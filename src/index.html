@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zenith</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+      <section class="zenith-cosmic">
+          <header class="zenith-header container">
+              <div class="zenith-header-logo">
+                  <a href="#">
+                    <img src="/assets/images/logo_small.svg" alt="Zenith logo" class="zenith-header-logo__image"/>
+                  </a>
+              </div>
+              <div class="znth-dots zenith-header-dots"></div>
+              <ul class="zenith-header-nav">
+<!--                  <li class="zenith-header-nav-item"><a class="zenith-header-nav-item__link">Docs</a></li>-->
+<!--                  <li class="zenith-header-nav-item"><a class="zenith-header-nav-item__link">Internals</a></li>-->
+<!--                  <li class="zenith-header-nav-item"><a class="zenith-header-nav-item__link">Team</a></li>-->
+                  <li class="zenith-header-nav-item">
+                      <a class="zenith-header-nav-item__link" href="https://github.com/libzenith/zenith">GitHub</a>
+                  </li>
+              </ul>
+          </header>
+          <div class="container zenith-title">
+              <div class="zenith-title__text">
+                  <h1 class="zenith-title__header znth-header">
+                      Fault tolerant scale-out <br />
+                      storage for PostgreSQL
+                  </h1>
+                  <div class="zenith-title__subheader">
+                      Zenith substitutes PostgreSQL storage layer and redistributes <br />
+                      data across a highly-available cluster of nodes
+                  </div>
+              </div>
+              <div class="zenith-title__logo">
+                  <img src="/assets/images/logo_big.svg" alt="" />
+              </div>
+          </div>
+          <div class="znth-dots zenith-cosmic-dots"></div>
+      </section>
+      <section class="zenith-architecture">
+          <div class="container">
+              <div class="zenith-architecture-plan">
+                  <img src="/assets/images/plan.svg" alt="" class="zenith-architecture__schema">
+                  <div class="zenith-architecture-item zenith-architecture-item_1">
+
+                      <div class="zenith-architecture-item__header znth-header">
+                          Runs unmodified<br />
+                          PostgreSQL
+                      </div>
+                      <div class="zenith-architecture-item__desc">
+                          Full flexibility of the whole<br />
+                          PostgreSQL eco-system
+                      </div>
+                  </div>
+                  <div class="zenith-architecture-item zenith-architecture-item_2">
+                      <div class="zenith-architecture-item__header znth-header">
+                          Page Servers enable<br />
+                          elastic scaling
+                      </div>
+                      <div class="zenith-architecture-item__desc">
+                          Checkpointing is offloaded to<br />
+                          Page Servers and is performed<br />
+                          continuously and in parallel
+                      </div>
+                  </div>
+                  <div class="zenith-architecture-item zenith-architecture-item_3">
+                      <div class="zenith-architecture-item__header znth-header">
+                          WAL Service<br />
+                          ensures low-latency<br />
+                          commits and<br />
+                          durability
+                      </div>
+                      <div class="zenith-architecture-item__desc">
+                          Provides highly reliable<br />
+                          and cost-effective storage
+                      </div>
+                  </div>
+                  <div class="zenith-architecture-item zenith-architecture-item_4">
+                      <div class="zenith-architecture-item__header znth-header">
+                          Industry-standard<br />
+                          Cloud Storage
+                      </div>
+                      <div class="zenith-architecture-item__desc">
+                          Provides highly reliable<br />
+                          and cost-effective storage
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <section class="zenith-feature-container">
+          <div class="zenith-feature container">
+              <div class="zenith-feature__header znth-header znth-section-header znth-section-header_inverted">
+                  This architecture enables the following unique features:
+              </div>
+              <div class="row">
+                  <div class="zenith-feature-item">
+                      <div class="zenith-feature-item__icon">
+                          <img src="/assets/images/feature_recovery.svg" alt="">
+                      </div>
+                      <div class="zenith-feature-item__header znth-header">
+                          Fast crash <br />
+                          recovery and <br />
+                          failover
+                      </div>
+                      <ul class="zenith-feature-item__desc">
+                          <li>
+                              No waiting for WAL replay at crash recovery
+                          </li>
+                          <li>
+                            Like read-only replicas, a new primary node can be launched quickly
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="zenith-feature-item">
+                      <div class="zenith-feature-item__icon">
+                          <img src="/assets/images/feature_scaling.svg" alt="">
+                      </div>
+                      <div class="zenith-feature-item__header znth-header">
+                          Unlimited<br />
+                          Scaling
+                      </div>
+                      <ul class="zenith-feature-item__desc">
+                          <li>
+                            Launch read replicas instantly without duplicating data.
+                          </li>
+
+                          <li>
+                            Ideal for running long-running reports, pg_dump logical backups, without affecting the primary server
+                          </li>
+
+                          <li>
+                            Page Servers are added automatically to respond to database size and I/O 
+                          </li>
+
+                          <li>
+                            Never run out of disk space again
+                          </li>
+
+                          <li>
+                            Save resources by transparently swapping out cold data to cloud storage
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="zenith-feature-item">
+                      <div class="zenith-feature-item__icon">
+                          <img src="/assets/images/feature_opensource.svg" alt="">
+                      </div>
+                      <div class="zenith-feature-item__header znth-header">
+                          Open <br />
+                          architecture
+                      </div>
+                      <ul class="zenith-feature-item__desc">
+                          <li>
+                            Runs uncrippled open source PostgreSQL, with full power of extensions and shell access
+                          </li>
+
+                          <li>
+                            Zenith software is fully open source
+                          </li>
+
+                          <li>
+                            Full access to underlying cloud storage. You own the data.
+                          </li>
+
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <section class="zenith-product-container">
+          <div class="container">
+              <div class="zenith-product__header znth-header znth-section-header">
+                  Our products
+              </div>
+              <div class="zenith-product-tabs">
+                  <div class="zenith-product-tabs-item">
+                      <input id="product_1" type="radio" name="products" checked />
+                      <label for="product_1" class="zenith-product-tabs-header">
+                          <div class="zenith-product-tabs-header__icon zenith-product-tabs-header__icon-tool">
+                          </div>
+                          <div class="zenith-product-tabs-header__label znth-header">
+                              Zenith as tools for the developer
+                          </div>
+                      </label>
+                      <div class="zenith-product-tabs-content">
+                        <div class="znth-console">
+                            контент 1
+                        </div>
+                      </div>
+                  </div>
+                  <div class="zenith-product-tabs-item">
+                      <input id="product_2" type="radio" name="products" />
+                      <label for="product_2" class="zenith-product-tabs-header" >
+                          <div class="zenith-product-tabs-header__icon zenith-product-tabs-header__icon-cloud">
+
+                          </div>
+                          <div class="zenith-product-tabs-header__label">
+                              Zenith — cloud service
+                          </div>
+                      </label>
+                      <div class="zenith-product-tabs-content">
+                          <div class="znth-console">
+                              контент 2
+                          </div>
+                      </div>
+                  </div>
+                  <div class="zenith-product-tabs-item">
+                      <input id="product_3" type="radio" name="products" />
+                      <label for="product_3" class="zenith-product-tabs-header">
+                          <div class="zenith-product-tabs-header__icon zenith-product-tabs-header__icon-backup">
+
+                          </div>
+                          <div class="zenith-product-tabs-header__label">
+                              Zenith — as a backup service for experienced users
+                          </div>
+                      </label>
+                      <div class="zenith-product-tabs-content">
+                          <div class="znth-console">
+                              контент 3
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <section class="zenith-team">
+          <div class="container">
+              <div class="zenith-team__header znth-header znth-section-header znth-section-header_secondary">
+                  Our team
+              </div>
+              <div class="zenith-person">
+                  <div class="zenith-person__img">
+                      <img src="/assets/images/heikki.png" alt="">
+                  </div>
+                  <div class="zenith-person__info">
+                      <div class="zenith-person__name znth-header">
+                          Jacob Jones
+                      </div>
+                      <div class="zenith-person__position">
+                          Nursing Assistant
+                      </div>
+                      <div class="zenith-person__text">
+                          Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.
+                      </div>
+                  </div>
+              </div>
+              <div class="zenith-person">
+                  <div class="zenith-person__img">
+                      <img src="/assets/images/heikki.png" alt="Heikki">
+                  </div>
+                  <div class="zenith-person__info">
+                      <div class="zenith-person__name znth-header">
+                          Jacob Jones
+                      </div>
+                      <div class="zenith-person__position">
+                          Nursing Assistant
+                      </div>
+                      <div class="zenith-person__text">
+                          Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.
+                      </div>
+                  </div>
+              </div>
+              <div class="zenith-person">
+                  <div class="zenith-person__img">
+                      <img src="/assets/images/heikki.png" alt="Heikki">
+                  </div>
+                  <div class="zenith-person__info">
+                      <div class="zenith-person__name znth-header">
+                          Jacob Jones
+                      </div>
+                      <div class="zenith-person__position">
+                          Nursing Assistant
+                      </div>
+                      <div class="zenith-person__text">
+                          Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <footer class="zenith-footer-container">
+          <div class="zenith-footer container">
+              <div class="zenith-footer-col zenith-footer-col_wide">
+                  <div class="zenith-footer-logo">
+                      <img src="/assets/images/logo_small.svg" alt="">
+                  </div>
+              </div>
+              <div class="zenith-footer-col">
+                  <div class="zenith-footer-link">
+                      <a href="#">Docs</a>
+                  </div>
+                  <div class="zenith-footer-link">
+                      <a href="#">Internals</a>
+                  </div>
+                  <div class="zenith-footer-link">
+                      <a href="#">Team</a>
+                  </div>
+                  <div class="zenith-footer-link">
+                      <a href="#">Github link</a>
+                  </div>
+              </div>
+              <div class="zenith-footer-col">
+                  <div class="zenith-footer-link">
+                      <a href="#">Selling tooling</a>
+                  </div>
+                  <div class="zenith-footer-link">
+                      <a href="#">Installs</a>
+                  </div>
+                  <div class="zenith-footer-link">
+                      <a href="#">Adoption</a>
+                  </div>
+              </div>
+              <div class="zenith-footer-col">
+                  <div class="zenith-footer-link">
+                      <a href="tel:+123456789">8 (888) 888-88-88</a>
+                  </div>
+                  <div class="zenith-footer-link">
+                      <a href="mailto:email@email.com">email@email.com</a>
+                  </div>
+              </div>
+              <div class="zenith-footer-col zenith-footer-col_wide">
+                  <div class="zenith-footer-link zenith-footer-link_underlined zenith-footer-link_inline">
+                      <a href="#">Twitter</a>
+                  </div>
+                  <div class="zenith-footer-link zenith-footer-link_underlined zenith-footer-link_inline">
+                      <a href="#">Facebook</a>
+                  </div>
+                  <div class="zenith-footer-link zenith-footer-link_underlined zenith-footer-link_inline">
+                      <a href="#">Instagram</a>
+                  </div>
+              </div>
+          </div>
+      </footer>
+  </body>
+</html>
