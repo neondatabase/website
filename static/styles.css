@@ -73,7 +73,7 @@ a:hover {
 }
 
 .znth-dots {
-    background-image: url("/assets/images/dots.svg");
+    background-image: url("./assets/images/dots.svg");
     background-repeat: repeat-x;
     background-position: left center;
     background-size: contain;
@@ -103,7 +103,7 @@ a:hover {
 /* cosmic section start */
 
 .zenith-cosmic {
-    background:  url('/assets/images/bg_cosmo.svg') center no-repeat;
+    background:  url('./assets/images/bg_cosmo.svg') center no-repeat;
     background-size: cover;
     position: relative;
     padding-bottom: 120px;
@@ -275,7 +275,7 @@ a:hover {
 /* features section start */
 
 .zenith-feature-container {
-    background: url('/assets/images/bg_features.svg') center top no-repeat;
+    background: url('./assets/images/bg_features.svg') center top no-repeat;
     padding-top: 64px;
     padding-bottom: 130px;
 }
@@ -329,7 +329,7 @@ a:hover {
     height: 8px;
     margin-right: 10px;
     flex-shrink: 0;
-    background: url('/assets/images/list_item_dot.svg') center no-repeat;
+    background: url('./assets/images/list_item_dot.svg') center no-repeat;
     background-size: contain;
 }
 
@@ -362,7 +362,7 @@ a:hover {
 /* product section start */
 
 .zenith-product-container {
-    background: url('/assets/images/bg_products.svg') center top no-repeat;
+    background: url('./assets/images/bg_products.svg') center top no-repeat;
     padding-top: 70px;
     padding-bottom: 141px;
 }
@@ -452,28 +452,28 @@ a:hover {
 }
 
 .zenith-product-tabs-header__icon-tool {
-    background-image: url('/assets/images/product_tool.svg');
+    background-image: url('./assets/images/product_tool.svg');
 }
 
 .zenith-product-tabs-header__icon-cloud {
-    background-image: url('/assets/images/product_cloud.svg');
+    background-image: url('./assets/images/product_cloud.svg');
 }
 
 .zenith-product-tabs-header__icon-backup {
-    background-image: url('/assets/images/product_backup.svg');
+    background-image: url('./assets/images/product_backup.svg');
 }
 
 
 input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-tool {
-    background-image: url('/assets/images/product_tool_active.svg');
+    background-image: url('./assets/images/product_tool_active.svg');
 }
 
 input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-cloud {
-    background-image: url('/assets/images/product_cloud_active.svg');
+    background-image: url('./assets/images/product_cloud_active.svg');
 }
 
 input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-backup {
-    background-image: url('/assets/images/product_backup_active.svg');
+    background-image: url('./assets/images/product_backup_active.svg');
 }
 
 
@@ -485,6 +485,10 @@ input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-ba
 .zenith-product-tabs input:checked + .zenith-product-tabs-header {
     color: var(--color-main);
     background-color: var(--color-inverted);
+}
+
+.znth-console {
+    padding: 20px;
 }
 
 @media screen and (min-width: 1400px) {
@@ -578,7 +582,7 @@ input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-ba
 .zenith-footer-container {
     color: var(--color-inverted);
     padding: 50px 0 120px;
-    background: var(--color-dark) url('/assets/images/bg_footer.svg') center bottom no-repeat;
+    background: var(--color-dark) url('./assets/images/bg_footer.svg') center bottom no-repeat;
     font-size: var(--fz-h6);
 }
 
