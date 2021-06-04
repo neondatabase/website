@@ -374,6 +374,8 @@ a:hover {
 .zenith-product-tabs {
     position: relative;
     padding-bottom: 360px;
+    margin: 0 auto;
+    width: calc(230px*3 + 36px);
 }
 
 .zenith-product-tabs-item {
@@ -402,7 +404,7 @@ a:hover {
     background-color: var(--color-text);
     box-shadow: 34px 40px 33px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    margin-top: -20px;
+    margin-top: -10px;
     left: 0;
     color: var(--color-inverted);
 }
@@ -419,33 +421,22 @@ a:hover {
     border-radius: 20px 20px 0 0;
     border-bottom: 0;
     text-align: center;
-    padding: 28px 0 76px;
+    padding: 10px 10px 20px;
     position: relative;
     width: 230px;
     margin-right: 12px;
-    display: block;
     box-sizing: border-box;
-}
-
-.zenith-product-tabs-header:after {
-    content: '';
-    display: block;
-    width: 0px;
-    height: 0px;
-    border-bottom: 0px solid transparent;
-    border-left: 11px solid transparent;
-    border-right: 11px solid transparent;
-    border-top: 23px solid currentColor;
-    left: 50%;
-    bottom: 29px;
-    position: absolute;
-    transform: translateX(-13px);
+    display: flex;
+    align-items: center;
+    height: 120px;
+    cursor: pointer;
 }
 
 .zenith-product-tabs-header__icon {
-    height: 100px;
-    width: 120px;
-    margin: 0 auto 20px;
+    height: 75px;
+    width: 90px;
+    margin-right: 10px;
+    flex-shrink: 0;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -464,25 +455,28 @@ a:hover {
 }
 
 
-input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-tool {
+input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-tool,
+.zenith-product-tabs-header:hover .zenith-product-tabs-header__icon-tool {
     background-image: url('./assets/images/product_tool_active.svg');
 }
 
-input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-cloud {
+input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-cloud,
+.zenith-product-tabs-header:hover .zenith-product-tabs-header__icon-cloud{
     background-image: url('./assets/images/product_cloud_active.svg');
 }
 
-input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-backup {
+input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-backup,
+.zenith-product-tabs-header:hover .zenith-product-tabs-header__icon-backup {
     background-image: url('./assets/images/product_backup_active.svg');
 }
 
 
 .zenith-product-tabs-header__label {
-    height: 61px;
     font-size: var(--fz-h4);
 }
 
-.zenith-product-tabs input:checked + .zenith-product-tabs-header {
+.zenith-product-tabs input:checked + .zenith-product-tabs-header,
+.zenith-product-tabs-header:hover {
     color: var(--color-main);
     background-color: var(--color-inverted);
 }
@@ -493,17 +487,17 @@ input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-ba
 
 @media screen and (min-width: 1400px) {
     .zenith-product-tabs {
-        margin: 0 100px;
+        width: calc(360px*3 + 45px);
     }
 
     .zenith-product-tabs-header {
-        padding: 28px 0 76px;
-        width: 380px;
+        width: 360px;
         margin-right: 15px;
+        padding: 20px 20px 30px;
     }
 
     .zenith-product-tabs-content {
-        width: calc(380px*3 + 30px);
+        width: calc(360px*3 + 30px);
     }
 }
 
@@ -512,31 +506,35 @@ input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-ba
 /* product team start */
 
 .zenith-team {
-    padding: 76px 0 220px;
+    padding: 76px 0 140px;
 }
 
 .zenith-team__header {
     margin-bottom: 65px;
 }
 
-.zenith-person {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.zenith-team .row {
+    align-items: flex-start;
 }
 
-.zenith-person + .zenith-person {
-    margin-top: 93px;
+.zenith-person {
+    text-align: center;
+    width: 33.3333%;
+    padding: 0 30px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    margin-bottom: 80px;
 }
 
 .zenith-person__img {
-    margin-right: 56px;
     padding: 17px;
     position: relative;
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
     max-width: 250px;
+    margin: 0 auto 20px;
 }
 
 .zenith-person__img:before {
@@ -552,10 +550,6 @@ input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-ba
 .zenith-person__img img {
     position: relative;
     max-width: 100%;
-}
-
-.zenith-person__info {
-    width: 420px;
 }
 
 .zenith-person__name {
