@@ -106,8 +106,8 @@ a:hover {
     background:  url('./assets/images/bg_cosmo.svg') center no-repeat;
     background-size: cover;
     position: relative;
-    padding-bottom: 120px;
-    padding-top: 77px;
+    padding-bottom: 80px;
+    padding-top: 50px;
 }
 
 .zenith-cosmic:after {
@@ -127,7 +127,7 @@ a:hover {
 .zenith-header {
     display: flex;
     align-items: center;
-    margin-bottom: 144px;
+    margin-bottom: 80px;
     font-size: var(--fz-h6);
 }
 
@@ -164,7 +164,7 @@ a:hover {
 .zenith-title {
     color: #fff;
     display: flex;
-    margin-bottom: 150px;
+    margin-bottom: 80px;
     padding-left: 59px;
     justify-content: space-between;
 }
@@ -186,6 +186,11 @@ a:hover {
 .zenith-title__logo {
     margin-top: -3px;
     margin-right: 65px;
+    width: 230px;
+}
+
+.zenith-title__logo img {
+    max-width: 100%;
 }
 
 /* cosmic section end */
@@ -506,7 +511,7 @@ input:checked + .zenith-product-tabs-header .zenith-product-tabs-header__icon-ba
 /* product team start */
 
 .zenith-team {
-    padding: 76px 0 140px;
+    padding: 76px 0 80px;
 }
 
 .zenith-team__header {
