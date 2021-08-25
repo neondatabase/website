@@ -16,7 +16,7 @@ export const Header = ({children}: PropsWithChildren<{}>) => {
       <Container>
         <Row className={styles.inner}>
           <Col xs={2}>
-            <a href="/" className={styles.logo}>
+            <a href="#" className={styles.logo}>
               <Image src={logoPic} alt="Zenith logo"/>
             </a>
           </Col>

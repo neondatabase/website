@@ -4,7 +4,6 @@ import {Col, Container, Row } from 'react-bootstrap'
 import classnames from 'classnames';
 
 import {ExternalLinks} from '../../config/externalLinks'
-import {Header} from '../Header/Header'
 
 import logoPic from '../../public/images/zenith_logo.svg'
 import discordLogoPic from '../../public/images/discord_logo_black.svg'
@@ -18,11 +17,11 @@ export const Footer = ({children}: PropsWithChildren<{}>) => {
         <Row>
           <Col xs={6} className={styles.colLeft}>
             <div className={styles.logo}>
-              <Image src={logoPic}/>
+              <Image src={logoPic} alt="Zenith logo"/>
             </div>
             <div className={styles.footerSocial}>
               <a className={styles.footerSocialItem}>
-                <Image src={discordLogoPic} width={24} height={24} />
+                <Image src={discordLogoPic} width={24} height={24} alt="Join our community in discord"/>
               </a>
             </div>
           </Col>
