@@ -1,0 +1,23 @@
+.container {
+    padding: 24px;
+    border-radius: 10px;
+    border: 1px solid currentColor;
+    height: 250px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    margin-bottom: 8px;
+}
+
+.header {
+    font-size: 24px;
+    line-height: 32px;
+    margin-bottom: 15px;
+}
+
+.description {
+    line-height: 18px;
+}
