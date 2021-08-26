@@ -1,6 +1,9 @@
 .container {
     flex-shrink: 0;
     position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1;
 }
 
 .inner {
