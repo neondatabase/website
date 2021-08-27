@@ -5,6 +5,7 @@ import Head from 'next/head'
 import {Intro} from '../components/Intro/Intro'
 import { Features } from '../components/Features/Features'
 import { Community } from '../components/Community/Community'
+import { Benefits } from '../components/Benefits/Benefits'
 
 const Home: NextPage = () => {
   return (
@@ -15,6 +16,7 @@ const Home: NextPage = () => {
       </Head>
       <Intro />
       <Features />
+      <Benefits />
       <Community />
     </>
   )
