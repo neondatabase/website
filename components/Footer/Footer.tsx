@@ -7,6 +7,7 @@ import {ExternalLinks} from '../../config/externalLinks'
 
 import logoPic from '../../public/images/zenith_logo.svg'
 import discordLogoPic from '../../public/images/discord_logo_black.svg'
+import githubLogoPic from '../../public/images/github_logo_black.svg'
 
 import styles from './Footer.module.css';
 
@@ -20,6 +21,9 @@ export const Footer = ({children}: PropsWithChildren<{}>) => {
               <Image src={logoPic} alt="Zenith logo"/>
             </div>
             <div className={styles.footerSocial}>
+              <a className={styles.footerSocialItem}>
+                <Image src={githubLogoPic} width={24} height={24} alt="Github repo"/>
+              </a>
               <a className={styles.footerSocialItem}>
                 <Image src={discordLogoPic} width={24} height={24} alt="Join our community in discord"/>
               </a>

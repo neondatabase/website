@@ -43,10 +43,16 @@
 .links {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .linksItem {
+    max-width: 46px;
+    max-height: 46px;
+    margin: 0 20px;
+}
+
+.linksItem_github {
     max-width: 50px;
     max-height: 50px;
-    margin: 0 20px;
 }

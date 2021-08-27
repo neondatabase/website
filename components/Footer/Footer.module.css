@@ -8,6 +8,10 @@
     margin-bottom: 16px;
 }
 
+.footerSocialItem {
+    margin-right: 16px;
+}
+
 .colRight {
     text-align: right;
     display: flex;

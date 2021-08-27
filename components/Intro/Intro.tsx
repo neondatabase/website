@@ -9,6 +9,7 @@ import documentationPic from '../../public/images/documentation.svg'
 import consoleIntroPic from '../../public/images/console_intro.svg'
 
 import styles from './Intro.module.css';
+import { BetaAccessButton } from '../BetaAccessButton/BetaAccessButton';
 
 export const Intro = () => {
   return (
@@ -26,7 +27,7 @@ export const Intro = () => {
               for every app developer
             </div>
             <div className={styles.actions}>
-              <a href="" className={classnames(styles.button, styles.button_primary)}>Beta access</a>
+              <BetaAccessButton className={styles.button} />
               <a href="" className={classnames(styles.button, styles.button_link)}>
                 <span className={styles.buttonIcon}>
                   <Image src={documentationPic} alt="" />
@@ -46,10 +47,10 @@ export const Intro = () => {
             </pre>
             <div className={styles.partnersList}>
               <a href="#" className={styles.partnersItem}>
-                <Image src={vercelPic} />
+                <Image src={vercelPic}  alt="" />
               </a>
               <a href="#" className={styles.partnersItem}>
-                <Image src={netlifyPic} />
+                <Image src={netlifyPic}  alt="" />
               </a>
             </div>
           </Col>

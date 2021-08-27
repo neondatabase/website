@@ -41,12 +41,7 @@
 }
 
 .button {
-    display: inline-block;
-    text-decoration: none;
     margin-right: 24px;
-    color: #fff;
-    text-align: center;
-    transition: opacity 0.2s;
 }
 
 .button:hover {
@@ -54,16 +49,13 @@
     opacity: 0.9;
 }
 
-.button_primary {
-    width: 160px;
-    border: 1px solid currentColor;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #0361B8;
-}
-
 .button_link {
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    transition: opacity 0.2s;
     display: flex;
+    width: auto;
 }
 
 .buttonIcon {

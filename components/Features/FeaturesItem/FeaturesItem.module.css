@@ -3,12 +3,12 @@
     border-radius: 10px;
     border: 1px solid currentColor;
     height: 250px;
+    margin-bottom: 1.5rem;
 }
 
 .icon {
     width: 24px;
     height: 24px;
-    background-color: #fff;
     margin-bottom: 8px;
 }
 

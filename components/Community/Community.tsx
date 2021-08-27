@@ -5,6 +5,7 @@ import classnames from 'classnames';
 
 import discordPic from "../../public/images/discord_logo_color.svg"
 import twitterPic from "../../public/images/twitter_logo_color.svg"
+import githubPic from "../../public/images/github_logo_white.svg"
 
 import styles from './Community.module.css';
 
@@ -20,10 +21,13 @@ export const Community = () => {
           </div>
           <div className={styles.links}>
             <a href="#" className={styles.linksItem}>
-              <Image src={discordPic} />
+              <Image src={discordPic} alt="" />
+            </a>
+            <a href="#" className={classnames(styles.linksItem, styles.linksItem_github)}>
+              <Image src={githubPic} alt="" />
             </a>
             <a href="#" className={styles.linksItem}>
-              <Image src={twitterPic} />
+              <Image src={twitterPic} alt="" />
             </a>
           </div>
         </Container>

@@ -7,6 +7,7 @@ import {ExternalLinks} from '../../config/externalLinks'
 
 import logoPic from '../../public/images/zenith_logo.svg'
 import discordLogoPic from '../../public/images/discord_logo_black.svg'
+import githubLogoPic from '../../public/images/github_logo_black.svg'
 
 import styles from './Header.module.css';
 
@@ -25,6 +26,9 @@ export const Header = ({children}: PropsWithChildren<{}>) => {
               <a href="#" className={styles.navItem}>Docs</a>
               <a href="#" className={styles.navItem}>Blog</a>
               <a href="#" className={styles.navItem}>Join us</a>
+              <a href={ExternalLinks.DiscordServerInvite} className={classnames(styles.navItem, styles.navItemIcon)}>
+                <Image src={githubLogoPic} alt="Github repo" width={24} height={24} />
+              </a>
               <a href={ExternalLinks.DiscordServerInvite} className={classnames(styles.navItem, styles.navItemIcon)}>
                 <Image src={discordLogoPic} alt="Join us in discord" width={24} height={24} />
               </a>
