@@ -1,5 +1,4 @@
 import React from 'react';
-import type ImageProps from 'next/image';
 import Image from 'next/image';
 import classnames from 'classnames';
 
@@ -8,7 +7,7 @@ import {Col, Container, Row } from 'react-bootstrap';
 import styles from './BenefitsItem.module.css';
 
 interface BenefitsItemProps {
-  icon: typeof ImageProps;
+  icon: any;
   header: string;
   description: React.ReactNode;
 }
