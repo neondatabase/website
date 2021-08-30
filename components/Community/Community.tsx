@@ -8,6 +8,7 @@ import twitterPic from "../../public/images/twitter_logo_color.svg"
 import githubPic from "../../public/images/github_logo_white.svg"
 
 import styles from './Community.module.css';
+import { ExternalLinks } from '../../config/externalLinks';
 
 export const Community = () => {
   return (
@@ -20,13 +21,13 @@ export const Community = () => {
             devs building apps on Zenith
           </div>
           <div className={styles.links}>
-            <a href="#" className={styles.linksItem}>
+            <a href={ExternalLinks.DiscordServerInvite} className={styles.linksItem}>
               <Image src={discordPic} alt="" />
             </a>
-            <a href="#" className={classnames(styles.linksItem, styles.linksItem_github)}>
+            <a href={ExternalLinks.Repo} className={classnames(styles.linksItem, styles.linksItem_github)}>
               <Image src={githubPic} alt="" />
             </a>
-            <a href="#" className={styles.linksItem}>
+            <a href={ExternalLinks.Twitter} className={styles.linksItem}>
               <Image src={twitterPic} alt="" />
             </a>
           </div>

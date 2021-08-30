@@ -1,6 +1,6 @@
 export enum ExternalLinks {
   Console = '#',
-  Repo = '#',
+  Repo = 'https://github.com/zenithdb',
   DiscordServerInvite = '#',
   Twitter = '#',
 }

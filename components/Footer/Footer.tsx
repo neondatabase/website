@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import Image from 'next/image';
+import Link from 'next/link'
 import {Col, Container, Row } from 'react-bootstrap'
 import classnames from 'classnames';
 
@@ -21,12 +22,21 @@ export const Footer = ({children}: PropsWithChildren<{}>) => {
               <Image src={logoPic} alt="Zenith logo"/>
             </div>
             <div className={styles.footerSocial}>
-              <a className={styles.footerSocialItem}>
-                <Image src={githubLogoPic} width={24} height={24} alt="Github repo"/>
-              </a>
-              <a className={styles.footerSocialItem}>
-                <Image src={discordLogoPic} width={24} height={24} alt="Join our community in discord"/>
-              </a>
+              <div className={styles.footerSocialItem}>
+                <Link href={ExternalLinks.Repo}>
+                  <a>
+                    <Image src={githubLogoPic} width={24} height={24} alt="Github repo"/>
+                  </a>
+                </Link>
+              </div>
+              <div className={styles.footerSocialItem}>
+
+                <Link  href={ExternalLinks.DiscordServerInvite}>
+                  <a>
+                    <Image src={discordLogoPic} width={24} height={24} alt="Join our community in discord"/>
+                  </a>
+                </Link>
+              </div>
             </div>
           </Col>
           <Col xs={6} className={styles.colRight}>
@@ -36,25 +46,33 @@ export const Footer = ({children}: PropsWithChildren<{}>) => {
                 <a href="#">Features</a>
               </div>
               <div className={styles.navItem}>
-                <a href="#">Features</a>
+                <a href="#">Pricing</a>
               </div>
             </div>
             <div className={styles.nav}>
-              <div className={styles.navHeader}>Product</div>
+              <div className={styles.navHeader}>Developers</div>
               <div className={styles.navItem}>
-                <a href="#">Features</a>
+                <a href="#">Documentation</a>
               </div>
               <div className={styles.navItem}>
-                <a href="#">Features</a>
+                <a href="#">API Reference</a>
+              </div>
+              <div className={styles.navItem}>
+                <a href="#">Guides</a>
               </div>
             </div>
             <div className={styles.nav}>
-              <div className={styles.navHeader}>Product</div>
+              <div className={styles.navHeader}>Company</div>
               <div className={styles.navItem}>
-                <a href="#">Features</a>
+                <Link href="/about">
+                  <a>About</a>
+                </Link>
               </div>
               <div className={styles.navItem}>
-                <a href="#">Features</a>
+                <a href="#">Join Us</a>
+              </div>
+              <div className={styles.navItem}>
+                <a href="#">Blog</a>
               </div>
             </div>
           </Col>

@@ -8,6 +8,10 @@
     margin-bottom: 16px;
 }
 
+.footerSocial {
+    display: flex;
+}
+
 .footerSocialItem {
     margin-right: 16px;
 }
