@@ -1,6 +1,5 @@
 import React  from 'react';
 import Image from 'next/image';
-import type ImageProps from 'next/image';
 import {Col, Container, Row } from 'react-bootstrap'
 import classnames from 'classnames';
 
@@ -8,7 +7,7 @@ import styles from './FeaturesItem.module.css';
 
 interface FeaturesItemProps {
   id: string;
-  icon: ImageProps;
+  icon: any;
   header: string;
   description: React.ReactNode;
 }
