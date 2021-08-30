@@ -27,18 +27,38 @@ export const Header = ({children}: PropsWithChildren<{}>) => {
           <Col xs={8}>
             <nav className={styles.nav}>
               <a href="#" className={styles.navItem}>Docs</a>
-              <a href="#" className={styles.navItem}>Blog</a>
+              <a
+                href={ExternalLinks.Blog}
+                className={styles.navItem}
+                target="_blank"
+                rel="noreferrer"
+              >Blog</a>
               <a href="#" className={styles.navItem}>Join us</a>
-              <a href={ExternalLinks.Repo} className={classnames(styles.navItem, styles.navItemIcon)}>
+              <a
+                href={ExternalLinks.Repo}
+                className={classnames(styles.navItem, styles.navItemIcon)}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Image src={githubLogoPic} alt="Github repo" width={24} height={24} />
               </a>
-              <a href={ExternalLinks.DiscordServerInvite} className={classnames(styles.navItem, styles.navItemIcon)}>
+              <a
+                href={ExternalLinks.DiscordServerInvite}
+                className={classnames(styles.navItem, styles.navItemIcon)}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Image src={discordLogoPic} alt="Join us in discord" width={24} height={24} />
               </a>
             </nav>
           </Col>
           <Col xs={2}>
-            <a href="#" className={styles.consoleButton}>
+            <a
+              href={ExternalLinks.Console}
+              className={styles.consoleButton}
+              target="_blank"
+              rel="noreferrer"
+            >
               Console
             </a>
           </Col>
