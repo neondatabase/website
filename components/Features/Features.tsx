@@ -4,6 +4,7 @@ import {Col, Container, Row } from 'react-bootstrap'
 import classnames from 'classnames';
 
 import { FeaturesItem } from './FeaturesItem/FeaturesItem';
+import { Section } from '../Section/Section';
 
 import serverlessPic from '../../public/images/features_serverless.svg'
 import branchingPic from '../../public/images/features_branching.svg'
@@ -13,9 +14,6 @@ import storagePic from '../../public/images/features_storage.svg'
 import provenancePic from '../../public/images/features_provenance.svg'
 import limitsPic from '../../public/images/features_limits.svg'
 import opensourcePic from '../../public/images/features_opensource.svg'
-
-
-import styles from './Features.module.css';
 
 const FEATURES = [
   {
@@ -73,17 +71,16 @@ const FEATURES = [
 
 export const Features = () => {
   return (
-    <section className={styles.container}>
-      <Container>
-        <h2 className={styles.header}>Features</h2>
-        <Row>
-          {FEATURES.map(f => (
-            <Col xs={3} key={f.id}>
-              <FeaturesItem {...f} />
-            </Col>
-          ))}
-        </Row>
-      </Container>
-    </section>
-)
+    <Section
+      header="Features"
+    >
+      <Row>
+        {FEATURES.map(f => (
+          <Col xs={3} key={f.id}>
+            <FeaturesItem {...f} />
+          </Col>
+        ))}
+      </Row>
+    </Section>
+  )
 };

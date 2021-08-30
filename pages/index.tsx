@@ -14,7 +14,6 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Zenith</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Intro />
       <Features />

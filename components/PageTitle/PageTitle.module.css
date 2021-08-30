@@ -1,0 +1,13 @@
+.container {
+    padding: 150px 0;
+}
+
+.header {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+.subheader {
+    font-size: 24px;
+}

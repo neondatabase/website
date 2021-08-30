@@ -1,0 +1,19 @@
+.container {
+    font-size: 24px;
+    width: 250px;
+    margin: 0 auto 100px;
+}
+
+.name {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.image {
+    background-color: #fff;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 36px;
+    border-radius: 125px;
+    overflow: hidden;
+}

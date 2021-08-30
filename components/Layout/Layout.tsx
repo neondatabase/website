@@ -11,9 +11,13 @@ import headerLogoPic from '../../public/images/header_logo.svg'
 import discordLogoPic from '../../public/images/discord_logo_black.svg'
 
 import styles from './Layout.module.css';
+import Head from 'next/head';
 
 export const Layout = ({children}: PropsWithChildren<{}>) => {
   return <div className={styles.layout}>
+    <Head>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
     <Header />
     <main className={styles.main}>
       {children}
