@@ -1,0 +1,52 @@
+.container {
+    flex-shrink: 0;
+    background-color: var(--bg-secondary);
+    padding: 120px 0 97px;
+}
+
+.logo {
+    margin-bottom: 16px;
+}
+
+.footerSocial {
+    display: flex;
+}
+
+.footerSocialItem {
+    margin-right: 16px;
+}
+
+.colRight {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav {
+    margin-left: 32px;
+    line-height: 30px;
+}
+
+.navItem a {
+    text-decoration: none;
+    color: inherit;
+
+}
+
+.navHeader {
+    color: #B3B3B3;
+}
+
+.companyInfo {
+    margin-top: 60px;
+    color: #BBCEDF;
+}
+
+.companyInfoItem {
+    text-decoration: none;
+    color: inherit;
+}
+
+.companyInfoItem + .companyInfoItem {
+    margin-left: 24px;
+}

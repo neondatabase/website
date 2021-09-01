@@ -1,0 +1,66 @@
+.container {
+    padding-top: 100px;
+    padding-bottom: 90px;
+}
+
+.header {
+    font-size: 64px;
+    font-weight: bold;
+    margin: 0 0 5px;
+}
+
+.rightCol {
+    text-align: right;
+}
+
+.description {
+    font-size: 18px;
+}
+
+.partners {
+    margin-top: 24px;
+}
+
+.partnersList {
+    display: flex;
+    align-items: center;
+}
+
+.partnersItem {
+    max-height: 30px;
+    max-width: 90px;
+    margin-right: 40px;
+    display: block;
+    font-size: 0;
+}
+
+.actions {
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    margin-right: 24px;
+}
+
+.button:hover {
+    color: #fff;
+    opacity: 0.9;
+}
+
+.button_link {
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    transition: opacity 0.2s;
+    display: flex;
+    width: auto;
+}
+
+.buttonIcon {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+    font-size: 0;
+}

@@ -1,0 +1,43 @@
+.container {
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.inner {
+    height: 60px;
+    align-items: center;
+}
+
+.logo {}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.navItem {
+    margin-left: 24px;
+    text-decoration: none;
+    display: block;
+    color: var(--text-secondary);
+}
+
+.navItemIcon {
+    font-size: 0;
+}
+
+.consoleButton {
+    color: var(--text-secondary);
+    border: 2px solid currentColor;
+    border-radius: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    width: 100%;
+    padding: 0.5rem;
+    text-align: center;
+}

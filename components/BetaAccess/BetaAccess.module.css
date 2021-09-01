@@ -1,0 +1,11 @@
+.container {
+    background-color: #282727;
+    padding: 110px 0 120px;
+    text-align: center;
+}
+
+.header {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 85px;
+}

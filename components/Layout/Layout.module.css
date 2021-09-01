@@ -1,0 +1,13 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 14px;
+}
+
+.main {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    flex-grow: 1;
+}
+
