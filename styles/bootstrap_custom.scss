@@ -11,6 +11,7 @@
 @import "../node_modules/bootstrap/scss/mixins";
 @import "../node_modules/bootstrap/scss/root";
 
+
 // 4. Include any optional Bootstrap CSS as needed
 @import "../node_modules/bootstrap/scss/utilities";
 @import "../node_modules/bootstrap/scss/reboot";
@@ -19,6 +20,10 @@
 @import "../node_modules/bootstrap/scss/containers";
 @import "../node_modules/bootstrap/scss/grid";
 @import "../node_modules/bootstrap/scss/helpers";
+
+.container {
+  max-width: 1140px !important;
+}
 
 // 5. Optionally include utilities API last to generate classes based on the Sass map in `_utililies.scss`
 @import "../node_modules/bootstrap/scss/utilities/api";
