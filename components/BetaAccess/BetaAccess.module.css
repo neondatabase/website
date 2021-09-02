@@ -5,7 +5,9 @@
 }
 
 .header {
+    font-family: aileron;
     font-size: 48px;
-    font-weight: bold;
-    margin-bottom: 85px;
+    font-weight: regular;
+    margin-bottom: 45px;
+    letter-spacing: 1px;
 }

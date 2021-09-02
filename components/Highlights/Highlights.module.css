@@ -13,12 +13,15 @@
 
 .header {
     font-size: 48px;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: aileron;
 }
 
 .text {
     font-size: 24px;
     line-height: 32px;
+    letter-spacing: 0.5px;
+    font-weight: 300;
 }
 
 .col_text.col_right {

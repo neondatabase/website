@@ -4,11 +4,14 @@
     color: #fff;
     text-align: center;
     transition: opacity 0.2s;
-    width: 160px;
-    border: 1px solid currentColor;
-    border-radius: 10px;
+    width: 170px;
+    border-radius: 20px;
     padding: 10px;
     background-color: #0361B8;
+    font-family: Helvetica;
+    font-weight:300;
+    font-size: 18px;
+    letter-spacing: 1px;
 }
 
 .button:hover {

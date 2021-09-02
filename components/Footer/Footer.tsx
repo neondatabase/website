@@ -79,7 +79,7 @@ export const Footer = ({children}: PropsWithChildren<{}>) => {
         </Row>
         <Row className={styles.companyInfo}>
           <Col xs={6} className={styles.colLeft}>
-            <span className={styles.companyInfoItem}>© 2021 Zenith Labc Inc. All rights reserved.</span>
+            <span className={styles.companyInfoItem}>© 2021 Zenith Labs Inc. All rights reserved.</span>
           </Col>
           <Col xs={6} className={styles.colRight}>
             <a href="#" className={styles.companyInfoItem}>Terms and Conditions</a>

@@ -9,7 +9,7 @@ import { BetaAccessButton } from '../BetaAccessButton/BetaAccessButton';
 export const BetaAccess = () => {
   return <section className={styles.container}>
     <Container>
-      <h2 className={styles.header}>Start building on Postgres  in seconds</h2>
+      <h2 className={styles.header}>Start building on Postgres in seconds</h2>
       <div>
         <BetaAccessButton />
       </div>

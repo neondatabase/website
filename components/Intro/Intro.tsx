@@ -17,18 +17,19 @@ export const Intro = () => {
       <Container>
         <Row>
           <Col xs={6}>
-            <h1 className={styles.header}>
-              Serverless
-              PostgreSQL
-            </h1>
-            <div className={styles.description}>
-              Zenith is a simplified Postgres db service
-              built by Postgres committers
-              for every app developer
-            </div>
+          <h1 className={styles.header}>
+            Serverless 
+            PostgreSQL
+          </h1>
+          <br></br>
+          <div className={styles.description}>
+          Zenith is a simplified Postgres db service<br/>
+          built by Postgres committers<br />
+          for every app developer
+          </div>
             <div className={styles.actions}>
               <BetaAccessButton className={styles.button} />
-              <a href="" className={classnames(styles.button, styles.button_link)}>
+              <a href="" className={classnames(styles.button, styles.button_link, styles.doc)}>
                 <span className={styles.buttonIcon}>
                   <Image src={documentationPic} alt="" />
                 </span>
@@ -41,20 +42,20 @@ export const Intro = () => {
           </Col>
         </Row>
         <Row>
-          <Col className={styles.partners} xs={6}>
-            <pre className={styles.partnersHeader}>
-              Designing with
-            </pre>
-            <div className={styles.partnersList}>
-              <a href="#" className={styles.partnersItem}>
-                <Image src={vercelPic}  alt="" />
-              </a>
-              <a href="#" className={styles.partnersItem}>
-                <Image src={netlifyPic}  alt="" />
-              </a>
-            </div>
-          </Col>
-        </Row>
+            <Col className={styles.partners} xs={6}>
+              <pre className={styles.partnersHeader}>
+                Designing with
+              </pre>
+              <div className={styles.partnersList}>
+                <a href="#" className={styles.partnersItem}>
+                  <Image src={vercelPic}  alt="" />
+                </a>
+                <a href="#" className={styles.partnersItem}>
+                  <Image src={netlifyPic}  alt="" />
+                </a>
+              </div>
+            </Col>
+        </Row> 
       </Container>
     </section>
   )

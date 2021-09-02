@@ -12,7 +12,7 @@ interface BetaAccessButtonProps
 export const BetaAccessButton = (props: BetaAccessButtonProps) => {
   return (
     <a href="" className={classnames(props.className, styles.button)}>
-      Beta access
+      Beta Access
     </a>)
 
 }

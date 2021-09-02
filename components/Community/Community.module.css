@@ -31,13 +31,16 @@
 .header {
     font-size: 48px;
     margin-bottom: 36px;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: aileron;
 }
 
 .text {
     font-size: 24px;
     line-height: 32px;
-    margin-bottom: 75px;
+    margin-bottom: 55px;
+    letter-spacing: 0.5px;
+    font-weight: 300;
 }
 
 .links {

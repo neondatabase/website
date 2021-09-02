@@ -4,8 +4,11 @@
 }
 
 .header {
+    font-family: aileron;
     font-size: 64px;
     font-weight: bold;
+    letter-spacing: 2px;
+    line-height: 80%;
     margin: 0 0 5px;
 }
 
@@ -13,8 +16,16 @@
     text-align: right;
 }
 
-.description {
+.doc {
     font-size: 18px;
+    font-weight:300;
+}
+
+.description {
+    font-family: aileron;
+    font-size: 18px;
+    font-weight:lighter;
+    letter-spacing: 1px;
 }
 
 .partners {

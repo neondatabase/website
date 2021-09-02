@@ -6,6 +6,9 @@ import classnames from 'classnames';
 import { FeaturesItem } from './FeaturesItem/FeaturesItem';
 import { Section } from '../Section/Section';
 
+
+import styles from './FeaturesItem/FeaturesItem.module.css'
+
 import serverlessPic from '../../public/images/features_serverless.svg'
 import branchingPic from '../../public/images/features_branching.svg'
 import availabilityPic from '../../public/images/features_availability.svg'
@@ -21,8 +24,8 @@ const FEATURES = [
     icon: serverlessPic,
     header: 'Serverless',
     description: <>
-      Create a Postgres endpoint in seconds and pay only for what you use on Zenith
-      <br/>Resources are automatically scaled based on workload
+      Create a Postgres endpoint instantly and pay only for what you use on Zenith
+      <br/><br/>Resources are automatically scaled based on workload
     </>
   },
   {
@@ -34,32 +37,32 @@ const FEATURES = [
   {
     id: 'availability',
     icon: availabilityPic,
-    header: 'High Availability',
+    header: 'High availability',
     description: 'HA for Postgres out of the box '
   },
   {
     id: 'deployment',
     icon: deploymentPic,
-    header: 'Edge Deployment',
+    header: 'Edge deployment',
     description: 'Your data lives close to your users'
   },
   {
     id: 'storage',
     icon: storagePic,
-    header: 'Bottomless Storage',
+    header: 'Bottomless storage',
     description: 'Your data is continuously and automatically backed up to cloud storage'
-  },
-  {
-    id: 'provenance',
-    icon: provenancePic,
-    header: 'Data Provenance',
-    description: 'Know the history of each record in your database'
   },
   {
     id: 'limits',
     icon: limitsPic,
-    header: 'High Connection Limits',
+    header: 'High connection limits',
     description: 'High connection limits for Postgres out of the box '
+  },
+  {
+    id: 'provenance',
+    icon: provenancePic,
+    header: 'Data provenance',
+    description: 'Know the history of each record in your database'
   },
   {
     id: 'open_source',
@@ -71,9 +74,10 @@ const FEATURES = [
 
 export const Features = () => {
   return (
-    <Section
-      header="Features"
-    >
+    <Section>
+      <h1 className={styles.title}>
+        Features
+      </h1>
       <Row>
         {FEATURES.map(f => (
           <Col xs={3} key={f.id}>
@@ -81,6 +85,6 @@ export const Features = () => {
           </Col>
         ))}
       </Row>
-    </Section>
+   </Section>
   )
 };

@@ -4,34 +4,42 @@
 
 .icon {
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    justify-content:left;
     height: 90px;
     width: 90px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .header {
     font-size: 48px;
     margin-bottom: 20px;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: aileron;
 }
 
 .text {
     font-size: 24px;
+    letter-spacing: 0.5px;
+    font-weight: 300;
 }
 
 .text a {
     color: inherit;
-    text-decoration: none;
+    text-underline-position: under;
 }
 
 .text a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 
 .text ul li {
-    list-style-type: '→';
+    list-style-type: '↳ ';
     padding-left: 0.5rem;
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
+.text ul li:hover {
+    text-decoration: none;
 }

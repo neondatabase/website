@@ -20,10 +20,10 @@ const BENEFITS = [
     description: <>
       On the surface Zenith is a single Postgres
       end point for your app. Internally we modified
-      Postgres’s storage engine to use the the cloud
+      Postgres’s storage engine to use the the cloud.
       <br/>
       <br/>
-      <a href="">Learn more →</a>
+      <a href="">Learn more&nbsp;&nbsp;&nbsp;→</a>
     </>
   },
   {
@@ -37,10 +37,10 @@ const BENEFITS = [
       <br/>
       <br/>
       <ul>
-        <li>Bottom-up index deletion</li>
-        <li>B-Tree deduplication</li>
-        <li>UPSERT -- ON CONFLICT UPDATE</li>
-        <li>Hot standby</li>
+        <li><a href="https://www.postgresql.org/docs/14/btree-implementation.html#BTREE-DELETION">Bottom-up index deletion</a></li>
+        <li><a href="https://blog.discourse.org/2021/04/standing-on-the-shoulders-of-a-giant-elephant/">B-Tree deduplication</a></li>
+        <li><a href="https://www.postgresql.org/docs/current/sql-insert.html#SQL-ON-CONFLICT">UPSERT -- ON CONFLICT UPDATE</a></li>
+        <li><a href="https://www.postgresql.org/docs/14/hot-standby.html">Hot standby</a></li>
       </ul>
     </>
   },
@@ -54,7 +54,7 @@ const BENEFITS = [
       extensions work automatically
       <br/>
       <br/>
-      <a href="">Learn more →</a>
+      <a href="">Learn more&nbsp;&nbsp;&nbsp;→</a>
     </>
   },
 ]
