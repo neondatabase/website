@@ -1,0 +1,70 @@
+{
+  "name": "zenith-gatsby",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "start": "npm run develop",
+    "develop": "gatsby develop -H 0.0.0.0",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "format": "prettier --write .",
+    "lint": "npm run lint:js & npm run lint:md",
+    "lint:fix": "npm run lint:js:fix & npm run lint:md:fix",
+    "lint:js": "eslint --ext .js,.jsx --ignore-path .gitignore .",
+    "lint:js:fix": "eslint --fix --ext .js,.jsx --ignore-path .gitignore .",
+    "lint:md": "markdownlint --ignore-path .gitignore .",
+    "lint:md:fix": "markdownlint --fix --ignore-path .gitignore .",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "clsx": "^1.1.1",
+    "gatsby": "^3.14.5",
+    "gatsby-plugin-image": "^1.14.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
+    "tailwindcss": "^2.2.19",
+    "tailwindcss-safe-area": "^0.2.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
+    "autoprefixer": "^10.4.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "gatsby-alias-imports": "^1.0.6",
+    "gatsby-plugin-manifest": "^3.14.0",
+    "gatsby-plugin-offline": "^4.14.0",
+    "gatsby-plugin-postcss": "^4.14.0",
+    "gatsby-plugin-react-helmet": "^4.14.0",
+    "gatsby-plugin-sharp": "^3.14.2",
+    "gatsby-plugin-sitemap": "^4.10.0",
+    "gatsby-plugin-svgr-svgo": "^1.2.2",
+    "gatsby-source-filesystem": "^3.14.0",
+    "gatsby-transformer-sharp": "^3.14.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
+    "markdownlint-cli": "^0.29.0",
+    "postcss": "^8.3.11",
+    "postcss-import": "^14.0.2",
+    "prettier": "^2.4.1"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pixel-point/gatsby-starter"
+  },
+  "bugs": {
+    "url": "https://github.com/pixel-point/gatsby-starter/issues"
+  }
+}

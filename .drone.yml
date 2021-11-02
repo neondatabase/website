@@ -1,0 +1,11 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: tests
+    image: node:12.14.0-alpine3.11
+    environment:
+      GATSBY_DEFAULT_SITE_URL: http://localhost
+    commands:
+      - npm install
+      - npm run build
