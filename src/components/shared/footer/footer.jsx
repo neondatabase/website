@@ -94,9 +94,11 @@ const Footer = () => (
             </Heading>
             <ul className="flex flex-col px-10 mt-10 space-y-6 pb-14">
               {links.map(({ to, text }, index) => (
-                <Link to={to} theme="normal-black" size="sm" key={index}>
-                  {text}
-                </Link>
+                <li key={index}>
+                  <Link to={to} theme="normal-black" size="sm">
+                    {text}
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
