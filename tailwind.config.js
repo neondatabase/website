@@ -26,9 +26,9 @@ module.exports = {
         '2xl': [defaultTheme.fontSize['2xl'][0], defaultTheme.lineHeight.normal],
         '3xl': [defaultTheme.fontSize['3xl'][0], defaultTheme.lineHeight.normal],
         '4xl': ['2.5rem', defaultTheme.lineHeight.none],
-        '6xl': ['4rem', '112.5'],
-        '7xl': ['5rem', '112.5'],
-        '8xl': ['6.5rem', '112.5'],
+        '6xl': ['4rem', '1.125'],
+        '7xl': ['5rem', '1.125'],
+        '8xl': ['6.5rem', '1.125'],
       },
       colors: {
         black: '#1a1a1a',
