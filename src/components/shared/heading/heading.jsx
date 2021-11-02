@@ -8,6 +8,7 @@ const styles = {
     lg: 't-7xl font-bold',
     md: 't-6xl font-bold',
     sm: 't-4xl font-semibold',
+    xs: 't-base font-bold tracking-wider uppercase',
   },
   theme: {
     white: 'text-white',

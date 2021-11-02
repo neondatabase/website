@@ -9,8 +9,8 @@ const underlineCommonStyles =
 const styles = {
   base: 'inline-flex !leading-none',
   size: {
-    md: 'text-xl font-semibold',
-    sm: 'text-lg',
+    md: 't-xl font-semibold',
+    sm: 't-lg',
   },
   theme: {
     'normal-black': 'text-black transition-colors duration-200 hover:text-primary-1',

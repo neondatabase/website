@@ -33,8 +33,8 @@ const Header = () => (
     <Container className="flex items-center justify-between">
       <nav>
         <ul className="flex space-x-12">
-          {links.map(({ text, to }) => (
-            <li>
+          {links.map(({ to, text }, index) => (
+            <li key={index}>
               <Link to={to} theme="normal-white" size="sm">
                 {text}
               </Link>
@@ -42,7 +42,10 @@ const Header = () => (
           ))}
         </ul>
       </nav>
-      <Link className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" to="/">
+      <Link
+        className="absolute block text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+        to="/"
+      >
         <Logo />
       </Link>
       <Button to="/" size="xs" theme="tertiary">
