@@ -9,6 +9,7 @@ import SaaS from 'components/pages/home/saas';
 import Scalability from 'components/pages/home/scalability';
 import Storage from 'components/pages/home/storage';
 import Layout from 'components/shared/layout';
+import Subscribe from 'components/shared/subscribe';
 
 const HomePage = () => (
   <Layout>
@@ -20,6 +21,7 @@ const HomePage = () => (
     <Scalability />
     <Storage />
     <DataBranching />
+    <Subscribe />
   </Layout>
 );
 
