@@ -3,11 +3,11 @@ import React from 'react';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import CostEfficientIcon from 'icons/cost-efficient.inline.svg';
-import EasyToUseIcon from 'icons/easy-to-use.inline.svg';
-import ScalableIcon from 'icons/scalable.inline.svg';
 
+import CostEfficientIcon from './images/cost-efficient.inline.svg';
+import EasyToUseIcon from './images/easy-to-use.inline.svg';
 import PlayIcon from './images/play.inline.svg';
+import ScalableIcon from './images/scalable.inline.svg';
 
 const Advantages = () => (
   <section className="bg-black py-80">
