@@ -43,7 +43,7 @@ const Advantages = () => (
           >
             <PlayIcon
               className="relative rounded-full"
-              style={{ 'box-shadow': '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
+              style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
             />
           </button>
         </div>

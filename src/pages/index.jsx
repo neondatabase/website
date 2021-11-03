@@ -16,11 +16,11 @@ const HomePage = () => (
     <Hero />
     <CTA />
     <Advantages />
-    <Features />
-    <SaaS />
     <Scalability />
     <Storage />
     <DataBranching />
+    <Features />
+    <SaaS />
     <Subscribe />
   </Layout>
 );
