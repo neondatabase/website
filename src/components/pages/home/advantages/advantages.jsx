@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 
@@ -8,6 +9,27 @@ import CostEfficientIcon from './images/cost-efficient.inline.svg';
 import EasyToUseIcon from './images/easy-to-use.inline.svg';
 import PlayIcon from './images/play.inline.svg';
 import ScalableIcon from './images/scalable.inline.svg';
+
+const items = [
+  {
+    icon: ScalableIcon,
+    title: 'Scalable',
+    description:
+      'Separation of storage and compute. allows Zenith reconfigure amount of the compute power on the fly.',
+  },
+  {
+    icon: CostEfficientIcon,
+    title: 'Cost efficient',
+    description:
+      'Being serverless allows using of resources on-demand, which significantly cuts the costs.',
+  },
+  {
+    icon: EasyToUseIcon,
+    title: 'Easy to use',
+    description:
+      'No complex onboarding needed. Use a single CLI command to create a new Zenith database.',
+  },
+];
 
 const Advantages = () => (
   <section className="bg-black py-80">
@@ -36,35 +58,22 @@ const Advantages = () => (
         </div>
       </div>
       <ul className="grid grid-cols-12 mt-40 gap-x-10">
-        <li className="col-span-3">
-          <ScalableIcon />
-          <Heading className="mt-6" tag="h3" size="sm" theme="white">
-            Scalable
-          </Heading>
-          <p className="mt-4 text-white t-xl">
-            Separation of storage and compute. allows Zenith reconfigure amount of the compute power
-            on the fly.
-          </p>
-        </li>
-        <li className="col-span-3 col-start-5">
-          <CostEfficientIcon />
-          <Heading className="mt-6" tag="h3" size="sm" theme="white">
-            Cost efficient
-          </Heading>
-          <p className="mt-4 text-white t-xl">
-            Being serverless allows using of resources on-demand, which significantly cuts the
-            costs.
-          </p>
-        </li>
-        <li className="col-span-3 col-start-9">
-          <EasyToUseIcon />
-          <Heading className="mt-6" tag="h3" size="sm" theme="white">
-            Easy to use
-          </Heading>
-          <p className="mt-4 text-white t-xl">
-            No complex onboarding needed. Use a single CLI command to create a new Zenith database.
-          </p>
-        </li>
+        {items.map(({ icon: Icon, title, description }, index) => (
+          <li
+            className={clsx(
+              'col-span-3',
+              { 'col-start-5': index === 1 },
+              { 'col-start-9': index === 2 }
+            )}
+            key={index}
+          >
+            <Icon />
+            <Heading className="mt-6" tag="h3" size="sm" theme="white">
+              {title}
+            </Heading>
+            <p className="mt-4 text-white t-xl">{description}</p>
+          </li>
+        ))}
       </ul>
     </Container>
   </section>
