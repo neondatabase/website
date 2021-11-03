@@ -35,7 +35,7 @@ const Header = () => (
         <ul className="flex space-x-12">
           {links.map(({ to, text }, index) => (
             <li key={index}>
-              <Link to={to} theme="normal-white" size="sm">
+              <Link to={to} theme="white" size="sm">
                 {text}
               </Link>
             </li>

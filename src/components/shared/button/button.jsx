@@ -5,11 +5,11 @@ import React from 'react';
 import Link from 'components/shared/link';
 
 const styles = {
-  base: 'inline-flex items-center justify-center font-bold !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200',
+  base: 'inline-flex items-center justify-center font-bold !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
   size: {
     md: 't-2xl py-7 px-11',
-    sm: 't-xl py-6 px-11',
-    xs: 't-base py-3.5 px-6',
+    sm: 't-xl py-[26px] px-11',
+    xs: 't-base py-[14px] px-[26px]',
   },
   theme: {
     primary: 'bg-primary-1 text-black hover:bg-[#00e5bf]',

@@ -95,7 +95,7 @@ const Footer = () => (
             <ul className="flex flex-col px-10 mt-10 space-y-6 pb-14">
               {links.map(({ to, text }, index) => (
                 <li key={index}>
-                  <Link to={to} theme="normal-black" size="sm">
+                  <Link to={to} theme="black" size="sm">
                     {text}
                   </Link>
                 </li>
