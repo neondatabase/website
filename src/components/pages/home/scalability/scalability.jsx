@@ -31,7 +31,7 @@ const Scalability = () => (
           </Link>
         </div>
         <div className="col-span-6">
-          <StaticImage className="-ml-5" src="./images/illustration.png" />
+          <StaticImage className="-ml-5" src="./images/illustration.png" alt="" aria-hidden />
         </div>
       </div>
     </Container>
