@@ -43,11 +43,11 @@ const Advantages = () => (
             aria-hidden
           />
           <button
-            className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-40 h-40 flex items-center justify-center rounded-full before:bg-[#00ace6] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:rounded-full before:mix-blend-multiply"
+            className="absolute flex items-center justify-center w-40 h-40 -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 group"
             type="button"
           >
             <PlayIcon
-              className="relative rounded-full"
+              className="relative rounded-full transition-transform duration-200 group-hover:scale-[1.1]"
               style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
             />
           </button>
