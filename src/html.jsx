@@ -3,7 +3,10 @@ import React from 'react';
 
 const fontsBasePath = '/fonts';
 
-const fontsPaths = [];
+const fontsPaths = [
+  '/ibm-plex-sans/ibm-plex-sans-bold.woff2',
+  '/ibm-plex-sans/ibm-plex-sans-regular.woff2',
+];
 
 const HTML = ({
   htmlAttributes,
