@@ -13,11 +13,13 @@ const styles = {
     sm: 't-lg',
   },
   theme: {
-    'normal-black': 'text-black transition-colors duration-200 hover:text-primary-1',
-    'normal-white': 'text-white transition-colors duration-200 hover:text-primary-1',
-    'underline-primary-1': `${underlineCommonStyles} before:bg-primary-1 hover:text-primary-1`,
-    'underline-secondary-3': `${underlineCommonStyles} before:bg-secondary-3 hover:text-secondary-3`,
-    'underline-secondary-5': `${underlineCommonStyles} before:bg-secondary-5 hover:text-secondary-5`,
+    black: 'text-black transition-colors duration-200 hover:text-primary-1',
+    white: 'text-white transition-colors duration-200 hover:text-primary-1',
+    'black-primary-1': `${underlineCommonStyles} before:bg-primary-1 hover:text-primary-1`,
+    'black-secondary-3': `${underlineCommonStyles} before:bg-secondary-3 hover:text-secondary-3`,
+    'black-secondary-5': `${underlineCommonStyles} before:bg-secondary-5 hover:text-secondary-5`,
+    'underline-primary-1':
+      'text-primary-1 border-b border-primary-1 transition-colors duration-200 hover:border-transparent',
   },
 };
 
