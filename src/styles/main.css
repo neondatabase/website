@@ -35,7 +35,7 @@
 }
 
 body {
-  @apply text-lg text-black antialiased;
+  @apply font-sans text-lg text-black antialiased;
 }
 
 .t-base {
