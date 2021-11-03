@@ -2,6 +2,7 @@ import React from 'react';
 
 import Advantages from 'components/pages/home/advantages';
 import CTA from 'components/pages/home/cta';
+import DataBranching from 'components/pages/home/data-branching';
 import Features from 'components/pages/home/features';
 import Hero from 'components/pages/home/hero';
 import SaaS from 'components/pages/home/saas';
@@ -18,6 +19,7 @@ const HomePage = () => (
     <SaaS />
     <Scalability />
     <Storage />
+    <DataBranching />
   </Layout>
 );
 
