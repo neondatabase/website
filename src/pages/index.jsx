@@ -4,6 +4,7 @@ import Advantages from 'components/pages/home/advantages';
 import CTA from 'components/pages/home/cta';
 import Features from 'components/pages/home/features';
 import Hero from 'components/pages/home/hero';
+import SaaS from 'components/pages/home/saas';
 import Layout from 'components/shared/layout';
 
 const HomePage = () => (
@@ -12,6 +13,7 @@ const HomePage = () => (
     <CTA />
     <Advantages />
     <Features />
+    <SaaS />
   </Layout>
 );
 
