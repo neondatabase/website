@@ -24,7 +24,7 @@ const DataBranching = () => (
     </Container>
     <StaticImage
       className="!block max-w-[1920px] mt-[-365px] mx-auto"
-      src="./images/illustration-data-branching.png"
+      src="../data-branching/images/illustration.png"
       alt=""
       aria-hidden
     />

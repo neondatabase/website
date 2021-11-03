@@ -28,7 +28,12 @@ const links = [
 const Subscribe = () => (
   <section className="my-48">
     <Container className="flex items-center justify-between">
-      <StaticImage className="max-w-[800px]" src="./images/illustration.jpg" alt="" aria-hidden />
+      <StaticImage
+        className="max-w-[800px]"
+        src="../subscribe/images/illustration.jpg"
+        alt=""
+        aria-hidden
+      />
       <div className="max-w-[710px]">
         <Heading tag="h2" size="lg" theme="black">
           Subscribe <br /> to Newsletter

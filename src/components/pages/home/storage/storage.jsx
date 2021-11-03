@@ -10,7 +10,7 @@ const Storage = () => (
     <Container className="flex items-center justify-between">
       <StaticImage
         className="max-w-[880px]"
-        src="./images/illustration-storage.png"
+        src="../storage/images/illustration.png"
         alt=""
         aria-hidden
       />

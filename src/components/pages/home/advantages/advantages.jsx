@@ -36,7 +36,12 @@ const Advantages = () => (
     <Container>
       <div className="flex items-center space-x-[100px]">
         <div className="relative">
-          <StaticImage className="max-w-[800px]" src="./images/cover.jpg" alt="" aria-hidden />
+          <StaticImage
+            className="max-w-[800px]"
+            src="../advantages/images/cover.jpg"
+            alt=""
+            aria-hidden
+          />
           <button
             className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-40 h-40 flex items-center justify-center rounded-full before:bg-[#00ace6] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:rounded-full before:mix-blend-multiply"
             type="button"

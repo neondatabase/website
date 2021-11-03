@@ -18,7 +18,7 @@ const Hero = () => (
       </div>
       <StaticImage
         className="max-w-[820px] -mr-5 -mb-7"
-        src="./images/illustration.png"
+        src="../hero/images/illustration.png"
         alt=""
         aria-hidden
       />
