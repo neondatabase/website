@@ -6,6 +6,7 @@ import Features from 'components/pages/home/features';
 import Hero from 'components/pages/home/hero';
 import SaaS from 'components/pages/home/saas';
 import Layout from 'components/shared/layout';
+import Subscribe from 'components/shared/subscribe';
 
 const HomePage = () => (
   <Layout>
@@ -14,6 +15,7 @@ const HomePage = () => (
     <Advantages />
     <Features />
     <SaaS />
+    <Subscribe />
   </Layout>
 );
 
