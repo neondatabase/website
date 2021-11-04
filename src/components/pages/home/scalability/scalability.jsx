@@ -6,7 +6,7 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 
 const Scalability = () => (
-  <section className="mt-48">
+  <section className="mt-48 safe-paddings">
     <Container className="flex items-center justify-between">
       <div className="max-w-[600px] ml-[150px]">
         <Heading tag="h2" size="lg" theme="black">

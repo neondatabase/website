@@ -32,7 +32,7 @@ const items = [
 ];
 
 const Advantages = () => (
-  <section className="bg-black py-80">
+  <section className="bg-black py-80 safe-paddings">
     <Container>
       <div className="flex items-center space-x-[100px]">
         <div className="relative">

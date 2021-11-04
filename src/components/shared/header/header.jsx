@@ -29,7 +29,7 @@ const links = [
 ];
 
 const Header = () => (
-  <header className="py-8 bg-black">
+  <header className="py-8 bg-black safe-paddings">
     <Container className="flex items-center justify-between">
       <nav>
         <ul className="flex space-x-12">

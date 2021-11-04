@@ -74,6 +74,18 @@ body {
   @apply text-8xl;
 }
 
+.safe-paddings {
+  @apply px-safe;
+
+  header& {
+    @apply pt-safe;
+  }
+
+  footer& {
+    @apply pb-safe;
+  }
+}
+
 .with-highlighted-text-secondary-2 {
   span {
     @apply text-secondary-2;

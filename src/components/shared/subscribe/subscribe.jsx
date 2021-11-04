@@ -26,7 +26,7 @@ const links = [
 ];
 
 const Subscribe = () => (
-  <section className="my-48">
+  <section className="my-48 safe-paddings">
     <Container className="flex items-center justify-between">
       <StaticImage
         className="max-w-[800px]"

@@ -6,7 +6,7 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 
 const Hero = () => (
-  <section className="bg-black pt-11">
+  <section className="bg-black pt-11 safe-paddings">
     <Container className="flex items-center justify-between">
       <div className="max-w-[860px]">
         <Heading className="with-highlighted-text-secondary-2" tag="h1" size="xl" theme="white">

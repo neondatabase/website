@@ -6,7 +6,7 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 
 const Storage = () => (
-  <section className="mt-48">
+  <section className="mt-48 safe-paddings">
     <Container className="flex items-center justify-between">
       <StaticImage
         className="max-w-[880px]"

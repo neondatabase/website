@@ -58,7 +58,7 @@ const items = [
 ];
 
 const Features = () => (
-  <section className="pt-40 mt-48 bg-black">
+  <section className="pt-40 mt-48 bg-black safe-paddings">
     <Container>
       <Heading className="text-center" tag="h2" size="md" theme="white">
         Not an ordinary PostgreSQL as a service

@@ -7,7 +7,7 @@ import Heading from 'components/shared/heading';
 import illustration from './images/illustration.svg';
 
 const SaaS = () => (
-  <section className="py-48 bg-black">
+  <section className="py-48 bg-black safe-paddings">
     <Container className="flex items-center justify-between">
       <div>
         <Heading tag="h2" size="lg" theme="white">
