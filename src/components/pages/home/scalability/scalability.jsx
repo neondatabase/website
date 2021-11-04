@@ -27,8 +27,8 @@ const Scalability = () => (
         </Link>
       </div>
       <StaticImage
-        className="max-w-[880px]"
-        src="../scalability/images/illustration.png"
+        className="max-w-[881px]"
+        src="../scalability/images/illustration.jpg"
         alt=""
         aria-hidden
       />
