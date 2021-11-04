@@ -25,7 +25,7 @@ const CTA = () => {
   }, [isCopied]);
 
   return (
-    <section className="text-center bg-black pt-[340px] safe-paddings 3xl:pt-[280px] 2xl:pt-60 xl:pt-56">
+    <section className="text-center bg-black pt-[340px] safe-paddings 3xl:pt-[280px] 2xl:pt-60 xl:pt-56 lg:pt-[260px]">
       <Container>
         <Heading tag="h2" size="lg" theme="white">
           Made for Developers
@@ -33,7 +33,7 @@ const CTA = () => {
         <p className="mt-5 text-white t-3xl 2xl:mt-4">
           Just use a single command from CLI to create new Zenith database
         </p>
-        <div className="relative max-w-[860px] mt-8 mx-auto 3xl:max-w-[716px] 2xl:max-w-[592px] 2xl:mt-7 xl:max-w-[504px] xl:mt-6 before:absolute before:-bottom-3.5 before:-left-3.5 before:w-full before:h-full before:bg-primary-1 before:rounded-full 2xl:before:-bottom-2.5 2xl:before:-left-2.5 xl:before:-bottom-2 xl:before:-left-2">
+        <div className="relative max-w-[860px] mt-8 mx-auto 3xl:max-w-[716px] 2xl:max-w-[592px] 2xl:mt-7 xl:max-w-[504px] xl:mt-6 lg:max-w-[584px] before:absolute before:-bottom-3.5 before:-left-3.5 before:w-full before:h-full before:bg-primary-1 before:rounded-full 2xl:before:-bottom-2.5 2xl:before:-left-2.5 xl:before:-bottom-2 xl:before:-left-2">
           <div className="relative flex items-center justify-between p-2 bg-white border-4 border-black rounded-full pl-9 2xl:p-1.5 2xl:pl-7 xl:p-1 xl:pl-6">
             <span className="font-mono t-3xl">$ psql -h lb.zenith.tech</span>
             <Button className="relative" size="sm" theme="secondary" onClick={handleButtonClick}>

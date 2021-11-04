@@ -57,19 +57,19 @@ const items = [
 ];
 
 const Features = () => (
-  <section className="pt-40 mt-48 bg-black safe-paddings 3xl:pt-36 3xl:mt-44 2xl:pt-32 2xl:mt-40 xl:pt-28 xl:mt-32">
+  <section className="pt-40 mt-48 bg-black safe-paddings 3xl:pt-36 3xl:mt-44 2xl:pt-32 2xl:mt-40 xl:pt-28 xl:mt-32 lg:pt-20 lg:mt-24">
     <Container>
-      <Heading className="text-center" tag="h2" size="md" theme="white">
+      <Heading className="text-center lg:max-w-[460px] lg:mx-auto" tag="h2" size="md" theme="white">
         Not an ordinary PostgreSQL as a service
       </Heading>
-      <p className="mt-5 text-center text-white t-3xl max-w-[940px] mx-auto 2xl:max-w-[800px] 2xl:mt-4 xl:max-w-[610px] xl:mt-3.5">
+      <p className="mt-5 text-center text-white t-3xl max-w-[940px] mx-auto 2xl:max-w-[800px] 2xl:mt-4 xl:max-w-[610px] xl:mt-3.5 lg:max-w-[580px]">
         The way Zenith extends PostgreSQL brings many essential features needed for modern projects
         development.
       </p>
       <ul className="grid grid-cols-12 mt-[92px] grid-gap gap-y-[92px] 2xl:mt-[76px] 2xl:gap-y-[76px xl:mt-16 xl:gap-y-16">
         {items.map(({ icon: Icon, title, description }, index) => (
           <li
-            className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px]"
+            className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px]"
             key={index}
           >
             <Icon className="w-24 2xl:w-20 xl:w-[72px]" />
