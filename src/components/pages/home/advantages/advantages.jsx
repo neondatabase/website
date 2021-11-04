@@ -46,7 +46,7 @@ const Advantages = () => (
             type="button"
           >
             <PlayIcon
-              className="relative rounded-full transition-transform duration-200 group-hover:scale-[1.1] 3xl:w-[82px] 2xl:w-[68px] xl:w-[62px]"
+              className="relative h-24 rounded-full transition-transform duration-200 group-hover:scale-[1.1] 3xl:h-[82px] 2xl:h-[68px] xl:h-[62px]"
               style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
             />
           </button>
