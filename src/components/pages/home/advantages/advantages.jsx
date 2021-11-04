@@ -42,7 +42,7 @@ const Advantages = () => (
             aria-hidden
           />
           <button
-            className="absolute flex items-center justify-center w-40 h-40 -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 group"
+            className="absolute flex items-center justify-center w-40 h-40 -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 group 3xl:w-[136px] 3xl:h-[136px] 2xl:w-[112px] 2xl:h-[112px]"
             type="button"
           >
             <PlayIcon
