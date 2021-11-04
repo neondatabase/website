@@ -60,6 +60,10 @@ body {
   @screen 2xl {
     font-size: 18px;
   }
+
+  @screen xl {
+    font-size: 16px;
+  }
 }
 
 .t-2xl {
@@ -67,6 +71,10 @@ body {
 
   @screen 2xl {
     font-size: 20px;
+  }
+
+  @screen xl {
+    font-size: 18px;
   }
 }
 
@@ -76,6 +84,10 @@ body {
   @screen 2xl {
     font-size: 24px;
   }
+
+  @screen xl {
+    font-size: 20px;
+  }
 }
 
 .t-4xl {
@@ -84,6 +96,10 @@ body {
   @screen 2xl {
     font-size: 36px;
   }
+
+  @screen xl {
+    font-size: 32px;
+  }
 }
 
 .t-6xl {
@@ -91,6 +107,10 @@ body {
 
   @screen 2xl {
     font-size: 48px;
+  }
+
+  @screen xl {
+    font-size: 40px;
   }
 }
 
@@ -104,6 +124,10 @@ body {
   @screen 2xl {
     font-size: 56px;
   }
+
+  @screen xl {
+    font-size: 48px;
+  }
 }
 
 .t-8xl {
@@ -115,6 +139,10 @@ body {
 
   @screen 2xl {
     font-size: 72px;
+  }
+
+  @screen xl {
+    font-size: 64px;
   }
 }
 
@@ -131,7 +159,7 @@ body {
 }
 
 .grid-gap {
-  @apply gap-x-10 2xl:gap-x-8;
+  @apply gap-x-10 2xl:gap-x-8 xl:gap-x-6;
 }
 
 .with-highlighted-text-secondary-2 {

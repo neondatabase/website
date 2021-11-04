@@ -43,7 +43,7 @@ const Header = () => (
         </ul>
       </nav>
       <Link
-        className="absolute block text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+        className="absolute block text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 xl:relative xl:top-0 xl:left-0 xl:transform-none xl:order-first"
         to="/"
       >
         <Logo className="h-6 2xl:h-5" />

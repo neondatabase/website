@@ -31,10 +31,10 @@ const items = [
 ];
 
 const Advantages = () => (
-  <section className="bg-black py-80 safe-paddings 3xl:py-72 2xl:py-64">
+  <section className="bg-black py-80 safe-paddings 3xl:py-72 2xl:py-64 xl:py-52">
     <Container>
-      <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px]">
-        <div className="relative max-w-[800px] 3xl:max-w-[680px] 2xl:max-w-[560px]">
+      <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px] xl:space-x-[50px]">
+        <div className="relative max-w-[800px] 3xl:max-w-[680px] 2xl:max-w-[560px] xl:max-w-[510px]">
           <StaticImage
             className="rounded"
             src="../advantages/images/cover.jpg"
@@ -42,17 +42,22 @@ const Advantages = () => (
             aria-hidden
           />
           <button
-            className="absolute flex items-center justify-center w-40 h-40 -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 group 3xl:w-[136px] 3xl:h-[136px] 2xl:w-[112px] 2xl:h-[112px]"
+            className="absolute flex items-center justify-center w-40 h-40 -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 group 3xl:w-[136px] 3xl:h-[136px] 2xl:w-[112px] 2xl:h-[112px] xl:w-[102px] xl:h-[102px]"
             type="button"
           >
             <PlayIcon
-              className="relative rounded-full transition-transform duration-200 group-hover:scale-[1.1] 3xl:w-[82px] 2xl:w-[68px]"
+              className="relative rounded-full transition-transform duration-200 group-hover:scale-[1.1] 3xl:w-[82px] 2xl:w-[68px] xl:w-[62px]"
               style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
             />
           </button>
         </div>
         <div>
-          <Heading className="max-w-[490px] 2xl:max-w-[385px]" tag="h2" size="lg" theme="white">
+          <Heading
+            className="max-w-[490px] 2xl:max-w-[385px] xl:max-w-[300px]"
+            tag="h2"
+            size="lg"
+            theme="white"
+          >
             Distributed Database, Made Simple
           </Heading>
           <p className="max-w-[600px] t-xl mt-5 text-white 2xl:max-w-[520px] 2xl:mt-4">
@@ -61,14 +66,17 @@ const Advantages = () => (
           </p>
         </div>
       </div>
-      <ul className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36 2xl:mt-32">
+      <ul className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36 2xl:mt-32 xl:mt-24">
         {items.map(({ icon: Icon, title, description }, index) => (
-          <li className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px]" key={index}>
-            <Icon className="w-24 2xl:w-20" />
-            <Heading className="mt-6" tag="h3" size="sm" theme="white">
+          <li
+            className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px]"
+            key={index}
+          >
+            <Icon className="w-24 2xl:w-20 xl:w-[72px]" />
+            <Heading className="mt-6 xl:mt-5" tag="h3" size="sm" theme="white">
               {title}
             </Heading>
-            <p className="mt-4 text-white t-xl">{description}</p>
+            <p className="mt-4 text-white t-xl xl:mt-3.5">{description}</p>
           </li>
         ))}
       </ul>
