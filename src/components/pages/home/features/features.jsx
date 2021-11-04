@@ -67,7 +67,7 @@ const Features = () => (
         The way Zenith extends PostgreSQL brings many essential features needed for modern projects
         development.
       </p>
-      <ul className="grid grid-cols-12 mt-[92px] gap-x-10 gap-y-[92px]">
+      <ul className="grid grid-cols-12 mt-[92px] grid-gap gap-y-[92px]">
         {items.map(({ icon: Icon, title, description }, index) => (
           <li
             className={clsx(

@@ -62,7 +62,7 @@ const Advantages = () => (
           </p>
         </div>
       </div>
-      <ul className="grid grid-cols-12 mt-40 gap-x-10">
+      <ul className="grid grid-cols-12 mt-40 grid-gap">
         {items.map(({ icon: Icon, title, description }, index) => (
           <li
             className={clsx(
