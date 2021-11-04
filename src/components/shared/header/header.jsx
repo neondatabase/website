@@ -30,9 +30,9 @@ const links = [
 
 const Header = () => (
   <header className="bg-black safe-paddings">
-    <Container className="flex items-center justify-between py-8">
+    <Container className="flex items-center justify-between py-8 2xl:py-6">
       <nav>
-        <ul className="flex space-x-12">
+        <ul className="flex space-x-12 2xl:space-x-10">
           {links.map(({ to, text }, index) => (
             <li key={index}>
               <Link to={to} theme="white" size="sm">
@@ -46,7 +46,7 @@ const Header = () => (
         className="absolute block text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
         to="/"
       >
-        <Logo />
+        <Logo className="h-6 2xl:h-5" />
       </Link>
       <Button to="/" size="xs" theme="tertiary">
         Sign Up

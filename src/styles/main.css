@@ -40,30 +40,58 @@ body {
 
 .t-base {
   @apply text-base;
+
+  @screen 2xl {
+    font-size: 14px;
+  }
 }
 
 .t-lg {
   @apply text-lg;
+
+  @screen 2xl {
+    font-size: 16px;
+  }
 }
 
 .t-xl {
   @apply text-xl;
+
+  @screen 2xl {
+    font-size: 18px;
+  }
 }
 
 .t-2xl {
   @apply text-2xl;
+
+  @screen 2xl {
+    font-size: 20px;
+  }
 }
 
 .t-3xl {
   @apply text-3xl;
+
+  @screen 2xl {
+    font-size: 24px;
+  }
 }
 
 .t-4xl {
   @apply text-4xl;
+
+  @screen 2xl {
+    font-size: 36px;
+  }
 }
 
 .t-6xl {
   @apply text-6xl;
+
+  @screen 2xl {
+    font-size: 48px;
+  }
 }
 
 .t-7xl {
@@ -72,6 +100,10 @@ body {
   @screen 3xl {
     font-size: 72px;
   }
+
+  @screen 2xl {
+    font-size: 56px;
+  }
 }
 
 .t-8xl {
@@ -79,6 +111,10 @@ body {
 
   @screen 3xl {
     font-size: 88px;
+  }
+
+  @screen 2xl {
+    font-size: 72px;
   }
 }
 
@@ -95,7 +131,7 @@ body {
 }
 
 .grid-gap {
-  @apply gap-x-10;
+  @apply gap-x-10 2xl:gap-x-8;
 }
 
 .with-highlighted-text-secondary-2 {

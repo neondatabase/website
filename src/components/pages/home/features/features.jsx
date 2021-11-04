@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import React from 'react';
 
 import Container from 'components/shared/container';
@@ -58,26 +57,19 @@ const items = [
 ];
 
 const Features = () => (
-  <section className="pt-40 mt-48 bg-black safe-paddings 3xl:pt-36 3xl:mt-44">
+  <section className="pt-40 mt-48 bg-black safe-paddings 3xl:pt-36 3xl:mt-44 2xl:pt-32 2xl:mt-40">
     <Container>
       <Heading className="text-center" tag="h2" size="md" theme="white">
         Not an ordinary PostgreSQL as a service
       </Heading>
-      <p className="mt-5 text-center text-white t-3xl max-w-[940px] mx-auto">
+      <p className="mt-5 text-center text-white t-3xl max-w-[940px] mx-auto 2xl:max-w-[800px] 2xl:mt-4">
         The way Zenith extends PostgreSQL brings many essential features needed for modern projects
         development.
       </p>
-      <ul className="grid grid-cols-12 mt-[92px] grid-gap gap-y-[92px]">
+      <ul className="grid grid-cols-12 mt-[92px] grid-gap gap-y-[92px] 2xl:mt-[76px] 2xl:gap-y-[76px]">
         {items.map(({ icon: Icon, title, description }, index) => (
-          <li
-            className={clsx(
-              'col-span-3',
-              { 'col-start-5': index === 1 || index === 4 },
-              { 'col-start-9': index === 2 || index === 5 }
-            )}
-            key={index}
-          >
-            <Icon />
+          <li className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px]" key={index}>
+            <Icon className="w-24 2xl:w-20" />
             <Heading className="mt-6" tag="h3" size="sm" theme="white">
               {title}
             </Heading>

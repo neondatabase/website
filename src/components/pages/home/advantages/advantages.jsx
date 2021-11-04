@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 
@@ -32,10 +31,10 @@ const items = [
 ];
 
 const Advantages = () => (
-  <section className="bg-black py-80 safe-paddings 3xl:py-72">
+  <section className="bg-black py-80 safe-paddings 3xl:py-72 2xl:py-64">
     <Container>
-      <div className="flex items-center space-x-[100px] 3xl:space-x-[76px]">
-        <div className="relative max-w-[800px] 3xl:max-w-[680px]">
+      <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px]">
+        <div className="relative max-w-[800px] 3xl:max-w-[680px] 2xl:max-w-[560px]">
           <StaticImage
             className="rounded"
             src="../advantages/images/cover.jpg"
@@ -47,32 +46,25 @@ const Advantages = () => (
             type="button"
           >
             <PlayIcon
-              className="relative rounded-full transition-transform duration-200 group-hover:scale-[1.1] 3xl:w-[82px]"
+              className="relative rounded-full transition-transform duration-200 group-hover:scale-[1.1] 3xl:w-[82px] 2xl:w-[68px]"
               style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
             />
           </button>
         </div>
         <div>
-          <Heading className="max-w-[490px]" tag="h2" size="lg" theme="white">
+          <Heading className="max-w-[490px] 2xl:max-w-[385px]" tag="h2" size="lg" theme="white">
             Distributed Database, Made Simple
           </Heading>
-          <p className="max-w-[600px] t-xl mt-5 text-white">
+          <p className="max-w-[600px] t-xl mt-5 text-white 2xl:max-w-[520px] 2xl:mt-4">
             Go through our 5 minutes tutorials video and start using scalable, cost efficient
             database architecture for your project.
           </p>
         </div>
       </div>
-      <ul className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36">
+      <ul className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36 2xl:mt-32">
         {items.map(({ icon: Icon, title, description }, index) => (
-          <li
-            className={clsx(
-              'col-span-3',
-              { 'col-start-5': index === 1 },
-              { 'col-start-9': index === 2 }
-            )}
-            key={index}
-          >
-            <Icon />
+          <li className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px]" key={index}>
+            <Icon className="w-24 2xl:w-20" />
             <Heading className="mt-6" tag="h3" size="sm" theme="white">
               {title}
             </Heading>

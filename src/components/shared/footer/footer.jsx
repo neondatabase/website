@@ -73,28 +73,31 @@ const menuItems = [
 ];
 
 const Footer = () => (
-  <footer className="mb-20 safe-paddings 3xl:mb-16">
+  <footer className="mb-20 safe-paddings 3xl:mb-16 2xl:mb-14">
     <Container className="flex justify-between border-t-2 border-b-2 border-black">
-      <div className="flex flex-col justify-between pt-8 pb-14">
+      <div className="flex flex-col justify-between pt-8 pb-14 2xl:pt-[25px] 2xl:pb-11">
         <Link className="block text-black" to="/">
-          <Logo />
+          <Logo className="h-6 2xl:h-5" />
         </Link>
         <p className="t-base">Zenith 2021 Ⓒ All rights reserved</p>
       </div>
       <div className="flex">
         {menuItems.map(({ heading, links }, index) => (
-          <div className="w-[300px] border-l-2 border-black 3xl:w-[252px]" key={index}>
+          <div
+            className="w-[300px] border-l-2 border-black 3xl:w-[252px] 2xl:w-[208px]"
+            key={index}
+          >
             <Heading
-              className="px-10 border-b-2 border-black py-9"
+              className="px-10 border-b-2 border-black py-9 2xl:px-8 2xl:py-7"
               tag="h3"
               size="xs"
               theme="black"
             >
               {heading}
             </Heading>
-            <ul className="flex flex-col px-10 mt-10 space-y-6 pb-14">
+            <ul className="flex flex-col px-10 mt-10 space-y-6 pb-14 2xl:px-8 2xl:mt-8 2xl:pb-11">
               {links.map(({ to, text }, index) => (
-                <li key={index}>
+                <li style={{ fontSize: 0 }} key={index}>
                   <Link to={to} theme="black" size="sm">
                     {text}
                   </Link>
