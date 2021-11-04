@@ -29,8 +29,8 @@ const links = [
 ];
 
 const Header = () => (
-  <header className="py-8 bg-black safe-paddings">
-    <Container className="flex items-center justify-between">
+  <header className="bg-black safe-paddings">
+    <Container className="flex items-center justify-between py-8">
       <nav>
         <ul className="flex space-x-12">
           {links.map(({ to, text }, index) => (
