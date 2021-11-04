@@ -25,7 +25,7 @@ const CTA = () => {
   }, [isCopied]);
 
   return (
-    <section className="text-center bg-black pt-[340px] safe-paddings">
+    <section className="text-center bg-black pt-[340px] safe-paddings 3xl:pt-[280px]">
       <Container>
         <Heading tag="h2" size="lg" theme="white">
           Made for Developers
@@ -33,7 +33,7 @@ const CTA = () => {
         <p className="mt-5 text-white t-3xl">
           Just use a single command from CLI to create new Zenith database
         </p>
-        <div className="relative max-w-[860px] mx-auto before:absolute before:-bottom-3.5 before:-left-3.5 before:w-full before:h-full before:bg-primary-1 before:rounded-full">
+        <div className="relative max-w-[860px] mx-auto 3xl:max-w-[716px] before:absolute before:-bottom-3.5 before:-left-3.5 before:w-full before:h-full before:bg-primary-1 before:rounded-full">
           <div className="relative flex items-center justify-between p-2 mt-8 bg-white border-4 border-black rounded-full pl-9">
             <span className="font-mono t-3xl">$ psql -h lb.zenith.tech</span>
             <Button className="relative" size="sm" theme="secondary" onClick={handleButtonClick}>

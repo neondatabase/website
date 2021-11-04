@@ -6,13 +6,13 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 
 const DataBranching = () => (
-  <section className="mt-[270px] safe-paddings">
+  <section className="mt-[270px] safe-paddings 3xl:mt-44">
     <Container>
       <div className="max-w-[600px]">
         <Heading tag="h2" size="lg" theme="black">
           Data Branching
         </Heading>
-        <p className="mt-8 t-xl">
+        <p className="mt-8 t-xl 3xl:max-w-[504px]">
           Zenith storage allows users to branch the entire Postgres cluster, making it ideal for
           developer, staging, and production environments. Use CLI from your CI/CD process to create
           a new branch from the current environment for every deploy preview.
@@ -23,7 +23,7 @@ const DataBranching = () => (
       </div>
     </Container>
     <StaticImage
-      className="!block max-w-[1920px] mt-[-365px] mx-auto z-[-2]"
+      className="!block max-w-[1920px] mt-[-365px] mx-auto z-[-2] 3xl:mt-[-310px]"
       src="../data-branching/images/illustration.jpg"
       alt=""
       aria-hidden

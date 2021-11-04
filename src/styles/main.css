@@ -68,10 +68,18 @@ body {
 
 .t-7xl {
   @apply text-7xl;
+
+  @screen 3xl {
+    font-size: 72px;
+  }
 }
 
 .t-8xl {
   @apply text-8xl;
+
+  @screen 3xl {
+    font-size: 88px;
+  }
 }
 
 .safe-paddings {

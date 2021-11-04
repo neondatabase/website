@@ -32,12 +32,12 @@ const items = [
 ];
 
 const Advantages = () => (
-  <section className="bg-black py-80 safe-paddings">
+  <section className="bg-black py-80 safe-paddings 3xl:py-72">
     <Container>
-      <div className="flex items-center space-x-[100px]">
-        <div className="relative">
+      <div className="flex items-center space-x-[100px] 3xl:space-x-[76px]">
+        <div className="relative max-w-[800px] 3xl:max-w-[680px]">
           <StaticImage
-            className="max-w-[800px]"
+            className="rounded"
             src="../advantages/images/cover.jpg"
             alt=""
             aria-hidden
@@ -47,7 +47,7 @@ const Advantages = () => (
             type="button"
           >
             <PlayIcon
-              className="relative rounded-full transition-transform duration-200 group-hover:scale-[1.1]"
+              className="relative rounded-full transition-transform duration-200 group-hover:scale-[1.1] 3xl:w-[82px]"
               style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
             />
           </button>
@@ -62,7 +62,7 @@ const Advantages = () => (
           </p>
         </div>
       </div>
-      <ul className="grid grid-cols-12 mt-40 grid-gap">
+      <ul className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36">
         {items.map(({ icon: Icon, title, description }, index) => (
           <li
             className={clsx(

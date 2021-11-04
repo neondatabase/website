@@ -73,7 +73,7 @@ const menuItems = [
 ];
 
 const Footer = () => (
-  <footer className="mb-20 safe-paddings">
+  <footer className="mb-20 safe-paddings 3xl:mb-16">
     <Container className="flex justify-between border-t-2 border-b-2 border-black">
       <div className="flex flex-col justify-between pt-8 pb-14">
         <Link className="block text-black" to="/">
@@ -83,7 +83,7 @@ const Footer = () => (
       </div>
       <div className="flex">
         {menuItems.map(({ heading, links }, index) => (
-          <div className="w-[300px] border-l-2 border-black" key={index}>
+          <div className="w-[300px] border-l-2 border-black 3xl:w-[252px]" key={index}>
             <Heading
               className="px-10 border-b-2 border-black py-9"
               tag="h3"

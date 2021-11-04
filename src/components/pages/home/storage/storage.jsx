@@ -6,15 +6,15 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 
 const Storage = () => (
-  <section className="mt-48 safe-paddings">
+  <section className="mt-48 safe-paddings 3xl:mt-44">
     <Container className="flex items-center justify-between">
       <StaticImage
-        className="max-w-[880px]"
+        className="max-w-[880px] 3xl:max-w-[735px]"
         src="../storage/images/illustration.jpg"
         alt=""
         aria-hidden
       />
-      <div className="max-w-[600px] mr-[110px]">
+      <div className="max-w-[600px] mr-[110px] 3xl:max-w-[504px] 3xl:mr-[86px]">
         <Heading className="max-w-[370px]" tag="h2" size="lg" theme="black">
           Unlimited Storage
         </Heading>

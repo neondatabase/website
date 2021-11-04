@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Container = ({ className: additionalClassName, children, ...otherProps }) => {
-  const className = clsx('relative max-w-[1760px] mx-auto', additionalClassName);
+  const className = clsx('relative max-w-[1760px] 3xl:max-w-[1472px] mx-auto', additionalClassName);
 
   return (
     <div className={className} {...otherProps}>

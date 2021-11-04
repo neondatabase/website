@@ -26,21 +26,21 @@ const links = [
 ];
 
 const Subscribe = () => (
-  <section className="my-48 safe-paddings">
+  <section className="my-48 safe-paddings 3xl:my-44">
     <Container className="flex items-center justify-between">
       <StaticImage
-        className="max-w-[800px]"
+        className="max-w-[800px] 3xl:max-w-[660px]"
         src="../subscribe/images/illustration.jpg"
         alt=""
         aria-hidden
       />
-      <div className="max-w-[710px]">
+      <div className="max-w-[710px] 3xl:max-w-[590px]">
         <Heading tag="h2" size="lg" theme="black">
           Subscribe <br /> to Newsletter
         </Heading>
         <div className="relative mt-10 ml-[14px] before:absolute before:-bottom-3.5 before:-left-3.5 before:w-full before:h-full before:bg-secondary-2 before:rounded-full">
           <input
-            className="relative block w-[696px] h-24 mt-8 text-black bg-white border-4 border-black rounded-full outline-none t-2xl pl-7 pr-[218px] placeholder-black"
+            className="relative block w-[696px] h-24 mt-8 text-black bg-white border-4 border-black rounded-full outline-none t-2xl pl-7 pr-[218px] placeholder-black 3xl:w-[576px]"
             type="email"
             placeholder="Your email..."
           />
