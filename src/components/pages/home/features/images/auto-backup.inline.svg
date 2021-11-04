@@ -1,0 +1,15 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect y="-0.000488281" width="96" height="96" rx="6" fill="#FBD0D7"/>
+<rect x="8" y="25.9995" width="62" height="56" rx="4" fill="#AA99FF"/>
+<rect x="15" y="20.9995" width="60" height="54" rx="3" fill="white" stroke="#1A1A1A" stroke-width="2"/>
+<rect x="26" y="7.99951" width="4" height="22" rx="2" fill="#1A1A1A"/>
+<rect x="60" y="7.99951" width="4" height="22" rx="2" fill="#1A1A1A"/>
+<rect x="24" y="37.9995" width="8" height="8" rx="1" fill="#1A1A1A"/>
+<rect x="41" y="37.9995" width="8" height="8" rx="1" fill="#1A1A1A"/>
+<rect x="58" y="37.9995" width="8" height="8" rx="1" fill="#1A1A1A"/>
+<rect x="41" y="51.9995" width="8" height="8" rx="1" fill="#1A1A1A"/>
+<rect x="24" y="51.9995" width="8" height="8" rx="1" fill="#FF4C79"/>
+<rect x="58" y="51.9995" width="8" height="8" rx="1" fill="#1A1A1A"/>
+<circle cx="76" cy="75.9995" r="11" fill="#FBD0D7" stroke="#1A1A1A" stroke-width="2"/>
+<circle cx="76" cy="75.9995" r="4" fill="#1A1A1A"/>
+</svg>

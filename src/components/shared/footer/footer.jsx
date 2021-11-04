@@ -73,7 +73,7 @@ const menuItems = [
 ];
 
 const Footer = () => (
-  <footer className="mb-20">
+  <footer className="mb-20 safe-paddings">
     <Container className="flex justify-between border-t-2 border-b-2 border-black">
       <div className="flex flex-col justify-between pt-8 pb-14">
         <Link className="block text-black" to="/">
@@ -95,7 +95,7 @@ const Footer = () => (
             <ul className="flex flex-col px-10 mt-10 space-y-6 pb-14">
               {links.map(({ to, text }, index) => (
                 <li key={index}>
-                  <Link to={to} theme="normal-black" size="sm">
+                  <Link to={to} theme="black" size="sm">
                     {text}
                   </Link>
                 </li>
