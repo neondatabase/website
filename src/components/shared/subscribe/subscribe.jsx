@@ -42,7 +42,7 @@ const Subscribe = () => (
         </Heading>
         <div className="relative mt-10 ml-[14px] 2xl:mt-8 2xl:ml-2.5 xl:mt-7 xl:ml-2 lg:max-w-[584px] lg:mx-auto before:absolute before:-bottom-3.5 before:-left-3.5 before:w-full before:h-full before:bg-secondary-2 before:rounded-full 2xl:before:-bottom-2.5 2xl:before:-left-2.5 xl:before:-bottom-2 xl:before:-left-2 md:before:w-[calc(100%+8px)]">
           <input
-            className="relative block w-[696px] h-24 text-black bg-white border-4 border-black rounded-full outline-none t-2xl pl-7 pr-[218px] placeholder-black 3xl:w-[576px] 2xl:w-[478px] 2xl:h-20 xl:w-[448px] xl:h-[72px] lg:w-full lg:pl-5 md:pr-20"
+            className="relative block w-[696px] h-24 text-black bg-white border-4 border-black rounded-full outline-none t-2xl pl-7 pr-[218px] placeholder-black 3xl:w-[576px] 2xl:w-[478px] 2xl:h-20 xl:w-[448px] 2xl:pr-[187px] xl:h-[72px] xl:pr-[164px] lg:w-full lg:pl-5 md:pr-20"
             type="email"
             placeholder="Your email..."
           />
