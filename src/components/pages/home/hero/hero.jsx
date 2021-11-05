@@ -17,7 +17,7 @@ const Hero = () => (
         </Button>
       </div>
       <StaticImage
-        className="!absolute top-[-345px] right-[-165px] w-[1163px] 3xl:w-[960px] 3xl:top-[-270px] 3xl:right-[-150px] 2xl:w-[800px] 2xl:top-[-225px] 2xl:right-[-125px] xl:w-[697px] xl:top-[-197px] xl:right-[-228px] lg:!relative lg:top-0 lg:right-0 lg:w-[640px] lg:mt-[-60px] md:w-[555px] md:mt-[-55px]"
+        className="!absolute top-[-345px] right-[-165px] w-[1163px] 3xl:w-[960px] 3xl:top-[-270px] 3xl:right-[-150px] 2xl:w-[800px] 2xl:top-[-225px] 2xl:right-[-125px] xl:w-[697px] xl:top-[-197px] xl:right-[-228px] lg:!relative lg:top-0 lg:right-0 lg:w-[640px] lg:mt-[-60px] md:w-[555px] md:mt-[-55px] xs:w-[420px] xs:-mt-10"
         src="../hero/images/illustration.png"
         alt=""
         loading="eager"
