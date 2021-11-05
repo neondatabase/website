@@ -77,7 +77,8 @@ const Footer = () => (
     <Container className="flex justify-between border-t-2 border-b-2 border-black xl:flex-col lg:border-none">
       <div className="flex flex-col justify-between pt-8 pb-14 2xl:pt-[25px] 2xl:pb-11 xl:flex-row xl:items-center xl:py-6 lg:border-b-2 lg:border-black md:block">
         <Link className="block text-black" to="/">
-          <Logo className="h-6 2xl:h-5" />
+          <span className="sr-only">Zenith</span>
+          <Logo className="h-6 2xl:h-5" aria-hidden />
         </Link>
         <p className="t-base md:mt-4">Zenith 2021 Ⓒ All rights reserved</p>
       </div>
