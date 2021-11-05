@@ -6,7 +6,7 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 
 const DataBranching = () => (
-  <section className="mt-[270px] safe-paddings 3xl:mt-44 2xl:mt-40 xl:mt-32 lg:mt-24">
+  <section className="mt-[270px] safe-paddings 3xl:mt-44 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20">
     <Container>
       <div className="max-w-[600px] xl:max-w-[400px] lg:max-w-none">
         <Heading tag="h2" size="lg" theme="black">
@@ -22,13 +22,15 @@ const DataBranching = () => (
         </Link>
       </div>
     </Container>
-    <StaticImage
-      className="!block max-w-[1920px] mt-[-365px] mx-auto z-[-2] 3xl:mt-[-19.38vw] 2xl:mt-[-18.94vw] xl:mt-[-18.55vw] lg:min-w-[865px] lg:mt-[-2.35vw]"
-      src="../data-branching/images/illustration.jpg"
-      alt=""
-      loading="lazy"
-      aria-hidden
-    />
+    <div className="lg:flex lg:justify-end">
+      <StaticImage
+        className="!block max-w-[1920px] mt-[-365px] mx-auto z-[-2] 3xl:mt-[-19.38vw] 2xl:mt-[-18.94vw] xl:mt-[-18.55vw] lg:min-w-[865px] lg:-mt-5 md:w-[767px] md:min-w-0 md:flex-shrink-0 md:mt-5 sm:w-[700px] sm:mt-[45px]"
+        src="../data-branching/images/illustration.jpg"
+        alt=""
+        loading="lazy"
+        aria-hidden
+      />
+    </div>
   </section>
 );
 

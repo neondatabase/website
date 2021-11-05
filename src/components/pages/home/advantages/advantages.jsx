@@ -31,7 +31,7 @@ const items = [
 ];
 
 const Advantages = () => (
-  <section className="bg-black py-80 safe-paddings 3xl:py-72 2xl:py-64 xl:py-52 lg:py-40">
+  <section className="bg-black py-80 safe-paddings 3xl:py-72 2xl:py-64 xl:py-52 lg:py-40 md:py-36">
     <Container>
       <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px] xl:space-x-[50px] lg:flex-col lg:items-start lg:space-x-0">
         <div className="relative max-w-[800px] 3xl:max-w-[680px] 2xl:max-w-[560px] xl:max-w-[510px] lg:max-w-full lg:mt-10">
@@ -46,7 +46,7 @@ const Advantages = () => (
             type="button"
           >
             <PlayIcon
-              className="relative h-24 rounded-full transition-transform duration-200 group-hover:scale-[1.1] 3xl:h-[82px] 2xl:h-[68px] xl:h-[62px] lg:h-[86px]"
+              className="relative h-24 rounded-full transition-transform duration-200 group-hover:scale-[1.1] 3xl:h-[82px] 2xl:h-[68px] xl:h-[62px] lg:h-[86px] md:h-12"
               style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
             />
           </button>
@@ -66,10 +66,10 @@ const Advantages = () => (
           </p>
         </div>
       </div>
-      <ul className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:gap-y-16 lg:mt-20">
+      <ul className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:gap-y-16 lg:mt-20 md:grid-cols-1">
         {items.map(({ icon: Icon, title, description }, index) => (
           <li
-            className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px]"
+            className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
             key={index}
           >
             <Icon className="w-24 2xl:w-20 xl:w-[72px]" loading="lazy" aria-hidden />

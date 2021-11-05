@@ -7,7 +7,7 @@ import Heading from 'components/shared/heading';
 import illustration from './images/illustration.svg';
 
 const SaaS = () => (
-  <section className="py-48 bg-black safe-paddings 3xl:py-44 2xl:py-40 xl:py-32 lg:py-24">
+  <section className="py-48 bg-black safe-paddings 3xl:py-44 2xl:py-40 xl:py-32 lg:py-24 md:py-20">
     <Container className="flex items-center justify-between lg:block">
       <div>
         <Heading tag="h2" size="lg" theme="white">
@@ -23,7 +23,7 @@ const SaaS = () => (
         </Button>
       </div>
       <img
-        className="3xl:max-w-[716px] 2xl:max-w-[592px] xl:max-w-[500px] lg:max-w-[524px] lg:mt-10"
+        className="3xl:max-w-[716px] 2xl:max-w-[592px] xl:max-w-[500px] lg:max-w-[524px] lg:mt-10 md:max-w-full"
         src={illustration}
         alt=""
         loading="lazy"

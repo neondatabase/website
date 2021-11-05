@@ -132,6 +132,10 @@ body {
   @screen xl {
     font-size: 48px;
   }
+
+  @screen md {
+    font-size: 40px;
+  }
 }
 
 .t-8xl {
@@ -147,6 +151,10 @@ body {
 
   @screen xl {
     font-size: 64px;
+  }
+
+  @screen md {
+    font-size: 48px;
   }
 }
 

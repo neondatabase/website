@@ -6,7 +6,7 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 
 const Scalability = () => (
-  <section className="mt-48 safe-paddings 3xl:mt-44 2xl:mt-40 xl:mt-32 lg:mt-24">
+  <section className="mt-48 safe-paddings 3xl:mt-44 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20">
     <Container className="flex items-center justify-between lg:block">
       <div className="max-w-[600px] ml-[150px] 3xl:max-w-[504px] 3xl:ml-[126px] 2xl:max-w-[416px] 2xl:ml-[104px] xl:max-w-[400px] xl:ml-0 lg:max-w-none">
         <Heading tag="h2" size="lg" theme="black">
@@ -27,7 +27,7 @@ const Scalability = () => (
         </Link>
       </div>
       <StaticImage
-        className="max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:max-w-[475px] lg:-ml-3 lg:mt-[46px]"
+        className="max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:max-w-[475px] lg:-ml-3 lg:mt-[46px] md:-ml-2"
         src="../scalability/images/illustration.jpg"
         alt=""
         loading="lazy"
