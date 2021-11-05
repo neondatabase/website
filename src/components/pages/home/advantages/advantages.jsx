@@ -18,13 +18,13 @@ const items = [
   },
   {
     icon: CostEfficientIcon,
-    title: 'Cost efficient',
+    title: 'Cost Efficient',
     description:
       'Being serverless allows using of resources on-demand, which significantly cuts the costs.',
   },
   {
     icon: EasyToUseIcon,
-    title: 'Easy to use',
+    title: 'Easy to Use',
     description:
       'No complex onboarding needed. Use a single CLI command to create a new Zenith database.',
   },
@@ -42,7 +42,7 @@ const Advantages = () => (
             aria-hidden
           />
           <button
-            className="absolute flex items-center justify-center w-40 h-40 -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 group 3xl:w-[136px] 3xl:h-[136px] 2xl:w-[112px] 2xl:h-[112px] xl:w-[102px] xl:h-[102px]"
+            className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 group"
             type="button"
           >
             <PlayIcon
@@ -72,7 +72,7 @@ const Advantages = () => (
             className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px]"
             key={index}
           >
-            <Icon className="w-24 2xl:w-20 xl:w-[72px]" />
+            <Icon className="w-24 2xl:w-20 xl:w-[72px]" loading="lazy" aria-hidden />
             <Heading className="mt-6 xl:mt-5" tag="h3" size="sm" theme="white">
               {title}
             </Heading>

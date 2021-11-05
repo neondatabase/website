@@ -31,7 +31,7 @@ const links = [
 ];
 
 const Header = () => (
-  <header className="bg-black safe-paddings">
+  <header className="absolute top-0 left-0 right-0 z-10 w-full safe-paddings lg:relative lg:bg-black">
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5">
       <Link
         className="absolute block text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 xl:relative xl:top-0 xl:left-0 xl:transform-none"
@@ -39,7 +39,7 @@ const Header = () => (
       >
         <Logo className="h-6 2xl:h-5" />
       </Link>
-      <nav>
+      <nav className="xl:absolute xl:-translate-x-1/2 xl:-translate-y-1/2 xl:top-1/2 xl:left-1/2">
         <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
           {links.map(({ to, text }, index) => (
             <li key={index}>

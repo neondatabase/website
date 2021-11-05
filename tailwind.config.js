@@ -21,6 +21,7 @@ module.exports = {
         mono: ['IBM Plex Mono', ...defaultTheme.fontFamily.mono],
       },
       fontSize: {
+        sm: [defaultTheme.fontSize.sm[0], defaultTheme.lineHeight.none],
         base: [defaultTheme.fontSize.base[0], defaultTheme.lineHeight.none],
         lg: [defaultTheme.fontSize.lg[0], defaultTheme.lineHeight.none],
         xl: [defaultTheme.fontSize.xl[0], defaultTheme.lineHeight.normal],

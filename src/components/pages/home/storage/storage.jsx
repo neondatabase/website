@@ -12,6 +12,7 @@ const Storage = () => (
         className="max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:max-w-[475px] lg:mt-[46px]"
         src="../storage/images/illustration.jpg"
         alt=""
+        loading="lazy"
         aria-hidden
       />
       <div className="max-w-[600px] mr-[110px] 3xl:max-w-[504px] 3xl:mr-[86px] 2xl:max-w-[416px] 2xl:mr-[72px] xl:max-w-[400px] xl:mr-0 lg:order-first lg:max-w-none">

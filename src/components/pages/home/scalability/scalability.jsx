@@ -30,6 +30,7 @@ const Scalability = () => (
         className="max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:max-w-[475px] lg:-ml-3 lg:mt-[46px]"
         src="../scalability/images/illustration.jpg"
         alt=""
+        loading="lazy"
         aria-hidden
       />
     </Container>

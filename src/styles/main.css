@@ -38,6 +38,10 @@ body {
   @apply font-sans text-lg text-black antialiased;
 }
 
+.t-sm {
+  @apply text-sm;
+}
+
 .t-base {
   @apply text-base;
 

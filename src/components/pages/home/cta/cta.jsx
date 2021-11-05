@@ -25,7 +25,7 @@ const CTA = () => {
   }, [isCopied]);
 
   return (
-    <section className="text-center bg-black pt-[340px] safe-paddings 3xl:pt-[280px] 2xl:pt-60 xl:pt-56 lg:pt-[260px]">
+    <section className="text-center bg-black pt-[504px] safe-paddings 3xl:pt-[397px] 2xl:pt-[344px] xl:pt-[310px] lg:pt-[155px]">
       <Container>
         <Heading tag="h2" size="lg" theme="white">
           Made for Developers

@@ -26,6 +26,7 @@ const DataBranching = () => (
       className="!block max-w-[1920px] mt-[-365px] mx-auto z-[-2] 3xl:mt-[-19.38vw] 2xl:mt-[-18.94vw] xl:mt-[-18.55vw] lg:min-w-[865px] lg:mt-[-2.35vw]"
       src="../data-branching/images/illustration.jpg"
       alt=""
+      loading="lazy"
       aria-hidden
     />
   </section>

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 
 import Container from 'components/shared/container';
@@ -14,36 +15,44 @@ import PayAsYouGoIcon from './images/pay-as-you-go.inline.svg';
 const items = [
   {
     icon: PayAsYouGoIcon,
-    title: 'Pay as you go',
+    title: 'Pay as You Go',
     description:
       'Being serverless allows using of resources on-demand, which significantly cuts the costs and brings pay as you go solution.',
   },
   {
     icon: HighAvailabilityIcon,
-    title: 'High availability',
+    title: 'High Availability',
     description: `Zenith's architecture guarantees high availability even under peak load and 99.9999% uptime for Cloud users.`,
   },
   {
     icon: AutoBackupIcon,
-    title: 'Auto-backup',
+    title: 'Auto-Backup',
     description:
       'Cost efficient incremental auto backup functionality keeps your database save 24/7.',
   },
   {
     icon: AutoScalingIcon,
-    title: 'Auto scaling',
+    title: 'Auto Scaling',
     description:
       'Handle peak time requests, with a flexible auto scale deployment solution, and pay for the actual usage.',
+    tag: {
+      className: 'text-secondary-4 border-secondary-4',
+      text: 'Coming Soon',
+    },
   },
   {
     icon: EdgeDeploymentIcon,
-    title: 'Edge deployment',
+    title: 'Edge Deployment',
     description:
       'Have a database close to your users. Zenith is a perfect for serverless functions.',
+    tag: {
+      className: 'text-secondary-2 border-secondary-2',
+      text: 'Coming Soon',
+    },
   },
   {
     icon: OpenSourceIcon,
-    title: 'Open source',
+    title: 'Open Source',
     description: (
       <>
         Check{' '}
@@ -67,12 +76,24 @@ const Features = () => (
         development.
       </p>
       <ul className="grid grid-cols-12 mt-[92px] grid-gap gap-y-[92px] 2xl:mt-[76px] 2xl:gap-y-[76px xl:mt-16 xl:gap-y-16">
-        {items.map(({ icon: Icon, title, description }, index) => (
+        {items.map(({ icon: Icon, title, description, tag }, index) => (
           <li
             className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px]"
             key={index}
           >
-            <Icon className="w-24 2xl:w-20 xl:w-[72px]" />
+            <div className="flex items-end space-x-4 xl:space-x-3.5">
+              <Icon className="w-24 2xl:w-20 xl:w-[72px]" aria-hidden />
+              {tag?.text && (
+                <span
+                  className={clsx(
+                    'inline-block font-mono t-sm px-2.5 border-2 rounded-full mr-3 py-1',
+                    tag.className
+                  )}
+                >
+                  {tag.text}
+                </span>
+              )}
+            </div>
             <Heading className="mt-6 xl:mt-5" tag="h3" size="sm" theme="white">
               {title}
             </Heading>

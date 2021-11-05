@@ -32,6 +32,7 @@ const Subscribe = () => (
         className="max-w-[800px] 3xl:max-w-[660px] 2xl:max-w-[550px] xl:max-w-[430px] lg:!hidden"
         src="../subscribe/images/illustration.jpg"
         alt=""
+        loading="lazy"
         aria-hidden
       />
       <div className="max-w-[710px] 3xl:max-w-[590px] 2xl:max-w-[488px] xl:max-w-[456px] lg:max-w-none">
