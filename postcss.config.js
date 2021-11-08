@@ -5,6 +5,6 @@ module.exports = {
     require('tailwindcss/nesting'),
     require('tailwindcss'),
     require('postcss-hover-media-feature'),
-    require('autoprefixer'),
+    require('autoprefixer')({ grid: 'autoplace' }),
   ],
 };
