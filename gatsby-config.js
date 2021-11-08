@@ -6,7 +6,8 @@ module.exports = {
   flags: { DEV_SSR: process.env.GATSBY_DEV_SSR || false },
   siteMetadata: {
     siteTitle: 'Zenith',
-    siteDescription: 'Site description',
+    siteDescription:
+      'Zenith is PostgreSQL that is serverless, fault-tolerant, branchable, and bottomless',
     siteImage: '/images/social-preview.jpg',
     siteLanguage: 'en',
     siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
