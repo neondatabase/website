@@ -72,7 +72,7 @@ const Advantages = () => (
             className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
             key={index}
           >
-            <Icon className="w-24 2xl:w-20 xl:w-[72px]" loading="lazy" aria-hidden />
+            <Icon className="h-24 2xl:h-20 xl:h-[72px] lg:h-16" aria-hidden />
             <Heading className="mt-6 xl:mt-5" tag="h3" size="sm" theme="white">
               {title}
             </Heading>

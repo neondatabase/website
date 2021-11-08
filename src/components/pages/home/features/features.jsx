@@ -82,7 +82,7 @@ const Features = () => (
             key={index}
           >
             <div className="flex items-end space-x-4 xl:space-x-3.5">
-              <Icon className="w-24 2xl:w-20 xl:w-[72px]" aria-hidden />
+              <Icon className="h-24 2xl:h-20 xl:h-[72px] lg:h-16" aria-hidden />
               {tag?.text && (
                 <span
                   className={clsx(

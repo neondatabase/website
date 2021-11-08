@@ -18,7 +18,7 @@ const SaaS = () => (
           worrying about the costs of provisioned capacity. Databases can be shut down when they are
           not active, while automated capacity adjustments can meet application needs.
         </p>
-        <Button className="mt-10 2xl:mt-8 xl:mt-7" to="/" size="md" theme="primary">
+        <Button className="mt-10 2xl:mt-8 xl:mt-7 md:mt-6" to="/" size="md" theme="primary">
           Try it Now
         </Button>
       </div>

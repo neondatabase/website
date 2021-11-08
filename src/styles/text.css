@@ -40,6 +40,10 @@
   @screen xl {
     font-size: 18px;
   }
+
+  @screen md {
+    font-size: 16px;
+  }
 }
 
 .t-3xl {
@@ -64,6 +68,10 @@
   @screen xl {
     font-size: 32px;
   }
+
+  @screen md {
+    font-size: 28px;
+  }
 }
 
 .t-6xl {
@@ -75,6 +83,10 @@
 
   @screen xl {
     font-size: 40px;
+  }
+
+  @screen md {
+    font-size: 36px;
   }
 }
 
@@ -94,7 +106,7 @@
   }
 
   @screen md {
-    font-size: 40px;
+    font-size: 36px;
   }
 }
 
@@ -114,6 +126,6 @@
   }
 
   @screen md {
-    font-size: 48px;
+    font-size: 42px;
   }
 }
