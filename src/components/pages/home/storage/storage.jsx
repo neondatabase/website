@@ -9,7 +9,7 @@ const Storage = () => (
   <section className="mt-48 safe-paddings 3xl:mt-44 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20">
     <Container className="flex items-center justify-between lg:flex-col lg:items-start">
       <StaticImage
-        className="max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:max-w-[475px] lg:mt-[46px] md:-mr-2"
+        className="max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:max-w-[475px] lg:mt-[46px]"
         src="../storage/images/illustration.jpg"
         alt=""
         loading="lazy"
