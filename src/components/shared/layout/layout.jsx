@@ -9,7 +9,7 @@ const Layout = ({ children }) => (
   <>
     <SEO />
     <Header />
-    <main>{children}</main>
+    <main className="overflow-hidden">{children}</main>
     <Footer />
   </>
 );

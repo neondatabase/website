@@ -6,7 +6,8 @@ module.exports = {
   flags: { DEV_SSR: process.env.GATSBY_DEV_SSR || false },
   siteMetadata: {
     siteTitle: 'Zenith',
-    siteDescription: 'Site description',
+    siteDescription:
+      'Zenith is PostgreSQL that is serverless, fault-tolerant, branchable, and bottomless',
     siteImage: '/images/social-preview.jpg',
     siteLanguage: 'en',
     siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
@@ -37,8 +38,8 @@ module.exports = {
         name: 'gatsby-starter-default',
         short_name: 'starter',
         start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
+        background_color: '#1a1a1a',
+        theme_color: '#1a1a1a',
         display: 'minimal-ui',
         icon: 'src/images/favicon.png',
       },

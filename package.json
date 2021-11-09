@@ -55,18 +55,8 @@
     "lint-staged": "^11.2.6",
     "markdownlint-cli": "^0.29.0",
     "postcss": "^8.3.11",
+    "postcss-hover-media-feature": "^1.0.1",
     "postcss-import": "^14.0.2",
     "prettier": "^2.4.1"
-  },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pixel-point/gatsby-starter"
-  },
-  "bugs": {
-    "url": "https://github.com/pixel-point/gatsby-starter/issues"
   }
 }

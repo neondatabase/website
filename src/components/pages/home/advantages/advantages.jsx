@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 
@@ -19,64 +18,65 @@ const items = [
   },
   {
     icon: CostEfficientIcon,
-    title: 'Cost efficient',
+    title: 'Cost Efficient',
     description:
       'Being serverless allows using of resources on-demand, which significantly cuts the costs.',
   },
   {
     icon: EasyToUseIcon,
-    title: 'Easy to use',
+    title: 'Easy to Use',
     description:
       'No complex onboarding needed. Use a single CLI command to create a new Zenith database.',
   },
 ];
 
 const Advantages = () => (
-  <section className="bg-black py-80 safe-paddings">
+  <section className="bg-black py-80 safe-paddings 3xl:py-72 2xl:py-64 xl:py-52 lg:py-40 md:py-36">
     <Container>
-      <div className="flex items-center space-x-[100px]">
-        <div className="relative">
+      <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px] xl:space-x-[50px] lg:flex-col lg:items-start lg:space-x-0">
+        <div className="relative max-w-[800px] 3xl:max-w-[680px] 2xl:max-w-[560px] xl:max-w-[510px] lg:max-w-full lg:mt-10">
           <StaticImage
-            className="max-w-[800px]"
+            className="rounded"
             src="../advantages/images/cover.jpg"
             alt=""
             aria-hidden
           />
           <button
-            className="absolute flex items-center justify-center w-40 h-40 -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 group"
+            className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 group"
             type="button"
           >
             <PlayIcon
-              className="relative rounded-full transition-transform duration-200 group-hover:scale-[1.1]"
+              className="relative h-24 rounded-full transition-transform duration-200 group-hover:scale-[1.1] 3xl:h-[82px] 2xl:h-[68px] xl:h-[62px] lg:h-[86px] md:h-12"
               style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
             />
           </button>
         </div>
-        <div>
-          <Heading className="max-w-[490px]" tag="h2" size="lg" theme="white">
+        <div className="lg:order-first">
+          <Heading
+            className="max-w-[490px] 2xl:max-w-[385px] xl:max-w-[300px] lg:max-w-[500px]"
+            tag="h2"
+            size="lg"
+            theme="white"
+          >
             Distributed Database, Made Simple
           </Heading>
-          <p className="max-w-[600px] t-xl mt-5 text-white">
+          <p className="max-w-[600px] t-xl mt-5 text-white 2xl:max-w-[520px] 2xl:mt-4 lg:max-w-full">
             Go through our 5 minutes tutorials video and start using scalable, cost efficient
             database architecture for your project.
           </p>
         </div>
       </div>
-      <ul className="grid grid-cols-12 mt-40 grid-gap">
+      <ul className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:gap-y-16 lg:mt-20 md:grid-cols-1">
         {items.map(({ icon: Icon, title, description }, index) => (
           <li
-            className={clsx(
-              'col-span-3',
-              { 'col-start-5': index === 1 },
-              { 'col-start-9': index === 2 }
-            )}
+            className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
             key={index}
           >
-            <Icon />
-            <Heading className="mt-6" tag="h3" size="sm" theme="white">
+            <Icon className="h-24 2xl:h-20 xl:h-[72px] lg:h-16" aria-hidden />
+            <Heading className="mt-6 xl:mt-5" tag="h3" size="sm" theme="white">
               {title}
             </Heading>
-            <p className="mt-4 text-white t-xl">{description}</p>
+            <p className="mt-4 text-white t-xl xl:mt-3.5">{description}</p>
           </li>
         ))}
       </ul>

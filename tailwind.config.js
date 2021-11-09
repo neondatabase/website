@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies, global-require */
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
@@ -7,7 +7,8 @@ module.exports = {
   darkMode: false,
   theme: {
     screens: {
-      '2xl': { max: '1535px' },
+      '3xl': { max: '1919px' },
+      '2xl': { max: '1599px' },
       xl: { max: '1279px' },
       lg: { max: '1023px' },
       md: { max: '767px' },
@@ -20,6 +21,7 @@ module.exports = {
         mono: ['IBM Plex Mono', ...defaultTheme.fontFamily.mono],
       },
       fontSize: {
+        sm: [defaultTheme.fontSize.sm[0], defaultTheme.lineHeight.none],
         base: [defaultTheme.fontSize.base[0], defaultTheme.lineHeight.none],
         lg: [defaultTheme.fontSize.lg[0], defaultTheme.lineHeight.none],
         xl: [defaultTheme.fontSize.xl[0], defaultTheme.lineHeight.normal],
