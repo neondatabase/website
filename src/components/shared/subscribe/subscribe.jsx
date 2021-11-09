@@ -29,7 +29,7 @@ const links = [
 const Subscribe = () => {
   const [email, setEmail] = useState('');
 
-  const handleInputChange = (event) => setEmail(event.currentTarget.value);
+  const handleInputChange = (event) => setEmail(event.currentTarget.value.trim());
 
   const handleSubmit = (event) => {
     event.preventDefault();
