@@ -3,5 +3,6 @@
 @layer base {
   body {
     @apply font-sans text-black antialiased;
+    -webkit-tap-highlight-color: transparent;
   }
 }
