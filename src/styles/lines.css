@@ -5,3 +5,23 @@
 .vertical-line {
   @apply absolute w-0.5 h-[300vw] bg-gray-1;
 }
+
+.shape {
+  @apply absolute border-2 border-gray-1;
+
+  &.shape-top-right {
+    @apply rounded-tr-full;
+  }
+
+  &.shape-bottom-right {
+    @apply rounded-br-full;
+  }
+
+  &.shape-bottom-left {
+    @apply rounded-bl-full;
+  }
+
+  &.shape-top-left {
+    @apply rounded-tl-full;
+  }
+}
