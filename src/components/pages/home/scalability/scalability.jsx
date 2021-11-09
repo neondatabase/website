@@ -23,7 +23,7 @@ const Scalability = () => (
           vanilla postgres. And we are committed to bring back our changes back to the community.
         </p>
         <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-secondary-3">
-          Explore Zenith's architecture
+          Explore Zenith&apos;s architecture
         </Link>
       </div>
       <StaticImage

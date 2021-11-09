@@ -22,8 +22,8 @@ const Storage = () => (
         <p className="mt-8 t-xl 2xl:mt-7 xl:mt-6">
           Zenith redistributes data across a fault-tolerant storage cluster written in rust, which
           takes care of high-availability and effectively makes the database instances on top of it
-          "bottomless". Backups, checkpoints, integration with S3 and point-in-time recovery are
-          automatically handled by the zenith storage itself.
+          &quot;bottomless&quot;. Backups, checkpoints, integration with S3 and point-in-time
+          recovery are automatically handled by the zenith storage itself.
         </p>
         <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-secondary-5">
           How do we cook PostgreSQL storage
