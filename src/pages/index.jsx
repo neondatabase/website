@@ -353,6 +353,14 @@ function setPositionsForShapes() {
 }
 
 function setPositionsForCircles() {
+  const circle1 = document.querySelector('#circle-1');
+  const circle2 = document.querySelector('#circle-2');
+  const circle3 = document.querySelector('#circle-3');
+  const circle4 = document.querySelector('#circle-4');
+  const circle5 = document.querySelector('#circle-5');
+  const circle6 = document.querySelector('#circle-6');
+  const circle7 = document.querySelector('#circle-7');
+
   const verticalLine2 = document.querySelector('#vertical-line-2');
   const verticalLine4 = document.querySelector('#vertical-line-4');
   const verticalLine7 = document.querySelector('#vertical-line-7');
@@ -362,14 +370,6 @@ function setPositionsForCircles() {
   const horizontalLine11 = document.querySelector('#horizontal-line-11');
   const horizontalLine16 = document.querySelector('#horizontal-line-16');
   const horizontalLine17 = document.querySelector('#horizontal-line-17');
-
-  const circle1 = document.querySelector('#circle-1');
-  const circle2 = document.querySelector('#circle-2');
-  const circle3 = document.querySelector('#circle-3');
-  const circle4 = document.querySelector('#circle-4');
-  const circle5 = document.querySelector('#circle-5');
-  const circle6 = document.querySelector('#circle-6');
-  const circle7 = document.querySelector('#circle-7');
 
   circle1.style.cssText = `
     top: ${
@@ -435,6 +435,62 @@ function setPositionsForCircles() {
   `;
 }
 
+function setPositionsForCirclesWithText() {
+  const circleWithText1 = document.querySelector('#circle-with-text-1');
+  const circleWithText2 = document.querySelector('#circle-with-text-2');
+  const circleWithText3 = document.querySelector('#circle-with-text-3');
+  const circleWithText4 = document.querySelector('#circle-with-text-4');
+
+  const verticalLine3 = document.querySelector('#vertical-line-3');
+  const verticalLine6 = document.querySelector('#vertical-line-6');
+  const verticalLine7 = document.querySelector('#vertical-line-7');
+  const horizontalLine1 = document.querySelector('#horizontal-line-1');
+  const horizontalLine6 = document.querySelector('#horizontal-line-6');
+  const horizontalLine7 = document.querySelector('#horizontal-line-7');
+  const horizontalLine11 = document.querySelector('#horizontal-line-11');
+  const horizontalLine12 = document.querySelector('#horizontal-line-12');
+  const horizontalLine20 = document.querySelector('#horizontal-line-20');
+  const advantages = document.querySelector('#advantages');
+
+  circleWithText1.style.cssText = `
+    top: ${
+      (horizontalLine1.getBoundingClientRect().top + document.documentElement.scrollTop) / 1.5
+    }px;
+    left: ${verticalLine3.getBoundingClientRect().left + LINE_WIDTH / 2}px;
+  `;
+
+  circleWithText2.style.cssText = `
+    top: ${
+      horizontalLine6.getBoundingClientRect().top +
+      document.documentElement.scrollTop +
+      (horizontalLine7.getBoundingClientRect().top - horizontalLine6.getBoundingClientRect().top) /
+        1.7
+    }px;
+    left: ${verticalLine6.getBoundingClientRect().left + LINE_WIDTH / 2}px;
+  `;
+
+  circleWithText3.style.cssText = `
+    top: ${
+      horizontalLine11.getBoundingClientRect().top +
+      document.documentElement.scrollTop +
+      (horizontalLine12.getBoundingClientRect().top -
+        horizontalLine11.getBoundingClientRect().top) /
+        1.8
+    }px;
+    left: ${verticalLine7.getBoundingClientRect().left + LINE_WIDTH / 2}px;
+  `;
+
+  circleWithText4.style.cssText = `
+    top: ${
+      horizontalLine20.getBoundingClientRect().top +
+      document.documentElement.scrollTop +
+      (advantages.getBoundingClientRect().bottom - horizontalLine20.getBoundingClientRect().top) /
+        2.1
+    }px;
+    left: ${verticalLine6.getBoundingClientRect().left + LINE_WIDTH / 2}px;
+  `;
+}
+
 const Lines = () => {
   useEffect(() => {
     setPositionsForVerticalLines();
@@ -446,6 +502,7 @@ const Lines = () => {
     setPositionsForVerticalLines();
     setPositionsForShapes();
     setPositionsForCircles();
+    setPositionsForCirclesWithText();
   }, []);
 
   return (
@@ -497,6 +554,27 @@ const Lines = () => {
       <div id="circle-5" className="circle" />
       <div id="circle-6" className="circle" />
       <div id="circle-7" className="circle" />
+
+      <div
+        id="circle-with-text-1"
+        className="circle circle-with-text"
+        data-text="51e3bade-4507-4f44-b960-675a2a272fa6"
+      />
+      <div
+        id="circle-with-text-2"
+        className="circle circle-with-text"
+        data-text="fe495254-ff45-4a1e-9207-2f8aa6482547"
+      />
+      <div
+        id="circle-with-text-3"
+        className="circle circle-with-text"
+        data-text="3022b5f9-5eab-444c-890a-f63b3caa5d28"
+      />
+      <div
+        id="circle-with-text-4"
+        className="circle circle-with-text"
+        data-text="24a9b481-97a0-4316-b27e-d1da09e2992a"
+      />
     </>
   );
 };

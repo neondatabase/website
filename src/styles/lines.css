@@ -33,4 +33,18 @@
     @apply absolute top-1/2 left-1/2 w-2 h-2 bg-gray-1 rounded-full -translate-y-1/2 -translate-x-1/2;
     content: '';
   }
+
+  &.circle-with-text {
+    @apply border-gray-2;
+
+    &::before {
+      @apply bg-gray-2;
+    }
+
+    &::after {
+      content: attr(data-text);
+      font-size: 15px;
+      @apply absolute top-1/2 -right-2.5 uppercase leading-relaxed bg-black font-semibold whitespace-nowrap tracking-wide text-gray-2 translate-x-full -translate-y-1/2;
+    }
+  }
 }
