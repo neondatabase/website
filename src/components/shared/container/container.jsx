@@ -9,7 +9,7 @@ const Container = ({ className: additionalClassName, children, ...otherProps }) 
   );
 
   return (
-    <div className={className} {...otherProps}>
+    <div id="container" className={className} {...otherProps}>
       {children}
     </div>
   );

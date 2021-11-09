@@ -19,7 +19,7 @@ const styles = {
     'black-secondary-3': `${underlineCommonStyles} before:bg-secondary-3 hover:text-secondary-3`,
     'black-secondary-5': `${underlineCommonStyles} before:bg-secondary-5 hover:text-secondary-5`,
     'underline-primary-1':
-      'text-primary-1 border-b border-primary-1 transition-colors duration-200 hover:border-transparent',
+      'text-primary-1 border-b-2 border-primary-1 transition-colors duration-200 hover:border-transparent',
   },
 };
 

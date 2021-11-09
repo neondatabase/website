@@ -1,0 +1,7 @@
+.horizontal-line {
+  @apply absolute left-0 right-0 h-0.5 bg-gray-1;
+}
+
+.vertical-line {
+  @apply absolute w-0.5 h-[300vw] bg-gray-1;
+}

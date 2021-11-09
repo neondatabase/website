@@ -34,7 +34,10 @@ const Advantages = () => (
   <section className="bg-black py-80 safe-paddings 3xl:py-72 2xl:py-64 xl:py-52 lg:py-40 md:py-36">
     <Container>
       <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px] xl:space-x-[50px] lg:flex-col lg:items-start lg:space-x-0">
-        <div className="relative max-w-[800px] 3xl:max-w-[680px] 2xl:max-w-[560px] xl:max-w-[510px] lg:max-w-full lg:mt-10">
+        <div
+          id="advantages-video-wrapper"
+          className="relative max-w-[800px] 3xl:max-w-[680px] 2xl:max-w-[560px] xl:max-w-[510px] lg:max-w-full lg:mt-10"
+        >
           <StaticImage
             className="rounded"
             src="../advantages/images/cover.jpg"
@@ -53,6 +56,7 @@ const Advantages = () => (
         </div>
         <div className="lg:order-first">
           <Heading
+            id="advantages-title"
             className="max-w-[490px] 2xl:max-w-[385px] xl:max-w-[300px] lg:max-w-[500px]"
             tag="h2"
             size="lg"
@@ -60,7 +64,10 @@ const Advantages = () => (
           >
             Distributed Database, Made Simple
           </Heading>
-          <p className="max-w-[600px] t-xl mt-5 text-white 2xl:max-w-[520px] 2xl:mt-4 lg:max-w-full">
+          <p
+            id="advantages-description"
+            className="max-w-[600px] t-xl mt-5 text-white 2xl:max-w-[520px] 2xl:mt-4 lg:max-w-full"
+          >
             Go through our 5 minutes tutorials video and start using scalable, cost efficient
             database architecture for your project.
           </p>
@@ -72,11 +79,26 @@ const Advantages = () => (
             className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
             key={index}
           >
-            <Icon className="h-24 2xl:h-20 xl:h-[72px] lg:h-16" aria-hidden />
-            <Heading className="mt-6 xl:mt-5" tag="h3" size="sm" theme="white">
+            <Icon
+              id={`advantages-item-${index + 1}-icon`}
+              className="h-24 2xl:h-20 xl:h-[72px] lg:h-16"
+              aria-hidden
+            />
+            <Heading
+              id={`advantages-item-${index + 1}-title`}
+              className="mt-6 xl:mt-5"
+              tag="h3"
+              size="sm"
+              theme="white"
+            >
               {title}
             </Heading>
-            <p className="mt-4 text-white t-xl xl:mt-3.5">{description}</p>
+            <p
+              id={`advantages-item-${index + 1}-description`}
+              className="mt-4 text-white t-xl xl:mt-3.5"
+            >
+              {description}
+            </p>
           </li>
         ))}
       </ul>
