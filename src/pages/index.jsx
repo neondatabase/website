@@ -352,6 +352,89 @@ function setPositionsForShapes() {
   `;
 }
 
+function setPositionsForCircles() {
+  const verticalLine2 = document.querySelector('#vertical-line-2');
+  const verticalLine4 = document.querySelector('#vertical-line-4');
+  const verticalLine7 = document.querySelector('#vertical-line-7');
+  const verticalLine9 = document.querySelector('#vertical-line-9');
+  const horizontalLine6 = document.querySelector('#horizontal-line-6');
+  const horizontalLine7 = document.querySelector('#horizontal-line-7');
+  const horizontalLine11 = document.querySelector('#horizontal-line-11');
+  const horizontalLine16 = document.querySelector('#horizontal-line-16');
+  const horizontalLine17 = document.querySelector('#horizontal-line-17');
+
+  const circle1 = document.querySelector('#circle-1');
+  const circle2 = document.querySelector('#circle-2');
+  const circle3 = document.querySelector('#circle-3');
+  const circle4 = document.querySelector('#circle-4');
+  const circle5 = document.querySelector('#circle-5');
+  const circle6 = document.querySelector('#circle-6');
+  const circle7 = document.querySelector('#circle-7');
+
+  circle1.style.cssText = `
+    top: ${
+      horizontalLine6.getBoundingClientRect().top +
+      document.documentElement.scrollTop +
+      LINE_WIDTH / 2
+    }px;
+    left: ${verticalLine4.getBoundingClientRect().left + LINE_WIDTH / 2}px;
+  `;
+
+  circle2.style.cssText = `
+    top: ${
+      horizontalLine7.getBoundingClientRect().top +
+      document.documentElement.scrollTop +
+      LINE_WIDTH / 2
+    }px;
+    left: ${verticalLine2.getBoundingClientRect().left + LINE_WIDTH / 2}px;
+  `;
+
+  circle3.style.cssText = `
+    top: ${
+      horizontalLine11.getBoundingClientRect().top +
+      document.documentElement.scrollTop +
+      LINE_WIDTH / 2
+    }px;
+    left: ${verticalLine2.getBoundingClientRect().left + LINE_WIDTH / 2}px;
+  `;
+
+  circle4.style.cssText = `
+    top: ${
+      horizontalLine11.getBoundingClientRect().top +
+      document.documentElement.scrollTop +
+      LINE_WIDTH / 2
+    }px;
+    left: ${verticalLine4.getBoundingClientRect().left + LINE_WIDTH / 2}px;
+  `;
+
+  circle5.style.cssText = `
+    top: ${
+      horizontalLine11.getBoundingClientRect().top +
+      document.documentElement.scrollTop +
+      LINE_WIDTH / 2
+    }px;
+    left: ${verticalLine7.getBoundingClientRect().left + LINE_WIDTH / 2}px;
+  `;
+
+  circle6.style.cssText = `
+    top: ${
+      horizontalLine16.getBoundingClientRect().top +
+      document.documentElement.scrollTop +
+      LINE_WIDTH / 2
+    }px;
+    left: ${verticalLine9.getBoundingClientRect().left + LINE_WIDTH / 2}px;
+  `;
+
+  circle7.style.cssText = `
+    top: ${
+      horizontalLine17.getBoundingClientRect().top +
+      document.documentElement.scrollTop +
+      LINE_WIDTH / 2
+    }px;
+    left: ${verticalLine9.getBoundingClientRect().left + LINE_WIDTH / 2}px;
+  `;
+}
+
 const Lines = () => {
   useEffect(() => {
     setPositionsForVerticalLines();
@@ -362,6 +445,7 @@ const Lines = () => {
     // We will have to make additional call any way
     setPositionsForVerticalLines();
     setPositionsForShapes();
+    setPositionsForCircles();
   }, []);
 
   return (
@@ -405,6 +489,14 @@ const Lines = () => {
       <div id="shape-6" className="shape shape-bottom-right" />
       <div id="shape-7" className="shape shape-bottom-right" />
       <div id="shape-8" className="shape shape-bottom-right" />
+
+      <div id="circle-1" className="circle" />
+      <div id="circle-2" className="circle" />
+      <div id="circle-3" className="circle" />
+      <div id="circle-4" className="circle" />
+      <div id="circle-5" className="circle" />
+      <div id="circle-6" className="circle" />
+      <div id="circle-7" className="circle" />
     </>
   );
 };

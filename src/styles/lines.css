@@ -25,3 +25,12 @@
     @apply rounded-tl-full;
   }
 }
+
+.circle {
+  @apply absolute w-6 h-6 bg-black border-2 border-gray-1 rounded-full -translate-x-1/2 -translate-y-1/2;
+
+  &::before {
+    @apply absolute top-1/2 left-1/2 w-2 h-2 bg-gray-1 rounded-full -translate-y-1/2 -translate-x-1/2;
+    content: '';
+  }
+}
