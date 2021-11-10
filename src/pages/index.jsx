@@ -24,6 +24,7 @@ function setPositionsForVerticalLines() {
   const verticalLine8 = document.querySelector('#vertical-line-8');
   const verticalLine9 = document.querySelector('#vertical-line-9');
 
+  const horizontalLine7 = document.querySelector('#horizontal-line-7');
   const horizontalLine8 = document.querySelector('#horizontal-line-8');
   const container = document.querySelector('#container');
   const heroButton = document.querySelector('#hero-button');
@@ -66,6 +67,7 @@ function setPositionsForVerticalLines() {
   `;
 
   verticalLine9.style.cssText = `
+    top: ${horizontalLine7.getBoundingClientRect().top + document.documentElement.scrollTop}px;
     left: ${container.getBoundingClientRect().right - 81 - LINE_WIDTH}px
   `;
 }
@@ -109,7 +111,7 @@ function setPositionsForHorizontalLines() {
 
   // TODO: Need dynamic "top" value. Right now we can't do it since this value should be set depend on an item from illustration
   horizontalLine1.style.cssText = `
-    top: 230px;
+    top: 229px;
   `;
 
   horizontalLine2.style.cssText = `
@@ -506,7 +508,7 @@ const Lines = () => {
   }, []);
 
   return (
-    <>
+    <div className="lg:hidden" aria-hidden>
       <div id="vertical-line-1" className="top-0 vertical-line" />
       <div id="vertical-line-2" className="top-0 vertical-line" />
       <div id="vertical-line-3" className="top-0 vertical-line" />
@@ -557,25 +559,25 @@ const Lines = () => {
 
       <div
         id="circle-with-text-1"
-        className="circle circle-with-text"
+        className="circle circle-with-text circle-with-text-right"
         data-text="51e3bade-4507-4f44-b960-675a2a272fa6"
       />
       <div
         id="circle-with-text-2"
-        className="circle circle-with-text"
+        className="circle circle-with-text circle-with-text-right"
         data-text="fe495254-ff45-4a1e-9207-2f8aa6482547"
       />
       <div
         id="circle-with-text-3"
-        className="circle circle-with-text"
+        className="circle circle-with-text circle-with-text-right"
         data-text="3022b5f9-5eab-444c-890a-f63b3caa5d28"
       />
       <div
         id="circle-with-text-4"
-        className="circle circle-with-text"
+        className="circle circle-with-text circle-with-text-right"
         data-text="24a9b481-97a0-4316-b27e-d1da09e2992a"
       />
-    </>
+    </div>
   );
 };
 

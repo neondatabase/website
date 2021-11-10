@@ -44,7 +44,19 @@
     &::after {
       content: attr(data-text);
       font-size: 15px;
-      @apply absolute top-1/2 -right-2.5 uppercase leading-relaxed bg-black font-semibold whitespace-nowrap tracking-wide text-gray-2 translate-x-full -translate-y-1/2;
+      @apply absolute top-1/2 uppercase leading-relaxed bg-black font-semibold whitespace-nowrap tracking-wide text-gray-2 -translate-y-1/2;
+    }
+
+    &.circle-with-text-right {
+      &::after {
+        @apply -right-1 pl-2.5 translate-x-full;
+      }
+    }
+
+    &.circle-with-text-left {
+      &::after {
+        @apply -left-1 pr-2.5 -translate-x-full;
+      }
     }
   }
 }
