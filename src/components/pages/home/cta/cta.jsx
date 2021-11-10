@@ -25,7 +25,7 @@ const CTA = () => {
   }, [isCopied]);
 
   return (
-    <section className="text-center bg-black pt-[504px] safe-paddings 3xl:pt-[397px] 2xl:pt-[344px] xl:pt-[310px] lg:pt-[155px] md:pt-[130px]">
+    <section className="text-center bg-black pt-[504px] safe-paddings 3xl:pt-[397px] 2xl:pt-[344px] xl:pt-[310px] lg:pt-[238px] md:pt-[130px]">
       <Container>
         <Heading id="cta-title" tag="h2" size="lg" theme="white">
           Made for Developers
@@ -35,7 +35,7 @@ const CTA = () => {
         </p>
         <div
           id="cta-input"
-          className="relative max-w-[860px] mt-8 mx-auto 3xl:max-w-[716px] 2xl:max-w-[592px] 2xl:mt-7 xl:max-w-[504px] xl:mt-6 lg:max-w-[584px]"
+          className="relative max-w-[860px] mt-8 mx-auto 3xl:max-w-[716px] 2xl:max-w-[592px] 2xl:mt-7 xl:max-w-[498px] xl:mt-6 lg:max-w-[584px]"
         >
           <div
             id="cta-input-background"

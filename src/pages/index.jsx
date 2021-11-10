@@ -24,6 +24,7 @@ function setPositionsForVerticalLines() {
   const verticalLine8 = document.querySelector('#vertical-line-8');
   const verticalLine9 = document.querySelector('#vertical-line-9');
 
+  const horizontalLine1 = document.querySelector('#horizontal-line-1');
   const horizontalLine7 = document.querySelector('#horizontal-line-7');
   const horizontalLine8 = document.querySelector('#horizontal-line-8');
   const container = document.querySelector('#container');
@@ -59,6 +60,7 @@ function setPositionsForVerticalLines() {
   `;
 
   verticalLine7.style.cssText = `
+    top: ${horizontalLine1.getBoundingClientRect().top + document.documentElement.scrollTop}px;
     left: ${advantagesItem3Icon.getBoundingClientRect().left}px
   `;
 
@@ -73,12 +75,10 @@ function setPositionsForVerticalLines() {
 }
 
 function setPositionsForHorizontalLines() {
-  const horizontalLine1 = document.querySelector('#horizontal-line-1');
   const horizontalLine2 = document.querySelector('#horizontal-line-2');
   const horizontalLine3 = document.querySelector('#horizontal-line-3');
   const horizontalLine4 = document.querySelector('#horizontal-line-4');
   const horizontalLine5 = document.querySelector('#horizontal-line-5');
-  const horizontalLine6 = document.querySelector('#horizontal-line-6');
   const horizontalLine7 = document.querySelector('#horizontal-line-7');
   const horizontalLine8 = document.querySelector('#horizontal-line-8');
   const horizontalLine9 = document.querySelector('#horizontal-line-9');
@@ -109,11 +109,6 @@ function setPositionsForHorizontalLines() {
   const advantagesItem1Title = document.querySelector('#advantages-item-1-title');
   const advantagesItem1Description = document.querySelector('#advantages-item-1-description');
 
-  // TODO: Need dynamic "top" value. Right now we can't do it since this value should be set depend on an item from illustration
-  horizontalLine1.style.cssText = `
-    top: 229px;
-  `;
-
   horizontalLine2.style.cssText = `
     top: ${heroTitle.getBoundingClientRect().top + document.documentElement.scrollTop}px
   `;
@@ -126,11 +121,6 @@ function setPositionsForHorizontalLines() {
 
   horizontalLine4.style.cssText = `
     top: ${heroButton.getBoundingClientRect().top + document.documentElement.scrollTop}px
-  `;
-
-  // TODO: Need dynamic "top" value. Right now we can't do it since this value should be set depend on an item from illustration
-  horizontalLine6.style.cssText = `
-    top: 956px;
   `;
 
   horizontalLine5.style.cssText = `

@@ -1,5 +1,13 @@
 .horizontal-line {
   @apply absolute left-0 right-0 h-0.5 bg-gray-1;
+
+  &#horizontal-line-1 {
+    @apply top-[229px] 3xl:top-[180px] 2xl:top-[154px] xl:top-[148px];
+  }
+
+  &#horizontal-line-6 {
+    @apply top-[956px] 3xl:top-[780px] 2xl:top-[654px] xl:top-[583px];
+  }
 }
 
 .vertical-line {
@@ -35,7 +43,7 @@
   }
 
   &.circle-with-text {
-    @apply border-gray-2;
+    @apply border-gray-2 z-10;
 
     &::before {
       @apply bg-gray-2;
@@ -49,13 +57,13 @@
 
     &.circle-with-text-right {
       &::after {
-        @apply -right-1 pl-2.5 translate-x-full;
+        @apply right-[-2px] pl-2.5 translate-x-full;
       }
     }
 
     &.circle-with-text-left {
       &::after {
-        @apply -left-1 pr-2.5 -translate-x-full;
+        @apply left-[-2px] pr-2.5 -translate-x-full;
       }
     }
   }
