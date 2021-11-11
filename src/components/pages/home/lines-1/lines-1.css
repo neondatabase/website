@@ -1,0 +1,7 @@
+#lines-1-horizontal-line-1 {
+  @apply top-[229px] 3xl:top-[180px] 2xl:top-[154px] xl:top-[148px];
+}
+
+#lines-1-horizontal-line-6 {
+  @apply top-[956px] 3xl:top-[780px] 2xl:top-[654px] xl:top-[583px];
+}
