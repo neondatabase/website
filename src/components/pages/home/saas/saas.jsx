@@ -39,7 +39,6 @@ const SaaS = () => (
         className="3xl:max-w-[813px] 2xl:max-w-[672px] xl:max-w-[500px] lg:max-w-[524px] lg:mt-10 md:max-w-full"
         src={illustration}
         alt=""
-        loading="lazy"
         aria-hidden
       />
     </Container>
