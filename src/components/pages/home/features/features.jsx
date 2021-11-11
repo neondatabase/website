@@ -66,9 +66,18 @@ const items = [
 ];
 
 const Features = () => (
-  <section className="pt-40 mt-48 bg-black safe-paddings 3xl:pt-36 3xl:mt-44 2xl:pt-32 2xl:mt-40 xl:pt-28 xl:mt-32 lg:pt-20 lg:mt-24 md:pt-16 md:mt-20">
-    <Container>
-      <Heading className="text-center lg:max-w-[460px] lg:mx-auto" tag="h2" size="md" theme="white">
+  <section
+    id="features"
+    className="pt-40 bg-black safe-paddings 3xl:pt-36 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16"
+  >
+    <Container className="z-20">
+      <Heading
+        id="features-title"
+        className="text-center lg:max-w-[460px] lg:mx-auto"
+        tag="h2"
+        size="md"
+        theme="white"
+      >
         Not an ordinary PostgreSQL as a service
       </Heading>
       <p className="mt-5 text-center text-white t-3xl max-w-[940px] mx-auto 2xl:max-w-[800px] 2xl:mt-4 xl:max-w-[610px] xl:mt-3.5 lg:max-w-[580px]">
@@ -82,7 +91,11 @@ const Features = () => (
             key={index}
           >
             <div className="flex items-end space-x-4 xl:space-x-3.5">
-              <Icon className="h-24 2xl:h-20 xl:h-[72px] lg:h-16" aria-hidden />
+              <Icon
+                id={`features-item-${index + 1}-icon`}
+                className="h-24 2xl:h-20 xl:h-[72px] lg:h-16"
+                aria-hidden
+              />
               {tag?.text && (
                 <span
                   className={clsx(
@@ -94,10 +107,21 @@ const Features = () => (
                 </span>
               )}
             </div>
-            <Heading className="mt-6 xl:mt-5" tag="h3" size="sm" theme="white">
+            <Heading
+              id={`features-item-${index + 1}-title`}
+              className="mt-6 xl:mt-5"
+              tag="h3"
+              size="sm"
+              theme="white"
+            >
               {title}
             </Heading>
-            <p className="mt-4 text-white t-xl xl:mt-3.5">{description}</p>
+            <p
+              id={`features-item-${index + 1}-description`}
+              className="mt-4 text-white t-xl xl:mt-3.5"
+            >
+              {description}
+            </p>
           </li>
         ))}
       </ul>

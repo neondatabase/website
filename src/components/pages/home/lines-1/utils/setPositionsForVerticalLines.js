@@ -22,11 +22,11 @@ export default function setPositionsForVerticalLines() {
   const horizontalLine8 = document.querySelector('#lines-1-horizontal-line-8');
 
   verticalLine1.style.cssText = `
-    left: ${container.getBoundingClientRect().left}px
+    left: ${container.getBoundingClientRect().left}px;
   `;
 
   verticalLine2.style.cssText = `
-    left: ${advantagesItem1Icon.getBoundingClientRect().right - LINE_WIDTH}px
+    left: ${advantagesItem1Icon.getBoundingClientRect().right - LINE_WIDTH}px;
   `;
 
   verticalLine3.style.cssText = `
@@ -35,28 +35,28 @@ export default function setPositionsForVerticalLines() {
   `;
 
   verticalLine4.style.cssText = `
-    left: ${ctaInputBackground.getBoundingClientRect().left}px
+    left: ${ctaInputBackground.getBoundingClientRect().left}px;
   `;
 
   verticalLine5.style.cssText = `
-    left: ${advantagesItem2Icon.getBoundingClientRect().left}px
+    left: ${advantagesItem2Icon.getBoundingClientRect().left}px;
   `;
 
   verticalLine6.style.cssText = `
-    left: ${advantagesItem2Icon.getBoundingClientRect().right - LINE_WIDTH}px
+    left: ${advantagesItem2Icon.getBoundingClientRect().right - LINE_WIDTH}px;
   `;
 
   verticalLine7.style.cssText = `
     top: ${horizontalLine1.getBoundingClientRect().top + document.documentElement.scrollTop}px;
-    left: ${advantagesItem3Icon.getBoundingClientRect().left}px
+    left: ${advantagesItem3Icon.getBoundingClientRect().left}px;
   `;
 
   verticalLine8.style.cssText = `
-    left: ${advantagesItem3Icon.getBoundingClientRect().right - LINE_WIDTH}px
+    left: ${advantagesItem3Icon.getBoundingClientRect().right - LINE_WIDTH}px;
   `;
 
   verticalLine9.style.cssText = `
     top: ${horizontalLine7.getBoundingClientRect().top + document.documentElement.scrollTop}px;
-    left: ${container.getBoundingClientRect().right - 81 - LINE_WIDTH}px
+    left: ${container.getBoundingClientRect().right - 81 - LINE_WIDTH}px;
   `;
 }

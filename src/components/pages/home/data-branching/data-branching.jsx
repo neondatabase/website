@@ -6,7 +6,7 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 
 const DataBranching = () => (
-  <section className="mt-[270px] safe-paddings 3xl:mt-44 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20">
+  <section className="mt-[270px] mb-48 safe-paddings 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20">
     <Container>
       <div className="max-w-[600px] xl:max-w-[400px] lg:max-w-none">
         <Heading tag="h2" size="lg" theme="black">
