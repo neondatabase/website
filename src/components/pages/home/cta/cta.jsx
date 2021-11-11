@@ -26,7 +26,7 @@ const CTA = () => {
 
   return (
     <section className="text-center bg-black pt-[504px] safe-paddings 3xl:pt-[397px] 2xl:pt-[344px] xl:pt-[310px] lg:pt-[238px] md:pt-[130px]">
-      <Container>
+      <Container className="z-20">
         <Heading id="cta-title" tag="h2" size="lg" theme="white">
           Made for Developers
         </Heading>

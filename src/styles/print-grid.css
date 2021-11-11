@@ -11,7 +11,7 @@
 }
 
 .vertical-line {
-  @apply absolute w-0.5 h-[300vw] bg-gray-1;
+  @apply absolute top-0 w-0.5 h-[300vw] bg-gray-1;
 }
 
 .shape {

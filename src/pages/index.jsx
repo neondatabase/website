@@ -557,36 +557,36 @@ const Lines = () => {
 
   return (
     <div className="lg:hidden" aria-hidden>
-      <div id="vertical-line-1" className="top-0 vertical-line" />
-      <div id="vertical-line-2" className="top-0 vertical-line" />
-      <div id="vertical-line-3" className="top-0 vertical-line" />
-      <div id="vertical-line-4" className="top-0 vertical-line" />
-      <div id="vertical-line-5" className="top-0 vertical-line" />
-      <div id="vertical-line-6" className="top-0 vertical-line" />
-      <div id="vertical-line-7" className="top-0 vertical-line" />
-      <div id="vertical-line-8" className="top-0 vertical-line" />
-      <div id="vertical-line-9" className="top-0 vertical-line" />
+      <div id="vertical-line-1" className="vertical-line" />
+      <div id="vertical-line-2" className="vertical-line" />
+      <div id="vertical-line-3" className="vertical-line" />
+      <div id="vertical-line-4" className="vertical-line" />
+      <div id="vertical-line-5" className="vertical-line" />
+      <div id="vertical-line-6" className="vertical-line" />
+      <div id="vertical-line-7" className="vertical-line" />
+      <div id="vertical-line-8" className="vertical-line" />
+      <div id="vertical-line-9" className="vertical-line" />
 
-      <div id="horizontal-line-1" className="left-0 horizontal-line" />
-      <div id="horizontal-line-2" className="left-0 horizontal-line" />
-      <div id="horizontal-line-3" className="left-0 horizontal-line" />
-      <div id="horizontal-line-4" className="left-0 horizontal-line" />
-      <div id="horizontal-line-5" className="left-0 horizontal-line" />
-      <div id="horizontal-line-6" className="left-0 horizontal-line" />
-      <div id="horizontal-line-7" className="left-0 horizontal-line" />
-      <div id="horizontal-line-8" className="left-0 horizontal-line" />
-      <div id="horizontal-line-9" className="left-0 horizontal-line" />
-      <div id="horizontal-line-10" className="left-0 horizontal-line" />
-      <div id="horizontal-line-11" className="left-0 horizontal-line" />
-      <div id="horizontal-line-12" className="left-0 horizontal-line" />
-      <div id="horizontal-line-13" className="left-0 horizontal-line" />
-      <div id="horizontal-line-14" className="left-0 horizontal-line" />
-      <div id="horizontal-line-15" className="left-0 horizontal-line" />
-      <div id="horizontal-line-16" className="left-0 horizontal-line" />
-      <div id="horizontal-line-17" className="left-0 horizontal-line" />
-      <div id="horizontal-line-18" className="left-0 horizontal-line" />
-      <div id="horizontal-line-19" className="left-0 horizontal-line" />
-      <div id="horizontal-line-20" className="left-0 horizontal-line" />
+      <div id="horizontal-line-1" className="horizontal-line" />
+      <div id="horizontal-line-2" className="horizontal-line" />
+      <div id="horizontal-line-3" className="horizontal-line" />
+      <div id="horizontal-line-4" className="horizontal-line" />
+      <div id="horizontal-line-5" className="horizontal-line" />
+      <div id="horizontal-line-6" className="horizontal-line" />
+      <div id="horizontal-line-7" className="horizontal-line" />
+      <div id="horizontal-line-8" className="horizontal-line" />
+      <div id="horizontal-line-9" className="horizontal-line" />
+      <div id="horizontal-line-10" className="horizontal-line" />
+      <div id="horizontal-line-11" className="horizontal-line" />
+      <div id="horizontal-line-12" className="horizontal-line" />
+      <div id="horizontal-line-13" className="horizontal-line" />
+      <div id="horizontal-line-14" className="horizontal-line" />
+      <div id="horizontal-line-15" className="horizontal-line" />
+      <div id="horizontal-line-16" className="horizontal-line" />
+      <div id="horizontal-line-17" className="horizontal-line" />
+      <div id="horizontal-line-18" className="horizontal-line" />
+      <div id="horizontal-line-19" className="horizontal-line" />
+      <div id="horizontal-line-20" className="horizontal-line" />
 
       <div id="shape-1" className="shape shape-bottom-left" />
       <div id="shape-2" className="shape shape-bottom-right" />

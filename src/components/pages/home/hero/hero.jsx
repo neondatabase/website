@@ -8,7 +8,7 @@ import Heading from 'components/shared/heading';
 const Hero = () => (
   <section className="bg-black pt-[322px] safe-paddings 3xl:pt-[243px] 2xl:pt-[207px] xl:pt-[193px] lg:pt-12 md:pt-6">
     <Container className="flex items-center justify-between lg:flex-col lg:justify-center">
-      <div className="relative z-10 max-w-[860px] 3xl:max-w-[750px] 2xl:max-w-[610px] xl:max-w-[535px] lg:text-center">
+      <div className="relative z-20 max-w-[860px] 3xl:max-w-[750px] 2xl:max-w-[610px] xl:max-w-[535px] lg:text-center">
         <Heading
           id="hero-title"
           className="with-highlighted-text-secondary-2"
