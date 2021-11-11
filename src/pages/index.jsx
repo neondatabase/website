@@ -483,6 +483,52 @@ function setPositionsForCirclesWithText() {
   `;
 }
 
+function setPositionsForDottedVerticalLines() {
+  const dottedVerticalLine1 = document.querySelector('#dotted-vertical-line-1');
+  const dottedVerticalLine2 = document.querySelector('#dotted-vertical-line-2');
+  const dottedVerticalLine3 = document.querySelector('#dotted-vertical-line-3');
+
+  const verticalLine2 = document.querySelector('#vertical-line-2');
+  const verticalLine4 = document.querySelector('#vertical-line-4');
+  const verticalLine9 = document.querySelector('#vertical-line-9');
+  const circle1 = document.querySelector('#circle-1');
+  const circle2 = document.querySelector('#circle-2');
+  const circle3 = document.querySelector('#circle-3');
+  const circle4 = document.querySelector('#circle-4');
+  const circle6 = document.querySelector('#circle-6');
+
+  dottedVerticalLine1.style.cssText = `
+    top: ${circle1.getBoundingClientRect().bottom + document.documentElement.scrollTop}px;
+    left: ${verticalLine4.getBoundingClientRect().left}px;
+    height: ${circle4.getBoundingClientRect().top - circle1.getBoundingClientRect().bottom}px;
+  `;
+
+  dottedVerticalLine2.style.cssText = `
+    top: ${circle2.getBoundingClientRect().bottom + document.documentElement.scrollTop}px;
+    left: ${verticalLine2.getBoundingClientRect().left}px;
+    height: ${circle3.getBoundingClientRect().top - circle2.getBoundingClientRect().bottom}px;
+  `;
+
+  dottedVerticalLine3.style.cssText = `
+    top: ${circle6.getBoundingClientRect().bottom + document.documentElement.scrollTop}px;
+    left: ${verticalLine9.getBoundingClientRect().left}px;
+    height: 200vh;
+  `;
+}
+
+function setPositionsForDottedHorizontalLines() {
+  const dottedHorizontalLine1 = document.querySelector('#dotted-horizontal-line-1');
+
+  const horizontalLine11 = document.querySelector('#horizontal-line-11');
+  const circle5 = document.querySelector('#circle-5');
+
+  dottedHorizontalLine1.style.cssText = `
+    top: ${horizontalLine11.getBoundingClientRect().top + document.documentElement.scrollTop}px;
+    left: ${circle5.getBoundingClientRect().right}px;
+    width: 100vw;
+  `;
+}
+
 const Lines = () => {
   useEffect(() => {
     setPositionsForVerticalLines();
@@ -495,6 +541,8 @@ const Lines = () => {
     setPositionsForShapes();
     setPositionsForCircles();
     setPositionsForCirclesWithText();
+    setPositionsForDottedVerticalLines();
+    setPositionsForDottedHorizontalLines();
   }, []);
 
   return (
@@ -567,6 +615,12 @@ const Lines = () => {
         className="circle circle-with-text circle-with-text-right"
         data-text="24a9b481-97a0-4316-b27e-d1da09e2992a"
       />
+
+      <div id="dotted-vertical-line-1" className="dotted-vertical-line" />
+      <div id="dotted-vertical-line-2" className="dotted-vertical-line" />
+      <div id="dotted-vertical-line-3" className="dotted-vertical-line" />
+
+      <div id="dotted-horizontal-line-1" className="dotted-horizontal-line" />
     </div>
   );
 };
