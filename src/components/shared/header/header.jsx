@@ -9,15 +9,15 @@ import BurgerIcon from './images/burger.inline.svg';
 
 const links = [
   {
-    text: 'Docs',
-    to: '/',
-  },
-  {
     text: 'Pricing',
     to: '/',
   },
   {
     text: 'Team',
+    to: '/',
+  },
+  {
+    text: 'Docs',
     to: '/',
   },
   {
