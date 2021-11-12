@@ -4,6 +4,7 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 
+import illustrationLg from './images/illustration-lg.svg';
 import illustration from './images/illustration.svg';
 
 const SaaS = () => (
@@ -36,8 +37,15 @@ const SaaS = () => (
       </div>
       <img
         id="saas-illustration"
-        className="3xl:max-w-[813px] 2xl:max-w-[672px] xl:max-w-[500px] lg:max-w-[524px] lg:mt-10 md:max-w-full"
+        className="3xl:max-w-[813px] 2xl:max-w-[672px] xl:max-w-[500px] lg:hidden"
         src={illustration}
+        alt=""
+        aria-hidden
+      />
+      <img
+        className="hidden lg:block lg:max-w-[524px] lg:mt-10 md:max-w-full"
+        src={illustrationLg}
+        loading="lazy"
         alt=""
         aria-hidden
       />
