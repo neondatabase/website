@@ -6,14 +6,14 @@ const words = ['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless'];
 const wrapperVariants = {
   hidden: {
     transition: {
-      staggerChildren: 0.01,
+      staggerChildren: 0.02,
       staggerDirection: -1,
       delayChildren: 2,
     },
   },
   shown: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.07,
       delayChildren: 0.25,
     },
   },
