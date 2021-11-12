@@ -16,7 +16,7 @@ export default function setPositionsForHorizontalLines() {
   const horizontalLine13 = document.querySelector('#lines-2-horizontal-line-13');
   const horizontalLine14 = document.querySelector('#lines-2-horizontal-line-14');
   const horizontalLine15 = document.querySelector('#lines-2-horizontal-line-15');
-  const horizontalLine17 = document.querySelector('#lines-2-horizontal-line-17');
+  const horizontalLine16 = document.querySelector('#lines-2-horizontal-line-16');
 
   const features = document.querySelector('#features');
   const featuresTitle = document.querySelector('#features-title');
@@ -129,7 +129,7 @@ export default function setPositionsForHorizontalLines() {
     }px;
   `;
 
-  horizontalLine17.style.cssText = `
+  horizontalLine16.style.cssText = `
     top: ${
       saasIllustration.getBoundingClientRect().bottom - features.getBoundingClientRect().top
     }px;

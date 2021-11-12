@@ -43,7 +43,6 @@ const Lines2 = () => {
       <div id="lines-2-horizontal-line-14" className="horizontal-line" />
       <div id="lines-2-horizontal-line-15" className="horizontal-line" />
       <div id="lines-2-horizontal-line-16" className="horizontal-line" />
-      <div id="lines-2-horizontal-line-17" className="horizontal-line" />
 
       <div id="lines-2-shape-1" className="shape shape-bottom-right" />
       <div id="lines-2-shape-2" className="shape shape-bottom-right" />

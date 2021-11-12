@@ -18,7 +18,7 @@ export default function setPositionsForShapes() {
   const horizontalLine10 = document.querySelector('#lines-2-horizontal-line-10');
   const horizontalLine11 = document.querySelector('#lines-2-horizontal-line-11');
   const horizontalLine14 = document.querySelector('#lines-2-horizontal-line-14');
-  const horizontalLine17 = document.querySelector('#lines-2-horizontal-line-17');
+  const horizontalLine16 = document.querySelector('#lines-2-horizontal-line-16');
 
   shape1.style.cssText = `
     top: ${horizontalLine7.getBoundingClientRect().top - features.getBoundingClientRect().top}px;
@@ -47,19 +47,19 @@ export default function setPositionsForShapes() {
     left: ${verticalLine4.getBoundingClientRect().left}px; 
     right: ${document.body.clientWidth - verticalLine5.getBoundingClientRect().right}px; 
     height: ${
-      horizontalLine17.getBoundingClientRect().bottom -
+      horizontalLine16.getBoundingClientRect().bottom -
       horizontalLine14.getBoundingClientRect().bottom +
       LINE_WIDTH
     }px;
   `;
 
   shape4.style.cssText = `
-    top: ${horizontalLine17.getBoundingClientRect().top - features.getBoundingClientRect().top}px;
+    top: ${horizontalLine16.getBoundingClientRect().top - features.getBoundingClientRect().top}px;
     left: ${verticalLine3.getBoundingClientRect().left}px; 
     right: ${document.body.clientWidth - verticalLine4.getBoundingClientRect().right}px; 
     height: ${
       saas.getBoundingClientRect().bottom -
-      horizontalLine17.getBoundingClientRect().bottom +
+      horizontalLine16.getBoundingClientRect().bottom +
       LINE_WIDTH
     }px;
   `;

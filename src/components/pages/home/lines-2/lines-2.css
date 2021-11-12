@@ -9,7 +9,3 @@
 #lines-2-vertical-line-11 {
   @apply ml-[-40px] 3xl:ml-[-33px] 2xl:ml-[-27px] xl:ml-[-20px];
 }
-
-#lines-2-horizontal-line-16 {
-  @apply bottom-[295px] 3xl:bottom-[245px] 2xl:bottom-[217px] xl:bottom-[171px];
-}

@@ -13,7 +13,7 @@ export default function setPositionsForCirclesWithText() {
   const horizontalLine1 = document.querySelector('#lines-2-horizontal-line-1');
   const horizontalLine9 = document.querySelector('#lines-2-horizontal-line-9');
   const horizontalLine10 = document.querySelector('#lines-2-horizontal-line-10');
-  const horizontalLine17 = document.querySelector('#lines-2-horizontal-line-17');
+  const horizontalLine16 = document.querySelector('#lines-2-horizontal-line-16');
 
   circleWithText1.style.cssText = `
     top: ${
@@ -32,17 +32,11 @@ export default function setPositionsForCirclesWithText() {
     left: ${verticalLine2.getBoundingClientRect().left + LINE_WIDTH / 2}px;
   `;
 
-  // top: ${
-  //   horizontalLine17.getBoundingClientRect().top - features.getBoundingClientRect().top +
-  //   (saas.getBoundingClientRect().top - horizontalLine17.getBoundingClientRect().top) /
-  //     1.7
-  // }px;
-
   circleWithText3.style.cssText = `
     top: ${
-      horizontalLine17.getBoundingClientRect().top -
+      horizontalLine16.getBoundingClientRect().top -
       features.getBoundingClientRect().top +
-      (saas.getBoundingClientRect().bottom - horizontalLine17.getBoundingClientRect().top) / 2.1
+      (saas.getBoundingClientRect().bottom - horizontalLine16.getBoundingClientRect().top) / 2.1
     }px;
     left: ${verticalLine6.getBoundingClientRect().left + LINE_WIDTH / 2}px;
   `;
