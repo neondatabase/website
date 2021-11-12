@@ -2,7 +2,7 @@
 
 @layer base {
   body {
-    @apply font-sans text-black antialiased;
+    @apply relative font-sans text-black antialiased min-w-[320px];
     -webkit-tap-highlight-color: transparent;
   }
 }

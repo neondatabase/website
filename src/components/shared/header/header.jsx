@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from 'components/shared/button';
@@ -6,6 +7,7 @@ import Link from 'components/shared/link';
 import Logo from 'images/logo.inline.svg';
 
 import BurgerIcon from './images/burger.inline.svg';
+import CloseIcon from './images/close.inline.svg';
 
 const links = [
   {
@@ -30,7 +32,7 @@ const links = [
   },
 ];
 
-const Header = () => (
+const Header = ({ isMobileMenuOpen, onBurgerClick }) => (
   <header className="absolute top-0 left-0 right-0 z-10 w-full safe-paddings lg:relative lg:bg-black">
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5">
       <Link className="hidden text-white xl:block" to="/">
@@ -58,11 +60,20 @@ const Header = () => (
       <Button className="lg:hidden" to="/" size="xs" theme="tertiary">
         Sign Up
       </Button>
-      <button className="hidden lg:block" type="button">
-        <BurgerIcon />
+      <button className="hidden lg:block" type="button" onClick={onBurgerClick}>
+        {isMobileMenuOpen ? <CloseIcon /> : <BurgerIcon />}
       </button>
     </Container>
   </header>
 );
+
+Header.propTypes = {
+  isMobileMenuOpen: PropTypes.bool,
+  onBurgerClick: PropTypes.func.isRequired,
+};
+
+Header.defaultProps = {
+  isMobileMenuOpen: false,
+};
 
 export default Header;
