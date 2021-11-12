@@ -1,39 +1,40 @@
 import LINE_WIDTH from 'constants/line-width';
+import $ from 'utils/$';
 
 export default function setPositionsForHorizontalLines() {
-  const horizontalLine2 = document.querySelector('#lines-1-horizontal-line-2');
-  const horizontalLine3 = document.querySelector('#lines-1-horizontal-line-3');
-  const horizontalLine4 = document.querySelector('#lines-1-horizontal-line-4');
-  const horizontalLine5 = document.querySelector('#lines-1-horizontal-line-5');
-  const horizontalLine7 = document.querySelector('#lines-1-horizontal-line-7');
-  const horizontalLine8 = document.querySelector('#lines-1-horizontal-line-8');
-  const horizontalLine9 = document.querySelector('#lines-1-horizontal-line-9');
-  const horizontalLine10 = document.querySelector('#lines-1-horizontal-line-10');
-  const horizontalLine11 = document.querySelector('#lines-1-horizontal-line-11');
-  const horizontalLine12 = document.querySelector('#lines-1-horizontal-line-12');
-  const horizontalLine13 = document.querySelector('#lines-1-horizontal-line-13');
-  const horizontalLine14 = document.querySelector('#lines-1-horizontal-line-14');
-  const horizontalLine15 = document.querySelector('#lines-1-horizontal-line-15');
-  const horizontalLine16 = document.querySelector('#lines-1-horizontal-line-16');
-  const horizontalLine17 = document.querySelector('#lines-1-horizontal-line-17');
-  const horizontalLine18 = document.querySelector('#lines-1-horizontal-line-18');
-  const horizontalLine19 = document.querySelector('#lines-1-horizontal-line-19');
-  const horizontalLine20 = document.querySelector('#lines-1-horizontal-line-20');
+  const horizontalLine2 = $('#lines-1-horizontal-line-2');
+  const horizontalLine3 = $('#lines-1-horizontal-line-3');
+  const horizontalLine4 = $('#lines-1-horizontal-line-4');
+  const horizontalLine5 = $('#lines-1-horizontal-line-5');
+  const horizontalLine7 = $('#lines-1-horizontal-line-7');
+  const horizontalLine8 = $('#lines-1-horizontal-line-8');
+  const horizontalLine9 = $('#lines-1-horizontal-line-9');
+  const horizontalLine10 = $('#lines-1-horizontal-line-10');
+  const horizontalLine11 = $('#lines-1-horizontal-line-11');
+  const horizontalLine12 = $('#lines-1-horizontal-line-12');
+  const horizontalLine13 = $('#lines-1-horizontal-line-13');
+  const horizontalLine14 = $('#lines-1-horizontal-line-14');
+  const horizontalLine15 = $('#lines-1-horizontal-line-15');
+  const horizontalLine16 = $('#lines-1-horizontal-line-16');
+  const horizontalLine17 = $('#lines-1-horizontal-line-17');
+  const horizontalLine18 = $('#lines-1-horizontal-line-18');
+  const horizontalLine19 = $('#lines-1-horizontal-line-19');
+  const horizontalLine20 = $('#lines-1-horizontal-line-20');
 
-  const container = document.querySelector('#container');
-  const heroTitle = document.querySelector('#hero-title');
-  const heroButton = document.querySelector('#hero-button');
-  const ctaTitle = document.querySelector('#cta-title');
-  const ctaInput = document.querySelector('#cta-input');
-  const ctaInputBackground = document.querySelector('#cta-input-background');
-  const ctaBottomText = document.querySelector('#cta-bottom-text');
-  const advantagesVideoWrapper = document.querySelector('#advantages-video-wrapper');
-  const advantagesTitle = document.querySelector('#advantages-title');
-  const advantagesDescription = document.querySelector('#advantages-description');
-  const advantagesItem1Icon = document.querySelector('#advantages-item-1-icon');
-  const advantagesItem1Title = document.querySelector('#advantages-item-1-title');
-  const advantagesItem1Description = document.querySelector('#advantages-item-1-description');
-  const verticalLine9 = document.querySelector('#lines-1-vertical-line-9');
+  const container = $('#container');
+  const heroTitle = $('#hero-title');
+  const heroButton = $('#hero-button');
+  const ctaTitle = $('#cta-title');
+  const ctaInput = $('#cta-input');
+  const ctaInputBackground = $('#cta-input-background');
+  const ctaBottomText = $('#cta-bottom-text');
+  const advantagesVideoWrapper = $('#advantages-video-wrapper');
+  const advantagesTitle = $('#advantages-title');
+  const advantagesDescription = $('#advantages-description');
+  const advantagesItem1Icon = $('#advantages-item-1-icon');
+  const advantagesItem1Title = $('#advantages-item-1-title');
+  const advantagesItem1Description = $('#advantages-item-1-description');
+  const verticalLine9 = $('#lines-1-vertical-line-9');
 
   horizontalLine2.style.cssText = `
     top: ${heroTitle.getBoundingClientRect().top + document.documentElement.scrollTop}px

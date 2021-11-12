@@ -1,36 +1,37 @@
 import LINE_WIDTH from 'constants/line-width';
+import $ from 'utils/$';
 
 export default function setPositionsForHorizontalLines() {
-  const horizontalLine1 = document.querySelector('#lines-2-horizontal-line-1');
-  const horizontalLine2 = document.querySelector('#lines-2-horizontal-line-2');
-  const horizontalLine3 = document.querySelector('#lines-2-horizontal-line-3');
-  const horizontalLine4 = document.querySelector('#lines-2-horizontal-line-4');
-  const horizontalLine5 = document.querySelector('#lines-2-horizontal-line-5');
-  const horizontalLine6 = document.querySelector('#lines-2-horizontal-line-6');
-  const horizontalLine7 = document.querySelector('#lines-2-horizontal-line-7');
-  const horizontalLine8 = document.querySelector('#lines-2-horizontal-line-8');
-  const horizontalLine9 = document.querySelector('#lines-2-horizontal-line-9');
-  const horizontalLine10 = document.querySelector('#lines-2-horizontal-line-10');
-  const horizontalLine11 = document.querySelector('#lines-2-horizontal-line-11');
-  const horizontalLine12 = document.querySelector('#lines-2-horizontal-line-12');
-  const horizontalLine13 = document.querySelector('#lines-2-horizontal-line-13');
-  const horizontalLine14 = document.querySelector('#lines-2-horizontal-line-14');
-  const horizontalLine15 = document.querySelector('#lines-2-horizontal-line-15');
-  const horizontalLine16 = document.querySelector('#lines-2-horizontal-line-16');
+  const horizontalLine1 = $('#lines-2-horizontal-line-1');
+  const horizontalLine2 = $('#lines-2-horizontal-line-2');
+  const horizontalLine3 = $('#lines-2-horizontal-line-3');
+  const horizontalLine4 = $('#lines-2-horizontal-line-4');
+  const horizontalLine5 = $('#lines-2-horizontal-line-5');
+  const horizontalLine6 = $('#lines-2-horizontal-line-6');
+  const horizontalLine7 = $('#lines-2-horizontal-line-7');
+  const horizontalLine8 = $('#lines-2-horizontal-line-8');
+  const horizontalLine9 = $('#lines-2-horizontal-line-9');
+  const horizontalLine10 = $('#lines-2-horizontal-line-10');
+  const horizontalLine11 = $('#lines-2-horizontal-line-11');
+  const horizontalLine12 = $('#lines-2-horizontal-line-12');
+  const horizontalLine13 = $('#lines-2-horizontal-line-13');
+  const horizontalLine14 = $('#lines-2-horizontal-line-14');
+  const horizontalLine15 = $('#lines-2-horizontal-line-15');
+  const horizontalLine16 = $('#lines-2-horizontal-line-16');
 
-  const features = document.querySelector('#features');
-  const featuresTitle = document.querySelector('#features-title');
-  const featuresItem1Icon = document.querySelector('#features-item-1-icon');
-  const featuresItem1Title = document.querySelector('#features-item-1-title');
-  const featuresItem1Description = document.querySelector('#features-item-1-description');
-  const featuresItem4Icon = document.querySelector('#features-item-4-icon');
-  const featuresItem4Title = document.querySelector('#features-item-4-title');
-  const featuresItem4Description = document.querySelector('#features-item-4-description');
-  const saasTitle = document.querySelector('#saas-title');
-  const saasDescription = document.querySelector('#saas-description');
-  const saasButton = document.querySelector('#saas-button');
-  const saasIllustration = document.querySelector('#saas-illustration');
-  const verticalLine2 = document.querySelector('#lines-2-vertical-line-2');
+  const features = $('#features');
+  const featuresTitle = $('#features-title');
+  const featuresItem1Icon = $('#features-item-1-icon');
+  const featuresItem1Title = $('#features-item-1-title');
+  const featuresItem1Description = $('#features-item-1-description');
+  const featuresItem4Icon = $('#features-item-4-icon');
+  const featuresItem4Title = $('#features-item-4-title');
+  const featuresItem4Description = $('#features-item-4-description');
+  const saasTitle = $('#saas-title');
+  const saasDescription = $('#saas-description');
+  const saasButton = $('#saas-button');
+  const saasIllustration = $('#saas-illustration');
+  const verticalLine2 = $('#lines-2-vertical-line-2');
 
   horizontalLine1.style.cssText = `
     top: ${featuresTitle.getBoundingClientRect().top - features.getBoundingClientRect().top}px;

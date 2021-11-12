@@ -1,24 +1,25 @@
 import LINE_WIDTH from 'constants/line-width';
+import $ from 'utils/$';
 
 export default function setPositionsForShapes() {
-  const shape1 = document.querySelector('#lines-2-shape-1');
-  const shape2 = document.querySelector('#lines-2-shape-2');
-  const shape3 = document.querySelector('#lines-2-shape-3');
-  const shape4 = document.querySelector('#lines-2-shape-4');
+  const shape1 = $('#lines-2-shape-1');
+  const shape2 = $('#lines-2-shape-2');
+  const shape3 = $('#lines-2-shape-3');
+  const shape4 = $('#lines-2-shape-4');
 
-  const features = document.querySelector('#features');
-  const saas = document.querySelector('#saas');
-  const verticalLine2 = document.querySelector('#lines-2-vertical-line-2');
-  const verticalLine3 = document.querySelector('#lines-2-vertical-line-3');
-  const verticalLine4 = document.querySelector('#lines-2-vertical-line-4');
-  const verticalLine5 = document.querySelector('#lines-2-vertical-line-5');
-  const verticalLine9 = document.querySelector('#lines-2-vertical-line-9');
-  const verticalLine11 = document.querySelector('#lines-2-vertical-line-10');
-  const horizontalLine7 = document.querySelector('#lines-2-horizontal-line-7');
-  const horizontalLine10 = document.querySelector('#lines-2-horizontal-line-10');
-  const horizontalLine11 = document.querySelector('#lines-2-horizontal-line-11');
-  const horizontalLine14 = document.querySelector('#lines-2-horizontal-line-14');
-  const horizontalLine16 = document.querySelector('#lines-2-horizontal-line-16');
+  const features = $('#features');
+  const saas = $('#saas');
+  const verticalLine2 = $('#lines-2-vertical-line-2');
+  const verticalLine3 = $('#lines-2-vertical-line-3');
+  const verticalLine4 = $('#lines-2-vertical-line-4');
+  const verticalLine5 = $('#lines-2-vertical-line-5');
+  const verticalLine9 = $('#lines-2-vertical-line-9');
+  const verticalLine11 = $('#lines-2-vertical-line-10');
+  const horizontalLine7 = $('#lines-2-horizontal-line-7');
+  const horizontalLine10 = $('#lines-2-horizontal-line-10');
+  const horizontalLine11 = $('#lines-2-horizontal-line-11');
+  const horizontalLine14 = $('#lines-2-horizontal-line-14');
+  const horizontalLine16 = $('#lines-2-horizontal-line-16');
 
   shape1.style.cssText = `
     top: ${horizontalLine7.getBoundingClientRect().top - features.getBoundingClientRect().top}px;

@@ -1,13 +1,14 @@
 import LINE_WIDTH from 'constants/line-width';
+import $ from 'utils/$';
 
 export default function setPositionsForCircles() {
-  const circle1 = document.querySelector('#lines-2-circle-1');
-  const circle2 = document.querySelector('#lines-2-circle-2');
+  const circle1 = $('#lines-2-circle-1');
+  const circle2 = $('#lines-2-circle-2');
 
-  const features = document.querySelector('#features');
-  const verticalLine11 = document.querySelector('#lines-2-vertical-line-11');
-  const horizontalLine1 = document.querySelector('#lines-2-horizontal-line-1');
-  const horizontalLine7 = document.querySelector('#lines-2-horizontal-line-7');
+  const features = $('#features');
+  const verticalLine11 = $('#lines-2-vertical-line-11');
+  const horizontalLine1 = $('#lines-2-horizontal-line-1');
+  const horizontalLine7 = $('#lines-2-horizontal-line-7');
 
   circle1.style.cssText = `
     top: ${

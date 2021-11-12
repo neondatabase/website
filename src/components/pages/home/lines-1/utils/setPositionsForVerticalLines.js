@@ -1,25 +1,26 @@
 import LINE_WIDTH from 'constants/line-width';
+import $ from 'utils/$';
 
 export default function setPositionsForVerticalLines() {
-  const verticalLine1 = document.querySelector('#lines-1-vertical-line-1');
-  const verticalLine2 = document.querySelector('#lines-1-vertical-line-2');
-  const verticalLine3 = document.querySelector('#lines-1-vertical-line-3');
-  const verticalLine4 = document.querySelector('#lines-1-vertical-line-4');
-  const verticalLine5 = document.querySelector('#lines-1-vertical-line-5');
-  const verticalLine6 = document.querySelector('#lines-1-vertical-line-6');
-  const verticalLine7 = document.querySelector('#lines-1-vertical-line-7');
-  const verticalLine8 = document.querySelector('#lines-1-vertical-line-8');
-  const verticalLine9 = document.querySelector('#lines-1-vertical-line-9');
+  const verticalLine1 = $('#lines-1-vertical-line-1');
+  const verticalLine2 = $('#lines-1-vertical-line-2');
+  const verticalLine3 = $('#lines-1-vertical-line-3');
+  const verticalLine4 = $('#lines-1-vertical-line-4');
+  const verticalLine5 = $('#lines-1-vertical-line-5');
+  const verticalLine6 = $('#lines-1-vertical-line-6');
+  const verticalLine7 = $('#lines-1-vertical-line-7');
+  const verticalLine8 = $('#lines-1-vertical-line-8');
+  const verticalLine9 = $('#lines-1-vertical-line-9');
 
-  const container = document.querySelector('#container');
-  const heroButton = document.querySelector('#hero-button');
-  const ctaInputBackground = document.querySelector('#cta-input-background');
-  const advantagesItem1Icon = document.querySelector('#advantages-item-1-icon');
-  const advantagesItem2Icon = document.querySelector('#advantages-item-2-icon');
-  const advantagesItem3Icon = document.querySelector('#advantages-item-3-icon');
-  const horizontalLine1 = document.querySelector('#lines-1-horizontal-line-1');
-  const horizontalLine7 = document.querySelector('#lines-1-horizontal-line-7');
-  const horizontalLine8 = document.querySelector('#lines-1-horizontal-line-8');
+  const container = $('#container');
+  const heroButton = $('#hero-button');
+  const ctaInputBackground = $('#cta-input-background');
+  const advantagesItem1Icon = $('#advantages-item-1-icon');
+  const advantagesItem2Icon = $('#advantages-item-2-icon');
+  const advantagesItem3Icon = $('#advantages-item-3-icon');
+  const horizontalLine1 = $('#lines-1-horizontal-line-1');
+  const horizontalLine7 = $('#lines-1-horizontal-line-7');
+  const horizontalLine8 = $('#lines-1-horizontal-line-8');
 
   verticalLine1.style.cssText = `
     left: ${container.getBoundingClientRect().left}px;

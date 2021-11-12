@@ -1,34 +1,35 @@
 import LINE_WIDTH from 'constants/line-width';
+import $ from 'utils/$';
 
 export default function setPositionsForShapes() {
-  const shape1 = document.querySelector('#lines-1-shape-1');
-  const shape2 = document.querySelector('#lines-1-shape-2');
-  const shape3 = document.querySelector('#lines-1-shape-3');
-  const shape4 = document.querySelector('#lines-1-shape-4');
-  const shape5 = document.querySelector('#lines-1-shape-5');
-  const shape6 = document.querySelector('#lines-1-shape-6');
-  const shape7 = document.querySelector('#lines-1-shape-7');
-  const shape8 = document.querySelector('#lines-1-shape-8');
+  const shape1 = $('#lines-1-shape-1');
+  const shape2 = $('#lines-1-shape-2');
+  const shape3 = $('#lines-1-shape-3');
+  const shape4 = $('#lines-1-shape-4');
+  const shape5 = $('#lines-1-shape-5');
+  const shape6 = $('#lines-1-shape-6');
+  const shape7 = $('#lines-1-shape-7');
+  const shape8 = $('#lines-1-shape-8');
 
-  const advantages = document.querySelector('#advantages');
-  const verticalLine2 = document.querySelector('#lines-1-vertical-line-2');
-  const verticalLine3 = document.querySelector('#lines-1-vertical-line-3');
-  const verticalLine4 = document.querySelector('#lines-1-vertical-line-4');
-  const verticalLine6 = document.querySelector('#lines-1-vertical-line-6');
-  const verticalLine7 = document.querySelector('#lines-1-vertical-line-7');
-  const verticalLine8 = document.querySelector('#lines-1-vertical-line-8');
-  const verticalLine9 = document.querySelector('#lines-1-vertical-line-9');
-  const horizontalLine1 = document.querySelector('#lines-1-horizontal-line-1');
-  const horizontalLine2 = document.querySelector('#lines-1-horizontal-line-2');
-  const horizontalLine6 = document.querySelector('#lines-1-horizontal-line-6');
-  const horizontalLine7 = document.querySelector('#lines-1-horizontal-line-7');
-  const horizontalLine8 = document.querySelector('#lines-1-horizontal-line-8');
-  const horizontalLine10 = document.querySelector('#lines-1-horizontal-line-10');
-  const horizontalLine11 = document.querySelector('#lines-1-horizontal-line-11');
-  const horizontalLine12 = document.querySelector('#lines-1-horizontal-line-12');
-  const horizontalLine16 = document.querySelector('#lines-1-horizontal-line-16');
-  const horizontalLine17 = document.querySelector('#lines-1-horizontal-line-17');
-  const horizontalLine19 = document.querySelector('#lines-1-horizontal-line-19');
+  const advantages = $('#advantages');
+  const verticalLine2 = $('#lines-1-vertical-line-2');
+  const verticalLine3 = $('#lines-1-vertical-line-3');
+  const verticalLine4 = $('#lines-1-vertical-line-4');
+  const verticalLine6 = $('#lines-1-vertical-line-6');
+  const verticalLine7 = $('#lines-1-vertical-line-7');
+  const verticalLine8 = $('#lines-1-vertical-line-8');
+  const verticalLine9 = $('#lines-1-vertical-line-9');
+  const horizontalLine1 = $('#lines-1-horizontal-line-1');
+  const horizontalLine2 = $('#lines-1-horizontal-line-2');
+  const horizontalLine6 = $('#lines-1-horizontal-line-6');
+  const horizontalLine7 = $('#lines-1-horizontal-line-7');
+  const horizontalLine8 = $('#lines-1-horizontal-line-8');
+  const horizontalLine10 = $('#lines-1-horizontal-line-10');
+  const horizontalLine11 = $('#lines-1-horizontal-line-11');
+  const horizontalLine12 = $('#lines-1-horizontal-line-12');
+  const horizontalLine16 = $('#lines-1-horizontal-line-16');
+  const horizontalLine17 = $('#lines-1-horizontal-line-17');
+  const horizontalLine19 = $('#lines-1-horizontal-line-19');
 
   shape1.style.cssText = `
     top: -${LINE_WIDTH}px; 
