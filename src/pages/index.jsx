@@ -5,6 +5,8 @@ import CTA from 'components/pages/home/cta';
 import DataBranching from 'components/pages/home/data-branching';
 import Features from 'components/pages/home/features';
 import Hero from 'components/pages/home/hero';
+import Lines1 from 'components/pages/home/lines-1';
+import Lines2 from 'components/pages/home/lines-2';
 import SaaS from 'components/pages/home/saas';
 import Scalability from 'components/pages/home/scalability';
 import Storage from 'components/pages/home/storage';
@@ -13,14 +15,20 @@ import Subscribe from 'components/shared/subscribe';
 
 const HomePage = () => (
   <Layout>
-    <Hero />
-    <CTA />
-    <Advantages />
+    <div className="relative overflow-hidden">
+      <Lines1 />
+      <Hero />
+      <CTA />
+      <Advantages />
+    </div>
     <Scalability />
     <Storage />
     <DataBranching />
-    <Features />
-    <SaaS />
+    <div className="relative overflow-hidden">
+      <Features />
+      <SaaS />
+      <Lines2 />
+    </div>
     <Subscribe />
   </Layout>
 );
