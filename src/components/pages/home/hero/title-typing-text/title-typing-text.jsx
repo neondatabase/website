@@ -4,14 +4,14 @@ import React, { useCallback, useEffect, useState } from 'react';
 const words = ['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless'];
 
 const wrapperVariants = {
-  hide: {
+  hidden: {
     transition: {
-      staggerChildren: 0.05,
+      staggerChildren: 0.01,
       staggerDirection: -1,
       delayChildren: 2,
     },
   },
-  show: {
+  shown: {
     transition: {
       staggerChildren: 0.1,
       delayChildren: 0.25,
@@ -20,13 +20,13 @@ const wrapperVariants = {
 };
 
 const wordVariants = {
-  hide: {
+  hidden: {
     opacity: 0,
     transition: {
       duration: 0,
     },
   },
-  show: {
+  shown: {
     opacity: 1,
     transition: {
       duration: 0,
@@ -40,8 +40,8 @@ const TitleTypingText = () => {
   const controls = useAnimation();
 
   const animate = useCallback(() => {
-    controls.start('show').then(() => {
-      controls.start('hide').then(() => {
+    controls.start('shown').then(() => {
+      controls.start('hidden').then(() => {
         setActiveTitleWordIndex((currentATitleWordIndex) =>
           currentATitleWordIndex === words.length - 1 ? 0 : currentATitleWordIndex + 1
         );
@@ -52,16 +52,16 @@ const TitleTypingText = () => {
   }, [controls]);
 
   useEffect(() => {
-    controls.set('show');
+    controls.set('shown');
 
-    controls.start('hide').then(() => {
+    controls.start('hidden').then(() => {
       setActiveTitleWordIndex((currentATitleWordIndex) => currentATitleWordIndex + 1);
       animate();
     });
   }, [controls, animate]);
 
   return (
-    <motion.span initial="hide" animate={controls} variants={wrapperVariants}>
+    <motion.span initial="hidden" animate={controls} variants={wrapperVariants}>
       {words[activeTitleWordIndex].split('').map((letter, index) => (
         <motion.span className="!text-white" variants={wordVariants} key={index}>
           {letter}
