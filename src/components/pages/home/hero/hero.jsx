@@ -5,6 +5,8 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 
+import TitleTypingText from './title-typing-text';
+
 const Hero = () => (
   <section className="bg-black pt-[322px] safe-paddings 3xl:pt-[243px] 2xl:pt-[207px] xl:pt-[193px] lg:pt-12 md:pt-6">
     <Container className="flex items-center justify-between lg:flex-col lg:justify-center">
@@ -16,7 +18,7 @@ const Hero = () => (
           size="xl"
           theme="white"
         >
-          Zenith is PostgreSQL that is <span>/</span> Fault-tolerant
+          Zenith is PostgreSQL that is <span>/</span> <TitleTypingText />
         </Heading>
         <Button
           id="hero-button"

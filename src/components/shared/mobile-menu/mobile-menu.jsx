@@ -70,8 +70,8 @@ const MobileMenu = ({ isOpen }) => {
       style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
     >
       <ul className="flex flex-col text-center">
-        {links.map(({ text, to }) => (
-          <li>
+        {links.map(({ text, to }, index) => (
+          <li key={index}>
             <Link className="block py-4" to={to} size="sm" theme="black">
               {text}
             </Link>
