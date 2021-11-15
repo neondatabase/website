@@ -1,4 +1,5 @@
 import { motion, useAnimation } from 'framer-motion';
+import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 
 const words = ['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless'];
@@ -34,7 +35,7 @@ const wordVariants = {
   },
 };
 
-const TitleTypingText = () => {
+const TitleTypingText = ({ shouldAnimationStart }) => {
   const [activeTitleWordIndex, setActiveTitleWordIndex] = useState(0);
 
   const controls = useAnimation();
@@ -54,11 +55,13 @@ const TitleTypingText = () => {
   }, [controls]);
 
   useEffect(() => {
-    controls.start('hidden').then(() => {
-      setActiveTitleWordIndex((currentATitleWordIndex) => currentATitleWordIndex + 1);
-      animate();
-    });
-  }, [controls, animate]);
+    if (shouldAnimationStart) {
+      controls.start('hidden').then(() => {
+        setActiveTitleWordIndex((currentATitleWordIndex) => currentATitleWordIndex + 1);
+        animate();
+      });
+    }
+  }, [controls, animate, shouldAnimationStart]);
 
   return (
     <motion.span initial="shown" animate={controls} variants={wrapperVariants}>
@@ -74,6 +77,14 @@ const TitleTypingText = () => {
       ))}
     </motion.span>
   );
+};
+
+TitleTypingText.propTypes = {
+  shouldAnimationStart: PropTypes.bool,
+};
+
+TitleTypingText.defaultProps = {
+  shouldAnimationStart: false,
 };
 
 export default TitleTypingText;

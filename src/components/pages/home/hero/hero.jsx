@@ -10,8 +10,6 @@ import useLottie from 'hooks/use-lottie';
 import animationData from './data/lottie-data.json';
 import TitleTypingText from './title-typing-text';
 
-const title = 'Zenith is PostgreSQL that is /';
-
 const Hero = () => {
   const titleRef = useRef(null);
 
@@ -47,7 +45,7 @@ const Hero = () => {
           letter.style.cssText = 'animation-play-state: running';
         }, currentTimeout);
 
-        currentTimeout += 25;
+        currentTimeout += 20;
       });
     }
   }, [isAnimationPlaying]);
@@ -64,7 +62,7 @@ const Hero = () => {
             theme="white"
             ref={titleRef}
           >
-            {title.split('').map((letter, index) => (
+            {'Zenith is PostgreSQL that is /'.split('').map((letter, index) => (
               <span
                 className="animate-text-blink"
                 style={{ animationPlayState: 'paused' }}
@@ -73,7 +71,7 @@ const Hero = () => {
                 {letter}
               </span>
             ))}{' '}
-            <TitleTypingText />
+            <TitleTypingText shouldAnimationStart={isAnimationPlaying} />
           </Heading>
           <Button
             id="hero-button"

@@ -79,7 +79,7 @@ module.exports = {
         },
       }),
       animation: {
-        'text-blink': 'text-blink 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+        'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       },
     },
   },
