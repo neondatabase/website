@@ -40,6 +40,8 @@ const TitleTypingText = () => {
   const controls = useAnimation();
 
   const animate = useCallback(() => {
+    controls.set('hidden');
+
     controls.start('shown').then(() => {
       controls.start('hidden').then(() => {
         setActiveTitleWordIndex((currentATitleWordIndex) =>
@@ -52,8 +54,6 @@ const TitleTypingText = () => {
   }, [controls]);
 
   useEffect(() => {
-    controls.set('shown');
-
     controls.start('hidden').then(() => {
       setActiveTitleWordIndex((currentATitleWordIndex) => currentATitleWordIndex + 1);
       animate();
@@ -61,9 +61,14 @@ const TitleTypingText = () => {
   }, [controls, animate]);
 
   return (
-    <motion.span initial="hidden" animate={controls} variants={wrapperVariants}>
+    <motion.span initial="shown" animate={controls} variants={wrapperVariants}>
       {words[activeTitleWordIndex].split('').map((letter, index) => (
-        <motion.span className="!text-white" variants={wordVariants} key={index}>
+        <motion.span
+          className="animate-text-blink"
+          variants={wordVariants}
+          style={activeTitleWordIndex === 0 && { animationPlayState: 'paused' }}
+          key={index}
+        >
           {letter}
         </motion.span>
       ))}

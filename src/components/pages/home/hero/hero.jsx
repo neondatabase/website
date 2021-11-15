@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import React from 'react';
+import shuffle from 'lodash.shuffle';
+import React, { useEffect, useRef } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -9,7 +10,11 @@ import useLottie from 'hooks/use-lottie';
 import animationData from './data/lottie-data.json';
 import TitleTypingText from './title-typing-text';
 
+const title = 'Zenith is PostgreSQL that is /';
+
 const Hero = () => {
+  const titleRef = useRef(null);
+
   const { animationRef, isAnimationReady, animationVisibilityRef } = useLottie({
     lottieOptions: {
       animationData,
@@ -31,6 +36,22 @@ const Hero = () => {
     },
   });
 
+  useEffect(() => {
+    if (titleRef && isAnimationReady) {
+      const letters = titleRef.current.querySelectorAll('span');
+      const shuffledLetters = shuffle(letters);
+
+      let currentTimeout = 0;
+      shuffledLetters.forEach((letter) => {
+        setTimeout(() => {
+          letter.style.cssText = 'animation-play-state: running';
+        }, currentTimeout);
+
+        currentTimeout += 25;
+      });
+    }
+  }, [isAnimationReady]);
+
   return (
     <section className="bg-black pt-[322px] safe-paddings 3xl:pt-[243px] 2xl:pt-[207px] xl:pt-[193px] lg:pt-12 md:pt-6">
       <Container className="z-20 flex items-center justify-between lg:flex-col lg:justify-center">
@@ -41,8 +62,18 @@ const Hero = () => {
             tag="h1"
             size="xl"
             theme="white"
+            ref={titleRef}
           >
-            Zenith is PostgreSQL that is <span>/</span> <TitleTypingText />
+            {title.split('').map((letter, index) => (
+              <span
+                className="animate-text-blink"
+                style={{ animationPlayState: 'paused' }}
+                key={index}
+              >
+                {letter}
+              </span>
+            ))}{' '}
+            <TitleTypingText />
           </Heading>
           <Button
             id="hero-button"
