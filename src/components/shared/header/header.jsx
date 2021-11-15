@@ -33,7 +33,7 @@ const links = [
 ];
 
 const Header = ({ isMobileMenuOpen, onBurgerClick }) => (
-  <header className="absolute top-0 left-0 right-0 z-10 w-full safe-paddings lg:relative lg:bg-black">
+  <header className="absolute top-0 left-0 right-0 z-30 w-full safe-paddings lg:relative lg:bg-black">
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5">
       <Link className="hidden text-white xl:block" to="/">
         <span className="sr-only">Zenith</span>

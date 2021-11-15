@@ -35,7 +35,7 @@ const Lines2 = () => {
       ))}
 
       {shapes.map((side, index) => (
-        <div id={`lines-2-shape-${index + 1}`} className={`shape shape-${side}`} />
+        <div id={`lines-2-shape-${index + 1}`} className={`shape shape-${side}`} key={index} />
       ))}
 
       {circles.map((_, index) => (
@@ -47,6 +47,7 @@ const Lines2 = () => {
           id={`lines-2-circle-with-text-${index + 1}`}
           className="circle circle-with-text circle-with-text-right"
           data-text={text}
+          key={index}
         />
       ))}
 
