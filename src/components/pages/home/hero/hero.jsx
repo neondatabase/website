@@ -15,7 +15,7 @@ const title = 'Zenith is PostgreSQL that is /';
 const Hero = () => {
   const titleRef = useRef(null);
 
-  const { animationRef, isAnimationReady, animationVisibilityRef } = useLottie({
+  const { animationRef, isAnimationReady, isAnimationPlaying, animationVisibilityRef } = useLottie({
     lottieOptions: {
       animationData,
       rendererSettings: {
@@ -37,7 +37,7 @@ const Hero = () => {
   });
 
   useEffect(() => {
-    if (titleRef && isAnimationReady) {
+    if (titleRef && isAnimationPlaying) {
       const letters = titleRef.current.querySelectorAll('span');
       const shuffledLetters = shuffle(letters);
 
@@ -50,7 +50,7 @@ const Hero = () => {
         currentTimeout += 25;
       });
     }
-  }, [isAnimationReady]);
+  }, [isAnimationPlaying]);
 
   return (
     <section className="bg-black pt-[322px] safe-paddings 3xl:pt-[243px] 2xl:pt-[207px] xl:pt-[193px] lg:pt-12 md:pt-6">
