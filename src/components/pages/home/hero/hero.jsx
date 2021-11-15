@@ -26,7 +26,7 @@ const Hero = () => {
     events: {
       complete() {
         this.loop = true;
-        this.playSegments([150, 240], true);
+        this.playSegments([70, 130], true);
       },
     },
   });
