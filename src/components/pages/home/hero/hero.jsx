@@ -28,7 +28,9 @@ const Hero = () => {
     useInViewOptions: { triggerOnce: false, threshold: 0.6 },
     events: {
       complete() {
+        // eslint-disable-next-line react/no-this-in-sfc
         this.loop = true;
+        // eslint-disable-next-line react/no-this-in-sfc
         this.playSegments([70, 130], true);
       },
     },
@@ -42,10 +44,11 @@ const Hero = () => {
       let currentTimeout = 0;
       shuffledLetters.forEach((letter) => {
         setTimeout(() => {
+          // eslint-disable-next-line no-param-reassign
           letter.style.cssText = 'animation-play-state: running';
         }, currentTimeout);
 
-        currentTimeout += 20;
+        currentTimeout += 10;
       });
     }
   }, [isAnimationPlaying]);
