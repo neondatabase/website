@@ -17,7 +17,7 @@ const Scalability = () => {
         // eslint-disable-next-line react/no-this-in-sfc
         this.loop = true;
         // eslint-disable-next-line react/no-this-in-sfc
-        this.playSegments([70, 130], true);
+        this.playSegments([40, 80], true);
       },
     },
   });
