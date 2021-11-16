@@ -1,7 +1,9 @@
+import { motion } from 'framer-motion';
 import { StaticImage } from 'gatsby-plugin-image';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import BlinkingText from 'components/shared/blinking-text';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import useLottie from 'hooks/use-lottie';
@@ -12,29 +14,30 @@ import scalableAnimationData from './data/scalable-lottie-data.json';
 import PlayIcon from './images/play.inline.svg';
 
 const Advantages = () => {
-  const [animationVisibilityRef, isInView] = useInView({
-    threshold: [0.6, 0],
-  });
+  const [videoWrapperRef, isVideoWrapperInView] = useInView({ triggerOnce: true, threshold: 0.8 });
+  const [contentRef, isContentInView] = useInView({ threshold: 0.8 });
+  const [itemsRef, isItemsInView] = useInView({ triggerOnce: true, threshold: 0.8 });
+  const titleRef = useRef();
 
   const { animationRef: scalableAnimationRef } = useLottie({
     lottieOptions: {
       animationData: scalableAnimationData,
     },
-    isInView,
+    isInView: isItemsInView,
   });
 
   const { animationRef: costEfficientAnimationRef } = useLottie({
     lottieOptions: {
       animationData: costEfficientAnimationData,
     },
-    isInView,
+    isInView: isItemsInView,
   });
 
   const { animationRef: easyToUseAnimationRef } = useLottie({
     lottieOptions: {
       animationData: easyToUseAnimationData,
     },
-    isInView,
+    isInView: isItemsInView,
   });
 
   const items = [
@@ -67,14 +70,21 @@ const Advantages = () => {
         <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px] xl:space-x-[50px] lg:flex-col lg:items-start lg:space-x-0">
           <div
             id="advantages-video-wrapper"
-            className="relative max-w-[800px] 3xl:max-w-[680px] 2xl:max-w-[560px] xl:max-w-[510px] lg:max-w-full lg:mt-10"
+            className="relative max-w-[800px] rounded-md overflow-hidden 3xl:max-w-[680px] 2xl:max-w-[560px] xl:max-w-[510px] lg:max-w-full lg:mt-10"
+            ref={videoWrapperRef}
           >
-            <StaticImage
-              className="rounded"
-              src="../advantages/images/cover.jpg"
-              alt=""
-              aria-hidden
-            />
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={isVideoWrapperInView && { scale: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <StaticImage
+                className="rounded"
+                src="../advantages/images/cover.jpg"
+                alt=""
+                aria-hidden
+              />
+            </motion.div>
             <button
               className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 group"
               type="button"
@@ -85,15 +95,20 @@ const Advantages = () => {
               />
             </button>
           </div>
-          <div className="lg:order-first">
+          <div className="lg:order-first" ref={contentRef}>
             <Heading
               id="advantages-title"
               className="max-w-[490px] 2xl:max-w-[385px] xl:max-w-[300px] lg:max-w-[500px]"
               tag="h2"
               size="lg"
               theme="white"
+              ref={titleRef}
             >
-              Distributed Database, Made Simple
+              <BlinkingText
+                text="Distributed Database, Made Simple"
+                parentElement={titleRef.current}
+                shouldAnimationStart={isContentInView}
+              />
             </Heading>
             <p
               id="advantages-description"
@@ -106,7 +121,7 @@ const Advantages = () => {
         </div>
         <ul
           className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:gap-y-16 lg:mt-20 md:grid-cols-1"
-          ref={animationVisibilityRef}
+          ref={itemsRef}
         >
           {items.map(({ animationRef, title, description }, index) => (
             <li
