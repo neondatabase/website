@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import shuffle from 'lodash.shuffle';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
+import BlinkingText from 'components/shared/blinking-text';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
@@ -36,23 +36,6 @@ const Hero = () => {
     },
   });
 
-  useEffect(() => {
-    if (titleRef && isAnimationPlaying) {
-      const letters = titleRef.current.querySelectorAll('span');
-      const shuffledLetters = shuffle(letters);
-
-      let currentTimeout = 0;
-      shuffledLetters.forEach((letter) => {
-        setTimeout(() => {
-          // eslint-disable-next-line no-param-reassign
-          letter.style.cssText = 'animation-play-state: running';
-        }, currentTimeout);
-
-        currentTimeout += 10;
-      });
-    }
-  }, [isAnimationPlaying]);
-
   return (
     <section className="bg-black pt-[322px] safe-paddings 3xl:pt-[243px] 2xl:pt-[207px] xl:pt-[193px] lg:pt-12 md:pt-6">
       <Container className="z-20 flex items-center justify-between lg:flex-col lg:justify-center">
@@ -65,19 +48,24 @@ const Hero = () => {
             theme="white"
             ref={titleRef}
           >
-            {'Zenith is PostgreSQL that is /'.split('').map((letter, index) => (
-              <span
-                className="animate-text-blink"
-                style={{ animationPlayState: 'paused' }}
-                key={index}
-              >
-                {letter}
-              </span>
-            ))}{' '}
-            <TypingText
-              phrases={['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless']}
+            <BlinkingText
+              parentElement={titleRef.current}
               shouldAnimationStart={isAnimationPlaying}
-            />
+            >
+              {'Zenith is PostgreSQL that is /'.split('').map((letter, index) => (
+                <span
+                  className="animate-text-blink"
+                  style={{ animationPlayState: 'paused' }}
+                  key={index}
+                >
+                  {letter}
+                </span>
+              ))}{' '}
+              <TypingText
+                phrases={['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless']}
+                shouldAnimationStart={isAnimationPlaying}
+              />
+            </BlinkingText>
           </Heading>
           <Button
             id="hero-button"
