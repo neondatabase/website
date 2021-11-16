@@ -7,7 +7,7 @@ import Link from 'components/shared/link';
 
 const DataBranching = () => (
   <section className="mt-[270px] mb-48 safe-paddings 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20">
-    <Container>
+    <Container className="z-10">
       <div className="max-w-[600px] xl:max-w-[400px] lg:max-w-none">
         <Heading tag="h2" size="lg" theme="black">
           Data Branching
