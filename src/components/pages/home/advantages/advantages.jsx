@@ -74,9 +74,9 @@ const Advantages = () => {
             ref={videoWrapperRef}
           >
             <motion.div
-              initial={{ scale: 0 }}
-              animate={isVideoWrapperInView && { scale: 1 }}
-              transition={{ duration: 1 }}
+              initial={{ scale: 0.75, opacity: 0 }}
+              animate={isVideoWrapperInView && { scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
             >
               <StaticImage
                 className="rounded"
