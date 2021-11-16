@@ -2,8 +2,6 @@ import { motion, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 
-const words = ['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless'];
-
 const wrapperVariants = {
   hidden: {
     transition: {
@@ -35,8 +33,8 @@ const wordVariants = {
   },
 };
 
-const TitleTypingText = ({ shouldAnimationStart }) => {
-  const [activeTitleWordIndex, setActiveTitleWordIndex] = useState(0);
+const TypingText = ({ phrases, shouldAnimationStart }) => {
+  const [activePhraseIndex, setActivePhraseIndex] = useState(0);
 
   const controls = useAnimation();
 
@@ -45,19 +43,19 @@ const TitleTypingText = ({ shouldAnimationStart }) => {
 
     controls.start('shown').then(() => {
       controls.start('hidden').then(() => {
-        setActiveTitleWordIndex((currentATitleWordIndex) =>
-          currentATitleWordIndex === words.length - 1 ? 0 : currentATitleWordIndex + 1
+        setActivePhraseIndex((currentActivePhrase) =>
+          currentActivePhrase === phrases.length - 1 ? 0 : currentActivePhrase + 1
         );
 
         animate();
       });
     });
-  }, [controls]);
+  }, [phrases, controls]);
 
   useEffect(() => {
     if (shouldAnimationStart) {
       controls.start('hidden').then(() => {
-        setActiveTitleWordIndex((currentATitleWordIndex) => currentATitleWordIndex + 1);
+        setActivePhraseIndex((currentActivePhrase) => currentActivePhrase + 1);
         animate();
       });
     }
@@ -65,11 +63,11 @@ const TitleTypingText = ({ shouldAnimationStart }) => {
 
   return (
     <motion.span initial="shown" animate={controls} variants={wrapperVariants}>
-      {words[activeTitleWordIndex].split('').map((letter, index) => (
+      {phrases[activePhraseIndex].split('').map((letter, index) => (
         <motion.span
           className="animate-text-blink"
           variants={wordVariants}
-          style={activeTitleWordIndex === 0 && { animationPlayState: 'paused' }}
+          style={activePhraseIndex === 0 && { animationPlayState: 'paused' }}
           key={index}
         >
           {letter}
@@ -79,12 +77,13 @@ const TitleTypingText = ({ shouldAnimationStart }) => {
   );
 };
 
-TitleTypingText.propTypes = {
+TypingText.propTypes = {
+  phrases: PropTypes.arrayOf(PropTypes.string).isRequired,
   shouldAnimationStart: PropTypes.bool,
 };
 
-TitleTypingText.defaultProps = {
+TypingText.defaultProps = {
   shouldAnimationStart: false,
 };
 
-export default TitleTypingText;
+export default TypingText;

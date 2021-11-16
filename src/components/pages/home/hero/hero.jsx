@@ -5,10 +5,10 @@ import React, { useEffect, useRef } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import TypingText from 'components/shared/typing-text';
 import useLottie from 'hooks/use-lottie';
 
 import animationData from './data/lottie-data.json';
-import TitleTypingText from './title-typing-text';
 
 const Hero = () => {
   const titleRef = useRef(null);
@@ -74,7 +74,10 @@ const Hero = () => {
                 {letter}
               </span>
             ))}{' '}
-            <TitleTypingText shouldAnimationStart={isAnimationPlaying} />
+            <TypingText
+              phrases={['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless']}
+              shouldAnimationStart={isAnimationPlaying}
+            />
           </Heading>
           <Button
             id="hero-button"
