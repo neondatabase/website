@@ -5,17 +5,17 @@ import React, { useEffect } from 'react';
 import Button from 'components/shared/button';
 import Link from 'components/shared/link';
 
-const ANIMATION_EASE = [0.25, 0.1, 0, 1];
 const ANIMATION_DURATION = 0.5;
 
 const variants = {
   from: {
-    zIndex: -1,
     opacity: 0,
     translateY: 30,
     transition: {
-      ease: ANIMATION_EASE,
       duration: ANIMATION_DURATION,
+    },
+    transitionEnd: {
+      zIndex: -1,
     },
   },
   to: {
@@ -23,7 +23,6 @@ const variants = {
     opacity: 1,
     translateY: 0,
     transition: {
-      ease: ANIMATION_EASE,
       duration: ANIMATION_DURATION,
     },
   },
@@ -65,7 +64,7 @@ const MobileMenu = ({ isOpen }) => {
 
   return (
     <motion.nav
-      className="absolute hidden px-8 pt-4 bg-white rounded-md top-20 right-8 left-8 pb-7 md:right-4 md:left-4 lg:block"
+      className="absolute z-[-1] hidden px-8 pt-4 bg-white rounded-md top-20 right-8 left-8 pb-7 md:right-4 md:left-4 lg:block"
       initial="from"
       animate={controls}
       variants={variants}

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const DURATION = 0.2;
+const ANIMATION_DURATION = 0.2;
 
 const Burger = ({ className: additionalClassName, isToggled, onClick }) => (
   <button
@@ -20,10 +20,14 @@ const Burger = ({ className: additionalClassName, isToggled, onClick }) => (
         isToggled
           ? {
               top: 17,
-              transition: { duration: DURATION },
+              transition: { duration: ANIMATION_DURATION },
               transitionEnd: { display: 'none' },
             }
-          : { top: 11, display: 'block', transition: { duration: DURATION, delay: DURATION } }
+          : {
+              top: 11,
+              display: 'block',
+              transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
+            }
       }
     />
     <motion.span
@@ -33,8 +37,8 @@ const Burger = ({ className: additionalClassName, isToggled, onClick }) => (
       }}
       animate={
         isToggled
-          ? { display: 'none', transition: { delay: DURATION } }
-          : { display: 'block', transition: { delay: DURATION } }
+          ? { display: 'none', transition: { delay: ANIMATION_DURATION } }
+          : { display: 'block', transition: { delay: ANIMATION_DURATION } }
       }
     />
     <motion.span
@@ -46,12 +50,16 @@ const Burger = ({ className: additionalClassName, isToggled, onClick }) => (
         isToggled
           ? {
               bottom: 17,
-              transition: { duration: DURATION },
+              transition: { duration: ANIMATION_DURATION },
               transitionEnd: {
                 display: 'none',
               },
             }
-          : { bottom: 11, display: 'block', transition: { duration: DURATION, delay: DURATION } }
+          : {
+              bottom: 11,
+              display: 'block',
+              transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
+            }
       }
     />
     <motion.span
@@ -65,11 +73,11 @@ const Burger = ({ className: additionalClassName, isToggled, onClick }) => (
           ? {
               display: 'block',
               rotate: '45deg',
-              transition: { duration: DURATION, delay: DURATION },
+              transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
             }
           : {
               rotate: '0deg',
-              transition: { duration: DURATION },
+              transition: { duration: ANIMATION_DURATION },
               transitionEnd: { display: 'none' },
             }
       }
@@ -85,11 +93,11 @@ const Burger = ({ className: additionalClassName, isToggled, onClick }) => (
           ? {
               display: 'block',
               rotate: '-45deg',
-              transition: { duration: DURATION, delay: DURATION },
+              transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
             }
           : {
               rotate: '0deg',
-              transition: { duration: DURATION },
+              transition: { duration: ANIMATION_DURATION },
               transitionEnd: { display: 'none' },
             }
       }
