@@ -50,7 +50,7 @@ const Scalability = () => {
         >
           <div
             className={clsx(
-              'opacity-0 transition-opacity ease-linear duration-500',
+              'w-full h-full opacity-0 transition-opacity ease-linear duration-500',
               isAnimationReady && 'opacity-100'
             )}
             ref={animationRef}
