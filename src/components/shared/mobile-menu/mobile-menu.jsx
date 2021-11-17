@@ -10,6 +10,7 @@ const ANIMATION_DURATION = 0.5;
 
 const variants = {
   from: {
+    zIndex: -1,
     opacity: 0,
     translateY: 30,
     transition: {
@@ -18,6 +19,7 @@ const variants = {
     },
   },
   to: {
+    zIndex: 999,
     opacity: 1,
     translateY: 0,
     transition: {
@@ -63,7 +65,7 @@ const MobileMenu = ({ isOpen }) => {
 
   return (
     <motion.nav
-      className="hidden absolute z-[999] top-20 right-8 left-8 bg-white rounded-md pt-4 px-8 pb-7 md:right-4 md:left-4 lg:block"
+      className="absolute hidden px-8 pt-4 bg-white rounded-md top-20 right-8 left-8 pb-7 md:right-4 md:left-4 lg:block"
       initial="from"
       animate={controls}
       variants={variants}
