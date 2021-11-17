@@ -22,18 +22,6 @@ const pVariants = {
   },
 };
 
-const inputInnerVariants = {
-  from: {
-    width: 0,
-  },
-  to: {
-    width: '100%',
-    transition: {
-      duration: 1,
-    },
-  },
-};
-
 const inputPanelVariants = {
   from: {
     backgroundColor: '#00e699',
@@ -98,38 +86,37 @@ const CTA = () => {
         <motion.p className="mt-5 text-white t-3xl 2xl:mt-4" variants={pVariants}>
           Just use a single command from CLI to create new Zenith database
         </motion.p>
-        <div className="max-w-[860px] mt-8 mx-auto 3xl:max-w-[716px] 2xl:max-w-[592px] 2xl:mt-7 xl:max-w-[498px] xl:mt-6 lg:max-w-[584px]">
-          <motion.div className="relative mx-auto" id="cta-input" variants={inputInnerVariants}>
-            <motion.div
-              id="cta-input-background"
-              className="absolute -bottom-3.5 -left-3.5 w-full h-full rounded-full 2xl:-bottom-2.5 2xl:-left-2.5 xl:-bottom-2 xl:-left-2 md:w-[calc(100%+8px)]"
-              variants={inputPanelVariants}
-              aria-hidden
-            />
-            <div className="overflow-hidden">
-              <div className="relative flex items-center justify-between p-2 bg-white border-4 border-black rounded-full pl-9 2xl:p-1.5 2xl:pl-7 xl:p-1 xl:pl-6 md:py-[22px] md:px-0 md:justify-center">
-                <span className="font-mono t-3xl whitespace-nowrap !leading-none">
-                  $ psql -h lb.zenith.tech
-                </span>
-                <Button
-                  className="relative md:hidden"
-                  size="sm"
-                  theme="secondary"
-                  onClick={handleButtonClick}
-                >
-                  <span className={clsx({ 'opacity-0': isCopied })}>Copy</span>
-                  <span
-                    className={clsx(
-                      'absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 opacity-0',
-                      { 'opacity-100': isCopied }
-                    )}
-                  >
-                    Copied!
-                  </span>
-                </Button>
-              </div>
-            </div>
-          </motion.div>
+        <div
+          id="cta-input"
+          className="relative max-w-[834px] mt-8 mx-auto 3xl:max-w-[738px] 2xl:max-w-[610px] 2xl:mt-7 xl:max-w-[490px] xl:mt-6 lg:max-w-[584px]"
+        >
+          <motion.div
+            id="cta-input-background"
+            className="absolute -bottom-3.5 -left-3.5 w-full h-full rounded-full 2xl:-bottom-2.5 2xl:-left-2.5 xl:-bottom-2 xl:-left-2 md:w-[calc(100%+8px)]"
+            variants={inputPanelVariants}
+            aria-hidden
+          />
+          <div className="relative flex items-center justify-between p-2 bg-white border-4 border-black rounded-full pl-9 2xl:p-1.5 2xl:pl-7 xl:p-1 xl:pl-6 md:py-[22px] md:px-0 md:justify-center">
+            <span className="font-mono t-3xl whitespace-nowrap !leading-none">
+              $ psql -h lb.zenith.tech
+            </span>
+            <Button
+              className="relative md:hidden"
+              size="sm"
+              theme="secondary"
+              onClick={handleButtonClick}
+            >
+              <span className={clsx({ 'opacity-0': isCopied })}>Copy</span>
+              <span
+                className={clsx(
+                  'absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 opacity-0',
+                  { 'opacity-100': isCopied }
+                )}
+              >
+                Copied!
+              </span>
+            </Button>
+          </div>
         </div>
         <motion.p
           id="cta-bottom-text"

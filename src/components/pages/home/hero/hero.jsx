@@ -25,7 +25,7 @@ const Hero = () => {
         },
       },
     },
-    useInViewOptions: { triggerOnce: false, threshold: 0.8 },
+    useInViewOptions: { triggerOnce: false, threshold: [0.8, 0] },
     events: {
       complete() {
         // eslint-disable-next-line react/no-this-in-sfc
