@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import React, { useRef } from 'react';
 
 import BlinkingText from 'components/shared/blinking-text';
@@ -13,7 +12,7 @@ import animationData from './data/lottie-data.json';
 const Hero = () => {
   const titleRef = useRef(null);
 
-  const { animationRef, isAnimationReady, isAnimationPlaying, animationVisibilityRef } = useLottie({
+  const { animationRef, isAnimationPlaying, animationVisibilityRef } = useLottie({
     lottieOptions: {
       animationData,
       rendererSettings: {
@@ -78,18 +77,11 @@ const Hero = () => {
           </Button>
         </div>
         <div
-          className="!absolute top-[-165px] -right-1 w-[820px] 3xl:w-[677px] 3xl:top-[-122px] 3xl:right-[-17px] 2xl:w-[564px] 2xl:top-[-102px] 2xl:right-[-14px] xl:w-[492px] xl:top-[-88px] xl:right-[-132px] lg:!relative lg:top-0 lg:right-0 lg:w-[451px] lg:-mr-2.5 lg:mt-10 sm:w-[391px] sm:mt-8 xs:w-[294px]"
+          className="!absolute top-[-165px] -right-1 w-[820px] h-[830px] 3xl:w-[677px] 3xl:h-[685.25px] 3xl:top-[-122px] 3xl:right-[-17px] 2xl:w-[564px] 2xl:h-[570.88px] 2xl:top-[-102px] 2xl:right-[-14px] xl:w-[492px] xl:h-[498px] xl:top-[-88px] xl:right-[-132px] lg:!relative lg:top-0 lg:right-0 lg:w-[451px] lg:h-[456.5px] lg:-mr-2.5 lg:mt-10 sm:w-[391px] sm:h-[395.77px] sm:mt-8 xs:w-[294px] xs:h-[297.58px]"
           ref={animationVisibilityRef}
           aria-hidden
         >
-          <div className="pt-[101.22%]" />
-          <div
-            className={clsx(
-              'absolute top-0 right-0 z-10 opacity-0 transition-opacity ease-linear duration-500',
-              isAnimationReady && 'opacity-100'
-            )}
-            ref={animationRef}
-          />
+          <div className="relative z-10" ref={animationRef} />
           <div className="absolute top-1/2 left-1/2 w-[888px] h-[888px] border-2 border-gray-1 rounded-full translate-x-[-51%] translate-y-[-51.6%] 3xl:w-[716px] 3xl:h-[716px] 2xl:w-[600px] 2xl:h-[600px] xl:w-[520px] xl:h-[520px] lg:w-[480px] lg:h-[480px] sm:w-[420px] sm:h-[420px] xs:hidden" />
           <div className="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] border-2 border-gray-1 rounded-full translate-x-[-51%] translate-y-[-51.6%] 3xl:w-[796px] 3xl:h-[796px] 2xl:w-[670px] 2xl:h-[670px] xl:w-[590px] xl:h-[590px] lg:w-[540px] lg:h-[540px] sm:w-[470px] sm:h-[470px] xs:hidden" />
           <div className="absolute top-1/2 left-1/2 w-[1160px] h-[1160px] border-2 border-gray-1 rounded-full translate-x-[-51%] translate-y-[-51.6%] 3xl:w-[924px] 3xl:h-[924px]  2xl:w-[780px] 2xl:h-[780px] xl:w-[700px] xl:h-[700px] lg:w-[630px] lg:h-[630px] sm:w-[520px] sm:h-[520px] xs:hidden" />
