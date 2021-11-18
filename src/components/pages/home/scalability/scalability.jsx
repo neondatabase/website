@@ -44,13 +44,13 @@ const Scalability = () => {
           </Link>
         </div>
         <div
-          className="max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:max-w-[475px] lg:-ml-3 lg:mt-[46px] md:-ml-2"
+          className="w-full max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:max-w-[475px] lg:-ml-3 lg:mt-[46px] md:-ml-2"
           ref={animationVisibilityRef}
           aria-hidden
         >
           <div
             className={clsx(
-              'w-full h-full opacity-0 transition-opacity ease-linear duration-500',
+              'opacity-0 transition-opacity ease-linear duration-500',
               isAnimationReady && 'opacity-100'
             )}
             ref={animationRef}

@@ -40,13 +40,13 @@ const Storage = () => {
           </Link>
         </div>
         <div
-          className="order-first max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:order-last lg:max-w-[475px] lg:mt-[46px]"
+          className="order-first w-full max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:order-last lg:max-w-[475px] lg:mt-[46px]"
           ref={animationVisibilityRef}
           aria-hidden
         >
           <div
             className={clsx(
-              'w-full h-full opacity-0 transition-opacity ease-linear duration-500',
+              'opacity-0 transition-opacity ease-linear duration-500',
               isAnimationReady && 'opacity-100'
             )}
             ref={animationRef}
