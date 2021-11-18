@@ -50,7 +50,8 @@ const TypingText = ({ phrases, shouldAnimationStart }) => {
         animate();
       });
     });
-  }, [phrases, controls]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (shouldAnimationStart) {
@@ -59,7 +60,8 @@ const TypingText = ({ phrases, shouldAnimationStart }) => {
         animate();
       });
     }
-  }, [controls, animate, shouldAnimationStart]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shouldAnimationStart]);
 
   return (
     <motion.span initial="shown" animate={controls} variants={wrapperVariants}>

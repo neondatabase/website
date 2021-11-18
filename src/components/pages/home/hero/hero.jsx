@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import BlinkingText from 'components/shared/blinking-text';
 import Button from 'components/shared/button';
@@ -10,7 +11,7 @@ import useLottie from 'hooks/use-lottie';
 import animationData from './data/lottie-data.json';
 
 const Hero = () => {
-  const titleRef = useRef(null);
+  const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true });
 
   const { animationRef, isAnimationPlaying, animationVisibilityRef } = useLottie({
     lottieOptions: {
@@ -48,7 +49,7 @@ const Hero = () => {
             ref={titleRef}
           >
             <BlinkingText
-              parentElement={titleRef.current}
+              parentElement={titleEntry?.target}
               shouldAnimationStart={isAnimationPlaying}
             >
               {'Zenith is PostgreSQL that is /'.split('').map((letter, index) => (
@@ -62,7 +63,7 @@ const Hero = () => {
               ))}{' '}
               <TypingText
                 phrases={['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless']}
-                shouldAnimationStart={isAnimationPlaying}
+                shouldAnimationStart={isTitleInView}
               />
             </BlinkingText>
           </Heading>
