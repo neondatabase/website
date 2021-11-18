@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import Button from 'components/shared/button';
 import Link from 'components/shared/link';
 
-const ANIMATION_DURATION = 0.5;
+const ANIMATION_DURATION = 0.2;
 
 const variants = {
   from: {
