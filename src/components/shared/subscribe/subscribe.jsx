@@ -1,11 +1,12 @@
-import { StaticImage } from 'gatsby-plugin-image';
 import React, { useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import useLottie from 'hooks/use-lottie';
 
+import animationData from './data/lottie-data.json';
 import DiscordIcon from './images/discord.inline.svg';
 import GithubIcon from './images/github.inline.svg';
 import SendIcon from './images/send.inline.svg';
@@ -29,6 +30,14 @@ const links = [
 const Subscribe = () => {
   const [email, setEmail] = useState('');
 
+  const { animationRef, animationVisibilityRef } = useLottie({
+    lottieOptions: {
+      animationData,
+      loop: true,
+    },
+    useInViewOptions: { threshold: [0.8, 0] },
+  });
+
   const handleInputChange = (event) => setEmail(event.currentTarget.value.trim());
 
   const handleSubmit = (event) => {
@@ -47,13 +56,13 @@ const Subscribe = () => {
   return (
     <section className="my-48 safe-paddings 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20">
       <Container className="flex items-center justify-between lg:block">
-        <StaticImage
+        <div
           className="max-w-[800px] 3xl:max-w-[660px] 2xl:max-w-[550px] xl:max-w-[430px] lg:!hidden"
-          src="../subscribe/images/illustration.jpg"
-          alt=""
-          loading="lazy"
+          ref={animationVisibilityRef}
           aria-hidden
-        />
+        >
+          <div ref={animationRef} />
+        </div>
         <div className="max-w-[710px] 3xl:max-w-[590px] 2xl:max-w-[488px] xl:max-w-[456px] lg:max-w-none">
           <Heading className="lg:text-center" tag="h2" size="lg" theme="black">
             Subscribe to&nbsp;Newsletter
