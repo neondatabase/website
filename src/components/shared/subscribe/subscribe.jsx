@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, { useState } from 'react';
 
 import Button from 'components/shared/button';
@@ -30,7 +31,7 @@ const links = [
 const Subscribe = () => {
   const [email, setEmail] = useState('');
 
-  const { animationRef, animationVisibilityRef } = useLottie({
+  const { animationRef, isAnimationReady, animationVisibilityRef } = useLottie({
     lottieOptions: {
       animationData,
       loop: true,
@@ -57,11 +58,21 @@ const Subscribe = () => {
     <section className="my-48 safe-paddings 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20">
       <Container className="flex items-center justify-between lg:block">
         <div
-          className="max-w-[800px] 3xl:max-w-[660px] 2xl:max-w-[550px] xl:max-w-[430px] lg:!hidden"
+          className="relative max-w-[800px] 3xl:max-w-[660px] 2xl:max-w-[550px] xl:max-w-[430px] lg:!hidden"
           ref={animationVisibilityRef}
           aria-hidden
         >
-          <div ref={animationRef} />
+          <img
+            src="data:image/svg+xml;charset=utf-8,%3Csvg width='800' height='710' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E"
+            alt=""
+          />
+          <div
+            className={clsx(
+              'absolute top-0 right-0 w-full opacity-0 transition-opacity ease-linear duration-500',
+              isAnimationReady && 'opacity-100'
+            )}
+            ref={animationRef}
+          />
         </div>
         <div className="max-w-[710px] 3xl:max-w-[590px] 2xl:max-w-[488px] xl:max-w-[456px] lg:max-w-none">
           <Heading className="lg:text-center" tag="h2" size="lg" theme="black">

@@ -83,7 +83,7 @@ const Hero = () => {
           aria-hidden
         >
           <img
-            src="data:image/svg+xml;charset=utf-8,%3Csvg height='830' width='820' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E"
+            src="data:image/svg+xml;charset=utf-8,%3Csvg width='820' height='830' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E"
             alt=""
             aria-hidden
           />

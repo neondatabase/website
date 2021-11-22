@@ -14,7 +14,10 @@ import scalableAnimationData from './data/scalable-lottie-data.json';
 import PlayIcon from './images/play.inline.svg';
 
 const Advantages = () => {
-  const [videoWrapperRef, isVideoWrapperInView] = useInView({ triggerOnce: true, threshold: 0.8 });
+  const [videoWrapperRef, isVideoWrapperInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.8,
+  });
   const [contentRef, isContentInView] = useInView({ threshold: 0.8 });
   const [itemsRef, isItemsInView] = useInView({ triggerOnce: true, threshold: 0.8 });
   const titleRef = useRef();
