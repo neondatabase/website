@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import React from 'react';
-import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
@@ -15,69 +14,89 @@ import openSourceAnimationData from './data/open-source-lottie-data.json';
 import payAsYouGoAnimationData from './data/pay-as-you-go-lottie-data.json';
 
 const Features = () => {
-  const [itemsRef, isItemsInView] = useInView({ triggerOnce: true, threshold: 0.3 });
-
-  const { animationRef: payAsYouGoAnimationRef } = useLottie({
+  const {
+    animationRef: payAsYouGoAnimationRef,
+    animationVisibilityRef: payAsYouGoAnimationVisibilityRef,
+  } = useLottie({
     lottieOptions: {
       animationData: payAsYouGoAnimationData,
     },
-    isInView: isItemsInView,
+    useInViewOptions: { threshold: 0.5 },
   });
 
-  const { animationRef: highAvailabilityAnimationRef } = useLottie({
+  const {
+    animationRef: highAvailabilityAnimationRef,
+    animationVisibilityRef: highAvailabilityAnimationVisibilityRef,
+  } = useLottie({
     lottieOptions: {
       animationData: highAvailabilityAnimationData,
     },
-    isInView: isItemsInView,
+    useInViewOptions: { threshold: 0.5 },
   });
 
-  const { animationRef: autoBackupAnimationRef } = useLottie({
+  const {
+    animationRef: autoBackupAnimationRef,
+    animationVisibilityRef: autoBackupAnimationVisibilityRef,
+  } = useLottie({
     lottieOptions: {
       animationData: autoBackupAnimationData,
     },
-    isInView: isItemsInView,
+    useInViewOptions: { threshold: 0.5 },
   });
 
-  const { animationRef: autoScalingAnimationRef } = useLottie({
+  const {
+    animationRef: autoScalingAnimationRef,
+    animationVisibilityRef: autoScalingAnimationVisibilityRef,
+  } = useLottie({
     lottieOptions: {
       animationData: autoScalingAnimationData,
     },
-    isInView: isItemsInView,
+    useInViewOptions: { threshold: 0.5 },
   });
 
-  const { animationRef: edgeDeploymentAnimationRef } = useLottie({
+  const {
+    animationRef: edgeDeploymentAnimationRef,
+    animationVisibilityRef: edgeDeploymentAnimationVisibilityRef,
+  } = useLottie({
     lottieOptions: {
       animationData: edgeDeploymentAnimationData,
     },
-    isInView: isItemsInView,
+    useInViewOptions: { threshold: 0.5 },
   });
 
-  const { animationRef: openSourceAnimationRef } = useLottie({
+  const {
+    animationRef: openSourceAnimationRef,
+    animationVisibilityRef: openSourceAnimationVisibilityRef,
+  } = useLottie({
     lottieOptions: {
       animationData: openSourceAnimationData,
     },
-    isInView: isItemsInView,
+    useInViewOptions: { threshold: 0.5 },
   });
 
   const items = [
     {
+      animationVisibilityRef: payAsYouGoAnimationVisibilityRef,
       animationRef: payAsYouGoAnimationRef,
       title: 'Pay as You Go',
       description:
         'Being serverless allows using of resources on-demand, which significantly cuts the costs and brings pay as you go solution.',
     },
     {
+      animationVisibilityRef: highAvailabilityAnimationVisibilityRef,
       animationRef: highAvailabilityAnimationRef,
       title: 'High Availability',
       description: `Zenith's architecture guarantees high availability even under peak load and 99.9999% uptime for Cloud users.`,
     },
     {
+      animationVisibilityRef: autoBackupAnimationVisibilityRef,
       animationRef: autoBackupAnimationRef,
       title: 'Auto-Backup',
       description:
         'Cost efficient incremental auto backup functionality keeps your database save 24/7.',
     },
     {
+      animationVisibilityRef: autoScalingAnimationVisibilityRef,
       animationRef: autoScalingAnimationRef,
       title: 'Auto Scaling',
       description:
@@ -88,6 +107,7 @@ const Features = () => {
       },
     },
     {
+      animationVisibilityRef: edgeDeploymentAnimationVisibilityRef,
       animationRef: edgeDeploymentAnimationRef,
       title: 'Edge Deployment',
       description:
@@ -98,6 +118,7 @@ const Features = () => {
       },
     },
     {
+      animationVisibilityRef: openSourceAnimationVisibilityRef,
       animationRef: openSourceAnimationRef,
       title: 'Open Source',
       description: (
@@ -131,16 +152,13 @@ const Features = () => {
           The way Zenith extends PostgreSQL brings many essential features needed for modern
           projects development.
         </p>
-        <ul
-          className="grid grid-cols-12 mt-[92px] grid-gap gap-y-[92px] 2xl:mt-[76px] 2xl:gap-y-[76px] xl:mt-16 xl:gap-y-16 md:grid-cols-1"
-          ref={itemsRef}
-        >
-          {items.map(({ animationRef, title, description, tag }, index) => (
+        <ul className="grid grid-cols-12 mt-[92px] grid-gap gap-y-[92px] 2xl:mt-[76px] 2xl:gap-y-[76px] xl:mt-16 xl:gap-y-16 md:grid-cols-1">
+          {items.map(({ animationVisibilityRef, animationRef, title, description, tag }, index) => (
             <li
               className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[261px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
               key={index}
             >
-              <div className="flex items-end space-x-4 xl:space-x-3.5">
+              <div className="flex items-end space-x-4 xl:space-x-3.5" ref={animationVisibilityRef}>
                 <div
                   id={`features-item-${index + 1}-icon`}
                   className="w-24 h-24 2xl:w-20 2xl:h-20 xl:w-[72px] xl:h-[72px] lg:w-16 lg:h-16"

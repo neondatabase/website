@@ -44,10 +44,7 @@ const CTA = () => {
 
   const controls = useAnimation();
 
-  const [animationVisibilityRef, isInView] = useInView({
-    threshold: 0.8,
-    triggerOnce: true,
-  });
+  const [animationVisibilityRef, isInView] = useInView({ triggerOnce: true, threshold: 0.5 });
 
   const handleButtonClick = () => {
     if (!isCopied) {

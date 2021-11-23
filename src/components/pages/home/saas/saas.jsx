@@ -14,7 +14,7 @@ const SaaS = () => {
     lottieOptions: {
       animationData,
     },
-    useInViewOptions: { threshold: 0.8 },
+    useInViewOptions: { threshold: 0.5 },
   });
 
   return (

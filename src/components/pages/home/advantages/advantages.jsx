@@ -14,49 +14,57 @@ import scalableAnimationData from './data/scalable-lottie-data.json';
 import PlayIcon from './images/play.inline.svg';
 
 const Advantages = () => {
-  const [videoWrapperRef, isVideoWrapperInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.8,
-  });
-  const [contentRef, isContentInView] = useInView({ threshold: 0.8 });
-  const [itemsRef, isItemsInView] = useInView({ triggerOnce: true, threshold: 0.8 });
+  const [videoWrapperRef, isVideoWrapperInView] = useInView({ triggerOnce: true, threshold: 0.5 });
+  const [contentRef, isContentInView] = useInView({ triggerOnce: true, threshold: 0.5 });
   const titleRef = useRef();
 
-  const { animationRef: scalableAnimationRef } = useLottie({
+  const {
+    animationRef: scalableAnimationRef,
+    animationVisibilityRef: scalableAnimationVisibilityRef,
+  } = useLottie({
     lottieOptions: {
       animationData: scalableAnimationData,
     },
-    isInView: isItemsInView,
+    useInViewOptions: { threshold: 0.5 },
   });
 
-  const { animationRef: costEfficientAnimationRef } = useLottie({
+  const {
+    animationRef: costEfficientAnimationRef,
+    animationVisibilityRef: costEfficientAnimationVisibilityRef,
+  } = useLottie({
     lottieOptions: {
       animationData: costEfficientAnimationData,
     },
-    isInView: isItemsInView,
+    useInViewOptions: { threshold: 0.5 },
   });
 
-  const { animationRef: easyToUseAnimationRef } = useLottie({
+  const {
+    animationRef: easyToUseAnimationRef,
+    animationVisibilityRef: easyToUseAnimationVisibilityRef,
+  } = useLottie({
     lottieOptions: {
       animationData: easyToUseAnimationData,
     },
-    isInView: isItemsInView,
+    useInViewOptions: { threshold: 0.5 },
   });
 
   const items = [
     {
+      animationVisibilityRef: scalableAnimationVisibilityRef,
       animationRef: scalableAnimationRef,
       title: 'Scalable',
       description:
         'Separation of storage and compute. allows Zenith reconfigure amount of the compute power on the fly.',
     },
     {
+      animationVisibilityRef: costEfficientAnimationVisibilityRef,
       animationRef: costEfficientAnimationRef,
       title: 'Cost Efficient',
       description:
         'Being serverless allows using of resources on-demand, which significantly cuts the costs.',
     },
     {
+      animationVisibilityRef: easyToUseAnimationVisibilityRef,
       animationRef: easyToUseAnimationRef,
       title: 'Easy to Use',
       description:
@@ -122,14 +130,12 @@ const Advantages = () => {
             </p>
           </div>
         </div>
-        <ul
-          className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:gap-y-16 lg:mt-20 md:grid-cols-1"
-          ref={itemsRef}
-        >
-          {items.map(({ animationRef, title, description }, index) => (
+        <ul className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:gap-y-16 lg:mt-20 md:grid-cols-1">
+          {items.map(({ animationVisibilityRef, animationRef, title, description }, index) => (
             <li
               className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
               key={index}
+              ref={animationVisibilityRef}
             >
               <div
                 id={`advantages-item-${index + 1}-icon`}

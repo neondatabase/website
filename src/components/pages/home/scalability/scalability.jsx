@@ -11,7 +11,7 @@ import animationData from './data/lottie-data.json';
 const Scalability = () => {
   const { animationRef, isAnimationReady, animationVisibilityRef } = useLottie({
     lottieOptions: { animationData },
-    useInViewOptions: { threshold: 0.6 },
+    useInViewOptions: { threshold: 0.5 },
   });
 
   return (

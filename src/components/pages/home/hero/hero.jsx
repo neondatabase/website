@@ -13,7 +13,7 @@ import animationData from './data/lottie-data.json';
 const titlePhrases = ['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless'];
 
 const Hero = () => {
-  const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true });
+  const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true, threshold: 0.5 });
 
   const { animationRef, isAnimationPlaying, animationVisibilityRef } = useLottie({
     lottieOptions: {
@@ -27,7 +27,7 @@ const Hero = () => {
         },
       },
     },
-    useInViewOptions: { threshold: 0.8 },
+    useInViewOptions: { threshold: 0.5 },
   });
 
   const titleContent = (
