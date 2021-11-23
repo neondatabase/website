@@ -19,8 +19,10 @@ const Advantages = () => {
   const titleRef = useRef();
 
   const {
-    animationRef: scalableAnimationRef,
+    isAnimationPlaying: scalableIsAnimationPlaying,
     animationVisibilityRef: scalableAnimationVisibilityRef,
+    animationRef: scalableAnimationRef,
+    animationEntry: scalableAnimationEntry,
   } = useLottie({
     lottieOptions: {
       animationData: scalableAnimationData,
@@ -29,8 +31,10 @@ const Advantages = () => {
   });
 
   const {
-    animationRef: costEfficientAnimationRef,
+    isAnimationPlaying: costEfficientIsAnimationPlaying,
     animationVisibilityRef: costEfficientAnimationVisibilityRef,
+    animationRef: costEfficientAnimationRef,
+    animationEntry: costEfficientAnimationEntry,
   } = useLottie({
     lottieOptions: {
       animationData: costEfficientAnimationData,
@@ -39,8 +43,10 @@ const Advantages = () => {
   });
 
   const {
-    animationRef: easyToUseAnimationRef,
+    isAnimationPlaying: easyToUseIsAnimationPlaying,
     animationVisibilityRef: easyToUseAnimationVisibilityRef,
+    animationRef: easyToUseAnimationRef,
+    animationEntry: easyToUseAnimationEntry,
   } = useLottie({
     lottieOptions: {
       animationData: easyToUseAnimationData,
@@ -50,22 +56,28 @@ const Advantages = () => {
 
   const items = [
     {
+      isAnimationPlaying: scalableIsAnimationPlaying,
       animationVisibilityRef: scalableAnimationVisibilityRef,
       animationRef: scalableAnimationRef,
+      animationEntry: scalableAnimationEntry,
       title: 'Scalable',
       description:
         'Separation of storage and compute. allows Zenith reconfigure amount of the compute power on the fly.',
     },
     {
+      isAnimationPlaying: costEfficientIsAnimationPlaying,
       animationVisibilityRef: costEfficientAnimationVisibilityRef,
       animationRef: costEfficientAnimationRef,
+      animationEntry: costEfficientAnimationEntry,
       title: 'Cost Efficient',
       description:
         'Being serverless allows using of resources on-demand, which significantly cuts the costs.',
     },
     {
+      isAnimationPlaying: easyToUseIsAnimationPlaying,
       animationVisibilityRef: easyToUseAnimationVisibilityRef,
       animationRef: easyToUseAnimationRef,
+      animationEntry: easyToUseAnimationEntry,
       title: 'Easy to Use',
       description:
         'No complex onboarding needed. Use a single CLI command to create a new Zenith database.',
@@ -131,35 +143,51 @@ const Advantages = () => {
           </div>
         </div>
         <ul className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:gap-y-16 lg:mt-20 md:grid-cols-1">
-          {items.map(({ animationVisibilityRef, animationRef, title, description }, index) => (
-            <li
-              className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
-              key={index}
-              ref={animationVisibilityRef}
-            >
-              <div
-                id={`advantages-item-${index + 1}-icon`}
-                className="w-24 h-24 2xl:w-20 2xl:h-20 xl:w-[72px] xl:h-[72px] lg:w-16 lg:h-16"
-                ref={animationRef}
-                aria-hidden
-              />
-              <Heading
-                id={`advantages-item-${index + 1}-title`}
-                className="mt-6 xl:mt-5"
-                tag="h3"
-                size="sm"
-                theme="white"
+          {items.map(
+            (
+              {
+                isAnimationPlaying,
+                animationVisibilityRef,
+                animationEntry,
+                animationRef,
+                title,
+                description,
+              },
+              index
+            ) => (
+              <li
+                className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
+                key={index}
+                ref={animationVisibilityRef}
               >
-                {title}
-              </Heading>
-              <p
-                id={`advantages-item-${index + 1}-description`}
-                className="mt-4 text-white t-xl xl:mt-3.5"
-              >
-                {description}
-              </p>
-            </li>
-          ))}
+                <div
+                  id={`advantages-item-${index + 1}-icon`}
+                  className="w-24 h-24 2xl:w-20 2xl:h-20 xl:w-[72px] xl:h-[72px] lg:w-16 lg:h-16"
+                  ref={animationRef}
+                  aria-hidden
+                />
+                <Heading
+                  id={`advantages-item-${index + 1}-title`}
+                  className="mt-6 xl:mt-5"
+                  tag="h3"
+                  size="sm"
+                  theme="white"
+                >
+                  <BlinkingText
+                    text={title}
+                    parentElement={animationEntry?.target}
+                    shouldAnimationStart={isAnimationPlaying}
+                  />
+                </Heading>
+                <p
+                  id={`advantages-item-${index + 1}-description`}
+                  className="mt-4 text-white t-xl xl:mt-3.5"
+                >
+                  {description}
+                </p>
+              </li>
+            )
+          )}
         </ul>
       </Container>
     </section>

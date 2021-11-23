@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 const BlinkingText = ({ text, parentElement, shouldAnimationStart, children }) => {
   useEffect(() => {
     if (parentElement && shouldAnimationStart) {
-      const letters = parentElement.querySelectorAll('span');
+      const letters = parentElement.querySelectorAll('.animate-text-blink');
       const shuffledLetters = shuffle(letters);
 
       let currentTimeout = 0;

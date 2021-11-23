@@ -11,7 +11,7 @@ export default function useLottie({ lottieOptions, useInViewOptions = {}, events
   const [animation, setAnimation] = useState(lottieOptions.autoplay);
   const [isAnimationReady, setIsAnimationReady] = useState(!shouldWaitForImagesToLoad);
   const [isAnimationPlaying, setIsAnimationPlaying] = useState(false);
-  const [animationVisibilityRef, isInViewInternal] = useInView({
+  const [animationVisibilityRef, isInViewInternal, animationEntry] = useInView({
     threshold: 0.4,
     triggerOnce: !lottieOptions.loop,
     ...useInViewOptions,
@@ -59,5 +59,6 @@ export default function useLottie({ lottieOptions, useInViewOptions = {}, events
     isAnimationPlaying,
     animationRef,
     animationVisibilityRef,
+    animationEntry,
   };
 }

@@ -19,8 +19,10 @@ const Features = () => {
   const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true, threshold: 0.5 });
 
   const {
+    isAnimationPlaying: payAsYouGoIsAnimationPlaying,
     animationRef: payAsYouGoAnimationRef,
     animationVisibilityRef: payAsYouGoAnimationVisibilityRef,
+    animationEntry: payAsYouGoAnimationEntry,
   } = useLottie({
     lottieOptions: {
       animationData: payAsYouGoAnimationData,
@@ -29,8 +31,10 @@ const Features = () => {
   });
 
   const {
+    isAnimationPlaying: highAvailabiIsAnimationPlaying,
     animationRef: highAvailabilityAnimationRef,
     animationVisibilityRef: highAvailabilityAnimationVisibilityRef,
+    animationEntry: highAvailabilityAnimationEntry,
   } = useLottie({
     lottieOptions: {
       animationData: highAvailabilityAnimationData,
@@ -39,8 +43,10 @@ const Features = () => {
   });
 
   const {
+    isAnimationPlaying: autoBackupIsAnimationPlaying,
     animationRef: autoBackupAnimationRef,
     animationVisibilityRef: autoBackupAnimationVisibilityRef,
+    animationEntry: autoBackupAnimationEntry,
   } = useLottie({
     lottieOptions: {
       animationData: autoBackupAnimationData,
@@ -49,8 +55,10 @@ const Features = () => {
   });
 
   const {
+    isAnimationPlaying: autoScalingIsAnimationPlaying,
     animationRef: autoScalingAnimationRef,
     animationVisibilityRef: autoScalingAnimationVisibilityRef,
+    animationEntry: autoScalingAnimationEntry,
   } = useLottie({
     lottieOptions: {
       animationData: autoScalingAnimationData,
@@ -59,8 +67,10 @@ const Features = () => {
   });
 
   const {
+    isAnimationPlaying: edgeDeploymeIsAnimationPlaying,
     animationRef: edgeDeploymentAnimationRef,
     animationVisibilityRef: edgeDeploymentAnimationVisibilityRef,
+    animationEntry: edgeDeploymentAnimationEntry,
   } = useLottie({
     lottieOptions: {
       animationData: edgeDeploymentAnimationData,
@@ -69,8 +79,10 @@ const Features = () => {
   });
 
   const {
+    isAnimationPlaying: openSourceIsAnimationPlaying,
     animationRef: openSourceAnimationRef,
     animationVisibilityRef: openSourceAnimationVisibilityRef,
+    animationEntry: openSourceAnimationEntry,
   } = useLottie({
     lottieOptions: {
       animationData: openSourceAnimationData,
@@ -80,28 +92,36 @@ const Features = () => {
 
   const items = [
     {
+      isAnimationPlaying: payAsYouGoIsAnimationPlaying,
       animationVisibilityRef: payAsYouGoAnimationVisibilityRef,
       animationRef: payAsYouGoAnimationRef,
+      animationEntry: payAsYouGoAnimationEntry,
       title: 'Pay as You Go',
       description:
         'Being serverless allows using of resources on-demand, which significantly cuts the costs and brings pay as you go solution.',
     },
     {
+      isAnimationPlaying: highAvailabiIsAnimationPlaying,
       animationVisibilityRef: highAvailabilityAnimationVisibilityRef,
       animationRef: highAvailabilityAnimationRef,
+      animationEntry: highAvailabilityAnimationEntry,
       title: 'High Availability',
       description: `Zenith's architecture guarantees high availability even under peak load and 99.9999% uptime for Cloud users.`,
     },
     {
+      isAnimationPlaying: autoBackupIsAnimationPlaying,
       animationVisibilityRef: autoBackupAnimationVisibilityRef,
       animationRef: autoBackupAnimationRef,
+      animationEntry: autoBackupAnimationEntry,
       title: 'Auto-Backup',
       description:
         'Cost efficient incremental auto backup functionality keeps your database save 24/7.',
     },
     {
+      isAnimationPlaying: autoScalingIsAnimationPlaying,
       animationVisibilityRef: autoScalingAnimationVisibilityRef,
       animationRef: autoScalingAnimationRef,
+      animationEntry: autoScalingAnimationEntry,
       title: 'Auto Scaling',
       description:
         'Handle peak time requests, with a flexible auto scale deployment solution, and pay for the actual usage.',
@@ -111,8 +131,10 @@ const Features = () => {
       },
     },
     {
+      isAnimationPlaying: edgeDeploymeIsAnimationPlaying,
       animationVisibilityRef: edgeDeploymentAnimationVisibilityRef,
       animationRef: edgeDeploymentAnimationRef,
+      animationEntry: edgeDeploymentAnimationEntry,
       title: 'Edge Deployment',
       description:
         'Have a database close to your users. Zenith is a perfect for serverless functions.',
@@ -122,8 +144,10 @@ const Features = () => {
       },
     },
     {
+      isAnimationPlaying: openSourceIsAnimationPlaying,
       animationVisibilityRef: openSourceAnimationVisibilityRef,
       animationRef: openSourceAnimationRef,
+      animationEntry: openSourceAnimationEntry,
       title: 'Open Source',
       description: (
         <>
@@ -162,46 +186,64 @@ const Features = () => {
           projects development.
         </p>
         <ul className="grid grid-cols-12 mt-[92px] grid-gap gap-y-[92px] 2xl:mt-[76px] 2xl:gap-y-[76px] xl:mt-16 xl:gap-y-16 md:grid-cols-1">
-          {items.map(({ animationVisibilityRef, animationRef, title, description, tag }, index) => (
-            <li
-              className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[261px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
-              key={index}
-            >
-              <div className="flex items-end space-x-4 xl:space-x-3.5" ref={animationVisibilityRef}>
-                <div
-                  id={`features-item-${index + 1}-icon`}
-                  className="w-24 h-24 2xl:w-20 2xl:h-20 xl:w-[72px] xl:h-[72px] lg:w-16 lg:h-16"
-                  ref={animationRef}
-                  aria-hidden
-                />
-                {tag?.text && (
-                  <span
-                    className={clsx(
-                      'inline-block font-mono t-sm px-2.5 border-2 rounded-full mr-3 py-1',
-                      tag.className
-                    )}
-                  >
-                    {tag.text}
-                  </span>
-                )}
-              </div>
-              <Heading
-                id={`features-item-${index + 1}-title`}
-                className="mt-6 xl:mt-5"
-                tag="h3"
-                size="sm"
-                theme="white"
+          {items.map(
+            (
+              {
+                isAnimationPlaying,
+                animationVisibilityRef,
+                animationRef,
+                animationEntry,
+                title,
+                description,
+                tag,
+              },
+              index
+            ) => (
+              <li
+                className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[261px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
+                key={index}
+                ref={animationVisibilityRef}
               >
-                {title}
-              </Heading>
-              <p
-                id={`features-item-${index + 1}-description`}
-                className="mt-4 text-white t-xl xl:mt-3.5"
-              >
-                {description}
-              </p>
-            </li>
-          ))}
+                <div className="flex items-end space-x-4 xl:space-x-3.5">
+                  <div
+                    id={`features-item-${index + 1}-icon`}
+                    className="w-24 h-24 2xl:w-20 2xl:h-20 xl:w-[72px] xl:h-[72px] lg:w-16 lg:h-16"
+                    ref={animationRef}
+                    aria-hidden
+                  />
+                  {tag?.text && (
+                    <span
+                      className={clsx(
+                        'inline-block font-mono t-sm px-2.5 border-2 rounded-full mr-3 py-1',
+                        tag.className
+                      )}
+                    >
+                      {tag.text}
+                    </span>
+                  )}
+                </div>
+                <Heading
+                  id={`features-item-${index + 1}-title`}
+                  className="mt-6 xl:mt-5"
+                  tag="h3"
+                  size="sm"
+                  theme="white"
+                >
+                  <BlinkingText
+                    text={title}
+                    parentElement={animationEntry?.target}
+                    shouldAnimationStart={isAnimationPlaying}
+                  />
+                </Heading>
+                <p
+                  id={`features-item-${index + 1}-description`}
+                  className="mt-4 text-white t-xl xl:mt-3.5"
+                >
+                  {description}
+                </p>
+              </li>
+            )
+          )}
         </ul>
       </Container>
     </section>
