@@ -56,6 +56,10 @@
   @screen xl {
     font-size: 20px;
   }
+
+  @screen xs {
+    font-size: 17px;
+  }
 }
 
 .t-4xl {

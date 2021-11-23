@@ -6,8 +6,7 @@ import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import Logo from 'images/logo.inline.svg';
 
-import BurgerIcon from './images/burger.inline.svg';
-import CloseIcon from './images/close.inline.svg';
+import Burger from './burger';
 
 const links = [
   {
@@ -33,7 +32,7 @@ const links = [
 ];
 
 const Header = ({ isMobileMenuOpen, onBurgerClick }) => (
-  <header className="absolute top-0 left-0 right-0 z-10 w-full safe-paddings lg:relative lg:bg-black">
+  <header className="absolute top-0 left-0 right-0 z-30 w-full safe-paddings lg:relative lg:bg-black">
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5">
       <Link className="hidden text-white xl:block" to="/">
         <span className="sr-only">Zenith</span>
@@ -60,9 +59,7 @@ const Header = ({ isMobileMenuOpen, onBurgerClick }) => (
       <Button className="lg:hidden" to="/" size="xs" theme="tertiary">
         Sign Up
       </Button>
-      <button className="hidden lg:block" type="button" onClick={onBurgerClick}>
-        {isMobileMenuOpen ? <CloseIcon /> : <BurgerIcon />}
-      </button>
+      <Burger className="hidden lg:block" isToggled={isMobileMenuOpen} onClick={onBurgerClick} />
     </Container>
   </header>
 );

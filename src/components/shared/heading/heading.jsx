@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 const styles = {
   size: {
@@ -16,29 +16,31 @@ const styles = {
   },
 };
 
-const Heading = ({
-  className: additionalClassName,
-  tag: Tag,
-  size,
-  theme,
-  asHTML,
-  children,
-  ...otherProps
-}) => {
-  const className = clsx(styles.size[size], styles.theme[theme], additionalClassName);
+const Heading = forwardRef(
+  (
+    { className: additionalClassName, tag: Tag, size, theme, asHTML, children, ...otherProps },
+    ref
+  ) => {
+    const className = clsx(styles.size[size], styles.theme[theme], additionalClassName);
 
-  if (asHTML) {
+    if (asHTML) {
+      return (
+        <Tag
+          className={className}
+          dangerouslySetInnerHTML={{ __html: children }}
+          ref={ref}
+          {...otherProps}
+        />
+      );
+    }
+
     return (
-      <Tag className={className} dangerouslySetInnerHTML={{ __html: children }} {...otherProps} />
+      <Tag className={className} ref={ref} {...otherProps}>
+        {children}
+      </Tag>
     );
   }
-
-  return (
-    <Tag className={className} {...otherProps}>
-      {children}
-    </Tag>
-  );
-};
+);
 
 Heading.propTypes = {
   className: PropTypes.string,
