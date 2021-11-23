@@ -14,15 +14,7 @@ const SaaS = () => {
     lottieOptions: {
       animationData,
     },
-    useInViewOptions: { triggerOnce: false, threshold: [0.8, 0] },
-    events: {
-      complete() {
-        // eslint-disable-next-line react/no-this-in-sfc
-        this.loop = true;
-        // eslint-disable-next-line react/no-this-in-sfc
-        this.playSegments([60, 120], true);
-      },
-    },
+    useInViewOptions: { threshold: 0.8 },
   });
 
   return (

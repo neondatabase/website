@@ -11,15 +11,7 @@ import animationData from './data/lottie-data.json';
 const Scalability = () => {
   const { animationRef, isAnimationReady, animationVisibilityRef } = useLottie({
     lottieOptions: { animationData },
-    useInViewOptions: { triggerOnce: false, threshold: [0.6, 0] },
-    events: {
-      complete() {
-        // eslint-disable-next-line react/no-this-in-sfc
-        this.loop = true;
-        // eslint-disable-next-line react/no-this-in-sfc
-        this.playSegments([60, 120], true);
-      },
-    },
+    useInViewOptions: { threshold: 0.6 },
   });
 
   return (
