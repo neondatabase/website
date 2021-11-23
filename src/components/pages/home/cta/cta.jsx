@@ -98,7 +98,7 @@ const CTA = () => {
         <motion.div
           id="cta-input"
           variants={inputWrapperVariants}
-          className="relative max-w-[834px] mt-8 mx-auto 3xl:max-w-[738px] 2xl:max-w-[610px] 2xl:mt-7 xl:max-w-[490px] xl:mt-6 lg:max-w-[584px]"
+          className="relative max-w-[834px] mt-8 mx-auto 3xl:max-w-[738px] 2xl:max-w-[610px] 2xl:mt-7 xl:max-w-[498px] xl:mt-6 lg:max-w-[584px]"
         >
           <motion.div
             id="cta-input-background"
