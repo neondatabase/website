@@ -22,6 +22,18 @@ const pVariants = {
   },
 };
 
+const inputWrapperVariants = {
+  from: {
+    opacity: 0,
+  },
+  to: {
+    opacity: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+};
+
 const inputPanelVariants = {
   from: {
     backgroundColor: '#00e699',
@@ -83,8 +95,9 @@ const CTA = () => {
         <motion.p className="mt-5 text-white t-3xl 2xl:mt-4" variants={pVariants}>
           Just use a single command from CLI to create new Zenith database
         </motion.p>
-        <div
+        <motion.div
           id="cta-input"
+          variants={inputWrapperVariants}
           className="relative max-w-[834px] mt-8 mx-auto 3xl:max-w-[738px] 2xl:max-w-[610px] 2xl:mt-7 xl:max-w-[490px] xl:mt-6 lg:max-w-[584px]"
         >
           <motion.div
@@ -114,7 +127,7 @@ const CTA = () => {
               </span>
             </Button>
           </div>
-        </div>
+        </motion.div>
         <motion.p
           id="cta-bottom-text"
           className="max-w-[500px] text-white t-xl mt-[56px] mx-auto 2xl:max-w-[450px] 2xl:mt-[46px] xl:mt-10 xl:max-w-[400px]"
