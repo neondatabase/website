@@ -71,7 +71,7 @@ const CTA = () => {
 
   return (
     <motion.section
-      className="text-center bg-black pt-[504px] safe-paddings 3xl:pt-[397px] 2xl:pt-[344px] xl:pt-[310px] lg:pt-[238px] md:pt-[200px]"
+      className="text-center bg-black pt-[504px] safe-paddings 3xl:pt-[397px] 2xl:pt-[344px] xl:pt-[310px] lg:pt-[238px] md:pt-[160px]"
       initial="from"
       animate={controls}
     >
