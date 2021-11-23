@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -34,7 +35,11 @@ const Hero = () => {
     <span className="lg:hidden">
       <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
         {'Zenith is PostgreSQL that is /'.split('').map((letter, index) => (
-          <span className="animate-text-blink" style={{ animationPlayState: 'paused' }} key={index}>
+          <span
+            className={clsx('animate-text-blink', letter === '/' && 'text-secondary-2')}
+            style={{ animationPlayState: 'paused' }}
+            key={index}
+          >
             {letter}
           </span>
         ))}{' '}

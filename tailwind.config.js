@@ -61,7 +61,7 @@ module.exports = {
             )}, -1px 1px 0 ${theme('colors.gray.1')}, 1px 1px 0 ${theme('colors.gray.1')}`,
           },
           '25%': {
-            color: theme('colors.white'),
+            color: 'currentColor',
             textShadow:
               '-1px -1px 0 transparent, 1px -1px 0 transparent, -1px 1px 0 transparent, 1px 1px 0 transparent',
           },
@@ -72,7 +72,7 @@ module.exports = {
             )}, -1px 1px 0 ${theme('colors.gray.1')}, 1px 1px 0 ${theme('colors.gray.1')}`,
           },
           '100%': {
-            color: theme('colors.white'),
+            color: 'currentColor',
             textShadow:
               '-1px -1px 0 transparent, 1px -1px 0 transparent, -1px 1px 0 transparent, 1px 1px 0 transparent',
           },
