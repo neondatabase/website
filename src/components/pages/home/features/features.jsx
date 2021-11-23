@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
 
+import BlinkingText from 'components/shared/blinking-text';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
@@ -14,6 +16,8 @@ import openSourceAnimationData from './data/open-source-lottie-data.json';
 import payAsYouGoAnimationData from './data/pay-as-you-go-lottie-data.json';
 
 const Features = () => {
+  const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true, threshold: 0.5 });
+
   const {
     animationRef: payAsYouGoAnimationRef,
     animationVisibilityRef: payAsYouGoAnimationVisibilityRef,
@@ -145,8 +149,13 @@ const Features = () => {
           tag="h2"
           size="md"
           theme="white"
+          ref={titleRef}
         >
-          Not an ordinary PostgreSQL as a service
+          <BlinkingText
+            text="Not an ordinary PostgreSQL as a service"
+            parentElement={titleEntry?.target}
+            shouldAnimationStart={isTitleInView}
+          />
         </Heading>
         <p className="mt-5 text-center text-white t-3xl max-w-[940px] mx-auto 2xl:max-w-[800px] 2xl:mt-4 xl:max-w-[610px] xl:mt-3.5 lg:max-w-[580px]">
           The way Zenith extends PostgreSQL brings many essential features needed for modern
