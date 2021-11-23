@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 
 import setPositionsForElements from './utils/setPositionsForElements';
@@ -25,7 +26,7 @@ const Lines2 = () => {
   }, []);
 
   return (
-    <div className="lg:hidden" aria-hidden>
+    <motion.div className="lg:hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} aria-hidden>
       {verticalLines.map((_, index) => (
         <div id={`lines-2-vertical-line-${index + 1}`} className="vertical-line" key={index} />
       ))}
@@ -58,7 +59,7 @@ const Lines2 = () => {
           key={index}
         />
       ))}
-    </div>
+    </motion.div>
   );
 };
 

@@ -32,11 +32,8 @@ export default function setPositionsForVerticalLines() {
 
   verticalLine3.style.cssText = `
     left: ${heroButton.getBoundingClientRect().right - LINE_WIDTH}px;
+    height: ${horizontalLine8.getBoundingClientRect().top + document.documentElement.scrollTop}px;
   `;
-
-  verticalLine3.dataset.height = `${
-    horizontalLine8.getBoundingClientRect().top + document.documentElement.scrollTop
-  }px`;
 
   verticalLine4.style.cssText = `
     left: ${ctaInputBackground.getBoundingClientRect().left}px;
