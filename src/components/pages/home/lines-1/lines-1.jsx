@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 
 import setPositionsForElements from './utils/setPositionsForElements';
@@ -38,23 +39,53 @@ const Lines1 = () => {
   return (
     <div className="lg:hidden" aria-hidden>
       {verticalLines.map((_, index) => (
-        <div id={`lines-1-vertical-line-${index + 1}`} className="vertical-line" key={index} />
+        <motion.div
+          id={`lines-1-vertical-line-${index + 1}`}
+          className="vertical-line"
+          initial={{ height: 0 }}
+          animate={(id) => ({
+            height: document.querySelector(`#${id}`)?.dataset?.height || '100%',
+            transition: { duration: 2 },
+          })}
+          custom={`lines-1-vertical-line-${index + 1}`}
+          key={index}
+        />
       ))}
 
       {horizontalLines.map((_, index) => (
-        <div id={`lines-1-horizontal-line-${index + 1}`} className="horizontal-line" key={index} />
+        <motion.div
+          id={`lines-1-horizontal-line-${index + 1}`}
+          className="horizontal-line"
+          initial={{ width: 0 }}
+          animate={{ width: '', transition: { duration: 2 } }}
+          key={index}
+        />
       ))}
 
       {shapes.map((side, index) => (
-        <div id={`lines-1-shape-${index + 1}`} className={`shape shape-${side}`} key={index} />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 1, delay: 2 } }}
+          id={`lines-1-shape-${index + 1}`}
+          className={`shape shape-${side}`}
+          key={index}
+        />
       ))}
 
       {circles.map((_, index) => (
-        <div id={`lines-1-circle-${index + 1}`} className="circle" key={index} />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 1, delay: 2 } }}
+          id={`lines-1-circle-${index + 1}`}
+          className="circle"
+          key={index}
+        />
       ))}
 
       {circlesWithText.map((text, index) => (
-        <div
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 1, delay: 2 } }}
           id={`lines-1-circle-with-text-${index + 1}`}
           className="circle circle-with-text circle-with-text-right"
           data-text={text}
@@ -63,7 +94,9 @@ const Lines1 = () => {
       ))}
 
       {dottedVerticalLines.map((_, index) => (
-        <div
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 1, delay: 2 } }}
           id={`lines-1-dotted-vertical-line-${index + 1}`}
           className="dotted-vertical-line"
           key={index}
@@ -71,7 +104,9 @@ const Lines1 = () => {
       ))}
 
       {dottedHorizontalLines.map((_, index) => (
-        <div
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 1, delay: 2 } }}
           id={`lines-1-dotted-horizontal-line-${index + 1}`}
           className="dotted-horizontal-line"
           key={index}
