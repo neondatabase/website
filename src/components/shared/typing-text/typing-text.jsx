@@ -33,7 +33,7 @@ const wordVariants = {
   },
 };
 
-const TypingText = ({ phrases, shouldAnimationStart }) => {
+const TypingText = ({ className: additionalClassName, phrases, shouldAnimationStart }) => {
   const [activePhraseIndex, setActivePhraseIndex] = useState(0);
 
   const controls = useAnimation();
@@ -64,7 +64,12 @@ const TypingText = ({ phrases, shouldAnimationStart }) => {
   }, [shouldAnimationStart]);
 
   return (
-    <motion.span initial="shown" animate={controls} variants={wrapperVariants}>
+    <motion.span
+      className={additionalClassName}
+      initial="shown"
+      animate={controls}
+      variants={wrapperVariants}
+    >
       {phrases[activePhraseIndex].split('').map((letter, index) => (
         <motion.span
           className="animate-text-blink"
@@ -80,11 +85,13 @@ const TypingText = ({ phrases, shouldAnimationStart }) => {
 };
 
 TypingText.propTypes = {
+  className: PropTypes.string,
   phrases: PropTypes.arrayOf(PropTypes.string).isRequired,
   shouldAnimationStart: PropTypes.bool,
 };
 
 TypingText.defaultProps = {
+  className: null,
   shouldAnimationStart: false,
 };
 

@@ -10,6 +10,8 @@ import useLottie from 'hooks/use-lottie';
 
 import animationData from './data/lottie-data.json';
 
+const titlePhrases = ['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless'];
+
 const Hero = () => {
   const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true });
 
@@ -28,6 +30,31 @@ const Hero = () => {
     useInViewOptions: { threshold: 0.8 },
   });
 
+  const titleContent = (
+    <span className="lg:hidden">
+      <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
+        {'Zenith is PostgreSQL that is /'.split('').map((letter, index) => (
+          <span className="animate-text-blink" style={{ animationPlayState: 'paused' }} key={index}>
+            {letter}
+          </span>
+        ))}{' '}
+        <TypingText phrases={titlePhrases} shouldAnimationStart={isTitleInView} />
+      </BlinkingText>
+    </span>
+  );
+
+  const titleContentLg = (
+    <span className="hidden lg:inline">
+      <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
+        {`Zenith is PostgreSQL that is / ${titlePhrases[0]}`.split('').map((letter, index) => (
+          <span className="animate-text-blink" style={{ animationPlayState: 'paused' }} key={index}>
+            {letter}
+          </span>
+        ))}
+      </BlinkingText>
+    </span>
+  );
+
   return (
     <section className="bg-black pt-[322px] safe-paddings 3xl:pt-[243px] 2xl:pt-[207px] xl:pt-[193px] lg:pt-12 md:pt-6">
       <Container className="z-20 flex items-center justify-between lg:flex-col lg:justify-center">
@@ -40,24 +67,8 @@ const Hero = () => {
             theme="white"
             ref={titleRef}
           >
-            <BlinkingText
-              parentElement={titleEntry?.target}
-              shouldAnimationStart={isAnimationPlaying}
-            >
-              {'Zenith is PostgreSQL that is /'.split('').map((letter, index) => (
-                <span
-                  className="animate-text-blink"
-                  style={{ animationPlayState: 'paused' }}
-                  key={index}
-                >
-                  {letter}
-                </span>
-              ))}{' '}
-              <TypingText
-                phrases={['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless']}
-                shouldAnimationStart={isTitleInView}
-              />
-            </BlinkingText>
+            {titleContent}
+            {titleContentLg}
           </Heading>
           <Button
             id="hero-button"
