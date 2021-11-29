@@ -5,7 +5,7 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import useLottie from 'hooks/use-lottie';
 
-import animationData from './data/lottie-data.json';
+import animationData from './data/data-branching-lottie-data.json';
 
 const DataBranching = () => {
   const { animationRef, animationVisibilityRef } = useLottie({

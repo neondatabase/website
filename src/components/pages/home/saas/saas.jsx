@@ -8,8 +8,8 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import useLottie from 'hooks/use-lottie';
 
-import animationData from './data/lottie-data.json';
-import illustrationLg from './images/illustration-lg.svg';
+import animationData from './data/saas-lottie-data.json';
+import illustrationLg from './images/saas-illustration-lg.svg';
 
 const SaaS = () => {
   const { animationRef, isAnimationReady, animationVisibilityRef } = useLottie({

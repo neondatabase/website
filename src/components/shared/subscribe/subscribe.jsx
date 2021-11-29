@@ -6,10 +6,10 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 
-import DiscordIcon from './images/discord.inline.svg';
-import GithubIcon from './images/github.inline.svg';
-import SendIcon from './images/send.inline.svg';
-import TwitterIcon from './images/twitter.inline.svg';
+import DiscordIcon from './images/subscribe-discord.inline.svg';
+import GithubIcon from './images/subscribe-github.inline.svg';
+import SendIcon from './images/subscribe-send.inline.svg';
+import TwitterIcon from './images/subscribe-twitter.inline.svg';
 
 const links = [
   {
@@ -49,7 +49,7 @@ const Subscribe = () => {
       <Container className="flex items-center justify-between lg:block">
         <StaticImage
           className="max-w-[800px] 3xl:max-w-[660px] 2xl:max-w-[550px] xl:max-w-[430px] lg:!hidden"
-          src="../subscribe/images/illustration.jpg"
+          src="../subscribe/images/subscribe-illustration.jpg"
           alt=""
           loading="lazy"
           aria-hidden
