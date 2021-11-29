@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import BlinkingText from 'components/shared/blinking-text';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
@@ -34,33 +33,21 @@ const Hero = () => {
 
   const titleContent = (
     <span className="lg:hidden">
-      <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
-        {'Zenith is PostgreSQL that is /'.split('').map((letter, index) => (
-          <span
-            className={clsx('animate-text-blink', letter === '/' && 'text-secondary-2')}
-            style={{ animationPlayState: 'paused' }}
-            key={index}
-          >
-            {letter}
-          </span>
-        ))}{' '}
-        <TypingText
-          phrases={titlePhrases}
-          shouldAnimationStart={isTitleInView && isAnimationFinished}
-        />
-      </BlinkingText>
+      {'Zenith is PostgreSQL that is /'.split('').map((letter, index) => (
+        <span key={index}>{letter}</span>
+      ))}{' '}
+      <TypingText
+        phrases={titlePhrases}
+        shouldAnimationStart={isTitleInView && isAnimationFinished}
+      />
     </span>
   );
 
   const titleContentLg = (
     <span className="hidden lg:inline">
-      <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
-        {`Zenith is PostgreSQL that is / ${titlePhrases[0]}`.split('').map((letter, index) => (
-          <span className="animate-text-blink" style={{ animationPlayState: 'paused' }} key={index}>
-            {letter}
-          </span>
-        ))}
-      </BlinkingText>
+      {`Zenith is PostgreSQL that is / ${titlePhrases[0]}`.split('').map((letter, index) => (
+        <span key={index}>{letter}</span>
+      ))}
     </span>
   );
 
