@@ -16,10 +16,11 @@ import Subscribe from 'components/shared/subscribe';
 
 const HomePage = () => {
   const [firstSectionWithLinesRef, isFirstSectionWithLinesInView] = useInView({
-    rootMargin: '200px 0px',
+    rootMargin: '100px 0px',
   });
+
   const [secondSectionWithLinesRef, isSecondSectionWithLinesInView] = useInView({
-    rootMargin: '200px 0px',
+    rootMargin: '100px 0px',
   });
 
   return (

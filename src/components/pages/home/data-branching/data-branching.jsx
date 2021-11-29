@@ -1,22 +1,20 @@
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
-import useLottie from 'hooks/use-lottie';
 
-import animationData from './data/data-branching-lottie-data.json';
+import Illustration from './data-branching-illustration';
 
 const DataBranching = () => {
-  const { animationRef, animationVisibilityRef } = useLottie({
-    lottieOptions: {
-      animationData,
-    },
-    useInViewOptions: { threshold: 0.5 },
-  });
+  const [wrapperRef, isSectionInView] = useInView({ rootMargin: '100px 0px' });
 
   return (
-    <section className="mt-[270px] mb-48 safe-paddings 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20">
+    <section
+      className="mt-[270px] mb-48 safe-paddings 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20"
+      ref={wrapperRef}
+    >
       <Container className="z-10">
         <div className="max-w-[600px] xl:max-w-[400px] lg:max-w-none">
           <Heading tag="h2" size="lg" theme="black">
@@ -32,23 +30,7 @@ const DataBranching = () => {
           </Link>
         </div>
       </Container>
-      <div
-        className="relative max-w-[1920px] mx-auto mt-[-365px] 3xl:mt-[-19.38vw] 2xl:mt-[-18.94vw] xl:mt-[-18.55vw] lg:-mt-5 md:mt-5 sm:mt-[40px]"
-        ref={animationVisibilityRef}
-        aria-hidden
-      >
-        <div className="w-[calc(100%+40px)] lg:min-w-[865px] lg:w-auto md:w-[767px] md:min-w-0 sm:w-auto sm:min-w-[700px] xs:min-w-[550px]">
-          <img
-            src="data:image/svg+xml;charset=utf-8,%3Csvg width='1960' height='800' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E"
-            alt=""
-            aria-hidden
-          />
-        </div>
-        <div
-          className="absolute top-0 right-1/2 z-[-2] w-[calc(100%+40px)] translate-x-1/2 lg:-right-2 lg:w-auto lg:min-w-[865px] lg:translate-x-0 md:w-[767px] md:min-w-0 sm:w-auto sm:min-w-[700px] xs:min-w-[550px]"
-          ref={animationRef}
-        />
-      </div>
+      {isSectionInView && <Illustration />}
     </section>
   );
 };

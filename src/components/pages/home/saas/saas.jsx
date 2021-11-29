@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -6,25 +5,19 @@ import BlinkingText from 'components/shared/blinking-text';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import useLottie from 'hooks/use-lottie';
 
-import animationData from './data/saas-lottie-data.json';
 import illustrationLg from './images/saas-illustration-lg.svg';
+import Illustration from './saas-illustration';
 
 const SaaS = () => {
-  const { animationRef, isAnimationReady, animationVisibilityRef } = useLottie({
-    lottieOptions: {
-      animationData,
-    },
-    useInViewOptions: { threshold: 0.5 },
-  });
-
+  const [wrapperRef, isSectionInView] = useInView({ rootMargin: '100px 0px' });
   const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true, threshold: 0.5 });
 
   return (
     <section
       id="saas"
       className="py-[212px] bg-black safe-paddings 3xl:py-44 2xl:py-40 xl:py-32 lg:py-24 md:py-20"
+      ref={wrapperRef}
     >
       <Container className="z-20 flex items-center justify-between lg:block">
         <div>
@@ -53,24 +46,7 @@ const SaaS = () => {
             Try it Now
           </Button>
         </div>
-        <div
-          id="saas-illustration"
-          className="relative 3xl:max-w-[813px] 2xl:max-w-[672px] xl:max-w-[500px] lg:hidden"
-          ref={animationVisibilityRef}
-          aria-hidden
-        >
-          <img
-            src="data:image/svg+xml;charset=utf-8,%3Csvg width='976' height='624' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E"
-            alt=""
-          />
-          <div
-            className={clsx(
-              'absolute top-0 right-0 w-full opacity-0 transition-opacity ease-linear duration-500',
-              isAnimationReady && 'opacity-100'
-            )}
-            ref={animationRef}
-          />
-        </div>
+        {isSectionInView && <Illustration />}
         <img
           className="hidden lg:block lg:max-w-[524px] lg:mt-10 md:max-w-full"
           src={illustrationLg}
