@@ -4,6 +4,7 @@ import { motion, useAnimation } from 'framer-motion';
 import React, { useRef, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import BlinkingText from 'components/shared/blinking-text';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
@@ -85,7 +86,11 @@ const CTA = () => {
     >
       <Container className="z-20" ref={animationVisibilityRef}>
         <Heading id="cta-title" tag="h2" size="lg" theme="white" ref={titleRef}>
-          Made for Developers
+          <BlinkingText
+            text="Made for Developers"
+            parentElement={titleRef.current}
+            shouldAnimationStart={isInView}
+          />
         </Heading>
         <motion.p className="mt-5 text-white t-3xl 2xl:mt-4" variants={pVariants}>
           Just use a single command from CLI to create new Zenith database

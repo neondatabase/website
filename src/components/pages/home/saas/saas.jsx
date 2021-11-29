@@ -1,6 +1,7 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import BlinkingText from 'components/shared/blinking-text';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
@@ -21,7 +22,11 @@ const SaaS = () => {
       <Container className="z-20 flex items-center justify-between lg:block">
         <div>
           <Heading id="saas-title" tag="h2" size="lg" theme="white" ref={titleRef}>
-            Perfect for SaaS
+            <BlinkingText
+              text="Perfect for SaaS"
+              parentElement={titleEntry?.target}
+              shouldAnimationStart={isTitleInView}
+            />
           </Heading>
           <p
             id="saas-description"

@@ -3,6 +3,7 @@ import { StaticImage } from 'gatsby-plugin-image';
 import React, { useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import BlinkingText from 'components/shared/blinking-text';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import useLottie from 'hooks/use-lottie';
@@ -114,7 +115,11 @@ const Advantages = () => {
               theme="white"
               ref={titleRef}
             >
-              Distributed Database, Made Simple
+              <BlinkingText
+                text="Distributed Database, Made Simple"
+                parentElement={titleRef.current}
+                shouldAnimationStart={isContentInView}
+              />
             </Heading>
             <p
               id="advantages-description"
