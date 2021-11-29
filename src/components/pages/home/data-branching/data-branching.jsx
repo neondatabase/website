@@ -8,7 +8,7 @@ import Link from 'components/shared/link';
 import Illustration from './data-branching-illustration';
 
 const DataBranching = () => {
-  const [wrapperRef, isSectionInView] = useInView({ rootMargin: '100px 0px' });
+  const [wrapperRef, isSectionInView] = useInView({ rootMargin: '100px 0px', triggerOnce: true });
 
   return (
     <section

@@ -10,7 +10,7 @@ import illustrationLg from './images/saas-illustration-lg.svg';
 import Illustration from './saas-illustration';
 
 const SaaS = () => {
-  const [wrapperRef, isSectionInView] = useInView({ rootMargin: '100px 0px' });
+  const [wrapperRef, isSectionInView] = useInView({ rootMargin: '100px 0px', triggerOnce: true });
   const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true, threshold: 0.5 });
 
   return (

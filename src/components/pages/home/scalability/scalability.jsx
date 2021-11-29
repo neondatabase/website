@@ -8,7 +8,7 @@ import Link from 'components/shared/link';
 import Illustration from './scalability-illustration';
 
 const Scalability = () => {
-  const [wrapperRef, isSectionInView] = useInView({ rootMargin: '100px 0px' });
+  const [wrapperRef, isSectionInView] = useInView({ rootMargin: '100px 0px', triggerOnce: true });
 
   return (
     <section
