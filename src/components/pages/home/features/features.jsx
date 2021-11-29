@@ -8,12 +8,12 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import useLottie from 'hooks/use-lottie';
 
-import autoBackupAnimationData from './data/auto-backup-lottie-data.json';
-import autoScalingAnimationData from './data/auto-scaling-lottie-data.json';
-import edgeDeploymentAnimationData from './data/edge-deployment-lottie-data.json';
-import highAvailabilityAnimationData from './data/high-availability-lottie-data.json';
-import openSourceAnimationData from './data/open-source-lottie-data.json';
-import payAsYouGoAnimationData from './data/pay-as-you-go-lottie-data.json';
+import autoBackupAnimationData from './data/features-auto-backup-lottie-data.json';
+import autoScalingAnimationData from './data/features-auto-scaling-lottie-data.json';
+import edgeDeploymentAnimationData from './data/features-edge-deployment-lottie-data.json';
+import highAvailabilityAnimationData from './data/features-high-availability-lottie-data.json';
+import openSourceAnimationData from './data/features-open-source-lottie-data.json';
+import payAsYouGoAnimationData from './data/features-pay-as-you-go-lottie-data.json';
 
 const Features = () => {
   const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true, threshold: 0.5 });

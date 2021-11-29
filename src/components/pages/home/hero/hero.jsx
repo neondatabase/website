@@ -9,7 +9,7 @@ import Heading from 'components/shared/heading';
 import TypingText from 'components/shared/typing-text';
 import useLottie from 'hooks/use-lottie';
 
-import animationData from './data/lottie-data.json';
+import animationData from './data/hero-lottie-data.json';
 
 const titlePhrases = ['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless'];
 

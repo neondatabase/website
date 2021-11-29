@@ -8,10 +8,10 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import useLottie from 'hooks/use-lottie';
 
-import costEfficientAnimationData from './data/cost-efficient-lottie-data.json';
-import easyToUseAnimationData from './data/easy-to-use-lottie-data.json';
-import scalableAnimationData from './data/scalable-lottie-data.json';
-import PlayIcon from './images/play.inline.svg';
+import costEfficientAnimationData from './data/advantages-cost-efficient-lottie-data.json';
+import easyToUseAnimationData from './data/advantages-easy-to-use-lottie-data.json';
+import scalableAnimationData from './data/advantages-scalable-lottie-data.json';
+import PlayIcon from './images/advantages-play.inline.svg';
 
 const Advantages = () => {
   const [videoWrapperRef, isVideoWrapperInView] = useInView({ triggerOnce: true, threshold: 0.5 });
@@ -91,7 +91,7 @@ const Advantages = () => {
             >
               <StaticImage
                 className="rounded"
-                src="../advantages/images/cover.jpg"
+                src="../advantages/images/advantages-cover.jpg"
                 alt=""
                 aria-hidden
               />

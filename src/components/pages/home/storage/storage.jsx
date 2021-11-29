@@ -6,7 +6,7 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import useLottie from 'hooks/use-lottie';
 
-import animationData from './data/lottie-data.json';
+import animationData from './data/storage-lottie-data.json';
 
 const Storage = () => {
   const { animationRef, isAnimationReady, animationVisibilityRef } = useLottie({
