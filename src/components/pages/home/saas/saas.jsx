@@ -12,6 +12,10 @@ import Illustration from './saas-illustration';
 const SaaS = () => {
   const [wrapperRef, isSectionInView] = useInView({ rootMargin: '100px 0px', triggerOnce: true });
   const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true, threshold: 0.5 });
+  const [illustrationWrapperRef, isIllustrationWrapperInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+  });
 
   return (
     <section
@@ -46,7 +50,20 @@ const SaaS = () => {
             Try it Now
           </Button>
         </div>
-        {isSectionInView && <Illustration />}
+
+        <div
+          id="saas-illustration"
+          className="relative 3xl:max-w-[813px] 2xl:max-w-[672px] xl:max-w-[500px] lg:hidden"
+          ref={illustrationWrapperRef}
+          aria-hidden
+        >
+          <img
+            src="data:image/svg+xml;charset=utf-8,%3Csvg width='976' height='624' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E"
+            alt=""
+          />
+          {isSectionInView && <Illustration isInView={isIllustrationWrapperInView} />}
+        </div>
+
         <img
           className="hidden lg:block lg:max-w-[524px] lg:mt-10 md:max-w-full"
           src={illustrationLg}

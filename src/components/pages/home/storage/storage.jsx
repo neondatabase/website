@@ -9,6 +9,10 @@ import Illustration from './storage-illustration';
 
 const Storage = () => {
   const [wrapperRef, isSectionInView] = useInView({ rootMargin: '100px 0px', triggerOnce: true });
+  const [illustrationWrapperRef, isIllustrationWrapperInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+  });
 
   return (
     <section
@@ -30,7 +34,18 @@ const Storage = () => {
             How do we cook PostgreSQL storage
           </Link>
         </div>
-        {isSectionInView && <Illustration />}
+
+        <div
+          className="relative order-first w-full max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:order-last lg:max-w-[475px] lg:mt-[46px]"
+          ref={illustrationWrapperRef}
+          aria-hidden
+        >
+          <img
+            src="data:image/svg+xml;charset=utf-8,%3Csvg width='880' height='800' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E"
+            alt=""
+          />
+          {isSectionInView && <Illustration isInView={isIllustrationWrapperInView} />}
+        </div>
       </Container>
     </section>
   );
