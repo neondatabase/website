@@ -94,9 +94,10 @@ export default function setPositionsForHorizontalLines() {
     }px;
   `;
 
+  // TODO: FIXME: PLEASE
   horizontalLine10.style.cssText = `
     top: ${
-      saasIllustration.getBoundingClientRect().top -
+      saasIllustration?.getBoundingClientRect().top -
       features.getBoundingClientRect().top -
       LINE_WIDTH
     }px;
@@ -130,9 +131,10 @@ export default function setPositionsForHorizontalLines() {
     }px;
   `;
 
+  // TODO: FIXME: PLEASE
   horizontalLine16.style.cssText = `
     top: ${
-      saasIllustration.getBoundingClientRect().bottom - features.getBoundingClientRect().top
+      saasIllustration?.getBoundingClientRect().bottom - features.getBoundingClientRect().top
     }px;
   `;
 }

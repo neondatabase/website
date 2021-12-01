@@ -43,8 +43,9 @@ export default function setPositionsForVerticalLines() {
     left: ${featuresItem2Icon.getBoundingClientRect().right - LINE_WIDTH}px
   `;
 
+  // TODO: FIXME: PLEASE
   verticalLine6.style.cssText = `
-    left: ${sassIllustration.getBoundingClientRect().left - LINE_WIDTH}px
+    left: ${sassIllustration?.getBoundingClientRect().left - LINE_WIDTH}px
   `;
 
   verticalLine7.style.cssText = `

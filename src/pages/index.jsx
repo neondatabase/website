@@ -1,4 +1,5 @@
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import Advantages from 'components/pages/home/advantages';
 import CTA from 'components/pages/home/cta';
@@ -13,24 +14,36 @@ import Storage from 'components/pages/home/storage';
 import Layout from 'components/shared/layout';
 import Subscribe from 'components/shared/subscribe';
 
-const HomePage = () => (
-  <Layout>
-    <div className="relative overflow-hidden">
-      <Lines1 />
-      <Hero />
-      <CTA />
-      <Advantages />
-    </div>
-    <Scalability />
-    <Storage />
-    <DataBranching />
-    <div className="relative overflow-hidden">
-      <Features />
-      <SaaS />
-      <Lines2 />
-    </div>
-    <Subscribe />
-  </Layout>
-);
+const HomePage = () => {
+  const [firstSectionWithLinesRef, isFirstSectionWithLinesInView] = useInView({
+    rootMargin: '100px 0px',
+    triggerOnce: true,
+  });
+
+  const [secondSectionWithLinesRef, isSecondSectionWithLinesInView] = useInView({
+    rootMargin: '100px 0px',
+    triggerOnce: true,
+  });
+
+  return (
+    <Layout>
+      <div className="relative overflow-hidden" ref={firstSectionWithLinesRef}>
+        {isFirstSectionWithLinesInView && <Lines1 />}
+        <Hero />
+        <CTA />
+        <Advantages />
+      </div>
+      <Scalability />
+      <Storage />
+      <DataBranching />
+      <div className="relative overflow-hidden" ref={secondSectionWithLinesRef}>
+        <Features />
+        <SaaS />
+        {isSecondSectionWithLinesInView && <Lines2 />}
+      </div>
+      <Subscribe />
+    </Layout>
+  );
+};
 
 export default HomePage;

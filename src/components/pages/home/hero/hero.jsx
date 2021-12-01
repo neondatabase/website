@@ -16,20 +16,21 @@ const titlePhrases = ['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless'
 const Hero = () => {
   const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true, threshold: 0.5 });
 
-  const { animationRef, isAnimationPlaying, animationVisibilityRef } = useLottie({
-    lottieOptions: {
-      animationData,
-      rendererSettings: {
-        filterSize: {
-          width: '300%',
-          height: '300%',
-          x: '-100%',
-          y: '-100%',
+  const { animationRef, isAnimationPlaying, isAnimationFinished, animationVisibilityRef } =
+    useLottie({
+      lottieOptions: {
+        animationData,
+        rendererSettings: {
+          filterSize: {
+            width: '300%',
+            height: '300%',
+            x: '-100%',
+            y: '-100%',
+          },
         },
       },
-    },
-    useInViewOptions: { threshold: 0.5 },
-  });
+      useInViewOptions: { threshold: 0.5 },
+    });
 
   const titleContent = (
     <span className="lg:hidden">
@@ -43,7 +44,10 @@ const Hero = () => {
             {letter}
           </span>
         ))}{' '}
-        <TypingText phrases={titlePhrases} shouldAnimationStart={isTitleInView} />
+        <TypingText
+          phrases={titlePhrases}
+          shouldAnimationStart={isTitleInView && isAnimationFinished}
+        />
       </BlinkingText>
     </span>
   );

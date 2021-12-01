@@ -99,11 +99,9 @@ const Advantages = () => {
             <button
               className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 group"
               type="button"
+              style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
             >
-              <PlayIcon
-                className="relative h-24 rounded-full transition-transform duration-200 group-hover:scale-[1.1] 3xl:h-[82px] 2xl:h-[68px] xl:h-[62px] lg:h-[86px] md:h-12"
-                style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
-              />
+              <PlayIcon className="relative h-24 rounded-full transition-transform duration-200 group-hover:scale-[1.1] 3xl:h-[82px] 2xl:h-[68px] xl:h-[62px] lg:h-[86px] md:h-12" />
             </button>
           </div>
           <div className="lg:order-first" ref={contentRef}>

@@ -55,10 +55,16 @@ const TypingText = ({ className: additionalClassName, phrases, shouldAnimationSt
 
   useEffect(() => {
     if (shouldAnimationStart) {
-      controls.start('hidden').then(() => {
-        setActivePhraseIndex((currentActivePhrase) => currentActivePhrase + 1);
-        animate();
-      });
+      controls
+        .start('hidden', {
+          ...wrapperVariants.hidden.transition,
+          ...wordVariants.hidden.transition,
+          delayChildren: 0,
+        })
+        .then(() => {
+          setActivePhraseIndex((currentActivePhrase) => currentActivePhrase + 1);
+          animate();
+        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldAnimationStart]);
