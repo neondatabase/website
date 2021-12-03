@@ -22,8 +22,8 @@ const Hero = () => {
         animationData,
         rendererSettings: {
           filterSize: {
-            width: '300%',
-            height: '300%',
+            width: '400%',
+            height: '400%',
             x: '-100%',
             y: '-100%',
           },
