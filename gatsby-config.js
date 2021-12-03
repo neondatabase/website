@@ -10,7 +10,7 @@ module.exports = {
       'Zenith is PostgreSQL that is serverless, fault-tolerant, branchable, and bottomless',
     siteImage: '/images/social-preview.jpg',
     siteLanguage: 'en',
-    siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
+    siteUrl: process.env.GATSBY_DEFAULT_SITE_URL || 'http://localhost:8000',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -53,8 +53,12 @@ module.exports = {
             svgoConfig: {
               plugins: [
                 {
-                  removeViewBox: false,
+                  name: 'preset-default',
+                  params: {
+                    overrides: [{ name: 'removeViewBox', active: false }],
+                  },
                 },
+                'prefixIds',
               ],
             },
           },
@@ -63,11 +67,7 @@ module.exports = {
           {
             test: /\.svg$/,
             svgoConfig: {
-              plugins: [
-                {
-                  removeViewBox: false,
-                },
-              ],
+              plugins: [{ name: 'removeViewBox', active: false }],
             },
           },
         ],
