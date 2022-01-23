@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run develop",
     "develop": "gatsby develop -H 0.0.0.0",
-    "build": "gatsby build",
+    "build": "gatsby build --prefix-paths",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "format": "prettier --write .",
@@ -21,6 +21,7 @@
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1",
     "framer-motion": "^5.3.3",
+    "fs-extra": "^10.0.0",
     "gatsby": "^4.3.0",
     "gatsby-plugin-image": "^2.3.0",
     "lodash.shuffle": "^4.2.0",
