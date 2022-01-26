@@ -10,10 +10,10 @@ const fs = require('fs-extra');
 
 //
 // I want to switch our current public domain to this repo and use it deploy system,
-// hence moving new webisite into a subfolder and an old one to root.
+// hence moving new website into a subfolder and an old one to root.
 //
 exports.onPostBuild = function () {
-  // Store gatsby files in public/new insteaad of public.
+  // Store gatsby files in public/new instead of public.
   fs.renameSync(path.join(__dirname, 'public'), path.join(__dirname, 'public-new'));
   fs.mkdirSync(path.join(__dirname, 'public'));
   fs.renameSync(path.join(__dirname, 'public-new'), path.join(__dirname, 'public', 'new'));
