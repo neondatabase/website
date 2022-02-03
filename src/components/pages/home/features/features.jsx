@@ -140,12 +140,12 @@ const Features = () => {
   return (
     <section
       id="features"
-      className="pt-40 bg-black safe-paddings 3xl:pt-36 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16"
+      className="safe-paddings bg-black pt-40 3xl:pt-36 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16"
     >
       <Container className="z-20">
         <Heading
           id="features-title"
-          className="text-center lg:max-w-[460px] lg:mx-auto"
+          className="text-center lg:mx-auto lg:max-w-[460px]"
           tag="h2"
           size="md"
           theme="white"
@@ -157,11 +157,11 @@ const Features = () => {
             shouldAnimationStart={isTitleInView}
           />
         </Heading>
-        <p className="mt-5 text-center text-white t-3xl max-w-[940px] mx-auto 2xl:max-w-[800px] 2xl:mt-4 xl:max-w-[610px] xl:mt-3.5 lg:max-w-[580px]">
+        <p className="t-3xl mx-auto mt-5 max-w-[940px] text-center text-white 2xl:mt-4 2xl:max-w-[800px] xl:mt-3.5 xl:max-w-[610px] lg:max-w-[580px]">
           The way Zenith extends PostgreSQL brings many essential features needed for modern
           projects development.
         </p>
-        <ul className="grid grid-cols-12 mt-[92px] grid-gap gap-y-[92px] 2xl:mt-[76px] 2xl:gap-y-[76px] xl:mt-16 xl:gap-y-16 md:grid-cols-1">
+        <ul className="grid-gap mt-[92px] grid grid-cols-12 gap-y-[92px] 2xl:mt-[76px] 2xl:gap-y-[76px] xl:mt-16 xl:gap-y-16 md:grid-cols-1">
           {items.map(({ animationVisibilityRef, animationRef, title, description, tag }, index) => (
             <li
               className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[261px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
@@ -171,14 +171,14 @@ const Features = () => {
               <div className="flex items-end space-x-4 xl:space-x-3.5">
                 <div
                   id={`features-item-${index + 1}-icon`}
-                  className="w-24 h-24 2xl:w-20 2xl:h-20 xl:w-[72px] xl:h-[72px] lg:w-16 lg:h-16"
+                  className="h-24 w-24 2xl:h-20 2xl:w-20 xl:h-[72px] xl:w-[72px] lg:h-16 lg:w-16"
                   ref={animationRef}
                   aria-hidden
                 />
                 {tag?.text && (
                   <span
                     className={clsx(
-                      'inline-block font-mono t-sm px-2.5 border-2 rounded-full mr-3 py-1',
+                      't-sm mr-3 inline-block rounded-full border-2 px-2.5 py-1 font-mono',
                       tag.className
                     )}
                   >
@@ -197,7 +197,7 @@ const Features = () => {
               </Heading>
               <p
                 id={`features-item-${index + 1}-description`}
-                className="mt-4 text-white t-xl xl:mt-3.5"
+                className="t-xl mt-4 text-white xl:mt-3.5"
               >
                 {description}
               </p>

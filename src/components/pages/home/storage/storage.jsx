@@ -16,15 +16,15 @@ const Storage = () => {
 
   return (
     <section
-      className="mt-48 safe-paddings 3xl:mt-44 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20"
+      className="safe-paddings mt-48 3xl:mt-44 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20"
       ref={wrapperRef}
     >
       <Container className="flex items-center justify-between lg:flex-col lg:items-start">
-        <div className="max-w-[600px] mr-[110px] 3xl:max-w-[504px] 3xl:mr-[86px] 2xl:max-w-[416px] 2xl:mr-[72px] xl:max-w-[400px] xl:mr-0 lg:max-w-none">
+        <div className="mr-[110px] max-w-[600px] 3xl:mr-[86px] 3xl:max-w-[504px] 2xl:mr-[72px] 2xl:max-w-[416px] xl:mr-0 xl:max-w-[400px] lg:max-w-none">
           <Heading className="max-w-[370px] lg:max-w-none" tag="h2" size="lg" theme="black">
             Unlimited Storage
           </Heading>
-          <p className="mt-8 t-xl 2xl:mt-7 xl:mt-6">
+          <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
             Zenith redistributes data across a fault-tolerant storage cluster written in rust, which
             takes care of high-availability and effectively makes the database instances on top of
             it &quot;bottomless&quot;. Backups, checkpoints, integration with S3 and point-in-time
@@ -36,7 +36,7 @@ const Storage = () => {
         </div>
 
         <div
-          className="relative order-first w-full max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:order-last lg:max-w-[475px] lg:mt-[46px]"
+          className="relative order-first w-full max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:order-last lg:mt-[46px] lg:max-w-[475px]"
           ref={illustrationWrapperRef}
           aria-hidden
         >

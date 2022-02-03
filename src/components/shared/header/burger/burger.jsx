@@ -7,13 +7,13 @@ const ANIMATION_DURATION = 0.2;
 
 const Burger = ({ className: additionalClassName, onClick, isToggled }) => (
   <motion.button
-    className={clsx('relative w-10 h-10 border-2 border-white rounded-full', additionalClassName)}
+    className={clsx('relative h-10 w-10 rounded-full border-2 border-white', additionalClassName)}
     type="button"
     animate={isToggled ? 'toggled' : 'initial'}
     onClick={onClick}
   >
     <motion.span
-      className="absolute top-[11px] left-[8px] block w-5 h-0.5 bg-white rounded-full"
+      className="absolute top-[11px] left-[8px] block h-0.5 w-5 rounded-full bg-white"
       variants={{
         initial: {
           top: 11,
@@ -28,7 +28,7 @@ const Burger = ({ className: additionalClassName, onClick, isToggled }) => (
       }}
     />
     <motion.span
-      className="absolute top-[17px] left-[12px] block w-3 h-0.5 bg-white rounded-full"
+      className="absolute top-[17px] left-[12px] block h-0.5 w-3 rounded-full bg-white"
       variants={{
         initial: {
           display: 'block',
@@ -41,7 +41,7 @@ const Burger = ({ className: additionalClassName, onClick, isToggled }) => (
       }}
     />
     <motion.span
-      className="absolute bottom-[11px] left-[8px] block w-5 h-0.5 bg-white rounded-full"
+      className="absolute bottom-[11px] left-[8px] block h-0.5 w-5 rounded-full bg-white"
       variants={{
         initial: {
           bottom: 11,
@@ -56,7 +56,7 @@ const Burger = ({ className: additionalClassName, onClick, isToggled }) => (
       }}
     />
     <motion.span
-      className="absolute top-[17px] left-[8px] hidden w-5 h-0.5 bg-white rounded-full"
+      className="absolute top-[17px] left-[8px] hidden h-0.5 w-5 rounded-full bg-white"
       variants={{
         initial: {
           rotate: '0deg',
@@ -71,7 +71,7 @@ const Burger = ({ className: additionalClassName, onClick, isToggled }) => (
       }}
     />
     <motion.span
-      className="absolute top-[17px] left-[8px] hidden w-5 h-0.5 bg-white rounded-full"
+      className="absolute top-[17px] left-[8px] hidden h-0.5 w-5 rounded-full bg-white"
       variants={{
         initial: {
           rotate: '0deg',

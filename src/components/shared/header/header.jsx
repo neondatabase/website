@@ -32,13 +32,13 @@ const links = [
 ];
 
 const Header = ({ isMobileMenuOpen, onBurgerClick }) => (
-  <header className="absolute top-0 left-0 right-0 z-30 w-full safe-paddings lg:relative lg:bg-black">
+  <header className="safe-paddings absolute top-0 left-0 right-0 z-30 w-full lg:relative lg:bg-black">
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5">
       <Link className="hidden text-white xl:block" to="/">
         <span className="sr-only">Zenith</span>
         <Logo className="h-6 2xl:h-5" aria-hidden />
       </Link>
-      <nav className="xl:absolute xl:-translate-x-1/2 xl:-translate-y-1/2 xl:top-1/2 xl:left-1/2">
+      <nav className="xl:absolute xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2">
         <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
           {links.map(({ to, text }, index) => (
             <li key={index}>
@@ -50,7 +50,7 @@ const Header = ({ isMobileMenuOpen, onBurgerClick }) => (
         </ul>
       </nav>
       <Link
-        className="absolute block text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 xl:hidden"
+        className="absolute top-1/2 left-1/2 block -translate-x-1/2 -translate-y-1/2 text-white xl:hidden"
         to="/"
       >
         <span className="sr-only">Zenith</span>

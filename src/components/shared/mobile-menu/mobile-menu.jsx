@@ -64,7 +64,7 @@ const MobileMenu = ({ isOpen }) => {
 
   return (
     <motion.nav
-      className="absolute z-[-1] hidden px-8 pt-4 bg-white rounded-md top-20 right-8 left-8 pb-7 md:right-4 md:left-4 lg:block"
+      className="absolute top-20 right-8 left-8 z-[-1] hidden rounded-md bg-white px-8 pt-4 pb-7 lg:block md:right-4 md:left-4"
       initial="from"
       animate={controls}
       variants={variants}
@@ -79,7 +79,7 @@ const MobileMenu = ({ isOpen }) => {
           </li>
         ))}
       </ul>
-      <Button className="w-full mt-4" to="/" size="sm" theme="secondary">
+      <Button className="mt-4 w-full" to="/" size="sm" theme="secondary">
         Sign Up
       </Button>
     </motion.nav>
