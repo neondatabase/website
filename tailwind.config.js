@@ -7,7 +7,7 @@ module.exports = {
   darkMode: false,
   theme: {
     screens: {
-      '3xl': { max: '1919px' },
+      '3xl': { max: '1920px' },
       '2xl': { max: '1599px' },
       xl: { max: '1279px' },
       lg: { max: '1023px' },
