@@ -19,7 +19,7 @@ const links = [
   },
   {
     text: 'Docs',
-    to: '/docs',
+    to: '/',
   },
   {
     text: 'Changelog',

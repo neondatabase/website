@@ -12,7 +12,6 @@ module.exports = {
     siteLanguage: 'en',
     siteUrl: process.env.GATSBY_DEFAULT_SITE_URL || 'http://localhost:8000',
   },
-  pathPrefix: `/new`,
   plugins: [
     'gatsby-plugin-react-helmet',
     {
