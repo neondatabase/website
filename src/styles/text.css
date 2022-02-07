@@ -78,6 +78,22 @@
   }
 }
 
+.t-5xl {
+  @apply text-5xl;
+
+  @screen 2xl {
+    font-size: 40px;
+  }
+
+  @screen xl {
+    font-size: 36px;
+  }
+
+  @screen md {
+    font-size: 32px;
+  }
+}
+
 .t-6xl {
   @apply text-6xl;
 

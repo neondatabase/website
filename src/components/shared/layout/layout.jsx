@@ -6,7 +6,7 @@ import Header from 'components/shared/header';
 import MobileMenu from 'components/shared/mobile-menu';
 import SEO from 'components/shared/seo';
 
-const Layout = ({ children }) => {
+const Layout = ({ headerTheme, children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleHeaderBurgerClick = () => setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -14,7 +14,11 @@ const Layout = ({ children }) => {
   return (
     <>
       <SEO />
-      <Header isMobileMenuOpen={isMobileMenuOpen} onBurgerClick={handleHeaderBurgerClick} />
+      <Header
+        theme={headerTheme}
+        isMobileMenuOpen={isMobileMenuOpen}
+        onBurgerClick={handleHeaderBurgerClick}
+      />
       <main className="overflow-hidden">{children}</main>
       <Footer />
       <MobileMenu isOpen={isMobileMenuOpen} />
@@ -23,6 +27,7 @@ const Layout = ({ children }) => {
 };
 
 Layout.propTypes = {
+  headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
   children: PropTypes.node.isRequired,
 };
 

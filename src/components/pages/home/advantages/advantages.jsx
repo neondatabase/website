@@ -77,7 +77,7 @@ const Advantages = () => {
       id="advantages"
       className="safe-paddings bg-black py-80 3xl:py-72 2xl:py-64 xl:py-52 lg:py-40 md:py-24"
     >
-      <Container className="z-20">
+      <Container className="z-20" size="md">
         <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px] xl:space-x-[50px] lg:flex-col lg:items-start lg:space-x-0">
           <div
             id="advantages-video-wrapper"

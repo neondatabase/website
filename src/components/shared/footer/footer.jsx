@@ -70,7 +70,7 @@ const menuItems = [
 
 const Footer = () => (
   <footer className="safe-paddings overflow-hidden border-t-2 border-black">
-    <Container className="flex justify-between xl:flex-col lg:border-none">
+    <Container className="flex justify-between xl:flex-col lg:border-none" size="md">
       <div className="flex flex-col justify-between pt-8 pb-14 2xl:pt-[25px] 2xl:pb-11 xl:relative xl:flex-row xl:items-center xl:py-6 xl:before:absolute xl:before:left-[-50vw] xl:before:-top-0.5 xl:before:h-0.5 xl:before:w-[200vw] xl:before:bg-black md:block">
         <Link className="block text-black" to="/">
           <span className="sr-only">Zenith</span>

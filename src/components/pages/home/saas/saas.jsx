@@ -23,7 +23,7 @@ const SaaS = () => {
       className="safe-paddings bg-black py-[212px] 3xl:py-44 2xl:py-40 xl:py-32 lg:py-24 md:py-20"
       ref={wrapperRef}
     >
-      <Container className="z-20 flex items-center justify-between lg:block">
+      <Container className="z-20 flex items-center justify-between lg:block" size="md">
         <div>
           <Heading id="saas-title" tag="h2" size="lg" theme="white" ref={titleRef}>
             <BlinkingText
