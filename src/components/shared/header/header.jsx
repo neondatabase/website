@@ -33,7 +33,12 @@ const links = [
 ];
 
 const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
-  <header className="safe-paddings absolute top-0 left-0 right-0 z-30 w-full lg:relative lg:bg-black">
+  <header
+    className={clsx(
+      'safe-paddings absolute top-0 left-0 right-0 z-30 w-full lg:relative',
+      theme === 'white' && 'lg:bg-black'
+    )}
+  >
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5" size="md">
       <Link
         className={clsx(
@@ -76,7 +81,15 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
       >
         Sign Up
       </Button>
-      <Burger className="hidden lg:block" isToggled={isMobileMenuOpen} onClick={onBurgerClick} />
+      <Burger
+        className={clsx(
+          'hidden lg:block',
+          theme === 'white' && 'text-white',
+          theme === 'black' && 'text-black'
+        )}
+        isToggled={isMobileMenuOpen}
+        onClick={onBurgerClick}
+      />
     </Container>
   </header>
 );

@@ -187,46 +187,57 @@ const items = [
 ];
 
 const Team = () => (
-  <section className="safe-paddings pt-48">
+  <section className="safe-paddings pt-48 3xl:pt-44 2xl:pt-40 xl:pt-32 lg:pt-12 md:pt-6">
     <Container size="sm">
       <Heading tag="h1" size="md" theme="black">
         Meet the team
       </Heading>
-      <p className="t-xl mt-8">
+      <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
         laboris nisi ut aliquip ex ea commodo consequat.
       </p>
-      <p className="t-xl mt-6">
+      <p className="t-xl mt-6 2xl:mt-5 xl:mt-4">
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
-      <ul className="grid-gap mt-16 grid grid-cols-2 gap-y-20">
+      <ul className="grid-gap mt-16 grid grid-cols-2 gap-y-20 xl:gap-y-10 lg:mt-12 md:mt-8 md:block md:space-y-8">
         {items.map(({ photo, name, position, githubUrl, linkedinUrl, twitterUrl }, index) => (
           <li className="flex" key={index}>
-            <div className="w-36">{photo}</div>
-            <div className="ml-5">
-              <h3 className="max-w-[100px] text-2xl font-medium leading-snug">{name}</h3>
-              <p className="mt-2 leading-none text-gray-2">{position}</p>
+            <div className="w-36 flex-shrink-0 xs:w-32">{photo}</div>
+            <div className="ml-5 xs:ml-3">
+              <h3 className="max-w-[100px] text-2xl font-medium leading-snug md:max-w-none">
+                {name}
+              </h3>
+              <p className="t-base mt-2 text-gray-2">{position}</p>
               <ul className="mt-3 flex space-x-2">
                 {githubUrl && (
                   <li>
-                    <Link to={githubUrl}>
+                    <Link
+                      className="text-gray-2 transition-colors duration-200 hover:text-black"
+                      to={githubUrl}
+                    >
                       <span className="sr-only">Github</span> <GithubIcon />
                     </Link>
                   </li>
                 )}
                 {linkedinUrl && (
                   <li>
-                    <Link to={linkedinUrl}>
+                    <Link
+                      className="text-gray-2 transition-colors duration-200 hover:text-black"
+                      to={linkedinUrl}
+                    >
                       <span className="sr-only">Linkedin</span> <LinkedinIcon />
                     </Link>
                   </li>
                 )}
                 {twitterUrl && (
                   <li>
-                    <Link to={twitterUrl}>
+                    <Link
+                      className="text-gray-2 transition-colors duration-200 hover:text-black"
+                      to={twitterUrl}
+                    >
                       <span className="sr-only">Twitter</span> <TwitterIcon />
                     </Link>
                   </li>
