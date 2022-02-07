@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -15,7 +16,7 @@ const links = [
   },
   {
     text: 'Team',
-    to: '/',
+    to: '/team',
   },
   {
     text: 'Docs',
@@ -31,10 +32,17 @@ const links = [
   },
 ];
 
-const Header = ({ isMobileMenuOpen, onBurgerClick }) => (
+const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
   <header className="safe-paddings absolute top-0 left-0 right-0 z-30 w-full lg:relative lg:bg-black">
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5" size="md">
-      <Link className="hidden text-white xl:block" to="/">
+      <Link
+        className={clsx(
+          'hidden xl:block',
+          theme === 'white' && 'text-white',
+          theme === 'black' && 'text-black'
+        )}
+        to="/"
+      >
         <span className="sr-only">Zenith</span>
         <Logo className="h-6 2xl:h-5" aria-hidden />
       </Link>
@@ -42,7 +50,7 @@ const Header = ({ isMobileMenuOpen, onBurgerClick }) => (
         <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
           {links.map(({ to, text }, index) => (
             <li key={index}>
-              <Link to={to} theme="white" size="sm">
+              <Link to={to} theme={theme} size="sm">
                 {text}
               </Link>
             </li>
@@ -50,13 +58,22 @@ const Header = ({ isMobileMenuOpen, onBurgerClick }) => (
         </ul>
       </nav>
       <Link
-        className="absolute top-1/2 left-1/2 block -translate-x-1/2 -translate-y-1/2 text-white xl:hidden"
+        className={clsx(
+          'absolute top-1/2 left-1/2 block -translate-x-1/2 -translate-y-1/2 xl:hidden',
+          theme === 'white' && 'text-white',
+          theme === 'black' && 'text-black'
+        )}
         to="/"
       >
         <span className="sr-only">Zenith</span>
         <Logo className="h-6 2xl:h-5" aria-hidden />
       </Link>
-      <Button className="lg:hidden" to="/" size="xs" theme="tertiary">
+      <Button
+        className="lg:hidden"
+        to="/"
+        size="xs"
+        theme={theme === 'white' ? 'tertiary' : 'secondary'}
+      >
         Sign Up
       </Button>
       <Burger className="hidden lg:block" isToggled={isMobileMenuOpen} onClick={onBurgerClick} />
@@ -65,6 +82,7 @@ const Header = ({ isMobileMenuOpen, onBurgerClick }) => (
 );
 
 Header.propTypes = {
+  theme: PropTypes.oneOf(['white', 'black']).isRequired,
   isMobileMenuOpen: PropTypes.bool,
   onBurgerClick: PropTypes.func.isRequired,
 };

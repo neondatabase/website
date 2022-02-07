@@ -78,6 +78,10 @@
   }
 }
 
+.t-5xl {
+  @apply text-5xl;
+}
+
 .t-6xl {
   @apply text-6xl;
 
