@@ -19,7 +19,7 @@ const Storage = () => {
       className="safe-paddings mt-48 3xl:mt-44 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20"
       ref={wrapperRef}
     >
-      <Container className="flex items-center justify-between lg:flex-col lg:items-start">
+      <Container className="flex items-center justify-between lg:flex-col lg:items-start" size="md">
         <div className="mr-[110px] max-w-[600px] 3xl:mr-[86px] 3xl:max-w-[504px] 2xl:mr-[72px] 2xl:max-w-[416px] xl:mr-0 xl:max-w-[400px] lg:max-w-none">
           <Heading className="max-w-[370px] lg:max-w-none" tag="h2" size="lg" theme="black">
             Unlimited Storage

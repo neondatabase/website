@@ -65,8 +65,11 @@ const Hero = () => {
   );
 
   return (
-    <section className="bg-black pt-[322px] safe-paddings 3xl:pt-[243px] 2xl:pt-[207px] xl:pt-[193px] lg:pt-12 md:pt-6">
-      <Container className="z-20 flex items-center justify-between lg:flex-col lg:justify-center">
+    <section className="safe-paddings bg-black pt-[322px] 3xl:pt-[243px] 2xl:pt-[207px] xl:pt-[193px] lg:pt-12 md:pt-6">
+      <Container
+        className="z-20 flex items-center justify-between lg:flex-col lg:justify-center"
+        size="md"
+      >
         <div className="relative z-20 max-w-[860px] 3xl:max-w-[750px] 2xl:max-w-[610px] xl:max-w-[535px] lg:text-center">
           <Heading
             id="hero-title"
@@ -90,7 +93,7 @@ const Hero = () => {
           </Button>
         </div>
         <div
-          className="!absolute top-[-165px] -right-1 w-[820px] 3xl:w-[677px] 3xl:top-[-122px] 3xl:right-[-17px] 2xl:w-[564px] 2xl:top-[-102px] 2xl:right-[-14px] xl:w-[492px] xl:top-[-88px] xl:right-[-132px] lg:!relative lg:top-0 lg:right-0 lg:w-[451px] lg:-mr-2.5 lg:mt-10 sm:w-[391px] sm:mt-8 xs:w-[294px]"
+          className="!absolute top-[-165px] -right-1 w-[820px] 3xl:top-[-122px] 3xl:right-[-17px] 3xl:w-[677px] 2xl:top-[-102px] 2xl:right-[-14px] 2xl:w-[564px] xl:top-[-88px] xl:right-[-132px] xl:w-[492px] lg:!relative lg:top-0 lg:right-0 lg:-mr-2.5 lg:mt-10 lg:w-[451px] sm:mt-8 sm:w-[391px] xs:w-[294px]"
           ref={animationVisibilityRef}
           aria-hidden
         >
@@ -101,44 +104,44 @@ const Hero = () => {
           />
 
           <div className="absolute top-0 right-0 z-10 w-full" ref={animationRef} />
-          <div className="absolute top-1/2 left-1/2 w-[888px] h-[888px] border-2 border-gray-1 rounded-full translate-x-[-51%] translate-y-[-51.6%] 3xl:w-[716px] 3xl:h-[716px] 2xl:w-[600px] 2xl:h-[600px] xl:w-[520px] xl:h-[520px] lg:w-[480px] lg:h-[480px] sm:w-[420px] sm:h-[420px] xs:hidden" />
-          <div className="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] border-2 border-gray-1 rounded-full translate-x-[-51%] translate-y-[-51.6%] 3xl:w-[796px] 3xl:h-[796px] 2xl:w-[670px] 2xl:h-[670px] xl:w-[590px] xl:h-[590px] lg:w-[540px] lg:h-[540px] sm:w-[470px] sm:h-[470px] xs:hidden" />
-          <div className="absolute top-1/2 left-1/2 w-[1160px] h-[1160px] border-2 border-gray-1 rounded-full translate-x-[-51%] translate-y-[-51.6%] 3xl:w-[924px] 3xl:h-[924px]  2xl:w-[780px] 2xl:h-[780px] xl:w-[700px] xl:h-[700px] lg:w-[630px] lg:h-[630px] sm:w-[520px] sm:h-[520px] xs:hidden" />
+          <div className="absolute top-1/2 left-1/2 h-[888px] w-[888px] translate-x-[-51%] translate-y-[-51.6%] rounded-full border-2 border-gray-1 3xl:h-[716px] 3xl:w-[716px] 2xl:h-[600px] 2xl:w-[600px] xl:h-[520px] xl:w-[520px] lg:h-[480px] lg:w-[480px] sm:h-[420px] sm:w-[420px] xs:hidden" />
+          <div className="absolute top-1/2 left-1/2 h-[1000px] w-[1000px] translate-x-[-51%] translate-y-[-51.6%] rounded-full border-2 border-gray-1 3xl:h-[796px] 3xl:w-[796px] 2xl:h-[670px] 2xl:w-[670px] xl:h-[590px] xl:w-[590px] lg:h-[540px] lg:w-[540px] sm:h-[470px] sm:w-[470px] xs:hidden" />
+          <div className="absolute top-1/2 left-1/2 h-[1160px] w-[1160px] translate-x-[-51%] translate-y-[-51.6%] rounded-full border-2 border-gray-1 3xl:h-[924px] 3xl:w-[924px]  2xl:h-[780px] 2xl:w-[780px] xl:h-[700px] xl:w-[700px] lg:h-[630px] lg:w-[630px] sm:h-[520px] sm:w-[520px] xs:hidden" />
 
-          <div className="absolute w-6 h-6 top-[-54px] left-[383px] 3xl:top-[-37px] 3xl:left-[310px] 2xl:top-[-42px] 2xl:left-[126px] xl:hidden">
-            <div className="absolute top-0 left-0 w-12 h-6 bg-black rounded-l-full" />
+          <div className="absolute top-[-54px] left-[383px] h-6 w-6 3xl:top-[-37px] 3xl:left-[310px] 2xl:top-[-42px] 2xl:left-[126px] xl:hidden">
+            <div className="absolute top-0 left-0 h-6 w-12 rounded-l-full bg-black" />
             <div
               className="circle circle-with-text circle-with-text-right !translate-x-0 !translate-y-0"
               data-text="Cloudflare Workers"
             />
           </div>
 
-          <div className="absolute w-6 h-6 top-[89px] right-[81px] 3xl:top-[67px] 3xl:right-[81px] 2xl:top-[2px] 2xl:right-[68px] xl:hidden lg:block lg:top-[1px] lg:right-[47px] sm:hidden">
-            <div className="absolute top-0 left-0 w-12 h-6 bg-black rounded-l-full" />
+          <div className="absolute top-[89px] right-[81px] h-6 w-6 3xl:top-[67px] 3xl:right-[81px] 2xl:top-[2px] 2xl:right-[68px] xl:hidden lg:top-[1px] lg:right-[47px] lg:block sm:hidden">
+            <div className="absolute top-0 left-0 h-6 w-12 rounded-l-full bg-black" />
             <div
               className="circle circle-with-text circle-with-text-right !translate-x-0 !translate-y-0"
               data-text="Hasura Cloud"
             />
           </div>
 
-          <div className="absolute w-6 h-6 top-[185px] left-[-5px] 3xl:top-[152px] 3xl:left-[4px] 2xl:top-[128px] 2xl:left-[-3px] xl:top-[54px] xl:left-[-9px] lg:top-[97px] lg:left-[-3px] sm:hidden">
-            <div className="absolute top-0 right-0 w-12 h-6 bg-black rounded-r-full" />
+          <div className="absolute top-[185px] left-[-5px] h-6 w-6 3xl:top-[152px] 3xl:left-[4px] 2xl:top-[128px] 2xl:left-[-3px] xl:top-[54px] xl:left-[-9px] lg:top-[97px] lg:left-[-3px] sm:hidden">
+            <div className="absolute top-0 right-0 h-6 w-12 rounded-r-full bg-black" />
             <div
               className="circle circle-with-text circle-with-text-left !translate-x-0 !translate-y-0"
               data-text="Gatsby Cloud"
             />
           </div>
 
-          <div className="absolute w-6 h-6 top-auto bottom-[61px] left-[41px] 3xl:left-[39px] 2xl:bottom-[51px] 2xl:left-[25px] xl:bottom-[44px] xl:left-[15px] lg:bottom-[36px] lg:left-[17px] sm:hidden">
-            <div className="absolute top-0 right-0 w-12 h-6 bg-black rounded-r-full" />
+          <div className="absolute top-auto bottom-[61px] left-[41px] h-6 w-6 3xl:left-[39px] 2xl:bottom-[51px] 2xl:left-[25px] xl:bottom-[44px] xl:left-[15px] lg:bottom-[36px] lg:left-[17px] sm:hidden">
+            <div className="absolute top-0 right-0 h-6 w-12 rounded-r-full bg-black" />
             <div
               className="circle circle-with-text circle-with-text-left !translate-x-0 !translate-y-0"
               data-text="Netlify"
             />
           </div>
 
-          <div className="absolute w-6 h-6 top-auto bottom-[-48px] right-[233px] 3xl:bottom-[-28px] 3xl:right-[190px] 2xl:bottom-[-29px] 2xl:right-[162px] xl:hidden lg:block lg:right-[131px] sm:hidden">
-            <div className="absolute top-0 left-0 w-12 h-6 bg-black rounded-l-full" />
+          <div className="absolute top-auto bottom-[-48px] right-[233px] h-6 w-6 3xl:bottom-[-28px] 3xl:right-[190px] 2xl:bottom-[-29px] 2xl:right-[162px] xl:hidden lg:right-[131px] lg:block sm:hidden">
+            <div className="absolute top-0 left-0 h-6 w-12 rounded-l-full bg-black" />
             <div
               className="circle circle-with-text circle-with-text-right !translate-x-0 !translate-y-0"
               data-text="Amazon Lambda"

@@ -142,7 +142,7 @@ const Features = () => {
       id="features"
       className="safe-paddings bg-black pt-40 3xl:pt-36 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16"
     >
-      <Container className="z-20">
+      <Container className="z-20" size="md">
         <Heading
           id="features-title"
           className="text-center lg:mx-auto lg:max-w-[460px]"

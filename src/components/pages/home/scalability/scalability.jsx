@@ -19,7 +19,7 @@ const Scalability = () => {
       className="safe-paddings mt-48 3xl:mt-44 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20"
       ref={wrapperRef}
     >
-      <Container className="flex items-center justify-between lg:block">
+      <Container className="flex items-center justify-between lg:block" size="md">
         <div className="ml-[150px] max-w-[600px] 3xl:ml-[126px] 3xl:max-w-[504px] 2xl:ml-[104px] 2xl:max-w-[416px] xl:ml-0 xl:max-w-[400px] lg:max-w-none">
           <Heading tag="h2" size="lg" theme="black">
             On Demand Scalability

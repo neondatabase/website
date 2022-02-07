@@ -84,7 +84,7 @@ const CTA = () => {
       initial="from"
       animate={controls}
     >
-      <Container className="z-20" ref={animationVisibilityRef}>
+      <Container className="z-20" size="md" ref={animationVisibilityRef}>
         <Heading id="cta-title" tag="h2" size="lg" theme="white" ref={titleRef}>
           <BlinkingText
             text="Made for Developers"
