@@ -8,10 +8,13 @@ import Link from 'components/shared/link';
 import Logo from 'images/logo.inline.svg';
 
 import Burger from './burger';
+import DiscordIcon from './images/discord.inline.svg';
+import DiscussionsIcon from './images/discussions.inline.svg';
+import Github from './images/github.inline.svg';
 
 const links = [
   {
-    text: 'Pricing',
+    text: 'Docs',
     to: '/',
   },
   {
@@ -19,23 +22,27 @@ const links = [
     to: '/team',
   },
   {
-    text: 'Docs',
-    to: '/',
-  },
-  {
-    text: 'Changelog',
-    to: '/',
+    text: 'Jobs',
+    to: '/jobs',
   },
   {
     text: 'Blog',
     to: '/',
+  },
+  {
+    text: 'Community',
+    to: '#',
+    items: [
+      { icon: DiscordIcon, text: 'Discord', description: 'Join our community', to: '/' },
+      { icon: DiscussionsIcon, text: 'Discussions', description: 'Get a help', to: '/' },
+    ],
   },
 ];
 
 const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
   <header
     className={clsx(
-      'safe-paddings absolute top-0 left-0 right-0 z-30 w-full lg:relative',
+      'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative',
       theme === 'white' && 'lg:bg-black'
     )}
   >
@@ -53,11 +60,51 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
       </Link>
       <nav className="xl:absolute xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2">
         <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
-          {links.map(({ to, text }, index) => (
-            <li key={index}>
-              <Link to={to} theme={theme} size="sm">
+          {links.map(({ to, text, items }, index) => (
+            <li className={clsx(items?.length > 0 && 'group relative')} key={index}>
+              <Link
+                className={clsx(
+                  items?.length > 0 &&
+                    'relative pr-3.5 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-[transparent] before:transition-colors before:duration-200 group-hover:text-primary-1 group-hover:before:border-t-primary-1',
+                  theme === 'white' && 'before:border-t-white',
+                  theme === 'black' && 'before:border-t-black'
+                )}
+                to={to}
+                theme={theme}
+                size="sm"
+              >
                 {text}
               </Link>
+              {items?.length > 0 && (
+                <div className="group-hover:opacity-1 invisible absolute bottom-0 translate-y-full pt-4 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
+                  <ul
+                    className=" rounded-2xl bg-white p-3.5"
+                    style={{ boxShadow: '0px 4px 10px rgba(26, 26, 26, 0.2)' }}
+                  >
+                    {items.map(({ icon: Icon, text, description, to }, index) => (
+                      <li
+                        className={clsx(index !== 0 && 'mt-3.5 border-t border-t-gray-3 pt-3.5')}
+                        key={index}
+                      >
+                        <Link
+                          className="flex items-center whitespace-nowrap hover:text-primary-1"
+                          to={to}
+                        >
+                          <Icon className="flex-shrink-0" aria-hidden />
+                          <span className="ml-3">
+                            <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
+                              {text}
+                            </span>
+                            <span className="mt-1.5 block leading-none text-black">
+                              {description}
+                            </span>
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -73,14 +120,22 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
         <span className="sr-only">Zenith</span>
         <Logo className="h-6 2xl:h-5" aria-hidden />
       </Link>
-      <Button
-        className="lg:hidden"
-        to="/"
-        size="xs"
-        theme={theme === 'white' ? 'tertiary' : 'secondary'}
-      >
-        Sign Up
-      </Button>
+
+      <div className="flex space-x-5 lg:hidden">
+        <Button
+          className="relative pl-11"
+          to="https://github.com/zenithdb/zenith"
+          size="xs"
+          theme={theme === 'white' ? 'tertiary' : 'secondary'}
+        >
+          <Github className="absolute top-1/2 left-1.5 -translate-y-1/2" />
+          <span>Star Us</span>
+        </Button>
+        <Button to="/" size="xs" theme="primary">
+          Sign Up
+        </Button>
+      </div>
+
       <Burger
         className={clsx(
           'hidden lg:block',
