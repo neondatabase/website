@@ -101,7 +101,7 @@ const MobileMenu = ({ isOpen }) => {
           <GithubIcon className="absolute left-1.5 top-1/2 -translate-y-1/2" />
           Star Us
         </Button>
-        <Button className="flex-grow" to="/" size="xs" theme="secondary">
+        <Button className="h-11 flex-grow" to="/" size="xs" theme="secondary">
           Sign Up
         </Button>
       </div>

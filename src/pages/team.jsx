@@ -5,7 +5,7 @@ import Team from 'components/pages/team/team';
 import Layout from 'components/shared/layout';
 
 const TeamPage = () => (
-  <Layout headerTheme="black">
+  <Layout headerTheme="white">
     <Team />
     <CTA />
   </Layout>

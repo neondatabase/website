@@ -43,15 +43,15 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
   <header
     className={clsx(
       'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative',
-      theme === 'white' && 'lg:bg-black'
+      theme === 'black' && 'lg:bg-black'
     )}
   >
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5" size="md">
       <Link
         className={clsx(
           'hidden xl:block',
-          theme === 'white' && 'text-white',
-          theme === 'black' && 'text-black'
+          theme === 'white' && 'text-black',
+          theme === 'black' && 'text-white'
         )}
         to="/"
       >
@@ -66,11 +66,11 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
                 className={clsx(
                   items?.length > 0 &&
                     'relative pr-3.5 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-[transparent] before:transition-colors before:duration-200 group-hover:text-primary-1 group-hover:before:border-t-primary-1',
-                  theme === 'white' && 'before:border-t-white',
-                  theme === 'black' && 'before:border-t-black'
+                  theme === 'white' && 'before:border-t-black',
+                  theme === 'black' && 'before:border-t-white'
                 )}
                 to={to}
-                theme={theme}
+                theme={theme === 'white' ? 'black' : 'white'}
                 size="sm"
               >
                 {text}
@@ -112,8 +112,8 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
       <Link
         className={clsx(
           'absolute top-1/2 left-1/2 block -translate-x-1/2 -translate-y-1/2 xl:hidden',
-          theme === 'white' && 'text-white',
-          theme === 'black' && 'text-black'
+          theme === 'white' && 'text-black',
+          theme === 'black' && 'text-white'
         )}
         to="/"
       >
@@ -126,9 +126,15 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
           className="relative pl-11"
           to="https://github.com/zenithdb/zenith"
           size="xs"
-          theme={theme === 'white' ? 'tertiary' : 'secondary'}
+          theme={theme === 'white' ? 'quaternary' : 'tertiary'}
         >
-          <Github className="absolute top-1/2 left-1.5 -translate-y-1/2" />
+          <Github
+            className={clsx(
+              'absolute top-1/2 left-1.5 -translate-y-1/2',
+              theme === 'white' && 'text-black',
+              theme === 'black' && 'text-white'
+            )}
+          />
           <span>Star Us</span>
         </Button>
         <Button to="/" size="xs" theme="primary">
@@ -139,8 +145,8 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
       <Burger
         className={clsx(
           'hidden lg:block',
-          theme === 'white' && 'text-white',
-          theme === 'black' && 'text-black'
+          theme === 'white' && 'text-black',
+          theme === 'black' && 'text-white'
         )}
         isToggled={isMobileMenuOpen}
         onClick={onBurgerClick}
