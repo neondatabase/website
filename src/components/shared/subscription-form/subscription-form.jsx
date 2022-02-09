@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import Button from 'components/shared/button';
 
 import CheckIcon from './images/subscription-form-check.inline.svg';
+import ErrorIcon from './images/subscription-form-error.inline.svg';
 import SendIcon from './images/subscription-form-send.inline.svg';
 
 const emailRegexp =
@@ -17,6 +18,19 @@ const appearAndExitAnimationVariants = {
   animate: { opacity: 1, transition: { duration: 0.2 } },
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
+
+function doNowOrAfterSomeTime(callback, loadingAnimationStartedTime) {
+  const LOADING_ANIMATION_FULL_DURATION = 2200; // 2000 (loading animation duration) + 200 (loading animation delay) = 2200
+
+  if (Date.now() - loadingAnimationStartedTime > LOADING_ANIMATION_FULL_DURATION) {
+    callback();
+  } else {
+    setTimeout(
+      callback,
+      LOADING_ANIMATION_FULL_DURATION - (Date.now() - loadingAnimationStartedTime)
+    );
+  }
+}
 
 const SubscriptionForm = ({ className }) => {
   const [email, setEmail] = useState('');
@@ -31,22 +45,12 @@ const SubscriptionForm = ({ className }) => {
     if (!email) {
       setErrorMessage('Please enter your email');
     } else if (!emailRegexp.test(email)) {
-      setErrorMessage('Please valid email');
+      setErrorMessage('Please enter a valid email');
     } else {
       setErrorMessage('');
       setFormState('loading');
 
-      setTimeout(() => {
-        setFormState('success');
-        setEmail('Thanks for subscribing!');
-
-        setTimeout(() => {
-          setFormState('default');
-          setEmail('');
-        }, 2000);
-
-        // 2000 (loading animation duration) + 200 (loading animation delay) = 2200
-      }, 2200);
+      const loadingAnimationStartedTime = Date.now();
 
       fetch('https://submit-form.com/nHIBlORO', {
         headers: {
@@ -55,7 +59,31 @@ const SubscriptionForm = ({ className }) => {
         },
         method: 'POST',
         body: JSON.stringify({ email }),
-      });
+      })
+        .then((response) => {
+          if (response.ok) {
+            doNowOrAfterSomeTime(() => {
+              setFormState('success');
+              setEmail('Thanks for subscribing!');
+
+              setTimeout(() => {
+                setFormState('default');
+                setEmail('');
+              }, 2000);
+            }, loadingAnimationStartedTime);
+          } else {
+            doNowOrAfterSomeTime(() => {
+              setFormState('error');
+              setErrorMessage('Something went wrong. Please reload the page and try again');
+            }, loadingAnimationStartedTime);
+          }
+        })
+        .catch(() => {
+          doNowOrAfterSomeTime(() => {
+            setFormState('error');
+            setErrorMessage('Something went wrong. Please reload the page and try again');
+          }, loadingAnimationStartedTime);
+        });
     }
   };
 
@@ -87,7 +115,7 @@ const SubscriptionForm = ({ className }) => {
       <AnimatePresence>
         {errorMessage && (
           <motion.span
-            className="t-base absolute left-1/2 -bottom-5 translate-y-full -translate-x-1/2 whitespace-nowrap font-semibold text-secondary-1 lg:-bottom-4"
+            className="t-base absolute left-1/2 -bottom-5 w-full translate-y-full -translate-x-1/2 text-center font-semibold !leading-snug text-secondary-1 lg:-bottom-4"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -156,7 +184,7 @@ const SubscriptionForm = ({ className }) => {
 
       {/* Success state */}
       <AnimatePresence>
-        {formState === 'success' && (
+        {(formState === 'success' || formState === 'error') && (
           <motion.div
             className="absolute right-3 top-1/2 -translate-y-1/2 2xl:right-2.5 xl:right-2"
             initial="initial"
@@ -165,7 +193,8 @@ const SubscriptionForm = ({ className }) => {
             variants={appearAndExitAnimationVariants}
             aria-hidden
           >
-            <CheckIcon className="2xl:w-[60px] xl:w-[56px]" />
+            {formState === 'success' && <CheckIcon className="2xl:w-[60px] xl:w-[56px]" />}
+            {formState === 'error' && <ErrorIcon className="2xl:w-[60px] xl:w-[56px]" />}
           </motion.div>
         )}
       </AnimatePresence>

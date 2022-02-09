@@ -8,9 +8,9 @@ import Link from 'components/shared/link';
 import Logo from 'images/logo.inline.svg';
 
 import Burger from './burger';
-import DiscordIcon from './images/discord.inline.svg';
-import DiscussionsIcon from './images/discussions.inline.svg';
-import Github from './images/github.inline.svg';
+import DiscordIcon from './images/header-discord.inline.svg';
+import DiscussionsIcon from './images/header-discussions.inline.svg';
+import Github from './images/header-github.inline.svg';
 
 const links = [
   {
@@ -67,8 +67,8 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
                 className={clsx(
                   items?.length > 0 &&
                     'relative pr-3.5 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-[transparent] before:transition-colors before:duration-200 group-hover:text-primary-2 group-hover:before:border-t-primary-2',
-                  theme === 'white' && 'before:border-t-black',
-                  theme === 'black' && 'before:border-t-white'
+                  items?.length > 0 && theme === 'white' && 'before:border-t-black',
+                  items?.length > 0 && theme === 'black' && 'before:border-t-white'
                 )}
                 to={to}
                 theme={theme === 'white' ? 'black' : 'white'}
