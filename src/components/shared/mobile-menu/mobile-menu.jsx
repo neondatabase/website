@@ -121,7 +121,10 @@ MobileMenu.propTypes = {
   // Typing was taken from here — https://stackoverflow.com/a/51127130
   headerRef: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+    PropTypes.shape({
+      // SSR workaround
+      current: PropTypes.instanceOf(typeof Element === 'undefined' ? () => {} : Element),
+    }),
   ]).isRequired,
   onOutsideClick: PropTypes.func.isRequired,
 };
