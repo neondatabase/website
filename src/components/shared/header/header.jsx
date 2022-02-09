@@ -8,9 +8,9 @@ import Link from 'components/shared/link';
 import Logo from 'images/logo.inline.svg';
 
 import Burger from './burger';
-import DiscordIcon from './images/discord.inline.svg';
-import DiscussionsIcon from './images/discussions.inline.svg';
-import Github from './images/github.inline.svg';
+import DiscordIcon from './images/header-discord.inline.svg';
+import DiscussionsIcon from './images/header-discussions.inline.svg';
+import Github from './images/header-github.inline.svg';
 
 const links = [
   {
@@ -66,9 +66,9 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
               <Link
                 className={clsx(
                   items?.length > 0 &&
-                    'relative pr-3.5 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-[transparent] before:transition-colors before:duration-200 group-hover:text-primary-1 group-hover:before:border-t-primary-1',
-                  theme === 'white' && 'before:border-t-black',
-                  theme === 'black' && 'before:border-t-white'
+                    'relative pr-3.5 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-[transparent] before:transition-colors before:duration-200 group-hover:text-primary-2 group-hover:before:border-t-primary-2',
+                  items?.length > 0 && theme === 'white' && 'before:border-t-black',
+                  items?.length > 0 && theme === 'black' && 'before:border-t-white'
                 )}
                 to={to}
                 theme={theme === 'white' ? 'black' : 'white'}
@@ -88,7 +88,7 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
                         key={index}
                       >
                         <Link
-                          className="flex items-center whitespace-nowrap hover:text-primary-1"
+                          className="flex items-center whitespace-nowrap hover:text-primary-2"
                           to={to}
                         >
                           <Icon className="flex-shrink-0" aria-hidden />
@@ -128,6 +128,8 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
           to="https://github.com/zenithdb/zenith"
           size="xs"
           theme={theme === 'white' ? 'quaternary' : 'tertiary'}
+          rel="noopener noreferrer"
+          target="_blank"
         >
           <Github
             className={clsx(

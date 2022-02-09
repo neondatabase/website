@@ -29,10 +29,10 @@ const DataBranching = () => (
         alt=""
         loading="lazy"
       />
-      <div className="absolute top-[209px] right-px h-3 w-5 translate-x-full rounded-r bg-secondary-1 3xl:hidden" />
-      <div className="absolute bottom-[339px] left-px h-3 w-5 -translate-x-full rounded-l bg-black 3xl:hidden" />
-      <div className="absolute bottom-[339px] right-px h-3 w-5 translate-x-full rounded-r bg-black 3xl:hidden" />
-      <div className="absolute bottom-[162px] right-px h-3 w-5 translate-x-full rounded-r bg-black 3xl:hidden" />
+      <div className="absolute top-[209px] right-px h-3 w-screen translate-x-full bg-secondary-1 3xl:hidden" />
+      <div className="absolute bottom-[339px] left-px h-3 w-screen -translate-x-full bg-black 3xl:hidden" />
+      <div className="absolute bottom-[339px] right-px h-3 w-screen translate-x-full bg-black 3xl:hidden" />
+      <div className="absolute bottom-[162px] right-px h-3 w-screen translate-x-full bg-black 3xl:hidden" />
     </div>
   </section>
 );
