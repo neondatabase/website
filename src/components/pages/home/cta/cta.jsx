@@ -60,7 +60,7 @@ const CTA = () => {
 
   const handleButtonClick = () => {
     if (!isCopied) {
-      copyToClipboard('psql -h lb.zenith.tech', { onCopy: setIsCopied(true) });
+      copyToClipboard('psql -h start.zenith.tech', { onCopy: setIsCopied(true) });
     }
   };
 
@@ -108,7 +108,7 @@ const CTA = () => {
           />
           <div className="relative flex items-center justify-between p-2 bg-white border-4 border-black rounded-full pl-9 2xl:p-1.5 2xl:pl-7 xl:p-1 xl:pl-6 md:py-[22px] md:px-0 md:justify-center">
             <span className="font-mono t-3xl whitespace-nowrap !leading-none">
-              $ psql -h lb.zenith.tech
+              $ psql -h start.zenith.tech
             </span>
             <Button
               className="relative md:hidden"
