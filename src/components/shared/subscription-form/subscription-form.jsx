@@ -87,7 +87,7 @@ const SubscriptionForm = ({ className }) => {
       <AnimatePresence>
         {errorMessage && (
           <motion.span
-            className="t-base absolute left-1/2 -bottom-4 translate-y-full -translate-x-1/2 whitespace-nowrap font-semibold text-secondary-1 lg:-bottom-3"
+            className="t-base absolute left-1/2 -bottom-5 translate-y-full -translate-x-1/2 whitespace-nowrap font-semibold text-secondary-1 lg:-bottom-4"
             initial="initial"
             animate="animate"
             exit="exit"

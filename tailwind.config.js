@@ -38,6 +38,7 @@ module.exports = {
         white: '#ffffff',
         primary: {
           1: '#00e699',
+          2: '#00cc88',
         },
         secondary: {
           1: '#ff4c79',
@@ -50,7 +51,7 @@ module.exports = {
         gray: {
           1: '#262626',
           2: '#404040',
-          3: '#cccccc',
+          3: '#e5e5e5',
         },
       },
       keyframes: (theme) => ({

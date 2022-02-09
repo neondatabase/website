@@ -66,7 +66,7 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
               <Link
                 className={clsx(
                   items?.length > 0 &&
-                    'relative pr-3.5 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-[transparent] before:transition-colors before:duration-200 group-hover:text-primary-1 group-hover:before:border-t-primary-1',
+                    'relative pr-3.5 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-[transparent] before:transition-colors before:duration-200 group-hover:text-primary-2 group-hover:before:border-t-primary-2',
                   theme === 'white' && 'before:border-t-black',
                   theme === 'black' && 'before:border-t-white'
                 )}
@@ -88,7 +88,7 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
                         key={index}
                       >
                         <Link
-                          className="flex items-center whitespace-nowrap hover:text-primary-1"
+                          className="flex items-center whitespace-nowrap hover:text-primary-2"
                           to={to}
                         >
                           <Icon className="flex-shrink-0" aria-hidden />
@@ -128,6 +128,8 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
           to="https://github.com/zenithdb/zenith"
           size="xs"
           theme={theme === 'white' ? 'quaternary' : 'tertiary'}
+          rel="noopener noreferrer"
+          target="_blank"
         >
           <Github
             className={clsx(
