@@ -207,18 +207,19 @@ const Team = () => (
           <li className="flex" key={index}>
             <div className="w-36 flex-shrink-0 xs:w-32">{photo}</div>
             <div className="ml-5 xs:ml-3">
-              <h3 className="max-w-[100px] text-2xl font-medium leading-snug md:max-w-none">
+              <h3 className="max-w-[100px] text-2xl font-medium leading-snug md:max-w-none xs:text-[20px] xs:leading-tight">
                 {name}
               </h3>
-              <p className="t-base mt-2 text-gray-2">{position}</p>
-              <ul className="mt-3 flex space-x-2">
+              <p className="t-base mt-2 !leading-snug text-gray-2 xs:mt-1">{position}</p>
+              <ul className="mt-3 flex space-x-2 xs:mt-2">
                 {githubUrl && (
                   <li>
                     <Link
                       className="text-gray-2 transition-colors duration-200 hover:text-black"
                       to={githubUrl}
                     >
-                      <span className="sr-only">Github</span> <GithubIcon />
+                      <span className="sr-only">Github</span>
+                      <GithubIcon className="xs:h-6 xs:w-6" />
                     </Link>
                   </li>
                 )}
@@ -228,7 +229,8 @@ const Team = () => (
                       className="text-gray-2 transition-colors duration-200 hover:text-black"
                       to={linkedinUrl}
                     >
-                      <span className="sr-only">Linkedin</span> <LinkedinIcon />
+                      <span className="sr-only">Linkedin</span>
+                      <LinkedinIcon className="xs:h-6 xs:w-6" />
                     </Link>
                   </li>
                 )}
@@ -238,7 +240,8 @@ const Team = () => (
                       className="text-gray-2 transition-colors duration-200 hover:text-black"
                       to={twitterUrl}
                     >
-                      <span className="sr-only">Twitter</span> <TwitterIcon />
+                      <span className="sr-only">Twitter</span>
+                      <TwitterIcon className="xs:h-6 xs:w-6" />
                     </Link>
                   </li>
                 )}

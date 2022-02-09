@@ -34,7 +34,15 @@ const links = [
     to: '/',
   },
   {
+    text: 'Pricing',
+    to: '/',
+  },
+  {
     text: 'Team',
+    to: '/team',
+  },
+  {
+    text: 'Changelog',
     to: '/',
   },
   {
@@ -42,12 +50,8 @@ const links = [
     to: '/',
   },
   {
-    text: 'Changelog',
-    to: '/',
-  },
-  {
-    text: 'Blog',
-    to: '/',
+    text: 'Jobs',
+    to: '/jobs',
   },
 ];
 

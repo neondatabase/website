@@ -10,28 +10,32 @@ const menuItems = [
     heading: 'Company',
     links: [
       {
-        text: 'Pricing',
+        text: 'Blog',
         to: '/',
       },
       {
-        text: 'Team',
+        text: 'About us',
+        to: '/',
+      },
+      {
+        text: 'Changelog',
         to: '/',
       },
     ],
   },
   {
-    heading: 'Resources',
+    heading: 'Docs',
     links: [
       {
-        text: 'Blog',
+        text: 'Our docs',
         to: '/',
       },
       {
-        text: 'Docs',
+        text: 'Postgres docs',
         to: '/',
       },
       {
-        text: 'Changelog',
+        text: 'Postgres maillists',
         to: '/',
       },
     ],

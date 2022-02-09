@@ -15,20 +15,24 @@ const links = [
     to: '/',
   },
   {
-    text: 'Team',
-    to: '/team',
+    text: 'Pricing',
+    to: '/',
   },
   {
-    text: 'Docs',
-    to: '/',
+    text: 'Team',
+    to: '/team',
   },
   {
     text: 'Changelog',
     to: '/',
   },
   {
-    text: 'Blog',
+    text: 'Docs',
     to: '/',
+  },
+  {
+    text: 'Jobs',
+    to: '/jobs',
   },
 ];
 
@@ -36,15 +40,15 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
   <header
     className={clsx(
       'safe-paddings absolute top-0 left-0 right-0 z-30 w-full lg:relative',
-      theme === 'white' && 'lg:bg-black'
+      theme === 'black' && 'lg:bg-black'
     )}
   >
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5" size="md">
       <Link
         className={clsx(
           'hidden xl:block',
-          theme === 'white' && 'text-white',
-          theme === 'black' && 'text-black'
+          theme === 'white' && 'text-black',
+          theme === 'black' && 'text-white'
         )}
         to="/"
       >
@@ -55,7 +59,7 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
         <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
           {links.map(({ to, text }, index) => (
             <li key={index}>
-              <Link to={to} theme={theme} size="sm">
+              <Link to={to} theme={theme === 'white' ? 'black' : 'white'} size="sm">
                 {text}
               </Link>
             </li>
@@ -65,8 +69,8 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
       <Link
         className={clsx(
           'absolute top-1/2 left-1/2 block -translate-x-1/2 -translate-y-1/2 xl:hidden',
-          theme === 'white' && 'text-white',
-          theme === 'black' && 'text-black'
+          theme === 'white' && 'text-black',
+          theme === 'black' && 'text-white'
         )}
         to="/"
       >
@@ -77,15 +81,15 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
         className="lg:hidden"
         to="/"
         size="xs"
-        theme={theme === 'white' ? 'tertiary' : 'secondary'}
+        theme={theme === 'white' ? 'secondary' : 'tertiary'}
       >
         Sign Up
       </Button>
       <Burger
         className={clsx(
           'hidden lg:block',
-          theme === 'white' && 'text-white',
-          theme === 'black' && 'text-black'
+          theme === 'white' && 'text-black',
+          theme === 'black' && 'text-white'
         )}
         isToggled={isMobileMenuOpen}
         onClick={onBurgerClick}
