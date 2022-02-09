@@ -21,6 +21,7 @@ const Hero = () => (
           src="./images/illustration.jpg"
           alt=""
           imgClassName="rounded-md"
+          loading="eager"
           aria-hidden
         />
       </div>
