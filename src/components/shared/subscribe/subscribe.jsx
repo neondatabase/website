@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 import { StaticImage } from 'gatsby-plugin-image';
 import React, { useState } from 'react';
@@ -12,6 +13,10 @@ import DiscordIcon from './images/subscribe-discord.inline.svg';
 import GithubIcon from './images/subscribe-github.inline.svg';
 import SendIcon from './images/subscribe-send.inline.svg';
 import TwitterIcon from './images/subscribe-twitter.inline.svg';
+
+const emailRegexp =
+  // eslint-disable-next-line no-control-regex, no-useless-escape
+  /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
 
 const links = [
   {
@@ -28,20 +33,28 @@ const links = [
   },
 ];
 
+const appearAndExitAnimationVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.2 } },
+  exit: { opacity: 0, transition: { duration: 0.2 } },
+};
+
 const Subscribe = () => {
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState('default');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (event) => setEmail(event.currentTarget.value.trim());
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const emailRegexp =
-      // eslint-disable-next-line no-control-regex, no-useless-escape
-      /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
-
-    if (emailRegexp.test(email) && formState === 'default') {
+    if (!email) {
+      setErrorMessage('Please enter your email');
+    } else if (!emailRegexp.test(email)) {
+      setErrorMessage('Please valid email');
+    } else {
+      setErrorMessage('');
       setFormState('loading');
 
       setTimeout(() => {
@@ -56,14 +69,14 @@ const Subscribe = () => {
         // 2000 (loading animation duration) + 200 (loading animation delay) = 2200
       }, 2200);
 
-      fetch('https://submit-form.com/nHIBlORO', {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify({ email }),
-      });
+      // fetch('https://submit-form.com/nHIBlORO', {
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     Accept: 'application/json',
+      //   },
+      //   method: 'POST',
+      //   body: JSON.stringify({ email }),
+      // });
     }
   };
 
@@ -87,7 +100,10 @@ const Subscribe = () => {
             onSubmit={handleSubmit}
           >
             <input
-              className="remove-autocomplete-styles outline-none t-2xl relative block h-24 w-[696px] rounded-full border-4 border-black bg-white pl-7 pr-[218px] text-black placeholder-black 3xl:w-[576px] 2xl:h-20 2xl:w-[478px] 2xl:pr-[187px] xl:h-[72px] xl:w-[448px] xl:pr-[164px] lg:w-full lg:pl-5 md:pr-20"
+              className={clsx(
+                'remove-autocomplete-styles outline-none t-2xl relative block h-24 w-[696px] rounded-full border-4 border-black bg-white pl-7 pr-[218px] font-semibold text-black placeholder-black transition-colors duration-200 3xl:w-[576px] 2xl:h-20 2xl:w-[478px] 2xl:pr-[187px] xl:h-[72px] xl:w-[448px] xl:pr-[164px] lg:w-full lg:pl-5 md:pr-20',
+                errorMessage && 'border-secondary-1'
+              )}
               name="email"
               type="email"
               placeholder="Your email..."
@@ -97,13 +113,28 @@ const Subscribe = () => {
               onChange={handleInputChange}
             />
 
+            <AnimatePresence>
+              {errorMessage && (
+                <motion.span
+                  className="t-base absolute left-1/2 -bottom-4 translate-y-full -translate-x-1/2 font-semibold text-secondary-1 lg:-bottom-3"
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={appearAndExitAnimationVariants}
+                >
+                  {errorMessage}
+                </motion.span>
+              )}
+            </AnimatePresence>
+
             {/* Button */}
             <AnimatePresence>
               {formState === 'default' && (
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1, transition: { duration: 0.2 } }}
-                  exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={appearAndExitAnimationVariants}
                 >
                   <Button
                     className="absolute right-3 top-1/2 -translate-y-1/2 2xl:right-2.5 xl:right-2 md:h-14 md:w-14 md:rounded-full md:p-0"
@@ -123,9 +154,10 @@ const Subscribe = () => {
               {formState === 'loading' && (
                 <motion.div
                   className="absolute right-3 top-1/2 flex h-[72px] w-[72px] -translate-y-1/2 items-center justify-center rounded-full bg-black 2xl:right-2.5 2xl:h-[60px] 2xl:w-[60px] xl:right-2 xl:h-[56px] xl:w-[56px]"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1, transition: { duration: 0.2 } }}
-                  exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={appearAndExitAnimationVariants}
                   aria-hidden
                 >
                   <div className="h-[58px] w-[58px] rounded-full border-[6px] border-gray-2 2xl:h-[48px] 2xl:w-[48px] xl:h-[42px] xl:w-[42px]" />
@@ -156,9 +188,10 @@ const Subscribe = () => {
               {formState === 'success' && (
                 <motion.div
                   className="absolute right-3 top-1/2 -translate-y-1/2 2xl:right-2.5 xl:right-2"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1, transition: { duration: 0.2 } }}
-                  exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={appearAndExitAnimationVariants}
                   aria-hidden
                 >
                   <CheckIcon className="2xl:w-[60px] xl:w-[56px]" />
