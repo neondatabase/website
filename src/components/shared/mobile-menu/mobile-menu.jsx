@@ -6,9 +6,9 @@ import Button from 'components/shared/button';
 import Link from 'components/shared/link';
 import useClickOutside from 'hooks/use-click-outside';
 
-import DiscordIcon from './images/discord.inline.svg';
-import DiscussionsIcon from './images/discussions.inline.svg';
-import GithubIcon from './images/github.inline.svg';
+import DiscordIcon from './images/mobile-menu-discord.inline.svg';
+import DiscussionsIcon from './images/mobile-menu-discussions.inline.svg';
+import GithubIcon from './images/mobile-menu-github.inline.svg';
 
 const ANIMATION_DURATION = 0.2;
 
@@ -70,7 +70,7 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
 
   return (
     <motion.nav
-      className="absolute top-20 right-8 left-8 z-[-1] hidden rounded-md bg-white px-5 pt-1 pb-7 lg:block md:right-4 md:left-4"
+      className="absolute top-20 right-8 left-8 z-[-1] hidden rounded-2xl bg-white px-5 pt-1 pb-7 lg:block md:right-4 md:left-4"
       initial="from"
       animate={controls}
       variants={variants}

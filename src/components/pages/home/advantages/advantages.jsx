@@ -128,7 +128,7 @@ const Advantages = () => {
             </p>
           </div>
         </div>
-        <ul className="grid-gap mt-40 grid grid-cols-12 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:mt-20 lg:gap-y-16 md:grid-cols-1">
+        <ul className="grid-gap-x mt-40 grid grid-cols-12 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:mt-20 lg:gap-y-16 md:grid-cols-1">
           {items.map(({ animationVisibilityRef, animationRef, title, description }, index) => (
             <li
               className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"

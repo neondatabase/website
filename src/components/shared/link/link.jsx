@@ -13,8 +13,8 @@ const styles = {
     sm: 't-lg',
   },
   theme: {
-    black: 'text-black transition-colors duration-200 hover:text-primary-1',
-    white: 'text-white transition-colors duration-200 hover:text-primary-1',
+    black: 'text-black transition-colors duration-200 hover:text-primary-2',
+    white: 'text-white transition-colors duration-200 hover:text-primary-2',
     'black-primary-1': `${underlineCommonStyles} before:bg-primary-1 hover:text-primary-1`,
     'black-secondary-3': `${underlineCommonStyles} before:bg-secondary-3 hover:text-secondary-3`,
     'black-secondary-5': `${underlineCommonStyles} before:bg-secondary-5 hover:text-secondary-5`,

@@ -10,15 +10,15 @@ const menuItems = [
     heading: 'Company',
     links: [
       {
+        text: 'Team',
+        to: '/team',
+      },
+      {
+        text: 'Jobs',
+        to: '/jobs',
+      },
+      {
         text: 'Blog',
-        to: '/',
-      },
-      {
-        text: 'About us',
-        to: '/',
-      },
-      {
-        text: 'Changelog',
         to: '/',
       },
     ],
