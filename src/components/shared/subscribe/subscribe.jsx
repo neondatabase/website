@@ -69,14 +69,14 @@ const Subscribe = () => {
         // 2000 (loading animation duration) + 200 (loading animation delay) = 2200
       }, 2200);
 
-      // fetch('https://submit-form.com/nHIBlORO', {
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     Accept: 'application/json',
-      //   },
-      //   method: 'POST',
-      //   body: JSON.stringify({ email }),
-      // });
+      fetch('https://submit-form.com/nHIBlORO', {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({ email }),
+      });
     }
   };
 
@@ -90,15 +90,18 @@ const Subscribe = () => {
           loading="lazy"
           aria-hidden
         />
+
         <div className="max-w-[710px] 3xl:max-w-[590px] 2xl:max-w-[488px] xl:max-w-[456px] lg:max-w-none">
           <Heading className="lg:text-center" tag="h2" size="lg" theme="black">
             Subscribe to&nbsp;Newsletter
           </Heading>
+
           <form
             className="relative mt-10 ml-[14px] before:absolute before:-bottom-3.5 before:-left-3.5 before:h-full before:w-full before:rounded-full before:bg-secondary-2 2xl:mt-8 2xl:ml-2.5 2xl:before:-bottom-2.5 2xl:before:-left-2.5 xl:mt-7 xl:ml-2 xl:before:-bottom-2 xl:before:-left-2 lg:mx-auto lg:max-w-[584px] md:before:w-[calc(100%+8px)]"
             noValidate
             onSubmit={handleSubmit}
           >
+            {/* Input */}
             <input
               className={clsx(
                 'remove-autocomplete-styles outline-none t-2xl relative block h-24 w-[696px] rounded-full border-4 border-black bg-white pl-7 pr-[218px] font-semibold text-black placeholder-black transition-colors duration-200 3xl:w-[576px] 2xl:h-20 2xl:w-[478px] 2xl:pr-[187px] xl:h-[72px] xl:w-[448px] xl:pr-[164px] lg:w-full lg:pl-5 md:pr-20',
@@ -113,6 +116,7 @@ const Subscribe = () => {
               onChange={handleInputChange}
             />
 
+            {/* Error message */}
             <AnimatePresence>
               {errorMessage && (
                 <motion.span
@@ -199,6 +203,7 @@ const Subscribe = () => {
               )}
             </AnimatePresence>
           </form>
+
           <div className="mt-[94px] flex items-center space-x-[38px] 2xl:mt-[74px] 2xl:space-x-8 xl:mt-16 xl:space-x-7 lg:mt-12 lg:flex-col lg:space-x-0">
             <span className="t-3xl font-bold !leading-none">Join us:</span>
             <ul className="flex space-x-[26px] 2xl:space-x-5 xl:space-x-[18px] lg:mt-3.5">
