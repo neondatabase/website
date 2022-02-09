@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -39,12 +39,13 @@ const links = [
   },
 ];
 
-const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
+const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
   <header
     className={clsx(
       'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative',
       theme === 'black' && 'lg:bg-black'
     )}
+    ref={ref}
   >
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5" size="md">
       <Link
@@ -153,7 +154,7 @@ const Header = ({ theme, isMobileMenuOpen, onBurgerClick }) => (
       />
     </Container>
   </header>
-);
+));
 
 Header.propTypes = {
   theme: PropTypes.oneOf(['white', 'black']).isRequired,

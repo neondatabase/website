@@ -1,10 +1,13 @@
 import { motion, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import Button from 'components/shared/button';
 import Link from 'components/shared/link';
+import useClickOutside from 'hooks/use-click-outside';
 
+import DiscordIcon from './images/discord.inline.svg';
+import DiscussionsIcon from './images/discussions.inline.svg';
 import GithubIcon from './images/github.inline.svg';
 
 const ANIMATION_DURATION = 0.2;
@@ -47,18 +50,13 @@ const links = [
     text: 'Blog',
     to: '/',
   },
-  {
-    text: 'Community',
-    to: '#',
-    items: [
-      { text: 'Discord', to: '/' },
-      { text: 'Discussions', to: '/' },
-    ],
-  },
+  { icon: DiscordIcon, text: 'Discord', description: 'Join our community', to: '/' },
+  { icon: DiscussionsIcon, text: 'Discussions', description: 'Get a help', to: '/' },
 ];
 
-const MobileMenu = ({ isOpen }) => {
+const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
   const controls = useAnimation();
+  const ref = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -68,41 +66,50 @@ const MobileMenu = ({ isOpen }) => {
     }
   }, [isOpen, controls]);
 
+  useClickOutside([ref, headerRef], onOutsideClick);
+
   return (
     <motion.nav
-      className="absolute top-20 right-8 left-8 z-[-1] hidden rounded-md bg-white px-6 pt-2 pb-6 lg:block md:right-4 md:left-4 xs:px-5 xs:pb-5 xs:pt-1"
+      className="absolute top-20 right-8 left-8 z-[-1] hidden rounded-md bg-white px-5 pt-1 pb-7 lg:block md:right-4 md:left-4"
       initial="from"
       animate={controls}
       variants={variants}
       style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
+      ref={ref}
     >
-      <ul className="divide-y-gray-2 flex flex-col divide-y">
-        {links.map(({ text, to, items }, index) => (
-          <li key={index}>
-            <Link className="!block py-4 text-lg" to={to}>
-              {text}
-            </Link>
-            {items?.length > 0 && (
-              <ul className="space-y-2 pl-4">
-                {items.map(({ text, to }, index) => (
-                  <li key={index}>
-                    <Link className="block py-2 text-base leading-none" to={to}>
-                      {text}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+      <ul className="flex flex-col">
+        {links.map(({ icon: Icon, text, to, description }, index) => (
+          <li className="border-b border-b-gray-3" key={index}>
+            {Icon && description ? (
+              <Link className="flex items-center whitespace-nowrap py-4" to={to}>
+                <Icon className="flex-shrink-0" aria-hidden />
+                <span className="ml-3">
+                  <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
+                    {text}
+                  </span>
+                  <span className="mt-1.5 block leading-none text-black">{description}</span>
+                </span>
+              </Link>
+            ) : (
+              <Link className="!block py-4 text-lg" to={to}>
+                {text}
+              </Link>
             )}
           </li>
         ))}
       </ul>
-      <div className="mt-6 flex items-center space-x-5 xs:space-x-2">
-        <Button className="relative h-11 pl-12" to="/" size="xs" theme="quaternary">
-          <GithubIcon className="absolute left-1.5 top-1/2 -translate-y-1/2" />
-          Star Us
-        </Button>
-        <Button className="h-11 flex-grow" to="/" size="xs" theme="secondary">
+      <div className="mt-5 space-y-4">
+        <Button className="!flex h-12 items-center" to="/" size="xs" theme="primary">
           Sign Up
+        </Button>
+        <Button
+          className="!flex h-12 items-center justify-center"
+          to="/"
+          size="xs"
+          theme="quaternary"
+        >
+          <GithubIcon />
+          <span className="ml-2.5">Star Us on Github</span>
         </Button>
       </div>
     </motion.nav>
@@ -111,6 +118,12 @@ const MobileMenu = ({ isOpen }) => {
 
 MobileMenu.propTypes = {
   isOpen: PropTypes.bool,
+  // Typing was taken from here — https://stackoverflow.com/a/51127130
+  headerRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
+  onOutsideClick: PropTypes.func.isRequired,
 };
 
 MobileMenu.defaultProps = {
