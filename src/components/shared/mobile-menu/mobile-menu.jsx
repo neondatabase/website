@@ -5,6 +5,8 @@ import React, { useEffect } from 'react';
 import Button from 'components/shared/button';
 import Link from 'components/shared/link';
 
+import GithubIcon from './images/github.inline.svg';
+
 const ANIMATION_DURATION = 0.2;
 
 const variants = {
@@ -30,24 +32,28 @@ const variants = {
 
 const links = [
   {
-    text: 'Pricing',
-    to: '/',
-  },
-  {
-    text: 'Team',
-    to: '/',
-  },
-  {
     text: 'Docs',
     to: '/',
   },
   {
-    text: 'Changelog',
-    to: '/',
+    text: 'Team',
+    to: '/team',
+  },
+  {
+    text: 'Jobs',
+    to: '/jobs',
   },
   {
     text: 'Blog',
     to: '/',
+  },
+  {
+    text: 'Community',
+    to: '#',
+    items: [
+      { text: 'Discord', to: '/' },
+      { text: 'Discussions', to: '/' },
+    ],
   },
 ];
 
@@ -64,24 +70,41 @@ const MobileMenu = ({ isOpen }) => {
 
   return (
     <motion.nav
-      className="absolute top-20 right-8 left-8 z-[-1] hidden rounded-md bg-white px-8 pt-4 pb-7 lg:block md:right-4 md:left-4"
+      className="absolute top-20 right-8 left-8 z-[-1] hidden rounded-md bg-white px-6 pt-2 pb-6 lg:block md:right-4 md:left-4 xs:px-5 xs:pb-5 xs:pt-1"
       initial="from"
       animate={controls}
       variants={variants}
       style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
     >
-      <ul className="flex flex-col text-center">
-        {links.map(({ text, to }, index) => (
+      <ul className="divide-y-gray-2 flex flex-col divide-y">
+        {links.map(({ text, to, items }, index) => (
           <li key={index}>
-            <Link className="block py-4" to={to} size="sm" theme="black">
+            <Link className="!block py-4 text-lg" to={to}>
               {text}
             </Link>
+            {items?.length > 0 && (
+              <ul className="space-y-2 pl-4">
+                {items.map(({ text, to }, index) => (
+                  <li key={index}>
+                    <Link className="block py-2 text-base leading-none" to={to}>
+                      {text}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))}
       </ul>
-      <Button className="mt-4 w-full" to="/" size="sm" theme="secondary">
-        Sign Up
-      </Button>
+      <div className="mt-6 flex items-center space-x-5 xs:space-x-2">
+        <Button className="relative h-11 pl-12" to="/" size="xs" theme="quaternary">
+          <GithubIcon className="absolute left-1.5 top-1/2 -translate-y-1/2" />
+          Star Us
+        </Button>
+        <Button className="flex-grow" to="/" size="xs" theme="secondary">
+          Sign Up
+        </Button>
+      </div>
     </motion.nav>
   );
 };
