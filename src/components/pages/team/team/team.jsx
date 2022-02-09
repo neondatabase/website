@@ -202,12 +202,12 @@ const Team = () => (
         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
-      <ul className="grid-gap mt-16 grid grid-cols-2 gap-y-20 xl:gap-y-10 lg:mt-12 md:mt-8 md:block md:space-y-8">
+      <ul className="grid-gap-x mt-16 grid grid-cols-2 gap-y-20 xl:gap-y-10 lg:mt-12 md:mt-8 md:block md:space-y-8">
         {items.map(({ photo, name, position, githubUrl, linkedinUrl, twitterUrl }, index) => (
           <li className="flex" key={index}>
             <div className="w-36 flex-shrink-0 xs:w-32">{photo}</div>
             <div className="ml-5 xs:ml-3">
-              <h3 className="max-w-[100px] text-2xl font-semibold leading-snug md:max-w-none xs:text-[20px] xs:leading-tight">
+              <h3 className="max-w-[100px] text-2xl font-semibold leading-tight md:max-w-none xs:text-[20px] xs:leading-tight">
                 {name}
               </h3>
               <p className="t-base mt-2 !leading-snug text-gray-2 xs:mt-1">{position}</p>
@@ -226,7 +226,7 @@ const Team = () => (
                 {linkedinUrl && (
                   <li>
                     <Link
-                      className="text-gray-2 transition-colors duration-200 hover:text-black"
+                      className="text-gray-2 transition-colors duration-200 hover:text-[#0a66c2]"
                       to={linkedinUrl}
                     >
                       <span className="sr-only">Linkedin</span>
@@ -237,7 +237,7 @@ const Team = () => (
                 {twitterUrl && (
                   <li>
                     <Link
-                      className="text-gray-2 transition-colors duration-200 hover:text-black"
+                      className="text-gray-2 transition-colors duration-200 hover:text-[#309ce8]"
                       to={twitterUrl}
                     >
                       <span className="sr-only">Twitter</span>
