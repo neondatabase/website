@@ -19,7 +19,7 @@ const menuItems = [
       },
       {
         text: 'Blog',
-        to: '/',
+        to: '/blog',
       },
     ],
   },

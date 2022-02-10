@@ -73,3 +73,4 @@ yarn-error.log
 .yarn-integrity
 
 .vscode/snipsnap.code-snippets
+src/posts

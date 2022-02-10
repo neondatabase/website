@@ -27,7 +27,7 @@ const links = [
   },
   {
     text: 'Blog',
-    to: '/',
+    to: '/blog',
   },
   {
     text: 'Community',

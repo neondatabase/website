@@ -7,7 +7,7 @@ import PostsList from 'components/pages/blog/posts-list';
 import Layout from 'components/shared/layout';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
 
-const BlogPage = ({
+const BlogTemplate = ({
   data: {
     allMdx: { nodes },
   },
@@ -20,25 +20,24 @@ const BlogPage = ({
   </Layout>
 );
 
-export const blogPostsQuery = graphql`
+export const query = graphql`
   query ($limit: Int!, $skip: Int!, $draftFilter: [Boolean]!) {
     allMdx(
       filter: { fileAbsolutePath: { regex: "/posts/" }, fields: { draft: { in: $draftFilter } } }
-      sort: { order: DESC, fields: frontmatter___date }
+      sort: { order: DESC, fields: slug }
       limit: $limit
       skip: $skip
     ) {
       nodes {
+        slug
         frontmatter {
           title
           description
           author
-          date(locale: "en", formatString: "MMMM Do, yyyy")
-          path
         }
       }
     }
   }
 `;
 
-export default BlogPage;
+export default BlogTemplate;
