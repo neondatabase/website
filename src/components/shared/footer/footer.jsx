@@ -24,15 +24,15 @@ const menuItems = [
     links: [
       {
         text: 'Our docs',
-        to: '/',
+        to: 'https://github.com/zenithdb/zenith/tree/main/docs',
       },
       {
         text: 'Postgres docs',
-        to: '/',
+        to: 'https://www.postgresql.org/docs/',
       },
       {
-        text: 'Postgres maillists',
-        to: '/',
+        text: 'Postgres mailing lists',
+        to: 'https://www.postgresql.org/list/',
       },
     ],
   },
@@ -45,27 +45,27 @@ const menuItems = [
       },
       {
         text: 'Discord',
-        to: '/',
+        to: 'https://discord.gg/YKY4CBXZT2',
       },
       {
         text: 'Github',
-        to: '/',
+        to: 'https://github.com/zenithdb/zenith',
       },
     ],
   },
-  {
-    heading: 'Legal',
-    links: [
-      {
-        text: 'Privacy policy',
-        to: '/',
-      },
-      {
-        text: 'Terms of service',
-        to: '/',
-      },
-    ],
-  },
+  // {
+  //   heading: 'Legal',
+  //   links: [
+  //     {
+  //       text: 'Privacy policy',
+  //       to: '/',
+  //     },
+  //     {
+  //       text: 'Terms of service',
+  //       to: '/',
+  //     },
+  //   ],
+  // },
 ];
 
 const Footer = () => (

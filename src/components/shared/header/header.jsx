@@ -15,7 +15,7 @@ import Github from './images/header-github.inline.svg';
 const links = [
   {
     text: 'Docs',
-    to: '/',
+    to: 'https://github.com/zenithdb/zenith/tree/main/docs',
   },
   {
     text: 'Team',
@@ -29,8 +29,18 @@ const links = [
     text: 'Community',
     to: '#',
     items: [
-      { icon: DiscordIcon, text: 'Discord', description: 'Join our community', to: '/' },
-      { icon: DiscussionsIcon, text: 'Discussions', description: 'Get a help', to: '/' },
+      {
+        icon: DiscordIcon,
+        text: 'Discord',
+        description: 'Join our community',
+        to: 'https://discord.gg/YKY4CBXZT2',
+      },
+      {
+        icon: DiscussionsIcon,
+        text: 'Discussions',
+        description: 'Get a help',
+        to: 'https://github.com/zenithdb/zenith/discussions',
+      },
     ],
   },
 ];
@@ -136,8 +146,8 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
           />
           <span>Star Us</span>
         </Button>
-        <Button to="/" size="xs" theme="primary">
-          Sign Up
+        <Button to="https://console.zenith.tech/sign_in" size="xs" theme="primary">
+          Sign In
         </Button>
       </div>
 
