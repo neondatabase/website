@@ -128,7 +128,7 @@ const Features = () => {
       description: (
         <>
           Check{' '}
-          <Link to="/" theme="underline-primary-1">
+          <Link to="https://github.com/zenithdb/zenith" theme="underline-primary-1">
             our repository
           </Link>{' '}
           to learn more about technologies which make Zenith great.

@@ -8,13 +8,13 @@ import SubscriptionForm from 'components/shared/subscription-form';
 
 import DiscordIcon from './images/subscribe-discord.inline.svg';
 import GithubIcon from './images/subscribe-github.inline.svg';
-import TwitterIcon from './images/subscribe-twitter.inline.svg';
+// import TwitterIcon from './images/subscribe-twitter.inline.svg';
 
 const links = [
-  {
-    icon: TwitterIcon,
-    to: '/',
-  },
+  // {
+  //   icon: TwitterIcon,
+  //   to: '/',
+  // },
   {
     icon: DiscordIcon,
     to: 'https://discord.gg/YKY4CBXZT2',

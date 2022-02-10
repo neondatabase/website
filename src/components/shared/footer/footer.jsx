@@ -39,10 +39,10 @@ const menuItems = [
   {
     heading: 'Social',
     links: [
-      {
-        text: 'Twitter',
-        to: '/',
-      },
+      // {
+      //   text: 'Twitter',
+      //   to: '/',
+      // },
       {
         text: 'Discord',
         to: 'https://discord.gg/YKY4CBXZT2',
