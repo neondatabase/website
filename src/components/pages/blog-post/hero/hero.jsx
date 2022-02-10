@@ -13,7 +13,7 @@ const Hero = ({ title, description, author, slug }) => (
       <div className="mt-8 flex items-center justify-between">
         <div className="flex items-center">
           <img
-            className="w-10 flex-shrink-0 rounded-full"
+            className="w-10 shrink-0 rounded-full"
             src={POST_AUTHORS[author]?.photo}
             alt={POST_AUTHORS[author]?.name}
           />

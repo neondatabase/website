@@ -2,9 +2,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  mode: 'jit',
-  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
-  darkMode: false,
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     screens: {
       '3xl': { max: '1920px' },
@@ -87,9 +85,6 @@ module.exports = {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [require('tailwindcss-safe-area')],
 };

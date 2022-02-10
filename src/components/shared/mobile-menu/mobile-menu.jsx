@@ -82,7 +82,7 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
           <li className="border-b border-b-gray-3" key={index}>
             {Icon && description ? (
               <Link className="flex items-center whitespace-nowrap py-4" to={to}>
-                <Icon className="flex-shrink-0" aria-hidden />
+                <Icon className="shrink-0" aria-hidden />
                 <span className="ml-3">
                   <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
                     {text}

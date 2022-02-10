@@ -24,7 +24,7 @@ const DataBranching = () => (
     </Container>
     <div className="relative mx-auto max-w-[1920px] lg:flex lg:justify-end" aria-hidden>
       <StaticImage
-        className="z-[-2] mt-[-365px] !block max-w-full 3xl:mt-[-19.38vw] 2xl:mt-[-18.94vw] xl:mt-[-18.55vw] lg:-mt-5 lg:min-w-[865px] md:mt-5 md:min-w-[767px] md:flex-shrink-0 sm:mt-[40px] sm:min-w-[700px] xs:min-w-[550px]"
+        className="z-[-2] mt-[-365px] !block max-w-full 3xl:mt-[-19.38vw] 2xl:mt-[-18.94vw] xl:mt-[-18.55vw] lg:-mt-5 lg:min-w-[865px] md:mt-5 md:min-w-[767px] md:shrink-0 sm:mt-[40px] sm:min-w-[700px] xs:min-w-[550px]"
         src="../data-branching/images/data-branching-illustration.jpg"
         alt=""
         loading="lazy"
