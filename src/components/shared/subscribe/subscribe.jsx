@@ -17,11 +17,11 @@ const links = [
   },
   {
     icon: DiscordIcon,
-    to: '/',
+    to: 'https://discord.gg/YKY4CBXZT2',
   },
   {
     icon: GithubIcon,
-    to: '/',
+    to: 'https://github.com/zenithdb/zenith',
   },
 ];
 

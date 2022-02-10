@@ -36,7 +36,7 @@ const variants = {
 const links = [
   {
     text: 'Docs',
-    to: '/',
+    to: 'https://github.com/zenithdb/zenith/tree/main/docs',
   },
   {
     text: 'Team',
@@ -47,11 +47,17 @@ const links = [
     to: '/jobs',
   },
   {
-    text: 'Blog',
-    to: '/',
+    icon: DiscordIcon,
+    text: 'Discord',
+    description: 'Join our community',
+    to: 'https://discord.gg/YKY4CBXZT2',
   },
-  { icon: DiscordIcon, text: 'Discord', description: 'Join our community', to: '/' },
-  { icon: DiscussionsIcon, text: 'Discussions', description: 'Get a help', to: '/' },
+  {
+    icon: DiscussionsIcon,
+    text: 'Discussions',
+    description: 'Get a help',
+    to: 'https://github.com/zenithdb/zenith/discussions',
+  },
 ];
 
 const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
@@ -99,12 +105,17 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
         ))}
       </ul>
       <div className="mt-5 space-y-4">
-        <Button className="!flex h-12 items-center" to="/" size="xs" theme="primary">
+        <Button
+          className="!flex h-12 items-center"
+          to="https://console.zenith.tech/sign_in?"
+          size="xs"
+          theme="primary"
+        >
           Sign Up
         </Button>
         <Button
           className="!flex h-12 items-center justify-center"
-          to="/"
+          to="https://github.com/zenithdb/zenith"
           size="xs"
           theme="quaternary"
         >

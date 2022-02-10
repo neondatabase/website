@@ -85,7 +85,7 @@ const Hero = () => {
           <Button
             id="hero-button"
             className="mt-10 2xl:mt-8 xl:mt-7 md:mt-6"
-            to="/"
+            to="https://console.zenith.tech/sign_in"
             size="md"
             theme="primary"
           >

@@ -7,8 +7,8 @@ export default function setPositionsForShapes() {
   const shape3 = $('#lines-1-shape-3');
   const shape4 = $('#lines-1-shape-4');
   const shape5 = $('#lines-1-shape-5');
-  const shape6 = $('#lines-1-shape-6');
-  const shape7 = $('#lines-1-shape-7');
+  // const shape6 = $('#lines-1-shape-6');
+  // const shape7 = $('#lines-1-shape-7');
   const shape8 = $('#lines-1-shape-8');
 
   const advantages = $('#advantages');
@@ -16,8 +16,8 @@ export default function setPositionsForShapes() {
   const verticalLine3 = $('#lines-1-vertical-line-3');
   const verticalLine4 = $('#lines-1-vertical-line-4');
   const verticalLine6 = $('#lines-1-vertical-line-6');
-  const verticalLine7 = $('#lines-1-vertical-line-7');
-  const verticalLine8 = $('#lines-1-vertical-line-8');
+  // const verticalLine7 = $('#lines-1-vertical-line-7');
+  // const verticalLine8 = $('#lines-1-vertical-line-8');
   const verticalLine9 = $('#lines-1-vertical-line-9');
   const horizontalLine1 = $('#lines-1-horizontal-line-1');
   const horizontalLine2 = $('#lines-1-horizontal-line-2');
@@ -26,8 +26,8 @@ export default function setPositionsForShapes() {
   const horizontalLine8 = $('#lines-1-horizontal-line-8');
   const horizontalLine10 = $('#lines-1-horizontal-line-10');
   const horizontalLine11 = $('#lines-1-horizontal-line-11');
-  const horizontalLine12 = $('#lines-1-horizontal-line-12');
-  const horizontalLine16 = $('#lines-1-horizontal-line-16');
+  // const horizontalLine12 = $('#lines-1-horizontal-line-12');
+  // const horizontalLine16 = $('#lines-1-horizontal-line-16');
   const horizontalLine17 = $('#lines-1-horizontal-line-17');
   const horizontalLine19 = $('#lines-1-horizontal-line-19');
 
@@ -86,27 +86,27 @@ export default function setPositionsForShapes() {
     }px;
   `;
 
-  shape6.style.cssText = `
-    top: ${horizontalLine11.getBoundingClientRect().top + document.documentElement.scrollTop}px;
-    left: ${verticalLine8.getBoundingClientRect().left}px;
-    right: ${document.body.clientWidth - verticalLine9.getBoundingClientRect().right}px;
-    height: ${
-      horizontalLine12.getBoundingClientRect().bottom -
-      horizontalLine11.getBoundingClientRect().bottom +
-      LINE_WIDTH
-    }px;
-  `;
+  // shape6.style.cssText = `
+  //   top: ${horizontalLine11.getBoundingClientRect().top + document.documentElement.scrollTop}px;
+  //   left: ${verticalLine8.getBoundingClientRect().left}px;
+  //   right: ${document.body.clientWidth - verticalLine9.getBoundingClientRect().right}px;
+  //   height: ${
+  //     horizontalLine12.getBoundingClientRect().bottom -
+  //     horizontalLine11.getBoundingClientRect().bottom +
+  //     LINE_WIDTH
+  //   }px;
+  // `;
 
-  shape7.style.cssText = `
-    top: ${horizontalLine16.getBoundingClientRect().top + document.documentElement.scrollTop}px;
-    left: ${verticalLine6.getBoundingClientRect().left}px;
-    right: ${document.body.clientWidth - verticalLine7.getBoundingClientRect().right}px;
-    height: ${
-      horizontalLine17.getBoundingClientRect().bottom -
-      horizontalLine16.getBoundingClientRect().bottom +
-      LINE_WIDTH
-    }px;
-  `;
+  // shape7.style.cssText = `
+  //   top: ${horizontalLine16.getBoundingClientRect().top + document.documentElement.scrollTop}px;
+  //   left: ${verticalLine6.getBoundingClientRect().left}px;
+  //   right: ${document.body.clientWidth - verticalLine7.getBoundingClientRect().right}px;
+  //   height: ${
+  //     horizontalLine17.getBoundingClientRect().bottom -
+  //     horizontalLine16.getBoundingClientRect().bottom +
+  //     LINE_WIDTH
+  //   }px;
+  // `;
 
   shape8.style.cssText = `
     top: ${horizontalLine19.getBoundingClientRect().top + document.documentElement.scrollTop}px;

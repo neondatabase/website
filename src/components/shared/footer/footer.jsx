@@ -17,10 +17,6 @@ const menuItems = [
         text: 'Jobs',
         to: '/jobs',
       },
-      {
-        text: 'Blog',
-        to: '/',
-      },
     ],
   },
   {
@@ -28,15 +24,15 @@ const menuItems = [
     links: [
       {
         text: 'Our docs',
-        to: '/',
+        to: 'https://github.com/zenithdb/zenith/tree/main/docs',
       },
       {
         text: 'Postgres docs',
-        to: '/',
+        to: 'https://www.postgresql.org/docs/',
       },
       {
-        text: 'Postgres maillists',
-        to: '/',
+        text: 'Postgres mailing lists',
+        to: 'https://www.postgresql.org/list/',
       },
     ],
   },
@@ -49,33 +45,33 @@ const menuItems = [
       },
       {
         text: 'Discord',
-        to: '/',
+        to: 'https://discord.gg/YKY4CBXZT2',
       },
       {
         text: 'Github',
-        to: '/',
+        to: 'https://github.com/zenithdb/zenith',
       },
     ],
   },
-  {
-    heading: 'Legal',
-    links: [
-      {
-        text: 'Privacy policy',
-        to: '/',
-      },
-      {
-        text: 'Terms of service',
-        to: '/',
-      },
-    ],
-  },
+  // {
+  //   heading: 'Legal',
+  //   links: [
+  //     {
+  //       text: 'Privacy policy',
+  //       to: '/',
+  //     },
+  //     {
+  //       text: 'Terms of service',
+  //       to: '/',
+  //     },
+  //   ],
+  // },
 ];
 
 const Footer = () => (
   <footer className="safe-paddings overflow-hidden border-t-2 border-black">
     <Container className="flex justify-between xl:flex-col lg:border-none" size="md">
-      <div className="flex flex-col justify-between pt-8 pb-14 2xl:pt-[25px] 2xl:pb-11 xl:relative xl:flex-row xl:items-center xl:py-6 xl:before:absolute xl:before:left-[-50vw] xl:before:-top-0.5 xl:before:h-0.5 xl:before:w-[200vw] xl:before:bg-black md:block">
+      <div className="flex flex-col items-start justify-between pt-8 pb-14 2xl:pt-[25px] 2xl:pb-11 xl:relative xl:flex-row xl:items-center xl:py-6 xl:before:absolute xl:before:left-[-50vw] xl:before:-top-0.5 xl:before:h-0.5 xl:before:w-[200vw] xl:before:bg-black md:block">
         <Link className="block text-black" to="/">
           <span className="sr-only">Zenith</span>
           <Logo className="h-6 2xl:h-5" aria-hidden />
