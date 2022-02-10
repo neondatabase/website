@@ -34,6 +34,9 @@ module.exports = {
         '8xl': ['6.5rem', '1.125'],
       },
       colors: {
+        inherit: 'inherit',
+        current: 'currentColor',
+        transparent: 'transparent',
         black: '#1a1a1a',
         white: '#ffffff',
         primary: {

@@ -5,7 +5,7 @@ import JobsList from 'components/pages/jobs/jobs-list';
 import Layout from 'components/shared/layout';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
 
-const HomePage = () => (
+const JobsPage = () => (
   <Layout headerTheme="black">
     <Hero />
     <JobsList />
@@ -13,4 +13,4 @@ const HomePage = () => (
   </Layout>
 );
 
-export default HomePage;
+export default JobsPage;
