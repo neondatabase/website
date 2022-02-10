@@ -70,7 +70,6 @@ module.exports = {
     'gatsby-alias-imports',
     'gatsby-plugin-postcss',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-netlify',
     {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
