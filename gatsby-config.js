@@ -71,5 +71,14 @@ module.exports = {
     'gatsby-plugin-postcss',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-netlify',
+    {
+      resolve: 'gatsby-plugin-google-tagmanager',
+      options: {
+        id: 'GTM-MJLTK6F',
+        includeInDevelopment: false,
+        routeChangeEventName: 'landing_route_change',
+        dataLayerName: 'landing',
+      },
+    },
   ],
 };
