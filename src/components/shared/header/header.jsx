@@ -26,10 +26,6 @@ const links = [
     to: '/jobs',
   },
   {
-    text: 'Blog',
-    to: '/',
-  },
-  {
     text: 'Community',
     to: '#',
     items: [

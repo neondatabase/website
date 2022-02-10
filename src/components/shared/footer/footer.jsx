@@ -17,10 +17,6 @@ const menuItems = [
         text: 'Jobs',
         to: '/jobs',
       },
-      {
-        text: 'Blog',
-        to: '/',
-      },
     ],
   },
   {
