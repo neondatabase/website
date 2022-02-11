@@ -10,6 +10,37 @@ const getBlogPostPath = require('./src/utils/get-blog-post-path');
 // We have an array structure here in order to use it in the filter using the "in" operator
 const DRAFT_FILTER = process.env.NODE_ENV === 'production' ? [false] : [true, false];
 
+async function createStaticPages({ graphql, actions }) {
+  const {
+    data: {
+      allMdx: { nodes: staticPages },
+    },
+  } = await graphql(`
+    query staticPageQuery {
+      allMdx(filter: { fileAbsolutePath: { regex: "/src/static-pages/" } }) {
+        nodes {
+          id
+          slug
+          fields {
+            draft
+          }
+          frontmatter {
+            title
+          }
+        }
+      }
+    }
+  `);
+
+  staticPages.forEach((file) => {
+    actions.createPage({
+      path: `/${file.slug}`,
+      component: path.resolve('./src/templates/static.jsx'),
+      context: { id: file.id },
+    });
+  });
+}
+
 async function createBlogPages({ graphql, actions }) {
   const { createPage } = actions;
 
@@ -116,4 +147,5 @@ exports.onCreateNode = ({ node, actions }) => {
 exports.createPages = async (options) => {
   await createBlogPages(options);
   await createBlogPosts(options);
+  await createStaticPages(options);
 };
