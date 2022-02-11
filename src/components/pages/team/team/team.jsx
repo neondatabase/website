@@ -134,14 +134,9 @@ const Team = () => (
         Meet the team
       </Heading>
       <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.
-      </p>
-      <p className="t-xl mt-6 2xl:mt-5 xl:mt-4">
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        The Zenith team consists of PostgreSQL contributors and technologists on a mission to create
+        a cloud-native database service for every developer. Zenith CEO is Nikita Shamgunov,
+        co-founder of MemSQL / SingleStore.
       </p>
       <ul className="grid-gap-x mt-16 grid grid-cols-2 gap-y-20 xl:gap-y-10 lg:mt-12 md:mt-8 md:block md:space-y-8">
         {items.map(({ photo, name, position, githubUrl, linkedinUrl, twitterUrl }, index) => (
