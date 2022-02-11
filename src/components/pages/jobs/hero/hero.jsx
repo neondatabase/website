@@ -11,7 +11,7 @@ const Hero = () => (
       <p className="t-lg mx-auto mt-8 max-w-[860px] text-center !leading-normal 2xl:mt-7 xl:mt-6">
         We're a well funded startup with a fully remote team. Transparency, Open Source & Modern
         System Engineering are among our company values. Become part of a{' '}
-        <Link to="/" theme="underline-primary-1">
+        <Link to="/team" theme="underline-primary-1">
           team
         </Link>{' '}
         with deep knowledge of Postgres internals and decades of experience building databases.
