@@ -89,7 +89,7 @@ async function createBlogPosts({ graphql, actions }) {
     }
     if (!Object.keys(POST_AUTHORS).includes(frontmatter.author)) {
       throw new Error(
-        `Post "${frontmatter.title}" has unknown "author" ${frontmatter.author}!\nPlease check an array of authors in "/src/constants/post-authors.js"`
+        `Post "${frontmatter.title}" has unknown author "${frontmatter.author}"!\nPlease check an array of authors in "/src/constants/post-authors.js"`
       );
     }
 

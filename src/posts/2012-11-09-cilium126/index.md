@@ -2,6 +2,7 @@
 title: 'Cilium 1.2.6: DNS Security Policies, EKS Support, ClusterMesh, kube-router integration'
 description: 'In this 45-minute interview with Lee Robinson, hear Rich Harris, the creator of Svelte, talk about his plans for the future of the framework. Other topics include funding open source, SvelteKit 1.0, the Edge-first future, and more.'
 author: 'Stas Kelvich'
+draft: true
 ---
 
 ![Cilium Kubernetes](k8s_ship.png)
