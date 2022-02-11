@@ -5,9 +5,9 @@ require('dotenv').config();
 module.exports = {
   flags: { DEV_SSR: process.env.GATSBY_DEV_SSR || false },
   siteMetadata: {
-    siteTitle: 'Zenith',
+    siteTitle: 'Zenith – Serverless, Fault-Tolerant, Branchable Postgresql',
     siteDescription:
-      'Zenith is PostgreSQL that is serverless, fault-tolerant, branchable, and bottomless',
+      'PostgreSQL made for developers. Easy to Use, Scalable, Cost efficient solution for your next project.',
     siteImage: '/images/social-preview.jpg',
     siteLanguage: 'en',
     siteUrl: process.env.GATSBY_DEFAULT_SITE_URL || 'http://localhost:8000',
