@@ -3,70 +3,8 @@ import React from 'react';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import MENUS from 'constants/menus.js';
 import Logo from 'images/logo.inline.svg';
-
-const menuItems = [
-  {
-    heading: 'Company',
-    links: [
-      {
-        text: 'Team',
-        to: '/team',
-      },
-      {
-        text: 'Jobs',
-        to: '/jobs',
-      },
-    ],
-  },
-  {
-    heading: 'Docs',
-    links: [
-      {
-        text: 'Our docs',
-        to: 'https://github.com/zenithdb/zenith/tree/main/docs',
-      },
-      {
-        text: 'Postgres docs',
-        to: 'https://www.postgresql.org/docs/',
-      },
-      {
-        text: 'Postgres mailing lists',
-        to: 'https://www.postgresql.org/list/',
-      },
-    ],
-  },
-  {
-    heading: 'Social',
-    links: [
-      // {
-      //   text: 'Twitter',
-      //   to: '/',
-      // },
-      {
-        text: 'Discord',
-        to: 'https://discord.gg/YKY4CBXZT2',
-      },
-      {
-        text: 'Github',
-        to: 'https://github.com/zenithdb/zenith',
-      },
-    ],
-  },
-  // {
-  //   heading: 'Legal',
-  //   links: [
-  //     {
-  //       text: 'Privacy policy',
-  //       to: '/',
-  //     },
-  //     {
-  //       text: 'Terms of service',
-  //       to: '/',
-  //     },
-  //   ],
-  // },
-];
 
 const Footer = () => (
   <footer className="safe-paddings overflow-hidden border-t-2 border-black">
@@ -87,7 +25,7 @@ const Footer = () => (
         </div>
       </div>
       <div className="flex xl:order-first xl:grid xl:grid-cols-4 xl:gap-x-6 xl:border-b-2 xl:border-black lg:gap-x-4 md:grid-cols-2 md:gap-y-8 md:pt-8 md:pb-11 xs:block xs:space-y-8">
-        {menuItems.map(({ heading, links }, index) => (
+        {MENUS.footer.map(({ heading, links }, index) => (
           <div
             className="flex w-[300px] flex-col border-l-2 border-black 3xl:w-[254px] 2xl:w-[218px] xl:w-full xl:border-none"
             key={index}
