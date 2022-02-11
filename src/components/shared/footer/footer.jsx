@@ -76,12 +76,20 @@ const Footer = () => (
           <span className="sr-only">Zenith</span>
           <Logo className="h-6 2xl:h-5" aria-hidden />
         </Link>
-        <p className="t-base md:mt-4">Zenith 2021 Ⓒ All rights reserved</p>
+        <div className="t-base space-y-6 xl:space-y-4 md:mt-4">
+          <p>
+            Creative design by{' '}
+            <Link to="https://pixelpoint.io/" theme="black">
+              Pixel Point
+            </Link>
+          </p>
+          <p>Zenith 2021 Ⓒ All rights reserved</p>
+        </div>
       </div>
-      <div className="flex xl:order-first xl:grid xl:grid-cols-4 xl:gap-x-6 xl:border-b-2 xl:border-black lg:gap-x-4 md:grid-cols-2 md:gap-y-8 md:pt-8 md:pb-11">
+      <div className="flex xl:order-first xl:grid xl:grid-cols-4 xl:gap-x-6 xl:border-b-2 xl:border-black lg:gap-x-4 md:grid-cols-2 md:gap-y-8 md:pt-8 md:pb-11 xs:block xs:space-y-8">
         {menuItems.map(({ heading, links }, index) => (
           <div
-            className="flex w-[300px] flex-col border-l-2 border-black 3xl:w-[252px] 2xl:w-[208px] xl:w-full xl:border-none"
+            className="flex w-[300px] flex-col border-l-2 border-black 3xl:w-[254px] 2xl:w-[218px] xl:w-full xl:border-none"
             key={index}
           >
             <Heading
