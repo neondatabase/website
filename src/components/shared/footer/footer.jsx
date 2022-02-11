@@ -76,7 +76,7 @@ const Footer = () => (
           <span className="sr-only">Zenith</span>
           <Logo className="h-6 2xl:h-5" aria-hidden />
         </Link>
-        <div className="t-base space-y-6 xl:space-y-4 md:mt-4">
+        <div className="t-base space-y-6 xl:space-y-4 md:mt-8">
           <p>
             Creative design by{' '}
             <Link to="https://pixelpoint.io/" theme="black">
