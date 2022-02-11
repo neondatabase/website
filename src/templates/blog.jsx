@@ -6,14 +6,15 @@ import Pagination from 'components/pages/blog/pagination';
 import PostsList from 'components/pages/blog/posts-list';
 import Layout from 'components/shared/layout';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
+import SEO_DATA from 'constants/seo-data';
 
 const BlogTemplate = ({
   data: {
     allMdx: { nodes },
   },
-  pageContext: { currentPageIndex, pageCount },
+  pageContext: { currentPageIndex, pageCount, canonicalUrl },
 }) => (
-  <Layout headerTheme="white">
+  <Layout seo={SEO_DATA.blog({ canonicalUrl })} headerTheme="white">
     <PostsList items={nodes} />
     {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />}
     <SubscribeMinimalistic />

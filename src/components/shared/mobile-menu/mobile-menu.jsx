@@ -48,7 +48,7 @@ const links = [
   },
   {
     text: 'Blog',
-    to: '/',
+    to: '/blog',
   },
   { icon: DiscordIcon, text: 'Discord', description: 'Join our community', to: '/' },
   { icon: DiscussionsIcon, text: 'Discussions', description: 'Get a help', to: '/' },

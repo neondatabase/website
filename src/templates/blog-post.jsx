@@ -3,16 +3,24 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import Hero from 'components/pages/blog-post/hero';
+import Content from 'components/shared/content';
 import Layout from 'components/shared/layout';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
+import SEO_DATA from 'constants/seo-data';
 
 const BlogPostTemplate = ({
   data: {
-    mdx: { slug, frontmatter },
+    mdx: { slug, body, frontmatter },
   },
 }) => (
-  <Layout headerTheme="white">
-    <Hero {...frontmatter} slug={slug} />
+  <Layout
+    seo={SEO_DATA.blogPost({ title: frontmatter.title, description: frontmatter.description })}
+    headerTheme="white"
+  >
+    <article>
+      <Hero {...frontmatter} slug={slug} />
+      <Content className="mt-8" content={body} />
+    </article>
     <SubscribeMinimalistic />
   </Layout>
 );

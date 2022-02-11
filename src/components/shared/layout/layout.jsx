@@ -6,7 +6,7 @@ import Header from 'components/shared/header';
 import MobileMenu from 'components/shared/mobile-menu';
 import SEO from 'components/shared/seo';
 
-const Layout = ({ headerTheme, children }) => {
+const Layout = ({ seo, headerTheme, children }) => {
   const headerRef = useRef(null);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -21,7 +21,7 @@ const Layout = ({ headerTheme, children }) => {
 
   return (
     <>
-      <SEO />
+      <SEO {...seo} />
       <Header
         theme={headerTheme}
         isMobileMenuOpen={isMobileMenuOpen}
@@ -40,8 +40,17 @@ const Layout = ({ headerTheme, children }) => {
 };
 
 Layout.propTypes = {
+  seo: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    canonicalUrl: PropTypes.string,
+  }),
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
   children: PropTypes.node.isRequired,
+};
+
+Layout.defaultProps = {
+  seo: {},
 };
 
 export default Layout;

@@ -13,6 +13,30 @@ module.exports = {
       sm: { max: '639px' },
       xs: { max: '413px' },
     },
+    colors: {
+      inherit: 'inherit',
+      current: 'currentColor',
+      transparent: 'transparent',
+      black: '#1a1a1a',
+      white: '#ffffff',
+      primary: {
+        1: '#00e699',
+        2: '#00cc88',
+      },
+      secondary: {
+        1: '#ff4c79',
+        2: '#f0f075',
+        3: '#ffa64c',
+        4: '#fbd0d7',
+        5: '#aa99ff',
+        6: '#d9eef2',
+      },
+      gray: {
+        1: '#262626',
+        2: '#404040',
+        3: '#e5e5e5',
+      },
+    },
     extend: {
       fontFamily: {
         sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
@@ -30,30 +54,6 @@ module.exports = {
         '6xl': ['4rem', '1.125'],
         '7xl': ['5rem', '1.125'],
         '8xl': ['6.5rem', '1.125'],
-      },
-      colors: {
-        inherit: 'inherit',
-        current: 'currentColor',
-        transparent: 'transparent',
-        black: '#1a1a1a',
-        white: '#ffffff',
-        primary: {
-          1: '#00e699',
-          2: '#00cc88',
-        },
-        secondary: {
-          1: '#ff4c79',
-          2: '#f0f075',
-          3: '#ffa64c',
-          4: '#fbd0d7',
-          5: '#aa99ff',
-          6: '#d9eef2',
-        },
-        gray: {
-          1: '#262626',
-          2: '#404040',
-          3: '#e5e5e5',
-        },
       },
       keyframes: (theme) => ({
         'text-blink': {
@@ -86,5 +86,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-safe-area')],
+  plugins: [require('tailwindcss-safe-area'), require('@tailwindcss/typography')],
 };
