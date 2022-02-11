@@ -1,32 +1,47 @@
+const links = {
+  docs: 'https://github.com/zenithdb/zenith/tree/main/docs',
+  team: '/team',
+  jobs: '/jobs',
+  community: '#',
+  discord: 'https://discord.gg/YKY4CBXZT2',
+  discussions: 'https://github.com/zenithdb/zenith/discussions',
+  github: 'https://github.com/zenithdb/zenith',
+  twitter: '/',
+  postgresDocs: 'https://www.postgresql.org/docs/',
+  postgresList: 'https://www.postgresql.org/list/',
+  privacy: '/',
+  terms: '/',
+};
+
 export default {
   header: [
     {
       text: 'Docs',
-      to: 'https://github.com/zenithdb/zenith/tree/main/docs',
+      to: links.docs,
     },
     {
       text: 'Team',
-      to: '/team',
+      to: links.team,
     },
     {
       text: 'Jobs',
-      to: '/jobs',
+      to: links.jobs,
     },
     {
       text: 'Community',
-      to: '#',
+      to: links.community,
       items: [
         {
           iconName: 'discord',
           text: 'Discord',
           description: 'Join our community',
-          to: 'https://discord.gg/YKY4CBXZT2',
+          to: links.discord,
         },
         {
           iconName: 'discussions',
           text: 'Discussions',
           description: 'Get help',
-          to: 'https://github.com/zenithdb/zenith/discussions',
+          to: links.discussions,
         },
       ],
     },
@@ -37,11 +52,11 @@ export default {
       links: [
         {
           text: 'Team',
-          to: '/team',
+          to: links.team,
         },
         {
           text: 'Jobs',
-          to: '/jobs',
+          to: links.jobs,
         },
       ],
     },
@@ -50,15 +65,15 @@ export default {
       links: [
         {
           text: 'Our docs',
-          to: 'https://github.com/zenithdb/zenith/tree/main/docs',
+          to: links.docs,
         },
         {
           text: 'Postgres docs',
-          to: 'https://www.postgresql.org/docs/',
+          to: links.postgresDocs,
         },
         {
           text: 'Postgres mailing lists',
-          to: 'https://www.postgresql.org/list/',
+          to: links.postgresList,
         },
       ],
     },
@@ -67,15 +82,15 @@ export default {
       links: [
         // {
         //   text: 'Twitter',
-        //   to: '/',
+        //   to: links.twitter,
         // },
         {
           text: 'Discord',
-          to: 'https://discord.gg/YKY4CBXZT2',
+          to: links.discord,
         },
         {
           text: 'Github',
-          to: 'https://github.com/zenithdb/zenith',
+          to: links.github,
         },
       ],
     },
@@ -84,11 +99,11 @@ export default {
     //   links: [
     //     {
     //       text: 'Privacy policy',
-    //       to: '/',
+    //       to: links.privacy,
     //     },
     //     {
     //       text: 'Terms of service',
-    //       to: '/',
+    //       to: links.terms,
     //     },
     //   ],
     // },
@@ -96,27 +111,27 @@ export default {
   mobile: [
     {
       text: 'Docs',
-      to: 'https://github.com/zenithdb/zenith/tree/main/docs',
+      to: links.docs,
     },
     {
       text: 'Team',
-      to: '/team',
+      to: links.team,
     },
     {
       text: 'Jobs',
-      to: '/jobs',
+      to: links.jobs,
     },
     {
       iconName: 'discord',
       text: 'Discord',
       description: 'Join our community',
-      to: 'https://discord.gg/YKY4CBXZT2',
+      to: links.discord,
     },
     {
       iconName: 'discussions',
       text: 'Discussions',
       description: 'Get help',
-      to: 'https://github.com/zenithdb/zenith/discussions',
+      to: links.discussions,
     },
   ],
 };
