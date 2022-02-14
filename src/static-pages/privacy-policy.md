@@ -1,8 +1,6 @@
 ---
-title: 'Zenith — Privacy Policy'
+title: 'Privacy Policy'
 ---
-
-## Privacy Policy
 
 This is the Privacy Policy for the website hosted at zenith.com (“our site”), our products and services, and for other RevenueCat activities at which you may provide your personal data, such as sponsored events or trade shows. The site is operated by or on behalf of RevenueCat, Inc. (“we”, ”us”, “our”). We are committed to protecting and respecting your privacy.
 This policy (together with our terms of service and any other documents referred to in it) sets out:
@@ -22,7 +20,7 @@ This policy (together with our terms of service and any other documents referred
 - EU Citizen Rights
 - Contact us
 
-### 1. Information we collect
+## 1. Information we collect
 
 When you contact us or interact with our Service we collect information that alone or in combination with other information could be used to identify you (“**Personal Data**”) as follows:
 
@@ -39,7 +37,7 @@ When you contact us or interact with our Service we collect information that alo
 
 **Online Tracking and Do Not Track Signals**: We may, and we may allow third party service providers to, use cookies or other tracking technologies to collect information about your browsing activities over time and across different websites following your use of the Sites. Our Sites currently does not respond to “Do Not Track” (“DNT”) signals and operates as described in this Privacy Policy whether or not a DNT signal is received. If we do respond to DNT signals in the future, we will describe how we do so in this Privacy Policy.
 
-### 2. How we use personal data
+## 2. How we use personal data
 
 We use Personal Data to provide the Service. This processing is necessary to perform our contract with you.
 
@@ -55,7 +53,7 @@ For information about what we mean by legitimate interests and the rights of ind
 
 **Marketing**. We may contact you to provide information we believe will be of interest to you. For instance, if you elect to provide your email address, we may use that information to send you promotional information about our products and services. If we do, where required by law, for example if you are in the EU, we will only send you such emails if you consent to us doing so at the time you provide us with your Personal Data. You may opt out of receiving emails by following the instructions contained in each promotional email we send you or by [contacting us](#contact-us). If you unsubscribe from our marketing lists, you will no longer receive marketing communications but we will continue to contact you regarding our Sites and Services and to respond to your requests.
 
-### 3. How we share and disclose personal data
+## 3. How we share and disclose personal data
 
 In certain circumstances we may share your Personal Data with third parties without further notice to you, unless required by the law, as set forth below:
 
@@ -63,7 +61,7 @@ In certain circumstances we may share your Personal Data with third parties with
 - **Business Transfers**: If we are involved in a merger, acquisition, financing due diligence, reorganization, bankruptcy, receivership, sale of all or a portion of our assets, or transition of service to another provider, your Personal Data and other information may be shared in the diligence process with counterparties and others assisting with the transaction and transferred to a successor or affiliate as part of that transaction along with other assets.
 - **Legal Requirements**: If required to do so by law or in the good faith belief that such action is necessary to (i) comply with legal or regulatory obligations, including to respond to lawful requests from public authorities and to meet national security or law enforcement requirements, (ii) protect and defend our rights or property, (iii) prevent fraud, (iv) act in urgent circumstances to protect the personal safety of users of the Sites, or the public, or (v) protect against legal liability.
 
-### 4. Data retention
+## 4. Data retention
 
 We keep Personal Data for as long as reasonably necessary for the purposes described in this Privacy Policy, while we have a legitimate business need to do so, or as required by law (e.g. for tax, legal, accounting or other purposes), whichever is the longer.
 
@@ -71,15 +69,15 @@ If you have elected to receive marketing communications from us, we retain infor
 
 To determine the appropriate retention period for your Personal Data, we will consider the amount, nature, and sensitivity of the Personal Data, the potential risk of harm from unauthorized use or disclosure of your Personal Data, the purposes for which we use your Personal Data and whether we can achieve those purposes through other means, and the applicable legal requirements.
 
-### 5. Update your information
+## 5. Update your information
 
 If you need to change or correct your Personal Data please contact us at privacy@zenith.com. We will address your request as required by applicable law.
 
-### 6. Children
+## 6. Children
 
 Our Service is not directed to children who are under the age of 16. Zenith does not knowingly collect Personal Data from children under the age of 16. If you have reason to believe that a child under the age of 16 has provided Personal Data to Zenith through the Service please [contact us](#contact-us) and we will endeavor to delete that information from our databases.
 
-### 7. EU users
+## 7. EU users
 
 **Scope**. This section applies to individuals in the EU (for these purposes, reference to the EU also includes the European Economic Area countries of Iceland, Liechtenstein and Norway, the United Kingdom, and, to the extent applicable, Switzerland).
 
@@ -106,11 +104,11 @@ Please see the “[Contact Us](#contact-us)” section below for information on 
 
 **Data Transfers**. Zenith is based in the U.S. The U.S. may have data protection laws less stringent than or otherwise different from the laws in effect in the EU and UK. Transfers of your Personal Data to Zenith in the U.S. are necessary to perform the agreement we have entered into, or are about to enter into, with you.
 
-### 8. Links to other websites
+## 8. Links to other websites
 
 The Sites may contain links to other websites not operated or controlled by Zenith, including Social Media Sites (“**Third Party Sites**”). The information that you share with Third Party Sites will be governed by the specific privacy policies and terms of service of the Third Party Sites and not by this Privacy Policy. By providing these links we do not imply that we endorse or have reviewed these sites. Please contact the Third Party Sites directly for information on their privacy practices and policies.
 
-### 9. Cookies
+## 9. Cookies
 
 We and our partners use cookies to operate and administer our Sites, make it easier for you to use the Sites during future visits, and gather usage data on our Sites.
 
@@ -121,18 +119,18 @@ We use the following types of cookies:
 | Header    | Title       | Header    | Title       | Header    | Title       |
 | Paragraph | Text        | Paragraph | Text        | Paragraph | Text        |
 
-### 10. Security
+## 10. Security
 
 You use the Service at your own risk. We comply with industry standards to protect Personal Data both online and offline from loss, misuse, and unauthorized access, disclosure, alteration or destruction. However, no Internet or e-mail transmission is ever fully secure or error free. In particular, e-mail sent to or from us may not be secure. Therefore, you should take special care in deciding what information you send to us via the Service or e-mail. Please keep this in mind when disclosing any Personal Data to Zenith via the Internet. In addition, we are not responsible for circumvention of any privacy settings or security measures contained on the Service, or third party websites.
 
-### 11. Your choices
+## 11. Your choices
 
 Whether or not you provide Personal Data to us is completely up to you, but if you choose not to provide information that is needed to use some features of our Sites, you may be unable to use those features. You can also [contact us](#contact-us) to request access to your data or to ask us to update, correct, or delete your Personal Data.
 
-### 12. Changes to the Privacy Policy
+## 12. Changes to the Privacy Policy
 
 The Service, and our business may change from time to time. As a result we may change this Privacy Policy at any time. When we do we will post an updated version on this page, unless another type of notice is required by the applicable law. By continuing to use our Service or providing us with Personal Data after we have posted an updated Privacy Policy, or notified you if applicable, you consent to the revised Privacy Policy and practices described in it.
 
-### 13. Contact Us
+## 13. Contact Us
 
 If you have any questions about our Privacy Policy or the information practices of the Sites, please feel free to contact us at privacy@zenith.com.

@@ -2,20 +2,25 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
+import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
 
-const StaticPage = ({
+const StaticTemplate = ({
   data: {
-    mdx: { body, frontmatter },
+    mdx: {
+      body,
+      frontmatter: { title },
+    },
   },
 }) => (
-  <Layout seo={SEO_DATA.static({ title: frontmatter.title })} headerTheme="white">
-    <article>
-      <div className="safe-paddings py-48 3xl:py-44 2xl:py-40 xl:py-32 lg:py-12 md:py-6">
-        <Content content={body} />
-      </div>
+  <Layout seo={SEO_DATA.static({ title })} headerTheme="white">
+    <article className="safe-paddings pt-48 3xl:pt-44 2xl:pt-40 2xl:pb-28 xl:pt-32 xl:pb-20 lg:pt-12 lg:pb-16 md:pt-6">
+      <Container size="sm">
+        <h1 className="t-5xl font-semibold">{title}</h1>
+      </Container>
+      <Content className="mt-8" content={body} />
     </article>
   </Layout>
 );
@@ -31,4 +36,4 @@ export const query = graphql`
   }
 `;
 
-export default StaticPage;
+export default StaticTemplate;

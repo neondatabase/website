@@ -10,31 +10,6 @@ const getBlogPostPath = require('./src/utils/get-blog-post-path');
 // We have an array structure here in order to use it in the filter using the "in" operator
 const DRAFT_FILTER = process.env.NODE_ENV === 'production' ? [false] : [true, false];
 
-async function createStaticPages({ graphql, actions }) {
-  const {
-    data: {
-      allMdx: { nodes: staticPages },
-    },
-  } = await graphql(`
-    query staticPageQuery {
-      allMdx(filter: { fileAbsolutePath: { regex: "/src/static-pages/" } }) {
-        nodes {
-          id
-          slug
-        }
-      }
-    }
-  `);
-
-  staticPages.forEach(({ id, slug }) => {
-    actions.createPage({
-      path: `/${slug}`,
-      component: path.resolve('./src/templates/static.jsx'),
-      context: { id },
-    });
-  });
-}
-
 async function createBlogPages({ graphql, actions }) {
   const { createPage } = actions;
 
@@ -121,6 +96,29 @@ async function createBlogPosts({ graphql, actions }) {
     actions.createPage({
       path: getBlogPostPath(slug),
       component: path.resolve('./src/templates/blog-post.jsx'),
+      context: { id },
+    });
+  });
+}
+
+async function createStaticPages({ graphql, actions }) {
+  const result = await graphql(`
+    query staticPageQuery {
+      allMdx(filter: { fileAbsolutePath: { regex: "/src/static-pages/" } }) {
+        nodes {
+          id
+          slug
+        }
+      }
+    }
+  `);
+
+  if (result.errors) throw new Error(result.errors);
+
+  result.data.allMdx.nodes.forEach(({ id, slug }) => {
+    actions.createPage({
+      path: `/${slug}`,
+      component: path.resolve('./src/templates/static.jsx'),
       context: { id },
     });
   });
