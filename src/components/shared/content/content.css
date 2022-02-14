@@ -83,10 +83,6 @@
       @apply mx-auto rounded-md;
     }
 
-    #twitter-widget-0 {
-      @apply max-w-full;
-    }
-
     blockquote {
       @apply border-primary-1 font-normal not-italic;
 
