@@ -13,7 +13,7 @@ const StaticPage = ({
 }) => (
   <Layout seo={SEO_DATA.static({ title: frontmatter.title })} headerTheme="white">
     <article>
-      <div className="safe-paddings pt-48 3xl:pt-44 2xl:pt-40 xl:pt-32 lg:pt-12 md:pt-6">
+      <div className="safe-paddings py-48 3xl:py-44 2xl:py-40 xl:py-32 lg:py-12 md:py-6">
         <Content content={body} />
       </div>
     </article>
