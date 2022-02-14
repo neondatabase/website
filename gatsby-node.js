@@ -21,22 +21,16 @@ async function createStaticPages({ graphql, actions }) {
         nodes {
           id
           slug
-          fields {
-            draft
-          }
-          frontmatter {
-            title
-          }
         }
       }
     }
   `);
 
-  staticPages.forEach((file) => {
+  staticPages.forEach(({ id, slug }) => {
     actions.createPage({
-      path: `/${file.slug}`,
+      path: `/${slug}`,
       component: path.resolve('./src/templates/static.jsx'),
-      context: { id: file.id },
+      context: { id },
     });
   });
 }
