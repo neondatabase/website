@@ -5,6 +5,7 @@ import React, { forwardRef } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import MENUS from 'constants/menus.js';
 import Logo from 'images/logo.inline.svg';
 
 import Burger from './burger';
@@ -12,32 +13,10 @@ import DiscordIcon from './images/header-discord.inline.svg';
 import DiscussionsIcon from './images/header-discussions.inline.svg';
 import Github from './images/header-github.inline.svg';
 
-const links = [
-  {
-    text: 'Docs',
-    to: '/',
-  },
-  {
-    text: 'Team',
-    to: '/team',
-  },
-  {
-    text: 'Jobs',
-    to: '/jobs',
-  },
-  {
-    text: 'Blog',
-    to: '/blog',
-  },
-  {
-    text: 'Community',
-    to: '#',
-    items: [
-      { icon: DiscordIcon, text: 'Discord', description: 'Join our community', to: '/' },
-      { icon: DiscussionsIcon, text: 'Discussions', description: 'Get a help', to: '/' },
-    ],
-  },
-];
+const icons = {
+  discord: DiscordIcon,
+  discussions: DiscussionsIcon,
+};
 
 const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
   <header
@@ -61,7 +40,7 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
       </Link>
       <nav className="xl:absolute xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2">
         <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
-          {links.map(({ to, text, items }, index) => (
+          {MENUS.header.map(({ to, text, items }, index) => (
             <li className={clsx(items?.length > 0 && 'group relative')} key={index}>
               <Link
                 className={clsx(
@@ -82,27 +61,30 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
                     className=" rounded-2xl bg-white p-3.5"
                     style={{ boxShadow: '0px 4px 10px rgba(26, 26, 26, 0.2)' }}
                   >
-                    {items.map(({ icon: Icon, text, description, to }, index) => (
-                      <li
-                        className={clsx(index !== 0 && 'mt-3.5 border-t border-t-gray-3 pt-3.5')}
-                        key={index}
-                      >
-                        <Link
-                          className="flex items-center whitespace-nowrap hover:text-primary-2"
-                          to={to}
+                    {items.map(({ iconName, text, description, to }, index) => {
+                      const Icon = icons[iconName];
+                      return (
+                        <li
+                          className={clsx(index !== 0 && 'mt-3.5 border-t border-t-gray-3 pt-3.5')}
+                          key={index}
                         >
-                          <Icon className="shrink-0" aria-hidden />
-                          <span className="ml-3">
-                            <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
-                              {text}
+                          <Link
+                            className="flex items-center whitespace-nowrap hover:text-primary-2"
+                            to={to}
+                          >
+                            <Icon className="shrink-0" aria-hidden />
+                            <span className="ml-3">
+                              <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
+                                {text}
+                              </span>
+                              <span className="mt-1.5 block leading-none text-black">
+                                {description}
+                              </span>
                             </span>
-                            <span className="mt-1.5 block leading-none text-black">
-                              {description}
-                            </span>
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}
@@ -140,8 +122,8 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
           />
           <span>Star Us</span>
         </Button>
-        <Button to="/" size="xs" theme="primary">
-          Sign Up
+        <Button to="https://console.zenith.tech/sign_in" size="xs" theme="primary">
+          Sign In
         </Button>
       </div>
 

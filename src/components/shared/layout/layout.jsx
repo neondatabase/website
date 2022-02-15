@@ -47,6 +47,14 @@ Layout.propTypes = {
   }),
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
   children: PropTypes.node.isRequired,
+  pageMetadata: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+  }),
+};
+
+Layout.defaultProps = {
+  pageMetadata: {},
 };
 
 Layout.defaultProps = {
