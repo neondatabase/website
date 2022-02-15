@@ -16,11 +16,11 @@ const StaticTemplate = ({
   },
 }) => (
   <Layout seo={SEO_DATA.static({ title })} headerTheme="white">
-    <article className="safe-paddings py-48 3xl:pt-44 2xl:pt-40 2xl:pb-28 xl:pt-32 xl:pb-20 lg:pt-12 lg:pb-16 md:pt-6">
+    <article className="safe-paddings py-48 3xl:py-44 2xl:py-40 xl:py-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
       <Container size="sm">
         <h1 className="t-5xl font-semibold">{title}</h1>
       </Container>
-      <Content className="mt-8" content={body} />
+      <Content className="mt-8 2xl:mt-7 xl:mt-6" content={body} />
     </article>
   </Layout>
 );
