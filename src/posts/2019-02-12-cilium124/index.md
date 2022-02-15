@@ -20,8 +20,6 @@ load-balancing from Cilium. As usual, a big shout out to the entire community
 of Cilium developers. The total number of contributors has grown to 85 and 579
 commits have been contributed in the time period between 1.1 and 1.2.
 
-<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen class="" style="position: static; visibility: visible; width: 550px; height: 654px; display: block; flex-grow: 1;" title="Twitter Tweet" src="https://platform.twitter.com/embed/Tweet.html?dnt=false&amp;embedId=twitter-widget-0&amp;features=eyJ0ZndfZXhwZXJpbWVudHNfY29va2llX2V4cGlyYXRpb24iOnsiYnVja2V0IjoxMjA5NjAwLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2hvcml6b25fdHdlZXRfZW1iZWRfOTU1NSI6eyJidWNrZXQiOiJodGUiLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X3NwYWNlX2NhcmQiOnsiYnVja2V0Ijoib2ZmIiwidmVyc2lvbiI6bnVsbH0sInRmd19za2VsZXRvbl9sb2FkaW5nXzEzMzk4Ijp7ImJ1Y2tldCI6ImNvbnRyb2wiLCJ2ZXJzaW9uIjoyfX0%3D&amp;frame=false&amp;hideCard=false&amp;hideThread=false&amp;id=1491753625768665091&amp;lang=en&amp;origin=https%3A%2F%2Fpublish.twitter.com%2F%3Fquery%3Dhttps%253A%252F%252Ftwitter.com%252Falex_barashkov%252Fstatus%252F1491753625768665091%26widget%3DTweet&amp;sessionId=f4159e5ffbf262c93a756d8e08ec529c31956759&amp;theme=light&amp;widgetsVersion=0a8eea3%3A1643743420422&amp;width=550px" data-tweet-id="1491753625768665091"></iframe>
-
 ## What is Cilium?
 
 Cilium is open source software for transparently providing and securing the

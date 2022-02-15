@@ -101,6 +101,29 @@ async function createBlogPosts({ graphql, actions }) {
   });
 }
 
+async function createStaticPages({ graphql, actions }) {
+  const result = await graphql(`
+    query staticPageQuery {
+      allMdx(filter: { fileAbsolutePath: { regex: "/src/static-pages/" } }) {
+        nodes {
+          id
+          slug
+        }
+      }
+    }
+  `);
+
+  if (result.errors) throw new Error(result.errors);
+
+  result.data.allMdx.nodes.forEach(({ id, slug }) => {
+    actions.createPage({
+      path: `/${slug}`,
+      component: path.resolve('./src/templates/static.jsx'),
+      context: { id },
+    });
+  });
+}
+
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions;
 
@@ -116,4 +139,5 @@ exports.onCreateNode = ({ node, actions }) => {
 exports.createPages = async (options) => {
   await createBlogPages(options);
   await createBlogPosts(options);
+  await createStaticPages(options);
 };
