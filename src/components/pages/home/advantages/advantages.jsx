@@ -54,7 +54,7 @@ const Advantages = () => {
       animationVisibilityRef: scalableAnimationVisibilityRef,
       animationRef: scalableAnimationRef,
       title: 'Scalable',
-      description: `On the fly compute scaling ensures that you're ready for peak hours.`,
+      description: `Dynamic compute scaling ensures that you're ready for peak hours.`,
     },
     {
       animationVisibilityRef: costEfficientAnimationVisibilityRef,
