@@ -103,7 +103,7 @@ const Features = () => {
       animationVisibilityRef: autoScalingAnimationVisibilityRef,
       animationRef: autoScalingAnimationRef,
       title: 'Auto Scaling',
-      description: 'Incremental auto backup functionality keeps your data safe 24/7.',
+      description: 'Handle peak time with flexible auto-scaling.',
       tag: {
         className: 'text-secondary-4 border-secondary-4',
         text: 'Coming Soon',
