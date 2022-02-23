@@ -54,19 +54,19 @@ const Advantages = () => {
       animationVisibilityRef: scalableAnimationVisibilityRef,
       animationRef: scalableAnimationRef,
       title: 'Scalable',
-      description: `Dynamic compute scaling ensures that you're ready for peak hours.`,
+      description: `Compute scales dynamically to ensure that you are ready for peak hours.`,
     },
     {
       animationVisibilityRef: costEfficientAnimationVisibilityRef,
       animationRef: costEfficientAnimationRef,
       title: 'Cost Efficient',
-      description: 'On demand resource adjustment cuts costs out of peak hours.',
+      description: 'Compute scales down to zero on usage and hot storage offloads to S3 for cost effiency.',
     },
     {
       animationVisibilityRef: easyToUseAnimationVisibilityRef,
       animationRef: easyToUseAnimationRef,
       title: 'Easy to Use',
-      description: 'Smooth and quick onboarding empowers developers to innovate.',
+      description: 'Fully managed serverless PostgreSQL starts seconds.',
     },
   ];
 
