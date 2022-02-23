@@ -25,7 +25,7 @@ const Scalability = () => {
             On Demand Scalability
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            Zenith Compute Node is a modified Postgres instance. It processes data retrieved from
+            Zenith Compute Node is a genuine Postgres instance. It processes data retrieved from
             Zenith&apos;s multi-tenant storage. Compute node is swift to start and reconfigures on
             the fly. It activates upon an incoming connection and shuts down to save resources when
             there&apos;s no read or write activity.
