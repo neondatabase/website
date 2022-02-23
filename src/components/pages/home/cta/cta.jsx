@@ -93,7 +93,7 @@ const CTA = () => {
           />
         </Heading>
         <motion.p className="t-3xl mt-5 text-white 2xl:mt-4" variants={pVariants}>
-          Just use a single command from CLI to create new Zenith database
+          Create a new Zenith cluster with a single command:
         </motion.p>
         <motion.div
           id="cta-input"

@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import Link from 'components/shared/link';
+// import Link from 'components/shared/link';
 
 import Illustration from './scalability-illustration';
 
@@ -25,18 +25,18 @@ const Scalability = () => {
             On Demand Scalability
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            Zenith compute node is a modified postgres instance which is used only to process data
-            retrieved from the multi-tenant storage. Compute node is swift to start and can be
-            reconfigured on the fly. Without any activity compute shuts down to save resources and
-            will be started on any incoming connection.
+            Zenith Compute Node is a modified Postgres instance. It processes data retrieved from
+            Zenith&apos;s multi-tenant storage. Compute node is swift to start and reconfigures on
+            the fly. It activates upon an incoming connection and shuts down to save resources when
+            there&apos;s no read or write activity.
           </p>
           <p className="t-xl mt-5 2xl:mt-4 xl:mt-3">
-            While compute node is a modified postgres it is still fully app-compatible with the
-            vanilla postgres. And we are committed to bring back our changes back to the community.
+            Compute Nodes are fully client-compatible with the vanilla Postgres. We are committed to
+            bringing our changes back to the community.
           </p>
-          <Link className="mt-6 2xl:mt-5 xl:mt-4" to="" size="md" theme="black-secondary-3">
+          {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="" size="md" theme="black-secondary-3">
             Explore Zenith&apos;s architecture
-          </Link>
+          </Link> */}
         </div>
         <div
           className="relative w-full max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:-ml-3 lg:mt-[46px] lg:max-w-[475px] md:-ml-2"

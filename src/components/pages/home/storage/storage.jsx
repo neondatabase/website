@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import Link from 'components/shared/link';
+// import Link from 'components/shared/link';
 
 import Illustration from './storage-illustration';
 
@@ -25,14 +25,14 @@ const Storage = () => {
             Unlimited Storage
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            Zenith redistributes data across a fault-tolerant storage cluster written in rust, which
-            takes care of high-availability and effectively makes the database instances on top of
-            it &quot;bottomless&quot;. Backups, checkpoints, integration with S3 and point-in-time
-            recovery are automatically handled by the zenith storage itself.
+            Zenith distributes data across a fault-tolerant Storage written in Rust. It integrates
+            with S3 to store cold data for cost optimization. This architecture ensures high
+            availability and effectively makes Zenith clusters &quot;bottomless&quot;. Zenith
+            handles backups and provides checkpoints and point-in-time recovery out-of-the-box.
           </p>
-          <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-secondary-5">
+          {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-secondary-5">
             How do we cook PostgreSQL storage
-          </Link>
+          </Link> */}
         </div>
 
         <div

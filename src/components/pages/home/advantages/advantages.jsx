@@ -54,22 +54,19 @@ const Advantages = () => {
       animationVisibilityRef: scalableAnimationVisibilityRef,
       animationRef: scalableAnimationRef,
       title: 'Scalable',
-      description:
-        'Separation of storage and compute. allows Zenith reconfigure amount of the compute power on the fly.',
+      description: `On the fly compute scaling ensures that you're ready for peak hours.`,
     },
     {
       animationVisibilityRef: costEfficientAnimationVisibilityRef,
       animationRef: costEfficientAnimationRef,
       title: 'Cost Efficient',
-      description:
-        'Being serverless allows using of resources on-demand, which significantly cuts the costs.',
+      description: 'On demand resource adjustment cuts costs out of peak hours.',
     },
     {
       animationVisibilityRef: easyToUseAnimationVisibilityRef,
       animationRef: easyToUseAnimationRef,
       title: 'Easy to Use',
-      description:
-        'No complex onboarding needed. Use a single CLI command to create a new Zenith database.',
+      description: 'Smooth and quick onboarding empowers developers to innovate.',
     },
   ];
 

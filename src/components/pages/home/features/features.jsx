@@ -10,7 +10,7 @@ import useLottie from 'hooks/use-lottie';
 
 import autoBackupAnimationData from './data/features-auto-backup-lottie-data.json';
 import autoScalingAnimationData from './data/features-auto-scaling-lottie-data.json';
-import edgeDeploymentAnimationData from './data/features-edge-deployment-lottie-data.json';
+// import edgeDeploymentAnimationData from './data/features-edge-deployment-lottie-data.json';
 import highAvailabilityAnimationData from './data/features-high-availability-lottie-data.json';
 import openSourceAnimationData from './data/features-open-source-lottie-data.json';
 import payAsYouGoAnimationData from './data/features-pay-as-you-go-lottie-data.json';
@@ -58,15 +58,15 @@ const Features = () => {
     useInViewOptions: { threshold: 0.5 },
   });
 
-  const {
-    animationRef: edgeDeploymentAnimationRef,
-    animationVisibilityRef: edgeDeploymentAnimationVisibilityRef,
-  } = useLottie({
-    lottieOptions: {
-      animationData: edgeDeploymentAnimationData,
-    },
-    useInViewOptions: { threshold: 0.5 },
-  });
+  // const {
+  //   animationRef: edgeDeploymentAnimationRef,
+  //   animationVisibilityRef: edgeDeploymentAnimationVisibilityRef,
+  // } = useLottie({
+  //   lottieOptions: {
+  //     animationData: edgeDeploymentAnimationData,
+  //   },
+  //   useInViewOptions: { threshold: 0.5 },
+  // });
 
   const {
     animationRef: openSourceAnimationRef,
@@ -84,43 +84,42 @@ const Features = () => {
       animationRef: payAsYouGoAnimationRef,
       title: 'Pay as You Go',
       description:
-        'Being serverless allows using of resources on-demand, which significantly cuts the costs and brings pay as you go solution.',
+        'Serverless means using resources on-demand without having to pay for standby resources. Pay as you go and cut costs.',
     },
     {
       animationVisibilityRef: highAvailabilityAnimationVisibilityRef,
       animationRef: highAvailabilityAnimationRef,
       title: 'High Availability',
-      description: `Zenith's architecture guarantees high availability even under peak load and 99.9999% uptime for Cloud users.`,
+      description:
+        'Zenith Cloud provides high availability without a maintenance burden and a need for expert advice.',
     },
     {
       animationVisibilityRef: autoBackupAnimationVisibilityRef,
       animationRef: autoBackupAnimationRef,
       title: 'Auto-Backup',
-      description:
-        'Cost efficient incremental auto backup functionality keeps your database save 24/7.',
+      description: 'Incremental auto backup functionality keeps your data safe 24/7.',
     },
     {
       animationVisibilityRef: autoScalingAnimationVisibilityRef,
       animationRef: autoScalingAnimationRef,
       title: 'Auto Scaling',
-      description:
-        'Handle peak time requests, with a flexible auto scale deployment solution, and pay for the actual usage.',
+      description: 'Incremental auto backup functionality keeps your data safe 24/7.',
       tag: {
         className: 'text-secondary-4 border-secondary-4',
         text: 'Coming Soon',
       },
     },
-    {
-      animationVisibilityRef: edgeDeploymentAnimationVisibilityRef,
-      animationRef: edgeDeploymentAnimationRef,
-      title: 'Edge Deployment',
-      description:
-        'Have a database close to your users. Zenith is a perfect for serverless functions.',
-      tag: {
-        className: 'text-secondary-2 border-secondary-2',
-        text: 'Coming Soon',
-      },
-    },
+    // {
+    //   animationVisibilityRef: edgeDeploymentAnimationVisibilityRef,
+    //   animationRef: edgeDeploymentAnimationRef,
+    //   title: 'Edge Deployment',
+    //   description:
+    //     'Have a database close to your users. Zenith is a perfect for serverless functions.',
+    //   tag: {
+    //     className: 'text-secondary-2 border-secondary-2',
+    //     text: 'Coming Soon',
+    //   },
+    // },
     {
       animationVisibilityRef: openSourceAnimationVisibilityRef,
       animationRef: openSourceAnimationRef,
@@ -131,7 +130,7 @@ const Features = () => {
           <Link to="https://github.com/zenithdb/zenith" theme="underline-primary-1">
             our repository
           </Link>{' '}
-          to learn more about technologies which make Zenith great.
+          on GitHub. We develop in public under the Apache 2.0 license.
         </>
       ),
     },
@@ -158,8 +157,7 @@ const Features = () => {
           />
         </Heading>
         <p className="t-3xl mx-auto mt-5 max-w-[940px] text-center text-white 2xl:mt-4 2xl:max-w-[800px] xl:mt-3.5 xl:max-w-[610px] lg:max-w-[580px]">
-          The way Zenith extends PostgreSQL brings many essential features needed for modern
-          projects development.
+          Zenith supplements Postgres with features essential for modern application development.
         </p>
         <ul className="grid-gap-x mt-[92px] grid grid-cols-12 gap-y-[92px] 2xl:mt-[76px] 2xl:gap-y-[76px] xl:mt-16 xl:gap-y-16 md:grid-cols-1">
           {items.map(({ animationVisibilityRef, animationRef, title, description, tag }, index) => (
