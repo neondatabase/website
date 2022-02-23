@@ -89,7 +89,7 @@ const Features = () => {
     {
       animationVisibilityRef: highAvailabilityAnimationVisibilityRef,
       animationRef: highAvailabilityAnimationRef,
-      title: 'High Availability',
+      title: 'Reliable',
       description:
         'Zenith Cloud provides high availability without a maintenance burden and a need for expert advice.',
     },
