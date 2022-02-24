@@ -35,7 +35,11 @@ const Hero = () => {
   const titleContent = (
     <span className="lg:hidden">
       <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
-        {'${titlePhrases[0]} PostgreSQL'.split('').map((letter, index) => (
+        <TypingText
+          phrases={titlePhrases}
+          shouldAnimationStart={isTitleInView && isAnimationFinished}
+        />{' '}
+        {'PostgreSQL'.split('').map((letter, index) => (
           <span
             className={clsx('animate-text-blink', letter === '/' && 'text-secondary-2')}
             style={{ animationPlayState: 'paused' }}
@@ -43,11 +47,7 @@ const Hero = () => {
           >
             {letter}
           </span>
-        ))}{' '}
-        <TypingText
-          phrases={titlePhrases}
-          shouldAnimationStart={isTitleInView && isAnimationFinished}
-        />
+        ))}
       </BlinkingText>
     </span>
   );
