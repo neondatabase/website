@@ -35,7 +35,7 @@ const Hero = () => {
   const titleContent = (
     <span className="lg:hidden">
       <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
-        {'Zenith is PostgreSQL that is /'.split('').map((letter, index) => (
+        {'${titlePhrases[0]} PostgreSQL'.split('').map((letter, index) => (
           <span
             className={clsx('animate-text-blink', letter === '/' && 'text-secondary-2')}
             style={{ animationPlayState: 'paused' }}
