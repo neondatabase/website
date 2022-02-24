@@ -25,10 +25,11 @@ const Storage = () => {
             Unlimited Storage
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            Zenith distributes data across a fault-tolerant Storage written in Rust. It integrates
-            with S3 to store cold data for cost optimization. This architecture ensures high
-            availability and effectively makes Zenith clusters &quot;bottomless&quot;. Zenith
-            handles backups and checkpoints and provides point-in-time recovery out-of-the-box.
+            Zenith stores data across a fault tolerant scale-out Storage built from ground up.
+            It integrates with S3 to store cold data for cost optimization.
+            This architecture ensures high availability and makes Zenith storage &quot;bottomless&quot;.
+            Zenith handles backups and checkpoints and provides point-in-time recovery out-of-the-box.
+            Zenith Storage is implemented in Rust.
           </p>
           {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-secondary-5">
             How do we cook PostgreSQL storage
