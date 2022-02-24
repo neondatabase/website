@@ -125,7 +125,7 @@ const items = [
   {
     photo: <StaticImage src="./images/anna-stepanyan-photo.jpg" alt="Anna Stepanyan" />,
     name: 'Anna Stepanyan',
-    position: 'Product Manager',
+    position: 'Head of Product',
     linkedinUrl: 'https://www.linkedin.com/in/annastepanyan21/',
     githubUrl: 'https://github.com/stepashka',
   },
