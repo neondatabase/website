@@ -13,8 +13,9 @@ const DataBranching = () => (
           Data Branching
         </Heading>
         <p className="t-xl mt-8 3xl:max-w-[504px] 2xl:mt-7 2xl:max-w-[416px] xl:mt-6 lg:max-w-none">
-          Zenith can instantly branch your PostrgreSQL database to support a modern developer workflow.
+          Zenith allows to instantly branch your PostgreSQL database to support a modern developement workflow.
           Create a branch for your dev and test environments for every code deployment in your CI/CD pipeline.
+          Branches are free so that you can branch for every code deployment in your CI/CD pipelines.
         </p>
         {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-primary-1">
           Getting started with data branching
