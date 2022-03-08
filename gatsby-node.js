@@ -1,7 +1,9 @@
+const fs = require('fs');
 const path = require('path');
 
 const { BLOG_BASE_PATH, BLOG_POSTS_PER_PAGE } = require('./src/constants/blog');
 const POST_AUTHORS = require('./src/constants/post-authors');
+const { generateSidebar } = require('./src/utils/docs');
 const getBlogPostPath = require('./src/utils/get-blog-post-path');
 
 // We have this variable in order to decide whether to render draft posts or not
@@ -127,6 +129,72 @@ async function createStaticPages({ graphql, actions }) {
   });
 }
 
+async function createDocPages({ graphql, actions, reporter }) {
+  const { createPage } = actions;
+
+  const result = await graphql(`
+    {
+      allMdx(sort: { fields: fileAbsolutePath, order: ASC }) {
+        edges {
+          node {
+            fileAbsolutePath
+            frontmatter {
+              title
+              id
+              sidebarLabel
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  if (result.errors) {
+    throw new Error(result.errors);
+  }
+
+  const pages = result.data.allMdx.edges;
+
+  const pagesById = {};
+  pages.forEach(
+    ({
+      node: {
+        frontmatter: { title, sidebarLabel, id },
+      },
+    }) => {
+      pagesById[id] = {
+        title,
+        sidebarLabel,
+        slug: id,
+      };
+    }
+  );
+
+  const docSidebar = generateSidebar(pagesById);
+
+  pages.forEach(
+    ({
+      node: {
+        frontmatter: { id },
+      },
+    }) => {
+      const templatePath = path.resolve(`./src/templates/doc-page.jsx`);
+
+      const context = { id, docSidebar };
+
+      if (fs.existsSync(templatePath)) {
+        createPage({
+          path: `/docs/${id}`,
+          component: templatePath,
+          context,
+        });
+      } else {
+        reporter.error(`Template "doc-page" was not found`);
+      }
+    }
+  );
+}
+
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions;
 
@@ -144,4 +212,5 @@ exports.createPages = async (options) => {
   // await createBlogPages(options);
   // await createBlogPosts(options);
   // await createStaticPages(options);
+  await createDocPages(options);
 };
