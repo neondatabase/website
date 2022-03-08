@@ -10,6 +10,7 @@ const getBlogPostPath = require('./src/utils/get-blog-post-path');
 // We have an array structure here in order to use it in the filter using the "in" operator
 const DRAFT_FILTER = process.env.NODE_ENV === 'production' ? [false] : [true, false];
 
+// eslint-disable-next-line no-unused-vars
 async function createBlogPages({ graphql, actions }) {
   const { createPage } = actions;
 
@@ -51,6 +52,7 @@ async function createBlogPages({ graphql, actions }) {
   });
 }
 
+// eslint-disable-next-line no-unused-vars
 async function createBlogPosts({ graphql, actions }) {
   const result = await graphql(`
     {
@@ -101,6 +103,7 @@ async function createBlogPosts({ graphql, actions }) {
   });
 }
 
+// eslint-disable-next-line no-unused-vars
 async function createStaticPages({ graphql, actions }) {
   const result = await graphql(`
     query staticPageQuery {
@@ -136,8 +139,9 @@ exports.onCreateNode = ({ node, actions }) => {
   }
 };
 
+// eslint-disable-next-line no-unused-vars
 exports.createPages = async (options) => {
-  await createBlogPages(options);
-  await createBlogPosts(options);
-  await createStaticPages(options);
+  // await createBlogPages(options);
+  // await createBlogPosts(options);
+  // await createStaticPages(options);
 };
