@@ -90,6 +90,9 @@ module.exports = {
             h2: {
               fontWeight: 600,
             },
+            a: {
+              fontWeight: 600,
+            },
           },
         },
       }),
