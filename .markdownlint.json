@@ -1,4 +1,7 @@
 {
   "line-length": false,
-  "ol-prefix": false
+  "ol-prefix": false,
+  "no-inline-html": {
+    "allowed_elements": ["iframe"]
+  }
 }

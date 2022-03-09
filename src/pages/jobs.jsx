@@ -4,18 +4,14 @@ import Hero from 'components/pages/jobs/hero';
 import JobsList from 'components/pages/jobs/jobs-list';
 import Layout from 'components/shared/layout';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
+import SEO_DATA from 'constants/seo-data';
 
-const pageMetadata = {
-  title: 'Zenith - Jobs',
-  description: 'Become a part of our team',
-};
-
-const HomePage = () => (
-  <Layout headerTheme="black" pageMetadata={pageMetadata}>
+const JobsPage = () => (
+  <Layout seo={SEO_DATA.jobs} headerTheme="black">
     <Hero />
     <JobsList />
     <SubscribeMinimalistic />
   </Layout>
 );
 
-export default HomePage;
+export default JobsPage;

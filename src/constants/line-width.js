@@ -1,3 +1,1 @@
-const LINE_WIDTH = 2;
-
-export default LINE_WIDTH;
+export default 2;
