@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import classNames from 'classnames';
+import clsx from 'clsx';
 import React from 'react';
 
 import AnchorIcon from './svg/anchor.inline.svg';
@@ -33,7 +33,7 @@ const AnchorHeading =
 
     const Tag = tagName;
     return (
-      <Tag className={classNames(baseStyles, styles.tagName)} id={anchor}>
+      <Tag className={clsx(baseStyles, styles.tagName)} id={anchor}>
         <a className="hidden group-hover:visible" href={`#${anchor}`}>
           <AnchorIcon />
         </a>

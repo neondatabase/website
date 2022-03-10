@@ -16,4 +16,8 @@ export default {
   static: ({ title }) => ({
     title: `${title} — Zenith`,
   }),
+  docs: ({ title, description }) => ({
+    title: `${title} — Zenith`,
+    description,
+  }),
 };
