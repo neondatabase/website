@@ -100,9 +100,12 @@ const Sidebar = ({ sidebar, currentSlug }) => {
                 <Link
                   key={`${index}-${childIndex}`}
                   to={`/docs/${child.slug}`}
-                  className={classNames('text-md py-2 leading-none hover:text-primary-2', {
-                    'font-semibold text-primary-2': currentSlug === child.slug,
-                  })}
+                  className={classNames(
+                    'py-2 text-base leading-none first:pt-0 last:pb-0 hover:text-primary-2',
+                    {
+                      'font-semibold text-primary-2': currentSlug === child.slug,
+                    }
+                  )}
                 >
                   {child.sidebarLabel}
                 </Link>
@@ -119,13 +122,13 @@ const DocLayout = ({ seo, currentSlug, sidebar, children }) => (
   <Layout headerTheme="white" pageMetadata={seo}>
     <Container size="md">
       <div className="mb-auto flex h-full flex-grow lg:flex-col">
-        <div className="mt-44 w-[313px] flex-shrink-0 xl:w-[256px] lg:hidden">
+        <div className="mt-48 w-[313px] flex-shrink-0 xl:w-[256px] lg:hidden">
           <Sidebar sidebar={sidebar} currentSlug={currentSlug} />
         </div>
-        <div className="hidden w-full lg:block">
+        <div className="hidden w-full lg:mt-8 lg:block">
           <MobileNavMenu sidebar={sidebar} currentSlug={currentSlug} />
         </div>
-        <main className="mt-44 w-[calc(100%-313px)] pb-44 xl:w-[calc(100%-256px)] lg:mt-14 lg:w-full md:mt-10">
+        <main className="mt-48 w-[calc(100%-313px)] pb-48 xl:w-[calc(100%-256px)] lg:mt-14 lg:w-full md:mt-10">
           {children}
         </main>
       </div>
