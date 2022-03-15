@@ -134,7 +134,10 @@ async function createDocPages({ graphql, actions, reporter }) {
 
   const result = await graphql(`
     {
-      allMdx(sort: { fields: fileAbsolutePath, order: ASC }) {
+      allMdx(
+        filter: { fileAbsolutePath: { regex: "/src/docs/" } }
+        sort: { fields: fileAbsolutePath, order: ASC }
+      ) {
         edges {
           node {
             fileAbsolutePath
