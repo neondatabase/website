@@ -5,10 +5,12 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
+import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
-import Container from 'components/shared/container';
 
 const components = {
+  h2: AnchorHeading('h2'),
+  h3: AnchorHeading('h3'),
   table: (props) => (
     <div className="table-wrapper">
       <table {...props} />
@@ -21,13 +23,11 @@ const components = {
 };
 
 const Content = ({ className, content }) => (
-  <Container size="sm">
-    <div className={clsx('prose prose-lg md:prose-base', className)}>
-      <MDXProvider components={components}>
-        <MDXRenderer>{content}</MDXRenderer>
-      </MDXProvider>
-    </div>
-  </Container>
+  <div className={clsx('prose prose-lg md:prose-base', className)}>
+    <MDXProvider components={components}>
+      <MDXRenderer>{content}</MDXRenderer>
+    </MDXProvider>
+  </div>
 );
 
 Content.propTypes = {

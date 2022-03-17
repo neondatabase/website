@@ -2,11 +2,11 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import DocContent from 'components/pages/doc-page/doc-content';
 import DocMobileNav from 'components/pages/doc-page/doc-mobile-nav';
 import DocNavLinks from 'components/pages/doc-page/doc-nav-links';
 import Sidebar from 'components/pages/doc-page/sidebar';
 import Container from 'components/shared/container';
+import Content from 'components/shared/content';
 import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
 import { getPrevAndNextLinks } from 'utils/docs';
@@ -30,7 +30,14 @@ const DocPage = ({ data: { mdx: docData }, pageContext }) => {
             <DocMobileNav sidebar={pageContext.docSidebar} currentSlug={pageContext.id} />
           </div>
           <main className="mx-auto mt-48 w-[860px] pb-48 2xl:w-[calc(100%-256px)] lg:mt-14 lg:w-full md:mt-10">
-            <DocContent title={frontmatter.title} content={content} />
+            <article className="relative">
+              <div className="relative flex flex-col">
+                <h1 className="text-[52px] font-semibold leading-tight md:text-5xl">
+                  {frontmatter.title}
+                </h1>
+                <Content content={content} className="!mt-6 !max-w-full md:!mt-5" />
+              </div>
+            </article>
             <DocNavLinks previousLink={previousLink} nextLink={nextLink} />
           </main>
         </div>
