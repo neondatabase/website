@@ -113,7 +113,6 @@ module.exports = {
               controls: true,
             },
           },
-          'gatsby-remark-prismjs',
           'gatsby-remark-responsive-iframe',
         ],
       },

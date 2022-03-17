@@ -1,0 +1,7 @@
+@layer components {
+  .code-block {
+    & pre code {
+      @apply !text-white;
+    }
+  }
+}

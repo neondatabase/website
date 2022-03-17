@@ -4,9 +4,8 @@ import clsx from 'clsx';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'prismjs/themes/prism.css';
 
+import CodeBlock from 'components/shared/code-block';
 import Container from 'components/shared/container';
 
 const components = {
@@ -17,6 +16,8 @@ const components = {
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
+  code: (props) => <CodeBlock {...props} />,
+  pre: (props) => <div {...props} />,
 };
 
 const Content = ({ className, content }) => (

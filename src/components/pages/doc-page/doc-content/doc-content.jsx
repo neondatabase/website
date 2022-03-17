@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import AnchorHeading from 'components/shared/anchor-heading';
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'prismjs/themes/prism.css';
+import CodeBlock from 'components/shared/code-block';
 
 const components = {
   h2: AnchorHeading('h2'),
@@ -17,6 +15,8 @@ const components = {
       <table {...props} />
     </div>
   ),
+  code: (props) => <CodeBlock {...props} />,
+  pre: (props) => <div {...props} />,
 };
 
 const DocContent = ({ title, content }) => (
