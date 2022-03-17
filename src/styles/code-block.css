@@ -4,4 +4,8 @@
       @apply !text-white;
     }
   }
+
+  .prose :not(pre) > code {
+    @apply bg-[#f1f1f1] leading-none;
+  }
 }
