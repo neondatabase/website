@@ -21,15 +21,15 @@ const DocPage = ({ data: { mdx: docData }, pageContext }) => {
       headerTheme="white"
       pageMetadata={SEO_DATA.docs({ title: frontmatter.title, description: excerpt || null })}
     >
-      <Container size="md">
+      <Container size="md" className="relative">
         <div className="mb-auto flex h-full flex-grow lg:flex-col">
-          <div className="mt-48 w-[313px] flex-shrink-0 xl:w-[256px] lg:hidden">
+          <div className="absolute top-48 left-[calc((100%-860px)/2-313px)] w-[313px] flex-shrink-0 2xl:relative 2xl:left-0 2xl:top-0 2xl:mt-48 2xl:w-[256px] lg:hidden">
             <Sidebar sidebar={pageContext.docSidebar} currentSlug={pageContext.id} />
           </div>
           <div className="hidden w-full lg:mt-8 lg:block">
             <DocMobileNav sidebar={pageContext.docSidebar} currentSlug={pageContext.id} />
           </div>
-          <main className="mt-48 w-[calc(100%-313px)] pb-48 xl:w-[calc(100%-256px)] lg:mt-14 lg:w-full md:mt-10">
+          <main className="mx-auto mt-48 w-[860px] pb-48 2xl:w-[calc(100%-256px)] lg:mt-14 lg:w-full md:mt-10">
             <DocContent title={frontmatter.title} content={content} />
             <DocNavLinks previousLink={previousLink} nextLink={nextLink} />
           </main>
