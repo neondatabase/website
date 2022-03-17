@@ -167,7 +167,7 @@ async function createDocPages({ graphql, actions, reporter }) {
     }) => {
       pagesById[id] = {
         title,
-        sidebarLabel,
+        sidebarLabel: sidebarLabel || title,
         slug: id,
       };
     }
@@ -178,12 +178,21 @@ async function createDocPages({ graphql, actions, reporter }) {
   pages.forEach(
     ({
       node: {
-        frontmatter: { id },
+        frontmatter: { id, title },
       },
     }) => {
       const templatePath = path.resolve(`./src/templates/doc-page.jsx`);
 
       const context = { id, docSidebar };
+
+      // Required fields validation
+      if (!id) {
+        throw new Error(`Doc file does not have field "id"!`);
+      }
+
+      if (!title) {
+        throw new Error(`Doc file with ID "${id}" does not have field "title"!`);
+      }
 
       if (fs.existsSync(templatePath)) {
         createPage({
