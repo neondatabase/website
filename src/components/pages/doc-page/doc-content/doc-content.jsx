@@ -22,7 +22,7 @@ const components = {
 const DocContent = ({ title, content }) => (
   <article className="relative">
     <div className="relative flex flex-col">
-      <h1 className="t-5xl font-semibold">{title}</h1>
+      <h1 className="text-[52px] font-semibold leading-tight">{title}</h1>
       <div className="prose prose-lg !mt-6 !max-w-full md:!mt-5">
         <MDXProvider components={components}>
           <MDXRenderer>{content}</MDXRenderer>

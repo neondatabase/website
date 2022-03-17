@@ -23,7 +23,7 @@ const Sidebar = ({ sidebar, currentSlug }) => {
   };
 
   return (
-    <>
+    <div className="flex w-full flex-col pr-10">
       {sidebar.map(({ title, sidebarLabel, children }, index) => (
         <div key={index}>
           <div
@@ -60,7 +60,7 @@ const Sidebar = ({ sidebar, currentSlug }) => {
           )}
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
