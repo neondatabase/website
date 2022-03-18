@@ -45,8 +45,8 @@ const CodeBlock = ({ className, children, ...props }) => {
       <Button
         className="invisible absolute top-4 right-6 rounded font-semibold uppercase opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100"
         type="button"
-        size="xs"
-        theme="grey-80"
+        size="xxs"
+        theme="gray-2"
         disabled={isCopied}
         onClick={() => handleCopy(code)}
       >
