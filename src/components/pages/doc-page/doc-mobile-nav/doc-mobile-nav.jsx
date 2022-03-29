@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
+import clsx from 'clsx';
 import { navigate } from 'gatsby';
 import React, { useState, useLayoutEffect } from 'react';
 
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
-const DocMobileNav = ({ sidebar, currentSlug }) => {
+const DocMobileNav = ({ className, sidebar, currentSlug }) => {
   const [value, setValue] = useState(null);
   useLayoutEffect(() => {
     const sectionIndex = sidebar.findIndex(
@@ -21,7 +22,7 @@ const DocMobileNav = ({ sidebar, currentSlug }) => {
   }, [currentSlug]);
 
   return (
-    <div className="relative w-full">
+    <div className={clsx(className, 'relative w-full')}>
       <select
         className="select w-full"
         // value={value}

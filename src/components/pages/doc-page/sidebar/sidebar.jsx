@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
-const Sidebar = ({ sidebar, currentSlug }) => {
+const Sidebar = ({ className, sidebar, currentSlug }) => {
   const initialState = {};
   sidebar.forEach(({ title }) => (initialState[title] = false));
   const sectionIndex = sidebar.findIndex(
@@ -23,7 +23,7 @@ const Sidebar = ({ sidebar, currentSlug }) => {
   };
 
   return (
-    <div className="flex w-full flex-col pr-10">
+    <div className={clsx(className, 'flex w-full flex-col pr-10')}>
       {sidebar.map(({ title, sidebarLabel, children }, index) => (
         <div key={index}>
           <div

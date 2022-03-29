@@ -25,25 +25,27 @@ const DocPage = ({
 
   return (
     <Layout seo={SEO_DATA.docs({ title, description: excerpt })} headerTheme="white">
-      <Container size="md" className="relative">
-        <div className="safe-paddings mb-auto flex h-full flex-grow pt-48 3xl:pt-44 2xl:pt-40 xl:pt-32 lg:flex-col lg:pt-6">
-          <div className="absolute top-48 left-[calc((100%-860px)/2-313px)] w-[313px] flex-shrink-0 2xl:relative 2xl:left-0 2xl:top-0 2xl:w-[256px] lg:hidden">
-            <Sidebar sidebar={pageContext.docSidebar} currentSlug={pageContext.id} />
-          </div>
-          <div className="hidden w-full lg:mb-8 lg:block">
-            <DocMobileNav sidebar={pageContext.docSidebar} currentSlug={pageContext.id} />
-          </div>
-          <main className="mx-auto w-[860px] pb-48 3xl:pb-44 2xl:w-[calc(100%-256px)] 2xl:pb-40 xl:pb-32 lg:w-full lg:pb-24 md:pb-20">
-            <article className="relative">
-              <div className="relative flex flex-col">
-                <h1 className="t-5xl font-semibold">{title}</h1>
-                <Content content={body} className="!mt-6 !max-w-full md:!mt-5" />
-              </div>
+      <div className="safe-paddings pt-48 pb-48 3xl:pt-44 3xl:pb-44 2xl:pt-40 2xl:pb-40 xl:pt-32 xl:pb-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
+        <Container className="grid grid-cols-12 lg:block" size="md">
+          <Sidebar
+            className="col-start-2 col-end-4 xl:col-start-1 lg:hidden"
+            sidebar={pageContext.docSidebar}
+            currentSlug={pageContext.id}
+          />
+          <DocMobileNav
+            className="hidden w-full lg:mb-8 lg:block"
+            sidebar={pageContext.docSidebar}
+            currentSlug={pageContext.id}
+          />
+          <div className="col-span-6 xl:col-span-9">
+            <article>
+              <h1 className="t-5xl font-semibold">{title}</h1>
+              <Content className="mt-5" content={body} />
             </article>
             <DocNavLinks previousLink={previousLink} nextLink={nextLink} />
-          </main>
-        </div>
-      </Container>
+          </div>
+        </Container>
+      </div>
     </Layout>
   );
 };
