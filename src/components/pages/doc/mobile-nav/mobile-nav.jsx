@@ -5,7 +5,7 @@ import React, { useState, useLayoutEffect } from 'react';
 
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
-const DocMobileNav = ({ className, sidebar, currentSlug }) => {
+const MobileNav = ({ className, sidebar, currentSlug }) => {
   const [value, setValue] = useState(null);
   useLayoutEffect(() => {
     const sectionIndex = sidebar.findIndex(
@@ -56,4 +56,4 @@ const DocMobileNav = ({ className, sidebar, currentSlug }) => {
   );
 };
 
-export default DocMobileNav;
+export default MobileNav;

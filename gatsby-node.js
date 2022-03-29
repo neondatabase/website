@@ -3,7 +3,7 @@ const path = require('path');
 
 const { BLOG_BASE_PATH, BLOG_POSTS_PER_PAGE } = require('./src/constants/blog');
 const POST_AUTHORS = require('./src/constants/post-authors');
-const { generateSidebar } = require('./src/utils/docs');
+const generateDocsSidebar = require('./src/utils/generate-docs-sidebar');
 const getBlogPostPath = require('./src/utils/get-blog-post-path');
 
 // We have this variable in order to decide whether to render draft posts or not
@@ -173,7 +173,7 @@ async function createDocPages({ graphql, actions, reporter }) {
     }
   );
 
-  const docSidebar = generateSidebar(pagesById);
+  const docsSidebar = generateDocsSidebar(pagesById);
 
   pages.forEach(
     ({
@@ -181,9 +181,9 @@ async function createDocPages({ graphql, actions, reporter }) {
         frontmatter: { id, title },
       },
     }) => {
-      const templatePath = path.resolve(`./src/templates/doc-page.jsx`);
+      const templatePath = path.resolve(`./src/templates/doc.jsx`);
 
-      const context = { id, docSidebar };
+      const context = { id, docsSidebar };
 
       // Required fields validation
       if (!id) {
@@ -201,7 +201,7 @@ async function createDocPages({ graphql, actions, reporter }) {
           context,
         });
       } else {
-        reporter.error(`Template "doc-page" was not found`);
+        reporter.error(`Template "doc" was not found`);
       }
     }
   );

@@ -1,28 +1,4 @@
-const { sidebarData } = require('../constants/docs-sidebar');
-
-// eslint-disable-next-line import/prefer-default-export
-const generateSidebar = (pagesById) => {
-  const docSidebar = [];
-  Object.keys(sidebarData).forEach((dirName) => {
-    const sidebarChildren = [];
-    sidebarData[dirName].forEach((id) => {
-      if (!pagesById[id]) {
-        console.log('Missing page for id:', id);
-        return;
-      }
-      sidebarChildren.push(pagesById[id]);
-    });
-    docSidebar.push({
-      title: dirName,
-      sidebarLabel: dirName,
-      children: sidebarChildren,
-      slug: null,
-    });
-  });
-  return docSidebar;
-};
-
-const getPrevAndNextLinks = (slug, sidebar) => {
+export default function getDocPreviousAndNextLinks(slug, sidebar) {
   let sectionIndex = 0;
   let linkIndex = 0;
 
@@ -56,6 +32,4 @@ const getPrevAndNextLinks = (slug, sidebar) => {
   }
 
   return { previousLink, nextLink };
-};
-
-module.exports = { generateSidebar, getPrevAndNextLinks };
+}

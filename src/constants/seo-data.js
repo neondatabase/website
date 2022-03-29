@@ -16,8 +16,8 @@ export default {
   static: ({ title }) => ({
     title: `${title} — Zenith`,
   }),
-  docs: ({ title, description }) => ({
-    title: `${title} — Zenith`,
+  doc: ({ title, description }) => ({
+    title: `${title} — Zenith Docs`,
     description,
   }),
 };
