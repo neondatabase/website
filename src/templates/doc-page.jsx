@@ -11,16 +11,20 @@ import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
 import { getPrevAndNextLinks } from 'utils/docs';
 
-const DocPage = ({ data: { mdx: docData }, pageContext }) => {
-  const { body: content, frontmatter, excerpt } = docData;
-
+const DocPage = ({
+  data: {
+    mdx: {
+      excerpt,
+      body,
+      frontmatter: { title },
+    },
+  },
+  pageContext,
+}) => {
   const { previousLink, nextLink } = getPrevAndNextLinks(pageContext.id, pageContext.docSidebar);
 
   return (
-    <Layout
-      headerTheme="white"
-      pageMetadata={SEO_DATA.docs({ title: frontmatter.title, description: excerpt || null })}
-    >
+    <Layout seo={SEO_DATA.docs({ title, description: excerpt })} headerTheme="white">
       <Container size="md" className="relative">
         <div className="safe-paddings mb-auto flex h-full flex-grow pt-48 3xl:pt-44 2xl:pt-40 xl:pt-32 lg:flex-col lg:pt-6">
           <div className="absolute top-48 left-[calc((100%-860px)/2-313px)] w-[313px] flex-shrink-0 2xl:relative 2xl:left-0 2xl:top-0 2xl:w-[256px] lg:hidden">
@@ -32,8 +36,8 @@ const DocPage = ({ data: { mdx: docData }, pageContext }) => {
           <main className="mx-auto w-[860px] pb-48 3xl:pb-44 2xl:w-[calc(100%-256px)] 2xl:pb-40 xl:pb-32 lg:w-full lg:pb-24 md:pb-20">
             <article className="relative">
               <div className="relative flex flex-col">
-                <h1 className="t-5xl font-semibold">{frontmatter.title}</h1>
-                <Content content={content} className="!mt-6 !max-w-full md:!mt-5" />
+                <h1 className="t-5xl font-semibold">{title}</h1>
+                <Content content={body} className="!mt-6 !max-w-full md:!mt-5" />
               </div>
             </article>
             <DocNavLinks previousLink={previousLink} nextLink={nextLink} />
@@ -47,12 +51,11 @@ const DocPage = ({ data: { mdx: docData }, pageContext }) => {
 export const query = graphql`
   query ($id: String!) {
     mdx(frontmatter: { id: { eq: $id } }) {
-      frontmatter {
-        id
-        title
-      }
       excerpt(pruneLength: 140)
       body
+      frontmatter {
+        title
+      }
     }
   }
 `;
