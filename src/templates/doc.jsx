@@ -33,7 +33,7 @@ const DocTemplate = ({
             currentSlug={id}
           />
           <MobileNav className="hidden lg:block" sidebar={docsSidebar} currentSlug={id} />
-          <div className="col-span-6 xl:col-span-9">
+          <div className="col-span-6 xl:col-span-9 lg:mt-6">
             <article>
               <h1 className="t-5xl font-semibold">{title}</h1>
               <Content className="mt-5" content={body} />

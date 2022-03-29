@@ -22,7 +22,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
   }, [currentSlug]);
 
   return (
-    <div className={clsx(className, 'relative w-full')}>
+    <div className={clsx(className)}>
       <select
         className="select w-full"
         // value={value}
