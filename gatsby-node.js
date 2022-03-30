@@ -130,7 +130,7 @@ async function createStaticPages({ graphql, actions }) {
 }
 
 async function createDocPages({ graphql, actions, reporter }) {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
 
   const result = await graphql(`
     {
@@ -174,6 +174,12 @@ async function createDocPages({ graphql, actions, reporter }) {
   );
 
   const docsSidebar = generateDocsSidebar(pagesById);
+
+  createRedirect({
+    fromPath: '/docs',
+    toPath: `/docs/${docsSidebar[0].children[0].slug}`,
+    statusCode: 200,
+  });
 
   pages.forEach(
     ({
