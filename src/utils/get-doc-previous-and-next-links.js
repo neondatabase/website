@@ -20,14 +20,14 @@ export default function getDocPreviousAndNextLinks(slug, sidebar) {
   if (linkIndex > 0) {
     previousLink = {
       title: sidebar[sectionIndex].items[linkIndex - 1].title,
-      slug: `${DOCS_BASE_PATH}/${sidebar[sectionIndex].items[linkIndex - 1].slug}`,
+      slug: `${DOCS_BASE_PATH}${sidebar[sectionIndex].items[linkIndex - 1].slug}/`,
     };
   } else if (sectionIndex > 0) {
     previousLink = {
       title: sidebar[sectionIndex - 1].items[sidebar[sectionIndex - 1].items.length - 1].title,
-      slug: `${DOCS_BASE_PATH}/${
+      slug: `${DOCS_BASE_PATH}${
         sidebar[sectionIndex - 1].items[sidebar[sectionIndex - 1].items.length - 1].slug
-      }`,
+      }/`,
     };
   }
 
@@ -36,13 +36,13 @@ export default function getDocPreviousAndNextLinks(slug, sidebar) {
     if (sectionIndex < sidebar.length - 1) {
       nextLink = {
         title: sidebar[sectionIndex + 1].items[0].title,
-        slug: `${DOCS_BASE_PATH}/${sidebar[sectionIndex + 1].items[0].slug}`,
+        slug: `${DOCS_BASE_PATH}${sidebar[sectionIndex + 1].items[0].slug}/`,
       };
     }
   } else {
     nextLink = {
       title: sidebar[sectionIndex].items[linkIndex + 1].title,
-      slug: `${DOCS_BASE_PATH}/${sidebar[sectionIndex].items[linkIndex + 1].slug}`,
+      slug: `${DOCS_BASE_PATH}${sidebar[sectionIndex].items[linkIndex + 1].slug}/`,
     };
   }
 

@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { navigate } from 'gatsby';
 import React, { useState, useLayoutEffect } from 'react';
 
+import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 const MobileNav = ({ className, sidebar, currentSlug }) => {
@@ -27,7 +28,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
         onChange={({ target }) => {
           const val = target.value;
           if (!val) return;
-          navigate(`/docs/${val}`);
+          navigate(`${DOCS_BASE_PATH}${val}`);
         }}
       >
         <option value={false} disabled>

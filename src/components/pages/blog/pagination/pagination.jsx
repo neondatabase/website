@@ -15,7 +15,7 @@ const Pagination = ({ currentPageIndex, pageCount }) => {
     'flex items-center text-base font-semibold space-x-2 transition-colors duration-200 hover:text-primary-2';
 
   const handlePageChange = ({ selected }) => {
-    const navigatePath = selected === 0 ? BLOG_BASE_PATH : `${BLOG_BASE_PATH}/${selected + 1}`;
+    const navigatePath = selected === 0 ? BLOG_BASE_PATH : `${BLOG_BASE_PATH}${selected + 1}`;
     navigate(navigatePath);
   };
 

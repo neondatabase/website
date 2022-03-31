@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { Link } from 'gatsby';
 import React, { useState } from 'react';
 
+import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 const Sidebar = ({ className, sidebar, currentSlug }) => {
@@ -50,7 +51,7 @@ const Sidebar = ({ className, sidebar, currentSlug }) => {
                       'font-semibold text-primary-2': currentSlug === slug,
                     }
                   )}
-                  to={`/docs/${slug}`}
+                  to={`${DOCS_BASE_PATH}${slug}/`}
                   key={index}
                 >
                   {title}

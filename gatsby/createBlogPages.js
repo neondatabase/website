@@ -28,7 +28,7 @@ module.exports = async function createBlogPages({ graphql, actions }) {
   const pageCount = Math.ceil(result.data.allMdx.totalCount / BLOG_POSTS_PER_PAGE);
 
   Array.from({ length: pageCount }).forEach((_, i) => {
-    const pagePath = i === 0 ? BLOG_BASE_PATH : `${BLOG_BASE_PATH}/${i + 1}`;
+    const pagePath = i === 0 ? BLOG_BASE_PATH : `${BLOG_BASE_PATH}${i + 1}`;
 
     createPage({
       path: pagePath,

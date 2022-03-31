@@ -38,7 +38,7 @@ module.exports = async function createStaticPages({ graphql, actions }) {
     });
 
     actions.createPage({
-      path: `/${slug}`,
+      path: `/${slug}/`,
       component: path.resolve('./src/templates/static.jsx'),
       context: { id },
     });

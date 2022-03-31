@@ -47,8 +47,14 @@ module.exports = async function createDocPages({ graphql, actions }) {
   const docsSidebar = generateDocsSidebar(pagesBySlug);
 
   createRedirect({
+    fromPath: '/docs',
+    toPath: `${DOCS_BASE_PATH}${docsSidebar[0].items[0].slug}/`,
+    redirectInBrowser: true,
+  });
+
+  createRedirect({
     fromPath: `${DOCS_BASE_PATH}`,
-    toPath: `${DOCS_BASE_PATH}/${docsSidebar[0].items[0].slug}`,
+    toPath: `${DOCS_BASE_PATH}${docsSidebar[0].items[0].slug}/`,
     redirectInBrowser: true,
   });
 
@@ -61,7 +67,7 @@ module.exports = async function createDocPages({ graphql, actions }) {
     });
 
     createPage({
-      path: `${DOCS_BASE_PATH}/${slug}`,
+      path: `${DOCS_BASE_PATH}${slug}/`,
       component: path.resolve(`./src/templates/doc.jsx`),
       context: { id, docsSidebar },
     });
