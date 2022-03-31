@@ -26,7 +26,7 @@ export const query = graphql`
     allMdx(
       filter: {
         fileAbsolutePath: { regex: "/content/posts/" }
-        fields: { draft: { in: $draftFilter } }
+        fields: { isDraft: { in: $draftFilter } }
       }
       sort: { order: DESC, fields: slug }
       limit: $limit

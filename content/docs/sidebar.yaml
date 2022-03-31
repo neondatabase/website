@@ -1,0 +1,18 @@
+- id: get-started
+  title: Get started
+  items:
+    - id: intro
+      title: Intro
+    - id: quickstart
+      title: Quickstart
+    - id: faq
+      title: FAQ
+- id: zenith-cloud
+  title: Zenith cloud
+  items:
+    - id: cloud-console
+      title: Cloud console
+    - id: postgres
+      title: Connecting to postgres
+    - id: api
+      title: API
