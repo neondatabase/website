@@ -1,11 +1,14 @@
+const fs = require('fs');
 const path = require('path');
 
+const jsYaml = require('js-yaml');
 const get = require('lodash.get');
 
 const { DOCS_BASE_PATH } = require('../src/constants/docs');
-const generateDocsSidebar = require('../src/utils/generate-docs-sidebar');
 
 const { DRAFT_FILTER, DOC_REQUIRED_FIELDS } = require('./constants');
+
+const sidebar = jsYaml.load(fs.readFileSync(path.resolve('./content/docs/sidebar.yaml'), 'utf8'));
 
 module.exports = async function createDocPages({ graphql, actions }) {
   const { createPage, createRedirect } = actions;
@@ -44,17 +47,15 @@ module.exports = async function createDocPages({ graphql, actions }) {
     };
   });
 
-  const docsSidebar = generateDocsSidebar(pagesBySlug);
-
   createRedirect({
     fromPath: `${DOCS_BASE_PATH}`.slice(0, -1),
-    toPath: `${DOCS_BASE_PATH}${docsSidebar[0].items[0].slug}/`,
+    toPath: `${DOCS_BASE_PATH}${sidebar[0].items[0].slug}/`,
     redirectInBrowser: true,
   });
 
   createRedirect({
     fromPath: `${DOCS_BASE_PATH}`,
-    toPath: `${DOCS_BASE_PATH}${docsSidebar[0].items[0].slug}/`,
+    toPath: `${DOCS_BASE_PATH}${sidebar[0].items[0].slug}/`,
     redirectInBrowser: true,
   });
 
@@ -69,7 +70,7 @@ module.exports = async function createDocPages({ graphql, actions }) {
     createPage({
       path: `${DOCS_BASE_PATH}${slug}/`,
       component: path.resolve(`./src/templates/doc.jsx`),
-      context: { id, docsSidebar },
+      context: { id, sidebar },
     });
   });
 };

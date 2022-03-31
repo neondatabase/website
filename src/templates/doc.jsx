@@ -20,9 +20,9 @@ const DocTemplate = ({
       frontmatter: { title },
     },
   },
-  pageContext: { docsSidebar },
+  pageContext: { sidebar },
 }) => {
-  const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, docsSidebar);
+  const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, sidebar);
 
   return (
     <Layout seo={SEO_DATA.doc({ title, description: excerpt })} headerTheme="white">
@@ -30,10 +30,10 @@ const DocTemplate = ({
         <Container className="grid grid-cols-12 lg:block" size="md">
           <Sidebar
             className="col-start-2 col-end-4 xl:col-start-1 lg:hidden"
-            sidebar={docsSidebar}
+            sidebar={sidebar}
             currentSlug={slug}
           />
-          <MobileNav className="hidden lg:block" sidebar={docsSidebar} currentSlug={slug} />
+          <MobileNav className="hidden lg:block" sidebar={sidebar} currentSlug={slug} />
           <div className="col-span-6 xl:col-span-9 lg:mt-6">
             <article>
               <h1 className="t-5xl font-semibold">{title}</h1>
