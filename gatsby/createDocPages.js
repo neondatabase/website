@@ -39,22 +39,14 @@ module.exports = async function createDocPages({ graphql, actions }) {
 
   const pages = result.data.allMdx.nodes;
 
-  const pagesBySlug = {};
-  pages.forEach(({ slug, frontmatter: { title } }) => {
-    pagesBySlug[slug] = {
-      title,
-      slug,
-    };
-  });
-
   createRedirect({
-    fromPath: `${DOCS_BASE_PATH}`.slice(0, -1),
+    fromPath: DOCS_BASE_PATH.slice(0, -1),
     toPath: `${DOCS_BASE_PATH}${sidebar[0].items[0].slug}/`,
     redirectInBrowser: true,
   });
 
   createRedirect({
-    fromPath: `${DOCS_BASE_PATH}`,
+    fromPath: DOCS_BASE_PATH,
     toPath: `${DOCS_BASE_PATH}${sidebar[0].items[0].slug}/`,
     redirectInBrowser: true,
   });
