@@ -14,7 +14,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
     );
     const itemIndex = sidebar[sectionIndex].items.findIndex((child) => child.slug === currentSlug);
     setValue({
-      label: sidebar[sectionIndex].items[itemIndex].sidebarLabel,
+      label: sidebar[sectionIndex].items[itemIndex].title,
       value: sidebar[sectionIndex].items[itemIndex].slug,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
