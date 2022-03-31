@@ -9,6 +9,7 @@ const { DOCS_BASE_PATH } = require('../src/constants/docs');
 const { DRAFT_FILTER, DOC_REQUIRED_FIELDS } = require('./constants');
 
 const sidebar = jsYaml.load(fs.readFileSync(path.resolve('./content/docs/sidebar.yaml'), 'utf8'));
+const flatSidebar = sidebar.map(({ items }) => items).flat();
 
 module.exports = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions;
@@ -55,7 +56,7 @@ module.exports = async ({ graphql, actions }) => {
     createPage({
       path: `${DOCS_BASE_PATH}${slug}/`,
       component: path.resolve(`./src/templates/doc.jsx`),
-      context: { id, sidebar },
+      context: { id, sidebar, flatSidebar },
     });
   });
 };

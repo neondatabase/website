@@ -20,9 +20,9 @@ const DocTemplate = ({
       frontmatter: { title },
     },
   },
-  pageContext: { sidebar },
+  pageContext: { sidebar, flatSidebar },
 }) => {
-  const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, sidebar);
+  const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar);
 
   return (
     <Layout seo={SEO_DATA.doc({ title, description: excerpt })} headerTheme="white">

@@ -8,5 +8,4 @@
 @import './grid-gap';
 @import './print-grid';
 @import './remove-autocomplete-styles';
-@import './select';
 @import '../components/shared/content/content.css';
