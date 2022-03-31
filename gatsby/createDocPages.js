@@ -47,7 +47,7 @@ module.exports = async function createDocPages({ graphql, actions }) {
   const docsSidebar = generateDocsSidebar(pagesBySlug);
 
   createRedirect({
-    fromPath: '/docs',
+    fromPath: `${DOCS_BASE_PATH}`.slice(0, -1),
     toPath: `${DOCS_BASE_PATH}${docsSidebar[0].items[0].slug}/`,
     redirectInBrowser: true,
   });
