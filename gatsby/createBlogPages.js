@@ -4,7 +4,7 @@ const { BLOG_BASE_PATH, BLOG_POSTS_PER_PAGE } = require('../src/constants/blog')
 
 const { DRAFT_FILTER } = require('./constants');
 
-module.exports = async function createBlogPages({ graphql, actions }) {
+module.exports = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
   const result = await graphql(

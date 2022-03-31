@@ -21,6 +21,27 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'posts',
+        path: `${__dirname}/content/posts`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'static-pages',
+        path: `${__dirname}/content/static-pages`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: 'docs',
+        path: `${__dirname}/content/docs/`,
+      },
+    },
     'gatsby-plugin-image',
     'gatsby-transformer-sharp',
     {
@@ -68,27 +89,6 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'posts',
-        path: `${__dirname}/content/posts`,
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'static-pages',
-        path: `${__dirname}/content/static-pages`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: 'docs',
-        path: `${__dirname}/content/docs/`,
-      },
-    },
-    {
       resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.mdx', '.md'],
@@ -117,9 +117,6 @@ module.exports = {
         ],
       },
     },
-    'gatsby-alias-imports',
-    'gatsby-plugin-postcss',
-    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
@@ -129,5 +126,9 @@ module.exports = {
         dataLayerName: 'landing',
       },
     },
+    'gatsby-alias-imports',
+    'gatsby-plugin-postcss',
+    'gatsby-plugin-sitemap',
+    'gatsby-plugin-meta-redirect',
   ],
 };

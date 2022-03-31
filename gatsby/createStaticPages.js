@@ -4,7 +4,7 @@ const get = require('lodash.get');
 
 const { DRAFT_FILTER, STATIC_PAGE_REQUIRED_FIELDS } = require('./constants');
 
-module.exports = async function createStaticPages({ graphql, actions }) {
+module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       query ($draftFilter: [Boolean]!) {

@@ -10,7 +10,7 @@ const { DRAFT_FILTER, DOC_REQUIRED_FIELDS } = require('./constants');
 
 const sidebar = jsYaml.load(fs.readFileSync(path.resolve('./content/docs/sidebar.yaml'), 'utf8'));
 
-module.exports = async function createDocPages({ graphql, actions }) {
+module.exports = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions;
 
   const result = await graphql(
@@ -40,15 +40,8 @@ module.exports = async function createDocPages({ graphql, actions }) {
   const pages = result.data.allMdx.nodes;
 
   createRedirect({
-    fromPath: DOCS_BASE_PATH.slice(0, -1),
-    toPath: `${DOCS_BASE_PATH}${sidebar[0].items[0].slug}/`,
-    redirectInBrowser: true,
-  });
-
-  createRedirect({
     fromPath: DOCS_BASE_PATH,
     toPath: `${DOCS_BASE_PATH}${sidebar[0].items[0].slug}/`,
-    redirectInBrowser: true,
   });
 
   pages.forEach(({ id, slug, frontmatter }) => {

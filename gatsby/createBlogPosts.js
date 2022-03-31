@@ -7,7 +7,7 @@ const getBlogPostPath = require('../src/utils/get-blog-post-path');
 
 const { DRAFT_FILTER, POST_REQUIRED_FIELDS } = require('./constants');
 
-module.exports = async function createBlogPosts({ graphql, actions }) {
+module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       query ($draftFilter: [Boolean]!) {
