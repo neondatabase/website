@@ -178,7 +178,7 @@ async function createDocPages({ graphql, actions, reporter }) {
   createRedirect({
     fromPath: '/docs',
     toPath: `/docs/${docsSidebar[0].children[0].slug}`,
-    statusCode: 200,
+    redirectInBrowser: true,
   });
 
   pages.forEach(
