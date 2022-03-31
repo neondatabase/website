@@ -65,7 +65,11 @@
 
     pre {
       code {
-        @apply !font-mono !text-black;
+        @apply !font-mono !text-base !text-black;
+
+        .token {
+          @apply !bg-transparent;
+        }
       }
     }
 
