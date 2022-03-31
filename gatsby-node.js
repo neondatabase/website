@@ -58,7 +58,7 @@ async function createBlogPages({ graphql, actions }) {
 async function createBlogPosts({ graphql, actions }) {
   const result = await graphql(`
     {
-      allMdx(filter: { fileAbsolutePath: { regex: "/posts/" } }) {
+      allMdx(filter: { fileAbsolutePath: { regex: "/content/posts/" } }) {
         nodes {
           id
           slug
@@ -109,7 +109,7 @@ async function createBlogPosts({ graphql, actions }) {
 async function createStaticPages({ graphql, actions }) {
   const result = await graphql(`
     query staticPageQuery {
-      allMdx(filter: { fileAbsolutePath: { regex: "/src/static-pages/" } }) {
+      allMdx(filter: { fileAbsolutePath: { regex: "/content/static-pages/" } }) {
         nodes {
           id
           slug
@@ -135,7 +135,7 @@ async function createDocPages({ graphql, actions, reporter }) {
   const result = await graphql(`
     {
       allMdx(
-        filter: { fileAbsolutePath: { regex: "/src/docs/" } }
+        filter: { fileAbsolutePath: { regex: "/content/docs/" } }
         sort: { fields: fileAbsolutePath, order: ASC }
       ) {
         edges {
@@ -227,8 +227,8 @@ exports.onCreateNode = ({ node, actions }) => {
 
 // eslint-disable-next-line no-unused-vars
 exports.createPages = async (options) => {
-  // await createBlogPages(options);
-  // await createBlogPosts(options);
-  // await createStaticPages(options);
+  await createBlogPages(options);
+  await createBlogPosts(options);
+  await createStaticPages(options);
   await createDocPages(options);
 };

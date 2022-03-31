@@ -71,21 +71,21 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'posts',
-        path: `${__dirname}/src/posts`,
+        path: `${__dirname}/content/posts`,
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'static-pages',
-        path: `${__dirname}/src/static-pages`,
+        path: `${__dirname}/content/static-pages`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: 'docs',
-        path: `${__dirname}/src/docs/`,
+        path: `${__dirname}/content/docs/`,
       },
     },
     {

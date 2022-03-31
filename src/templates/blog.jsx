@@ -24,7 +24,10 @@ const BlogTemplate = ({
 export const query = graphql`
   query ($limit: Int!, $skip: Int!, $draftFilter: [Boolean]!) {
     allMdx(
-      filter: { fileAbsolutePath: { regex: "/posts/" }, fields: { draft: { in: $draftFilter } } }
+      filter: {
+        fileAbsolutePath: { regex: "/content/posts/" }
+        fields: { draft: { in: $draftFilter } }
+      }
       sort: { order: DESC, fields: slug }
       limit: $limit
       skip: $skip
