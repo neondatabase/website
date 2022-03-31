@@ -1,5 +1,4 @@
 ---
-id: quickstart
 title: Quickstart
 ---
 

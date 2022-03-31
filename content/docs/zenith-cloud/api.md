@@ -1,4 +1,3 @@
 ---
-id: api
 title: API
 ---

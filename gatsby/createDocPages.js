@@ -2,6 +2,7 @@ const path = require('path');
 
 const get = require('lodash.get');
 
+const { DOCS_BASE_PATH } = require('../src/constants/docs');
 const generateDocsSidebar = require('../src/utils/generate-docs-sidebar');
 
 const { DRAFT_FILTER, DOC_REQUIRED_FIELDS } = require('./constants');
@@ -19,10 +20,10 @@ module.exports = async function createDocPages({ graphql, actions }) {
           }
         ) {
           nodes {
+            id
             slug
             frontmatter {
               title
-              id
             }
           }
         }
@@ -35,24 +36,23 @@ module.exports = async function createDocPages({ graphql, actions }) {
 
   const pages = result.data.allMdx.nodes;
 
-  const pagesById = {};
-  pages.forEach(({ frontmatter: { title, id } }) => {
-    pagesById[id] = {
+  const pagesBySlug = {};
+  pages.forEach(({ slug, frontmatter: { title } }) => {
+    pagesBySlug[slug] = {
       title,
-      sidebarLabel: title,
-      slug: id,
+      slug,
     };
   });
 
-  const docsSidebar = generateDocsSidebar(pagesById);
+  const docsSidebar = generateDocsSidebar(pagesBySlug);
 
   createRedirect({
-    fromPath: '/docs',
-    toPath: `/docs/${docsSidebar[0].children[0].slug}`,
+    fromPath: `${DOCS_BASE_PATH}`,
+    toPath: `${DOCS_BASE_PATH}/${docsSidebar[0].items[0].slug}`,
     redirectInBrowser: true,
   });
 
-  pages.forEach(({ slug, frontmatter }) => {
+  pages.forEach(({ id, slug, frontmatter }) => {
     // Required fields validation
     DOC_REQUIRED_FIELDS.forEach((fieldName) => {
       if (!get(frontmatter, fieldName)) {
@@ -61,9 +61,9 @@ module.exports = async function createDocPages({ graphql, actions }) {
     });
 
     createPage({
-      path: `/docs/${frontmatter.id}`,
+      path: `${DOCS_BASE_PATH}/${slug}`,
       component: path.resolve(`./src/templates/doc.jsx`),
-      context: { id: frontmatter.id, docsSidebar },
+      context: { id, docsSidebar },
     });
   });
 };

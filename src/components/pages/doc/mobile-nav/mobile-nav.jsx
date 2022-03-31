@@ -9,14 +9,12 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
   const [value, setValue] = useState(null);
   useLayoutEffect(() => {
     const sectionIndex = sidebar.findIndex(
-      (item) => item.children.findIndex((child) => child.slug === currentSlug) !== -1
+      (item) => item.items.findIndex((child) => child.slug === currentSlug) !== -1
     );
-    const itemIndex = sidebar[sectionIndex].children.findIndex(
-      (child) => child.slug === currentSlug
-    );
+    const itemIndex = sidebar[sectionIndex].items.findIndex((child) => child.slug === currentSlug);
     setValue({
-      label: sidebar[sectionIndex].children[itemIndex].sidebarLabel,
-      value: sidebar[sectionIndex].children[itemIndex].slug,
+      label: sidebar[sectionIndex].items[itemIndex].sidebarLabel,
+      value: sidebar[sectionIndex].items[itemIndex].slug,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlug]);
@@ -36,16 +34,16 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
           Choose section
         </option>
         {sidebar &&
-          sidebar.map(({ sidebarLabel, children }) => (
-            <optgroup label={sidebarLabel} key={sidebarLabel}>
-              {children.map(({ slug, sidebarLabel: childSidebarLabel }) => (
+          sidebar.map(({ title, items }, index) => (
+            <optgroup label={title} key={index}>
+              {items.map(({ title, slug }, index) => (
                 <option
-                  label={childSidebarLabel}
+                  label={title}
                   value={slug}
-                  key={childSidebarLabel}
+                  key={index}
                   selected={value && slug === value.value}
                 >
-                  {childSidebarLabel}
+                  {title}
                 </option>
               ))}
             </optgroup>

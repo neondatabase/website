@@ -14,14 +14,15 @@ import getDocPreviousAndNextLinks from 'utils/get-doc-previous-and-next-links';
 const DocTemplate = ({
   data: {
     mdx: {
+      slug,
       excerpt,
       body,
-      frontmatter: { id, title },
+      frontmatter: { title },
     },
   },
   pageContext: { docsSidebar },
 }) => {
-  const { previousLink, nextLink } = getDocPreviousAndNextLinks(id, docsSidebar);
+  const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, docsSidebar);
 
   return (
     <Layout seo={SEO_DATA.doc({ title, description: excerpt })} headerTheme="white">
@@ -30,9 +31,9 @@ const DocTemplate = ({
           <Sidebar
             className="col-start-2 col-end-4 xl:col-start-1 lg:hidden"
             sidebar={docsSidebar}
-            currentSlug={id}
+            currentSlug={slug}
           />
-          <MobileNav className="hidden lg:block" sidebar={docsSidebar} currentSlug={id} />
+          <MobileNav className="hidden lg:block" sidebar={docsSidebar} currentSlug={slug} />
           <div className="col-span-6 xl:col-span-9 lg:mt-6">
             <article>
               <h1 className="t-5xl font-semibold">{title}</h1>
@@ -48,11 +49,11 @@ const DocTemplate = ({
 
 export const query = graphql`
   query ($id: String!) {
-    mdx(frontmatter: { id: { eq: $id } }) {
-      excerpt(pruneLength: 140)
+    mdx(id: { eq: $id }) {
+      excerpt(pruneLength: 160)
       body
+      slug
       frontmatter {
-        id
         title
       }
     }

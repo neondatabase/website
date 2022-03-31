@@ -1,34 +1,49 @@
+import { DOCS_BASE_PATH } from 'constants/docs';
+
 export default function getDocPreviousAndNextLinks(slug, sidebar) {
   let sectionIndex = 0;
   let linkIndex = 0;
 
   // find index of current page section in docSidebar
   sectionIndex = sidebar.findIndex(
-    (item) => item.children.find((child) => child.slug === slug) !== undefined
+    (item) => item.items.find((child) => child.slug === slug) !== undefined
   );
 
   // find index of current page in current section
-  linkIndex = sidebar[sectionIndex].children.findIndex((item) => item.slug === slug);
+  linkIndex = sidebar[sectionIndex].items.findIndex((item) => item.slug === slug);
 
   // check if linkIndex is last in section
-  const isLastLinkInSection = linkIndex === sidebar[sectionIndex].children.length - 1;
+  const isLastLinkInSection = linkIndex === sidebar[sectionIndex].items.length - 1;
 
   // get previous link
   let previousLink = null;
   if (linkIndex > 0) {
-    previousLink = sidebar[sectionIndex].children[linkIndex - 1];
+    previousLink = {
+      title: sidebar[sectionIndex].items[linkIndex - 1].title,
+      slug: `${DOCS_BASE_PATH}/${sidebar[sectionIndex].items[linkIndex - 1].slug}`,
+    };
   } else if (sectionIndex > 0) {
-    previousLink =
-      sidebar[sectionIndex - 1].children[sidebar[sectionIndex - 1].children.length - 1];
+    previousLink = {
+      title: sidebar[sectionIndex - 1].items[sidebar[sectionIndex - 1].items.length - 1].title,
+      slug: `${DOCS_BASE_PATH}/${
+        sidebar[sectionIndex - 1].items[sidebar[sectionIndex - 1].items.length - 1].slug
+      }`,
+    };
   }
 
   let nextLink = null;
   if (isLastLinkInSection) {
     if (sectionIndex < sidebar.length - 1) {
-      nextLink = sidebar[sectionIndex + 1].children[0];
+      nextLink = {
+        title: sidebar[sectionIndex + 1].items[0].title,
+        slug: `${DOCS_BASE_PATH}/${sidebar[sectionIndex + 1].items[0].slug}`,
+      };
     }
   } else {
-    nextLink = sidebar[sectionIndex].children[linkIndex + 1];
+    nextLink = {
+      title: sidebar[sectionIndex].items[linkIndex + 1].title,
+      slug: `${DOCS_BASE_PATH}/${sidebar[sectionIndex].items[linkIndex + 1].slug}`,
+    };
   }
 
   return { previousLink, nextLink };

@@ -9,7 +9,7 @@ const Sidebar = ({ className, sidebar, currentSlug }) => {
   const initialState = {};
   sidebar.forEach(({ title }) => (initialState[title] = false));
   const sectionIndex = sidebar.findIndex(
-    (item) => item.children.find((child) => child.slug === currentSlug) !== undefined
+    (item) => item.items.find((child) => child.slug === currentSlug) !== undefined
   );
 
   initialState[sidebar[sectionIndex].title] = true;
@@ -24,7 +24,7 @@ const Sidebar = ({ className, sidebar, currentSlug }) => {
 
   return (
     <div className={clsx(className, 'flex w-full flex-col pr-10')}>
-      {sidebar.map(({ title, sidebarLabel, children }, index) => (
+      {sidebar.map(({ title, items }, index) => (
         <div key={index}>
           <div
             className="flex items-center pt-3 pb-3"
@@ -38,22 +38,22 @@ const Sidebar = ({ className, sidebar, currentSlug }) => {
                 'rotate-90 transform': sidebarState[title],
               })}
             />
-            <span className="text-lg font-semibold leading-none">{sidebarLabel}</span>
+            <span className="text-lg font-semibold leading-none">{title}</span>
           </div>
           {sidebarState[title] && (
             <div className="flex flex-col space-y-1 py-2 pl-4">
-              {children.map((child, childIndex) => (
+              {items.map(({ title, slug }, index) => (
                 <Link
-                  key={`${index}-${childIndex}`}
-                  to={`/docs/${child.slug}`}
                   className={clsx(
                     'py-2 text-base leading-none first:pt-0 last:pb-0 hover:text-primary-2',
                     {
-                      'font-semibold text-primary-2': currentSlug === child.slug,
+                      'font-semibold text-primary-2': currentSlug === slug,
                     }
                   )}
+                  to={`/docs/${slug}`}
+                  key={index}
                 >
-                  {child.sidebarLabel}
+                  {title}
                 </Link>
               ))}
             </div>

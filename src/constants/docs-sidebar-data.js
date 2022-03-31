@@ -1,4 +1,4 @@
 module.exports = {
-  'Get started': ['intro', 'quickstart', 'faq'],
-  'Zenith Cloud': ['cloud-console', 'postgres', 'api'],
+  'Get started': ['get-started/intro', 'get-started/quickstart', 'get-started/faq'],
+  'Zenith Cloud': ['zenith-cloud/cloud-console', 'zenith-cloud/postgres', 'zenith-cloud/api'],
 };

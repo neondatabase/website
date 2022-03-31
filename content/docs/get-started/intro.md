@@ -1,4 +1,3 @@
 ---
-id: intro
 title: Intro
 ---

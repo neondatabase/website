@@ -1,21 +1,19 @@
 const docsSidebarData = require('../constants/docs-sidebar-data');
 
-function generateDocsSidebar(pagesById) {
+function generateDocsSidebar(pagesBySlug) {
   const sidebar = [];
 
   Object.keys(docsSidebarData).forEach((dirName) => {
-    const children = [];
+    const items = [];
 
-    docsSidebarData[dirName].forEach((id) => {
-      if (!pagesById[id]) return;
-      children.push(pagesById[id]);
+    docsSidebarData[dirName].forEach((slug) => {
+      if (!pagesBySlug[slug]) return;
+      items.push(pagesBySlug[slug]);
     });
 
     sidebar.push({
       title: dirName,
-      sidebarLabel: dirName,
-      children,
-      slug: null,
+      items,
     });
   });
 
