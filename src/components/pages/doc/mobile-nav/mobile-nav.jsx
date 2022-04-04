@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import clsx from 'clsx';
 import { navigate } from 'gatsby';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import { DOCS_BASE_PATH } from 'constants/docs';
@@ -35,6 +35,26 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
       <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90" aria-hidden />
     </nav>
   );
+};
+
+MobileNav.propTypes = {
+  className: PropTypes.string,
+  sidebar: PropTypes.arrayOf(
+    PropTypes.exact({
+      title: PropTypes.string.isRequired,
+      items: PropTypes.arrayOf(
+        PropTypes.exact({
+          title: PropTypes.string.isRequired,
+          slug: PropTypes.string.isRequired,
+        })
+      ).isRequired,
+    })
+  ).isRequired,
+  currentSlug: PropTypes.string.isRequired,
+};
+
+MobileNav.defaultProps = {
+  className: null,
 };
 
 export default MobileNav;

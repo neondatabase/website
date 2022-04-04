@@ -1,12 +1,12 @@
-/* eslint-disable react/prop-types */
 import clsx from 'clsx';
 import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
-const SubMenu = ({ title, items, isOpenByDefault, currentSlug }) => {
+const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
   const [isOpen, setIsOpen] = useState(isOpenByDefault);
 
   const handleClick = () => setIsOpen((isOpen) => !isOpen);
@@ -43,6 +43,22 @@ const SubMenu = ({ title, items, isOpenByDefault, currentSlug }) => {
   );
 };
 
+Item.propTypes = {
+  title: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.exact({
+      title: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  isOpenByDefault: PropTypes.bool,
+  currentSlug: PropTypes.string.isRequired,
+};
+
+Item.defaultProps = {
+  isOpenByDefault: false,
+};
+
 const Sidebar = ({ className, sidebar, currentSlug }) => {
   const activeItemIndex = sidebar.findIndex(
     ({ items }) => items.find(({ slug }) => slug === currentSlug) !== undefined
@@ -52,7 +68,7 @@ const Sidebar = ({ className, sidebar, currentSlug }) => {
     <aside className={clsx(className, 'flex w-full flex-col pr-10')}>
       <nav>
         {sidebar.map((item, index) => (
-          <SubMenu
+          <Item
             {...item}
             isOpenByDefault={index === activeItemIndex}
             currentSlug={currentSlug}
@@ -62,6 +78,26 @@ const Sidebar = ({ className, sidebar, currentSlug }) => {
       </nav>
     </aside>
   );
+};
+
+Sidebar.propTypes = {
+  className: PropTypes.string,
+  sidebar: PropTypes.arrayOf(
+    PropTypes.exact({
+      title: PropTypes.string.isRequired,
+      items: PropTypes.arrayOf(
+        PropTypes.exact({
+          title: PropTypes.string.isRequired,
+          slug: PropTypes.string.isRequired,
+        })
+      ).isRequired,
+    })
+  ).isRequired,
+  currentSlug: PropTypes.string.isRequired,
+};
+
+Sidebar.defaultProps = {
+  className: null,
 };
 
 export default Sidebar;

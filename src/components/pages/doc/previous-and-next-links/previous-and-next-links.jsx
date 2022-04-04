@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Link from 'components/shared/link';
@@ -28,5 +28,16 @@ const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
     )}
   </div>
 );
+
+PreviousAndNextLinks.propTypes = {
+  previousLink: PropTypes.exact({
+    title: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+  }).isRequired,
+  nextLink: PropTypes.exact({
+    title: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default PreviousAndNextLinks;
