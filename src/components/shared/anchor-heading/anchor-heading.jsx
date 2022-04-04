@@ -1,40 +1,25 @@
-/* eslint-disable react/prop-types */
-import clsx from 'clsx';
 import React from 'react';
+import slugify from 'slugify';
 
-import AnchorIcon from './svg/anchor.inline.svg';
-
-const baseStyles = 'relative group';
-const styles = {
-  h2: 'font-bold text-5xl xl:text-4xl md:text-3xl',
-  h3: 'font-semibold text-3xl xl:text-2xl',
-};
-
-const slugify = (path) => {
-  if (!path || path.key === null) {
-    return null;
-  }
-  return path
-    .toLowerCase()
-    .replace(/[\s-;:!?&.,()[\]]{1,}/g, '-')
-    .replace(/[%@~`'"]/g, '');
-};
-
-const anchorify = (str) =>
-  slugify(str)?.replace(/[=/]/g, '-').replace(/^\d+/g, '').replace(/^-*/g, '').replace(/-*$/g, '');
+import AnchorIcon from './images/anchor.inline.svg';
 
 const AnchorHeading =
-  (tagName) =>
+  (Tag) =>
+  // eslint-disable-next-line react/prop-types
   ({ children }) => {
-    const getPlainText = (arr) =>
-      arr.reduce((acc, cur) => acc.concat(cur.props?.children ?? cur), '');
-    const textContent = Array.isArray(children) ? getPlainText(children) : children;
-    const anchor = `${anchorify(textContent) ? anchorify(textContent) : ''}`;
+    const id =
+      typeof children === 'string'
+        ? slugify(children, { strict: true }).toLocaleLowerCase()
+        : undefined;
 
-    const Tag = tagName;
     return (
-      <Tag className={clsx(baseStyles, styles.tagName)} id={anchor}>
-        <a className="hidden group-hover:visible" href={`#${anchor}`}>
+      <Tag id={id} className="group relative">
+        <a
+          className="anchor absolute top-0 left-0 flex h-full -translate-x-full items-center justify-center px-2.5 opacity-0 transition-opacity duration-200 hover:opacity-100 group-hover:opacity-100"
+          href={`#${id}`}
+          tabIndex="-1"
+          aria-hidden
+        >
           <AnchorIcon />
         </a>
         {children}

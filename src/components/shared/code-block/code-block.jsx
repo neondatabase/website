@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { prism } from 'react-syntax-highlighter/dist/cjs/styles/prism';
@@ -8,22 +8,23 @@ import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 
 const DEFAULT_LANGUAGE = 'bash';
 
-const CodeBlock = ({ className, children, ...props }) => {
+const CodeBlock = ({ className, children, ...otherProps }) => {
+  const { isCopied, handleCopy } = useCopyToClipboard(3000);
+
   const match = /language-(\w+)/.exec(className || '');
   const language = match ? match[1] : DEFAULT_LANGUAGE;
   const code = children.trim();
 
-  const { isCopied, handleCopy } = useCopyToClipboard(3000);
   return (
-    <div className="group code-block relative" {...props}>
+    <div className="group relative" {...otherProps}>
       <SyntaxHighlighter language={language} style={prism}>
         {code}
       </SyntaxHighlighter>
       <Button
-        className="invisible absolute top-4 right-6 rounded font-semibold uppercase opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100"
+        className="invisible absolute top-2 right-2 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100"
         type="button"
         size="xxs"
-        theme="gray-2"
+        theme="secondary"
         disabled={isCopied}
         onClick={() => handleCopy(code)}
       >
@@ -32,4 +33,14 @@ const CodeBlock = ({ className, children, ...props }) => {
     </div>
   );
 };
+
+CodeBlock.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
+
+CodeBlock.defaultProps = {
+  className: null,
+};
+
 export default CodeBlock;

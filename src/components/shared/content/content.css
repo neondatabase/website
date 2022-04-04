@@ -2,7 +2,7 @@
   .prose {
     @apply max-w-none text-black;
 
-    a {
+    a:not(.anchor) {
       @apply border-b-2 border-b-primary-1 no-underline transition-colors duration-200 ease-in-out hover:text-primary-1;
     }
 
