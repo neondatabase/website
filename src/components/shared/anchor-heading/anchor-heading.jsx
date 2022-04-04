@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 import slugify from 'slugify';
 
@@ -20,7 +21,7 @@ const AnchorHeading =
           tabIndex="-1"
           aria-hidden
         >
-          <AnchorIcon />
+          <AnchorIcon className={clsx(Tag === 'h2' && 'w-5', Tag === 'h3' && 'w-4')} />
         </a>
         {children}
       </Tag>
