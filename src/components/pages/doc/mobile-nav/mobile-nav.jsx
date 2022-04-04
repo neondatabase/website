@@ -15,6 +15,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
     <nav className={clsx('relative', className)}>
       <select
         className="w-full appearance-none border-2 border-black bg-white px-5 py-3"
+        value={currentSlug}
         onChange={handleChange}
       >
         <option value={false} disabled>
@@ -24,7 +25,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
           sidebar.map(({ title, items }, index) => (
             <optgroup label={title} key={index}>
               {items.map(({ title, slug }, index) => (
-                <option label={title} value={slug} selected={slug === currentSlug} key={index}>
+                <option label={title} value={slug} key={index}>
                   {title}
                 </option>
               ))}
