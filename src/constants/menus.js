@@ -1,47 +1,34 @@
-const links = {
-  docs: 'https://github.com/zenithdb/zenith/tree/main/docs',
-  team: '/team',
-  jobs: '/jobs',
-  community: '#',
-  discord: 'https://discord.gg/YKY4CBXZT2',
-  discussions: 'https://github.com/zenithdb/zenith/discussions',
-  github: 'https://github.com/zenithdb/zenith',
-  twitter: '/',
-  postgresDocs: 'https://www.postgresql.org/docs/',
-  postgresList: 'https://www.postgresql.org/list/',
-  privacy: '/',
-  terms: '/',
-};
+import LINKS from './links';
 
 export default {
   header: [
     {
       text: 'Docs',
-      to: links.docs,
+      to: LINKS.docs,
     },
     {
       text: 'Team',
-      to: links.team,
+      to: LINKS.team,
     },
     {
       text: 'Jobs',
-      to: links.jobs,
+      to: LINKS.jobs,
     },
     {
       text: 'Community',
-      to: links.community,
+      to: LINKS.community,
       items: [
         {
           iconName: 'discord',
           text: 'Discord',
           description: 'Join our community',
-          to: links.discord,
+          to: LINKS.discord,
         },
         {
           iconName: 'discussions',
           text: 'Discussions',
           description: 'Get help',
-          to: links.discussions,
+          to: LINKS.discussions,
         },
       ],
     },
@@ -52,11 +39,11 @@ export default {
       links: [
         {
           text: 'Team',
-          to: links.team,
+          to: LINKS.team,
         },
         {
           text: 'Jobs',
-          to: links.jobs,
+          to: LINKS.jobs,
         },
       ],
     },
@@ -65,15 +52,15 @@ export default {
       links: [
         {
           text: 'Our docs',
-          to: links.docs,
+          to: LINKS.docs,
         },
         {
           text: 'Postgres docs',
-          to: links.postgresDocs,
+          to: LINKS.postgresDocs,
         },
         {
           text: 'Postgres mailing lists',
-          to: links.postgresList,
+          to: LINKS.postgresList,
         },
       ],
     },
@@ -82,15 +69,15 @@ export default {
       links: [
         // {
         //   text: 'Twitter',
-        //   to: links.twitter,
+        //   to: LINKS.twitter,
         // },
         {
           text: 'Discord',
-          to: links.discord,
+          to: LINKS.discord,
         },
         {
           text: 'Github',
-          to: links.github,
+          to: LINKS.github,
         },
       ],
     },
@@ -99,11 +86,11 @@ export default {
     //   links: [
     //     {
     //       text: 'Privacy policy',
-    //       to: links.privacy,
+    //       to: LINKS.privacy,
     //     },
     //     {
     //       text: 'Terms of service',
-    //       to: links.terms,
+    //       to: LINKS.terms,
     //     },
     //   ],
     // },
@@ -111,27 +98,27 @@ export default {
   mobile: [
     {
       text: 'Docs',
-      to: links.docs,
+      to: LINKS.docs,
     },
     {
       text: 'Team',
-      to: links.team,
+      to: LINKS.team,
     },
     {
       text: 'Jobs',
-      to: links.jobs,
+      to: LINKS.jobs,
     },
     {
       iconName: 'discord',
       text: 'Discord',
       description: 'Join our community',
-      to: links.discord,
+      to: LINKS.discord,
     },
     {
       iconName: 'discussions',
       text: 'Discussions',
       description: 'Get help',
-      to: links.discussions,
+      to: LINKS.discussions,
     },
   ],
 };

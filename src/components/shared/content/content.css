@@ -2,7 +2,7 @@
   .prose {
     @apply max-w-none text-black;
 
-    a {
+    a:not(.anchor) {
       @apply border-b-2 border-b-primary-1 no-underline transition-colors duration-200 ease-in-out hover:text-primary-1;
     }
 
@@ -65,12 +65,17 @@
 
     pre {
       code {
-        @apply !font-mono !text-black;
+        @apply !font-mono !text-base !text-black;
+
+        .token {
+          @apply !bg-transparent;
+        }
       }
     }
 
     :not(pre) > code {
-      @apply !rounded-sm !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
+      /* Background color was takn from default Prisma theme that was used at the moment */
+      @apply !rounded-sm bg-[rgb(245,242,240)] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
 
       &::before,
       &::after {

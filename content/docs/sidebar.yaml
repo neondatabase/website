@@ -1,0 +1,16 @@
+- title: Get started
+  items:
+    - title: Intro
+      slug: get-started/intro
+    - title: Quickstart
+      slug: get-started/quickstart
+    - title: FAQ
+      slug: get-started/faq
+- title: Zenith cloud
+  items:
+    - title: Cloud console
+      slug: zenith-cloud/cloud-console
+    - title: Postgres
+      slug: zenith-cloud/postgres
+    - title: API
+      slug: zenith-cloud/api

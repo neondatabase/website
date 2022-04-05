@@ -84,6 +84,18 @@ module.exports = {
       animation: {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       },
+      typography: () => ({
+        DEFAULT: {
+          css: {
+            h2: {
+              fontWeight: 600,
+            },
+            a: {
+              fontWeight: 600,
+            },
+          },
+        },
+      }),
     },
   },
   plugins: [require('tailwindcss-safe-area'), require('@tailwindcss/typography')],

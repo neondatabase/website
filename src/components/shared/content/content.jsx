@@ -4,12 +4,13 @@ import clsx from 'clsx';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'prismjs/themes/prism.css';
 
-import Container from 'components/shared/container';
+import AnchorHeading from 'components/shared/anchor-heading';
+import CodeBlock from 'components/shared/code-block';
 
 const components = {
+  h2: AnchorHeading('h2'),
+  h3: AnchorHeading('h3'),
   table: (props) => (
     <div className="table-wrapper">
       <table {...props} />
@@ -17,16 +18,16 @@ const components = {
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
+  code: (props) => <CodeBlock {...props} />,
+  pre: (props) => <div {...props} />,
 };
 
 const Content = ({ className, content }) => (
-  <Container size="sm">
-    <div className={clsx('prose prose-lg md:prose-base', className)}>
-      <MDXProvider components={components}>
-        <MDXRenderer>{content}</MDXRenderer>
-      </MDXProvider>
-    </div>
-  </Container>
+  <div className={clsx('prose prose-lg md:prose-base', className)}>
+    <MDXProvider components={components}>
+      <MDXRenderer>{content}</MDXRenderer>
+    </MDXProvider>
+  </div>
 );
 
 Content.propTypes = {
