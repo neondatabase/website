@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
+import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
@@ -12,26 +12,21 @@ const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
   const handleClick = () => setIsOpen((isOpen) => !isOpen);
 
   return (
-    <>
-      <button className="flex items-center pt-3 pb-3" type="button" onClick={handleClick}>
-        <ChevronRight
-          className={clsx('mr-2 transition-transform duration-500', {
-            'rotate-90 transform': isOpen,
-          })}
-        />
+    <li>
+      <button className="flex items-center py-2.5" type="button" onClick={handleClick}>
+        <ChevronRight className={clsx('mr-2', { 'rotate-90 transform': isOpen })} />
         <span className="text-lg font-semibold leading-none">{title}</span>
       </button>
-      <ul className={clsx('flex flex-col space-y-1 py-2 pl-4', !isOpen && 'sr-only')}>
+      <ul className={clsx('pl-4', !isOpen && 'sr-only')}>
         {items.map(({ title, slug }, index) => (
-          <li key={index}>
+          <li className="text-[0]" key={index}>
             <Link
-              className={clsx(
-                'py-2 text-base leading-none first:pt-0 last:pb-0 hover:text-primary-2',
-                {
-                  'font-semibold text-primary-2': currentSlug === slug,
-                }
-              )}
+              className={clsx('py-2.5', {
+                'font-semibold text-primary-2': currentSlug === slug,
+              })}
               to={`${DOCS_BASE_PATH}${slug}/`}
+              size="sm"
+              theme="black"
               tabIndex={!isOpen ? '-1' : undefined}
             >
               {title}
@@ -39,7 +34,7 @@ const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
           </li>
         ))}
       </ul>
-    </>
+    </li>
   );
 };
 
@@ -65,16 +60,18 @@ const Sidebar = ({ className, sidebar, currentSlug }) => {
   );
 
   return (
-    <aside className={clsx(className, 'flex w-full flex-col pr-10')}>
+    <aside className={className}>
       <nav>
-        {sidebar.map((item, index) => (
-          <Item
-            {...item}
-            isOpenByDefault={index === activeItemIndex}
-            currentSlug={currentSlug}
-            key={index}
-          />
-        ))}
+        <ul className="space-y-2">
+          {sidebar.map((item, index) => (
+            <Item
+              {...item}
+              isOpenByDefault={index === activeItemIndex}
+              currentSlug={currentSlug}
+              key={index}
+            />
+          ))}
+        </ul>
       </nav>
     </aside>
   );

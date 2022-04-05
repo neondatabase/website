@@ -74,7 +74,8 @@
     }
 
     :not(pre) > code {
-      @apply !rounded-sm !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
+      /* Background color was takn from default Prisma theme that was used at the moment */
+      @apply !rounded-sm bg-[rgb(245,242,240)] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
 
       &::before,
       &::after {
