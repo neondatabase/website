@@ -21,6 +21,27 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'posts',
+        path: `${__dirname}/content/posts`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'static-pages',
+        path: `${__dirname}/content/static-pages`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: 'docs',
+        path: `${__dirname}/content/docs/`,
+      },
+    },
     'gatsby-plugin-image',
     'gatsby-transformer-sharp',
     {
@@ -67,9 +88,35 @@ module.exports = {
         ],
       },
     },
-    'gatsby-alias-imports',
-    'gatsby-plugin-postcss',
-    'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        extensions: ['.mdx', '.md'],
+        gatsbyRemarkPlugins: [
+          'gatsby-remark-copy-linked-files',
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 860,
+              quality: 85,
+              withWebp: true,
+              backgroundColor: 'white',
+              disableBgImageOnAlpha: true,
+            },
+          },
+          {
+            resolve: 'gatsby-remark-video',
+            options: {
+              width: 860,
+              height: 'auto',
+              preload: 'auto',
+              controls: true,
+            },
+          },
+          'gatsby-remark-responsive-iframe',
+        ],
+      },
+    },
     {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
@@ -79,5 +126,9 @@ module.exports = {
         dataLayerName: 'landing',
       },
     },
+    'gatsby-alias-imports',
+    'gatsby-plugin-postcss',
+    'gatsby-plugin-sitemap',
+    'gatsby-plugin-meta-redirect',
   ],
 };

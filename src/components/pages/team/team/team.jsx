@@ -182,7 +182,7 @@ const Team = () => (
       <ul className="grid-gap-x mt-16 grid grid-cols-2 gap-y-20 xl:gap-y-10 lg:mt-12 md:mt-8 md:block md:space-y-8">
         {items.map(({ photo, name, position, githubUrl, linkedinUrl, twitterUrl }, index) => (
           <li className="flex" key={index}>
-            <div className="w-36 flex-shrink-0 xs:w-32">{photo}</div>
+            <div className="w-36 shrink-0 xs:w-32">{photo}</div>
             <div className="ml-5 xs:ml-3">
               <h3 className="max-w-[100px] text-2xl font-semibold leading-tight md:max-w-none xs:text-[20px] xs:leading-tight">
                 {name}

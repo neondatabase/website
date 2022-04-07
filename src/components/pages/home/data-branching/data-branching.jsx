@@ -13,9 +13,10 @@ const DataBranching = () => (
           Data Branching
         </Heading>
         <p className="t-xl mt-8 3xl:max-w-[504px] 2xl:mt-7 2xl:max-w-[416px] xl:mt-6 lg:max-w-none">
-          Zenith allows to instantly branch your PostgreSQL database to support a modern developement workflow.
-          Create a branch for your dev and test environments for every code deployment in your CI/CD pipeline.
-          Branches are free so that you can branch for every code deployment in your CI/CD pipelines.
+          Zenith allows to instantly branch your PostgreSQL database to support a modern
+          developement workflow. Create a branch for your dev and test environments for every code
+          deployment in your CI/CD pipeline. Branches are free so that you can branch for every code
+          deployment in your CI/CD pipelines.
         </p>
         {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-primary-1">
           Getting started with data branching
@@ -24,7 +25,7 @@ const DataBranching = () => (
     </Container>
     <div className="relative mx-auto max-w-[1920px] lg:flex lg:justify-end" aria-hidden>
       <StaticImage
-        className="z-[-2] mt-[-365px] !block max-w-full 3xl:mt-[-19.38vw] 2xl:mt-[-18.94vw] xl:mt-[-18.55vw] lg:-mt-5 lg:min-w-[865px] md:mt-5 md:min-w-[767px] md:flex-shrink-0 sm:mt-[40px] sm:min-w-[700px] xs:min-w-[550px]"
+        className="z-[-2] mt-[-365px] !block max-w-full 3xl:mt-[-19.38vw] 2xl:mt-[-18.94vw] xl:mt-[-18.55vw] lg:-mt-5 lg:min-w-[865px] md:mt-5 md:min-w-[767px] md:shrink-0 sm:mt-[40px] sm:min-w-[700px] xs:min-w-[550px]"
         src="../data-branching/images/data-branching-illustration.jpg"
         alt=""
         loading="lazy"

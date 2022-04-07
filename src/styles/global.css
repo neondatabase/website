@@ -1,5 +1,3 @@
-@tailwind base;
-
 @layer base {
   body {
     @apply relative min-w-[320px] font-sans text-black antialiased;

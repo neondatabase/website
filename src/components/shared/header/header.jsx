@@ -72,7 +72,7 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
                             className="flex items-center whitespace-nowrap hover:text-primary-2"
                             to={to}
                           >
-                            <Icon className="flex-shrink-0" aria-hidden />
+                            <Icon className="shrink-0" aria-hidden />
                             <span className="ml-3">
                               <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
                                 {text}
