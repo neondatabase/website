@@ -36,8 +36,8 @@ const SaaS = () => {
             id="saas-description"
             className="t-2xl mt-5 max-w-[600px] text-white 2xl:mt-4 2xl:max-w-[488px] xl:max-w-[400px] lg:max-w-none"
           >
-            SaaS vendors using Zenith maximize cost savings and convenience. Zenith minimizes the
-            cost of maintenance for inactive customers. Zenith removes the need to over-provision by
+            SaaS vendors using Neon maximize cost savings and convenience. Neon minimizes the cost
+            of maintenance for inactive customers. Neon removes the need to over-provision by
             fitting the customers into the predefined under-utilized instance sizes.
           </p>
           <Button

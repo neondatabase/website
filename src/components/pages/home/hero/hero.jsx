@@ -83,8 +83,8 @@ const Hero = () => {
             {titleContentLg}
           </Heading>
           <p className="t-xl mt-7 max-w-[680px] text-white 3xl:max-w-[654px] 2xl:mt-6 2xl:max-w-[480px] xl:mt-5 xl:max-w-[456px] lg:mx-auto lg:max-w-[414px]">
-            Zenith is an auto-scaling, on-demand database as a service for modern applications,
-            making it an open-source alternative to Amazon Aurora.
+            Neon is an auto-scaling, on-demand database as a service for modern applications, making
+            it an open-source alternative to Amazon Aurora.
           </p>
           <Button
             id="hero-button"

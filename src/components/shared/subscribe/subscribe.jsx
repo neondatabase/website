@@ -5,6 +5,7 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import SubscriptionForm from 'components/shared/subscription-form';
+import LINKS from 'constants/links';
 
 import DiscordIcon from './images/subscribe-discord.inline.svg';
 import GithubIcon from './images/subscribe-github.inline.svg';
@@ -13,15 +14,15 @@ import GithubIcon from './images/subscribe-github.inline.svg';
 const links = [
   // {
   //   icon: TwitterIcon,
-  //   to: '/',
+  //   to: LINKS.twitter,
   // },
   {
     icon: DiscordIcon,
-    to: 'https://discord.gg/YKY4CBXZT2',
+    to: LINKS.discord,
   },
   {
     icon: GithubIcon,
-    to: 'https://github.com/zenithdb/zenith',
+    to: LINKS.github,
   },
 ];
 
