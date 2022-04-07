@@ -82,6 +82,10 @@ const Hero = () => {
             {titleContent}
             {titleContentLg}
           </Heading>
+          <p className="t-xl mt-7 max-w-[680px] text-white 3xl:max-w-[654px] 2xl:mt-6 2xl:max-w-[480px] xl:mt-5 xl:max-w-[456px] lg:mx-auto lg:max-w-[414px]">
+            Zenith is an auto-scaling, on-demand database as a service for modern applications,
+            making it an open-source alternative to Amazon Aurora.
+          </p>
           <Button
             id="hero-button"
             className="mt-10 2xl:mt-8 xl:mt-7 md:mt-6"
@@ -128,7 +132,7 @@ const Hero = () => {
             <div className="absolute top-0 right-0 h-6 w-12 rounded-r-full bg-black" />
             <div
               className="circle circle-with-text circle-with-text-left !translate-x-0 !translate-y-0"
-              data-text="Gatsby Cloud"
+              data-text="Vercel"
             />
           </div>
 

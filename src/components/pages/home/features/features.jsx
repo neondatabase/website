@@ -9,24 +9,24 @@ import Link from 'components/shared/link';
 import useLottie from 'hooks/use-lottie';
 
 import autoBackupAnimationData from './data/features-auto-backup-lottie-data.json';
-import autoScalingAnimationData from './data/features-auto-scaling-lottie-data.json';
+// import autoScalingAnimationData from './data/features-auto-scaling-lottie-data.json';
 // import edgeDeploymentAnimationData from './data/features-edge-deployment-lottie-data.json';
 import highAvailabilityAnimationData from './data/features-high-availability-lottie-data.json';
 import openSourceAnimationData from './data/features-open-source-lottie-data.json';
-import payAsYouGoAnimationData from './data/features-pay-as-you-go-lottie-data.json';
+// import payAsYouGoAnimationData from './data/features-pay-as-you-go-lottie-data.json';
 
 const Features = () => {
   const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true, threshold: 0.5 });
 
-  const {
-    animationRef: payAsYouGoAnimationRef,
-    animationVisibilityRef: payAsYouGoAnimationVisibilityRef,
-  } = useLottie({
-    lottieOptions: {
-      animationData: payAsYouGoAnimationData,
-    },
-    useInViewOptions: { threshold: 0.5 },
-  });
+  // const {
+  //   animationRef: payAsYouGoAnimationRef,
+  //   animationVisibilityRef: payAsYouGoAnimationVisibilityRef,
+  // } = useLottie({
+  //   lottieOptions: {
+  //     animationData: payAsYouGoAnimationData,
+  //   },
+  //   useInViewOptions: { threshold: 0.5 },
+  // });
 
   const {
     animationRef: highAvailabilityAnimationRef,
@@ -48,15 +48,15 @@ const Features = () => {
     useInViewOptions: { threshold: 0.5 },
   });
 
-  const {
-    animationRef: autoScalingAnimationRef,
-    animationVisibilityRef: autoScalingAnimationVisibilityRef,
-  } = useLottie({
-    lottieOptions: {
-      animationData: autoScalingAnimationData,
-    },
-    useInViewOptions: { threshold: 0.5 },
-  });
+  // const {
+  //   animationRef: autoScalingAnimationRef,
+  //   animationVisibilityRef: autoScalingAnimationVisibilityRef,
+  // } = useLottie({
+  //   lottieOptions: {
+  //     animationData: autoScalingAnimationData,
+  //   },
+  //   useInViewOptions: { threshold: 0.5 },
+  // });
 
   // const {
   //   animationRef: edgeDeploymentAnimationRef,
@@ -79,13 +79,13 @@ const Features = () => {
   });
 
   const items = [
-    {
-      animationVisibilityRef: payAsYouGoAnimationVisibilityRef,
-      animationRef: payAsYouGoAnimationRef,
-      title: 'Pay as You Go',
-      description:
-        'Serverless means using resources on-demand without having to pay for standby resources. Pay as you go and cut costs.',
-    },
+    // {
+    //   animationVisibilityRef: payAsYouGoAnimationVisibilityRef,
+    //   animationRef: payAsYouGoAnimationRef,
+    //   title: 'Pay as You Go',
+    //   description:
+    //     'Serverless means using resources on-demand without having to pay for standby resources. Pay as you go and cut costs.',
+    // },
     {
       animationVisibilityRef: highAvailabilityAnimationVisibilityRef,
       animationRef: highAvailabilityAnimationRef,
@@ -99,16 +99,16 @@ const Features = () => {
       title: 'Auto-Backup',
       description: 'Incremental auto backup functionality keeps your data safe 24/7.',
     },
-    {
-      animationVisibilityRef: autoScalingAnimationVisibilityRef,
-      animationRef: autoScalingAnimationRef,
-      title: 'Auto Scaling',
-      description: 'Handle peak time with flexible auto-scaling.',
-      tag: {
-        className: 'text-secondary-4 border-secondary-4',
-        text: 'Coming Soon',
-      },
-    },
+    // {
+    //   animationVisibilityRef: autoScalingAnimationVisibilityRef,
+    //   animationRef: autoScalingAnimationRef,
+    //   title: 'Auto Scaling',
+    //   description: 'Handle peak time with flexible auto-scaling.',
+    //   tag: {
+    //     className: 'text-secondary-4 border-secondary-4',
+    //     text: 'Coming Soon',
+    //   },
+    // },
     // {
     //   animationVisibilityRef: edgeDeploymentAnimationVisibilityRef,
     //   animationRef: edgeDeploymentAnimationRef,
