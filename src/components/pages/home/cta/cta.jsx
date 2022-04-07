@@ -107,7 +107,7 @@ const CTA = () => {
             aria-hidden
           />
           <div className="relative flex items-center justify-between rounded-full border-4 border-black bg-white p-2 pl-9 2xl:p-1.5 2xl:pl-7 xl:p-1 xl:pl-6 md:justify-center md:py-[22px] md:px-0">
-            <span className="t-3xl whitespace-nowrap font-mono !leading-none">
+            <span className="t-3xl whitespace-nowrap font-mono font-bold !leading-none">
               $ psql -h start.zenith.tech
             </span>
             <Button
