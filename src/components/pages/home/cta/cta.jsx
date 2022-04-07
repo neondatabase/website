@@ -93,7 +93,7 @@ const CTA = () => {
           />
         </Heading>
         <motion.p className="t-3xl mt-5 text-white 2xl:mt-4" variants={pVariants}>
-          Just use a single command from CLI to create new Zenith database
+          Create a new Neon cluster with a single command:
         </motion.p>
         <motion.div
           id="cta-input"
@@ -107,7 +107,7 @@ const CTA = () => {
             aria-hidden
           />
           <div className="relative flex items-center justify-between rounded-full border-4 border-black bg-white p-2 pl-9 2xl:p-1.5 2xl:pl-7 xl:p-1 xl:pl-6 md:justify-center md:py-[22px] md:px-0">
-            <span className="t-3xl whitespace-nowrap font-mono !leading-none">
+            <span className="t-3xl whitespace-nowrap font-mono font-bold !leading-none">
               $ psql -h start.zenith.tech
             </span>
             <Button
@@ -128,17 +128,17 @@ const CTA = () => {
             </Button>
           </div>
         </motion.div>
-        <motion.p
+        {/* remove the invisible and opacity-0 classes to display this block again when it comes in handy */}
+        <p
           id="cta-bottom-text"
-          className="t-xl mx-auto mt-[56px] max-w-[500px] text-white 2xl:mt-[46px] 2xl:max-w-[450px] xl:mt-10 xl:max-w-[400px]"
-          variants={pVariants}
+          className="t-xl invisible mx-auto mt-[56px] max-w-[500px] text-white opacity-0 2xl:mt-[46px] 2xl:max-w-[450px] xl:mt-10 xl:max-w-[400px]"
         >
           Same PostgreSQL command as you used to will get you{' '}
           <Link to="/" theme="underline-primary-1">
             a smooth database creation
           </Link>{' '}
           experience.
-        </motion.p>
+        </p>
       </Container>
     </motion.section>
   );

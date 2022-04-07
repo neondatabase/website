@@ -36,9 +36,9 @@ const SaaS = () => {
             id="saas-description"
             className="t-2xl mt-5 max-w-[600px] text-white 2xl:mt-4 2xl:max-w-[488px] xl:max-w-[400px] lg:max-w-none"
           >
-            With Zenith SaaS vendors can provisioning database clusters for each customer without
-            worrying about the costs of provisioned capacity. Databases can be shut down when they
-            are not active, while automated capacity adjustments can meet application needs.
+            SaaS vendors using Neon maximize cost savings and convenience. Neon minimizes the cost
+            of maintenance for inactive customers. Neon removes the need to over-provision by
+            fitting the customers into the predefined under-utilized instance sizes.
           </p>
           <Button
             id="saas-button"

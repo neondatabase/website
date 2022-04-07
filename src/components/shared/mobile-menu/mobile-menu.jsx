@@ -89,7 +89,7 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
       <div className="mt-5 space-y-4">
         <Button
           className="!flex h-12 items-center"
-          to="https://console.zenith.tech/sign_in?"
+          to="https://console.zenith.tech/sign_in"
           size="xs"
           theme="primary"
         >

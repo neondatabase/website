@@ -1,5 +1,5 @@
 export default {
-  docs: 'https://github.com/zenithdb/zenith/tree/main/docs',
+  docs: '/docs/',
   team: '/team/',
   jobs: '/jobs/',
   community: '#',

@@ -2,7 +2,7 @@
 title: 'Privacy Policy'
 ---
 
-This is the Privacy Policy for the website hosted at zenith.com (“our site”), our products and services, and for other RevenueCat activities at which you may provide your personal data, such as sponsored events or trade shows. The site is operated by or on behalf of RevenueCat, Inc. (“we”, ”us”, “our”). We are committed to protecting and respecting your privacy.
+This is the Privacy Policy for the website hosted at neon.com (“our site”), our products and services, and for other RevenueCat activities at which you may provide your personal data, such as sponsored events or trade shows. The site is operated by or on behalf of RevenueCat, Inc. (“we”, ”us”, “our”). We are committed to protecting and respecting your privacy.
 This policy (together with our terms of service and any other documents referred to in it) sets out:
 
 - Information we collect
@@ -71,17 +71,17 @@ To determine the appropriate retention period for your Personal Data, we will co
 
 ## 5. Update your information
 
-If you need to change or correct your Personal Data please contact us at privacy@zenith.com. We will address your request as required by applicable law.
+If you need to change or correct your Personal Data please contact us at privacy@neon.com. We will address your request as required by applicable law.
 
 ## 6. Children
 
-Our Service is not directed to children who are under the age of 16. Zenith does not knowingly collect Personal Data from children under the age of 16. If you have reason to believe that a child under the age of 16 has provided Personal Data to Zenith through the Service please [contact us](#contact-us) and we will endeavor to delete that information from our databases.
+Our Service is not directed to children who are under the age of 16. Neon does not knowingly collect Personal Data from children under the age of 16. If you have reason to believe that a child under the age of 16 has provided Personal Data to Neon through the Service please [contact us](#contact-us) and we will endeavor to delete that information from our databases.
 
 ## 7. EU users
 
 **Scope**. This section applies to individuals in the EU (for these purposes, reference to the EU also includes the European Economic Area countries of Iceland, Liechtenstein and Norway, the United Kingdom, and, to the extent applicable, Switzerland).
 
-**Data Controller**. Zenith is the data controller for the processing of your Personal Data. You can find our contact information in the “[Contact Us](#contact-us)” section below.
+**Data Controller**. Neon is the data controller for the processing of your Personal Data. You can find our contact information in the “[Contact Us](#contact-us)” section below.
 
 **Legal Bases for Processing**. This Privacy Policy (the paragraph “[How We Use Personal Data](#how-we-use-personal-data)”) describes the legal bases we rely on for the processing of your Personal Data. Please [contact us](#contact-us) if you have any questions about the specific legal basis we are relying on to process your Personal Data.
 
@@ -102,11 +102,11 @@ As used in this Privacy Policy, “legitimate interests” means our interests i
 
 Please see the “[Contact Us](#contact-us)” section below for information on how to exercise your rights.
 
-**Data Transfers**. Zenith is based in the U.S. The U.S. may have data protection laws less stringent than or otherwise different from the laws in effect in the EU and UK. Transfers of your Personal Data to Zenith in the U.S. are necessary to perform the agreement we have entered into, or are about to enter into, with you.
+**Data Transfers**. Neon is based in the U.S. The U.S. may have data protection laws less stringent than or otherwise different from the laws in effect in the EU and UK. Transfers of your Personal Data to Neon in the U.S. are necessary to perform the agreement we have entered into, or are about to enter into, with you.
 
 ## 8. Links to other websites
 
-The Sites may contain links to other websites not operated or controlled by Zenith, including Social Media Sites (“**Third Party Sites**”). The information that you share with Third Party Sites will be governed by the specific privacy policies and terms of service of the Third Party Sites and not by this Privacy Policy. By providing these links we do not imply that we endorse or have reviewed these sites. Please contact the Third Party Sites directly for information on their privacy practices and policies.
+The Sites may contain links to other websites not operated or controlled by Neon, including Social Media Sites (“**Third Party Sites**”). The information that you share with Third Party Sites will be governed by the specific privacy policies and terms of service of the Third Party Sites and not by this Privacy Policy. By providing these links we do not imply that we endorse or have reviewed these sites. Please contact the Third Party Sites directly for information on their privacy practices and policies.
 
 ## 9. Cookies
 
@@ -121,7 +121,7 @@ We use the following types of cookies:
 
 ## 10. Security
 
-You use the Service at your own risk. We comply with industry standards to protect Personal Data both online and offline from loss, misuse, and unauthorized access, disclosure, alteration or destruction. However, no Internet or e-mail transmission is ever fully secure or error free. In particular, e-mail sent to or from us may not be secure. Therefore, you should take special care in deciding what information you send to us via the Service or e-mail. Please keep this in mind when disclosing any Personal Data to Zenith via the Internet. In addition, we are not responsible for circumvention of any privacy settings or security measures contained on the Service, or third party websites.
+You use the Service at your own risk. We comply with industry standards to protect Personal Data both online and offline from loss, misuse, and unauthorized access, disclosure, alteration or destruction. However, no Internet or e-mail transmission is ever fully secure or error free. In particular, e-mail sent to or from us may not be secure. Therefore, you should take special care in deciding what information you send to us via the Service or e-mail. Please keep this in mind when disclosing any Personal Data to Neon via the Internet. In addition, we are not responsible for circumvention of any privacy settings or security measures contained on the Service, or third party websites.
 
 ## 11. Your choices
 
@@ -133,4 +133,4 @@ The Service, and our business may change from time to time. As a result we may c
 
 ## 13. Contact Us
 
-If you have any questions about our Privacy Policy or the information practices of the Sites, please feel free to contact us at privacy@zenith.com.
+If you have any questions about our Privacy Policy or the information practices of the Sites, please feel free to contact us at privacy@neon.com.

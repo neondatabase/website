@@ -6,11 +6,11 @@
       slug: get-started/quickstart
     - title: FAQ
       slug: get-started/faq
-- title: Zenith cloud
+- title: Neon cloud
   items:
     - title: Cloud console
-      slug: zenith-cloud/cloud-console
+      slug: neon-cloud/cloud-console
     - title: Postgres
-      slug: zenith-cloud/postgres
+      slug: neon-cloud/postgres
     - title: API
-      slug: zenith-cloud/api
+      slug: neon-cloud/api

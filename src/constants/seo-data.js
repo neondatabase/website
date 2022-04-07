@@ -1,23 +1,23 @@
 export default {
   jobs: {
-    title: 'Jobs — Zenith',
+    title: 'Jobs — Neon',
   },
   team: {
-    title: 'Our Team — Zenith',
+    title: 'Our Team — Neon',
   },
   blog: ({ canonicalUrl }) => ({
-    title: 'Our Blog — Zenith',
+    title: 'Our Blog — Neon',
     canonicalUrl,
   }),
   blogPost: ({ title, description }) => ({
-    title: `${title} — Zenith`,
+    title: `${title} — Neon`,
     description,
   }),
   static: ({ title }) => ({
-    title: `${title} — Zenith`,
+    title: `${title} — Neon`,
   }),
   doc: ({ title, description }) => ({
-    title: `${title} — Zenith Docs`,
+    title: `${title} — Neon Docs`,
     description,
   }),
 };

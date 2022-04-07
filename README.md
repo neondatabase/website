@@ -1,4 +1,4 @@
-# Zenith Gatsby
+# Neon Gatsby
 
 ## Table of Contents
 

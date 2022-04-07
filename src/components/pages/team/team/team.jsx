@@ -125,7 +125,7 @@ const items = [
   {
     photo: <StaticImage src="./images/anna-stepanyan-photo.jpg" alt="Anna Stepanyan" />,
     name: 'Anna Stepanyan',
-    position: 'Product Manager',
+    position: 'Head of Product',
     linkedinUrl: 'https://www.linkedin.com/in/annastepanyan21/',
     githubUrl: 'https://github.com/stepashka',
   },
@@ -175,9 +175,9 @@ const Team = () => (
         Meet the team
       </Heading>
       <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-        The Zenith team consists of PostgreSQL contributors and technologists on a mission to create
-        a cloud-native database service for every developer. Zenith CEO is Nikita Shamgunov,
-        co-founder of MemSQL / SingleStore.
+        The Neon team consists of PostgreSQL contributors and technologists on a mission to create a
+        cloud-native database service for every developer. Neon CEO is Nikita Shamgunov, co-founder
+        of MemSQL / SingleStore.
       </p>
       <ul className="grid-gap-x mt-16 grid grid-cols-2 gap-y-20 xl:gap-y-10 lg:mt-12 md:mt-8 md:block md:space-y-8">
         {items.map(({ photo, name, position, githubUrl, linkedinUrl, twitterUrl }, index) => (

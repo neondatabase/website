@@ -9,3 +9,11 @@
 #lines-2-vertical-line-11 {
   @apply ml-[-40px] 3xl:ml-[-33px] 2xl:ml-[-27px] xl:ml-[-20px];
 }
+
+#lines-2-horizontal-line-6,
+#lines-2-horizontal-line-7,
+#lines-2-horizontal-line-8,
+#lines-2-horizontal-line-9,
+#lines-2-vertical-line-2 {
+  @apply hidden;
+}

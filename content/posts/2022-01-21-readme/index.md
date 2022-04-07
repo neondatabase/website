@@ -1,6 +1,6 @@
 ---
-title: 'Zenith Gatsby'
-description: 'Readme for the Zenith website'
+title: 'Neon Gatsby'
+description: 'Readme for the Neon website'
 author: 'Stas Kelvich'
 ---
 

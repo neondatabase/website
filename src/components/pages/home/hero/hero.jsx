@@ -35,7 +35,11 @@ const Hero = () => {
   const titleContent = (
     <span className="lg:hidden">
       <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
-        {'Zenith is PostgreSQL that is /'.split('').map((letter, index) => (
+        <TypingText
+          phrases={titlePhrases}
+          shouldAnimationStart={isTitleInView && isAnimationFinished}
+        />{' '}
+        {'PostgreSQL'.split('').map((letter, index) => (
           <span
             className={clsx('animate-text-blink', letter === '/' && 'text-secondary-2')}
             style={{ animationPlayState: 'paused' }}
@@ -43,11 +47,7 @@ const Hero = () => {
           >
             {letter}
           </span>
-        ))}{' '}
-        <TypingText
-          phrases={titlePhrases}
-          shouldAnimationStart={isTitleInView && isAnimationFinished}
-        />
+        ))}
       </BlinkingText>
     </span>
   );
@@ -55,7 +55,7 @@ const Hero = () => {
   const titleContentLg = (
     <span className="hidden lg:inline">
       <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
-        {`Zenith is PostgreSQL that is / ${titlePhrases[0]}`.split('').map((letter, index) => (
+        {`${titlePhrases[0]} PostgreSQL`.split('').map((letter, index) => (
           <span className="animate-text-blink" style={{ animationPlayState: 'paused' }} key={index}>
             {letter}
           </span>
@@ -82,6 +82,10 @@ const Hero = () => {
             {titleContent}
             {titleContentLg}
           </Heading>
+          <p className="t-xl mt-7 max-w-[680px] text-white 3xl:max-w-[654px] 2xl:mt-6 2xl:max-w-[480px] xl:mt-5 xl:max-w-[456px] lg:mx-auto lg:max-w-[414px]">
+            Neon is an auto-scaling, on-demand database as a service for modern applications, making
+            it an open-source alternative to Amazon Aurora.
+          </p>
           <Button
             id="hero-button"
             className="mt-10 2xl:mt-8 xl:mt-7 md:mt-6"
@@ -128,7 +132,7 @@ const Hero = () => {
             <div className="absolute top-0 right-0 h-6 w-12 rounded-r-full bg-black" />
             <div
               className="circle circle-with-text circle-with-text-left !translate-x-0 !translate-y-0"
-              data-text="Gatsby Cloud"
+              data-text="Vercel"
             />
           </div>
 
