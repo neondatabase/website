@@ -5,6 +5,7 @@ import BlinkingText from 'components/shared/blinking-text';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import LINKS from 'constants/links';
 
 import illustrationLg from './images/saas-illustration-lg.svg';
 import Illustration from './saas-illustration';
@@ -43,7 +44,7 @@ const SaaS = () => {
           <Button
             id="saas-button"
             className="mt-10 2xl:mt-8 xl:mt-7 md:mt-6"
-            to="https://console.zenith.tech/sign_in"
+            to={LINKS.dashboard}
             size="md"
             theme="primary"
           >

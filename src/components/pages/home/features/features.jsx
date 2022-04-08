@@ -6,6 +6,7 @@ import BlinkingText from 'components/shared/blinking-text';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 import useLottie from 'hooks/use-lottie';
 
 import autoBackupAnimationData from './data/features-auto-backup-lottie-data.json';
@@ -127,7 +128,7 @@ const Features = () => {
       description: (
         <>
           Check{' '}
-          <Link to="https://github.com/zenithdb/zenith" theme="underline-primary-1">
+          <Link to={LINKS.github} theme="underline-primary-1">
             our repository
           </Link>{' '}
           on GitHub. We develop in public under the Apache 2.0 license.

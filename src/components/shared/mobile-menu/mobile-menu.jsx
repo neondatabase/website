@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 
 import Button from 'components/shared/button';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import useClickOutside from 'hooks/use-click-outside';
 
@@ -87,17 +88,12 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
         })}
       </ul>
       <div className="mt-5 space-y-4">
-        <Button
-          className="!flex h-12 items-center"
-          to="https://console.zenith.tech/sign_in"
-          size="xs"
-          theme="primary"
-        >
+        <Button className="!flex h-12 items-center" to={LINKS.dashboard} size="xs" theme="primary">
           Sign Up
         </Button>
         <Button
           className="!flex h-12 items-center justify-center"
-          to="https://github.com/zenithdb/zenith"
+          to={LINKS.github}
           size="xs"
           theme="quaternary"
         >

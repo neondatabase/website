@@ -7,6 +7,7 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import TypingText from 'components/shared/typing-text';
+import LINKS from 'constants/links';
 import useLottie from 'hooks/use-lottie';
 
 import animationData from './data/hero-lottie-data.json';
@@ -89,7 +90,7 @@ const Hero = () => {
           <Button
             id="hero-button"
             className="mt-10 2xl:mt-8 xl:mt-7 md:mt-6"
-            to="https://console.zenith.tech/sign_in"
+            to={LINKS.dashboard}
             size="md"
             theme="primary"
           >

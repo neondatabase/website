@@ -5,6 +5,7 @@ import React, { forwardRef } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import LogoBlack from 'images/logo-black.inline.svg';
 import LogoWhite from 'images/logo-white.inline.svg';
@@ -99,7 +100,7 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
       <div className="flex space-x-5 lg:hidden">
         <Button
           className="relative pl-11"
-          to="https://github.com/zenithdb/zenith"
+          to={LINKS.github}
           size="xs"
           theme={theme === 'white' ? 'quaternary' : 'tertiary'}
           rel="noopener noreferrer"
@@ -114,7 +115,7 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
           />
           <span>Star Us</span>
         </Button>
-        <Button to="https://console.zenith.tech/sign_in" size="xs" theme="primary">
+        <Button to={LINKS.dashboard} size="xs" theme="primary">
           Sign In
         </Button>
       </div>

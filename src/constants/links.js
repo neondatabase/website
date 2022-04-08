@@ -11,4 +11,5 @@ export default {
   postgresList: 'https://www.postgresql.org/list/',
   privacy: '/',
   terms: '/',
+  dashboard: 'https://console.zenith.tech/sign_in',
 };
