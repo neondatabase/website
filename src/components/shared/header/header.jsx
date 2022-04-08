@@ -7,8 +7,7 @@ import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
-import LogoBlack from 'images/logo-black.inline.svg';
-import LogoWhite from 'images/logo-white.inline.svg';
+import Logo from 'images/logo.inline.svg';
 
 import Burger from './burger';
 import DiscordIcon from './images/header-discord.inline.svg';
@@ -29,10 +28,16 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
     ref={ref}
   >
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5" size="md">
-      <Link className="hidden xl:block" to="/">
+      <Link
+        className={clsx(
+          'hidden xl:block',
+          theme === 'white' && 'text-black',
+          theme === 'black' && 'text-white'
+        )}
+        to="/"
+      >
         <span className="sr-only">Neon</span>
-        {theme === 'black' && <LogoWhite className="h-9 2xl:h-8" aria-hidden />}
-        {theme === 'white' && <LogoBlack className="h-9 2xl:h-8" aria-hidden />}
+        <Logo className="h-9 2xl:h-8" aria-hidden />
       </Link>
       <nav className="xl:absolute xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2">
         <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
@@ -89,12 +94,15 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
         </ul>
       </nav>
       <Link
-        className="absolute top-1/2 left-1/2 block -translate-x-1/2 -translate-y-1/2 xl:hidden"
+        className={clsx(
+          'absolute top-1/2 left-1/2 block -translate-x-1/2 -translate-y-1/2 xl:hidden',
+          theme === 'white' && 'text-black',
+          theme === 'black' && 'text-white'
+        )}
         to="/"
       >
         <span className="sr-only">Neon</span>
-        {theme === 'black' && <LogoWhite className="h-9 2xl:h-8" aria-hidden />}
-        {theme === 'white' && <LogoBlack className="h-9 2xl:h-8" aria-hidden />}
+        <Logo className="h-9 2xl:h-8" aria-hidden />
       </Link>
 
       <div className="flex space-x-5 lg:hidden">
