@@ -250,12 +250,7 @@ const files = [
   {
     name: 'jobs.txt',
     content: `
-<p>We're currently looking for:</p>
-<ul>
-  <li>Systems Software Engineer - distributed storage engine (Rust) and Postgres extension</li>
-  <li>Backend/Web Engineer - web console, serverless API</li>
-  <li>Infrastructure Engineer - cloud orchestration, database proxy</li>
-</ul>
+<p>We keep our open positions in <a href="https://boards.greenhouse.io/zenithlabs">greenhouse</a>.</p>
 <p>To apply, please send a resume and cover letter to <a href="mailto:jobs@zenith.tech">jobs@zenith.tech</a></p>
 `,
   },
