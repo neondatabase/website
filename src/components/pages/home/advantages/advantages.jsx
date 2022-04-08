@@ -60,7 +60,8 @@ const Advantages = () => {
       animationVisibilityRef: costEfficientAnimationVisibilityRef,
       animationRef: costEfficientAnimationRef,
       title: 'Cost Efficient',
-      description: 'Compute scales down to zero on usage and hot storage offloads to S3 for cost effiency.',
+      description:
+        'Compute scales down to zero on usage and hot storage offloads to S3 for cost effiency.',
     },
     {
       animationVisibilityRef: easyToUseAnimationVisibilityRef,
@@ -74,7 +75,7 @@ const Advantages = () => {
     <section
       id="advantages"
       // className="safe-paddings bg-black py-80 3xl:py-72 2xl:py-64 xl:py-52 lg:py-40 md:py-24"
-      className="safe-paddings bg-black pt-52 pb-72 3xl:pt-48 3xl:pb-64 2xl:pt-44 2xl:pb-52 xl:pt-40 xl:pb-40 lg:pt-36 lg:pb-36 md:pt-24 md:pb-24"
+      className="safe-paddings bg-black pt-36 pb-72 3xl:pt-32 3xl:pb-64 2xl:pt-28 2xl:pb-52 xl:pt-40 xl:pb-40 lg:pt-36 lg:pb-36 md:pt-24 md:pb-24"
     >
       <Container className="z-20" size="md">
         {/* <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px] xl:space-x-[50px] lg:flex-col lg:items-start lg:space-x-0">
