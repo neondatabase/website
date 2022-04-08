@@ -66,7 +66,7 @@ const Hero = () => {
   );
 
   return (
-    <section className="safe-paddings bg-black pt-[322px] 3xl:pt-[243px] 2xl:pt-[207px] xl:pt-[193px] lg:pt-12 md:pt-6">
+    <section className="safe-paddings bg-black pt-[320px] 3xl:pt-[280px] 2xl:pt-[230px] xl:pt-[193px] lg:pt-12 md:pt-6">
       <Container
         className="z-20 flex items-center justify-between lg:flex-col lg:justify-center"
         size="md"
