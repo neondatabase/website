@@ -250,7 +250,7 @@ const files = [
   {
     name: 'jobs.txt',
     content: `
-<p>We keep our open positions in <a href="https://boards.greenhouse.io/zenithlabs">greenhouse</a>.</p>
+<p>See open positions in <a href="https://boards.greenhouse.io/zenithlabs">greenhouse</a>.</p>
 <p>To apply, please send a resume and cover letter to <a href="mailto:jobs@zenith.tech">jobs@zenith.tech</a></p>
 `,
   },
