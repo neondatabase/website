@@ -14,3 +14,15 @@
       slug: neon-cloud/postgres
     - title: API
       slug: neon-cloud/api
+- title: Neon Storage Engine
+  items:
+    - title: Overview
+      slug: neon-engine/overview
+    - title: Glossary
+      slug: neon-engine/glossary
+    - title: Write Path
+      slug: neon-engine/write-path
+    - title: Read Path
+      slug: neon-engine/read-path
+    - title: Control Plane
+      slug: neon-engine/control-plane
