@@ -7,8 +7,8 @@ import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
-import LogoBlack from 'images/logo-black.inline.svg';
-import LogoWhite from 'images/logo-white.inline.svg';
+import logoBlack from 'images/logo-black.svg';
+import logoWhite from 'images/logo-white.svg';
 
 import Burger from './burger';
 import DiscordIcon from './images/header-discord.inline.svg';
@@ -31,8 +31,8 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5" size="md">
       <Link className="hidden xl:block" to="/">
         <span className="sr-only">Neon</span>
-        {theme === 'white' && <LogoBlack className="h-9 2xl:h-8" aria-hidden />}
-        {theme === 'black' && <LogoWhite className="h-9 2xl:h-8" aria-hidden />}
+        {theme === 'white' && <img className="h-9 2xl:h-8" src={logoBlack} alt="" aria-hidden />}
+        {theme === 'black' && <img className="h-9 2xl:h-8" src={logoWhite} alt="" aria-hidden />}
       </Link>
       <nav className="xl:absolute xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2">
         <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
@@ -93,8 +93,8 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
         to="/"
       >
         <span className="sr-only">Neon</span>
-        {theme === 'white' && <LogoBlack className="h-9 2xl:h-8" aria-hidden />}
-        {theme === 'black' && <LogoWhite className="h-9 2xl:h-8" aria-hidden />}
+        {theme === 'white' && <img className="h-9 2xl:h-8" src={logoBlack} alt="" aria-hidden />}
+        {theme === 'black' && <img className="h-9 2xl:h-8" src={logoWhite} alt="" aria-hidden />}
       </Link>
 
       <div className="flex space-x-5 lg:hidden">
