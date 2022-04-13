@@ -4,15 +4,15 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
-import Logo from 'images/logo.inline.svg';
+import LogoBlack from 'images/logo-black.inline.svg';
 
 const Footer = () => (
   <footer className="safe-paddings overflow-hidden border-t-2 border-black">
     <Container className="flex justify-between xl:flex-col lg:border-none" size="md">
       <div className="flex flex-col items-start justify-between pt-8 pb-14 2xl:pt-[25px] 2xl:pb-11 xl:relative xl:flex-row xl:items-center xl:py-6 xl:before:absolute xl:before:left-[-50vw] xl:before:-top-0.5 xl:before:h-0.5 xl:before:w-[200vw] xl:before:bg-black md:block">
-        <Link className="block text-black" to="/">
+        <Link className="block" to="/">
           <span className="sr-only">Neon</span>
-          <Logo className="h-9 2xl:h-8" aria-hidden />
+          <LogoBlack className="h-9 2xl:h-8" aria-hidden />
         </Link>
         <div className="t-base space-y-6 xl:space-y-4 md:mt-8">
           <p>
