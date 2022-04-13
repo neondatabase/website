@@ -1,6 +1,0 @@
-[book]
-authors = ["Stas Kelvich"]
-language = "en"
-multilingual = false
-src = "src"
-title = "Zenith docs"
