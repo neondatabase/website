@@ -18,12 +18,12 @@ export default {
       text: 'Community',
       to: LINKS.community,
       items: [
-        {
-          iconName: 'discord',
-          text: 'Discord',
-          description: 'Join our community',
-          to: LINKS.discord,
-        },
+        // {
+        //   iconName: 'discord',
+        //   text: 'Discord',
+        //   description: 'Join our community',
+        //   to: LINKS.discord,
+        // },
         {
           iconName: 'discussions',
           text: 'Discussions',
