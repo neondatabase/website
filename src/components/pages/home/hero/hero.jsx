@@ -36,7 +36,7 @@ const Hero = () => {
   const titleContent = (
     <span className="lg:hidden">
       <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
-        {'The Open Source Alternative to AWS Aurora Postgre'.split('').map((letter, index) => (
+        {'Cloud Native Postgres'.split('').map((letter, index) => (
           <span
             className={clsx('animate-text-blink', letter === '/' && 'text-secondary-2')}
             style={{ animationPlayState: 'paused' }}
@@ -81,10 +81,9 @@ const Hero = () => {
           </Heading>
           <p className="t-xl mt-7 max-w-[680px] text-white 3xl:max-w-[654px] 2xl:mt-6 2xl:max-w-[480px] xl:mt-5 xl:max-w-[456px] lg:mx-auto lg:max-w-[414px]">
             Neon separated storage a compute to offer:
-            <li>Serverless. Spin up instantly. Scale up to the demands of your app and scale down to zero</li>
-            <li>Branches. Create branches on demand. Plug your database into CI/CD pipeline to manage testing and migrations</li>
+            <li>Autoscaling. Scale up to the demands of your app and scale down to zero</li>
+            <li>Branching. Plug your database into CI/CD pipeline to manage testing and migrations</li>
             <li>Bottomless. Never run out of space and only pay for what you use</li>
-            Neon is an auto-scaling, on-demand database as a service for modern applications, making
             it an open-source alternative to Amazon Aurora.
           </p>
           <Button
