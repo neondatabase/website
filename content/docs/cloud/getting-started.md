@@ -1,5 +1,5 @@
 ---
-title: About
+title: Getting Started
 ---
 
 Neon is a public service that hosts PostgreSQL databases and is backed by the Neon Storage Engine.
