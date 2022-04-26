@@ -8,4 +8,4 @@ If you are already familiar with PostgreSQL, you can jump to [Query with psql](.
 
 If you are new to PostgreSQL, look at our [web query editor](../tutorials#query-via-ui) for a primer.
 
-For instructions on how to use Neon with your application stack, see [Integrations](../tutorials#integrate).
+For instructions on how to use Neon with your application stack, see [Integrations](../integrations).
