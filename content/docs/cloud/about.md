@@ -12,20 +12,20 @@ Compute is a genuine PostgreSQL, so it is fully application compatible with your
 
 ## Built for developer productivity
 
-Neon allows you to instantly create a clone of your PostgreSQL database for developer-friendly workflows and disaster recovery. Copies are created instantly and that’s why we call them branches. You can create a branch for dev and test environments of every code deployment in the CI/CD pipeline. Branches don’t incur any additional cost. See [branching](#branches-coming-soon) for more info.
+Neon allows you to instantly create a clone of your PostgreSQL database for developer-friendly workflows and disaster recovery. Copies are created instantly and that’s why we call them branches. You can create a branch for dev and test environments of every code deployment in the CI/CD pipeline. Branches don’t incur any additional cost. See [branching](../concepts#branches-coming-soon) for more info.
 
 ## Fully managed
 
-Neon cloud service provides high availability without any administrative, maintenance, or scaling burden. Check [our documentation](#cloud-service) for Neon users.
+Neon cloud service provides high availability without any administrative, maintenance, or scaling burden. Check [our documentation](../getting_started) for Neon users.
 
 ## Open Source
 
-Check [neondatabase](https://github.com/neondatabase/neon) on GitHub and [our architecture documentation](https://docs.google.com/document/u/0/d/1NWSHPLrLZfunUsNH0RPvlTxb-jRL5r_eSiNbBxXeki0/edit). We develop in public under the Apache 2.0 license.
+Check [neondatabase](https://github.com/neondatabase/neon) on GitHub and [our architecture documentation](../../storage-engine/architecture-overview). We develop in public under the Apache 2.0 license.
 
 ## Elastic Storage
 
 Neon uses a modern approach to storing data in the cloud. Neon Storage Engine allows virtually unlimited storage while providing high availability and durability guarantees. Neon is built to reduce operational headaches of checkpoints, data backup and restore.
 
-Neon Storage Engine integrates storage, backups, and archiving into one system. This allows quick and cheap _branching_, and _Point-in-Time query_.
+Neon Storage Engine integrates storage, backups, and archiving into one system. This allows quick and cheap [_branching_](../concepts#branches-coming-soon), and [Point-in-Time Reset](../concepts#point-in-time-reset).
 
 Our storage is proudly written in the Rust language and backed by S3.

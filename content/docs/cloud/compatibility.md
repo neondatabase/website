@@ -34,9 +34,11 @@ Neon cloud service does not currently provide the user with access permissions o
 
 List of configuration parameters Neon uses by default:
 
-\
-To check settings that differ from PostgreSQL defaults, run this query: \
-select \* from pg_settings where source &lt;> 'default';
+To check settings that differ from PostgreSQL defaults, run this query:
+
+```postgresql
+select * from pg_settings where source <> 'default';
+```
 
 | Name                 | Value   | Note                                                                                      |
 | -------------------- | ------- | ----------------------------------------------------------------------------------------- |
