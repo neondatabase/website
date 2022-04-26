@@ -2,7 +2,7 @@
 title: Tutorials
 ---
 
-## Import an existing database to Neon Cloud Service
+## Import an existing database to Neon
 
 Migration of existed Postgres database to Neon can be done almost in the same way
 
