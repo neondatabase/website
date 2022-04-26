@@ -83,8 +83,7 @@ const Hero = () => {
             Neon separated storage a compute to offer:
             <li>Autoscaling. Scale up to the demands of your app and scale down to zero</li>
             <li>Branching. Plug your database into CI/CD pipeline to manage testing and migrations</li>
-            <li>Bottomless. Never run out of space and only pay for what you use</li>
-            it an open-source alternative to Amazon Aurora.
+            <li>Infinite storage. Never run out of space and only pay for what you use</li>
           </p>
           <Button
             id="hero-button"
