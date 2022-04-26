@@ -1,3 +1,0 @@
----
-title: Connecting to postgres
----

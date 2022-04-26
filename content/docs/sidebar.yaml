@@ -1,28 +1,28 @@
-- title: Get started
+- title: About
   items:
-    - title: Intro
-      slug: get-started/intro
-    - title: Quickstart
-      slug: get-started/quickstart
-    - title: FAQ
-      slug: get-started/faq
-- title: Neon cloud
+    - title: Neon
+      slug: about-neon/about
+- title: Cloud Service
   items:
-    - title: Cloud console
-      slug: neon-cloud/cloud-console
+    - title: About
+      slug: cloud-service/about
+    - title: Concepts
+      slug: cloud-service/concepts
+    - title: Tutorials
+      slug: cloud-service/tutorials
+    - title: Roadmap
+      slug: cloud-service/roadmap
+- title: Compatibility
+  items:
     - title: Postgres
-      slug: neon-cloud/postgres
-    - title: API
-      slug: neon-cloud/api
-- title: Neon Storage Engine
+      slug: compatibility/compatibility
+- title: Storage Engine
   items:
-    - title: Overview
-      slug: neon-engine/overview
+    - title: Architecture Overview
+      slug: storage-engine/architecture-overview
     - title: Glossary
-      slug: neon-engine/glossary
+      slug: storage-engine/glossary
     - title: Write Path
-      slug: neon-engine/write-path
+      slug: storage-engine/write-path
     - title: Read Path
-      slug: neon-engine/read-path
-    - title: Control Plane
-      slug: neon-engine/control-plane
+      slug: storage-engine/read-path
