@@ -1,8 +1,6 @@
 ---
-title: Neon Roadmap
+title: Roadmap
 ---
-
-### Roadmap
 
 Neon is in the **Limited Preview** now. Reach out to Neon employees or to beta@neon.tech to procure the invite.
 

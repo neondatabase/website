@@ -1,8 +1,6 @@
 ---
-title: Neon Engine Read Path
+title: Read Path
 ---
-
-#### Read path
 
 PostgreSQL &lt;-- Pageserver &lt;-- Cloud storage
 

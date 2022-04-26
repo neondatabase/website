@@ -1,8 +1,6 @@
 ---
-title: Neon Engine Write Path
+title: Write Path
 ---
-
-#### Write path
 
 PostgreSQL --> Safekeepers --> Pageserver --> Cloud storage
 
