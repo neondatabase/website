@@ -2,7 +2,7 @@
 title: About Neon
 ---
 
-Neon is an on-demand serverless Postgres as a service that runs Neon Storage Engine. Neon is packed with modern features for developers, such as branching. What's more? it's open-source!
+Neon is an on-demand serverless Postgres as a service that runs Neon Storage Engine. Neon is packed with modern features for developers, such as branching. What's more? It's open-source!
 
 ## Serverless
 
