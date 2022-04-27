@@ -8,17 +8,17 @@ Neon is open source and written in Rust.
 
 ## Serverless
 
-With a separation of storage and compute Neon scales up compute on demand in response to the app workload as well as scales down to zero when idle.
-This happens automatically and is transparent to the user and app.
+Neon automatically and transparently scales up compute on demand in response to the app workload as well as scales down to zero when idle.
 
-Neon compute is PostgreSQL 14. It is 100% app compatible with your PostgreSQL workloads.
+Neon compute is PostgreSQL 14. It is 100% app compatible with regular PostgreSQL.
 
 ## Built for developer productivity
 
-Neon allows you to create a branch of your PostgreSQL database for you developer-friendly workflows. It's easy to create a brunch for a dev or staging environment
-as branching have close to zero overhead and created instantly.
-You can create a branch for you dev and test environments for every code deployment in the CI/CD pipeline. 
-Branches don’t incur any additional cost and implemented using "copy-on-write" technique at the storage tier. See [branching](#branches-coming-soon) for more info.
+Neon allows you to create a branch of your PostgreSQL database for you developer workflows. It's easy to create a brunch for a dev, test, or staging environments
+as branching is instant and has close to zero overhead.
+
+You can create a branch for every code deployment in the CI/CD pipeline.
+Branches don’t incur any additional cost and implemented using "copy-on-write" technique at the Neon Storage. See [branching](#branches-coming-soon) for more info.
 
 ## Fully managed
 
