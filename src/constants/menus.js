@@ -2,10 +2,10 @@ import LINKS from './links';
 
 export default {
   header: [
-    // {
-    //   text: 'Docs',
-    //   to: LINKS.docs,
-    // },
+    {
+      text: 'Docs',
+      to: LINKS.docs,
+    },
     {
       text: 'Team',
       to: LINKS.team,

@@ -120,7 +120,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
-        id: 'GTM-MJLTK6F',
+        id: 'GTM-56XZ7MT',
         includeInDevelopment: false,
         routeChangeEventName: 'landing_route_change',
         dataLayerName: 'landing',

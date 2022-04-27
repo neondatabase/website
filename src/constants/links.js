@@ -1,5 +1,5 @@
 export default {
-  docs: '/docs/',
+  docs: '/docs/cloud/about/',
   team: '/team/',
   jobs: '/jobs/',
   community: '#',

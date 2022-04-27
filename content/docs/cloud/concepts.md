@@ -1,16 +1,16 @@
 ---
-title: Neon Cloud Service Concepts
+title: Concepts
 ---
 
-#### User
+## User
 
 Neon User is identified by their email address.
 
 User registers and authenticates in Neon Web UI with their GitHub account. More authentication methods are coming soon.
 
-Once authenticated, Neon User can create and access [Projects](#project), query Project data. They can also manage [Postgres Users and Databases](#postgres-users) in each Project.
+Once authenticated, Neon User can create and access [Projects](#project) and [query Project data](../tutorials#query-via-ui). They can also manage [Postgres Users](#postgres-users) and [Databases](#postgres-databases) in each Project.
 
-##### API keys
+### API keys
 
 API keys allow users to access Neon application programming interface.
 
@@ -18,7 +18,7 @@ An API key provides access to any action available to the user. Currently API ke
 
 Check out the [API Spec](https://console.neon.tech/api-docs) reference for more information about using the API keys and available API methods.
 
-#### Project
+## Project
 
 Project is a collection of Postgres databases, postgres users and other settings on Neon cloud service.
 
@@ -26,7 +26,7 @@ Project contains a virtual instance with a Postgres server, also called Compute,
 
 Compute is stateless and can be automatically activated and suspended due to user activity.
 
-##### Compute Lifecycle
+### Compute Lifecycle
 
 A Compute node in the Neon is a stateless Postgres process due to the separation of storage and compute. It has two main states: Active and Idle.
 
@@ -38,15 +38,15 @@ After some period in the idle state, Neon will start occasionally activating you
 
 You can check all Compute state transitions in the operations list tab on the dashboard.
 
-##### Postgres Users
+### Postgres Users
 
 Postgres users are created as part of Neon Project.
 
-##### Postgres Databases
+### Postgres Databases
 
 When a Project is created, a default database for storing data is created along with it, the name of the database is main. Neon users cannot manipulate the system databases.
 
-##### Limits
+### Limits
 
 Neon give you no cost access to the PostgreSQL databases is you stay within Free Tier limits.
 
@@ -62,7 +62,7 @@ If you need to upgrade resource limits, contact technical support.
 
 To monitor current resource usage, check the Project Dashboard.
 
-###### Data size
+#### Data size
 
 Neon separates storage and compute and stores data in its own internal format.
 Data Size limit applies to the logical size of the Project. The logical size is the sum of all relation sizes in the Project.
@@ -81,23 +81,23 @@ When the limit is reached, you will see the PostgreSQL error message:
 
 `could not extend file because cluster size limit (10240 MB) has been exceeded`
 
-###### Point in Time Recovery
+#### Point in Time Reset
 
-Neon storage consumes extra space in order to support Point in Time Recovery (PITR) and the ability to reset a branch to a historical state. The historical data is stored in log based format.
+Neon storage consumes extra space in order to support Point in Time Reset (PITR) and the ability to reset a branch to a historical state. The historical data is stored in log based format.
 
 Neon limits on the modification history for [Free Tier](#free-tier) customers.
 
-###### Compute config
+#### Compute config
 
 During technical preview, Neon only supports modification to session level configuration parameters. Parameters are reset when session is terminated (e.g. when compute is suspended)
 
-[Default Parameters](../../compatibility/compatibiilty#default-parameters)
+[Default Parameters](../compatibiilty#default-parameters)
 
 See [https://www.postgresql.org/docs/14/runtime-config.html](https://www.postgresql.org/docs/14/runtime-config.html) for details
 
-#### Free Tier
+## Free Tier
 
-Neon cloud service is available for free during the [Limited and the Technical Preview](#roadmap).
+Neon cloud service is available for free during the [Limited and the Technical Preview](../roadmap).
 
 Free tier users can only create three Projects in Neon. Projects created under Free tier are subject to additional limits:
 
@@ -107,11 +107,11 @@ Free tier users can only create three Projects in Neon. Projects created under F
 
 _Note: Free Tier limits are subject to change over the course of [Technical Preview](../roadmap)._
 
-#### Branches (coming soon)
+## Branches (coming soon)
 
 _Neon Branching capabilities are not publicly available yet. If you’d like to try out this feature, reach out to beta@neon.tech with a request to enable branching capabilities for your account._
 
-A branch is a copy of the [project data](#project) created from the current state or any past state that is still available (see [PITR](#point-in-time-recovery)). A branch can be independently modified from its originating project data.
+A branch is a copy of the [project data](#project) created from the current state or any past state that is still available (see [PITR](#point-in-time-reset)). A branch can be independently modified from its originating project data.
 
 You can use a branch to:
 
