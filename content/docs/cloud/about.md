@@ -8,10 +8,10 @@ Neon is open source and written in Rust.
 
 ## Serverless
 
-With a separation of storage and compute Neon allocates spin up and scales compute on demand in response to application queries and shuts down when idle.
+With a separation of storage and compute Neon scales up compute on demand in response to the app workload as well as scales down to zero when idle.
 This happens automatically and is transparent to the user and app.
 
-Neon compute is PostgreSQL 14. It is 100% application compatible with your PostgreSQL workloads.
+Neon compute is PostgreSQL 14. It is 100% app compatible with your PostgreSQL workloads.
 
 ## Built for developer productivity
 
