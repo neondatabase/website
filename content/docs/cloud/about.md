@@ -2,7 +2,7 @@
 title: About Neon
 ---
 
-Neon is a fully managed serverless Postgres in the cloud with a generous free tier. 
+Neon is a fully managed serverless Postgres with a generous free tier.
 Neon separates storage and compute and offers modern developer features such as serverless, branching, bottomless storage, and many more.
 Neon is open source and written in Rust.
 
