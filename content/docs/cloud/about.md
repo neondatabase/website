@@ -11,7 +11,6 @@ Neon is open source and written in Rust.
 Neon automatically and transparently scales up compute on demand in response to the app workload as well as scales down to zero on inactivity. 
 Neon only charges for what you use and can deliver up to 10x reduction in cost.
 
-Neon compute is PostgreSQL 14. It is 100% app compatible with your app written against PostgreSQL.
 
 ## Built for developer productivity
 
@@ -40,3 +39,7 @@ Neon Storage is designed with cloud costs in mind and uses a multi-tier architec
 It integrates a cloud object store such as S3 to push cold data to the cheapest storage medium and locally attached SSDs for low latency high performance data.
 
 Our storage is written in the Rust for maximum performance and usability.
+
+## Compatibility
+
+Neon compute is the latest version of PostgreSQL. Currently we are using PostgreSQL 14. It is 100% compatible with your app written against regular PostgreSQL.
