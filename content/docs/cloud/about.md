@@ -24,10 +24,6 @@ Branches don’t incur any additional cost and implemented using "copy-on-write"
 
 Neon cloud service provides high availability without any administrative, maintenance, or scaling burden. Check [our documentation](../getting_started) for Neon users.
 
-## Open Source
-
-Check [neondatabase](https://github.com/neondatabase/neon) on GitHub and [our architecture documentation](../../storage-engine/architecture-overview). We develop in public under the Apache 2.0 license.
-
 ## Elastic Storage
 
 Neon developed a pupose build multi-tenant storage system for the cloud. Neon Storage allows virtually unlimited storage while providing high availability and durability guarantees. 
@@ -39,6 +35,10 @@ Neon Storage is designed with cloud costs in mind and uses a multi-tier architec
 It integrates a cloud object store such as S3 to push cold data to the cheapest storage medium and locally attached SSDs for low latency high performance data.
 
 Our storage is written in the Rust for maximum performance and usability.
+
+## Open Source
+
+Check [neondatabase](https://github.com/neondatabase/neon) on GitHub and [our architecture documentation](../../storage-engine/architecture-overview). We develop in public under the Apache 2.0 license.
 
 ## Compatibility
 
