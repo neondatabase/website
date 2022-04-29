@@ -24,7 +24,7 @@ After connecting, DataGrip will notify you that the connected database has a dif
 
 ## Authentication
 
-Neon cloud service currently only supports the older MD5-based password authentication. SCRAM-based authentication is still in the works (in [https://github.com/zenithdb/zenith/issues/918](https://github.com/zenithdb/zenith/issues/918)).
+Neon cloud service currently only supports the older MD5-based password authentication. SCRAM-based authentication is still in the works (in [https://github.com/neondatabase/neon/issues/918](https://github.com/neondatabase/neon/issues/918)).
 
 ## Permissions
 
