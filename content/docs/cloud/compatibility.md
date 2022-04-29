@@ -56,23 +56,23 @@ During technical preview Neon has restrictions on user ability to install Postgr
 
 Following PostgreSQL extensions come pre-installed:
 
-|               | Version | Note                                                                                      |
-| ------------- | ------- | ----------------------------------------------------------------------------------------- |
-| plpgsql       | 1.0     |                                                                                           |
-| fuzzystrmatch | 1.1     | Don’t be surprised. Neon syncs data to Neon Storage Engine and stores your data reliably. |
-| tcn           | 1.0     |                                                                                           |
-| unaccent      | 1.1     |                                                                                           |
-| btree_gin     | 1.3     |                                                                                           |
-| btree_gist    | 1.6     |                                                                                           |
-| citext        | 1.6     |                                                                                           |
-| cube          | 1.5     |                                                                                           |
-| dict_int      | 1.0     |                                                                                           |
-| hstore        | 1.8     |                                                                                           |
-| intarray      | 1.5     |                                                                                           |
-| isn           | 1.2     |                                                                                           |
-| lo            | 1.1     |                                                                                           |
-| ltree         | 1.2     |                                                                                           |
-| seg           | 1.4     |                                                                                           |
+|               | Version | Note |
+| ------------- | ------- | ---- |
+| plpgsql       | 1.0     |      |
+| fuzzystrmatch | 1.1     |      |
+| tcn           | 1.0     |      |
+| unaccent      | 1.1     |      |
+| btree_gin     | 1.3     |      |
+| btree_gist    | 1.6     |      |
+| citext        | 1.6     |      |
+| cube          | 1.5     |      |
+| dict_int      | 1.0     |      |
+| hstore        | 1.8     |      |
+| intarray      | 1.5     |      |
+| isn           | 1.2     |      |
+| lo            | 1.1     |      |
+| ltree         | 1.2     |      |
+| seg           | 1.4     |      |
 
 ## Unlogged tables
 
@@ -84,4 +84,4 @@ Certain queries in PostgreSQL could generate a dataset which doesn’t fit in me
 
 ## Temp Tables
 
-Temp tables are limited in size by the Compute local storage. Otherwise temp table semantics are similar to PostgreSQL
+Temp tables are limited in size by the Compute local storage. Temporary tables are stored locally on Compute.

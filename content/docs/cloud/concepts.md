@@ -20,7 +20,7 @@ Check out the [API Spec](https://console.neon.tech/api-docs) reference for more 
 
 ## Project
 
-Project is a collection of Postgres databases, postgres users and other settings on Neon cloud service.
+Project is a collection of Postgres databases, Postgres users and other settings on Neon cloud service.
 
 Project contains a virtual instance with a Postgres server, also called Compute, as well as the storage used to store the project data. Amount of virtual resources available for the Project is subject to limits defined by the [Free Tier](#free-tier).
 
@@ -32,7 +32,7 @@ A Compute node in the Neon is a stateless Postgres process due to the separation
 
 Active means that Postgres is running right now. If there are no active queries for 5 minutes, the activity monitor will gracefully put the corresponding compute node into the idle state to save energy and resources. The activity monitor is conservative, and it treats 'idle in transaction' connections as some activity to do not break an application logic that relies on long-lasting transactions. Yet, it closes all 'idle' connections after 5 minutes of complete inactivity.
 
-In the Idle state, you can still connect to your compute at any time. Neon will automatically activate it. Activation usually happens within a few seconds, so the first connection in the idle state will have higher latency. Also, the Postgres page cache (shared buffers) could not be warmed up after waking up from the idle state, and your usual queries may take longer to accomplish.
+In the Idle state, you can still connect to your compute at any time. Neon will automatically activate it. Activation usually happens within a few seconds, so the first connection in the idle state will have higher latency. Also, the Postgres page cache (shared buffers) will be cold after waking up from idle state, and your usual queries may take longer.
 
 After some period in the idle state, Neon will start occasionally activating your Compute to check data availability. The checks period will gradually increase up to several days if the Compute does not receive any client connections.
 
@@ -48,7 +48,7 @@ When a Project is created, a default database for storing data is created along 
 
 ### Limits
 
-Neon give you no cost access to the PostgreSQL databases is you stay within Free Tier limits.
+Neon give you no cost access to the PostgreSQL databases, within Free Tier limits.
 
 | Limit                                                 | Value  |
 | ----------------------------------------------------- | ------ |
