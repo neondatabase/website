@@ -24,7 +24,7 @@ author: 'Stas Kelvich'
 1. Clone this repository
 
 ```bash
-git clone git@github.com:zenithdb/zenithdb.github.io.git
+git clone git@github.com:neondatabase/website.git
 ```
 
 2. Install dependencies
