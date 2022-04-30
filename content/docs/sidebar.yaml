@@ -14,7 +14,7 @@
       slug: cloud/compatibility
     - title: Roadmap
       slug: cloud/roadmap
-- title: Storage Engine
+- title: Neon Architecture
   items:
     - title: Architecture Overview
       slug: storage-engine/architecture-overview
