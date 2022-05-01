@@ -1,4 +1,6 @@
-### Getting Started with Java
+---
+title: Getting Started with Java
+---
 
 #### Connect with JDBC
 
@@ -21,4 +23,3 @@ The only configuration required for connection is a datasource URL. It should sp
 ```java
 spring.datasource.url=jdbc:postgresql://pg.neon.tech/<project>?user=<user>@neon&password=<token>
 ```
-

@@ -1,4 +1,6 @@
-### Getting Started with Node.js
+---
+title: Getting Started with Node.js
+---
 
 1. Add postgres client to your project. In this example we used [postgres.js](https://www.npmjs.com/package/postgres), but feel free to choose another one
 2. Store your Neon credentials somewhere, for example in the `.env` file.
@@ -26,4 +28,3 @@ const sql = postgres({
 
 const result = await sql.uafe(req.body);
 ```
-

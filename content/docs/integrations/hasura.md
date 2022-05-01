@@ -1,4 +1,6 @@
-### Getting Started with Hasura
+---
+title: Getting Started with Hasura
+---
 
 Hasura is a cloud-based GraphQL provider for existing databases. This guide will cover zero-coding integration between Neon cloud service and Hasura Cloud. By the end of this guide, we will have a working HTTP API endpoint that uses GraphQL to query our serverless database and responds with a set of rows.
 
@@ -36,4 +38,3 @@ $ curl -H 'x-hasura-admin-secret: {admin_secret}' https://{your_project_name}.ha
 ```
 
 Thanks for your time, and keep hacking!
-

@@ -1,4 +1,6 @@
-### Getting Started with Go
+---
+title: Getting Started with Go
+---
 
 Neon is fully compatible with sql/db package and common Postgres drivers ie. lib/pq, pgx etc.
 
@@ -39,4 +41,3 @@ func main() {
 ```
 
 [On golang playground](https://play.golang.com/p/gl69dT0HtHN)
-
