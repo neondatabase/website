@@ -11,7 +11,7 @@ as copying database from one server to another. Postgres provides several ways t
 The most straightforward and efficient is to use `pg_dump` utility:
 
 ```bash
-pg_dump -h HOST-U USER DBNAME|psql -h start.neon.tech -U username@neon main
+pg_dump -h HOST-U USER DBNAME|psql -h pg.neon.tech -U username@neon main
 ```
 
 You may need to make `pg_dump` to create data in non-plain-text format.
@@ -55,7 +55,7 @@ In the console go to the Project Dashboard, click “Generate Token” button, f
 Copy the connection string and run it in the shell:
 
 ```bash
-psql -h start.neon.tech -U username@neon main
+psql -h pg.neon.tech -U username@neon main
 ```
 
 Run a simple query:
@@ -68,7 +68,7 @@ select * from my_table;
 ## Quick connect with github single-sign on
 
 ```bash
-psql -h start.neon.tech
+psql -h pg.neon.tech
 ```
 
 The above command connects to your Project called 'main'. If it doesn't already exist, it is created. The "main" Project is a great way to get started. However, before moving to production, it is recommended to create a separate Project for each application.
@@ -78,5 +78,5 @@ By default, psql connects to a database with the same name as your OS username. 
 To connect to a different Project:
 
 ```bash
-psql -h <project>.start.neon.tech
+psql -h <project>.pg.neon.tech
 ```

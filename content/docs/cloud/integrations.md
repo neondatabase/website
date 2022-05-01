@@ -117,7 +117,7 @@ DATABASES = {
         'NAME': '<here goes your project id>',
         'USER': '<your github nickname from account used to authenticate in neon>@neon,
         'PASSWORD': '<token generated in "Connection Details" tab>',
-        'HOST': 'start.neon.tech',
+        'HOST': 'pg.neon.tech',
         'PORT': '5432',
     }
 }
@@ -177,7 +177,7 @@ import psycopg2.extras; psycopg2.extensions.set_wait_callback(psycopg2.extras.wa
 # NOTE: the password can be set to None if it's specified in the ~/.pgpass file
 USERNAME = "<your-username>"
 ACCESS_TOKEN = "<your-access-token>"
-HOST = "start.neon.tech"
+HOST = "pg.neon.tech"
 PORT = "5432"
 PROJECT = "main"
 
@@ -277,7 +277,7 @@ For example, if you configure your Symfony project with `.env` file, then DATABA
 
 ```shell
 # cat .env | grep DATABASE_URL
-DATABASE_URL="postgresql://<user>%40neon:<token>@start.neon.tech:5432/<project_id>?charset=utf8"
+DATABASE_URL="postgresql://<user>%40neon:<token>@pg.neon.tech:5432/<project_id>?charset=utf8"
 ```
 
 Make sure that you are using `<user>%40neon` as username. This is url encoded value for `<user>@neon`. You can find `<user>` string in the upper right corner of the UI.
@@ -291,7 +291,7 @@ The JDBC API is a Java API for relational databases. PostgreSQL has a well-suppo
 To get a JDBC connection URL, replace placeholders with your credentials in the following template:
 
 ```java
-jdbc:postgresql://start.neon.tech/<project>?user=<user>@neon&password=<token>
+jdbc:postgresql://pg.neon.tech/<project>?user=<user>@neon&password=<token>
 ```
 
 For more information about JDBC, refer to the standard JDBC API documentation and [PostgreSQL JDBC Driver documentation](https://jdbc.postgresql.org/documentation/head/index.html).
@@ -303,7 +303,7 @@ Spring relies on JDBC and PostgreSQL driver to connect to PostgreSQL databases. 
 The only configuration required for connection is a datasource URL. It should specified inside `application.properties` file in the following format:
 
 ```java
-spring.datasource.url=jdbc:postgresql://start.neon.tech/<project>?user=<user>@neon&password=<token>
+spring.datasource.url=jdbc:postgresql://pg.neon.tech/<project>?user=<user>@neon&password=<token>
 ```
 
 ### Using from Go
@@ -322,7 +322,7 @@ import (
 )
 
 func main() {
-    connStr := "user=<user>@neon password=<token> dbname=<project> host=start.neon.tech"
+    connStr := "user=<user>@neon password=<token> dbname=<project> host=pg.neon.tech"
     db, err := sql.Open("postgres", connStr)
     if err != nil {
         log.Fatal(err)
@@ -354,7 +354,7 @@ func main() {
 use postgres::{Client, NoTls};
 
 fn main() {
- let mut client = Client::connect("user=<user name> dbname=<db name> host=start.neon.tech password=<password>", NoTls).expect("connection error");
+ let mut client = Client::connect("user=<user name> dbname=<db name> host=pg.neon.tech password=<password>", NoTls).expect("connection error");
 
  for row in client.query("select version()", &[]).expect("query error") {
      let version: &str = row.get(0);

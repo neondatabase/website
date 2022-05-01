@@ -8,8 +8,8 @@ Neon is open source and written in Rust.
 
 ## Serverless
 
-Neon automatically and transparently scales up compute on demand in response to the app workload as well as scales down to zero on inactivity. 
-Neon only charges for what you use and can deliver up to 10x reduction in cost.
+Neon automatically and transparently scales up compute on demand in response to the app workload. Neo also scales down to zero on inactivity.
+Since Neon is serverless it only charges for what you use and can deliver up to 10x reduction in cost.
 
 
 ## Built for developer productivity
