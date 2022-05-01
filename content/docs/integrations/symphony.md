@@ -1,4 +1,6 @@
-### Getting Stareted with Symphony
+---
+title: Getting Stareted with Symphony
+---
 
 Symfony is a framework for building web applications in PHP. Symfony uses Doctrine library to access database. Using Neon from Symfony + Doctrine is straightforward and differs nothing from using a vanilla postgresql.
 
@@ -16,4 +18,3 @@ DATABASE_URL="postgresql://<user>%40neon:<token>@pg.neon.tech:5432/<project_id>?
 ```
 
 Make sure that you are using `<user>%40neon` as username. This is url encoded value for `<user>@neon`. You can find `<user>` string in the upper right corner of the UI.
-

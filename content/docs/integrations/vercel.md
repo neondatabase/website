@@ -1,4 +1,6 @@
-### Getting Started with Next.js + vercel
+---
+title: Getting Started with Next.js + vercel
+---
 
 1. [Create a next.js project](https://nextjs.org/learn/basics/create-nextjs-app/setup) if you don’t have one.
 2. Create a Neon project for your app. You can configure your db schema from Neon Console or using tools like Prisma.
@@ -34,4 +36,3 @@ const result = await sql.uafe(req.body);
 Do not ever expose your Neon credentials to the browser.
 
 You can also use Prisma to manage your database, check our how-to [here](#using-with-prisma). \
-

@@ -1,4 +1,6 @@
-### Getting Started with Rust
+---
+title: Getting Started with Rust
+---
 
 ```rust
 use postgres::{Client, NoTls};

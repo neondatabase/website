@@ -1,4 +1,6 @@
-### Getting Started with SQL Alchemy
+---
+title: Getting Started with SQL Alchemy
+---
 
 SQLAlchemy is among the most popular ORMs in the Python universe. Because Neon is fully compatible with vanilla PostgreSQL, you only need to fill in the correct connection details.
 
@@ -63,4 +65,3 @@ with conn.cursor() as cur:
 5. Build great things with Neon! Any postgres tutorial will be able to guide you on the syntax.
 
 Note: This example was tested with python 3 and psycopg2 version 2.9.3
-

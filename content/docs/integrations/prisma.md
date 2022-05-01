@@ -1,4 +1,6 @@
-### Getting Started  with Prisma
+---
+title: Getting Started with Prisma
+---
 
 Prisma is an open-source type-safe ORM for the javascript ecosystem. It consists of the following parts:
 
@@ -49,4 +51,3 @@ and in `.env`:
 DATABASE_URL="<connection string to the project1>"
 SHADOW_DATABASE_URL="<connection string to the project2>"
 ```
-
