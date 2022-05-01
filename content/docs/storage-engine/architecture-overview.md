@@ -2,10 +2,9 @@
 title: Overview
 ---
 
-Neon architectural foundation is separation of storage and compute. 
-Compute is regular Postgres and storage is a multi-tenant cloud native key value store of Postgres pages.
-In addition to the low level storage and compute Neon Control Plane schedules compute in response to the demans of an app as well as
-manages storage nodes.
+Neon architecture based on separation of storage and compute and orchestrated by Neon Control Plane.
+Compute is regular Postgres and storage is a custom built multi-tenant key value store of Postgres pages built for the cloud.
+Neon Control Plane manages all the cloud resources across storage and compute.
 
 ![Neon Architecture Diagram](/docs-images/neon_architecture.png)
 
