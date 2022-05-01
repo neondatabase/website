@@ -1,4 +1,4 @@
-- title: Neon
+- title: Overview
   items:
     - title: About
       slug: cloud/about
@@ -14,7 +14,7 @@
       slug: cloud/compatibility
     - title: Roadmap
       slug: cloud/roadmap
-- title: Neon Architecture
+- title: Architecture
   items:
     - title: Architecture Overview
       slug: storage-engine/architecture-overview
