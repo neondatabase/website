@@ -21,7 +21,7 @@
       - title: Getting Started with Django
       slug: cloud/integrations/django.md
       - title: Getting Started with SQL Alchemy
-      slug: cloud/integrations/alchemy.md
+      slug: cloud/integrations/sqlalchemy.md
       - title: Getting Started with Node.js
       slug: cloud/integrations/node.md
       - title: Getting Started with Vercel and Next.js
