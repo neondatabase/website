@@ -11,27 +11,27 @@
 - title: Integrations
   items:
       - title: Signing up with Web UI
-      slug: cloud/integrations/console.md
+      slug: cloud/integrations/console
       - title: Getting Started with Postgres
-      slug: cloud/integrations/postgres.md
+      slug: cloud/integrations/postgres
       - title: Getting Started with Hasura
-      slug: cloud/integrations/hasura.md
+      slug: cloud/integrations/hasura
       - title: Getting Started with Prisma
-      slug: cloud/integrations/prisma.md
+      slug: cloud/integrations/prisma
       - title: Getting Started with Django
-      slug: cloud/integrations/django.md
+      slug: cloud/integrations/django
       - title: Getting Started with SQL Alchemy
-      slug: cloud/integrations/sqlalchemy.md
+      slug: cloud/integrations/sqlalchemy
       - title: Getting Started with Node.js
-      slug: cloud/integrations/node.md
+      slug: cloud/integrations/node
       - title: Getting Started with Vercel and Next.js
-      slug: cloud/integrations/vercel.md
+      slug: cloud/integrations/vercel
       - title: Getting Started with Symphony
-      slug: cloud/integrations/symphony.md
+      slug: cloud/integrations/symphony
       - title: Getting Started with Java
-      slug: cloud/integrations/java.md
+      slug: cloud/integrations/java
       - title: Getting Started with Go
-      slug: cloud/integrations/go.md
+      slug: cloud/integrations/go
 - title: Architecture
   items:
     - title: Architecture Overview
