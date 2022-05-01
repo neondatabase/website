@@ -8,6 +8,7 @@
       slug: cloud/concepts
     - title: Tutorials
       slug: cloud/tutorials
+
 - title: Integrations
   items:
       - title: Signing up with Web UI
