@@ -1,6 +1,6 @@
 - title: Overview
   items:
-    - title: About
+    - title: Introduction
       slug: cloud/about
     - title: Getting Started
       slug: cloud/getting-started
@@ -8,12 +8,41 @@
       slug: cloud/concepts
     - title: Tutorials
       slug: cloud/tutorials
-    - title: Integrations
-      slug: cloud/integrations
-    - title: Compatibility
-      slug: cloud/compatibility
-    - title: Roadmap
-      slug: cloud/roadmap
+- title: Integrations
+  items:
+      - title: Signing up with Web UI
+      slug: cloud/integrations/console.md
+
+      - title: Getting Started with Postgres
+      slug: cloud/integrations/postgres.md
+
+      - title: Getting Started with Hasura
+      slug: cloud/integrations/hasura.md
+
+      - title: Getting Started with Prisma
+      slug: cloud/integrations/prisma.md
+
+      - title: Getting Started with Django
+      slug: cloud/integrations/django.md
+
+      - title: Getting Started with SQL Alchemy
+      slug: cloud/integrations/alchemy.md
+
+      - title: Getting Started with Node.js
+      slug: cloud/integrations/node.md
+
+      - title: Getting Started with Vercel and Next.js
+      slug: cloud/integrations/vercel.md
+
+      - title: Getting Started with Symphony
+      slug: cloud/integrations/symphony.md
+
+      - title: Getting Started with Java
+      slug: cloud/integrations/java.md
+
+      - title: Getting Started with Go
+      slug: cloud/integrations/go.md
+
 - title: Architecture
   items:
     - title: Architecture Overview
@@ -24,3 +53,9 @@
       slug: storage-engine/write-path
     - title: Read Path
       slug: storage-engine/read-path
+- title: About
+  items:
+    - title: Compatibility
+      slug: cloud/compatibility
+    - title: Roadmap
+      slug: cloud/roadmap
