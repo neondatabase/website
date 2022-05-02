@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Web UI
+title: Signing Up
 ---
 
 In order to launch Neon projects you need to sign up on <http://console.neon.tech> and

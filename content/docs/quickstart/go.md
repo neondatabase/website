@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Go
+title: Run a Go app
 ---
 
 Neon is fully compatible with sql/db package and common Postgres drivers ie. lib/pq, pgx etc.

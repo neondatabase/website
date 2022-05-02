@@ -1,5 +1,5 @@
 ---
-title: Getting Started with SQL Alchemy
+title: Run a SQL Alchemy App
 ---
 
 SQLAlchemy is among the most popular ORMs in the Python universe. Because Neon is fully compatible with vanilla PostgreSQL, you only need to fill in the correct connection details.

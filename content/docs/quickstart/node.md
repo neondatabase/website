@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Node.js
+title: Run a Node.js app
 ---
 
 1. Add postgres client to your project. In this example we used [postgres.js](https://www.npmjs.com/package/postgres), but feel free to choose another one

@@ -11,27 +11,27 @@
 - title: Quickstart
   items:
     - title: Signing up
-      slug: integrations/console
+      slug: quickstart/console
     - title: Run a Postgres app
-      slug: integrations/postgres
+      slug: quickstart/postgres
     - title: Run a Hasura app
-      slug: integrations/hasura
+      slug: quickstart/hasura
     - title: Run a Prisma app
-      slug: integrations/prisma
+      slug: quickstart/prisma
     - title: Run a Django app
-      slug: integrations/django
+      slug: quickstart/django
     - title: Run a SQL Alchemy app
-      slug: integrations/sqlalchemy
+      slug: quickstart/sqlalchemy
     - title: Run a Node.js app
-      slug: integrations/node
+      slug: quickstart/node
     - title: Run a Vercel and Next.js app
-      slug: integrations/vercel
+      slug: quickstart/vercel
     - title: Run a Symphony app
-      slug: integrations/symphony
+      slug: quickstart/symphony
     - title: Run a Java app
-      slug: integrations/java
+      slug: quickstart/java
     - title: Run a Go app
-      slug: integrations/go
+      slug: quickstart/go
 - title: Architecture
   items:
     - title: Architecture Overview

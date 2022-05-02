@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Next.js + vercel
+title: Run a Vercel and Next.js app
 ---
 
 1. [Create a next.js project](https://nextjs.org/learn/basics/create-nextjs-app/setup) if you don’t have one.

@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Java
+title: Run a Java app
 ---
 
 #### Connect with JDBC

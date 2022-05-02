@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Prisma
+title: Run a Prisma App
 ---
 
 Prisma is an open-source type-safe ORM for the javascript ecosystem. It consists of the following parts:

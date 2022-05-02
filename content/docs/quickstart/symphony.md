@@ -1,5 +1,5 @@
 ---
-title: Getting Stareted with Symphony
+title: Run a Symphony app
 ---
 
 Symfony is a framework for building web applications in PHP. Symfony uses Doctrine library to access database. Using Neon from Symfony + Doctrine is straightforward and differs nothing from using a vanilla postgresql.
