@@ -7,7 +7,7 @@ import Link from 'components/shared/link';
 import SubscriptionForm from 'components/shared/subscription-form';
 import LINKS from 'constants/links';
 
-import DiscordIcon from './images/subscribe-discord.inline.svg';
+// import DiscordIcon from './images/subscribe-discord.inline.svg';
 import GithubIcon from './images/subscribe-github.inline.svg';
 // import TwitterIcon from './images/subscribe-twitter.inline.svg';
 
@@ -16,10 +16,10 @@ const links = [
   //   icon: TwitterIcon,
   //   to: LINKS.twitter,
   // },
-  {
-    icon: DiscordIcon,
-    to: LINKS.discord,
-  },
+  // {
+  //   icon: DiscordIcon,
+  //   to: LINKS.discord,
+  // },
   {
     icon: GithubIcon,
     to: LINKS.github,

@@ -71,10 +71,10 @@ export default {
         //   text: 'Twitter',
         //   to: LINKS.twitter,
         // },
-        {
-          text: 'Discord',
-          to: LINKS.discord,
-        },
+        // {
+        //   text: 'Discord',
+        //   to: LINKS.discord,
+        // },
         {
           text: 'Github',
           to: LINKS.github,
@@ -108,12 +108,12 @@ export default {
       text: 'Jobs',
       to: LINKS.jobs,
     },
-    {
-      iconName: 'discord',
-      text: 'Discord',
-      description: 'Join our community',
-      to: LINKS.discord,
-    },
+    // {
+    //   iconName: 'discord',
+    //   text: 'Discord',
+    //   description: 'Join our community',
+    //   to: LINKS.discord,
+    // },
     {
       iconName: 'discussions',
       text: 'Discussions',

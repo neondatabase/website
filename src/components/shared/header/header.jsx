@@ -11,12 +11,12 @@ import logoBlack from 'images/logo-black.svg';
 import logoWhite from 'images/logo-white.svg';
 
 import Burger from './burger';
-import DiscordIcon from './images/header-discord.inline.svg';
+// import DiscordIcon from './images/header-discord.inline.svg';
 import DiscussionsIcon from './images/header-discussions.inline.svg';
 import Github from './images/header-github.inline.svg';
 
 const icons = {
-  discord: DiscordIcon,
+  // discord: DiscordIcon,
   discussions: DiscussionsIcon,
 };
 

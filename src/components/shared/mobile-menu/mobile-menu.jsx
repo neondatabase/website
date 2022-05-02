@@ -8,14 +8,14 @@ import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import useClickOutside from 'hooks/use-click-outside';
 
-import DiscordIcon from './images/mobile-menu-discord.inline.svg';
+// import DiscordIcon from './images/mobile-menu-discord.inline.svg';
 import DiscussionsIcon from './images/mobile-menu-discussions.inline.svg';
 import GithubIcon from './images/mobile-menu-github.inline.svg';
 
 const ANIMATION_DURATION = 0.2;
 
 const icons = {
-  discord: DiscordIcon,
+  // discord: DiscordIcon,
   discussions: DiscussionsIcon,
 };
 
