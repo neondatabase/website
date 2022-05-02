@@ -62,7 +62,7 @@ If you need to upgrade resource limits, contact technical support.
 
 To monitor current resource usage, check the Project Dashboard.
 
-#### Data size
+### Data size
 
 Neon separates storage and compute and stores data in its own internal format.
 Data Size limit applies to the logical size of the Project. The logical size is the sum of all relation sizes in the Project.
@@ -81,13 +81,13 @@ When the limit is reached, you will see the PostgreSQL error message:
 
 `could not extend file because cluster size limit (10240 MB) has been exceeded`
 
-#### Point in Time Reset
+### Point in Time Reset
 
 Neon storage consumes extra space in order to support Point in Time Reset (PITR) and the ability to reset a branch to a historical state. The historical data is stored in log based format.
 
 Neon limits on the modification history for [Free Tier](#free-tier) customers.
 
-#### Compute config
+### Compute config
 
 During technical preview, Neon only supports modification to session level configuration parameters. Parameters are reset when session is terminated (e.g. when compute is suspended)
 
