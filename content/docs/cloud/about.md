@@ -11,10 +11,9 @@ Neon is open source and written in Rust.
 Neon automatically and transparently scales up compute on demand in response to the app workload. Neon also scales down to zero on inactivity.
 Since Neon is serverless it only charges for what you use and can deliver up to 10x reduction in cost.
 
-
 ## Built for developer productivity
 
-Neon allows you to create a branch of your Postgres database. It's easy to create brunches for dev, test, or staging environments.
+Neon allows you to create a branch of your Postgres database. It's easy to create branches for dev, test, or staging environments.
 Branching is instant and has close to zero overhead as it is implemented using the "copy-on-write" technique in Neon Storage.
 In fact branches are so cheap that you can create a branch for every code deployment in your CI/CD pipeline.
 
@@ -24,7 +23,7 @@ Neon cloud service provides high availability without any administrative, mainte
 
 ## Bottomless Storage
 
-Our engineering team developed a pupose built multi-tenant storage system for the cloud. 
+Our engineering team developed a pupose built multi-tenant storage system for the cloud.
 Neon Storage allows virtually unlimited storage while providing high availability and durability guarantees.
 
 Neon Storage integrates storage, backups, and archiving into one system. This reduces operational headaches of checkpoints, data backup and restore.
