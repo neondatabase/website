@@ -4,7 +4,7 @@ title: Roadmap
 
 Neon is in the **Limited Preview** now. Reach out to Neon employees or to beta@neon.tech to procure the invite.
 
-Neon team is working towards the **Technical Preview** when Neon will become available without the invites. During the Technical Preview anyone could try Neon's Free Tier.
+Neon team is working towards the **Technical Preview** when Neon will become available without invites. During the Technical Preview anyone can try Neon's Free Tier.
 
 **Public Branching Release** will follow shortly after.
 

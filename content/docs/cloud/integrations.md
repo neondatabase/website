@@ -2,7 +2,7 @@
 title: Integrations
 ---
 
-Neon support the standard PostgreSQL wire protocol. You can use all the normal client utilities like ‘psql’ and ‘pg_dump’, and standard client libraries and drivers to connect.
+Neon supports the standard PostgreSQL wire protocol. You can use all the normal client utilities like ‘psql’ and ‘pg_dump’, and standard client libraries and drivers to connect.
 
 There are two ways to authenticate:
 
@@ -15,23 +15,31 @@ Github single-sign-on makes it very easy to connect interactively. However, as i
 
 ### Using from Hasura
 
-Hasura is a cloud-based GraphQL provider for existing databases. This guide will cover zero-coding integration between Neon cloud service and Hasura Cloud. By the end of this guide, we will have a working HTTP API endpoint that uses GraphQL to query our serverless database and responds with a set of rows.
+Hasura is a cloud-based GraphQL provider for existing databases. This guide will cover zero-coding integration between Neon cloud service and Hasura Cloud. By the end of this guide, you will have a working HTTP API endpoint that uses GraphQL to query a serverless database and responds with a set of rows.
 
-First, let us set up a Neon project:
+First, set up a Neon project:
 
 1. Go to the Neon console <https://console.neon.tech/app/projects>.
-2. Create a new Project or use any existing one.
+2. Create a new Project or choose any existing one.
 3. Open the Project page and click the 'Generate token' button.
 4. Copy DATABASE_URL. We will need it later.
 
 Second, add this Project as a data source in the Hasura Cloud project:
 
 1. Go to the Hasura Cloud projects list <https://cloud.hasura.io/projects>.
-2. Create a new project or launch a console for the existing one.
+2. Create a new project or launch a console for an existing one.
 3. Go to the DATA section, and in the 'Connect Existing Database' tab, paste DATABASE_URL into the corresponding form field. Give it some name and click connect.
-4. That is mostly it! Hasura Cloud will connect and automatically discover the public schema. While Neon will spin up a new compute node for your database when any new connection arrives and suspend it when it is idle.
 
-Now we can create the first table using the Hasura Console web interface. Let it be table 't' with a single column 'text' of a type 'Text'. Once created, you can put some rows into it and finally navigate to the API section for endpoint creation. In the GraphQL tab, we can query our table with GraphQL, for example:
+That is mostly it! Hasura Cloud will connect and automatically
+discover the public schema. Neon will spin up a new compute node for
+your database when a new connection arrives, and suspend it when it
+becomes idle.
+
+Now we can create the first table using the Hasura Console web
+interface. Let it be table 't' with a single column 'text' of a type
+'Text'. Once created, you can insert some rows into it, and finally
+navigate to the API section for endpoint creation. In the GraphQL tab,
+we can query our table with GraphQL, for example:
 
 ```graphql
 query MyQuery {
@@ -64,7 +72,7 @@ This document discusses the concepts behind using Prisma with Neon for developme
 
 #### Connecting to Neon from Prisma
 
-To connect Prisma-based app to Neon you need to specify `postgresql` datasource and connection string.
+To connect a Prisma-based app to Neon you need to specify a `postgresql` datasource and connection string.
 
 First, add the following to the `prisma/schema.prisma`:
 
@@ -75,7 +83,7 @@ datasource db {
 }
 ```
 
-Then, go to the Project dashboard in Neon and generate a connection string in `Connection Details` widget. You can specify this connection string in `.env`:
+Then, go to the Project dashboard in Neon and generate a connection string in the `Connection Details` widget. You can add this connection string in `.env`:
 
 ```shell
 DATABASE_URL=postgres://user:pass@start.stage.neon.tech/project-name-123
@@ -83,7 +91,7 @@ DATABASE_URL=postgres://user:pass@start.stage.neon.tech/project-name-123
 
 #### Using Neon for development with Prisma
 
-Prisma used a so-called shadow database to detect schema drift, therefore you need to have a second database to perform `prisma migrate dev` command. One way to deal with it is to create a separate Project in Neon and specify it via `shadowDatabaseUrl` in `prisma/schema.prisma`.
+Prisma uses a so-called shadow database to detect schema drift. Therefore, you need to have a second database to perform `prisma migrate dev` command. One way to deal with it is to create a separate Project in Neon and specify it via `shadowDatabaseUrl` in `prisma/schema.prisma`.
 
 For example, you can configure Prisma in the following way:
 
@@ -106,7 +114,7 @@ SHADOW_DATABASE_URL="<connection string to the project2>"
 
 ### Using from Django
 
-Django is one of the most popular backend frameworks. Because Neon is fully compatible with vanilla PostgreSQL, you only need to fill in the correct connection details. To use Neon with Django, you have create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
+Django is one of the most popular Python backend frameworks. Django has built-in support for PostgreSQL, so you only need to fill in the correct connection details. To use Neon with Django, you have create a Project on Neon and fill in the project connection settings in your settings.py in the same way as for a standalone Postgres server.
 
 See the following example of specifying connection properties for Neon:
 
@@ -114,7 +122,7 @@ See the following example of specifying connection properties for Neon:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '<here goes your project id>',
+        'NAME': '<your project id>',
         'USER': '<your github nickname from account used to authenticate in neon>@neon,
         'PASSWORD': '<token generated in "Connection Details" tab>',
         'HOST': 'start.neon.tech',
@@ -133,13 +141,13 @@ References:
 
 ### Using from SQLAlchemy
 
-SQLAlchemy is among the most popular ORMs in the Python universe. Because Neon is fully compatible with vanilla PostgreSQL, you only need to fill in the correct connection details.
+SQLAlchemy is among the most popular ORMs in the Python universe. To use SQLAlchemy with a PostgreSQL database hosted on Neon, you only need to fill in the correct connection details.
 
 Prerequisites:
 
-Here we assume that you have already created a project on Neon cloud service and have sqlalchemy installed with a PostgreSQL driver (example assumes psycopg2 - the default one for PostgreSQL in SQLAlchemy). For installation details see corresponding pages for [SQLAlchemy](https://docs.sqlalchemy.org/en/14/intro.html#installation) and [psycopg2](https://www.psycopg.org/docs/install.html).
+Here we assume that you have already created a project on Neon, and have SQLAlchemy installed with a PostgreSQL driver (this example assumes psycopg2 - the default one for PostgreSQL in SQLAlchemy). For installation details see corresponding pages for [SQLAlchemy](https://docs.sqlalchemy.org/en/14/intro.html#installation) and [psycopg2](https://www.psycopg.org/docs/install.html).
 
-SQLALchemy uses Engine abstraction to manage database connections and exposes a `create_engine` function as the primary endpoint for engine initialization. See the following example on how to create SQLAlchemy engine pointing to the Neon Project.
+SQLALchemy uses Engine abstraction to manage database connections and exposes a `create_engine` function as the primary endpoint for engine initialization. See the following example on how to create an SQLAlchemy engine pointing to the Neon Project.
 
 ```python
 from sqlalchemy import create_engine
@@ -199,7 +207,7 @@ Note: This example was tested with python 3 and psycopg2 version 2.9.3
 
 ### Using from Node.js
 
-1. Add postgres client to your project. In this example we used [postgres.js](https://www.npmjs.com/package/postgres), but feel free to choose another one
+1. Add a postgres client to your project. In this example we use [postgres.js](https://www.npmjs.com/package/postgres).
 2. Store your Neon credentials somewhere, for example in the `.env` file.
 
 ```shell
@@ -210,7 +218,7 @@ Note: This example was tested with python 3 and psycopg2 version 2.9.3
     NEON_PORT=...` \
 ```
 
-3. To connect to the database using postgres client and your Neon credentials, add the following code to the `pages/api/hello_worlds.js`
+3. Add the following code to `pages/api/hello_worlds.js`
 
 ```javascript
 import postgres from 'postgres';
@@ -230,8 +238,8 @@ const result = await sql.uafe(req.body);
 
 1. [Create a next.js project](https://nextjs.org/learn/basics/create-nextjs-app/setup) if you don’t have one.
 2. Create a Neon project for your app. You can configure your db schema from Neon Console or using tools like Prisma.
-3. Add postgres client to your app. In this example we used [postgres.js](https://www.npmjs.com/package/postgres), but feel free to choose another one.
-4. Put your Neon credentials to the `.env` file. \
+3. Add postgres client to your app. In this example we use [postgres.js](https://www.npmjs.com/package/postgres).
+4. Put your Neon credentials to the `.env` file:
 
 ```shell
 NEON_HOST=...
@@ -243,7 +251,7 @@ NEON_PORT=...
 
 You can use either a connection string or connection options separately.
 
-5. Connect to the database with postgres client and your Neon credentials from your api handlers or server functions.
+5. Connect to the database with postgres client and your Neon credentials from your api handlers or server functions:
 
 ```javascript pages/api/hello_worlds.js
 import postgres from 'postgres';
@@ -261,11 +269,11 @@ const result = await sql.uafe(req.body);
 
 Do not ever expose your Neon credentials to the browser.
 
-You can also use Prisma to manage your database, check our how-to [here](#using-with-prisma). \
+You can also use Prisma to manage your database, check our how-to [here](#using-with-prisma).
 
-### Using from Symphony
+### Using from Symfony
 
-Symfony is a framework for building web applications in PHP. Symfony uses Doctrine library to access database. Using Neon from Symfony + Doctrine is straightforward and differs nothing from using a vanilla postgresql.
+Symfony is a framework for building web applications in PHP. Symfony uses Doctrine library to access databases.
 
 First, obtain secret token from “Connection details” panel:
 
@@ -300,7 +308,7 @@ For more information about JDBC, refer to the standard JDBC API documentation an
 
 Spring relies on JDBC and PostgreSQL driver to connect to PostgreSQL databases. If you are starting your project with Spring Initializr, do not forget to add **PostgreSQL Driver** as a dependency. If you have an existing project, ensure driver dependency is installed.
 
-The only configuration required for connection is a datasource URL. It should specified inside `application.properties` file in the following format:
+The only configuration required for connection is a datasource URL. It is specified in the `application.properties` file in the following format:
 
 ```java
 spring.datasource.url=jdbc:postgresql://start.neon.tech/<project>?user=<user>@neon&password=<token>
