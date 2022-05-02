@@ -32,6 +32,10 @@
       slug: quickstart/java
     - title: Run a Go app
       slug: quickstart/go
+- title: API
+  items:
+    - title: Neon API
+      slug: api/about
 - title: Architecture
   items:
     - title: Architecture Overview
