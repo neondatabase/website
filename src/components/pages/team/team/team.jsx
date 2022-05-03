@@ -32,6 +32,13 @@ const items = [
     githubUrl: 'https://github.com/kelvich',
     linkedinUrl: 'https://www.linkedin.com/in/kelvich/',
   },
+  {
+    photo: <StaticImage src="./images/alexey-kondratov-photo.jpg" alt="Alexey Kondratov" />,
+    name: 'Alexey Kondratov',
+    position: 'Software Engineer',
+    githubUrl: 'https://github.com/ololobus',
+    linkedinUrl: 'https://www.linkedin.com/in/alexeyko/',
+  },
 ];
 
 const items2 = [
@@ -62,13 +69,7 @@ const items2 = [
     position: 'Software Engineer',
     githubUrl: 'https://github.com/arssher',
   },
-  {
-    photo: <StaticImage src="./images/alexey-kondratov-photo.jpg" alt="Alexey Kondratov" />,
-    name: 'Alexey Kondratov',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/ololobus',
-    linkedinUrl: 'https://www.linkedin.com/in/alexeyko/',
-  },
+
   {
     photo: <StaticImage src="./images/polina-semenova-photo.jpg" alt="Polina Semenova" />,
     name: 'Polina Semenova',
@@ -162,7 +163,6 @@ const items2 = [
     position: 'Software Engineer',
     githubUrl: 'https://github.com/antonyc',
   },
-
   {
     photo: <StaticImage src="./images/dhammikaa-pathirana-photo.jpg" alt="Dhammika Pathirana" />,
     name: 'Dhammika Pathirana',
