@@ -171,6 +171,16 @@ const items2 = [
   },
 ];
 
+function compare(a, b) {
+  if (a.name < b.name) {
+    return -1;
+  }
+  if (a.name > b.name) {
+    return 1;
+  }
+  return 0;
+}
+
 const Team = () => (
   <section className="safe-paddings pt-48 3xl:pt-44 2xl:pt-40 xl:pt-32 lg:pt-12 md:pt-6">
     <Container size="sm">
@@ -232,7 +242,7 @@ const Team = () => (
       </ul>
       <ul className="grid-gap-x mt-16 grid grid-cols-2 gap-y-20 xl:gap-y-10 lg:mt-12 md:mt-8 md:block md:space-y-8">
         {items2
-          .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
+          .sort(compare)
           .map(({ photo, name, position, githubUrl, linkedinUrl, twitterUrl }, index) => (
             <li className="flex" key={index}>
               <div className="w-36 shrink-0 xs:w-32">{photo}</div>
