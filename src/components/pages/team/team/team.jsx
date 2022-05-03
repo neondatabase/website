@@ -9,7 +9,7 @@ import GithubIcon from './images/github.inline.svg';
 import LinkedinIcon from './images/linkedin.inline.svg';
 import TwitterIcon from './images/twitter.inline.svg';
 
-const items = [
+const founders = [
   {
     photo: <StaticImage src="./images/nikita-shamgunov-photo.jpg" alt="Nikita Shamgunov" />,
     name: 'Nikita Shamgunov',
@@ -32,6 +32,9 @@ const items = [
     githubUrl: 'https://github.com/kelvich',
     linkedinUrl: 'https://www.linkedin.com/in/kelvich/',
   },
+];
+
+const members = [
   {
     photo: <StaticImage src="./images/alexey-kondratov-photo.jpg" alt="Alexey Kondratov" />,
     name: 'Alexey Kondratov',
@@ -39,9 +42,6 @@ const items = [
     githubUrl: 'https://github.com/ololobus',
     linkedinUrl: 'https://www.linkedin.com/in/alexeyko/',
   },
-];
-
-const items2 = [
   {
     photo: <StaticImage src="./images/konstantin-knizhnik-photo.jpg" alt="Konstantin Knizhnik" />,
     name: 'Konstantin Knizhnik',
@@ -171,15 +171,8 @@ const items2 = [
   },
 ];
 
-function compare(a, b) {
-  if (a.name < b.name) {
-    return -1;
-  }
-  if (a.name > b.name) {
-    return 1;
-  }
-  return 0;
-}
+const sortedMembers = members.sort((a, b) => a.name.localeCompare(b.name));
+const allMembers = [...founders, ...sortedMembers];
 
 const Team = () => (
   <section className="safe-paddings pt-48 3xl:pt-44 2xl:pt-40 xl:pt-32 lg:pt-12 md:pt-6">
@@ -193,7 +186,7 @@ const Team = () => (
         of MemSQL / SingleStore.
       </p>
       <ul className="grid-gap-x mt-16 grid grid-cols-2 gap-y-20 xl:gap-y-10 lg:mt-12 md:mt-8 md:block md:space-y-8">
-        {items.map(({ photo, name, position, githubUrl, linkedinUrl, twitterUrl }, index) => (
+        {allMembers.map(({ photo, name, position, githubUrl, linkedinUrl, twitterUrl }, index) => (
           <li className="flex" key={index}>
             <div className="w-36 shrink-0 xs:w-32">{photo}</div>
             <div className="ml-5 xs:ml-3">
@@ -239,56 +232,6 @@ const Team = () => (
             </div>
           </li>
         ))}
-      </ul>
-      <ul className="grid-gap-x mt-16 grid grid-cols-2 gap-y-20 xl:gap-y-10 lg:mt-12 md:mt-8 md:block md:space-y-8">
-        {items2
-          .sort(compare)
-          .map(({ photo, name, position, githubUrl, linkedinUrl, twitterUrl }, index) => (
-            <li className="flex" key={index}>
-              <div className="w-36 shrink-0 xs:w-32">{photo}</div>
-              <div className="ml-5 xs:ml-3">
-                <h3 className="max-w-[100px] text-2xl font-semibold leading-tight md:max-w-none xs:text-[20px] xs:leading-tight">
-                  {name}
-                </h3>
-                <p className="t-base mt-2 !leading-snug text-gray-2 xs:mt-1">{position}</p>
-                <ul className="mt-3 flex space-x-2 xs:mt-2">
-                  {githubUrl && (
-                    <li>
-                      <Link
-                        className="text-gray-2 transition-colors duration-200 hover:text-black"
-                        to={githubUrl}
-                      >
-                        <span className="sr-only">Github</span>
-                        <GithubIcon className="xs:h-6 xs:w-6" />
-                      </Link>
-                    </li>
-                  )}
-                  {linkedinUrl && (
-                    <li>
-                      <Link
-                        className="text-gray-2 transition-colors duration-200 hover:text-[#0a66c2]"
-                        to={linkedinUrl}
-                      >
-                        <span className="sr-only">Linkedin</span>
-                        <LinkedinIcon className="xs:h-6 xs:w-6" />
-                      </Link>
-                    </li>
-                  )}
-                  {twitterUrl && (
-                    <li>
-                      <Link
-                        className="text-gray-2 transition-colors duration-200 hover:text-[#309ce8]"
-                        to={twitterUrl}
-                      >
-                        <span className="sr-only">Twitter</span>
-                        <TwitterIcon className="xs:h-6 xs:w-6" />
-                      </Link>
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </li>
-          ))}
       </ul>
     </Container>
   </section>
