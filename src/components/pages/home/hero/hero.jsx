@@ -80,10 +80,7 @@ const Hero = () => {
             {titleContentLg}
           </Heading>
           <p className="t-xl mt-7 max-w-[680px] text-white 3xl:max-w-[654px] 2xl:mt-6 2xl:max-w-[480px] xl:mt-5 xl:max-w-[456px] lg:mx-auto lg:max-w-[414px]">
-            Neon separated storage and compute to offer:
-            <li>Autoscaling. Scale up to the demands of your app and scale down to zero</li>
-            <li>Branching. Plug your database into CI/CD pipeline to manage testing and migrations</li>
-            <li>Infinite storage. Never run out of space and only pay for what you use</li>
+            Neon separated Postgres storage and compute to offer autoscaling, branching and infinite storage.
           </p>
           <Button
             id="hero-button"
