@@ -90,7 +90,7 @@ const Hero = () => {
             size="md"
             theme="primary"
           >
-            Start your project"
+            Start your project
           </Button>
         </div>
         <div
