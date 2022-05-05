@@ -1,16 +1,16 @@
 import React from 'react';
 
-import Hero from 'components/pages/sign-up/hero';
+import Hero from 'components/pages/early-access/hero';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
 
-const SignUpPage = () => (
+const EarlyAccessPage = () => (
   <>
-    <SEO {...SEO_DATA.signUp} />
+    <SEO {...SEO_DATA.earlyAccess} />
     <main>
       <Hero />
     </main>
   </>
 );
 
-export default SignUpPage;
+export default EarlyAccessPage;

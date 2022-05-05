@@ -88,9 +88,6 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
         })}
       </ul>
       <div className="mt-5 space-y-4">
-        <Button className="!flex h-12 items-center" to={LINKS.dashboard} size="xs" theme="primary">
-          Sign Up
-        </Button>
         <Button
           className="!flex h-12 items-center justify-center"
           to={LINKS.github}
@@ -99,6 +96,9 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
         >
           <GithubIcon />
           <span className="ml-2.5">Star Us on Github</span>
+        </Button>
+        <Button className="!flex h-12 items-center" to={LINKS.dashboard} size="xs" theme="primary">
+          Sign In
         </Button>
       </div>
     </motion.nav>
