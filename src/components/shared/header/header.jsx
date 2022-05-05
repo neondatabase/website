@@ -118,9 +118,6 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
         <Button to={LINKS.dashboard} size="xs" theme="primary">
           Sign In
         </Button>
-        <Button to={LINKS.dashboard} size="xs" theme="primary">
-          Start your project
-        </Button>
       </div>
 
       <Burger

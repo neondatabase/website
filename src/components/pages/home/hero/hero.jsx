@@ -6,7 +6,7 @@ import BlinkingText from 'components/shared/blinking-text';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import TypingText from 'components/shared/typing-text';
+// import TypingText from 'components/shared/typing-text';
 import LINKS from 'constants/links';
 import useLottie from 'hooks/use-lottie';
 
@@ -15,9 +15,11 @@ import animationData from './data/hero-lottie-data.json';
 const titlePhrases = ['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless'];
 
 const Hero = () => {
+  // eslint-disable-next-line no-unused-vars
   const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true, threshold: 0.5 });
 
-  const { animationRef, isAnimationPlaying, isAnimationFinished, animationVisibilityRef } =
+  const { animationRef, isAnimationPlaying, animationVisibilityRef } =
+    // const { animationRef, isAnimationPlaying, isAnimationFinished, animationVisibilityRef } =
     useLottie({
       lottieOptions: {
         animationData,
@@ -80,8 +82,9 @@ const Hero = () => {
             {titleContentLg}
           </Heading>
           <p className="t-xl mt-7 max-w-[680px] text-white 3xl:max-w-[654px] 2xl:mt-6 2xl:max-w-[480px] xl:mt-5 xl:max-w-[456px] lg:mx-auto lg:max-w-[414px]">
-            Neon is a fully managed Postgres with a generous free tier.
-            Neon is built for the cloud - it separated storage and compute to offer autoscaling, branching, and infinite storage.
+            Neon is a fully managed Postgres with a generous free tier. Neon is built for the cloud
+            - it separated storage and compute to offer autoscaling, branching, and infinite
+            storage.
           </p>
           <Button
             id="hero-button"
@@ -90,7 +93,7 @@ const Hero = () => {
             size="md"
             theme="primary"
           >
-            Start your project
+            Get early access
           </Button>
         </div>
         <div
