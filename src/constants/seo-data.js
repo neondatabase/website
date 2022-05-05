@@ -5,6 +5,9 @@ export default {
   team: {
     title: 'Our Team — Neon',
   },
+  earlyAccess: {
+    title: 'Get Early Access — Neon',
+  },
   blog: ({ canonicalUrl }) => ({
     title: 'Our Blog — Neon',
     canonicalUrl,
