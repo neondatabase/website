@@ -11,11 +11,11 @@ export default function setPositionsForHorizontalLines() {
   const horizontalLine9 = $('#lines-1-horizontal-line-9');
   const horizontalLine10 = $('#lines-1-horizontal-line-10');
   const horizontalLine11 = $('#lines-1-horizontal-line-11');
-  const horizontalLine12 = $('#lines-1-horizontal-line-12');
-  const horizontalLine13 = $('#lines-1-horizontal-line-13');
-  const horizontalLine14 = $('#lines-1-horizontal-line-14');
-  const horizontalLine15 = $('#lines-1-horizontal-line-15');
-  const horizontalLine16 = $('#lines-1-horizontal-line-16');
+  // const horizontalLine12 = $('#lines-1-horizontal-line-12');
+  // const horizontalLine13 = $('#lines-1-horizontal-line-13');
+  // const horizontalLine14 = $('#lines-1-horizontal-line-14');
+  // const horizontalLine15 = $('#lines-1-horizontal-line-15');
+  // const horizontalLine16 = $('#lines-1-horizontal-line-16');
   const horizontalLine17 = $('#lines-1-horizontal-line-17');
   const horizontalLine18 = $('#lines-1-horizontal-line-18');
   const horizontalLine19 = $('#lines-1-horizontal-line-19');
@@ -28,9 +28,9 @@ export default function setPositionsForHorizontalLines() {
   const ctaInput = $('#cta-input');
   const ctaInputBackground = $('#cta-input-background');
   const ctaBottomText = $('#cta-bottom-text');
-  const advantagesVideoWrapper = $('#advantages-video-wrapper');
-  const advantagesTitle = $('#advantages-title');
-  const advantagesDescription = $('#advantages-description');
+  // const advantagesVideoWrapper = $('#advantages-video-wrapper');
+  // const advantagesTitle = $('#advantages-title');
+  // const advantagesDescription = $('#advantages-description');
   const advantagesItem1Icon = $('#advantages-item-1-icon');
   const advantagesItem1Title = $('#advantages-item-1-title');
   const advantagesItem1Description = $('#advantages-item-1-description');
@@ -87,40 +87,40 @@ export default function setPositionsForHorizontalLines() {
     }px
   `;
 
-  horizontalLine12.style.cssText = `
-    top: ${
-      advantagesVideoWrapper.getBoundingClientRect().top + document.documentElement.scrollTop
-    }px
-  `;
+  // horizontalLine12.style.cssText = `
+  //   top: ${
+  //     advantagesVideoWrapper.getBoundingClientRect().top + document.documentElement.scrollTop
+  //   }px
+  // `;
 
-  horizontalLine13.style.cssText = `
-    top: ${advantagesTitle.getBoundingClientRect().top + document.documentElement.scrollTop}px;
-    right: ${document.body.clientWidth - verticalLine9.getBoundingClientRect().right}px
-  `;
+  // horizontalLine13.style.cssText = `
+  //   top: ${advantagesTitle.getBoundingClientRect().top + document.documentElement.scrollTop}px;
+  //   right: ${document.body.clientWidth - verticalLine9.getBoundingClientRect().right}px
+  // `;
 
-  horizontalLine14.style.cssText = `
-    top: ${
-      advantagesTitle.getBoundingClientRect().bottom +
-      document.documentElement.scrollTop -
-      LINE_WIDTH
-    }px
-  `;
+  // horizontalLine14.style.cssText = `
+  //   top: ${
+  //     advantagesTitle.getBoundingClientRect().bottom +
+  //     document.documentElement.scrollTop -
+  //     LINE_WIDTH
+  //   }px
+  // `;
 
-  horizontalLine15.style.cssText = `
-    top: ${
-      advantagesDescription.getBoundingClientRect().bottom +
-      document.documentElement.scrollTop -
-      LINE_WIDTH
-    }px
-  `;
+  // horizontalLine15.style.cssText = `
+  //   top: ${
+  //     advantagesDescription.getBoundingClientRect().bottom +
+  //     document.documentElement.scrollTop -
+  //     LINE_WIDTH
+  //   }px
+  // `;
 
-  horizontalLine16.style.cssText = `
-    top: ${
-      advantagesVideoWrapper.getBoundingClientRect().bottom +
-      document.documentElement.scrollTop -
-      LINE_WIDTH
-    }px
-  `;
+  // horizontalLine16.style.cssText = `
+  //   top: ${
+  //     advantagesVideoWrapper.getBoundingClientRect().bottom +
+  //     document.documentElement.scrollTop -
+  //     LINE_WIDTH
+  //   }px
+  // `;
 
   horizontalLine17.style.cssText = `
     top: ${advantagesItem1Icon.getBoundingClientRect().top + document.documentElement.scrollTop}px;

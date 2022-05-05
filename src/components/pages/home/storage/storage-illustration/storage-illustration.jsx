@@ -15,7 +15,7 @@ const StorageIllustration = ({ isInView }) => {
   return (
     <div
       className={clsx(
-        'absolute top-0 right-0 w-full opacity-0 transition-opacity ease-linear duration-500',
+        'absolute top-0 right-0 w-full opacity-0 transition-opacity duration-500 ease-linear',
         isAnimationReady && 'opacity-100'
       )}
       ref={animationRef}

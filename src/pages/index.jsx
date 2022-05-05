@@ -26,7 +26,7 @@ const HomePage = () => {
   });
 
   return (
-    <Layout>
+    <Layout headerTheme="black">
       <div className="relative overflow-hidden" ref={firstSectionWithLinesRef}>
         {isFirstSectionWithLinesInView && <Lines1 />}
         <Hero />

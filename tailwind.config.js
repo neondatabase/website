@@ -2,18 +2,40 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  mode: 'jit',
-  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
-  darkMode: false,
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     screens: {
-      '3xl': { max: '1919px' },
+      '3xl': { max: '1920px' },
       '2xl': { max: '1599px' },
       xl: { max: '1279px' },
       lg: { max: '1023px' },
       md: { max: '767px' },
       sm: { max: '639px' },
       xs: { max: '413px' },
+    },
+    colors: {
+      inherit: 'inherit',
+      current: 'currentColor',
+      transparent: 'transparent',
+      black: '#1a1a1a',
+      white: '#ffffff',
+      primary: {
+        1: '#00e699',
+        2: '#00cc88',
+      },
+      secondary: {
+        1: '#ff4c79',
+        2: '#f0f075',
+        3: '#ffa64c',
+        4: '#fbd0d7',
+        5: '#aa99ff',
+        6: '#d9eef2',
+      },
+      gray: {
+        1: '#262626',
+        2: '#404040',
+        3: '#e5e5e5',
+      },
     },
     extend: {
       fontFamily: {
@@ -28,29 +50,10 @@ module.exports = {
         '2xl': [defaultTheme.fontSize['2xl'][0], defaultTheme.lineHeight.normal],
         '3xl': [defaultTheme.fontSize['3xl'][0], defaultTheme.lineHeight.normal],
         '4xl': ['2.5rem', defaultTheme.lineHeight.none],
+        '5xl': [defaultTheme.fontSize['5xl'][0], defaultTheme.lineHeight.tight],
         '6xl': ['4rem', '1.125'],
         '7xl': ['5rem', '1.125'],
         '8xl': ['6.5rem', '1.125'],
-      },
-      colors: {
-        black: '#1a1a1a',
-        white: '#ffffff',
-        primary: {
-          1: '#00e699',
-        },
-        secondary: {
-          1: '#ff4c79',
-          2: '#f0f075',
-          3: '#ffa64c',
-          4: '#fbd0d7',
-          5: '#aa99ff',
-          6: '#d9eef2',
-        },
-        gray: {
-          1: '#262626',
-          2: '#404040',
-          3: '#cccccc',
-        },
       },
       keyframes: (theme) => ({
         'text-blink': {
@@ -81,10 +84,19 @@ module.exports = {
       animation: {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       },
+      typography: () => ({
+        DEFAULT: {
+          css: {
+            h2: {
+              fontWeight: 600,
+            },
+            a: {
+              fontWeight: 600,
+            },
+          },
+        },
+      }),
     },
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [require('tailwindcss-safe-area')],
+  plugins: [require('tailwindcss-safe-area'), require('@tailwindcss/typography')],
 };

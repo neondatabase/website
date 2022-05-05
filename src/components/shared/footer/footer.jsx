@@ -3,96 +3,42 @@ import React from 'react';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
-import Logo from 'images/logo.inline.svg';
-
-const menuItems = [
-  {
-    heading: 'Company',
-    links: [
-      {
-        text: 'Pricing',
-        to: '/',
-      },
-      {
-        text: 'Team',
-        to: '/',
-      },
-    ],
-  },
-  {
-    heading: 'Resources',
-    links: [
-      {
-        text: 'Blog',
-        to: '/',
-      },
-      {
-        text: 'Docs',
-        to: '/',
-      },
-      {
-        text: 'Changelog',
-        to: '/',
-      },
-    ],
-  },
-  {
-    heading: 'Social',
-    links: [
-      {
-        text: 'Twitter',
-        to: '/',
-      },
-      {
-        text: 'Discord',
-        to: '/',
-      },
-      {
-        text: 'Github',
-        to: '/',
-      },
-    ],
-  },
-  {
-    heading: 'Legal',
-    links: [
-      {
-        text: 'Privacy policy',
-        to: '/',
-      },
-      {
-        text: 'Terms of service',
-        to: '/',
-      },
-    ],
-  },
-];
+import MENUS from 'constants/menus.js';
+import logoBlack from 'images/logo-black.svg';
 
 const Footer = () => (
-  <footer className="overflow-hidden border-t-2 border-black safe-paddings">
-    <Container className="flex justify-between xl:flex-col lg:border-none">
-      <div className="flex flex-col justify-between pt-8 pb-14 2xl:pt-[25px] 2xl:pb-11 xl:relative xl:flex-row xl:items-center xl:py-6 md:block xl:before:absolute xl:before:left-[-50vw] xl:before:-top-0.5 xl:before:w-[200vw] xl:before:h-0.5 xl:before:bg-black">
-        <Link className="block text-black" to="/">
-          <span className="sr-only">Zenith</span>
-          <Logo className="h-6 2xl:h-5" aria-hidden />
+  <footer className="safe-paddings overflow-hidden border-t-2 border-black">
+    <Container className="flex justify-between xl:flex-col lg:border-none" size="md">
+      <div className="flex flex-col items-start justify-between pt-8 pb-14 2xl:pt-[25px] 2xl:pb-11 xl:relative xl:flex-row xl:items-center xl:py-6 xl:before:absolute xl:before:left-[-50vw] xl:before:-top-0.5 xl:before:h-0.5 xl:before:w-[200vw] xl:before:bg-black md:block">
+        <Link className="block" to="/">
+          <span className="sr-only">Neon</span>
+          <img className="h-9 2xl:h-8" src={logoBlack} alt="" aria-hidden />
         </Link>
-        <p className="t-base md:mt-4">Zenith 2021 Ⓒ All rights reserved</p>
+        <div className="t-base space-y-6 xl:space-y-4 md:mt-8">
+          <p>
+            Creative design by{' '}
+            <Link to="https://pixelpoint.io/" theme="black" target="_blank" rel="noopener">
+              Pixel Point
+            </Link>
+          </p>
+          <p>Neon 2021 Ⓒ All rights reserved</p>
+        </div>
       </div>
-      <div className="flex xl:order-first xl:border-b-2 xl:border-black xl:grid xl:grid-cols-4 xl:gap-x-6 lg:gap-x-4 md:grid-cols-2 md:gap-y-8 md:pt-8 md:pb-11">
-        {menuItems.map(({ heading, links }, index) => (
+      <div className="flex xl:order-first xl:grid xl:grid-cols-4 xl:gap-x-6 xl:border-b-2 xl:border-black lg:gap-x-4 md:grid-cols-2 md:gap-y-8 md:pt-8 md:pb-11 xs:block xs:space-y-8">
+        {MENUS.footer.map(({ heading, links }, index) => (
           <div
-            className="flex flex-col w-[300px] border-l-2 border-black 3xl:w-[252px] 2xl:w-[208px] xl:w-full xl:border-none"
+            className="flex w-[300px] flex-col border-l-2 border-black 3xl:w-[254px] 2xl:w-[218px] xl:w-full xl:border-none"
             key={index}
           >
             <Heading
-              className="relative px-10 border-b-2 border-black py-9 2xl:px-8 2xl:py-7 xl:px-0 xl:border-none xl:pt-8 xl:pb-0 md:pt-0 before:absolute before:left-0 before:-bottom-0.5 before:w-[50vw] before:h-0.5 before:bg-black xl:before:hidden"
+              className="relative border-b-2 border-black px-10 py-9 before:absolute before:left-0 before:-bottom-0.5 before:h-0.5 before:w-[50vw] before:bg-black 2xl:px-8 2xl:py-7 xl:border-none xl:px-0 xl:pt-8 xl:pb-0 xl:before:hidden md:pt-0"
               tag="h3"
               size="xs"
               theme="black"
             >
               {heading}
             </Heading>
-            <ul className="flex flex-col flex-grow px-10 mt-10 space-y-6 pb-14 2xl:px-8 2xl:mt-8 2xl:pb-11 xl:px-0 md:pb-0 md:mt-6 md:space-y-5">
+            <ul className="mt-10 flex grow flex-col space-y-6 px-10 pb-14 2xl:mt-8 2xl:px-8 2xl:pb-11 xl:px-0 md:mt-6 md:space-y-5 md:pb-0">
               {links.map(({ to, text }, index) => (
                 <li style={{ fontSize: 0 }} key={index}>
                   <Link to={to} theme="black" size="sm">

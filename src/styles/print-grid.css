@@ -1,9 +1,9 @@
 .horizontal-line {
-  @apply absolute z-10 left-0 right-0 h-0.5 bg-gray-1;
+  @apply absolute left-0 right-0 z-10 h-0.5 bg-gray-1;
 }
 
 .vertical-line {
-  @apply absolute top-0 w-0.5 h-full bg-gray-1;
+  @apply absolute top-0 h-full w-0.5 bg-gray-1;
 }
 
 .shape {
@@ -27,11 +27,11 @@
 }
 
 .circle {
-  @apply absolute z-10 w-6 h-6 bg-black border-2 border-gray-1 rounded-full -translate-x-1/2 -translate-y-1/2;
+  @apply absolute z-10 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-gray-1 bg-black;
 
   &::before {
     content: '';
-    @apply absolute top-1/2 left-1/2 w-2 h-2 bg-gray-1 rounded-full -translate-y-1/2 -translate-x-1/2;
+    @apply absolute top-1/2 left-1/2 h-2 w-2 -translate-y-1/2 -translate-x-1/2 rounded-full bg-gray-1;
   }
 
   &.circle-with-text {
@@ -44,41 +44,41 @@
     &::after {
       content: attr(data-text);
       font-size: 15px;
-      @apply absolute top-1/2 uppercase leading-relaxed bg-black font-semibold whitespace-nowrap tracking-wide text-gray-2 -translate-y-1/2;
+      @apply absolute top-1/2 -translate-y-1/2 whitespace-nowrap bg-black font-semibold uppercase leading-relaxed tracking-wide text-gray-2;
     }
 
     &.circle-with-text-right {
       &::after {
-        @apply right-[-3px] pl-2.5 translate-x-full;
+        @apply right-[-3px] translate-x-full pl-2.5;
       }
     }
 
     &.circle-with-text-left {
       &::after {
-        @apply left-[-3px] pr-2.5 -translate-x-full;
+        @apply left-[-3px] -translate-x-full pr-2.5;
       }
     }
   }
 }
 
 .dotted-vertical-line {
-  @apply absolute w-[4px] bg-black -translate-x-px;
+  @apply absolute w-[4px] -translate-x-px bg-black;
 
   &::before {
     content: '';
     /* my-[7px] is the space that should be between dotted line and circles */
     /* h-[calc(100%-14px)] is the height without these spaces */
-    @apply absolute h-[calc(100%-14px)] border-dotted border-r-[4px] border-gray-1 my-[7px];
+    @apply absolute my-[7px] h-[calc(100%-14px)] border-r-[4px] border-dotted border-gray-1;
   }
 }
 
 .dotted-horizontal-line {
-  @apply absolute z-10 h-[4px] bg-black -translate-y-px;
+  @apply absolute z-10 h-[4px] -translate-y-px bg-black;
 
   &::before {
     content: '';
     /* mx-[7px] is the space that should be between dotted line and circles */
     /* w-[calc(100%-14px)] is the height without these spaces */
-    @apply absolute w-[calc(100%-14px)] border-dotted border-t-[4px] border-gray-1 mx-[7px];
+    @apply absolute mx-[7px] w-[calc(100%-14px)] border-t-[4px] border-dotted border-gray-1;
   }
 }

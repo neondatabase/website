@@ -60,7 +60,7 @@ const CTA = () => {
 
   const handleButtonClick = () => {
     if (!isCopied) {
-      copyToClipboard('psql -h start.zenith.tech', { onCopy: setIsCopied(true) });
+      copyToClipboard('psql -h pg.neon.tech', { onCopy: setIsCopied(true) });
     }
   };
 
@@ -80,11 +80,11 @@ const CTA = () => {
 
   return (
     <motion.section
-      className="text-center bg-black pt-[504px] safe-paddings 3xl:pt-[397px] 2xl:pt-[344px] xl:pt-[310px] lg:pt-[238px] md:pt-[160px]"
+      className="safe-paddings bg-black pt-[504px] text-center 3xl:pt-[397px] 2xl:pt-[344px] xl:pt-[310px] lg:pt-[238px] md:pt-[160px]"
       initial="from"
       animate={controls}
     >
-      <Container className="z-20" ref={animationVisibilityRef}>
+      <Container className="z-20" size="md" ref={animationVisibilityRef}>
         <Heading id="cta-title" tag="h2" size="lg" theme="white" ref={titleRef}>
           <BlinkingText
             text="Made for Developers"
@@ -92,23 +92,23 @@ const CTA = () => {
             shouldAnimationStart={isInView}
           />
         </Heading>
-        <motion.p className="mt-5 text-white t-3xl 2xl:mt-4" variants={pVariants}>
-          Just use a single command from CLI to create new Zenith database
+        <motion.p className="t-3xl mt-5 text-white 2xl:mt-4" variants={pVariants}>
+          Create a new Neon cluster with a single command:
         </motion.p>
         <motion.div
           id="cta-input"
           variants={inputWrapperVariants}
-          className="relative max-w-[834px] mt-8 mx-auto 3xl:max-w-[738px] 2xl:max-w-[610px] 2xl:mt-7 xl:max-w-[498px] xl:mt-6 lg:max-w-[584px]"
+          className="relative mx-auto mt-8 max-w-[834px] 3xl:max-w-[738px] 2xl:mt-7 2xl:max-w-[610px] xl:mt-6 xl:max-w-[498px] lg:max-w-[584px]"
         >
           <motion.div
             id="cta-input-background"
-            className="absolute -bottom-3.5 -left-3.5 w-full h-full rounded-full 2xl:-bottom-2.5 2xl:-left-2.5 xl:-bottom-2 xl:-left-2 md:w-[calc(100%+8px)]"
+            className="absolute -bottom-3.5 -left-3.5 h-full w-full rounded-full 2xl:-bottom-2.5 2xl:-left-2.5 xl:-bottom-2 xl:-left-2 md:w-[calc(100%+8px)]"
             variants={inputPanelVariants}
             aria-hidden
           />
-          <div className="relative flex items-center justify-between p-2 bg-white border-4 border-black rounded-full pl-9 2xl:p-1.5 2xl:pl-7 xl:p-1 xl:pl-6 md:py-[22px] md:px-0 md:justify-center">
-            <span className="font-mono t-3xl whitespace-nowrap !leading-none">
-              $ psql -h start.zenith.tech
+          <div className="relative flex items-center justify-between rounded-full border-4 border-black bg-white p-2 pl-9 2xl:p-1.5 2xl:pl-7 xl:p-1 xl:pl-6 md:justify-center md:py-[22px] md:px-0">
+            <span className="t-3xl whitespace-nowrap font-mono font-bold !leading-none">
+              $ psql -h pg.neon.tech
             </span>
             <Button
               className="relative md:hidden"
@@ -119,7 +119,7 @@ const CTA = () => {
               <span className={clsx({ 'opacity-0': isCopied })}>Copy</span>
               <span
                 className={clsx(
-                  'absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 opacity-0',
+                  'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0',
                   { 'opacity-100': isCopied }
                 )}
               >
@@ -128,17 +128,17 @@ const CTA = () => {
             </Button>
           </div>
         </motion.div>
-        <motion.p
+        {/* remove the invisible and opacity-0 classes to display this block again when it comes in handy */}
+        <p
           id="cta-bottom-text"
-          className="max-w-[500px] text-white t-xl mt-[56px] mx-auto 2xl:max-w-[450px] 2xl:mt-[46px] xl:mt-10 xl:max-w-[400px]"
-          variants={pVariants}
+          className="t-xl invisible mx-auto mt-[56px] max-w-[500px] text-white opacity-0 2xl:mt-[46px] 2xl:max-w-[450px] xl:mt-10 xl:max-w-[400px]"
         >
           Same PostgreSQL command as you used to will get you{' '}
           <Link to="/" theme="underline-primary-1">
             a smooth database creation
           </Link>{' '}
           experience.
-        </motion.p>
+        </p>
       </Container>
     </motion.section>
   );

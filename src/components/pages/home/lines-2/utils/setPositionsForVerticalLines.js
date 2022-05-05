@@ -16,9 +16,9 @@ export default function setPositionsForVerticalLines() {
 
   const container = $('#container');
   const features = $('#features');
-  const featuresItem1Icon = $('#advantages-item-1-icon');
-  const featuresItem2Icon = $('#advantages-item-2-icon');
-  const featuresItem3Icon = $('#advantages-item-3-icon');
+  const featuresItem1Icon = $('#features-item-1-icon');
+  const featuresItem2Icon = $('#features-item-2-icon');
+  const featuresItem3Icon = $('#features-item-3-icon');
   const sassButton = $('#saas-button');
   const sassIllustration = $('#saas-illustration');
 
@@ -43,7 +43,6 @@ export default function setPositionsForVerticalLines() {
     left: ${featuresItem2Icon.getBoundingClientRect().right - LINE_WIDTH}px
   `;
 
-  // TODO: FIXME: PLEASE
   verticalLine6.style.cssText = `
     left: ${sassIllustration?.getBoundingClientRect().left - LINE_WIDTH}px
   `;

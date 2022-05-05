@@ -1,8 +1,6 @@
-@tailwind base;
-
 @layer base {
   body {
-    @apply relative font-sans text-black antialiased min-w-[320px];
+    @apply relative min-w-[320px] font-sans text-black antialiased;
     -webkit-tap-highlight-color: transparent;
   }
 }

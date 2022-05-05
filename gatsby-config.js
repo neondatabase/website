@@ -5,14 +5,13 @@ require('dotenv').config();
 module.exports = {
   flags: { DEV_SSR: process.env.GATSBY_DEV_SSR || false },
   siteMetadata: {
-    siteTitle: 'Zenith',
+    siteTitle: 'Neon — Serverless, Fault-Tolerant, Branchable Postgresql',
     siteDescription:
-      'Zenith is PostgreSQL that is serverless, fault-tolerant, branchable, and bottomless',
+      'PostgreSQL made for developers. Easy to Use, Scalable, Cost efficient solution for your next project.',
     siteImage: '/images/social-preview.jpg',
     siteLanguage: 'en',
     siteUrl: process.env.GATSBY_DEFAULT_SITE_URL || 'http://localhost:8000',
   },
-  pathPrefix: `/new`,
   plugins: [
     'gatsby-plugin-react-helmet',
     {
@@ -20,6 +19,27 @@ module.exports = {
       options: {
         name: 'images',
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'posts',
+        path: `${__dirname}/content/posts`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'static-pages',
+        path: `${__dirname}/content/static-pages`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: 'docs',
+        path: `${__dirname}/content/docs/`,
       },
     },
     'gatsby-plugin-image',
@@ -56,7 +76,9 @@ module.exports = {
                 {
                   name: 'preset-default',
                   params: {
-                    overrides: [{ name: 'removeViewBox', active: false }],
+                    overrides: {
+                      removeViewBox: false,
+                    },
                   },
                 },
                 'prefixIds',
@@ -64,19 +86,49 @@ module.exports = {
             },
           },
         ],
-        urlSvgOptions: [
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        extensions: ['.mdx', '.md'],
+        gatsbyRemarkPlugins: [
+          'gatsby-remark-copy-linked-files',
           {
-            test: /\.svg$/,
-            svgoConfig: {
-              plugins: [{ name: 'removeViewBox', active: false }],
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 860,
+              quality: 85,
+              withWebp: true,
+              backgroundColor: 'white',
+              disableBgImageOnAlpha: true,
             },
           },
+          {
+            resolve: 'gatsby-remark-video',
+            options: {
+              width: 860,
+              height: 'auto',
+              preload: 'auto',
+              controls: true,
+            },
+          },
+          'gatsby-remark-responsive-iframe',
         ],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-google-tagmanager',
+      options: {
+        id: 'GTM-MJLTK6F',
+        includeInDevelopment: false,
+        routeChangeEventName: 'landing_route_change',
+        dataLayerName: 'landing',
       },
     },
     'gatsby-alias-imports',
     'gatsby-plugin-postcss',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-netlify',
+    'gatsby-plugin-meta-redirect',
   ],
 };

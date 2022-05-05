@@ -1,4 +1,4 @@
-# Zenith Gatsby
+# Neon Gatsby
 
 ## Table of Contents
 
@@ -13,13 +13,14 @@
   - [ESLint](#eslint)
   - [Prettier](#prettier)
   - [VS Code](#vs-code)
+- [Documentation](#docs)
 
 ## Getting Started
 
 1. Clone this repository
 
 ```bash
-git clone git@github.com:zenithdb/zenithdb.github.io.git
+git clone git@github.com:neondatabase/website.git
 ```
 
 2. Install dependencies
@@ -63,6 +64,7 @@ npm run clean
 ## Project Structure
 
 ```text
+├── docs — Documentation sources in `mdbook` format, see [Documentation](#docs) section
 ├── src
 │   ├── components
 │   │  ├── pages — React components that are being used specifically on a certain page
@@ -171,3 +173,16 @@ You can navigate to settings.json by using Command Pallete (CMD+Shift+P) and the
 To enable Prettier go to Preferences -> Settings -> type "Format". Then check that you have esbenp.prettier-vscode as default formatter, and also enable "Format On Save".
 
 Reload VS Code and auto-format will work for you.
+
+## Documentation
+
+Documentation is in the [mdBook](https://rust-lang.github.io/mdBook/) format.
+To build it locally you need `mdbook` binaries installed:
+
+```bash
+cargo install mdbook
+cd docs
+mdbook build
+```
+
+During the deploy documentation is automatically built by the `./build_docs.sh` script which places results into `public/docs`.

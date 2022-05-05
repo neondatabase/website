@@ -1,9 +1,10 @@
-import { motion } from 'framer-motion';
-import { StaticImage } from 'gatsby-plugin-image';
-import React, { useRef } from 'react';
-import { useInView } from 'react-intersection-observer';
+// import { motion } from 'framer-motion';
+// import { StaticImage } from 'gatsby-plugin-image';
+// import React, { useRef } from 'react';
+import React from 'react';
+// import { useInView } from 'react-intersection-observer';
 
-import BlinkingText from 'components/shared/blinking-text';
+// import BlinkingText from 'components/shared/blinking-text';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import useLottie from 'hooks/use-lottie';
@@ -11,12 +12,12 @@ import useLottie from 'hooks/use-lottie';
 import costEfficientAnimationData from './data/advantages-cost-efficient-lottie-data.json';
 import easyToUseAnimationData from './data/advantages-easy-to-use-lottie-data.json';
 import scalableAnimationData from './data/advantages-scalable-lottie-data.json';
-import PlayIcon from './images/advantages-play.inline.svg';
+// import PlayIcon from './images/advantages-play.inline.svg';
 
 const Advantages = () => {
-  const [videoWrapperRef, isVideoWrapperInView] = useInView({ triggerOnce: true, threshold: 0.5 });
-  const [contentRef, isContentInView] = useInView({ triggerOnce: true, threshold: 0.5 });
-  const titleRef = useRef();
+  // const [videoWrapperRef, isVideoWrapperInView] = useInView({ triggerOnce: true, threshold: 0.5 });
+  // const [contentRef, isContentInView] = useInView({ triggerOnce: true, threshold: 0.5 });
+  // const titleRef = useRef();
 
   const {
     animationVisibilityRef: scalableAnimationVisibilityRef,
@@ -53,35 +54,34 @@ const Advantages = () => {
       animationVisibilityRef: scalableAnimationVisibilityRef,
       animationRef: scalableAnimationRef,
       title: 'Scalable',
-      description:
-        'Separation of storage and compute. allows Zenith reconfigure amount of the compute power on the fly.',
+      description: `Compute scales dynamically to ensure that you are ready for peak hours.`,
     },
     {
       animationVisibilityRef: costEfficientAnimationVisibilityRef,
       animationRef: costEfficientAnimationRef,
       title: 'Cost Efficient',
       description:
-        'Being serverless allows using of resources on-demand, which significantly cuts the costs.',
+        'Compute scales down to zero on usage and hot storage offloads to S3 for cost effiency.',
     },
     {
       animationVisibilityRef: easyToUseAnimationVisibilityRef,
       animationRef: easyToUseAnimationRef,
       title: 'Easy to Use',
-      description:
-        'No complex onboarding needed. Use a single CLI command to create a new Zenith database.',
+      description: 'Fully managed serverless PostgreSQL starts in seconds.',
     },
   ];
 
   return (
     <section
       id="advantages"
-      className="bg-black py-80 safe-paddings 3xl:py-72 2xl:py-64 xl:py-52 lg:py-40 md:py-24"
+      // className="safe-paddings bg-black py-80 3xl:py-72 2xl:py-64 xl:py-52 lg:py-40 md:py-24"
+      className="safe-paddings bg-black pt-36 pb-72 3xl:pt-32 3xl:pb-64 2xl:pt-28 2xl:pb-52 xl:pt-40 xl:pb-40 lg:pt-36 lg:pb-36 md:pt-24 md:pb-24"
     >
-      <Container className="z-20">
-        <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px] xl:space-x-[50px] lg:flex-col lg:items-start lg:space-x-0">
+      <Container className="z-20" size="md">
+        {/* <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px] xl:space-x-[50px] lg:flex-col lg:items-start lg:space-x-0">
           <div
             id="advantages-video-wrapper"
-            className="relative max-w-[800px] rounded-md overflow-hidden 3xl:max-w-[680px] 2xl:max-w-[560px] xl:max-w-[510px] lg:max-w-full lg:mt-10"
+            className="relative max-w-[800px] overflow-hidden rounded-md 3xl:max-w-[680px] 2xl:max-w-[560px] xl:max-w-[510px] lg:mt-10 lg:max-w-full"
             ref={videoWrapperRef}
           >
             <motion.div
@@ -97,7 +97,7 @@ const Advantages = () => {
               />
             </motion.div>
             <button
-              className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 group"
+              className="group absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full"
               type="button"
               style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
             >
@@ -121,14 +121,15 @@ const Advantages = () => {
             </Heading>
             <p
               id="advantages-description"
-              className="max-w-[600px] t-xl mt-5 text-white 2xl:max-w-[520px] 2xl:mt-4 lg:max-w-full"
+              className="t-xl mt-5 max-w-[600px] text-white 2xl:mt-4 2xl:max-w-[520px] lg:max-w-full"
             >
               Go through our 5 minutes tutorials video and start using scalable, cost efficient
               database architecture for your project.
             </p>
           </div>
-        </div>
-        <ul className="grid grid-cols-12 mt-40 grid-gap 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:gap-y-16 lg:mt-20 md:grid-cols-1">
+        </div> */}
+        {/* <ul className="grid-gap-x mt-40 grid grid-cols-12 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:mt-20 lg:gap-y-16 md:grid-cols-1"> */}
+        <ul className="grid-gap-x grid grid-cols-12 lg:gap-y-16 md:grid-cols-1">
           {items.map(({ animationVisibilityRef, animationRef, title, description }, index) => (
             <li
               className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
@@ -137,7 +138,7 @@ const Advantages = () => {
             >
               <div
                 id={`advantages-item-${index + 1}-icon`}
-                className="w-24 h-24 2xl:w-20 2xl:h-20 xl:w-[72px] xl:h-[72px] lg:w-16 lg:h-16"
+                className="h-24 w-24 2xl:h-20 2xl:w-20 xl:h-[72px] xl:w-[72px] lg:h-16 lg:w-16"
                 ref={animationRef}
                 aria-hidden
               />
@@ -152,7 +153,7 @@ const Advantages = () => {
               </Heading>
               <p
                 id={`advantages-item-${index + 1}-description`}
-                className="mt-4 text-white t-xl xl:mt-3.5"
+                className="t-xl mt-4 text-white xl:mt-3.5"
               >
                 {description}
               </p>
