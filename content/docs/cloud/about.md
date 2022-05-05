@@ -23,7 +23,7 @@ Neon cloud service provides high availability without any administrative, mainte
 
 ## Bottomless Storage
 
-Our engineering team developed a pupose built multi-tenant storage system for the cloud.
+Our engineering team developed a purpose built multi-tenant storage system for the cloud.
 Neon Storage allows virtually unlimited storage while providing high availability and durability guarantees.
 
 Neon Storage integrates storage, backups, and archiving into one system. This reduces operational headaches of checkpoints, data backup and restore.

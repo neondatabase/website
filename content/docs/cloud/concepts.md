@@ -28,7 +28,7 @@ Compute is stateless and can be automatically activated and suspended due to use
 
 ### Compute Lifecycle
 
-A Compute node in the Neon is a stateless Postgres process due to the separation of storage and compute. It has two main states: Active and Idle.
+A Compute node in Neon is a stateless Postgres process due to the separation of storage and compute. It has two main states: Active and Idle.
 
 Active means that Postgres is running right now. If there are no active queries for 5 minutes, the activity monitor will gracefully put the corresponding compute node into the idle state to save energy and resources. The activity monitor is conservative, and it treats 'idle in transaction' connections as some activity to do not break an application logic that relies on long-lasting transactions. Yet, it closes all 'idle' connections after 5 minutes of complete inactivity.
 
