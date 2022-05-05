@@ -48,7 +48,7 @@ const SaaS = () => {
             size="md"
             theme="primary"
           >
-            Try it Now
+            Get early access
           </Button>
         </div>
 
