@@ -81,7 +81,7 @@ const Hero = () => {
             {titleContent}
             {titleContentLg}
           </Heading>
-          <p className="t-xl mt-7 max-w-[680px] text-white 3xl:max-w-[654px] 2xl:mt-6 2xl:max-w-[480px] xl:mt-5 xl:max-w-[456px] lg:mx-auto lg:max-w-[414px]">
+          <p className="t-xl mt-7 max-w-[550px] text-white 2xl:mt-6 2xl:max-w-[480px] xl:mt-5 xl:max-w-[456px] lg:mx-auto lg:max-w-[414px]">
             Neon is a fully managed Postgres with a generous free tier. Neon is built for the cloud
             - it separated storage and compute to offer autoscaling, branching, and infinite
             storage.
