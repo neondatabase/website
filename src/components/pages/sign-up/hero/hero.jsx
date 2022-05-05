@@ -76,7 +76,7 @@ const Hero = () => {
           )}
         </ul>
         <StaticImage
-          className="!absolute bottom-0 right-0 lg:hidden"
+          className="!absolute bottom-0 right-0 lg:!hidden"
           src="./images/illustration.png"
           alt=""
           aria-hidden
