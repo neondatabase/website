@@ -16,7 +16,7 @@ export default {
     },
     {
       text: 'Community',
-      to: LINKS.community,
+      to: '#',
       items: [
         // {
         //   iconName: 'discord',
