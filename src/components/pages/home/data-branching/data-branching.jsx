@@ -26,7 +26,7 @@ const DataBranching = () => {
           </Heading>
           <p className="t-xl mt-8 3xl:max-w-[504px] 2xl:mt-7 2xl:max-w-[416px] xl:mt-6 lg:max-w-none">
             Neon allows to instantly branch your Postgres database to support a modern
-            developement workflow. You can create a branch for your dev and test environments for every code
+            development workflow. You can create a branch for your dev and test environments for every code
             deployment in your CI/CD pipeline. Branches are free and implemented using "copy of write" technique in Neon Storage.
           </p>
           {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-primary-1">
