@@ -133,7 +133,7 @@ const CTA = () => {
           id="cta-bottom-text"
           className="t-xl invisible mx-auto mt-[56px] max-w-[500px] text-white opacity-0 2xl:mt-[46px] 2xl:max-w-[450px] xl:mt-10 xl:max-w-[400px]"
         >
-          Same PostgreSQL command as you used to will get you{' '}
+          Same Postgres command as you used to will get you{' '}
           <Link to="/" theme="underline-primary-1">
             a smooth database creation
           </Link>{' '}

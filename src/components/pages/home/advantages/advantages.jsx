@@ -67,7 +67,7 @@ const Advantages = () => {
       animationVisibilityRef: easyToUseAnimationVisibilityRef,
       animationRef: easyToUseAnimationRef,
       title: 'Easy to Use',
-      description: 'Fully managed serverless PostgreSQL starts in seconds.',
+      description: 'Fully managed serverless Postgres starts in seconds.',
     },
   ];
 

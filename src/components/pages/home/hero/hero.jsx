@@ -54,7 +54,7 @@ const Hero = () => {
   const titleContentLg = (
     <span className="hidden lg:inline">
       <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
-        {`${titlePhrases[0]} PostgreSQL`.split('').map((letter, index) => (
+        {`${titlePhrases[0]} Postgres`.split('').map((letter, index) => (
           <span className="animate-text-blink" style={{ animationPlayState: 'paused' }} key={index}>
             {letter}
           </span>

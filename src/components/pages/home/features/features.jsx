@@ -152,7 +152,7 @@ const Features = () => {
           ref={titleRef}
         >
           <BlinkingText
-            text="Not an ordinary PostgreSQL as a service"
+            text="Not an ordinary Postgres as a service"
             parentElement={titleEntry?.target}
             shouldAnimationStart={isTitleInView}
           />

@@ -5,9 +5,9 @@ require('dotenv').config();
 module.exports = {
   flags: { DEV_SSR: process.env.GATSBY_DEV_SSR || false },
   siteMetadata: {
-    siteTitle: 'Neon — Serverless, Fault-Tolerant, Branchable Postgresql',
+    siteTitle: 'Neon — Serverless, Fault-Tolerant, Branchable Postgres',
     siteDescription:
-      'PostgreSQL made for developers. Easy to Use, Scalable, Cost efficient solution for your next project.',
+      'Postgres made for developers. Easy to Use, Scalable, Cost efficient solution for your next project.',
     siteImage: '/images/social-preview.jpg',
     siteLanguage: 'en',
     siteUrl: process.env.GATSBY_DEFAULT_SITE_URL || 'http://localhost:8000',

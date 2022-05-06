@@ -181,7 +181,7 @@ const Team = () => (
         Meet the team
       </Heading>
       <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-        The Neon team consists of PostgreSQL contributors and technologists on a mission to create a
+        The Neon team consists of Postgres contributors and technologists on a mission to create a
         cloud-native database service for every developer. Neon CEO is Nikita Shamgunov, co-founder
         of MemSQL / SingleStore.
       </p>
