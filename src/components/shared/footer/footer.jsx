@@ -21,7 +21,7 @@ const Footer = () => (
               Pixel Point
             </Link>
           </p>
-          <p>Neon 2021 Ⓒ All rights reserved</p>
+          <p>Neon 2022 Ⓒ All rights reserved</p>
         </div>
       </div>
       <div className="flex xl:order-first xl:grid xl:grid-cols-4 xl:gap-x-6 xl:border-b-2 xl:border-black lg:gap-x-4 md:grid-cols-2 md:gap-y-8 md:pt-8 md:pb-11 xs:block xs:space-y-8">
