@@ -54,7 +54,7 @@ const Hero = () => {
 
       const loadingAnimationStartedTime = Date.now();
 
-      fetch('https://submit-form.com/nHIBlORO', {
+      fetch('https://submit-form.com/6ERkQV60', {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
@@ -95,7 +95,7 @@ const Hero = () => {
           <img src={logoWhite} alt="Neon" />
         </Link>
         <h2 className="mt-12 text-[28px] font-bold lg:mt-0 lg:max-w-[450px] md:text-[26px]">
-          Get serverless, fault-tolerant, branchable Postgresql for free
+          Neon limited beta release
         </h2>
         <p className="mt-5 border-t border-t-[#2E3338] pt-5 font-semibold">Free Tier includes:</p>
         <ul className="mt-5 space-y-4">
@@ -121,7 +121,7 @@ const Hero = () => {
             <img src={logoBlack} alt="Neon" />
           </Link>
           <h1 className="text-[28px] font-bold lg:mt-10 lg:text-center md:text-[26px]">
-            Get early access
+            Get serverless, fault-tolerant, branchable Postgresql
           </h1>
           <p className="mt-2.5 lg:text-center">
             Neon is in beta, please submit your email to join the waitlist
