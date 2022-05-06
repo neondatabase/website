@@ -22,7 +22,7 @@ const Storage = () => {
       <Container className="flex items-center justify-between lg:flex-col lg:items-start" size="md">
         <div className="mr-[110px] max-w-[600px] 3xl:mr-[86px] 3xl:max-w-[504px] 2xl:mr-[72px] 2xl:max-w-[416px] xl:mr-0 xl:max-w-[400px] lg:max-w-none">
           <Heading className="max-w-[370px] lg:max-w-none" tag="h2" size="lg" theme="black">
-            Elastic Storage
+            Bottomless Storage
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
             Neon stores data across a fault tolerant scale-out Storage built for the cloud from the ground up. It
