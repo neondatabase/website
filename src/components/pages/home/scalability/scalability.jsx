@@ -25,15 +25,14 @@ const Scalability = () => {
             On Demand Scalability
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            Neon separates storage and compute to deliver on the serverless promise. Compute
-            activates on an incoming connection and shuts down to save resources when there&apos;s
-            no read or write activity.
+            Neon separates storage and compute to enable on demand scalability. Compute
+            activates on an incoming connection and shuts down to save resources on inactivity.
           </p>
           <p className="t-xl mt-5 2xl:mt-4 xl:mt-3">
-            Compute is fully client-compatible with PostgreSQL because it is PostgreSQL.
+            Compute is fully client-compatible with Postgres because it is Postgres!
           </p>
           <p className="t-xl mt-5 2xl:mt-4 xl:mt-3">
-            On the fly reconfiguration for Compute is coming soon.
+            As the workload changes Neon adjusts the amount of resources dedicated to compute (coming soon).
           </p>
           {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-secondary-3">
             Explore Neon&apos;s architecture

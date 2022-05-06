@@ -25,14 +25,14 @@ const Storage = () => {
             Elastic Storage
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            Neon stores data across a fault tolerant scale-out Storage built from ground up. It
-            integrates with S3 to store cold data for cost optimization. This architecture ensures
+            Neon stores data across a fault tolerant scale-out Storage built for the cloud from the ground up. It
+            integrates with cloud object stores such as S3 to store cold data for cost optimization. This architecture ensures
             high availability and makes Neon storage &quot;bottomless&quot;. Neon handles backups
-            and checkpoints and provides point-in-time recovery out-of-the-box. Neon Storage is
+            and checkpoints and provides point-in-time recovery out-of-the-box. Neon Storage is open source and
             implemented in Rust.
           </p>
           {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-secondary-5">
-            How do we cook PostgreSQL storage
+            How do we cook Postgres storage
           </Link> */}
         </div>
 
