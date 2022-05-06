@@ -90,24 +90,26 @@ const Hero = () => {
 
   return (
     <section className="safe-paddings flex h-screen min-h-[760px] lg:h-auto lg:min-h-screen lg:flex-col">
-      <div className="relative max-w-[520px] bg-black p-8 text-white lg:order-last lg:max-w-none lg:py-7 md:px-4">
-        <Link className="inline-block align-top lg:hidden" to="/">
-          <img src={logoWhite} alt="Neon" />
-        </Link>
-        <h2 className="mt-12 text-[28px] font-bold lg:mt-0 lg:max-w-[450px] md:text-[26px]">
-          Neon limited beta release
-        </h2>
-        <p className="mt-5 border-t border-t-[#2E3338] pt-5 font-semibold">Free Tier includes:</p>
-        <ul className="mt-5 space-y-4">
-          {['compute up to 1 vCPU / 256 MB', 'up to 10 GB storage', '3 clusters per user'].map(
-            (item, index) => (
-              <li className="flex items-center space-x-2 font-bold" key={index}>
-                <CheckIcon />
-                <span>{item}</span>
-              </li>
-            )
-          )}
-        </ul>
+      <div className="relative min-w-[768px] bg-black p-8 text-white 2xl:min-w-0 lg:order-last lg:max-w-none lg:py-7 md:px-4">
+        <div className="m-auto max-w-[520px]">
+          <Link className="inline-block align-top lg:hidden" to="/">
+            <img src={logoWhite} alt="Neon" />
+          </Link>
+          <h2 className="mt-28 text-[28px]  font-bold 2xl:mt-12 lg:mt-0 lg:max-w-[450px] md:text-[26px]">
+            Neon limited beta release
+          </h2>
+          <p className="mt-5 border-t border-t-[#2E3338] pt-5 font-semibold">Free Tier includes:</p>
+          <ul className="mt-5 space-y-4">
+            {['compute up to 1 vCPU / 256 MB', 'up to 10 GB storage', '3 clusters per user'].map(
+              (item, index) => (
+                <li className="flex items-center space-x-2 font-bold" key={index}>
+                  <CheckIcon />
+                  <span>{item}</span>
+                </li>
+              )
+            )}
+          </ul>
+        </div>
         <StaticImage
           className="!absolute bottom-0 right-0 lg:!hidden"
           src="./images/illustration.png"
@@ -124,7 +126,7 @@ const Hero = () => {
             Get serverless, fault-tolerant, branchable Postgresql
           </h1>
           <p className="mt-2.5 lg:text-center">
-            Neon is in beta, please submit your email to join the waitlist
+            Start with free tier. Setup takes under 5 seconds.
           </p>
           <form className="mt-7 lg:mt-5" noValidate onSubmit={handleSubmit}>
             <div className="relative">
@@ -136,7 +138,7 @@ const Hero = () => {
                 name="email"
                 type="email"
                 value={email}
-                placeholder="Email address..."
+                placeholder="Enter your email"
                 autoComplete="email"
                 style={{ boxShadow: '0px 1px 2px rgba(23, 26, 28, 0.06)' }}
                 readOnly={formState !== 'default'}
@@ -164,7 +166,7 @@ const Hero = () => {
                     (formState === 'loading' || formState === 'success') && 'opacity-0'
                   )}
                 >
-                  Join the waitlist
+                  Request Early Access
                 </span>
                 <span
                   className={clsx(
@@ -202,7 +204,7 @@ const Hero = () => {
                 )}
               </Button>
               <p className="text-[14px]">
-                Already have an account?{' '}
+                Have an invite code?{' '}
                 <Link className="font-semibold text-[#0D80F2] hover:underline" to={LINKS.dashboard}>
                   Log In
                 </Link>
