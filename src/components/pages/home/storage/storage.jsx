@@ -25,11 +25,13 @@ const Storage = () => {
             Bottomless Storage
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            We architected are storage as a fault tolerant scale-out system built for the cloud from the ground up. It
-            integrates with cloud object stores such as S3 to store cold data for cost optimization. This architecture ensures
-            high availability, scale, and unlimited capacity - &quot;bottomless&quot;.
+            We designed our storage from the ground up as a fault tolerant scale-out system built for the cloud. It
+            integrates with cloud object stores such as S3 to offload cold data for cost optimization. Our storage architecture ensures
+            high availability, scale out, and unlimited capacity that we call &quot;bottomless&quot;.
+            <br />
             Our storage implementes a "copy-on-write" technique to deliver online checkpointing, branching, and point in time restore.
-            This eliminates expensize "size of data" backup and restore operations.
+            This eliminates expensive "size of data" backup and restore operations required for traditional database as a service systems.
+            <br />
             Out storage technology is open source and written in Rust.
           </p>
           {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-secondary-5">
