@@ -25,11 +25,12 @@ const Storage = () => {
             Bottomless Storage
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            Neon stores data across a fault tolerant scale-out Storage built for the cloud from the ground up. It
+            We architected are storage as a fault tolerant scale-out system built for the cloud from the ground up. It
             integrates with cloud object stores such as S3 to store cold data for cost optimization. This architecture ensures
-            high availability and makes Neon storage &quot;bottomless&quot;. Neon handles backups
-            and checkpoints and provides point-in-time recovery out-of-the-box. Neon Storage is open source and
-            implemented in Rust.
+            high availability, scale, and unlimited capacity - &quot;bottomless&quot;.
+            Our storage implementes a "copy-on-write" technique to deliver online checkpointing, branching, and point in time restore.
+            This eliminates expensize "size of data" backup and restore operations.
+            Out storage technology is open source and written in Rust.
           </p>
           {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-secondary-5">
             How do we cook Postgres storage
