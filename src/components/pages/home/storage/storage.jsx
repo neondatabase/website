@@ -30,7 +30,7 @@ const Storage = () => {
             high availability, scale out, and unlimited capacity that we call &quot;bottomless&quot;.
           </p>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            Our storage implementes a "copy-on-write" technique to deliver online checkpointing, branching, and point in time restore.
+            Our storage implements a "copy-on-write" technique to deliver online checkpointing, branching, and point in time restore.
             This eliminates expensive "size of data" backup and restore operations required for traditional database as a service systems.
           </p>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">

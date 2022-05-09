@@ -37,8 +37,8 @@ const SaaS = () => {
             id="saas-description"
             className="t-2xl mt-5 max-w-[600px] text-white 2xl:mt-4 2xl:max-w-[488px] xl:max-w-[400px] lg:max-w-none"
           >
-            SaaS vendors using Neon maximize cost savings and convenience. Neon minimizes the cost
-            of maintenance for inactive customers. Neon removes the need to over-provision by
+            SaaS companies use Neon to maximize engineering velocity and minimize the cost. Our serverless architecture
+            minimizes the cost of maintenance for inactive customers. Specifically Neon removes the need to over-provision capacity by
             fitting the customers into the predefined under-utilized instance sizes.
           </p>
           <Button
