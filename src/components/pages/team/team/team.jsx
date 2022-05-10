@@ -149,7 +149,7 @@ const members = [
     photo: <StaticImage src="./images/bojan-serafimov-photo.jpg" alt="Bojan Serafimov" />,
     name: 'Bojan Serafimov',
     position: 'Software Engineer',
-    githubUrl: 'https://github.com/bojan',
+    githubUrl: 'https://github.com/bojanserafimov',
   },
   {
     photo: <StaticImage src="./images/anton-shyrabokau-photo.jpg" alt="Anton Shyrabokau" />,
