@@ -210,6 +210,7 @@ const Team = () => (
                     <Link
                       className="text-gray-2 transition-colors duration-200 hover:text-black"
                       to={githubUrl}
+                      target="_blank"
                     >
                       <span className="sr-only">Github</span>
                       <GithubIcon className="xs:h-6 xs:w-6" />
@@ -221,6 +222,7 @@ const Team = () => (
                     <Link
                       className="text-gray-2 transition-colors duration-200 hover:text-[#0a66c2]"
                       to={linkedinUrl}
+                      target="_blank"
                     >
                       <span className="sr-only">Linkedin</span>
                       <LinkedinIcon className="xs:h-6 xs:w-6" />
@@ -232,6 +234,7 @@ const Team = () => (
                     <Link
                       className="text-gray-2 transition-colors duration-200 hover:text-[#309ce8]"
                       to={twitterUrl}
+                      target="_blank"
                     >
                       <span className="sr-only">Twitter</span>
                       <TwitterIcon className="xs:h-6 xs:w-6" />
