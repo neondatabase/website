@@ -9,7 +9,7 @@ import GithubIcon from './images/github.inline.svg';
 import LinkedinIcon from './images/linkedin.inline.svg';
 import TwitterIcon from './images/twitter.inline.svg';
 
-const founders = [
+const members = [
   {
     photo: <StaticImage src="./images/nikita-shamgunov-photo.jpg" alt="Nikita Shamgunov" />,
     name: 'Nikita Shamgunov',
@@ -32,9 +32,6 @@ const founders = [
     githubUrl: 'https://github.com/kelvich',
     linkedinUrl: 'https://www.linkedin.com/in/kelvich/',
   },
-];
-
-const members = [
   {
     photo: <StaticImage src="./images/alexey-kondratov-photo.jpg" alt="Alexey Kondratov" />,
     name: 'Alexey Kondratov',
@@ -43,10 +40,16 @@ const members = [
     linkedinUrl: 'https://www.linkedin.com/in/alexeyko/',
   },
   {
-    photo: <StaticImage src="./images/konstantin-knizhnik-photo.jpg" alt="Konstantin Knizhnik" />,
-    name: 'Konstantin Knizhnik',
+    photo: <StaticImage src="./images/bojan-serafimov-photo.jpg" alt="Bojan Serafimov" />,
+    name: 'Bojan Serafimov',
     position: 'Software Engineer',
-    githubUrl: 'https://github.com/knizhnik',
+    githubUrl: 'https://github.com/bojan',
+  },
+  {
+    photo: <StaticImage src="./images/megan-fulcher-photo.jpg" alt="Megan Fulcher" />,
+    name: 'Megan Fulcher',
+    position: 'Business Operations Manager',
+    linkedinUrl: 'https://www.linkedin.com/in/megan-fulcher/',
   },
   {
     photo: (
@@ -58,10 +61,18 @@ const members = [
     linkedinUrl: 'https://www.linkedin.com/in/anastasia-lubennikova-8a2295a0/',
   },
   {
-    photo: <StaticImage src="./images/dmitry-ivanov-photo.jpg" alt="Dmitry Ivanov" />,
-    name: 'Dmitry Ivanov',
+    photo: <StaticImage src="./images/dhammikaa-pathirana-photo.jpg" alt="Dhammika Pathirana" />,
+    name: 'Dhammika Pathirana',
     position: 'Software Engineer',
-    githubUrl: 'https://github.com/funbringer',
+    githubUrl: 'https://github.com/dhammika',
+  },
+  {
+    photo: (
+      <StaticImage src="./images/matthias-van-de-meent-photo.jpg" alt="Matthias van de Meent" />
+    ),
+    name: 'Matthias van\u00a0de\u00a0Meent',
+    position: 'Software Engineer',
+    githubUrl: 'https://github.com/MMeent',
   },
   {
     photo: <StaticImage src="./images/arseny-sher-photo.jpg" alt="Arseny Sher" />,
@@ -69,18 +80,29 @@ const members = [
     position: 'Software Engineer',
     githubUrl: 'https://github.com/arssher',
   },
-
+  {
+    photo: <StaticImage src="./images/konstantin-knizhnik-photo.jpg" alt="Konstantin Knizhnik" />,
+    name: 'Konstantin Knizhnik',
+    position: 'Software Engineer',
+    githubUrl: 'https://github.com/knizhnik',
+  },
+  {
+    photo: <StaticImage src="./images/kate-klink-photo.jpg" alt="Kate Klink" />,
+    name: 'Kate Klink',
+    position: 'Growth & Marketing Manager',
+    githubUrl: 'https://github.com/klink',
+  },
+  {
+    photo: <StaticImage src="./images/dmitry-ivanov-photo.jpg" alt="Dmitry Ivanov" />,
+    name: 'Dmitry Ivanov',
+    position: 'Software Engineer',
+    githubUrl: 'https://github.com/funbringer',
+  },
   {
     photo: <StaticImage src="./images/polina-semenova-photo.jpg" alt="Polina Semenova" />,
     name: 'Polina Semenova',
     position: 'Software Engineer',
     githubUrl: 'https://github.com/seymourisdead',
-  },
-  {
-    photo: <StaticImage src="./images/megan-fulcher-photo.jpg" alt="Megan Fulcher" />,
-    name: 'Megan Fulcher',
-    position: 'Business Operations Manager',
-    linkedinUrl: 'https://www.linkedin.com/in/megan-fulcher/',
   },
   {
     photo: <StaticImage src="./images/peter-geoghegan-photo.jpg" alt="Peter Geoghegan" />,
@@ -107,6 +129,13 @@ const members = [
     githubUrl: 'https://github.com/SomeoneToIgnore',
   },
   {
+    photo: <StaticImage src="./images/anna-stepanyan-photo.jpg" alt="Anna Stepanyan" />,
+    name: 'Anna Stepanyan',
+    position: 'Head of Product',
+    linkedinUrl: 'https://www.linkedin.com/in/annastepanyan21/',
+    githubUrl: 'https://github.com/stepashka',
+  },
+  {
     photo: <StaticImage src="./images/egor-suvorov-photo.jpg" alt="Egor Suvorov" />,
     name: 'Egor Suvorov',
     position: 'Software Engineer',
@@ -119,19 +148,9 @@ const members = [
     githubUrl: 'https://github.com/cicdteam',
   },
   {
-    photo: (
-      <StaticImage src="./images/matthias-van-de-meent-photo.jpg" alt="Matthias van de Meent" />
-    ),
-    name: 'Matthias van\u00a0de\u00a0Meent',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/MMeent',
-  },
-  {
-    photo: <StaticImage src="./images/anna-stepanyan-photo.jpg" alt="Anna Stepanyan" />,
-    name: 'Anna Stepanyan',
-    position: 'Head of Product',
-    linkedinUrl: 'https://www.linkedin.com/in/annastepanyan21/',
-    githubUrl: 'https://github.com/stepashka',
+    photo: <StaticImage src="./images/irina-hliabovich-photo.jpg" alt="Irina Hliabovich" />,
+    name: 'Irina Hliabovich',
+    position: 'Chief of Staff',
   },
   {
     photo: <StaticImage src="./images/daniil-efimov-photo.jpg" alt="Daniil Efimov" />,
@@ -140,22 +159,16 @@ const members = [
     githubUrl: 'https://github.com/Daniel-ef',
   },
   {
-    photo: <StaticImage src="./images/anton-galitsyn-photo.jpg" alt="Anton Galitsyn" />,
-    name: 'Anton Galitsyn',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/agalitsyn',
-  },
-  {
-    photo: <StaticImage src="./images/bojan-serafimov-photo.jpg" alt="Bojan Serafimov" />,
-    name: 'Bojan Serafimov',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/bojanserafimov',
-  },
-  {
     photo: <StaticImage src="./images/anton-shyrabokau-photo.jpg" alt="Anton Shyrabokau" />,
     name: 'Anton Shyrabokau',
     position: 'Software Engineer',
     githubUrl: 'https://github.com/antons-antons',
+  },
+  {
+    photo: <StaticImage src="./images/anton-galitsyn-photo.jpg" alt="Anton Galitsyn" />,
+    name: 'Anton Galitsyn',
+    position: 'Software Engineer',
+    githubUrl: 'https://github.com/agalitsyn',
   },
   {
     photo: <StaticImage src="./images/anton-chaporgin-photo.jpg" alt="Anton Chaporgin" />,
@@ -164,15 +177,12 @@ const members = [
     githubUrl: 'https://github.com/antonyc',
   },
   {
-    photo: <StaticImage src="./images/dhammikaa-pathirana-photo.jpg" alt="Dhammika Pathirana" />,
-    name: 'Dhammika Pathirana',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/dhammika',
+    photo: <StaticImage src="./images/sergey-melnikov-photo.jpg" alt="Sergey Melnikov" />,
+    name: 'Sergey Melnikov',
+    position: 'Site Reliability Engineer',
+    githubUrl: 'https://github.com/SergeyMelnikov',
   },
 ];
-
-const sortedMembers = members.sort((a, b) => a.name.localeCompare(b.name));
-const allMembers = [...founders, ...sortedMembers];
 
 const Team = () => (
   <section className="safe-paddings pt-48 3xl:pt-44 2xl:pt-40 xl:pt-32 lg:pt-12 md:pt-6">
@@ -181,12 +191,12 @@ const Team = () => (
         Meet the team
       </Heading>
       <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-        The Neon team consists of Postgres contributors and technologists on a mission to create a
+        The Neon team consists of PostgreSQL contributors and technologists on a mission to create a
         cloud-native database service for every developer. Neon CEO is Nikita Shamgunov, co-founder
         of MemSQL / SingleStore.
       </p>
       <ul className="grid-gap-x mt-16 grid grid-cols-2 gap-y-20 xl:gap-y-10 lg:mt-12 md:mt-8 md:block md:space-y-8">
-        {allMembers.map(({ photo, name, position, githubUrl, linkedinUrl, twitterUrl }, index) => (
+        {members.map(({ photo, name, position, githubUrl, linkedinUrl, twitterUrl }, index) => (
           <li className="flex" key={index}>
             <div className="w-36 shrink-0 xs:w-32">{photo}</div>
             <div className="ml-5 xs:ml-3">
@@ -200,6 +210,7 @@ const Team = () => (
                     <Link
                       className="text-gray-2 transition-colors duration-200 hover:text-black"
                       to={githubUrl}
+                      target="_blank"
                     >
                       <span className="sr-only">Github</span>
                       <GithubIcon className="xs:h-6 xs:w-6" />
@@ -211,6 +222,7 @@ const Team = () => (
                     <Link
                       className="text-gray-2 transition-colors duration-200 hover:text-[#0a66c2]"
                       to={linkedinUrl}
+                      target="_blank"
                     >
                       <span className="sr-only">Linkedin</span>
                       <LinkedinIcon className="xs:h-6 xs:w-6" />
@@ -222,6 +234,7 @@ const Team = () => (
                     <Link
                       className="text-gray-2 transition-colors duration-200 hover:text-[#309ce8]"
                       to={twitterUrl}
+                      target="_blank"
                     >
                       <span className="sr-only">Twitter</span>
                       <TwitterIcon className="xs:h-6 xs:w-6" />
