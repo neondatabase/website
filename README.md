@@ -176,7 +176,7 @@ Reload VS Code and auto-format will work for you.
 
 ## Documentation
 
-Documentation is stored in [content/docs](./content/docs) folder. Sidebar data is stroed in [content/docs/sidebar.yaml](./content/docs/sidebar.yaml) file.
+Documentation is stored in [content/docs](./content/docs) folder. Sidebar data is stored in [content/docs/sidebar.yaml](./content/docs/sidebar.yaml) file.
 
 How docs folder work:
 
