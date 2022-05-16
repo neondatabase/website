@@ -21,7 +21,7 @@ const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
         {items.map(({ title, slug }, index) => (
           <li className="text-[0]" key={index}>
             <Link
-              className={clsx('py-2.5', {
+              className={clsx('!block py-2.5', {
                 'font-semibold text-primary-2': currentSlug === slug,
               })}
               to={`${DOCS_BASE_PATH}${slug}/`}

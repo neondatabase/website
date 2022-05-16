@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import { graphql } from 'gatsby';
-import React from 'react';
+import React, { useRef } from 'react';
 
 import MobileNav from 'components/pages/doc/mobile-nav';
 import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
 import Sidebar from 'components/pages/doc/sidebar';
+import TableOfContents from 'components/pages/doc/table-of-contents';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Layout from 'components/shared/layout';
@@ -23,6 +24,7 @@ const DocTemplate = ({
   pageContext: { sidebar, flatSidebar },
 }) => {
   const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar);
+  const contentRef = useRef(null);
 
   return (
     <Layout seo={SEO_DATA.doc({ title, description: excerpt })} headerTheme="white">
@@ -37,10 +39,11 @@ const DocTemplate = ({
           <div className="col-span-6 xl:col-span-9 lg:mt-6">
             <article>
               <h1 className="t-5xl font-semibold">{title}</h1>
-              <Content className="mt-5" content={body} />
+              <Content className="mt-5" content={body} ref={contentRef} />
             </article>
             <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
           </div>
+          <TableOfContents contentRef={contentRef} />
         </Container>
       </div>
     </Layout>
