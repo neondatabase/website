@@ -18,7 +18,7 @@ const DocTemplate = ({
       slug,
       excerpt,
       body,
-      frontmatter: { title },
+      frontmatter: { title, enableTableOfContents },
     },
   },
   pageContext: { sidebar, flatSidebar },
@@ -43,7 +43,7 @@ const DocTemplate = ({
             </article>
             <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
           </div>
-          <TableOfContents contentRef={contentRef} />
+          {enableTableOfContents && <TableOfContents contentRef={contentRef} />}
         </Container>
       </div>
     </Layout>
@@ -58,6 +58,7 @@ export const query = graphql`
       slug
       frontmatter {
         title
+        enableTableOfContents
       }
     }
   }
