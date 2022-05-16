@@ -1,5 +1,6 @@
 ---
 title: Concepts
+enableTableOfContents: true
 ---
 
 ## User

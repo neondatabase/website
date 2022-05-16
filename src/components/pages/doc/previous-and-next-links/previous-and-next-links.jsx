@@ -33,11 +33,16 @@ PreviousAndNextLinks.propTypes = {
   previousLink: PropTypes.exact({
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
   nextLink: PropTypes.exact({
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
+};
+
+PreviousAndNextLinks.defaultProps = {
+  previousLink: null,
+  nextLink: null,
 };
 
 export default PreviousAndNextLinks;
