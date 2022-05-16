@@ -176,13 +176,10 @@ Reload VS Code and auto-format will work for you.
 
 ## Documentation
 
-Documentation is in the [mdBook](https://rust-lang.github.io/mdBook/) format.
-To build it locally you need `mdbook` binaries installed:
+Documentation is stored in [content/docs](./content/docs) folder. Sidebar data is stroed in [content/docs/sidebar.yaml](./content/docs/sidebar.yaml) file.
 
-```bash
-cargo install mdbook
-cd docs
-mdbook build
-```
+How docs folder work:
 
-During the deploy documentation is automatically built by the `./build_docs.sh` script which places results into `public/docs`.
+How sidebar.yaml file work:
+
+How to add new documentation page:
