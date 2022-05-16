@@ -1,6 +1,6 @@
 ---
 title: About Neon
-enableTableOfContents: true
+enableTableOfContents:
 ---
 
 Neon is a fully managed serverless Postgres with a generous free tier.
