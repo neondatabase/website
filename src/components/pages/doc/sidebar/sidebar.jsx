@@ -19,7 +19,7 @@ const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
       </button>
       <ul className={clsx('pl-4', !isOpen && 'sr-only')}>
         {items.map(({ title, slug }, index) => (
-          <li className="text-[0]" key={index}>
+          <li key={index}>
             <Link
               className={clsx('!block py-2.5', {
                 'font-semibold text-primary-2': currentSlug === slug,

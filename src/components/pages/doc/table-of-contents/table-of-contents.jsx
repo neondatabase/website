@@ -17,11 +17,10 @@ const TableOfContents = ({ contentRef }) => {
     <div className="absolute top-0 bottom-10 col-start-11 col-end-13 h-full xl:hidden">
       <nav className="sticky top-10 bottom-10 max-h-[calc(100vh-40px-40px)] max-w-[260px] space-y-2 overflow-y-auto overflow-x-hidden pt-2">
         <span className="py-2.5 text-lg font-semibold leading-none">Table of contents</span>
-        <ul className="">
+        <ul>
           {items.map((item, index) => {
             const linkClassName =
               'py-2.5 block text-base leading-none transition-colors duration-200 hover:text-primary-2';
-
             const linkHref = `#${item.id}`;
 
             return (
@@ -46,12 +45,12 @@ const TableOfContents = ({ contentRef }) => {
 };
 
 TableOfContents.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  contentRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]),
-};
-
-TableOfContents.defaultProps = {
-  contentRef: null,
+  contentRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      current: PropTypes.instanceOf(typeof Element === 'undefined' ? () => {} : Element),
+    }),
+  ]).isRequired,
 };
 
 export default TableOfContents;
