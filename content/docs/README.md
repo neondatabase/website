@@ -1,11 +1,11 @@
-# Documentation
+# Docs
 
-Welcome to Neon documentation! This folder contains the source code of the [Neon documentation](https://neon.tech/docs/)
+Welcome to Neon docs! This folder contains the source code of the [Neon docs](https://neon.tech/docs/)
 
 ## Basic rules
 
-1. Every single Markdown file in this folder will be turned into a documentation page
-2. `slug` is generated based on the folder structure and file names inside `docs` folder. For example, [About Neon page](./cloud/about.md) will have [cloud/about] slug
+1. Every single Markdown file in this folder will be turned into a docs page
+2. `slug` is generated based on the folder structure and file names inside this folder. For example, [About Neon page](./cloud/about.md) will have slug `cloud/about`
 3. There is no need to add `h1` to the page since it will be displayed automatically with the value from `title` field
 
 ## Fields
