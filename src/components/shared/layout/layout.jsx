@@ -45,6 +45,7 @@ Layout.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     canonicalUrl: PropTypes.string,
+    pathname: PropTypes.string.isRequired,
   }),
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
   withOverflowHidden: PropTypes.bool,

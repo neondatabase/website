@@ -22,12 +22,16 @@ const DocTemplate = ({
     },
   },
   pageContext: { sidebar, flatSidebar },
+  location: { pathname },
 }) => {
   const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar);
   const contentRef = useRef(null);
 
   return (
-    <Layout seo={SEO_DATA.doc({ title, description: excerpt })} headerTheme="white">
+    <Layout
+      seo={{ ...SEO_DATA.doc({ title, description: excerpt }), pathname }}
+      headerTheme="white"
+    >
       <div className="safe-paddings pt-48 pb-48 3xl:pt-44 3xl:pb-44 2xl:pt-40 2xl:pb-40 xl:pt-32 xl:pb-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
         <Container className="grid-gap-x grid grid-cols-12 lg:block" size="md">
           <Sidebar

@@ -8,10 +8,9 @@ export default {
   earlyAccess: {
     title: 'Get Early Access — Neon',
   },
-  blog: ({ canonicalUrl }) => ({
+  blog: {
     title: 'Our Blog — Neon',
-    canonicalUrl,
-  }),
+  },
   blogPost: ({ title, description }) => ({
     title: `${title} — Neon`,
     description,

@@ -14,8 +14,9 @@ const StaticTemplate = ({
       frontmatter: { title },
     },
   },
+  location: { pathname },
 }) => (
-  <Layout seo={SEO_DATA.static({ title })} headerTheme="white">
+  <Layout seo={{ ...SEO_DATA.static({ title }), pathname }} headerTheme="white">
     <article className="safe-paddings py-48 3xl:py-44 2xl:py-40 xl:py-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
       <Container size="sm">
         <h1 className="t-5xl font-semibold">{title}</h1>
