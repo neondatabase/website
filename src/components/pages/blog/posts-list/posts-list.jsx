@@ -13,7 +13,7 @@ const PostsList = ({ items }) => (
       <div className="space-y-10 2xl:space-y-8 xl:space-y-7 md:space-y-6">
         {items.map(({ slug, frontmatter: { title, description, author } }, index) => (
           <article
-            className="relative border-b border-b-gray-3 pb-10 2xl:pb-8 xl:pb-7 md:pb-6"
+            className="relative border-b border-b-gray-4 pb-10 2xl:pb-8 xl:pb-7 md:pb-6"
             key={index}
           >
             <h1 className="t-4xl font-semibold !leading-tight">

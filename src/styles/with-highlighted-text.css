@@ -1,0 +1,7 @@
+@layer components {
+  .with-highlighted-text {
+    mark {
+      @apply bg-secondary-6;
+    }
+  }
+}

@@ -44,7 +44,7 @@ const JobsList = () => {
               <ul className="mt-7 2xl:mt-6 xl:mt-5">
                 {items.map(({ name, location, url }, index) => (
                   <li
-                    className="border-t border-t-gray-3 last:border-b last:border-b-gray-3"
+                    className="border-t border-t-gray-4 last:border-b last:border-b-gray-4"
                     key={index}
                   >
                     <Link

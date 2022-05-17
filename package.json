@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@mdx-js/react": "^1.6.22",
+    "algoliasearch": "^4.13.0",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1",
     "framer-motion": "^5.3.3",
@@ -38,6 +39,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
+    "react-instantsearch-dom": "^6.24.3",
     "react-intersection-observer": "^8.32.5",
     "react-paginate": "^8.1.0",
     "react-syntax-highlighter": "^15.5.0",

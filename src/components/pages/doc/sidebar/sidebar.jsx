@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import Link from 'components/shared/link';
+import Search from 'components/shared/search';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRight from 'icons/chevron-right.inline.svg';
+import algoliaQueries from 'utils/algolia-queries';
+
+const searchIndices = [
+  { name: algoliaQueries[0].indexName, title: 'Docs', hitComp: 'postPageHit' },
+];
 
 const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
   const [isOpen, setIsOpen] = useState(isOpenByDefault);
@@ -61,7 +67,8 @@ const Sidebar = ({ className, sidebar, currentSlug }) => {
 
   return (
     <aside className={className}>
-      <nav>
+      <Search indices={searchIndices} />
+      <nav className="mt-5">
         <ul className="space-y-2">
           {sidebar.map((item, index) => (
             <Item
