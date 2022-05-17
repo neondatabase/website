@@ -34,10 +34,10 @@ In order to add a new page, add a new item to `items` array with keys `title` an
 
 ## Code blocks
 
-All available languages for code blocks can be found [here](https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_PRISM.MD)
+All available languages for code blocks can be found [here](https://prismjs.com/index.html#supported-languages)
 
 ## Contributing
 
-For small changes and spelling fixes, we recommend using the GitHub UI because the markdown files are relatively easy to edit.
+For small changes and spelling fixes, we recommend using the GitHub UI because the markdown files are relatively easy to edit
 
-For larger contributions, consider running the project locally to see how the changes look like before making a pull request.
+For larger contributions, consider running the project locally to see how the changes look like before making a pull request
