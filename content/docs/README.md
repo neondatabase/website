@@ -2,17 +2,6 @@
 
 Welcome to Neon documentation! This folder contains the source code of the [Neon documentation](https://neon.tech/docs/)
 
-## Table of contents
-
-- [Basic rules](#basic-rules)
-- [Fields](#fields)
-- [Sidebar](#sidebar)
-  - [How to add a new category](#how-to-add-a-new-category)
-  - [How to add a new page](#how-to-add-a-new-page)
-- [Code blocks](#code-blocks)
-- [Other notes](#other-notes)
-- [Contributing](#contributing)
-
 ## Basic rules
 
 1. Every single Markdown file in this folder will be turned into a documentation page
