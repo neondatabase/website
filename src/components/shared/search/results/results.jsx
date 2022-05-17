@@ -80,7 +80,7 @@ const Results = ({ indices }) => {
   const [allResultsShown, setAllResultsShown] = useState(false);
 
   return (
-    <div className="overflow-hidden rounded-b border border-t-0 border-gray-3">
+    <div className="absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden rounded-b border border-t-0 border-gray-3 bg-white">
       <div className="max-h-[70vh] overflow-y-scroll pt-2.5">
         {indices.map((index) => (
           <HitsInIndex allResultsShown={allResultsShown} indexName={index.name} key={index.name} />

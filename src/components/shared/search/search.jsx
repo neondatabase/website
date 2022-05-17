@@ -1,14 +1,18 @@
 import algoliasearch from 'algoliasearch/lite';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useRef, useState, useMemo } from 'react';
 import { InstantSearch } from 'react-instantsearch-dom';
 
 import useClickOutside from 'hooks/use-click-outside';
+import algoliaQueries from 'utils/algolia-queries';
 
 import Input from './input';
 import Results from './results';
 
-const Search = ({ indices }) => {
+const indices = [{ name: algoliaQueries[0].indexName, title: 'Docs', hitComp: 'postPageHit' }];
+
+const Search = ({ className }) => {
   const ref = useRef(null);
   const [query, setQuery] = useState();
   const [hasFocus, setFocus] = useState(false);
@@ -22,7 +26,7 @@ const Search = ({ indices }) => {
   const shouldShowResult = !!query?.length && hasFocus;
 
   return (
-    <div ref={ref}>
+    <div className={clsx('relative', className)} ref={ref}>
       <InstantSearch
         searchClient={searchClient}
         indexName={indices[0].name}
@@ -36,13 +40,11 @@ const Search = ({ indices }) => {
 };
 
 Search.propTypes = {
-  indices: PropTypes.arrayOf(
-    PropTypes.exact({
-      name: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      hitComp: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  className: PropTypes.string,
+};
+
+Search.defaultProps = {
+  className: null,
 };
 
 export default Search;

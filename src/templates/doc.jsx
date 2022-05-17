@@ -8,6 +8,7 @@ import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Layout from 'components/shared/layout';
+import Search from 'components/shared/search';
 import SEO_DATA from 'constants/seo-data';
 import getDocPreviousAndNextLinks from 'utils/get-doc-previous-and-next-links';
 
@@ -33,7 +34,8 @@ const DocTemplate = ({
             sidebar={sidebar}
             currentSlug={slug}
           />
-          <MobileNav className="hidden lg:block" sidebar={sidebar} currentSlug={slug} />
+          <Search className="hidden lg:block" />
+          <MobileNav className="mt-5 hidden lg:block" sidebar={sidebar} currentSlug={slug} />
           <div className="col-span-6 xl:col-span-9 lg:mt-6">
             <article>
               <h1 className="t-5xl font-semibold">{title}</h1>
