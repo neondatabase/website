@@ -21,6 +21,7 @@ module.exports = async ({ graphql, actions }) => {
           filter: {
             fileAbsolutePath: { regex: "/content/docs/" }
             fields: { isDraft: { in: $draftFilter } }
+            slug: { ne: "README" }
           }
         ) {
           nodes {

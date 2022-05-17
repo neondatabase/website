@@ -13,7 +13,7 @@
   - [ESLint](#eslint)
   - [Prettier](#prettier)
   - [VS Code](#vs-code)
-- [Documentation](#docs)
+- [Docs](#docs)
 
 ## Getting Started
 
@@ -174,12 +174,6 @@ To enable Prettier go to Preferences -> Settings -> type "Format". Then check th
 
 Reload VS Code and auto-format will work for you.
 
-## Documentation
+## Docs
 
-Documentation is stored in [content/docs](./content/docs) folder. Sidebar data is stored in [content/docs/sidebar.yaml](./content/docs/sidebar.yaml) file.
-
-How docs folder work:
-
-How sidebar.yaml file work:
-
-How to add new documentation page:
+Documentation for docs is described in [content/docs/README.md](./content/docs/README.md)
