@@ -130,7 +130,7 @@ That's it! Now you don't have to worry about bundling Chrome or it's dependencie
 
 Below is a sample cURL call that will use your new service to ensure it's all working:
 
-```sh
+```bash
 curl -X GET -o temp.png http://localhost:8080/image
 ```
 
@@ -161,7 +161,7 @@ Once that's setup, be sure to verify your script works locally before proceeding
 
 Once you have script working locally, the next step is to specify browserless as the remote server. This will give you the ability to run multiple browsers in parallel, greatly reducing the amount of time your tests take.
 
-```rb
+```ruby
 # You must specify --headless and --no-sandbox
 caps = Selenium::WebDriver::Remote::Capabilities.chrome("goog:chromeOptions" => {
   "args" => [

@@ -55,7 +55,7 @@
       @apply w-full border-hidden md:min-w-[500px];
 
       th {
-        @apply border border-gray-3 bg-secondary-6 bg-opacity-30 p-3.5 md:px-2;
+        @apply border border-gray-3 !bg-[#FBFBFB] bg-opacity-30 p-3.5 md:px-2;
       }
 
       td {
@@ -64,19 +64,17 @@
     }
 
     pre {
-      @apply bg-[#E5E5E5];
+      @apply !bg-[#FBFBFB];
+
       code {
-        text-shadow: unset !important;
+        text-shadow: unset;
 
-        @apply !bg-[#E5E5E5] !font-mono !text-base !text-black;
+        @apply !font-mono !text-base !text-black;
 
-        .token {
-          @apply bg-[#E5E5E5] !bg-transparent;
-        }
         .token.atrule,
         .token.attr-value,
         .token.keyword {
-          @apply text-[#6A4CFF];
+          @apply !text-[#6A4CFF];
         }
 
         .token.function,
@@ -108,7 +106,7 @@
         .token.char,
         .token.builtin,
         .token.inserted {
-          @apply text-[#00B277];
+          @apply !text-[#00B277];
         }
 
         .token.punctuation {
@@ -125,8 +123,7 @@
     }
 
     :not(pre) > code {
-      /* Background color was takn from default Prisma theme that was used at the moment */
-      @apply !rounded-sm bg-[#E5E5E5] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
+      @apply !rounded-sm  !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
 
       &::before,
       &::after {

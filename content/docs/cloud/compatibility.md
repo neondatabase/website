@@ -36,7 +36,7 @@ List of configuration parameters Neon uses by default:
 
 To check settings that differ from PostgreSQL defaults, run this query:
 
-```SQL
+```plsql
 select * from pg_settings where source <> 'default';
 ```
 

@@ -16,7 +16,7 @@ To connect Prisma-based app to Neon you need to specify `postgresql` datasource 
 
 First, add the following to the `prisma/schema.prisma`:
 
-```prisma
+```typescript
 datasource db {
   provider = "postgresql"
   url   = env("DATABASE_URL")
@@ -37,7 +37,7 @@ For example, you can configure Prisma in the following way:
 
 in `prisma/schema.prisma`:
 
-```prisma
+```typescript
 datasource db {
   provider = "postgresql"
   url   = env("DATABASE_URL")

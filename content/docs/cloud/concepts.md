@@ -69,18 +69,22 @@ Neon separates storage and compute and stores data in its own internal format.
 Data Size limit applies to the logical size of the Project. The logical size is the sum of all relation sizes in the Project.
 If you are familiar with PostgreSQL, the logical size is roughly equal to
 
-```postgresql
+```sql
 select pg_size_pretty(sum(pg_database_size(datname)))
 from pg_database;
 ```
 
 To check the logical size run the following query:
 
-`select pg_size_pretty(neon.pg_cluster_size());`
+```sql
+select pg_size_pretty(neon.pg_cluster_size());
+```
 
 When the limit is reached, you will see the PostgreSQL error message:
 
-`could not extend file because cluster size limit (10240 MB) has been exceeded`
+```text
+could not extend file because cluster size limit (10240 MB) has been exceeded
+```
 
 ### Point in Time Reset
 
