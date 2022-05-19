@@ -55,7 +55,7 @@
       @apply w-full border-hidden md:min-w-[500px];
 
       th {
-        @apply border border-gray-3 !bg-[#FBFBFB] bg-opacity-30 p-3.5 md:px-2;
+        @apply border border-gray-3 !bg-secondary-6 bg-opacity-30 p-3.5 md:px-2;
       }
 
       td {
@@ -74,7 +74,7 @@
         .token.atrule,
         .token.attr-value,
         .token.keyword {
-          @apply !text-[#6A4CFF];
+          @apply text-[#6A4CFF];
         }
 
         .token.function,
@@ -123,7 +123,7 @@
     }
 
     :not(pre) > code {
-      @apply !rounded-sm  !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
+      @apply !rounded-sm bg-[#FBFBFB] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
 
       &::before,
       &::after {
