@@ -64,7 +64,7 @@
     }
 
     pre {
-      @apply !bg-[#FBFBFB];
+      @apply !border-[1px] !border-[#E5E5E5] !bg-[#FBFBFB];
 
       code {
         text-shadow: unset;
