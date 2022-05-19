@@ -2,7 +2,7 @@
 title: Run a Django App
 ---
 
-Django is one of the most popular backend frameworks. Because Neon is fully compatible with vanilla PostgreSQL, you only need to fill in the correct connection details. To use Neon with Django, you have create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
+Django is one of the most popular backend frameworks. Because Neon is fully compatible with vanilla PostgreSQL, you only need to fill in the correct connection details. To use Neon with Django, you have to create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
 
 See the following example of specifying connection properties for Neon:
 
