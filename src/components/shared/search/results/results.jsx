@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Index,
   connectHits,
@@ -13,9 +13,17 @@ import Link from 'components/shared/link';
 import AlgoliaLogo from './images/algolia-logo.inline.svg';
 import ChevronBottomIcon from './images/chevron-bottom.inline.svg';
 
-const HitCount = connectStateResults(({ searchResults }) => {
+const HitCount = connectStateResults(({ searchResults, setShouldShowAllResultsButton }) => {
   const hitCount = searchResults?.nbHits;
   const query = searchResults?.query;
+
+  useEffect(() => {
+    if (searchResults?.nbHits && searchResults?.nbHits > 5) {
+      setShouldShowAllResultsButton(true);
+    } else {
+      setShouldShowAllResultsButton(false);
+    }
+  }, [setShouldShowAllResultsButton, searchResults?.nbHits]);
 
   return (
     <div className="px-2.5 text-xs">
@@ -64,30 +72,22 @@ const Hits = connectHits(({ hits, showAll }) =>
   ) : null
 );
 
-const HitsInIndex = ({ indexName, allResultsShown }) => (
-  <Index indexName={indexName}>
-    <HitCount />
-    <Hits showAll={allResultsShown} />
-  </Index>
-);
-
-HitsInIndex.propTypes = {
-  indexName: PropTypes.string.isRequired,
-  allResultsShown: PropTypes.bool.isRequired,
-};
-
 const Results = ({ indices }) => {
+  const [shouldShowAllResultsButton, setShouldShowAllResultsButton] = useState(false);
   const [allResultsShown, setAllResultsShown] = useState(false);
 
   return (
     <div className="absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden rounded-b border border-t-0 border-gray-3 bg-white">
       <div className="max-h-[70vh] overflow-y-scroll pt-2.5">
-        {indices.map((index) => (
-          <HitsInIndex allResultsShown={allResultsShown} indexName={index.name} key={index.name} />
+        {indices.map(({ name }) => (
+          <Index indexName={name} key={name}>
+            <HitCount setShouldShowAllResultsButton={setShouldShowAllResultsButton} />
+            <Hits showAll={allResultsShown} />
+          </Index>
         ))}
       </div>
       <div className="flex justify-between bg-gray-5 p-2.5">
-        {!allResultsShown && (
+        {!allResultsShown && shouldShowAllResultsButton && (
           <button
             className="flex items-baseline space-x-1.5 text-xs font-bold uppercase leading-none text-primary-1 transition-colors duration-200 hover:text-[#00e5bf]"
             type="button"
