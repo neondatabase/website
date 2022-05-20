@@ -64,12 +64,12 @@
     }
 
     pre {
-      @apply !border-[1px] !border-[#E5E5E5] !bg-[#FBFBFB];
+      @apply !border !border-[#E5E5E5] !bg-[#FBFBFB];
 
       code {
         text-shadow: unset;
 
-        @apply !font-mono !text-base !text-black;
+        @apply !font-mono  !text-base !text-black;
 
         .token.atrule,
         .token.attr-value,
@@ -123,7 +123,7 @@
     }
 
     :not(pre) > code {
-      @apply !rounded-sm bg-[#FBFBFB] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
+      @apply !rounded-md !border !border-[#E5E5E5] bg-[#FBFBFB] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
 
       &::before,
       &::after {
