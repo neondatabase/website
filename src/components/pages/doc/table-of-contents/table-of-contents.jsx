@@ -44,7 +44,7 @@ const TableOfContents = ({ contentRef }) => {
               <li key={index}>
                 {item.localName === 'h2' && (
                   <a
-                    className={clsx(linkClassName, 'font-semibold')}
+                    className={linkClassName}
                     href={linkHref}
                     onClick={(e) => handleAnchorClick(e, linkHref)}
                   >
