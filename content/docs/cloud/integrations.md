@@ -76,7 +76,7 @@ To connect a Prisma-based app to Neon you need to specify a `postgresql` datasou
 
 First, add the following to the `prisma/schema.prisma`:
 
-```prisma
+```typescript
 datasource db {
   provider = "postgresql"
   url   = env("DATABASE_URL")
@@ -97,7 +97,7 @@ For example, you can configure Prisma in the following way:
 
 in `prisma/schema.prisma`:
 
-```prisma
+```typescript
 datasource db {
   provider = "postgresql"
   url   = env("DATABASE_URL")
@@ -118,7 +118,7 @@ Django is one of the most popular Python backend frameworks. Django has built-in
 
 See the following example of specifying connection properties for Neon:
 
-```json
+```django
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

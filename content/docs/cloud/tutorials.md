@@ -36,7 +36,7 @@ Select the SQL Editor tab.
 
 Paste a query
 
-```postgresql
+```sql
 create table t (c int);
 insert into t select generate_series(1,100);
 select count(*) from t;
@@ -58,7 +58,7 @@ psql -h pg.neon.tech -U username@neon main
 
 Run a simple query:
 
-```postgresql
+```sql
 create my_table as select now();
 select * from my_table;
 ```

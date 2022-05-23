@@ -64,18 +64,66 @@
     }
 
     pre {
+      @apply !border !border-[#E5E5E5] !bg-[#FBFBFB];
+
       code {
+        text-shadow: unset;
+
         @apply !font-mono !text-base !text-black;
 
-        .token {
-          @apply !bg-transparent;
+        .token.atrule,
+        .token.attr-value,
+        .token.keyword {
+          @apply text-[#6A4CFF];
+        }
+
+        .token.function,
+        .token.class-name {
+          @apply text-[#FF3366];
+        }
+
+        .token.operator,
+        .token.entity,
+        .token.url,
+        .language-css .token.string,
+        .style .token.string {
+          @apply text-[#7e428a];
+        }
+
+        .token.property,
+        .token.tag,
+        .token.boolean,
+        .token.number,
+        .token.constant,
+        .token.symbol,
+        .token.deleted {
+          @apply text-[#FF8C1A];
+        }
+
+        .token.selector,
+        .token.attr-name,
+        .token.string,
+        .token.char,
+        .token.builtin,
+        .token.inserted {
+          @apply !text-[#00B277];
+        }
+
+        .token.punctuation {
+          @apply text-[#737373];
+        }
+
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+          @apply text-[#a6a6a6];
         }
       }
     }
 
     :not(pre) > code {
-      /* Background color was takn from default Prisma theme that was used at the moment */
-      @apply !rounded-sm bg-[rgb(245,242,240)] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
+      @apply !rounded-sm !border !border-[#E5E5E5] bg-[#FBFBFB] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
 
       &::before,
       &::after {
