@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import Link from 'components/shared/link';
+import Search from 'components/shared/search';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
@@ -61,7 +62,8 @@ const Sidebar = ({ className, sidebar, currentSlug }) => {
 
   return (
     <aside className={className}>
-      <nav>
+      <Search />
+      <nav className="mt-5">
         <ul className="space-y-2">
           {sidebar.map((item, index) => (
             <Item

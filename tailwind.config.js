@@ -34,7 +34,9 @@ module.exports = {
       gray: {
         1: '#262626',
         2: '#404040',
-        3: '#e5e5e5',
+        3: '#b3b3b3',
+        4: '#e5e5e5',
+        5: '#fafafa',
       },
     },
     extend: {

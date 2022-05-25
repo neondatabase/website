@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@mdx-js/react": "^1.6.22",
+    "algoliasearch": "^4.13.0",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1",
     "framer-motion": "^5.3.3",
@@ -38,6 +39,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
+    "react-instantsearch-dom": "^6.24.3",
     "react-intersection-observer": "^8.32.5",
     "react-paginate": "^8.1.0",
     "react-syntax-highlighter": "^15.5.0",
@@ -59,6 +61,7 @@
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
     "gatsby-alias-imports": "^1.0.6",
+    "gatsby-plugin-algolia-search": "^0.5.7",
     "gatsby-plugin-google-tagmanager": "^4.11.1",
     "gatsby-plugin-manifest": "^4.3.0",
     "gatsby-plugin-meta-redirect": "^1.1.1",
