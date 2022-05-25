@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -14,7 +15,7 @@ import Storage from 'components/pages/home/storage';
 import Layout from 'components/shared/layout';
 import Subscribe from 'components/shared/subscribe';
 
-const HomePage = () => {
+const HomePage = ({ location: { pathname } }) => {
   const [firstSectionWithLinesRef, isFirstSectionWithLinesInView] = useInView({
     rootMargin: '100px 0px',
     triggerOnce: true,
@@ -26,7 +27,7 @@ const HomePage = () => {
   });
 
   return (
-    <Layout headerTheme="black" withOverflowHidden>
+    <Layout seo={{ pathname }} headerTheme="black" withOverflowHidden>
       <div className="relative overflow-hidden" ref={firstSectionWithLinesRef}>
         {isFirstSectionWithLinesInView && <Lines1 />}
         <Hero />

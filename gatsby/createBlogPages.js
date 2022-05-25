@@ -39,7 +39,6 @@ module.exports = async ({ graphql, actions }) => {
         limit: BLOG_POSTS_PER_PAGE,
         skip: i * BLOG_POSTS_PER_PAGE,
         draftFilter: DRAFT_FILTER,
-        canonicalUrl: `${process.env.GATSBY_DEFAULT_SITE_URL}${pagePath}`,
       },
     });
   });

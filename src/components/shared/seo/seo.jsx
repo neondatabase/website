@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-const SEO = ({ title, description, canonicalUrl }) => {
+const SEO = ({ title, description, pathname, canonicalUrl }) => {
   const {
     site: {
       siteMetadata: { siteTitle, siteDescription, siteUrl, siteImage, siteLanguage },
@@ -22,6 +22,8 @@ const SEO = ({ title, description, canonicalUrl }) => {
     }
   `);
 
+  const currentUrl = pathname !== '/' ? `${siteUrl}${pathname}` : siteUrl;
+
   return (
     <Helmet
       title={title || siteTitle}
@@ -35,12 +37,13 @@ const SEO = ({ title, description, canonicalUrl }) => {
       {/* Open Graph */}
       <meta property="og:title" content={title || siteTitle} />
       <meta property="og:description" content={description || siteDescription} />
-      <meta property="og:url" content={siteUrl} />
+      <meta property="og:url" content={currentUrl} />
       <meta property="og:image" content={siteUrl + siteImage} />
       <meta property="og:type" content="website" />
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+      {/* Canonical */}
+      <link rel="canonical" href={canonicalUrl || currentUrl} />
     </Helmet>
   );
 };
@@ -48,6 +51,7 @@ const SEO = ({ title, description, canonicalUrl }) => {
 SEO.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
+  pathname: PropTypes.string.isRequired,
   canonicalUrl: PropTypes.string,
 };
 
