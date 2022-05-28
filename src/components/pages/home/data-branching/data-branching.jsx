@@ -31,7 +31,7 @@ const DataBranching = () => {
           </p>
 
           <p className="t-xl mt-8 3xl:max-w-[504px] 2xl:mt-7 2xl:max-w-[416px] xl:mt-6 lg:max-w-none">
-            Branches are virtually free and implemented using the "copy of write" technique.
+            Branches are virtually free and implemented using the "copy on write" technique.
           </p>
           {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-primary-1">
           Getting started with data branching
