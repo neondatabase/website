@@ -16,10 +16,7 @@ const Footer = () => (
         </Link>
         <div className="t-base space-y-6 xl:space-y-4 md:mt-8">
           <p>
-            Creative design by{' '}
-            <Link to="https://pixelpoint.io/" theme="black" target="_blank" rel="noopener">
-              Pixel Point
-            </Link>
+            Maid in SF and the World
           </p>
           <p>Neon 2022 Ⓒ All rights reserved</p>
         </div>
