@@ -14,7 +14,5 @@ For example, if you configure your Symfony project with `.env` file, then DATABA
 
 ```shell
 # cat .env | grep DATABASE_URL
-DATABASE_URL="postgresql://<user>%40neon:<token>@pg.neon.tech:5432/<project_id>?charset=utf8"
+DATABASE_URL="postgresql://<user>:<token>@<project_id>.cloud.neon.tech:5432/main?charset=utf8"
 ```
-
-Make sure that you are using `<user>%40neon` as username. This is url encoded value for `<user>@neon`. You can find `<user>` string in the upper right corner of the UI.

@@ -15,8 +15,8 @@ from sqlalchemy import create_engine
 
 USERNAME = # Your GitHub username
 TOKEN = # Token generated in "Connection Details" tab
-DBNAME = # Name of your project
-CONNSTR = f'postgresql://{USERNAME}@neon:{TOKEN}@start.stage.neon.tech/{DBNAME}
+PROJECT_ID = # Name of your project
+CONNSTR = f'postgresql://{USERNAME}:{TOKEN}@{PROJECT_ID}.cloud.neon.tech/main
 
 engine = create_engine(CONNSTR)
 ```
@@ -33,7 +33,7 @@ Psycopg2 is the most popular python library for running raw postgres queries. If
 To get started writing postgres queries against neon via psycopg2:
 
 1. Register on Neon cloud service and create a project
-2. Navigate to your Project on console.neon.tech and find the Postgres Username and access token in the “Connection Details” section. The Postgres Username should end with @neon.
+2. Navigate to your Project on console.neon.tech and find the Postgres Username and access token in the “Connection Details” section.
 3. Install psycopg2. You might also need psycopg2-binary depending on your system. You can run “pip install psycopg2 psycopg2-binary” or use a dependency manager like poetry to do the same.
 4. Run the “hello neon” program:
 
