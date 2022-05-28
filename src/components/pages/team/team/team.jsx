@@ -61,12 +61,6 @@ const members = [
     linkedinUrl: 'https://www.linkedin.com/in/anastasia-lubennikova-8a2295a0/',
   },
   {
-    photo: <StaticImage src="./images/dhammikaa-pathirana-photo.jpg" alt="Dhammika Pathirana" />,
-    name: 'Dhammika Pathirana',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/dhammika',
-  },
-  {
     photo: (
       <StaticImage src="./images/matthias-van-de-meent-photo.jpg" alt="Matthias van de Meent" />
     ),
@@ -136,6 +130,11 @@ const members = [
     githubUrl: 'https://github.com/stepashka',
   },
   {
+    photo: <StaticImage src="./images/irina-hliabovich-photo.jpg" alt="Irina Hliabovich" />,
+    name: 'Irina Hliabovich',
+    position: 'Chief of Staff',
+  },
+  {
     photo: <StaticImage src="./images/egor-suvorov-photo.jpg" alt="Egor Suvorov" />,
     name: 'Egor Suvorov',
     position: 'Software Engineer',
@@ -148,28 +147,19 @@ const members = [
     githubUrl: 'https://github.com/cicdteam',
   },
   {
-    photo: <StaticImage src="./images/irina-hliabovich-photo.jpg" alt="Irina Hliabovich" />,
-    name: 'Irina Hliabovich',
-    position: 'Chief of Staff',
+    photo: <StaticImage src="./images/anton-galitsyn-photo.jpg" alt="Anton Galitsyn" />,
+    name: 'Anton Galitsyn',
+    position: 'Software Engineer',
+    githubUrl: 'https://github.com/agalitsyn',
   },
+
   {
     photo: <StaticImage src="./images/daniil-efimov-photo.jpg" alt="Daniil Efimov" />,
     name: 'Daniil Efimov',
     position: 'Software Engineer',
     githubUrl: 'https://github.com/Daniel-ef',
   },
-  {
-    photo: <StaticImage src="./images/anton-shyrabokau-photo.jpg" alt="Anton Shyrabokau" />,
-    name: 'Anton Shyrabokau',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/antons-antons',
-  },
-  {
-    photo: <StaticImage src="./images/anton-galitsyn-photo.jpg" alt="Anton Galitsyn" />,
-    name: 'Anton Galitsyn',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/agalitsyn',
-  },
+
   {
     photo: <StaticImage src="./images/anton-chaporgin-photo.jpg" alt="Anton Chaporgin" />,
     name: 'Anton Chaporgin',
