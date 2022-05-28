@@ -26,7 +26,7 @@ datasource db {
 Then, go to the Project dashboard in Neon and generate a connection string in `Connection Details` widget. You can specify this connection string in `.env`:
 
 ```shell
-DATABASE_URL=postgres://user:pass@start.stage.neon.tech/project-name-123
+DATABASE_URL=postgres://user:pass@project-name-123.cloud.neon.tech/main
 ```
 
 #### Using Neon for development with Prisma

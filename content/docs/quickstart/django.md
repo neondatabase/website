@@ -11,9 +11,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': '<here goes your project id>',
-        'USER': '<your github nickname from account used to authenticate in neon>@neon,
+        'USER': '<your github username used to authenticate to neon>,
         'PASSWORD': '<token generated in "Connection Details" tab>',
-        'HOST': 'pg.neon.tech',
+        'HOST': '<your project id>.cloud.neon.tech',
         'PORT': '5432',
     }
 }

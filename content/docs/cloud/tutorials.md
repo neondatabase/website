@@ -10,7 +10,7 @@ as copying database from one server to another. Postgres provides several ways t
 The most straightforward and efficient is to use the `pg_dump` utility:
 
 ```bash
-pg_dump -h HOST-U USER DBNAME|psql -h pg.neon.tech -U username@neon main
+pg_dump -h HOST-U USER DBNAME|psql -h pg.neon.tech main
 ```
 
 You may need to make `pg_dump` to create data in non-plain-text format.
@@ -53,7 +53,7 @@ In the console go to the Project Dashboard, click “Generate Token” button, a
 Copy the connection string and run it in the shell:
 
 ```bash
-psql -h pg.neon.tech -U username@neon main
+psql -h postgres://<username>@<project_id>.cloud.neon.tech main
 ```
 
 Run a simple query:
