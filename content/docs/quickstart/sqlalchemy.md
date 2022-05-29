@@ -16,7 +16,7 @@ from sqlalchemy import create_engine
 USERNAME = # Your GitHub username
 TOKEN = # Token generated in "Connection Details" tab
 PROJECT_ID = # Name of your project
-CONNSTR = f'postgresql://{USERNAME}:{TOKEN}@{PROJECT_ID}.cloud.neon.tech/main
+CONNSTR = f'postgresql://{USERNAME}:{TOKEN}@{PROJECT_ID}.cloud.neon.tech/main'
 
 engine = create_engine(CONNSTR)
 ```
