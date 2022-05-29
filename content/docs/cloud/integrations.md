@@ -155,7 +155,7 @@ from sqlalchemy import create_engine
 USERNAME = # Your GitHub username
 TOKEN = # Token generated in "Connection Details" tab
 DBNAME = # Name of your project
-CONNSTR = f'postgresql://{USERNAME}:{TOKEN}@pg.neon.tech/{DBNAME}
+CONNSTR = f'postgresql://{USERNAME}:{TOKEN}@pg.neon.tech/{DBNAME}'
 
 engine = create_engine(CONNSTR)
 ```
@@ -279,7 +279,7 @@ First, obtain secret token from “Connection details” panel:
 
 1. Select Project you wish to use in the UI. Click on it.
 2. Click “Generate token” link.
-3. Substitue token placeholder below with this token.
+3. Substitute token placeholder below with this token.
 
 For example, if you configure your Symfony project with `.env` file, then DATABASE_URL entry in `.env` file should look like this:
 
