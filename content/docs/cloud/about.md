@@ -3,7 +3,7 @@ title: About Neon
 ---
 
 Neon is a fully managed serverless Postgres with a generous free tier.
-Neon separates storage and compute, offering modern developer features such as serverless, branching, bottomless storage, and many more.
+Neon separates storage and compute, offering modern developer features such as serverless, branching, bottomless storage, and more.
 Neon is open source and written in Rust.
 
 ## Serverless
@@ -40,4 +40,4 @@ Check [neondatabase](https://github.com/neondatabase/neon) on GitHub and [our ar
 
 ## Compatibility
 
-Neon compute is the latest version of Postgres. Currently we are using Postgres 14. It is 100% compatible with your app written against the official release of Postgres.
+Neon compute is the latest version of [PostgreSQL](https://www.postgresql.org/docs/14/release-14.html). Currently, we are using PostgreSQL 14. It is 100% compatible with your app written against the official release of Postgres.
