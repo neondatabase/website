@@ -2,13 +2,23 @@
 title: Run a SQL Alchemy App
 ---
 
+### Introduction
+
 SQLAlchemy is among the most popular ORMs in the Python universe. Because Neon is fully compatible with vanilla PostgreSQL, you only need to fill in the correct connection details.
 
-Prerequisites:
+## Prerequisites
 
-Here we assume that you have already created a project on Neon cloud service and have sqlalchemy installed with a PostgreSQL driver (example assumes psycopg2 - the default one for PostgreSQL in SQLAlchemy). For installation details see corresponding pages for [SQLAlchemy](https://docs.sqlalchemy.org/en/14/intro.html#installation) and [psycopg2](https://www.psycopg.org/docs/install.html).
+To complete this section, you will need:
 
-SQLALchemy uses Engine abstraction to manage database connections and exposes a `create_engine` function as the primary endpoint for engine initialization. See the following example on how to create SQLAlchemy engine pointing to the Neon Project.
+- Already created a Project on Neon Cloud service
+- Have SQLalchemy installed with a PostgresSQL driver (such as psycopg2, the default driver for PostgreSQL in SQLAlchemy)
+  - Use the following guide for installation details on [SQLAlchemy](https://docs.sqlalchemy.org/en/14/intro.html#installation) and [psycopg2](https://www.psycopg.org/docs/install.html).
+
+## Step 1 — Create SQLAlchemy engine pointing to the Neon Project
+
+SQLALchemy uses Engine abstraction to manage database connections and exposes a `create_engine` function as the primary endpoint for engine initialization.
+
+See the following example on how to create SQLAlchemy engine pointing to the Neon Project:
 
 ```python
 from sqlalchemy import create_engine
@@ -21,21 +31,24 @@ CONNSTR = f'postgresql://{USERNAME}:{TOKEN}@{PROJECT_ID}.cloud.neon.tech/main'
 engine = create_engine(CONNSTR)
 ```
 
-References:
+## References
 
 - [Establishing Connectivity - the Engine](https://docs.sqlalchemy.org/en/14/tutorial/engine.html)
 - [Connecting to PostgreSQL with SQLAlchemy](https://docs.sqlalchemy.org/en/14/core/engines.html#postgresql)
 
-### Using from python + psycopg2
+## Step 2 — Using from Python + psycopg2
 
-Psycopg2 is the most popular python library for running raw postgres queries. If you’re interested in a higher-level ORM on top of psycopg2, see our guides on [SQLAlchemy](#using-from-sqlalchemy) and [Django](#using-from-django).
+Psycopg2 is the most popular python library for running raw postgres queries. If you are interested in a higher-level ORM on top of psycopg2, see our guides on [SQLAlchemy](#using-from-sqlalchemy) and [Django](#using-from-django).
 
-To get started writing postgres queries against neon via psycopg2:
+This step will cover how to get started with writing postgres queries against Neon via psycopg2.
 
-1. Register on Neon cloud service and create a project
-2. Navigate to your Project on console.neon.tech and find the Postgres Username and access token in the “Connection Details” section.
-3. Install psycopg2. You might also need psycopg2-binary depending on your system. You can run “pip install psycopg2 psycopg2-binary” or use a dependency manager like poetry to do the same.
-4. Run the “hello neon” program:
+First, register on the Neon cloud service and create a Project.
+
+Next, navigate to your Project on [console.neon.tech](console.neon.tech/).
+
+Then, install psycopg2. You may also need psycopg2-binary depending on your system. To install psycopg2-binary, You can run “pip install psycopg2 psycopg2-binary” or use a dependency manager like [Poetry](https://python-poetry.org/) to do the same.
+
+Finally, run the “hello neon” program:
 
 ```python
 import psycopg2
@@ -62,6 +75,10 @@ with conn.cursor() as cur:
  print(cur.fetchall())
 ```
 
-5. Build great things with Neon! Any postgres tutorial will be able to guide you on the syntax.
+_Note: This example was tested with Python 3 and psycopg2 version 2.9.3._
 
-Note: This example was tested with python 3 and psycopg2 version 2.9.3
+Now, build great things with Neon! Any Postgres tutorial will be able to guide you on the syntax.
+
+## Conclusion
+
+In this section, you have learned how to create SQLAlchemy engine that points to your Neon Project and write Postgres queries using psycopg2.
