@@ -1,14 +1,18 @@
 ---
-title: Run a Symphony app
+title: Run a Symfony app
 ---
 
-Symfony is a framework for building web applications in PHP. Symfony uses Doctrine library to access database. Using Neon from Symfony + Doctrine is straightforward and differs nothing from using a vanilla postgresql.
+### Introduction
 
-First, obtain secret token from “Connection details” panel:
+Symfony is a framework for building web applications in PHP. Symfony uses Doctrine library to access database. Using Neon from Symfony + Doctrine is straightforward and differs nothing from using a vanilla PostgreSQL.
 
-1. Select Project you wish to use in the UI. Click on it.
-2. Click “Generate token” link.
-3. Substitue token placeholder below with this token.
+## Step 1 — Obtain Secret token from "Connection Details" Panel
+
+## Step 2 — Select Project in the UI
+
+## Step 3 — Click "Generate token" link
+
+## Step 4 — Substitute token placeholder below with this token
 
 For example, if you configure your Symfony project with `.env` file, then DATABASE_URL entry in `.env` file should look like this:
 
