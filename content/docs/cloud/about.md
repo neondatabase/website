@@ -31,7 +31,6 @@ You can learn more about quick and cheap [_branching_](../concepts#branches-comi
 
 Neon Storage is designed with cloud costs in mind and uses a multi-tier architecture to deliver on latency, throughput, and cost.
 It integrates a cloud object store, such as S3, to push cold data to the cheapest storage medium and locally attached SSDs for low latency, high performance data.
-
 Neon Storage is written in Rust for maximum performance and usability.
 
 ## Open Source
