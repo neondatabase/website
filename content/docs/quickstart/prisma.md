@@ -12,7 +12,7 @@ Prisma is an open-source type-safe ORM for the Javascript ecosystem. It consists
 
 This section will discuss the concept and step-by-by process of connecting Prisma with Neon for development and product setups.
 
-## Step 1 — Connecting to Neon from Prisma
+## Step 1 Connecting to Neon from Prisma
 
 To connect Prisma-based app to Neon, you need to specify the `postgresql` datasource and connection string.
 
@@ -35,7 +35,7 @@ DATABASE_URL=postgres://user:pass@project-name-123.cloud.neon.tech/main
 
 ## Step 2 — Using Neon for Development With Prisma
 
-Prisma uses a shadow database to detect schema drift, therefore you need to have a second database to perform the `prisma migrate dev` command. One way to deal with it is to creat>
+Prisma used a so-called shadow database to detect schema drift, therefore you need to have a second database to perform `prisma migrate dev` command. One way to deal with it is to create a separate Project in Neon and specify it via `shadowDatabaseUrl` in `prisma/schema.prisma`.
 
 For example, you can configure Prisma in the following way:
 
