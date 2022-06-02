@@ -1,6 +1,5 @@
 ---
 title: Concepts
-enableTableOfContents: true
 ---
 
 ## Neon User
