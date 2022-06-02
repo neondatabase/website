@@ -65,13 +65,13 @@ select * from my_table;
 
 ## Quick Connect With Github Single-Sign On
 
-You can connect to your Project called "Main" using the following command:
+You can connect to your Project called "main" using the following command:
 
 ```bash
 psql -h pg.neon.tech
 ```
 
-If it does not already exist, it will then be created. The "Main" Project is a great way to get started. However, before moving to production, it is recommended to create a separate Project for each application.
+If it does not already exist, it will then be created. The "main" Project is a great way to get started. However, before moving to production, it is recommended to create a separate Project for each application.
 
 By default, psql connects to a database with the same name as your OS username. For example, if your OS username is "alice", the above command will connect to a database called "alice".
 
