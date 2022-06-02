@@ -15,8 +15,8 @@ from sqlalchemy import create_engine
 
 USERNAME = # Your GitHub username
 TOKEN = # Token generated in "Connection Details" tab
-DBNAME = # Name of your project
-CONNSTR = f'postgresql://{USERNAME}@neon:{TOKEN}@start.stage.neon.tech/{DBNAME}
+PROJECT_ID = # Name of your project
+CONNSTR = f'postgresql://{USERNAME}:{TOKEN}@{PROJECT_ID}.cloud.neon.tech/main'
 
 engine = create_engine(CONNSTR)
 ```
@@ -33,35 +33,35 @@ Psycopg2 is the most popular python library for running raw postgres queries. If
 To get started writing postgres queries against neon via psycopg2:
 
 1. Register on Neon cloud service and create a project
-2. Navigate to your Project on console.neon.tech and find the Postgres Username and access token in the “Connection Details” section. The Postgres Username should end with @neon.
+2. Navigate to your Project on console.neon.tech and find the Postgres Username and access token in the “Connection Details” section.
 3. Install psycopg2. You might also need psycopg2-binary depending on your system. You can run “pip install psycopg2 psycopg2-binary” or use a dependency manager like poetry to do the same.
 4. Run the “hello neon” program:
-
-```python
-import psycopg2
-
-# Optional: tell psycopg2 to cancel the query on Ctrl-C
-import psycopg2.extras; psycopg2.extensions.set_wait_callback(psycopg2.extras.wait_select)
-
-# NOTE: the password can be set to None if it's specified in the ~/.pgpass file
-USERNAME = "<your-username>"
-ACCESS_TOKEN = "<your-access-token>"
-HOST = "pg.neon.tech"
-PORT = "5432"
-PROJECT = "main"
-
-conn = psycopg2.connect(
- host=HOST,
- port=PORT,
- user=USERNAME,
- password=ACCESS_TOKEN,
- database=PROJECT)
-
-with conn.cursor() as cur:
- cur.execute("SELECT 'hello neon';")
- print(cur.fetchall())
-```
-
+    
+    ```python
+    import psycopg2
+    
+    # Optional: tell psycopg2 to cancel the query on Ctrl-C
+    import psycopg2.extras; psycopg2.extensions.set_wait_callback(psycopg2.extras.wait_select)
+    
+    # NOTE: the password can be set to None if it's specified in the ~/.pgpass file
+    USERNAME = "<your-username>"
+    ACCESS_TOKEN = "<your-access-token>"
+    HOST = "pg.neon.tech"
+    PORT = "5432"
+    PROJECT = "main"
+    
+    conn = psycopg2.connect(
+     host=HOST,
+     port=PORT,
+     user=USERNAME,
+     password=ACCESS_TOKEN,
+     database=PROJECT)
+    
+    with conn.cursor() as cur:
+     cur.execute("SELECT 'hello neon';")
+     print(cur.fetchall())
+    ```
+    
 5. Build great things with Neon! Any postgres tutorial will be able to guide you on the syntax.
 
 Note: This example was tested with python 3 and psycopg2 version 2.9.3

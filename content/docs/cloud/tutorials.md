@@ -55,7 +55,7 @@ In the console go to the Project Dashboard, click “Generate Token” button, a
 Copy the connection string and run it in the shell:
 
 ```bash
-psql -h pg.neon.tech -U username@neon main
+psql -h postgres://<username>@<project_id>.cloud.neon.tech main
 ```
 
 Run a simple query:
