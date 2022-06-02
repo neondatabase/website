@@ -140,6 +140,7 @@ const SubscriptionForm = ({ className }) => {
               size="sm"
               type="submit"
               theme="primary"
+              disabled={formState !== 'default'}
             >
               <span className="md:sr-only">Subscribe</span>
               <SendIcon className="hidden md:ml-1.5 md:block" aria-hidden />

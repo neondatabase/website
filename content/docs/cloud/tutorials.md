@@ -10,8 +10,10 @@ as copying database from one server to another. Postgres provides several ways t
 The most straightforward and efficient is to use the `pg_dump` utility:
 
 ```bash
-pg_dump -h HOST-U USER DBNAME|psql -h pg.neon.tech main
+pg_dump -h HOST -U USER DBNAME | psql -h pg.neon.tech
 ```
+
+In this command, replace `HOST`, `USER`, and `DBNAME` with the appropriate values for the database you are importing into neon.
 
 You may need to make `pg_dump` to create data in non-plain-text format.
 
