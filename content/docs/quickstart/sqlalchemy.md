@@ -14,7 +14,7 @@ To complete this section, you will need:
 - Have SQLalchemy installed with a PostgresSQL driver (such as psycopg2, the default driver for PostgreSQL in SQLAlchemy)
   - Use the following guide for installation details on [SQLAlchemy](https://docs.sqlalchemy.org/en/14/intro.html#installation) and [psycopg2](https://www.psycopg.org/docs/install.html).
 
-## Step 1 — Create SQLAlchemy engine pointing to the Neon Project
+## Create SQLAlchemy engine pointing to the Neon Project
 
 SQLALchemy uses Engine abstraction to manage database connections and exposes a `create_engine` function as the primary endpoint for engine initialization.
 
@@ -36,7 +36,7 @@ engine = create_engine(CONNSTR)
 - [Establishing Connectivity - the Engine](https://docs.sqlalchemy.org/en/14/tutorial/engine.html)
 - [Connecting to PostgreSQL with SQLAlchemy](https://docs.sqlalchemy.org/en/14/core/engines.html#postgresql)
 
-## Step 2 — Using from Python + psycopg2
+## Using from Python + psycopg2
 
 Psycopg2 is the most popular python library for running raw postgres queries. If you are interested in a higher-level ORM on top of psycopg2, see our guides on [SQLAlchemy](#using-from-sqlalchemy) and [Django](#using-from-django).
 
