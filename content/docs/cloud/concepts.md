@@ -45,7 +45,7 @@ Postgres users are created as a part of your Neon Project.
 
 ## Postgres Databases
 
-When a Project is created, a default database for storing data is created along with it, the name of the database is "Main". Neon users cannot manipulate the system's databases.
+When a Project is created, a default database for storing data is created along with it, the name of the database is "main". Neon users cannot manipulate the system's databases.
 
 ## Limits
 
