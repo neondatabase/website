@@ -41,7 +41,9 @@ You can check all Compute state transitions in the Operations List tab on the da
 
 ## Postgres Users
 
-Postgres users are created as a part of your Neon Project.
+Postgres users are created as a part of your Neon Project and can ba managed via the Neon web UI.
+A system user `web-access` is used for the SQL Editor in Neon UI and for the link auth for PQSL. This user cannot be removed or used for authenticating in other scenarios.
+The second user is created for client access. The credentials for that user can be managed, this user's credentials can be used for a password based psql authentication too.
 
 ## Postgres Databases
 
