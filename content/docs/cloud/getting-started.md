@@ -1,6 +1,5 @@
 ---
 title: Getting Started
-
 ---
 
 Neon is a fully managed serverless Postgres.
