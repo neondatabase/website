@@ -1,4 +1,4 @@
----
+cide---
 title: Run a Go app
 ---
 

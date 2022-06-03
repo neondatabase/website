@@ -2,17 +2,19 @@
 title: Run a Prisma App
 ---
 
-Prisma is an open-source type-safe ORM for the javascript ecosystem. It consists of the following parts:
+### Introduction
+
+Prisma is an open-source type-safe ORM for the Javascript ecosystem. It consists of the following three parts:
 
 - Prisma Client: Auto-generated and type-safe query builder for Node.js & TypeScript
 - Prisma Migrate: Migration tool to easily evolve your database schema from prototyping to production
 - Prisma Studio: GUI to view and edit data in your database
 
-This document discusses the concepts behind using Prisma with Neon for development and production setups.
+This section will discuss the concept and step-by-by process of connecting Prisma with Neon for development and product setups.
 
-#### Connecting to Neon from Prisma
+## Step 1 Connecting to Neon from Prisma
 
-To connect Prisma-based app to Neon you need to specify `postgresql` datasource and connection string.
+To connect Prisma-based app to Neon, you need to specify the `postgresql` datasource and connection string.
 
 First, add the following to the `prisma/schema.prisma`:
 
@@ -23,19 +25,21 @@ datasource db {
 }
 ```
 
-Then, go to the Project dashboard in Neon and generate a connection string in `Connection Details` widget. You can specify this connection string in `.env`:
+Next, go to the **Project** dashboard in Neon and generate a connection string in `Connection Details` widget.
+
+You can specify this connection string in `.env`:
 
 ```shell
 DATABASE_URL=postgres://user:pass@project-name-123.cloud.neon.tech/main
 ```
 
-#### Using Neon for development with Prisma
+## Step 2 — Using Neon for Development With Prisma
 
-Prisma used a so-called shadow database to detect schema drift, therefore you need to have a second database to perform `prisma migrate dev` command. One way to deal with it is to creat>
+Prisma used a so-called shadow database to detect schema drift, therefore you need to have a second database to perform `prisma migrate dev` command. One way to deal with it is to create a separate Project in Neon and specify it via `shadowDatabaseUrl` in `prisma/schema.prisma`.
 
 For example, you can configure Prisma in the following way:
 
-in `prisma/schema.prisma`:
+Add the following code in `prisma/schema.prisma`:
 
 ```typescript
 datasource db {
@@ -45,7 +49,7 @@ datasource db {
 }
 ```
 
-and in `.env`:
+Add the following code in `.env`:
 
 ```shell
 DATABASE_URL="<connection string to the project1>"

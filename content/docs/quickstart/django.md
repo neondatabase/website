@@ -2,7 +2,11 @@
 title: Run a Django App
 ---
 
+### Introduction
+
 Django is one of the most popular backend frameworks. Because Neon is fully compatible with vanilla PostgreSQL, you only need to fill in the correct connection details. To use Neon with Django, you have to create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
+
+## Specify the Project Connection Settings
 
 See the following example of specifying connection properties for Neon:
 
@@ -19,10 +23,8 @@ DATABASES = {
 }
 ```
 
-Note:
+_Note: Currently, it is not possible to run Django tests against Neon because Django test runner needs to create a new database for tests which is currently not supported in Neon._
 
-Currently, it is not possible to run Django tests against Neon because Django test runner needs to create a new database for tests which is currently not supported in Neon.
-
-References:
+## References
 
 - [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings/#databases)
