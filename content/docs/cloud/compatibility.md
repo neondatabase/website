@@ -58,11 +58,11 @@ Following PostgreSQL extensions come pre-installed:
 
 ## Unlogged tables
 
-Unlogged tables are maintained on local storage of Neon Compute. Such tables do not survive compute restart (incl. when compute becomes idle). Unlike vanilla PostgreSQL where unlogged relations are truncated in case of abnormal process termination (e.g. crash) only. Additionally unlogged tables are limited in by the local storage on compute.
+Unlogged tables are maintained on local storage of Neon Compute. Such tables do not survive compute restart (incl. when compute becomes idle). Unlike vanilla PostgreSQL where unlogged relations are truncated in case of abnormal process termination (e.g. crash) only. Additionally, unlogged tables are limited in by the local storage on compute.
 
 ## Spill/Index build handling
 
-Certain queries in PostgreSQL could generate a dataset which doesn’t fit in memory. In such cases storage is used to spill the data. In Neon local storage is limited on the compute which could limit ability to create large indexes or execute certain queries
+Certain queries in PostgreSQL could generate a dataset which doesn’t fit in memory. In such cases, storage is used to spill the data. In Neon, local storage is limited on the compute which could limit ability to create large indexes or execute certain queries
 
 ## Temp Tables
 
