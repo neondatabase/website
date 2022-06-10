@@ -4,7 +4,7 @@ title: Run a Node.js app
 
 ### Introduction
 
-In this section, you will learn how to add a Postgres client to your Project and connect to your database.
+In this section, you will learn how to add a Postgres client to your Project and connect to your Neon Project.
 
 ## Step 1 — Add Postgres client to your Neon Project
 
