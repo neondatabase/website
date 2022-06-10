@@ -4,11 +4,21 @@
       slug: cloud/about
     - title: Getting Started
       slug: cloud/getting-started
+    - title: Signing Up
+      slug: cloud/signing-up
+    - title: Setting Up a Project
+      slug: cloud/set-up-a-project
+    - title: Using an API Key
+      slug: cloud/use-an-api-key
+    - title: Query with Neon SQL editor
+      slug: cloud/query-with-neon-sql-editor
+    - title: Query with psql editor
+      slug: cloud/query-with-psql-editor
     - title: Concepts
       slug: cloud/concepts
     - title: Tutorials
       slug: cloud/tutorials
-- title: Quickstart
+- title: Integrations
   items:
     - title: Signing up
       slug: quickstart/console
@@ -32,23 +42,33 @@
       slug: quickstart/java
     - title: Run a Go app
       slug: quickstart/go
-- title: API
+- title: How-to Guides
   items:
+    - title: Authentication
+      slug: how-to-guides/authentication
+    - title: Import an Existing Database
+      slug: how-to-guides/import-an-existing-database
+    - title: Delete an Existing Database
+      slug: how-to-guides/delete-an-existing-database
+- title: Reference
+  items:
+    - title: Neon Project Roadmap
+      slug: reference/roadmap
     - title: Neon API
-      slug: api/about
+      slug: reference/api/about
+    - title: Glossary
+      slug: reference/glossary
+    - title: Compatibility
+      slug: reference/compatibility
 - title: Architecture
   items:
     - title: Architecture Overview
       slug: storage-engine/architecture-overview
-    - title: Glossary
-      slug: storage-engine/glossary
     - title: Write Path
       slug: storage-engine/write-path
     - title: Read Path
       slug: storage-engine/read-path
-- title: About
+- title: Security
   items:
-    - title: Compatibility
-      slug: cloud/compatibility
-    - title: Roadmap
-      slug: cloud/roadmap
+    - title: About Security
+      slug: security/about-security
