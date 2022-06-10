@@ -60,7 +60,3 @@ $ curl -H 'x-hasura-admin-secret: {admin_secret}' https://{your_project_name}.ha
 ```
 
 Thanks for your time, and keep hacking!
-
-## Conclusion
-
-In this tutorial, you performed an integration between Neon cloud service and Hasura Cloud. Now you can use an HTTP API endpoint that uses GraphQL to query Neon's serverless database and returns a set of rows.
