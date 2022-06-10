@@ -23,7 +23,7 @@ Check out the [API Reference](https://console.neon.tech/api-docs) for more infor
 
 A Project is a collection of Postgres databases, Postgres users and other settings on Neon cloud service.
 
-A Project contains a virtual instance with a Postgres server, also called Compute, as well as the storage used to store the Project data. The amount of virtual resources available for the Project is subject to limits defined by the [Free Tier](#free-tier).
+A Project contains a virtual instance with a Postgres server, also called Compute, as well as the storage used to store the Project data. The amount of virtual resources available for the Project is subject to limits defined by the [Technical Preview Free Tier](#free-tier).
 
 Compute is stateless and can be automatically activated and suspended due to user activity.
 
@@ -53,7 +53,7 @@ When a Project is created, a default database for storing data is created along 
 
 ## Limits
 
-Neon gives you no cost access to the PostgreSQL databases within the Free Tier limits.
+Neon gives you no cost access to the PostgreSQL databases within the Technical Preview Free Tier limits.
 
 | Limit                                                 | Value  |
 | ----------------------------------------------------- | ------ |
@@ -106,7 +106,7 @@ See [Default Parameters](../compatibiilty#default-parameters).
 
 See [https://www.postgresql.org/docs/14/runtime-config.html](https://www.postgresql.org/docs/14/runtime-config.html) for details.
 
-## Free Tier
+## Technical Preview Free Tier
 
 Neon cloud service is available for free during the [Limited and the Technical Preview](../roadmap).
 
@@ -116,7 +116,7 @@ Technical Preview Free Tier users can only create three Projects in Neon. Projec
 - PITR time window is limited to 7 days of _reasonable usage_;
 - Compute node can use up to 1vCPU/256 MB.
 
-_Note: Free Tier limits are subject to change over the course of [Technical Preview](../roadmap)._
+_Note: Technical Preview Free Tier limits are subject to change over the course of [Technical Preview](../roadmap)._
 
 ## Branches (coming soon)
 
