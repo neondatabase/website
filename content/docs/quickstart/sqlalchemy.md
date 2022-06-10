@@ -8,10 +8,10 @@ SQLAlchemy is among the most popular ORMs in the Python universe. Because Neon i
 
 ## Prerequisites
 
-To complete this section, you will need:
+To complete this section, you will need to already have the following:
 
-- Already created a Project on Neon Cloud service
-- Have SQLalchemy installed with a PostgresSQL driver (such as psycopg2, the default driver for PostgreSQL in SQLAlchemy)
+- Created a Project on Neon Cloud service
+- Have SQLAlchemy installed with a PostgresSQL driver (such as psycopg2, the default driver for PostgreSQL in SQLAlchemy)
   - Use the following guide for installation details on [SQLAlchemy](https://docs.sqlalchemy.org/en/14/intro.html#installation) and [psycopg2](https://www.psycopg.org/docs/install.html).
 
 ## Create SQLAlchemy engine pointing to the Neon Project
