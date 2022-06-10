@@ -18,30 +18,34 @@
       slug: cloud/concepts
     - title: Tutorials
       slug: cloud/tutorials
-- title: Integrations 
+- title: Integrations
   items:
     - title: Signing up
       slug: quickstart/console
-    - title: Run a Postgres app
-      slug: quickstart/postgres
+    - title: Cloud Integrations
+      slug: cloud/about
     - title: Run a Hasura app
       slug: quickstart/hasura
-    - title: Run a Prisma app
-      slug: quickstart/prisma
-    - title: Run a Django app
-      slug: quickstart/django
-    - title: Run a SQL Alchemy app
-      slug: quickstart/sqlalchemy
-    - title: Run a Node.js app
-      slug: quickstart/node
     - title: Run a Vercel and Next.js app
       slug: quickstart/vercel
-    - title: Run a Symphony app
-      slug: quickstart/symphony
-    - title: Run a Java app
-      slug: quickstart/java
+    - title: Run a Prisma app
+      slug: quickstart/prisma
+    - title: Frameworks & Programming Languages
+      slug: cloud/about
     - title: Run a Go app
       slug: quickstart/go
+    - title: Run a Java app
+      slug: quickstart/java
+    - title: Run a Django app
+      slug: quickstart/django
+    - title: Run a Node.js app
+      slug: quickstart/node
+    - title: Run a Symphony app
+      slug: quickstart/symphony
+    - title: Run a Postgres app
+      slug: quickstart/postgres
+    - title: Run a SQL Alchemy app
+      slug: quickstart/sqlalchemy
 - title: How-to Guides
   items:
     - title: Authentication
