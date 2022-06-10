@@ -18,7 +18,7 @@
       slug: cloud/concepts
     - title: Tutorials
       slug: cloud/tutorials
-- title: Integrations
+- title: Integrations 
   items:
     - title: Signing up
       slug: quickstart/console
