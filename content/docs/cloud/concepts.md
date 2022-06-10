@@ -1,18 +1,17 @@
 ---
 title: Concepts
 enableTableOfContents: true
-
 ---
 
 ## Neon User
 
 A Neon user is identified by their email address.
 
-A user registers and authenticates in Neon Web UI with their GitHub account. More authentication methods are coming soon.
+A user registers and authenticates in Neon Web UI with their GitHub or Google account. More authentication methods are coming soon.
 
 Once authenticated, a user can create and access [Projects](#project) and [query Project data](../tutorials#query-via-ui). You can also manage [Postgres Users](#postgres-users) and [Databases](#postgres-databases) in each Project.
 
-## Using API keys
+### Using API keys
 
 API keys allow users to access Neon application programming interface.
 
@@ -32,25 +31,29 @@ Compute is stateless and can be automatically activated and suspended due to use
 
 A Compute node in Neon is a stateless Postgres process due to the separation of storage and compute. It has two main states: Active and Idle.
 
-Active means that Postgres is running currently. If there are no active queries for 5 minutes, the activity monitor will gracefully put the corresponding compute node into the Idle state to save energy and resources. The activity monitor is conservative, and it treats 'idle in transaction' connections as some activities do not break an application logic that relies on long-lasting transactions. Yet, it closes all 'idle' connections after 5 minutes of complete inactivity.
+Active means that Postgres is running currently. If there are no active queries for 5 minutes, the activity monitor will gracefully put the corresponding compute node into the Idle state to save energy and resources. The activity monitor is conservative, and it treats 'idle in transaction' connections as some activities to avoid breaking an application logic that relies on long-lasting transactions. Yet, it closes all 'idle' connections after 5 minutes of complete inactivity.
 
-In the Idle state, you can still connect to your compute at any time. Neon will automatically activate it. Activation usually happens within a few seconds, so the first connection in the Idle state will have higher latency. Also, the Postgres page cache (shared buffers) will be cold after waking up from Idle state, and your usual queries may take longer.
+You can connect to your compute at any time if it is Idle. Neon will automatically activate it. Activation usually happens within a few seconds, so the first connection in the Idle state will have higher latency. Also, the Postgres page cache (shared buffers) will be cold after waking up from Idle state, and your usual queries may take longer.
 
 After some period in the Idle state, Neon will start occasionally activating your Compute to check data availability. The checks period will gradually increase up to several days if the Compute does not receive any client connections.
 
-You can check all Compute state transitions in the Operations List tab on the dashboard.
+You can check all Compute state transitions in the Operations List widget on the Project dashboard.
 
 ## Postgres Users
 
-Postgres users are created as a part of your Neon Project.
+Postgres users are created as a part of your Neon Project and can be managed via the Neon web UI. A system user `web-access` is used for the SQL Editor in Neon UI and for link authentication for psql. This user cannot be removed or used for authenticating in other scenarios.
+
+The second user is created for client access. The credentials for that user can be managed, this user's credentials can be used for password-based psql authentication too.
+
+More Postgres users can be created in Neon UI.
 
 ## Postgres Databases
 
-When a Project is created, a default database for storing data is created along with it, the name of the database is "Main". Neon users cannot manipulate the system's databases.
+When a Project is created, a default database for storing data is created along with it, the name of the database is "main". A Neon user can create more databases inside a Project in the Neon UI. Neon users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
 
 ## Limits
 
-Neon give you no cost access to the PostgreSQL databases, within Free Tier limits.
+Neon gives you no cost access to the PostgreSQL databases within the Free Tier limits.
 
 | Limit                                                 | Value  |
 | ----------------------------------------------------- | ------ |
@@ -93,11 +96,11 @@ has been exceeded
 
 Neon storage consumes extra space in order to support Point in Time Reset (PITR) and the ability to reset a branch to a historical state. The historical data is stored in log based format.
 
-Neon has limits on the modification history for [Free Tier](#free-tier) customers.
+Neon has limits on the amount of modification history stored for the [Technical Preview Free Tier](#free-tier) customers.
 
 ## Compute Config
 
-During technical preview, Neon only supports modification to session level configuration parameters. Parameters are reset when the session is terminated (e.g. when compute is suspended).
+During the Technical Preview, Neon only supports modification to session level configuration parameters. Parameters are reset when the session is terminated (e.g. when compute is suspended).
 
 See [Default Parameters](../compatibiilty#default-parameters).
 
@@ -107,7 +110,7 @@ See [https://www.postgresql.org/docs/14/runtime-config.html](https://www.postgre
 
 Neon cloud service is available for free during the [Limited and the Technical Preview](../roadmap).
 
-Free Tier users can only create three Projects in Neon. Projects created under Free Tier are subject to additional limits:
+Technical Preview Free Tier users can only create three Projects in Neon. Projects created under Technical Preview Free Tier are subject to additional limits:
 
 - Data size in the Project is limited to 10GB;
 - PITR time window is limited to 7 days of _reasonable usage_;
@@ -117,7 +120,7 @@ _Note: Free Tier limits are subject to change over the course of [Technical Prev
 
 ## Branches (coming soon)
 
-_Neon Branching capabilities are not publicly available yet. If you would like to try out this feature, reach out to beta@neon.tech with a request to enable branching capabilities for your account._
+_Neon Branching capabilities are not publicly available yet. If you would like to try out this feature, reach out to beta@neon.tech describing your use case and request to enable branching capabilities for your account._
 
 A branch is a copy of the [Project Data](#project) created from the current state or any past state that is still available (see [PITR](#point-in-time-reset)). A branch can be independently modified from its originating project data.
 
