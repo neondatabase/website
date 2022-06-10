@@ -60,14 +60,14 @@
       slug: reference/glossary
     - title: Compatibility
       slug: reference/compatibility
-- title: Architecture
+- title: Conceptual Guides
   items:
     - title: Architecture Overview
-      slug: storage-engine/architecture-overview
-    - title: Write Path
-      slug: storage-engine/write-path
-    - title: Read Path
-      slug: storage-engine/read-path
+      slug: conceptual-guides/architecture-overview
+    - title: Compute Lifecycle
+      slug: conceptual-guides
+    - title: Branches
+      slug: conceptual-guides
 - title: Security
   items:
     - title: About Security
