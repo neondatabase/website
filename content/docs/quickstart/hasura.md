@@ -14,9 +14,9 @@ First, go to the [Neon console](https://console.neon.tech/app/projects).
 
 Next, create a new Project or use any existing one.
 
-Then, open the Project page, and click the **Generate token** button.
+Then, open the Project page, and copy the connection string (`DATABASE_URL`) if you created a new Project.
 
-Finally, copy DATABASE_URL. We will need it later.
+Otherwise, if you are using a previously created Project, create a new user or reset password of an existing user to get the complete connection string. Keep these connection details, we will need them later.
 
 ## Step 2 — Add Project as a Data Source in the Hasura Cloud Project
 
