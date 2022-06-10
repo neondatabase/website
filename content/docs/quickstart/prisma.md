@@ -10,9 +10,11 @@ Prisma is an open-source type-safe ORM for the Javascript ecosystem. It consists
 - Prisma Migrate: Migration tool to easily evolve your database schema from prototyping to production
 - Prisma Studio: GUI to view and edit data in your database
 
-This section will discuss the concept and step-by-by process of connecting Prisma with Neon for development and product setups.
+This section discusses the concepts behind using Prisma with Neon for development and production setups.
 
-## Step 1 Connecting to Neon from Prisma
+Follow our step-by-step guide on how to setup the integration.
+
+## Step 1 — Connecting to Neon from Prisma
 
 To connect Prisma-based app to Neon, you need to specify the `postgresql` datasource and connection string.
 
