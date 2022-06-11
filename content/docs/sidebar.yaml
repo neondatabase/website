@@ -65,6 +65,6 @@
     - title: Neon Architecture
       slug: conceptual-guides/architecture-overview
     - title: Compute Lifecycle
-      slug: cloud/roadmap
+      slug: conceptual-guides/compute-lifecycle
     - title: Branches
-      slug: cloud/roadmap
+      slug: conceptual-guides/branches
