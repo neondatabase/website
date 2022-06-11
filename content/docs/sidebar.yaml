@@ -58,6 +58,8 @@
       slug: reference/compatibility/#default-parameters
     - title: Neon Default Parameters
       slug: reference/compatibility/#default-extensions
+    - title: Technical Preview Free Tier in Neon
+      slug: reference/technical-preview-free-tier
 - title: Architecture
   items:
     - title: Architecture Overview
