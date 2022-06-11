@@ -52,6 +52,8 @@
       slug: reference/roadmap
     - title: API Reference
       slug: reference/about
+    - title: Glossary
+      slug: reference/glossary
 - title: Architecture
   items:
     - title: Architecture Overview
