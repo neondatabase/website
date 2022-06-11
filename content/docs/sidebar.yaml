@@ -14,36 +14,38 @@
       slug: get-started-with-neon/query-with-neon-sql-editor
     - title: Query with Neon's psql Editor
       slug: get-started-with-neon/query-with-psql-editor
-- title: Others
+- title: Integrations
   items:
-    - title: Concepts
-      slug: cloud/concepts
-    - title: Tutorials
-      slug: cloud/tutorials
-- title: Quickstart
-  items:
-    - title: Signing up
-      slug: quickstart/console
-    - title: Run a Postgres app
-      slug: quickstart/postgres
+    - title: Cloud Integrations
+      slug: integrations/integrations-list
     - title: Run a Hasura app
       slug: quickstart/hasura
-    - title: Run a Prisma app
-      slug: quickstart/prisma
-    - title: Run a Django app
-      slug: quickstart/django
-    - title: Run a SQL Alchemy app
-      slug: quickstart/sqlalchemy
-    - title: Run a Node.js app
-      slug: quickstart/node
     - title: Run a Vercel and Next.js app
       slug: quickstart/vercel
-    - title: Run a Symphony app
-      slug: quickstart/symphony
-    - title: Run a Java app
-      slug: quickstart/java
+    - title: Run a Prisma app
+      slug: quickstart/prisma
+    - title: Frameworks & Programming Languages
+      slug: integrations/integrations-list
     - title: Run a Go app
       slug: quickstart/go
+    - title: Run a Java app
+      slug: quickstart/java
+    - title: Run a Django app
+      slug: quickstart/django
+    - title: Run a Node.js app
+      slug: quickstart/node
+    - title: Run a Symphony app
+      slug: quickstart/symphony
+    - title: Others
+      slug: integrations/integrations-list
+    - title: Run a Postgres app
+      slug: quickstart/postgres
+    - title: Run a SQL Alchemy app
+      slug: quickstart/sqlalchemy
+- title: How-To Guides
+  items:
+    - title: Import an Existing Database
+      slug: how-to-guides/import-an-existing-database
 - title: API
   items:
     - title: Neon API
@@ -64,3 +66,9 @@
       slug: cloud/compatibility
     - title: Roadmap
       slug: cloud/roadmap
+- title: Others
+  items:
+    - title: Concepts
+      slug: cloud/concepts
+    - title: Tutorials
+      slug: cloud/tutorials
