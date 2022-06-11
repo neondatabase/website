@@ -2,8 +2,6 @@
 title: Query with psql Editor
 ---
 
-## Query With Psql
-
 To follow this guide, you will need a working installation of [psql](https://www.postgresql.org/download/), the PostgreSQL interactive terminal.
 
 In the console go to the Project Dashboard, click “Generate Token” button, and follow the instructions to save the password into .pgpass file

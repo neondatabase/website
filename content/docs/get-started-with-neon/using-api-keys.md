@@ -10,7 +10,7 @@ A user registers and authenticates in Neon Web UI with their GitHub or Google ac
 
 Once authenticated, a user can create and access [Projects](#project) and [query Project data](../tutorials#query-via-ui). You can also manage [Postgres Users](#postgres-users) and [Databases](#postgres-databases) in each Project.
 
-### Using API keys
+## Using API keys as a Neon User
 
 API keys allow users to access Neon application programming interface.
 

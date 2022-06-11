@@ -2,8 +2,6 @@
 title: Query with Neon's SQL Editor
 ---
 
-## Query via UI
-
 In console ([https://console.neon.tech/](https://console.neon.tech/)) select your Project to see the Project details.
 
 Select the SQL Editor tab.
