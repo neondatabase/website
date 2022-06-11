@@ -2,8 +2,6 @@
 title: Technical Preview Free Tier
 ---
 
-## Technical Preview Free Tier
-
 Neon cloud service is available for free during the [Limited and the Technical Preview](../roadmap).
 
 Technical Preview Free Tier users can only create three Projects in Neon. Projects created under Technical Preview Free Tier are subject to additional limits:
