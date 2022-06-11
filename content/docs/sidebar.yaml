@@ -50,6 +50,8 @@
   items:
     - title: Neon Roadmap
       slug: reference/roadmap
+    - title: API Reference
+      slug: reference/about
 - title: Architecture
   items:
     - title: Architecture Overview
