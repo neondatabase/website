@@ -54,6 +54,10 @@
       slug: reference/about
     - title: Glossary
       slug: reference/glossary
+    - title: Neon Default Extensions
+      slug: reference/compatibility/#default-parameters
+    - title: Neon Default Parameters
+      slug: reference/compatibility/#default-extensions
 - title: Architecture
   items:
     - title: Architecture Overview
