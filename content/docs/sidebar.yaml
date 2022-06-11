@@ -60,27 +60,11 @@
       slug: reference/compatibility/#default-extensions
     - title: Technical Preview Free Tier in Neon
       slug: reference/technical-preview-free-tier
-- title: Architecture
+- title: Conceptual Guides
   items:
-    - title: Architecture Overview
-      slug: storage-engine/architecture-overview
-    - title: Glossary
-      slug: storage-engine/glossary
-    - title: Write Path
-      slug: storage-engine/write-path
-    - title: Read Path
-      slug: storage-engine/read-path
-- title: About
-  items:
-    - title: Compatibility
-      slug: cloud/compatibility
-    - title: Roadmap
+    - title: Neon Architecture
+      slug: conceptual-guides/architecture-overview
+    - title: Compute Lifecycle
       slug: cloud/roadmap
-- title: Others
-  items:
-    - title: Concepts
-      slug: cloud/concepts
-    - title: Tutorials
-      slug: cloud/tutorials
-    - title: Neon API
-      slug: api/about
+    - title: Branches
+      slug: cloud/roadmap
