@@ -46,10 +46,10 @@
   items:
     - title: Import an Existing Database
       slug: how-to-guides/import-an-existing-database
-- title: API
+- title: Reference
   items:
-    - title: Neon API
-      slug: api/about
+    - title: Neon Roadmap
+      slug: reference/roadmap
 - title: Architecture
   items:
     - title: Architecture Overview
@@ -72,3 +72,5 @@
       slug: cloud/concepts
     - title: Tutorials
       slug: cloud/tutorials
+    - title: Neon API
+      slug: api/about
