@@ -46,7 +46,7 @@ First, register on the Neon cloud service and create a Project.
 
 Next, navigate to your Project on [console.neon.tech](console.neon.tech/).
 
-Then, install psycopg2. You may also need psycopg2-binary depending on your system. To install psycopg2-binary, You can run “pip install psycopg2 psycopg2-binary” or use a dependency manager like [Poetry](https://python-poetry.org/) to do the same.
+Then, install psycopg2. You may also need psycopg2-binary depending on your system. To install psycopg2-binary, You can run `pip install psycopg2 psycopg2-binary` or use a dependency manager like [Poetry](https://python-poetry.org/) to do the same.
 
 Finally, run the “hello neon” program:
 
