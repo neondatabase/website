@@ -10,9 +10,9 @@ Hasura is a cloud-based GraphQL provider for existing databases. This guide will
 
 In this step, you will create or select an existing Neon Project to be used as a data source for Hasura.
 
-First, go to the [Neon console](https://console.neon.tech/app/projects).
+First, go to the [Neon console](https://console.neon.tech).
 
-Next, create a new Project or use any existing one.
+Next, you will obtain the connection details. Keep your connection details as we will need them later.
 
 Then, open the Project page, and copy the connection string (`DATABASE_URL`) if you created a new Project.
 
