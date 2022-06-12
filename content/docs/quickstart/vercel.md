@@ -12,7 +12,7 @@ First, [Create a next.js project](https://nextjs.org/learn/basics/create-nextjs-
 
 ## Step 2 — Create a Neon Project
 
-Next, create a Neon Project for your app. You can configure your db schema from Neon Console or using tools like Prisma.
+Next, create a Neon Project for your app. You can configure your database schema from Neon Console or using tools like Prisma.
 
 ## Step 3 — Add Postgres Client
 
