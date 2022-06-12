@@ -10,13 +10,13 @@ Django is one of the most popular backend frameworks. Because Neon is fully comp
 
 See the following example of specifying connection properties for Neon:
 
-```json
+```python
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': '<here goes your project id>',
-        'USER': '<your github username used to authenticate to neon>,
-        'PASSWORD': '<token generated in "Connection Details" tab>',
+        'USER': '<your github username used to authenticate to neon>',
+        'PASSWORD': '<token generated in Connection Details tab>',
         'HOST': '<your project id>.cloud.neon.tech',
         'PORT': '5432',
     }
