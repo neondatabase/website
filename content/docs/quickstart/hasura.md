@@ -16,7 +16,11 @@ Next, you will obtain the connection details. Keep your connection details as we
 
 Then, open the Project page, and copy the connection string (`DATABASE_URL`) if you created a new Project.
 
-Otherwise, if you are using a previously created Project, create a new user or reset password of an existing user to get the complete connection string. Keep these connection details, we will need them later.
+Note: The following method bellow will disconnect all existing clients
+
+Otherwise, if you are using a previously created Project, there are two options: either create a new user or reset password of an existing user to get the complete connection string.
+
+Keep these connection details, we will need them later.
 
 ## Step 2 — Add Project as a Data Source in the Hasura Cloud Project
 
