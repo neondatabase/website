@@ -16,5 +16,5 @@ For example, if you configure your Symfony project with `.env` file, then DATABA
 
 ```shell
 # cat .env | grep DATABASE_URL
-DATABASE_URL="postgresql://<user>:<token>@<project_id>.cloud.neon.tech:5432/main?charset=utf8"
+DATABASE_URL="postgresql://<user>:<password>@<project_id>.cloud.neon.tech:5432/main?charset=utf8"
 ```
