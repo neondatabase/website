@@ -24,9 +24,9 @@ See the following example on how to create SQLAlchemy engine pointing to the Neo
 from sqlalchemy import create_engine
 
 USERNAME = # Your GitHub username
-TOKEN = # Token generated in "Connection Details" tab
+PASSWORD = # Password generated in "Connection Details" tab
 PROJECT_ID = # Name of your project
-CONNSTR = f'postgresql://{USERNAME}:{TOKEN}@{PROJECT_ID}.cloud.neon.tech/main'
+CONNSTR = f'postgresql://{USERNAME}:{PASSWORD}@{PROJECT_ID}.cloud.neon.tech/main'
 
 engine = create_engine(CONNSTR)
 ```
@@ -58,7 +58,7 @@ import psycopg2.extras; psycopg2.extensions.set_wait_callback(psycopg2.extras.wa
 
 # NOTE: the password can be set to None if it's specified in the ~/.pgpass file
 USERNAME = "<your-username>"
-ACCESS_TOKEN = "<your-access-token>"
+PASSWORD = "<your-password>"
 HOST = "pg.neon.tech"
 PORT = "5432"
 PROJECT = "main"
@@ -67,7 +67,7 @@ conn = psycopg2.connect(
  host=HOST,
  port=PORT,
  user=USERNAME,
- password=ACCESS_TOKEN,
+ password=PASSWORD,
  database=PROJECT)
 
 with conn.cursor() as cur:
