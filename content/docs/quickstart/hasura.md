@@ -28,7 +28,7 @@ In this section, you will head to Hasura Cloud, paste your DATABASE_URL, and con
 
 Head over to the [Hasura Cloud projects list](https://cloud.hasura.io/projects).
 
-Then, create a new project or launch a console for the existing one.
+Then, create a new Hasura project or launch a console for the existing one.
 
 Now, go to the DATA section. In the 'Connect Existing Database' tab, paste DATABASE_URL into the corresponding form field. Give your database an appropriate name, and click connect.
 
