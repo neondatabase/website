@@ -9,7 +9,7 @@ The JDBC API is a Java API for relational databases. PostgreSQL has a well-suppo
 To get a JDBC connection URL, replace placeholders with your credentials in the following template:
 
 ```java
-jdbc:postgresql://<project>.cloud.neon.tech/main?user=<user>&password=<token>
+jdbc:postgresql://<project>.cloud.neon.tech/main?user=<user>&password=<password>
 ```
 
 For more information about JDBC, refer to the standard JDBC API documentation and [PostgreSQL JDBC Driver documentation](https://jdbc.postgresql.org/documentation/head/index.html).
@@ -21,5 +21,5 @@ Spring relies on JDBC and PostgreSQL driver to connect to PostgreSQL databases. 
 The only configuration required for connection is a datasource URL. It should be specified inside `application.properties` file in the following format:
 
 ```java
-spring.datasource.url=jdbc:postgresql://<project>.cloud.neon.tech/main?user=<user>&password=<token>
+spring.datasource.url=jdbc:postgresql://<project>.cloud.neon.tech/main?user=<user>&password=<password>
 ```
