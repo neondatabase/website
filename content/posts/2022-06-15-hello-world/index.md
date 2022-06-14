@@ -40,7 +40,7 @@ Since storage is separate, compute, which is a Postgres process, becomes statele
 
 Here is an example of spinning up Postgres in 3 seconds.
 
-![Start Neon Project](neon_project_start.png)
+![Start Neon Project](neon_project_start.gif)
 
 ## Branching
 
