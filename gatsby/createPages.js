@@ -1,5 +1,5 @@
-// const createBlogPages = require('./createBlogPages');
-// const createBlogPosts = require('./createBlogPosts');
+const createBlogPages = require('./createBlogPages');
+const createBlogPosts = require('./createBlogPosts');
 const createDocPages = require('./createDocPages');
 // const createStaticPages = require('./createStaticPages');
 
