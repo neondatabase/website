@@ -7,7 +7,7 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRightSm from 'icons/chevron-right-sm.inline.svg';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
-const SubItem = ({ title, items, currentSlug }) => {
+const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
   const [isOpen, setIsOpen] = useState(
     !!items?.find(
       ({ slug, items }) => slug === currentSlug || items?.find(({ slug }) => slug === currentSlug)
@@ -21,6 +21,7 @@ const SubItem = ({ title, items, currentSlug }) => {
       <button
         className="-ml-4 flex items-center pt-2.5 pb-2 transition-colors duration-200 hover:text-primary-2"
         type="button"
+        tabIndex={!isParentOpen ? '-1' : undefined}
         onClick={handleClick}
       >
         <ChevronRight className={clsx('mr-2 hidden rotate-90', { '!block': isOpen })} />
@@ -58,7 +59,12 @@ SubItem.propTypes = {
       slug: PropTypes.string.isRequired,
     })
   ).isRequired,
+  isParentOpen: PropTypes.bool,
   currentSlug: PropTypes.string.isRequired,
+};
+
+SubItem.defaultProps = {
+  isParentOpen: false,
 };
 
 export default SubItem;

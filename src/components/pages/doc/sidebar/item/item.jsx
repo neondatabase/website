@@ -27,7 +27,12 @@ const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
         {items.map(({ title, slug, items }, index) => (
           <li key={index}>
             {items && items.length > 0 ? (
-              <SubItem title={title} items={items} currentSlug={currentSlug} />
+              <SubItem
+                title={title}
+                items={items}
+                isParentOpen={isOpen}
+                currentSlug={currentSlug}
+              />
             ) : (
               <Link
                 className={clsx('!flex items-center py-2.5 text-base !leading-snug', {
