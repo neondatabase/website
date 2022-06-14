@@ -1,5 +1,5 @@
 ---
-title: 'Neon Gatsby'
+title: 'Hello World'
 description: 'Readme for the Neon website'
 author: 'Nikita Shamgunov'
 ---

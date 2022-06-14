@@ -1,5 +1,5 @@
 ---
-title: 'Neon Gatsby'
+title: 'Designing Neon'
 description: 'Readme for the Neon website'
 author: 'Heikki Linnakangas'
 ---
