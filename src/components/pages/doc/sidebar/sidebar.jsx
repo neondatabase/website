@@ -17,7 +17,7 @@ const Sidebar = ({ className, sidebar, currentSlug }) => {
     <aside className={className}>
       <Search />
       <nav className="mt-5">
-        <ul className="space-y-2">
+        <ul>
           {sidebar.map((item, index) => (
             <Item
               {...item}

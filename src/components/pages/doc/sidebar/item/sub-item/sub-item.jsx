@@ -18,23 +18,22 @@ const SubItem = ({ title, items, currentSlug }) => {
   return (
     <>
       <button
-        className="-ml-4 flex items-center py-2.5 transition-colors duration-200 hover:text-primary-2"
+        className="-ml-4 flex items-center pt-2.5 pb-2 transition-colors duration-200 hover:text-primary-2"
         type="button"
         onClick={handleClick}
       >
         <ChevronRight className={clsx('mr-2', { 'rotate-90 transform': isOpen })} />
-        <span className={clsx('t-lg leading-snug', isOpen && 'font-semibold')}>{title}</span>
+        <span className={clsx('text-base leading-snug', isOpen && 'font-semibold')}>{title}</span>
       </button>
       {isOpen && (
         <ul className="pl-3">
           <li>
             {items.map(({ title, slug }, index) => (
               <Link
-                className={clsx('!block py-2.5 !leading-snug', {
+                className={clsx('!block py-2 text-base !leading-snug', {
                   'font-semibold text-primary-2': currentSlug === slug,
                 })}
                 to={`${DOCS_BASE_PATH}${slug}/`}
-                size="sm"
                 theme="black"
                 tabIndex={!isOpen ? '-1' : undefined}
                 key={index}

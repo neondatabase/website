@@ -21,7 +21,7 @@ const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
         onClick={handleClick}
       >
         <ChevronRight className={clsx('mr-2', { 'rotate-90 transform': isOpen })} />
-        <span className="text-lg font-semibold leading-snug">{title}</span>
+        <span className="text-xl font-semibold leading-snug">{title}</span>
       </button>
       <ul className={clsx('pl-4', !isOpen && 'sr-only')}>
         {items.map(({ title, slug, items }, index) => (
@@ -30,11 +30,10 @@ const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
               <SubItem title={title} items={items} currentSlug={currentSlug} />
             ) : (
               <Link
-                className={clsx('!flex items-center py-2.5 !leading-snug', {
+                className={clsx('!flex items-center py-2.5 text-base !leading-snug', {
                   'font-semibold text-primary-2': currentSlug === slug,
                 })}
                 to={`${DOCS_BASE_PATH}${slug}/`}
-                size="sm"
                 theme="black"
                 tabIndex={!isOpen ? '-1' : undefined}
               >
