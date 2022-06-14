@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import ChevronRightSm from 'icons/chevron-right-sm.inline.svg';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 const SubItem = ({ title, items, currentSlug }) => {
@@ -22,7 +23,8 @@ const SubItem = ({ title, items, currentSlug }) => {
         type="button"
         onClick={handleClick}
       >
-        <ChevronRight className={clsx('mr-2', { 'rotate-90 transform': isOpen })} />
+        <ChevronRight className={clsx('mr-2 hidden rotate-90', { '!block': isOpen })} />
+        <ChevronRightSm className={clsx('mr-2.5', { '!hidden': isOpen })} />
         <span className={clsx('text-base leading-snug', isOpen && 'font-semibold')}>{title}</span>
       </button>
       {isOpen && (
