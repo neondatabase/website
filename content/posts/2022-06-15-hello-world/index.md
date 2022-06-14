@@ -1,7 +1,7 @@
 ---
 title: 'Neon Gatsby'
 description: 'Readme for the Neon website'
-author: 'Stas Kelvich'
+author: 'Nikita Shamgunov'
 ---
 
 ## Table of Contents
