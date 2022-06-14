@@ -1,192 +1,59 @@
 ---
 title: 'Hello World'
-description: 'Readme for the Neon website'
+description: 'Serverless Postgres built for the cloud'
 author: 'Nikita Shamgunov'
 ---
 
-## Table of Contents
+We have just launched Neon designed to provide you with the best Postgres experience in the cloud. You can [sign up to our waitlist](https://neon.tech/early-access/) right now and experience serverless Postgres enabled by the separation of storage and compute. The service is still gated by the waitlist as we are onboarding more and more users every day, and we expect to open it up for everyone soon.
 
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-  - [Run the website](#run-the-website)
-  - [Build the website](#build-the-website)
-  - [Run the built website](#run-the-built-website)
-  - [Clean Gatsby cache](#clean-gatsby-cache)
-- [Project Structure](#project-structure)
-- [Code Style](#code-style)
-  - [ESLint](#eslint)
-  - [Prettier](#prettier)
-  - [VS Code](#vs-code)
-- [Documentation](#docs)
+Our website [leaked](https://news.ycombinator.com/item?id=315368270) to HackerNews a few weeks ago before we officially launched the company. While there was a great deal of discussion there, it’s important to us to talk in detail about the motivation for the project.
 
-## Getting Started
+## Why Neon?
 
-1. Clone this repository
+As we are looking at the world it’s clear to us that database workloads are shifting into the cloud — no one wants to manage a database themselves. We are a team of Postgres hackers, systems and cloud engineers and we are all huge fans of Postgres. We believe that in the ever-changing technology stack Postgres is here to stay. Just like Linux operating system or Git version control Postgres is the default choice for a relational database system.
 
-```bash
-git clone git@github.com:neondatabase/website.git
-```
+That’s why lots of platforms such as AWS, Azure, Google Cloud Platform, Digital Ocean, Heroku, as well as newcomers like Fly.io (we are big fans) offer Postgres as a service.
 
-2. Install dependencies
+## Built for the Cloud
 
-```bash
-npm install
-```
+If you look at the architecture of Postgres deployments, be that self-hosted, managed or cloud, often it looks like this:
 
-3. Fill environment variables
+![Typical Postgres Setups](typical_postgres_setups.png)
 
-```bash
-cp .env.example .env
-```
+If you squint at this diagram you realize that in order to get more throughput or storage, a user has to migrate to bigger host machines, and the service provider needs to explicitly manage the migration procedure to avoid downtimes. Due to the monolith architecture of Postgres you end up overprovisioning either storage or compute which also has a direct implication on the cost of running the service in the cloud. Another problem is that since you have to handle failover you are paying triple for storage and compute. Amazon EBS volumes provide you yet another level of redundancy, but they also charge for it. EBS volumes are very expensive, they throttle your throughput unless you pay for provisioned IOPs in which case your costs balloon even further.
 
-## Usage
+We realized that a modern Postgres service can be designed differently in order to be cheaper and more efficient in cloud environments, but it will require some real systems engineering. We call this approach **separation of storage and compute**. It allows us to architect the service around performance, reliability, manageability, and cost. Cost is particularly important when you design a system for the cloud. Any cloud service has an infrastructure bill that it has to pass on to the end user. If you don’t account for cost at the architecture level running a service can get very expensive. That’s why when you build for the cloud you have to make the cost of running the service an important design consideration on par with manageability, reliability, and performance. One of the immediate implications of designing for cost was to never use EBS volumes and use a combination of local storage and S3 instead. Local storage for hot and S3 for cold data.
 
-### Run the website
+The architecture diagram looks like this. At the bottom of our diagram is our distributed multi-tenant storage that we built from the ground up. It integrates into Postgres without the need of forking Postgres itself (it does require small changes in the engine that we are aiming to commit upstream). You can read more on the details of this architecture in our next posts.
 
-```bash
-npm run start
-```
+![Neon Architecure](neon_architecture.png)
 
-### Build the website
+Each user gets a dedicated Postgres that we run in a container, while the data is safely stored in our multi-tenant storage system. Storage consists of two services: Safekeepers and Pageservers. Safekeepers implement a consensus protocol. The combination of Safekeepers and S3 provide the system of record. Pageservers serve database pages with low latency and provide “scratch space” for updates. Pageservers are not part of the system of record - you can lose all the pageservers and won’t lose any data.
 
-```bash
-npm run build
-```
+## Architecture Benefits
 
-### Run the built website
+This architecture provides a surprising number of benefits. Compared to the “naive” approach the most obvious are cost and elasticity of storage (bottomless). Compute and storage are separated, so you don’t overprovision either. Storage is backed up by a reliable and cost effective S3, so we do not have to triple the cost of storing the data.The quorum only has to store a small window of the most recent data which is not yet saved in S3. Moreover, quorum nodes can be shared between users, so the end user does not pay triple for the compute either. Backups and restores are integrated seamlessly as they are all built into the storage architecture. And most importantly this design allows us to deliver on a better developer experience (DevX), with elasticity, branching, and time machine. All these are enabled by our ability to transparently serve a Postgres instance any version of any page from our storage system.
 
-```bash
-npm run serve
-```
+## Serverless
 
-### Clean Gatsby cache
+Since storage is separate, compute, which is a Postgres process, becomes stateless (barring the buffer cache). This allows dynamically rescheduling compute and moving it from one node to another. And this opens up the possibility to run a compute layer that scales in response to changes in traffic, including the scale down to 0 when the database is not in use. You don’t need to specify the size of the compute instance. You push a button and get Postgres in under 3 seconds. Your only interface to it is a connection string and we will handle the rest.
 
-```bash
-npm run clean
-```
+Here is an example of spinning up Postgres in 3 seconds.
 
-## Project Structure
+![Start Neon Project](neon_project_start.png)
 
-```text
-├── docs — Documentation sources in `mdbook` format, see [Documentation](#docs) section
-├── src
-│   ├── components
-│   │  ├── pages — React components that are being used specifically on a certain page
-│   │  └── shared — React components that are being used across the whole website
-│   ├── hooks
-│   ├── images
-│   ├── pages
-│   ├── styles
-│   ├── templates
-│   ├── utils
-│   └── html.jsx — HTML template for all generated pages. Read more about it here — gatsbyjs.org/docs/custom-html
-├── static
-│   └── fonts
-├── gatsby-browser.js — Usage of the Gatsby browser APIs. Read more about it [here](gatsbyjs.org/docs/browser-apis)
-├── gatsby-config.js — Main configuration file for a Gatsby site. Read more about it [here](gatsbyjs.org/docs/gatsby-config)
-├── gatsby-node.js — Usage of the Gatsby Node APIs. [Read more about it here](gatsbyjs.org/docs/node-apis)
-└── gatsby-ssr.js — Usage of the Gatsby server-side rendering APIs. [Read more about it here](gatsbyjs.org/docs/ssr-apis)
-```
+## Branching
 
-## Component Folder Structure
+Today everyone who is following modern app development practices needs to easily create dev, stage, and test environments. Modern developer workflow includes GitLab CI/CD, GitHub actions and other various CD/CI tools. Developers send pull requests and have platforms like [Vercel](https://vercel.com/) to compile, test, and deploy their code. Databases today don’t support this workflow very well and the key missing feature for this was branching – the ability to create a branch of the whole database similar to how Git does it.
 
-### Each component includes
+Neon allows instantly branching your Postgres database to support a modern development workflow. You can create a branch for your test environments for every code deployment in your CI/CD pipeline. You can test migrations against a recent production snapshot without affecting the production. Branches are created instantly and implemented using the "copy on write" technique. In the current version you have to contact us separately if you want to try branching after receiving an invitation. We will open it up for everyone as we build the UI support.
 
-1. Main JavaScript File
-2. Index File
+## Open Source
 
-### Each component optionally may include
+We are not the first to offer separation of storage and compute for Postgres. AWS Aurora is probably the most famous example, however it is proprietary and tied to AWS's internal infrastructure.
 
-1. Folder with images and icons
-2. Folder with data
+We think we have an opportunity to define the standard for cloud Postgres. We carefully designed our storage focusing on cloud independence, performance, manageability, DevX, and cost. We chose the most permissive open source license: Apache 2.0 and invited the world to participate. You can already build and run your own fully featured instance of Neon.
 
-Also, each component may include another component that follows all above listed rules.
+## Hello World
 
-### Example structure
-
-```bash
-component
-├── nested-component
-│  ├── data
-│  │  └── nested-component-lottie-data.json
-│  ├── images
-│  │  ├── nested-component-image.jpg
-│  │  ├── nested-component-inline-svg.inline.svg
-│  │  └── nested-component-url-svg.url.svg
-│  ├── nested-component.js
-│  └── index.js
-├── data
-│  └── component-lottie-data.json
-├── images
-│  ├── component-image.jpg
-│  ├── component-inline-svg.inline.svg
-│  └── component-url-svg.url.svg
-├── component.js
-└── index.js
-```
-
-## Code Style
-
-### ESLint
-
-[ESLint](https://eslint.org/) helps find and fix code style issues and force developers to follow same rules. Current configuration is based on [Airbnb style guide](https://github.com/airbnb/javascript).
-
-Additional commands:
-
-```bash
-npm run lint
-```
-
-Run it to check the current status of eslint issues across project.
-
-```bash
-npm run lint:fix
-```
-
-Run it to fix all possible issues.
-
-### Prettier
-
-[Prettier](https://prettier.io/) helps to format code based on defined rules. [Difference between Prettier and ESLint](https://prettier.io/docs/en/comparison.html).
-
-Additional commands:
-
-```bash
-npm run format
-```
-
-Run it to format all files across the project.
-
-### VS Code
-
-Following extensions required to simplify the process of keeping the same code style across the project:
-
-- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-
-After installation enable "ESLint on save" by adding to your VS Code settings.json the following line:
-
-```json
-"editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-}
-```
-
-You can navigate to settings.json by using Command Pallete (CMD+Shift+P) and then type "Open settings.json".
-
-To enable Prettier go to Preferences -> Settings -> type "Format". Then check that you have esbenp.prettier-vscode as default formatter, and also enable "Format On Save".
-
-Reload VS Code and auto-format will work for you.
-
-## Documentation
-
-Documentation is in the [mdBook](https://rust-lang.github.io/mdBook/) format.
-To build it locally you need `mdbook` binaries installed:
-
-```bash
-cargo install mdbook
-cd docs
-mdbook build
-```
-
-During the deploy documentation is automatically built by the `./build_docs.sh` script which places results into `public/docs`.
+Please welcome Neon to the world. Follow @neondatabase on [Twitter](https://twitter.com/Neondatabase) or [GitHub](https://github.com/neondatabase/) and be on the lookout for exciting new features we will be continuously shipping.
