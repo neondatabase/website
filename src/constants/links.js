@@ -3,7 +3,7 @@ export default {
   team: '/team/',
   jobs: '/jobs/',
   earlyAccess: '/early-access/',
-  security: '/security/',
+  security: '/docs/security/',
   discord: 'https://discord.gg/YKY4CBXZT2',
   discussions: 'https://github.com/neondatabase/neon/discussions',
   github: 'https://github.com/neondatabase/neon',

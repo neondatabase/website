@@ -48,15 +48,19 @@ export default {
       ],
     },
     {
-      heading: 'Docs',
+      heading: 'Resources',
       links: [
         {
-          text: 'Our docs',
+          text: 'Neon docs',
           to: LINKS.docs,
         },
         {
           text: 'Postgres docs',
           to: LINKS.postgresDocs,
+        },
+        {
+          text: 'Security',
+          to: LINKS.security,
         },
         {
           text: 'Postgres mailing lists',
@@ -78,15 +82,6 @@ export default {
         {
           text: 'Github',
           to: LINKS.github,
-        },
-      ],
-    },
-    {
-      heading: 'Legal',
-      links: [
-        {
-          text: 'Security',
-          to: LINKS.security,
         },
       ],
     },
