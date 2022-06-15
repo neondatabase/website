@@ -67,10 +67,10 @@ export default {
     {
       heading: 'Social',
       links: [
-        // {
-        //   text: 'Twitter',
-        //   to: LINKS.twitter,
-        // },
+        {
+          text: 'Twitter',
+          to: LINKS.twitter,
+        },
         // {
         //   text: 'Discord',
         //   to: LINKS.discord,

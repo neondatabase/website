@@ -6,7 +6,7 @@ export default {
   discord: 'https://discord.gg/YKY4CBXZT2',
   discussions: 'https://github.com/neondatabase/neon/discussions',
   github: 'https://github.com/neondatabase/neon',
-  twitter: '/',
+  twitter: 'http://twitter.com/neondatabase/',
   postgresDocs: 'https://www.postgresql.org/docs/',
   postgresList: 'https://www.postgresql.org/list/',
   privacy: '/',

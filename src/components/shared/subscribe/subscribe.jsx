@@ -12,10 +12,10 @@ import GithubIcon from './images/subscribe-github.inline.svg';
 // import TwitterIcon from './images/subscribe-twitter.inline.svg';
 
 const links = [
-  // {
-  //   icon: TwitterIcon,
-  //   to: LINKS.twitter,
-  // },
+  {
+    icon: TwitterIcon,
+    to: LINKS.twitter,
+  },
   // {
   //   icon: DiscordIcon,
   //   to: LINKS.discord,
