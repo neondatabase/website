@@ -46,18 +46,14 @@ In order to add a new category to the sidebar, add a new item to the top level a
 For example:
 
 ```diff
- - title: Category
+ - title: Category 1
    items:
      - title: Page 1
        slug: page-1
-     - title: Page 2
-       slug: page-2
-+- title: New Category
++- title: Category 2
 +  items:
-+    - title: Page 3
-+      slug: page-3
-+    - title: Page 4
-+      slug: page-4
++    - title: Page 2
++      slug: page-2
 ```
 
 ### How to add a new subcategory
@@ -67,18 +63,18 @@ In order to add a new subcategory, add a new item to `items` array with keys `ti
 For example:
 
 ```diff
- - title: Category
+ - title: Category 1
    items:
      - title: Page 1
        slug: page-1
+ - title: Category 2
+   items:
      - title: Page 2
        slug: page-2
-+    - title: New Subcategory
++    - title: Subcategory 1
 +      items:
 +        - title: Page 3
-+          slug: page-4
-+        - title: Page 4
-+          slug: page-4
++          slug: page-3
 ```
 
 ### How to add a new page
@@ -91,22 +87,22 @@ In order to add a new page, add a new item to `items` array with keys `title` an
 For example:
 
 ```diff yaml
- - title: Category
+ - title: Category 1
    items:
      - title: Page 1
        slug: page-1
+ - title: Category 2
+   items:
      - title: Page 2
        slug: page-2
-+    - title: New Page 1
-+      slug: new-page-1
-     - title: Subcategory
-       items:
-         - title: Page 3
-           slug: page-4
-         - title: Page 4
-           slug: page-4
-+        - title: New Page 2
-+          slug: new-page-2
+    - title: Subcategory 1
+      items:
+        - title: Page 3
+          slug: page-3
++       - title: Page 4
++         slug: page-4
++   - title: Page 5
++     slug: page-5
 ```
 
 ## Code blocks
