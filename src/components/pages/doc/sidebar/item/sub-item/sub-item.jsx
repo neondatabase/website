@@ -19,13 +19,13 @@ const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
   return (
     <>
       <button
-        className="-ml-4 flex items-center pt-2.5 pb-2 transition-colors duration-200 hover:text-primary-2"
+        className="-ml-4 flex w-full items-center pt-2.5 pb-2 transition-colors duration-200 hover:text-primary-2"
         type="button"
         tabIndex={!isParentOpen ? '-1' : undefined}
         onClick={handleClick}
       >
-        <ChevronRight className={clsx('mr-2 hidden rotate-90', { '!block': isOpen })} />
-        <ChevronRightSm className={clsx('mr-2.5', { '!hidden': isOpen })} />
+        <ChevronRight className={clsx('mr-2 hidden shrink-0 rotate-90', { '!block': isOpen })} />
+        <ChevronRightSm className={clsx('mr-2.5 shrink-0', { '!hidden': isOpen })} />
         <span className={clsx('text-base leading-snug', isOpen && 'font-semibold')}>{title}</span>
       </button>
       {isOpen && (

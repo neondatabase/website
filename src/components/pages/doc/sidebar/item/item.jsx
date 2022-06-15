@@ -16,11 +16,11 @@ const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
   return (
     <li>
       <button
-        className="flex items-center py-2.5 transition-colors duration-200 hover:text-primary-2"
+        className="flex w-full items-center py-2.5 transition-colors duration-200 hover:text-primary-2"
         type="button"
         onClick={handleClick}
       >
-        <ChevronRight className={clsx('mr-2', { 'rotate-90 transform': isOpen })} />
+        <ChevronRight className={clsx('mr-2 shrink-0', { 'rotate-90 transform': isOpen })} />
         <span className="text-xl font-semibold leading-snug">{title}</span>
       </button>
       <ul className={clsx('pl-4', !isOpen && 'sr-only')}>
