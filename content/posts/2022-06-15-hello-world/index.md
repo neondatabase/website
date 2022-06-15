@@ -1,5 +1,5 @@
 ---
-title: 'Hello World'
+title: 'SELECT ’Hello, World’'
 description: 'Serverless Postgres built for the cloud'
 author: 'Nikita Shamgunov'
 ---
@@ -54,6 +54,6 @@ We are not the first to offer separation of storage and compute for Postgres. AW
 
 We think we have an opportunity to define the standard for cloud Postgres. We carefully designed our storage focusing on cloud independence, performance, manageability, DevX, and cost. We chose the most permissive open source license: Apache 2.0 and invited the world to participate. You can already build and run your own fully-featured instance of Neon.
 
-## Hello World
+## Hello, World
 
 Please welcome Neon to the world. Follow @neondatabase on [Twitter](https://twitter.com/Neondatabase) or [GitHub](https://github.com/neondatabase/) and be on the lookout for exciting new features we will be continuously shipping.
