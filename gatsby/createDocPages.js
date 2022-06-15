@@ -10,7 +10,9 @@ const generateDocPagePath = require('../src/utils/generate-doc-page-path');
 const { DRAFT_FILTER, DOC_REQUIRED_FIELDS } = require('./constants');
 
 const sidebar = jsYaml.load(fs.readFileSync(path.resolve('./content/docs/sidebar.yaml'), 'utf8'));
-const flatSidebar = sidebar.map(({ items }) => items).flat();
+const flatSidebar = sidebar
+  .map(({ items }) => items.map((item) => (item?.items?.length > 0 ? item.items : item)))
+  .flat(2);
 
 module.exports = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions;
