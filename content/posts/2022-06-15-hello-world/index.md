@@ -6,7 +6,7 @@ author: 'Nikita Shamgunov'
 
 We have just launched Neon to provide you with the best Postgres experience in the cloud. You can [sign up to our waitlist](https://neon.tech/early-access/) right now and experience serverless Postgres enabled by the separation of storage and compute. The service is still gated by the waitlist as we are onboarding more and more users every day, and we expect to open it up for everyone soon.
 
-Our website [showed up on HackerNews](https://news.ycombinator.com/item?id=315368270) a few weeks ago, sooner than we expected and before we officially launched the company. While there was a great deal of discussion there, it’s important for us to talk in detail about the motivation for the project.
+Our website [showed up on HackerNews](https://news.ycombinator.com/item?id=31536827) a few weeks ago, sooner than we expected and before we officially launched the company. While there was a great deal of discussion there, it’s important for us to talk in detail about the motivation for the project.
 
 ## Why Neon?
 
