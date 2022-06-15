@@ -15,6 +15,10 @@ export default {
       to: LINKS.jobs,
     },
     {
+      text: 'Blog',
+      to: LINKS.blog,
+    },
+    {
       text: 'Community',
       to: '#',
       items: [
@@ -44,6 +48,10 @@ export default {
         {
           text: 'Jobs',
           to: LINKS.jobs,
+        },
+        {
+          text: 'Blog',
+          to: LINKS.blog,
         },
       ],
     },
@@ -107,6 +115,10 @@ export default {
     {
       text: 'Jobs',
       to: LINKS.jobs,
+    },
+    {
+      text: 'Blog',
+      to: LINKS.blog,
     },
     // {
     //   iconName: 'discord',

@@ -4,4 +4,12 @@ module.exports = {
     name: 'Stas Kelvich',
     photo: '/images/post-authors/stas-kelvich-photo.jpg',
   },
+  'Nikita Shamgunov': {
+    name: 'Nikita Shamgunov',
+    photo: '/images/post-authors/nikita-shamgunov-photo.jpg',
+  },
+  'Heikki Linnakangas': {
+    name: 'Heikki Linnakangas',
+    photo: '/images/post-authors/heikki-linnakangas-photo.jpg',
+  },
 };
