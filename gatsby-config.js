@@ -126,6 +126,23 @@ module.exports = {
         dataLayerName: 'landing',
       },
     },
+    ...(process.env.NODE_ENV === 'production'
+      ? [
+          {
+            resolve: 'gatsby-plugin-algolia-search',
+            options: {
+              appId: process.env.GATSBY_ALGOLIA_APP_ID,
+              apiKey: process.env.ALGOLIA_ADMIN_KEY,
+              indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
+              enablePartialUpdates: true,
+              // eslint-disable-next-line global-require
+              queries: require('./src/utils/algolia-queries'),
+              matchFields: ['title', 'excerpt'],
+              chunkSize: 10000, // default: 1000
+            },
+          },
+        ]
+      : []),
     'gatsby-alias-imports',
     'gatsby-plugin-postcss',
     'gatsby-plugin-sitemap',

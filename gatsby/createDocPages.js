@@ -5,6 +5,7 @@ const jsYaml = require('js-yaml');
 const get = require('lodash.get');
 
 const { DOCS_BASE_PATH } = require('../src/constants/docs');
+const generateDocPagePath = require('../src/utils/generate-doc-page-path');
 
 const { DRAFT_FILTER, DOC_REQUIRED_FIELDS } = require('./constants');
 
@@ -43,7 +44,7 @@ module.exports = async ({ graphql, actions }) => {
 
   createRedirect({
     fromPath: DOCS_BASE_PATH,
-    toPath: `${DOCS_BASE_PATH}${sidebar[0].items[0].slug}/`,
+    toPath: generateDocPagePath(sidebar[0].items[0].slug),
   });
 
   pages.forEach(({ id, slug, frontmatter }) => {
@@ -55,7 +56,7 @@ module.exports = async ({ graphql, actions }) => {
     });
 
     createPage({
-      path: `${DOCS_BASE_PATH}${slug}/`,
+      path: generateDocPagePath(slug),
       component: path.resolve(`./src/templates/doc.jsx`),
       context: { id, sidebar, flatSidebar },
     });

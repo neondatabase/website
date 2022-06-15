@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import Link from 'components/shared/link';
+import Search from 'components/shared/search';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
@@ -15,13 +16,13 @@ const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
     <li>
       <button className="flex items-center py-2.5" type="button" onClick={handleClick}>
         <ChevronRight className={clsx('mr-2', { 'rotate-90 transform': isOpen })} />
-        <span className="text-lg font-semibold leading-none">{title}</span>
+        <span className="text-lg font-semibold leading-snug">{title}</span>
       </button>
       <ul className={clsx('pl-4', !isOpen && 'sr-only')}>
         {items.map(({ title, slug }, index) => (
-          <li className="text-[0]" key={index}>
+          <li key={index}>
             <Link
-              className={clsx('py-2.5', {
+              className={clsx('!block py-2.5 !leading-snug', {
                 'font-semibold text-primary-2': currentSlug === slug,
               })}
               to={`${DOCS_BASE_PATH}${slug}/`}
@@ -61,7 +62,8 @@ const Sidebar = ({ className, sidebar, currentSlug }) => {
 
   return (
     <aside className={className}>
-      <nav>
+      <Search />
+      <nav className="mt-5">
         <ul className="space-y-2">
           {sidebar.map((item, index) => (
             <Item

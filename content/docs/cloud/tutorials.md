@@ -1,8 +1,9 @@
 ---
 title: Tutorials
+
 ---
 
-## Import an existing database to Neon
+## Import an Existing Database to Neon
 
 Migrating an existing Postgres database to Neon can be done almost in the same way
 as copying database from one server to another. Postgres provides several ways to do it.
@@ -10,8 +11,10 @@ as copying database from one server to another. Postgres provides several ways t
 The most straightforward and efficient is to use the `pg_dump` utility:
 
 ```bash
-pg_dump -h HOST-U USER DBNAME|psql -h pg.neon.tech -U username@neon main
+pg_dump -h HOST -U USER DBNAME | psql -h pg.neon.tech
 ```
+
+In this command, replace `HOST`, `USER`, and `DBNAME` with the appropriate values for the database you are importing into neon.
 
 You may need to make `pg_dump` to create data in non-plain-text format.
 
@@ -36,7 +39,7 @@ Select the SQL Editor tab.
 
 Paste a query
 
-```postgresql
+```sql
 create table t (c int);
 insert into t select generate_series(1,100);
 select count(*) from t;
@@ -44,7 +47,7 @@ select count(*) from t;
 
 Click run button to see the results.
 
-## Query with psql
+## Query With Psql
 
 To follow this guide you will need a working installation of [psql](https://www.postgresql.org/download/), the PostgreSQL interactive terminal.
 
@@ -53,27 +56,29 @@ In the console go to the Project Dashboard, click “Generate Token” button, a
 Copy the connection string and run it in the shell:
 
 ```bash
-psql -h pg.neon.tech -U username@neon main
+psql -h postgres://<username>@<project_id>.cloud.neon.tech main
 ```
 
 Run a simple query:
 
-```postgresql
+```sql
 create my_table as select now();
 select * from my_table;
 ```
 
-## Quick connect with github single-sign on
+## Quick Connect With Github Single-Sign On
+
+You can connect to your Project called "Main" using the following command:
 
 ```bash
 psql -h pg.neon.tech
 ```
 
-The above command connects to your Project called 'main'. If it doesn't already exist, it is created. The "main" Project is a great way to get started. However, before moving to production, it is recommended to create a separate Project for each application.
+If it does not already exist, it will then be created. The "Main" Project is a great way to get started. However, before moving to production, it is recommended to create a separate Project for each application.
 
 By default, psql connects to a database with the same name as your OS username. For example, if your OS username is "alice", the above command will connect to a database called "alice".
 
-To connect to a different Project:
+To connect to a different Project, use the following command:
 
 ```bash
 psql -h <project>.pg.neon.tech

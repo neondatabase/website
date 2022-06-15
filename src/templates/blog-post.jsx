@@ -13,9 +13,13 @@ const BlogPostTemplate = ({
   data: {
     mdx: { slug, body, frontmatter },
   },
+  location: { pathname },
 }) => (
   <Layout
-    seo={SEO_DATA.blogPost({ title: frontmatter.title, description: frontmatter.description })}
+    seo={{
+      ...SEO_DATA.blogPost({ title: frontmatter.title, description: frontmatter.description }),
+      pathname,
+    }}
     headerTheme="white"
   >
     <article>

@@ -159,7 +159,12 @@ const Hero = () => {
               </AnimatePresence>
             </div>
             <div className="mt-7 flex items-center justify-between lg:mt-6 lg:flex-col lg:items-center lg:justify-center lg:space-y-6">
-              <Button className="relative" size="xs" theme="primary">
+              <Button
+                className="relative"
+                size="xs"
+                theme="primary"
+                disabled={formState !== 'default'}
+              >
                 <span
                   className={clsx(
                     'transition-opacity duration-200',

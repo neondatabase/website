@@ -61,7 +61,7 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
                       const Icon = icons[iconName];
                       return (
                         <li
-                          className={clsx(index !== 0 && 'mt-3.5 border-t border-t-gray-3 pt-3.5')}
+                          className={clsx(index !== 0 && 'mt-3.5 border-t border-t-gray-4 pt-3.5')}
                           key={index}
                         >
                           <Link

@@ -2,18 +2,29 @@
 title: Run a Node.js app
 ---
 
-1. Add postgres client to your project. In this example we used [postgres.js](https://www.npmjs.com/package/postgres), but feel free to choose another one
-2. Store your Neon credentials somewhere, for example in the `.env` file.
+### Introduction
+
+In this section, you will learn how to add a Postgres client to your Project and connect to your Neon Project.
+
+## Step 1 — Add Postgres client to your Neon Project
+
+First, add a Postgres client to your Project. In this example, we used [postgres.js](https://www.npmjs.com/package/postgres), but feel free to choose another one.
+
+## Step 2 — Store Neon Credentials
+
+Next, store your Neon credentials somewhere, for example, in the `.env` file.
 
 ```shell
-    NEON_HOST=...
-    NEON_DB=...
-    NEON_USER=...
-    NEON_PASS=...
-    NEON_PORT=...` \
+NEON_HOST=...
+NEON_DB=...
+NEON_USER=...
+NEON_PASS=...
+NEON_PORT=...
 ```
 
-3. To connect to the database using postgres client and your Neon credentials, add the following code to the `pages/api/hello_worlds.js`
+## Step 3 — Connect to Database using Postgres client and Neon Credentials
+
+Then, to connect to the database using Postgres client and your Neon credentials, add the following code to the `pages/api/hello_worlds.js`:
 
 ```javascript
 import postgres from 'postgres';

@@ -8,24 +8,6 @@ Neon is protocol- and application-compatible with PostgreSQL. However, when you 
 
 Neon cloud service is currently only compatible with PostgreSQL v14.
 
-## Connected database and catalogs
-
-When you connect to your database through `TODO:MAIN_PROXYHOST`, the database you'll connect to will always be the 'main' database, as that endpoint uses the `database` parameter to determine which Project to connect to. So, if your application queries the catalog tables to determine which databases are available and then uses this to connect to those databases, then that won't work.
-
-### Known affected applications
-
-#### PGAdmin4
-
-PGAdmin4 is currently incompatible with our cloud offering.
-
-#### Jetbrains DataGrip
-
-After connecting, DataGrip will notify you that the connected database has a different name than expected. That notification event allows you to enable single-database mode, after which DataGrip should work fine.
-
-## Authentication
-
-Neon cloud service currently only supports the older MD5-based password authentication. SCRAM-based authentication is still in the works (in [https://github.com/neondatabase/neon/issues/918](https://github.com/neondatabase/neon/issues/918)).
-
 ## Permissions
 
 Neon cloud service does not currently provide the user with access permissions other than those given to a standard database owner in PostgreSQL. Therefore, users of Neon cloud service cannot access either replication method, nor can they install extensions, nor are they allowed to create more users or roles from their PostgreSQL connection.
@@ -36,7 +18,7 @@ List of configuration parameters Neon uses by default:
 
 To check settings that differ from PostgreSQL defaults, run this query:
 
-```postgresql
+```plsql
 select * from pg_settings where source <> 'default';
 ```
 
@@ -76,11 +58,11 @@ Following PostgreSQL extensions come pre-installed:
 
 ## Unlogged tables
 
-Unlogged tables are maintained on local storage of Neon Compute. Such tables do not survive compute restart (incl. when compute becomes idle). Unlike vanilla PostgreSQL where unlogged relations are truncated in case of abnormal process termination (e.g. crash) only. Additionally unlogged tables are limited in by the local storage on compute.
+Unlogged tables are maintained on local storage of Neon Compute. Such tables do not survive compute restart (incl. when compute becomes idle). Unlike vanilla PostgreSQL where unlogged relations are truncated in case of abnormal process termination (e.g. crash) only. Additionally, unlogged tables are limited in by the local storage on compute.
 
 ## Spill/Index build handling
 
-Certain queries in PostgreSQL could generate a dataset which doesn’t fit in memory. In such cases storage is used to spill the data. In Neon local storage is limited on the compute which could limit ability to create large indexes or execute certain queries
+Certain queries in PostgreSQL could generate a dataset which doesn’t fit in memory. In such cases, storage is used to spill the data. In Neon, local storage is limited on the compute which could limit ability to create large indexes or execute certain queries
 
 ## Temp Tables
 

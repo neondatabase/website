@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { prism } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import Button from 'components/shared/button';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
@@ -17,7 +16,7 @@ const CodeBlock = ({ className, children, ...otherProps }) => {
 
   return (
     <div className="group relative" {...otherProps}>
-      <SyntaxHighlighter language={language} style={prism}>
+      <SyntaxHighlighter language={language} useInlineStyles={false}>
         {code}
       </SyntaxHighlighter>
       <Button
