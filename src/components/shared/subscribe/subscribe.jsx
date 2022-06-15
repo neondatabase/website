@@ -9,12 +9,17 @@ import LINKS from 'constants/links';
 
 // import DiscordIcon from './images/subscribe-discord.inline.svg';
 import GithubIcon from './images/subscribe-github.inline.svg';
-// import TwitterIcon from './images/subscribe-twitter.inline.svg';
+import LinkedinIcon from './images/subscribe-linkedin.inline.svg';
+import TwitterIcon from './images/subscribe-twitter.inline.svg';
 
 const links = [
   {
     icon: TwitterIcon,
     to: LINKS.twitter,
+  },
+  {
+    icon: LinkedinIcon,
+    to: LINKS.linkedin,
   },
   // {
   //   icon: DiscordIcon,

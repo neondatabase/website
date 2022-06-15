@@ -71,6 +71,10 @@ export default {
           text: 'Twitter',
           to: LINKS.twitter,
         },
+        {
+          text: 'LinkedIn',
+          to: LINKS.linkedin,
+        },
         // {
         //   text: 'Discord',
         //   to: LINKS.discord,
