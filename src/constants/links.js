@@ -2,6 +2,7 @@ export default {
   docs: '/docs/cloud/about/',
   team: '/team/',
   jobs: '/jobs/',
+  blog: '/blog/',
   earlyAccess: '/early-access/',
   discord: 'https://discord.gg/YKY4CBXZT2',
   discussions: 'https://github.com/neondatabase/neon/discussions',
