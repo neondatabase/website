@@ -30,8 +30,8 @@
           slug: cloud/nested-1
     - title: Run a Vercel and Next.js app
       slug: quickstart/vercel
-    - title: Run a Symphony app
-      slug: quickstart/symphony
+    - title: Run a Symfony app
+      slug: quickstart/symfony
     - title: Run a Java app
       slug: quickstart/java
     - title: Run a Go app
