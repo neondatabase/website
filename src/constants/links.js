@@ -10,5 +10,7 @@ export default {
   twitter: '/',
   postgresDocs: 'https://www.postgresql.org/docs/',
   postgresList: 'https://www.postgresql.org/list/',
+  privacy: '/',
+  terms: '/',
   dashboard: 'https://console.neon.tech/sign_in',
 };

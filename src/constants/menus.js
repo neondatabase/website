@@ -85,6 +85,19 @@ export default {
         },
       ],
     },
+    // {
+    //   heading: 'Legal',
+    //   links: [
+    //     {
+    //       text: 'Privacy policy',
+    //       to: LINKS.privacy,
+    //     },
+    //     {
+    //       text: 'Terms of service',
+    //       to: LINKS.terms,
+    //     },
+    //   ],
+    // },
   ],
   mobile: [
     {
