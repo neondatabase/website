@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-    connStr := "user=<user> password=<token> dbname=main host=<project>.cloud.neon.tech"
+    connStr := "user=<user> password=<password> dbname=main host=<project>.cloud.neon.tech"
     db, err := sql.Open("postgres", connStr)
     if err != nil {
         log.Fatal(err)
