@@ -2,6 +2,7 @@
 title: 'SELECT ’Hello, World’'
 description: 'Serverless Postgres built for the cloud'
 author: 'Nikita Shamgunov'
+redirectFrom:
   - /some-path/some-other-path/
 ---
 

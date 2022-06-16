@@ -1,5 +1,6 @@
 ---
 title: Neon API
+redirectFrom:
   - /docs/add-react-to-an-existing-app/
 ---
 
