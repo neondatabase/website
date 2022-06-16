@@ -28,9 +28,11 @@ module.exports = async ({ graphql, actions }) => {
           nodes {
             id
             slug
+            fields {
+              redirectFrom
+            }
             frontmatter {
               title
-              redirectFrom
             }
           }
         }
@@ -48,7 +50,7 @@ module.exports = async ({ graphql, actions }) => {
     toPath: generateDocPagePath(sidebar[0].items[0].items?.[0]?.slug ?? sidebar[0].items[0].slug),
   });
 
-  pages.forEach(({ id, slug, frontmatter }) => {
+  pages.forEach(({ id, slug, fields: { redirectFrom }, frontmatter }) => {
     // Required fields validation
     DOC_REQUIRED_FIELDS.forEach((fieldName) => {
       if (!get(frontmatter, fieldName)) {
@@ -58,8 +60,10 @@ module.exports = async ({ graphql, actions }) => {
 
     const pagePath = generateDocPagePath(slug);
 
-    if (frontmatter.redirectFrom?.length > 0) {
-      frontmatter.redirectFrom.forEach((redirectFromPath) => {
+    // Checking if value of redirectFrom is not default
+    // Default value of redirectFrom is ['']
+    if (redirectFrom[0].length > 0) {
+      redirectFrom.forEach((redirectFromPath) => {
         actions.createRedirect({
           fromPath: redirectFromPath,
           toPath: pagePath,

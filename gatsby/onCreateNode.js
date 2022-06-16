@@ -11,7 +11,8 @@ module.exports = ({ node, actions }) => {
     createNodeField({
       node,
       name: 'redirectFrom',
-      value: node.frontmatter.redirectFrom || [],
+      // We had to use array with one empty string as default value so it would pop up in the GraphQL
+      value: node.frontmatter.redirectFrom || [''],
     });
   }
 };
