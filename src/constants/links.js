@@ -4,6 +4,7 @@ export default {
   jobs: '/jobs/',
   blog: '/blog/',
   earlyAccess: '/early-access/',
+  security: '/docs/security/',
   discord: 'https://discord.gg/YKY4CBXZT2',
   discussions: 'https://github.com/neondatabase/neon/discussions',
   github: 'https://github.com/neondatabase/neon',

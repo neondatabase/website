@@ -3,5 +3,6 @@
   "ol-prefix": false,
   "no-inline-html": {
     "allowed_elements": ["iframe"]
-  }
+  },
+  "no-trailing-punctuation": false
 }
