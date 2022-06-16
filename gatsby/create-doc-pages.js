@@ -8,7 +8,7 @@ const { DOCS_BASE_PATH } = require('../src/constants/docs');
 const generateDocPagePath = require('../src/utils/generate-doc-page-path');
 
 const { DRAFT_FILTER, DOC_REQUIRED_FIELDS } = require('./constants');
-const createRedirects = require('./createRedirects');
+const createRedirects = require('./create-redirects');
 
 const sidebar = jsYaml.load(fs.readFileSync(path.resolve('./content/docs/sidebar.yaml'), 'utf8'));
 const flatSidebar = sidebar

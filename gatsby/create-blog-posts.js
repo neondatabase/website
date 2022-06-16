@@ -2,8 +2,11 @@ const path = require('path');
 
 const get = require('lodash.get');
 
-const { DRAFT_FILTER, STATIC_PAGE_REQUIRED_FIELDS } = require('./constants');
-const createRedirects = require('./createRedirects');
+const POST_AUTHORS = require('../src/constants/post-authors');
+const getBlogPostPath = require('../src/utils/get-blog-post-path');
+
+const { DRAFT_FILTER, POST_REQUIRED_FIELDS } = require('./constants');
+const createRedirects = require('./create-redirects');
 
 module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
@@ -11,7 +14,7 @@ module.exports = async ({ graphql, actions }) => {
       query ($draftFilter: [Boolean]!) {
         allMdx(
           filter: {
-            fileAbsolutePath: { regex: "/content/static-pages/" }
+            fileAbsolutePath: { regex: "/content/posts/" }
             fields: { isDraft: { in: $draftFilter } }
           }
         ) {
@@ -23,6 +26,8 @@ module.exports = async ({ graphql, actions }) => {
             }
             frontmatter {
               title
+              description
+              author
             }
           }
         }
@@ -35,19 +40,25 @@ module.exports = async ({ graphql, actions }) => {
 
   result.data.allMdx.nodes.forEach(({ id, slug, fields: { redirectFrom }, frontmatter }) => {
     // Required fields validation
-    STATIC_PAGE_REQUIRED_FIELDS.forEach((fieldName) => {
+    POST_REQUIRED_FIELDS.forEach((fieldName) => {
       if (!get(frontmatter, fieldName)) {
-        throw new Error(`Static page "${slug}" does not have field "${fieldName}"!`);
+        throw new Error(`Post "${slug}" does not have field "${fieldName}"!`);
       }
     });
 
-    const pagePath = `/${slug}/`;
+    if (!Object.keys(POST_AUTHORS).includes(frontmatter.author)) {
+      throw new Error(
+        `Post "${slug}" has unknown author "${frontmatter.author}"!\nPlease check an array of authors in "/src/constants/post-authors.js"`
+      );
+    }
+
+    const pagePath = getBlogPostPath(slug);
 
     createRedirects({ redirectFrom, actions, pagePath });
 
     actions.createPage({
       path: pagePath,
-      component: path.resolve('./src/templates/static.jsx'),
+      component: path.resolve('./src/templates/blog-post.jsx'),
       context: { id },
     });
   });
