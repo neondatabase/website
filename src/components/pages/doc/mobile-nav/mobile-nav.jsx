@@ -14,7 +14,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
   return (
     <nav className={clsx('relative', className)}>
       <select
-        className="w-full appearance-none border-2 border-black bg-white px-5 py-3 outline-none"
+        className="w-full appearance-none text-ellipsis border-2 border-black bg-white py-3 pl-5 pr-8 outline-none"
         value={currentSlug}
         onChange={handleChange}
       >
