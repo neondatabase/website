@@ -1,5 +1,6 @@
 {
   "line-length": false,
   "ol-prefix": false,
-  "no-inline-html": false
+  "no-inline-html": false,
+  "no-trailing-punctuation": false
 }
