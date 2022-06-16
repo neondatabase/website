@@ -54,7 +54,7 @@ module.exports = async ({ graphql, actions }) => {
 
     const pagePath = getBlogPostPath(slug);
 
-    if (frontmatter.redirectFrom) {
+    if (frontmatter.redirectFrom?.length > 0) {
       frontmatter.redirectFrom.forEach((redirectFromPath) => {
         actions.createRedirect({
           fromPath: redirectFromPath,
