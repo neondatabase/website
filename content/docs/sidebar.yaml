@@ -34,17 +34,6 @@
       slug: quickstart/django
     - title: Run a Node.js app
       slug: quickstart/node
-<<<<<<< HEAD
-    - title: Run a Symphony app
-      slug: quickstart/symphony
-    - title: Others
-      slug: integrations/integrations-list
-    - title: Run a Postgres app
-      slug: quickstart/postgres
-    - title: Run a SQL Alchemy app
-      slug: quickstart/sqlalchemy
-- title: How-To Guides
-=======
     - title: Run a Vercel and Next.js app
       slug: quickstart/vercel
     - title: Run a Symfony app
@@ -53,8 +42,7 @@
       slug: quickstart/java
     - title: Run a Go app
       slug: quickstart/go
-- title: API
->>>>>>> abee270ed6a760f12702a00b002e2feb84bcec43
+- title: How-to Guides
   items:
     - title: Import an Existing Database
       slug: how-to-guides/import-an-existing-database
