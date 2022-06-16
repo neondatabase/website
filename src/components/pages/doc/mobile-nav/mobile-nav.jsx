@@ -26,8 +26,8 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
             <optgroup label={sidebarItem.title} key={index}>
               {sidebarItem.items.map(({ title, slug, items }, index) => (
                 <Fragment key={index}>
-                  {items && items.length > 0 ? (
-                    items?.map(({ title: title2, slug }, index) => (
+                  {items?.length > 0 ? (
+                    items.map(({ title: title2, slug }, index) => (
                       <option value={slug} key={index}>
                         {title}: {title2}
                       </option>

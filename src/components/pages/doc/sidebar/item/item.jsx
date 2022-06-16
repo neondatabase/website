@@ -26,7 +26,7 @@ const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
       <ul className={clsx('pl-4', !isOpen && 'sr-only')}>
         {items.map(({ title, slug, items }, index) => (
           <li key={index}>
-            {items && items.length > 0 ? (
+            {items?.length > 0 ? (
               <SubItem
                 title={title}
                 items={items}

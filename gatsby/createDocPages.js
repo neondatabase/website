@@ -45,11 +45,7 @@ module.exports = async ({ graphql, actions }) => {
 
   createRedirect({
     fromPath: DOCS_BASE_PATH,
-    toPath: generateDocPagePath(
-      sidebar[0].items[0].items?.[0]?.slug
-        ? sidebar[0].items[0].items?.[0]?.slug
-        : sidebar[0].items[0].slug
-    ),
+    toPath: generateDocPagePath(sidebar[0].items[0].items?.[0]?.slug ?? sidebar[0].items[0].slug),
   });
 
   pages.forEach(({ id, slug, frontmatter }) => {
