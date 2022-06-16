@@ -27,6 +27,7 @@ module.exports = async ({ graphql, actions }) => {
               title
               description
               author
+              redirectFrom
             }
           }
         }
@@ -51,8 +52,20 @@ module.exports = async ({ graphql, actions }) => {
       );
     }
 
+    const pagePath = getBlogPostPath(slug);
+
+    if (frontmatter.redirectFrom) {
+      frontmatter.redirectFrom.forEach((redirectFromPath) => {
+        actions.createRedirect({
+          fromPath: redirectFromPath,
+          toPath: pagePath,
+          isPermanent: true,
+        });
+      });
+    }
+
     actions.createPage({
-      path: getBlogPostPath(slug),
+      path: pagePath,
       component: path.resolve('./src/templates/blog-post.jsx'),
       context: { id },
     });

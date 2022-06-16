@@ -1,5 +1,7 @@
 ---
 title: Neon API
+redirectFrom:
+  - /docs/add-react-to-an-existing-app/
 ---
 
 Neon API allows you to manage Projects and branches programmatically. This is helpful when using Neon as a part of the CI/CD flow.

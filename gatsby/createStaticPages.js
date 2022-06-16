@@ -19,6 +19,7 @@ module.exports = async ({ graphql, actions }) => {
             slug
             frontmatter {
               title
+              redirectFrom
             }
           }
         }
@@ -37,8 +38,20 @@ module.exports = async ({ graphql, actions }) => {
       }
     });
 
+    const pagePath = `/${slug}/`;
+
+    if (frontmatter.redirectFrom) {
+      frontmatter.redirectFrom.forEach((redirectFromPath) => {
+        actions.createRedirect({
+          fromPath: redirectFromPath,
+          toPath: pagePath,
+          isPermanent: true,
+        });
+      });
+    }
+
     actions.createPage({
-      path: `/${slug}/`,
+      path: pagePath,
       component: path.resolve('./src/templates/static.jsx'),
       context: { id },
     });

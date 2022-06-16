@@ -15,8 +15,6 @@ const flatSidebar = sidebar
   .flat(2);
 
 module.exports = async ({ graphql, actions }) => {
-  const { createPage, createRedirect } = actions;
-
   const result = await graphql(
     `
       query ($draftFilter: [Boolean]!) {
@@ -32,6 +30,7 @@ module.exports = async ({ graphql, actions }) => {
             slug
             frontmatter {
               title
+              redirectFrom
             }
           }
         }
@@ -44,7 +43,7 @@ module.exports = async ({ graphql, actions }) => {
 
   const pages = result.data.allMdx.nodes;
 
-  createRedirect({
+  actions.createRedirect({
     fromPath: DOCS_BASE_PATH,
     toPath: generateDocPagePath(sidebar[0].items[0].items?.[0]?.slug ?? sidebar[0].items[0].slug),
   });
@@ -57,8 +56,20 @@ module.exports = async ({ graphql, actions }) => {
       }
     });
 
-    createPage({
-      path: generateDocPagePath(slug),
+    const pagePath = generateDocPagePath(slug);
+
+    if (frontmatter.redirectFrom) {
+      frontmatter.redirectFrom.forEach((redirectFromPath) => {
+        actions.createRedirect({
+          fromPath: redirectFromPath,
+          toPath: pagePath,
+          isPermanent: true,
+        });
+      });
+    }
+
+    actions.createPage({
+      path: pagePath,
       component: path.resolve(`./src/templates/doc.jsx`),
       context: { id, sidebar, flatSidebar },
     });
