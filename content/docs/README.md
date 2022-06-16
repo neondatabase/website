@@ -37,7 +37,8 @@ Welcome to Neon docs! This folder contains the source code of the [Neon docs](ht
 Right now Markdown files accept 2 fields:
 
 1. `title` — title of the page (required)
-2. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
+2. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/docs/old-path/`
+3. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 
