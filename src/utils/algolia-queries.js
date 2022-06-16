@@ -7,6 +7,7 @@ const queries = [
         filter: {
           fileAbsolutePath: { regex: "/content/docs/" }
           fields: { isDraft: { in: [false] } }
+          slug: { ne: "README" }
         }
       ) {
           nodes {

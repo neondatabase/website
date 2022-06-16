@@ -1,8 +1,6 @@
 {
   "line-length": false,
   "ol-prefix": false,
-  "no-inline-html": {
-    "allowed_elements": ["iframe"]
-  },
+  "no-inline-html": false,
   "no-trailing-punctuation": false
 }
