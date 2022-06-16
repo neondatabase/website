@@ -24,10 +24,6 @@
       slug: quickstart/sqlalchemy
     - title: Run a Node.js app
       slug: quickstart/node
-    - title: Nested example 1
-      items:
-        - title: Nested example item 1
-          slug: cloud/nested-1
     - title: Run a Vercel and Next.js app
       slug: quickstart/vercel
     - title: Run a Symfony app
@@ -36,10 +32,6 @@
       slug: quickstart/java
     - title: Run a Go app
       slug: quickstart/go
-    - title: Nested example 2
-      items:
-        - title: Nested example item 2
-          slug: cloud/nested/nested-2
 - title: API
   items:
     - title: Neon API
