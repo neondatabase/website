@@ -3,6 +3,7 @@ const path = require('path');
 const get = require('lodash.get');
 
 const { DRAFT_FILTER, STATIC_PAGE_REQUIRED_FIELDS } = require('./constants');
+const createRedirects = require('./createRedirects');
 
 module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
@@ -42,17 +43,7 @@ module.exports = async ({ graphql, actions }) => {
 
     const pagePath = `/${slug}/`;
 
-    // Checking if value of redirectFrom is not default
-    // Default value of redirectFrom is ['']
-    if (redirectFrom[0].length > 0) {
-      redirectFrom.forEach((redirectFromPath) => {
-        actions.createRedirect({
-          fromPath: redirectFromPath,
-          toPath: pagePath,
-          isPermanent: true,
-        });
-      });
-    }
+    createRedirects({ redirectFrom, actions, pagePath });
 
     actions.createPage({
       path: pagePath,

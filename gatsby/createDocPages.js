@@ -8,6 +8,7 @@ const { DOCS_BASE_PATH } = require('../src/constants/docs');
 const generateDocPagePath = require('../src/utils/generate-doc-page-path');
 
 const { DRAFT_FILTER, DOC_REQUIRED_FIELDS } = require('./constants');
+const createRedirects = require('./createRedirects');
 
 const sidebar = jsYaml.load(fs.readFileSync(path.resolve('./content/docs/sidebar.yaml'), 'utf8'));
 const flatSidebar = sidebar
@@ -60,17 +61,7 @@ module.exports = async ({ graphql, actions }) => {
 
     const pagePath = generateDocPagePath(slug);
 
-    // Checking if value of redirectFrom is not default
-    // Default value of redirectFrom is ['']
-    if (redirectFrom[0].length > 0) {
-      redirectFrom.forEach((redirectFromPath) => {
-        actions.createRedirect({
-          fromPath: redirectFromPath,
-          toPath: pagePath,
-          isPermanent: true,
-        });
-      });
-    }
+    createRedirects({ redirectFrom, actions, pagePath });
 
     actions.createPage({
       path: pagePath,

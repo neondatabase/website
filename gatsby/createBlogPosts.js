@@ -6,6 +6,7 @@ const POST_AUTHORS = require('../src/constants/post-authors');
 const getBlogPostPath = require('../src/utils/get-blog-post-path');
 
 const { DRAFT_FILTER, POST_REQUIRED_FIELDS } = require('./constants');
+const createRedirects = require('./createRedirects');
 
 module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
@@ -53,17 +54,7 @@ module.exports = async ({ graphql, actions }) => {
 
     const pagePath = getBlogPostPath(slug);
 
-    // Checking if value of redirectFrom is not default
-    // Default value of redirectFrom is ['']
-    if (redirectFrom[0].length > 0) {
-      redirectFrom.forEach((redirectFromPath) => {
-        actions.createRedirect({
-          fromPath: redirectFromPath,
-          toPath: pagePath,
-          isPermanent: true,
-        });
-      });
-    }
+    createRedirects({ redirectFrom, actions, pagePath });
 
     actions.createPage({
       path: pagePath,
