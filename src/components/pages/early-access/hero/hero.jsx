@@ -64,6 +64,11 @@ const Hero = () => {
       })
         .then((response) => {
           if (response.ok) {
+            try {
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({ event: 'early_access_submitted' });
+            } catch (e) {}
+
             doNowOrAfterSomeTime(() => {
               setFormState('success');
 
