@@ -12,26 +12,6 @@ Neon cloud service is currently only compatible with PostgreSQL v14.
 
 Neon cloud service does not currently provide the user with access permissions other than those given to a standard database owner in PostgreSQL. Therefore, users of Neon cloud service cannot access either replication method, nor can they install extensions, nor are they allowed to create more users or roles from their PostgreSQL connection.
 
-## Default Parameters
-
-List of configuration parameters Neon uses by default:
-
-To check settings that differ from PostgreSQL defaults, run this query:
-
-```plsql
-select * from pg_settings where source <> 'default';
-```
-
-| Name                 | Value   | Note                                                                                      |
-| -------------------- | ------- | ----------------------------------------------------------------------------------------- |
-| shared_buffers       | 512MB   |                                                                                           |
-| fsync                | off     | Don’t be surprised. Neon syncs data to Neon Storage Engine and stores your data reliably. |
-| wal_level            | replica |                                                                                           |
-| max_connections      |         |                                                                                           |
-| autovacuum_work_mem  |         |                                                                                           |
-| work_mem             |         |                                                                                           |
-| maintenance_work_mem |         |                                                                                           |
-
 ## Default Extensions
 
 During technical preview Neon has restrictions on user ability to install PostgreSQL extensions.
