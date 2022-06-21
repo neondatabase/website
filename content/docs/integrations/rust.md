@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Rust
+redirectFrom: docs/quickstart/rust
 ---
 
 ```rust

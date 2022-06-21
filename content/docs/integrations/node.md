@@ -1,5 +1,6 @@
 ---
 title: Run a Node.js app
+redirectFrom: docs/quickstart/node
 ---
 
 ### Introduction

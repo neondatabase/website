@@ -19,29 +19,29 @@
     - title: Cloud Integrations
       slug: integrations/integrations-list
     - title: Run a Hasura app
-      slug: quickstart/hasura
+      slug: integrations/hasura
     - title: Run a Vercel and Next.js app
-      slug: quickstart/vercel
+      slug: integrations/vercel
     - title: Run a Prisma app
-      slug: quickstart/prisma
+      slug: integrations/prisma
     - title: Frameworks & Programming Languages
       slug: integrations/integrations-list
     - title: Run a Go app
-      slug: quickstart/go
+      slug: integrations/go
     - title: Run a Java app
-      slug: quickstart/java
+      slug: integrations/java
     - title: Run a Django app
-      slug: quickstart/django
+      slug: integrations/django
     - title: Run a Node.js app
-      slug: quickstart/node
+      slug: integrations/node
     - title: Run a Vercel and Next.js app
-      slug: quickstart/vercel
+      slug: integrations/vercel
     - title: Run a Symfony app
-      slug: quickstart/symfony
+      slug: integrations/symfony
     - title: Run a Java app
-      slug: quickstart/java
+      slug: integrations/java
     - title: Run a Go app
-      slug: quickstart/go
+      slug: integrations/go
 - title: How-to Guides
   items:
     - title: Import an Existing Database

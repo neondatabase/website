@@ -1,5 +1,6 @@
 ---
 title: Run a SQL Alchemy App
+redirectFrom: docs/quickstart/sqlalchemy
 ---
 
 ### Introduction

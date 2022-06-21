@@ -1,5 +1,6 @@
 ---
 title: Run a Prisma App
+redirectFrom: docs/quickstart/prisma
 ---
 
 ### Introduction

@@ -1,5 +1,6 @@
 ---
 title: Run a Postgres App
+redirectFrom: docs/quickstart/postgres
 ---
 
 Since Neon compute is regular Postgres, any Postgres app will run out of the box.

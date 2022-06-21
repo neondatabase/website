@@ -1,5 +1,6 @@
 ---
 title: Run a Java app
+redirectFrom: docs/quickstart/java
 ---
 
 ## Connect with Java Database Connectivity (JDBC)
