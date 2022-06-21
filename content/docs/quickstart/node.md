@@ -37,5 +37,5 @@ const sql = postgres({
   password: process.env.NEON_PASS,
 });
 
-const result = await sql.uafe(req.body);
+const result = await sql.unsafe(req.body);
 ```
