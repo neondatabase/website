@@ -122,7 +122,7 @@ module.exports = {
       options: {
         id: 'GTM-MJLTK6F',
         includeInDevelopment: false,
-        routeChangeEventName: 'landing_route_change',
+        routeChangeEventName: 'gatsby-route-change',
       },
     },
     ...(process.env.NODE_ENV === 'production'
