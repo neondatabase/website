@@ -121,8 +121,6 @@ module.exports = {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
         id: 'GTM-MJLTK6F',
-        includeInDevelopment: false,
-        routeChangeEventName: 'gatsby-route-change',
       },
     },
     ...(process.env.NODE_ENV === 'production'
