@@ -123,7 +123,6 @@ module.exports = {
         id: 'GTM-MJLTK6F',
         includeInDevelopment: false,
         routeChangeEventName: 'landing_route_change',
-        dataLayerName: 'landing',
       },
     },
     ...(process.env.NODE_ENV === 'production'
