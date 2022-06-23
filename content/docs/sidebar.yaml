@@ -52,6 +52,10 @@
       slug: reference/roadmap
     - title: API Reference
       slug: reference/about
+- title: Architecture
+  items:
+    - title: Architecture Overview
+      slug: storage-engine/architecture-overview
     - title: Glossary
       slug: reference/glossary
     - title: Neon Default Extensions
@@ -68,3 +72,15 @@
       slug: conceptual-guides/compute-lifecycle
     - title: Branches
       slug: conceptual-guides/branches
+    - title: Compatibility
+      slug: cloud/compatibility
+    - title: Roadmap
+      slug: cloud/roadmap
+- title: Others
+  items:
+    - title: Concepts
+      slug: cloud/concepts
+    - title: Tutorials
+      slug: cloud/tutorials
+    - title: Neon API
+      slug: api/about
