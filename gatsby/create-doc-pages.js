@@ -8,13 +8,14 @@ const { DOCS_BASE_PATH } = require('../src/constants/docs');
 const generateDocPagePath = require('../src/utils/generate-doc-page-path');
 
 const { DRAFT_FILTER, DOC_REQUIRED_FIELDS } = require('./constants');
+const createRedirects = require('./create-redirects');
 
 const sidebar = jsYaml.load(fs.readFileSync(path.resolve('./content/docs/sidebar.yaml'), 'utf8'));
-const flatSidebar = sidebar.map(({ items }) => items).flat();
+const flatSidebar = sidebar
+  .map(({ items }) => items.map((item) => (item?.items?.length > 0 ? item.items : item)))
+  .flat(2);
 
 module.exports = async ({ graphql, actions }) => {
-  const { createPage, createRedirect } = actions;
-
   const result = await graphql(
     `
       query ($draftFilter: [Boolean]!) {
@@ -22,11 +23,15 @@ module.exports = async ({ graphql, actions }) => {
           filter: {
             fileAbsolutePath: { regex: "/content/docs/" }
             fields: { isDraft: { in: $draftFilter } }
+            slug: { ne: "README" }
           }
         ) {
           nodes {
             id
             slug
+            fields {
+              redirectFrom
+            }
             frontmatter {
               title
             }
@@ -41,12 +46,12 @@ module.exports = async ({ graphql, actions }) => {
 
   const pages = result.data.allMdx.nodes;
 
-  createRedirect({
+  actions.createRedirect({
     fromPath: DOCS_BASE_PATH,
-    toPath: generateDocPagePath(sidebar[0].items[0].slug),
+    toPath: generateDocPagePath(sidebar[0].items[0].items?.[0]?.slug ?? sidebar[0].items[0].slug),
   });
 
-  pages.forEach(({ id, slug, frontmatter }) => {
+  pages.forEach(({ id, slug, fields: { redirectFrom }, frontmatter }) => {
     // Required fields validation
     DOC_REQUIRED_FIELDS.forEach((fieldName) => {
       if (!get(frontmatter, fieldName)) {
@@ -54,8 +59,12 @@ module.exports = async ({ graphql, actions }) => {
       }
     });
 
-    createPage({
-      path: generateDocPagePath(slug),
+    const pagePath = generateDocPagePath(slug);
+
+    createRedirects({ redirectFrom, actions, pagePath });
+
+    actions.createPage({
+      path: pagePath,
       component: path.resolve(`./src/templates/doc.jsx`),
       context: { id, sidebar, flatSidebar },
     });

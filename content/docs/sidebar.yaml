@@ -84,3 +84,5 @@
       slug: cloud/tutorials
     - title: Neon API
       slug: api/about
+    - title: Security
+      slug: security

@@ -15,6 +15,10 @@ export default {
       to: LINKS.jobs,
     },
     {
+      text: 'Blog',
+      to: LINKS.blog,
+    },
+    {
       text: 'Community',
       to: '#',
       items: [
@@ -45,18 +49,26 @@ export default {
           text: 'Jobs',
           to: LINKS.jobs,
         },
+        {
+          text: 'Blog',
+          to: LINKS.blog,
+        },
       ],
     },
     {
-      heading: 'Docs',
+      heading: 'Resources',
       links: [
         {
-          text: 'Our docs',
+          text: 'Neon docs',
           to: LINKS.docs,
         },
         {
           text: 'Postgres docs',
           to: LINKS.postgresDocs,
+        },
+        {
+          text: 'Security',
+          to: LINKS.security,
         },
         {
           text: 'Postgres mailing lists',
@@ -67,10 +79,14 @@ export default {
     {
       heading: 'Social',
       links: [
-        // {
-        //   text: 'Twitter',
-        //   to: LINKS.twitter,
-        // },
+        {
+          text: 'Twitter',
+          to: LINKS.twitter,
+        },
+        {
+          text: 'LinkedIn',
+          to: LINKS.linkedin,
+        },
         // {
         //   text: 'Discord',
         //   to: LINKS.discord,
@@ -107,6 +123,10 @@ export default {
     {
       text: 'Jobs',
       to: LINKS.jobs,
+    },
+    {
+      text: 'Blog',
+      to: LINKS.blog,
     },
     // {
     //   iconName: 'discord',

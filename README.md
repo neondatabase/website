@@ -13,7 +13,7 @@
   - [ESLint](#eslint)
   - [Prettier](#prettier)
   - [VS Code](#vs-code)
-- [Documentation](#docs)
+- [Docs](#docs)
 
 ## Getting Started
 
@@ -174,15 +174,6 @@ To enable Prettier go to Preferences -> Settings -> type "Format". Then check th
 
 Reload VS Code and auto-format will work for you.
 
-## Documentation
+## Docs
 
-Documentation is in the [mdBook](https://rust-lang.github.io/mdBook/) format.
-To build it locally you need `mdbook` binaries installed:
-
-```bash
-cargo install mdbook
-cd docs
-mdbook build
-```
-
-During the deploy documentation is automatically built by the `./build_docs.sh` script which places results into `public/docs`.
+Documentation for docs is described in [content/docs/README.md](./content/docs/README.md)

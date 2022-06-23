@@ -6,6 +6,7 @@ const POST_AUTHORS = require('../src/constants/post-authors');
 const getBlogPostPath = require('../src/utils/get-blog-post-path');
 
 const { DRAFT_FILTER, POST_REQUIRED_FIELDS } = require('./constants');
+const createRedirects = require('./create-redirects');
 
 module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
@@ -21,7 +22,7 @@ module.exports = async ({ graphql, actions }) => {
             id
             slug
             fields {
-              isDraft
+              redirectFrom
             }
             frontmatter {
               title
@@ -37,7 +38,7 @@ module.exports = async ({ graphql, actions }) => {
 
   if (result.errors) throw new Error(result.errors);
 
-  result.data.allMdx.nodes.forEach(({ id, slug, frontmatter }) => {
+  result.data.allMdx.nodes.forEach(({ id, slug, fields: { redirectFrom }, frontmatter }) => {
     // Required fields validation
     POST_REQUIRED_FIELDS.forEach((fieldName) => {
       if (!get(frontmatter, fieldName)) {
@@ -51,8 +52,12 @@ module.exports = async ({ graphql, actions }) => {
       );
     }
 
+    const pagePath = getBlogPostPath(slug);
+
+    createRedirects({ redirectFrom, actions, pagePath });
+
     actions.createPage({
-      path: getBlogPostPath(slug),
+      path: pagePath,
       component: path.resolve('./src/templates/blog-post.jsx'),
       context: { id },
     });
