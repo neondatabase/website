@@ -8,6 +8,7 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import logoBlack from 'images/logo-black.svg';
 import logoWhite from 'images/logo-white.svg';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 import CheckIcon from './images/check.inline.svg';
 
@@ -64,10 +65,7 @@ const Hero = () => {
       })
         .then((response) => {
           if (response.ok) {
-            try {
-              window.dataLayer = window.dataLayer || [];
-              window.dataLayer.push({ event: 'early_access_submitted' });
-            } catch (e) {}
+            sendGtagEvent('early_access_submitted');
 
             doNowOrAfterSomeTime(() => {
               setFormState('success');
