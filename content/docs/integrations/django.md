@@ -1,6 +1,7 @@
 ---
 title: Run a Django App
-redirectFrom: docs/quickstart/django/
+redirectFrom: 
+ - docs/quickstart/django/
 ---
 
 ### Introduction

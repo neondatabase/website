@@ -1,11 +1,11 @@
 ---
 title: Roadmap
+redirectFrom:
+- docs/cloud/roadmap
 ---
 
-Neon is in the **Limited Preview** now. Reach out to Neon employees or to beta@neon.tech to procure the invite.
+Neon was in the **Limited Preview**, starting February 2022, available to a handful of select users and friends.
 
-Neon team is working towards the **Technical Preview** when Neon will become available without invites. During the Technical Preview, anyone can try Neon's Free Tier.
-
-**Public Branching Release** will follow shortly after.
+On 15th of June Neon team announced the **Technical Preview**, and Neon will become available to more people. During the Technical Preview, thousands of users will be able to try Neon's Free Tier. Branching, support of Regions and other features will be released during the summer of 2022.
 
 Neon team aims to announce the General Availability of the service before the end of 2022.
