@@ -7,6 +7,7 @@ export default {
   security: '/docs/security/',
   discord: 'https://discord.gg/YKY4CBXZT2',
   discussions: 'https://github.com/neondatabase/neon/discussions',
+  discourse: 'https://community.neon.tech',
   github: 'https://github.com/neondatabase/neon',
   twitter: 'http://twitter.com/neondatabase/',
   linkedin: 'https://www.linkedin.com/company/neon-inc/',

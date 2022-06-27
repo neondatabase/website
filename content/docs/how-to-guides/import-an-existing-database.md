@@ -1,9 +1,8 @@
 ---
-title: Tutorials
-
+title: Import an Existing Database
+redirectFrom: 
+- docs/cloud/tutorials
 ---
-
-## Import an Existing Database to Neon
 
 Migrating an existing Postgres database to Neon can be done almost in the same way
 as copying database from one server to another. Postgres provides several ways to do it.
@@ -30,56 +29,3 @@ You can also configure logical replication to let Neon receive stream of updates
 Please note that some of Postgres features that require access to the local file system are not supported by Neon. For example tablespaces, large objects. Please take it in account when migrating an existing database schema to Neon.
 
 You can definitely copy not only the whole database, but also particular tables. It can be done using `COPY` command in the same way as populating table in vanilla Postgres. The only specific of Neon is that populated data is transferred through replication stream and so may affect speed of execution of some other queries even not related with this table.
-
-## Query via UI
-
-In console ([https://console.neon.tech/](https://console.neon.tech/)) select your Project to see the Project details.
-
-Select the SQL Editor tab.
-
-Paste a query
-
-```sql
-create table t (c int);
-insert into t select generate_series(1,100);
-select count(*) from t;
-```
-
-Click run button to see the results.
-
-## Query With Psql
-
-To follow this guide you will need a working installation of [psql](https://www.postgresql.org/download/), the PostgreSQL interactive terminal.
-
-In the console go to the Project Dashboard, click “Generate Token” button, and follow the instructions to save the password into .pgpass file
-
-Copy the connection string and run it in the shell:
-
-```bash
-psql -h postgres://<username>@<project_id>.cloud.neon.tech main
-```
-
-Run a simple query:
-
-```sql
-create my_table as select now();
-select * from my_table;
-```
-
-## Quick Connect With Github Single-Sign On
-
-You can connect to your Project called "Main" using the following command:
-
-```bash
-psql -h pg.neon.tech
-```
-
-If it does not already exist, it will then be created. The "Main" Project is a great way to get started. However, before moving to production, it is recommended to create a separate Project for each application.
-
-By default, psql connects to a database with the same name as your OS username. For example, if your OS username is "alice", the above command will connect to a database called "alice".
-
-To connect to a different Project, use the following command:
-
-```bash
-psql -h <project>.pg.neon.tech
-```

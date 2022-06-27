@@ -30,9 +30,9 @@ export default {
         // },
         {
           iconName: 'discussions',
-          text: 'Discussions',
+          text: 'Community',
           description: 'Get help',
-          to: LINKS.discussions,
+          to: LINKS.discourse,
         },
       ],
     },
@@ -136,9 +136,9 @@ export default {
     // },
     {
       iconName: 'discussions',
-      text: 'Discussions',
+      text: 'Community',
       description: 'Get help',
-      to: LINKS.discussions,
+      to: LINKS.discourse,
     },
   ],
 };

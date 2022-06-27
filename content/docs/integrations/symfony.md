@@ -1,5 +1,7 @@
 ---
 title: Run a Symfony app
+redirectFrom: 
+ - docs/quickstart/symfony
 ---
 
 ### Introduction
