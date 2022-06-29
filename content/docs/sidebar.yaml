@@ -36,10 +36,8 @@
         slug: integrations/node
       - title: Run a Symfony app
         slug: integrations/symfony
-      - title: Run a Java app
-        slug: integrations/java
-      - title: Run a Go app
-        slug: integrations/go
+      - title: Run a Rust app
+        slug: integrations/rust
     - title: Run a Postgres app
       slug: integrations/postgres
     - title: Run a SQLAlchemy app
