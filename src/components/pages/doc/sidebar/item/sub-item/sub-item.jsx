@@ -19,7 +19,7 @@ const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
   return (
     <>
       <button
-        className="-ml-4 flex w-full items-center pt-2.5 pb-2 transition-colors duration-200 hover:text-primary-2"
+        className="-ml-4 flex w-full items-center pt-2.5 pb-2 text-left transition-colors duration-200 hover:text-primary-2"
         type="button"
         tabIndex={!isParentOpen ? '-1' : undefined}
         onClick={handleClick}

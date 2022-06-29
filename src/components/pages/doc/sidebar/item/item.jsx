@@ -16,7 +16,7 @@ const Item = ({ title, items, isOpenByDefault, currentSlug }) => {
   return (
     <li>
       <button
-        className="flex w-full items-center py-2.5 transition-colors duration-200 hover:text-primary-2"
+        className="flex w-full items-center py-2.5 text-left transition-colors duration-200 hover:text-primary-2"
         type="button"
         onClick={handleClick}
       >
