@@ -1,5 +1,7 @@
 ---
 title: Neon Compatibility
+redirectFrom:
+  - docs/conceptual-guides/compatibility
 ---
 
 Neon is protocol- and application-compatible with PostgreSQL. However, when you connect to our cloud offering, there are some limitations that you need to take into account.
@@ -35,6 +37,26 @@ Following PostgreSQL extensions come pre-installed:
 | lo            | 1.1     |      |
 | ltree         | 1.2     |      |
 | seg           | 1.4     |      |
+
+## Default Parameters
+
+List of configuration parameters Neon uses by default:
+
+To check settings that differ from PostgreSQL defaults, run this query:
+
+```plsql
+select * from pg_settings where source <> 'default';
+```
+
+| Name                 | Value   | Note                                                                                      |
+| -------------------- | ------- | ----------------------------------------------------------------------------------------- |
+| shared_buffers       | 512MB   |                                                                                           |
+| fsync                | off     | Don’t be surprised. Neon syncs data to Neon Storage Engine and stores your data reliably. |
+| wal_level            | replica |                                                                                           |
+| max_connections      |         |                                                                                           |
+| autovacuum_work_mem  |         |                                                                                           |
+| work_mem             |         |                                                                                           |
+| maintenance_work_mem |         |                                                                                           |
 
 ## Unlogged tables
 
