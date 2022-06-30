@@ -1,6 +1,6 @@
 ---
 title: 'Showcase of Neon Branching to Run Prisma Migrations'
-description: 'presention at Prisma Day 2022'
+description: 'Presentation at Prisma Day 2022'
 author: 'Nikita Shamgunov'
 ---
 
