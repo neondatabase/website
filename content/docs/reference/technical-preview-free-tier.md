@@ -10,7 +10,7 @@ Technical Preview Free Tier users can only create three Projects in Neon. Projec
 - PITR time window is limited to 7 days of _reasonable usage_;
 - Compute node can use up to 1vCPU/256 MB.
 
-_Note: Technical Preview Free Tier limits are subject to change over the course of [Technical Preview](../roadmap)._
+_Note: We intend to keep a Free Tier and will shape the limits over the course of this year. Technical Preview Free Tier limits are subject to change over the course of [Technical Preview](../roadmap)._
 
 ## Data Size
 
