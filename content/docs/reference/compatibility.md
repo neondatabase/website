@@ -1,5 +1,7 @@
 ---
 title: Neon Compatibility
+redirectFrom:
+  - docs/conceptual-guides/compatibility
 ---
 
 Neon is protocol- and application-compatible with PostgreSQL. However, when you connect to our cloud offering, there are some limitations that you need to take into account.
@@ -11,6 +13,8 @@ Neon cloud service is currently only compatible with PostgreSQL v14.
 ## Permissions
 
 Neon cloud service does not currently provide the user with access permissions other than those given to a standard database owner in PostgreSQL. Therefore, users of Neon cloud service cannot access either replication method, nor can they install extensions, nor are they allowed to create more users or roles from their PostgreSQL connection.
+
+<a id="default-extensions/"></a>
 
 ## Default Extensions
 
@@ -35,6 +39,28 @@ Following PostgreSQL extensions come pre-installed:
 | lo            | 1.1     |      |
 | ltree         | 1.2     |      |
 | seg           | 1.4     |      |
+
+<a id="default-parameters/"></a>
+
+## Default Parameters
+
+List of configuration parameters Neon uses by default:
+
+To check settings that differ from PostgreSQL defaults, run this query:
+
+```plsql
+select * from pg_settings where source <> 'default';
+```
+
+| Name                 | Value   | Note                                                                                      |
+| -------------------- | ------- | ----------------------------------------------------------------------------------------- |
+| shared_buffers       | 512MB   |                                                                                           |
+| fsync                | off     | Don’t be surprised. Neon syncs data to Neon Storage Engine and stores your data reliably. |
+| wal_level            | replica |                                                                                           |
+| max_connections      |         |                                                                                           |
+| autovacuum_work_mem  |         |                                                                                           |
+| work_mem             |         |                                                                                           |
+| maintenance_work_mem |         |                                                                                           |
 
 ## Unlogged tables
 
