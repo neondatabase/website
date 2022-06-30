@@ -4,8 +4,6 @@
       slug: cloud/about
     - title: Get Started with Neon
       items:
-        - title: Getting Started
-          slug: get-started-with-neon/getting-started
         - title: Signing Up
           slug: get-started-with-neon/signing-up
         - title: Setting up a Project
@@ -36,14 +34,10 @@
         slug: integrations/django
       - title: Run a Node.js app
         slug: integrations/node
-      - title: Run a Vercel and Next.js app
-        slug: integrations/vercel
       - title: Run a Symfony app
         slug: integrations/symfony
-      - title: Run a Java app
-        slug: integrations/java
-      - title: Run a Go app
-        slug: integrations/go
+      - title: Run a Rust app
+        slug: integrations/rust
     - title: Run a Postgres app
       slug: integrations/postgres
     - title: Run a SQLAlchemy app
@@ -59,7 +53,9 @@
     - title: API Reference
       slug: reference/about
     - title: Glossary
-      slug: reference/glossary
+      slug: reference/glossary    
+    - title: Compatibility
+      slug: reference/compatibility
     - title: Neon Default Extensions
       slug: reference/compatibility/#default-extensions
     - title: Neon Default Parameters
@@ -74,10 +70,7 @@
       slug: conceptual-guides/compute-lifecycle
     - title: Branches
       slug: conceptual-guides/branches
-    - title: Compatibility
-      slug: conceptual-guides/compatibility
-    - title: Roadmap
-      slug: conceptual-guides/roadmap
+
 - title: Security
   items:
     - title: Security
