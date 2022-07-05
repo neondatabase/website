@@ -62,10 +62,6 @@
       slug: reference/compatibility/#default-parameters
     - title: Technical Preview Free Tier in Neon
       slug: reference/technical-preview-free-tier
-- title: Releases
-  items:
-    - title: "2022-06-27"
-      slug: releases/2022-06-27      
 - title: Conceptual Guides
   items:
     - title: Neon Architecture
@@ -79,3 +75,5 @@
   items:
     - title: Security
       slug: security
+- title: Release Notes
+  slug: release-notes      
