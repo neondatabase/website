@@ -1,6 +1,5 @@
 ---
 title: About Neon
-
 ---
 
 Neon is a fully managed serverless Postgres with a generous free tier.
@@ -20,7 +19,7 @@ In fact, branches are so cheap that you can create a branch for every code deplo
 
 ## Fully managed
 
-Neon cloud service provides high availability without any administrative, maintenance, or scaling burden. Check [our documentation](../getting_started) for Neon users.
+Neon cloud service provides high availability without any administrative, maintenance, or scaling burden. Check [our documentation](../get-started-with-neon/signing-up) for Neon users.
 
 ## Bottomless Storage
 
