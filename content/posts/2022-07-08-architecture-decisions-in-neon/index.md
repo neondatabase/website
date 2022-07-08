@@ -2,6 +2,7 @@
 title: 'Architecture decisions in Neon'
 description: 'Decisions we made on Neon architecture'
 author: 'Heikki Linnakangas'
+cover: ./architecture-cover.jpeg
 ---
 
 The idea behind Neon is to create a new serverless Postgres service with a modern cloud-native architecture. When building for the cloud it usually is a good idea to separate storage and compute. For operational databases such design was first introduced by AWS Aurora [^1], followed by many others [^2][^3], however none of the implementations were open source and native to Postgres.
