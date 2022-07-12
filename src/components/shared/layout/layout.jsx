@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useState, useRef } from 'react';
 
@@ -56,5 +57,47 @@ Layout.defaultProps = {
   seo: {},
   withOverflowHidden: false,
 };
+
+export const query = graphql`
+  fragment wpPageSeo on WpPage {
+    seo {
+      title
+      metaDesc
+      metaKeywords
+      metaRobotsNoindex
+      opengraphTitle
+      opengraphDescription
+      opengraphUrl
+      opengraphImage {
+        localFile {
+          childImageSharp {
+            gatsbyImageData(layout: FIXED, quality: 90, width: 1200, height: 630, formats: JPG)
+          }
+        }
+      }
+      canonical
+    }
+  }
+
+  fragment wpPostSeo on WpPost {
+    seo {
+      title
+      metaDesc
+      metaKeywords
+      metaRobotsNoindex
+      opengraphTitle
+      opengraphDescription
+      opengraphUrl
+      opengraphImage {
+        localFile {
+          childImageSharp {
+            gatsbyImageData(layout: FIXED, quality: 90, width: 1200, height: 630, formats: JPG)
+          }
+        }
+      }
+      canonical
+    }
+  }
+`;
 
 export default Layout;
