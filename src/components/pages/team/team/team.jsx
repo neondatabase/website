@@ -47,12 +47,6 @@ const members = [
     twitterUrl: 'https://twitter.com/Bojan93112526',
   },
   {
-    photo: <StaticImage src="./images/megan-fulcher-photo.jpg" alt="Megan Fulcher" />,
-    name: 'Megan Fulcher',
-    position: 'Business Operations Manager',
-    linkedinUrl: 'https://www.linkedin.com/in/megan-fulcher/',
-  },
-  {
     photo: (
       <StaticImage src="./images/anastasia-lubennikova-photo.jpg" alt="Anastasia Lubennikova" />
     ),
@@ -98,12 +92,6 @@ const members = [
     name: 'Polina Semenova',
     position: 'Software Engineer',
     githubUrl: 'https://github.com/seymourisdead',
-  },
-  {
-    photo: <StaticImage src="./images/peter-geoghegan-photo.jpg" alt="Peter Geoghegan" />,
-    name: 'Peter Geoghegan',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/petergeoghegan',
   },
   {
     photo: <StaticImage src="./images/dmitry-rodionov-photo.jpg" alt="Dmitry Rodionov" />,
