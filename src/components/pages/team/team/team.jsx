@@ -165,37 +165,36 @@ const members = [
     photo: <StaticImage src="./images/aleksander-bayandin-photo.jpg" alt="Aleksander Bayandin" />,
     name: 'Aleksander Bayandin',
     position: 'Lead QA Automation Engineer',
-    githubUrl: 'https://github.com/SergeyMelnikov',
+    githubUrl: 'https://github.com/bayandin',
   },
   {
     photo: <StaticImage src="./images/eduard-dyckman-photo.jpg" alt="Eduard Dyckman" />,
     name: 'Eduard Dyckman',
     position: 'Software Engineer',
-    githubUrl: 'https://github.com/SergeyMelnikov',
+    githubUrl: 'https://github.com/duskpoet',
   },
   {
     photo: <StaticImage src="./images/kliment-serafimov-photo.jpg" alt="Kliment Serafimov" />,
     name: 'Kliment Serafimov',
     position: 'Software Engineer',
-    githubUrl: 'https://github.com/SergeyMelnikov',
+    githubUrl: 'https://github.com/klimentserafimov',
   },
   {
     photo: <StaticImage src="./images/lassi-polonen-photo.jpg" alt="Lassi Pölönen" />,
     name: 'Lassi Pölönen',
     position: 'Site Reliability Engineer',
-    githubUrl: 'https://github.com/SergeyMelnikov',
   },
   {
     photo: <StaticImage src="./images/rory-de-zoete-photo.jpg" alt="Rory de Zoete" />,
     name: 'Rory de Zoete',
     position: 'Site Reliability Engineer',
-    githubUrl: 'https://github.com/SergeyMelnikov',
+    githubUrl: 'https://github.com/zoete',
   },
   {
     photo: <StaticImage src="./images/thang-pham-photo.jpg" alt="Thang Pham" />,
     name: 'Thang Pham',
     position: 'Software Engineer',
-    githubUrl: 'https://github.com/SergeyMelnikov',
+    githubUrl: 'https://github.com/aome510',
   },
 ];
 
