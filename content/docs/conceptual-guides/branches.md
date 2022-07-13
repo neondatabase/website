@@ -1,10 +1,12 @@
 ---
 title: Branches
+redirectFrom:
+  - /docs/cloud/concepts/#branches-coming-soon
 ---
 
 _Neon Branching capabilities are not publicly available yet. If you would like to try out this feature, reach out to iwantbranching@neon.tech describing your use case and request to enable branching capabilities for your account._
 
-A branch is a copy of the [Project Data](../cloud/concepts/#project) created from the current state or any past state that is still available (see [PITR](../reference/technical-preview-free-tier/#point-in-time-reset)). A branch can be independently modified from its originating project data.
+A branch is a copy of the project data created from the current state or any past state that is still available (see [PITR](../../reference/technical-preview-free-tier/#point-in-time-reset)). A branch can be independently modified from its originating project data.
 
 You can use a branch to:
 

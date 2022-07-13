@@ -1,5 +1,8 @@
 ---
 title: Technical Preview Free Tier
+redirectFrom:
+  - /docs/cloud/concepts/#branches-coming-soon
+  - /docs/cloud/concepts/#point-in-time-reset
 ---
 
 Neon cloud service is available for free during the [Limited and the Technical Preview](../roadmap).
