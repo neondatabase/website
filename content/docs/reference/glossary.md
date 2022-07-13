@@ -1,5 +1,7 @@
 ---
 title: Glossary
+redirectFrom:
+  - /docs/conceptual-guides/glossary
 ---
 
 ## Postgres

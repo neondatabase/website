@@ -47,6 +47,6 @@ Neon has limits on the amount of modification history stored for the [Technical 
 
 During the Technical Preview, Neon only supports modification to session level configuration parameters. Parameters are reset when the session is terminated (e.g. when compute is suspended).
 
-See [Default Parameters](../compatibiilty#default-parameters).
+See [Default Parameters](../compatibility#default-parameters).
 
 See [https://www.postgresql.org/docs/14/runtime-config.html](https://www.postgresql.org/docs/14/runtime-config.html) for details.
