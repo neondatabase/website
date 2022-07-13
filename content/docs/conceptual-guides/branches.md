@@ -1,8 +1,10 @@
 ---
 title: Branches
 redirectFrom:
-  - /docs/cloud/concepts/#branches-coming-soon
+  - /docs/cloud/concepts/
 ---
+
+<a id="branches-coming-soon/"></a>
 
 _Neon Branching capabilities are not publicly available yet. If you would like to try out this feature, reach out to iwantbranching@neon.tech describing your use case and request to enable branching capabilities for your account._
 

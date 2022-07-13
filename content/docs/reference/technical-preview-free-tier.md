@@ -1,8 +1,7 @@
 ---
 title: Technical Preview Free Tier
 redirectFrom:
-  - /docs/cloud/concepts/#branches-coming-soon
-  - /docs/cloud/concepts/#point-in-time-reset
+  - /docs/cloud/concepts/
 ---
 
 Neon cloud service is available for free during the [Limited and the Technical Preview](../roadmap).
@@ -39,6 +38,8 @@ When the limit is reached, you will see the PostgreSQL error message:
 could not extend file because cluster size limit (10240 MB)
 has been exceeded
 ```
+
+<a id="#point-in-time-reset/"></a>
 
 ## Point in Time Reset
 
