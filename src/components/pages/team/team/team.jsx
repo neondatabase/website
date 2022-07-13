@@ -190,12 +190,12 @@ const members = [
     position: 'Site Reliability Engineer',
     githubUrl: 'https://github.com/zoete',
   },
-  {
-    photo: <StaticImage src="./images/thang-pham-photo.jpg" alt="Thang Pham" />,
-    name: 'Thang Pham',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/aome510',
-  },
+  // {
+  //   photo: <StaticImage src="./images/thang-pham-photo.jpg" alt="Thang Pham" />,
+  //   name: 'Thang Pham',
+  //   position: 'Software Engineer',
+  //   githubUrl: 'https://github.com/aome510',
+  // },
 ];
 
 const Team = () => (
