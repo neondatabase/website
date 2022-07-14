@@ -1,7 +1,6 @@
 ---
 title: Technical Preview Free Tier
 redirectFrom:
-  - /docs/cloud/concepts/
 ---
 
 Neon cloud service is available for free during the [Limited and the Technical Preview](../roadmap).
