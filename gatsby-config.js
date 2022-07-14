@@ -139,6 +139,12 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-meta-redirect',
     {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
+      },
+    },
+    {
       resolve: 'gatsby-source-wordpress',
       options: {
         url: process.env.WP_GRAPHQL_URL,

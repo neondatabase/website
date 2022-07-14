@@ -45,7 +45,6 @@ Layout.propTypes = {
   seo: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
-    canonicalUrl: PropTypes.string,
     pathname: PropTypes.string.isRequired,
   }),
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
@@ -75,7 +74,6 @@ export const query = graphql`
           }
         }
       }
-      canonical
     }
   }
 
@@ -95,7 +93,6 @@ export const query = graphql`
           }
         }
       }
-      canonical
     }
   }
 `;

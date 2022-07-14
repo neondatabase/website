@@ -16,6 +16,7 @@ const Hero = ({ title, description, author, date }) => (
             imgClassName="rounded-full"
             image={getImage(author.postAuthor.image.localFile)}
             alt={author.title}
+            loading="eager"
           />
           <span className="t-lg ml-3 font-semibold xs:ml-1.5">{author.title}</span>
         </div>

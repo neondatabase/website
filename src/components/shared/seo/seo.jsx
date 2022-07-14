@@ -7,7 +7,6 @@ import createMetaImagePath from 'utils/create-meta-image-path';
 
 const SEO = ({
   pathname,
-  canonicalUrl,
   title,
   description,
   ogImage,
@@ -64,8 +63,6 @@ const SEO = ({
       {facebook && <meta property="fb:app_id" content={facebook.appId} />}
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      {/* Canonical */}
-      <link rel="canonical" href={canonicalUrl || currentUrl} />
     </Helmet>
   );
 };
@@ -74,7 +71,6 @@ SEO.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   pathname: PropTypes.string.isRequired,
-  canonicalUrl: PropTypes.string,
   ogImage: PropTypes.shape({}),
   metaKeywords: PropTypes.string,
   metaRobotsNoindex: PropTypes.string,
@@ -90,7 +86,6 @@ SEO.propTypes = {
 SEO.defaultProps = {
   title: null,
   description: null,
-  canonicalUrl: null,
   ogImage: null,
   metaKeywords: null,
   metaRobotsNoindex: null,
