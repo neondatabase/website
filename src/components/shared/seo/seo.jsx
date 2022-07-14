@@ -16,6 +16,7 @@ const SEO = ({
   opengraphDescription,
   opengraphTitle,
   opengraphImage,
+  opengraphUrl,
   facebook,
 }) => {
   const {
@@ -36,7 +37,8 @@ const SEO = ({
     }
   `);
   const isRobotsNoindexPage = metaRobotsNoindex === 'noindex';
-  const currentUrl = pathname !== '/' ? `${siteUrl}${pathname}` : siteUrl;
+  const currentUrl =
+    (pathname || opengraphUrl) !== '/' ? `${siteUrl}${pathname || opengraphUrl}` : siteUrl;
   const currentDescription = description || opengraphDescription || siteDescription;
   return (
     <Helmet
@@ -78,6 +80,7 @@ SEO.propTypes = {
   metaRobotsNoindex: PropTypes.string,
   opengraphDescription: PropTypes.string,
   opengraphTitle: PropTypes.string,
+  opengraphUrl: PropTypes.string,
   opengraphImage: PropTypes.shape({}),
   facebook: PropTypes.shape({
     appId: PropTypes.string,
@@ -93,6 +96,7 @@ SEO.defaultProps = {
   metaRobotsNoindex: null,
   opengraphDescription: null,
   opengraphTitle: null,
+  opengraphUrl: null,
   opengraphImage: null,
   facebook: null,
 };
