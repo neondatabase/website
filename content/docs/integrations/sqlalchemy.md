@@ -1,7 +1,7 @@
 ---
 title: Run a SQL Alchemy App
-redirectFrom: 
- - docs/quickstart/sqlalchemy
+redirectFrom:
+  - docs/quickstart/sqlalchemy
 ---
 
 ### Introduction
@@ -46,7 +46,7 @@ This step will cover how to get started with writing postgres queries against Ne
 
 First, register on the Neon cloud service and create a Project.
 
-Next, navigate to your Project on [console.neon.tech](https://neon.tech/).
+Next, navigate to your Project on [console.neon.tech](https://console.neon.tech/).
 
 Then, install psycopg2. You may also need psycopg2-binary depending on your system. To install psycopg2-binary, You can run `pip install psycopg2 psycopg2-binary` or use a dependency manager like [Poetry](https://python-poetry.org/) to do the same.
 
