@@ -137,7 +137,6 @@ module.exports = {
     'gatsby-alias-imports',
     'gatsby-plugin-postcss',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-meta-redirect',
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
