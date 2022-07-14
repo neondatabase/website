@@ -16,7 +16,7 @@ const BlogTemplate = ({
   pageContext: { currentPageIndex, pageCount },
 }) => (
   <Layout seo={{ ...seo, pathname: BLOG_BASE_PATH }} headerTheme="white">
-    <PostsList items={nodes} />S
+    <PostsList items={nodes} />
     {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />}
     <SubscribeMinimalistic />
   </Layout>
