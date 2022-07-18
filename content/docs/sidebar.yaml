@@ -75,3 +75,7 @@
   items:
     - title: Security
       slug: security
+- title: Release Notes
+  items:
+    - title: Release Notes
+      slug: release-notes      
