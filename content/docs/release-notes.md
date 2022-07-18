@@ -25,5 +25,5 @@ title: Release Notes
 
 ### Bug fixes
 
-* Fixed an issue when system role `web_access` cloud be modified or deleted, which broke the UI query interface
+* Fixed an issue when system role `web_access` could be modified or deleted, which broke the UI query interface
 * Various UI fixes and improvements
