@@ -8,7 +8,7 @@ A Neon user is identified by their email address.
 
 A user registers and authenticates in Neon Web UI with their GitHub or Google account. More authentication methods are coming soon.
 
-Once authenticated, a user can create and access Projects and [query Project data](../tutorials#query-via-ui). You can also manage [Postgres](../../reference/glossary/#postgres) Users and Databases in each Project.
+Once authenticated, a user can create and access Projects and [query Project data](../tutorials#query-via-ui). You can also manage [Postgres Users](../../reference/glossary/#postgres-users) and [Databases](../../reference/glossary/#postgres-databases) in each Project.
 
 ## Using API keys as a Neon User
 
