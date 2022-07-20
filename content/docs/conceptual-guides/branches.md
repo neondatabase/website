@@ -1,7 +1,5 @@
 ---
 title: Branches
-redirectFrom:
-  - /docs/cloud/concepts/
 ---
 
 <a id="branches-coming-soon/"></a>
