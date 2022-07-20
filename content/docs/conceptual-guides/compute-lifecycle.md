@@ -11,3 +11,11 @@ You can connect to your compute at any time if it is Idle. Neon will automatical
 After some period in the Idle state, Neon will start occasionally activating your Compute to check data availability. The checks period will gradually increase up to several days if the Compute does not receive any client connections.
 
 You can check all Compute state transitions in the Operations List widget on the Project dashboard.
+
+## Compute Config
+
+During the Technical Preview, Neon only supports modification to session level configuration parameters. Parameters are reset when the session is terminated (e.g. when compute is suspended).
+
+See [Default Parameters](../../reference/compatibility#default-parameters).
+
+See [https://www.postgresql.org/docs/14/runtime-config.html](https://www.postgresql.org/docs/14/runtime-config.html) for details.
