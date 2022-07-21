@@ -46,6 +46,8 @@
   items:
     - title: Import an Existing Database
       slug: how-to-guides/import-an-existing-database
+    - title: Connect with TablePlus
+      slug: how-to-guides/connect-with-tableplus
 - title: Reference
   items:
     - title: Neon Roadmap
@@ -75,3 +77,7 @@
   items:
     - title: Security
       slug: security
+- title: Release Notes
+  items:
+    - title: Release Notes
+      slug: release-notes      
