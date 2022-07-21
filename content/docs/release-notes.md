@@ -27,4 +27,4 @@ title: Release Notes
 ### Bug fixes
 
 * Control Plane: Fix an issue when system role `web_access` could be modified or deleted, which broke the UI query interface.
-* UI: Various UI fixes and improvements.
+* UI: various fixes and improvements.
