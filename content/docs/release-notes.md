@@ -6,13 +6,13 @@ title: Release Notes
 
 ### What's new
 
-* Control Plane: Implement optional connection pooling for projects.
-* API: Add `pooler_enabled` flag to [projects update API call](https://console.neon.tech/api-docs#operations-Project-updateProject).
-* UI: Various improvements.
+* Control Plane: implement optional connection pooling for projects.
+* API: add `pooler_enabled` flag to [projects update API call](https://console.neon.tech/api-docs#operations-Project-updateProject).
+* UI: various improvements.
 
 ### Bug fixes
 
-* API: Fix several bugs that could cause intermittent 409 responses.
+* API: fix several bugs that could cause intermittent 409 responses.
 
 ## 2022-06-08
 
@@ -26,5 +26,5 @@ title: Release Notes
 
 ### Bug fixes
 
-* Control Plane: Fix an issue when system role `web_access` could be modified or deleted, which broke the UI query interface.
+* Control Plane: fix an issue when system role `web_access` could be modified or deleted, which broke the UI query interface.
 * UI: various fixes and improvements.
