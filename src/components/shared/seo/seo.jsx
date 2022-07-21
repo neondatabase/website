@@ -14,8 +14,8 @@ const SEO = ({
   metaRobotsNoindex,
   opengraphDescription,
   opengraphTitle,
-  opengraphImage,
   opengraphUrl,
+  twitterImage,
   facebook,
 }) => {
   const {
@@ -35,6 +35,7 @@ const SEO = ({
       }
     }
   `);
+
   const isRobotsNoindexPage = metaRobotsNoindex === 'noindex';
   const currentUrl =
     (pathname || opengraphUrl) !== '/' ? `${siteUrl}${pathname || opengraphUrl}` : siteUrl;
@@ -58,7 +59,9 @@ const SEO = ({
       <meta
         property="og:image"
         content={
-          createMetaImagePath(opengraphImage, siteUrl) || siteUrl + ogImage || siteUrl + siteImage
+          createMetaImagePath(twitterImage, siteUrl) ||
+          (ogImage && siteUrl + ogImage) ||
+          siteUrl + siteImage
         }
       />
       <meta property="og:type" content="website" />
@@ -79,7 +82,7 @@ SEO.propTypes = {
   opengraphDescription: PropTypes.string,
   opengraphTitle: PropTypes.string,
   opengraphUrl: PropTypes.string,
-  opengraphImage: PropTypes.shape({}),
+  twitterImage: PropTypes.shape({}),
   facebook: PropTypes.shape({
     appId: PropTypes.string,
   }),
@@ -94,7 +97,7 @@ SEO.defaultProps = {
   opengraphDescription: null,
   opengraphTitle: null,
   opengraphUrl: null,
-  opengraphImage: null,
+  twitterImage: null,
   facebook: null,
 };
 

@@ -27,6 +27,7 @@ const BlogPostTemplate = ({
     <Layout
       seo={{
         ...seo,
+        description: pageBlogPost.description,
         pathname,
       }}
       headerTheme="white"
