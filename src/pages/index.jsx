@@ -12,6 +12,7 @@ import Lines2 from 'components/pages/home/lines-2';
 import SaaS from 'components/pages/home/saas';
 import Scalability from 'components/pages/home/scalability';
 import Storage from 'components/pages/home/storage';
+import TwitSection from 'components/pages/home/twit-section';
 import Layout from 'components/shared/layout';
 import Subscribe from 'components/shared/subscribe';
 
@@ -34,6 +35,7 @@ const HomePage = ({ location: { pathname } }) => {
         <CTA />
         <Advantages />
       </div>
+      <TwitSection />
       <Scalability />
       <Storage />
       <DataBranching />
