@@ -57,7 +57,9 @@ const SEO = ({
       <meta property="og:url" content={currentUrl} />
       <meta
         property="og:image"
-        content={createMetaImagePath(opengraphImage || ogImage, siteUrl) || siteUrl + siteImage}
+        content={
+          createMetaImagePath(opengraphImage, siteUrl) || siteUrl + ogImage || siteUrl + siteImage
+        }
       />
       <meta property="og:type" content="website" />
       {facebook && <meta property="fb:app_id" content={facebook.appId} />}

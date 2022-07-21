@@ -24,7 +24,13 @@ const BlogPostTemplate = ({
     true
   );
   return (
-    <Layout seo={{ ...seo, pathname, ogImage: pageBlogPost.cover }} headerTheme="white">
+    <Layout
+      seo={{
+        ...seo,
+        pathname,
+      }}
+      headerTheme="white"
+    >
       <article>
         <Hero title={title} {...pageBlogPost} date={date} />
         <Container size="sm">
@@ -56,13 +62,6 @@ export const query = graphql`
                   }
                 }
               }
-            }
-          }
-        }
-        cover {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(layout: FIXED, quality: 90, width: 1200, height: 630, formats: JPG)
             }
           }
         }
