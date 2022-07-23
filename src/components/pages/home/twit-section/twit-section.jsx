@@ -2,6 +2,9 @@ import { Link } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 
+import Container from 'components/shared/container';
+import Heading from 'components/shared/heading';
+
 import Arrow from './images/arrow.inline.svg';
 import TwitterIcon from './images/twitter.inline.svg';
 
@@ -27,6 +30,7 @@ const items = [
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
           to="https://twitter.com/hashtag/Postgres?src=hashtag_click"
+          target="_blank"
         >
           #Postgres
         </Link>{' '}
@@ -53,6 +57,7 @@ const items = [
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
           to="https://twitter.com/neondatabase"
+          target="_blank"
         >
           @Neondatabase
         </Link>
@@ -79,6 +84,7 @@ const items = [
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
           to="https://twitter.com/foundersfund"
+          target="_blank"
         >
           @foundersfund
         </Link>{' '}
@@ -86,6 +92,7 @@ const items = [
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
           to="https://twitter.com/neondatabase"
+          target="_blank"
         >
           @neondatabase
         </Link>{' '}
@@ -93,6 +100,7 @@ const items = [
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
           to="https://twitter.com/hashtag/neonlaunch?src=hashtag_click"
+          target="_blank"
         >
           #neonlaunch!!
         </Link>{' '}
@@ -100,6 +108,7 @@ const items = [
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
           to="https://twitter.com/hashtag/serverless?src=hashtag_click"
+          target="_blank"
         >
           #serverless
         </Link>{' '}
@@ -119,6 +128,7 @@ const items = [
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
           to="https://twitter.com/neondatabase"
+          target="_blank"
         >
           @Neondatabase
         </Link>{' '}
@@ -147,6 +157,7 @@ const items = [
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
           to="https://twitter.com/SingleStoreDB"
+          target="_blank"
         >
           @SingleStoreDB
         </Link>
@@ -172,6 +183,7 @@ const items = [
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
           to="https://twitter.com/neondatabase"
+          target="_blank"
         >
           @neondatabase
         </Link>{' '}
@@ -179,6 +191,7 @@ const items = [
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
           to="https://twitter.com/nhost"
+          target="_blank"
         >
           @nhost
         </Link>{' '}
@@ -186,6 +199,7 @@ const items = [
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
           to="https://twitter.com/HasuraHQ"
+          target="_blank"
         >
           @HasuraHQ
         </Link>{' '}
@@ -201,31 +215,42 @@ const TwitSection = () => (
     id="Twitter wall"
     className="safe-paddings bg-white pt-40 3xl:pt-36 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16"
   >
-    <h2 className="text-center text-6xl font-bold lg:mx-auto lg:max-w-[460px]">
-      {HEADER}
-      <Link className="text-secondary-7" to="https://twitter.com/neondatabase/">
-        Follow Us <Arrow className="inline" />
-      </Link>
-    </h2>
-    <ul className="mx-auto mt-20 grid max-w-[1760px] grid-cols-3 gap-y-10 gap-x-10">
-      {items.map(({ photo, name, twitterAccount, twitterUrl, text }, index) => (
-        <li className="w-[560px] shrink-0 border-2 border-gray-4 p-6" key={index}>
-          <div className="flex border-b border-b-gray-4 pb-6">
-            <div className="w-16">{photo}</div>
-            <div className="ml-5 w-full">
-              <h4 className="font-sans text-xl font-semibold">{name}</h4>
-              <div className="flex justify-between">
-                <p className="font-sans text-xl font-normal">@{twitterAccount}</p>
-                <Link className="my-auto" to={twitterUrl} target="_blank">
-                  <TwitterIcon />
-                </Link>
+    <Container className="z-20" size="md">
+      <Heading
+        id="twit-section-title"
+        className="text-center lg:mx-auto lg:max-w-[460px]"
+        tag="h2"
+        size="md"
+        theme="black"
+      >
+        {HEADER}
+        <Link className="text-secondary-7" to="https://twitter.com/neondatabase/">
+          Follow Us <Arrow className="inline" />
+        </Link>
+      </Heading>
+      <ul className="mx-auto mt-20 grid grid-cols-3 gap-10 xl:grid-cols-2 lg:gap-8 md:gap-4 sm:grid-cols-1">
+        {items.map(({ photo, name, twitterAccount, twitterUrl, text }, index) => (
+          <li
+            className="max-w-[560px] border-2 border-gray-4 p-6 font-sans text-xl xl:p-5 xl:text-base md:p-4"
+            key={index}
+          >
+            <div className="flex border-b border-b-gray-4 pb-6 xl:pb-4">
+              <div className="w-16 shrink-0">{photo}</div>
+              <div className="ml-5 flex w-full flex-col justify-evenly">
+                <h4 className="font-semibold">{name}</h4>
+                <div className="flex justify-between">
+                  <p className="font-normal">@{twitterAccount}</p>
+                  <Link className="my-auto" to={twitterUrl} target="_blank">
+                    <TwitterIcon />
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-          <p className="mt-5 font-sans text-xl leading-snug">{text}</p>
-        </li>
-      ))}
-    </ul>
+            <p className="mt-5 leading-snug xl:mt-3">{text}</p>
+          </li>
+        ))}
+      </ul>
+    </Container>
   </section>
 );
 
