@@ -20,7 +20,7 @@ const icons = {
   discussions: DiscussionsIcon,
 };
 
-const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
+const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn }, ref) => (
   <header
     className={clsx(
       'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative',
@@ -115,9 +115,16 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick }, ref) => (
           />
           <span>Star Us</span>
         </Button>
-        <Button to={LINKS.dashboard} size="xs" theme="primary">
-          Sign In
-        </Button>
+        {isSignIn && (
+          <Button to={LINKS.dashboard} size="xs" theme="primary">
+            Sign In
+          </Button>
+        )}
+        {!isSignIn && (
+          <Button to={LINKS.earlyAccess} size="xs" theme="primary">
+            Get early access
+          </Button>
+        )}
       </div>
 
       <Burger
@@ -137,10 +144,12 @@ Header.propTypes = {
   theme: PropTypes.oneOf(['white', 'black']).isRequired,
   isMobileMenuOpen: PropTypes.bool,
   onBurgerClick: PropTypes.func.isRequired,
+  isSignIn: PropTypes.bool,
 };
 
 Header.defaultProps = {
   isMobileMenuOpen: false,
+  isSignIn: false,
 };
 
 export default Header;

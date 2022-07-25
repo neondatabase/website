@@ -7,7 +7,7 @@ import Header from 'components/shared/header';
 import MobileMenu from 'components/shared/mobile-menu';
 import SEO from 'components/shared/seo';
 
-const Layout = ({ seo, headerTheme, withOverflowHidden, children }) => {
+const Layout = ({ seo, headerTheme, withOverflowHidden, isSignIn, children }) => {
   const headerRef = useRef(null);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,6 +27,7 @@ const Layout = ({ seo, headerTheme, withOverflowHidden, children }) => {
         theme={headerTheme}
         isMobileMenuOpen={isMobileMenuOpen}
         ref={headerRef}
+        isSignIn={isSignIn}
         onBurgerClick={handleHeaderBurgerClick}
       />
       <main className={clsx(withOverflowHidden && 'overflow-hidden')}>{children}</main>
@@ -50,11 +51,13 @@ Layout.propTypes = {
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
+  isSignIn: PropTypes.bool,
 };
 
 Layout.defaultProps = {
   seo: {},
   withOverflowHidden: false,
+  isSignIn: false,
 };
 
 export default Layout;
