@@ -74,10 +74,6 @@
       slug: conceptual-guides/branches
 
 - title: Security
-  items:
-    - title: Security
-      slug: security
+  slug: security
 - title: Release Notes
-  items:
-    - title: Release Notes
-      slug: release-notes      
+  slug: release-notes      
