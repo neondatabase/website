@@ -99,7 +99,7 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn },
 
       <div className="flex space-x-5 lg:hidden">
         <Button
-          className="relative pl-11"
+          className="relative pl-11 xl:hidden"
           to={LINKS.github}
           size="xs"
           theme={theme === 'white' ? 'quaternary' : 'tertiary'}
