@@ -57,5 +57,7 @@ We’re growing our remote, global team with a number of open roles in engineeri
 ## Get started
 
 Request access to the [Neon Technical Preview](https://neon.tech/early-access/)
+
 Star us on [Github](https://github.com/neondatabase/neon)
+
 Follow us on [Twitter](https://twitter.com/neondatabase) and [LinkedIn](https://www.linkedin.com/company/neon-inc)
