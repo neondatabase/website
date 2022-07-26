@@ -52,7 +52,7 @@ We are certain that no other database service has the full feature set that Neon
 
 ## Join us
 
-We’re growing our remote, global team with a number of open roles in engineering, product, and operations.
+We’re growing our remote, global team with a number of [open roles](https://neon.tech/jobs/) in engineering, product, and operations.
 
 ## Get started
 
