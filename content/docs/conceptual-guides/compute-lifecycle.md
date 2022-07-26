@@ -11,23 +11,3 @@ You can connect to your compute at any time if it is Idle. Neon will automatical
 After some period in the Idle state, Neon will start occasionally activating your Compute to check data availability. The checks period will gradually increase up to several days if the Compute does not receive any client connections.
 
 You can check all Compute state transitions in the Operations List widget on the Project dashboard.
-
-## Default Parameters
-
-List of configuration parameters Neon uses by default:
-
-To check settings that differ from PostgreSQL defaults, run this query:
-
-```plsql
-select * from pg_settings where source <> 'default';
-```
-
-| Name                 | Value   | Note                                                                                      |
-| -------------------- | ------- | ----------------------------------------------------------------------------------------- |
-| shared_buffers       | 512MB   |                                                                                           |
-| fsync                | off     | Don’t be surprised. Neon syncs data to Neon Storage Engine and stores your data reliably. |
-| wal_level            | replica |                                                                                           |
-| max_connections      |         |                                                                                           |
-| autovacuum_work_mem  |         |                                                                                           |
-| work_mem             |         |                                                                                           |
-| maintenance_work_mem |         |                                                                                           |

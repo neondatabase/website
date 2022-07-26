@@ -2,6 +2,7 @@
 title: 'SELECT ’Hello, World’'
 description: 'Serverless Postgres built for the cloud'
 author: 'Nikita Shamgunov'
+cover: ./cover.jpg
 ---
 
 We have just launched Neon to provide you with the best Postgres experience in the cloud. You can [sign up to our waitlist](https://neon.tech/early-access/) right now and experience serverless Postgres enabled by the separation of storage and compute. The service is still gated by the waitlist as we are onboarding more and more users every day, and we expect to open it up for everyone soon.

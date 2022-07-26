@@ -1,7 +1,8 @@
 ---
 title: Roadmap
 redirectFrom:
-- docs/cloud/roadmap
+  - docs/cloud/roadmap
+  - docs/conceptual-guides/roadmap
 ---
 
 Neon was in the **Limited Preview**, starting February 2022, available to a handful of select users and friends.

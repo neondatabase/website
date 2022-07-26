@@ -17,7 +17,11 @@ const BlogPostTemplate = ({
 }) => (
   <Layout
     seo={{
-      ...SEO_DATA.blogPost({ title: frontmatter.title, description: frontmatter.description }),
+      ...SEO_DATA.blogPost({
+        title: frontmatter.title,
+        description: frontmatter.description,
+      }),
+      ogImage: frontmatter.ogImage?.childImageSharp.gatsbyImageData.images.fallback.src,
       pathname,
     }}
     headerTheme="white"
@@ -41,6 +45,11 @@ export const query = graphql`
         title
         description
         author
+        ogImage: cover {
+          childImageSharp {
+            gatsbyImageData(layout: FIXED, quality: 90, width: 1200, height: 630, formats: JPG)
+          }
+        }
       }
     }
   }
