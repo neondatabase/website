@@ -43,4 +43,4 @@ has been exceeded
 
 Neon storage consumes extra space in order to support Point in Time Reset (PITR) and the ability to reset a branch to a historical state. The historical data is stored in log based format.
 
-Neon has limits on the amount of modification history stored for the [Technical Preview Free Tier](#free-tier) customers.
+Neon has limits on the amount of modification history stored for the Technical Preview Free Tier customers.
