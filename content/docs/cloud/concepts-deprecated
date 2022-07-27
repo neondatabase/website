@@ -1,6 +1,5 @@
 ---
 title: Concepts
-enableTableOfContents: true
 ---
 
 ## Neon User
@@ -9,7 +8,7 @@ A Neon user is identified by their email address.
 
 A user registers and authenticates in Neon Web UI with their GitHub or Google account. More authentication methods are coming soon.
 
-Once authenticated, a user can create and access [Projects](#project) and [query Project data](../tutorials#query-via-ui). You can also manage [Postgres Users](#postgres-users) and [Databases](#postgres-databases) in each Project.
+Once authenticated, a user can create and access [Projects](#project) and [query Project data](../get-started-with-neon/tutorials#query-via-ui). You can also manage [Postgres Users](#postgres-users) and [Databases](#postgres-databases) in each Project.
 
 ### Using API keys
 
@@ -102,7 +101,7 @@ Neon has limits on the amount of modification history stored for the [Technical 
 
 During the Technical Preview, Neon only supports modification to session level configuration parameters. Parameters are reset when the session is terminated (e.g. when compute is suspended).
 
-See [Default Parameters](../compatibiilty#default-parameters).
+See [Default Parameters](../compatibility#default-parameters).
 
 See [https://www.postgresql.org/docs/14/runtime-config.html](https://www.postgresql.org/docs/14/runtime-config.html) for details.
 

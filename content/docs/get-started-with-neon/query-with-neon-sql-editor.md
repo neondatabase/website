@@ -1,6 +1,10 @@
 ---
 title: Query with Neon's SQL Editor
+redirectFrom:
+  - /docs/get-started-with-neon/tutorials
 ---
+
+<a id="query-via-ui/"></a>
 
 In console ([https://console.neon.tech/](https://console.neon.tech/)) select your Project to see the Project details.
 
