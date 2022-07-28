@@ -10,7 +10,7 @@ title: Release Notes
 
 * Safekeeper: Download WAL from S3 on demand.
 
-* Safekeeper: Replace `callmemaybe` communication API between safekeepers and pageserver with etcd subscriptions on safekeeper timeline info.
+* Safekeeper: Switch to etcd subscriptions to keep pageservers updated about safekeeper status
 
 * Safekeeper: Implement JWT authentication in Safekeeper HTTP API.
 
