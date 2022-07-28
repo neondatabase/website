@@ -3,6 +3,7 @@ import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Advantages from 'components/pages/home/advantages';
+import Community from 'components/pages/home/community';
 import CTA from 'components/pages/home/cta';
 import DataBranching from 'components/pages/home/data-branching';
 import Features from 'components/pages/home/features';
@@ -12,7 +13,6 @@ import Lines2 from 'components/pages/home/lines-2';
 import SaaS from 'components/pages/home/saas';
 import Scalability from 'components/pages/home/scalability';
 import Storage from 'components/pages/home/storage';
-import TwitSection from 'components/pages/home/twit-section';
 import Layout from 'components/shared/layout';
 import Subscribe from 'components/shared/subscribe';
 
@@ -35,7 +35,7 @@ const HomePage = ({ location: { pathname } }) => {
         <CTA />
         <Advantages />
       </div>
-      <TwitSection />
+      <Community />
       <Scalability />
       <Storage />
       <DataBranching />

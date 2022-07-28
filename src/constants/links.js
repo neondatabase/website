@@ -9,7 +9,7 @@ export default {
   discussions: 'https://github.com/neondatabase/neon/discussions',
   discourse: 'https://community.neon.tech',
   github: 'https://github.com/neondatabase/neon',
-  twitter: 'http://twitter.com/neondatabase/',
+  twitter: 'https://twitter.com/neondatabase/',
   linkedin: 'https://www.linkedin.com/company/neon-inc/',
   postgresDocs: 'https://www.postgresql.org/docs/',
   postgresList: 'https://www.postgresql.org/list/',

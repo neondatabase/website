@@ -1,14 +1,30 @@
-import { Link } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import Link from 'components/shared/link';
+import LINKS from 'constants/links';
+import DiscourseIcon from 'icons/discourse.inline.svg';
+import GithubIcon from 'icons/github.inline.svg';
+import TwitterIcon from 'icons/twitter.inline.svg';
 
-import Arrow from './images/arrow.inline.svg';
-import TwitterIcon from './images/twitter.inline.svg';
+const HEADER = 'Join the community';
 
-const HEADER = 'What our users are saying. ';
+const links = [
+  {
+    icon: TwitterIcon,
+    to: LINKS.twitter,
+  },
+  {
+    icon: DiscourseIcon,
+    to: LINKS.discourse,
+  },
+  {
+    icon: GithubIcon,
+    to: LINKS.github,
+  },
+];
 
 const items = [
   {
@@ -24,7 +40,7 @@ const items = [
     twitterUrl:
       'https://twitter.com/gunnarmorling/status/1537323844070932480?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
     text: (
-      <p>
+      <>
         {' '}
         Neon is definitely one of the most exciting developments around{' '}
         <Link
@@ -36,7 +52,7 @@ const items = [
         </Link>{' '}
         lately. The separation of storage and compute is definitely interesting, would love to see
         some latency numbers there. Also how "Pageservers" and "Safekeepers" are kept in sync.
-      </p>
+      </>
     ),
   },
   {
@@ -52,7 +68,7 @@ const items = [
     twitterUrl:
       'https://twitter.com/rauchg/status/1537075535230009344?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
     text: (
-      <p>
+      <>
         With{' '}
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
@@ -63,7 +79,7 @@ const items = [
         </Link>
         , *truly* serverless PostgreSQL is finally here.You can spin up a db and connect to it in
         less than 3 seconds.This changes the game.
-      </p>
+      </>
     ),
   },
   {
@@ -79,7 +95,7 @@ const items = [
     twitterUrl:
       'https://twitter.com/LM_Braswell/status/1537063982766374912?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
     text: (
-      <p>
+      <>
         {' '}
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
@@ -113,7 +129,7 @@ const items = [
           #serverless
         </Link>{' '}
         Postgres, separating storage & compute.
-      </p>
+      </>
     ),
   },
   {
@@ -123,7 +139,7 @@ const items = [
     twitterUrl:
       'https://twitter.com/iavins/status/1530515401578119168?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
     text: (
-      <p>
+      <>
         Neon DB{' '}
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
@@ -135,7 +151,7 @@ const items = [
         is really exciting! Serverless Postgres with separated storage and compute for autoscaling
         (this is huge!), branching, Point in Time Reset, and time travel queries They have built an
         open source storage engine to make storage, backups, and archiving easier
-      </p>
+      </>
     ),
   },
   {
@@ -151,7 +167,7 @@ const items = [
     twitterUrl:
       'https://twitter.com/tobias_petry/status/1530442483364159488?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
     text: (
-      <p>
+      <>
         An *open-source* serverless PostgreSQL database is currently being built. The first one to
         my knowledge. 🥳 The CEO is one of the founders of{' '}
         <Link
@@ -162,7 +178,7 @@ const items = [
           @SingleStoreDB
         </Link>
         , so they really know what they do! I have big hopes for this project to succeed.
-      </p>
+      </>
     ),
   },
   {
@@ -178,7 +194,7 @@ const items = [
     twitterUrl:
       'https://twitter.com/elitasson/status/1541011704687087616?s=20&t=mH7iKzLsIzsCYljQ7e7v9Q',
     text: (
-      <p>
+      <>
         Ok, I just tried{' '}
         <Link
           className="border-b-2 border-b-primary-2 font-semibold"
@@ -205,16 +221,13 @@ const items = [
         </Link>{' '}
         . Things just worked out of the box! Instant GraphQL API on a truly serverless Postgres
         database. The future is here!
-      </p>
+      </>
     ),
   },
 ];
 
-const TwitSection = () => (
-  <section
-    id="Twitter wall"
-    className="safe-paddings bg-white pt-40 3xl:pt-36 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16"
-  >
+const Community = () => (
+  <section className="safe-paddings bg-white pt-40 3xl:pt-36 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16">
     <Container className="z-20" size="md">
       <Heading
         id="twit-section-title"
@@ -224,11 +237,28 @@ const TwitSection = () => (
         theme="black"
       >
         {HEADER}
-        <Link className="text-secondary-7" to="https://twitter.com/neondatabase/">
-          Follow Us <Arrow className="inline" />
-        </Link>
       </Heading>
-      <ul className="mx-auto mt-20 grid grid-cols-3 gap-10 xl:grid-cols-2 lg:gap-8 md:gap-4 sm:grid-cols-1">
+      <p className="t-xl mx-auto mt-5 text-center 2xl:mt-4 xl:mt-3.5">
+        Learn what the experts love about Neon.
+      </p>
+      <ul className="mt-8 flex justify-center space-x-5">
+        {links.map(({ icon: Icon, to }, index) => (
+          <li className="relative" key={index}>
+            <span
+              className="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5"
+              aria-hidden
+            />
+            <Link
+              className="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:translate-y-1 hover:-translate-x-1"
+              to={to}
+              target="_blank"
+            >
+              <Icon className="h-6" />
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <ul className="mx-auto mt-20 grid grid-cols-3 gap-10 xl:grid-cols-2 lg:mt-12 lg:gap-8 md:gap-4 sm:grid-cols-1">
         {items.map(({ photo, name, twitterAccount, twitterUrl, text }, index) => (
           <li
             className="max-w-[560px] border-2 border-gray-4 p-6 font-sans text-xl xl:p-5 xl:text-base md:p-4"
@@ -240,8 +270,8 @@ const TwitSection = () => (
                 <h4 className="font-semibold">{name}</h4>
                 <div className="flex justify-between">
                   <p className="font-normal">@{twitterAccount}</p>
-                  <Link className="my-auto" to={twitterUrl} target="_blank">
-                    <TwitterIcon />
+                  <Link className="my-auto w-6" to={twitterUrl} target="_blank">
+                    <TwitterIcon className="text-[#259DF4]" />
                   </Link>
                 </div>
               </div>
@@ -254,4 +284,4 @@ const TwitSection = () => (
   </section>
 );
 
-export default TwitSection;
+export default Community;
