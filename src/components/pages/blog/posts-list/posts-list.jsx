@@ -1,17 +1,16 @@
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
-import POST_AUTHORS from 'constants/post-authors';
-import getBlogPostDateFromSlug from 'utils/get-blog-post-date-from-slug';
 import getBlogPostPath from 'utils/get-blog-post-path';
 
 const PostsList = ({ items }) => (
   <section className="safe-paddings pt-48 3xl:pt-44 2xl:pt-40 xl:pt-32 lg:pt-12 md:pt-6">
     <Container size="sm">
       <div className="space-y-10 2xl:space-y-8 xl:space-y-7 md:space-y-6">
-        {items.map(({ slug, frontmatter: { title, description, author } }, index) => (
+        {items.map(({ slug, title, date, pageBlogPost: { author, description } }, index) => (
           <article
             className="relative border-b border-b-gray-4 pb-10 2xl:pb-8 xl:pb-7 md:pb-6"
             key={index}
@@ -23,16 +22,15 @@ const PostsList = ({ items }) => (
             </h1>
             <div className="mt-5 flex items-center justify-between 2xl:mt-4">
               <div className="flex items-center">
-                <img
+                <GatsbyImage
                   className="w-10 shrink-0 rounded-full"
-                  src={POST_AUTHORS[author]?.photo}
-                  alt={POST_AUTHORS[author]?.name}
+                  imgClassName="rounded-full"
+                  image={getImage(author.postAuthor.image.localFile)}
+                  alt={author.title}
                 />
-                <span className="t-lg ml-3 font-semibold xs:ml-1.5">
-                  {POST_AUTHORS[author]?.name}
-                </span>
+                <span className="t-lg ml-3 font-semibold xs:ml-1.5">{author.title}</span>
               </div>
-              <p className="t-base text-gray-2">{getBlogPostDateFromSlug(slug)}</p>
+              <p className="t-base text-gray-2">{date}</p>
             </div>
             <p className="t-lg mt-5 !leading-normal 2xl:mt-4">{description}</p>
             <Link
@@ -54,11 +52,16 @@ PostsList.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string.isRequired,
-      frontmatter: PropTypes.shape({
-        title: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      pageBlogPost: PropTypes.shape({
         description: PropTypes.string.isRequired,
-        author: PropTypes.oneOf(Object.keys(POST_AUTHORS)).isRequired,
-      }).isRequired,
+        author: PropTypes.shape({
+          title: PropTypes.string.isRequired,
+          postAuthor: PropTypes.shape({
+            image: PropTypes.shape({}).isRequired,
+          }),
+        }).isRequired,
+      }),
     })
   ).isRequired,
 };

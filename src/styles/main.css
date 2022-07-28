@@ -9,5 +9,5 @@
 @import './print-grid';
 @import './remove-autocomplete-styles';
 @import './with-highlighted-text';
-@import '../components/shared/content/content.css';
+@import './content.css';
 @import '../components/shared/search/input/input.css';
