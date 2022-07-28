@@ -6,44 +6,44 @@ title: Release Notes
 
 ### What's new
 
-* Safekeeper: Back up WAL to S3 for disaster recovery.
+* Safekeeper: back up WAL to S3 for disaster recovery.
 
-* Safekeeper: Download WAL from S3 on demand.
+* Safekeeper: download WAL from S3 on demand.
 
-* Safekeeper: Switch to etcd subscriptions to keep pageservers updated about safekeeper status
+* Safekeeper: switch to etcd subscriptions to keep pageservers updated about safekeeper status
 
-* Safekeeper: Implement JWT authentication in Safekeeper HTTP API.
+* Safekeeper: implement JWT authentication in Safekeeper HTTP API.
 
-* Proxy: Propagate postgres authentication errors to the clients.
+* Proxy: propagate SASL/SCRAM postgres authentication errors to the clients.
 
-* Postgres Compute: Update vendor/postgres to 14.4.
+* Postgres Compute: update vendor/postgres to 14.4.
 
-* Postgres Compute: Rename custom configuration parameters:
+* Postgres Compute: rename custom configuration parameters:
     * `zenith.page_server_connstring` -> `neon.pageserver_connstring`
     * `zenith.zenith_tenant` -> `neon.tenant_id`
     * `zenith.zenith_timeline` -> `neon.timeline_id`
     * `zenith.max_cluster_size` -> `neon.max_cluster_size`
     * `wal_acceptors` -> `safekeepers`
 
-* Control Plane: Rename `zenith_admin` role to `cloud_admin`
+* Control Plane: rename `zenith_admin` role to `cloud_admin`
 
-* Pageserver: Implement page service `fullbackup` endpoint that works like basebackup, but also sends relational files.
+* Pageserver: implement page service `fullbackup` endpoint that works like basebackup, but also sends relational files.
 
-* Pageserver: Allow importing basebackup taken from vanilla postgres or another pageserver via psql copy in protocol.
+* Pageserver: allow importing basebackup taken from vanilla postgres or another pageserver via psql copy in protocol.
 
-* Pageserver: Fix database size calculation - count not only main fork of the relation, but also VM and FSM.
+* Pageserver: fix database size calculation - count not only main fork of the relation, but also VM and FSM.
 
-* Pageserver: Update timeline size when DROP DATABASE is executed.
+* Pageserver: update timeline size when DROP DATABASE is executed.
 
-* Pageserver: Decrease the number of threads by running gc and compaction in a blocking tokio thread pool.
+* Pageserver: decrease the number of threads by running gc and compaction in a blocking tokio thread pool.
 
-* Pageserver: Switch to per-tenant attach/detach. Download operations of all timelines for one tenant are now grouped together so branches can be used safely with attach/detach.
+* Pageserver: switch to per-tenant attach/detach. Download operations of all timelines for one tenant are now grouped together so branches can be used safely with attach/detach.
 
 ### Bug fixes
 
-* Postgres Compute: Fix CREATE EXTENSION for non-db-owner users
+* Postgres Compute: fix CREATE EXTENSION for non-db-owner users
 
-* Safekeeper: Fix walreceiver connection selection mechanism:
+* Safekeeper: fix walreceiver connection selection mechanism:
     * Avoid reconnecting to safekeeper immediately after its failure by limiting candidates to those with fewest connection attempts.
     * Make default `max_lsn_wal_lag` larger, otherwise constant reconnections happen during normal work.
     * Fix `wal_connection_attempts` maintanance, preventing busy loop of reconnections.
