@@ -33,6 +33,8 @@ const items = [
         className="rounded-full"
         src="./images/gunnar-morling.jpg"
         alt="Gunnar Morling"
+        width={64}
+        height={64}
       />
     ),
     name: 'Gunnar Morling',
@@ -61,6 +63,8 @@ const items = [
         className="rounded-full"
         src="./images/guillermo-rauch.jpg"
         alt="Guillermo Rauch"
+        width={64}
+        height={64}
       />
     ),
     name: 'Guillermo Rauch',
@@ -88,6 +92,8 @@ const items = [
         className="rounded-full"
         src="./images/marie-braswell.jpg"
         alt="'Leigh Marie' Braswell"
+        width={64}
+        height={64}
       />
     ),
     name: "'Leigh Marie' Braswell",
@@ -133,7 +139,15 @@ const items = [
     ),
   },
   {
-    photo: <StaticImage className="rounded-full" src="./images/iavins.jpg" alt="v" />,
+    photo: (
+      <StaticImage
+        className="rounded-full"
+        src="./images/iavins.jpg"
+        alt="v"
+        width={64}
+        height={64}
+      />
+    ),
     name: 'v',
     twitterAccount: 'iavins',
     twitterUrl:
@@ -160,6 +174,8 @@ const items = [
         className="rounded-full"
         src="./images/tobias-petry.jpg"
         alt="Tobias_Petry.sql"
+        width={64}
+        height={64}
       />
     ),
     name: 'Tobias_Petry.sql',
@@ -187,6 +203,8 @@ const items = [
         className="rounded-full"
         src="./images/johan-eliasson.jpg"
         alt="Johan Eliasson"
+        width={64}
+        height={64}
       />
     ),
     name: 'Johan Eliasson',
