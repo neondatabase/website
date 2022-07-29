@@ -2,6 +2,12 @@
 title: Release Notes
 ---
 
+## 2022-07-20 Console release
+
+### What's new
+
+* UI for pool enabling
+
 ## 2022-07-19 Storage release
 
 ### What's new
