@@ -6,7 +6,7 @@ title: Release Notes
 
 ### What's new
 
-* UI for pool enabling
+* UI: add 'Enable pooling' toggle to the Project's Settings page 
 
 ## 2022-07-19 Storage release
 
