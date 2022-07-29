@@ -22,4 +22,7 @@ export default {
     title: `${title} — Neon Docs`,
     description,
   }),
+  changelog: {
+    title: 'Changelog — Neon',
+  },
 };
