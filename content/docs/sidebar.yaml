@@ -16,7 +16,7 @@
           slug: get-started-with-neon/query-with-psql-editor
 - title: Integrations
   items:
-    - title: Cloud Integrations
+    - title: Cloud Deployments
       items:
       - title: Run a Hasura app
         slug: integrations/hasura
