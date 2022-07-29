@@ -162,8 +162,8 @@ const members = [
     githubUrl: 'https://github.com/SergeyMelnikov',
   },
   {
-    photo: <StaticImage src="./images/aleksander-bayandin-photo.jpg" alt="Aleksander Bayandin" />,
-    name: 'Aleksander Bayandin',
+    photo: <StaticImage src="./images/alexander-bayandin-photo.jpg" alt="Alexander Bayandin" />,
+    name: 'Alexander Bayandin',
     position: 'Lead QA Automation Engineer',
     githubUrl: 'https://github.com/bayandin',
   },
