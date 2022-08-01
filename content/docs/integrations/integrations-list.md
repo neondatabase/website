@@ -1,22 +1,25 @@
 ---
 title: Integrations
+redirectFrom:
+  - docs/cloud/integrations
 ---
 
-To see **Cloud Integrations**,
+To see **Cloud Integrations** that Neon integrates with,
 
-- Run a Hasura App
-- Run a Next.js and Vercel App
-- Run Prisma App
+- Run a [Hasura App](../hasura)
+- Run a [Next.js and Vercel App](../vercel)
+- Run a [Prisma App](../prisma)
 
 To see **Frameworks & Programming Languages** that Neon integrates with,
 
-- Run a Go App
-- Run a Java App
-- Run a Django App
-- Run a Node.js App
-- Run a Symphony App
+- Run a [Go App](../go)
+- Run a [Java App](../java)
+- Run a [Django App](../django)
+- Run a [Node.js App](../node)
+- Run a [Symfony App](../symfony)
+- Run a [Rust App](../rust)
 
-To see **Others**,
+To see **Other** Neon integrations,
 
-- Run a Postgres App
-- Run a SQLAlchemy App
+- Run a [Postgres App](../postgres)
+- Run a [SQLAlchemy App](../sqlalchemy)
