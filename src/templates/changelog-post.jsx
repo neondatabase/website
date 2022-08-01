@@ -12,27 +12,35 @@ import getChangelogPostDateFromSlug from 'utils/get-changelog-post-date-from-slu
 
 const ChangelogPostTemplate = ({
   data: {
-    mdx: {
-      slug,
-      body,
-      frontmatter: { version },
-    },
+    mdx: { slug, body, frontmatter },
   },
   location: { pathname },
 }) => (
-  <Layout seo={{ ...SEO_DATA.changelog, pathname }} headerTheme="white">
+  <Layout
+    seo={{
+      ...SEO_DATA.changelogPost({
+        title: frontmatter.title,
+        version: frontmatter.version,
+      }),
+      pathname,
+    }}
+    headerTheme="white"
+  >
     <Hero />
-    <Container size="sm" className="relative mb-10 flex border-b border-b-gray-4 pb-12 pt-48">
-      <article className="relative flex">
+    <Container size="sm" className="relative mb-10 flex">
+      <article className="relative flex border-b border-b-gray-4 pb-12">
         <div className="absolute -left-36 max-h-fit min-w-fit max-w-fit rounded-md border border-gray-4">
           <div className="border-b border-b-gray-4 py-2 px-3 text-2xl font-bold">
-            v <span>{version}</span>
+            v<span>{frontmatter.version}</span>
           </div>
           <div className="max-h-fit py-1.5 px-2.5 text-sm">
             {getChangelogPostDateFromSlug(slug)}
           </div>
         </div>
-        <Content content={body} />
+        <div>
+          <h2 className="mb-5 text-3xl font-bold leading-tight">{frontmatter.title}</h2>
+          <Content content={body} />
+        </div>
       </article>
     </Container>
     <SubscribeMinimalistic />
@@ -45,6 +53,7 @@ export const query = graphql`
       slug
       body
       frontmatter {
+        title
         version
       }
     }

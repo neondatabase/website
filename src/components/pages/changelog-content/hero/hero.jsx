@@ -27,7 +27,7 @@ const TITLE = 'Changelog';
 const DESCRIPTION = 'Latest product updates by Neon’s team';
 
 const Hero = () => (
-  <Container size="sm" className="mb-10 border-b border-b-gray-4 pb-12 pt-48">
+  <Container size="sm" className="mb-12 border-b border-b-gray-4 pb-12 pt-48">
     <Heading size="md" tag="h3" theme="black">
       {TITLE}
     </Heading>
