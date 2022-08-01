@@ -276,10 +276,10 @@ const Community = () => (
           </li>
         ))}
       </ul>
-      <ul className="mx-auto mt-20 grid grid-cols-3 gap-10 xl:grid-cols-2 lg:mt-12 lg:gap-8 md:gap-4 sm:grid-cols-1">
+      <ul className="mx-auto mt-20 grid grid-cols-3 gap-10 overflow-x-auto xl:grid-cols-2 lg:mt-12 lg:gap-8 md:gap-4 sm:-mx-4 sm:flex sm:snap-x sm:snap-mandatory sm:grid-cols-1 sm:px-4">
         {items.map(({ photo, name, twitterAccount, twitterUrl, text }, index) => (
           <li
-            className="max-w-[560px] border-2 border-gray-4 p-6 font-sans text-xl xl:p-5 xl:text-base md:p-4"
+            className="max-w-[560px] bg-[#f9f9f9] p-6 font-sans text-xl xl:p-5 xl:text-base md:p-4 sm:w-[300px] sm:flex-shrink-0 sm:snap-center"
             key={index}
           >
             <div className="flex border-b border-b-gray-4 pb-6 xl:pb-4">
