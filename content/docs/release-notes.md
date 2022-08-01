@@ -2,6 +2,14 @@
 title: Release Notes
 ---
 
+## 2022-07-20 Console release
+
+### What's new
+
+* UI: add 'Enable pooling' toggle to the Project's Settings page.
+* Control plane: use several instances to serve public API and web UI, which allow doing a zero-downtime deployments.
+* API: return `423 Locked` instead of `409 Conflict`, when there is a concurrent operation on project preventing acquiring the project lock.
+
 ## 2022-07-19 Storage release
 
 ### What's new
