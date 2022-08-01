@@ -10,14 +10,16 @@ const ChangelogPostList = ({ items }) => (
     <Container size="sm">
       <div className="space-y-12">
         {items.map(({ body, slug, frontmatter: { version } }, index) => (
-          <article className="relative" key={index}>
-            <Content content={body} />
-            <div className="sticky mt-5 rounded-md border border-gray-4">
-              <div className="text-xl">
-                v<span className="uppercase">{version}</span>
+          <article className="relative flex border-b border-b-gray-4 pb-12" key={index}>
+            <div className="absolute -left-36 max-h-fit min-w-fit max-w-fit rounded-md border border-gray-4">
+              <div className="border-b border-b-gray-4 py-2 px-3 text-2xl font-bold">
+                v <span>{version}</span>
               </div>
-              <div className="text-sm">{getChangelogPostDateFromSlug(slug)}</div>
+              <div className="max-h-fit py-1.5 px-2.5 text-sm">
+                {getChangelogPostDateFromSlug(slug)}
+              </div>
             </div>
+            <Content content={body} />
           </article>
         ))}
       </div>

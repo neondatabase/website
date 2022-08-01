@@ -22,7 +22,7 @@ const ChangelogPage = ({
 );
 
 export const query = graphql`
-  query {
+  {
     allMdx(filter: { fileAbsolutePath: { regex: "/content/changelog/" } }) {
       nodes {
         body

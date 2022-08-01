@@ -22,14 +22,18 @@ const ChangelogPostTemplate = ({
 }) => (
   <Layout seo={{ ...SEO_DATA.changelog, pathname }} headerTheme="white">
     <Hero />
-    <Container size="sm" className="relative mb-10 border-b border-b-gray-4 pb-12 pt-48">
-      <div className="sticky mt-5 rounded-md border border-gray-4">
-        <div className="text-xl">
-          v<span className="uppercase">{version}</span>
+    <Container size="sm" className="relative mb-10 flex border-b border-b-gray-4 pb-12 pt-48">
+      <article className="relative flex">
+        <div className="absolute -left-36 max-h-fit min-w-fit max-w-fit rounded-md border border-gray-4">
+          <div className="border-b border-b-gray-4 py-2 px-3 text-2xl font-bold">
+            v <span>{version}</span>
+          </div>
+          <div className="max-h-fit py-1.5 px-2.5 text-sm">
+            {getChangelogPostDateFromSlug(slug)}
+          </div>
         </div>
-        <div className="text-sm">{getChangelogPostDateFromSlug(slug)}</div>
-      </div>
-      <Content content={body} />
+        <Content content={body} />
+      </article>
     </Container>
     <SubscribeMinimalistic />
   </Layout>
@@ -37,13 +41,11 @@ const ChangelogPostTemplate = ({
 
 export const query = graphql`
   query ($id: String!) {
-    AllMdx(id: { eq: $id }) {
-      nodes {
-        slug
-        body
-        frontmatter {
-          version
-        }
+    mdx(id: { eq: $id }) {
+      slug
+      body
+      frontmatter {
+        version
       }
     }
   }
