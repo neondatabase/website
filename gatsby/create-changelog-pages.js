@@ -1,10 +1,8 @@
 const path = require('path');
 
-const getChangelogPath = require('../src/utils/get-changelog-post-path');
+const { CHANGELOG_BASE_PATH, CHANGELOG_POSTS_PER_PAGE } = require('../src/constants/changelog');
 
 const { DRAFT_FILTER } = require('./constants');
-
-// const { CHANGELOG_BASE_PATH, CHANGELOG_POSTS_PER_PAGE } = require('../src/constants/changelog');
 
 module.exports = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -13,13 +11,7 @@ module.exports = async ({ graphql, actions }) => {
     `
       query {
         allMdx(filter: { fileAbsolutePath: { regex: "/content/changelog/" } }) {
-          nodes {
-            slug
-            body
-            frontmatter {
-              version
-            }
-          }
+          totalCount
         }
       }
     `,
@@ -28,13 +20,21 @@ module.exports = async ({ graphql, actions }) => {
 
   if (result.errors) throw new Error(result.errors);
 
-  result.data.allMdx.nodes.forEach(({ id, slug }) => {
-    const pagePath = getChangelogPath(slug);
+  const pageCount = Math.ceil(result.data.allMdx.totalCount / CHANGELOG_POSTS_PER_PAGE);
+
+  Array.from({ length: pageCount }).forEach((_, i) => {
+    const pagePath = i === 0 ? CHANGELOG_BASE_PATH : `${CHANGELOG_BASE_PATH}${i + 1}`;
 
     createPage({
       path: pagePath,
       component: path.resolve('./src/templates/changelog.jsx'),
-      context: { id },
+      context: {
+        currentPageIndex: i,
+        pageCount,
+        limit: CHANGELOG_POSTS_PER_PAGE,
+        skip: i * CHANGELOG_POSTS_PER_PAGE,
+        draftFilter: DRAFT_FILTER,
+      },
     });
   });
 };
