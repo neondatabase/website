@@ -10,7 +10,12 @@ module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       query {
-        allMdx(filter: { fileAbsolutePath: { regex: "/content/changelog/" } }) {
+        allMdx(
+          filter: {
+            fileAbsolutePath: { regex: "/content/changelog/" }
+            fields: { isDraft: { in: $draftFilter } }
+          }
+        ) {
           totalCount
         }
       }
