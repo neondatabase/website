@@ -43,17 +43,9 @@ const items = [
       'https://twitter.com/gunnarmorling/status/1537323844070932480?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
     text: (
       <>
-        {' '}
-        Neon is definitely one of the most exciting developments around{' '}
-        <Link
-          className="border-b-2 border-b-primary-2 font-semibold"
-          to="https://twitter.com/hashtag/Postgres?src=hashtag_click"
-          target="_blank"
-        >
-          #Postgres
-        </Link>{' '}
-        lately. The separation of storage and compute is definitely interesting, would love to see
-        some latency numbers there. Also how "Pageservers" and "Safekeepers" are kept in sync.
+        Neon is definitely one of the most exciting developments around #Postgres lately. The
+        separation of storage and compute is definitely interesting, would love to see some latency
+        numbers there. Also how "Pageservers" and "Safekeepers" are kept in sync.
       </>
     ),
   },
@@ -73,16 +65,8 @@ const items = [
       'https://twitter.com/rauchg/status/1537075535230009344?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
     text: (
       <>
-        With{' '}
-        <Link
-          className="border-b-2 border-b-primary-2 font-semibold"
-          to="https://twitter.com/neondatabase"
-          target="_blank"
-        >
-          @Neondatabase
-        </Link>
-        , *truly* serverless PostgreSQL is finally here.You can spin up a db and connect to it in
-        less than 3 seconds.This changes the game.
+        With @Neondatabase , *truly* serverless PostgreSQL is finally here.You can spin up a db and
+        connect to it in less than 3 seconds.This changes the game.
       </>
     ),
   },
@@ -102,39 +86,9 @@ const items = [
       'https://twitter.com/LM_Braswell/status/1537063982766374912?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
     text: (
       <>
-        {' '}
-        <Link
-          className="border-b-2 border-b-primary-2 font-semibold"
-          to="https://twitter.com/foundersfund"
-          target="_blank"
-        >
-          @foundersfund
-        </Link>{' '}
-        is so excited to partner with{' '}
-        <Link
-          className="border-b-2 border-b-primary-2 font-semibold"
-          to="https://twitter.com/neondatabase"
-          target="_blank"
-        >
-          @neondatabase
-        </Link>{' '}
-        who is launching today{' '}
-        <Link
-          className="border-b-2 border-b-primary-2 font-semibold"
-          to="https://twitter.com/hashtag/neonlaunch?src=hashtag_click"
-          target="_blank"
-        >
-          #neonlaunch!!
-        </Link>{' '}
-        They offer modern, cloud-native architecture for{' '}
-        <Link
-          className="border-b-2 border-b-primary-2 font-semibold"
-          to="https://twitter.com/hashtag/serverless?src=hashtag_click"
-          target="_blank"
-        >
-          #serverless
-        </Link>{' '}
-        Postgres, separating storage & compute.
+        @foundersfund is so excited to partner with @neondatabase who is launching today
+        #neonlaunch!! They offer modern, cloud-native architecture for #serverless Postgres,
+        separating storage & compute.
       </>
     ),
   },
@@ -154,17 +108,10 @@ const items = [
       'https://twitter.com/iavins/status/1530515401578119168?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
     text: (
       <>
-        Neon DB{' '}
-        <Link
-          className="border-b-2 border-b-primary-2 font-semibold"
-          to="https://twitter.com/neondatabase"
-          target="_blank"
-        >
-          @Neondatabase
-        </Link>{' '}
-        is really exciting! Serverless Postgres with separated storage and compute for autoscaling
-        (this is huge!), branching, Point in Time Reset, and time travel queries They have built an
-        open source storage engine to make storage, backups, and archiving easier
+        Neon DB @Neondatabase is really exciting! Serverless Postgres with separated storage and
+        compute for autoscaling (this is huge!), branching, Point in Time Reset, and time travel
+        queries They have built an open source storage engine to make storage, backups, and
+        archiving easier
       </>
     ),
   },
@@ -185,15 +132,8 @@ const items = [
     text: (
       <>
         An *open-source* serverless PostgreSQL database is currently being built. The first one to
-        my knowledge. 🥳 The CEO is one of the founders of{' '}
-        <Link
-          className="border-b-2 border-b-primary-2 font-semibold"
-          to="https://twitter.com/SingleStoreDB"
-          target="_blank"
-        >
-          @SingleStoreDB
-        </Link>
-        , so they really know what they do! I have big hopes for this project to succeed.
+        my knowledge. 🥳 The CEO is one of the founders of @SingleStoreDB , so they really know what
+        they do! I have big hopes for this project to succeed.
       </>
     ),
   },
@@ -213,32 +153,8 @@ const items = [
       'https://twitter.com/elitasson/status/1541011704687087616?s=20&t=mH7iKzLsIzsCYljQ7e7v9Q',
     text: (
       <>
-        Ok, I just tried{' '}
-        <Link
-          className="border-b-2 border-b-primary-2 font-semibold"
-          to="https://twitter.com/neondatabase"
-          target="_blank"
-        >
-          @neondatabase
-        </Link>{' '}
-        with{' '}
-        <Link
-          className="border-b-2 border-b-primary-2 font-semibold"
-          to="https://twitter.com/nhost"
-          target="_blank"
-        >
-          @nhost
-        </Link>{' '}
-        and{' '}
-        <Link
-          className="border-b-2 border-b-primary-2 font-semibold"
-          to="https://twitter.com/HasuraHQ"
-          target="_blank"
-        >
-          @HasuraHQ
-        </Link>{' '}
-        . Things just worked out of the box! Instant GraphQL API on a truly serverless Postgres
-        database. The future is here!
+        Ok, I just tried @neondatabase with @nhost and @HasuraHQ. Things just worked out of the box!
+        Instant GraphQL API on a truly serverless Postgres database. The future is here!
       </>
     ),
   },
