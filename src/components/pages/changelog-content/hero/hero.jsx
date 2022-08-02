@@ -27,11 +27,14 @@ const TITLE = 'Changelog';
 const DESCRIPTION = 'Latest product updates by Neon’s team';
 
 const Hero = () => (
-  <Container size="sm" className="mb-12 border-b border-b-gray-4 pb-12 pt-48">
+  <Container
+    size="sm"
+    className="mb-12 border-b border-b-gray-4 pb-12 pt-48 lg:pt-16 md:mb-10 md:py-10 sm:mb-7 sm:py-7"
+  >
     <Heading size="md" tag="h3" theme="black">
       {TITLE}
     </Heading>
-    <div className="flex justify-between ">
+    <div className="flex justify-between sm:mt-3 sm:flex-col">
       <p className="mt-auto text-xl">{DESCRIPTION}</p>
       <ul className="flex space-x-[26px] 2xl:space-x-5 xl:space-x-[16px] lg:mt-3.5">
         {links.map(({ icon: Icon, to }, index) => (
@@ -41,7 +44,7 @@ const Hero = () => (
               aria-hidden
             />
             <Link
-              className="relative flex h-[52px] w-[52px] items-center justify-center rounded-full border-4 border-black bg-white transition-transform duration-200 hover:translate-y-1.5 hover:-translate-x-1.5 2xl:h-16 2xl:w-16 xl:h-14 xl:w-14"
+              className="relative flex h-[52px] w-[52px] items-center justify-center rounded-full border-4 border-black bg-white transition-transform duration-200 hover:translate-y-1.5 hover:-translate-x-1.5 2xl:h-16 2xl:w-16 xl:h-14 xl:w-14 lg:hover:-translate-x-1 lg:hover:translate-y-1"
               to={to}
             >
               <Icon className="h-8 xl:h-7" />
