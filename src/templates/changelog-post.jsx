@@ -28,8 +28,8 @@ const ChangelogPostTemplate = ({
   >
     <Hero />
     <Container size="sm" className="relative mb-10 flex">
-      <article className="relative flex border-b border-b-gray-4 pb-12">
-        <div className="absolute -left-36 max-h-fit min-w-fit max-w-fit rounded-md border border-gray-4">
+      <article className="relative flex border-b border-b-gray-4 pb-12 sm:flex-col sm:pb-10">
+        <div className="absolute -left-36 min-w-fit max-w-fit rounded-md border border-gray-4 xl:sticky xl:top-10 xl:mr-5 xl:max-h-20 sm:static sm:mb-3">
           <div className="border-b border-b-gray-4 py-2 px-3 text-2xl font-bold">
             v<span>{frontmatter.version}</span>
           </div>
