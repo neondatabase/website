@@ -10,8 +10,13 @@ const createRedirects = require('./create-redirects');
 module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
     `
-      query {
-        allMdx(filter: { fileAbsolutePath: { regex: "/content/changelog/" } }) {
+      query ($draftFilter: [Boolean]!) {
+        allMdx(
+          filter: {
+            fileAbsolutePath: { regex: "/content/changelog/" }
+            fields: { isDraft: { in: $draftFilter } }
+          }
+        ) {
           nodes {
             id
             slug
