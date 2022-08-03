@@ -8,7 +8,9 @@ const Aside = ({ version, slug }) => (
     <div className="border-b border-b-gray-4 py-2 px-3 text-2xl font-bold">
       v<span>{version}</span>
     </div>
-    <time className="py-1.5 px-2.5 text-sm">{getChangelogPostDateFromSlug(slug)}</time>
+    <time className="py-1.5 px-2.5 text-sm" dateTime={getChangelogPostDateFromSlug(slug)}>
+      {getChangelogPostDateFromSlug(slug)}
+    </time>
   </aside>
 );
 
