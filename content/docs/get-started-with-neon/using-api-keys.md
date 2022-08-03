@@ -14,7 +14,7 @@ Once authenticated, a user can create and access Projects and [query Project dat
 
 API keys allow users to access the Neon application programming interface.
 
-An API key provides access to any action available to the user.An API key that is no longer needed can be revoked; this action cannot be reverted. Any issued API key is valid forever until it is revoked. Neon users can generate multiple API keys.
+An API key provides access to any action available to the user. An API key that is no longer needed can be revoked; this action cannot be reverted. Any issued API key is valid forever until it is revoked. Neon users can generate multiple API keys.
 
 ### Issue a New API Key
 
@@ -40,7 +40,7 @@ Remember, all API keys remain valid until you revoke them.
 
 Every request to the Neon API endpoints should pass an API key in the `Authorization` HTTP header. You can see the available endpoints in our [API Reference](https://console.neon.tech/api-docs/v1).
 
-Let’s look at how to make a `curl` request using your Neon API key. We're going to use the `projects` endpoint to get a list of the project IDs in an account.
+Let’s look at how to make a `curl` request using your Neon API key. We're going to use the `projects` endpoint to get a list of the projects in an account.
 
 All requests to the API need to have the `Authorization` HTTP header with your API key in the form `Authorization: Bearer EXAMPLEKEY`.
 
