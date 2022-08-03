@@ -14,7 +14,7 @@ Once authenticated, a user can create and access Projects and [query Project dat
 
 API keys allow users to access the Neon application programming interface.
 
-An API key provides access to any action available to the user.An API key that is no longer needed can be revoked; this action cannot be reverted. Any issued API key is valid forever until it is revoked. Neon users can generate multiple API keys.
+An API key provides access to any action available to the user. An API key that is no longer needed can be revoked; this action cannot be reverted. Any issued API key is valid forever until it is revoked. Neon users can generate multiple API keys.
 
 ### Issue a New API Key
 
