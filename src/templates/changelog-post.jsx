@@ -2,13 +2,15 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
+import Aside from 'components/pages/changelog-content/aside';
 import Hero from 'components/pages/changelog-content/hero/hero';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Layout from 'components/shared/layout';
+import Link from 'components/shared/link';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
+import { CHANGELOG_BASE_PATH } from 'constants/changelog';
 import SEO_DATA from 'constants/seo-data';
-import getChangelogPostDateFromSlug from 'utils/get-changelog-post-date-from-slug';
 
 const ChangelogPostTemplate = ({
   data: {
@@ -28,18 +30,19 @@ const ChangelogPostTemplate = ({
   >
     <Hero />
     <Container size="sm" className="relative mb-10 flex">
-      <article className="relative flex border-b border-b-gray-4 pb-12 sm:flex-col sm:pb-10">
-        <div className="absolute -left-36 min-w-fit max-w-fit rounded-md border border-gray-4 xl:sticky xl:top-10 xl:mr-5 xl:max-h-20 sm:static sm:mb-3">
-          <div className="border-b border-b-gray-4 py-2 px-3 text-2xl font-bold">
-            v<span>{frontmatter.version}</span>
-          </div>
-          <div className="max-h-fit py-1.5 px-2.5 text-sm">
-            {getChangelogPostDateFromSlug(slug)}
-          </div>
-        </div>
+      <article className="relative flex sm:flex-col">
+        <Aside version={frontmatter.version} slug={slug} />
         <div>
           <h2 className="mb-5 text-3xl font-bold leading-tight">{frontmatter.title}</h2>
           <Content content={body} />
+          <Link
+            className="mt-10 font-semibold 2xl:mt-4"
+            to={CHANGELOG_BASE_PATH}
+            size="sm"
+            theme="black-primary-1"
+          >
+            Back to Changelog
+          </Link>
         </div>
       </article>
     </Container>

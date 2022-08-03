@@ -31,7 +31,7 @@ const Hero = () => (
     size="sm"
     className="mb-12 border-b border-b-gray-4 pb-12 pt-48 lg:pt-16 md:mb-10 md:py-10 sm:mb-7 sm:py-7"
   >
-    <Heading size="md" tag="h3" theme="black">
+    <Heading size="md" tag="h2" theme="black">
       {TITLE}
     </Heading>
     <div className="flex justify-between sm:mt-3 sm:flex-col">

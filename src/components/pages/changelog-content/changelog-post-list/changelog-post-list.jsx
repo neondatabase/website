@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Aside from 'components/pages/changelog-content/aside';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
-import getChangelogPostDateFromSlug from 'utils/get-changelog-post-date-from-slug';
-import getChangelogPostPath from 'utils/get-changelog-post-path';
 
 const ChangelogPostList = ({ items }) => (
   <section>
@@ -16,17 +15,10 @@ const ChangelogPostList = ({ items }) => (
             className="relative flex border-b border-b-gray-4 pb-12 sm:flex-col sm:pb-10"
             key={index}
           >
-            <div className="absolute -left-36 min-w-fit max-w-fit rounded-md border border-gray-4 xl:sticky xl:top-10 xl:mr-5 xl:max-h-20 sm:static sm:mb-3">
-              <div className="border-b border-b-gray-4 py-2 px-3 text-2xl font-bold">
-                v<span>{version}</span>
-              </div>
-              <div className="max-h-fit py-1.5 px-2.5 text-sm">
-                {getChangelogPostDateFromSlug(slug)}
-              </div>
-            </div>
+            <Aside version={version} slug={slug} />
             <div>
               <h2 className="mb-5 text-3xl font-bold leading-tight">
-                <Link to={getChangelogPostPath(slug)}>{title}</Link>
+                <Link to={slug}>{title}</Link>
               </h2>
               <Content content={body} />
             </div>

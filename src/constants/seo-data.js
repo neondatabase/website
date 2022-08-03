@@ -25,8 +25,7 @@ export default {
   changelog: {
     title: 'Changelog — Neon',
   },
-  changelogPost: ({ title, version }) => ({
+  changelogPost: ({ title }) => ({
     title: `${title} — Neon`,
-    version,
   }),
 };
