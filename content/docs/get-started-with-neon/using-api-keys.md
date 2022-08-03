@@ -21,18 +21,18 @@ An API key provides access to any action available to the user.An API key that i
 Here's how to issue a new API key:
 
 1. Start by logging in to [Neon Console](https://console.neon.tech).
-2. Click on your username in the upper right corner, then click the `Settings` button.
+2. Click on your username in the upper right corner, then click `Account`.
 3. Under `Developer Settings` click on `Generate new API Key`.
-4. Choose a unique name that will help you remember what this key is for. For example, if you want a key for your testing environment, name the key `Test Key`.
+4. Choose a unique name that will help you remember what this key is for. For example, if you want a key for your testing environment, name the key `Testing Environment`.
 5. Click the `Create` button and copy the generated key.
 
-You need to store your key in a safe location, Neon does not store this key for you. If you lose your key, revoke the lost key and create a new key to access the Neon API. You can safely store your API key in a credential manager on your local machine, or using a credential management service like [AWS Key Management Service](https://aws.amazon.com/kms/).
+You need to store your key in a safe location after generating it, you will not be able to access this value again after leaving your `Developer Settings`. If you lose your key, revoke the lost key and create a new key to access the Neon API. You can safely store your API key in a credential manager on your local machine, or using a credential management service like [AWS Key Management Service](https://aws.amazon.com/kms/).
 
 Remember, all API keys remain valid until you revoke them.
 
 ### Revoke an API Key
 
-1. In your Neon Console, click on your username in the upper right corner and click the `Settings` button.
+1. In your Neon Console, click on your username in the upper right corner and click `Account`.
 2. Under `Developer Settings` you will see the list of issued and active API keys.
 3. To revoke the key forever, click the `Revoke` button. This will immediately revoke the key, all the requests using this key will now fail.
 
@@ -56,7 +56,7 @@ To make the API call, add `/projects` to the prefix `https://console.neon.tech/a
 "https://console.neon.tech/api/v1/projects" | jq
 ```
 
-Once the request above receives a JSON response containing the saved projects, we use the tool `jq` to make it easier to parse the incoming JSON response. That's all you need to call the Neon API.
+Once the request above receives a JSON response containing the saved projects, we use the third-party tool [`jq`](https://stedolan.github.io/jq/) to make it easier to parse the incoming JSON response. That's all you need to call the Neon API.
 
 The full `curl` request should look like this:
 
