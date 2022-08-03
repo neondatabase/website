@@ -40,7 +40,7 @@ Remember, all API keys remain valid until you revoke them.
 
 Every request to the Neon API endpoints should pass an API key in the `Authorization` HTTP header. You can see the available endpoints in our [API Reference](https://console.neon.tech/api-docs/v1).
 
-Let’s look at how to make a `curl` request using your Neon API key. We're going to use the `projects` endpoint to get a list of the project IDs in an account.
+Let’s look at how to make a `curl` request using your Neon API key. We're going to use the `projects` endpoint to get a list of the projects in an account.
 
 All requests to the API need to have the `Authorization` HTTP header with your API key in the form `Authorization: Bearer EXAMPLEKEY`.
 
