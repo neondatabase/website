@@ -36,7 +36,7 @@ const ChangelogPostTemplate = ({
           <h2 className="mb-5 text-3xl font-bold leading-tight">{frontmatter.title}</h2>
           <Content content={body} />
           <Link
-            className="mt-10 font-semibold 2xl:mt-4"
+            className="mt-10 font-semibold lg:mt-8"
             to={CHANGELOG_BASE_PATH}
             size="sm"
             theme="black-primary-1"
