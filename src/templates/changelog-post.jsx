@@ -33,7 +33,7 @@ const ChangelogPostTemplate = ({
       <article className="relative flex sm:flex-col">
         <Aside version={frontmatter.version} slug={slug} />
         <div>
-          <h2 className="mb-5 text-3xl font-bold leading-tight">{frontmatter.title}</h2>
+          <h2 className="mb-5 text-4xl font-bold leading-tight">{frontmatter.title}</h2>
           <Content content={body} />
           <Link
             className="mt-10 font-semibold lg:mt-8"
