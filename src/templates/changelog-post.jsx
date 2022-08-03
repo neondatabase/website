@@ -6,6 +6,7 @@ import Aside from 'components/pages/changelog-content/aside';
 import Hero from 'components/pages/changelog-content/hero/hero';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
+import Heading from 'components/shared/heading';
 import Layout from 'components/shared/layout';
 import Link from 'components/shared/link';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
@@ -33,7 +34,9 @@ const ChangelogPostTemplate = ({
       <article className="relative flex sm:flex-col">
         <Aside version={frontmatter.version} slug={slug} />
         <div>
-          <h2 className="mb-5 text-4xl font-bold leading-tight">{frontmatter.title}</h2>
+          <Heading className="mb-5" tag="h2" size="sm" theme="black">
+            {frontmatter.title}
+          </Heading>
           <Content content={body} />
           <Link
             className="mt-10 font-semibold lg:mt-8"
@@ -41,7 +44,7 @@ const ChangelogPostTemplate = ({
             size="sm"
             theme="black-primary-1"
           >
-            Back to Changelog
+            back to all changelogs
           </Link>
         </div>
       </article>
