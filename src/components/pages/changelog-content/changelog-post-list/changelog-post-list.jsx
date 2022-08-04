@@ -34,7 +34,7 @@ const ChangelogPostList = ({ items }) => (
                   </a>
                   <Link to={slug}>{title}</Link>
                 </Heading>
-                <Content content={body} />
+                <Content content={body} showH3Anchors={false} />
               </div>
             </article>
           );
