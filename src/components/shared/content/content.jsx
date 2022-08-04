@@ -25,8 +25,7 @@ const components = {
 // eslint-disable-next-line no-return-assign
 const Content = forwardRef(({ className, content, showH3Anchors = true }, ref) => (
   <div className={clsx('prose prose-lg md:prose-base', className)} ref={ref}>
-    {/* <MDXProvider components={components}> */}
-    <MDXProvider components={showH3Anchors ? components : (components.h3 = undefined)}>
+    <MDXProvider components={showH3Anchors ? components : { ...components, h3: undefined }}>
       <MDXRenderer>{content}</MDXRenderer>
     </MDXProvider>
   </div>

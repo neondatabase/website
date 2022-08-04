@@ -7,11 +7,11 @@ We've spent the last couple of months rebuilding search from the ground up. The 
 
 Not only that, but results will show comments, documents, and projects as well as issues.
 
-## New
+### New
 
 We've spent the last couple of months rebuilding search from the ground up. The UI has been refined. We've improved how we display results as well as the accuracy, for instance for words split with / or \_. You can now reliably use "phrase matching", -negative keywords AND boolean operators in your search queries.
 
-## Fixes & improvements
+### Fixes & improvements
 
 Not only that, but results will show comments, documents, and projects as well as issues.
 
