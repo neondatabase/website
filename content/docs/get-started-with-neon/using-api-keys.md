@@ -23,7 +23,7 @@ Here's how to issue a new API key:
 1. Start by logging in to [Neon Console](https://console.neon.tech).
 2. Click on your username in the upper right corner, then click `Account`.
 3. Under `Developer Settings` click on `Generate new API Key`.
-4. Choose a unique name that will help you remember what this key is for. For example, if you want a key for your testing environment, name the key `Testing Environment`.
+4. Choose a unique name that will help you remember what this key is for.
 5. Click the `Create` button and copy the generated key.
 
 You need to store your key in a safe location after generating it, you will not be able to access this value again after leaving your `Developer Settings`. If you lose your key, revoke the lost key and create a new key to access the Neon API. You can safely store your API key in a credential manager on your local machine, or using a credential management service like [AWS Key Management Service](https://aws.amazon.com/kms/).
