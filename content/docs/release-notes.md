@@ -2,6 +2,12 @@
 title: Release Notes
 ---
 
+## 2022-08-08 Console release
+
+### Bug fixes
+
+* UI: fix project status live updates using websocket connection.
+
 ## 2022-08-02 Storage release
 
 ### What's new
