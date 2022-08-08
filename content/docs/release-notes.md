@@ -8,6 +8,17 @@ title: Release Notes
 
 * UI: fix project status live updates using websocket connection.
 
+## 2022-08-04 Console release
+
+### What's new
+
+* UI: validate that API key name is not empty in the creation form
+* UI: add 'Create branch' to the project dashboard for selected users
+* UI: SQL Editor: Show detailed error if query failed
+* Control plane: use new version of operations executor including various stability and obervability improvements
+* Control plane: dump compute node logs if startup process failed
+* Control plane: delete corresponding timeline data from all storage nodes (safekeepers and pageserver) after project deletion
+
 ## 2022-08-02 Storage release
 
 ### What's new
