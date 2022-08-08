@@ -117,18 +117,11 @@ If you are interested in more details about our replication protocol, you can lo
 
 Thanks to @larhat, Egor Rogov, and @PredragGruevski for their feedback on the early drafts of this post. All mistakes and possible controversies are on me.
 
-[1] High availability here is used in a general sense (like <https://www.postgresql.org/docs/current/high-availability.html> does), not in the CAP-theorem sense
-
-[2] <https://pmg.csail.mit.edu/papers/osdi99.pdf>
-
-[3] The requirement for some messages to be eventually delivered is essential in the light of the FLP theorem, which states that no consensus algorithm is guaranteed to terminate under a similar failure model. Without this eventual delivery requirement, it would be a trivial result.
-
-[4] However, in a synchronous system with a reliable network algorithm with a similar idea will work: <https://en.wikipedia.org/wiki/Bully_algorithm>
-
-[5] <https://arxiv.org/abs/2004.05074>
-
-[6] Such delay addresses a similar kind of problem the `pg_rewind` utility addresses, but instead of "rewinding" WAL, it prohibits situations when rewind is needed.
-
-[7] <https://www.microsoft.com/en-us/research/publication/disk-paxos/>
-
-[8] <https://dl.acm.org/doi/10.1145/571825.571837>
+[^1]: High availability here is used in a general sense (like <https://www.postgresql.org/docs/current/high-availability.html> does), not in the CAP-theorem sense
+[^2]: <https://pmg.csail.mit.edu/papers/osdi99.pdf>
+[^3]: The requirement for some messages to be eventually delivered is essential in the light of the FLP theorem, which states that no consensus algorithm is guaranteed to terminate under a similar failure model. Without this eventual delivery requirement, it would be a trivial result.
+[^4]: However, in a synchronous system with a reliable network algorithm with a similar idea will work: <https://en.wikipedia.org/wiki/Bully_algorithm>
+[^5]: <https://arxiv.org/abs/2004.05074>
+[^6]: Such delay addresses a similar kind of problem the `pg_rewind` utility addresses, but instead of "rewinding" WAL, it prohibits situations when rewind is needed.
+[^7]: <https://www.microsoft.com/en-us/research/publication/disk-paxos/>
+[^8]: <https://dl.acm.org/doi/10.1145/571825.571837>
