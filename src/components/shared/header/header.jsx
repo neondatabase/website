@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
-
+import TopBar from 'components/pages/home/topbar';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
@@ -28,6 +28,7 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn },
     )}
     ref={ref}
   >
+    <TopBar text="Neon raises 30mln in Series A-1" to="/blog/funding-a1/" />
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5" size="md">
       <Link className="hidden xl:block" to="/">
         <span className="sr-only">Neon</span>
