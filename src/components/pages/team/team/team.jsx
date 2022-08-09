@@ -187,7 +187,7 @@ const members = [
   {
     photo: <StaticImage src="./images/rory-de-zoete-photo.jpg" alt="Rory de Zoete" />,
     name: 'Rory de Zoete',
-    position: 'Site Reliability Engineer',
+    position: 'Lead Site Reliability Engineer',
     githubUrl: 'https://github.com/zoete',
   },
   // {
