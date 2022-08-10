@@ -3,11 +3,13 @@ import { Link as GatsbyLink } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import ArrowRightIcon from 'icons/arrow-right.inline.svg';
+
 const underlineCommonStyles =
   'relative transition-colors duration-500 before:absolute before:z-[-1] before:-bottom-1.5 before:left-0 before:h-1.5 before:w-full before:transition-all before:duration-500 hover:before:bottom-full hover:before:opacity-0';
 
 const styles = {
-  base: 'inline-flex !leading-none',
+  base: 'inline-flex !leading-none items-center',
   size: {
     md: 't-xl font-semibold',
     sm: 't-lg',
@@ -23,7 +25,15 @@ const styles = {
   },
 };
 
-const Link = ({ className: additionalClassName, size, theme, to, children, ...props }) => {
+const Link = ({
+  className: additionalClassName,
+  size,
+  theme,
+  to,
+  children,
+  withArrow,
+  ...props
+}) => {
   const className = clsx(
     theme && size && styles.base,
     styles.size[size],
@@ -31,17 +41,24 @@ const Link = ({ className: additionalClassName, size, theme, to, children, ...pr
     additionalClassName
   );
 
+  const content = (
+    <>
+      {withArrow ? <span>{children}</span> : children}
+      {withArrow && <ArrowRightIcon className={clsx('ml-2 shrink-0')} />}
+    </>
+  );
+
   if (to.startsWith('/')) {
     return (
       <GatsbyLink className={className} to={to} {...props}>
-        {children}
+        {content}
       </GatsbyLink>
     );
   }
 
   return (
     <a className={className} href={to} {...props}>
-      {children}
+      {content}
     </a>
   );
 };
@@ -52,6 +69,7 @@ Link.propTypes = {
   size: PropTypes.oneOf(Object.keys(styles.size)),
   theme: PropTypes.oneOf(Object.keys(styles.theme)),
   children: PropTypes.node.isRequired,
+  withArrow: PropTypes.bool,
 };
 
 Link.defaultProps = {
@@ -59,6 +77,7 @@ Link.defaultProps = {
   to: null,
   size: null,
   theme: null,
+  withArrow: false,
 };
 
 export default Link;
