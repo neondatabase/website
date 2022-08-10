@@ -10,14 +10,17 @@ const Hero = ({ title, description, author, slug }) => (
     <Container size="sm">
       <h1 className="t-5xl font-semibold">{title}</h1>
       <p className="t-2xl mt-6 xl:mt-5">{description}</p>
-      <div className="mt-8 flex items-center justify-between border-b border-b-gray-4 pb-8 2xl:mt-7 2xl:pb-7 xl:mt-6 xl:pb-6">
+      <div className="mt-8 flex items-center justify-between border-b border-b-gray-4 pb-8 2xl:mt-7 2xl:pb-7 xl:mt-6 xl:pb-6 sm:flex-col sm:items-start sm:space-y-4">
         <div className="flex items-center">
           <img
             className="w-10 shrink-0 rounded-full"
             src={POST_AUTHORS[author]?.photo}
             alt={POST_AUTHORS[author]?.name}
           />
-          <span className="t-lg ml-3 font-semibold xs:ml-1.5">{POST_AUTHORS[author]?.name}</span>
+          <span className="t-lg">
+            <span className="ml-3 font-semibold xs:ml-1.5">{POST_AUTHORS[author]?.name}</span>,{' '}
+            <span>{POST_AUTHORS[author]?.role}</span>
+          </span>
         </div>
         <p className="t-base text-gray-2">{getBlogPostDateFromSlug(slug)}</p>
       </div>
