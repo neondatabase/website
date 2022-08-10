@@ -8,10 +8,10 @@ const TopBar = () => (
     className="safe-paddings relative z-40 flex h-11 w-full items-center justify-center bg-primary-1 px-4 py-3 transition-colors duration-200 hover:bg-[#1AFFB2] xs:h-auto"
     to="/blog/funding-a1/"
   >
-    <span className="mr-4 border-r border-black border-opacity-20 py-1 pr-4 text-sm font-semibold xs:mr-0 xs:border-r-0 xs:pr-0">
+    <span className="mr-4 border-r border-black border-opacity-20 py-1 pr-4 text-sm font-semibold">
       Neon raises 30mln in Series A-1
     </span>
-    <span className="inline-flex items-center text-sm font-bold xs:mt-1 xs:hidden">
+    <span className="inline-flex items-center text-sm font-bold xs:hidden">
       <span>Read More</span>
       <ArrowRightIcon className="ml-1" />
     </span>
