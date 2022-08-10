@@ -8,7 +8,7 @@ const TopBar = () => (
       Neon raises 30mln in Series A-1
     </span>
     <Link
-      className="font-bold xs:mt-2"
+      className="font-bold xs:mt-1"
       theme="black-no-hover"
       size="2xs"
       to="/blog/funding-a1/"
