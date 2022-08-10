@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
 
-import TopBar from 'components/pages/home/topbar';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import TopBar from 'components/shared/topbar';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import logoBlack from 'images/logo-black.svg';
