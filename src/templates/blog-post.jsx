@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import Hero from 'components/pages/blog-post/hero';
+import SocialShare from 'components/pages/blog-post/social-share';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Layout from 'components/shared/layout';
@@ -11,9 +12,10 @@ import SEO_DATA from 'constants/seo-data';
 
 const BlogPostTemplate = ({
   data: {
-    mdx: { slug, body, frontmatter },
+    mdx: { slug, body, timeToRead, frontmatter },
   },
   location: { pathname },
+  pageContext: { pagePath },
 }) => (
   <Layout
     seo={{
@@ -27,11 +29,12 @@ const BlogPostTemplate = ({
     headerTheme="white"
   >
     <article>
-      <Hero {...frontmatter} slug={slug} />
+      <Hero {...frontmatter} timeToRead={timeToRead} slug={slug} />
       <Container size="sm">
         <Content className="mt-8" content={body} />
       </Container>
     </article>
+    <SocialShare slug={pagePath} title={frontmatter.title} />
     <SubscribeMinimalistic />
   </Layout>
 );
@@ -41,6 +44,7 @@ export const query = graphql`
     mdx(id: { eq: $id }) {
       slug
       body
+      timeToRead
       frontmatter {
         title
         description

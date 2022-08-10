@@ -59,7 +59,7 @@ module.exports = async ({ graphql, actions }) => {
     actions.createPage({
       path: pagePath,
       component: path.resolve('./src/templates/blog-post.jsx'),
-      context: { id },
+      context: { id, pagePath },
     });
   });
 };
