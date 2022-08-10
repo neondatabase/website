@@ -3,7 +3,6 @@ import React from 'react';
 import { LinkedinShareButton, TwitterShareButton, FacebookShareButton } from 'react-share';
 
 import Container from 'components/shared/container';
-import { BLOG_BASE_PATH } from 'constants/blog';
 import FacebookIcon from 'icons/facebook.inline.svg';
 import LinkedinIcon from 'icons/linkedin.inline.svg';
 import TwitterIcon from 'icons/twitter.inline.svg';
@@ -24,7 +23,8 @@ const links = [
 ];
 
 const SocialShare = ({ slug, title }) => {
-  const shareUrl = `${process.env.GATSBY_DEFAULT_SITE_URL}${BLOG_BASE_PATH}${slug}`;
+  const shareUrl = `${process.env.GATSBY_DEFAULT_SITE_URL}${slug}`;
+
   return (
     <div className="safe-paddings mt-8">
       <Container

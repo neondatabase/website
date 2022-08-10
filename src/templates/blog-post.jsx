@@ -15,6 +15,7 @@ const BlogPostTemplate = ({
     mdx: { slug, body, timeToRead, frontmatter },
   },
   location: { pathname },
+  pageContext: { pagePath },
 }) => (
   <Layout
     seo={{
@@ -33,7 +34,7 @@ const BlogPostTemplate = ({
         <Content className="mt-8" content={body} />
       </Container>
     </article>
-    <SocialShare slug={slug} title={frontmatter.title} />
+    <SocialShare slug={pagePath} title={frontmatter.title} />
     <SubscribeMinimalistic />
   </Layout>
 );
