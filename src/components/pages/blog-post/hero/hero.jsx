@@ -22,7 +22,7 @@ const Hero = ({ title, description, author, slug, timeToRead }) => (
             <span>{POST_AUTHORS[author]?.role}</span>
           </span>
         </div>
-        <span className="t-base text-gray-2">
+        <span className="t-base flex items-center text-gray-2">
           <span>{getBlogPostDateFromSlug(slug)}</span>
           <span className="relative ml-3 pl-4 before:absolute before:top-1/2 before:left-0 before:inline-flex before:h-1 before:w-1 before:-translate-y-1/2 before:rounded-full before:bg-gray-3">
             {timeToRead} min read
