@@ -11,7 +11,7 @@ import SEO_DATA from 'constants/seo-data';
 
 const BlogPostTemplate = ({
   data: {
-    mdx: { slug, body, frontmatter },
+    mdx: { slug, body, timeToRead, frontmatter },
   },
   location: { pathname },
 }) => (
@@ -27,7 +27,7 @@ const BlogPostTemplate = ({
     headerTheme="white"
   >
     <article>
-      <Hero {...frontmatter} slug={slug} />
+      <Hero {...frontmatter} timeToRead={timeToRead} slug={slug} />
       <Container size="sm">
         <Content className="mt-8" content={body} />
       </Container>
@@ -41,6 +41,7 @@ export const query = graphql`
     mdx(id: { eq: $id }) {
       slug
       body
+      timeToRead
       frontmatter {
         title
         description
