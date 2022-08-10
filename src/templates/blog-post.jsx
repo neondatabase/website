@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import Hero from 'components/pages/blog-post/hero';
+import SocialShare from 'components/pages/blog-post/social-share';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Layout from 'components/shared/layout';
@@ -32,6 +33,7 @@ const BlogPostTemplate = ({
         <Content className="mt-8" content={body} />
       </Container>
     </article>
+    <SocialShare slug={slug} title={frontmatter.title} />
     <SubscribeMinimalistic />
   </Layout>
 );

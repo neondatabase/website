@@ -38,7 +38,7 @@ Hero.propTypes = {
   description: PropTypes.string.isRequired,
   author: PropTypes.oneOf(Object.keys(POST_AUTHORS)).isRequired,
   slug: PropTypes.string.isRequired,
-  timeToRead: PropTypes.string.isRequired,
+  timeToRead: PropTypes.number.isRequired,
 };
 
 export default Hero;

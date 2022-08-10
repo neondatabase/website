@@ -6,11 +6,11 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import SubscriptionForm from 'components/shared/subscription-form';
 import LINKS from 'constants/links';
+import LinkedinIcon from 'icons/linkedin.inline.svg';
+import TwitterIcon from 'icons/twitter.inline.svg';
 
 // import DiscordIcon from './images/subscribe-discord.inline.svg';
 import GithubIcon from './images/subscribe-github.inline.svg';
-import LinkedinIcon from './images/subscribe-linkedin.inline.svg';
-import TwitterIcon from './images/subscribe-twitter.inline.svg';
 
 const links = [
   {
