@@ -9,7 +9,7 @@ const TopBar = () => (
     to="/blog/funding-a1/"
   >
     <span className="mr-4 border-r border-black border-opacity-20 py-1 pr-4 text-sm font-semibold">
-      Neon raises 30mln in Series A-1
+      Neon raises $30M in Series A-1
     </span>
     <span className="inline-flex items-center text-sm font-bold xs:hidden">
       <span>Read More</span>
