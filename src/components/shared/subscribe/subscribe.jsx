@@ -59,7 +59,7 @@ const Subscribe = () => (
                   aria-hidden
                 />
                 <Link
-                  className="relative flex h-[72px] w-[72px] items-center justify-center rounded-full border-4 border-black bg-white transition-transform duration-200 hover:translate-y-1.5 hover:-translate-x-1.5 2xl:h-16 2xl:w-16 xl:h-14 xl:w-14"
+                  className="relative flex h-[72px] w-[72px] items-center justify-center rounded-full border-4 border-black bg-white transition-transform duration-200 hover:translate-y-1.5 hover:-translate-x-1.5 2xl:h-16 2xl:w-16 xl:h-14 xl:w-14 xl:hover:translate-y-1 xl:hover:-translate-x-1"
                   to={to}
                 >
                   <Icon className="h-8 xl:h-7" />

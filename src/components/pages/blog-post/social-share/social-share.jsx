@@ -37,10 +37,10 @@ const SocialShare = ({ slug, title }) => {
             <Tag url={shareUrl} title={title} key={index}>
               <div className="relative">
                 <span
-                  className="absolute -bottom-1.5 -left-1.5 h-full w-full rounded-full bg-secondary-5 xl:-bottom-1 xl:-left-1"
+                  className="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5"
                   aria-hidden
                 />
-                <div className="relative flex h-[33px] w-[33px] items-center justify-center rounded-full border-2 border-black bg-white transition-transform duration-200 hover:translate-y-1.5 hover:-translate-x-1.5">
+                <div className="relative flex h-[33px] w-[33px] items-center justify-center rounded-full border-2 border-black bg-white transition-transform duration-200 hover:translate-y-1 hover:-translate-x-1">
                   <Icon className="h-4" />
                 </div>
               </div>
