@@ -5,6 +5,7 @@ import React, { forwardRef } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import TopBar from 'components/shared/topbar';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import logoBlack from 'images/logo-black.svg';
@@ -28,6 +29,7 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn },
     )}
     ref={ref}
   >
+    <TopBar />
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5" size="md">
       <Link className="hidden xl:block" to="/">
         <span className="sr-only">Neon</span>
