@@ -37,7 +37,6 @@ const variants = {
     transition: {
       duration: ANIMATION_DURATION,
     },
-    T,
   },
 };
 
