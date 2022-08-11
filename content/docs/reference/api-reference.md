@@ -1,5 +1,8 @@
 ---
 title: Neon API
+redirectFrom:
+  - docs/reference/about
+  - docs/api/about
 ---
 
 Neon API allows you to manage Projects and branches programmatically. This is helpful when using Neon as a part of the CI/CD flow.

@@ -37,16 +37,10 @@ could not extend file because cluster size limit (10240 MB)
 has been exceeded
 ```
 
+<a id="#point-in-time-reset/"></a>
+
 ## Point in Time Reset
 
 Neon storage consumes extra space in order to support Point in Time Reset (PITR) and the ability to reset a branch to a historical state. The historical data is stored in log based format.
 
-Neon has limits on the amount of modification history stored for the [Technical Preview Free Tier](#free-tier) customers.
-
-## Compute Config
-
-During the Technical Preview, Neon only supports modification to session level configuration parameters. Parameters are reset when the session is terminated (e.g. when compute is suspended).
-
-See [Default Parameters](../compatibiilty#default-parameters).
-
-See [https://www.postgresql.org/docs/14/runtime-config.html](https://www.postgresql.org/docs/14/runtime-config.html) for details.
+Neon has limits on the amount of modification history stored for the Technical Preview Free Tier customers.

@@ -2,7 +2,7 @@
 title: Integrations
 ---
 
-To see **Cloud Integrations**,
+To see **Cloud Deployments**,
 
 - Run a Hasura App
 - Run a Next.js and Vercel App
