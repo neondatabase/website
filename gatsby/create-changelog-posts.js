@@ -25,7 +25,6 @@ module.exports = async ({ graphql, actions }) => {
             }
             frontmatter {
               title
-              version
             }
           }
         }

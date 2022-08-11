@@ -14,7 +14,7 @@ const ChangelogPostList = ({ items }) => (
   <section>
     <Container size="sm">
       <div className="space-y-12 sm:space-y-10">
-        {items.map(({ body, slug, frontmatter: { title, version } }, index) => {
+        {items.map(({ body, slug, frontmatter: { title } }, index) => {
           const id = slugify(slug).toLocaleLowerCase();
 
           return (
@@ -22,7 +22,7 @@ const ChangelogPostList = ({ items }) => (
               className="relative flex border-b border-b-gray-4 pb-12 sm:flex-col sm:pb-10"
               key={index}
             >
-              <Aside version={version} slug={slug} />
+              <Aside slug={slug} />
               <div>
                 <Heading tag="h2" className="group relative mb-5" id={id} size="sm" theme="black">
                   <a
@@ -51,7 +51,6 @@ ChangelogPostList.propTypes = {
       slug: PropTypes.string.isRequired,
       frontmatter: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        version: PropTypes.string.isRequired,
       }).isRequired,
     })
   ).isRequired,
