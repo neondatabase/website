@@ -18,26 +18,26 @@
   items:
     - title: Cloud Integrations
       items:
-      - title: Run a Hasura app
-        slug: integrations/hasura
-      - title: Run a Vercel and Next.js app
-        slug: integrations/vercel
-      - title: Run a Prisma app
-        slug: integrations/prisma
+        - title: Run a Hasura app
+          slug: integrations/hasura
+        - title: Run a Vercel and Next.js app
+          slug: integrations/vercel
+        - title: Run a Prisma app
+          slug: integrations/prisma
     - title: Frameworks & Programming Languages
-      items: 
-      - title: Run a Go app
-        slug: integrations/go
-      - title: Run a Java app
-        slug: integrations/java
-      - title: Run a Django app
-        slug: integrations/django
-      - title: Run a Node.js app
-        slug: integrations/node
-      - title: Run a Symfony app
-        slug: integrations/symfony
-      - title: Run a Rust app
-        slug: integrations/rust
+      items:
+        - title: Run a Go app
+          slug: integrations/go
+        - title: Run a Java app
+          slug: integrations/java
+        - title: Run a Django app
+          slug: integrations/django
+        - title: Run a Node.js app
+          slug: integrations/node
+        - title: Run a Symfony app
+          slug: integrations/symfony
+        - title: Run a Rust app
+          slug: integrations/rust
     - title: Run a Postgres app
       slug: integrations/postgres
     - title: Run a SQLAlchemy app
@@ -55,7 +55,7 @@
     - title: API Reference
       slug: reference/about
     - title: Glossary
-      slug: reference/glossary    
+      slug: reference/glossary
     - title: Compatibility
       slug: reference/compatibility
     - title: Neon Default Extensions
@@ -77,7 +77,3 @@
   items:
     - title: Security
       slug: security
-- title: Release Notes
-  items:
-    - title: Release Notes
-      slug: release-notes      
