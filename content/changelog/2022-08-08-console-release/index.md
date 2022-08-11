@@ -1,6 +1,5 @@
 ---
 title: 'Console release'
-version: '2.2.3'
 ---
 
 ### Bug fixes

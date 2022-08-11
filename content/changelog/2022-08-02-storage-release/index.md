@@ -1,6 +1,5 @@
 ---
 title: 'Storage release'
-version: '2.1.18'
 ---
 
 ### What's new

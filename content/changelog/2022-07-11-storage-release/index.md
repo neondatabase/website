@@ -1,6 +1,5 @@
 ---
 title: 'Console release'
-version: '2.1.15'
 ---
 
 ### What's new
