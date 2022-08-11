@@ -23,7 +23,6 @@ const ChangelogPostTemplate = ({
     seo={{
       ...SEO_DATA.changelogPost({
         title: frontmatter.title,
-        version: frontmatter.version,
       }),
       pathname,
     }}
@@ -32,7 +31,7 @@ const ChangelogPostTemplate = ({
     <Hero />
     <Container size="sm" className="relative mb-10 flex">
       <article className="relative flex sm:flex-col">
-        <Aside version={frontmatter.version} slug={slug} />
+        <Aside slug={slug} />
         <div>
           <Heading className="mb-5" tag="h2" size="sm" theme="black">
             {frontmatter.title}
@@ -60,7 +59,6 @@ export const query = graphql`
       body
       frontmatter {
         title
-        version
       }
     }
   }

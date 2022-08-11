@@ -41,7 +41,6 @@ export const query = graphql`
         body
         frontmatter {
           title
-          version
         }
       }
     }
