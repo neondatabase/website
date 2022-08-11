@@ -6,6 +6,7 @@ import Footer from 'components/shared/footer';
 import Header from 'components/shared/header';
 import MobileMenu from 'components/shared/mobile-menu';
 import SEO from 'components/shared/seo';
+import Topbar from 'components/shared/topbar';
 
 const Layout = ({ seo, headerTheme, withOverflowHidden, isSignIn, children }) => {
   const headerRef = useRef(null);
@@ -23,20 +24,23 @@ const Layout = ({ seo, headerTheme, withOverflowHidden, isSignIn, children }) =>
   return (
     <>
       <SEO {...seo} />
-      <Header
-        theme={headerTheme}
-        isMobileMenuOpen={isMobileMenuOpen}
-        ref={headerRef}
-        isSignIn={isSignIn}
-        onBurgerClick={handleHeaderBurgerClick}
-      />
-      <main className={clsx(withOverflowHidden && 'overflow-hidden')}>{children}</main>
-      <Footer />
-      <MobileMenu
-        isOpen={isMobileMenuOpen}
-        headerRef={headerRef}
-        onOutsideClick={handleMobileMenuOutsideClick}
-      />
+      <Topbar />
+      <div className="relative">
+        <Header
+          theme={headerTheme}
+          isMobileMenuOpen={isMobileMenuOpen}
+          ref={headerRef}
+          isSignIn={isSignIn}
+          onBurgerClick={handleHeaderBurgerClick}
+        />
+        <main className={clsx(withOverflowHidden && 'overflow-hidden')}>{children}</main>
+        <Footer />
+        <MobileMenu
+          isOpen={isMobileMenuOpen}
+          headerRef={headerRef}
+          onOutsideClick={handleMobileMenuOutsideClick}
+        />
+      </div>
     </>
   );
 };
