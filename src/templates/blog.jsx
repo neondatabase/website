@@ -12,9 +12,10 @@ const BlogTemplate = ({
     wpPage: { seo },
     allWpPost: { nodes },
   },
+  location: { pathname },
   pageContext: { currentPageIndex, pageCount },
 }) => (
-  <Layout seo={{ ...seo }} headerTheme="white">
+  <Layout seo={{ ...seo, pathname }} headerTheme="white">
     <PostsList items={nodes} />
     {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />}
     <SubscribeMinimalistic />

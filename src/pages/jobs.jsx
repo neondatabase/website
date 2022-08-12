@@ -13,7 +13,7 @@ const JobsPage = ({ location: { pathname }, data: { ogImage } }) => (
     seo={{
       ...SEO_DATA.jobs,
       pathname,
-      ogImage: ogImage.childImageSharp.gatsbyImageData.images.fallback.src,
+      ogImage,
     }}
     headerTheme="black"
   >
@@ -27,7 +27,7 @@ export const query = graphql`
   query {
     ogImage: file(relativePath: { eq: "social-previews/jobs.jpg" }) {
       childImageSharp {
-        gatsbyImageData(layout: FIXED, quality: 90, width: 1200, height: 630, formats: JPG)
+        gatsbyImageData(layout: FIXED, width: 1200, height: 630, formats: JPG)
       }
     }
   }

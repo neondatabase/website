@@ -1,9 +1,8 @@
 import { useStaticQuery, graphql } from 'gatsby';
+import { getSrc } from 'gatsby-plugin-image';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-
-import createMetaImagePath from 'utils/create-meta-image-path';
 
 const SEO = ({
   pathname,
@@ -15,7 +14,7 @@ const SEO = ({
   opengraphDescription,
   opengraphTitle,
   opengraphUrl,
-  twitterImage,
+  twitterImage: opengraphImage,
   facebook,
 }) => {
   const {
@@ -40,6 +39,12 @@ const SEO = ({
   const currentUrl =
     (pathname || opengraphUrl) !== '/' ? `${siteUrl}${pathname || opengraphUrl}` : siteUrl;
   const currentDescription = description || opengraphDescription || siteDescription;
+
+  const opengraphImagePreview =
+    opengraphImage && siteUrl + getSrc(opengraphImage.localFile.childImageSharp);
+  const ogImagePreview = ogImage && siteUrl + getSrc(ogImage.childImageSharp);
+  const currentImagePath = opengraphImagePreview || ogImagePreview || siteUrl + siteImage;
+
   return (
     <Helmet
       title={title || siteTitle}
@@ -56,14 +61,7 @@ const SEO = ({
       <meta property="og:title" content={title || opengraphTitle || siteTitle} />
       <meta property="og:description" content={currentDescription} />
       <meta property="og:url" content={currentUrl} />
-      <meta
-        property="og:image"
-        content={
-          createMetaImagePath(twitterImage, siteUrl) ||
-          (ogImage && siteUrl + ogImage) ||
-          siteUrl + siteImage
-        }
-      />
+      <meta property="og:image" content={currentImagePath} />
       <meta property="og:type" content="website" />
       {facebook && <meta property="fb:app_id" content={facebook.appId} />}
       {/* Twitter */}
@@ -76,13 +74,19 @@ SEO.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   pathname: PropTypes.string.isRequired,
-  ogImage: PropTypes.shape({}),
+  ogImage: PropTypes.shape({
+    childImageSharp: PropTypes.shape({}),
+  }),
   metaKeywords: PropTypes.string,
   metaRobotsNoindex: PropTypes.string,
   opengraphDescription: PropTypes.string,
   opengraphTitle: PropTypes.string,
   opengraphUrl: PropTypes.string,
-  twitterImage: PropTypes.shape({}),
+  twitterImage: PropTypes.shape({
+    localFile: PropTypes.shape({
+      childImageSharp: PropTypes.shape({}),
+    }),
+  }),
   facebook: PropTypes.shape({
     appId: PropTypes.string,
   }),

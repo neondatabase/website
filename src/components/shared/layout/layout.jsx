@@ -77,7 +77,7 @@ export const query = graphql`
       twitterImage {
         localFile {
           childImageSharp {
-            gatsbyImageData(layout: FIXED, quality: 90, width: 1200, height: 630, formats: JPG)
+            gatsbyImageData(layout: FIXED, width: 1200, height: 630, formats: JPG)
           }
         }
       }
@@ -96,7 +96,7 @@ export const query = graphql`
       twitterImage {
         localFile {
           childImageSharp {
-            gatsbyImageData(layout: FIXED, quality: 90, width: 1200, height: 630, formats: JPG)
+            gatsbyImageData(layout: FIXED, width: 1200, height: 630, formats: JPG)
           }
         }
       }
