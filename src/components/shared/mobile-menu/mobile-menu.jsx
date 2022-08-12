@@ -97,8 +97,13 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
           <GithubIcon />
           <span className="ml-2.5">Star Us on Github</span>
         </Button>
-        <Button className="!flex h-12 items-center" to={LINKS.dashboard} size="xs" theme="primary">
-          Sign In
+        <Button
+          className="!flex h-12 items-center"
+          to={LINKS.earlyAccess}
+          size="xs"
+          theme="primary"
+        >
+          Get early access
         </Button>
       </div>
     </motion.nav>

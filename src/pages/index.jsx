@@ -27,7 +27,7 @@ const HomePage = ({ location: { pathname } }) => {
   });
 
   return (
-    <Layout seo={{ pathname }} headerTheme="black" withOverflowHidden>
+    <Layout seo={{ pathname }} headerTheme="black" isSignIn withOverflowHidden>
       <div className="relative overflow-hidden" ref={firstSectionWithLinesRef}>
         {isFirstSectionWithLinesInView && <Lines1 />}
         <Hero />
