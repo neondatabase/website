@@ -4,6 +4,7 @@ import React from 'react';
 
 import Content from 'components/pages/blog-post/content';
 import Hero from 'components/pages/blog-post/hero';
+import SocialShare from 'components/pages/blog-post/social-share';
 import CodeBlock from 'components/shared/code-block';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
@@ -12,9 +13,10 @@ import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blo
 
 const BlogPostTemplate = ({
   data: {
-    wpPost: { content, title, pageBlogPost, date, seo },
+    wpPost: { content, title, pageBlogPost, date, readingTime, seo },
   },
   location: { pathname },
+  pageContext: { pagePath },
 }) => {
   const contentWithLazyBlocks = getReactContentWithLazyBlocks(
     content,
@@ -33,11 +35,12 @@ const BlogPostTemplate = ({
       headerTheme="white"
     >
       <article>
-        <Hero title={title} {...pageBlogPost} date={date} />
+        <Hero title={title} {...pageBlogPost} date={date} readingTime={readingTime} />
         <Container size="sm">
           <Content className="mt-8" html={contentWithLazyBlocks} />
         </Container>
       </article>
+      <SocialShare slug={pagePath} title={title} />
       <SubscribeMinimalistic />
     </Layout>
   );
@@ -49,6 +52,7 @@ export const query = graphql`
       slug
       title
       content
+      readingTime
       date(formatString: "MMMM D, YYYY")
       pageBlogPost {
         description
@@ -56,6 +60,7 @@ export const query = graphql`
           ... on WpPostAuthor {
             title
             postAuthor {
+              role
               image {
                 localFile {
                   childImageSharp {
