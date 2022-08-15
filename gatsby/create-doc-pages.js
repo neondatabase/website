@@ -51,6 +51,11 @@ module.exports = async ({ graphql, actions }) => {
     toPath: generateDocPagePath(sidebar[0].items[0].items?.[0]?.slug ?? sidebar[0].items[0].slug),
   });
 
+  actions.createRedirect({
+    fromPath: `/sni`,
+    toPath: `/docs/how-to-guides/connectivity-issues/`,
+  });
+
   pages.forEach(({ id, slug, fields: { redirectFrom }, frontmatter }) => {
     // Required fields validation
     DOC_REQUIRED_FIELDS.forEach((fieldName) => {
