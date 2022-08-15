@@ -7,7 +7,7 @@ redirectFrom:
 
 <a id="branches-coming-soon/"></a>
 
-## Branches
+## Branch
 
 _Neon Branching capabilities are not publicly available yet. If you would like to try out this feature, reach out to iwantbranching@neon.tech describing your use case and request to enable branching capabilities for your account._
 
