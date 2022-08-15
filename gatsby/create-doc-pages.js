@@ -51,6 +51,7 @@ module.exports = async ({ graphql, actions }) => {
     toPath: generateDocPagePath(sidebar[0].items[0].items?.[0]?.slug ?? sidebar[0].items[0].slug),
   });
 
+  // Proxy has an error message, that suggests to read `https://neon.tech/sni` for more details.
   actions.createRedirect({
     fromPath: `/sni`,
     toPath: `/docs/how-to-guides/connectivity-issues/`,
