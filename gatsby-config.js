@@ -14,7 +14,6 @@ module.exports = {
     siteUrl: process.env.GATSBY_DEFAULT_SITE_URL || 'http://localhost:8000',
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
