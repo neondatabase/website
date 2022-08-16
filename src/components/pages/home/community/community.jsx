@@ -145,7 +145,7 @@ const items = [
       <StaticImage
         className="rounded-full"
         imgClassName="rounded-full"
-        src="./images/johan-eliasson.jpg"
+        src="./images/johan-eliasson.jpeg"
         alt="Johan Eliasson"
         width={64}
         height={64}
