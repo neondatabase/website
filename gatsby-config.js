@@ -4,6 +4,7 @@ require('dotenv').config();
 
 module.exports = {
   flags: { DEV_SSR: process.env.GATSBY_DEV_SSR || false },
+  trailingSlash: 'always',
   siteMetadata: {
     siteTitle: 'Neon — Serverless, Fault-Tolerant, Branchable Postgres',
     siteDescription:
@@ -19,13 +20,6 @@ module.exports = {
       options: {
         name: 'images',
         path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'posts',
-        path: `${__dirname}/content/posts`,
       },
     },
     {
@@ -143,6 +137,34 @@ module.exports = {
     'gatsby-alias-imports',
     'gatsby-plugin-postcss',
     'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
+      },
+    },
+    {
+      resolve: 'gatsby-source-wordpress',
+      options: {
+        url: process.env.WP_GRAPHQL_URL,
+        auth: {
+          htaccess: {
+            username: process.env.WP_HTACCESS_USERNAME,
+            password: process.env.WP_HTACCESS_PASSWORD,
+          },
+        },
+        html: {
+          fallbackImageMaxWidth: 800, // max-width of the content area
+          imageQuality: 85,
+          generateWebpImages: true,
+        },
+        develop: {
+          nodeUpdateInterval: process.env.WP_NODE_UPDATE_INTERVAL || 5000,
+          hardCacheMediaFiles: process.env.WP_HARD_CACHE_MEDIA === 'true',
+          hardCacheData: process.env.WP_HARD_CACHE_DATA === 'true',
+        },
+      },
+    },
     `gatsby-plugin-gatsby-cloud`,
   ],
 };

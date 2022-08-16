@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useState, useRef } from 'react';
 
@@ -49,7 +50,6 @@ Layout.propTypes = {
   seo: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
-    canonicalUrl: PropTypes.string,
     pathname: PropTypes.string.isRequired,
   }),
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
@@ -63,5 +63,45 @@ Layout.defaultProps = {
   withOverflowHidden: false,
   isSignIn: false,
 };
+
+export const query = graphql`
+  fragment wpPageSeo on WpPage {
+    seo {
+      title
+      metaDesc
+      metaKeywords
+      metaRobotsNoindex
+      opengraphTitle
+      opengraphDescription
+      opengraphUrl
+      twitterImage {
+        localFile {
+          childImageSharp {
+            gatsbyImageData(layout: FIXED, width: 1200, height: 630, formats: JPG)
+          }
+        }
+      }
+    }
+  }
+
+  fragment wpPostSeo on WpPost {
+    seo {
+      title
+      metaDesc
+      metaKeywords
+      metaRobotsNoindex
+      opengraphTitle
+      opengraphDescription
+      opengraphUrl
+      twitterImage {
+        localFile {
+          childImageSharp {
+            gatsbyImageData(layout: FIXED, width: 1200, height: 630, formats: JPG)
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default Layout;
