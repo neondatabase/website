@@ -3,6 +3,7 @@ import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Advantages from 'components/pages/home/advantages';
+import Community from 'components/pages/home/community';
 import CTA from 'components/pages/home/cta';
 import DataBranching from 'components/pages/home/data-branching';
 import Features from 'components/pages/home/features';
@@ -34,6 +35,7 @@ const HomePage = ({ location: { pathname } }) => {
         <CTA />
         <Advantages />
       </div>
+      <Community />
       <Scalability />
       <Storage />
       <DataBranching />

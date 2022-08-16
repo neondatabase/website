@@ -30,6 +30,7 @@ module.exports = {
         4: '#fbd0d7',
         5: '#aa99ff',
         6: '#d9eef2',
+        7: '#259df4',
       },
       gray: {
         1: '#262626',
@@ -37,6 +38,7 @@ module.exports = {
         3: '#b3b3b3',
         4: '#e5e5e5',
         5: '#fafafa',
+        6: '#f9f9f9',
       },
     },
     extend: {
