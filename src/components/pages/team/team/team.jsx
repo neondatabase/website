@@ -162,8 +162,8 @@ const members = [
     githubUrl: 'https://github.com/SergeyMelnikov',
   },
   {
-    photo: <StaticImage src="./images/aleksander-bayandin-photo.jpg" alt="Aleksander Bayandin" />,
-    name: 'Aleksander Bayandin',
+    photo: <StaticImage src="./images/alexander-bayandin-photo.jpg" alt="Alexander Bayandin" />,
+    name: 'Alexander Bayandin',
     position: 'Lead QA Automation Engineer',
     githubUrl: 'https://github.com/bayandin',
   },
@@ -187,7 +187,7 @@ const members = [
   {
     photo: <StaticImage src="./images/rory-de-zoete-photo.jpg" alt="Rory de Zoete" />,
     name: 'Rory de Zoete',
-    position: 'Site Reliability Engineer',
+    position: 'Lead Site Reliability Engineer',
     githubUrl: 'https://github.com/zoete',
   },
   // {

@@ -1,7 +1,7 @@
 ---
 title: Run a Vercel and Next.js app
-redirectFrom: 
- - docs/quickstart/vercel
+redirectFrom:
+  - docs/quickstart/vercel
 ---
 
 ## Introduction
@@ -53,5 +53,3 @@ const result = await sql.uafe(req.body);
 ```
 
 _Note: Do not ever expose your Neon credentials to the browser._
-
-You can also use Prisma to manage your database, check our how-to [here](#using-with-prisma).
