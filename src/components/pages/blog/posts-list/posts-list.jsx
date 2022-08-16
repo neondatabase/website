@@ -25,7 +25,7 @@ const PostsList = ({ items }) => (
                 <GatsbyImage
                   className="w-10 shrink-0 rounded-full"
                   imgClassName="rounded-full"
-                  image={getImage(author.postAuthor.image.localFile)}
+                  image={getImage(author?.postAuthor?.image?.localFile)}
                   alt={author.title}
                 />
                 <span className="t-lg ml-3 font-semibold xs:ml-1.5">{author.title}</span>
