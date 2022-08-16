@@ -38,6 +38,7 @@ module.exports = {
         3: '#b3b3b3',
         4: '#e5e5e5',
         5: '#fafafa',
+        6: '#f9f9f9',
       },
     },
     extend: {
