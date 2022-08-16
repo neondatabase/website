@@ -83,7 +83,7 @@ const items = [
         height={64}
       />
     ),
-    name: "'Leigh Marie' Braswell",
+    name: 'Leigh Marie Braswell',
     twitterAccount: 'LM_Braswell',
     twitterUrl:
       'https://twitter.com/LM_Braswell/status/1537063982766374912?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
@@ -100,22 +100,20 @@ const items = [
       <StaticImage
         className="rounded-full"
         imgClassName="rounded-full"
-        src="./images/iavins.jpg"
-        alt="v"
+        src="./images/erik.jpg"
+        alt="bernhardsson"
         width={64}
         height={64}
       />
     ),
-    name: 'v',
-    twitterAccount: 'iavins',
+    name: 'Erik Bernhardsson',
+    twitterAccount: 'bernhardsson',
     twitterUrl:
-      'https://twitter.com/iavins/status/1530515401578119168?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
+      'https://twitter.com/bernhardsson/status/1537126461861240838?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
     text: (
       <>
-        Neon DB @Neondatabase is really exciting! Serverless Postgres with separated storage and
-        compute for autoscaling (this is huge!), branching, Point in Time Reset, and time travel
-        queries They have built an open source storage engine to make storage, backups, and
-        archiving easier
+        100% Postgres compatibility and the ability to scale down to zero and cold start in less
+        than 3s... sounds extremely cool
       </>
     ),
   },
@@ -130,7 +128,7 @@ const items = [
         height={64}
       />
     ),
-    name: 'Tobias_Petry.sql',
+    name: 'Tobias Petry',
     twitterAccount: 'tobias_petry',
     twitterUrl:
       'https://twitter.com/tobias_petry/status/1530442483364159488?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
