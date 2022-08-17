@@ -48,8 +48,8 @@
   items:
     - title: Import an Existing Database
       slug: how-to-guides/import-an-existing-database
-    - title: Connect with TablePlus
-      slug: how-to-guides/connect-with-tableplus
+    - title: Connecting with old clients
+      slug: how-to-guides/connectivity-issues
 - title: Reference
   items:
     - title: Neon Roadmap
