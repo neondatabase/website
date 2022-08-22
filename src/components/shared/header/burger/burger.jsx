@@ -10,6 +10,7 @@ const Burger = ({ className, isToggled, onClick }) => (
     className={clsx('relative h-10 w-10 rounded-full border-2 border-current', className)}
     type="button"
     animate={isToggled ? 'toggled' : 'initial'}
+    aria-label={isToggled ? 'Close menu' : 'Open menu'}
     onClick={onClick}
   >
     <motion.span
