@@ -2,16 +2,17 @@
 // import { StaticImage } from 'gatsby-plugin-image';
 // import React, { useRef } from 'react';
 import React from 'react';
-// import { useInView } from 'react-intersection-observer';
+import { useInView } from 'react-intersection-observer';
 
 // import BlinkingText from 'components/shared/blinking-text';
+
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import useLottie from 'hooks/use-lottie';
 
 import costEfficientAnimationData from './data/advantages-cost-efficient-lottie-data.json';
 import easyToUseAnimationData from './data/advantages-easy-to-use-lottie-data.json';
 import scalableAnimationData from './data/advantages-scalable-lottie-data.json';
+import Icon from './icon';
 // import PlayIcon from './images/advantages-play.inline.svg';
 
 const Advantages = () => {
@@ -19,53 +20,25 @@ const Advantages = () => {
   // const [contentRef, isContentInView] = useInView({ triggerOnce: true, threshold: 0.5 });
   // const titleRef = useRef();
 
-  const {
-    animationVisibilityRef: scalableAnimationVisibilityRef,
-    animationRef: scalableAnimationRef,
-  } = useLottie({
-    lottieOptions: {
-      animationData: scalableAnimationData,
-    },
-    useInViewOptions: { threshold: 0.5 },
-  });
-
-  const {
-    animationVisibilityRef: costEfficientAnimationVisibilityRef,
-    animationRef: costEfficientAnimationRef,
-  } = useLottie({
-    lottieOptions: {
-      animationData: costEfficientAnimationData,
-    },
-    useInViewOptions: { threshold: 0.5 },
-  });
-
-  const {
-    animationVisibilityRef: easyToUseAnimationVisibilityRef,
-    animationRef: easyToUseAnimationRef,
-  } = useLottie({
-    lottieOptions: {
-      animationData: easyToUseAnimationData,
-    },
-    useInViewOptions: { threshold: 0.5 },
+  const [sectionRef, isSectionInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
   });
 
   const items = [
     {
-      animationVisibilityRef: scalableAnimationVisibilityRef,
-      animationRef: scalableAnimationRef,
+      animationData: scalableAnimationData,
       title: 'Scalable',
       description: `Compute scales dynamically to ensure that you are ready for peak hours.`,
     },
     {
-      animationVisibilityRef: costEfficientAnimationVisibilityRef,
-      animationRef: costEfficientAnimationRef,
+      animationData: costEfficientAnimationData,
       title: 'Cost Efficient',
       description:
         'Compute scales down to zero on usage and hot storage offloads to S3 for cost efficiency.',
     },
     {
-      animationVisibilityRef: easyToUseAnimationVisibilityRef,
-      animationRef: easyToUseAnimationRef,
+      animationData: easyToUseAnimationData,
       title: 'Easy to Use',
       description: 'Fully managed serverless Postgres starts in seconds.',
     },
@@ -76,6 +49,7 @@ const Advantages = () => {
       id="advantages"
       // className="safe-paddings bg-black py-80 3xl:py-72 2xl:py-64 xl:py-52 lg:py-40 md:py-24"
       className="safe-paddings bg-black pt-36 pb-72 3xl:pt-32 3xl:pb-64 2xl:pt-28 2xl:pb-52 xl:pt-40 xl:pb-40 lg:pt-36 lg:pb-36 md:pt-24 md:pb-24"
+      ref={sectionRef}
     >
       <Container className="z-20" size="md">
         {/* <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px] xl:space-x-[50px] lg:flex-col lg:items-start lg:space-x-0">
@@ -130,18 +104,21 @@ const Advantages = () => {
         </div> */}
         {/* <ul className="grid-gap-x mt-40 grid grid-cols-12 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:mt-20 lg:gap-y-16 md:grid-cols-1"> */}
         <ul className="grid-gap-x grid grid-cols-12 lg:gap-y-16 md:grid-cols-1">
-          {items.map(({ animationVisibilityRef, animationRef, title, description }, index) => (
+          {items.map(({ animationData, title, description }, index) => (
             <li
               className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:col-span-6 lg:max-w-[300px] md:max-w-none"
               key={index}
-              ref={animationVisibilityRef}
             >
               <div
                 id={`advantages-item-${index + 1}-icon`}
                 className="h-24 w-24 2xl:h-20 2xl:w-20 xl:h-[72px] xl:w-[72px] lg:h-16 lg:w-16"
-                ref={animationRef}
                 aria-hidden
-              />
+              >
+                {isSectionInView && (
+                  <Icon animationData={animationData} isInView={isSectionInView} />
+                )}
+              </div>
+
               <Heading
                 id={`advantages-item-${index + 1}-title`}
                 className="mt-6 xl:mt-5"
