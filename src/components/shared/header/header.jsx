@@ -31,8 +31,12 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn },
     <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5" size="md">
       <Link className="hidden xl:block" to="/">
         <span className="sr-only">Neon</span>
-        {theme === 'white' && <img className="h-9 2xl:h-8" src={logoBlack} alt="" aria-hidden />}
-        {theme === 'black' && <img className="h-9 2xl:h-8" src={logoWhite} alt="" aria-hidden />}
+        {theme === 'white' && (
+          <img className="h-9 2xl:h-8" src={logoBlack} width={114} height={32} alt="" aria-hidden />
+        )}
+        {theme === 'black' && (
+          <img className="h-9 2xl:h-8" src={logoWhite} width={114} height={32} alt="" aria-hidden />
+        )}
       </Link>
       <nav className="xl:absolute xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2">
         <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
@@ -93,8 +97,12 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn },
         to="/"
       >
         <span className="sr-only">Neon</span>
-        {theme === 'white' && <img className="h-9 2xl:h-8" src={logoBlack} alt="" aria-hidden />}
-        {theme === 'black' && <img className="h-9 2xl:h-8" src={logoWhite} alt="" aria-hidden />}
+        {theme === 'white' && (
+          <img className="h-9 2xl:h-8" src={logoBlack} alt="" width={128} height={36} aria-hidden />
+        )}
+        {theme === 'black' && (
+          <img className="h-9 2xl:h-8" src={logoWhite} alt="" width={128} height={36} aria-hidden />
+        )}
       </Link>
 
       <div className="flex space-x-5 lg:hidden">
