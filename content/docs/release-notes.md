@@ -2,6 +2,26 @@
 title: Release Notes
 ---
 
+## 2022-08-25 Console release
+
+### Bug fixes
+
+- UI: Correct .pgpass instructions [#1825](https://github.com/neondatabase/neon/issues/1825)
+
+- UI: add validation messages for creating a project form.
+
+- UI: fix the dead links in the onboarding
+
+- UI: limited preview and branching email updates 
+
+### What's new
+
+- UI: Table viewer
+
+- UI: add help center menu 
+
+- Control Plane: Select safekeepers from different Availability Zones for a new compute project.
+
 ## 2022-08-15 Console release
 
 ### Bug fixes
