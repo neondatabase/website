@@ -1,9 +1,8 @@
+import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-
-import illustration from './images/illustration.svg';
 
 const Hero = () => (
   <section className="grow pt-28 pb-24 lg:pt-0 md:py-14 xs:pt-10">
@@ -22,7 +21,14 @@ const Hero = () => (
         </Button>
       </div>
       <div className="col-start-6 col-end-12 2xl:col-end-13 md:col-span-full">
-        <img className="w-full md:mx-auto md:max-w-xl" src={illustration} alt="Illustration" />
+        <StaticImage
+          className="w-full md:mx-auto md:max-w-xl"
+          width={860}
+          height={862}
+          src="./images/illustration.jpg"
+          alt="Illustration"
+          loading="eager"
+        />
       </div>
     </Container>
   </section>
