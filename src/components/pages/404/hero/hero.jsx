@@ -13,8 +13,7 @@ const Hero = () => (
           <br /> Page not found...
         </h1>
         <p className="t-xl mt-11 lg:mt-8">
-          Sorry, the page you are looking for doesn’t exist or has been moved. We suggest you back
-          to home.
+          Sorry, the page you are looking for doesn’t exist or has been moved.
         </p>
         <Button className="mt-11 lg:mt-8 sm:w-full" size="md" theme="primary" to="/">
           Back to Home
