@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
+import clsx from 'clsx';
 import { graphql } from 'gatsby';
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import Content from 'components/pages/blog-post/content';
 import Hero from 'components/pages/blog-post/hero';
 import SocialShare from 'components/pages/blog-post/social-share';
 import CodeBlock from 'components/shared/code-block';
-import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
@@ -25,6 +26,9 @@ const BlogPostTemplate = ({
     },
     true
   );
+  const [socialShareRef, isSocialShareInView] = useInView({
+    threshold: 0.5,
+  });
   return (
     <Layout
       seo={{
@@ -33,14 +37,25 @@ const BlogPostTemplate = ({
         pathname,
       }}
       headerTheme="white"
+      isHeaderSticky
     >
-      <article>
-        <Hero title={title} {...pageBlogPost} date={date} readingTime={readingTime} />
-        <Container size="sm">
+      <div className="mx-auto grid max-w-[1009px] grid-cols-10 gap-x-8 pt-20 xl:max-w-[936px] xl:pt-16 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6">
+        <SocialShare
+          className={clsx(
+            'col-span-1 transition-opacity duration-150 md:hidden',
+            isSocialShareInView ? 'invisible opacity-0' : 'visible opacity-100'
+          )}
+          slug={pagePath}
+          title={title}
+          isSticky
+        />
+
+        <article className="col-start-2 col-end-10 md:col-span-full">
+          <Hero title={title} {...pageBlogPost} date={date} readingTime={readingTime} />
           <Content className="mt-8" html={contentWithLazyBlocks} />
-        </Container>
-      </article>
-      <SocialShare slug={pagePath} title={title} />
+          <SocialShare slug={pagePath} title={title} ref={socialShareRef} withTopBorder />
+        </article>
+      </div>
       <SubscribeMinimalistic />
     </Layout>
   );

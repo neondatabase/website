@@ -20,11 +20,13 @@ const icons = {
   discussions: DiscussionsIcon,
 };
 
-const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn }, ref) => (
+const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn, isSticky }, ref) => (
   <header
     className={clsx(
       'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative',
-      theme === 'black' && 'lg:bg-black'
+      theme === 'black' && 'lg:bg-black',
+      theme === 'white' && 'bg-white',
+      isSticky && 'sticky top-0 z-50 md:relative'
     )}
     ref={ref}
   >
@@ -153,11 +155,13 @@ Header.propTypes = {
   isMobileMenuOpen: PropTypes.bool,
   onBurgerClick: PropTypes.func.isRequired,
   isSignIn: PropTypes.bool,
+  isSticky: PropTypes.bool,
 };
 
 Header.defaultProps = {
   isMobileMenuOpen: false,
   isSignIn: false,
+  isSticky: false,
 };
 
 export default Header;

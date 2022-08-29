@@ -9,7 +9,7 @@ import MobileMenu from 'components/shared/mobile-menu';
 import SEO from 'components/shared/seo';
 import Topbar from 'components/shared/topbar';
 
-const Layout = ({ seo, headerTheme, withOverflowHidden, isSignIn, children }) => {
+const Layout = ({ seo, headerTheme, withOverflowHidden, isSignIn, children, isHeaderSticky }) => {
   const headerRef = useRef(null);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -32,6 +32,7 @@ const Layout = ({ seo, headerTheme, withOverflowHidden, isSignIn, children }) =>
           isMobileMenuOpen={isMobileMenuOpen}
           ref={headerRef}
           isSignIn={isSignIn}
+          isSticky={isHeaderSticky}
           onBurgerClick={handleHeaderBurgerClick}
         />
         <main className={clsx(withOverflowHidden && 'overflow-hidden')}>{children}</main>
@@ -56,12 +57,14 @@ Layout.propTypes = {
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
   isSignIn: PropTypes.bool,
+  isHeaderSticky: PropTypes.bool,
 };
 
 Layout.defaultProps = {
   seo: {},
   withOverflowHidden: false,
   isSignIn: false,
+  isHeaderSticky: false,
 };
 
 export const query = graphql`
