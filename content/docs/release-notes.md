@@ -18,7 +18,7 @@ title: Release Notes
 
 - UI: added Tables page for exporing the Project schema and data.
 
-- UI: add help center menu 
+- UI: add help center menu.
 
 - Control Plane: pick the safekeepers from different Availability Zones for the new Projects.
 
