@@ -12,7 +12,7 @@ title: Release Notes
 
 - UI: fix the dead links in the onboarding
 
-- UI: limited preview and branching email updates 
+- UI: update the emails for requesting branching and support.
 
 ### What's new
 
