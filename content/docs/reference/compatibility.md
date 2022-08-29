@@ -1,7 +1,7 @@
 ---
 title: Neon Compatibility
 redirectFrom:
-  - docs/conceptual-guides/compatibility
+  - /docs/conceptual-guides/compatibility
 ---
 
 Neon is protocol- and application-compatible with PostgreSQL. However, when you connect to our cloud offering, there are some limitations that you need to take into account.
