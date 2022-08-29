@@ -10,7 +10,7 @@ title: Release Notes
 
 - UI: add validation messages for creating a project form.
 
-- UI: fix the dead links in the onboarding
+- UI: fix the dead links in the onboarding.
 
 - UI: update the emails for requesting branching and support.
 
