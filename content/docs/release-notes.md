@@ -16,7 +16,7 @@ title: Release Notes
 
 ### What's new
 
-- UI: Table viewer
+- UI: added Tables page for exporing the Project schema and data.
 
 - UI: add help center menu 
 
