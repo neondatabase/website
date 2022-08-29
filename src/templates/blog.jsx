@@ -5,17 +5,16 @@ import React from 'react';
 import Pagination from 'components/pages/blog/pagination';
 import PostsList from 'components/pages/blog/posts-list';
 import Layout from 'components/shared/layout';
+import SEO from 'components/shared/seo';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
 
 const BlogTemplate = ({
   data: {
-    wpPage: { seo },
     allWpPost: { nodes },
   },
-  location: { pathname },
   pageContext: { currentPageIndex, pageCount },
 }) => (
-  <Layout seo={{ ...seo, pathname }} headerTheme="white">
+  <Layout headerTheme="white">
     <PostsList items={nodes} />
     {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />}
     <SubscribeMinimalistic />
@@ -25,7 +24,6 @@ const BlogTemplate = ({
 export const query = graphql`
   query ($id: String!, $limit: Int!, $skip: Int!) {
     wpPage(id: { eq: $id }) {
-      id
       ...wpPageSeo
     }
     allWpPost(sort: { order: DESC, fields: date }, limit: $limit, skip: $skip) {
@@ -56,3 +54,10 @@ export const query = graphql`
 `;
 
 export default BlogTemplate;
+
+export const Head = ({
+  location: { pathname },
+  data: {
+    wpPage: { seo },
+  },
+}) => <SEO pathname={pathname} {...seo} />;
