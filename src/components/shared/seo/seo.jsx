@@ -45,13 +45,12 @@ const SEO = ({
     opengraphImage && siteUrl + getSrc(opengraphImage.localFile.childImageSharp);
   const ogImagePreview = ogImage && siteUrl + getSrc(ogImage.childImageSharp);
   const currentImagePath = opengraphImagePreview || ogImagePreview || siteUrl + siteImage;
-
   return (
     <>
       <title>{currentTitle}</title>
       {/* General */}
       <meta name="description" content={currentDescription} />
-      {metaKeywords && <meta name="keywords" content={metaKeywords} />}
+      {metaKeywords ? <meta name="keywords" content={metaKeywords} /> : null}
       {isRobotsNoindexPage && <meta name="robots" content="noindex" />}
       {/* Open Graph */}
       <meta property="og:title" content={currentTitle} />
