@@ -16,7 +16,7 @@ const Hero = () => (
           Sorry, the page you are looking for doesn’t exist or has been moved. We suggest you back
           to home.
         </p>
-        <Button className="mt-11 lg:mt-8" size="md" theme="primary" to="/">
+        <Button className="mt-11 lg:mt-8 sm:w-full" size="md" theme="primary" to="/">
           Back to Home
         </Button>
       </div>
