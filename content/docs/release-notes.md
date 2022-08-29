@@ -14,7 +14,7 @@ title: Release Notes
 
 - UI: introduce saved queries and history in the project query interface.
 
-- UI: add token-based authorization into Swagger UI for [Neon's public API](https://console.neon.tech/api-docs/v1).
+- UI: add token-based authorization into Swagger UI for [Neon's public API](https://neon.tech/api-reference).
 
 - UI: display status of operations that are waiting in the queue as 'Scheduling' instead of 'In progress'.
 
@@ -123,7 +123,7 @@ title: Release Notes
 
 - Control Plane: implement optional connection pooling for projects.
 
-- API: add `pooler_enabled` flag to [projects update API call](https://console.neon.tech/api-docs#operations-Project-updateProject).
+- API: add `pooler_enabled` flag to [projects update API call](https://neon.tech/api-reference#operations-Project-updateProject).
 
 - UI: various improvements.
 
