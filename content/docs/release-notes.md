@@ -20,7 +20,7 @@ title: Release Notes
 
 - UI: add help center menu 
 
-- Control Plane: Select safekeepers from different Availability Zones for a new compute project.
+- Control Plane: pick the safekeepers from different Availability Zones for the new Projects.
 
 ## 2022-08-15 Console release
 
