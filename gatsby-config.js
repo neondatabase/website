@@ -164,6 +164,14 @@ module.exports = {
         },
       },
     },
-    `gatsby-plugin-gatsby-cloud`,
+    {
+      resolve: 'gatsby-plugin-gatsby-cloud',
+      options: {
+        headers: {
+          '/fonts/*': ['Cache-Control: public, max-age=31536000, immutable'],
+          '/lottie-assets/*': ['Cache-Control: public, max-age=31536000, immutable'],
+        },
+      },
+    },
   ],
 };

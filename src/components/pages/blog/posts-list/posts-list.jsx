@@ -21,15 +21,17 @@ const PostsList = ({ items }) => (
               </Link>
             </h1>
             <div className="mt-5 flex items-center justify-between 2xl:mt-4">
-              <div className="flex items-center">
-                <GatsbyImage
-                  className="w-10 shrink-0 rounded-full"
-                  imgClassName="rounded-full"
-                  image={getImage(author?.postAuthor?.image?.localFile)}
-                  alt={author.title}
-                />
-                <span className="t-lg ml-3 font-semibold xs:ml-1.5">{author.title}</span>
-              </div>
+              {author && (
+                <div className="flex items-center">
+                  <GatsbyImage
+                    className="w-10 shrink-0 rounded-full"
+                    imgClassName="rounded-full"
+                    image={getImage(author.postAuthor?.image?.localFile)}
+                    alt={author.title}
+                  />
+                  <span className="t-lg ml-3 font-semibold xs:ml-1.5">{author.title}</span>
+                </div>
+              )}
               <p className="t-base text-gray-2">{date}</p>
             </div>
             <p className="t-lg mt-5 !leading-normal 2xl:mt-4">{description}</p>

@@ -1,9 +1,9 @@
 ---
 title: Signing Up
 redirectFrom:
-  - docs/quickstart/console/
-  - docs/cloud/getting-started/
-  - docs/cloud/getting_started/
+  - /docs/quickstart/console/
+  - /docs/cloud/getting-started/
+  - /docs/cloud/getting_started/
 ---
 
 In order to launch Neon projects, you need to sign up on <https://console.neon.tech> and click on the New Project button.

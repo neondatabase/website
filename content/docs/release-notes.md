@@ -2,6 +2,26 @@
 title: Release Notes
 ---
 
+## 2022-08-25 Console release
+
+### Bug fixes
+
+- UI: fix .pgpass instructions [#1825](https://github.com/neondatabase/neon/issues/1825).
+
+- UI: add validation messages for creating a project form.
+
+- UI: fix the dead links in the onboarding.
+
+- UI: update the emails for requesting branching and support.
+
+### What's new
+
+- UI: added Tables page for exporing the Project schema and data.
+
+- UI: add help center menu.
+
+- Control Plane: pick the safekeepers from different Availability Zones for the new Projects.
+
 ## 2022-08-15 Console release
 
 ### Bug fixes
@@ -14,7 +34,7 @@ title: Release Notes
 
 - UI: introduce saved queries and history in the project query interface.
 
-- UI: add token-based authorization into Swagger UI for [Neon's public API](https://console.neon.tech/api-docs/v1).
+- UI: add token-based authorization into Swagger UI for [Neon's public API](https://neon.tech/api-reference).
 
 - UI: display status of operations that are waiting in the queue as 'Scheduling' instead of 'In progress'.
 
@@ -123,7 +143,7 @@ title: Release Notes
 
 - Control Plane: implement optional connection pooling for projects.
 
-- API: add `pooler_enabled` flag to [projects update API call](https://console.neon.tech/api-docs#operations-Project-updateProject).
+- API: add `pooler_enabled` flag to [projects update API call](https://neon.tech/api-reference#operations-Project-updateProject).
 
 - UI: various improvements.
 

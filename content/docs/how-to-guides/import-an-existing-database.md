@@ -1,7 +1,7 @@
 ---
 title: Import an Existing Database
-redirectFrom: 
-- docs/cloud/tutorials
+redirectFrom:
+  - /docs/cloud/tutorials
 ---
 
 Migrating an existing Postgres database to Neon can be done almost in the same way
