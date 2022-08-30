@@ -10,7 +10,7 @@ title: Release Notes
 
 ### What's new
 
-- UI: added Feedback form.
+- UI: add Feedback form.
 
 ## 2022-08-25 Console release
 
