@@ -22,4 +22,7 @@ export default {
     title: `${title} — Neon Docs`,
     description,
   }),
+  404: {
+    title: 'Page Not Found — Neon',
+  },
 };
