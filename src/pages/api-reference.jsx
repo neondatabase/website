@@ -18,6 +18,8 @@ const ApiReferencePage = () => {
         SwaggerUI({
           spec,
           dom_id: '#swagger',
+          deepLinking: true,
+          filter: true,
         });
       });
   }, []);
