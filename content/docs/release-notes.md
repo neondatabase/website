@@ -6,7 +6,7 @@ title: Release Notes
 
 ### Bug fixes
 
-- UI: fix cors error for Swagger UI API requests.
+- UI: fix CORS error for API requests in Swagger UI, when using 'Try it out'.
 
 ### What's new
 
