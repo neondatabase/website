@@ -1,7 +1,7 @@
 ---
 title: Branching
 redirectFrom:
-  - docs/conceptual-guides/branches
+  - /docs/conceptual-guides/branches
 ---
 
 <a id="branches-coming-soon/"></a>

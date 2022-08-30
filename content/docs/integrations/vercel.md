@@ -1,7 +1,7 @@
 ---
 title: Run a Vercel and Next.js app
 redirectFrom:
-  - docs/quickstart/vercel
+  - /docs/quickstart/vercel
 ---
 
 ## Introduction

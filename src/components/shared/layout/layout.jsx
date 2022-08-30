@@ -6,10 +6,9 @@ import React, { useState, useRef } from 'react';
 import Footer from 'components/shared/footer';
 import Header from 'components/shared/header';
 import MobileMenu from 'components/shared/mobile-menu';
-import SEO from 'components/shared/seo';
 import Topbar from 'components/shared/topbar';
 
-const Layout = ({ seo, headerTheme, withOverflowHidden, isSignIn, children }) => {
+const Layout = ({ headerTheme, withOverflowHidden, isSignIn, children }) => {
   const headerRef = useRef(null);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,7 +23,6 @@ const Layout = ({ seo, headerTheme, withOverflowHidden, isSignIn, children }) =>
 
   return (
     <>
-      <SEO {...seo} />
       <Topbar />
       <div className="relative">
         <Header
@@ -50,7 +48,6 @@ Layout.propTypes = {
   seo: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
-    pathname: PropTypes.string.isRequired,
   }),
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
   withOverflowHidden: PropTypes.bool,

@@ -8,14 +8,14 @@ import SocialShare from 'components/pages/blog-post/social-share';
 import CodeBlock from 'components/shared/code-block';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
+import SEO from 'components/shared/seo';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
 const BlogPostTemplate = ({
   data: {
-    wpPost: { content, title, pageBlogPost, date, readingTime, seo },
+    wpPost: { content, title, pageBlogPost, date, readingTime },
   },
-  location: { pathname },
   pageContext: { pagePath },
 }) => {
   const contentWithLazyBlocks = getReactContentWithLazyBlocks(
@@ -26,14 +26,7 @@ const BlogPostTemplate = ({
     true
   );
   return (
-    <Layout
-      seo={{
-        ...seo,
-        description: pageBlogPost.description,
-        pathname,
-      }}
-      headerTheme="white"
-    >
+    <Layout headerTheme="white">
       <article>
         <Hero title={title} {...pageBlogPost} date={date} readingTime={readingTime} />
         <Container size="sm">
@@ -78,3 +71,10 @@ export const query = graphql`
 `;
 
 export default BlogPostTemplate;
+
+export const Head = ({
+  location: { pathname },
+  data: {
+    wpPost: { seo, pageBlogPost },
+  },
+}) => <SEO pathname={pathname} description={pageBlogPost.description} {...seo} />;

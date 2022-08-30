@@ -1,7 +1,7 @@
 ---
 title: Overview
 redirectFrom:
-  - docs/storage-engine/architecture-overview
+  - /docs/storage-engine/architecture-overview
 ---
 
 ### Introduction
