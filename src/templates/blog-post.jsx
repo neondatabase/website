@@ -31,23 +31,37 @@ const BlogPostTemplate = ({
   });
   return (
     <Layout headerTheme="white" isHeaderSticky>
-      <div className="mx-auto grid max-w-[1009px] grid-cols-10 gap-x-8 pt-20 xl:max-w-[936px] xl:pt-16 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6">
+      <article className="mx-auto grid max-w-[1009px] grid-cols-10 gap-x-8 pt-20 xl:max-w-[936px] xl:pt-16 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6">
+        <Hero
+          className="col-start-2 col-end-10 md:col-span-full"
+          title={title}
+          {...pageBlogPost}
+          date={date}
+          readingTime={readingTime}
+        />
+
         <SocialShare
           className={clsx(
-            'col-span-1 transition-opacity duration-150 md:hidden',
+            'col-span-1 col-start-1 mt-10 transition-opacity duration-150 md:hidden',
             isSocialShareInView ? 'invisible opacity-0' : 'visible opacity-100'
           )}
           slug={pagePath}
           title={title}
           isSticky
         />
+        <Content
+          className="col-start-2 col-end-10 mt-8 md:col-span-full"
+          html={contentWithLazyBlocks}
+        />
 
-        <article className="col-start-2 col-end-10 md:col-span-full">
-          <Hero title={title} {...pageBlogPost} date={date} readingTime={readingTime} />
-          <Content className="mt-8" html={contentWithLazyBlocks} />
-          <SocialShare slug={pagePath} title={title} ref={socialShareRef} withTopBorder />
-        </article>
-      </div>
+        <SocialShare
+          className="col-start-2 col-end-10 md:col-span-full"
+          slug={pagePath}
+          title={title}
+          ref={socialShareRef}
+          withTopBorder
+        />
+      </article>
       <SubscribeMinimalistic />
     </Layout>
   );

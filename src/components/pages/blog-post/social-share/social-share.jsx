@@ -29,9 +29,9 @@ const SocialShare = forwardRef(({ className, slug, title, withTopBorder, isStick
     <div className={clsx('safe-paddings mt-8', className)} ref={ref}>
       <div
         className={clsx(
-          'flex items-center space-x-4  xs:flex-col xs:space-x-0 xs:space-y-4',
+          'flex items-center space-x-4 xs:flex-col xs:space-x-0 xs:space-y-4',
           withTopBorder && 'border-t border-gray-4',
-          isSticky ? 'sticky top-28 pt-16' : 'pt-8'
+          isSticky ? 'sticky top-28' : 'pt-8'
         )}
       >
         {!isSticky && <span className="text-lg font-semibold">Share this article:</span>}

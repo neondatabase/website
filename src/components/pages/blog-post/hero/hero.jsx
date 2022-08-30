@@ -1,9 +1,10 @@
+import clsx from 'clsx';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Hero = ({ title, description, author, date, readingTime }) => (
-  <div className="safe-paddings">
+const Hero = ({ title, description, author, date, readingTime, className }) => (
+  <div className={clsx('safe-paddings', className)}>
     <h1 className="t-5xl font-semibold">{title}</h1>
     <p className="t-2xl mt-6 xl:mt-5">{description}</p>
     <div className="mt-8 flex items-center justify-between border-b border-b-gray-4 pb-8 2xl:mt-7 2xl:pb-7 xl:mt-6 xl:pb-6 sm:flex-col sm:items-start sm:space-y-6">
@@ -46,6 +47,10 @@ Hero.propTypes = {
   }).isRequired,
   date: PropTypes.string.isRequired,
   readingTime: PropTypes.number.isRequired,
+  className: PropTypes.string,
 };
 
+Hero.defaultProps = {
+  className: null,
+};
 export default Hero;
