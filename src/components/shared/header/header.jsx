@@ -23,7 +23,7 @@ const icons = {
 const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn, isSticky }, ref) => (
   <header
     className={clsx(
-      'safe-paddings absolute top-0 left-0 right-0 z-40 max-h-[70px] w-full lg:relative',
+      'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative',
       theme === 'black' && 'lg:bg-black',
       theme === 'white' && 'bg-white',
       isSticky && 'sticky top-0 z-50 md:relative'
@@ -109,7 +109,7 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn, i
 
       <div className="flex space-x-5 lg:hidden">
         <Button
-          className="relative py-3 pl-11 xl:hidden"
+          className="relative py-[11px] pl-11 xl:hidden"
           to={LINKS.github}
           size="xs"
           theme={theme === 'white' ? 'quaternary' : 'tertiary'}
@@ -126,12 +126,12 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn, i
           <span>Star Us</span>
         </Button>
         {isSignIn && (
-          <Button className="py-3" to={LINKS.dashboard} size="xs" theme="primary">
+          <Button className="py-[11px]" to={LINKS.dashboard} size="xs" theme="primary">
             Sign In
           </Button>
         )}
         {!isSignIn && (
-          <Button className="py-3" to={LINKS.earlyAccess} size="xs" theme="primary">
+          <Button className="py-[11px]" to={LINKS.earlyAccess} size="xs" theme="primary">
             Get early access
           </Button>
         )}
