@@ -153,7 +153,7 @@ title: Release Notes
 
 - Control Plane: implement optional connection pooling for projects.
 
-- API: add `pooler_enabled` flag to [projects update API call](https://neon.tech/api-reference#operations-Project-updateProject).
+- API: add `pooler_enabled` flag to [projects update API call](https://neon.tech/api-reference/#/Project/branchCreate).
 
 - UI: various improvements.
 
