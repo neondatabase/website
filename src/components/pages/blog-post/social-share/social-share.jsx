@@ -26,7 +26,7 @@ const SocialShare = forwardRef(({ className, slug, title, withTopBorder, isStick
   const shareUrl = `${process.env.GATSBY_DEFAULT_SITE_URL}${slug}`;
 
   return (
-    <div className={clsx('safe-paddings mt-8', className)} ref={ref}>
+    <div className={clsx('safe-paddings', className)} ref={ref}>
       <div
         className={clsx(
           'flex items-center space-x-4 xs:flex-col xs:space-x-0 xs:space-y-4',

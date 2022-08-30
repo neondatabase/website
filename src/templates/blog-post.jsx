@@ -55,7 +55,7 @@ const BlogPostTemplate = ({
         />
 
         <SocialShare
-          className="col-start-2 col-end-10 md:col-span-full"
+          className="col-start-2 col-end-10 mt-8 md:col-span-full"
           slug={pagePath}
           title={title}
           ref={socialShareRef}
