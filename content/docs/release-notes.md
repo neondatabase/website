@@ -2,6 +2,16 @@
 title: Release Notes
 ---
 
+## 2022-08-30 Console release
+
+### Bug fixes
+
+- UI: fix CORS error for API requests in Swagger UI, when using 'Try it out'.
+
+### What's new
+
+- UI: add Feedback form.
+
 ## 2022-08-25 Console release
 
 ### Bug fixes
