@@ -2,6 +2,16 @@
 title: Release Notes
 ---
 
+## 2022-08-30 Console release
+
+### Bug fixes
+
+- UI: fix cors error for Swagger UI API requests.
+
+### What's new
+
+- UI: added Feedback form.
+
 ## 2022-08-25 Console release
 
 ### Bug fixes
