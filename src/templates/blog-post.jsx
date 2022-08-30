@@ -9,14 +9,14 @@ import Hero from 'components/pages/blog-post/hero';
 import SocialShare from 'components/pages/blog-post/social-share';
 import CodeBlock from 'components/shared/code-block';
 import Layout from 'components/shared/layout';
+import SEO from 'components/shared/seo';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
 const BlogPostTemplate = ({
   data: {
-    wpPost: { content, title, pageBlogPost, date, readingTime, seo },
+    wpPost: { content, title, pageBlogPost, date, readingTime },
   },
-  location: { pathname },
   pageContext: { pagePath },
 }) => {
   const contentWithLazyBlocks = getReactContentWithLazyBlocks(
@@ -30,15 +30,7 @@ const BlogPostTemplate = ({
     threshold: 0.5,
   });
   return (
-    <Layout
-      seo={{
-        ...seo,
-        description: pageBlogPost.description,
-        pathname,
-      }}
-      headerTheme="white"
-      isHeaderSticky
-    >
+    <Layout headerTheme="white" isHeaderSticky>
       <div className="mx-auto grid max-w-[1009px] grid-cols-10 gap-x-8 pt-20 xl:max-w-[936px] xl:pt-16 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6">
         <SocialShare
           className={clsx(
@@ -93,3 +85,10 @@ export const query = graphql`
 `;
 
 export default BlogPostTemplate;
+
+export const Head = ({
+  location: { pathname },
+  data: {
+    wpPost: { seo, pageBlogPost },
+  },
+}) => <SEO pathname={pathname} description={pageBlogPost.description} {...seo} />;

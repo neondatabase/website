@@ -14,9 +14,10 @@ import SaaS from 'components/pages/home/saas';
 import Scalability from 'components/pages/home/scalability';
 import Storage from 'components/pages/home/storage';
 import Layout from 'components/shared/layout';
+import SEO from 'components/shared/seo';
 import Subscribe from 'components/shared/subscribe';
 
-const HomePage = ({ location: { pathname } }) => {
+const HomePage = () => {
   const [firstSectionWithLinesRef, isFirstSectionWithLinesInView] = useInView({
     rootMargin: '100px 0px',
     triggerOnce: true,
@@ -28,7 +29,7 @@ const HomePage = ({ location: { pathname } }) => {
   });
 
   return (
-    <Layout seo={{ pathname }} headerTheme="black" isSignIn withOverflowHidden>
+    <Layout headerTheme="black" isSignIn withOverflowHidden>
       <div className="relative overflow-hidden" ref={firstSectionWithLinesRef}>
         {isFirstSectionWithLinesInView && <Lines1 />}
         <Hero />
@@ -50,3 +51,5 @@ const HomePage = ({ location: { pathname } }) => {
 };
 
 export default HomePage;
+
+export const Head = ({ location: { pathname } }) => <SEO pathname={pathname} />;

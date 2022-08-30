@@ -51,7 +51,6 @@ Layout.propTypes = {
   seo: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
-    pathname: PropTypes.string.isRequired,
   }),
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
   withOverflowHidden: PropTypes.bool,
