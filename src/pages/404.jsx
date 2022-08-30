@@ -3,11 +3,14 @@ import React from 'react';
 
 import Hero from 'components/pages/404/hero';
 import Layout from 'components/shared/layout';
+import SEO from 'components/shared/seo';
 
-const NotFoundPage = ({ location: { pathname } }) => (
-  <Layout seo={{ pathname }} headerTheme="white">
+const NotFoundPage = () => (
+  <Layout headerTheme="white">
     <Hero />
   </Layout>
 );
 
 export default NotFoundPage;
+
+export const Head = ({ location: { pathname } }) => <SEO pathname={pathname} />;
