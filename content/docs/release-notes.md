@@ -9,7 +9,7 @@ title: Release Notes
 
 ### Bug fixes
 
-- UI: fix syntax highlight for Goland snippet.
+- UI: fix syntax highlight for Golang snippet.
 
 - UI: fix styles for smaller screens.
 
