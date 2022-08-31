@@ -99,7 +99,7 @@ const Hero = () => {
             <img src={logoWhite} alt="Neon" />
           </Link>
           <h2 className="mt-28 text-[28px]  font-bold 2xl:mt-12 lg:mt-0 lg:max-w-[450px] md:text-[26px]">
-            Neon limited beta release
+            Neon Technical Preview
           </h2>
           <p className="mt-5 border-t border-t-[#2E3338] pt-5 font-semibold">Free Tier includes:</p>
           <ul className="mt-5 space-y-4">
