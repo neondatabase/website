@@ -20,19 +20,25 @@ const icons = {
   discussions: DiscussionsIcon,
 };
 
-const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn }, ref) => (
+const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn, isSticky }, ref) => (
   <header
     className={clsx(
       'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative',
-      theme === 'black' && 'lg:bg-black'
+      theme === 'black' && 'lg:bg-black',
+      theme === 'white' && 'bg-white',
+      isSticky && 'sticky top-0 z-50 md:relative'
     )}
     ref={ref}
   >
-    <Container className="flex items-center justify-between py-8 2xl:py-6 lg:py-5" size="md">
+    <Container className="flex items-center justify-between py-3.5" size="md">
       <Link className="hidden xl:block" to="/">
         <span className="sr-only">Neon</span>
-        {theme === 'white' && <img className="h-9 2xl:h-8" src={logoBlack} alt="" aria-hidden />}
-        {theme === 'black' && <img className="h-9 2xl:h-8" src={logoWhite} alt="" aria-hidden />}
+        {theme === 'white' && (
+          <img className="h-9 2xl:h-8" src={logoBlack} width={114} height={32} alt="" aria-hidden />
+        )}
+        {theme === 'black' && (
+          <img className="h-9 2xl:h-8" src={logoWhite} width={114} height={32} alt="" aria-hidden />
+        )}
       </Link>
       <nav className="xl:absolute xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2">
         <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
@@ -93,13 +99,17 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn },
         to="/"
       >
         <span className="sr-only">Neon</span>
-        {theme === 'white' && <img className="h-9 2xl:h-8" src={logoBlack} alt="" aria-hidden />}
-        {theme === 'black' && <img className="h-9 2xl:h-8" src={logoWhite} alt="" aria-hidden />}
+        {theme === 'white' && (
+          <img className="h-9 2xl:h-8" src={logoBlack} alt="" width={128} height={36} aria-hidden />
+        )}
+        {theme === 'black' && (
+          <img className="h-9 2xl:h-8" src={logoWhite} alt="" width={128} height={36} aria-hidden />
+        )}
       </Link>
 
       <div className="flex space-x-5 lg:hidden">
         <Button
-          className="relative pl-11 xl:hidden"
+          className="relative py-[11px] pl-11 xl:hidden"
           to={LINKS.github}
           size="xs"
           theme={theme === 'white' ? 'quaternary' : 'tertiary'}
@@ -116,12 +126,12 @@ const Header = forwardRef(({ theme, isMobileMenuOpen, onBurgerClick, isSignIn },
           <span>Star Us</span>
         </Button>
         {isSignIn && (
-          <Button to={LINKS.dashboard} size="xs" theme="primary">
+          <Button className="py-[11px]" to={LINKS.dashboard} size="xs" theme="primary">
             Sign In
           </Button>
         )}
         {!isSignIn && (
-          <Button to={LINKS.earlyAccess} size="xs" theme="primary">
+          <Button className="py-[11px]" to={LINKS.earlyAccess} size="xs" theme="primary">
             Get early access
           </Button>
         )}
@@ -145,11 +155,13 @@ Header.propTypes = {
   isMobileMenuOpen: PropTypes.bool,
   onBurgerClick: PropTypes.func.isRequired,
   isSignIn: PropTypes.bool,
+  isSticky: PropTypes.bool,
 };
 
 Header.defaultProps = {
   isMobileMenuOpen: false,
   isSignIn: false,
+  isSticky: false,
 };
 
 export default Header;

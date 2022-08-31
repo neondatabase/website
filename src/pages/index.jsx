@@ -3,6 +3,7 @@ import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Advantages from 'components/pages/home/advantages';
+import Community from 'components/pages/home/community';
 import CTA from 'components/pages/home/cta';
 import DataBranching from 'components/pages/home/data-branching';
 import Features from 'components/pages/home/features';
@@ -13,9 +14,10 @@ import SaaS from 'components/pages/home/saas';
 import Scalability from 'components/pages/home/scalability';
 import Storage from 'components/pages/home/storage';
 import Layout from 'components/shared/layout';
+import SEO from 'components/shared/seo';
 import Subscribe from 'components/shared/subscribe';
 
-const HomePage = ({ location: { pathname } }) => {
+const HomePage = () => {
   const [firstSectionWithLinesRef, isFirstSectionWithLinesInView] = useInView({
     rootMargin: '100px 0px',
     triggerOnce: true,
@@ -27,13 +29,14 @@ const HomePage = ({ location: { pathname } }) => {
   });
 
   return (
-    <Layout seo={{ pathname }} headerTheme="black" isSignIn withOverflowHidden>
+    <Layout headerTheme="black" isSignIn withOverflowHidden>
       <div className="relative overflow-hidden" ref={firstSectionWithLinesRef}>
         {isFirstSectionWithLinesInView && <Lines1 />}
         <Hero />
         <CTA />
         <Advantages />
       </div>
+      <Community />
       <Scalability />
       <Storage />
       <DataBranching />
@@ -48,3 +51,5 @@ const HomePage = ({ location: { pathname } }) => {
 };
 
 export default HomePage;
+
+export const Head = ({ location: { pathname } }) => <SEO pathname={pathname} />;

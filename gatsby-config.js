@@ -4,6 +4,7 @@ require('dotenv').config();
 
 module.exports = {
   flags: { DEV_SSR: process.env.GATSBY_DEV_SSR || false },
+  trailingSlash: 'always',
   siteMetadata: {
     siteTitle: 'Neon — Serverless, Fault-Tolerant, Branchable Postgres',
     siteDescription:
@@ -13,19 +14,11 @@ module.exports = {
     siteUrl: process.env.GATSBY_DEFAULT_SITE_URL || 'http://localhost:8000',
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
         path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'posts',
-        path: `${__dirname}/content/posts`,
       },
     },
     {
@@ -150,6 +143,42 @@ module.exports = {
     'gatsby-alias-imports',
     'gatsby-plugin-postcss',
     'gatsby-plugin-sitemap',
-    `gatsby-plugin-gatsby-cloud`,
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
+      },
+    },
+    {
+      resolve: 'gatsby-source-wordpress',
+      options: {
+        url: process.env.WP_GRAPHQL_URL,
+        auth: {
+          htaccess: {
+            username: process.env.WP_HTACCESS_USERNAME,
+            password: process.env.WP_HTACCESS_PASSWORD,
+          },
+        },
+        html: {
+          fallbackImageMaxWidth: 800, // max-width of the content area
+          imageQuality: 85,
+          generateWebpImages: true,
+        },
+        develop: {
+          nodeUpdateInterval: process.env.WP_NODE_UPDATE_INTERVAL || 5000,
+          hardCacheMediaFiles: process.env.WP_HARD_CACHE_MEDIA === 'true',
+          hardCacheData: process.env.WP_HARD_CACHE_DATA === 'true',
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-gatsby-cloud',
+      options: {
+        headers: {
+          '/fonts/*': ['Cache-Control: public, max-age=31536000, immutable'],
+          '/lottie-assets/*': ['Cache-Control: public, max-age=31536000, immutable'],
+        },
+      },
+    },
   ],
 };

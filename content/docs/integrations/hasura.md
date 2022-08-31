@@ -1,7 +1,7 @@
 ---
 title: Run a Hasura App
-redirectFrom: 
- - docs/quickstart/hasura
+redirectFrom:
+  - /docs/quickstart/hasura
 ---
 
 ### Introduction

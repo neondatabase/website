@@ -1,8 +1,8 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { LinkedinShareButton, TwitterShareButton, FacebookShareButton } from 'react-share';
 
-import Container from 'components/shared/container';
 import FacebookIcon from 'icons/facebook.inline.svg';
 import LinkedinIcon from 'icons/linkedin.inline.svg';
 import TwitterIcon from 'icons/twitter.inline.svg';
@@ -22,17 +22,20 @@ const links = [
   },
 ];
 
-const SocialShare = ({ slug, title }) => {
+const SocialShare = forwardRef(({ className, slug, title, withTopBorder, isSticky }, ref) => {
   const shareUrl = `${process.env.GATSBY_DEFAULT_SITE_URL}${slug}`;
 
   return (
-    <div className="safe-paddings mt-8">
-      <Container
-        className="flex items-center space-x-4 border-t border-gray-4 pt-8 xs:flex-col xs:space-x-0 xs:space-y-4"
-        size="sm"
+    <div className={clsx('safe-paddings', className)} ref={ref}>
+      <div
+        className={clsx(
+          'flex items-center space-x-4 xs:flex-col xs:space-x-0 xs:space-y-4',
+          withTopBorder && 'border-t border-gray-4',
+          isSticky ? 'sticky top-28' : 'pt-8'
+        )}
       >
-        <span className="text-lg font-semibold">Share this article:</span>
-        <div className="space-x-3.5">
+        {!isSticky && <span className="text-lg font-semibold">Share this article:</span>}
+        <div className={clsx('flex', isSticky ? 'flex-col space-y-3' : 'space-x-3.5')}>
           {links.map(({ icon: Icon, tag: Tag }, index) => (
             <Tag url={shareUrl} title={title} key={index}>
               <div className="relative">
@@ -47,14 +50,23 @@ const SocialShare = ({ slug, title }) => {
             </Tag>
           ))}
         </div>
-      </Container>
+      </div>
     </div>
   );
-};
+});
 
 SocialShare.propTypes = {
+  className: PropTypes.string,
   slug: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  withTopBorder: PropTypes.bool,
+  isSticky: PropTypes.bool,
+};
+
+SocialShare.defaultProps = {
+  className: null,
+  withTopBorder: false,
+  isSticky: false,
 };
 
 export default SocialShare;

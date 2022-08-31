@@ -136,6 +136,16 @@
       @apply mx-auto rounded-md;
     }
 
+    .wp-block-embed {
+      .wp-block-embed__wrapper {
+        @apply relative h-0 overflow-hidden pb-[56.25%];
+
+        iframe {
+          @apply absolute top-0 left-0 h-full w-full;
+        }
+      }
+    }
+
     blockquote {
       @apply border-primary-1 font-normal not-italic;
 

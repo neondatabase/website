@@ -28,4 +28,7 @@ export default {
   changelogPost: ({ title }) => ({
     title: `${title} — Neon`,
   }),
+  404: {
+    title: 'Page Not Found — Neon',
+  },
 };

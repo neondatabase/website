@@ -10,6 +10,7 @@ import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Layout from 'components/shared/layout';
 import Search from 'components/shared/search';
+import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
 import getDocPreviousAndNextLinks from 'utils/get-doc-previous-and-next-links';
 
@@ -17,22 +18,17 @@ const DocTemplate = ({
   data: {
     mdx: {
       slug,
-      excerpt,
       body,
       frontmatter: { title, enableTableOfContents },
     },
   },
   pageContext: { sidebar, flatSidebar },
-  location: { pathname },
 }) => {
   const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar);
   const contentRef = useRef(null);
 
   return (
-    <Layout
-      seo={{ ...SEO_DATA.doc({ title, description: excerpt }), pathname }}
-      headerTheme="white"
-    >
+    <Layout headerTheme="white">
       <div className="safe-paddings pt-48 pb-48 3xl:pt-44 3xl:pb-44 2xl:pt-40 2xl:pb-40 xl:pt-32 xl:pb-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
         <Container className="grid-gap-x grid grid-cols-12 lg:block" size="md">
           <Sidebar
@@ -71,3 +67,13 @@ export const query = graphql`
 `;
 
 export default DocTemplate;
+
+export const Head = ({
+  location: { pathname },
+  data: {
+    mdx: {
+      excerpt,
+      frontmatter: { title },
+    },
+  },
+}) => <SEO pathname={pathname} {...SEO_DATA.doc({ title, description: excerpt })} />;

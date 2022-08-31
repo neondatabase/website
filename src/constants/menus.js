@@ -20,21 +20,21 @@ export default {
     },
     {
       text: 'Community',
-      to: '#',
-      items: [
-        // {
-        //   iconName: 'discord',
-        //   text: 'Discord',
-        //   description: 'Join our community',
-        //   to: LINKS.discord,
-        // },
-        {
-          iconName: 'discussions',
-          text: 'Community',
-          description: 'Get help',
-          to: LINKS.discourse,
-        },
-      ],
+      to: LINKS.discourse,
+      // items: [
+      // {
+      //   iconName: 'discord',
+      //   text: 'Discord',
+      //   description: 'Join our community',
+      //   to: LINKS.discord,
+      // },
+      //   {
+      //     iconName: 'discussions',
+      //     text: 'Community',
+      //     description: 'Get help',
+      //     to: LINKS.discourse,
+      //   },
+      // ],
     },
   ],
   footer: [
