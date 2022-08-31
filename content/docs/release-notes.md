@@ -2,6 +2,14 @@
 title: Release Notes
 ---
 
+## 2022-08-31 Console release
+
+### Bug fixes
+
+- UI: fix syntax highlight for Goland snippet.
+
+- UI: fix styles for smaller screens.
+
 ## 2022-08-30 Console release
 
 ### Bug fixes
