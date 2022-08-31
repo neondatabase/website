@@ -25,6 +25,7 @@ module.exports = async ({ graphql, actions }) => {
             }
             frontmatter {
               title
+              label
             }
           }
         }

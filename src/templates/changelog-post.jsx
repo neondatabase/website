@@ -25,7 +25,7 @@ const ChangelogPostTemplate = ({
       <article className="relative flex sm:flex-col">
         <Aside slug={slug} />
         <div>
-          <Heading className="mb-5" tag="h2" size="sm" theme="black">
+          <Heading className="mb-5 !text-2xl leading-normal" tag="h3" size="sm" theme="black">
             {frontmatter.title}
           </Heading>
           <Content content={body} />

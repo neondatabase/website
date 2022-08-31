@@ -1,8 +1,7 @@
 ---
-title: 'Console release'
+title: "What's new"
+label: 'Console'
 ---
-
-### What's new
 
 - Control Plane: implement optional connection pooling for projects.
 - API: add `pooler_enabled` flag to [projects update API call](https://console.neon.tech/api-docs#operations-Project-updateProject).

@@ -1,8 +1,7 @@
 ---
-title: 'Console release'
+title: "What's new"
+label: 'Console'
 ---
-
-### What's new
 
 - UI: validate that API key name is not empty in the creation form.
 - UI: add 'Create branch' to the project dashboard for selected users.

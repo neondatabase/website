@@ -1,7 +1,6 @@
 ---
-title: 'Console release'
+title: 'Bug fixes'
+label: 'Console'
 ---
-
-### Bug fixes
 
 - UI: fix project status live updates using websocket connection.

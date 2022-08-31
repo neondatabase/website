@@ -24,7 +24,13 @@ const ChangelogPostList = ({ items }) => (
             >
               <Aside slug={slug} />
               <div>
-                <Heading tag="h2" className="group relative mb-5" id={id} size="sm" theme="black">
+                <Heading
+                  tag="h3"
+                  className="group relative mb-5 !text-2xl leading-normal"
+                  id={id}
+                  size="sm"
+                  theme="black"
+                >
                   <a
                     className="anchor absolute top-0 left-0 flex h-full -translate-x-full items-center justify-center px-2.5 opacity-0 transition-opacity duration-200 hover:opacity-100 group-hover:opacity-100"
                     href={`#${id}`}

@@ -1,8 +1,7 @@
 ---
-title: 'Console release'
+title: "What's new"
+label: 'Console'
 ---
-
-### What's new
 
 - UI: add 'Enable pooling' toggle to the Project's Settings page.
 - Control plane: use several instances to serve public API and web UI, which allow doing a zero-downtime deployments.
