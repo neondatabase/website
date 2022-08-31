@@ -9,6 +9,7 @@ import Content from 'components/shared/content';
 import Heading from 'components/shared/heading';
 import Layout from 'components/shared/layout';
 import Link from 'components/shared/link';
+import SEO from 'components/shared/seo';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
 import { CHANGELOG_BASE_PATH } from 'constants/changelog';
 import SEO_DATA from 'constants/seo-data';
@@ -17,17 +18,8 @@ const ChangelogPostTemplate = ({
   data: {
     mdx: { slug, body, frontmatter },
   },
-  location: { pathname },
 }) => (
-  <Layout
-    seo={{
-      ...SEO_DATA.changelogPost({
-        title: frontmatter.title,
-      }),
-      pathname,
-    }}
-    headerTheme="white"
-  >
+  <Layout headerTheme="white">
     <Hero />
     <Container size="sm" className="relative mb-10 flex">
       <article className="relative flex sm:flex-col">
@@ -65,3 +57,17 @@ export const query = graphql`
 `;
 
 export default ChangelogPostTemplate;
+
+export const Head = ({
+  data: {
+    mdx: { frontmatter },
+  },
+  location: { pathname },
+}) => (
+  <SEO
+    pathname={pathname}
+    {...SEO_DATA.changelogPost({
+      title: frontmatter.title,
+    })}
+  />
+);
