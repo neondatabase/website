@@ -4,6 +4,9 @@ title: Release Notes
 
 ## 2022-08-31 Console release
 
+### What's new
+- Control plane: first version of OAuth support. Currently we only allow a project creation. If you want to integrate your product with Neon, please contact us!
+
 ### Bug fixes
 
 - UI: fix syntax highlight for Goland snippet.
