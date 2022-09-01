@@ -32,7 +32,7 @@ const ChangelogPostList = ({ items }) => (
                     href={`#${id}`}
                     aria-hidden
                   >
-                    <AnchorIcon className="w-5" />
+                    <AnchorIcon className="w-4" />
                   </a>
                   <Link to={slug}>{title}</Link>
                 </Heading>
