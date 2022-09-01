@@ -7,8 +7,7 @@ import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
-
-import AnchorIcon from './images/anchor.inline.svg';
+import AnchorIcon from 'icons/anchor.inline.svg';
 
 const ChangelogPostList = ({ items }) => (
   <section>
@@ -33,7 +32,7 @@ const ChangelogPostList = ({ items }) => (
                     href={`#${id}`}
                     aria-hidden
                   >
-                    <AnchorIcon className="w-6" />
+                    <AnchorIcon className="w-5" />
                   </a>
                   <Link to={slug}>{title}</Link>
                 </Heading>
