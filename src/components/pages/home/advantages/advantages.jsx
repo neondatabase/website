@@ -35,7 +35,7 @@ const Advantages = () => {
       animationData: costEfficientAnimationData,
       title: 'Cost Efficient',
       description:
-        'Compute scales down to zero on usage and hot storage offloads to S3 for cost efficiency.',
+        'Compute scales down to zero on usage and cold storage offloads to S3 for cost efficiency.',
     },
     {
       animationData: easyToUseAnimationData,
