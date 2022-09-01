@@ -16,7 +16,7 @@ const members = [
     position: 'CEO',
     githubUrl: 'https://github.com/nikitashamgunov',
     linkedinUrl: 'https://www.linkedin.com/in/nikitashamgunov/',
-    twitterUrl: 'https://twitter.com/NikitaShamgunov',
+    twitterUrl: 'https://twitter.com/nikitabase',
   },
   {
     photo: <StaticImage src="./images/heikki-linnakangas-photo.jpg" alt="Heikki Linnakangas" />,
