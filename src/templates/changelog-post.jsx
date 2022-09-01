@@ -23,9 +23,14 @@ const ChangelogPostTemplate = ({
     <Hero />
     <Container size="sm" className="relative mb-10 flex">
       <article className="relative flex sm:flex-col">
-        <Aside slug={slug} />
-        <div>
-          <Heading className="mb-5 !text-2xl leading-normal" tag="h3" size="sm" theme="black">
+        <Aside slug={slug} label={frontmatter.label} />
+        <div className="relative before:absolute before:top-3.5 before:bottom-16 before:-left-11 before:h-auto before:w-px before:bg-gray-3 xl:before:hidden">
+          <Heading
+            className="relative mb-5 !text-2xl leading-normal before:absolute before:top-3.5 before:-left-[49.5px] before:h-3 before:w-3 before:rounded-full before:border before:border-black before:bg-white xl:before:hidden"
+            tag="h3"
+            size="sm"
+            theme="black"
+          >
             {frontmatter.title}
           </Heading>
           <Content content={body} />
@@ -51,6 +56,7 @@ export const query = graphql`
       body
       frontmatter {
         title
+        label
       }
     }
   }

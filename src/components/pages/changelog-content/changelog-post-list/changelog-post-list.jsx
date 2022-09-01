@@ -13,20 +13,17 @@ import AnchorIcon from './images/anchor.inline.svg';
 const ChangelogPostList = ({ items }) => (
   <section>
     <Container size="sm">
-      <div className="space-y-12 sm:space-y-10">
-        {items.map(({ body, slug, frontmatter: { title } }, index) => {
+      <div className="relative space-y-12 before:absolute before:top-3.5 before:bottom-3 before:-left-11 before:h-auto before:w-px before:bg-gray-3 xl:before:hidden sm:space-y-10">
+        {items.map(({ body, slug, frontmatter: { title, label } }, index) => {
           const id = slugify(slug).toLocaleLowerCase();
 
           return (
-            <article
-              className="relative flex border-b border-b-gray-4 pb-12 sm:flex-col sm:pb-10"
-              key={index}
-            >
-              <Aside slug={slug} />
+            <article className="relative flex sm:flex-col sm:space-y-3" key={index}>
+              <Aside slug={slug} label={label} />
               <div>
                 <Heading
                   tag="h3"
-                  className="group relative mb-5 !text-2xl leading-normal"
+                  className="group relative mb-5 !text-2xl leading-normal before:absolute before:top-3.5 before:-left-[49.5px] before:h-3 before:w-3 before:rounded-full before:border before:border-black before:bg-white xl:before:hidden"
                   id={id}
                   size="sm"
                   theme="black"

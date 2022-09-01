@@ -29,7 +29,7 @@ const DESCRIPTION = 'Latest product updates by Neon’s team';
 const Hero = () => (
   <Container
     size="sm"
-    className="mb-12 border-b border-b-gray-4 pb-12 pt-48 lg:pt-16 md:mb-10 md:py-10 sm:mb-7 sm:py-7"
+    className="mb-12 border-b border-b-gray-4 pb-12 pt-40 lg:pt-16 md:mb-10 md:py-10 sm:mb-7 sm:py-7"
   >
     <Heading size="md" tag="h2" theme="black">
       {TITLE}
@@ -44,7 +44,7 @@ const Hero = () => (
               aria-hidden
             />
             <Link
-              className="relative flex h-[52px] w-[52px] items-center justify-center rounded-full border-4 border-black bg-white transition-transform duration-200 hover:translate-y-1.5 hover:-translate-x-1.5 2xl:h-16 2xl:w-16 xl:h-14 xl:w-14 lg:hover:-translate-x-1 lg:hover:translate-y-1"
+              className="relative flex h-12 w-12 items-center justify-center rounded-full border-4 border-black bg-white transition-transform duration-200 hover:translate-y-1.5 hover:-translate-x-1.5 2xl:h-16 2xl:w-16 xl:h-14 xl:w-14 lg:hover:-translate-x-1 lg:hover:translate-y-1"
               to={to}
             >
               <Icon className="h-8 xl:h-7" />
