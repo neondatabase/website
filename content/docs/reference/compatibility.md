@@ -16,29 +16,39 @@ Neon cloud service does not currently provide the user with access permissions o
 
 <a id="default-extensions/"></a>
 
-## Default Extensions
+## Available PostgreSQL Extensions
 
 During technical preview Neon has restrictions on user ability to install PostgreSQL extensions.
 
-Following PostgreSQL extensions come pre-installed:
+The following PostgreSQL extensions can be installed by the user:
 
-|               | Version | Note |
-| ------------- | ------- | ---- |
-| plpgsql       | 1.0     |      |
-| fuzzystrmatch | 1.1     |      |
-| tcn           | 1.0     |      |
-| unaccent      | 1.1     |      |
-| btree_gin     | 1.3     |      |
-| btree_gist    | 1.6     |      |
-| citext        | 1.6     |      |
-| cube          | 1.5     |      |
-| dict_int      | 1.0     |      |
-| hstore        | 1.8     |      |
-| intarray      | 1.5     |      |
-| isn           | 1.2     |      |
-| lo            | 1.1     |      |
-| ltree         | 1.2     |      |
-| seg           | 1.4     |      |
+|                         | Version | Note |
+|:------------------------|--------:|------|
+| btree_gin               |     1.3 |      |
+| btree_gist              |     1.6 |      |
+| citext                  |     1.6 |      |
+| cube                    |     1.5 |      |
+| dict_int                |     1.0 |      |
+| fuzzystrmatch           |     1.1 |      |
+| hstore                  |     1.8 |      |
+| intarray                |     1.5 |      |
+| isn                     |     1.2 |      |
+| lo                      |     1.1 |      |
+| ltree                   |     1.2 |      |
+| pg_trgm                 |     1.6 |      |
+| pgcrypto                |     1.3 |      |
+| plpgsql                 |     1.0 | Comes pre-installed with postgres |
+| postgis                 |   3.3.0 |      |
+| postgis_raster          |   3.3.0 |      |
+| postgis_tiger_geocoder  |   3.3.0 | Cannot be installed through the web UI - use your psql user credentials instead. |
+| postgis_topology        |   3.3.0 |      |
+| seg                     |     1.4 |      |
+| tablefunc               |     1.0 |      |
+| tcn                     |     1.0 |      |
+| tsm_system_rows         |     1.0 |      |
+| tsm_system_time         |     1.0 |      |
+| unaccent                |     1.1 |      |
+| uuid-ossp               |     1.1 |      |
 
 <a id="default-parameters/"></a>
 
