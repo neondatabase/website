@@ -75,6 +75,8 @@
     - title: Branching
       slug: conceptual-guides/branching
 - title: Security
-  slug: security
+  items:
+    - title: Security
+      slug: security
 - title: Release Notes
   slug: changelog
