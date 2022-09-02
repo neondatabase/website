@@ -13,6 +13,17 @@ title: Release Notes
 
 - Proxy: forward connection parameters `options`, `application_name` and `replication` to compute nodes.
 
+## 2022-08-31 Console release
+
+### What's new
+- Control plane: implement OAuth backend and the OAuth concent screens. OAuth applications are granted permissions to create projects on behalf of the user. If you want to integrate your product with Neon, please contact us!
+
+### Bug fixes
+
+- UI: fix syntax highlight for Golang snippet.
+
+- UI: fix styles for smaller screens.
+
 ## 2022-08-30 Console release
 
 ### Bug fixes
