@@ -5,7 +5,7 @@ title: Release Notes
 
 ### What's new
 
-- UI: Pass OAuth app name to the client
+- UI: pass OAuth app name to the client.
 
 ### Bug fixes
 
