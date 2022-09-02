@@ -13,6 +13,8 @@ title: Release Notes
 
 - UI: fix postgres version.
 
+- Control plane: fix authentication of concurrent proxy connections to the idle compute node.
+
 ## 2022-09-01 Storage release
 
 ### What's new
