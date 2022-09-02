@@ -6,13 +6,17 @@ import Search from 'components/shared/search';
 import Item from './item';
 
 const Sidebar = ({ className, sidebar, currentSlug }) => {
-  const activeItemIndex = sidebar.findIndex(
-    ({ slug, items }) =>
-      slug === currentSlug ||
-      items.find(
+  const activeItemIndex = sidebar.findIndex(({ slug, items }) => {
+    if (slug) {
+      return slug === currentSlug;
+    }
+
+    return (
+      items?.find(
         ({ slug, items }) => slug === currentSlug || items?.find(({ slug }) => slug === currentSlug)
       ) !== undefined
-  );
+    );
+  });
 
   return (
     <aside className={className}>
