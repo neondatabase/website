@@ -37,6 +37,7 @@ Sidebar.propTypes = {
   sidebar: PropTypes.arrayOf(
     PropTypes.exact({
       title: PropTypes.string.isRequired,
+      slug: PropTypes.string,
       items: PropTypes.arrayOf(
         PropTypes.exact({
           title: PropTypes.string.isRequired,
@@ -48,7 +49,7 @@ Sidebar.propTypes = {
             })
           ),
         })
-      ).isRequired,
+      ),
     })
   ).isRequired,
   currentSlug: PropTypes.string.isRequired,

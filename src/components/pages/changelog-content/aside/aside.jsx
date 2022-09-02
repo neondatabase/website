@@ -4,7 +4,7 @@ import React from 'react';
 import getChangelogPostDateFromSlug from 'utils/get-changelog-post-date-from-slug';
 
 const Aside = ({ slug, label }) => (
-  <aside className="absolute right-[calc(100%+5.625rem)] top-3 flex min-w-fit max-w-fit flex-col items-end rounded-md text-sm xl:sticky xl:top-10 xl:mt-3 xl:mr-5 xl:max-h-24 sm:static sm:max-h-max sm:items-start">
+  <aside className="absolute right-[calc(100%+5.625rem)] top-3.5 flex min-w-fit max-w-fit flex-col items-end rounded-md text-sm xl:sticky xl:top-10 xl:mt-3 xl:mr-9 xl:max-h-24 sm:static sm:max-h-max sm:items-start">
     <time className="whitespace-nowrap" dateTime={getChangelogPostDateFromSlug(slug)}>
       {getChangelogPostDateFromSlug(slug)}
     </time>

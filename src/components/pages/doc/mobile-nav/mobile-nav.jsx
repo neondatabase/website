@@ -24,7 +24,8 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
         {sidebar &&
           sidebar.map((sidebarItem, index) => (
             <optgroup label={sidebarItem.title} key={index}>
-              {sidebarItem.items.map(({ title, slug, items }, index) => (
+              {sidebarItem.slug && <option value={sidebarItem.slug}>{sidebarItem.title}</option>}
+              {sidebarItem?.items?.map(({ title, slug, items }, index) => (
                 <Fragment key={index}>
                   {items?.length > 0 ? (
                     items.map(({ title: title2, slug }, index) => (
@@ -50,6 +51,7 @@ MobileNav.propTypes = {
   sidebar: PropTypes.arrayOf(
     PropTypes.exact({
       title: PropTypes.string.isRequired,
+      slug: PropTypes.string,
       items: PropTypes.arrayOf(
         PropTypes.exact({
           title: PropTypes.string.isRequired,
@@ -61,7 +63,7 @@ MobileNav.propTypes = {
             })
           ),
         })
-      ).isRequired,
+      ),
     })
   ).isRequired,
   currentSlug: PropTypes.string.isRequired,

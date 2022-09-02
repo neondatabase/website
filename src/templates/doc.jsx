@@ -12,7 +12,6 @@ import Layout from 'components/shared/layout';
 import Search from 'components/shared/search';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
-import getDocPreviousAndNextLinks from 'utils/get-doc-previous-and-next-links';
 
 const DocTemplate = ({
   data: {
@@ -22,9 +21,8 @@ const DocTemplate = ({
       frontmatter: { title, enableTableOfContents },
     },
   },
-  pageContext: { sidebar, flatSidebar },
+  pageContext: { sidebar, previousLink, nextLink },
 }) => {
-  const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar);
   const contentRef = useRef(null);
 
   return (
@@ -32,7 +30,7 @@ const DocTemplate = ({
       <div className="safe-paddings pt-48 pb-48 3xl:pt-44 3xl:pb-44 2xl:pt-40 2xl:pb-40 xl:pt-32 xl:pb-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
         <Container className="grid-gap-x grid grid-cols-12 lg:block" size="md">
           <Sidebar
-            className="col-start-2 col-end-4 2xl:col-start-1 lg:hidden"
+            className="col-start-2 col-end-4 pt-3 2xl:col-start-1 lg:hidden"
             sidebar={sidebar}
             currentSlug={slug}
           />
