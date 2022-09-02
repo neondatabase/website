@@ -17,11 +17,11 @@ const Item = ({ title, slug, items, isOpenByDefault, currentSlug }) => {
     <li>
       {slug ? (
         <Link
-          className={clsx('w-full py-2.5 pl-4 text-left !text-xl', {
-            'font-semibold text-primary-2': currentSlug === slug,
+          className={clsx('w-full py-2.5 pl-4 text-left font-semibold', {
+            'font-bold text-primary-2': currentSlug === slug,
           })}
           theme="black"
-          size="md"
+          size="sm"
           to={`${DOCS_BASE_PATH}${slug}/`}
         >
           {title}
@@ -32,12 +32,22 @@ const Item = ({ title, slug, items, isOpenByDefault, currentSlug }) => {
           type="button"
           onClick={handleClick}
         >
-          <ChevronRight className={clsx('mr-2 shrink-0', { 'rotate-90 transform': isOpen })} />
-          <span className="text-xl font-semibold leading-snug">{title}</span>
+          <ChevronRight
+            className={clsx(
+              'mr-2 shrink-0 transition-transform duration-150',
+              isOpen ? 'rotate-90' : 'rotate-0'
+            )}
+          />
+          <span className="text-lg font-bold leading-snug">{title}</span>
         </button>
       )}
       {!!items?.length && (
-        <ul className={clsx('pl-4', !isOpen && 'sr-only')}>
+        <ul
+          className={clsx(
+            'relative pl-9 before:absolute before:left-[3px] before:h-full before:w-0.5 before:bg-gray-4',
+            !isOpen && 'sr-only'
+          )}
+        >
           {items.map(({ title, slug, items }, index) => (
             <li key={index}>
               {items?.length > 0 ? (
@@ -49,9 +59,12 @@ const Item = ({ title, slug, items, isOpenByDefault, currentSlug }) => {
                 />
               ) : (
                 <Link
-                  className={clsx('!flex items-center py-2.5 text-base !leading-snug', {
-                    'font-semibold text-primary-2': currentSlug === slug,
-                  })}
+                  className={clsx(
+                    '!flex items-center py-2.5 text-base font-semibold !leading-snug',
+                    {
+                      'font-semibold text-primary-2': currentSlug === slug,
+                    }
+                  )}
                   to={`${DOCS_BASE_PATH}${slug}/`}
                   theme="black"
                   tabIndex={!isOpen ? '-1' : undefined}

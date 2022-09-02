@@ -29,6 +29,7 @@ const Sidebar = ({ className, sidebar, currentSlug }) => {
               isOpenByDefault={index === activeItemIndex}
               currentSlug={currentSlug}
               key={index}
+              S
             />
           ))}
         </ul>

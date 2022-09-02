@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import ChevronRightSm from 'icons/chevron-right-sm.inline.svg';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
@@ -19,17 +18,21 @@ const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
   return (
     <>
       <button
-        className="-ml-4 flex w-full items-center pt-2.5 pb-2 text-left transition-colors duration-200 hover:text-primary-2"
+        className="-ml-4 flex w-full pt-2.5 pb-2 text-left transition-colors duration-200 hover:text-primary-2"
         type="button"
         tabIndex={!isParentOpen ? '-1' : undefined}
         onClick={handleClick}
       >
-        <ChevronRight className={clsx('mr-2 hidden shrink-0 rotate-90', { '!block': isOpen })} />
-        <ChevronRightSm className={clsx('mr-2.5 shrink-0', { '!hidden': isOpen })} />
-        <span className={clsx('text-base leading-snug', isOpen && 'font-semibold')}>{title}</span>
+        <ChevronRight
+          className={clsx(
+            'mr-2 mt-1 shrink-0 transition-transform duration-150',
+            isOpen ? 'rotate-90' : 'rotate-0'
+          )}
+        />
+        <span className={clsx('text-base font-semibold leading-snug')}>{title}</span>
       </button>
       {isOpen && (
-        <ul className="pl-3">
+        <ul className="relative before:absolute before:-left-3.5 before:h-full before:w-0.5 before:bg-gray-4">
           <li>
             {items.map(({ title, slug }, index) => (
               <Link
