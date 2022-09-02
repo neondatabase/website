@@ -28,7 +28,7 @@ const ChangelogPostTemplate = ({
       <Container size="sm" className="relative mb-10 flex">
         <article className="relative flex sm:flex-col">
           <Aside slug={slug} label={frontmatter.label} />
-          <div className="relative before:absolute before:top-3.5 before:bottom-16 before:-left-11 before:h-auto before:w-px before:bg-gray-3 xl:before:hidden">
+          <div className="relative before:absolute before:top-3.5 before:bottom-16 before:-left-11 before:h-auto before:w-px before:bg-gray-3 xl:before:hidden sm:mt-3">
             <Heading
               className="relative mb-5 !text-2xl leading-normal before:absolute before:top-3.5 before:-left-[49.5px] before:h-3 before:w-3 before:rounded-full before:border before:border-black before:bg-white xl:before:hidden"
               tag="h3"
@@ -36,7 +36,7 @@ const ChangelogPostTemplate = ({
               theme="black"
             >
               <a
-                className="anchor absolute top-0 left-0 flex h-full -translate-x-full items-center justify-center px-2.5 opacity-0 transition-opacity duration-200 hover:opacity-100 group-hover:opacity-100"
+                className="anchor absolute top-0 left-0 flex h-full -translate-x-full items-center justify-center px-2.5 opacity-0 transition-opacity duration-200 hover:opacity-100  group-hover:opacity-100 sm:group-hover:opacity-0"
                 href={`#${id}`}
                 aria-hidden
               >
