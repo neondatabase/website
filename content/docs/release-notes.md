@@ -9,7 +9,7 @@ title: Release Notes
 
 ### Bug fixes
 
-- UI: fix title on the Sing in page
+- UI: fix title on the 'Sign in' page.
 
 - UI: fix postgres version.
 
