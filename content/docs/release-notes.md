@@ -1,6 +1,18 @@
 ---
 title: Release Notes
 ---
+## 2022-09-02 Console release
+
+### What's new
+
+- UI: Pass OAuth app name to the client
+
+### Bug fixes
+
+- UI: fix title on the Sing in page
+
+- UI: fix postgres version.
+
 ## 2022-09-01 Storage release
 
 ### What's new
