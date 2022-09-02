@@ -16,7 +16,14 @@ const Item = ({ title, slug, items, isOpenByDefault, currentSlug }) => {
   return (
     <li>
       {slug ? (
-        <Link className="w-full py-2.5 pl-4 text-left" theme="black" size="md" to={`/${slug}`}>
+        <Link
+          className={clsx('w-full py-2.5 pl-4 text-left !text-xl', {
+            'font-semibold text-primary-2': currentSlug === slug,
+          })}
+          theme="black"
+          size="md"
+          to={`${DOCS_BASE_PATH}${slug}/`}
+        >
           {title}
         </Link>
       ) : (

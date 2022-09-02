@@ -7,7 +7,8 @@ import Item from './item';
 
 const Sidebar = ({ className, sidebar, currentSlug }) => {
   const activeItemIndex = sidebar.findIndex(
-    ({ items }) =>
+    ({ slug, items }) =>
+      slug === currentSlug ||
       items.find(
         ({ slug, items }) => slug === currentSlug || items?.find(({ slug }) => slug === currentSlug)
       ) !== undefined
