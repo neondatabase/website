@@ -6,7 +6,7 @@ import getChangelogPostDateFromSlug from 'utils/get-changelog-post-date-from-slu
 
 const Aside = ({ slug, label }) => (
   <aside className="absolute left-6 top-0.5 flex min-w-fit max-w-fit flex-col items-end rounded-md xl:sticky xl:top-10 xl:mt-0 xl:mr-9 xl:max-h-24 sm:static sm:max-h-max sm:items-start">
-    <Link to={slug}>
+    <Link className="transition-colors duration-200 hover:text-primary-2" to={slug}>
       <time
         className="whitespace-nowrap text-2xl font-semibold leading-none xl:text-xl"
         dateTime={getChangelogPostDateFromSlug(slug)}
