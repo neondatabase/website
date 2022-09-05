@@ -16,14 +16,13 @@ module.exports = async (options) => {
 
   const { createRedirect } = options.actions;
 
-  createRedirect(
-    {
-      fromPath: `/docs/release-notes/`,
-      toPath: `/changelog/`,
-    },
-    {
-      fromPath: `/docs/changelog/`,
-      toPath: `/changelog/`,
-    }
-  );
+  createRedirect({
+    fromPath: `/docs/release-notes/`,
+    toPath: `/changelog/`,
+  });
+
+  createRedirect({
+    fromPath: `/docs/changelog/`,
+    toPath: `/changelog/`,
+  });
 };
