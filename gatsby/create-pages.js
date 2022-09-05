@@ -20,9 +20,4 @@ module.exports = async (options) => {
     fromPath: `/docs/release-notes/`,
     toPath: `/changelog/`,
   });
-
-  createRedirect({
-    fromPath: `/docs/changelog/`,
-    toPath: `/changelog/`,
-  });
 };
