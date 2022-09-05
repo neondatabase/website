@@ -63,6 +63,11 @@ module.exports = async ({ graphql, actions }) => {
     toPath: `/docs/how-to-guides/connectivity-issues/`,
   });
 
+  actions.createRedirect({
+    fromPath: `/docs/release-notes/`,
+    toPath: `/changelog/`,
+  });
+
   pages.forEach(({ id, slug, fields: { redirectFrom }, frontmatter }) => {
     // Required fields validation
     DOC_REQUIRED_FIELDS.forEach((fieldName) => {
