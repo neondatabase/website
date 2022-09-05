@@ -8,7 +8,7 @@ import Content from 'components/shared/content';
 const ChangelogPostList = ({ items }) => (
   <section>
     <Container size="sm">
-      <div className="relative space-y-12 before:absolute before:top-4 before:bottom-3 before:left-[212px] before:h-auto before:w-px before:bg-gray-3 xl:before:hidden sm:space-y-10">
+      <div className="relative space-y-12 before:absolute before:top-4 before:bottom-3 before:left-[212px] before:h-auto before:w-px before:bg-gray-3 xl:before:hidden sm:space-y-16">
         {items.map(({ body, slug, frontmatter: { label } }, index) => (
           <article className="relative flex sm:flex-col sm:space-y-3" key={index}>
             <Aside slug={slug} label={label} />
