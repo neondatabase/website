@@ -1,7 +1,8 @@
 ---
-title: "What's new"
 label: 'Storage'
 ---
+
+### What's new
 
 - Postgres Compute: install `uuid-ossp` extension binaries. `CREATE EXTENSION "uuid-ossp"` now works.
 - Postgres Compute: add logging for when initializing compute node fails in the `basebackup` stage.

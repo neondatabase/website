@@ -1,7 +1,8 @@
 ---
-title: 'Bug fixes'
 label: 'Console'
 ---
+
+### Bug fixes
 
 - UI: fix CORS error for API requests in Swagger UI, when using 'Try it out'.
 

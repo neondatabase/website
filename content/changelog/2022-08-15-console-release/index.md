@@ -1,7 +1,8 @@
 ---
-title: 'Bug fixes'
 label: 'Console'
 ---
+
+### Bug fixes
 
 - UI: fix incorrect encoding when switching between code samples in the connection widget, add description for connection string examples.
 - UI: fix various typos and errors.

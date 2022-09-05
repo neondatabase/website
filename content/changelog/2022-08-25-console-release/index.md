@@ -1,7 +1,8 @@
 ---
-title: 'Bug fixes'
 label: 'Console'
 ---
+
+### Bug fixes
 
 - UI: fix .pgpass instructions [#1825](https://github.com/neondatabase/neon/issues/1825).
 - UI: add validation messages for creating a project form.

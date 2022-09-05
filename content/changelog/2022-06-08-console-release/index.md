@@ -1,7 +1,8 @@
 ---
-title: "What's new"
 label: 'Console'
 ---
+
+### What's new
 
 - UI: invite code is now asked only at the first login.
 - UI: new password cover everywhere, protecting it from stranger eyes.

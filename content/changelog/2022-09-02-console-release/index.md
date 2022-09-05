@@ -1,7 +1,8 @@
 ---
-title: "What's new"
 label: 'Console'
 ---
+
+### What's new
 
 - UI: pass OAuth app name to the client.
 

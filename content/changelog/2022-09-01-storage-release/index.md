@@ -1,7 +1,8 @@
 ---
-title: "What's new"
 label: 'Storage'
 ---
+
+### What's new
 
 - Postgres Compute: update vendor/postgres to 14.5.
 - Postgres Compute: support `PostGIS` extension version 3.3.0.

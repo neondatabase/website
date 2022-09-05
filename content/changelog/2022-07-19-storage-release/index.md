@@ -1,7 +1,8 @@
 ---
-title: "What's new"
 label: 'Storage'
 ---
+
+### What's new
 
 - Safekeeper: back up WAL to S3 for disaster recovery.
 - Safekeeper: download WAL from S3 on demand.
