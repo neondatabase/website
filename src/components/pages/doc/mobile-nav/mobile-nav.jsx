@@ -7,10 +7,12 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 const MobileNav = ({ className, sidebar, currentSlug }) => {
-  const handleChange = ({ target: { value } }) => {
-    if (value) navigate(`${DOCS_BASE_PATH}${value}`);
-  };
+  const handleChange = (e) => {
+    const { value, selectedOptions } = e.target;
 
+    const slug = selectedOptions[0].dataset.standalone ? `/${value}` : `${DOCS_BASE_PATH}${value}/`;
+    if (value) navigate(slug);
+  };
   return (
     <nav className={clsx('relative', className)}>
       <select
@@ -18,13 +20,14 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
         value={currentSlug}
         onChange={handleChange}
       >
-        <option value={false} disabled>
-          Choose section
-        </option>
         {sidebar &&
           sidebar.map((sidebarItem, index) => (
             <optgroup label={sidebarItem.title} key={index}>
-              {sidebarItem.slug && <option value={sidebarItem.slug}>{sidebarItem.title}</option>}
+              {sidebarItem.slug && (
+                <option value={sidebarItem.slug} data-standalone={sidebarItem.isStandalone}>
+                  {sidebarItem.title}
+                </option>
+              )}
               {sidebarItem?.items?.map(({ title, slug, items }, index) => (
                 <Fragment key={index}>
                   {items?.length > 0 ? (
@@ -51,6 +54,7 @@ MobileNav.propTypes = {
   sidebar: PropTypes.arrayOf(
     PropTypes.exact({
       title: PropTypes.string.isRequired,
+      isStandalone: PropTypes.bool,
       slug: PropTypes.string,
       items: PropTypes.arrayOf(
         PropTypes.exact({

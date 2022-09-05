@@ -8,12 +8,12 @@ import ChevronRight from 'icons/chevron-right.inline.svg';
 
 import SubItem from './sub-item';
 
-const Item = ({ title, slug, items, isOpenByDefault, currentSlug }) => {
+const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }) => {
   const [isOpen, setIsOpen] = useState(isOpenByDefault);
 
   const handleClick = () => setIsOpen((isOpen) => !isOpen);
 
-  const docSlug = slug === 'changelog' ? '/changelog' : `${DOCS_BASE_PATH}${slug}/`;
+  const docSlug = isStandalone ? `/${slug}` : `${DOCS_BASE_PATH}${slug}/`;
 
   return (
     <li>
@@ -84,11 +84,13 @@ const Item = ({ title, slug, items, isOpenByDefault, currentSlug }) => {
 
 Item.propTypes = {
   title: PropTypes.string.isRequired,
+  isStandalone: PropTypes.bool,
   slug: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.exact({
       title: PropTypes.string.isRequired,
       slug: PropTypes.string,
+
       items: PropTypes.arrayOf(
         PropTypes.exact({
           title: PropTypes.string.isRequired,
@@ -103,6 +105,7 @@ Item.propTypes = {
 
 Item.defaultProps = {
   slug: null,
+  isStandalone: null,
   items: null,
   isOpenByDefault: false,
 };

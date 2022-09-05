@@ -78,3 +78,4 @@
   slug: security
 - title: Release Notes
   slug: changelog
+  isStandalone: true

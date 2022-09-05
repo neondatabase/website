@@ -112,6 +112,32 @@ For example:
 +     slug: page-5
 ```
 
+### How to add a single page to doc sidebar
+
+To add a single page <https://example.com/changelog> to the docs sidebar, add the boolean `isStandalone` to the first level of the list
+
+- `title` in the sidebar may differ from `title` in Markdown file.
+- `slug` should always match page's slug.
+- `isStandalone` - the boolean for the single page in sidebar.
+
+```diff yaml
++- title: Changelog
++  slug: changelog
++  isStandalone: true
+ - title: Category 1
+   items:
+     - title: Page 1
+       slug: page-1
+ - title: Category 2
+   items:
+     - title: Page 2
+       slug: page-2
+    - title: Subcategory 1
+      items:
+        - title: Page 3
+          slug: page-3
+```
+
 ## Code blocks
 
 All available languages for code blocks can be found [here](https://prismjs.com/index.html#supported-languages).
