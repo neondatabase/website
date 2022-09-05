@@ -7,7 +7,6 @@ import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
-import AnchorIcon from 'icons/anchor.inline.svg';
 
 const ChangelogPostList = ({ items }) => (
   <section>
@@ -27,13 +26,6 @@ const ChangelogPostList = ({ items }) => (
                   size="sm"
                   theme="black"
                 >
-                  <a
-                    className="anchor absolute top-0 left-0 flex h-full -translate-x-full items-center justify-center px-2.5 opacity-0 transition-opacity duration-200 hover:opacity-100 group-hover:opacity-100 xl:left-1 sm:group-hover:opacity-0"
-                    href={`#${id}`}
-                    aria-hidden
-                  >
-                    <AnchorIcon className="w-4" />
-                  </a>
                   <Link to={slug}>{title}</Link>
                 </Heading>
                 <Content className="prose-h3:text-xl" content={body} showH3Anchors={false} />
