@@ -27,9 +27,6 @@ const ChangelogPostTemplate = ({
       <Hero />
       <Container size="sm" className="relative mb-10 flex">
         <article className="relative flex flex-col items-start">
-          <Heading tag="h3" size="sm" theme="black">
-            {frontmatter.label} release
-          </Heading>
           <time
             className="mt-3 whitespace-nowrap text-gray-2"
             dateTime={getChangelogPostDateFromSlug(slug)}
@@ -37,7 +34,16 @@ const ChangelogPostTemplate = ({
             {getChangelogPostDateFromSlug(slug)}
           </time>
           <Heading
-            className="relative mt-10 mb-5 !text-2xl leading-normal"
+            className="!text-[36px] !leading-normal md:!text-3xl"
+            tag="h3"
+            size="sm"
+            theme="black"
+          >
+            {frontmatter.label} release
+          </Heading>
+
+          <Heading
+            className="relative mt-8 mb-2 !text-xl leading-normal"
             tag="h3"
             size="sm"
             theme="black"
@@ -51,14 +57,14 @@ const ChangelogPostTemplate = ({
             </a>
             {frontmatter.title}
           </Heading>
-          <Content content={body} />
+          <Content className="prose-h3:text-xl" content={body} />
           <Link
             className="mt-10 font-semibold lg:mt-8"
             to={CHANGELOG_BASE_PATH}
             size="sm"
             theme="black-primary-1"
           >
-            back to all changelogs
+            Back to all changelogs
           </Link>
         </article>
       </Container>
