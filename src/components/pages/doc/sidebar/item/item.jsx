@@ -13,6 +13,8 @@ const Item = ({ title, slug, items, isOpenByDefault, currentSlug }) => {
 
   const handleClick = () => setIsOpen((isOpen) => !isOpen);
 
+  const docSlug = slug === 'changelog' ? '/changelog' : `${DOCS_BASE_PATH}${slug}/`;
+
   return (
     <li>
       {slug ? (
@@ -22,7 +24,7 @@ const Item = ({ title, slug, items, isOpenByDefault, currentSlug }) => {
           })}
           theme="black"
           size="sm"
-          to={`${DOCS_BASE_PATH}${slug}/`}
+          to={docSlug}
         >
           {title}
         </Link>
