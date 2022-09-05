@@ -58,10 +58,16 @@ module.exports = async ({ graphql, actions }) => {
   });
 
   // Proxy has an error message, that suggests to read `https://neon.tech/sni` for more details.
-  actions.createRedirect({
-    fromPath: `/sni`,
-    toPath: `/docs/how-to-guides/connectivity-issues/`,
-  });
+  actions.createRedirect(
+    {
+      fromPath: `/sni`,
+      toPath: `/docs/how-to-guides/connectivity-issues/`,
+    },
+    {
+      fromPath: '/docs/changelog/',
+      toPath: '/changelog/',
+    }
+  );
 
   pages.forEach(({ id, slug, fields: { redirectFrom }, frontmatter }) => {
     // Required fields validation
