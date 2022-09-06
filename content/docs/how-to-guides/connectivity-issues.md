@@ -18,7 +18,7 @@ To route incoming connections, we use different domain names for different proje
 
 ## Workarounds
 
-If you face a `Project ID is not specified` error and library/application upgrade does not help, we provide several fallback options. When `SNI` domain name info is missing, we need to get it via other means.
+If you encounter a Project ID is not specified error and a library or application upgrade does not help, we provide several fallback options. When SNI domain name information is missing, we need to obtain this information through other means.
 
 ### A. Pass project ID in options
 
