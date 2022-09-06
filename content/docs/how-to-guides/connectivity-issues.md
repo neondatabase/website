@@ -7,7 +7,7 @@ title: Connecting with old clients
 In most cases, copy-pasting `Connection string` from the project's dashboard and using it in your project should work as is. However, with older clients and some native Postgres clients, you may receive the following error:
 
 ```txt
-ERROR: Project ID is not specified. Either please upgrade the postgres client library (libpq) for SNI support or pass the project ID (first part of the domain name) as a parameter: '&options=project%3D<project-id>'. See more at https://neon.tech/sni
+ERROR: The project ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the project ID (the first part of the domain name) as a parameter: '&options=project%3D'. See https://neon.tech/sni for more information.
 ```
 
 In most cases, this happens if your client library or app does not support the so-called **SNI (Server Name Indication)** mechanism in TLS. See [#Details](Details) for more context and [#Workarounds](Workarounds) for a list of ways to get around this issue.
