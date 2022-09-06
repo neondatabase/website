@@ -37,7 +37,7 @@ The following PostgreSQL extensions can be installed by the user:
 | ltree                   |     1.2 |      |
 | pg_trgm                 |     1.6 |      |
 | pgcrypto                |     1.3 |      |
-| plpgsql                 |     1.0 | Comes pre-installed with postgres |
+| plpgsql                 |     1.0 | Pre-installed with PostgreSQL |
 | postgis                 |   3.3.0 |      |
 | postgis_raster          |   3.3.0 |      |
 | postgis_tiger_geocoder  |   3.3.0 | Cannot be installed through the web UI - use your psql user credentials instead. |
