@@ -56,7 +56,7 @@ If your application or service uses golang Postgres clients like `pgx` and `lib/
 
 ### D. Specify the project ID in the password field
 
-You can specify the project ID in the password field as a last resort. So instead of your actual password (let it be 'my-pass'), you can set the following string, consisting of the project ID and the password:
+You can specify the project ID in the password field as a last resort. So, instead of your actual password (for example, 'my-pass'), you can set the following string, consisting of the project ID and the password:
 
 ```txt
 project=mute-recipe-239816;my-pass
