@@ -5,7 +5,6 @@ const get = require('lodash.get');
 const getChangelogPostPath = require('../src/utils/get-changelog-post-path');
 
 const { DRAFT_FILTER, CHANGELOG_POST_REQUIRED_FIELDS } = require('./constants');
-const createRedirects = require('./create-redirects');
 
 module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
@@ -20,11 +19,7 @@ module.exports = async ({ graphql, actions }) => {
           nodes {
             id
             slug
-            fields {
-              redirectFrom
-            }
             frontmatter {
-              title
               label
             }
           }
@@ -36,7 +31,7 @@ module.exports = async ({ graphql, actions }) => {
 
   if (result.errors) throw new Error(result.errors);
 
-  result.data.allMdx.nodes.forEach(({ id, slug, fields: { redirectFrom }, frontmatter }) => {
+  result.data.allMdx.nodes.forEach(({ id, slug, frontmatter }) => {
     // Required fields validation
     CHANGELOG_POST_REQUIRED_FIELDS.forEach((fieldName) => {
       if (!get(frontmatter, fieldName)) {
@@ -45,8 +40,6 @@ module.exports = async ({ graphql, actions }) => {
     });
 
     const pagePath = getChangelogPostPath(slug);
-
-    createRedirects({ redirectFrom, actions, pagePath });
 
     actions.createPage({
       path: pagePath,
