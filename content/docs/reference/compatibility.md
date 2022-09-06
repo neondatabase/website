@@ -18,11 +18,11 @@ Neon cloud service does not currently provide the user with access permissions o
 
 ## Available PostgreSQL Extensions
 
-During technical preview Neon has restrictions on user ability to install PostgreSQL extensions.
+During the technical preview, Neon restricts the installation of PostgreSQL extensions.
 
 The following PostgreSQL extensions can be installed by the user:
 
-|                         | Version | Note |
+| Extension               | Version | Note |
 |:------------------------|--------:|------|
 | btree_gin               |     1.3 |      |
 | btree_gist              |     1.6 |      |
@@ -40,7 +40,7 @@ The following PostgreSQL extensions can be installed by the user:
 | plpgsql                 |     1.0 | Pre-installed with PostgreSQL |
 | postgis                 |   3.3.0 |      |
 | postgis_raster          |   3.3.0 |      |
-| postgis_tiger_geocoder  |   3.3.0 | Cannot be installed through the web UI - use your psql user credentials instead. |
+| postgis_tiger_geocoder  |   3.3.0 | Cannot be installed using the Neon web UI. Use your `psql` user credentials to install this extension instead. |
 | postgis_topology        |   3.3.0 |      |
 | seg                     |     1.4 |      |
 | tablefunc               |     1.0 |      |
