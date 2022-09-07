@@ -4,7 +4,7 @@ redirectFrom:
   - /docs/conceptual-guides/compatibility
 ---
 
-Neon is protocol and application-compatible with PostgreSQL. However, when using Neon, there are some limitations that you should be aware of.
+Neon is protocol and application-compatible with PostgreSQL. However, when using the Neon cloud service, there are some limitations that you should be aware of.
 
 ## PostgreSQL versions
 
@@ -74,3 +74,7 @@ Certain queries in PostgreSQL can generate large datasets that do not fit in mem
 ## Temporary tables
 
 Temporary tables, which are stored in compute local storage,  are limited by compute local storage size.
+
+## Statistics collection
+
+Statistics collected by the PostgreSQL [cumulative statistics system](https://www.postgresql.org/docs/15/monitoring-stats.html) are lost on restart.
