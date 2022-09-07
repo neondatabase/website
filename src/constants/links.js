@@ -5,6 +5,7 @@ export default {
   blog: '/blog/',
   earlyAccess: '/early-access/',
   security: '/docs/security/',
+  releaseNotes: '/docs/release-notes/',
   discord: 'https://discord.gg/YKY4CBXZT2',
   discussions: 'https://github.com/neondatabase/neon/discussions',
   discourse: 'https://community.neon.tech',

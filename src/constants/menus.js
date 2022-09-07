@@ -53,6 +53,10 @@ export default {
           text: 'Blog',
           to: LINKS.blog,
         },
+        {
+          text: 'Release notes',
+          to: LINKS.releaseNotes,
+        },
       ],
     },
     {

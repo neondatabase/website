@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import slugify from 'slugify';
 
-import AnchorIcon from './images/anchor.inline.svg';
+import AnchorIcon from 'icons/anchor.inline.svg';
 
 const AnchorHeading =
   (Tag) =>

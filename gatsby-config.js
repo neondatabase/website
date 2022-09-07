@@ -35,6 +35,13 @@ module.exports = {
         path: `${__dirname}/content/docs/`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: 'changelog',
+        path: `${__dirname}/content/changelog/`,
+      },
+    },
     'gatsby-plugin-image',
     'gatsby-transformer-sharp',
     {
