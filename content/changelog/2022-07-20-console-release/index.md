@@ -4,6 +4,6 @@ label: 'Console'
 
 ### What's new
 
-- UI: add 'Enable pooling' toggle to the Project's Settings page.
-- Control plane: use several instances to serve public API and web UI, which allow doing a zero-downtime deployments.
-- API: return `423 Locked instead` of `409 Conflict`, when there is a concurrent operation on project preventing acquiring the project lock.
+- UI: Added an 'Enable pooling' toggle to the project's General settings page.
+- Control plane: Implemented usage of several instances for serving the public API and web UI to enables zero-downtime deployments.
+- API: Changed the error reported when a concurrent operation on a project prevents acquiring the project lock. Error `423 Locked` is now reported instead of `409 Conflict`.

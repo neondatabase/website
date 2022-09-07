@@ -4,13 +4,13 @@ label: 'Console'
 
 ### What's new
 
-- UI: invite code is now asked only at the first login.
-- UI: new password cover everywhere, protecting it from stranger eyes.
-- API: `user_id` type changed from `int64` to `uuid`.
-- API: unified JSON error response in a format of `{ "message": "error text" }` is now used whenever it's possible.
-- API: `platform`, `region` and `instance_type` ids are now optional during new project creation.
+- UI: The Neon Technical Preview invite code is now requested only at the first login.
+- UI: Added a cover to all password fields to protect passwords from view.
+- API: Changed the `user_id` type from `int64` to `uuid`.
+- API: Implemented a unified JSON error response where possible, in the format of `{ "message": "error text" }`.
+- API: Made `platform`, `region`, and `instance_type` ids optional during new project creation.
 
 ### Bug fixes
 
-- Control Plane: fix an issue when system role `web_access` could be modified or deleted, which broke the UI query interface.
-- UI: various fixes and improvements.
+- Control Plane: Fixed an issue that allowed the `web_access` system role to be modified or deleted, which could break the UI query interface.
+- UI: Implemented various fixes and improvements.

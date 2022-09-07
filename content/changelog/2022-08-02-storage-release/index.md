@@ -4,8 +4,8 @@ label: 'Storage'
 
 ### What's new
 
-- Postgres Compute: install `uuid-ossp` extension binaries. `CREATE EXTENSION "uuid-ossp"` now works.
-- Postgres Compute: add logging for when initializing compute node fails in the `basebackup` stage.
-- Pageserver: avoid busy looping, when deletion from cloud storage is skipped due to failed upload tasks.
-- Pageserver: changes to internal management API: merge `wal_receiver` endpoint with `timeline_detail`.
-- Pageserver: changes to internal management API: report physical size with tenant status.
+- Postgres Compute: Installed the 'uuid-ossp' extension binaries. `CREATE EXTENSION "uuid-ossp"` now works.
+- Postgres Compute: Added logging for compute node initialization failure during the 'basebackup' stage.
+- Pageserver: Avoided busy looping when deletion from cloud storage is skipped due to failed upload tasks.
+- Pageserver: Merged the 'wal_receiver' endpoint with 'timeline_detail', in the internal management API.
+- Pageserver: Added reporting of the physical size with the tenant status, in the internal management API.

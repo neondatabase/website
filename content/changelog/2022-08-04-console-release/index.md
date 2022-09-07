@@ -4,9 +4,9 @@ label: 'Console'
 
 ### What's new
 
-- UI: validate that API key name is not empty in the creation form.
-- UI: add 'Create branch' to the project dashboard for selected users.
-- UI: show detailed error in the SQL Editor if query failed.
-- Control Plane: use new version of operations executor including various stability and obervability improvements.
-- Control Plane: dump compute node logs if startup process failed.
-- Control Plane: delete corresponding timeline data from all storage nodes (safekeepers and pageserver) after project deletion.
+- UI: Added validation to ensure that an API key name is not empty in the creation form.
+- UI: Added 'Create branch' to the project dashboard for selected users.
+- UI: Added a detailed error message to the SQL Editor for failed queries.
+- Control Plane: Added a new version of operations executor that includes various stability and observability improvements.
+- Control Plane: Compute node logs are dumped if the startup process fails.
+- Control Plane: Added support for deleting timeline data from all storage nodes (safekeepers and pageserver) after project deletion.

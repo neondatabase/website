@@ -4,13 +4,13 @@ label: 'Console'
 
 ### Bug fixes
 
-- UI: fix .pgpass instructions [#1825](https://github.com/neondatabase/neon/issues/1825).
-- UI: add validation messages for creating a project form.
-- UI: fix the dead links in the onboarding.
-- UI: update the emails for requesting branching and support.
+- UI: Fixed `.pgpass` instructions [#1825](https://github.com/neondatabase/neon/issues/1825).
+- UI: Added validation messages for creating a project form.
+- UI: Fixed broken links in the onboarding section of the UI.
+- UI: Updated emails used to request branching and support.
 
 ### What's new
 
-- UI: added Tables page for exporing the Project schema and data
-- UI: add help center menu.
-- Control Plane: pick the safekeepers from different Availability Zones for the new Projects.
+- UI: Added a Tables page for exporting the Project schema and data.
+- UI: Added a help center menu.
+- Control Plane: Added the ability to select Safekeepers from different Availability Zones for new Projects.
