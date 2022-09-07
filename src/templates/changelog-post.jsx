@@ -45,7 +45,7 @@ const ChangelogPostTemplate = ({
           size="sm"
           theme="black-primary-1"
         >
-          Back to all changelogs
+          Back to all release notes
         </Link>
       </article>
     </Container>
