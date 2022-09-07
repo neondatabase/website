@@ -57,7 +57,7 @@ with conn.cursor() as cur:
 
 _Note: This example was tested with Python 3 and psycopg2 version 2.9.3._
 
-## Create SQLAlchemy engine pointing to the Neon Project
+## Create SQLAlchemy engine pointing to the Neon project
 
 SQLALchemy uses Engine abstraction to manage database connections and exposes a `create_engine` function as the primary endpoint for engine initialization.
 
