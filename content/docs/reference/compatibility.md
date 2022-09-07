@@ -52,25 +52,16 @@ Installation is permitted for the following PostgreSQL extensions:
 
 <a id="default-parameters/"></a>
 
-## Default parameters
+## Neon PostgreSQL parameter settings
 
-The following table lists configuration parameters that Neon uses by default.
-
-To check settings that differ from PostgreSQL defaults, run this query:
-
-```plsql
-SELECT * FROM pg_settings WHERE SOURCE <> 'default';
-```
+The following table lists Neon PostgreSQL parameter settings that may differ from the expected default.
 
 | Parameter            | Value   | Note                                                                                      |
 | -------------------- | ------- | ----------------------------------------------------------------------------------------- |
-| shared_buffers       | 512MB   |                                                                                           |
-| fsync                | off     | Don’t be surprised. Neon syncs data to Neon Storage Engine and stores your data reliably. |
-| wal_level            | replica |                                                                                           |
-| max_connections      |         |                                                                                           |
-| autovacuum_work_mem  |         |                                                                                           |
-| work_mem             |         |                                                                                           |
-| maintenance_work_mem |         |                                                                                           |
+| fsync                | off     | Neon syncs data to the Neon Storage Engine to store your data safely and reliably         |
+| max_connections      |         | The value depends on compute size                                                         |
+| shared_buffers       |         | The value depends on compute size                                                         |
+| wal_level            | replica | Logical replication is currently not supported                                            |
 
 ## Unlogged tables
 
