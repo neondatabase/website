@@ -19,7 +19,7 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
     <li>
       {slug ? (
         <Link
-          className={clsx('w-full py-2.5 pl-4 text-left !text-lg font-semibold', {
+          className={clsx('w-full py-2.5 pl-4 text-left !text-lg font-bold', {
             'font-bold text-primary-2': currentSlug === slug,
           })}
           theme="black"

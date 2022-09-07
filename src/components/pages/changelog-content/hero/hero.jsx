@@ -3,8 +3,8 @@ import React from 'react';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 
-const TITLE = 'Changelog';
-const DESCRIPTION = 'Latest product updates by Neon’s team';
+const TITLE = 'Release Notes';
+const DESCRIPTION = 'The latest product updates from Neon';
 
 const Hero = () => (
   <Container

@@ -13,11 +13,4 @@ module.exports = async (options) => {
   await createDocPages(options);
   await createChangelogPages(options);
   await createChangelogPosts(options);
-
-  const { createRedirect } = options.actions;
-
-  createRedirect({
-    fromPath: `/docs/release-notes/`,
-    toPath: `/changelog/`,
-  });
 };
