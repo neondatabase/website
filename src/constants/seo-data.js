@@ -22,8 +22,8 @@ export default {
     title: `${title} — Neon Docs`,
     description,
   }),
-  changelog: {
-    title: 'Changelog — Neon',
+  releaseNotes: {
+    title: 'Release notes — Neon',
   },
   changelogPost: ({ title }) => ({
     title: `${title} — Neon`,

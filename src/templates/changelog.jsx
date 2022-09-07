@@ -50,4 +50,4 @@ export const query = graphql`
 
 export default ChangelogPage;
 
-export const Head = () => <SEO pathname={CHANGELOG_BASE_PATH} {...SEO_DATA.changelog} />;
+export const Head = () => <SEO pathname={CHANGELOG_BASE_PATH} {...SEO_DATA.releaseNotes} />;
