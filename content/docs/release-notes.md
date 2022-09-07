@@ -5,215 +5,214 @@ title: Release Notes
 
 ### What's new
 
-- UI: Added support for passing the OAuth app name to the client.
+- UI: pass OAuth app name to the client.
 
 ### Bug fixes
 
-- UI: Fixed the title on the 'Sign in' page.
+- UI: fix title on the 'Sign in' page.
 
-- UI: Changed the PostgreSQL version displayed on the project dashboard to 14.5.
+- UI: change Postgres version on the project dashboard to 14.5.
 
-- Control plane: Fixed authentication of concurrent proxy connections to the idle compute node.
+- Control plane: fix authentication of concurrent proxy connections to the idle compute node.
 
 ## 2022-09-01 Storage release
 
 ### What's new
 
-- Postgres Compute: Updated the PostgreSQL version to 14.5.
+- Postgres Compute: update vendor/postgres to 14.5.
 
-- Postgres Compute: Added support for the `PostGIS` extension, version 3.3.0.
+- Postgres Compute: support `PostGIS` extension version 3.3.0.
 
-- Pageserver: Changed basebackup import panics to plain errors.
+- Pageserver: downgrade basebackup importing panics into plain errors.
 
-- Proxy: Added support for forwarding the `options`, `application_name`, and `replication` connection parameters to compute nodes.
+- Proxy: forward connection parameters `options`, `application_name` and `replication` to compute nodes.
 
 ## 2022-08-31 Console release
 
 ### What's new
-
-- Control plane: Implemented OAuth backend and OAuth consent screens. OAuth applications are granted permissions to create projects on behalf of the user. To integrate your product with Neon, please contact us.
+- Control plane: implement OAuth backend and the OAuth concent screens. OAuth applications are granted permissions to create projects on behalf of the user. If you want to integrate your product with Neon, please contact us!
 
 ### Bug fixes
 
-- UI: Fixed syntax highlighting for Golang snippets.
+- UI: fix syntax highlight for Golang snippet.
 
-- UI: Fixed styles for smaller screens.
+- UI: fix styles for smaller screens.
 
 ## 2022-08-30 Console release
 
 ### Bug fixes
 
-- UI: Fixed a CORS error for API requests in the Swagger UI. The error occurred when using 'Try it out'.
+- UI: fix CORS error for API requests in Swagger UI, when using 'Try it out'.
 
 ### What's new
 
-- UI: Added a feedback form.
+- UI: add Feedback form.
 
 ## 2022-08-25 Console release
 
 ### Bug fixes
 
-- UI: Fixed `.pgpass` instructions [#1825](https://github.com/neondatabase/neon/issues/1825).
+- UI: fix .pgpass instructions [#1825](https://github.com/neondatabase/neon/issues/1825).
 
-- UI: Added validation messages for creating a project form.
+- UI: add validation messages for creating a project form.
 
-- UI: Fixed broken links in the onboarding section of the UI.
+- UI: fix the dead links in the onboarding.
 
-- UI: Updated emails used to request branching and support.
+- UI: update the emails for requesting branching and support.
 
 ### What's new
 
-- UI: Added a Tables page for exporting the Project schema and data.
+- UI: added Tables page for exporing the Project schema and data.
 
-- UI: Added a help center menu.
+- UI: add help center menu.
 
-- Control Plane: Added the ability to select Safekeepers from different Availability Zones for new Projects.
+- Control Plane: pick the safekeepers from different Availability Zones for the new Projects.
 
 ## 2022-08-15 Console release
 
 ### Bug fixes
 
-- UI: Fixed incorrect encoding when switching between code samples in the connection widget, and added descriptions to connection string examples.
+- UI: fix incorrect encoding when switching between code samples in the connection widget, add description for connection string examples.
 
-- UI: Fixed various typos and errors.
+- UI: fix various typos and errors.
 
 ### What's new
 
-- UI: Introduced saved queries and a query history to the project query interface.
+- UI: introduce saved queries and history in the project query interface.
 
-- UI: Added token-based authorization to the Swagger UI for [Neon's public API](https://neon.tech/api-reference).
+- UI: add token-based authorization into Swagger UI for [Neon's public API](https://neon.tech/api-reference).
 
-- UI: Changed the display status of operations waiting in the queue from 'In progress' to 'Scheduling'.
+- UI: display status of operations that are waiting in the queue as 'Scheduling' instead of 'In progress'.
 
-- UI: Disabled some controls that remained enabled while the project was in a transitive state.
+- UI: disable some controls, when project is in the transitive state already.
 
-- Control Plane: Set `max_replication_write_lag` to `15 MB` to tune the backpressure mechanism and improve PostgresSQL responsiveness under load.
+- Control Plane: set `max_replication_write_lag` to `15 MB`, which should tune backpressure mechanism and make Postgres more responsive under load.
 
-- Control Plane: Improved the ability to investigate performance issues by collecting and saving more detailed compute node startup time metrics.
+- Control Plane: collect and save more detailed compute node startup time metrics for an easier investigation of performance issues.
 
 ## 2022-08-08 Console release
 
 ### Bug fixes
 
-- UI: Fixed project status live updates that were failing with a websocket connection.
+- UI: fix project status live updates using websocket connection.
 
 ## 2022-08-04 Console release
 
 ### What's new
 
-- UI: Added validation to ensure that an API key name is not empty in the creation form.
+- UI: validate that API key name is not empty in the creation form.
 
-- UI: Added 'Create branch' to the project dashboard for selected users.
+- UI: add 'Create branch' to the project dashboard for selected users.
 
-- UI: Added a detailed error message to the SQL Editor for failed queries.
+- UI: show detailed error in the SQL Editor if query failed.
 
-- Control Plane: Added a new version of operations executor that includes various stability and observability improvements.
+- Control Plane: use new version of operations executor including various stability and observability improvements.
 
-- Control Plane: Compute node logs are dumped if the startup process fails.
+- Control Plane: dump compute node logs if startup process failed.
 
-- Control Plane: Added support for deleting timeline data from all storage nodes (safekeepers and pageserver) after project deletion.
+- Control Plane: delete corresponding timeline data from all storage nodes (safekeepers and pageserver) after project deletion.
 
 ## 2022-08-02 Storage release
 
 ### What's new
 
-- Postgres Compute: Installed the 'uuid-ossp' extension binaries. `CREATE EXTENSION "uuid-ossp"` now works.
+- Postgres Compute: install 'uuid-ossp' extension binaries. `CREATE EXTENSION "uuid-ossp"` now works.
 
-- Postgres Compute: Added logging for compute node initialization failure during the 'basebackup' stage.
+- Postgres Compute: add logging for when initializing compute node fails in the 'basebackup' stage.
 
-- Pageserver: Avoided busy looping when deletion from cloud storage is skipped due to failed upload tasks.
+- Pageserver: avoid busy looping, when deletion from cloud storage is skipped due to failed upload tasks.
 
-- Pageserver: Merged the 'wal_receiver' endpoint with 'timeline_detail', in the internal management API.
+- Pageserver: changes to internal management API, merge 'wal_receiver' endpoint with 'timeline_detail'.
 
-- Pageserver: Added reporting of the physical size with the tenant status, in the internal management API.
+- Pageserver: changes to internal management API, report physical size with tenant status.
 
 ## 2022-07-20 Console release
 
 ### What's new
 
-- UI: Added an 'Enable pooling' toggle to the project's General settings page.
+- UI: add 'Enable pooling' toggle to the Project's Settings page.
 
-- Control plane: Added usage of several instances for serving the public API and web UI to enables zero-downtime deployments.
+- Control plane: use several instances to serve public API and web UI, which allow doing a zero-downtime deployments.
 
-- API: Changed the error reported when a concurrent operation on a project prevents acquiring the project lock. Error `423 Locked` is now reported instead of `409 Conflict`.
+- API: return `423 Locked` instead of `409 Conflict`, when there is a concurrent operation on project preventing acquiring the project lock.
 
 ## 2022-07-19 Storage release
 
 ### What's new
 
-- Safekeeper: Added support for backing up WAL to S3 for disaster recovery.
+- Safekeeper: back up WAL to S3 for disaster recovery.
 
-- Safekeeper: Added support for downloading WAL from S3 on demand.
+- Safekeeper: download WAL from S3 on demand.
 
-- Safekeeper: Switched to etcd subscriptions to keep pageservers up to date regarding safekeeper status.
+- Safekeeper: switch to etcd subscriptions to keep pageservers updated about safekeeper status.
 
-- Safekeeper: Implemented JWT authentication in the Safekeeper HTTP API.
+- Safekeeper: implement JWT authentication in Safekeeper HTTP API.
 
-- Proxy: Added support for propagating SASL/SCRAM PostgreSQL authentication errors to clients.
+- Proxy: propagate SASL/SCRAM postgres authentication errors to the clients.
 
-- Postgres Compute: Updated the PostgreSQL version to 14.4.
+- Postgres Compute: update vendor/postgres to 14.4.
 
-- Postgres Compute: Renamed the following custom configuration parameters:
+- Postgres Compute: rename custom configuration parameters:
 
-  - `zenith.page_server_connstring` to `neon.pageserver_connstring`
-  - `zenith.zenith_tenant` to `neon.tenant_id`
-  - `zenith.zenith_timeline` to `neon.timeline_id`
-  - `zenith.max_cluster_size` to `neon.max_cluster_size`
-  - `wal_acceptors` to `safekeepers`
+  - `zenith.page_server_connstring` -> `neon.pageserver_connstring`
+  - `zenith.zenith_tenant` -> `neon.tenant_id`
+  - `zenith.zenith_timeline` -> `neon.timeline_id`
+  - `zenith.max_cluster_size` -> `neon.max_cluster_size`
+  - `wal_acceptors` -> `safekeepers`
 
-- Control Plane: Renamed `zenith_admin` role to `cloud_admin`.
+- Control Plane: rename `zenith_admin` role to `cloud_admin`
 
-- Pageserver: Implemented a page service `fullbackup` endpoint that works like basebackup but also sends relational files.
+- Pageserver: implement page service `fullbackup` endpoint that works like basebackup, but also sends relational files.
 
-- Pageserver: Added support for importing a basebackup taken from vanilla PostgreSQL or another pageserver via psql copy in protocol.
+- Pageserver: allow importing basebackup taken from vanilla postgres or another pageserver via psql copy in protocol.
 
-- Pageserver: Fixed the database size calculation to count VMs and FSMs in addition to the main fork of the relation.
+- Pageserver: fix database size calculation - count not only main fork of the relation, but also VM and FSM.
 
-- Pageserver: Updated the timeline size reported when DROP DATABASE is executed.
+- Pageserver: update timeline size when DROP DATABASE is executed.
 
-- Pageserver: Decreased the number of threads by running gc and compaction in a blocking tokio thread pool.
+- Pageserver: decrease the number of threads by running gc and compaction in a blocking tokio thread pool.
 
-- Pageserver: Switched to per-tenant attach/detach. Download operations of all timelines for one tenant are now grouped together so that branches can be used safely with attach/detach.
+- Pageserver: switch to per-tenant attach/detach. Download operations of all timelines for one tenant are now grouped together so branches can be used safely with attach/detach.
 
 ### Bug fixes
 
-- Postgres Compute: Fixed `CREATE EXTENSION` for users that are not database owners.
+- Postgres Compute: fix `CREATE EXTENSION` for non-db-owner users.
 
-- Safekeeper: Fixed the walreceiver connection selection mechanism:
-  - Reconnecting to safekeeper immediately after it fails is now avoided by limiting candidates to those with fewest connection attempts.
-  - Increased the `max_lsn_wal_lag` default setting to avoid constant reconnections during normal work.
-  - Fixed `wal_connection_attempts` maintenance, preventing busy reconnection loops.
+- Safekeeper: fix walreceiver connection selection mechanism:
+  - Avoid reconnecting to safekeeper immediately after its failure by limiting candidates to those with fewest connection attempts.
+  - Make default `max_lsn_wal_lag` larger, otherwise constant reconnections happen during normal work.
+  - Fix `wal_connection_attempts` maintanance, preventing busy loop of reconnections.
 
 ## 2022-07-11 Console release
 
 ### What's new
 
-- Control Plane: Implemented optional connection pooling for projects.
+- Control Plane: implement optional connection pooling for projects.
 
-- API: Added a `pooler_enabled` flag to the [project update API call](https://neon.tech/api-reference/#/Project/branchCreate).
+- API: add `pooler_enabled` flag to [projects update API call](https://neon.tech/api-reference/#/Project/branchCreate).
 
-- UI: Implemented various improvements.
+- UI: various improvements.
 
 ### Bug fixes
 
-- API: Fixed several bugs that could cause intermittent 409 responses.
+- API: fix several bugs that could cause intermittent 409 responses.
 
 ## 2022-06-08 Console release
 
 ### What's new
 
-- UI: The technical preview invite code is now requested only at the first login.
+- UI: invite code is now asked only at the first login.
 
-- UI: Added a cover to all password fields to protect passwords from view.
+- UI: new password cover everywhere, protecting it from stranger eyes.
 
-- API: Changed the `user_id` type from `int64` to `uuid`.
+- API: `user_id` type changed from `int64` to `uuid`.
 
-- API: Implemented a unified JSON error response where possible, in the format of `{ "message": "error text" }`.
+- API: unified JSON error response in a format of `{ "message": "error text" }` is now used whenever it's possible.
 
-- API: Made `platform`, `region`, and `instance_type` ids optional during new project creation.
+- API: `platform`, `region` and `instance_type` ids are now optional during new project creation.
 
 ### Bug fixes
 
-- Control Plane: Fixed an issue that allowed the `web_access` system role to be modified or deleted, which could break the UI query interface.
+- Control Plane: fix an issue when system role `web_access` could be modified or deleted, which broke the UI query interface.
 
-- UI: Implemented various fixes and improvements.
+- UI: various fixes and improvements.
