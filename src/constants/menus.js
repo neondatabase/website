@@ -54,8 +54,8 @@ export default {
           to: LINKS.blog,
         },
         {
-          text: 'Changelog',
-          to: LINKS.changelog,
+          text: 'Release notes',
+          to: LINKS.releaseNotes,
         },
       ],
     },
