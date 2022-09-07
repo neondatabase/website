@@ -6,7 +6,7 @@ redirectFrom:
 
 Neon is protocol and application-compatible with PostgreSQL. However, when using Neon, there are some limitations that you should be aware of.
 
-## PostgreSQL Versions
+## PostgreSQL versions
 
 Neon cloud service is currently only compatible with PostgreSQL v14.
 
@@ -16,7 +16,7 @@ Neon cloud service does not currently provide users with access permissions othe
 
 <a id="default-extensions/"></a>
 
-## Available PostgreSQL Extensions
+## Available PostgreSQL extensions
 
 During the technical preview, Neon restricts the installation of PostgreSQL extensions.
 
@@ -52,7 +52,7 @@ Installation is permitted for the following PostgreSQL extensions:
 
 <a id="default-parameters/"></a>
 
-## Default Parameters
+## Default parameters
 
 The following table lists configuration parameters that Neon uses by default.
 
@@ -72,14 +72,14 @@ SELECT * FROM pg_settings WHERE SOURCE <> 'default';
 | work_mem             |         |                                                                                           |
 | maintenance_work_mem |         |                                                                                           |
 
-## Unlogged Tables
+## Unlogged tables
 
 Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restart (including when compute becomes idle). This is unlike vanilla PostgreSQL, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local storage size.
 
-## Spill and Index Build Handling
+## Spill and index build handling
 
 Certain queries in PostgreSQL can generate large datasets that do not fit in memory. In such cases, storage spills the data. In Neon, the size of compute local storage limits the ability to create large indexes or execute certain queries that generate large datasets.
 
-## Temporary Tables
+## Temporary tables
 
 Temporary tables, which are stored in compute local storage,  are limited by compute local storage size.
