@@ -12,15 +12,15 @@ Neon cloud service is currently only compatible with PostgreSQL v14.
 
 ## Permissions
 
-Neon cloud service does not currently provide users with access permissions other than those granted to standard database owners in PostgreSQL. Therefore, Neon cloud service users cannot access replication methods, create additional users or roles from a PostgreSQL connection, or install PostgreSQL extensions other than those permitted by Neon.
+Neon cloud service does not currently provide users with access permissions other than those granted to standard database owners in Postgres. Therefore, Neon cloud service users cannot access replication methods, create additional users or roles from a Postgres connection, or install Postgres extensions other than those permitted by Neon.
 
 <a id="default-extensions/"></a>
 
-## Available PostgreSQL extensions
+## Available Postgres extensions
 
-During the technical preview, Neon restricts the installation of PostgreSQL extensions.
+During the technical preview, Neon restricts the installation of Postgres extensions.
 
-Installation is permitted for the following PostgreSQL extensions:
+Installation is permitted for the following Postgres extensions:
 
 | Extension               | Version | Note |
 |:------------------------|--------:|------|
@@ -37,7 +37,7 @@ Installation is permitted for the following PostgreSQL extensions:
 | [ltree](https://www.postgresql.org/docs/14/ltree.html)                   |     1.2 |      |
 | [pg_trgm](https://www.postgresql.org/docs/14/pgtrgm.html)                 |     1.6 |      |
 | [pgcrypto](https://www.postgresql.org/docs/14/pgcrypto.html)                |     1.3 |      |
-| [plpgsql](https://www.postgresql.org/docs/current/plpgsql.html)                 |     1.0 | Pre-installed with PostgreSQL |
+| [plpgsql](https://www.postgresql.org/docs/current/plpgsql.html)                 |     1.0 | Pre-installed with Postgres |
 | [postgis](https://postgis.net/)                 |   3.3.0 |      |
 | [postgis_raster](https://postgis.net/docs/raster.html)          |   3.3.0 |      |
 | [postgis_tiger_geocoder](http://postgis.net/docs/Geocode.html)  |   3.3.0 | Cannot be installed using the Neon web UI. Use your `psql` user credentials to install this extension instead. |
@@ -52,9 +52,9 @@ Installation is permitted for the following PostgreSQL extensions:
 
 <a id="default-parameters/"></a>
 
-## Neon PostgreSQL parameter settings
+## Neon Postgres parameter settings
 
-The following table lists Neon PostgreSQL parameter settings that may differ from the expected default.
+The following table lists Neon Postgres parameter settings that may differ from the expected default.
 
 | Parameter            | Value   | Note                                                                                      |
 | -------------------- | ------- | ----------------------------------------------------------------------------------------- |
@@ -65,16 +65,20 @@ The following table lists Neon PostgreSQL parameter settings that may differ fro
 
 ## Unlogged tables
 
-Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restart (including when compute becomes idle). This is unlike vanilla PostgreSQL, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local storage size.
+Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restart (including when compute becomes idle). This is unlike vanilla Postgres, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local storage size.
 
 ## Spill and index build handling
 
-Certain queries in PostgreSQL can generate large datasets that do not fit in memory. In such cases, storage spills the data. In Neon, the size of compute local storage limits the ability to create large indexes or execute certain queries that generate large datasets.
+Certain queries in Postgres can generate large datasets that do not fit in memory. In such cases, storage spills the data. In Neon, the size of compute local storage limits the ability to create large indexes or execute certain queries that generate large datasets.
 
 ## Temporary tables
 
 Temporary tables, which are stored in compute local storage,  are limited by compute local storage size.
 
+## Session context
+
+The Neon cloud service automatically closes idle connections after a period of inactivity, as described in [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). When connections are closed, anything defined within a session context is forgotten and must be recreated before being used again. For example, temporary tables, prepared statements, advisory locks, and notifications and listeners defined using the [NOTIFY](https://www.postgresql.org/docs/current/sql-notify.html)/[LISTEN](https://www.postgresql.org/docs/9.1/sql-listen.html) commands only exist for the duration of the current session and are lost when the session ends.
+
 ## Statistics collection
 
-Statistics collected by the PostgreSQL [cumulative statistics system](https://www.postgresql.org/docs/15/monitoring-stats.html) are lost on restart.
+Statistics collected by the Postgres [cumulative statistics system](https://www.postgresql.org/docs/15/monitoring-stats.html) are currently not saved when the Neon compute node is suspended due to inactivity or restarted. For information about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/).
