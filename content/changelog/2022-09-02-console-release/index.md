@@ -4,10 +4,10 @@ label: 'Console'
 
 ### What's new
 
-- UI: pass OAuth app name to the client.
+- UI: Added support for passing the OAuth app name to the client.
 
 ### Bug fixes
 
-- UI: fix title on the 'Sign in' page.
-- UI: change Postgres version on the project dashboard to 14.5.
-- Control plane: fix authentication of concurrent proxy connections to the idle compute node.
+- UI: Fixed the title on the 'Sign in' page.
+- UI: Changed the PostgreSQL version displayed on the project dashboard to 14.5.
+- Control plane: Fixed authentication of concurrent proxy connections to the idle compute node.

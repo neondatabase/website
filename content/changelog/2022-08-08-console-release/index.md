@@ -4,4 +4,4 @@ label: 'Console'
 
 ### Bug fixes
 
-- UI: fix project status live updates using websocket connection.
+- UI: Fixed project status live updates that were failing with a websocket connection.

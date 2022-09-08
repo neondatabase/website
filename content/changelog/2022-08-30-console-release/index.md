@@ -4,8 +4,8 @@ label: 'Console'
 
 ### Bug fixes
 
-- UI: fix CORS error for API requests in Swagger UI, when using 'Try it out'.
+- UI: Fixed a CORS error for API requests in the Swagger UI. The error occurred when using 'Try it out'.
 
 ### What's new
 
-- UI: add Feedback form.
+- UI: Added a feedback form.
