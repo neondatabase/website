@@ -10,9 +10,9 @@ Neon architecture based on separation of storage and compute and orchestrated by
 Compute is regular Postgres and storage is a custom built multi-tenant key value store of Postgres pages built for the cloud.
 Neon Control Plane manages all the cloud resources across storage and compute.
 
-![Neon Architecture Diagram](/docs-images/neon_architecture.png)
+![Neon architecture diagram](/docs-images/neon_architecture.png)
 
-Neon Storage consists of three main components: Safekeepers, Pageservers, and cloud storage.
+Neon storage consists of three main components: Safekeepers, Pageservers, and cloud storage.
 
 The Safekeepers are responsible for durability of recent updates.
 PostgreSQL streams [WAL](../glossary#postgres) to the Safekeepers, and the Safekeepers store the WAL durably,

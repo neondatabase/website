@@ -16,7 +16,7 @@ Neon cloud service does not currently provide the user with access permissions o
 
 <a id="default-extensions/"></a>
 
-## Available PostgreSQL Extensions
+## Available PostgreSQL extensions
 
 During the technical preview, Neon restricts the installation of PostgreSQL extensions.
 
@@ -52,7 +52,7 @@ The following PostgreSQL extensions can be installed by the user:
 
 <a id="default-parameters/"></a>
 
-## Default Parameters
+## Default parameters
 
 List of configuration parameters Neon uses by default:
 
@@ -76,10 +76,10 @@ select * from pg_settings where source <> 'default';
 
 Unlogged tables are maintained on local storage of Neon Compute. Such tables do not survive compute restart (incl. when compute becomes idle). Unlike vanilla PostgreSQL where unlogged relations are truncated in case of abnormal process termination (e.g. crash) only. Additionally, unlogged tables are limited in by the local storage on compute.
 
-## Spill/Index build handling
+## Spill and index build handling
 
 Certain queries in PostgreSQL could generate a dataset which doesn’t fit in memory. In such cases, storage is used to spill the data. In Neon, local storage is limited on the compute which could limit ability to create large indexes or execute certain queries
 
-## Temp Tables
+## Temporary tables
 
 Temp tables are limited in size by the Compute local storage. Temporary tables are stored locally on Compute.

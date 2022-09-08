@@ -2,13 +2,13 @@
   items:
     - title: What is Neon
       slug: cloud/about
-    - title: Get Started with Neon
+    - title: Get started with Neon
       items:
-        - title: Signing Up
+        - title: Signing up
           slug: get-started-with-neon/signing-up
-        - title: Setting up a Project
+        - title: Setting up a project
           slug: get-started-with-neon/setting-up-a-project
-        - title: Using API Keys
+        - title: Using API keys
           slug: get-started-with-neon/using-api-keys
         - title: Connection pooling
           slug: get-started-with-neon/connection-pooling
@@ -18,7 +18,7 @@
           slug: get-started-with-neon/query-with-psql-editor
 - title: Integrations
   items:
-    - title: Cloud Deployments
+    - title: Cloud deployments
       items:
         - title: Run a Hasura app
           slug: integrations/hasura
@@ -26,7 +26,7 @@
           slug: integrations/vercel
         - title: Run a Prisma app
           slug: integrations/prisma
-    - title: Frameworks & Programming Languages
+    - title: Frameworks & programming languages
       items:
         - title: Run a Go app
           slug: integrations/go
@@ -44,37 +44,37 @@
       slug: integrations/postgres
     - title: Run a SQLAlchemy app
       slug: integrations/sqlalchemy
-- title: How-to Guides
+- title: How-to guides
   items:
-    - title: Import an Existing Database
+    - title: Import an existing database
       slug: how-to-guides/import-an-existing-database
     - title: Connecting with old clients
       slug: how-to-guides/connectivity-issues
 - title: Reference
   items:
-    - title: Neon Roadmap
+    - title: Neon roadmap
       slug: reference/roadmap
-    - title: API Reference
+    - title: API reference
       slug: reference/api-reference
     - title: Glossary
       slug: reference/glossary
     - title: Compatibility
       slug: reference/compatibility
-    - title: Neon Default Extensions
+    - title: Neon default extensions
       slug: reference/compatibility/#default-extensions
-    - title: Neon Default Parameters
+    - title: Neon default parameters
       slug: reference/compatibility/#default-parameters
     - title: Technical Preview Free Tier in Neon
       slug: reference/technical-preview-free-tier
-- title: Conceptual Guides
+- title: Conceptual guides
   items:
-    - title: Neon Architecture
+    - title: Neon architecture
       slug: conceptual-guides/architecture-overview
-    - title: Compute Lifecycle
+    - title: Compute lifecycle
       slug: conceptual-guides/compute-lifecycle
     - title: Branching
       slug: conceptual-guides/branching
 - title: Security
   slug: security
-- title: Release Notes
+- title: Release notes
   slug: release-notes

@@ -8,7 +8,7 @@ redirectFrom:
 
 Symfony is a framework for building web applications in PHP. Symfony uses Doctrine library to access database. Using Neon from Symfony + Doctrine is straightforward and differs nothing from using a vanilla PostgreSQL.
 
-## Step 1 — Set up a Neon Project
+## Step 1 — Set up a Neon project
 
 ## Step 2 — Select Project in the UI
 

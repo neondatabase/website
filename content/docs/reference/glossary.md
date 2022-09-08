@@ -23,7 +23,7 @@ You can use a branch to:
 
 _Note: The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation._
 
-## Neon User
+## Neon user
 
 A Neon user is identified by their email address.
 
@@ -37,7 +37,7 @@ Once authenticated, a user can create and access [Projects](#project) and [query
 - LSN: [Log Sequence Number](https://www.postgresql.org/docs/current/datatype-pg-lsn.html), a byte offset into a location inside the entire WAL stream.
 - Page: An 8KB chunk of data, which is the smallest unit of storage that Postgres uses for storing relations and indexes on disk. In Neon, a page is also the smallest unit of data the Pageserver can be queried for. See [Postgres Database Page Layout](https://www.postgresql.org/docs/current/storage-page-layout.html).
 
-## Postgres Users
+## Postgres users
 
 Postgres users are created as a part of your Neon Project and can be managed via the Neon web UI. A system user `web-access` is used for the SQL Editor in Neon UI and for link authentication for psql. This user cannot be removed or used for authenticating in other scenarios.
 
@@ -45,7 +45,7 @@ The second user is created for client access. The credentials for that user can 
 
 More Postgres users can be created in Neon UI.
 
-## Postgres Databases
+## Postgres databases
 
 When a Project is created, a default database for storing data is created along with it, the name of the database is "main". A Neon user can create more databases inside a Project in the Neon UI. Neon users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
 
