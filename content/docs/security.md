@@ -35,12 +35,12 @@ If you identify a security vulnerability, please proceed as follows under the pr
 - If the above conditions are respected, Neon will not take any legal steps against the party that reported the security vulnerability.
 - In the event of a non-anonymous report, Neon will inform the party that submitted the report of the steps it intends to take and the progress toward closing the security vulnerability.
 
-## Neon's Security Roadmap for Y2022:
+## Neon's security roadmap for Y2022:
 
 Neon is undergoing internal reviews to achieve SOC2 Type 2 certification.
 
 We will share more information about Neon's security plans on the Github soon.
 
-## Data Centers
+## Data centers
 
 Neon’s infrastructure is hosted and managed within Amazon’s secure data centers in the USA and backed by [AWS Cloud Security](https://aws.amazon.com/security/). Amazon continually manages risk and undergoes recurring assessments to ensure compliance with industry standards. AWS data center compliance can be found [here](https://aws.amazon.com/compliance/programs/).

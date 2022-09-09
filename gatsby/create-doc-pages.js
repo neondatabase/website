@@ -6,14 +6,20 @@ const get = require('lodash.get');
 
 const { DOCS_BASE_PATH } = require('../src/constants/docs');
 const generateDocPagePath = require('../src/utils/generate-doc-page-path');
+const getDocPreviousAndNextLinks = require('../src/utils/get-doc-previous-and-next-links');
 
 const { DRAFT_FILTER, DOC_REQUIRED_FIELDS } = require('./constants');
 const createRedirects = require('./create-redirects');
 
 const sidebar = jsYaml.load(fs.readFileSync(path.resolve('./content/docs/sidebar.yaml'), 'utf8'));
-const flatSidebar = sidebar
-  .map(({ items }) => items.map((item) => (item?.items?.length > 0 ? item.items : item)))
-  .flat(2);
+
+const flatSidebar = (sidebar) =>
+  sidebar.reduce((acc, item) => {
+    if (item.items) {
+      return [...acc, ...flatSidebar(item.items)];
+    }
+    return [...acc, item];
+  }, []);
 
 module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
@@ -66,13 +72,14 @@ module.exports = async ({ graphql, actions }) => {
     });
 
     const pagePath = generateDocPagePath(slug);
+    const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar(sidebar));
 
     createRedirects({ redirectFrom, actions, pagePath });
 
     actions.createPage({
       path: pagePath,
       component: path.resolve(`./src/templates/doc.jsx`),
-      context: { id, sidebar, flatSidebar },
+      context: { id, sidebar, previousLink, nextLink },
     });
   });
 };

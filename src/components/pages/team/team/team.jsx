@@ -136,19 +136,11 @@ const members = [
     githubUrl: 'https://github.com/cicdteam',
   },
   {
-    photo: <StaticImage src="./images/anton-galitsyn-photo.jpg" alt="Anton Galitsyn" />,
-    name: 'Anton Galitsyn',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/agalitsyn',
-  },
-
-  {
     photo: <StaticImage src="./images/daniil-efimov-photo.jpg" alt="Daniil Efimov" />,
     name: 'Daniil Efimov',
     position: 'Software Engineer',
     githubUrl: 'https://github.com/Daniel-ef',
   },
-
   {
     photo: <StaticImage src="./images/anton-chaporgin-photo.jpg" alt="Anton Chaporgin" />,
     name: 'Anton Chaporgin',

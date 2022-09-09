@@ -2,13 +2,13 @@
 title: Integrations
 ---
 
-To see **Cloud Deployments**,
+To see **Cloud deployments**,
 
 - Run a Hasura App
 - Run a Next.js and Vercel App
 - Run Prisma App
 
-To see **Frameworks & Programming Languages** that Neon integrates with,
+To see **Frameworks & programming languages** that Neon integrates with,
 
 - Run a Go App
 - Run a Java App

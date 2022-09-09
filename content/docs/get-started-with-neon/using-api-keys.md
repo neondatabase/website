@@ -2,7 +2,7 @@
 title: Using API Keys
 ---
 
-## Neon User
+## Neon user
 
 A Neon user is identified by their email address.
 
@@ -16,7 +16,7 @@ API keys allow users to access the Neon application programming interface.
 
 An API key provides access to any action available to the user. An API key that is no longer needed can be revoked; this action cannot be reverted. Any issued API key is valid forever until it is revoked. Neon users can generate multiple API keys.
 
-### Issue a New API Key
+### Issue a new API key
 
 Here's how to issue a new API key:
 
@@ -30,13 +30,13 @@ You need to store your key in a safe location after generating it, you will not 
 
 Remember, all API keys remain valid until you revoke them.
 
-### Revoke an API Key
+### Revoke an API key
 
 1. In your Neon Console, click on your username in the upper right corner and click `Account`.
 2. Under `Developer Settings` you will see the list of issued and active API keys.
 3. To revoke the key forever, click the `Revoke` button. This will immediately revoke the key, all the requests using this key will now fail.
 
-### Making API Calls
+### Making API calls
 
 Every request to the Neon API endpoints should pass an API key in the `Authorization` HTTP header. You can see the available endpoints in our [API Reference](https://neon.tech/api-reference).
 

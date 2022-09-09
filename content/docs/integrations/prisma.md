@@ -37,7 +37,7 @@ You can specify this connection string in `.env`:
 DATABASE_URL=postgres://user:pass@project-name-123.cloud.neon.tech/main
 ```
 
-## Step 2 — Using Neon for Development With Prisma
+## Step 2 — Using Neon for development with Prisma
 
 Prisma used a so-called shadow database to detect schema drift, therefore you need to have a second database to perform `prisma migrate dev` command. One way to deal with it is to create a separate Project in Neon and specify it via `shadowDatabaseUrl` in `prisma/schema.prisma`.
 

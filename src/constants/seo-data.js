@@ -22,6 +22,12 @@ export default {
     title: `${title} — Neon Docs`,
     description,
   }),
+  releaseNotes: {
+    title: 'Release notes — Neon',
+  },
+  changelogPost: ({ title }) => ({
+    title: `${title} — Neon`,
+  }),
   404: {
     title: 'Page Not Found — Neon',
   },
