@@ -60,10 +60,6 @@
       slug: reference/glossary
     - title: Compatibility
       slug: reference/compatibility
-    - title: Neon default extensions
-      slug: reference/compatibility/#default-extensions
-    - title: Neon default parameters
-      slug: reference/compatibility/#default-parameters
     - title: Technical Preview Free Tier in Neon
       slug: reference/technical-preview-free-tier
 - title: Conceptual guides
