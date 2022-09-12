@@ -5,9 +5,18 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
 ---
+To sign up for Neon:
 
-In order to launch Neon projects, you need to sign up on <https://console.neon.tech> and click on the New Project button.
+1. Navigate to <https://console.neon.tech>.
 
-A Neon Project will automatically spin up compute, and you will be able to query it with the SQL Editor, psql, or from your application.
+2. If you do not have an invite code to access the [Neon Technical Preview](../reference/technical-preview-free-tier), click [Request early access](https://neon.tech/early-access/). 
 
-All the operations that are available to you in the web UI are also available via API. In order to use the API, you will need to generate a token in the Settings of the console.
+3. On the Neon Technical Preview page, enter your email address and click **Request Early Access**. 
+   
+   An invite code will be sent to your email address.
+
+4. In the invite email, click on the invite link, which directs you to the Neon sign-in page.
+
+5. Sign in with a Github or Google account. 
+   
+   After signing in, you are directed to the Neon console where you can create your first project. For instructions, see [Setting up a project](../get-started-with-neon/setting-up-a-project).
