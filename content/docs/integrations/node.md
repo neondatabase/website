@@ -10,7 +10,7 @@ In this section, you will learn how to add a Postgres client to your NodeJS proj
 
 ## Step 1 - Create a NodeJS project and add dependencies
 
-Let's first create a NodeJS project and move to the newly created directory.
+Create a NodeJS project and change to the newly created directory.
 
 ```shell
 mkdir neon-nodejs-example
