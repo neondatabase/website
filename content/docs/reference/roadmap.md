@@ -5,8 +5,10 @@ redirectFrom:
   - /docs/conceptual-guides/roadmap
 ---
 
-Neon was in the **Limited Preview**, starting February 2022, available to a handful of select users and friends.
+The Neon **Limited Preview** started in February, 2022, and was made available to a small number of select users and friends.
 
-On 15th of June Neon team announced the **Technical Preview**, and Neon will become available to more people. During the Technical Preview, thousands of users will be able to try Neon's Free Tier. Branching, support of Regions and other features will be released during the summer of 2022.
+On June 15th, 2022, the Neon team announced the **Technical Preview**, making Neon available to a wider audience. During the Technical Preview, thousands of users are able to try Neon's Free Tier. For more information, see [Technical Preview Free Tier](../reference/technical-preview-free-tier).
 
-Neon team aims to announce the General Availability of the service before the end of 2022.
+Branching, additional region support, and other features will be released in the coming months.
+
+The Neon team aims to announce the General Availability of the Neon Cloud Service before the end of 2022.
