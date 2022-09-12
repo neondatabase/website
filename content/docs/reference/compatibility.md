@@ -45,8 +45,8 @@ Installation is permitted for the following PostgreSQL extensions:
 | [seg](https://www.postgresql.org/docs/14/seg.html)                     |     1.4 |      |
 | [tablefunc](https://www.postgresql.org/docs/14/tablefunc.html)               |     1.0 |      |
 | [tcn](https://www.postgresql.org/docs/14/tcn.html)                     |     1.0 |      |
-| [tsm_system_rows](https://www.postgresql.org/docs14/tsm-system-rows.html)         |     1.0 |      |
-| [tsm_system_time](https://www.postgresql.org/docs14/tsm-system-time.html)         |     1.0 |      |
+| [tsm_system_rows](https://www.postgresql.org/docs/14/tsm-system-rows.html)         |     1.0 |      |
+| [tsm_system_time](https://www.postgresql.org/docs/14/tsm-system-time.html)         |     1.0 |      |
 | [unaccent](https://www.postgresql.org/docs/14/unaccent.html)                |     1.1 |      |
 | [uuid-ossp](https://www.postgresql.org/docs/14/uuid-ossp.html)               |     1.1 |      |
 
@@ -77,7 +77,7 @@ Temporary tables, which are stored in compute local storage,  are limited by com
 
 ## Session context
 
-The Neon cloud service automatically closes idle connections after a period of inactivity, as described in [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). When connections are closed, anything defined within a session context is forgotten and must be recreated before being used again. For example, temporary tables, prepared statements, advisory locks, and notifications and listeners that were defined using the [NOTIFY](https://www.postgresql.org/docs/current/sql-notify.html)/[LISTEN](https://www.postgresql.org/docs/9.1/sql-listen.html) commands only exist for the duration of the current session and are lost when the session ends.
+The Neon cloud service automatically closes idle connections after a period of inactivity, as described in [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). When connections are closed, anything defined within a session context is forgotten and must be recreated before being used again. For example, temporary tables, prepared statements, advisory locks, and notifications and listeners that were defined using the [NOTIFY](https://www.postgresql.org/docs/14/sql-notify.html)/[LISTEN](https://www.postgresql.org/docs/14/sql-listen.html) commands only exist for the duration of the current session and are lost when the session ends.
 
 ## Statistics collection
 
