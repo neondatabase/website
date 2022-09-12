@@ -6,7 +6,7 @@ redirectFrom:
 
 ### Introduction
 
-In this section, you will learn how to add a Postgres client to your NodeJS project and connect to your the database.
+In this section, you will learn how to add a Postgres client to your NodeJS project and connect to your database.
 
 ## Step 1 - Create a NodeJS project and add dependencies
 
