@@ -26,7 +26,7 @@ npm install postgres dotenv
 
 ## Step 2 — Store Neon credentials
 
-Next, store your Neon credentials in the `.env` file. Note that for security purposes, you should not expose your Neon credentials to the browser.
+Store your Neon credentials in the `.env` file. Note that for security purposes, you should not expose your Neon credentials to the browser.
 
 ```shell
 PGHOST='<project_name>.cloud.neon.tech:<port>'
