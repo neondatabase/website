@@ -3,7 +3,7 @@ title: Query with psql Editor
 enableTableOfContents: true
 ---
 
-The following steps require a working installation of [psql](https://www.postgresql.org/download/), a terminal-based front-end to PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/14/app-psql.html), in the _PostgreSQL Documentation_. 
+The following steps require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/14/app-psql.html), in the _PostgreSQL Documentation_. 
 
 ## Connecting with Neon's psql quick auth
 
@@ -61,7 +61,13 @@ user1=> SELECT current_database();
 
 To connect with an exported password:
 
-1. In your terminal, export the database user's password to the `PGPASSWORD` environment variable; for example:
+1. In your terminal, export the database user's password to the `PGPASSWORD` environment variable:
+
+```bash
+export PGPASSWORD=<password>
+```
+
+For example:
 
 ```bash
 export PGPASSWORD=En5v0dJoVpRL
@@ -72,13 +78,13 @@ The database user's password was provided to you when you created the project.
 2. Connect with the following command:
 
 ```bash
-psql postgres://<user>:$PGPASSWORD@<project_ID>.cloud.neon.tech:5432/main
+psql postgres://<user>:$PGPASSWORD@<project_id>.cloud.neon.tech:5432/main
 ```
 
 where:
 
-- `<user>` is the database user, which can be found on the Neon console **Dashboard** tab, under **Connection Details**. 
-- `<project_ID>` is the Neon project ID, which can be found on the Neon console **Settings** tab, under **General Settings**.
+- `<user>` is the database user, which can be found on the Neon Console **Dashboard** tab, under **Connection Details**. 
+- `<project_id>` is the Neon Project ID, which can be found on the Neon Console **Settings** tab, under **General Settings**.
 
 ## Connecting with a password saved to a password file
 
@@ -89,27 +95,27 @@ To connect with a password saved to a `.pgpass` password file:
 ```bash
 touch ~/.pgpass && \
 chmod 0600 ~/.pgpass && \
-echo -e "<project_ID>.cloud.neon.tech:5432:main:<user>:<password>\n$(cat ~/.pgpass)" >> ~/.pgpass
+echo -e "<project_id>.cloud.neon.tech:5432:main:<user>:<password>\n$(cat ~/.pgpass)" >> ~/.pgpass
 ```
 
 2. Connect with the following command:
 
 ```bash
-psql -h <project_ID>.cloud.neon.tech -U <user> main
+psql -h <project_id>.cloud.neon.tech -U <user> main
 ```
 
 where:
 
-- `<project_ID>` is the ID of the Neon project, which can be found on the Neon console **Settings** tab, under **General Settings**.
+- `<project_id>` is the ID of the Neon project, which can be found on the Neon Console **Settings** tab, under **General Settings**.
 - `<password>` is the database user's password, which was provided to you when you created the project
-- `<user>` is the database user, which can be found on the Neon console **Dashboard** tab, under **Connection Details**.
+- `<user>` is the database user, which can be found on the Neon Console **Dashboard** tab, under **Connection Details**.
 
 ## Running queries
 
 After establishing a connection, try running the following queries:
 
 ```sql
-main=> CREATE TABLE my_table AS SELECT now();
+CREATE TABLE my_table AS SELECT now();
 SELECT * FROM my_table;
 ```
 
