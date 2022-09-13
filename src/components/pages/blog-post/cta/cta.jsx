@@ -7,13 +7,7 @@ import background from './images/background.svg';
 
 const CTA = ({ title, buttonText, buttonUrl }) => (
   <div className="relative my-5">
-    <img
-      src={background}
-      alt=""
-      className="absolute inset-0 -z-10 m-0 h-full w-full bg-black object-cover md:m-0"
-      aria-hidden
-    />
-    <div className="flex items-center justify-between space-x-20 py-4 px-8  sm:flex-col sm:space-x-0">
+    <div className="flex items-center justify-between space-x-20 py-4 px-8 sm:flex-col sm:space-x-0">
       <h2 className="my-0 max-w-lg text-[22px] font-semibold text-white md:my-0 sm:text-center sm:text-lg sm:leading-tight">
         {title}
       </h2>
@@ -21,6 +15,12 @@ const CTA = ({ title, buttonText, buttonUrl }) => (
         {buttonText}
       </Button>
     </div>
+    <img
+      className="absolute inset-0 -z-10 m-0 h-full w-full bg-black object-cover md:m-0"
+      src={background}
+      alt=""
+      aria-hidden
+    />
   </div>
 );
 
