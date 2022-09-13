@@ -6,16 +6,43 @@ redirectFrom:
 
 <a id="query-via-ui/"></a>
 
-In console ([https://console.neon.tech/](https://console.neon.tech/)) select your Project to see the Project details.
+To use the SQL Editor:
 
-Select the SQL Editor tab.
+1. Navigate to the [Neon console](https://console.neon.tech/).
 
-Paste a query
+2. On the **Dashboard** tab, select your project from project drop-down list.
+
+3. Select the **SQL Editor** tab.
+
+4. Enter a query into the editor and click **Run** to view the results. 
+
+You can use the following queries to try the SQL Editor:
 
 ```sql
-create table t (c int);
-insert into t select generate_series(1,100);
-select count(*) from t;
+CREATE TABLE t (c int);
+INSERT INTO t SELECT generate_series(1,100);
+SELECT count(*) FROM t;
 ```
+**_Note:_**  Running multiple query statements at once returns a separate result set for each statement. The result sets are displayed in separate tabs, numbered in order of execution.
 
-Click run button to see the results.
+To clear the editor, click **New Query**.
+
+## Saving queries
+
+The SQL Editor allows you to save your queries.
+
+To save a query:
+
+1. Enter the query into the editor.
+
+2. Click **Save** to open the **SAVE QUERY** dialog.
+
+3. Enter a name for the query and click **Save**.
+
+The query is added to the **Saved** list in the left pane of the SQL Editor. You can rerun a query by selecting it from the **Saved** list.
+
+You can rename or delete a saved query by selecting **Rename** or **Delete** from the the kebab menu associated with the saved query.
+
+## Viewing the query history
+
+The SQL Editor maintains a query history for the project. To view your query history, select **History** in the left pane of the SQL Editor.
