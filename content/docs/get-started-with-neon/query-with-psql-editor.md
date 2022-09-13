@@ -1,5 +1,6 @@
 ---
 title: Query with psql Editor
+enableTableOfContents: true
 ---
 
 The following steps require a working installation of [psql](https://www.postgresql.org/download/), a terminal-based front-end to PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/14/app-psql.html), in the _PostgreSQL Documentation_. 
@@ -38,6 +39,22 @@ Type "help" for help.
 user1=>
 ```
 
+**_Note_**: When using _`psql` quick auth_ to connect, the `psql` prompt shows your local terminal user name instead of the database name that is shown for the other `psql` connection methods described in this topic. However, you are logged in to the default `main` database as the Neon `web_access` user, which you can verify by running this query:
+
+```bash
+user1=> SELECT current_user;
+ current_user 
+--------------
+ web_access
+(1 row)
+
+user1=> SELECT current_database();
+ current_database 
+------------------
+ main
+ (1 row)
+```
+
 ## Connecting with an exported password
 
 **_Warning_**: Some operating systems allow non-root users to view process environment variables when using the `ps` command. For security reasons, consider using a password file in such cases. 
@@ -63,7 +80,7 @@ where:
 - `<user>` is the database user, which can be found on the Neon console **Dashboard** tab, under **Connection Details**. 
 - `<project_ID>` is the Neon project ID, which can be found on the Neon console **Settings** tab, under **General Settings**.
 
-## Connecting with a password saved to .pgpass
+## Connecting with a password saved to a password file
 
 To connect with a password saved to a `.pgpass` password file:
 
