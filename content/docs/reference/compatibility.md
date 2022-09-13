@@ -40,7 +40,7 @@ Installation is permitted for the following PostgreSQL extensions:
 | [plpgsql](https://www.postgresql.org/docs/14/plpgsql.html)                 |     1.0 | Pre-installed with PostgreSQL |
 | [postgis](https://postgis.net/)                 |   3.3.0 |      |
 | [postgis_raster](https://postgis.net/docs/RT_reference.html)          |   3.3.0 |      |
-| [postgis_tiger_geocoder]((https://postgis.net/docs/Extras.html#Tiger_Geocoder)  |   3.3.0 | Cannot be installed using the Neon web UI. Use your `psql` user credentials to install this extension instead. |
+| [postgis_tiger_geocoder](https://postgis.net/docs/Extras.html#Tiger_Geocoder)  |   3.3.0 | Cannot be installed using the Neon web UI. Use your `psql` user credentials to install this extension instead. |
 | [postgis_topology](https://www.postgis.net/docs/Topology.html)        |   3.3.0 |      |
 | [seg](https://www.postgresql.org/docs/14/seg.html)                     |     1.4 |      |
 | [tablefunc](https://www.postgresql.org/docs/14/tablefunc.html)               |     1.0 |      |
