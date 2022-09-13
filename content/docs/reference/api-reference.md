@@ -5,6 +5,6 @@ redirectFrom:
   - /docs/api/about
 ---
 
-Neon API allows you to manage Projects and branches programmatically. This is helpful when using Neon as a part of the CI/CD flow.
+The Neon API allows you to manage projects programmatically, which is helpful when using Neon as a part of a CI/CD pipeline.
 
-Check the [API reference](https://neon.tech/api-reference) for details about the available methods and the [API keys Quick Start guide](/docs/get-started-with-neon/using-api-keys/).
+Refer to the the [API reference](https://neon.tech/api-reference) for available methods. Accessing the Neon API requires an API key. To obtain an API key, refer to the instructions in [Using API keys](/docs/get-started-with-neon/using-api-keys/).
