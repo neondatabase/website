@@ -2,12 +2,6 @@
 label: 'Console'
 ---
 
-### Bug fixes
-
-- UI: Fixed incorrect encoding when switching between code samples in the connection widget, and added descriptions to connection string examples.
-- UI: Fixed various typos and errors.
-
-
 ### What's new
 
 - UI: Introduced saved queries and a query history to the project query interface.
@@ -16,3 +10,8 @@ label: 'Console'
 - UI: Disabled some controls that remained enabled while the project was in a transitive state.
 - Control Plane: Set `max_replication_write_lag` to `15 MB` to tune the backpressure mechanism and improve PostgresSQL responsiveness under load.
 - Control Plane: Improved the ability to investigate performance issues by collecting and saving more detailed compute node startup time metrics.
+
+### Bug fixes
+
+- UI: Fixed incorrect encoding when switching between code samples in the connection widget, and added descriptions to connection string examples.
+- UI: Fixed various typos and errors.
