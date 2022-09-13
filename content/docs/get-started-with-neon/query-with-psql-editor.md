@@ -29,7 +29,7 @@ Authenticate by visiting:
 
 - Selecting **Create new project** directs you to a **Project creation** page where you create a new project to connect to.
 
-After making your selection, you are directed to check the terminal. In the terminal, you are connected to the project, and  connection information similar to the following is displayed:
+After making your selection, you are directed to check the terminal. In the terminal, you are connected to the project, and connection information similar to the following is displayed:
 
 ```bash
 NOTICE:  Connecting to database.
