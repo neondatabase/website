@@ -157,6 +157,7 @@ const members = [
     photo: <StaticImage src="./images/irina-hliabovich-photo.jpg" alt="Irina Hliabovich" />,
     name: 'Irina Hliabovich',
     position: 'Chief of Staff',
+    linkedinUrl: 'https://www.linkedin.com/in/irina-hliabovich/',
   },
   {
     photo: <StaticImage src="./images/egor-suvorov-photo.jpg" alt="Egor Suvorov" />,
