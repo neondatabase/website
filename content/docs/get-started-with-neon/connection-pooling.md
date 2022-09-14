@@ -4,27 +4,23 @@ title: Connection pooling
 
 ## Postgres connection limits
 
-Each PostgreSQL connection creates a new process in the operating system, which consumes resources -- memory, open file descriptors, etc. For this reason, PostgreSQL limits the number of open connections. The Neon [Technical Preview Free Tier](../reference/technical-preview-free-tier) allows 20 simultaneous PostgreSQL connections.
+Each PostgreSQL connection creates a new process in the operating system, which consumes resources -- memory, open file descriptors, etc. For this reason, PostgreSQL limits the number of open connections. The Neon [Technical Preview Free Tier](../reference/technical-preview-free-tier) allows 100 simultaneous PostgreSQL connections by default (`max_connections=100`), with a small number of those connections reserved for administrative purposes.
 
 Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations or to running many instances of the application. To handle these situations, Neon supports  connection pooling.
 
 ## Pooling in Neon
 
-Connection pooling allows PostgreSQL to accept up to 500 connections. The connections are routed to a smaller number of real PostgreSQL connections. Neon uses `pgbouncer` in `transaction mode` for connection pooling. For information about `pgbouncer`, refer to <https://www.pgbouncer.org/>.
+Enabling connection pooling allows PostgreSQL to accept up to 1000 connections. The connections are routed to a smaller number of real PostgreSQL connections. Neon uses `pgbouncer` in `transaction mode` for connection pooling. For information about `pgbouncer`, refer to <https://www.pgbouncer.org/>.
 
 ## Enabling connection pooling
 
 To enable connection pooling for a Neon project:
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
-
 2. On the **Dashboard** tab, select your project from project drop-down list.
-
 3. Select the **Settings** tab.
-
 4. Select **General** from the navigation sidebar.
-
-4. Toggle **Enable pooling** to the on position.
+5. Toggle **Enable pooling** to the on position.
 
 ### Limitations
 
