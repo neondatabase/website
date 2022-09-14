@@ -40,6 +40,39 @@ const members = [
     linkedinUrl: 'https://www.linkedin.com/in/alexeyko/',
   },
   {
+    photo: <StaticImage src="./images/anna-stepanyan-photo.jpg" alt="Anna Stepanyan" />,
+    name: 'Anna Stepanyan',
+    position: 'Head of Product',
+    linkedinUrl: 'https://www.linkedin.com/in/annastepanyan21/',
+    githubUrl: 'https://github.com/stepashka',
+  },
+  {
+    photo: <StaticImage src="./images/atli-cervantes-photo.jpg" alt="Atli Cervantes" />,
+    name: 'Atli Cervantes',
+    position: 'Developer Experience Engineer',
+    githubUrl: 'https://github.com/acervantes23',
+  },
+  {
+    photo: <StaticImage src="./images/daniel-price-photo.jpg" alt="Daniel Price" />,
+    name: 'Daniel Price',
+    position: 'Technical Writer',
+    githubUrl: 'https://github.com/danieltprice',
+  },
+  {
+    photo: <StaticImage src="./images/raouf-chabri-photo.jpg" alt="Raouf Chebri" />,
+    name: 'Raouf Chebri',
+    position: 'Developer Advocate',
+    githubUrl: 'https://github.com/raoufchebri',
+    twitterUrl: 'https://twitter.com/raoufdevrel',
+    linkedinUrl: 'https://www.linkedin.com/in/raoufchebri/',
+  },
+  {
+    photo: <StaticImage src="./images/kate-klink-photo.jpg" alt="Kate Klink" />,
+    name: 'Kate Klink',
+    position: 'Growth & Marketing Manager',
+    githubUrl: 'https://github.com/klink',
+  },
+  {
     photo: <StaticImage src="./images/bojan-serafimov-photo.jpg" alt="Bojan Serafimov" />,
     name: 'Bojan Serafimov',
     position: 'Software Engineer',
@@ -76,10 +109,9 @@ const members = [
     githubUrl: 'https://github.com/knizhnik',
   },
   {
-    photo: <StaticImage src="./images/kate-klink-photo.jpg" alt="Kate Klink" />,
-    name: 'Kate Klink',
-    position: 'Growth & Marketing Manager',
-    githubUrl: 'https://github.com/klink',
+    photo: <StaticImage src="./images/lassi-polonen-photo.jpg" alt="Lassi Pölönen" />,
+    name: 'Lassi Pölönen',
+    position: 'Site Reliability Engineer',
   },
   {
     photo: <StaticImage src="./images/dmitry-ivanov-photo.jpg" alt="Dmitry Ivanov" />,
@@ -94,6 +126,12 @@ const members = [
     githubUrl: 'https://github.com/seymourisdead',
   },
   {
+    photo: <StaticImage src="./images/rory-de-zoete-photo.jpg" alt="Rory de Zoete" />,
+    name: 'Rory de Zoete',
+    position: 'Lead Site Reliability Engineer',
+    githubUrl: 'https://github.com/zoete',
+  },
+  {
     photo: <StaticImage src="./images/dmitry-rodionov-photo.jpg" alt="Dmitry Rodionov" />,
     name: 'Dmitry Rodionov',
     position: 'Software Engineer',
@@ -106,22 +144,22 @@ const members = [
     githubUrl: 'https://github.com/petuhovskiy',
   },
   {
+    photo: <StaticImage src="./images/adrian-torres-photo.jpg" alt="Adrian Torres" />,
+    name: 'Adrian Torres',
+    position: 'People Operations Manager',
+    linkedinUrl: 'https://www.linkedin.com/in/adriantorres1/',
+  },
+  {
     photo: <StaticImage src="./images/kirill-bulatov-photo.jpg" alt="Kirill Bulatov" />,
     name: 'Kirill Bulatov',
     position: 'Software Engineer',
     githubUrl: 'https://github.com/SomeoneToIgnore',
   },
   {
-    photo: <StaticImage src="./images/anna-stepanyan-photo.jpg" alt="Anna Stepanyan" />,
-    name: 'Anna Stepanyan',
-    position: 'Head of Product',
-    linkedinUrl: 'https://www.linkedin.com/in/annastepanyan21/',
-    githubUrl: 'https://github.com/stepashka',
-  },
-  {
     photo: <StaticImage src="./images/irina-hliabovich-photo.jpg" alt="Irina Hliabovich" />,
     name: 'Irina Hliabovich',
     position: 'Chief of Staff',
+    linkedinUrl: 'https://www.linkedin.com/in/irina-hliabovich/',
   },
   {
     photo: <StaticImage src="./images/egor-suvorov-photo.jpg" alt="Egor Suvorov" />,
@@ -171,23 +209,28 @@ const members = [
     position: 'Software Engineer',
     githubUrl: 'https://github.com/klimentserafimov',
   },
-  {
-    photo: <StaticImage src="./images/lassi-polonen-photo.jpg" alt="Lassi Pölönen" />,
-    name: 'Lassi Pölönen',
-    position: 'Site Reliability Engineer',
-  },
-  {
-    photo: <StaticImage src="./images/rory-de-zoete-photo.jpg" alt="Rory de Zoete" />,
-    name: 'Rory de Zoete',
-    position: 'Lead Site Reliability Engineer',
-    githubUrl: 'https://github.com/zoete',
-  },
   // {
   //   photo: <StaticImage src="./images/thang-pham-photo.jpg" alt="Thang Pham" />,
   //   name: 'Thang Pham',
   //   position: 'Software Engineer',
   //   githubUrl: 'https://github.com/aome510',
   // },
+  {
+    photo: <StaticImage src="./images/anastasia-sushko-photo.jpg" alt="Anastasia Sushko" />,
+    name: 'Anastasia Sushko',
+    position: 'Business Operations Manager',
+  },
+  {
+    photo: <StaticImage src="./images/diana-sikorskaya-photo.jpg" alt="Diana Sikorskaya" />,
+    name: 'Diana Sikorskaya',
+    position: 'People Partner',
+  },
+  {
+    photo: <StaticImage src="./images/max-sharnoff-photo.jpg" alt="Max Sharnoff" />,
+    name: 'Max Sharnoff',
+    position: 'Software Engineer',
+    githubUrl: 'https://github.com/sharnoff',
+  },
 ];
 
 const Team = () => (
