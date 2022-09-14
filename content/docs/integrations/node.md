@@ -6,38 +6,64 @@ redirectFrom:
 
 ### Introduction
 
-In this section, you will learn how to add a Postgres client to your Project and connect to your Neon Project.
+In this section, you will learn how to add a Postgres client to your NodeJS project and connect to your database.
 
-## Step 1 — Add Postgres client to your Neon project
+## Step 1 - Create a NodeJS project and add dependencies
 
-First, add a Postgres client to your Project. In this example, we used [postgres.js](https://www.npmjs.com/package/postgres), but feel free to choose another one.
+Create a NodeJS project and change to the newly created directory.
+
+```shell
+mkdir neon-nodejs-example
+cd neon-nodejs-example
+npm init -y
+```
+
+Add project dependecies using the following command:
+
+```shell
+npm install postgres dotenv
+```
 
 ## Step 2 — Store Neon credentials
 
-Next, store your Neon credentials somewhere, for example, in the `.env` file.
+Store your Neon credentials in the `.env` file. Note that for security purposes, you should not expose your Neon credentials to the browser.
 
 ```shell
-NEON_HOST=...
-NEON_DB=...
-NEON_USER=...
-NEON_PASS=...
-NEON_PORT=...
+PGHOST='<project_name>.cloud.neon.tech:<port>'
+PGDATABASE='<database>'
+PGUSER='<username>'
+PGPASSWORD='<password>'
+PROJECT_NAME='<project_name>'
 ```
 
 ## Step 3 — Connect to database using Postgres client and Neon credentials
 
-Then, to connect to the database using Postgres client and your Neon credentials, add the following code to the `pages/api/hello_worlds.js`:
+To connect to the database using the Postgres client and your Neon credentials, add the following code to the `app.js` file:
 
 ```javascript
-import postgres from 'postgres';
+const postgres = require('postgres');
+require('dotenv').config();
 
-const sql = postgres({
-  host: process.env.NEON_HOST,
-  port: process.env.NEON_PORT,
-  database: process.env.NEON_DB,
-  username: process.env.NEON_USER,
-  password: process.env.NEON_PASS,
-});
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, PROJECT_NAME } = process.env;
+const URL = `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?options=project%3D${PROJECT_NAME}`;
 
-const result = await sql.unsafe(req.body);
+const sql = postgres(URL, { ssl: 'require' });
+
+async function getPostgresVersion() {
+  const result = await sql`select version()`;
+  console.log(result);
+}
+
+getPostgresVersion();
 ```
+
+You can now run `node app.js` to view the result. 
+```
+Result(1) [
+  {
+    version: 'PostgreSQL 14.5 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
+  }
+]
+```
+
+The same configuration can be used in Express or Next.js applications.
