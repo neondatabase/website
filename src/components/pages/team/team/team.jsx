@@ -145,6 +145,7 @@ const members = [
     photo: <StaticImage src="./images/adrian-torres-photo.jpg" alt="Adrian Torres" />,
     name: 'Adrian Torres',
     position: 'People Operations Manager',
+    linkedinUrl: 'https://www.linkedin.com/in/adriantorres1/',
   },
   {
     photo: <StaticImage src="./images/kirill-bulatov-photo.jpg" alt="Kirill Bulatov" />,
