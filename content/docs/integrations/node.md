@@ -38,7 +38,7 @@ PROJECT_NAME='<project_name>'
 
 ## Step 3 — Connect to database using Postgres client and Neon credentials
 
-To connect to the database using the Postgres client and your Neon credentials, add the following code to the `src/app.js` file:
+To connect to the database using the Postgres client and your Neon credentials, add the following code to the `app.js` file:
 
 ```javascript
 const postgres = require('postgres');
