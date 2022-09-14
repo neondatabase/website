@@ -1,5 +1,6 @@
 ---
 title: Neon Compatibility
+enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
 ---

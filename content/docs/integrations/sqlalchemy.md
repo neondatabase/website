@@ -1,5 +1,6 @@
 ---
 title: Run a SQL Alchemy App
+enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
 ---

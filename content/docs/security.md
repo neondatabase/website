@@ -1,5 +1,6 @@
 ---
 title: 'Security'
+enableTableOfContents: true
 ---
 
 At Neon, security is our highest priority. We’re committed to implementing best practices and earning the trust of our customers.
