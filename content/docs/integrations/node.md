@@ -56,3 +56,14 @@ async function getPostgresVersion() {
 
 getPostgresVersion();
 ```
+
+You can now run `node app.js` to view the result. 
+```
+Result(1) [
+  {
+    version: 'PostgreSQL 14.5 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
+  }
+]
+```
+
+The same configuration can be used in an Express or Next.js applications.
