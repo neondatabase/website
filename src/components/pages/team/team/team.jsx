@@ -59,10 +59,12 @@ const members = [
     githubUrl: 'https://github.com/danieltprice',
   },
   {
-    photo: <StaticImage src="./images/raouf-chabri-photo.jpg" alt="Raouf Chabri" />,
-    name: 'Raouf Chabri',
+    photo: <StaticImage src="./images/raouf-chabri-photo.jpg" alt="Raouf Chebri" />,
+    name: 'Raouf Chebri',
     position: 'Developer Advocate',
     githubUrl: 'https://github.com/raoufchebri',
+    twitterUrl: 'https://twitter.com/raoufdevrel',
+    linkedinUrl: 'https://www.linkedin.com/in/raoufchebri/',
   },
   {
     photo: <StaticImage src="./images/kate-klink-photo.jpg" alt="Kate Klink" />,
