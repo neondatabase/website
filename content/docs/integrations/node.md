@@ -66,4 +66,4 @@ Result(1) [
 ]
 ```
 
-The same configuration can be used in an Express or Next.js applications.
+The same configuration can be used in Express or Next.js applications.
