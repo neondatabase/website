@@ -25,7 +25,7 @@ echo -e "jolly-bird-965235.cloud.neon.tech:5432:main:<username>:<password>\n$(ca
 
 Creating a Neon project automatically creates a Neon compute instance. For the Technical Preview, a Neon compute instance is deployed with PostgreSQL 14.5, 1 vCPU, and 256MB of RAM. For more information about limits associated with the Technical Preview, see [Technical Preview Free Tier](../reference/technical-preview-free-tier). 
 
-Each Neon project is created with a default database named `main`.
+Each Neon project is created with a default database named `main`, which resides in the `public` schema.
 
 You can query a Neon project database from the Neon SQL Editor or a `psql` client. For instructions, see:
 
