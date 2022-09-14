@@ -26,7 +26,6 @@ Authenticate by visiting:
 2. In your browser, navigate to the provided link where you are asked to select an existing project or create a new project.
 
 - Selecting an existing project authenticates your connection to the selected project.
-
 - Selecting **Create new project** directs you to a **Project creation** page where you create a new project to connect to.
 
 After making your selection, you are directed to check the terminal. In the terminal, you are connected to the project, and connection information similar to the following is displayed:
