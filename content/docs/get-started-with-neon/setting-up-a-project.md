@@ -5,25 +5,22 @@ title: Setting Up a Project
 To set up a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon console.
-
 2. If you are creating your very first project, click **Create the first project**. Otherwise, click **New Project**. 
+3. Enter a name for your project and click **Create Project**. Upon creating a project, you are presented with a dialog that provides the following information:
 
-3. Enter a name for your project and click **Create Project**.
-
-Upon creating a project, you are presented with a dialog that provides the following information:
-
-- A generated password for the project 
-
+- A generated password for the project
 - An `export` command that you can use to export your project password to a `PGPASSWORD` environment variable:
 
     `export PGPASSWORD=<password>`
 
 - Commands for adding your password to `.pgpass`; for example:
-```
+
+```bash
 touch ~/.pgpass && \
 chmod 0600 ~/.pgpass && \
 echo -e "jolly-bird-965235.cloud.neon.tech:5432:main:<username>:<password>\n$(cat ~/.pgpass)" > ~/.pgpass
 ```
+
 **_Important_**: After the dialog containing your project's password information is closed, it is no longer accessible. If you forget or misplace your project password, your only option is to reset it.
 
 Creating a Neon project automatically creates a Neon compute instance. For the Technical Preview, a Neon compute instance is deployed with PostgreSQL 14.5, 1 vCPU, and 256MB of RAM. For more information about limits associated with the Technical Preview, see [Technical Preview Free Tier](../reference/technical-preview-free-tier). 
