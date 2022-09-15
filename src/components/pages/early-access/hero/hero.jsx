@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import Button from 'components/shared/button';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import useLocalStorage from 'hooks/use-local-storage';
 import logoBlack from 'images/logo-black.svg';
 import logoWhite from 'images/logo-white.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
@@ -39,6 +40,7 @@ const Hero = () => {
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState('default');
   const [errorMessage, setErrorMessage] = useState('');
+  const [submittedEmail, setSubmittedEmail] = useLocalStorage('submittedEmailEarlySuccessForm', []);
 
   const handleInputChange = (event) => setEmail(event.currentTarget.value.trim());
 
@@ -49,7 +51,10 @@ const Hero = () => {
       setErrorMessage('Please enter your email');
     } else if (!emailRegexp.test(email)) {
       setErrorMessage('Please enter a valid email');
+    } else if (submittedEmail.includes(email)) {
+      setErrorMessage('You have already submitted this email');
     } else {
+      setSubmittedEmail([...submittedEmail, email]);
       setErrorMessage('');
       setFormState('loading');
 
