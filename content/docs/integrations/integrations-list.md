@@ -19,7 +19,7 @@ For Neon **Framework & Programming Language** integrations, see:
 - Run a [Symfony App](../symfony)
 - Run a [Rust App](../rust)
 
-To see **Other** Neon integrations,
+For **Other** Neon integrations, see:
 
 - Run a [Postgres App](../postgres)
 - Run a [SQLAlchemy App](../sqlalchemy)
