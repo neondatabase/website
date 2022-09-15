@@ -10,7 +10,7 @@ For Neon **Cloud Integrations**, see:
 - Run a [Next.js and Vercel App](../vercel)
 - Run a [Prisma App](../prisma)
 
-To see **Frameworks & Programming Languages** that Neon integrates with,
+For Neon **Framework & Programming Language** integrations, see:
 
 - Run a [Go App](../go)
 - Run a [Java App](../java)
