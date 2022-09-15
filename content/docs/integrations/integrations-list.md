@@ -4,7 +4,7 @@ redirectFrom:
   - docs/cloud/integrations
 ---
 
-To see **Cloud Integrations** that Neon integrates with,
+For Neon **Cloud Integrations**, see:
 
 - Run a [Hasura App](../hasura)
 - Run a [Next.js and Vercel App](../vercel)
