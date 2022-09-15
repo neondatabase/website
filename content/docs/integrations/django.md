@@ -1,5 +1,6 @@
 ---
 title: Run a Django App
+enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/django/
   - /docs/cloud/integrations/

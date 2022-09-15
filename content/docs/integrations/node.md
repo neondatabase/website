@@ -1,5 +1,6 @@
 ---
 title: Run a Node.js app
+enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
 ---
@@ -8,7 +9,7 @@ redirectFrom:
 
 In this section, you will learn how to add a Postgres client to your NodeJS project and connect to your database.
 
-## Step 1 - Create a NodeJS project and add dependencies
+## Create a NodeJS project and add dependencies
 
 Create a NodeJS project and change to the newly created directory.
 
@@ -24,7 +25,7 @@ Add project dependecies using the following command:
 npm install postgres dotenv
 ```
 
-## Step 2 — Store Neon credentials
+## Store Neon credentials
 
 Store your Neon credentials in the `.env` file. Note that for security purposes, you should not expose your Neon credentials to the browser.
 
@@ -36,7 +37,7 @@ PGPASSWORD='<password>'
 PROJECT_NAME='<project_name>'
 ```
 
-## Step 3 — Connect to database using Postgres client and Neon credentials
+## Connect to database using Postgres client and Neon credentials
 
 To connect to the database using the Postgres client and your Neon credentials, add the following code to the `app.js` file:
 

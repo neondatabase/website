@@ -23,5 +23,6 @@ To do that, it processes the incoming WAL stream into a custom storage format th
 Pageservers also upload the data to cloud object storage, and download it back on demand.
 
 Cloud object storage, S3, Azure Blob Storage, or Google Cloud Storage, is the final long-term storage.
+
 Safekeepers can be thought of as an ultra reliable write buffer that holds latest data until it has been processed and uploaded to cloud storage. Safekeepers implement Paxos protocol for reliability.
 Pageservers can be thought of as a read cache over the cloud storage, providing fast random access to data pages.

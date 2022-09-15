@@ -1,5 +1,6 @@
 ---
 title: Run a Symfony app
+enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/symfony
 ---
@@ -8,13 +9,20 @@ redirectFrom:
 
 Symfony is a framework for building web applications in PHP. Symfony uses Doctrine library to access database. Using Neon from Symfony + Doctrine is straightforward and differs nothing from using a vanilla PostgreSQL.
 
-## Step 1 — Set up a Neon project
+## Set up a Neon project
 
-## Step 2 — Select Project in the UI
+See [Setting up a project](../get-started-with-neon/setting-up-a-project).
 
-## Step 3 — Copy the connection string (DATABASE_URL)
+## Select Project in the Console
 
-For example, if you configure your Symfony project with `.env` file, then DATABASE_URL entry in `.env` file should look like this:
+1. Navigate to the [Neon console](https://console.neon.tech/).
+2. On the **Dashboard** tab, select your project from project drop-down list.
+
+## Copy the connection string
+
+The connection string (`DATABASE_URL`) appears on the **Dashboard** tab, under **Connection Details**.
+
+For example, if you configure your Symfony project with `.env` file, the `DATABASE_URL` entry in `.env` file should appear as follows:
 
 ```shell
 # cat .env | grep DATABASE_URL

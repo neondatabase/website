@@ -1,5 +1,6 @@
 ---
 title: Run a Java app
+enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
 ---

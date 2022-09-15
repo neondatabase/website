@@ -1,5 +1,6 @@
 ---
 title: Run a Prisma App
+enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/prisma
 ---
@@ -16,7 +17,7 @@ This section discusses the concepts behind using Prisma with Neon for developmen
 
 Follow our step-by-step guide on how to setup the integration.
 
-## Step 1 — Connecting to Neon from Prisma
+## Connecting to Neon from Prisma
 
 To connect Prisma-based app to Neon, you need to specify the `postgresql` datasource and connection string.
 
@@ -37,7 +38,7 @@ You can specify this connection string in `.env`:
 DATABASE_URL=postgres://user:pass@project-name-123.cloud.neon.tech/main
 ```
 
-## Step 2 — Using Neon for development with Prisma
+## Using Neon for development with Prisma
 
 Prisma used a so-called shadow database to detect schema drift, therefore you need to have a second database to perform `prisma migrate dev` command. One way to deal with it is to create a separate Project in Neon and specify it via `shadowDatabaseUrl` in `prisma/schema.prisma`.
 

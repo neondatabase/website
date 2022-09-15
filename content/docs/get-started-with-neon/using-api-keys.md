@@ -1,5 +1,6 @@
 ---
 title: Using API Keys
+enableTableOfContents: true
 ---
 
 ## Neon user

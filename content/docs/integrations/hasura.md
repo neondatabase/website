@@ -1,5 +1,6 @@
 ---
 title: Run a Hasura App
+enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura
 ---
@@ -8,7 +9,7 @@ redirectFrom:
 
 Hasura is a cloud-based GraphQL provider for existing databases. This guide will cover zero-coding integration between Neon cloud service and Hasura Cloud. By the end of this guide, you will have a working HTTP API endpoint that uses GraphQL to query Neon's serverless database and responds with a set of rows.
 
-## Step 1 — Set up a Neon project
+## Set up a Neon project
 
 In this step, you will create or select an existing Neon Project to be used as a data source for Hasura.
 
@@ -24,7 +25,7 @@ Otherwise, if you are using a previously created Project, there are two options:
 
 Keep these connection details, we will need them later.
 
-## Step 2 — Add project as a data source in the Hasura cloud project
+## Add project as a data source in the Hasura cloud project
 
 In this section, you will head to Hasura Cloud, paste your DATABASE_URL, and connect your project to Hasura.
 
@@ -38,7 +39,7 @@ That is mostly it! Hasura Cloud will connect and automatically discover the publ
 
 Neon will spin up a new compute node for your database when any new connection arrives and suspend it when it is idle.
 
-## Step 3 — Create a table using the Hasura Console
+## Create a table using the Hasura Console
 
 Once your database is connected to Hasura, you can then create a table and perform queries.
 

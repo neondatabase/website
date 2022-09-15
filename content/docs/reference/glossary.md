@@ -1,5 +1,6 @@
 ---
 title: Glossary
+enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
