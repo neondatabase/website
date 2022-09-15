@@ -4,16 +4,25 @@ title: Connection pooling
 
 ## Postgres connection limits
 
-Each postgres connection creates a new process in the operating system, which occupies some resources -- memory, open file descriptors, etc. Hence postgres has limits on the number of open connections. In our free tier, we allow 20 simultaneous postgres connections.
+Each PostgreSQL connection creates a new process in the operating system, which consumes resources -- memory, open file descriptors, etc. For this reason, PostgreSQL limits the number of open connections. The Neon [Technical Preview Free Tier](../reference/technical-preview-free-tier) allows 100 simultaneous PostgreSQL connections by default (`max_connections=100`), with a small number of those connections reserved for administrative purposes.
 
-Some apps tend to open many connections and keep most of them inactive. Such behavior usually happens because of database driver limitations or due to the many deployed instances of the app. To deal with such situations, we use a connection pooler.
+Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations or to running many instances of the application. To handle these situations, Neon supports  connection pooling.
 
 ## Pooling in Neon
 
-Connection pooler is deployed near the postgres and allows to accept up to 500 connections. This connection is routed to the smaller amount of real postgres connections. We use `pgbouncer` in `transaction mode` for connection pooling.
+Enabling connection pooling allows PostgreSQL to accept up to 1000 connections. The connections are routed to a smaller number of real PostgreSQL connections. Neon uses `pgbouncer` in `transaction mode` for connection pooling. For information about `pgbouncer`, refer to [https://www.pgbouncer.org/](https://www.pgbouncer.org/).
 
-To enable pooling go to the project settings and tick `Enable pooling` checkbox under the `General` section.
+## Enabling connection pooling
+
+To enable connection pooling for a Neon project:
+
+1. Navigate to the [Neon console](https://console.neon.tech/).
+2. On the **Dashboard** tab, select your project from project drop-down list.
+3. Select the **Settings** tab.
+4. Select **General** from the navigation sidebar.
+5. Toggle **Enable pooling** to the on position.
+6. Click **Save**.
 
 ### Limitations
 
-Some database features like prepared statements and `LISTEN/NOTIFY` functionality won't work with connection pooling. To get a complete list of limitations, see `Transaction pooling` column in the features table at <https://www.pgbouncer.org/features.html>.
+PostgreSQL features such as prepared statements and [LISTEN](https://www.postgresql.org/docs/14/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/14/sql-notify.html) are not supported with connection pooling. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section, in the [pgbouncer.org Features documentation](https://www.pgbouncer.org/features.html).
