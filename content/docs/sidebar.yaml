@@ -58,6 +58,8 @@
   items:
     - title: Importing a database
       slug: how-to-guides/import-an-existing-database
+- title: Security
+  slug: security
 - title: Reference
   items:
     - title: API 
@@ -66,7 +68,5 @@
       slug: reference/glossary
     - title: Compatibility
       slug: reference/compatibility
-- title: Security
-  slug: security
 - title: Release notes
   slug: release-notes
