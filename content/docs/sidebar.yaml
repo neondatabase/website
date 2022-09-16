@@ -13,21 +13,21 @@
     - title: Technical Preview Free Tier
       slug: reference/technical-preview-free-tier
 - title: Get started
-   items:
-     - title: Signing up
-       slug: get-started-with-neon/signing-up
-     - title: Setting up a project
-       slug: get-started-with-neon/setting-up-a-project
-     - title: Query with Neon's SQL Editor
-       slug: get-started-with-neon/query-with-neon-sql-editor
-     - title: Query with psql
-       slug: get-started-with-neon/query-with-psql-editor
-     - title: Using API keys
-       slug: get-started-with-neon/using-api-keys
-     - title: Connecting with old clients
-       slug: how-to-guides/connectivity-issues
-     - title: Connection pooling
-       slug: get-started-with-neon/connection-pooling
+  items:
+    - title: Signing up
+      slug: get-started-with-neon/signing-up
+    - title: Setting up a project
+      slug: get-started-with-neon/setting-up-a-project
+    - title: Query with Neon's SQL Editor
+      slug: get-started-with-neon/query-with-neon-sql-editor
+    - title: Query with psql
+      slug: get-started-with-neon/query-with-psql-editor
+    - title: Using API keys
+      slug: get-started-with-neon/using-api-keys
+    - title: Connecting with old clients
+      slug: how-to-guides/connectivity-issues
+    - title: Connection pooling
+      slug: get-started-with-neon/connection-pooling
 - title: Integrations
   items:
     - title: Hasura
