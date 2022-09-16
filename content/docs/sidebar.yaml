@@ -1,4 +1,4 @@
-- title: Overview
+- title: Introduction
   items:
     - title: What is Neon?
       slug: cloud/about
@@ -60,7 +60,7 @@
       slug: how-to-guides/import-an-existing-database
 - title: Reference
   items:
-    - title: API reference
+    - title: API 
       slug: reference/api-reference
     - title: Glossary
       slug: reference/glossary
