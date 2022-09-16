@@ -1,5 +1,5 @@
 ---
-title: About Neon
+title: What is Neon?
 enableTableOfContents: true
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Connecting with old clients
+title: Connecting with older clients
 ---
 
 ## Overview
