@@ -5,6 +5,7 @@ import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Content from 'components/pages/blog-post/content';
+import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 import SocialShare from 'components/pages/blog-post/social-share';
 import CodeBlock from 'components/shared/code-block';
@@ -23,6 +24,7 @@ const BlogPostTemplate = ({
     content,
     {
       blogpostcode: CodeBlock,
+      blogpostcta: CTA,
     },
     true
   );
