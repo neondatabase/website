@@ -35,7 +35,7 @@
 
     ol {
       counter-reset: custom-counter;
-      @apply md:pl-0;
+      @apply pl-10 md:pl-4;
 
       > li {
         counter-increment: custom-counter;

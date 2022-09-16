@@ -5,13 +5,13 @@ import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
 const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
-  <div className="mt-16 flex w-full">
+  <div className="mt-16 flex w-full space-x-4">
     {previousLink && (
       <Link
         to={`${DOCS_BASE_PATH}${previousLink.slug}`}
         size="md"
         theme="black-primary-1"
-        className="mr-auto"
+        className="mr-auto xs:!leading-tight"
       >
         {previousLink.title}
       </Link>
@@ -21,7 +21,7 @@ const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
         to={`${DOCS_BASE_PATH}${nextLink.slug}`}
         size="md"
         theme="black-primary-1"
-        className="ml-auto"
+        className="ml-auto text-right xs:!leading-tight"
       >
         {nextLink.title}
       </Link>
