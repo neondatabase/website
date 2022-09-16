@@ -13,15 +13,13 @@ Neon cloud service is currently only compatible with PostgreSQL v14.
 
 ## Permissions
 
-Neon cloud service does not currently provide users with access permissions other than those granted to standard database owners in Postgres. Therefore, Neon cloud service users cannot access replication methods, create additional users or roles from a PostgreSQL connection, or install PostgreSQL extensions other than those permitted by Neon.
+Neon cloud service does not currently provide users with access permissions other than those granted to standard database owners in PostgreSQL. Therefore, Neon users cannot access replication methods, create additional users or roles from a PostgreSQL connection, or install PostgreSQL extensions other than those permitted by Neon.
 
 <a id="default-extensions/"></a>
 
 ## Available PostgreSQL extensions
 
-During the technical preview, Neon restricts the installation of PostgreSQL extensions.
-
-Installation is permitted for the following PostgreSQL extensions:
+During the Technical Preview, Neon permits installing the following PostgreSQL extensions:
 
 | Extension               | Version | Note |
 |:------------------------|--------:|------|
@@ -60,13 +58,15 @@ The following table lists Neon PostgreSQL parameter settings that may differ fro
 | Parameter            | Value   | Note                                                                                      |
 | -------------------- | ------- | ----------------------------------------------------------------------------------------- |
 | fsync                | off     | Neon syncs data to the Neon Storage Engine to store your data safely and reliably         |
-| max_connections      |         | The value depends on compute size                                                         |
+| max_connections      |         | The value depends on compute size. Set to 100 for the Technical Preview.                  |
 | shared_buffers       |         | The value depends on compute size                                                         |
 | wal_level            | replica | Logical replication is currently not supported                                            |
 
+**_Note_**: To increase the number of permitted connections, you can enable connection pooling. For more information, see [Connection pooling](../get-started-with-neon/connection-pooling).
+
 ## Unlogged tables
 
-Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restart (including when compute becomes idle). This is unlike vanilla Postgres, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local storage size.
+Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restart (including when compute becomes idle). This is unlike vanilla PostgreSQL, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local storage size.
 
 ## Spill and index build handling
 
