@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Neon architecture
 redirectFrom:
   - /docs/storage-engine/architecture-overview
 ---
