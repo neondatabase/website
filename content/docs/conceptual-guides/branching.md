@@ -1,5 +1,6 @@
 ---
 title: Branching
+enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/branches
 ---
@@ -14,16 +15,18 @@ When you create a branch, all of the data in the parent project is available in 
 
 Branch creation does not increase load on the parent Neon project. You can create a branch at any time without affecting the performance of your production system, and no downtime is required.
 
+## Branching use cases
+
 Branching has many possible uses, some of which are outlined below:
 
 - **Development**
-    - Create a branch of your production database for Developers
-    - Create a branch for each Developer
+    - Create a branch of your production database for your Development team
+    - Or better yet, create a branch for each Developer
 	
 - **Testing** 
     -	Run tests on a current branch of production data
     -	Test potentially destructive queries before deploying them to production
-    -	Test changes to database design
+    -	Test schema changes
     -	Run tests on real data &mdash; branching eliminates the need to hydrate a test database
     -	Run tests in parallel on separate branches, each with it own a dedicated compute
 
