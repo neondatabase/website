@@ -1,5 +1,5 @@
 ---
-title: Import an Existing Database
+title: Importing a database
 redirectFrom:
   - /docs/cloud/tutorials
 ---
