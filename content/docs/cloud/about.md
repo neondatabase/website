@@ -15,7 +15,7 @@ Neon automatically and transparently scales up compute on demand, in response to
 Neon allows you to create a branch of your PostgreSQL database. It's easy to create branches for development, test, and staging environments.
 
 Branching is instant and has close to zero overhead, as it is implemented using the "copy-on-write" technique in Neon storage.
-In fact, branches are so cheap that you can create a branch for every code deployment in your CI/CD pipeline. To learn more about our branching feature, see [Branching](../../conceptual-guides/branches)
+In fact, branches are so cheap that you can create a branch for every code deployment in your CI/CD pipeline. To learn more about our branching feature, see [Branching](/docs/conceptual-guides/branches)
 
 ## Fully managed
 
@@ -32,7 +32,7 @@ Neon storage is designed with cloud costs in mind and uses a multi-tier architec
 
 ## Open source
 
-You can find [neondatabase](https://github.com/neondatabase/neon) on GitHub. We develop in public under the Apache 2.0 license. For an overview of Neon's architecture, refer to Neon's [architecture documentation](../../storage-engine/architecture-overview). 
+You can find [neondatabase](https://github.com/neondatabase/neon) on GitHub. We develop in public under the Apache 2.0 license. For an overview of Neon's architecture, refer to Neon's [architecture documentation](/docs/conceptual-guides/architecture-overview). 
 
 ## Compatibility
 
