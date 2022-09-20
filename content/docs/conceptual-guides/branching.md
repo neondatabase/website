@@ -110,6 +110,6 @@ To delete a branch:
 
 3. If the left pane, select **Delete** from the menu associated with the branch.
 
-4. The the Delete the branch dialog, click **Delete**.
+4. In the **Delete the branch** dialog, click **Delete**.
 
 Deleting a branch deletes all endpoints associated with the branch.
