@@ -86,7 +86,7 @@ const Results = ({ indices }) => {
           </Index>
         ))}
       </div>
-      <div className="flex justify-between bg-gray-5 p-2.5">
+      <div className="mt-2.5 flex justify-between bg-gray-5 p-2.5">
         {!allResultsShown && shouldShowAllResultsButton && (
           <button
             className="flex items-baseline space-x-1.5 text-xs font-bold uppercase leading-none text-primary-1 transition-colors duration-200 hover:text-[#00e5bf]"
