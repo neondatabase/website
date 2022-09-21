@@ -83,7 +83,7 @@ To create a branch:
 4. Select the type of branch you want to create. 
     - **Head**: Branch the current state of the parent project. The branch is created with all of the parent project data.
     - **Time**: Branch a specific point in time. The branch is created with the project data as it existed at the specified date and time.
-    - **LSN**: Branch from a specified Log Sequence NUmber (LSN). The branch is created with the project data as it existed at the specified LSN.
+    - **LSN**: Branch from a specified Log Sequence Number (LSN). The branch is created with the project data as it existed at the specified LSN.
 
 5. Select whether or not to create an endpoint for the branch. An endpoint may not be necessary when creating branches as backups, for example. 
 
