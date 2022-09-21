@@ -8,6 +8,7 @@ import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 import SocialShare from 'components/pages/blog-post/social-share';
+import SocialShareBar from 'components/pages/blog-post/social-share-bar';
 import CodeBlock from 'components/shared/code-block';
 import Layout from 'components/shared/layout';
 import SEO from 'components/shared/seo';
@@ -31,6 +32,7 @@ const BlogPostTemplate = ({
   const [socialShareRef, isSocialShareInView] = useInView({
     threshold: 0.5,
   });
+  const shareUrl = `${process.env.GATSBY_DEFAULT_SITE_URL}${pagePath}`;
   return (
     <Layout headerTheme="white" isHeaderSticky>
       <article className="mx-auto grid max-w-[1009px] grid-cols-10 gap-x-8 pt-20 xl:max-w-[936px] xl:pt-16 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6">
@@ -47,7 +49,7 @@ const BlogPostTemplate = ({
             'col-span-1 col-start-1 mt-10 transition-opacity duration-150 md:hidden',
             isSocialShareInView ? 'invisible opacity-0' : 'visible opacity-100'
           )}
-          slug={pagePath}
+          slug={shareUrl}
           title={title}
           isSticky
         />
@@ -58,13 +60,18 @@ const BlogPostTemplate = ({
 
         <SocialShare
           className="col-start-2 col-end-10 mt-8 md:col-span-full"
-          slug={pagePath}
+          slug={shareUrl}
           title={title}
           ref={socialShareRef}
           withTopBorder
         />
       </article>
       <SubscribeMinimalistic />
+      <SocialShareBar
+        className={clsx(isSocialShareInView && 'hidden', 'hidden md:block')}
+        slug={shareUrl}
+        title={title}
+      />
     </Layout>
   );
 };
