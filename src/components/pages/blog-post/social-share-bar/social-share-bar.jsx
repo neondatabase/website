@@ -28,9 +28,9 @@ const links = [
 ];
 
 const SocialShareBar = ({ className, slug, title }) => {
-  const { isCopied, handleCopy } = useCopyToClipboard();
+  const { isCopied, handleCopy } = useCopyToClipboard(5000);
   return (
-    <div className={clsx('fixed bottom-0 z-10 w-full bg-white', className)}>
+    <div className={clsx('fixed bottom-0 z-10 w-full max-w-[100vw] bg-white', className)}>
       <ul className="flex px-4 py-2.5" style={{ boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.16)' }}>
         {links.map(({ icon: Icon, tag: Tag }, index) => (
           <li className="flex flex-1 items-center justify-center" key={index}>

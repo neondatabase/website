@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import clsx from 'clsx';
 import { graphql } from 'gatsby';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Content from 'components/pages/blog-post/content';
@@ -21,6 +21,38 @@ const BlogPostTemplate = ({
   },
   pageContext: { pagePath },
 }) => {
+  const [socialShareRef, isSocialShareInView] = useInView({
+    threshold: 0.5,
+  });
+  const contentRef = useRef();
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [isSocialShareBarVisible, setIsSocialShareBarVisible] = useState(false);
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    const { offsetTop } = el;
+    const offsetBottom = offsetTop + el.offsetHeight;
+
+    if (scrollPosition > offsetTop && scrollPosition < offsetBottom) {
+      setIsSocialShareBarVisible(true);
+    } else {
+      setIsSocialShareBarVisible(false);
+    }
+  }, [scrollPosition]);
+
   const contentWithLazyBlocks = getReactContentWithLazyBlocks(
     content,
     {
@@ -29,13 +61,15 @@ const BlogPostTemplate = ({
     },
     true
   );
-  const [socialShareRef, isSocialShareInView] = useInView({
-    threshold: 0.5,
-  });
+
   const shareUrl = `${process.env.GATSBY_DEFAULT_SITE_URL}${pagePath}`;
+
   return (
     <Layout headerTheme="white" isHeaderSticky>
-      <article className="mx-auto grid max-w-[1009px] grid-cols-10 gap-x-8 pt-20 xl:max-w-[936px] xl:pt-16 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6">
+      <article
+        className="mx-auto grid max-w-[1009px] grid-cols-10 gap-x-8 pt-20 xl:max-w-[936px] xl:pt-16 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6"
+        ref={contentRef}
+      >
         <Hero
           className="col-start-2 col-end-10 md:col-span-full"
           title={title}
@@ -59,7 +93,7 @@ const BlogPostTemplate = ({
         />
 
         <SocialShare
-          className="col-start-2 col-end-10 mt-8 md:col-span-full"
+          className="col-start-2 col-end-10 mt-8 md:hidden"
           slug={shareUrl}
           title={title}
           ref={socialShareRef}
@@ -68,7 +102,7 @@ const BlogPostTemplate = ({
       </article>
       <SubscribeMinimalistic />
       <SocialShareBar
-        className={clsx(isSocialShareInView && 'hidden', 'hidden md:block')}
+        className={clsx('hidden', isSocialShareBarVisible ? 'md:block' : 'md:hidden')}
         slug={shareUrl}
         title={title}
       />
