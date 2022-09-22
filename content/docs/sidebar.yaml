@@ -28,8 +28,12 @@
       slug: get-started-with-neon/connection-pooling
 - title: Branches
   items:
-    - title: Branches
-      slug: conceptual-guides/branching
+    - title: About Branching
+      slug: branching/branching
+    - title: Branching using the Console
+      slug: branching/branching-console
+    - title: Branching using the API
+      slug: branching/branching-api
 - title: Integrations
   items:
     - title: Hasura
