@@ -21,18 +21,19 @@ const Hero = ({ pathname }) => {
           <p className="t-xl mt-11 lg:mt-8">
             Sorry, the page you are looking for doesn’t exist or has been moved.
           </p>
-          {!isDocsPage ? (
-            <Button className="mt-11 lg:mt-8 sm:w-full" size="md" theme="primary" to="/">
-              Back to Home
-            </Button>
-          ) : (
-            <>
+
+          {isDocsPage ? (
+            <div className="flex w-full flex-col">
               <Search className="my-8" isNotFoundPage />
               <span className="h-px w-full bg-gray-4" />
               <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
                 Back to home
               </Link>
-            </>
+            </div>
+          ) : (
+            <Button className="mt-11 self-start lg:mt-8 sm:w-full" size="md" theme="primary" to="/">
+              Back to Home
+            </Button>
           )}
         </div>
 
