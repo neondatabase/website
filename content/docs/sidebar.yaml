@@ -26,7 +26,7 @@
       slug: how-to-guides/connectivity-issues
     - title: Connection pooling
       slug: get-started-with-neon/connection-pooling
-- title: Branches
+- title: Branching
   items:
     - title: About Branching
       slug: branching/branching
