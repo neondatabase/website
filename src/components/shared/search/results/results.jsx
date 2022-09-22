@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import {
@@ -35,15 +36,20 @@ const HitCount = connectStateResults(({ searchResults, setShouldShowAllResultsBu
   );
 });
 
-const PageHit = ({ hit }) => (
+const PageHit = ({ hit, isNotFoundPage }) => (
   <div className="with-highlighted-text">
     <Link className="block" to={hit.slug}>
-      <h4 className="highlight-text text-sm font-semibold">
+      <h4
+        className={clsx('highlight-text font-semibold', isNotFoundPage ? 'text-base' : 'text-sm')}
+      >
         <Highlight attribute="title" hit={hit} tagName="mark" />
       </h4>
     </Link>
     <Snippet
-      className="mt-1.5 block text-xs leading-relaxed text-gray-2"
+      className={clsx(
+        'mt-1.5 block text-xs leading-relaxed text-gray-2',
+        isNotFoundPage ? 'text-sm' : 'text-xs'
+      )}
       attribute="excerpt"
       hit={hit}
       tagName="mark"
@@ -58,35 +64,57 @@ PageHit.propTypes = {
     excerpt: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
+  isNotFoundPage: PropTypes.bool,
 };
 
-const Hits = connectHits(({ hits, showAll }) =>
+PageHit.defaultProps = {
+  isNotFoundPage: false,
+};
+
+const Hits = connectHits(({ hits, showAll, isNotFoundPage }) =>
   hits?.length ? (
     <ul className="mt-4 divide-y divide-gray-3 px-2.5">
       {hits.slice(0, showAll ? hits.length : 5).map((hit) => (
         <li className="py-2.5 first:pt-0" key={hit.objectID}>
-          <PageHit hit={hit} />
+          <PageHit isNotFoundPage={isNotFoundPage} hit={hit} />
         </li>
       ))}
     </ul>
   ) : null
 );
 
-const Results = ({ indices }) => {
+const Results = ({ indices, isNotFoundPage }) => {
   const [shouldShowAllResultsButton, setShouldShowAllResultsButton] = useState(false);
   const [allResultsShown, setAllResultsShown] = useState(false);
 
   return (
-    <div className="absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden rounded-b border border-t-0 border-gray-3 bg-white">
-      <div className="max-h-[70vh] overflow-y-scroll pt-2.5">
+    <div
+      className={clsx(
+        'absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden border-t-0 bg-white',
+        isNotFoundPage
+          ? 'rounded-b-[29px] border-2 border-gray-2'
+          : 'rounded-b border border-gray-3 '
+      )}
+    >
+      <div
+        className={clsx(
+          'max-h-[70vh] overflow-y-scroll pt-2.5',
+          isNotFoundPage && 'px-3.5 xs:px-0'
+        )}
+      >
         {indices.map(({ name }) => (
           <Index indexName={name} key={name}>
             <HitCount setShouldShowAllResultsButton={setShouldShowAllResultsButton} />
-            <Hits showAll={allResultsShown} />
+            <Hits isNotFoundPage={isNotFoundPage} showAll={allResultsShown} />
           </Index>
         ))}
       </div>
-      <div className="flex justify-between bg-gray-5 p-2.5">
+      <div
+        className={clsx(
+          'mt-2.5 flex justify-between bg-gray-5 p-2.5',
+          isNotFoundPage && 'px-6 xs:px-2.5'
+        )}
+      >
         {!allResultsShown && shouldShowAllResultsButton && (
           <button
             className="flex items-baseline space-x-1.5 text-xs font-bold uppercase leading-none text-primary-1 transition-colors duration-200 hover:text-[#00e5bf]"
@@ -119,6 +147,11 @@ Results.propTypes = {
       hitComp: PropTypes.string.isRequired,
     })
   ).isRequired,
+  isNotFoundPage: PropTypes.bool,
+};
+
+Results.defaultProps = {
+  isNotFoundPage: false,
 };
 
 export default Results;
