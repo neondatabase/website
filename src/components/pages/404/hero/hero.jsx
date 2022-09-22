@@ -22,7 +22,7 @@ const Hero = ({ pathname }) => {
             Sorry, the page you are looking for doesn’t exist or has been moved.
           </p>
 
-          {!isDocsPage ? (
+          {isDocsPage ? (
             <>
               <Search className="my-8" isNotFoundPage />
               <span className="h-px w-full bg-gray-4" />
