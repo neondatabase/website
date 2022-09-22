@@ -7,7 +7,7 @@ At Neon, security is our highest priority. We are committed to implementing best
 
 ## Security reporting
 
-Neon is in Technical Preview, and vulnerabilities may be present. We have established a security reporting procedure to address security issues quickly. We recommend using Neon only with public or non-sensitive data at this time.
+Neon is currently in Technical Preview, and vulnerabilities may be present. We have established a security reporting procedure to address security issues quickly. We recommend using Neon only with public or non-sensitive data at this time.
 
 > 💡 Reporting issues: If you have a security concern or believe you have found a vulnerability in any part of our infrastructure, please contact us at [security@neon.tech](mailto:security@neon.tech). If you need to share sensitive information, we can provide you with a security contact number through [Signal](https://signal.org/).
 
@@ -21,7 +21,7 @@ Neon is in Technical Preview, and vulnerabilities may be present. We have establ
 
 We strive to resolve all problems quickly and publicize any discoveries after their resolution.
 
-Please note that we do not have a bug bounty program, and will not pay financial bonuses or bounties for reporting bugs or vulnerability issues.
+Neon does not have a bug bounty program and does not pay financial bonuses or bounties for reporting bugs or vulnerability issues.
 
 ## How to disclose vulnerabilities
 
@@ -38,7 +38,7 @@ If you identify a security vulnerability, please proceed as follows under the pr
 
 ## Secure data centers
 
-Neon’s infrastructure is hosted and managed within Amazon’s secure data centers in the USA and backed by [AWS Cloud Security](https://aws.amazon.com/security/). Amazon continually manages risk and undergoes recurring assessments to ensure compliance with industry standards. Information about AWS data center compliance can be found [here](https://aws.amazon.com/compliance/programs/).
+Neon’s infrastructure is hosted and managed within Amazon’s secure data centers in the USA and backed by [AWS Cloud Security](https://aws.amazon.com/security/). Amazon continually manages risk and undergoes recurring assessments to ensure compliance with industry standards. For information about AWS data center compliance programs, refer to [AWS Compliance Programs](https://aws.amazon.com/compliance/programs/).
 
 ## Neon's security roadmap for 2022
 

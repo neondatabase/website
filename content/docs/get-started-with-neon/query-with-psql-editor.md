@@ -104,7 +104,7 @@ To connect with a password saved to a `.pgpass` password file:
     where:
 
     - `<project_id>` is the ID of the Neon project, which can be found on the Neon Console **Settings** tab, under **General Settings**.
-    - `<password>` is the database user's password, which was provided to you when you created the project
+    - `<password>` is the database user's password, which was provided to you when you created the project.
     - `<user>` is the database user, which can be found on the Neon Console **Dashboard** tab, under **Connection Details**.
 
 ## Running queries
