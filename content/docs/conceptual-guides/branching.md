@@ -17,7 +17,7 @@ When you create a branch, all of the data in the parent project is available in 
 
 Branch creation does not increase load on the parent Neon project. You can create a branch at any time without affecting the performance of your production system, and no downtime is required.
 
-## Branching uses
+### Branching uses
 
 Branching has many possible uses, some of which are outlined below:
 
@@ -59,7 +59,7 @@ Branching has many possible uses, some of which are outlined below:
     -	Create a branch for ML model training
     -	Name or tag a branch for a specific point in time for ML model training repeatability
 
-## Branch characteristics
+### Branch characteristics
 
 A branch has the following characteristics:
 
@@ -71,7 +71,12 @@ A branch has the following characteristics:
 - The endpoint associated with the branch is deleted when a branch is deleted
 - A branch endpoint URL uses the same format as a project endpoint URL: `{project_id}-{endpoint_id}.cloud.neon.tech` 
 
-## Creating a branch
+
+## Branching from the Console
+
+This section describes how to create and manage branches from the Neon Console.
+
+### Creating a branch
 
 Creating a branch requires that you have a project to branch from. For information about creating a project, see [Setting up a project](/docs/getting-started-with-neon/setting-up-a-project).
 
@@ -93,7 +98,7 @@ To create a branch:
 5. Select whether or not to create an endpoint for the branch. An endpoint may not be necessary when using branch as a backup, for example.
 
 
-## Viewing branches
+### Viewing branches
 
 Branches are listed on the **Projects** page in the Neon Console.
 
@@ -116,8 +121,7 @@ For example, a branch name appears similar to the following:
 super-star-526912-branch-rough-queen-523183
 ```
 
-
-## Renaming a branch
+### Renaming a branch
 
 To rename a branch:
 
@@ -130,7 +134,7 @@ To rename a branch:
 4. Specify the new name and click **Save**.
 
 
-## Deleting a branch
+### Deleting a branch
 
 To delete a branch:
 
@@ -144,7 +148,7 @@ To delete a branch:
 
 Deleting a branch deletes all endpoints associated with the branch.
 
-## Creating and managing branches using the API
+## Branching from the API
 
 Any branch action that you can perform in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/).
 

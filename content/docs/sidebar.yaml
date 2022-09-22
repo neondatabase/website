@@ -26,10 +26,8 @@
       slug: how-to-guides/connectivity-issues
     - title: Connection pooling
       slug: get-started-with-neon/connection-pooling
-- title: Branches
-  items:
-    - title: Branches
-      slug: conceptual-guides/branching
+- title: Branching
+  slug: conceptual-guides/branching
 - title: Integrations
   items:
     - title: Hasura
