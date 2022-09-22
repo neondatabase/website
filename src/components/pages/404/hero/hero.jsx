@@ -27,7 +27,7 @@ const Hero = ({ pathname }) => {
               <Search className="my-8" isNotFoundPage />
               <span className="h-px w-full bg-gray-4" />
               <Link className="mt-8 self-start" theme="black-primary-1" size="lg" to="/">
-                Back to Home
+                Back to home
               </Link>
             </>
           ) : (
