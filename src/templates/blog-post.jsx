@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import clsx from 'clsx';
 import { graphql } from 'gatsby';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Content from 'components/pages/blog-post/content';
@@ -24,34 +24,13 @@ const BlogPostTemplate = ({
   const [socialShareRef, isSocialShareInView] = useInView({
     threshold: 0.5,
   });
-  const contentRef = useRef();
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [isSocialShareBarVisible, setIsSocialShareBarVisible] = useState(false);
-
-  const handleScroll = () => {
-    const position = window.pageYOffset;
-    setScrollPosition(position);
-  };
-
+  // add padding to footer of page to avoid content overlap
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    const el = contentRef.current;
-    const { offsetTop } = el;
-    const offsetBottom = offsetTop + el.offsetHeight;
-
-    if (scrollPosition > offsetTop && scrollPosition < offsetBottom) {
-      setIsSocialShareBarVisible(true);
-    } else {
-      setIsSocialShareBarVisible(false);
+    const footer = document.querySelector('footer');
+    if (footer) {
+      footer.style.paddingBottom = '40px';
     }
-  }, [scrollPosition]);
+  }, []);
 
   const contentWithLazyBlocks = getReactContentWithLazyBlocks(
     content,
@@ -66,10 +45,7 @@ const BlogPostTemplate = ({
 
   return (
     <Layout headerTheme="white" isHeaderSticky>
-      <article
-        className="mx-auto grid max-w-[1009px] grid-cols-10 gap-x-8 pt-20 xl:max-w-[936px] xl:pt-16 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6"
-        ref={contentRef}
-      >
+      <article className="mx-auto grid max-w-[1009px] grid-cols-10 gap-x-8 pt-20 xl:max-w-[936px] xl:pt-16 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6">
         <Hero
           className="col-start-2 col-end-10 md:col-span-full"
           title={title}
@@ -101,11 +77,7 @@ const BlogPostTemplate = ({
         />
       </article>
       <SubscribeMinimalistic />
-      <SocialShareBar
-        className={clsx('hidden', isSocialShareBarVisible ? 'md:block' : 'md:hidden')}
-        slug={shareUrl}
-        title={title}
-      />
+      <SocialShareBar className="hidden md:block" slug={shareUrl} title={title} />
     </Layout>
   );
 };
