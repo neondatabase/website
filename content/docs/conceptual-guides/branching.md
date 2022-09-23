@@ -95,7 +95,7 @@ To create a branch:
     - **Time**: Branch a specific point in time. The branch is created with the project data as it existed at the specified date and time.
     - **LSN**: Branch from a specified Log Sequence Number (LSN). The branch is created with the project data as it existed at the specified LSN.
 
-5. Select whether or not to create an endpoint for the branch. An endpoint may not be necessary when using branch as a backup, for example.
+5. Select whether or not to create an endpoint for the branch. An endpoint may not be necessary when using a branch as a backup, for example.
 
 
 ### Viewing branches
