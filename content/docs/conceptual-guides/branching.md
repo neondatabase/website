@@ -30,7 +30,7 @@ Branching has many possible uses, some of which are outlined below:
     -	Test potentially destructive queries before deploying them to production
     -	Test schema changes
     -	Run tests on real data &mdash; branching eliminates the need to hydrate a test database
-    -	Run tests in parallel on separate branches, each with it own a dedicated compute
+    -	Run tests in parallel on separate branches, each with its own dedicated compute
 
 - **Staging**
     - Create a staging database by branching your production data
@@ -88,7 +88,7 @@ To create a branch:
 
 3. Enter a name for the branch.
 
-3. Select the project or brach that you want to branch from.
+3. Select the project or branch that you want to branch from.
 
 4. Select the type of branch you want to create. 
     - **Head**: Branch the current state of the parent project. The branch is created with all of the parent project data.
@@ -112,8 +112,8 @@ You can identify a branch by its name, which has the following pattern:
 
 where:
 
-<project_id> is the parent project
-<branch_id> is the branch ID
+`<project_id>` is the parent project ID
+`<branch_id>` is the branch ID
 
 For example, a branch name appears similar to the following:
 
