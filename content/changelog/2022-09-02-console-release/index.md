@@ -10,4 +10,4 @@ label: 'Console'
 
 - UI: Fixed the title on the 'Sign in' page.
 - UI: Changed the PostgreSQL version displayed on the project dashboard to 14.5.
-- Control plane: Fixed authentication of concurrent proxy connections to the idle compute node.
+- Control Plane: Fixed authentication of concurrent proxy connections to the idle compute node.

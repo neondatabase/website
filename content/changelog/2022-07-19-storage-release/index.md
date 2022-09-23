@@ -9,8 +9,8 @@ label: 'Storage'
 - Safekeeper: Switched to etcd subscriptions to keep pageservers up to date regarding safekeeper status.
 - Safekeeper: Implemented JWT authentication in the Safekeeper HTTP API.
 - Proxy: Added support for propagating SASL/SCRAM PostgreSQL authentication errors to clients.
-- Postgres Compute: Updated the PostgreSQL version to 14.4.
-- Postgres Compute: Renamed the following custom configuration parameters:
+- Compute: Updated the PostgreSQL version to 14.4.
+- Compute: Renamed the following custom configuration parameters:
   - `zenith.page_server_connstring` to `neon.pageserver_connstring`
   - `zenith.zenith_tenant` to `neon.tenant_id`
   - `zenith.zenith_timeline` to `neon.timeline_id`
@@ -26,7 +26,7 @@ label: 'Storage'
 
 ### Bug fixes
 
-- Postgres Compute: Fixed `CREATE EXTENSION` for users that are not database owners.
+- Compute: Fixed `CREATE EXTENSION` for users that are not database owners.
 - Safekeeper: Fixed the walreceiver connection selection mechanism:
   - Reconnecting to safekeeper immediately after it fails is now avoided by limiting candidates to those with fewest connection attempts.
   - Increased the `max_lsn_wal_lag` default setting to avoid constant reconnections during normal work.
