@@ -8,52 +8,86 @@ redirectFrom:
 
 <a id="branches-coming-soon/"></a>
 
-## Branch
+## A
 
-_Neon Branching capabilities are not publicly available yet. If you would like to try out this feature, reach out to iwantbranching@neon.tech describing your use case and request to enable branching capabilities for your account._
+<a id="api">API</a> 
+: See [Neon API](#neon-api)
 
-A branch is a copy of the project data created from the current state or any past state that is still available (see [PITR](../technical-preview-free-tier/#point-in-time-reset)). A branch can be independently modified from its originating project data.
+<a id="api-key">API Key</a>
+: A unique identifier used to authenticate a user or calling program to an API. An API key is required to authenticate to the Neon API. For more information, see [Using API keys](/docs/get-started-with-neon/using-api-keys/). 
 
-You can use a branch to:
+## B
 
-- Run potentially destructive queries without impacting your main branch
-- Run time travel queries against historical state
-- Run a set of queries with separate resources to avoid impacting your application
-- Tag and name the current moment, for PITR convenience or ML model training repeatability
-- Run your tests against a branch from production data
+<a id="branches-coming-soon/"></a>
 
-_Note: The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation._
+<a id="branch">Branch</a>
+: A copy of Project data created from a current or past state. A branch can be independently modified from its originating Project data. See [Branching](/docs/conceptual-guides/branching/).
 
-## Neon user
+## C
 
-A Neon user is identified by their email address.
+<a id="ci-cd">CI/CD</a>
+: Continuous integration and continuous delivery or continuous deployment.
 
-A user registers and authenticates in Neon Web UI with their GitHub or Google account. More authentication methods are coming soon.
+<a id="control-plane">Control Plane</a>
+: A part of the Neon architecture that manages cloud storage and compute resources.
 
-Once authenticated, a user can create and access [Projects](#project) and [query Project data](../../get-started-with-neon/tutorials#query-via-ui). You can also manage [Postgres Users](#postgres-users) and [Databases](#postgres-databases) in each Project.
+<a id="compute">Compute</a>
+: A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon Compute runs PostgreSQL. Each Neon Project contains a Compute. The amount of Compute resources available to a Neon Project is currently subject to the limits defined by the Technical Preview Free Tier. A Neon Compute is stateless and is automatically activated or suspended based on user activity.
 
-## Postgres
+<a id="connection-pstring">Connection String</a>
+: A string containing details for connecting to a Neon Project. The details include a user name, Project ID, host address, port number, and database name; for example: `postgres://user1@black-sky-342827.cloud.neon.tech:5432/main`. The connection string for a Neon Project is provided on the **Dashboard** tab in the Neon Console, under **Connection Details**. The connection string displayed that is displayed immediately after creating a Project also includes the user’s password, temporarily. For security, the password is removed from the connection string after navigating away from the Dashboard.
 
-- WAL: PostgreSQL uses a [Write Ahead Log (WAL)](https://www.postgresql.org/docs/current/wal-intro.html) for durability and replication. In Neon, we additionally rely on this WAL to separate storage from compute.
-- LSN: [Log Sequence Number](https://www.postgresql.org/docs/current/datatype-pg-lsn.html), a byte offset into a location inside the entire WAL stream.
-- Page: An 8KB chunk of data, which is the smallest unit of storage that Postgres uses for storing relations and indexes on disk. In Neon, a page is also the smallest unit of data the Pageserver can be queried for. See [Postgres Database Page Layout](https://www.postgresql.org/docs/current/storage-page-layout.html).
+<a id="console">Console</a>
+: See [Neon Console](#neon-console).
 
-## Postgres users
+## D
 
-Postgres users are created as a part of your Neon Project and can be managed via the Neon web UI. A system user `web-access` is used for the SQL Editor in Neon UI and for link authentication for psql. This user cannot be removed or used for authenticating in other scenarios.
+## E
 
-The second user is created for client access. The credentials for that user can be managed, this user's credentials can be used for password-based psql authentication too.
+## F
 
-More Postgres users can be created in Neon UI.
+## G
 
-## Postgres databases
+## H
 
-When a Project is created, a default database for storing data is created along with it, the name of the database is "main". A Neon user can create more databases inside a Project in the Neon UI. Neon users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
+## I
 
-## Project
+## J
 
-A Project is a collection of Postgres databases, Postgres users and other settings on Neon cloud service.
+## K
 
-A Project contains a virtual instance with a Postgres server, also called Compute, as well as the storage used to store the Project data. The amount of virtual resources available for the Project is subject to limits defined by the [Technical Preview Free Tier](../technical-preview-free-tier).
+## L
 
-Compute is stateless and can be automatically activated and suspended due to user activity.
+## M
+
+## N
+
+<a id="neon-api">Neon API</a>
+: The Neon RESTful Application Programming Interface. Any operation performed in the Neon Console can also be performed using the Neon API.
+
+<a id="neon-console">Neon Console</a>
+: A browser-based graphical interface for managing Neon Projects and resources.s
+
+## O
+
+## P
+
+## Q
+
+## R
+
+## S
+
+## T
+
+## U
+
+## V
+
+## W
+
+## X
+
+## Y
+
+## Z
