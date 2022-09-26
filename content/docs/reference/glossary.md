@@ -8,7 +8,7 @@ redirectFrom:
 
 ## A
 
-<a id="access-token">**Access token**</a>
+<a id="access-token">Access token</a>
 
 See [Token](/docs/reference/glossary/#token).
 
@@ -16,11 +16,11 @@ See [Token](/docs/reference/glossary/#token).
 
 A processes that monitors a Neon Compute for activity. During periods of inactivity, the Activity Monitor gracefully places the Compute into an idle state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of complete inactivity. When a connection is made to an idle Compute, the Activity Monitor automatically reactivates the Compute.
 
-<a id="api">**API**</a> 
+<a id="api">API</a> 
 
 See [Neon API](/docs/reference/glossary/#neon-api).
 
-<a id="api-key">**API Key**</a>
+<a id="api-key">API Key</a>
 
 A unique identifier used to authenticate a user or calling program to an API. An API key is required to authenticate to the Neon API. For more information, see [Using API keys](/docs/get-started-with-neon/using-api-keys/).
 
