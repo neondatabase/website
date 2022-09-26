@@ -6,16 +6,18 @@ redirectFrom:
 
 <a id="branches-coming-soon/"></a>
 
-_Neon Branching capabilities are not yet publicly available yet. If you would like to try this feature, reach out to [iwantbranching@neon.tech](iwantbranching@neon.tech) describing your use case and requesting that Neon  enable branching capabilities for your account.
+_Neon branching capabilities are not yet publicly available. If you would like to try this feature, contact Neon at [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching for your account._
 
-A branch is a copy of the project data created from the current state or any past state that is still available. A branch can be independently modified from its originating project data.
+A Branch is a copy of your Neon Project data created from the current state or from a past state that is still available.
 
-You can use a branch to:
+When you create a Branch, all of the data in the parent Project is available in the branched Project, but changes to the Branch afterward are independent of the parent Project and vice versa.
 
-- Run potentially destructive queries without impacting your main branch
+Branch creation does not increase load on the parent Project. You can create a Branch at any time without affecting the performance of your production system, and no downtime is required.
+
+Branching has many possible uses, some of which are outlined below:
+
+- Run potentially destructive queries without impacting your main Branch
 - Run time travel queries against historical state
 - Run a set of queries with separate resources to avoid impacting your application
 - Tag and name the current moment for PITR convenience or ML model training repeatability
-- Run tests against a branch from production data
-
-_Note: The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation._
+- Run tests on a Branch created from production data
