@@ -16,7 +16,6 @@ Branch creation does not increase load on the parent Project. You can create a b
 
 Branching has many possible uses, some of which are outlined below:
 
-- Create a branch of your production database for your Development team
 - Create a branch for each Developer
 -	Quickly and easily create backup branches
 - Run potentially destructive queries without impacting your main branch
