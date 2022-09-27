@@ -18,6 +18,5 @@ Branching has many possible uses, some of which are outlined below:
 
 - Run potentially destructive queries without impacting your main Branch
 - Run time travel queries against historical state
-- Run a set of queries with separate resources to avoid impacting your application
 - Tag and name the current moment for PITR convenience or ML model training repeatability
 - Run tests on a Branch created from production data
