@@ -3,6 +3,7 @@ import React from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import ArrowIcon from 'icons/arrow-right.inline.svg';
 
 const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
   <div className="mt-16 flex w-full space-x-4">
@@ -11,9 +12,10 @@ const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
         to={`${DOCS_BASE_PATH}${previousLink.slug}`}
         size="md"
         theme="black-primary-1"
-        className="mr-auto xs:!leading-tight"
+        className="mr-auto flex xs:items-baseline xs:space-x-3 xs:!leading-tight xs:before:hidden"
       >
-        {previousLink.title}
+        <ArrowIcon className="hidden shrink-0 rotate-180 xs:block" />
+        <span>{previousLink.title}</span>
       </Link>
     )}
     {nextLink && (
@@ -21,9 +23,20 @@ const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
         to={`${DOCS_BASE_PATH}${nextLink.slug}`}
         size="md"
         theme="black-primary-1"
-        className="ml-auto text-right xs:!leading-tight"
+        className="ml-auto flex text-right xs:items-baseline xs:space-x-3 xs:!leading-tight xs:before:hidden"
       >
-        {nextLink.title}
+        <span
+          style={{
+            display: 'webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+            width: '100%',
+          }}
+        >
+          {nextLink.title}
+        </span>
+        <ArrowIcon className="hidden shrink-0 xs:block" />
       </Link>
     )}
   </div>
