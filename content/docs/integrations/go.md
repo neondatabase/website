@@ -4,7 +4,7 @@ redirectFrom:
   - /docs/quickstart/go
 ---
 
-Neon is fully compatible with sql/db package and common Postgres drivers ie. lib/pq, pgx etc.
+Neon is fully compatible with sql/db package and common PostgreSQL drivers ie. lib/pq, pgx etc.
 
 ```go
 package main

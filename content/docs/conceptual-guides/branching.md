@@ -6,7 +6,7 @@ redirectFrom:
 
 <a id="branches-coming-soon/"></a>
 
-_Neon Branching capabilities are not yet publicly available yet. If you would like to try this feature, reach out to [iwantbranching@neon.tech](iwantbranching@neon.tech) describing your use case and requesting that Neon  enable branching capabilities for your account.
+Neon Branching capabilities are not yet publicly available. If you would like to try this feature, reach out to [iwantbranching@neon.tech](iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching capabilities for your account.
 
 A branch is a copy of the project data created from the current state or any past state that is still available. A branch can be independently modified from its originating project data.
 

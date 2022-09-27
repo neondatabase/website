@@ -17,9 +17,9 @@ First, [Create a next.js project](https://nextjs.org/learn/basics/create-nextjs-
 
 Next, create a Neon Project for your app. You can configure your database schema from Neon Console or using tools like Prisma.
 
-## Add Postgres client
+## Add PostgreSQL client
 
-Add Postgres client to your app. In this example we used [postgres.js](https://www.npmjs.com/package/postgres), but feel free to choose another one.
+Add PostgreSQL client to your app. In this example we used [postgres.js](https://www.npmjs.com/package/postgres), but feel free to choose another one.
 
 ## Add Neon credentials
 
@@ -35,9 +35,9 @@ NEON_PORT=...
 
 You can use either a connection string or connection options separately.
 
-## Connect to the Database with Postgres client and Neon Credentials
+## Connect to the Database with a PostgreSQL client and Neon Credentials
 
-Connect to the database with postgres client and your Neon credentials from your api handlers or server functions.
+Connect to the database with PostgreSQL client and your Neon credentials from your api handlers or server functions.
 
 ```javascript pages/api/hello_worlds.js
 import postgres from 'postgres';
