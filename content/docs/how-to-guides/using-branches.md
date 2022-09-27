@@ -1,6 +1,5 @@
 ---
 title: How to Use Branches
-draft: true
 ---
 
 Now that you have access to [branching](https://neon.tech/docs/conceptual-guides/branching.md) on Neon, let's look at how you can use it.
