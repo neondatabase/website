@@ -16,12 +16,39 @@ Branch creation does not increase load on the parent Project. You can create a b
 
 Branching has many possible uses, some of which are outlined below:
 
-- Create a branch for each Developer
--	Quickly and easily create backup branches
-- Run potentially destructive queries without impacting your main branch
-- Run time travel queries against historical state
-- Tag and name the current moment for PITR convenience or ML model training repeatability
-- Run tests on a branch created from production or staging data
--	Test schema changes
--	Run tests in parallel on separate branches, each with its own dedicated compute
-- Run "what if" scenarios on a branch of your production data
+- **Development**
+     - Create a branch for each Developer
+	
+- **Testing** 
+    -	Run tests on a current branch of production or staging data
+    -	Test potentially destructive queries before deploying them to production
+    -	Test schema changes
+    -	Run tests on real data &mdash; branching eliminates the need to hydrate a test database
+    -	Run tests in parallel on separate branches, each with its own dedicated compute
+
+- **Staging**
+    - Create a staging database by branching your production data
+    - Create a branch for every pull request in your CI/CD pipeline
+			
+- **Backup** 
+    -	Quickly and easily create backup branches
+    -	Instantly restore a previous state by branching from a previously created backup branch
+    -	Name backup branches according to the time they were created for convenient point-in-time restore (PITR)
+	
+- **Replication**	
+    - Use branching to quickly and easily clone replicas
+
+- **Historical Analysis**
+    -	Run time-travel queries against a historical state
+    -	Create a branch from a past point in time to reproduce an issue
+	
+- **Simulation**	
+    - Run "what if" scenarios on a branch of your production data
+    - Perform each simulation on its own branch
+	
+- **Analytics**
+    - Run costly queries on a branch of your production data, each with its own resources
+	
+- **Machine Learning**
+    -	Create a branch for ML model training
+    -	Name or tag a branch for a specific point in time for ML model training repeatability
