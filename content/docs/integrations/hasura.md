@@ -5,65 +5,89 @@ redirectFrom:
   - /docs/quickstart/hasura
 ---
 
-### Introduction
+Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
 
-Hasura is a cloud-based GraphQL provider for existing databases. This guide will cover zero-coding integration between Neon cloud service and Hasura Cloud. By the end of this guide, you will have a working HTTP API endpoint that uses GraphQL to query Neon's serverless database and responds with a set of rows.
+The following instructions describe how to connect to a new or existing Neon database from Hasura Cloud.
 
-## Set up a Neon project
+## Connecting to a new Neon database
 
-In this step, you will create or select an existing Neon Project to be used as a data source for Hasura.
+Use the following instructions to connect to a new Neon database that is created for you when connecting a Hasura Cloud project to Neon. This connection method authenticates you with Neon from Hasura Cloud. If you do not have a Neon account, one is created for you.
 
-First, go to the [Neon console](https://console.neon.tech).
+1. Navigate to [Hasura Cloud](https://cloud.hasura.io/signup/?pg=docs&plcmt=body&cta=navigate-to-hasura-cloud&tech=default) and sign up or log in.
+1. Create a Hasura Cloud project.
+    1. On the Hasura Cloud dashboard, select **New Project**.
+    1. After the project is initialized successfully, click **Launch Console** to open the Hasura Console.
+    1. Select **DATA** from the top navigation bar.
+    1. Select the **Create New Database** tab.
+    1. Click **Connect Neon Database**. If you are not logged in to Neon already, you are directed to a Neon authorization dialog.
+    1. Select an authentication option.  
+    1. In the Neon authorization dialog, click **Authorize**.
 
-Next, you will obtain the connection details. Keep your connection details as we will need them later.
+       A message appears at the top right of the Hasura Console indicating that a data source is being added. A subsequent message indicates that the data source was added successfully and provides a **View Database** button, which directs you to the *Data Manager* dialog in the Hasura Console, opened to the default `public` schema your Neon database.
 
-Then, open the Project page, and copy the connection string (`DATABASE_URL`) if you created a new Project.
+To start using your Neon database from the Hasura Console, see [Next steps](#next-steps).
 
-Note: The following method bellow will disconnect all existing clients
+You can also access your new database from the [Neon Console](https://console.neon.tech/app/projects).
+  
+## Connecting to an existing Neon database
 
-Otherwise, if you are using a previously created Project, there are two options: either create a new user or reset password of an existing user to get the complete connection string.
+Use the following instructions to connect to an existing Neon database from Hasura Cloud. The connection is configured manually using a Neon project connection string.
 
-Keep these connection details, we will need them later.
+### Prerequisites
 
-## Add project as a data source in the Hasura cloud project
+- An existing Neon account. If you do not have one, see [Signing up](../get-started-with-neon/signing-up).
+- An existing Neon project. If you do not have a Neon project, see [Setting up a project](../get-started-with-neon/setting-up-a-project.md).
+- A connection string for the Neon project that includes your password. For example:  `postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main`. Your project's connection string can be found on the **Dashboard** tab in the Neon Console. If you have misplaced your password, you can either reset it or create a new user.
 
-In this section, you will head to Hasura Cloud, paste your DATABASE_URL, and connect your project to Hasura.
+### Add the Neon project as a data source
 
-Head over to the [Hasura Cloud projects list](https://cloud.hasura.io/projects).
+In this section, you navigate to Hasura Cloud, where you configure a connection to your Neon project.
 
-Then, create a new Hasura project or launch a console for the existing one.
+1. Navigate to [Hasura Cloud](https://cloud.hasura.io/signup/?pg=docs&plcmt=body&cta=navigate-to-hasura-cloud&tech=default) and sign up or log in.
+1. Click **Create Project** to create a Hasura Cloud project or click **Launch Console** to open an existing project.
+1. Select **DATA** from the top navigation bar. 
+1. On the **Connect Existing Database** tab, paste your connection string into the **Database URL** field.
+1. Enter a display name for your database in the **Database Display Name** field, and click **Connect Database**.
 
-Now, go to the DATA section. In the 'Connect Existing Database' tab, paste DATABASE_URL into the corresponding form field. Give your database an appropriate name, and click connect.
+Hasura Cloud connects to your Neon project and automatically discovers the default `public` schema.
 
-That is mostly it! Hasura Cloud will connect and automatically discover the public schema.
+To start using your Neon database from the Hasura Console, see [Next steps](#next-steps).
 
-Neon will spin up a new compute node for your database when any new connection arrives and suspend it when it is idle.
+## Next steps
 
-## Create a table using the Hasura Console
+Optionally, follow the instructions in this section create a table in your Neon database from the Hasura Console, create an endpoint, and run a `cURL` command using your new endpoint.
 
-Once your database is connected to Hasura, you can then create a table and perform queries.
+### Create a table
 
-Now, you can create the first table using the Hasura Console web interface. Let it be table 't' with a single column 'text' of a type 'Text'. Once created, you can put some rows into it and finally navigate to the API section for endpoint creation.
+After your Neon database is connected to Hasura, you can create a table from the Hasura Console.
 
-In the GraphQL tab, we can query our table with GraphQL, for example:
+1. In Hasura, select **DATA** from the navigation bar and click **Create Table**.
+1. On the **Add a New Table** dialog, enter a table name (`t`), a column name (`text`), and select a column type (`Text`).
+1. Select the `text` column as the **Primary Key**.
+1. Click **Add Table**.
+1. Add rows to the table using the **Insert Row** tab.
 
-```graphql
-query MyQuery {
-  t {
-    text
-  }
-}
-```
+### Create an API endpoint
 
-Then, save this GraphQL query as an HTTP API endpoint by clicking the REST tab. Let us call the endpoint 'query_t'.
+1. Navigate to the **API** tab. On the **GraphiQL** tab, query the table with GraphQL, for example:
 
-Finally, you can use this endpoint to get the table content now.
+    ```graphql
+    query MyQuery {
+      t {
+        text
+      }
+    }
+    ```
 
-Your output on the screen should be similar to the example below:
+2. Save the GraphQL query as an HTTP API endpoint by clicking the **REST** tab. Call the endpoint `query_t` and save it as a `GET` method.
+
+### Run a cURL command
+
+From a terminal, use the endpoint with cURL to query the table contents:
+
+Your terminal should appear similar to the following:
 
 ```bash
-$ curl -H 'x-hasura-admin-secret: {admin_secret}' https://{your_project_name}.hasura.app/api/rest/query_t
+$ curl -H 'x-hasura-admin-secret: {admin_secret}' https://<hasura_project_name>.hasura.app/api/rest/query_t
 {"t":[{"text":"test"}]}
-```
-
-Thanks for your time, and keep hacking!
+ ```
