@@ -56,7 +56,7 @@ To start using your Neon database from the Hasura Console, see [Next steps](#nex
 
 ## Next steps
 
-Optionally, follow the instructions in this section create a table in your Neon database from the Hasura Console, create an endpoint, and run a `cURL` command using the new endpoint.
+Optionally, follow the instructions in this section to create a table in your Neon database from the Hasura Console, create an endpoint, and run a `cURL` command using the new endpoint.
 
 ### Create a table
 
