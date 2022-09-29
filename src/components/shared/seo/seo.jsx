@@ -47,7 +47,7 @@ const SEO = ({
   const currentImagePath = opengraphImagePreview || ogImagePreview || siteUrl + siteImage;
   return (
     <>
-      <title key={currentTitle}>{currentTitle}</title>
+      <title>{currentTitle}</title>
       {/* General */}
       <meta name="description" content={currentDescription} />
       {metaKeywords ? <meta name="keywords" content={metaKeywords} /> : null}
