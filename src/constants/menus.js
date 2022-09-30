@@ -1,3 +1,8 @@
+import Discourse from '../icons/discourse.inline.svg';
+import Github from '../icons/github.inline.svg';
+import LinkedIn from '../icons/linkedin.inline.svg';
+import Twitter from '../icons/twitter.inline.svg';
+
 import LINKS from './links';
 
 export default {
@@ -85,11 +90,11 @@ export default {
       heading: 'Social',
       links: [
         {
-          text: 'Twitter',
+          Icon: Twitter,
           to: LINKS.twitter,
         },
         {
-          text: 'LinkedIn',
+          Icon: LinkedIn,
           to: LINKS.linkedin,
         },
         // {
@@ -97,8 +102,12 @@ export default {
         //   to: LINKS.discord,
         // },
         {
-          text: 'Github',
+          Icon: Github,
           to: LINKS.github,
+        },
+        {
+          Icon: Discourse,
+          to: LINKS.discourse,
         },
       ],
     },

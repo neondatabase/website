@@ -1,8 +1,6 @@
 export default {
   docs: '/docs/cloud/about/',
-  // team: '/team/',
   aboutUs: '/about-us/',
-  // jobs: '/jobs/',
   careers: '/careers/',
   blog: '/blog/',
   earlyAccess: '/early-access/',
