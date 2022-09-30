@@ -1,9 +1,9 @@
 export default {
-  jobs: {
-    title: 'Jobs — Neon',
+  careers: {
+    title: 'Careers — Neon',
   },
-  team: {
-    title: 'Our Team — Neon',
+  aboutUs: {
+    title: 'About Us — Neon',
   },
   earlyAccess: {
     title: 'Get Early Access — Neon',

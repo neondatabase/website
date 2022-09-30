@@ -7,12 +7,12 @@ export default {
       to: LINKS.docs,
     },
     {
-      text: 'Team',
-      to: LINKS.team,
+      text: 'About Us',
+      to: LINKS.aboutUs,
     },
     {
-      text: 'Jobs',
-      to: LINKS.jobs,
+      text: 'Careers',
+      to: LINKS.careers,
     },
     {
       text: 'Blog',
@@ -42,41 +42,42 @@ export default {
       heading: 'Company',
       links: [
         {
-          text: 'Team',
-          to: LINKS.team,
-        },
-        {
-          text: 'Jobs',
-          to: LINKS.jobs,
-        },
-        {
           text: 'Blog',
           to: LINKS.blog,
         },
         {
-          text: 'Release notes',
-          to: LINKS.releaseNotes,
+          text: 'About Us',
+          to: LINKS.aboutUs,
         },
+        {
+          text: 'Careers',
+          to: LINKS.careers,
+        },
+
+        // {
+        //   text: 'Release notes',
+        //   to: LINKS.releaseNotes,
+        // },
       ],
     },
     {
       heading: 'Resources',
       links: [
         {
-          text: 'Neon docs',
+          text: 'Docs',
           to: LINKS.docs,
         },
         {
-          text: 'PostgreSQL docs',
-          to: LINKS.postgresDocs,
+          text: 'Release notes',
+          to: LINKS.releaseNotes,
         },
+        // {
+        //   text: 'PostgreSQL docs',
+        //   to: LINKS.postgresDocs,
+        // },
         {
           text: 'Security',
           to: LINKS.security,
-        },
-        {
-          text: 'PostgreSQL mailing lists',
-          to: LINKS.postgresList,
         },
       ],
     },
@@ -121,12 +122,12 @@ export default {
       to: LINKS.docs,
     },
     {
-      text: 'Team',
-      to: LINKS.team,
+      text: 'About Us',
+      to: LINKS.aboutUs,
     },
     {
-      text: 'Jobs',
-      to: LINKS.jobs,
+      text: 'Careers',
+      to: LINKS.careers,
     },
     {
       text: 'Blog',
