@@ -23,7 +23,7 @@ To create a Neon project:
 2. Click **New Project**.
 3. Enter a name for your project and click **Create Project**.
 
-For additional information about creating projects, see [Setting up a project](../get-started-with-neon/setting-up-a-project).
+For additional information about creating projects, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
 
 ## Configure Django project connection settings
 
