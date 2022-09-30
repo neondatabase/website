@@ -46,8 +46,6 @@
       slug: integrations/java
     - title: Node.js
       slug: integrations/node
-    - title: PostgreSQL
-      slug: integrations/postgres
     - title: Rust
       slug: integrations/rust
     - title: SQLAlchemy

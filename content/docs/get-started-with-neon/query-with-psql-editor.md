@@ -1,9 +1,14 @@
 ---
 title: Query with psql
 enableTableOfContents: true
+redirectFrom:
+  - /docs/quickstart/postgres
+  - /docs/integrations/postgres
 ---
 
 The following steps require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/14/app-psql.html), in the _PostgreSQL Documentation_. 
+
+_**Note**:_ A Neon Compute runs regular PostgreSQL, which means that any PostgreSQL application or standard utility such as `psql` is compatible with Neon. You can also use PostgreSQL client libraries and drivers to connect.
 
 ## Connecting with Neon's psql quick auth
 
