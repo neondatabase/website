@@ -17,7 +17,7 @@ To create a Neon project and access it from a Next.js app:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your project ID, database name, user, password, and port number. This information is required when defining your connection settings. Neon provides the password to you immediately after you create a project.
+When creating a Neon project, take note of your project ID, database name, user, password, and port number. This information is required when defining your connection settings. 
 
 To create a Neon project:
 
@@ -29,15 +29,15 @@ For additional information about creating projects, see [Setting up a project](/
 
 ## Create a Next.js project
 
-Create a next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app/setup), in the Vercel documentation.
+Create a Next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app/setup), in the Vercel documentation.
 
 ## Add a PostgreSQL client to your app
 
-Add a Postgres client to your app, such as `Postgres.js`.  For instructions, refer to the [postgres.js Getting started](https://www.npmjs.com/package/postgres).
+Add a PostgreSQL client to your app, such as `Postgres.js`.  For instructions, refer to the [postgres.js Getting started](https://www.npmjs.com/package/postgres).
 
 ## Add your Neon connection details
 
-Add your Neon connection details to the `.env` file.
+Add your Neon connection details to your `.env` file.
 
 ```shell
 NEON_HOST='<project_id>.cloud.neon.tech'
