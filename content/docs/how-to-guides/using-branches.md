@@ -4,7 +4,7 @@ title: How to Use Branches
 
 Now that you have access to [branching](https://neon.tech/docs/conceptual-guides/branching.md) on Neon, let's look at how you can use it.
 
-Branching allows you to create a copy of your data so that you can modify a version of your project data without changing your production data.
+Branching allows you to create a copy of your Project data which you can modify without affecting the data you have in production.
 
 A new branch has all the same data that your project had when you first created the branch, but future changes to the data in your project won't update your branch.
 
