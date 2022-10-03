@@ -6,7 +6,7 @@ Now that you have access to [branching](https://neon.tech/docs/conceptual-guides
 
 Branching allows you to create a copy of your Project data which you can modify without affecting the data you have in production.
 
-A new branch has all the same data that your project had when you first created the branch, but future changes to the data in your project won't update your branch.
+A branch is created with the same data that existed in your Project at the time the branch was created, but future changes to your Project data do not affect the branch.
 
 Below is a guide to using branching in your project.
 
