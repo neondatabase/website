@@ -67,7 +67,7 @@ export default {
           to: LINKS.docs,
         },
         {
-          text: 'Postgres docs',
+          text: 'PostgreSQL docs',
           to: LINKS.postgresDocs,
         },
         {
@@ -75,7 +75,7 @@ export default {
           to: LINKS.security,
         },
         {
-          text: 'Postgres mailing lists',
+          text: 'PostgreSQL mailing lists',
           to: LINKS.postgresList,
         },
       ],
