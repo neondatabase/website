@@ -11,24 +11,24 @@ The following instructions describe how to connect to a new or existing Neon dat
 
 ## Connecting to a new Neon database
 
-Use the following instructions to connect to a new Neon database that is created for you when connecting a Hasura Cloud project to Neon. This connection method authenticates you with Neon from Hasura Cloud. If you do not have a Neon account, one is created for you.
+Use the following instructions to connect to a new Neon database. The database is created for you when you connect your Hasura Cloud project to Neon. This connection method authenticates you from Hasura Cloud. If you do not have a Neon account, one is created for you.
 
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
 1. On the Hasura Cloud dashboard, select **New Project** to create a Hasura project.
-1. After the project is initialized successfully, click **Launch Console** to open the Hasura Console.
+1. After the project is initialized, click **Launch Console** to open the Hasura Console.
 1. Select **DATA** from the top navigation bar.
 1. Select the **Create New Database** tab.
 1. Click **Connect Neon Database**. If you are not logged in to Neon already, you are directed to a Neon authorization dialog.
 1. Select an authentication option.  
 1. In the Neon authorization dialog, click **Authorize**.
 
-    A message appears at the top right of the Hasura Console indicating that a data source is being added. A subsequent message indicates that the data source was added successfully and provides a **View Database** button, which directs you to the **Data Manager** dialog in the Hasura Console, opened to the default `public` schema in your Neon database.
+    A message appears at the top right of the Hasura Console indicating that a data source is being added. A subsequent message indicates that the data source was added successfully and provides a **View Database** button, which directs you to the **Data Manager** dialog in the Hasura Console, opened to the default `public` schema in Neon.
 
 To start using your Neon database from the Hasura Console, see [Next steps](#next-steps).
 
 ## Connecting to an existing Neon database
 
-Use the following instructions to connect to an existing Neon database from Hasura Cloud. The connection is configured manually using a Neon project connection string.
+Use the following instructions to connect to an existing Neon database from Hasura Cloud. The connection is configured manually using a connection string.
 
 ### Prerequisites
 
@@ -38,7 +38,7 @@ Use the following instructions to connect to an existing Neon database from Hasu
   ```sh
   `postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main`.
   ```
-  Your project's connection string can be found on the **Dashboard** tab in the Neon Console. If you have misplaced your password, you can either reset it or create a new project user. Users are managed on the **Settings** tab in the Neon Console.
+  Your project's connection string can be found on the **Dashboard** tab in the Neon Console. If you have misplaced your password, you can either reset it or create a new user. Users are managed on the **Settings** tab in the Neon Console.
 
 ### Add the Neon project as a data source
 
@@ -60,7 +60,7 @@ Optionally, follow the instructions in this section to create a table in your Ne
 
 ### Create a table
 
-After your Neon database is connected to Hasura, you can create a table from the Hasura Console.
+After connecting from your Hasura project to a Neon database, you can create a table from the Hasura Console.
 
 1. In Hasura, select **DATA** from the navigation bar and click **Create Table**.
 1. On the **Add a New Table** dialog, enter a table name (`t`), a column name (`text`), and select a column type (`Text`).
