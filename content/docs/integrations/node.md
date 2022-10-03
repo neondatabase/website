@@ -19,7 +19,7 @@ To connect to Neon from a NodeJS project:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your project ID, database name, user, and password. This information is required when configuring connection settings. Neon provides the password to you immediately after you create a project.
+When creating a Neon project, take note of your project ID, database name, user, and password. This information is required when configuring connection settings. 
 
 To create a Neon project:
 
@@ -59,10 +59,10 @@ PROJECT_NAME='<project_id>'
 
 where:
 
-- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**
+- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
 - `<dbname>` is the name of the database in your Neon project. `main` is the default database created with each Neon project.
-- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**
-- `<password>` is the database user's password, which is provided to you when you create a project
+- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<password>` is the database user's password, which is provided to you when you create a project.
 
 **_Important_**: To ensure the security of your data, never expose your Neon credentials to the browser.
 
