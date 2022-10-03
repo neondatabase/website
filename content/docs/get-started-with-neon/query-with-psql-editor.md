@@ -3,11 +3,19 @@ title: Query with psql
 enableTableOfContents: true
 ---
 
-The following steps require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/14/app-psql.html), in the _PostgreSQL Documentation_. 
+The following instructions require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/14/app-psql.html), in the _PostgreSQL Documentation_.
 
-## Connecting with Neon's psql quick auth
+The following `psql` connection methods are described:
 
-Neon's `psql` quick auth feature helps you quickly and conveniently authenticate a connection to a Neon project.
+- [Passwordless connect with Neon's psql quick auth](#passwordless-connect-with-neons-psql-quick-auth)
+- [Connecting with an exported password](#connecting-with-an-exported-password)
+- [Connecting with a password saved to a file](#connecting-with-a-password-saved-to-a-file)
+
+After establishing a connection, try running some queries. For instructions, see [Running queries](#running-queries).
+
+## Passwordless connect with Neon's psql quick auth
+
+Neon's passwordless `psql` quick auth feature helps you quickly and conveniently authenticate a connection to a Neon project.
 
 1. In your terminal, run the following command:
 
@@ -28,7 +36,7 @@ Neon's `psql` quick auth feature helps you quickly and conveniently authenticate
     - Selecting an existing project authenticates your connection to the selected project.
     - Selecting **Create new project** directs you to a **Project creation** page where you create a new project to connect to.
 
-    After making your selection, you are directed to check the terminal. In the terminal, you are connected to the project, and connection information similar to the following is displayed:
+    After making your selection, you are directed to check the terminal. In the terminal, you are connected to the project and connection information similar to the following is displayed:
 
     ```bash
     NOTICE:  Connecting to database.
@@ -40,7 +48,7 @@ Neon's `psql` quick auth feature helps you quickly and conveniently authenticate
 
     **_Note_**: When using _`psql` quick auth_ to connect, the `psql` prompt shows your local terminal user name instead of the database name that is shown for the other `psql` connection methods described in this topic. However, you are logged in to the default `main` database as the Neon `web_access` user, which you can verify by running this query:
 
-    ```bash
+    ```sql
     SELECT current_user;
      current_user 
     --------------
@@ -80,8 +88,8 @@ To connect with an exported password:
 
     where:
 
-    - `<user>` is the database user, which can be found on the Neon Console **Dashboard** tab, under **Connection Details**. 
-    - `<project_id>` is the Neon Project ID, which can be found on the Neon Console **Settings** tab, under **General Settings**.
+    - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**. 
+    - `<project_id>` is the Neon Project ID, which is found on the Neon Console **Settings** tab, under **General Settings**.
 
 ## Connecting with a password saved to a file
 
@@ -92,8 +100,9 @@ To connect with a password saved to a `.pgpass` password file:
     ```bash
     touch ~/.pgpass && \
     chmod 0600 ~/.pgpass && \
-    echo -e "<project_id>.cloud.neon.tech:5432:main:<user>:<password>\n$(cat ~/.pgpass)" >> ~/.pgpass
+    echo -e "<project_id>.cloud.neon.tech:5432:main:<user>:<password>\n" >> ~/.pgpass
     ```
+    _**Note**_: If you already have a `.pgpass` file, you only need to run the `echo` command.
 
 2. Connect with the following command:
 
@@ -103,9 +112,9 @@ To connect with a password saved to a `.pgpass` password file:
 
     where:
 
-    - `<project_id>` is the ID of the Neon project, which can be found on the Neon Console **Settings** tab, under **General Settings**.
-    - `<password>` is the database user's password, which was provided to you when you created the project.
-    - `<user>` is the database user, which can be found on the Neon Console **Dashboard** tab, under **Connection Details**.
+    - `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
+    - `<password>` is the database user's password, which is provided to you when you create a Neon project.
+    - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
 
 ## Running queries
 
