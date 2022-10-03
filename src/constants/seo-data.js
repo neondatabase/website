@@ -22,10 +22,7 @@ export default {
     title: `${title} — Neon Docs`,
     description,
   }),
-  releaseNotes: {
-    title: 'Release notes — Neon',
-  },
-  changelogPost: ({ title }) => ({
+  releaseNotePost: ({ title }) => ({
     title: `${title} — Neon`,
   }),
   404: {

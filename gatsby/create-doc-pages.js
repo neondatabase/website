@@ -13,7 +13,7 @@ const {
 const generateDocPagePath = require('../src/utils/generate-doc-page-path');
 const getDocPreviousAndNextLinks = require('../src/utils/get-doc-previous-and-next-links');
 
-const { DRAFT_FILTER, DOC_REQUIRED_FIELDS, RELEASE_NOTES_REQUIRED_FIELDS } = require('./constants');
+const { DRAFT_FILTER, DOC_REQUIRED_FIELDS } = require('./constants');
 const createRedirects = require('./create-redirects');
 
 const sidebar = jsYaml.load(fs.readFileSync(path.resolve('./content/docs/sidebar.yaml'), 'utf8'));
@@ -54,15 +54,8 @@ module.exports = async ({ graphql, actions }) => {
             fields: { isDraft: { in: $draftFilter } }
             slug: { ne: "release-notes" }
           }
-          sort: { fields: slug, order: ASC }
         ) {
           totalCount
-          nodes {
-            slug
-            frontmatter {
-              label
-            }
-          }
         }
       }
     `,
@@ -72,7 +65,6 @@ module.exports = async ({ graphql, actions }) => {
   if (result.errors) throw new Error(result.errors);
 
   const pages = result.data.allDocs.nodes;
-  const releaseNotes = result.data.allReleaseNotes.nodes;
   const pageReleaseNotesCount = Math.ceil(
     result.data.allReleaseNotes.totalCount / RELEASE_NOTES_PER_PAGE
   );
@@ -112,15 +104,6 @@ module.exports = async ({ graphql, actions }) => {
     });
 
     if (isReleaseNotes) {
-      // Required fields validation
-      releaseNotes.forEach(({ slug, frontmatter }) => {
-        RELEASE_NOTES_REQUIRED_FIELDS.forEach((fieldName) => {
-          if (!get(frontmatter, fieldName)) {
-            throw new Error(`Release note "${slug}" does not have field "${fieldName}"!`);
-          }
-        });
-      });
-
       Array.from({ length: pageReleaseNotesCount }).forEach((_, i) => {
         const releaseNotesPath =
           i === 0 ? RELEASE_NOTES_BASE_PATH : `${RELEASE_NOTES_BASE_PATH}${i + 1}`;
