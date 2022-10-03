@@ -6,8 +6,6 @@ redirectFrom:
   - /docs/cloud/concepts/
 ---
 
-## Glossary
-
 ### Access token
 
 See [Token](#token).
