@@ -58,7 +58,7 @@ const queries = [
     transformer: ({ data }) =>
       data.releaseNotes.nodes.map(({ id, slug, frontmatter: { label }, excerpt }) => ({
         objectID: id,
-        title: label,
+        title: `${label} release`,
         slug: generateReleaseNotePath(slug),
         excerpt,
       })),
