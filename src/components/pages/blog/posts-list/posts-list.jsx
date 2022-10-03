@@ -19,7 +19,9 @@ const PostsList = ({ items }) => (
                 image={getImage(author.postAuthor?.image?.localFile)}
                 alt={author.title}
               />
-              <span className="t-lg ml-3 font-semibold xs:ml-1.5">{author.title}</span>
+              <span className="t-lg ml-3 font-semibold transition-colors duration-200 group-hover:text-primary-1 xs:ml-1.5 ">
+                {author.title}
+              </span>
             </div>
           );
 
@@ -35,7 +37,9 @@ const PostsList = ({ items }) => (
               </h1>
               <div className="mt-5 flex items-center justify-between 2xl:mt-4">
                 {postAuthor && author.postAuthor.url ? (
-                  <Link to={author.postAuthor.url}>{postAuthor}</Link>
+                  <Link className="group" to={author.postAuthor.url}>
+                    {postAuthor}
+                  </Link>
                 ) : (
                   postAuthor
                 )}
