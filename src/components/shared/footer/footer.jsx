@@ -41,7 +41,7 @@ const Footer = () => (
               className={clsx(
                 'flex',
                 heading === 'Social'
-                  ? 'mt-8 gap-3.5 px-[42px] xl:flex-wrap xl:px-[5px]'
+                  ? 'mt-8 gap-3.5 px-[42px] hover:text-black xl:flex-wrap xl:px-[5px]'
                   : 'mt-10 grow flex-col space-y-6 px-10 pb-14 2xl:mt-8 2xl:px-8 2xl:pb-11 xl:px-0 md:mt-6 md:space-y-5 md:pb-0'
               )}
             >
@@ -57,7 +57,7 @@ const Footer = () => (
                     className={clsx(
                       'relative',
                       heading === 'Social' &&
-                        'flex h-[38px] w-[38px] items-center justify-center rounded-full border-2 border-black bg-white transition-transform duration-200 hover:translate-y-0.5 hover:-translate-x-0.5 hover:text-black'
+                        'flex h-[38px] w-[38px] items-center justify-center rounded-full border-2 border-black bg-white transition-transform duration-200 hover:translate-y-0.5 hover:-translate-x-0.5 hover:!text-black'
                     )}
                     to={to}
                     theme="black"
