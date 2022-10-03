@@ -14,7 +14,7 @@ To connect to Neon from a Go project:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your user name, password, database name, and project ID. This information is required when defining connection settings in your Go project. Neon provides the password to you immediately after you create a project.
+When creating a Neon project, take note of your user name, password, database name, and project ID. This information is required when defining connection settings in your Go project. 
 
 To create a Neon project:
 
@@ -70,9 +70,9 @@ func main() {
 
 where:
 
-- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**
-- `<password>` is the database user's password, which is provided to you when you create a project
+- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<password>` is the database user's password, which is provided to you when you create a project.
 - `<dbname>` is the name of the database in your Neon project. `main` is the default database created with each Neon project.
-- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**
+- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
 
 The `.go` file example shown above is also available on [The Go Playground](https://play.golang.com/p/gl69dT0HtHN).
