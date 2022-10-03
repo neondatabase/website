@@ -7,7 +7,7 @@ const JobsList = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch(`https://boards-api.greenhouse.io/v1/boards/neondatabase/careers?content=true`)
+    fetch(`https://boards-api.greenhouse.io/v1/boards/neondatabase/jobs?content=true`)
       .then((response) => response.json())
       .then(({ jobs }) => {
         const jobsByDepartmentAsObject = {};
