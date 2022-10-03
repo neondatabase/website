@@ -49,7 +49,11 @@ module.exports = async ({ graphql, actions }) => {
           }
         }
         allReleaseNotes: allMdx(
-          filter: { fileAbsolutePath: { regex: "/release-notes/" }, slug: { ne: "release-notes" } }
+          filter: {
+            fileAbsolutePath: { regex: "/release-notes/" }
+            fields: { isDraft: { in: $draftFilter } }
+            slug: { ne: "release-notes" }
+          }
           sort: { fields: slug, order: ASC }
         ) {
           totalCount
@@ -129,6 +133,7 @@ module.exports = async ({ graphql, actions }) => {
             pageCount: pageReleaseNotesCount,
             limit: RELEASE_NOTES_PER_PAGE,
             skip: i * RELEASE_NOTES_PER_PAGE,
+            draftFilter: DRAFT_FILTER,
             ...context,
           },
         });

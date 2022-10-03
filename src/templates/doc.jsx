@@ -17,9 +17,9 @@ import Search from 'components/shared/search';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
 
-const ReleaseNotes = ({ nodes, pageCount, currentPageIndex }) => (
+const ReleaseNotes = ({ title, nodes, pageCount, currentPageIndex }) => (
   <>
-    <Hero />
+    <Hero title={title} />
     <ReleaseNoteList items={nodes} />
     {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />}
   </>
@@ -60,6 +60,7 @@ const DocTemplate = ({
           >
             {isReleaseNotes ? (
               <ReleaseNotes
+                title={title}
                 nodes={nodes}
                 pageCount={pageCount}
                 currentPageIndex={currentPageIndex}
@@ -80,7 +81,7 @@ const DocTemplate = ({
 };
 
 export const query = graphql`
-  query ($id: String!, $limit: Int, $skip: Int) {
+  query ($id: String!, $limit: Int, $skip: Int, $draftFilter: [Boolean]) {
     mdx(id: { eq: $id }) {
       excerpt(pruneLength: 160)
       body
@@ -90,7 +91,11 @@ export const query = graphql`
       }
     }
     allMdx(
-      filter: { fileAbsolutePath: { regex: "/release-notes/" }, slug: { ne: "release-notes" } }
+      filter: {
+        fileAbsolutePath: { regex: "/release-notes/" }
+        slug: { ne: "release-notes" }
+        fields: { isDraft: { in: $draftFilter } }
+      }
       sort: { order: DESC, fields: slug }
       limit: $limit
       skip: $skip
