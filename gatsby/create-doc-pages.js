@@ -52,7 +52,7 @@ module.exports = async ({ graphql, actions }) => {
           filter: {
             fileAbsolutePath: { regex: "/release-notes/" }
             fields: { isDraft: { in: $draftFilter } }
-            slug: { ne: "release-notes" }
+            slug: { nin: ["release-notes", "RELEASE_NOTES_TEMPLATE"] }
           }
         ) {
           totalCount

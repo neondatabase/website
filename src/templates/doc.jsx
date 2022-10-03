@@ -93,7 +93,7 @@ export const query = graphql`
     allMdx(
       filter: {
         fileAbsolutePath: { regex: "/release-notes/" }
-        slug: { ne: "release-notes" }
+        slug: { nin: ["release-notes", "RELEASE_NOTES_TEMPLATE"] }
         fields: { isDraft: { in: $draftFilter } }
       }
       sort: { order: DESC, fields: slug }

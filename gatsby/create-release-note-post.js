@@ -13,7 +13,7 @@ module.exports = async ({ graphql, actions }) => {
         allMdx(
           filter: {
             fileAbsolutePath: { regex: "/release-notes/" }
-            slug: { ne: "release-notes" }
+            slug: { nin: ["release-notes", "RELEASE_NOTES_TEMPLATE"] }
             fields: { isDraft: { in: $draftFilter } }
           }
         ) {
