@@ -1,5 +1,6 @@
 ---
 title: Integrations
+isDraft: true
 ---
 
 To see **Cloud deployments**,
