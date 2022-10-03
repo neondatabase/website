@@ -15,7 +15,7 @@ To connect to Neon from a Django project:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your user name, password, and project ID. This information is required when defining connection settings in your Django project. Neon provides the password to you immediately after you create a project.
+When creating a Neon project, take note of your project ID, user name, and password. This information is required when defining connection settings in your Django project.
 
 To create a Neon project:
 
@@ -47,9 +47,9 @@ DATABASES = {
 where:
 
 - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
-- `<password>` is the database user's password, which is provided to you when you create a project
+- `<password>` is the database user's password, which is provided to you when you create a project.
 - `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
 
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings/#databases), in the Django documentation.
 
-**_Note_**: Running Django tests is currently not supported. The Django test runner must be able to create a database for tests, which is not yet supported.
+**_Note_**: Running Django tests is currently not supported. The Django test runner must be able to create a database for tests, which is not yet supported by Neon.
