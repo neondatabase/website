@@ -7,7 +7,7 @@ redirectFrom:
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This topic describes how to create a Neon project and connect to it from SQLAlchemy.
 
-Prerequisite:
+**Prerequisites:**
 
 To complete the steps in this topic, ensure that you have an SQLAlchemy installation with a PostgreSQL driver. The following instructions use `psycopg2`, the default driver for PostgreSQL in SQLAlchemy. For SQLAlchemy installation instructions, refer to the [SQLAlchemy Installation Guide](https://docs.sqlalchemy.org/en/14/intro.html#installation). `psycopg2` installation instructions are provided below.
 
@@ -40,7 +40,7 @@ pip install psycopg2-binary
 For additional information about installing `psycopg2`, refer to the [psycopg2 installation documentation](https://www.psycopg.org/docs/install.html).
 
 
-# Create the "hello neon" program
+## Create the "hello neon" program
 
 ```python
 import psycopg2
