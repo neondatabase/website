@@ -11,8 +11,7 @@ To create a Neon project and connect to it from Prisma:
 
 1. [Create a Neon project](#create-a-neon-project)
 2. [Connect to Neon from Prisma](#connect-to-neon-from-prisma)
-
-To configure a shadow database for Prisma Migrate, see [Configure a shadow database for Prisma Migrate](#configure-a-shadow-database-for-prisma-migrate).
+3. Optionally, [Configure a shadow database for Prisma Migrate](#configure-a-shadow-database-for-prisma-migrate).
 
 ## Create a Neon project
 
@@ -29,12 +28,12 @@ To connect to Neon from Prisma:
 
 1. Add the following lines to `prisma/schema.prisma` to identify the data source and database URL:
 
-```typescript
-datasource db {
-  provider = "postgresql"
-  url   = env("DATABASE_URL")
-}
-```
+    ```typescript
+    datasource db {
+      provider = "postgresql"
+      url   = env("DATABASE_URL")
+    }
+    ```
 
 2. Add a `DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon project connection string that you copied in the previous step.
 
@@ -44,9 +43,9 @@ datasource db {
 
 where:
 
-- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**
-- `<password>` is the database user's password, which is provided to you when you create a Neon project
-- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**
+- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<password>` is the database user's password, which is provided to you when you create a Neon project.
+- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
 
 
 ## Configure a shadow database for Prisma Migrate
@@ -73,6 +72,4 @@ To configure a shadow database:
     SHADOW_DATABASE_URL="postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main"
     ```
 
-    where `SHADOW_DATABASE_URL` specifies the connection string to the second Neon project
-
-For additional information about shadow databases, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the Prisma Documentation.
+For additional information about shadow databases, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the Prisma documentation.
