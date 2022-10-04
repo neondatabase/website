@@ -63,9 +63,9 @@ Branching has many possible uses, some of which are outlined below:
 
 A branch has the following characteristics:
 
-- A branch compute has 1 vCPU and 256 MB of RAM, which is the same as a project
+- A branch compute has 1 vCPU and 256 MB of RAM
 - Branches are read-write 
-- A branch supports a single endpoint, which is the URL address for performing actions on the branch from the Neon API.
+- A branch supports a single endpoint, which is the URL address required to perform actions on the branch using the Neon API.
 - A branch can be created without an endpoint. An endpoint may not be required for certain use cases, such as backups.
 - A branch endpoint can be deleted
 - The endpoint associated with the branch is deleted when a branch is deleted.
