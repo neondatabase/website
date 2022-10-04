@@ -1,9 +1,9 @@
 export default {
-  jobs: {
-    title: 'Jobs — Neon',
+  careers: {
+    title: 'Careers — Neon',
   },
-  team: {
-    title: 'Our Team — Neon',
+  aboutUs: {
+    title: 'About Us — Neon',
   },
   earlyAccess: {
     title: 'Get Early Access — Neon',
@@ -22,10 +22,7 @@ export default {
     title: `${title} — Neon Docs`,
     description,
   }),
-  releaseNotes: {
-    title: 'Release notes — Neon',
-  },
-  changelogPost: ({ title }) => ({
+  releaseNotePost: ({ title }) => ({
     title: `${title} — Neon`,
   }),
   404: {

@@ -9,7 +9,7 @@ import SEO from 'components/shared/seo';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
 import SEO_DATA from 'constants/seo-data';
 
-const JobsPage = () => (
+const CareersPage = () => (
   <Layout headerTheme="black">
     <Hero />
     <JobsList />
@@ -27,7 +27,7 @@ export const query = graphql`
   }
 `;
 
-export default JobsPage;
+export default CareersPage;
 
 export const Head = ({ location: { pathname }, data: { ogImage } }) => (
   <SEO pathname={pathname} ogImage={ogImage} {...SEO_DATA.jobs} />
