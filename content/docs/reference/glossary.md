@@ -40,7 +40,7 @@ A service that provides virtualized computing resources (CPU, memory, and storag
 
 A method of creating a pool of connections and caching those connections for reuse. Neon uses `pgbouncer` in `transaction mode` for connection pooling. Neon’s connection pooling feature can be enabled or disabled for a Project on the **Settings** tab, under **General Settings**.
 
-### Connection String
+### Connection string
 
 A string containing details for connecting to a Neon Project. The details include a user name, Project ID, host address, port number, and database name; for example:
 
@@ -163,10 +163,6 @@ An encrypted access token that enables users to authenticate with Neon using the
 ### User
 
 See [Neon user](#neon-user) and [PostgreSQL user](#postgresql-user).
-
-### Vanilla PostgreSQL
-
-Refers to the standard PostgreSQL open-source database system, maintained by the [PostgreSQL project](https://www.postgresql.org/). 
 
 ### WAL
 
