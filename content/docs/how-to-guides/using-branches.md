@@ -10,7 +10,7 @@ A branch is created with the same data that existed in your Project at the time 
 
 The following guide describes how to using branching in your project.
 
-Branches currently appear as a whole new project in the Neon UI and API, but when branches become available to all users, you'll be able to find them within their parent project.
+Branches currently appear as a new project in the Neon Console and API, but when the branching feature is made available to all users, branches will be associated with their parent Project.
 
 ---
 Let's look at how you can create branches using either the Neon Dashboard or the Neon API.
