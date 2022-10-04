@@ -17,7 +17,7 @@ Let's look at how to create branches using the Neon Console and the Neon API.
 
 Create a Project on Neon and Add Your Data
 ===============
-Log in to Neon and create a project on Neon in the UI: https://console.neon.tech
+Log in to Neon and create a project in the Neon Console: [https://console.neon.tech](https://console.neon.tech)
 Add some data using the SQL Editor in the UI, psql, or any other Postgres client.
 
 Our docs have more information about how to create a project :
