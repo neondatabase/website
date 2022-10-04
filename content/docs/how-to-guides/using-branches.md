@@ -49,4 +49,4 @@ Currently, a branch appears as separate Project on the **Dashboard** tab in the 
 All the data in the parent project when you create the branch will be available in the branched project as well.
 Future changes to the data in the parent and the branch are independent, so you can make changes to the branch without affecting your parent project.
 
-Learn More About [Branching](https://neon.tech/docs/conceptual-guides/branching.md) in Neon
+To learn more about Neon's branching feature, see [Branching](https://neon.tech/docs/conceptual-guides/branching.md), in the Neon documentation.
