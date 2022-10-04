@@ -20,7 +20,7 @@ Create a Project in Neon and add your data
 Log in to Neon and create a project in the Neon Console: [https://console.neon.tech](https://console.neon.tech)
 Add data to your Project using the Neon SQL Editor, `psql`, or some other PostgreSQL client.
 
-Our docs have more information about how to create a project :
+Refer to the Neon documentation for information about creating a Project:
 https://neon.tech/docs/cloud/getting-started/
 https://neon.tech/docs/cloud/tutorials/
 https://neon.tech/docs/quickstart/postgres/
