@@ -26,7 +26,7 @@ https://neon.tech/docs/cloud/tutorials/
 https://neon.tech/docs/quickstart/postgres/
 
 After creating a Project and adding data, click **Create branch** on the **Dashboard** tab in the Neon Console to create a branch.
-Alternatively, you can use the Neon API to create your branch.
+Alternatively, you can use the Neon API to create a branch.
 
 Create a Branch Using the API
 ======================================
