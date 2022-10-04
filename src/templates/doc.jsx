@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import clsx from 'clsx';
 import { graphql } from 'gatsby';
 import React, { useRef } from 'react';
 
@@ -6,6 +7,9 @@ import MobileNav from 'components/pages/doc/mobile-nav';
 import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
 import Sidebar from 'components/pages/doc/sidebar';
 import TableOfContents from 'components/pages/doc/table-of-contents';
+import Hero from 'components/pages/release-notes/hero';
+import Pagination from 'components/pages/release-notes/pagination';
+import ReleaseNoteList from 'components/pages/release-notes/release-note-list';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Layout from 'components/shared/layout';
@@ -13,15 +17,30 @@ import Search from 'components/shared/search';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
 
+const ReleaseNotes = ({ title, nodes, pageCount, currentPageIndex }) => (
+  <>
+    <Hero title={title} />
+    <ReleaseNoteList items={nodes} />
+    {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />}
+  </>
+);
 const DocTemplate = ({
   data: {
     mdx: {
-      slug,
       body,
       frontmatter: { title, enableTableOfContents },
     },
+    allMdx: { nodes },
   },
-  pageContext: { sidebar, previousLink, nextLink },
+  pageContext: {
+    sidebar,
+    currentSlug,
+    isReleaseNotes,
+    previousLink,
+    nextLink,
+    pageCount,
+    currentPageIndex,
+  },
 }) => {
   const contentRef = useRef(null);
 
@@ -32,15 +51,26 @@ const DocTemplate = ({
           <Sidebar
             className="col-start-2 col-end-4 pt-3 2xl:col-start-1 lg:hidden"
             sidebar={sidebar}
-            currentSlug={slug}
+            currentSlug={currentSlug}
           />
           <Search className="hidden lg:block" />
-          <MobileNav className="mt-5 hidden lg:block" sidebar={sidebar} currentSlug={slug} />
-          <div className="col-span-6 xl:col-span-9 lg:mt-6">
-            <article>
-              <h1 className="t-5xl font-semibold">{title}</h1>
-              <Content className="mt-5" content={body} ref={contentRef} />
-            </article>
+          <MobileNav className="mt-5 hidden lg:block" sidebar={sidebar} currentSlug={currentSlug} />
+          <div
+            className={clsx('xl:col-span-9 lg:mt-6', isReleaseNotes ? 'col-span-7' : 'col-span-6')}
+          >
+            {isReleaseNotes ? (
+              <ReleaseNotes
+                title={title}
+                nodes={nodes}
+                pageCount={pageCount}
+                currentPageIndex={currentPageIndex}
+              />
+            ) : (
+              <article>
+                <h1 className="t-5xl font-semibold">{title}</h1>
+                <Content className="mt-5" content={body} ref={contentRef} />
+              </article>
+            )}
             <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
           </div>
           {enableTableOfContents && <TableOfContents contentRef={contentRef} />}
@@ -51,14 +81,31 @@ const DocTemplate = ({
 };
 
 export const query = graphql`
-  query ($id: String!) {
+  query ($id: String!, $limit: Int, $skip: Int, $draftFilter: [Boolean]) {
     mdx(id: { eq: $id }) {
       excerpt(pruneLength: 160)
       body
-      slug
       frontmatter {
         title
         enableTableOfContents
+      }
+    }
+    allMdx(
+      filter: {
+        fileAbsolutePath: { regex: "/release-notes/" }
+        slug: { nin: ["release-notes", "RELEASE_NOTES_TEMPLATE"] }
+        fields: { isDraft: { in: $draftFilter } }
+      }
+      sort: { order: DESC, fields: slug }
+      limit: $limit
+      skip: $skip
+    ) {
+      nodes {
+        slug
+        body
+        frontmatter {
+          label
+        }
       }
     }
   }

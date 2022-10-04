@@ -9,7 +9,7 @@ redirectFrom:
 
 ## About branching
 
-A branch is a copy of your Neon project data created from the current state or from a past state that is still available.
+A branch is a copy of the project data created from the current state or any past state that is still available. A branch can be independently modified from its originating project data.
 
 When you create a branch, all of the data in the parent project is available in the branched project, but changes to the branch afterward are independent of the parent project and vice versa.
 

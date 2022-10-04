@@ -5,26 +5,33 @@ redirectFrom:
   - /docs/quickstart/symfony
 ---
 
-### Introduction
+Symfony is a free and open-source PHP web application framework. Symfony uses the Doctrine library for database access. Connecting to Neon from Symfony with Doctrine is the same as connecting to vanilla PostgreSQL from Symfony with Doctrine. Only the connection details differ.
 
-Symfony is a framework for building web applications in PHP. Symfony uses Doctrine library to access database. Using Neon from Symfony + Doctrine is straightforward and differs nothing from using a vanilla PostgreSQL.
+To connect to Neon from Symfony with Doctrine:
 
-## Set up a Neon project
+1. [Create a Neon Project](#create-a-neon-project)
+2. [Configure the connection](#configure-the-connection)
 
-See [Setting up a project](../get-started-with-neon/setting-up-a-project).
+## Create a Neon project
 
-## Select Project in the Console
+To create a Neon project:
 
-1. Navigate to the [Neon console](https://console.neon.tech/).
-2. On the **Dashboard** tab, select your project from project drop-down list.
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Enter a name for your project and click **Create Project**.
+4. After creating a project, you are directed to the Neon **Dashboard** tab, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the **Dashboard** tab. Copy the connection string. It is required to configure the connection from Symfony.
 
-## Copy the connection string
+## Configure the connection
 
-The connection string (`DATABASE_URL`) appears on the **Dashboard** tab, under **Connection Details**.
-
-For example, if you configure your Symfony project with `.env` file, the `DATABASE_URL` entry in `.env` file should appear as follows:
+In your `.env` file, set the `DATABASE_URL` to the Neon project connection string that you copied in the previous step.
 
 ```shell
-# cat .env | grep DATABASE_URL
-DATABASE_URL="postgresql://<user>:<password>@<project_id>.cloud.neon.tech:5432/main?charset=utf8"
+DATABASE_URL="postgresql://<user>:<password>@<project_id>.cloud.neon.tech:5432/<dbname>?charset=utf8"
 ```
+
+where:
+
+- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<password>` is the database user's password, which is provided to you when you create a Neon project.
+- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
+- `<dbname>` is the database name (the default Neon project database is `main`).
