@@ -36,7 +36,7 @@ To create a branch, use the following API method:
 
 	POST /projects/{project_id}/branches
 
-Here's an example of a curl command that you can use to create a branch: 
+Here's an example of a cURL command that uses that method to create a branch: 
 
 ```
 curl -o - -X POST -H 'Authorization: Bearer ...' https://console.neon.tech/api/v1/clusters/ancient-haze-985396/branches
