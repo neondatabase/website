@@ -13,7 +13,7 @@ The following guide describes how to using branching in your project.
 Branches currently appear as a new project in the Neon Console and API, but when the branching feature is made available to all users, branches will be associated with their parent Project.
 
 ---
-Let's look at how you can create branches using either the Neon Dashboard or the Neon API.
+Let's look at how to create branches using the Neon Console and the Neon API.
 
 Create a Project on Neon and Add Your Data
 ===============
