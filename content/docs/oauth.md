@@ -20,7 +20,7 @@ This configuration requires a locally installed Ory Hydra server. For installati
 
 Configure port forwarding to allow clients to access the Ory Hydra API. For example:
 
-```terminal
+```shell
 kubectl port-forward svc/zenith-console-hydra-admin 4445:4445
 ```
 
@@ -29,7 +29,7 @@ kubectl port-forward svc/zenith-console-hydra-admin 4445:4445
 The following command creates an OAuth client named "neonclitest3", with a callback of  http://127.0.0.1:5555/callback, that can refresh its token.
 
 
-```terminal
+```shell
 $ export HYDRA_URL="http://localhost:4445"
 
 $ hydra clients --fake-tls-termination create \
@@ -50,15 +50,15 @@ $ hydra clients --fake-tls-termination list
 
 Notes:
 
-- The `--token-endpoint-auth-method "none"` setting allows the client to access the API without providing a client secret, which is provided as part of the OAuth 2.0 Dynamic Client Registration Protocol. This is a valid option for a command-line client. If the client is a backend application, require `client_secret_post` or `client_secret_basic`.
-- Pay attention to `--token-endpoint-auth-method "none"`. This is useful only for CLI and other applications that are unable to store secrets. For backend applications, use `client_secret_post` or `client_secret_basic`. Add `--secret app-secret key` and pass `app-secret` to the developers of a third-party app. Do not store these secrets. In your shell, prefix the command with space to avoid the secret being stored in your shell's command history.
-- The `openid offline offline_access` technical scopes are required but a user does not see them during consent. Choose other scopes wisely so as to not expose more technical scopes to an application than is necessary.
+- The `--token-endpoint-auth-method "none"` setting allows the client to access the API without providing a client secret, which is supported with the OAuth 2.0 Dynamic Client Registration Protocol. This is a valid option for a command-line client. If the client is a backend application, require `client_secret_post` or `client_secret_basic`.
+- The `--token-endpoint-auth-method "none"` option is useful only for a CLI or other applications that are unable to store secrets. For backend applications, use `client_secret_post` or `client_secret_basic`. Add `--secret app-secret key` and pass `app-secret` to the developers of a third-party app. Do not store these secrets. In your shell, prefix the command with a space to avoid storing the secret in your shell's command history.
+- The `openid offline offline_access` technical scopes are required but a user does not see them during consent. Choose other scopes wisely so that you do not expose technical scopes to an application unnecessarily.
 
 ## Updating the client configuration
 
-When updating the client configuration, specify all of the parameters included in the command below. Parameters should be omitted.
+When updating the client configuration, specify all of the parameters included in the example below. Parameters should not be omitted.
 
-```terminal
+```shell
 $ hydra clients --fake-tls-termination update neonclitest3 --token-endpoint-auth-method "none" --grant-types "authorization_code,refresh_token" --scope "openid offline" --response-types "code" --name "Neon CLI test 3" --callbacks "http://127.0.0.1:5555/callback"
 neonclitest3 OAuth 2.0 Client updated.
 ```
