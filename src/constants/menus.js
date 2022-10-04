@@ -1,3 +1,8 @@
+import Discourse from '../icons/discourse.inline.svg';
+import Github from '../icons/github.inline.svg';
+import LinkedIn from '../icons/linkedin.inline.svg';
+import Twitter from '../icons/twitter.inline.svg';
+
 import LINKS from './links';
 
 export default {
@@ -7,12 +12,12 @@ export default {
       to: LINKS.docs,
     },
     {
-      text: 'Team',
-      to: LINKS.team,
+      text: 'About Us',
+      to: LINKS.aboutUs,
     },
     {
-      text: 'Jobs',
-      to: LINKS.jobs,
+      text: 'Careers',
+      to: LINKS.careers,
     },
     {
       text: 'Blog',
@@ -42,41 +47,42 @@ export default {
       heading: 'Company',
       links: [
         {
-          text: 'Team',
-          to: LINKS.team,
-        },
-        {
-          text: 'Jobs',
-          to: LINKS.jobs,
-        },
-        {
           text: 'Blog',
           to: LINKS.blog,
         },
         {
-          text: 'Release notes',
-          to: LINKS.releaseNotes,
+          text: 'About Us',
+          to: LINKS.aboutUs,
         },
+        {
+          text: 'Careers',
+          to: LINKS.careers,
+        },
+
+        // {
+        //   text: 'Release notes',
+        //   to: LINKS.releaseNotes,
+        // },
       ],
     },
     {
       heading: 'Resources',
       links: [
         {
-          text: 'Neon docs',
+          text: 'Docs',
           to: LINKS.docs,
         },
         {
-          text: 'PostgreSQL docs',
-          to: LINKS.postgresDocs,
+          text: 'Release notes',
+          to: LINKS.releaseNotes,
         },
+        // {
+        //   text: 'PostgreSQL docs',
+        //   to: LINKS.postgresDocs,
+        // },
         {
           text: 'Security',
           to: LINKS.security,
-        },
-        {
-          text: 'PostgreSQL mailing lists',
-          to: LINKS.postgresList,
         },
       ],
     },
@@ -84,11 +90,11 @@ export default {
       heading: 'Social',
       links: [
         {
-          text: 'Twitter',
+          Icon: Twitter,
           to: LINKS.twitter,
         },
         {
-          text: 'LinkedIn',
+          Icon: LinkedIn,
           to: LINKS.linkedin,
         },
         // {
@@ -96,8 +102,12 @@ export default {
         //   to: LINKS.discord,
         // },
         {
-          text: 'Github',
+          Icon: Github,
           to: LINKS.github,
+        },
+        {
+          Icon: Discourse,
+          to: LINKS.discourse,
         },
       ],
     },
@@ -121,12 +131,12 @@ export default {
       to: LINKS.docs,
     },
     {
-      text: 'Team',
-      to: LINKS.team,
+      text: 'About Us',
+      to: LINKS.aboutUs,
     },
     {
-      text: 'Jobs',
-      to: LINKS.jobs,
+      text: 'Careers',
+      to: LINKS.careers,
     },
     {
       text: 'Blog',

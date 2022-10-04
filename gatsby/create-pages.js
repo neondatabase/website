@@ -13,4 +13,15 @@ module.exports = async (options) => {
   await createDocPages(options);
   await createChangelogPages(options);
   await createChangelogPosts(options);
+
+  const { createRedirect } = options.actions;
+
+  createRedirect({
+    fromPath: `/team/`,
+    toPath: `/about-us/`,
+  });
+  createRedirect({
+    fromPath: `/jobs/`,
+    toPath: `/careers/`,
+  });
 };
