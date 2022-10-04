@@ -160,6 +160,10 @@ A preview of Neon during which users are able to try Neon's Free Tier. For more 
 
 An encrypted access token that enables users to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Using API keys](https://neon.tech/docs/get-started-with-neon/using-api-keys/).
 
+## PostgreSQL users
+
+PostgreSQL users are created as a part of your Neon Project and can be managed via the Neon web UI. A system user `web-access` is used for the SQL Editor in Neon UI and for link authentication for psql. This user cannot be removed or used for authenticating in other scenarios.
+
 ### User
 
 See [Neon user](#neon-user) and [PostgreSQL user](#postgresql-user).

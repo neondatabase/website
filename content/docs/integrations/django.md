@@ -6,29 +6,50 @@ redirectFrom:
   - /docs/cloud/integrations/
 ---
 
-### Introduction
+This topic describes how to create a Neon project and connect to it from a Django project.
 
-Django is one of the most popular backend frameworks. Because Neon is fully compatible with vanilla PostgreSQL, you only need to fill in the correct connection details. To use Neon with Django, you have to create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
+To connect to Neon from a Django project:
 
-## Specify the project connection settings
+1. [Create a Neon project](#create-a-neon-project)
+2. [Configure Django project connection settings](#configure-django-project-connection-settings)
 
-See the following example of specifying connection properties for Neon:
+## Create a Neon project
+
+When creating a Neon project, take note of your project ID, user name, and password. This information is required when defining connection settings in your Django project.
+
+To create a Neon project:
+
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Enter a name for your project and click **Create Project**.
+
+For additional information about creating projects, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
+
+## Configure Django project connection settings
+
+Connecting to Neon requires configuring database connection settings in your Django project's `settings.py` file.
+
+In your Django project, navigate to the `DATABASES` section of your `settings.py` file and modify the connection details as shown:
 
 ```python
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '<here goes your project id>',
-        'USER': '<your github username used to authenticate to neon>',
-        'PASSWORD': '<password generated in Connection Details tab>',
-        'HOST': '<your project id>.cloud.neon.tech',
+        'NAME': '<project_id>',
+        'USER': '<user>',
+        'PASSWORD': '<password>',
+        'HOST': '<project_id>.cloud.neon.tech',
         'PORT': '5432',
     }
 }
 ```
 
-_Note: Currently, it is not possible to run Django tests against Neon because Django test runner needs to create a new database for tests which is currently not supported in Neon._
+where:
 
-## References
+- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<password>` is the database user's password, which is provided to you when you create a project.
+- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
 
-- [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings/#databases)
+For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings/#databases), in the Django documentation.
+
+**_Note_**: Running Django tests is currently not supported. The Django test runner must be able to create a database for tests, which is not yet supported by Neon.

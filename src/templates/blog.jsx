@@ -36,6 +36,7 @@ export const query = graphql`
             ... on WpPostAuthor {
               title
               postAuthor {
+                url
                 image {
                   localFile {
                     childImageSharp {

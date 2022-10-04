@@ -4,7 +4,12 @@ const path = require('path');
 const jsYaml = require('js-yaml');
 const get = require('lodash.get');
 
-const { DOCS_BASE_PATH } = require('../src/constants/docs');
+const {
+  DOCS_BASE_PATH,
+  RELEASE_NOTES_SLUG,
+  RELEASE_NOTES_PER_PAGE,
+  RELEASE_NOTES_BASE_PATH,
+} = require('../src/constants/docs');
 const generateDocPagePath = require('../src/utils/generate-doc-page-path');
 const getDocPreviousAndNextLinks = require('../src/utils/get-doc-previous-and-next-links');
 
@@ -25,7 +30,7 @@ module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       query ($draftFilter: [Boolean]!) {
-        allMdx(
+        allDocs: allMdx(
           filter: {
             fileAbsolutePath: { regex: "/content/docs/" }
             fields: { isDraft: { in: $draftFilter } }
@@ -43,6 +48,15 @@ module.exports = async ({ graphql, actions }) => {
             }
           }
         }
+        allReleaseNotes: allMdx(
+          filter: {
+            fileAbsolutePath: { regex: "/release-notes/" }
+            fields: { isDraft: { in: $draftFilter } }
+            slug: { nin: ["release-notes", "RELEASE_NOTES_TEMPLATE"] }
+          }
+        ) {
+          totalCount
+        }
       }
     `,
     { draftFilter: DRAFT_FILTER }
@@ -50,7 +64,10 @@ module.exports = async ({ graphql, actions }) => {
 
   if (result.errors) throw new Error(result.errors);
 
-  const pages = result.data.allMdx.nodes;
+  const pages = result.data.allDocs.nodes;
+  const pageReleaseNotesCount = Math.ceil(
+    result.data.allReleaseNotes.totalCount / RELEASE_NOTES_PER_PAGE
+  );
 
   actions.createRedirect({
     fromPath: DOCS_BASE_PATH,
@@ -71,15 +88,39 @@ module.exports = async ({ graphql, actions }) => {
       }
     });
 
+    const isReleaseNotes = slug === RELEASE_NOTES_SLUG;
+
     const pagePath = generateDocPagePath(slug);
     const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar(sidebar));
 
     createRedirects({ redirectFrom, actions, pagePath });
 
+    const context = { id, currentSlug: slug, isReleaseNotes, sidebar, previousLink, nextLink };
+
     actions.createPage({
       path: pagePath,
       component: path.resolve(`./src/templates/doc.jsx`),
-      context: { id, sidebar, previousLink, nextLink },
+      context,
     });
+
+    if (isReleaseNotes) {
+      Array.from({ length: pageReleaseNotesCount }).forEach((_, i) => {
+        const releaseNotesPath =
+          i === 0 ? RELEASE_NOTES_BASE_PATH : `${RELEASE_NOTES_BASE_PATH}${i + 1}`;
+
+        actions.createPage({
+          path: releaseNotesPath,
+          component: path.resolve('./src/templates/doc.jsx'),
+          context: {
+            currentPageIndex: i,
+            pageCount: pageReleaseNotesCount,
+            limit: RELEASE_NOTES_PER_PAGE,
+            skip: i * RELEASE_NOTES_PER_PAGE,
+            draftFilter: DRAFT_FILTER,
+            ...context,
+          },
+        });
+      });
+    }
   });
 };

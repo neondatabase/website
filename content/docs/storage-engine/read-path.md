@@ -1,5 +1,6 @@
 ---
 title: Read Path
+isDraft: true
 ---
 
 PostgreSQL &lt;-- Pageserver &lt;-- Cloud storage

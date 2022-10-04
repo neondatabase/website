@@ -11,7 +11,7 @@ const Input = connectSearchBox(({ refine, currentRefinement, onFocus, hasFocus }
     <input
       id="search-input"
       className={clsx(
-        'search-input h-9 w-full appearance-none rounded border border-gray-3 bg-white pl-9 pr-2.5 text-gray-3 placeholder-gray-3 outline-none',
+        'search-input h-9 w-full appearance-none rounded border border-gray-3 bg-white pl-9 pr-2.5 text-black placeholder-gray-3 outline-none',
         hasFocus && currentRefinement && 'rounded-b-none'
       )}
       type="search"

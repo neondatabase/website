@@ -4,7 +4,7 @@ title: Connecting with older clients
 
 ## Overview
 
-In most cases, copy-pasting `Connection string` from the project's dashboard and using it in your project should work as is. However, with older clients and some native Postgres clients, you may receive the following error:
+In most cases, copy-pasting `Connection string` from the project's dashboard and using it in your project should work as is. However, with older clients and some native PostgreSQL clients, you may receive the following error:
 
 ```txt
 ERROR: The project ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the project ID (the first part of the domain name) as a parameter: '&options=project%3D'. See https://neon.tech/sni for more information.
@@ -14,7 +14,7 @@ In most cases, this happens if your client library or app does not support the s
 
 ## Details
 
-To route incoming connections, we use different domain names for different projects, e.g., to connect to the project `mute-recipe-239816`, we ask you to connect to _**mute-recipe-239816.cloud.neon.tech**_. However, the Postgres wire protocol does not transfer the server domain name, so we rely on the so-called **SNI (Server Name Indication)** extension of the `TLS` protocol, which allows a client to indicate what domain name it is attempting to connect to. That is the same mechanism that allows hosting several `https`-enabled websites on a single IP address. `SNI` support was added to the `libpq` (an official Postgres client library) in version 14, released in September 2021. All `libpq`-based clients like Python's `psycopg2` and Ruby's `ruby-pg` should work if `libpq` in the system has a version >= 14.
+To route incoming connections, we use different domain names for different projects, e.g., to connect to the project `mute-recipe-239816`, we ask you to connect to _**mute-recipe-239816.cloud.neon.tech**_. However, the PostgreSQL wire protocol does not transfer the server domain name, so we rely on the so-called **SNI (Server Name Indication)** extension of the `TLS` protocol, which allows a client to indicate what domain name it is attempting to connect to. That is the same mechanism that allows hosting several `https`-enabled websites on a single IP address. `SNI` support was added to the `libpq` (an official PostgreSQL client library) in version 14, released in September 2021. All `libpq`-based clients like Python's `psycopg2` and Ruby's `ruby-pg` should work if `libpq` in the system has a version >= 14.
 
 ## Workarounds
 
@@ -52,7 +52,7 @@ This option is expected to work with all libpq-based apps.
 
 ### C. Set verify-full for golang-based clients
 
-If your application or service uses golang Postgres clients like `pgx` and `lib/pg` you can set `sslmode=verify-full,` which will cause `SNI` info to be sent. Most likely, this was not intentional but happened inadvertently due to the golang's TLS library API design.
+If your application or service uses golang PostgreSQL clients like `pgx` and `lib/pg` you can set `sslmode=verify-full,` which will cause `SNI` info to be sent. Most likely, this was not intentional but happened inadvertently due to the golang's TLS library API design.
 
 ### D. Specify the project ID in the password field
 
