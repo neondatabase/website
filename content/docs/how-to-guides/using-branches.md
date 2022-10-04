@@ -30,7 +30,7 @@ Alternatively, you can use the Neon API to create a branch.
 
 Create a branch using the API
 ======================================
-Get familiar with using API keys on Neon: https://neon.tech/docs/get-started-with-neon/using-api-keys/
+Using the Neon API requires an API key. For information about how to obtain an API key for your Project, refer to [Using API keys](https://neon.tech/docs/get-started-with-neon/using-api-keys/).
 The Neon API Reference: https://console.neon.tech/api-docs
 To create a branch, you can use the API method:
 
