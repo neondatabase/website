@@ -18,7 +18,7 @@ To connect to Neon with JDBC or from a Spring Data project:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your project ID, database name, user, and password. This information is required when defining JDBC connection settings. 
+When creating a Neon project, take note of your project ID, database name, user, and password. This information is required when defining JDBC connection settings.
 
 To create a Neon project:
 

@@ -2,9 +2,9 @@ const path = require('path');
 
 const get = require('lodash.get');
 
-const getChangelogPostPath = require('../src/utils/get-changelog-post-path');
+const generateReleaseNotePath = require('../src/utils/generate-release-note-path');
 
-const { DRAFT_FILTER, CHANGELOG_POST_REQUIRED_FIELDS } = require('./constants');
+const { DRAFT_FILTER, RELEASE_NOTES_REQUIRED_FIELDS } = require('./constants');
 
 module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
@@ -12,7 +12,8 @@ module.exports = async ({ graphql, actions }) => {
       query ($draftFilter: [Boolean]!) {
         allMdx(
           filter: {
-            fileAbsolutePath: { regex: "/content/changelog/" }
+            fileAbsolutePath: { regex: "/release-notes/" }
+            slug: { nin: ["release-notes", "RELEASE_NOTES_TEMPLATE"] }
             fields: { isDraft: { in: $draftFilter } }
           }
         ) {
@@ -33,17 +34,17 @@ module.exports = async ({ graphql, actions }) => {
 
   result.data.allMdx.nodes.forEach(({ id, slug, frontmatter }) => {
     // Required fields validation
-    CHANGELOG_POST_REQUIRED_FIELDS.forEach((fieldName) => {
+    RELEASE_NOTES_REQUIRED_FIELDS.forEach((fieldName) => {
       if (!get(frontmatter, fieldName)) {
         throw new Error(`Post "${slug}" does not have field "${fieldName}"!`);
       }
     });
 
-    const pagePath = getChangelogPostPath(slug);
+    const pagePath = generateReleaseNotePath(slug);
 
     actions.createPage({
       path: pagePath,
-      component: path.resolve('./src/templates/changelog-post.jsx'),
+      component: path.resolve('./src/templates/release-note-post.jsx'),
       context: { id },
     });
   });

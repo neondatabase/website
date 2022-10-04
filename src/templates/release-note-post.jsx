@@ -2,7 +2,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Hero from 'components/pages/changelog-content/hero/hero';
+import Hero from 'components/pages/release-notes/hero';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Heading from 'components/shared/heading';
@@ -10,24 +10,24 @@ import Layout from 'components/shared/layout';
 import Link from 'components/shared/link';
 import SEO from 'components/shared/seo';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
-import { CHANGELOG_BASE_PATH } from 'constants/changelog';
+import { RELEASE_NOTES_BASE_PATH } from 'constants/docs';
 import SEO_DATA from 'constants/seo-data';
-import getChangelogPostDateFromSlug from 'utils/get-changelog-post-date-from-slug';
+import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 
-const ChangelogPostTemplate = ({
+const ReleaseNotePostTemplate = ({
   data: {
     mdx: { slug, body, frontmatter },
   },
 }) => (
   <Layout headerTheme="white">
-    <Hero />
+    <Hero className="pt-40 lg:pt-16 md:mb-10 md:py-10 sm:mb-7 sm:py-7" withContainer />
     <Container size="sm" className="relative mb-10 flex">
       <article className="relative flex flex-col items-start">
         <time
           className="mt-3 whitespace-nowrap text-gray-2"
-          dateTime={getChangelogPostDateFromSlug(slug)}
+          dateTime={getReleaseNotesDateFromSlug(slug)}
         >
-          {getChangelogPostDateFromSlug(slug)}
+          {getReleaseNotesDateFromSlug(slug)}
         </time>
         <Heading
           className="!text-[36px] !leading-normal md:!text-3xl"
@@ -41,7 +41,7 @@ const ChangelogPostTemplate = ({
         <Content className="mt-8 prose-h3:text-xl" content={body} />
         <Link
           className="mt-10 font-semibold lg:mt-8"
-          to={CHANGELOG_BASE_PATH}
+          to={RELEASE_NOTES_BASE_PATH}
           size="sm"
           theme="black-primary-1"
         >
@@ -65,7 +65,7 @@ export const query = graphql`
   }
 `;
 
-export default ChangelogPostTemplate;
+export default ReleaseNotePostTemplate;
 
 export const Head = ({
   data: {
@@ -75,8 +75,8 @@ export const Head = ({
 }) => (
   <SEO
     pathname={pathname}
-    {...SEO_DATA.changelogPost({
-      title: frontmatter.title,
+    {...SEO_DATA.releaseNotePost({
+      title: `${frontmatter.label} release`,
     })}
   />
 );

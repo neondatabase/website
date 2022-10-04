@@ -38,8 +38,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: 'changelog',
-        path: `${__dirname}/content/changelog/`,
+        name: 'release-notes',
+        path: `${__dirname}/content/release-notes/`,
       },
     },
     'gatsby-plugin-image',
