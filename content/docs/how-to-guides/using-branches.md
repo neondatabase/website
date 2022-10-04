@@ -45,7 +45,7 @@ curl -o - -X POST -H 'Authorization: Bearer ...' https://console.neon.tech/api/v
 To use the cURL command with your Project, change the placeholder Project name `ancient-haze-985396` to the name of the Project that you want to branch from.
 In the response to the API request, you will receive information about the branch you created. The branch name will have the following format:
 `$parent_project_id-branch-...`.
-Currently branches appear as a separate project in the Dashboard UI, this will change in the future when branches are publically available.
+Currently, a branch appears as separate Project on the **Dashboard** tab in the Neon Console. This will change in the future when the branching feature becomes generally available.
 All the data in the parent project when you create the branch will be available in the branched project as well.
 Future changes to the data in the parent and the branch are independent, so you can make changes to the branch without affecting your parent project.
 
