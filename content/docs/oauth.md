@@ -1,6 +1,7 @@
 ---
 title: Configuring Neon OAuth for 3rd party Neon API access
 enableTableOfContents: true
+isDraft: true
 ---
 This topic explains how to configure Neon OAuth to enable third-party services to access Neon's API on behalf of its users.
 
