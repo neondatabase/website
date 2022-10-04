@@ -96,6 +96,7 @@ export const query = graphql`
           ... on WpPostAuthor {
             title
             postAuthor {
+              url
               role
               image {
                 localFile {

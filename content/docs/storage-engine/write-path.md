@@ -1,5 +1,6 @@
 ---
 title: Write Path
+isDraft: true
 ---
 
 PostgreSQL --> Safekeepers --> Pageserver --> Cloud storage
