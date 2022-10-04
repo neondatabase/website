@@ -4,7 +4,7 @@ label: 'Console'
 
 ### What's new
 
-- UI: Social authentication with Hasura provider.
+- UI: Added social authentication for Hasura, enabling users to sign in using using social networking services supported by Hasura.
 - Control Plane: Improved performance of project creation.
 
 ### Bug fixes
