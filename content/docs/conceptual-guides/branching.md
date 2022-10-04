@@ -65,10 +65,10 @@ A branch has the following characteristics:
 
 - A branch compute has 1 vCPU and 256 MB of RAM, which is the same as a project
 - Branches are read-write 
-- A branch supports a single endpoint
+- A branch supports a single endpoint, which is the URL address for performing actions on the branch from the Neon API.
 - A branch can be created without an endpoint. An endpoint may not be required for certain use cases, such as backups.
 - A branch endpoint can be deleted
-- The endpoint associated with the branch is deleted when a branch is deleted
+- The endpoint associated with the branch is deleted when a branch is deleted.
 - A branch endpoint URL uses the same format as a project endpoint URL: `{project_id}-{endpoint_id}.cloud.neon.tech` 
 
 ## Branching from the Console
