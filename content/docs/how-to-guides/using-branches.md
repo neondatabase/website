@@ -8,7 +8,7 @@ Branching allows you to create a copy of your Project data which you can modify 
 
 A branch is created with the same data that existed in your Project at the time the branch was created, but future changes to your Project data do not affect the branch.
 
-Below is a guide to using branching in your project.
+The following guide describes how to using branching in your project.
 
 Branches currently appear as a whole new project in the Neon UI and API, but when branches become available to all users, you'll be able to find them within their parent project.
 
