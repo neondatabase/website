@@ -42,7 +42,7 @@ Here's an example of a cURL command that uses that method to create a branch:
 curl -o - -X POST -H 'Authorization: Bearer ...' https://console.neon.tech/api/v1/clusters/ancient-haze-985396/branches
 ```
 
-To use this curl command, change the placeholder project name `ancient-haze-985396` to the name of the project that you want to create a branch from.
+To use the cURL command with your Project, change the placeholder Project name `ancient-haze-985396` to the name of the Project that you want to branch from.
 In the response, you will receive new project info info, with the name that looks like
 `$parent_project_id-branch-...`.
 Currently branches appear as a separate project in the Dashboard UI, this will change in the future when branches are publically available.
