@@ -55,7 +55,7 @@ const Footer = () => (
                   )}
                   <Link
                     className={clsx(
-                      'relative',
+                      'relative whitespace-nowrap',
                       heading === 'Social' &&
                         'flex h-[38px] w-[38px] items-center justify-center rounded-full border-2 border-black bg-white transition-transform duration-200 hover:translate-y-0.5 hover:-translate-x-0.5 hover:!text-black'
                     )}
