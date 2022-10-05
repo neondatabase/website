@@ -4,7 +4,7 @@ label: 'Console'
 
 ### What's new
 
-- UI: Added social authentication for Hasura, enabling users to sign in using using social networking services supported by Hasura.
+- UI: Added social authentication for Hasura, enabling users to sign in using social networking services supported by Hasura.
 - Improved Neon project creation performance.
 
 ### Bug fixes
