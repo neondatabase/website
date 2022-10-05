@@ -9,7 +9,7 @@ label: 'Console'
 
 ### Bug fixes
 
-- UI: Database selector allows to select any of created databases.
+- UI: The Database drop-down menu that appears in the Connection Details widget on the Dashboard and in the Neon SQL Editor now permits selecting any created database.
 - Control Plane: The availability checker now waits for the project operations queue to be cleared before starting.
 - Control Plane: Operations for redo are now selected based on the correct status. 
 - The V2 branch creation endpoint is now accessible using an OAuth token.
