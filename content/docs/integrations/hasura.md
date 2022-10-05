@@ -11,7 +11,7 @@ The following instructions describe how to connect to a new or existing Neon dat
 
 ## Connecting to a new Neon database
 
-Use the following instructions to connect to a new Neon database. The database is created for you when you connect your Hasura Cloud project to Neon. This connection method authenticates you from Hasura Cloud. If you do not have a Neon account, one is created for you.
+Use the following instructions to connect to a new Neon database. The database is created for you when you connect your Hasura Cloud project to Neon. This connection method authenticates you from Hasura Cloud. 
 
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
 1. On the Hasura Cloud dashboard, create a Hasura project.
