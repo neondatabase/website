@@ -26,7 +26,7 @@ A unique identifier used to authenticate a user or a calling program to an API. 
 
 ### Branch
 
-A copy of Project data created from a current or past state. A branch can be independently modified from its originating Project data. See [Branching](/docs/conceptual-guides/branching/).
+A copy of project data created from a current or past state. A branch can be independently modified from its originating project data. See [Branching](/docs/conceptual-guides/branching/).
 
 ### CI/CD
 
@@ -34,21 +34,21 @@ Continuous integration and continuous delivery or continuous deployment.
 
 ### Compute
 
-A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon Compute runs PostgreSQL. Each Neon Project contains a Compute. The amount of Compute resources available to a Neon Project is currently subject to the limits defined by the Technical Preview Free Tier. A Neon Compute is stateless and is automatically activated or suspended based on user activity.
+A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon Compute runs PostgreSQL. Each Neon project contains a Compute. The amount of Compute resources available to a Neon project is currently subject to the limits defined by the Technical Preview Free Tier. A Neon Compute is stateless and is automatically activated or suspended based on user activity.
 
 ### Connection pooling
 
-A method of creating a pool of connections and caching those connections for reuse. Neon uses `pgbouncer` in `transaction mode` for connection pooling. Neon’s connection pooling feature can be enabled or disabled for a Project on the **Settings** tab, under **General Settings**.
+A method of creating a pool of connections and caching those connections for reuse. Neon uses `pgbouncer` in `transaction mode` for connection pooling. Neon’s connection pooling feature can be enabled or disabled for a project on the **Settings** tab, under **General Settings**.
 
 ### Connection string
 
-A string containing details for connecting to a Neon Project. The details include a user name, Project ID, host address, port number, and database name; for example:
+A string containing details for connecting to a Neon project. The details include a user name, project ID, host address, port number, and database name; for example:
 
 ```terminal
 postgres://user1@black-sky-342827.cloud.neon.tech:5432/main`
 ```
 
-The connection string for a Neon Project is provided on the **Dashboard** tab in the Neon Console, under **Connection Details**. The connection string that is displayed immediately after creating a Project also includes the user’s password, temporarily. For security reasons, the password is removed from the connection string after navigating away from the Dashboard.
+The connection string for a Neon project is provided on the **Dashboard** tab in the Neon Console, under **Connection Details**. The connection string that is displayed immediately after creating a project also includes the user’s password, temporarily. For security reasons, the password is removed from the connection string after navigating away from the Dashboard.
 
 ### Console
 
@@ -60,11 +60,11 @@ A part of the Neon architecture that manages cloud storage and compute resources
 
 ### Copy-on-write
 
-A technique used to efficiently copy data. Neon uses the copy-on-write technique to efficiently copy Project data when creating a branch.
+A technique used to efficiently copy data. Neon uses the copy-on-write technique to efficiently copy project data when creating a branch.
 
 ### Database
 
-A named collection of database objects. A Neon Project has a default database named main which resides in the default `public` schema. A Neon Project can contain multiple databases. Users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
+A named collection of database objects. A Neon project has a default database named main which resides in the default `public` schema. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
 
 ### Free Tier
 
@@ -84,11 +84,11 @@ The Neon RESTful Application Programming Interface. Any operation performed in t
 
 ### Neon Console
 
-A browser-based graphical interface for managing Neon Projects and resources.
+A browser-based graphical interface for managing Neon projects and resources.
 
 ### Neon user
 
-The user that registers and authenticates with Neon using a GitHub or Google account. Once authenticated, a Neon user can create and access Projects, and manage users, databases, and other Project resources.
+The user that registers and authenticates with Neon using a GitHub or Google account. Once authenticated, a Neon user can create and access projects, and manage users, databases, and other project resources.
 
 ### Object storage
 
@@ -110,13 +110,13 @@ The ability to authenticate without providing a password. Neon’s [Quick auth](
 
 ### PostgreSQL user
 
-Two PostgreSQL users are created with each Neon Project. The first is named for the registered Neon account and can be used to access the Neon Project from a client. This user’s credentials can be managed and used for password-based `psql` authentication. The second user is the `web-access` system user, which is used by the SQL Editor and Neon’s (/docs/reference/glossary/#quick-auth) feature. The `web-access` user is system managed. It cannot be modified, removed, or used in other authentication scenarios.
+Two PostgreSQL users are created with each Neon project. The first is named for the registered Neon account and can be used to access the Neon project from a client. This user’s credentials can be managed and used for password-based `psql` authentication. The second user is the `web-access` system user, which is used by the SQL Editor and Neon’s (/docs/reference/glossary/#quick-auth) feature. The `web-access` user is system managed. It cannot be modified, removed, or used in other authentication scenarios.
 
 Additional PostgreSQL users can be created in the Neon Console.
 
 ### Project
 
-A collection of PostgreSQL databases, PostgreSQL users, and other Project resources and settings. A Project contains a Compute with a PostgreSQL server as well as storage for the Project data.
+A collection of PostgreSQL databases, PostgreSQL users, and other project resources and settings. A project contains a Compute with a PostgreSQL server as well as storage for the project data.
 
 ### Proxy
 
@@ -124,7 +124,7 @@ A multitenant service that accepts and handles connections from clients that use
 
 ### Quick auth
 
-A passwordless authentication feature that allows users to connect to a Neon Project with a single `psql` command. See [Query with psql](/docs/get-started-with-neon/query-with-psql-editor/).
+A passwordless authentication feature that allows users to connect to a Neon project with a single `psql` command. See [Query with psql](/docs/get-started-with-neon/query-with-psql-editor/).
 
 ### Regular PostgreSQL
 
@@ -144,7 +144,7 @@ Server Name Indication. A TLS protocol extension that allows a client or browser
 
 ### SQL Editor
 
-A feature of the Neon Console that enables running queries on a Neon Project database. The SQL Editor also enables saving queries, viewing query history, and analyzing or explaining queries.
+A feature of the Neon Console that enables running queries on a Neon project database. The SQL Editor also enables saving queries, viewing query history, and analyzing or explaining queries.
 
 ### Storage
 
@@ -162,7 +162,7 @@ An encrypted access token that enables users to authenticate with Neon using the
 
 ## PostgreSQL users
 
-PostgreSQL users are created as a part of your Neon Project and can be managed via the Neon web UI. A system user `web-access` is used for the SQL Editor in Neon UI and for link authentication for psql. This user cannot be removed or used for authenticating in other scenarios.
+PostgreSQL users are created as a part of your Neon project and can be managed via the Neon web UI. A system user `web-access` is used for the SQL Editor in Neon UI and for link authentication for psql. This user cannot be removed or used for authenticating in other scenarios.
 
 ### User
 
