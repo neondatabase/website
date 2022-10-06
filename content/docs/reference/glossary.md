@@ -26,7 +26,7 @@ A unique identifier used to authenticate a user or a calling program to an API. 
 
 ### Branch
 
-A copy of project data created from a current or past state. A branch can be independently modified from its originating project data. See [Branching](/docs/conceptual-guides/branching/).
+A copy of a Neon project created from a current or past state. Project data is copied using the [copy-on-write](#copy-on-write) technique. The data in a branched project can be independently modified. See [Branching](/docs/conceptual-guides/branching/).
 
 ### CI/CD
 
@@ -90,10 +90,6 @@ A browser-based graphical interface for managing Neon projects and resources.
 
 The user that registers and authenticates with Neon using a GitHub or Google account. Once authenticated, a Neon user can create and access projects, and manage users, databases, and other project resources.
 
-### Object storage
-
-Computer data storage that manages data as objects. Neon uses cloud object storage for long-term data storage.
-
 ### Page
 
 An 8KB unit of data, which is the smallest unit that PostgreSQL uses for storing relations and indexes on disk. In Neon, a page is also the smallest unit of data that resides on a Pageserver. For information about PostgreSQL page format, see [Database Page Layout](https://www.postgresql.org/docs/14/storage-page-layout.html), in the _PostgreSQL Documentation_.
@@ -106,7 +102,7 @@ The Pageserver uploads immutable files to cloud storage, which is the final, hig
 
 ### Passwordless authentication
 
-The ability to authenticate without providing a password. Neon’s [Quick auth](#quick-auth) feature supports passwordless authentication.  
+The ability to authenticate without providing a password. Neon’s [Passwordless auth](#passwordless-auth) feature supports passwordless authentication.  
 
 ### PostgreSQL user
 
@@ -124,9 +120,9 @@ A collection of PostgreSQL databases, PostgreSQL users, and other project resour
 
 A Neon component which functions as a multitenant service that accepts and handles connections from clients that use the PostgreSQL protocol.
 
-### Quick auth
+### Passwordless auth
 
-A passwordless authentication feature that allows users to connect to a Neon project with a single `psql` command. See [Query with psql](/docs/get-started-with-neon/query-with-psql-editor/).
+A Neon feature that allows users to connect to a Neon project with a single `psql` command. See [Query with psql](/docs/get-started-with-neon/query-with-psql-editor/).
 
 ### Regular PostgreSQL
 
@@ -150,9 +146,7 @@ A feature of the Neon Console that enables running queries on a Neon project dat
 
 ### Storage
 
-Where data is recorded and stored.
-
-Also see [Object storage](#object-storage).
+Where data is recorded and stored. Neon storage consists of Pageserver which stores hot data and a cloud object store such as Amazon S3 that stores cold data for cost optimization and durability.
 
 ### Technical Preview
 
