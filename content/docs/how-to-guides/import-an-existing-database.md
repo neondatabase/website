@@ -25,7 +25,7 @@ You can also configure logical replication to allow Neon to receive a stream of 
 
 Some PostgreSQL features that require access to the local file system are not supported by Neon. For example, tablespaces and large objects are not supported. Please take this into account when importing an existing database to Neon.
 
-In addition to databases, Neon supports importing individual tables. You can do this using the `COPY` command, as you would with regular PostgreSQL. The only requirement is that the data is transferred through a replication stream, which may affect the performance of other queries, including those unrelated to the table you are copying.
+In addition to databases, Neon supports importing individual tables. You can do this using the `COPY` command, as you would with a standalone PostgreSQL installation. The only requirement is that the data is transferred through a replication stream, which may affect the performance of other queries, including those unrelated to the table you are copying.
 
 For information about the commands referred to in this topic, refer to the following topics in the PostgreSQL documentation:
 
