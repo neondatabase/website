@@ -1,12 +1,11 @@
 ---
 title: Run a Postgres App
+isDraft: true
 ---
 
 A Neon compute runs regular PostgreSQL, which means that you run any PostgreSQL app with Neon.
 
 You can also connect to Neon using standard PostgreSQL client utilities such as `psql` and `pg_dump`, standard client libraries, and drivers.
-
-All connections to Neon PostgreSQL are via an endpoint hosted at `pg.neon.tech`.
 
 For `psql` connection instructions, see [Query with psql](../get-started-with-neon/query-with-psql-editor).
 
