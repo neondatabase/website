@@ -124,10 +124,6 @@ A Neon component which functions as a multitenant service that accepts and handl
 
 A Neon feature that allows users to connect to a Neon project with a single `psql` command. See [Query with psql](/docs/get-started-with-neon/query-with-psql-editor/).
 
-### Regular PostgreSQL
-
-Refers to the standard PostgreSQL open-source database system, maintained by [postgresql.org](https://www.postgresql.org/).
-
 ### Safekeeper
 
 A Neon architecture component responsible for the durability of database changes. PostgreSQL streams WAL records to Safekeepers. A quorum algorithm based on Paxos ensures that when a transaction is committed, it is stored on a majority of Safekeepers and can be recovered if a node is lost. Safekeepers are deployed in different availability zones to ensure high availability and durability.
