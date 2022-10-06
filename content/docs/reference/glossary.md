@@ -110,9 +110,11 @@ The ability to authenticate without providing a password. Neon’s [Quick auth](
 
 ### PostgreSQL user
 
-Two PostgreSQL users are created with each Neon project. The first is named for the registered Neon account and can be used to access the Neon project from a client. This user’s credentials can be managed and used for password-based `psql` authentication. The second user is the `web-access` system user, which is used by the SQL Editor and Neon’s (/docs/reference/glossary/#quick-auth) feature. The `web-access` user is system managed. It cannot be modified, removed, or used in other authentication scenarios.
+Two PostgreSQL database users are created with each Neon project. The first is named for the registered Neon account and can be used to access the Neon project from a client. This user’s credentials can be managed and used for password-based `psql` authentication. The second user is the `web-access` system user, which is used by the SQL Editor and Neon’s (/docs/reference/glossary/#quick-auth) feature. The `web-access` user is system managed. It cannot be modified, removed, or used in other authentication scenarios.
 
 Additional PostgreSQL users can be created in the Neon Console.
+
+In PostgreSQL, a role with the `LOGIN` attribute is considered the same as a _database user_. For additional information, refer to [Database roles](https://www.postgresql.org/docs/14/user-manag.html) and [Role Attributes](https://www.postgresql.org/docs/14/role-attributes.html), in the PostgreSQL documentation.
 
 ### Project
 
@@ -120,7 +122,7 @@ A collection of PostgreSQL databases, PostgreSQL users, and other project resour
 
 ### Proxy
 
-A multitenant service that accepts and handles connections from clients that use the PostgreSQL protocol.
+A Neon component which functions as a multitenant service that accepts and handles connections from clients that use the PostgreSQL protocol.
 
 ### Quick auth
 
@@ -128,7 +130,7 @@ A passwordless authentication feature that allows users to connect to a Neon pro
 
 ### Regular PostgreSQL
 
-Refers to the standard PostgreSQL open-source database system, maintained by the [PostgreSQL project](https://www.postgresql.org/).
+Refers to the standard PostgreSQL open-source database system, maintained by [postgresql.org](https://www.postgresql.org/).
 
 ### Safekeeper
 
