@@ -6,8 +6,6 @@ redirectFrom:
 
 This topic describes how to create a Neon project and connect to it from a Rust app.
 
-To connect to Neon from a Rust app:
-
 1. [Create a Neon project](#create-a-neon-project)
 2. [Configure the connection](#configure-the-connection)
 
@@ -40,9 +38,9 @@ fn main() {
 
 where:
 
-- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<user>` is the database user, which is found on the project **Dashboard**, under **Connection Details**.
 - `<dbname>` is the database name (the default Neon project database is `main`).
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
-- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
+- `<project_id>` is the ID of the Neon project, which is found on the project **Settings** tab, under **General Settings**.
 
 **_Note_**: The sample connection code shown above is also available on the [rust-lang playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=0d9daa9cde3c74d2916c8f05b24707a3).
