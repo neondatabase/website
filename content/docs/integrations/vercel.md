@@ -17,13 +17,12 @@ To create a Neon project and access it from a Next.js app:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your project ID, database name, user, password, and port number. This information is required when defining your connection settings. 
-
 To create a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
 3. Enter a name for your project and click **Create Project**.
+4. After creating a project, you are directed to the project **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the **Dashboard**. Copy the connection string. It is used later to connect to your Neon project.
 
 For additional information about creating projects, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
 
@@ -37,23 +36,21 @@ Add a PostgreSQL client to your app, such as `Postgres.js`.  For instructions, r
 
 ## Add your Neon connection details
 
-Add your Neon connection details to your `.env` file.
+Add your Neon connection string to your `.env` file.
 
 ```shell
-NEON_HOST='<project_id>.cloud.neon.tech'
-NEON_PORT='<port>'
-NEON_DB='<database>'
-NEON_USER='<username>'
-NEON_PASS='<password>'
+DATABASE_URL=postgres://<user>:<password>@<project_id>.cloud.neon.tech:<port>/<database>
 ```
 
 where:
 
+- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<password>` is the database user's password, which is provided to you when you create a project.
 - `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
 - `<port>` is the Neon port number. The default port number is `5432`.
 - `<database>` is the name of the database in your Neon project. `main` is the default database created with each Neon project.
-- `<username>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
-- `<password>` is the database user's password, which is provided to you when you create a project.
+
+The connection details listed above are provided in the Neon connection string that you copied from the project Dashboard after you created the Neon project.
 
 ## Connect to the Neon database
 
@@ -62,13 +59,7 @@ From your API handlers or server functions, connect to the Neon database with th
 ```javascript pages/api/hello_worlds.js
 import postgres from 'postgres';
 
-const sql = postgres({
-  host: process.env.NEON_HOST,
-  port: process.env.NEON_PORT,
-  database: process.env.NEON_DB,
-  username: process.env.NEON_USER,
-  password: process.env.NEON_PASS,
-});
+const sql = postgres(process.env.DATABASE_URL);
 
 const result = await sql.uafe(req.body);
 ```
