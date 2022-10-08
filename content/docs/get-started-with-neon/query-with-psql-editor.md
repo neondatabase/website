@@ -105,7 +105,7 @@ To connect with a password saved to a `.pgpass` password file:
     ```bash
     touch ~/.pgpass && \
     chmod 0600 ~/.pgpass && \
-    echo -e "<project_id>.cloud.neon.tech:5432:main:<user>:<password>\n" >> ~/.pgpass
+    echo -e "<project_id>.cloud.neon.tech:5432:main:<user>:<password>\n$(cat ~/.pgpass)" > ~/.pgpass
     ```
     _**Note**_: If you already have a `.pgpass` file, you only need to run the `echo` command.
 
