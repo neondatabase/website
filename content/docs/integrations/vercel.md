@@ -61,7 +61,7 @@ import postgres from 'postgres';
 
 const sql = postgres(process.env.DATABASE_URL);
 
-const result = await sql.uafe(req.body);
+const result = await sql.unsafe(req.body);
 ```
 
 _**Important**_: Never expose your Neon credentials to the browser.
