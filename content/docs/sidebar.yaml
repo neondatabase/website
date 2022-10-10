@@ -58,6 +58,8 @@
   items:
     - title: Importing a database
       slug: how-to-guides/import-an-existing-database
+    - title: Migrating from Hasura with Heroku
+      slug: how-to-guides/hasura-heroku-migration
 - title: Security
   slug: security
 - title: Reference
