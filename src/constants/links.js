@@ -1,7 +1,7 @@
 export default {
   docs: '/docs/cloud/about/',
-  team: '/team/',
-  jobs: '/jobs/',
+  aboutUs: '/about-us/',
+  careers: '/careers/',
   blog: '/blog/',
   earlyAccess: '/early-access/',
   security: '/docs/security/',

@@ -14,7 +14,7 @@ To connect to Neon from a Go project:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your user name, password, database name, and project ID. This information is required when defining connection settings in your Go project. 
+When creating a Neon project, take note of your user name, password, database name, and project ID. This information is required when defining connection settings in your Go project.
 
 To create a Neon project:
 

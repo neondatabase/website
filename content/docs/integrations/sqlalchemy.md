@@ -39,7 +39,6 @@ pip install psycopg2-binary
 
 For additional information about installing `psycopg2`, refer to the [psycopg2 installation documentation](https://www.psycopg.org/docs/install.html).
 
-
 ## Create the "hello neon" program
 
 ```python

@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/quickstart/prisma
 ---
 
-Prisma is an open-source, next-generation ORM that allows you to easily manage and interact with your database. This topic describes how to create a Neon project, connect to it from Prisma, and optionally configure a shadow database for Prisma Migrate.  
+Prisma is an open-source, next-generation ORM that allows you to easily manage and interact with your database. This topic describes how to create a Neon project, connect to it from Prisma, and optionally configure a shadow database for Prisma Migrate.
 
 To create a Neon project and connect to it from Prisma:
 
@@ -28,12 +28,12 @@ To connect to Neon from Prisma:
 
 1. Add the following lines to `prisma/schema.prisma` to identify the data source and database URL:
 
-    ```typescript
-    datasource db {
-      provider = "postgresql"
-      url   = env("DATABASE_URL")
-    }
-    ```
+   ```typescript
+   datasource db {
+     provider = "postgresql"
+     url   = env("DATABASE_URL")
+   }
+   ```
 
 2. Add a `DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon project connection string that you copied in the previous step.
 
@@ -47,7 +47,6 @@ where:
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 - `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
 
-
 ## Configure a shadow database for Prisma Migrate
 
 Prisma Migrate is a migration tool that allows you to easily evolve your database schema from prototyping to production. Prisma Migrate requires a shadow database to detect schema drift. This section describes how to configure a second Neon database, which is required to run the `prisma migrate dev` command.
@@ -58,18 +57,18 @@ To configure a shadow database:
 
 1. Add the `shadowDatabaseUrl` setting to your `prisma/schema.prisma` file to identify the shadow database URL:
 
-    ```typescript
-    datasource db {
-      provider = "postgresql"
-      url   = env("DATABASE_URL")
-      shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-    }
-    ```
+   ```typescript
+   datasource db {
+     provider = "postgresql"
+     url   = env("DATABASE_URL")
+     shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+   }
+   ```
 
-2. Add a `SHADOW_DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon project connection string that you copied in the previous step.
+1. Add a `SHADOW_DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon project connection string that you copied in the previous step.
 
-    ```shell
-    SHADOW_DATABASE_URL="postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main"
-    ```
+   ```shell
+   SHADOW_DATABASE_URL="postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main"
+   ```
 
 For additional information about shadow databases, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the Prisma documentation.

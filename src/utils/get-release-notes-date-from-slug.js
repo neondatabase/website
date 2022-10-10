@@ -1,4 +1,4 @@
-export default function getChangelogPostDateFromSlug(slug) {
+export default function getReleaseNotesDateFromSlug(slug) {
   return new Date(slug.slice(0, 10)).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',

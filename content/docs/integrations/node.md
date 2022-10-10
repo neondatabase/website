@@ -19,7 +19,7 @@ To connect to Neon from a NodeJS project:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your project ID, database name, user, and password. This information is required when configuring connection settings. 
+When creating a Neon project, take note of your project ID, database name, user, and password. This information is required when configuring connection settings.
 
 To create a Neon project:
 
@@ -33,17 +33,17 @@ For additional information about creating projects, see [Setting up a project](/
 
 1. Create a NodeJS project and change to the newly created directory.
 
-    ```shell
-    mkdir neon-nodejs-example
-    cd neon-nodejs-example
-    npm init -y
-    ```
+   ```shell
+   mkdir neon-nodejs-example
+   cd neon-nodejs-example
+   npm init -y
+   ```
 
 2. Add project dependencies using the following command:
 
-    ```shell
-    npm install postgres dotenv
-    ```
+   ```shell
+   npm install postgres dotenv
+   ```
 
 ## Store your Neon credentials
 
