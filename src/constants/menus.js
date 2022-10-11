@@ -149,6 +149,12 @@ export default {
     //   to: LINKS.discord,
     // },
     {
+      iconName: 'github',
+      text: 'GitHub',
+      description: 'Star us',
+      to: LINKS.github,
+    },
+    {
       iconName: 'discussions',
       text: 'Community',
       description: 'Get help',
