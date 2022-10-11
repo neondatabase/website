@@ -3,7 +3,7 @@ title: Migrating from Heroku
 enableTableOfContents: true
 ---
 
-This guide describes how to migrate your data from Heroku PostgreSQL to Neon PostgreSQL.
+This guide describes how to migrate your data from Heroku PostgreSQL to Neon.
 
 The instructions assume that you have installed the Heroku CLI, which is used to transfer data from Heroku. For installation instructions, see [The Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 
@@ -34,7 +34,7 @@ postgres://jsmith:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
 1. Select **Overview** and copy the name of the Heroku Postgres database, which appears under **Installed add-ons**.
 2. Click **Settings** and copy your Heroku **App Name**.
 
-_**Note**_: You can also retrieve the Heroku Postgres database name by executing the following Heroku CLI command:
+_**Note**_: You can also retrieve the Heroku Postgres database name using the following Heroku CLI command:
 
 ```shell
 heroku pg:links --app <app>
