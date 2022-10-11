@@ -1,21 +1,32 @@
 ---
-title: Migrate from Hasura with Heroku to Hasura with Neon 
+title: Migrating from Heroku
 enableTableOfContents: true
-isDraft: true
 ---
 
-This guide describes how to migrate your data from a Hasura with Heroku PostgreSQL to Hasuru with Neon PostgreSQL.
+This guide describes how to migrate your data from Heroku PostgreSQL to Neon PostgreSQL.
 
-It is assumed that you have already connected from Hasura Cloud to a Neon project. If not, refer [Running a Hasura App](/docs/integrations/hasura) for instructions.
+The instructions assume that you have installed the Heroku CLI, which is used to transfer data from Heroku. For installation instructions, see [The Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 
-The instructions also assume that you have installed the Heroku CLI, which is used to transfer data from Heroku PostgreSQL to Neon PostgreSQL. For Heroku CLI installation instructions, see [The Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+To migrate your data from Heroku to Neon:
 
-To migrate your Heroku data to Neon:
-
-1. [Retrieve your Heroku app name and database name](#retrieve-your-heroku-app-name-and-database-name)
-2. [Retrieve your Neon connection string](#retrieve-your-neon-connection-string)
-3. [Migrate your data](#migrate-your-data)
+1. [Create a Neon project and copy the connection string](#create-a-neon-project-and-copy-the-connection-string)
+2. [Retrieve your Heroku app name and database name](#retrieve-your-heroku-app-name-and-database-name)
+3. [Migrate your data](#migrate-your-data-to-neon)
 4. [Verify that your data was transferred to Neon](#verify-that-your-data-was-transferred-to-neon)
+
+
+## Create a Neon project and copy the connection string
+
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Enter a name for your project and click **Create Project**.
+4. After creating a project, you are directed to the project **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the **Dashboard**. Copy the connection string. It is required to migrate your data from Heroku.
+
+The example connection string used the instructions that follow is:
+
+```sh
+postgres://daniel:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
+```
 
 ## Retrieve your Heroku app name and database name
 
@@ -34,28 +45,11 @@ where `<app>` is the Heroku App Name.
 For example:
 
 ```shell
-$ heroku pg:links --app thawing-wave-57217
-=== postgresql-trapezoidal-48643
+$ heroku pg:links --app thawing-wave-57227
+=== postgresql-trapezoidal-48645
 ```
 
-## Retrieve your Neon connection string
-
-You can find the Neon connection string in the Hasura Console or the Neon Console.
-
-To retrieve your Neon connection string from the Hasura Console:
-
-1. Log into your Hasura account.
-2. Select the project that you want to migrate and click **Launch Console**.
-3. Select the **DATA** tab.
-4. Copy the Neon connection string.
-
-To retrieve your Neon connection string from the Neon Console:
-
-1. Log in to the [Neon Console](https://console.neon.tech/app/projects).
-2. Select the Neon project that you want to transfer data to.
-3. On the project **Dashboard**, copy the connection string from **Connection Details**.
-
-## Migrate your data
+## Migrate your data to Neon
 
 From your terminal, run the following Heroku CLI command:
 
@@ -72,9 +66,9 @@ where:
 For example:
 
 ```shell
-$ heroku pg:pull --app thawing-wave-57217 postgresql-trapezoidal-48643 postgres://daniel:Wij8mIDXoQ6G@lively-voice-223755.cloud.neon.tech:5432/main
+$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgres://daniel:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
 
-heroku-cli: Pulling postgresql-trapezoidal-48643 ---> postgres://daniel:Wij8mIDXoQ6G@lively-voice-223755.cloud.neon.tech:5432/main
+heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgres://daniel:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
 
 pg_dump: last built-in OID is 16383
 pg_dump: reading extensions
