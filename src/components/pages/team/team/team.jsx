@@ -248,7 +248,7 @@ const members = [
   {
     photo: <StaticImage src="./images/joonas-koivunen-photo.jpg" alt="Joonas Koivunen" />,
     name: 'Joonas Koivunen',
-    position: 'SSE (Storage)',
+    position: 'Software Engineer',
     githubUrl: 'https://www.github.com/koivunej',
     linkedinUrl: 'https://www.linkedin.com/in/joonas-koivunen-70273412/',
   },
