@@ -7,26 +7,22 @@ redirectFrom:
 
 Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
 
-The following instructions describe how to connect to a new or existing Neon database from Hasura Cloud.
-
-_**Note**_ If you are migrating to Neon from Hasura with Heroku Postgres, refer to our [Migrate from Heroku](/docs/how-to-guides/hasura-heroku-migration) guide for data migration instructions after connecting to a Neon project.
+The following instructions describe how to connect a Hasura Cloud project to a new or existing Neon database.
 
 ## Connecting to a new Neon database
 
-Use the following instructions to connect to a new Neon database. The database is created for you when you connect your Hasura Cloud project to Neon. This connection method authenticates you from Hasura Cloud. 
+Use the following instructions to connect to a new Neon database. The database is created for you when you connect your Hasura Cloud project to Neon. This connection method authenticates you from Hasura Cloud.
 
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
 1. On the Hasura Cloud dashboard, create a Hasura project.
 1. After the project is initialized, click **Launch Console** to open the Hasura Console.
-1. Select **DATA** from the top navigation bar.
-1. Select the **Create New Database** tab.
-1. Click **Connect Neon Database**. If you are not logged in to Neon already, you are directed to a Neon authorization dialog.
-1. Select an authentication option.  
-1. In the Neon authorization dialog, click **Authorize**.
+1. On the Hasura Console, navigate to **DATA** > **Manage** > **Connect Database** > **Create New Database**.
+1. Click **Connect Neon Database**. 
+1. When prompted to login or sign up for Neon, we recommend selecting **Continue with Hasura** for seamless authentication.
 
-    A message appears at the top right of the Hasura Console indicating that a data source is being added. A subsequent message indicates that the data source was added successfully and provides a **View Database** button, which directs you to the **Data Manager** dialog in the Hasura Console, opened to the default `public` schema in Neon.
+After authenticating, a new Neon PostgreSQL database is created and connected to your Hasura project, and the Neon project connection string is associated with the `PG_DATABASE_URL` environment variable.
 
-To start using your Neon database from the Hasura Console, see [Next steps](#next-steps).
+To start exploring Hasura's GraphQL API with data stored in Neon, see [Load a template in Hasura](#load-a-template-in-hasura-optional).
 
 ## Connecting to an existing Neon database
 
@@ -38,7 +34,7 @@ Use the following instructions to connect to an existing Neon database from Hasu
 - An existing Neon project. If you do not have a Neon project, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
 - A connection string for the Neon project that includes your password. For example:  
   ```sh
-  `postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main`.
+  `postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main`
   ```
   Your project's connection string can be found on the **Dashboard** tab in the Neon Console. If you have misplaced your password, you can either reset it or create a new user. Users are managed on the **Settings** tab in the Neon Console.
 
@@ -54,41 +50,22 @@ The following steps describe how to navigate to Hasura Cloud and connect to your
 
 Hasura Cloud connects to your Neon project and automatically discovers the default `public` schema.
 
-To start using your Neon database from the Hasura Console, see [Next steps](#next-steps).
+To start exploring Hasura's GraphQL API with data stored in Neon, see [Load a template in Hasura](#load-a-template-in-hasura-optional).
 
-## Next steps
+## Load a template in Hasura (optional)
 
-Optionally, follow the instructions in this section to create a table in your Neon database from the Hasura Console, create an endpoint, and run a `cURL` command using the new endpoint.
+Optionally, after connecting from your Hasura project to Neon, you can explore Hasura's GraphQL API by loading a template from Hasura's template gallery. Follow these steps to load the `Welcome to Hasura` template, which creates `customer` and `order` tables and populates them with sample data.
+. 
+1. In the Hasura Console, select **DATA**.
+1. Under **Data Manager**, select your database.
+1. From the **Template Gallery**, select **Welcome to Hasura** to install the template.
 
-### Create a table
+To view the newly created tables from the Neon Console:
 
-After connecting from your Hasura project to a Neon database, you can create a table from the Hasura Console.
+1. In the Hasura Console, select **DATA** > **Manage your Neon databases** to open the Neon Console.
+2. In the Neon Console, select your project.
+3. Select the **Tables** tab. The newly created `customer` and `order` tables should appear under the **Tables** heading in the sidebar.
 
-1. In Hasura, select **DATA** from the navigation bar and click **Create Table**.
-1. On the **Add a New Table** dialog, enter a table name (`t`), a column name (`text`), and select a column type (`Text`).
-1. Select the `text` column as the **Primary Key**.
-1. Click **Add Table**.
-1. Add rows to the table using the **Insert Row** tab.
+## Import existing data to Neon
 
-### Create an API endpoint
-
-1. Navigate to the **API** tab. On the **GraphiQL** tab, query the table with GraphQL. For example:
-
-    ```graphql
-    query MyQuery {
-      t {
-        text
-      }
-    }
-    ```
-
-2. Save the GraphQL query as an HTTP API endpoint by clicking the **REST** tab. Name the endpoint `query_t` and save it as a `GET` method.
-
-### Run a cURL command
-
-From a terminal, use the endpoint with cURL to query the table contents:
-
-```bash
-$ curl -H 'x-hasura-admin-secret: {admin_secret}' https://<hasura_project_name>.hasura.app/api/rest/query_t
-{"t":[{"text":"test"}]}
- ```
+If you are migrating to Neon from Hasura with Heroku PostgreSQL, refer to the [Migrate from Heroku](/docs/how-to-guides/hasura-heroku-migration) guide for data migration instructions. For general data import instructions, see [Importing a database](/docs/how-to-guides/import-an-extsing-database).
