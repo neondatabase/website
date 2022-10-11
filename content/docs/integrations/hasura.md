@@ -55,7 +55,7 @@ To start exploring Hasura's GraphQL API with data stored in Neon, see [Load a te
 ## Load a template in Hasura (optional)
 
 Optionally, after connecting from your Hasura project to Neon, you can explore Hasura's GraphQL API by loading a template from Hasura's template gallery. Follow these steps to load the `Welcome to Hasura` template, which creates `customer` and `order` tables and populates them with sample data.
-. 
+
 1. In the Hasura Console, select **DATA**.
 1. Under **Data Manager**, select your database.
 1. From the **Template Gallery**, select **Welcome to Hasura** to install the template.
