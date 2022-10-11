@@ -25,7 +25,7 @@ To migrate your data from Heroku to Neon:
 The example connection string used the instructions that follow is:
 
 ```sh
-postgres://daniel:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
+postgres://jsmith:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
 ```
 
 ## Retrieve your Heroku app name and database name
@@ -66,9 +66,9 @@ where:
 For example:
 
 ```shell
-$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgres://daniel:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
+$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgres://jsmith:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
 
-heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgres://daniel:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
+heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgres://jsmith:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
 
 pg_dump: last built-in OID is 16383
 pg_dump: reading extensions
