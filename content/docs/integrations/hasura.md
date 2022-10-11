@@ -9,6 +9,8 @@ Hasura Cloud is an open source GraphQL engine that provides a scalable, highly a
 
 The following instructions describe how to connect to a new or existing Neon database from Hasura Cloud.
 
+_**Note**_ If you are migrating to Neon from Hasura with Heroku Postgres, refer to our [Migrate from Heroku](/docs/how-to-guides/hasura-heroku-migration) guide for database migration instructions.
+
 ## Connecting to a new Neon database
 
 Use the following instructions to connect to a new Neon database. The database is created for you when you connect your Hasura Cloud project to Neon. This connection method authenticates you from Hasura Cloud. 
