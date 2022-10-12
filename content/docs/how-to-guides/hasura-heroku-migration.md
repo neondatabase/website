@@ -60,7 +60,7 @@ heroku pg:pull --app <app> <heroku-pg-database> <neon-connection-string>
 where:
 
 - `<app>` is the name of the Heroku app
-- `<heroku-pg-database>` is the name of Heroku PostgreSQL database
+- `<heroku-pg-database>` is the name of the Heroku PostgreSQL database
 - `<neon-connection-string>` is the Neon connection string
 
 For example:
