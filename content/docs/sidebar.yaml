@@ -32,8 +32,6 @@
   items:
     - title: Hasura
       slug: integrations/hasura
-    - title: Vercel and Next.js
-      slug: integrations/vercel
     - title: Prisma
       slug: integrations/prisma
 - title: Develop
@@ -44,6 +42,8 @@
       slug: integrations/go
     - title: Java
       slug: integrations/java
+    - title: Next.js
+      slug: integrations/vercel
     - title: Node.js
       slug: integrations/node
     - title: Rust
@@ -51,7 +51,7 @@
     - title: SQLAlchemy
       slug: integrations/sqlalchemy
     - title: Symfony
-      slug: integrations/symfony
+      slug: integrations/symfony    
 - title: Import data
   items:
     - title: Importing a database

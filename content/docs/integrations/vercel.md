@@ -1,56 +1,67 @@
 ---
-title: Run a Vercel and Next.js app
+title: Run a Next.js app
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
 ---
 
-## Introduction
+Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js app.
 
-Vercel is a serverless platform used by developers for web hosting and other web services with the benefit of automatic scaling and smooth deployment; it also allows you to deploy your Next.js applications with full-on support.
+To create a Neon project and access it from a Next.js app:
 
-## Create a Next.js project
-
-First, [Create a next.js project](https://nextjs.org/learn/basics/create-nextjs-app/setup) if you don't have one.
+1. [Create a Neon project](#create-a-neon-project)
+2. [Create a Next.js project](#create-a-nextjs-project)
+3. [Add a PostgreSQL client to your app](#add-a-postgresql-client-to-your-app)
+4. [Add your Neon connection details](#add-your-neon-connection-details)
+5. [Connect to the Neon database](#connect-to-the-neon-database)
 
 ## Create a Neon project
 
-Next, create a Neon Project for your app. You can configure your database schema from Neon Console or using tools like Prisma.
+To create a Neon project:
 
-## Add PostgreSQL client
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Enter a name for your project and click **Create Project**.
+4. After creating a project, you are directed to the project **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the **Dashboard**. Copy the connection string. It is used later to connect to your Neon project.
 
-Add PostgreSQL client to your app. In this example we used [postgres.js](https://www.npmjs.com/package/postgres), but feel free to choose another one.
+For additional information about creating projects, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
 
-## Add Neon credentials
+## Create a Next.js project
 
-Add your Neon credentials to the `.env` file.
+Create a Next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app/setup), in the Vercel documentation.
+
+## Add a PostgreSQL client to your app
+
+Add a PostgreSQL client to your app, such as `Postgres.js`.  For instructions, refer to the [postgres.js Getting started](https://www.npmjs.com/package/postgres).
+
+## Add your Neon connection details
+
+Add your Neon connection string to your `.env` file.
 
 ```shell
-NEON_HOST=...
-NEON_DB=...
-NEON_USER=...
-NEON_PASS=...
-NEON_PORT=...
+DATABASE_URL=postgres://<user>:<password>@<project_id>.cloud.neon.tech:<port>/<database>
 ```
 
-You can use either a connection string or connection options separately.
+where:
 
-## Connect to the Database with a PostgreSQL client and Neon Credentials
+- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<password>` is the database user's password, which is provided to you when you create a project.
+- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
+- `<port>` is the Neon port number. The default port number is `5432`.
+- `<database>` is the name of the database in your Neon project. `main` is the default database created with each Neon project.
 
-Connect to the database with PostgreSQL client and your Neon credentials from your api handlers or server functions.
+The connection details listed above are provided in the Neon connection string that you copied from the project Dashboard after you created the Neon project.
+
+## Connect to the Neon database
+
+From your API handlers or server functions, connect to the Neon database with the PostgreSQL client and your Neon connection details. For example:
 
 ```javascript pages/api/hello_worlds.js
 import postgres from 'postgres';
 
-const sql = postgres({
-  host: process.env.NEON_HOST,
-  port: process.env.NEON_PORT,
-  database: process.env.NEON_DB,
-  username: process.env.NEON_USER,
-  password: process.env.NEON_PASS,
-});
+const sql = postgres(process.env.DATABASE_URL);
 
-const result = await sql.uafe(req.body);
+const result = await sql.unsafe(req.body);
 ```
 
-_Note: Do not ever expose your Neon credentials to the browser._
+_**Important**_: Never expose your Neon credentials to the browser.
