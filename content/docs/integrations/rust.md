@@ -11,7 +11,7 @@ This topic describes how to create a Neon project and connect to it from a Rust 
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your project ID, database name, user, and password. This information is required when configuring a connection from your Rust app. 
+When creating a Neon project, take note of your user name, password, and database name. This information is required when configuring a connection from your Rust app. 
 
 To create a Neon project:
 
@@ -27,7 +27,7 @@ Add the Neon connection details to your `main.rs` file.
 use postgres::{Client, NoTls};
 
 fn main() {
- let mut client = Client::connect("user=<user> dbname=<db_name> host=pg.neon.tech password=<password>", NoTls).expect("connection error");
+ let mut client = Client::connect("user=<user> dbname=<dbname> host=pg.neon.tech password=<password>", NoTls).expect("connection error");
 
  for row in client.query("select version()", &[]).expect("query error") {
      let version: &str = row.get(0);
@@ -41,6 +41,5 @@ where:
 - `<user>` is the database user, which is found on the project **Dashboard**, under **Connection Details**.
 - `<dbname>` is the database name (the default Neon project database is `main`).
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
-- `<project_id>` is the ID of the Neon project, which is found on the project **Settings** tab, under **General Settings**.
 
 **_Note_**: The sample connection code shown above is also available on the [rust-lang playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=0d9daa9cde3c74d2916c8f05b24707a3).
