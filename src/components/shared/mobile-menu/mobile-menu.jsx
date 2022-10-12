@@ -16,6 +16,7 @@ const ANIMATION_DURATION = 0.2;
 
 const icons = {
   // discord: DiscordIcon,
+  github: GithubIcon,
   discussions: DiscussionsIcon,
 };
 
@@ -90,12 +91,11 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
       <div className="mt-5 space-y-4">
         <Button
           className="!flex h-12 items-center justify-center"
-          to={LINKS.github}
+          to={LINKS.dashboard}
           size="xs"
           theme="quaternary"
         >
-          <GithubIcon />
-          <span className="ml-2.5">Star Us on Github</span>
+          Sign In
         </Button>
         <Button
           className="!flex h-12 items-center"
