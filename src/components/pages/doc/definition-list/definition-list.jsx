@@ -82,7 +82,7 @@ const DefinitionList = ({ children }) => {
         return (
           <Fragment key={idx}>
             {terms.map((term, termIdx) => {
-              const anchorMold = slugify(termTextContent);
+              const anchorMold = slugify(termTextContent, { lower: true });
               return (
                 <dt
                   className="relative mt-4 flex font-bold first:mt-0"
