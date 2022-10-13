@@ -9,11 +9,18 @@ Neon separates storage and compute and offers modern developer features such as 
 <!-- TODO remove before merging  -->
 <DefinitionList>
 
-First definition
-: Duis aute irure dolor in **reprehenderit** in voluptate velit esse `cillum` dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, _sunt_ in culpa qui officia deserunt mollit anim id est laborum.
+Scenario executor
+: First definition
+: Second definition
 
-Second definition
-: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br/> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu [fugiat nulla pariatur](/).
+Soak test
+: First and only definition
+
+Smoke test
+Another term for smoke test
+: First definition for both terms
+: Second definition for both terms
+: ...n definition for both terms
 
 [Stress test](/)
 : First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
