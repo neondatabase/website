@@ -185,10 +185,6 @@ Another term for smoke test
 
 ### Constraints
 
-The `dt` (term) has an `id` att and the same anchor as well!
-
-⚠️ Beware of the constraint though:
-
 - using emojis in `dt` is prohibited, as it potentially can mess up with `id` attribute, and `href` at anchor. We can not be sure which range will be used to display a particular symbol (depends on editor OS) and if it is going to be stripped.
 - if there are multiple terms for a given set of descriptions, only the first one will have an `id` and an `anchor`
 - make absolutely sure your `dt` text content is unique across the page to avoid `id` collisions
