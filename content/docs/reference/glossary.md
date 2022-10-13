@@ -14,7 +14,7 @@ See [Token](#token).
 
 A process that monitors a Neon Compute for activity. During periods of inactivity, the Activity Monitor gracefully places the Compute into an idle state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of complete inactivity. When a connection is made to an idle Compute, the Activity Monitor reactivates the Compute.
 
-### API 
+### API
 
 See [Neon API](#neon-api).
 
@@ -26,7 +26,7 @@ A unique identifier used to authenticate a user or a calling program to an API. 
 
 ### Branch
 
-A copy of a Neon project created from a current or past state. Project data is copied using the [copy-on-write](#copy-on-write) technique. The data in a branched project can be independently modified. See [Branching](/docs/conceptual-guides/branching/).
+A [copy-on-write](#copy-on-write) clone of existing Neon project created from a current or past state. The data in each branch can be modified independently from its originating project data. See [Branching](/docs/conceptual-guides/branching/).
 
 ### CI/CD
 
