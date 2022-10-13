@@ -85,20 +85,20 @@ const DefinitionList = ({ children }) => {
               const anchorMold = slugify(termTextContent, { lower: true });
               return (
                 <dt
-                  className="relative mt-4 flex font-bold first:mt-0"
+                  className="relative mt-4 flex items-center font-bold first:mt-0"
                   id={!termIdx ? anchorMold : termIdx}
                   key={termIdx}
                 >
+                  <span className="mr-2.5">—</span>
+                  {term}
                   {!termIdx && (
                     <a
-                      className="absolute -left-5 top-1/2 -translate-y-1/2 !border-b-0 opacity-0 transition-opacity duration-200 hover:opacity-100"
+                      className="ml-2 mt-0.5 !border-b-0 opacity-0 transition-opacity duration-200 hover:opacity-100"
                       href={`#${anchorMold}`}
                     >
                       <AnchorIcon className="h-4 w-4" />
                     </a>
                   )}
-                  <span className="mr-2.5">—</span>
-                  {term}
                 </dt>
               );
             })}

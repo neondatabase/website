@@ -147,7 +147,7 @@ All available languages for code blocks can be found [here](https://prismjs.com/
 
 Custom `mdx` component that makes possible using [extended markdown syntax for descriptions lists](https://www.markdownguide.org/extended-syntax/#definition-lists). Fully [WCAG-compliant](https://www.w3.org/TR/WCAG20-TECHS/H40.html). It provides an accessible way to make term lists, and it's a generally good way to add structure to a text when a writer needs more than bullets and less than headings.
 
-The usage is pretty [straightforward](https://github.com/grafana/k6-docs/pull/740/commits/65a8c8fce838f7c3e5f1a356250145d59296807c#diff-3a17a7abbacb63f84edb34a6d6631cc656f65efc3b8d1863d8b24cba0c99b838):
+The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
 <!-- other content here -->
@@ -183,11 +183,9 @@ Another term for smoke test
 - `**strong**` - but that doesn't make sense, by default terms appearance is already bold
 - `inlineCode` - but it doesn't alter it's change in this context
 
-### Batteries
+### Constraints
 
-`DefinitionList` is backward-compatible with the old way of representing terms and definitions, via `h3` tag and custom content. `h3` tag by default had an anchor icon and a `id` attribute, similar to how it works on GitHub.
-
-So our `dt` (term) has an `id` att and the same anchor as well!
+The `dt` (term) has an `id` att and the same anchor as well!
 
 ⚠️ Beware of the constraint though:
 
