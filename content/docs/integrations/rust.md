@@ -41,5 +41,3 @@ where:
 - `<user>` is the database user, which is found on the project **Dashboard**, under **Connection Details**.
 - `<dbname>` is the database name (the default Neon project database is `main`).
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
-
-**_Note_**: The sample connection code shown above is also available on the [rust-lang playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=0d9daa9cde3c74d2916c8f05b24707a3).
