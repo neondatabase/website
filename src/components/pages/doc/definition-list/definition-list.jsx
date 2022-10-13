@@ -87,6 +87,7 @@ const DefinitionList = ({ children }) => {
                 <dt
                   className="relative mt-4 flex font-bold first:mt-0"
                   id={!termIdx ? anchorMold : termIdx}
+                  key={termIdx}
                 >
                   {!termIdx && (
                     <a
