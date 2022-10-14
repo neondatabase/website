@@ -11,17 +11,17 @@ The following instructions describe how to connect a Hasura Cloud project to a n
 
 ## Connecting to a new Neon database
 
+Use the following instructions to connect to a new Neon database. This connection method authenticates you from Hasura Cloud.
+
 <video autoplay playsinline muted loop width="800" height="600">
 <source type="video/mp4" src="https://user-images.githubusercontent.com/13738772/195619191-6de246e2-a47a-4ab3-a68f-c5d793cd5bb0.mp4" />
 </video>
-
-Use the following instructions to connect to a new Neon database. This connection method authenticates you from Hasura Cloud.
 
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
 1. On the Hasura Cloud dashboard, create a Hasura project.
 1. After the project is initialized, click **Launch Console** to open the Hasura Console.
 1. On the Hasura Console, navigate to **DATA** > **Manage** > **Connect Database** > **Create New Database**.
-1. Click **Connect Neon Database**. 
+1. Click **Connect Neon Database**.
 1. When prompted to login or sign up for Neon, we recommend selecting **Continue with Hasura** for seamless authentication.
 
 After authenticating, a new Neon PostgreSQL database is created and connected to your Hasura project, and the Neon project connection string is associated with the `PG_DATABASE_URL` environment variable.
@@ -36,10 +36,12 @@ Use the following instructions to connect to an existing Neon database from Hasu
 
 - An existing Neon account. If you do not have one, see [Signing up](/docs/get-started-with-neon/signing-up).
 - An existing Neon project. If you do not have a Neon project, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
-- A connection string for the Neon project that includes your password. For example:  
+- A connection string for the Neon project that includes your password. For example:
+
   ```sh
   `postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main`
   ```
+  
   Your project's connection string can be found on the **Dashboard** tab in the Neon Console. If you have misplaced your password, you can either reset it or create a new user. Users are managed on the **Settings** tab in the Neon Console.
 
 ### Add the Neon project as a data source
