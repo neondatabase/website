@@ -54,10 +54,10 @@
       slug: integrations/symfony    
 - title: Import data
   items:
-    - title: Importing a database
+    - title: Import data from PostgreSQL
       slug: how-to-guides/import-an-existing-database
-    - title: Migrating from Heroku
-      slug: how-to-guides/hasura-heroku-migration
+    - title: Import data from Heroku
+      slug: how-to-guides/import-from-heroku
 - title: Security
   slug: security
 - title: Reference
