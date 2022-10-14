@@ -1,15 +1,15 @@
 ---
-title: Run a Node.js app
+title: Connect a Node.js application to Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
 ---
 
-This topic describes how to create a Neon project and connect to it from a NodeJS project.
+This guide describes how to create a Neon project and connect to it from a Node.js application.
 
 _**Note**_: The same configuration steps can be used for Express and Next.js applications.
 
-To connect to Neon from a NodeJS project:
+To connect to Neon from a Node.js application:
 
 1. [Create a Neon Project](#create-a-neon-project)
 2. [Create a NodeJS project and add dependencies](#create-a-nodejs-project-and-add-dependencies)

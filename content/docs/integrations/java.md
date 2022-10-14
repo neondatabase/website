@@ -1,11 +1,11 @@
 ---
-title: Run a Java app
+title: Connect a Java application to Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
 ---
 
-This topic describes how to create a Neon project and connect to it with Java Database Connectivity (JDBC) or from a Spring Data project that uses JDBC.
+This guide describes how to create a Neon project and connect to it with Java Database Connectivity (JDBC) or from a Spring Data project that uses JDBC.
 
 The JDBC API is a Java API for relational databases. PostgreSQL has a well-supported open-source JDBC driver which can be used to access Neon. All popular Java frameworks use JDBC internally. To connect to Neon, you are only required to provide a connection URL.
 
