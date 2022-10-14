@@ -26,9 +26,9 @@ const Input = connectSearchBox(
         )}
         type="search"
         value={currentRefinement}
-        placeholder={isNotFoundPage ? 'Search from other pages' : 'Search'}
+        placeholder={isNotFoundPage ? 'Search for other pages' : 'Search'}
         autoComplete="off"
-        aria-label={isNotFoundPage ? 'Search from other pages' : 'Search'}
+        aria-label={isNotFoundPage ? 'Search for other pages' : 'Search'}
         onChange={(e) => refine(e.target.value)}
         onFocus={onFocus}
       />
