@@ -13,8 +13,8 @@ To import your data from Heroku to Neon:
 
 1. [Create a Neon project and copy the connection string](#create-a-neon-project-and-copy-the-connection-string)
 2. [Retrieve your Heroku app name and database name](#retrieve-your-heroku-app-name-and-database-name)
-3. [Import your data](#import-your-data-to-neon)
-4. [Verify that your data was transferred to Neon](#verify-that-your-data-was-transferred-to-neon)
+3. [Import your data](#import-your-data)
+4. [Verify that your data was imported](#verify-that-your-data-was-imported)
 
 
 ## Create a Neon project and copy the connection string
@@ -51,7 +51,7 @@ $ heroku pg:links --app thawing-wave-57227
 === postgresql-trapezoidal-48645
 ```
 
-## Import your data to Neon
+## Import your data
 
 From your terminal, run the following Heroku CLI command:
 
@@ -141,7 +141,7 @@ pg_restore: creating FK CONSTRAINT "public.order order_customer_id_fkey"
 heroku-cli: Pulling complete.
 ```
 
-## Verify that your data was transferred to Neon
+## Verify that your data was imported
 
 1. Log in to the [Neon Console](https://console.neon.tech/app/projects).
 2. Select the Neon project that you transferred data to.
