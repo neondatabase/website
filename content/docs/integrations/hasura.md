@@ -15,7 +15,7 @@ The following instructions describe how to connect a Hasura Cloud project to a n
 <source type="video/mp4" src="https://user-images.githubusercontent.com/13738772/195619191-6de246e2-a47a-4ab3-a68f-c5d793cd5bb0.mp4" />
 </video>
 
-Use the following instructions to connect to a new Neon database. The database is created for you when you connect your Hasura Cloud project to Neon. This connection method authenticates you from Hasura Cloud.
+Use the following instructions to connect to a new Neon database. This connection method authenticates you from Hasura Cloud.
 
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
 1. On the Hasura Cloud dashboard, create a Hasura project.
