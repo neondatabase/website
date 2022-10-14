@@ -1,22 +1,26 @@
 ---
 title: Query with psql
 enableTableOfContents: true
+redirectFrom:
+  - /docs/quickstart/postgres
+  - /docs/integrations/postgres
 ---
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/14/app-psql.html), in the _PostgreSQL Documentation_.
 
+_**Note**:_ A Neon Compute runs PostgreSQL, which means that any PostgreSQL application or standard utility such as `psql` is compatible with Neon. You can also use PostgreSQL client libraries and drivers to connect.
+
 The following `psql` connection methods are described:
 
-- [Passwordless connect with Neon's psql quick auth](#passwordless-connect-with-neons-psql-quick-auth)
-- [Connecting with an exported password](#connecting-with-an-exported-password)
-- [Connecting with a password saved to a file](#connecting-with-a-password-saved-to-a-file)
-- [Running queries](#running-queries)
+- [Connect with Neon's psql passwordless auth](#connect-with-neons-psql-passwordless-auth)
+- [Connect with an exported password](#connect-with-an-exported-password)
+- [Connect with a password saved to a file](#connect-with-a-password-saved-to-a-file)
 
-After establishing a connection, try running some queries. For instructions, see [Running queries](#running-queries).
+After establishing a connection, you can try running some queries. For instructions, see [Running queries](#running-queries).
 
-## Passwordless connect with Neon's psql quick auth
+## Connect with Neon's psql passwordless auth
 
-Neon's passwordless `psql` quick auth feature helps you quickly and conveniently authenticate a connection to a Neon project.
+Neon's `psql` passwordless auth feature helps you quickly authenticate a connection to a Neon project.
 
 1. In your terminal, run the following command:
 
@@ -61,7 +65,7 @@ Neon's passwordless `psql` quick auth feature helps you quickly and conveniently
     main
    ```
 
-## Connecting with an exported password
+## Connect with an exported password
 
 **_Warning_**: Some operating systems allow non-root users to view process environment variables when using the `ps` command. For security reasons, consider using a password file in such cases.
 
@@ -92,7 +96,7 @@ To connect with an exported password:
    - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
    - `<project_id>` is the Neon Project ID, which is found on the Neon Console **Settings** tab, under **General Settings**.
 
-## Connecting with a password saved to a file
+## Connect with a password saved to a file
 
 To connect with a password saved to a `.pgpass` password file:
 
@@ -101,7 +105,7 @@ To connect with a password saved to a `.pgpass` password file:
    ```bash
    touch ~/.pgpass && \
    chmod 0600 ~/.pgpass && \
-   echo -e "<project_id>.cloud.neon.tech:5432:main:<user>:<password>\n" >> ~/.pgpass
+   echo -e "<project_id>.cloud.neon.tech:5432:main:<user>:<password>\n$(cat ~/.pgpass)" > ~/.pgpass
    ```
 
    _**Note**_: If you already have a `.pgpass` file, you only need to run the `echo` command.

@@ -6,7 +6,7 @@ redirectFrom:
 
 Neon architecture is based on the separation of storage and compute and is orchestrated by the Neon Control Plane, which manages cloud resources across both storage and compute.
 
-A Neon Compute runs regular PostgreSQL, and storage is a multi-tenant key-value store for PostgreSQL pages, which is custom-built for the cloud.
+A Neon Compute runs PostgreSQL, and storage is a multi-tenant key-value store for PostgreSQL pages that is custom-built for the cloud.
 
 ![Neon architecture diagram](/docs-images/neon_architecture_2.png)
 
