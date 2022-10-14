@@ -1,14 +1,43 @@
 import { StaticImage } from 'gatsby-plugin-image';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import Search from 'components/shared/search';
 
+const CTA = ({ isDocsPage }) =>
+  isDocsPage ? (
+    <div className="flex w-full flex-col">
+      <Search className="my-8" isNotFoundPage />
+      <span className="h-px w-full bg-gray-4" />
+      <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
+        Back to home
+      </Link>
+    </div>
+  ) : (
+    <Button className="mt-11 self-start lg:mt-8 sm:w-full" size="md" theme="primary" to="/">
+      Back to Home
+    </Button>
+  );
+
+CTA.propTypes = {
+  isDocsPage: PropTypes.bool,
+};
+
+CTA.defaultProps = {
+  isDocsPage: false,
+};
+
 const Hero = ({ pathname }) => {
-  const isDocsPage = pathname.includes('/docs/');
+  const [isDocsPage, setIsDocsPage] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+    setIsDocsPage(pathname.includes('/docs/'));
+  }, [pathname]);
 
   return (
     <section className="grow pt-28 pb-24 lg:pt-0 md:py-14 xs:pt-10">
@@ -22,19 +51,7 @@ const Hero = ({ pathname }) => {
             Sorry, the page you are looking for doesn’t exist or has been moved.
           </p>
 
-          {isDocsPage ? (
-            <div className="flex w-full flex-col">
-              <Search className="my-8" isNotFoundPage />
-              <span className="h-px w-full bg-gray-4" />
-              <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
-                Back to home
-              </Link>
-            </div>
-          ) : (
-            <Button className="mt-11 self-start lg:mt-8 sm:w-full" size="md" theme="primary" to="/">
-              Back to Home
-            </Button>
-          )}
+          {isLoading ? 'Loading...' : <CTA isDocsPage={isDocsPage} />}
         </div>
 
         <div className="col-start-6 col-end-12 2xl:col-end-13 md:col-span-full">
