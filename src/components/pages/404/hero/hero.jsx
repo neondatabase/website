@@ -30,6 +30,14 @@ CTA.defaultProps = {
   isDocsPage: false,
 };
 
+const Skeleton = () => (
+  <div className="mt-6 flex w-full flex-col items-start justify-center space-y-4">
+    <span className="skeleton max-w-[410px]" />
+    <span className="skeleton max-w-[260px]" />
+    <span className="skeleton max-w-[410px]" />
+  </div>
+);
+
 const Hero = ({ pathname }) => {
   const [isDocsPage, setIsDocsPage] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -51,7 +59,7 @@ const Hero = ({ pathname }) => {
             Sorry, the page you are looking for doesn’t exist or has been moved.
           </p>
 
-          {isLoading ? 'Loading...' : <CTA isDocsPage={isDocsPage} />}
+          {isLoading ? <Skeleton /> : <CTA isDocsPage={isDocsPage} />}
         </div>
 
         <div className="col-start-6 col-end-12 2xl:col-end-13 md:col-span-full">
