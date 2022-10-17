@@ -32,7 +32,7 @@ Create a Next.js project if you do not have one. For instructions, see [Create a
 
 ## Add a PostgreSQL client to your app
 
-Add a PostgreSQL client to your app, such as `Postgres.js`.  For instructions, refer to the [postgres.js Getting started](https://www.npmjs.com/package/postgres).
+Add a PostgreSQL client to your app, such as `Postgres.js`. For instructions, refer to the [postgres.js Getting started](https://www.npmjs.com/package/postgres).
 
 ## Add your Neon connection details
 

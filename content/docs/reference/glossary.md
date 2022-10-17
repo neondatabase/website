@@ -102,7 +102,7 @@ The Pageserver uploads immutable files to cloud storage, which is the final, hig
 
 ### Passwordless authentication
 
-The ability to authenticate without providing a password. Neon’s [Passwordless auth](#passwordless-auth) feature supports passwordless authentication.  
+The ability to authenticate without providing a password. Neon’s [Passwordless auth](#passwordless-auth) feature supports passwordless authentication.
 
 ### PostgreSQL user
 

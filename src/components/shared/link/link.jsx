@@ -11,6 +11,7 @@ const underlineCommonStyles =
 const styles = {
   base: 'inline-flex !leading-none items-center',
   size: {
+    lg: 't-2xl font-semibold',
     md: 't-xl font-semibold',
     sm: 't-lg',
     xs: 't-base',

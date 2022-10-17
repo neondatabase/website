@@ -11,7 +11,7 @@ This topic describes how to create a Neon project and connect to it from a Rust 
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your user name, password, and database name. This information is required when configuring a connection from your Rust app. 
+When creating a Neon project, take note of your user name, password, and database name. This information is required when configuring a connection from your Rust app.
 
 To create a Neon project:
 

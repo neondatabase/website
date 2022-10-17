@@ -14,7 +14,6 @@ To migrate your data from Heroku to Neon:
 3. [Migrate your data](#migrate-your-data-to-neon)
 4. [Verify that your data was transferred to Neon](#verify-that-your-data-was-transferred-to-neon)
 
-
 ## Create a Neon project and copy the connection string
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
@@ -32,7 +31,7 @@ postgres://jsmith:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
 
 1. Log in to [Heroku](https://dashboard.heroku.com/) and select the project you want to migrate data from.
 1. Select **Overview** and copy the name of the Heroku Postgres database, which appears under **Installed add-ons**.
-2. Click **Settings** and copy your Heroku **App Name**.
+1. Click **Settings** and copy your Heroku **App Name**.
 
 _**Note**_: You can also retrieve the Heroku Postgres database name using the following Heroku CLI command:
 
@@ -123,7 +122,7 @@ pg_dump: reading large objects
 pg_dump: reading dependency data
 pg_dump: saving encoding = UTF8
 pg_dump: saving standard_conforming_strings = on
-pg_dump: saving search_path = 
+pg_dump: saving search_path =
 pg_dump: saving database definition
 pg_dump: dumping contents of table "public.customer"
 pg_restore: connecting to database for restore

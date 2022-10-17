@@ -41,7 +41,7 @@ Use the following instructions to connect to an existing Neon database from Hasu
   ```sh
   `postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main`
   ```
-  
+
   Your project's connection string can be found on the **Dashboard** tab in the Neon Console. If you have misplaced your password, you can either reset it or create a new user. Users are managed on the **Settings** tab in the Neon Console.
 
 ### Add the Neon project as a data source
@@ -50,7 +50,7 @@ The following steps describe how to navigate to Hasura Cloud and connect to your
 
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
 1. Click **Create Project** to create a Hasura Cloud project or click **Launch Console** to open an existing project.
-1. Select **DATA** from the top navigation bar. 
+1. Select **DATA** from the top navigation bar.
 1. On the **Connect Existing Database** tab, paste your connection string into the **Database URL** field.
 1. Enter a display name for your database in the **Database Display Name** field, and click **Connect Database**.
 

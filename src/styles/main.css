@@ -10,4 +10,5 @@
 @import './remove-autocomplete-styles';
 @import './with-highlighted-text';
 @import './content.css';
+@import './skeleton.css';
 @import '../components/shared/search/input/input.css';
