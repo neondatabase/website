@@ -18,6 +18,7 @@ Technical Preview Free Tier users can create up to three projects in Neon. Proje
 Neon separates storage and compute and stores data in its own internal format.
 The 10GB data size limit applies to the logical size of a Neon project. The logical size is the sum of all relation sizes in the project.
 
+<!--
 For users familiar with PostgreSQL, the logical size is roughly equal to:
 
 ```sql
@@ -30,6 +31,7 @@ To check the logical size of your Neon project, run the following query:
 ```sql
 SELECT pg_size_pretty(neon.pg_cluster_size());
 ```
+-->
 
 When the data size limit is reached, the following PostgreSQL error message is reported:
 
