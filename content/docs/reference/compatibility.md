@@ -29,6 +29,7 @@ During the Technical Preview, Neon permits installing the following PostgreSQL e
 | [cube](https://www.postgresql.org/docs/14/cube.html)                          |     1.5 |                                                                                                                |
 | [dict_int](https://www.postgresql.org/docs/14/dict-int.html)                  |     1.0 |                                                                                                                |
 | [fuzzystrmatch](https://www.postgresql.org/docs/14/fuzzystrmatch.html)        |     1.1 |                                                                                                                |
+| [h3_pg](https://github.com/zachasme/h3-pg/blob/main/docs/api.md)              |   4.0.1 |                                                                                                                |
 | [hstore](https://www.postgresql.org/docs/14/hstore.html)                      |     1.8 |                                                                                                                |
 | [intarray](https://www.postgresql.org/docs/14/intarray.html)                  |     1.5 |                                                                                                                |
 | [isn](https://www.postgresql.org/docs/14/isn.html)                            |     1.2 |                                                                                                                |
