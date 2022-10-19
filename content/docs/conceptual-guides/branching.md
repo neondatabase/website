@@ -9,21 +9,21 @@ redirectFrom:
 
 ## About branching
 
-A branch is a copy of the project data created from the current state or any past state that is still available. A branch can be independently modified from its originating project data.
+Neon allows you to instantly branch your data that same way you branch your code.
 
-When you create a branch, all of the data in the parent project is available in the branched project, but changes to the branch afterward are independent of the parent project and vice versa.
+A branch is a copy-on-write clone of existing Neon project created from a current or past state. A branch is completely isolated from its parent Neon project, so you are free play around with it, modify it, or remove it it when it's no longer needed.
 
 Branch creation does not increase load on the parent Neon project. You can create a branch at any time without affecting the performance of your production system, and no downtime is required.
 
-_**Note**: Neon branching capabilities are not yet publicly available. If you would like to try this feature, contact Neon at [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching for your account._
+When you create a branch, all of the data in the parent project is available in the branch, but changes to the branch are independent of the parent Neon project project and vice versa.
 
-### Branching uses
+### What can branching be used for?
 
-Branching has many possible uses, some of which are outlined below:
+Branching has a variety of possible uses, some of which are describes below:
 
 - **Development**
     - Create a branch of your production database for your Development team
-    - Create a branch for each Developer that they are free to play around with
+    - Create a branch for each Developer
 	
 - **Testing** 
     -	Run tests on a current branch of production data
@@ -36,19 +36,19 @@ Branching has many possible uses, some of which are outlined below:
     - Create a staging database by branching your production data
     - Create a branch for every pull request in your CI/CD pipeline
 			
-- **Backup** 
+- **Backup**
     -	Quickly and easily create backup branches
     -	Instantly restore a previous state by branching from a previously created backup branch
     -	Name backup branches according to the time they were created for convenient point-in-time restore (PITR)
 	
-- **Replication**	
+- **Replication**
     - Use branching to quickly and easily clone replicas
 
 - **Historical Analysis**
     -	Run time-travel queries against a historical state
     -	Create a branch from a past point in time to reproduce an issue
 	
-- **Simulation**	
+- **Simulation**
     - Run "what if" scenarios on a branch of your production data
     - Perform each simulation on its own branch
 	
@@ -69,7 +69,7 @@ A branch has the following characteristics:
 - A branch can be created without an endpoint. An endpoint may not be required for certain use cases, such as backups.
 - A branch endpoint can be deleted
 - The endpoint associated with the branch is deleted when a branch is deleted.
-- A branch endpoint URL uses the same format as a project endpoint URL: `{project_id}-{endpoint_id}.cloud.neon.tech` 
+- A branch endpoint URL uses the same format as a project endpoint URL: `{project_id}-{endpoint_id}.cloud.neon.tech`
 
 ## Branching from the Console
 
