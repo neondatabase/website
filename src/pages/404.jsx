@@ -6,9 +6,9 @@ import Layout from 'components/shared/layout';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
 
-const NotFoundPage = () => (
+const NotFoundPage = ({ location: { pathname } }) => (
   <Layout headerTheme="white">
-    <Hero />
+    <Hero pathname={pathname} />
   </Layout>
 );
 

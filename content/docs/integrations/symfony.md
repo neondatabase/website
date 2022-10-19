@@ -1,5 +1,5 @@
 ---
-title: Run a Symfony app
+title: Connect from Symfony with Doctrine to Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/symfony

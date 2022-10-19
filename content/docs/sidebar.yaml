@@ -28,24 +28,22 @@
       slug: how-to-guides/connectivity-issues
     - title: Connection pooling
       slug: get-started-with-neon/connection-pooling
-- title: Integrations
-  items:
-    - title: Hasura
-      slug: integrations/hasura
-    - title: Prisma
-      slug: integrations/prisma
-- title: Develop
+- title: Guides
   items:
     - title: Django
       slug: integrations/django
     - title: Go
       slug: integrations/go
+    - title: Hasura
+      slug: integrations/hasura
     - title: Java
       slug: integrations/java
     - title: Next.js
       slug: integrations/vercel
     - title: Node.js
       slug: integrations/node
+    - title: Prisma
+      slug: integrations/prisma
     - title: Rust
       slug: integrations/rust
     - title: SQLAlchemy
@@ -54,10 +52,10 @@
       slug: integrations/symfony    
 - title: Import data
   items:
-    - title: Importing a database
+    - title: Import data from PostgreSQL
       slug: how-to-guides/import-an-existing-database
-    - title: Migrating from Heroku
-      slug: how-to-guides/hasura-heroku-migration
+    - title: Import data from Heroku
+      slug: how-to-guides/import-from-heroku
 - title: Security
   slug: security
 - title: Reference

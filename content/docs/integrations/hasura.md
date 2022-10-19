@@ -1,5 +1,5 @@
 ---
-title: Run a Hasura App
+title: Connect from Hasura Cloud to Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura
@@ -7,17 +7,21 @@ redirectFrom:
 
 Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
 
-The following instructions describe how to connect a Hasura Cloud project to a new or existing Neon database.
+This guide describe how to connect a Hasura Cloud project to a new or existing Neon database.
 
 ## Connecting to a new Neon database
 
-Use the following instructions to connect to a new Neon database. The database is created for you when you connect your Hasura Cloud project to Neon. This connection method authenticates you from Hasura Cloud.
+Use the following instructions to connect to a new Neon database. This connection method authenticates you from Hasura Cloud.
+
+<video autoplay playsinline muted loop width="800" height="600">
+<source type="video/mp4" src="https://user-images.githubusercontent.com/13738772/195619191-6de246e2-a47a-4ab3-a68f-c5d793cd5bb0.mp4" />
+</video>
 
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
 1. On the Hasura Cloud dashboard, create a Hasura project.
 1. After the project is initialized, click **Launch Console** to open the Hasura Console.
 1. On the Hasura Console, navigate to **DATA** > **Manage** > **Connect Database** > **Create New Database**.
-1. Click **Connect Neon Database**. 
+1. Click **Connect Neon Database**.
 1. When prompted to login or sign up for Neon, we recommend selecting **Continue with Hasura** for seamless authentication.
 
 After authenticating, a new Neon PostgreSQL database is created and connected to your Hasura project, and the Neon project connection string is associated with the `PG_DATABASE_URL` environment variable.
@@ -32,10 +36,12 @@ Use the following instructions to connect to an existing Neon database from Hasu
 
 - An existing Neon account. If you do not have one, see [Signing up](/docs/get-started-with-neon/signing-up).
 - An existing Neon project. If you do not have a Neon project, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
-- A connection string for the Neon project that includes your password. For example:  
+- A connection string for the Neon project that includes your password. For example:
+
   ```sh
   `postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main`
   ```
+
   Your project's connection string can be found on the **Dashboard** tab in the Neon Console. If you have misplaced your password, you can either reset it or create a new user. Users are managed on the **Settings** tab in the Neon Console.
 
 ### Add the Neon project as a data source
@@ -44,7 +50,7 @@ The following steps describe how to navigate to Hasura Cloud and connect to your
 
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
 1. Click **Create Project** to create a Hasura Cloud project or click **Launch Console** to open an existing project.
-1. Select **DATA** from the top navigation bar. 
+1. Select **DATA** from the top navigation bar.
 1. On the **Connect Existing Database** tab, paste your connection string into the **Database URL** field.
 1. Enter a display name for your database in the **Database Display Name** field, and click **Connect Database**.
 
@@ -68,4 +74,4 @@ To view the newly created tables from the Neon Console:
 
 ## Import existing data to Neon
 
-If you are migrating to Neon from Hasura with Heroku PostgreSQL, refer to the [Migrate from Heroku](/docs/how-to-guides/hasura-heroku-migration) guide for data migration instructions. For general data import instructions, see [Importing a database](/docs/how-to-guides/import-an-extsing-database).
+If you are migrating from Hasura with Heroku PostgreSQL to Neon, refer to the [Import data from Heroku](/docs/how-to-guides/import-from-heroku) guide for data import instructions. For general data import instructions, see [Import data from PostgreSQL](/docs/how-to-guides/import-an-existing-database).

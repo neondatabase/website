@@ -32,7 +32,7 @@ Neon storage is designed with cloud costs in mind and uses a multi-tier architec
 
 ## Open source
 
-You can find [neondatabase](https://github.com/neondatabase/neon) on GitHub. We develop in public under the Apache 2.0 license. For an overview of Neon's architecture, refer to Neon's [architecture documentation](/docs/conceptual-guides/architecture-overview). 
+You can find [neondatabase](https://github.com/neondatabase/neon) on GitHub. We develop in public under the Apache 2.0 license. For an overview of Neon's architecture, refer to Neon's [architecture documentation](/docs/conceptual-guides/architecture-overview).
 
 ## Compatibility
 

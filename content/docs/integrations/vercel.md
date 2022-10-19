@@ -1,13 +1,13 @@
 ---
-title: Run a Next.js app
+title: Connect a Next.js application to Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
 ---
 
-Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js app.
+Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js application.
 
-To create a Neon project and access it from a Next.js app:
+To create a Neon project and access it from a Next.js application:
 
 1. [Create a Neon project](#create-a-neon-project)
 2. [Create a Next.js project](#create-a-nextjs-project)
@@ -32,7 +32,7 @@ Create a Next.js project if you do not have one. For instructions, see [Create a
 
 ## Add a PostgreSQL client to your app
 
-Add a PostgreSQL client to your app, such as `Postgres.js`.  For instructions, refer to the [postgres.js Getting started](https://www.npmjs.com/package/postgres).
+Add a PostgreSQL client to your app, such as `Postgres.js`. For instructions, refer to the [postgres.js Getting started](https://www.npmjs.com/package/postgres).
 
 ## Add your Neon connection details
 

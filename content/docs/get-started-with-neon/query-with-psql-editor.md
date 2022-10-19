@@ -102,12 +102,13 @@ To connect with a password saved to a `.pgpass` password file:
 
 1. In your terminal, run the following commands to create and configure the `.pgpass` file:
 
-    ```bash
-    touch ~/.pgpass && \
-    chmod 0600 ~/.pgpass && \
-    echo -e "<project_id>.cloud.neon.tech:5432:main:<user>:<password>\n$(cat ~/.pgpass)" > ~/.pgpass
-    ```
-    _**Note**_: If you already have a `.pgpass` file, you only need to run the `echo` command.
+   ```bash
+   touch ~/.pgpass && \
+   chmod 0600 ~/.pgpass && \
+   echo -e "<project_id>.cloud.neon.tech:5432:main:<user>:<password>\n$(cat ~/.pgpass)" > ~/.pgpass
+   ```
+
+   _**Note**_: If you already have a `.pgpass` file, you only need to run the `echo` command.
 
 2. Connect with the following command:
 

@@ -86,31 +86,6 @@ export default {
         },
       ],
     },
-    {
-      heading: 'Social',
-      links: [
-        {
-          Icon: Twitter,
-          to: LINKS.twitter,
-        },
-        {
-          Icon: LinkedIn,
-          to: LINKS.linkedin,
-        },
-        // {
-        //   text: 'Discord',
-        //   to: LINKS.discord,
-        // },
-        {
-          Icon: Github,
-          to: LINKS.github,
-        },
-        {
-          Icon: Discourse,
-          to: LINKS.discourse,
-        },
-      ],
-    },
     // {
     //   heading: 'Legal',
     //   links: [
@@ -124,6 +99,32 @@ export default {
     //     },
     //   ],
     // },
+  ],
+  socialUrls: [
+    {
+      text: 'Twitter',
+      Icon: Twitter,
+      to: LINKS.twitter,
+    },
+    {
+      text: 'LinkedIn',
+      Icon: LinkedIn,
+      to: LINKS.linkedin,
+    },
+    // {
+    //   text: 'Discord',
+    //   to: LINKS.discord,
+    // },
+    {
+      text: 'GitHub',
+      Icon: Github,
+      to: LINKS.github,
+    },
+    {
+      text: 'Discourse',
+      Icon: Discourse,
+      to: LINKS.discourse,
+    },
   ],
   mobile: [
     {

@@ -1,5 +1,6 @@
 ---
 title: Query with Neon's SQL Editor
+enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/tutorials
 ---

@@ -1,5 +1,5 @@
 ---
-title: Importing a database
+title: Import data from PostgreSQL
 redirectFrom:
   - /docs/cloud/tutorials
 ---
@@ -17,7 +17,7 @@ In the `pg_dump` command shown above, replace `<host>`, `<user>`, and `<dbname>`
 **_Note_**: If you create an archive using `pg_dump` that is in a non-plain-text format, use the `pg_restore` utility instead of `psql` to restore the database to Neon.
 
 Neon is not able to create databases, so you can not use `pg_dumpall` or
-`pg_dump` with the `-C` option. If there are multiple databases in the project that you want to import, you must migrate each database separately.
+`pg_dump` with the `-C` option. If there are multiple databases in the project that you want to import, you must import each database separately.
 
 Because `pg_dump` dumps a single database, it does not include information about roles that are stored in the global `pg_authid` catalog. Also, Neon does not support creating users or roles using `psql`. Those can only be created using the Neon Console. If you do not create roles in Neon before importing a database that has roles, you will receive "role does not exist" errors during the import operation. You can ignore this warning. It does not prevent data from being imported.
 
