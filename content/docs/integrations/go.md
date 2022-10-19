@@ -1,20 +1,20 @@
 ---
-title: Run a Go app
+title: Connect a Go application to Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
 ---
 
-This topic describes how to create a Neon project and connect to it from a Go project.
+This topic describes how to create a Neon project and connect to it from a Go application.
 
-To connect to Neon from a Go project:
+To connect to Neon from a Go application:
 
 1. [Create a Neon project](#create-a-neon-project)
 2. [Configure Go project connection settings](#configure-go-project-connection-settings)
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your user name, password, database name, and project ID. This information is required when defining connection settings in your Go project.
+When creating a Neon project, take note of your user name, password, database name, and project ID. This information is required when defining connection settings in your Go application.
 
 To create a Neon project:
 
@@ -24,7 +24,7 @@ To create a Neon project:
 
 For additional information about creating projects, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
 
-## Configure Go project connection settings
+## Configure Go application connection settings
 
 Connecting to Neon requires configuring connection settings in your Go project's `.go` file.
 

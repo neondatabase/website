@@ -1,5 +1,6 @@
 ---
 title: Connection pooling
+enableTableOfContents: true
 ---
 
 ## PostgreSQL connection limits
