@@ -1,9 +1,11 @@
 ---
-title: Migrating from Heroku
+title: Import data from Heroku
 enableTableOfContents: true
+redirectFrom:
+  - /docs/how-to-guides/hasura-heroku-migration
 ---
 
-This guide describes how to migrate your data from Heroku PostgreSQL to Neon.
+This guide describes how to import your data from Heroku PostgreSQL to Neon.
 
 The instructions assume that you have installed the Heroku CLI, which is used to transfer data from Heroku. For installation instructions, see [The Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 
@@ -11,16 +13,15 @@ To migrate your data from Heroku to Neon:
 
 1. [Create a Neon project and copy the connection string](#create-a-neon-project-and-copy-the-connection-string)
 2. [Retrieve your Heroku app name and database name](#retrieve-your-heroku-app-name-and-database-name)
-3. [Migrate your data](#migrate-your-data-to-neon)
-4. [Verify that your data was transferred to Neon](#verify-that-your-data-was-transferred-to-neon)
-
+3. [Import your data](#import-your-data)
+4. [Verify that your data was imported](#verify-that-your-data-was-imported)
 
 ## Create a Neon project and copy the connection string
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
 3. Enter a name for your project and click **Create Project**.
-4. After creating a project, you are directed to the project **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the **Dashboard**. Copy the connection string. It is required to migrate your data from Heroku.
+4. After creating a project, you are directed to the project **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the **Dashboard**. Copy the connection string. It is required to import your data from Heroku.
 
 The example connection string used the instructions that follow is:
 
@@ -30,9 +31,9 @@ postgres://jsmith:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
 
 ## Retrieve your Heroku app name and database name
 
-1. Log in to [Heroku](https://dashboard.heroku.com/) and select the project you want to migrate data from.
+1. Log in to [Heroku](https://dashboard.heroku.com/) and select the project you want to import data from.
 1. Select **Overview** and copy the name of the Heroku Postgres database, which appears under **Installed add-ons**.
-2. Click **Settings** and copy your Heroku **App Name**.
+1. Click **Settings** and copy your Heroku **App Name**.
 
 _**Note**_: You can also retrieve the Heroku Postgres database name using the following Heroku CLI command:
 
@@ -49,7 +50,7 @@ $ heroku pg:links --app thawing-wave-57227
 === postgresql-trapezoidal-48645
 ```
 
-## Migrate your data to Neon
+## Import your data
 
 From your terminal, run the following Heroku CLI command:
 
@@ -60,7 +61,7 @@ heroku pg:pull --app <app> <heroku-pg-database> <neon-connection-string>
 where:
 
 - `<app>` is the name of the Heroku app
-- `<heroku-pg-database>` is the name of Heroku PostgreSQL database
+- `<heroku-pg-database>` is the name of the Heroku PostgreSQL database
 - `<neon-connection-string>` is the Neon connection string
 
 For example:
@@ -123,7 +124,7 @@ pg_dump: reading large objects
 pg_dump: reading dependency data
 pg_dump: saving encoding = UTF8
 pg_dump: saving standard_conforming_strings = on
-pg_dump: saving search_path = 
+pg_dump: saving search_path =
 pg_dump: saving database definition
 pg_dump: dumping contents of table "public.customer"
 pg_restore: connecting to database for restore
@@ -139,7 +140,7 @@ pg_restore: creating FK CONSTRAINT "public.order order_customer_id_fkey"
 heroku-cli: Pulling complete.
 ```
 
-## Verify that your data was transferred to Neon
+## Verify that your data was imported
 
 1. Log in to the [Neon Console](https://console.neon.tech/app/projects).
 2. Select the Neon project that you transferred data to.

@@ -1,5 +1,6 @@
 ---
 title: Connecting with older clients
+enableTableOfContents: true
 ---
 
 ## Overview
