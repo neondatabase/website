@@ -11,12 +11,6 @@ This guide describes how to integrate Neon with Vercel using the Neon integratio
 - A [Vercel account](https://vercel.com).
 - A Vercel project. For Vercel project creation instructions, see [Projects](https://vercel.com/docs/concepts/projects/overview), in the Vercel documentation.
 
-To integrate Neon with Vercel:
-
-- [Deploy the integration](#deploy-the-integration)
-- [Perform addition connection configuration](#perform-addition-connection-configuration)
-- [Manage your Neon integration](#manage-your-neon-integration)
-
 ## Deploy the integration
 
 1. Navigate to the [Neon Vercel integrations page](https://vercel.com/integrations/neon) and click **Add integration**.
