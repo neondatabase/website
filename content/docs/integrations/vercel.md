@@ -1,7 +1,6 @@
 ---
 title: Integrate Neon with Vercel
 enableTableOfContents: true
-isDraft: true
 ---
 
 This guide describes how to integrate Neon with Vercel using the Neon integration from the Vercel marketplace. The integration automatically configures the required environment variables in your Vercel project.
