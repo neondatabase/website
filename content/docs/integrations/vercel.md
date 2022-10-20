@@ -16,13 +16,14 @@ This guide describes how to integrate Neon with Vercel using the Neon integratio
 1. Navigate to the [Neon Vercel integrations page](https://vercel.com/integrations/neon) and click **Add integration**.
 1. Select an account to sign in to Neon.
 1. Select the Vercel project that you want to link to Neon.
-1. Select the Neon project, database, and role to link to your Vercel project.
+1. Select the Neon project, database, and role that you want to to link to your Vercel project.
+1. Click **Continue** to deploy the integration.
 
-Your Vercel project is now connected to a Neon database.
+Your Vercel project is connected to the Neon database.
 
 ## Manage your Neon integration
 
-You can manage your Neon-Vercel integration from the Vercel dashboard.
+You can manage access or remove of your Neon-Vercel integration from the Vercel dashboard.
 
 1. On the Vercel dashboard, select **Integrations**.
 1. For the **Neon** integration, select **Manage**.
