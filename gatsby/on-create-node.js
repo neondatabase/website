@@ -1,3 +1,19 @@
+const contentNodeItems = [
+  {
+    path: '/docs/',
+    name: 'docSlug',
+  },
+
+  {
+    path: '/release-notes/',
+    name: 'releaseNoteSlug',
+  },
+  {
+    path: '/static-pages/',
+    name: 'staticPageSlug',
+  },
+];
+
 module.exports = ({ node, actions }) => {
   const { createNodeField } = actions;
 
@@ -17,4 +33,17 @@ module.exports = ({ node, actions }) => {
       value: node.frontmatter.redirectFrom || [''],
     });
   }
+
+  contentNodeItems.map(({ path, name }) => {
+    if (node.internal.contentFilePath?.includes(path)) {
+      const slug = node.internal.contentFilePath.split(path)[1].replace('.md', '') || '';
+
+      return createNodeField({
+        node,
+        name,
+        value: slug,
+      });
+    }
+    return null;
+  });
 };

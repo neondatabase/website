@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { MDXProvider } from '@mdx-js/react';
 import clsx from 'clsx';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import PropTypes from 'prop-types';
 import React, { Fragment, forwardRef } from 'react';
 
@@ -27,11 +26,11 @@ const components = {
 // eslint-disable-next-line no-return-assign
 const Content = forwardRef(({ className, content, showH3Anchors = true }, ref) => (
   <div
-    className={clsx('prose prose-lg md:prose-base xs:prose-code:break-words', className)}
+    className={clsx('prose-lg prose md:prose-base xs:prose-code:break-words', className)}
     ref={ref}
   >
     <MDXProvider components={showH3Anchors ? components : { ...components, h3: undefined }}>
-      <MDXRenderer>{content}</MDXRenderer>
+      {content}
     </MDXProvider>
   </div>
 ));
