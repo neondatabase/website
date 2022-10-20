@@ -1,6 +1,8 @@
 ---
 title: Run a Postgres App
 isDraft: true
+redirectFrom:
+  - /docs/integrations/postgres
 ---
 
 A Neon compute runs regular PostgreSQL, which means that you run any PostgreSQL app with Neon.
