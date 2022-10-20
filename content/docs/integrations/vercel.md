@@ -1,6 +1,7 @@
 ---
 title: Integrate Neon with Vercel
 enableTableOfContents: true
+isDraft: true
 ---
 
 This guide describes how to integrate Neon with Vercel using the Neon integration from the Vercel marketplace. The integration automatically configures the required environment variables in your Vercel project.
@@ -13,8 +14,9 @@ This guide describes how to integrate Neon with Vercel using the Neon integratio
 
 To integrate Neon with Vercel:
 
-[Deploy the integration](#deploy-the-integration)
-[Perform addition connection configuration](#perform-addition-connection-configuration)
+- [Deploy the integration](#deploy-the-integration)
+- [Perform addition connection configuration](#perform-addition-connection-configuration)
+- [Manage your Neon integration](#manage-your-neon-integration)
 
 ## Deploy the integration
 
@@ -25,7 +27,7 @@ To integrate Neon with Vercel:
 
 Your Vercel project is now connected to a Neon database.
 
-## Manage the Neon integration
+## Manage your Neon integration
 
 You can manage your Neon-Vercel integration from the Vercel dashboard.
 
