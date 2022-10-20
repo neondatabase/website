@@ -143,6 +143,31 @@ To add a single page <https://example.com/changelog> to the docs sidebar, add th
 
 All available languages for code blocks can be found [here](https://prismjs.com/index.html#supported-languages).
 
+## Images
+
+The images should be sourced in `docs` directory and be used in `.md` with the absolute path
+
+For example:
+
+```md
+├── content
+│ ├── docs
+│ ├── conceptual-guides
+│ ├── images
+│ ├── neon_architecture_2.png // put images in the same directory as your .md file
+│ ├── architecture-overview.md
+```
+
+And use the absolute path in your content.
+
+```md
+architecture-overview.md
+
+![Neon architecture diagram](./images/neon_architecture_2.png)
+```
+
+With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.
+
 ## Definition list
 
 Custom `mdx` component that makes possible using [extended markdown syntax for descriptions lists](https://www.markdownguide.org/extended-syntax/#definition-lists). Fully [WCAG-compliant](https://www.w3.org/TR/WCAG20-TECHS/H40.html). It provides an accessible way to make term lists, and it's a generally good way to add structure to a text when a writer needs more than bullets and less than headings.
