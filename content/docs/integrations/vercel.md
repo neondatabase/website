@@ -7,7 +7,7 @@ This guide describes how to integrate Neon with Vercel using the Neon integratio
 
 ## Prerequisites
 
-- An existing Neon project. If you do not have a Neon project, refer to the [Setting up a project](../get-started-with-neon/setting-up-a-project/) to get started.
+- An existing Neon project. If you do not have a Neon project, refer to the [Setting up a project](../../get-started-with-neon/setting-up-a-project/) to get started.
 - A [Vercel account](https://vercel.com).
 - A Vercel project. For Vercel project creation instructions, see [Projects](https://vercel.com/docs/concepts/projects/overview), in the Vercel documentation.
 
