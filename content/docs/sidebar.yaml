@@ -39,7 +39,7 @@
     - title: Java
       slug: integrations/java
     - title: Next.js
-      slug: integrations/vercel
+      slug: integrations/nextjs
     - title: Node.js
       slug: integrations/node
     - title: Prisma
@@ -49,7 +49,9 @@
     - title: SQLAlchemy
       slug: integrations/sqlalchemy
     - title: Symfony
-      slug: integrations/symfony    
+      slug: integrations/symfony
+    - title: Vercel
+      slug: integrations/vercel   
 - title: Import data
   items:
     - title: Import data from PostgreSQL
