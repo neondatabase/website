@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/quickstart/node
 ---
 
-This guide describes how to create a Neon project and connect to it from a Node.js application.
+This guide describes how to create a Neon project and connect to it from a Node.js application. You can find the below code sample on [GitHub](https://github.com/neondatabase/examples/tree/main/with-nodejs).
 
 _**Note**_: The same configuration steps can be used for Express and Next.js applications.
 
