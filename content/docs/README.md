@@ -145,7 +145,7 @@ All available languages for code blocks can be found [here](https://prismjs.com/
 
 ## Images
 
-The images should be sourced in `docs` directory and be used in `.md` with the absolute path
+The images should be sourced in `docs` directory and be used in `.md` with the relative path
 
 For example:
 
@@ -158,7 +158,7 @@ For example:
 │ ├── architecture-overview.md
 ```
 
-And use the absolute path in your content.
+And use the relative path in your content.
 
 ```md
 architecture-overview.md
