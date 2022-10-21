@@ -24,26 +24,22 @@ const components = {
 };
 
 // eslint-disable-next-line no-return-assign
-const Content = forwardRef(({ className, content, showH3Anchors = true }, ref) => (
+const Content = forwardRef(({ className, content }, ref) => (
   <div
     className={clsx('prose-lg prose md:prose-base xs:prose-code:break-words', className)}
     ref={ref}
   >
-    <MDXProvider components={showH3Anchors ? components : { ...components, h3: undefined }}>
-      {content}
-    </MDXProvider>
+    <MDXProvider components={components}>{content}</MDXProvider>
   </div>
 ));
 
 Content.propTypes = {
   className: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  showH3Anchors: PropTypes.bool,
 };
 
 Content.defaultProps = {
   className: null,
-  showH3Anchors: true,
 };
 
 export default Content;

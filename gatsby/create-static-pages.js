@@ -19,6 +19,9 @@ module.exports = async ({ graphql, actions }) => {
         ) {
           nodes {
             id
+            internal {
+              contentFilePath
+            }
             fields {
               slug: staticPageSlug
               redirectFrom

@@ -3,14 +3,13 @@ const contentNodeItems = [
     path: '/docs/',
     name: 'docSlug',
   },
-
-  {
-    path: '/release-notes/',
-    name: 'releaseNoteSlug',
-  },
   {
     path: '/static-pages/',
     name: 'staticPageSlug',
+  },
+  {
+    path: '/release-notes/',
+    name: 'releaseNoteSlug',
   },
 ];
 

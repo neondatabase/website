@@ -41,6 +41,7 @@
     "lodash.isempty": "^4.4.0",
     "lodash.shuffle": "^4.2.0",
     "lottie-web": "^5.9.6",
+    "markdown-it": "^13.0.1",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
