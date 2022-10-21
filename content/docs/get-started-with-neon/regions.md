@@ -13,26 +13,24 @@ Neon offers project deployment in multiple regions. It is recommended that you s
 
 Neon currently supports the following AWS regions:
 
-- US West (Oregon) Region - us-west-2
-- US East (Ohio) Region -  us-east-2
-- Europe (Frankfurt) Region - eu-central-1
-- Asia Pacific (Singapore) Region - AWS ap-southeast-1
+- Asia Pacific (Singapore) Region &mdash; ap-southeast-1
+- Europe (Frankfurt) Region &mdash; eu-central-1
+- US East (Ohio) Region &mdash;  us-east-2
+- US West (Oregon) Region &mdash; us-west-2
 
 ## Select a region for your Neon project
 
-Neon allows you to select the region for a your Neon project during project creation. All database created in the Neon project are created in the region selected for the project.
+Neon allows you to select the region for a Neon project during project creation. All databases created in a Neon project are created in the region selected for the project.
 
 _**Note**_ Once you select region for a Neon project, it cannot be changed.
 
 ## Moving project data to a new region
 
-Once you select a region for a Neon project, it cannot be changed. 
+Once you select a region for a Neon project, it cannot be changed.
 
-If you do need to move your data to a different region, the following steps are recommended:
+If you need to move your data to a different region, the following steps are recommended:
 
-1. Create a new project in the new region
-1. Dump and restore data from your old project to the new project.
+1. Create a new project in the new region. For project creation instructions, see [Setting up a project](../setting-up-a-project).
+1. Dump and restore data from your old project to the new project. For instructions, see [].
 
-For a detailed dump and restore example, refer to [TBD].
-
-This procedure may require downtime if performed on a production database, as the dump and restore procedures takes time to compete. To avoid losing data, consider temporarily blocking writes from your applications before dumping data, and re-enable writes after the migration is completed.
+This procedure may require downtime if performed on a production database, as the dump and restore procedure may take some time to complete. To avoid losing data, consider temporarily blocking writes from your applications before dumping data, and re-enable writes after the data migration is finished.
