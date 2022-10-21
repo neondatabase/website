@@ -152,11 +152,10 @@ For example:
 ```md
 ├── content
 │ ├── docs
-│ ├── conceptual-guides
-│ ├── images
-│ ├── neon_architecture_2.png // put images in the same directory as your .md file
+│     ├── conceptual-guides
+│         ├── images
+│             ├── neon_architecture_2.png // put images in the same directory as your .md file
 │ ├── architecture-overview.md
-```
 
 And use the relative path in your content.
 
