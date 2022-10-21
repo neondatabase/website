@@ -4,22 +4,18 @@ import React from 'react';
 
 import Aside from 'components/pages/release-notes/aside';
 
-const Content = ({ content }) => {
-  const md = new MarkdownIt({
-    html: true,
-    linkify: true,
-    typographer: true,
-  });
+const md = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true,
+});
 
-  const result = md.render(content);
-
-  return (
-    <div
-      className="prose-lg prose md:prose-base xs:prose-code:break-words"
-      dangerouslySetInnerHTML={{ __html: result }}
-    />
-  );
-};
+const Content = ({ content }) => (
+  <div
+    className="prose-lg prose md:prose-base xs:prose-code:break-words"
+    dangerouslySetInnerHTML={{ __html: md.render(content) }}
+  />
+);
 
 Content.propTypes = {
   content: PropTypes.string.isRequired,
