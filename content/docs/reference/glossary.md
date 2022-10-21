@@ -24,7 +24,7 @@ A unique identifier used to authenticate a user or a calling program to an API. 
 
 ### Backpressure
 
-A mechanism that manages the lag between the Pageserver and Compute Node or the Pageserver and Write-Ahead Log (WAL) service. If a compute node or WAL service runs ahead of the Pageserver, the time to serve page requests increases, which could result in increased query durations or timeout errors.
+A mechanism that manages the lag between the Pageserver and Compute Node or the Pageserver and Write-Ahead Log (WAL) service. If a Compute Node or WAL service runs ahead of the Pageserver, the time to serve page requests increases, which could result in increased query times or timeout errors.
 
 <a id="branches-coming-soon/"></a>
 
