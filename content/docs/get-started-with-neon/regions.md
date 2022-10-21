@@ -31,6 +31,6 @@ Once you select a region for a Neon project, it cannot be changed.
 If you need to move your data to a different region, the following steps are recommended:
 
 1. Create a new project in the new region. For project creation instructions, see [Setting up a project](../setting-up-a-project).
-1. Dump and restore data from your old project to the new project. For instructions, see [].
+1. Dump and restore data from your old project to the new project. For instructions, see [Import data from PostgreSQL](../../how-to-guides/import-an-existing-database).
 
 This procedure may require downtime if performed on a production database, as the dump and restore procedure may take some time to complete. To avoid losing data, consider temporarily blocking writes from your applications before dumping data, and re-enable writes after the data migration is finished.
