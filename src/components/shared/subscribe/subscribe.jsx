@@ -32,7 +32,10 @@ const links = [
 ];
 
 const Subscribe = () => (
-  <section className="safe-paddings my-48 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20">
+  <section
+    id="subscribe"
+    className="safe-paddings my-48 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20"
+  >
     <Container className="flex items-center justify-between lg:block" size="md">
       <StaticImage
         className="max-w-[800px] 3xl:max-w-[660px] 2xl:max-w-[550px] xl:max-w-[430px] lg:!hidden"
