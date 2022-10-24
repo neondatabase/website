@@ -38,6 +38,7 @@ During the Technical Preview, Neon permits installing the following PostgreSQL e
 | [pg_trgm](https://www.postgresql.org/docs/14/pgtrgm.html)                     |     1.6 |                                                                                                                |
 | [pgcrypto](https://www.postgresql.org/docs/14/pgcrypto.html)                  |     1.3 |                                                                                                                |
 | [plpgsql](https://www.postgresql.org/docs/14/plpgsql.html)                    |     1.0 | Pre-installed with PostgreSQL                                                                                  |
+| [plv8](https://plv8.github.io/)                                               |   3.1.4 |                                                                                                                |
 | [postgis](https://postgis.net/)                                               |   3.3.0 |                                                                                                                |
 | [postgis_raster](https://postgis.net/docs/RT_reference.html)                  |   3.3.0 |                                                                                                                |
 | [postgis_tiger_geocoder](https://postgis.net/docs/Extras.html#Tiger_Geocoder) |   3.3.0 | Cannot be installed using the Neon web UI. Use your `psql` user credentials to install this extension instead. |
