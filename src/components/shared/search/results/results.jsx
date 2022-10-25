@@ -4,10 +4,12 @@ import React, { useEffect, useState } from 'react';
 import {
   Index,
   connectHits,
+  connectHitInsights,
   connectStateResults,
   Highlight,
   Snippet,
 } from 'react-instantsearch-dom';
+import aa from 'search-insights';
 
 import Link from 'components/shared/link';
 
@@ -36,9 +38,17 @@ const HitCount = connectStateResults(({ searchResults, setShouldShowAllResultsBu
   );
 });
 
-const PageHit = ({ hit, isNotFoundPage }) => (
+const PageHit = ({ hit, insights, isNotFoundPage }) => (
   <div className="with-highlighted-text">
-    <Link className="block" to={hit.slug}>
+    <Link
+      className="block"
+      to={hit.slug}
+      onClick={() =>
+        insights('clickedObjectIDsAfterSearch', {
+          eventName: 'Search Result Clicked',
+        })
+      }
+    >
       <h4
         className={clsx('highlight-text font-semibold', isNotFoundPage ? 'text-base' : 'text-sm')}
       >
@@ -64,6 +74,7 @@ PageHit.propTypes = {
     excerpt: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
+  insights: PropTypes.func.isRequired,
   isNotFoundPage: PropTypes.bool,
 };
 
@@ -71,12 +82,14 @@ PageHit.defaultProps = {
   isNotFoundPage: false,
 };
 
+const HitWithInsights = connectHitInsights(aa)(PageHit);
+
 const Hits = connectHits(({ hits, showAll, isNotFoundPage }) =>
   hits?.length ? (
     <ul className="mt-4 divide-y divide-gray-3 px-2.5">
       {hits.slice(0, showAll ? hits.length : 5).map((hit) => (
         <li className="py-2.5 first:pt-0" key={hit.objectID}>
-          <PageHit isNotFoundPage={isNotFoundPage} hit={hit} />
+          <HitWithInsights isNotFoundPage={isNotFoundPage} hit={hit} />
         </li>
       ))}
     </ul>
