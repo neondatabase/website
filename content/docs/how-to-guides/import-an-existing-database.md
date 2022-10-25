@@ -6,7 +6,7 @@ redirectFrom:
 
 This topic describes how to import an existing PostgreSQL database to Neon. The instructions can also be used to migrate a database from one Neon project to another. For example, you can use the instructions to migrate a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15.
 
-PostgreSQL provides several import methods. This topic shows how to use the `pg_dump` utility with connection strings.
+PostgreSQL provides several import methods. This topic shows how to use the `pg_dump` utility with connection strings and `psql`.
 
 ```bash
 pg_dump <connection-string> | psql <connection-string>
@@ -22,11 +22,11 @@ where:
 
 - `<user>` is your PostgreSQL user.
 - `<password>` is your PostgreSQL user's password.
-- `<hostname>` is the host name of the PostgreSQL instance.
+- `<hostname>` is the hostname of the PostgreSQL instance.
 - `<port>` is the port number of the PostgreSQL instance. The default port number is `5432`.
 - `<dbname>` is the name of the database.
 
-The Neon connection string has the same format but the `hostname` is the Neon domain, as shown:  
+A Neon connection string has the same format with the Neon domain defined as the `hostname`, as shown:  
 
 ```bash
 postgres://<user>:<password>@<project_id>.cloud.neon.tech:<port>/<dbname>
