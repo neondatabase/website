@@ -6,7 +6,7 @@ redirectFrom:
 
 This topic describes how to import an existing PostgreSQL database to Neon. The instructions can also be used to migrate a database from one Neon project to another. For example, you can use the instructions to migrate a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15.
 
-PostgreSQL provides several import methods. The most efficient method is using the `pg_dump` utility with connection strings, as shown:
+PostgreSQL provides several import methods. This topic shows how to use the `pg_dump` utility with connection strings.
 
 ```bash
 pg_dump <connection-string> | psql <connection-string>
@@ -26,7 +26,7 @@ where:
 - `<port>` is the port number of the PostgreSQL instance. The default port number is `5432`.
 - `<dbname>` is the name of the database.
 
-A Neon connection string has this format:
+The Neon connection string format is the same, but with the `hostname` defined as the Neon domain, as shown:  
 
 ```bash
 postgres://<user>:<password>@<project_id>.cloud.neon.tech:<port>/<dbname>
@@ -63,7 +63,6 @@ When importing a database, be aware of the following:
 - If you are importing a database from an archive using `pg_dump` that is  not in plain-text format, use the `pg_restore` utility instead of `psql` to restore the database to Neon.
 - Neon is not able to create databases, so you can not use `pg_dumpall` or `pg_dump` with the `-C` option.
 - Because `pg_dump` dumps a single database, it does not include information about roles stored in the global `pg_authid` catalog. Also, Neon does not support creating roles using `psql`. You can only create roles (users) using the Neon Console. If you do not create roles in Neon before importing a database that has roles, you will receive "role does not exist" errors during the import operation. You can ignore this warning. It does not prevent data from being imported.
-- When importing from a standalone PostgreSQL instance, you can configure logical replication to allow Neon to receive a stream of updates from the PostgreSQL instance.
 - Some PostgreSQL features that require access to the local file system are not supported by Neon. For example, tablespaces and large objects are not supported. Please take this into account when importing a database from PostgreSQL to Neon.
 - In addition to databases, Neon supports importing individual tables from a standalone PostgreSQL instance. You can do this using the `COPY` command. The only requirement is that the data is transferred through a replication stream, which may affect the performance of other queries, including those unrelated to the table you are copying.
 
