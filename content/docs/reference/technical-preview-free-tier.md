@@ -26,13 +26,13 @@ FROM pg_database;
 ```
 
 {
-/\* To check the logical size of your Neon project, run the following query:
+/* To check the logical size of your Neon project, run the following query:
 
 ```sql
 SELECT pg_size_pretty(neon.pg_cluster_size());
 ```
 
-\*/
+*/
 }
 
 When the data size limit is reached, the following PostgreSQL error message is reported:
