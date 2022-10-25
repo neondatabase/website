@@ -5,45 +5,47 @@ enableTableOfContents: true
 
 ## Neon user
 
-A Neon user is identified by their email address.
+A Neon user registers and authenticates in the Neon Console using a GitHub, Google, or partner account.
 
-A user registers and authenticates in Neon Web UI with their GitHub or Google account. More authentication methods are coming soon.
-
-Once authenticated, a user can create and access Projects and [query Project data](../tutorials#query-via-ui). You can also manage [PostgreSQL Users](../../reference/glossary/#postgres-users) and [Databases](../../reference/glossary/#postgres-databases) in each Project.
+Once authenticated, a Neon user can create and access projects and query project data through the [Neon SQL Editor](../query-with-neon-sql-editor) or some other client such as [psql](../query-with-psql-editor). A Neon user can also manage [PostgreSQL Users](../../reference/glossary/#postgres-users) and [Databases](../../reference/glossary/#postgres-databases) for each Neon project.
 
 ## Using API keys as a Neon User
 
-API keys allow users to access the Neon application programming interface.
+An API key allows you to access the Neon API.
 
-An API key provides access to any action available to the user. An API key that is no longer needed can be revoked; this action cannot be reverted. Any issued API key is valid forever until it is revoked. Neon users can generate multiple API keys.
+An API key provides access to any action available through the Neon Console. An API key that is no longer needed can be revoked; this action cannot be reverted. Any issued API key is valid forever until it is revoked. Neon users can generate multiple API keys.
 
-### Issue a new API key
+### Generate an API key
 
-Here's how to issue a new API key:
+To generate an API key:
 
-1. Start by logging in to [Neon Console](https://console.neon.tech).
-2. Click on your username in the upper right corner, then click `Account`.
-3. Under `Developer Settings` click on `Generate new API Key`.
+1. Log in to [Neon Console](https://console.neon.tech).
+2. Click your username in the upper right corner and click **Account**.
+3. Under **Developer Settings** click **Generate new API Key**.
 4. Choose a unique name that will help you remember what this key is for.
-5. Click the `Create` button and copy the generated key.
+5. Click **Create** and copy the generated key.
 
-You need to store your key in a safe location after generating it, you will not be able to access this value again after leaving your `Developer Settings`. If you lose your key, revoke the lost key and create a new key to access the Neon API. You can safely store your API key in a credential manager on your local machine, or using a credential management service like [AWS Key Management Service](https://aws.amazon.com/kms/).
+Store your key in a safe location after generating it. You will not be able to access the key again after leaving the **Developer Settings** page. If you lose your key, revoke the lost key and generate a new key to access the Neon API. You can safely store your API key in a credential manager on your local machine, or using a credential management service like [AWS Key Management Service](https://aws.amazon.com/kms/).
 
-Remember, all API keys remain valid until you revoke them.
+API keys remain valid until you revoke them.
 
 ### Revoke an API key
 
-1. In your Neon Console, click on your username in the upper right corner and click `Account`.
-2. Under `Developer Settings` you will see the list of issued and active API keys.
-3. To revoke the key forever, click the `Revoke` button. This will immediately revoke the key, all the requests using this key will now fail.
+To revoke an API key:
+
+1. In the Neon Console, click your username in the upper right corner and click **Account**.
+2. Under **Developer Settings**, you will see a list of issued and active API keys.
+3. To revoke the key, click **Revoke**. The key is immediately revoked and any requests using the key will now fail.
 
 ### Making API calls
 
-Every request to the Neon API endpoints should pass an API key in the `Authorization` HTTP header. You can see the available endpoints in our [API Reference](https://neon.tech/api-reference).
+Every request to the Neon API endpoints must provide an API key in the `Authorization` HTTP header. For available endpoints, refer to the [Neon API Reference](https://neon.tech/api-reference).
+
+**_Note_** The next version of the Neon API is currently in preview. It is partially implemented and intended for review purposes only. To try this version of the Neon API, refer to the [Neon API V2 reference](https://neon.tech/api-reference/v2). The API prefix for the the preview version of the Neon API is `https://console.neon.tech/api/v2`. Use this prefix when using the preview version of the Neon API.
 
 Let’s look at how to make a `curl` request using your Neon API key. We're going to use the `projects` endpoint to get a list of the projects in an account.
 
-All requests to the API need to have the `Authorization` HTTP header with your API key in the form `Authorization: Bearer EXAMPLEKEY`.
+All requests to the Neon API must provide the `Authorization` HTTP header with your API key in the form `Authorization: Bearer $NEON_API_KEY`.
 
 ```bash
 curl -X GET -H "Authorization: Bearer $NEON_API_KEY" "accept: application/json"
@@ -66,7 +68,7 @@ curl -X GET -H "Authorization: Bearer $NEON_API_KEY" "accept: application/json"
 "https://console.neon.tech/api/v1/projects" | jq
 ```
 
-Your response will be a list of projects, below is a shortened example of what the response should look like:
+The response is a list of projects. For example:
 
 ```json
 [
@@ -101,6 +103,6 @@ Your response will be a list of projects, below is a shortened example of what t
 ]
 ```
 
-Check out the [API Reference](https://neon.tech/api-reference) for more information about using the API keys and available API methods.
+Refer to the [Neon API Reference](https://neon.tech/api-reference) for more information about using Neon API methods.
 
-Note: currently API keys cannot be scoped to specific Projects.
+**_Note_:** Currently, API keys are global. When you create an API key, it is associated with the Neon user rather than a specific Neon project.
