@@ -4,7 +4,7 @@ redirectFrom:
   - /docs/cloud/tutorials
 ---
 
-This topic describes how to import an existing PostgreSQL database to Neon. These instructions can also be used to migrate a database from one Neon project to another. For example, you can use these instructions to migrate a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15.
+This topic describes how to import an existing PostgreSQL database to Neon. The instructions can also be used to migrate a database from one Neon project to another. For example, you can use the instructions to migrate a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15.
 
 PostgreSQL provides several import methods. The most efficient method is using the `pg_dump` utility with connection strings, as shown:
 
@@ -12,7 +12,7 @@ PostgreSQL provides several import methods. The most efficient method is using t
 pg_dump <connection-string> | psql <connection-string>
 ```
 
-The typical format for a PostgreSQL connection string is:
+The format for a PostgreSQL connection string is:
 
 ```bash
 postgres://<user>:<password>@<hostname>:<port>/<dbname>
@@ -40,7 +40,7 @@ where:
 - `<port>` is the Neon port number. The default port number is `5432`.
 - `<dbname>` is the name of the database. `main` is the default database created with each Neon project.
 
-You can obtain a Neon connection string from the Neon Console project **Dashboard**, under **Connection Details**. The connection string must include your project password, which was provided when you created the project. If you have misplaced your password, you can reset it or create a new user. Users and passwords are managed on the **Settings** tab in the Neon Console.
+You can obtain a Neon connection string from the Neon Console project **Dashboard**, under **Connection Details**. The connection string must include your project password, which was provided when you created the Neon project. If you have misplaced your password, you can reset it or create a new user. Users and passwords are managed on the **Settings** tab in the Neon Console.
 
 The command for importing a database from PostgreSQL to Neon appears similar to the following:
 
