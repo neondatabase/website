@@ -175,10 +175,10 @@ Custom `mdx` component that makes possible using [extended markdown syntax for d
 The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
-{_/ other content here _/}
+/_ other content here _/}
 
 <DefinitionList>
-{*/ required new line */}
+{/* required new line */}
 Scenario executor
 : First definition
 : Second definition
@@ -195,10 +195,10 @@ Another term for smoke test
 [Stress test](/)
 : First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
 
-{_/ required new line _/}
+{/_ required new line _/}
 </DefinitionList>
 
-{_/ other content here _/}
+{/_ other content here _/}
 ```
 
 ### Acceptable markup for term
