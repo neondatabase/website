@@ -6,7 +6,7 @@ To set up a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. If you are creating your very first project, click **Create the first project**. Otherwise, click **New Project**. 
-3. Specify a name, a PostgreSQL version, and a region, and click **Create Project**. Upon creating a project, you are presented with a dialog that provides the following information:
+3. Specify a name, a PostgreSQL version, and click **Create Project**. Upon creating a project, you are presented with a dialog that provides the following information:
 
     - A generated password for the project
     - An `export` command that you can use to export your project password to a `PGPASSWORD` environment variable:
