@@ -1,3 +1,5 @@
+const DRAFT_FILTER = process.env.BRANCH === 'main' ? [false] : [true, false];
+
 const generateDocPagePath = require('./generate-doc-page-path');
 const generateReleaseNotePath = require('./generate-release-note-path');
 
@@ -5,7 +7,7 @@ const docQuery = `{
   pages: allMdx(
     filter: {
       fileAbsolutePath: { regex: "/content/docs/" }
-      fields: { isDraft: { in: [false] } }
+      fields: { isDraft: { in: ${DRAFT_FILTER} } }
       slug: { ne: "README" }
     }
   ) {
@@ -24,8 +26,8 @@ const releaseNotesQuery = `{
   releaseNotes: allMdx(
     filter: {
       fileAbsolutePath: { regex: "/release-notes/" }
-      slug: { ne: "release-notes" }
-      fields: { isDraft: { in: [false] } }
+      slug: { nin: ["release-notes", "RELEASE_NOTES_TEMPLATE"] }
+      fields: { isDraft: { in: ${DRAFT_FILTER} } }
     }
   ) {
       nodes {
@@ -58,7 +60,7 @@ const queries = [
     transformer: ({ data }) =>
       data.releaseNotes.nodes.map(({ id, slug, frontmatter: { label }, excerpt }) => ({
         objectID: id,
-        title: `${label} release`,
+        title: `${label} release - ${slug}`,
         slug: generateReleaseNotePath(slug),
         excerpt,
       })),

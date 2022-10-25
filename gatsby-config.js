@@ -130,7 +130,10 @@ module.exports = {
             options: {
               appId: process.env.GATSBY_ALGOLIA_APP_ID,
               apiKey: process.env.ALGOLIA_ADMIN_KEY,
-              indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
+              indexName:
+                process.env.BRANCH === 'main'
+                  ? process.env.GATSBY_ALGOLIA_INDEX_NAME
+                  : process.env.GATSBY_ALGOLIA_INDEX_NAME_STAGING,
               enablePartialUpdates: true,
               // eslint-disable-next-line global-require
               queries: require('./src/utils/algolia-queries'),
