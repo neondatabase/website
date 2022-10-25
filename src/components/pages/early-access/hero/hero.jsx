@@ -140,7 +140,7 @@ const Hero = () => {
             <div className="relative">
               <input
                 className={clsx(
-                  'remove-autocomplete-styles h-11 w-full rounded border border-[#c7ccd1] px-3.5 transition-colors duration-200',
+                  'remove-autocomplete-styles h-11 w-full appearance-none rounded border border-[#c7ccd1] px-3.5 transition-colors duration-200',
                   errorMessage && 'border-[#FF4C79]'
                 )}
                 name="email"
