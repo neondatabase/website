@@ -11,7 +11,7 @@ Once authenticated, a Neon user can create and access projects and query project
 
 ## Using API keys as a Neon User
 
-An API key allows you to access the Neon API.
+An API key is required to access the Neon API.
 
 An API key provides access to any action available through the Neon Console. An API key that is no longer needed can be revoked; this action cannot be reverted. Any issued API key is valid forever until it is revoked. Neon users can generate multiple API keys.
 
@@ -21,7 +21,7 @@ To generate an API key:
 
 1. Log in to [Neon Console](https://console.neon.tech).
 2. Click your username in the upper right corner and click **Account**.
-3. Under **Developer Settings** click **Generate new API Key**.
+3. Under **Developer Settings**, click **Generate new API Key**.
 4. Choose a unique name that will help you remember what this key is for.
 5. Click **Create** and copy the generated key.
 
@@ -35,13 +35,13 @@ To revoke an API key:
 
 1. In the Neon Console, click your username in the upper right corner and click **Account**.
 2. Under **Developer Settings**, you will see a list of issued and active API keys.
-3. To revoke the key, click **Revoke**. The key is immediately revoked and any requests using the key will now fail.
+3. To revoke a key, click **Revoke**. The key is immediately revoked and any requests using the key will now fail.
 
 ### Making API calls
 
-Every request to the Neon API endpoints must provide an API key in the `Authorization` HTTP header. For available endpoints, refer to the [Neon API Reference](https://neon.tech/api-reference).
+Every request to an Neon API endpoint must provide an API key in the `Authorization` HTTP header. For available endpoints, refer to the [Neon API Reference](https://neon.tech/api-reference).
 
-**_Note_** The next version of the Neon API is currently in preview. It is partially implemented and intended for review purposes only. To try this version of the Neon API, refer to the [Neon API V2 reference](https://neon.tech/api-reference/v2). The API prefix for the the preview version of the Neon API is `https://console.neon.tech/api/v2`. Use this prefix when using the preview version of the Neon API.
+**_Note_**: The next version of the Neon API is currently in preview. It is partially implemented and intended for review purposes only. To try this version of the Neon API, refer to the [Neon API V2 reference](https://neon.tech/api-reference/v2). The API prefix for the the preview version of the Neon API is `https://console.neon.tech/api/v2`. Use this prefix when using the preview version of the Neon API.
 
 Let’s look at how to make a `curl` request using your Neon API key. We're going to use the `projects` endpoint to get a list of the projects in an account.
 
@@ -59,7 +59,7 @@ To make the API call, add `/projects` to the prefix `https://console.neon.tech/a
 "https://console.neon.tech/api/v1/projects" | jq
 ```
 
-Once the request above receives a JSON response containing the saved projects, we use the third-party tool [`jq`](https://stedolan.github.io/jq/) to make it easier to parse the incoming JSON response. That's all you need to call the Neon API.
+Once the request above receives a JSON response containing the saved projects, we use the third-party tool [`jq`](https://stedolan.github.io/jq/) to make it easier to read the incoming JSON response. That's all you need to call the Neon API.
 
 The full `curl` request should look like this:
 
