@@ -15,7 +15,9 @@ Neon currently supports the following AWS regions:
 
 ## Select a region for your Neon project
 
-You can select the region for your Neon project during project creation. All databases created in a Neon project are created in the region selected for the project.
+You can select the region for your Neon project during project creation. See [Setting up a project](../setting-up-a-project). 
+
+All databases created in a Neon project are created in the region selected for the project.
 
 ![Select region image](./images/project_creation_regions.png)
 
