@@ -9,7 +9,7 @@ redirectFrom:
 
 ## About branching
 
-Neon allows you to instantly branch your database in the same way you branch your code. You can quickly and cost-effectively branch a database for development, testing, staging, and a variety of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. For more information about the different ways branching can help improve your development workflows, see [Branching use cases](#branching-use-cases).
+Neon allows you to instantly branch your database in the same way you branch your code. You can quickly and cost-effectively branch a database for development, testing, staging, and a variety of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. For information about different ways branching can improve development workflows, see [Branching use cases](#branching-use-cases).
 
 ## What is a branch?
 
@@ -73,7 +73,7 @@ To delete a branch:
 
 ## Branching using the Neon API
 
-Any branch action that you can perform in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/).
+Any branch action that you can perform in the Neon Console can be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/).
 
 ### Prerequisites
 
