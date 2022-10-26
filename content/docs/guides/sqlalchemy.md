@@ -25,7 +25,7 @@ To create a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Enter a name for your project and click **Create Project**.
+3. Specify a name, a PostgreSQL version, and click **Create Project**.
 4. After creating a project, you are directed to the Neon **Dashboard** tab, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the **Dashboard** tab. Copy the connection string. It contains the details required to connect to Neon from SQLAlchemy.
 
 ## Install psycopg2
