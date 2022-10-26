@@ -9,7 +9,7 @@ redirectFrom:
 
 ## About branching
 
-Neon allows you to instantly branch your database in the same way you branch your code. You can quickly and cost-effectively branch a database for development, testing, staging, and a variety of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. For information about different ways branching can improve development workflows, see [Branching use cases](#branching-use-cases).
+Neon allows you to instantly branch your database in the same way you branch your code. You can quickly and cost-effectively branch a database for development, testing, staging, and a variety of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. For information about different ways to integrate branching with your development workflows, see [Branching use cases](#branching-use-cases).
 
 ## What is a branch?
 
@@ -28,7 +28,7 @@ A branch has the following characteristics:
 - Branches are read-write.
 - An endpoint is created for each branch when the branch is created, which permits connecting to the branch as you would connect to any Neon project from a PostgreSQL client, an application, or the Neon API.
 
-## Creating a branch
+## Create a branch
 
 Creating a branch requires that you have a Neon project. For information about creating a project, see [Setting up a project](/docs/getting-started-with-neon/setting-up-a-project).
 
@@ -47,7 +47,7 @@ To create a branch:
 
 AN endpoint is created with each branch, which you can use to connect to the branch from a PostgreSQL client, an application, or the Neon API.
 
-## Viewing branches
+## View branches
 
 To view the branches associated with a Neon project:
 
@@ -59,7 +59,7 @@ Branch details include the branch name, parent branch, database size, storage si
 
 The branches associated with a Neon project are also listed in the **Branches** widget on the project **Dashboard**. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you view and manage branches.
 
-## Deleting a branch
+## Delete a branch
 
 Deleting a branch is a permanent action that cannot be undone. Deleting a branch also deletes the endpoint associated with the branch.
 
