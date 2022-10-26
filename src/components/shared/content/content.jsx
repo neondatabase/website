@@ -18,7 +18,12 @@ const components = {
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
-  code: (props) => <CodeBlock {...props} />,
+  code: (props) => {
+    if (props?.className?.startsWith('language-')) {
+      return <CodeBlock {...props} />;
+    }
+    return <code {...props} />;
+  },
   pre: (props) => <div {...props} />,
   DefinitionList,
 };
