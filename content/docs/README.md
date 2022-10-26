@@ -143,6 +143,29 @@ To add a single page <https://example.com/changelog> to the docs sidebar, add th
 
 All available languages for code blocks can be found [here](https://prismjs.com/index.html#supported-languages).
 
+## Images
+
+The images should be sourced in `docs` directory and be used in `.md` with the relative path
+
+Example file structure:
+
+```md
+├── content
+│ ├── docs
+│   ├── conceptual-guides
+│     ├── architecture-overview.md
+│     ├── images
+│       ├── neon_architecture_2.png // put images in the same directory as your .md file
+```
+
+Example content in `architecture-overview.md`:
+
+```md
+![Neon architecture diagram](./images/neon_architecture_2.png)
+```
+
+With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.
+
 ## Definition list
 
 Custom `mdx` component that makes possible using [extended markdown syntax for descriptions lists](https://www.markdownguide.org/extended-syntax/#definition-lists). Fully [WCAG-compliant](https://www.w3.org/TR/WCAG20-TECHS/H40.html). It provides an accessible way to make term lists, and it's a generally good way to add structure to a text when a writer needs more than bullets and less than headings.
@@ -150,10 +173,10 @@ Custom `mdx` component that makes possible using [extended markdown syntax for d
 The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
-<!-- other content here -->
+/* other content here */}
 
 <DefinitionList>
-<!-- required new line -->
+{/* required new line */}
 Scenario executor
 : First definition
 : Second definition
@@ -170,10 +193,10 @@ Another term for smoke test
 [Stress test](/)
 : First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
 
-<!-- required new line -->
+{/* required new line */}
 </DefinitionList>
 
-<!-- other content here -->
+{/* other content here */}
 ```
 
 ### Acceptable markup for term

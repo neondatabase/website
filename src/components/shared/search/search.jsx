@@ -2,7 +2,8 @@ import algoliasearch from 'algoliasearch/lite';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useRef, useState, useMemo } from 'react';
-import { InstantSearch } from 'react-instantsearch-dom';
+import { InstantSearch, Configure } from 'react-instantsearch-dom';
+import aa from 'search-insights';
 
 import useClickOutside from 'hooks/use-click-outside';
 import algoliaQueries from 'utils/algolia-queries';
@@ -11,6 +12,25 @@ import Input from './input';
 import Results from './results';
 
 const indices = [{ name: algoliaQueries[0].indexName, title: 'Docs', hitComp: 'postPageHit' }];
+
+// Initialization of the search-insights library
+aa('init', {
+  appId: process.env.GATSBY_ALGOLIA_APP_ID,
+  apiKey: process.env.GATSBY_ALGOLIA_SEARCH_KEY,
+  useCookie: true,
+});
+
+let userToken = '';
+aa('getUserToken', null, (err, algoliaUserToken) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  userToken = algoliaUserToken;
+});
+
+aa('setUserToken', userToken);
 
 const Search = ({ className, isNotFoundPage }) => {
   const ref = useRef(null);
@@ -32,6 +52,7 @@ const Search = ({ className, isNotFoundPage }) => {
         indexName={indices[0].name}
         onSearchStateChange={({ query }) => setQuery(query)}
       >
+        <Configure clickAnalytics />
         <Input hasFocus={hasFocus} isNotFoundPage={isNotFoundPage} onFocus={() => setFocus(true)} />
         {shouldShowResult && <Results indices={indices} isNotFoundPage={isNotFoundPage} />}
       </InstantSearch>

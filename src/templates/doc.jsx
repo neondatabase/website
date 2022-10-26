@@ -27,11 +27,11 @@ const ReleaseNotes = ({ title, nodes, pageCount, currentPageIndex }) => (
 const DocTemplate = ({
   data: {
     mdx: {
-      body,
       frontmatter: { title, enableTableOfContents },
     },
     allMdx: { nodes },
   },
+  children,
   pageContext: {
     sidebar,
     currentSlug,
@@ -68,7 +68,7 @@ const DocTemplate = ({
             ) : (
               <article>
                 <h1 className="t-5xl font-semibold">{title}</h1>
-                <Content className="mt-5" content={body} ref={contentRef} />
+                <Content className="mt-5" content={children} ref={contentRef} />
               </article>
             )}
             <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
@@ -84,7 +84,6 @@ export const query = graphql`
   query ($id: String!, $limit: Int, $skip: Int, $draftFilter: [Boolean]) {
     mdx(id: { eq: $id }) {
       excerpt(pruneLength: 160)
-      body
       frontmatter {
         title
         enableTableOfContents
@@ -92,17 +91,18 @@ export const query = graphql`
     }
     allMdx(
       filter: {
-        fileAbsolutePath: { regex: "/release-notes/" }
-        slug: { nin: ["release-notes", "RELEASE_NOTES_TEMPLATE"] }
+        internal: { contentFilePath: { regex: "/release-notes/((?!RELEASE_NOTES_TEMPLATE).)*$/" } }
         fields: { isDraft: { in: $draftFilter } }
       }
-      sort: { order: DESC, fields: slug }
+      sort: { fields: internal___contentFilePath, order: DESC }
       limit: $limit
       skip: $skip
     ) {
       nodes {
-        slug
         body
+        fields {
+          slug: releaseNoteSlug
+        }
         frontmatter {
           label
         }

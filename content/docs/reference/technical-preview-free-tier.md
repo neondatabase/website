@@ -11,25 +11,29 @@ Technical Preview Free Tier users can create up to three projects in Neon. Proje
 - The Point in Time Reset (PITR) window is limited to 7 days of _reasonable usage_
 - The compute node is limited to 1 vCPU and 256MB of RAM
 
-**_Note:_**: Neon intends to offer a Free Tier beyond the Technical Preview period. The limits associated with that tier will be defined in the coming months. Technical Preview Free Tier limits are subject to change over the course of the Technical Preview.
+**_Note:_** Neon intends to offer a Free Tier beyond the Technical Preview period. The limits associated with that tier will be defined in the coming months. Technical Preview Free Tier limits are subject to change over the course of the Technical Preview.
 
 ## Data Size
 
 Neon separates storage and compute and stores data in its own internal format.
 The 10GB data size limit applies to the logical size of a Neon project. The logical size is the sum of all relation sizes in the project.
 
-For users familiar with PostgreSQL, the logical size is roughly equal to:
+To check the logical size of the databases in your Neon project, run the following query:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))
 FROM pg_database;
 ```
 
-To check the logical size of your Neon project, run the following query:
+{
+/* To check the logical size of your Neon project, run the following query:
 
 ```sql
 SELECT pg_size_pretty(neon.pg_cluster_size());
 ```
+
+*/
+}
 
 When the data size limit is reached, the following PostgreSQL error message is reported:
 

@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { MDXProvider } from '@mdx-js/react';
 import clsx from 'clsx';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import PropTypes from 'prop-types';
 import React, { Fragment, forwardRef } from 'react';
 
@@ -25,26 +24,22 @@ const components = {
 };
 
 // eslint-disable-next-line no-return-assign
-const Content = forwardRef(({ className, content, showH3Anchors = true }, ref) => (
+const Content = forwardRef(({ className, content }, ref) => (
   <div
-    className={clsx('prose prose-lg md:prose-base xs:prose-code:break-words', className)}
+    className={clsx('prose-lg prose md:prose-base xs:prose-code:break-words', className)}
     ref={ref}
   >
-    <MDXProvider components={showH3Anchors ? components : { ...components, h3: undefined }}>
-      <MDXRenderer>{content}</MDXRenderer>
-    </MDXProvider>
+    <MDXProvider components={components}>{content}</MDXProvider>
   </div>
 ));
 
 Content.propTypes = {
   className: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  showH3Anchors: PropTypes.bool,
 };
 
 Content.defaultProps = {
   className: null,
-  showH3Anchors: true,
 };
 
 export default Content;
