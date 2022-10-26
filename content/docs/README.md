@@ -147,21 +147,20 @@ All available languages for code blocks can be found [here](https://prismjs.com/
 
 The images should be sourced in `docs` directory and be used in `.md` with the relative path
 
-For example:
+Example file structure:
 
 ```md
 ├── content
 │ ├── docs
-│     ├── conceptual-guides
-│         ├── images
-│             ├── neon_architecture_2.png // put images in the same directory as your .md file
-│ ├── architecture-overview.md
+│   ├── conceptual-guides
+│     ├── architecture-overview.md
+│     ├── images
+│       ├── neon_architecture_2.png // put images in the same directory as your .md file
+```
 
-And use the relative path in your content.
+Example content in `architecture-overview.md`:
 
 ```md
-architecture-overview.md
-
 ![Neon architecture diagram](./images/neon_architecture_2.png)
 ```
 
@@ -174,10 +173,10 @@ Custom `mdx` component that makes possible using [extended markdown syntax for d
 The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
-<!-- other content here -->
+/* other content here */}
 
 <DefinitionList>
-<!-- required new line -->
+{/* required new line */}
 Scenario executor
 : First definition
 : Second definition
@@ -194,10 +193,10 @@ Another term for smoke test
 [Stress test](/)
 : First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
 
-<!-- required new line -->
+{/* required new line */}
 </DefinitionList>
 
-<!-- other content here -->
+{/* other content here */}
 ```
 
 ### Acceptable markup for term

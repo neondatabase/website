@@ -6,14 +6,15 @@ const generateReleaseNotePath = require('./generate-release-note-path');
 const docQuery = `{
   pages: allMdx(
     filter: {
-      fileAbsolutePath: { regex: "/content/docs/" }
+      internal: { contentFilePath: { regex: "/docs/((?!README).)*$/" } }
       fields: { isDraft: { in: ${DRAFT_FILTER} } }
-      slug: { ne: "README" }
     }
   ) {
       nodes {
         id
-        slug
+        fields {
+          slug: docSlug
+        }
         frontmatter {
           title
         }
@@ -25,14 +26,17 @@ const docQuery = `{
 const releaseNotesQuery = `{
   releaseNotes: allMdx(
     filter: {
-      fileAbsolutePath: { regex: "/release-notes/" }
-      slug: { nin: ["release-notes", "RELEASE_NOTES_TEMPLATE"] }
+      internal: {
+        contentFilePath: { regex: "/release-notes/((?!RELEASE_NOTES_TEMPLATE).)*$/" }
+      }
       fields: { isDraft: { in: ${DRAFT_FILTER} } }
     }
   ) {
       nodes {
         id
-        slug
+        fields {
+          slug: releaseNoteSlug
+        }
         frontmatter {
           label
         }
@@ -45,7 +49,7 @@ const queries = [
   {
     query: docQuery,
     transformer: ({ data }) =>
-      data.pages.nodes.map(({ id, slug, frontmatter: { title }, excerpt }) => ({
+      data.pages.nodes.map(({ id, fields: { slug }, frontmatter: { title }, excerpt }) => ({
         objectID: id,
         title,
         slug: generateDocPagePath(slug),
@@ -58,7 +62,7 @@ const queries = [
   {
     query: releaseNotesQuery,
     transformer: ({ data }) =>
-      data.releaseNotes.nodes.map(({ id, slug, frontmatter: { label }, excerpt }) => ({
+      data.releaseNotes.nodes.map(({ id, fields: { slug }, frontmatter: { label }, excerpt }) => ({
         objectID: id,
         title: `${label} release - ${slug}`,
         slug: generateReleaseNotePath(slug),

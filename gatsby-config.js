@@ -92,6 +92,13 @@ module.exports = {
       resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.mdx', '.md'],
+        mdxOptions: {
+          remarkPlugins: [
+            // Add GitHub Flavored Markdown (GFM) support
+            // eslint-disable-next-line global-require
+            require(`remark-gfm`),
+          ],
+        },
         gatsbyRemarkPlugins: [
           'gatsby-remark-copy-linked-files',
           {
