@@ -1,7 +1,10 @@
-const DRAFT_FILTER = process.env.BRANCH === 'main' ? [false] : [true, false];
-
+const { GATSBY_ALGOLIA_INDEX_NAME } = require('./constants');
 const generateDocPagePath = require('./generate-doc-page-path');
 const generateReleaseNotePath = require('./generate-release-note-path');
+
+const DRAFT_FILTER = process.env.BRANCH === 'main' ? [false] : [true, false];
+
+console.log(process.env.BRANCH);
 
 const docQuery = `{
   pages: allMdx(
@@ -55,7 +58,7 @@ const queries = [
         slug: generateDocPagePath(slug),
         excerpt,
       })),
-    indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
+    indexName: GATSBY_ALGOLIA_INDEX_NAME,
     settings: { attributesToSnippet: [`excerpt:20`] },
     matchFields: ['title', 'excerpt'],
   },
@@ -68,7 +71,7 @@ const queries = [
         slug: generateReleaseNotePath(slug),
         excerpt,
       })),
-    indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
+    indexName: GATSBY_ALGOLIA_INDEX_NAME,
     settings: { attributesToSnippet: [`excerpt:20`] },
     matchFields: ['title', 'excerpt'],
   },
