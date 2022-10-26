@@ -9,7 +9,7 @@ const TopBar = () => (
     to="/blog/postgresql-15-three-features-you-can-now-try-on-neon"
   >
     <span className="mr-4 border-r border-black border-opacity-20 py-1 pr-4 text-sm font-semibold">
-      Neon supports PostgreSQL 15
+      Neon supports PostgreSQL 15 🎉
     </span>
     <span className="inline-flex items-center text-sm font-bold xs:hidden">
       <span>Read More</span>
