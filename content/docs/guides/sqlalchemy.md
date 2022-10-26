@@ -3,6 +3,7 @@ title: Connect an SQLAlchemy application to Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
+  - /docs/integrations/sqlalchemy
 ---
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.

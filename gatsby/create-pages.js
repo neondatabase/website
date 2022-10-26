@@ -3,6 +3,7 @@ const createBlogPosts = require('./create-blog-posts');
 const createDocPages = require('./create-doc-pages');
 const createReleaseNotePost = require('./create-release-note-post');
 
+// TODO: Uncomment static pages when /privacy-policy is ready to be published
 // const createStaticPages = require('./create-static-pages');
 
 module.exports = async (options) => {

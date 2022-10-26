@@ -3,6 +3,7 @@ title: Connect from Prisma to Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/prisma
+  - /docs/integrations/prisma
 ---
 
 Prisma is an open-source, next-generation ORM that allows you to easily manage and interact with your database. This guide describes how to create a Neon project, connect to it from Prisma, and optionally configure a shadow database for Prisma Migrate.

@@ -3,6 +3,7 @@ title: Connect a Java application to Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
+  - /docs/integrations/java
 ---
 
 This guide describes how to create a Neon project and connect to it with Java Database Connectivity (JDBC) or from a Spring Data project that uses JDBC.

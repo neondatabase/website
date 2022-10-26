@@ -3,6 +3,7 @@ title: Connect from Hasura Cloud to Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura
+  - /docs/integrations/hasura
 ---
 
 Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
