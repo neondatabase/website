@@ -39,7 +39,7 @@
     - title: Java
       slug: integrations/java
     - title: Next.js
-      slug: integrations/vercel
+      slug: guides/vercel
     - title: Node.js
       slug: integrations/node
     - title: Prisma
