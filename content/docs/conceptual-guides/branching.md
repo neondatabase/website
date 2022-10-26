@@ -9,36 +9,50 @@ redirectFrom:
 
 ## About branching
 
-Neon allows you to instantly branch your data in the same way that you branch your code. For example, you can quickly and cost-effectively create branches of your production data for development, testing, staging, and variety of other purposes. For more information about how you can use branching to improve productivity and optimize your CI/CD pipelines, see [Branching use cases](#branching-use-cases).
+Neon allows you to instantly branch your database in the same way you branch your code. You can quickly and cost-effectively branch a database for development, testing, staging, and variety of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. For more information about the different ways in which branching can help improve your development workflows, see [Branching use cases](#branching-use-cases).
 
-A branch is a copy-on-write clone of existing Neon project created from a current or past state. A branch is completely isolated from its parent Neon project, so you are free play around with it, modify it, or remove it it when it's no longer needed.
+## What is a branch?
 
-Branch creation does not increase load on the parent Neon project. You can create a branch at any time without affecting the performance of your production system, and no downtime is required.
+A branch is a copy-on-write clone of an existing Neon project branch. That branch can be the `main` branch of your Neon project or another branch. A branch can be created from a current or past state of the parent branch. For example, you can create a branch that includes data up to the point of branch creation or a branch that includes data up to a particular time or a particular Log Sequence Number (LSN).
 
-When you create a branch, all of the data in the parent project is available in the branch, but changes to the branch are independent of the parent Neon project project and vice versa.
+A branch is completely isolated from its parent Neon project, so you are free play around with it, modify it, or remove it when it's no longer needed. When you create a branch, all of the data in the parent project, in a current or past state according to your selection, is available to the branch, but changes to the branch are independent of the parent Neon project and vice versa. A branch and its parent branch share the same history but diverge at the point of branch creation. Writes to a branch exist as an independent delta. Likewise, writes to a the parent project from the point of branch creation are independent of any child branches.
 
-## Branching from the Console
+Creating a branch does not increase load on the parent branch or affect it in any way, which means that you can create a branch at any time without impacting the performance of your production database.
 
-This section describes how to create and manage branches from the Neon Console.
+A branch has the following characteristics:
 
-### Creating a branch
+- A branch is subject to the same technical preview limits as Neon project:
+  - Project data size is limited to 10GB.
+  - The Point in Time Reset (PITR) window is limited to 7 days of reasonable usage.
+  - The compute node is limited to 1 vCPU and 256MB of RAM.
+- Branches are read-write.
+- An endpoint is created for each branch when the branch is created, which permits connecting to the branch as you would connect to a Neon project from a PostgreSQL client, an application, or the Neon API. 
 
-Creating a branch requires that you have a project to branch from. For information about creating a project, see [Setting up a project](/docs/getting-started-with-neon/setting-up-a-project).
+## Creating a branch
+
+Creating a branch requires that you have a Neon project. For information about creating a project, see [Setting up a project](/docs/getting-started-with-neon/setting-up-a-project).
 
 To create a branch:
 
-1. In the Neon Console, select the **Branches** tab.
+1. In the Neon Console, select a project.
+2. Select the **Branches** tab.
 2. Click **New Branch**.
-3. Enter a name for the branch.
-4. Select the project or branch that you want to branch from.
-5. Select the type of branch you want to create. 
-    - **Head**: Branch the current state of the parent project. The branch is created with all of the parent project data.
-    - **Time**: Branch a specific point in time. The branch is created with the project data as it existed at the specified date and time.
-    - **LSN**: Branch from a specified Log Sequence Number (LSN). The branch is created with the project data as it existed at the specified LSN.
-6. Select whether or not to create an endpoint for the branch. An endpoint may not be necessary when using a branch as a backup, for example.
+3. Enter a name for the branch or leave the field empty to have one generated for you.
+4. Select a parent branch. You can branch from your project's `main` branch or a branch that was created previously.
+5. Select one of the following branching options:
+    - **Head**: Branch the current state of the parent branch. The branch has access to all data up to the current point in time.
+    - **Time**: Branch from a specific point in time. The branch is created with access to project data up to the specified date and time.
+    - **LSN**: Branch from a specified Log Sequence Number (LSN). The branch is created with access to project data up to the specified LSN.
+6. Click **Create Branch**.
+
+The branch is created with an accompanying endpoint that you can use to connect to the branch from a PostgreSQL client, an application, or the Neon API. 
+
+The branch name is either user-specified or combination of the parent project ID and branch ID in the following format: `{parent-branch-id}-branch-{branch-id}`. For example, a branch name comprised of parent and branch ID values looks similar to: `autumn-lake-518875-branch-fancy-lake-471319`
+
+The branch endpoint name is the endpoint ID and appears similar to: `ep-{endpoint-id}`. For example: `ep-purple-frost-523241`
 
 
-### Viewing branches
+## Viewing branches
 
 Branches are listed on the **Projects** page in the Neon Console.
 
@@ -61,7 +75,7 @@ For example, a branch name appears similar to the following:
 super-star-526912-branch-rough-queen-523183
 ```
 
-### Renaming a branch
+## Renaming a branch
 
 To rename a branch:
 
@@ -70,7 +84,7 @@ To rename a branch:
 3. If the left pane, select **Rename** from the menu associated with the branch.
 4. Specify the new name and click **Save**.
 
-### Deleting a branch
+## Deleting a branch
 
 To delete a branch:
 
@@ -132,9 +146,9 @@ Specified in a cURL command, the API method appears as follows:
 curl -X DELETE -H 'Authorization: Bearer $NEON_API_KEY' https://console.neon.tech/api/v2/branches/<branch_id>
 ```
 
-### Branching use cases
+## Branching use cases
 
-Branching has a variety of possible uses, some of which are describes below:
+Branching has a variety of possible uses, some of which are described below:
 
 - **Development**
     - Create a branch of your production database for your Development team
@@ -174,14 +188,4 @@ Branching has a variety of possible uses, some of which are describes below:
     -	Create a branch for ML model training
     -	Name or tag a branch for a specific point in time for ML model training repeatability
 
-### Branch characteristics
 
-A branch has the following characteristics:
-
-- A branch compute has 1 vCPU and 256 MB of RAM
-- Branches are read-write 
-- A branch supports a single endpoint, which is the URL address required to perform actions on the branch using the Neon API.
-- A branch can be created without an endpoint. An endpoint may not be required for certain use cases, such as backups.
-- A branch endpoint can be deleted
-- The endpoint associated with the branch is deleted when a branch is deleted.
-- A branch endpoint URL uses the same format as a project endpoint URL: `{project_id}-{endpoint_id}.cloud.neon.tech`
