@@ -8,7 +8,7 @@ enableTableOfContents: true
 In most cases, copy-pasting `Connection string` from the project's dashboard and using it in your project should work as is. However, with older clients and some native PostgreSQL clients, you may receive the following error:
 
 ```txt
-ERROR: The project ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the project ID (the first part of the domain name) as a parameter: '&options=project%3D'. See https://neon.tech/sni for more information.
+ERROR: The project ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the project ID (the first part of the domain name) as a parameter: '&options=project%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
 ```
 
 In most cases, this happens if your client library or app does not support the so-called **SNI (Server Name Indication)** mechanism in TLS. See [#Details](Details) for more context and [#Workarounds](Workarounds) for a list of ways to get around this issue.
@@ -78,7 +78,7 @@ That approach is the most invasive option out of all workarounds. It causes the 
 
 ## Libraries
 
-libpq-based clients from this list <https://wiki.postgresql.org/wiki/List_of_drivers> are expected to work with system `libpq` version >= 14.
+libpq-based clients from this list [https://wiki.postgresql.org/wiki/List_of_drivers](https://wiki.postgresql.org/wiki/List_of_drivers) are expected to work with system `libpq` version >= 14.
 
 List of native client libraries:
 

@@ -16,8 +16,12 @@ import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug'
 
 const ReleaseNotePostTemplate = ({
   data: {
-    mdx: { slug, body, frontmatter },
+    mdx: {
+      fields: { slug },
+      frontmatter,
+    },
   },
+  children,
 }) => (
   <Layout headerTheme="white">
     <Hero className="pt-40 lg:pt-16 md:mb-10 md:py-10 sm:mb-7 sm:py-7" withContainer />
@@ -38,7 +42,7 @@ const ReleaseNotePostTemplate = ({
           {frontmatter.label} release
         </Heading>
 
-        <Content className="mt-8 prose-h3:text-xl" content={body} />
+        <Content className="mt-8 prose-h3:text-xl" content={children} />
         <Link
           className="mt-10 font-semibold lg:mt-8"
           to={RELEASE_NOTES_BASE_PATH}
@@ -56,8 +60,9 @@ const ReleaseNotePostTemplate = ({
 export const query = graphql`
   query ($id: String!) {
     mdx(id: { eq: $id }) {
-      slug
-      body
+      fields {
+        slug: releaseNoteSlug
+      }
       frontmatter {
         label
       }
