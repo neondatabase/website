@@ -9,67 +9,13 @@ redirectFrom:
 
 ## About branching
 
-Neon allows you to instantly branch your data that same way you branch your code.
+Neon allows you to instantly branch your data in the same way that you branch your code. For example, you can quickly and cost-effectively create branches of your production data for development, testing, staging, and variety of other purposes. For more information about how you can use branching to improve productivity and optimize your CI/CD pipelines, see [Branching use cases](#branching-use-cases).
 
 A branch is a copy-on-write clone of existing Neon project created from a current or past state. A branch is completely isolated from its parent Neon project, so you are free play around with it, modify it, or remove it it when it's no longer needed.
 
 Branch creation does not increase load on the parent Neon project. You can create a branch at any time without affecting the performance of your production system, and no downtime is required.
 
 When you create a branch, all of the data in the parent project is available in the branch, but changes to the branch are independent of the parent Neon project project and vice versa.
-
-### What can branching be used for?
-
-Branching has a variety of possible uses, some of which are describes below:
-
-- **Development**
-    - Create a branch of your production database for your Development team
-    - Create a branch for each Developer
-	
-- **Testing** 
-    -	Run tests on a current branch of production data
-    -	Test potentially destructive queries before deploying them to production
-    -	Test schema changes
-    -	Run tests on real data &mdash; branching eliminates the need to hydrate a test database
-    -	Run tests in parallel on separate branches, each with its own dedicated compute
-
-- **Staging**
-    - Create a staging database by branching your production data
-    - Create a branch for every pull request in your CI/CD pipeline
-			
-- **Backup**
-    -	Quickly and easily create backup branches
-    -	Instantly restore a previous state by branching from a previously created backup branch
-    -	Name backup branches according to the time they were created for convenient point-in-time restore (PITR)
-	
-- **Replication**
-    - Use branching to quickly and easily clone replicas
-
-- **Historical Analysis**
-    -	Run time-travel queries against a historical state
-    -	Create a branch from a past point in time to reproduce an issue
-	
-- **Simulation**
-    - Run "what if" scenarios on a branch of your production data
-    - Perform each simulation on its own branch
-	
-- **Analytics**
-    - Run costly queries on a branch of your production data, each with its own resources
-	
-- **Machine Learning**
-    -	Create a branch for ML model training
-    -	Name or tag a branch for a specific point in time for ML model training repeatability
-
-### Branch characteristics
-
-A branch has the following characteristics:
-
-- A branch compute has 1 vCPU and 256 MB of RAM
-- Branches are read-write 
-- A branch supports a single endpoint, which is the URL address required to perform actions on the branch using the Neon API.
-- A branch can be created without an endpoint. An endpoint may not be required for certain use cases, such as backups.
-- A branch endpoint can be deleted
-- The endpoint associated with the branch is deleted when a branch is deleted.
-- A branch endpoint URL uses the same format as a project endpoint URL: `{project_id}-{endpoint_id}.cloud.neon.tech`
 
 ## Branching from the Console
 
@@ -123,7 +69,6 @@ To rename a branch:
 2. Select the branch you want to rename.
 3. If the left pane, select **Rename** from the menu associated with the branch.
 4. Specify the new name and click **Save**.
-
 
 ### Deleting a branch
 
@@ -186,3 +131,57 @@ Specified in a cURL command, the API method appears as follows:
 ```bash
 curl -X DELETE -H 'Authorization: Bearer $NEON_API_KEY' https://console.neon.tech/api/v2/branches/<branch_id>
 ```
+
+### Branching use cases
+
+Branching has a variety of possible uses, some of which are describes below:
+
+- **Development**
+    - Create a branch of your production database for your Development team
+    - Create a branch for each Developer
+	
+- **Testing** 
+    -	Run tests on a current branch of production data
+    -	Test potentially destructive queries before deploying them to production
+    -	Test schema changes
+    -	Run tests on real data &mdash; branching eliminates the need to hydrate a test database
+    -	Run tests in parallel on separate branches, each with its own dedicated compute
+
+- **Staging**
+    - Create a staging database by branching your production data
+    - Create a branch for every pull request in your CI/CD pipeline
+			
+- **Backup**
+    -	Quickly and easily create backup branches
+    -	Instantly restore a previous state by branching from a previously created backup branch
+    -	Name backup branches according to the time they were created for convenient point-in-time restore (PITR)
+	
+- **Replication**
+    - Use branching to quickly and easily clone replicas
+
+- **Historical Analysis**
+    -	Run time-travel queries against a historical state
+    -	Create a branch from a past point in time to reproduce an issue
+	
+- **Simulation**
+    - Run "what if" scenarios on a branch of your production data
+    - Perform each simulation on its own branch
+	
+- **Analytics**
+    - Run costly queries on a branch of your production data, each with its own resources
+	
+- **Machine Learning**
+    -	Create a branch for ML model training
+    -	Name or tag a branch for a specific point in time for ML model training repeatability
+
+### Branch characteristics
+
+A branch has the following characteristics:
+
+- A branch compute has 1 vCPU and 256 MB of RAM
+- Branches are read-write 
+- A branch supports a single endpoint, which is the URL address required to perform actions on the branch using the Neon API.
+- A branch can be created without an endpoint. An endpoint may not be required for certain use cases, such as backups.
+- A branch endpoint can be deleted
+- The endpoint associated with the branch is deleted when a branch is deleted.
+- A branch endpoint URL uses the same format as a project endpoint URL: `{project_id}-{endpoint_id}.cloud.neon.tech`
