@@ -31,25 +31,25 @@
 - title: Guides
   items:
     - title: Django
-      slug: integrations/django
+      slug: guides/django
     - title: Go
-      slug: integrations/go
+      slug: guides/go
     - title: Hasura
-      slug: integrations/hasura
+      slug: guides/hasura
     - title: Java
-      slug: integrations/java
+      slug: guides/java
     - title: Next.js
       slug: guides/vercel
     - title: Node.js
-      slug: integrations/node
+      slug: guides/node
     - title: Prisma
-      slug: integrations/prisma
+      slug: guides/prisma
     - title: Rust
-      slug: integrations/rust
+      slug: guides/rust
     - title: SQLAlchemy
-      slug: integrations/sqlalchemy
+      slug: guides/sqlalchemy
     - title: Symfony
-      slug: integrations/symfony    
+      slug: guides/symfony    
 - title: Import data
   items:
     - title: Import data from PostgreSQL

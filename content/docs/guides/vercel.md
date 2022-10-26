@@ -3,6 +3,7 @@ title: Connect a Next.js application to Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
+  - /docs/integrations/vercel
 ---
 
 Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js application.
