@@ -20,8 +20,6 @@ const ApiReferencePage = () => {
           dom_id: '#swagger',
           deepLinking: true,
           filter: true,
-          tryItOutEnabled: false,
-          supportedSubmitMethods: [''],
         });
       });
   }, []);
