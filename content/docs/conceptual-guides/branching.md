@@ -40,12 +40,12 @@ To create a branch:
 3. Enter a name for the branch or leave the field empty to have one generated for you.
 4. Select a parent branch. You can branch from your project's `main` branch or from a previously created branch.
 5. Select one of the following branching options:
-    - **Head**: Branch the current state of the parent branch. The branch has access to all data up to the current point in time.
-    - **Time**: Branch from a specific point in time. The branch is created with access to project data up to the specified date and time.
-    - **LSN**: Branch from a specified Log Sequence Number (LSN). The branch is created with access to project data up to the specified LSN.
+    - **Head**: Branch the current state of the parent branch. The branch is created with data up to the current point in time.
+    - **Time**: Branch from a specific point in time. The branch is created with data up to the specified date and time.
+    - **LSN**: Branch from a specified Log Sequence Number (LSN). The branch is created with data up to the specified Log Sequence Number (LSN).
 6. Click **Create Branch**.
 
-AN endpoint is created with each branch, which you can use to connect to the branch from a PostgreSQL client, an application, or the Neon API.
+An endpoint is created with each branch, which you can use to connect to the branch from a PostgreSQL client, an application, or the Neon API.
 
 ## View branches
 
@@ -134,11 +134,15 @@ You can quickly create an isolated branch of your production database that devel
 
 Branching enables testers to use the most recent production data. Testers can quickly create new database branches for testing schema changes, validating new queries, or testing potentially destructive queries before they are deployed to production. A branch is completely isolated from its parent branch but has access to all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a test database. Testers can also run tests on separate branches in parallel, with each branch having its own dedicated compute resources.
 
-Another potential testing scenario enabled by branching is creating a branch from a past point in time to track down and reproduce a failue or data quaility issue. Neon permits creating a branch that includes data up to a user-specified time or Log Sequence Number (LSN). For example, you can quickly create and dispose of as many point-in-time database branches as necessary to determine when an issue first appears.
+Another potential testing scenario enabled by branching is creating a branch from a past point in time to track down and reproduce a failure or data quality issue. Neon permits creating a branch that includes data up to a user-specified time or Log Sequence Number (LSN). For example, you can quickly create and dispose of as many point-in-time database branches as necessary to determine when an issue first appears.
 
 ### Staging
 
 With Neon's branching capabilities, you can create a staging database by branching your production database. With the Neon API, you can automate the creation of a database branch for every pull request in your CI/CD pipeline.
+
+### Data recovery
+
+If you lose data due to an unintended deletion or some other event, you can create a branch of your database with the data as it existed before the event occurred to recover the lost data. Neon allows you to create a branch with the data that existed up to a particular point in time or up to a particular Log Sequence Number (LSN).
 
 ### Analytics
 
