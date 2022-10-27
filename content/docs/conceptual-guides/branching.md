@@ -259,7 +259,7 @@ Branching has a variety of possible uses, some of which are described below:
 
 ### Development
 
-You can quickly create an isolated branch of your production database that developers are free to play with and modify. Branches can be created instantly with full access to data that existed at the time the branch was created, eliminating the set-up time required to deploy and maintain a development database. Branching is so easy and cost-effective that you can create a separate branch for each developer to work on in parallel. You can also or branch from an existing development branch to assign development tasks at a granular level.
+You can quickly create an isolated branch of your production database that developers are free to play with and modify. You can create a branch instantly with access to all of the data that existed at the time the branch was created, eliminating the set-up time required to deploy and maintain a development database. Branching is so easy and cost-effective that you can create a separate branch for each developer to work on in parallel. You can also or branch from an existing development branch to assign development tasks at a granular level.
 
 ### Testing
 
