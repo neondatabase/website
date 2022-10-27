@@ -37,7 +37,7 @@ To create a branch:
 
 1. In the Neon Console, select a project.
 2. Select the **Branches** tab.
-2. Click **New Branch** to open the **Create branch** page.
+2. Click **New Branch** to open the **Create a branch** page.
 ![Neon architecture diagram](./images/create_branch.png)
 3. Enter a name for the branch or leave the field empty to have one generated for you.
 4. Select a parent branch. You can branch from your project's `main` branch or a previously created branch.
@@ -56,8 +56,11 @@ To view the branches associated with a Neon project:
 1. Select a project from the project drop-down list at the top of the Neon Console.
 2. Select the **Branches** tab.
 3. Select the branch from the table to view details about the branch.
+![Neon architecture diagram](./images/view_branches.png)
 
 Branch details include the branch name, parent branch, database size, storage size, and the time the branch was created.
+
+![Neon architecture diagram](./images/branch_details.png)
 
 The **Branches** widget on the project **Dashboard** also lists the branches associated with a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
 
