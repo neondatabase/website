@@ -38,7 +38,7 @@ To create a branch:
 1. In the Neon Console, select a project.
 2. Select the **Branches** tab.
 2. Click **New Branch** to open the **Create branch** page.
-![Neon architecture diagram](/images/create_branch.png)
+![Neon architecture diagram](./images/create_branch.png)
 3. Enter a name for the branch or leave the field empty to have one generated for you.
 4. Select a parent branch. You can branch from your project's `main` branch or a previously created branch.
 5. Select one of the following branching options:
