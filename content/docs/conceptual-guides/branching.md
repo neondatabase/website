@@ -9,13 +9,13 @@ redirectFrom:
 
 ## About branching
 
-Neon allows you to instantly branch your database in the same way you branch your code. You can quickly and cost-effectively branch a database for development, testing, staging, and a variety of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. For information about different ways to integrate branching with your development workflows, see [Branching use cases](#branching-use-cases).
+Neon allows you to instantly branch your database in the same way that you branch your code. You can quickly and cost-effectively branch a database for development, testing, staging, and a variety of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. For a discussion of different ways you can integrate branching with your development workflows, see [Branching use cases](#branching-use-cases).
 
 ## What is a branch?
 
-A branch is a copy-on-write clone of an existing Neon project branch. You can create a branch from a current or past state of a parent branch. For example, you can create a branch that includes all data up to the point of branch creation, or a branch that includes all data up to a particular time or a particular Log Sequence Number (LSN).
+A branch is a copy-on-write clone of an existing branch. You can create a branch from a current or past state of a parent branch. For example, you can create a branch that includes all data up to the point of branch creation or one that includes all data up to a particular time or Log Sequence Number (LSN).
 
-A branch is completely isolated from its parent Neon project, so you are free to play around with it, modify it, and remove it when it's no longer needed. When you create a branch, all of the data in the parent branch (in a current or past state according to your selection) is available to the branch, but changes to the branch are independent of the parent Neon branch and vice versa. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch exist as an independent delta. Likewise, writes to a parent branch from the point of branch creation are independent of child branches.
+A branch is completely isolated from its parent branch, so you are free to play around with it, modify it, and delete it when it's no longer needed. When you create a branch, all of the data in the parent branch is available to the new branch, but changes to the new branch are independent of the parent branch and vice versa. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch exist as an independent delta. Likewise, writes to a parent branch from the point of branch creation are independent of a child branch.
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means that you can create a branch at any time without impacting the performance of your production database.
 
@@ -25,6 +25,7 @@ A branch has the following characteristics:
   - Project data size is limited to 10GB.
   - The Point in Time Reset (PITR) window is limited to 7 days of reasonable usage.
   - The compute node is limited to 1 vCPU and 256MB of RAM.
+- During the Neon Technical Preview, a Neon project is limited to three branches.
 - Branches are read-write.
 - An endpoint is created for each branch when the branch is created, which permits connecting to the branch as you would connect to any Neon project from a PostgreSQL client, an application, or the Neon API.
 
@@ -40,12 +41,12 @@ To create a branch:
 3. Enter a name for the branch or leave the field empty to have one generated for you.
 4. Select a parent branch. You can branch from your project's `main` branch or from a previously created branch.
 5. Select one of the following branching options:
-    - **Head**: Branch the current state of the parent branch. The branch is created with data up to the current point in time.
-    - **Time**: Branch from a specific point in time. The branch is created with data up to the specified date and time.
-    - **LSN**: Branch from a specified Log Sequence Number (LSN). The branch is created with data up to the specified Log Sequence Number (LSN).
+    - **Head**: Creates a branch with data up to the current point in time.
+    - **Time**: Creates a branch with data up to the specified date and time.
+    - **LSN**: Creates a branch with data up to the specified Log Sequence Number (LSN).
 6. Click **Create Branch**.
 
-An endpoint is created with each branch, which you can use to connect to the branch from a PostgreSQL client, an application, or the Neon API.
+An endpoint is created with each branch, which is required connect to the branch from a PostgreSQL client, an application, or the Neon API.
 
 ## View branches
 
