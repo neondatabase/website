@@ -110,6 +110,121 @@ curl -X 'POST' \
 }
 ```
 
+Response:
+
+```bash
+{
+
+  "branch": {
+
+    "id": "br-soft-term-199780",
+
+    "project_id": "autumn-lake-518875",
+
+    "parent_id": "br-steep-bonus-114258",
+
+    "name": "staging_branch",
+
+    "current_state": "init",
+
+    "pending_state": "ready",
+
+    "created_at": "2022-10-27T22:57:27Z",
+
+    "updated_at": "2022-10-27T22:57:27Z"
+
+  },
+
+  "endpoints": [
+
+    {
+
+      "id": "ep-red-lake-259266",
+
+      "project_id": "autumn-lake-518875",
+
+      "branch_id": "br-soft-term-199780",
+
+      "instance_type_id": "scalable",
+
+      "region_id": "aws-us-east-1",
+
+      "type": "read_write",
+
+      "current_state": "init",
+
+      "pending_state": "active",
+
+      "settings": {},
+
+      "pooler_enabled": false,
+
+      "pooler_mode": "transaction",
+
+      "allow_connections": true,
+
+      "passwordless_access": true,
+
+      "created_at": "2022-10-27T22:57:27Z",
+
+      "updated_at": "2022-10-27T22:57:27Z",
+
+      "proxy_host": "cloud.stage.neon.tech"
+
+    }
+
+  ],
+
+  "operations": [
+
+    {
+
+      "id": "8bd2e83c-29fb-46ff-a989-4c2162748b2d",
+
+      "project_id": "autumn-lake-518875",
+
+      "branch_id": "br-soft-term-199780",
+
+      "action": "create_branch",
+
+      "status": "running",
+
+      "failures_count": 0,
+
+      "created_at": "2022-10-27T22:57:27Z",
+
+      "updated_at": "2022-10-27T22:57:27Z"
+
+    },
+
+    {
+
+      "id": "12880f24-421c-4b63-a92f-d1c501bf89aa",
+
+      "project_id": "autumn-lake-518875",
+
+      "branch_id": "br-soft-term-199780",
+
+      "endpoint_id": "ep-red-lake-259266",
+
+      "action": "start_compute",
+
+      "status": "scheduling",
+
+      "failures_count": 0,
+
+      "created_at": "2022-10-27T22:57:27Z",
+
+      "updated_at": "2022-10-27T22:57:27Z"
+
+    }
+
+  ]
+
+}
+```
+
+
 ### List branches
 
 The following Neon API method lists branches for the specified project.
