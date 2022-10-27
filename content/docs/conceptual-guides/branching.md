@@ -63,7 +63,7 @@ Branch details include the branch name, parent branch, database size, storage si
 
 The **Branches** widget on the project **Dashboard** also lists the branches associated with a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
 
-![Branches widget](./images/branch_widget.png)
+![Branches widget](./images/branches_widget.png)
 
 ## Delete a branch
 
@@ -285,4 +285,4 @@ You can run costly, long-running queries on an isolated branch of your productio
 
 ### Machine Learning
 
-You can create point-in-time branches to ensure repeatability as you train and validate machine learning models.
+You can create point-in-time branches to ensure repeatability when training machine learning models.
