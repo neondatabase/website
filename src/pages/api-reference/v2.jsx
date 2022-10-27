@@ -10,9 +10,9 @@ const ApiReferencePage = () => {
       .then((res) => res.json())
       .then((spec) => {
         spec.servers = [
-          // {
-          //   url: 'https://console.neon.tech/api/v2',
-          // },
+          {
+            url: 'https://console.neon.tech/api/v2',
+          },
         ];
         spec.info.description = `This is a preview of the next version of the Neon API. It is only partially implemented and intended for review purposes only.\n\n${spec.info.description}`;
         SwaggerUI({
