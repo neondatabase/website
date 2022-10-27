@@ -105,7 +105,7 @@ GET /projects/{project_id}/branches
 Specified in a cURL command, the API method appears as follows:
 
 ```bash
-curl -X GET -H 'Authorization: Bearer $NEON_API_KEY' https://console.neon.tech/api/v2/projects/<project_id>/branches
+curl -X GET -H 'Authorization: Bearer $NEON_API_KEY' https://console.neon.tech/api/v2/projects/<project_id>/branches |jq
 ```
 
 ### Deleting a branch
@@ -128,22 +128,22 @@ Branching has a variety of possible uses, some of which are described below:
 
 ### Development
 
-You can quickly create an isolated branch of your production database that developers are free to play with and modify. Branches can be created instantly with full access to data that existed at the time the branch was created, eliminating the set-up time required to deploy and maintain a development database. Branching is so easy to create and cost-effective that you can create a separate branch for each developer to work on in parallel.
+You can quickly create an isolated branch of your production database that developers are free to play with and modify. Branches can be created instantly with full access to data that existed at the time the branch was created, eliminating the set-up time required to deploy and maintain a development database. Branching is so easy and cost-effective that you can create a separate branch for each developer to work on in parallel.
 
 ### Testing
 
-Branching enables testers to use the most recent production data. Testers can quickly spin up new database branches for testing schema changes, running new queries, or running potentially destructive queries before they are deployed to production. A branch is completely isolated from its parent branch but has access to all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a test database. Testers can also run tests on separate branches in parallel, with each branch having its own dedicated compute resources.
+Branching enables testers to use the most recent production data. Testers can quickly create new database branches for testing schema changes, validating new queries, or testing potentially destructive queries before they are deployed to production. A branch is completely isolated from its parent branch but has access to all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a test database. Testers can also run tests on separate branches in parallel, with each branch having its own dedicated compute resources.
 
-Another potential testing scenario enabled by branching is creating a branch from a past point in time to track down and reproduce an issue. Neon permits creating a branch that includes data up to a user-specified time or Log Sequence Number (LSN).
+Another potential testing scenario enabled by branching is creating a branch from a past point in time to track down and reproduce a failue or data quaility issue. Neon permits creating a branch that includes data up to a user-specified time or Log Sequence Number (LSN). For example, you can quickly create and dispose of as many point-in-time database branches as necessary to determine when an issue first appears.
 
 ### Staging
 
-With Neon's branching capabilities, you can create a staging database by branching your production database. With the Neon API, you could automate the creation of a database branch for every pull request in your CI/CD pipeline.
+With Neon's branching capabilities, you can create a staging database by branching your production database. With the Neon API, you can automate the creation of a database branch for every pull request in your CI/CD pipeline.
 
 ### Analytics
 
-You can run costly, long-running queries on an isolated branch of your production data, each with its own resources to avoid impacting your production system. With some automation, you could create and dispose of branches on a regular schedule to ensure that queries run on a recent copy of production data.
+You can run costly, long-running queries on an isolated branch of your production data, each with its own resources to avoid impacting your production system. With automation scripts, you can create and dispose of branches on a regular schedule to ensure that queries always run on an up-to-date copy of production data.
 
 ### Machine Learning
 
-You can use branches for for ML model training. For example, you can create point-in-time branches to ensure ML model training repeatability.
+You can use branches for ML model training. For example, you can create point-in-time branches to ensure repeatability as you train and validate machine learning models.
