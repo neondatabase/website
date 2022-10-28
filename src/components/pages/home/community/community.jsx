@@ -205,9 +205,9 @@ const Community = () => (
             <div className="flex border-b border-b-gray-4 pb-6 xl:pb-4">
               <div className="w-16 shrink-0">{photo}</div>
               <div className="ml-5 flex w-full flex-col justify-evenly">
-                <h4 className="font-semibold">{name}</h4>
+                <h4 className="font-semibold leading-none">{name}</h4>
                 <div className="flex justify-between">
-                  <p className="font-normal">@{twitterAccount}</p>
+                  <p className="font-normal leading-none">@{twitterAccount}</p>
                   <Link className="my-auto w-6" to={twitterUrl} target="_blank">
                     <TwitterIcon className="text-secondary-7" />
                   </Link>

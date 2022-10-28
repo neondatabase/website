@@ -41,7 +41,7 @@ const Footer = () => (
             ))}
           </ul>
         </div>
-        <div className="t-base space-y-6 xl:space-y-4 md:mt-8">
+        <div className="t-base space-y-6 leading-none xl:space-y-4 md:mt-8">
           <p>Made in SF and the World</p>
           <p>Neon 2022 Ⓒ All rights reserved</p>
         </div>
@@ -56,7 +56,7 @@ const Footer = () => (
             key={index}
           >
             <Heading
-              className="relative border-b-2 border-black px-10 py-9 before:absolute before:left-0 before:-bottom-0.5 before:h-0.5 before:w-[50vw] before:bg-black 2xl:px-8 2xl:py-7 xl:border-none xl:px-0 xl:pt-8 xl:pb-0 xl:before:hidden md:pt-0"
+              className="relative border-b-2 border-black px-10 py-9 leading-none before:absolute before:left-0 before:-bottom-0.5 before:h-0.5 before:w-[50vw] before:bg-black 2xl:px-8 2xl:py-7 xl:border-none xl:px-0 xl:pt-8 xl:pb-0 xl:before:hidden md:pt-0"
               tag="h3"
               size="xs"
               theme="black"

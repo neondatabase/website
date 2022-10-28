@@ -99,7 +99,7 @@ const SubscriptionForm = ({ className }) => {
       {/* Input */}
       <input
         className={clsx(
-          'remove-autocomplete-styles t-2xl relative block h-24 w-[696px] rounded-full border-4 border-black bg-white pl-7 pr-[218px] font-semibold text-black placeholder-black outline-none transition-colors duration-200 3xl:w-[576px] 2xl:h-20 2xl:w-[478px] 2xl:pr-[187px] xl:h-[72px] xl:w-[448px] xl:pr-[164px] lg:w-full lg:pl-5 md:pr-20',
+          'remove-autocomplete-styles t-2xl relative block h-24 w-[696px] rounded-full border-4 border-black bg-white pl-7 pr-[218px] font-semibold leading-none text-black placeholder-black outline-none transition-colors duration-200 3xl:w-[576px] 2xl:h-20 2xl:w-[478px] 2xl:pr-[187px] xl:h-[72px] xl:w-[448px] xl:pr-[164px] lg:w-full lg:pl-5 md:pr-20',
           errorMessage && 'border-secondary-1'
         )}
         name="email"
