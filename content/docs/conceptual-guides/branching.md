@@ -13,9 +13,9 @@ Neon allows you to instantly branch your database in the same way that you branc
 
 ### What is a branch?
 
-A branch is a copy-on-write clone of an existing branch. You can create a branch from a current or past state of a parent branch. For example, you can create a branch that includes all data up to the point of branch creation or one that includes all data up to a particular time or Log Sequence Number (LSN).
+A branch is a copy-on-write clone of an existing branch. You can create a branch from a current or past state of a parent branch. For example, you can create a branch that includes all data up to the point of branch creation or up to a particular time or Log Sequence Number (LSN).
 
-A branch is completely isolated from its parent branch, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to the new branch are independent of the parent branch and vice versa. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are persisted as an independent delta. Likewise, writes to a parent branch are independent of a child branch.
+A branch is completely isolated from its parent branch, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to the a branch are independent of the parent branch and vice versa. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are persisted as an independent delta.
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means that you can create a branch at any time without impacting the performance of your production database.
 
@@ -36,9 +36,9 @@ To create a branch:
 
 1. In the Neon Console, select a project.
 2. Select the **Branches** tab.
-2. Click **New Branch** to open the **Create a branch** page.
+2. Click **New Branch** to open the branch creation page.
   ![Create branch dialog](./images/create_branch.png)
-3. Enter a name for the branch or leave the field empty to have one generated for you.
+3. Enter a name for the branch.
 4. Select a parent branch. You can branch from your project's `main` branch or a previously created branch.
 5. Select one of the following branching options:
     - **Head**: Creates a branch with data up to the current point in time.
@@ -79,19 +79,18 @@ To delete a branch:
 
 ## Branching using the Neon API
 
-Any branch action that you perform in the Neon Console can be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/).
+Any branch action performed in the Neon Console can be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/).
 
 ### Prerequisites
 
-- A Neon API request requires an API key. For information about obtaining an API key, see [Using API Keys](/docs/get-started-with-neon/using-api-keys). In the cURL examples below, `$NEON_API_KEY` represents the Neon API key. Replace `$NEON_API_KEY` with your API key when issuing a request.
-- The API examples in this section require a `<project_id>` or `<branch_id>` value. You can find `<project_id>` values in the Neon Console on the **Settings** tab, under **General Settings**. You can find branch IDs by listing the branches for your project. See [List branches](#list-branches).
+A Neon API request requires an API key. For information about obtaining an API key, see [Using API Keys](/docs/get-started-with-neon/using-api-keys). In the cURL examples below, `$NEON_API_KEY` represents the Neon API key. Replace `$NEON_API_KEY` with your API key when issuing a request.
 
 ### Create a branch
 
 The following Neon API method creates a branch:
 
 ```bash
-POST /projects/{project_id}/branches (NOT IMPLEMENTED)
+POST /projects/{project_id}/branches 
 ```
 
 The API method appears as follows when specified in a cURL command:
@@ -110,120 +109,68 @@ curl -X 'POST' \
 }
 ```
 
-Response:
+- The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**.
+- The `<parent_id>` and `<branch_name>` values can be obtained by listing the branches for your project. See [List branches](#list-branches). The `<parent_id>` is the `id` of the branch you are branching from. Each Neon project is created with a branch named `main`.
+
+The response includes information about the branch, the branch's endpoint, and the `create_branch` and `start_compute` operations that have been initiated.
 
 ```bash
 {
-
   "branch": {
-
     "id": "br-soft-term-199780",
-
     "project_id": "autumn-lake-518875",
-
     "parent_id": "br-steep-bonus-114258",
-
     "name": "staging_branch",
-
     "current_state": "init",
-
     "pending_state": "ready",
-
     "created_at": "2022-10-27T22:57:27Z",
-
     "updated_at": "2022-10-27T22:57:27Z"
-
   },
-
   "endpoints": [
-
     {
-
       "id": "ep-red-lake-259266",
-
       "project_id": "autumn-lake-518875",
-
       "branch_id": "br-soft-term-199780",
-
       "instance_type_id": "scalable",
-
       "region_id": "aws-us-east-1",
-
       "type": "read_write",
-
       "current_state": "init",
-
       "pending_state": "active",
-
       "settings": {},
-
       "pooler_enabled": false,
-
       "pooler_mode": "transaction",
-
       "allow_connections": true,
-
       "passwordless_access": true,
-
       "created_at": "2022-10-27T22:57:27Z",
-
       "updated_at": "2022-10-27T22:57:27Z",
-
       "proxy_host": "cloud.stage.neon.tech"
-
     }
-
   ],
-
   "operations": [
-
     {
-
       "id": "8bd2e83c-29fb-46ff-a989-4c2162748b2d",
-
       "project_id": "autumn-lake-518875",
-
       "branch_id": "br-soft-term-199780",
-
       "action": "create_branch",
-
       "status": "running",
-
       "failures_count": 0,
-
       "created_at": "2022-10-27T22:57:27Z",
-
       "updated_at": "2022-10-27T22:57:27Z"
-
     },
-
     {
-
       "id": "12880f24-421c-4b63-a92f-d1c501bf89aa",
-
       "project_id": "autumn-lake-518875",
-
       "branch_id": "br-soft-term-199780",
-
       "endpoint_id": "ep-red-lake-259266",
-
       "action": "start_compute",
-
       "status": "scheduling",
-
       "failures_count": 0,
-
       "created_at": "2022-10-27T22:57:27Z",
-
       "updated_at": "2022-10-27T22:57:27Z"
-
     }
-
   ]
-
 }
 ```
-
 
 ### List branches
 
@@ -239,47 +186,30 @@ The API method appears as follows when specified in a cURL command:
 curl -X GET -H 'Authorization: Bearer $NEON_API_KEY' https://console.neon.tech/api/v2/projects/<project_id>/branches |jq
 ```
 
+The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**.
+
 Response:
 
 ```bash
    {
-
       "id": "br-steep-bonus-114258",
-
       "project_id": "autumn-lake-518875",
-
       "name": "main",
-
       "current_state": "ready",
-
       "created_at": "2022-10-24T19:12:18Z",
-
       "updated_at": "2022-10-24T19:12:19Z"
-
     },
-
     {
-
       "id": "br-snowy-flower-899793",
-
       "project_id": "autumn-lake-518875",
-
       "parent_id": "br-steep-bonus-114258",
-
       "parent_lsn": "0/2C01940",
-
       "name": "dev_branch",
-
       "current_state": "ready",
-
       "created_at": "2022-10-27T16:52:35Z",
-
       "updated_at": "2022-10-27T16:52:35Z"
-
     }
-
   ]
-
 }
 ```
 
@@ -297,80 +227,49 @@ The API method appears as follows when specified in a cURL command:
 curl -X DELETE -H 'Authorization: Bearer $NEON_API_KEY' https://console.neon.tech/api/v2/branches/<branch_id>
 ```
 
-The response shows the `suspend_compute` and `delete_timeline` actions are running and scheduled, respectively.
+The `<branch_id>` can be found by listing the branches for your project. The `<branch_id>` is the `id` of a branch. See [List branches](#list-branches).
+
+The response shows information about the branch being deleted and the `suspend_compute` and `delete_timeline` operations that were initiated.
 
 ```bash
   "branch": {
-
     "id": "br-snowy-flower-899793",
-
     "project_id": "autumn-lake-518875",
-
     "parent_id": "br-steep-bonus-114258",
-
     "parent_lsn": "0/2C01940",
-
     "name": "dev_branch",
-
     "current_state": "ready",
-
     "created_at": "2022-10-27T16:52:35Z",
-
     "updated_at": "2022-10-27T17:01:56Z"
-
   },
-
   "operations": [
-
     {
-
       "id": "bc2f34dc-72be-4efe-918a-30e46e4bd077",
-
       "project_id": "autumn-lake-518875",
-
       "branch_id": "br-snowy-flower-899793",
-
       "endpoint_id": "ep-empty-tooth-523438",
-
       "action": "suspend_compute",
-
       "status": "running",
-
       "failures_count": 0,
-
       "created_at": "2022-10-27T17:01:56Z",
-
       "updated_at": "2022-10-27T17:01:56Z"
-
     },
-
     {
 
       "id": "5c6d1ce9-793c-41e7-910e-1af424de4d36",
-
       "project_id": "autumn-lake-518875",
-
       "branch_id": "br-snowy-flower-899793",
-
       "action": "delete_timeline",
-
       "status": "scheduling",
-
       "failures_count": 0,
-
       "created_at": "2022-10-27T17:01:56Z",
-
       "updated_at": "2022-10-27T17:01:56Z"
-
     }
-
   ]
-
 }
 ```
 
-You can verify that a branch is deleted by listing the branches for the project. See [List branches](#list-branches). The deleted branch should no longer be listed.
-
+You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches). The deleted branch should no longer be listed.
 
 ## Branching use cases
 
