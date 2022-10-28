@@ -1,11 +1,14 @@
+const { GATSBY_ALGOLIA_INDEX_NAME, IS_PRODUCTION } = require('./constants');
 const generateDocPagePath = require('./generate-doc-page-path');
 const generateReleaseNotePath = require('./generate-release-note-path');
+
+const DRAFT_FILTER = IS_PRODUCTION ? '[false]' : '[true, false]';
 
 const docQuery = `{
   pages: allMdx(
     filter: {
       internal: { contentFilePath: { regex: "/docs/((?!README).)*$/" } }
-      fields: { isDraft: { in: [false] } }
+      fields: { isDraft: { in: ${DRAFT_FILTER} } }
     }
   ) {
       nodes {
@@ -27,7 +30,7 @@ const releaseNotesQuery = `{
       internal: {
         contentFilePath: { regex: "/release-notes/((?!RELEASE_NOTES_TEMPLATE).)*$/" }
       }
-      fields: { isDraft: { in: [false] } }
+      fields: { isDraft: { in: ${DRAFT_FILTER} } }
     }
   ) {
       nodes {
@@ -53,7 +56,7 @@ const queries = [
         slug: generateDocPagePath(slug),
         excerpt,
       })),
-    indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
+    indexName: GATSBY_ALGOLIA_INDEX_NAME,
     settings: { attributesToSnippet: [`excerpt:20`] },
     matchFields: ['title', 'excerpt'],
   },
@@ -62,11 +65,11 @@ const queries = [
     transformer: ({ data }) =>
       data.releaseNotes.nodes.map(({ id, fields: { slug }, frontmatter: { label }, excerpt }) => ({
         objectID: id,
-        title: `${label} release`,
+        title: `${label} release - ${slug}`,
         slug: generateReleaseNotePath(slug),
         excerpt,
       })),
-    indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
+    indexName: GATSBY_ALGOLIA_INDEX_NAME,
     settings: { attributesToSnippet: [`excerpt:20`] },
     matchFields: ['title', 'excerpt'],
   },

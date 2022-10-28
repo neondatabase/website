@@ -1,5 +1,5 @@
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-const DRAFT_FILTER = IS_PRODUCTION ? [false] : [true, false];
+const DRAFT_FILTER = IS_PRODUCTION && process.env.BRANCH === 'main' ? [false] : [true, false];
 
 const POST_REQUIRED_FIELDS = ['title', 'description', 'author'];
 const STATIC_PAGE_REQUIRED_FIELDS = ['title'];
