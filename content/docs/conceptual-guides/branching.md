@@ -26,7 +26,7 @@ A branch has the following characteristics:
   - The Point in Time Reset (PITR) window is limited to 7 days of reasonable usage.
   - The compute node is limited to 1 vCPU and 256MB of RAM.
 - Branches are read-write.
-- An endpoint is created for each branch, which permits connecting to the branch as you would connect to any Neon project from a PostgreSQL client, an application, or the Neon API.
+- An endpoint is created for each branch, which permits connecting to the branch as you would connect to any Neon project from a client or application.
 
 ## Create a branch
 
@@ -46,7 +46,7 @@ To create a branch:
     - **LSN**: Creates a branch with data up to the specified Log Sequence Number (LSN).
 6. Click **Create Branch**.
 
-An endpoint is created with each branch, which is required connect to the branch from a PostgreSQL client, an application, or the Neon API.
+An endpoint is created with each branch, which is required connect to the branch from a client or application.
 
 ## View branches
 
@@ -57,17 +57,13 @@ To view the branches associated with a Neon project:
 3. Select the branch from the table to view details about the branch.
   ![Branches page](./images/view_branches.png)
 
-Branch details include the branch name, parent branch, database size, storage size, and the time the branch was created.
-
-![Branch details](./images/branch_details.png)
-
 The **Branches** widget on the project **Dashboard** also lists the branches associated with a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
 
 ![Branches widget](./images/branches_widget.png)
 
 ## Delete a branch
 
-Deleting a branch is a permanent action that also deletes the endpoint associated with the branch.
+Deleting a branch is a permanent action. Deleting a branch also deletes the branch endpoint.
 
 To delete a branch:
 
