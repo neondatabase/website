@@ -1,7 +1,7 @@
 const generateDocPagePath = require('./generate-doc-page-path');
 const generateReleaseNotePath = require('./generate-release-note-path');
 
-const DRAFT_FILTER = process.env.IS_PRODUCTION ? '[false]' : '[true, false]';
+const DRAFT_FILTER = process.env.IS_PRODUCTION === 'true' ? '[false]' : '[true, false]';
 
 const docQuery = `{
   pages: allMdx(
