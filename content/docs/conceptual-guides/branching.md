@@ -9,7 +9,7 @@ redirectFrom:
 
 ## About branching
 
-Neon allows you to instantly branch your database in the same way that you branch your code. You can quickly and cost-effectively branch a database for development, testing, staging, and various of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. See [Branching use cases](#branching-use-cases) for a discussion of different ways you can integrate branching into your development workflows.
+Neon allows you to instantly branch your database in the same way that you branch your code. You can quickly and cost-effectively branch a database for development, testing, staging, and various of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. See [Branching workflows](#branching-workflows) for a discussion of different ways you can integrate branching into your development workflows.
 
 ### What is a branch?
 
@@ -267,9 +267,9 @@ The response shows information about the branch being deleted and the `suspend_c
 
 You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches). The deleted branch should no longer be listed.
 
-## Branching use cases
+## Branching workflows
 
-Neon's branching feature has a variety of possible uses, a few of which are discussed below:
+You can use Neon's branching feature in variety development workflows, a few of which are discussed below:
 
 ### Development
 
