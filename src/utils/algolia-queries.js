@@ -1,8 +1,8 @@
-const { GATSBY_ALGOLIA_INDEX_NAME, BRANCH } = require('./constants');
+const { GATSBY_ALGOLIA_INDEX_NAME, IS_PRODUCTION } = require('./constants');
 const generateDocPagePath = require('./generate-doc-page-path');
 const generateReleaseNotePath = require('./generate-release-note-path');
 
-const DRAFT_FILTER = BRANCH === 'main' ? '[false]' : '[true, false]';
+const DRAFT_FILTER = IS_PRODUCTION ? '[false]' : '[true, false]';
 
 const docQuery = `{
   pages: allMdx(
