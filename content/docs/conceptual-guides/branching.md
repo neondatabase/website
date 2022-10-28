@@ -7,17 +7,17 @@ redirectFrom:
 
 <a id="branches-coming-soon/"></a>
 
-Neon allows you to instantly branch your database in the same way that you branch your code. You can quickly and cost-effectively branch a database for development, testing, staging, and various of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. See [Branching workflows](#branching-workflows) for a discussion of different ways you can integrate branching into your development workflows.
+Neon allows you to instantly branch your database in the same way that you branch your code. You can quickly and cost-effectively branch a database for development, testing, staging, and various of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. See [Branching workflows](#branching-workflows) for a discussion of different ways you can integrate database branching into your development workflows.
 
 ### What is a branch?
 
-A branch is a copy-on-write clone of an existing branch. You can create a branch from a current or past state of a parent branch. For example, you can create a branch that includes all data up to the point of branch creation or up to a particular time or [Log Sequence Number (LSN)](../../reference/glossary/#lsn).
+A branch is a copy-on-write clone of your database. You can create a branch from a current or past state of your database. For example, you can create a branch that includes all data up to the point of branch creation or up to a particular time or [Log Sequence Number (LSN)](../../reference/glossary/#lsn).
 
-A branch is completely isolated from its parent branch, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to the a branch are independent of the parent branch and vice versa. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are persisted as an independent delta.
+A branch is completely isolated from its parent database, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to a branch are independent of the parent database and vice versa. A branch and its parent database share the same history but diverge at the point of branch creation. Writes to a branch are persisted as an independent delta.
 
-Creating a branch does not increase load on the parent branch or affect it in any way, which means that you can create a branch at any time without impacting the performance of your production database.
+Creating a branch does not increase load on the parent database or affect it in any way, which means that you can create a branch at any time without impacting the performance of your production system.
 
-An endpoint is created for each branch, which is the compute instance associated with the branch. You can connect to a branch endpoint as you would connect to any Neon project. Branch endpoints are read-write.
+An endpoint is created for each branch, which is the compute instance associated with the branch. You can connect to a branch endpoint as you would connect to any Neon database. Branch endpoints are read-write.
 
 ## Create a branch
 
@@ -30,14 +30,14 @@ To create a branch:
 2. Click **New Branch** to open the branch creation page.
   ![Create branch dialog](./images/create_branch.png)
 3. Enter a name for the branch.
-4. Select a parent branch. You can branch from your project's `main` branch or a previously created branch.
+4. Select a parent branch. You can branch from your Neon project's `main` branch or a previously created branch.
 5. Select one of the following branching options:
     - **Head**: Creates a branch with data up to the current point in time.
     - **Time**: Creates a branch with data up to the specified date and time.
     - **LSN**: Creates a branch with data up to the specified Log Sequence Number (LSN).
 6. Click **Create Branch**.
 
-An endpoint is created with each branch, which is required connect to the branch from a client or application.
+An endpoint is created with each branch, which is the compute instance associated with the branch.
 
 ## View branches
 
@@ -54,7 +54,7 @@ The **Branches** widget on the project **Dashboard** also lists the branches ass
 
 ## Delete a branch
 
-Deleting a branch is a permanent action. Deleting a branch also deletes the branch endpoint.
+Deleting a branch is a permanent action. Deleting a branch also deletes the branch endpoint, which is the compute instance associated with the branch.
 
 To delete a branch:
 
@@ -97,7 +97,7 @@ curl -X 'POST' \
 ```
 
 - The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**.
-- The `<parent_id>` and `<branch_name>` values can be obtained by listing the branches for your project. See [List branches](#list-branches). The `<parent_id>` is the `id` of the branch you are branching from. Each Neon project is created with a branch named `main`.
+- The `<parent_id>` and `<branch_name>` values can be obtained by listing the branches for your project. See [List branches](#list-branches). The `<parent_id>` is the `id` of the branch you are branching from. You can branch from your Neon project's `main` branch or a previously created branch.
 
 The response includes information about the branch, the branch's endpoint, and the `create_branch` and `start_compute` operations that have been initiated.
 
