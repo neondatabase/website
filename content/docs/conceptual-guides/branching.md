@@ -7,26 +7,17 @@ redirectFrom:
 
 <a id="branches-coming-soon/"></a>
 
-## About branching
-
 Neon allows you to instantly branch your database in the same way that you branch your code. You can quickly and cost-effectively branch a database for development, testing, staging, and various of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. See [Branching workflows](#branching-workflows) for a discussion of different ways you can integrate branching into your development workflows.
 
 ### What is a branch?
 
-A branch is a copy-on-write clone of an existing branch. You can create a branch from a current or past state of a parent branch. For example, you can create a branch that includes all data up to the point of branch creation or up to a particular time or Log Sequence Number (LSN).
+A branch is a copy-on-write clone of an existing branch. You can create a branch from a current or past state of a parent branch. For example, you can create a branch that includes all data up to the point of branch creation or up to a particular time or [Log Sequence Number (LSN)](../../reference/glossary/#lsn).
 
 A branch is completely isolated from its parent branch, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to the a branch are independent of the parent branch and vice versa. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are persisted as an independent delta.
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means that you can create a branch at any time without impacting the performance of your production database.
 
-A branch has the following characteristics:
-
-- It is subject to the same technical preview limits as a Neon project:
-  - Project data size is limited to 10GB.
-  - The Point in Time Reset (PITR) window is limited to 7 days of reasonable usage.
-  - The compute node is limited to 1 vCPU and 256MB of RAM.
-- Branches are read-write.
-- An endpoint is created for each branch, which permits connecting to the branch as you would connect to any Neon project from a client or application.
+An endpoint is created for each branch, which is the compute instance associated with the branch. You can connect to a branch endpoint as you would connect to any Neon project. Branch endpoints are read-write.
 
 ## Create a branch
 
@@ -75,7 +66,7 @@ To delete a branch:
 
 ## Branching using the Neon API
 
-Any branch action performed in the Neon Console can be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/).
+Any branch action performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference/). The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/).
 
 ### Prerequisites
 
@@ -93,7 +84,7 @@ The API method appears as follows when specified in a cURL command:
 
 ```bash
 curl -X 'POST' \
-  'https://console.stage.neon.tech/api/v2/projects/<project_id>/branches' \
+  'https://console.neon.tech/api/v2/projects/<project_id>/branches' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' \
@@ -273,13 +264,13 @@ You can use Neon's branching feature in variety development workflows, a few of 
 
 ### Development
 
-You can quickly create a branch of your production database that developers are free to play with and modify. You can create a branch instantly with access to all of the data that existed at the time the branch was created, eliminating the setup time required to deploy and maintain a development database. Branching is so easy and cost-effective that you can create a branch for each developer to work on. For example, you can create branches from a primary development branch to assign tasks to be worked on in parallel.
+You can create a branch of your production database that developers are free to play with and modify. A branch has access to all of the data that existed at the time the branch was created, eliminating the setup time required to deploy and maintain a development database. Branching is so easy and cost-effective that you can create a branch for each developer to work on. For example, you can create branches from a primary development branch to assign tasks to be worked on in parallel.
 
 ### Testing
 
-Branching enables testers to use the most recent production data. Testers can quickly create new database branches for testing schema changes, validating new queries, or testing potentially destructive queries before deploying them to production. A branch is completely isolated from its parent branch but has access to all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating database for testing. Testers can also run tests on separate branches in parallel, with each branch having dedicated compute resources.
+Branching enables testers to use the most recent production data. Testers can create new database branches for testing schema changes, validating new queries, or testing potentially destructive queries before deploying them to production. A branch is isolated from its parent branch but has all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a database for testing. Testers can also run tests on separate branches in parallel, with each branch having dedicated compute resources.
 
-Another testing scenario enabled by branching is creating a branch from a past point in time to track down and reproduce a failure or data quality issue. Neon permits creating a branch that includes data up to a user-specified time or Log Sequence Number (LSN). For example, you can create and dispose of as many point-in-time database branches as necessary to determine when an issue first occurs.
+Another testing scenario enabled by branching is creating a branch from a past point in time to track down a failure or data quality issue. Neon permits creating a branch that includes data up to a user-specified time or Log Sequence Number (LSN). For example, you can create and dispose of as many point-in-time database branches as necessary to determine when an issue first occurs.
 
 ### Staging
 
@@ -287,11 +278,11 @@ With Neon's branching capabilities, you can create a staging database by branchi
 
 ### Data recovery
 
-If you lose data due to an unintended deletion or some other event, you can create a branch of your database with the data as it existed before the event occurred allowing you to recover the lost data. Neon allows you to create a branch with the data that existed up to a particular time or Log Sequence Number (LSN).
+If you lose data due to an unintended deletion or some other event, you can create a branch with data as it existed before the event occurred allowing you to recover the lost data. 
 
 ### Analytics
 
-You can run costly, long-running queries on an isolated branch of your production data, each with its own compute resources. With automation scripts, you can create and dispose of branches on a defined schedule to ensure that queries always run on an up-to-date copy of production data.
+You can run costly, long-running queries on an isolated branch of your production data, each with its own compute resources. With automation scripts, you can create and dispose of branches on a defined schedule to ensure that queries always run on an up-to-date copy of your production data.
 
 ### Machine Learning
 
