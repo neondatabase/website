@@ -64,6 +64,28 @@ To delete a branch:
 3. Click **Delete**.
 4. On the **Delete the branch?** dialog, click **Delete**.
 
+## Connect to a branch
+
+This topic describes how to connect to a branch using `psql`.
+
+_**Note:**_ You can also query branch from the Neon SQL Editor. See [../../get-started-with-neon/query-with-neon-sql-editor].
+
+An endpoint is created for each branch that you create. You can connect to a branch endpoint using a connection string as you would for any Neon project database.
+
+You can obtain a branch connection string from the **Connection Details** widget on the project dashboard.
+
+1. Navigate to the [Neon console](https://console.neon.tech/).
+2. Select your project from the project drop-down list.
+3. On the project **Dashboard**, under **Connection Details**, select the branch and database to connect to, and a user you want to connect with.
+4. Copy the connection string.
+5. Add your password to the connection string as shown and connect with `psql`:
+
+  ```bash
+  psql postgres://web_access:<password>@ep-snowy-butterfly-311850.cloud.stage.neon.tech/main
+  ```
+
+If you have misplaced the password for your branch endpoint, you can reset it. Users and passwords are managed on the **Settings** tab in the Neon Console.
+
 ## Branching using the Neon API
 
 Any branch action performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference/). The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/).
