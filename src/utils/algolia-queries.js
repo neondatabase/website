@@ -1,8 +1,7 @@
-const { GATSBY_ALGOLIA_INDEX_NAME, IS_PRODUCTION } = require('./constants');
 const generateDocPagePath = require('./generate-doc-page-path');
 const generateReleaseNotePath = require('./generate-release-note-path');
 
-const DRAFT_FILTER = IS_PRODUCTION ? '[false]' : '[true, false]';
+const DRAFT_FILTER = process.env.IS_PRODUCTION === 'true' ? '[false]' : '[true, false]';
 
 const docQuery = `{
   pages: allMdx(
@@ -56,7 +55,7 @@ const queries = [
         slug: generateDocPagePath(slug),
         excerpt,
       })),
-    indexName: GATSBY_ALGOLIA_INDEX_NAME,
+    indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
     settings: { attributesToSnippet: [`excerpt:20`] },
     matchFields: ['title', 'excerpt'],
   },
@@ -69,7 +68,7 @@ const queries = [
         slug: generateReleaseNotePath(slug),
         excerpt,
       })),
-    indexName: GATSBY_ALGOLIA_INDEX_NAME,
+    indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
     settings: { attributesToSnippet: [`excerpt:20`] },
     matchFields: ['title', 'excerpt'],
   },

@@ -1,7 +1,6 @@
 // Gatsby has dotenv by default
 // eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config();
-const { GATSBY_ALGOLIA_INDEX_NAME } = require('./src/utils/constants');
 
 module.exports = {
   flags: { DEV_SSR: process.env.GATSBY_DEV_SSR || false },
@@ -138,7 +137,7 @@ module.exports = {
             options: {
               appId: process.env.GATSBY_ALGOLIA_APP_ID,
               apiKey: process.env.ALGOLIA_ADMIN_KEY,
-              indexName: GATSBY_ALGOLIA_INDEX_NAME,
+              indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
               enablePartialUpdates: true,
               // eslint-disable-next-line global-require
               queries: require('./src/utils/algolia-queries'),
