@@ -67,7 +67,7 @@ const DocTemplate = ({
               />
             ) : (
               <article>
-                <h1 className="t-5xl font-semibold">{title}</h1>
+                <h1 className="t-5xl font-semibold leading-tight">{title}</h1>
                 <Content className="mt-5" content={children} ref={contentRef} />
               </article>
             )}

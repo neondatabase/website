@@ -15,8 +15,8 @@ const Hero = ({ title, description, author, date, readingTime, className }) => {
         alt={author.title}
         loading="eager"
       />
-      <span className="t-lg transition-colors duration-200 group-hover:text-primary-1">
-        <span className="ml-3 font-semibold xs:ml-1.5">{author.title}</span>,{' '}
+      <span className="t-lg ml-3 transition-colors duration-200 group-hover:text-primary-1 xs:ml-1.5">
+        <span className="font-semibold">{author.title}</span>,{' '}
         <span>{author.postAuthor?.role}</span>
       </span>
     </div>
@@ -24,9 +24,9 @@ const Hero = ({ title, description, author, date, readingTime, className }) => {
 
   return (
     <div className={clsx('safe-paddings', className)}>
-      <h1 className="t-5xl font-semibold">{title}</h1>
+      <h1 className="t-5xl font-semibold leading-tight">{title}</h1>
       <p className="t-2xl mt-6 xl:mt-5">{description}</p>
-      <div className="mt-8 flex items-center justify-between border-b border-b-gray-4 pb-8 2xl:mt-7 2xl:pb-7 xl:mt-6 xl:pb-6 sm:flex-col sm:items-start sm:space-y-6">
+      <div className="mt-8 flex items-center justify-between border-b border-b-gray-4 pb-8 leading-none 2xl:mt-7 2xl:pb-7 xl:mt-6 xl:pb-6 sm:flex-col sm:items-start sm:space-y-6 xs:leading-tight">
         {postAuthor && author.postAuthor.url ? (
           <Link className="group" to={author.postAuthor.url}>
             {postAuthor}
