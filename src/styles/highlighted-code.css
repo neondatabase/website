@@ -48,5 +48,9 @@
     .token.cdata {
       @apply text-[#a6a6a6];
     }
+
+    .react-syntax-highlighter-line-number.linenumber {
+      @apply !min-w-[2.25em] text-gray-4;
+    }
   }
 }

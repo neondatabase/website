@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -9,7 +10,7 @@ import CopyIcon from './images/copy.inline.svg';
 
 const DEFAULT_LANGUAGE = 'bash';
 
-const CodeBlock = ({ className, children, ...otherProps }) => {
+const CodeBlock = ({ className, children, showLineNumbers, ...otherProps }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const match = /language-(\w+)/.exec(className || '');
@@ -17,8 +18,12 @@ const CodeBlock = ({ className, children, ...otherProps }) => {
   const code = children.trim();
 
   return (
-    <div className="group relative" {...otherProps}>
-      <SyntaxHighlighter language={language} useInlineStyles={false}>
+    <div className={clsx('group relative', className)} {...otherProps}>
+      <SyntaxHighlighter
+        language={language}
+        useInlineStyles={false}
+        showLineNumbers={showLineNumbers}
+      >
         {code}
       </SyntaxHighlighter>
       <button
@@ -36,10 +41,12 @@ const CodeBlock = ({ className, children, ...otherProps }) => {
 CodeBlock.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
+  showLineNumbers: PropTypes.bool,
 };
 
 CodeBlock.defaultProps = {
   className: null,
+  showLineNumbers: false,
 };
 
 export default CodeBlock;

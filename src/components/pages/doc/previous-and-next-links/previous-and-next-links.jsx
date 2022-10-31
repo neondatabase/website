@@ -12,10 +12,10 @@ const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
         to={`${DOCS_BASE_PATH}${previousLink.slug}`}
         className="group mr-auto flex w-1/2 items-end justify-between rounded border border-gray-5 p-4 xs:items-baseline xs:space-x-3 xs:leading-tight xs:before:hidden"
       >
-        <ArrowIcon className="mb-1.5 shrink-0 rotate-180 text-black group-hover:text-secondary-7 xs:block" />
+        <ArrowIcon className="mb-1.5 shrink-0 rotate-180 text-black group-hover:text-secondary-8 xs:block" />
         <div className="flex flex-col items-end">
           <span className="text-sm font-normal text-gray-4">Previous</span>
-          <span className="font-semibold transition-colors duration-200 group-hover:text-secondary-7">
+          <span className="font-semibold transition-colors duration-200 group-hover:text-secondary-8">
             {previousLink.title}
           </span>
         </div>
@@ -29,7 +29,7 @@ const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
         <div className="flex flex-col items-start">
           <span className="text-sm font-normal text-gray-4">Next</span>
           <span
-            className="font-semibold transition-colors duration-200 group-hover:text-secondary-7"
+            className="font-semibold transition-colors duration-200 group-hover:text-secondary-8"
             style={{
               display: 'webkit-box',
               WebkitLineClamp: 2,
@@ -41,7 +41,7 @@ const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
             {nextLink.title}
           </span>
         </div>
-        <ArrowIcon className="mb-1.5 shrink-0 text-black group-hover:text-secondary-7 xs:block" />
+        <ArrowIcon className="mb-1.5 shrink-0 text-black group-hover:text-secondary-8 xs:block" />
       </Link>
     )}
   </div>

@@ -10,6 +10,8 @@ Neon separates storage and compute and offers modern developer features such as 
 
 Neon automatically and transparently scales up compute on demand, in response to application workload. Neon also scales down to zero on inactivity. Since Neon is serverless, it only charges for what you use and can deliver up to a 10x reduction in cost.
 
+TODO: remove testing data before merging
+
 <Admonition type="note">
 The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
 </Admonition>
@@ -25,6 +27,108 @@ The branch creation process does not increase load on the originating project. Y
 <Admonition type="tip">
 The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
 </Admonition>
+
+<CodeTabs labels={["React", "Python", "PHP", "Java"]}>
+
+```jsx
+import Auth from 'components/auth';
+import { Provider as SessionProvider } from 'next-auth/client';
+import { FlagsmithProvider } from 'flagsmith-react';
+
+import '../styles/globals.css';
+
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <FlagsmithProvider environmentId={process.env.NEXT_PUBLIC_FLAGSMITH_API_KEY}>
+      <SessionProvider session={pageProps.session}>
+        {Component.auth ? (
+          <Auth>
+            <Component {...pageProps} />
+          </Auth>
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </SessionProvider>
+    </FlagsmithProvider>
+  );
+}
+```
+
+```python
+import Auth from 'components/auth';
+import { Provider as SessionProvider } from 'next-auth/client';
+import { FlagsmithProvider } from 'flagsmith-react';
+
+import '../styles/globals.css';
+
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <FlagsmithProvider environmentId={process.env.NEXT_PUBLIC_FLAGSMITH_API_KEY}>
+      <SessionProvider session={pageProps.session}>
+        {Component.auth ? (
+          <Auth>
+            <Component {...pageProps} />
+          </Auth>
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </SessionProvider>
+    </FlagsmithProvider>
+  );
+}
+```
+
+```php
+import Auth from 'components/auth';
+import { Provider as SessionProvider } from 'next-auth/client';
+import { FlagsmithProvider } from 'flagsmith-react';
+
+import '../styles/globals.css';
+
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <FlagsmithProvider environmentId={process.env.NEXT_PUBLIC_FLAGSMITH_API_KEY}>
+      <SessionProvider session={pageProps.session}>
+        {Component.auth ? (
+          <Auth>
+            <Component {...pageProps} />
+          </Auth>
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </SessionProvider>
+    </FlagsmithProvider>
+  );
+}
+```
+
+```java
+import Auth from 'components/auth';
+import { Provider as SessionProvider } from 'next-auth/client';
+import { FlagsmithProvider } from 'flagsmith-react';
+
+import '../styles/globals.css';
+
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <FlagsmithProvider environmentId={process.env.NEXT_PUBLIC_FLAGSMITH_API_KEY}>
+      <SessionProvider session={pageProps.session}>
+        {Component.auth ? (
+          <Auth>
+            <Component {...pageProps} />
+          </Auth>
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </SessionProvider>
+    </FlagsmithProvider>
+  );
+}
+```
+
+</CodeTabs>
+
+TODO: remove testing data before merging
 
 ## Built for developer productivity
 

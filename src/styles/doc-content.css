@@ -3,7 +3,7 @@
     @apply max-w-none text-black;
 
     a:not(.anchor) {
-      @apply font-normal text-secondary-7 no-underline transition-colors duration-200 ease-in-out hover:text-black sm:break-words;
+      @apply font-normal text-secondary-8 no-underline transition-colors duration-200 ease-in-out hover:text-black sm:break-words;
     }
 
     ul,
@@ -67,13 +67,19 @@
       }
     }
 
+    .code-tab {
+      > pre {
+        @apply my-0 py-8;
+      }
+    }
+
     pre {
       @apply !bg-gray-6;
 
       code {
         text-shadow: unset;
 
-        @apply highlighted-code !font-mono !text-base !text-black;
+        @apply highlighted-code !font-mono text-sm !text-black;
       }
     }
 
