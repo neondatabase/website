@@ -3,7 +3,7 @@ title: How to use branches
 isDraft: true
 ---
 
-Now that you have access to branching in Neon, let's look at how you can use it.
+This guide describes how to use Neon's branching feature, which is currently in preview. If you would like to try branching, send an email to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) to request early access.
 
 Branching allows you to create a copy of your Neon project data which you can modify without affecting the data you have in production.
 
@@ -39,9 +39,9 @@ Here's an example of a cURL command that uses that method to create a branch:
 curl -o - -X POST -H 'Authorization: Bearer ...' https://console.neon.tech/api/v1/clusters/ancient-haze-985396/branches
 ```
 
-To use the cURL command with your Project, change the placeholder Project name `ancient-haze-985396` to the name of the Project that you want to branch from.
+To use the cURL command with your Project, change the placeholder Project name `ancient-haze-985396` to the name of the Project you want to branch from.
 
-You will receive information about the branch you created in the response to the API request. The branch name will have the following format:
+You will receive information about the branch you created in the API request response body. The branch name will have the following format:
 
 ```bash
 $parent_project_id-branch-...
@@ -53,6 +53,6 @@ Currently, a branch appears as separate project on the **Dashboard** tab in the 
 
 All data in the parent project when you create the branch will be available in the branched project as well.
 
-Future changes to the data in the parent and the branch are independent, so you can make changes to the branch without affecting your parent project.
+Future changes to the data in the parent and the branch are independent, so you can make changes to the branch without affecting the parent project.
 
 To learn more about Neon's branching feature, see [Branching](../../conceptual-guides/branching).
