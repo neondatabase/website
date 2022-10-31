@@ -1,10 +1,10 @@
 ---
-title: Get started with branching
+title: Branching quickstart
 enableTableOfContents: true
 isDraft: true
 ---
 
-This topic describes how to get started with branching. It walks you through creating and connecting to a branch.
+This topic describes how to get started with branching. It describes how to create and connect to a branch.
 
 A branch is a clone of your database that you are free play with and modify without affecting the parent database. Creating a branch is fast and easy, and when you are finished with it, it can be removed just as quickly.
 
@@ -16,7 +16,7 @@ Before you can create a branch, you must have a Neon project to branch from. If 
 
 To create a branch:
 
-1. In the Neon Console, select a project from the project drop-down list at the top of the console.
+1. In the Neon Console, select a project from the drop-down list at the top of the console.
 2. Select the **Branches** tab.
 2. Click **New Branch** to open the branch creation page.
 3. Enter a name for the branch.
@@ -29,7 +29,7 @@ To create a branch:
 
 ## Connecting to a branch
 
-Now that you have created a branch, how to do you connect to it from a client or application? You can connect to a branch endpoint using a connection string, as you would connect to any other Neon project database. The following steps describe how to connect to a branch using `psql`.
+Now that you have created a branch, how do you connect to it? You can connect to a branch using a connection string, as you would connect to any other Neon project database. The following steps describe how to connect to a branch using `psql`.
 
 _**Note:**_ You can also query branch from the Neo Console's SQL Editor. See [Query from psql](/query-with-neon-sql-editor).
 
