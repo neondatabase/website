@@ -2,8 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
-import Button from 'components/shared/button';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+
+import CheckIcon from './images/check.inline.svg';
+import CopyIcon from './images/copy.inline.svg';
 
 const DEFAULT_LANGUAGE = 'bash';
 
@@ -19,16 +21,14 @@ const CodeBlock = ({ className, children, ...otherProps }) => {
       <SyntaxHighlighter language={language} useInlineStyles={false}>
         {code}
       </SyntaxHighlighter>
-      <Button
-        className="invisible absolute top-2 right-2 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100"
+      <button
+        className="invisible absolute top-2 right-2 rounded border border-gray-5 bg-white p-1.5 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100"
         type="button"
-        size="xxs"
-        theme="secondary"
         disabled={isCopied}
         onClick={() => handleCopy(code)}
       >
-        {isCopied ? 'Copied' : 'Copy'}
-      </Button>
+        {isCopied ? <CheckIcon className="h-4 w-4 text-primary-1" /> : <CopyIcon />}
+      </button>
     </div>
   );
 };

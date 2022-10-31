@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import slugify from 'slugify';
 
-import AnchorIcon from 'icons/anchor.inline.svg';
+import HashIcon from './images/hash.inline.svg';
 
 const AnchorHeading =
   (Tag) =>
@@ -21,7 +21,7 @@ const AnchorHeading =
           tabIndex="-1"
           aria-hidden
         >
-          <AnchorIcon className={clsx(Tag === 'h2' && 'w-5', Tag === 'h3' && 'w-4')} />
+          <HashIcon className={clsx(Tag === 'h2' && 'w-3.5', Tag === 'h3' && 'w-3')} />
         </a>
         {children}
       </Tag>

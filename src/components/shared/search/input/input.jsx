@@ -17,10 +17,10 @@ const Input = connectSearchBox(
       <input
         id="search-input"
         className={clsx(
-          'search-input w-full appearance-none bg-white text-black placeholder-gray-3 outline-none',
+          'search-input w-full appearance-none bg-white text-black placeholder-gray-4 outline-none',
           isNotFoundPage
             ? 'h-16 rounded-[110px] border-2 border-gray-2 pl-14 pr-6 text-xl md:text-lg xs:pr-2.5 xs:pl-9 xs:text-base'
-            : 'h-9 rounded border border-gray-3 pl-9 pr-2.5 ',
+            : 'h-9 rounded border border-gray-4 pl-9 pr-2.5 ',
           isNotFoundPage && hasFocus && currentRefinement && 'rounded-[29px]',
           hasFocus && currentRefinement && 'rounded-b-none border-b'
         )}

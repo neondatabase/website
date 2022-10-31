@@ -2,6 +2,11 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 
+import TOCIcon from './images/toc.inline.svg';
+
+const linkClassName =
+  'py-1.5 block text-base leading-snug transition-colors duration-200 text-gray-2 hover:text-secondary-7';
+
 const TableOfContents = ({ contentRef }) => {
   const [items, setItems] = useState([]);
 
@@ -33,11 +38,12 @@ const TableOfContents = ({ contentRef }) => {
   return (
     <div className="col-start-11 col-end-13 h-full xl:hidden">
       <nav className="sticky top-10 bottom-10 max-h-[calc(100vh-40px-40px)] overflow-y-auto overflow-x-hidden">
-        <h3 className="py-2.5 text-lg font-semibold leading-snug">Table of contents</h3>
+        <h3 className="flex items-baseline space-x-2 py-2.5 text-sm font-semibold leading-snug">
+          <TOCIcon className="h-3.5 w-3.5" />
+          <span>On this page</span>
+        </h3>
         <ul>
           {items.map((item, index) => {
-            const linkClassName =
-              'py-2.5 block text-base leading-snug transition-colors duration-200 hover:text-primary-2';
             const linkHref = `#${item.id}`;
 
             return (

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Content = ({ html, className }) => (
-  <div className={clsx('prose-lg prose md:prose-base', className)}>{html}</div>
+  <div className={clsx('prose-blog prose-lg prose md:prose-base', className)}>{html}</div>
 );
 
 Content.propTypes = {

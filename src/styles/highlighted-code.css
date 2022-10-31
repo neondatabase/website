@@ -1,0 +1,52 @@
+@layer components {
+  .highlighted-code {
+    .token.atrule,
+    .token.attr-value,
+    .token.keyword {
+      @apply text-[#6A4CFF];
+    }
+
+    .token.function,
+    .token.class-name {
+      @apply text-[#FF3366];
+    }
+
+    .token.operator,
+    .token.entity,
+    .token.url,
+    .language-css .token.string,
+    .style .token.string {
+      @apply text-[#7e428a];
+    }
+
+    .token.property,
+    .token.tag,
+    .token.boolean,
+    .token.number,
+    .token.constant,
+    .token.symbol,
+    .token.deleted {
+      @apply text-[#FF8C1A];
+    }
+
+    .token.selector,
+    .token.attr-name,
+    .token.string,
+    .token.char,
+    .token.builtin,
+    .token.inserted {
+      @apply !text-[#00B277];
+    }
+
+    .token.punctuation {
+      @apply text-[#737373];
+    }
+
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+      @apply text-[#a6a6a6];
+    }
+  }
+}

@@ -6,37 +6,42 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 import ArrowIcon from 'icons/arrow-right.inline.svg';
 
 const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
-  <div className="mt-16 flex w-full space-x-4">
+  <div className="mt-16 flex w-full space-x-10">
     {previousLink && (
       <Link
         to={`${DOCS_BASE_PATH}${previousLink.slug}`}
-        size="md"
-        theme="black-primary-1"
-        className="mr-auto flex xs:items-baseline xs:space-x-3 xs:!leading-tight xs:before:hidden"
+        className="group mr-auto flex w-1/2 items-end justify-between rounded border border-gray-5 p-4 xs:items-baseline xs:space-x-3 xs:leading-tight xs:before:hidden"
       >
-        <ArrowIcon className="hidden shrink-0 rotate-180 xs:block" />
-        <span>{previousLink.title}</span>
+        <ArrowIcon className="mb-1.5 shrink-0 rotate-180 text-black group-hover:text-secondary-7 xs:block" />
+        <div className="flex flex-col items-end">
+          <span className="text-sm font-normal text-gray-4">Previous</span>
+          <span className="font-semibold transition-colors duration-200 group-hover:text-secondary-7">
+            {previousLink.title}
+          </span>
+        </div>
       </Link>
     )}
     {nextLink && (
       <Link
         to={`${DOCS_BASE_PATH}${nextLink.slug}`}
-        size="md"
-        theme="black-primary-1"
-        className="ml-auto flex text-right xs:items-baseline xs:space-x-3 xs:!leading-tight xs:before:hidden"
+        className="group ml-auto flex w-1/2 items-end justify-between rounded border border-gray-5 p-4 text-right xs:items-baseline xs:space-x-3 xs:leading-tight xs:before:hidden"
       >
-        <span
-          style={{
-            display: 'webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-            width: '100%',
-          }}
-        >
-          {nextLink.title}
-        </span>
-        <ArrowIcon className="hidden shrink-0 xs:block" />
+        <div className="flex flex-col items-start">
+          <span className="text-sm font-normal text-gray-4">Next</span>
+          <span
+            className="font-semibold transition-colors duration-200 group-hover:text-secondary-7"
+            style={{
+              display: 'webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+              width: '100%',
+            }}
+          >
+            {nextLink.title}
+          </span>
+        </div>
+        <ArrowIcon className="mb-1.5 shrink-0 text-black group-hover:text-secondary-7 xs:block" />
       </Link>
     )}
   </div>

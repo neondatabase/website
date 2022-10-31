@@ -202,7 +202,7 @@ const Community = () => (
             className="max-w-[560px] bg-gray-6 p-6 font-sans text-xl xl:p-5 xl:text-base md:p-4 sm:w-[300px] sm:flex-shrink-0 sm:snap-center"
             key={index}
           >
-            <div className="flex border-b border-b-gray-4 pb-6 xl:pb-4">
+            <div className="flex border-b border-b-gray-5 pb-6 xl:pb-4">
               <div className="w-16 shrink-0">{photo}</div>
               <div className="ml-5 flex w-full flex-col justify-evenly">
                 <h4 className="font-semibold leading-none">{name}</h4>

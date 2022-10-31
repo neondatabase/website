@@ -46,7 +46,7 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
       {!!items?.length && (
         <ul
           className={clsx(
-            'relative pl-9 before:absolute before:left-[3px] before:h-full before:w-0.5 before:bg-gray-4',
+            'relative pl-9 before:absolute before:left-[3px] before:h-full before:w-0.5 before:bg-gray-5',
             !isOpen && 'sr-only'
           )}
         >

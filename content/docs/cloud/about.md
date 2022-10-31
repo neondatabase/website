@@ -10,6 +10,22 @@ Neon separates storage and compute and offers modern developer features such as 
 
 Neon automatically and transparently scales up compute on demand, in response to application workload. Neon also scales down to zero on inactivity. Since Neon is serverless, it only charges for what you use and can deliver up to a 10x reduction in cost.
 
+<Admonition type="note">
+The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+</Admonition>
+<Admonition type="info">
+The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+</Admonition>
+<Admonition type="warning">
+The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+</Admonition>
+<Admonition type="important">
+The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+</Admonition>
+<Admonition type="tip">
+The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+</Admonition>
+
 ## Built for developer productivity
 
 Neon allows you to create a branch of your PostgreSQL database. It's easy to create branches for development, test, and staging environments.
