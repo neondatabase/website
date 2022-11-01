@@ -34,7 +34,7 @@ const Admonition = ({ children, type, title }) => (
 
 Admonition.propTypes = {
   children: PropTypes.node,
-  type: PropTypes.oneOf(['note', 'warning', 'info', 'caution', 'tip']),
+  type: PropTypes.oneOf(Object.keys(titleClassNames)),
   title: PropTypes.string,
 };
 

@@ -3,7 +3,7 @@
     @apply max-w-none text-black;
 
     a:not(.anchor) {
-      @apply font-normal text-secondary-8 no-underline transition-colors duration-200 ease-in-out hover:text-black sm:break-words;
+      @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color] duration-200 ease-in-out hover:border-secondary-8 sm:break-words;
     }
 
     ul,
