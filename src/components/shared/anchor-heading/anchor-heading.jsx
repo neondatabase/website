@@ -21,7 +21,9 @@ const AnchorHeading =
           tabIndex="-1"
           aria-hidden
         >
-          <HashIcon className={clsx(Tag === 'h2' && 'w-3.5', Tag === 'h3' && 'w-3')} />
+          <HashIcon
+            className={clsx(Tag === 'h2' && 'w-3.5', Tag === 'h3' && 'w-3', 'text-primary-2')}
+          />
         </a>
         {children}
       </Tag>
