@@ -68,7 +68,7 @@ A named collection of database objects. A Neon project has a default database na
 
 ### Endpoint
 
-The compute instance associated with a branch. A single read-write endpoint is created with each branch. The name of the endpoint is required to connect to a branch from a client or application. The name of an endpoint is found by selecting the branch on the **Branches** page in the Neon Console or in the **Connection Details** widget on the Neon **Dashboard**.
+The compute instance associated with a branch. A single read-write endpoint is created with each branch. The name of the endpoint is required to connect to a branch from a client or application. An endpoint name can be found on the **Branches** page in the Neon Console or in the **Connection Details** widget on the Neon **Dashboard**.
 
 ### Free Tier
 
