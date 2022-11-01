@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import TOCIcon from './images/toc.inline.svg';
 
 const linkClassName =
-  'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-4 hover:text-black';
+  'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-3 hover:text-black';
 
 const TableOfContents = ({ className, contentRef }) => {
   const [items, setItems] = useState([]);

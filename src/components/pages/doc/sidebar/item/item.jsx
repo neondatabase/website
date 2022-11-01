@@ -19,8 +19,8 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
     <li className="flex flex-col">
       {slug ? (
         <Link
-          className={clsx('w-full py-2 text-left text-sm hover:text-secondary-8', {
-            'font-semibold': currentSlug === slug,
+          className={clsx('w-full py-2 text-left text-sm text-gray-3 hover:text-black', {
+            'font-semibold text-black': currentSlug === slug,
           })}
           size="2xs"
           to={docSlug}
@@ -29,7 +29,7 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
         </Link>
       ) : (
         <button
-          className="flex w-full items-center justify-between py-2 text-left text-sm transition-colors duration-200 hover:text-secondary-8"
+          className="flex w-full items-center justify-between py-2 text-left text-sm text-gray-3 transition-colors duration-200 hover:text-black"
           type="button"
           onClick={handleClick}
         >
@@ -61,9 +61,9 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
               ) : (
                 <Link
                   className={clsx(
-                    '!flex items-center py-2 text-sm leading-tight hover:text-secondary-8',
+                    '!flex items-center py-2 text-sm leading-tight text-gray-3 hover:text-black',
                     {
-                      'font-semibold': currentSlug === slug,
+                      'font-semibold text-black': currentSlug === slug,
                     }
                   )}
                   to={`${DOCS_BASE_PATH}${slug}/`}

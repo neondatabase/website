@@ -1,0 +1,15 @@
+.breadcrumb__list {
+  @apply flex items-baseline text-sm text-gray-4;
+
+  &__item {
+    @apply pointer-events-none inline-flex cursor-default items-center px-1;
+
+    &:first-child {
+      @apply pl-0;
+    }
+
+    &:last-child {
+      @apply pr-0;
+    }
+  }
+}

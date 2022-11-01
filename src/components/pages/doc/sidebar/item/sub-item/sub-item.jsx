@@ -18,7 +18,7 @@ const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
   return (
     <>
       <button
-        className="flex w-full justify-between pt-2.5 pb-2 text-left transition-colors duration-200 hover:text-secondary-8"
+        className="flex w-full justify-between pt-2.5 pb-2 text-left text-gray-3 transition-colors duration-200 hover:text-black"
         type="button"
         tabIndex={!isParentOpen ? '-1' : undefined}
         onClick={handleClick}
@@ -36,8 +36,8 @@ const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
           <li>
             {items.map(({ title, slug }, index) => (
               <Link
-                className={clsx('!block py-2 leading-tight hover:text-secondary-8', {
-                  'font-semibold': currentSlug === slug,
+                className={clsx('!block py-2 leading-tight text-gray-3 hover:text-black', {
+                  'font-semibold text-black': currentSlug === slug,
                 })}
                 size="2xs"
                 to={`${DOCS_BASE_PATH}${slug}/`}

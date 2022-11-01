@@ -14,3 +14,4 @@
 @import './blog-content.css';
 @import './skeleton.css';
 @import '../components/shared/search/input/input.css';
+@import './breadcrumbs';

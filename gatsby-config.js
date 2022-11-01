@@ -157,6 +157,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-breadcrumb`,
+      options: {
+        useAutoGen: true,
+        trailingSlashes: true,
+      },
+    },
+    {
       resolve: 'gatsby-source-wordpress',
       options: {
         url: process.env.WP_GRAPHQL_URL,

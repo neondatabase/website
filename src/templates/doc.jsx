@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { graphql } from 'gatsby';
 import React, { useRef } from 'react';
 
+import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import MobileNav from 'components/pages/doc/mobile-nav';
 import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
 import Sidebar from 'components/pages/doc/sidebar';
@@ -24,24 +25,26 @@ const ReleaseNotes = ({ title, nodes, pageCount, currentPageIndex }) => (
     {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />}
   </>
 );
-const DocTemplate = ({
-  data: {
-    mdx: {
-      frontmatter: { title, enableTableOfContents },
+const DocTemplate = (props) => {
+  const {
+    data: {
+      mdx: {
+        frontmatter: { title, enableTableOfContents },
+      },
+      allMdx: { nodes },
     },
-    allMdx: { nodes },
-  },
-  children,
-  pageContext: {
-    sidebar,
-    currentSlug,
-    isReleaseNotes,
-    previousLink,
-    nextLink,
-    pageCount,
-    currentPageIndex,
-  },
-}) => {
+    children,
+    pageContext: {
+      sidebar,
+      currentSlug,
+      isReleaseNotes,
+      previousLink,
+      nextLink,
+      pageCount,
+      currentPageIndex,
+      breadcrumb: { crumbs },
+    },
+  } = props;
   const contentRef = useRef(null);
 
   return (
@@ -55,12 +58,14 @@ const DocTemplate = ({
           />
           <Search className="hidden lg:block" />
           <MobileNav className="mt-5 hidden lg:block" sidebar={sidebar} currentSlug={currentSlug} />
+
           <div
             className={clsx(
               '-mx-10 pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-10 lg:ml-0 lg:pt-10',
               isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
             )}
           >
+            <Breadcrumbs crumbs={crumbs} title={title} />
             {isReleaseNotes ? (
               <ReleaseNotes
                 title={title}
