@@ -52,7 +52,7 @@ const DocTemplate = (props) => {
       <div className="safe-paddings">
         <Container className="grid-gap-x grid grid-cols-12 lg:block lg:pt-10 md:pt-6" size="md">
           <Sidebar
-            className="relative col-start-1 col-end-4 max-w-[274px] bg-gray-7 pb-20 pt-[118px] before:absolute before:top-0 before:-right-5 before:-z-10 before:h-full before:w-[300%] before:bg-gray-7 lg:hidden"
+            className="relative col-start-1 col-end-4 max-w-[274px] bg-gray-8 pb-20 pt-[118px] before:absolute before:top-0 before:-right-5 before:-z-10 before:h-full before:w-[300%] before:bg-gray-8 lg:hidden"
             sidebar={sidebar}
             currentSlug={currentSlug}
           />

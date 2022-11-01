@@ -68,7 +68,7 @@
     }
 
     pre {
-      @apply !bg-gray-7;
+      @apply !bg-gray-8;
 
       code {
         text-shadow: unset;

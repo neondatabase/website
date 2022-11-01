@@ -86,7 +86,7 @@ const HitWithInsights = connectHitInsights(aa)(PageHit);
 
 const Hits = connectHits(({ hits, showAll, isNotFoundPage }) =>
   hits?.length ? (
-    <ul className="mt-4 divide-y divide-gray-7 px-2.5">
+    <ul className="mt-4 divide-y divide-gray-8 px-2.5">
       {hits.slice(0, showAll ? hits.length : 5).map((hit) => (
         <li className="py-2.5 first:pt-0" key={hit.objectID}>
           <HitWithInsights isNotFoundPage={isNotFoundPage} hit={hit} />
@@ -106,7 +106,7 @@ const Results = ({ indices, isNotFoundPage }) => {
         'absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden border-t-0 bg-white',
         isNotFoundPage
           ? 'rounded-b-[29px] border-2 border-gray-2'
-          : 'rounded-b border border-gray-7 '
+          : 'rounded-b border border-gray-8'
       )}
     >
       <div
@@ -124,7 +124,7 @@ const Results = ({ indices, isNotFoundPage }) => {
       </div>
       <div
         className={clsx(
-          'mt-2.5 flex justify-between bg-gray-7 p-2.5',
+          'mt-2.5 flex justify-between bg-gray-8 p-2.5',
           isNotFoundPage && 'px-6 xs:px-2.5'
         )}
       >
@@ -139,7 +139,7 @@ const Results = ({ indices, isNotFoundPage }) => {
           </button>
         )}
         <Link
-          className="ml-auto flex items-center space-x-2 text-xs text-gray-7"
+          className="ml-auto flex items-center space-x-2 text-xs text-gray-8"
           to="https://www.algolia.com/"
           target="_blank"
           rel="noopener noreferrer"
