@@ -12,7 +12,7 @@ const md = new MarkdownIt({
 
 const Content = ({ content }) => (
   <div
-    className="prose-lg prose md:prose-base xs:prose-code:break-words"
+    className="prose-doc prose-base prose prose-h3:text-xl xs:prose-code:break-words"
     dangerouslySetInnerHTML={{ __html: md.render(content) }}
   />
 );
@@ -22,11 +22,11 @@ Content.propTypes = {
 };
 
 const ReleaseNoteList = ({ items }) => (
-  <div className="relative space-y-12 before:absolute before:top-4 before:bottom-3 before:left-[180px] before:h-auto before:w-px before:bg-gray-5 xl:before:hidden sm:space-y-16">
+  <div className="relative space-y-12 before:absolute before:top-4 before:bottom-3 before:left-[179px] before:h-auto before:w-px before:bg-gray-6 xl:before:hidden sm:space-y-16">
     {items.map(({ fields: { slug }, body, frontmatter: { label } }, index) => (
       <article className="relative flex sm:flex-col sm:space-y-3" key={index}>
         <Aside slug={slug} label={label} />
-        <div className="relative pl-56 before:absolute before:top-3 before:left-[175px] before:h-[11px] before:w-[11px] before:rounded-full before:bg-gray-1 xl:pl-0 xl:before:hidden">
+        <div className="relative pl-56 before:absolute before:top-3 before:left-[175px] before:h-[9px] before:w-[9px] before:rounded-full before:bg-primary-1 xl:pl-0 xl:before:hidden">
           <Content content={body} />
         </div>
       </article>

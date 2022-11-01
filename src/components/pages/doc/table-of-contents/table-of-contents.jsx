@@ -5,9 +5,9 @@ import React, { useState, useEffect } from 'react';
 import TOCIcon from './images/toc.inline.svg';
 
 const linkClassName =
-  'py-1.5 block text-base leading-snug transition-colors duration-200 text-gray-2 hover:text-secondary-8';
+  'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-4 hover:text-black';
 
-const TableOfContents = ({ contentRef }) => {
+const TableOfContents = ({ className, contentRef }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -36,9 +36,9 @@ const TableOfContents = ({ contentRef }) => {
   if (items.length === 0) return null;
 
   return (
-    <div className="col-start-11 col-end-13 h-full xl:hidden">
+    <div className={clsx('h-full xl:hidden', className)}>
       <nav className="sticky top-10 bottom-10 max-h-[calc(100vh-40px-40px)] overflow-y-auto overflow-x-hidden">
-        <h3 className="flex items-baseline space-x-2 py-2.5 text-sm font-semibold leading-snug">
+        <h3 className="flex items-baseline space-x-2 py-2 text-sm font-semibold leading-tight">
           <TOCIcon className="h-3.5 w-3.5" />
           <span>On this page</span>
         </h3>
@@ -76,12 +76,17 @@ const TableOfContents = ({ contentRef }) => {
 };
 
 TableOfContents.propTypes = {
+  className: PropTypes.string,
   contentRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({
       current: PropTypes.instanceOf(typeof Element === 'undefined' ? () => {} : Element),
     }),
   ]).isRequired,
+};
+
+TableOfContents.defaultProps = {
+  className: null,
 };
 
 export default TableOfContents;

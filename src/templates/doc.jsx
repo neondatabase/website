@@ -45,18 +45,21 @@ const DocTemplate = ({
   const contentRef = useRef(null);
 
   return (
-    <Layout headerTheme="white">
-      <div className="safe-paddings pt-48 pb-48 3xl:pt-44 3xl:pb-44 2xl:pt-40 2xl:pb-40 xl:pt-32 xl:pb-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
+    <Layout headerTheme="white" headerWithBottomBorder>
+      <div className="safe-paddings">
         <Container className="grid-gap-x grid grid-cols-12 lg:block" size="md">
           <Sidebar
-            className="col-start-2 col-end-4 pt-3 2xl:col-start-1 lg:hidden"
+            className="relative col-start-1 col-end-4 max-w-[274px] bg-gray-7 pb-20 pt-[118px] before:absolute before:top-0 before:-right-5 before:-z-10 before:h-full before:w-[300%] before:bg-gray-7 lg:hidden"
             sidebar={sidebar}
             currentSlug={currentSlug}
           />
           <Search className="hidden lg:block" />
           <MobileNav className="mt-5 hidden lg:block" sidebar={sidebar} currentSlug={currentSlug} />
           <div
-            className={clsx('xl:col-span-9 lg:mt-6', isReleaseNotes ? 'col-span-7' : 'col-span-6')}
+            className={clsx(
+              '-mx-10 pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-10 lg:mt-6 lg:ml-0 lg:pt-10 md:pt-6',
+              isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
+            )}
           >
             {isReleaseNotes ? (
               <ReleaseNotes
@@ -67,13 +70,20 @@ const DocTemplate = ({
               />
             ) : (
               <article>
-                <h1 className="t-5xl font-semibold leading-tight">{title}</h1>
+                <h1 className="text-[36px] font-semibold leading-tight 2xl:text-3xl xl:text-2xl">
+                  {title}
+                </h1>
                 <Content className="mt-5" content={children} ref={contentRef} />
               </article>
             )}
             <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
           </div>
-          {enableTableOfContents && <TableOfContents contentRef={contentRef} />}
+          {enableTableOfContents && (
+            <TableOfContents
+              className="col-start-11 col-end-13 -ml-11 pb-20 pt-[118px] 2xl:ml-0"
+              contentRef={contentRef}
+            />
+          )}
         </Container>
       </div>
     </Layout>

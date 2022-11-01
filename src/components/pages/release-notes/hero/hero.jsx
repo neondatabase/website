@@ -10,12 +10,9 @@ const DESCRIPTION = 'The latest product updates from Neon';
 const Hero = ({ className, withContainer }) => {
   const Tag = withContainer ? Container : 'div';
   return (
-    <Tag
-      className={clsx('mb-12 border-b border-b-gray-6 pb-12 md:mb-10 sm:mb-7', className)}
-      size="sm"
-    >
-      <h1 className="t-5xl font-semibold">{TITLE}</h1>
-      <p className="mt-3 text-xl">{DESCRIPTION}</p>
+    <Tag className={clsx('mb-10 sm:mb-7', className)} size="sm">
+      <h1 className="text-[36px] font-semibold xl:text-3xl">{TITLE}</h1>
+      <p className="mt-3">{DESCRIPTION}</p>
     </Tag>
   );
 };

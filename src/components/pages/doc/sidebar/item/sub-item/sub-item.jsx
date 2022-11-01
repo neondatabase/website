@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import ChevronRight from 'icons/chevron-right.inline.svg';
+import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 
 const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
   const [isOpen, setIsOpen] = useState(
@@ -18,29 +18,29 @@ const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
   return (
     <>
       <button
-        className="-ml-4 flex w-full pt-2.5 pb-2 text-left transition-colors duration-200 hover:text-primary-2"
+        className="flex w-full justify-between pt-2.5 pb-2 text-left transition-colors duration-200 hover:text-secondary-8"
         type="button"
         tabIndex={!isParentOpen ? '-1' : undefined}
         onClick={handleClick}
       >
+        <span className={clsx('text-sm leading-tight')}>{title}</span>
         <ChevronRight
           className={clsx(
-            'mr-2 mt-1 shrink-0 transition-transform duration-150',
+            'mr-2 mt-1 shrink-0 text-gray-5 transition-transform duration-150',
             isOpen ? 'rotate-90' : 'rotate-0'
           )}
         />
-        <span className={clsx('text-base font-semibold leading-snug')}>{title}</span>
       </button>
       {isOpen && (
-        <ul className="relative before:absolute before:-left-3.5 before:h-full before:w-0.5 before:bg-gray-6">
+        <ul className="relative pl-3 before:absolute before:left-0 before:h-full before:w-px before:bg-gray-6">
           <li>
             {items.map(({ title, slug }, index) => (
               <Link
-                className={clsx('!block py-2 text-base !leading-snug', {
-                  'font-semibold text-primary-2': currentSlug === slug,
+                className={clsx('!block py-2 leading-tight hover:text-secondary-8', {
+                  'font-semibold': currentSlug === slug,
                 })}
+                size="2xs"
                 to={`${DOCS_BASE_PATH}${slug}/`}
-                theme="black"
                 tabIndex={!isOpen ? '-1' : undefined}
                 key={index}
               >

@@ -29,7 +29,7 @@ const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
         <div className="flex flex-col items-start">
           <span className="text-sm font-normal text-gray-5">Next</span>
           <span
-            className="font-semibold transition-colors duration-200 group-hover:text-secondary-8"
+            className="text-left font-semibold transition-colors duration-200 group-hover:text-secondary-8"
             style={{
               display: 'webkit-box',
               WebkitLineClamp: 2,

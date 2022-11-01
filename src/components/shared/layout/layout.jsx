@@ -8,7 +8,14 @@ import Header from 'components/shared/header';
 import MobileMenu from 'components/shared/mobile-menu';
 import Topbar from 'components/shared/topbar';
 
-const Layout = ({ headerTheme, withOverflowHidden, isSignIn, children, isHeaderSticky }) => {
+const Layout = ({
+  headerTheme,
+  withOverflowHidden,
+  isSignIn,
+  children,
+  isHeaderSticky,
+  headerWithBottomBorder,
+}) => {
   const headerRef = useRef(null);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -26,6 +33,7 @@ const Layout = ({ headerTheme, withOverflowHidden, isSignIn, children, isHeaderS
       <Topbar />
       <div className="relative">
         <Header
+          withBottomBorder={headerWithBottomBorder}
           theme={headerTheme}
           isMobileMenuOpen={isMobileMenuOpen}
           ref={headerRef}
@@ -51,12 +59,14 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   isSignIn: PropTypes.bool,
   isHeaderSticky: PropTypes.bool,
+  headerWithBottomBorder: PropTypes.bool,
 };
 
 Layout.defaultProps = {
   withOverflowHidden: false,
   isSignIn: false,
   isHeaderSticky: false,
+  headerWithBottomBorder: false,
 };
 
 export const query = graphql`

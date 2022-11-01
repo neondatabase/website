@@ -34,16 +34,10 @@
     }
 
     ol {
-      counter-reset: custom-counter;
-      @apply pl-10 md:pl-4;
+      @apply list-decimal pl-10 md:pl-4;
 
-      > li {
-        counter-increment: custom-counter;
-
-        &::before {
-          @apply -left-2 -translate-x-full md:static;
-          content: counter(custom-counter) '. ' !important;
-        }
+      li::marker {
+        @apply text-black;
       }
     }
 
@@ -69,7 +63,7 @@
 
     .code-tab {
       > pre {
-        @apply my-0 py-8;
+        @apply my-0 pt-8 pb-4;
       }
     }
 
@@ -108,7 +102,7 @@
     }
 
     blockquote {
-      @apply border-primary-1 font-normal not-italic;
+      @apply border-secondary-8 font-normal not-italic;
 
       p {
         &::before,
