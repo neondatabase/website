@@ -66,6 +66,10 @@ A technique used to efficiently copy data. Neon uses the copy-on-write technique
 
 A named collection of database objects. A Neon project has a default database named main which resides in the default `public` schema. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
 
+### Endpoint
+
+The compute instance associated with a branch. A single read-write endpoint is created with each branch. The name of the endpoint is required to connect to a branch from a client or application. The name of an endpoint is found by selecting the branch on the **Branches** page in the Neon Console or in the **Connection Details** widget on the Neon **Dashboard**.
+
 ### Free Tier
 
 A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier/).
