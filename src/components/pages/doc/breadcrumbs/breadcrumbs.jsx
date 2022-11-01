@@ -26,11 +26,11 @@ const convertPathToTitle = (path) => {
   return crumbLabel;
 };
 
-const Breadcrumbs = ({ crumbs, title }) => {
+const Breadcrumbs = ({ crumbs }) => {
   const crumbsWithLabel = useMemo(() => {
     const docCrumbs = crumbs.filter((crumb) => crumb.pathname.includes('/docs/'));
 
-    return docCrumbs.map((crumb) => {
+    return docCrumbs.slice(0, -1).map((crumb) => {
       const crumbLabelUpdate = crumbLabelUpdates.find(
         (update) => update.pathname === crumb.pathname
       );
@@ -48,9 +48,7 @@ const Breadcrumbs = ({ crumbs, title }) => {
       };
     });
   }, [crumbs]);
-  return (
-    <Breadcrumb className="mb-5" crumbs={crumbsWithLabel} crumbSeparator="/" crumbLabel={title} />
-  );
+  return <Breadcrumb className="mb-5" crumbs={crumbsWithLabel} crumbSeparator="/" />;
 };
 
 Breadcrumbs.propTypes = {
@@ -60,7 +58,6 @@ Breadcrumbs.propTypes = {
       crumbLabel: PropTypes.string.isRequired,
     })
   ).isRequired,
-  title: PropTypes.string.isRequired,
 };
 
 Breadcrumbs.defaultProps = {};

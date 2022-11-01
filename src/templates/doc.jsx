@@ -65,7 +65,7 @@ const DocTemplate = (props) => {
               isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
             )}
           >
-            <Breadcrumbs crumbs={crumbs} title={title} />
+            <Breadcrumbs crumbs={crumbs} />
             {isReleaseNotes ? (
               <ReleaseNotes
                 title={title}
