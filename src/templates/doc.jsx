@@ -61,7 +61,7 @@ const DocTemplate = (props) => {
 
           <div
             className={clsx(
-              '-mx-10 pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-10 lg:ml-0 lg:pt-10',
+              '-mx-10 pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-11 lg:ml-0 lg:pt-10',
               isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
             )}
           >
