@@ -6,9 +6,9 @@ isDraft: true
 
 This topic describes how to get started with Neon's branching feature, which allows you to branch your data in the same way that you branch your code.
 
-A branch is a clone of your data that you are free to play with and modify without affecting the originating data.
+A branch is a clone of your data that you are free to play around with and modify without affecting the originating data.
 
-You can create a branch using the Neon Console or Neon API. In this topic, we'll cover how to create a branch using the Neon Console. For Neon API branching instructions, see [Branching with the Neon API]. This topic also describes how to connect to a branch.
+You can create a branch using the Neon Console or Neon API. In this topic, we'll cover how to create a branch using the Neon Console and how to connect to a branch. For Neon API branching instructions, see [Branching with the Neon API]. 
 
 Before you can create a branch, you must have a Neon project to branch from. If you do not have a Neon project, see [Setting up a project](./setting-up-a-project).
 
@@ -40,7 +40,7 @@ You are directed to the **Branches** tab where you are shown the details for you
 
 ## Connecting to a branch
 
-Now that you have created a branch, how do you connect to it? You can connect to a branch using a connection string, as you would connect to any other Neon database. The following steps describe how to connect to a branch using `psql`.
+Now that you have created a branch, how do you connect to it? You can connect to a branch using a connection string, as you would connect to any Neon database. The following steps describe how to connect to a branch using `psql`.
 
 _**Note:**_ You can also query a branch from the Neo Console's SQL Editor. For instructions, see [Query from psql](/query-with-neon-sql-editor).
 
