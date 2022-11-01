@@ -68,7 +68,7 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
         {MENUS.mobile.map(({ iconName, text, to, description }, index) => {
           const Icon = icons[iconName];
           return (
-            <li className="border-b border-b-gray-5" key={index}>
+            <li className="border-b border-b-gray-6" key={index}>
               {Icon && description ? (
                 <Link className="flex items-center whitespace-nowrap py-4" to={to}>
                   <Icon className="flex-shrink-0" aria-hidden />

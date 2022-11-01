@@ -26,7 +26,7 @@ const Hero = ({ title, description, author, date, readingTime, className }) => {
     <div className={clsx('safe-paddings', className)}>
       <h1 className="t-5xl font-semibold leading-tight">{title}</h1>
       <p className="t-2xl mt-6 xl:mt-5">{description}</p>
-      <div className="mt-8 flex items-center justify-between border-b border-b-gray-5 pb-8 leading-none 2xl:mt-7 2xl:pb-7 xl:mt-6 xl:pb-6 sm:flex-col sm:items-start sm:space-y-6 xs:leading-tight">
+      <div className="mt-8 flex items-center justify-between border-b border-b-gray-6 pb-8 leading-none 2xl:mt-7 2xl:pb-7 xl:mt-6 xl:pb-6 sm:flex-col sm:items-start sm:space-y-6 xs:leading-tight">
         {postAuthor && author.postAuthor.url ? (
           <Link className="group" to={author.postAuthor.url}>
             {postAuthor}
@@ -36,7 +36,7 @@ const Hero = ({ title, description, author, date, readingTime, className }) => {
         )}
         <span className="t-base flex items-center text-gray-2">
           <span>{date}</span>
-          <span className="relative ml-3 pl-4 before:absolute before:top-1/2 before:left-0 before:inline-flex before:h-1 before:w-1 before:-translate-y-1/2 before:rounded-full before:bg-gray-4">
+          <span className="relative ml-3 pl-4 before:absolute before:top-1/2 before:left-0 before:inline-flex before:h-1 before:w-1 before:-translate-y-1/2 before:rounded-full before:bg-gray-5">
             {readingTime} min read
           </span>
         </span>

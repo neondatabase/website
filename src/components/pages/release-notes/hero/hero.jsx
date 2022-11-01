@@ -11,7 +11,7 @@ const Hero = ({ className, withContainer }) => {
   const Tag = withContainer ? Container : 'div';
   return (
     <Tag
-      className={clsx('mb-12 border-b border-b-gray-5 pb-12 md:mb-10 sm:mb-7', className)}
+      className={clsx('mb-12 border-b border-b-gray-6 pb-12 md:mb-10 sm:mb-7', className)}
       size="sm"
     >
       <h1 className="t-5xl font-semibold">{TITLE}</h1>

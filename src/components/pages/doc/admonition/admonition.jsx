@@ -7,7 +7,7 @@ const titleClassNames = {
   important: 'text-[#FFBB33]',
   tip: 'text-primary-2',
   warning: 'text-secondary-1',
-  info: 'text-gray-4',
+  info: 'text-gray-5',
 };
 
 const borderClassNames = {
@@ -15,13 +15,13 @@ const borderClassNames = {
   important: 'border-[#FFBB33]',
   tip: 'border-primary-2',
   warning: 'border-secondary-1',
-  info: 'border-gray-4',
+  info: 'border-gray-5',
 };
 
 const Admonition = ({ children, type, title }) => (
   <div
     className={clsx(
-      'rounded-r-px not-prose mt-8 flex flex-col border-l-4 bg-gray-6 px-5 py-4',
+      'rounded-r-px not-prose mt-8 flex flex-col border-l-4 bg-gray-7 px-5 py-4',
       borderClassNames[type]
     )}
   >

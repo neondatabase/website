@@ -59,11 +59,11 @@
       }
 
       th {
-        @apply border border-gray-5 bg-secondary-6 bg-opacity-30 p-3.5 md:px-2;
+        @apply border border-gray-6 bg-secondary-6 bg-opacity-30 p-3.5 md:px-2;
       }
 
       td {
-        @apply border border-gray-5 p-3.5 md:px-2;
+        @apply border border-gray-6 p-3.5 md:px-2;
       }
     }
 
@@ -74,7 +74,7 @@
     }
 
     pre {
-      @apply !bg-gray-6;
+      @apply !bg-gray-7;
 
       code {
         text-shadow: unset;

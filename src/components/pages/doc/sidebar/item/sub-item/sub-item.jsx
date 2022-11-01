@@ -32,7 +32,7 @@ const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
         <span className={clsx('text-base font-semibold leading-snug')}>{title}</span>
       </button>
       {isOpen && (
-        <ul className="relative before:absolute before:-left-3.5 before:h-full before:w-0.5 before:bg-gray-5">
+        <ul className="relative before:absolute before:-left-3.5 before:h-full before:w-0.5 before:bg-gray-6">
           <li>
             {items.map(({ title, slug }, index) => (
               <Link

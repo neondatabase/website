@@ -27,7 +27,7 @@ const PostsList = ({ items }) => (
 
           return (
             <article
-              className="relative border-b border-b-gray-5 pb-10 2xl:pb-8 xl:pb-7 md:pb-6"
+              className="relative border-b border-b-gray-6 pb-10 2xl:pb-8 xl:pb-7 md:pb-6"
               key={index}
             >
               <h1 className="t-4xl font-semibold leading-tight">
