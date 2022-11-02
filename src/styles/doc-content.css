@@ -2,6 +2,14 @@
   .prose-doc {
     @apply max-w-none text-black;
 
+    h2 {
+      @apply mt-10 mb-3;
+    }
+
+    p {
+      @apply my-3 leading-normal;
+    }
+
     a:not(.anchor) {
       @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color] duration-200 ease-in-out hover:border-secondary-8 sm:break-words;
     }
