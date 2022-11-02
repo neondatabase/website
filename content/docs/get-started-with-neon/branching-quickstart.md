@@ -19,17 +19,11 @@ Before you can create a branch, you must have a Neon project to branch from. If 
 To create a branch:
 
 1. On the Neon Console, select the Neon project that you want to branch from.
-
   ![Select project drop-down](./images/select_project.png)
-
 2. Select the **Branches** tab.
-
   ![Branches tab](./images/branches_tab.png)
-
 3. Click **New Branch** to open the branch creation dialog.
-
   ![Create branch dialog](./images/create_branch.png)
-
 4. Enter a name for the branch.
 5. Select a parent branch. You can branch from your Neon project's `main` branch or a previously created branch. Every Neon project is created with a default branch called `main`.  
 6. Select one of the following branching options:
@@ -49,19 +43,12 @@ _**Note:**_ You can also query a branch from the Neo Console's SQL Editor. For i
 You can obtain a branch connection string from the **Connection Details** widget on the project dashboard.
 
 1. On the Neon Console, select a project from the project drop-down list at the top of the console.
-
   ![Select project drop-down](./images/select_project.png)
-
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the user you want to connect with.
-
   ![Connection details widget](./images/connection_details.png)
-
 3. Copy the connection string. A connection string includes your user name, endpoint name, and database name. The endpoint name is the name of the compute instance associated with the branch.
-
 4. Obtain a password for your branch by navigating to **Settings** > **Users**. Select the user you want to connect with and click **Reset password**.
-
   ![Reset password](./images/reset_password.png)
-
 5. Add your password to the connection string as shown below, and connect with `psql`. 
 
   ```bash
