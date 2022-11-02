@@ -20,7 +20,7 @@ const Breadcrumbs = ({ slug }) => {
   }, [slug]);
 
   return (
-    <div className="mb-5 flex space-x-1 text-gray-4">
+    <div className="mb-5 flex space-x-1 text-sm text-gray-4">
       <span>Documentation</span>
 
       {breadcrumbLabels.map((title, index) => (

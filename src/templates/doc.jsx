@@ -47,9 +47,12 @@ const DocTemplate = (props) => {
   const contentRef = useRef(null);
 
   return (
-    <Layout headerTheme="white" headerWithBottomBorder>
+    <Layout headerTheme="white" headerWithBottomBorder isDocPage>
       <div className="safe-paddings">
-        <Container className="grid-gap-x grid grid-cols-12 lg:block lg:pt-10 md:pt-6" size="md">
+        <Container
+          className="grid grid-cols-12 gap-x-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-10 md:pt-6"
+          size="lg"
+        >
           <Sidebar
             className="relative col-start-1 col-end-4 max-w-[274px] bg-gray-9 pb-20 pt-[118px] before:absolute before:top-0 before:-right-5 before:-z-10 before:h-full before:w-[300%] before:bg-gray-9 lg:hidden"
             sidebar={sidebar}

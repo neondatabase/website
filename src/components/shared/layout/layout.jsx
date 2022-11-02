@@ -15,6 +15,7 @@ const Layout = ({
   children,
   isHeaderSticky,
   headerWithBottomBorder,
+  isDocPage,
 }) => {
   const headerRef = useRef(null);
 
@@ -39,10 +40,11 @@ const Layout = ({
           ref={headerRef}
           isSignIn={isSignIn}
           isSticky={isHeaderSticky}
+          isDocPage={isDocPage}
           onBurgerClick={handleHeaderBurgerClick}
         />
         <main className={clsx(withOverflowHidden && 'overflow-hidden')}>{children}</main>
-        <Footer />
+        <Footer isDocPage={isDocPage} />
         <MobileMenu
           isOpen={isMobileMenuOpen}
           headerRef={headerRef}
@@ -60,6 +62,7 @@ Layout.propTypes = {
   isSignIn: PropTypes.bool,
   isHeaderSticky: PropTypes.bool,
   headerWithBottomBorder: PropTypes.bool,
+  isDocPage: PropTypes.bool,
 };
 
 Layout.defaultProps = {
@@ -67,6 +70,7 @@ Layout.defaultProps = {
   isSignIn: false,
   isHeaderSticky: false,
   headerWithBottomBorder: false,
+  isDocPage: false,
 };
 
 export const query = graphql`
