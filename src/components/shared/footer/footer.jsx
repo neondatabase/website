@@ -44,18 +44,23 @@ const Footer = ({ isDocPage, withTopBorder }) => {
                 {heading}
               </Heading>
               <ul className="mt-5 flex grow flex-col space-y-4">
-                {links.map(({ to, text }, index) => (
-                  <li className="flex" key={index}>
-                    <Link
-                      className="relative whitespace-nowrap leading-none"
-                      to={to}
-                      theme="black"
-                      size="sm"
-                    >
-                      {text}
-                    </Link>
-                  </li>
-                ))}
+                {links.map(({ to, text }, index) => {
+                  const isExternalUrl = to.startsWith('http');
+                  return (
+                    <li className="flex" key={index}>
+                      <Link
+                        className="relative whitespace-nowrap leading-none"
+                        to={to}
+                        theme="black"
+                        size="sm"
+                        target={isExternalUrl ? '_blank' : null}
+                        rel={isExternalUrl ? 'noopener noreferrer' : null}
+                      >
+                        {text}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
