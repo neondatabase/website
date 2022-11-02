@@ -55,6 +55,10 @@
       li::marker {
         @apply text-black;
       }
+
+      ol {
+        list-style-type: lower-alpha;
+      }
     }
 
     .table-wrapper {

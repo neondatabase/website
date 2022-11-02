@@ -12,6 +12,12 @@ Neon automatically and transparently scales up compute on demand, in response to
 
 TODO: remove testing data before merging
 
+1. Navigate to [https://console.neon.tech](https://console.neon.tech).
+2. If you do not have an invite code to access the Neon Technical Preview, click Request early access.
+3. In your browser, navigate to the provided link where you are asked to select an existing project or create a new project.
+   1. Selecting an existing project authenticates your connection to the selected project.
+   2. Selecting Create new project directs you to a Project creation page where you create a new project to connect to.
+
 <Admonition type="note">
 The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
 </Admonition>

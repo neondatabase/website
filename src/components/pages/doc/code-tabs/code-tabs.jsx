@@ -9,35 +9,35 @@ const CodeTabs = ({ children, labels }) => {
 
   return (
     <div className="my-10 max-w-full overflow-hidden rounded-md bg-gray-9">
-      <div className="no-scrollbars bg-grey-15 flex w-full flex-nowrap overflow-auto border-b border-gray-6">
-        {labels.map((label, i) => (
+      <div className="no-scrollbars bg-grey-15 relative flex w-full flex-nowrap overflow-auto after:absolute after:bottom-0 after:h-px after:w-full after:bg-gray-7">
+        {labels.map((label, index) => (
           <div
-            key={`lb-${i}`}
+            key={`lb-${index}`}
             className={clsx(
-              'cursor-pointer whitespace-nowrap border-b-2 px-[18px] pt-3 pb-3.5 font-semibold leading-none transition-colors duration-200',
-              i === currentIndex
+              'relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pt-3 pb-3.5 font-semibold leading-none transition-colors duration-200',
+              index === currentIndex
                 ? 'border-secondary-8 text-secondary-8 after:opacity-100'
                 : 'border-transparent'
             )}
             tabIndex="0"
             role="button"
-            onClick={() => setCurrentIndex(i)}
-            onKeyDown={() => setCurrentIndex(i)}
+            onClick={() => setCurrentIndex(index)}
+            onKeyDown={() => setCurrentIndex(index)}
           >
             {label}
           </div>
         ))}
       </div>
 
-      {React.Children.map(children, (child, i) => {
-        if (i !== currentIndex) {
+      {React.Children.map(children, (child, index) => {
+        if (index !== currentIndex) {
           return null;
         }
 
         const { children, className } = child.props?.children.props ?? {};
 
         return (
-          <CodeBlock key={i} className={clsx(className, 'code-tab')} showLineNumbers>
+          <CodeBlock key={index} className={clsx(className, 'code-tab')} showLineNumbers>
             {children}
           </CodeBlock>
         );
