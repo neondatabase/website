@@ -42,7 +42,6 @@ const DocTemplate = (props) => {
       nextLink,
       pageCount,
       currentPageIndex,
-      breadcrumb: { crumbs },
     },
   } = props;
   const contentRef = useRef(null);
@@ -52,7 +51,7 @@ const DocTemplate = (props) => {
       <div className="safe-paddings">
         <Container className="grid-gap-x grid grid-cols-12 lg:block lg:pt-10 md:pt-6" size="md">
           <Sidebar
-            className="relative col-start-1 col-end-4 max-w-[274px] bg-gray-8 pb-20 pt-[118px] before:absolute before:top-0 before:-right-5 before:-z-10 before:h-full before:w-[300%] before:bg-gray-8 lg:hidden"
+            className="relative col-start-1 col-end-4 max-w-[274px] bg-gray-9 pb-20 pt-[118px] before:absolute before:top-0 before:-right-5 before:-z-10 before:h-full before:w-[300%] before:bg-gray-9 lg:hidden"
             sidebar={sidebar}
             currentSlug={currentSlug}
           />
@@ -65,7 +64,7 @@ const DocTemplate = (props) => {
               isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
             )}
           >
-            <Breadcrumbs crumbs={crumbs} />
+            <Breadcrumbs slug={currentSlug} />
             {isReleaseNotes ? (
               <ReleaseNotes
                 title={title}

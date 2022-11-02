@@ -68,7 +68,7 @@
     }
 
     pre {
-      @apply !bg-gray-8;
+      @apply !bg-gray-9;
 
       code {
         text-shadow: unset;
@@ -78,7 +78,7 @@
     }
 
     :not(pre) > code {
-      @apply !rounded-sm !border !border-[#E5E5E5] bg-[#FBFBFB] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
+      @apply !rounded-sm bg-gray-8 !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
 
       &::before,
       &::after {

@@ -156,13 +156,7 @@ module.exports = {
         siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
       },
     },
-    {
-      resolve: `gatsby-plugin-breadcrumb`,
-      options: {
-        useAutoGen: true,
-        trailingSlashes: true,
-      },
-    },
+
     {
       resolve: 'gatsby-source-wordpress',
       options: {

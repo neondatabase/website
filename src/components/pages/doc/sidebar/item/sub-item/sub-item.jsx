@@ -37,7 +37,7 @@ const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
             {items.map(({ title, slug }, index) => (
               <Link
                 className={clsx('!block py-2 leading-tight text-gray-3 hover:text-black', {
-                  'font-semibold text-black': currentSlug === slug,
+                  'font-semibold !text-black': currentSlug === slug,
                 })}
                 size="2xs"
                 to={`${DOCS_BASE_PATH}${slug}/`}

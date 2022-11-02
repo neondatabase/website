@@ -28,7 +28,7 @@ const Header = forwardRef(
         theme === 'black' && 'lg:bg-black',
         theme === 'white' && 'bg-white',
         isSticky && 'sticky top-0 z-50 md:relative',
-        withBottomBorder && 'border-b border-gray-6'
+        withBottomBorder && 'border-b border-gray-7'
       )}
       ref={ref}
     >

@@ -20,7 +20,7 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
       {slug ? (
         <Link
           className={clsx('w-full py-2 text-left text-sm text-gray-3 hover:text-black', {
-            'font-semibold text-black': currentSlug === slug,
+            'font-semibold !text-black': currentSlug === slug,
           })}
           size="2xs"
           to={docSlug}
@@ -63,7 +63,7 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
                   className={clsx(
                     '!flex items-center py-2 text-sm leading-tight text-gray-3 hover:text-black',
                     {
-                      'font-semibold text-black': currentSlug === slug,
+                      'font-semibold !text-black': currentSlug === slug,
                     }
                   )}
                   to={`${DOCS_BASE_PATH}${slug}/`}
