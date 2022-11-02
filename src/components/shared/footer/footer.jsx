@@ -10,10 +10,12 @@ import logoBlack from 'images/logo-black.svg';
 
 import ThemeSelect from './theme-select';
 
-const Footer = ({ isDocPage }) => {
+const Footer = ({ isDocPage, withTopBorder }) => {
   const containerSize = isDocPage ? 'xl' : 'md';
   return (
-    <footer className="safe-paddings overflow-hidden border-t border-gray-7">
+    <footer
+      className={clsx('safe-paddings overflow-hidden', withTopBorder && 'border-t border-gray-7')}
+    >
       <Container className="flex justify-between py-10 xl:py-8" size={containerSize}>
         <div className="flex flex-col items-start justify-between md:w-full md:flex-row md:items-end md:justify-between sm:flex-col sm:items-start">
           <div className="mb-7 md:mb-0 sm:mb-6">
@@ -65,10 +67,12 @@ const Footer = ({ isDocPage }) => {
 
 Footer.propTypes = {
   isDocPage: PropTypes.bool,
+  withTopBorder: PropTypes.bool,
 };
 
 Footer.defaultProps = {
   isDocPage: false,
+  withTopBorder: false,
 };
 
 export default Footer;
