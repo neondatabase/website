@@ -6,9 +6,11 @@ isDraft: false
 
 This topic describes how to get started with Neon's branching feature, which allows you to branch your data in the same way that you branch your code.
 
+_**Note**: Neon Branching capabilities are not yet publicly available. If you would like to try this feature, reach out to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching for your account._
+
 A branch is a clone of your data that you are free to play around with and modify without affecting the originating data.
 
-You can create a branch using the Neon Console or Neon API. In this topic, we'll cover how to create a branch using the Neon Console and how to connect to a branch. For Neon API branching instructions, see [Branching with the Neon API]. 
+You can create a branch using the Neon Console or Neon API. In this topic, we'll cover how to create a branch using the Neon Console and how to connect to it. <!-- For Neon API branching instructions, see [Branching with the Neon API].-->
 
 Before you can create a branch, you must have a Neon project to branch from. If you do not have a Neon project, see [Setting up a project](./setting-up-a-project).
 
@@ -54,20 +56,20 @@ You can obtain a branch connection string from the **Connection Details** widget
 
   ![Connection details widget](./images/connection_details.png)
 
-3. Copy the connection string.
+3. Copy the connection string. A connection string includes your user name, endpoint name, and database name. The endpoint name is the name of the compute instance associated with the branch.
 
 4. Obtain a password for your branch by navigating to **Settings** > **Users**. Select the user you want to connect with and click **Reset password**.
 
   ![Reset password](./images/reset_password.png)
 
-4. Add your password to the connection string as shown below, and connect with `psql`:
+5. Add your password to the connection string as shown below, and connect with `psql`. 
 
   ```bash
-  psql postgres://casey:<password>@ep-snowy-butterfly-311850.cloud.neon.tech/main
+  psql postgres://casey:<password>@ep-patient-wildflower-627498.cloud.neon.tech/main
   ```
 
 If you want to connect to a branch from an application, the **Connection Details** widget on the project **Dashboard** also provides connection details for various languages and frameworks.
 
 ## Next steps
 
-For more information about branches, including how to view them, delete them, and use them in your development workflows, see [Branching workflows].
+For more information about branches, including how to view them, delete them, and use them in your development workflows, see [Branching](../../branching).
