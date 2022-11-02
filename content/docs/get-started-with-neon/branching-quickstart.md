@@ -29,7 +29,7 @@ To create a branch:
   ![Create branch dialog](./images/create_branch.png)
 
 4. Enter a name for the branch.
-5. Select a parent branch. You can branch from your Neon project's `main` branch or a previously created branch. Every Neon project is created with a primary branch named `main`.  
+5. Select a parent branch. You can branch from your Neon project's `main` branch or a previously created branch. Every Neon project is created with a default branch called `main`.  
 6. Select one of the following branching options:
     - **Head**: Creates a branch with data up to the current point in time (the default).
     - **Time**: Creates a branch with data up to the specified date and time.
