@@ -49,7 +49,7 @@ You can obtain a branch connection string from the **Connection Details** widget
 3. Copy the connection string. A connection string includes your user name, endpoint name, and database name. The endpoint name is the name of the compute instance associated with the branch.
 4. Obtain a password for your branch by navigating to **Settings** > **Users**. Select the user you want to connect with and click **Reset password**.
 ![Reset password](./images/reset_password.png)
-5. Add your password to the connection string as shown below, and connect with `psql`. 
+5. Add your password to the connection string as shown below, and connect with `psql`.
 
   ```bash
   psql postgres://casey:<password>@ep-patient-wildflower-627498.cloud.neon.tech/main
