@@ -27,7 +27,7 @@ For information about connecting to Neon using `psql`, see [Querying with psql](
 
 Creating a Neon project automatically creates a Neon compute instance. For the Technical Preview, a Neon compute instance is deployed with PostgreSQL 14.5 by default, 1 vCPU, and 256MB of RAM. Both PostgreSQL 14.5 and 15 are supported. You can select the PostgreSQL version during project creation. For more information about limits associated with the Technical Preview, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier).
 
-Each Neon project is created with a default database named `main`, which resides in the `public` schema.
+Each Neon project is created with a default database named `main`. This database and every new database created in Neon contains a `public` schema. As with any standalone PostgreSQL installation, tables and other objects are created in the `public` schema by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
 
 You can query a Neon project database from the Neon SQL Editor or a `psql` client. For instructions, see:
 
