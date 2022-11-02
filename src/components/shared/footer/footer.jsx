@@ -41,7 +41,7 @@ const Footer = ({ isDocPage }) => {
               <Heading className="relative leading-none" tag="h3" size="xs" theme="black">
                 {heading}
               </Heading>
-              <ul className="mt-5 flex grow flex-col space-y-4 pb-10">
+              <ul className="mt-5 flex grow flex-col space-y-4">
                 {links.map(({ to, text }, index) => (
                   <li className="flex" key={index}>
                     <Link
