@@ -71,7 +71,7 @@
 
     .code-tab {
       > pre {
-        @apply my-0 pt-8 pb-4;
+        @apply my-0 py-5;
       }
     }
 
