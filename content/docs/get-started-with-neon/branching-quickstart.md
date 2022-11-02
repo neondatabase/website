@@ -1,7 +1,7 @@
 ---
 title: Branching quickstart
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
 
 This topic describes how to get started with Neon's branching feature, which allows you to branch your data in the same way that you branch your code.
@@ -63,7 +63,7 @@ You can obtain a branch connection string from the **Connection Details** widget
 4. Add your password to the connection string as shown below, and connect with `psql`:
 
   ```bash
-  psql postgres://<user>:<password>@ep-snowy-butterfly-311850.cloud.neon.tech/main
+  psql postgres://casey:<password>@ep-snowy-butterfly-311850.cloud.neon.tech/main
   ```
 
 If you want to connect to a branch from an application, the **Connection Details** widget on the project **Dashboard** also provides connection details for various languages and frameworks.
