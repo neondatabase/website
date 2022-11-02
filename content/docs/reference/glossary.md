@@ -158,7 +158,7 @@ An encrypted access token that enables users to authenticate with Neon using the
 
 ## PostgreSQL users
 
-PostgreSQL users are created as a part of your Neon project and can be managed via the Neon web UI. A system user `web-access` is used for the SQL Editor in Neon UI and for link authentication for psql. This user cannot be removed or used for authenticating in other scenarios.
+PostgreSQL users are created as a part of your Neon project and can be managed via the Neon web UI. A system user `web-access` is used for the SQL Editor in Neon UI and for link authentication for `psql`. This user cannot be removed or used for authenticating in other scenarios.
 
 ### User
 
