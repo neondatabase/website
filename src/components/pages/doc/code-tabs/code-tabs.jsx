@@ -17,7 +17,7 @@ const CodeTabs = ({ children, labels }) => {
               'relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pt-3 pb-3.5 font-semibold leading-none transition-colors duration-200',
               index === currentIndex
                 ? 'border-secondary-8 text-secondary-8 after:opacity-100'
-                : 'border-transparent'
+                : 'border-transparent text-gray-3'
             )}
             tabIndex="0"
             role="button"
