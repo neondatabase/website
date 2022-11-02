@@ -1,12 +1,13 @@
 import clsx from 'clsx';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 
 import Footer from 'components/shared/footer';
 import Header from 'components/shared/header';
 import MobileMenu from 'components/shared/mobile-menu';
 import Topbar from 'components/shared/topbar';
+import { ThemeContext, useDarkModeInit } from 'hooks/use-dark-mode';
 
 const Layout = ({
   headerTheme,
@@ -18,8 +19,8 @@ const Layout = ({
   isDocPage,
 }) => {
   const headerRef = useRef(null);
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useDarkModeInit();
 
   const handleMobileMenuOutsideClick = () => {
     if (isMobileMenuOpen) setIsMobileMenuOpen(false);
@@ -29,8 +30,10 @@ const Layout = ({
     setIsMobileMenuOpen((isMobileMenuOpen) => !isMobileMenuOpen);
   };
 
+  const themeContextValue = useMemo(() => [isDarkMode, setIsDarkMode], [isDarkMode, setIsDarkMode]);
+
   return (
-    <>
+    <ThemeContext.Provider value={themeContextValue}>
       <Topbar />
       <div className="relative">
         <Header
@@ -51,7 +54,7 @@ const Layout = ({
           onOutsideClick={handleMobileMenuOutsideClick}
         />
       </div>
-    </>
+    </ThemeContext.Provider>
   );
 };
 

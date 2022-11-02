@@ -25,7 +25,7 @@ const Header = forwardRef(
     { theme, isMobileMenuOpen, onBurgerClick, isSignIn, isSticky, withBottomBorder, isDocPage },
     ref
   ) => {
-    const containerSize = isDocPage ? 'lg' : 'md';
+    const containerSize = isDocPage ? 'xl' : 'md';
     return (
       <header
         className={clsx(
