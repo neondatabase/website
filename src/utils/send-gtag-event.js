@@ -1,6 +1,6 @@
-export default function sendGtagEvent(event) {
+export default function sendGtagEvent(eventName) {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
-    event,
+    event: eventName,
   });
 }
