@@ -10,7 +10,7 @@ const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
     {previousLink && (
       <Link
         to={`${DOCS_BASE_PATH}${previousLink.slug}`}
-        className="group mr-auto flex w-1/2 items-center justify-between rounded border border-gray-6 p-4 xs:items-baseline xs:space-x-3 xs:leading-tight xs:before:hidden"
+        className="group mr-auto flex w-1/2 items-center justify-between rounded border border-gray-7 p-4 xs:items-baseline xs:space-x-3 xs:leading-tight xs:before:hidden"
       >
         <ArrowIcon className="shrink-0 rotate-180 text-gray-5 transition-colors duration-200 group-hover:text-secondary-8 xs:block" />
         <div className="flex flex-col items-end">
@@ -24,7 +24,7 @@ const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
     {nextLink && (
       <Link
         to={`${DOCS_BASE_PATH}${nextLink.slug}`}
-        className="group ml-auto flex w-1/2 items-center justify-between rounded border border-gray-6 p-4 text-right xs:items-baseline xs:space-x-3 xs:leading-tight xs:before:hidden"
+        className="group ml-auto flex w-1/2 items-center justify-between rounded border border-gray-7 p-4 text-right xs:items-baseline xs:space-x-3 xs:leading-tight xs:before:hidden"
       >
         <div className="flex flex-col items-start">
           <span className="text-sm font-normal text-gray-3">Next</span>
