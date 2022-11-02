@@ -10,7 +10,8 @@ _**Note**: Neon Branching capabilities are not yet publicly available. If you wo
 
 A branch is a clone of your data that you are free to play around with and modify without affecting the originating data.
 
-You can create a branch using the Neon Console or Neon API. In this topic, we'll cover how to create a branch using the Neon Console and how to connect to it. <!-- For Neon API branching instructions, see [Branching with the Neon API].-->
+You can create a branch using the Neon Console or Neon API. In this topic, we'll cover how to create a branch using the Neon Console and how to connect to it. 
+<!-- For Neon API branching instructions, see [Branching with the Neon API].-->
 
 Before you can create a branch, you must have a Neon project to branch from. If you do not have a Neon project, see [Setting up a project](./setting-up-a-project).
 
@@ -72,4 +73,4 @@ If you want to connect to a branch from an application, the **Connection Details
 
 ## Next steps
 
-For more information about branches, including how to view them, delete them, and use them in your development workflows, see [Branching](../../branching).
+For more information about branches, including how to view them, delete them, and use them in your development workflows, see Branching.
