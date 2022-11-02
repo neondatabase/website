@@ -6,12 +6,11 @@ isDraft: false
 
 This topic describes how to get started with Neon's branching feature, which allows you to branch your data in the same way that you branch your code.
 
-_**Note**: Neon Branching capabilities are not yet publicly available. If you would like to try this feature, reach out to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching for your account._
+_Neon Branching capabilities are not yet publicly available. If you would like to try this feature, reach out to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching for your account._
 
 A branch is a clone of your data that you are free to play around with and modify without affecting the originating data.
 
 You can create a branch using the Neon Console or Neon API. In this topic, we'll cover how to create a branch using the Neon Console and how to connect to it. 
-<!-- For Neon API branching instructions, see [Branching with the Neon API].-->
 
 Before you can create a branch, you must have a Neon project to branch from. If you do not have a Neon project, see [Setting up a project](./setting-up-a-project).
 
