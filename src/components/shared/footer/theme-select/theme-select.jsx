@@ -126,7 +126,7 @@ const ThemeSelect = ({ className }) => {
               <motion.li key={item} variants={itemVariants}>
                 <button
                   className={clsx(
-                    'flex w-full items-center py-[7px] pl-2.5 pr-3 transition-colors duration-200 hover:bg-gray-4',
+                    'flex w-full items-center py-[7px] pl-2.5 pr-3 transition-colors duration-200 hover:bg-gray-8',
                     index === 0 && 'rounded-t'
                   )}
                   type="button"
