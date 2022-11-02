@@ -22,6 +22,10 @@ See [Neon API](#neon-api).
 
 A unique identifier used to authenticate a user or a calling program to an API. An API key is required to authenticate to the Neon API. For more information, see [Using API keys](/docs/get-started-with-neon/using-api-keys/).
 
+### Backpressure
+
+A mechanism that manages the lag between the Pageserver and compute node or the Pageserver and Write-Ahead Log (WAL) service. If the WAL service runs ahead of the Pageserver, the time to serve page requests increases, which could result in increased query times or timeout errors. The backpressure mechanism manages lag using a stop-and-wait backend throttling strategy.
+
 <a id="branches-coming-soon/"></a>
 
 ### Branch
