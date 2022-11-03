@@ -3,7 +3,8 @@ import React from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import ArrowIcon from 'icons/arrow-right.inline.svg';
+
+import ArrowIcon from './images/arrow.inline.svg';
 
 const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
   <div className="mt-16 flex w-full space-x-10">

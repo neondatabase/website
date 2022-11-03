@@ -95,6 +95,8 @@ module.exports = async ({ graphql, actions }) => {
 
       const isReleaseNotes = slug === RELEASE_NOTES_SLUG;
 
+      const filePath = contentFilePath.split('/docs/').pop();
+
       const pagePath = generateDocPagePath(slug);
       const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar(sidebar));
 
@@ -105,7 +107,10 @@ module.exports = async ({ graphql, actions }) => {
       actions.createPage({
         path: pagePath,
         component: `${docTemplate}?__contentFilePath=${contentFilePath}`,
-        context,
+        context: {
+          fileOriginPath: encodeURI(`${process.env.GATSBY_DOCS_GITHUB_PATH}${filePath}`),
+          ...context,
+        },
       });
 
       if (isReleaseNotes) {
@@ -122,6 +127,7 @@ module.exports = async ({ graphql, actions }) => {
               limit: RELEASE_NOTES_PER_PAGE,
               skip: i * RELEASE_NOTES_PER_PAGE,
               draftFilter: DRAFT_FILTER,
+              fileOriginPath: encodeURI(process.env.GATSBY_RELEASE_NOTES_GITHUB_PATH),
               ...context,
             },
           });

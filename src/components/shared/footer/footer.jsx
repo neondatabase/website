@@ -20,12 +20,12 @@ const Footer = ({ isDocPage, withTopBorder }) => {
       )}
     >
       <Container className="flex justify-between py-10 xl:py-8" size={containerSize}>
-        <div className="flex flex-col items-start justify-between md:w-full md:flex-row md:items-end md:justify-between sm:flex-col sm:items-start">
-          <div className="mb-7 md:mb-0 sm:mb-6">
+        <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
+          <div className="mb-7 flex flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-center md:justify-between">
             <Link className="block" to="/">
               <span className="sr-only">Neon</span>
               <img
-                className="h-9 2xl:h-8"
+                className="h-9 sm:h-6 sm:w-auto"
                 src={logoBlack}
                 width={128}
                 height={36}
@@ -33,14 +33,14 @@ const Footer = ({ isDocPage, withTopBorder }) => {
                 aria-hidden
               />
             </Link>
-            {isDocPage && <ThemeSelect className="mt-10 md:mt-8" />}
+            {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />}
           </div>
           <div className="t-lg space-y-4 leading-none">
             <p>Made in SF and the World</p>
             <p>Neon 2022 Ⓒ All rights reserved</p>
           </div>
         </div>
-        <div className="grid w-[49%] grid-cols-3 gap-x-11 xl:w-[57%] xl:gap-x-16 md:hidden">
+        <div className="flex w-[40.5%] space-x-[123px] xl:w-[49.5%] xl:space-x-8 md:hidden">
           {MENUS.footer.map(({ heading, links }, index) => (
             <div className={clsx('flex flex-col xl:w-full')} key={index}>
               <Heading className="relative leading-none" tag="h3" size="xs" theme="black">

@@ -16,7 +16,7 @@ const AnchorHeading =
     return (
       <Tag id={id} className="group relative flex w-fit">
         <a
-          className="anchor absolute top-1/2 -right-16 flex h-full -translate-y-[calc(50%-0.15rem)] -translate-x-full items-center justify-center px-2.5 opacity-0 transition-opacity duration-200 hover:opacity-100 group-hover:opacity-100"
+          className="anchor absolute top-1/2 -right-16 flex h-full -translate-y-[calc(50%-0.15rem)] -translate-x-full items-center justify-center px-2.5 opacity-0 transition-opacity duration-200 hover:opacity-100 group-hover:opacity-100 sm:hidden"
           href={`#${id}`}
           tabIndex="-1"
           aria-hidden

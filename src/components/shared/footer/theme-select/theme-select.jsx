@@ -49,7 +49,7 @@ const ActiveThemeIcon = ({ theme }) => {
       className={clsx(
         'inline-flex h-4 w-4 rounded-full',
         theme === 'dark' && 'border border-black bg-black dark:border-[#D9D9D9] dark:bg-[#D9D9D9]',
-        theme === 'light' && 'border border-black bg-white dark:border-transparent'
+        theme === 'light' && 'border border-gray-6 bg-white dark:border-transparent'
       )}
     />
   );

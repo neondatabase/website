@@ -23,6 +23,7 @@ const CodeBlock = ({ className, children, showLineNumbers, ...otherProps }) => {
         language={language}
         useInlineStyles={false}
         showLineNumbers={showLineNumbers}
+        className="no-scrollbars"
       >
         {code}
       </SyntaxHighlighter>

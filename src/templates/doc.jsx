@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 import React, { useRef } from 'react';
 
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
+import DocFooter from 'components/pages/doc/doc-footer';
 import MobileNav from 'components/pages/doc/mobile-nav';
 import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
 import Sidebar from 'components/pages/doc/sidebar';
@@ -14,7 +15,6 @@ import ReleaseNoteList from 'components/pages/release-notes/release-note-list';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Layout from 'components/shared/layout';
-import Search from 'components/shared/search';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
 
@@ -42,15 +42,18 @@ const DocTemplate = (props) => {
       nextLink,
       pageCount,
       currentPageIndex,
+      fileOriginPath,
     },
   } = props;
   const contentRef = useRef(null);
 
   return (
     <Layout headerTheme="white" headerWithBottomBorder footerWithTopBorder isDocPage>
-      <div className="safe-paddings flex flex-1">
+      <div className="safe-paddings flex flex-1 flex-col lg:block">
+        <MobileNav className="hidden lg:block" sidebar={sidebar} currentSlug={currentSlug} />
+
         <Container
-          className="grid grid-cols-12 gap-x-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-10 md:pt-6"
+          className="grid flex-1 grid-cols-12 gap-x-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
           size="lg"
         >
           <Sidebar
@@ -58,12 +61,9 @@ const DocTemplate = (props) => {
             sidebar={sidebar}
             currentSlug={currentSlug}
           />
-          <Search className="hidden lg:block" />
-          <MobileNav className="mt-5 hidden lg:block" sidebar={sidebar} currentSlug={currentSlug} />
-
           <div
             className={clsx(
-              '-mx-10 pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-11 lg:ml-0 lg:pt-10',
+              '-mx-10 pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-11 lg:ml-0 lg:pt-0 md:pb-[70px] sm:pb-8',
               isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
             )}
           >
@@ -82,6 +82,7 @@ const DocTemplate = (props) => {
               </article>
             )}
             <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
+            <DocFooter fileOriginPath={fileOriginPath} />
           </div>
           {enableTableOfContents && (
             <TableOfContents
