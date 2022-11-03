@@ -1,5 +1,5 @@
 ---
-title: Branching quickstart
+title: Get started with Branching
 enableTableOfContents: true
 isDraft: false
 ---
@@ -10,11 +10,11 @@ _Neon Branching capabilities are not yet publicly available. If you would like t
 
 A branch is a clone of your data that you are free to play around with and modify without affecting the originating data.
 
-You can create a branch using the Neon Console or Neon API. In this topic, we'll cover how to create a branch using the Neon Console and how to connect to it.
+You can create a branch using the Neon Console or Neon API. In this topic, we'll cover how to create a branch, how to view branches, how to connect to a branch, and how to delete a branch using the Neon Console.
 
 Before you can create a branch, you must have a Neon project to branch from. If you do not have a Neon project, see [Setting up a project](./setting-up-a-project).
 
-## Creating a branch
+## Create a branch
 
 To create a branch:
 
@@ -32,7 +32,18 @@ To create a branch:
 
 You are directed to the **Branches** tab where you are shown the details for your new branch.
 
-## Connecting to a branch
+## View branches
+
+To view the branches in a Neon project:
+
+1. In the Neon Console, select a project from the project drop-down list.
+2. Select the **Branches** tab to view the branches for the project.
+3. Select a branch from the table to view details about the branch.
+
+The **Branches** widget on the project **Dashboard** also lists the branches in a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
+
+
+## Connect to a branch
 
 Now that you have created a branch, how do you connect to it? You can connect to a branch using a connection string, as you would when connecting to any Neon database. The following steps describe how to connect to a branch using `psql`.
 
@@ -54,6 +65,18 @@ You can obtain a branch connection string from the **Connection Details** widget
 
 If you want to connect to a branch from an application, the **Connection Details** widget on the project **Dashboard** also provides connection examples for various languages and frameworks.
 
+## Delete a branch
+
+Deleting a branch is a permanent action. Deleting a branch also deletes the branch endpoint, which is the compute instance associated with the branch.
+
+To delete a branch:
+
+1. In the Neon Console, select a project from the project drop-down list.
+2. Select the **Branches** tab.
+3. Select a branch from the table.
+3. Click **Delete**.
+4. On the **Delete the branch?** dialog, click **Delete**.
+
 ## Next steps
 
-For more information about branches, including how to view them, delete them, and use them in your development workflows, see [Branching](../../branching).
+For more information about branches and how to use them in your development workflows, see [Branching](../../conceptual-guides/branching).
