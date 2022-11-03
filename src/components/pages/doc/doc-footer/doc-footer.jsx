@@ -23,6 +23,8 @@ const DocFooter = ({ fileOriginPath }) => (
     <Link
       className="group inline-flex items-center space-x-2.5 text-sm leading-none transition-colors duration-200"
       to={fileOriginPath}
+      target="_blank"
+      rel="noopener noreferrer"
     >
       <GitHubIcon className="h-6 w-6" />
       <span className="group-hover:text-secondary-8">Edit this page</span>

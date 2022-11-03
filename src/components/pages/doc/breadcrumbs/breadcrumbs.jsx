@@ -1,40 +1,33 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo } from 'react';
+import React, { Fragment } from 'react';
 
-const convertPathToTitle = (path) => {
-  const crumbLabel = path
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+import Link from 'components/shared/link';
 
-  return crumbLabel;
-};
-
-const Breadcrumbs = ({ slug }) => {
-  const breadcrumbLabels = useMemo(() => {
-    const labels = slug
-      .split('/')
-      .slice(0, -1)
-      .map((path) => convertPathToTitle(path));
-    return labels;
-  }, [slug]);
-
-  return (
-    <div className="mb-5 flex space-x-1 text-sm text-gray-4">
-      <span>Documentation</span>
-
-      {breadcrumbLabels.map((title, index) => (
-        <Fragment key={index}>
-          <span>/</span>
-          <span>{title}</span>
-        </Fragment>
-      ))}
-    </div>
-  );
-};
+const Breadcrumbs = ({ breadcrumbs }) => (
+  <div className="mb-5 flex space-x-1 text-sm ">
+    {breadcrumbs.map(({ title, path }, index) => (
+      <Fragment key={index}>
+        <span className={clsx(index === 0 && 'hidden')}>/</span>
+        {path ? (
+          <Link className="text-gray-4 hover:text-black" to={path}>
+            {title}
+          </Link>
+        ) : (
+          <span className="text-gray-4">{title}</span>
+        )}
+      </Fragment>
+    ))}
+  </div>
+);
 
 Breadcrumbs.propTypes = {
-  slug: PropTypes.string.isRequired,
+  breadcrumbs: PropTypes.arrayOf(
+    PropTypes.exact({
+      title: PropTypes.string.isRequired,
+      path: PropTypes.string,
+    })
+  ).isRequired,
 };
 
 export default Breadcrumbs;

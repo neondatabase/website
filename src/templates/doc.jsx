@@ -43,6 +43,7 @@ const DocTemplate = (props) => {
       pageCount,
       currentPageIndex,
       fileOriginPath,
+      breadcrumbs,
     },
   } = props;
   const contentRef = useRef(null);
@@ -67,7 +68,7 @@ const DocTemplate = (props) => {
               isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
             )}
           >
-            <Breadcrumbs slug={currentSlug} />
+            {Boolean(breadcrumbs.length) && <Breadcrumbs breadcrumbs={breadcrumbs} />}
             {isReleaseNotes ? (
               <ReleaseNotes
                 title={title}

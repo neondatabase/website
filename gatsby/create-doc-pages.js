@@ -100,15 +100,47 @@ module.exports = async ({ graphql, actions }) => {
       const pagePath = generateDocPagePath(slug);
       const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar(sidebar));
 
+      const getBreadcrumbs = (sidebar, path) => {
+        const breadcrumbs = [];
+        sidebar.forEach((item) => {
+          if (item.items) {
+            item.items.forEach((subItem) => {
+              if (subItem.slug === path) {
+                breadcrumbs.push({ path: item.slug || null, title: item.title });
+              }
+
+              if (subItem.items) {
+                subItem.items.forEach((subSubItem) => {
+                  if (subSubItem.slug === path) {
+                    breadcrumbs.push({ path: item.slug || null, title: item.title });
+                    breadcrumbs.push({ path: subItem.slug || null, title: subItem.title });
+                  }
+                });
+              }
+            });
+          }
+        });
+        return breadcrumbs;
+      };
+      const breadcrumbs = getBreadcrumbs(sidebar, slug);
+
       createRedirects({ redirectFrom, actions, pagePath });
 
-      const context = { id, currentSlug: slug, isReleaseNotes, sidebar, previousLink, nextLink };
+      const context = {
+        id,
+        currentSlug: slug,
+        isReleaseNotes,
+        sidebar,
+        previousLink,
+        nextLink,
+        breadcrumbs,
+      };
 
       actions.createPage({
         path: pagePath,
         component: `${docTemplate}?__contentFilePath=${contentFilePath}`,
         context: {
-          fileOriginPath: encodeURI(`${process.env.GATSBY_DOCS_GITHUB_PATH}${filePath}`),
+          fileOriginPath: process.env.GATSBY_DOCS_GITHUB_PATH + filePath,
           ...context,
         },
       });
@@ -127,7 +159,7 @@ module.exports = async ({ graphql, actions }) => {
               limit: RELEASE_NOTES_PER_PAGE,
               skip: i * RELEASE_NOTES_PER_PAGE,
               draftFilter: DRAFT_FILTER,
-              fileOriginPath: encodeURI(process.env.GATSBY_RELEASE_NOTES_GITHUB_PATH),
+              fileOriginPath: process.env.GATSBY_RELEASE_NOTES_GITHUB_PATH,
               ...context,
             },
           });
