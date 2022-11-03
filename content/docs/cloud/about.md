@@ -12,6 +12,15 @@ Neon automatically and transparently scales up compute on demand, in response to
 
 TODO: remove testing data before merging
 
+```bash
+pg_dump <connection-string> | psql <connection-string>
+```
+
+An `export` command that you can use to export your project password to a `PGPASSWORD` environment variable.
+
+- Navigate to [https://console.neon.tech](https://console.neon.tech).
+- If you do not have an invite code to access the Neon Technical Preview, click Request early access.
+
 1. Navigate to [https://console.neon.tech](https://console.neon.tech).
 2. If you do not have an invite code to access the Neon Technical Preview, click Request early access.
 3. In your browser, navigate to the provided link where you are asked to select an existing project or create a new project.

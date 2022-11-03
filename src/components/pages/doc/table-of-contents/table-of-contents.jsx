@@ -38,7 +38,7 @@ const TableOfContents = ({ className, contentRef }) => {
   return (
     <div className={clsx('h-full xl:hidden', className)}>
       <nav className="sticky top-10 bottom-10 max-h-[calc(100vh-40px-40px)] overflow-y-auto overflow-x-hidden">
-        <h3 className="flex items-baseline space-x-2 py-2 text-sm font-semibold leading-tight">
+        <h3 className="flex items-center space-x-2 py-2 text-sm font-semibold leading-tight">
           <TOCIcon className="h-3.5 w-3.5" />
           <span>On this page</span>
         </h3>

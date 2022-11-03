@@ -36,7 +36,7 @@ const Layout = ({
   return (
     <ThemeContext.Provider value={themeContextValue}>
       <Topbar />
-      <div className="relative">
+      <div className="relative flex min-h-screen flex-col">
         <Header
           withBottomBorder={headerWithBottomBorder}
           theme={headerTheme}
@@ -47,7 +47,9 @@ const Layout = ({
           isDocPage={isDocPage}
           onBurgerClick={handleHeaderBurgerClick}
         />
-        <main className={clsx(withOverflowHidden && 'overflow-hidden')}>{children}</main>
+        <main className={clsx(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col')}>
+          {children}
+        </main>
         <Footer isDocPage={isDocPage} withTopBorder={footerWithTopBorder} />
         <MobileMenu
           isOpen={isMobileMenuOpen}

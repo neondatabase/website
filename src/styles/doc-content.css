@@ -1,6 +1,15 @@
 @layer components {
+  .admonition-text {
+    p:first-child {
+      @apply mt-0;
+    }
+
+    p:last-child {
+      @apply mb-0;
+    }
+  }
   .prose-doc {
-    @apply max-w-none text-black;
+    @apply max-w-none leading-normal text-black;
 
     h2,
     h3,
@@ -24,10 +33,10 @@
 
     ul,
     ol {
-      @apply list-none pl-6;
+      @apply my-3 list-none;
 
       > li {
-        @apply relative pl-0;
+        @apply relative my-1.5 pl-0;
 
         &::before {
           @apply absolute top-4 -translate-y-1/2;
@@ -40,7 +49,7 @@
     }
 
     ul {
-      @apply md:pl-4;
+      @apply pl-[34px] md:pl-4;
 
       > li {
         &::before {
@@ -50,10 +59,14 @@
     }
 
     ol {
-      @apply list-decimal pl-10 md:pl-4;
+      @apply list-decimal pl-[38px] md:pl-5;
 
-      li::marker {
-        @apply text-black;
+      li {
+        @apply pl-1.5;
+
+        &::marker {
+          @apply pl-1 text-black;
+        }
       }
 
       ol {
@@ -88,7 +101,7 @@
     }
 
     pre {
-      @apply !bg-gray-9;
+      @apply my-5 !bg-gray-9;
 
       code {
         text-shadow: unset;
@@ -111,14 +124,8 @@
       @apply mx-auto rounded-md;
     }
 
-    .wp-block-embed {
-      .wp-block-embed__wrapper {
-        @apply relative h-0 overflow-hidden pb-[56.25%];
-
-        iframe {
-          @apply absolute top-0 left-0 h-full w-full;
-        }
-      }
+    .gatsby-resp-image-wrapper {
+      @apply my-5;
     }
 
     blockquote {

@@ -21,14 +21,14 @@ const borderClassNames = {
 const Admonition = ({ children, type, title }) => (
   <div
     className={clsx(
-      'not-prose mt-8 flex flex-col rounded-[1px] border-l-4 bg-gray-9 px-5 py-4',
+      'not-prose mt-5 flex flex-col rounded-[1px] border-l-4 bg-gray-9 px-5 py-4 leading-normal',
       borderClassNames[type]
     )}
   >
     <span className={clsx('text-xs font-bold uppercase', titleClassNames[type])}>
       {title || type}
     </span>
-    <div className="mt-1.5 text-base leading-normal">{children}</div>
+    <div className="admonition-text mt-1.5 text-base">{children}</div>
   </div>
 );
 

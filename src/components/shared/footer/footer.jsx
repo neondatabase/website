@@ -14,7 +14,10 @@ const Footer = ({ isDocPage, withTopBorder }) => {
   const containerSize = isDocPage ? 'xl' : 'md';
   return (
     <footer
-      className={clsx('safe-paddings overflow-hidden', withTopBorder && 'border-t border-gray-7')}
+      className={clsx(
+        'safe-paddings mt-auto overflow-hidden',
+        withTopBorder && 'border-t border-gray-7'
+      )}
     >
       <Container className="flex justify-between py-10 xl:py-8" size={containerSize}>
         <div className="flex flex-col items-start justify-between md:w-full md:flex-row md:items-end md:justify-between sm:flex-col sm:items-start">
@@ -30,7 +33,7 @@ const Footer = ({ isDocPage, withTopBorder }) => {
                 aria-hidden
               />
             </Link>
-            <ThemeSelect className="mt-10 md:mt-8" />
+            {isDocPage && <ThemeSelect className="mt-10 md:mt-8" />}
           </div>
           <div className="t-lg space-y-4 leading-none">
             <p>Made in SF and the World</p>

@@ -29,14 +29,14 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
         </Link>
       ) : (
         <button
-          className="flex w-full items-center justify-between py-2 text-left text-sm text-gray-3 transition-colors duration-200 hover:text-black"
+          className="group flex w-full items-center justify-between py-2 text-left text-sm text-gray-3 transition-colors duration-200 hover:text-black"
           type="button"
           onClick={handleClick}
         >
           <span className="leading-snug">{title}</span>
           <ChevronRight
             className={clsx(
-              'mr-2 shrink-0 text-gray-5 transition-transform duration-150',
+              'mr-2 shrink-0 text-gray-5 transition-[transform,color] duration-200 group-hover:text-black',
               isOpen ? 'rotate-90' : 'rotate-0'
             )}
           />

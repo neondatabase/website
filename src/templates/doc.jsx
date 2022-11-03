@@ -48,7 +48,7 @@ const DocTemplate = (props) => {
 
   return (
     <Layout headerTheme="white" headerWithBottomBorder footerWithTopBorder isDocPage>
-      <div className="safe-paddings">
+      <div className="safe-paddings flex flex-1">
         <Container
           className="grid grid-cols-12 gap-x-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-10 md:pt-6"
           size="lg"

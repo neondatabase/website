@@ -8,7 +8,7 @@ const CodeTabs = ({ children, labels }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
-    <div className="my-10 max-w-full overflow-hidden rounded-md bg-gray-9">
+    <div className="my-5 max-w-full overflow-hidden rounded-md bg-gray-9">
       <div className="no-scrollbars bg-grey-15 relative flex w-full flex-nowrap overflow-auto after:absolute after:bottom-0 after:h-px after:w-full after:bg-gray-7">
         {labels.map((label, index) => (
           <div
