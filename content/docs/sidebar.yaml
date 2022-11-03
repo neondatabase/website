@@ -6,6 +6,8 @@
       slug: conceptual-guides/architecture-overview
     - title: Compute lifecycle
       slug: conceptual-guides/compute-lifecycle
+    - title: Branching
+      slug: conceptual-guides/branching
     - title: Neon roadmap
       slug: reference/roadmap
     - title: Technical Preview Free Tier
@@ -26,8 +28,6 @@
       slug: how-to-guides/connectivity-issues
     - title: Connection pooling
       slug: get-started-with-neon/connection-pooling
-- title: Branching
-  slug: conceptual-guides/branching
 - title: Integrations
   items:
     - title: Hasura
