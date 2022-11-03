@@ -10,7 +10,7 @@ _Neon Branching capabilities are not yet publicly available. If you would like t
 
 A branch is a clone of your data that you are free to play around with and modify without affecting the originating data.
 
-You can create a branch using the Neon Console or Neon API. In this topic, we'll cover how to create a branch using the Neon Console and how to connect to it. 
+You can create a branch using the Neon Console or Neon API. In this topic, we'll cover how to create a branch using the Neon Console and how to connect to it.
 
 Before you can create a branch, you must have a Neon project to branch from. If you do not have a Neon project, see [Setting up a project](./setting-up-a-project).
 
@@ -36,9 +36,9 @@ You are directed to the **Branches** tab where you are shown the details for you
 
 ## Connecting to a branch
 
-Now that you have created a branch, how do you connect to it? You can connect to a branch using a connection string, as you would connect to any Neon database. The following steps describe how to connect to a branch using `psql`.
+Now that you have created a branch, how do you connect to it? You can connect to a branch using a connection string, as you would when connecting to any Neon database. The following steps describe how to connect to a branch using `psql`.
 
-_**Note:**_ You can also query a branch from the Neo Console's SQL Editor. For instructions, see [Query from psql](/query-with-neon-sql-editor).
+_**Note:**_ You can also query a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/query-with-neon-sql-editor).
 
 You can obtain a branch connection string from the **Connection Details** widget on the project dashboard.
 
@@ -55,7 +55,7 @@ You can obtain a branch connection string from the **Connection Details** widget
   psql postgres://casey:<password>@ep-patient-wildflower-627498.cloud.neon.tech/main
   ```
 
-If you want to connect to a branch from an application, the **Connection Details** widget on the project **Dashboard** also provides connection details for various languages and frameworks.
+If you want to connect to a branch from an application, the **Connection Details** widget on the project **Dashboard** also provides connection examples for various languages and frameworks.
 
 ## Next steps
 
