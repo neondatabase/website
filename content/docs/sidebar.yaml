@@ -22,8 +22,8 @@
       slug: get-started-with-neon/query-with-neon-sql-editor
     - title: Query with psql
       slug: get-started-with-neon/query-with-psql-editor
-    - title: Branching quickstart
-      slug: get-started-with-neon/branching-quickstart
+    - title: Get started with Branching
+      slug: get-started-with-neon/get-started-branching
     - title: Using API keys
       slug: get-started-with-neon/using-api-keys
     - title: Connecting with old clients

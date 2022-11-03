@@ -6,11 +6,12 @@ isDraft: false
 
 This topic describes how to get started with Neon's branching feature, which allows you to branch your data in the same way that you branch your code.
 
+A branch is a clone of your data that you are free to play around with and modify without affecting the originating data.
+For more information about what branches are and how to use them in your development workflows, see [Branching](../../conceptual-guides/branching).
+
 _Neon Branching capabilities are not yet publicly available. If you would like to try this feature, reach out to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching for your account._
 
-A branch is a clone of your data that you are free to play around with and modify without affecting the originating data.
-
-You can create a branch using the Neon Console or Neon API. In this topic, we'll cover how to create a branch, how to view branches, how to connect to a branch, and how to delete a branch using the Neon Console.
+You can create and manage branches using the Neon Console or Neon API. In this topic, we cover branching using the Neon Console.
 
 Before you can create a branch, you must have a Neon project to branch from. If you do not have a Neon project, see [Setting up a project](./setting-up-a-project).
 
@@ -41,7 +42,6 @@ To view the branches in a Neon project:
 3. Select a branch from the table to view details about the branch.
 
 The **Branches** widget on the project **Dashboard** also lists the branches in a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
-
 
 ## Connect to a branch
 
@@ -76,7 +76,3 @@ To delete a branch:
 3. Select a branch from the table.
 3. Click **Delete**.
 4. On the **Delete the branch?** dialog, click **Delete**.
-
-## Next steps
-
-For more information about branches and how to use them in your development workflows, see [Branching](../../conceptual-guides/branching).
