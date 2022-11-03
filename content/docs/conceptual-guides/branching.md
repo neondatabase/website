@@ -13,9 +13,9 @@ _Neon Branching capabilities are not yet publicly available. If you would like t
 
 ## What is a branch?
 
-A branch is a copy-on-write clone of your database. You can create a branch from a current or past state of your data. For example, you can create a branch that includes all data up to the current point in time or up to a past point in time or [Log Sequence Number (LSN)](../../reference/glossary#lsn).
+A branch is a copy-on-write clone of your data. You can create a branch from a current or past state. For example, you can create a branch that includes all data up to the current point in time or up to a past point in time or [Log Sequence Number (LSN)](../../reference/glossary#lsn).
 
-A branch is isolated from the originating data, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to a branch are independent of the originating data. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are saved as an independent delta.
+A branch is isolated from its originating data, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to a branch are independent of the originating data. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are saved as an independent delta.
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means that you can create a branch at any time without impacting the performance of your production system.
 
@@ -23,7 +23,7 @@ An endpoint is created for each branch, which is the compute instance associated
 
 ## Branching workflows
 
-You can use Neon's branching feature in variety development workflows, a few of which are discussed below:
+You can use Neon's branching feature in variety development workflows, a few of which are discussed below.
 
 ### Development
 
@@ -31,13 +31,13 @@ You can create a branch of your production database that developers are free to 
 
 ### Testing
 
-Branching enables testers to use the most recent production data. Testers can create new database branches for testing schema changes, validating new queries, or testing potentially destructive queries before deploying them to production. A branch is isolated from its parent branch but has all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a database for testing. Testers can also run tests on separate branches in parallel, with each branch having dedicated compute resources.
+Branching enables testers to use the most recent production data. Testers can create branches for testing schema changes, validating new queries, or testing potentially destructive queries before deploying them into production. A branch is isolated from its parent branch but has all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a database. Tests can also run on separate branches in parallel, with each branch having dedicated compute resources.
 
-Another testing scenario enabled by branching is creating a branch from a past point in time to track down a failure or data quality issue. Neon permits creating a branch that includes data up to a user-specified time or Log Sequence Number (LSN). For example, you can create and dispose of as many point-in-time database branches as necessary to determine when an issue first appeared.
+Another testing scenario enabled by branching is tracking down corruption or data quality issue. For example, you can create and dispose of as many point-in-time database branches as necessary to determine when the corruption or data quality issue first appeared.
 
 ### Staging
 
-With Neon's branching capabilities, you can create a staging database by branching your production database. Using the Neon API, you can automate the creation of a database branch for every pull request in your CI/CD pipeline.
+With Neon's branching capabilities, you can create a staging database by branching your production database. Using the Neon API, you can automate branch creation for every pull request in your CI/CD pipeline.
 
 ### Data recovery
 
