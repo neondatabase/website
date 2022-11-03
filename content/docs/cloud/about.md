@@ -43,6 +43,15 @@ The branch creation process does not increase load on the originating project. Y
 The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
 </Admonition>
 
+| Application                                                                        | SNI support | Comment                                                                                                                          |
+| ---------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| [TablePlus](https://tableplus.com)                                                 | ✅          | SNI support on macOS since build 436, on Windows since build 202, TBD for Linux. For older versions, Workaround B is applicable. |
+| [Postico](https://eggerapps.at/postico/)                                           | ✅          | SNI support since v1.5.21. For older versions, Workaround B is applicable.                                                       |
+| [PopSQL](https://popsql.com/)                                                      | ❌          | No SNI support. Workaround D helps.                                                                                              |
+| [Grafana pg source](https://grafana.com/docs/grafana/latest/datasources/postgres/) | ✅ / ❌     | Workaround C. SNI works if sslmode=verify-full as with other golang libraries                                                    |
+| [PgAdmin 4](https://www.pgadmin.org/)                                              | ✅          |                                                                                                                                  |
+| [DataGrip](https://www.jetbrains.com/datagrip/)                                    | ✅          |                                                                                                                                  |
+
 <CodeTabs labels={["React", "Python", "PHP", "Java"]}>
 
 ```jsx

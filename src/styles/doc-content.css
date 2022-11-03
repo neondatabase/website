@@ -79,18 +79,26 @@
     }
 
     table {
-      @apply w-full border-hidden md:min-w-[500px];
-
-      thead th {
-        vertical-align: top;
-      }
+      @apply my-10 w-full leading-normal md:min-w-[500px];
 
       th {
-        @apply border border-gray-6 bg-secondary-6 bg-opacity-30 p-3.5 md:px-2;
+        @apply p-2.5 pt-0 align-top;
       }
 
       td {
-        @apply border border-gray-6 p-3.5 md:px-2;
+        @apply p-2.5;
+      }
+
+      thead {
+        tr {
+          @apply border-b border-gray-5;
+        }
+      }
+
+      tbody {
+        tr {
+          @apply border-b border-gray-7 last:border-gray-5;
+        }
       }
     }
 
