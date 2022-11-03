@@ -13,13 +13,13 @@ _Neon Branching capabilities are not yet publicly available. If you would like t
 
 ### What is a branch?
 
-A branch is a copy-on-write clone of your database. You can create a branch from a current or past state of your data. For example, you can create a branch that includes all data up to the current point in time or up to a past point in time.
+A branch is a copy-on-write clone of your database. You can create a branch from a current or past state of your data. For example, you can create a branch that includes all data up to the current point in time or up to a past point in time or [Log Sequence Number (LSN)](../../reference/glossary#lsn).
 
-A branch is isolated from the originating data, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to a branch are independent of the originating data and vice versa. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are saved as an independent delta.
+A branch is isolated from the originating data, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to a branch are independent of the originating data. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are saved as an independent delta.
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means that you can create a branch at any time without impacting the performance of your production system.
 
-An endpoint is created for each branch, which is the compute instance associated with the branch. Branch endpoints are read-write. When you connect to a branch from a client or application, you are connecting to the branch endpoint.
+An endpoint is created for each branch, which is the compute instance associated with the branch. A branch endpoint is read-write. To connect to a branch from a client or application, you must connect to the branch endpoint. For more information, see [Connect to a branch](#connect-to-a-branch).
 
 ## Create a branch
 
@@ -39,18 +39,18 @@ To create a branch:
     - **LSN**: Creates a branch with data up to the specified Log Sequence Number (LSN).
 6. Click **Create Branch**.
 
-You are directed to the **Branches** tab where you are shown the details for your new branch.
+You are directed to the **Branches** tab where you are shown the details for your new branch, including the endpoint for the branch.
 
 ## View branches
 
-To view the branches associated with a Neon project:
+To view the branches in a Neon project:
 
 1. In the Neon Console, select a project from the project drop-down list.
 2. Select the **Branches** tab to view the branches for the project.
 ![Branches page](./images/view_branches.png)
 3. Select a branch from the table to view details about the branch.
 
-The **Branches** widget on the project **Dashboard** also lists the branches associated with a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
+The **Branches** widget on the project **Dashboard** also lists the branches in a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
 
 ## Delete a branch
 
@@ -70,13 +70,11 @@ This topic describes how to connect to a branch using `psql`.
 
 _**Note:**_ You can also query branch from the Neon SQL Editor. See [Query with Neon's SQL Editor](../../get-started-with-neon/query-with-neon-sql-editor).
 
-You can obtain a branch connection string from the **Connection Details** widget on the project dashboard.
-
 1. In the Neon Console, select a project from the project drop-down list.
-3. On the project **Dashboard**, under **Connection Details**, select the branch, database, and user you want to connect with.
-4. Copy the connection string. A connection string includes your user name, the endpoint name, and database name. The endpoint is the compute instance associated with the branch.
-5. Obtain a password for your branch by navigating to **Settings** > **Users**. Select the user you want to connect with and click **Reset password**.
-6. Add your password to the connection string as shown and connect with `psql`:
+2. On the project **Dashboard**, under **Connection Details**, select the branch, database, and user you want to connect with.
+3. Copy the connection string. A connection string includes your user name, the endpoint name, and database name. The endpoint is the compute instance associated with the branch.
+4. Obtain a password for your branch by navigating to **Settings** > **Users**. Select the user you want to connect with and click **Reset password**.
+5. Add your password to the connection string as shown and connect with `psql`:
 
   ```bash
   psql postgres://<user>:<password>@ep-snowy-butterfly-311850.cloud.stage.neon.tech/main
@@ -90,13 +88,13 @@ You can use Neon's branching feature in variety development workflows, a few of 
 
 ### Development
 
-You can create a branch of your production database that developers are free to play with and modify. A branch has access to all of the data that existed at the time the branch was created, eliminating the setup time required to deploy and maintain a development database. Branching is so easy and cost-effective that you can create a branch for each developer to work on. For example, you can create branches from a primary development branch to assign tasks to be worked on in parallel.
+You can create a branch of your production database that developers are free to play with and modify. You can quickly create a branch with all of the data that existed in the parent branch, eliminating the setup time required to deploy and maintain a development database. Branching is so easy and cost-effective that you can create a branch for each developer. For example, you can create branches from a primary development branch to assign tasks to be worked on in parallel.
 
 ### Testing
 
 Branching enables testers to use the most recent production data. Testers can create new database branches for testing schema changes, validating new queries, or testing potentially destructive queries before deploying them to production. A branch is isolated from its parent branch but has all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a database for testing. Testers can also run tests on separate branches in parallel, with each branch having dedicated compute resources.
 
-Another testing scenario enabled by branching is creating a branch from a past point in time to track down a failure or data quality issue. Neon permits creating a branch that includes data up to a user-specified time or Log Sequence Number (LSN). For example, you can create and dispose of as many point-in-time database branches as necessary to determine when an issue first occurs.
+Another testing scenario enabled by branching is creating a branch from a past point in time to track down a failure or data quality issue. Neon permits creating a branch that includes data up to a user-specified time or Log Sequence Number (LSN). For example, you can create and dispose of as many point-in-time database branches as necessary to determine when an issue first appeared.
 
 ### Staging
 
@@ -104,7 +102,7 @@ With Neon's branching capabilities, you can create a staging database by branchi
 
 ### Data recovery
 
-If you lose data due to an unintended deletion or some other event, you can create a branch with data as it existed before the event occurred allowing you to recover the lost data.
+If you lose data due to an unintended deletion or some other event, you can create a branch with data as it existed before the event occurred, allowing you to recover the lost data.
 
 ### Analytics
 
