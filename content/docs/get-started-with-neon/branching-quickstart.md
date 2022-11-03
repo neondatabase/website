@@ -19,9 +19,7 @@ Before you can create a branch, you must have a Neon project to branch from. If 
 To create a branch:
 
 1. On the Neon Console, select the Neon project that you want to branch from.
-![Select project drop-down](./images/select_project.png)
 2. Select the **Branches** tab.
-![Branches tab](./images/branches_tab.png)
 3. Click **New Branch** to open the branch creation dialog.
 ![Create branch dialog](./images/create_branch.png)
 4. Enter a name for the branch.
@@ -43,7 +41,6 @@ _**Note:**_ You can also query a branch from the Neon SQL Editor. For instructio
 You can obtain a branch connection string from the **Connection Details** widget on the project dashboard.
 
 1. On the Neon Console, select a project from the project drop-down list at the top of the console.
-![Select project drop-down](./images/select_project.png)
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the user you want to connect with.
 ![Connection details widget](./images/connection_details.png)
 3. Copy the connection string. A connection string includes your user name, endpoint name, and database name. The endpoint name is the name of the compute instance associated with the branch.
@@ -59,4 +56,4 @@ If you want to connect to a branch from an application, the **Connection Details
 
 ## Next steps
 
-For more information about branches, including how to view them, delete them, and use them in your development workflows, see Branching.
+For more information about branches, including how to view them, delete them, and use them in your development workflows, see [Branching](../../branching).
