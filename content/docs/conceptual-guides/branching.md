@@ -50,3 +50,7 @@ You can run costly, long-running queries on an isolated branch of your productio
 ### Machine Learning
 
 You can create point-in-time branches to ensure repeatability when training machine learning models.
+
+## Get started with branching
+
+To start using branches, refer to the instructions in [Get started with branching](../../get-started-with-neon/get-started-branching).
