@@ -1,6 +1,7 @@
 ---
 title: Projects
 enableTableOfContents: true
+isDraft: true
 ---
 
 A Neon account can have multiple projects.
