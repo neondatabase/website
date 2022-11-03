@@ -5,20 +5,20 @@ enableTableOfContents: true
 
 A Neon account can have multiple projects.
 
-Each Neon project is created with a dedicated Neon compute instance. During the Technical Preview, a Neon compute instance is deployed with PostgreSQL 14.5 by default, 1 vCPU, and 256MB of RAM. If preferred, you can select PostgreSQL 15 during project creation. For more information about limits associated with the Technical Preview, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier).
+Each Neon project is created with a dedicated Neon compute instance. During the Technical Preview, a Neon compute instance is deployed with PostgreSQL 14.5, 1 vCPU, and 256MB of RAM. If preferred, you can select PostgreSQL 15 during project creation. For more information about limits associated with Neon's Technical Preview, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier).
 
 A project is the top-level object in the Neon object hierarchy.
 
-Each Neon project is created with a branch called `main`, which is the project's root branch. A project may contain additional branches created from the root branch or from a previously created branch. For information about Neon's branching feature, see {Branching](../../conceptual-guides/branching).
+Each Neon project is created with a branch called `main`, which is the project's root branch. A project may contain additional branches created from the root branch or from a previously created branch. For information about Neon's branching feature, see [Branching](../../conceptual-guides/branching).
 
-A project's root branch is created with a default database, also called `main`. This database and every database created in Neon contains a `public` schema. As with any standalone PostgreSQL installation, tables and other objects are created in the `public` schema by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
+A project's root branch is created with a default database, also called `main`. This database and all databases created in Neon contain a `public` schema. Tables and other objects are created in the `public` schema by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
 
-A project is created with two database users by default.
+A project is created with two database users by default:
 
 - A user that takes its name from your Neon account (the Google, GitHub, or partner account that you signed up with).
 - A `web_access` user, which is used for passwordless authentication and by the Neon SQL Editor. The `web_access` user cannot be modified or deleted.
 
-Additional database users can be added to the root branch or a child branch.
+Additional database users can be added to a project's root branch or child branches.
 
 ## Create a project
 
@@ -42,7 +42,7 @@ To delete a project:
 4. Click **Delete project.**
 5. On the **Do you want to delete this project?** dialog, click **Delete**.
 
-## Check project data size
+## Check the project data size
 
 Neon stores data in its own internal format. During the technical preview, a Neon project has a 10GB data size limit, which applies to the logical size of a Neon project. The logical size is the sum of all database sizes in the project.
 
