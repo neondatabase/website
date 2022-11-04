@@ -136,6 +136,10 @@ A Neon component which functions as a multitenant service that accepts and handl
 
 A Neon feature that allows users to connect to a Neon project with a single `psql` command. See [Query with psql](/docs/get-started-with-neon/query-with-psql-editor/).
 
+### Region
+
+The geographic location where Neon project resource are located. Neon supports creating projects in several Amazon Web Services (AWS) regions. For information about regions supported by Neon, see [Regions](../../conceptual-guides/regions).
+
 ### Safekeeper
 
 A Neon architecture component responsible for the durability of database changes. PostgreSQL streams WAL records to Safekeepers. A quorum algorithm based on Paxos ensures that when a transaction is committed, it is stored on a majority of Safekeepers and can be recovered if a node is lost. Safekeepers are deployed in different availability zones to ensure high availability and durability.
