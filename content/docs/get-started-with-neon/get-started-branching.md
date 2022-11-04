@@ -49,7 +49,7 @@ Now that you have created a branch, how do you connect to it? You can connect to
 
 _**Note:**_ You can also query a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../query-with-neon-sql-editor).
 
-1. On the Neon Console, select a project from the project drop-down list at the top of the console.
+1. On the Neon Console, select a project from the project list in the console.
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the user you want to connect with.
 ![Connection details widget](./images/connection_details.png)
 3. Copy the connection string. A connection string includes your user name, endpoint name, and database name. The endpoint name is the name of the compute instance associated with the branch.
