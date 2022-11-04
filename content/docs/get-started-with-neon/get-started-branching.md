@@ -52,7 +52,7 @@ _**Note:**_ You can also query a branch from the Neon SQL Editor. For instructio
 1. On the Neon Console, select a project from the project list in the console.
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the user you want to connect with.
 ![Connection details widget](./images/connection_details.png)
-3. Copy the connection string. A connection string includes your user name, endpoint name, and database name. The endpoint name is the name of the compute instance associated with the branch.
+3. Copy the connection string. A connection string includes your user name, endpoint address, and database name. The endpoint is the compute instance associated with the branch.
 5. Add your password to the connection string as shown below, and connect with `psql`. You can connect using the same user and password that you use to connect to the parent branch.
 
   ```bash
