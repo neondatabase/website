@@ -19,7 +19,7 @@ A branch is isolated from its originating data, so you are free to play around w
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means that you can create a branch at any time without impacting the performance of your production system.
 
-An endpoint is created for each branch, which is the compute instance associated with the branch. A branch endpoint is read-write. To connect to a branch from a client or application, you must connect to the branch endpoint.
+An endpoint is created for each branch, which is the compute instance associated with the branch. A branch endpoint is read-write. To connect to a branch from a client or application, you must connect to the branch endpoint. For more information, see [Getting started with branches](../../getting-started-with-neon/get-started-branching).
 
 ## Branching workflows
 
