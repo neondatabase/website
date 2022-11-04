@@ -33,7 +33,7 @@ You can create a branch of your production database that developers are free to 
 
 Branching enables testers to use the most recent production data. Testers can create branches for testing schema changes, validating new queries, or testing potentially destructive queries before deploying them into production. A branch is isolated from its parent branch but has all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a database. Tests can also run on separate branches in parallel, with each branch having dedicated compute resources.
 
-Another testing scenario enabled by branching is tracking down corruption or data quality issue. For example, you can create and dispose of as many point-in-time database branches as necessary to determine when the corruption or data quality issue first appeared.
+Another testing scenario enabled by branching is tracking down corruption or data quality issue. For example, you can create and dispose of multiple point-in-time database branches to determine when the corruption or data quality issue first appeared.
 
 ### Staging
 
