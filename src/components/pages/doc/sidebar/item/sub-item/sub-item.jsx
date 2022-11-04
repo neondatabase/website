@@ -18,7 +18,12 @@ const SubItem = ({ title, slug, items, isParentOpen, currentSlug }) => {
   return (
     <>
       <Tag
-        className="group flex w-full justify-between pt-2.5 pb-2 text-left text-gray-3 transition-colors duration-200 hover:text-black"
+        className={clsx(
+          'group flex w-full justify-between pt-2.5 pb-2 text-left text-gray-3 transition-colors duration-200 hover:text-black',
+          {
+            'font-semibold !text-black': currentSlug === slug,
+          }
+        )}
         type="button"
         to={slug ? `${DOCS_BASE_PATH}${slug}` : undefined}
         tabIndex={!isParentOpen ? '-1' : undefined}
@@ -28,6 +33,9 @@ const SubItem = ({ title, slug, items, isParentOpen, currentSlug }) => {
         <ChevronRight
           className={clsx(
             'mr-2 mt-1 shrink-0 text-gray-5 transition-[transform,color] duration-200 group-hover:text-black',
+            {
+              '!text-black': currentSlug === slug,
+            },
             isOpen ? 'rotate-90' : 'rotate-0'
           )}
         />
