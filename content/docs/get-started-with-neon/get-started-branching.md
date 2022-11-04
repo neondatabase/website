@@ -67,7 +67,7 @@ Deleting a branch is a permanent action. Deleting a branch also deletes the bran
 
 To delete a branch:
 
-1. In the Neon Console, select a project from the project drop-down list.
+1. In the Neon Console, select a project from the project list.
 2. Select the **Branches** tab.
 3. Select a branch from the table.
 3. Click **Delete**.
