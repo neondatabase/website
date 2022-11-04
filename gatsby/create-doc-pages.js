@@ -110,9 +110,11 @@ module.exports = async ({ graphql, actions }) => {
               }
 
               if (subItem.items) {
+                if (breadcrumbs.length === 0) {
+                  breadcrumbs.push({ path: item.slug || null, title: item.title });
+                }
                 subItem.items.forEach((subSubItem) => {
                   if (subSubItem.slug === path) {
-                    breadcrumbs.push({ path: item.slug || null, title: item.title });
                     breadcrumbs.push({ path: subItem.slug || null, title: subItem.title });
                   }
                 });
@@ -123,6 +125,8 @@ module.exports = async ({ graphql, actions }) => {
         return breadcrumbs;
       };
       const breadcrumbs = getBreadcrumbs(sidebar, slug);
+
+      console.log(breadcrumbs);
 
       createRedirects({ redirectFrom, actions, pagePath });
 
