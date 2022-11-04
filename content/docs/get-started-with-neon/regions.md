@@ -1,7 +1,7 @@
 ---
 title: Regions
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
 Neon supports project deployment in several regions. We recommended that you select the region closest to your application server to reduce latency between your Neon project and your application.
 
@@ -9,9 +9,10 @@ Neon supports project deployment in several regions. We recommended that you sel
 
 Neon currently supports the following AWS regions:
 
-- US East (Ohio) Region &mdash; `us-east-2`
-- Europe (Frankfurt) Region &mdash; `eu-central-1`
-- Asia Pacific (Singapore) Region &mdash; `ap-southeast-1`
+- US East (Ohio) &mdash; `us-east-2`
+- US West (Oregon) &mdash; `us-west-2`
+- Europe (Frankfurt) &mdash; `eu-central-1`
+- Asia Pacific (Singapore) &mdash; `ap-southeast-1`
 
 ## Select a region for your Neon project
 
