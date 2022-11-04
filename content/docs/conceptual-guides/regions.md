@@ -18,21 +18,19 @@ Neon currently supports the following AWS regions:
 
 You can select the region for your Neon project during project creation. See [Setting up a project](../setting-up-a-project). 
 
-All databases created in a Neon project are created in the region selected for the project.
+All branches and databases created in a Neon project are created in the region selected for the project.
 
 ![Select region image](./images/project_creation_regions.png)
 
-_**Note**_: Once you select region for a Neon project, it cannot be changed for that project.
+_**Note**_: Once you select a region for a Neon project, it cannot be changed for that project.
 
 ## Moving project data to a new region
 
-The region for an existing Neon project cannot be changed.
-
 If you need to move your data to a different region, the following steps are recommended:
 
-1. Create a new project in the new region. For project creation instructions, see [Setting up a project](../setting-up-a-project).
-1. Move your data from the old project to the new project that you created in the desired region. For instructions, see [Import data from PostgreSQL](../../how-to-guides/import-an-existing-database).
+1. Create a new project in the desired region. For project creation instructions, see [Setting up a project](../setting-up-a-project).
+1. Move your data from the old project to the new project. For instructions, see [Import data from PostgreSQL](../../how-to-guides/import-an-existing-database).
 
-Moving data to a new Neon project may require downtime if you are moving a production database, as the import procedure may take some time to complete. To avoid losing data, consider blocking writes from your applications before starting the import operation, and re-enabling writes when the data migration is completed. Neon currently supports read-write compute instances only. Blocking writes must be performed at the application level.
+Moving data to a new Neon project may require downtime if you are moving a production database, as the import procedure may take some time depending on the size of your data. To prevent the loss of data during the import operation, consider disabling writes from your applications before initiating the import operation. You can re-enable writes when the import is completed. Neon does not currently support disabling database writes. Writes must be disabled at the application level.
 
 To request support for additional regions, please visit the [Hosting in other AWS regions](https://community.neon.tech/t/hosting-in-other-aws-regions/81/5) topic in the Neon Community Forum.
