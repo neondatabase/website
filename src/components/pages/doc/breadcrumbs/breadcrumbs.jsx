@@ -1,20 +1,20 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
 import Link from 'components/shared/link';
+import { DOCS_BASE_PATH } from 'constants/docs';
 
 const Breadcrumbs = ({ breadcrumbs }) => (
-  <div className="mb-5 flex space-x-1 text-sm ">
+  <div className="mb-5 flex space-x-1 text-sm text-gray-4">
     {breadcrumbs.map(({ title, path }, index) => (
       <Fragment key={index}>
-        <span className={clsx(index === 0 && 'hidden')}>/</span>
+        {index !== 0 && <span>/</span>}
         {path ? (
-          <Link className="text-gray-4 hover:text-black" to={path}>
+          <Link className="hover:text-black" to={DOCS_BASE_PATH + path}>
             {title}
           </Link>
         ) : (
-          <span className="text-gray-4">{title}</span>
+          <span>{title}</span>
         )}
       </Fragment>
     ))}

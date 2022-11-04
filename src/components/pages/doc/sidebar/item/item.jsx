@@ -54,6 +54,7 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
               {items?.length > 0 ? (
                 <SubItem
                   title={title}
+                  slug={slug}
                   items={items}
                   isParentOpen={isOpen}
                   currentSlug={currentSlug}

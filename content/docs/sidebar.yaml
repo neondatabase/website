@@ -12,6 +12,10 @@
       slug: reference/roadmap
     - title: Technical Preview Free Tier
       slug: reference/technical-preview-free-tier
+      items:
+        - title: Test page
+          slug: cloud/test/test
+
 - title: Get started
   items:
     - title: Signing up
@@ -49,7 +53,7 @@
     - title: SQLAlchemy
       slug: guides/sqlalchemy
     - title: Symfony
-      slug: guides/symfony    
+      slug: guides/symfony
 - title: Import data
   items:
     - title: Import data from PostgreSQL
@@ -60,7 +64,7 @@
   slug: security
 - title: Reference
   items:
-    - title: API 
+    - title: API
       slug: reference/api-reference
     - title: Glossary
       slug: reference/glossary

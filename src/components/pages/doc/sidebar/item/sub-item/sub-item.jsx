@@ -6,20 +6,21 @@ import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 
-const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
+const SubItem = ({ title, slug, items, isParentOpen, currentSlug }) => {
   const [isOpen, setIsOpen] = useState(
     !!items?.find(
       ({ slug, items }) => slug === currentSlug || items?.find(({ slug }) => slug === currentSlug)
-    )
+    ) || slug === currentSlug
   );
 
   const handleClick = () => setIsOpen((isOpen) => !isOpen);
-
+  const Tag = slug ? Link : 'button';
   return (
     <>
-      <button
+      <Tag
         className="group flex w-full justify-between pt-2.5 pb-2 text-left text-gray-3 transition-colors duration-200 hover:text-black"
         type="button"
+        to={slug ? `${DOCS_BASE_PATH}${slug}` : undefined}
         tabIndex={!isParentOpen ? '-1' : undefined}
         onClick={handleClick}
       >
@@ -30,7 +31,7 @@ const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
             isOpen ? 'rotate-90' : 'rotate-0'
           )}
         />
-      </button>
+      </Tag>
       {isOpen && (
         <ul className="relative pl-3 before:absolute before:left-0 before:h-full before:w-px before:bg-gray-6">
           <li>
@@ -59,6 +60,7 @@ const SubItem = ({ title, items, isParentOpen, currentSlug }) => {
 
 SubItem.propTypes = {
   title: PropTypes.string.isRequired,
+  slug: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.exact({
       title: PropTypes.string.isRequired,
@@ -71,6 +73,7 @@ SubItem.propTypes = {
 
 SubItem.defaultProps = {
   isParentOpen: false,
+  slug: undefined,
 };
 
 export default SubItem;
