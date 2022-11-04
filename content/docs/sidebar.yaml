@@ -12,6 +12,8 @@
       slug: reference/roadmap
     - title: Technical Preview Free Tier
       slug: reference/technical-preview-free-tier
+    - title: Regions
+      slug: conceptual-guides/regions
 - title: Get started
   items:
     - title: Signing up
