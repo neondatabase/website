@@ -37,7 +37,7 @@ Another testing scenario enabled by branching is tracking down corruption or dat
 
 ### Staging
 
-With Neon's branching capabilities, you can create a staging database by branching your production database. Using the Neon API, you can automate branch creation for every pull request in your CI/CD pipeline.
+With Neon's branching capabilities, you can create a staging database by branching your production database. Using the Neon API, you can automate branch creation creating a database branch based on the staging branch for every pull request in your CI/CD pipeline.
 
 ### Data recovery
 
