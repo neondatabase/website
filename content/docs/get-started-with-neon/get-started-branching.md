@@ -13,7 +13,7 @@ _Neon Branching capabilities are not yet publicly available. If you would like t
 
 You can create and manage branches using the Neon Console or Neon API. In this topic, we cover branching using the Neon Console.
 
-Before you can create a branch, you must have a Neon project to branch from. If you do not have a Neon project, see [Setting up a project](./setting-up-a-project).
+Before you can create a branch, you must have a Neon project to branch from. If you do not have a Neon project, see [Setting up a project](../setting-up-a-project).
 
 ## Create a branch
 
@@ -47,7 +47,7 @@ The **Branches** widget on the project **Dashboard** also lists the branches in 
 
 Now that you have created a branch, how do you connect to it? You can connect to a branch using a connection string, as you would when connecting to any Neon database. The following steps describe how to connect to a branch using `psql`.
 
-_**Note:**_ You can also query a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/query-with-neon-sql-editor).
+_**Note:**_ You can also query a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../query-with-neon-sql-editor).
 
 1. On the Neon Console, select a project from the project drop-down list at the top of the console.
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the user you want to connect with.
