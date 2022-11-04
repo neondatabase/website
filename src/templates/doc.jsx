@@ -54,7 +54,7 @@ const DocTemplate = (props) => {
         <MobileNav className="hidden lg:block" sidebar={sidebar} currentSlug={currentSlug} />
 
         <Container
-          className="grid flex-1 grid-cols-12 gap-x-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
+          className="grid w-full flex-1 grid-cols-12 gap-x-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
           size="lg"
         >
           <Sidebar

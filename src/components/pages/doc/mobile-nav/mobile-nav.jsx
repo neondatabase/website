@@ -32,15 +32,17 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
                 )}
                 {sidebarItem?.items?.map(({ title, slug, items }, index) => (
                   <Fragment key={index}>
-                    {items?.length > 0 ? (
-                      items.map(({ title: title2, slug }, index) => (
-                        <option value={slug} key={index}>
-                          {title}: {title2}
-                        </option>
-                      ))
-                    ) : (
-                      <option value={slug}>{title}</option>
+                    {slug && (
+                      <option value={slug} data-standalone={sidebarItem.isStandalone}>
+                        {title}
+                      </option>
                     )}
+                    {items?.map(({ title: title2, slug: slug2 }, index) => (
+                      <option value={slug2} data-standalone={sidebarItem.isStandalone} key={index}>
+                        {!slug && `${title}: `}
+                        {title2}
+                      </option>
+                    ))}
                   </Fragment>
                 ))}
               </optgroup>
