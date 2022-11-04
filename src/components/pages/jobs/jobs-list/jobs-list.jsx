@@ -56,7 +56,7 @@ const JobsList = () => {
                       <span className="t-xl font-semibold leading-snug transition-colors duration-200 group-hover:text-primary-2">
                         {name}
                       </span>
-                      <span className="t-base Brounded-full ml-4 bg-secondary-2 py-2 px-4 font-semibold leading-snug md:ml-2 md:px-2.5">
+                      <span className="t-base ml-4 rounded-full bg-secondary-2 py-2 px-4 font-semibold leading-snug md:ml-2 md:px-2.5">
                         {location}
                       </span>
                     </Link>

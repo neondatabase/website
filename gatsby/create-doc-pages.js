@@ -120,8 +120,6 @@ module.exports = async ({ graphql, actions }) => {
       const pagePath = generateDocPagePath(slug);
       const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar(sidebar));
 
-      console.log(flatSidebar(sidebar));
-
       const getBreadcrumbs = (sidebar, slug) => {
         const items = findMatchedItems(sidebar, slug);
         if (typeof items === 'boolean') {
