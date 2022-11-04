@@ -15,11 +15,15 @@ _Neon Branching capabilities are not yet publicly available. If you would like t
 
 A branch is a copy-on-write clone of your data. You can create a branch from a current or past state. For example, you can create a branch that includes all data up to the current point in time or up to a past point in time or [Log Sequence Number (LSN)](../../reference/glossary#lsn).
 
+_**Note:**_ Each Neon project is also created with a [root branch](../../reference/glossary#root-branch) called `main`.
+
 A branch is isolated from its originating data, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to a branch are independent of the originating data. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are saved as an independent delta.
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means that you can create a branch at any time without impacting the performance of your production system.
 
-An endpoint is created for each branch, which is the compute instance associated with the branch. A branch endpoint is read-write. To connect to a branch from a client or application, you must connect to the branch endpoint. For more information, see [Getting started with branches](../../getting-started-with-neon/get-started-branching).
+## Branch endpoint
+
+An endpoint is created for each branch, which is the compute instance associated with the branch. A branch endpoint is read-write. To connect to a branch from a client or application, you must connect to the branch endpoint. For more information about endpoints and connecting to a branch, see [Get started with branching](../../getting-started-with-neon/get-started-branching/).
 
 ## Branching workflows
 
