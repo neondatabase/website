@@ -64,11 +64,11 @@ const DocTemplate = (props) => {
           />
           <div
             className={clsx(
-              '-mx-10 pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-11 lg:ml-0 lg:pt-0 md:pb-[70px] sm:pb-8',
+              '-mx-10 flex flex-col pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-11 lg:ml-0 lg:pt-0 md:pb-[70px] sm:pb-8',
               isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
             )}
           >
-            {Boolean(breadcrumbs.length) && <Breadcrumbs breadcrumbs={breadcrumbs} />}
+            {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
             {isReleaseNotes ? (
               <ReleaseNotes
                 title={title}
@@ -82,8 +82,10 @@ const DocTemplate = (props) => {
                 <Content className="mt-5" content={children} ref={contentRef} />
               </article>
             )}
-            <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
-            <DocFooter fileOriginPath={fileOriginPath} />
+            <div className="mt-auto">
+              <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
+              <DocFooter fileOriginPath={fileOriginPath} />
+            </div>
           </div>
           {enableTableOfContents && (
             <TableOfContents

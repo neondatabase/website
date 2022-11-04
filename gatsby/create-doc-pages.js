@@ -27,6 +27,22 @@ const flatSidebar = (sidebar) =>
     return [...acc, item];
   }, []);
 
+function findMatchedItems(items, slug) {
+  const item = items.find((item) => item.slug === slug);
+  if (item) {
+    return true;
+  }
+  for (let i = 0; i < items.length; i++) {
+    const currentItem = items[i];
+    if (currentItem.items) {
+      const innerItem = findMatchedItems(currentItem.items, slug);
+      if (innerItem) {
+        return [currentItem, ...(typeof innerItem === 'boolean' ? [] : innerItem)];
+      }
+    }
+  }
+}
+
 module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
     `
@@ -100,30 +116,15 @@ module.exports = async ({ graphql, actions }) => {
       const pagePath = generateDocPagePath(slug);
       const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar(sidebar));
 
-      const getBreadcrumbs = (sidebar, path) => {
-        const breadcrumbs = [];
-        sidebar.forEach((item) => {
-          if (item.items) {
-            item.items.forEach((subItem) => {
-              if (subItem.slug === path) {
-                breadcrumbs.push({ path: item.slug || null, title: item.title });
-              }
+      const getBreadcrumbs = (sidebar, slug) => {
+        const items = findMatchedItems(sidebar, slug);
+        if (typeof items === 'boolean') {
+          return undefined;
+        }
 
-              if (subItem.items) {
-                if (breadcrumbs.length === 0) {
-                  breadcrumbs.push({ path: item.slug || null, title: item.title });
-                }
-                subItem.items.forEach((subSubItem) => {
-                  if (subSubItem.slug === path) {
-                    breadcrumbs.push({ path: subItem.slug || null, title: subItem.title });
-                  }
-                });
-              }
-            });
-          }
-        });
-        return breadcrumbs;
+        return items?.map((item) => ({ path: item.slug || null, title: item.title }));
       };
+
       const breadcrumbs = getBreadcrumbs(sidebar, slug);
 
       createRedirects({ redirectFrom, actions, pagePath });
