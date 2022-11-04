@@ -19,7 +19,7 @@ Before you can create a branch, you must have a Neon project to branch from. If 
 
 To create a branch:
 
-1. On the Neon Console, select a Neon project.
+1. In the Neon Console, select a project.
 2. Select the **Branches** tab.
 3. Click **New Branch** to open the branch creation dialog.
 ![Create branch dialog](./images/create_branch.png)
@@ -37,7 +37,7 @@ You are directed to the **Branches** tab where you are shown the details for you
 
 To view the branches in a Neon project:
 
-1. In the Neon Console, select a project from the project list.
+1. In the Neon Console, select a project.
 2. Select the **Branches** tab to view the branches for the project.
 3. Select a branch from the table to view details about the branch, including the branch's endpoint hostname.
 
@@ -49,7 +49,7 @@ Now that you have created a branch, how do you connect to it? You can connect to
 
 _**Note:**_ You can also query a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../query-with-neon-sql-editor).
 
-1. On the Neon Console, select a project from the project list in the console.
+1. In the Neon Console, select a project.
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the user you want to connect with.
 ![Connection details widget](./images/connection_details.png)
 3. Copy the connection string. A connection string includes your user name, endpoint hostname, and database name. The endpoint is the compute instance associated with the branch.
@@ -69,7 +69,7 @@ Deleting a branch is a permanent action. Deleting a branch also deletes the bran
 
 To delete a branch:
 
-1. In the Neon Console, select a project from the project list.
+1. In the Neon Console, select a project.
 2. Select the **Branches** tab.
 3. Select a branch from the table.
 3. Click **Delete**.
