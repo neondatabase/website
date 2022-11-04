@@ -59,6 +59,8 @@ _**Note:**_ You can also query a branch from the Neon SQL Editor. For instructio
   psql postgres://casey:<password>@ep-patient-wildflower-627498.cloud.neon.tech/main
   ```
 
+_**Note:**_ The endpoint address for a branch, which is `ep-patient-wildflower-627498` in the example above, can also be found on the **Branches** page. For instructions, see [View branches](#view-branches).
+
 If you want to connect to a branch from an application, the **Connection Details** widget on the project **Dashboard** also provides connection examples for various languages and frameworks.
 
 ## Delete a branch
