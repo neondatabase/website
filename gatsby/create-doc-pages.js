@@ -126,8 +126,6 @@ module.exports = async ({ graphql, actions }) => {
       };
       const breadcrumbs = getBreadcrumbs(sidebar, slug);
 
-      console.log(breadcrumbs);
-
       createRedirects({ redirectFrom, actions, pagePath });
 
       const context = {
