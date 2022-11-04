@@ -22,6 +22,10 @@ const docTemplate = path.resolve('./src/templates/doc.jsx');
 const flatSidebar = (sidebar) =>
   sidebar.reduce((acc, item) => {
     if (item.items) {
+      if (item.slug) {
+        const current = { title: item.title, slug: item.slug };
+        return [current, ...acc, ...flatSidebar(item.items)];
+      }
       return [...acc, ...flatSidebar(item.items)];
     }
     return [...acc, item];
@@ -115,6 +119,8 @@ module.exports = async ({ graphql, actions }) => {
 
       const pagePath = generateDocPagePath(slug);
       const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar(sidebar));
+
+      console.log(flatSidebar(sidebar));
 
       const getBreadcrumbs = (sidebar, slug) => {
         const items = findMatchedItems(sidebar, slug);

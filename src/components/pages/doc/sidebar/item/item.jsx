@@ -9,39 +9,46 @@ import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 import SubItem from './sub-item';
 
 const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }) => {
-  const [isOpen, setIsOpen] = useState(isOpenByDefault);
+  const [isOpen, setIsOpen] = useState(isOpenByDefault || slug === currentSlug);
+
+  if (
+    !isOpen &&
+    items?.find(
+      ({ slug, items }) => slug === currentSlug || items?.find(({ slug }) => slug === currentSlug)
+    )
+  ) {
+    setIsOpen(true);
+  }
 
   const handleClick = () => setIsOpen((isOpen) => !isOpen);
 
   const docSlug = isStandalone ? `/${slug}` : `${DOCS_BASE_PATH}${slug}/`;
-
+  const Tag = slug ? Link : 'button';
   return (
     <li className="flex flex-col">
-      {slug ? (
-        <Link
-          className={clsx('w-full py-2 text-left text-sm text-gray-3 hover:text-black', {
+      <Tag
+        className={clsx(
+          'group flex w-full items-center justify-between py-2 text-left text-sm text-gray-3 transition-colors duration-200 hover:text-black',
+          {
             'font-semibold !text-black': currentSlug === slug,
-          })}
-          size="2xs"
-          to={docSlug}
-        >
-          {title}
-        </Link>
-      ) : (
-        <button
-          className="group flex w-full items-center justify-between py-2 text-left text-sm text-gray-3 transition-colors duration-200 hover:text-black"
-          type="button"
-          onClick={handleClick}
-        >
-          <span className="leading-snug">{title}</span>
-          <ChevronRight
-            className={clsx(
-              'mr-2 shrink-0 text-gray-5 transition-[transform,color] duration-200 group-hover:text-black',
-              isOpen ? 'rotate-90' : 'rotate-0'
-            )}
-          />
-        </button>
-      )}
+          }
+        )}
+        type={slug ? undefined : 'button'}
+        to={docSlug || undefined}
+        onClick={handleClick}
+      >
+        <span className="leading-snug">{title}</span>
+        <ChevronRight
+          className={clsx(
+            'mr-2 shrink-0 text-gray-5 transition-[transform,color] duration-200 group-hover:text-black',
+            {
+              '!text-black': currentSlug === slug,
+            },
+            items?.length ? 'block' : 'hidden',
+            isOpen ? 'rotate-90' : 'rotate-0'
+          )}
+        />
+      </Tag>
       {!!items?.length && (
         <ul
           className={clsx(
@@ -51,28 +58,13 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
         >
           {items.map(({ title, slug, items }, index) => (
             <li key={index}>
-              {items?.length > 0 ? (
-                <SubItem
-                  title={title}
-                  slug={slug}
-                  items={items}
-                  isParentOpen={isOpen}
-                  currentSlug={currentSlug}
-                />
-              ) : (
-                <Link
-                  className={clsx(
-                    '!flex items-center py-2 text-sm leading-tight text-gray-3 hover:text-black',
-                    {
-                      'font-semibold !text-black': currentSlug === slug,
-                    }
-                  )}
-                  to={`${DOCS_BASE_PATH}${slug}/`}
-                  tabIndex={!isOpen ? '-1' : undefined}
-                >
-                  {title}
-                </Link>
-              )}
+              <SubItem
+                title={title}
+                slug={slug}
+                items={items}
+                isParentOpen={isOpen}
+                currentSlug={currentSlug}
+              />
             </li>
           ))}
         </ul>

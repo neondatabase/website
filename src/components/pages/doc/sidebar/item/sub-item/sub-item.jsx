@@ -19,12 +19,12 @@ const SubItem = ({ title, slug, items, isParentOpen, currentSlug }) => {
     <>
       <Tag
         className={clsx(
-          'group flex w-full justify-between pt-2.5 pb-2 text-left text-gray-3 transition-colors duration-200 hover:text-black',
+          'group flex w-full justify-between py-2 text-left text-gray-3 transition-colors duration-200 hover:text-black',
           {
             'font-semibold !text-black': currentSlug === slug,
           }
         )}
-        type="button"
+        type={slug ? undefined : 'button'}
         to={slug ? `${DOCS_BASE_PATH}${slug}` : undefined}
         tabIndex={!isParentOpen ? '-1' : undefined}
         onClick={handleClick}
@@ -36,11 +36,12 @@ const SubItem = ({ title, slug, items, isParentOpen, currentSlug }) => {
             {
               '!text-black': currentSlug === slug,
             },
+            items?.length ? 'block' : 'hidden',
             isOpen ? 'rotate-90' : 'rotate-0'
           )}
         />
       </Tag>
-      {isOpen && (
+      {items?.length > 0 && isOpen && (
         <ul className="relative pl-3 before:absolute before:left-0 before:h-full before:w-px before:bg-gray-6">
           <li>
             {items.map(({ title, slug }, index) => (
@@ -74,7 +75,7 @@ SubItem.propTypes = {
       title: PropTypes.string.isRequired,
       slug: PropTypes.string.isRequired,
     })
-  ).isRequired,
+  ),
   isParentOpen: PropTypes.bool,
   currentSlug: PropTypes.string.isRequired,
 };
@@ -82,6 +83,7 @@ SubItem.propTypes = {
 SubItem.defaultProps = {
   isParentOpen: false,
   slug: undefined,
+  items: undefined,
 };
 
 export default SubItem;

@@ -58,7 +58,7 @@ const DocTemplate = (props) => {
           size="lg"
         >
           <Sidebar
-            className="relative col-start-1 col-end-4 max-w-[274px] bg-gray-9 pb-20 pt-[118px] before:absolute before:top-0 before:-right-5 before:-z-10 before:h-full before:w-[300%] before:bg-gray-9 lg:hidden"
+            className="relative col-start-1 col-end-4 max-w-[254px] bg-gray-9 pb-20 pt-[118px] before:absolute before:top-0 before:-right-5 before:-z-10 before:h-full before:w-[300%] before:bg-gray-9 lg:hidden"
             sidebar={sidebar}
             currentSlug={currentSlug}
           />
