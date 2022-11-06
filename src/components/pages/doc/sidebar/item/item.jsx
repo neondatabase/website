@@ -6,21 +6,21 @@ import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 
-import SubItem from './sub-item';
+const isActiveItem = (items, currentSlug) =>
+  !!items?.find(
+    ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
+  );
 
 const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }) => {
   const [isOpen, setIsOpen] = useState(isOpenByDefault || slug === currentSlug);
 
-  if (
-    !isOpen &&
-    items?.find(
-      ({ slug, items }) => slug === currentSlug || items?.find(({ slug }) => slug === currentSlug)
-    )
-  ) {
+  if (!isOpen && isActiveItem(items, currentSlug)) {
     setIsOpen(true);
   }
 
-  const handleClick = () => setIsOpen((isOpen) => !isOpen);
+  const handleClick = () => {
+    setIsOpen((isOpen) => !isOpen);
+  };
 
   const docSlug = isStandalone ? `/${slug}` : `${DOCS_BASE_PATH}${slug}/`;
   const Tag = slug ? Link : 'button';
@@ -56,16 +56,8 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
             !isOpen && 'sr-only'
           )}
         >
-          {items.map(({ title, slug, items }, index) => (
-            <li key={index}>
-              <SubItem
-                title={title}
-                slug={slug}
-                items={items}
-                isParentOpen={isOpen}
-                currentSlug={currentSlug}
-              />
-            </li>
+          {items.map((item, index) => (
+            <Item {...item} currentSlug={currentSlug} key={index} />
           ))}
         </ul>
       )}
@@ -81,11 +73,16 @@ Item.propTypes = {
     PropTypes.exact({
       title: PropTypes.string.isRequired,
       slug: PropTypes.string,
-
       items: PropTypes.arrayOf(
         PropTypes.exact({
-          title: PropTypes.string.isRequired,
-          slug: PropTypes.string.isRequired,
+          title: PropTypes.string,
+          slug: PropTypes.string,
+          items: PropTypes.arrayOf(
+            PropTypes.exact({
+              title: PropTypes.string,
+              slug: PropTypes.string,
+            })
+          ),
         })
       ),
     })
