@@ -129,7 +129,7 @@
 
     iframe,
     video {
-      @apply mx-auto rounded-md;
+      @apply mx-auto my-5 rounded-md;
     }
 
     .gatsby-resp-image-wrapper {
