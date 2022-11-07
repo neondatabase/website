@@ -9,7 +9,7 @@ Neon is protocol and application-compatible with PostgreSQL. However, when using
 
 ## PostgreSQL versions
 
-Neon cloud service is currently compatible with PostgreSQL 14 and PostgreSQL 15.
+Neon cloud service is currently compatible with PostgreSQL 14 and PostgreSQL 15, with PostgreSQL 15 being the default version.
 
 ## Permissions
 
