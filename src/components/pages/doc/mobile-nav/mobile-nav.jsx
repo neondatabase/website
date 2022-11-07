@@ -18,7 +18,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
     <nav className={clsx('safe-paddings relative border-b border-gray-7 bg-gray-9', className)}>
       <Container size="lg">
         <select
-          className="relative z-10 w-full cursor-pointer appearance-none text-ellipsis bg-transparent py-3.5 leading-none outline-none"
+          className="relative z-10 w-full cursor-pointer appearance-none text-ellipsis bg-transparent py-[10px] outline-none"
           value={currentSlug}
           onChange={handleChange}
         >
