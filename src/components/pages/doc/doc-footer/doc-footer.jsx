@@ -30,7 +30,7 @@ const DocFooter = ({ fileOriginPath }) => (
       <span className="group-hover:text-secondary-8">Edit this page</span>
     </Link>
     <div className="flex items-center space-x-5">
-      <span>Was this page helpful?</span>
+      <span className="text-sm leading-tight">Was this page helpful?</span>
       <div className="space-x-3">
         {emojis.map((emoji, index) => (
           <button
