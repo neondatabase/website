@@ -40,7 +40,6 @@ const Layout = ({
   headerWithBottomBorder,
   footerWithTopBorder,
   isDocPage,
-  burgerWithoutBorder,
 }) => {
   const headerRef = useRef(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -78,7 +77,6 @@ const Layout = ({
           isSignIn={isSignIn}
           isSticky={isHeaderSticky}
           isDocPage={isDocPage}
-          burgerWithoutBorder={burgerWithoutBorder}
           onBurgerClick={handleHeaderBurgerClick}
           onSearchClick={openMobileSearchModal}
         />
@@ -89,7 +87,6 @@ const Layout = ({
         <MobileMenu
           isOpen={isMobileMenuOpen}
           headerRef={headerRef}
-          burgerWithoutBorder={burgerWithoutBorder}
           onOutsideClick={handleMobileMenuOutsideClick}
         />
         <SearchModal isOpen={isMobileSearchModalOpen} closeModal={closeMobileSearchModal} />
@@ -107,7 +104,6 @@ Layout.propTypes = {
   headerWithBottomBorder: PropTypes.bool,
   footerWithTopBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
-  burgerWithoutBorder: PropTypes.bool,
 };
 
 Layout.defaultProps = {
@@ -117,7 +113,6 @@ Layout.defaultProps = {
   headerWithBottomBorder: false,
   footerWithTopBorder: false,
   isDocPage: false,
-  burgerWithoutBorder: false,
 };
 
 export const query = graphql`

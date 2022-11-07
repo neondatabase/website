@@ -5,41 +5,31 @@ import React from 'react';
 
 const ANIMATION_DURATION = 0.2;
 
-const Burger = ({ className, isToggled, onClick, withoutBorder }) => (
+const Burger = ({ className, isToggled, onClick }) => (
   <motion.button
-    className={clsx(
-      'relative rounded-full',
-      withoutBorder ? '-mr-0.5 h-5 w-5' : 'h-10 w-10 border-2 border-current',
-      className
-    )}
+    className={clsx('relative -mt-1 -mr-1 flex h-8 w-7 shrink rounded-full', className)}
     type="button"
     animate={isToggled ? 'toggled' : 'initial'}
     aria-label={isToggled ? 'Close menu' : 'Open menu'}
     onClick={onClick}
   >
     <motion.span
-      className={clsx(
-        'absolute block h-0.5 rounded-full bg-current',
-        withoutBorder ? 'left-0 top-0.5 w-4' : 'left-2 top-[11px] w-5'
-      )}
+      className="absolute left-1.5 top-2.5 block h-0.5 w-4 rounded-full bg-current"
       variants={{
         initial: {
-          top: withoutBorder ? 2 : 11,
+          top: 10,
           display: 'block',
           transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
         },
         toggled: {
-          top: withoutBorder ? 12 : 17,
+          top: 12,
           transition: { duration: ANIMATION_DURATION },
           transitionEnd: { display: 'none' },
         },
       }}
     />
     <motion.span
-      className={clsx(
-        'absolute block h-0.5 rounded-full bg-current',
-        withoutBorder ? 'left-0 top-[7px] w-4' : 'left-3 top-[17px] w-3'
-      )}
+      className="absolute left-1.5 top-[15px] block h-0.5 w-4 rounded-full bg-current"
       variants={{
         initial: {
           display: 'block',
@@ -52,28 +42,22 @@ const Burger = ({ className, isToggled, onClick, withoutBorder }) => (
       }}
     />
     <motion.span
-      className={clsx(
-        'absolute block h-0.5 rounded-full bg-current',
-        withoutBorder ? 'left-0 bottom-1.5 w-4' : 'left-2 bottom-[11px] w-5'
-      )}
+      className="absolute left-1.5 bottom-2.5 block h-0.5 w-4 rounded-full bg-current"
       variants={{
         initial: {
-          bottom: withoutBorder ? 6 : 11,
+          bottom: 10,
           display: 'block',
           transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
         },
         toggled: {
-          bottom: withoutBorder ? 12 : 17,
+          bottom: 12,
           transition: { duration: ANIMATION_DURATION },
           transitionEnd: { display: 'none' },
         },
       }}
     />
     <motion.span
-      className={clsx(
-        'absolute hidden h-0.5 rounded-full bg-current',
-        withoutBorder ? 'left-0 top-1.5 w-4' : 'left-2 top-[17px] w-5'
-      )}
+      className="absolute left-1.5 top-3.5 hidden h-0.5 w-4 rounded-full bg-current"
       variants={{
         initial: {
           rotate: '0deg',
@@ -88,10 +72,7 @@ const Burger = ({ className, isToggled, onClick, withoutBorder }) => (
       }}
     />
     <motion.span
-      className={clsx(
-        'absolute hidden h-0.5 rounded-full bg-current',
-        withoutBorder ? 'left-0 top-1.5 w-4' : 'left-2 top-[17px] w-5'
-      )}
+      className="absolute left-1.5 top-3.5 hidden h-0.5 w-4 rounded-full bg-current"
       variants={{
         initial: {
           rotate: '0deg',
@@ -112,14 +93,12 @@ Burger.propTypes = {
   className: PropTypes.string,
   isToggled: PropTypes.bool,
   onClick: PropTypes.func,
-  withoutBorder: PropTypes.bool,
 };
 
 Burger.defaultProps = {
   className: null,
   isToggled: false,
   onClick: null,
-  withoutBorder: false,
 };
 
 export default Burger;

@@ -31,27 +31,22 @@ const Header = forwardRef(
       isSticky,
       withBottomBorder,
       isDocPage,
-      burgerWithoutBorder,
       onSearchClick,
     },
     ref
   ) => (
     <header
       className={clsx(
-        'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative ',
+        'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative lg:h-14',
         theme === 'black' && 'lg:bg-black',
         theme === 'white' && 'bg-white',
         isSticky && 'sticky top-0 z-50 md:relative',
-        withBottomBorder && 'border-b border-gray-7',
-        burgerWithoutBorder && 'lg:h-14'
+        withBottomBorder && 'border-b border-gray-7'
       )}
       ref={ref}
     >
       <Container
-        className={clsx(
-          'flex items-center justify-between',
-          burgerWithoutBorder ? 'py-3.5' : 'py-3'
-        )}
+        className="flex items-center justify-between py-3.5"
         size={isDocPage ? 'xl' : 'md'}
       >
         <Link className="hidden xl:block" to="/">
@@ -192,7 +187,7 @@ const Header = forwardRef(
         <div className=" hidden items-center lg:flex">
           {isDocPage && (
             <button
-              className="mr-6 flex h-5 w-5 items-center"
+              className="mr-5 flex h-5 w-5 items-center"
               type="button"
               onClick={onSearchClick}
             >
@@ -203,7 +198,6 @@ const Header = forwardRef(
           <Burger
             className={clsx(theme === 'white' && 'text-black', theme === 'black' && 'text-white')}
             isToggled={isMobileMenuOpen}
-            withoutBorder={burgerWithoutBorder}
             onClick={onBurgerClick}
           />
         </div>
@@ -221,7 +215,6 @@ Header.propTypes = {
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
   onSearchClick: PropTypes.func,
-  burgerWithoutBorder: PropTypes.bool,
 };
 
 Header.defaultProps = {
@@ -231,7 +224,6 @@ Header.defaultProps = {
   isSticky: false,
   isDocPage: false,
   onSearchClick: null,
-  burgerWithoutBorder: false,
 };
 
 export default Header;

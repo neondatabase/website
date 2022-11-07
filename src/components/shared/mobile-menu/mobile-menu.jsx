@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { motion, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
@@ -42,7 +41,7 @@ const variants = {
   },
 };
 
-const MobileMenu = ({ isOpen, headerRef, onOutsideClick, burgerWithoutBorder }) => {
+const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
   const controls = useAnimation();
   const ref = useRef(null);
 
@@ -58,10 +57,7 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick, burgerWithoutBorder }) 
 
   return (
     <motion.nav
-      className={clsx(
-        'absolute right-8 left-8 z-[-1] hidden rounded-2xl bg-white px-5 pt-1 pb-7 lg:block md:right-4 md:left-4',
-        burgerWithoutBorder ? 'top-16' : 'top-20'
-      )}
+      className="absolute right-8 left-8 top-16 z-[-1] hidden rounded-2xl bg-white px-5 pt-1 pb-7 lg:block md:right-4 md:left-4"
       initial="from"
       animate={controls}
       variants={variants}
@@ -125,12 +121,10 @@ MobileMenu.propTypes = {
     }),
   ]).isRequired,
   onOutsideClick: PropTypes.func.isRequired,
-  burgerWithoutBorder: PropTypes.bool,
 };
 
 MobileMenu.defaultProps = {
   isOpen: false,
-  burgerWithoutBorder: false,
 };
 
 export default MobileMenu;
