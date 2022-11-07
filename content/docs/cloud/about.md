@@ -52,101 +52,199 @@ The branch creation process does not increase load on the originating project. Y
 | [PgAdmin 4](https://www.pgadmin.org/)                                              | ✅          |                                                                                                                                  |
 | [DataGrip](https://www.jetbrains.com/datagrip/)                                    | ✅          |                                                                                                                                  |
 
-<CodeTabs labels={["React", "Python", "PHP", "Java"]}>
+<CodeTabs labels={["React", "CSS", "JSON", "Rest", "Python", "PHP", "Java", "Rust", "Go"]}>
 
 ```jsx
-import Auth from 'components/auth';
-import { Provider as SessionProvider } from 'next-auth/client';
-import { FlagsmithProvider } from 'flagsmith-react';
+import flagsmith from 'flagsmith';
+// import flagsmith from 'react-native-flagsmith'; - Use this instead for React Native
 
-import '../styles/globals.css';
+import { useFlags, FlagsmithProvider } from 'flagsmith/react';
 
-export default function MyApp({ Component, pageProps }) {
-  return (
-    <FlagsmithProvider environmentId={process.env.NEXT_PUBLIC_FLAGSMITH_API_KEY}>
-      <SessionProvider session={pageProps.session}>
-        {Component.auth ? (
-          <Auth>
-            <Component {...pageProps} />
-          </Auth>
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </SessionProvider>
+const randomRegex = /[.*+?^${}()|[\]\\]/g;
+
+console.log(true === false); // prints false
+console.log(true === !false);
+
+function isEven(number) {
+ return Number(number) % 2 === 0;
+}
+const isOdd = (number) => !isEven(number);
+
+const char = ['A', 'z', '0', '-', '\t', '\u{2728}'];
+
+for (const foo of bar) {
+ if (foo === 'foobar') break;
+ await foo;
+}
+
+const App = () => (
+    <FlagsmithProvider options={{ environmentID: "QjgYur4LQTwe5HpvbvhpzK"}} flagsmith={flagsmith}>
+        <HomePage/>
+        <p id="greeting">Hello World!</p>
+        <video width="1280" height="720" allowfullscreen controls>
+          <source src="hello_world.mp4" type="video/mp4" />
+        </video>
     </FlagsmithProvider>
+)
+
+const HomePage = () => {
+ const flags = useFlags(['chat_widget']);
+  return (
+      <>{flags.chat_widget.enabled && <ChatWidget>}</>
   );
 }
+```
+
+```css
+body {
+  background: url(foo.png);
+  color: red;
+  line-height: normal !important;
+}
+@font-family {
+  font-family: Questrial;
+  src: url(questrial.otf);
+}
+@media screen and (min-width: 768px) {
+  /* ... */
+}
+
+section h1,
+#features li strong,
+header h2,
+footer p {
+  /* ... */
+}
+
+.class,
+.random-class {
+  /* ... */
+}
+```
+
+```json
+{
+  "data": { "labels": ["foo", "bar"] },
+  "error": null,
+  "status": "Ok"
+}
+```
+
+```bash
+$ curl 'https://api.flagsmith.com/api/v1/flags/'
+-H 'X-Environment-Key: TijpMX6ajA7REC4bf5suYg' | jq
+
+[
+  {
+    "id": 131,
+    "feature": {
+      "id": 56,
+      "name": "kyc_button",
+      "created_date": "2018-06-28T13:30:09.983174Z",
+      "description": null,
+      "initial_value": null,
+      "default_enabled": true,
+      "type": "FLAG"
+    },
+    "feature_state_value": null,
+    "enabled": true,
+    "environment": 12,
+    "identity": null,
+    "feature_segment": null
+  }
+]
 ```
 
 ```python
-import Auth from 'components/auth';
-import { Provider as SessionProvider } from 'next-auth/client';
-import { FlagsmithProvider } from 'flagsmith-react';
+$ pip install flagsmith
 
-import '../styles/globals.css';
+from flagsmith import Flagsmith;
 
-export default function MyApp({ Component, pageProps }) {
-  return (
-    <FlagsmithProvider environmentId={process.env.NEXT_PUBLIC_FLAGSMITH_API_KEY}>
-      <SessionProvider session={pageProps.session}>
-        {Component.auth ? (
-          <Auth>
-            <Component {...pageProps} />
-          </Auth>
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </SessionProvider>
-    </FlagsmithProvider>
-  );
-}
+fs = Flagsmith(environment_id="QjgYur4LQTwe5HpvbvhpzK")
+
+if fs.has_feature("header"):
+  if fs.feature_enabled("header"):
+    # Show my awesome cool new feature to the world
+
+value = fs.get_value("header", '<My User Id>')
+
+value = fs.get_value("header")
+
+fs.set_trait("accept-cookies", "true", "ben@flagsmith.com))
+fs.get_trait("accept-cookies", "ben@flagsmith.com"))
+
+def median(pool):
+  copy = sorted(pool)
+  size = len(copy)
+  if size % 2 == 1:
+    return copy[(size - 1) / 2]
+  else:
+    return (copy[size/2 - 1] + copy[size/2]) / 2
 ```
 
 ```php
-import Auth from 'components/auth';
-import { Provider as SessionProvider } from 'next-auth/client';
-import { FlagsmithProvider } from 'flagsmith-react';
+composer require flagsmith/flagsmith-php-client
 
-import '../styles/globals.css';
+$fs = new Flagsmith('QjgYur4LQTwe5HpvbvhpzK');
 
-export default function MyApp({ Component, pageProps }) {
-  return (
-    <FlagsmithProvider environmentId={process.env.NEXT_PUBLIC_FLAGSMITH_API_KEY}>
-      <SessionProvider session={pageProps.session}>
-        {Component.auth ? (
-          <Auth>
-            <Component {...pageProps} />
-          </Auth>
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </SessionProvider>
-    </FlagsmithProvider>
-  );
+$flags = $fs->getFlags();
+foreach ($flags as &$value) {
+    print_r($value);
 }
 ```
 
 ```java
-import Auth from 'components/auth';
-import { Provider as SessionProvider } from 'next-auth/client';
-import { FlagsmithProvider } from 'flagsmith-react';
+implementation 'com.flagsmith:flagsmith-java-client:2.3'
 
-import '../styles/globals.css';
+FlagsmithClient flagsmithClient =
+         FlagsmithClient.newBuilder()
+         .setApiKey("QjgYur4LQTwe5HpvbvhpzK")
+         .build();
 
-export default function MyApp({ Component, pageProps }) {
-  return (
-    <FlagsmithProvider environmentId={process.env.NEXT_PUBLIC_FLAGSMITH_API_KEY}>
-      <SessionProvider session={pageProps.session}>
-        {Component.auth ? (
-          <Auth>
-            <Component {...pageProps} />
-          </Auth>
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </SessionProvider>
-    </FlagsmithProvider>
-  );
+if (flagsmithClient.hasFeatureFlag("chat_widget");) {
+  userInterface.chatWidgetEnable()
+} else {
+ return false;
+}
+
+class Foo extends foo.bar.Foo {
+  java.util.List<foo.bar.Foo.Bar> bar(foo.bar.Baz bat) {
+   throw new java.lang.UnsupportedOperationException();
+  }
+}
+```
+
+```rust
+# Cargo.toml
+flagsmith = "0.2.0"
+
+let fs = flagsmith::Client::new("QjgYur4LQTwe5HpvbvhpzK");
+
+if fs.feature_enabled("chat_widget")? {
+    println!("Feature enabled");
+}
+
+if let Some(Value::String(s)) = fs.get_value("cart_abundant_notification_ab_test")? {
+    println!("{}", s);
+}
+```
+
+```go
+$ go get github.com/flagsmith/flagsmith-go-client
+
+import (
+  "github.com/flagsmith/flagsmith-go-client"
+)
+
+bt := bullettrain.DefaultBulletTrainClient("QjgYur4LQTwe5HpvbvhpzK")
+
+enabled, err := bt.FeatureEnabled("chat_widget")
+if err != nil {
+    log.Fatal(err)
+} else {
+    if (enabled) {
+        fmt.Printf("Feature enabled")
+    }
 }
 ```
 
