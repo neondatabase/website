@@ -7,6 +7,7 @@ import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
+import SearchIcon from 'icons/search.inline.svg';
 import logoBlack from 'images/logo-black.svg';
 import logoWhite from 'images/logo-white.svg';
 
@@ -22,21 +23,35 @@ const icons = {
 
 const Header = forwardRef(
   (
-    { theme, isMobileMenuOpen, onBurgerClick, isSignIn, isSticky, withBottomBorder, isDocPage },
+    {
+      theme,
+      isMobileMenuOpen,
+      onBurgerClick,
+      isSignIn,
+      isSticky,
+      withBottomBorder,
+      isDocPage,
+      burgerWithoutBorder,
+      onSearchClick,
+    },
     ref
   ) => (
     <header
       className={clsx(
-        'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative',
+        'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative ',
         theme === 'black' && 'lg:bg-black',
         theme === 'white' && 'bg-white',
         isSticky && 'sticky top-0 z-50 md:relative',
-        withBottomBorder && 'border-b border-gray-7'
+        withBottomBorder && 'border-b border-gray-7',
+        burgerWithoutBorder && 'lg:h-14'
       )}
       ref={ref}
     >
       <Container
-        className="flex items-center justify-between py-3.5"
+        className={clsx(
+          'flex items-center justify-between',
+          burgerWithoutBorder ? 'py-3.5' : 'py-3'
+        )}
         size={isDocPage ? 'xl' : 'md'}
       >
         <Link className="hidden xl:block" to="/">
@@ -174,16 +189,24 @@ const Header = forwardRef(
             </Button>
           )}
         </div>
-
-        <Burger
-          className={clsx(
-            'hidden lg:block',
-            theme === 'white' && 'text-black',
-            theme === 'black' && 'text-white'
+        <div className=" hidden items-center lg:flex">
+          {isDocPage && (
+            <button
+              className="mr-6 flex h-5 w-5 items-center"
+              type="button"
+              onClick={onSearchClick}
+            >
+              <SearchIcon className="mb-[5px]" />
+            </button>
           )}
-          isToggled={isMobileMenuOpen}
-          onClick={onBurgerClick}
-        />
+
+          <Burger
+            className={clsx(theme === 'white' && 'text-black', theme === 'black' && 'text-white')}
+            isToggled={isMobileMenuOpen}
+            withoutBorder={burgerWithoutBorder}
+            onClick={onBurgerClick}
+          />
+        </div>
       </Container>
     </header>
   )
@@ -197,6 +220,8 @@ Header.propTypes = {
   isSignIn: PropTypes.bool,
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
+  onSearchClick: PropTypes.func,
+  burgerWithoutBorder: PropTypes.bool,
 };
 
 Header.defaultProps = {
@@ -205,6 +230,8 @@ Header.defaultProps = {
   isSignIn: false,
   isSticky: false,
   isDocPage: false,
+  onSearchClick: null,
+  burgerWithoutBorder: false,
 };
 
 export default Header;

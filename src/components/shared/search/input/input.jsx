@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connectSearchBox } from 'react-instantsearch-dom';
 
-import SearchIcon from './images/search.inline.svg';
+import SearchIcon from 'icons/search.inline.svg';
 
 const Input = connectSearchBox(
-  ({ refine, currentRefinement, onFocus, hasFocus, isNotFoundPage }) => (
-    <div className="relative">
+  ({ refine, currentRefinement, onFocus, hasFocus, isNotFoundPage, isMobileSearch, className }) => (
+    <div className={clsx('relative', className)}>
       <SearchIcon
         className={clsx(
           'absolute top-1/2 -translate-y-1/2',
@@ -22,7 +22,7 @@ const Input = connectSearchBox(
             ? 'h-16 rounded-[110px] border-2 border-gray-2 pl-14 pr-6 text-xl md:text-lg xs:pr-2.5 xs:pl-9 xs:text-base'
             : 'h-9 rounded border border-gray-5 pl-9 pr-2.5 ',
           isNotFoundPage && hasFocus && currentRefinement && 'rounded-[29px]',
-          hasFocus && currentRefinement && 'rounded-b-none border-b'
+          hasFocus && currentRefinement && !isMobileSearch && 'rounded-b-none border-b'
         )}
         type="search"
         value={currentRefinement}

@@ -49,7 +49,13 @@ const DocTemplate = (props) => {
   const contentRef = useRef(null);
 
   return (
-    <Layout headerTheme="white" headerWithBottomBorder footerWithTopBorder isDocPage>
+    <Layout
+      headerTheme="white"
+      headerWithBottomBorder
+      footerWithTopBorder
+      isDocPage
+      burgerWithoutBorder
+    >
       <div className="safe-paddings flex flex-1 flex-col lg:block">
         <MobileNav className="hidden lg:block" sidebar={sidebar} currentSlug={currentSlug} />
 
