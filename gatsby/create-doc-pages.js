@@ -24,7 +24,7 @@ const flatSidebar = (sidebar) =>
     if (item.items) {
       if (item.slug) {
         const current = { title: item.title, slug: item.slug };
-        return [current, ...acc, ...flatSidebar(item.items)];
+        return [...acc, current, ...flatSidebar(item.items)];
       }
       return [...acc, ...flatSidebar(item.items)];
     }
