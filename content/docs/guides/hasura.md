@@ -14,8 +14,9 @@ This guide describe how to connect a Hasura Cloud project to a new or existing N
 
 Use the following instructions to connect to a new Neon database. This connection method authenticates you from Hasura Cloud.
 
-<video autoplay playsinline muted loop width="800" height="600">
-<source type="video/mp4" src="https://user-images.githubusercontent.com/13738772/195619191-6de246e2-a47a-4ab3-a68f-c5d793cd5bb0.mp4" />
+<video autoPlay playsInline muted loop width="800" height="600">
+  <source type="video/mp4" src="https://user-images.githubusercontent.com/48465000/200608247-a050bdc0-3f38-447f-a5a0-75835d7a0238.mp4"/>
+  <source type="video/webm" src="https://user-images.githubusercontent.com/48465000/200608356-d4bb7f27-d9d5-49c9-b923-13e82c4cfc44.webm"/>
 </video>
 
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
