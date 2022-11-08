@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import { useWindowSize } from 'react-use';
 
 import Item from 'components/pages/doc/sidebar/item';
-import Container from 'components/shared/container';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 const ANIMATION_DURATION = 0.2;
@@ -48,7 +47,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
     );
   });
 
-  const onClickHandler = () => {
+  const openMenu = () => {
     setIsOpen(!isOpen);
   };
 
@@ -67,19 +66,17 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
   }, [controls, isOpen]);
   return (
     <nav className={clsx('safe-paddings relative border-b border-gray-7 bg-gray-9', className)}>
-      <Container size="md">
-        <button
-          className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-transparent py-2.5 outline-none"
-          type="button"
-          onClick={onClickHandler}
-        >
-          Documentation menu
-        </button>
+      <button
+        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-9 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-8 active:bg-gray-8 lg:px-8 md:px-4"
+        type="button"
+        onClick={openMenu}
+      >
+        <span>Documentation menu</span>
         <ChevronRight
           className="absolute right-[37px] top-1/2 -translate-y-1/2 rotate-90 md:right-5"
           aria-hidden
         />
-      </Container>
+      </button>
 
       <motion.ul
         className={clsx(
