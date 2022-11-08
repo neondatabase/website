@@ -2,8 +2,10 @@ import clsx from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { useCookie, useLocation } from 'react-use';
 
 import Button from 'components/shared/button';
+import { HUBSPOT_NEWSLETTERS_FORM_ID, HUBSPOT_FORM_PORTAL_ID } from 'constants/forms';
 
 import CheckIcon from './images/subscription-form-check.inline.svg';
 import ErrorIcon from './images/subscription-form-error.inline.svg';
@@ -36,8 +38,14 @@ const SubscriptionForm = ({ className }) => {
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState('default');
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [hubspotutk] = useCookie('hubspotutk');
+  const { href } = useLocation();
   const handleInputChange = (event) => setEmail(event.currentTarget.value.trim());
+
+  const context = {
+    hutk: hubspotutk,
+    pageUri: href,
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -52,14 +60,24 @@ const SubscriptionForm = ({ className }) => {
 
       const loadingAnimationStartedTime = Date.now();
 
-      fetch('https://submit-form.com/nHIBlORO', {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify({ email }),
-      })
+      fetch(
+        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_FORM_PORTAL_ID}/${HUBSPOT_NEWSLETTERS_FORM_ID}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            context,
+            fields: [
+              {
+                name: 'email',
+                value: email,
+              },
+            ],
+          }),
+        }
+      )
         .then((response) => {
           if (response.ok) {
             doNowOrAfterSomeTime(() => {

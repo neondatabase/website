@@ -29,6 +29,8 @@
           slug: cloud/second-test/test2
       #  TODO: remove testing data
 
+    - title: Regions
+      slug: conceptual-guides/regions
 - title: Get started
   items:
     - title: Signing up
@@ -39,6 +41,8 @@
       slug: get-started-with-neon/query-with-neon-sql-editor
     - title: Query with psql
       slug: get-started-with-neon/query-with-psql-editor
+    - title: Get started with Branching
+      slug: get-started-with-neon/get-started-branching
     - title: Using API keys
       slug: get-started-with-neon/using-api-keys
     - title: Connecting with old clients
