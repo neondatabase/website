@@ -9,6 +9,7 @@ import {
   Highlight,
   Snippet,
 } from 'react-instantsearch-dom';
+import { useWindowSize } from 'react-use';
 import aa from 'search-insights';
 
 import Link from 'components/shared/link';
@@ -110,20 +111,22 @@ const resultsClassNames = {
 const containerClassNames = {
   default: 'max-h-[70vh]',
   notFound: 'max-h-[70vh] px-3.5 xs:px-0',
-  // 102px is the height of the search input and footer of the search results
-  mobile: 'max-h-[calc(100vh-102px)]',
 };
 
 const Results = ({ indices, type }) => {
   const [shouldShowAllResultsButton, setShouldShowAllResultsButton] = useState(false);
   const [allResultsShown, setAllResultsShown] = useState(false);
-
+  const { height } = useWindowSize();
   const isMobileSearch = type === 'mobile';
   const isNotFoundPage = type === 'notFound';
-
+  // 102px is the height of the search input and footer of the search results
+  const containerHeight = `${height - 102}px`;
   return (
     <div className={clsx('bg-white', resultsClassNames[type])}>
-      <div className={clsx('overflow-y-scroll pt-2.5', containerClassNames[type])}>
+      <div
+        className={clsx('overflow-y-scroll pt-2.5', containerClassNames[type])}
+        style={{ maxHeight: containerHeight }}
+      >
         {indices.map(({ name }) => (
           <Index indexName={name} key={name}>
             <HitCount

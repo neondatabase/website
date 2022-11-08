@@ -22,12 +22,7 @@ const SearchModal = ({ isOpen, closeModal }) => {
     >
       <Configure clickAnalytics />
 
-      <div
-        className={clsx(
-          isOpen ? 'block' : 'hidden',
-          'fixed inset-0 z-[100] h-screen w-screen bg-gray-9'
-        )}
-      >
+      <div className={clsx(isOpen ? 'block' : 'hidden', 'fixed inset-0 z-[100] bg-gray-9')}>
         <div className="flex items-center space-x-4 border-b border-gray-7 bg-white px-4 py-2.5">
           <Input
             className="grow"
