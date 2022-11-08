@@ -14,7 +14,7 @@
         @apply relative pl-0;
 
         &::before {
-          @apply absolute top-4 -translate-y-1/2;
+          @apply absolute -translate-y-1/2;
         }
 
         ol {
@@ -28,20 +28,20 @@
 
       > li {
         &::before {
-          @apply -left-6 h-2 w-2 rounded-full bg-primary-1 content-[''] md:top-3 md:-left-4 md:h-1.5 md:w-1.5;
+          @apply -left-6 top-4 h-2 w-2 rounded-full bg-primary-1 content-[''] md:top-3 md:-left-4 md:h-1.5 md:w-1.5;
         }
       }
     }
 
     ol {
       counter-reset: custom-counter;
-      @apply pl-10 md:pl-4;
+      @apply pl-10 md:pl-5;
 
       > li {
         counter-increment: custom-counter;
 
         &::before {
-          @apply -left-2 -translate-x-full md:static;
+          @apply -left-2 top-4 -translate-x-full md:top-3.5 md:-left-1;
           content: counter(custom-counter) '. ' !important;
         }
       }
