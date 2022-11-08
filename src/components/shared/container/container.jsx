@@ -4,8 +4,8 @@ import React, { forwardRef } from 'react';
 
 const styles = {
   size: {
-    lg: 'max-w-[1472px] 2xl:max-w-[1216px] xl:max-w-[936px] px-0',
     md: 'max-w-[1760px] 3xl:max-w-[1472px] 2xl:max-w-[1216px] xl:max-w-[936px]',
+    mdDoc: 'max-w-[1472px] 2xl:max-w-[1216px] xl:max-w-[936px] px-0',
     sm: 'max-w-[860px]',
   },
 };
