@@ -51,6 +51,8 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
     setIsOpen(!isOpen);
   };
 
+  const containerHeight = `${height - 148}px`;
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -71,19 +73,22 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
           Documentation menu
         </button>
         <ChevronRight
-          className="absolute right-8 top-1/2 -translate-y-1/2 rotate-90 md:right-5"
+          className={clsx(
+            'absolute right-8 top-1/2 -translate-y-1/2 transition-transform duration-300 ease-in-out md:right-5',
+            isOpen ? 'rotate-90' : '-rotate-90'
+          )}
           aria-hidden
         />
       </Container>
 
       <motion.ul
         className={clsx(
-          'fixed inset-x-0 top-[148px] bottom-0 z-20 overflow-y-scroll bg-white px-4 pt-2 pb-4'
+          'fixed inset-x-0 top-[148px] bottom-0 z-20 overflow-y-scroll bg-white pl-4 pr-[13px] pt-2 pb-4'
         )}
         initial="from"
         animate={controls}
         variants={variants}
-        style={{ maxHeight: `${height - 148}px` }}
+        style={{ maxHeight: containerHeight }}
       >
         {sidebar.map((item, index) => (
           <Item
