@@ -17,7 +17,7 @@ const Footer = ({ isDocPage, withTopBorder }) => (
       withTopBorder && 'border-t border-gray-7'
     )}
   >
-    <Container className="flex justify-between py-10 xl:py-8" size={isDocPage ? 'xl' : 'md'}>
+    <Container className="flex justify-between py-10 xl:py-8" size="md">
       <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
         <div className="mb-7 flex flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-center md:justify-between">
           <Link className="block" to="/">

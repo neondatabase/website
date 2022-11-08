@@ -74,7 +74,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
         </button>
         <ChevronRight
           className={clsx(
-            'absolute right-8 top-1/2 -translate-y-1/2 transition-transform duration-300 ease-in-out md:right-5',
+            'absolute right-[37px] top-1/2 -translate-y-1/2 transition-transform duration-300 ease-in-out md:right-5',
             isOpen ? 'rotate-90' : '-rotate-90'
           )}
           aria-hidden
@@ -83,7 +83,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
 
       <motion.ul
         className={clsx(
-          'fixed inset-x-0 top-[148px] bottom-0 z-20 overflow-y-scroll bg-white pl-4 pr-[13px] pt-2 pb-4'
+          'fixed inset-x-0 top-[148px] bottom-0 z-20 overflow-y-scroll bg-white pl-8 pr-[29px] pt-2 pb-4 md:pl-4 md:pr-[13px]'
         )}
         initial="from"
         animate={controls}
