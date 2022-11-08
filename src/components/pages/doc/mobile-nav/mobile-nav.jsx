@@ -33,6 +33,7 @@ const variants = {
 
 const MobileNav = ({ className, sidebar, currentSlug }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [containerHeight, setContainerHeight] = useState(null);
   const { height } = useWindowSize();
   const controls = useAnimation();
   const activeItemIndex = sidebar.findIndex(({ slug, items }) => {
@@ -51,7 +52,9 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
     setIsOpen(!isOpen);
   };
 
-  const containerHeight = `${height - 148}px`;
+  useEffect(() => {
+    setContainerHeight(`${height - 148}px`);
+  }, [height]);
 
   useEffect(() => {
     if (isOpen) {
@@ -64,7 +67,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
   }, [controls, isOpen]);
   return (
     <nav className={clsx('safe-paddings relative border-b border-gray-7 bg-gray-9', className)}>
-      <Container size="lg">
+      <Container size="md">
         <button
           className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-transparent py-2.5 outline-none"
           type="button"

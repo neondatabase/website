@@ -116,11 +116,16 @@ const containerClassNames = {
 const Results = ({ indices, type }) => {
   const [shouldShowAllResultsButton, setShouldShowAllResultsButton] = useState(false);
   const [allResultsShown, setAllResultsShown] = useState(false);
+  const [containerHeight, setContainerHeight] = useState(null);
   const { height } = useWindowSize();
   const isMobileSearch = type === 'mobile';
   const isNotFoundPage = type === 'notFound';
-  // 102px is the height of the search input and footer of the search results
-  const containerHeight = `${height - 102}px`;
+
+  useEffect(() => {
+    // 102px is the height of the search input and footer of the search results
+    setContainerHeight(`${height - 102}px`);
+  }, [height]);
+
   return (
     <div className={clsx('bg-white', resultsClassNames[type])}>
       <div
