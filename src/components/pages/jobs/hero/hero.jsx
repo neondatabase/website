@@ -15,7 +15,7 @@ const Hero = () => (
       </p>
       <div className="-mt-16 translate-y-32 lg:-mt-12 lg:translate-y-24 md:-mt-8 md:flex md:translate-y-16 md:justify-center">
         <StaticImage
-          className="rounded-md md:min-w-[600px]"
+          className="rounded-md md:min-w-[600px] sm:min-w-0"
           src="./images/hero-illustration.jpg"
           alt=""
           imgClassName="rounded-md"
