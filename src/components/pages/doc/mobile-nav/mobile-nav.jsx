@@ -1,58 +1,99 @@
 import clsx from 'clsx';
-import { navigate } from 'gatsby';
+import { motion, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useWindowSize } from 'react-use';
 
+import Item from 'components/pages/doc/sidebar/item';
 import Container from 'components/shared/container';
-import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
-const MobileNav = ({ className, sidebar, currentSlug }) => {
-  const handleChange = (e) => {
-    const { value, selectedOptions } = e.target;
+const ANIMATION_DURATION = 0.2;
 
-    const slug = selectedOptions[0].dataset.standalone ? `/${value}` : `${DOCS_BASE_PATH}${value}/`;
-    if (value) navigate(slug);
+const variants = {
+  from: {
+    opacity: 0,
+    translateY: 10,
+    transition: {
+      duration: ANIMATION_DURATION,
+    },
+    transitionEnd: {
+      zIndex: -1,
+    },
+  },
+  to: {
+    zIndex: 20,
+    opacity: 1,
+    translateY: 0,
+    transition: {
+      duration: ANIMATION_DURATION,
+    },
+  },
+};
+
+const MobileNav = ({ className, sidebar, currentSlug }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { height } = useWindowSize();
+  const controls = useAnimation();
+  const activeItemIndex = sidebar.findIndex(({ slug, items }) => {
+    if (slug) {
+      return slug === currentSlug;
+    }
+
+    return (
+      items?.find(
+        ({ slug, items }) => slug === currentSlug || items?.find(({ slug }) => slug === currentSlug)
+      ) !== undefined
+    );
+  });
+
+  const onClickHandler = () => {
+    setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      controls.start('to');
+    } else {
+      document.body.style.overflow = '';
+      controls.start('from');
+    }
+  }, [controls, isOpen]);
   return (
     <nav className={clsx('safe-paddings relative border-b border-gray-7 bg-gray-9', className)}>
       <Container size="lg">
-        <select
-          className="relative z-10 w-full cursor-pointer appearance-none text-ellipsis bg-transparent py-[10px] outline-none"
-          value={currentSlug}
-          onChange={handleChange}
+        <button
+          className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-transparent py-2.5 outline-none"
+          type="button"
+          onClick={onClickHandler}
         >
-          {sidebar &&
-            sidebar.map((sidebarItem, index) => (
-              <optgroup label={sidebarItem.title} key={index}>
-                {sidebarItem.slug && (
-                  <option value={sidebarItem.slug} data-standalone={sidebarItem.isStandalone}>
-                    {sidebarItem.title}
-                  </option>
-                )}
-                {sidebarItem?.items?.map(({ title, slug, items }, index) => (
-                  <Fragment key={index}>
-                    {slug && (
-                      <option value={slug} data-standalone={sidebarItem.isStandalone}>
-                        {title}
-                      </option>
-                    )}
-                    {items?.map(({ title: title2, slug: slug2 }, index) => (
-                      <option value={slug2} data-standalone={sidebarItem.isStandalone} key={index}>
-                        {!slug && `${title}: `}
-                        {title2}
-                      </option>
-                    ))}
-                  </Fragment>
-                ))}
-              </optgroup>
-            ))}
-        </select>
+          Documentation menu
+        </button>
         <ChevronRight
           className="absolute right-8 top-1/2 -translate-y-1/2 rotate-90 md:right-5"
           aria-hidden
         />
       </Container>
+
+      <motion.ul
+        className={clsx(
+          'fixed inset-x-0 top-[148px] bottom-0 z-20 overflow-y-scroll bg-white px-4 pt-2 pb-4'
+        )}
+        initial="from"
+        animate={controls}
+        variants={variants}
+        style={{ maxHeight: `${height - 148}px` }}
+      >
+        {sidebar.map((item, index) => (
+          <Item
+            {...item}
+            isOpenByDefault={index === activeItemIndex}
+            currentSlug={currentSlug}
+            key={index}
+          />
+        ))}
+      </motion.ul>
     </nav>
   );
 };
