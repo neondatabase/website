@@ -38,7 +38,13 @@ const SearchModal = ({ isOpen, closeModal }) => {
             Cancel
           </button>
         </div>
-        {shouldShowResult && <Results indices={indices} type="mobile" />}
+        {shouldShowResult ? (
+          <Results indices={indices} type="mobile" />
+        ) : (
+          <span className="mt-3.5 block text-center text-xs leading-none text-gray-3">
+            No recent searches
+          </span>
+        )}
       </div>
     </InstantSearch>
   );
