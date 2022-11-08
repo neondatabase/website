@@ -41,7 +41,7 @@ With Neon's branching capabilities, you can create a staging database by branchi
 
 ## Backup
 
-You can use branching to implement a data backup strategy. For example, you can create a backup branches named for the time they were created for convenient point-in-time restore (PITR).
+You can use branching to implement a data backup strategy. For example, you can create backup branches named for the time they were created for convenient point-in-time restore (PITR).
 
 ### Data recovery
 
