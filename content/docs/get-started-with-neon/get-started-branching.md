@@ -51,7 +51,7 @@ The **Branches** widget on the project **Dashboard** also lists the branches in 
 
 Now that you have created a branch, how do you connect to it? You can connect to a branch using a connection string, as you would when connecting to any Neon database. The following steps describe how to connect to a branch using `psql`.
 
-_**Note:**_ You can also query a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../query-with-neon-sql-editor).
+_**Note:** You can also query a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../query-with-neon-sql-editor)._
 
 1. In the Neon Console, select a project.
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the user you want to connect with.
@@ -60,10 +60,10 @@ _**Note:**_ You can also query a branch from the Neon SQL Editor. For instructio
 5. Add your password to the connection string as shown below, and connect with `psql`. You can connect using the same user and password that you use to connect to the parent branch.
 
   ```bash
-  psql postgres://casey:<password>@ep-patient-wildflower-627498.cloud.neon.tech/main
+  psql postgres://casey:<password>@ep-frosty-meadow-241299.cloud.neon.tech/main
   ```
 
-_**Note:**_ The endpoint hostname, which is `ep-patient-wildflower-627498.cloud.neon.tech` in the example above, can also be found on the **Branches** page in the Neon Console. For instructions, see [View branches](#view-branches).
+_**Note:** The endpoint hostname, which is `ep-frosty-meadow-241299.cloud.neon.tech` in the example above, can also be found on the **Branches** page in the Neon Console. For instructions, see [View branches](#view-branches)._
 
 If you want to connect to a branch from an application, the **Connection Details** widget on the project **Dashboard** also provides connection examples for various languages and frameworks.
 
