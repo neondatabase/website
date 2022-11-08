@@ -76,10 +76,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
           Documentation menu
         </button>
         <ChevronRight
-          className={clsx(
-            'absolute right-[37px] top-1/2 -translate-y-1/2 transition-transform duration-300 ease-in-out md:right-5',
-            isOpen ? 'rotate-90' : '-rotate-90'
-          )}
+          className="absolute right-[37px] top-1/2 -translate-y-1/2 rotate-90 md:right-5"
           aria-hidden
         />
       </Container>

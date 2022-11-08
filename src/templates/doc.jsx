@@ -61,7 +61,7 @@ const DocTemplate = (props) => {
 
         <Container
           className="grid w-full flex-1 grid-cols-12 gap-x-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
-          size="md"
+          size="lg"
         >
           <Sidebar
             className="relative col-start-1 col-end-4 max-w-[254px] bg-gray-9 pb-20 pt-[118px] before:absolute before:top-0 before:-right-5 before:-z-10 before:h-full before:w-[300%] before:bg-gray-9 lg:hidden"
