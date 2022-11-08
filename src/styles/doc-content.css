@@ -38,10 +38,6 @@
       > li {
         @apply relative my-1.5 pl-0;
 
-        &::before {
-          @apply absolute top-4 -translate-y-1/2;
-        }
-
         ol {
           @apply md:pl-4;
         }
@@ -53,7 +49,7 @@
 
       > li {
         &::before {
-          @apply -left-3.5 h-1 w-1 rounded-full bg-black content-[''] md:top-3 md:-left-3;
+          @apply absolute -left-3.5 top-2.5 h-1 w-1 rounded-full bg-black content-[''] md:-left-3;
         }
       }
     }
