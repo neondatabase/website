@@ -130,7 +130,7 @@ const Results = ({ indices, type }) => {
     <div className={clsx('bg-white', resultsClassNames[type])}>
       <div
         className={clsx('overflow-y-scroll pt-2.5', containerClassNames[type])}
-        style={{ maxHeight: containerHeight }}
+        style={{ maxHeight: isMobileSearch && containerHeight }}
       >
         {indices.map(({ name }) => (
           <Index indexName={name} key={name}>
