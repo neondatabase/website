@@ -1,5 +1,4 @@
 - title: Introduction
-  slug: introduction #  TODO: remove testing data
   items:
     - title: What is Neon?
       slug: cloud/about
@@ -13,22 +12,6 @@
       slug: reference/roadmap
     - title: Technical Preview Free Tier
       slug: reference/technical-preview-free-tier
-      # TODO: remove testing data
-      items:
-        - title: Test page
-          slug: cloud/test/test
-        - title: Test page 2
-          slug: cloud/test/test2
-        - title: Sidebar item test
-          items:
-            - title: Test page
-              slug: cloud/second-test/test
-    - title: Sidebar Items
-      items:
-        - title: Test page 2
-          slug: cloud/second-test/test2
-      #  TODO: remove testing data
-
     - title: Regions
       slug: conceptual-guides/regions
 - title: Get started

@@ -8,9 +8,12 @@ import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
 import logoBlack from 'images/logo-black.svg';
 
-import ThemeSelect from './theme-select';
+// import ThemeSelect from './theme-select';
 
-const Footer = ({ isDocPage, withTopBorder }) => (
+const Footer = ({
+  // isDocPage,
+  withTopBorder,
+}) => (
   <footer
     className={clsx(
       'safe-paddings mt-auto overflow-hidden',
@@ -31,7 +34,7 @@ const Footer = ({ isDocPage, withTopBorder }) => (
               aria-hidden
             />
           </Link>
-          {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />}
+          {/* {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />} */}
         </div>
         <div className="t-lg space-y-4 leading-none">
           <p>Made in SF and the World</p>
@@ -71,12 +74,12 @@ const Footer = ({ isDocPage, withTopBorder }) => (
 );
 
 Footer.propTypes = {
-  isDocPage: PropTypes.bool,
+  // isDocPage: PropTypes.bool,
   withTopBorder: PropTypes.bool,
 };
 
 Footer.defaultProps = {
-  isDocPage: false,
+  // isDocPage: false,
   withTopBorder: false,
 };
 
