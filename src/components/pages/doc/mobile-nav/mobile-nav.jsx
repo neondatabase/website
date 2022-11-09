@@ -35,17 +35,6 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
   const [containerHeight, setContainerHeight] = useState(null);
   const { height } = useWindowSize();
   const controls = useAnimation();
-  const activeItemIndex = sidebar.findIndex(({ slug, items }) => {
-    if (slug) {
-      return slug === currentSlug;
-    }
-
-    return (
-      items?.find(
-        ({ slug, items }) => slug === currentSlug || items?.find(({ slug }) => slug === currentSlug)
-      ) !== undefined
-    );
-  });
 
   const openMenu = () => {
     setIsOpen(!isOpen);
@@ -88,12 +77,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
         style={{ maxHeight: containerHeight }}
       >
         {sidebar.map((item, index) => (
-          <Item
-            {...item}
-            isOpenByDefault={index === activeItemIndex}
-            currentSlug={currentSlug}
-            key={index}
-          />
+          <Item {...item} currentSlug={currentSlug} key={index} />
         ))}
       </motion.ul>
     </nav>

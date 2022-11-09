@@ -136,9 +136,7 @@ module.exports = async ({ graphql, actions }) => {
       actions.createPage({
         path: pagePath,
         component: `${docTemplate}?__contentFilePath=${contentFilePath}`,
-        context: {
-          ...context,
-        },
+        context,
       });
 
       if (isReleaseNotes) {
