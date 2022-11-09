@@ -7,12 +7,12 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 
 const isActiveItem = (items, currentSlug) =>
-  !!items?.find(
+  items?.some(
     ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
   );
 
-const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }) => {
-  const [isOpen, setIsOpen] = useState(isOpenByDefault || slug === currentSlug);
+const Item = ({ title, slug, isStandalone, items, currentSlug }) => {
+  const [isOpen, setIsOpen] = useState(slug === currentSlug);
 
   if (!isOpen && isActiveItem(items, currentSlug)) {
     setIsOpen(true);
@@ -28,7 +28,7 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
     <li className="flex flex-col">
       <Tag
         className={clsx(
-          'group flex w-full items-center justify-between py-2 text-left text-sm text-gray-3 transition-colors duration-200 hover:text-black',
+          'group flex w-full items-start justify-between py-2 text-left text-sm text-gray-3 transition-colors duration-200 hover:text-black',
           {
             'font-semibold !text-black': currentSlug === slug,
           }
@@ -40,7 +40,7 @@ const Item = ({ title, slug, isStandalone, items, isOpenByDefault, currentSlug }
         <span className="leading-snug">{title}</span>
         <ChevronRight
           className={clsx(
-            'mr-2 shrink-0 text-gray-5 transition-[transform,color] duration-200 group-hover:text-black',
+            'mx-2 mt-[5px] shrink-0 text-gray-5 transition-[transform,color] duration-200 group-hover:text-black',
             {
               '!text-black': currentSlug === slug,
             },

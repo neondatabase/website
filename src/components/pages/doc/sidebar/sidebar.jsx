@@ -5,37 +5,18 @@ import Search from 'components/shared/search';
 
 import Item from './item';
 
-const Sidebar = ({ className, sidebar, currentSlug }) => {
-  const activeItemIndex = sidebar.findIndex(({ slug, items }) => {
-    if (slug) {
-      return slug === currentSlug;
-    }
-
-    return (
-      items?.find(
-        ({ slug, items }) => slug === currentSlug || items?.find(({ slug }) => slug === currentSlug)
-      ) !== undefined
-    );
-  });
-
-  return (
-    <aside className={className}>
-      <Search />
-      <nav className="mt-5">
-        <ul>
-          {sidebar.map((item, index) => (
-            <Item
-              {...item}
-              isOpenByDefault={index === activeItemIndex}
-              currentSlug={currentSlug}
-              key={index}
-            />
-          ))}
-        </ul>
-      </nav>
-    </aside>
-  );
-};
+const Sidebar = ({ className, sidebar, currentSlug }) => (
+  <aside className={className}>
+    <Search />
+    <nav className="mt-5">
+      <ul>
+        {sidebar.map((item, index) => (
+          <Item {...item} currentSlug={currentSlug} key={index} />
+        ))}
+      </ul>
+    </nav>
+  </aside>
+);
 
 Sidebar.propTypes = {
   className: PropTypes.string,

@@ -6,11 +6,14 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 
 const Breadcrumbs = ({ breadcrumbs }) => (
   <div className="mb-4 flex space-x-1 text-sm leading-none text-gray-4">
-    {breadcrumbs.map(({ title, path }, index) => (
+    {breadcrumbs.map(({ title, slug }, index) => (
       <Fragment key={index}>
         {index !== 0 && <span>/</span>}
-        {path ? (
-          <Link className="hover:text-black" to={DOCS_BASE_PATH + path}>
+        {slug ? (
+          <Link
+            className="transition-colors duration-200 hover:text-black"
+            to={DOCS_BASE_PATH + slug}
+          >
             {title}
           </Link>
         ) : (
@@ -25,7 +28,7 @@ Breadcrumbs.propTypes = {
   breadcrumbs: PropTypes.arrayOf(
     PropTypes.exact({
       title: PropTypes.string.isRequired,
-      path: PropTypes.string,
+      slug: PropTypes.string,
     })
   ).isRequired,
 };

@@ -52,10 +52,12 @@ PreviousAndNextLinks.propTypes = {
   previousLink: PropTypes.exact({
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
+    path: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
   nextLink: PropTypes.exact({
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
+    path: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
 };
 

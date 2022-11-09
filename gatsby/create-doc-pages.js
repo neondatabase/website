@@ -19,33 +19,29 @@ const createRedirects = require('./create-redirects');
 const sidebar = jsYaml.load(fs.readFileSync(path.resolve('./content/docs/sidebar.yaml'), 'utf8'));
 const docTemplate = path.resolve('./src/templates/doc.jsx');
 
-const flatSidebar = (sidebar) =>
-  sidebar.reduce((acc, item) => {
+const getFlatSidebar = (sidebar, path = []) =>
+  sidebar.reduce((acc, item, index) => {
+    const current = { title: item.title, slug: item.slug, path: [...path, index] };
     if (item.items) {
-      if (item.slug) {
-        const current = { title: item.title, slug: item.slug };
-        return [...acc, current, ...flatSidebar(item.items)];
-      }
-      return [...acc, ...flatSidebar(item.items)];
+      return [...acc, current, ...getFlatSidebar(item.items, current.path)];
     }
-    return [...acc, item];
+    return [...acc, { ...item, path: [...path, index] }];
   }, []);
+const flatSidebar = getFlatSidebar(sidebar);
 
-function findMatchedItems(items, slug) {
-  const item = items.find((item) => item.slug === slug);
-  if (item) {
-    return true;
+const getBreadcrumbs = (slug, flatSidebar) => {
+  const path = flatSidebar.find((item) => item.slug === slug)?.path;
+  const arr = [];
+  if (path) {
+    path.reduce((prev, cur) => {
+      const current = prev[cur] || prev.items[cur];
+      arr.push({ title: current.title, slug: current.slug });
+      return current;
+    }, sidebar);
+
+    return arr.slice(0, -1);
   }
-  for (let i = 0; i < items.length; i++) {
-    const currentItem = items[i];
-    if (currentItem.items) {
-      const innerItem = findMatchedItems(currentItem.items, slug);
-      if (innerItem) {
-        return [currentItem, ...(typeof innerItem === 'boolean' ? [] : innerItem)];
-      }
-    }
-  }
-}
+};
 
 module.exports = async ({ graphql, actions }) => {
   const result = await graphql(
@@ -116,18 +112,8 @@ module.exports = async ({ graphql, actions }) => {
       const isReleaseNotes = slug === RELEASE_NOTES_SLUG;
 
       const pagePath = generateDocPagePath(slug);
-      const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar(sidebar));
-
-      const getBreadcrumbs = (sidebar, slug) => {
-        const items = findMatchedItems(sidebar, slug);
-        if (typeof items === 'boolean') {
-          return undefined;
-        }
-
-        return items?.map((item) => ({ path: item.slug || null, title: item.title }));
-      };
-
-      const breadcrumbs = getBreadcrumbs(sidebar, slug);
+      const breadcrumbs = getBreadcrumbs(slug, flatSidebar);
+      const { previousLink, nextLink } = getDocPreviousAndNextLinks(slug, flatSidebar);
 
       const filePath = contentFilePath.split('/docs/').pop();
       const fileOriginPath = isReleaseNotes
