@@ -27,15 +27,15 @@ const PostsList = ({ items }) => (
 
           return (
             <article
-              className="relative border-b border-b-gray-4 pb-10 2xl:pb-8 xl:pb-7 md:pb-6"
+              className="relative border-b border-b-gray-6 pb-10 2xl:pb-8 xl:pb-7 md:pb-6"
               key={index}
             >
-              <h1 className="t-4xl font-semibold !leading-tight">
+              <h1 className="t-4xl font-semibold leading-tight">
                 <Link to={getBlogPostPath(slug)} theme="black">
                   {title}
                 </Link>
               </h1>
-              <div className="mt-5 flex items-center justify-between 2xl:mt-4">
+              <div className="mt-5 flex items-center justify-between leading-none 2xl:mt-4">
                 {postAuthor && author.postAuthor.url ? (
                   <Link className="group" to={author.postAuthor.url}>
                     {postAuthor}
@@ -46,7 +46,7 @@ const PostsList = ({ items }) => (
 
                 <p className="t-base text-gray-2">{date}</p>
               </div>
-              <p className="t-lg mt-5 !leading-normal 2xl:mt-4">{description}</p>
+              <p className="t-lg mt-5 leading-normal 2xl:mt-4">{description}</p>
               <Link
                 className="mt-5 font-semibold 2xl:mt-4"
                 to={getBlogPostPath(slug)}

@@ -1,13 +1,16 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
-import Button from 'components/shared/button';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+
+import CheckIcon from './images/check.inline.svg';
+import CopyIcon from './images/copy.inline.svg';
 
 const DEFAULT_LANGUAGE = 'bash';
 
-const CodeBlock = ({ className, children, ...otherProps }) => {
+const CodeBlock = ({ className, children, showLineNumbers, ...otherProps }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const match = /language-(\w+)/.exec(className || '');
@@ -15,20 +18,23 @@ const CodeBlock = ({ className, children, ...otherProps }) => {
   const code = children.trim();
 
   return (
-    <div className="group relative" {...otherProps}>
-      <SyntaxHighlighter language={language} useInlineStyles={false}>
+    <div className={clsx('group relative', className)} {...otherProps}>
+      <SyntaxHighlighter
+        language={language}
+        useInlineStyles={false}
+        showLineNumbers={showLineNumbers}
+        className="no-scrollbars"
+      >
         {code}
       </SyntaxHighlighter>
-      <Button
-        className="invisible absolute top-2 right-2 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100"
+      <button
+        className="invisible absolute top-2 right-2 rounded border border-gray-6 bg-white p-1.5 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-gray-7 group-hover:visible group-hover:opacity-100"
         type="button"
-        size="xxs"
-        theme="secondary"
         disabled={isCopied}
         onClick={() => handleCopy(code)}
       >
-        {isCopied ? 'Copied' : 'Copy'}
-      </Button>
+        {isCopied ? <CheckIcon className="h-4 w-4 text-primary-1" /> : <CopyIcon />}
+      </button>
     </div>
   );
 };
@@ -36,10 +42,12 @@ const CodeBlock = ({ className, children, ...otherProps }) => {
 CodeBlock.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
+  showLineNumbers: PropTypes.bool,
 };
 
 CodeBlock.defaultProps = {
   className: null,
+  showLineNumbers: false,
 };
 
 export default CodeBlock;
