@@ -68,7 +68,7 @@ const BlogPostTemplate = ({
           className="col-start-2 col-end-10 mt-8 md:col-span-full sm:mt-4"
           html={contentWithLazyBlocks}
         />
-        <div className="col-start-2 col-end-10 mt-7 hidden space-x-8 lg:flex md:col-span-full sm:flex-col sm:space-x-0 sm:space-y-6">
+        <div className="col-start-2 col-end-10 mt-9 hidden space-x-8 lg:flex md:col-span-full sm:flex-col sm:space-x-0 sm:space-y-6">
           <BlogPostAuthors authors={pageBlogPost.authors} isBlogPost />
         </div>
 
