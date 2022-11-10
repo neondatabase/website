@@ -9,6 +9,7 @@ import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 import SocialShare from 'components/pages/blog-post/social-share';
 import SocialShareBar from 'components/pages/blog-post/social-share-bar';
+import BlogPostAuthors from 'components/shared/blog-post-author';
 import CodeBlock from 'components/shared/code-block';
 import Layout from 'components/shared/layout';
 import SEO from 'components/shared/seo';
@@ -56,7 +57,7 @@ const BlogPostTemplate = ({
 
         <SocialShare
           className={clsx(
-            'col-span-1 col-start-1 mt-10 transition-opacity duration-150 md:hidden',
+            'sticky top-28 col-span-1 col-start-10 row-start-2 row-end-4 ml-3 mt-6 transition-opacity duration-150 md:hidden',
             isSocialShareInView ? 'invisible opacity-0' : 'visible opacity-100'
           )}
           slug={shareUrl}
@@ -64,9 +65,12 @@ const BlogPostTemplate = ({
           isSticky
         />
         <Content
-          className="col-start-2 col-end-10 mt-8 md:col-span-full"
+          className="col-start-2 col-end-10 mt-8 md:col-span-full sm:mt-4"
           html={contentWithLazyBlocks}
         />
+        <div className="col-start-2 col-end-10 mt-7 hidden flex-col space-y-5 lg:flex md:col-span-full">
+          <BlogPostAuthors authors={pageBlogPost.authors} isBlogPost />
+        </div>
 
         <SocialShare
           className="col-start-2 col-end-10 mt-8 md:hidden"
@@ -92,16 +96,18 @@ export const query = graphql`
       date(formatString: "MMMM D, YYYY")
       pageBlogPost {
         description
-        author {
-          ... on WpPostAuthor {
-            title
-            postAuthor {
-              url
-              role
-              image {
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData(width: 40)
+        authors {
+          author {
+            ... on WpPostAuthor {
+              title
+              postAuthor {
+                role
+                url
+                image {
+                  localFile {
+                    childImageSharp {
+                      gatsbyImageData(width: 40)
+                    }
                   }
                 }
               }
