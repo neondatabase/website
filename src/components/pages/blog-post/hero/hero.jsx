@@ -13,7 +13,7 @@ const Hero = ({ title, description, authors, date, readingTime, className }) => 
           {readingTime} min read
         </span>
       </span>
-      <h1 className="t-5xl font-semibold">{title}</h1>
+      <h1 className="t-5xl font-semibold leading-tight">{title}</h1>
     </div>
     <div className={clsx('safe-paddings', className)}>
       <p className="t-2xl mt-6 xl:mt-5 md:!text-lg">{description}</p>
