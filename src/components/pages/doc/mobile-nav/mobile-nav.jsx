@@ -36,10 +36,9 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
   const { height } = useWindowSize();
   const controls = useAnimation();
 
-  const openMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = () => setIsOpen((isOpen) => !isOpen);
 
+  // 148px is the height of top banner + header + button Documentation menu
   useEffect(() => {
     setContainerHeight(`${height - 148}px`);
   }, [height]);
@@ -58,7 +57,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
       <button
         className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-9 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-8 active:bg-gray-8 lg:px-8 md:px-4"
         type="button"
-        onClick={openMenu}
+        onClick={toggleMenu}
       >
         <span>Documentation menu</span>
         <ChevronRight

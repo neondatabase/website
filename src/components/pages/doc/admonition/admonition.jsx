@@ -25,9 +25,7 @@ const Admonition = ({ children, type, title }) => (
       borderClassNames[type]
     )}
   >
-    <span className={clsx('text-xs font-bold uppercase', titleClassNames[type])}>
-      {title || type}
-    </span>
+    <h4 className={clsx('text-xs font-bold uppercase', titleClassNames[type])}>{title || type}</h4>
     <div className="admonition-text mt-1.5 text-base">{children}</div>
   </div>
 );

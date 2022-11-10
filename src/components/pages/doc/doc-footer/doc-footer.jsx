@@ -5,6 +5,7 @@ import React from 'react';
 import Link from 'components/shared/link';
 import GitHubIcon from 'icons/github.inline.svg';
 
+// TODO: uncomment this when we have a way to track feedback
 // const emojis = [
 //   <StaticImage src="./images/crying.jpg" width={24} height={24} alt="Crying" loading="lazy" />,
 //   <StaticImage

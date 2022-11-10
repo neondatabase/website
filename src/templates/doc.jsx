@@ -95,7 +95,7 @@ const DocTemplate = (props) => {
           </div>
           {enableTableOfContents && (
             <TableOfContents
-              className="col-start-11 col-end-13 -ml-11 pb-20 pt-[118px] 2xl:ml-0"
+              className="col-start-11 col-end-13 -ml-11 pb-20 pt-[110px] 2xl:ml-0"
               contentRef={contentRef}
             />
           )}
