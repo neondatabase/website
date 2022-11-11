@@ -28,7 +28,7 @@ const CodeBlock = ({ className, children, showLineNumbers, ...otherProps }) => {
         {code}
       </SyntaxHighlighter>
       <button
-        className="invisible absolute top-2 right-2 rounded border border-gray-6 bg-white p-1.5 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-gray-7 group-hover:visible group-hover:opacity-100"
+        className="invisible absolute top-2 right-2 rounded border border-gray-6 bg-white p-1.5 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-gray-7 group-hover:visible group-hover:opacity-100 lg:visible lg:opacity-100"
         type="button"
         disabled={isCopied}
         onClick={() => handleCopy(code)}

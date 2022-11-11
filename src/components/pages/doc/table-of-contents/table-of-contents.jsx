@@ -42,7 +42,7 @@ const TableOfContents = ({ className, contentRef }) => {
           <TOCIcon className="h-3.5 w-3.5" />
           <span>On this page</span>
         </h3>
-        <ul>
+        <ul className="mt-2.5">
           {items.map((item, index) => {
             const linkHref = `#${item.id}`;
 

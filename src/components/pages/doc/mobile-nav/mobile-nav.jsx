@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { motion, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useWindowSize } from 'react-use';
+import { useLockBodyScroll, useWindowSize } from 'react-use';
 
 import Item from 'components/pages/doc/sidebar/item';
 import ChevronRight from 'icons/chevron-right.inline.svg';
@@ -35,21 +35,18 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
   const [containerHeight, setContainerHeight] = useState(null);
   const { height } = useWindowSize();
   const controls = useAnimation();
+  useLockBodyScroll(isOpen);
+  const toggleMenu = () => setIsOpen((isOpen) => !isOpen);
 
-  const openMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
+  // 148px is the height of top banner + header + button Documentation menu
   useEffect(() => {
     setContainerHeight(`${height - 148}px`);
   }, [height]);
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
       controls.start('to');
     } else {
-      document.body.style.overflow = '';
       controls.start('from');
     }
   }, [controls, isOpen]);
@@ -58,7 +55,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
       <button
         className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-9 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-8 active:bg-gray-8 lg:px-8 md:px-4"
         type="button"
-        onClick={openMenu}
+        onClick={toggleMenu}
       >
         <span>Documentation menu</span>
         <ChevronRight
