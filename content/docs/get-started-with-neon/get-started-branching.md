@@ -60,10 +60,10 @@ _**Note:** You can also query a branch from the Neon SQL Editor. For instruction
 5. Add your password to the connection string as shown below, and connect with `psql`. You can connect using the same user and password that you use to connect to the parent branch.
 
   ```bash
-  psql postgres://casey:<password>@ep-frosty-meadow-241299.cloud.neon.tech/main
+  psql postgres://casey:<password>@ep-ancient-sky-241299.cloud.neon.tech/main
   ```
 
-_**Note:** The endpoint hostname, which is `ep-frosty-meadow-241299.cloud.neon.tech` in the example above, can also be found on the **Branches** page in the Neon Console. For instructions, see [View branches](#view-branches)._
+_**Note:** The endpoint hostname, which is `ep-ancient-sky-241299.cloud.neon.tech` in the example above, can also be found on the **Branches** page in the Neon Console. For instructions, see [View branches](#view-branches)._
 
 If you want to connect to a branch from an application, the **Connection Details** widget on the project **Dashboard** also provides connection examples for various languages and frameworks.
 
