@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { motion, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useWindowSize } from 'react-use';
+import { useLockBodyScroll, useWindowSize } from 'react-use';
 
 import Item from 'components/pages/doc/sidebar/item';
 import ChevronRight from 'icons/chevron-right.inline.svg';
@@ -35,7 +35,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
   const [containerHeight, setContainerHeight] = useState(null);
   const { height } = useWindowSize();
   const controls = useAnimation();
-
+  useLockBodyScroll(isOpen);
   const toggleMenu = () => setIsOpen((isOpen) => !isOpen);
 
   // 148px is the height of top banner + header + button Documentation menu
@@ -45,10 +45,8 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
       controls.start('to');
     } else {
-      document.body.style.overflow = '';
       controls.start('from');
     }
   }, [controls, isOpen]);

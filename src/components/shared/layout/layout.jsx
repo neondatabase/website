@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useState, useRef, useMemo } from 'react';
+import { useLockBodyScroll } from 'react-use';
 import aa from 'search-insights';
 
 import Footer from 'components/shared/footer';
@@ -45,14 +46,13 @@ const Layout = ({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useDarkModeInit();
   const [isMobileSearchModalOpen, setIsMobileSearchModalOpen] = useState(false);
+  useLockBodyScroll(isMobileSearchModalOpen);
 
   const openMobileSearchModal = () => {
     setIsMobileSearchModalOpen(true);
-    document.body.style.overflow = 'hidden';
   };
   const closeMobileSearchModal = () => {
     setIsMobileSearchModalOpen(false);
-    document.body.style.overflow = '';
   };
 
   const handleMobileMenuOutsideClick = () => {
