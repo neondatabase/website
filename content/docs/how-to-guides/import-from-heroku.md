@@ -35,7 +35,9 @@ postgres://jsmith:Wij8mIDXoQ8H@lively-voice-223755.cloud.neon.tech:5432/main
 1. Select **Overview** and copy the name of the Heroku Postgres database, which appears under **Installed add-ons**.
 1. Click **Settings** and copy your Heroku **App Name**.
 
-_**Note**_: You can also retrieve the Heroku Postgres database name using the following Heroku CLI command:
+<Admonition type="note">
+You can also retrieve the Heroku Postgres database name using the following Heroku CLI command:
+</Admonition>
 
 ```shell
 heroku pg:links --app <app>
