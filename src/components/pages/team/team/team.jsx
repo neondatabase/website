@@ -252,6 +252,28 @@ const members = [
     githubUrl: 'https://www.github.com/koivunej',
     linkedinUrl: 'https://www.linkedin.com/in/joonas-koivunen-70273412/',
   },
+  {
+    photo: <StaticImage src="./images/vadim-kharitonov-photo.jpg" alt="Vadim Kharitonov" />,
+    name: 'Vadim Kharitonov',
+    position: 'Engineering Manager',
+    githubUrl: 'https://github.com/vadim2404',
+    linkedinUrl: 'https://www.linkedin.com/in/vadimkharitonov/',
+  },
+  {
+    photo: <StaticImage src="./images/alexander-stanovoy-photo.jpg" alt="Alexander Stanovoy" />,
+    name: 'Alexander Stanovoy',
+    position: 'Software Engineer',
+    githubUrl: 'https://github.com/alexstanovoy',
+    linkedinUrl: 'https://www.linkedin.com/in/alexstanovoy/',
+  },
+  {
+    photo: <StaticImage src="./images/christian-schwarz-photo.jpg" alt="Christian Schwarz" />,
+    name: 'Christian Schwarz',
+    position: 'Software Engineer',
+    githubUrl: 'https://github.com/problame',
+    linkedinUrl: 'https://www.linkedin.com/in/christian-schwarz-947351204/',
+    twitterUrl: 'https://twitter.com/problame',
+  },
 ];
 
 const Team = () => (
