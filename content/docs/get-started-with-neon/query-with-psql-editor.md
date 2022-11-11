@@ -70,7 +70,7 @@ Neon's `psql` passwordless auth feature helps you quickly authenticate a connect
 ## Connect with an exported password
 
 <Admonition type="warning">
-**_Warning_**: Some operating systems allow non-root users to view process environment variables when using the `ps` command. For security reasons, consider using a password file in such cases.
+Some operating systems allow non-root users to view process environment variables when using the `ps` command. For security reasons, consider using a password file in such cases.
 </Admonition>
 
 To connect with an exported password:
