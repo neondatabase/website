@@ -18,18 +18,18 @@ const DocFooter = ({ fileOriginPath, slug }) => {
 
   useEffect(() => {
     setFeedbackParams({
-      isSent: feedbackSent.length > 0,
-      isSentPositive: feedbackSent.includes(true),
-      isSentNegative: feedbackSent.includes(false),
+      isSent: Object.keys(feedbackSent).includes(slug),
+      isPositive: feedbackSent?.[slug]?.includes(true),
+      isNegative: feedbackSent?.[slug]?.includes(false),
     });
-  }, [feedbackSent]);
+  }, [feedbackSent, slug]);
 
   const handleFeedbackClick = (isPositive) => {
-    setFeedbackSent([isPositive]);
+    setFeedbackSent({ ...feedbackSent, [slug]: [isPositive] });
     setIsFeedbackPositive(isPositive);
     sendGtagEvent('page-feedback', {
       rate: isPositive ? 'positive' : 'negative',
-      url: `${DOCS_BASE_PATH}${slug}`,
+      url: `${process.env.GATSBY_DEFAULT_SITE_URL}${DOCS_BASE_PATH}${slug}`,
     });
   };
 
@@ -63,7 +63,7 @@ const DocFooter = ({ fileOriginPath, slug }) => {
               <ThumbsUpIcon
                 className={clsx(
                   'h-2.5 w-2.5 shrink transition-colors duration-200',
-                  feedbackParams.isSentPositive ? 'text-primary-1' : 'text-gray-4',
+                  feedbackParams.isPositive ? 'text-primary-1' : 'text-gray-4',
                   !feedbackParams.isSent && 'group-hover:text-primary-1 group-active:text-primary-1'
                 )}
               />
@@ -78,7 +78,7 @@ const DocFooter = ({ fileOriginPath, slug }) => {
               <ThumbsDownIcon
                 className={clsx(
                   'h-2.5 w-2.5 shrink transition-colors duration-200 ',
-                  feedbackParams.isSentNegative ? 'text-secondary-1' : 'text-gray-4',
+                  feedbackParams.isNegative ? 'text-secondary-1' : 'text-gray-4',
                   !feedbackParams.isSent &&
                     'group-hover:text-secondary-1 group-active:text-secondary-1'
                 )}
