@@ -9,7 +9,9 @@ This topic describes how to get started with Neon's branching feature, which all
 A branch is a clone of your data that you are free to play around with and modify without affecting the originating data.
 For more information about what branches are and how to use them in your development workflows, see [Branching](../../conceptual-guides/branching).
 
-_Neon Branching capabilities are not yet publicly available. If you would like to try this feature, reach out to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching for your account._
+<Admonition type="note">
+Neon Branching capabilities are not yet publicly available. If you would like to try this feature, reach out to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching for your account.
+</Admonition>
 
 You can create and manage branches using the Neon Console or Neon API. In this topic, we cover branching using the Neon Console.
 
@@ -43,7 +45,9 @@ To view the branches in a Neon project:
 
 ![Branch details](./images/branch_details.png)
 
-_**Note:** Each branch is created with an endpoint, which is the compute instance associated with the branch. To connect to a branch, you must connect to the endpoint. For instructions, see [Connect to a branch](#connect-to-a-branch). A endpoint hostname starts with an `ep-` prefix. You can also find an endpoint hostname in the branch connection string in the **Connection Details** widget on the project **Dashboard**._
+<Admonition type="note">
+Each branch is created with an endpoint, which is the compute instance associated with the branch. To connect to a branch, you must connect to the endpoint. For instructions, see [Connect to a branch](#connect-to-a-branch). A endpoint hostname starts with an `ep-` prefix. You can also find an endpoint hostname in the branch connection string in the **Connection Details** widget on the project **Dashboard**.
+</Admonition>
 
 The **Branches** widget on the project **Dashboard** also lists the branches in a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
 
@@ -51,7 +55,9 @@ The **Branches** widget on the project **Dashboard** also lists the branches in 
 
 Now that you have created a branch, how do you connect to it? You can connect to a branch using a connection string, as you would when connecting to any Neon database. The following steps describe how to connect to a branch using `psql`.
 
-_**Note:** You can also query a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../query-with-neon-sql-editor)._
+<Admonition type="tip">
+You can also query a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../query-with-neon-sql-editor).
+</Admonition>
 
 1. In the Neon Console, select a project.
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the user you want to connect with.
@@ -63,7 +69,9 @@ _**Note:** You can also query a branch from the Neon SQL Editor. For instruction
   psql postgres://casey:<password>@ep-ancient-sky-241299.cloud.neon.tech/main
   ```
 
-_**Note:** The endpoint hostname, which is `ep-ancient-sky-241299.cloud.neon.tech` in the example above, can also be found on the **Branches** page in the Neon Console. For instructions, see [View branches](#view-branches)._
+<Admonition type="tip">
+The endpoint hostname, which is `ep-ancient-sky-241299.cloud.neon.tech` in the example above, can also be found on the **Branches** page in the Neon Console. For instructions, see [View branches](#view-branches).
+</Admonition>
 
 If you want to connect to a branch from an application, the **Connection Details** widget on the project **Dashboard** also provides connection examples for various languages and frameworks.
 
