@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Container from 'components/shared/container';
@@ -7,15 +8,25 @@ import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
 import logoBlack from 'images/logo-black.svg';
 
-const Footer = () => (
-  <footer className="safe-paddings overflow-hidden border-t-2 border-black">
-    <Container className="flex justify-between xl:flex-col lg:border-none" size="md">
-      <div className="flex flex-col items-start justify-between pt-8 pb-14 2xl:pt-[25px] 2xl:pb-11 xl:relative xl:flex-row xl:items-center xl:py-6 xl:before:absolute xl:before:left-[-50vw] xl:before:-top-0.5 xl:before:h-0.5 xl:before:w-[200vw] xl:before:bg-black md:block">
-        <div className="mb-[70px] xl:mb-0">
+// import ThemeSelect from './theme-select';
+
+const Footer = ({
+  // isDocPage,
+  withTopBorder,
+}) => (
+  <footer
+    className={clsx(
+      'safe-paddings mt-auto overflow-hidden',
+      withTopBorder && 'border-t border-gray-7'
+    )}
+  >
+    <Container className="flex justify-between py-10 xl:py-8" size="md">
+      <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
+        <div className="mb-7 flex flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-center md:justify-between">
           <Link className="block" to="/">
             <span className="sr-only">Neon</span>
             <img
-              className="h-9 2xl:h-8"
+              className="h-9 sm:h-6 sm:w-auto"
               src={logoBlack}
               width={128}
               height={36}
@@ -23,54 +34,37 @@ const Footer = () => (
               aria-hidden
             />
           </Link>
-          <ul className="mt-10 flex space-x-3.5 md:mt-8">
-            {MENUS.socialUrls.map(({ text, to, Icon }) => (
-              <li className="relative" key={text}>
-                <span
-                  className="absolute -bottom-0.5 -left-0.5 h-full w-full rounded-full bg-secondary-5"
-                  aria-hidden
-                />
-                <Link
-                  className="relative flex h-[38px] w-[38px] items-center justify-center rounded-full border-2 border-black bg-white transition-transform duration-200 hover:translate-y-0.5 hover:-translate-x-0.5"
-                  to={to}
-                  target="_blank"
-                >
-                  <Icon className="h-5" />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {/* {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />} */}
         </div>
-        <div className="t-base space-y-6 xl:space-y-4 md:mt-8">
+        <div className="t-lg space-y-4 leading-none">
           <p>Made in SF and the World</p>
           <p>Neon 2022 Ⓒ All rights reserved</p>
         </div>
       </div>
-      <div className="flex xl:order-first xl:grid xl:grid-cols-4 xl:gap-x-6 xl:border-b-2 xl:border-black lg:gap-x-4 md:grid-cols-2 md:gap-y-8 md:pt-8 md:pb-11 xs:block xs:space-y-8">
+      <div className="flex w-[40.5%] space-x-[123px] xl:w-[49.5%] xl:space-x-8 md:hidden">
         {MENUS.footer.map(({ heading, links }, index) => (
-          <div
-            className={clsx(
-              'flex w-[448px] flex-col border-l-2 border-black 3xl:w-80 2xl:w-72 xl:w-full xl:border-none',
-              heading === 'Social' && '2xl:w-full xl:max-w-[100px]'
-            )}
-            key={index}
-          >
-            <Heading
-              className="relative border-b-2 border-black px-10 py-9 before:absolute before:left-0 before:-bottom-0.5 before:h-0.5 before:w-[50vw] before:bg-black 2xl:px-8 2xl:py-7 xl:border-none xl:px-0 xl:pt-8 xl:pb-0 xl:before:hidden md:pt-0"
-              tag="h3"
-              size="xs"
-              theme="black"
-            >
+          <div className={clsx('flex flex-col xl:w-full')} key={index}>
+            <Heading className="relative leading-none" tag="h3" size="xs" theme="black">
               {heading}
             </Heading>
-            <ul className="mt-10 flex grow flex-col space-y-5 px-10 pb-14 2xl:mt-8 2xl:px-8 2xl:pb-11 xl:px-0 md:mt-6 md:space-y-5 md:pb-0">
-              {links.map(({ to, text }, index) => (
-                <li key={index}>
-                  <Link className="relative whitespace-nowrap" to={to} theme="black" size="sm">
-                    {text}
-                  </Link>
-                </li>
-              ))}
+            <ul className="mt-5 flex grow flex-col space-y-4">
+              {links.map(({ to, text }, index) => {
+                const isExternalUrl = to.startsWith('http');
+                return (
+                  <li className="flex" key={index}>
+                    <Link
+                      className="relative whitespace-nowrap leading-none"
+                      to={to}
+                      theme="black"
+                      size="sm"
+                      target={isExternalUrl ? '_blank' : null}
+                      rel={isExternalUrl ? 'noopener noreferrer' : null}
+                    >
+                      {text}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))}
@@ -78,5 +72,15 @@ const Footer = () => (
     </Container>
   </footer>
 );
+
+Footer.propTypes = {
+  // isDocPage: PropTypes.bool,
+  withTopBorder: PropTypes.bool,
+};
+
+Footer.defaultProps = {
+  // isDocPage: false,
+  withTopBorder: false,
+};
 
 export default Footer;

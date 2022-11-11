@@ -29,7 +29,7 @@ const HomePage = () => {
   });
 
   return (
-    <Layout headerTheme="black" isSignIn withOverflowHidden>
+    <Layout headerTheme="black" isSignIn footerWithTopBorder withOverflowHidden>
       <div className="relative overflow-hidden" ref={firstSectionWithLinesRef}>
         {isFirstSectionWithLinesInView && <Lines1 />}
         <Hero />

@@ -5,34 +5,18 @@ import React, { useState } from 'react';
 import { useCookie, useLocation } from 'react-use';
 
 import Button from 'components/shared/button';
-import { HUBSPOT_NEWSLETTERS_FORM_ID, HUBSPOT_FORM_PORTAL_ID } from 'constants/forms';
+import { HUBSPOT_NEWSLETTERS_FORM_ID } from 'constants/forms';
+import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
 
 import CheckIcon from './images/subscription-form-check.inline.svg';
 import ErrorIcon from './images/subscription-form-error.inline.svg';
 import SendIcon from './images/subscription-form-send.inline.svg';
-
-const emailRegexp =
-  // eslint-disable-next-line no-control-regex, no-useless-escape
-  /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
 
 const appearAndExitAnimationVariants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.2 } },
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
-
-function doNowOrAfterSomeTime(callback, loadingAnimationStartedTime) {
-  const LOADING_ANIMATION_FULL_DURATION = 2200; // 2000 (loading animation duration) + 200 (loading animation delay) = 2200
-
-  if (Date.now() - loadingAnimationStartedTime > LOADING_ANIMATION_FULL_DURATION) {
-    callback();
-  } else {
-    setTimeout(
-      callback,
-      LOADING_ANIMATION_FULL_DURATION - (Date.now() - loadingAnimationStartedTime)
-    );
-  }
-}
 
 const SubscriptionForm = ({ className }) => {
   const [email, setEmail] = useState('');
@@ -60,24 +44,16 @@ const SubscriptionForm = ({ className }) => {
 
       const loadingAnimationStartedTime = Date.now();
 
-      fetch(
-        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_FORM_PORTAL_ID}/${HUBSPOT_NEWSLETTERS_FORM_ID}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+      sendHubspotFormData({
+        formId: HUBSPOT_NEWSLETTERS_FORM_ID,
+        context,
+        values: [
+          {
+            name: 'email',
+            value: email,
           },
-          body: JSON.stringify({
-            context,
-            fields: [
-              {
-                name: 'email',
-                value: email,
-              },
-            ],
-          }),
-        }
-      )
+        ],
+      })
         .then((response) => {
           if (response.ok) {
             doNowOrAfterSomeTime(() => {
@@ -117,7 +93,7 @@ const SubscriptionForm = ({ className }) => {
       {/* Input */}
       <input
         className={clsx(
-          'remove-autocomplete-styles t-2xl relative block h-24 w-[696px] rounded-full border-4 border-black bg-white pl-7 pr-[218px] font-semibold text-black placeholder-black outline-none transition-colors duration-200 3xl:w-[576px] 2xl:h-20 2xl:w-[478px] 2xl:pr-[187px] xl:h-[72px] xl:w-[448px] xl:pr-[164px] lg:w-full lg:pl-5 md:pr-20',
+          'remove-autocomplete-styles t-2xl relative block h-24 w-[696px] rounded-full border-4 border-black bg-white pl-7 pr-[218px] font-semibold leading-none text-black placeholder-black outline-none transition-colors duration-200 3xl:w-[576px] 2xl:h-20 2xl:w-[478px] 2xl:pr-[187px] xl:h-[72px] xl:w-[448px] xl:pr-[164px] lg:w-full lg:pl-5 md:pr-20',
           errorMessage && 'border-secondary-1'
         )}
         name="email"

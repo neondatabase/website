@@ -270,10 +270,10 @@ const Team = () => (
           <li className="flex" key={index}>
             <div className="w-36 shrink-0 xs:w-32">{photo}</div>
             <div className="ml-5 xs:ml-3">
-              <h3 className="max-w-[100px] text-2xl font-semibold leading-tight md:max-w-none xs:text-[20px] xs:leading-tight">
+              <h3 className="max-w-[100px] text-2xl font-semibold leading-snug md:max-w-none xs:text-[20px] xs:leading-tight">
                 {name}
               </h3>
-              <p className="t-base mt-2 !leading-snug text-gray-2 xs:mt-1">{position}</p>
+              <p className="t-base mt-2 leading-snug text-gray-2 xs:mt-1">{position}</p>
               <ul className="mt-3 flex space-x-2 xs:mt-2">
                 {githubUrl && (
                   <li>

@@ -1,17 +1,59 @@
 import clsx from 'clsx';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
+import { useLockBodyScroll } from 'react-use';
+import aa from 'search-insights';
 
 import Footer from 'components/shared/footer';
 import Header from 'components/shared/header';
 import MobileMenu from 'components/shared/mobile-menu';
 import Topbar from 'components/shared/topbar';
+import { ThemeContext, useDarkModeInit } from 'hooks/use-dark-mode';
 
-const Layout = ({ headerTheme, withOverflowHidden, isSignIn, children, isHeaderSticky }) => {
+import SearchModal from '../header/search-modal';
+
+// Initialization of the search-insights library
+aa('init', {
+  appId: process.env.GATSBY_ALGOLIA_APP_ID,
+  apiKey: process.env.GATSBY_ALGOLIA_SEARCH_KEY,
+  useCookie: true,
+});
+
+let userToken = '';
+aa('getUserToken', null, (err, algoliaUserToken) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  userToken = algoliaUserToken;
+});
+
+aa('setUserToken', userToken);
+
+const Layout = ({
+  headerTheme,
+  withOverflowHidden,
+  isSignIn,
+  children,
+  isHeaderSticky,
+  headerWithBottomBorder,
+  footerWithTopBorder,
+  isDocPage,
+}) => {
   const headerRef = useRef(null);
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useDarkModeInit();
+  const [isMobileSearchModalOpen, setIsMobileSearchModalOpen] = useState(false);
+  useLockBodyScroll(isMobileSearchModalOpen);
+
+  const openMobileSearchModal = () => {
+    setIsMobileSearchModalOpen(true);
+  };
+  const closeMobileSearchModal = () => {
+    setIsMobileSearchModalOpen(false);
+  };
 
   const handleMobileMenuOutsideClick = () => {
     if (isMobileMenuOpen) setIsMobileMenuOpen(false);
@@ -21,27 +63,35 @@ const Layout = ({ headerTheme, withOverflowHidden, isSignIn, children, isHeaderS
     setIsMobileMenuOpen((isMobileMenuOpen) => !isMobileMenuOpen);
   };
 
+  const themeContextValue = useMemo(() => [isDarkMode, setIsDarkMode], [isDarkMode, setIsDarkMode]);
+
   return (
-    <>
+    <ThemeContext.Provider value={themeContextValue}>
       <Topbar />
-      <div className="relative">
+      <div className="relative flex min-h-screen flex-col">
         <Header
+          withBottomBorder={headerWithBottomBorder}
           theme={headerTheme}
           isMobileMenuOpen={isMobileMenuOpen}
           ref={headerRef}
           isSignIn={isSignIn}
           isSticky={isHeaderSticky}
+          isDocPage={isDocPage}
           onBurgerClick={handleHeaderBurgerClick}
+          onSearchClick={openMobileSearchModal}
         />
-        <main className={clsx(withOverflowHidden && 'overflow-hidden')}>{children}</main>
-        <Footer />
+        <main className={clsx(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col')}>
+          {children}
+        </main>
+        <Footer isDocPage={isDocPage} withTopBorder={footerWithTopBorder} />
         <MobileMenu
           isOpen={isMobileMenuOpen}
           headerRef={headerRef}
           onOutsideClick={handleMobileMenuOutsideClick}
         />
+        <SearchModal isOpen={isMobileSearchModalOpen} closeModal={closeMobileSearchModal} />
       </div>
-    </>
+    </ThemeContext.Provider>
   );
 };
 
@@ -51,12 +101,18 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   isSignIn: PropTypes.bool,
   isHeaderSticky: PropTypes.bool,
+  headerWithBottomBorder: PropTypes.bool,
+  footerWithTopBorder: PropTypes.bool,
+  isDocPage: PropTypes.bool,
 };
 
 Layout.defaultProps = {
   withOverflowHidden: false,
   isSignIn: false,
   isHeaderSticky: false,
+  headerWithBottomBorder: false,
+  footerWithTopBorder: false,
+  isDocPage: false,
 };
 
 export const query = graphql`

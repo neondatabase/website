@@ -12,6 +12,7 @@ export default {
   github: 'https://github.com/neondatabase/neon',
   twitter: 'https://twitter.com/neondatabase/',
   linkedin: 'https://www.linkedin.com/company/neon-inc/',
+  youtube: 'https://www.youtube.com/channel/UCoMzQTJSIr7-RU1QbomQI2w',
   postgresDocs: 'https://www.postgresql.org/docs/',
   postgresList: 'https://www.postgresql.org/list/',
   privacy: '/',

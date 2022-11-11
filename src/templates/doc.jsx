@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import { graphql } from 'gatsby';
 import React, { useRef } from 'react';
 
+import Breadcrumbs from 'components/pages/doc/breadcrumbs';
+import DocFooter from 'components/pages/doc/doc-footer';
 import MobileNav from 'components/pages/doc/mobile-nav';
 import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
 import Sidebar from 'components/pages/doc/sidebar';
@@ -13,7 +15,6 @@ import ReleaseNoteList from 'components/pages/release-notes/release-note-list';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Layout from 'components/shared/layout';
-import Search from 'components/shared/search';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
 
@@ -24,40 +25,56 @@ const ReleaseNotes = ({ title, nodes, pageCount, currentPageIndex }) => (
     {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />}
   </>
 );
-const DocTemplate = ({
-  data: {
-    mdx: {
-      frontmatter: { title, enableTableOfContents },
+const DocTemplate = (props) => {
+  const {
+    data: {
+      mdx: {
+        frontmatter: { title, enableTableOfContents },
+      },
+      allMdx: { nodes },
     },
-    allMdx: { nodes },
-  },
-  children,
-  pageContext: {
-    sidebar,
-    currentSlug,
-    isReleaseNotes,
-    previousLink,
-    nextLink,
-    pageCount,
-    currentPageIndex,
-  },
-}) => {
+    children,
+    pageContext: {
+      sidebar,
+      currentSlug,
+      isReleaseNotes,
+      previousLink,
+      nextLink,
+      pageCount,
+      currentPageIndex,
+      fileOriginPath,
+      breadcrumbs,
+    },
+  } = props;
   const contentRef = useRef(null);
 
   return (
-    <Layout headerTheme="white">
-      <div className="safe-paddings pt-48 pb-48 3xl:pt-44 3xl:pb-44 2xl:pt-40 2xl:pb-40 xl:pt-32 xl:pb-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
-        <Container className="grid-gap-x grid grid-cols-12 lg:block" size="md">
+    <Layout
+      headerTheme="white"
+      headerWithBottomBorder
+      footerWithTopBorder
+      isDocPage
+      burgerWithoutBorder
+    >
+      <div className="safe-paddings flex flex-1 flex-col lg:block">
+        <MobileNav className="hidden lg:block" sidebar={sidebar} currentSlug={currentSlug} />
+
+        <Container
+          className="grid w-full flex-1 grid-cols-12 gap-x-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
+          size="mdDoc"
+        >
           <Sidebar
-            className="col-start-2 col-end-4 pt-3 2xl:col-start-1 lg:hidden"
+            className="relative col-start-1 col-end-4 max-w-[254px] bg-gray-9 pb-20 pt-[118px] before:absolute before:top-0 before:-right-5 before:-z-10 before:h-full before:w-[300%] before:bg-gray-9 lg:hidden"
             sidebar={sidebar}
             currentSlug={currentSlug}
           />
-          <Search className="hidden lg:block" />
-          <MobileNav className="mt-5 hidden lg:block" sidebar={sidebar} currentSlug={currentSlug} />
           <div
-            className={clsx('xl:col-span-9 lg:mt-6', isReleaseNotes ? 'col-span-7' : 'col-span-6')}
+            className={clsx(
+              '-mx-10 flex flex-col pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-11 lg:ml-0 lg:pt-0 md:pb-[70px] sm:pb-8',
+              isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
+            )}
           >
+            {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
             {isReleaseNotes ? (
               <ReleaseNotes
                 title={title}
@@ -67,13 +84,21 @@ const DocTemplate = ({
               />
             ) : (
               <article>
-                <h1 className="t-5xl font-semibold">{title}</h1>
+                <h1 className="text-[36px] font-semibold leading-tight xl:text-3xl">{title}</h1>
                 <Content className="mt-5" content={children} ref={contentRef} />
               </article>
             )}
-            <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
+            <div className="mt-auto">
+              <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
+              <DocFooter fileOriginPath={fileOriginPath} />
+            </div>
           </div>
-          {enableTableOfContents && <TableOfContents contentRef={contentRef} />}
+          {enableTableOfContents && (
+            <TableOfContents
+              className="col-start-11 col-end-13 -ml-11 pb-20 pt-[110px] 2xl:ml-0"
+              contentRef={contentRef}
+            />
+          )}
         </Container>
       </div>
     </Layout>

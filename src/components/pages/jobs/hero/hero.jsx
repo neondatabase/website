@@ -6,8 +6,8 @@ import Container from 'components/shared/container';
 const Hero = () => (
   <section className="safe-paddings bg-black pt-40 text-white xl:pt-36 lg:pt-12 md:pt-6">
     <Container size="md">
-      <h1 className="t-5xl text-center font-bold">Become a part of our team </h1>
-      <p className="t-lg mx-auto mt-8 max-w-[860px] text-center !leading-normal 2xl:mt-7 xl:mt-6">
+      <h1 className="t-5xl text-center font-bold leading-tight">Become a part of our team </h1>
+      <p className="t-lg mx-auto mt-8 max-w-[860px] text-center leading-normal 2xl:mt-7 xl:mt-6">
         Neon is a distributed team building open-source cloud-native Postgres. We&apos;re a well
         funded startup with deep knowledge of Postgres internals and decades of experience building
         databases. Our storage layer is written in Rust, cloud control plane is written in Go. We're

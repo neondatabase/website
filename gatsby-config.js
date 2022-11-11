@@ -104,7 +104,7 @@ module.exports = {
           {
             resolve: 'gatsby-remark-images',
             options: {
-              maxWidth: 860,
+              maxWidth: 960,
               quality: 85,
               withWebp: true,
               backgroundColor: 'white',
@@ -156,6 +156,7 @@ module.exports = {
         siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
       },
     },
+
     {
       resolve: 'gatsby-source-wordpress',
       options: {

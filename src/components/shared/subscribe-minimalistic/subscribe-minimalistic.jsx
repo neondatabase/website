@@ -9,7 +9,7 @@ const SubscribeMinimalistic = () => (
       className="flex items-center justify-center space-x-14 lg:block lg:space-x-0 lg:space-y-7"
       size="md"
     >
-      <h2 className="t-5xl font-bold">Subscribe to Newsletter</h2>
+      <h2 className="t-5xl font-bold leading-tight">Subscribe to Newsletter</h2>
       <SubscriptionForm className="lg:!mx-auto" />
     </Container>
   </section>

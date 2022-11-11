@@ -9,7 +9,7 @@ const Aside = ({ slug, label }) => (
   <aside className="absolute left-0 top-0.5 z-10 flex min-w-fit max-w-fit flex-col items-end rounded-md xl:sticky xl:top-10 xl:mt-0 xl:mr-9 xl:max-h-24 sm:static sm:max-h-max sm:flex-row sm:items-center sm:space-x-5">
     <Link theme="black" to={generateReleaseNotePath(slug)}>
       <time
-        className="whitespace-nowrap text-2xl font-semibold leading-none"
+        className="whitespace-nowrap text-xl font-semibold leading-none"
         dateTime={getReleaseNotesDateFromSlug(slug)}
       >
         {getReleaseNotesDateFromSlug(slug)}
