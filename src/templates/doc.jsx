@@ -90,7 +90,7 @@ const DocTemplate = (props) => {
             )}
             <div className="mt-auto">
               <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
-              <DocFooter fileOriginPath={fileOriginPath} />
+              <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
             </div>
           </div>
           {enableTableOfContents && (
