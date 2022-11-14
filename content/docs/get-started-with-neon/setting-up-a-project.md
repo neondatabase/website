@@ -23,7 +23,9 @@ To set up a Neon project:
 
 For information about connecting to Neon using `psql`, see [Querying with psql](/docs/get-started-with-neon/query-with-psql-editor).
 
-**_Important_**: After navigating away from the Neon Console or refreshing the browser page, the password is no longer accessible. If you forget or misplace your password, your only option is to reset it. You can reset a password on the **User** page, which is found on the **Settings** tab in the Neon Console.
+<Admonition type="important">
+After navigating away from the Neon Console or refreshing the browser page, the password is no longer accessible. If you forget or misplace your password, your only option is to reset it. You can reset a password on the **User** page, which is found on the **Settings** tab in the Neon Console.
+</Admonition>
 
 Creating a Neon project automatically creates a Neon compute instance. For the Technical Preview, a Neon compute instance is deployed with PostgreSQL 14.5 by default, 1 vCPU, and 256MB of RAM. Both PostgreSQL 14.5 and 15 are supported. You can select the PostgreSQL version during project creation. For more information about limits associated with the Technical Preview, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier).
 
