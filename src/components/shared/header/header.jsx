@@ -84,7 +84,6 @@ const Header = forwardRef(
                     )}
                     to={to}
                     theme={isThemeBlack ? 'white' : 'black'}
-                    size="sm"
                   >
                     {text}
                   </Link>

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Container from 'components/shared/container';
-import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
 import logoBlack from 'images/logo-black.svg';
@@ -36,7 +35,7 @@ const Footer = ({
           </Link>
           {/* {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />} */}
         </div>
-        <div className="t-lg space-y-4 leading-none">
+        <div className="space-y-[18px] leading-none">
           <p>Made in SF and the World</p>
           <p>Neon 2022 Ⓒ All rights reserved</p>
         </div>
@@ -44,10 +43,10 @@ const Footer = ({
       <div className="flex w-[40.5%] space-x-[123px] xl:w-[49.5%] xl:space-x-8 md:hidden">
         {MENUS.footer.map(({ heading, links }, index) => (
           <div className={clsx('flex flex-col xl:w-full')} key={index}>
-            <Heading className="relative leading-none" tag="h3" size="xs" theme="black">
+            <h3 className="relative text-sm font-bold uppercase leading-none tracking-wider">
               {heading}
-            </Heading>
-            <ul className="mt-5 flex grow flex-col space-y-4">
+            </h3>
+            <ul className="mt-6 flex grow flex-col space-y-[18px]">
               {links.map(({ to, text }, index) => {
                 const isExternalUrl = to.startsWith('http');
                 return (
@@ -55,8 +54,6 @@ const Footer = ({
                     <Link
                       className="relative whitespace-nowrap leading-none"
                       to={to}
-                      theme="black"
-                      size="sm"
                       target={isExternalUrl ? '_blank' : null}
                       rel={isExternalUrl ? 'noopener noreferrer' : null}
                     >
