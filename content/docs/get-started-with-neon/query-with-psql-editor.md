@@ -8,7 +8,9 @@ redirectFrom:
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/14/app-psql.html), in the _PostgreSQL Documentation_.
 
-_**Note**:_ A Neon Compute runs PostgreSQL, which means that any PostgreSQL application or standard utility such as `psql` is compatible with Neon. You can also use PostgreSQL client libraries and drivers to connect.
+<Admonition type="note">
+A Neon Compute runs PostgreSQL, which means that any PostgreSQL application or standard utility such as `psql` is compatible with Neon. You can also use PostgreSQL client libraries and drivers to connect.
+</Admonition>
 
 The following `psql` connection methods are described:
 
@@ -67,7 +69,9 @@ Neon's `psql` passwordless auth feature helps you quickly authenticate a connect
 
 ## Connect with an exported password
 
-**_Warning_**: Some operating systems allow non-root users to view process environment variables when using the `ps` command. For security reasons, consider using a password file in such cases.
+<Admonition type="warning">
+Some operating systems allow non-root users to view process environment variables when using the `ps` command. For security reasons, consider using a password file in such cases.
+</Admonition>
 
 To connect with an exported password:
 
@@ -108,7 +112,9 @@ To connect with a password saved to a `.pgpass` password file:
    echo -e "<project_id>.cloud.neon.tech:5432:main:<user>:<password>\n$(cat ~/.pgpass)" > ~/.pgpass
    ```
 
-   _**Note**_: If you already have a `.pgpass` file, you only need to run the `echo` command.
+  <Admonition type="tip">
+  If you already have a `.pgpass` file, you only need to run the `echo` command.
+  </Admonition>
 
 2. Connect with the following command:
 

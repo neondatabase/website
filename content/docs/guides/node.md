@@ -8,7 +8,9 @@ redirectFrom:
 
 This guide describes how to create a Neon project and connect to it from a Node.js application. You can find the below code sample on [GitHub](https://github.com/neondatabase/examples/tree/main/with-nodejs).
 
-_**Note**_: The same configuration steps can be used for Express and Next.js applications.
+<Admonition type="note">
+The same configuration steps can be used for Express and Next.js applications.
+</Admonition>
 
 To connect to Neon from a Node.js application:
 
@@ -65,7 +67,9 @@ where:
 - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a project.
 
-**_Important_**: To ensure the security of your data, never expose your Neon credentials to the browser.
+<Admonition type="important">
+To ensure the security of your data, never expose your Neon credentials to the browser.
+</Admonition>
 
 ## Configure the app.js file
 
