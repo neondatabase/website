@@ -225,12 +225,14 @@ class GFG {
 
 In addition to emphasize your text, wrap text with `<Admonition></Admonition>` and set the proper type.
 
-There are 5 types of Admonition in total: `note`, `important`, `tip`, `warning`, `info`
+There are 5 types of Admonition: `note`, `important`, `tip`, `warning`, `info`.
+
+You may also specify an optional title with prop `title`.
 
 Example:
 
 ```md
-<Admonition type="note">
+<Admonition type="note" title="Your title">
 The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
 </Admonition>
 <Admonition type="info">
