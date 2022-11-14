@@ -35,7 +35,7 @@ const Footer = ({
           </Link>
           {/* {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />} */}
         </div>
-        <div className="space-y-3.5 leading-none">
+        <div className="space-y-[18px] leading-none">
           <p>Made in SF and the World</p>
           <p>Neon 2022 Ⓒ All rights reserved</p>
         </div>
@@ -46,7 +46,7 @@ const Footer = ({
             <h3 className="relative text-sm font-bold uppercase leading-none tracking-wider">
               {heading}
             </h3>
-            <ul className="mt-6 flex grow flex-col space-y-3.5">
+            <ul className="mt-6 flex grow flex-col space-y-[18px]">
               {links.map(({ to, text }, index) => {
                 const isExternalUrl = to.startsWith('http');
                 return (
