@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useLocalStorage } from 'react-use';
 
 import Link from 'components/shared/link';
-import { DOCS_BASE_PATH } from 'constants/docs';
 import GitHubIcon from 'icons/github.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -28,8 +27,7 @@ const DocFooter = ({ fileOriginPath, slug }) => {
     setFeedbackSent({ ...feedbackSent, [slug]: [isPositive] });
     setIsFeedbackPositive(isPositive);
     sendGtagEvent('page-feedback', {
-      rate: isPositive ? 'positive' : 'negative',
-      url: `${process.env.GATSBY_DEFAULT_SITE_URL}${DOCS_BASE_PATH}${slug}`,
+      rate: isPositive ? 1 : 0,
     });
   };
 
