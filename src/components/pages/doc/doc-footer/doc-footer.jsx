@@ -15,14 +15,13 @@ const DocFooter = ({ fileOriginPath, slug }) => {
   const [feedbackSentData, setFeedbackSentData] = useSessionStorage('isPageFeedbackSubmitted', []);
 
   const handleFeedbackClick = (isPositive) => {
-    setFeedbackSentData({ ...feedbackSentData, [slug]: isPositive });
     setIsFeedbackSent(true);
-    if (feedbackSentData[slug]) {
-      return;
+    if (!feedbackSentData?.includes(slug)) {
+      setFeedbackSentData([...feedbackSentData, slug]);
+      sendGtagEvent('page-feedback', {
+        rate: isPositive ? 1 : 0,
+      });
     }
-    sendGtagEvent('page-feedback', {
-      rate: isPositive ? 1 : 0,
-    });
   };
 
   return (
