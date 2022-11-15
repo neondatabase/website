@@ -9,7 +9,7 @@ import backgroundLines from './images/bg-lines.svg';
 import Line from './images/white-line.inline.svg';
 
 const Hero = () => (
-  <div className="relative flex h-[calc(100vh-44px)] max-h-[1080px] min-h-[765px] flex-col overflow-hidden bg-black pt-[214px] pb-20 text-white lg:min-h-0 lg:pt-[28%] sm:h-[calc(100vh-216px)]">
+  <div className="relative flex h-[calc(100vh-44px)] max-h-[1080px] min-h-[765px] flex-col overflow-hidden bg-black pt-[214px] pb-20 text-white lg:min-h-0 lg:pt-[20%] sm:h-auto sm:grow sm:pt-16">
     <Container className="relative h-full w-full" size="md">
       <img
         className="absolute -top-10 left-1/2 max-w-[1240px] -translate-x-1/2"
@@ -20,7 +20,7 @@ const Hero = () => (
         loading="eager"
         aria-hidden
       />
-      <div className="absolute -bottom-20 left-1/2 w-[1668px] -translate-x-1/2 lg:w-[1000px] md:w-[900px]">
+      <div className="absolute -bottom-20 left-1/2 w-[1668px] -translate-x-1/2 lg:w-[1240px] md:w-[900px] sm:hidden">
         <StaticImage src="./images/background.png" alt="" width={1650} height={568} aria-hidden />
       </div>
       <div className="relative z-10 flex flex-col items-center">

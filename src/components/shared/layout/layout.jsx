@@ -69,7 +69,8 @@ const Layout = ({
   return (
     <ThemeContext.Provider value={themeContextValue}>
       <Topbar />
-      <div className="relative flex min-h-screen flex-col">
+      {/* 44px is the height of the topbar */}
+      <div className="relative flex min-h-[calc(100vh-44px)] flex-col">
         <Header
           withBottomBorder={headerWithBottomBorder}
           theme={headerTheme}
