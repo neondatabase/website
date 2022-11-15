@@ -2,13 +2,13 @@ import clsx from 'clsx';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useState, useRef, useMemo } from 'react';
-import { useLockBodyScroll } from 'react-use';
 import aa from 'search-insights';
 
 import Footer from 'components/shared/footer';
 import Header from 'components/shared/header';
 import MobileMenu from 'components/shared/mobile-menu';
 import Topbar from 'components/shared/topbar';
+import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import { ThemeContext, useDarkModeInit } from 'hooks/use-dark-mode';
 
 import SearchModal from '../header/search-modal';
@@ -46,7 +46,7 @@ const Layout = ({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useDarkModeInit();
   const [isMobileSearchModalOpen, setIsMobileSearchModalOpen] = useState(false);
-  useLockBodyScroll(isMobileSearchModalOpen);
+  useBodyLockScroll(isMobileSearchModalOpen);
 
   const openMobileSearchModal = () => {
     setIsMobileSearchModalOpen(true);
