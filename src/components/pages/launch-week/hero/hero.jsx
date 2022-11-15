@@ -9,7 +9,7 @@ import backgroundLines from './images/bg-lines.svg';
 import Line from './images/white-line.inline.svg';
 
 const Hero = () => (
-  <div className="relative flex h-[calc(100vh-44px)] max-h-[1080px] min-h-[765px] flex-col overflow-hidden bg-black pt-[214px] pb-20 text-white lg:min-h-0 lg:pt-[28%] sm:h-[calc(100vh-206px)]">
+  <div className="relative flex h-[calc(100vh-44px)] max-h-[1080px] min-h-[765px] flex-col overflow-hidden bg-black pt-[214px] pb-20 text-white lg:min-h-0 lg:pt-[28%] sm:h-[calc(100vh-216px)]">
     <Container className="relative h-full w-full" size="md">
       <img
         className="absolute -top-10 left-1/2 max-w-[1240px] -translate-x-1/2"
@@ -33,16 +33,17 @@ const Hero = () => (
         <h1 className="mt-5 text-center text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl">
           Neon Launch Week
         </h1>
-        <p className="mt-5 max-w-[640px] text-center text-xl leading-normal">
+        <p className="mt-5 max-w-[640px] text-center text-xl leading-normal md:text-lg">
           Register to Neon Launch Week at 5th of December and be the first who will see the latest
           updates from our team
         </p>
         <div className="relative">
-          <Line className="absolute top-[calc(100%-30px)] right-16 2xl:top-full lg:hidden" />
+          <Line className="absolute top-[calc(100%-30px)] right-16 2xl:top-[calc(100%-10px)] lg:hidden" />
           <SubscriptionForm
             className="mt-8"
             successText="Thanks for registering!"
             submitButtonText="Register"
+            size="sm"
             formId={HUBSPOT_LAUNCH_WEEK_FORM_ID}
           />
         </div>

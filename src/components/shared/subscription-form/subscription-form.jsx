@@ -19,7 +19,7 @@ const sizeClassNames = {
   sm: {
     form: 'before:-bottom-2 before:-left-2',
     input: 'w-[552px] h-[72px] text-lg pl-5',
-    button: '!text-lg !px-8 !py-[19px] right-2',
+    button: '!text-lg !px-8 !py-[19px] right-2 md:!p-0',
     loading: 'right-2',
     success: 'right-2',
     stateIcon: 'w-14 h-14',
@@ -28,9 +28,9 @@ const sizeClassNames = {
     form: 'before:-bottom-3.5 before:-left-3.5 2xl:before:-bottom-2.5 2xl:before:-left-2.5',
     input:
       'h-24 w-[696px] 3xl:w-[576px] 2xl:h-20 2xl:w-[478px] 2xl:pr-[187px] xl:h-[72px] xl:w-[448px] xl:pr-[164px] t-2xl pl-7',
-    button: 'right-3',
+    button: 'right-3 2xl:right-2.5 xl:right-2',
     loading:
-      'right-3  h-[72px] w-[72px] 2xl:right-2.5 2xl:h-[60px] 2xl:w-[60px] xl:right-2 xl:h-[56px] xl:w-[56px]',
+      'right-3 h-[72px] w-[72px] 2xl:right-2.5 2xl:h-[60px] 2xl:w-[60px] xl:right-2 xl:h-[56px] xl:w-[56px]',
     success: 'right-3 2xl:right-2.5 xl:right-2',
     stateIcon: '2xl:w-[60px] xl:w-[56px]',
   },
@@ -150,7 +150,7 @@ const SubscriptionForm = ({ className, formId, successText, submitButtonText, si
           >
             <Button
               className={clsx(
-                'absolute top-1/2 -translate-y-1/2 2xl:right-2.5 xl:right-2 md:h-14 md:w-14 md:rounded-full md:p-0',
+                'absolute top-1/2 -translate-y-1/2 md:h-14 md:w-14 md:rounded-full md:p-0',
                 sizeClassNames[size].button
               )}
               size="sm"
