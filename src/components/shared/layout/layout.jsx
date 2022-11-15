@@ -34,6 +34,7 @@ aa('setUserToken', userToken);
 
 const Layout = ({
   headerTheme,
+  footerTheme,
   withOverflowHidden,
   isSignIn,
   children,
@@ -83,7 +84,7 @@ const Layout = ({
         <main className={clsx(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col')}>
           {children}
         </main>
-        <Footer isDocPage={isDocPage} withTopBorder={footerWithTopBorder} />
+        <Footer isDocPage={isDocPage} theme={footerTheme} withTopBorder={footerWithTopBorder} />
         <MobileMenu
           isOpen={isMobileMenuOpen}
           headerRef={headerRef}
@@ -97,6 +98,7 @@ const Layout = ({
 
 Layout.propTypes = {
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
+  footerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
   isSignIn: PropTypes.bool,

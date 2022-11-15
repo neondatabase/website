@@ -1,16 +1,14 @@
 import clsx from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { useCookie, useLocation } from 'react-use';
+import React from 'react';
 
 import Button from 'components/shared/button';
 import { HUBSPOT_NEWSLETTERS_FORM_ID } from 'constants/forms';
-import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
-
-import CheckIcon from './images/subscription-form-check.inline.svg';
-import ErrorIcon from './images/subscription-form-error.inline.svg';
-import SendIcon from './images/subscription-form-send.inline.svg';
+import useEmailSubmitForm from 'hooks/use-email-submit-form';
+import CheckIcon from 'icons/subscription-form-check.inline.svg';
+import ErrorIcon from 'icons/subscription-form-error.inline.svg';
+import SendIcon from 'icons/subscription-form-send.inline.svg';
 
 const appearAndExitAnimationVariants = {
   initial: { opacity: 0 },
@@ -19,67 +17,10 @@ const appearAndExitAnimationVariants = {
 };
 
 const SubscriptionForm = ({ className }) => {
-  const [email, setEmail] = useState('');
-  const [formState, setFormState] = useState('default');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [hubspotutk] = useCookie('hubspotutk');
-  const { href } = useLocation();
-  const handleInputChange = (event) => setEmail(event.currentTarget.value.trim());
-
-  const context = {
-    hutk: hubspotutk,
-    pageUri: href,
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (!email) {
-      setErrorMessage('Please enter your email');
-    } else if (!emailRegexp.test(email)) {
-      setErrorMessage('Please enter a valid email');
-    } else {
-      setErrorMessage('');
-      setFormState('loading');
-
-      const loadingAnimationStartedTime = Date.now();
-
-      sendHubspotFormData({
-        formId: HUBSPOT_NEWSLETTERS_FORM_ID,
-        context,
-        values: [
-          {
-            name: 'email',
-            value: email,
-          },
-        ],
-      })
-        .then((response) => {
-          if (response.ok) {
-            doNowOrAfterSomeTime(() => {
-              setFormState('success');
-              setEmail('Thanks for subscribing!');
-
-              setTimeout(() => {
-                setFormState('default');
-                setEmail('');
-              }, 2000);
-            }, loadingAnimationStartedTime);
-          } else {
-            doNowOrAfterSomeTime(() => {
-              setFormState('error');
-              setErrorMessage('Something went wrong. Please reload the page and try again');
-            }, loadingAnimationStartedTime);
-          }
-        })
-        .catch(() => {
-          doNowOrAfterSomeTime(() => {
-            setFormState('error');
-            setErrorMessage('Something went wrong. Please reload the page and try again');
-          }, loadingAnimationStartedTime);
-        });
-    }
-  };
+  const { email, formState, errorMessage, handleInputChange, handleSubmit } = useEmailSubmitForm({
+    formId: HUBSPOT_NEWSLETTERS_FORM_ID,
+    successText: 'Thanks for subscribing!',
+  });
 
   return (
     <form
