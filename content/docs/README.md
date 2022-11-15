@@ -223,21 +223,24 @@ class GFG {
 
 ## Admonition
 
-In addition to emphasize your text, wrap text with `<Admonition></Admonition>` and set the proper type.
+To improve the documentation readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
 
-There are 5 types of Admonition: `note`, `important`, `tip`, `warning`, `info`.
+There are 5 types of Admonition: `note`, `important`, `tip`, `warning`, `info`; the default is `note`.
 
 You may also specify an optional title with prop `title`.
 
 Example:
 
 ```md
+
 <Admonition type="note" title="Your title">
-The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
 </Admonition>
+
 <Admonition type="info">
-The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
 </Admonition>
+
 ```
 
 <details>
@@ -256,10 +259,10 @@ Example file structure:
 ```md
 ├── content
 │ ├── docs
-│ ├── conceptual-guides
-│ ├── architecture-overview.md
-│ ├── images
-│ ├── neon_architecture_2.png // put images in the same directory as your .md file
+│   ├── conceptual-guides
+│     ├── architecture-overview.md
+│     ├── images
+│       ├── neon_architecture_2.png // put images in the same directory as your .md file
 ```
 
 Example content in `architecture-overview.md`:
@@ -277,7 +280,7 @@ Custom `mdx` component that makes possible using [extended markdown syntax for d
 The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
-/_ other content here _/}
+{/* other content here */}
 
 <DefinitionList>
 {/* required new line */}
@@ -297,10 +300,10 @@ Another term for smoke test
 [Stress test](/)
 : First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
 
-{/_ required new line _/}
+{/* other content here */}
 </DefinitionList>
 
-{/_ other content here _/}
+{/* other content here */}
 ```
 
 ### Acceptable markup for term
