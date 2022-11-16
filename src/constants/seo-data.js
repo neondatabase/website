@@ -28,4 +28,9 @@ export default {
   404: {
     title: 'Page Not Found — Neon',
   },
+  developerDays1: {
+    title: 'Neon Developer Days — Neon',
+    description:
+      'Join us virtually on December 6th, 7th, and 8th to learn about Neon and how to build better with Serverless Postgres.',
+  },
 };
