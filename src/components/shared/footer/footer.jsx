@@ -19,7 +19,8 @@ const Footer = ({
     <footer
       className={clsx(
         'safe-paddings mt-auto overflow-hidden',
-        withTopBorder && 'border-t border-gray-7',
+        !isDarkTheme && withTopBorder && 'border-t border-gray-7',
+        isDarkTheme && withTopBorder && 'border-t border-gray-2',
         isDarkTheme ? 'bg-black text-white' : 'bg-white text-black'
       )}
     >

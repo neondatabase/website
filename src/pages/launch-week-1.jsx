@@ -7,7 +7,7 @@ import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
 
 const LaunchWeek1 = () => (
-  <Layout headerTheme="black" footerTheme="black">
+  <Layout headerTheme="black" footerTheme="black" footerWithTopBorder>
     <Hero />
   </Layout>
 );
