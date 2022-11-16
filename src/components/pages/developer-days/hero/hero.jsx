@@ -26,7 +26,7 @@ const Hero = () => (
       <div className="relative z-10 flex flex-col items-center">
         <time
           className="rounded-[40px] bg-secondary-2 py-2 px-4 text-xs font-bold uppercase leading-none text-black"
-          dateTime="2022-12-05"
+          dateTime="2022-12-06"
         >
           December 6-8, 2022
         </time>
