@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Configure, InstantSearch } from 'react-instantsearch-dom';
 
 import Input from 'components/shared/search/input';
@@ -13,6 +13,13 @@ const indices = [{ name: algoliaQueries[0].indexName, title: 'Docs', hitComp: 'p
 const SearchModal = ({ isOpen, closeModal }) => {
   const { query, setQuery, setFocus, hasFocus, searchClient } = useAlgoliaSearch();
   const shouldShowResult = !!query?.length && hasFocus;
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
 
   return (
     <InstantSearch
@@ -27,6 +34,7 @@ const SearchModal = ({ isOpen, closeModal }) => {
           <Input
             className="grow"
             hasFocus={hasFocus}
+            inputRef={inputRef}
             isMobileSearch
             onFocus={() => setFocus(true)}
           />
