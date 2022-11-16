@@ -40,6 +40,7 @@ Right now Markdown files accept 2 fields:
 2. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/docs/old-path/`
 3. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
 4. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
+5. `ogImage` - the social preview image of the page.
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 
@@ -232,7 +233,6 @@ You may also specify an optional title with prop `title`.
 Example:
 
 ```md
-
 <Admonition type="note" title="Your title">
   The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
 </Admonition>
@@ -240,7 +240,6 @@ Example:
 <Admonition type="info">
   The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
 </Admonition>
-
 ```
 
 <details>
@@ -259,10 +258,10 @@ Example file structure:
 ```md
 ├── content
 │ ├── docs
-│   ├── conceptual-guides
-│     ├── architecture-overview.md
-│     ├── images
-│       ├── neon_architecture_2.png // put images in the same directory as your .md file
+│ ├── conceptual-guides
+│ ├── architecture-overview.md
+│ ├── images
+│ ├── neon_architecture_2.png // put images in the same directory as your .md file
 ```
 
 Example content in `architecture-overview.md`:
@@ -280,7 +279,7 @@ Custom `mdx` component that makes possible using [extended markdown syntax for d
 The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
-{/* other content here */}
+{/_ other content here _/}
 
 <DefinitionList>
 {/* required new line */}
@@ -300,10 +299,10 @@ Another term for smoke test
 [Stress test](/)
 : First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
 
-{/* other content here */}
+{/_ other content here _/}
 </DefinitionList>
 
-{/* other content here */}
+{/_ other content here _/}
 ```
 
 ### Acceptable markup for term
