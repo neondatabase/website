@@ -111,6 +111,11 @@ export const query = graphql`
       excerpt(pruneLength: 160)
       frontmatter {
         title
+        ogImage {
+          childImageSharp {
+            gatsbyImageData(layout: FIXED, width: 1200, height: 630, formats: JPG)
+          }
+        }
         enableTableOfContents
       }
     }
@@ -143,7 +148,9 @@ export const Head = ({
   data: {
     mdx: {
       excerpt,
-      frontmatter: { title },
+      frontmatter: { title, ogImage },
     },
   },
-}) => <SEO pathname={pathname} {...SEO_DATA.doc({ title, description: excerpt })} />;
+}) => (
+  <SEO pathname={pathname} {...SEO_DATA.doc({ title, description: excerpt })} ogImage={ogImage} />
+);
