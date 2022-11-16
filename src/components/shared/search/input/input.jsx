@@ -6,7 +6,16 @@ import { connectSearchBox } from 'react-instantsearch-dom';
 import SearchIcon from 'icons/search.inline.svg';
 
 const Input = connectSearchBox(
-  ({ refine, currentRefinement, onFocus, hasFocus, isNotFoundPage, isMobileSearch, className }) => (
+  ({
+    refine,
+    currentRefinement,
+    onFocus,
+    hasFocus,
+    isNotFoundPage,
+    isMobileSearch,
+    className,
+    inputRef,
+  }) => (
     <div className={clsx('relative', className)}>
       <SearchIcon
         className={clsx(
@@ -29,6 +38,7 @@ const Input = connectSearchBox(
         placeholder={isNotFoundPage ? 'Search for other pages' : 'Search'}
         autoComplete="off"
         aria-label={isNotFoundPage ? 'Search for other pages' : 'Search'}
+        ref={inputRef}
         onChange={(e) => refine(e.target.value)}
         onFocus={onFocus}
       />
