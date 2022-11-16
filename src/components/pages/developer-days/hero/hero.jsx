@@ -28,7 +28,7 @@ const Hero = () => (
           className="rounded-[40px] bg-secondary-2 py-2 px-4 text-xs font-bold uppercase leading-none text-black"
           dateTime="2022-12-05"
         >
-          5 December 2022
+          December 6-8, 2022
         </time>
         <h1 className="mt-5 text-center text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl">
           Neon Developer Days
