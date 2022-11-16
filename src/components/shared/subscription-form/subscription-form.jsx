@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useCookie, useLocation } from 'react-use';
 
 import Button from 'components/shared/button';
+import useLocalStorage from 'hooks/use-local-storage';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import ErrorIcon from 'icons/subscription-form-error.inline.svg';
 import SendIcon from 'icons/subscription-form-send.inline.svg';
@@ -35,9 +36,17 @@ const sizeClassNames = {
     stateIcon: '2xl:w-[60px] xl:w-[56px]',
   },
 };
-const SubscriptionForm = ({ className, formId, successText, submitButtonText, size }) => {
+const SubscriptionForm = ({
+  className,
+  formId,
+  successText,
+  submitButtonText,
+  size,
+  localStorageKey,
+}) => {
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState('default');
+  const [submittedEmail, setSubmittedEmail] = useLocalStorage(localStorageKey, []);
   const [errorMessage, setErrorMessage] = useState('');
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
@@ -55,7 +64,10 @@ const SubscriptionForm = ({ className, formId, successText, submitButtonText, si
       setErrorMessage('Please enter your email');
     } else if (!emailRegexp.test(email)) {
       setErrorMessage('Please enter a valid email');
+    } else if (submittedEmail.includes(email)) {
+      setErrorMessage('You have already submitted this email');
     } else {
+      setSubmittedEmail([...submittedEmail, email]);
       setErrorMessage('');
       setFormState('loading');
 
@@ -232,6 +244,7 @@ SubscriptionForm.propTypes = {
   successText: PropTypes.string,
   submitButtonText: PropTypes.string,
   size: PropTypes.oneOf(['sm', 'md']),
+  localStorageKey: PropTypes.string.isRequired,
 };
 
 SubscriptionForm.defaultProps = {

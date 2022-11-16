@@ -6,14 +6,14 @@ import Layout from 'components/shared/layout';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
 
-const LaunchWeek1 = () => (
+const DeveloperDays1 = () => (
   <Layout headerTheme="black" footerTheme="black" footerWithTopBorder>
     <Hero />
   </Layout>
 );
 
-export default LaunchWeek1;
+export default DeveloperDays1;
 
 export const Head = ({ location: { pathname } }) => (
-  <SEO pathname={pathname} {...SEO_DATA.launchWeek1} />
+  <SEO pathname={pathname} {...SEO_DATA.developerDays1} />
 );

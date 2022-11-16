@@ -28,9 +28,9 @@ export default {
   404: {
     title: 'Page Not Found — Neon',
   },
-  launchWeek1: {
-    title: 'Neon Launch Week — Neon',
+  developerDays1: {
+    title: 'Neon Developer Days — Neon',
     description:
-      'Register to Neon Launch Week at 5th of December and be the first who will see the latest updates from our team',
+      'Join us virtually on December 6th, 7th, and 8th to learn about Neon and how to build better with Serverless Postgres.',
   },
 };

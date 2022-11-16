@@ -3,7 +3,7 @@ import React from 'react';
 
 import Container from 'components/shared/container';
 import SubscriptionForm from 'components/shared/subscription-form';
-import { HUBSPOT_LAUNCH_WEEK_FORM_ID } from 'constants/forms';
+import { HUBSPOT_DEVELOPER_DAYS_1_FORM_ID } from 'constants/forms';
 
 import backgroundLines from './images/bg-lines.svg';
 import Line from './images/white-line.inline.svg';
@@ -31,11 +31,11 @@ const Hero = () => (
           5 December 2022
         </time>
         <h1 className="mt-5 text-center text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl">
-          Neon Launch Week
+          Neon Developer Days
         </h1>
         <p className="mt-5 max-w-[640px] text-center text-xl leading-normal md:text-lg">
-          Register to Neon Launch Week at 5th of December and be the first who will see the latest
-          updates from our team
+          Join us virtually on December 6th, 7th, and 8th to learn about Neon and how to build
+          better with Serverless Postgres.
         </p>
         <div className="relative">
           <Line className="absolute top-[calc(100%-30px)] right-16 2xl:top-[calc(100%-10px)] lg:hidden" />
@@ -44,7 +44,8 @@ const Hero = () => (
             successText="Thanks for registering!"
             submitButtonText="Register"
             size="sm"
-            formId={HUBSPOT_LAUNCH_WEEK_FORM_ID}
+            localStorageKey="submittedEmailDeveloperDays1Form"
+            formId={HUBSPOT_DEVELOPER_DAYS_1_FORM_ID}
           />
         </div>
       </div>

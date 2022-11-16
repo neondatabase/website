@@ -11,7 +11,11 @@ const SubscribeMinimalistic = () => (
       size="md"
     >
       <h2 className="t-5xl font-bold leading-tight">Subscribe to Newsletter</h2>
-      <SubscriptionForm className="lg:!mx-auto" formId={HUBSPOT_NEWSLETTERS_FORM_ID} />
+      <SubscriptionForm
+        className="lg:!mx-auto"
+        formId={HUBSPOT_NEWSLETTERS_FORM_ID}
+        localStorageKey="submittedEmailNewsletterForm"
+      />
     </Container>
   </section>
 );
