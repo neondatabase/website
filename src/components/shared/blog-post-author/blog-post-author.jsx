@@ -40,7 +40,12 @@ const BlogPostAuthors = ({ authors, isBlogPost }) =>
   authors?.map(({ author }, index) => (
     <Fragment key={index}>
       {author.postAuthor.url ? (
-        <Link className="group" to={author.postAuthor.url}>
+        <Link
+          className="group"
+          to={author.postAuthor.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Author author={author} isBlogPost={isBlogPost} />
         </Link>
       ) : (
