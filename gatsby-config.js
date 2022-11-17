@@ -124,13 +124,7 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: 'gatsby-plugin-google-tagmanager',
-      options: {
-        id: 'GTM-MJLTK6F',
-      },
-    },
-    ...(process.env.NODE_ENV === 'production'
+    ...(process.env.IS_PRODUCTION === 'true'
       ? [
           {
             resolve: 'gatsby-plugin-algolia-search',
@@ -143,6 +137,12 @@ module.exports = {
               queries: require('./src/utils/algolia-queries'),
               matchFields: ['title', 'excerpt'],
               chunkSize: 10000, // default: 1000
+            },
+          },
+          {
+            resolve: 'gatsby-plugin-google-tagmanager',
+            options: {
+              id: 'GTM-MJLTK6F',
             },
           },
         ]
