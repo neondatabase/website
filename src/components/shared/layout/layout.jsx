@@ -99,7 +99,7 @@ const Layout = ({
 
 Layout.propTypes = {
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
-  footerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
+  footerTheme: PropTypes.oneOf(['white', 'black']),
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
   isSignIn: PropTypes.bool,
@@ -110,6 +110,7 @@ Layout.propTypes = {
 };
 
 Layout.defaultProps = {
+  footerTheme: 'white',
   withOverflowHidden: false,
   isSignIn: false,
   isHeaderSticky: false,
