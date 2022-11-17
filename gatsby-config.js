@@ -104,7 +104,7 @@ module.exports = {
           {
             resolve: 'gatsby-remark-images',
             options: {
-              maxWidth: 860,
+              maxWidth: 960,
               quality: 85,
               withWebp: true,
               backgroundColor: 'white',
@@ -124,13 +124,7 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: 'gatsby-plugin-google-tagmanager',
-      options: {
-        id: 'GTM-MJLTK6F',
-      },
-    },
-    ...(process.env.NODE_ENV === 'production'
+    ...(process.env.IS_PRODUCTION === 'true'
       ? [
           {
             resolve: 'gatsby-plugin-algolia-search',
@@ -145,6 +139,12 @@ module.exports = {
               chunkSize: 10000, // default: 1000
             },
           },
+          {
+            resolve: 'gatsby-plugin-google-tagmanager',
+            options: {
+              id: 'GTM-MJLTK6F',
+            },
+          },
         ]
       : []),
     'gatsby-alias-imports',
@@ -156,6 +156,7 @@ module.exports = {
         siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
       },
     },
+
     {
       resolve: 'gatsby-source-wordpress',
       options: {

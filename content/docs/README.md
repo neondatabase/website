@@ -40,6 +40,7 @@ Right now Markdown files accept 2 fields:
 2. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/docs/old-path/`
 3. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
 4. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
+5. `ogImage` - the social preview image of the page.
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 
@@ -87,10 +88,31 @@ For example:
 
 ### How to add a new page
 
-In order to add a new page, add a new item to `items` array with keys `title` and `slug` under specific category or subcategory:
+In order to add a new page to the root level, add `slug` in the same level with `title`.
 
-- `title` in the sidebar may differ from `title` in Markdown file.
-- `slug` should always match page's slug.
+```diff yaml
+ - title: Root page 1
+   items:
+     - title: Page 1
+       slug: page-1
+ - title: Root page 2
+   items:
+     - title: Page 2
+       slug: page-2
++ - title: Root page 1
++   slug: root-page-1
++   items:
++     - title: Page 1
++       slug: page-1
++ - title: Root page 2
++   slug: root-page-2
++   items:
++     - title: Page 2
++       slug: page-2
+
+```
+
+In order to add new page under Category, add a new item to `items` array with keys `title` and `slug` under specific category or subcategory:
 
 For example:
 
@@ -112,6 +134,9 @@ For example:
 +   - title: Page 5
 +     slug: page-5
 ```
+
+- `title` in the sidebar may differ from `title` in Markdown file.
+- `slug` should always match page's slug.
 
 ### How to add a single page to doc sidebar
 
@@ -143,6 +168,87 @@ To add a single page <https://example.com/changelog> to the docs sidebar, add th
 
 All available languages for code blocks can be found [here](https://prismjs.com/index.html#supported-languages).
 
+## Code Tabs
+
+To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and write labels of code tabs in order:
+
+````md
+<CodeTabs labels={["Shell", "C++", "C#", "Java"]}>
+
+```bash
+#!/bin/bash
+STR="Hello World!"
+echo $STR
+```
+
+```c++
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World";
+    return 0;
+}
+```
+
+```csharp
+namespace HelloWorld
+{
+    class Hello {
+        static void Main(string[] args)
+        {
+            System.Console.WriteLine("Hello World");
+        }
+    }
+}
+```
+
+```java
+import java.io.*;
+
+class GFG {
+    public static void main (String[] args) {
+       System.out.println("Hello World");
+    }
+}
+```
+
+</CodeTabs>
+````
+
+<details>
+<summary>Examples</summary>
+
+![Code tabs example](code-tabs-example.jpg)
+
+</details>
+
+## Admonition
+
+To improve the documentation readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
+
+There are 5 types of Admonition: `note`, `important`, `tip`, `warning`, `info`; the default is `note`.
+
+You may also specify an optional title with prop `title`.
+
+Example:
+
+```md
+<Admonition type="note" title="Your title">
+  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+</Admonition>
+
+<Admonition type="info">
+  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+</Admonition>
+```
+
+<details>
+<summary>Examples</summary>
+
+![Admonition example](admonition-example.jpg)
+
+</details>
+
 ## Images
 
 The images should be sourced in `docs` directory and be used in `.md` with the relative path
@@ -173,7 +279,7 @@ Custom `mdx` component that makes possible using [extended markdown syntax for d
 The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
-/* other content here */}
+{/* other content here */}
 
 <DefinitionList>
 {/* required new line */}
@@ -193,7 +299,7 @@ Another term for smoke test
 [Stress test](/)
 : First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
 
-{/* required new line */}
+{/* other content here */}
 </DefinitionList>
 
 {/* other content here */}

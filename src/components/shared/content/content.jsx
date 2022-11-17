@@ -4,6 +4,8 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { Fragment, forwardRef } from 'react';
 
+import Admonition from 'components/pages/doc/admonition';
+import CodeTabs from 'components/pages/doc/code-tabs';
 import DefinitionList from 'components/pages/doc/definition-list';
 import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
@@ -26,14 +28,13 @@ const components = {
   },
   pre: (props) => <div {...props} />,
   DefinitionList,
+  Admonition,
+  CodeTabs,
 };
 
 // eslint-disable-next-line no-return-assign
 const Content = forwardRef(({ className, content }, ref) => (
-  <div
-    className={clsx('prose-lg prose md:prose-base xs:prose-code:break-words', className)}
-    ref={ref}
-  >
+  <div className={clsx('prose-doc prose xs:prose-code:break-words', className)} ref={ref}>
     <MDXProvider components={components}>{content}</MDXProvider>
   </div>
 ));

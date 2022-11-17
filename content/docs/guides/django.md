@@ -53,4 +53,6 @@ where:
 
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings/#databases), in the Django documentation.
 
-**_Note_**: Running Django tests is currently not supported. The Django test runner must be able to create a database for tests, which is not yet supported by Neon.
+<Admonition type="note">
+Running Django tests is currently not supported. The Django test runner must be able to create a database for tests, which is not yet supported by Neon.
+</Admonition>

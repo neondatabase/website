@@ -5,38 +5,48 @@ import React, { useState } from 'react';
 import { useCookie, useLocation } from 'react-use';
 
 import Button from 'components/shared/button';
-import { HUBSPOT_NEWSLETTERS_FORM_ID, HUBSPOT_FORM_PORTAL_ID } from 'constants/forms';
-
-import CheckIcon from './images/subscription-form-check.inline.svg';
-import ErrorIcon from './images/subscription-form-error.inline.svg';
-import SendIcon from './images/subscription-form-send.inline.svg';
-
-const emailRegexp =
-  // eslint-disable-next-line no-control-regex, no-useless-escape
-  /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
+import useLocalStorage from 'hooks/use-local-storage';
+import CheckIcon from 'icons/subscription-form-check.inline.svg';
+import ErrorIcon from 'icons/subscription-form-error.inline.svg';
+import SendIcon from 'icons/subscription-form-send.inline.svg';
+import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
 
 const appearAndExitAnimationVariants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.2 } },
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
-
-function doNowOrAfterSomeTime(callback, loadingAnimationStartedTime) {
-  const LOADING_ANIMATION_FULL_DURATION = 2200; // 2000 (loading animation duration) + 200 (loading animation delay) = 2200
-
-  if (Date.now() - loadingAnimationStartedTime > LOADING_ANIMATION_FULL_DURATION) {
-    callback();
-  } else {
-    setTimeout(
-      callback,
-      LOADING_ANIMATION_FULL_DURATION - (Date.now() - loadingAnimationStartedTime)
-    );
-  }
-}
-
-const SubscriptionForm = ({ className }) => {
+const sizeClassNames = {
+  sm: {
+    form: 'before:-bottom-2 before:-left-2',
+    input: 'w-[552px] h-[72px] text-lg pl-5 border-[3px]',
+    button: '!text-lg !px-8 !py-[19px] right-2 md:!p-0',
+    loading: 'right-2',
+    success: 'right-2',
+    stateIcon: 'w-14 h-14',
+  },
+  md: {
+    form: 'before:-bottom-3.5 before:-left-3.5 2xl:before:-bottom-2.5 2xl:before:-left-2.5',
+    input:
+      'h-24 w-[696px] 3xl:w-[576px] 2xl:h-20 2xl:w-[478px] 2xl:pr-[187px] xl:h-[72px] xl:w-[448px] xl:pr-[164px] t-2xl pl-7 border-4',
+    button: 'right-3 2xl:right-2.5 xl:right-2',
+    loading:
+      'right-3 h-[72px] w-[72px] 2xl:right-2.5 2xl:h-[60px] 2xl:w-[60px] xl:right-2 xl:h-[56px] xl:w-[56px]',
+    success: 'right-3 2xl:right-2.5 xl:right-2',
+    stateIcon: '2xl:w-[60px] xl:w-[56px]',
+  },
+};
+const SubscriptionForm = ({
+  className,
+  formId,
+  successText,
+  submitButtonText,
+  size,
+  localStorageKey,
+}) => {
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState('default');
+  const [submittedEmail, setSubmittedEmail] = useLocalStorage(localStorageKey, []);
   const [errorMessage, setErrorMessage] = useState('');
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
@@ -54,35 +64,30 @@ const SubscriptionForm = ({ className }) => {
       setErrorMessage('Please enter your email');
     } else if (!emailRegexp.test(email)) {
       setErrorMessage('Please enter a valid email');
+    } else if (submittedEmail.includes(email)) {
+      setErrorMessage('You have already submitted this email');
     } else {
+      setSubmittedEmail([...submittedEmail, email]);
       setErrorMessage('');
       setFormState('loading');
 
       const loadingAnimationStartedTime = Date.now();
 
-      fetch(
-        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_FORM_PORTAL_ID}/${HUBSPOT_NEWSLETTERS_FORM_ID}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+      sendHubspotFormData({
+        formId,
+        context,
+        values: [
+          {
+            name: 'email',
+            value: email,
           },
-          body: JSON.stringify({
-            context,
-            fields: [
-              {
-                name: 'email',
-                value: email,
-              },
-            ],
-          }),
-        }
-      )
+        ],
+      })
         .then((response) => {
           if (response.ok) {
             doNowOrAfterSomeTime(() => {
               setFormState('success');
-              setEmail('Thanks for subscribing!');
+              setEmail(successText);
 
               setTimeout(() => {
                 setFormState('default');
@@ -108,8 +113,9 @@ const SubscriptionForm = ({ className }) => {
   return (
     <form
       className={clsx(
-        'relative ml-[14px] before:absolute before:-bottom-3.5 before:-left-3.5 before:h-full before:w-full before:rounded-full before:bg-secondary-2 2xl:ml-2.5 2xl:before:-bottom-2.5 2xl:before:-left-2.5 xl:ml-2 xl:before:-bottom-2 xl:before:-left-2 lg:mx-auto lg:max-w-[584px] md:before:w-[calc(100%+8px)]',
-        className
+        'relative ml-[14px] before:absolute before:h-full before:w-full before:rounded-full before:bg-secondary-2 2xl:ml-2.5 xl:ml-2 xl:before:-bottom-2 xl:before:-left-2 lg:mx-auto lg:max-w-[584px] md:before:w-[calc(100%+8px)]',
+        className,
+        sizeClassNames[size].form
       )}
       noValidate
       onSubmit={handleSubmit}
@@ -117,8 +123,9 @@ const SubscriptionForm = ({ className }) => {
       {/* Input */}
       <input
         className={clsx(
-          'remove-autocomplete-styles t-2xl relative block h-24 w-[696px] rounded-full border-4 border-black bg-white pl-7 pr-[218px] font-semibold text-black placeholder-black outline-none transition-colors duration-200 3xl:w-[576px] 2xl:h-20 2xl:w-[478px] 2xl:pr-[187px] xl:h-[72px] xl:w-[448px] xl:pr-[164px] lg:w-full lg:pl-5 md:pr-20',
-          errorMessage && 'border-secondary-1'
+          'remove-autocomplete-styles relative block rounded-full border-black bg-white pr-[218px] font-semibold leading-none text-black placeholder-black outline-none transition-colors duration-200 lg:w-full lg:pl-5 md:pr-20',
+          errorMessage && 'border-secondary-1',
+          sizeClassNames[size].input
         )}
         name="email"
         type="email"
@@ -154,13 +161,16 @@ const SubscriptionForm = ({ className }) => {
             variants={appearAndExitAnimationVariants}
           >
             <Button
-              className="absolute right-3 top-1/2 -translate-y-1/2 2xl:right-2.5 xl:right-2 md:h-14 md:w-14 md:rounded-full md:p-0"
+              className={clsx(
+                'absolute top-1/2 -translate-y-1/2 md:h-14 md:w-14 md:rounded-full md:p-0',
+                sizeClassNames[size].button
+              )}
               size="sm"
               type="submit"
               theme="primary"
               disabled={formState !== 'default'}
             >
-              <span className="md:sr-only">Subscribe</span>
+              <span className="md:sr-only">{submitButtonText}</span>
               <SendIcon className="hidden md:ml-1.5 md:block" aria-hidden />
             </Button>
           </motion.div>
@@ -171,7 +181,10 @@ const SubscriptionForm = ({ className }) => {
       <AnimatePresence>
         {formState === 'loading' && (
           <motion.div
-            className="absolute right-3 top-1/2 flex h-[72px] w-[72px] -translate-y-1/2 items-center justify-center rounded-full bg-black 2xl:right-2.5 2xl:h-[60px] 2xl:w-[60px] xl:right-2 xl:h-[56px] xl:w-[56px]"
+            className={clsx(
+              'absolute top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-black',
+              sizeClassNames[size].loading
+            )}
             initial="initial"
             animate="animate"
             exit="exit"
@@ -205,15 +218,19 @@ const SubscriptionForm = ({ className }) => {
       <AnimatePresence>
         {(formState === 'success' || formState === 'error') && (
           <motion.div
-            className="absolute right-3 top-1/2 -translate-y-1/2 2xl:right-2.5 xl:right-2"
+            className={clsx('absolute top-1/2 -translate-y-1/2', sizeClassNames[size].success)}
             initial="initial"
             animate="animate"
             exit="exit"
             variants={appearAndExitAnimationVariants}
             aria-hidden
           >
-            {formState === 'success' && <CheckIcon className="2xl:w-[60px] xl:w-[56px]" />}
-            {formState === 'error' && <ErrorIcon className="2xl:w-[60px] xl:w-[56px]" />}
+            {formState === 'success' && (
+              <CheckIcon className={clsx(sizeClassNames[size].stateIcon)} />
+            )}
+            {formState === 'error' && (
+              <ErrorIcon className={clsx(sizeClassNames[size].stateIcon)} />
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -223,10 +240,18 @@ const SubscriptionForm = ({ className }) => {
 
 SubscriptionForm.propTypes = {
   className: PropTypes.string,
+  formId: PropTypes.string.isRequired,
+  successText: PropTypes.string,
+  submitButtonText: PropTypes.string,
+  size: PropTypes.oneOf(['sm', 'md']),
+  localStorageKey: PropTypes.string.isRequired,
 };
 
 SubscriptionForm.defaultProps = {
   className: null,
+  successText: 'Thank you for subscribing!',
+  submitButtonText: 'Subscribe',
+  size: 'md',
 };
 
 export default SubscriptionForm;

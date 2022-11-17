@@ -11,7 +11,9 @@ Technical Preview Free Tier users can create up to three projects in Neon. Proje
 - The Point in Time Reset (PITR) window is limited to 7 days of _reasonable usage_
 - The compute node is limited to 1 vCPU and 256MB of RAM
 
-**_Note:_** Neon intends to offer a Free Tier beyond the Technical Preview period. The limits associated with that tier will be defined in the coming months. Technical Preview Free Tier limits are subject to change over the course of the Technical Preview.
+<Admonition type="note">
+Neon intends to offer a Free Tier beyond the Technical Preview period. The limits associated with that tier will be defined in the coming months. Technical Preview Free Tier limits are subject to change over the course of the Technical Preview.
+</Admonition>
 
 ## Data Size
 
