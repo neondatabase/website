@@ -48,7 +48,7 @@ const ActiveThemeIcon = ({ theme }) => {
     <span
       className={clsx(
         'inline-flex h-4 w-4 rounded-full',
-        theme === 'dark' && 'border border-black bg-black dark:border-[#D9D9D9] dark:bg-[#D9D9D9]',
+        theme === 'dark' && 'border border-black bg-black dark:border-gray-4',
         theme === 'light' && 'border border-gray-6 bg-white dark:border-transparent'
       )}
     />
@@ -109,7 +109,7 @@ const ThemeSelect = ({ className }) => {
     <div className={clsx('relative h-8 w-36', className)}>
       <div
         className={clsx(
-          'absolute bottom-0 w-36 items-center rounded border border-gray-7 bg-white text-sm leading-none transition-shadow duration-200 md:bottom-auto md:top-0 md:flex md:flex-col-reverse',
+          'absolute bottom-0 w-36 items-center rounded border border-gray-7 bg-white text-sm leading-none transition-shadow duration-200 dark:border-gray-3 dark:bg-black md:bottom-auto md:top-0 md:flex md:flex-col-reverse',
           showDropdown && 'shadow-select dark:shadow-none'
         )}
         ref={dropdownRef}
@@ -126,7 +126,7 @@ const ThemeSelect = ({ className }) => {
               <motion.li key={item} variants={itemVariants}>
                 <button
                   className={clsx(
-                    'flex w-full items-center py-[7px] pl-2.5 pr-3 transition-colors duration-200 hover:bg-gray-8',
+                    'flex w-full items-center py-[7px] pl-2.5 pr-3 transition-colors duration-200 hover:bg-gray-8 dark:hover:bg-gray-2',
                     index === 0 && 'rounded-t'
                   )}
                   type="button"
@@ -146,7 +146,7 @@ const ThemeSelect = ({ className }) => {
         >
           <ActiveThemeIcon theme={theme} />
           <span className="ml-2.5 capitalize">{theme}</span>
-          <ChevronsIcon className="ml-auto  text-gray-4" />
+          <ChevronsIcon className="ml-auto text-gray-4 dark:text-gray-6" />
         </button>
       </div>
     </div>

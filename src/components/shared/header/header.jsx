@@ -39,10 +39,10 @@ const Header = forwardRef(
     return (
       <header
         className={clsx(
-          'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative lg:h-14',
+          'safe-paddings absolute top-0 left-0 right-0 z-40 w-full dark:bg-black lg:relative lg:h-14',
           isThemeBlack ? 'lg:bg-black' : 'bg-white',
           isSticky && 'sticky top-0 z-50 md:relative',
-          withBottomBorder && 'border-b border-gray-7'
+          withBottomBorder && 'border-b border-gray-7 dark:border-gray-2'
         )}
         ref={ref}
       >
@@ -77,10 +77,10 @@ const Header = forwardRef(
                     className={clsx(
                       items?.length > 0 &&
                         'relative pr-3.5 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-[transparent] before:transition-colors before:duration-200 group-hover:text-primary-2 group-hover:before:border-t-primary-2',
-
                       items?.length > 0 && isThemeBlack
                         ? 'before:border-t-white'
-                        : 'before:border-t-black'
+                        : 'before:border-t-black',
+                      'dark:text-white dark:before:border-t-white'
                     )}
                     to={to}
                     theme={isThemeBlack ? 'white' : 'black'}
@@ -164,7 +164,7 @@ const Header = forwardRef(
             >
               <Github
                 className={clsx(
-                  'absolute top-1/2 left-1.5 -translate-y-1/2',
+                  'absolute top-1/2 left-1.5 -translate-y-1/2 dark:text-white',
                   isThemeBlack ? 'text-white' : 'text-black'
                 )}
               />
@@ -188,12 +188,12 @@ const Header = forwardRef(
                 type="button"
                 onClick={onSearchClick}
               >
-                <SearchIcon className="mb-[5px]" />
+                <SearchIcon className="mb-[5px] dark:text-white" />
               </button>
             )}
 
             <Burger
-              className={clsx(isThemeBlack ? 'text-white' : 'text-black')}
+              className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
               isToggled={isMobileMenuOpen}
               onClick={onBurgerClick}
             />

@@ -9,7 +9,7 @@
     }
   }
   .prose-doc {
-    @apply max-w-none leading-normal text-black;
+    @apply max-w-none leading-normal text-black dark:text-white;
 
     h2,
     h3,
@@ -28,7 +28,7 @@
     }
 
     a:not(.anchor) {
-      @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color] duration-200 ease-in-out hover:border-secondary-8 sm:break-words;
+      @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color] duration-200 ease-in-out hover:border-secondary-8 dark:text-primary-1 dark:hover:border-primary-1 sm:break-words;
     }
 
     ul,
@@ -49,7 +49,7 @@
 
       > li {
         &::before {
-          @apply absolute -left-3.5 top-2.5 h-1 w-1 rounded-full bg-black content-[''] md:-left-3;
+          @apply absolute -left-3.5 top-2.5 h-1 w-1 rounded-full bg-black content-[''] dark:bg-white md:-left-3;
         }
       }
     }
@@ -61,7 +61,7 @@
         @apply pl-1.5;
 
         &::marker {
-          @apply pl-1 text-black;
+          @apply pl-1 text-black dark:text-white;
         }
       }
 
@@ -93,7 +93,7 @@
 
       tbody {
         tr {
-          @apply border-b border-gray-7 last:border-gray-5;
+          @apply border-b border-gray-7 last:border-gray-5 dark:border-gray-2 dark:last:border-gray-5;
         }
       }
     }
@@ -105,17 +105,17 @@
     }
 
     pre {
-      @apply my-5 !bg-gray-9;
+      @apply my-5 !bg-gray-9 dark:!bg-gray-1;
 
       code {
         text-shadow: unset;
 
-        @apply highlighted-code !font-mono text-sm !text-black;
+        @apply highlighted-code !font-mono text-sm !text-black dark:!text-white dark:![text-shadow:unset];
       }
     }
 
     :not(pre) > code {
-      @apply !rounded-sm bg-gray-8 !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
+      @apply !rounded-sm bg-gray-8 !px-1.5 !py-0.5 !font-mono !font-normal !text-black dark:bg-gray-2 dark:!text-white;
 
       &::before,
       &::after {

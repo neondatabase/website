@@ -60,7 +60,7 @@ const PageHit = ({ hit, insights, isNotFoundPage }) => (
     </Link>
     <Snippet
       className={clsx(
-        'mt-1.5 block text-xs leading-relaxed text-gray-2',
+        'mt-1.5 block text-xs leading-relaxed text-gray-2 dark:text-gray-7',
         isNotFoundPage ? 'text-sm' : 'text-xs'
       )}
       attribute="excerpt"
@@ -90,7 +90,10 @@ const HitWithInsights = connectHitInsights(aa)(PageHit);
 const Hits = connectHits(({ hits, showAll, isNotFoundPage, isMobileSearch }) =>
   hits?.length ? (
     <ul
-      className={clsx('mt-4 divide-y', isMobileSearch ? 'divide-gray-7' : 'divide-gray-9 px-2.5')}
+      className={clsx(
+        'mt-4 divide-y',
+        isMobileSearch ? 'divide-gray-7' : 'divide-gray-9 px-2.5 dark:divide-gray-4'
+      )}
     >
       {hits.slice(0, showAll ? hits.length : 5).map((hit) => (
         <li className="py-2.5 first:pt-0" key={hit.objectID}>
@@ -103,7 +106,7 @@ const Hits = connectHits(({ hits, showAll, isNotFoundPage, isMobileSearch }) =>
 
 const resultsClassNames = {
   default:
-    'absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden rounded-b border-t-0 rounded-b border border-gray-5',
+    'absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden rounded-b border-t-0 rounded-b border border-gray-5 dark:border-gray-4',
   mobile: 'px-4',
   notFound: 'rounded-b-[29px] border-2 border-gray-2',
 };
@@ -127,7 +130,7 @@ const Results = ({ indices, type }) => {
   }, [height]);
 
   return (
-    <div className={clsx('bg-white', resultsClassNames[type])}>
+    <div className={clsx('bg-white dark:bg-black dark:text-white', resultsClassNames[type])}>
       <div
         className={clsx('overflow-y-scroll pt-2.5', containerClassNames[type])}
         style={{ maxHeight: isMobileSearch && containerHeight }}
@@ -148,7 +151,7 @@ const Results = ({ indices, type }) => {
       </div>
       <div
         className={clsx(
-          'mt-2.5 flex justify-between p-2.5',
+          'mt-2.5 flex justify-between p-2.5 dark:bg-black',
           isNotFoundPage && 'rounded-b-[29px] px-6 xs:px-2.5',
           isMobileSearch ? 'bg-white px-0' : 'bg-gray-9'
         )}

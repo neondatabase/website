@@ -18,7 +18,8 @@ const styles = {
     '2xs': 't-sm',
   },
   theme: {
-    black: 'text-black transition-colors duration-200 hover:text-primary-2',
+    black:
+      'text-black transition-colors duration-200 hover:text-primary-2 dark:text-white dark:hover:text-primary-2',
     'black-no-hover': 'text-black',
     white: 'text-white transition-colors duration-200 hover:text-primary-2',
     'black-primary-1': `${underlineCommonStyles} before:bg-primary-1 hover:text-primary-1`,

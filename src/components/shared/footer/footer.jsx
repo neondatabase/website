@@ -7,19 +7,16 @@ import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
 import logoBlack from 'images/logo-black.svg';
 import logoWhite from 'images/logo-white.svg';
-// import ThemeSelect from './theme-select';
 
-const Footer = ({
-  // isDocPage,
-  withTopBorder,
-  theme,
-}) => {
+import ThemeSelect from './theme-select';
+
+const Footer = ({ isDocPage, withTopBorder, theme }) => {
   const isDarkTheme = theme === 'black';
   return (
     <footer
       className={clsx(
-        'safe-paddings mt-auto overflow-hidden',
-        !isDarkTheme && withTopBorder && 'border-t border-gray-7',
+        'safe-paddings mt-auto overflow-hidden dark:bg-black dark:text-white',
+        !isDarkTheme && withTopBorder && 'border-t border-gray-7 dark:border-gray-2',
         isDarkTheme && withTopBorder && 'border-t border-gray-2',
         isDarkTheme ? 'bg-black text-white' : 'bg-white text-black'
       )}
@@ -49,7 +46,7 @@ const Footer = ({
                 />
               )}
             </Link>
-            {/* {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />} */}
+            {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />}
           </div>
           <div className="space-y-[18px] leading-none">
             <p>Made in SF and the World</p>
@@ -88,13 +85,13 @@ const Footer = ({
 };
 
 Footer.propTypes = {
-  // isDocPage: PropTypes.bool,
+  isDocPage: PropTypes.bool,
   withTopBorder: PropTypes.bool,
   theme: PropTypes.oneOf(['white', 'black']),
 };
 
 Footer.defaultProps = {
-  // isDocPage: false,
+  isDocPage: false,
   withTopBorder: false,
   theme: 'white',
 };
