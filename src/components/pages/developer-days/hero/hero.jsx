@@ -35,7 +35,7 @@ const Hero = () => (
         </h1>
         <p className="mt-5 max-w-[640px] text-center text-xl leading-normal md:text-lg">
           Join us virtually on December 6th, 7th, and 8th to learn about Neon and how to build
-          better with Serverless Postgres.
+          better with Serverless Postgres. Register for event updates.
         </p>
         <div className="relative">
           <Line className="absolute top-[calc(100%-30px)] right-16 2xl:top-[calc(100%-10px)] lg:hidden" />
