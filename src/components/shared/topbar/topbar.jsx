@@ -9,7 +9,7 @@ const TopBar = () => (
     to="/developer-days-1"
   >
     <span className="mr-4 border-r border-black border-opacity-20 py-1 pr-4 text-sm font-semibold">
-      Register to the Neon Developer Days 🚀
+      Register for Neon Developer Days 🚀
     </span>
     <span className="inline-flex items-center text-sm font-bold xs:hidden">
       <span>Read More</span>
