@@ -1,7 +1,7 @@
 ---
 title: Projects
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
 
 ## About projects
