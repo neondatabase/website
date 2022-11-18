@@ -121,7 +121,7 @@ const Advantages = () => {
 
               <Heading
                 id={`advantages-item-${index + 1}-title`}
-                className="mt-6 xl:mt-5"
+                className="mt-6 leading-none xl:mt-5"
                 tag="h3"
                 size="sm"
                 theme="white"

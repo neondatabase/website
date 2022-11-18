@@ -2,20 +2,19 @@ import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { StaticImage } from 'gatsby-plugin-image';
 import React, { useState } from 'react';
+import { useCookie, useLocation } from 'react-use';
 
 import Button from 'components/shared/button';
 import Link from 'components/shared/link';
+import { HUBSPOT_EARLY_ACCESS_FORM_ID } from 'constants/forms';
 import LINKS from 'constants/links';
 import useLocalStorage from 'hooks/use-local-storage';
 import logoBlack from 'images/logo-black.svg';
 import logoWhite from 'images/logo-white.svg';
+import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import CheckIcon from './images/check.inline.svg';
-
-const emailRegexp =
-  // eslint-disable-next-line no-control-regex, no-useless-escape
-  /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
 
 const appearAndExitAnimationVariants = {
   initial: { opacity: 0 },
@@ -23,25 +22,17 @@ const appearAndExitAnimationVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-function doNowOrAfterSomeTime(callback, loadingAnimationStartedTime) {
-  const LOADING_ANIMATION_FULL_DURATION = 2200; // 2000 (loading animation duration) + 200 (loading animation delay) = 2200
-
-  if (Date.now() - loadingAnimationStartedTime > LOADING_ANIMATION_FULL_DURATION) {
-    callback();
-  } else {
-    setTimeout(
-      callback,
-      LOADING_ANIMATION_FULL_DURATION - (Date.now() - loadingAnimationStartedTime)
-    );
-  }
-}
-
 const Hero = () => {
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState('default');
   const [errorMessage, setErrorMessage] = useState('');
   const [submittedEmail, setSubmittedEmail] = useLocalStorage('submittedEmailEarlySuccessForm', []);
-
+  const [hubspotutk] = useCookie('hubspotutk');
+  const { href } = useLocation();
+  const context = {
+    hutk: hubspotutk,
+    pageUri: href,
+  };
   const handleInputChange = (event) => setEmail(event.currentTarget.value.trim());
 
   const handleSubmit = (event) => {
@@ -60,13 +51,15 @@ const Hero = () => {
 
       const loadingAnimationStartedTime = Date.now();
 
-      fetch('https://submit-form.com/6ERkQV60', {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify({ email }),
+      sendHubspotFormData({
+        formId: HUBSPOT_EARLY_ACCESS_FORM_ID,
+        context,
+        values: [
+          {
+            name: 'email',
+            value: email,
+          },
+        ],
       })
         .then((response) => {
           if (response.ok) {

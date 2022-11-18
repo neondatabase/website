@@ -5,6 +5,7 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import SubscriptionForm from 'components/shared/subscription-form';
+import { HUBSPOT_NEWSLETTERS_FORM_ID } from 'constants/forms';
 import LINKS from 'constants/links';
 import LinkedinIcon from 'icons/linkedin.inline.svg';
 import TwitterIcon from 'icons/twitter.inline.svg';
@@ -50,7 +51,11 @@ const Subscribe = () => (
           Subscribe to&nbsp;Newsletter
         </Heading>
 
-        <SubscriptionForm className="mt-10 2xl:mt-8 xl:mt-7" />
+        <SubscriptionForm
+          className="mt-10 2xl:mt-8 xl:mt-7"
+          formId={HUBSPOT_NEWSLETTERS_FORM_ID}
+          localStorageKey="submittedEmailNewsletterForm"
+        />
 
         <div className="mt-[94px] flex items-center space-x-[38px] 2xl:mt-[74px] 2xl:space-x-8 xl:mt-16 xl:space-x-7 lg:mt-12 lg:flex-col lg:space-x-0">
           <span className="t-3xl font-bold !leading-none">Join us:</span>

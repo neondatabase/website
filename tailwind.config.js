@@ -2,6 +2,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+  darkMode: 'class',
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     screens: {
@@ -31,34 +32,40 @@ module.exports = {
         5: '#aa99ff',
         6: '#d9eef2',
         7: '#259df4',
+        8: '#0055FF',
       },
       gray: {
         1: '#262626',
         2: '#404040',
-        3: '#b3b3b3',
-        4: '#e5e5e5',
-        5: '#fafafa',
-        6: '#f9f9f9',
-        7: '#f5f5f5',
+        3: '#595959',
+        4: '#808080',
+        5: '#b3b3b3',
+        6: '#cccccc',
+        7: '#e5e5e5',
+        8: '#f2f2f2',
+        9: '#FAFAFA',
       },
     },
     extend: {
       fontFamily: {
-        sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
+        sans: ['IBM Plex Sans', 'IBM Plex Sans Fallback', ...defaultTheme.fontFamily.sans],
         mono: ['IBM Plex Mono', ...defaultTheme.fontFamily.mono],
       },
       fontSize: {
-        sm: [defaultTheme.fontSize.sm[0], defaultTheme.lineHeight.none],
-        base: [defaultTheme.fontSize.base[0], defaultTheme.lineHeight.none],
-        lg: [defaultTheme.fontSize.lg[0], defaultTheme.lineHeight.none],
-        xl: [defaultTheme.fontSize.xl[0], defaultTheme.lineHeight.normal],
-        '2xl': [defaultTheme.fontSize['2xl'][0], defaultTheme.lineHeight.normal],
-        '3xl': [defaultTheme.fontSize['3xl'][0], defaultTheme.lineHeight.normal],
-        '4xl': ['2.5rem', defaultTheme.lineHeight.none],
-        '5xl': [defaultTheme.fontSize['5xl'][0], defaultTheme.lineHeight.tight],
-        '6xl': ['4rem', '1.125'],
-        '7xl': ['5rem', '1.125'],
-        '8xl': ['6.5rem', '1.125'],
+        sm: [defaultTheme.fontSize.sm[0]],
+        base: [defaultTheme.fontSize.base[0]],
+        lg: [defaultTheme.fontSize.lg[0]],
+        xl: [defaultTheme.fontSize.xl[0]],
+        '2xl': [defaultTheme.fontSize['2xl'][0]],
+        '3xl': [defaultTheme.fontSize['3xl'][0]],
+        '4xl': ['2.5rem'],
+        '5xl': [defaultTheme.fontSize['5xl'][0]],
+        '6xl': ['4rem'],
+        '7xl': ['5rem'],
+        '8xl': ['6.5rem'],
+      },
+      lineHeight: {
+        dense: '1.125',
       },
       keyframes: (theme) => ({
         'text-blink': {

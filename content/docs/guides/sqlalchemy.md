@@ -72,7 +72,9 @@ where:
 - `<username>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 
-_**Note**_: This example was tested with Python 3 and psycopg2 version 2.9.3.
+<Admonition type="note">
+This example was tested with Python 3 and psycopg2 version 2.9.3.
+</Admonition>
 
 ## Create an SQLAlchemy engine for your Neon project
 

@@ -32,7 +32,7 @@ const variants = {
     },
   },
   to: {
-    zIndex: 999,
+    zIndex: 99,
     opacity: 1,
     translateY: 0,
     transition: {
@@ -57,7 +57,7 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
 
   return (
     <motion.nav
-      className="absolute top-20 right-8 left-8 z-[-1] hidden rounded-2xl bg-white px-5 pt-1 pb-7 lg:block md:right-4 md:left-4"
+      className="absolute right-8 left-8 top-16 z-[-1] hidden rounded-2xl bg-white px-5 pt-1 pb-7 lg:block md:right-4 md:left-4"
       initial="from"
       animate={controls}
       variants={variants}
@@ -68,7 +68,7 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
         {MENUS.mobile.map(({ iconName, text, to, description }, index) => {
           const Icon = icons[iconName];
           return (
-            <li className="border-b border-b-gray-4" key={index}>
+            <li className="border-b border-b-gray-6" key={index}>
               {Icon && description ? (
                 <Link className="flex items-center whitespace-nowrap py-4" to={to}>
                   <Icon className="flex-shrink-0" aria-hidden />
