@@ -40,10 +40,10 @@ If you identify a security vulnerability, please proceed as follows under the pr
 
 ## Secure data centers
 
-Neon’s infrastructure is hosted and managed within Amazon’s secure data centers in the USA and backed by [AWS Cloud Security](https://aws.amazon.com/security/). Amazon continually manages risk and undergoes recurring assessments to ensure compliance with industry standards. For information about AWS data center compliance programs, refer to [AWS Compliance Programs](https://aws.amazon.com/compliance/programs/).
+Neon’s infrastructure is hosted and managed within Amazon’s secure data centers backed by [AWS Cloud Security](https://aws.amazon.com/security/). Amazon continually manages risk and undergoes recurring assessments to ensure compliance with industry standards. For information about AWS data center compliance programs, refer to [AWS Compliance Programs](https://aws.amazon.com/compliance/programs/).
 
-## Neon's security roadmap for 2022
+## Neon's security roadmap for 2023
 
 Neon is undergoing internal reviews to achieve SOC2 Type 2 certification.
 
-We will share more information about Neon's security plans on Github soon.
+We will share more information about Neon's security plans on GitHub soon.
