@@ -1,5 +1,5 @@
 @layer components {
-  .prose {
+  .prose-blog {
     @apply max-w-none text-black;
 
     a:not(.anchor) {
@@ -14,7 +14,7 @@
         @apply relative pl-0;
 
         &::before {
-          @apply absolute top-4 -translate-y-1/2;
+          @apply absolute -translate-y-1/2;
         }
 
         ol {
@@ -28,20 +28,20 @@
 
       > li {
         &::before {
-          @apply -left-6 h-2 w-2 rounded-full bg-primary-1 content-[''] md:top-3 md:-left-4 md:h-1.5 md:w-1.5;
+          @apply -left-6 top-4 h-2 w-2 rounded-full bg-primary-1 content-[''] md:top-3 md:-left-4 md:h-1.5 md:w-1.5;
         }
       }
     }
 
     ol {
       counter-reset: custom-counter;
-      @apply pl-10 md:pl-4;
+      @apply pl-10 md:pl-5;
 
       > li {
         counter-increment: custom-counter;
 
         &::before {
-          @apply -left-2 -translate-x-full md:static;
+          @apply -left-2 top-4 -translate-x-full md:top-3.5 md:-left-1;
           content: counter(custom-counter) '. ' !important;
         }
       }
@@ -55,11 +55,11 @@
       @apply w-full border-hidden md:min-w-[500px];
 
       th {
-        @apply border border-gray-4 bg-secondary-6 bg-opacity-30 p-3.5 md:px-2;
+        @apply border border-gray-6 bg-secondary-6 bg-opacity-30 p-3.5 md:px-2;
       }
 
       td {
-        @apply border border-gray-4 p-3.5 md:px-2;
+        @apply border border-gray-6 p-3.5 md:px-2;
       }
     }
 
@@ -69,56 +69,7 @@
       code {
         text-shadow: unset;
 
-        @apply !font-mono !text-base !text-black;
-
-        .token.atrule,
-        .token.attr-value,
-        .token.keyword {
-          @apply text-[#6A4CFF];
-        }
-
-        .token.function,
-        .token.class-name {
-          @apply text-[#FF3366];
-        }
-
-        .token.operator,
-        .token.entity,
-        .token.url,
-        .language-css .token.string,
-        .style .token.string {
-          @apply text-[#7e428a];
-        }
-
-        .token.property,
-        .token.tag,
-        .token.boolean,
-        .token.number,
-        .token.constant,
-        .token.symbol,
-        .token.deleted {
-          @apply text-[#FF8C1A];
-        }
-
-        .token.selector,
-        .token.attr-name,
-        .token.string,
-        .token.char,
-        .token.builtin,
-        .token.inserted {
-          @apply !text-[#00B277];
-        }
-
-        .token.punctuation {
-          @apply text-[#737373];
-        }
-
-        .token.comment,
-        .token.prolog,
-        .token.doctype,
-        .token.cdata {
-          @apply text-[#a6a6a6];
-        }
+        @apply highlighted-code !font-mono !text-base !text-black;
       }
     }
 
