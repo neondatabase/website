@@ -26,4 +26,4 @@ To enable connection pooling for a Neon project:
 
 ### Limitations
 
-PostgreSQL features such as prepared statements and [LISTEN](https://www.postgresql.org/docs/14/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/14/sql-notify.html) are not supported with connection pooling. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section, in the [pgbouncer.org Features documentation](https://www.pgbouncer.org/features.html).
+PostgreSQL features such as prepared statements and [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html) are not supported with connection pooling. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section, in the [pgbouncer.org Features documentation](https://www.pgbouncer.org/features.html).
