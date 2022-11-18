@@ -43,11 +43,7 @@ To connect to Neon from Prisma:
 ```
 
 <Admonition type="note">
-If connection pooling is enabled for your Neon project, which is the default setting, append `?pgbouncer=true` to the connection string, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
-
-```shell
-    DATABASE_URL="postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main?pgbouncer=true"
-```
+If connection pooling is enabled for your Neon project, which is the default, append `?pgbouncer=true` to the connection string, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 
 For information about enabling and disabling connection pooling for your Neon project, see [Connection pooling](../../get-started-with-neon/connection-pooling/).
 </Admonition>
