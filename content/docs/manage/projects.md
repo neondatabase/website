@@ -4,15 +4,15 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-A Neon account can have multiple projects.
+## About projects
 
-Each Neon project is created with a dedicated Neon compute instance. During the Technical Preview, a Neon compute instance is deployed with PostgreSQL 14.5, 1 vCPU, and 256MB of RAM. If preferred, you can select PostgreSQL 15 during project creation. For more information about limits associated with Neon's Technical Preview, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier).
+A project is the top-level object in the Neon object hierarchy. A Neon account can have multiple projects.
 
-A project is the top-level object in the Neon object hierarchy.
-
-Each Neon project is created with a branch called `main`, which is the project's root branch. A project may contain additional branches created from the root branch or from a previously created branch. For information about Neon's branching feature, see [Branching](../../conceptual-guides/branching).
+Each Neon project is created with a root branch called `main`. A project may contain additional child branches created from the root branch or from a previously created branch. For information about Neon's branching feature, see [Branching](../../conceptual-guides/branching).
 
 A project's root branch is created with a default database, also called `main`. This database and all databases created in Neon contain a `public` schema. Tables and other objects are created in the `public` schema by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
+
+A Neon project's root branch has a dedicated Neon compute instance. In Neon's Technical Preview Free Tier, a Neon compute instance is deployed with PostgreSQL 15, 1 vCPU, and 256MB of RAM. For more information about limits associated with Neon's Technical Preview, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier).
 
 A project is created with two database users by default:
 
@@ -26,14 +26,14 @@ Additional database users can be added to a project's root branch or child branc
 To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-2. If you are creating your very first project, click **Create the first project**. Otherwise, click **New Project**. 
+2. If you are creating your very first project, click **Create the first project**. Otherwise, click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**. Upon creating a project, you are presented with a dialog that provides your password for the project, which is required to connect to databases in the Neon project from a client or application. Store your password in a safe location.
 
-**_Important_**: After navigating away from the Neon Console or refreshing the browser page, the password is no longer accessible. If you forget or misplace your password, your only option is to reset it. You can reset a password on the **User** page, which is found on the **Settings** tab in the Neon Console.
+**_Important_**: After navigating away from the Neon Console or refreshing the browser page, the password is no longer accessible. If you forget or misplace your password, your only option is to reset it. You can reset a password on the **User** page, which is found on the **Settings** page in the Neon Console.
 
 ## Delete a project
 
-Deleting a branch is a permanent action. Deleting a project deletes any branches, databases, and users that belong to the project.
+Deleting a project is a permanent action. Deleting a project deletes any branches, databases, and users that belong to the project.
 
 To delete a project:
 
@@ -69,3 +69,4 @@ When the data size limit is reached, the following PostgreSQL error message is r
 ```text
 could not extend file because cluster size limit (10240 MB)
 has been exceeded
+```
