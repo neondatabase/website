@@ -92,11 +92,13 @@ const Hits = connectHits(({ hits, showAll, isNotFoundPage, isMobileSearch }) =>
     <ul
       className={clsx(
         'mt-4 divide-y',
-        isMobileSearch ? 'divide-gray-7' : 'divide-gray-9 px-2.5 dark:divide-gray-4'
+        isMobileSearch
+          ? 'divide-gray-7 dark:divide-gray-3'
+          : 'divide-gray-9 px-2.5 dark:divide-gray-4'
       )}
     >
       {hits.slice(0, showAll ? hits.length : 5).map((hit) => (
-        <li className="py-2.5 first:pt-0" key={hit.objectID}>
+        <li className="py-2.5 first:pt-0 last:pb-5" key={hit.objectID}>
           <HitWithInsights isNotFoundPage={isNotFoundPage} hit={hit} />
         </li>
       ))}
@@ -107,13 +109,21 @@ const Hits = connectHits(({ hits, showAll, isNotFoundPage, isMobileSearch }) =>
 const resultsClassNames = {
   default:
     'absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden rounded-b border-t-0 rounded-b border border-gray-5 dark:border-gray-4',
-  mobile: 'px-4',
-  notFound: 'rounded-b-[29px] border-2 border-gray-2',
+  mobile: 'flex flex-col h-[calc(100%-58px)]', // 58px is the height of the search input
+  notFound:
+    'rounded-b-[29px] border-2 border-gray-2 absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden',
 };
 
 const containerClassNames = {
   default: 'max-h-[70vh]',
-  notFound: 'max-h-[70vh] px-3.5 xs:px-0',
+  mobile: 'px-4',
+  notFound: 'max-h-[40vh] px-3.5 xs:px-0',
+};
+
+const searchFooterClassNames = {
+  default: 'ml-auto xl:ml-0 xl:space-y-3.5 xl:flex xl:flex-col',
+  mobile: 'mt-auto flex grow flex-col items-center px-4',
+  notFound: 'rounded-b-[29px] px-6 xs:px-2.5',
 };
 
 const Results = ({ indices, type }) => {
@@ -125,14 +135,14 @@ const Results = ({ indices, type }) => {
   const isNotFoundPage = type === 'notFound';
 
   useEffect(() => {
-    // 102px is the height of the search input and footer of the search results
-    setContainerHeight(`${height - 102}px`);
+    // 94px is the height of the search input and footer of the search results
+    setContainerHeight(`${height - 94}px`);
   }, [height]);
 
   return (
     <div className={clsx('bg-white dark:bg-black dark:text-white', resultsClassNames[type])}>
       <div
-        className={clsx('overflow-y-scroll pt-2.5', containerClassNames[type])}
+        className={clsx('overflow-x-hidden overflow-y-scroll pt-2.5', containerClassNames[type])}
         style={{ maxHeight: isMobileSearch && containerHeight }}
       >
         {indices.map(({ name }) => (
@@ -151,18 +161,15 @@ const Results = ({ indices, type }) => {
       </div>
       <div
         className={clsx(
-          'mt-2.5 flex justify-between p-2.5 dark:bg-black',
-          isNotFoundPage && 'rounded-b-[29px] px-6 xs:px-2.5',
-          isMobileSearch ? 'bg-white px-0' : 'bg-gray-9'
+          'flex justify-between bg-gray-9 p-2.5 dark:bg-gray-1',
+          searchFooterClassNames[type]
         )}
       >
         {!allResultsShown && shouldShowAllResultsButton && (
           <button
             className={clsx(
-              'flex items-baseline space-x-1.5 text-xs transition-colors duration-200',
-              isMobileSearch
-                ? 'font-semibold leading-tight text-secondary-8'
-                : 'font-bold uppercase leading-none text-primary-1 hover:text-[#00e5bf]'
+              'flex items-baseline space-x-1.5 text-xs text-secondary-8 transition-colors duration-200 dark:text-primary-1',
+              isMobileSearch ? 'mb-4 font-semibold leading-tight' : 'font-bold leading-none'
             )}
             type="button"
             onClick={() => setAllResultsShown(!allResultsShown)}
@@ -172,12 +179,11 @@ const Results = ({ indices, type }) => {
           </button>
         )}
         <Link
-          className="ml-auto flex items-center space-x-2 text-xs text-gray-9"
+          className={clsx('flex items-center space-x-2 text-xs text-gray-4 dark:text-gray-9')}
           to="https://www.algolia.com/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span>Search by Algolia</span>
           <AlgoliaLogo />
         </Link>
       </div>

@@ -6,7 +6,7 @@ import React from 'react';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 
 const underlineCommonStyles =
-  'relative transition-colors duration-500 before:absolute before:z-[-1] before:-bottom-1.5 before:left-0 before:h-1.5 before:w-full before:transition-all before:duration-500 hover:before:bottom-full hover:before:opacity-0';
+  'relative transition-colors duration-500 before:absolute before:-bottom-1.5 before:left-0 before:h-1.5 before:w-full before:transition-all before:duration-500 hover:before:bottom-full hover:before:opacity-0';
 
 const styles = {
   base: 'inline-flex !leading-none items-center',
@@ -22,7 +22,7 @@ const styles = {
       'text-black transition-colors duration-200 hover:text-primary-2 dark:text-white dark:hover:text-primary-2',
     'black-no-hover': 'text-black',
     white: 'text-white transition-colors duration-200 hover:text-primary-2',
-    'black-primary-1': `${underlineCommonStyles} before:bg-primary-1 hover:text-primary-1`,
+    'black-primary-1': `${underlineCommonStyles} before:bg-primary-1 hover:text-primary-1 dark:before:bg-primary-1 dark:hover:text-primary-1`,
     'black-secondary-3': `${underlineCommonStyles} before:bg-secondary-3 hover:text-secondary-3`,
     'black-secondary-5': `${underlineCommonStyles} before:bg-secondary-5 hover:text-secondary-5`,
     'underline-primary-1':

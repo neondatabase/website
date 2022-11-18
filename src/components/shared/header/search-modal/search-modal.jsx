@@ -29,17 +29,23 @@ const SearchModal = ({ isOpen, closeModal }) => {
     >
       <Configure clickAnalytics />
 
-      <div className={clsx(isOpen ? 'block' : 'hidden', 'fixed inset-0 z-[100] bg-gray-9')}>
-        <div className="flex items-center space-x-4 border-b border-gray-7 bg-white px-4 py-2.5">
+      <div
+        className={clsx(
+          isOpen ? 'block' : 'hidden',
+          'fixed inset-0 z-[100] bg-gray-9 dark:bg-gray-1'
+        )}
+      >
+        <div className="flex items-center space-x-4 border-b border-gray-7 bg-white px-4 py-2.5 dark:border-gray-3 dark:bg-gray-1">
           <Input
             className="grow"
+            innerClassName="border active:border-secondary-8 dark:active:border-primary-1 hover:border-secondary-8 dark:hover:border-primary-1"
             hasFocus={hasFocus}
             inputRef={inputRef}
             isMobileSearch
             onFocus={() => setFocus(true)}
           />
           <button
-            className="shrink text-sm font-semibold leading-tight text-secondary-8"
+            className="shrink text-sm font-semibold leading-tight text-secondary-8 dark:text-primary-1"
             type="button"
             onClick={closeModal}
           >

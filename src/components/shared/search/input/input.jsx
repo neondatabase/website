@@ -15,6 +15,7 @@ const Input = connectSearchBox(
     isMobileSearch,
     className,
     inputRef,
+    innerClassName,
   }) => (
     <div className={clsx('relative', className)}>
       <SearchIcon
@@ -31,7 +32,8 @@ const Input = connectSearchBox(
             ? 'h-16 rounded-[110px] border-2 border-gray-2 pl-14 pr-6 text-xl md:text-lg xs:pr-2.5 xs:pl-9 xs:text-base'
             : 'h-9 rounded border border-gray-5 pl-9 pr-2.5 dark:border-gray-4',
           isNotFoundPage && hasFocus && currentRefinement && 'rounded-[29px]',
-          hasFocus && currentRefinement && !isMobileSearch && 'rounded-b-none border-b'
+          hasFocus && currentRefinement && !isMobileSearch && 'rounded-b-none border-b',
+          innerClassName
         )}
         type="search"
         value={currentRefinement}

@@ -59,7 +59,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
       )}
     >
       <button
-        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-9 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-8 active:bg-gray-8 dark:bg-gray-1 lg:px-8 md:px-4"
+        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-9 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-8 active:bg-gray-8 dark:bg-gray-1 dark:hover:bg-[rgba(64,64,64,0.6)] dark:active:bg-[rgba(64,64,64,0.6)] lg:px-8 md:px-4"
         type="button"
         onClick={toggleMenu}
       >

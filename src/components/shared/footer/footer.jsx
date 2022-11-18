@@ -4,9 +4,8 @@ import React from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus.js';
-import logoBlack from 'images/logo-black.svg';
-import logoWhite from 'images/logo-white.svg';
 
 import ThemeSelect from './theme-select';
 
@@ -26,25 +25,7 @@ const Footer = ({ isDocPage, withTopBorder, theme }) => {
           <div className="mb-7 flex flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-center md:justify-between">
             <Link className="block" to="/">
               <span className="sr-only">Neon</span>
-              {isDarkTheme ? (
-                <img
-                  className="h-9 sm:h-6 sm:w-auto"
-                  src={logoWhite}
-                  width={128}
-                  height={36}
-                  alt=""
-                  aria-hidden
-                />
-              ) : (
-                <img
-                  className="h-9 sm:h-6 sm:w-auto"
-                  src={logoBlack}
-                  width={128}
-                  height={36}
-                  alt=""
-                  aria-hidden
-                />
-              )}
+              <Logo className="w-auto sm:h-6" isThemeBlack={isDarkTheme} />
             </Link>
             {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />}
           </div>
@@ -67,6 +48,7 @@ const Footer = ({ isDocPage, withTopBorder, theme }) => {
                       <Link
                         className="relative whitespace-nowrap leading-none"
                         to={to}
+                        theme="black"
                         target={isExternalUrl ? '_blank' : null}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
                       >
