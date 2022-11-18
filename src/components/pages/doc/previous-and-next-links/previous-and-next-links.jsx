@@ -3,40 +3,37 @@ import React from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import ArrowIcon from 'icons/arrow-right.inline.svg';
+
+import ArrowIcon from './images/arrow.inline.svg';
 
 const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
-  <div className="mt-16 flex w-full space-x-4">
+  <div className="mt-10 flex w-full space-x-10 sm:mt-7 sm:space-x-0">
     {previousLink && (
       <Link
         to={`${DOCS_BASE_PATH}${previousLink.slug}`}
-        size="md"
-        theme="black-primary-1"
-        className="mr-auto flex xs:items-baseline xs:space-x-3 xs:!leading-tight xs:before:hidden"
+        className="group mr-auto flex w-1/2 items-center justify-between rounded border border-gray-7 p-4 sm:hidden"
       >
-        <ArrowIcon className="hidden shrink-0 rotate-180 xs:block" />
-        <span>{previousLink.title}</span>
+        <ArrowIcon className="shrink-0 rotate-180 text-gray-5 transition-colors duration-200 group-hover:text-secondary-8" />
+        <div className="flex flex-col items-end">
+          <span className="text-sm font-normal text-gray-3">Previous</span>
+          <span className="text-right font-semibold transition-colors duration-200 group-hover:text-secondary-8">
+            {previousLink.title}
+          </span>
+        </div>
       </Link>
     )}
     {nextLink && (
       <Link
         to={`${DOCS_BASE_PATH}${nextLink.slug}`}
-        size="md"
-        theme="black-primary-1"
-        className="ml-auto flex text-right xs:items-baseline xs:space-x-3 xs:!leading-tight xs:before:hidden"
+        className="group ml-auto flex w-1/2 items-center justify-between rounded border border-gray-7 p-4 text-right sm:w-full sm:space-x-3"
       >
-        <span
-          style={{
-            display: 'webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-            width: '100%',
-          }}
-        >
-          {nextLink.title}
-        </span>
-        <ArrowIcon className="hidden shrink-0 xs:block" />
+        <div className="flex flex-col items-start">
+          <span className="text-sm font-normal text-gray-3">Next</span>
+          <span className="text-left font-semibold transition-colors duration-200 group-hover:text-secondary-8">
+            {nextLink.title}
+          </span>
+        </div>
+        <ArrowIcon className="shrink-0 text-gray-5 transition-colors duration-200 group-hover:text-secondary-8 sm:block" />
       </Link>
     )}
   </div>
@@ -46,10 +43,12 @@ PreviousAndNextLinks.propTypes = {
   previousLink: PropTypes.exact({
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
+    path: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
   nextLink: PropTypes.exact({
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
+    path: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
 };
 

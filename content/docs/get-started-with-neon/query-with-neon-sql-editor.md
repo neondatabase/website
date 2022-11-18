@@ -22,7 +22,9 @@ INSERT INTO t SELECT generate_series(1,100);
 SELECT count(*) FROM t;
 ```
 
-**_Note:_** Running multiple query statements at once returns a separate result set for each statement. The result sets are displayed in separate tabs, numbered in order of execution.
+<Admonition type="note">
+Running multiple query statements at once returns a separate result set for each statement. The result sets are displayed in separate tabs, numbered in order of execution.
+</Admonition>
 
 To clear the editor, click **New Query**.
 

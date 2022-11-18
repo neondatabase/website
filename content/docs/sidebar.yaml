@@ -12,6 +12,8 @@
       slug: reference/roadmap
     - title: Technical Preview Free Tier
       slug: reference/technical-preview-free-tier
+    - title: Regions
+      slug: conceptual-guides/regions
 - title: Get started
   items:
     - title: Signing up
@@ -22,6 +24,8 @@
       slug: get-started-with-neon/query-with-neon-sql-editor
     - title: Query with psql
       slug: get-started-with-neon/query-with-psql-editor
+    - title: Get started with Branching
+      slug: get-started-with-neon/get-started-branching
     - title: Using API keys
       slug: get-started-with-neon/using-api-keys
     - title: Connecting with old clients
@@ -53,7 +57,7 @@
     - title: SQLAlchemy
       slug: guides/sqlalchemy
     - title: Symfony
-      slug: guides/symfony    
+      slug: guides/symfony
 - title: Import data
   items:
     - title: Import data from PostgreSQL
@@ -64,7 +68,7 @@
   slug: security
 - title: Reference
   items:
-    - title: API 
+    - title: API
       slug: reference/api-reference
     - title: Glossary
       slug: reference/glossary

@@ -1,26 +1,59 @@
 @layer base {
   @font-face {
     font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
     src: url('/fonts/ibm-plex-sans/ibm-plex-sans-bold.woff2') format('woff2');
-    font-weight: bold;
+  }
+
+  @font-face {
+    font-family: 'IBM Plex Sans Fallback';
     font-style: normal;
-    font-display: swap;
+    font-weight: 700;
+    src: local('Arial');
+    ascent-override: 96%;
+    descent-override: 25.76%;
+    line-gap-override: 0%;
+    size-adjust: 106.77%;
   }
 
   @font-face {
     font-family: 'IBM Plex Sans';
-    src: url('/fonts/ibm-plex-sans/ibm-plex-sans-semibold.woff2') format('woff2');
+    font-style: normal;
     font-weight: 600;
-    font-style: normal;
     font-display: swap;
+    src: url('/fonts/ibm-plex-sans/ibm-plex-sans-semibold.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'IBM Plex Sans Fallback';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Arial');
+    ascent-override: 97.5%;
+    descent-override: 26.16%;
+    line-gap-override: 0%;
+    size-adjust: 105.13%;
   }
 
   @font-face {
     font-family: 'IBM Plex Sans';
-    src: url('/fonts/ibm-plex-sans/ibm-plex-sans-regular.woff2') format('woff2');
-    font-weight: normal;
     font-style: normal;
+    font-weight: 400;
     font-display: swap;
+    src: url('/fonts/ibm-plex-sans/ibm-plex-sans-regular.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'IBM Plex Sans Fallback';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Arial');
+    ascent-override: 101.35%;
+    descent-override: 27.19%;
+    line-gap-override: 0%;
+    size-adjust: 101.13%;
   }
 
   @font-face {
