@@ -1,5 +1,5 @@
 ---
-title: Get started with Branching
+title: Get started with branching
 enableTableOfContents: true
 isDraft: false
 ---
@@ -53,7 +53,7 @@ The **Branches** widget on the project **Dashboard** also lists the branches in 
 
 ## Connect to a branch
 
-Now that you have created a branch, how do you connect to it? You can connect to a branch using a connection string, as you would when connecting to any Neon database. The following steps describe how to connect to a branch using `psql`.
+Connecting to a branch requires connecting to the branch's endpoint, which is the compute instance associated with a branch. The following steps describe how to connect to a branch using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="tip">
 You can also query a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../query-with-neon-sql-editor).
