@@ -1,5 +1,5 @@
 const DOCS_BASE_PATH = '/docs/';
-const RELEASE_NOTES_PER_PAGE = 10;
+const RELEASE_NOTES_PER_PAGE = 40;
 const RELEASE_NOTES_SLUG = 'release-notes';
 const RELEASE_NOTES_BASE_PATH = `${DOCS_BASE_PATH}${RELEASE_NOTES_SLUG}/`;
 

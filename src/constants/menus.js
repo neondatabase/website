@@ -1,8 +1,3 @@
-import Discourse from '../icons/discourse.inline.svg';
-import Github from '../icons/github.inline.svg';
-import LinkedIn from '../icons/linkedin.inline.svg';
-import Twitter from '../icons/twitter.inline.svg';
-
 import LINKS from './links';
 
 export default {
@@ -86,6 +81,35 @@ export default {
         },
       ],
     },
+    {
+      heading: 'Community',
+      links: [
+        {
+          text: 'Twitter',
+          to: LINKS.twitter,
+        },
+        {
+          text: 'LinkedIn',
+          to: LINKS.linkedin,
+        },
+        // {
+        //   text: 'Discord',
+        //   to: LINKS.discord,
+        // },
+        {
+          text: 'GitHub',
+          to: LINKS.github,
+        },
+        {
+          text: 'Discourse',
+          to: LINKS.discourse,
+        },
+        {
+          text: 'YouTube',
+          to: LINKS.youtube,
+        },
+      ],
+    },
     // {
     //   heading: 'Legal',
     //   links: [
@@ -99,32 +123,6 @@ export default {
     //     },
     //   ],
     // },
-  ],
-  socialUrls: [
-    {
-      text: 'Twitter',
-      Icon: Twitter,
-      to: LINKS.twitter,
-    },
-    {
-      text: 'LinkedIn',
-      Icon: LinkedIn,
-      to: LINKS.linkedin,
-    },
-    // {
-    //   text: 'Discord',
-    //   to: LINKS.discord,
-    // },
-    {
-      text: 'GitHub',
-      Icon: Github,
-      to: LINKS.github,
-    },
-    {
-      text: 'Discourse',
-      Icon: Discourse,
-      to: LINKS.discourse,
-    },
   ],
   mobile: [
     {

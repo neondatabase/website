@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import slugify from 'slugify';
 
-import AnchorIcon from 'icons/anchor.inline.svg';
+import HashIcon from './images/hash.inline.svg';
 
 const AnchorHeading =
   (Tag) =>
@@ -14,14 +14,16 @@ const AnchorHeading =
         : undefined;
 
     return (
-      <Tag id={id} className="group relative">
+      <Tag id={id} className="group relative flex w-fit">
         <a
-          className="anchor absolute top-0 left-0 flex h-full -translate-x-full items-center justify-center px-2.5 opacity-0 transition-opacity duration-200 hover:opacity-100 group-hover:opacity-100"
+          className="anchor absolute top-1/2 -right-16 flex h-full -translate-y-[calc(50%-0.15rem)] -translate-x-full items-center justify-center px-2.5 opacity-0 transition-opacity duration-200 hover:opacity-100 group-hover:opacity-100 sm:hidden"
           href={`#${id}`}
           tabIndex="-1"
           aria-hidden
         >
-          <AnchorIcon className={clsx(Tag === 'h2' && 'w-5', Tag === 'h3' && 'w-4')} />
+          <HashIcon
+            className={clsx(Tag === 'h2' && 'w-3.5', Tag === 'h3' && 'w-3', 'text-primary-2')}
+          />
         </a>
         {children}
       </Tag>

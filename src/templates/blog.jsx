@@ -32,15 +32,18 @@ export const query = graphql`
         title
         date(formatString: "MMMM D, YYYY")
         pageBlogPost {
-          author {
-            ... on WpPostAuthor {
-              title
-              postAuthor {
-                url
-                image {
-                  localFile {
-                    childImageSharp {
-                      gatsbyImageData(width: 40)
+          authors {
+            author {
+              ... on WpPostAuthor {
+                title
+                postAuthor {
+                  role
+                  url
+                  image {
+                    localFile {
+                      childImageSharp {
+                        gatsbyImageData(width: 40)
+                      }
                     }
                   }
                 }

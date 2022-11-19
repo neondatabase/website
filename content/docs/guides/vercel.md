@@ -65,4 +65,6 @@ const sql = postgres(process.env.DATABASE_URL);
 const result = await sql.unsafe(req.body);
 ```
 
+<Admonition type="important">
 _**Important**_: Never expose your Neon credentials to the browser.
+</Admonition>

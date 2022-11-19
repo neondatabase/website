@@ -6,9 +6,11 @@ redirectFrom:
   - /docs/integrations/postgres
 ---
 
-The following instructions require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/14/app-psql.html), in the _PostgreSQL Documentation_.
+The following instructions require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
 
-_**Note**:_ A Neon Compute runs PostgreSQL, which means that any PostgreSQL application or standard utility such as `psql` is compatible with Neon. You can also use PostgreSQL client libraries and drivers to connect.
+<Admonition type="note">
+A Neon Compute runs PostgreSQL, which means that any PostgreSQL application or standard utility such as `psql` is compatible with Neon. You can also use PostgreSQL client libraries and drivers to connect.
+</Admonition>
 
 The following `psql` connection methods are described:
 
@@ -45,10 +47,10 @@ Neon's `psql` passwordless auth feature helps you quickly authenticate a connect
 
    ```bash
    NOTICE:  Connecting to database.
-   psql (14.5 (Ubuntu 14.5-0ubuntu0.22.04.1))
+   psql (15.0 (Ubuntu 15.0-1.pgdg22.04+1))
    Type "help" for help.
 
-   user1=>
+   casey=>
    ```
 
    **_Note_**: When using _`psql` quick auth_ to connect, the `psql` prompt shows your local terminal user name instead of the database name that is shown for the other `psql` connection methods described in this topic. However, you are logged in to the default `main` database as the Neon `web_access` user, which you can verify by running this query:
@@ -67,7 +69,9 @@ Neon's `psql` passwordless auth feature helps you quickly authenticate a connect
 
 ## Connect with an exported password
 
-**_Warning_**: Some operating systems allow non-root users to view process environment variables when using the `ps` command. For security reasons, consider using a password file in such cases.
+<Admonition type="warning">
+Some operating systems allow non-root users to view process environment variables when using the `ps` command. For security reasons, consider using a password file in such cases.
+</Admonition>
 
 To connect with an exported password:
 
@@ -108,7 +112,9 @@ To connect with a password saved to a `.pgpass` password file:
    echo -e "<project_id>.cloud.neon.tech:5432:main:<user>:<password>\n$(cat ~/.pgpass)" > ~/.pgpass
    ```
 
-   _**Note**_: If you already have a `.pgpass` file, you only need to run the `echo` command.
+  <Admonition type="tip">
+  If you already have a `.pgpass` file, you only need to run the `echo` command.
+  </Admonition>
 
 2. Connect with the following command:
 
