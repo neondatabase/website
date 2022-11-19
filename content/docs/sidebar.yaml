@@ -36,6 +36,8 @@
   items:
     - title: Projects
       slug: manage/projects
+    - title: Databases
+      slug: manage/databases
 - title: Guides
   items:
     - title: Django
