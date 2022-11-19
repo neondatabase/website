@@ -54,6 +54,8 @@
       slug: guides/sqlalchemy
     - title: Symfony
       slug: guides/symfony
+    - title: Laravel
+      slug: guides/laravel
 - title: Import data
   items:
     - title: Import data from PostgreSQL
