@@ -1,9 +1,6 @@
 ---
 title: Connect from Laravel to Neon
 enableTableOfContents: true
-redirectFrom:
-  - /docs/quickstart/laravel
-  - /docs/integrations/laravel
 ---
 
 Laravel is a web application framework with expressive, elegant syntax. Connecting to Neon from Laravel is the same as connecting to a standalone PostgreSQL installation from Laravel. Only the connection details differ.
