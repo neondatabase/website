@@ -118,7 +118,7 @@ The ability to authenticate without providing a password. Neon’s [Passwordless
 
 ### PostgreSQL user
 
-Two PostgreSQL database users are created with each Neon project. The first is named for the registered Neon account and can be used to access the Neon project from a client. This user’s credentials can be managed and used for password-based `psql` authentication. The second user is the `web-access` system user, which is used by the SQL Editor and Neon’s (/docs/reference/glossary/#quick-auth) feature. The `web-access` user is system managed. It cannot be modified, removed, or used in other authentication scenarios.
+Two PostgreSQL database users are created with each Neon project. The first is named for the registered Neon account and can be used to access the Neon project from a client. This user’s credentials can be managed and used for password-based `psql` authentication. The second user is the `web-access` system user, which is used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth) feature. The `web-access` user is system managed. It cannot be modified, removed, or used in other authentication scenarios.
 
 Additional PostgreSQL users can be created in the Neon Console.
 
