@@ -1,11 +1,12 @@
 import clsx from 'clsx';
 import { motion, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useWindowSize } from 'react-use';
 
 import Item from 'components/pages/doc/sidebar/item';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
+import useClickOutside from 'hooks/use-click-outside';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 const ANIMATION_DURATION = 0.2;
@@ -35,9 +36,16 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [containerHeight, setContainerHeight] = useState(null);
   const { height } = useWindowSize();
+  const wrapperRef = useRef(null);
   const controls = useAnimation();
   const toggleMenu = () => setIsOpen((isOpen) => !isOpen);
   useBodyLockScroll(isOpen);
+
+  const onOutsideClick = () => {
+    setIsOpen(false);
+  };
+
+  useClickOutside([wrapperRef], onOutsideClick);
 
   // 146px is the height of top banner + header + button Documentation menu
   useEffect(() => {
@@ -57,6 +65,7 @@ const MobileNav = ({ className, sidebar, currentSlug }) => {
         'safe-paddings relative border-b border-gray-7 bg-gray-9 dark:border-gray-2 dark:bg-gray-1',
         className
       )}
+      ref={wrapperRef}
     >
       <button
         className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-9 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-8 active:bg-gray-8 dark:bg-gray-1 dark:hover:bg-[rgba(64,64,64,0.6)] dark:active:bg-[rgba(64,64,64,0.6)] lg:px-8 md:px-4"
