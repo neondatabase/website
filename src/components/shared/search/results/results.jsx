@@ -91,14 +91,12 @@ const Hits = connectHits(({ hits, showAll, isNotFoundPage, isMobileSearch }) =>
   hits?.length ? (
     <ul
       className={clsx(
-        'mt-4 divide-y',
-        isMobileSearch
-          ? 'divide-gray-7 dark:divide-gray-3'
-          : 'divide-gray-9 px-2.5 dark:divide-gray-4'
+        'mt-4 divide-y dark:divide-gray-3',
+        isMobileSearch ? 'divide-gray-7 ' : 'divide-gray-9 px-2.5'
       )}
     >
       {hits.slice(0, showAll ? hits.length : 5).map((hit) => (
-        <li className="py-2.5 first:pt-0 last:pb-5" key={hit.objectID}>
+        <li className="py-2.5 first:pt-0" key={hit.objectID}>
           <HitWithInsights isNotFoundPage={isNotFoundPage} hit={hit} />
         </li>
       ))}
@@ -142,7 +140,7 @@ const Results = ({ indices, type }) => {
   return (
     <div className={clsx('bg-white dark:bg-black dark:text-white', resultsClassNames[type])}>
       <div
-        className={clsx('overflow-x-hidden overflow-y-scroll pt-2.5', containerClassNames[type])}
+        className={clsx('overflow-x-hidden overflow-y-scroll py-2.5', containerClassNames[type])}
         style={{ maxHeight: isMobileSearch && containerHeight }}
       >
         {indices.map(({ name }) => (
