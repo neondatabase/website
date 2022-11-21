@@ -17,7 +17,7 @@ To create a Neon project:
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
-4. After creating a project, you are directed to the Neon **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the **Dashboard** tab.
+4. After creating a project, you are directed to the Neon **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the Neon Console or refresh the browser page. If you misplace your password, your only option is to reset it.
 
 ## Configure the connection
 

@@ -25,7 +25,7 @@ To create a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Specify a name, a PostgreSQL version, and click **Create Project**.
+3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 
 For additional information about creating projects, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
 
@@ -34,12 +34,12 @@ For additional information about creating projects, see [Setting up a project](/
 For a JDBC connection URL, replace the variables in the following URL string with your Neon project ID, database name, user, and password:
 
 ```java
-jdbc:postgresql://<project_id>.cloud.neon.tech/<dbname>?user=<user>&password=<password>
+jdbc:postgresql://<endpoint_hostname>/<dbname>?user=<user>&password=<password>
 ```
 
 where:
 
-- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
+- `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon Dashboard, under **Connection Settings**.
 - `<dbname>` is the name of the database in your Neon project. `main` is the default database created with each Neon project.
 - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a project.
@@ -51,7 +51,7 @@ Spring Data relies on JDBC and PostgreSQL drivers to connect to PostgreSQL datab
 Connecting from a Spring Data project requires specifying the datasource URL in your `application.properties` file, as shown in the following example:
 
 ```java
-spring.datasource.url=jdbc:postgresql://<project_id>.cloud.neon.tech/<dbname>?user=<user>&password=<password>
+spring.datasource.url=jdbc:postgresql://<endpoint_hostname>/<dbname>?user=<user>&password=<password>
 ```
 
-Refer to the [Connect with JDBC](#connect-with-jdbc) section above for information about Neon `project_id`, `dbname`, `user`, and `password` credentials.
+Refer to the [Connect with JDBC](#connect-with-jdbc) section above for information about Neon `endpoint_hostname`, `dbname`, `user`, and `password` credentials.

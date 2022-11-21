@@ -25,8 +25,8 @@ To create a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Specify a name, a PostgreSQL version, and click **Create Project**.
-4. After creating a project, you are directed to the Neon **Dashboard** tab, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the **Dashboard** tab. Copy the connection string. It contains the details required to connect to Neon from SQLAlchemy.
+3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
+4. After creating a project, you are directed to the Neon **Dashboard** tab, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the Neon Console or refresh the browser page. Copy the connection string. It contains the details required to connect to Neon from SQLAlchemy.
 
 ## Install psycopg2
 
@@ -80,15 +80,15 @@ This example was tested with Python 3 and psycopg2 version 2.9.3.
 
 SQLAlchemy uses engine abstraction to manage database connections, and exposes a `create_engine` function as the primary endpoint for engine initialization.
 
-The following example creates an SQLAlchemy engine that points to your Neon project:
+The following example creates an SQLAlchemy engine that points to your Neon branch:
 
 ```python
 from sqlalchemy import create_engine
 
 USERNAME = <username>
 PASSWORD = <password>
-PROJECT_ID = <project_id>
-CONNSTR = f'postgresql://{USERNAME}:{PASSWORD}@{PROJECT_ID}.cloud.neon.tech/main'
+ENDPOINT = <endpoint_hostname>
+CONNSTR = f'postgresql://{USERNAME}:{PASSWORD}@{ENDPOINT}/main'
 
 engine = create_engine(CONNSTR)
 ```
@@ -97,7 +97,7 @@ where:
 
 - `<username>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
-- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
+- `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon Dashboard, under **Connection Settings**.
 
 For additional information about connecting from SQLAlchemy, refer to the following topics in the SQLAlchemy documentation:
 

@@ -26,7 +26,7 @@ where:
 - `<port>` is the port number of the PostgreSQL instance. The default port number is `5432`.
 - `<dbname>` is the name of the database.
 
-A Neon connection string has the same format, but your Neon endpoint hostname is defined as the `hostname`, as shown:  
+A Neon connection string has the same format, with your Neon endpoint hostname is defined as the `hostname`, as shown:  
 
 ```bash
 postgres://<user>:<password>@<endpoint_hostname>:<port>/<dbname>
