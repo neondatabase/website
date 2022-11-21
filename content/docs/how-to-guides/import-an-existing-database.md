@@ -26,32 +26,32 @@ where:
 - `<port>` is the port number of the PostgreSQL instance. The default port number is `5432`.
 - `<dbname>` is the name of the database.
 
-A Neon connection string has the same format with the Neon domain defined as the `hostname`, as shown:  
+A Neon connection string has the same format, but your Neon endpoint hostname is defined as the `hostname`, as shown:  
 
 ```bash
-postgres://<user>:<password>@<project_id>.cloud.neon.tech:<port>/<dbname>
+postgres://<user>:<password>@<endpoint_hostname>:<port>/<dbname>
 ```
 
 where:
 
 - `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
-- `<project_id>` is the Neon project ID.
+- `<endpoint_hostname>` is the Neon endpoint hostname.
 - `<port>` is the Neon port number. The default port number is `5432`.
-- `<dbname>` is the name of the database. `main` is the default database created with each Neon project.
+- `<dbname>` is the database you are connecting to. The default Neon database is `main`.
 
-You can obtain a Neon connection string from the Neon Console project **Dashboard**, under **Connection Details**. The connection string must include your project password, which was provided when you created the Neon project. If you have misplaced your password, you can reset it or create a new user. Users and passwords are managed on the **Settings** tab in the Neon Console.
+You can obtain a Neon connection string from the Neon **Dashboard**, under **Connection Details**. The connection string must include your project password, which was provided when you created the Neon project. If you have misplaced your password, you can reset it. Passwords are managed on the **Settings** tab in the Neon Console.
 
 The command for importing a database from PostgreSQL to Neon appears similar to the following:
 
 ```bash
-pg_dump postgres://mypguser:a1B2c3D4e5F6@<hostname>:5432/mydb | psql postgres://myneonuser:a1B2c3D4e5F6@lively-voice-123456.cloud.neon.tech:5432/main
+pg_dump postgres://mypguser:a1B2c3D4e5F6@<hostname>:5432/mydb | psql postgres://myneonuser:a1B2c3D4e5F6@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main
 ```
 
 The command for importing a database from one Neon project to another uses two Neon connection strings:
 
 ```bash
-pg_dump postgres://myneonuser:a1B2c3D4e5F6@lively-voice-123456.cloud.neon.tech:5432/main | psql postgres://myneonuser:a1B2c3D4e5F6@floral-king-123456.cloud.neon.tech:5432/main
+pg_dump postgres://myneonuser:a1B2c3D4e5F6@ep-dawn-union-749234.us-east-2.aws.neon.tech:5432/main | psql postgres://myneonuser:a1B2c3D4e5F6@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main
 ```
 
 If you have multiple databases to import, each database must be imported separately.

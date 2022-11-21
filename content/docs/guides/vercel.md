@@ -22,7 +22,7 @@ To create a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Specify a name, a PostgreSQL version, and click **Create Project**.
+3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 4. After creating a project, you are directed to the project **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the Neon Console or refresh the browser page. Copy the connection string. It is used later to connect to your Neon project.
 
 For additional information about creating projects, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
@@ -40,18 +40,18 @@ Add a PostgreSQL client to your app, such as `Postgres.js`. For instructions, re
 Add your Neon connection string to your `.env` file.
 
 ```shell
-DATABASE_URL=postgres://<user>:<password>@<project_id>.cloud.neon.tech:<port>/<database>
+DATABASE_URL=postgres://<user>:<password>@<endpoint_hostname>:<port>/<database>
 ```
 
 where:
 
 - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a project.
-- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
+- `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon Dashboard, under **Connection Settings**.
 - `<port>` is the Neon port number. The default port number is `5432`.
 - `<database>` is the name of the database in your Neon project. `main` is the default database created with each Neon project.
 
-The connection details listed above are provided in the Neon connection string that you copied from the project Dashboard after you created the Neon project.
+The connection details listed above are provided in the Neon connection string that you copied from the Neon **Dashboard** after you created the Neon project.
 
 ## Connect to the Neon database
 
@@ -66,5 +66,5 @@ const result = await sql.unsafe(req.body);
 ```
 
 <Admonition type="important">
-_**Important**_: Never expose your Neon credentials to the browser.
+Never expose your Neon credentials to the browser.
 </Admonition>
