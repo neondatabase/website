@@ -20,7 +20,7 @@ const Footer = ({ isDocPage, withTopBorder, theme }) => {
         isDarkTheme ? 'bg-black text-white' : 'bg-white text-black'
       )}
     >
-      <Container className="flex justify-between py-10 xl:py-8" size="md">
+      <Container className="flex justify-between py-10 xl:py-8" size="lg">
         <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
           <div className="mb-7 flex flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-center md:justify-between">
             <Link className="block" to="/">

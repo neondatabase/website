@@ -45,7 +45,7 @@ const Header = forwardRef(
         )}
         ref={ref}
       >
-        <Container className="flex items-center justify-between py-3.5" size="md">
+        <Container className="flex items-center justify-between py-3.5" size="lg">
           <Link className="hidden xl:block" to="/">
             <span className="sr-only">Neon</span>
 
