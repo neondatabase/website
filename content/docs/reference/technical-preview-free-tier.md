@@ -8,10 +8,11 @@ The Neon cloud service is available for free during the Technical Preview. For i
 The Technical Preview Free Tier has the following limits:
 
 - Each Neon user account can create one Neon project
-- Each Neon project can have up to three branches
-- The total project data size is limited to 10GB
-- The Point in Time Reset (PITR) window is limited to 7 days of _reasonable usage_
-- The compute node associated with with each branch is limited to 1 vCPU and 256MB of RAM
+- Each Neon project can have up to 10 branches
+- Each branch permits up to 3GB of data
+- Each project supports up to three compute nodes (endpoints) running simultaneously
+- Each compute node is limited to 1 vCPU and 256MB of RAM
+- The Point in Time Reset (PITR) window for data is limited to 7 days of _reasonable usage_
 
 <Admonition type="note">
 Neon intends to offer a Free Tier beyond the Technical Preview period. The limits associated with that tier will be defined in the coming months. Technical Preview Free Tier limits are subject to change over the course of the Technical Preview.
