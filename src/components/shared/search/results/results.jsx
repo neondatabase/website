@@ -119,8 +119,8 @@ const containerClassNames = {
 };
 
 const searchFooterClassNames = {
-  default: 'ml-auto xl:ml-0 xl:space-y-3.5 xl:flex xl:flex-col',
-  mobile: 'mt-auto flex grow flex-col items-center px-4',
+  default: 'ml-auto',
+  mobile: 'flex items-center',
   notFound: 'rounded-b-[29px] px-6 xs:px-2.5',
 };
 
@@ -138,9 +138,12 @@ const Results = ({ indices, type }) => {
   }, [height]);
 
   return (
-    <div className={clsx('bg-white dark:bg-black dark:text-white', resultsClassNames[type])}>
+    <div className={clsx('bg-gray-7 dark:bg-gray-1', resultsClassNames[type])}>
       <div
-        className={clsx('overflow-x-hidden overflow-y-scroll py-2.5', containerClassNames[type])}
+        className={clsx(
+          'overflow-x-hidden overflow-y-scroll bg-white py-2.5 dark:bg-black dark:text-white',
+          containerClassNames[type]
+        )}
         style={{ maxHeight: isMobileSearch && containerHeight }}
       >
         {indices.map(({ name }) => (
@@ -167,7 +170,7 @@ const Results = ({ indices, type }) => {
           <button
             className={clsx(
               'flex items-baseline space-x-1.5 text-xs text-secondary-8 transition-colors duration-200 dark:text-primary-1',
-              isMobileSearch ? 'mb-4 font-semibold leading-tight' : 'font-bold leading-none'
+              isMobileSearch ? 'font-semibold leading-tight' : 'font-bold leading-none'
             )}
             type="button"
             onClick={() => setAllResultsShown(!allResultsShown)}
@@ -177,11 +180,12 @@ const Results = ({ indices, type }) => {
           </button>
         )}
         <Link
-          className={clsx('flex items-center space-x-2 text-xs text-gray-4 dark:text-gray-9')}
+          className="ml-auto flex items-center space-x-2 text-xs text-gray-4 dark:text-gray-9"
           to="https://www.algolia.com/"
           target="_blank"
           rel="noopener noreferrer"
         >
+          <span>Search by Algolia</span>
           <AlgoliaLogo />
         </Link>
       </div>
