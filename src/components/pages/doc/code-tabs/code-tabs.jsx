@@ -12,13 +12,13 @@ const CodeTabs = ({ children, labels }) => {
       <div className="no-scrollbars bg-grey-15 relative flex w-full flex-nowrap overflow-auto after:absolute after:bottom-0 after:h-px after:w-full after:bg-gray-7 dark:after:bg-gray-2">
         {labels.map((label, index) => (
           <div
-            key={`lb-${index}`}
             className={clsx(
               'relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pt-3 pb-3.5 font-semibold leading-none transition-colors duration-200',
               index === currentIndex
                 ? 'border-secondary-8 text-secondary-8 after:opacity-100 dark:border-primary-1 dark:text-primary-1'
                 : 'border-transparent text-gray-3 dark:text-gray-7'
             )}
+            key={`lb-${index}`}
             tabIndex="0"
             role="button"
             onClick={() => setCurrentIndex(index)}
