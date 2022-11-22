@@ -4,52 +4,30 @@ import React from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus.js';
-import logoBlack from 'images/logo-black.svg';
-import logoWhite from 'images/logo-white.svg';
-// import ThemeSelect from './theme-select';
 
-const Footer = ({
-  // isDocPage,
-  withTopBorder,
-  theme,
-}) => {
+import ThemeSelect from './theme-select';
+
+const Footer = ({ isDocPage, withTopBorder, theme }) => {
   const isDarkTheme = theme === 'black';
   return (
     <footer
       className={clsx(
-        'safe-paddings mt-auto overflow-hidden',
-        !isDarkTheme && withTopBorder && 'border-t border-gray-7',
+        'safe-paddings mt-auto overflow-hidden dark:bg-black dark:text-white',
+        !isDarkTheme && withTopBorder && 'border-t border-gray-7 dark:border-gray-2',
         isDarkTheme && withTopBorder && 'border-t border-gray-2',
         isDarkTheme ? 'bg-black text-white' : 'bg-white text-black'
       )}
     >
-      <Container className="flex justify-between py-10 xl:py-8" size="md">
+      <Container className="flex justify-between py-10 xl:py-8" size="lg">
         <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
           <div className="mb-7 flex flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-center md:justify-between">
             <Link className="block" to="/">
               <span className="sr-only">Neon</span>
-              {isDarkTheme ? (
-                <img
-                  className="h-9 sm:h-6 sm:w-auto"
-                  src={logoWhite}
-                  width={128}
-                  height={36}
-                  alt=""
-                  aria-hidden
-                />
-              ) : (
-                <img
-                  className="h-9 sm:h-6 sm:w-auto"
-                  src={logoBlack}
-                  width={128}
-                  height={36}
-                  alt=""
-                  aria-hidden
-                />
-              )}
+              <Logo className="w-auto sm:h-6" isThemeBlack={isDarkTheme} />
             </Link>
-            {/* {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />} */}
+            {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />}
           </div>
           <div className="space-y-[18px] leading-none">
             <p>Made in SF and the World</p>
@@ -70,6 +48,7 @@ const Footer = ({
                       <Link
                         className="relative whitespace-nowrap leading-none"
                         to={to}
+                        theme="black"
                         target={isExternalUrl ? '_blank' : null}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
                       >
@@ -88,13 +67,13 @@ const Footer = ({
 };
 
 Footer.propTypes = {
-  // isDocPage: PropTypes.bool,
+  isDocPage: PropTypes.bool,
   withTopBorder: PropTypes.bool,
   theme: PropTypes.oneOf(['white', 'black']),
 };
 
 Footer.defaultProps = {
-  // isDocPage: false,
+  isDocPage: false,
   withTopBorder: false,
   theme: 'white',
 };

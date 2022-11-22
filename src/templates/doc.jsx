@@ -53,10 +53,10 @@ const DocTemplate = (props) => {
       headerTheme="white"
       headerWithBottomBorder
       footerWithTopBorder
-      isDocPage
       burgerWithoutBorder
+      isDocPage
     >
-      <div className="safe-paddings flex flex-1 flex-col lg:block">
+      <div className="safe-paddings flex flex-1 flex-col dark:bg-black dark:text-white lg:block">
         <MobileNav className="hidden lg:block" sidebar={sidebar} currentSlug={currentSlug} />
 
         <Container
@@ -64,13 +64,13 @@ const DocTemplate = (props) => {
           size="mdDoc"
         >
           <Sidebar
-            className="relative col-start-1 col-end-4 max-w-[254px] bg-gray-9 pb-20 pt-[118px] before:absolute before:top-0 before:-right-5 before:-z-10 before:h-full before:w-[300%] before:bg-gray-9 lg:hidden"
+            className="relative col-start-1 col-end-4 max-w-[254px] bg-gray-9 pb-20 pt-[111px] before:absolute before:top-0 before:-right-5 before:z-10 before:h-full before:w-screen before:bg-gray-9 dark:bg-gray-1 dark:before:bg-gray-1 lg:hidden"
             sidebar={sidebar}
             currentSlug={currentSlug}
           />
           <div
             className={clsx(
-              '-mx-10 flex flex-col pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-11 lg:ml-0 lg:pt-0 md:pb-[70px] sm:pb-8',
+              '-mx-10 flex flex-col pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
               isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
             )}
           >

@@ -12,7 +12,7 @@ const md = new MarkdownIt({
 
 const Content = ({ content }) => (
   <div
-    className="prose-doc prose-base prose prose-h3:text-xl xs:prose-code:break-words"
+    className="prose-doc prose-base prose prose-h3:text-xl dark:prose-invert xs:prose-code:break-words"
     dangerouslySetInnerHTML={{ __html: md.render(content) }}
   />
 );
@@ -38,7 +38,9 @@ ReleaseNoteList.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       body: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
+      fields: PropTypes.shape({
+        slug: PropTypes.string.isRequired,
+      }).isRequired,
       frontmatter: PropTypes.shape({
         label: PropTypes.string.isRequired,
       }).isRequired,

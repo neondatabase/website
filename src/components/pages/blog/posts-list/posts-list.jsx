@@ -46,13 +46,19 @@ PostsList.propTypes = {
       title: PropTypes.string.isRequired,
       pageBlogPost: PropTypes.shape({
         description: PropTypes.string.isRequired,
-        author: PropTypes.shape({
-          title: PropTypes.string.isRequired,
-          postAuthor: PropTypes.shape({
-            image: PropTypes.shape({}).isRequired,
-            url: PropTypes.string,
-          }),
-        }).isRequired,
+        authors: PropTypes.arrayOf(
+          PropTypes.shape({
+            author: PropTypes.shape({
+              title: PropTypes.string.isRequired,
+              postAuthor: PropTypes.shape({
+                role: PropTypes.string,
+                image: PropTypes.shape({
+                  localFile: PropTypes.shape({}).isRequired,
+                }).isRequired,
+              }).isRequired,
+            }).isRequired,
+          })
+        ).isRequired,
       }),
     })
   ).isRequired,
