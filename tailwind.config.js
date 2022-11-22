@@ -45,6 +45,20 @@ module.exports = {
         8: '#f2f2f2',
         9: '#FAFAFA',
       },
+      code: {
+        'green-1': '#078345',
+        'green-2': '#47D18C',
+        'blue-1': '#206CDF',
+        'blue-2': '#66A3FF',
+        'red-1': '#DA0B51',
+        'red-2': '#F6558C',
+        'orange-1': '#FF9500',
+        'orange-2': '#FFBF66',
+        'gray-1': '#B3B3B3',
+        'gray-2': '#8C8C8C',
+        'brown-1': '#A86624',
+        'brown-2': '#BA8C5E',
+      },
     },
     extend: {
       fontFamily: {

@@ -1,52 +1,59 @@
 @layer components {
   .highlighted-code {
-    .token.atrule,
-    .token.attr-value,
-    .token.keyword {
-      @apply text-[#6A4CFF];
+    .token.keyword,
+    .token.class-name,
+    .token.url,
+    .token.tag {
+      @apply text-code-blue-1 dark:text-code-blue-2;
     }
 
+    .token.console,
+    .token.class-name.namespace,
+    .token.tag.attr-name {
+      @apply text-black dark:text-white;
+    }
+
+    .token.builtin,
     .token.function,
-    .token.class-name {
-      @apply text-[#FF3366];
+    .token.string,
+    .token.char,
+    .token.selector,
+    .token.tag.attr-value,
+    .token.atrule,
+    .token.inserted {
+      @apply text-code-green-1 dark:text-code-green-2;
+    }
+
+    .token.boolean,
+    .token.number,
+    .token.symbol,
+    .token.variable,
+    .token.constant,
+    .token.property,
+    .token.property-access,
+    .token.deleted {
+      @apply text-code-red-1 dark:text-code-red-2;
+    }
+
+    .token.regex,
+    .token.important {
+      @apply text-code-orange-1 dark:text-code-orange-2;
     }
 
     .token.operator,
-    .token.entity,
-    .token.url,
-    .language-css .token.string,
-    .style .token.string {
-      @apply text-[#7e428a];
-    }
-
-    .token.property,
-    .token.tag,
-    .token.boolean,
-    .token.number,
-    .token.constant,
-    .token.symbol,
-    .token.deleted {
-      @apply text-[#FF8C1A];
-    }
-
-    .token.selector,
-    .token.attr-name,
-    .token.string,
-    .token.char,
-    .token.builtin,
-    .token.inserted {
-      @apply !text-[#00B277];
+    .token.entity {
+      @apply text-code-brown-1 dark:text-code-brown-2;
     }
 
     .token.punctuation {
-      @apply text-[#737373];
+      @apply text-code-gray-2;
     }
 
     .token.comment,
     .token.prolog,
     .token.doctype,
     .token.cdata {
-      @apply text-[#a6a6a6];
+      @apply text-code-gray-1;
     }
 
     .react-syntax-highlighter-line-number.linenumber {
