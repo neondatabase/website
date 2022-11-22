@@ -10,8 +10,8 @@ redirectFrom:
 To use the SQL Editor:
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
-2. On the **Dashboard** tab, select your project from project drop-down list.
-3. Select the **SQL Editor** tab.
+2. On the **Dashboard**, select your project.
+3. Select the **SQL Editor**.
 4. Enter a query into the editor and click **Run** to view the results.
 
 You can use the following queries to try the SQL Editor:

@@ -18,8 +18,8 @@ Enabling connection pooling allows PostgreSQL to accept up to 1000 connections. 
 To enable connection pooling for a Neon project:
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
-2. On the **Dashboard** tab, select your project from the project drop-down list.
-3. Select the **Settings** tab.
+2. On the **Dashboard**, select your project.
+3. Select **Settings**.
 4. Select **General** from the navigation sidebar.
 5. Toggle **Enable pooling** to the on position.
 6. Click **Save**.

@@ -62,9 +62,9 @@ PROJECT_NAME='<project_id>'
 
 where:
 
-- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
+- `<project_id>` is the ID of the Neon project, which is found on the **Settings** page, under **General Settings**.
 - `<dbname>` is the name of the database in your Neon project. `main` is the default database created with each Neon project.
-- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<user>` is the database user, which is found on the Neon **Dashboard**, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a project.
 
 <Admonition type="important">

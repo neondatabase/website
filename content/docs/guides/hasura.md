@@ -44,7 +44,7 @@ Use the following instructions to connect to an existing Neon database from Hasu
   `postgres://<user>:<password>@<endpoint_hostname>:5432/main`
   ```
 
-  Your project's connection string can be found on the Neon **Dashboard**, under **Connection Details**. If you have misplaced your password, you can either reset it or create a new user. Users are managed on the **Settings** tab in the Neon Console.
+  Your project's connection string can be found on the Neon **Dashboard**, under **Connection Details**. If you have misplaced your password, you can either reset it or create a new user. Users are managed on the **Settings**  page in the Neon Console.
 
 ### Add Neon as a data source
 

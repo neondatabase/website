@@ -48,7 +48,7 @@ DATABASES = {
 where:
 
 - `<dbname>` is the database you are connecting to. The default Neon database is `main`.
-- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<user>` is the database user, which is found on the Neon **Dashboard**, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a project.
 - `<endpoint_hostname>` is the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
 

@@ -95,7 +95,7 @@ engine = create_engine(CONNSTR)
 
 where:
 
-- `<username>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<username>` is the database user, which is found on the Neon **Dashboard**, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 - `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
 

@@ -22,7 +22,7 @@ Before you can create a branch, you must have a Neon project. If you do not have
 To create a branch:
 
 1. In the Neon Console, select a project.
-2. Select the **Branches** tab.
+2. Select **Branches**.
 3. Click **New Branch** to open the branch creation dialog.
 ![Create branch dialog](./images/create_branch.png)
 4. Enter a name for the branch.
@@ -33,14 +33,14 @@ To create a branch:
     - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](../../reference/glossary/#lsn).
 7. Click **Create Branch** to create your branch.
 
-You are directed to the **Branches** tab where you are shown the details for your new branch.
+You are directed to the **Branches** page where you are shown the details for your new branch.
 
 ## View branches
 
 To view the branches in a Neon project:
 
 1. In the Neon Console, select a project.
-2. Select the **Branches** tab to view the branches for the project.
+2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table to view details about the branch, including the branch's endpoint hostname.
 
 ![Branch details](./images/branch_details.png)
@@ -82,7 +82,7 @@ Deleting a branch is a permanent action. Deleting a branch also deletes the bran
 To delete a branch:
 
 1. In the Neon Console, select a project.
-2. Select the **Branches** tab.
+2. Select **Branches**.
 3. Select a branch from the table.
 3. Click **Delete**.
 4. On the **Delete the branch?** dialog, click **Delete**.
