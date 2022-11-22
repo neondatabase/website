@@ -126,7 +126,7 @@ To connect with a password saved to a `.pgpass` password file:
 
    where:
 
-   - `<endpoint_host>` the hostname of the branch endpoint, which is found on the Neon Dashboard, under **Connection Settings**.
+   - `<endpoint_host>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
    - `<port>` is the PostgreSQL port. Neon uses port `5432`.
    - `<dbname>` is the database you are connecting to. The default Neon database is `main`.
    - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
