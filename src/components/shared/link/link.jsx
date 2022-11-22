@@ -22,7 +22,7 @@ const styles = {
       'text-black transition-colors duration-200 hover:text-primary-2 dark:text-white dark:hover:text-primary-2',
     'black-no-hover': 'text-black',
     white: 'text-white transition-colors duration-200 hover:text-primary-2',
-    'black-primary-1': `${underlineCommonStyles} before:bg-primary-1 hover:text-primary-1 dark:before:bg-primary-1 dark:hover:text-primary-1`,
+    'black-primary-1': `${underlineCommonStyles} before:bg-primary-1 hover:text-primary-1 dark:before:bg-primary-1 dark:text-white dark:hover:text-primary-1`,
     'black-secondary-3': `${underlineCommonStyles} before:bg-secondary-3 hover:text-secondary-3`,
     'black-secondary-5': `${underlineCommonStyles} before:bg-secondary-5 hover:text-secondary-5`,
     'underline-primary-1':
