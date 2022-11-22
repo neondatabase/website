@@ -48,7 +48,7 @@ const Footer = ({ isDocPage, withTopBorder, theme }) => {
                       <Link
                         className="relative whitespace-nowrap leading-none"
                         to={to}
-                        theme="black"
+                        theme={isDarkTheme ? 'white' : 'black'}
                         target={isExternalUrl ? '_blank' : null}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
                       >
