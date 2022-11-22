@@ -25,7 +25,7 @@ For information about connecting to Neon using `psql`, see [Querying with psql](
 
 <Admonition type="important">
 After navigating away from the Neon Console or refreshing the browser page, the password is no longer accessible. If you forget or misplace your password, your only option is to reset it. You can reset a password on the **User** page, which is found on the **Settings** page in the Neon Console.
-</Admonition> page
+</Admonition>
 
 Creating a Neon project automatically creates a Neon compute instance for the project's [root branch](../../reference/glossary/#root-branch). 
 
