@@ -92,7 +92,7 @@ To connect with an exported password:
 2. Connect with the following command:
 
    ```bash
-   psql postgres://<user>:$PGPASSWORD@<endpoint_host>:<port>/<dbname>
+   psql postgres://<user>:$PGPASSWORD@<endpoint_hostname>:<port>/<dbname>
    ```
 
    where:
@@ -111,7 +111,7 @@ To connect with a password saved to a `.pgpass` password file:
    ```bash
    touch ~/.pgpass && \
    chmod 0600 ~/.pgpass && \
-   echo -e "<endpoint_host>:<port>:<dbname>:<user>:<password>\n$(cat ~/.pgpass)" > ~/.pgpass
+   echo -e "<endpoint_hostname>:<port>:<dbname>:<user>:<password>\n$(cat ~/.pgpass)" > ~/.pgpass
    ```
 
   <Admonition type="tip">
@@ -126,7 +126,7 @@ To connect with a password saved to a `.pgpass` password file:
 
    where:
 
-   - `<endpoint_host>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
+   - `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
    - `<port>` is the PostgreSQL port. Neon uses port `5432`.
    - `<dbname>` is the database you are connecting to. The default Neon database is `main`.
    - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
