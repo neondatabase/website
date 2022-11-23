@@ -4,8 +4,6 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-This topic describes how to create and manage database users in Neon.
-
 <Admonition type="note">
 You can only create database users in the Neon Console. Creating database users directly in PostgreSQL is not yet supported.  
 </Admonition>

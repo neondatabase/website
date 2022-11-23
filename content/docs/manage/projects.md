@@ -4,8 +4,6 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-## About projects
-
 A project is the top-level object in the Neon object hierarchy. A Neon account can have multiple projects.
 
 Each Neon project is created with a root branch called `main`. A project may contain additional child branches created from the root branch or from a previously created branch. For information about Neon's branching feature, see [Branching](../../conceptual-guides/branching).
