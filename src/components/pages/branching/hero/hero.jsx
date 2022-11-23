@@ -36,7 +36,8 @@ const Hero = () => (
         </div>
       </div>
       <StaticImage
-        src="./images/illustration.jpg"
+        src="./images/illustration.png"
+        quality={70}
         width={752}
         height={616}
         alt=""

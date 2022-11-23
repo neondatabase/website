@@ -21,7 +21,7 @@ const items = [
 ];
 
 const BranchData = () => (
-  <section className="branch-data safe-padding bg-black pt-44 pb-48 text-white">
+  <section className="branch-data safe-padding bg-black pt-44 pb-28 text-white">
     <Container className="grid-gap-x grid grid-cols-10 items-start" size="sm">
       <Heading className="t-5xl col-span-3 font-bold leading-snug" tag="h2">
         Branch your data with single click or API call
