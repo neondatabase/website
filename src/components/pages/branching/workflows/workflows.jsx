@@ -38,19 +38,22 @@ const items = [
 
 const Workflows = () => (
   <section className="workflows safe-paddings bg-black pt-20 text-white">
-    <Container className="grid-gap-x grid grid-cols-12 border-y border-gray-2" size="md">
+    <Container
+      className="grid-gap-x grid grid-cols-12 border-y border-dashed border-gray-2"
+      size="md"
+    >
       <div className="col-start-2 col-end-5 flex space-x-[17px]">
         {Array.from({ length: 18 }).map((_, index) => (
           <span className="h-full w-2 bg-white bg-opacity-[2%]" key={index} />
         ))}
       </div>
-      <div className="col-start-6 col-end-11 pt-32 pb-[278px]">
+      <div className="col-start-6 col-end-12 max-w-[698px] pt-32 pb-[278px]">
         <Heading className="t-5xl font-bold leading-tight" tag="h2">
           Optimize your <span className="text-primary-1">development workflows</span> with branching
         </Heading>
         <div className="mt-[220px] space-y-[440px]">
           {items.map(({ title, description, linkText, linkUrl }, index) => (
-            <div className="mt-20 flex flex-col items-start" key={index}>
+            <div className="mt-20 flex max-w-[600px] flex-col items-start" key={index}>
               <Heading
                 className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl"
                 tag="h3"
