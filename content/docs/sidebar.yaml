@@ -36,6 +36,8 @@
   items:
     - title: Projects
       slug: manage/projects
+    - title: Database
+      slug: manage/databases
     - title: Users
       slug: manage/users
 - title: Guides
