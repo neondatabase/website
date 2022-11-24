@@ -42,7 +42,7 @@ const Workflows = () => (
       className="grid-gap-x grid grid-cols-12 border-y border-dashed border-gray-2"
       size="md"
     >
-      <div className="col-start-2 col-end-5 flex space-x-[17px]">
+      <div className="col-start-2 col-end-5 flex justify-between 3xl:col-start-1">
         {Array.from({ length: 18 }).map((_, index) => (
           <span className="h-full w-2 bg-white bg-opacity-[2%]" key={index} />
         ))}
