@@ -45,27 +45,28 @@ postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/main
 `.env` file:
 
 ```text
-PGHOST='ep-polished-water-579720.us-east-2.aws.neon.tech:5432'
+PGHOST='ep-polished-water-579720.us-east-2.aws.neon.tech'
 PGDATABASE='main'
 PGUSER='casey'
 PGPASSWORD='<password>'
+PGPORT='5432'
 ```
 
 `DATABASE_URL` variable:
 
 ```text
-DATABASE_URL="postgres://casey:ep-polished-water-579720.us-east-2.aws.neon.tech/main"
+DATABASE_URL="postgres://casey:ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main"
 ```
 
-<Admonition type="tip">
-For additional information about Neon connection strings and what comprises them, see [Connection strings](../connection-strings).
+<Admonition type="note">
+Neon uses the default PostgreSQL port, `5432`. For additional information about Neon connection strings, see [Connection strings](../connection-strings).
 </Admonition>
 
 ## Passwords
 
 A password is provided for the initial database user that was created when you created your Neon project. A password is also also provided when you create a new database user. If you have misplaced a password, refer to [Users](tbd) for password reset instructions.
 
-## Application and framework connection examples
+## Language and framework connection examples
 
 The **Connection Details** widget on the **Neon Dashboard** provides connection examples for different languages and frameworks, constructed for the branch, database, and user that you select. Click **connection examples**  in the **Connection Details** widget to view or copy them.
 
