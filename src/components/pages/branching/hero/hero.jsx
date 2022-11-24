@@ -48,8 +48,4 @@ const Hero = () => (
   </section>
 );
 
-Hero.propTypes = {};
-
-Hero.defaultProps = {};
-
 export default Hero;
