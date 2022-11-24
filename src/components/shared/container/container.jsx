@@ -7,7 +7,7 @@ const styles = {
     lg: 'max-w-[1760px] 3xl:max-w-[1472px] 2xl:px-10',
     md: 'max-w-[1760px] 3xl:max-w-[1472px] 2xl:max-w-[1216px] xl:max-w-[936px]',
     mdDoc: 'max-w-[1472px] 2xl:px-10',
-    sm: 'max-w-[1460px] 2xl:px-10',
+    sm: 'max-w-[1460px] 2xl:px-10 2xl:max-w-[1216px] xl:max-w-[936px]',
     xs: 'max-w-[860px]',
   },
 };

@@ -45,7 +45,7 @@ const Workflows = () => {
   const [containerRef, isContainerInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
   const [headingRef, isHeadingInView] = useInView({
     triggerOnce: true,
-    rootMargin: '500px',
+    rootMargin: '200px',
   });
   const { RiveComponent, rive } = useRive({
     src: '/animations/pages/branching/branching-route.riv',
