@@ -3,7 +3,7 @@ title: Connection strings
 enableTableOfContents: true
 ---
 
-There are many ways to specify database connection details in your client or application, but connection strings, also referred to as connection URIs or connection URLs, are an easy way to provide your connection details in a compact form.
+There are many ways to specify database connection details in your client or application, but connection strings, also referred to as connection URIs or connection URLs, are an easy way to provide connection details in a compact form.
 
 Neon makes it easy to obtain a connection string for any database in your Neon project. To obtain a connection string:
 
@@ -12,62 +12,77 @@ Neon makes it easy to obtain a connection string for any database in your Neon p
 
 ![Connection details widget](./images/connection_details.png)
 
-The connection string displayed on the **Dashboard** has the following format:
+A connection string has the following format:
 
 ```text
 <uri_schema_designator>://<user>@<endpoint_id>.<region_slug>.<platform>.<neon_domain>/<database>
 ```
 
-This example describes and actual connection string:
+For example:
 
 ```text
 postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/main
-    |        ^         ^                       ^     ^      ^      ^
-    |        |- <user> |- <endpoint_id>        |     |      |      |- <database>
-    |                                          |     |      |                                          
-    |- <uri_schema_designator>                 |     |      |- <neon_domain>
-                                               |     |
-                                               |     |- <platform>
-                                               |
-                                               |- <region_slug>
+    ^        ^         ^                       ^     ^      ^      ^
+    |        |         |- <endpoint_id>        |     |      |      |- <database>
+    |        |                                 |     |      |      
+    |        |- <user>                         |     |      |- <neon_domain>                                          
+    |                                          |     |             
+    |- <uri_schema_designator>                 |     |- <platform>
+                                               |     
+                                               | - <region_slug>
 ```
 
 where:
 
-- `<uri_schema_designator>` is the URI schema designator for PostgreSQL. Neon uses the `postgres` URI schema designator.
+- `<uri_schema_designator>` is the URI schema designator.
 - `<user>` is the database user.
-- `<endpoint_id>` is the ID of the endpoint, which is the compute instance associated with the branch.
+- `<endpoint_id>` is the endpoint ID. An endpoint is the compute instance associated with the branch.
 - `<region_slug>` is the region where the Neon project was created. For information about the regions supported by Neon, see [Regions](../../conceptual-guides/regions).
-- `<platform>` is the cloud platform. Currently, Neon uses the `aws` cloud platform.
+- `<platform>` is the cloud platform.
 - `<neon_domain>` is the Neon domain (`neon.tech`).
-- `<database>` is the name of the database to connect to. Neon creates a default database named `main` in each project.
+- `<database>` is the name of the database to connect to.
+
+<Admonition type="note">
+The connection string format has evolved as support for new regions and branching capabilities has been introduced. If you created a Neon project created prior to these changes, your connecting string format may differ from what is described here. For more information, see [Connection string change history](#connection-string-change-history).
+</Admonition>
 
 ## Endpoint hostname
 
-The hostname of your PostgreSQL instance is typically required when configuring database connection details for an application or framework. For Neon, the hostname of your PostgreSQL instance is the endpoint hostname.
+A PostgreSQL hostname is typically required when configuring database connection details for an application or framework. For Neon, the hostname of your PostgreSQL instance is the endpoint hostname. An endpoint is a Neon compute instance associated with a branch.
 
-Together, the `endpoint_id`, `region_slug`, `platform`, and `neon_domain` details from your connection string form the endpoint hostname:
+Together, the `endpoint_id`, `region_slug`, `platform`, and `neon_domain` details form the endpoint hostname. For example:
 
-```ep-cold-sun-597246.us-east-2.aws.neon.tech```
+```ep-polished-water-579720.us-east-2.aws.neon.tech```
 
 The hostname for any endpoint in your Neon project can also be found on the **Endpoints** page in the Neon Console.
 
-An endpoint is a Neon compute instance. Endpoint hostnames always start with an `ep-` prefix. For more information about endpoints, see [Endpoints](tbd).
+Endpoint hostnames always start with an `ep-` prefix. For more information about endpoints, see [Endpoints](tbd).
 
 ## Add a password to a connection string
 
-The connection string example above does not include the database user's password. For security reasons, the connection string shown on the Neon **Dashboard** only includes the database user's password immediately after creating a project. Once you navigate away from the Neon Console or refresh the browser after creating a project, the password is no longer displayed as part of the connection string.
+For security reasons, the connection string shown on the Neon **Dashboard** only includes the database user's password immediately after you create a project. Once you navigate away from the Neon Console or refresh the browser, the password is no longer included in the connection string that is shown on the **Dashboard**.
 
-To include a password in your connection string, add a colon after the user name and place it in the connection string as shown in the following example:
+To add a password to a connection string, add `:<password>` after the user name, as shown in the following example:
 
 ```text
-postgres://casey:<password>@ep-cold-sun-597246.us-east-2.aws.neon.tech/main
+postgres://casey:a12BcdefHhIJ@ep-polished-water-579720.us-east-2.aws.neon.tech/main
 ```
+
+If you have misplaced your password, refer to [Users](tbd) for password reset instructions.
 
 ## Add a port number to a connection string
 
-The PostgreSQL port number is not included in the connection string shown on the Neon dashboard. The default PostgreSQL port `5432` is assumed. To include a port number in your connection string, add a colon after the Neon domain and place the port number in the connection string as shown in the following example:
+The PostgreSQL port number is not included in the connection string shown on the Neon **Dashboard**. The default PostgreSQL port `5432` is assumed. To add a port number to a connection string, add `:<port>` after the Neon domain, as shown in the following example:
 
 ```text
-postgres://casey@ep-cold-sun-597246.us-east-2.aws.neon.tech:<port>/main
+postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main
 ```
+
+## Connection string change history
+
+With the addition of support for new regions and updates to Neon's branching capabilities in [November, 2022](https://neon.tech/docs/release-notes/), changes were made to the hostname in Neon connection strings. Previously, a Neon hostname had this format: `<project_id>.cloud.neon.tech`. With the introduction of new regions, a `<region_slug>` and `<platform>` value were added to the hostname for projects created in newly supported regions. With the update to branching capabilities, `<project_id>` was replaced by `<endpoint_id>`. As a result of these changes:
+
+- Projects created in the original Neon region, US West (Oregon), currently have this hostname format: `<endpoint_id>.cloud.neon.tech`.
+- Projects created in the newly supported regions, have this hostname format: `<endpoint_id>.<region_slug>.<platform>.neon.tech`, which is the *endpoint hostname* described above, under [Endpoint hostname](#endpoint-hostname).
+
+The old hostname format continues to be supported for projects created before the region and branching changes were introduced.
