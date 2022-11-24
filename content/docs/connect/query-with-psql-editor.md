@@ -1,9 +1,10 @@
 ---
-title: Query with psql
+title: Connect with psql
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/postgres
   - /docs/integrations/postgres
+  - /docs/get-started-with-neon/query-with-psql-editor
 ---
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.

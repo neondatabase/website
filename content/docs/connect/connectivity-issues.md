@@ -1,6 +1,8 @@
 ---
-title: Connecting with older clients
+title: Connect from old clients
 enableTableOfContents: true
+redirectFrom:
+  - /docs/how-to-guides/connectivity-issues
 ---
 
 ## Overview

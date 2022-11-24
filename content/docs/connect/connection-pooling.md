@@ -1,6 +1,8 @@
 ---
 title: Connection pooling
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started-with-neon/connection-pooling
 ---
 
 ## PostgreSQL connection limits
