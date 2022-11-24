@@ -1,5 +1,5 @@
 ---
-title: Connection from any application
+title: Connect from any application
 enableTableOfContents: true
 ---
 When developing an application, you will need to connect to a database in your Neon project. In Neon, a database belongs to a branch, which can be the root branch of your Neon project (`main`) or a child branch. You can create databases any branch.
