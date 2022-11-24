@@ -65,8 +65,10 @@ For additional information about Neon connection strings and what comprises them
 
 A password is provided for the initial database user that was created when you created your Neon project. A password is also also provided when you create a new database user. If you have misplaced a password, refer to [Users](tbd) for password reset instructions.
 
-## Applications and framework connection examples
+## Application and framework connection examples
 
 The **Connection Details** widget on the **Neon Dashboard** provides connection examples for different languages and frameworks, constructed for the branch, database, and user that you select. Click **connection examples**  in the **Connection Details** widget to view or copy them.
 
 ![Connection details widget](./images/code_connection_examples.png)
+
+Connection examples for various languages and frameworks are also provided in our *Guides* section.
