@@ -41,11 +41,11 @@ const items = [
 const STATE_MACHINE_NAME = 'State Machine';
 
 const Workflows = () => {
-  const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, threshold: 0.3 });
+  const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
   const [containerRef, isContainerInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
   const [headingRef, isHeadingInView] = useInView({
     triggerOnce: true,
-    rootMargin: '200px',
+    rootMargin: '100px',
   });
   const { RiveComponent, rive } = useRive({
     src: '/animations/pages/branching/branching-route.riv',
@@ -107,6 +107,7 @@ const Workflows = () => {
                 className="mt-20 flex max-w-[600px] flex-col items-start"
                 as="div"
                 key={index}
+                delay={index * 100}
                 triggerOnce
                 onChange={(inView) => {
                   if (inView && routeInputs[index + 1]) {
