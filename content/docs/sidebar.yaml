@@ -31,9 +31,9 @@
 - title: Connect
   items:
     - title: Connection strings
-      slug: connect/connect-strings
+      slug: connect/connection-strings
     - title: Connect with psql
-      slug: get-started-with-neon/query-with-psql-editor
+      slug: connect/query-with-psql-editor
     - title: Connect from old clients
       slug: connect/connectivity-issues
     - title: Connection pooling
