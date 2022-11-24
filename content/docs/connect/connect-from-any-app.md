@@ -58,7 +58,7 @@ DATABASE_URL="postgres://casey:ep-polished-water-579720.us-east-2.aws.neon.tech/
 ```
 
 <Admonition type="tip">
-For additional information about Neon connection strings and what comprises them, see [Connection strings](../connect-strings).
+For additional information about Neon connection strings and what comprises them, see [Connection strings](../connection-strings).
 </Admonition>
 
 ## Passwords
