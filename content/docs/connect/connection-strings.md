@@ -5,12 +5,12 @@ enableTableOfContents: true
 
 There are many ways to specify database connection details in your client or application, but connection strings, also referred to as connection URIs or connection URLs, are an easy way to provide your connection details in a compact form.
 
-Neon makes it easy to obtain a connection string for any database in your Neon project.
-
-To obtain a connection string:
+Neon makes it easy to obtain a connection string for any database in your Neon project. To obtain a connection string:
 
 1. Navigate to the Neon **Dashboard**.
 1. Under **Connection details**, select a branch, a user, and the database you want to connect to. The connection string for your database is constructed for you.
+
+![Connection details widget](./images/connection_details.png)
 
 The connection string displayed on the **Dashboard** has the following format:
 
@@ -21,15 +21,15 @@ The connection string displayed on the **Dashboard** has the following format:
 This example describes and actual connection string:
 
 ```text
-postgres://casey@ep-cold-sun-597246.us-east-2.aws.neon.tech/main
-    |        ^         ^                 ^     ^      ^      ^
-    |        |- <user> |- <endpoint_id>  |     |      |      |- <database>
-    |                                    |     |      |                                          
-    |- <uri_schema_designator>           |     |      |- <neon_domain>
-                                         |     |
-                                         |     |- <platform>
-                                         |
-                                         |- <region_slug>
+postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/main
+    |        ^         ^                       ^     ^      ^      ^
+    |        |- <user> |- <endpoint_id>        |     |      |      |- <database>
+    |                                          |     |      |                                          
+    |- <uri_schema_designator>                 |     |      |- <neon_domain>
+                                               |     |
+                                               |     |- <platform>
+                                               |
+                                               |- <region_slug>
 ```
 
 where:
@@ -44,13 +44,17 @@ where:
 
 ## Endpoint hostname
 
-Together, the `endpoint_id`, `region_slug`, `platform`, and `neon_domain` form the endpoint hostname:
+The hostname of your PostgreSQL instance is typically required when configuring database connection details for an application or framework. For Neon, the hostname of your PostgreSQL instance is the endpoint hostname.
+
+Together, the `endpoint_id`, `region_slug`, `platform`, and `neon_domain` details from your connection string form the endpoint hostname:
 
 ```ep-cold-sun-597246.us-east-2.aws.neon.tech```
 
-An endpoint is a Neon compute instance. To connect to a branch in your Neon project from a client or application, you must connect to an endpoint that is associated with the branch. Endpoint hostnames always start with an `ep-` prefix. For more information about endpoints, see [Endpoints](tbd).
+The hostname for any endpoint in your Neon project can also be found on the **Endpoints** page in the Neon Console.
 
-## Include a password
+An endpoint is a Neon compute instance. Endpoint hostnames always start with an `ep-` prefix. For more information about endpoints, see [Endpoints](tbd).
+
+## Add a password to a connection string
 
 The connection string example above does not include the database user's password. For security reasons, the connection string shown on the Neon **Dashboard** only includes the database user's password immediately after creating a project. Once you navigate away from the Neon Console or refresh the browser after creating a project, the password is no longer displayed as part of the connection string.
 
@@ -60,7 +64,7 @@ To include a password in your connection string, add a colon after the user name
 postgres://casey:<password>@ep-cold-sun-597246.us-east-2.aws.neon.tech/main
 ```
 
-## Include a port number
+## Add a port number to a connection string
 
 The PostgreSQL port number is not included in the connection string shown on the Neon dashboard. The default PostgreSQL port `5432` is assumed. To include a port number in your connection string, add a colon after the Neon domain and place the port number in the connection string as shown in the following example:
 
