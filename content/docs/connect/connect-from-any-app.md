@@ -28,7 +28,7 @@ Neon project
                |------ database  
 ```
 
-You can obtain the connection details for an endpoint (and database) from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you, which contains the details required to configure a database connection in your application.
+You can obtain the connection details for a branch from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you, which contains the details required to configure a database connection in your application.
 
 ![Connection details widget](./images/connection_details.png)
 

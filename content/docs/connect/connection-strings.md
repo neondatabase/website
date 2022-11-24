@@ -43,7 +43,7 @@ where:
 - `<database>` is the name of the database to connect to.
 
 <Admonition type="note">
-The connection string format has evolved as new features have been introduced. The connecting string format for an older Neon project may differ from what is described here. For more information, see [Connection string change history](#connection-string-change-history).
+The connection string format has evolved as new features have been introduced. The connecting string format for older Neon projects may differ from what is described here. For more information, see [Connection string change history](#connection-string-change-history).
 </Admonition>
 
 ## Add a password to a connection string
@@ -68,13 +68,13 @@ postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main
 
 ## Endpoint hostnames
 
-A PostgreSQL hostname is typically required when configuring database connection for an application (see [Connect from any application](../connect-from-any-app)). With Neon, the hostname of your PostgreSQL instance is the endpoint hostname. An endpoint is the Neon compute instance associated with a branch.
+A PostgreSQL hostname is required when configuring database connection for an application (see [Connect from any application](../connect-from-any-app)). With Neon, the hostname of your PostgreSQL instance is the endpoint hostname. An endpoint is the Neon compute instance associated with a branch.
 
 Together, the `endpoint_id`, `region_slug`, `platform`, and `neon_domain` details form the endpoint hostname. For example:
 
 ```ep-polished-water-579720.us-east-2.aws.neon.tech```
 
-The hostname for an endpoint in your Neon project can also be found in the **Connection Details** widget on the Neon **Dashboard**, on the **Endpoints** page, or by selecting a branch on the **Branches** page (for branches with an associated endpoint).
+The hostname for an endpoint can be found in the **Connection Details** widget on the Neon **Dashboard**, on the **Endpoints** page, or by selecting a branch on the **Branches** page (for branches with an associated endpoint).
 
 Endpoint hostnames always start with an `ep-` prefix. For more information about endpoints, see [Endpoints](tbd).
 
