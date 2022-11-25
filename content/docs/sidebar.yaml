@@ -34,6 +34,8 @@
       slug: get-started-with-neon/connection-pooling
 - title: Manage
   items:
+    - title: Overview
+      slug: manage/overview
     - title: Projects
       slug: manage/projects
     - title: Endpoints

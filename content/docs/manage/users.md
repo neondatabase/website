@@ -28,6 +28,8 @@ To create a database user:
 
 ## Delete a user
 
+You cannot delete a user that owns a database.
+
 To delete a database user:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
