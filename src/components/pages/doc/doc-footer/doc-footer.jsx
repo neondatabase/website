@@ -25,15 +25,17 @@ const DocFooter = ({ fileOriginPath, slug }) => {
   };
 
   return (
-    <div className="mt-10 flex items-center justify-between border-t border-gray-7 pt-5 sm:flex-col sm:space-y-4">
+    <div className="mt-10 flex items-center justify-between border-t border-gray-7 pt-5 dark:border-gray-2 sm:flex-col sm:space-y-4">
       <Link
-        className="group inline-flex items-center space-x-2.5 text-sm leading-none transition-colors duration-200"
+        className="group inline-flex items-center space-x-2.5 text-sm leading-none"
         to={fileOriginPath}
         target="_blank"
         rel="noopener noreferrer"
       >
         <GitHubIcon className="h-6 w-6" />
-        <span className="group-hover:text-secondary-8">Edit this page</span>
+        <span className="transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1">
+          Edit this page
+        </span>
       </Link>
 
       <div className="relative">
@@ -46,19 +48,19 @@ const DocFooter = ({ fileOriginPath, slug }) => {
           <span className="text-sm leading-tight">Was this page helpful?</span>
           <div className="flex space-x-3">
             <button
-              className="group flex items-center space-x-1 rounded border border-gray-7 px-2.5 py-1.5 text-xs leading-none"
+              className="group flex items-center space-x-1 rounded border border-gray-7 px-2.5 py-1.5 text-xs leading-none dark:border-gray-2 dark:text-gray-7"
               type="button"
               onClick={() => handleFeedbackClick(true, slug)}
             >
-              <ThumbsUpIcon className="h-2.5 w-2.5 shrink transition-colors duration-200 group-hover:text-primary-1 group-active:text-primary-1" />
+              <ThumbsUpIcon className="h-2.5 w-2.5 shrink transition-colors duration-200 group-hover:text-primary-1 group-active:text-primary-1 dark:text-gray-4" />
               <span>Yes</span>
             </button>
             <button
-              className="group flex items-center space-x-1 rounded border border-gray-7 px-2.5 py-1.5 text-xs leading-none"
+              className="group flex items-center space-x-1 rounded border border-gray-7 px-2.5 py-1.5 text-xs leading-none dark:border-gray-2 dark:text-gray-7"
               type="button"
               onClick={() => handleFeedbackClick(false, slug)}
             >
-              <ThumbsDownIcon className="h-2.5 w-2.5 shrink transition-colors duration-200 group-hover:text-secondary-1 group-active:text-secondary-1" />
+              <ThumbsDownIcon className="h-2.5 w-2.5 shrink transition-colors duration-200 group-hover:text-secondary-1 group-active:text-secondary-1 dark:text-gray-4" />
               <span>No</span>
             </button>
           </div>

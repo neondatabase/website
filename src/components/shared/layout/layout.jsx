@@ -82,7 +82,12 @@ const Layout = ({
           onBurgerClick={handleHeaderBurgerClick}
           onSearchClick={openMobileSearchModal}
         />
-        <main className={clsx(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col')}>
+        <main
+          className={clsx(
+            withOverflowHidden && 'overflow-hidden',
+            'flex flex-1 flex-col dark:bg-black'
+          )}
+        >
           {children}
         </main>
         <Footer isDocPage={isDocPage} theme={footerTheme} withTopBorder={footerWithTopBorder} />
