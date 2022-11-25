@@ -44,8 +44,6 @@
       slug: manage/databases
     - title: Users
       slug: manage/users
-    - title: Connections
-      slug: manage/connections
 - title: Guides
   items:
     - title: Django
