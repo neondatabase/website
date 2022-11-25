@@ -14,13 +14,13 @@ Neon account
     |      |
     |      |---- root branch (main) ---- endpoint (compute) 
     |                |    |
-    |                |    |-- users
-    |                |    |-- databases           
+    |                |    |---- users
+    |                |    |---- databases           
     |                |                         
     |                |---- child branch 1 ---- endpoint (compute) 
     |                |          |    |
-    |                |          |    |------ users
-    |                |          |    |------ databases   
+    |                |          |    |---- users
+    |                |          |    |---- databases   
     |                |          |
     |                |          |---- child branch 1.a ---- endpoint (compute) 
     |                |                          |
