@@ -1,9 +1,13 @@
 ---
-title: Using API Keys
+title: API Keys
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started-with-neon/using-api-keys
 ---
 
-Any action performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference). Using the Neon API requires an API key. This topic describes how to generate, revoke, and use an API key.
+Any action performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference). Using the Neon API requires an API key. This topic describes how to generate, revoke, and use API keys.
+
+API keys are global and belong to the Neon user account. They can be used with any project or project object that belongs to the user account. A Neon account can create unlimited API keys.
 
 ### Generate an API key
 
@@ -31,7 +35,9 @@ To revoke an API key:
 
 ### Make an API call
 
-_**Note**: The next version of the Neon API is currently in preview. It is partially implemented and intended for review purposes only. To try this version of the Neon API, refer to the [Neon API V2 reference](https://neon.tech/api-reference/v2) for supported endpoints. The base URL for the preview version of the Neon API is `https://console.neon.tech/api/v2`. Use this base URL when using the preview version of the Neon API._
+<Admonition type="important">
+The next version of the Neon API is currently in preview. It is partially implemented and intended for review purposes only. To try this version of the Neon API, refer to the [Neon API V2 reference](https://neon.tech/api-reference/v2) for supported endpoints. The base URL for the preview version of the Neon API is `https://console.neon.tech/api/v2`. Use this base URL when using the preview version of the Neon API.
+</Admonition>
 
 The following `cURL` example uses the `/projects` endpoint to retrieve projects that belong to your Neon account.
 

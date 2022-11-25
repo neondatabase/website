@@ -39,7 +39,7 @@ This is the account used to register with Neon. Neon currently supports register
 
 ## API keys
 
-API keys are global and belong to the Neon user account. API keys are used with the [Neon API](../../reference/api-refernce) to create and mange a Neon projects or any object within a project. A Neon account can have unlimited API keys. For more information, see [API keys](../../get-started-with-neon/using-api-keys).
+API keys are global and belong to the Neon user account. API keys are used with the [Neon API](../../reference/api-refernce) to create and manage a Neon projects or any object within a project. A Neon account can create unlimited API keys. For more information, see [API keys](../api-keys).
 
 ## Projects
 
@@ -47,15 +47,15 @@ A project is the top-level object in the Neon object hierarchy. It is a containe
 
 ## Branches
 
-Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project. For more information, see [Branches](../../get-started-with-neon/branches).
+Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project. For more information, see [Branches](../branches).
 
 ## Endpoints
 
-An endpoint is the compute instance associated with a branch. A read-write endpoint is created for a project's root branch by default. When you create child branches, you can choose whether or not to create an endpoint for the branch and the type of endpoint (read-write or read-only). To connect to a database that resides in a branch, you must connect via an endpoint that is associated with the branch. Tier limits define the number of endpoints per project and the resources (vCPUs and RAM) available to an endpoint. For more information, see [Endpoints](../endpoints).
+An endpoint is the compute instance associated with a branch. A read-write endpoint is created for a project's root branch by default. You can choose whether or not to create an endpoint when creating a branch. To connect to a database that resides in a branch, you must connect via an endpoint that is associated with the branch. Tier limits define the number of endpoints per project and the resources (vCPUs and RAM) available to an endpoint. For more information, see [Endpoints](../endpoints).
 
 ## Users
 
-A PostgreSQL user is required to create and access a database. A user belongs to a branch. There is no limit on the number of users you can create. A Neon project root branch is created with a user named for the Neon user account that you registered with. For example, if you registered with a Google account for Casey Smith, Neon creates a database user named Casey in the root branch. This user is the owner of the default `main` database. For more information, see [Users](../users).
+A PostgreSQL user is required to create and access a database. A user belongs to a branch. There is no limit on the number of users you can create. A Neon project root branch is created with a user named for the Neon user account that you registered with. For example, if you registered with a Google account for Casey Smith, Neon creates a database user named Casey in the root branch. This user is the owner of the default `main` database in your project's root branch. For more information, see [Users](../users).
 
 ## Databases
 

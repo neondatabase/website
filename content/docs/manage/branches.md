@@ -1,12 +1,14 @@
 ---
-title: Get started with branching
+title: Branches
 enableTableOfContents: true
 isDraft: false
+redirectFrom:
+  - /docs/get-started-with-neon/get-started-branching
 ---
 
-This topic describes how to get started with Neon's branching feature, which allows you to branch your data in the same way that you branch your code.
+Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project.
 
-A branch is a clone of your data that you are free to play around with and modify without affecting the originating data.
+A child branch is a clone of your data that you are free to play around with and modify without affecting the originating data.
 For more information about what branches are and how to use them in your development workflows, see [Branching](../../conceptual-guides/branching).
 
 <Admonition type="note">
