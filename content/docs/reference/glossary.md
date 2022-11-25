@@ -46,17 +46,17 @@ A service that provides virtualized computing resources (CPU, memory, and storag
 
 ### Connection pooling
 
-A method of creating a pool of connections and caching those connections for reuse. Neon uses `pgbouncer` in `transaction mode` for connection pooling. Neon’s connection pooling feature can be enabled or disabled for a project on the **Settings** tab, under **General Settings**.
+A method of creating a pool of connections and caching those connections for reuse. Neon uses `pgbouncer` in `transaction mode` for connection pooling. Neon’s connection pooling feature can be enabled or disabled for a project on the **Settings** page, under **General Settings**.
 
 ### Connection string
 
-A string containing details for connecting to a Neon project. The details include a user name, project ID, host address, port number, and database name; for example:
+A string containing details for connecting to a Neon project branch. The details include a user name, endpoint host address, and database name; for example:
 
 ```terminal
-postgres://user1@black-sky-342827.cloud.neon.tech:5432/main`
+postgres://daniel@ep-polished-water-579720.us-east-2.aws.neon.tech/main
 ```
 
-The connection string for a Neon project is provided on the **Dashboard** tab in the Neon Console, under **Connection Details**. The connection string that is displayed immediately after creating a project also includes the user’s password, temporarily. For security reasons, the password is removed from the connection string after navigating away from the Dashboard.
+The connection string for a Neon is provided on the **Dashboard** in the Neon Console, under **Connection Details**. The connection string that is displayed immediately after creating a project also includes the user’s password, temporarily. For security reasons, the password is removed from the connection string after navigating away from the Neon Console or refreshing the browser. If you misplace your password, your only option is to reset it.
 
 ### Console
 
@@ -68,15 +68,15 @@ A part of the Neon architecture that manages cloud storage and compute resources
 
 ### Copy-on-write
 
-A technique used to efficiently copy data. Neon uses the copy-on-write technique to efficiently copy project data when creating a branch.
+A technique used to efficiently copy data. Neon uses the copy-on-write technique to efficiently copy data when creating a branch.
 
 ### Database
 
-A named collection of database objects. A Neon project has a default database named main which resides in the default `public` schema. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
+A named collection of database objects. A Neon project has a default database named `main` which resides in the default `public` schema. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
 
 ### Endpoint
 
-The compute instance associated with a branch. A single read-write endpoint is created for each branch, including the project's [root branch](#root-branch) (`main`). The endpoint hostname is required to connect to a branch from a client or application. An endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. An endpoint hostname starts with an `ep-` prefix, as in this example: `ep-steep-forest-654321.cloud.neon.tech`. For more information, see [Connecting to a branch](https://neon.tech/docs/get-started-with-neon/get-started-branching/#connect-to-a-branch).
+The compute instance associated with a branch. A single read-write endpoint is created for each branch, including the project's [root branch](#root-branch) (`main`). The endpoint hostname is required to connect to a branch from a client or application. An endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. An endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. For more information, see [Connecting to a branch](https://neon.tech/docs/get-started-with-neon/get-started-branching/#connect-to-a-branch).
 
 ### Free Tier
 
@@ -100,7 +100,7 @@ A browser-based graphical interface for managing Neon projects and resources.
 
 ### Neon user
 
-The user that registers and authenticates with Neon using a GitHub or Google account. Once authenticated, a Neon user can create and access projects, and manage users, databases, and other project resources.
+The user that registers and authenticates with Neon using a GitHub or Google account. Once authenticated, a Neon user can create and manage projects, branches, users, databases, and other project resources.
 
 ### Page
 
@@ -126,7 +126,7 @@ In PostgreSQL, a role with the `LOGIN` attribute is considered the same as a _da
 
 ### Project
 
-A collection of PostgreSQL databases, PostgreSQL users, and other project resources and settings. A project contains a Compute with a PostgreSQL server as well as storage for the project data.
+A collection of branches, databases, users, and other project resources and settings. A project contains a compute with a PostgreSQL server as well as storage for the project data.
 
 ### Proxy
 
@@ -174,7 +174,7 @@ An encrypted access token that enables users to authenticate with Neon using the
 
 ## PostgreSQL users
 
-PostgreSQL users are created as a part of your Neon project and can be managed via the Neon web UI. A system user `web-access` is used for the SQL Editor in Neon UI and for link authentication for `psql`. This user cannot be removed or used for authenticating in other scenarios.
+PostgreSQL users are created as a part of your Neon project and can be managed via the Neon Console. A system user `web-access` is used for the SQL Editor in the Neon Console and for [passwordless authentication](#passwordless-auth). This user cannot be removed or used for authenticating in other scenarios.
 
 ### User
 

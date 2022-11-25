@@ -16,13 +16,13 @@ To connect to Neon from a Django application:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your project ID, user name, and password. This information is required when defining connection settings in your Django project.
+When creating a Neon project, take note of your endpoint hostname, user name, and password. This information is required when defining connection settings in your Django project.
 
 To create a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Specify a name, a PostgreSQL version, and click **Create Project**.
+3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 
 For additional information about creating projects, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
 
@@ -36,10 +36,10 @@ In your Django project, navigate to the `DATABASES` section of your `settings.py
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '<project_id>',
+        'NAME': '<dbname>',
         'USER': '<user>',
         'PASSWORD': '<password>',
-        'HOST': '<project_id>.cloud.neon.tech',
+        'HOST': '<endpoint_hostname>',
         'PORT': '5432',
     }
 }
@@ -47,9 +47,10 @@ DATABASES = {
 
 where:
 
-- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<dbname>` is the database you are connecting to. The default Neon database is `main`.
+- `<user>` is the database user, which is found on the Neon **Dashboard**, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a project.
-- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
+- `<endpoint_hostname>` is the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
 
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings/#databases), in the Django documentation.
 

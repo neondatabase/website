@@ -16,8 +16,8 @@ To create a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Specify a name, a PostgreSQL version, and click **Create Project**.
-4. After creating a project, you are directed to the Neon **Dashboard** tab, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the **Dashboard** tab.
+3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
+4. After creating a project, you are directed to the Neon **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the Neon Console or refresh the browser page. If you misplace your password, your only option is to reset it.
 
 ## Configure the connection
 
@@ -25,7 +25,7 @@ Open the `.env` file in your Laravel app, and replace all the database credentia
 
 ```shell
 DB_CONNECTION=pgsql
-DB_HOST=<project_id>.cloud.neon.tech
+DB_HOST=<endpoint_hostname>
 DB_PORT=5432
 DB_DATABASE=<dbname>
 DB_USERNAME=<user>
@@ -34,7 +34,7 @@ DB_PASSWORD=<password>
 
 where:
 
-- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
-- `<password>` is the database user's password, which is provided to you when you create a Neon project.
-- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
+- `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
 - `<dbname>` is the database name (the default Neon project database is `main`).
+- `<user>` is the database user, which is found on the Neon **Dashboard**, under **Connection Details**.
+- `<password>` is the database user's password, which is provided to you when you create a Neon project.
