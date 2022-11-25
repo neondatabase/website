@@ -4,9 +4,11 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-An endpoint is the compute instance associated with a branch. A single read-write endpoint is created for your project's [root branch](#root-branch) (`main`) by default. You can also create a 
+An endpoint is the compute instance associated with a branch. A single read-write endpoint is created for your project's [root branch](#root-branch) (`main`) by default.
 
-The endpoint hostname is required to connect to a branch from a client or application. An endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. An endpoint hostname starts with an `ep-` prefix, as in this example: `ep-steep-forest-654321.cloud.neon.tech`. For more information, see [Connecting to a branch](https://neon.tech/docs/get-started-with-neon/get-started-branching/#connect-to-a-branch).
+To connect to a database that resides on a branch, you must connect via an endpoint that is associated with the branch. A Neon project can have multiple endpoints. For example, you may want a separate endpoint for each branch in your project.
+
+Tier limits define the number of endpoints that you can create in a Neon project and the compute resources (vCPUs and RAM) available to an endpoint.
 
 ## Create an endpoint
 
@@ -17,9 +19,9 @@ To create an endpoint:
 1. On the **Create endpoint** dialog:
     1. Select a branch. An endpoint must be associated with a branch.
     1. Select an endpoint type, read-write or read-only.
-    1. Select wether or not to enable [passwordless connect with psql](../../reference/glossary/#passwordless-auth) for the endpoint.
-    1. Select whether to enable autoscaling. This option is not yet supported.
-    1. Specify the minimum and maximum number of CPU limits for the compute. This option is not yet supported.
+    1. Select wether or not to enable [passwordless connect](../../reference/glossary/#passwordless-auth) for the endpoint.
+    1. Select whether to enable autoscaling. This option is only available to paid tiers.
+    1. Specify the minimum and maximum number of CPU limits for the compute. This option is only available to paid tiers.
 1. Click **Create endpoint**.
 
 ## View endpoints
@@ -34,14 +36,14 @@ Endpoint details include:
 - **Region**: The regions in which the endpoint was created.
 - **Min/max compute units**: The maximum and minimum number of CPUs allocated to the compute unit.
 - **Type**: The type of endpoint. Neon supports read-write and read-only endpoints.
-- **Branch**: The name of the branch that the endpoint is associated with..
+- **Branch**: The name of the branch that the endpoint is associated with.
 - **State**: The endpoint state (`Active`, `Idle`, or `Stopped`)
 - **Last activity**: The last time the endpoint was active.
-- **Created**: The data and time the endpoint was created.
+- **Created**: The date and time the endpoint was created.
 
 ## Edit an endpoint
 
-You can edit an endpoint to change the branch that the endpoint is associated with, the endpoint type (Read-write or read-only), enabled or disable passwordless connect, enable or disable autoscaling, or change minimum and maximum number of CPU units.
+You can edit an endpoint to change the branch that the endpoint is associated with, the endpoint type (read-write or read-only), enabled or disable [passwordless connect](../../reference/glossary/#passwordless-auth), enable or disable autoscaling, or change minimum and maximum number of CPU units. Autoscaling and resource-related options are only available to paid tiers.
 
 To edit an endpoint:
 

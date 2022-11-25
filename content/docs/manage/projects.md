@@ -4,20 +4,16 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-A project is the top-level object in the Neon object hierarchy. A Neon account can have multiple projects.
+A project is the top-level object in the Neon object hierarchy. Neon's free tier permits one project per account.
 
-Each Neon project is created with a root branch called `main`. A project may contain additional child branches created from the root branch or from a previously created branch. For information about Neon's branching feature, see [Branching](../../conceptual-guides/branching).
+A Neon project is created with the following resources by default:
 
-A project's root branch is created with a default database, also called `main`. This database and all databases created in Neon contain a `public` schema. Tables and other objects are created in the `public` schema by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
-
-A Neon project's root branch has a dedicated Neon compute instance. In Neon's Technical Preview Free Tier, a Neon compute instance is deployed with PostgreSQL 15, 1 vCPU, and 256MB of RAM. For more information about limits associated with Neon's Technical Preview, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier).
-
-A project is created with two database users by default:
-
-- A user that takes its name from your Neon account (the Google, GitHub, or partner account that you signed up with).
-- A `web_access` user, which is used for passwordless authentication and by the Neon SQL Editor. The `web_access` user cannot be modified or deleted.
-
-Additional database users can be added to a project's root branch or child branches.
+- A root branch called `main`. You can create additional child branches from the root branch or from a previously created branch. For more information, see [Branches](../branches).
+- A single read-write endpoint, which is the Neon compute instance associated with the project's root branch. For more information, see [Endpoints](../branches).
+- A default database, called `main`, which resides in the project's root branch.
+- Two PostgreSQL database users:
+  - A user that takes its name from your Neon account (the Google, GitHub, or partner account that you signed up with).
+  - A `web_access` user, which is used for passwordless authentication and by the Neon SQL Editor. The `web_access` user cannot be modified or deleted.
 
 ## Create a project
 
@@ -27,7 +23,7 @@ To create a Neon project:
 2. If you are creating your very first project, click **Create the first project**. Otherwise, click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**. Upon creating a project, you are presented with a dialog that provides your password for the project, which is required to connect to databases in the Neon project from a client or application. Store your password in a safe location.
 
-**_Important_**: After navigating away from the Neon Console or refreshing the browser page, the password is no longer accessible. If you forget or misplace your password, your only option is to reset it. You can reset a password on the **User** page, which is found on the **Settings** page in the Neon Console.
+**_Important_**: After navigating away from the Neon Console or refreshing the browser page, the password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Users](../users).
 
 ## Delete a project
 
@@ -36,16 +32,16 @@ Deleting a project is a permanent action. Deleting a project deletes any branche
 To delete a project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select the project that you want to delete from the project drop-down list.
+2. Select the project that you want to delete.
 3. Select **Settings** > **General**.
 4. Click **Delete project.**
 5. On the **Do you want to delete this project?** dialog, click **Delete**.
 
 ## Check the project data size
 
-Neon stores data in its own internal format. During the technical preview, a Neon project has a 10GB data size limit, which applies to the logical size of a Neon project. The logical size is the sum of all database sizes in the project.
+Neon stores data in its own internal format. Tier limits define the amount of data you can store in a project. 
 
-To check the logical size of the databases in your Neon project, run the following query:
+The logical size is the sum of all database sizes in the project. To check the logical size of the databases in your Neon project, run the following query:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))
