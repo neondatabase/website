@@ -12,25 +12,25 @@ Neon account
     | 
     |- project 
     |      |
-    |      |---- root branch (main) ---- endpoint (compute) 
+    |      |---- root branch (main) ---- endpoint a (compute) 
     |                |    |
     |                |    |---- users
     |                |    |---- databases           
     |                |                         
-    |                |---- child branch 1 ---- endpoint (compute) 
+    |                |---- child branch 1 ---- endpoint b (compute) 
     |                |          |    |
     |                |          |    |---- users
     |                |          |    |---- databases   
     |                |          |
-    |                |          |---- child branch 1.a ---- endpoint (compute) 
+    |                |          |---- child branch 1.a ---- endpoint c (compute) 
     |                |                          |
     |                |                          |---- users
     |                |                          |---- databases
     |                |
     |                |---- child branch 2 
-    |                                 |
-    |                                 |---- users
-    |                                 |---- databases
+    |                                |
+    |                                |---- users
+    |                                |---- databases
 ```
 
 ## Neon account
