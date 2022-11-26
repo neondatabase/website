@@ -1,29 +1,27 @@
 ---
-title: Connect from any application
+title: Connect from any app or client
 enableTableOfContents: true
 ---
-When developing an application, you will need to connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the root branch of your Neon project (`main`) or a child branch. You can create databases in any branch.
+When developing an application or accessing Neon from a client, you will need to connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the root branch of your Neon project (`main`) or a child branch. You can create databases in any branch.
 
 In order to connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through an endpoint, which is the compute instance associated with the branch.
 
 ```text
 Project
     |----root branch (main) ---- endpoint (compute) <--- application
+             |    |
+             |    ---- database (main)
              |
-             |---- database (main)
-             |
-             ----
-                |
-           child branch ---- endpoint (compute) <--- application
-                |
-                |---- database (mydb)  
+             ---- child branch ---- endpoint (compute) <--- application
+                            |
+                            |---- database (mydb)  
 ```
 
 You can obtain the connection details for a database from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
 ![Connection details widget](./images/connection_details.png)
 
-The details from the connection string or connection string itself can be used configure a database connection. For example, connection details might be placed in an `.env` file or the connection string might be assigned to a variable. Given the following connection string, an `.env` file or a `DATABASE_URL` variable can be configured as shown.
+The details from the connection string or connection string itself can be used configure a connection. For example, connection details might be placed in an `.env` file, assigned to a variable, or passed on the command-line. Given the following connection string, an `.env` file, a variable, or a client command-line string can be configured as shown.
 
 Connection string:
 
@@ -43,11 +41,19 @@ PGPASSWORD='<password>'
 PGPORT='5432'
 ```
 
-`DATABASE_URL` variable:
+Variable:
 
 ```text
 DATABASE_URL="postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main"
 ```
+
+Command-line connection string:
+
+```bash
+psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main
+```
+
+For more information about connecting using `psql`, see [Connect with psql](../query-with-psql-editor).
 
 ## Where do I obtain a password?
 

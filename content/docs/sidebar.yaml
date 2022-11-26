@@ -30,8 +30,6 @@
 
 - title: Connect
   items:
-    - title: Connection strings
-      slug: connect/connection-strings
     - title: Connect from any application
       slug: connect/connect-from-any-app
     - title: Connect with psql
