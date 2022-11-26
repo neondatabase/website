@@ -43,7 +43,7 @@ Neon's `psql` passwordless auth feature helps you quickly authenticate a connect
    - Selecting an existing project authenticates your connection to the selected project.
    - Selecting **Create new project** directs you to a **Project creation** page where you create a new project to connect to.
 
-   After making your selection, you are directed to check the terminal. In the terminal, you are connected to the project and connection information similar to the following is displayed:
+   After making your selection, you are directed to check the terminal where information similar to the following is displayed:
 
    ```bash
    NOTICE:  Connecting to database.
@@ -53,7 +53,7 @@ Neon's `psql` passwordless auth feature helps you quickly authenticate a connect
    casey=>
    ```
 
-   **_Note_**: When using _`psql` quick auth_ to connect, the `psql` prompt shows your local terminal user name instead of the database name that is shown for the other `psql` connection methods described in this topic. However, you are logged in to the default `main` database as the Neon `web_access` user, which you can verify by running this query:
+   **_Note_**: When using _`psql` passwordless auth_ to connect, the `psql` prompt shows your local terminal user name. However, you are logged in to the default database as the Neon `web_access` user, which you can verify by running this query:
 
    ```sql
    SELECT current_user;
@@ -92,13 +92,15 @@ To connect with an exported password:
 2. Connect with the following command:
 
    ```bash
-   psql postgres://<user>:$PGPASSWORD@<project_id>.cloud.neon.tech:5432/main
+   psql postgres://<user>:$PGPASSWORD@<endpoint_hostname>:<port>/<dbname>
    ```
 
    where:
 
    - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
-   - `<project_id>` is the Neon Project ID, which is found on the Neon Console **Settings** tab, under **General Settings**.
+   - `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon Dashboard, under **Connection Settings**.
+   - `<port>` is the PostgreSQL port. Neon uses port `5432`.
+   - `<dbname>` is the database you are connecting to. The default Neon database is `main`.
 
 ## Connect with a password saved to a file
 
@@ -109,7 +111,7 @@ To connect with a password saved to a `.pgpass` password file:
    ```bash
    touch ~/.pgpass && \
    chmod 0600 ~/.pgpass && \
-   echo -e "<project_id>.cloud.neon.tech:5432:main:<user>:<password>\n$(cat ~/.pgpass)" > ~/.pgpass
+   echo -e "<endpoint_hostname>:<port>:<dbname>:<user>:<password>\n$(cat ~/.pgpass)" > ~/.pgpass
    ```
 
   <Admonition type="tip">
@@ -119,15 +121,17 @@ To connect with a password saved to a `.pgpass` password file:
 2. Connect with the following command:
 
    ```bash
-   psql -h <project_id>.cloud.neon.tech -U <user> main
+   psql -h <endpoint_id>.us-east-2.aws.neon.tech -U <user> main
    ```
 
    where:
 
-   - `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
-   - `<password>` is the database user's password, which is provided to you when you create a Neon project.
+   - `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
+   - `<port>` is the PostgreSQL port. Neon uses port `5432`.
+   - `<dbname>` is the database you are connecting to. The default Neon database is `main`.
    - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
-
+   - `<password>` is the database user's password, which is provided to you when you create a Neon project.
+  
 ## Running queries
 
 After establishing a connection, try running the following queries:

@@ -7,8 +7,8 @@ import Item from './item';
 
 const Sidebar = ({ className, sidebar, currentSlug }) => (
   <aside className={className}>
-    <Search />
-    <nav className="mt-5">
+    <Search className="z-30" />
+    <nav className="relative z-20 mt-5">
       <ul>
         {sidebar.map((item, index) => (
           <Item {...item} currentSlug={currentSlug} key={index} />

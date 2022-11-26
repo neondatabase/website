@@ -28,21 +28,21 @@ const Item = ({ title, slug, isStandalone, items, currentSlug }) => {
     <li className="flex flex-col">
       <Tag
         className={clsx(
-          'group flex w-full items-start justify-between py-2 text-left text-sm text-gray-3 transition-colors duration-200 hover:text-black',
+          'group flex w-full items-start justify-between py-2 text-left text-sm text-gray-3 transition-colors duration-200 hover:text-black dark:text-gray-7 dark:hover:text-white',
           {
-            'font-semibold !text-black': currentSlug === slug,
+            'font-semibold !text-black dark:!text-white': currentSlug === slug,
           }
         )}
         type={slug ? undefined : 'button'}
-        to={docSlug || undefined}
+        to={slug ? docSlug : undefined}
         onClick={handleClick}
       >
         <span className="leading-snug">{title}</span>
         <ChevronRight
           className={clsx(
-            'mx-2 mt-[5px] shrink-0 text-gray-5 transition-[transform,color] duration-200 group-hover:text-black',
+            'mx-2 mt-[5px] shrink-0 text-gray-5 transition-[transform,color] duration-200 group-hover:text-black dark:group-hover:text-white',
             {
-              '!text-black': currentSlug === slug,
+              '!text-black dark:!text-white': currentSlug === slug,
             },
             items?.length ? 'block' : 'hidden',
             isOpen ? 'rotate-90' : 'rotate-0'
@@ -52,7 +52,7 @@ const Item = ({ title, slug, isStandalone, items, currentSlug }) => {
       {!!items?.length && (
         <ul
           className={clsx(
-            'relative pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-6',
+            'relative pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-6 dark:before:bg-gray-2',
             !isOpen && 'sr-only'
           )}
         >

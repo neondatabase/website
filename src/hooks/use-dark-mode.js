@@ -8,6 +8,7 @@ export { ThemeContext };
 
 export function useDarkModeInit() {
   const [enabledState, setEnabledState] = useLocalStorage('dark-mode-enabled');
+  const isDocPage = typeof window !== 'undefined' && window.location.pathname.startsWith('/docs');
   const isSystemDarkMode =
     typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
   const isSystemThemeEnabled =
@@ -15,7 +16,7 @@ export function useDarkModeInit() {
       ? (localStorage.theme && JSON.parse(localStorage.theme) === 'system') ||
         !('theme' in localStorage)
       : false;
-  const enabled = enabledState || (isSystemThemeEnabled && isSystemDarkMode);
+  const enabled = isDocPage && (enabledState || (isSystemThemeEnabled && isSystemDarkMode));
 
   useIsomorphicLayoutEffect(() => {
     const className = 'dark';

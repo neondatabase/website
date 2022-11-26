@@ -15,7 +15,7 @@ const Aside = ({ slug, label }) => (
         {getReleaseNotesDateFromSlug(slug)}
       </time>
     </Link>
-    <span className="mt-3.5 block rounded-[50px] bg-secondary-2 py-1 px-4 text-sm font-semibold leading-snug sm:mt-0">
+    <span className="mt-3.5 block rounded-[50px] bg-secondary-2 py-1 px-4 text-sm font-semibold leading-snug dark:text-black sm:mt-0">
       {label}
     </span>
   </aside>

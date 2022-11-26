@@ -34,7 +34,10 @@ const components = {
 
 // eslint-disable-next-line no-return-assign
 const Content = forwardRef(({ className, content }, ref) => (
-  <div className={clsx('prose-doc prose xs:prose-code:break-words', className)} ref={ref}>
+  <div
+    className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}
+    ref={ref}
+  >
     <MDXProvider components={components}>{content}</MDXProvider>
   </div>
 ));

@@ -12,7 +12,7 @@ const styles = {
   },
   theme: {
     white: 'text-white',
-    black: 'text-black',
+    black: 'text-black dark:text-white',
   },
 };
 

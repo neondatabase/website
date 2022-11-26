@@ -54,6 +54,8 @@
       slug: guides/hasura
     - title: Java
       slug: guides/java
+    - title: Laravel
+      slug: guides/laravel
     - title: Next.js
       slug: guides/vercel
     - title: Node.js

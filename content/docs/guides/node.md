@@ -22,13 +22,13 @@ To connect to Neon from a Node.js application:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your project ID, database name, user, and password. This information is required when configuring connection settings.
+When creating a Neon project, take note of the endpoint hostname, database name, user, and password. This information is required when configuring connection settings.
 
 To create a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Specify a name, a PostgreSQL version, and click **Create Project**.
+3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 
 For additional information about creating projects, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
 
@@ -53,19 +53,20 @@ For additional information about creating projects, see [Setting up a project](/
 Store your Neon credentials in your `.env` file.
 
 ```shell
-PGHOST='<project_id>.cloud.neon.tech:<port>'
-PGDATABASE='<database>'
+PGHOST='<endpoint_hostname>:<port>'
+PGDATABASE='<dbname>'
 PGUSER='<username>'
 PGPASSWORD='<password>'
-PROJECT_NAME='<project_id>'
+ENDPOINT_ID='<endpoint_id>'
 ```
 
 where:
 
-- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
+- `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
 - `<dbname>` is the name of the database in your Neon project. `main` is the default database created with each Neon project.
-- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<user>` is the database user, which is found on the Neon **Dashboard**, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a project.
+- `<endpoint_id>` is the ID of the branch endpoint that you are connecting to, which can be found on the Neon **Dashboard**, under **Connection Settings**. The `<endpoint_id>` starts with an `ep-` prefix, as in this example: `ep-steep-forest-654321`.
 
 <Admonition type="important">
 To ensure the security of your data, never expose your Neon credentials to the browser.
@@ -79,8 +80,8 @@ To connect to the database using the PostgreSQL client and your Neon credentials
 const postgres = require('postgres');
 require('dotenv').config();
 
-const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, PROJECT_NAME } = process.env;
-const URL = `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?options=project%3D${PROJECT_NAME}`;
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
+const URL = `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?options=project%3D${ENDPOINT_ID}`;
 
 const sql = postgres(URL, { ssl: 'require' });
 
@@ -101,7 +102,7 @@ node app.js
 
 Result(1) [
   {
-    version: 'PostgreSQL 14.5 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
+    version: 'PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
   }
 ]
 ```

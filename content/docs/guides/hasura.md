@@ -38,15 +38,15 @@ Use the following instructions to connect to an existing Neon database from Hasu
 
 - An existing Neon account. If you do not have one, see [Signing up](/docs/get-started-with-neon/signing-up).
 - An existing Neon project. If you do not have a Neon project, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
-- A connection string for the Neon project that includes your password. For example:
+- A connection string for a branch in Neon project that includes your password. For example:
 
   ```sh
-  `postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main`
+  `postgres://<user>:<password>@<endpoint_hostname>:5432/main`
   ```
 
-  Your project's connection string can be found on the **Dashboard** tab in the Neon Console. If you have misplaced your password, you can either reset it or create a new user. Users are managed on the **Settings** tab in the Neon Console.
+  Your project's connection string can be found on the Neon **Dashboard**, under **Connection Details**. If you have misplaced your password, you can either reset it or create a new user. Users are managed on the **Settings**  page in the Neon Console.
 
-### Add the Neon project as a data source
+### Add Neon as a data source
 
 The following steps describe how to navigate to Hasura Cloud and connect to your Neon project.
 
