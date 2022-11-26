@@ -20,8 +20,8 @@ To create a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Specify a name, a PostgreSQL version, and click **Create Project**.
-4. After creating a project, you are directed to the Neon **Dashboard** tab, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the **Dashboard** tab. Copy the connection string. It is required to connect to Neon from your Prisma app.
+3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
+4. After creating a project, you are directed to the Neon **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the Neon Console or refresh the browser page. Copy the connection string. It is required to connect to Neon from your Prisma app.
 
 ## Connect to Neon from Prisma
 
@@ -36,10 +36,10 @@ To connect to Neon from Prisma:
    }
    ```
 
-2. Add a `DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon project connection string that you copied in the previous step.
+2. Add a `DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon connection string that you copied in the previous step.
 
 ```shell
-    DATABASE_URL="postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main"
+    DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/main"
 ```
 
 <Admonition type="note">
@@ -50,9 +50,9 @@ For information about enabling and disabling connection pooling for your Neon pr
 
 where:
 
+- `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
 - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
-- `<project_id>` is the ID of the Neon project, which is found on the Neon Console **Settings** tab, under **General Settings**.
 
 ## Configure a shadow database for Prisma Migrate
 
@@ -72,10 +72,10 @@ To configure a shadow database:
    }
    ```
 
-1. Add a `SHADOW_DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon project connection string that you copied in the previous step.
+1. Add a `SHADOW_DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon connection string that you copied in the previous step.
 
    ```shell
-   SHADOW_DATABASE_URL="postgres://<user>:<password>@<project_id>.cloud.neon.tech:5432/main"
+   SHADOW_DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/main"
    ```
 
 For additional information about shadow databases, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the Prisma documentation.
