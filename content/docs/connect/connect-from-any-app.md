@@ -10,7 +10,7 @@ In order to connect to a database, you must connect to the branch where the data
 Project
     |----root branch (main) ---- endpoint (compute) <--- application
              |    |
-             |    ---- database (main)
+             |    |---- database (main)
              |
              ---- child branch ---- endpoint (compute) <--- application
                             |
@@ -47,7 +47,7 @@ Variable:
 DATABASE_URL="postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main"
 ```
 
-Command-line connection string:
+Command-line:
 
 ```bash
 psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main
