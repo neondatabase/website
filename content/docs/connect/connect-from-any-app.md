@@ -2,17 +2,17 @@
 title: Connect from any application
 enableTableOfContents: true
 ---
-When developing an application or accessing Neon from a client, you will need to connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the root branch of your Neon project (`main`) or a child branch. You can create databases in any branch.
+When connecting to Neon from an application or client, you will need to connect to a database in your Neon project. In Neon, a database belongs to a branch, which may the root branch of your project (`main`) or a child branch.
 
 In order to connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through an endpoint, which is the compute instance associated with the branch.
 
 ```text
 Project
-    |----root branch (main) ---- endpoint (compute) <--- application
+    |----root branch (main) ---- endpoint (compute) <--- application/client
              |    |
              |    |---- database (main)
              |
-             ---- child branch ---- endpoint (compute) <--- application
+             ---- child branch ---- endpoint (compute) <--- application/client
                             |
                             |---- database (mydb)  
 ```
@@ -21,7 +21,7 @@ You can obtain the connection details for a database from the **Connection Detai
 
 ![Connection details widget](./images/connection_details.png)
 
-The details from the connection string or connection string itself can be used configure a connection. For example, connection details might be placed in an `.env` file, assigned to a variable, or passed on the command-line. Given the following connection string, an `.env` file, a variable, or a client command-line string can be configured as shown.
+The details from the connection string or the connection string itself can be used configure a connection. For example, connection details might be placed in an `.env` file, assigned to a variable, or passed on the command-line. Given the following connection string, an `.env` file, a variable, or a client command-line string can be configured as shown.
 
 Connection string:
 
@@ -63,7 +63,7 @@ The connection string on the Neon **Dashboard** only includes a password immedia
 
 Neon uses the default PostgreSQL port, `5432`.
 
-## Language and framework connection examples
+## Connection examples
 
 The **Connection Details** widget on the **Neon Dashboard** provides connection examples for different languages and frameworks, constructed for the branch, database, and user that you select. Click **connection examples**  in the **Connection Details** widget to view or copy them.
 
