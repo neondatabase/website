@@ -4,14 +4,14 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-A project is the top-level object in the Neon object hierarchy. Neon's free tier permits one project per account.
+A project is the top-level object in the Neon object hierarchy. Tier limits define how many projects you can create. Neon's free tier permits one project per Neon account.
 
 A Neon project is created with the following resources by default:
 
-- A root branch called `main`. You can create additional child branches from the root branch or from a previously created branch. For more information, see [Branches](../branches).
-- A single read-write endpoint, which is the Neon compute instance associated with the project's root branch. For more information, see [Endpoints](../branches).
+- A root branch called `main`. You can create child branches from the root branch or from a previously created branch. For more information, see [Branches](../branches).
+- A single read-write endpoint. An endpoint is the compute instance associated with a branch. For more information, see [Endpoints](../branches).
 - A default database, called `main`, which resides in the project's root branch.
-- Two PostgreSQL database users:
+- Two PostgreSQL users:
   - A user that takes its name from your Neon account (the Google, GitHub, or partner account that you signed up with).
   - A `web_access` user, which is used for passwordless authentication and by the Neon SQL Editor. The `web_access` user cannot be modified or deleted.
 
@@ -23,7 +23,7 @@ To create a Neon project:
 2. If you are creating your very first project, click **Create the first project**. Otherwise, click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 
-Upon creating a project, you are presented with a dialog that provides your password for the project, which is required to connect to databases in the Neon project from a client or application. Store your password in a safe location.
+Upon creating a project, you are presented with a dialog that provides your password for the project, which is required to connect to databases in the project from a client or application. Store your password in a safe location.
 
 <Admonition type="important">
 After navigating away from the Neon Console or refreshing the browser page, the password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Users](../users).
@@ -31,7 +31,7 @@ After navigating away from the Neon Console or refreshing the browser page, the 
 
 ## Delete a project
 
-Deleting a project is a permanent action. Deleting a project deletes any branches, databases, and users that belong to the project.
+Deleting a project is a permanent action. Deleting a project deletes any endpoints, branches, databases, and users that belong to the project.
 
 To delete a project:
 

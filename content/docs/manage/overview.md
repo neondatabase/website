@@ -35,11 +35,11 @@ Neon account
 
 ## Neon account
 
-This is the account used to register with Neon. Neon currently supports registering with GitHub, Google, or partner accounts.
+This is the account you used to register with Neon. Neon currently supports registering with GitHub, Google, or partner accounts.
 
 ## API keys
 
-API keys are global and belong to the Neon user account. API keys are used with the [Neon API](../../reference/api-refernce) to create and manage a Neon projects or any object within a project. A Neon account can create unlimited API keys. For more information, see [API keys](../api-keys).
+API keys are global and belong to the your Neon account. API keys are used with the [Neon API](../../reference/api-refernce) to create and manage a Neon projects or objects within a project. A Neon account can create unlimited API keys. For more information, see [API keys](../api-keys).
 
 ## Projects
 
@@ -55,7 +55,7 @@ An endpoint is the compute instance associated with a branch. A read-write endpo
 
 ## Users
 
-A PostgreSQL user is required to create and access a database. A user belongs to a branch. There is no limit on the number of users you can create. A Neon project root branch is created with a user named for the Neon user account that you registered with. For example, if you registered with a Google account for Casey Smith, Neon creates a database user named Casey in the root branch. This user is the owner of the default `main` database in your project's root branch. For more information, see [Users](../users).
+In Neon, users are PostgreSQL users. A user is required to create and access a database. A user belongs to a branch. There is no limit on the number of users you can create. The root branch of a Neon project is created with a user named for the Neon account that you registered with. For example, if you registered with a Google account for Casey Smith, Neon creates a user named Casey in the root branch. This user is the owner of the default `main` database in your project's root branch. For more information, see [Users](../users).
 
 ## Databases
 

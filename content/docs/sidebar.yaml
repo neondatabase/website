@@ -40,10 +40,10 @@
       slug: manage/branches
     - title: Endpoints
       slug: manage/endpoints
-    - title: Database
-      slug: manage/databases
     - title: Users
       slug: manage/users
+    - title: Databases
+      slug: manage/databases
 - title: Guides
   items:
     - title: Django

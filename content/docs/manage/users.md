@@ -4,20 +4,20 @@ enableTableOfContents: true
 isDraft: false
 ---
 
+Users in a Neon are PostgreSQL users. Each Neon project is created with two users by default:
+
+- A user that takes its name from your Neon account (the Google, GitHub, or partner account that you signed up with). This user owns the default database (`main`) that is created in a project's root branch.
+- A `web_access` user, which is used for [passwordless authentication](../../reference/glossary#passwordless-auth) and by the Neon SQL Editor. The `web_access` user cannot be modified or deleted.
+
+Additional database users can be created in a project's root branch or child branches.
+
 <Admonition type="note">
 You can only create database users in the Neon Console. Creating database users directly in PostgreSQL is not yet supported.  
 </Admonition>
 
-Each Neon project is created with two PostgreSQL database users by default:
-
-- A user that takes its name from your Neon account (the Google, GitHub, or partner account that you signed up with).
-- A `web_access` user, which is used for passwordless authentication and by the Neon SQL Editor. The `web_access` user cannot be modified or deleted.
-
-Additional database users can be created in a project's root branch or child branches.
-
 ## Create a user
 
-To create a PostgreSQL database user:
+To create a user:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
@@ -28,7 +28,7 @@ To create a PostgreSQL database user:
 
 ## Delete a user
 
-You cannot delete a PostgreSQL database user that owns a database.
+You cannot delete a user that owns a database.
 
 To delete a database user:
 
@@ -40,7 +40,7 @@ To delete a database user:
 
 ## Reset a PostgreSQL user's password
 
-To reset a PostgreSQL database user's password:
+To reset a user's password:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.

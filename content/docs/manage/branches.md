@@ -6,18 +6,18 @@ redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
 ---
 
-Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project.
+Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data you can store in each branch.
 
-A child branch is a clone of your data that you are free to play around with and modify without affecting the originating data.
-For more information about what branches are and how to use them in your development workflows, see [Branching](../../conceptual-guides/branching).
+A child branch is a copy-on-write clone the data in the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
+For more information about branches and how to use them in your development workflows, see [Branching](../../conceptual-guides/branching).
 
 <Admonition type="note">
 Neon Branching capabilities are not yet publicly available. If you would like to try this feature, reach out to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching for your account.
 </Admonition>
 
-You can create and manage branches using the Neon Console or Neon API. In this topic, we cover branching using the Neon Console.
+You can create and manage branches using the Neon Console or [Neon API](https://neon.tech/api-reference). This topic covers branching using the Neon Console.
 
-Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Setting up a project](../setting-up-a-project).
+Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Projects](../projects/#create-a-project).
 
 ## Create a branch
 
@@ -28,7 +28,7 @@ To create a branch:
 3. Click **New Branch** to open the branch creation dialog.
 ![Create branch dialog](./images/create_branch.png)
 4. Enter a name for the branch.
-5. Select a parent branch. You can branch from your Neon project's [root branch](../../reference/glossary/#root-branch) (`main`) or a previously created branch. Every Neon project is created with a root branch called `main`.  
+5. Select a parent branch. You can branch from your Neon project's [root branch](../../reference/glossary/#root-branch) (`main`) or a previously created branch.
 6. Select one of the following branching options:
     - **Head**: Creates a branch with data up to the current point in time (the default).
     - **Time**: Creates a branch with data up to the specified date and time.
@@ -43,22 +43,22 @@ To view the branches in a Neon project:
 
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
-3. Select a branch from the table to view details about the branch, including the branch's endpoint hostname.
+3. Select a branch from the table to view details about the branch.
 
 ![Branch details](./images/branch_details.png)
 
 <Admonition type="note">
-Each branch is created with an endpoint, which is the compute instance associated with the branch. To connect to a branch, you must connect to the endpoint. For instructions, see [Connect to a branch](#connect-to-a-branch). A endpoint hostname starts with an `ep-` prefix. You can also find an endpoint hostname in the branch connection string in the **Connection Details** widget on the project **Dashboard**.
+Each branch is created with an endpoint, which is the compute instance associated with the branch. To connect to a database in a branch, you must connect via an endpoint. For instructions, see [Connect to a branch database](#connect-to-a-branch-database). 
 </Admonition>
 
 The **Branches** widget on the project **Dashboard** also lists the branches in a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
 
-## Connect to a branch
+## Connect to a branch database
 
-Connecting to a branch requires connecting to the branch's endpoint, which is the compute instance associated with a branch. The following steps describe how to connect to a branch using `psql` and a connection string obtained from the Neon Console.
+Connecting to a database in a branch requires connecting via an endpoint, which is the compute instance associated with a branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="tip">
-You can also query a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../query-with-neon-sql-editor).
+You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../query-with-neon-sql-editor).
 </Admonition>
 
 1. In the Neon Console, select a project.
@@ -72,14 +72,14 @@ You can also query a branch from the Neon SQL Editor. For instructions, see [Que
   ```
 
 <Admonition type="tip">
-The endpoint hostname, which is `ep-polished-water-579720.us-east-2.aws.neon.tech` in the example above, can also be found on the **Branches** page in the Neon Console. For instructions, see [View branches](#view-branches).
+A endpoint hostname starts with an `ep-` prefix. You can also find an endpoint hostname in the branch connection string in the **Connection Details** widget on the project **Dashboard**. The endpoint hostname, which is `ep-polished-water-579720.us-east-2.aws.neon.tech` in the example above, can also be found on the **Branches** page in the Neon Console. For instructions, see [View branches](#view-branches).
 </Admonition>
 
-If you want to connect to a branch from an application, the **Connection Details** widget on the project **Dashboard** also provides connection examples for various languages and frameworks.
+If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the _Guides_ section in the documentation provide connection examples for various languages and frameworks.
 
 ## Delete a branch
 
-Deleting a branch is a permanent action. Deleting a branch also deletes the branch endpoint, which is the compute instance associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
+Deleting a branch is a permanent action. Deleting a branch also deletes databases and users that belong to the branch as well as the branch endpoint, which is the compute instance associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
 
 To delete a branch:
 

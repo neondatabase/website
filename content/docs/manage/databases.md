@@ -4,11 +4,11 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-In the Neon object hierarchy, a database exists within a branch of a Neon project. The is no limit on the number of databases you can create.
+A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the Neon object hierarchy, a database exists within a branch of a project. There is no limit on the number of databases you can create.
 
-A Neon project's root branch is created with a default database called `main`. You can create your own databases in a project's root branch or in a child branch.
+A Neon project's root branch is created with a default database called `main`, which is owned by your project's default user (see [Users](../users) for more information). You can create your own databases in a project's root branch or in a child branch.
 
-As with any standalone PostgreSQL instance, database objects such as schemas and tables are created in a database. All databases in Neon are created with a `public` schema. Tables and other database objects are created in the `public` schema by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
+All databases in Neon are created with a `public` schema. SQL objects are created in the `public` schema by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
 
 ## Create a database
 
