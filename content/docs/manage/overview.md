@@ -35,7 +35,7 @@ Neon account
 
 ## Neon account
 
-This is the account used to register with Neon. Neon currently supports registering with GitHub, Google, or partner accounts. 
+This is the account used to register with Neon. Neon currently supports registering with GitHub, Google, or partner accounts.
 
 ## API keys
 
