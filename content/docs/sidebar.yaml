@@ -28,7 +28,7 @@
       slug: get-started-with-neon/using-api-keys
 - title: Connect
   items:
-    - title: Connect from any app or client
+    - title: Connect from any application
       slug: connect/connect-from-any-app
     - title: Connect with psql
       slug: connect/query-with-psql-editor
