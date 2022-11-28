@@ -35,15 +35,15 @@ Neon account
 
 ## Neon account
 
-This is the account you used to register with Neon. Neon currently supports registering with GitHub, Google, or partner accounts.
+This is the account used to register with Neon. Neon currently supports registering with GitHub, Google, or partner accounts.
 
 ## API keys
 
-API keys are global and belong to the your Neon account. API keys are used with the [Neon API](../../reference/api-refernce) to create and manage a Neon projects or objects within a project. A Neon account can create unlimited API keys. For more information, see [API keys](../api-keys).
+API keys are global and belong to the your Neon account. API keys are used with the [Neon API](../../reference/api-refernce) to create and manage a Neon projects or objects within a Neon project. A Neon account can create unlimited API keys. For more information, see [API keys](../api-keys).
 
 ## Projects
 
-A project is the top-level object in the Neon object hierarchy. It is a container for all other objects, with the exception of API keys, which are global. Branches and endpoints belong to a project. A Neon project defines the region where project resources reside. A Neon user account can have multiple projects, but tier limits define the number of projects per Neon account. For more information, see [Projects](../projects).
+A project is the top-level object in the Neon object hierarchy. It is a container for all other objects, with the exception of API keys, which are global. Branches and endpoints belong to a project. A Neon project defines the region where project resources reside. A Neon account can have multiple projects, but tier limits define the number of projects per Neon account. For more information, see [Projects](../projects).
 
 ## Branches
 
@@ -55,8 +55,8 @@ An endpoint is the compute instance associated with a branch. A read-write endpo
 
 ## Users
 
-In Neon, users are PostgreSQL users. A user is required to create and access a database. A user belongs to a branch. There is no limit on the number of users you can create. The root branch of a Neon project is created with a user named for the Neon account that you registered with. For example, if you registered with a Google account for Casey Smith, Neon creates a user named Casey in the root branch. This user is the owner of the default `main` database in your project's root branch. For more information, see [Users](../users).
+In Neon, users are PostgreSQL users. A user is required to create and access a database. A user belongs to a branch. There is no limit on the number of users you can create. The root branch of a Neon project is created with a user named for the Neon account that you registered with. For example, if you registered with a Google account for "Casey Smith", Neon creates a user named "Casey" in the root branch. This user is the owner of the default `main` database in your project's root branch. For more information, see [Users](../users).
 
 ## Databases
 
-A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. A database belongs to a branch. The root branch of a Neon project is created with a default database named `main`. There is no limit on the number of databases you can create. For more information, see [Databases](../databases).
+As with any standalone instance of PostgreSQL, a database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In Neon, a database belongs to a branch. The root branch of a Neon project is created with a default database named `main`. There is no limit on the number of databases you can create. For more information, see [Databases](../databases).

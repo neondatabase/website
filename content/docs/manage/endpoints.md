@@ -21,7 +21,7 @@ To create an endpoint:
     1. Select an endpoint type, read-write or read-only.
     1. Select wether or not to enable [passwordless connect](../../reference/glossary/#passwordless-auth) for the endpoint.
     1. Select whether to enable autoscaling. This option is only available to paid tiers.
-    1. Specify the minimum and maximum number of CPU limits for the compute. This option is only available to paid tiers.
+    1. Specify the minimum and maximum number of CPU units for the compute. This option is only available to paid tiers.
 1. Click **Create endpoint**.
 
 ## View endpoints
@@ -34,7 +34,7 @@ Endpoint details include:
 
 - **Name**: The endpoint name.
 - **Region**: The regions in which the endpoint was created.
-- **Min/max compute units**: The minimum and maximum number of CPUs allocated to the compute unit.
+- **Min/max compute units**: The minimum and maximum number of vCPUs allocated to the compute unit.
 - **Type**: The type of endpoint. Neon supports read-write and read-only endpoints.
 - **Branch**: The branch that the endpoint is associated with.
 - **State**: The endpoint state (`Active`, `Idle`, or `Stopped`).
@@ -49,7 +49,7 @@ You can edit an endpoint to modify the following characteristics:
 - The endpoint type (read-write or read-only)
 - Whether to enable or disable [passwordless connect](../../reference/glossary/#passwordless-auth)
 - Whether to enable or disable autoscaling (only available to paid tiers)
-- The minimum and maximum number of CPU units (only available to paid tiers)
+- The minimum and maximum number of vCPUs (only available to paid tiers)
 
 To edit an endpoint:
 
@@ -65,4 +65,4 @@ To delete an endpoint:
 
 1. In the Neon Console, select **Endpoints**.
 1. Fnd the endpoint you want to delete, click the &#8942; menu, and select **Delete**.
-1. On the **Delete the endpoint** dialog, click **Delete**.
+1. On the confirmation dialog, click **Delete**.

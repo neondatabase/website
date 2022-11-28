@@ -12,7 +12,7 @@ A Neon project is created with the following resources by default:
 - A single read-write endpoint. An endpoint is the compute instance associated with a branch. For more information, see [Endpoints](../branches).
 - A default database, called `main`, which resides in the project's root branch.
 - Two PostgreSQL users:
-  - A user that takes its name from your Neon account (the Google, GitHub, or partner account that you signed up with).
+  - A user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
   - A `web_access` user, which is used for passwordless authentication and by the Neon SQL Editor. The `web_access` user cannot be modified or deleted.
 
 ## Create a project
@@ -23,10 +23,10 @@ To create a Neon project:
 2. If you are creating your very first project, click **Create the first project**. Otherwise, click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 
-Upon creating a project, you are presented with a dialog that provides your password for the project, which is required to connect to databases in the project from a client or application. Store your password in a safe location.
+Upon creating a project, you are presented with a dialog that provides your password for the project, which is required to connect to databases in the project from a client or application. Store your password in a safe location. Your password is also temporarily available in the **Connection Details** widget on the **Neon Dashboard**. 
 
 <Admonition type="important">
-After navigating away from the Neon Console or refreshing the browser page, the password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Users](../users).
+After closing the password dialog, navigating away from the Neon Console, or refreshing the browser page, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Users](../users).
 </Admonition>
 
 ## Delete a project
@@ -39,7 +39,7 @@ To delete a project:
 2. Select the project that you want to delete.
 3. Select **Settings** > **General**.
 4. Click **Delete project.**
-5. On the **Do you want to delete this project?** dialog, click **Delete**.
+5. On the confirmation dialog, click **Delete**.
 
 ## Check the project data size
 

@@ -7,16 +7,16 @@ redirectFrom:
 
 Any action performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference). Using the Neon API requires an API key. This topic describes how to generate, revoke, and use API keys.
 
-API keys are global and belong to the Neon account. They can be used with any project that belongs to the Neon account. A Neon account can create unlimited API keys.
+API keys are global and belong to your Neon account. They can be used with any project that belongs to your Neon account. A Neon account can create unlimited API keys.
 
 ### Generate an API key
 
-An API key is a secure, randomly generated, 64-bit key that you must provide when calling Neon API methods. An API key remains valid until it is revoked. 
+An API key is a secure, randomly generated, 64-bit key that you must provide when calling Neon API methods. An API key remains valid until it is revoked.
 
 To generate an API key:
 
 1. Log in to [Neon Console](https://console.neon.tech).
-2. Click your account in the upper right corner of the Neon Console and click **Account**.
+2. Click your account in the upper right corner of the Neon Console, and click **Account**.
 3. Select **Developer Settings** and click **Generate new API Key**.
 4. Enter a name for the API key.
 5. Click **Create** and copy the generated key.
@@ -25,7 +25,7 @@ Store your key in a safe location immediately after generating it. You will not 
 
 ### Revoke an API key
 
-An API key that is no longer needed can be revoked. This action cannot be reverted.
+An API key that is no longer needed can be revoked. This action cannot be reversed.
 
 To revoke an API key:
 

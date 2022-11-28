@@ -38,4 +38,4 @@ To delete a database:
 2. Select **Settings** > **Databases**.
 3. Select a branch to view the databases in the branch.
 4. For the database you want to delete, click the delete icon.
-5. In the **Do you want to delete this database** dialog, click **Delete**.
+5. In the confirmation dialog, click **Delete**.

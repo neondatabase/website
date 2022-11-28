@@ -9,7 +9,7 @@ redirectFrom:
 Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data you can store in each branch.
 
 A child branch is a copy-on-write clone the data in the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
-For more information about branches and how to use them in your development workflows, see [Branching](../../conceptual-guides/branching).
+For more information about branches and how you can use them in your development workflows, see [Branching](../../conceptual-guides/branching).
 
 <Admonition type="note">
 Neon Branching capabilities are not yet publicly available. If you would like to try this feature, reach out to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching for your account.
@@ -79,7 +79,7 @@ If you want to connect from an application, the **Connection Details** widget on
 
 ## Delete a branch
 
-Deleting a branch is a permanent action. Deleting a branch also deletes databases and users that belong to the branch as well as the branch endpoint, which is the compute instance associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
+Deleting a branch is a permanent action. Deleting a branch also deletes the databases and users that belong to the branch as well as the branch endpoint, which is the compute instance associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
 
 To delete a branch:
 
@@ -87,4 +87,4 @@ To delete a branch:
 2. Select **Branches**.
 3. Select a branch from the table.
 3. Click **Delete**.
-4. On the **Delete the branch?** dialog, click **Delete**.
+4. On the confirmation dialog, click **Delete**.

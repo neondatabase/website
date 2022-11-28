@@ -6,7 +6,7 @@ isDraft: false
 
 In Neon, users are PostgreSQL users. Each Neon project is created with two users by default:
 
-- A user that takes its name from your Neon account (the Google, GitHub, or partner account that you signed up with). This user owns the default database (`main`) that is created in a project's root branch.
+- A user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This user owns the default database (`main`) that is created in a project's root branch.
 - A `web_access` user, which is used for [passwordless authentication](../../reference/glossary#passwordless-auth) and by the Neon SQL Editor. The `web_access` user cannot be modified or deleted.
 
 Additional users can be created in a project's root branch or child branches. There is no limit to the number fo users you can create.
@@ -23,14 +23,14 @@ To create a user:
 2. Select a project.
 3. Select **Settings** > **Users**.
 4. Select **New User**.
-5. In the **USER CREATION** dialog, select the branch where you want to create the user and specify a user name.
+5. In the user creation dialog, select the branch where you want to create the user and specify a user name.
 6. Click **Create**.
 
 ## Delete a user
 
 You cannot delete a user that owns a database.
 
-To delete a database user:
+To delete a user:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
@@ -38,7 +38,7 @@ To delete a database user:
 4. Click the delete icon for the user you want to delete.
 5. On the delete user dialog, click **Delete**.
 
-## Reset a PostgreSQL user's password
+## Reset a user password
 
 To reset a user's password:
 
@@ -46,5 +46,5 @@ To reset a user's password:
 2. Select a project.
 3. Select **Settings** > **Users**.
 4. Select **Reset password**.
-5. On the **Are you sure you want to reset password** dialog, click **Sure, reset**.
+5. On the confirmation dialog, click **Sure, reset**.
 6. A reset password dialog with your new password is displayed. Copy your password and save it to a secure location. After you close the reset password dialog, you will no longer be able to access the newly created password.
