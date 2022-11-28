@@ -29,7 +29,7 @@
 - title: Connect
   items:
     - title: Connect from any application
-      slug: connect/passwordless-connect
+      slug: connect/connect-from-any-app
     - title: Passwordless connect
       slug: connect/passwordless-connect
     - title: Connect with psql

@@ -7,84 +7,37 @@ redirectFrom:
   - /docs/get-started-with-neon/query-with-psql-editor
 ---
 
-The following instructions require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
+The following instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for PostgreSQL. It provides an interactive session for sending commands to PostgreSQL and running ad-hoc queries. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
 
 <Admonition type="note">
-A Neon Compute runs PostgreSQL, which means that any PostgreSQL application or standard utility such as `psql` is compatible with Neon. You can also use PostgreSQL client libraries and drivers to connect.
+A Neon compute instance runs PostgreSQL, which means that any PostgreSQL application or standard utility such as `psql` is compatible with Neon. You can also use PostgreSQL client libraries and drivers to connect.
+
+Neon also provide a passwordless connect feature that uses `psql`. For more information, see [Passwordless connect](../passwordless-connect).
 </Admonition>
 
-The following `psql` connection methods are described:
+The easiest way to connect to a Neon using `psql` is with a connection string.
 
-- [Connect with Neon's psql passwordless auth](#connect-with-neons-psql-passwordless-auth)
-- [Connect with an exported password](#connect-with-an-exported-password)
-- [Connect with a password saved to a file](#connect-with-a-password-saved-to-a-file)
+You can obtain a connection string from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
-After establishing a connection, you can try running some queries. For instructions, see [Running queries](#running-queries).
+![Connection details widget](./images/connection_details.png)
 
-## Connect with an exported password
+From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**, but be sure to add your password, as shown:
 
-<Admonition type="warning">
-Some operating systems allow non-root users to view process environment variables when using the `ps` command. For security reasons, consider using a password file in such cases.
-</Admonition>
+```bash
+psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/main
+```
 
-To connect with an exported password:
+## Where do I obtain a password?
 
-1. In your terminal, export the database user's password to the `PGPASSWORD` environment variable:
+The connection string on the Neon **Dashboard** only includes a password immediately after you create a project. The password no longer appears in the connection string once you navigate away from the Neon Console or refresh the browser. If you have misplaced your password, refer to [Users](tbd) for password reset instructions.
 
-   ```bash
-   export PGPASSWORD=<password>
-   ```
+## What port does Neon use?
 
-   For example:
+Neon uses the default PostgreSQL port, `5432`. If you need to specify it in your connection string, you can do so as follows:
 
-   ```bash
-   export PGPASSWORD=En5v0dJoVpRL
-   ```
-
-   The database user's password was provided to you when you created the project.
-
-2. Connect with the following command:
-
-   ```bash
-   psql postgres://<user>:$PGPASSWORD@<endpoint_hostname>:<port>/<dbname>
-   ```
-
-   where:
-
-   - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
-   - `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon Dashboard, under **Connection Settings**.
-   - `<port>` is the PostgreSQL port. Neon uses port `5432`.
-   - `<dbname>` is the database you are connecting to. The default Neon database is `main`.
-
-## Connect with a password saved to a file
-
-To connect with a password saved to a `.pgpass` password file:
-
-1. In your terminal, run the following commands to create and configure the `.pgpass` file:
-
-   ```bash
-   touch ~/.pgpass && \
-   chmod 0600 ~/.pgpass && \
-   echo -e "<endpoint_hostname>:<port>:<dbname>:<user>:<password>\n$(cat ~/.pgpass)" > ~/.pgpass
-   ```
-
-  <Admonition type="tip">
-  If you already have a `.pgpass` file, you only need to run the `echo` command.
-  </Admonition>
-
-2. Connect with the following command:
-
-   ```bash
-   psql -h <endpoint_id>.us-east-2.aws.neon.tech -U <user> main
-   ```
-
-   where:
-
-   - `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
-   - `<port>` is the PostgreSQL port. Neon uses port `5432`.
-   - `<dbname>` is the database you are connecting to. The default Neon database is `main`.
-   - `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
-   - `<password>` is the database user's password, which is provided to you when you create a Neon project.
+```bash
+psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main
+```
   
 ## Running queries
 

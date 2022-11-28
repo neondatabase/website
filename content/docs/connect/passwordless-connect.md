@@ -7,10 +7,6 @@ Neon's `psql` passwordless connect feature helps you quickly authenticate a conn
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
 
-<Admonition type="note">
-A Neon Compute runs PostgreSQL, which means that any PostgreSQL application or standard utility such as `psql` is compatible with Neon. You can also use PostgreSQL client libraries and drivers to connect.
-</Admonition>
-
 To connect using Neon's `psql` passwordless connect feature:
 
 1. In your terminal, run the following command:
