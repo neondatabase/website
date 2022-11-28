@@ -83,28 +83,28 @@ const Workflows = () => {
   }, [isHeadingInView, routeInputs]);
 
   return (
-    <section className="workflows safe-paddings bg-black pt-20 text-white" ref={wrapperRef}>
+    <section className="workflows safe-paddings bg-black pt-20 text-white lg:pt-0" ref={wrapperRef}>
       <Container
         className="grid-gap-x grid grid-cols-12 border-y border-dashed border-gray-2"
         size="md"
         ref={containerRef}
       >
-        <div className="relative col-start-2 col-end-5 flex justify-between 3xl:col-start-1">
+        <div className="relative col-start-2 col-end-5 flex justify-between 3xl:col-start-1 lg:hidden">
           {isContainerInView && (
-            <div className="absolute left-0 -top-16 h-[calc(100%+64px)] w-[609px]">
+            <div className="absolute left-0 -top-20 h-[calc(100%+80px)] w-[609px]">
               <RiveComponent width={609} height={3561} />
             </div>
           )}
         </div>
-        <div className="relative z-10 col-start-6 col-end-12 max-w-[698px] pt-32 pb-[278px]">
+        <div className="relative z-10 col-start-6 col-end-12 max-w-[698px] pt-32 pb-[278px] 3xl:col-start-7 3xl:col-end-13 lg:col-span-full lg:max-w-none lg:pt-28 lg:pb-0 md:pt-20">
           <Heading className="t-5xl font-bold leading-tight" tag="h2" ref={headingRef}>
             Optimize your <span className="text-primary-1">development workflows</span> with
             branching
           </Heading>
-          <div className="mt-[220px] space-y-[440px]">
+          <div className="mt-[220px] space-y-[440px] lg:mt-4 lg:space-y-0 lg:divide-y lg:divide-dashed lg:divide-gray-2">
             {items.map(({ title, description, linkText, linkUrl }, index) => (
               <InView
-                className="mt-20 flex max-w-[600px] flex-col items-start"
+                className="mt-20 flex max-w-[600px] flex-col items-start lg:mt-0 lg:max-w-none lg:py-12 md:py-8"
                 as="div"
                 key={index}
                 delay={index * 100}
@@ -116,12 +116,12 @@ const Workflows = () => {
                 }}
               >
                 <Heading
-                  className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl"
+                  className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-3xl"
                   tag="h3"
                 >
                   {title}
                 </Heading>
-                <p className="mt-3.5 text-[26px] leading-tight">{description}</p>
+                <p className="mt-3.5 text-[26px] leading-tight lg:text-xl">{description}</p>
                 {linkText && linkUrl && (
                   <Link
                     className="mt-5 text-lg font-semibold before:-bottom-1 before:h-[3px]"

@@ -13,22 +13,22 @@ const items = [
 ];
 
 const Recovery = () => (
-  <section className="recovery safe-paddings bg-black pt-[200px] text-white">
+  <section className="recovery safe-paddings bg-black pt-[200px] text-white 2xl:pt-36 xl:pt-32 lg:pt-28 md:pt-20">
     <Container className="" size="sm">
       <Heading className="t-5xl font-bold" tag="h2">
         Debugging and Disaster Recovery
       </Heading>
-      <div className="grid-gap-x mt-10 grid grid-cols-10 items-center">
-        <div className="col-span-4 max-w-[484px] divide-y divide-dashed divide-gray-2">
+      <div className="grid-gap-x mt-10 grid grid-cols-10 items-center md:mt-6">
+        <ul className="col-span-4 max-w-[484px] divide-y divide-dashed divide-gray-2 md:col-span-full md:max-w-none">
           {items.map((item, index) => (
-            <div className="t-xl flex space-x-4 py-5 leading-snug" key={index}>
+            <li className="t-xl flex space-x-4 py-5 leading-snug" key={index}>
               <span className="font-semibold text-primary-1">{index + 1}.</span>
-              <p className="">{item}</p>
-            </div>
+              <p>{item}</p>
+            </li>
           ))}
-        </div>
+        </ul>
         <img
-          className="col-span-6"
+          className="col-span-6 md:col-span-full md:mt-10"
           src={screenImage}
           width={710}
           height={420}

@@ -28,26 +28,26 @@ const items = [
 ];
 
 const Features = () => (
-  <section className="features safe-paddings bg-black pt-[200px] text-white">
+  <section className="features safe-paddings bg-black pt-[200px] text-white 2xl:pt-36 xl:pt-32 lg:pt-28 md:pt-20">
     <Container size="md">
-      <Heading className="t-5xl text-center font-bold" tag="h2">
+      <Heading className="t-5xl text-center font-bold leading-snug" tag="h2">
         Run simulations and answer{' '}
         <span>
           <span className="sr-only">What if</span>
-          <WhatIfSvg className="inline h-auto w-[228px] pb-2" />
+          <WhatIfSvg className="inline h-auto w-[228px] pb-2 lg:w-36 lg:pb-0" />
         </span>{' '}
         questions
       </Heading>
-      <div className="grid-gap mt-16 grid grid-cols-12">
+      <div className="grid-gap mt-16 grid grid-cols-12 lg:mt-12 md:mt-10">
         {items.map(({ className, icon: Icon, text }, index) => (
           <div
             className={clsx(
-              'col-span-4 flex flex-col items-center rounded-[18px] px-8 pt-[72px] pb-[74px]',
+              'col-span-4 flex flex-col items-center rounded-[18px] px-8 pt-[72px] pb-[74px] xl:py-14 md:col-start-2 md:col-end-12 md:py-12 sm:col-span-full',
               className
             )}
             key={index}
           >
-            <Icon className="h-20 w-20" />
+            <Icon className="h-20 w-20 md:h-16 md:w-16" />
             <Heading className="t-3xl mt-5 text-center font-semibold" theme="black" tag="h3" asHTML>
               {text}
             </Heading>
