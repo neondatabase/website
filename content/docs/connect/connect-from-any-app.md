@@ -28,7 +28,7 @@ Connection string:
 ```text
 postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/main
              ^                       ^                              ^
-             |- <user>               |- <endpoint_hostname>         |- <database> 
+             |- <user>               |- <endpoint_hostname>         |- <database>
 ```
 
 `.env` file:
