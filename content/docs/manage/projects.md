@@ -40,31 +40,3 @@ To delete a project:
 3. Select **Settings** > **General**.
 4. Click **Delete project.**
 5. On the confirmation dialog, click **Delete**.
-
-## Check the data size
-
-Neon stores data in its own internal format. Tier limits define the amount of data you can store in a project. 
-
-The logical size is the sum of all database sizes in the project. To check the logical size of the databases in your Neon project, run the following query:
-
-```sql
-SELECT pg_size_pretty(sum(pg_database_size(datname)))
-FROM pg_database;
-```
-
-{
-/* To check the logical size of your Neon project, run the following query:
-
-```sql
-SELECT pg_size_pretty(neon.pg_cluster_size());
-```
-
-*/
-}
-
-When the data size limit is reached, the following PostgreSQL error message is reported:
-
-```text
-could not extend file because cluster size limit (10240 MB)
-has been exceeded
-```

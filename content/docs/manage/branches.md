@@ -88,3 +88,11 @@ To delete a branch:
 3. Select a branch from the table.
 3. Click **Delete**.
 4. On the confirmation dialog, click **Delete**.
+
+## Check the data size
+
+Tier limits define the amount of data you can store in each branch. Neon's free tier permits 3GB per branch. 
+
+You can check the data size for a branch in the **Storage** widget on the Neon **Dashboard** or by viewing the branch details on the **Branches** page. The `DATABASE SIZE` value is the amount of data stored in the branch.
+
+Neon stores data in its own internal format.
