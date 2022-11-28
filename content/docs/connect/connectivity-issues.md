@@ -5,8 +5,6 @@ redirectFrom:
   - /docs/how-to-guides/connectivity-issues
 ---
 
-## Overview
-
 In most cases, copying a connection string from the Neon **Dashboard** and using it in your project should work as is. However, with older clients and some native PostgreSQL clients, you may receive the following error:
 
 ```txt

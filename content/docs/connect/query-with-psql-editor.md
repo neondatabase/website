@@ -15,7 +15,7 @@ A Neon compute instance runs PostgreSQL, which means that any PostgreSQL applica
 Neon also provide a passwordless connect feature that uses `psql`. For more information, see [Passwordless connect](../passwordless-connect).
 </Admonition>
 
-The easiest way to connect to a Neon using `psql` is with a connection string.
+The easiest way to connect to Neon using `psql` is with a connection string.
 
 You can obtain a connection string from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
@@ -33,7 +33,7 @@ The connection string on the Neon **Dashboard** only includes a password immedia
 
 ## What port does Neon use?
 
-Neon uses the default PostgreSQL port, `5432`. If you need to specify it in your connection string, you can do so as follows:
+Neon uses the default PostgreSQL port, `5432`. If you need to specify the port in your connection string, you can do so as follows:
 
 ```bash
 psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main

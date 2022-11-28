@@ -17,7 +17,7 @@ Project
                             |---- database (mydb)  
 ```
 
-You can obtain the connection details for a database from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+You can obtain the connection details that you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
 ![Connection details widget](./images/connection_details.png)
 
@@ -54,7 +54,7 @@ DATABASE_URL="postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws
 Command-line:
 
 ```bash
-psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main
+psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/main
 ```
 
 For more information about connecting using `psql`, see [Connect with psql](../query-with-psql-editor).
@@ -69,7 +69,7 @@ Neon uses the default PostgreSQL port, `5432`.
 
 ## Connection examples
 
-The **Connection Details** widget on the **Neon Dashboard** provides connection examples for different languages and frameworks, constructed for the branch, database, and user that you select. Click **connection examples**  in the **Connection Details** widget to view or copy them.
+The **Connection Details** widget on the **Neon Dashboard** also provides connection examples for different languages and frameworks, constructed for the branch, database, and user that you select. Click **connection examples**  in the **Connection Details** widget to view or copy them.
 
 ![Connection details widget](./images/code_connection_examples.png)
 
