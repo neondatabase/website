@@ -89,14 +89,14 @@ const Workflows = () => {
         size="md"
         ref={containerRef}
       >
-        <div className="relative col-start-2 col-end-5 flex justify-between 3xl:col-start-1 lg:hidden">
+        <div className="relative col-start-2 col-end-5 flex justify-between xl:col-start-1 lg:hidden">
           {isContainerInView && (
             <div className="absolute left-0 -top-20 h-[calc(100%+80px)] w-[609px]">
               <RiveComponent width={609} height={3561} />
             </div>
           )}
         </div>
-        <div className="relative z-10 col-start-6 col-end-12 max-w-[698px] pt-32 pb-[278px] 3xl:col-start-7 3xl:col-end-13 lg:col-span-full lg:max-w-none lg:pt-28 lg:pb-0 md:pt-20">
+        <div className="relative z-10 col-start-6 col-end-12 max-w-[698px] pt-32 pb-[278px] 2xl:col-start-7 2xl:col-end-13 lg:col-span-full lg:max-w-none lg:pt-28 lg:pb-0 md:pt-20">
           <Heading className="t-5xl font-bold leading-tight" tag="h2" ref={headingRef}>
             Optimize your <span className="text-primary-1">development workflows</span> with
             branching
