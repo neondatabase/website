@@ -31,7 +31,7 @@
     - title: Connect from any application
       slug: connect/passwordless-connect
     - title: Passwordless connect
-      slug: connect/query-with-psql-editor
+      slug: connect/passwordless-connect
     - title: Connect with psql
       slug: connect/query-with-psql-editor
     - title: Connect from old clients
