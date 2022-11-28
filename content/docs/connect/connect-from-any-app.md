@@ -21,15 +21,20 @@ You can obtain the connection details for a database from the **Connection Detai
 
 ![Connection details widget](./images/connection_details.png)
 
-The details from the connection string or the connection string itself can be used configure a connection. For example, connection details might be placed in an `.env` file, assigned to a variable, or passed on the command-line. Given the following connection string, an `.env` file, a variable, or a client command-line string can be configured as shown.
-
-Connection string:
+A Neon connection string includes the user, the endpoint hostname, and database name.
 
 ```text
 postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/main
              ^                       ^                              ^
              |- <user>               |- <endpoint_hostname>         |- <database>
 ```
+
+<Admonition type="note">
+When an application or client requires a PostgreSQL host, it is the endpoint hostname that you should provide. An endpoint hostname, like the one shown above, is comprised of an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and the Neon domain (`neon.tech`).
+</Admonition>
+
+
+You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign them to a variable, or pass them on the command-line, as shown in the following examples:
 
 `.env` file:
 
