@@ -30,7 +30,7 @@ postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/main
 ```
 
 <Admonition type="note">
-When an application or client requires a PostgreSQL host, it is the endpoint hostname that you should provide. An endpoint hostname, like the one shown above, is comprised of an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and the Neon domain (`neon.tech`).
+When an application or client requires a PostgreSQL host, it is the endpoint hostname that you should provide. An endpoint hostname, such as the one shown above, is comprised of an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and the Neon domain (`neon.tech`).
 </Admonition>
 
 You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file,  assign the connection string to a variable, or pass the connection string on the command-line, as shown:
@@ -57,7 +57,9 @@ Command-line:
 psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/main
 ```
 
-For more information about connecting using `psql`, see [Connect with psql](../query-with-psql-editor).
+<Admonition type="note">
+For information about connecting with `psql`, see [Connect with psql](../query-with-psql-editor).
+</Admonition>
 
 ## Where do I obtain a password?
 
@@ -69,7 +71,7 @@ Neon uses the default PostgreSQL port, `5432`.
 
 ## Connection examples
 
-The **Connection Details** widget on the **Neon Dashboard** also provides connection examples for different languages and frameworks, constructed for the branch, database, and user that you select. Click **connection examples**  in the **Connection Details** widget to view or copy them.
+The **Connection Details** widget on the **Neon Dashboard** also provides connection examples for different languages and frameworks, constructed for the branch, database, and user that you select. Click **connection examples**  in the **Connection Details** widget to view or copy the examples.
 
 ![Connection details widget](./images/code_connection_examples.png)
 
