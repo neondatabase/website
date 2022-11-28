@@ -21,53 +21,6 @@ The following `psql` connection methods are described:
 
 After establishing a connection, you can try running some queries. For instructions, see [Running queries](#running-queries).
 
-## Connect with Neon's psql passwordless auth
-
-Neon's `psql` passwordless auth feature helps you quickly authenticate a connection to a Neon project.
-
-1. In your terminal, run the following command:
-
-   ```bash
-   psql -h pg.neon.tech
-   ```
-
-   A response similar to the following is displayed:
-
-   ```bash
-   NOTICE:  Welcome to Neon!
-   Authenticate by visiting:
-       https://console.neon.tech/psql_session/6d32af5ef8215b62
-   ```
-
-2. In your browser, navigate to the provided link where you are asked to select an existing project or create a new project.
-
-   - Selecting an existing project authenticates your connection to the selected project.
-   - Selecting **Create new project** directs you to a **Project creation** page where you create a new project to connect to.
-
-   After making your selection, you are directed to check the terminal where information similar to the following is displayed:
-
-   ```bash
-   NOTICE:  Connecting to database.
-   psql (15.0 (Ubuntu 15.0-1.pgdg22.04+1))
-   Type "help" for help.
-
-   casey=>
-   ```
-
-   **_Note_**: When using _`psql` passwordless auth_ to connect, the `psql` prompt shows your local terminal user name. However, you are logged in to the default database as the Neon `web_access` user, which you can verify by running this query:
-
-   ```sql
-   SELECT current_user;
-    current_user
-   --------------
-    web_access
-
-   SELECT current_database();
-    current_database
-   ------------------
-    main
-   ```
-
 ## Connect with an exported password
 
 <Admonition type="warning">

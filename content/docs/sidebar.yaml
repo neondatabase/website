@@ -29,7 +29,9 @@
 - title: Connect
   items:
     - title: Connect from any application
-      slug: connect/connect-from-any-app
+      slug: connect/passwordless-connect
+    - title: Passwordless connect
+      slug: connect/query-with-psql-editor
     - title: Connect with psql
       slug: connect/query-with-psql-editor
     - title: Connect from old clients
