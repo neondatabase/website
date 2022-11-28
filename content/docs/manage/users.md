@@ -4,10 +4,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-In Neon, users are PostgreSQL users. Each Neon project is created with two users by default:
-
-- A user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This user owns the default database (`main`) that is created in a project's root branch.
-- A `web_access` user, which is used for [passwordless authentication](../../reference/glossary#passwordless-auth) and by the Neon SQL Editor. The `web_access` user cannot be modified or deleted.
+In Neon, users are PostgreSQL users. Each Neon project is created with a default user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This user owns the default database (`main`) that is created in a project's root branch.
 
 Additional users can be created in a project's root branch or child branches. There is no limit to the number fo users you can create.
 
