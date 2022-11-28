@@ -33,8 +33,7 @@ postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/main
 When an application or client requires a PostgreSQL host, it is the endpoint hostname that you should provide. An endpoint hostname, like the one shown above, is comprised of an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and the Neon domain (`neon.tech`).
 </Admonition>
 
-
-You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign them to a variable, or pass them on the command-line, as shown in the following examples:
+You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file,  assign the connection string to a variable, or pass the connection string on the command-line, as shown:
 
 `.env` file:
 
@@ -74,4 +73,4 @@ The **Connection Details** widget on the **Neon Dashboard** provides connection 
 
 ![Connection details widget](./images/code_connection_examples.png)
 
-Connection examples for various languages and frameworks are also provided in our *Guides* section.
+Connection examples for various languages and frameworks are also provided in our *Guides* documentation.
