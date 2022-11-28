@@ -38,7 +38,7 @@ To delete a user:
 4. Click the delete icon for the user you want to delete.
 5. On the delete user dialog, click **Delete**.
 
-## Reset a user password
+## Reset a password
 
 To reset a user's password:
 

@@ -41,7 +41,7 @@ To delete a project:
 4. Click **Delete project.**
 5. On the confirmation dialog, click **Delete**.
 
-## Check the project data size
+## Check the data size
 
 Neon stores data in its own internal format. Tier limits define the amount of data you can store in a project. 
 

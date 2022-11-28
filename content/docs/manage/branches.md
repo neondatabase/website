@@ -53,7 +53,7 @@ Each branch is created with an endpoint, which is the compute instance associate
 
 The **Branches** widget on the project **Dashboard** also lists the branches in a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
 
-## Connect to a branch database
+## Connect to a branch
 
 Connecting to a database in a branch requires connecting via an endpoint, which is the compute instance associated with a branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
