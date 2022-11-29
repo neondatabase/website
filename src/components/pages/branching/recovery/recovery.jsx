@@ -6,17 +6,17 @@ import Heading from 'components/shared/heading';
 import screenImage from './images/screen.svg';
 
 const items = [
-  'Create a branch from a point in time in the past to reproduce an issue.',
-  'Instantly restore your production instance from a point in time in the past via branch creation.',
-  'Find the latest point before the data was removed.',
-  'Use branches as backups and inspect their data without hassle.',
+  'Create a branch from a past point in time to reproduce an issue.',
+  'Instantly restore a production database from a past point in time.',
+  'Recover lost data with a branch created from a past point in time.',
+  'Instantly create backup branches that you can connect to and inspect at any time.',
 ];
 
 const Recovery = () => (
   <section className="recovery safe-paddings bg-black pt-[200px] text-white 2xl:pt-36 xl:pt-32 lg:pt-28 md:pt-20">
     <Container size="sm">
       <Heading className="t-5xl font-bold" tag="h2">
-        Debugging and Disaster Recovery
+        Data recovery and debugging
       </Heading>
       <div className="grid-gap-x mt-10 grid grid-cols-10 items-center lg:mt-6">
         <ul className="col-span-4 max-w-[484px] divide-y divide-dashed divide-gray-2 lg:col-span-full lg:max-w-none">

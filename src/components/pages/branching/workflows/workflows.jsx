@@ -8,12 +8,12 @@ import Link from 'components/shared/link';
 
 const items = [
   {
-    title: 'Environment',
+    title: 'Integrate',
     description:
-      'Integrate your developer environment by branching from your production and staging databases.',
+      'Integrate database branching into your developer workflows by branching from staging and production databases.',
   },
   {
-    title: 'Developer',
+    title: 'Develop',
     description: 'Give each developer their own branch.',
   },
   {
@@ -30,9 +30,9 @@ const items = [
     linkUrl: '/', // TODO: add link
   },
   {
-    title: 'Tests',
+    title: 'Test',
     description:
-      'Confidently test your migrations on real data. Forget about looking for the right database dumps, downloading and restoring them.',
+      'Confidently test migrations with real data without the hassle of creating and restoring database dumps. Create and hydrate test databases instantly.',
     linkText: 'See examples',
     linkUrl: '/', // TODO: add link
   },
@@ -95,12 +95,12 @@ const Workflows = () => {
             </div>
           )}
         </div>
-        <div className="relative z-10 col-start-6 col-end-12 max-w-[698px] pt-32 pb-[278px] 2xl:col-start-7 2xl:col-end-13 lg:col-span-full lg:max-w-none lg:pt-28 lg:pb-0 md:pt-20">
+        <div className="relative z-10 col-start-6 col-end-12 max-w-[698px] pt-32 pb-[253px] 2xl:col-start-7 2xl:col-end-13 lg:col-span-full lg:max-w-none lg:pt-28 lg:pb-0 md:pt-20">
           <Heading className="t-5xl font-bold leading-tight" tag="h2">
             Optimize your <span className="text-primary-1">development workflows</span> with
             branching
           </Heading>
-          <div className="mt-[220px] space-y-[440px] lg:mt-4 lg:space-y-0 lg:divide-y lg:divide-dashed lg:divide-gray-2">
+          <div className="mt-[220px] space-y-[431px] lg:mt-4 lg:space-y-0 lg:divide-y lg:divide-dashed lg:divide-gray-2">
             {items.map(({ title, description, linkText, linkUrl }, index) => (
               <InView
                 className="mt-20 flex max-w-[600px] flex-col items-start lg:mt-0 lg:max-w-none lg:py-12 md:py-8"

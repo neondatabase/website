@@ -11,7 +11,7 @@ const CTA = () => (
       className="flex items-center justify-between space-x-10 lg:flex-col lg:justify-center lg:space-y-16 lg:space-x-0 md:space-y-10"
       size="sm"
     >
-      <div className="max-w-[661px] lg:text-center">
+      <div className="max-w-[661px] pb-16 xl:pb-0 lg:text-center">
         <Heading
           className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl"
           tag="h2"

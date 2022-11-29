@@ -38,7 +38,7 @@ const Features = () => (
         </span>{' '}
         questions
       </Heading>
-      <div className="grid-gap mt-16 grid grid-cols-12 lg:mt-12 md:mt-10">
+      <div className="grid-gap mt-12 grid grid-cols-12 lg:mt-12 md:mt-10">
         {items.map(({ className, icon: Icon, text }, index) => (
           <div
             className={clsx(
@@ -47,7 +47,7 @@ const Features = () => (
             )}
             key={index}
           >
-            <Icon className="h-20 w-20 md:h-16 md:w-16" />
+            <Icon className="h-16 w-16" />
             <Heading className="t-3xl mt-5 text-center font-semibold" theme="black" tag="h3" asHTML>
               {text}
             </Heading>
