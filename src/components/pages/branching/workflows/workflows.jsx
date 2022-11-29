@@ -41,7 +41,7 @@ const items = [
 const STATE_MACHINE_NAME = ['S0', 'S1', 'S2', 'S3', 'S4', 'S5'];
 
 const Workflows = () => {
-  const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
+  const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true });
   const [containerRef, isContainerInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
 
   const { RiveComponent, rive } = useRive({
@@ -66,18 +66,20 @@ const Workflows = () => {
   const initPlay = useRef(false);
 
   useEffect(() => {
-    if (isWrapperInView && rive) {
+    if (rive) {
       if (currentIndex > lastPlayedStateIndex && !initPlay.current) {
-        const statesToPlay = STATE_MACHINE_NAME.slice(lastPlayedStateIndex, currentIndex);
+        const statesToPlay = STATE_MACHINE_NAME.slice(lastPlayedStateIndex, currentIndex + 1);
         statesToPlay.forEach((state) => {
           rive.play(state);
         });
         setLastPlayedIndex(currentIndex);
       }
       initPlay.current = true;
-      rive.play(STATE_MACHINE_NAME[currentIndex]);
+      if (currentIndex) {
+        rive.play(STATE_MACHINE_NAME[currentIndex]);
+      }
     }
-  }, [isWrapperInView, rive, currentIndex, lastPlayedStateIndex]);
+  }, [rive, currentIndex, lastPlayedStateIndex]);
 
   return (
     <section className="workflows safe-paddings bg-black pt-20 text-white lg:pt-0" ref={wrapperRef}>
