@@ -1,5 +1,8 @@
 ---
 title: Compute Lifecycle
+enableTableOfContents: true
+redirectFrom:
+  - /docs/conceptual-guides/compute-lifecycle
 ---
 
 A compute node in Neon is a stateless PostgresSQL process due to the separation of storage and compute. It has two main states: Active and Idle.

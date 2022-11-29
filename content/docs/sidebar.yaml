@@ -1,19 +1,19 @@
 - title: Introduction
   items:
     - title: What is Neon?
-      slug: cloud/about
+      slug: introduction/about
     - title: Neon architecture
-      slug: conceptual-guides/architecture-overview
+      slug: introduction/architecture-overview
     - title: Compute lifecycle
-      slug: conceptual-guides/compute-lifecycle
+      slug: introduction/compute-lifecycle
     - title: Branching
-      slug: conceptual-guides/branching
+      slug: introduction/branching
     - title: Neon roadmap
-      slug: reference/roadmap
+      slug: introduction/roadmap
     - title: Technical Preview Free Tier
-      slug: reference/technical-preview-free-tier
+      slug: introduction/technical-preview-free-tier
     - title: Regions
-      slug: conceptual-guides/regions
+      slug: introduction/regions
 - title: Get started
   items:
     - title: Signing up
