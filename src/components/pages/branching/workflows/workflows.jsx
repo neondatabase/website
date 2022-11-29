@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { InView, useInView } from 'react-intersection-observer';
-import { useRive, useStateMachineInput, Layout, Fit, Alignment } from 'rive-react';
+import { useRive, Layout, Fit, Alignment } from 'rive-react';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
@@ -38,15 +38,12 @@ const items = [
   },
 ];
 
-const STATE_MACHINE_NAME = 'State Machine';
+const STATE_MACHINE_NAME = ['S0', 'S1', 'S2', 'S3', 'S4', 'S5'];
 
 const Workflows = () => {
   const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
   const [containerRef, isContainerInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
-  const [headingRef, isHeadingInView] = useInView({
-    triggerOnce: true,
-    rootMargin: '100px',
-  });
+
   const { RiveComponent, rive } = useRive({
     src: '/animations/pages/branching/branching-route.riv',
     autoplay: false,
@@ -59,28 +56,28 @@ const Workflows = () => {
 
   useEffect(() => {
     if (isWrapperInView && rive) {
-      rive.play(STATE_MACHINE_NAME);
+      rive.play(STATE_MACHINE_NAME[0]);
     }
   }, [isWrapperInView, rive]);
 
-  // create inputs for the state machine
-  const routeInput0 = useStateMachineInput(rive, STATE_MACHINE_NAME, 'T0');
-  const routeInput1 = useStateMachineInput(rive, STATE_MACHINE_NAME, 'T1');
-  const routeInput2 = useStateMachineInput(rive, STATE_MACHINE_NAME, 'T2');
-  const routeInput3 = useStateMachineInput(rive, STATE_MACHINE_NAME, 'T3');
-  const routeInput4 = useStateMachineInput(rive, STATE_MACHINE_NAME, 'T4');
-  const routeInput5 = useStateMachineInput(rive, STATE_MACHINE_NAME, 'T5');
+  const [currentIndex, setCurrentIndex] = useState(null);
+  const [lastPlayedStateIndex, setLastPlayedIndex] = useState(1); //  set first state as default last played state
 
-  const routeInputs = useMemo(
-    () => [routeInput0, routeInput1, routeInput2, routeInput3, routeInput4, routeInput5],
-    [routeInput0, routeInput1, routeInput2, routeInput3, routeInput4, routeInput5]
-  );
+  const initPlay = useRef(false);
 
   useEffect(() => {
-    if (isHeadingInView && routeInputs[0]) {
-      routeInputs[0].fire();
+    if (isWrapperInView && rive) {
+      if (currentIndex > lastPlayedStateIndex && !initPlay.current) {
+        const statesToPlay = STATE_MACHINE_NAME.slice(lastPlayedStateIndex, currentIndex);
+        statesToPlay.forEach((state) => {
+          rive.play(state);
+        });
+        setLastPlayedIndex(currentIndex);
+      }
+      initPlay.current = true;
+      rive.play(STATE_MACHINE_NAME[currentIndex]);
     }
-  }, [isHeadingInView, routeInputs]);
+  }, [isWrapperInView, rive, currentIndex, lastPlayedStateIndex]);
 
   return (
     <section className="workflows safe-paddings bg-black pt-20 text-white lg:pt-0" ref={wrapperRef}>
@@ -97,7 +94,7 @@ const Workflows = () => {
           )}
         </div>
         <div className="relative z-10 col-start-6 col-end-12 max-w-[698px] pt-32 pb-[278px] 2xl:col-start-7 2xl:col-end-13 lg:col-span-full lg:max-w-none lg:pt-28 lg:pb-0 md:pt-20">
-          <Heading className="t-5xl font-bold leading-tight" tag="h2" ref={headingRef}>
+          <Heading className="t-5xl font-bold leading-tight" tag="h2">
             Optimize your <span className="text-primary-1">development workflows</span> with
             branching
           </Heading>
@@ -106,12 +103,12 @@ const Workflows = () => {
               <InView
                 className="mt-20 flex max-w-[600px] flex-col items-start lg:mt-0 lg:max-w-none lg:py-12 md:py-8"
                 as="div"
+                data-workflow-id={index}
                 key={index}
-                delay={index * 100}
                 triggerOnce
                 onChange={(inView) => {
-                  if (inView && routeInputs[index + 1]) {
-                    routeInputs[index + 1].fire();
+                  if (inView && lastPlayedStateIndex <= index + 1) {
+                    setCurrentIndex(index + 1);
                   }
                 }}
               >
