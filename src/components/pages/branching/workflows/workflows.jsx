@@ -105,7 +105,6 @@ const Workflows = () => {
               <InView
                 className="mt-20 flex max-w-[600px] flex-col items-start lg:mt-0 lg:max-w-none lg:py-12 md:py-8"
                 as="div"
-                data-workflow-id={index}
                 key={index}
                 triggerOnce
                 onChange={(inView) => {

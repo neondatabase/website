@@ -19,14 +19,14 @@ const Recovery = () => (
         Data recovery and debugging
       </Heading>
       <div className="grid-gap-x mt-10 grid grid-cols-10 items-center lg:mt-6">
-        <ul className="col-span-4 max-w-[484px] divide-y divide-dashed divide-gray-2 lg:col-span-full lg:max-w-none">
+        <ol className="col-span-4 max-w-[484px] divide-y divide-dashed divide-gray-2 lg:col-span-full lg:max-w-none">
           {items.map((item, index) => (
             <li className="t-xl flex space-x-4 py-5 leading-snug" key={index}>
               <span className="font-semibold text-primary-1">{index + 1}.</span>
               <p>{item}</p>
             </li>
           ))}
-        </ul>
+        </ol>
         <img
           className="col-span-6 lg:col-span-full lg:mt-10 lg:w-full"
           src={screenImage}
