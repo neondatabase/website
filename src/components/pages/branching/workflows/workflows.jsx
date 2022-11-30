@@ -38,11 +38,15 @@ const items = [
   },
 ];
 
-const STATE_MACHINE_NAME = ['S0', 'S1', 'S2', 'S3', 'S4', 'S5'];
+const STATE_MACHINE_NAME = ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6'];
+const initialStates = STATE_MACHINE_NAME.slice(0, 2);
 
 const Workflows = () => {
   const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true });
   const [containerRef, isContainerInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
+  const [currentIndex, setCurrentIndex] = useState(null);
+  const [lastPlayedStateIndex, setLastPlayedIndex] = useState(2); //  set second state S2 as default last played state
+  const initPlay = useRef(false);
 
   const { RiveComponent, rive } = useRive({
     src: '/animations/pages/branching/branching-route.riv',
@@ -55,23 +59,19 @@ const Workflows = () => {
   });
 
   useEffect(() => {
-    if (isWrapperInView && rive) {
-      rive.play(STATE_MACHINE_NAME[0]);
+    if (rive) {
+      if (isWrapperInView) {
+        // play initial state S0, S1 of route animation
+        setTimeout(rive.play(initialStates), 3000);
+      }
     }
   }, [isWrapperInView, rive]);
-
-  const [currentIndex, setCurrentIndex] = useState(null);
-  const [lastPlayedStateIndex, setLastPlayedIndex] = useState(1); //  set first state as default last played state
-
-  const initPlay = useRef(false);
 
   useEffect(() => {
     if (rive) {
       if (currentIndex > lastPlayedStateIndex && !initPlay.current) {
         const statesToPlay = STATE_MACHINE_NAME.slice(lastPlayedStateIndex, currentIndex + 1);
-        statesToPlay.forEach((state) => {
-          rive.play(state);
-        });
+        rive.play(statesToPlay);
         setLastPlayedIndex(currentIndex);
       }
       initPlay.current = true;
@@ -95,7 +95,7 @@ const Workflows = () => {
             </div>
           )}
         </div>
-        <div className="relative z-10 col-start-6 col-end-12 max-w-[698px] pt-32 pb-[253px] 2xl:col-start-7 2xl:col-end-13 lg:col-span-full lg:max-w-none lg:pt-28 lg:pb-0 md:pt-20">
+        <div className="relative z-10 col-start-6 col-end-12 h-full w-auto pt-32 pb-[253px] 2xl:col-start-7 2xl:col-end-13 lg:col-span-full lg:max-w-none lg:pt-28 lg:pb-0 md:pt-20">
           <Heading className="t-5xl font-bold leading-tight" tag="h2">
             Optimize your <span className="text-primary-1">development workflows</span> with
             branching
@@ -106,10 +106,12 @@ const Workflows = () => {
                 className="mt-20 flex max-w-[600px] flex-col items-start lg:mt-0 lg:max-w-none lg:py-12 md:py-8"
                 as="div"
                 key={index}
+                threshold={1}
+                delay={500}
                 triggerOnce
                 onChange={(inView) => {
-                  if (inView && lastPlayedStateIndex <= index + 1) {
-                    setCurrentIndex(index + 1);
+                  if (inView && lastPlayedStateIndex <= index + 2) {
+                    setCurrentIndex(index + 2); // starting with S2 after initial states S0, S1
                   }
                 }}
               >
