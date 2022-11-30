@@ -34,8 +34,7 @@ const Hero = () => (
           Neon Developer Days
         </h1>
         <p className="mt-5 max-w-[640px] text-center text-xl leading-normal md:text-lg">
-          Join us virtually to learn about Neon and how to build
-          better with Serverless Postgres.
+          Join us virtually to learn about Neon and how to build better with Serverless Postgres.
         </p>
         <p className="mt-5 max-w-[640px] text-center text-xl leading-normal md:text-lg">
           Register for event updates.

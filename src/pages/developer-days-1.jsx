@@ -2,7 +2,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Hero from 'components/pages/developer-days/hero';
+import Hero from 'components/pages/developer-days-1/hero';
 import Layout from 'components/shared/layout';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
