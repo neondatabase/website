@@ -1,6 +1,8 @@
 ---
 title: What is Neon?
 enableTableOfContents: true
+redirectFrom:
+  - /docs/cloud/about
 ---
 
 Neon is a fully managed serverless PostgreSQL with a generous free tier.

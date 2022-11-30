@@ -1,6 +1,8 @@
 ---
 title: Technical Preview Free Tier
 enableTableOfContents: true
+redirectFrom:
+  - /docs/reference/technical-preview-free-tier
 ---
 
 The Neon cloud service is available for free during the Technical Preview. For information about how the Technical Preview fits within Neon's release plans, please refer to the [Neon roadmap](/docs/reference/roadmap).
