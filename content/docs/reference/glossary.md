@@ -53,7 +53,7 @@ A method of creating a pool of connections and caching those connections for reu
 A string containing details for connecting to a Neon project branch. The details include a user name, endpoint hostname, and database name; for example:
 
 ```terminal
-postgres://daniel@ep-polished-water-579720.us-east-2.aws.neon.tech/main
+postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/main
 ```
 
 The endpoint hostname include an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
