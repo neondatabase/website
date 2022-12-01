@@ -74,7 +74,7 @@ const Partners = () => (
             loading="lazy"
             aria-hidden
           />
-          <div className="absolute top-8 left-[38px] h-full max-w-[330px] rounded-2xl bg-secondary-2 px-5 pt-7 pb-8">
+          <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-secondary-2 px-5 pt-7 pb-8">
             <Button
               className="w-full px-8 !text-lg"
               theme="secondary"
