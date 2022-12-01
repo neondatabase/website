@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+import { graphql } from 'gatsby';
 import React from 'react';
 
 import Branching from 'components/pages/developer-days/branching';
@@ -5,9 +7,11 @@ import CTA from 'components/pages/developer-days/cta';
 import Hero from 'components/pages/developer-days/hero';
 import Partners from 'components/pages/developer-days/partners';
 import Layout from 'components/shared/layout';
+import SEO from 'components/shared/seo';
+import SEO_DATA from 'constants/seo-data';
 import background from 'images/developer-days/background.svg';
 
-const DeveloperDays2 = () => (
+const DeveloperDays = () => (
   <Layout headerTheme="black" footerTheme="black" footerWithTopBorder>
     <div className="relative overflow-hidden bg-black text-white">
       <img
@@ -26,4 +30,18 @@ const DeveloperDays2 = () => (
   </Layout>
 );
 
-export default DeveloperDays2;
+export const query = graphql`
+  query {
+    ogImage: file(relativePath: { eq: "social-previews/developer-days-1.jpg" }) {
+      childImageSharp {
+        gatsbyImageData(layout: FIXED, width: 1200, height: 630, formats: JPG)
+      }
+    }
+  }
+`;
+
+export default DeveloperDays;
+// TODO: check if need to update SEO data
+export const Head = ({ location: { pathname }, data: { ogImage } }) => (
+  <SEO pathname={pathname} {...SEO_DATA.developerDays1} ogImage={ogImage} />
+);
