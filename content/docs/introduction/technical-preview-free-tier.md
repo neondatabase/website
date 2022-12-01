@@ -14,7 +14,7 @@ The Technical Preview Free Tier has the following limits:
 - 3 GB of data per branch
 - 3 compute nodes (endpoints)
 - 1 vCPU with a limit of 4GB of RAM per compute node (with 512MB of RAM allocated to PostgreSQL shared buffers)
-- A point-in-rime reset (PITR) window of 7 days of _reasonable usage_
+- A point-in-time recovery (PITR) window of 7 days of _reasonable usage_
 
 <Admonition type="note">
 Neon intends to offer a Free Tier beyond the Technical Preview period. The limits associated with that tier will be defined in the coming months. Technical Preview Free Tier limits are subject to change over the course of the Technical Preview.
