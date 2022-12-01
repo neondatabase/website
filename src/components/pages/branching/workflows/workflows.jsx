@@ -96,7 +96,7 @@ const Workflows = () => {
             </div>
           )}
         </div>
-        <div className="relative z-10 col-start-6 col-end-12 flex min-h-[3482px] flex-col pt-32 pb-[245px] 3xl:pt-28 2xl:col-start-7 2xl:col-end-13 2xl:min-h-[3383px] xl:col-start-6 xl:min-h-[2608px] xl:pt-20 xl:pb-[195px] lg:min-h-[2046px] lg:pt-10 lg:pb-[88px] md:col-span-full md:min-h-0 md:max-w-none md:pt-28 md:pb-0">
+        <div className="relative z-10 col-start-6 col-end-12 flex min-h-[3482px] flex-col pt-32 pb-[245px] 3xl:pt-28 2xl:col-start-7 2xl:col-end-13 2xl:min-h-[3383px] xl:col-start-6 xl:min-h-[2608px] xl:pt-20 xl:pb-[195px] lg:min-h-[2046px] lg:pt-10 lg:pb-[88px] md:col-span-full md:min-h-0 md:max-w-none md:pt-16 md:pb-0">
           <Heading className="t-5xl font-bold leading-tight" tag="h2">
             Supercharge your <span className="text-primary-1">development workflows</span> with
             branching
