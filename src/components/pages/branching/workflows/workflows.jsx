@@ -8,31 +8,32 @@ import Link from 'components/shared/link';
 
 const items = [
   {
-    title: 'Integrate',
+    title: 'Deploy',
     description:
-      'Integrate database branching into your developer workflows by branching from staging and production databases.',
+      'Instantly deploy development, test, and staging environments with an up-to-date copy of your production data.',
+    linkText: 'Read docs',
   },
   {
     title: 'Develop',
-    description: 'Give each developer their own branch.',
-  },
-  {
-    title: 'Feature',
     description:
-      'Create new database branches as easily as checking out a new branch in git. Your branch is one api call away.',
-    linkText: 'Read more',
-    linkUrl: '/docs/branching',
+      'Create a branch of your production database that developers are free to play with and modify better yet, create a branch for each developer.',
   },
   {
-    title: 'PR preview',
-    description: 'Deploy cost-efficient production preview for each pull request.',
+    title: 'Integrate',
+    description:
+      "Use the Neon API to integrate branching into your development workflows. The Neon API provides full access to Neon's branching capabilities.",
+  },
+  {
+    title: 'Preview',
+    description:
+      'Easily spin up a database branch for each PR preview to facilitate reviews and testing.',
     linkText: 'See integrations',
     linkUrl: '/', // TODO: add link
   },
   {
     title: 'Test',
     description:
-      'Confidently test migrations with real data without the hassle of creating and restoring database dumps. Create and hydrate test databases instantly.',
+      'Confidently test new features with real data, without the hassle of creating and restoring database dumps. Create and hydrate test databases with a single click or API call.',
     linkText: 'See examples',
     linkUrl: '/', // TODO: add link
   },
@@ -95,15 +96,15 @@ const Workflows = () => {
             </div>
           )}
         </div>
-        <div className="relative z-10 col-start-6 col-end-12 h-full w-auto pt-32 pb-[253px] 2xl:col-start-7 2xl:col-end-13 lg:col-span-full lg:max-w-none lg:pt-28 lg:pb-0 md:pt-20">
+        <div className="relative z-10 col-start-6 col-end-12 flex min-h-[3482px] flex-col pt-32 pb-[245px] 2xl:col-start-7 2xl:col-end-13 lg:col-span-full lg:min-h-0 lg:max-w-none lg:pt-28 lg:pb-0 md:pt-20">
           <Heading className="t-5xl font-bold leading-tight" tag="h2">
-            Optimize your <span className="text-primary-1">development workflows</span> with
+            Supercharge your <span className="text-primary-1">development workflows</span> with
             branching
           </Heading>
-          <div className="mt-[220px] space-y-[431px] lg:mt-4 lg:space-y-0 lg:divide-y lg:divide-dashed lg:divide-gray-2">
+          <div className="mt-[220px] flex grow flex-col justify-between lg:mt-4 lg:space-y-0 lg:divide-y lg:divide-dashed lg:divide-gray-2">
             {items.map(({ title, description, linkText, linkUrl }, index) => (
               <InView
-                className="mt-20 flex max-w-[600px] flex-col items-start lg:mt-0 lg:max-w-none lg:py-12 md:py-8"
+                className="flex max-w-[600px] flex-col items-start lg:mt-0 lg:max-w-none lg:py-12 md:py-8"
                 as="div"
                 key={index}
                 threshold={1}
