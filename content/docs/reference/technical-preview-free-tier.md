@@ -10,8 +10,8 @@ The Technical Preview Free Tier has the following limits:
 - 1 Neon project
 - 10 branches
 - 3 GB of data per branch
-- Up to 3 compute nodes (endpoints), one per branch
-- 1 vCPU and 256MB of RAM per compute node
+- 3 compute nodes (endpoints)
+- 1 vCPU and 512MB of RAM per compute node
 - A point-in-rime reset (PITR) window of 7 days of _reasonable usage_
 
 <Admonition type="note">
@@ -20,7 +20,7 @@ Neon intends to offer a Free Tier beyond the Technical Preview period. The limit
 
 ## Data Size
 
-Neon stores data in its own internal format. The 10GB data size limit in the Technical Preview free tier applies to the logical size of your Neon project. The logical size is the sum of all database sizes in the branches of your project. For information about checking the data size of your Neon project, see [../../manage/projects](Projects).
+Neon stores data in its own internal format. The data size limit in the Technical Preview free tier applies to the logical size of your branch. The logical size is the sum of all database sizes in the branch of your project.
 
 <a id="#point-in-time-reset/"></a>
 
@@ -28,4 +28,4 @@ Neon stores data in its own internal format. The 10GB data size limit in the Tec
 
 Neon storage consumes extra space in order to support Point in Time Reset (PITR) and the ability to reset a branch to a historical state. Historical data is stored in log-based format.
 
-Neon limits the amount of modification history that is stored in the Technical Preview Free Tier, as described above.
+Neon limits the amount of modification history that is stored in the Technical Preview Free Tier.
