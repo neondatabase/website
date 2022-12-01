@@ -11,7 +11,7 @@ The Technical Preview Free Tier has the following limits:
 - 10 branches
 - 3 GB of data per branch
 - 3 compute nodes (endpoints)
-- 1 vCPU and 512MB of RAM per compute node
+- 1 vCPU with a limit of 4GB of RAM per compute node (with 512MB of RAM allocated to PostgreSQL shared buffers)
 - A point-in-rime reset (PITR) window of 7 days of _reasonable usage_
 
 <Admonition type="note">
