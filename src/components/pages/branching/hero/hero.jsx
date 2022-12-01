@@ -7,24 +7,24 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 
 const Hero = () => (
-  <section className="hero safe-paddings bg-black pt-[158px] text-white lg:pt-20 md:pt-16">
+  <section className="hero safe-paddings bg-black pt-[158px] text-white xl:pt-[136px] lg:pt-9 sm:pt-6">
     <Container
-      className="flex w-full items-center justify-between border-b border-dashed border-gray-2 lg:flex-col lg:space-y-16 md:space-y-10"
+      className="flex w-full items-end justify-between space-x-14 border-b border-dashed border-gray-2 lg:flex-col lg:items-center lg:space-y-14 lg:space-x-0"
       size="sm"
     >
-      <div className="max-w-[605px] pb-[88px] xl:pb-0 lg:text-center">
+      <div className="max-w-[605px] pb-[88px] xl:max-w-[376px] xl:pb-[60px] lg:pb-0 lg:text-center">
         <Heading
-          className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl"
+          className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-[56px] lg:text-[44px]"
           tag="h1"
         >
           Instant branching for Postgres
         </Heading>
-        <p className="mt-7 text-xl md:text-lg sm:text-base">
+        <p className="mt-7 text-xl xl:text-base">
           Neon allows you to instantly branch your data the same way that you branch your code.
         </p>
         <div className="mt-9 space-x-10">
           <Button
-            className="py-6 px-9 !text-lg lg:py-5 lg:px-8 lg:!text-base"
+            className="py-6 px-9 !text-lg xl:!text-base lg:py-5 lg:px-8"
             theme="primary"
             size="sm"
             to="/early-access"
@@ -41,7 +41,7 @@ const Hero = () => (
         </div>
       </div>
       <StaticImage
-        className="lg:max-w-[650px]"
+        className="lg:max-w-[464px]"
         src="./images/illustration.png"
         quality={70}
         width={752}

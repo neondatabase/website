@@ -13,7 +13,7 @@ const CTA = () => (
     >
       <div className="max-w-[661px] pb-16 xl:pb-0 lg:text-center">
         <Heading
-          className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl"
+          className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-[56px] lg:text-[44px]"
           tag="h2"
         >
           Try branching in your project now
@@ -27,7 +27,7 @@ const CTA = () => (
         </Button>
       </div>
       <StaticImage
-        className="lg:max-w-[650px]"
+        className="lg:max-w-[464px]"
         src="./images/illustration.png"
         width={752}
         height={567}

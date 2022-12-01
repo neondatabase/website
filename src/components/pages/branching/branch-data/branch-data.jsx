@@ -21,12 +21,12 @@ const items = [
 ];
 
 const BranchData = () => (
-  <section className="branch-data safe-padding bg-black pt-44 pb-28 text-white 2xl:pt-28 md:py-20">
+  <section className="branch-data safe-padding bg-black pt-44 pb-32 text-white 2xl:pt-40 2xl:pb-28 xl:pt-28 xl:pb-24 lg:pt-20 sm:pb-16">
     <Container className="grid-gap-x grid grid-cols-10 items-start" size="sm">
-      <Heading className="t-5xl col-span-3 font-bold leading-snug 2xl:col-span-full" tag="h2">
+      <Heading className="t-5xl col-span-3 font-bold leading-snug xl:col-span-full" tag="h2">
         Branch your data with single click or API call
       </Heading>
-      <div className="grid-gap col-start-5 col-end-11 grid grid-cols-2 2xl:col-span-full 2xl:mt-10 sm:grid-cols-1 sm:gap-y-8">
+      <div className="grid-gap col-start-5 col-end-11 grid grid-cols-2 2xl:col-span-7 xl:col-span-full xl:mt-10 sm:grid-cols-1 sm:gap-y-8">
         {items.map(({ icon: Icon, title, description }, index) => (
           <div className="flex max-w-[360px] flex-col items-start sm:max-w-none" key={index}>
             <Icon className="h-20 w-20 md:h-16 md:w-16" />
