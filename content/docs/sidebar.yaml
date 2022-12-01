@@ -1,19 +1,19 @@
 - title: Introduction
   items:
     - title: What is Neon?
-      slug: cloud/about
+      slug: introduction/about
     - title: Neon architecture
-      slug: conceptual-guides/architecture-overview
+      slug: introduction/architecture-overview
     - title: Compute lifecycle
-      slug: conceptual-guides/compute-lifecycle
+      slug: introduction/compute-lifecycle
     - title: Branching
-      slug: conceptual-guides/branching
+      slug: introduction/branching
     - title: Neon roadmap
-      slug: reference/roadmap
+      slug: introduction/roadmap
     - title: Technical Preview Free Tier
-      slug: reference/technical-preview-free-tier
+      slug: introduction/technical-preview-free-tier
     - title: Regions
-      slug: conceptual-guides/regions
+      slug: introduction/regions
 - title: Get started
   items:
     - title: Signing up
@@ -22,16 +22,22 @@
       slug: get-started-with-neon/setting-up-a-project
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
-    - title: Query with psql
-      slug: get-started-with-neon/query-with-psql-editor
     - title: Get started with Branching
       slug: get-started-with-neon/get-started-branching
     - title: Using API keys
       slug: get-started-with-neon/using-api-keys
-    - title: Connecting with old clients
-      slug: how-to-guides/connectivity-issues
+- title: Connect
+  items:
+    - title: Connect from any application
+      slug: connect/connect-from-any-app
+    - title: Passwordless connect
+      slug: connect/passwordless-connect
+    - title: Connect with psql
+      slug: connect/query-with-psql-editor
+    - title: Connect from old clients
+      slug: connect/connectivity-issues
     - title: Connection pooling
-      slug: get-started-with-neon/connection-pooling
+      slug: connect/connection-pooling
 - title: Guides
   items:
     - title: Django
@@ -42,6 +48,8 @@
       slug: guides/hasura
     - title: Java
       slug: guides/java
+    - title: Laravel
+      slug: guides/laravel
     - title: Next.js
       slug: guides/vercel
     - title: Node.js
@@ -54,8 +62,6 @@
       slug: guides/sqlalchemy
     - title: Symfony
       slug: guides/symfony
-    - title: Laravel
-      slug: guides/laravel
 - title: Import data
   items:
     - title: Import data from PostgreSQL

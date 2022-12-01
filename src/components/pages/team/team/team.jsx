@@ -67,12 +67,6 @@ const members = [
     linkedinUrl: 'https://www.linkedin.com/in/raoufchebri/',
   },
   {
-    photo: <StaticImage src="./images/kate-klink-photo.jpg" alt="Kate Klink" />,
-    name: 'Kate Klink',
-    position: 'Growth & Marketing Manager',
-    githubUrl: 'https://github.com/klink',
-  },
-  {
     photo: <StaticImage src="./images/bojan-serafimov-photo.jpg" alt="Bojan Serafimov" />,
     name: 'Bojan Serafimov',
     position: 'Software Engineer',
