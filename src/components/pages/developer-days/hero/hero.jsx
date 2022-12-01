@@ -1,4 +1,5 @@
 import { StaticImage } from 'gatsby-plugin-image';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from 'components/shared/button';
@@ -29,7 +30,7 @@ const items = [
   },
 ];
 
-const Hero = () => (
+const Hero = ({ setIsOpenModal }) => (
   <section className="safe-paddings relative bg-black pt-[182px] text-white">
     <img
       className="absolute top-0 left-1/2 w-full max-w-[1920px] -translate-x-1/2 blur-[80px]"
@@ -51,7 +52,7 @@ const Hero = () => (
       </p>
       <div className="relative mt-14">
         <StickerIcon className="absolute top-[-198px] right-[-154px] h-[300px] w-[300px]" />
-        <div className="absolute top-16 left-1/2 h-auto w-[1068px] -translate-x-1/2">
+        <div className="absolute -inset-x-16 top-16">
           <StaticImage
             className="rounded-[200px] opacity-30 blur-[70px]"
             imgClassName="rounded-[200px]"
@@ -79,6 +80,9 @@ const Hero = () => (
             theme="secondary"
             size="sm"
             style={{ boxShadow: '0px 10px 30px rgba(26, 26, 26, 0.6)' }}
+            onClick={() => {
+              setIsOpenModal(true);
+            }}
           >
             <PlayIcon className="mr-4 h-[22px] w-4 shrink-0" />
             <span>Watch announcements</span>
@@ -104,5 +108,9 @@ const Hero = () => (
     </Container>
   </section>
 );
+
+Hero.propTypes = {
+  setIsOpenModal: PropTypes.func.isRequired,
+};
 
 export default Hero;

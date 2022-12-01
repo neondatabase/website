@@ -1,4 +1,5 @@
 import { StaticImage } from 'gatsby-plugin-image';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from 'components/shared/button';
@@ -29,7 +30,7 @@ const items = [
   },
 ];
 
-const Branching = () => (
+const Branching = ({ setIsOpenModal }) => (
   <section className="branching safe-paddings bg-black pt-[672px] text-white">
     <Container className="grid-gap-x grid grid-cols-12" size="md">
       <div className="relative col-span-8 ml-[50px] flex max-w-[940px] flex-col items-center">
@@ -42,7 +43,7 @@ const Branching = () => (
         </Heading>
         <p className="mt-3 text-xl">Welcome to Neon Developer days from 6-8 December, 2022</p>
         <div className="relative mt-14">
-          <div className="absolute top-16 left-1/2 h-auto w-[1068px] -translate-x-1/2">
+          <div className="absolute -inset-x-16 top-16">
             <StaticImage
               className="rounded-[200px] opacity-30 blur-[70px]"
               imgClassName="rounded-[200px]"
@@ -70,6 +71,7 @@ const Branching = () => (
               theme="secondary"
               size="sm"
               style={{ boxShadow: '0px 10px 30px rgba(26, 26, 26, 0.6)' }}
+              onClick={() => setIsOpenModal(true)}
             >
               <PlayIcon className="mr-4 h-[22px] w-4 shrink-0" />
               <span>Watch announcements</span>
@@ -106,5 +108,7 @@ const Branching = () => (
     </Container>
   </section>
 );
-
+Branching.propTypes = {
+  setIsOpenModal: PropTypes.func.isRequired,
+};
 export default Branching;
