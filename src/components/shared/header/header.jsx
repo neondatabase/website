@@ -5,11 +5,10 @@ import React, { forwardRef } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import Logo from 'components/shared/logo';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import SearchIcon from 'icons/search.inline.svg';
-import logoBlack from 'images/logo-black.svg';
-import logoWhite from 'images/logo-white.svg';
 
 import Burger from './burger';
 // import DiscordIcon from './images/header-discord.inline.svg';
@@ -39,35 +38,18 @@ const Header = forwardRef(
     return (
       <header
         className={clsx(
-          'safe-paddings absolute top-0 left-0 right-0 z-40 w-full lg:relative lg:h-14',
+          'safe-paddings absolute top-0 left-0 right-0 z-40 w-full dark:bg-black lg:relative lg:h-14',
           isThemeBlack ? 'lg:bg-black' : 'bg-white',
           isSticky && 'sticky top-0 z-50 md:relative',
-          withBottomBorder && 'border-b border-gray-7'
+          withBottomBorder && 'border-b border-gray-7 dark:border-gray-2'
         )}
         ref={ref}
       >
-        <Container className="flex items-center justify-between py-3.5" size="md">
+        <Container className="flex items-center justify-between py-3.5" size="lg">
           <Link className="hidden xl:block" to="/">
             <span className="sr-only">Neon</span>
-            {isThemeBlack ? (
-              <img
-                className="h-9 2xl:h-8"
-                src={logoWhite}
-                width={114}
-                height={32}
-                alt=""
-                aria-hidden
-              />
-            ) : (
-              <img
-                className="h-9 2xl:h-8"
-                src={logoBlack}
-                width={114}
-                height={32}
-                alt=""
-                aria-hidden
-              />
-            )}
+
+            <Logo isThemeBlack={isThemeBlack} />
           </Link>
           <nav className="xl:absolute xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2">
             <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
@@ -77,7 +59,6 @@ const Header = forwardRef(
                     className={clsx(
                       items?.length > 0 &&
                         'relative pr-3.5 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-[transparent] before:transition-colors before:duration-200 group-hover:text-primary-2 group-hover:before:border-t-primary-2',
-
                       items?.length > 0 && isThemeBlack
                         ? 'before:border-t-white'
                         : 'before:border-t-black'
@@ -131,31 +112,12 @@ const Header = forwardRef(
             to="/"
           >
             <span className="sr-only">Neon</span>
-
-            {isThemeBlack ? (
-              <img
-                className="h-9 2xl:h-8"
-                src={logoWhite}
-                alt=""
-                width={128}
-                height={36}
-                aria-hidden
-              />
-            ) : (
-              <img
-                className="h-9 2xl:h-8"
-                src={logoBlack}
-                alt=""
-                width={128}
-                height={36}
-                aria-hidden
-              />
-            )}
+            <Logo isThemeBlack={isThemeBlack} />
           </Link>
 
           <div className="flex space-x-5 lg:hidden">
             <Button
-              className="relative py-[11px] pl-11 xl:hidden"
+              className="relative py-[11px] pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden"
               to={LINKS.github}
               size="xs"
               theme={isThemeBlack ? 'tertiary' : 'quaternary'}
@@ -164,7 +126,7 @@ const Header = forwardRef(
             >
               <Github
                 className={clsx(
-                  'absolute top-1/2 left-1.5 -translate-y-1/2',
+                  'absolute top-1/2 left-1.5 -translate-y-1/2 dark:text-white',
                   isThemeBlack ? 'text-white' : 'text-black'
                 )}
               />
@@ -188,12 +150,12 @@ const Header = forwardRef(
                 type="button"
                 onClick={onSearchClick}
               >
-                <SearchIcon className="mb-[5px]" />
+                <SearchIcon className="mb-[5px] dark:text-white" />
               </button>
             )}
 
             <Burger
-              className={clsx(isThemeBlack ? 'text-white' : 'text-black')}
+              className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
               isToggled={isMobileMenuOpen}
               onClick={onBurgerClick}
             />

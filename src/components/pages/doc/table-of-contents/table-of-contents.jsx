@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import TOCIcon from './images/toc.inline.svg';
 
 const linkClassName =
-  'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-3 hover:text-black';
+  'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-3 hover:text-black dark:text-gray-7 dark:hover:text-white';
 
 const TableOfContents = ({ className, contentRef }) => {
   const [items, setItems] = useState([]);
@@ -39,7 +39,7 @@ const TableOfContents = ({ className, contentRef }) => {
     <div className={clsx('h-full xl:hidden', className)}>
       <nav className="sticky top-10 bottom-10 max-h-[calc(100vh-40px-40px)] overflow-y-auto overflow-x-hidden">
         <h3 className="flex items-center space-x-2 py-2 text-sm font-semibold leading-tight">
-          <TOCIcon className="h-3.5 w-3.5" />
+          <TOCIcon className="h-3.5 w-3.5 text-black dark:text-white" />
           <span>On this page</span>
         </h3>
         <ul className="mt-2.5">

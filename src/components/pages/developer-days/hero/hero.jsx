@@ -28,14 +28,17 @@ const Hero = () => (
           className="rounded-[40px] bg-secondary-2 py-2 px-4 text-xs font-bold uppercase leading-none text-black"
           dateTime="2022-12-06"
         >
-          December 6-8, 2022
+          December 6-8 | 9:00 - 10:00 PT
         </time>
         <h1 className="mt-5 text-center text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl">
           Neon Developer Days
         </h1>
         <p className="mt-5 max-w-[640px] text-center text-xl leading-normal md:text-lg">
-          Join us virtually on December 6th, 7th, and 8th to learn about Neon and how to build
-          better with Serverless Postgres. Register for event updates.
+          Join us virtually to learn about Neon and how to build
+          better with Serverless Postgres.
+        </p>
+        <p className="mt-5 max-w-[640px] text-center text-xl leading-normal md:text-lg">
+          Register for event updates.
         </p>
         <div className="relative">
           <Line className="absolute top-[calc(100%-30px)] right-16 2xl:top-[calc(100%-10px)] lg:hidden" />

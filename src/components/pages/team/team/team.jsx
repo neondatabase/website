@@ -67,12 +67,6 @@ const members = [
     linkedinUrl: 'https://www.linkedin.com/in/raoufchebri/',
   },
   {
-    photo: <StaticImage src="./images/kate-klink-photo.jpg" alt="Kate Klink" />,
-    name: 'Kate Klink',
-    position: 'Growth & Marketing Manager',
-    githubUrl: 'https://github.com/klink',
-  },
-  {
     photo: <StaticImage src="./images/bojan-serafimov-photo.jpg" alt="Bojan Serafimov" />,
     name: 'Bojan Serafimov',
     position: 'Software Engineer',
@@ -258,13 +252,6 @@ const members = [
     position: 'Engineering Manager',
     githubUrl: 'https://github.com/vadim2404',
     linkedinUrl: 'https://www.linkedin.com/in/vadimkharitonov/',
-  },
-  {
-    photo: <StaticImage src="./images/alexander-stanovoy-photo.jpg" alt="Alexander Stanovoy" />,
-    name: 'Alexander Stanovoy',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/alexstanovoy',
-    linkedinUrl: 'https://www.linkedin.com/in/alexstanovoy/',
   },
   {
     photo: <StaticImage src="./images/christian-schwarz-photo.jpg" alt="Christian Schwarz" />,
