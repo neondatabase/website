@@ -21,7 +21,7 @@ const DataBranching = () => {
     >
       <Container className="z-10" size="md">
         <div className="max-w-[600px] xl:max-w-[400px] lg:max-w-none">
-          <Heading tag="h2" size="lg" theme="black">
+          <Heading tag="h2" size="xl" theme="black">
             Data Branching
           </Heading>
           <p className="t-xl mt-8 3xl:max-w-[504px] 2xl:mt-7 2xl:max-w-[416px] xl:mt-6 lg:max-w-none">

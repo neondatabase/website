@@ -26,7 +26,7 @@ const SaaS = () => {
     >
       <Container className="z-20 flex items-center justify-between lg:block" size="md">
         <div>
-          <Heading id="saas-title" tag="h2" size="lg" theme="white" ref={titleRef}>
+          <Heading id="saas-title" tag="h2" size="xl" theme="white" ref={titleRef}>
             <BlinkingText
               text="Perfect for SaaS"
               parentElement={titleEntry?.target}

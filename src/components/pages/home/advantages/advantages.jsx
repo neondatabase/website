@@ -83,7 +83,7 @@ const Advantages = () => {
               id="advantages-title"
               className="max-w-[490px] 2xl:max-w-[385px] xl:max-w-[300px] lg:max-w-[500px]"
               tag="h2"
-              size="lg"
+              size="xl"
               theme="white"
               ref={titleRef}
             >

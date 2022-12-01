@@ -74,7 +74,7 @@ const Hero = () => {
             id="hero-title"
             className="with-highlighted-text-secondary-2"
             tag="h1"
-            size="xl"
+            size="2xl"
             theme="white"
             ref={titleRef}
           >
@@ -82,8 +82,8 @@ const Hero = () => {
             {titleContentLg}
           </Heading>
           <p className="t-xl mt-7 max-w-[550px] text-white 2xl:mt-6 2xl:max-w-[480px] xl:mt-5 xl:max-w-[456px] lg:mx-auto lg:max-w-[414px]">
-            The multi-cloud fully managed Postgres with a generous free tier.
-            We separated storage and compute to offer autoscaling, branching, and bottomless storage.
+            The multi-cloud fully managed Postgres with a generous free tier. We separated storage
+            and compute to offer autoscaling, branching, and bottomless storage.
           </p>
           <Button
             id="hero-button"

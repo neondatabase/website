@@ -1,0 +1,27 @@
+import React from 'react';
+
+import Button from 'components/shared/button';
+import Container from 'components/shared/container';
+import Heading from 'components/shared/heading';
+
+import LineSvg from './images/line.inline.svg';
+
+const CTA = () => (
+  <section className="safe-paddings cta bg-black pt-[568px] pb-[366px] text-white">
+    <Container className="relative flex flex-col items-center" size="md">
+      <LineSvg className="absolute bottom-[calc(100%+2rem)] left-1/2 h-auto w-[392px] -translate-x-[calc(50%-11.3rem)]" />
+      <Heading size="lg" tag="h2">
+        Have you tried it yet?
+      </Heading>
+      <Button className="relative mt-8 px-9 py-6 !text-lg" theme="primary" size="sm">
+        <span
+          className="absolute inset-x-0 top-0 h-[232px] w-full rounded-[32px] opacity-40 blur-[30px]"
+          style={{ background: 'linear-gradient(180deg, #00E599 0%, rgba(0, 229, 153, 0) 100%)' }}
+        />
+        Try branching now
+      </Button>
+    </Container>
+  </section>
+);
+
+export default CTA;
