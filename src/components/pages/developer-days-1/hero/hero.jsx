@@ -24,10 +24,7 @@ const Hero = () => (
         <StaticImage src="./images/background.png" alt="" width={1650} height={568} aria-hidden />
       </div>
       <div className="relative z-10 flex flex-col items-center">
-        <time
-          className="rounded-[40px] bg-secondary-2 py-2 px-4 text-xs font-bold uppercase leading-none text-black"
-          dateTime="2022-12-06"
-        >
+        <time className="label-secondary-2" dateTime="2022-12-06">
           December 6-8 | 9:00 - 10:00 PT
         </time>
         <h1 className="mt-5 text-center text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl">

@@ -5,6 +5,7 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import ArrowIcon from 'icons/arrow-right.inline.svg';
 import PlayIcon from 'icons/play.inline.svg';
 
 import bgShapeSvg from './images/bg-shape.svg';
@@ -88,15 +89,12 @@ const Hero = () => (
                 className="flex flex-col border-t border-dashed border-black border-opacity-40 py-6 text-black last:pb-0"
                 key={index}
               >
-                <p className="text-lg font-semibold leading-snug opacity-[85%]">{text}</p>
-                <Link
-                  className="mt-3.5 font-semibold leading-none"
-                  theme="black"
-                  size="xs"
-                  to={linkUrl}
-                  withArrow
-                >
-                  {linkText}
+                <Link to={linkUrl}>
+                  <p className="text-lg font-semibold leading-snug opacity-[85%]">{text}</p>
+                  <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none">
+                    <span>{linkText}</span>
+                    <ArrowIcon className="h-auto w-[18px]" />
+                  </span>
                 </Link>
               </li>
             ))}

@@ -5,6 +5,7 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import ArrowIcon from 'icons/arrow-right.inline.svg';
 import PlayIcon from 'icons/play.inline.svg';
 
 import LineSvg from './images/line.inline.svg';
@@ -29,7 +30,7 @@ const items = [
 ];
 
 const Branching = () => (
-  <section className="branching safe-paddings  bg-black pt-[672px] text-white">
+  <section className="branching safe-paddings bg-black pt-[672px] text-white">
     <Container className="grid-gap-x grid grid-cols-12" size="md">
       <div className="relative col-span-8 ml-[50px] flex max-w-[940px] flex-col items-center">
         <LineSvg className="absolute bottom-[calc(100%+2rem)] left-1/2 h-auto w-[393px] -translate-x-[calc(50%-11.3rem)]" />
@@ -79,15 +80,12 @@ const Branching = () => (
                   className="flex flex-col border-t border-dashed border-black border-opacity-40 py-6 text-black last:pb-0"
                   key={index}
                 >
-                  <p className="text-lg font-semibold leading-snug opacity-[85%]">{text}</p>
-                  <Link
-                    className="mt-3.5 font-semibold leading-none"
-                    theme="black"
-                    size="xs"
-                    to={linkUrl}
-                    withArrow
-                  >
-                    {linkText}
+                  <Link to={linkUrl}>
+                    <p className="text-lg font-semibold leading-snug opacity-[85%]">{text}</p>
+                    <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none">
+                      <span>{linkText}</span>
+                      <ArrowIcon className="h-auto w-[18px]" />
+                    </span>
                   </Link>
                 </li>
               ))}

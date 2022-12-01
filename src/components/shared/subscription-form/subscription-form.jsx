@@ -19,7 +19,7 @@ const appearAndExitAnimationVariants = {
 const sizeClassNames = {
   sm: {
     form: 'before:-bottom-2 before:-left-2',
-    input: 'w-[552px] h-[72px] text-lg pl-5 border-[3px]',
+    input: 'max-w-[552px] h-[72px] text-lg pl-5 border-[3px]',
     button: '!text-lg !px-8 !py-[19px] right-2 md:!p-0',
     loading: 'right-2',
     success: 'right-2',
@@ -28,7 +28,7 @@ const sizeClassNames = {
   md: {
     form: 'before:-bottom-3.5 before:-left-3.5 2xl:before:-bottom-2.5 2xl:before:-left-2.5',
     input:
-      'h-24 w-[696px] 3xl:w-[576px] 2xl:h-20 2xl:w-[478px] 2xl:pr-[187px] xl:h-[72px] xl:w-[448px] xl:pr-[164px] t-2xl pl-7 border-4',
+      'h-24 max-w-[696px] 3xl:max-w-[576px] 2xl:h-20 2xl:max-w-[478px] 2xl:pr-[187px] xl:h-[72px] xl:max-w-[448px] xl:pr-[164px] t-2xl pl-7 border-4',
     button: 'right-3 2xl:right-2.5 xl:right-2',
     loading:
       'right-3 h-[72px] w-[72px] 2xl:right-2.5 2xl:h-[60px] 2xl:w-[60px] xl:right-2 xl:h-[56px] xl:w-[56px]',
@@ -123,7 +123,7 @@ const SubscriptionForm = ({
       {/* Input */}
       <input
         className={clsx(
-          'remove-autocomplete-styles relative block rounded-full border-black bg-white pr-[218px] font-semibold leading-none text-black placeholder-black outline-none transition-colors duration-200 lg:w-full lg:pl-5 md:pr-20',
+          'remove-autocomplete-styles relative block w-full rounded-full border-black bg-white pr-[218px] font-semibold leading-none text-black placeholder-black outline-none transition-colors duration-200 lg:w-full lg:pl-5 md:pr-20',
           errorMessage && 'border-secondary-1',
           sizeClassNames[size].input
         )}
