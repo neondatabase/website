@@ -44,12 +44,11 @@ const STATE_MACHINE_NAME = ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6'];
 const Workflows = () => {
   const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true });
   const [containerRef, isContainerInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
-  const [contentRef, isContentInView] = useInView({ triggerOnce: true });
   const [currentIndex, setCurrentIndex] = useState(null);
   const [lastPlayedStateIndex, setLastPlayedIndex] = useState(2); //  set second state S2 as default last played state
   const initPlay = useRef(false);
 
-  const { RiveComponent, rive } = useRive({
+  const { RiveComponent, rive, setContainerRef } = useRive({
     src: '/animations/pages/branching/branching-route.riv',
     autoplay: false,
     stateMachines: STATE_MACHINE_NAME,
@@ -62,18 +61,10 @@ const Workflows = () => {
   useEffect(() => {
     if (rive) {
       if (isWrapperInView) {
-        rive.play(STATE_MACHINE_NAME[0]);
+        setTimeout(rive.play(STATE_MACHINE_NAME.slice(0, 2)), 3000);
       }
     }
   }, [isWrapperInView, rive]);
-
-  useEffect(() => {
-    if (rive) {
-      if (isContentInView) {
-        setTimeout(rive.play(STATE_MACHINE_NAME[1]), 3000);
-      }
-    }
-  }, [isContentInView, rive]);
 
   useEffect(() => {
     if (rive) {
@@ -105,7 +96,7 @@ const Workflows = () => {
         </div>
         <div
           className="relative z-10 col-start-6 col-end-12 flex min-h-[3482px] flex-col pt-32 pb-[245px] 3xl:pt-28 2xl:col-start-7 2xl:col-end-13 2xl:min-h-[3383px] xl:col-start-6 xl:min-h-[2608px] xl:pt-20 xl:pb-[195px] lg:min-h-[2046px] lg:pt-10 lg:pb-[88px] md:col-span-full md:min-h-0 md:max-w-none md:pt-16 md:pb-0"
-          ref={contentRef}
+          ref={setContainerRef}
         >
           <Heading className="t-5xl font-bold leading-tight" tag="h2">
             Supercharge your <span className="text-primary-1">development workflows</span> with
