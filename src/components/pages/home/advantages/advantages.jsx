@@ -95,7 +95,7 @@ const Advantages = () => {
             </Heading>
             <p
               id="advantages-description"
-              className="t-xl mt-5 max-w-[600px] text-white 2xl:mt-4 2xl:max-w-[520px] lg:max-w-full"
+              className="t-xl mt-5 max-w-[600px] text-white 2xl:mt-4 2xl:max-w-[] lg:max-w-full"
             >
               Go through our 5 minutes tutorials video and start using scalable, cost efficient
               database architecture for your project.

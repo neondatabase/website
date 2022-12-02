@@ -1,5 +1,0 @@
-@layer components {
-  .with-moving-arrow {
-    @apply space-x-2 font-semibold leading-none transition-[margin-left,margin-right] duration-200 group-hover:space-x-3;
-  }
-}
