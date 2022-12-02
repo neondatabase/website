@@ -34,7 +34,7 @@ const items = [
 
 const Hero = ({ setIsOpenModal }) => {
   const [wrapperRef, isWrapperInView] = useInView({ threshold: 0.3 });
-  const { RiveComponent, rive, setContainerRef } = useRive({
+  const { RiveComponent, rive } = useRive({
     src: '/animations/pages/developer-days/dr-brown.riv',
     autoplay: false,
     stateMachines: 'State Machine',
@@ -92,17 +92,12 @@ const Hero = ({ setIsOpenModal }) => {
             />
           </div>
           <div className="relative">
-            <svg
-              width="940"
-              height="520"
-              className="rounded-2xl xl:w-full md:max-h-[390px]"
-              ref={setContainerRef}
-            >
+            <svg width="940" height="520" className="rounded-2xl xl:w-full lg:max-h-[390px]">
               <rect width="940" height="520" className="fill-secondary-2" />
             </svg>
             <RiveComponent className="absolute bottom-0 -right-2 h-full max-h-[448px] w-full max-w-[612px] sm:max-w-none" />
           </div>
-          <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-primary-1 px-5 pt-7 pb-8 xl:left-6 lg:min-h-[442px] lg:max-w-[290px] md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
+          <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-primary-1 px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] lg:pb-7 lg:pt-6 md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
             <Button
               className="w-full px-8"
               theme="secondary"
@@ -112,20 +107,20 @@ const Hero = ({ setIsOpenModal }) => {
                 setIsOpenModal(true);
               }}
             >
-              <PlayIcon className="mr-4 h-[22px] w-4 shrink-0" />
+              <PlayIcon className="mr-4 h-[22px] w-4 shrink-0 leading-none lg:h-4 lg:w-[11px]" />
               <span>Watch announcements</span>
             </Button>
-            <ul className="mt-7">
+            <ul className="mt-7 lg:mt-6">
               {items.map(({ text, linkText, linkUrl }, index) => (
                 <li
-                  className="group flex flex-col border-t border-dashed border-black border-opacity-40 py-6 text-black last:pb-0"
+                  className="group flex flex-col border-t border-dashed border-black border-opacity-40 py-6 text-black last:pb-0 lg:py-5"
                   key={index}
                 >
                   <Link to={linkUrl}>
                     <p className="text-lg font-semibold leading-snug opacity-[85%] lg:text-base">
                       {text}
                     </p>
-                    <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none">
+                    <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none lg:mt-2">
                       <span>{linkText}</span>
                       <ArrowIcon className="h-auto w-[18px] transition-transform duration-200 group-hover:translate-x-1" />
                     </span>

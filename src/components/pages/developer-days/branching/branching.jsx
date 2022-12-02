@@ -58,13 +58,13 @@ const Branching = ({ setIsOpenModal }) => {
 
   return (
     <section
-      className="branching safe-paddings sm:pt[190px] bg-black pt-[672px] text-white xl:pt-[408px] lg:pt-[364px] md:pt-[364px] sm:pt-[190px]"
+      className="branching safe-paddings sm:pt[190px] bg-black pt-[672px] text-white xl:pt-[408px] md:pt-[364px] sm:pt-[190px]"
       ref={wrapperRef}
     >
       <Container className="grid-gap-x grid grid-cols-12" size="md" ref={containerRef}>
         <div className="relative col-span-8 ml-[50px] flex max-w-[940px] flex-col items-center xl:col-span-full xl:mx-auto">
           <LineSvg className="absolute bottom-[calc(100%+2rem)] left-1/2 h-auto w-[393px] -translate-x-[calc(50%-11.3rem)] xl:hidden" />
-          <StraightLineSvg className="absolute bottom-[calc(100%+1rem)] left-1/2 hidden h-auto w-8 -translate-x-1/2 xl:block lg:w-[30px] md:w-6 sm:w-3.5" />
+          <StraightLineSvg className="absolute bottom-[calc(100%+1rem)] left-1/2 hidden h-auto w-8 -translate-x-1/2 xl:block lg:w-[30px] md:w-7 sm:w-3.5" />
           <time className="label-secondary-2 mx-auto" dateTime="2022-12-07">
             7th of December, 2022
           </time>
@@ -88,7 +88,7 @@ const Branching = ({ setIsOpenModal }) => {
               />
             </div>
             <div className="relative">
-              <svg width="940" height="520" className="rounded-2xl xl:w-full md:max-h-[390px]">
+              <svg width="940" height="520" className="rounded-2xl xl:w-full lg:max-h-[390px]">
                 <rect width="940" height="520" className="fill-secondary-6" />
               </svg>
 
@@ -96,7 +96,7 @@ const Branching = ({ setIsOpenModal }) => {
                 <RiveComponent className="absolute bottom-0 -right-2 h-full max-h-[448px] w-full max-w-[612px] sm:max-w-none" />
               )}
             </div>
-            <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-secondary-5 px-5 pt-7 pb-8 xl:left-6  lg:min-h-[442px] lg:max-w-[290px] md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
+            <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-secondary-5 px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
               <Button
                 className="w-full px-8"
                 theme="secondary"
@@ -104,10 +104,10 @@ const Branching = ({ setIsOpenModal }) => {
                 style={{ boxShadow: '0px 10px 30px rgba(26, 26, 26, 0.6)' }}
                 onClick={() => setIsOpenModal(true)}
               >
-                <PlayIcon className="mr-4 h-[22px] w-4 shrink-0" />
+                <PlayIcon className="mr-4 h-[22px] w-4 shrink-0 lg:h-4 lg:w-[11px]" />
                 <span>Watch announcements</span>
               </Button>
-              <ul className="mt-7">
+              <ul className="mt-7 lg:mt-6">
                 {items.map(({ text, linkText, linkUrl }, index) => (
                   <li
                     className="group flex flex-col border-t border-dashed border-black border-opacity-40 py-6 text-black last:pb-0"
@@ -117,7 +117,7 @@ const Branching = ({ setIsOpenModal }) => {
                       <p className="text-lg font-semibold leading-snug opacity-[85%] lg:text-base">
                         {text}
                       </p>
-                      <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none">
+                      <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none lg:mt-2">
                         <span>{linkText}</span>
                         <ArrowIcon className="h-auto w-[18px] transition-transform duration-200 group-hover:translate-x-1" />
                       </span>
