@@ -14,7 +14,7 @@ const styles = {
   },
   theme: {
     primary: 'bg-primary-1 text-black hover:bg-[#00e5bf]',
-    secondary: 'bg-black text-white hover:bg-[#262626]',
+    secondary: 'bg-black text-white hover:bg-[#292929]',
     tertiary: 'bg-black text-white border-2 border-white hover:border-primary-2',
     quaternary: 'bg-white text-black border-2 border-black hover:border-primary-2',
   },

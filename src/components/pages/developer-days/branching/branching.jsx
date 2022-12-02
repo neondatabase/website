@@ -79,12 +79,12 @@ const Branching = ({ setIsOpenModal }) => (
             <ul className="mt-7">
               {items.map(({ text, linkText, linkUrl }, index) => (
                 <li
-                  className="flex flex-col border-t border-dashed border-black border-opacity-40 py-6 text-black last:pb-0"
+                  className="group flex flex-col border-t border-dashed border-black border-opacity-40 py-6 text-black last:pb-0"
                   key={index}
                 >
                   <Link to={linkUrl}>
                     <p className="text-lg font-semibold leading-snug opacity-[85%]">{text}</p>
-                    <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none">
+                    <span className="with-moving-arrow mt-3.5 inline-flex items-center font-semibold leading-none">
                       <span>{linkText}</span>
                       <ArrowIcon className="h-auto w-[18px]" />
                     </span>
