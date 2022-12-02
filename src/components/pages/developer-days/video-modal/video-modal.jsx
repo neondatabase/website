@@ -44,7 +44,7 @@ const VideoModal = ({ isOpenModal, setIsOpenModal }) => (
             title="Neon Developer Days"
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           />
         </figure>
       </div>
