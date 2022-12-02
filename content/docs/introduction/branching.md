@@ -3,6 +3,7 @@ title: Branching
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/branches
+  - /docs/conceptual-guides/branching
 ---
 
 <a id="branches-coming-soon/"></a>
