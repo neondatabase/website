@@ -10,7 +10,7 @@ The Neon cloud service is available for free during the Technical Preview. For i
 The Technical Preview Free Tier has the following limits:
 
 - 1 Neon project
-- 10 branches, with a limit of 3GB of data
+- 10 branches, with a limit of 3GB of data per branch
 - 3 compute nodes (endpoints), each with 1 vCPU and up to 4GB of RAM (with 512MB of RAM allocated to PostgreSQL shared buffers)
 - A point-in-rime reset (PITR) window of 7 days of _reasonable usage_
 
