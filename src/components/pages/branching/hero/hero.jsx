@@ -22,7 +22,7 @@ const Hero = () => (
         <p className="mt-7 text-xl xl:text-base">
           Neon allows you to instantly branch your data the same way that you branch your code.
         </p>
-        <div className="mt-9 space-x-10 xs:flex xs:flex-col xs:items-center xs:space-y-6 xs:space-x-0">
+        <div className="mt-9 space-x-10 xl:space-x-8 xs:flex xs:flex-col xs:items-center xs:space-y-6 xs:space-x-0">
           <Button
             className="py-6 px-9 !text-lg xl:!text-base lg:py-5 lg:px-8"
             theme="primary"
@@ -32,7 +32,7 @@ const Hero = () => (
             Get early access
           </Button>
           <Link
-            className="text-lg font-semibold before:-bottom-1 before:h-[3px] lg:text-base"
+            className="text-lg font-semibold before:-bottom-1 before:h-[3px] xl:text-base"
             theme="black-primary-1"
             to="/docs/conceptual-guides/branching/"
           >

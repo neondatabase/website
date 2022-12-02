@@ -11,7 +11,7 @@ const CTA = () => (
       className="flex items-center justify-between space-x-10 lg:flex-col lg:justify-center lg:space-y-16 lg:space-x-0 md:space-y-10"
       size="sm"
     >
-      <div className="max-w-[661px] pb-16 xl:pb-0 lg:text-center">
+      <div className="max-w-[661px] shrink-0 pb-16 xl:max-w-[400px] xl:pb-0 lg:text-center">
         <Heading
           className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-[56px] lg:text-[44px]"
           tag="h2"
@@ -19,7 +19,7 @@ const CTA = () => (
           Try branching in your project now
         </Heading>
         <Button
-          className="mt-9 py-6 px-9 !text-lg lg:py-5 lg:px-8 lg:!text-base"
+          className="mt-9 py-6 px-9 !text-lg xl:!text-base lg:py-5 lg:px-8"
           theme="primary"
           size="sm"
         >

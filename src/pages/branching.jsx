@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { graphql } from 'gatsby';
 import React from 'react';
 
 import BranchData from 'components/pages/branching/branch-data';
@@ -22,8 +23,18 @@ const BranchingPage = () => (
   </Layout>
 );
 
+export const query = graphql`
+  query {
+    ogImage: file(relativePath: { eq: "social-previews/branching.jpg" }) {
+      childImageSharp {
+        gatsbyImageData(layout: FIXED, width: 1200, height: 630, formats: JPG)
+      }
+    }
+  }
+`;
+
 export default BranchingPage;
 
-export const Head = ({ location: { pathname } }) => (
-  <SEO pathname={pathname} {...SEO_DATA.branching} />
+export const Head = ({ location: { pathname }, data: { ogImage } }) => (
+  <SEO pathname={pathname} {...SEO_DATA.branching} ogImage={ogImage} />
 );

@@ -29,7 +29,7 @@ const BranchData = () => (
       <div className="grid-gap col-start-5 col-end-11 grid grid-cols-2 2xl:col-span-7 xl:col-span-full xl:mt-10 sm:grid-cols-1 sm:gap-y-8">
         {items.map(({ icon: Icon, title, description }, index) => (
           <div className="flex max-w-[360px] flex-col items-start sm:max-w-none" key={index}>
-            <Icon className="h-20 w-20 md:h-16 md:w-16" />
+            <Icon className="h-20 w-20 xl:h-16 xl:w-16" />
             <Heading className="mt-5 text-[26px] font-bold leading-dense" tag="h3">
               {title}
             </Heading>
