@@ -68,11 +68,7 @@ const Branching = ({ setIsOpenModal }) => {
           <time className="label-secondary-2 mx-auto" dateTime="2022-12-07">
             7th of December, 2022
           </time>
-          <Heading
-            className="mt-2.5 text-center text-[72px] font-bold leading-tight 2xl:text-6xl xl:text-[56px] xl:leading-dense md:text-[44px]"
-            tag="h2"
-            size="lg"
-          >
+          <Heading className="mt-2.5 text-center" tag="h2" size="lg">
             All-Things-Branching
           </Heading>
           <p className="mt-3 text-center text-base xl:mt-2.5 md:mt-2">
@@ -100,7 +96,7 @@ const Branching = ({ setIsOpenModal }) => {
                 <RiveComponent className="absolute bottom-0 -right-2 h-full max-h-[448px] w-full max-w-[612px] sm:max-w-none" />
               )}
             </div>
-            <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-secondary-5 px-5 pt-7 pb-8 xl:left-6 md:min-h-[442px] md:max-w-[290px] sm:static sm:mx-auto sm:-mt-2 sm:min-h-0 sm:w-[85%] sm:max-w-none sm:rounded-t-none">
+            <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-secondary-5 px-5 pt-7 pb-8 xl:left-6  lg:min-h-[442px] lg:max-w-[290px] md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
               <Button
                 className="w-full px-8"
                 theme="secondary"

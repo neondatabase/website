@@ -34,7 +34,7 @@ const items = [
 
 const Hero = ({ setIsOpenModal }) => {
   const [wrapperRef, isWrapperInView] = useInView({ threshold: 0.3 });
-  const { RiveComponent, rive } = useRive({
+  const { RiveComponent, rive, setContainerRef } = useRive({
     src: '/animations/pages/developer-days/dr-brown.riv',
     autoplay: false,
     stateMachines: 'State Machine',
@@ -71,10 +71,7 @@ const Hero = ({ setIsOpenModal }) => {
         <time className="label-secondary-2 mx-auto" dateTime="2022-12-06">
           6th of December, 2022
         </time>
-        <Heading
-          className="mt-2.5 text-center text-[72px] font-bold leading-tight 2xl:text-6xl xl:text-[56px] xl:leading-dense md:text-[44px]"
-          tag="h1"
-        >
+        <Heading className="mt-2.5 text-center" tag="h1" size="lg">
           Neon is Live!
         </Heading>
         <p className="mt-3 text-center text-base xl:mt-2.5 md:mt-2">
@@ -95,12 +92,17 @@ const Hero = ({ setIsOpenModal }) => {
             />
           </div>
           <div className="relative">
-            <svg width="940" height="520" className="rounded-2xl xl:w-full md:max-h-[390px]">
+            <svg
+              width="940"
+              height="520"
+              className="rounded-2xl xl:w-full md:max-h-[390px]"
+              ref={setContainerRef}
+            >
               <rect width="940" height="520" className="fill-secondary-2" />
             </svg>
             <RiveComponent className="absolute bottom-0 -right-2 h-full max-h-[448px] w-full max-w-[612px] sm:max-w-none" />
           </div>
-          <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-primary-1 px-5 pt-7 pb-8 xl:left-6 md:min-h-[442px] md:max-w-[290px] sm:static sm:mx-auto sm:-mt-2 sm:min-h-0 sm:w-[85%] sm:max-w-none sm:rounded-t-none">
+          <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-primary-1 px-5 pt-7 pb-8 xl:left-6 lg:min-h-[442px] lg:max-w-[290px] md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
             <Button
               className="w-full px-8"
               theme="secondary"
