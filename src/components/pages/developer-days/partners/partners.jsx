@@ -62,7 +62,7 @@ const Partners = ({ setIsOpenModal }) => {
       ref={wrapperRef}
     >
       <Container className="grid-gap-x grid grid-cols-12" size="md" ref={containerRef}>
-        <div className="col-span-4 flex justify-center 2xl:justify-start xl:hidden">
+        <div className="col-span-4 flex justify-center 2xl:col-span-3 2xl:justify-start xl:hidden">
           <img
             className="-mt-20 ml-[74px] 2xl:ml-0"
             src={featureLineSvg}
@@ -72,7 +72,7 @@ const Partners = ({ setIsOpenModal }) => {
             loading="lazy"
           />
         </div>
-        <div className="relative col-span-8 ml-auto mr-[50px] flex max-w-[940px] flex-col items-center xl:col-span-full xl:mx-auto xl:w-full">
+        <div className="relative col-span-8 ml-auto mr-[50px] flex max-w-[940px] flex-col items-center 2xl:col-span-9 xl:col-span-full xl:mx-auto xl:w-full">
           <LineSvg className="absolute bottom-[calc(100%+2rem)] left-1/2 h-auto w-[752px] -translate-x-[calc(50%+22.5rem)] xl:hidden" />
           <StraightLineSvg className="absolute bottom-[calc(100%+1rem)] left-1/2 hidden h-auto w-8 -translate-x-1/2 xl:block lg:w-[30px] md:w-7 sm:w-3.5" />
           <time className="label-secondary-2 mx-auto" dateTime="2022-12-07">

@@ -96,7 +96,7 @@ const Branching = ({ setIsOpenModal }) => {
                 <rect width="940" height="520" className="fill-secondary-6" />
               </svg>
               {isContainerInView && (
-                <RiveComponent className="sm:w-[276px absolute bottom-0 right-0 h-full max-h-[448px] w-full max-w-[612px] xl:-right-10 lg:h-[374px] lg:w-[510px] md:left-1/2 md:-translate-x-1/2 sm:h-[202px]" />
+                <RiveComponent className="absolute bottom-0 right-0 h-full max-h-[448px] w-full max-w-[612px] xl:-right-10 lg:h-[374px] lg:w-[510px] md:left-1/2 md:-translate-x-1/2 sm:h-[202px] sm:w-[276px]" />
               )}
             </div>
             <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-secondary-5 px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
