@@ -12,11 +12,12 @@ const items = [
     description:
       'Instantly deploy development, test, and staging environments with an up-to-date copy of your production data.',
     linkText: 'Read docs',
+    linkUrl: '/docs/introduction/branching', // TODO: check if this is the correct link
   },
   {
     title: 'Develop',
     description:
-      'Create a branch of your production database that developers are free to play with and modify better yet, create a branch for each developer.',
+      'Create a branch of your production database that developers are free to play with and modify — better yet, create a branch for each developer.',
   },
   {
     title: 'Integrate',
