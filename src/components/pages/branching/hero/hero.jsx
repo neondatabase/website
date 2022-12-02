@@ -12,7 +12,7 @@ const Hero = () => (
       className="flex w-full items-end justify-between space-x-14 border-b border-dashed border-gray-2 lg:flex-col lg:items-center lg:space-y-14 lg:space-x-0"
       size="sm"
     >
-      <div className="max-w-[605px] pb-[88px] xl:max-w-[376px] xl:pb-[60px] lg:pb-0 lg:text-center">
+      <div className="max-w-[605px] shrink-0 pb-[88px] xl:max-w-[376px] xl:pb-[60px] lg:pb-0 lg:text-center">
         <Heading
           className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-[56px] lg:text-[44px]"
           tag="h1"
