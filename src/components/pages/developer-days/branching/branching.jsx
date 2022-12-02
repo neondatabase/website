@@ -62,7 +62,7 @@ const Branching = ({ setIsOpenModal }) => {
       ref={wrapperRef}
     >
       <Container className="grid-gap-x grid grid-cols-12" size="md" ref={containerRef}>
-        <div className="relative col-span-8 ml-[50px] flex max-w-[940px] flex-col items-center xl:col-span-full xl:mx-auto">
+        <div className="relative col-span-8 ml-[50px] flex max-w-[940px] flex-col items-center xl:col-span-full xl:mx-auto xl:w-full">
           <LineSvg className="absolute bottom-[calc(100%+2rem)] left-1/2 h-auto w-[393px] -translate-x-[calc(50%-11.3rem)] xl:hidden" />
           <StraightLineSvg className="absolute bottom-[calc(100%+1rem)] left-1/2 hidden h-auto w-8 -translate-x-1/2 xl:block lg:w-[30px] md:w-7 sm:w-3.5" />
           <time className="label-secondary-2 mx-auto" dateTime="2022-12-07">
@@ -71,13 +71,13 @@ const Branching = ({ setIsOpenModal }) => {
           <Heading className="mt-2.5 text-center" tag="h2" size="lg">
             All-Things-Branching
           </Heading>
-          <p className="mt-3 text-center text-base xl:mt-2.5 md:mt-2">
-            Welcome to Neon Developer days from 6-8 December, 2022
+          <p className="mt-3 text-center text-xl xl:mt-2.5 xl:text-base md:mt-2">
+            Join us Wednesday, December 7th, to learn about database branching with Neon.
           </p>
-          <div className="relative mt-14 xl:mt-12 lg:mt-9 md:mt-6">
-            <div className="absolute -inset-x-16 top-16">
+          <div className="relative mt-14 xl:mt-12 lg:mt-9 md:mt-6 sm:w-full">
+            <div className="absolute -inset-x-16 top-16 md:w-[150%]">
               <StaticImage
-                className="rounded-[200px] opacity-30 blur-[70px]"
+                className="rounded-[200px] opacity-30 blur-[70px] md:h-[132px]"
                 imgClassName="rounded-[200px]"
                 src="./images/bg-gradient-branching.jpg"
                 width={1068}
@@ -88,12 +88,15 @@ const Branching = ({ setIsOpenModal }) => {
               />
             </div>
             <div className="relative">
-              <svg width="940" height="520" className="rounded-2xl xl:w-full lg:max-h-[390px]">
+              <svg
+                width="940"
+                height="520"
+                className="w-auto rounded-2xl xl:w-full lg:mx-auto lg:max-h-[390px] sm:max-h-[211px]"
+              >
                 <rect width="940" height="520" className="fill-secondary-6" />
               </svg>
-
               {isContainerInView && (
-                <RiveComponent className="absolute bottom-0 -right-2 h-full max-h-[448px] w-full max-w-[612px] sm:max-w-none" />
+                <RiveComponent className="sm:w-[276px absolute bottom-0 right-0 h-full max-h-[448px] w-full max-w-[612px] xl:-right-10 lg:h-[374px] lg:w-[510px] md:left-1/2 md:-translate-x-1/2 sm:h-[202px]" />
               )}
             </div>
             <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-secondary-5 px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
@@ -128,9 +131,9 @@ const Branching = ({ setIsOpenModal }) => {
             </div>
           </div>
         </div>
-        <div className="col-span-4 flex justify-center xl:hidden">
+        <div className="col-span-4 flex justify-center 2xl:justify-end xl:hidden">
           <img
-            className="-mt-9 mr-[153px]"
+            className="-mt-9 mr-[153px] 2xl:mr-0"
             src={vercelLineSvg}
             width={169}
             height={760}

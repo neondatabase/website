@@ -33,7 +33,7 @@ const items = [
 ];
 
 const Hero = ({ setIsOpenModal }) => {
-  const [wrapperRef, isWrapperInView] = useInView({ threshold: 0.3 });
+  const [wrapperRef, isWrapperInView] = useInView();
   const { RiveComponent, rive } = useRive({
     src: '/animations/pages/developer-days/dr-brown.riv',
     autoplay: false,
@@ -77,11 +77,11 @@ const Hero = ({ setIsOpenModal }) => {
         <p className="mt-3 text-center text-base xl:mt-2.5 md:mt-2">
           Welcome to Neon Developer Days. December 6-8, 2022.
         </p>
-        <div className="relative mt-14 xl:mt-12 lg:mt-9 md:mt-6">
+        <div className="relative mt-14 xl:mt-12 lg:mt-9 md:mt-6 sm:w-full">
           <StickerIcon className="absolute top-[-198px] right-[-154px] h-[300px] w-[300px] xl:hidden" />
-          <div className="absolute -inset-x-16 top-16">
+          <div className="absolute -inset-x-16 top-16 md:w-[150%]">
             <StaticImage
-              className="rounded-[200px] opacity-30 blur-[70px]"
+              className="rounded-[200px] opacity-30 blur-[70px] md:h-[132px]"
               imgClassName="rounded-[200px]"
               src="./images/bg-gradient-hero.jpg"
               width={1068}
@@ -92,10 +92,14 @@ const Hero = ({ setIsOpenModal }) => {
             />
           </div>
           <div className="relative">
-            <svg width="940" height="520" className="rounded-2xl xl:w-full lg:max-h-[390px]">
+            <svg
+              width="940"
+              height="520"
+              className="rounded-2xl xl:w-full lg:max-h-[390px] sm:max-h-[211px]"
+            >
               <rect width="940" height="520" className="fill-secondary-2" />
             </svg>
-            <RiveComponent className="absolute bottom-0 -right-2 h-full max-h-[448px] w-full max-w-[612px] sm:max-w-none" />
+            <RiveComponent className="absolute bottom-0 right-2 h-full max-h-[448px] w-full max-w-[612px] lg:h-[333px] lg:w-[452px] md:right-auto md:left-1/2 md:-translate-x-1/2 sm:h-[192px] sm:w-[260px] sm:max-w-none" />
           </div>
           <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-primary-1 px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] lg:pb-7 lg:pt-6 md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
             <Button
