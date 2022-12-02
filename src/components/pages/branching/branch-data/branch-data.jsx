@@ -10,13 +10,13 @@ const items = [
   {
     icon: InstantIcon,
     title: 'Instant branches',
-    description:
-      'Neon’s <a href="/">copy-on-write technique</a> makes branching instantaneous and cost-effective.',
+    description: 'Neon’s copy-on-write technique makes branching instantaneous and cost-effective.',
   },
   {
     icon: SeamlessIcon,
     title: 'Seamless integration',
-    description: 'Integrate branching into your CI/CD pipeline using the <a href="/">Neon API</a>.',
+    description:
+      'Integrate branching into your CI/CD pipeline using the <a href="/docs/reference/api-reference/">Neon API</a>.',
   },
 ];
 

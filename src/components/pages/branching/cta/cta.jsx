@@ -4,6 +4,7 @@ import React from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import LINKS from 'constants/links';
 
 const CTA = () => (
   <section className="cta safe-paddings bg-black pt-[200px] text-white 2xl:pt-36 xl:pt-32 lg:pt-28 md:pt-20">
@@ -21,6 +22,7 @@ const CTA = () => (
         <Button
           className="mt-9 py-6 px-9 !text-lg xl:!text-base lg:py-5 lg:px-8"
           theme="primary"
+          to={LINKS.signup}
           size="sm"
         >
           Try branching now

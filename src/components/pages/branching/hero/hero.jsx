@@ -5,6 +5,7 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 
 const Hero = () => (
   <section className="hero safe-paddings bg-black pt-[158px] text-white xl:pt-[136px] lg:pt-9 sm:pt-6">
@@ -27,14 +28,14 @@ const Hero = () => (
             className="py-6 px-9 !text-lg xl:!text-base lg:py-5 lg:px-8"
             theme="primary"
             size="sm"
-            to="/early-access"
+            to={LINKS.signup}
           >
-            Get early access
+            Sign up
           </Button>
           <Link
             className="text-lg font-semibold before:-bottom-1 before:h-[3px] xl:text-base"
             theme="black-primary-1"
-            to="/docs/conceptual-guides/branching/"
+            to="/docs/introduction/branching/"
           >
             Explore the docs
           </Link>

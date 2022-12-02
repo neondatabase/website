@@ -97,13 +97,8 @@ const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
         >
           Sign In
         </Button>
-        <Button
-          className="!flex h-12 items-center"
-          to={LINKS.earlyAccess}
-          size="xs"
-          theme="primary"
-        >
-          Get early access
+        <Button className="!flex h-12 items-center" to={LINKS.signup} size="xs" theme="primary">
+          Sign up
         </Button>
       </div>
     </motion.nav>

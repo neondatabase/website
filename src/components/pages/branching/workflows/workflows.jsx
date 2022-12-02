@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { InView, useInView } from 'react-intersection-observer';
-import { useRive, Layout, Fit, Alignment } from 'rive-react';
+import { Alignment, Fit, Layout, useRive } from 'rive-react';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import Link from 'components/shared/link';
 
 const items = [
   {
@@ -113,7 +112,7 @@ const Workflows = () => {
             branching
           </Heading>
           <div className="mt-[220px] flex grow flex-col justify-between 3xl:mt-48 lg:mt-28 md:mt-4 md:space-y-0 md:divide-y md:divide-dashed md:divide-gray-2">
-            {items.map(({ title, description, linkText, linkUrl }, index) => (
+            {items.map(({ title, description }, index) => (
               <InView
                 className="flex max-w-[600px] flex-col items-start md:mt-0 md:max-w-none md:py-12"
                 as="div"
@@ -135,7 +134,8 @@ const Workflows = () => {
                 <p className="mt-3.5 text-[26px] leading-tight xl:text-xl lg:text-lg md:text-base">
                   {description}
                 </p>
-                {linkText && linkUrl && (
+                {/* TODO: restore links if necessary (don't forget to add linkText and linkUrl props to items mapping) */}
+                {/* {linkText && linkUrl && (
                   <Link
                     className="mt-5 text-lg font-semibold before:-bottom-1 before:h-[3px]"
                     theme="black-primary-1"
@@ -143,7 +143,7 @@ const Workflows = () => {
                   >
                     {linkText}
                   </Link>
-                )}
+                )} */}
               </InView>
             ))}
           </div>
