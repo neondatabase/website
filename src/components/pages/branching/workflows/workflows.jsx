@@ -40,13 +40,14 @@ const items = [
 ];
 
 const STATE_MACHINE_NAME = ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6'];
-const PRELIMINARY_STEPS = STATE_MACHINE_NAME.slice(0, 2);
+const PRELIMINARY_STEPS_COUNT = 2;
 
 const Workflows = () => {
   const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
   const [containerRef, isContainerInView] = useInView({ triggerOnce: true });
   const [currentIndex, setCurrentIndex] = useState(-1);
   const lastPlayedIndex = useRef(-1);
+  const initialAnimationTimeout = useRef(null);
 
   const { RiveComponent, rive, setContainerRef } = useRive({
     src: '/animations/pages/branching/branching-route.riv',
@@ -63,7 +64,11 @@ const Workflows = () => {
       if (isContainerInView) {
         // Playing initial animation only if content animation didn't played
         if (lastPlayedIndex.current === -1) {
-          rive.play(PRELIMINARY_STEPS);
+          rive.play(STATE_MACHINE_NAME[0]);
+          initialAnimationTimeout.current = setTimeout(
+            () => rive.play(STATE_MACHINE_NAME[1]),
+            1000
+          );
         }
       }
     }
@@ -72,8 +77,9 @@ const Workflows = () => {
   useEffect(() => {
     if (rive) {
       if (currentIndex > lastPlayedIndex.current) {
-        rive.play(STATE_MACHINE_NAME[currentIndex + PRELIMINARY_STEPS.length]);
+        clearTimeout(initialAnimationTimeout.current);
         lastPlayedIndex.current = currentIndex;
+        rive.play(STATE_MACHINE_NAME[currentIndex + PRELIMINARY_STEPS_COUNT]);
       }
     }
   }, [rive, currentIndex]);
