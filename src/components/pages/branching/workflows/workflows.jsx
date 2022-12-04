@@ -40,13 +40,13 @@ const items = [
 ];
 
 const STATE_MACHINE_NAME = ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6'];
+const PRELIMINARY_STEPS = STATE_MACHINE_NAME.slice(0, 2);
 
 const Workflows = () => {
-  const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true });
-  const [containerRef, isContainerInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
-  const [currentIndex, setCurrentIndex] = useState(null);
-  const [lastPlayedStateIndex, setLastPlayedIndex] = useState(2); //  set second state S2 as default last played state
-  const initPlay = useRef(false);
+  const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
+  const [containerRef, isContainerInView] = useInView({ triggerOnce: true });
+  const [currentIndex, setCurrentIndex] = useState(-1);
+  const lastPlayedIndex = useRef(-1);
 
   const { RiveComponent, rive, setContainerRef } = useRive({
     src: '/animations/pages/branching/branching-route.riv',
@@ -57,28 +57,26 @@ const Workflows = () => {
       alignment: Alignment.TopCenter,
     }),
   });
-  // play initial states S0, S1 of route animation
-  useEffect(() => {
-    if (rive) {
-      if (isWrapperInView) {
-        setTimeout(rive.play(STATE_MACHINE_NAME.slice(0, 2)), 3000);
-      }
-    }
-  }, [isWrapperInView, rive]);
 
   useEffect(() => {
     if (rive) {
-      if (currentIndex > lastPlayedStateIndex && !initPlay.current) {
-        const statesToPlay = STATE_MACHINE_NAME.slice(lastPlayedStateIndex, currentIndex + 1);
-        rive.play(statesToPlay);
-        setLastPlayedIndex(currentIndex);
-      }
-      initPlay.current = true;
-      if (currentIndex) {
-        rive.play(STATE_MACHINE_NAME[currentIndex]);
+      if (isContainerInView) {
+        // Playing initial animation only if content animation didn't played
+        if (lastPlayedIndex.current === -1) {
+          rive.play(PRELIMINARY_STEPS);
+        }
       }
     }
-  }, [rive, currentIndex, lastPlayedStateIndex]);
+  }, [rive, isContainerInView]);
+
+  useEffect(() => {
+    if (rive) {
+      if (currentIndex > lastPlayedIndex.current) {
+        rive.play(STATE_MACHINE_NAME[currentIndex + PRELIMINARY_STEPS.length]);
+        lastPlayedIndex.current = currentIndex;
+      }
+    }
+  }, [rive, currentIndex]);
 
   return (
     <section className="workflows safe-paddings bg-black pt-20 text-white lg:pt-0" ref={wrapperRef}>
@@ -88,7 +86,7 @@ const Workflows = () => {
         ref={containerRef}
       >
         <div className="relative col-start-2 col-end-5 flex justify-between xl:col-start-1 md:hidden">
-          {isContainerInView && (
+          {isWrapperInView && (
             <div className="absolute left-0 -top-20 h-[calc(100%+80px)] w-[609px] 2xl:w-[592px] xl:-top-[60px] xl:w-[456px] lg:-top-[47px] lg:w-[358px]">
               <RiveComponent width={609} height={3561} />
             </div>
@@ -110,11 +108,7 @@ const Workflows = () => {
                 key={index}
                 threshold={1}
                 triggerOnce
-                onChange={(inView) => {
-                  if (inView && lastPlayedStateIndex <= index + 2) {
-                    setCurrentIndex(index + 2); // starting with S2 after initial states S0, S1
-                  }
-                }}
+                onChange={(inView) => inView && setCurrentIndex(index)}
               >
                 <Heading
                   className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-[44px] md:text-4xl"
