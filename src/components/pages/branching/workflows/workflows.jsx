@@ -45,8 +45,9 @@ const PRELIMINARY_STEPS_COUNT = 2;
 const Workflows = () => {
   const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
   const [containerRef, isContainerInView] = useInView({ triggerOnce: true });
-  const [currentIndex, setCurrentIndex] = useState(-1);
-  const lastPlayedIndex = useRef(-1);
+  const [animationDeadlineRef, isAnimationDeadlineInView] = useInView({ triggerOnce: true });
+  const [currentItemIndex, setCurrentItemIndex] = useState(-1);
+  const lastPlayedStep = useRef(-1);
   const initialAnimationTimeout = useRef(null);
 
   const { RiveComponent, rive, setContainerRef } = useRive({
@@ -59,11 +60,28 @@ const Workflows = () => {
     }),
   });
 
+  // NOTE: the useEffect order is important,
+  // this useEffect with last animation step
+  // should be placed last
+  useEffect(() => {
+    if (rive) {
+      if (isAnimationDeadlineInView) {
+        const lastStepIndex = STATE_MACHINE_NAME.length - 1;
+
+        if (lastPlayedStep.current !== lastStepIndex) {
+          lastPlayedStep.current = lastStepIndex;
+          rive.play(STATE_MACHINE_NAME[lastStepIndex]);
+        }
+      }
+    }
+  }, [rive, isAnimationDeadlineInView]);
+
   useEffect(() => {
     if (rive) {
       if (isContainerInView) {
-        // Playing initial animation only if content animation didn't played
-        if (lastPlayedIndex.current === -1) {
+        // NOTE: playing initial animation only
+        // if content animation didn't played
+        if (lastPlayedStep.current === -1) {
           rive.play(STATE_MACHINE_NAME[0]);
           initialAnimationTimeout.current = setTimeout(
             () => rive.play(STATE_MACHINE_NAME[1]),
@@ -76,13 +94,19 @@ const Workflows = () => {
 
   useEffect(() => {
     if (rive) {
-      if (currentIndex > lastPlayedIndex.current) {
-        clearTimeout(initialAnimationTimeout.current);
-        lastPlayedIndex.current = currentIndex;
-        rive.play(STATE_MACHINE_NAME[currentIndex + PRELIMINARY_STEPS_COUNT]);
+      // NOTE: preventing items animation
+      // when the Rive was loaded and ready to use
+      if (currentItemIndex !== -1) {
+        const currentIndex = currentItemIndex + PRELIMINARY_STEPS_COUNT;
+
+        if (currentIndex > lastPlayedStep.current) {
+          clearTimeout(initialAnimationTimeout.current);
+          lastPlayedStep.current = currentIndex;
+          rive.play(STATE_MACHINE_NAME[currentIndex]);
+        }
       }
     }
-  }, [rive, currentIndex]);
+  }, [rive, currentItemIndex]);
 
   return (
     <section className="workflows safe-paddings bg-black pt-20 text-white lg:pt-0" ref={wrapperRef}>
@@ -114,7 +138,7 @@ const Workflows = () => {
                 key={index}
                 threshold={1}
                 triggerOnce
-                onChange={(inView) => inView && setCurrentIndex(index)}
+                onChange={(inView) => inView && setCurrentItemIndex(index)}
               >
                 <Heading
                   className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-[44px] md:text-4xl"
@@ -140,6 +164,7 @@ const Workflows = () => {
           </div>
         </div>
       </Container>
+      <div ref={animationDeadlineRef} />
     </section>
   );
 };
