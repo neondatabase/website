@@ -14,6 +14,10 @@ import VideoModal from '../video-modal';
 import LineSvg from './images/line.inline.svg';
 import vercelLineSvg from './images/vercel-line.svg';
 
+const title = 'All-Things-Branching';
+const description =
+  ' Join us Wednesday, December 7th, to learn about database branching with Neon.';
+
 const items = [
   {
     text: 'Branching with the Neon API',
@@ -52,11 +56,9 @@ const Branching = () => {
             7th of December, 2022
           </time>
           <Heading className="mt-2.5 text-center" tag="h2" size="lg" theme="white">
-            All-Things-Branching
+            {title}
           </Heading>
-          <p className="mt-3 text-center text-xl xl:mt-2.5 xl:text-base md:mt-2">
-            Join us Wednesday, December 7th, to learn about database branching with Neon.
-          </p>
+          <p className="mt-3 text-center text-xl xl:mt-2.5 xl:text-base md:mt-2">{description}</p>
           <div className="relative mt-14 xl:mt-12 lg:mt-9 md:mt-6 sm:w-full">
             <div className="absolute -inset-x-16 top-16 md:w-[150%]">
               <StaticImage
@@ -106,7 +108,13 @@ const Branching = () => {
           />
         </div>
       </Container>
-      <VideoModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} videoId="tu-bgIg-Luo" />
+      <VideoModal
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+        title={title}
+        description={description}
+        videoId="tu-bgIg-Luo"
+      />
     </section>
   );
 };

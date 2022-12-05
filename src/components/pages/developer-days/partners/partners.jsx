@@ -14,6 +14,10 @@ import VideoModal from '../video-modal';
 import featureLineSvg from './images/feature-line.svg';
 import LineSvg from './images/line.inline.svg';
 
+const title = 'Serverless & Postgres';
+const description =
+  'Join us Thursday, December 8th, to learn about building serverless apps with Postgres.';
+
 const items = [
   {
     text: 'Serverless Driver for Postgres',
@@ -57,11 +61,9 @@ const Partners = () => {
             8th of December, 2022
           </time>
           <Heading className="mt-2.5 text-center" tag="h2" size="lg" theme="white">
-            Serverless & Postgres
+            {title}
           </Heading>
-          <p className="mt-3 text-center text-xl xl:mt-2.5 xl:text-base md:mt-2">
-            Join us Thursday, December 8th, to learn about building serverless apps with Postgres.
-          </p>
+          <p className="mt-3 text-center text-xl xl:mt-2.5 xl:text-base md:mt-2">{description}</p>
           <div className="relative mt-14 xl:mt-12 lg:mt-9 md:mt-6 sm:w-full">
             <div className="absolute -inset-x-16 top-16 md:w-[150%]">
               <StaticImage
@@ -102,7 +104,13 @@ const Partners = () => {
           </div>
         </div>
       </Container>
-      <VideoModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} videoId="tu-bgIg-Luo" />
+      <VideoModal
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+        title={title}
+        description={description}
+        videoId="tu-bgIg-Luo"
+      />
     </section>
   );
 };

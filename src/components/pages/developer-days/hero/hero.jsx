@@ -12,6 +12,9 @@ import VideoModal from '../video-modal';
 import bgShapeSvg from './images/bg-shape.svg';
 import StickerIcon from './images/sticker.inline.svg';
 
+const title = 'Neon is Live!';
+const description = 'Welcome to Neon Developer Days. December 6-8, 2022.';
+
 const items = [
   {
     text: 'Neon is Live!',
@@ -51,11 +54,9 @@ const Hero = () => {
           6th of December, 2022
         </time>
         <Heading className="mt-2.5 text-center" tag="h1" size="lg" theme="white">
-          Neon is Live!
+          {title}
         </Heading>
-        <p className="mt-3 text-center text-base xl:mt-2.5 md:mt-2">
-          Welcome to Neon Developer Days. December 6-8, 2022.
-        </p>
+        <p className="mt-3 text-center text-base xl:mt-2.5 md:mt-2">{description}</p>
         <div className="relative mt-14 xl:mt-12 lg:mt-9 md:mt-6 sm:w-full">
           <StickerIcon className="absolute top-[-198px] right-[-154px] h-[300px] w-[300px] xl:hidden" />
           <div className="absolute -inset-x-16 top-16 md:w-[150%]">
@@ -93,7 +94,13 @@ const Hero = () => {
           <ItemsList className="bg-primary-1" items={items} setIsOpenModal={setIsOpenModal} />
         </div>
       </Container>
-      <VideoModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} videoId="tu-bgIg-Luo" />
+      <VideoModal
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+        title={title}
+        description={description}
+        videoId="tu-bgIg-Luo"
+      />
     </section>
   );
 };

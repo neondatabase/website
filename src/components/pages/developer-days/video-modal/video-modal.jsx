@@ -6,7 +6,7 @@ import React, { useRef } from 'react';
 import useClickOutside from 'hooks/use-click-outside';
 import CloseIcon from 'icons/close.inline.svg';
 
-const VideoModal = ({ isOpenModal, setIsOpenModal, videoId }) => {
+const VideoModal = ({ isOpenModal, setIsOpenModal, title, description, videoId }) => {
   const contentRef = useRef();
   const handleClickOutside = () => {
     setIsOpenModal(false);
@@ -30,8 +30,8 @@ const VideoModal = ({ isOpenModal, setIsOpenModal, videoId }) => {
         >
           <CloseIcon className="h-5 w-5 text-white opacity-20" />
         </button>
-        <h3 className="text-3xl font-bold leading-tight">Neon is Live!</h3>
-        <p className="mt-0.5">Welcome to Neon Developer days from 6-8 December, 2022</p>
+        <h3 className="text-3xl font-bold leading-tight">{title}</h3>
+        <p className="mt-0.5">{description}</p>
         <div className="relative">
           <div className="absolute -inset-x-16 top-16">
             <StaticImage
@@ -66,6 +66,8 @@ const VideoModal = ({ isOpenModal, setIsOpenModal, videoId }) => {
 VideoModal.propTypes = {
   isOpenModal: PropTypes.bool.isRequired,
   setIsOpenModal: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   videoId: PropTypes.string.isRequired,
 };
 
