@@ -12,12 +12,16 @@ import SearchIcon from 'icons/search.inline.svg';
 
 import Burger from './burger';
 // import DiscordIcon from './images/header-discord.inline.svg';
+import AboutUsIcon from './images/header-about-us.inline.svg';
+import CareersIcon from './images/header-careers.inline.svg';
 import DiscussionsIcon from './images/header-discussions.inline.svg';
 import Github from './images/header-github.inline.svg';
 
 const icons = {
   // discord: DiscordIcon,
   discussions: DiscussionsIcon,
+  careers: CareersIcon,
+  aboutUs: AboutUsIcon,
 };
 
 const Header = forwardRef(
@@ -35,6 +39,7 @@ const Header = forwardRef(
     ref
   ) => {
     const isThemeBlack = theme === 'black';
+
     return (
       <header
         className={clsx(
@@ -53,58 +58,62 @@ const Header = forwardRef(
           </Link>
           <nav className="xl:absolute xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2">
             <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
-              {MENUS.header.map(({ to, text, items }, index) => (
-                <li className={clsx(items?.length > 0 && 'group relative')} key={index}>
-                  <Link
-                    className={clsx(
-                      items?.length > 0 &&
-                        'relative pr-3.5 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-[transparent] before:transition-colors before:duration-200 group-hover:text-primary-2 group-hover:before:border-t-primary-2',
-                      items?.length > 0 && isThemeBlack
-                        ? 'before:border-t-white'
-                        : 'before:border-t-black'
-                    )}
-                    to={to}
-                    theme={isThemeBlack ? 'white' : 'black'}
-                  >
-                    {text}
-                  </Link>
-                  {items?.length > 0 && (
-                    <div className="group-hover:opacity-1 invisible absolute bottom-0 translate-y-full pt-4 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
-                      <ul
-                        className=" rounded-2xl bg-white p-3.5"
-                        style={{ boxShadow: '0px 4px 10px rgba(26, 26, 26, 0.2)' }}
-                      >
-                        {items.map(({ iconName, text, description, to }, index) => {
-                          const Icon = icons[iconName];
-                          return (
-                            <li
-                              className={clsx(
-                                index !== 0 && 'mt-3.5 border-t border-t-gray-6 pt-3.5'
-                              )}
-                              key={index}
-                            >
-                              <Link
-                                className="flex items-center whitespace-nowrap hover:text-primary-2"
-                                to={to}
+              {MENUS.header.map(({ to, text, items }, index) => {
+                const Tag = to ? Link : 'button';
+                return (
+                  <li className={clsx(items?.length > 0 && 'group relative')} key={index}>
+                    <Tag
+                      className={clsx(
+                        items?.length > 0 &&
+                          'relative pr-3.5 leading-none before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-[transparent] before:transition-colors before:duration-200 group-hover:text-primary-2 group-hover:before:border-t-primary-2',
+                        items?.length > 0 && isThemeBlack
+                          ? 'before:border-t-white'
+                          : 'before:border-t-black',
+                        isThemeBlack ? 'text-white' : 'text-black'
+                      )}
+                      to={to}
+                      theme={isThemeBlack ? 'white' : 'black'}
+                    >
+                      {text}
+                    </Tag>
+                    {items?.length > 0 && (
+                      <div className="group-hover:opacity-1 invisible absolute bottom-0 translate-y-full pt-4 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
+                        <ul
+                          className=" rounded-2xl bg-white p-3.5"
+                          style={{ boxShadow: '0px 4px 10px rgba(26, 26, 26, 0.2)' }}
+                        >
+                          {items.map(({ iconName, text, description, to }, index) => {
+                            const Icon = icons[iconName];
+                            return (
+                              <li
+                                className={clsx(
+                                  index !== 0 && 'mt-3.5 border-t border-t-gray-6 pt-3.5'
+                                )}
+                                key={index}
                               >
-                                <Icon className="shrink-0" aria-hidden />
-                                <span className="ml-3">
-                                  <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
-                                    {text}
+                                <Link
+                                  className="flex items-center whitespace-nowrap hover:text-primary-2"
+                                  to={to}
+                                >
+                                  <Icon className="shrink-0" aria-hidden />
+                                  <span className="ml-3">
+                                    <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
+                                      {text}
+                                    </span>
+                                    <span className="mt-1.5 block leading-none text-black">
+                                      {description}
+                                    </span>
                                   </span>
-                                  <span className="mt-1.5 block leading-none text-black">
-                                    {description}
-                                  </span>
-                                </span>
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  )}
-                </li>
-              ))}
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
           <Link
