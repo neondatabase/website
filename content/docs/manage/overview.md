@@ -55,8 +55,8 @@ An endpoint is the compute instance associated with a branch. A read-write endpo
 
 ## Users
 
-In Neon, users are PostgreSQL users. A user is required to create and access a database. A user belongs to a branch. There is no limit on the number of users you can create. The root branch of a Neon project is created with a user named for the Neon account that you registered with. For example, if you registered with a Google account for "Casey Smith", Neon creates a user named "Casey" in the root branch. This user is the owner of the default `main` database in your project's root branch. For more information, see [Users](../users).
+In Neon, users are PostgreSQL users. A user is required to create and access a database. A user belongs to a branch. There is no limit on the number of users you can create. The root branch of a Neon project is created with a user named for the Neon account that you registered with. For example, if you registered with a Google account for "Casey Smith", Neon creates a user named "Casey" in the root branch. This user is the owner of the default `neondb` database in your project's root branch. For more information, see [Users](../users).
 
 ## Databases
 
-As with any standalone instance of PostgreSQL, a database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In Neon, a database belongs to a branch. The root branch of a Neon project is created with a default database named `main`. There is no limit on the number of databases you can create. For more information, see [Databases](../databases).
+As with any standalone instance of PostgreSQL, a database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In Neon, a database belongs to a branch. The root branch of a Neon project is created with a default database named `neondb`. There is no limit on the number of databases you can create. For more information, see [Databases](../databases).

@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-In Neon, users are PostgreSQL users. Each Neon project is created with a default user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This user owns the default database (`main`) that is created in a project's root branch.
+In Neon, users are PostgreSQL users. Each Neon project is created with a default user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This user owns the default database (`neondb`) that is created in a project's root branch.
 
 Additional users can be created in a project's root branch or child branches. There is no limit to the number fo users you can create.
 

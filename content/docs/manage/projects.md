@@ -10,7 +10,7 @@ A Neon project is created with the following resources by default:
 
 - A root branch called `main`. You can create child branches from the root branch or from a previously created branch. For more information, see [Branches](../branches).
 - A single read-write endpoint. An endpoint is the compute instance associated with a branch. For more information, see [Endpoints](../branches).
-- A default database, called `main`, which resides in the project's root branch.
+- A default database, called `neondb`, which resides in the project's root branch.
 - A default PostgreSQL user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
 
 ## Create a project
