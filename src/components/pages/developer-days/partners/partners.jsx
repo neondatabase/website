@@ -63,13 +63,13 @@ const Partners = () => {
 
   return (
     <section
-      className="branching safe-paddings sm:pt[190px] bg-black pt-[672px] text-white xl:pt-[408px] md:pt-[364px] sm:pt-[190px]"
+      className="branching safe-paddings bg-black pt-[672px] text-white 3xl:pt-[690px] xl:pt-[408px] md:pt-[364px] sm:pt-[190px]"
       ref={wrapperRef}
     >
       <Container className="grid-gap-x grid grid-cols-12" size="md" ref={containerRef}>
         <div className="col-span-4 flex justify-center 2xl:col-span-3 2xl:justify-start xl:hidden">
           <img
-            className="-mt-20 ml-[74px] 2xl:ml-0"
+            className="-mt-20 ml-[74px] 3xl:ml-0"
             src={featureLineSvg}
             width={144}
             height={784}
@@ -117,7 +117,7 @@ const Partners = () => {
             </div>
             <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-secondary-2 px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
               <Button
-                className="w-full px-8"
+                className="w-full px-8 !text-lg lg:!text-base"
                 theme="secondary"
                 size="sm"
                 style={{ boxShadow: '0px 10px 30px rgba(26, 26, 26, 0.6)' }}

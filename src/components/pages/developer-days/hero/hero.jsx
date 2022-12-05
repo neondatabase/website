@@ -108,7 +108,7 @@ const Hero = () => {
           </div>
           <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-primary-1 px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] lg:pb-7 lg:pt-6 md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
             <Button
-              className="w-full px-8"
+              className="w-full px-8 !text-lg lg:!text-base"
               theme="secondary"
               size="sm"
               style={{ boxShadow: '0px 10px 30px rgba(26, 26, 26, 0.6)' }}

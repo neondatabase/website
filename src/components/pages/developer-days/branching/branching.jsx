@@ -106,7 +106,7 @@ const Branching = () => {
             </div>
             <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-secondary-5 px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
               <Button
-                className="w-full px-8"
+                className="w-full px-8 !text-lg lg:!text-base"
                 theme="secondary"
                 size="sm"
                 style={{ boxShadow: '0px 10px 30px rgba(26, 26, 26, 0.6)' }}
@@ -138,7 +138,7 @@ const Branching = () => {
         </div>
         <div className="col-span-4 flex justify-center 2xl:justify-end xl:hidden">
           <img
-            className="-mt-9 mr-[153px] 2xl:mr-0"
+            className="-mt-9 mr-[153px] 3xl:mr-0"
             src={vercelLineSvg}
             width={169}
             height={760}
