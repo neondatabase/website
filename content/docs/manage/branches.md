@@ -68,7 +68,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
   ```
 
 <Admonition type="tip">
-A endpoint hostname starts with an `ep-` prefix. You can also find an endpoint hostname in the branch connection string in the **Connection Details** widget on the project **Dashboard**. An endpoint hostname can also be found on the **Branches** page in the Neon Console. See [View branches](#view-branches).
+A endpoint hostname starts with an `ep-` prefix. You can also find an endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
 </Admonition>
 
 If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the _Guides_ section in the documentation provide connection examples for various languages and frameworks. For more information about connecting, see [Connect from any application](../../connect/connect-from-any-app).
@@ -89,7 +89,7 @@ To delete a branch:
 
 Tier limits define the amount of data you can store in a branch. Neon's free tier permits 3GB per branch.
 
-You can check the data size for a branch in the **Storage** widget on the Neon **Dashboard** or by viewing the `DATABASE SIZE` value on the **Branches** page (see [View branchings](#view-branches)). Alternatively, you can run the following query from the Neon SQL Editor:
+You can check the data size for a branch by viewing the `DATABASE SIZE` value on the **Branches** page (see [View branchings](#view-branches)). Alternatively, you can run the following query from the Neon SQL Editor:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))
