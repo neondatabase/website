@@ -36,73 +36,42 @@ To revoke an API key:
 ### Make an API call
 
 <Admonition type="important">
-The next version of the Neon API is currently in preview. It is partially implemented and intended for review purposes only. To try this version of the Neon API, refer to the [Neon API V2 reference](https://neon.tech/api-reference/v2) for supported endpoints. The base URL for the preview version of the Neon API is `https://console.neon.tech/api/v2`. Use this base URL when using the preview version of the Neon API.
+[Neon API v1](https://console.neon.tech/api/v1) is now deprecated. Support for it will be removed in a future release. Please migrate your applications to [Neon API V2 reference](https://neon.tech/api-reference/v2). The base URL for the new Neon API is `https://console.neon.tech/api/v2`.
 </Admonition>
 
 The following `cURL` example uses the `/projects` endpoint to retrieve projects that belong to your Neon account.
 
 ```bash
 curl -X GET -H "Authorization: Bearer $NEON_API_KEY" "accept: application/json"
-"https://console.neon.tech/api/v1/projects" | jq
+"https://console.neon.tech/api/v2/projects" | jq
 ```
 
 where:
 
 - The `Authorization: Bearer $NEON_API_KEY` entry in the header specifies your API key. Replace `$NEON_API_KEY` with your actual 64-bit API key. A request without this header, or containing an invalid or revoked API key, fails and returns a `401 Unauthorized` HTTP status code.
 - `"accept: application/json"` specifies the accepted response type.
-- `"https://console.neon.tech/api/v1/projects"` is the resource URL, which includes the base URL for the Neon API and the `/projects` endpoint.  
+- `"https://console.neon.tech/api/v2/projects"` is the resource URL, which includes the base URL for the Neon API and the `/projects` endpoint.  
 - [`jq`](https://stedolan.github.io/jq/) is an optional third-party tool that formats the JSON response, making it easier to read.
 
 A response for a Neon user with a single project appears similar to the following:
 
 ```json
-[
-
-  {
-
-    "id": "wispy-sea-654321",
-    "parent_id": null,
-    "roles": [
-      {
-        "id": 683636,
-        "name": "casey",
-        "password": "",
-        "dsn": "postgres://casey@wispy-sea-654321.cloud.neon.tech:31062"
-      },
-      {
-        "id": 683637,
-        "name": "web_access",
-        "password": "",
-        "dsn": "postgres://web_access@wispy-sea-654321.cloud.neon.tech:31062"
-      }
-    ],
-    "databases": [
-      {
-        "id": 378719,
-        "name": "main",
-        "owner_id": 683636
-      }
-    ],
-    "name": "wispy-sea-654321",
-    "created_at": "2022-11-08T17:54:08.467908Z",
-    "updated_at": "2022-11-08T17:54:08.467908Z",
-    "region_id": "aws-us-west-2",
-    "instance_handle": "scalable",
-    "instance_type_id": "1",
-    "region_name": "US West (Oregon)",
-    "platform_name": "Serverless",
-    "platform_id": "aws",
-    "settings": {},
-    "pending_state": null,
-    "current_state": "idle",
-    "deleted": false,
-    "size": 0,
-    "max_project_size": 0,
-    "pooler_enabled": false,
-    "pg_version": 15,
-    "proxy_host": "cloud.neon.tech"
-  }
-]
+{
+  "projects": [
+    {
+      "id": "shiny-wind-028834",
+      "platform_id": "aws",
+      "region_id": "aws-us-east-2",
+      "name": "myproject",
+      "provisioner": "k8s-pod",
+      "pg_version": 15,
+      "locked": false,
+      "created_at": "2022-11-23T17:42:25Z",
+      "updated_at": "2022-12-04T02:39:25Z",
+      "proxy_host": "us-east-2.aws.neon.build"
+    }
+  ]
+}
 ```
 
 Refer to the [Neon API Reference](https://neon.tech/api-reference) for other supported Neon API endpoints.
