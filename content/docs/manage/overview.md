@@ -51,7 +51,7 @@ Data resides in a branch. Each Neon project has a root branch called `main`. You
 
 ## Endpoints
 
-An endpoint is the compute instance associated with a branch. A read-write endpoint is created for a project's root branch by default. You can choose whether or not to create an endpoint when creating a branch. To connect to a database that resides in a branch, you must connect via an endpoint that is associated with the branch. Tier limits define the number of endpoints per project and the resources (vCPUs and RAM) available to an endpoint. For more information, see [Endpoints](../endpoints).
+An endpoint is a compute resource associated with a branch. A read-write endpoint is created for a project's root branch by default. You can choose whether or not to create an endpoint when creating a branch. To connect to a database that resides in a branch, you must connect via an endpoint that is associated with the branch. Tier limits define the number of endpoints per project and the resources (vCPUs and RAM) available to an endpoint. For more information, see [Endpoints](../endpoints).
 
 ## Users
 
