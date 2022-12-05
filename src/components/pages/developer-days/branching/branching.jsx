@@ -106,13 +106,13 @@ const Branching = () => {
             </div>
             <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-secondary-5 px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
               <Button
-                className="w-full px-8 !text-lg lg:!text-base"
+                className="w-full px-8 !text-lg lg:!text-base xs:!text-sm"
                 theme="secondary"
                 size="sm"
                 style={{ boxShadow: '0px 10px 30px rgba(26, 26, 26, 0.6)' }}
                 onClick={() => setIsOpenModal(true)}
               >
-                <PlayIcon className="mr-4 h-[22px] w-4 shrink-0 lg:h-4 lg:w-[11px]" />
+                <PlayIcon className="mr-4 h-[22px] w-4 shrink-0 lg:h-4 lg:w-[11px] xs:mr-3" />
                 <span>Watch announcements</span>
               </Button>
               <ul className="mt-7 lg:mt-6">
