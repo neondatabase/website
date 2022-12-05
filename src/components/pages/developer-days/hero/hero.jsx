@@ -1,6 +1,5 @@
 import { StaticImage } from 'gatsby-plugin-image';
-import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Alignment, Fit, Layout, useRive } from 'rive-react';
 
@@ -8,8 +7,11 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import ArrowIcon from 'icons/arrow-right.inline.svg';
 import PlayIcon from 'icons/play.inline.svg';
+
+import VideoModal from '../video-modal';
 
 import bgShapeSvg from './images/bg-shape.svg';
 import StickerIcon from './images/sticker.inline.svg';
@@ -32,7 +34,10 @@ const items = [
   },
 ];
 
-const Hero = ({ setIsOpenModal }) => {
+const Hero = () => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  useBodyLockScroll(isOpenModal);
   const [wrapperRef, isWrapperInView] = useInView();
   const { RiveComponent, rive } = useRive({
     src: '/animations/pages/developer-days/dr-brown.riv',
@@ -135,12 +140,9 @@ const Hero = ({ setIsOpenModal }) => {
           </div>
         </div>
       </Container>
+      <VideoModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} videoId="tu-bgIg-Luo" />
     </section>
   );
-};
-
-Hero.propTypes = {
-  setIsOpenModal: PropTypes.func.isRequired,
 };
 
 export default Hero;

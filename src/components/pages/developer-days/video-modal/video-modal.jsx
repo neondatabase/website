@@ -6,7 +6,7 @@ import React, { useRef } from 'react';
 import useClickOutside from 'hooks/use-click-outside';
 import CloseIcon from 'icons/close.inline.svg';
 
-const VideoModal = ({ isOpenModal, setIsOpenModal }) => {
+const VideoModal = ({ isOpenModal, setIsOpenModal, videoId }) => {
   const contentRef = useRef();
   const handleClickOutside = () => {
     setIsOpenModal(false);
@@ -50,7 +50,7 @@ const VideoModal = ({ isOpenModal, setIsOpenModal }) => {
               className="absolute top-0 left-0 h-full w-full rounded-2xl"
               width="1161"
               height="653"
-              src={`https://www.youtube.com/embed/tu-bgIg-Luo${isOpenModal ? '?autoplay=1' : ''}`}
+              src={`https://www.youtube.com/embed/${videoId}${isOpenModal ? '?autoplay=1' : ''}`}
               title="Neon Developer Days"
               frameBorder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -66,6 +66,7 @@ const VideoModal = ({ isOpenModal, setIsOpenModal }) => {
 VideoModal.propTypes = {
   isOpenModal: PropTypes.bool.isRequired,
   setIsOpenModal: PropTypes.func.isRequired,
+  videoId: PropTypes.string.isRequired,
 };
 
 export default VideoModal;
