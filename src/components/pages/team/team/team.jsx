@@ -254,13 +254,6 @@ const members = [
     linkedinUrl: 'https://www.linkedin.com/in/vadimkharitonov/',
   },
   {
-    photo: <StaticImage src="./images/alexander-stanovoy-photo.jpg" alt="Alexander Stanovoy" />,
-    name: 'Alexander Stanovoy',
-    position: 'Software Engineer',
-    githubUrl: 'https://github.com/alexstanovoy',
-    linkedinUrl: 'https://www.linkedin.com/in/alexstanovoy/',
-  },
-  {
     photo: <StaticImage src="./images/christian-schwarz-photo.jpg" alt="Christian Schwarz" />,
     name: 'Christian Schwarz',
     position: 'Software Engineer',
@@ -272,7 +265,7 @@ const members = [
 
 const Team = () => (
   <section className="safe-paddings pt-48 3xl:pt-44 2xl:pt-40 xl:pt-32 lg:pt-12 md:pt-6">
-    <Container size="sm">
+    <Container size="xs">
       <Heading tag="h1" size="md" theme="black">
         Meet the team
       </Heading>

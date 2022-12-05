@@ -45,13 +45,15 @@ const Heading = forwardRef(
 Heading.propTypes = {
   className: PropTypes.string,
   tag: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(Object.keys(styles.size)).isRequired,
-  theme: PropTypes.oneOf(Object.keys(styles.theme)).isRequired,
+  size: PropTypes.oneOf(Object.keys(styles.size)),
+  theme: PropTypes.oneOf(Object.keys(styles.theme)),
   asHTML: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 
 Heading.defaultProps = {
+  size: null,
+  theme: null,
   className: null,
   asHTML: false,
 };

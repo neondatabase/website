@@ -19,6 +19,7 @@
     "lint:js:fix": "eslint --fix --ext .js,.jsx --ignore-path .gitignore .",
     "lint:md": "markdownlint --ignore-path .gitignore .",
     "lint:md:fix": "markdownlint --fix --ignore-path .gitignore .",
+    "check:broken-links": "linkinator --config linkinator.config.json",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -35,6 +36,7 @@
     "gatsby-source-wordpress": "^6.24.0",
     "html-react-parser": "^3.0.4",
     "js-yaml": "^4.1.0",
+    "linkinator": "^4.1.1",
     "lodash.get": "^4.4.2",
     "lodash.isboolean": "^3.0.3",
     "lodash.isempty": "^4.4.0",
@@ -51,6 +53,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-use": "^17.4.0",
     "remark-gfm": "^1.0.0",
+    "rive-react": "^3.0.33",
     "search-insights": "^2.2.1",
     "slugify": "^1.6.5",
     "swagger-ui": "^4.14.3",

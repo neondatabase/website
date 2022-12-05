@@ -8,6 +8,7 @@
   - [Build the website](#build-the-website)
   - [Run the built website](#run-the-built-website)
   - [Clean Gatsby cache](#clean-gatsby-cache)
+  - [Checks broken links](#checks-broken-links)
 - [Project Structure](#project-structure)
 - [Code Style](#code-style)
   - [ESLint](#eslint)
@@ -60,6 +61,16 @@ npm run serve
 ```bash
 npm run clean
 ```
+
+### Checks broken links
+
+```bash
+npm run check:broken-links -- https://neon.tech
+```
+
+_The command may take time, be patient. You can also specify which part of the website you want to check by passing a specific URL, for example `https://neon.tech/docs` for checking the Docs_
+
+> N.B. The automatic check is done every Monday at midnight by GitHub CI. You can find the reports on the "Actions" tab
 
 ## Project Structure
 

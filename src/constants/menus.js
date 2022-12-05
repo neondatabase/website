@@ -7,12 +7,25 @@ export default {
       to: LINKS.docs,
     },
     {
-      text: 'About Us',
-      to: LINKS.aboutUs,
+      text: 'Branching',
+      to: LINKS.branching,
     },
     {
-      text: 'Careers',
-      to: LINKS.careers,
+      text: 'Company',
+      items: [
+        {
+          iconName: 'aboutUs',
+          text: 'About us',
+          description: 'Meet the team',
+          to: LINKS.aboutUs,
+        },
+        {
+          iconName: 'careers',
+          text: 'Careers',
+          description: 'Become a member',
+          to: LINKS.careers,
+        },
+      ],
     },
     {
       text: 'Blog',
@@ -130,7 +143,11 @@ export default {
       to: LINKS.docs,
     },
     {
-      text: 'About Us',
+      text: 'Branching',
+      to: LINKS.branching,
+    },
+    {
+      text: 'About us',
       to: LINKS.aboutUs,
     },
     {
