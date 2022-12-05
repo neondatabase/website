@@ -36,7 +36,7 @@ const items = [
 const Partners = ({ setIsOpenModal }) => {
   const [wrapperRef, isWrapperInView] = useInView({ threshold: 0.3 });
   const [containerRef, isContainerInView] = useInView({ triggerOnce: true, rootMargin: '300px' });
-  const { RiveComponent, rive } = useRive({
+  const { RiveComponent, rive, setContainerRef } = useRive({
     src: '/animations/pages/developer-days/hands.riv',
     autoplay: false,
     stateMachines: 'State Machine',
@@ -97,7 +97,7 @@ const Partners = ({ setIsOpenModal }) => {
                 aria-hidden
               />
             </div>
-            <div className="relative">
+            <div className="relative" ref={setContainerRef}>
               <svg
                 width="940"
                 height="520"
