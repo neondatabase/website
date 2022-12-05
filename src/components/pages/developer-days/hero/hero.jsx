@@ -57,7 +57,7 @@ const Hero = () => {
           {title}
         </Heading>
         <p className="mt-3 text-center text-base xl:mt-2.5 md:mt-2">{description}</p>
-        <div className="relative mt-14 xl:mt-12 lg:mt-9 md:mt-6 sm:w-full">
+        <div className="relative mt-14 xl:mt-12 xl:w-full lg:mt-9 md:mt-6">
           <StickerIcon className="absolute top-[-198px] right-[-154px] h-[300px] w-[300px] xl:hidden" />
           <div className="absolute -inset-x-16 top-16 md:w-[150%]">
             <StaticImage
@@ -71,7 +71,7 @@ const Hero = () => {
               aria-hidden
             />
           </div>
-          <div className="relative overflow-hidden rounded-xl">
+          <div className="relative isolate overflow-hidden rounded-xl">
             <svg
               width="940"
               height="520"

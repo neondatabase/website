@@ -59,7 +59,7 @@ const Branching = () => {
             {title}
           </Heading>
           <p className="mt-3 text-center text-xl xl:mt-2.5 xl:text-base md:mt-2">{description}</p>
-          <div className="relative mt-14 xl:mt-12 lg:mt-9 md:mt-6 sm:w-full">
+          <div className="relative mt-14 xl:mt-12 xl:w-full lg:mt-9 md:mt-6">
             <div className="absolute -inset-x-16 top-16 md:w-[150%]">
               <StaticImage
                 className="rounded-[200px] opacity-30 blur-[70px] md:h-[132px]"
@@ -72,7 +72,7 @@ const Branching = () => {
                 aria-hidden
               />
             </div>
-            <div className="relative overflow-hidden rounded-2xl">
+            <div className="relative isolate overflow-hidden rounded-2xl">
               <svg
                 width="940"
                 height="520"
