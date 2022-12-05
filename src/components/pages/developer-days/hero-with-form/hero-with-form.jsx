@@ -8,7 +8,7 @@ import { HUBSPOT_DEVELOPER_DAYS_1_FORM_ID } from 'constants/forms';
 import backgroundLines from './images/bg-lines.svg';
 import Line from './images/white-line.inline.svg';
 
-const Hero = () => (
+const HeroWithForm = () => (
   <div className="relative flex h-[calc(100vh-44px)] max-h-[1080px] min-h-[765px] flex-col overflow-hidden bg-black pt-[214px] pb-20 text-white lg:min-h-0 lg:pt-[20%] sm:h-auto sm:grow sm:pt-16">
     <Container className="relative h-full w-full" size="md">
       <img
@@ -52,4 +52,4 @@ const Hero = () => (
   </div>
 );
 
-export default Hero;
+export default HeroWithForm;

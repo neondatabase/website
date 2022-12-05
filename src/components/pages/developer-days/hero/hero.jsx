@@ -80,7 +80,7 @@ const Hero = () => {
               <rect width="940" height="520" className="fill-[#f3f281]" />
             </svg>
             <video
-              className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:right-10 xs:right-0"
+              className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:left-1/2 md:right-auto md:-translate-x-[calc(50%+7rem)] sm:-translate-x-[calc(50%+4rem)]"
               ref={videoRef}
               autoPlay
               loop
