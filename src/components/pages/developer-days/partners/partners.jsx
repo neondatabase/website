@@ -1,7 +1,6 @@
 import { StaticImage } from 'gatsby-plugin-image';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { Alignment, Fit, Layout, useRive } from 'rive-react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -39,34 +38,14 @@ const Partners = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   useBodyLockScroll(isOpenModal);
-  const [wrapperRef, isWrapperInView] = useInView({ threshold: 0.3 });
-  const [containerRef, isContainerInView] = useInView({ triggerOnce: true, rootMargin: '300px' });
-  const { RiveComponent, rive, setContainerRef } = useRive({
-    src: '/animations/pages/developer-days/hands.riv',
-    autoplay: false,
-    stateMachines: 'State Machine',
-    layout: new Layout({
-      fit: Fit.FitWidth,
-      alignment: Alignment.TopCenter,
-    }),
-  });
-
-  useEffect(() => {
-    if (rive) {
-      if (isWrapperInView) {
-        rive.play();
-      } else {
-        rive.pause();
-      }
-    }
-  }, [isWrapperInView, rive]);
+  const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, rootMargin: '300px' });
 
   return (
     <section
       className="branching safe-paddings bg-black pt-[672px] text-white 3xl:pt-[690px] xl:pt-[408px] md:pt-[364px] sm:pt-[190px]"
       ref={wrapperRef}
     >
-      <Container className="grid-gap-x grid grid-cols-12" size="md" ref={containerRef}>
+      <Container className="grid-gap-x grid grid-cols-12" size="md">
         <div className="col-span-4 flex justify-center 2xl:col-span-3 2xl:justify-start xl:hidden">
           <img
             className="-mt-20 ml-[74px] 3xl:ml-0"
@@ -83,7 +62,7 @@ const Partners = () => {
           <time className="label-secondary-2 mx-auto" dateTime="2022-12-07">
             8th of December, 2022
           </time>
-          <Heading className="mt-2.5 text-center" tag="h2" size="lg">
+          <Heading className="mt-2.5 text-center" tag="h2" size="lg" theme="white">
             Serverless & Postgres
           </Heading>
           <p className="mt-3 text-center text-xl xl:mt-2.5 xl:text-base md:mt-2">
@@ -102,17 +81,26 @@ const Partners = () => {
                 aria-hidden
               />
             </div>
-            <div className="relative" ref={setContainerRef}>
+            <div className="relative overflow-hidden rounded-2xl">
               <svg
                 width="940"
                 height="520"
                 className="w-auto rounded-2xl xl:w-full lg:mx-auto lg:max-h-[390px] sm:max-h-[211px]"
               >
-                <rect width="940" height="520" className="fill-secondary-4" />
+                <rect width="940" height="520" className="fill-[#ffdde0]" />
               </svg>
 
-              {isContainerInView && (
-                <RiveComponent className="absolute bottom-0 right-0 h-full max-h-[448px] w-full max-w-[612px] lg:h-[355px] lg:w-[484px] md:left-1/2 md:-translate-x-1/2 sm:h-[196px] sm:w-[268px]" />
+              {isWrapperInView && (
+                <video
+                  className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:-bottom-6 md:h-[calc(100%+2rem)] sm:-bottom-3"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
+                  <source src="/videos/pages/developer-days/hands.mp4" type="video/mp4" />
+                  <source src="/videos/pages/developer-days/hands.webm" type="video/webm" />
+                </video>
               )}
             </div>
             <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-secondary-2 px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
