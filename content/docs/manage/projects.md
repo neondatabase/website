@@ -11,7 +11,7 @@ A Neon project is created with the following resources by default:
 - A root branch called `main`. You can create child branches from the root branch or from a previously created branch. For more information, see [Branches](../branches).
 - A single read-write endpoint. An endpoint is the compute instance associated with a branch. For more information, see [Endpoints](../branches).
 - A default database, called `main`, which resides in the project's root branch.
-- A default PostgreSQL users that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
+- A default PostgreSQL user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
 
 ## Create a project
 
@@ -29,7 +29,7 @@ After closing the password dialog, navigating away from the Neon Console, or ref
 
 ## Delete a project
 
-Deleting a project is a permanent action. Deleting a project deletes any endpoints, branches, databases, and users that belong to the project.
+Deleting a project is a permanent action, which also deletes any endpoints, branches, databases, and users that belong to the project.
 
 To delete a project:
 

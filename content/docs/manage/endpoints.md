@@ -4,7 +4,9 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-An endpoint is the compute instance associated with a branch. A single read-write endpoint is created for your project's [root branch](#root-branch) (`main`) by default.
+An endpoint is the compute instance associated with a branch. A single read-write endpoint is created for your project's [root branch](#root-branch) (`main`) by default. Neon free tier users can create up to 3 endpoints. Endpoints can be created and managed independently of branches.
+
+For example, you could have three endpoints and 10 branches in your project. To work with the branches in your project, you can add and remove endpoints from the branches as necessary.
 
 To connect to a database that resides on a branch, you must connect via an endpoint that is associated with the branch. A Neon project can have multiple endpoints.
 

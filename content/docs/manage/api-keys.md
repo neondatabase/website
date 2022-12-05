@@ -36,21 +36,21 @@ To revoke an API key:
 ### Make an API call
 
 <Admonition type="important">
-[Neon API v1](https://console.neon.tech/api/v1) is now deprecated. Support for it will be removed in a future release. Please migrate your applications to [Neon API V2 reference](https://neon.tech/api-reference/v2). The base URL for the new Neon API is `https://console.neon.tech/api/v2`.
+[Neon API v1](https://console.neon.tech/api/v1) is now deprecated. Support for it will be removed in a future release. Please migrate your applications to [Neon API V2 reference](https://neon.tech/api-reference/v2/). The base URL for the new Neon API is `https://neon.tech/api-reference/v2/`.
 </Admonition>
 
 The following `cURL` example uses the `/projects` endpoint to retrieve projects that belong to your Neon account.
 
 ```bash
 curl -X GET -H "Authorization: Bearer $NEON_API_KEY" "accept: application/json"
-"https://console.neon.tech/api/v2/projects" | jq
+"https://neon.tech/api-reference/v2" | jq
 ```
 
 where:
 
 - The `Authorization: Bearer $NEON_API_KEY` entry in the header specifies your API key. Replace `$NEON_API_KEY` with your actual 64-bit API key. A request without this header, or containing an invalid or revoked API key, fails and returns a `401 Unauthorized` HTTP status code.
 - `"accept: application/json"` specifies the accepted response type.
-- `"https://console.neon.tech/api/v2/projects"` is the resource URL, which includes the base URL for the Neon API and the `/projects` endpoint.  
+- `"https://neon.tech/api-reference/v2/projects"` is the resource URL, which includes the base URL for the Neon API and the `/projects` endpoint.  
 - [`jq`](https://stedolan.github.io/jq/) is an optional third-party tool that formats the JSON response, making it easier to read.
 
 A response for a Neon user with a single project appears similar to the following:

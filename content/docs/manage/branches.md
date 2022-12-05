@@ -11,10 +11,6 @@ Data resides in a branch. Each Neon project has a root branch called `main`. You
 A child branch is a copy-on-write clone the data in the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](../../conceptual-guides/branching).
 
-<Admonition type="note">
-Neon Branching capabilities are not yet publicly available. If you would like to try this feature, reach out to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching for your account.
-</Admonition>
-
 You can create and manage branches using the Neon Console or [Neon API](https://neon.tech/api-reference). This topic covers branching using the Neon Console.
 
 Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Projects](../projects/#create-a-project).
@@ -48,7 +44,7 @@ To view the branches in a Neon project:
 ![Branch details](./images/branch_details.png)
 
 <Admonition type="note">
-Each branch is created with an endpoint, which is the compute instance associated with the branch. To connect to a database in a branch, you must connect via an endpoint. For instructions, see [Connect to a branch database](#connect-to-a-branch-database). 
+Each branch is created with a read-write endpoint, which is the compute instance associated with the branch. To connect to a database in a branch, you must connect via an endpoint. For instructions, see [Connect to a branch database](#connect-to-a-branch-database). 
 </Admonition>
 
 The **Branches** widget on the project **Dashboard** also lists the branches in a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
@@ -72,10 +68,10 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
   ```
 
 <Admonition type="tip">
-A endpoint hostname starts with an `ep-` prefix. You can also find an endpoint hostname in the branch connection string in the **Connection Details** widget on the project **Dashboard**. The endpoint hostname, which is `ep-polished-water-579720.us-east-2.aws.neon.tech` in the example above, can also be found on the **Branches** page in the Neon Console. For instructions, see [View branches](#view-branches).
+A endpoint hostname starts with an `ep-` prefix. You can also find an endpoint hostname in the branch connection string in the **Connection Details** widget on the project **Dashboard**. An endpoint hostname can also be found on the **Branches** page in the Neon Console. See [View branches](#view-branches).
 </Admonition>
 
-If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the _Guides_ section in the documentation provide connection examples for various languages and frameworks.
+If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the _Guides_ section in the documentation provide connection examples for various languages and frameworks. For more information about connecting, see [Connect from any application](../../connect/connect-from-any-app).
 
 ## Delete a branch
 
@@ -93,11 +89,13 @@ To delete a branch:
 
 Tier limits define the amount of data you can store in a branch. Neon's free tier permits 3GB per branch.
 
-You can check the data size for a branch in the **Storage** widget on the Neon **Dashboard** or by viewing the `DATABASE SIZE` value the **Branches** page. Alternatively, you can run the following query from the SQL Editor or a client:
+You can check the data size for a branch in the **Storage** widget on the Neon **Dashboard** or by viewing the `DATABASE SIZE` value on the **Branches** page (see [View branchings](#view-branches)). Alternatively, you can run the following query from the Neon SQL Editor:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))
 FROM pg_database;
 ```
 
+<Admonition type="info">
 Neon stores data in its own internal format.
+</Admonition>
