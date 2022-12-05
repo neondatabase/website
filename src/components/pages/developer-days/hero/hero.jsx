@@ -71,11 +71,11 @@ const Hero = () => {
               aria-hidden
             />
           </div>
-          <div className="relative isolate overflow-hidden rounded-xl">
+          <div className="relative isolate overflow-hidden rounded-xl md:rounded-b-none">
             <svg
               width="940"
               height="520"
-              className="rounded-2xl xl:w-full lg:max-h-[390px] sm:max-h-[211px]"
+              className="rounded-2xl xl:w-full lg:max-h-[390px] md:rounded-b-none sm:max-h-[211px]"
             >
               <rect width="940" height="520" className="fill-[#f3f281]" />
             </svg>

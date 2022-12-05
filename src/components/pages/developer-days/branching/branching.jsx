@@ -72,11 +72,11 @@ const Branching = () => {
                 aria-hidden
               />
             </div>
-            <div className="relative isolate overflow-hidden rounded-2xl">
+            <div className="relative isolate overflow-hidden rounded-2xl md:rounded-b-none">
               <svg
                 width="940"
                 height="520"
-                className="w-auto rounded-2xl xl:w-full lg:mx-auto lg:max-h-[390px] sm:max-h-[211px]"
+                className="w-auto rounded-2xl xl:w-full lg:mx-auto lg:max-h-[390px] md:rounded-b-none sm:max-h-[211px]"
               >
                 <rect width="940" height="520" className="fill-secondary-6" />
               </svg>

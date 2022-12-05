@@ -10,7 +10,7 @@ import PlayIcon from 'icons/play.inline.svg';
 const ItemsList = ({ className, items, setIsOpenModal }) => (
   <div
     className={clsx(
-      'absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] lg:pb-7 lg:pt-6 md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none',
+      'absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] lg:pb-7 lg:pt-6 md:static md:mx-auto md:-mt-2 md:min-h-0 md:max-w-none md:rounded-t-none',
       className
     )}
   >
