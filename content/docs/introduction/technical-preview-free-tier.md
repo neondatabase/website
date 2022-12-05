@@ -20,7 +20,7 @@ Neon intends to offer a Free Tier beyond the Technical Preview period. The limit
 
 ## Data Size
 
-Neon stores data in its own internal format. The data size limit in the Technical Preview free tier applies to the logical size of your branch. The logical size is the sum of all database sizes in the branch of your project.
+Neon stores data in its own internal format. The data size limit in the Technical Preview free tier applies to the logical size of your branch. The logical size is the sum of all database sizes in the branch of your project. For information about checking the size of the data in your branch, see [Branches](../../manage/branches).
 
 <a id="#point-in-time-reset/"></a>
 
