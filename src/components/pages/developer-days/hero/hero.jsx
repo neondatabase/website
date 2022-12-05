@@ -6,6 +6,7 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
+import useVideo from 'hooks/use-video';
 import ArrowIcon from 'icons/arrow-right.inline.svg';
 import PlayIcon from 'icons/play.inline.svg';
 
@@ -34,9 +35,8 @@ const items = [
 
 const Hero = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-
   useBodyLockScroll(isOpenModal);
-
+  const { containerRef, videoRef } = useVideo();
   return (
     <section className="safe-paddings relative bg-black pt-[182px] text-white xl:pt-[136px] lg:pt-[76px] md:pt-16 sm:pt-12">
       <img
@@ -47,7 +47,7 @@ const Hero = () => {
         alt=""
         aria-hidden
       />
-      <Container className="flex flex-col items-center" size="md">
+      <Container className="flex flex-col items-center" size="md" ref={containerRef}>
         <time className="label-secondary-2 mx-auto" dateTime="2022-12-06">
           6th of December, 2022
         </time>
@@ -81,6 +81,7 @@ const Hero = () => {
             </svg>
             <video
               className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:right-10 xs:right-0"
+              ref={videoRef}
               autoPlay
               loop
               muted

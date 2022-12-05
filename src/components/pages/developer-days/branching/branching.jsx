@@ -7,6 +7,7 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
+import useVideo from 'hooks/use-video';
 import ArrowIcon from 'icons/arrow-right.inline.svg';
 import PlayIcon from 'icons/play.inline.svg';
 import StraightLineSvg from 'images/developer-days/straight-line.inline.svg';
@@ -38,13 +39,13 @@ const Branching = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   useBodyLockScroll(isOpenModal);
   const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
-
+  const { containerRef, videoRef } = useVideo();
   return (
     <section
       className="branching safe-paddings sm:pt[190px] bg-black pt-[672px] text-white xl:pt-[408px] md:pt-[364px] sm:pt-[190px]"
       ref={wrapperRef}
     >
-      <Container className="grid-gap-x grid grid-cols-12" size="md">
+      <Container className="grid-gap-x grid grid-cols-12" size="md" ref={containerRef}>
         <div className="relative col-span-8 ml-[50px] flex max-w-[940px] flex-col items-center xl:col-span-full xl:mx-auto xl:w-full">
           <LineSvg className="absolute bottom-[calc(100%+2rem)] left-1/2 h-auto w-[393px] -translate-x-[calc(50%-11.3rem)] xl:hidden" />
           <StraightLineSvg className="absolute bottom-[calc(100%+1rem)] left-1/2 hidden h-auto w-8 -translate-x-1/2 xl:block lg:w-[30px] md:w-7 sm:w-3.5" />
@@ -81,6 +82,7 @@ const Branching = () => {
               {isWrapperInView && (
                 <video
                   className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:left-1/2 md:right-auto md:-translate-x-[calc(50%+8rem)] sm:-translate-x-[calc(50%+4.5rem)]"
+                  ref={videoRef}
                   autoPlay
                   loop
                   muted

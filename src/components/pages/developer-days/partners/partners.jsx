@@ -7,6 +7,7 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
+import useVideo from 'hooks/use-video';
 import ArrowIcon from 'icons/arrow-right.inline.svg';
 import PlayIcon from 'icons/play.inline.svg';
 import StraightLineSvg from 'images/developer-days/straight-line.inline.svg';
@@ -39,13 +40,13 @@ const Partners = () => {
 
   useBodyLockScroll(isOpenModal);
   const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, rootMargin: '300px' });
-
+  const { containerRef, videoRef } = useVideo();
   return (
     <section
       className="branching safe-paddings bg-black pt-[672px] text-white 3xl:pt-[690px] xl:pt-[408px] md:pt-[364px] sm:pt-[190px]"
       ref={wrapperRef}
     >
-      <Container className="grid-gap-x grid grid-cols-12" size="md">
+      <Container className="grid-gap-x grid grid-cols-12" size="md" ref={containerRef}>
         <div className="col-span-4 flex justify-center 2xl:col-span-3 2xl:justify-start xl:hidden">
           <img
             className="-mt-20 ml-[74px] 3xl:ml-0"
@@ -93,6 +94,7 @@ const Partners = () => {
               {isWrapperInView && (
                 <video
                   className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:-bottom-6 md:h-[calc(100%+2rem)] sm:-bottom-3"
+                  ref={videoRef}
                   autoPlay
                   loop
                   muted
