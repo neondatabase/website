@@ -65,14 +65,14 @@ const Header = forwardRef(
                     <Tag
                       className={clsx(
                         items?.length > 0 &&
-                          'relative pr-3.5 leading-none before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-[transparent] before:transition-colors before:duration-200 group-hover:text-primary-2 group-hover:before:border-t-primary-2',
+                          'relative pr-3.5 leading-none transition-colors duration-200 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-transparent before:transition-[border-color] before:duration-200 hover:text-primary-2 group-hover:before:border-t-primary-2 dark:before:border-black',
                         items?.length > 0 && isThemeBlack
                           ? 'before:border-t-white'
-                          : 'before:border-t-black',
-                        isThemeBlack ? 'text-white' : 'text-black'
+                          : 'before:border-t-black dark:before:border-t-white',
+                        isThemeBlack ? 'text-white' : 'text-black dark:text-white'
                       )}
                       to={to}
-                      theme={isThemeBlack ? 'white' : 'black'}
+                      theme={isThemeBlack && to ? 'white' : 'black'}
                     >
                       {text}
                     </Tag>
