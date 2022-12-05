@@ -92,7 +92,7 @@ const Hero = () => {
           </div>
           <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-primary-1 px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] lg:pb-7 lg:pt-6 md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
             <Button
-              className="w-full px-8 !text-lg lg:!text-base xs:!text-sm"
+              className="w-full px-8 !text-lg lg:!text-base"
               theme="secondary"
               size="sm"
               style={{ boxShadow: '0px 10px 30px rgba(26, 26, 26, 0.6)' }}
@@ -101,7 +101,7 @@ const Hero = () => {
               }}
             >
               <PlayIcon className="mr-4 h-[22px] w-4 shrink-0 leading-none lg:h-4 lg:w-[11px] xs:mr-3" />
-              <span>Watch announcements</span>
+              <span>Watch broadcast</span>
             </Button>
             <ul className="mt-7 lg:mt-6">
               {items.map(({ text, linkText, linkUrl }, index) => (
