@@ -35,7 +35,7 @@ const JobsList = () => {
 
   return (
     <section className="safe-paddings pt-64 3xl:pt-60 2xl:pt-52 xl:pt-48 lg:pt-40 md:pt-32">
-      <Container size="sm">
+      <Container size="xs">
         <h2 className="t-5xl font-bold leading-tight">Job Openings</h2>
         <ul className="mt-14 space-y-16 lg:mt-10 lg:space-y-12 md:mt-6 md:space-y-8">
           {items.map(({ name, items }, index) => (

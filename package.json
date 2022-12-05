@@ -53,6 +53,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-use": "^17.4.0",
     "remark-gfm": "^1.0.0",
+    "rive-react": "^3.0.33",
     "search-insights": "^2.2.1",
     "slugify": "^1.6.5",
     "swagger-ui": "^4.14.3",

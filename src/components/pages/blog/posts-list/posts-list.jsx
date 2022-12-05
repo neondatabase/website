@@ -8,7 +8,7 @@ import getBlogPostPath from 'utils/get-blog-post-path';
 
 const PostsList = ({ items }) => (
   <section className="safe-paddings pt-48 3xl:pt-44 2xl:pt-40 xl:pt-32 lg:pt-12 md:pt-6">
-    <Container size="sm">
+    <Container size="xs">
       <div className="space-y-10 2xl:space-y-8 xl:space-y-7 md:space-y-6">
         {items.map(({ slug, title, pageBlogPost: { authors, description } }, index) => (
           <article

@@ -21,7 +21,7 @@ const Pagination = ({ currentPageIndex, pageCount }) => {
 
   return (
     <div className="safe-paddings mt-10 2xl:mt-8 xl:mt-7 md:mt-6">
-      <Container size="sm">
+      <Container size="xs">
         <ReactPaginate
           containerClassName="flex justify-center items-center"
           pageLinkClassName={pageLinkAndBreakLinkClassName}

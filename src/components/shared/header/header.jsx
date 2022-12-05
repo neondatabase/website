@@ -138,8 +138,8 @@ const Header = forwardRef(
               </Button>
             )}
             {!isSignIn && (
-              <Button className="py-[11px]" to={LINKS.earlyAccess} size="xs" theme="primary">
-                Get early access
+              <Button className="py-[11px]" to={LINKS.signup} size="xs" theme="primary">
+                Sign up
               </Button>
             )}
           </div>

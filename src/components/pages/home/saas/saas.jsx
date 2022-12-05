@@ -45,11 +45,11 @@ const SaaS = () => {
           <Button
             id="saas-button"
             className="mt-10 2xl:mt-8 xl:mt-7 md:mt-6"
-            to={LINKS.earlyAccess}
+            to={LINKS.signup}
             size="md"
             theme="primary"
           >
-            Get early access
+            Sign up
           </Button>
         </div>
 

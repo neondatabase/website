@@ -33,4 +33,9 @@ export default {
     description:
       'Join us virtually on December 6th, 7th, and 8th to learn about Neon and how to build better with Serverless Postgres.',
   },
+  branching: {
+    title: 'Instant branching for Postgres — Neon',
+    description:
+      'Neon allows you to instantly branch your data the same way that you branch your code.',
+  },
 };

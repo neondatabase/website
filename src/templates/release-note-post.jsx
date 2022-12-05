@@ -28,7 +28,7 @@ const ReleaseNotePostTemplate = ({
       withContainer
     />
     <div className="pb-28 dark:bg-black lg:pb-20 md:pb-16">
-      <Container size="sm" className="relative flex pb-10">
+      <Container size="xs" className="relative flex pb-10">
         <article className="relative flex flex-col items-start">
           <time
             className="mt-3 whitespace-nowrap text-gray-2 dark:text-gray-5"

@@ -4,3 +4,11 @@
     -webkit-tap-highlight-color: transparent;
   }
 }
+
+@layer utilities {
+  .with-link-primary {
+    a {
+      @apply border-b border-transparent text-primary-1 transition-[border-color] duration-200 hover:border-primary-1;
+    }
+  }
+}
