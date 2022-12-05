@@ -11,8 +11,8 @@ export default {
       to: LINKS.aboutUs,
     },
     {
-      text: 'Careers',
-      to: LINKS.careers,
+      text: 'Branching',
+      to: LINKS.branching,
     },
     {
       text: 'Blog',
