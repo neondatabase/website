@@ -18,4 +18,5 @@ export default {
   privacy: '/',
   terms: '/',
   dashboard: 'https://console.neon.tech/sign_in',
+  branching: '/branching/',
 };

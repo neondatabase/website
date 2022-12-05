@@ -35,7 +35,7 @@ const DataBranching = () => {
           </p>
           <Link
             className="mt-6 inline-block text-2xl font-semibold before:-bottom-1 before:h-1 2xl:text-xl xl:text-lg"
-            to="/docs/conceptual-guides/branching/"
+            to="/branching/"
             theme="black-primary-1"
           >
             Read more
