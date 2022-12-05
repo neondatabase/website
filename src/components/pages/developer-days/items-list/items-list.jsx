@@ -27,33 +27,42 @@ const ItemsList = ({ className, items, setIsOpenModal }) => (
       <span>Watch broadcast</span>
     </Button>
     <ul className="mt-7 lg:mt-6">
-      {items.map(({ text, linkText, linkUrl }, index) => (
-        <li
-          className="group flex flex-col border-t border-dashed border-black border-opacity-40 py-6 text-black last:pb-0 lg:py-5"
-          key={index}
-        >
-          {linkUrl ? (
-            <Link to={linkUrl}>
-              <p className="text-lg font-semibold leading-snug opacity-[85%] lg:text-base">
-                {text}
-              </p>
-              <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none lg:mt-2">
-                <span>{linkText}</span>
-                <ArrowIcon className="h-auto w-[18px] transition-transform duration-200 group-hover:translate-x-1" />
-              </span>
-            </Link>
-          ) : (
-            <div>
-              <p className="text-lg font-semibold leading-snug opacity-[85%] lg:text-base">
-                {text}
-              </p>
-              <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none opacity-60 lg:mt-2">
-                {linkText}
-              </span>
-            </div>
-          )}
-        </li>
-      ))}
+      {items.map(({ text, linkText, linkUrl }, index) => {
+        const isExternal = linkUrl?.startsWith('http');
+
+        return (
+          <li
+            className="flex flex-col border-t border-dashed border-black border-opacity-40 py-6 text-black last:pb-0 lg:py-5"
+            key={index}
+          >
+            {linkUrl ? (
+              <Link
+                className="group"
+                to={linkUrl}
+                target={isExternal ? '_blank' : null}
+                rel={isExternal ? 'noopener noreferrer' : null}
+              >
+                <p className="text-lg font-semibold leading-snug opacity-[85%] lg:text-base">
+                  {text}
+                </p>
+                <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none lg:mt-2">
+                  <span>{linkText}</span>
+                  <ArrowIcon className="h-auto w-[18px] transition-transform duration-200 group-hover:translate-x-1" />
+                </span>
+              </Link>
+            ) : (
+              <div>
+                <p className="text-lg font-semibold leading-snug opacity-[85%] lg:text-base">
+                  {text}
+                </p>
+                <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none opacity-60 lg:mt-2">
+                  {linkText}
+                </span>
+              </div>
+            )}
+          </li>
+        );
+      })}
     </ul>
   </div>
 );
