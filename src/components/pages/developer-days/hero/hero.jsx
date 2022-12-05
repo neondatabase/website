@@ -1,7 +1,5 @@
 import { StaticImage } from 'gatsby-plugin-image';
-import React, { useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { Alignment, Fit, Layout, useRive } from 'rive-react';
+import React, { useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -38,32 +36,9 @@ const Hero = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   useBodyLockScroll(isOpenModal);
-  const [wrapperRef, isWrapperInView] = useInView();
-  const { RiveComponent, rive } = useRive({
-    src: '/animations/pages/developer-days/dr-brown.riv',
-    autoplay: false,
-    stateMachines: 'State Machine',
-    layout: new Layout({
-      fit: Fit.FitWidth,
-      alignment: Alignment.TopCenter,
-    }),
-  });
-
-  useEffect(() => {
-    if (rive) {
-      if (isWrapperInView) {
-        rive.play();
-      } else {
-        rive.pause();
-      }
-    }
-  }, [isWrapperInView, rive]);
 
   return (
-    <section
-      className="safe-paddings relative bg-black pt-[182px] text-white xl:pt-[136px] lg:pt-[76px] md:pt-16 sm:pt-12"
-      ref={wrapperRef}
-    >
+    <section className="safe-paddings relative bg-black pt-[182px] text-white xl:pt-[136px] lg:pt-[76px] md:pt-16 sm:pt-12">
       <img
         className="absolute top-0 left-1/2 w-full max-w-[1920px] -translate-x-1/2 blur-[80px]"
         src={bgShapeSvg}
@@ -76,7 +51,7 @@ const Hero = () => {
         <time className="label-secondary-2 mx-auto" dateTime="2022-12-06">
           6th of December, 2022
         </time>
-        <Heading className="mt-2.5 text-center" tag="h1" size="lg">
+        <Heading className="mt-2.5 text-center" tag="h1" size="lg" theme="white">
           Neon is Live!
         </Heading>
         <p className="mt-3 text-center text-base xl:mt-2.5 md:mt-2">
@@ -96,15 +71,24 @@ const Hero = () => {
               aria-hidden
             />
           </div>
-          <div className="relative">
+          <div className="relative overflow-hidden rounded-xl">
             <svg
               width="940"
               height="520"
               className="rounded-2xl xl:w-full lg:max-h-[390px] sm:max-h-[211px]"
             >
-              <rect width="940" height="520" className="fill-secondary-2" />
+              <rect width="940" height="520" className="fill-[#f3f281]" />
             </svg>
-            <RiveComponent className="absolute bottom-0 right-2 h-full max-h-[448px] w-full max-w-[612px] lg:h-[333px] lg:w-[452px] md:right-auto md:left-1/2 md:-translate-x-1/2 sm:h-[192px] sm:w-[260px] sm:max-w-none" />
+            <video
+              className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:right-10 xs:right-0"
+              autoPlay
+              loop
+              muted
+              playsInline
+            >
+              <source src="/videos/pages/developer-days/dr-brown.mp4" type="video/mp4" />
+              <source src="/videos/pages/developer-days/dr-brown.webm" type="video/webm" />
+            </video>
           </div>
           <div className="absolute top-8 left-[38px] min-h-[520px] max-w-[330px] rounded-2xl bg-primary-1 px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] lg:pb-7 lg:pt-6 md:static md:mx-auto md:-mt-2 md:min-h-0 md:w-[85%] md:max-w-none md:rounded-t-none">
             <Button
