@@ -53,7 +53,7 @@ A method of creating a pool of connections and caching those connections for reu
 A string containing details for connecting to a Neon project branch. The details include a user name, endpoint host address, and database name; for example:
 
 ```terminal
-postgres://daniel@ep-polished-water-579720.us-east-2.aws.neon.tech/main
+postgres://daniel@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
 ```
 
 The connection string for a Neon is provided on the **Dashboard** in the Neon Console, under **Connection Details**. The connection string that is displayed immediately after creating a project also includes the user’s password, temporarily. For security reasons, the password is removed from the connection string after navigating away from the Neon Console or refreshing the browser. If you misplace your password, your only option is to reset it.
@@ -72,7 +72,7 @@ A technique used to efficiently copy data. Neon uses the copy-on-write technique
 
 ### Database
 
-A named collection of database objects. A Neon project has a default database named `main` which resides in the default `public` schema. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
+A named collection of database objects. A Neon project has a default database named `neondb` which resides in the default `public` schema. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
 
 ### Endpoint
 

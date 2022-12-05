@@ -49,7 +49,7 @@ where:
 - `<password>` is the database user's password, which is provided to you when you create a project.
 - `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
 - `<port>` is the Neon port number. The default port number is `5432`.
-- `<database>` is the name of the database in your Neon project. `main` is the default database created with each Neon project.
+- `<database>` is the name of the database in your Neon project. `neondb` is the default database created with each Neon project.
 
 The connection details listed above are provided in the Neon connection string that you copied from the Neon **Dashboard** after you created the Neon project.
 

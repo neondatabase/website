@@ -40,5 +40,5 @@ fn main() {
 where:
 
 - `<user>` is the database user, which is found on the project **Dashboard**, under **Connection Details**.
-- `<dbname>` is the database name (the default Neon project database is `main`).
+- `<dbname>` is the database name (the default Neon project database is `neondb`).
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.

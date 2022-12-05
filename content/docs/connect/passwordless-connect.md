@@ -54,7 +54,7 @@ You can determine which endpoint is associated with a branch by selecting the br
    SELECT current_database();
     current_database
    ------------------
-    main
+    neondb
     ``` 
 
 ## Running queries
