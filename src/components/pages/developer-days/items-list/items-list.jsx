@@ -51,14 +51,14 @@ const ItemsList = ({ className, items, setIsOpenModal }) => (
                 </span>
               </Link>
             ) : (
-              <div>
+              <>
                 <p className="text-lg font-semibold leading-snug opacity-[85%] lg:text-base">
                   {text}
                 </p>
-                <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none opacity-60 lg:mt-2">
+                <span className="mt-3.5 font-semibold leading-none opacity-60 lg:mt-2">
                   {linkText}
                 </span>
-              </div>
+              </>
             )}
           </li>
         );
