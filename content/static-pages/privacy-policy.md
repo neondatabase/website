@@ -1,7 +1,8 @@
 ---
-slug: "/privacy-policy"
-date: "2022-12-05"
-title: 'Privacy Policy'
+title: Privacy Policy'
+slug: /privacy-policy
+redirectFrom: 
+- /privacy-policy
 ---
 
 **Last updated:** Dec 5, 2022

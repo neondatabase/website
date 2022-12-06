@@ -1,7 +1,8 @@
 ---
-slug: "/candidate-privacy-policy"
-date: "2022-12-05"
-title: 'Candidate privacy policy'
+title: Candidate privacy policy
+slug: /candidate-privacy-policy
+redirectFrom: 
+- /candidate-privacy-policy
 ---
 
 Last Updated: Dec 5, 2022

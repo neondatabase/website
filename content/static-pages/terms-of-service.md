@@ -1,7 +1,8 @@
 ---
-slug: "/terms-of-service"
-date: "2022-12-05"
-title: 'Terms of service'
+title: Terms of service
+slug: /terms-of-service
+redirectFrom: 
+- /terms-of-service
 ---
 
 ## The fine print
