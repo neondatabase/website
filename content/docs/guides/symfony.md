@@ -35,4 +35,4 @@ where:
 - `<user>` is the database user, which is found on the Neon **Dashboard**, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 - `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon Dashboard, under **Connection Settings**.
-- `<dbname>` is the database name (the default Neon project database is `main`).
+- `<dbname>` is the database name (the default Neon project database is `neondb`).
