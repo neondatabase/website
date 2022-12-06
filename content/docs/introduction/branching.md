@@ -30,7 +30,7 @@ Each branch is created with an endpoint, which is the compute instance associate
 
 Your Neon project's [root branch](../../reference/glossary#root-branch) (`main`) also has an endpoint.
 
-To connect to a branch or root branch from a client or application, you must connect to the branch's endpoint. For more information connecting to a branch endpoint, see [Get started with branching](../../get-started-with-neon/get-started-branching/).
+To connect to a branch or root branch from a client or application, you must connect to the branch's endpoint. For more information connecting to a branch endpoint, see [Branches](../../get-started-with-neon/get-started-branching/).
 
 ## Branching workflows
 
