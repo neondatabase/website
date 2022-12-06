@@ -15,7 +15,12 @@ const CTA = () => (
       <Heading className="text-center" size="lg" tag="h2" theme="white">
         Have you tried it yet?
       </Heading>
-      <Button className="relative mt-8 px-9 py-6 !text-lg xl:!text-base" theme="primary" size="sm">
+      <Button
+        className="relative mt-8 px-9 py-6 !text-lg xl:!text-base"
+        theme="primary"
+        size="sm"
+        to="https://console.neon.tech/sign_in"
+      >
         <span
           className="pointer-events-none absolute inset-x-0 top-0 h-[232px] w-full rounded-[32px] opacity-40 blur-[30px] lg:h-[146px] sm:h-[92px]"
           style={{ background: 'linear-gradient(180deg, #00E599 0%, rgba(0, 229, 153, 0) 100%)' }}
