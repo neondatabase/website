@@ -41,7 +41,7 @@ const Partners = () => {
 
   return (
     <section className="branching safe-paddings bg-black pt-[672px] text-white 3xl:pt-[690px] xl:pt-[408px] md:pt-[364px] sm:pt-[190px]">
-      <Container className="grid-gap-x grid grid-cols-12" size="md" ref={containerRef}>
+      <Container className="grid-gap-x grid w-full grid-cols-12" size="md" ref={containerRef}>
         <div className="col-span-4 flex justify-center 2xl:col-span-3 2xl:justify-start xl:hidden">
           <img
             className="-mt-20 ml-[74px] 3xl:ml-0"
@@ -117,7 +117,7 @@ const Partners = () => {
           setIsOpenModal={setIsOpenModal}
           title={title}
           description={description}
-          videoId="0Ly5gVQ87mM"
+          videoId="v-NGAiBb2r8"
         />
       )}
     </section>

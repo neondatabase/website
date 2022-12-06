@@ -49,7 +49,7 @@ const Hero = () => {
         alt=""
         aria-hidden
       />
-      <Container className="flex flex-col items-center" size="md" ref={containerRef}>
+      <Container className="flex w-full flex-col items-center" size="md" ref={containerRef}>
         <time className="label-secondary-2 mx-auto" dateTime="2022-12-06">
           6th of December, 2022
         </time>
