@@ -10,17 +10,13 @@ redirectFrom:
 
 Neon allows you to instantly branch your data in the same way that you branch your code. You can quickly and cost-effectively branch your data for development, testing, staging, and various of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. See [Branching workflows](#branching-workflows) for a discussion of different ways you can integrate branching into your development workflows.
 
-<Admonition type="note">
-Neon Branching capabilities are not yet publicly available. If you would like to try this feature, reach out to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) describing your use case and requesting that Neon enable branching for your account.
-</Admonition>
-
 ## What is a branch?
 
-A branch is a copy-on-write clone of your data. You can create a branch from a current or past state. For example, you can create a branch that includes all data up to the current point in time or up to a past point in time or [Log Sequence Number (LSN)](../../reference/glossary#lsn).
+A branch is a copy-on-write clone of your data. You can create a branch from a current or past state. For example, you can create a branch that includes all data up to the current point in time or up to an earlier point in time or [Log Sequence Number (LSN)](../../reference/glossary#lsn).
 
-A branch is isolated from its originating data, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to a branch are independent of the originating data. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are saved as an independent delta.
+A branch is isolated from its originating data, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to a branch are independent. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are saved as a delta.
 
-Creating a branch does not increase load on the parent branch or affect it in any way, which means that you can create a branch at any time without impacting the performance of your production system.
+Creating a branch does not increase load on the parent branch or affect it in any way, which means can create a branch at any time without impacting the performance of your production system.
 
 Each Neon project has a [root branch](../../reference/glossary#root-branch) called `main`. The first branch that you create is branched from the project's root branch (`main`). Subsequent branches can be branched from `main` or from a previously created branch.
 
@@ -30,7 +26,7 @@ Each branch is created with an endpoint, which is the compute instance associate
 
 Your Neon project's [root branch](../../reference/glossary#root-branch) (`main`) also has an endpoint.
 
-To connect to a branch or root branch from a client or application, you must connect to the branch's endpoint. For more information connecting to a branch endpoint, see [Branches](../../get-started-with-neon/get-started-branching/).
+To connect to a database in a branch from a client or application, you must connect to the branch's endpoint. For more information connecting to a branch endpoint, see [Connect to a branch](../../manage/branches/#connect-to-a-branch).
 
 ## Branching workflows
 
@@ -52,7 +48,7 @@ Branching enables testers to use the most recent production data. Testers can cr
 
 ![test environment branches](./images/branching_test.png)
 
-Another testing scenario enabled by branching is tracking down corruption or data quality issues. For example, you can create and dispose of multiple point-in-time database branches to determine when a corruption or data quality issue first appeared.
+Another testing scenario enabled by branching is tracking down corruption or data quality issues. For example, you can create and dispose of multiple point-in-time branches to determine when a corruption or data quality issue first appeared.
 
 ![data quality issue branch](./images/branching_issue.png)
 
