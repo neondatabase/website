@@ -46,17 +46,21 @@ A service that provides virtualized computing resources (CPU, memory, and storag
 
 ### Connection pooling
 
-A method of creating a pool of connections and caching those connections for reuse. Neon uses `pgbouncer` in `transaction mode` for connection pooling. Neon’s connection pooling feature can be enabled or disabled for a project on the **Settings** page, under **General Settings**.
+A method of creating a pool of connections and caching those connections for reuse. Neon uses `pgbouncer` in `transaction mode` for connection pooling. Neon’s connection pooling feature can be enabled or disabled for a project on the **Settings** page, under **General Settings**. See [Connection pooling](../../connect/connection-pooling).
 
 ### Connection string
 
-A string containing details for connecting to a Neon project branch. The details include a user name, endpoint host address, and database name; for example:
+A string containing details for connecting to a Neon project branch. The details include a user name, endpoint hostname, and database name; for example:
 
 ```terminal
-postgres://daniel@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
+postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
 ```
 
+The endpoint hostname include an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
+
 The connection string for a Neon is provided on the **Dashboard** in the Neon Console, under **Connection Details**. The connection string that is displayed immediately after creating a project also includes the user’s password, temporarily. For security reasons, the password is removed from the connection string after navigating away from the Neon Console or refreshing the browser. If you misplace your password, your only option is to reset it.
+
+For information about connecting to Neon, see [Connect from any application](../../connect/connect-from-any-app).
 
 ### Console
 
@@ -76,8 +80,7 @@ A named collection of database objects. A Neon project has a default database na
 
 ### Endpoint
 
-The compute instance associated with a branch. A single read-write endpoint is created for each branch, including the project's [root branch](#root-branch) (`main`). The endpoint hostname is required to connect to a branch from a client or application. An endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. An endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. For more information, see [Connecting to a branch](https://neon.tech/docs/get-started-with-neon/get-started-branching/#connect-to-a-branch).
-
+The compute resource associated with a branch. A single read-write endpoint is created for the project's [root branch](#root-branch) (`main`). You can choos whether no not to create an endpoint for when creating child branches. The endpoint hostname is required to connect to a Neon database from a client or application. An endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. An endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. An endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](../../connect/connect-from-any-app).
 ### Free Tier
 
 A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier/).
