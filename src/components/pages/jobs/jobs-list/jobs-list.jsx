@@ -66,7 +66,7 @@ const JobsList = () => {
             </li>
           ))}
         </ul>
-        <span className="text-xl">
+        <span className="text-xl md:text-base">
           By applying for the position you agree to our{' '}
           <Link className="font-semibold" to="/candidate-privacy-policy/" theme="black-primary-1">
             Candidate privacy policy
