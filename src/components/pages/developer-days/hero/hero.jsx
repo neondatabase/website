@@ -88,21 +88,23 @@ const Hero = () => {
               label="Hero video"
               srcMp4="/videos/pages/developer-days/dr-brown.mp4"
               srcWebm="/videos/pages/developer-days/dr-brown.webm"
-              inView={isContainerInView}
               setBackgroundColor={setBackgroundColor}
               lazyLoading={false}
+              inView
             />
           </div>
           <ItemsList className="bg-primary-1" items={items} setIsOpenModal={setIsOpenModal} />
         </div>
       </Container>
-      <VideoModal
-        isOpenModal={isOpenModal}
-        setIsOpenModal={setIsOpenModal}
-        title={title}
-        description={description}
-        videoId="0Ly5gVQ87mM"
-      />
+      {isContainerInView && (
+        <VideoModal
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+          title={title}
+          description={description}
+          videoId="0Ly5gVQ87mM"
+        />
+      )}
     </section>
   );
 };
