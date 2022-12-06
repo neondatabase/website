@@ -1,8 +1,6 @@
 ---
 title: Terms of service
-slug: /terms-of-service
-redirectFrom: 
-- /terms-of-service
+slug: terms-of-service
 ---
 
 ## The fine print
@@ -76,7 +74,7 @@ PLEASE NOTE THAT NEON DOES NOT GUARANTEE THE INTEGRITY AND CONFIDENTIALITY OF AN
 
 6.2 Your failure to maintain database instance within the support perimeter (as specified in the Documentation) may result in Product(s) failure for which Neon is not responsible. Any customization, copies, and use of any additional software with the Neon Product(s) may result in the instance falling outside the support perimeter and causing Neon's Products  failure for which Neon is not responsible.
 
-6.3 Yiou shall use Neon in compliance with all applicable laws, the Documentation and the Terms. You are prohibited from: (a) modifying and/or making derivative works of, disassembling, extracting, reverse compiling and/or reverse engineering the source code or any part of the Neon Product(s); (b) reselling, offering, selling, renting, leasing, distributing, assigning and/or otherwise commercially exploiting the Neon Product(s)  for any purposes, in whole or in part, except where specifically permitted by Neon; (c) using and/or accessing the Neon Product(s)n order to build a similar and/or competitive website, platform, product and/or service or for other benchmarking or competitive purposes; (d) framing or otherwise incorporating Neon Product(s), as part of another website or service; (e) removing and/or destroying any copyright notices and/or other proprietary markings contained in the Neon Product(s); (f) taking any action that imposes or may impose (as determined by Neon’s sole and absolute discretion) an unreasonable and/or disproportionately large load on Neon’s and/or our third-party providers’ infrastructure; (j) exceeding any usage allowances and service capacity available for the Free Tier (l) promoting and/or providing information about illegal activities and/or physical harm and/or injury to any group, individual, institution and/or property; and (m) transferring through the Website and/or Neon Product(s) any Prohibited Content.
+6.3 You shall use Neon in compliance with all applicable laws, the Documentation and the Terms. You are prohibited from: (a) modifying and/or making derivative works of, disassembling, extracting, reverse compiling and/or reverse engineering the source code or any part of the Neon Product(s); (b) reselling, offering, selling, renting, leasing, distributing, assigning and/or otherwise commercially exploiting the Neon Product(s)  for any purposes, in whole or in part, except where specifically permitted by Neon; (c) using and/or accessing the Neon Product(s)n order to build a similar and/or competitive website, platform, product and/or service or for other benchmarking or competitive purposes; (d) framing or otherwise incorporating Neon Product(s), as part of another website or service; (e) removing and/or destroying any copyright notices and/or other proprietary markings contained in the Neon Product(s); (f) taking any action that imposes or may impose (as determined by Neon’s sole and absolute discretion) an unreasonable and/or disproportionately large load on Neon’s and/or our third-party providers’ infrastructure; (j) exceeding any usage allowances and service capacity available for the Free Tier (l) promoting and/or providing information about illegal activities and/or physical harm and/or injury to any group, individual, institution and/or property; and (m) transferring through the Website and/or Neon Product(s) any Prohibited Content.
 
 ## 7. Intellectual Property Ownership; Feedback
 
@@ -105,7 +103,7 @@ The Neon Product(s) are provided "as is" and Neon hereby disclaims all warrantie
 
 ## 10. Limitation of Liability
 
-10.1 SUBJECT TO SECTION 10.1 ABOVE, YOU EXPRESSLY UNDERSTAND AND AGREE THAT NEON, ITS SUBSIDIARIES AND AFFILIATES, AND ITS LICENSORS SHALL NOT BE LIABLE TO YOU FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL CONSEQUENTIAL OR EXEMPLARY DAMAGES WHICH MAY BE INCURRED BY YOU, HOWEVER, CAUSED AND UNDER ANY THEORY OF LIABILITY. THIS SHALL INCLUDE, BUT NOT BE LIMITED TO, ANY LOSS OF PROFIT (WHETHER INCURRED DIRECTLY OR INDIRECTLY), ANY LOSS OF GOODWILL OR BUSINESS REPUTATION, ANY LOSS OF DATA SUFFERED, COST OF PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, OR OTHER INTANGIBLE LOSS. UNLESS OTHERWISE IS STATED IN THESE TERMST, NEON’S MAXIMUM AGGREGATE LIABILITY TO THE OTHER PARTY FOR DAMAGES OF ANY KIND THAT THE OTHER PARTY SUFFERS IN CONNECTION WITH THESE TERMS DURING THE USE OF NEON PRODUCT(S) OTHER THAN WITHIN THE TECHNICAL PREVIEWS IS LIMITED TO THE AMOUNT OF THE FEES PAID BY THE OTHER OTHER PARTY TO NEON IN THE TWELVE (12) MONTH PERIOD IMMEDIATELY PRECEDING THE DATE OF THE LAST EVENT GIVING RISE TO THE LIABILITY.
+10.1 SUBJECT TO SECTION 10.1 ABOVE, YOU EXPRESSLY UNDERSTAND AND AGREE THAT NEON, ITS SUBSIDIARIES AND AFFILIATES, AND ITS LICENSORS SHALL NOT BE LIABLE TO YOU FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL CONSEQUENTIAL OR EXEMPLARY DAMAGES WHICH MAY BE INCURRED BY YOU, HOWEVER, CAUSED AND UNDER ANY THEORY OF LIABILITY. THIS SHALL INCLUDE, BUT NOT BE LIMITED TO, ANY LOSS OF PROFIT (WHETHER INCURRED DIRECTLY OR INDIRECTLY), ANY LOSS OF GOODWILL OR BUSINESS REPUTATION, ANY LOSS OF DATA SUFFERED, COST OF PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, OR OTHER INTANGIBLE LOSS. UNLESS OTHERWISE IS STATED IN THESE TERMS, NEON’S MAXIMUM AGGREGATE LIABILITY TO THE OTHER PARTY FOR DAMAGES OF ANY KIND THAT THE OTHER PARTY SUFFERS IN CONNECTION WITH THESE TERMS DURING THE USE OF NEON PRODUCT(S) OTHER THAN WITHIN THE TECHNICAL PREVIEWS IS LIMITED TO THE AMOUNT OF THE FEES PAID BY THE OTHER OTHER PARTY TO NEON IN THE TWELVE (12) MONTH PERIOD IMMEDIATELY PRECEDING THE DATE OF THE LAST EVENT GIVING RISE TO THE LIABILITY.
 
 10.2 THE LIMITATIONS ON NEON'S LIABILITY TO YOU IN PARAGRAPH 10.1 ABOVE SHALL APPLY WHETHER OR NOT NEON HAS BEEN ADVISED OF OR SHOULD HAVE BEEN AWARE OF THE POSSIBILITY OF ANY SUCH LOSSES ARISING.
 
@@ -151,7 +149,7 @@ Neon may identify you as a user of the Neon Product(s) and may use your name, lo
 
 “Authorized User” means an individual, including any Customer’s employee, agent, contractor, or employee, business partners, contractors, affiliates, representatives or whosoever the Admin as defined in the Terms  granted permission to access and/or the Neon Product(s) via Customer’s pre-approved email domain(s) (e.g., @customerdomain.com).
 “Data Protection Laws” means all laws and regulations, including laws and regulations of the United States of America, the European Union (the “EU”), the European Economic Area (the “EEA”) and their member states, Switzerland and the United Kingdom, applicable to the processing of the Personal Data under these Terms.  
-"Documentation" means Neon's user documentation relating to the Neon Product(s) available at <https://neon.tech>.
+"Documentation" means Neon's user documentation relating to the Neon Product(s) available at [https://neon.tech](https://neon.tech).
 
 "Harmful Code" means any software, hardware, or other technology, device, or means, including any virus, worm, malware, or other malicious computer code, the purpose or effect of which is to permit unauthorized access to, or to destroy, disrupt, disable, distort, or otherwise harm or impede in any manner any (i) computer, software, firmware, hardware, system, or network; or (ii) any application or function of any of the foregoing or the security, integrity, confidentiality, or use of any data processed thereby.
 
@@ -169,4 +167,4 @@ Neon may identify you as a user of the Neon Product(s) and may use your name, lo
 
 "User Data" means information, data, and other content, in any form or medium, that is submitted, posted, or otherwise transmitted by or on behalf of any user of the Neon's Product through the Neon Products; provided that, for purposes of clarity, User Data does not include Aggregated Data.
 
-“Website” means an interface of the Neon Product(s) compiled of all web documents (including images, CSS, and HTML files) made available via <https://neon.tech> or its sub-domains or domains under other top domains that are owned by Neon.
+“Website” means an interface of the Neon Product(s) compiled of all web documents (including images, CSS, and HTML files) made available via [https://neon.tech](https://neon.tech) or its sub-domains or domains under other top domains that are owned by Neon.

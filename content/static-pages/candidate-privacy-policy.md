@@ -1,8 +1,6 @@
 ---
 title: Candidate privacy policy
-slug: /candidate-privacy-policy
-redirectFrom: 
-- /candidate-privacy-policy
+slug: candidate-privacy-policy
 ---
 
 Last Updated: Dec 5, 2022
@@ -133,23 +131,28 @@ This Privacy Notice may be subject to updates and modifications from time to tim
 
 **If you have any questions about this privacy notice, feel free to contact us at jobs@neon.tech.**
 
-**Additional GDPR Disclosure**
+#### Additional GDPR Disclosure
+
 Under the General Data Protection Regulation (EU Regulation 2016/679) (the "GDPR"), if you are a Candidate in the UK or the European Economic Area (EEA), we are required to provide you with additional information about our processing of your personal information. These disclosures should be read in conjunction with the Privacy Notice.
 
-**Controller of your personal information**
+#### Controller of your personal information
+
 If you are a Candidate located in the UK or EEA, the Neon entity to which you are applying is the controller of your personal information. Neon Inc., California, the USA, will be a data controller when you are applying for an open position on our career page. As a data controller, Neon Inc. is responsible for ensuring that your personal information processing complies with applicable EU data protection law.
 
-**Legal basis for processing your personal information**
+#### Legal basis for processing your personal information
+
 Our legal basis for collecting and using your personal information will depend on the information concerned. However, for this Notice, we will process your personal information, as summarized in Annex 1 below. The examples in Annex 1 cannot, of course, be exhaustive.
 
-**Data transfers outside of the EEA**
+#### Data transfers outside of the EEA
+
 The countries outside of the European Economic Area (EEA) may have data protection laws that are different and some potentially less protective than your own country's laws. Neon has and will continue to implement measures with any recipients of your personal data to ensure it remains protected under this Privacy Notice and the applicable data protection laws.
 
 To ensure this level of protection for your personal data, Neon concludes Standard Contractual Clauses approved by the European Commission with the third-party recipient, unless they are based in countries with an adequacy decision under Art. 45 GDPR.
 
 In the event of a legal obligation, we reserve the right under Article 6 (1) c) GDPR to disclose information about you if we are required to surrender it to competent authorities or law. More information on the topic is available [here](https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection/rules-international-data-transfers_en)
 
-**Additional CCPA Disclosures**
+#### Additional CCPA Disclosures
+
 Under the California Consumer Privacy Act ("CCPA"), if you are a resident of California, we are required to provide you with additional information about how we collect, use, and disclose personal information. These disclosures should be read in conjunction with the Privacy Notice.
 
 For purposes of this Notice, the term "Personal Information" has the meaning given in the California Consumer Privacy Act of 2018 (the "CCPA") but excludes information exempted from the CCPA's scope. Please note that the terms of personal information and personal data are interchangeable for the purposes of this Notice.
@@ -165,7 +168,8 @@ jobs@neon.tech.
 
 Please note that we do not sell your personal information to third parties.
 
-**California privacy rights**
+#### California privacy rights
+
 You have the right not to be discriminated against by us because you exercised any of your rights under the CCPA.
 
 However, your rights under California law may differ from the rights described in Section 8 "Your Rights" of the Notice to the extent they apply to Personal Information. We reserve the right to deny requests to exercise such rights as permitted by California law.
@@ -193,7 +197,7 @@ Under data protection laws, there are various grounds on which we can rely when 
 
 **Legal Basis.** We may need to process your personal data to comply with our legal obligations when required to do so by law, regulation, or court order or in response to a request for assistance by the police or other law enforcement agency or where we consider disclosure is necessary or required by law, to exercise, establish, or defend our legal rights, or to protect your vital interests or those of any other person.
 
-**Purposes:**
+#### Purposes:
 
 - Comply with all applicable employment, equality and health and safety law;
 - Comply with all applicable immigration and tax law;
