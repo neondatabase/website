@@ -32,10 +32,10 @@ const VideoModal = ({ isOpenModal, setIsOpenModal, title, description, videoId }
         </button>
         <h3 className="text-3xl font-bold leading-tight">{title}</h3>
         <p className="mt-0.5">{description}</p>
-        <div className="relative">
-          <div className="absolute -inset-x-16 top-16">
+        <div className="relative mt-5">
+          <div className="absolute -inset-x-16 top-16 h-full sm:top-10">
             <StaticImage
-              className="rounded-[200px] opacity-20 blur-[70px]"
+              className="h-full rounded-[200px] opacity-20 blur-[70px]"
               imgClassName="rounded-[200px]"
               src="./images/bg-gradient-modal.jpg"
               width={1289}
@@ -45,7 +45,7 @@ const VideoModal = ({ isOpenModal, setIsOpenModal, title, description, videoId }
               aria-hidden
             />
           </div>
-          <figure className="relative mt-5 h-0 overflow-hidden pb-[56.25%]">
+          <figure className="relative h-0 overflow-hidden pb-[56.25%]">
             <iframe
               className="absolute top-0 left-0 h-full w-full rounded-2xl"
               width="1161"
