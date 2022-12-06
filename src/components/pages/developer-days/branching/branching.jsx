@@ -71,7 +71,7 @@ const Branching = () => {
                 aria-hidden
               />
             </div>
-            <div className="relative isolate overflow-hidden rounded-2xl md:rounded-b-none">
+            <div className="relative isolate w-[940px] overflow-hidden rounded-2xl xl:w-auto md:rounded-b-none">
               <img
                 className="w-full"
                 src={`data:image/svg+xml;charset=utf-8,%3Csvg width='940' height='520' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
