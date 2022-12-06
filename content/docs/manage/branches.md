@@ -11,7 +11,7 @@ Data resides in a branch. Each Neon project has a root branch called `main`. You
 A child branch is a copy-on-write clone the data in the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](../../conceptual-guides/branching).
 
-You can create and manage branches using the Neon Console or [Neon API](https://neon.tech/api-reference). This topic covers branching using the Neon Console.
+You can create and manage branches using the Neon Console or [Neon API](https://neon.tech/api-reference). This topic covers both methods.
 
 Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Projects](../projects/#create-a-project).
 
@@ -99,3 +99,219 @@ FROM pg_database;
 <Admonition type="info">
 Neon stores data in its own internal format.
 </Admonition>
+
+## Branching using the Neon API
+
+Branch actions performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
+
+### Prerequisites
+
+A Neon API request requires an API key. For information about obtaining an API key, see [API Keys](../api-keys).
+
+### Create a branch
+
+The following Neon API method creates a branch. Adding the `endpoints` attribute to the call creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without an endpoint.
+
+```bash
+POST /projects/{project_id}/branches 
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+curl -X 'POST' \
+  'https://console.neon.tech/api/v2/projects/<project_id>/branches' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "endpoints": [
+    {
+      "type": "read_write"
+    }
+  ],
+  "branch": {
+    "parent_id": "<parent_id>"
+  }
+}'
+```
+
+- The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**.
+- The `<parent_id>` can be obtained by listing the branches for your project. See [List branches](#list-branches). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's root branch (`main`) or a previously created branch.
+
+The response includes information about the branch, the branch's endpoint, and the `create_branch` and `start_compute` operations that have been initiated.
+
+```bash
+{
+  "branch": {
+    "id": "br-flat-darkness-194551",
+    "project_id": "sparkling-king-781971",
+    "parent_id": "br-shy-meadow-151383",
+    "parent_lsn": "0/1953508",
+    "name": "br-flat-darkness-194551",
+    "current_state": "init",
+    "pending_state": "ready",
+    "created_at": "2022-12-06T01:10:45Z",
+    "updated_at": "2022-12-06T01:10:45Z"
+  },
+  "endpoints": [
+    {
+      "host": "ep-restless-grass-543725.cloud.neon.tech",
+      "id": "ep-restless-grass-543725",
+      "project_id": "sparkling-king-781971",
+      "branch_id": "br-flat-darkness-194551",
+      "autoscaling_limit_min_cu": 1,
+      "autoscaling_limit_max_cu": 1,
+      "region_id": "aws-us-west-2",
+      "type": "read_write",
+      "current_state": "init",
+      "pending_state": "active",
+      "settings": {
+        "pg_settings": {}
+      },
+      "pooler_enabled": false,
+      "pooler_mode": "transaction",
+      "disabled": false,
+      "passwordless_access": true,
+      "created_at": "2022-12-06T01:10:45Z",
+      "updated_at": "2022-12-06T01:10:45Z",
+      "proxy_host": "cloud.neon.tech"
+    }
+  ],
+  "operations": [
+    {
+      "id": "c80f6e98-7595-412b-b0d3-8c4ce77a3103",
+      "project_id": "sparkling-king-781971",
+      "branch_id": "br-flat-darkness-194551",
+      "action": "create_branch",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2022-12-06T01:10:45Z",
+      "updated_at": "2022-12-06T01:10:45Z"
+    },
+    {
+      "id": "67ca339c-a861-48c7-8fed-13723b4868bb",
+      "project_id": "sparkling-king-781971",
+      "branch_id": "br-flat-darkness-194551",
+      "endpoint_id": "ep-restless-grass-543725",
+      "action": "start_compute",
+      "status": "scheduling",
+      "failures_count": 0,
+      "created_at": "2022-12-06T01:10:45Z",
+      "updated_at": "2022-12-06T01:10:45Z"
+    }
+  ]
+}
+```
+
+### List branches
+
+The following Neon API method lists branches for the specified project.
+
+```bash
+GET /projects/{project_id}/branches
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+curl -X 'GET' \
+  'https://console.neon.tech/api/v2/projects/sparkling-king-781971/branches' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY'
+```
+
+The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**.
+
+The response lists the project's root branch and any child branches.
+
+Response:
+
+```bash
+{
+  "branches": [
+    {
+      "id": "br-flat-darkness-194551",
+      "project_id": "sparkling-king-781971",
+      "parent_id": "br-shy-meadow-151383",
+      "parent_lsn": "0/1953508",
+      "name": "br-flat-darkness-194551",
+      "current_state": "ready",
+      "logical_size": 28,
+      "created_at": "2022-12-06T01:10:45Z",
+      "updated_at": "2022-12-06T01:10:45Z"
+    },
+    {
+      "id": "br-shy-meadow-151383",
+      "project_id": "sparkling-king-781971",
+      "name": "main",
+      "current_state": "ready",
+      "logical_size": 28,
+      "physical_size": 29,
+      "created_at": "2022-12-05T18:32:13Z",
+      "updated_at": "2022-12-05T18:32:14Z"
+    }
+  ]
+}
+```
+
+### Delete a branch
+
+The following Neon API method deletes the specified branch.
+
+```bash
+DELETE /branches/{branch_id}
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+curl -X 'DELETE' \
+  'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY'
+```
+
+The `<branch_id>` can be found by listing the branches for your project. The `<branch_id>` is the `id` of a branch. A branch `id` has a `br-` prefix. See [List branches](#list-branches).
+
+The response shows information about the branch being deleted and the `suspend_compute` and `delete_timeline` operations that were initiated.
+
+```bash
+{
+  "branch": {
+    "id": "br-flat-darkness-194551",
+    "project_id": "sparkling-king-781971",
+    "parent_id": "br-shy-meadow-151383",
+    "parent_lsn": "0/1953508",
+    "name": "br-flat-darkness-194551",
+    "current_state": "ready",
+    "created_at": "2022-12-06T01:10:45Z",
+    "updated_at": "2022-12-06T01:12:10Z"
+  },
+  "operations": [
+    {
+      "id": "c7ee9bea-c984-41ac-8672-9848714104bc",
+      "project_id": "sparkling-king-781971",
+      "branch_id": "br-flat-darkness-194551",
+      "endpoint_id": "ep-restless-grass-543725",
+      "action": "suspend_compute",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2022-12-06T01:12:10Z",
+      "updated_at": "2022-12-06T01:12:10Z"
+    },
+    {
+      "id": "41646f65-c692-4621-9538-32265f74ffe5",
+      "project_id": "sparkling-king-781971",
+      "branch_id": "br-flat-darkness-194551",
+      "action": "delete_timeline",
+      "status": "scheduling",
+      "failures_count": 0,
+      "created_at": "2022-12-06T01:12:10Z",
+      "updated_at": "2022-12-06T01:12:10Z"
+    }
+  ]
+}
+```
+
+You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches). The deleted branch should no longer be listed.
