@@ -16,7 +16,7 @@ import background3 from 'images/developer-days/background-3.svg';
 
 const DeveloperDays = () => (
   <Layout headerTheme="black" footerTheme="black" footerWithTopBorder>
-    <div className="relative overflow-hidden bg-black text-white">
+    <div className="relative overflow-x-hidden bg-black text-white">
       {/* <img
         className="absolute top-0 left-1/2 h-auto w-[1440px] -translate-x-1/2"
         src={background1}

@@ -86,10 +86,18 @@ const Partners = () => {
                 aria-hidden
               />
               <CanvasVideo
-                className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:-bottom-6 md:h-[calc(100%+2rem)] sm:-bottom-3"
+                className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:hidden"
                 label="Partners video"
                 srcMp4="/videos/pages/developer-days/hands.mp4"
                 srcWebm="/videos/pages/developer-days/hands.webm"
+                inView={isContainerInView}
+                setBackgroundColor={setBackgroundColor}
+              />
+              <CanvasVideo
+                className="absolute bottom-0 right-0 hidden h-full w-auto max-w-none rounded-2xl md:block"
+                label="Partners video"
+                srcMp4="/videos/pages/developer-days/hands-mobile.mp4"
+                srcWebm="/videos/pages/developer-days/hands-mobile.webm"
                 inView={isContainerInView}
                 setBackgroundColor={setBackgroundColor}
               />

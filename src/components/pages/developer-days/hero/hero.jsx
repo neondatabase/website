@@ -19,15 +19,13 @@ const description = 'Welcome to Neon Developer Days. December 6-8, 2022.';
 const items = [
   {
     text: 'Neon is Live!',
-    // linkText: 'Read blog post',
-    // linkUrl: '/blog/neon-serverless-postgres-is-live/',
-    linkText: 'Coming soon!',
+    linkText: 'Read blog post',
+    linkUrl: '/blog/neon-serverless-postgres-is-live/',
   },
   {
     text: 'Database branching with Neon',
-    linkText: 'Coming soon!',
-    // linkText: 'Read blog post',
-    // linkUrl: '/blog/database-branching-for-postgres-with-neon/',
+    linkText: 'Read blog post',
+    linkUrl: '/blog/database-branching-for-postgres-with-neon/',
   },
   {
     text: 'Twitter Space: Neon is Live Q&A',
