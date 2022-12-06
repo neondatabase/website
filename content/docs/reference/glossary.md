@@ -53,7 +53,7 @@ A method of creating a pool of connections and caching those connections for reu
 A string containing details for connecting to a Neon project branch. The details include a user name, endpoint hostname, and database name; for example:
 
 ```terminal
-postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/main
+postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
 ```
 
 The endpoint hostname include an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
@@ -80,7 +80,7 @@ A named collection of database objects. A Neon project has a default database na
 
 ### Endpoint
 
-The compute instance associated with a branch. A single read-write endpoint is created for each branch, including the project's [root branch](#root-branch) (`main`). The endpoint hostname is required to connect to a Neon database from a client or application. An endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. An endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. An endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](../../connect/connect-from-any-app).
+The compute resource associated with a branch. A single read-write endpoint is created for the project's [root branch](#root-branch) (`main`). You can choos whether no not to create an endpoint for when creating child branches. The endpoint hostname is required to connect to a Neon database from a client or application. An endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. An endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. An endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](../../connect/connect-from-any-app).
 ### Free Tier
 
 A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier/).
