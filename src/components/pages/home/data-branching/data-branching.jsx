@@ -21,7 +21,7 @@ const DataBranching = () => {
     >
       <Container className="z-10" size="md">
         <div className="max-w-[600px] xl:max-w-[400px] lg:max-w-none">
-          <Heading tag="h2" size="lg" theme="black">
+          <Heading tag="h2" size="xl" theme="black">
             Data Branching
           </Heading>
           <p className="t-xl mt-8 3xl:max-w-[504px] 2xl:mt-7 2xl:max-w-[416px] xl:mt-6 lg:max-w-none">
@@ -35,7 +35,7 @@ const DataBranching = () => {
           </p>
           <Link
             className="mt-6 inline-block text-2xl font-semibold before:-bottom-1 before:h-1 2xl:text-xl xl:text-lg"
-            to="/docs/conceptual-guides/branching/"
+            to="/branching/"
             theme="black-primary-1"
           >
             Read more

@@ -13,7 +13,7 @@ const items = [
   {
     className: 'bg-secondary-2',
     icon: DataIcon,
-    text: 'Perform scenario analysis on production like data',
+    text: 'Perform scenario analysis on production-like data',
   },
   {
     className: 'bg-secondary-6',

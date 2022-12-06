@@ -74,7 +74,7 @@ const Hero = () => {
             id="hero-title"
             className="with-highlighted-text-secondary-2"
             tag="h1"
-            size="xl"
+            size="2xl"
             theme="white"
             ref={titleRef}
           >

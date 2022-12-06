@@ -1,0 +1,55 @@
+<svg width="1440" height="1614" viewBox="0 0 1440 1614" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_10440_18967" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-4" y="0" width="1448" height="1614">
+<g opacity="0.02">
+<path d="M360 0V1614" stroke="white" stroke-width="8"/>
+<path d="M320 0V1614" stroke="white" stroke-width="8"/>
+<path d="M280 0V1614" stroke="white" stroke-width="8"/>
+<path d="M240 0V1614" stroke="white" stroke-width="8"/>
+<path d="M200 0V1614" stroke="white" stroke-width="8"/>
+<path d="M160 0V1614" stroke="white" stroke-width="8"/>
+<path d="M120 0V1614" stroke="white" stroke-width="8"/>
+<path d="M80 0V1614" stroke="white" stroke-width="8"/>
+<path d="M40 0V1614" stroke="white" stroke-width="8"/>
+<path d="M0 0V1614" stroke="white" stroke-width="8"/>
+<path d="M840 0V1614" stroke="white" stroke-width="8"/>
+<path d="M800 0V1614" stroke="white" stroke-width="8"/>
+<path d="M760 0V1614" stroke="white" stroke-width="8"/>
+<path d="M720 0V1614" stroke="white" stroke-width="8"/>
+<path d="M680 0V1614" stroke="white" stroke-width="8"/>
+<path d="M640 0V1614" stroke="white" stroke-width="8"/>
+<path d="M600 0V1614" stroke="white" stroke-width="8"/>
+<path d="M560 0V1614" stroke="white" stroke-width="8"/>
+<path d="M520 0V1614" stroke="white" stroke-width="8"/>
+<path d="M480 0V1614" stroke="white" stroke-width="8"/>
+<path d="M440 0V1614" stroke="white" stroke-width="8"/>
+<path d="M400 0V1614" stroke="white" stroke-width="8"/>
+<path d="M1320 0V1614" stroke="white" stroke-width="8"/>
+<path d="M1280 0V1614" stroke="white" stroke-width="8"/>
+<path d="M1240 0V1614" stroke="white" stroke-width="8"/>
+<path d="M1200 0V1614" stroke="white" stroke-width="8"/>
+<path d="M1160 0V1614" stroke="white" stroke-width="8"/>
+<path d="M1360 0V1614" stroke="white" stroke-width="8"/>
+<path d="M1400 0V1614" stroke="white" stroke-width="8"/>
+<path d="M1440 0V1614" stroke="white" stroke-width="8"/>
+<path d="M1120 0V1614" stroke="white" stroke-width="8"/>
+<path d="M1080 0V1614" stroke="white" stroke-width="8"/>
+<path d="M1040 0V1614" stroke="white" stroke-width="8"/>
+<path d="M1000 0V1614" stroke="white" stroke-width="8"/>
+<path d="M960 0V1614" stroke="white" stroke-width="8"/>
+<path d="M920 0V1614" stroke="white" stroke-width="8"/>
+<path d="M880 0V1614" stroke="white" stroke-width="8"/>
+</g>
+</mask>
+<g mask="url(#mask0_10440_18967)">
+<g filter="url(#filter0_f_10440_18967)">
+<circle cx="720" cy="1150" r="170" fill="white"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_10440_18967" x="336" y="766" width="768" height="768" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="107" result="effect1_foregroundBlur_10440_18967"/>
+</filter>
+</defs>
+</svg>

@@ -5,6 +5,12 @@
   }
 }
 
+@layer components {
+  .label-secondary-2 {
+    @apply rounded-[40px] bg-secondary-2 py-2 px-4 text-xs font-bold uppercase leading-none text-black;
+  }
+}
+
 @layer utilities {
   .with-link-primary {
     a {
