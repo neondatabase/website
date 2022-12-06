@@ -37,7 +37,7 @@ const JobsList = () => {
     <section className="safe-paddings pt-64 3xl:pt-60 2xl:pt-52 xl:pt-48 lg:pt-40 md:pt-32">
       <Container size="xs">
         <h2 className="t-5xl font-bold leading-tight">Job Openings</h2>
-        <ul className="mt-14 space-y-16 lg:mt-10 lg:space-y-12 md:mt-6 md:space-y-8">
+        <ul className="mt-14 mb-16 space-y-16 lg:mb-12 lg:mt-10 lg:space-y-12 md:mb-8 md:mt-6 md:space-y-8">
           {items.map(({ name, items }, index) => (
             <li key={index}>
               <h3 className="t-3xl font-bold leading-none">{name}</h3>
@@ -66,6 +66,12 @@ const JobsList = () => {
             </li>
           ))}
         </ul>
+        <span className="text-xl md:text-base">
+          By applying for the position you agree to our{' '}
+          <Link className="font-semibold" to="/candidate-privacy-policy/" theme="black-primary-1">
+            Candidate privacy policy
+          </Link>
+        </span>
       </Container>
     </section>
   );

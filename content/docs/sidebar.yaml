@@ -24,8 +24,22 @@
       slug: get-started-with-neon/query-with-neon-sql-editor
     - title: Get started with Branching
       slug: get-started-with-neon/get-started-branching
-    - title: Using API keys
-      slug: get-started-with-neon/using-api-keys
+- title: Manage
+  items:
+    - title: Overview
+      slug: manage/overview
+    - title: API keys
+      slug: manage/api-keys
+    - title: Projects
+      slug: manage/projects
+    - title: Branches
+      slug: manage/branches
+    - title: Endpoints
+      slug: manage/endpoints
+    - title: Users
+      slug: manage/users
+    - title: Databases
+      slug: manage/databases
 - title: Connect
   items:
     - title: Connect from any application
