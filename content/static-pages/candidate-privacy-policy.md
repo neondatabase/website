@@ -3,9 +3,9 @@ title: Candidate privacy policy
 slug: candidate-privacy-policy
 ---
 
-Last Updated: Dec 5, 2022
+**Last Updated**: Dec 5, 2022
 
-We at Neon are committed to protecting the privacy and security of your personal information. This Candidates Data Privacy Notice (the "Privacy Notice," the "Notice") explains how Neon Inc. ("we," "us") collects and handles your personal data and what privacy rights you have.  
+We at Neon are committed to protecting the privacy and security of your personal information. This Candidates Data Privacy Notice (the "Privacy Notice", the "Notice") explains how Neon Inc. ("we," "us") collects and handles your personal data and what privacy rights you have.  
 
 The term "you," "Candidate" in this Notice refers to anyone who applies for a job role or open position at Neon or uses our careers websites, including our career page.
 
@@ -16,7 +16,7 @@ This Notice is set out in this document and:
 - for those Candidates in the EEA and the UK, the "Additional GDPR Disclosures" annexed to this document;
 - for those Candidates who are residents of California, the "Additional CCPA Disclosures" annexed to this document.
 
-### 1. What Personal Data we collect
+## 1. What Personal Data we collect
 
 When you apply for a position at Neon, we collect and process information that may include, but is not limited to:
 
@@ -32,13 +32,13 @@ You are under no statutory or contractual obligation to provide data during the 
 
 We rely on you to transmit complete, current, and accurate information about yourself. Please update your personal information if changes arise or contact us at jobs@neon.tech to correct your information accordingly.
 
-### 2. Sensitive data processing
+## 2. Sensitive data processing
 
 We do not generally collect special or sensitive personal data about you during the recruitment process unless you provide it to us voluntarily. That is information about your race or ethnicity, political opinion, religious or philosophical belief, trade union membership; genetic data; biometric data for unique identification; or information on your health, sex life, or sexual orientation.
 
 However, under certain circumstances, we are required or permitted by law to process sensitive personal information. For example, Neon may collect data about your racial/ethnic origin, gender, and disabilities to ensure compliance with anti-discrimination laws or conduct equal opportunities monitoring. Likewise, information about your physical or mental condition may be collected to consider special equipment you might need for a subsequent job role.
 
-### 3. What sources we use to get personal data about you
+## 3. What sources we use to get personal data about you
 
 We may collect personal data about you from the following sources to the extent permitted by law:
 
@@ -46,11 +46,11 @@ We may collect personal data about you from the following sources to the extent 
 - **Individuals Who Refer You.** Other individuals may give us your personal information when recommending you as a candidate for a specific position or our business generally.
 - **Combining Personal Information from Different Sources.** We may combine the personal information we receive from other sources with personal information we collect from you and use it as described in this Notice.
 
-### 4. Legal basis and purpose of processing
+## 4. Legal basis and purpose of processing
 
 We collect your personal data during various stages of the recruiting process (application, testing, interviews) because it is necessary for our hiring decisions. We collect and use your personal data for reasons related to your application and always follow applicable data protection laws. We outline the main legal grounds and purposes of your data processing in Annex 1. Scroll down to see details.
 
-### 5. Personal information sharing
+## 5. Personal information sharing
 
 Neon may have to share your data with third parties, including third-party service providers and our affiliated entities. Because we operate as a global business, we may transfer, store, or process your personal data in a country different from where you reside. We require all recipients to respect the security of your data and to treat it per the law.
 We may disclose your personal information to the following parties or in the following circumstances (where applicable):
@@ -64,13 +64,13 @@ We may disclose your personal information to the following parties or in the fol
 
 Some of the above circumstances for processing will overlap. There may be several circumstances that justify our use of your personal information.
 
-### 6. Automated decision-making
+## 6. Automated decision-making
 
 We do not make any automated decisions concerning your application without human involvement. Our hiring decision will be made considering a combination of factors such as your education, job experience, qualifications, and cultural fit.
 
 We may use pre-employment automated tests, cognitive, numerical reasoning, and behavioral tests to measure your suitability for a specific position. The test results are never used as the sole determining factor in the recruitment process.
 
-### 7. How we protect your personal information
+## 7. How we protect your personal information
 
 We take your security seriously and take reasonable steps to protect and secure your personal information. We have implemented adequate technical and organizational measures to protect your data against unauthorized, accidental, or unlawful destruction, loss, alteration, misuse, disclosure, access, and other unlawful forms of processing.
 
@@ -78,7 +78,7 @@ We limit access to your personal data on a genuine business need-to-know basis. 
 
 Unfortunately, the transmission of information via the internet is not completely secure. Although we will do our best to protect your personal data, we cannot guarantee the security of your data transmitted through any online means. Therefore, any transmission remains at your own risk.
 
-### 8. Your Rights
+## 8. Your Rights
 
 Depending on your location, you have certain rights concerning your personal information. Those rights may include:
 
@@ -96,14 +96,14 @@ We may need to request specific information from you to confirm your identity an
 
 You will not be expected to pay a fee to obtain your personal data unless we consider that your access request is unfounded or excessive. In these circumstances, we may charge you a reasonable fee or refuse to comply with your request. We may charge a reasonable fee if you request another copy of the information already provided to us.
 
-### 9. Consent Withdrawal
+## 9. Consent Withdrawal
 
 We are unlikely to rely on consent as a ground for the processing. However, if we do, you may withdraw consent at any time — though if you do so, that will not affect the lawfulness of what we have done before you withdraw consent. For this purpose, please notify us at jobs
 @neon.tech.
 
 Once we receive your consent withdrawal, we will no longer process your information for the purpose you originally agreed to unless storing your data is required by law.
 
-### 10. How long we retain your personal information
+## 10. How long we retain your personal information
 
 In general, we might keep personal data about you as long as it is necessary for the purpose for which we collected it.
 
@@ -117,33 +117,33 @@ After this period, we will securely delete or anonymize your personal data when 
 
 We will review your request at the earliest convenience and delete your data unless we are not required by law to keep it for a longer period. If deletion is impossible, we will securely store your personal data and isolate it from any further processing until deletion is permitted.
 
-### 11. How to contact us
+## 11. How to contact us
 
 If you have any questions, requests, or complaints regarding the use or disclosure of your personal data or if you would like to review, delete or update information about you, please contact us by email: jobs@neon.tech.
 
-### 12. Your complaints
+## 12. Your complaints
 
 We are committed to working with you to resolve any data protection concerns fairly. However, suppose you believe that we have not been able to resolve the issue. In that case, you have the right to make a complaint to the data protection authority in the country where you reside. A list of contact details for the EU data protection authorities is available here.
 
-### 13. Updates to this Privacy Notice
+## 13. Updates to this Privacy Notice
 
 This Privacy Notice may be subject to updates and modifications from time to time. We will post any changes to this Notice on this page. Each version of this Notice is identified at the top of the page by its version date.
 
 **If you have any questions about this privacy notice, feel free to contact us at jobs@neon.tech.**
 
-#### Additional GDPR Disclosure
+### Additional GDPR Disclosure
 
 Under the General Data Protection Regulation (EU Regulation 2016/679) (the "GDPR"), if you are a Candidate in the UK or the European Economic Area (EEA), we are required to provide you with additional information about our processing of your personal information. These disclosures should be read in conjunction with the Privacy Notice.
 
-#### Controller of your personal information
+### Controller of your personal information
 
 If you are a Candidate located in the UK or EEA, the Neon entity to which you are applying is the controller of your personal information. Neon Inc., California, the USA, will be a data controller when you are applying for an open position on our career page. As a data controller, Neon Inc. is responsible for ensuring that your personal information processing complies with applicable EU data protection law.
 
-#### Legal basis for processing your personal information
+### Legal basis for processing your personal information
 
 Our legal basis for collecting and using your personal information will depend on the information concerned. However, for this Notice, we will process your personal information, as summarized in Annex 1 below. The examples in Annex 1 cannot, of course, be exhaustive.
 
-#### Data transfers outside of the EEA
+### Data transfers outside of the EEA
 
 The countries outside of the European Economic Area (EEA) may have data protection laws that are different and some potentially less protective than your own country's laws. Neon has and will continue to implement measures with any recipients of your personal data to ensure it remains protected under this Privacy Notice and the applicable data protection laws.
 
@@ -151,7 +151,7 @@ To ensure this level of protection for your personal data, Neon concludes Standa
 
 In the event of a legal obligation, we reserve the right under Article 6 (1) c) GDPR to disclose information about you if we are required to surrender it to competent authorities or law. More information on the topic is available [here](https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection/rules-international-data-transfers_en)
 
-#### Additional CCPA Disclosures
+### Additional CCPA Disclosures
 
 Under the California Consumer Privacy Act ("CCPA"), if you are a resident of California, we are required to provide you with additional information about how we collect, use, and disclose personal information. These disclosures should be read in conjunction with the Privacy Notice.
 
@@ -163,12 +163,11 @@ The purposes for which we use Personal Information are described in Annex 1 of t
 
 The categories of third parties with whom we share personal information are described in Section 5 of this Notice.
 
-The specific pieces of personal information we have collected about you might be requested at
-jobs@neon.tech.
+The specific pieces of personal information we have collected about you might be requested at jobs@neon.tech.
 
 Please note that we do not sell your personal information to third parties.
 
-#### California privacy rights
+### California privacy rights
 
 You have the right not to be discriminated against by us because you exercised any of your rights under the CCPA.
 
