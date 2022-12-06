@@ -40,6 +40,7 @@ Append a Neon API method path to the base URL to construct the full URL for a re
 https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}
 ```
 
-## Using the Neon API reference create requests
+## Using the Neon API reference to construct and execute requests
 
 You can use the the [Neon API v2 reference](https://neon.tech/api-reference/v2) to construct and execute Neon API requests. Click **Authorize** to add your API key token, and for each method, click **Try it out** and supply the required parameters and request body attributes. Click **Execute** to create and run the request.
+
