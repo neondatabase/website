@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/api/about
 ---
 
-The Neon API allows you to manage projects your Neon projects programmatically.
+The Neon API allows you to manage your Neon projects programmatically.
 
 Refer to the [Neon API v2 reference](https://neon.tech/api-reference/v2) for supported methods.
 
