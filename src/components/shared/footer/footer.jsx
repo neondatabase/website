@@ -34,7 +34,7 @@ const Footer = ({ isDocPage, withTopBorder, theme }) => {
             <p>Neon 2022 Ⓒ All rights reserved</p>
           </div>
         </div>
-        <div className="flex w-[40.5%] space-x-[123px] xl:w-[49.5%] xl:space-x-8 md:hidden">
+        <div className="flex space-x-[123px] xl:space-x-8 md:hidden">
           {MENUS.footer.map(({ heading, links }, index) => (
             <div className={clsx('flex flex-col xl:w-full')} key={index}>
               <h3 className="relative text-sm font-bold uppercase leading-none tracking-wider">
