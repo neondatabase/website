@@ -51,13 +51,13 @@ User Personal Information does not include aggregated, non-personally identifyin
 
 - We need your User Personal Information to create your account, and to provide the services you request.
 - We use your User Personal Information, specifically your user name and email address, to identify you on Neon.
-- We use your email address to communicate with you, if you have consented to this use for the purposes outlined in our email [communication section](#contacting-neon).
+- We use your email address to communicate with you, if you have consented to this use for the purposes outlined in our [email communication section](#contacting-neon).
 - We limit our use of your User Personal Information to the purposes listed in this Privacy Policy. If we need to use your
 - User Personal Information for other purposes, we will ask for your permission first.
 
 #### What Information Neon Does Not Collect
 
-We do not intentionally collect sensitive personal information, such as social security numbers, genetic data, health information, or religious affiliation. Although Neon does not request or intentionally collect sensitive personal information, we realize that you might store this kind of information in your account, such as in an application. If you store sensitive personal information on our servers, you are consenting to our storage of that information on our servers, which are located in the regions list here [https://neon.tech/docs/conceptual-guides/regions/](https://neon.tech/docs/conceptual-guides/regions/).
+We do not intentionally collect sensitive personal information, such as social security numbers, genetic data, health information, or religious affiliation. Although Neon does not request or intentionally collect sensitive personal information, we realize that you might store this kind of information in your account, such as in an application. If you store sensitive personal information on our servers, you are consenting to our storage of that information on our servers, which are located in the regions list [here](https://neon.tech/docs/conceptual-guides/regions/).
 
 You shall be responsible for ensuring that any Sensitive Information is Transferred to the Neon Product in compliance with any applicable Data Protection Laws as defined in the Terms. You shall be solely liable for any and all liabilities arising from or relating to your Sensitive Information. We do not allow Transferring of the Sensitive Information during the Technical Previews.
 
@@ -115,7 +115,7 @@ Neon is currently in Technical Preview means that our information security pract
 
 #### Resolving Complaints
 
-If you have concerns about the way Neon is handling your User Personal Information, please let us know immediately. We want to help. You may email us directly at privacyt@neon.tech with the subject line "Privacy Concerns." We will respond within 45 days at the latest.
+If you have concerns about the way Neon is handling your User Personal Information, please let us know immediately. We want to help. You may email us directly at privacy@neon.tech with the subject line "Privacy Concerns." We will respond within 45 days at the latest.
 
 #### How We Respond to Compelled Disclosure
 
