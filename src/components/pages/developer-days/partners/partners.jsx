@@ -103,13 +103,15 @@ const Partners = () => {
           </div>
         </div>
       </Container>
-      <VideoModal
-        isOpenModal={isOpenModal}
-        setIsOpenModal={setIsOpenModal}
-        title={title}
-        description={description}
-        videoId="tu-bgIg-Luo"
-      />
+      {isContainerInView && (
+        <VideoModal
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+          title={title}
+          description={description}
+          videoId="0Ly5gVQ87mM"
+        />
+      )}
     </section>
   );
 };
