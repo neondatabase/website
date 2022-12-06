@@ -38,34 +38,50 @@ You can use Neon's branching feature in variety development workflows, a few of 
 
 ### Development
 
-You can create a branch of your production database that developers are free to play with and modify. You can quickly create a branch with all of the data that existed in the parent branch, eliminating the setup time required to deploy and maintain a development database. Branching is so easy and cost-effective that you can create a branch for each developer. For example, you can create branches from a primary development branch to assign tasks to be worked on in parallel.
+Create a branch of your production database that developers are free to play with and modify. You can quickly create a branch with all of the data that existed in the parent branch, eliminating the setup time required to deploy and maintain a development database. 
+
+![development environment branch](./images/branching_dev_env.png)
+
+Branching is so easy and cost-effective that you can create a branch for each developer. For example, you can create branches from a primary development branch to assign tasks to be worked on in parallel.
+
+![branch for each developer](./images/branching_each_dev.png)
 
 ### Testing
 
 Branching enables testers to use the most recent production data. Testers can create branches for testing schema changes, validating new queries, or testing potentially destructive queries before deploying them into production. A branch is isolated from its parent branch but has all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a database. Tests can also run on separate branches in parallel, with each branch having dedicated compute resources.
 
+![test environment branches](./images/branching_test.png)
+
 Another testing scenario enabled by branching is tracking down corruption or data quality issues. For example, you can create and dispose of multiple point-in-time database branches to determine when a corruption or data quality issue first appeared.
 
-### Staging
-
-With Neon's branching capabilities, you can create a staging database by branching your production database. Using the Neon API, you can automate creating a database branch based on the staging branch for every pull request in your CI/CD pipeline.
-
-### Backup
-
-You can use branching to implement a data backup strategy. For example, you can create backup branches named for the time they were created for convenient point-in-time restore (PITR).
+![data quality issue branch](./images/branching_issue.png)
 
 ### Data recovery
 
 If you lose data due to an unintended deletion or some other event, you can create a branch with data as it existed before the event occurred, allowing you to recover the lost data.
 
+![data recovery branch](./images/branching_data_loss.png)
+
 ### Analytics
 
 You can run costly, long-running queries on an isolated branch of your production data, each with its own compute resources. With automation scripts, you can create and dispose of branches on a defined schedule to ensure that queries always run on an up-to-date copy of your production data.
+
+![analytics branches](./images/branching_analytics.png)
 
 ### Machine Learning
 
 You can create point-in-time branches to ensure repeatability when training machine learning models.
 
+![ML branches](./images/branching_ml.png)
+
+### Staging
+
+With Neon's branching capabilities, you can create a staging database by branching your production database. Using the Neon API, you can automate creating a database branch based on the staging branch for every pull request in your CI/CD pipeline.
+
+### Backups
+
+You can use branching to implement a data backup strategy. For example, you can create backup branches named for the time they were created for convenient point-in-time restore (PITR).
+
 ## Get started with branching
 
-To start using branches, refer to the instructions in [Get started with branching](../../get-started-with-neon/get-started-branching).
+To start using branches, refer to the instructions in [Branches](../../get-started-with-neon/get-started-branching).
