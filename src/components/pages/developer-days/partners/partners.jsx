@@ -94,7 +94,12 @@ const Partners = () => {
                 setBackgroundColor={setBackgroundColor}
               />
             </div>
-            <ItemsList className="bg-secondary-2" items={items} setIsOpenModal={setIsOpenModal} />
+            <ItemsList
+              className="bg-secondary-2"
+              items={items}
+              setIsOpenModal={setIsOpenModal}
+              isUpcoming
+            />
           </div>
         </div>
       </Container>

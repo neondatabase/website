@@ -7,7 +7,7 @@ import Link from 'components/shared/link';
 import ArrowIcon from 'icons/arrow-right.inline.svg';
 import PlayIcon from 'icons/play.inline.svg';
 
-const ItemsList = ({ className, items, setIsOpenModal }) => (
+const ItemsList = ({ className, items, setIsOpenModal, isUpcoming }) => (
   <div
     className={clsx(
       'absolute top-8 left-[38px] z-10 min-h-[520px] max-w-[330px] rounded-2xl px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] lg:pb-7 lg:pt-6 md:static md:mx-auto md:-mt-2 md:min-h-0 md:max-w-none md:rounded-t-none',
@@ -19,12 +19,15 @@ const ItemsList = ({ className, items, setIsOpenModal }) => (
       theme="secondary"
       size="sm"
       style={{ boxShadow: '0px 10px 30px rgba(26, 26, 26, 0.6)' }}
+      disabled={isUpcoming}
       onClick={() => {
         setIsOpenModal(true);
       }}
     >
-      <PlayIcon className="mr-4 h-[22px] w-4 shrink-0 leading-none lg:h-4 lg:w-[11px] xs:mr-3" />
-      <span>Watch broadcast</span>
+      {!isUpcoming && (
+        <PlayIcon className="mr-4 h-[22px] w-4 shrink-0 leading-none lg:h-4 lg:w-[11px] xs:mr-3" />
+      )}
+      <span>{isUpcoming ? 'Coming soon' : 'Watch broadcast'}</span>
     </Button>
     <ul className="mt-7 lg:mt-6">
       {items.map(({ text, linkText, linkUrl }, index) => {
@@ -77,10 +80,12 @@ ItemsList.propTypes = {
     })
   ).isRequired,
   setIsOpenModal: PropTypes.func.isRequired,
+  isUpcoming: PropTypes.bool,
 };
 
 ItemsList.defaultProps = {
   className: null,
+  isUpcoming: false,
 };
 
 export default ItemsList;

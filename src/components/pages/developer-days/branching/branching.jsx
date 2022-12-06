@@ -90,7 +90,12 @@ const Branching = () => {
                 setBackgroundColor={setBackgroundColor}
               />
             </div>
-            <ItemsList className="bg-secondary-5" items={items} setIsOpenModal={setIsOpenModal} />
+            <ItemsList
+              className="bg-secondary-5"
+              items={items}
+              setIsOpenModal={setIsOpenModal}
+              isUpcoming
+            />
           </div>
         </div>
         <div className="col-span-4 flex justify-center 2xl:justify-end xl:hidden">
