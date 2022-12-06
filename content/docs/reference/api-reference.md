@@ -5,10 +5,41 @@ redirectFrom:
   - /docs/api/about
 ---
 
-The Neon API allows you to manage projects programmatically, which is helpful when using Neon as a part of a CI/CD pipeline.
+The Neon API allows you to manage projects your Neon projects programmatically.
 
-Refer to the [Neon API V1 reference](https://neon.tech/api-reference) for supported methods.
+Refer to the [Neon API v2 reference](https://neon.tech/api-reference/v2) for supported methods.
 
-The next version of the Neon API is currently in preview. It is partially implemented and intended for review purposes only. To try this version of the Neon API, refer to the [Neon API V2 reference](https://neon.tech/api-reference/v2). If you encounter issues using the Neon API V2 preview, please contact [Neon Support](mailto:support@neon.tech).  
+<Admonition type="warning">
+The [Neon API v1 reference](https://neon.tech/api-reference) is deprecated. Support for it will be removed in a future release.
+</Admonition>
 
-Accessing the Neon API requires an API key. To obtain an API key, refer to the instructions in [Using API keys](/docs/get-started-with-neon/using-api-keys/).
+The Neon API is a REST API. It provides resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and supports standard HTTP response codes, authentication, and verbs.
+
+## Authentication
+
+The Neon API uses API keys to authenticate requests. You can view and manage API keys for your account in the Neon Console. For instructions, refer to [API keys](../../manage/api-keys).
+
+The client must send an API key in the Authorization header when making requests, using the bearer authentication scheme. For example:
+
+```curl
+curl -X GET -H "Authorization: Bearer $NEON_API_KEY" "accept: application/json"
+"https://console.neon.tech/api/v2/projects"
+```
+
+## Neon API base URL
+
+The base URL for a Neon API request is:
+
+```text
+https://console.neon.tech/api/v2/
+```
+
+Append a Neon API method path to the base URL to construct the full URL for a request. For example:
+
+```text
+https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}
+```
+
+## Using the Neon API reference create requests
+
+You can use the the [Neon API v2 reference](https://neon.tech/api-reference/v2) to construct and execute Neon API requests. Click **Authorize** to add your API key token, and for each method, click **Try it out** and supply the required parameters and request body attributes. Click **Execute** to create and run the request.
