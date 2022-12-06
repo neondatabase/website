@@ -24,7 +24,7 @@ You can obtain the connection details that you require from the **Connection Det
 A Neon connection string includes the user, the endpoint hostname, and database name.
 
 ```text
-postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/main
+postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
              ^                       ^                              ^
              |- <user>               |- <endpoint_hostname>         |- <database>
 ```
@@ -39,7 +39,7 @@ You can use the details from the connection string or the connection string itse
 
 ```text
 PGHOST='ep-polished-water-579720.us-east-2.aws.neon.tech'
-PGDATABASE='main'
+PGDATABASE='neondb'
 PGUSER='casey'
 PGPASSWORD='<password>'
 PGPORT='5432'
@@ -48,13 +48,13 @@ PGPORT='5432'
 Variable:
 
 ```text
-DATABASE_URL="postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/main"
+DATABASE_URL="postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb"
 ```
 
 Command-line:
 
 ```bash
-psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/main
+psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="note">
