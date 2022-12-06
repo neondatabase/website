@@ -64,7 +64,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 5. Add your password to the connection string as shown below, and connect with `psql`. You can connect using the same user and password that you use to connect to the parent branch.
 
   ```bash
-  psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
+  psql postgres://casey:<password>@ep-floral-fog-184072.us-east-2.aws.neon.tech/neondb
   ```
 
 <Admonition type="tip">
