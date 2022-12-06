@@ -12,11 +12,11 @@ Neon allows you to instantly branch your data in the same way that you branch yo
 
 ## What is a branch?
 
-A branch is a copy-on-write clone of your data. You can create a branch from a current or past state. For example, you can create a branch that includes all data up to the current point in time or up to an earlier point in time or [Log Sequence Number (LSN)](../../reference/glossary#lsn).
+A branch is a copy-on-write clone of your data. You can create a branch from a current or past state. For example, you can create a branch that includes all data up to the current point in time or an earlier point in time.
 
 A branch is isolated from its originating data, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to a branch are independent. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are saved as a delta.
 
-Creating a branch does not increase load on the parent branch or affect it in any way, which means can create a branch at any time without impacting the performance of your production system.
+Creating a branch does not increase load on the parent branch or affect it in any way, which means you can create a branch at any time without impacting the performance of your production system.
 
 Each Neon project has a [root branch](../../reference/glossary#root-branch) called `main`. The first branch that you create is branched from the project's root branch (`main`). Subsequent branches can be branched from `main` or from a previously created branch.
 
