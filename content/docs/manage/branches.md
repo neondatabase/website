@@ -100,7 +100,7 @@ FROM pg_database;
 Neon stores data in its own internal format.
 </Admonition>
 
-## Branching using the Neon API
+## Branching with the Neon API
 
 Branch actions performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
 
