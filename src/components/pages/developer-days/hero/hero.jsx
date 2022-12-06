@@ -1,10 +1,11 @@
 import { StaticImage } from 'gatsby-plugin-image';
 import React, { useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
+import CanvasVideo from 'components/shared/canvas-video';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
-import useVideo from 'hooks/use-video';
 
 import ItemsList from '../items-list';
 import VideoModal from '../video-modal';
@@ -37,8 +38,9 @@ const items = [
 
 const Hero = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [containerRef, isContainerInView] = useInView();
+  const [backgroundColor, setBackgroundColor] = useState('#f3f281');
   useBodyLockScroll(isOpenModal);
-  const { containerRef, videoRef } = useVideo();
   return (
     <section className="safe-paddings relative bg-black pt-[182px] text-white xl:pt-[136px] lg:pt-[76px] md:pt-16 sm:pt-12">
       <img
@@ -67,29 +69,29 @@ const Hero = () => {
               width={1068}
               height={520}
               alt=""
-              loading="lazy"
+              loading="eager"
               aria-hidden
             />
           </div>
           <div className="relative isolate overflow-hidden rounded-xl md:rounded-b-none">
-            <svg
-              width="940"
-              height="520"
-              className="rounded-2xl xl:w-full lg:max-h-[390px] md:rounded-b-none sm:max-h-[211px]"
-            >
-              <rect width="940" height="520" className="fill-[#f3f281]" />
-            </svg>
-            <video
-              className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:left-1/2 md:right-auto md:-translate-x-[calc(50%+7rem)] sm:-translate-x-[calc(50%+4rem)]"
-              ref={videoRef}
-              autoPlay
-              loop
-              muted
-              playsInline
-            >
-              <source src="/videos/pages/developer-days/dr-brown.mp4" type="video/mp4" />
-              <source src="/videos/pages/developer-days/dr-brown.webm" type="video/webm" />
-            </video>
+            <img
+              className="w-full"
+              src={`data:image/svg+xml;charset=utf-8,%3Csvg width='940' height='520' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+              alt=""
+              style={{ backgroundColor }}
+              width={940}
+              height={520}
+              aria-hidden
+            />
+            <CanvasVideo
+              className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:left-1/2 md:right-auto md:-translate-x-[calc(50%+6rem)] sm:-translate-x-[calc(50%+3rem)]"
+              label="Hero video"
+              srcMp4="/videos/pages/developer-days/dr-brown.mp4"
+              srcWebm="/videos/pages/developer-days/dr-brown.webm"
+              inView={isContainerInView}
+              setBackgroundColor={setBackgroundColor}
+              lazyLoading={false}
+            />
           </div>
           <ItemsList className="bg-primary-1" items={items} setIsOpenModal={setIsOpenModal} />
         </div>
@@ -99,7 +101,7 @@ const Hero = () => {
         setIsOpenModal={setIsOpenModal}
         title={title}
         description={description}
-        videoId="tu-bgIg-Luo"
+        videoId="0Ly5gVQ87mM"
       />
     </section>
   );

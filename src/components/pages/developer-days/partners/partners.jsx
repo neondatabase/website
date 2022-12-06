@@ -2,10 +2,10 @@ import { StaticImage } from 'gatsby-plugin-image';
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import CanvasVideo from 'components/shared/canvas-video';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
-import useVideo from 'hooks/use-video';
 import StraightLineSvg from 'images/developer-days/straight-line.inline.svg';
 
 import ItemsList from '../items-list';
@@ -33,16 +33,14 @@ const items = [
 ];
 
 const Partners = () => {
+  const [containerRef, isContainerInView] = useInView();
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState('#ffdde0');
 
   useBodyLockScroll(isOpenModal);
-  const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, rootMargin: '300px' });
-  const { containerRef, videoRef } = useVideo();
+
   return (
-    <section
-      className="branching safe-paddings bg-black pt-[672px] text-white 3xl:pt-[690px] xl:pt-[408px] md:pt-[364px] sm:pt-[190px]"
-      ref={wrapperRef}
-    >
+    <section className="branching safe-paddings bg-black pt-[672px] text-white 3xl:pt-[690px] xl:pt-[408px] md:pt-[364px] sm:pt-[190px]">
       <Container className="grid-gap-x grid grid-cols-12" size="md" ref={containerRef}>
         <div className="col-span-4 flex justify-center 2xl:col-span-3 2xl:justify-start xl:hidden">
           <img
@@ -78,27 +76,23 @@ const Partners = () => {
               />
             </div>
             <div className="relative isolate overflow-hidden rounded-2xl md:rounded-b-none">
-              <svg
-                width="940"
-                height="520"
-                className="w-auto rounded-2xl xl:w-full lg:mx-auto lg:max-h-[390px] md:rounded-b-none sm:max-h-[211px]"
-              >
-                <rect width="940" height="520" className="fill-[#ffdde0]" />
-              </svg>
-
-              {isWrapperInView && (
-                <video
-                  className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:-bottom-6 md:h-[calc(100%+2rem)] sm:-bottom-3"
-                  ref={videoRef}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                >
-                  <source src="/videos/pages/developer-days/hands.mp4" type="video/mp4" />
-                  <source src="/videos/pages/developer-days/hands.webm" type="video/webm" />
-                </video>
-              )}
+              <img
+                className="w-full"
+                src={`data:image/svg+xml;charset=utf-8,%3Csvg width='940' height='520' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+                alt=""
+                width={940}
+                height={520}
+                style={{ backgroundColor }}
+                aria-hidden
+              />
+              <CanvasVideo
+                className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:-bottom-6 md:h-[calc(100%+2rem)] sm:-bottom-3"
+                label="Partners video"
+                srcMp4="/videos/pages/developer-days/hands.mp4"
+                srcWebm="/videos/pages/developer-days/hands.webm"
+                inView={isContainerInView}
+                setBackgroundColor={setBackgroundColor}
+              />
             </div>
             <ItemsList className="bg-secondary-2" items={items} setIsOpenModal={setIsOpenModal} />
           </div>

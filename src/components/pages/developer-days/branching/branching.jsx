@@ -2,10 +2,10 @@ import { StaticImage } from 'gatsby-plugin-image';
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import CanvasVideo from 'components/shared/canvas-video';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
-import useVideo from 'hooks/use-video';
 import StraightLineSvg from 'images/developer-days/straight-line.inline.svg';
 
 import ItemsList from '../items-list';
@@ -39,15 +39,14 @@ const items = [
 ];
 
 const Branching = () => {
+  const [containerRef, isContainerInView] = useInView();
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState('#d9eef2');
+
   useBodyLockScroll(isOpenModal);
-  const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
-  const { containerRef, videoRef } = useVideo();
+
   return (
-    <section
-      className="branching safe-paddings sm:pt[190px] bg-black pt-[672px] text-white xl:pt-[408px] md:pt-[364px] sm:pt-[190px]"
-      ref={wrapperRef}
-    >
+    <section className="branching safe-paddings sm:pt[190px] bg-black pt-[672px] text-white xl:pt-[408px] md:pt-[364px] sm:pt-[190px]">
       <Container className="grid-gap-x grid grid-cols-12" size="md" ref={containerRef}>
         <div className="relative col-span-8 ml-[50px] flex max-w-[940px] flex-col items-center xl:col-span-full xl:mx-auto xl:w-full">
           <LineSvg className="absolute bottom-[calc(100%+2rem)] left-1/2 h-auto w-[393px] -translate-x-[calc(50%-11.3rem)] xl:hidden" />
@@ -73,26 +72,23 @@ const Branching = () => {
               />
             </div>
             <div className="relative isolate overflow-hidden rounded-2xl md:rounded-b-none">
-              <svg
-                width="940"
-                height="520"
-                className="w-auto rounded-2xl xl:w-full lg:mx-auto lg:max-h-[390px] md:rounded-b-none sm:max-h-[211px]"
-              >
-                <rect width="940" height="520" className="fill-secondary-6" />
-              </svg>
-              {isWrapperInView && (
-                <video
-                  className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:left-1/2 md:right-auto md:-translate-x-[calc(50%+8rem)] sm:-translate-x-[calc(50%+4.5rem)]"
-                  ref={videoRef}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                >
-                  <source src="/videos/pages/developer-days/cactus.mp4" type="video/mp4" />
-                  <source src="/videos/pages/developer-days/cactus.webm" type="video/webm" />
-                </video>
-              )}
+              <img
+                className="w-full"
+                src={`data:image/svg+xml;charset=utf-8,%3Csvg width='940' height='520' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+                alt=""
+                width={940}
+                height={520}
+                style={{ backgroundColor }}
+                aria-hidden
+              />
+              <CanvasVideo
+                className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:left-1/2 md:right-auto md:-translate-x-[calc(50%+8rem)] sm:-translate-x-[calc(50%+5.5rem)] xs:-translate-x-[calc(50%+4.5rem)]"
+                label="Branching video"
+                srcMp4="/videos/pages/developer-days/cactus.mp4"
+                srcWebm="/videos/pages/developer-days/cactus.webm"
+                inView={isContainerInView}
+                setBackgroundColor={setBackgroundColor}
+              />
             </div>
             <ItemsList className="bg-secondary-5" items={items} setIsOpenModal={setIsOpenModal} />
           </div>
