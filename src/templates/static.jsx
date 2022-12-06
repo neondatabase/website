@@ -16,7 +16,7 @@ const StaticTemplate = ({
   },
   children,
 }) => (
-  <Layout headerTheme="white" footerWithTopBorder="true">
+  <Layout headerTheme="white" footerWithTopBorder>
     <article className="safe-paddings py-48 3xl:py-44 2xl:py-40 xl:py-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
       <Container size="xs">
         <h1 className="t-5xl font-semibold">{title}</h1>
