@@ -1,59 +1,112 @@
 import { StaticImage } from 'gatsby-plugin-image';
-import React from 'react';
+import React, { useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
+import CanvasVideo from 'components/shared/canvas-video';
 import Container from 'components/shared/container';
-import SubscriptionForm from 'components/shared/subscription-form';
-import { HUBSPOT_DEVELOPER_DAYS_1_FORM_ID } from 'constants/forms';
+import Heading from 'components/shared/heading';
+import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 
-import backgroundLines from './images/bg-lines.svg';
-import Line from './images/white-line.inline.svg';
+import ItemsList from '../items-list';
+import VideoModal from '../video-modal';
 
-const Hero = () => (
-  <div className="relative flex h-[calc(100vh-44px)] max-h-[1080px] min-h-[765px] flex-col overflow-hidden bg-black pt-[214px] pb-20 text-white lg:min-h-0 lg:pt-[20%] sm:h-auto sm:grow sm:pt-16">
-    <Container className="relative h-full w-full" size="md">
+import bgShapeSvg from './images/bg-shape.svg';
+import StickerIcon from './images/sticker.inline.svg';
+
+const title = 'Neon is Live!';
+const description = 'Welcome to Neon Developer Days. December 6-8, 2022.';
+
+const items = [
+  {
+    text: 'Neon is Live!',
+    // linkText: 'Read blog post',
+    // linkUrl: '/blog/neon-serverless-postgres-is-live/',
+    linkText: 'Coming soon!',
+  },
+  {
+    text: 'Database branching with Neon',
+    linkText: 'Coming soon!',
+    // linkText: 'Read blog post',
+    // linkUrl: '/blog/database-branching-for-postgres-with-neon/',
+  },
+  {
+    text: 'Twitter Space: Neon is Live Q&A',
+    linkText: 'Set reminder',
+    linkUrl: 'https://twitter.com/i/spaces/1YpJkgDDEXPJj',
+  },
+];
+
+const Hero = () => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [containerRef, isContainerInView] = useInView();
+  const [backgroundColor, setBackgroundColor] = useState('#f3f281');
+  useBodyLockScroll(isOpenModal);
+  return (
+    <section className="safe-paddings relative bg-black pt-[182px] text-white xl:pt-[136px] lg:pt-[76px] md:pt-16 sm:pt-12">
       <img
-        className="absolute -top-10 left-1/2 max-w-[1240px] -translate-x-1/2"
-        src={backgroundLines}
+        className="absolute top-0 left-1/2 w-full max-w-[1920px] -translate-x-1/2 blur-[80px] lg:hidden"
+        src={bgShapeSvg}
+        width={1920}
+        height={760}
         alt=""
-        width={1240}
-        height={871}
-        loading="eager"
         aria-hidden
       />
-      <div className="absolute -bottom-20 left-1/2 w-[1668px] -translate-x-1/2 lg:w-[1240px] md:w-[900px] sm:hidden">
-        <StaticImage src="./images/background.png" alt="" width={1650} height={568} aria-hidden />
-      </div>
-      <div className="relative z-10 flex flex-col items-center">
-        <time
-          className="rounded-[40px] bg-secondary-2 py-2 px-4 text-xs font-bold uppercase leading-none text-black"
-          dateTime="2022-12-06"
-        >
-          December 6-8 | 9:00 - 10:00 PT
+      <Container className="flex flex-col items-center" size="md" ref={containerRef}>
+        <time className="label-secondary-2 mx-auto" dateTime="2022-12-06">
+          6th of December, 2022
         </time>
-        <h1 className="mt-5 text-center text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl">
-          Neon Developer Days
-        </h1>
-        <p className="mt-5 max-w-[640px] text-center text-xl leading-normal md:text-lg">
-          Join us virtually to learn about Neon and how to build
-          better with Serverless Postgres.
-        </p>
-        <p className="mt-5 max-w-[640px] text-center text-xl leading-normal md:text-lg">
-          Register for event updates.
-        </p>
-        <div className="relative">
-          <Line className="absolute top-[calc(100%-30px)] right-16 2xl:top-[calc(100%-10px)] lg:hidden" />
-          <SubscriptionForm
-            className="mt-8"
-            successText="Thanks for registering!"
-            submitButtonText="Register"
-            size="sm"
-            localStorageKey="submittedEmailDeveloperDays1Form"
-            formId={HUBSPOT_DEVELOPER_DAYS_1_FORM_ID}
-          />
+        <Heading className="mt-2.5 text-center" tag="h1" size="lg" theme="white">
+          {title}
+        </Heading>
+        <p className="mt-3 text-center text-base xl:mt-2.5 md:mt-2">{description}</p>
+        <div className="relative mt-14 xl:mt-12 xl:w-full lg:mt-9 md:mt-6">
+          <StickerIcon className="absolute top-[-198px] right-[-154px] h-[300px] w-[300px] xl:hidden" />
+          <div className="absolute -inset-x-16 top-16 md:w-[150%]">
+            <StaticImage
+              className="rounded-[200px] opacity-30 blur-[70px] md:h-[132px]"
+              imgClassName="rounded-[200px]"
+              src="./images/bg-gradient-hero.jpg"
+              width={1068}
+              height={520}
+              alt=""
+              loading="eager"
+              aria-hidden
+            />
+          </div>
+          <div className="relative isolate overflow-hidden rounded-xl md:rounded-b-none">
+            <img
+              className="w-full"
+              src={`data:image/svg+xml;charset=utf-8,%3Csvg width='940' height='520' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+              alt=""
+              style={{ backgroundColor }}
+              width={940}
+              height={520}
+              aria-hidden
+            />
+            <CanvasVideo
+              className="absolute bottom-0 right-0 h-full w-auto max-w-none rounded-2xl md:left-1/2 md:right-auto md:-translate-x-[calc(50%+6rem)] sm:-translate-x-[calc(50%+3rem)]"
+              label="Hero video"
+              srcMp4="/videos/pages/developer-days/dr-brown.mp4"
+              srcWebm="/videos/pages/developer-days/dr-brown.webm"
+              setBackgroundColor={setBackgroundColor}
+              lazyLoading={false}
+              inView
+            />
+          </div>
+          <ItemsList className="bg-primary-1" items={items} setIsOpenModal={setIsOpenModal} />
         </div>
-      </div>
-    </Container>
-  </div>
-);
+      </Container>
+      {isContainerInView && (
+        <VideoModal
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+          title={title}
+          description={description}
+          videoId="0Ly5gVQ87mM"
+        />
+      )}
+    </section>
+  );
+};
 
 export default Hero;

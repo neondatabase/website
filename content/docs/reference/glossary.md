@@ -76,7 +76,7 @@ A technique used to efficiently copy data. Neon uses the copy-on-write technique
 
 ### Database
 
-A named collection of database objects. A Neon project has a default database named `main` which resides in the default `public` schema. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
+A named collection of database objects. A Neon project has a default database named `neondb` which resides in the default `public` schema. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
 
 ### Endpoint
 

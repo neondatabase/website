@@ -63,7 +63,7 @@ ENDPOINT_ID='<endpoint_id>'
 where:
 
 - `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
-- `<dbname>` is the name of the database in your Neon project. `main` is the default database created with each Neon project.
+- `<dbname>` is the name of the database in your Neon project. `neondb` is the default database created with each Neon project.
 - `<user>` is the database user, which is found on the Neon **Dashboard**, under **Connection Details**.
 - `<password>` is the database user's password, which is provided to you when you create a project.
 - `<endpoint_id>` is the ID of the branch endpoint that you are connecting to, which can be found on the Neon **Dashboard**, under **Connection Settings**. The `<endpoint_id>` starts with an `ep-` prefix, as in this example: `ep-steep-forest-654321`.

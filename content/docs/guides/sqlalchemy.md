@@ -53,7 +53,7 @@ USERNAME = "<username>"
 PASSWORD = "<password>"
 HOST = "pg.neon.tech"
 PORT = "5432"
-PROJECT = "main"
+PROJECT = "neondb"
 
 conn = psycopg2.connect(
  host=HOST,
@@ -88,7 +88,7 @@ from sqlalchemy import create_engine
 USERNAME = <username>
 PASSWORD = <password>
 ENDPOINT = <endpoint_hostname>
-CONNSTR = f'postgresql://{USERNAME}:{PASSWORD}@{ENDPOINT}/main'
+CONNSTR = f'postgresql://{USERNAME}:{PASSWORD}@{ENDPOINT}/neondb'
 
 engine = create_engine(CONNSTR)
 ```

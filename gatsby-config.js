@@ -185,6 +185,8 @@ module.exports = {
         headers: {
           '/fonts/*': ['Cache-Control: public, max-age=31536000, immutable'],
           '/lottie-assets/*': ['Cache-Control: public, max-age=31536000, immutable'],
+          '/videos/*': ['Cache-Control: public, max-age=31536000, immutable'],
+          '/animations/*': ['Cache-Control: public, max-age=31536000, immutable'],
         },
       },
     },

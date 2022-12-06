@@ -39,7 +39,7 @@ To connect to Neon from Prisma:
 2. Add a `DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon connection string that you copied in the previous step.
 
 ```shell
-    DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/main"
+    DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/neondb"
 ```
 
 <Admonition type="note">
