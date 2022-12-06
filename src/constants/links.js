@@ -15,8 +15,8 @@ export default {
   youtube: 'https://www.youtube.com/channel/UCoMzQTJSIr7-RU1QbomQI2w',
   postgresDocs: 'https://www.postgresql.org/docs/',
   postgresList: 'https://www.postgresql.org/list/',
-  privacy: '/',
-  terms: '/',
+  privacy: '/privacy-policy',
+  terms: '/terms-of-service',
   dashboard: 'https://console.neon.tech/sign_in',
   branching: '/branching/',
 };
