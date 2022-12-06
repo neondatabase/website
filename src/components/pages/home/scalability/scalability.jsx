@@ -21,7 +21,7 @@ const Scalability = () => {
     >
       <Container className="flex items-center justify-between lg:block" size="md">
         <div className="ml-[150px] max-w-[600px] 3xl:ml-[126px] 3xl:max-w-[504px] 2xl:ml-[104px] 2xl:max-w-[416px] xl:ml-0 xl:max-w-[400px] lg:max-w-none">
-          <Heading tag="h2" size="lg" theme="black">
+          <Heading tag="h2" size="xl" theme="black">
             On Demand Scalability
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">

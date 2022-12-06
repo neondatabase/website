@@ -4,8 +4,9 @@ import React, { forwardRef } from 'react';
 
 const styles = {
   size: {
-    xl: 't-8xl font-bold leading-dense',
-    lg: 't-7xl font-bold leading-dense',
+    '2xl': 't-8xl font-bold leading-dense',
+    xl: 't-7xl font-bold leading-dense',
+    lg: 'text-[72px] font-bold leading-tight 2xl:text-6xl xl:text-[56px] xl:leading-dense md:text-[44px]',
     md: 't-6xl font-bold leading-dense',
     sm: 't-4xl font-semibold',
     xs: 't-base font-bold tracking-wider uppercase',
