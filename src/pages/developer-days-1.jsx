@@ -3,49 +3,58 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import Branching from 'components/pages/developer-days/branching';
-import CTA from 'components/pages/developer-days/cta';
+// import CTA from 'components/pages/developer-days/cta';
 import Hero from 'components/pages/developer-days/hero';
 import Partners from 'components/pages/developer-days/partners';
-// import Register from 'components/pages/developer-days/register';
+import Register from 'components/pages/developer-days/register';
 import Layout from 'components/shared/layout';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
-// import background1 from 'images/developer-days/background-1.svg';
-// import background2 from 'images/developer-days/background-2.svg';
-import background3 from 'images/developer-days/background-3.svg';
+import backgroundLg from 'images/developer-days/background-lg.svg';
+import backgroundMd from 'images/developer-days/background-md.svg';
+import backgroundXl from 'images/developer-days/background-xl.svg';
+import background from 'images/developer-days/background.svg';
 
 const DeveloperDays = () => (
   <Layout headerTheme="black" footerTheme="black" footerWithTopBorder>
-    <div className="relative overflow-x-hidden bg-black text-white">
-      {/* <img
-        className="absolute top-0 left-1/2 h-auto w-[1440px] -translate-x-1/2"
-        src={background1}
-        width={1440}
-        height={4815}
-        alt=""
-        aria-hidden
-      /> */}
-      {/* <img
-        className="absolute top-0 left-1/2 h-auto w-[1440px] -translate-x-1/2" // TODO: uncomment on day 2
-        src={background2}
-        width={1440}
-        height={4815}
-        alt=""
-        aria-hidden
-      /> */}
+    <div className="relative overflow-hidden bg-black text-white">
       <img
-        className="absolute top-0 left-1/2 h-auto w-[1440px] -translate-x-1/2" // TODO: uncomment on day 3
-        src={background3}
+        className="absolute top-0 left-1/2 h-auto w-[1440px] -translate-x-1/2 xl:hidden"
+        src={background}
         width={1440}
         height={4815}
+        alt=""
+        aria-hidden
+      />
+      <img
+        className="absolute top-0 left-1/2 hidden h-auto w-full -translate-x-1/2 px-[70px] xl:block lg:hidden"
+        src={backgroundXl}
+        width={884}
+        height={3780}
+        alt=""
+        aria-hidden
+      />
+      <img
+        className="absolute top-0 left-1/2 hidden h-auto w-full -translate-x-1/2 px-11 lg:block xs:hidden"
+        src={backgroundLg}
+        width={680}
+        height={3196}
+        alt=""
+        aria-hidden
+      />
+      <img
+        className="absolute top-0 left-1/2 hidden h-auto w-full -translate-x-1/2 px-9 xs:block"
+        src={backgroundMd}
+        width={340}
+        height={3330}
         alt=""
         aria-hidden
       />
       <Hero />
       <Branching />
       <Partners />
-      <CTA />
-      {/* <Register type="day2" /> */}
+      {/* <CTA /> */}
+      <Register type="day1" />
     </div>
   </Layout>
 );
