@@ -91,7 +91,12 @@ const Hero = () => {
               inView
             />
           </div>
-          <ItemsList className="bg-primary-1" items={items} setIsOpenModal={setIsOpenModal} />
+          <ItemsList
+            className="bg-primary-1"
+            items={items}
+            setIsOpenModal={setIsOpenModal}
+            buttonText="Watch the recording"
+          />
         </div>
       </Container>
       {isContainerInView && (

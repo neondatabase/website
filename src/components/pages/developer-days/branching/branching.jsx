@@ -102,8 +102,7 @@ const Branching = () => {
               className="bg-secondary-5"
               items={items}
               setIsOpenModal={setIsOpenModal}
-              buttonText="Starts on Wed, Dec 7"
-              isUpcoming
+              buttonText="Watch broadcast"
             />
           </div>
         </div>
@@ -124,7 +123,7 @@ const Branching = () => {
           setIsOpenModal={setIsOpenModal}
           title={title}
           description={description}
-          videoId="0Ly5gVQ87mM"
+          videoId="Qq6wzfopJ38"
         />
       )}
     </section>
