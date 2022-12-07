@@ -12,7 +12,7 @@ The Technical Preview Free Tier has the following limits:
 - 1 Neon project
 - 10 branches, with a limit of 3GB of data per branch
 - 3 compute endpoints, each with 1 vCPU and up to 4GB of RAM (with 512MB of RAM allocated to PostgreSQL shared buffers)
-- A point-in-time recovery (PITR) window of 7 days of _reasonable usage_
+- A point-in-time restore window of 7 days of _reasonable usage_
 
 <Admonition type="note">
 Neon intends to offer a Free Tier beyond the Technical Preview period. The limits associated with that tier will be defined in the coming months. Technical Preview Free Tier limits are subject to change over the course of the Technical Preview.
@@ -24,8 +24,8 @@ Neon stores data in its own internal format. The data size limit in the Technica
 
 <a id="#point-in-time-reset/"></a>
 
-## Point in Time Reset
+## Point-in-time restore
 
-Neon storage consumes extra space in order to support point-in-time recovery (PITR) and the ability to reset a branch to a historical state. Historical data is stored in log-based format.
+Neon storage consumes extra space in order to support point-in-time restore, which enables you to restore your data to a historical state. Historical data is stored in log-based format.
 
 Neon limits the amount of modification history that is stored in the Technical Preview Free Tier.
