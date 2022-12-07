@@ -45,9 +45,11 @@ const ItemsList = ({ className, items, setIsOpenModal, isUpcoming, buttonText })
                 target={isExternal ? '_blank' : null}
                 rel={isExternal ? 'noopener noreferrer' : null}
               >
-                <time className="text-sm leading-snug opacity-[0.85]" dateTime="2022-12-07">
-                  {time}
-                </time>
+                {time && (
+                  <time className="text-sm leading-snug opacity-[0.85]" dateTime="2022-12-07">
+                    {time}
+                  </time>
+                )}
                 <p className="mt-1.5 text-xl font-semibold leading-[1.2] opacity-[85%] lg:text-lg">
                   {text}
                 </p>
@@ -80,6 +82,7 @@ ItemsList.propTypes = {
   className: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
+      time: PropTypes.string,
       text: PropTypes.string.isRequired,
       linkText: PropTypes.string.isRequired,
       linkUrl: PropTypes.string,

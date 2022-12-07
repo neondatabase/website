@@ -20,21 +20,18 @@ const description =
 
 const items = [
   {
-    time: '9:00 AM PT',
     text: 'Branching Postgres databases with the Neon API',
     linkText: 'Read blog post',
     linkUrl: '/blog/branching-postgres-databases-with-the-neon-api/',
   },
   {
-    time: '9:30 AM PT',
     text: 'Time Travel with Serverless Postgres',
     linkText: 'Read blog post',
     linkUrl: '/blog/time-travel-with-postgres/',
   },
   {
-    time: '10:00 AM PT',
     text: 'Twitter Space: All-Things-Branching Q&A',
-    linkText: 'Set reminder',
+    linkText: 'Listen the recording',
     linkUrl: 'https://twitter.com/i/spaces/1ynJOammAvVKR',
   },
 ];
