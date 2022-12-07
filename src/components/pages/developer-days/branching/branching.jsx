@@ -20,18 +20,21 @@ const description =
 
 const items = [
   {
+    time: '9:00 AM PT',
     text: 'Branching with the Neon API',
     linkText: 'Coming soon!',
     // linkText: 'Read blog post',
     // linkUrl: '/blog/branching-postgres-databases-with-the-neon-api/',
   },
   {
+    time: '9:00 AM PT',
     text: 'Data Recovery with Branching',
     linkText: 'Coming soon!',
     // linkText: 'Read blog post',
     // linkUrl: '/blog/postgres-data-recovery-with-branching/',
   },
   {
+    time: '10:00 AM PT',
     text: 'Twitter Space: All-Things-Branching Q&A',
     linkText: 'Set reminder',
     linkUrl: 'https://twitter.com/i/spaces/1ynJOammAvVKR',
@@ -47,7 +50,12 @@ const Branching = () => {
 
   return (
     <section className="branching safe-paddings sm:pt[190px] bg-black pt-[672px] text-white xl:pt-[408px] md:pt-[364px] sm:pt-[190px]">
-      <Container className="grid-gap-x grid w-full grid-cols-12" size="md" ref={containerRef}>
+      <Container
+        className="grid-gap-x grid w-full grid-cols-12"
+        size="md"
+        ref={containerRef}
+        id="day-2"
+      >
         <div className="relative col-span-8 ml-[50px] flex max-w-[940px] flex-col items-center xl:col-span-full xl:mx-auto xl:w-full">
           <LineSvg className="absolute bottom-[calc(100%+2rem)] left-1/2 h-auto w-[393px] -translate-x-[calc(50%-11.3rem)] xl:hidden" />
           <StraightLineSvg className="absolute bottom-[calc(100%+1rem)] left-1/2 hidden h-auto w-8 -translate-x-1/2 xl:block lg:w-[30px] md:w-7 sm:w-3.5" />
@@ -94,6 +102,7 @@ const Branching = () => {
               className="bg-secondary-5"
               items={items}
               setIsOpenModal={setIsOpenModal}
+              buttonText="Starts on Wed, Dec 7"
               isUpcoming
             />
           </div>
