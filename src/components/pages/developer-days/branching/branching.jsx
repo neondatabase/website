@@ -27,7 +27,7 @@ const items = [
     // linkUrl: '/blog/branching-postgres-databases-with-the-neon-api/',
   },
   {
-    time: '9:00 AM PT',
+    time: '9:30 AM PT',
     text: 'Data Recovery with Branching',
     linkText: 'Coming soon!',
     // linkText: 'Read blog post',
