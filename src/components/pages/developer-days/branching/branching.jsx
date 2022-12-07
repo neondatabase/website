@@ -100,7 +100,7 @@ const Branching = () => {
               className="bg-secondary-5"
               items={items}
               setIsOpenModal={setIsOpenModal}
-              buttonText="Watch broadcast"
+              buttonText="Watch the recording"
             />
           </div>
         </div>
