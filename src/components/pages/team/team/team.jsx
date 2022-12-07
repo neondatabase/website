@@ -261,6 +261,14 @@ const members = [
     linkedinUrl: 'https://www.linkedin.com/in/christian-schwarz-947351204/',
     twitterUrl: 'https://twitter.com/problame',
   },
+  {
+    photo: <StaticImage src="./images/mahmoud-abdelwahab-photo.jpg" alt="Mahmoud Abdelwahab" />,
+    name: 'Mahmoud Abdelwahab',
+    position: 'Developer Advocate',
+    githubUrl: 'https://github.com/m-abdelwahab',
+    linkedinUrl: 'https://www.linkedin.com/in/mahmoud-codes/',
+    twitterUrl: 'https://twitter.com/thisismahmoud_',
+  },
 ];
 
 const Team = () => (
