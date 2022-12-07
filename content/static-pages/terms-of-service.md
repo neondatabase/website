@@ -3,6 +3,8 @@ title: Terms of service
 slug: terms-of-service
 ---
 
+**Last updated:** Dec 5, 2022
+
 ## The fine print
 
 Thank you for using Neon! We're happy you're here. Please read this Terms of Service carefully before accessing or using Neon during the Technical Preview Stage.  
@@ -13,8 +15,6 @@ This page contains a lot of legalese pertaining to policies and terms. It's all 
 - You own your data
 - We shipped core functionality, but there might be many issues, bugs, and incidents
 - We strive for reliability and security. However, we cannot guarantee the full security and integrity of your data now
-
-**Last updated:** Dec 5, 2022
 
 ## 1. Your Agreement with Neon
 
@@ -28,7 +28,7 @@ This page contains a lot of legalese pertaining to policies and terms. It's all 
 
 ## 2. Technical Previews
 
-2.1 If you receive access to the Service or features, technologies, and services that are not yet generally available on a free or trial basis, including, but not limited to, any products, services, or features labelled as an alpha, beta, technical preview or early access offering, or access and use Services available in regions that are not generally available, including, but not limited to, any regions identified by Neon as “alpha”, “beta”, “preview”, “pre-release”, or “experimental” (the “Technical Previews”), You must comply with all terms related to any Technical Previews as posted on the Neon Website.
+2.1 If you receive access to the Service or features, technologies, and services that are not yet generally available on a free or trial basis, including, but not limited to, any products, services, or features labeled as an alpha, beta, technical preview or early access offering, or access and use Services available in regions that are not generally available, including, but not limited to, any regions identified by Neon as “alpha”, “beta”, “preview”, “pre-release”, or “experimental” (the “Technical Previews”), You must comply with all terms related to any Technical Previews as posted on the Neon Website.
 
 2.2 Neon may add or modify terms, including lowering or raising any usage limits, related to access to or use of any Technical Previews at any time. Technical Previews may not be covered by customer support and/or service level agreements. Neon may change or discontinue Technical Previews at any time without notice. Technical Previews are not ready for general commercial release and may contain bugs, errors, defects, or harmful components. Neon's Product(s) in Technical Previews may be inoperable, incomplete or include features that Neon may never release, and their features and performance information are Neon’s IP.
 
@@ -82,7 +82,7 @@ PLEASE NOTE THAT NEON DOES NOT GUARANTEE THE INTEGRITY AND CONFIDENTIALITY OF AN
 
 7.2  Open-source software licenses for components of the Neon Product released under an open source license constitute separate written agreements. To the limited extent that the open-source software licenses expressly supersede these Terms, the open-source licenses govern your agreement with Neon for using the components of the Neon Product released under an open-source license.
 
-7.3 Neon acknowledges that, as between Neon and you, you own all right, titles, and interests, including all intellectual property rights, in and to the User Data. You hereby grant to Neon a non-exclusive, royalty-free, worldwide license to reproduce, distribute, and otherwise use and display the User Data and perform all acts with respect to the User Data as may be necessary for Neon to provide the Neon Product(s) to you. You may export User Data anytime through the features and functionalities made available via the Neon Product(s).
+7.3 Neon acknowledges that, as between Neon and you, you own all rights, titles, and interests, including all intellectual property rights, in and to the User Data. You hereby grant to Neon a non-exclusive, royalty-free, worldwide license to reproduce, distribute, and otherwise use and display the User Data and perform all acts with respect to the User Data as may be necessary for Neon to provide the Neon Product(s) to you. You may export User Data anytime through the features and functionalities made available via the Neon Product(s).
 
 7.4 If you or any of your teammates, employees or contractors send or transmit any communications or materials to Neon by mail, email, public repositories, telephone, social media, or otherwise, suggesting or recommending changes to the Neon IP, including without limitation, new features or functionality relating thereto, or any comments, questions, suggestions, or the like ("Feedback"), Neon is free to use such Feedback irrespective of any other obligation or limitation between the parties governing such Feedback so long as Neon does not identify you as the source of the Feedback without your prior approval.
 
@@ -116,11 +116,11 @@ You agree to hold harmless, defend and indemnify Neon, and its subsidiaries, aff
 
 12.1 Neon may from time to time make Third-Party Products available to you or Neon may allow for certain Third-Party Products to be integrated with the Neon Products to allow for the transmission of User Data from such Third-Party Products into the Neon Products. For purposes of this Agreement, such Third-Party Products are subject to their own terms and conditions. If you do not agree to abide by the applicable terms for any such Third-Party Products, then you should not install or use such Third-Party Products. By authorizing Neon to transmit User Data from Third-Party Products into Neon Product(s), you represent and warrant to Neon that you have all right, power, and authority to provide such authorization.
 
-12.2 You acknowledge and agree that Neon is not liable for any loss or damage which may be incurred by you or as a result of the services, content or availability of those Third-Party Products, or as a result of any reliance placed by you on the completeness, accuracy or existence of any advertising, products or other materials on, or available from, such web sites or resources.
+12.2 You acknowledge and agree that Neon is not liable for any loss or damage which may be incurred by you or as a result of the services, content or availability of those Third-Party Products, or as a result of any reliance placed by you on the completeness, accuracy or existence of any advertising, products or other materials on, or available from, such websites or resources.
 
 ## 13. Changes to the Terms
 
-13.1 Neon may make changes to the Terms from time to time during the Techincal Previews. If we change the Terms in any substantive way, we will  notify users before the changes take effect, during which period you may reject the changes by terminating your account.
+13.1 Neon may make changes to the Terms from time to time during the Technical Previews. If we change the Terms in any substantive way, we will  notify users before the changes take effect, during which period you may reject the changes by terminating your account.
 
 13.2 You understand and agree that if you use the Neon Product(s) after the date on which the Terms have changed, Neon will treat your use as acceptance of the updated Terms.
 
@@ -160,7 +160,7 @@ Neon may identify you as a user of the Neon Product(s) and may use your name, lo
 
 "Personal Data" means information about an identified or identifiable natural person that (a) can be used to identify, contact or locate a specific individual; (b) can be combined with other information that can be used to identify, contact or locate a specific individual; or (c) is defined as “personal data” or “personal information” by applicable Data Protection Laws relating to the collection, use, storage or disclosure of information about an identifiable individual.
 
-**“Prohibited Content”** means any User Data (including source code, software, text, images or other information) that: (a) is unlawful and/or promotes unlawful activities; (b) defames, harasses, abuses, threatens or incites violence towards any individual or group; (c) is pornographic, discriminatory and/or otherwise victimizes and/or intimidates an individual and/or group on the basis of religion, gender, sexual orientation, race, ethnicity, age and/or disability; (d) is spam, is machine- or randomly-generated, constitutes unauthorized or unsolicited advertising, chain letters, any other form of unauthorized solicitation and/or any form of lottery and/or gambling; (e) contains any Sensitive Information; (f) contains and/or installs any viruses, worms, malware, Trojan horses and/or other content that is designed or intended to disrupt, damage and/or limit the functioning of any software, hardware, and/or telecommunications equipment and/or to damage and/or obtain unauthorized access to any data and/or other information of any third party; (g) infringes upon any intellectual rights of any party; (h) impersonates any person or entity, including any of our employees or representatives; and/or (i) violates the privacy of any third party.
+“Prohibited Content” means any User Data (including source code, software, text, images or other information) that: (a) is unlawful and/or promotes unlawful activities; (b) defames, harasses, abuses, threatens or incites violence towards any individual or group; (c) is pornographic, discriminatory and/or otherwise victimizes and/or intimidates an individual and/or group on the basis of religion, gender, sexual orientation, race, ethnicity, age and/or disability; (d) is spam, is machine- or randomly-generated, constitutes unauthorized or unsolicited advertising, chain letters, any other form of unauthorized solicitation and/or any form of lottery and/or gambling; (e) contains any Sensitive Information; (f) contains and/or installs any viruses, worms, malware, Trojan horses and/or other content that is designed or intended to disrupt, damage and/or limit the functioning of any software, hardware, and/or telecommunications equipment and/or to damage and/or obtain unauthorized access to any data and/or other information of any third party; (g) infringes upon any intellectual rights of any party; (h) impersonates any person or entity, including any of our employees or representatives; and/or (i) violates the privacy of any third party.
 
 "Sensitive Information" means any Personal Data, including personal data of your end-users and/or any other personal data subject to heightened security requirements as a result of your internal policies or practices or by any law or regulation applicable to the Customer (examples include but are not limited to the U.S. Health Insurance Portability and Accountability Act (HIPAA), the Gramm–Leach–Bliley Act (GLBA), Family Educational Rights and Privacy Act (FERPA).
 
