@@ -10,7 +10,7 @@ redirectFrom:
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for PostgreSQL. It provides an interactive session for sending commands to PostgreSQL and running ad-hoc queries. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
 
 <Admonition type="note">
-A Neon compute instance runs PostgreSQL, which means that any PostgreSQL application or standard utility such as `psql` is compatible with Neon. You can also use PostgreSQL client libraries and drivers to connect.
+A Neon compute instance runs PostgreSQL, which means that any PostgreSQL application or standard utility such as `psql` is compatible with Neon. You can also use PostgreSQL client libraries and drivers to connect. However, please be aware that some older `psql` executables are built without SNI support and require a workaround. For more information, see [Connecting from older clients](../connectivity-issues).
 
 Neon also provide a passwordless connect feature that uses `psql`. For more information, see [Passwordless connect](../passwordless-connect).
 </Admonition>
