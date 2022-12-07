@@ -1,5 +1,6 @@
 ---
 title: Neon API
+enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about
   - /docs/api/about
