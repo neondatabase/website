@@ -13,7 +13,7 @@ import LineSvg2 from './images/line-2.inline.svg';
 
 const lines = {
   day1: {
-    className: 'pt-[565px]',
+    className: 'pt-[610px]',
     svg: (
       <LineSvg1 className="absolute bottom-[calc(100%+0.75rem)] left-1/2 -translate-x-1/2 xl:hidden" />
     ),
@@ -39,7 +39,7 @@ const Register = ({ type }) => (
       <StraightLineSvg className="absolute bottom-[calc(100%+1rem)] left-1/2 hidden h-auto w-8 -translate-x-1/2 xl:block lg:w-[30px] md:w-7 sm:w-3.5" />
 
       <Heading className="text-center leading-snug" tag="h2" size="sm">
-        Be the first who will see the latest updates from our team
+        Register for event updates
       </Heading>
       <SubscriptionForm
         className="mt-8"
