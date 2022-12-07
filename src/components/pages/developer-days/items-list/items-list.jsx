@@ -45,7 +45,7 @@ const ItemsList = ({ className, items, setIsOpenModal, isUpcoming }) => (
                 target={isExternal ? '_blank' : null}
                 rel={isExternal ? 'noopener noreferrer' : null}
               >
-                <p className="text-lg font-semibold leading-snug opacity-[85%] lg:text-base">
+                <p className="text-xl font-semibold leading-[1.2] opacity-[85%] lg:text-lg">
                   {text}
                 </p>
                 <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none lg:mt-2">
@@ -55,7 +55,7 @@ const ItemsList = ({ className, items, setIsOpenModal, isUpcoming }) => (
               </Link>
             ) : (
               <>
-                <p className="text-lg font-semibold leading-snug opacity-[85%] lg:text-base">
+                <p className="text-xl font-semibold leading-[1.2] opacity-[85%] lg:text-lg">
                   {text}
                 </p>
                 <span className="mt-3.5 font-semibold leading-none opacity-60 lg:mt-2">
