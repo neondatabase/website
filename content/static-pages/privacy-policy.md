@@ -3,11 +3,11 @@ title: Privacy Policy
 slug: privacy-policy
 ---
 
-**Last updated:** Dec 5, 2022
+**Last updated:** Dec 7, 2022
 
 Thank you for entrusting Neon with your source code, projects, and personal information. Ensuring the security of your private information is a serious matter, and we want you to know how we manage that responsibility.
 
-This document explains how Neon Inc. and its affiliates and subsidiaries (“Neon”, “we”, “our” or “us”) collect, store, use, disclose and otherwise process information about you in the course of our business, including through our websites that link to this document (such as, www.neon.tech) (the “Sites”), our SaaS-based database service (the “Service”) and through other means such as our and our partner’s events, sales and marketing activities. It also sets out more information about your privacy rights.
+This document explains how Neon Inc. and its affiliates and subsidiaries (“Neon”, “we”, “our” or “us”) collect, store, use, disclose and otherwise process information about you in the course of our business, including through our websites that link to this document (such as, www.neon.tech) (the “Websites”), our cloud-based database management service (the “Service”) and through other means such as our and our partner’s events, sales and marketing activities. It also sets out more information about your privacy rights.
 
 ## Technical Preview
 
@@ -33,11 +33,11 @@ Please review the Neon Privacy Policy in full for additional details about how N
 
 We use common internet technologies, such as cookies and web server logs, to collect data for all visitors accessing neon owned domains.
 
-The information we collect about all visitors to our website includes the visitor’s browser type, language preference, referring site, additional websites requested, and the date and time of each visitor request. We also collect potentially personally-identifying information like Internet Protocol (IP) addresses.
+The information we collect about all visitors to our website includes the visitor’s browser type, language preference, referring site, additional websites requested, and the date and time of each visitor request. We also collect potentially personally-identifying information like Internet Protocol (IP) addresses
 
 #### Why Do We Collect This?
 
-We collect this information to better understand how visitors to our website use Neon, and to monitor and protect the security of the website.
+We collect this information to better understand how visitors to our Website use Neon, and to monitor and protect the security of the Website.
 
 #### Information From Users With Accounts
 
@@ -51,23 +51,25 @@ User Personal Information does not include aggregated, non-personally identifyin
 
 - We need your User Personal Information to create your account, and to provide the services you request.
 - We use your User Personal Information, specifically your user name and email address, to identify you on Neon.
-- We use your email address to communicate with you, if you have consented to this use for the purposes outlined in our [email communication section](#contacting-neon).
-- We limit our use of your User Personal Information to the purposes listed in this Privacy Policy. If we need to use your
-- User Personal Information for other purposes, we will ask for your permission first.
+- We use your email address to communicate with you, if you have consented to this use for the purposes outlined in the email communication section below.
+- We limit our use of your User Personal Information to the purposes listed in this Privacy Policy. If we need to use your User Personal Information for other purposes, we will ask for your permission first.
 
 #### What Information Neon Does Not Collect
 
-We do not intentionally collect sensitive personal information, such as social security numbers, genetic data, health information, or religious affiliation. Although Neon does not request or intentionally collect sensitive personal information, we realize that you might store this kind of information in your account, such as in an application. If you store sensitive personal information on our servers, you are consenting to our storage of that information on our servers, which are located in the regions list [here](https://neon.tech/docs/conceptual-guides/regions/).
+Although Neon does not request or intentionally collect or process personal information other than described above, we realize that you might store this kind of information in your account, such as in an application. You shall be responsible for ensuring that any personal information is Transferred to the Neon Websites and Servies in compliance with any applicable Data Protection Laws as defined in the Terms.
 
-You shall be responsible for ensuring that any Sensitive Information is Transferred to the Neon Product in compliance with any applicable Data Protection Laws as defined in the Terms. You shall be solely liable for any and all liabilities arising from or relating to your Sensitive Information. We do not allow Transferring of the Sensitive Information during the Technical Previews.
+If you store personal information on our servers, you are consenting to our storage of that information on our servers, which are located in the regions list here [https://neon.tech/docs/conceptual-guides/regions/](https://neon.tech/docs/conceptual-guides/regions/).
 
-We do not intentionally collect information that is stored in your applications or other free-form content inputs. Information in your applications belongs to you, and you are responsible for it, as well as for making sure that your content complies with our [Terms of Service](/terms-of-service). Neon employees do not access applications or your Personal Information unless required to for security or maintenance, or for support reasons. If Neon employees will access your applications for the security reasons, we will try all the best efforts to get your consent otherwise we will notify the application owner of any technical incident or security issue that led to access of their application.
+We do not intentionally collect Sensitive Information as defined in our Terms, such as social security numbers, genetic data, health information, or religious affiliation. You shall be solely liable for any and all liabilities arising from or relating to your Sensitive Information. We do not allow Transferring of the Sensitive Information during the Technical Previews.
+
+We do not intentionally collect information that is stored in your applications or other free-form content inputs. Information in your applications belongs to you, and you are responsible for it, as well as for making sure that your content complies with our [Terms of Service](/terms-of-service). Neon employees do not access applications or your Personal Information unless required to for security or maintenance, or for support reasons. If Neon employees will access your applications for the security reasons, we will try all the best efforts to get your consent or notify users of any technical incident or security issue that led to access of their data.
 
 If you are a minor under the age of 16, you are not permitted to have an account on Neon. Neon does not knowingly collect information from or direct any of our content specifically to children under 16. If we learn or have reason to suspect that you are a user who is under the age of 16, we will unfortunately have to close your account. Please see our [Terms of Service](/terms-of-service) for information about account termination.
 
 #### How We Share the Information We Collect
 
 We do not share, sell, rent, or trade User Personal Information with third parties for commercial purposes.
+
 We do not disclose User Personal Information outside Neon, except in the situations listed in this section or in the section below.
 
 #### How We Respond to Compelled Disclosure
@@ -77,7 +79,7 @@ We do share certain aggregated, non-personally identifying information with othe
 We do not host advertising on Neon. We may occasionally embed content from third party sites, such as YouTube, and that content may include ads.
 
 We may share User Personal Information with your permission, so we can perform services you have requested.
-We may share User Personal Information with a limited number of third-party vendors who process it on our behalf to provide or improve our service, and who have agreed to privacy restrictions similar to our own Privacy Policy. Our vendors perform services such as payment processing, customer support ticketing, network data transmission, and other similar services.
+We may share User Personal Information with a limited number of third-party vendors who process it on our behalf to provide or improve our service, and who have agreed to privacy restrictions similar to our own Privacy Policy. Our vendors may perform services such as payment processing, customer support ticketing, network data transmission, and other similar services.
 
 We may share User Personal Information if we are involved in a merger, sale, or acquisition. If any such change of ownership happens, we will ensure that it is under terms that preserve the confidentiality of User Personal Information, and we will notify you on our website or by email before any transfer of your User Personal Information. The organization receiving any User Personal Information will have to honor any promises we have made in our Privacy Policy or in our [Terms of Service](/terms-of-service).
 
@@ -101,7 +103,9 @@ Certain pages on our site may set other third party cookies. For example, we may
 
 #### Tracking
 
-["Do Not Track"](http://donottrack.us/) is a privacy preference you can set in your browser if you do not want online services to collect and share certain kinds of information about your online activity from third party tracking services. We do not track your online browsing activity on other online services over time and we do not permit third-party services to track your activity on our site beyond our basic Google Analytics tracking, which you may opt out of [here](https://tools.google.com/dlpage/gaoptout). Because we do not share this kind of data with third party services or permit this kind of third party data collection on Neon for any of our users, and we do not track our users on third-party websites ourselves, we do not need to respond differently to an individual browser's Do Not Track setting.
+["Do Not Track"](http://donottrack.us/) is a privacy preference you can set in your browser if you do not want online services to collect and share certain kinds of information about your online activity from third party tracking services. We do not track your online browsing activity on other online services over time and we do not permit third-party services to track your activity on our site beyond our basic Google Analytics tracking, which you may opt out of [here](https://tools.google.com/dlpage/gaoptout).
+
+Because we do not share this kind of data with third party services or permit this kind of third party data collection on Neon for any of our users, and we do not track our users on third-party websites ourselves, we do not need to respond differently to an individual browser's Do Not Track setting.
 
 If you are interested in turning on your browser’s privacy and Do Not Track settings, the [Do Not Track](http://donottrack.us/) website has browser-specific instructions.
 
@@ -115,7 +119,7 @@ Neon is currently in Technical Preview means that our information security pract
 
 #### Resolving Complaints
 
-If you have concerns about the way Neon is handling your User Personal Information, please let us know immediately. We want to help. You may email us directly at privacy@neon.tech with the subject line "Privacy Concerns." We will respond within 45 days at the latest.
+If you have concerns about the way Neon is handling your User Personal Information, please let us know immediately. We want to help. You may email us directly at privacyt@neon.tech with the subject line "Privacy Concerns." We will respond within 45 days at the latest.
 
 #### How We Respond to Compelled Disclosure
 
@@ -125,11 +129,12 @@ In complying with court orders and similar legal processes, Neon strives for tra
 
 #### How You Can Access and Control the Information We Collect
 
-If you are already a Neon user, you may access, update, alter, or delete your basic user profile information by editing your user profile or contacting [email](support@neon.tech).
+If you are already a Neon user, you may access, update, alter, or delete your basic user profile information by editing your user profile or contacting support@neon.tech.
 
 #### Data Retention and Deletion
 
 Neon will retain User Personal Information for as long as your account is active or as needed to provide you services.
+
 We may retain certain User Personal Information indefinitely, unless you delete it or request its deletion. For example, we do not automatically delete inactive user accounts, so unless you choose to delete your account, we will retain your account information indefinitely.
 
 If you would like to cancel your account or delete your User Personal Information, you may do so by emailing support@neon.tech. We will retain and use your information as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements, but barring legal requirements, we will delete your full profile (within reason) within 30 days.
@@ -144,7 +149,7 @@ Our emails might contain a pixel tag, which is a small, clear image that tells u
 
 #### Changes to Our Privacy Policy
 
-Although most changes are likely to be minor, Neon may change our Privacy Policy from time to time. We will provide notification to users of material changes to this Privacy Policy through our Website by posting a notice on our home page. For changes to this Privacy Policy that do not affect your rights, we encourage visitors to check this page frequently.
+Although most changes are likely to be minor, Neon may change our Privacy Policy from time to time. We will provide notification to users of material changes to this Privacy Policy through our Website. For changes to this Privacy Policy that do not affect your rights, we encourage visitors to check the Website frequently.
 
 ### Contacting Neon
 
