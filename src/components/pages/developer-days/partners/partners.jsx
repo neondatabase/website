@@ -51,7 +51,7 @@ const Partners = () => {
       >
         <div className="col-span-4 flex justify-center 2xl:col-span-3 2xl:justify-start xl:hidden">
           <img
-            className="-mt-20 ml-[74px] 3xl:ml-0"
+            className="-mt-20 ml-[74px] 3xl:ml-0 2xl:mt-0"
             src={featureLineSvg}
             width={144}
             height={784}

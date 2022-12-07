@@ -35,7 +35,7 @@ const ItemsList = ({ className, items, setIsOpenModal, isUpcoming, buttonText })
 
         return (
           <li
-            className="flex flex-col border-t border-dashed border-black border-opacity-40 py-6 text-black last:pb-0 lg:py-5"
+            className="flex flex-col border-t border-dashed border-black border-opacity-40 py-[18px] text-black last:pb-0 lg:py-5"
             key={index}
           >
             {linkUrl ? (

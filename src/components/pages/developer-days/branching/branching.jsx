@@ -109,7 +109,7 @@ const Branching = () => {
         </div>
         <div className="col-span-4 flex justify-center 2xl:justify-end xl:hidden">
           <img
-            className="-mt-9 mr-[153px] 3xl:mr-0"
+            className="-mt-9 mr-[153px] 3xl:mr-0 2xl:mt-0"
             src={vercelLineSvg}
             width={169}
             height={760}
