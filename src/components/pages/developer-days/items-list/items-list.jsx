@@ -27,7 +27,7 @@ const ItemsList = ({ className, items, setIsOpenModal, isUpcoming, buttonText })
       {!isUpcoming && (
         <PlayIcon className="mr-4 h-[22px] w-4 shrink-0 leading-none lg:h-4 lg:w-[11px] xs:mr-3" />
       )}
-      <span>{isUpcoming ? buttonText : 'Watch broadcast'}</span>
+      <span>{isUpcoming ? buttonText : 'Watch the recording'}</span>
     </Button>
     <ul className="mt-7 lg:mt-6">
       {items.map(({ time, text, linkText, linkUrl }, index) => {

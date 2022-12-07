@@ -29,7 +29,7 @@ const items = [
   },
   {
     text: 'Twitter Space: Neon is Live Q&A',
-    linkText: 'Set reminder',
+    linkText: 'Listen the recording',
     linkUrl: 'https://twitter.com/i/spaces/1YpJkgDDEXPJj',
   },
 ];
