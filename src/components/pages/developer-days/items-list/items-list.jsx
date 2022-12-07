@@ -45,10 +45,10 @@ const ItemsList = ({ className, items, setIsOpenModal, isUpcoming, buttonText })
                 target={isExternal ? '_blank' : null}
                 rel={isExternal ? 'noopener noreferrer' : null}
               >
-                <time className="mt-1.5 text-sm leading-snug opacity-[0.85]" dateTime="2022-12-07">
+                <time className="text-sm leading-snug opacity-[0.85]" dateTime="2022-12-07">
                   {time}
                 </time>
-                <p className="text-xl font-semibold leading-[1.2] opacity-[85%] lg:text-lg">
+                <p className="mt-1.5 text-xl font-semibold leading-[1.2] opacity-[85%] lg:text-lg">
                   {text}
                 </p>
                 <span className="mt-3.5 inline-flex items-center space-x-2 font-semibold leading-none lg:mt-2">
