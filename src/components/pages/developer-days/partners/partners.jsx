@@ -20,12 +20,14 @@ const description =
 
 const items = [
   {
+    time: '9:00 AM PT',
     text: 'Serverless Driver for Postgres',
     linkText: 'Coming soon!',
     // linkText: 'Read blog post',
     // linkUrl: '/blog/serverless-driver-for-postgres/',
   },
   {
+    time: '10:00 AM PT',
     text: 'Twitter Space: Serverless & Postgres Q&A',
     linkText: 'Set reminder',
     linkUrl: 'https://twitter.com/i/spaces/1zqKVPDDrDMJB',
@@ -41,7 +43,12 @@ const Partners = () => {
 
   return (
     <section className="branching safe-paddings bg-black pt-[672px] text-white 3xl:pt-[690px] xl:pt-[408px] md:pt-[364px] sm:pt-[190px]">
-      <Container className="grid-gap-x grid w-full grid-cols-12" size="md" ref={containerRef}>
+      <Container
+        className="grid-gap-x grid w-full grid-cols-12"
+        size="md"
+        ref={containerRef}
+        id="day-3"
+      >
         <div className="col-span-4 flex justify-center 2xl:col-span-3 2xl:justify-start xl:hidden">
           <img
             className="-mt-20 ml-[74px] 3xl:ml-0"
@@ -106,6 +113,7 @@ const Partners = () => {
               className="bg-secondary-2"
               items={items}
               setIsOpenModal={setIsOpenModal}
+              buttonText="Starts on Thu, Dec 8"
               isUpcoming
             />
           </div>
