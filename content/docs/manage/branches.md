@@ -108,7 +108,7 @@ Branch actions performed in the Neon Console can be performed using the [Neon AP
 
 A Neon API request requires an API key. For information about obtaining an API key, see [API Keys](../api-keys).
 
-### Create a branch using the API
+### Create a branch with the API
 
 The following Neon API method creates a branch. Adding the `endpoints` attribute to the call creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without an endpoint.
 
@@ -205,7 +205,7 @@ The response includes information about the branch, the branch's endpoint, and t
 }
 ```
 
-### List branches using the API
+### List branches with the API
 
 The following Neon API method lists branches for the specified project.
 
@@ -257,7 +257,7 @@ Response:
 }
 ```
 
-### Delete a branch using the API
+### Delete a branch with the API
 
 The following Neon API method deletes the specified branch.
 
