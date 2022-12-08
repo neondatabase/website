@@ -23,14 +23,11 @@ To create an endpoint:
 
 To view the endpoints, select **Endpoints** in the Neon Console.
 
-The **Endpoints** page lists the endpoints that belong your Neon project. You can search for endpoints by name and change the view to show only active, idle, or stopped endpoints.
+The **Endpoints** page lists the endpoints that belong your Neon project.
 
 Endpoint details include:
 
-- **Name**: The endpoint name.
-- **Region**: The region in which the endpoint was created.
-- **Min/max compute units**: The minimum and maximum number of vCPUs allocated to the compute unit.
-- **Type**: The type of endpoint. Neon supports read-write and read-only endpoints.
+- **Host**: The endpoint name.
 - **Branch**: The branch that the endpoint is associated with.
 - **State**: The endpoint state (`Active`, `Idle`, or `Stopped`).
 - **Last activity**: The last time the endpoint was active.
