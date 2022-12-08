@@ -29,7 +29,7 @@ const items = [
   {
     time: '10:00 AM PT',
     text: 'Twitter Space: Serverless & Postgres Q&A',
-    linkText: 'Set reminder',
+    linkText: 'Join us on Twitter',
     linkUrl: 'https://twitter.com/i/spaces/1zqKVPDDrDMJB',
   },
 ];
@@ -113,8 +113,7 @@ const Partners = () => {
               className="bg-secondary-2"
               items={items}
               setIsOpenModal={setIsOpenModal}
-              buttonText="Starts on Thu, Dec 8"
-              isUpcoming
+              buttonText="Watch broadcast"
             />
           </div>
         </div>
