@@ -63,7 +63,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['IBM Plex Sans', 'IBM Plex Sans Fallback', ...defaultTheme.fontFamily.sans],
-        mono: ['IBM Plex Mono', ...defaultTheme.fontFamily.mono],
+        mono: ['IBM Plex Mono', 'IBM Plex Mono Fallback', ...defaultTheme.fontFamily.mono],
       },
       fontSize: {
         sm: [defaultTheme.fontSize.sm[0]],
