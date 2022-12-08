@@ -26,7 +26,7 @@ export const query = graphql`
     wpPage(id: { eq: $id }) {
       ...wpPageSeo
     }
-    allWpPost(sort: { order: DESC, fields: date }, limit: $limit, skip: $skip) {
+    allWpPost(sort: { date: DESC }, limit: $limit, skip: $skip) {
       nodes {
         slug
         title
