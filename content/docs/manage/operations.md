@@ -62,7 +62,7 @@ Operation details include:
 
 ## Viewing operations with the Neon API
 
-You can use the Neon API to view project operations. The following methods are provided:
+You can use the [Neon API](https://neon.tech/api-reference/v2/) to view project operations. The following methods are provided:
 
 ### List operations
 
