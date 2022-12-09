@@ -25,7 +25,8 @@ The client must send an API key in the Authorization header when making requests
 ```curl
 curl 'https://console.neon.tech/api/v2/projects' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
 ```
 
 ## Neon API base URL
