@@ -120,7 +120,7 @@ The API method appears as follows when specified in a cURL command:
 
 ```curl
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
-  -H 'accept: application/json' \
+  -H 'Accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
