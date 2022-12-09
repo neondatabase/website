@@ -76,9 +76,9 @@
       slug: guides/symfony
 - title: Import data
   items:
-    - title: Import from PostgreSQL
+    - title: from PostgreSQL
       slug: how-to-guides/import-an-existing-database
-    - title: Import from Heroku
+    - title: from Heroku
       slug: how-to-guides/import-from-heroku
 - title: Security
   slug: security
