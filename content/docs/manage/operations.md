@@ -74,9 +74,9 @@ Lists operation for the specified project. This method supports response paginat
 
 cURL command:
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations' \
-  -H 'accept: application/json' \
+  -H 'Accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
@@ -132,9 +132,9 @@ Pagination allows you to limit the number of operations displayed, as the number
 
 cURL command:
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?limit=1' \
-  -H 'accept: application/json' \
+  -H 'Accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
@@ -163,9 +163,9 @@ Response:
 
 To list the next page of operations, enter a limit _and_ the `cursor` value returned in the response body of the initial or previous request.
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?cursor=2022-12-09T08%3A47%3A52.20417Z&limit=1' \
-  -H 'accept: application/json' \
+  -H 'Accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
@@ -202,9 +202,9 @@ This method shows only the details for the specified operation ID.
 
 cURL command:
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/97c7a650-e4ff-43d7-8c58-4c67f5050167' \
-  -H 'accept: application/json' \
+  -H 'Accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
