@@ -1,6 +1,8 @@
 ---
 title: Getting Started
 isDraft: true
+redirectFrom:
+  - /docs/cloud/getting-started
 ---
 
 Neon is a fully managed serverless Postgres.
