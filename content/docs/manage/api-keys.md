@@ -1,5 +1,5 @@
 ---
-title: API Keys
+title: Manage API Keys
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/using-api-keys

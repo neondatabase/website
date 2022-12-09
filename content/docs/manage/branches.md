@@ -1,5 +1,5 @@
 ---
-title: Branches
+title: Manage branches
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
