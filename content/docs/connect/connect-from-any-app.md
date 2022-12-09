@@ -58,7 +58,7 @@ psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tec
 ```
 
 <Admonition type="note">
-For information about connecting with `psql`, see [Connect with psql](../query-with-psql-editor). Please be aware that some older `psql` executables are built without SNI support and require a workaround. For more information, see [Connecting from older clients](../connectivity-issues).
+For information about connecting with `psql`, see [Connect with psql](../query-with-psql-editor). Please be aware that some older `psql` executables, libraries, and drivers are built without SNI support and require a workaround. For more information, see [Connecting from older clients](../connectivity-issues).
 </Admonition>
 
 ## Where do I obtain a password?
