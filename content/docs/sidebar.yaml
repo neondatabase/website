@@ -16,9 +16,9 @@
       slug: introduction/regions
 - title: Get started
   items:
-    - title: Signing up
+    - title: Sign up
       slug: get-started-with-neon/signing-up
-    - title: Setting up a project
+    - title: Set up a project
       slug: get-started-with-neon/setting-up-a-project
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
