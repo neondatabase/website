@@ -23,7 +23,7 @@ If you encounter a `Project ID is not specified` error and a library or applicat
 
 ### A. Pass the endpoint ID as an option
 
-We support a special connection option named `project,` which you can set to identify the endpoint you are connecting to. More specifically, you can set pass `options=project%3Dmy-endpoint-123456` as a `GET` parameter in the connection string. The `%3D` is a URL-encoded `=`.
+We support a special connection option named `project`, which you can set to identify the endpoint you are connecting to. More specifically, you can set pass `options=project%3Dmy-endpoint-123456` as a `GET` parameter in the connection string. The `%3D` is a URL-encoded `=`.
 
 For example, instead of the following connection string:
 
