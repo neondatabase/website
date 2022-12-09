@@ -218,7 +218,7 @@ The API method appears as follows when specified in a cURL command:
 ```curl
 curl 'https://console.neon.tech/api/v2/projects/sparkling-king-781971/branches' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' |jq
+  -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
 The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**.
