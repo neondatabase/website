@@ -8,45 +8,25 @@ An operation is an action performed on a Neon project resource. Operations can b
 
 Operations include:
 
-- `apply_config`
+- `apply_config`: Applies a new configuration to a Neon object or resource. 
 
-  Applies a new configuration to a Neon object or resource. 
+- `check_availability`: Checks the availability of an endpoint compute resource. Initiated by the [availability checker](../../glossary/#availability-checker).
 
-- `check_availability`
+- `create_branch`: Creates a branch.
 
-  Checks the availability of an endpoint compute resource. Initiated by the [availability checker](../../glossary/#availability-checker).
+- `create_timeline`: Creates a database.
 
-- `create_branch`
+- `delete_tenant`: Deletes a project.
 
-  Creates a branch.
+- `delete_timeline`: Deletes a database.
 
-- `create_timeline`
+- `replace_safekeeper`: Replaces the safekeeper.
 
-  Creates a database.
+- `start_compute`: Starts an endpoint compute resource.
 
-- `delete_tenant`
+- `stop_compute`: Stops an endpoint compute resource.
 
-  Deletes a project.
-
-- `delete_timeline`
-
-  Deletes a database.
-
-- `replace_safekeeper`
-
-  Replaces the safekeeper.
-
-- `start_compute`
-
-  Starts an endpoint compute resource.
-
-- `stop_compute`
-
-  Stops an endpoint compute resource.
-
-- `suspend_compute`
-
-  Suspends an endpoint compute resource.
+- `suspend_compute`: Suspends an endpoint compute resource.
 
 ## Viewing operations in the Neon Console
 
@@ -128,7 +108,7 @@ Response:
 
 ### List operations with pagination
 
-Pagination allows you to limit the number of operations displayed, as the number of operations for project can be extensive. To paginate responses, issue an initial request with a response limit. For brevity, the limit is set to 1 in this example.
+Pagination allows you to limit the number of operations displayed, as the number of operations for project can be large. To paginate responses, issue an initial request with a `limit` value. For brevity, the limit is set to 1 in the following example.
 
 cURL command:
 
@@ -161,7 +141,7 @@ Response:
 }
 ```
 
-To list the next page of operations, enter a limit _and_ the `cursor` value returned in the response body of the initial or previous request.
+To list the next page of operations, add the `cursor` value returned in the response body of the initial or previous request and a `limit` value for the next page.
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?cursor=2022-12-09T08%3A47%3A52.20417Z&limit=1' \
