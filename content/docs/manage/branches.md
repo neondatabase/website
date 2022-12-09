@@ -267,7 +267,7 @@ DELETE /branches/{branch_id}
 
 The API method appears as follows when specified in a cURL command:
 
-```curl
+```bash
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>' \
   -H 'accept: application/json' \
