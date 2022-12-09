@@ -1,10 +1,7 @@
-
 ---
 title: Supported PostgreSQL Extensions
 enableTableOfContents: true
 ---
-
-<a id="default-extensions/"></a>
 
 During the Technical Preview, Neon permits installing the PostgreSQL extensions shown in the following table. For extension documentation, select the extension version.
 
@@ -15,6 +12,8 @@ CREATE EXTENSION <extension_name>
 ```
 
 For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](../../get-started-with-neon/query-with-neon-sql-editor).
+
+<a id="default-extensions/"></a>
 
 | Extension                | Extension Version (PostgreSQL 14)                               | Extension Version (PostgreSQL 15)                                |Note                                                                                                                |
 | :------------------------| --------------------------------------------------------------: | ----------------------------------------------------------------:| :------------------------------------------------------------------------------------------------------------------|
