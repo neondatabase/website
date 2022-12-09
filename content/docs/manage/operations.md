@@ -28,7 +28,7 @@ Operations include:
 
 - `suspend_compute`: Suspends an endpoint compute resource
 
-## Viewing operations in the Neon Console
+## View operations in the Neon Console
 
 Project operations are displayed in the **Operations** widget on the Neon **Dashboard**. You can also view project operations in **Settings** > **Operations**. The **Operations** page provides more details than the **Dashboard** widget.
 
@@ -40,7 +40,7 @@ Operation details include:
 - **Duration**: The amount of time it took the operation to complete
 - **Date**: The date and time the operation occurred
 
-## Viewing operations with the Neon API
+## View operations with the Neon API
 
 You can use the [Neon API](https://neon.tech/api-reference/v2/) to view project operations. The following methods are provided:
 
