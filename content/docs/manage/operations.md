@@ -1,5 +1,5 @@
 ---
-title: Operations
+title: Project operations
 enableTableOfContents: true
 isDraft: false
 ---
@@ -10,23 +10,23 @@ Operations include:
 
 - `apply_config`: Applies a new configuration to a Neon object or resource. 
 
-- `check_availability`: Checks the availability of an endpoint compute resource. Initiated by the [availability checker](../../glossary/#availability-checker).
+- `check_availability`: Checks the availability of an endpoint compute resource
 
-- `create_branch`: Creates a branch.
+- `create_branch`: Creates a branch
 
-- `create_timeline`: Creates a database.
+- `create_timeline`: Creates a database
 
-- `delete_tenant`: Deletes a project.
+- `delete_tenant`: Deletes a project
 
-- `delete_timeline`: Deletes a database.
+- `delete_timeline`: Deletes a database
 
-- `replace_safekeeper`: Replaces the safekeeper.
+- `replace_safekeeper`: Replaces the safekeeper
 
-- `start_compute`: Starts an endpoint compute resource.
+- `start_compute`: Starts an endpoint compute resource
 
-- `stop_compute`: Stops an endpoint compute resource.
+- `stop_compute`: Stops an endpoint compute resource
 
-- `suspend_compute`: Suspends an endpoint compute resource.
+- `suspend_compute`: Suspends an endpoint compute resource
 
 ## Viewing operations in the Neon Console
 
@@ -34,11 +34,11 @@ Project operations are displayed in the **Operations** widget on the Neon **Dash
 
 Operation details include:
 
-- **Action/ID**: The operation ID.
-- **Branch**: The branch that the operation was performed on.
-- **Status**: The status of the operation. 
-- **Duration**: The amount of time it took the operation to complete.
-- **Date**: The date and time the operation occurred.
+- **Action/ID**: The operation ID
+- **Branch**: The branch that the operation was performed on
+- **Status**: The status of the operation
+- **Duration**: The amount of time it took the operation to complete
+- **Date**: The date and time the operation occurred
 
 ## Viewing operations with the Neon API
 
