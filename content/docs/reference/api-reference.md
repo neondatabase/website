@@ -32,7 +32,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 
 The base URL for a Neon API request is:
 
-```http
+```text
 https://console.neon.tech/api/v2/
 ```
 
