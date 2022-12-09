@@ -42,15 +42,16 @@ To revoke an API key:
 The following `cURL` example uses the `/projects` endpoint to retrieve projects that belong to your Neon account.
 
 ```bash
-curl -X GET -H "Authorization: Bearer $NEON_API_KEY" "accept: application/json"
-"https://neon.tech/api-reference/v2" | jq
+curl 'https://console.neon.tech/api/v2/projects' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
 where:
 
+- `"https://neon.tech/api-reference/v2/projects"` is the resource URL, which includes the base URL for the Neon API and the `/projects` endpoint.
+- The `"Accept: application/json"` in the header specifies the accepted response type.
 - The `Authorization: Bearer $NEON_API_KEY` entry in the header specifies your API key. Replace `$NEON_API_KEY` with your actual 64-bit API key. A request without this header, or containing an invalid or revoked API key, fails and returns a `401 Unauthorized` HTTP status code.
-- `"accept: application/json"` specifies the accepted response type.
-- `"https://neon.tech/api-reference/v2/projects"` is the resource URL, which includes the base URL for the Neon API and the `/projects` endpoint.  
 - [`jq`](https://stedolan.github.io/jq/) is an optional third-party tool that formats the JSON response, making it easier to read.
 
 A response for a Neon user with a single project appears similar to the following:
@@ -59,16 +60,16 @@ A response for a Neon user with a single project appears similar to the followin
 {
   "projects": [
     {
-      "id": "shiny-wind-028834",
+      "id": "autumn-disk-123331",
       "platform_id": "aws",
       "region_id": "aws-us-east-2",
-      "name": "myproject",
+      "name": "autumn-disk-123331",
       "provisioner": "k8s-pod",
       "pg_version": 15,
       "locked": false,
-      "created_at": "2022-11-23T17:42:25Z",
-      "updated_at": "2022-12-04T02:39:25Z",
-      "proxy_host": "us-east-2.aws.neon.build"
+      "created_at": "2022-12-07T00:45:05Z",
+      "updated_at": "2022-12-07T00:45:05Z",
+      "proxy_host": "us-east-2.aws.neon.tech"
     }
   ]
 }

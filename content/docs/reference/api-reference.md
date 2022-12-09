@@ -23,8 +23,10 @@ The Neon API uses API keys to authenticate requests. You can view and manage API
 The client must send an API key in the Authorization header when making requests, using the bearer authentication scheme. For example:
 
 ```curl
-curl -X GET -H "Authorization: Bearer $NEON_API_KEY" "accept: application/json"
-"https://console.neon.tech/api/v2/projects"
+curl 'https://console.neon.tech/api/v2/projects' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
 ```
 
 ## Neon API base URL
