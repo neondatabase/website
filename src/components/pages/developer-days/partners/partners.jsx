@@ -20,16 +20,13 @@ const description =
 
 const items = [
   {
-    time: '9:00 AM PT',
-    text: 'Serverless Driver for Postgres',
-    linkText: 'Coming soon!',
-    // linkText: 'Read blog post',
-    // linkUrl: '/blog/serverless-driver-for-postgres/',
+    text: 'Frictionless development experience with Neon branching',
+    linkText: 'Read blog post',
+    linkUrl: '/blog/frictionless-development-experience-with-neon-branching/',
   },
   {
-    time: '10:00 AM PT',
     text: 'Twitter Space: Serverless & Postgres Q&A',
-    linkText: 'Join us on Twitter',
+    linkText: 'Listen the recording',
     linkUrl: 'https://twitter.com/i/spaces/1zqKVPDDrDMJB',
   },
 ];
@@ -113,7 +110,7 @@ const Partners = () => {
               className="bg-secondary-2"
               items={items}
               setIsOpenModal={setIsOpenModal}
-              buttonText="Watch broadcast"
+              buttonText="Watch the recording"
             />
           </div>
         </div>
