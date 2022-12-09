@@ -38,7 +38,7 @@ https://console.neon.tech/api/v2/
 
 Append a Neon API method path to the base URL to construct the full URL for a request. For example:
 
-```http
+```text
 https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}
 ```
 
