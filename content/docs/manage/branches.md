@@ -132,7 +132,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
   "branch": {
     "parent_id": "br-wispy-dew-591433"
   }
-}' |jq
+}' | jq
 ```
 
 - The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**.
