@@ -41,7 +41,7 @@ To revoke an API key:
 
 The following `cURL` example uses the `/projects` endpoint to retrieve projects that belong to your Neon account.
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
