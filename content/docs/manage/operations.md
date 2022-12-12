@@ -12,11 +12,9 @@ Operations include:
 
 - `check_availability`: Checks the availability of an endpoint compute resource
 
-- `create_branch`: Creates a branch
-
 - `create_timeline`: Creates a project
 
-- `delete_tenant`: Deletes a project
+- `delete_tenant`: Deletes an account
 
 - `delete_timeline`: Deletes a branch
 
