@@ -54,7 +54,7 @@ The **Branches** widget on the project **Dashboard** also lists the branches in 
 Connecting to a database in a branch requires connecting via an endpoint, which is the compute instance associated with a branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="tip">
-You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../query-with-neon-sql-editor).
+You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../../get-started-with-neon/query-with-neon-sql-editor).
 </Admonition>
 
 1. In the Neon Console, select a project.
