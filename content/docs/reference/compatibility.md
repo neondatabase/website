@@ -9,11 +9,11 @@ Neon is protocol and application-compatible with PostgreSQL. However, when using
 
 ## PostgreSQL versions
 
-Neon cloud service is currently compatible with PostgreSQL 14 and PostgreSQL 15, with PostgreSQL 15 being the default version.
+Neon cloud service is currently compatible with PostgreSQL 14 and PostgreSQL 15. You can select the PostgreSQL version you want to use when creating a Neon project. PostgreSQL 15 selected by default. For information about creating a Neon project, See [Manage projects](../../manage/projects).
 
-## Permissions
+## Permissions and extension support
 
-Neon cloud service does not currently provide users with access permissions other than those granted to standard database owners in PostgreSQL. Therefore, Neon users cannot access replication methods, create additional users or roles from a PostgreSQL connection, or install PostgreSQL extensions other than those permitted by Neon.
+Neon cloud service does not currently provide users with access permissions other than those granted to standard database owners in PostgreSQL. Therefore, Neon users cannot access replication methods, create additional users or roles from a PostgreSQL connection, or install PostgreSQL extensions other than those permitted by Neon. For information about the PostgreSQL extensions that Neon supports, see [PostgreSQL Extensions](../pg-extensions).
 
 <a id="default-parameters/"></a>
 

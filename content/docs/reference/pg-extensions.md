@@ -3,7 +3,7 @@ title: Supported PostgreSQL Extensions
 enableTableOfContents: true
 ---
 
-During the Technical Preview, Neon permits installing the PostgreSQL extensions shown in the following table. For extension documentation, select the extension version.
+Neon supports the PostgreSQL extensions shown in the following table. For extension documentation, select the extension version.
 
 Unless otherwise noted, supported extensions can be installed from the Neon SQL Editor using [CREATE EXTENSION](https://www.postgresql.org/docs/14/sql-createextension.html) syntax.
 
