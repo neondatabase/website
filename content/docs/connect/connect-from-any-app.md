@@ -60,7 +60,7 @@ psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tec
 <Admonition type="note">
 For information about connecting with `psql`, see [Connect with psql](../query-with-psql-editor). Please be aware that some older client libraries and drivers, including older `psql` executables, are built without SNI support and require a workaround. For more information, see [Connecting from older clients](../connectivity-issues).
 
-Some tools, such as DBeaver, DataGrip, and CLion, do not support inclusion of a user name and password in a database connection string. When you find that a full connection string is not accepted, try entering the user name and password values in the user and password fields in the tool's UI instead of the connection string.
+Some tools, such as DBeaver, DataGrip, and CLion, do not support inclusion of a user name and password in a database connection string. When you find that a full connection string is not accepted, try entering the user name and password values in the appropriate fields in the tool's UI when configuring a connection to Neon.
 </Admonition>
 
 ## Where do I obtain a password?
