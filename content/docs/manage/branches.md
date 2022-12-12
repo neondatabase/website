@@ -1,5 +1,5 @@
 ---
-title: Branches
+title: Manage branches
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
@@ -136,7 +136,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
 ```
 
 - The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**.
-- The `<parent_id>` can be obtained by listing the branches for your project. See [List branches](#list-branches). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's root branch (`main`) or a previously created branch.
+- The `<parent_id>` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's root branch (`main`) or a previously created branch.
 
 The response includes information about the branch, the branch's endpoint, and the `create_branch` and `start_compute` operations that have been initiated.
 
@@ -274,7 +274,7 @@ curl -X 'DELETE' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-The `<branch_id>` can be found by listing the branches for your project. The `<branch_id>` is the `id` of a branch. A branch `id` has a `br-` prefix. See [List branches](#list-branches).
+The `<branch_id>` can be found by listing the branches for your project. The `<branch_id>` is the `id` of a branch. A branch `id` has a `br-` prefix. See [List branches](#list-branches-with-the-api).
 
 The response shows information about the branch being deleted and the `suspend_compute` and `delete_timeline` operations that were initiated.
 
@@ -316,4 +316,4 @@ The response shows information about the branch being deleted and the `suspend_c
 }
 ```
 
-You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches). The deleted branch should no longer be listed.
+You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches-with-the-api). The deleted branch should no longer be listed.

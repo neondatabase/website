@@ -1,5 +1,5 @@
 ---
-title: Users
+title: Manage users
 enableTableOfContents: true
 isDraft: false
 ---

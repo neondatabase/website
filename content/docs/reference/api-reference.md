@@ -18,7 +18,7 @@ The Neon API is a REST API. It provides resource-oriented URLs, accepts form-enc
 
 ## Authentication
 
-The Neon API uses API keys to authenticate requests. You can view and manage API keys for your account in the Neon Console. For instructions, refer to [API keys](../../manage/api-keys).
+The Neon API uses API keys to authenticate requests. You can view and manage API keys for your account in the Neon Console. For instructions, refer to [Manage API keys](../../manage/api-keys).
 
 The client must send an API key in the Authorization header when making requests, using the bearer authentication scheme. For example:
 
