@@ -3,6 +3,7 @@ title: Import data from Heroku
 enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/hasura-heroku-migration
+  - /docs/how-to-guides/import-from-heroku
 ---
 
 This guide describes how to import your data from Heroku PostgreSQL to Neon.
