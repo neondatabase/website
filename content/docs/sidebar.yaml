@@ -88,9 +88,9 @@
       slug: reference/api-reference
     - title: Glossary
       slug: reference/glossary
-    - title: PostgreSQL Extensions
-      slug: reference/pg-extensions
     - title: PostgreSQL Compatibility
       slug: reference/compatibility
+    - title: PostgreSQL Extensions
+      slug: reference/pg-extensions
 - title: Release notes
   slug: release-notes
