@@ -3,10 +3,10 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import Branching from 'components/pages/developer-days/branching';
-// import CTA from 'components/pages/developer-days/cta';
+import CTA from 'components/pages/developer-days/cta';
 import Hero from 'components/pages/developer-days/hero';
 import Partners from 'components/pages/developer-days/partners';
-import Register from 'components/pages/developer-days/register';
+// import Register from 'components/pages/developer-days/register';
 import Layout from 'components/shared/layout';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
@@ -53,8 +53,8 @@ const DeveloperDays = () => (
       <Hero />
       <Branching />
       <Partners />
-      {/* <CTA /> */}
-      <Register type="day1" />
+      <CTA />
+      {/* <Register type="day1" /> */}
     </div>
   </Layout>
 );

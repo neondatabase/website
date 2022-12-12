@@ -1,5 +1,5 @@
 ---
-title: Endpoints
+title: Manage endpoints
 enableTableOfContents: true
 isDraft: false
 ---

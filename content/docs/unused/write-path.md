@@ -1,6 +1,8 @@
 ---
 title: Write Path
 isDraft: true
+redirectFrom:
+  - /docs/storage-engine/write-path
 ---
 
 PostgreSQL --> Safekeepers --> Pageserver --> Cloud storage

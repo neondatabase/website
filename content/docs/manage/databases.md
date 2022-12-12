@@ -1,5 +1,5 @@
 ---
-title: Databases
+title: Manage databases
 enableTableOfContents: true
 isDraft: false
 ---

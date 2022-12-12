@@ -1,6 +1,8 @@
 ---
 title: Read Path
 isDraft: true
+redirectFrom:
+  - /docs/storage-engine/read-path
 ---
 
 PostgreSQL &lt;-- Pageserver &lt;-- Cloud storage

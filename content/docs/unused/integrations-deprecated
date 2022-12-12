@@ -1,5 +1,8 @@
 ---
 title: Integrations
+isDraft: true
+redirectFrom:
+  - /docs/cloud/integrations-deprecated
 ---
 
 Neon supports the standard PostgreSQL wire protocol. You can use all the normal client utilities like ‘psql’ and ‘pg_dump’, and standard client libraries and drivers to connect.
