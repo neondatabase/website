@@ -8,17 +8,21 @@ An operation is an action performed on a Neon project resource. Operations can b
 
 Operations include:
 
-- `apply_config`: Applies a new configuration to a Neon object or resource. 
+- `apply_config`: Applies a new configuration to a Neon object or resource.
 
 - `check_availability`: Checks the availability of an endpoint compute resource
 
 - `create_branch`: Creates a branch
 
-- `create_timeline`: Creates a database
+- `create_timeline`: Creates a project
 
 - `delete_tenant`: Deletes a project
 
-- `delete_timeline`: Deletes a database
+- `delete_timeline`: Deletes a branch
+
+- `pageserver_tenant_detach`: ?
+
+- `pageserver_tenant_migrate`: ?
 
 - `replace_safekeeper`: Replaces the safekeeper
 
