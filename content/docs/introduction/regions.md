@@ -33,7 +33,7 @@ Once you select a region for a Neon project, it cannot be changed for that proje
 If you need to move your data to a different region, the following steps are recommended:
 
 1. Create a new project in the desired region. For project creation instructions, see [Setting up a project](../../get-started-with-neon/setting-up-a-project).
-1. Move your data from the old project to the new project. For instructions, see [Import data from PostgreSQL](../../how-to-guides/import-an-existing-database).
+1. Move your data from the old project to the new project. For instructions, see [Import data from PostgreSQL](../../import/import-from-postgres).
 
 Moving data to a new Neon project may require downtime if you are moving a production database, as the import procedure may take some time depending on the size of your data. To prevent the loss of data during the import operation, consider disabling writes from your applications before initiating the import operation. You can re-enable writes when the import is completed. Neon does not currently support disabling database writes. Writes must be disabled at the application level.
 
