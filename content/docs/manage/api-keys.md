@@ -3,6 +3,7 @@ title: API Keys
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/using-api-keys
+  - /docs/get-started-with-neon/api-keys
 ---
 
 Most actions performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference). Using the Neon API requires an API key. This topic describes how to generate, revoke, and use API keys.

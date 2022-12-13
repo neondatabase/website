@@ -2,6 +2,8 @@
 title: Projects
 enableTableOfContents: true
 isDraft: false
+redirectFrom:
+  - /docs/get-started-with-neon/projects
 ---
 
 A project is the top-level object in the Neon object hierarchy. Tier limits define how many projects you can create. Neon's free tier permits one project per Neon account.
@@ -21,7 +23,7 @@ To create a Neon project:
 2. If you are creating your very first project, click **Create the first project**. Otherwise, click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 
-Upon creating a project, you are presented with a dialog that provides your password for the project, which is required to connect to databases in the project from a client or application. Store your password in a safe location. Your password is also temporarily available in the **Connection Details** widget on the **Neon Dashboard**. 
+Upon creating a project, you are presented with a dialog that provides your password for the project, which is required to connect to databases in the project from a client or application. Store your password in a safe location. Your password is also temporarily available in the **Connection Details** widget on the **Neon Dashboard**.
 
 <Admonition type="important">
 After closing the password dialog, navigating away from the Neon Console, or refreshing the browser page, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Users](../users).
