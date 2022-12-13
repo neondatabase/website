@@ -15,7 +15,7 @@ For additional information about JDBC, refer to the standard JDBC API documentat
 To connect to Neon with JDBC or from a Spring Data project:
 
 1. [Create a Neon project](#create-a-neon-project)
-2. [Connect with JDBC](#configure-go-project-connection-settings) or [Connect from Spring Data](#connect-from-spring-data)
+2. [Connect with JDBC](#connect-with-jdbc) or [Connect from Spring Data](#connect-from-spring-data)
 
 ## Create a Neon project
 
