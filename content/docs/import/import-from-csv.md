@@ -46,4 +46,4 @@ The following example uses the default `neondb` database that is created with ea
     \copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
     ```
 
-    The `/copy` option performs a frontend (client) copy. It runs an SQL `COPY` command, but instead of the server reading or writing the specified file, `psql` reads or writes the file and routes the data between remote host and the local file system, which means that file accessibility and privileges are those of the local user, and no SQL superuser privileges are required. For more information about the `/copy` option, refer to the [psql documentation](https://www.postgresql.org/docs/current/app-psql.html).
+    For more information about the `/copy` option, refer to the [psql documentation](https://www.postgresql.org/docs/current/app-psql.html).
