@@ -20,15 +20,15 @@ The following example uses the default `neondb` database that is created with ea
 
 2. Create the `customer` table.
 
-```sql
-CREATE TABLE customer (
-  id SERIAL,
-  first_name VARCHAR(50),
-  last_name VARCHAR(50),
-  email VARCHAR(255),
-  PRIMARY KEY (id)
-)
-```
+   ```sql
+   CREATE TABLE customer (
+     id SERIAL,
+     first_name VARCHAR(50),
+     last_name VARCHAR(50),
+     email VARCHAR(255),
+     PRIMARY KEY (id)
+   )
+   ```
 
 3. Load the data from the `customer.csv` file.
 
