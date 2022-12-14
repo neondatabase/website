@@ -7,7 +7,13 @@ This topic describes how to import data into a Neon database table from a CSV fi
 
 The instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for PostgreSQL. It provides an interactive session for sending commands to PostgreSQL. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
 
-The following example uses the default `neondb` database that is created with each Neon project, a table named `customer`, and a data file named `customer.csv`. Data is loaded from the `customer.csv` into the `customer` table.
+The following example uses the default `neondb` database, a table named `customer`, and a data file named `customer.csv`. Data is loaded from the `customer.csv` file into the `customer` table. The `customer.csv` file has the following data:
+
+   ```text
+   First Name,Last Name,Email
+   Casey,Smith,casey.smith@example.com
+   Sally,Jones,sally.jones@example.com
+   ```
 
 1. Connect to the `neondb` database using `psql`. For example:
 
@@ -15,7 +21,7 @@ The following example uses the default `neondb` database that is created with ea
    psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
    ```
 
-   <Admonition type="tip">
+   <Admonition type="not">
    For more information about connecting with `psql`, see [Connect with psql](../../connect/query-with-psql-editor).
    </Admonition>
 
@@ -32,20 +38,10 @@ The following example uses the default `neondb` database that is created with ea
    ```
 
    <Admonition type="tip">
-   You can also create tables in a Neon database using the SQL Editor in the Neon Console. See [Query with Neon's SQL Editor](../../query-with-neon-sql-editor).
+   You can also create tables using the **SQL Editor** in the Neon Console. See [Query with Neon's SQL Editor](../../query-with-neon-sql-editor).
    </Admonition>
 
-3. Load the data from the `customer.csv` file.
-
-   The `customer.csv` file has the following data:
-
-   ```text
-   First Name,Last Name,Email
-   Casey,Smith,casey.smith@example.com
-   Sally,Jones,sally.jones@example.com
-   ```
-
-   From your `psql` prompt, load the data using the `\copy` option:
+3. From your `psql` prompt, load the data from the `customer.csv` file using the `\copy` option:
 
     ```bash
     \copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
