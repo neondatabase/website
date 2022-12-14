@@ -31,6 +31,10 @@ The following example uses the default `neondb` database that is created with ea
    )
    ```
 
+   <Admonition type="tip">
+   You can also create tables in a Neon database using the SQL Editor in the Neon Console. See [Query with Neon's SQL Editor](../../query-with-neon-sql-editor).
+   </Admonition>
+
 3. Load the data from the `customer.csv` file.
 
    The `customer.csv` file has the following data:
@@ -44,7 +48,7 @@ The following example uses the default `neondb` database that is created with ea
    From your `psql` prompt, load the data using the `\copy` option:
 
     ```bash
-    \\copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
+    \copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
     ```
 
     For more information about the `\copy` option, refer to the [psql documentation](https://www.postgresql.org/docs/current/app-psql.html).
