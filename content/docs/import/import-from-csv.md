@@ -2,6 +2,7 @@
 title: Import data from CSV
 enableTableOfContents: true
 ---
+
 This topic describes how to import data into a Neon database table from a CSV file.
 
 The instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for PostgreSQL. It provides an interactive session for sending commands to PostgreSQL. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
