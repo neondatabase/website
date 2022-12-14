@@ -77,9 +77,11 @@
 - title: Import data
   items:
     - title: Import from PostgreSQL
-      slug: how-to-guides/import-an-existing-database
+      slug: import/import-from-postgres
     - title: Import from Heroku
-      slug: how-to-guides/import-from-heroku
+      slug: import/import-from-heroku
+    - title: Import from CSV
+      slug: import/import-from-csv
 - title: Security
   slug: security
 - title: Reference
