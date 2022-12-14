@@ -9,7 +9,7 @@ The instructions require a working installation of [psql](https://www.postgresql
 
 The following example uses the default `neondb` database that is created with each Neon project, a table named `customer`, and a data file named `customer.csv`. Data is loaded from the `customer.csv` into the `customer` table.
 
-1. Connect to the neondb database using `psql`. For example:
+1. Connect to the `neondb` database using `psql`. For example:
 
    ```bash
    psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
@@ -17,7 +17,7 @@ The following example uses the default `neondb` database that is created with ea
 
    <Admonition type="tip">
    For more information about connecting with `psql`, see [Connect with psql](../../connect/query-with-psql-editor).
-   </Adminition>
+   </Admonition>
 
 2. Create the `customer` table.
 
@@ -44,7 +44,7 @@ The following example uses the default `neondb` database that is created with ea
    From your `psql` prompt, load the data using the `\copy` option:
 
     ```bash
-    \copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
+    \\copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
     ```
 
-    For more information about the `/copy` option, refer to the [psql documentation](https://www.postgresql.org/docs/current/app-psql.html).
+    For more information about the `\copy` option, refer to the [psql documentation](https://www.postgresql.org/docs/current/app-psql.html).
