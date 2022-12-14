@@ -2,6 +2,7 @@
 title: Import data from PostgreSQL
 redirectFrom:
   - /docs/cloud/tutorials
+  - /docs/how-to-guides/import-an-existing-database
 ---
 
 This topic describes how to import an existing PostgreSQL database to Neon. The instructions can also be used to migrate a database from one Neon project to another. For example, you can use the instructions to migrate a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15.

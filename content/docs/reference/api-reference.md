@@ -11,14 +11,14 @@ The Neon API allows you to manage your Neon projects programmatically.
 Refer to the [Neon API v2 reference](https://neon.tech/api-reference/v2) for supported methods.
 
 <Admonition type="warning">
-The [Neon API v1 reference](https://neon.tech/api-reference) is deprecated. Support for it will be removed in a future release.
+The [Neon API v1](https://neon.tech/api-reference) is deprecated. Please migrate your applications to [Neon API V2 ](https://neon.tech/api-reference/v2/). The base URL for the new Neon API is `https://neon.tech/api-reference/v2/`
 </Admonition>
 
 The Neon API is a REST API. It provides resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and supports standard HTTP response codes, authentication, and verbs.
 
 ## Authentication
 
-The Neon API uses API keys to authenticate requests. You can view and manage API keys for your account in the Neon Console. For instructions, refer to [API keys](../../manage/api-keys).
+The Neon API uses API keys to authenticate requests. You can view and manage API keys for your account in the Neon Console. For instructions, refer to [Manage API keys](../../manage/api-keys).
 
 The client must send an API key in the Authorization header when making requests, using the bearer authentication scheme. For example:
 

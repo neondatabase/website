@@ -1,5 +1,5 @@
 ---
-title: Projects
+title: Manage projects
 enableTableOfContents: true
 isDraft: false
 redirectFrom:

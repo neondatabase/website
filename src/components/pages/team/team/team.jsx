@@ -269,6 +269,18 @@ const members = [
     linkedinUrl: 'https://www.linkedin.com/in/mahmoud-codes/',
     twitterUrl: 'https://twitter.com/thisismahmoud_',
   },
+  {
+    photo: <StaticImage src="./images/tom-parandyk-photo.jpg" alt="Tom Parandyk" />,
+    name: 'Tom Parandyk',
+    position: 'Lead Product Designer',
+    linkedinUrl: 'https://www.linkedin.com/in/tmass/',
+  },
+  {
+    photo: <StaticImage src="./images/shany-pozin-photo.jpg" alt="Shany Pozin" />,
+    name: 'Shany Pozin',
+    position: 'Engineering Manager',
+    linkedinUrl: 'https://il.linkedin.com/in/shany',
+  },
 ];
 
 const Team = () => (

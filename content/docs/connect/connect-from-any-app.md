@@ -63,7 +63,7 @@ For information about connecting with `psql`, see [Connect with psql](../query-w
 
 ## Where do I obtain a password?
 
-The connection string on the Neon **Dashboard** only includes a password immediately after you create a project. The password no longer appears in the connection string once you navigate away from the Neon Console or refresh the browser. If you have misplaced your password, refer to [Users](../../manage/users/#reset-a-password) for password reset instructions.
+The connection string on the Neon **Dashboard** only includes a password immediately after you create a project. The password no longer appears in the connection string once you navigate away from the Neon Console or refresh the browser. If you have misplaced your password, refer to [Reset a password](../../manage/users/#reset-a-password) for password reset instructions.
 
 ## What port does Neon use?
 

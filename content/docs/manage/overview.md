@@ -1,5 +1,5 @@
 ---
-title: Overview 
+title: Overview of the Neon object hierarchy
 enableTableOfContents: true
 isDraft: false
 ---
