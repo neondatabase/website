@@ -4,7 +4,7 @@ enableTableOfContents: true
 ---
 When connecting to Neon from an application or client, you will need to connect to a database in your Neon project. In Neon, a database belongs to a branch, which may the root branch of your project (`main`) or a child branch. The root branch in a Neon project has a default database named `neondb`.
 
-In order to connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through an endpoint, which is the compute instance associated with the branch.
+To connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through an endpoint, which is the compute instance associated with the branch.
 
 ```text
 Project
@@ -33,7 +33,7 @@ postgres://casey@ep-square-sea-260584.us-east-2.aws.neon.tech/neondb
 When an application or client requires a PostgreSQL host, it is the endpoint hostname that you should provide. An endpoint hostname, such as the one shown above, is comprised of an `endpoint_id` (`ep-square-sea-260584`), a region slug (`us-east-2`), the cloud platform (`aws`), and the Neon domain (`neon.tech`).
 </Admonition>
 
-You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file,  assign the connection string to a variable, or pass the connection string on the command-line, as shown:
+You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line, as shown:
 
 `.env` file:
 
@@ -65,7 +65,7 @@ Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, s
 
 ## Where do I obtain a password?
 
-The connection string on the Neon **Dashboard** only includes a password immediately after you create a project. The password no longer appears in the connection string once you navigate away from the Neon Console or refresh the browser. If you have misplaced your password, refer to [Reset a password](../../manage/users/#reset-a-password) for password reset instructions.
+A password was provided to you when you created your Neon project. If you have misplaced your password, refer to [Reset a password](../../manage/users/#reset-a-password) for password reset instructions.
 
 ## What port does Neon use?
 
