@@ -7,13 +7,7 @@ This topic describes how to import data into a Neon database table from a CSV fi
 
 The instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for PostgreSQL. It provides an interactive session for sending commands to PostgreSQL. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
 
-The following example uses the default `neondb` database, a table named `customer`, and a data file named `customer.csv`. Data is loaded from the `customer.csv` file into the `customer` table. The `customer.csv` file has the following data:
-
-   ```text
-   First Name,Last Name,Email
-   Casey,Smith,casey.smith@example.com
-   Sally,Jones,sally.jones@example.com
-   ```
+The following example uses the default `neondb` database, a table named `customer`, and a data file named `customer.csv`. Data is loaded from the `customer.csv` file into the `customer` table.
 
 1. Connect to the `neondb` database using `psql`. For example:
 
@@ -41,7 +35,15 @@ The following example uses the default `neondb` database, a table named `custome
    You can also create tables using the **SQL Editor** in the Neon Console. See [Query with Neon's SQL Editor](../../query-with-neon-sql-editor).
    </Admonition>
 
-3. From your `psql` prompt, load the data from the `customer.csv` file using the `\copy` option:
+3. Prepare a `customer.csv` file with contains the following data:
+
+   ```text
+   First Name,Last Name,Email
+   Casey,Smith,casey.smith@example.com
+   Sally,Jones,sally.jones@example.com
+   ```
+
+4. From your `psql` prompt, load the data from the `customer.csv` file using the `\copy` option.
 
     ```bash
     \copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
