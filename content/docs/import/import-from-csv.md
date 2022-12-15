@@ -39,8 +39,8 @@ The following example uses the default `neondb` database, a table named `custome
 
    ```text
    First Name,Last Name,Email
-   Casey,Smith,casey.smith@example.com
-   Sally,Jones,sally.jones@example.com
+   1,Casey,Smith,casey.smith@example.com
+   2,Sally,Jones,sally.jones@example.com
    ```
 
 4. From your `psql` prompt, load the data from the `customer.csv` file using the `\copy` option.
