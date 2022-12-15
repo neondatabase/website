@@ -15,7 +15,7 @@ The following example uses the default `neondb` database, a table named `custome
    psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
    ```
 
-   <Admonition type="not">
+   <Admonition type="note">
    For more information about connecting to Neon with `psql`, see [Connect with psql](../../connect/query-with-psql-editor).
    </Admonition>
 
