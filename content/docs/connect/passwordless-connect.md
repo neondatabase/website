@@ -23,7 +23,7 @@ To connect using Neon's `psql` passwordless connect feature:
        https://console.neon.tech/psql_session/6d32af5ef8215b62
    ```
 
-2. In your browser, navigate to the provided link where you are asked to select a Neon project and an endpoint to connect with. An endpoint is the compute instance associated with a  branch. A project can have multiple endpoints. Select the endpoint that is associated with the branch you want to connect to.
+2. In your browser, navigate to the provided link where you are asked to select a Neon project to connect to. If your project has more than one endpoint, you are asked to select the endpoint to connect with. An endpoint is the compute instance associated with a branch. Select the endpoint that is associated with the branch you want to connect to.
 
 <Admonition type="note">
 You can determine which endpoint is associated with a branch by selecting the branch on the **Branches** page in the Neon console. The branch details include the name of the associated endpoint, which has an `ep-` prefix. For example: `ep-summer-sun-985942`
