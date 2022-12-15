@@ -49,10 +49,10 @@ The following example uses the default `neondb` database, a table named `custome
     \copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
     ```
 
-   If the command runs successfully, it will return the number of copied records to the database:
+   If the command runs successfully, it returns the number of records copied to the database:
 
    ```bash
    COPY 2
-   ```    
-    
+   ```
+
    For more information about the `\copy` option, refer to the [psql reference](https://www.postgresql.org/docs/current/app-psql.html), in the _PostgreSQL Documentation_.
