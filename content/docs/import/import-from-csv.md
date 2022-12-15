@@ -5,7 +5,7 @@ enableTableOfContents: true
 
 This topic describes how to import data into a Neon database table from a CSV file.
 
-The instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for PostgreSQL. It provides an interactive session for sending commands to PostgreSQL. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
+The instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for PostgreSQL. It provides an interactive session for sending commands to PostgreSQL. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/current/app-psql.html), in the _PostgreSQL Documentation_.
 
 The following example uses the default `neondb` database, a table named `customer`, and a data file named `customer.csv`. Data is loaded from the `customer.csv` file into the `customer` table.
 
@@ -16,7 +16,7 @@ The following example uses the default `neondb` database, a table named `custome
    ```
 
    <Admonition type="not">
-   For more information about connecting with `psql`, see [Connect with psql](../../connect/query-with-psql-editor).
+   For more information about connecting to Neon with `psql`, see [Connect with psql](../../connect/query-with-psql-editor).
    </Admonition>
 
 2. Create the `customer` table.
@@ -35,7 +35,7 @@ The following example uses the default `neondb` database, a table named `custome
    You can also create tables using the **SQL Editor** in the Neon Console. See [Query with Neon's SQL Editor](../../query-with-neon-sql-editor).
    </Admonition>
 
-3. Prepare a `customer.csv` file with contains the following data:
+3. Prepare a `customer.csv` file with the following data:
 
    ```text
    First Name,Last Name,Email
@@ -49,4 +49,4 @@ The following example uses the default `neondb` database, a table named `custome
     \copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
     ```
 
-    For more information about the `\copy` option, refer to the [psql documentation](https://www.postgresql.org/docs/current/app-psql.html).
+    For more information about the `\copy` option, refer to the [psql reference](https://www.postgresql.org/docs/current/app-psql.html), in the _PostgreSQL Documentation_.
