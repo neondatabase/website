@@ -13,7 +13,7 @@ For more information about branches and how you can use them in your development
 
 You can create and manage branches using the Neon Console or [Neon API](https://neon.tech/api-reference/v2/). This topic covers both methods.
 
-Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Projects](../projects/#create-a-project).
+Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Create a project](../projects/#create-a-project).
 
 ## Create a branch
 
@@ -64,7 +64,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 5. Add your password to the connection string as shown below, and connect with `psql`. You can connect using the same user and password that you use to connect to the parent branch.
 
   ```bash
-  psql postgres://casey:<password>@ep-floral-fog-184072.us-east-2.aws.neon.tech/neondb
+  psql postgres://casey:<password>@ep-shrill-limit-432460.us-east-2.aws.neon.tech/neondb
   ```
 
 <Admonition type="tip">
