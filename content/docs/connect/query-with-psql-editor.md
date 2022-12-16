@@ -24,19 +24,19 @@ You can obtain a connection string from the **Connection Details** widget on the
 From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**, but be sure to add your password, as shown:
 
 ```bash
-psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
+psql postgres://casey:<password>@ep-square-sea-260584.us-east-2.aws.neon.tech/neondb
 ```
 
 ## Where do I obtain a password?
 
-The connection string on the Neon **Dashboard** only includes a password immediately after you create a project. The password no longer appears in the connection string once you navigate away from the Neon Console or refresh the browser. If you have misplaced your password, refer to [Users](../../manage/users/#reset-a-password) for password reset instructions.
+A password was provided to you when you created your Neon project. If you have misplaced your password, refer to [Reset a password](../../manage/users/#reset-a-password) for password reset instructions.
 
 ## What port does Neon use?
 
 Neon uses the default PostgreSQL port, `5432`. If you need to specify the port in your connection string, you can do so as follows:
 
 ```bash
-psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+psql postgres://casey:<password>@ep-square-sea-260584.us-east-2.aws.neon.tech:5432/neondb
 ```
   
 ## Running queries
