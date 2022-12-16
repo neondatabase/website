@@ -6,6 +6,8 @@ redirectFrom:
   - /docs/cloud/getting_started/
 ---
 
+Neon is currently in Technical Preview. You can sign up for Neon and use it for free during this period. For information about usage limits during the Technical Preview, see [Technical Preview Free Tier](../../introduction/technical-preview-free-tier).
+
 To sign up for Neon:
 
 1. Navigate to [https://console.neon.tech](https://console.neon.tech).
