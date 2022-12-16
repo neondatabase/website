@@ -35,7 +35,7 @@ To connect using Neon's `psql` passwordless connect feature:
    casey=>
    ```
 
-   **_Note_**: When using passwordless connect, the `psql` prompt shows your local terminal user name. However, you are logged in as the Neon `web_access` user, which you can verify by running this query:
+   When using passwordless connect, the `psql` prompt shows your local terminal user name. However, you are logged in as the Neon `web_access` user, which you can verify by running this query:
 
    ```sql
    SELECT current_user;
@@ -44,7 +44,7 @@ To connect using Neon's `psql` passwordless connect feature:
     web_access
    ```
 
-   To check the database you are connected to, issue this query:
+   The passwordless connect feature connects to the first database created in the branch. To check the database you are connected to, issue this query:
 
    ```sql
    SELECT current_database();
@@ -52,6 +52,8 @@ To connect using Neon's `psql` passwordless connect feature:
    ------------------
     neondb
     ```
+
+    Switching databases from the `psql` prompt (using `\c <database_name>`, for example) after you have authenticated restarts the passwordless connect authentication process to authenticate a connection to the new database.
 
 ## Running queries
 
