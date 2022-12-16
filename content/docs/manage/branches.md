@@ -11,7 +11,7 @@ Data resides in a branch. Each Neon project has a root branch called `main`. You
 A child branch is a copy-on-write clone the data in the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](../../conceptual-guides/branching).
 
-You can create and manage branches using the Neon Console or [Neon API](https://neon.tech/api-reference). This topic covers both methods.
+You can create and manage branches using the Neon Console or [Neon API](https://neon.tech/api-reference/v2/). This topic covers both methods.
 
 Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Projects](../projects/#create-a-project).
 

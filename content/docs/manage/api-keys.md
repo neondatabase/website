@@ -16,13 +16,13 @@ An API key is a secure, randomly generated, 64-bit key that you must provide whe
 
 To generate an API key:
 
-1. Log in to [Neon Console](https://console.neon.tech).
+1. Log in to the [Neon Console](https://console.neon.tech).
 2. Click your account in the upper right corner of the Neon Console, and click **Account**.
 3. Select **Developer Settings** and click **Generate new API Key**.
 4. Enter a name for the API key.
 5. Click **Create** and copy the generated key.
 
-Store your key in a safe location immediately after generating it. You will not be able to view or copy the key again after leaving the **Developer Settings** page. You can safely store an API key in a locally installed credential manager or in a credential management service such as the [AWS Key Management Service](https://aws.amazon.com/kms/). If you lose an API key, revoke it and generate a new one.
+Store your key in a safe location. You will not be able to view or copy the key again after leaving the **Developer Settings** page. You can safely store an API key in a locally installed credential manager or in a credential management service such as the [AWS Key Management Service](https://aws.amazon.com/kms/). If you lose an API key, revoke it and generate a new one.
 
 ### Revoke an API key
 
