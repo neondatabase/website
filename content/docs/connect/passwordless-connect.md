@@ -39,7 +39,7 @@ You can determine which endpoint is associated with a branch by selecting the br
    casey=>
    ```
 
-   **_Note_**: When using _`psql` passwordless connect_, the `psql` prompt shows your local terminal user name. However, you are logged in as the Neon `web_access` user, which you can verify by running this query:
+   **_Note_**: When using passwordless connect, the `psql` prompt shows your local terminal user name. However, you are logged in as the Neon `web_access` user, which you can verify by running this query:
 
    ```sql
    SELECT current_user;
