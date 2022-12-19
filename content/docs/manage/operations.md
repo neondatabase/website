@@ -4,17 +4,17 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-An operation is an action performed on a Neon project resource. Operations can be user-initiated or initiated by the Neon Control Plane. User-initiated operations result from actions such as creating a branch or deleting a database. Operations initiated by the Neon Control Plane include suspending a compute instance after a defined period of inactivity or periodically checking the availability of a compute instance, for example.
+An operation is an action performed on a Neon resource. Operations can be user-initiated or initiated by the Neon Control Plane. User-initiated operations result from actions such as creating a branch or deleting a database. Operations initiated by the Neon Control Plane may include suspending a compute instance after a defined period of inactivity or periodically checking the availability of a compute instance, for example. You can monitor operation statuses to keep an eye on the health of your Neon project or just to check if an operation, such as updating a database, has completed successfully.
 
 Operations include:
 
-- `apply_config`: Applies a new configuration to a Neon object or resource.
+- `apply_config`: Applies a new configuration to a Neon object or resource
 - `check_availability`: Checks the availability of an endpoint compute resource
 - `create_timeline`: Creates a project
-- `delete_tenant`: Deletes an account
+- `delete_tenant`: Deletes the storage data
 - `delete_timeline`: Deletes a branch
-- `pageserver_tenant_detach`: ?
-- `pageserver_tenant_migrate`: ?
+- `pageserver_tenant_detach`: Detaches the storage data from a region
+- `pageserver_tenant_migrate`: Migrates the storage data to another region
 - `replace_safekeeper`: Replaces the safekeeper
 - `start_compute`: Starts an endpoint compute resource
 - `stop_compute`: Stops an endpoint compute resource
@@ -38,7 +38,7 @@ You can use the [Neon API](https://neon.tech/api-reference/v2/) to view project 
 
 ### List operations
 
-Lists operation for the specified project. This method supports response pagination. For more information, see [List operations with pagination](#list-operations-with-pagination).
+Lists operations for the specified project. This method supports response pagination. For more information, see [List operations with pagination](#list-operations-with-pagination).
 
 ```text
 /projects/{project_id}/operations/{operation_id}
