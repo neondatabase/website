@@ -17,7 +17,7 @@ An API key is a secure, randomly generated, 64-bit key that you must provide whe
 To generate an API key:
 
 1. Log in to the [Neon Console](https://console.neon.tech).
-2. Click your account in the upper right corner of the Neon Console, and click **Account**.
+2. Click your account in the upper right corner of the Neon Console, and select **Account**.
 3. Select **Developer Settings** and click **Generate new API Key**.
 4. Enter a name for the API key.
 5. Click **Create** and copy the generated key.
@@ -30,7 +30,7 @@ An API key that is no longer needed can be revoked. This action cannot be revers
 
 To revoke an API key:
 
-1. Click your account in the upper right corner of the Neon Console and click **Account**.
+1. Click your account in the upper right corner of the Neon Console and select **Account**.
 2. Select **Developer Settings** to see a list of API keys.
 3. To revoke a key, click **Revoke**. The key is immediately revoked. Any request that uses the key will now fail.
 
@@ -52,7 +52,7 @@ where:
 
 - `"https://neon.tech/api-reference/v2/projects"` is the resource URL, which includes the base URL for the Neon API and the `/projects` endpoint.
 - The `"Accept: application/json"` in the header specifies the accepted response type.
-- The `Authorization: Bearer $NEON_API_KEY` entry in the header specifies your API key. Replace `$NEON_API_KEY` with your actual 64-bit API key. A request without this header, or containing an invalid or revoked API key, fails and returns a `401 Unauthorized` HTTP status code.
+- The `Authorization: Bearer $NEON_API_KEY` entry in the header specifies your API key. Replace `$NEON_API_KEY` with an actual 64-bit API key. A request without this header, or containing an invalid or revoked API key, fails and returns a `401 Unauthorized` HTTP status code.
 - [`jq`](https://stedolan.github.io/jq/) is an optional third-party tool that formats the JSON response, making it easier to read.
 
 A response for a Neon user with a single project appears similar to the following:
