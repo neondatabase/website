@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
 ---
 
-Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data you can store in each branch.
+Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
 
 A child branch is a copy-on-write clone the data in the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](../../conceptual-guides/branching).
@@ -15,8 +15,8 @@ You can create and manage branches using the Neon Console or [Neon API](https://
 
 Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Create a project](../projects/#create-a-project).
 
-<Admonition type="warning">
-When working with branches, it is important to have a strategy in place for removing old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reclaimed and reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To manage your disk space usage, it is recommended that you not allow branches to exceed this 7-day age limit.
+<Admonition type="important">
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To keep disk space usage to a minimum, it is recommended that you avoid allowing branches to age beyond the 7-day point-in-time restore window.
 </Admonition>
 
 ## Create a branch
@@ -33,7 +33,8 @@ To create a branch:
     - **Head**: Creates a branch with data up to the current point in time (the default).
     - **Time**: Creates a branch with data up to the specified date and time.
     - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](../../reference/glossary/#lsn).
-7. Click **Create Branch** to create your branch.
+7. Select whether or not to create an endpoint. An endpoint is a Neon compute instance, which is required to connect to the branch. If you are unsure, you can add an endpoint later.
+8. Click **Create Branch** to create your branch.
 
 You are directed to the **Branches** page where you are shown the details for your new branch.
 
@@ -47,11 +48,9 @@ To view the branches in a Neon project:
 
 ![Branch details](./images/branch_details.png)
 
-<Admonition type="note">
-Each branch is created with a read-write endpoint, which is the compute instance associated with the branch. To connect to a database in a branch, you must connect via an endpoint. For instructions, see [Connect to a branch database](#connect-to-a-branch-database). 
+<Admonition type="tip">
+The **Branches** widget on the project **Dashboard** also shows the branches in a Neon project.
 </Admonition>
-
-The **Branches** widget on the project **Dashboard** also lists the branches in a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
 
 ## Connect to a branch
 

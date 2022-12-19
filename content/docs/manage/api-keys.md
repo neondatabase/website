@@ -12,7 +12,7 @@ API keys are global and belong to your Neon account. They can be used with any p
 
 ### Generate an API key
 
-An API key is a secure, randomly generated, 64-bit key that you must provide when calling Neon API methods. An API key remains valid until it is revoked.
+An API key is a randomly-generated 64-bit key that you must provide when calling Neon API methods. An API key remains valid until it is revoked.
 
 To generate an API key:
 
@@ -32,12 +32,12 @@ To revoke an API key:
 
 1. Click your account in the upper right corner of the Neon Console and select **Account**.
 2. Select **Developer Settings** to see a list of API keys.
-3. To revoke a key, click **Revoke**. The key is immediately revoked. Any request that uses the key will now fail.
+3. To revoke a key, click **Revoke**. The key is immediately revoked. Any request using the key now fails.
 
 ### Make an API call
 
 <Admonition type="important">
-[Neon API v1](https://neon.tech/api-reference) is deprecated. Please migrate your applications to [Neon API V2 reference](https://neon.tech/api-reference/v2/). The base URL for Neon API v2 is `https://neon.tech/api-reference/v2/`.
+[Neon API v1](https://neon.tech/api-reference) is deprecated. Please migrate your applications to [Neon API v2](https://neon.tech/api-reference/v2/). The base URL for Neon API v2 is `https://console.neon.tech/api/v2/`.
 </Admonition>
 
 The following `cURL` example uses the `/projects` endpoint to retrieve projects that belong to your Neon account.
@@ -50,7 +50,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 
 where:
 
-- `"https://neon.tech/api-reference/v2/projects"` is the resource URL, which includes the base URL for the Neon API and the `/projects` endpoint.
+- `"https://console.neon.tech/api/v2/"` is the resource URL, which includes the base URL for the Neon API and the `/projects` endpoint.
 - The `"Accept: application/json"` in the header specifies the accepted response type.
 - The `Authorization: Bearer $NEON_API_KEY` entry in the header specifies your API key. Replace `$NEON_API_KEY` with an actual 64-bit API key. A request without this header, or containing an invalid or revoked API key, fails and returns a `401 Unauthorized` HTTP status code.
 - [`jq`](https://stedolan.github.io/jq/) is an optional third-party tool that formats the JSON response, making it easier to read.
@@ -76,4 +76,4 @@ A response for a Neon user with a single project appears similar to the followin
 }
 ```
 
-Refer to the [Neon API Reference](https://neon.tech/api-reference/v2/) for other supported Neon API endpoints.
+Refer to the [Neon API Reference](https://neon.tech/api-reference/v2/) for other supported Neon API methods.

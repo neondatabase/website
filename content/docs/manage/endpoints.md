@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-An endpoint is the compute instance associated with a branch. A single read-write endpoint is created for your project's [root branch](../../reference/glossary/#root-branch) (`main`) by default.
+An endpoint is a Neon compute instance. A single read-write endpoint is created for your project's [root branch](../../reference/glossary/#root-branch) (`main`) by default.
 
 To connect to a database that resides in a branch, you must connect via an endpoint that is associated with the branch. The following diagram shows the project's root branch (`main`) and a child branch, both of which have an associated endpoint. Applications and clients connect to a branch via an endpoint.
 
@@ -19,9 +19,9 @@ Project
                             |---- database (mydb)  
 ```
 
-Endpoints can be  managed independently of branches. For example, you can create and delete endpoints as necessary, assigning them to the branch you want to connect to. However, creating an endpoint is only necessary and only permitted if you have a one or more branches without an endpoint, as an endpoint must be assigned to a branch, and a branch can have only one endpoint. Attempting to create an endpoint for a branch that already has an endpoint results in an error.
+Endpoints can be  managed independently of branches. For example, you can create and delete endpoints as necessary, assigning them to the branch you want to connect to. However, creating an endpoint is only permitted if you have a branch without an endpoint, as an endpoint must be assigned to a branch. Also, a branch can have only one endpoint. Attempting to create an endpoint for a branch that already has an endpoint results in an error.
 
-Tier limits define the number of endpoints that you can create in a Neon project and the compute resources (vCPUs and RAM) available to an endpoint. Neon [Free Tier](../../introduction/technical-preview-free-tier) users can create up to 3 endpoints.
+Tier limits define the number of endpoints that you can create in a Neon project and the compute resources (vCPUs and RAM) available to an endpoint. The Neon [Free Tier](../../introduction/technical-preview-free-tier) allows up to 3 endpoints.
 
 ## Create an endpoint
 
