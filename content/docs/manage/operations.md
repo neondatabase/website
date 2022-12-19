@@ -1,5 +1,5 @@
 ---
-title: Project operations
+title: Operations
 enableTableOfContents: true
 isDraft: false
 ---
@@ -22,7 +22,7 @@ Operations include:
 
 ## View operations in the Neon Console
 
-Project operations are displayed in the **Operations** widget on the Neon **Dashboard**. You can also view project operations in **Settings** > **Operations**. The **Operations** page provides more details than the **Dashboard** widget.
+The **Operations** widget on the Neon **Dashboard** displays operations. You can also view operations in **Settings** > **Operations**. The **Operations** page provides additional details.
 
 Operation details include:
 
@@ -34,7 +34,7 @@ Operation details include:
 
 ## View operations with the Neon API
 
-You can use the [Neon API](https://neon.tech/api-reference/v2/) to view project operations. The following methods are provided:
+You can use the [Neon API](https://neon.tech/api-reference/v2/) to view operations. The following methods are provided:
 
 ### List operations
 
