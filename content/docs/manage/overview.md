@@ -3,7 +3,7 @@ title: Overview of the Neon object hierarchy
 enableTableOfContents: true
 isDraft: false
 ---
-Managing your Neon project requires an understanding of the Neon object hierarchy. The following diagram shows how objects in Neon are related:
+Managing your Neon project requires an understanding of the Neon object hierarchy. The following diagram shows how objects in Neon are related. See below for a description of of each object.
 
 ```text
 Neon account
@@ -39,7 +39,7 @@ This is the account used to register with Neon. Neon currently supports register
 
 ## API keys
 
-API keys are global and belong to the your Neon account. API keys are used with the [Neon API](../../reference/api-reference) to create and manage a Neon projects or objects within a Neon project. A Neon account can create unlimited API keys. For more information, see [Manage API keys](../api-keys).
+API keys are global and belong to the Neon account. API keys are used with the [Neon API](../../reference/api-reference) to create and manage a Neon projects or objects within a Neon project. A Neon account can create unlimited API keys. For more information, see [Manage API keys](../api-keys).
 
 ## Projects
 
