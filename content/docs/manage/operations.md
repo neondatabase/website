@@ -13,9 +13,9 @@ Operations include:
 - `create_timeline`: Creates a project
 - `delete_tenant`: Deletes the storage data
 - `delete_timeline`: Deletes a branch
-- `pageserver_tenant_detach`: Detaches the storage data from a region
-- `pageserver_tenant_migrate`: Migrates the storage data to another region
-- `replace_safekeeper`: Replaces the safekeeper
+- `pageserver_tenant_detach`: Detaches the storage data from the old [Pageserver](../../reference/glossary/#pageserver)
+- `pageserver_tenant_migrate`: Attaches thestorage data to the new [Pageserver](../../reference/glossary/#pageserver)
+- `replace_safekeeper`: Replaces the [Safekeeper](../../reference/glossary/#safekeeper)
 - `start_compute`: Starts an endpoint compute resource
 - `stop_compute`: Stops an endpoint compute resource
 - `suspend_compute`: Suspends an endpoint compute resource
