@@ -106,6 +106,8 @@ const members = [
     photo: <StaticImage src="./images/lassi-polonen-photo.jpg" alt="Lassi Pölönen" />,
     name: 'Lassi Pölönen',
     position: 'Site Reliability Engineer',
+    githubUrl: 'https://github.com/lassizci',
+    linkedinUrl: 'https://www.linkedin.com/in/lassipolonen',
   },
   {
     photo: <StaticImage src="./images/dmitry-ivanov-photo.jpg" alt="Dmitry Ivanov" />,
