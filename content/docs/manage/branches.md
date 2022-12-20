@@ -6,14 +6,18 @@ redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
 ---
 
-Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data you can store in each branch.
+Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
 
 A child branch is a copy-on-write clone the data in the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](../../conceptual-guides/branching).
 
-You can create and manage branches using the Neon Console or [Neon API](https://neon.tech/api-reference). This topic covers both methods.
+You can create and manage branches using the Neon Console or [Neon API](https://neon.tech/api-reference/v2/). This topic covers both methods.
 
-Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Projects](../projects/#create-a-project).
+Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Create a project](../projects/#create-a-project).
+
+<Admonition type="important">
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To keep disk space usage to a minimum, it is recommended that you avoid allowing branches to age beyond the 7-day point-in-time restore window.
+</Admonition>
 
 ## Create a branch
 
@@ -29,7 +33,8 @@ To create a branch:
     - **Head**: Creates a branch with data up to the current point in time (the default).
     - **Time**: Creates a branch with data up to the specified date and time.
     - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](../../reference/glossary/#lsn).
-7. Click **Create Branch** to create your branch.
+7. Select whether or not to create an endpoint. An endpoint is a Neon compute instance, which is required to connect to the branch. If you are unsure, you can add an endpoint later.
+8. Click **Create Branch** to create your branch.
 
 You are directed to the **Branches** page where you are shown the details for your new branch.
 
@@ -43,11 +48,9 @@ To view the branches in a Neon project:
 
 ![Branch details](./images/branch_details.png)
 
-<Admonition type="note">
-Each branch is created with a read-write endpoint, which is the compute instance associated with the branch. To connect to a database in a branch, you must connect via an endpoint. For instructions, see [Connect to a branch database](#connect-to-a-branch-database). 
+<Admonition type="tip">
+The **Branches** widget on the project **Dashboard** also shows the branches in a Neon project.
 </Admonition>
-
-The **Branches** widget on the project **Dashboard** also lists the branches in a Neon project. Selecting **Manage** from the **Branches** widget directs you to the **Branches** page, where you can view and manage branches.
 
 ## Connect to a branch
 
@@ -64,7 +67,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 5. Add your password to the connection string as shown below, and connect with `psql`. You can connect using the same user and password that you use to connect to the parent branch.
 
   ```bash
-  psql postgres://casey:<password>@ep-floral-fog-184072.us-east-2.aws.neon.tech/neondb
+  psql postgres://casey:<password>@ep-shrill-limit-432460.us-east-2.aws.neon.tech/neondb
   ```
 
 <Admonition type="tip">
@@ -102,15 +105,19 @@ Neon stores data in its own internal format.
 
 ## Branching with the Neon API
 
-Branch actions performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
+Branch actions performed in the Neon Console can be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [API Keys](../api-keys).
+A Neon API request requires an API key. For information about obtaining an API key, see [Manage API Keys](../api-keys).
 
 ### Create a branch with the API
 
 The following Neon API method creates a branch. Adding the `endpoints` attribute to the call creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without an endpoint.
+
+<Admonition type="note">
+The create branch API method does not require a request body. Without a request body, the method creates a branch from the project's `main` branch without an endpoint.
+</Admonition>
 
 ```text
 POST /projects/{project_id}/branches 
@@ -119,7 +126,7 @@ POST /projects/{project_id}/branches
 The API method appears as follows when specified in a cURL command:
 
 ```curl
-curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
+curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches' \
   -H 'Accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' \
   -H 'Content-Type: application/json' \
@@ -130,12 +137,12 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
     }
   ],
   "branch": {
-    "parent_id": "br-wispy-dew-591433"
+    "parent_id": "<parent_id>"
   }
 }' | jq
 ```
 
-- The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**.
+- The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**, or you can find it by listing the projects for your Neon account using the Neon API.
 - The `<parent_id>` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's root branch (`main`) or a previously created branch.
 
 The response includes information about the branch, the branch's endpoint, and the `create_branch` and `start_compute` operations that have been initiated.
@@ -216,12 +223,12 @@ GET /projects/{project_id}/branches
 The API method appears as follows when specified in a cURL command:
 
 ```curl
-curl 'https://console.neon.tech/api/v2/projects/sparkling-king-781971/branches' \
+curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**.
+The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**, or you can find it by listing the projects for your Neon account using the Neon API.
 
 The response lists the project's root branch and any child branches.
 
@@ -274,7 +281,8 @@ curl -X 'DELETE' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-The `<branch_id>` can be found by listing the branches for your project. The `<branch_id>` is the `id` of a branch. A branch `id` has a `br-` prefix. See [List branches](#list-branches-with-the-api).
+- The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**, or you can find it by listing the projects for your Neon account using the Neon API.
+- The `<branch_id>` can be found by listing the branches for your project. The `<branch_id>` is the `id` of a branch. A branch `id` has a `br-` prefix. See [List branches](#list-branches-with-the-api).
 
 The response shows information about the branch being deleted and the `suspend_compute` and `delete_timeline` operations that were initiated.
 

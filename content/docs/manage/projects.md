@@ -24,7 +24,7 @@ To create a Neon project:
 2. If you are creating your very first project, click **Create your first project**. Otherwise, click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 
-Upon creating a project, you are presented with a dialog that provides a connection string and `.env` file with the connection details for your project. The connection string and `.env` file include your password, which is required to connect from a client or application. Store your connection details in a safe location.
+Upon creating a project, you are presented with a dialog that provides your connection details for the project, including your password. The password is required to connect to databases in the project from a client or application. Store your password in a safe location.
 
 <Admonition type="important">
 After closing the connection information dialog, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Users](../users).
