@@ -8,7 +8,7 @@ In Neon, users are PostgreSQL users. Each Neon project is created with a default
 
 Additional users can be created in a project's root branch or child branches. There is no limit to the number of users you can create.
 
-Users belong to branch. If you create a child branch, users from the parent branch are duplicated in the child branch. For example, if user `sally` exists in the parent branch, user `sally` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the user was created in the parent branch after that point in time, that user is not duplicated the child branch.
+Users belong to a branch. If you create a child branch, users from the parent branch are duplicated in the child branch. For example, if user `sally` exists in the parent branch, user `sally` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the user was created in the parent branch after that point in time, that user is not duplicated the child branch.
 
 <Admonition type="note">
 You can only create database users in the Neon Console or using the [Neon API](https://neon.tech/api-reference). Creating database users directly in PostgreSQL is not yet supported. In Neon, the terms "user" and "role" are synonymous. The Neon API uses the term "role".
