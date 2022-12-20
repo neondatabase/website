@@ -14,20 +14,32 @@ A Neon project is created with the following resources by default:
 - A single read-write endpoint. An endpoint is the compute instance associated with a branch. For more information, see [Endpoints](../branches).
 - A default database, called `neondb`, which resides in the project's root branch.
 - A default PostgreSQL user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
+- A `web_access` PostgreSQL user, which is used by the Neon [SQL Editor](../../get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](../../connect/passwordless-connect).
 
 ## Create a project
 
 To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-2. If you are creating your very first project, click **Create the first project**. Otherwise, click **New Project**.
+2. If you are creating your very first project, click **Create your first project**. Otherwise, click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 
-Upon creating a project, you are presented with a dialog that provides your password for the project, which is required to connect to databases in the project from a client or application. Store your password in a safe location. Your password is also temporarily available in the **Connection Details** widget on the **Neon Dashboard**.
+Upon creating a project, you are presented with a dialog that provides a connection string and `.env` file with the connection details for your project. The connection string and `.env` file include your password, which is required to connect from a client or application. Store your connection details in a safe location.
 
 <Admonition type="important">
-After closing the password dialog, navigating away from the Neon Console, or refreshing the browser page, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Users](../users).
+After closing the connection information dialog, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Users](../users).
 </Admonition>
+
+## Edit a project
+
+Only changing the project name and enabling or disabling connection pooling are permitted when editing a project.
+
+To edit a Neon project:
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+2. Select the project that you want to edit.
+3. Select **Settings** > **General**.
+4. Make your changes and click **Save**.
 
 ## Delete a project
 
