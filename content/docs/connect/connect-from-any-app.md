@@ -61,6 +61,8 @@ psql postgres://casey:<password>@ep-square-sea-260584.us-east-2.aws.neon.tech/ne
 For information about connecting with `psql`, see [Connect with psql](../query-with-psql-editor). Please be aware that some older client libraries and drivers, including older `psql` executables, are built without SNI support and require a workaround. For more information, see [Connecting from older clients](../connectivity-issues).
 
 Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, such as DBeaver, DataGrip, and CLion, do not support inclusion of a user name and password in a database connection string. When you find that a full connection string is not accepted, try entering the user name and password values in the appropriate fields in the tool's UI when configuring a connection to Neon.
+
+Neon enables connection pooling by default using PgBouncer, which may affect connections from certain applications and clients, requiring you to adjust your connection string or the connection pooling configuration for your Neon project. This issue is known to affect Prisma Client and Prisma Migrate.  For more information, see [Connection pooling](../connection-pooling).
 </Admonition>
 
 ## Where do I obtain a password?
