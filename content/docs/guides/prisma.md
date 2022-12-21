@@ -38,9 +38,15 @@ To connect to Neon from Prisma:
 
 2. Add a `DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon connection string that you copied in the previous step.
 
-```shell
-    DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/neondb"
-```
+  ```shell
+  DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/neondb"
+  ```
+
+where:
+
+- `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
+- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<password>` is the database user's password, which is provided to you when you create a Neon project.
 
 <Admonition type="note">
 To use Prisma Client with PgBouncer from a serverless function, add the `?pgbouncer=true` flag to your connection URL. For example:
@@ -60,12 +66,6 @@ Error querying the database: db error: ERROR: prepared statement "s0" already ex
 
 In this case, you can disable connection pooling for your Neon project. See [Configure connection pooling](#configure-connection-pooling).
 </Admonition>
-
-where:
-
-- `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
-- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
-- `<password>` is the database user's password, which is provided to you when you create a Neon project.
 
 ## Configure a shadow database for Prisma Migrate
 
