@@ -19,7 +19,7 @@ With connection pooling enabled, Neon is able to handle up to 1000 connections. 
 
 ## Configure connection pooling
 
-Connection pooling is enabled by default for a Neon project. Configure connection pooling at a more granular level is currently not supported.
+Connection pooling is enabled by default for a Neon project. Configuring connection pooling at a more granular level is currently not supported.
 
 To enable or disable connection pooling for your Neon project:
 
