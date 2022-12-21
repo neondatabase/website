@@ -15,7 +15,7 @@ const CodeBlock = ({ className, children, showLineNumbers, ...otherProps }) => {
 
   const match = /language-(\w+)/.exec(className || '');
   const language = match ? match[1] : DEFAULT_LANGUAGE;
-  const code = children.trim();
+  const code = children?.trim();
 
   return (
     <div className={clsx('group relative', className)} {...otherProps}>
