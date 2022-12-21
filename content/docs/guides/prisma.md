@@ -49,22 +49,13 @@ where:
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 
 <Admonition type="note">
-To use Prisma Client with PgBouncer from a serverless function, add the `?pgbouncer=true` flag to your connection URL. For example:
+Neon enables connection pooling by default using PgBouncer. Using Prisma Client in a PgBouncer-enabled environment from a serverless function may require adding the `?pgbouncer=true` flag to your connection URL. For example:
 
 ```text
 postgres://<user>:<password>@<endpoint_hostname>:5432/neondb?pgbouncer=true
 ```
 
-For more information about using Prisma with PgBouncer, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
-
-Prisma Migrate, however, requires a direct connection to the database, and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in any environment that uses PgBouncer for connection pooling results in the following error:
-
-```text
-Error: undefined: Database error
-Error querying the database: db error: ERROR: prepared statement "s0" already exists
-```
-
-In this case, you can disable connection pooling for your Neon project. See [Configure connection pooling](#configure-connection-pooling).
+For more information, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 </Admonition>
 
 ## Configure a shadow database for Prisma Migrate
