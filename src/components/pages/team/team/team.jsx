@@ -26,6 +26,8 @@ const Team = ({ title, description, members }) => (
               width={144}
               height={144}
               alt={name}
+              // load first 6 images in first screen immediately, the rest lazily
+              loading={index > 5 ? 'lazy' : 'eager'}
             />
             <div className="ml-5 xs:ml-3">
               <h3 className="max-w-[100px] text-2xl font-semibold leading-snug md:max-w-none xs:text-[20px] xs:leading-tight">
