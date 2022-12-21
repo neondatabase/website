@@ -60,7 +60,3 @@ For additional information about Django project settings, see [Django Settings: 
 <Admonition type="note">
 Running Django tests is currently not supported. The Django test runner must be able to create a database for tests, which is not yet supported by Neon.
 </Admonition>
-
-## Need help?
-
-Send a request to [Neon support](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/) to see how others are using Neon.
