@@ -26,7 +26,7 @@ To enable or disable connection pooling for your Neon project:
 1. Navigate to the [Neon console](https://console.neon.tech/).
 2. On the **Dashboard**, select your project.
 3. Select **Settings** > **General**.
-5. Toggle **Enable pooling** to the desired position.
+5. Toggle **Enable pooling** to the desired option.
 6. Click **Save**.
 
 ## Connection pooling notes and limitations
