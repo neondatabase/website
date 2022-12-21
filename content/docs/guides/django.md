@@ -16,7 +16,7 @@ To connect to Neon from a Django application:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your endpoint hostname, user name, and password. This information is required when defining connection settings in your Django project.
+If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
 
 To create a Neon project:
 
@@ -24,7 +24,7 @@ To create a Neon project:
 2. Click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 
-For additional information about creating projects, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
+For additional information about creating projects, see [Set up a project](/docs/get-started-with-neon/setting-up-a-project).
 
 ## Configure Django connection settings
 
@@ -40,7 +40,7 @@ DATABASES = {
         'USER': '<user>',
         'PASSWORD': '<password>',
         'HOST': '<endpoint_hostname>',
-        'PORT': '5432',
+        'PORT': '<port>',
     }
 }
 ```
@@ -48,9 +48,12 @@ DATABASES = {
 where:
 
 - `<dbname>` is the database you are connecting to. The default Neon database is `neondb`.
-- `<user>` is the database user, which is found on the Neon **Dashboard**, under **Connection Details**.
+- `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a project.
-- `<endpoint_hostname>` is the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
+- `<endpoint_hostname>` is the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `<port>` is the PostgreSQL port number. Neon uses the default port, `5432`.
+
+You can find all of the connection details listed above, except for the password, in your database connection string, which can be obtained from the **Connection Details** widget on the Neon **Dashboard**. For more information about obtaining connection details, see [../../connect/connect-from-any-app]. If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
 
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings/#databases), in the Django documentation.
 

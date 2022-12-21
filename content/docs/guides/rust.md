@@ -12,7 +12,7 @@ This guide describes how to create a Neon project and connect to it from a Rust 
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your user name, password, and database name. This information is required when configuring a connection from your Rust app.
+If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
 
 To create a Neon project:
 
@@ -39,6 +39,8 @@ fn main() {
 
 where:
 
-- `<user>` is the database user, which is found on the project **Dashboard**, under **Connection Details**.
-- `<dbname>` is the database name (the default Neon project database is `neondb`).
+- `<user>` is the database user.
+- `<dbname>` is the database name. The default database is `neondb`.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
+
+You can find all of the connection details listed above, except for the password, in your database connection string, which can be obtained from the **Connection Details** widget on the Neon **Dashboard**. For more information about obtaining connection details, see [../../connect/connect-from-any-app]. If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).

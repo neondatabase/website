@@ -15,12 +15,11 @@ To connect to Neon from Symfony with Doctrine:
 
 ## Create a Neon project
 
-To create a Neon project:
+If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
-4. After creating a project, you are directed to the Neon **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the Neon Console or refresh the browser page. Copy the connection string. It is required to configure the connection from Symfony.
 
 ## Configure the connection
 
@@ -32,7 +31,9 @@ DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>:5432/<dbname>?c
 
 where:
 
-- `<user>` is the database user, which is found on the Neon **Dashboard**, under **Connection Details**.
+- `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
-- `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon Dashboard, under **Connection Settings**.
-- `<dbname>` is the database name (the default Neon project database is `neondb`).
+- `<endpoint_hostname>` the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `<dbname>` is the database name. The default database is `neondb`.
+
+You can find all of the connection details listed above, except for the password, in your database connection string, which can be obtained from the **Connection Details** widget on the Neon **Dashboard**. For more information about obtaining connection details, see [../../connect/connect-from-any-app]. If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
