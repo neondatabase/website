@@ -22,3 +22,7 @@ You can query a Neon project database from the Neon SQL Editor or a client. For 
 For information about connecting to Neon from any application or client, see [Connect from any application](../../connect/connect-from-any-app).
 
 All operations supported by the Neon Console can also be performed programmatically using the [Neon API](/docs/reference/api-reference).
+
+## Need help?
+
+Send a request to [Neon support](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/) to see how others are using Neon.

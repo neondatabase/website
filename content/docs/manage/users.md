@@ -49,3 +49,7 @@ To reset a user's password:
 5. Select **Reset password**.
 6. On the confirmation dialog, click **Sure, reset**.
 7. A reset password dialog is displayed. Copy your password or save the `.env` file to a secure location. After you close the reset password dialog, you will no longer be able to access the newly created password.
+
+## Need help?
+
+Send a request to [Neon support](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/) to see how others are using Neon.

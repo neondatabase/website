@@ -60,3 +60,7 @@ In Neon, users are PostgreSQL users. A user is required to create and access a d
 ## Databases
 
 As with any standalone instance of PostgreSQL, a database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In Neon, a database belongs to a branch. The root branch of a Neon project is created with a default database named `neondb`. There is no limit on the number of databases you can create. For more information, see [Manage databases](../databases).
+
+## Need help?
+
+Send a request to [Neon support](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/) to see how others are using Neon.

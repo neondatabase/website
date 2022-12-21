@@ -52,3 +52,7 @@ To delete a project:
 3. Select **Settings** > **General**.
 4. Click **Delete project.**
 5. On the confirmation dialog, click **Delete**.
+
+## Need help?
+
+Send a request to [Neon support](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/) to see how others are using Neon.

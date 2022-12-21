@@ -325,3 +325,7 @@ The response shows information about the branch being deleted and the `suspend_c
 ```
 
 You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches-with-the-api). The deleted branch should no longer be listed.
+
+## Need help?
+
+Send a request to [Neon support](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/) to see how others are using Neon.

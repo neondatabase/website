@@ -41,3 +41,7 @@ To delete a database:
 3. Select a branch to view the databases in the branch.
 4. For the database you want to delete, click the delete icon.
 5. In the confirmation dialog, click **Delete**.
+
+## Need help?
+
+Send a request to [Neon support](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/) to see how others are using Neon.

@@ -77,3 +77,7 @@ A response for a Neon user with a single project appears similar to the followin
 ```
 
 Refer to the [Neon API Reference](https://neon.tech/api-reference/v2/) for other supported Neon API methods.
+
+## Need help?
+
+Send a request to [Neon support](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/) to see how others are using Neon.

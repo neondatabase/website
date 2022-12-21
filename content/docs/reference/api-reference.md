@@ -48,3 +48,7 @@ https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}
 You can use the the [Neon API v2 reference](https://neon.tech/api-reference/v2) to construct and execute Neon API requests. Click **Authorize** to add your API key token, and for each method, click **Try it out** and supply the required parameters and attributes. Click **Execute** to create and submit the request.
 
 The [Neon API v2 reference](https://neon.tech/api-reference/v2) also provides request and response body examples that you can reference when constructing your own requests. For branching API examples, you can also refer to examples provided in [Branching with the Neon API](../../manage/branches/#branching-with-the-neon-api).
+
+## Need help?
+
+Send a request to [Neon support](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/) to see how others are using Neon.
