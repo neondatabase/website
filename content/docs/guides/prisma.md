@@ -72,7 +72,7 @@ where:
 Prisma Migrate is a migration tool that allows you to easily evolve your database schema from prototyping to production. Prisma Migrate requires a shadow database to detect schema drift. This section describes how to configure a second Neon database, which is required to run the `prisma migrate dev` command.
 
 <Admonition type="note">
-Neon enables connection pooling by default using PgBouncer. Prisma Migrate requires a direct connection to the database, and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in an environment that uses PgBouncer for connection pooling results in the following error:
+Neon enables connection pooling by default using PgBouncer. Prisma Migrate requires a direct connection to the database and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in an environment that uses PgBouncer for connection pooling results in the following error:
 
 ```text
 Error: undefined: Database error
@@ -81,7 +81,7 @@ Error querying the database: db error: ERROR: prepared statement "s0" already ex
 
 If you encounter this error, try disabling connection pooling for your Neon project. See [Configure connection pooling](../../connect/connection-pooling/#configure-connection-pooling).
 
-For more information, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
+For more information about this issue, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 </Admonition>
 
 To configure a shadow database:
