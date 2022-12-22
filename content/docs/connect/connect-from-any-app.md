@@ -78,3 +78,7 @@ The **Connection Details** widget on the **Neon Dashboard** also provides connec
 ![Connection details widget](./images/code_connection_examples.png)
 
 Connection examples for various languages and frameworks are also provided in our *Guides* documentation.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

@@ -73,3 +73,7 @@ For information about the commands referred to in this topic, refer to the follo
 - [pg_restore](https://www.postgresql.org/docs/14/app-pgrestore.html)
 - [psql](https://www.postgresql.org/docs/14/app-psql.html)
 - [COPY](https://www.postgresql.org/docs/14/sql-copy.html)
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

@@ -102,3 +102,7 @@ Native client libraries:
 | PostgresClientKit | Swift       | yes                                                      |
 | PostgresNIO       | Swift       |                                                          |
 | postgresql-client | TypeScript  | yes                                                      |
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

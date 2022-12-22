@@ -65,3 +65,7 @@ To delete an endpoint:
 1. In the Neon Console, select **Endpoints**.
 1. Find the endpoint you want to delete, click the &#8942; menu, and select **Delete**.
 1. On the confirmation dialog, click **Delete**.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
