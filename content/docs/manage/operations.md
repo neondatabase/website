@@ -14,6 +14,7 @@ Operations include:
 - `delete_tenant`: Deletes the storage data
 - `delete_timeline`: Deletes a branch
 - `pageserver_tenant_detach`: Detaches the storage data from the old Pageserver
+- `pageserver_tenant_migrate`: Attaches the storage data to the new Pageserver
 - `replace_safekeeper`: Replaces the Safekeeper
 - `start_compute`: Starts an endpoint compute resource
 - `stop_compute`: Stops an endpoint compute resource
