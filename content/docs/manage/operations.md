@@ -31,3 +31,5 @@ Operation details include:
 - **Status**: The status of the operation
 - **Duration**: The amount of time it took the operation to complete
 - **Date**: The date and time the operation occurred
+
+Operations data can also be accessed using the [Neon API](https://neon.tech/api-reference/v2/).
