@@ -33,3 +33,7 @@ Operation details include:
 - **Date**: The date and time the operation occurred
 
 Operations data can also be accessed using the [Neon API](https://neon.tech/api-reference/v2/).
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
