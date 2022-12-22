@@ -20,7 +20,7 @@ Operations include:
 - `stop_compute`: Stops an endpoint compute resource
 - `suspend_compute`: Suspends an endpoint compute resource
 
-## View operations in the Neon Console
+## View operations
 
 The **Operations** widget on the Neon **Dashboard** displays operations. You can also view operations in **Settings** > **Operations**.
 
@@ -32,7 +32,27 @@ Operation details include:
 - **Duration**: The amount of time it took the operation to complete
 - **Date**: The date and time the operation occurred
 
-Operations data can also be accessed using the [Neon API](https://neon.tech/api-reference/v2/).
+## View operations with the Neon API
+
+You can also view operations data using the [Neon API](https://neon.tech/api-reference/v2/), which provides additional operation details. For example:
+
+```json
+{
+  "operation": {
+    "id": "97c7a650-e4ff-43d7-8c58-4c67f5050167",
+    "project_id": "autumn-disk-484331",
+    "branch_id": "br-wispy-dew-591433",
+    "endpoint_id": "ep-orange-art-714542",
+    "action": "check_availability",
+    "status": "finished",
+    "failures_count": 0,
+    "created_at": "2022-12-09T08:47:52Z",
+    "updated_at": "2022-12-09T08:47:56Z"
+  }
+}
+```
+
+For information about using the Neon API, see [Neon API](../../reference/api-reference/).
 
 ## Need help?
 
