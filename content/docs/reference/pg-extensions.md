@@ -5,6 +5,8 @@ enableTableOfContents: true
 
 Neon supports the PostgreSQL extensions shown in the following table. For extension documentation, select the extension version.
 
+To request support for additional extensions, please contact us at [support@neon.tech](mailto:support@neon.tech) or post your request to the [Neon community forum](https://community.neon.tech/).
+
 Unless otherwise noted, supported extensions can be installed from the Neon SQL Editor using [CREATE EXTENSION](https://www.postgresql.org/docs/14/sql-createextension.html) syntax.
 
 ```sql
@@ -47,4 +49,4 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 ## Need help?
 
-Send a request to [Neon support](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/) to see how others are using Neon.
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

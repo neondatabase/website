@@ -48,4 +48,4 @@ The SQL Editor maintains a query history for the project. To view your query his
 
 ## Need help?
 
-Send a request to [Neon support](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/) to see how others are using Neon.
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
