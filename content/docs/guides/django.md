@@ -53,7 +53,7 @@ where:
 - `<endpoint_hostname>` is the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 - `<port>` is the PostgreSQL port number. Neon uses the default port, `5432`.
 
-You can find all of the connection details listed above, except for the password, in your database connection string, which can be obtained from the **Connection Details** widget on the Neon **Dashboard**. For more information about obtaining connection details, see [../../connect/connect-from-any-app]. If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
+You can find all of the connection details listed above, except for the password, in your database connection string, which can be obtained from the **Connection Details** widget on the Neon **Dashboard**. For more information about obtaining connection details, see [Connect from any app](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
 
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings/#databases), in the Django documentation.
 
