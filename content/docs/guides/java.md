@@ -57,3 +57,7 @@ spring.datasource.url=jdbc:postgresql://<endpoint_hostname>/<dbname>?user=<user>
 ```
 
 Refer to the [Connect with JDBC](#connect-with-jdbc) section above for information about obtaining connection details for your Neon database.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

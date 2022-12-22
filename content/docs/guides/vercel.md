@@ -67,3 +67,7 @@ const result = await sql.unsafe(req.body);
 <Admonition type="important">
 Never expose your Neon credentials to the browser.
 </Admonition>
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

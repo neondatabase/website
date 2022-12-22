@@ -108,3 +108,7 @@ Result(1) [
   }
 ]
 ```
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
