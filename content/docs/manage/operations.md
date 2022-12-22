@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-An operation is an action performed on a Neon resource. Operations can be user-initiated or initiated by the Neon Control Plane. User-initiated operations result from actions such as creating a branch or deleting a database. Operations initiated by the Neon Control Plane may include suspending a compute instance after a period of inactivity or checking the availability of a compute instance, for example. You can monitor operations to keep an eye on the overall health of your Neon project or to check if an individual operation completed successfully.
+An operation is an action performed on a Neon resource. Operations can be user-initiated or initiated by the Neon Control Plane. User-initiated operations result from actions such as creating a branch or deleting a database. Operations initiated by the Neon Control Plane may include suspending a compute instance after a period of inactivity or checking the availability of a compute instance, for example. You can monitor operations to keep an eye on the overall health of your Neon project or to check the status of an individual operation.
 
 Operations include:
 
@@ -21,7 +21,7 @@ Operations include:
 
 ## View operations in the Neon Console
 
-The **Operations** widget on the Neon **Dashboard** displays operations. You can also view operations in **Settings** > **Operations**. The **Operations** page provides additional details.
+The **Operations** widget on the Neon **Dashboard** displays operations. You can also view operations in **Settings** > **Operations**.
 
 Operation details include:
 
