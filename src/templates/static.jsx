@@ -19,7 +19,7 @@ const StaticTemplate = ({
         <h1 className="t-5xl font-semibold">{title}</h1>
       </Container>
       <Container size="xs">
-        <Content className="mt-8 2xl:mt-7 xl:mt-6" content={content} />
+        <Content className="mt-8 2xl:mt-7 xl:mt-6" content={content} asHTML />
       </Container>
     </article>
   </Layout>
