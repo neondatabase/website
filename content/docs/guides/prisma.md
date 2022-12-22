@@ -49,7 +49,7 @@ where:
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 
 <Admonition type="note">
-Neon enables connection pooling by default using PgBouncer. Using Prisma Client in a PgBouncer-enabled environment from a serverless function may require adding the `?pgbouncer=true` flag to your connection URL. For example:
+Using Prisma Client from a serverless function may require adding the `?pgbouncer=true` flag to your connection URL. For example:
 
 ```text
 postgres://<user>:<password>@<endpoint_hostname>:5432/neondb?pgbouncer=true
@@ -63,14 +63,14 @@ For more information, refer to the [Prisma documentation](https://www.prisma.io/
 Prisma Migrate is a migration tool that allows you to easily evolve your database schema from prototyping to production. Prisma Migrate requires a shadow database to detect schema drift. This section describes how to configure a second Neon database, which is required to run the `prisma migrate dev` command.
 
 <Admonition type="note">
-Neon enables connection pooling by default using PgBouncer. Prisma Migrate requires a direct connection to the database and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in an environment that uses PgBouncer for connection pooling results in the following error:
+Prisma Migrate requires a direct connection to the database and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in an environment that enables PgBouncer for connection pooling results in the following error:
 
 ```text
 Error: undefined: Database error
 Error querying the database: db error: ERROR: prepared statement "s0" already exists
 ```
 
-If you encounter this error, try disabling connection pooling for your Neon project. See [Configure connection pooling](../../connect/connection-pooling/#configure-connection-pooling).
+If you encounter this error, ensure that connection pooling in Neon is disabled. See [Configure connection pooling](../../connect/connection-pooling/#configure-connection-pooling).
 
 For more information about this issue, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 </Admonition>
