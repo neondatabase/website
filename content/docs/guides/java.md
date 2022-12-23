@@ -19,7 +19,7 @@ To connect to Neon with JDBC or from a Spring Data project:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your project ID, database name, user, and password. This information is required when defining JDBC connection settings.
+If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
 
 To create a Neon project:
 
@@ -27,7 +27,7 @@ To create a Neon project:
 2. Click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 
-For additional information about creating projects, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
+For additional information about creating projects, see [Set up a project](/docs/get-started-with-neon/setting-up-a-project).
 
 ## Connect with JDBC
 
@@ -39,10 +39,12 @@ jdbc:postgresql://<endpoint_hostname>/<dbname>?user=<user>&password=<password>
 
 where:
 
-- `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
-- `<dbname>` is the name of the database in your Neon project. `neondb` is the default database created with each Neon project.
-- `<user>` is the database user, which is found on the Neon **Dashboard**, under **Connection Details**.
+- `<endpoint_hostname>` the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `<dbname>` is the name of the database. The default Neon database is `neondb`.
+- `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a project.
+
+You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
 
 ## Connect from Spring Data
 
@@ -54,4 +56,8 @@ Connecting from a Spring Data project requires specifying the datasource URL in 
 spring.datasource.url=jdbc:postgresql://<endpoint_hostname>/<dbname>?user=<user>&password=<password>
 ```
 
-Refer to the [Connect with JDBC](#connect-with-jdbc) section above for information about Neon `endpoint_hostname`, `dbname`, `user`, and `password` credentials.
+Refer to the [Connect with JDBC](#connect-with-jdbc) section above for information about obtaining connection details for your Neon database.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
