@@ -49,7 +49,7 @@ where:
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 
 <Admonition type="note">
-Using Prisma Client from a serverless function may require adding the `?pgbouncer=true` flag to your connection URL. For example:
+Using Prisma Client from a serverless function may require adding the `?pgbouncer=true` flag to your connection URL to enable connection pooling. For example:
 
 ```text
 postgres://<user>:<password>@<endpoint_hostname>:5432/neondb?pgbouncer=true

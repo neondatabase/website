@@ -29,8 +29,8 @@ To enable connection pooling for your Neon project:
 
 ## Connection pooling notes and limitations
 
-- Neon uses PgBouncer in _transaction mode_. PostgreSQL features such as prepared statements and [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html) are not supported with connection pooling in _transaction mode_. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section, in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
-- Some clients and applications may require connection pooling. For example, to use Prisma Client with PgBouncer from a serverless function, you have to add the `?pgbouncer=true` flag to your PostgreSQL connection URL. For Neon, this appears similar to the following example:
+- Neon uses PgBouncer in _transaction mode_. This mode does not support PostgreSQL features such as prepared statements and [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section, in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
+- Some clients and applications may require connection pooling. For example, to use Prisma Client with PgBouncer from a serverless function, you can add the `?pgbouncer=true` flag to your PostgreSQL connection URL to enable connection pooling. For Neon, this appears similar to the following example:
 
   ```text
   postgres://<user>:<password>@<endpoint_hostname>:5432/neondb?pgbouncer=true
@@ -43,6 +43,6 @@ To enable connection pooling for your Neon project:
   Error querying the database: db error: ERROR: prepared statement "s0" already exists
   ```
 
-  You may encounter this error with other applications that require a direct connection to PostgreSQL or that are not compatible with PgBouncer in `transaction mode`. In this case, you can disable connection pooling in Neon.
+  You may encounter this error with other applications that require a direct connection to PostgreSQL or that are not compatible with PgBouncer in `transaction mode`. In these cases, do not enable connection pooling in Neon.
   
   For more information about using Prisma in a PgBouncer-enabled environment, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
