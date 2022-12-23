@@ -14,9 +14,6 @@ Operations include:
 - `create_timeline`: Creates a branch. This operation occurs when creating child branch or when creating a new project, which includes a `main` branch.
 - `delete_tenant`: Deletes the storage data when a Neon project is deleted.
 - `delete_timeline`: Deletes a branch. The terms _timeline_ and _branch_ are synonymous. The term _timeline_ is used internally in Neon.
-- `tenant_detach`: Detaches the storage data when migrating a Neon project to another Neon [Pageserver](../../reference/glossary/#pageserver) node.
-- `tenant_migrate`: Attaches the storage data when migrating a Neon project to another Neon [Pageserver](../../reference/glossary/#pageserver) node.
-- `replace_safekeeper`: Replaces the [Safekeeper](../../reference/glossary/#safekeeper).
 - `start_compute`: Starts an [endpoint](../../reference/glossary/#endpoint) when there is an event or action that requires compute resources.
 - `stop_compute`: Stops an [endpoint](../../reference/glossary/#endpoint). This operation occurs when a project is deleted.
 - `suspend_compute`: Suspends an [endpoint](../../reference/glossary/#endpoint) when it is not being used.
