@@ -18,8 +18,8 @@ const DocFooter = ({ fileOriginPath, slug }) => {
     setIsFeedbackSent(true);
     if (!feedbackSentData?.includes(slug)) {
       setFeedbackSentData([...feedbackSentData, slug]);
-      sendGtagEvent('page-feedback', {
-        rate: isPositive ? 1 : 0,
+      sendGtagEvent('page_feedback', {
+        rate: isPositive ? 'like' : 'dislike',
       });
     }
   };

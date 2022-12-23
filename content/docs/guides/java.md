@@ -10,12 +10,12 @@ This guide describes how to create a Neon project and connect to it with Java Da
 
 The JDBC API is a Java API for relational databases. PostgreSQL has a well-supported open-source JDBC driver which can be used to access Neon. All popular Java frameworks use JDBC internally. To connect to Neon, you are only required to provide a connection URL.
 
-For additional information about JDBC, refer to the standard JDBC API documentation and [PostgreSQL JDBC Driver documentation](https://jdbc.postgresql.org/documentation/head/index.html).
+For additional information about JDBC, refer to the standard JDBC API documentation and [PostgreSQL JDBC Driver documentation](https://jdbc.postgresql.org/documentation).
 
 To connect to Neon with JDBC or from a Spring Data project:
 
 1. [Create a Neon project](#create-a-neon-project)
-2. [Connect with JDBC](#configure-go-project-connection-settings) or [Connect from Spring Data](#connect-from-spring-data)
+2. [Connect with JDBC](#connect-with-jdbc) or [Connect from Spring Data](#connect-from-spring-data)
 
 ## Create a Neon project
 

@@ -124,7 +124,7 @@ export const query = graphql`
         internal: { contentFilePath: { regex: "/release-notes/((?!RELEASE_NOTES_TEMPLATE).)*$/" } }
         fields: { isDraft: { in: $draftFilter } }
       }
-      sort: { fields: internal___contentFilePath, order: DESC }
+      sort: { internal: { contentFilePath: DESC } }
       limit: $limit
       skip: $skip
     ) {

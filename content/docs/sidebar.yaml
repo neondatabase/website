@@ -16,9 +16,9 @@
       slug: introduction/regions
 - title: Get started
   items:
-    - title: Signing up
+    - title: Sign up
       slug: get-started-with-neon/signing-up
-    - title: Setting up a project
+    - title: Set up a project
       slug: get-started-with-neon/setting-up-a-project
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
@@ -78,10 +78,12 @@
       slug: guides/symfony
 - title: Import data
   items:
-    - title: Import data from PostgreSQL
-      slug: how-to-guides/import-an-existing-database
-    - title: Import data from Heroku
-      slug: how-to-guides/import-from-heroku
+    - title: Import from PostgreSQL
+      slug: import/import-from-postgres
+    - title: Import from Heroku
+      slug: import/import-from-heroku
+    - title: Import from CSV
+      slug: import/import-from-csv
 - title: Security
   slug: security
 - title: Reference
@@ -90,7 +92,9 @@
       slug: reference/api-reference
     - title: Glossary
       slug: reference/glossary
-    - title: Compatibility
+    - title: PostgreSQL Compatibility
       slug: reference/compatibility
+    - title: PostgreSQL Extensions
+      slug: reference/pg-extensions
 - title: Release notes
   slug: release-notes

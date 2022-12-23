@@ -10,7 +10,7 @@ redirectFrom:
 To use the SQL Editor:
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
-2. On the **Dashboard**, select your project.
+2. Select your project.
 3. Select the **SQL Editor**.
 4. Enter a query into the editor and click **Run** to view the results.
 
@@ -44,4 +44,8 @@ You can rename or delete a saved query by selecting **Rename** or **Delete** fro
 
 ## Viewing the query history
 
-The SQL Editor maintains a query history for the project. To view your query history, select **History** in the left pane of the SQL Editor.
+The SQL Editor maintains a query history for the project. To view your query history, select **History** in the left pane of the SQL Editor. You can click an item in the **History** list to view the query that was run.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
