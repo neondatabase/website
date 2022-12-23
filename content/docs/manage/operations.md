@@ -14,7 +14,7 @@ Operations include:
 - `delete_tenant`: Deletes the storage data when a project is deleted.
 - `delete_timeline`: Deletes a branch
 - `pageserver_tenant_detach`: Detaches the storage data from the Pageserver
-- `pageserver_tenant_migrate`: Attaches the storage data to the new Pageserver
+- `pageserver_tenant_migrate`: Attaches the storage data to the Pageserver to perform the migration of the project between Neon Pageserver nodes
 - `replace_safekeeper`: Replaces the Safekeeper
 - `start_compute`: Starts an endpoint compute resource
 - `stop_compute`: Stops an endpoint compute resource
