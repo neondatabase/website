@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-An operation is an action performed by Neon Control Plane on a Neon resource. Operations are typically initiated by user actions, such as creating a branch or deleting a database. Some Operations may be initiated by the Neon Control Plane, such as suspending a compute instance after a period of inactivity or checking the availability of a compute instance. You can monitor operations to keep an eye on the overall health of your Neon project or to check the status or the duration of specific operations.
+An operation is an action performed by Neon Control Plane on a Neon resource. Operations are typically initiated by user actions, such as creating a branch or deleting a database. Some Operations may be initiated by the Neon Control Plane, such as suspending a compute instance after a period of inactivity or checking the availability of a compute instance. You can monitor operations to keep an eye on the overall health of your Neon project or to check the status or duration of specific operations.
 
 Operations include:
 
@@ -13,7 +13,7 @@ Operations include:
 - `create_compute`: Creates a Neon endpoint. Neon compute instances are referred to as [endpoints](../../reference/glossary/#endpoint).
 - `create_timeline`: Creates a branch. This operation occurs when creating child branch or when creating a new project, which includes a `main` branch.
 - `delete_tenant`: Deletes the storage data when a Neon project is deleted.
-- `delete_timeline`: Deletes a branch. The terms _timeline_ and _branch_ are synonymous. The term _timeline_ is used internally in Neon, but timelines are exposed to users as branches in the Neon Console and API.
+- `delete_timeline`: Deletes a branch. The terms _timeline_ and _branch_ are synonymous. The term _timeline_ is used internally in Neon.
 - `tenant_detach`: Detaches the storage data when migrating a Neon project to another Neon [Pageserver](../../reference/glossary/#pageserver) node.
 - `tenant_migrate`: Attaches the storage data when migrating a Neon project to another Neon [Pageserver](../../reference/glossary/#pageserver) node.
 - `replace_safekeeper`: Replaces the [Safekeeper](../../reference/glossary/#safekeeper).
