@@ -27,11 +27,11 @@ The **Operations** widget on the Neon **Dashboard** displays operations. You can
 
 Operation details include:
 
-- **Action/ID**: The operation ID
-- **Branch**: The branch on which the operation was performed
-- **Status**: The status of the operation
-- **Duration**: The amount of time it took the operation to complete
-- **Date**: The date and time the operation occurred
+- **Action/ID**: The action performed by the operation.
+- **Branch**: The branch on which the operation was performed.
+- **Status**: The status of the operation. Possible status values .include `running`, `finished`, `failed`, and `scheduling`.
+- **Duration**: The duration of the operation.
+- **Date**: The date and time the operation occurred.
 
 ## View operations with the Neon API
 
