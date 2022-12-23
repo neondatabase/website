@@ -29,7 +29,7 @@ Operation details include:
 
 - **Action/ID**: The action performed by the operation.
 - **Branch**: The branch on which the operation was performed.
-- **Status**: The status of the operation. Possible status values .include `running`, `finished`, `failed`, and `scheduling`.
+- **Status**: The status of the operation.
 - **Duration**: The duration of the operation.
 - **Date**: The date and time the operation occurred.
 
