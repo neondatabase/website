@@ -78,9 +78,7 @@ where:
 - `<dbname>` is the database you are connecting to. The default Neon database is `neondb`.
 - `<endpoint_hostname>` is the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 
-You can find all of the connection details listed above, except for the password, in your database connection string, which can be obtained from the **Connection Details** widget on the Neon **Dashboard**. For more information about obtaining connection details, see [../../connect/connect-from-any-app]. If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
-
-The `.go` file example shown above is also available on [The Go Playground](https://play.golang.com/p/gl69dT0HtHN).
+You can find all of the connection details listed above, except for the password, in your database connection string, which can be obtained from the **Connection Details** widget on the Neon **Dashboard**. For more information about obtaining connection details, see [Connect from any app](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
 
 ## Need help?
 
