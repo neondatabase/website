@@ -8,7 +8,7 @@ An operation is an action performed by Neon Control Plane on a Neon resource. Op
 
 Operations include:
 
-- `apply_config`: Applies a new configuration to a Neon object or resource
+- `apply_config`: Applies a new configuration to a Neon object or resource, creating a new Postgres User or Postgres Database will trigger this operation
 - `check_availability`: Checks the availability of an endpoint compute resource
 - `create_timeline`: Creates a project
 - `delete_tenant`: Deletes the storage data
