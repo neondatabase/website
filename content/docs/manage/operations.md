@@ -34,7 +34,7 @@ Operation details include:
 
 ## View operations with the Neon API
 
-You can also view operations data using the [Neon API](https://neon.tech/api-reference/v2/), which provides additional operation details. For example:
+You can also view operations using the Neon API, which provides operations data in an unmodified format. For example:
 
 ```json
 {
