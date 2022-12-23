@@ -40,7 +40,7 @@ fn main() {
 where:
 
 - `<user>` is the database user.
-- `<dbname>` is the database name. The default database is `neondb`.
+- `<dbname>` is the name of the database. The default Neon database is `neondb`
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 
 You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).

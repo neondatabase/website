@@ -34,7 +34,7 @@ where:
 - `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 - `<endpoint_hostname>` the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
-- `<dbname>` is the database name. The default database is `neondb`.
+- `<dbname>` is the name of the database. The default Neon database is `neondb`
 
 You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
 

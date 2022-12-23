@@ -47,7 +47,7 @@ DATABASES = {
 
 where:
 
-- `<dbname>` is the database you are connecting to. The default Neon database is `neondb`.
+- `<dbname>` is the name of the database. The default Neon database is `neondb`.
 - `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a project.
 - `<endpoint_hostname>` is the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.

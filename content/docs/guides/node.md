@@ -63,7 +63,7 @@ ENDPOINT_ID='<endpoint_id>'
 where:
 
 - `<endpoint_hostname>` the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
-- `<dbname>` is the name of the database. The default database is `neondb`.
+- `<dbname>` is the name of the database. The default Neon database is `neondb`
 - `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a project.
 - `<endpoint_id>` is the ID of the branch endpoint that you are connecting to. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396`.
