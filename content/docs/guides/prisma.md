@@ -60,7 +60,7 @@ Prisma Migrate is a migration tool that allows you to easily evolve your databas
 
 To configure a shadow database:
 
-1. Create a branch in your Neon project and make sure to copy the connection string. Refer to [Create a branch](../../manage/branches/#create-a-branch) for instructions.
+1. Create another database in your Neon project and copy the connection string. Refer to [Create a database](../../manage/databases/#create-a-database) for instructions.
 
 1. Add the `shadowDatabaseUrl` setting to your `prisma/schema.prisma` file to identify the shadow database URL:
 
