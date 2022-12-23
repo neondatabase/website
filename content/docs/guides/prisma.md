@@ -60,7 +60,7 @@ Prisma Migrate is a migration tool that allows you to easily evolve your databas
 
 To configure a shadow database:
 
-1. Create a second Neon project and make sure to copy the connection string. Refer to [Create a Neon project](#create-a-neon-project) for instructions.
+1. Create another database in your Neon project and copy the connection string. Refer to [Create a database](../../manage/databases/#create-a-database) for instructions. For information about obtaining a connection string, see [Connect from any application](../../connect/connect-from-any-app/).
 
 1. Add the `shadowDatabaseUrl` setting to your `prisma/schema.prisma` file to identify the shadow database URL:
 
@@ -75,7 +75,11 @@ To configure a shadow database:
 1. Add a `SHADOW_DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon connection string that you copied in the previous step.
 
    ```shell
-   SHADOW_DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/main"
+   SHADOW_DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/<dbname>"
    ```
 
 For additional information about shadow databases, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the Prisma documentation.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
