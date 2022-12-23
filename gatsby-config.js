@@ -21,13 +21,6 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'static-pages',
-        path: `${__dirname}/content/static-pages`,
-      },
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: 'docs',

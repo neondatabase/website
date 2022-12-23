@@ -33,27 +33,18 @@ const components = {
 };
 
 // eslint-disable-next-line no-return-assign
-const Content = forwardRef(({ className, content, asHTML }, ref) => {
-  if (asHTML) {
-    return (
-      <div
-        className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}
-        ref={ref}
-      >
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}
-      ref={ref}
-    >
+const Content = forwardRef(({ className, content, asHTML }, ref) => (
+  <div
+    className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}
+    ref={ref}
+  >
+    {asHTML ? (
+      <div dangerouslySetInnerHTML={{ __html: content }} />
+    ) : (
       <MDXProvider components={components}>{content}</MDXProvider>
-    </div>
-  );
-});
+    )}{' '}
+  </div>
+));
 
 Content.propTypes = {
   className: PropTypes.string,
