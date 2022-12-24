@@ -1,5 +1,5 @@
 ---
-title: Compute Lifecycle
+title: Compute lifecycle
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compute-lifecycle
