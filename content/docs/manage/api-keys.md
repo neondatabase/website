@@ -10,7 +10,7 @@ Most actions performed in the Neon Console can be performed using the [Neon API]
 
 API keys are global and belong to your Neon account. They can be used with any project that belongs to your Neon account. A Neon account can create unlimited API keys.
 
-### Generate an API key
+## Generate an API key
 
 An API key is a randomly-generated 64-bit key that you must provide when calling Neon API methods. An API key remains valid until it is revoked.
 
@@ -24,7 +24,7 @@ To generate an API key:
 
 Store your key in a safe location. You will not be able to view or copy the key again after leaving the **Developer Settings** page. You can safely store an API key in a locally installed credential manager or in a credential management service such as the [AWS Key Management Service](https://aws.amazon.com/kms/). If you lose an API key, revoke it and generate a new one.
 
-### Revoke an API key
+## Revoke an API key
 
 An API key that is no longer needed can be revoked. This action cannot be reversed.
 
@@ -34,7 +34,7 @@ To revoke an API key:
 2. Select **Developer Settings** to see a list of API keys.
 3. To revoke a key, click **Revoke**. The key is immediately revoked. Any request using the key now fails.
 
-### Make an API call
+## Make an API call
 
 <Admonition type="important">
 [Neon API v1](https://neon.tech/api-reference) is deprecated. Please migrate your applications to [Neon API v2](https://neon.tech/api-reference/v2/). The base URL for Neon API v2 is `https://console.neon.tech/api/v2/`.
@@ -96,7 +96,7 @@ POST /api_keys
 
 The API method appears as follows when specified in a cURL command:
 
-```curl
+```bash
 curl https://console.neon.tech/api/v2/api_keys \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $NEON_API_KEY" \
@@ -114,7 +114,7 @@ Response:
 
 ### List API keys with the API
 
-The following Neon API method lists branches for the specified project.
+The following Neon API method lists API keys for the your Neon account.
 
 ```text
 GET /api_keys
@@ -122,7 +122,7 @@ GET /api_keys
 
 The API method appears as follows when specified in a cURL command:
 
-```curl
+```bash
 curl "https://console.neon.tech/api/v2/api_keys" \
  -H "Authorization: Bearer $NEON_API_KEY" \
  -H "Accept: application/json"  | jq
@@ -166,7 +166,7 @@ DELETE /api_keys/{key_id}
 
 The API method appears as follows when specified in a cURL command:
 
-```curl
+```bash
 curl -X DELETE \
   'https://console.neon.tech/api/v2/api_keys/177630' \
   -H "Accept: application/json"  \
