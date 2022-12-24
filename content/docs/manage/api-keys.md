@@ -10,7 +10,7 @@ Most actions performed in the Neon Console can be performed using the [Neon API]
 
 API keys are global and belong to your Neon account. They can be used with any project that belongs to your Neon account. A Neon account can create unlimited API keys.
 
-## Generate an API key
+## Create an API key
 
 An API key is a randomly-generated 64-bit key that you must provide when calling Neon API methods. An API key remains valid until it is revoked.
 
@@ -84,7 +84,7 @@ API key actions performed in the Neon Console can be performed using the [Neon A
 
 ### Prerequisites
 
-You create and manage API keys using the Neon API, but you need an API key to start with. You can obtain an initial API key from the Neon Console. For instructions, see [Generate an API key](#generate-an-api-key).
+You create and manage API keys using the Neon API, but you need an API key to start with. You can obtain an initial API key from the Neon Console. For instructions, see [Create an API key](#create-an-api-key).
 
 ### Create an API key with the API
 
