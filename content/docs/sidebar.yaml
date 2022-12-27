@@ -50,6 +50,8 @@
       slug: manage/users
     - title: Databases
       slug: manage/databases
+    - title: Operations
+      slug: manage/operations
 - title: Guides
   items:
     - title: Django
