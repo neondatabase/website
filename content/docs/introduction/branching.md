@@ -22,11 +22,15 @@ Each Neon project has a [root branch](../../reference/glossary#root-branch) call
 
 ## Branch endpoints
 
-Each branch is created with an endpoint, which is the compute instance associated with the branch. Branch endpoints are read-write.
+When creating a new branch, you have the option to create an endpoint. An endpoint is the compute instance associated with the branch.
 
-Your Neon project's [root branch](../../reference/glossary#root-branch) (`main`) also has an endpoint.
+An endpoint allows you to connect to the branch from a client or application and is read-write.
+
+Your Neon project's [root branch](../../reference/glossary#root-branch) (`main`) has an endpoint included by default.
 
 To connect to a database in a branch from a client or application, you must connect to the branch's endpoint. For more information connecting to a branch endpoint, see [Connect to a branch](../../manage/branches/#connect-to-a-branch).
+
+If a branch does not have an endpoint, it acts as a snapshot of the parent branch. You can add endpoint to a branch later if you wish to connect to it.
 
 ## Branching workflows
 
