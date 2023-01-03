@@ -1,5 +1,5 @@
 ---
-title: Sign Up
+title: Sign up
 redirectFrom:
   - /docs/quickstart/console/
   - /docs/cloud/getting-started/
