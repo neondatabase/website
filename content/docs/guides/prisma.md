@@ -70,7 +70,7 @@ Error: undefined: Database error
 Error querying the database: db error: ERROR: prepared statement "s0" already exists
 ```
 
-If you encounter this error, ensure that connection pooling in Neon is disabled. See [Configure connection pooling](../../connect/connection-pooling/#configure-connection-pooling).
+If you encounter this error, ensure that connection pooling in Neon is disabled. See [Enable connection pooling](../../connect/connection-pooling/#enable-connection-pooling).
 
 For more information about this issue, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 </Admonition>

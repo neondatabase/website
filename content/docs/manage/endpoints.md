@@ -30,6 +30,7 @@ To create an endpoint:
 1. In the Neon Console, select **Endpoints**.
 1. Select **New endpoint**.
 1. On the **Create endpoint** dialog, select a branch to assign the endpoint to. The branch you select must not have an associated endpoint.
+1. Choose wether to enable connection pooling. Enabling connection pooling increases the number of connections that the endpoint can support. For more information, see [Connection pooling](../../connect/connection-pooling).
 1. Click **Create endpoint**.
 
 ## View endpoints
@@ -48,13 +49,13 @@ Endpoint details include:
 
 ## Edit an endpoint
 
-You can edit an endpoint to modify the branch the endpoint is associated with. 
+You can edit an endpoint to modify the branch the endpoint is associated with or to enable connection pooling.
 
 To edit an endpoint:
 
 1. In the Neon Console, select **Endpoints**.
 1. Fnd the endpoint you want to edit, click the &#8942; menu, and select **Edit**.
-1. Select a new branch for the endpoint and click **Save**. The branch you select must not have an associated endpoint.
+1. Select a new branch for the endpoint or enable connection pooling and click **Save**. If you are selecting a new branch for the endpoint, the branch must not have an associated endpoint.
 
 ## Delete an endpoint
 
