@@ -15,7 +15,6 @@ Operations include:
 - `delete_tenant`: Deletes the stored data when a Neon project is deleted.
 - `delete_timeline`: Deletes a branch. The terms _timeline_ and _branch_ are synonymous. The term _timeline_ is used internally in Neon.
 - `start_compute`: Starts an endpoint compute instance when there is an event or action that requires compute resources. For example, connecting to a suspended endpoint initiates this operation.
-- `stop_compute`: Stops an endpoint compute instance. This operation occurs when a project is deleted.
 - `suspend_compute`: Suspends an endpoint compute instance after a period of inactivity. For information about how Neon manages compute resources, see [Compute lifecycle](../../introduction/compute-lifecycle/).
 
 ## View operations
