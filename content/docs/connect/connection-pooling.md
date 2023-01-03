@@ -19,7 +19,7 @@ With connection pooling enabled, Neon is able to handle up to 1000 connections. 
 
 ## Enable connection pooling
 
-In Neon, connection pooling is enabled or disabled for individual endpoints compute instances. It is disabled by default. You can enable connection pooling when creating and endpoint or you can enable it later by editing the endpoint.
+In Neon, connection pooling is configured for individual endpoint compute instances. It is disabled by default. You can enable connection pooling when creating or editing an endpoint.
 
 To enable connection pooling for an existing endpoint:
 
@@ -28,6 +28,8 @@ To enable connection pooling for an existing endpoint:
 3. Find the endpoint you want to enable pooling for, click the &#8942; menu, and select **Edit**.
 5. Toggle **Pooler enabled** to the on position.
 6. Click **Save**.
+
+To enable connection pooling when creating an endpoint, see [Create an endpoint](../../manage/endpoints/#create-an-endpoint).
 
 ## Connection pooling notes and limitations
 
