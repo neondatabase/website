@@ -46,6 +46,15 @@ You can rename or delete a saved query by selecting **Rename** or **Delete** fro
 
 The SQL Editor maintains a query history for the project. To view your query history, select **History** in the left pane of the SQL Editor. You can click an item in the **History** list to view the query that was run.
 
+## Explain and Analyze
+
+The Neon SQL Editor provides **Explain** and **Analyze** features.
+
+- The **Explain** feature runs the specified statement with the [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) command, which shows the execution plan for the statement. The **Explain** feature does not actually execute the statement.
+- The **Analyze** feature runs the specified statement with [EXPLAIN ANALYZE](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE). With the `ANALYZE` parameter, the statement is actually executed. Along with `EXPLAIN` estimates, true row counts and the actual run time for each plan node are returned.
+
+Understanding the information provided by **Explain** and **Analyze** features in the Neon SQL Editor requires an understanding of PostgreSQL's [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) command and its `ANALYZE` parameter. Refer to the [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) documentation, and [Using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html), in the _PostgreSQL documentation_.
+
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
