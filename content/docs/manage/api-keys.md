@@ -61,16 +61,18 @@ A response for a Neon user with a single project appears similar to the followin
 {
   "projects": [
     {
-      "id": "autumn-disk-123331",
+      "cpu_used_sec": 0,
+      "id": "purple-shape-411361",
       "platform_id": "aws",
       "region_id": "aws-us-east-2",
-      "name": "autumn-disk-123331",
+      "name": "purple-shape-411361",
       "provisioner": "k8s-pod",
       "pg_version": 15,
       "locked": false,
-      "created_at": "2022-12-07T00:45:05Z",
-      "updated_at": "2022-12-07T00:45:05Z",
-      "proxy_host": "us-east-2.aws.neon.tech"
+      "created_at": "2023-01-03T18:22:56Z",
+      "updated_at": "2023-01-03T18:22:56Z",
+      "proxy_host": "us-east-2.aws.neon.tech",
+      "branch_logical_size_limit": 3072
     }
   ]
 }
