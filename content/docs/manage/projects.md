@@ -192,7 +192,7 @@ Response:
 }
 ```
 
-### List API keys with the API
+### List projects with the API
 
 The following Neon API method lists projects for your Neon account.
 
@@ -231,6 +231,52 @@ Response:
 }
 ```
 
+### Update a project with the API
+
+The following Neon API method updates the specified project.
+
+```text
+PATCH /projects/{project_id}
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/odd-cell-528527' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "project": {
+    "name": "project1"
+  }
+}'
+```
+
+In the example above changes the project name to `project1`.
+
+Response:
+
+```json
+{
+  "project": {
+    "cpu_used_sec": 0,
+    "id": "odd-cell-528527",
+    "platform_id": "aws",
+    "region_id": "aws-us-east-2",
+    "name": "project1",
+    "provisioner": "k8s-pod",
+    "pg_version": 15,
+    "locked": false,
+    "created_at": "2023-01-04T17:33:11Z",
+    "updated_at": "2023-01-04T17:36:17Z",
+    "proxy_host": "us-east-2.aws.neon.tech",
+    "branch_logical_size_limit": 3072
+  },
+  "operations": []
+}
+```
+
 ### Delete a project with the API
 
 The following Neon API method deletes the specified project.
@@ -257,7 +303,7 @@ Response:
     "id": "odd-cell-528527",
     "platform_id": "aws",
     "region_id": "aws-us-east-2",
-    "name": "myproject",
+    "name": "project1",
     "provisioner": "k8s-pod",
     "pg_version": 15,
     "locked": false,
