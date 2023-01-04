@@ -42,6 +42,236 @@ To delete a database:
 4. For the database you want to delete, click the delete icon.
 5. In the confirmation dialog, click **Delete**.
 
+## Manage databases with the Neon API
+
+Database actions performed in the Neon Console can be performed using [Neon API](https://neon.tech/api-reference/v2/) database methods. The following examples demonstrate how to create, view, update, and delete databases using the Neon API. For other database-related methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
+
+In Neon, databases belong to branches, which means that when you create a database, it is created in a particular branch.  Database-related requests are therefore performed using database-related branch API methods.
+
+### Prerequisites
+
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must supply when making an Neon API request.
+
+### Create a database with the API
+
+The following Neon API method creates a database.
+
+```text
+POST /projects/{project_id}/branches/{branch_id}/databases
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "database": {
+    "name": "mydb",
+    "owner_name": "casey"
+  }
+}' | jq
+```
+
+Response:
+
+```json
+{
+  "database": {
+    "id": 1140822,
+    "branch_id": "br-blue-tooth-671580",
+    "name": "mydb",
+    "owner_name": "casey",
+    "created_at": "2023-01-04T21:17:17Z",
+    "updated_at": "2023-01-04T21:17:17Z"
+  },
+  "operations": [
+    {
+      "id": "6fc5969a-c445-4bc1-9f94-4dfbab4ad293",
+      "project_id": "hidden-cell-763301",
+      "branch_id": "br-blue-tooth-671580",
+      "endpoint_id": "ep-aged-math-668285",
+      "action": "apply_config",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2023-01-04T21:17:17Z",
+      "updated_at": "2023-01-04T21:17:17Z"
+    },
+    {
+      "id": "a0e78873-399a-45e4-9728-dde0b36f0941",
+      "project_id": "hidden-cell-763301",
+      "branch_id": "br-blue-tooth-671580",
+      "endpoint_id": "ep-aged-math-668285",
+      "action": "suspend_compute",
+      "status": "scheduling",
+      "failures_count": 0,
+      "created_at": "2023-01-04T21:17:17Z",
+      "updated_at": "2023-01-04T21:17:17Z"
+    }
+  ]
+}
+```
+
+### List databases with the API
+
+The following Neon API method lists databases for the specified branch.
+
+```text
+GET /projects/{project_id}/branches/{branch_id}/databases
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+```
+
+Response:
+
+```json
+{
+  "databases": [
+    {
+      "id": 1139149,
+      "branch_id": "br-blue-tooth-671580",
+      "name": "neondb",
+      "owner_name": "casey",
+      "created_at": "2023-01-04T18:38:23Z",
+      "updated_at": "2023-01-04T18:38:23Z"
+    },
+    {
+      "id": 1140822,
+      "branch_id": "br-blue-tooth-671580",
+      "name": "mydb",
+      "owner_name": "casey",
+      "created_at": "2023-01-04T21:17:17Z",
+      "updated_at": "2023-01-04T21:17:17Z"
+    }
+  ]
+}
+```
+
+### Update a database with the API
+
+The following Neon API method updates the specified database.
+
+```text
+PATCH /projects/{project_id}/branches/{branch_id}/databases/{database_name}
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases/mydb' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "database": {
+    "name": "database1"
+  }
+}' | jq
+```
+
+Response:
+
+```json
+{
+  "database": {
+    "id": 1140822,
+    "branch_id": "br-blue-tooth-671580",
+    "name": "database1",
+    "owner_name": "casey",
+    "created_at": "2023-01-04T21:17:17Z",
+    "updated_at": "2023-01-04T21:17:17Z"
+  },
+  "operations": [
+    {
+      "id": "7a3e05b0-385e-490c-a6a3-60bbb8906f57",
+      "project_id": "hidden-cell-763301",
+      "branch_id": "br-blue-tooth-671580",
+      "endpoint_id": "ep-aged-math-668285",
+      "action": "apply_config",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2023-01-04T21:19:35Z",
+      "updated_at": "2023-01-04T21:19:35Z"
+    },
+    {
+      "id": "f2805f7f-4d83-4c58-b3d1-dc678e699106",
+      "project_id": "hidden-cell-763301",
+      "branch_id": "br-blue-tooth-671580",
+      "endpoint_id": "ep-aged-math-668285",
+      "action": "suspend_compute",
+      "status": "scheduling",
+      "failures_count": 0,
+      "created_at": "2023-01-04T21:19:35Z",
+      "updated_at": "2023-01-04T21:19:35Z"
+    }
+  ]
+}
+```
+
+### Delete a database with the API
+
+The following Neon API method deletes the specified database.
+
+```text
+DELETE /projects/{project_id}/branches/{branch_id}/databases/{database_name}
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+curl -X 'DELETE' \
+  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases/database1' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+```
+
+Response:
+
+```json
+{
+  "database": {
+    "id": 1140822,
+    "branch_id": "br-blue-tooth-671580",
+    "name": "database1",
+    "owner_name": "casey",
+    "created_at": "2023-01-04T21:17:17Z",
+    "updated_at": "2023-01-04T21:17:17Z"
+  },
+  "operations": [
+    {
+      "id": "1a52afa4-f21b-4ed0-a97f-f7abda9ab49f",
+      "project_id": "hidden-cell-763301",
+      "branch_id": "br-blue-tooth-671580",
+      "endpoint_id": "ep-aged-math-668285",
+      "action": "apply_config",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2023-01-04T21:20:24Z",
+      "updated_at": "2023-01-04T21:20:24Z"
+    },
+    {
+      "id": "f3fe437e-259a-4442-a750-3613d89dbbff",
+      "project_id": "hidden-cell-763301",
+      "branch_id": "br-blue-tooth-671580",
+      "endpoint_id": "ep-aged-math-668285",
+      "action": "suspend_compute",
+      "status": "scheduling",
+      "failures_count": 0,
+      "created_at": "2023-01-04T21:20:24Z",
+      "updated_at": "2023-01-04T21:20:24Z"
+    }
+  ]
+}
+```
+
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
