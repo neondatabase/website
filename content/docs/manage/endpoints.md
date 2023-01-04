@@ -66,6 +66,94 @@ To delete an endpoint:
 1. Find the endpoint you want to delete, click the &#8942; menu, and select **Delete**.
 1. On the confirmation dialog, click **Delete**.
 
+## Manage endpoints with the Neon API
+
+Endpoint actions performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, update, and delete endpoints using the Neon API. For other endpoint-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
+
+### Prerequisites
+
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must supply when making an Neon API request.
+
+### Create a project with the API
+
+The following Neon API method creates an endpoint. The Neon Free Tier permits three endpoints per account.
+
+```text
+POST /endpoints 
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+
+```
+
+Response:
+
+```json
+
+```
+
+### List endpoints with the API
+
+The following Neon API method lists endpoints for the specified project.
+
+```text
+GET /projects/{project_id}/endpoints
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+
+```
+
+Response:
+
+```json
+
+```
+
+### Update an endpoint with the API
+
+The following Neon API method updates the specified endpoint.
+
+```text
+PATCH /projects/{project_id}/endpoints/{endpoint_id}
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+
+```
+
+Response:
+
+```json
+
+```
+
+### Delete an endpoint with the API
+
+The following Neon API method deletes the specified project.
+
+```text
+DELETE /projects/{project_id}/endpoints/{endpoint_id}
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+
+```
+
+Response:
+
+```json
+
+```
+
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
