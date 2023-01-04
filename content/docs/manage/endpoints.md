@@ -72,11 +72,11 @@ Endpoint actions performed in the Neon Console can be performed using the [Neon 
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must supply when making an Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must supply when making an Neon API request.
 
-### Create a project with the API
+### Create an endpoint with the API
 
-The following Neon API method creates an endpoint. The Neon Free Tier permits three endpoints per account.
+The following Neon API method creates an endpoint. The Neon Free Tier permits three endpoints per account. The branch that you specify cannot have an existing endpoint. An endpoint must be associated with a branch, and a branch can have only one endpoint. Neon currently supports read-write endpoints only.
 
 ```text
 POST /endpoints 
@@ -85,18 +85,64 @@ POST /endpoints
 The API method appears as follows when specified in a cURL command:
 
 ```bash
-
+curl -X 'POST' \
+  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "endpoint": {
+    "branch_id": "br-blue-tooth-671580",
+    "type": "read_write"
+  }
+}'
 ```
 
 Response:
 
 ```json
-
+{
+  "endpoint": {
+    "host": "ep-aged-math-668285.us-east-2.aws.neon.tech",
+    "id": "ep-aged-math-668285",
+    "project_id": "hidden-cell-763301",
+    "branch_id": "br-blue-tooth-671580",
+    "autoscaling_limit_min_cu": 1,
+    "autoscaling_limit_max_cu": 1,
+    "region_id": "aws-us-east-2",
+    "type": "read_write",
+    "current_state": "init",
+    "pending_state": "active",
+    "settings": {
+      "pg_settings": {}
+    },
+    "pooler_enabled": false,
+    "pooler_mode": "transaction",
+    "disabled": false,
+    "passwordless_access": true,
+    "created_at": "2023-01-04T18:39:41Z",
+    "updated_at": "2023-01-04T18:39:41Z",
+    "proxy_host": "us-east-2.aws.neon.tech"
+  },
+  "operations": [
+    {
+      "id": "e0e4da91-8576-4348-913b-aaf61a46d314",
+      "project_id": "hidden-cell-763301",
+      "branch_id": "br-blue-tooth-671580",
+      "endpoint_id": "ep-aged-math-668285",
+      "action": "start_compute",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2023-01-04T18:39:41Z",
+      "updated_at": "2023-01-04T18:39:41Z"
+    }
+  ]
+}
 ```
 
 ### List endpoints with the API
 
-The following Neon API method lists endpoints for the specified project.
+The following Neon API method lists endpoints for the specified project. An endpoint belongs to a Neon project.
 
 ```text
 GET /projects/{project_id}/endpoints
@@ -105,18 +151,68 @@ GET /projects/{project_id}/endpoints
 The API method appears as follows when specified in a cURL command:
 
 ```bash
-
+curl -X 'GET' \
+  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
 Response:
 
 ```json
-
+{
+  "endpoints": [
+    {
+      "host": "ep-young-art-646685.us-east-2.aws.neon.tech",
+      "id": "ep-young-art-646685",
+      "project_id": "hidden-cell-763301",
+      "branch_id": "br-shy-credit-899131",
+      "autoscaling_limit_min_cu": 1,
+      "autoscaling_limit_max_cu": 1,
+      "region_id": "aws-us-east-2",
+      "type": "read_write",
+      "current_state": "idle",
+      "settings": {
+        "pg_settings": {}
+      },
+      "pooler_enabled": false,
+      "pooler_mode": "transaction",
+      "disabled": false,
+      "passwordless_access": true,
+      "last_active": "2023-01-04T18:38:25Z",
+      "created_at": "2023-01-04T18:38:23Z",
+      "updated_at": "2023-01-04T18:43:36Z",
+      "proxy_host": "us-east-2.aws.neon.tech"
+    },
+    {
+      "host": "ep-aged-math-668285.us-east-2.aws.neon.tech",
+      "id": "ep-aged-math-668285",
+      "project_id": "hidden-cell-763301",
+      "branch_id": "br-blue-tooth-671580",
+      "autoscaling_limit_min_cu": 1,
+      "autoscaling_limit_max_cu": 1,
+      "region_id": "aws-us-east-2",
+      "type": "read_write",
+      "current_state": "idle",
+      "settings": {
+        "pg_settings": {}
+      },
+      "pooler_enabled": false,
+      "pooler_mode": "transaction",
+      "disabled": false,
+      "passwordless_access": true,
+      "last_active": "2023-01-04T18:39:42Z",
+      "created_at": "2023-01-04T18:39:41Z",
+      "updated_at": "2023-01-04T18:44:48Z",
+      "proxy_host": "us-east-2.aws.neon.tech"
+    }
+  ]
+}
 ```
 
 ### Update an endpoint with the API
 
-The following Neon API method updates the specified endpoint.
+The following Neon API method updates the specified endpoint. The example reassigns the endpoint to another branch by changing the `branch_id`. The branch that you specify cannot have an existing endpoint. An endpoint must be associated with a branch, and a branch can have only one endpoint.
 
 ```text
 PATCH /projects/{project_id}/endpoints/{endpoint_id}
@@ -125,18 +221,75 @@ PATCH /projects/{project_id}/endpoints/{endpoint_id}
 The API method appears as follows when specified in a cURL command:
 
 ```bash
-
+curl -X 'PATCH' \
+  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints/ep-young-art-646685' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "endpoint": {
+    "branch_id": "br-green-lab-617946"
+  }
+}'
 ```
 
 Response:
 
 ```json
-
+{
+  "endpoint": {
+    "host": "ep-young-art-646685.us-east-2.aws.neon.tech",
+    "id": "ep-young-art-646685",
+    "project_id": "hidden-cell-763301",
+    "branch_id": "br-green-lab-617946",
+    "autoscaling_limit_min_cu": 1,
+    "autoscaling_limit_max_cu": 1,
+    "region_id": "aws-us-east-2",
+    "type": "read_write",
+    "current_state": "idle",
+    "pending_state": "idle",
+    "settings": {
+      "pg_settings": {}
+    },
+    "pooler_enabled": false,
+    "pooler_mode": "transaction",
+    "disabled": false,
+    "passwordless_access": true,
+    "last_active": "2023-01-04T18:38:25Z",
+    "created_at": "2023-01-04T18:38:23Z",
+    "updated_at": "2023-01-04T18:47:36Z",
+    "proxy_host": "us-east-2.aws.neon.tech"
+  },
+  "operations": [
+    {
+      "id": "03bf0bbc-cc46-4863-a5c4-f31fc1881228",
+      "project_id": "hidden-cell-763301",
+      "branch_id": "br-green-lab-617946",
+      "endpoint_id": "ep-young-art-646685",
+      "action": "apply_config",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2023-01-04T18:47:36Z",
+      "updated_at": "2023-01-04T18:47:36Z"
+    },
+    {
+      "id": "c96be00c-6340-4fb2-b80a-5ae96f469969",
+      "project_id": "hidden-cell-763301",
+      "branch_id": "br-green-lab-617946",
+      "endpoint_id": "ep-young-art-646685",
+      "action": "suspend_compute",
+      "status": "scheduling",
+      "failures_count": 0,
+      "created_at": "2023-01-04T18:47:36Z",
+      "updated_at": "2023-01-04T18:47:36Z"
+    }
+  ]
+}
 ```
 
 ### Delete an endpoint with the API
 
-The following Neon API method deletes the specified project.
+The following Neon API method deletes the specified endpoint. An endpoint belongs to a a Neon project, so in addition to the `endpoint_id`, you must specify the `project_id`.
 
 ```text
 DELETE /projects/{project_id}/endpoints/{endpoint_id}
@@ -145,13 +298,40 @@ DELETE /projects/{project_id}/endpoints/{endpoint_id}
 The API method appears as follows when specified in a cURL command:
 
 ```bash
-
+curl -X 'DELETE' \
+  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints/ep-young-art-646685' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
 Response:
 
 ```json
-
+{
+  "endpoint": {
+    "host": "ep-young-art-646685.us-east-2.aws.neon.tech",
+    "id": "ep-young-art-646685",
+    "project_id": "hidden-cell-763301",
+    "branch_id": "br-green-lab-617946",
+    "autoscaling_limit_min_cu": 1,
+    "autoscaling_limit_max_cu": 1,
+    "region_id": "aws-us-east-2",
+    "type": "read_write",
+    "current_state": "idle",
+    "settings": {
+      "pg_settings": {}
+    },
+    "pooler_enabled": false,
+    "pooler_mode": "transaction",
+    "disabled": false,
+    "passwordless_access": true,
+    "last_active": "2023-01-04T18:38:25Z",
+    "created_at": "2023-01-04T18:38:23Z",
+    "updated_at": "2023-01-04T18:47:45Z",
+    "proxy_host": "us-east-2.aws.neon.tech"
+  },
+  "operations": []
+}
 ```
 
 ## Need help?
