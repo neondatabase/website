@@ -67,7 +67,8 @@ Prisma Migrate requires a direct connection to the database and currently does n
 
 ```text
 Error: undefined: Database error
-Error querying the database: db error: ERROR: prepared statement "s0" already exists
+Error querying the database: db error: ERROR: prepared statement "s0" already 
+exists
 ```
 
 If you encounter this error, ensure that connection pooling in Neon is disabled. See [Enable connection pooling](../../connect/connection-pooling/#enable-connection-pooling).
