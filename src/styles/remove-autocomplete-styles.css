@@ -3,7 +3,17 @@
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
-      transition: background-color 5000s;
+      transition: background-color 600000s 0s, color 600000s 0s;
+    }
+  }
+
+  .remove-autocomplete-styles-black-theme {
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      box-shadow: 0 0 0 1000px #404040 inset;
+      border: 1px solid #404040;
+      transition: background-color 600000s 0s, color 600000s 0s;
     }
   }
 }
