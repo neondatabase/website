@@ -15,7 +15,7 @@ To connect to Neon from a Go application:
 
 ## Create a Neon project
 
-When creating a Neon project, take note of your user name, password, database name, and project ID. This information is required when defining connection settings in your Go application.
+If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
 
 To create a Neon project:
 
@@ -23,7 +23,7 @@ To create a Neon project:
 2. Click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 
-For additional information about creating projects, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
+For additional information about creating projects, see [Set up a project](/docs/get-started-with-neon/setting-up-a-project).
 
 ## Configure Go application connection settings
 
@@ -33,7 +33,7 @@ Connecting to Neon requires configuring connection settings in your Go project's
 Neon is fully compatible with the `sql/db` package and common PostgreSQL drivers, such as `lib/pq` and `pgx`.
 </Admonition>
 
-Specify the connection settings for your Neon project in your `.go` file, as shown in the following example:
+Specify the connection settings in your `.go` file, as shown in the following example:
 
 ```go
 package main
@@ -73,9 +73,13 @@ func main() {
 
 where:
 
-- `<user>` is the database user, which is found on the Neon **Dashboard**, under **Connection Details**.
+- `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a project.
-- `<dbname>` is the name of the database in your Neon project. `neondb` is the default database created with each Neon project.
-- `<endpoint_hostname>` is the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
+- `<dbname>` is the name of the database. The default Neon database is `neondb`.
+- `<endpoint_hostname>` is the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 
-The `.go` file example shown above is also available on [The Go Playground](https://play.golang.com/p/gl69dT0HtHN).
+You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

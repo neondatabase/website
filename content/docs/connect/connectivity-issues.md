@@ -85,11 +85,11 @@ Native client libraries:
 | npgsql            | C#          | yes                                                      |
 | Postmodern        | Common Lisp |                                                          |
 | crystal-pg        | Crystal     |                                                          |
-| Postgrex          | Elixir      |                                                          |
+| Postgrex          | Elixir      | yes ([configure ssl_opts with server_name_indication](https://hexdocs.pm/postgrex/Postgrex.html#start_link/1-ssl-client-authentication)) |
 | epgsql            | Erlang      |                                                          |
 | pgo               | Erlang      |                                                          |
 | github.com/lib/pq | Go          | no (SNI support is in review)                            |
-| pgx               | Go          | no (SNI support is merged, not released yet)              |
+| pgx               | Go          | no (SNI support is merged, not released yet)             |
 | go-pg             | Go          | no (except verify-full mode)                             |
 | JDBC              | Java        | yes                                                      |
 | R2DBC             | Java        |                                                          |
@@ -102,3 +102,7 @@ Native client libraries:
 | PostgresClientKit | Swift       | yes                                                      |
 | PostgresNIO       | Swift       |                                                          |
 | postgresql-client | TypeScript  | yes                                                      |
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

@@ -5,6 +5,8 @@ enableTableOfContents: true
 
 Neon supports the PostgreSQL extensions shown in the following table. For extension documentation, select the extension version.
 
+To request support for additional extensions, please contact us at [support@neon.tech](mailto:support@neon.tech) or post your request to the [Neon community forum](https://community.neon.tech/).
+
 Unless otherwise noted, supported extensions can be installed from the Neon SQL Editor using [CREATE EXTENSION](https://www.postgresql.org/docs/14/sql-createextension.html) syntax.
 
 ```sql
@@ -44,3 +46,7 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 | tsm_system_time          | [1.0](https://www.postgresql.org/docs/14/tsm-system-time.html)  | [1.0](https://www.postgresql.org/docs/15/tsm-system-time.html)   |                                                                                                                    |
 | unaccent                 | [1.1](https://www.postgresql.org/docs/14/unaccent.html)         | [1.1](https://www.postgresql.org/docs/15/unaccent.html)          |                                                                                                                    |
 | uuid-ossp                | [1.1](https://www.postgresql.org/docs/14/uuid-ossp.html)        | [1.1](https://www.postgresql.org/docs/15/uuid-ossp.html)         |                                                                                                                    |
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

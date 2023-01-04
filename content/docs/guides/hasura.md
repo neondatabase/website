@@ -36,15 +36,15 @@ Use the following instructions to connect to an existing Neon database from Hasu
 
 ### Prerequisites
 
-- An existing Neon account. If you do not have one, see [Signing up](/docs/get-started-with-neon/signing-up).
-- An existing Neon project. If you do not have a Neon project, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
+- An existing Neon account. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up).
+- An existing Neon project. If you do not have a Neon project, see [Set up a project](/docs/get-started-with-neon/setting-up-a-project).
 - A connection string for a branch in Neon project that includes your password. For example:
 
-  ```sh
-  `postgres://<user>:<password>@<endpoint_hostname>:5432/neondb`
+  ```text
+  postgres://<user>:<password>@<endpoint_hostname>:5432/neondb
   ```
 
-  Your project's connection string can be found on the Neon **Dashboard**, under **Connection Details**. If you have misplaced your password, you can either reset it or create a new user. Users are managed on the **Settings**  page in the Neon Console.
+  Your project's connection string can be found on the Neon **Dashboard**, under **Connection Details**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
 
 ### Add Neon as a data source
 
@@ -77,3 +77,7 @@ To view the newly created tables from the Neon Console:
 ## Import existing data to Neon
 
 If you are migrating from Hasura with Heroku PostgreSQL to Neon, refer to the [Import from Heroku](/docs/import/import-from-heroku) guide for data import instructions. For general data import instructions, see [Import from PostgreSQL](/docs/import/import-from-postgres).
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

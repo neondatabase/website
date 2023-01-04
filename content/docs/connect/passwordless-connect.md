@@ -73,3 +73,7 @@ SELECT 1
  2022-09-11 23:12:15.083565+00
 (1 row)
 ```
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

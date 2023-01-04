@@ -18,10 +18,11 @@ To create a Neon project and connect to it from Prisma:
 
 To create a Neon project:
 
+If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
+
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
-4. After creating a project, you are directed to the Neon **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the Neon Console or refresh the browser page. Copy the connection string. It is required to connect to Neon from your Prisma app.
 
 ## Connect to Neon from Prisma
 
@@ -44,9 +45,11 @@ To connect to Neon from Prisma:
 
 where:
 
-- `<endpoint_hostname>` the hostname of the branch endpoint, which is found on the Neon **Dashboard**, under **Connection Settings**.
-- `<user>` is the database user, which is found on the Neon Console **Dashboard** tab, under **Connection Details**.
+- `<endpoint_hostname>` the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
+
+You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
 
 <Admonition type="note">
 Using Prisma Client from a serverless function may require adding the `?pgbouncer=true` flag to your connection URL to enable connection pooling. For example:
@@ -78,7 +81,7 @@ For more information about this issue, refer to the [Prisma documentation](https
 
 To configure a shadow database:
 
-1. Create a second Neon project and make sure to copy the connection string. Refer to [Create a Neon project](#create-a-neon-project) for instructions.
+1. Create another database in your Neon project and copy the connection string. Refer to [Create a database](../../manage/databases/#create-a-database) for instructions. For information about obtaining a connection string, see [Connect from any application](../../connect/connect-from-any-app/).
 
 1. Add the `shadowDatabaseUrl` setting to your `prisma/schema.prisma` file to identify the shadow database URL:
 
@@ -93,7 +96,11 @@ To configure a shadow database:
 1. Add a `SHADOW_DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon connection string that you copied in the previous step.
 
    ```shell
-   SHADOW_DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/main"
+   SHADOW_DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/<dbname>"
    ```
 
 For additional information about shadow databases, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the Prisma documentation.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

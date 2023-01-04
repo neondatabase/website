@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/get-started-with-neon/api-keys
 ---
 
-Most actions performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference). Using the Neon API requires an API key. This topic describes how to generate, revoke, and use API keys.
+Most actions performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference/v2/). Using the Neon API requires an API key. This topic describes how to generate, revoke, and use API keys.
 
 API keys are global and belong to your Neon account. They can be used with any project that belongs to your Neon account. A Neon account can create unlimited API keys.
 
@@ -77,3 +77,7 @@ A response for a Neon user with a single project appears similar to the followin
 ```
 
 Refer to the [Neon API Reference](https://neon.tech/api-reference/v2/) for other supported Neon API methods.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
