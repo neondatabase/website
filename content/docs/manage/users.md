@@ -22,7 +22,7 @@ To create a user:
 2. Select a project.
 3. Select **Settings** > **Users**.
 4. Select **New User**.
-5. In the user creation dialog, select the branch where you want to create the user and specify a user name.
+5. In the user creation dialog, select the branch where you want to create the user and specify a user name. The length of the user name is limited to 63 bytes.
 6. Click **Create**.
 
 ## Delete a user
