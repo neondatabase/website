@@ -50,10 +50,10 @@ The SQL Editor maintains a query history for the project. To view your query his
 
 The Neon SQL Editor provides **Explain** and **Analyze** features.
 
-- The **Explain** feature runs the specified statement with the [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) command, which shows the execution plan for the statement. The **Explain** feature does not actually execute the statement.
-- The **Analyze** feature runs the specified statement with [EXPLAIN ANALYZE](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE). With the `ANALYZE` parameter, the statement is actually executed. Along with `EXPLAIN` estimates, true row counts and the actual run time for each plan node are returned.
+- The **Explain** feature runs the specified query with the [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) command, which shows the execution plan for the query. The **Explain** feature does not actually execute the query.
+- The **Analyze** feature runs the specified query with [EXPLAIN ANALYZE](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE). The `ANALYZE` parameter causes the query to be executed and returns actual row counts and run times for plan nodes along with the `EXPLAIN` estimates.
 
-Understanding the information provided by **Explain** and **Analyze** features in the Neon SQL Editor requires an understanding of PostgreSQL's [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) command and its `ANALYZE` parameter. Refer to the [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) documentation, and [Using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html), in the _PostgreSQL documentation_.
+Understanding the information provided by the **Explain** and **Analyze** features in the Neon SQL Editor requires an understanding of PostgreSQL's [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) command and its `ANALYZE` parameter. Refer to the [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) documentation and the [Using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html) topic in the _PostgreSQL documentation_.
 
 ## Need help?
 
