@@ -70,19 +70,25 @@ To delete an endpoint:
 
 Endpoint actions performed in the Neon Console can also be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, update, and delete endpoints using the Neon API. For other endpoint-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
 
+<Admonition type="note">
+The API examples that have a request body may not demonstrate all of the user-configurable attributes that are available to you. To view all of request body attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://neon.tech/api-reference/v2/).
+</Admonition>
+
+The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
+
 ### Prerequisites
 
 A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/api-keys/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create an endpoint with the API
 
-The following Neon API method creates an endpoint. The Neon Free Tier permits three endpoints per account. The branch that you specify cannot have an existing endpoint. An endpoint must be associated with a branch, and a branch can have only one endpoint. Neon currently supports read-write endpoints only.
+The following Neon API method creates an endpoint. The [Neon Free Tier](../../introduction/technical-preview-free-tier/) permits three endpoints per account. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Endpoint/createProjectEndpoint).
 
 ```text
 POST /endpoints 
 ```
 
-The API method appears as follows when specified in a cURL command:
+The API method appears as follows when specified in a cURL command. The branch that you specify cannot have an existing endpoint. An endpoint must be associated with a branch, and a branch can have only one endpoint. Neon currently supports read-write endpoints only.
 
 ```bash
 curl -X 'POST' \
@@ -142,7 +148,7 @@ Response:
 
 ### List endpoints with the API
 
-The following Neon API method lists endpoints for the specified project. An endpoint belongs to a Neon project.
+The following Neon API method lists endpoints for the specified project. An endpoint belongs to a Neon project. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Endpoint/listProjectEndpoints).
 
 ```text
 GET /projects/{project_id}/endpoints
@@ -212,13 +218,13 @@ Response:
 
 ### Update an endpoint with the API
 
-The following Neon API method updates the specified endpoint. The example reassigns the endpoint to another branch by changing the `branch_id`. The branch that you specify cannot have an existing endpoint. An endpoint must be associated with a branch, and a branch can have only one endpoint.
+The following Neon API method updates the specified endpoint. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Endpoint/updateProjectEndpoint).
 
 ```text
 PATCH /projects/{project_id}/endpoints/{endpoint_id}
 ```
 
-The API method appears as follows when specified in a cURL command:
+The API method appears as follows when specified in a cURL command. The example reassigns the endpoint to another branch by changing the `branch_id`. The branch that you specify cannot have an existing endpoint. An endpoint must be associated with a branch, and a branch can have only one endpoint.
 
 ```bash
 curl -X 'PATCH' \
@@ -289,13 +295,13 @@ Response:
 
 ### Delete an endpoint with the API
 
-The following Neon API method deletes the specified endpoint. An endpoint belongs to a Neon project, so in addition to the `endpoint_id`, you must specify the `project_id`.
+The following Neon API method deletes the specified endpoint. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Endpoint/deleteProjectEndpoint).
 
 ```text
 DELETE /projects/{project_id}/endpoints/{endpoint_id}
 ```
 
-The API method appears as follows when specified in a cURL command:
+The API method appears as follows when specified in a cURL command. An endpoint belongs to a Neon project, so in addition to the `endpoint_id`, you must specify the `project_id`.
 
 ```bash
 curl -X 'DELETE' \
