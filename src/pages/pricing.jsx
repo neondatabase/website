@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 
 import Hero from 'components/pages/pricing/hero';
@@ -14,6 +13,7 @@ const Pricing = () => (
 
 export default Pricing;
 
+// eslint-disable-next-line react/prop-types
 export const Head = ({ location: { pathname } }) => (
   <SEO {...SEO_DATA.pricing} pathname={pathname} />
 );

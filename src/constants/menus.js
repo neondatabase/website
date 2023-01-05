@@ -11,6 +11,10 @@ export default {
       to: LINKS.branching,
     },
     {
+      text: 'Pricing',
+      to: LINKS.pricing,
+    },
+    {
       text: 'Company',
       items: [
         {
@@ -145,6 +149,10 @@ export default {
     {
       text: 'Branching',
       to: LINKS.branching,
+    },
+    {
+      text: 'Pricing',
+      to: LINKS.pricing,
     },
     {
       text: 'About us',
