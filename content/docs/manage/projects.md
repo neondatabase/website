@@ -55,11 +55,11 @@ To delete a project:
 
 ## Manage projects with the Neon API
 
-Project actions performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, and delete projects using the Neon API. For other project-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
+Project actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete projects using the Neon API. For other project-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must supply when making an Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/api-keys/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a project with the API
 
@@ -239,7 +239,7 @@ The following Neon API method updates the specified project.
 PATCH /projects/{project_id}
 ```
 
-The API method appears as follows when specified in a cURL command:
+The API method appears as follows when specified in a cURL command. This example changes the project name to `project1`.
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/odd-cell-528527' \
@@ -252,8 +252,6 @@ curl 'https://console.neon.tech/api/v2/projects/odd-cell-528527' \
   }
 }'
 ```
-
-In the example above changes the project name to `project1`.
 
 Response:
 
