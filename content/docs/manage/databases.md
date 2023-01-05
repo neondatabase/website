@@ -44,13 +44,15 @@ To delete a database:
 
 ## Manage databases with the Neon API
 
-Database actions performed in the Neon Console can be performed using [Neon API](https://neon.tech/api-reference/v2/) database methods. The following examples demonstrate how to create, view, update, and delete databases using the Neon API. For other database-related methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
+Database actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, update, and delete databases using the Neon API. For other database-related methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
 
-In Neon, databases belong to branches, which means that when you create a database, it is created in a particular branch.  Database-related requests are therefore performed using database-related branch API methods.
+<Admonition type="note">
+In Neon, databases belong to branches, which means that when you create a database, it is created in a branch.  Database-related requests are therefore performed using branch API methods.
+</Admonition>
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must supply when making an Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/api-keys/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a database with the API
 
