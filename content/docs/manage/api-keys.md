@@ -84,17 +84,19 @@ API key actions performed in the Neon Console can also be performed using the [N
 
 ### Prerequisites
 
-You can create and manage API keys using the Neon API, but you need an API key to start with. You can obtain an API key from the Neon Console. For instructions, see [Create an API key](#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+You can create and manage API keys using the Neon API, but you need an API key to start with. You can obtain an API key from the Neon Console. For instructions, see [Create an API key](#create-an-api-key). In the examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+
+The `jq` option specified in each example is an optional third-party tool that formats the JSON response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
 
 ### Create an API key with the API
 
-The following Neon API method creates an API key.
+The following Neon API method creates an API key. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/API%20Key/createApiKey).
 
 ```text
 POST /api_keys 
 ```
 
-The API method appears as follows when specified in a cURL command:
+The API method appears as follows when specified in a cURL command. You must specify the `key_name` attribute and with a name for the API key.
 
 ```bash
 curl https://console.neon.tech/api/v2/api_keys \
@@ -105,6 +107,8 @@ curl https://console.neon.tech/api/v2/api_keys \
 
 Response:
 
+The response includes an `id` for the key and a generated 64-bit `key` value, which can be used to access the Neon API. API keys should stored and managed securely, as they provide access to all objects in your Neon account.
+
 ```json
 {
   "id": 177630,
@@ -114,13 +118,13 @@ Response:
 
 ### List API keys with the API
 
-The following Neon API method lists API keys for the your Neon account.
+The following Neon API method lists API keys for the your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/API%20Key/listApiKeys).
 
 ```text
 GET /api_keys
 ```
 
-The API method appears as follows when specified in a cURL command:
+The API method appears as follows when specified in a cURL command. No parameters are required.
 
 ```bash
 curl "https://console.neon.tech/api/v2/api_keys" \
@@ -158,7 +162,7 @@ Response:
 
 ### Revoke an API key with the API
 
-The following Neon API method revokes the specified API key.
+The following Neon API method revokes the specified API key. The `key_id` is a required parameter. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/API%20Key/revokeApiKey).
 
 ```text
 DELETE /api_keys/{key_id}
