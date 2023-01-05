@@ -9,8 +9,8 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Field from 'components/shared/field';
 import Link from 'components/shared/link';
-import { HUBSPOT_PRICING_FORM_ID } from 'constants/forms';
-import { sendHubspotFormData } from 'utils/forms';
+import { HUBSPOT_PRICING_FORM_ID, FORM_STATES } from 'constants/forms';
+import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 const schema = yup
   .object({
@@ -32,9 +32,8 @@ const Hero = () => {
   });
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
+  const [formError, setFormError] = useState('');
   const context = {
     hutk: hubspotutk,
     pageUri: href,
@@ -42,7 +41,8 @@ const Hero = () => {
 
   const onSubmit = async (data) => {
     const { name, email, companyWebsite, companySize, message } = data;
-    setIsLoading(true);
+    setFormError('');
+    setFormState(FORM_STATES.LOADING);
     try {
       const response = await sendHubspotFormData({
         formId: HUBSPOT_PRICING_FORM_ID,
@@ -72,16 +72,21 @@ const Hero = () => {
       });
 
       if (response.ok) {
-        setIsLoading(false);
-        setIsSuccess(true);
+        doNowOrAfterSomeTime(() => {
+          setFormState(FORM_STATES.SUCCESS);
+          setFormError('');
+        }, 2000);
       } else {
-        setIsLoading(false);
-        setErrorMessage('Something went wrong. Please reload the page and try again.');
+        setFormState(FORM_STATES.ERROR);
+        setFormError('Something went wrong. Please reload the page and try again.');
       }
     } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-      setErrorMessage('Something went wrong. Please reload the page and try again.');
+      if (error.name !== 'AbortError') {
+        doNowOrAfterSomeTime(() => {
+          setFormState(FORM_STATES.ERROR);
+          setFormError(error?.message ?? error);
+        }, 2000);
+      }
     }
   };
   return (
@@ -104,36 +109,38 @@ const Hero = () => {
               <Field
                 name="name"
                 label="Your name *"
-                register={register('name')}
+                autoComplete="name"
                 error={errors.name?.message}
+                {...register('name')}
               />
               <Field
                 name="email"
                 label="Email address *"
                 type="email"
-                register={register('email')}
+                autoComplete="email"
                 error={errors.email?.message}
+                {...register('email')}
               />
               <div className="flex space-x-10 md:grid md:gap-y-5 md:space-x-0">
                 <Field
                   className="shrink-0 basis-[56%]"
                   name="companyWebsite"
                   label="Company website"
-                  register={register('companyWebsite')}
+                  {...register('companyWebsite')}
                 />
-                <Field name="companySize" label="Company size" register={register('companySize')} />
+                <Field name="companySize" label="Company size" {...register('companySize')} />
               </div>
-              <Field name="message" label="Message" tag="textarea" register={register('message')} />
+              <Field name="message" label="Message" tag="textarea" {...register('message')} />
               <div className="relative mt-2 flex items-center xl:mt-1 md:mt-0 md:flex-col md:items-start">
                 <Button
                   className="w-[194px] !px-9 !py-6 !text-lg md:order-1 md:mt-6 md:w-full"
                   type="submit"
-                  loading={isLoading}
+                  loading={formState === FORM_STATES.LOADING}
                   theme="primary"
                   size="xs"
-                  disabled={isLoading || isSuccess}
+                  disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
                 >
-                  {isSuccess ? 'Sent!' : 'Send message'}
+                  {formState === FORM_STATES.SUCCESS ? 'Sent!' : 'Send message'}
                 </Button>
                 <p className="ml-7 text-left leading-tight md:ml-0">
                   By submitting you agree to{' '}
@@ -147,9 +154,9 @@ const Hero = () => {
                   </Link>
                   .
                 </p>
-                {errorMessage && (
+                {formError && (
                   <span className="absolute left-1/2 top-[calc(100%+1rem)] w-full -translate-x-1/2 text-sm leading-none text-secondary-1">
-                    {errorMessage}
+                    {formError}
                   </span>
                 )}
               </div>
@@ -174,11 +181,12 @@ const Hero = () => {
                   Only pay for what you use.
                 </p>
               </div>
-              <div className="absolute bottom-0 left-1/2 w-full -translate-x-1/2 xl:w-[460px] lg:static lg:w-[300px] lg:translate-x-0 lg:pt-2.5 md:mt-4 md:w-[334px] md:pt-0">
+              <div className="absolute bottom-0 left-1/2 w-[620px] -translate-x-1/2 xl:w-[554px] lg:static lg:w-[320px] lg:translate-x-0 lg:pt-2.5 md:mt-4 md:w-[334px] md:pt-0">
                 <StaticImage
                   src="./images/illustration-pricing.png"
                   alt="Illustration"
                   objectFit="cover"
+                  loading="eager"
                 />
               </div>
             </div>
