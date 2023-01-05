@@ -85,17 +85,19 @@ const Hero = () => {
     }
   };
   return (
-    <section className="bg-black pt-44 pb-40 text-white">
+    <section className="bg-black pt-44 pb-40 text-white xl:pt-[136px] xl:pb-36 lg:pt-9 lg:pb-28 md:pb-24">
       <Container className="text-center" size="md">
-        <h1 className="text-[72px] font-bold leading-tight">Talk to our Sales team</h1>
-        <p className="mx-auto mt-1.5 max-w-[787px] text-xl">
+        <h1 className="text-[72px] font-bold leading-tight xl:text-[56px] md:text-[36px]">
+          Talk to our Sales team
+        </h1>
+        <p className="mx-auto mt-1.5 max-w-[787px] text-xl xl:max-w-[616px] xl:text-base md:mt-2">
           Are you interested in exceeding your free tier limits and learn about pricing? Please fill
           out the form provided below and our team will review your submission
         </p>
-        <div className="mx-auto mt-16 flex max-w-[1216px]">
-          <div className="relative w-full max-w-[696px] shrink-0 before:absolute before:inset-0 before:h-full before:w-full before:rounded-[20px] before:bg-primary-1 before:opacity-60 before:blur-[70px]">
+        <div className="mx-auto mt-16 flex max-w-[1216px] xl:mt-12 lg:mt-9 lg:max-w-[583px] lg:flex-col lg:space-y-9 md:mt-6 md:space-y-6">
+          <div className="relative w-full max-w-[696px] shrink-0 before:absolute before:inset-0 before:h-full before:w-full before:rounded-[20px] before:bg-primary-1 before:opacity-60 before:blur-[70px] xl:max-w-[535px] lg:max-w-none">
             <form
-              className="relative z-10 grid gap-y-10 rounded-xl bg-gray-1 p-12 pb-14"
+              className="relative z-10 grid gap-y-10 rounded-[20px] bg-gray-1 p-12 pb-14 xl:gap-y-9 xl:p-10 xl:pb-10 md:gap-y-5 md:p-6 md:pb-6"
               style={{ boxShadow: '0px 20px 40px rgba(26, 26, 26, 0.4)' }}
               onSubmit={handleSubmit(onSubmit)}
             >
@@ -112,9 +114,9 @@ const Hero = () => {
                 register={register('email')}
                 error={errors.email?.message}
               />
-              <div className="flex space-x-10">
+              <div className="flex space-x-10 md:grid md:gap-y-5 md:space-x-0">
                 <Field
-                  className="basis-[340px]"
+                  className="shrink-0 basis-[56%]"
                   name="companyWebsite"
                   label="Company website"
                   register={register('companyWebsite')}
@@ -122,9 +124,9 @@ const Hero = () => {
                 <Field name="companySize" label="Company size" register={register('companySize')} />
               </div>
               <Field name="message" label="Message" tag="textarea" register={register('message')} />
-              <div className="relative mt-2 flex items-center">
+              <div className="relative mt-2 flex items-center xl:mt-1 md:mt-0 md:flex-col md:items-start">
                 <Button
-                  className="w-[194px] !px-9 !py-6 !text-lg"
+                  className="w-[194px] !px-9 !py-6 !text-lg md:order-1 md:mt-6 md:w-full"
                   type="submit"
                   loading={isLoading}
                   theme="primary"
@@ -133,9 +135,14 @@ const Hero = () => {
                 >
                   {isSuccess ? 'Sent!' : 'Send message'}
                 </Button>
-                <p className="ml-7 leading-tight">
+                <p className="ml-7 text-left leading-tight md:ml-0">
                   By submitting you agree to{' '}
-                  <Link className="pb-1" to="/privacy" theme="underline-primary-1" size="xs">
+                  <Link
+                    className="pb-1 text-base xl:text-base md:!inline"
+                    to="/privacy-policy"
+                    theme="underline-primary-1"
+                    size="xs"
+                  >
                     Neon’s Privacy Policy
                   </Link>
                   .
@@ -148,24 +155,32 @@ const Hero = () => {
               </div>
             </form>
           </div>
-          <div className="relative my-9 grow rounded-r-[20px] bg-secondary-2 pt-10 font-mono text-black before:absolute before:inset-0 before:h-full before:w-full before:rounded-[20px] before:bg-secondary-2 before:opacity-70 before:blur-[70px]">
-            <div className="relative z-10 flex h-full flex-col">
-              <h2
-                className="text-[56px] font-bold leading-none"
-                style={{
-                  background: 'linear-gradient(180deg, #1A1A1A 0%, rgba(26, 26, 26, 0.8) 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  textFillColor: 'transparent',
-                }}
-              >
-                On Demand!
-              </h2>
-              <p className="mt-2.5 text-[23px] font-bold leading-snug text-[#3E3E29]">
-                Only pay for what you use.
-              </p>
-              <StaticImage className="mt-auto" src="./images/illustration.png" alt="Illustration" />
+          <div className="relative my-9 flex-1 rounded-r-[20px] bg-secondary-2 pt-10 font-mono text-black before:absolute before:inset-0 before:h-full before:w-full before:rounded-[20px] before:bg-secondary-2 before:opacity-70 before:blur-[70px] lg:my-0 lg:rounded-[20px] lg:pt-0">
+            <div className="relative z-10 flex h-full w-full flex-col overflow-hidden lg:flex-row md:flex-col md:items-center">
+              <div className="px-11 lg:order-1 lg:self-center lg:pl-[18px] lg:pr-10 lg:text-left md:order-none md:px-8 md:pr-4 md:pl-4 md:pt-5 md:text-center">
+                <h2
+                  className="text-[56px] font-bold leading-none xl:text-5xl lg:text-[36px]"
+                  style={{
+                    background: 'linear-gradient(180deg, #1A1A1A 0%, rgba(26, 26, 26, 0.8) 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    textFillColor: 'transparent',
+                  }}
+                >
+                  On Demand!
+                </h2>
+                <p className="mt-2.5 text-[23px] font-bold leading-snug text-[#3E3E29] xl:text-xl lg:max-w-[208px] md:max-w-none">
+                  Only pay for what you use.
+                </p>
+              </div>
+              <div className="absolute bottom-0 left-1/2 w-full -translate-x-1/2 xl:w-[460px] lg:static lg:w-[300px] lg:translate-x-0 lg:pt-2.5 md:mt-4 md:w-[334px] md:pt-0">
+                <StaticImage
+                  src="./images/illustration-pricing.png"
+                  alt="Illustration"
+                  objectFit="cover"
+                />
+              </div>
             </div>
           </div>
         </div>
