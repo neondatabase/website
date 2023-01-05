@@ -80,11 +80,11 @@ Refer to the [Neon API Reference](https://neon.tech/api-reference/v2/) for other
 
 ## Manage API keys with the Neon API
 
-API key actions performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, and revoke API keys using the Neon API.
+API key actions performed in the Neon Console can also be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, and revoke API keys using the Neon API.
 
 ### Prerequisites
 
-You create and manage API keys using the Neon API, but you need an API key to start with. You can obtain an initial API key from the Neon Console. For instructions, see [Create an API key](#create-an-api-key).
+You can create and manage API keys using the Neon API, but you need an API key to start with. You can obtain an API key from the Neon Console. For instructions, see [Create an API key](#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create an API key with the API
 
