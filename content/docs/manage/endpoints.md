@@ -71,7 +71,7 @@ To delete an endpoint:
 Endpoint actions performed in the Neon Console can also be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, update, and delete endpoints using the Neon API. For other endpoint-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
 
 <Admonition type="note">
-The API examples that have a request body may not demonstrate all of the user-configurable attributes that are available to you. To view all of request body attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://neon.tech/api-reference/v2/).
+The API examples that have a request body may not demonstrate all of the user-configurable attributes that are available to you. To view all of the request body attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://neon.tech/api-reference/v2/).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
