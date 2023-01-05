@@ -157,7 +157,6 @@ The response includes information about the branch, the branch's endpoint, and t
     "name": "br-dawn-scene-747675",
     "current_state": "init",
     "pending_state": "ready",
-    "logical_size_limit": 3072,
     "created_at": "2022-12-08T19:55:43Z",
     "updated_at": "2022-12-08T19:55:43Z"
   },
@@ -245,7 +244,6 @@ Response:
       "name": "br-dawn-scene-747675",
       "current_state": "ready",
       "logical_size": 28,
-      "logical_size_limit": 3072,
       "created_at": "2022-12-08T19:55:43Z",
       "updated_at": "2022-12-08T19:55:43Z"
     },
@@ -255,7 +253,6 @@ Response:
       "name": "main",
       "current_state": "ready",
       "logical_size": 28,
-      "logical_size_limit": 3072,
       "physical_size": 31,
       "created_at": "2022-12-07T00:45:05Z",
       "updated_at": "2022-12-07T00:45:05Z"
@@ -278,7 +275,7 @@ The API method appears as follows when specified in a cURL command:
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
 - The `<project_id>` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**, or you can find it by listing the projects for your Neon account using the Neon API.
