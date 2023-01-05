@@ -46,9 +46,13 @@ To delete a database:
 
 Database actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, update, and delete databases using the Neon API. For other database-related methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
 
-<Admonition type="note">
 In Neon, databases belong to branches, which means that when you create a database, it is created in a branch.  Database-related requests are therefore performed using branch API methods.
+
+<Admonition type="note">
+The API examples that have a request body may not demonstrate all of the user-configurable attributes that are available to you. To view all of request body attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://neon.tech/api-reference/v2/).
 </Admonition>
+
+The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
 
 ### Prerequisites
 
@@ -56,13 +60,13 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a database with the API
 
-The following Neon API method creates a database.
+The following Neon API method creates a database. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/createProjectBranchDatabase).
 
 ```text
 POST /projects/{project_id}/branches/{branch_id}/databases
 ```
 
-The API method appears as follows when specified in a cURL command:
+The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and a database `name` and `owner` are required attributes.
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases' \
@@ -118,13 +122,13 @@ Response:
 
 ### List databases with the API
 
-The following Neon API method lists databases for the specified branch.
+The following Neon API method lists databases for the specified branch. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/listProjectBranchDatabases).
 
 ```text
 GET /projects/{project_id}/branches/{branch_id}/databases
 ```
 
-The API method appears as follows when specified in a cURL command:
+The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters.
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases' \
@@ -159,13 +163,13 @@ Response:
 
 ### Update a database with the API
 
-The following Neon API method updates the specified database.
+The following Neon API method updates the specified database. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/updateProjectBranchDatabase).
 
 ```text
 PATCH /projects/{project_id}/branches/{branch_id}/databases/{database_name}
 ```
 
-The API method appears as follows when specified in a cURL command:
+The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters. This example updates the database `name` value to `database1`.
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases/mydb' \
@@ -220,13 +224,13 @@ Response:
 
 ### Delete a database with the API
 
-The following Neon API method deletes the specified database.
+The following Neon API method deletes the specified database. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/deleteProjectBranchDatabase).
 
 ```text
 DELETE /projects/{project_id}/branches/{branch_id}/databases/{database_name}
 ```
 
-The API method appears as follows when specified in a cURL command:
+The API method appears as follows when specified in a cURL command. The `project_id`, `branch_id`, and `database_name` are required parameters.
 
 ```bash
 curl -X 'DELETE' \
