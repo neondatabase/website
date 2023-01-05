@@ -68,11 +68,11 @@ To delete an endpoint:
 
 ## Manage endpoints with the Neon API
 
-Endpoint actions performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, update, and delete endpoints using the Neon API. For other endpoint-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
+Endpoint actions performed in the Neon Console can also be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, update, and delete endpoints using the Neon API. For other endpoint-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must supply when making an Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/api-keys/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create an endpoint with the API
 
@@ -289,7 +289,7 @@ Response:
 
 ### Delete an endpoint with the API
 
-The following Neon API method deletes the specified endpoint. An endpoint belongs to a a Neon project, so in addition to the `endpoint_id`, you must specify the `project_id`.
+The following Neon API method deletes the specified endpoint. An endpoint belongs to a Neon project, so in addition to the `endpoint_id`, you must specify the `project_id`.
 
 ```text
 DELETE /projects/{project_id}/endpoints/{endpoint_id}
