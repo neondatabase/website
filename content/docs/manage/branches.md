@@ -107,13 +107,19 @@ Neon stores data in its own internal format.
 
 Branch actions performed in the Neon Console can be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
 
+<Admonition type="note">
+The API examples that have a request body may not demonstrate all of the user-configurable attributes that are available to you. To view all of the request body attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://neon.tech/api-reference/v2/).
+</Admonition>
+
+The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
+
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Manage API Keys](../api-keys).
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../api-keys/#create-an-api-key). In the examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a branch with the API
 
-The following Neon API method creates a branch. Adding the `endpoints` attribute to the call creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without an endpoint.
+The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/createProjectBranch).
 
 <Admonition type="note">
 The create branch API method does not require a request body. Without a request body, the method creates a branch from the project's `main` branch without an endpoint.
@@ -123,7 +129,7 @@ The create branch API method does not require a request body. Without a request 
 POST /projects/{project_id}/branches 
 ```
 
-The API method appears as follows when specified in a cURL command:
+The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without an endpoint.
 
 ```curl
 curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches' \
@@ -213,7 +219,7 @@ The response includes information about the branch, the branch's endpoint, and t
 
 ### List branches with the API
 
-The following Neon API method lists branches for the specified project.
+The following Neon API method lists branches for the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/listProjectBranches).
 
 ```text
 GET /projects/{project_id}/branches
@@ -263,7 +269,7 @@ Response:
 
 ### Delete a branch with the API
 
-The following Neon API method deletes the specified branch.
+The following Neon API method deletes the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/deleteProjectBranch).
 
 ```text
 DELETE /branches/{branch_id}
