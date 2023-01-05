@@ -41,6 +41,7 @@ const Hero = () => {
 
   const onSubmit = async (data) => {
     const { name, email, companyWebsite, companySize, message } = data;
+
     setFormError('');
     setFormState(FORM_STATES.LOADING);
     try {
@@ -121,14 +122,28 @@ const Hero = () => {
                 error={errors.email?.message}
                 {...register('email')}
               />
-              <div className="flex space-x-10 md:grid md:gap-y-5 md:space-x-0">
+              <div className="flex space-x-10 xl:space-x-8 md:grid md:gap-y-5 md:space-x-0">
                 <Field
-                  className="shrink-0 basis-[56%] lg:basis-[59%]"
+                  className="shrink-0 basis-[56%] xl:basis-[45%] lg:basis-[50%]"
                   name="companyWebsite"
                   label="Company website"
                   {...register('companyWebsite')}
                 />
-                <Field name="companySize" label="Company size" {...register('companySize')} />
+                <Field
+                  className="grow"
+                  name="companySize"
+                  label="Company size"
+                  tag="select"
+                  {...register('companySize')}
+                >
+                  <option selected disabled hidden>
+                    &nbsp;
+                  </option>
+                  <option value="10"> &lt; 10 employees</option>
+                  <option value="10_49">10-49 employees</option>
+                  <option value="50_249">50-249 employees</option>
+                  <option value="250"> &ge; 250 employees</option>
+                </Field>
               </div>
               <Field name="message" label="Message" tag="textarea" {...register('message')} />
               <div className="relative mt-2 flex items-center xl:mt-1 md:mt-0 md:flex-col md:items-start">
@@ -145,7 +160,7 @@ const Hero = () => {
                 <p className="ml-7 text-left leading-tight md:ml-0">
                   By submitting you agree to{' '}
                   <Link
-                    className="pb-1 text-base xl:text-base md:!inline"
+                    className="pb-1 !text-base xl:!text-base md:!inline"
                     to="/privacy-policy"
                     theme="underline-primary-1"
                     size="xs"
