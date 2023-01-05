@@ -52,13 +52,15 @@ To reset a user's password:
 
 ## Manage roles with the Neon API
 
-In Neon, the term "user" is synonymous with "role". The Neon API uses the term "role". User actions performed in the Neon Console can be performed using [Neon API](https://neon.tech/api-reference/v2/) role methods. The following examples demonstrate how to create, view, reset passwords for, and delete roles using the Neon API. For other role-related methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
+In Neon, the term "user" is synonymous with "role". The Neon API uses the term "role". User actions performed in the Neon Console can be performed using Neon API role methods. The following examples demonstrate how to create, view, reset passwords for, and delete roles using the Neon API. For other role-related methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
 
-In Neon, roles belong to branches, which means that when you create a role, it is created in a particular branch.  Role-related requests are therefore performed using role-related branch API methods.
+<Admonition type="note">
+In Neon, roles belong to branches, which means that when you create a role, it is created in a branch. Role-related requests are therefore performed using branch API methods.
+</Admonition>
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must supply when making an Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/api-keys/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a role with the API
 
@@ -133,7 +135,7 @@ The API method appears as follows when specified in a cURL command:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
-  -H 'accept: application/json' \
+  -H 'Accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
@@ -180,7 +182,7 @@ The API method appears as follows when specified in a cURL command:
 ```bash
 curl -X 'POST' \
   'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles/sally/reset_password' \
-  -H 'accept: application/json' \
+  -H 'Accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
@@ -236,7 +238,7 @@ The API method appears as follows when specified in a cURL command:
 ```bash
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles/sally' \
-  -H 'accept: application/json' \
+  -H 'Accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
