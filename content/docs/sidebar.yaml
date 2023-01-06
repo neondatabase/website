@@ -76,6 +76,10 @@
       slug: guides/sqlalchemy
     - title: Symfony
       slug: guides/symfony
+- title: Tutorials
+  items:
+    - title: Setting up Prisma with Neon
+      slug: tutorials/neon-prisma-tutorial
 - title: Import data
   items:
     - title: Import from PostgreSQL

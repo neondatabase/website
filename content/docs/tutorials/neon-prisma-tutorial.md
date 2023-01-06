@@ -1,5 +1,5 @@
 ---
-title: Setup Prisma with Neon
+title: How to set up Prisma with Neon
 enableTableOfContents: true
 ---
 
