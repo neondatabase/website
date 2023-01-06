@@ -18,10 +18,12 @@ const appearAndExitAnimationVariants = {
 };
 
 const NoiseFilter = () => (
-  <svg className="absolute" aria-hidden="true">
+  <svg className="absolute hidden" aria-hidden="true">
     <filter id="noiseFilter">
-      <feTurbulence type="fractalNoise" baseFrequency="6.29" numOctaves="6" stitchTiles="stitch" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="6" stitchTiles="stitch" />
     </filter>
+    <rect x="0" y="0" width="100%" height="100%" fill="#000" />
+    <rect x="0" y="0" width="100%" height="100%" fill="#ffffff" filter="url(#noiseFilter)" />
   </svg>
 );
 
@@ -89,11 +91,11 @@ const Hero = () => {
                 Interested in increasing your free tier limits or learning about pricing? Complete
                 the form below to get in touch with our Sales team.
               </p>
-              <div className="mx-auto mt-16 flex after:pointer-events-none after:absolute after:inset-y-0 after:left-1/2 after:h-full after:w-screen after:-translate-x-1/2 after:opacity-10 after:[filter:url('#noiseFilter')] after:[-webkit-mask-image:radial-gradient(circle,transparent_0%,black_300%)] 2xl:mt-12 2xl:max-w-5xl lg:mt-9 lg:max-w-[583px] lg:flex-col lg:space-y-9 md:mt-6 md:space-y-6">
+              <div className="mx-auto mt-16 flex after:pointer-events-none after:absolute after:inset-y-0 after:left-1/2 after:h-full after:w-screen after:-translate-x-1/2 after:opacity-10 after:[filter:url('#noiseFilter')] after:[-webkit-mask-image:radial-gradient(transparent_0%,black_100%)] 2xl:mt-12 2xl:max-w-5xl lg:mt-9 lg:max-w-[583px] lg:flex-col lg:space-y-9 md:mt-6 md:space-y-6">
                 <div
                   className={clsx(
                     'relative w-full max-w-[696px] shrink-0  2xl:max-w-[535px] lg:max-w-none',
-                    'before:absolute before:inset-0 before:h-full before:w-full before:rounded-[20px] before:bg-primary-1 before:opacity-60 before:shadow-[0_0_100px_30px_rgb(0_230_153/50%)] sm:before:shadow-[0_0_30px_10px_rgb(0_230_153/50%)]'
+                    'before:absolute before:inset-0 before:h-full before:w-full before:rounded-[20px] before:bg-primary-1 before:opacity-60 before:shadow-[0_0_70px_30px_rgb(0_230_153/30%)] sm:before:shadow-none'
                   )}
                 >
                   <ContactForm formState={formState} setFormState={setFormState} />
@@ -101,7 +103,7 @@ const Hero = () => {
                 <div
                   className={clsx(
                     'relative my-9 flex-1 font-mono text-black lg:my-0',
-                    'before:absolute before:inset-0 before:h-full before:w-full before:rounded-[20px] before:bg-secondary-2 before:opacity-70 before:shadow-[0_0_100px_30px_rgb(240_240_117/40%)] sm:before:shadow-[0_0_30px_10px_rgb(240_240_117/40%)]'
+                    'before:absolute before:inset-0 before:h-full before:w-full before:rounded-[20px] before:bg-secondary-2 before:opacity-70 before:shadow-[0_0_70px_30px_rgb(240_240_117/30%)] sm:before:shadow-none'
                   )}
                 >
                   <div className="relative z-10 flex h-full w-full flex-col overflow-hidden rounded-r-[20px] bg-secondary-2 pt-10 lg:flex-row lg:rounded-[20px] lg:pt-0 md:flex-col md:items-center">
