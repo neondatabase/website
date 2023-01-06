@@ -86,8 +86,8 @@ const Hero = () => {
                 Talk to our Sales team
               </h1>
               <p className="mx-auto mt-1.5 max-w-[787px] text-xl 2xl:max-w-[616px] 2xl:text-base md:mt-2">
-                Are you interested in exceeding your free tier limits and learn about pricing?
-                Please fill out the form provided below and our team will review your submission
+                Interested in increasing your free tier limits or learning about pricing? Complete
+                the form below to get in touch with our Sales team.
               </p>
               <div className="mx-auto mt-16 flex after:pointer-events-none after:absolute after:inset-y-0 after:left-1/2 after:h-full after:w-screen after:-translate-x-1/2 after:opacity-10 after:[filter:url('#noiseFilter')] after:[-webkit-mask-image:radial-gradient(circle,transparent_0%,black_300%)] 2xl:mt-12 2xl:max-w-5xl lg:mt-9 lg:max-w-[583px] lg:flex-col lg:space-y-9 md:mt-6 md:space-y-6">
                 <div className="relative w-full max-w-[696px] shrink-0 before:absolute before:inset-0 before:h-full before:w-full before:rounded-[20px] before:bg-primary-1 before:opacity-60 before:shadow-[0_0_100px_30px_rgb(0_230_153/50%)] 2xl:max-w-[535px] lg:max-w-none">
