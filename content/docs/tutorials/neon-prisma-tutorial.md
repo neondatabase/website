@@ -3,6 +3,8 @@ title: How to set up Prisma with Neon
 enableTableOfContents: true
 ---
 
+## Introduction
+
 Prisma is an open source next-generation ORM. It consists of the following parts:
 
 - Prisma Client: An auto-generated and type-safe query builder for Node.js & TypeScript
@@ -189,6 +191,19 @@ found 0 vulnerabilities
 ✔ Generated Prisma Client (4.8.1 | library) to ./../node_modules/@prisma/client in 73ms
 ```
 
+## Viewing your tables in the Neon Console
+
+To view the `User` and `Post` tables that were created in your Neon project by the migration operation performed in the previous step:
+
+1. Navigate to the [Neon console](https://console.neon.tech/).
+2. Select your project.
+3. Select **Tables**.
+4. Select the `neondb` database and default `public` schema. The `User` and `Post` tables should be visible in the sidebar.
+
+## Conclusion
+
+Congratulations! You have successfully connected a Prisma project to a Neon database and performed your first migration. You have learned how to create a Neon project, create a shadow database, deploy a TypeScript sample project and set up Prisma, and perform a migration using Prisma Migrate.
+
 ## Next Steps
 
-You have now successfully connected a Prisma project to a Neon database and performed your first migration. If you would like to explore how to send queries to your database with Prisma Client, refer to the [Prisma Quickstart](https://www.prisma.io/docs/getting-started/quickstart). [Part 4: Explore how to send queries to your database with Prisma Client](https://www.prisma.io/docs/getting-started/quickstart#4-explore-how-to-send-queries-to-your-database-with-prisma-client), walks you through those steps.
+ If you would like to explore how to send queries to your database with Prisma Client, refer to the [Prisma Quickstart](https://www.prisma.io/docs/getting-started/quickstart). [Part 4: Explore how to send queries to your database with Prisma Client](https://www.prisma.io/docs/getting-started/quickstart#4-explore-how-to-send-queries-to-your-database-with-prisma-client), walks you through those steps.
