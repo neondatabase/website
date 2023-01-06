@@ -3,15 +3,13 @@ title: How to set up Prisma with Neon
 enableTableOfContents: true
 ---
 
-This tutorial explains how to deploy a Prisma project with a Neon PostgreSQL database.
-
 Prisma is an open source next-generation ORM. It consists of the following parts:
 
-- Prisma Client: Auto-generated and type-safe query builder for Node.js & TypeScript
-- Prisma Migrate: Migration tool to easily evolve your database schema from prototyping to production
-- Prisma Studio: GUI to view and edit data in your database
+- Prisma Client: An auto-generated and type-safe query builder for Node.js & TypeScript
+- Prisma Migrate: A migration tool for evolving your database schema from prototyping to production
+- Prisma Studio: A GUI tool for viewing and editing data in your database
 
-Neon is a fully managed, serverless PostgreSQL with a generous free tier. Neon separates storage and compute and offers modern developer features such as serverless, branching, bottomless storage, and more.
+In this tutorial, you will learn how to set up a Neon project, set up Prisma project, configure connection to Neon, and run a migration using Prisma Migrate.
 
 ## Step 1: Sign up with Neon
 
@@ -90,9 +88,9 @@ To complete these steps, you require Node.js v14.17.0 or higher. For more inform
 
 You are now ready to model your data and create your database with some tables.
 
-## Step 5: Configure your project to use Neon databases
+## Step 5: Configure your project to connect to Neon
 
-In this step, we'll update your project's `.env` file with the connection strings for your primary and shadow data database.
+In this step, we'll update your project's `.env` file with the connection strings for your primary and shadow data databases.
 
 1. Open the `.env` file, which is located in your `prisma` directory.
 2. Update the value of the `DATABASE_URL` variable to the connection string you copied in Step 3.
