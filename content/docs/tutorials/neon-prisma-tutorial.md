@@ -210,3 +210,7 @@ Congratulations! You have successfully connected a Prisma project to a Neon data
 ## Next Steps
 
  If you would like to explore how to send queries to your database with Prisma Client, refer to the [Prisma Quickstart](https://www.prisma.io/docs/getting-started/quickstart). [Part 4: Explore how to send queries to your database with Prisma Client](https://www.prisma.io/docs/getting-started/quickstart#4-explore-how-to-send-queries-to-your-database-with-prisma-client), walks you through those steps, building on setup you've performed in this tutorial.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
