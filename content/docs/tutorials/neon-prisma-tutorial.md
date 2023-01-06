@@ -55,7 +55,7 @@ postgres://sally:************@ep-throbbing-firefly-664409.us-east-2.aws.neon.bui
 
 In this step, we'll deploy a sample Typescript project and set up Prisma closely following the instructions in Prisma's [Quickstart](https://www.prisma.io/docs/getting-started/quickstart) guide.
 
-### Prerequisites
+**Prerequisites**
 
 To complete these steps, you require Node.js v14.17.0 or higher. For more information about Prisma's system requirements, see [System requirements](https://www.prisma.io/docs/reference/system-requirements).
 
@@ -194,7 +194,7 @@ found 0 vulnerabilities
 ✔ Generated Prisma Client (4.8.1 | library) to ./../node_modules/@prisma/client in 73ms
 ```
 
-## Step 8: Viewing your tables in the Neon Console
+## Step 8: View your tables in the Neon Console
 
 To view the `User` and `Post` tables that were created in your `neondb` database by the migration performed in the previous step:
 
