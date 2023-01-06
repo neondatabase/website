@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useCookie, useLocation } from 'react-use';
@@ -21,19 +22,18 @@ const schema = yup
   })
   .required();
 
-const ContactForm = () => {
+const ContactForm = ({ formState, setFormState }) => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
-  const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
   const [formError, setFormError] = useState('');
+
   const context = {
     hutk: hubspotutk,
     pageUri: href,
@@ -78,11 +78,6 @@ const ContactForm = () => {
         doNowOrAfterSomeTime(() => {
           setFormState(FORM_STATES.SUCCESS);
           setFormError('');
-
-          setTimeout(() => {
-            setFormState(FORM_STATES.DEFAULT);
-          }, 2000);
-          reset();
         }, loadingAnimationStartedTime);
       } else {
         throw new Error('Something went wrong. Please reload the page and try again.');
@@ -148,7 +143,7 @@ const ContactForm = () => {
       </div>
       <Field
         name="message"
-        label="Message"
+        label="Message *"
         tag="textarea"
         isDisabled={formState === FORM_STATES.LOADING}
         error={errors.message?.message}
@@ -185,6 +180,11 @@ const ContactForm = () => {
       </div>
     </form>
   );
+};
+
+ContactForm.propTypes = {
+  formState: PropTypes.oneOf(Object.values(FORM_STATES)).isRequired,
+  setFormState: PropTypes.func.isRequired,
 };
 
 export default ContactForm;
