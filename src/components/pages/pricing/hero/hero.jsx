@@ -78,7 +78,6 @@ const Hero = () => {
               className="mx-auto max-w-[1216px] text-center lg:max-w-none lg:px-8 md:px-4"
               animate={{
                 opacity: formState === FORM_STATES.SUCCESS ? 0 : 1,
-                y: formState === FORM_STATES.SUCCESS ? -20 : 0,
                 pointerEvents: formState === FORM_STATES.SUCCESS ? 'none' : 'auto',
                 transition: { duration: APPEAR_AND_EXIT_ANIMATION_DURATION },
               }}
