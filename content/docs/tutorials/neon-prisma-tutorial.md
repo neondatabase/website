@@ -191,7 +191,7 @@ found 0 vulnerabilities
 ✔ Generated Prisma Client (4.8.1 | library) to ./../node_modules/@prisma/client in 73ms
 ```
 
-## Viewing your tables in the Neon Console
+## Step 8: Viewing your tables in the Neon Console
 
 To view the `User` and `Post` tables that were created in your Neon project by the migration operation performed in the previous step:
 
