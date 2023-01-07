@@ -5,13 +5,13 @@ enableTableOfContents: true
 
 ## Introduction
 
-Prisma is an open source next-generation ORM. It consists of:
+Prisma is an open source next-generation ORM that includes the following tools:
 
 - Prisma Client: An auto-generated and type-safe query builder for Node.js & TypeScript
 - Prisma Migrate: A migration tool for evolving your database schema from prototyping to production
 - Prisma Studio: A GUI tool for viewing and editing data in your database
 
-This tutorial focusses on setting up Prisma with Neon and performing a migration using Prisma Migrate. You will learn how to create a Neon project, set up a Prisma project, model database tables in Prisma, and perform a migration. At the end of the tutorial, we'll point you to the Prisma Quickstart where you can build on the setup in this tutorial by executing queries using Prisma Client.
+This tutorial focusses on setting up Prisma with Neon and performing a migration using Prisma Migrate. You will learn how to create a Neon project, set up a Prisma project, model database tables in Prisma, and perform a migration. At the end of the tutorial, we'll point you to instructions you can follow to build on the setup in this tutorial by executing queries using Prisma Client.
 
 ## Step 1: Sign up with Neon
 
@@ -24,22 +24,24 @@ After signing in, you are directed to the Neon Console where you can create your
 
 ## Step 2: Create a project and copy the connection string
 
-1. In the Neon Console, Click **Create a project** to open the **Project Creation** dialog.
-1. Specify a name, a Postgres version, a region, and click **Create Project**.
+1. In the Neon Console, click **Create a project** to open the **Project Creation** dialog.
+1. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
 
-The project is created and you are presented with a dialog that provides connection details for the project. Copy the connection string, which looks similar to the following:
+The project is created and you are presented with a dialog that provides connection details. Copy the connection string, which looks similar to the following:
 
 ```text
 postgres://sally:************@ep-throbbing-firefly-664409.us-east-2.aws.neon.build/neondb
 ```
 
+<Admonition type="note">
 Every Neon project is created with a default PostgreSQL user named for your account, and default database named `neondb`, as shown in the connection string that you copied. We'll use this user and database for our Prisma project.
+</Admonition>
 
 ## Step 3: Create a shadow database for Prisma Migrate
 
 Prisma Migrate requires a second "shadow" database to detect schema drift and generate new migrations. For more information about the the purpose of the shadow database, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the _Prisma documentation_.
 
-For cloud-hosted databases like Neon, you need to create the shadow database manually. To create a shadow database:
+For cloud-hosted databases like Neon, you need to create the shadow database manually. To create the shadow database:
 
 1. In the Neon Console, select **Settings** > **Databases**.
 1. Click **New Database**.
@@ -110,7 +112,7 @@ SHADOW_DATABASE_URL=postgres://sally:************@ep-white-thunder-826300.us-eas
 
 ## Step 6: Update your schema.prisma file
 
-In this step, you will update the `datasource db` entry in your `schema.prisma` file and add models for the `User` and `Post` tables. The models represent the tables in your underlying database and serve as the foundation for the generated Client API. For information about data modeling in Prisma, see [Data modeling](https://www.prisma.io/docs/concepts/overview/what-is-prisma/data-modeling), in the _Prisma documentation_.
+In this step, you will update the `datasource db` entry in your `schema.prisma` file and add models for the `User` and `Post` tables. The models represent the tables in your underlying database and serve as the foundation for the generated Client API. For more information about data modeling in Prisma, see [Data modeling](https://www.prisma.io/docs/concepts/overview/what-is-prisma/data-modeling), in the _Prisma documentation_.
 
 1. Update the the `datasource db` entry. Ensure that the provider is set to `postgresql`, and add a `shadowDatabaseUrl` entry.
 2. Add the models for the `User` and `Post` tables.
@@ -152,7 +154,7 @@ model Post {
 
 At this point, you still have no database tables in Neon. In this step, you will run a migration with Prisma Migrate, which will create the database tables. The tables are created based on the `User` and `Post` models that you defined in the `schema.prisma` file in the previous step. Specifically, Prisma Migrate performs the following actions:
 
-- Creates a SQL migration file for this migration in your `prisma/migrate` directory.
+- Creates an SQL migration file for this migration in your `prisma/migrate` directory.
 - Runs the SQL migration file on your database
 
 To run Prisma Migrate, issue the following command:
@@ -162,8 +164,7 @@ npx prisma migrate dev --name init
 ```
 
 <Admonition type="note">
-Since this is your project's first migration, you're setting the migration `--name` flag to `init`. You can use a different name for future migrations. If you want to skip the process of creating a migration history, you can use the `db push` command instead of `migrate dev`.
-
+Since this is your project's first migration, we set the migration `--name` flag to `init`. You can use a different name for future migrations. If you want to skip the process of creating a migration history, you can use the `db push` command instead of `migrate dev`. The `db push` command pushes the state of your Prisma schema file to the database without using migrations. For more information see [db push](https://www.prisma.io/docs/reference/api-reference/command-reference#db-push).
 </Admonition>
 
 The output of this command appears similar to the following:
@@ -205,11 +206,11 @@ To view the `User` and `Post` tables that were created in your `neondb` database
 
 ## Conclusion
 
-Congratulations! You have successfully connected a Prisma project to a Neon database and performed your first migration. You have learned how to create a Neon project, deploy a TypeScript sample project and set up Prisma, and perform a migration using Prisma Migrate.
+Congratulations! You have successfully connected a Prisma project to a Neon database and performed your first migration. You have learned how to create a Neon project, set up Prisma, and perform a migration using Prisma Migrate.
 
 ## Next Steps
 
- If you would like to explore how to send queries to your database with Prisma Client, refer to the [Prisma Quickstart](https://www.prisma.io/docs/getting-started/quickstart). [Part 4: Explore how to send queries to your database with Prisma Client](https://www.prisma.io/docs/getting-started/quickstart#4-explore-how-to-send-queries-to-your-database-with-prisma-client), walks you through those steps, building on setup you've performed in this tutorial.
+ If you would like to explore how to send queries to your database with Prisma Client, refer to [Part 4: Explore how to send queries to your database with Prisma Client](https://www.prisma.io/docs/getting-started/quickstart#4-explore-how-to-send-queries-to-your-database-with-prisma-client) in the Prisma Quickstart, which walks you through those steps, building upon setup you've performed in this tutorial.
 
 ## Need help?
 
