@@ -5,13 +5,13 @@ enableTableOfContents: true
 
 ## Introduction
 
-Prisma is an open source next-generation ORM. It consists of the following parts:
+Prisma is an open source next-generation ORM. It consists of:
 
 - Prisma Client: An auto-generated and type-safe query builder for Node.js & TypeScript
 - Prisma Migrate: A migration tool for evolving your database schema from prototyping to production
 - Prisma Studio: A GUI tool for viewing and editing data in your database
 
-In this tutorial, you will learn how to set up a Neon project, set up Prisma, configure connections to Neon, and run a migration using Prisma Migrate.
+This tutorial focusses on setting up Prisma with Neon and performing a migration using Prisma Migrate. You will learn how to create a Neon project, set up a Prisma project, model database tables in Prisma, and perform a migration. At the end of the tutorial, we'll point you to the Prisma Quickstart where you can build on the setup in this tutorial by executing queries using Prisma Client.
 
 ## Step 1: Sign up with Neon
 
