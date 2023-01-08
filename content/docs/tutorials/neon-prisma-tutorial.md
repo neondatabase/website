@@ -11,7 +11,7 @@ Prisma is an open source next-generation ORM that includes the following tools:
 - Prisma Migrate: A migration tool for evolving your database schema from prototyping to production
 - Prisma Studio: A GUI tool for viewing and editing data in your database
 
-This tutorial focusses on setting up Prisma with Neon and performing a migration using Prisma Migrate. You will learn how to create a Neon project, set up a Prisma project, model database tables in Prisma, and perform a migration. At the end of the tutorial, we'll point you to instructions you can follow to build on the setup in this tutorial by executing queries using Prisma Client.
+This tutorial focusses on setting up Prisma with Neon and performing a migration using Prisma Migrate. You will learn how to create a Neon project, set up a Prisma project, model database tables in Prisma, and perform a migration. At the end of the tutorial, we'll point you to instructions you can follow to build upon this setup by executing queries using Prisma Client.
 
 ## Step 1: Sign up with Neon
 
@@ -210,7 +210,7 @@ Congratulations! You have successfully connected a Prisma project to a Neon data
 
 ## Next Steps
 
- If you would like to explore how to send queries to your database with Prisma Client, refer to [Part 4: Explore how to send queries to your database with Prisma Client](https://www.prisma.io/docs/getting-started/quickstart#4-explore-how-to-send-queries-to-your-database-with-prisma-client) in the Prisma Quickstart, which walks you through those steps, building upon setup you've performed in this tutorial.
+ If you would like to explore how to send queries to your database with Prisma Client, refer to [Part 4: Explore how to send queries to your database with Prisma Client](https://www.prisma.io/docs/getting-started/quickstart#4-explore-how-to-send-queries-to-your-database-with-prisma-client) in the Prisma Quickstart, which walks you through those steps, building upon the setup in this tutorial.
 
 ## Need help?
 
