@@ -34,7 +34,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
     let builder = SslConnector::builder(SslMethod::tls())?;
     let connector = MakeTlsConnector::new(builder.build());
 
-    let mut client = Client::connect("postgres://<user>:<password>@ep-cold-shadow-123456.eu-central-1.aws.neon.tech/<dbname>", connector)?;
+    let mut client = Client::connect("postgres://<user>:<password>@<endpoint_hostname>/<dbname>", connector)?;
 
     for row in client.query("SELECT 42", &[])? {
         let ret : i32 = row.get(0);
@@ -48,8 +48,9 @@ fn main() -> Result<(), Box<dyn error::Error>> {
 where:
 
 - `<user>` is the database user.
-- `<dbname>` is the name of the database. The default Neon database is `neondb`
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
+- `<dbname>` is the name of the database. The default Neon database is `neondb`
+- `<endpoint_hostname>` is the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 
 You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
 
