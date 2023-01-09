@@ -16,9 +16,9 @@ This guide describes how to set up a Neon database and connect to it from an AWS
 - A Neon account. If you do not have a Neon account, see [Sign up](https://neon.tech/docs/get-started-with-neon/signing-up/) for instructions.
 - An AWS account. If you do not have one, you can create a free account at [AWS Free Tier](https://aws.amazon.com/free/).
 
-## Create schema in Neon
+## Create a table in Neon
 
-To create a schema, navigate to the **SQL Editor** in the [Neon Console](https://console.neon.tech/), or connect to your project using Neon's [passwordless connect](../../connect/passwordless-connect/) feature:
+To create a table, navigate to the **SQL Editor** in the [Neon Console](https://console.neon.tech/), or connect to your project using Neon's [passwordless connect](../../connect/passwordless-connect/) feature:
 
 ```bash
 psql -h pg.neon.tech
@@ -43,9 +43,9 @@ VALUES
     ('Eve', 'eve@example.com');
 ```
 
-## Create Lambda function
+## Create a Lambda function
 
-Now, you will create the Lambda function using the Serverless Framework. 
+Now, you will create the Lambda function using the Serverless Framework.
 
 1. Install the framework by running the following command:
 
