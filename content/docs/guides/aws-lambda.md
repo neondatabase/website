@@ -11,7 +11,7 @@ This guide describes how to set up a Neon database and connect to it from an AWS
 - Connecting your Lambda function to a Neon database
 - Deploying the Lambda function to AWS
 
-## Prerequisites:
+## Prerequisites
 
 - A Neon account. If you do not have a Neon account, see [Sign up](https://neon.tech/docs/get-started-with-neon/signing-up/) for instructions.
 - An AWS account. If you do not have one, you can create a free account at [AWS Free Tier](https://aws.amazon.com/free/).
@@ -92,11 +92,11 @@ Now, you will create the Lambda function using the Serverless Framework.
     };
     ```
 
-  The code above exports the function `getAllUsers`, which retrieves all rows from the `users` table and returns them as a `JSON` object in the `HTTP` response body.
+    The code above exports the function `getAllUsers`, which retrieves all rows from the `users` table and returns them as a `JSON` object in the `HTTP` response body.
 
-  The function uses the `pg` library to connect to the Neon database using the `Client` class and the database connection URL that is stored in the `DATABASE_URL` environment variable. The function then calls the connect method on the `Client` instance to establish a connection to the database. and uses the query method to execute a `SELECT` statement that retrieves all rows from the `users` table.
+    The function uses the `pg` library to connect to the Neon database using the `Client` class and the database connection URL that is stored in the `DATABASE_URL` environment variable. The function then calls the connect method on the `Client` instance to establish a connection to the database. and uses the query method to execute a `SELECT` statement that retrieves all rows from the `users` table.
 
-  The query method returns a `Promise` that resolves to an object containing the rows retrieved by the `SELECT` statement, which the function parses to retrieve the `rows` property. Finally, the function returns an `HTTP` response with a status code of 200 and a body that contains a `JSON` object with a single `data` property, which is set to the value of the rows variable.
+    The query method returns a `Promise` that resolves to an object containing the rows retrieved by the `SELECT` statement, which the function parses to retrieve the `rows` property. Finally, the function returns an `HTTP` response with a status code of 200 and a body that contains a `JSON` object with a single `data` property, which is set to the value of the rows variable.
 
 6. Add the `DATABASE_URL` environment variable and the function definition to the `serverless.yml` file.
 
@@ -130,9 +130,9 @@ Now, you will create the Lambda function using the Serverless Framework.
     serverless deploy
     ```
 
-  The `serverless deploy` command generates an API endpoint using [API Gateway](https://www.serverless.com/framework/docs/providers/aws/events/http-api).
+    The `serverless deploy` command generates an API endpoint using [API Gateway](https://www.serverless.com/framework/docs/providers/aws/events/http-api).
   
-  If you make API calls to the Lambda function from your app, you will likely need to configure Cross-Origin Resource Sharing (CORS). Visit the AWS documentation for more information about [how to enable CORS in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
+    If you make API calls to the Lambda function from your app, you will likely need to configure Cross-Origin Resource Sharing (CORS). Visit the AWS documentation for more information about [how to enable CORS in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
 
 8. Run the following command to enable CORS to your local development environment:
 
@@ -140,8 +140,8 @@ Now, you will create the Lambda function using the Serverless Framework.
     aws apigatewayv2 update-api --api-id <api-id> --cors-configuration AllowOrigins="http://localhost:3000"
     ```
 
-  You can find your api-id on the API Gateway dashboard.
-  ![Screenshot 2023-01-09 at 16 20 34](https://user-images.githubusercontent.com/13738772/211343246-27259351-d45b-4832-86d3-214431e196aa.png)
+    You can find your api-id on the API Gateway dashboard.
+    ![Screenshot 2023-01-09 at 16 20 34](https://user-images.githubusercontent.com/13738772/211343246-27259351-d45b-4832-86d3-214431e196aa.png)
 
 ## Conclusion
 
