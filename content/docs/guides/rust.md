@@ -12,7 +12,7 @@ This guide describes how to create a Neon project and connect to it from a Rust 
 
 ## Create a Neon project
 
-If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
+If you do not have one already, create a Neon project. Save your connection string and password. They are required when defining connection settings.
 
 To create a Neon project:
 
@@ -22,18 +22,26 @@ To create a Neon project:
 
 ## Configure the connection
 
-Add the Neon connection details to your `main.rs` file.
+Add the Neon connection details to your `main.rs` file, as in the following example:
 
 ```rust
-use postgres::{Client, NoTls};
+use postgres::Client;
+use openssl::ssl::{SslConnector, SslMethod};
+use postgres_openssl::MakeTlsConnector;
+use std::error;
 
-fn main() {
- let mut client = Client::connect("user=<user> dbname=<dbname> host=pg.neon.tech password=<password>", NoTls).expect("connection error");
+fn main() -> Result<(), Box<dyn error::Error>> {
+    let builder = SslConnector::builder(SslMethod::tls())?;
+    let connector = MakeTlsConnector::new(builder.build());
 
- for row in client.query("select version()", &[]).expect("query error") {
-     let version: &str = row.get(0);
-     println!("version: {}", version);
- }
+    let mut client = Client::connect("postgres://<user>:<password>@ep-cold-shadow-123456.eu-central-1.aws.neon.tech/<dbname>", connector)?;
+
+    for row in client.query("SELECT 42", &[])? {
+        let ret : i32 = row.get(0);
+        println!("Result = {}", ret);
+    }
+
+    Ok(())
 }
 ```
 
