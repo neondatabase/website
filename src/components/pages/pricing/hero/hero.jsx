@@ -91,11 +91,12 @@ const Hero = () => {
                 Interested in increasing your free tier limits or learning about pricing? Complete
                 the form below to get in touch with our Sales team.
               </p>
-              <div className="mx-auto mt-16 flex after:pointer-events-none after:absolute after:inset-y-0 after:left-1/2 after:h-full after:w-screen after:-translate-x-1/2 after:opacity-10 after:[filter:url('#noiseFilter')] after:[-webkit-mask-image:radial-gradient(transparent_0%,black_100%)] 2xl:mt-12 2xl:max-w-5xl lg:mt-9 lg:max-w-[583px] lg:flex-col lg:space-y-9 md:mt-6 md:space-y-6">
+              <div className="mx-auto mt-16 flex 2xl:mt-12 2xl:max-w-5xl lg:mt-9 lg:max-w-[583px] lg:flex-col lg:space-y-9 md:mt-6 md:space-y-6">
                 <div
                   className={clsx(
-                    'relative w-full max-w-[696px] shrink-0  2xl:max-w-[535px] lg:max-w-none',
-                    'before:absolute before:inset-0 before:h-full before:w-full before:rounded-[20px] before:bg-primary-1 before:opacity-60 before:shadow-[0_0_70px_30px_rgb(0_230_153/30%)] sm:before:shadow-none'
+                    'relative w-full max-w-[696px] shrink-0 bg-[url("/images/mask.svg")] 2xl:max-w-[535px] lg:max-w-none',
+                    'before:shadow-gradient-primary-1 before:absolute before:inset-0 before:h-full before:w-full before:rounded-[22px] before:shadow-[0_0_70px_30px_rgb(0_230_153/30%)] sm:before:shadow-none',
+                    'after:pointer-events-none after:absolute after:-inset-40 after:rounded-[22px] after:opacity-10 after:[filter:url("#noiseFilter")] after:[-webkit-mask-size:100%_100%] after:[mask-image:url("/images/mask.svg")] after:[-webkit-mask-repeat:no-repeat] after:[-webkit-mask-position:center_center]'
                   )}
                 >
                   <ContactForm formState={formState} setFormState={setFormState} />
@@ -103,7 +104,8 @@ const Hero = () => {
                 <div
                   className={clsx(
                     'relative my-9 flex-1 font-mono text-black lg:my-0',
-                    'before:absolute before:inset-0 before:h-full before:w-full before:rounded-[20px] before:bg-secondary-2 before:opacity-70 before:shadow-[0_0_70px_30px_rgb(240_240_117/30%)] sm:before:shadow-none'
+                    'before:absolute before:inset-0 before:h-full before:w-full before:rounded-[22px] before:bg-secondary-2 before:shadow-[0_0_70px_30px_rgb(240_240_117/30%)] sm:before:shadow-none',
+                    'after:pointer-events-none after:absolute after:-inset-40 after:rounded-[22px] after:opacity-10 after:[filter:url("#noiseFilter")] after:[-webkit-mask-size:100%_100%] after:[mask-image:url("/images/mask.svg")] after:[-webkit-mask-repeat:no-repeat] after:[-webkit-mask-position:center_center]'
                   )}
                 >
                   <div className="relative z-10 flex h-full w-full flex-col overflow-hidden rounded-r-[20px] bg-secondary-2 pt-10 lg:flex-row lg:rounded-[20px] lg:pt-0 md:flex-col md:items-center">
