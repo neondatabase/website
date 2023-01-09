@@ -145,4 +145,4 @@ Now, you will create the Lambda function using the Serverless Framework.
 
 ## Conclusion
 
-In this guide, you have learned how to set up a PostgreSQL database using Neon and connect to it from an AWS Lambda function using Node.js as the runtime. We have also seen how to use the Serverless Framework to create and deploy the Lambda function, and how to use the pg library to perform a basic read operations on the database.
+In this guide, you have learned how to set up a PostgreSQL database using Neon and connect to it from an AWS Lambda function using Node.js as the runtime environment. You have also learned how to use Serverless Framework to create and deploy the Lambda function, and how to use the `pg` library to perform a basic read operations on the database.
