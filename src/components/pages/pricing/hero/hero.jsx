@@ -18,7 +18,7 @@ const appearAndExitAnimationVariants = {
 };
 
 const NoiseFilter = () => (
-  <svg className="absolute hidden" aria-hidden="true">
+  <svg className="absolute opacity-0" aria-hidden="true">
     <filter id="noiseFilter">
       <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="6" stitchTiles="stitch" />
     </filter>
