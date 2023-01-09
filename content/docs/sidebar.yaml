@@ -54,6 +54,8 @@
       slug: manage/operations
 - title: Guides
   items:
+    - title: AWS Lambda
+      slug: guides/aws-lambda
     - title: Django
       slug: guides/django
     - title: Go
