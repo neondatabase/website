@@ -128,7 +128,7 @@ POST /projects/{project_id}/branches
 The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without an endpoint. The `branch` attribute specifies the parent branch.
 
 <Admonition type="note">
-This method does not require a request body. Without a request body, the method creates a branch from the project's `main` branch without an endpoint.
+This method does not require a request body. Without a request body, the method creates a branch from the project's `main` branch, and an endpoint is not created.
 </Admonition>
 
 ```curl
