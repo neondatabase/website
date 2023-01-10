@@ -69,7 +69,7 @@ const ContactForm = ({ formState, setFormState }) => {
             value: companySize,
           },
           {
-            name: 'message',
+            name: 'content',
             value: message,
           },
         ],
