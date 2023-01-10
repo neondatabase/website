@@ -3,18 +3,18 @@ title: Connect from AWS Lambda
 enableTableOfContents: true
 ---
 
-AWS Lambda is a serverless, event-driven compute service that allows youto run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.
+AWS Lambda is a serverless, event-driven compute service that allows you to run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.
 
 This guide describes how to set up a Neon database and connect to it from an AWS Lambda function using Node.js as the runtime environment. It covers:
 
-- Creating a Lambda function using the [Serverless Framework](https://www.serverless.com/)
-- Connecting your Lambda function to a Neon database
-- Deploying the Lambda function to AWS
+- Creating a Lambda function using the [Serverless Framework](https://www.serverless.com/), which is a serverless application lifecycle management framework.
+- Connecting your Lambda function to a Neon database.
+- Deploying the Lambda function to AWS.
 
 ## Prerequisites
 
-- A Neon account. If you do not have a Neon account, see [Sign up](https://neon.tech/docs/get-started-with-neon/signing-up/) for instructions.
-- An AWS account. If you do not have one, you can create a free account at [AWS Free Tier](https://aws.amazon.com/free/).
+- A Neon account. If you do not have one, see [Sign up](https://neon.tech/docs/get-started-with-neon/signing-up/) for instructions.
+- An AWS account. You can create a free AWS account at [AWS Free Tier](https://aws.amazon.com/free/).
 
 ## Create a table in Neon
 
@@ -45,9 +45,9 @@ VALUES
 
 ## Create a Lambda function
 
-Now, you will create the Lambda function using the Serverless Framework.
+The following steps describe how to create the Lambda function using the [Serverless Framework](https://www.serverless.com/).
 
-1. Install the framework by running the following command:
+1. Install the Serverless Framework by running the following command:
 
     ```bash
     npm install -g serverless
@@ -60,7 +60,7 @@ Now, you will create the Lambda function using the Serverless Framework.
     cd my-lambda
     ```
 
-3. Run the **serverless** command and follow the instructions.
+3. Run the **serverless** command to create a serverless project. When prompted, select the **AWS - Node.js - Starter** project and provide your AWS account credentials, which include your AWS Access Key Id and AWS Secret Access Key. The process creates an `aws-node-project` directory.
 
     ```bash
      serverless
@@ -94,11 +94,11 @@ Now, you will create the Lambda function using the Serverless Framework.
 
     The code above exports the function `getAllUsers`, which retrieves all rows from the `users` table and returns them as a `JSON` object in the `HTTP` response body.
 
-    The function uses the `pg` library to connect to the Neon database using the `Client` class and the database connection URL that is stored in the `DATABASE_URL` environment variable. The function then calls the connect method on the `Client` instance to establish a connection to the database. and uses the query method to execute a `SELECT` statement that retrieves all rows from the `users` table.
+    The function uses the `pg` library to connect to the Neon database using the `Client` class and the database connection URL that is stored in the `DATABASE_URL` environment variable. The function calls the connect method on the `Client` instance to establish a connection to the database, and uses the query method to execute a `SELECT` statement that retrieves all rows from the `users` table.
 
     The query method returns a `Promise` that resolves to an object containing the rows retrieved by the `SELECT` statement, which the function parses to retrieve the `rows` property. Finally, the function returns an `HTTP` response with a status code of 200 and a body that contains a `JSON` object with a single `data` property, which is set to the value of the rows variable.
 
-6. Add the `DATABASE_URL` environment variable and the function definition to the `serverless.yml` file.
+6. Add the `DATABASE_URL` environment variable and the function definition to the `serverless.yml` file, which is located in your `aws-node-project` directory.
 
     You can copy the connection string from the Neon Console, and add the `DATABASE_URL` under `environment`. Add `sslmode=require` to enable SSL. The `sslmode=require` option tells PostgreSQL to use SSL encryption and verify the server's certificate.
   
@@ -132,9 +132,9 @@ Now, you will create the Lambda function using the Serverless Framework.
 
     The `serverless deploy` command generates an API endpoint using [API Gateway](https://www.serverless.com/framework/docs/providers/aws/events/http-api).
   
-    If you make API calls to the Lambda function from your app, you will likely need to configure Cross-Origin Resource Sharing (CORS). Visit the AWS documentation for more information about [how to enable CORS in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
+8. If you make API calls to the Lambda function from your app, you will likely need to configure Cross-Origin Resource Sharing (CORS).  Visit the AWS documentation for information about [how to enable CORS in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html).
 
-8. Run the following command to enable CORS to your local development environment:
+   Run the following command to enable CORS to your local development environment:
 
     ```bash
     aws apigatewayv2 update-api --api-id <api-id> --cors-configuration AllowOrigins="http://localhost:3000"
