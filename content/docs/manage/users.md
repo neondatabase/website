@@ -52,12 +52,12 @@ To reset a user's password:
 
 ## Manage roles with the Neon API
 
-In Neon, the term "user" is synonymous with "role". The Neon API uses the term "role". User actions performed in the Neon Console can be performed using Neon API role methods. The following examples demonstrate how to create, view, reset passwords for, and delete roles using the Neon API. For other role-related methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
+In Neon, the term "user" is synonymous with "role". The Neon API uses the term "role". User actions performed in the Neon Console can also be performed using Neon API role methods. The following examples demonstrate how to create, view, reset passwords for, and delete roles using the Neon API. For other role-related methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
 
 In Neon, roles belong to branches, which means that when you create a role, it is created in a branch. Role-related requests are therefore performed using branch API methods.
 
 <Admonition type="note">
-The API examples that have a request body may not demonstrate all of the user-configurable attributes that are available to you. To view all of the request body attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://neon.tech/api-reference/v2/).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://neon.tech/api-reference/v2/).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -68,7 +68,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a role with the API
 
-The following Neon API method creates a role. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/createProjectBranchRole).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/createProjectBranchRole).
 
 ```text
 POST /projects/{project_id}/branches/{branch_id}/roles
@@ -129,7 +129,7 @@ Response:
 
 ### List roles with the API
 
-The following Neon API method lists roles for the specified branch. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/listProjectBranchRoles).
+The following Neon API method lists roles for the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/listProjectBranchRoles).
 
 ```text
 GET /projects/{project_id}/branches/{branch_id}/roles
@@ -175,7 +175,7 @@ Response:
 
 ### Reset a password with the API
 
-The following Neon API method resets the password for the specified role. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/resetProjectBranchRolePassword).
+The following Neon API method resets the password for the specified role. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/resetProjectBranchRolePassword).
 
 ```text
 POST /projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password
@@ -231,7 +231,7 @@ Response:
 
 ### Delete a role with the API
 
-The following Neon API method deletes the specified role. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/deleteProjectBranchRole).
+The following Neon API method deletes the specified role. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/deleteProjectBranchRole).
 
 ```text
 DELETE /projects/{project_id}/branches/{branch_id}/roles/{role_name}
