@@ -58,7 +58,7 @@ To delete a project:
 Project actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete projects using the Neon API. For other project-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
 
 <Admonition type="note">
-The API examples that have a request body may not demonstrate all of the user-configurable attributes that are available to you. To view all of the request body attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://neon.tech/api-reference/v2/).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://neon.tech/api-reference/v2/).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -69,7 +69,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a project with the API
 
-The following Neon API method creates a project. The [Neon Free Tier](../../introduction/technical-preview-free-tier/) permits one project per account. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/createProject).
+The following Neon API method creates a project. The [Neon Free Tier](../../introduction/technical-preview-free-tier/) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/createProject).
 
 ```text
 POST /projects 
@@ -202,7 +202,7 @@ The response includes information about the roles, the default database, the roo
 
 ### List projects with the API
 
-The following Neon API method lists projects for your Neon account. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/listProjects).
+The following Neon API method lists projects for your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/listProjects).
 
 ```text
 GET /projects
@@ -241,7 +241,7 @@ Response:
 
 ### Update a project with the API
 
-The following Neon API method updates the specified project. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/updateProject).
+The following Neon API method updates the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/updateProject).
 
 ```text
 PATCH /projects/{project_id}
@@ -285,7 +285,7 @@ Response:
 
 ### Delete a project with the API
 
-The following Neon API method deletes the specified project. To view the Neon API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/deleteProject).
+The following Neon API method deletes the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/deleteProject).
 
 ```text
 DELETE /projects/{project_id}
