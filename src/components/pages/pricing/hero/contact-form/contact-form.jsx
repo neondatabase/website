@@ -69,7 +69,11 @@ const ContactForm = ({ formState, setFormState }) => {
             value: companySize,
           },
           {
-            name: 'content',
+            name: 'TICKET.subject',
+            value: 'Contact sales',
+          },
+          {
+            name: 'TICKET.content',
             value: message,
           },
         ],
@@ -151,6 +155,7 @@ const ContactForm = ({ formState, setFormState }) => {
         error={errors.message?.message}
         {...register('message')}
       />
+
       <div className="relative mt-2 flex items-center 2xl:mt-1 md:mt-0 md:flex-col md:items-start">
         <Button
           className="w-[194px] shrink-0 !px-9 !py-6 !text-lg md:order-1 md:mt-6 md:w-full"
