@@ -1,18 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="100%" height="100%"
-     viewBox="0 0 100 100">
-
-    <linearGradient id="horiz" x1="0.5" spreadMethod="reflect">
-        <stop offset="0.1" style="stop-color:#1a1a1a"/>
-        <stop offset="1" style="stop-color:transparent"/>
-    </linearGradient>
-
-    <linearGradient id="vert" y1="0.5" x2="0" y2="1" spreadMethod="reflect">
-        <stop offset="0.1" style="stop-color:#1a1a1a"/>
-        <stop offset="1" style="stop-color:transparent"/>
-    </linearGradient>
-
-    <polygon points="0,0, 100,100, 100,0, 0,100" fill="url(#horiz)"/>
-    <polygon points="0,0, 100,0, 0,100, 100,100" fill="url(#vert)"/>
+<svg width="1016" height="1042" viewBox="0 0 1016 1042" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_11615_19079)">
+<rect x="160" y="160" width="696" height="722" rx="22" fill="#00E699"/>
+</g>
+<defs>
+<filter id="filter0_d_11615_19079" x="60" y="60" width="896" height="922" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="50" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_11615_19079"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="25"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.101961 0 0 0 0 0.101961 0 0 0 0 0.101961 0 0 0 0.5 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_11615_19079"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_11615_19079" result="shape"/>
+</filter>
+</defs>
 </svg>
