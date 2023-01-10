@@ -131,8 +131,9 @@ const Hero = () => {
                       <StaticImage
                         src="./images/illustration-pricing.png"
                         alt="Illustration"
-                        objectFit="cover"
                         loading="eager"
+                        width={620}
+                        height={485}
                       />
                     </div>
                   </div>
