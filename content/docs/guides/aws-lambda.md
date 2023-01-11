@@ -125,6 +125,17 @@ The following steps describe how to create the Lambda function using the [Server
     npm install pg
     ```
 
+After installing the `pg` driver, this is what the `package.json` file should look like:
+
+```json
+{
+ "dependencies": {
+   "pg": "^8.8.0"
+ }
+}
+```
+
+
 5. Add a file named `users.js` to the `aws-node-project` directory and add the following code:
 
     ```js
@@ -195,22 +206,22 @@ The following steps describe how to create the Lambda function using the [Server
       getAllUsers: aws-node-project-dev-getAllUsers (225 kB)
     ```
   
-8. If you make API calls to the Lambda function from your app, you will likely need to configure Cross-Origin Resource Sharing (CORS).  Visit the AWS documentation for information about [how to enable CORS in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html).
-
-   Run the following command to enable CORS to your local development environment:
-
-    ```bash
-    aws apigatewayv2 update-api --api-id <api-id> --cors-configuration AllowOrigins="http://localhost:3000"
-    ```
-
-    You can find your api-id on the API Gateway dashboard.
-    ![Screenshot 2023-01-09 at 16 20 34](https://user-images.githubusercontent.com/13738772/211343246-27259351-d45b-4832-86d3-214431e196aa.png)
-
-9. Test your endpoint by running a cURL command from your terminal. For example:
+8. Test your endpoint by running a cURL command from your terminal. For example:
 
 ```bash
 curl https://oe58vzqeei.execute-api.us-east-1.amazonaws.com/userse-api.us-east-1.amazonaws.com/users
 ```
+
+If you make API calls to the Lambda function from your app, you will likely need to configure Cross-Origin Resource Sharing (CORS).  Visit the AWS documentation for information about [how to enable CORS in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html).
+
+Run the following command to enable CORS to your local development environment:
+
+```bash
+aws apigatewayv2 update-api --api-id <api-id> --cors-configuration AllowOrigins="http://localhost:3000"
+```
+
+You can find your api-id on the API Gateway dashboard.
+![Screenshot 2023-01-09 at 16 20 34](https://user-images.githubusercontent.com/13738772/211343246-27259351-d45b-4832-86d3-214431e196aa.png)
 
 ## Conclusion
 
