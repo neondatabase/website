@@ -61,13 +61,15 @@ The following steps describe how to create the Lambda function using the [Server
     cd my-lambda
     ```
 
-3. Run the **serverless** command to create a serverless project. When prompted, select the **AWS - Node.js - Starter** project and provide your AWS account credentials, which include your AWS Access Key Id and AWS Secret Access Key. The process creates an `aws-node-project` directory.
+3. Run the **serverless** command to create a serverless project.
 
     ```bash
      serverless
     ```
 
-4. Install the `node-postgres` package, which you will use to connect to the database.
+    When prompted, select the **AWS - Node.js - Starter** project and provide your AWS account credentials, which include your AWS Access Key Id and AWS Secret Access Key. The process creates an `aws-node-project` directory.
+
+4. Change to the `aws-node-project` directory and install the `node-postgres` package, which you will use to connect to the database.
 
     ```bash
     npm install pg
@@ -126,6 +128,22 @@ The following steps describe how to create the Lambda function using the [Server
     ```
 
     The `serverless deploy` command generates an API endpoint using [API Gateway](https://www.serverless.com/framework/docs/providers/aws/events/http-api).
+
+    The output of the command appears similar to the following:
+
+    ```bash
+    Deploying aws-node-project-3 to stage dev (us-east-1)
+
+    ✔ Service deployed to stack aws-node-project-3-dev (66s)
+
+    dashboard: https://app.serverless.com/myorg/apps/aws-node-project/aws-node-project/dev/us-east-1
+
+    endpoint: GET - https://tvut90ovvg.execute-api.us-east-1.amazonaws.com/users
+
+    functions:
+
+      getAllUsers: aws-node-project-dev-getAllUsers (225 kB)
+    ```
   
 8. If you make API calls to the Lambda function from your app, you will likely need to configure Cross-Origin Resource Sharing (CORS).  Visit the AWS documentation for information about [how to enable CORS in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html).
 
