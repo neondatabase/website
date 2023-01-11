@@ -15,6 +15,7 @@ This guide describes how to set up a Neon database and connect to it from an AWS
 
 - A Neon account. If you do not have one, see [Sign up](https://neon.tech/docs/get-started-with-neon/signing-up/) for instructions.
 - An AWS account. You can create a free AWS account at [AWS Free Tier](https://aws.amazon.com/free/).
+- A Service Framework account. You can sign up at [Serverless Framework](https://www.serverless.com/).
 
 ## Create a table in Neon
 
@@ -72,7 +73,7 @@ The following steps describe how to create the Lambda function using the [Server
     npm install pg
     ```
 
-5. Create a new file named `user.js` and add the following code:
+5. Add a file named `users.js` to the `aws-node-project` directory and add the following code:
 
     ```js
     'use strict';
@@ -82,7 +83,7 @@ The following steps describe how to create the Lambda function using the [Server
     module.exports.getAllUsers = async () => {
      var client = new Client(process.env.DATABASE_URL);
      client.connect();
-     var { rows } = await client.query('SELECT * from users);
+     var { rows } = await client.query('SELECT * from users');
      return {
        statusCode: 200,
        body: JSON.stringify({
@@ -103,15 +104,9 @@ The following steps describe how to create the Lambda function using the [Server
     You can copy the connection string from the Neon Console, and add the `DATABASE_URL` under `environment`. Add `sslmode=require` to enable SSL. The `sslmode=require` option tells PostgreSQL to use SSL encryption and verify the server's certificate.
   
     ```yaml
-    org: aws-user
-    app: lambda-example
-    service: nodejs
-    frameworkVersion: '3'
-
     provider:
      name: aws
      runtime: nodejs14.x
-     region: eu-west-1
      environment:
        DATABASE_URL: postgres://<USER>:<PASSWORD>@<HOST>/<DATABASE>?sslmode=require
 
@@ -142,6 +137,12 @@ The following steps describe how to create the Lambda function using the [Server
 
     You can find your api-id on the API Gateway dashboard.
     ![Screenshot 2023-01-09 at 16 20 34](https://user-images.githubusercontent.com/13738772/211343246-27259351-d45b-4832-86d3-214431e196aa.png)
+
+9. Test your endpoint by running a cURL command from your terminal. For example:
+
+```bash
+curl https://eo58vzqeei.execute-api.us-east-1.amazonaws.com/userse-api.us-east-1.amazonaws.com/users
+```
 
 ## Conclusion
 
