@@ -69,6 +69,56 @@ The following steps describe how to create the Lambda function using the [Server
 
     When prompted, select the **AWS - Node.js - Starter** project and provide your AWS account credentials, which include your AWS Access Key Id and AWS Secret Access Key. The process creates an `aws-node-project` directory.
 
+    ```bash
+    ? What do you want to make? AWS - Node.js - Starter
+    ? What do you want to call this project? aws-node-project
+
+    ✔ Project successfully created in aws-node-project folder
+
+    ? Do you want to login/register to Serverless Dashboard? Yes
+    Logging into the Serverless Dashboard via the browser
+    If your browser does not open automatically, please open this URL:
+    https://app.serverless.com?client=cli&transactionId=jP-Zz5A4xu67PPYqzIeOh
+
+    ✔ You are now logged into the Serverless Dashboard
+
+    ? What application do you want to add this to? [create a new app]
+    ? What do you want to name this application? aws-node-project
+
+    ✔ Your project is ready to be deployed to Serverless Dashboard (org: "myorg", app: "aws-node-project")
+
+    ? No AWS credentials found, what credentials do you want to use? AWS Access Role
+    (most secure)
+
+    If your browser does not open automatically, please open this URL: https://app.serverless.com/danielneon/settings/providers?source=cli&providerId=new&provider=aws
+
+    To learn more about providers, visit: http://slss.io/add-providers-dashboard
+    ? 
+    [If you encountered an issue when setting up a provider, you may press Enter to
+    skip this step]
+
+    ✔ AWS Access Role provider was successfully created
+
+    ? Do you want to deploy now? Yes
+
+    Deploying aws-node-project to stage dev (us-east-1, "default" provider)
+
+    ✔ Service deployed to stack aws-node-project-dev (71s)
+
+    dashboard: https://app.serverless.com/danielneon/apps/my-aws-node-project/aws-node-project/dev/us-east-1
+
+    functions:
+      hello: aws-node-project-dev-hello (225 kB)
+
+    What next?
+    Run these commands in the project directory:
+
+    serverless deploy    Deploy changes
+    serverless info      View deployed endpoints and resources
+    serverless invoke    Invoke deployed functions
+    serverless --help    Discover more commands
+    ```
+
 4. Change to the `aws-node-project` directory and install the `node-postgres` package, which you will use to connect to the database.
 
     ```bash
@@ -132,13 +182,13 @@ The following steps describe how to create the Lambda function using the [Server
     The output of the command appears similar to the following:
 
     ```bash
-    Deploying aws-node-project-3 to stage dev (us-east-1)
+    Deploying aws-node-project to stage dev (us-east-1, "default" provider)
 
-    ✔ Service deployed to stack aws-node-project-3-dev (66s)
+    ✔ Service deployed to stack aws-node-project-dev (60s)
 
-    dashboard: https://app.serverless.com/myorg/apps/aws-node-project/aws-node-project/dev/us-east-1
+    dashboard: https://app.serverless.com/danielneon/apps/my-aws-node-project/aws-node-project/dev/us-east-1
 
-    endpoint: GET - https://tvut90ovvg.execute-api.us-east-1.amazonaws.com/users
+    endpoint: GET - https://ge3onb0jkl.execute-api.us-east-1.amazonaws.com/users
 
     functions:
 
@@ -159,7 +209,7 @@ The following steps describe how to create the Lambda function using the [Server
 9. Test your endpoint by running a cURL command from your terminal. For example:
 
 ```bash
-curl https://eo58vzqeei.execute-api.us-east-1.amazonaws.com/userse-api.us-east-1.amazonaws.com/users
+curl https://oe58vzqeei.execute-api.us-east-1.amazonaws.com/userse-api.us-east-1.amazonaws.com/users
 ```
 
 ## Conclusion
