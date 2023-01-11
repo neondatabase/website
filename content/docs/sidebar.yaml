@@ -85,7 +85,11 @@
     - title: Import from CSV
       slug: import/import-from-csv
 - title: Security
-  slug: security
+  items:
+    - title: Security
+      slug: security/security
+    - title: Secure connections
+      slug: security/secure-connections
 - title: Reference
   items:
     - title: API
