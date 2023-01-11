@@ -2,9 +2,7 @@
 title: Secure connections
 ---
 
-Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Connections that do not use SSL/TLS are rejected. 
-
-Neon enforces SSL/TLS connections by enabling  `ssl` in PostgreSQL and using only `hostssl` records in the `pg_hba.conf` client authentication configuration file. A `hostssl` record matches connection attempts made using TCP/IP, but only if the connection is made with SSL/TLS encryption. For related information, see [The pg_hba.conf File](https://www.postgresql.org/docs/current/auth-pg-hba-conf.html), in the _PostgreSQL documentation_.
+Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Neon rejects connections that do not use SSL/TLS, similar to standalone PostgreSQL with only `hostssl` records in a `pg_hba.conf` client authentication configuration file.
 
 When connecting via `psql`, you can verify that the connection to Neon uses SSL/TLS by viewing the connection response, which shows the connection protocol (TLSv1.3) and the encryption cipher. For example:
 
