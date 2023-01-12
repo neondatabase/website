@@ -64,7 +64,7 @@ The following steps describe how to create the Lambda function using the [Server
     npm install -g serverless
     ```
 
-2. Create a `my-lambda` project and change to that directory.
+2. Create a `my-lambda` project directory and navigate to it.
 
     ```bash
     mkdir my-lambda
