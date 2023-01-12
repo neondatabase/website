@@ -29,13 +29,9 @@ For additional information about creating a Neon project, see [Set up a project]
 
 ## Create a table in Neon
 
-To create a table, navigate to the **SQL Editor** in the [Neon Console](https://console.neon.tech/), or connect to your project using Neon's [passwordless connect](../../connect/passwordless-connect/) feature:
+To create a table, navigate to the **SQL Editor** in the [Neon Console](https://console.neon.tech/):
 
-```bash
-psql -h pg.neon.tech
-```
-
-In the SQL Editor or from the `psql` command-line, run the following queries to create a `users` table and insert some data:
+In the SQL Editor, run the following queries to create a `users` table and insert some data:
 
 ```sql
 CREATE TABLE users (
