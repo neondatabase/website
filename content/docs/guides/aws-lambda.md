@@ -77,7 +77,7 @@ The following steps describe how to create the Lambda function using the [Server
      serverless
     ```
 
-    When prompted, select the **AWS - Node.js - Starter** project and provide your AWS account credentials, which include your AWS Access Key Id and AWS Secret Access Key. The process creates an `aws-node-project` directory.
+    Follow the prompts, as shown below. The process creates an `aws-node-project` directory.
 
     ```bash
     ? What do you want to make? AWS - Node.js - Starter
@@ -100,7 +100,7 @@ The following steps describe how to create the Lambda function using the [Server
     ? No AWS credentials found, what credentials do you want to use? AWS Access Role
     (most secure)
 
-    If your browser does not open automatically, please open this URL: https://app.serverless.com/danielneon/settings/providers?source=cli&providerId=new&provider=aws
+    If your browser does not open automatically, please open this URL: https://app.serverless.com/myord/settings/providers?source=cli&providerId=new&provider=aws
 
     To learn more about providers, visit: http://slss.io/add-providers-dashboard
     ? 
@@ -115,7 +115,7 @@ The following steps describe how to create the Lambda function using the [Server
 
     ✔ Service deployed to stack aws-node-project-dev (71s)
 
-    dashboard: https://app.serverless.com/danielneon/apps/my-aws-node-project/aws-node-project/dev/us-east-1
+    dashboard: https://app.serverless.com/myorg/apps/my-aws-node-project/aws-node-project/dev/us-east-1
 
     functions:
       hello: aws-node-project-dev-hello (225 kB)
@@ -206,7 +206,7 @@ After installing the `node-postgres` package, your `package.json` file should in
 
     ✔ Service deployed to stack aws-node-project-dev (60s)
 
-    dashboard: https://app.serverless.com/danielneon/apps/my-aws-node-project/aws-node-project/dev/us-east-1
+    dashboard: https://app.serverless.com/myorg/apps/my-aws-node-project/aws-node-project/dev/us-east-1
 
     endpoint: GET - https://ge3onb0jkl.execute-api.us-east-1.amazonaws.com/users
 
