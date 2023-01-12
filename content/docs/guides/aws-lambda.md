@@ -212,7 +212,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
 8. Test the generated endpoint by running a cURL command. For example:
 
     ```bash
-    $ curl https://eg3onb0jkl.execute-api.us-east-1.amazonaws.com/users | jq
+    curl https://eg3onb0jkl.execute-api.us-east-1.amazonaws.com/users | jq
     ```
 
     The response returns the following data:
