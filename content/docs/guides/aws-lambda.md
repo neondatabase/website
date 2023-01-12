@@ -68,8 +68,8 @@ The following steps describe how to create the Lambda function using the [Server
 2. Create a `my-lambda` project directory and navigate to it.
 
     ```bash
-    mkdir my-lambda
-    cd my-lambda
+    mkdir neon-lambda
+    cd neon-lambda
     ```
 
 3. Run the **serverless** command to create a serverless project.
