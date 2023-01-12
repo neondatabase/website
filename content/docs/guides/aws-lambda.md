@@ -217,9 +217,48 @@ After installing the `node-postgres` package, your `package.json` file should in
   
 8. Test your endpoint by running a cURL command. For example:
 
-```bash
-curl https://oe58vzqeei.execute-api.us-east-1.amazonaws.com/userse-api.us-east-1.amazonaws.com/users
-```
+    ```bash
+    $ curl https://eg3onb0jkl.execute-api.us-east-1.amazonaws.com/users | jq
+    ```
+
+    The response returns the following data:
+
+    ```bash
+    {
+      "data": [
+        {
+          "id": 1,
+          "name": "Alice",
+          "email": "alice@example.com",
+          "created_at": "2023-01-10T17:46:29.353Z"
+        },
+        {
+          "id": 2,
+          "name": "Bob",
+          "email": "bob@example.com",
+          "created_at": "2023-01-10T17:46:29.353Z"
+        },
+        {
+          "id": 3,
+          "name": "Charlie",
+          "email": "charlie@example.com",
+          "created_at": "2023-01-10T17:46:29.353Z"
+        },
+        {
+          "id": 4,
+          "name": "Dave",
+          "email": "dave@example.com",
+          "created_at": "2023-01-10T17:46:29.353Z"
+        },
+        {
+          "id": 5,
+          "name": "Eve",
+          "email": "eve@example.com",
+          "created_at": "2023-01-10T17:46:29.353Z"
+        }
+      ]
+    }
+    ```
 
 ## Enabling CORS
 
@@ -231,7 +270,8 @@ You can run the following command to enable CORS to your local development envir
 aws apigatewayv2 update-api --api-id <api-id> --cors-configuration AllowOrigins="http://localhost:3000"
 ```
 
-You can find your api-id on the API Gateway dashboard.
+You can find your `api-id` on the API Gateway dashboard:
+
 ![Screenshot 2023-01-09 at 16 20 34](https://user-images.githubusercontent.com/13738772/211343246-27259351-d45b-4832-86d3-214431e196aa.png)
 
 ## Conclusion
