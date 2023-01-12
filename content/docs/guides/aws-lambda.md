@@ -135,17 +135,17 @@ The following steps describe how to create the Lambda function using the [Server
     npm install pg
     ```
 
-After installing the `node-postgres` package, your `package.json` file should include the following dependency:
+    After installing the `node-postgres` package, your `package.json` file should include the following dependency:
 
-```json
-{
- "dependencies": {
-   "pg": "^8.8.0"
- }
-}
-```
+    ```json
+    {
+     "dependencies": {
+       "pg": "^8.8.0"
+     }
+    }
+    ```
 
-5. Add a file named `users.js` to the `aws-node-project` directory, and add the following code:
+5. In the `aws-node-project` directory, add a `users.js` file and add the following code:
 
     ```js
     'use strict';
@@ -165,7 +165,7 @@ After installing the `node-postgres` package, your `package.json` file should in
     };
     ```
 
-    The code exports the `getAllUsers` function, which retrieves all rows from the `users` table and returns them as a `JSON` object in the `HTTP` response body.
+    The code in the `users.js` file exports the `getAllUsers` function, which retrieves all rows from the `users` table and returns them as a `JSON` object in the `HTTP` response body.
 
     The function uses the `pg` library to connect to the Neon database using the `Client` class and the database connection URL that is stored in the `DATABASE_URL` environment variable. The function calls the connect method on the `Client` instance to establish a connection to the database, and uses the query method to execute a `SELECT` statement that retrieves all rows from the `users` table.
 
