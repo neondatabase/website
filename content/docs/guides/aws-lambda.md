@@ -14,8 +14,7 @@ This guide describes how to set up a Neon database and connect to it from an AWS
 ## Prerequisites
 
 - A Neon account. If you do not have one, see [Sign up](https://neon.tech/docs/get-started-with-neon/signing-up/) for instructions.
-- An AWS account. You can create a free AWS account at [AWS Free Tier](https://aws.amazon.com/free/). You will also need to [create an IAM User and Access Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) to programmatically interact with your AWS account.
-
+- An AWS account. You can create a free AWS account at [AWS Free Tier](https://aws.amazon.com/free/). An [IAM User and Access Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) are requird to programmatically interact with your AWS account. You must provide these credentials when deploying the Serverless Framework project.
 - A Service Framework account. You can sign up at [Serverless Framework](https://www.serverless.com/).
 
 ## Create a Neon project
@@ -57,7 +56,7 @@ VALUES
 
 ## Create a Lambda function
 
-The following steps describe how to create the Lambda function using the [Serverless Framework](https://www.serverless.com/).
+Create the Lambda function using the [Serverless Framework](https://www.serverless.com/):
 
 1. Install the Serverless Framework by running the following command:
 
@@ -78,7 +77,7 @@ The following steps describe how to create the Lambda function using the [Server
      serverless
     ```
 
-    Follow the prompts, as shown below. The process creates an `aws-node-project` directory.
+    Follow the prompts, as demonstrated below. You will be required to provide your AWS account credentials. The process creates an `aws-node-project` directory.
 
     ```bash
     ? What do you want to make? AWS - Node.js - Starter
@@ -89,7 +88,7 @@ The following steps describe how to create the Lambda function using the [Server
     ? Do you want to login/register to Serverless Dashboard? Yes
     Logging into the Serverless Dashboard via the browser
     If your browser does not open automatically, please open this URL:
-    https://app.serverless.com?client=cli&transactionId=jP-Zz5A4xu67PPYqzIeOh
+    https://app.serverless.com?client=cli&transactionId=jP-Zz5A9xu67PPYqzIhOe
 
     ✔ You are now logged into the Serverless Dashboard
 
@@ -101,7 +100,7 @@ The following steps describe how to create the Lambda function using the [Server
     ? No AWS credentials found, what credentials do you want to use? AWS Access Role
     (most secure)
 
-    If your browser does not open automatically, please open this URL: https://app.serverless.com/myord/settings/providers?source=cli&providerId=new&provider=aws
+    If your browser does not open automatically, please open this URL: https://app.serverless.com/myorg/settings/providers?source=cli&providerId=new&provider=aws
 
     To learn more about providers, visit: http://slss.io/add-providers-dashboard
     ? 
@@ -130,13 +129,13 @@ The following steps describe how to create the Lambda function using the [Server
     serverless --help    Discover more commands
     ```
 
-4. Change to the `aws-node-project` directory and install the `node-postgres` package, which you will use to connect to the database.
+4. Navigate to the `aws-node-project` directory created by the previous step and install the `node-postgres` package, which you will use to connect to the database.
 
     ```bash
     npm install pg
     ```
 
-    After installing the `node-postgres` package, your `package.json` file should include the following dependency:
+    After installing the `node-postgres` package, the following dependency should be defined in your `package.json` file:
 
     ```json
     {
@@ -146,7 +145,7 @@ The following steps describe how to create the Lambda function using the [Server
     }
     ```
 
-5. In the `aws-node-project` directory, add a `users.js` file and add the following code:
+5. In the `aws-node-project` directory, add a `users.js` file, and add the following code to it:
 
     ```js
     'use strict';
@@ -168,13 +167,13 @@ The following steps describe how to create the Lambda function using the [Server
 
     The code in the `users.js` file exports the `getAllUsers` function, which retrieves all rows from the `users` table and returns them as a `JSON` object in the `HTTP` response body.
 
-    This function uses the `pg` library to connect to the Neon database. First, you create a new `Client` instance and pass the database connection string which is available in the `DATABASE_URL` environment variable. you then call `connect()` to establish a connection to the database. Finally, you are using the `query()` method to execute a `SELECT` statement that retrieves all rows from the `users` table.
+    This function uses the `pg` library to connect to the Neon database. It creates a new `Client` instance and passes the database connection string, which is defined in the `DATABASE_URL` environment variable. It then calls `connect()` to establish a connection to the database. Finally, it uses the `query()` method to execute a `SELECT` statement that retrieves all rows from the `users` table.
 
     The query method returns a `Promise` that resolves to an object containing the rows retrieved by the `SELECT` statement, which the function parses to retrieve the `rows` property. Finally, the function returns an `HTTP` response with a status code of 200 and a body that contains a `JSON` object with a single `data` property, which is set to the value of the rows variable.
 
 6. Add the `DATABASE_URL` environment variable and the function definition to the `serverless.yml` file, which is located in your `aws-node-project` directory.
 
-    You can copy the connection string from the Neon Console, and add the `DATABASE_URL` under `environment`. Add `sslmode=require` to enable SSL. The `sslmode=require` option tells PostgreSQL to use SSL encryption and verify the server's certificate.
+    You can copy the connection string from **Connection Details** widget the Neon Console. Add the `DATABASE_URL` under `environment`, and add `sslmode=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells PostgreSQL to use SSL encryption and verify the server's certificate.
   
     ```yaml
     provider:
@@ -192,31 +191,29 @@ The following steps describe how to create the Lambda function using the [Server
              method: get
     ```
 
-7. Deploy your serverless function using the following command:
+7. Deploy the serverless function using the following command:
 
     ```bash
     serverless deploy
     ```
 
-    The `serverless deploy` command generates an API endpoint using [API Gateway](https://www.serverless.com/framework/docs/providers/aws/events/http-api).
-
-    The output of the command appears similar to the following:
+    The `serverless deploy` command generates an API endpoint using [API Gateway](https://www.serverless.com/framework/docs/providers/aws/events/http-api). The output of the command appears similar to the following:
 
     ```bash
     Deploying aws-node-project to stage dev (us-east-1, "default" provider)
 
     ✔ Service deployed to stack aws-node-project-dev (60s)
 
-    dashboard: https://app.serverless.com/myorg/apps/my-aws-node-project/aws-node-project/dev/us-east-1
+    dashboard: https://app.serverless.com/myorg/apps/aws-node-project/aws-node-project/dev/us-east-1
 
-    endpoint: GET - https://ge3onb0jkl.execute-api.us-east-1.amazonaws.com/users
+    endpoint: GET - https://ge3onb0klj.execute-api.us-east-1.amazonaws.com/users
 
     functions:
 
       getAllUsers: aws-node-project-dev-getAllUsers (225 kB)
     ```
   
-8. Test your endpoint by running a cURL command. For example:
+8. Test the generated endpoint by running a cURL command. For example:
 
     ```bash
     $ curl https://eg3onb0jkl.execute-api.us-east-1.amazonaws.com/users | jq
@@ -277,4 +274,4 @@ You can find your `api-id` on the API Gateway dashboard:
 
 ## Conclusion
 
-In this guide, you have learned how to set up a PostgreSQL database using Neon and connect to it from an AWS Lambda function using Node.js as the runtime environment. You have also learned how to use Serverless Framework to create and deploy the Lambda function, and how to use the `pg` library to perform a basic read operations on the database.
+In this guide, you have learned how to set up a PostgreSQL database using Neon and connect to it from an AWS Lambda function using Node.js as the runtime environment. You have also learned how to use Serverless Framework to create and deploy the Lambda function, and how to use the `pg` library to perform a basic database read operations.
