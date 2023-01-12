@@ -17,6 +17,16 @@ This guide describes how to set up a Neon database and connect to it from an AWS
 - An AWS account. You can create a free AWS account at [AWS Free Tier](https://aws.amazon.com/free/).
 - A Service Framework account. You can sign up at [Serverless Framework](https://www.serverless.com/).
 
+## Create a Neon project
+
+If you do not have one already, create a Neon project:
+
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
+
+For additional information about creating a Neon project, see [Set up a project](/docs/get-started-with-neon/setting-up-a-project).
+
 ## Create a table in Neon
 
 To create a table, navigate to the **SQL Editor** in the [Neon Console](https://console.neon.tech/), or connect to your project using Neon's [passwordless connect](../../connect/passwordless-connect/) feature:
@@ -125,7 +135,7 @@ The following steps describe how to create the Lambda function using the [Server
     npm install pg
     ```
 
-After installing the `pg` driver, this is what the `package.json` file should look like:
+After installing the `node-postgres` package, your `package.json` file should include the following dependency:
 
 ```json
 {
@@ -135,8 +145,7 @@ After installing the `pg` driver, this is what the `package.json` file should lo
 }
 ```
 
-
-5. Add a file named `users.js` to the `aws-node-project` directory and add the following code:
+5. Add a file named `users.js` to the `aws-node-project` directory, and add the following code:
 
     ```js
     'use strict';
@@ -156,7 +165,7 @@ After installing the `pg` driver, this is what the `package.json` file should lo
     };
     ```
 
-    The code above exports the function `getAllUsers`, which retrieves all rows from the `users` table and returns them as a `JSON` object in the `HTTP` response body.
+    The code exports the `getAllUsers` function, which retrieves all rows from the `users` table and returns them as a `JSON` object in the `HTTP` response body.
 
     The function uses the `pg` library to connect to the Neon database using the `Client` class and the database connection URL that is stored in the `DATABASE_URL` environment variable. The function calls the connect method on the `Client` instance to establish a connection to the database, and uses the query method to execute a `SELECT` statement that retrieves all rows from the `users` table.
 
@@ -182,7 +191,7 @@ After installing the `pg` driver, this is what the `package.json` file should lo
              method: get
     ```
 
-7. Deploy your function using the following command:
+7. Deploy your serverless function using the following command:
 
     ```bash
     serverless deploy
@@ -206,15 +215,17 @@ After installing the `pg` driver, this is what the `package.json` file should lo
       getAllUsers: aws-node-project-dev-getAllUsers (225 kB)
     ```
   
-8. Test your endpoint by running a cURL command from your terminal. For example:
+8. Test your endpoint by running a cURL command. For example:
 
 ```bash
 curl https://oe58vzqeei.execute-api.us-east-1.amazonaws.com/userse-api.us-east-1.amazonaws.com/users
 ```
 
+## Enabling CORS
+
 If you make API calls to the Lambda function from your app, you will likely need to configure Cross-Origin Resource Sharing (CORS).  Visit the AWS documentation for information about [how to enable CORS in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html).
 
-Run the following command to enable CORS to your local development environment:
+You can run the following command to enable CORS to your local development environment:
 
 ```bash
 aws apigatewayv2 update-api --api-id <api-id> --cors-configuration AllowOrigins="http://localhost:3000"
