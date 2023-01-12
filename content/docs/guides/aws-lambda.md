@@ -167,7 +167,7 @@ The following steps describe how to create the Lambda function using the [Server
 
     The code in the `users.js` file exports the `getAllUsers` function, which retrieves all rows from the `users` table and returns them as a `JSON` object in the `HTTP` response body.
 
-    The function uses the `pg` library to connect to the Neon database using the `Client` class and the database connection URL that is stored in the `DATABASE_URL` environment variable. The function calls the connect method on the `Client` instance to establish a connection to the database, and uses the query method to execute a `SELECT` statement that retrieves all rows from the `users` table.
+    This function uses the `pg` library to connect to the Neon database. First, you create a new `Client` instance and pass the database connection string which is available in the `DATABASE_URL` environment variable. you then call `connect()` to establish a connection to the database. Finally, you are using the `query()` method to execute a `SELECT` statement that retrieves all rows from the `users` table.
 
     The query method returns a `Promise` that resolves to an object containing the rows retrieved by the `SELECT` statement, which the function parses to retrieve the `rows` property. Finally, the function returns an `HTTP` response with a status code of 200 and a body that contains a `JSON` object with a single `data` property, which is set to the value of the rows variable.
 
