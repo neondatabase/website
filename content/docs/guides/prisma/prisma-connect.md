@@ -7,19 +7,11 @@ redirectFrom:
   - /docs/guides/prisma
 ---
 
-Prisma is an open-source, next-generation ORM that allows you to easily manage and interact with your database. This guide describes how to create a Neon project, connect to it from Prisma, and optionally configure a shadow database for Prisma Migrate.
-
-To create a Neon project and connect to it from Prisma:
-
-1. [Create a Neon project](#create-a-neon-project)
-2. [Connect to Neon from Prisma](#connect-to-neon-from-prisma)
-3. Optionally, [Configure a shadow database for Prisma Migrate](#configure-a-shadow-database-for-prisma-migrate).
+Prisma is an open-source, next-generation ORM that allows you to easily manage and interact with your database. This guide describes how to connect to Neon from Prisma.
 
 ## Create a Neon project
 
-To create a Neon project:
-
-If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
+If you do not have one already, create a Neon project. Save your connection connection string with our password. It is required when defining connection settings.
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
@@ -29,7 +21,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 To connect to Neon from Prisma:
 
-1. Add the following lines to `prisma/schema.prisma` to identify the data source and database URL:
+1. Add the following lines to your `prisma/schema.prisma` file to identify the data source and database URL:
 
    ```typescript
    datasource db {
@@ -38,7 +30,7 @@ To connect to Neon from Prisma:
    }
    ```
 
-2. Add a `DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon connection string that you copied in the previous step.
+2. Add a `DATABASE_URL` setting to your `.env` file and set it to the Neon connection string that you copied in the previous step.
 
   ```shell
   DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/neondb"
@@ -94,7 +86,7 @@ To configure a shadow database:
    }
    ```
 
-1. Add a `SHADOW_DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon connection string that you copied in the previous step.
+1. Add a `SHADOW_DATABASE_URL` setting to your `.env` file and set it to the Neon connection string that you copied in the previous step.
 
    ```shell
    SHADOW_DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/<dbname>"
