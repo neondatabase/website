@@ -71,9 +71,11 @@
     - title: Prisma
       items:
         - title: Connect from Prisma
-          slug: guides/prisma/prisma
+          slug: guides/prisma/prisma-connect
         - title: Use Prisma Migrate 
           slug: guides/prisma/prisma-migrate
+        - title: Use Prisma Migrate 
+          slug: guides/prisma/prisma-connection-issues
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy
