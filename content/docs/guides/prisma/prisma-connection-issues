@@ -7,7 +7,7 @@ This topics describes how to resolve connection issues you may encounter when us
 
 ## Connection timeouts
 
-A connection timeout from Prisma results in the following error:
+A connection timeout when attempting to connect to Prisma from Neon results in the following error:
 
 ```text
 Error: P1001: Can't reach database server at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`
@@ -26,7 +26,7 @@ The solution would be to [increase the connection pool timeout](https://www.pris
 
 In the future, when we bring down the time to activate an idle compute node, you wouldn’t need this workaround. Also, supporting more regions in the future will most likely decrease latency as well
 
-## Prisma Migrate and connection pooling with PGBouncer
+## Prisma Migrate with PgBouncer
 
 Prisma Migrate requires a direct connection to the database and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in an environment that enables PgBouncer for connection pooling results in the following error:
 
