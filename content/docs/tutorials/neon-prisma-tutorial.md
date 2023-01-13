@@ -106,9 +106,13 @@ In this step, we'll update your project's `.env` file with the connection string
 When you are finished, your `.env` file should have entries similar to the following:
 
 ```text
-DATABASE_URL=postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/neondb
-SHADOW_DATABASE_URL=postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/shadow
+DATABASE_URL=postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/neondb?connect_timeout=30
+SHADOW_DATABASE_URL=postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/shadow?connect_timeout=30
 ```
+
+<Admonition type="note">
+A `?connect_timeout=30` option is added to the connection strings shown above to avoid database connection timeouts. The default `connect_timeout` setting is 5 seconds, which is usually enough time for a database connection to be established. However, network latency combined with the couple of seconds it takes to start an idle Neon compute instance can sometimes cause the default `connect_timeout` setting to be exceeded. Setting `connect_timeout=30` helps avoid this potential connection timeout issue.
+</Admonition>
 
 ## Step 6: Update your schema.prisma file
 
@@ -204,13 +208,59 @@ To view the `User` and `Post` tables that were created in your `neondb` database
 3. Select **Tables**.
 4. Select the `neondb` database and default `public` schema. The `User` and `Post` tables should be visible in the sidebar (the tables have no data at this point).
 
+## Step 9: Evolve your schema with Prisma Migrate
+
+In this step, you will evolve your Prisma schema and generate and apply a migration with `prisma migrate dev`.
+
+Add a `tag` field to your `Post` model. The modified schema should appear as follows:
+
+```text
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(255)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  content   String?
+  published Boolean  @default(false)
+  authorId  Int
+  user      User     @relation(fields: [authorId], references: [id])
+  tag       String?      
+}   
+    ```
+
+3. Apply the Prisma schema change to your database using `prisma migrate dev` command. In this example, name given to the migration is `add-tag-field`.
+
+    ```bash
+    npx prisma migrate dev --name add-tag-field
+    ```
+
+    This command creates a new SQL migration file for the migration, applies the generated SQL migration to your database, and regenerates the Prisma Client. The output resembles the following:
+
+    ```bash
+    Environment variables loaded from .env
+    Prisma schema loaded from prisma/schema.prisma
+    Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-white-thunder-826300.us-east-2.aws.neon.tech:5432"
+
+    Applying migration `20230113120852_add_tag_field`
+
+
+
+    The following migration(s) have been created and applied from new schema changes:
+
+    migrations/
+      └─ 20230113120852_add_tag_field/
+        └─ migration.sql
+
+    Your database is now in sync with your schema.
+
+    ✔ Generated Prisma Client (4.8.1 | library) to ./node_modules/@prisma/client in 
+    91ms
+    ```
+     
+    You can view the migration in your `prisma/migrations` folder.
+
 ## Conclusion
 
-Congratulations! You have successfully connected a Prisma project to a Neon database and performed your first migration. You have learned how to create a Neon project, set up Prisma, and perform a migration using Prisma Migrate.
-
-## Next Steps
-
- If you would like to explore how to send queries to your database with Prisma Client, refer to [Part 4: Explore how to send queries to your database with Prisma Client](https://www.prisma.io/docs/getting-started/quickstart#4-explore-how-to-send-queries-to-your-database-with-prisma-client) in the Prisma Quickstart, which walks you through those steps, building upon the setup in this tutorial.
+Congratulations! You have successfully connected a Prisma project to a Neon database and performed migrations using Prisma Migrate.
 
 ## Need help?
 
