@@ -11,7 +11,7 @@ Prisma is an open-source, next-generation ORM that allows you to easily manage a
 
 ## Create a Neon project
 
-If you do not have one already, create a Neon project. Save your connection connection string with our password. It is required when defining connection settings.
+If you do not have one already, create a Neon project. Save your connection connection string. It is required when defining connection settings.
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
@@ -63,13 +63,13 @@ Prisma Migrate requires a direct connection to the database and currently does n
 
 ```text
 Error: undefined: Database error
-Error querying the database: db error: ERROR: prepared statement "s0" already 
-exists
+Error querying the database: db error: ERROR: prepared statement 
+"s0" already exists
 ```
 
 If you encounter this error, ensure that connection pooling in Neon is disabled. See [Enable connection pooling](../../connect/connection-pooling/#enable-connection-pooling).
 
-For more information about this issue, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
+For more information about this issue, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#prisma-migrate-and-pgbouncer-workaround).
 </Admonition>
 
 To configure a shadow database:
