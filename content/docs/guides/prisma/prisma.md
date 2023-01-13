@@ -39,15 +39,9 @@ To connect to Neon from Prisma:
 
 2. Add a `DATABASE_URL` setting to your Prisma `.env` file and set it to the Neon connection string that you copied in the previous step.
 
-```shell
-    DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/neondb"
-```
-
-<Admonition type="note">
-If connection pooling is enabled for your Neon project, which is the default, append `?pgbouncer=true` to the connection string, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
-
-For information about enabling and disabling connection pooling for your Neon project, see [Connection pooling](../../get-started-with-neon/connection-pooling/).
-</Admonition>
+  ```shell
+  DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>:5432/neondb"
+  ```
 
 where:
 
@@ -57,9 +51,33 @@ where:
 
 You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
 
+<Admonition type="note">
+Using Prisma Client from a serverless function may require adding the `?pgbouncer=true` flag to your connection URL to enable connection pooling. For example:
+
+```text
+postgres://<user>:<password>@<endpoint_hostname>:5432/neondb?pgbouncer=true
+```
+
+For more information, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
+</Admonition>
+
 ## Configure a shadow database for Prisma Migrate
 
 Prisma Migrate is a migration tool that allows you to easily evolve your database schema from prototyping to production. Prisma Migrate requires a shadow database to detect schema drift. This section describes how to configure a second Neon database, which is required to run the `prisma migrate dev` command.
+
+<Admonition type="note">
+Prisma Migrate requires a direct connection to the database and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in an environment that enables PgBouncer for connection pooling results in the following error:
+
+```text
+Error: undefined: Database error
+Error querying the database: db error: ERROR: prepared statement "s0" already 
+exists
+```
+
+If you encounter this error, ensure that connection pooling in Neon is disabled. See [Enable connection pooling](../../connect/connection-pooling/#enable-connection-pooling).
+
+For more information about this issue, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
+</Admonition>
 
 To configure a shadow database:
 

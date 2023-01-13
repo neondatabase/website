@@ -9,12 +9,8 @@ const ApiReferencePage = () => {
     fetch('https://dqjnwjfwjj8yz.cloudfront.net/api_spec/release/v2.json')
       .then((res) => res.json())
       .then((spec) => {
-        spec.servers = [
-          {
-            url: 'https://console.neon.tech/api/v2',
-          },
-        ];
-        spec.info.description = `This is a preview of the next version of the Neon API. It is only partially implemented and intended for review purposes only.\n\n${spec.info.description}`;
+        spec.info.description = `[Spec link](https://dqjnwjfwjj8yz.cloudfront.net/api_spec/release/v2.json)\n\n${spec.info.description}`;
+
         SwaggerUI({
           spec,
           dom_id: '#swagger',

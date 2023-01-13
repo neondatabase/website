@@ -10,7 +10,7 @@ Most actions performed in the Neon Console can be performed using the [Neon API]
 
 API keys are global and belong to your Neon account. They can be used with any project that belongs to your Neon account. A Neon account can create unlimited API keys.
 
-### Generate an API key
+## Create an API key
 
 An API key is a randomly-generated 64-bit key that you must provide when calling Neon API methods. An API key remains valid until it is revoked.
 
@@ -24,7 +24,7 @@ To generate an API key:
 
 Store your key in a safe location. You will not be able to view or copy the key again after leaving the **Developer Settings** page. You can safely store an API key in a locally installed credential manager or in a credential management service such as the [AWS Key Management Service](https://aws.amazon.com/kms/). If you lose an API key, revoke it and generate a new one.
 
-### Revoke an API key
+## Revoke an API key
 
 An API key that is no longer needed can be revoked. This action cannot be reversed.
 
@@ -34,7 +34,7 @@ To revoke an API key:
 2. Select **Developer Settings** to see a list of API keys.
 3. To revoke a key, click **Revoke**. The key is immediately revoked. Any request using the key now fails.
 
-### Make an API call
+## Make an API call
 
 <Admonition type="important">
 [Neon API v1](https://neon.tech/api-reference) is deprecated. Please migrate your applications to [Neon API v2](https://neon.tech/api-reference/v2/). The base URL for Neon API v2 is `https://console.neon.tech/api/v2/`.
@@ -50,7 +50,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 
 where:
 
-- `"https://console.neon.tech/api/v2/"` is the resource URL, which includes the base URL for the Neon API and the `/projects` endpoint.
+- `"https://console.neon.tech/api/v2/projects"` is the resource URL, which includes the base URL for the Neon API and the `/projects` endpoint.
 - The `"Accept: application/json"` in the header specifies the accepted response type.
 - The `Authorization: Bearer $NEON_API_KEY` entry in the header specifies your API key. Replace `$NEON_API_KEY` with an actual 64-bit API key. A request without this header, or containing an invalid or revoked API key, fails and returns a `401 Unauthorized` HTTP status code.
 - [`jq`](https://stedolan.github.io/jq/) is an optional third-party tool that formats the JSON response, making it easier to read.
@@ -79,6 +79,117 @@ A response for a Neon user with a single project appears similar to the followin
 ```
 
 Refer to the [Neon API Reference](https://neon.tech/api-reference/v2/) for other supported Neon API methods.
+
+## Manage API keys with the Neon API
+
+API key actions performed in the Neon Console can also be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, and revoke API keys using the Neon API.
+
+### Prerequisites
+
+You can create and manage API keys using the Neon API, but you need an API key to start with. You can obtain an API key from the Neon Console. For instructions, see [Create an API key](#create-an-api-key). In the examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+
+The `jq` option specified in each example is an optional third-party tool that formats the JSON response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
+
+### Create an API key with the API
+
+The following Neon API method creates an API key. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/API%20Key/createApiKey).
+
+```text
+POST /api_keys 
+```
+
+The API method appears as follows when specified in a cURL command. You must specify the `key_name` attribute and with a name for the API key.
+
+```bash
+curl https://console.neon.tech/api/v2/api_keys \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -d '{"key_name": "mynewkey"}' | jq
+```
+
+Response:
+
+The response includes an `id` for the key and a generated 64-bit `key` value, which can be used to access the Neon API. API keys should stored and managed securely, as they provide access to all objects in your Neon account.
+
+```json
+{
+  "id": 177630,
+  "key": "pgh66qptg0cdbzk9jmu4qpvn65jhvwkpfzc6qzi57z814ispmhfu7q4q85r44zv8"
+}
+```
+
+### List API keys with the API
+
+The following Neon API method lists API keys for the your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/API%20Key/listApiKeys).
+
+```text
+GET /api_keys
+```
+
+The API method appears as follows when specified in a cURL command. No parameters are required.
+
+```bash
+curl "https://console.neon.tech/api/v2/api_keys" \
+ -H "Authorization: Bearer $NEON_API_KEY" \
+ -H "Accept: application/json"  | jq
+```
+
+Response:
+
+```json
+[
+  {
+    "created_at": "2022-12-23T20:52:29Z",
+    "id": 177630,
+    "last_used_at": "2022-12-23T20:53:19Z",
+    "last_used_from_addr": "192.0.2.21",
+    "name": "mykey"
+  },
+  {
+    "created_at": "2022-12-23T20:49:01Z",
+    "id": 177626,
+    "last_used_at": "2022-12-23T20:53:19Z",
+    "last_used_from_addr": "192.0.2.21",
+    "name": "sam_key"
+  },
+  {
+    "created_at": "2022-12-23T20:48:31Z",
+    "id": 177624,
+    "last_used_at": "2022-12-23T20:53:19Z",
+    "last_used_from_addr": "192.0.2.21",
+    "name": "sally_key"
+  }
+]
+```
+
+### Revoke an API key with the API
+
+The following Neon API method revokes the specified API key. The `key_id` is a required parameter. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/API%20Key/revokeApiKey).
+
+```text
+DELETE /api_keys/{key_id}
+```
+
+The API method appears as follows when specified in a cURL command:
+
+```bash
+curl -X DELETE \
+  'https://console.neon.tech/api/v2/api_keys/177630' \
+  -H "Accept: application/json"  \
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
+```
+
+Response:
+
+```json
+{
+  "id": 177630,
+  "name": "mykey",
+  "revoked": true,
+  "last_used_at": "2022-12-23T23:38:35Z",
+  "last_used_from_addr": "192.0.2.21"
+}
+```
 
 ## Need help?
 
