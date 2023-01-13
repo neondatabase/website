@@ -1,5 +1,5 @@
 ---
-title: Using Prisma Migrate with Neon
+title: Use Prisma Migrate with Neon
 enableTableOfContents: true
 ---
 

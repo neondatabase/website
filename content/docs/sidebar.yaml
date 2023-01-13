@@ -72,8 +72,8 @@
       items:
         - title: Connect from Prisma
           slug: guides/prisma/prisma
-        - title: Using Prisma Migrate 
-          slug: guides/prisma/neon-prisma-migrate-tutorial
+        - title: Use Prisma Migrate 
+          slug: guides/prisma/prisma-migrate
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy
