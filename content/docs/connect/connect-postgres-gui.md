@@ -42,7 +42,9 @@ Should a port number be required, Neon always uses the default port, `5432`.
 
 ## Connect to the database
 
-In the GUI application, enter the connection details you gathered into the appropriate fields and click **Connect**.
+In the GUI application, enter the connection details you gathered into the appropriate fields and connect. In PgAdmin 4, clicking **Save** establishes the connection.
+
+![Register - Server](./images/pgadmin4.png)
 
 If the connection was successful, you should be able to view and query your database.
 
@@ -50,11 +52,12 @@ If the connection was successful, you should be able to view and query your data
 
 Connections from the following GUI applications have been successfully tested with Neon:
 
-- pgAdmin
-- DBeaver
-- DataGrip
-- HeidiSQL
-- Navicat
-- TablePlus
-- Postico
-- DronaHQ
+- [pgAdmin 4](https://www.pgadmin.org/)
+- [DBeaver](https://dbeaver.io/)
+- [DataGrip](https://www.jetbrains.com/datagrip/)
+- [HeidiSQL](https://www.heidisql.com/)
+- [Navicat](https://www.navicat.com/en/products/navicat-for-postgresql)
+- [TablePlus](https://tableplus.com/)
+- [Postico](https://eggerapps.at/postico2/)
+- [DronaHQ](https://www.dronahq.com/)
+- [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres)
