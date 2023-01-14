@@ -55,7 +55,6 @@ Connections from the following GUI applications have been successfully tested wi
 - [pgAdmin 4](https://www.pgadmin.org/)
 - [DBeaver](https://dbeaver.io/)
 - [DataGrip](https://www.jetbrains.com/datagrip/)
-- [HeidiSQL](https://www.heidisql.com/)
 - [TablePlus](https://tableplus.com/)
 - [DronaHQ](https://www.dronahq.com/)
 - [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres)
