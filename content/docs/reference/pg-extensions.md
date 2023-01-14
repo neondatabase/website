@@ -5,8 +5,6 @@ enableTableOfContents: true
 
 Neon supports the PostgreSQL extensions shown in the following table. For extension documentation, select the extension version.
 
-To request support for additional extensions, please contact us at [support@neon.tech](mailto:support@neon.tech) or post your request to the [Neon community forum](https://community.neon.tech/).
-
 Unless otherwise noted, supported extensions can be installed from the Neon SQL Editor using [CREATE EXTENSION](https://www.postgresql.org/docs/14/sql-createextension.html) syntax.
 
 ```sql
@@ -59,6 +57,10 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 - Neon supports the `uuid-ossp` extension for generating UUIDs rather than the `uuid` extension.
 - The `sslinfo` extension is not supported, as Neon handles connections via a proxy that checks SSL.
 - The `pg_cron` extension is not supported. Neon scales to zero when it is not being used, which means that a scheduler that runs inside the database cannot be implemented in Neon.
+
+## Request extension support
+
+To request support for additional extensions, please contact us at [support@neon.tech](mailto:support@neon.tech) or post your request to the [Neon community forum](https://community.neon.tech/).
 
 ## Need help?
 
