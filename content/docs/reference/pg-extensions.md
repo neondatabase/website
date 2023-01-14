@@ -54,6 +54,12 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 | unaccent                 | [1.1](https://www.postgresql.org/docs/14/unaccent.html)         | [1.1](https://www.postgresql.org/docs/15/unaccent.html)          |                                                                                                                    |
 | uuid-ossp                | [1.1](https://www.postgresql.org/docs/14/uuid-ossp.html)        | [1.1](https://www.postgresql.org/docs/15/uuid-ossp.html)         | Double-quote the extension name when installing: `CREATE EXTENSION "uuid-ossp"`                                    |
 
+## Extension support notes
+
+- Neon supports the `uuid-ossp` extension for generating UUIDs rather than the `uuid` extension.
+- The `sslinfo` extension is not supported, as Neon handles connections via a proxy that checks SSL.
+- The `pg_cron` extension is not supported. Neon scales to zero when it is not being used, which means that a scheduler that run inside the database cannot be implemented in Neon.
+
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
