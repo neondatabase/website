@@ -56,8 +56,6 @@ Connections from the following GUI applications have been successfully tested wi
 - [DBeaver](https://dbeaver.io/)
 - [DataGrip](https://www.jetbrains.com/datagrip/)
 - [HeidiSQL](https://www.heidisql.com/)
-- [Navicat](https://www.navicat.com/en/products/navicat-for-postgresql)
 - [TablePlus](https://tableplus.com/)
-- [Postico](https://eggerapps.at/postico2/)
 - [DronaHQ](https://www.dronahq.com/)
 - [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres)
