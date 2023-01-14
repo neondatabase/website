@@ -105,7 +105,7 @@ SHADOW_DATABASE_URL=postgres://sally:************@ep-white-thunder-826300.us-eas
 ```
 
 <Admonition type="note">
-A `?connect_timeout=30` option is added to the connection strings above to avoid database connection timeouts. The default `connect_timeout` setting is 5 seconds, which is usually enough time for a database connection to be established. However, network latency combined with the short amount of time required to start an idle Neon compute instance can sometimes cause the default `connect_timeout` setting to be exceeded. Setting `connect_timeout=10` helps avoid this potential connection timeout issue.
+A `?connect_timeout=10` option is added to the connection strings above to avoid database connection timeouts. The default `connect_timeout` setting is 5 seconds, which is usually enough time for a database connection to be established. However, network latency combined with the short amount of time required to start an idle Neon compute instance can sometimes cause the default `connect_timeout` setting to be exceeded. Setting `connect_timeout=10` helps avoid this potential connection timeout issue.
 </Admonition>
 
 ## Step 6: Update your schema.prisma file
