@@ -58,7 +58,7 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 - Neon supports the `uuid-ossp` extension for generating UUIDs rather than the `uuid` extension.
 - The `sslinfo` extension is not supported, as Neon handles connections via a proxy that checks SSL.
-- The `pg_cron` extension is not supported. Neon scales to zero when it is not being used, which means that a scheduler that run inside the database cannot be implemented in Neon.
+- The `pg_cron` extension is not supported. Neon scales to zero when it is not being used, which means that a scheduler that runs inside the database cannot be implemented in Neon.
 
 ## Need help?
 
