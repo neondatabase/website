@@ -31,7 +31,7 @@
     - title: Connect with psql
       slug: connect/query-with-psql-editor
     - title: Connect a GUI or IDE
-      slug: connect/connect-from-any-app
+      slug: connect/connect-postgres-gui
     - title: Connect from old clients
       slug: connect/connectivity-issues
     - title: Connection pooling
