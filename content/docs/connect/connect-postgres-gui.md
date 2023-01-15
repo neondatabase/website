@@ -3,35 +3,33 @@ title: Connect a GUI or IDE
 enableTableOfContents: true
 ---
 
-This topic describes how to connect to a Neon database from a GUI application or IDE. This topic uses `pgAdmin` as an example, but most GUI applications and IDEs that support connecting to a standalone PostgreSQL database also support connecting to Neon.
+This topic describes how to connect to a Neon database from a GUI application or IDE. The `pgAdmin` GUI application is used as an example below, but most GUI applications and IDEs that support connecting to a standalone PostgreSQL database also support connecting to Neon.
 
-## Retrieve your connection details
+## Gather your connection details
 
 To connect to a Neon database, the following connection details are typically required:
 
-- Hostname
-- Port
-- Database name
-- User name
-- Password
+- hostname
+- port
+- database name
+- user name
+- password
 
 You can obtain most of these details from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
 ![Connection details widget](./images/connection_details.png)
 
-A Neon connection string includes the user, the hostname, and the database name.
+You can obtain most of the connection details that you require from the connection string, with the exception of the password and port number:
 
 ```text
 postgres://casey@ep-square-sea-260584.us-east-2.aws.neon.tech/neondb
              ^                       ^                          ^
-             |- <user>               |- <hostname>     |- <database>
+             |- <user name>          |- <hostname>              |- <database name>
 ```
 
-From the connection string, you can obtain most of the connection details that you require with the exception of the password and port number:
-
-- Hostname: `ep-square-sea-260584.us-east-2.aws.neon.tech`
-- Database name: `neondb`
-- User name: `casey`
+- user name: `casey`
+- hostname: `ep-square-sea-260584.us-east-2.aws.neon.tech`
+- database name: `neondb`
 
 For security reasons, passwords are only shown when they are created. If you misplaced your password, you can reset it by selecting **Reset Password** link in the Connection Details widget, or by navigating to **Settings** > **Users**.
 
