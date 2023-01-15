@@ -3,11 +3,11 @@ title: Connect a GUI or IDE
 enableTableOfContents: true
 ---
 
-This topic describes how to connect to a Neon database from a GUI application or IDE. The `pgAdmin` GUI application is used as an example below, but most GUI applications and IDEs that support connecting to a standalone PostgreSQL database also support connecting to Neon.
+This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a PostgreSQL database also support connecting to Neon, because Neon is PostgreSQL.
 
 ## Gather your connection details
 
-The following connection details are typically required:
+The following connection details are typically required when configuring a connection:
 
 - hostname
 - port
@@ -31,17 +31,17 @@ postgres://casey@ep-square-sea-260584.us-east-2.aws.neon.tech/neondb
 - hostname: `ep-square-sea-260584.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
-Passwords are only shown when they are created. If you misplaced your password, you can reset it by selecting **Reset Password** link in the Connection Details widget, or by navigating to **Settings** > **Users**.
+Passwords are only shown when they are created. If you misplaced your password, you can reset it by selecting the **Reset Password** link in the **Connection Details** widget, or by navigating to **Settings** > **Users**.
 
 Neon uses the default PostgreSQL port, `5432`.
 
 ## Connect to the database
 
-In the GUI application or IDE, enter the connection details into the appropriate fields and connect. In PgAdmin 4, clicking **Save** establishes the database connection.
+In the GUI application or IDE, enter the connection details into the appropriate fields and connect. In PgAdmin example shown below, clicking **Save** establishes the database connection.
 
 ![Register - Server](./images/pgadmin4.png)
 
-If the connection was successful, you should be able to view and interact with your database from the GUI application or IDE.
+If the connection is successful, you should be able to view and interact with your database from the GUI application or IDE.
 
 ## Tested GUI applications and IDEs
 
@@ -59,10 +59,10 @@ Connections from the following GUI applications and IDEs have been tested with N
 
 ## Connection issues
 
-Applications that use older client libraries or drivers that do not support Server Name Indication (SNI) may not permit connecting to Neon. If you encounter the following error, refer to [Connecting from older clients](../connectivity-issues) for possible workarounds.
+Applications that use older client libraries or drivers that do not support Server Name Indication (SNI) may not permit connecting to Neon. If you encounter the following error, refer to [Connect from older clients](../connectivity-issues) for possible workarounds.
 
 ```text
-ERROR: The project ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the project ID (the first part of the domain name) as a parameter: '&options=project%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
+ERROR: The project ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the project ID (the first part of the domain name) as a parameter: '&options=project%3D'.
 ```
 
 ## Need help?
