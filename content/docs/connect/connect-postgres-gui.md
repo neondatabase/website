@@ -56,5 +56,7 @@ Connections from the following GUI applications have been successfully tested wi
 - [DBeaver](https://dbeaver.io/)
 - [DataGrip](https://www.jetbrains.com/datagrip/)
 - [TablePlus](https://tableplus.com/)
-- [DronaHQ](https://www.dronahq.com/)
+- [Postico](https://eggerapps.at/postico2/)
+- [DronaHQ hosted cloud version](https://www.dronahq.com/) (requires selecting **Connect using SSL** when creating a connector)
 - [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres)
+- [DbVisualizer](https://www.dbvis.com/)
