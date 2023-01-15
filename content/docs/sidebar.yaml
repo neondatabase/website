@@ -26,12 +26,12 @@
   items:
     - title: Connect from any application
       slug: connect/connect-from-any-app
+    - title: Connect a GUI or IDE
+      slug: connect/connect-postgres-gui
     - title: Passwordless connect
       slug: connect/passwordless-connect
     - title: Connect with psql
       slug: connect/query-with-psql-editor
-    - title: Connect a GUI or IDE
-      slug: connect/connect-postgres-gui
     - title: Connect from old clients
       slug: connect/connectivity-issues
     - title: Connection pooling
