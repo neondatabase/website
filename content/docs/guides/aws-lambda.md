@@ -169,6 +169,10 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
 
 6. Add the `DATABASE_URL` environment variable and the function definition to the `serverless.yml` file, which is located in your `aws-node-project` directory.
 
+    <Admonition type="note">
+    Environment variables can also be added to a `.env` file and loaded automatically with the help of the [dotenv](https://www.npmjs.com/package/dotenv) package. For more information, see [Resolution of environment variables](https://www.serverless.com/framework/docs/environment-variables).
+    </Admonition>
+
     You can copy the connection string from **Connection Details** widget the Neon Console. Add the `DATABASE_URL` under `environment`, and add `sslmode=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells PostgreSQL to use SSL encryption and verify the server's certificate.
   
     ```yaml
