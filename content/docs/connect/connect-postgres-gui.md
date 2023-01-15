@@ -3,11 +3,11 @@ title: Connect a GUI or IDE
 enableTableOfContents: true
 ---
 
-This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a PostgreSQL database also support connecting to Neon, because Neon is PostgreSQL.
+This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a PostgreSQL database also support connecting to Neon.
 
 ## Gather your connection details
 
-The following connection details are typically required when configuring a connection:
+The following details are typically required when configuring a connection:
 
 - hostname
 - port
@@ -15,7 +15,7 @@ The following connection details are typically required when configuring a conne
 - user name
 - password
 
-You can obtain most of these details from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+You can gather most of these details from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
 ![Connection details widget](./images/connection_details.png)
 
@@ -37,7 +37,7 @@ Neon uses the default PostgreSQL port, `5432`.
 
 ## Connect to the database
 
-In the GUI application or IDE, enter the connection details into the appropriate fields and connect. In PgAdmin example shown below, clicking **Save** establishes the database connection.
+In the GUI application or IDE, enter the connection details into the appropriate fields and connect. In the pgAdmin example shown below, clicking **Save** establishes the database connection.
 
 ![Register - Server](./images/pgadmin4.png)
 
@@ -45,7 +45,7 @@ If the connection is successful, you should be able to view and interact with yo
 
 ## Tested GUI applications and IDEs
 
-Connections from the following GUI applications and IDEs have been tested with Neon.
+Connections from the following GUI applications and IDEs have been tested with Neon:
 
 - [CLion](https://www.jetbrains.com/clion/)
 - [DataGrip](https://www.jetbrains.com/datagrip/)
