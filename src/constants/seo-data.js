@@ -38,8 +38,8 @@ export default {
     description:
       'Neon allows you to instantly branch your data the same way that you branch your code.',
   },
-  pricing: {
-    title: 'Pricing — Neon',
+  contactSales: {
+    title: 'Contact Sales — Neon',
     description: 'Neon is a Serverless Postgres database that scales with your business.',
   },
 };

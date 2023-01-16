@@ -15,5 +15,5 @@ export default Pricing;
 
 // eslint-disable-next-line react/prop-types
 export const Head = ({ location: { pathname } }) => (
-  <SEO {...SEO_DATA.pricing} pathname={pathname} />
+  <SEO {...SEO_DATA.contactSales} pathname={pathname} />
 );

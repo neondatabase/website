@@ -11,10 +11,6 @@ export default {
       to: LINKS.branching,
     },
     {
-      text: 'Pricing',
-      to: LINKS.pricing,
-    },
-    {
       text: 'Company',
       items: [
         {
@@ -53,6 +49,10 @@ export default {
       //   },
       // ],
     },
+    {
+      text: 'Contact Sales',
+      to: LINKS.contactSales,
+    },
   ],
   footer: [
     {
@@ -69,6 +69,10 @@ export default {
         {
           text: 'Careers',
           to: LINKS.careers,
+        },
+        {
+          text: 'Contact Sales',
+          to: LINKS.contactSales,
         },
 
         // {
@@ -151,10 +155,6 @@ export default {
       to: LINKS.branching,
     },
     {
-      text: 'Pricing',
-      to: LINKS.pricing,
-    },
-    {
       text: 'About us',
       to: LINKS.aboutUs,
     },
@@ -165,6 +165,10 @@ export default {
     {
       text: 'Blog',
       to: LINKS.blog,
+    },
+    {
+      text: 'Contact Sales',
+      to: LINKS.contactSales,
     },
     // {
     //   iconName: 'discord',

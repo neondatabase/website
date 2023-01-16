@@ -19,5 +19,5 @@ export default {
   terms: '/terms-of-service',
   dashboard: 'https://console.neon.tech/sign_in',
   branching: '/branching/',
-  pricing: '/pricing/',
+  contactSales: '/contact-sales/',
 };
