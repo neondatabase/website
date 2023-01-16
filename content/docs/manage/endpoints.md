@@ -104,6 +104,10 @@ curl -X 'POST' \
 }'
 ```
 
+<Admonition type="note">
+You can enable connection pooling for an endpoint by adding the `"pooler_enabled": "true"` attribute to the request body. For more information about connection pooling support in Neon, see [Connection pooling](../../connect/connection-pooling).
+</Admonition>
+
 Response:
 
 ```json
