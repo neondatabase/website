@@ -51,12 +51,12 @@ const Header = forwardRef(
         ref={ref}
       >
         <Container className="flex items-center justify-between py-3.5" size="lg">
-          <Link className="hidden xl:block" to="/">
+          <Link to="/">
             <span className="sr-only">Neon</span>
-
             <Logo isThemeBlack={isThemeBlack} />
           </Link>
-          <nav className="xl:absolute xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2">
+
+          <nav className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <ul className="flex space-x-12 3xl:space-x-10 2xl:space-x-7 lg:hidden">
               {MENUS.header.map(({ to, text, items }, index) => {
                 const Tag = to ? Link : 'button';
@@ -116,13 +116,6 @@ const Header = forwardRef(
               })}
             </ul>
           </nav>
-          <Link
-            className="absolute top-1/2 left-1/2 block -translate-x-1/2 -translate-y-1/2 xl:hidden"
-            to="/"
-          >
-            <span className="sr-only">Neon</span>
-            <Logo isThemeBlack={isThemeBlack} />
-          </Link>
 
           <div className="flex space-x-5 lg:hidden">
             <Button
