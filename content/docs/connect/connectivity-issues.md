@@ -93,7 +93,7 @@ Native client libraries:
 | go-pg             | Go          | no (except verify-full mode)                             |
 | JDBC              | Java        | yes                                                      |
 | R2DBC             | Java        |                                                          |
-| node-postgres     | JavaScript  |                                                          |
+| node-postgres     | JavaScript  | yes when `ssl: {'sslmode': 'require'}` option passed     |
 | postgres.js       | JavaScript  | no                                                       |
 | pgmoon            | Lua         |                                                          |
 | asyncpg           | Python      | yes                                                      |
