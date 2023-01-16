@@ -10,11 +10,8 @@ import SEO_DATA from 'constants/seo-data';
 
 const StaticTemplate = ({
   data: {
-    mdx: {
-      frontmatter: { title },
-    },
+    wpPage: { content, title },
   },
-  children,
 }) => (
   <Layout headerTheme="white" footerWithTopBorder>
     <article className="safe-paddings py-48 3xl:py-44 2xl:py-40 xl:py-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
@@ -22,7 +19,7 @@ const StaticTemplate = ({
         <h1 className="t-5xl font-semibold">{title}</h1>
       </Container>
       <Container size="xs">
-        <Content className="mt-8 2xl:mt-7 xl:mt-6" content={children} />
+        <Content className="mt-8 2xl:mt-7 xl:mt-6" content={content} asHTML />
       </Container>
     </article>
   </Layout>
@@ -30,10 +27,11 @@ const StaticTemplate = ({
 
 export const query = graphql`
   query ($id: String!) {
-    mdx(id: { eq: $id }) {
-      frontmatter {
-        title
-      }
+    wpPage(id: { eq: $id }) {
+      content
+      title
+      url: uri
+      ...wpPageSeo
     }
   }
 `;
@@ -43,8 +41,6 @@ export default StaticTemplate;
 export const Head = ({
   location: { pathname },
   data: {
-    mdx: {
-      frontmatter: { title },
-    },
+    wpPage: { title },
   },
 }) => <SEO pathname={pathname} {...SEO_DATA.static({ title })} />;

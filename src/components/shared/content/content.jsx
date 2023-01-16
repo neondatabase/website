@@ -33,22 +33,28 @@ const components = {
 };
 
 // eslint-disable-next-line no-return-assign
-const Content = forwardRef(({ className, content }, ref) => (
+const Content = forwardRef(({ className, content, asHTML }, ref) => (
   <div
     className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}
     ref={ref}
   >
-    <MDXProvider components={components}>{content}</MDXProvider>
+    {asHTML ? (
+      <div dangerouslySetInnerHTML={{ __html: content }} />
+    ) : (
+      <MDXProvider components={components}>{content}</MDXProvider>
+    )}{' '}
   </div>
 ));
 
 Content.propTypes = {
   className: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  asHTML: PropTypes.bool,
 };
 
 Content.defaultProps = {
   className: null,
+  asHTML: false,
 };
 
 export default Content;
