@@ -97,9 +97,9 @@ Native client libraries:
 | postgres.js       | JavaScript  | no                                                       |
 | pgmoon            | Lua         |                                                          |
 | asyncpg           | Python      | yes                                                      |
-| pg8000            | Python      | [depends](https://github.com/neondatabase/neon/pull/2008) |
+| pg8000            | Python      | yes (as of pg8000 v1.29.3)                               |
 | rust-postgres     | Rust        |                                                          |
-| PostgresClientKit | Swift       | yes                                                      |
+| PostgresClientKit | Swift       | no                                                       |
 | PostgresNIO       | Swift       |                                                          |
 | postgresql-client | TypeScript  | yes                                                      |
 
