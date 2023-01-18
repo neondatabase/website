@@ -49,6 +49,10 @@ export default {
       //   },
       // ],
     },
+    {
+      text: 'Contact Sales',
+      to: LINKS.contactSales,
+    },
   ],
   footer: [
     {
@@ -65,6 +69,10 @@ export default {
         {
           text: 'Careers',
           to: LINKS.careers,
+        },
+        {
+          text: 'Contact Sales',
+          to: LINKS.contactSales,
         },
 
         // {
@@ -157,6 +165,10 @@ export default {
     {
       text: 'Blog',
       to: LINKS.blog,
+    },
+    {
+      text: 'Contact Sales',
+      to: LINKS.contactSales,
     },
     // {
     //   iconName: 'discord',

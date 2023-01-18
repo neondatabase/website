@@ -51,19 +51,20 @@ const Header = forwardRef(
         ref={ref}
       >
         <Container className="flex items-center justify-between py-3.5" size="lg">
-          <Link className="hidden xl:block" to="/">
+          <Link to="/">
             <span className="sr-only">Neon</span>
-
             <Logo isThemeBlack={isThemeBlack} />
           </Link>
-          <nav className="xl:absolute xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2">
-            <ul className="flex space-x-12 2xl:space-x-10 lg:hidden">
+
+          <nav className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <ul className="flex space-x-12 3xl:space-x-10 2xl:space-x-8 lg:hidden">
               {MENUS.header.map(({ to, text, items }, index) => {
                 const Tag = to ? Link : 'button';
                 return (
                   <li className={clsx(items?.length > 0 && 'group relative')} key={index}>
                     <Tag
                       className={clsx(
+                        'whitespace-pre',
                         items?.length > 0 &&
                           'relative pr-3.5 leading-none transition-colors duration-200 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-transparent before:transition-[border-color] before:duration-200 hover:text-primary-2 group-hover:before:border-t-primary-2 dark:before:border-black',
                         items?.length > 0 && isThemeBlack
@@ -116,13 +117,6 @@ const Header = forwardRef(
               })}
             </ul>
           </nav>
-          <Link
-            className="absolute top-1/2 left-1/2 block -translate-x-1/2 -translate-y-1/2 xl:hidden"
-            to="/"
-          >
-            <span className="sr-only">Neon</span>
-            <Logo isThemeBlack={isThemeBlack} />
-          </Link>
 
           <div className="flex space-x-5 lg:hidden">
             <Button
