@@ -8,7 +8,7 @@ redirectFrom:
 In most cases, copying a connection string from the Neon **Dashboard** and using it in your project should work as is. However, with older clients and some native PostgreSQL clients, you may receive the following error:
 
 ```txt
-ERROR: The project ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the project ID (the first part of the domain name) as a parameter: '&options=project%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
+ERROR: The endpoint ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=project%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
 ```
 
 In most cases, this happens if your client library or application does not support the **SNI (Server Name Indication)** mechanism in TLS. See [Details](#details) for more context and [Workarounds](#workarounds) for a list of ways to work around this issue.
@@ -97,9 +97,9 @@ Native client libraries:
 | postgres.js       | JavaScript  | no                                                       |
 | pgmoon            | Lua         |                                                          |
 | asyncpg           | Python      | yes                                                      |
-| pg8000            | Python      | [depends](https://github.com/neondatabase/neon/pull/2008) |
+| pg8000            | Python      | yes (requires [scramp >= v1.4.3](https://pypi.org/project/scramp/), which is included in [pg8000 v1.29.3](https://pypi.org/project/pg8000/) and higher)  |
 | rust-postgres     | Rust        |                                                          |
-| PostgresClientKit | Swift       | yes                                                      |
+| PostgresClientKit | Swift       | no                                                       |
 | PostgresNIO       | Swift       |                                                          |
 | postgresql-client | TypeScript  | yes                                                      |
 
