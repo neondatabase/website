@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Hero from 'components/pages/pricing/hero';
+import Hero from 'components/pages/contact-sales/hero';
 import Layout from 'components/shared/layout';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';

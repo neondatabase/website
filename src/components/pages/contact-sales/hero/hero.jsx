@@ -87,7 +87,7 @@ const Hero = () => {
               <h1 className="text-[72px] font-bold leading-tight 2xl:text-[56px] 2xl:leading-dense md:text-[36px]">
                 Talk to our Sales team
               </h1>
-              <p className="mx-auto mt-1.5 max-w-[787px] text-xl 2xl:max-w-[616px] 2xl:text-base md:mt-2">
+              <p className="mx-auto mt-1.5 max-w-[660px] text-xl 2xl:max-w-[550px] 2xl:text-base md:mt-2">
                 Interested in increasing your free tier limits or learning about pricing? Complete
                 the form below to get in touch with our Sales team.
               </p>
