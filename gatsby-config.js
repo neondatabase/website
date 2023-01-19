@@ -148,7 +148,7 @@ module.exports = {
         siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
       },
     },
-
+    'gatsby-plugin-brotli',
     {
       resolve: 'gatsby-source-wordpress',
       options: {

@@ -30,6 +30,7 @@
     "copy-to-clipboard": "^3.3.3",
     "framer-motion": "^7.6.19",
     "gatsby": "^5.2.0",
+    "gatsby-plugin-brotli": "^2.1.0",
     "gatsby-plugin-canonical-urls": "^5.2.0",
     "gatsby-plugin-gatsby-cloud": "^5.2.0",
     "gatsby-plugin-image": "^3.2.0",
