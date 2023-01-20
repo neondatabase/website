@@ -7,13 +7,14 @@ enableTableOfContents: true
 
 If you do not have a Neon account, navigate to the Signup page and create an account using GitHub or Google.
 
-<screen-shot Sign-in>
+![image3](https://user-images.githubusercontent.com/13738772/213742099-a8d566da-fe0d-4fca-a992-6db4da35b794.png)
 
 ## Create a project
 
 Once you have signed in to the Neon Console, click on `Create a project`. Enter the name of your project and select a region (We recommend selecting the region closest to your application or user location).
 
-<Image>
+![image5](https://user-images.githubusercontent.com/13738772/213742176-05f4b49a-6a77-4413-a72c-415636c7066f.png)
+
 
 ### What happens behind the scenes
 You noticed that your project was created in a few seconds. That’s one of the benefits of Neon’s serverless architecture.
@@ -24,7 +25,8 @@ Neon also suspends a compute node if it is inactive for 5 minutes, to save on co
 
 If you navigate to the Endpoints page in the Neon Console, notice how the endpoint switches between Active and Idle states. Active means that the compute node is running. Idle on the other handle means that the compute node is suspended.
 
-<Image>
+<img width="118" alt="image2" src="https://user-images.githubusercontent.com/13738772/213742361-57378ec5-938f-4924-80b8-8bf9715c4c99.png">
+
 
 [Learn more about Neon’s architecture](https://neon.tech/docs/introduction/architecture-overview/).
 
