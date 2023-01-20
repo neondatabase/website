@@ -12,14 +12,14 @@ Prisma is an open source next-generation ORM that consists of the following part
 - Prisma Migrate: Migration system
 - Prisma Studio: GUI to view and edit data in your database.
 
-## Step 1: Sign up with Neon
+## Prerequisites
 
-To sign up for Neon:
+- You have a Neon account. If not, see [../../get-started-with-neon/signing-up].
+- You have created a Neon project. If not, see [../../get-started-with-neon/setting-up-a-project].
 
-1. Navigate to [https://console.neon.tech](https://console.neon.tech).
-2. Sign in with a Github or Google account.
+## Step 1: Gather your Neon connection details
 
-After signing in, you are directed to the Neon Console where you can create your first project.
+
 
 ## Step 2: Create a project and copy the connection string
 
