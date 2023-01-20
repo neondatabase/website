@@ -5,7 +5,7 @@ enableTableOfContents: true
 
 ## Remove duplicates from the shoes table
 
-You received an email from a colleague asking you to clean the data in the `shoes` table, because there is some some duplicate data on the front-end. 
+You received an email from a colleague asking you to clean the data in the `shoes` table, because there is some some duplicate data on the front-end.
 
 When you ran the `SELECT id, model, color FROM shoes` query, you noticed there were indeed a few duplicate rows.
 
@@ -29,11 +29,13 @@ GROUP BY brand, model, description, color
 HAVING COUNT(*) > 1
 ```
 
+```text
 | # |         model        | color                                        | count |
 |---|----------------------|----------------------------------------------|-------|
 | 1 | Invincible Run 2     | Black/Summit White/Summit White              | 2     |
 | 2 | Pegasus 39           | Black/Ashen Slate/Cobalt Bliss/White         | 2     |
 | 3 | Air Zoom Pegasus 39  | Black/Thunder Blue/Citron Pulse/Hyper Royal  | 2     |
+```
 
 Now run the following command to delete duplicates:
 
@@ -44,15 +46,17 @@ WHERE a.id > b.id
 
 And run `SELECT * FROM shoes` to see the result:
 
+```text
 | # |         model        | color                                        |
 |---|----------------------|----------------------------------------------|
 | 1 | Air Zoom Alphafly    | Scream Green/Bright Crimson/Honeydew/Black   |
+```
 
 Whoops! 😬
 
 It looks like we used the wrong command and accidentally deleted the majority of our data. The whole team is in a panic because you ran the command on production data and now the only available shoe on the website is the `Air Zoom Alphafly`.
 
-But don’t worry. You got this! 
+But don’t worry. You got this!
 
 ## Recover the lost data
 
