@@ -4,9 +4,13 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-## Introduction
+This guide describes how to connect a Prisma project to a Neon PostgreSQL database.
 
-This guide focusses on setting up Prisma with Neon and performing a migration using Prisma Migrate. You will learn how to create a Neon project, set up a Prisma project, model database tables in Prisma, and perform a migration.
+Prisma is an open source next-generation ORM that consists of the following parts:
+
+- Prisma Client: Auto-generated and type-safe query builder for Node.js & TypeScript
+- Prisma Migrate: Migration system
+- Prisma Studio: GUI to view and edit data in your database.
 
 ## Step 1: Sign up with Neon
 
