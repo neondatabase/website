@@ -21,37 +21,27 @@ This time, we want create a test branch from `Head`with the most up-to-date stat
 
 Note: if you skipped the Data recovery with branching section, you should use `main` as the parent branch.
 
+
+
 ## Run remove duplicates query on backup branch
 Let’s now navigate to the SQL Editor, select the `test` branch and run the query to remove duplicates.
 
+```sql
 DELETE FROM shoes a USING shoes b
 WHERE a.id > b.id
 AND a.brand = b.brand
 AND a.model = b.model
 AND a.description = b.description
 AND a.color = b.color
-
-
-
+```
 
 Let’s now run a `SELECT model, color FROM shoes` query to verify the result.
 
-
-#
-model
-color
-1
-Air Zoom Alphafly
-Scream Green/Bright Crimson/Honeydew/Black
-2
-Air Zoom Alphafly
-Total Orange/Bright Crimson/Ghost Green/Black
-3
-ZoomX Vaporfly
-Scream Green/Bright Crimson/Honeydew/Black
-4
-ZoomX Vaporfly
-White/Coconut Milk/Ghost Green/Black
+| # |         model        | color                                          | 
+|---|----------------------|------------------------------------------------|
+| 1 | Air Zoom Alphafly    | Scream Green/Bright Crimson/Honeydew/Black     |
+| 2 | Air Zoom Alphafly    | Total Orange/Bright Crimson/Ghost Green/Black  |
+| 3 | ZoomX Vaporfly       | Scream Green/Bright Crimson/Honeydew/Black     |
 
 
 Yes! We managed to remove duplicates from the `shoes` table. We can now safely apply the same query to the parent branch.
@@ -60,7 +50,7 @@ Yes! We managed to remove duplicates from the `shoes` table. We can now safely a
 Conclusion
 Congratulations! You completed the tutorial.
 Here is a recap of what we covered:
-Neon is serverless Postgres that separates storage and compute.
-You created a Neon project, a schema and inserted data to a table
-You learned about database branching and how to use it for test and data recovery
+- Neon is serverless Postgres that separates storage and compute.
+- You created a Neon project, a schema and inserted data to a table
+- You learned about database branching and how to use it for test and data recovery
 
