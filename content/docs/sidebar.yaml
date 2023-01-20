@@ -22,6 +22,16 @@
       slug: get-started-with-neon/setting-up-a-project
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
+- title: Tutorial
+  items:
+    - title: Introduction
+      slug: tutorial/index
+    - title: Create project schema
+      slug: tutorial/create-project-and-schema
+    - title: Data recovery with branching
+      slug: tutorial/data-recovery-with-branching
+    - title: Use Neon branching for testing
+      slug: tutorial/use-branching-for-test
 - title: Connect
   items:
     - title: Connect from any application
