@@ -69,13 +69,7 @@
     - title: Node.js
       slug: guides/node
     - title: Prisma
-      items:
-        - title: Connect from Prisma
-          slug: guides/prisma/prisma-connect
-        - title: Use Prisma Migrate 
-          slug: guides/prisma/prisma-migrate
-        - title: Prisma connection issues 
-          slug: guides/prisma/prisma-connection-issues
+      slug: guides/prisma   
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy

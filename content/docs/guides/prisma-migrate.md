@@ -1,6 +1,7 @@
 ---
 title: Use Prisma Migrate with Neon
 enableTableOfContents: true
+isDraft: true
 ---
 
 ## Introduction
