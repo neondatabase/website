@@ -15,18 +15,17 @@ Once you have signed in to the Neon Console, click on `Create a project`. Enter 
 
 ![image5](https://user-images.githubusercontent.com/13738772/213742176-05f4b49a-6a77-4413-a72c-415636c7066f.png)
 
-
 ### What happens behind the scenes
+
 You noticed that your project was created in a few seconds. That’s one of the benefits of Neon’s serverless architecture.
 
-Neon is serverless Postgres and separates compute and storage. Because the compute node is a stateless Postgres instance, Neon can provision one very quickly. 
+Neon is serverless Postgres and separates compute and storage. Because the compute node is a stateless Postgres instance, Neon can provision one very quickly.
 
-Neon also suspends a compute node if it is inactive for 5 minutes, to save on compute resources. 
+Neon also suspends a compute node if it is inactive for 5 minutes, to save on compute resources.
 
 If you navigate to the Endpoints page in the Neon Console, notice how the endpoint switches between Active and Idle states. Active means that the compute node is running. Idle on the other handle means that the compute node is suspended.
 
 <img width="118" alt="image2" src="https://user-images.githubusercontent.com/13738772/213742361-57378ec5-938f-4924-80b8-8bf9715c4c99.png">
-
 
 [Learn more about Neon’s architecture](https://neon.tech/docs/introduction/architecture-overview/).
 
@@ -45,8 +44,10 @@ CREATE TABLE IF NOT EXISTS shoes (
 );
 ```
 
-The above query creates a `shoes` table. 
-Insert data into the shoes table
+The above query creates a `shoes` table.
+
+## Insert data into the shoes table
+
 You can find sample queries on the migrate.sql file on [GitHub](https://github.com/neondatabase/examples/tutorial/migrate.sql). The `migrate.sql` file contains queries to `INSERT` data to the shoes table.
 
 ```sql
