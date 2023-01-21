@@ -69,7 +69,11 @@
     - title: Node.js
       slug: guides/node
     - title: Prisma
-      slug: guides/prisma   
+      items:
+        - title: Connect
+          slug: guides/prisma  
+        - title: Tutorial
+          slug: guides/prisma-tutorial 
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy

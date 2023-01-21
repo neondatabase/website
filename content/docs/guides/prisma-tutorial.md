@@ -1,7 +1,7 @@
 ---
-title: Use Prisma Migrate with Neon
+title: Use Prisma with Neon
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
 
 This guide describes how to connect a Prisma project to a Neon PostgreSQL database.
@@ -40,20 +40,20 @@ For cloud-hosted databases like Neon, you need to create the shadow database man
 The connection string for this database is the same as the connection string for your `neondb` database, only the database name differs:
 
 ```text
-postgres://sally:************@ep-throbbing-firefly-664409.us-east-2.aws.neon.build/shadow
+postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/shadow
 ```
 
 ## Step 4: Set up your Prisma project
 
-Deploy a sample Typescript project and set up Prisma. The following instructions closely follow the instructions in Prisma's [Quickstart](https://www.prisma.io/docs/getting-started/quickstart) guide.
+Deploy a sample Typescript project and set up Prisma. 
 
 To complete these steps, you require Node.js v14.17.0 or higher. For more information about Prisma's system requirements, see [System requirements](https://www.prisma.io/docs/reference/system-requirements).
 
 1. Create a project directory and navigate to it.
 
     ```bash
-    mkdir hello-prisma
-    cd hello-prisma
+    mkdir hello-neon-prisma
+    cd hello-neon-prisma
     ```
 
 1. Initialize a TypeScript project using `npm`. This creates a `package.json` file with the initial setup for your TypeScript app.
@@ -287,7 +287,7 @@ You will need a TypeScript file to execute queries with Prisma Client.
 
 ### Create TypeScript file to execute Prisma Client queries
 
-In your `hello-prisma` directory, create a new file called `script.ts`:
+In your `hello-neon-prisma` directory, create a new file called `script.ts`:
 
 ```bash
 touch script.js
