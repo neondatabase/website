@@ -83,7 +83,7 @@ To complete these steps, you require Node.js v14.17.0 or higher. For more inform
 
 You are now ready to model your data and create tables in your `neondb` database.
 
-## Step 5: Configure your project to connect to Neon
+## Step 5: Connect your Prisma project to Neon
 
 In this step you will update your project's `.env` file with the connection strings for your `neondb` and `shadow` data databases.
 
@@ -102,7 +102,7 @@ SHADOW_DATABASE_URL=postgres://sally:************@ep-white-thunder-826300.us-eas
 A `?connect_timeout=10` option is added to the connection strings above to avoid database connection timeouts. The default `connect_timeout` setting is 5 seconds, which is usually enough time for a database connection to be established. However, network latency combined with the short amount of time required to start an idle Neon compute instance can sometimes result in a connection failure. Setting `connect_timeout=10` helps avoid this issue.
 </Admonition>
 
-## Step 6: Update your schema.prisma file
+## Step 6: Add a model to your schema.prisma file
 
 In this step, you will update the `datasource db` entry in your `schema.prisma` file and add a model for the `Elements` table. A model represent the table in your underlying database and serve as the foundation for the generated Client API. For more information about data modeling, see [Data modeling](https://www.prisma.io/docs/concepts/overview/what-is-prisma/data-modeling), in the _Prisma documentation_.
 
@@ -133,17 +133,19 @@ model Elements {
 }
 ```
 
-## Step 7: Run a migration to create the database tables in Neon
+## Step 7: Run a migration to create a table in Neon
 
-At this point, you still have no database table in your Neon database. In this step, you will run a migration with Prisma Migrate, which creates the database table. The table is created based on the `Elements` table model that you defined in the `schema.prisma` file in the previous step. Specifically, Prisma Migrate performs the following actions:
+At this point, you do not have a table in your Neon database. In this step, you will run a migration with Prisma Migrate, which creates the database table. The table is created based on the `Elements` table model that you defined in the `schema.prisma` file in the previous step.
+
+During the migration, Prisma Migrate performs the following actions:
 
 - Creates an SQL migration file for this migration in your `prisma/migrate` directory.
 - Runs the SQL migration file on your database
 
-To run Prisma Migrate, issue the following command:
+To run Prisma Migrate, issue the following command from your `hello-neon-prisma` project directory:
 
 ```bash
-npx prisma migrate dev --name init
+$> npx prisma migrate dev --name init
 ```
 
 <Admonition type="note">
@@ -180,18 +182,18 @@ found 0 vulnerabilities
 
 ## Step 8: View your table in the Neon Console
 
-To view the `User` and `Post` tables that were created in your `neondb` database by the migration performed in the previous step:
+To view the `Elements` table that was created in your `neondb` database by the migration performed in the previous step:
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
 2. Select your project.
 3. Select **Tables**.
-4. Select the `neondb` database and default `public` schema. The `Elements` table should be visible in the sidebar (the table has no data at this point. Data will be added later.).
+4. Select the `neondb` database and default `public` schema. The `Elements` table should be visible in the sidebar (the table has no data at this point. Data will be added later).
 
 ## Step 9: Evolve your schema with Prisma Migrate
 
-In this step, you will evolve your Prisma schema and generate by applying another migration with `prisma migrate dev`.
+In this step, you will evolve your Prisma schema and applying another migration with `prisma migrate dev`.
 
-Add an `AtomicMass` field to your `Elements` model. The modified schema should appear as follows:
+Add an `AtomicMass` field to your `Elements` model. The modified schema should now appear as follows:
 
 ```text
 model Elements {
@@ -202,10 +204,10 @@ model Elements {
 }     
 ```
 
-3. Apply the Prisma schema change to your database using `prisma migrate dev` command. In this example, name given to the migration is `add-tag-field`.
+3. Apply the schema change to your database using `prisma migrate dev` command. In this example, name given to the migration is `add-tag-field`.
 
     ```bash
-    npx prisma migrate dev --name add-tag-field
+    $> npx prisma migrate dev --name add-tag-field
     ```
 
     This command creates a new SQL migration file for the migration, applies the generated SQL migration to your database, and regenerates the Prisma Client. The output resembles the following:
@@ -220,7 +222,7 @@ model Elements {
     The following migration(s) have been created and applied from new schema changes:
 
     migrations/
-      └─ 20230113120852_add_tag_field/
+      └─ 20230113120852_add_field/
         └─ migration.sql
 
     Your database is now in sync with your schema.
@@ -231,11 +233,11 @@ model Elements {
 
     You can view the migration in your `prisma/migrations` folder.
 
-## Step 10: Add some data
+## Step 10: Add data to your table
 
-You have a couple of options here. You can add data using the Neon SQL Editor or with Prisma Studio.
+You have a couple of options here. You can add data using the Neon SQL Editor or with Prisma Studio. Both methods are described below.
 
-### Option 1: Adding data using the Neon SQL Editor
+### Option A: Add data using the Neon SQL Editor
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
 1. Select your project.
@@ -257,7 +259,7 @@ To verify that the data was added, run:
 SELECT * FROM "Elements";
 ```
 
-### Option 2: Adding data using Prisma Studio
+### Option B: Add data using Prisma Studio
 
 To add data from Prisma Studio:
 
@@ -283,14 +285,14 @@ To add the record, click the **Save 1 change** button.
 
 ## Step 11: Send queries to your Neon database with Prisma Client
 
-You will need a TypeScript file to execute queries with Prisma Client.
+Follow the steps below to create a TypeScript file for executing queries with Prisma Client. Two examples are provided, one for creating a new record, and one for retrieving all records.
 
-### Create TypeScript file to execute Prisma Client queries
+### Create a TypeScript file to execute Prisma Client queries
 
-In your `hello-neon-prisma` directory, create a new file called `script.ts`:
+In your `hello-neon-prisma` directory, create a new file called `query.ts`:
 
 ```bash
-touch script.js
+touch query.js
 ```
 
 Add the following boilerplate code:
@@ -315,11 +317,11 @@ main()
   })
 ```
 
-This code contains a main function that's invoked at the end of the script. It also instantiates PrismaClient which represents the query interface to your database.
+This code contains a `main()` function that's invoked at the end of the script. It also instantiates Prisma Client, which act as the query interface to your database.
 
 ### Create a new record
 
-Next, add a query to the `main()` function your `script.ts` file that creats a new record to the `Elements` table and logs the resulting object to the console. Add the following code:
+Add a query to the `main()` function your `query.ts` file that creates a new record in the `Elements` table and logs the result to the console. Add the following code:
 
 ```ts
 import { PrismaClient } from '@prisma/client'
@@ -349,10 +351,10 @@ main()
   })
 ```
 
-Next, execute the script with the following command:
+Next, execute the `query.ts` script with the following command:
 
 ```bash
-$ npx ts-node script.ts
+$ npx ts-node query.ts
 { AtomicNumber: 8, Element: 'Oxygen', Symbol: 'O', AtomicMass: 15.999 }
 ```
 
@@ -360,9 +362,9 @@ Congratulations! You have created your first record with Prisma Client.
 
 ### Retrieve all records
 
-Prisma Client offers various queries to read data from your database. In this section, you'll use the findMany query that returns all the records in the database for a given model. Use the findMany query that returns all the records in the database for a given model.
+Prisma Client offers various queries to read data from your database. In this section, you will use the `findMany` query to returns all the records in the database for a the specified model.
 
-Delete the previous query from your script.js file and replace it with the `findMany` query. Your `script.js` file should appear as follows:
+Delete the previous query from your `query.js` file and replace it with the `findMany` query. Your `query.js` file should appear as follows:
 
 ```ts
 import { PrismaClient } from '@prisma/client'
@@ -388,8 +390,7 @@ main()
 Execute the script again:
 
 ```bash
-$ npx ts-node script.ts
-npx ts-node script.ts
+$ npx ts-node query.ts
 [
   {
     AtomicNumber: 10,
@@ -408,24 +409,24 @@ npx ts-node script.ts
 
 ## Step 12: Introspect a database using Prisma CLI
 
-Instead of creating a data model in your Prisma schema and using Prisma Migrate to create the database as you did in the previous steps, you can use Prisma's [Introspection](https://www.prisma.io/docs/concepts/components/introspection) tool to generate the data model from an existing database.
+Instead of creating data models in your Prisma schema and using Prisma Migrate to create database tables, as you did in the previous steps, you can use Prisma's [Introspection](https://www.prisma.io/docs/concepts/components/introspection) tool to generate data models from an existing database.
 
-Introspection is often used to generate an initial version of the data model when adding Prisma to an existing project, and may be more convenient than developing your data model manually.
+Introspection is often used to generate an initial version of the data model when adding Prisma to an existing project, and may be more convenient than developing your data model manually, especially if you have numerous tables or tables with many columns.
 
 Another use case for Introspection is when you are using a tool other than Prisma Migrate to perform schema migrations, or you are using plain SQL for schema changes. In this case, you might introspect your database after each schema change to re-generate your Prisma Client to reflect the  changes in your Prisma Client API.
 
 ### Create a schema in Neon
 
-Assume your database has extended version of the `Elements` table used to the previous steps. This table is called `Elements_ext`. Create that table in the Neon SQL Editor:
+Let's assume your database has an extended version of the `Elements` table used in the previous steps. This table is called `Elements_ext`. Create that table in the Neon SQL Editor:
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
 1. Select your project.
 1. Select the **SQL Editor**.
 1. Select the `main` branch of your project and select the `neondb` database.
-1. To create the `Elements_ext` table, enter the following statement into the editor and click **Run**.
+1. Enter the following statement into the editor and click **Run**.
 
 <Admonition type="note">
-Quotes are used for reserved keyword in PostgreSQL.
+Quotes are used for reserved keywords in PostgreSQL.
 </Admonition>
 
 ```sql
@@ -465,7 +466,7 @@ CREATE TABLE "Elements_ext" (
 You can find the `Elements` and `Elements_ext` table in Neon's example repo with a full set of data that you can import and play around with. See [neondatabase/examples](https://github.com/neondatabase/examples).
 </Admonition>
 
-To introspect the `Elements_ext` table to generate the Prisma schema data model, run the `prisma db pull` command:
+To introspect the `Elements_ext` table to generate the data model, run the `prisma db pull` command:
 
 ```sql
 $ npx prisma db pull
@@ -476,9 +477,11 @@ Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-white-thun
 ✔ Introspected 2 models and wrote them into prisma/schema.prisma in 1.78s
 ```
 
+Two models were introspected in this case because of the `Elements` table that existed in the database previously. Prisma does not yet support introspecting a subset of a database schema, so you cannot introspect an individual table.
+
 ### View the introspected model
 
-Two models were introspected in this case because of the `Elements` table that existed in the database previously, as Prisma does not yet support introspecting a subset of a database schema. To view the model generated for the new `Elements_ext` table, open your `schema.prisma` file. You will find the following model is now defined:
+To view the model generated for the new `Elements_ext` table, open your `schema.prisma` file. You will find the following model is now defined:
 
 ```text
 odel Elements_ext {
@@ -513,7 +516,7 @@ odel Elements_ext {
 }
 ```
 
-The typical workflow for project that does not sue Prisma Migrate is:
+The typical workflow for project that does not use Prisma Migrate is:
 
 1. Change the database schema (e.g. using plain SQL)
 1. Run `prisma db pull` to update the Prisma schema
