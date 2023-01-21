@@ -204,10 +204,10 @@ model Elements {
 }     
 ```
 
-3. Apply the schema change to your database using `prisma migrate dev` command. In this example, name given to the migration is `add-tag-field`.
+3. Apply the schema change to your database using `prisma migrate dev` command. In this example, name given to the migration is `add-field`.
 
     ```bash
-    $> npx prisma migrate dev --name add-tag-field
+    $> npx prisma migrate dev --name add-field
     ```
 
     This command creates a new SQL migration file for the migration, applies the generated SQL migration to your database, and regenerates the Prisma Client. The output resembles the following:
@@ -217,7 +217,7 @@ model Elements {
     Prisma schema loaded from prisma/schema.prisma
     Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-white-thunder-826300.us-east-2.aws.neon.tech:5432"
 
-    Applying migration `20230113120852_add_tag_field`
+    Applying migration `20230113120852_add_field`
 
     The following migration(s) have been created and applied from new schema changes:
 
