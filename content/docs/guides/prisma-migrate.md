@@ -187,7 +187,7 @@ To view the `User` and `Post` tables that were created in your `neondb` database
 3. Select **Tables**.
 4. Select the `neondb` database and default `public` schema. The `Elements` table should be visible in the sidebar (the table has no data at this point. Data will be added later.).
 
-## Step 8: Evolve your schema with Prisma Migrate
+## Step 9: Evolve your schema with Prisma Migrate
 
 In this step, you will evolve your Prisma schema and generate by applying another migration with `prisma migrate dev`.
 
@@ -231,7 +231,7 @@ model Elements {
 
     You can view the migration in your `prisma/migrations` folder.
 
-## Step 9: Add some data
+## Step 10: Add some data
 
 You have a couple of options here. You can add data using the Neon SQL Editor or with Prisma Studio.
 
@@ -280,6 +280,247 @@ Click the **Add record** and enter some values as follows:
 - AtomicMass: 20.1797
 
 To add the record, click the **Save 1 change** button.
+
+## Step 11: Send queries to your Neon database with Prisma Client
+
+You will need a TypeScript file to execute queries with Prisma Client.
+
+### Create TypeScript file to execute Prisma Client queries
+
+In your `hello-prisma` directory, create a new file called `script.ts`:
+
+```bash
+touch script.js
+```
+
+Add the following boilerplate code:
+
+```ts
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+async function main() {
+  // ... write Prisma Client queries here
+}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect()
+  })
+  .catch(async (e) => {
+    console.error(e)
+    await prisma.$disconnect()
+    process.exit(1)
+  })
+```
+
+This code contains a main function that's invoked at the end of the script. It also instantiates PrismaClient which represents the query interface to your database.
+
+### Create a new record
+
+Next, add a query to the `main()` function your `script.ts` file that creats a new record to the `Elements` table and logs the resulting object to the console. Add the following code:
+
+```ts
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+async function main() {
+  const elements = await prisma.elements.create({
+    data: {
+      AtomicNumber: 8,
+      Element: 'Oxygen',
+      Symbol: 'O',
+      AtomicMass: 15.999,
+    },
+  })
+  console.log(elements)
+}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect()
+  })
+  .catch(async (e) => {
+    console.error(e)
+    await prisma.$disconnect()
+    process.exit(1)
+  })
+```
+
+Next, execute the script with the following command:
+
+```bash
+$ npx ts-node script.ts
+{ AtomicNumber: 8, Element: 'Oxygen', Symbol: 'O', AtomicMass: 15.999 }
+```
+
+Congratulations! You have created your first record with Prisma Client.
+
+### Retrieve all records
+
+Prisma Client offers various queries to read data from your database. In this section, you'll use the findMany query that returns all the records in the database for a given model. Use the findMany query that returns all the records in the database for a given model.
+
+Delete the previous query from your script.js file and replace it with the `findMany` query. Your `script.js` file should appear as follows:
+
+```ts
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+async function main() {
+  const elements = await prisma.elements.findMany()
+  console.log(elements)
+}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect()
+  })
+  .catch(async (e) => {
+    console.error(e)
+    await prisma.$disconnect()
+    process.exit(1)
+  })
+```
+
+Execute the script again:
+
+```bash
+$ npx ts-node script.ts
+npx ts-node script.ts
+[
+  {
+    AtomicNumber: 10,
+    Element: 'Neon',
+    Symbol: 'Ne',
+    AtomicMass: 20.1797
+  },
+  {
+    AtomicNumber: 8,
+    Element: 'Oxygen',
+    Symbol: 'O',
+    AtomicMass: 15.999
+  }
+]
+```
+
+## Step 12: Introspect a database using Prisma CLI
+
+Instead of creating a data model in your Prisma schema and using Prisma Migrate to create the database as you did in the previous steps, you can use Prisma's [Introspection](https://www.prisma.io/docs/concepts/components/introspection) tool to generate the data model from an existing database.
+
+Introspection is often used to generate an initial version of the data model when adding Prisma to an existing project, and may be more convenient than developing your data model manually.
+
+Another use case for Introspection is when you are using a tool other than Prisma Migrate to perform schema migrations, or you are using plain SQL for schema changes. In this case, you might introspect your database after each schema change to re-generate your Prisma Client to reflect the  changes in your Prisma Client API.
+
+### Create a schema in Neon
+
+Assume your database has extended version of the `Elements` table used to the previous steps. This table is called `Elements_ext`. Create that table in the Neon SQL Editor:
+
+1. Navigate to the [Neon console](https://console.neon.tech/).
+1. Select your project.
+1. Select the **SQL Editor**.
+1. Select the `main` branch of your project and select the `neondb` database.
+1. To create the `Elements_ext` table, enter the following statement into the editor and click **Run**.
+
+<Admonition type="note">
+Quotes are used for reserved keyword in PostgreSQL.
+</Admonition>
+
+```sql
+CREATE TABLE "Elements_ext" (
+  AtomicNumber INTEGER PRIMARY KEY,
+  "Element" TEXT,
+  Symbol TEXT,
+  AtomicMass DECIMAL,
+  NumberOfNeutrons INTEGER,
+  NumberOfProtons INTEGER,
+  NumberOfElectrons INTEGER,
+  "Period" INTEGER,
+  "Group" INTEGER,
+  Phase TEXT,
+  Radioactive BOOLEAN,
+  "Natural" BOOLEAN,
+  Metal BOOLEAN,
+  Nonmetal BOOLEAN,
+  Metalloid BOOLEAN,
+  "Type" TEXT,
+  AtomicRadius DECIMAL,
+  Electronegativity DECIMAL,
+  FirstIonization DECIMAL,
+  Density DECIMAL,
+  MeltingPoint DECIMAL,
+  BoilingPoint DECIMAL,
+  NumberOfIsotopes INTEGER,
+  Discoverer TEXT,
+  "Year" INTEGER,
+  SpecificHeat DECIMAL,
+  NumberOfShells INTEGER,
+  NumberOfValence INTEGER
+);
+```
+
+<Admonition type="info">
+You can find the `Elements` and `Elements_ext` table in Neon's example repo with a full set of data that you can import and play around with. See [neondatabase/examples](https://github.com/neondatabase/examples).
+</Admonition>
+
+To introspect the `Elements_ext` table to generate the Prisma schema data model, run the `prisma db pull` command:
+
+```sql
+$ npx prisma db pull
+Prisma schema loaded from prisma/schema.prisma
+Environment variables loaded from .env
+Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-white-thunder-826300.us-east-2.aws.neon.tech:5432"
+
+✔ Introspected 2 models and wrote them into prisma/schema.prisma in 1.78s
+```
+
+### View the introspected model
+
+Two models were introspected in this case because of the `Elements` table that existed in the database previously, as Prisma does not yet support introspecting a subset of a database schema. To view the model generated for the new `Elements_ext` table, open your `schema.prisma` file. You will find the following model is now defined:
+
+```text
+odel Elements_ext {
+  atomicnumber      Int      @id
+  Element           String?
+  symbol            String?
+  atomicmass        Decimal? @db.Decimal
+  numberofneutrons  Int?
+  numberofprotons   Int?
+  numberofelectrons Int?
+  Period            Int?
+  Group             Int?
+  phase             String?
+  radioactive       Boolean?
+  Natural           Boolean?
+  metal             Boolean?
+  nonmetal          Boolean?
+  metalloid         Boolean?
+  Type              String?
+  atomicradius      Decimal? @db.Decimal
+  electronegativity Decimal? @db.Decimal
+  firstionization   Decimal? @db.Decimal
+  density           Decimal? @db.Decimal
+  meltingpoint      Decimal? @db.Decimal
+  boilingpoint      Decimal? @db.Decimal
+  numberofisotopes  Int?
+  discoverer        String?
+  Year              Int?
+  specificheat      Decimal? @db.Decimal
+  numberofshells    Int?
+  numberofvalence   Int?
+}
+```
+
+The typical workflow for project that does not sue Prisma Migrate is:
+
+1. Change the database schema (e.g. using plain SQL)
+1. Run `prisma db pull` to update the Prisma schema
+1. Run `prisma generate` to update Prisma Client
+1. Use the updated Prisma Client in your application
+
+You can read more about that workflow in the Prisma documentation. See [Introspection workflow](https://www.prisma.io/docs/concepts/components/introspection#introspection-workflow).
 
 ## Conclusion
 
