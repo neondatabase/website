@@ -4,13 +4,13 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-This guide describes how to connect a Prisma project to a Neon PostgreSQL database.
-
 Prisma is an open source next-generation ORM that consists of the following parts:
 
 - Prisma Client: Auto-generated and type-safe query builder for Node.js & TypeScript
 - Prisma Migrate: Migration system
 - Prisma Studio: GUI to view and edit data in your database.
+
+This tutorial steps you though how to connect from Prisma to Neon, how to use Prisma Migrate to create and evolve a schema, how to add data using the Neon SQL Editor or Prisma Studio, how to send queries using Prisma Client, and finally, how to to introspect an existing database using the Prisma CLI.
 
 ## Step 1: Create a Neon project and copy the connection string
 
@@ -20,7 +20,7 @@ Prisma is an open source next-generation ORM that consists of the following part
 The project is created and you are presented with a dialog that provides connection details. Copy the connection string, which looks similar to the following:
 
 ```text
-postgres://sally:************@ep-throbbing-firefly-664409.us-east-2.aws.neon.build/neondb
+postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="note">
@@ -466,6 +466,8 @@ CREATE TABLE "Elements_ext" (
 You can find the `Elements` and `Elements_ext` table in Neon's example repo with a full set of data that you can import and play around with. See [neondatabase/examples](https://github.com/neondatabase/examples).
 </Admonition>
 
+### Run prisma db pull
+
 To introspect the `Elements_ext` table to generate the data model, run the `prisma db pull` command:
 
 ```sql
@@ -484,7 +486,7 @@ Two models were introspected in this case because of the `Elements` table that e
 To view the model generated for the new `Elements_ext` table, open your `schema.prisma` file. You will find the following model is now defined:
 
 ```text
-odel Elements_ext {
+model Elements_ext {
   atomicnumber      Int      @id
   Element           String?
   symbol            String?
@@ -527,7 +529,7 @@ You can read more about that workflow in the Prisma documentation. See [Introspe
 
 ## Conclusion
 
-Congratulations! You have successfully connected a Prisma project to a Neon database and performed migrations using Prisma Migrate.
+Congratulations! You have successfully completed the _Use Prisma with Neon_ tutorial. To recap, you have learned how to connect from Prisma to Neon, how to use Prisma Migrate to create and evolve a schema, how to add data using the Neon SQL Editor or Prisma Studio, how to send queries using Prisma Client, and how to introspect an existing database using the Prisma CLI.
 
 ## Need help?
 
