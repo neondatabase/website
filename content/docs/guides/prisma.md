@@ -78,7 +78,7 @@ For additional information about shadow databases, refer to [About the shadow da
 Prisma Migrate requires a single, direct connection to the database and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in any environment that enables PgBouncer for connection pooling causes the following error:
 
 ```text
-Error: undefined: Database error
+Error undefined: Database error
 Error querying the database: db error: ERROR: prepared statement 
 "s0" already exists
 ```
@@ -97,7 +97,7 @@ You can enable PGBouncer by adding the `?pgbouncer=true` flag to your connection
 postgres://<user>:<password>@<host>:5432/neondb?pgbouncer=true
 ```
 
-Neon runs PgBouncer in [Transaction mode](https://www.pgbouncer.org/features.html), which is required for Prisma Client to work reliably.
+Neon runs PgBouncer in [Transaction mode](https://www.pgbouncer.org/features.html).
 
 For more information, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 
