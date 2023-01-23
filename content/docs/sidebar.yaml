@@ -70,9 +70,9 @@
       slug: guides/node
     - title: Prisma
       items:
-        - title: Connect
+        - title: Connect from Prisma
           slug: guides/prisma  
-        - title: Tutorial
+        - title: Use Prisma With Neon
           slug: guides/prisma-tutorial 
     - title: Rust
       slug: guides/rust
