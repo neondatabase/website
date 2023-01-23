@@ -10,7 +10,7 @@ Prisma is an open source next-generation ORM that consists of the following part
 - Prisma Migrate: Migration system
 - Prisma Studio: GUI to view and edit data in your database.
 
-This tutorial steps you though how to connect from Prisma to Neon, how to use Prisma Migrate to create and evolve a schema, how to add data using the Neon SQL Editor or Prisma Studio, how to send queries using Prisma Client, and finally, how to to introspect an existing database using the Prisma CLI.
+This tutorial steps you through how to connect from Prisma to Neon, how to use Prisma Migrate to create and evolve a schema, how to add data using the Neon SQL Editor or Prisma Studio, how to send queries using Prisma Client, and finally, how to introspect an existing database using the Prisma CLI.
 
 ## Step 1: Create a Neon project and copy the connection string
 
@@ -24,14 +24,14 @@ postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/ne
 ```
 
 <Admonition type="note">
-Every Neon project is created with a default PostgreSQL user named for your account, and default database named `neondb`, as shown in the connection string that you copied. The default user and database are used in the instructions that follow.
+Every Neon project is created with a default PostgreSQL user named for your account, and a default database named `neondb`, as shown in the connection string that you copied. The default user and database are used in the instructions that follow.
 </Admonition>
 
 ## Step 2: Create a shadow database for Prisma Migrate
 
-Prisma Migrate requires a second "shadow" database to detect schema drift and generate new migrations. For more information about the the purpose of the shadow database, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the _Prisma documentation_.
+Prisma Migrate requires a second "shadow" database to detect schema drift and generate new migrations. For more information about the purpose of the shadow database, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the _Prisma documentation_.
 
-For cloud-hosted databases like Neon, you need to create the shadow database manually. To create the shadow database:
+For cloud-hosted databases like Neon, you must create the shadow database manually. To create the shadow database:
 
 1. In the Neon Console, select **Settings** > **Databases**.
 1. Click **New Database**.
@@ -85,9 +85,9 @@ You are now ready to model your data and create tables in your `neondb` database
 
 ## Step 5: Connect your Prisma project to Neon
 
-In this step you will update your project's `.env` file with the connection strings for your `neondb` and `shadow` data databases.
+In this step, you will update your project's `.env` file with the connection strings for your `neondb` and `shadow` data databases.
 
-1. Open the `.env` file, which is located in your `prisma` directory.
+1. Open the `.env` file located in your `prisma` directory.
 2. Update the value of the `DATABASE_URL` variable to the connection string you copied in Step 2.
 3. Add a `SHADOW_DATABASE_URL` variable and set the value to the connection string for the shadow database you created in Step 3.
 
@@ -104,38 +104,38 @@ A `?connect_timeout=10` option is added to the connection strings above to avoid
 
 ## Step 6: Add a model to your schema.prisma file
 
-In this step, you will update the `datasource db` entry in your `schema.prisma` file and add a model for the `Elements` table. A model represent the table in your underlying database and serve as the foundation for the generated Client API. For more information about data modeling, see [Data modeling](https://www.prisma.io/docs/concepts/overview/what-is-prisma/data-modeling), in the _Prisma documentation_.
+In this step, you will update the `datasource db` entry in your `schema.prisma` file and add a model for the `Elements` table. A model represents the table in your underlying database and serves as the foundation for the generated Client API. For more information about data modeling, see [Data modeling](https://www.prisma.io/docs/concepts/overview/what-is-prisma/data-modeling), in the _Prisma documentation_.
 
-1. Update the the `datasource db` entry. Ensure that the provider is set to `postgresql`, and add a `shadowDatabaseUrl` entry.
+1. Update the `datasource db` entry. Ensure that the provider is set to `postgresql`, and add a `shadowDatabaseUrl` entry.
 
 2. Add the model for the `Elements` table.
 
-When you are finished, your `schema.prisma` file should appear as follows:
+  Your `schema.prisma` file should now appear as follows:
 
-```text
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+  ```text
+  // This is your Prisma schema file,
+  // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
-  provider = "prisma-client-js"
-}
+  generator client {
+    provider = "prisma-client-js"
+  }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-}
+  datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+    shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  }
 
-model Elements {
-  AtomicNumber Int @id
-  Element String?
-  Symbol  String?  
-}
-```
+  model Elements {
+    AtomicNumber Int @id
+    Element String?
+    Symbol  String?  
+  }
+  ```
 
 ## Step 7: Run a migration to create a table in Neon
 
-At this point, you do not have a table in your Neon database. In this step, you will run a migration with Prisma Migrate, which creates the database table. The table is created based on the `Elements` table model that you defined in the `schema.prisma` file in the previous step.
+At this point, you do not have a table in your Neon database. In this step, you will run a migration with Prisma Migrate, which creates the database table. The table is created based on the `Elements` table model you defined in the `schema.prisma` file in the previous step.
 
 During the migration, Prisma Migrate performs the following actions:
 
@@ -191,7 +191,7 @@ To view the `Elements` table that was created in your `neondb` database by the m
 
 ## Step 9: Evolve your schema with Prisma Migrate
 
-In this step, you will evolve your Prisma schema and applying another migration with `prisma migrate dev`.
+In this step, you will evolve your Prisma schema by performing another migration with `prisma migrate dev`.
 
 Add an `AtomicMass` field to your `Elements` model. The modified schema should now appear as follows:
 
@@ -253,7 +253,7 @@ You have a couple of options here. You can add data using the Neon SQL Editor or
 INSERT INTO "Elements" VALUES  (10, 'Neon', 'Ne', 20.1797);
 ```
 
-To verify that the data was added, run:
+To verify that data was added, run:
 
 ```sql
 SELECT * FROM "Elements";
@@ -317,11 +317,11 @@ main()
   })
 ```
 
-This code contains a `main()` function that's invoked at the end of the script. It also instantiates Prisma Client, which act as the query interface to your database.
+This code contains a `main()` function that's invoked at the end of the script. It also instantiates Prisma Client, which acts as the query interface to your database.
 
 ### Create a new record
 
-Add a query to the `main()` function your `query.ts` file that creates a new record in the `Elements` table and logs the result to the console. Add the following code:
+Add a query to the `main()` function in your `query.ts` file that creates a new record in the `Elements` table and logs the result to the console. Add the following code:
 
 ```ts
 import { PrismaClient } from '@prisma/client'
@@ -362,7 +362,7 @@ Congratulations! You have created your first record with Prisma Client.
 
 ### Retrieve all records
 
-Prisma Client offers various queries to read data from your database. In this section, you will use the `findMany` query to returns all the records in the database for a the specified model.
+Prisma Client offers various queries to read data from your database. In this section, you will use the `findMany` query to retrieve all records in the database for the specified model.
 
 Delete the previous query from your `query.js` file and replace it with the `findMany` query. Your `query.js` file should appear as follows:
 
@@ -413,7 +413,7 @@ Instead of creating data models in your Prisma schema and using Prisma Migrate t
 
 Introspection is often used to generate an initial version of the data model when adding Prisma to an existing project, and may be more convenient than developing your data model manually, especially if you have numerous tables or tables with many columns.
 
-Another use case for Introspection is when you are using a tool other than Prisma Migrate to perform schema migrations, or you are using plain SQL for schema changes. In this case, you might introspect your database after each schema change to re-generate your Prisma Client to reflect the  changes in your Prisma Client API.
+Another use case for Introspection is when using a tool other than Prisma Migrate to perform schema migrations, or using plain SQL for schema changes. In this case, you might introspect your database after each schema change to re-generate your Prisma Client to reflect the  changes in your Prisma Client API.
 
 ### Create a schema in Neon
 
@@ -426,7 +426,7 @@ Let's assume your database has an extended version of the `Elements` table used 
 1. Enter the following statement into the editor and click **Run**.
 
 <Admonition type="note">
-Quotes are used for reserved keywords in PostgreSQL.
+Reserved PostgreSQL keywords are quoted.
 </Admonition>
 
 ```sql
@@ -479,7 +479,7 @@ Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-white-thun
 ✔ Introspected 2 models and wrote them into prisma/schema.prisma in 1.78s
 ```
 
-Two models were introspected in this case because of the `Elements` table that existed in the database previously. Prisma does not yet support introspecting a subset of a database schema, so you cannot introspect an individual table.
+Two models were introspected because of the `Elements` table that existed in the database previously. Prisma does not yet support introspecting a subset of a database schema, so you cannot introspect an individual table.
 
 ### View the introspected model
 
@@ -518,18 +518,18 @@ model Elements_ext {
 }
 ```
 
-The typical workflow for project that does not use Prisma Migrate is:
+The typical workflow for a project that does not use Prisma Migrate is:
 
-1. Change the database schema (e.g. using plain SQL)
+1. Change the database schema (using plain SQL, for example)
 1. Run `prisma db pull` to update the Prisma schema
 1. Run `prisma generate` to update Prisma Client
 1. Use the updated Prisma Client in your application
 
-You can read more about that workflow in the Prisma documentation. See [Introspection workflow](https://www.prisma.io/docs/concepts/components/introspection#introspection-workflow).
+You can read more about this workflow in the Prisma documentation. See [Introspection workflow](https://www.prisma.io/docs/concepts/components/introspection#introspection-workflow).
 
 ## Conclusion
 
-Congratulations! You have successfully completed the _Use Prisma with Neon_ tutorial. To recap, you have learned how to connect from Prisma to Neon, how to use Prisma Migrate to create and evolve a schema, how to add data using the Neon SQL Editor or Prisma Studio, how to send queries using Prisma Client, and how to introspect an existing database using the Prisma CLI.
+Congratulations! You have completed the _Use Prisma with Neon_ tutorial. To recap, you have learned how to connect from Prisma to Neon, how to use Prisma Migrate to evolve a schema, how to add data using the Neon SQL Editor and Prisma Studio, how to send queries using Prisma Client, and how to introspect an existing database.
 
 ## Need help?
 
