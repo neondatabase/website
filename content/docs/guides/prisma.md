@@ -48,7 +48,7 @@ You can find all of the connection details listed above, except for your passwor
 Prisma Migrate is a migration tool that allows you to easily evolve your database schema from prototyping to production. Prisma Migrate requires a shadow database to detect schema drift. This section describes how to configure a second Neon database as a shadow database, which is required to run the `prisma migrate dev` command.
 
 <Admonition type="note">
-Prisma Migrate requires a direct connection to the database and currently does not support connection pooling with PgBouncer. Migrations fail with an error if connection pooling is enabled in Neon. For more information, see [Prisma Migrate and with PgBouncer](../prisma-connection-issues/#prisma-migrate-with-pgbouncer).
+Prisma Migrate requires a direct connection to the database and currently does not support connection pooling with PgBouncer. Migrations fail with an error if connection pooling is enabled in Neon. For more information, see [Prisma Migrate and with PgBouncer](#prisma-migrate-with-pgbouncer).
 </Admonition>
 
 To configure a shadow database:
@@ -73,10 +73,9 @@ To configure a shadow database:
 
 For additional information about shadow databases, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the _Prisma documentation_.
 
+## Prisma Migrate with PgBouncer
 
-## Using Prisma Migrate with PgBouncer
-
-Prisma Migrate requires a direct connection to the database and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in an environment that enables PgBouncer for connection pooling results in the following error:
+Prisma Migrate requires a single, direct connection to the database and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in any environment that enables PgBouncer for connection pooling results in the following error:
 
 ```text
 Error: undefined: Database error
@@ -88,9 +87,9 @@ If you encounter this error, ensure that connection pooling in Neon is disabled.
 
 For more information about this issue, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#prisma-migrate-and-pgbouncer-workaround).
 
-## Using Prisma Client from serverless functions
+## Prisma Client with PgBouncer for serverless functions
 
-Using Prisma Client from a serverless function may require adding the `?pgbouncer=true` flag to your connection URL to enable connection pooling, as serverless function may require a large number of database connections.
+If you are using Prisma Client from a serverless function add the `?pgbouncer=true` flag to your connection URL to enable connection pooling, as a serverless function may require a large number of database connections.
 
 PGBouncer is enabled by adding the `?pgbouncer=true` flag to your connection URL. For example:
 
@@ -98,41 +97,44 @@ PGBouncer is enabled by adding the `?pgbouncer=true` flag to your connection URL
 postgres://<user>:<password>@<endpoint_hostname>:5432/neondb?pgbouncer=true
 ```
 
+Neon runs PgBouncer in [Transaction mode](https://www.pgbouncer.org/features.html), which is required for Prisma Client to work reliably.
+
 For more information, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 
-<Admonition type="note">
-PgBouncer is not compatible with Prisma Migrate, which requires a direct connection to the database, which means that you cannot enable connection pooling in Neon if if you intend to use the same connection for Prisma Migrate. See [Using Prisma Migrate with PgBouncer](#using-prisma-migrate-with-pgbouncer).
-</Admonition>
+## Connection timeouts
 
-## Connection issues
-
-A connection timeout when attempting to connect to Prisma from Neon results in the following error:
+A connection timeout that occurs when connecting from Prisma to Neon results in an error similar to the following:
 
 ```text
 Error: P1001: Can't reach database server at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`
 Please make sure your database server is running at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`.
 ```
 
-A compute node in Neon has two main states: Active and Idle.
+This error most likely means that the Prisma query engine timed out before the Neon compute instance was activated.
 
-Active means that PostgreSQL is currently running. If there are no active queries for 5 minutes, the activity monitor gracefully places the compute node into the Idle state to save energy and resources.
+A Neon compute instance has two main states: _Active_ and _Idle_. Active means that PostgreSQL is currently running. If there is no query activity for 5 minutes, Neon places a compute instance into an idle state. For more information, see [Compute lifecycle](../../docs/introduction/compute-lifecycle/).
 
-When you connect to an idle compute (in your case, using Prisma), Neon automatically activates it. Activation typically happens within a few seconds.
+When you connect to an idle compute instance from Prisma, Neon automatically activates it. Activation typically happens within a few seconds, but added latency can result in a connection timeout. To address this issue, try adjusting your Neon connection string with the following parameters:
 
-When the connection timeout error is thrown, it most likely means that the Prisma query engine timed out before the Neon compute node is active  or it could be a combination of compute startup time and latency. This error also occurs if you attempt to connect to Neon project that has been deleted or is inaccessible for some other reason.
+- Set `connect_timeout` to 0 or a higher value. This setting defines the maximum number of seconds to wait for a new connection to be opened. The default value is 5 seconds. A setting of 0 means no timeout. For example:
 
-The solution is to increase the [connection pool timeout](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#increasing-the-pool-timeout) setting. You can do that by setting the `pool_timeout` parameter to 0 or to a value larger than the default (10 seconds). This parameter is set by appending `&pool_timeout=20` to the end of the Neon connection string that you defined in your Prisma database connection configuration. You can also try setting the connect_timeout variable.
+  ```bash
+  postgres://<user>:<password>@<endpoint_hostname>:5432/neondb?connect_timeout=10
+  ```
 
-You can set mutliple Prisma connection variables on your connection string. For example:
+- If you are using pooling, set `pool_timeout` to 0 or a higher value. This setting defines the number of seconds to wait for a new connection from the pool. The default is 10 seconds. A setting of 0 means no timeout. For more information, see [Increasing the pool timeout](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#increasing-the-pool-timeout).
+
+When `pool_timeout` is set, your connection string appears similar to the following:
 
 ```bash
-postgres://<user>:<password>@<endpoint_hostname>:5432/neondb?pgbouncer=true&pool_timeout=0&connect_timeout=30
+postgres://<user>:<password>@<endpoint_hostname>:5432/neondb?pgbouncer=true&pool_timeout=0&pool_timeout=30
 ```
 
 For additional information about connecting from Prisma, refer to the following resources in the _Prisma documentation_:
 
 - [Connection management](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management)
 - [Database connection issues](https://www.prisma.io/dataguide/managing-databases/database-troubleshooting#database-connection-issues)
+- [PostgreSQL database connector](https://www.prisma.io/docs/concepts/database-connectors/postgresql)
 
 ## Need help?
 
