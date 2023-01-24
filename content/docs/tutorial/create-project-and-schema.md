@@ -11,7 +11,7 @@ If you do not have a Neon account, navigate to the Signup page and create an acc
 
 ## Create a project
 
-Once you have signed in to the Neon Console, click on `Create a project`. Enter the name of your project and select a region (We recommend selecting the region closest to your application or user location).
+Once you have signed in to the Neon Console, click on **Create a project**. Enter the name of your project and select a region (We recommend selecting the region closest to your application or user location).
 
 ![image5](https://user-images.githubusercontent.com/13738772/213742176-05f4b49a-6a77-4413-a72c-415636c7066f.png)
 
@@ -23,13 +23,15 @@ Neon is serverless Postgres and separates compute and storage. Because the compu
 
 Neon also suspends a compute node if it is inactive for 5 minutes, to save on compute resources.
 
-If you navigate to the Endpoints page in the Neon Console, notice how the endpoint switches between Active and Idle states. Active means that the compute node is running. Idle on the other handle means that the compute node is suspended.
+If you navigate to the **Endpoints** page in the Neon Console, notice how the endpoint switches between `Active` and `Idle` states. Active means that the compute node is running. `Idle` on the other hand, means that the compute node is suspended.
 
 ![image10](https://user-images.githubusercontent.com/13738772/213742361-57378ec5-938f-4924-80b8-8bf9715c4c99.png)
 
 [Learn more about Neon’s architecture](https://neon.tech/docs/introduction/architecture-overview/).
 
 ## Create a schema
+
+The data used in this tutorial was collected from Nike.com’s website using Nike’s API.
 
 Navigate to the SQL Editor and run the following query:
 

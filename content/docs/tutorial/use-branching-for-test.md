@@ -51,6 +51,5 @@ Yes! We managed to remove duplicates from the `shoes` table. We can now safely a
 Congratulations! You completed the tutorial.
 Here is a recap of what we covered:
 
-- Neon is serverless Postgres that separates storage and compute.
 - You created a Neon project, a schema and inserted data to a table
 - You learned about database branching and how to use it for test and data recovery

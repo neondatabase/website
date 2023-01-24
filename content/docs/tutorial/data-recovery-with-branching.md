@@ -76,13 +76,13 @@ You should see a message similar to the one below to indicate that you successfu
 
 ![image1](https://user-images.githubusercontent.com/13738772/213742922-df6b0e88-5e89-4f21-a169-3871df8f293c.png)
 
-Let’s now get back to the SQL Editor and run the following query:
+Let’s now get back to the SQL Editor in the Neon COnsole and run the following query:
 
 ```sql
 SELECT * FROM shoes
 ```
 
-Make sure you select the newly created branch (`backup` in the example below).
+Make sure you select the newly created branch (the `backup` branch in the example below).
 
 ![image7](https://user-images.githubusercontent.com/13738772/213742990-775a1c53-aa7c-412e-95cf-60262121224b.png)
 
@@ -95,11 +95,15 @@ Make sure you select the newly created branch (`backup` in the example below).
 ```
 
 Phew 😮‍💨! You successfully recovered the data  🎉!
+
 What have we seen here?
+
 To recover the data, we introduced a powerful concept: branching.
 
-Neon Branching is a copy of your data that you can create from Head (the most up-to-date state of the database), Time (from a date and time, similar to the example above) or Log-Sequence-Number (LSN).
+Neon Branching is a copy of your data that you can create from **Head** (the most up-to-date state of the database), **Time** (from a date and time, similar to the example above). or **Log-Sequence-Number (LSN)**.
 
-LSN is a unique identifier that is assigned to each transaction in the database, and is used to track the order in which transactions are committed to the database.
+An LSN is a unique identifier that is assigned to each transaction in the database, and is used to track the order in which transactions are committed to the database.
 
-Note: We recommend conducting tests to your schema changes or manual data updates on a new branch rather than on your main database, to avoid schema conflicts or unwanted behavior in your app.
+<Admonition type="note">
+We recommend testing to your schema changes or manual data updates on a new branch rather than on the database branch you use for production, to avoid schema conflicts or unwanted behavior in your application.
+</Admonition>
