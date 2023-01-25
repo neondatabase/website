@@ -1,0 +1,19 @@
+#lines-1-horizontal-line-1 {
+  @apply top-[229px] 3xl:top-[180px] 2xl:top-[154px] xl:top-[148px];
+}
+
+#lines-1-horizontal-line-6 {
+  @apply top-[956px] 3xl:top-[780px] 2xl:top-[654px] xl:top-[583px];
+}
+
+#lines-1-horizontal-line-12,
+#lines-1-horizontal-line-13,
+#lines-1-horizontal-line-14,
+#lines-1-horizontal-line-15,
+#lines-1-horizontal-line-16,
+#lines-1-circle-with-text-3,
+#lines-1-shape-6,
+#lines-1-shape-7,
+#lines-1-circle-6 {
+  @apply hidden;
+}
