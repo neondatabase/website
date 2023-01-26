@@ -26,6 +26,8 @@
   items:
     - title: Connect from any application
       slug: connect/connect-from-any-app
+    - title: Connect a GUI or IDE
+      slug: connect/connect-postgres-gui
     - title: Passwordless connect
       slug: connect/passwordless-connect
     - title: Connect with psql
@@ -54,6 +56,8 @@
       slug: manage/operations
 - title: Guides
   items:
+    - title: AWS Lambda
+      slug: guides/aws-lambda
     - title: Django
       slug: guides/django
     - title: Go
@@ -69,7 +73,11 @@
     - title: Node.js
       slug: guides/node
     - title: Prisma
-      slug: guides/prisma
+      items:
+        - title: Connect from Prisma
+          slug: guides/prisma
+        - title: Use Prisma With Neon
+          slug: guides/prisma-tutorial
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy
@@ -85,7 +93,11 @@
     - title: Import from CSV
       slug: import/import-from-csv
 - title: Security
-  slug: security
+  items:
+    - title: Security
+      slug: security/security
+    - title: Secure connections
+      slug: security/secure-connections
 - title: Reference
   items:
     - title: API

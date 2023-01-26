@@ -17,8 +17,7 @@
     "lint:js": "eslint --ext .js,.jsx --ignore-path .gitignore .",
     "lint:js:fix": "eslint --fix --ext .js,.jsx --ignore-path .gitignore .",
     "lint:md": "markdownlint --ignore-path .gitignore .",
-    "lint:md:fix": "markdownlint --fix --ignore-path .gitignore .",
-    "prepare": "husky install"
+    "lint:md:fix": "markdownlint --fix --ignore-path .gitignore ."
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
