@@ -28,7 +28,9 @@ The following table lists Neon PostgreSQL parameter settings that may differ fro
 | shared_buffers  |         | The value depends on compute size                                                 |
 | wal_level       | replica | Logical replication is currently not supported                                    |
 
-**_Note_**: To increase the number of permitted connections, you can enable connection pooling. For more information, see [Connection pooling](/docs/get-started-with-neon/connection-pooling).
+<Admonition type="note">
+You can enable connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](../../connect/connection-pooling).
+</Admonition>
 
 ## Unlogged tables
 
