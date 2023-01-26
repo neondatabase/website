@@ -69,7 +69,7 @@
     - title: Laravel
       slug: guides/laravel
     - title: Next.js
-      slug: guides/vercel
+      slug: guides/nextjs
     - title: Node.js
       slug: guides/node
     - title: Prisma
