@@ -27,7 +27,7 @@ where:
 - `<port>` is the port number of the PostgreSQL instance. The default port number is `5432`.
 - `<dbname>` is the name of the database.
 
-A Neon connection string has the same format, with your Neon endpoint hostname defined as the `hostname`, as shown:
+A Neon connection string has the same format, with your Neon endpoint hostname defined as the `hostname`, as shown:  
 
 ```bash
 postgres://<user>:<password>@<endpoint_hostname>:<port>/<dbname>
@@ -61,7 +61,7 @@ If you have multiple databases to import, each database must be imported separat
 
 When importing a database, be aware of the following:
 
-- If you are importing a database from an archive using `pg_dump` that is not in plain-text format, use the `pg_restore` utility instead of `psql` to restore the database to Neon.
+- If you are importing a database from an archive using `pg_dump` that is  not in plain-text format, use the `pg_restore` utility instead of `psql` to restore the database to Neon.
 - Neon is not able to create databases, so you can not use `pg_dumpall` or `pg_dump` with the `-C` option.
 - Because `pg_dump` dumps a single database, it does not include information about roles stored in the global `pg_authid` catalog. Also, Neon does not support creating roles using `psql`. You can only create roles (users) using the Neon Console. If you do not create roles in Neon before importing a database that has roles, you will receive "role does not exist" errors during the import operation. You can ignore this warning. It does not prevent data from being imported.
 - Some PostgreSQL features that require access to the local file system are not supported by Neon. For example, tablespaces and large objects are not supported. Please take this into account when importing a database from PostgreSQL to Neon.
@@ -77,3 +77,4 @@ For information about the commands referred to in this topic, refer to the follo
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+

@@ -8,14 +8,14 @@ redirectFrom:
 In most cases, copying a connection string from the Neon **Dashboard** and using it in your project should work as is. However, with older clients and some native PostgreSQL clients, you may receive the following error:
 
 ```txt
-ERROR: The project ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the project ID (the first part of the domain name) as a parameter: '&options=project%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
+ERROR: The endpoint ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=project%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
 ```
 
 In most cases, this happens if your client library or application does not support the **SNI (Server Name Indication)** mechanism in TLS. See [Details](#details) for more context and [Workarounds](#workarounds) for a list of ways to work around this issue.
 
 ## Details
 
-To route incoming connections, we use different domain names for different endpoints. For example, to connect to the endpoint `ep-mute-recipe-239816`, we ask you to connect to `ep-mute-recipe-239816.us-east-2.aws.neon.tech`. However, the PostgreSQL wire protocol does not transfer the server domain name, so we rely on the SNI (Server Name Indication) extension of the `TLS` protocol, which allows a client to indicate what domain name it is attempting to connect to. This is the same mechanism that allows hosting several `https`-enabled websites on a single IP address. `SNI` support was added to the `libpq` (an official PostgreSQL client library) in version 14, released in September 2021. All `libpq`-based clients like Python's `psycopg2` and Ruby's `ruby-pg` should work if the system `libpq` version is >= 14.
+To route incoming connections, we use different domain names for different endpoints. For example, to connect to the endpoint `ep-mute-recipe-239816`, we ask you to connect to `ep-mute-recipe-239816.us-east-2.aws.neon.tech`. However, the PostgreSQL wire protocol does not transfer the server domain name, so we rely on the SNI (Server Name Indication) extension of the `TLS` protocol, which allows a client to indicate what domain name it is attempting to connect to. This is the same mechanism that allows hosting several `https`-enabled websites on a single IP address. `SNI` support was added to the `libpq` (an official PostgreSQL client library) in version 14, released in September 2021. All `libpq`-based clients like Python's `psycopg2` and Ruby's `ruby-pg` should work if the system `libpq`  version is >= 14.
 
 ## Workarounds
 
@@ -65,14 +65,14 @@ This approach is the least secure of all the recommended workarounds. It causes 
 
 ## Applications
 
-| Application                                                                        | SNI support | Comment                                                                                                                                                  |
-| ---------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Application                                                                        | SNI support | Comment                                                                                                                          |
+| ---------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | [TablePlus](https://tableplus.com)                                                 | ✅          | SNI support on macOS since build 436, and on Windows since build 202. No SNI support on Linux currently. For older versions, Workaround B is applicable. |
-| [Postico](https://eggerapps.at/postico/)                                           | ✅          | SNI support since v1.5.21. For older versions, Workaround B is applicable.                                                                               |
-| [PopSQL](https://popsql.com/)                                                      | ❌          | No SNI support. Workaround D helps.                                                                                                                      |
-| [Grafana pg source](https://grafana.com/docs/grafana/latest/datasources/postgres/) | ✅ / ❌     | Workaround C. SNI works if `sslmode=verify-full` as with other golang libraries                                                                          |
-| [PgAdmin 4](https://www.pgadmin.org/)                                              | ✅          |                                                                                                                                                          |
-| [DataGrip](https://www.jetbrains.com/datagrip/)                                    | ✅          |                                                                                                                                                          |
+| [Postico](https://eggerapps.at/postico/)                                           | ✅          | SNI support since v1.5.21. For older versions, Workaround B is applicable.                                                       |
+| [PopSQL](https://popsql.com/)                                                      | ❌          | No SNI support. Workaround D helps.                                                                                              |
+| [Grafana pg source](https://grafana.com/docs/grafana/latest/datasources/postgres/) | ✅ / ❌     | Workaround C. SNI works if `sslmode=verify-full` as with other golang libraries                                                    |
+| [PgAdmin 4](https://www.pgadmin.org/)                                              | ✅          |                                                                                                                                  |
+| [DataGrip](https://www.jetbrains.com/datagrip/)                                    | ✅          |                                                                                                                                  |
 
 ## Libraries
 
@@ -80,28 +80,28 @@ This approach is the least secure of all the recommended workarounds. It causes 
 
 Native client libraries:
 
-| Driver            | Language    | Supports SNI                                                                                                                             |
-| ----------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| npgsql            | C#          | yes                                                                                                                                      |
-| Postmodern        | Common Lisp |                                                                                                                                          |
-| crystal-pg        | Crystal     |                                                                                                                                          |
+| Driver            | Language    | Supports SNI                                             |
+| ----------------- | ----------- | -------------------------------------------------------- |
+| npgsql            | C#          | yes                                                      |
+| Postmodern        | Common Lisp |                                                          |
+| crystal-pg        | Crystal     |                                                          |
 | Postgrex          | Elixir      | yes ([configure ssl_opts with server_name_indication](https://hexdocs.pm/postgrex/Postgrex.html#start_link/1-ssl-client-authentication)) |
-| epgsql            | Erlang      |                                                                                                                                          |
-| pgo               | Erlang      |                                                                                                                                          |
-| github.com/lib/pq | Go          | no (SNI support is in review)                                                                                                            |
-| pgx               | Go          | no (SNI support is merged, not released yet)                                                                                             |
-| go-pg             | Go          | no (except verify-full mode)                                                                                                             |
-| JDBC              | Java        | yes                                                                                                                                      |
-| R2DBC             | Java        |                                                                                                                                          |
-| node-postgres     | JavaScript  |                                                                                                                                          |
-| postgres.js       | JavaScript  | no                                                                                                                                       |
-| pgmoon            | Lua         |                                                                                                                                          |
-| asyncpg           | Python      | yes                                                                                                                                      |
-| pg8000            | Python      | [depends](https://github.com/neondatabase/neon/pull/2008)                                                                                |
-| rust-postgres     | Rust        |                                                                                                                                          |
-| PostgresClientKit | Swift       | yes                                                                                                                                      |
-| PostgresNIO       | Swift       |                                                                                                                                          |
-| postgresql-client | TypeScript  | yes                                                                                                                                      |
+| epgsql            | Erlang      |                                                          |
+| pgo               | Erlang      |                                                          |
+| github.com/lib/pq | Go          | no (SNI support is in review)                            |
+| pgx               | Go          | no (SNI support is merged, not released yet)             |
+| go-pg             | Go          | no (except verify-full mode)                             |
+| JDBC              | Java        | yes                                                      |
+| R2DBC             | Java        |                                                          |
+| node-postgres     | JavaScript  | yes when `ssl: {'sslmode': 'require'}` option passed     |
+| postgres.js       | JavaScript  | no                                                       |
+| pgmoon            | Lua         |                                                          |
+| asyncpg           | Python      | yes                                                      |
+| pg8000            | Python      | yes (requires [scramp >= v1.4.3](https://pypi.org/project/scramp/), which is included in [pg8000 v1.29.3](https://pypi.org/project/pg8000/) and higher)  |
+| rust-postgres     | Rust        |                                                          |
+| PostgresClientKit | Swift       | no                                                       |
+| PostgresNIO       | Swift       |                                                          |
+| postgresql-client | TypeScript  | yes                                                      |
 
 ## Need help?
 

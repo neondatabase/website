@@ -258,10 +258,10 @@ Example file structure:
 ```md
 ├── content
 │ ├── docs
-│ ├── conceptual-guides
-│ ├── architecture-overview.md
-│ ├── images
-│ ├── neon_architecture_2.png // put images in the same directory as your .md file
+│   ├── conceptual-guides
+│     ├── architecture-overview.md
+│     ├── images
+│       ├── neon_architecture_2.png // put images in the same directory as your .md file
 ```
 
 Example content in `architecture-overview.md`:
@@ -279,7 +279,7 @@ Custom `mdx` component that makes possible using [extended markdown syntax for d
 The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
-{/_ other content here _/}
+{/* other content here */}
 
 <DefinitionList>
 {/* required new line */}
@@ -299,10 +299,10 @@ Another term for smoke test
 [Stress test](/)
 : First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
 
-{/_ other content here _/}
+{/* other content here */}
 </DefinitionList>
 
-{/_ other content here _/}
+{/* other content here */}
 ```
 
 ### Acceptable markup for term

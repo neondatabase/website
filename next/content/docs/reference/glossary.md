@@ -46,7 +46,7 @@ A service that provides virtualized computing resources (CPU, memory, and storag
 
 ### Connection pooling
 
-A method of creating a pool of connections and caching those connections for reuse. Neon uses `pgbouncer` in `transaction mode` for connection pooling. Neon’s connection pooling feature can be enabled or disabled for a project on the **Settings** page, under **General Settings**. See [Connection pooling](../../connect/connection-pooling).
+A method of creating a pool of connections and caching those connections for reuse. Neon supports `PgBouncer` in `transaction mode` for connection pooling. For more information, see [Connection pooling](../../connect/connection-pooling).
 
 ### Connection string
 

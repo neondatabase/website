@@ -38,7 +38,7 @@ You can use Neon's branching feature in variety development workflows, a few of 
 
 ### Development
 
-Create a branch of your production database that developers are free to play with and modify. You can quickly create a branch with all of the data that existed in the parent branch, eliminating the setup time required to deploy and maintain a development database.
+Create a branch of your production database that developers are free to play with and modify. You can quickly create a branch with all of the data that existed in the parent branch, eliminating the setup time required to deploy and maintain a development database. 
 
 ![development environment branch](/docs/introduction/branching_dev_env.png)
 
