@@ -14,13 +14,19 @@
 
 ## Getting Started
 
-1. Clone this repository or hit "Use this template" button
+1. Clone this repository
 
 ```bash
-git clone git@github.com:pixel-point/nextjs-tailwind-starter.git
+git clone git clone git@github.com:neondatabase/website.git
 ```
 
-2. Install dependencies
+2. Checkout to the `/next` folder (for the time being)
+
+```bash
+cd next
+```
+
+3. Install dependencies
 
 ```bash
 npm install
@@ -34,7 +40,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `src/app/page.jsx`. The page auto-updates as you edit the file.
 
 ### Learn More
 
@@ -54,14 +60,18 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Project Structure
 
 ```text
+├── content
 ├── public
 ├── src
+│   ├── app
 │   ├── components
 │   │  ├── pages — React components that are being used specifically on a certain page
 │   │  └── shared — React components that are being used across the whole website
 │   ├── hooks
+│   ├── icons
 │   ├── images
-│   ├── pages
+│   ├── lib
+│   ├── scripts
 │   ├── styles
 │   ├── utils
 ├── next.config.js — Main configuration file for a Next.js site. Read more about it [here](https://nextjs.org/docs/api-reference/next.config.js/introduction)
