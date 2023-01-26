@@ -1,0 +1,4 @@
+Contact: mailto:security@neon.tech
+Expires: 2022-12-31T23:59:00.000Z
+Preferred-Languages: en
+Policy: https://neon.tech/security
