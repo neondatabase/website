@@ -5,8 +5,6 @@ redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
 ---
 
-## PostgreSQL connection limits
-
 Each PostgreSQL connection creates a new process in the operating system, which consumes resources &mdash; memory, open file descriptors, etc. For this reason, PostgreSQL limits the number of open connections. The Neon [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier) allows 100 simultaneous PostgreSQL connections by default (`max_connections=100`), with a small number of those connections reserved for administrative purposes.
 
 Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations or to running many instances of the application. To handle these situations, Neon supports connection pooling.
