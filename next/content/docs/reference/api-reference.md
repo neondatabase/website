@@ -11,7 +11,7 @@ The Neon API allows you to manage your Neon projects programmatically.
 Refer to the [Neon API v2 reference](https://neon.tech/api-reference/v2) for supported methods.
 
 <Admonition type="warning">
-The [Neon API v1](https://neon.tech/api-reference) is deprecated. Please migrate your applications to [Neon API V2 ](https://neon.tech/api-reference/v2/). The base URL for the new Neon API is `https://neon.tech/api-reference/v2/`
+The [Neon API v1](https://neon.tech/api-reference) is deprecated. Please migrate your applications to [Neon API V2 ](https://neon.tech/api-reference/v2/). The base URL for the new Neon API is `https://console.neon.tech/api/v2`
 </Admonition>
 
 The Neon API is a REST API. It provides resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and supports standard HTTP response codes, authentication, and verbs.
