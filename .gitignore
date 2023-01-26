@@ -76,3 +76,6 @@ yarn-error.log
 .yarn-integrity
 
 .vscode/snipsnap.code-snippets
+
+.idea/
+next/.idea/
