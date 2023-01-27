@@ -4,21 +4,16 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-This guide describes how to integrate Neon with Vercel using the Neon integration from the Vercel marketplace.
+This guide describes how to integrate Neon with Vercel using the Neon integration from the [Vercel integration marketplace](https://vercel.com/integrations).
 
 ## What the Neon integration does
 
-This integration connects your Vercel project to your Neon project. If you use [preview deployments](https://vercel.com/docs/concepts/deployments/preview-deployments) in Vercel, which are available by default for all Vercel projects, Neon automatically creates a database branch for each preview deployment.
-
-The integration automatically configures the required environment variables in your Vercel project. The following variables are configured:
-
-- DATABASE_URL (Production): This variable is set to the `main` branch of your Neon project, to the database you select during the integration setup.
-- DATABASE_URL (Development): This variable is set to a development branch.
+The Neon-Vercel integration connects your Vercel project to your Neon project. If you use [preview deployments](https://vercel.com/docs/concepts/deployments/preview-deployments) in Vercel, which are available by default for all Vercel projects, Neon automatically creates a database branch for each preview deployment. This actin occurs when the GitHub branch created by the preview deployment is observed. The integration also sets Vercel preview environment variables to allow your preview deployment to connect to the Neon database branch.
 
 ## Prerequisites
 
 - A [Vercel account](https://vercel.com).
-- A Vercel project. For Vercel project creation instructions, see [Projects](https://vercel.com/docs/concepts/projects/overview), in the Vercel documentation.
+- A Vercel project. For Vercel project creation instructions, see [Projects](https://vercel.com/docs/concepts/projects/overview), in the _Vercel documentation_.
 
 ## Deploy the integration
 
@@ -34,7 +29,7 @@ The integration automatically configures the required environment variables in y
 
 ## Troubleshooting connection issues
 
-(Need to verify. May be complete fiction.)
+(Need to verify. This may be complete fiction.)
 
 If you encountered a connection error while adding the integration, you may need to remove existing environment variable settings in your Vercel project settings. The Neon integration sets the following environment variables.  
 
