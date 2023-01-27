@@ -20,13 +20,7 @@
 git clone git@github.com:neondatabase/website.git
 ```
 
-2. Checkout to the `/next` folder (for the time being)
-
-```bash
-cd next
-```
-
-3. Install dependencies
+2. Install dependencies
 
 ```bash
 npm install
@@ -40,7 +34,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `next/src/app/page.jsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `src/app/page.jsx`. The page auto-updates as you edit the file.
 
 ### Learn More
 
