@@ -2,8 +2,8 @@ import Head from 'next/head';
 
 import 'styles/globals.css';
 
-import Layout from 'components/shared/layout';
 import Hero from 'components/pages/404/hero';
+import Layout from 'components/shared/layout';
 import SEO from 'components/shared/seo';
 import SEO_DATA from 'constants/seo-data';
 
