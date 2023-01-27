@@ -132,7 +132,7 @@ In this step, you will update the `datasource db` entry in your `schema.prisma` 
     ```
 
   <Admonition type="note">
-  Prisma [naming conventions](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#naming-conventions) recommend using PascalCase when defining models. However, be aware that the letter case in your Prisma model is reflected in PostgreSQL identifier names. If an identifier name in PostgreSQL includes an upper case letter, you must quote the name when specifying it in a PostgreSQL query. For example, the `Elements` table has an upper case letter in its name. When querying this table in PostgreSQL, you must enclose `Elements` in quotes: `SELECT * FROM "Elements"`. Otherwise, the identifier name is folded to lower case in PostgreSQL and the query will not find the table.
+  Prisma [naming conventions](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#naming-conventions) recommend using PascalCase when defining models. However, be aware that the letter case in your Prisma model is reflected in PostgreSQL identifier names. If an identifier name in PostgreSQL includes an upper case letter, you must quote the name when specifying it in a PostgreSQL query. For example, the `Elements` table has an upper case letter in its name. When querying this table in PostgreSQL, you must enclose `Elements` in quotes: `SELECT * FROM "Elements"`. Otherwise, the identifier name is folded to lower case and the query will not find the table.
   </Admonition>
 
 ## Step 6: Run a migration to create the table in Neon
