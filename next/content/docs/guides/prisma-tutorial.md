@@ -131,6 +131,10 @@ In this step, you will update the `datasource db` entry in your `schema.prisma` 
     }
     ```
 
+  <Admonition type="note">
+  Prisma [naming conventions](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#naming-conventions) recommend using PascalCase when defining models. However, be aware that the letter case in your Prisma model is reflected in PostgreSQL identifier names. If an identifier name in PostgreSQL includes an upper case letter, you must quote the name when specifying it in a PostgreSQL query. For example, the `Elements` table has an upper case letter in its name. When querying this table in PostgreSQL, you must enclose `Elements` in quotes: `SELECT * FROM "Elements"`. Otherwise, the identifier name is folded to lower case in PostgreSQL and the query will not find the table.
+  </Admonition>
+
 ## Step 6: Run a migration to create the table in Neon
 
 At this point, you do not have a table in your `neondb` database. In this step, you will run a migration with Prisma Migrate, which creates the table. The table is created based on the `Elements` table model you defined in the `schema.prisma` file in the previous step.
@@ -242,10 +246,6 @@ You have a couple of options for adding data to the `Elements` table. You can ad
 1. Select the **SQL Editor**.
 1. Select the `main` branch of your project and select the `neondb` database.
 1. To add data, enter the following statement into the editor and click **Run**.
-
-<Admonition type="note">
-`ELEMENT` is a reserved keyword in PostgreSQL, so `"Elements"` must be quoted.
-</Admonition>
 
 ```sql
 INSERT INTO "Elements" VALUES  (10, 'Neon', 'Ne', 20.1797);
@@ -423,40 +423,36 @@ Let's assume your database has an extended version of the `Elements` table that 
 1. Select the `main` branch of your project and select the `neondb` database.
 1. Enter the following statement into the editor and click **Run**.
 
-<Admonition type="note">
-Reserved PostgreSQL keywords are quoted.
-</Admonition>
-
 ```sql
 CREATE TABLE "Elements_ext" (
-  AtomicNumber INTEGER PRIMARY KEY,
+  "AtomicNumber" INTEGER PRIMARY KEY,
   "Element" TEXT,
-  Symbol TEXT,
-  AtomicMass DECIMAL,
-  NumberOfNeutrons INTEGER,
-  NumberOfProtons INTEGER,
-  NumberOfElectrons INTEGER,
+  "Symbol" TEXT,
+  "AtomicMass" DECIMAL,
+  "NumberOfNeutrons" INTEGER,
+  "NumberOfProtons" INTEGER,
+  "NumberOfElectrons" INTEGER,
   "Period" INTEGER,
   "Group" INTEGER,
-  Phase TEXT,
-  Radioactive BOOLEAN,
+  "Phase" TEXT,
+  "Radioactive" BOOLEAN,
   "Natural" BOOLEAN,
-  Metal BOOLEAN,
-  Nonmetal BOOLEAN,
-  Metalloid BOOLEAN,
+  "Metal" BOOLEAN,
+  "Nonmetal" BOOLEAN,
+  "Metalloid" BOOLEAN,
   "Type" TEXT,
-  AtomicRadius DECIMAL,
-  Electronegativity DECIMAL,
-  FirstIonization DECIMAL,
-  Density DECIMAL,
-  MeltingPoint DECIMAL,
-  BoilingPoint DECIMAL,
-  NumberOfIsotopes INTEGER,
-  Discoverer TEXT,
+  "AtomicRadius" DECIMAL,
+  "Electronegativity" DECIMAL,
+  "FirstIonization" DECIMAL,
+  "Density" DECIMAL,
+  "MeltingPoint" DECIMAL,
+  "BoilingPoint" DECIMAL,
+  "NumberOfIsotopes" INTEGER,
+  "Discoverer" TEXT,
   "Year" INTEGER,
-  SpecificHeat DECIMAL,
-  NumberOfShells INTEGER,
-  NumberOfValence INTEGER
+  "SpecificHeat" DECIMAL,
+  "NumberOfShells" INTEGER,
+  "NumberOfValence" INTEGER
 );
 ```
 
@@ -485,34 +481,34 @@ To view the model generated for the new `Elements_ext` table, open your `schema.
 
 ```text
 model Elements_ext {
-  atomicnumber      Int      @id
+  AtomicNumber      Int      @id
   Element           String?
   symbol            String?
-  atomicmass        Decimal? @db.Decimal
-  numberofneutrons  Int?
-  numberofprotons   Int?
-  numberofelectrons Int?
+  AtomicMass        Decimal? @db.Decimal
+  NumberOfNeutrons  Int?
+  NumberOfProtons   Int?
+  NumberOfElectrons Int?
   Period            Int?
   Group             Int?
-  phase             String?
-  radioactive       Boolean?
+  Phase             String?
+  Radioactive       Boolean?
   Natural           Boolean?
-  metal             Boolean?
-  nonmetal          Boolean?
-  metalloid         Boolean?
+  Metal             Boolean?
+  Nonmetal          Boolean?
+  Metalloid         Boolean?
   Type              String?
-  atomicradius      Decimal? @db.Decimal
-  electronegativity Decimal? @db.Decimal
-  firstionization   Decimal? @db.Decimal
-  density           Decimal? @db.Decimal
-  meltingpoint      Decimal? @db.Decimal
-  boilingpoint      Decimal? @db.Decimal
-  numberofisotopes  Int?
-  discoverer        String?
+  AtomicRadius      Decimal? @db.Decimal
+  ElectroNegativity Decimal? @db.Decimal
+  FirstIonization   Decimal? @db.Decimal
+  Density           Decimal? @db.Decimal
+  MeltingPoint      Decimal? @db.Decimal
+  BoilingPoint      Decimal? @db.Decimal
+  NumberOfIsotopes  Int?
+  Discoverer        String?
   Year              Int?
-  specificheat      Decimal? @db.Decimal
-  numberofshells    Int?
-  numberofvalence   Int?
+  SpecificHeat      Decimal? @db.Decimal
+  NumberOfShells    Int?
+  NumberOfValence   Int?
 }
 ```
 
