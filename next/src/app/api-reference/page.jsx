@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+'use client';
 import React from 'react';
 import SwaggerUI from 'swagger-ui';
 
