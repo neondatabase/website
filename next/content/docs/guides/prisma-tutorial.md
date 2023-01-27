@@ -498,7 +498,7 @@ model Elements_ext {
   Metalloid         Boolean?
   Type              String?
   AtomicRadius      Decimal? @db.Decimal
-  ElectroNegativity Decimal? @db.Decimal
+  Electronegativity Decimal? @db.Decimal
   FirstIonization   Decimal? @db.Decimal
   Density           Decimal? @db.Decimal
   MeltingPoint      Decimal? @db.Decimal
