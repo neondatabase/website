@@ -57,8 +57,8 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 - Neon supports the `uuid-ossp` extension for generating UUIDs rather than the `uuid` extension.
 - The `sslinfo` extension is not supported, as Neon handles connections via a proxy that checks SSL.
-- The `pg_cron` extension is not supported. Neon scales to zero when it is not being used, which means that a scheduler that runs inside the database cannot be implemented in Neon.
-- The `file_fdw` extension is not supported because when Neon scales to zero, all the files are wiped out.
+- The `pg_cron` extension is not supported. Neon scales to zero when it is not being used, which means that a scheduler that runs inside the database cannot be implemented. Consider using an scheduler that runs externally instead.
+- The `file_fdw` extension is not supported. Files would not remain accessible when Neon scales to zero.
 
 ## Request extension support
 
