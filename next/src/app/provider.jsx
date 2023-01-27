@@ -11,8 +11,8 @@ const ThemeProvider = ({ children }) => {
   return (
     <PreferredProvider
       attribute="class"
-      enableSystem
       forcedTheme={isDocPage ? null : 'light'}
+      enableSystem
       disableTransitionOnChange
     >
       {children}
