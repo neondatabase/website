@@ -6,11 +6,8 @@ const POST_SEO_FRAGMENT = gql`
     seo {
       title
       metaDesc
-      metaKeywords
-      metaRobotsNoindex
       opengraphTitle
       opengraphDescription
-      opengraphUrl
       twitterImage {
         mediaItemUrl
       }
