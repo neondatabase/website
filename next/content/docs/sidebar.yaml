@@ -1,0 +1,112 @@
+- title: Introduction
+  items:
+    - title: What is Neon?
+      slug: introduction/about
+    - title: Neon architecture
+      slug: introduction/architecture-overview
+    - title: Compute lifecycle
+      slug: introduction/compute-lifecycle
+    - title: Branching
+      slug: introduction/branching
+    - title: Neon roadmap
+      slug: introduction/roadmap
+    - title: Technical Preview Free Tier
+      slug: introduction/technical-preview-free-tier
+    - title: Regions
+      slug: introduction/regions
+- title: Get started
+  items:
+    - title: Sign up
+      slug: get-started-with-neon/signing-up
+    - title: Set up a project
+      slug: get-started-with-neon/setting-up-a-project
+    - title: Query with Neon's SQL Editor
+      slug: get-started-with-neon/query-with-neon-sql-editor
+- title: Connect
+  items:
+    - title: Connect from any application
+      slug: connect/connect-from-any-app
+    - title: Connect a GUI or IDE
+      slug: connect/connect-postgres-gui
+    - title: Passwordless connect
+      slug: connect/passwordless-connect
+    - title: Connect with psql
+      slug: connect/query-with-psql-editor
+    - title: Connect from old clients
+      slug: connect/connectivity-issues
+    - title: Connection pooling
+      slug: connect/connection-pooling
+- title: Manage
+  items:
+    - title: Overview
+      slug: manage/overview
+    - title: API keys
+      slug: manage/api-keys
+    - title: Projects
+      slug: manage/projects
+    - title: Branches
+      slug: manage/branches
+    - title: Endpoints
+      slug: manage/endpoints
+    - title: Users
+      slug: manage/users
+    - title: Databases
+      slug: manage/databases
+    - title: Operations
+      slug: manage/operations
+- title: Guides
+  items:
+    - title: AWS Lambda
+      slug: guides/aws-lambda
+    - title: Django
+      slug: guides/django
+    - title: Go
+      slug: guides/go
+    - title: Hasura
+      slug: guides/hasura
+    - title: Java
+      slug: guides/java
+    - title: Laravel
+      slug: guides/laravel
+    - title: Next.js
+      slug: guides/vercel
+    - title: Node.js
+      slug: guides/node
+    - title: Prisma
+      items:
+        - title: Connect from Prisma
+          slug: guides/prisma
+        - title: Use Prisma With Neon
+          slug: guides/prisma-tutorial
+    - title: Rust
+      slug: guides/rust
+    - title: SQLAlchemy
+      slug: guides/sqlalchemy
+    - title: Symfony
+      slug: guides/symfony
+- title: Import data
+  items:
+    - title: Import from PostgreSQL
+      slug: import/import-from-postgres
+    - title: Import from Heroku
+      slug: import/import-from-heroku
+    - title: Import from CSV
+      slug: import/import-from-csv
+- title: Security
+  items:
+    - title: Security
+      slug: security/security
+    - title: Secure connections
+      slug: security/secure-connections
+- title: Reference
+  items:
+    - title: API
+      slug: reference/api-reference
+    - title: Glossary
+      slug: reference/glossary
+    - title: PostgreSQL Compatibility
+      slug: reference/compatibility
+    - title: PostgreSQL Extensions
+      slug: reference/pg-extensions
+- title: Release notes
+  slug: release-notes

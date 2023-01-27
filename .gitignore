@@ -60,7 +60,10 @@ typings/
 
 # gatsby files
 .cache/
-public
+# Do NOT ignore public in any subdirectory
+!*/public
+# only ignore it in the current directory
+/public
 
 # Mac files
 .DS_Store
@@ -73,3 +76,5 @@ yarn-error.log
 .yarn-integrity
 
 .vscode/snipsnap.code-snippets
+
+.idea/
