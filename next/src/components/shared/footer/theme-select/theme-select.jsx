@@ -10,7 +10,6 @@ import ChevronsIcon from '../images/chevrons.inline.svg';
 import ThemeIcon from '../images/switcher.inline.svg';
 
 const ANIMATION_DURATION = 0.2;
-const themes = ['system', 'light', 'dark'];
 
 const dropdownVariants = {
   hidden: { opacity: 0, y: '0', height: 0, pointerEvents: 'none', visibility: 'hidden' },
@@ -57,7 +56,7 @@ ActiveThemeIcon.propTypes = {
 
 const ThemeSelect = ({ className = null }) => {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, themes } = useTheme();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
