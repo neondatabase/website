@@ -12,7 +12,7 @@ const ThemeProvider = ({ children }) => {
     <PreferredProvider
       attribute="class"
       forcedTheme={isDocPage ? null : 'light'}
-      enableSystem
+      storageKey="neon-theme"
       disableTransitionOnChange
     >
       {children}
