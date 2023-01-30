@@ -37,7 +37,7 @@ const SEO = ({
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta name="twitter:card" content="summary_large_image" />
-
+      <meta name="theme-color" content="#1a1a1a" />
       <link rel="icon" href="/favicon.ico" />
       <link rel="manifest" href="/manifest.webmanifest" crossOrigin="anonymous" />
       <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
