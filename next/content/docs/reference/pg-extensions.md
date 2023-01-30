@@ -11,7 +11,7 @@ Unless otherwise noted, supported extensions can be installed from the Neon SQL 
 CREATE EXTENSION <extension_name>
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](../../get-started-with-neon/query-with-neon-sql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 <a id="default-extensions/"></a>
 
