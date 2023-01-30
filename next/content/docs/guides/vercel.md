@@ -24,7 +24,7 @@ The Neon-Vercel integration connects your Vercel project to your Neon project. I
 1. In the **Integrate Neon** dialog:
     1. Select the Vercel project that you want to add the integration to, and click **Continue**. If the Vercel project is already connected to a Neon project, continuing the integration replaces the existing configuration.
     1. Select a Neon project, a database, and role that Vercel will use to connect. The Neon Free Tier supports a single project per user. If you do not have a Neon project, you can create one. You can also create a new database and role for the integration if you do not want to use an existing database or role. When you have finished making your selections, click **Connect**.
-    1. The integration sets two `DATABASE_URL` variables in Vercel, one for your production database, and one for database branches that are created for preview deployments. The production database resides on the `main` branch of your Neon project. The database branches created for preview deployments are branched from `main`. Click **Confirm** to accept the environment variable settings.
+    1. The integration sets two `DATABASE_URL` variables in Vercel, one for your production database, and one for database branches that are created for preview deployments. The production database resides on the `main` branch of your Neon project. The database branches created for preview deployments are branched from `main`. Click **Confirm** to accept the environment variable settings. This action also resets the specified user's password.
     1. Click **Done** to complete the integration.
 
 ## Troubleshooting connection issues
