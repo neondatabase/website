@@ -41,7 +41,7 @@ where:
 - `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 
-You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
+You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users#reset-a-password).
 
 ## Configure a shadow database for Prisma Migrate
 
@@ -53,7 +53,7 @@ Prisma Migrate requires a direct connection to the database and currently does n
 
 To configure a shadow database:
 
-1. Create another database in your Neon project and copy the connection string. Refer to [Create a database](../../manage/databases/#create-a-database) for instructions. For information about obtaining a connection string, see [Connect from any application](../../connect/connect-from-any-app/).
+1. Create another database in your Neon project and copy the connection string. Refer to [Create a database](../../manage/databases#create-a-database) for instructions. For information about obtaining a connection string, see [Connect from any application](../../connect/connect-from-any-app/).
 
 1. Add the `shadowDatabaseUrl` setting to your `prisma/schema.prisma` file to identify the shadow database URL:
 
@@ -83,7 +83,7 @@ Error querying the database: db error: ERROR: prepared statement
 "s0" already exists
 ```
 
-If you encounter this error, ensure that connection pooling in Neon is disabled. See [Enable connection pooling](../../connect/connection-pooling/#enable-connection-pooling).
+If you encounter this error, ensure that connection pooling in Neon is disabled. See [Enable connection pooling](../../connect/connection-pooling#enable-connection-pooling).
 
 For more information about this issue, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#prisma-migrate-and-pgbouncer-workaround).
 

@@ -68,7 +68,7 @@ where:
 - `<password>` is the database user's password, which is provided to you when you create a project.
 - `<endpoint_id>` is the ID of the branch endpoint that you are connecting to. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396`.
 
-You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
+You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users#reset-a-password).
 
 <Admonition type="important">
 To ensure the security of your data, never expose your Neon credentials to the browser.

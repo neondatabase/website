@@ -13,7 +13,7 @@ For more information about branches and how you can use them in your development
 
 You can create and manage branches using the Neon Console or [Neon API](https://neon.tech/api-reference/v2/). This topic covers both methods.
 
-Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Create a project](../projects/#create-a-project).
+Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
 <Admonition type="important">
 When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To keep disk space usage to a minimum, it is recommended that you avoid allowing branches to age beyond the 7-day point-in-time restore window.

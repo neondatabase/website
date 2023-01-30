@@ -67,7 +67,7 @@ Certain applications and clients such as Prisma Client or Prisma Migrate may req
 
 ## Where do I obtain a password?
 
-A password was provided to you when you created your Neon project. If you have misplaced your password, refer to [Reset a password](../../manage/users/#reset-a-password) for password reset instructions.
+A password was provided to you when you created your Neon project. If you have misplaced your password, refer to [Reset a password](../../manage/users#reset-a-password) for password reset instructions.
 
 ## What port does Neon use?
 

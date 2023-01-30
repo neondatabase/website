@@ -7,7 +7,7 @@ redirectFrom:
 
 ## PostgreSQL connection limits
 
-Each PostgreSQL connection creates a new process in the operating system, which consumes resources. For this reason, PostgreSQL limits the number of open connections. Neon permits 100 simultaneous PostgreSQL connections by default with a `max_connections=100` setting, which is the typical default for this parameter. In Neon, a small number of those connections are reserved for administrative purposes. A connection limit of 100 may not be sufficient for some applications. To increase the number of connections that Neon  supports, you can enable connection pooling for the [endpoint](../../reference/glossary/#endpoint) compute instance you use to connect to your database.
+Each PostgreSQL connection creates a new process in the operating system, which consumes resources. For this reason, PostgreSQL limits the number of open connections. Neon permits 100 simultaneous PostgreSQL connections by default with a `max_connections=100` setting, which is the typical default for this parameter. In Neon, a small number of those connections are reserved for administrative purposes. A connection limit of 100 may not be sufficient for some applications. To increase the number of connections that Neon  supports, you can enable connection pooling for the [endpoint](../../reference/glossary#endpoint) compute instance you use to connect to your database.
 
 ## Connection pooling
 
@@ -29,7 +29,7 @@ To enable connection pooling for an existing endpoint:
 5. Toggle **Pooler enabled** to the on position.
 6. Click **Save**.
 
-You can also enable connection pooling when creating an endpoint. See [Create an endpoint](../../manage/endpoints/#create-an-endpoint).
+You can also enable connection pooling when creating an endpoint. See [Create an endpoint](../../manage/endpoints#create-an-endpoint).
 
 ## Connection pooling notes and limitations
 
