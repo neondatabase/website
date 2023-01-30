@@ -11,7 +11,7 @@ The Technical Preview Free Tier has the following limits:
 
 - 1 Neon project
 - 10 branches, with a limit of 3GB of data per branch
-- 3 compute endpoints, each with 1 vCPU and up to 4GB of RAM (with 512MB of RAM allocated to PostgreSQL shared buffers)
+- 3 compute endpoints, each with up to 1 vCPU and 4GB of RAM (with 512MB of RAM allocated to PostgreSQL shared buffers)
 - A point-in-time restore window of 7 days of _reasonable usage_
 
 <Admonition type="note">
@@ -20,7 +20,7 @@ Neon intends to offer a Free Tier beyond the Technical Preview period. The limit
 
 ## Data Size
 
-Neon stores data in its own internal format. The data size limit in the Technical Preview free tier applies to the logical size of your branch. The logical size is the sum of all database sizes in the branch of your project. For information about checking the size of the data in your branch, see [Check the data size](../../manage/branches/#check-the-data-size).
+Neon stores data in its own internal format. The data size limit in the Technical Preview free tier applies to the logical size of your branch. The logical size is the sum of all database sizes in the branch of your project. For information about checking the size of the data in your branch, see [Check the data size](/docs/manage/branches/#check-the-data-size).
 
 <a id="#point-in-time-reset/"></a>
 

@@ -65,6 +65,9 @@ typings/
 # only ignore it in the current directory
 /public
 
+sitemap.xml
+sitemap-0.xml
+
 # Mac files
 .DS_Store
 
@@ -76,3 +79,5 @@ yarn-error.log
 .yarn-integrity
 
 .vscode/snipsnap.code-snippets
+
+.idea/
