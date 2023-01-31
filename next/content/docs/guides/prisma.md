@@ -122,9 +122,9 @@ When you connect to an idle compute instance from Prisma, Neon automatically act
 
 - If you are using connection pooling, set `pool_timeout` to 0 or a higher value. This setting defines the number of seconds to wait for a new connection from the pool. The default is 10 seconds. A setting of 0 means no timeout. A higher setting should provide the time required to avoid connection timeout issues. For example:
 
-```bash
-postgres://<user>:<password>@<host>:5432/neondb?pgbouncer=true&pool_timeout=20
-```
+  ```bash
+  postgres://<user>:<password>@<host>:5432/neondb?pgbouncer=true&pool_timeout=20
+  ```
 
 For additional information about connecting from Prisma, refer to the following resources in the _Prisma documentation_:
 
