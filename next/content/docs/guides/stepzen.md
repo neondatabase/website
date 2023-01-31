@@ -251,6 +251,6 @@ In this guide, we've explored the GraphQL API and seen how you can query data fr
 
 ## Conclusion
 
-You've learned how to generate a GraphQL API from a Neon database. For this, we've used StepZen, which offers GraphQL-as-a-Service and a CLI to generate GraphQL APIs from data sources such as databases and REST APIs. You've seen how to create a Neon database and populate it with data. Using StepZen, you can quickly generate a GraphQL API from a Neon database and use it to query data from the database. Also, we deep-dived into how StepZen translates queries to the GraphQL API into SQL queries to the Neon database.
+You have learned how to generate a GraphQL API from a Neon database. For this, you have used StepZen, which offers GraphQL-as-a-Service and a CLI to generate GraphQL APIs from data sources such as databases and REST APIs. You've seen how to create a Neon database and populate it with data. Using StepZen, you can quickly generate a GraphQL API from a Neon database and use it to query data from the database. Also, you looked at how StepZen translates queries to the GraphQL API into SQL queries to the Neon database.
 
 You can find the complete code example [here](https://github.com/stepzen-dev/examples).
