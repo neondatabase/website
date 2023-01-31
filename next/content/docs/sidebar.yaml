@@ -82,6 +82,8 @@
       slug: guides/rust
     - title: SQLAlchemy
       slug: guides/sqlalchemy
+    - title: StepZen
+      slug: guides/stepzen
     - title: Symfony
       slug: guides/symfony
 - title: Import data

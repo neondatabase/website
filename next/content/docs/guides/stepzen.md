@@ -1,7 +1,7 @@
 ---
 title: Use StepZen with Neon
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
 
 _This guide was contributed by [Roy Derks](https://twitter.com/gethackteam?s=20&t=hq7VO7rPL2BOMo3A1ohkKg) from [StepZen](https://stepzen.com/)_
