@@ -1,4 +1,4 @@
 ---
 title: 'Release notes'
-isDraft: true
+isDraft: false
 ---
