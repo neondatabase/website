@@ -17,7 +17,7 @@ Project
                             |---- database (mydb)  
 ```
 
-You can obtain the connection details that you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+You can obtain the connection details that you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you. 
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
