@@ -28,7 +28,7 @@ An endpoint allows you to connect to the branch from a client or application and
 
 Your Neon project's [root branch](/docs/reference/glossary#root-branch) (`main`) has an endpoint included by default.
 
-To connect to a database in a branch from a client or application, you must connect to the branch's endpoint. For more information connecting to a branch endpoint, see [Connect to a branch](/docs/manage/branches/#connect-to-a-branch).
+To connect to a database in a branch from a client or application, you must connect to the branch's endpoint. For more information connecting to a branch endpoint, see [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
 
 If a branch does not have an endpoint, it acts as a snapshot of the parent branch. You can add endpoint to a branch later if you wish to connect to it.
 

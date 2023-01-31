@@ -27,7 +27,7 @@ To enable connection pooling for an existing endpoint:
 5. Toggle **Pooler enabled** to the on position.
 6. Click **Save**.
 
-You can also enable connection pooling when creating an endpoint. See [Create an endpoint](/docs/manage/endpoints/#create-an-endpoint).
+You can also enable connection pooling when creating an endpoint. See [Create an endpoint](/docs/manage/endpoints#create-an-endpoint).
 
 ## Connection pooling notes and limitations
 
