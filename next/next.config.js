@@ -53,6 +53,11 @@ module.exports = {
         destination: '/docs/introduction/about',
         permanent: true,
       },
+      {
+        source: '/early-access',
+        destination: '/',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },

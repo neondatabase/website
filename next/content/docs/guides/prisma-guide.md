@@ -470,7 +470,7 @@ CREATE TABLE "Elements_ext" (
 ```
 
 <Admonition type="info">
-You can find the `Elements` and `Elements_ext` table in Neon's example GitHub repository with a full set of data that you can import to play around with. See [neondatabase/examples](https://github.com/neondatabase/examples).
+You can find the `Elements` and `Elements_ext` tables in Neon's example GitHub repository with a full sets of data that you can import and play around with. [Elements data set](https://github.com/neondatabase/examples/tree/main/elements_data_set).
 </Admonition>
 
 ### Run prisma db pull
