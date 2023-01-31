@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-An endpoint is a Neon compute instance. A single read-write endpoint is created for your project's [root branch](/docs/reference/glossary/#root-branch) (`main`) by default.
+An endpoint is a Neon compute instance. A single read-write endpoint is created for your project's [root branch](/docs/reference/glossary#root-branch) (`main`) by default.
 
 To connect to a database that resides in a branch, you must connect via an endpoint that is associated with the branch. The following diagram shows the project's root branch (`main`) and a child branch, both of which have an associated endpoint. Applications and clients connect to a branch via an endpoint.
 
@@ -79,7 +79,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create an endpoint with the API
 
