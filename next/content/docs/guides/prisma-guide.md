@@ -138,15 +138,13 @@ In this step, you will update the `datasource db` entry in your `schema.prisma` 
 
   To name objects in your your Prism schema (and in the generated API) differently than they are named in your database, Prisma provides a mapping mechanism that you can use. For example, to map a model named "Elements" to  table named "elements", you can use the `@@map` API attribute in your Prisma schema, as shown:
   
-  ```text
   model Elements {
     AtomicNumber Int @id
     Element String?
     Symbol  String?  
     @@map("elements")
   }
-  ```
-  
+
 For more information, see [Mapping collection/table and field/column names](https://www.prisma.io/docs/concepts/components/prisma-schema/names-in-underlying-database#mapping-collectiontable-and-fieldcolumn-names), in the _Prisma documentation_.
   </Admonition>
 
