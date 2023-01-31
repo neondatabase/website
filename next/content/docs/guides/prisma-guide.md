@@ -144,7 +144,8 @@ In this step, you will update the `datasource db` entry in your `schema.prisma` 
     Element String?
     Symbol  String?  
     @@map("elements")
-}
+  }
+  ```
   
 For more information, see [Mapping collection/table and field/column names](https://www.prisma.io/docs/concepts/components/prisma-schema/names-in-underlying-database#mapping-collectiontable-and-fieldcolumn-names), in the _Prisma documentation_.
   </Admonition>
