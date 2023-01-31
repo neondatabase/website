@@ -20,25 +20,25 @@ Before generating a GraphQL API, you must set up a Neon database. Setting up a N
 
 You can find the connection string for your database in the **Connection Details** widget in the Neon Console.
 
-![Connection details widget](/docs/connect/connection-details.png)
+![Connection details widget](/docs/connect/stepzen_connection_details.png)
 
-Using the connection string, you can seed the database with the data from the `init.sql` file you can find [here](https://github.com/stepzen-dev/examples/blob/main/with-neon/init.sql).
+Using the connection string, you can seed the database with the data from the `init.sql` file, which you can find [here](https://github.com/stepzen-dev/examples/blob/main/with-neon/init.sql).
 
 This will create the tables `address`, `customer`, `product`, and `order` and populate them with the data from the `init.sql` file. Also, it will create tables to connect the tables `customer` with the table `address` and the table `order` with the table `product`.
 
 Using `psql` we can seed the database directly from the terminal by running the following command to populate the database:
 
 ```bash
-psql postgres://sally:*************@ep-square-sea-260584.us-east-2.aws.neon.tech/neondb < init.sql
+psql postgres://sally:*************@ep-morning-field-723223.us-east-2.aws.neon.tech/neondb < init.sql
 ```
 
 This command takes a connection string as the first argument and a file as the second argument.
 
 In the terminal, you can see from the output that the tables are created and populated with the data from the `init.sql` file. Also, you can see that the tables and data are created by viewing the **Tables** page in the Neon Console.
 
-![Neon database seeded with data](/assets/neon-postgres-seeded.png)
+![Neon database seeded with data](/docs/connect/stepzen_tables_view.png)
 
-You have set up and seeded the Neon database with the data. Next, you need to connect StepZen to the Neon database and use it to generate a GraphQL schema for the database.
+Next, you will connect StepZen to the Neon database and use it to generate a GraphQL schema for the database.
 
 ## Connect StepZen to Neon
 
@@ -50,7 +50,7 @@ The StepZen CLI can be installed with `npm` (or Yarn), and you need to install i
 npm install -g stepzen
 ```
 
-After you install the CLI, create a StepZen account. You can do this by opening the website [https://dashboard.stepzen.com](https://stepzen.com) and clicking the **Sign up** button in the top right corner.
+After you install the CLI, create a StepZen account. You can do this by opening the website [https://stepzen.com/](https://stepzen.com) and clicking the **Start for Free** button in the top right corner.
 
 To link your StepZen account to the CLI, log in using the following command:
 
@@ -62,13 +62,22 @@ stepzen login
 You can also use StepZen without creating an account. The difference is that you will get a public account, which means that your schema will be public, and everyone with the link can query data from your database. You can find more information about this in the [StepZen documentation](https://stepzen.com/docs/quick-start/install-and-setup).
 </Admonition>
 
+Next, create a local directory for your StepZen workspace and navigate to the directory. For example:
+
+```bash
+mkdir stpezen
+cd stepzen
+```
+
+Specify your data source with the `stepzen import` CLI. Answer the setup questions as shown below.
+
 ```bash
 stepzen import postgresql
 
 ? What would you like your endpoint to be called? api/with-neon
-? What is your host? YOUR_NEON_HOST:5432
-? What is your database name? YOUR_NEON_DATABASE
-? What is the username? YOUR_NEON_USERNAME
+? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-morning-field-723223.us-east-2.aws.neon.tech:5432`)
+? What is your database name? YOUR_NEON_DATABASE (e.g., `neondb`)
+? What is the username? YOUR_NEON_USERNAME (e.g., `sally`)
 ? What is the password? [hidden] YOUR_NEON_PASSWORD
 ? Automatically link types based on foreign key relationships using @materializer
  (https://stepzen.com/docs/features/linking-types) Yes
@@ -111,9 +120,7 @@ This command deploys the schema to the StepZen cloud and starts a local developm
 You can only use the endpoint to the development server to explore the GraphQL API when the `stepzen start` command is running. If you would like to query the GraphQL API from your application or a remote host, you need to use the production endpoint.
 </Admonition>
 
-You can explore the GraphQL API by opening the development server in the browser. You can find the development server at `http://localhost:5001/with-neon`, which should appear similar to the screenshot below.
-
-![StepZen GraphiQL API explorer](/assets/stepzen-graphiql-api-explorer.png)
+You can explore the GraphQL API by opening the development server in the browser. You can find the development server at `http://localhost:5001/with-neon`.
 
 From GraphiQL, you can find the GraphQL schema visualized in a section called "docs". You can also use GraphiQL to interact with the GraphQL API by writing queries and mutations in the left section and viewing the result in the right section.
 
