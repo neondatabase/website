@@ -114,15 +114,11 @@ To deploy the schema to the StepZen cloud, run the following command:
 stepzen start
 ```
 
-This command deploys the schema to the StepZen cloud and starts a local development server. The development server runs on `http://localhost:5001/with-neon` by default. You can also find the production endpoint in the terminal output and a cURL command to test the GraphQL API.
+This command deploys the schema to the StepZen cloud after which you can explore the GraphQL API in the [StepZen dashboard](https://dashboard.stepzen.com/explorer).
 
-<Admonition type="note">
-You can only use the endpoint to the development server to explore the GraphQL API when the `stepzen start` command is running. If you would like to query the GraphQL API from your application or a remote host, you need to use the production endpoint.
-</Admonition>
+From the dashboard you can view the GraphQL schema, try out queries and mutations, and generate code snippets for your favorite programming language.
 
-You can explore the GraphQL API by opening the development server in the browser. You can find the development server at `http://localhost:5001/with-neon`.
-
-From GraphiQL, you can find the GraphQL schema visualized in a section called "docs". You can also use GraphiQL to interact with the GraphQL API by writing queries and mutations in the left section and viewing the result in the right section.
+The CLI also outputs the URL of your GraphQL API endpoint. You can use this endpoint to query your API from other tools or applications.
 
 It's time to start querying the GraphQL API. Start by querying the `customer` table. You can do this by writing the following query in the left section:
 
