@@ -17,32 +17,55 @@ If you use [preview deployments](https://vercel.com/docs/concepts/deployments/pr
 - A [Vercel account](https://vercel.com).
 - A Vercel project. For Vercel project creation instructions, see [Projects](https://vercel.com/docs/concepts/projects/overview), in the _Vercel documentation_.
 
-## Deploy the integration
+## Add the integration
 
 1. Navigate to the [Neon Vercel integrations page](https://vercel.com/integrations/neon) and click **Add integration**.
-1. Select a Vercel account to add the integration to and click **Continue**.
-1. Select the projects to which the integration will be added. You can select **All Projects** or a **Specific Project**. After you have made your selection, click **Continue**.
-1. Review the required permissions, and click **Add Integration** to continue.
+1. Select a Vercel account to add the integration to.
+1. Select the projects to which the integration will be added. You can select **All Projects** or a **Specific Project**.
+1. Review the permissions required by the integration, and click **Add Integration**.
 1. In the **Integrate Neon** dialog:
-    1. Select the Vercel project that you want to add the integration to, and click **Continue**. If the Vercel project is already connected to a Neon project, continuing the integration replaces the existing configuration.
-    1. Select a Neon project, a database, and role that Vercel will use to connect. The Neon Free Tier supports a single project per user. If you do not have a Neon project, you can create one. You can also create a new database and role for the integration by selecting those options from the drop-down menu. When you have finished making your selections, click **Connect**.
-    1. The integration sets two `DATABASE_URL` variables in Vercel, one for your production environment and one for development. Click **Confirm** to accept the environment variable settings. This action also resets the specified user's password.
+    1. Select the Vercel project that you want to add the integration to. If the Vercel project is already connected to a Neon project, continuing the integration replaces the existing configuration.
+    1. Select a Neon project, a database, and role that Vercel will use to connect. The Neon Free Tier supports a single project per user. If you do not have a Neon project, you can create one. You can create a new database and role for the integration in the **Database** and **Role** drop-down menus. When you have finished making your selections, click **Continue**.
+    1. Confirm the integration settings. The integration sets the following environment variables:
+        - PGHOST
+        - PGUSER
+        - PGDATABASE
+        - PGPASSWORD
+        - DATABASE_URL
+
+        The integration will also be able to create database branches and endpoints in Neon.
+
+        Click **Continue** to accept the settings.
+
+        Clicking **Continue** also resets the database user's password, which enables the integration to configure the PGPASSWORD and DATABASE_URL environment variables, which require a password.
     1. Click **Done** to complete the integration.
 
 ## Troubleshooting connection issues
 
-If you encountered a connection error while adding the integration, you may need to remove existing environment variable settings from Vercel project settings. The Neon integration sets the following environment variables.  
+If the environment variables configured by the Neon integration already exist, you may encounter the following error, due to an existing database integration that sets one or more of the same environment variables.
 
-- DATABASE_URL (Production)
-- DATABASE_URL (Development)
+```text
+Failed to set environment variables in Vercel. Please make sure that following environment variables are not set: PGHOST, PGUSER, PGDATABASE, PGPASSWORD, DATABASE_URL
+```
 
-Once you have removed the settings, try reconnecting. For information about modifying project setting in Vercel, see [Project settings](https://vercel.com/docs/concepts/projects/overview#project-settings). you can configure environment variables directly from **Project Settings** in Vercel.
+In this case, you can remove the existing environment variables from your Vercel project settings and retry the Neon integration. To remove existing environment variables:
+
+1. From the Vercel dashboard, select **Settings**.
+1. Locate the environment variable that is required by the Neon integration (one or more of the variables mentioned in the error message) and remove it.
+
+    <Admonition type="note">
+    Alternatively, instead of removing environment variables individually, you can remove the conflicting database integration that sets the same environment variables, assuming you no longer require the conflicting database integration.
+    </Admonition>
+
+1. Once you have removed the settings, try adding the Neon integration again. See [Add the integration](#add-the-integration).
+
+For more information about project settings in Vercel, see [Project settings](https://vercel.com/docs/concepts/projects/overview#project-settings). For information about Vercel environment variables, see [Environment variables](https://vercel.com/docs/concepts/projects/environment-variables).
 
 ## Manage your Neon integration
 
-You can manage access or remove of your Neon-Vercel integration from the Vercel dashboard.
+To view integration permissions, manage integration access, or remove the Neon integration:
 
-1. On the Vercel dashboard, select **Integrations**.
+1. On the Vercel dashboard, select the **Integrations** tab.
 1. For the **Neon** integration, select **Manage**.
 
 ## Using the Neon integration for preview deployments
