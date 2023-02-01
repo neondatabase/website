@@ -1,7 +1,7 @@
 ---
 title: Connect from Vercel to Neon
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
 
 This guide describes how to connect your Vercel project to Neon using the [Neon integration from the Vercel marketplace](https://vercel.com/integrations).
