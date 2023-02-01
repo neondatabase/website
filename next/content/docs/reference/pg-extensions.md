@@ -11,7 +11,7 @@ Unless otherwise noted, supported extensions can be installed from the Neon SQL 
 CREATE EXTENSION <extension_name>
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](../../get-started-with-neon/query-with-neon-sql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 <a id="default-extensions/"></a>
 
@@ -51,13 +51,15 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 | tsm_system_rows          | [1.0](https://www.postgresql.org/docs/14/tsm-system-rows.html)  | [1.0](https://www.postgresql.org/docs/15/tsm-system-rows.html)   |                                                                                                                    |
 | tsm_system_time          | [1.0](https://www.postgresql.org/docs/14/tsm-system-time.html)  | [1.0](https://www.postgresql.org/docs/15/tsm-system-time.html)   |                                                                                                                    |
 | unaccent                 | [1.1](https://www.postgresql.org/docs/14/unaccent.html)         | [1.1](https://www.postgresql.org/docs/15/unaccent.html)          |                                                                                                                    |
+| unit                     | [7.7](https://github.com/df7cb/postgresql-unit)                 | [7.7](https://github.com/df7cb/postgresql-unit)                  |                                                                                                                    |
 | uuid-ossp                | [1.1](https://www.postgresql.org/docs/14/uuid-ossp.html)        | [1.1](https://www.postgresql.org/docs/15/uuid-ossp.html)         | Double-quote the extension name when installing: `CREATE EXTENSION "uuid-ossp"`                                    |
 
 ## Extension support notes
 
 - Neon supports the `uuid-ossp` extension for generating UUIDs rather than the `uuid` extension.
 - The `sslinfo` extension is not supported, as Neon handles connections via a proxy that checks SSL.
-- The `pg_cron` extension is not supported. Neon scales to zero when it is not being used, which means that a scheduler that runs inside the database cannot be implemented in Neon.
+- The `pg_cron` extension is not supported. Neon scales to zero when it is not being used, which means that a scheduler that runs inside the database cannot be implemented. Consider using an scheduler that runs externally instead.
+- The `file_fdw` extension is not supported. Files would not remain accessible when Neon scales to zero.
 
 ## Request extension support
 

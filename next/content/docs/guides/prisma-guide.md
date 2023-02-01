@@ -2,6 +2,8 @@
 title: Use Prisma with Neon
 enableTableOfContents: true
 isDraft: false
+redirectFrom:
+  - /docs/guides/prisma-tutorial
 ---
 
 Prisma is an open source next-generation ORM that consists of the following parts:
@@ -10,9 +12,9 @@ Prisma is an open source next-generation ORM that consists of the following part
 - Prisma Migrate: A schema migration system
 - Prisma Studio: A GUI for viewing and editing data in your database
 
-This tutorial steps you through how to connect from Prisma to Neon, how to use Prisma Migrate to create and evolve a schema, how to add data using the Neon SQL Editor or Prisma Studio, how to send queries using Prisma Client, and finally, how to introspect an existing database using the Prisma CLI.
+This guide steps you through how to connect from Prisma to Neon, how to use Prisma Migrate to create and evolve a schema, how to add data using the Neon SQL Editor or Prisma Studio, how to send queries using Prisma Client, and finally, how to introspect an existing database using the Prisma CLI.
 
-## Step 1: Create a Neon project and copy the connection string
+## Create a Neon project and copy the connection string
 
 1. In the Neon Console, click **Create a project** to open the **Project Creation** dialog.
 1. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
@@ -24,10 +26,10 @@ postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/ne
 ```
 
 <Admonition type="info">
-A Neon project is created with a default PostgreSQL user named for your account, and a default database named `neondb`. This tutorial uses the `neondb` database as the primary database.
+A Neon project is created with a default PostgreSQL user named for your account, and a default database named `neondb`. This guide uses the `neondb` database as the primary database.
 </Admonition>
 
-## Step 2: Create a shadow database for Prisma Migrate
+## Create a shadow database for Prisma Migrate
 
 Prisma Migrate requires a "shadow" database to detect schema drift and generate new migrations. For more information about the purpose of the shadow database, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the _Prisma documentation_.
 
@@ -43,7 +45,7 @@ The connection string for this database should be the same as the connection str
 postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/shadow
 ```
 
-## Step 3: Set up your Prisma project
+## Set up your Prisma project
 
 Deploy a sample Typescript project and set up Prisma. 
 
@@ -81,13 +83,13 @@ To complete these steps, you require Node.js v14.17.0 or higher. For more inform
     npx prisma init --datasource-provider postgresql
     ```
 
-## Step 4: Connect your Prisma project to Neon
+## Connect your Prisma project to Neon
 
 In this step, you will update your project's `.env` file with the connection strings for your `neondb` and `shadow` databases.
 
 1. Open the `.env` file located in your `prisma` directory.
-2. Update the value of the `DATABASE_URL` variable to the connection string you copied in Step 2.
-3. Add a `SHADOW_DATABASE_URL` variable and set the value to the connection string for the shadow database you created in Step 3.
+2. Update the value of the `DATABASE_URL` variable to the connection string you copied when you created your Neon project.
+3. Add a `SHADOW_DATABASE_URL` variable and set the value to the connection string for the shadow database you created previously.
 
 When you are finished, your `.env` file should have entries similar to the following:
 
@@ -100,7 +102,7 @@ SHADOW_DATABASE_URL=postgres://sally:************@ep-white-thunder-826300.us-eas
 A `?connect_timeout=10` parameter is added to the connection strings above to avoid database connection timeouts. The default `connect_timeout` setting is 5 seconds, which is usually enough time for a database connection to be established. However, network latency combined with the short amount of time required to start an idle Neon compute instance can sometimes result in a connection failure. Setting `connect_timeout=10` helps avoid this issue.
 </Admonition>
 
-## Step 5: Add a model to your schema.prisma file
+## Add a model to your schema.prisma file
 
 In this step, you will update the `datasource db` entry in your `schema.prisma` file and add a model for the `Elements` table. A model represents the table in your underlying database and serves as the foundation for the generated Client API. For more information about data modeling, see [Data modeling](https://www.prisma.io/docs/concepts/overview/what-is-prisma/data-modeling), in the _Prisma documentation_.
 
@@ -131,7 +133,15 @@ In this step, you will update the `datasource db` entry in your `schema.prisma` 
     }
     ```
 
-## Step 6: Run a migration to create the table in Neon
+  <Admonition type="note">
+  Prisma [naming conventions](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#naming-conventions) recommend using PascalCase when defining models. However, be aware that the letter case in your Prisma schema is reflected in PostgreSQL identifier names. If an identifier name in PostgreSQL includes an upper case letter, you must quote the name when specifying it in a PostgreSQL query. For example, the `Elements` table has an upper case letter in its name. When querying this table in PostgreSQL, you must enclose `Elements` in quotes: `SELECT * FROM "Elements"`. Otherwise, the identifier name is folded to lower case and the query will not find the table.
+
+  To name objects in your your Prism schema (and in the generated API) differently than they are named in your database, Prisma provides a mapping mechanism that you can use. For example, to map a model named "Elements" to  table named "elements", you can use the `@@map` API attribute in your Prisma schema.
+
+For more information, see [Mapping collection/table and field/column names](https://www.prisma.io/docs/concepts/components/prisma-schema/names-in-underlying-database#mapping-collectiontable-and-fieldcolumn-names), in the _Prisma documentation_.
+  </Admonition>
+
+## Run a migration to create the table in Neon
 
 At this point, you do not have a table in your `neondb` database. In this step, you will run a migration with Prisma Migrate, which creates the table. The table is created based on the `Elements` table model you defined in the `schema.prisma` file in the previous step.
 
@@ -178,16 +188,16 @@ found 0 vulnerabilities
 ✔ Generated Prisma Client (4.8.1 | library) to ./../node_modules/@prisma/client in 73ms
 ```
 
-## Step 7: View your table in the Neon Console
+## View your table in the Neon Console
 
 To view the `Elements` table that was created in your `neondb` database by the migration performed in the previous step:
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
 2. Select your project.
 3. Select **Tables**.
-4. Select the `neondb` database and default `public` schema. The `Elements` table should be visible in the sidebar. The table has no data at this point. Data will be added later in this tutorial.
+4. Select the `neondb` database and default `public` schema. The `Elements` table should be visible in the sidebar. The table has no data at this point. Data will be added later in this guide.
 
-## Step 8: Evolve your schema with Prisma Migrate
+## Evolve your schema with Prisma Migrate
 
 In this step, you will evolve your Prisma schema by performing another migration with `prisma migrate dev`.
 
@@ -231,7 +241,7 @@ model Elements {
 
     You can view the migration in your `prisma/migrations` folder.
 
-## Step 9: Add data to your table
+## Add data to your table
 
 You have a couple of options for adding data to the `Elements` table. You can add data using the Neon SQL Editor or with Prisma Studio. Both methods are described below.
 
@@ -242,10 +252,6 @@ You have a couple of options for adding data to the `Elements` table. You can ad
 1. Select the **SQL Editor**.
 1. Select the `main` branch of your project and select the `neondb` database.
 1. To add data, enter the following statement into the editor and click **Run**.
-
-<Admonition type="note">
-`ELEMENT` is a reserved keyword in PostgreSQL, so `"Elements"` must be quoted.
-</Admonition>
 
 ```sql
 INSERT INTO "Elements" VALUES  (10, 'Neon', 'Ne', 20.1797);
@@ -281,7 +287,7 @@ Click **Add record** and enter some values as follows:
 
 To add the record, click the **Save 1 change** button.
 
-## Step 10: Send queries to your Neon database with Prisma Client
+## Send queries to your Neon database with Prisma Client
 
 Follow the steps below to create a TypeScript file for executing queries with Prisma Client. Two examples are provided, one for creating a new record, and one for retrieving all records.
 
@@ -405,7 +411,7 @@ $ npx ts-node query.ts
 ]
 ```
 
-## Step 11: Introspect a database using Prisma CLI
+## Introspect a database using Prisma CLI
 
 Instead of creating data models in your Prisma schema and using Prisma Migrate to create the tables in your database, as you did for the `Elements` table in the previous steps, you can use Prisma's [Introspection](https://www.prisma.io/docs/concepts/components/introspection) capability to generate data models from an existing database.
 
@@ -423,45 +429,41 @@ Let's assume your database has an extended version of the `Elements` table that 
 1. Select the `main` branch of your project and select the `neondb` database.
 1. Enter the following statement into the editor and click **Run**.
 
-<Admonition type="note">
-Reserved PostgreSQL keywords are quoted.
-</Admonition>
-
 ```sql
 CREATE TABLE "Elements_ext" (
-  AtomicNumber INTEGER PRIMARY KEY,
+  "AtomicNumber" INTEGER PRIMARY KEY,
   "Element" TEXT,
-  Symbol TEXT,
-  AtomicMass DECIMAL,
-  NumberOfNeutrons INTEGER,
-  NumberOfProtons INTEGER,
-  NumberOfElectrons INTEGER,
+  "Symbol" TEXT,
+  "AtomicMass" DECIMAL,
+  "NumberOfNeutrons" INTEGER,
+  "NumberOfProtons" INTEGER,
+  "NumberOfElectrons" INTEGER,
   "Period" INTEGER,
   "Group" INTEGER,
-  Phase TEXT,
-  Radioactive BOOLEAN,
+  "Phase" TEXT,
+  "Radioactive" BOOLEAN,
   "Natural" BOOLEAN,
-  Metal BOOLEAN,
-  Nonmetal BOOLEAN,
-  Metalloid BOOLEAN,
+  "Metal" BOOLEAN,
+  "Nonmetal" BOOLEAN,
+  "Metalloid" BOOLEAN,
   "Type" TEXT,
-  AtomicRadius DECIMAL,
-  Electronegativity DECIMAL,
-  FirstIonization DECIMAL,
-  Density DECIMAL,
-  MeltingPoint DECIMAL,
-  BoilingPoint DECIMAL,
-  NumberOfIsotopes INTEGER,
-  Discoverer TEXT,
+  "AtomicRadius" DECIMAL,
+  "Electronegativity" DECIMAL,
+  "FirstIonization" DECIMAL,
+  "Density" DECIMAL,
+  "MeltingPoint" DECIMAL,
+  "BoilingPoint" DECIMAL,
+  "NumberOfIsotopes" INTEGER,
+  "Discoverer" TEXT,
   "Year" INTEGER,
-  SpecificHeat DECIMAL,
-  NumberOfShells INTEGER,
-  NumberOfValence INTEGER
+  "SpecificHeat" DECIMAL,
+  "NumberOfShells" INTEGER,
+  "NumberOfValence" INTEGER
 );
 ```
 
 <Admonition type="info">
-You can find the `Elements` and `Elements_ext` table in Neon's example GitHub repository with a full set of data that you can import to play around with. See [neondatabase/examples](https://github.com/neondatabase/examples).
+You can find the `Elements` and `Elements_ext` tables in Neon's example GitHub repository with a full sets of data that you can import and play around with. [Elements data set](https://github.com/neondatabase/examples/tree/main/elements_data_set).
 </Admonition>
 
 ### Run prisma db pull
@@ -485,34 +487,34 @@ To view the model generated for the new `Elements_ext` table, open your `schema.
 
 ```text
 model Elements_ext {
-  atomicnumber      Int      @id
+  AtomicNumber      Int      @id
   Element           String?
   symbol            String?
-  atomicmass        Decimal? @db.Decimal
-  numberofneutrons  Int?
-  numberofprotons   Int?
-  numberofelectrons Int?
+  AtomicMass        Decimal? @db.Decimal
+  NumberOfNeutrons  Int?
+  NumberOfProtons   Int?
+  NumberOfElectrons Int?
   Period            Int?
   Group             Int?
-  phase             String?
-  radioactive       Boolean?
+  Phase             String?
+  Radioactive       Boolean?
   Natural           Boolean?
-  metal             Boolean?
-  nonmetal          Boolean?
-  metalloid         Boolean?
+  Metal             Boolean?
+  Nonmetal          Boolean?
+  Metalloid         Boolean?
   Type              String?
-  atomicradius      Decimal? @db.Decimal
-  electronegativity Decimal? @db.Decimal
-  firstionization   Decimal? @db.Decimal
-  density           Decimal? @db.Decimal
-  meltingpoint      Decimal? @db.Decimal
-  boilingpoint      Decimal? @db.Decimal
-  numberofisotopes  Int?
-  discoverer        String?
+  AtomicRadius      Decimal? @db.Decimal
+  Electronegativity Decimal? @db.Decimal
+  FirstIonization   Decimal? @db.Decimal
+  Density           Decimal? @db.Decimal
+  MeltingPoint      Decimal? @db.Decimal
+  BoilingPoint      Decimal? @db.Decimal
+  NumberOfIsotopes  Int?
+  Discoverer        String?
   Year              Int?
-  specificheat      Decimal? @db.Decimal
-  numberofshells    Int?
-  numberofvalence   Int?
+  SpecificHeat      Decimal? @db.Decimal
+  NumberOfShells    Int?
+  NumberOfValence   Int?
 }
 ```
 
@@ -527,7 +529,7 @@ You can read more about this workflow in the Prisma documentation. See [Introspe
 
 ## Conclusion
 
-Congratulations! You have completed the _Use Prisma with Neon_ tutorial. To recap, you have learned how to connect from Prisma to Neon, how to use Prisma Migrate to evolve a schema, how to add data using the Neon SQL Editor and Prisma Studio, how to send queries using Prisma Client, and finally, how to introspect an existing database.
+Congratulations! You have completed the _Use Prisma with Neon_ guide. To recap, you have learned how to connect from Prisma to Neon, how to use Prisma Migrate to evolve a schema, how to add data using the Neon SQL Editor and Prisma Studio, how to send queries using Prisma Client, and finally, how to introspect an existing database.
 
 ## Need help?
 

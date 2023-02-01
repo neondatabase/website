@@ -15,4 +15,4 @@ Type "help" for help.
 neondb=>
 ```
 
-In addition to enforcing SSL/TLS for all connections, Neon implements the SNI (Server Name Indication) extension of the TLS protocol to ensure that clients access the correct SSL certificate for the Neon endpoint compute instance they are connecting to. SNI is an extension of the TLS protocol. The `libpq` PostgreSQL client library includes SNI support, in version 14 and higher. Please refer to the discussion in [Connect from old clients](../../https://neon.tech/docs/connect/connectivity-issues/) for workarounds for clients that do not support SNI.
+In addition to enforcing SSL/TLS for all connections, Neon implements the SNI (Server Name Indication) extension of the TLS protocol to ensure that clients access the correct SSL certificate for the Neon endpoint compute instance they are connecting to. SNI is an extension of the TLS protocol. The `libpq` PostgreSQL client library includes SNI support, in version 14 and higher. Please refer to the discussion in [Connect from old clients](/docs/connect/connectivity-issues/) for workarounds for clients that do not support SNI.

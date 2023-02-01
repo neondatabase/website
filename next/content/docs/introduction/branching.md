@@ -18,7 +18,7 @@ A branch is isolated from its originating data, so you are free to play around w
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means you can create a branch at any time without impacting the performance of your production system.
 
-Each Neon project has a [root branch](../../reference/glossary#root-branch) called `main`. The first branch that you create is branched from the project's root branch (`main`). Subsequent branches can be branched from `main` or from a previously created branch.
+Each Neon project has a [root branch](/docs/reference/glossary#root-branch) called `main`. The first branch that you create is branched from the project's root branch (`main`). Subsequent branches can be branched from `main` or from a previously created branch.
 
 ## Branch endpoints
 
@@ -26,9 +26,9 @@ When creating a new branch, you have the option to create an endpoint. An endpoi
 
 An endpoint allows you to connect to the branch from a client or application and is read-write.
 
-Your Neon project's [root branch](../../reference/glossary#root-branch) (`main`) has an endpoint included by default.
+Your Neon project's [root branch](/docs/reference/glossary#root-branch) (`main`) has an endpoint included by default.
 
-To connect to a database in a branch from a client or application, you must connect to the branch's endpoint. For more information connecting to a branch endpoint, see [Connect to a branch](../../manage/branches/#connect-to-a-branch).
+To connect to a database in a branch from a client or application, you must connect to the branch's endpoint. For more information connecting to a branch endpoint, see [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
 
 If a branch does not have an endpoint, it acts as a snapshot of the parent branch. You can add endpoint to a branch later if you wish to connect to it.
 
@@ -84,4 +84,4 @@ You can use branching to implement a data backup strategy. For example, you can 
 
 ## Get started with branching
 
-To start using branches, refer to the instructions in [Branches](../../get-started-with-neon/get-started-branching).
+To start using branches, refer to the instructions in [Manage branches](/docs/manage/branches).

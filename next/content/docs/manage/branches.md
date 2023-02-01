@@ -9,11 +9,11 @@ redirectFrom:
 Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
 
 A child branch is a copy-on-write clone the data in the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
-For more information about branches and how you can use them in your development workflows, see [Branching](../../conceptual-guides/branching).
+For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
 
 You can create and manage branches using the Neon Console or [Neon API](https://neon.tech/api-reference/v2/). This topic covers both methods.
 
-Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Create a project](../projects/#create-a-project).
+Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
 <Admonition type="important">
 When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To keep disk space usage to a minimum, it is recommended that you avoid allowing branches to age beyond the 7-day point-in-time restore window.
@@ -28,11 +28,11 @@ To create a branch:
 3. Click **New Branch** to open the branch creation dialog.
 ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch.
-5. Select a parent branch. You can branch from your Neon project's [root branch](../../reference/glossary/#root-branch) (`main`) or a previously created branch.
+5. Select a parent branch. You can branch from your Neon project's [root branch](/docs/reference/glossary/#root-branch) (`main`) or a previously created branch.
 6. Select one of the following branching options:
     - **Head**: Creates a branch with data up to the current point in time (the default).
     - **Time**: Creates a branch with data up to the specified date and time.
-    - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](../../reference/glossary/#lsn).
+    - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](/docs/reference/glossary#lsn).
 7. Select whether or not to create an endpoint. An endpoint is a Neon compute instance, which is required to connect to the branch. If you are unsure, you can add an endpoint later.
 8. Click **Create Branch** to create your branch.
 
@@ -57,7 +57,7 @@ The **Branches** widget on the project **Dashboard** also shows the branches in 
 Connecting to a database in a branch requires connecting via an endpoint, which is the compute instance associated with a branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="tip">
-You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../../get-started-with-neon/query-with-neon-sql-editor).
+You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 </Admonition>
 
 1. In the Neon Console, select a project.
@@ -74,7 +74,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 A endpoint hostname starts with an `ep-` prefix. You can also find an endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
 </Admonition>
 
-If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the _Guides_ section in the documentation provide connection examples for various languages and frameworks. For more information about connecting, see [Connect from any application](../../connect/connect-from-any-app).
+If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the _Guides_ section in the documentation provide connection examples for various languages and frameworks. For more information about connecting, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Delete a branch
 
@@ -115,7 +115,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../api-keys/#create-an-api-key). In the examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a branch with the API
 

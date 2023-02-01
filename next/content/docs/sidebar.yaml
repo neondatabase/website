@@ -77,7 +77,7 @@
         - title: Connect from Prisma
           slug: guides/prisma
         - title: Use Prisma With Neon
-          slug: guides/prisma-tutorial
+          slug: guides/prisma-guide
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy

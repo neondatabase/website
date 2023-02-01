@@ -1,0 +1,61 @@
+<svg width="884" height="3780" viewBox="0 0 884 3780" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_10773_23641" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-4" y="0" width="892" height="3780">
+<g opacity="0.02">
+<path d="M34 0V3780" stroke="white" stroke-width="8"/>
+<path d="M0 0V3780" stroke="white" stroke-width="8"/>
+<path d="M442 0V3780" stroke="white" stroke-width="8"/>
+<path d="M408 0V3780" stroke="white" stroke-width="8"/>
+<path d="M374 0V3780" stroke="white" stroke-width="8"/>
+<path d="M340 0V3780" stroke="white" stroke-width="8"/>
+<path d="M306 0V3780" stroke="white" stroke-width="8"/>
+<path d="M272 0V3780" stroke="white" stroke-width="8"/>
+<path d="M238 0V3780" stroke="white" stroke-width="8"/>
+<path d="M204 0V3780" stroke="white" stroke-width="8"/>
+<path d="M170 0V3780" stroke="white" stroke-width="8"/>
+<path d="M136 0V3780" stroke="white" stroke-width="8"/>
+<path d="M102 0V3780" stroke="white" stroke-width="8"/>
+<path d="M68 0V3780" stroke="white" stroke-width="8"/>
+<path d="M782 0V3780" stroke="white" stroke-width="8"/>
+<path d="M816 0V3780" stroke="white" stroke-width="8"/>
+<path d="M850 0V3780" stroke="white" stroke-width="8"/>
+<path d="M884 0V3780" stroke="white" stroke-width="8"/>
+<path d="M680 0V3780" stroke="white" stroke-width="8"/>
+<path d="M714 0V3780" stroke="white" stroke-width="8"/>
+<path d="M748 0V3780" stroke="white" stroke-width="8"/>
+<path d="M646 0V3780" stroke="white" stroke-width="8"/>
+<path d="M612 0V3780" stroke="white" stroke-width="8"/>
+<path d="M578 0V3780" stroke="white" stroke-width="8"/>
+<path d="M544 0V3780" stroke="white" stroke-width="8"/>
+<path d="M510 0V3780" stroke="white" stroke-width="8"/>
+<path d="M476 0V3780" stroke="white" stroke-width="8"/>
+</g>
+</mask>
+<g mask="url(#mask0_10773_23641)">
+<g filter="url(#filter0_f_10773_23641)">
+<circle cx="442" cy="945" r="170" fill="white"/>
+</g>
+<g filter="url(#filter1_f_10773_23641)">
+<circle cx="442" cy="2054" r="170" fill="white"/>
+</g>
+<g filter="url(#filter2_f_10773_23641)">
+<circle cx="442" cy="3165" r="170" fill="white"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_10773_23641" x="58" y="561" width="768" height="768" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="107" result="effect1_foregroundBlur_10773_23641"/>
+</filter>
+<filter id="filter1_f_10773_23641" x="58" y="1670" width="768" height="768" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="107" result="effect1_foregroundBlur_10773_23641"/>
+</filter>
+<filter id="filter2_f_10773_23641" x="58" y="2781" width="768" height="768" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="107" result="effect1_foregroundBlur_10773_23641"/>
+</filter>
+</defs>
+</svg>
