@@ -10,7 +10,7 @@ This guide describes how to connect your Vercel project to Neon using the [Neon 
 
 The Neon-Vercel integration connects your Vercel project to a Neon project. If you do not have a Neon project, you can create one when adding the integration. When adding the integration, you will select a database from the `main` branch of your Neon project. This will be your production database. Optionally, based on your selection, the integration creates a development branch that is branched from `main`, which you can use with your Vercel development environment.
 
-If you use [preview deployments](https://vercel.com/docs/concepts/deployments/preview-deployments) in Vercel, which are available by default for all Vercel projects, the integration will automatically create a database branch whenever a preview deployment is detected.
+If you use [preview deployments](https://vercel.com/docs/concepts/deployments/preview-deployments) in Vercel, which are available by default for all Vercel projects, the integration automatically creates a database branch whenever a preview deployment is detected.
 
 The integration sets the following variables:
 
