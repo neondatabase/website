@@ -8,9 +8,11 @@ This guide describes how to connect your Vercel project to Neon using the [Neon 
 
 ## What the Neon integration does
 
-The Neon-Vercel integration connects your Vercel project to a Neon project. If you do not have a Neon project, you can create one when adding the integration. When adding the integration, you will select a database from the `main` branch of your Neon project. This will be your production database. The integration automatically creates a development branch, which is branched from `main` and contains a copy of your production database. This will be your development database.
+The Neon-Vercel integration connects your Vercel project to a Neon project. If you do not have a Neon project, you can create one when adding the integration. When adding the integration, you will select a database from the `main` branch of your Neon project. This will be your production database. Optionally, based on your selection, the integration creates a development branch that is branched from `main`, which you can use with your Vercel development environment.
 
-The integration sets the following variables in Vercel for your production and development environments:
+If you use [preview deployments](https://vercel.com/docs/concepts/deployments/preview-deployments) in Vercel, which are available by default for all Vercel projects, the integration will automatically create a database branch whenever a preview deployment is detected.
+
+The integration sets the following variables:
 
 - `PGHOST`
 - `PGUSER`
@@ -18,7 +20,7 @@ The integration sets the following variables in Vercel for your production and d
 - `PGPASSWORD`
 - `DATABASE_URL`
 
-If you use [preview deployments](https://vercel.com/docs/concepts/deployments/preview-deployments) in Vercel, which are available by default for all Vercel projects, the integration automatically creates a database branch for each preview deployment.
+The variables are set for your Vercel production environment, for your development environment if you chose to create a development branch, and for your preview environment whenever a preview deployment is detected.
 
 ## Prerequisites
 
