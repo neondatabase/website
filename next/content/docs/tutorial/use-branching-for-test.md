@@ -14,16 +14,19 @@ AND a.description = b.description
 AND a.color = b.color
 ```
 
-Since a `DELETE` is a sensitive operation, it is recommended to first test the query and make sure it works as expected on a new branch before trying it on the `backup` branch.
+Since a `DELETE` is a potentially destructive operation, it is recommended to test the query first to make sure it works as intended. You can easily do this on a new branch before trying it on your `backup` branch.
+
 Navigate to the `Branches` page and click on the `New Branch` button to create a new branch.
 
-This time, we want create a test branch from `Head`with the most up-to-date state of the database and specify `backup` as parent.
+This time, create a test branch from `Head` with the most up-to-date state of the database and specify `backup` as parent.
 
-Note: if you skipped the Data recovery with branching section, you should use `main` as the parent branch.
+<Admonition type="note">
+If you skipped the [Data recovery with branching](/docs/tutorial/data-recover-with-branching) part of this tutorial, you should use `main` as the parent branch.
+</Admonition>
 
 ## Run remove duplicates query on backup branch
 
-Let’s now navigate to the SQL Editor, select the `test` branch and run the query to remove duplicates.
+Navigate to the SQL Editor, select the `test` branch and run the query to remove duplicates.
 
 ```sql
 DELETE FROM shoes a USING shoes b
@@ -34,7 +37,7 @@ AND a.description = b.description
 AND a.color = b.color
 ```
 
-Let’s now run a `SELECT model, color FROM shoes` query to verify the result.
+Next, run a `SELECT model, color FROM shoes` query to verify the result.
 
 ```text
 | # |         model        | color                                          |
@@ -44,12 +47,12 @@ Let’s now run a `SELECT model, color FROM shoes` query to verify the result.
 | 3 | ZoomX Vaporfly       | Scream Green/Bright Crimson/Honeydew/Black     |
 ```
 
-Yes! We managed to remove duplicates from the `shoes` table. We can now safely apply the same query to the parent branch.
+You managed to remove duplicates from the `shoes` table. You can now safely apply the same query to the parent branch.
 
 ## Conclusion
 
-Congratulations! You completed the tutorial.
-Here is a recap of what we covered:
+Congratulations. You completed the _Neon Tutorial_. Here is a recap of what was covered:
 
-- You created a Neon project, a schema and inserted data to a table
-- You learned about database branching and how to use it for test and data recovery
+- You created a Neon project.
+- You create a table and inserted data using the Neon **SQL Editor**.
+- You learned about Neon's database branching feature and how you can use it to recover lost data and test potentially destructive queries before before running them in production.

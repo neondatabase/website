@@ -23,7 +23,7 @@ Neon is serverless PostgreSQL that separates compute and storage. Because a Neon
 
 Neon also suspends a compute node if it is inactive for five minutes, to save on compute resources. This is Neon's scale-to-zero feature.
 
-If you navigate to the **Endpoints** page in the Neon Console, you can view how an endpoint switches from an `Active` to an `Idle` states after a five minutes of inactivity. Active means that the compute node is running. `Idle`, on the other hand, means that the compute node is suspended.
+If you navigate to the **Branches** page in the Neon Console, you can view how an endpoint switches from an `Active` to an `Idle` states after a five minutes of inactivity. Active means that the compute node is running. `Idle`, on the other hand, means that the compute node is suspended.
 
 ![Neon endpoint active](/docs/tutorial/neon_endpoint_active.png)
 
