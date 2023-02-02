@@ -47,6 +47,7 @@ If the connection is successful, you should be able to view and interact with yo
 
 Connections from the following GUI applications and IDEs have been tested with Neon:
 
+- [Azure Data Studio](https://azure.microsoft.com/en-us/products/data-studio/) (requires the [PostgreSQL extension](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/postgres-extension?view=sql-server-ver16), and the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
 - [CLion](https://www.jetbrains.com/clion/)
 - [DataGrip](https://www.jetbrains.com/datagrip/)
 - [DBeaver](https://dbeaver.io/)
