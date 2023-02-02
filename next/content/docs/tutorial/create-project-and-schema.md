@@ -11,9 +11,9 @@ If you do not have a Neon account, navigate to the [Sign-in page](https://consol
 
 ## Create a project
 
-After you have signed in, click on **Create a project**. Enter the name of your project and select a region. We recommend selecting the region closest to your application or user location.
+After you have signed in, click on **Create a project**. Enter a name for your project or let Neon generate one for you, select a PostgreSQL version and a region region, and clock **Create project**. We recommend selecting the region closest to your application or user location.
 
-![image5](https://user-images.githubusercontent.com/13738772/213742176-05f4b49a-6a77-4413-a72c-415636c7066f.png)
+![Neon create project](/docs/tutorial/neon_create_project.png)
 
 ### What happens behind the scenes
 
