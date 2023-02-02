@@ -56,7 +56,7 @@ The editor should report that the request ran successfully.
 
 ## Insert data into the shoes table
 
-In this step, you will add a row of data to the `shoes` table. In the SQL Editor, enter the following query:
+In this step, you will add a row of data to the `shoes` table. In the **SQL Editor**, enter the following query:
 
 ```sql
 INSERT INTO shoes ("brand", "model", "description", "color", "image") VALUES ('Nike', 'Air Zoom Alphafly', 'Men''s Road Racing Shoes', 'Scream Green/Bright Crimson/Honeydew/Black', 'https://static.nike.com/a/images/c_limit,w_400,f_auto/t_product_v1/c24ddc33-6e38-4cc9-b548-dc48cd3528ea/image.jpg');

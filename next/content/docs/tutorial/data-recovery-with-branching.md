@@ -16,11 +16,11 @@ When you ran the `SELECT id, model, color FROM shoes` query, you noticed there w
 | 2 | Air Zoom Alphafly    | Scream Green/Bright Crimson/Honeydew/Black     |
 ```
 
-To fix that issue, let’s remove duplicates from the shoes tables.
+To fix that issue, you write a query to remove duplicates from the `shoes` tables.
 
 ## Run the remove duplicates query on a branch
 
-Run the following query to see duplicates:
+Run the following query to see the duplicates:
 
 ```sql
 SELECT model, color, COUNT(*) 
@@ -37,7 +37,7 @@ HAVING COUNT(*) > 1
 | 3 | Air Zoom Pegasus 39  | Black/Thunder Blue/Citron Pulse/Hyper Royal  | 2     |
 ```
 
-Now run the following command to delete duplicates:
+Now, suppose that you accidentally ran a DELETE state to remove duplicates, but the statement you wrote actually deleted a majority of your data. For example, the following command deletes all but one record:  
 
 ```sql
 DELETE FROM shoes a USING shoes b
@@ -52,11 +52,9 @@ And run `SELECT * FROM shoes` to see the result:
 | 1 | Air Zoom Alphafly    | Scream Green/Bright Crimson/Honeydew/Black   |
 ```
 
-Whoops! 😬
+Now, you are in a panic because the only available shoe on your website is the `Air Zoom Alphafly`.
 
-It looks like we used the wrong command and accidentally deleted the majority of our data. The whole team is in a panic because you ran the command on production data and now the only available shoe on the website is the `Air Zoom Alphafly`.
-
-But don’t worry. You got this!
+With Neon, you can recover from a scenario like this very easily.
 
 ## Recover the lost data
 
@@ -94,13 +92,13 @@ Make sure you select the newly created branch (the `backup` branch in the exampl
 | 3 | Air Zoom Alphafly    | Total Orange/Bright Crimson/Ghost Green/Black  |
 ```
 
-Phew 😮‍💨! You successfully recovered the data  🎉!
+You successfully recovered the lost data.
 
 What have we seen here?
 
-To recover the data, we introduced a powerful concept: branching.
+To recover the data, we introduced a powerful concept: branching
 
-Neon Branching is a copy of your data that you can create from **Head** (the most up-to-date state of the database), **Time** (from a date and time, similar to the example above). or **Log-Sequence-Number (LSN)**.
+A Neon branch is a copy of your data that you can create from **Head** (the most up-to-date state of the database), **Time** (from a date and time, similar to the example above), or **Log-Sequence-Number (LSN)**.
 
 An LSN is a unique identifier that is assigned to each transaction in the database, and is used to track the order in which transactions are committed to the database.
 
