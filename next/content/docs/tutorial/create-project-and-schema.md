@@ -7,7 +7,7 @@ enableTableOfContents: true
 
 If you do not have a Neon account, navigate to the [Sign-in page](https://console.neon.tech/sign_in) and create an account using your GitHub or Google account.
 
-![image3](https://user-images.githubusercontent.com/13738772/213742099-a8d566da-fe0d-4fca-a992-6db4da35b794.png)
+![Neon sign-in page](/docs/tutorial/neon_signin.png)
 
 ## Create a project
 
