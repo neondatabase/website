@@ -25,7 +25,7 @@ Neon also suspends a compute node if it is inactive for five minutes, to save on
 
 If you navigate to the **Endpoints** page in the Neon Console, you can view how an endpoint switches from an `Active` to an `Idle` states after a five minutes of inactivity. Active means that the compute node is running. `Idle`, on the other hand, means that the compute node is suspended.
 
-![image10](https://user-images.githubusercontent.com/13738772/213742361-57378ec5-938f-4924-80b8-8bf9715c4c99.png)
+![Neon endpoint active](/docs/tutorial/neon_endpoint_active.png)
 
 [Learn more about Neon’s architecture](https://neon.tech/docs/introduction/architecture-overview/).
 
