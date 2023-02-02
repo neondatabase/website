@@ -26,7 +26,7 @@ If you skipped the [Data recovery with branching](/docs/tutorial/data-recover-wi
 
 ## Run remove duplicates query on backup branch
 
-Navigate to the SQL Editor, select the `test` branch and run the query to remove duplicates.
+Navigate to the **SQL Editor**, select the `test` branch and run the query to remove duplicates.
 
 ```sql
 DELETE FROM shoes a USING shoes b
