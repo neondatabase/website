@@ -1,5 +1,5 @@
 ---
-title: Connect from Vercel to Neon
+title: Connect Vercel and Neon
 enableTableOfContents: true
 isDraft: false
 ---
@@ -34,7 +34,7 @@ The variables are set for your Vercel production environment, for your developme
 1. Select the projects to which the integration will be added. You can select **All Projects** or a **Specific Project**.
 1. Review the permissions required by the integration, and click **Add Integration**.
 1. In the **Integrate Neon** dialog:
-    1. Select the Vercel project that you want to add the integration to. If the Vercel project is already connected to a Neon project, continuing the integration replaces the existing configuration.
+    1. Select the Vercel project that you want to add the integration to.
     1. Select a Neon project, a database, and role that Vercel will use to connect. The Neon Free Tier supports a single project per user. If you do not have a Neon project, you can create one. If desired, you can also create a new database and role for the integration. When you have finished making your selections, click **Continue**.
     1. Confirm the integration settings. By clicking **Confirm**, you are permitting the integration to perform the following actions:
         - Set the following environment variables for your Vercel production, development, and preview environments, as required:
@@ -74,7 +74,7 @@ For more information about project settings in Vercel, see [Project settings](ht
 
 To view integration permissions, manage integration access, or to remove the Neon integration:
 
-1. On the Vercel dashboard, select the **Integrations** tab.
+1. On the Vercel dashboard, select **Settings** > **Integrations**.
 1. For the **Neon** integration, select **Manage**.
 
 ## Using the Neon integration for preview deployments
