@@ -174,5 +174,3 @@ npm i -g vercel@latest
     From your dashboard, click on the deployed project and choose the **Functions** tab. This tab displays logs from any running functions within your project. Use the dropdown to select the `api/hello` function.
 
     The Runtime of the function will read `Edge`, and the **Region** will be the default [region](https://vercel.com/docs/concepts/edge-network/regions) for all new Vercel projects, which is Washington, D.C., USA.
-
-Congratulations. You have created a new Next.js project and deployed it as an Edge Function that retrieves the current time from Neon using the Neon serverless driver.
