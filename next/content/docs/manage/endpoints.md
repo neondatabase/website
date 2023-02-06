@@ -19,19 +19,9 @@ Project
                             |---- database (mydb)  
 ```
 
-Endpoints can be  managed independently of branches. For example, you can create and delete endpoints as necessary, assigning them to the branch you want to connect to. However, creating an endpoint is only permitted if you have a branch without an endpoint, as an endpoint must be assigned to a branch. Also, a branch can have only one endpoint. Attempting to create an endpoint for a branch that already has an endpoint results in an error.
+Endpoints can be  managed independently of branches. For example, you can assign an endpoint to the branch you want to connect to or remove an endpoint from a branch by deleting it.
 
-Tier limits define the number of endpoints that you can create in a Neon project and the compute resources (vCPUs and RAM) available to an endpoint. The Neon [Free Tier](/docs/introduction/technical-preview-free-tier) allows up to 3 endpoints.
-
-## Create an endpoint
-
-To create an endpoint:
-
-1. In the Neon Console, select **Endpoints**.
-1. Select **New endpoint**.
-1. On the **Create endpoint** dialog, select a branch to assign the endpoint to. The branch you select must not have an associated endpoint.
-1. Choose wether to enable connection pooling. Enabling connection pooling increases the number of connections that the endpoint can support. For more information, see [Connection pooling](/docs/connect/connection-pooling).
-1. Click **Create endpoint**.
+Tier limits define the number of endpoints that you can have in a Neon project and the compute resources (vCPUs and RAM) available to an endpoint. The Neon [Free Tier](/docs/introduction/technical-preview-free-tier) allows up to 3 endpoints per project.
 
 ## View endpoints
 
@@ -42,10 +32,11 @@ The **Endpoints** page lists the endpoints that belong your Neon project.
 Endpoint details include:
 
 - **Host**: The endpoint name.
+- **Region**: The region where the endpoint resides.
+- **Type**: The type of endpoint. Currently, only `read_write` endpoints are supported.
 - **Branch**: The branch that the endpoint is associated with.
 - **State**: The endpoint state (`Active`, `Idle`, or `Stopped`).
-- **Last activity**: The last time the endpoint was active.
-- **Created**: The date and time the endpoint was created.
+
 
 ## Edit an endpoint
 
