@@ -115,7 +115,7 @@ npm i -g vercel@latest
 1. Create a Next.js project.
 
     ```bash
-    npx create-next-app@latest --typescript
+    npx create-next-app --typescript
     ```
 
     This example accepts the option to create the `/src` directory for the project, which contains a `hello.ts` file where the function code will be added.
