@@ -97,7 +97,7 @@ If you attempt to add the integration with the **dev** branch option selected an
 A branch with the provided name already exists
 ```
 
-In this case, remove the existing **dev** branch and retry the integration. Alternatively, use a different Neon project. In either case, ensure that the environment variables set by the previous Neon integration or integration attempt are removed first.
+In this case, remove the existing **dev** branch and retry the integration. Alternatively, use a different Neon project. In either case, ensure that the environment variables set by the previous Neon integration or previous integration attempt are removed first.
 
 ## Manage your Neon integration
 
