@@ -40,7 +40,7 @@ In general, serverless platforms do not keep WebSocket connections alive between
 
 ## Neon serverless driver with Cloudflare
 
-The following example shows how to create a minimal Cloudflare Worker that asks PostgreSQL for the current time.
+The following example shows how to create a minimal Cloudflare Worker that uses the Neon serverless driver to ask PostgreSQL for the current time.
 
 1. Create a Worker by running the following command. Accept the defaults.
 
@@ -66,7 +66,7 @@ The following example shows how to create a minimal Cloudflare Worker that asks 
     npx wrangler secret put DATABASE_URL
     ```
 
-    You can find the connection string for your database on the Neon **Dashboard**. It appears similar to: `postgres://user:password@endpoint-name-123456.region.aws.neon.tech/dbname`. For more information about obtaining a Neon connection string, see [Connect from any application](/docs/connect/connect-from-any-app).
+    You can find the connection string for your database on the Neon **Dashboard**. It appears similar to: `postgres://<user>:<password>@<hostname>/<dbname>`. For information about obtaining your Neon connection string, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 1. Add code for the Worker by replacing the generated contents in `src/index.ts` with the following code:
 
