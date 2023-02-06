@@ -114,9 +114,11 @@ npm i -g vercel@latest
 
 1. Create a Next.js project.
 
-```bash
-npx create-next-app@latest --typescript
-```
+    ```bash
+    npx create-next-app@latest --typescript
+    ```
+
+This example accepts the option to create the `/src` directory for the project, which contains a `hello.ts` file where the function code will be added.
 
 1. Enter the new directory.
 
@@ -130,47 +132,47 @@ npx create-next-app@latest --typescript
     npm install @neondatabase/serverless
     ```
 
-2. Add code to your function.
+2. Add code to your function. In this example, the code is added to `/src/pages/api/hello.ts`
 
-```js
-import { NowRequest, NowResponse } from '@now/node'
-import { Client } from 'pg'
-import * as dotenv from 'dotenv'
+    ```js
+    import { NowRequest, NowResponse } from '@now/node'
+    import { Client } from 'pg'
+    import * as dotenv from 'dotenv'
 
-dotenv.config()
+    dotenv.config()
 
-export default async (request: NowRequest, response: NowResponse) => {
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL
-  })
+    export default async (request: NowRequest, response: NowResponse) => {
+      const client = new Client({
+        connectionString: process.env.DATABASE_URL
+      })
 
-  await client.connect()
+      await client.connect()
 
-  const result = await client.query('SELECT NOW()')
-  const currentTime = result.rows[0].now
+      const result = await client.query('SELECT NOW()')
+      const currentTime = result.rows[0].now
 
-  await client.end()
+      await client.end()
 
-  response.status(200).send(`The current time is ${currentTime}`)
-}
+      response.status(200).send(`The current time is ${currentTime}`)
+    }
 
-export const config = {
-  runtime: 'edge',
-};
-```
+    export const config = {
+      runtime: 'edge',
+    };
+    ```
 
 3. Deploy your function.
 
-```bash
-vercel deploy
-```
+    ```bash
+    vercel deploy
+    ```
 
 Follow the prompts to deploy your function and once done, open the `Production` link.
 
 4. View the function logs.
 
-From your dashboard, click on the deployed project and choose the **Functions** tab. This tab displays logs from any running functions within your project. Use the dropdown to select the `api/hello` function.
+    From your dashboard, click on the deployed project and choose the **Functions** tab. This tab displays logs from any running functions within your project. Use the dropdown to select the `api/hello` function.
 
-The Runtime of the function will read `Edge`, and the **Region** will be the default [region](https://vercel.com/docs/concepts/edge-network/regions) for all new Vercel projects, which is Washington, D.C., USA.
+    The Runtime of the function will read `Edge`, and the **Region** will be the default [region](https://vercel.com/docs/concepts/edge-network/regions) for all new Vercel projects, which is Washington, D.C., USA.
 
-5. Summary: Congratulations. You have now created a new Next.js project and deployed it as an Edge Function. The function retrieves the current time from Neon using the Neon serverless driver.
+Congratulations. You have created a new Next.js project and deployed it as an Edge Function that retrieves the current time from Neon using the Neon serverless driver.
