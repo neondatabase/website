@@ -61,12 +61,12 @@ The variables are set in your production, development, and preview environments,
     1. Navigate to the [Neon Console](https://console.stage.neon.tech/).
     1. Select the project you connected to.
     1. Select **Branches**.
-    You will see the `main` branch of your project, and if you created a Development branch, you will; also see a `dev` branch.
+    You will see the `main` branch of your project, and if you created a development branch, you will also see a `dev` branch.
 1. To view the results of the integration in Vercel:
     1. Navigate to [Vercel](https://vercel.com/).
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**.
-    You will see the PG* and DATABASE_URL environment variables set by the integration.
+    You will see the `PG*` and `DATABASE_URL` environment variables set by the integration.
 
       
 
@@ -75,7 +75,7 @@ The variables are set in your production, development, and preview environments,
 If the environment variables configured by the Neon integration already exist, you may encounter the following error due to an existing integration that sets one or more of the same environment variables.
 
 ```text
-Failed to set environment variables in Vercel. Please make sure that following environment variables are not set: PGHOST, PGUSER, PGDATABASE, PGPASSWORD, DATABASE_URL
+Failed to set environment variables in Vercel. Please make sure that the following environment variables are not set: PGHOST, PGUSER, PGDATABASE, PGPASSWORD, DATABASE_URL
 ```
 
 In this case, you can remove the existing environment variables from your Vercel project settings and retry the Neon integration. To remove existing environment variables:
@@ -101,7 +101,7 @@ In this case, remove the existing **dev** branch and retry the integration. Alte
 
 ## Manage your Neon integration
 
-To view integration permissions, manage integration access, or to remove the Neon integration:
+To view integration permissions, manage integration access, or remove the Neon integration:
 
 1. On the Vercel dashboard, select **Settings** > **Integrations**.
 1. For the **Neon** integration, select **Manage**.
