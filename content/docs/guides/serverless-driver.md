@@ -118,7 +118,7 @@ npm i -g vercel@latest
     npx create-next-app@latest --typescript
     ```
 
-This example accepts the option to create the `/src` directory for the project, which contains a `hello.ts` file where the function code will be added.
+    This example accepts the option to create the `/src` directory for the project, which contains a `hello.ts` file where the function code will be added.
 
 1. Enter the new directory.
 
@@ -132,7 +132,7 @@ This example accepts the option to create the `/src` directory for the project, 
     npm install @neondatabase/serverless
     ```
 
-2. Add code to your function. In this example, the code is added to `/src/pages/api/hello.ts`
+1. Add code to your function. In this example, the code is added to `/src/pages/api/hello.ts`
 
     ```js
     import { NowRequest, NowResponse } from '@now/node'
@@ -161,15 +161,15 @@ This example accepts the option to create the `/src` directory for the project, 
     };
     ```
 
-3. Deploy your function.
+1. Deploy your function.
 
     ```bash
     vercel deploy
     ```
 
-Follow the prompts to deploy your function and once done, open the `Production` link.
+    Follow the prompts to deploy your function and once done, open the `Production` link.
 
-4. View the function logs.
+1. View the function logs.
 
     From your dashboard, click on the deployed project and choose the **Functions** tab. This tab displays logs from any running functions within your project. Use the dropdown to select the `api/hello` function.
 
