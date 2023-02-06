@@ -70,7 +70,7 @@ The variables are set in your production, development, and preview environments,
 
       
 
-## Troubleshooting connection issues
+## Troubleshoot connection issues
 
 If the environment variables configured by the Neon integration already exist, you may encounter the following error due to an existing integration that sets one or more of the same environment variables.
 
