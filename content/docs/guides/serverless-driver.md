@@ -12,7 +12,7 @@ You can find out more about the driver from the [@neondatabase/serverless](https
 
 ## Install the Neon serverless driver
 
-To install the Neon serverless driver, you simply install it where you would otherwise install `pg` and `@types/pg` by running the following command:
+As a a drop-in replacement for [node-postgres](https://node-postgres.com/), you simply install the Neon serverless driver where you would otherwise install `pg` and `@types/pg`.
 
 ```bash
 npm install @neondatabase/serverless
@@ -20,7 +20,7 @@ npm install @neondatabase/serverless
 
 ## How to use it
 
-You can use the Neon serverless driver in the same way that you use `node-postgres`. For example, with your Neon database connection string defined by `env.DATABASE_URL`:
+Use the Neon serverless driver in the same way that you would use `node-postgres`. For example, with your Neon database connection string defined by `env.DATABASE_URL`, you can use the driver as shown below:
 
 ```js
 import { Client } from '@neondatabase/serverless';
@@ -40,48 +40,59 @@ In general, serverless platforms do not keep WebSocket connections alive between
 
 ## Neon serverless driver with Cloudflare
 
-The following example shows how to create a minimal Cloudflare Worker to ask Postgres for the current time.
+The following example shows how to create a minimal Cloudflare Worker that asks PostgreSQL for the current time.
 
-1. Create a new Worker by running the following command and accepting all of the defaults:
+1. Create a Worker by running the following command. Accept the defaults.
 
     ```bash
     npx wrangler init neon-cf-demo
     ```
 
-2. Enter the new directory  with `cd neon-cf-demo`.
-2. Install our driver package:
+1. Enter the new directory.
+
+    ```bash
+    cd neon-cf-demo
+    ```
+
+1. Install the Neon serverless driver package.
 
     ```bash
     npm install @neondatabase/serverless.
     ```
 
-3. Set your PostgreSQL credentials by running the following command and supplying the connection string for your Neon database when prompted. You can find the connection string for your database on the Neon Dashboard. It appears similar to: `postgres://user:password@endpoint-name-123456.region.aws.neon.tech/dbname`. For more information about obtaining a Neon connection string, see [Connect from any application](/docs/connect/connect-from-any-app).
+1. Set your PostgreSQL credentials by running the following command and providing the connection string for your Neon database when prompted.
 
-```bash
-npx wrangler secret put DATABASE_URL
-```
+    ```bash
+    npx wrangler secret put DATABASE_URL
+    ```
 
-4. Add code for the Worker by replacing the generated `src/index.ts` with the following code:
+    You can find the connection string for your database on the Neon **Dashboard**. It appears similar to: `postgres://user:password@endpoint-name-123456.region.aws.neon.tech/dbname`. For more information about obtaining a Neon connection string, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-```js
-import { Client } from '@neondatabase/serverless';
-interface Env { DATABASE_URL: string; }
+1. Add code for the Worker by replacing the generated contents in `src/index.ts` with the following code:
 
-export default {
-  async fetch(request: Request, env: Env, ctx: ExecutionContext) {
-    const client = new Client(env.DATABASE_URL);
-    await client.connect();
-    const { rows: [{ now }] } = await client.query('select now();');
-    ctx.waitUntil(client.end());  // this doesn’t hold up the response
+    ```js
+    import { Client } from '@neondatabase/serverless';
+    interface Env { DATABASE_URL: string; }
 
-    return new Response(now);
-  }
-}
-```
+    export default {
+      async fetch(request: Request, env: Env, ctx: ExecutionContext) {
+        const client = new Client(env.DATABASE_URL);
+        await client.connect();
+        const { rows: [{ now }] } = await client.query('select now();');
+        ctx.waitUntil(client.end());  // this doesn’t hold up the response
 
-5. To try this locally, type `npm start`. To deploy it around the globe, type `npx wrangler publish`.
+        return new Response(now);
+      }
+    }
+    ```
 
-    Go to the worker URL, and you should see a text response similar to `Wed Nov 23 2022 10:34:06 GMT+0000 (Coordinated Universal Time)`.
+1. To try the Worker locally, type `npm start`. To deploy the Worker around the globe, type `npx wrangler publish`.
+
+    Go to the worker URL, and you should see a text response similar to:
+
+    ```text
+    Wed Nov 23 2022 10:34:06 GMT+0000 (Coordinated Universal Time)
+    ```
 
     If the Worker has not been run in a while, you may experience a few seconds of latency, as both Cloudflare and Neon will perform cold starts. Subsequent refreshes are quicker.
 
@@ -89,4 +100,8 @@ export default {
 Brief queries such as the one used in the example above can generally be run on Cloudflare’s free plan. Queries with larger result sets will typically exceed the 10ms CPU time available to Workers on the free plan. In that case, you will see a Cloudflare error page, and you will need to upgrade your Cloudflare service to avoid this issue.
 </Admonition>
 
-For a more extensive example of Neon serverless driver with Cloudflare Workers, see our [https://github.com/neondatabase/serverless-cfworker-demo](UNESCO World Heritage Sites App) and read the accompanying [blog post](https://neon.tech/blog/serverless-driver-for-postgres).
+For a more extensive example of Neon serverless driver with Cloudflare Workers, see our [UNESCO World Heritage Sites]( Apphttps://github.com/neondatabase/serverless-cfworker-demo) and read the accompanying [blog post](https://neon.tech/blog/serverless-driver-for-postgres).
+
+## Neon serverless driver with Vercel Edge Functions
+
+TBD
