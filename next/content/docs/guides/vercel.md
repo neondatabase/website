@@ -105,3 +105,7 @@ To view integration permissions, manage integration access, or remove the Neon i
 
 1. On the Vercel dashboard, select **Settings** > **Integrations**.
 1. For the **Neon** integration, select **Manage**.
+
+## Using the Neon integration with Vercel preview deployments
+
+When using the Neon integration with Vercel preview deployments, ensure that the database connection settings in your application correspond to the environment variable settings configured by the integration. For example, if your applications's database connection is defined by a `DATABASE_URL` variable, make sure that setting corresponds to the `DATABASE_URL` setting configured by the Neon integration. You can find the `PG*` and `DATABASE_URL` environment variable settings in Vercel by navigating to the Vercel dashboard, selecting your project, and selecting **Settings** > **Environment Variables**.
