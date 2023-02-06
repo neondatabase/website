@@ -57,7 +57,7 @@ The following example shows how to create a minimal Cloudflare Worker that uses 
 1. Install the Neon serverless driver package.
 
     ```bash
-    npm install @neondatabase/serverless.
+    npm install @neondatabase/serverless
     ```
 
 1. Set your PostgreSQL credentials by running the following command and providing the connection string for your Neon database when prompted.
@@ -104,4 +104,73 @@ For a more extensive example that showcases the Neon serverless driver with Clou
 
 ## Neon serverless driver with Vercel Edge Functions
 
-TBD
+The following example shows how to create a minimal Vercel Edge Function with Next.js that uses the Neon serverless driver to ask PostgreSQL for the current time.
+
+You should have the latest version (>= v28.9) of the Vercel CLI. To check your version, use `vc --version`. To install or update Vercel CLI, use:
+
+```bash
+npm i -g vercel@latest
+```
+
+1. Create a Next.js project.
+
+```bash
+npx create-next-app@latest --typescript
+```
+
+1. Enter the new directory.
+
+    ```bash
+    cd neon-vercel-ef-demo
+    ```
+
+1. Install the Neon serverless driver package.
+
+    ```bash
+    npm install @neondatabase/serverless
+    ```
+
+2. Add code to your function.
+
+```js
+import { NowRequest, NowResponse } from '@now/node'
+import { Client } from 'pg'
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
+export default async (request: NowRequest, response: NowResponse) => {
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL
+  })
+
+  await client.connect()
+
+  const result = await client.query('SELECT NOW()')
+  const currentTime = result.rows[0].now
+
+  await client.end()
+
+  response.status(200).send(`The current time is ${currentTime}`)
+}
+
+export const config = {
+  runtime: 'edge',
+};
+```
+
+3. Deploy your function.
+
+```bash
+vercel deploy
+```
+
+Follow the prompts to deploy your function and once done, open the `Production` link.
+
+4. View the function logs.
+
+From your dashboard, click on the deployed project and choose the **Functions** tab. This tab displays logs from any running functions within your project. Use the dropdown to select the `api/hello` function.
+
+The Runtime of the function will read `Edge`, and the **Region** will be the default [region](https://vercel.com/docs/concepts/edge-network/regions) for all new Vercel projects, which is Washington, D.C., USA.
+
+5. Summary: Congratulations. You have now created a new Next.js project and deployed it as an Edge Function. The function retrieves the current time from Neon using the Neon serverless driver.
