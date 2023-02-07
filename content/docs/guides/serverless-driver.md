@@ -132,7 +132,7 @@ This example shows how to create a minimal Vercel Edge Function with Next.js tha
 
     ```js
     import { NowRequest, NowResponse } from '@now/node'
-    import { Client } from 'pg'
+    import { Client } from '@neondatabase/serverless'
     import * as dotenv from 'dotenv'
 
     dotenv.config()
