@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-_This guide was contributed by [Roy Derks](https://twitter.com/gethackteam?s=20&t=hq7VO7rPL2BOMo3A1ohkKg) from [StepZen](https://stepzen.com/)_
+_This guide was contributed by Roy Derks from [StepZen](https://stepzen.com/)_
 
 GraphQL has been around for years and is becoming increasingly popular among web developers. It is a query language for APIs and a runtime for fulfilling queries with your existing data. GraphQL allows clients to access data flexibly and efficiently. However, building a GraphQL API often requires writing a lot of code and familiarizing yourself with a new framework. This guide shows how you can generate a GraphQL API for your Neon database in minutes using [StepZen](https://stepzen.com/).
 
