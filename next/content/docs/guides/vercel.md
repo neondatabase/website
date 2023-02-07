@@ -12,11 +12,11 @@ This is a Beta version of Neon’s Vercel integration. For assistance or to sugg
 
 ## What the Neon integration does
 
-The Neon-Vercel integration connects your Vercel project to a Neon project. If you do not have a Neon project, you can create one when adding the integration. While deploying the integration, you will select a database from the root branch of your Neon project. This will be your production database.
+The Neon-Vercel integration connects your Vercel project to a Neon project. If you do not have a Neon project, you can create one while adding the integration. When deploying the integration, you will select a database from the root branch of your Neon project. This will become your production database.
 
-Once the integration is deployed, it will create a branch in Neon for each Git branch pushed to the GitHub account associated with the Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments), allowing you to take advantage of Neon's branching capabilities.
+When the integration is deployed, it creates a branch in Neon for each Git branch pushed to the GitHub account associated with your Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments), allowing you to take advantage of Neon's branching capabilities.
 
-Optionally, based on your selection, the integration also creates a development branch, which you can use with your Vercel development environment instead of a local database. The development branch is a copy of your production branch that you can modify without affecting your production data.
+Optionally, based on your selection, the integration also creates a development branch, which you can use with your Vercel development environment. The development branch is a copy of your production branch.
 
 The integration sets these environment variables in Vercel:
 
@@ -26,7 +26,7 @@ The integration sets these environment variables in Vercel:
 - `PGPASSWORD`
 - `DATABASE_URL`
 
-The variables are set in your production, development, and preview environments, as required.
+The variables are set in your Vercel production, development, and preview environments, as required.
 
 ## Prerequisites
 
