@@ -98,7 +98,7 @@ To view integration permissions, manage integration access, or remove the Neon i
 
 ## Using the Neon integration with Vercel Preview Deployments
 
-Vercel Preview Deployments enable teams to preview changes to an application in a live, production-like environment without merging those changes to the Git project's production branch, enabling anyone with access to the preview to provide feedback before the changes are merged.
+Vercel [Preview Deployments](https://vercel.com/docs/concepts/deployments/preview-deployments) enable teams to preview changes to an application in a live, production-like environment without merging those changes to the Git project's production branch, enabling anyone with access to the preview to provide feedback before the changes are merged.
 
 However, when databases are involved, teams are often forced to share a single database containing dummy data across all preview deployments. This setup is not ideal for several reasons:
 
@@ -106,13 +106,13 @@ However, when databases are involved, teams are often forced to share a single d
 - If the shared database encounters an issue, so will all preview deployments.
 - Changes to the shared database schema affect all preview deployments, which can make the database a productivity bottleneck.
 
-To address these issues, some teams will provision a database containing dummy data for each Preview Deployment. While this is a better experience, Preview Deployments still do not accurately represent production, which leads some teams to provision preview databases with a full copy of production data as part of their CI/CD pipeline.
+To address these issues, some teams provision a database containing dummy data for each preview deployment. While this is a better experience, the preview deployments still does not accurately represent production, which leads some to provision preview databases with a full copy of their production data as part of their CI/CD pipeline.
 
-The main downside of this approach is the time it takes for a preview deployment to be ready,  which depends on the amount of data to be imported. The larger the application’s database, the longer it takes to crate a preview deployment, negatively impacting developer productivity.
+The main downside of this approach is the time it takes for a preview deployment to be ready,  which depends on the amount of data you are importing. The larger the application’s database, the longer it takes to create a preview deployment, which impacts developer productivity.
 
-Neon’s branching feature addresses all these challenges. A branch in Neon is a copy-on-write clone of your data, which allows the branch to be created instantly for every pull request. This makes Neon branching a scalable and cost-effective solution for Preview Deployments. After setting up the integration, each Preview Deployment will automatically have its own isolated, production-like database.
+Neon’s branching feature addresses all of these challenges. In Neon, a branch is a copy-on-write clone of your data that can be created instantly, which makes Neon branching a scalable and cost-effective solution for preview deployments. After setting up the integration, each preview deployment will automatically have its own isolated, production-like database.
 
-To use the integration with Preview Deployments:
+To use the integration with preview deployments:
 
 1. Add the Neon integration to your Vercel project, as described above.
 2. Ensure that the database connection settings in your application correspond to the environment variable settings configured by the Neon integration. For example, if your applications's database connection is defined by a `DATABASE_URL` variable, make sure that setting in your application corresponds to the `DATABASE_URL` setting configured by the Neon integration. You can find the environment variable settings in Vercel by navigating to the Vercel dashboard, selecting your project, and selecting **Settings** > **Environment Variables**. In addition to `DATABASE_URL` variable, the integration sets the following environment variables, which may be used by some application frameworks instead of the `DATABASE_URL` variable:
@@ -126,7 +126,7 @@ To use the integration with Preview Deployments:
     After adding the integration and setting the environment variables in your application, you may have to redeploy your application in Vercel for the environment variables set by the integration to take effect.
     </Admonition>
 
-3. After the integration is added and the environment variables in your application are configured to match those in your Vercel project, each pull request creates a branch in Neon and automatically configures the database environment variables mentioned above for your Vercel preview environment, allowing the preview to connect to the database the branch.
+3. After the integration is added and the environment variables in your application are configured to match those in your Vercel project, each Git branch pushed to the GitHub account associated with your Vercel project creates a branch in Neon and automatically configures the database environment variables mentioned above for your Vercel preview environment, allowing the preview deployment to connect to the database the branch.
 
 ### Managing preview deployment branches
 
