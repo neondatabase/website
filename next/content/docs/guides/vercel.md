@@ -128,8 +128,8 @@ To use the integration with Preview Deployments:
 
 3. After the integration is added and the environment variables in your application are configured to match those in your Vercel project, each pull request creates a branch in Neon and automatically configures the database environment variables mentioned above for your Vercel preview environment, allowing the preview to connect to the database the branch.
 
-### Managing branches
+### Managing preview deployment branches
 
-Database branches created for preview deployments are not removed from Neon automatically, so branches may start to accumulate in your Neon project after a period of time. You can manage the removal of old branches in the Neon Console or you can add this task to your CI/CD pipeline using the [Neon API](https://neon.tech/api-reference/v2). See [Manage branches](/docs/manage/branches) for information about how to remove branches using the console or API.
+Branches created in Neon for preview deployments are not removed from Neon automatically, so they may start to accumulate in your Neon project after a period of time. You can manage the removal of old branches in the Neon Console or you can add this task to your CI/CD pipeline using the [Neon API](https://neon.tech/api-reference/v2). See [Manage branches](/docs/manage/branches) for information about how to remove branches using the console or API.
 
-When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To minimize disk space usage and stay within the Free Tier limits, avoid allowing branches to age beyond the 7-day window.
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To minimize disk space usage and stay within the Free Tier limits, avoid allowing branches to age beyond seven days.
