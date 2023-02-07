@@ -12,9 +12,9 @@ This is a Beta version of Neon’s Vercel integration. For assistance or to sugg
 
 ## What the Neon integration does
 
-The Neon-Vercel integration connects your Vercel project to a Neon project. If you do not have a Neon project, you can create one when adding the integration. While deploying the integration, you will select a database from the `main` branch of your Neon project. This will be your production database.
+The Neon-Vercel integration connects your Vercel project to a Neon project. If you do not have a Neon project, you can create one when adding the integration. While deploying the integration, you will select a database from the root branch of your Neon project. This will be your production database.
 
-Once the integration is deployed, it will create a branch in Neon for each git branch created by a Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments), allowing you to take advantage of Neon's branching capabilities.
+Once the integration is deployed, it will create a branch in Neon for each Git branch pushed to the GitHub account associated with the Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments), allowing you to take advantage of Neon's branching capabilities.
 
 Optionally, based on your selection, the integration also creates a development branch, which you can use with your Vercel development environment instead of a local database. The development branch is a copy of your production branch that you can modify without affecting your production data.
 
@@ -58,7 +58,7 @@ The variables are set in your production, development, and preview environments,
 
     Once the integration is added, you are presented with a **Success!** screen where you can copy the new password for your database user. It is recommended that you save the password, as you will not be able to access it again. If you misplace the password, a reset will be required.
 1. To view the results of the integration in Neon:
-    1. Navigate to the [Neon Console](https://console.stage.neon.tech/).
+    1. Navigate to the [Neon Console](https://console.neon.tech/).
     1. Select the project you connected to.
     1. Select **Branches**.
     You will see the `main` branch of your project, and if you created a development branch, you will also see a `dev` branch.
@@ -78,7 +78,7 @@ Failed to set environment variables in Vercel. Please make sure that the followi
 
 In this case, you can remove the existing environment variables from your Vercel project settings and retry the Neon integration. To remove existing environment variables:
 
-1. From the Vercel dashboard, select **Settings**.
+1. From the Vercel project page, select **Settings**.
 1. Locate the environment variables required by the Neon integration (one or more of the variables mentioned in the error message) and remove it.
 
     <Admonition type="note">
@@ -88,14 +88,6 @@ In this case, you can remove the existing environment variables from your Vercel
 1. Once you have removed the variables, try adding the Neon integration again. See [Add the Neon integration](#add-the-neon-integration).
 
 For more information about project settings in Vercel, see [Project settings](https://vercel.com/docs/concepts/projects/overview#project-settings). For information about Vercel environment variables, see [Environment variables](https://vercel.com/docs/concepts/projects/environment-variables).
-
-If you attempt to add the integration with the **dev** branch option selected and the Neon project already has a branch named **dev**, you will receive the following error:
-
-```text
-A branch with the provided name already exists
-```
-
-In this case, remove the existing **dev** branch and retry the integration. Alternatively, use a different Neon project. In either case, ensure that the environment variables set by the previous Neon integration or previous integration attempt are removed first.
 
 ## Manage your Neon integration
 
