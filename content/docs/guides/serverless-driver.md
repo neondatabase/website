@@ -4,11 +4,11 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-The Neon serverless driver allows you to query data from [Cloudflare Workers](https://workers.cloudflare.com/), [Vercel Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions), and other environments that support WebSockets — places where TCP sockets are not available.
+The Neon serverless driver (currently in Beta) allows you to query data from [Cloudflare Workers](https://workers.cloudflare.com/), [Vercel Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions), and other environments that support WebSockets — places where TCP sockets are not available.
 
 The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular `npm pg` package that you may already be familiar with, and it offers the same API.
 
-You can find out more about the driver from the [@neondatabase/serverless](https://www.npmjs.com/package/@neondatabase/serverless) `README` on [npmjs.com](https://www.npmjs.com/package/@neondatabase/serverless) or [GitHub](https://github.com/neondatabase/serverless).
+You learn more about the driver from the `README` on [GitHub](https://github.com/neondatabase/serverless).
 
 ## Install the Neon serverless driver
 
@@ -20,7 +20,7 @@ npm install @neondatabase/serverless
 
 ## How to use it
 
-Use the Neon serverless driver in the same way you would use `node-postgres`. For example, with your Neon database connection string defined by `env.DATABASE_URL`, you can use the driver in a serverless function as shown below:
+You can use the Neon serverless driver in the same way you would use `node-postgres`. For example, with your Neon database connection string defined by `env.DATABASE_URL`, you can use the driver in a serverless function as shown below:
 
 ```js
 import { Client } from '@neondatabase/serverless';
@@ -34,13 +34,9 @@ async function whatsTheTimeMrPostgres() {
 }
 ```
 
-## Pooling
-
-In general, serverless platforms do not keep WebSocket connections alive between requests. As a result, connecting to a database client (or establishing a connection pool) outside of the function that is run on each request does not generally work. The Neon serverless driver exposes a `Pool` class, but at this point, that class is likely to be slower than using `Client` directly.
-
 ## Neon serverless driver with Cloudflare
 
-The following example shows how to create a minimal Cloudflare Worker that uses the Neon serverless driver to ask PostgreSQL for the current time.
+This example shows how to create a minimal Cloudflare Worker that uses the Neon serverless driver to ask PostgreSQL for the current time.
 
 1. Create a Worker by running the following command. Accept the defaults.
 
@@ -104,13 +100,13 @@ For a more extensive example that showcases the Neon serverless driver with Clou
 
 ## Neon serverless driver with Vercel Edge Functions
 
-The following example shows how to create a minimal Vercel Edge Function with Next.js that uses the Neon serverless driver to ask PostgreSQL for the current time.
+This example shows how to create a minimal Vercel Edge Function with Next.js that uses the Neon serverless driver to ask PostgreSQL for the current time.
 
-You should have the latest version (>= v28.9) of the Vercel CLI. To check your version, use `vc --version`. To install or update Vercel CLI, use:
+1. Ensure that you have the latest version (>= v28.9) of the Vercel CLI. To check your version, use `vc --version`. To install or update Vercel CLI, use:
 
-```bash
-npm i -g vercel@latest
-```
+    ```bash
+    npm i -g vercel@latest
+    ```
 
 1. Create a Next.js project.
 
@@ -172,5 +168,3 @@ npm i -g vercel@latest
 1. View the function logs.
 
     From your dashboard, click on the deployed project and choose the **Functions** tab. This tab displays logs from any running functions within your project. Use the dropdown to select the `api/hello` function.
-
-    The Runtime of the function will read `Edge`, and the **Region** will be the default [region](https://vercel.com/docs/concepts/edge-network/regions) for all new Vercel projects, which is Washington, D.C., USA.
