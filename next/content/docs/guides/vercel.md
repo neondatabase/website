@@ -43,7 +43,7 @@ The variables are set in your production, development, and preview environments,
     1. Select the Vercel project to add the integration to.
     1. Select a Neon project, a database, and role that Vercel will use to connect. The Neon Free Tier supports a single project per user. If you do not have a Neon project, you can create one. If desired, you can also create a new database and role for the integration.
 
-        The database that you select becomes your production database. This database must reside on the `main` branch of your Neon project. The `main` branch is preselected for you.
+        The database that you select becomes your production database. This database must reside on the root branch of your Neon project. The root branch is preselected for you.
 
         You are given the option to create a branch for your Vercel development environment. When this option is selected (the default), the integration creates a branch named **dev** and sets environment variables for it.
 
@@ -67,8 +67,6 @@ The variables are set in your production, development, and preview environments,
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**.
     You will see the `PG*` and `DATABASE_URL` environment variables set by the integration.
-
-      
 
 ## Troubleshoot connection issues
 
@@ -106,6 +104,40 @@ To view integration permissions, manage integration access, or remove the Neon i
 1. On the Vercel dashboard, select **Settings** > **Integrations**.
 1. For the **Neon** integration, select **Manage**.
 
-## Using the Neon integration with Vercel preview deployments
+## Using the Neon integration with Vercel Preview Deployments
 
-When using the Neon integration with Vercel preview deployments, ensure that the database connection settings in your application correspond to the environment variable settings configured by the integration. For example, if your applications's database connection is defined by a `DATABASE_URL` variable, make sure that setting corresponds to the `DATABASE_URL` setting configured by the Neon integration. You can find the `PG*` and `DATABASE_URL` environment variable settings in Vercel by navigating to the Vercel dashboard, selecting your project, and selecting **Settings** > **Environment Variables**.
+Vercel Preview Deployments enable teams to preview changes to an application in a live, production-like environment without merging those changes to the Git project's production branch, enabling anyone with access to the preview to provide feedback before the changes are merged.
+
+However, when databases are involved, teams are often forced to share a single database containing dummy data across all preview deployments. This setup is not ideal for several reasons:
+
+- Preview deployments with dummy data do not accurately represent production.
+- If the shared database encounters an issue, so will all preview deployments.
+- Changes to the shared database schema affect all preview deployments, which can make the database a productivity bottleneck.
+
+To address these issues, some teams will provision a database containing dummy data for each Preview Deployment. While this is a better experience, Preview Deployments still do not accurately represent production, which leads some teams to provision preview databases with a full copy of production data as part of their CI/CD pipeline.
+
+The main downside of this approach is the time it takes for a preview deployment to be ready,  which depends on the amount of data to be imported. The larger the application’s database, the longer it takes to crate a preview deployment, negatively impacting developer productivity.
+
+Neon’s branching feature addresses all these challenges. A branch in Neon is a copy-on-write clone of your data, which allows the branch to be created instantly for every pull request. This makes Neon branching a scalable and cost-effective solution for Preview Deployments. After setting up the integration, each Preview Deployment will automatically have its own isolated, production-like database.
+
+To use the integration with Preview Deployments:
+
+1. Add the Neon integration to your Vercel project, as described above.
+2. Ensure that the database connection settings in your application correspond to the environment variable settings configured by the Neon integration. For example, if your applications's database connection is defined by a `DATABASE_URL` variable, make sure that setting in your application corresponds to the `DATABASE_URL` setting configured by the Neon integration. You can find the environment variable settings in Vercel by navigating to the Vercel dashboard, selecting your project, and selecting **Settings** > **Environment Variables**. In addition to `DATABASE_URL` variable, the integration sets the following environment variables, which may be used by some application frameworks instead of the `DATABASE_URL` variable:
+
+    - `PGHOST`
+    - `PGUSER`
+    - `PGDATABASE`
+    - `PGPASSWORD`
+
+    <Admonition type="note">
+    After adding the integration and setting the environment variables in your application, you may have to redeploy your application in Vercel for the environment variables set by the integration to take effect.
+    </Admonition>
+
+3. After the integration is added and the environment variables in your application are configured to match those in your Vercel project, each pull request creates a branch in Neon and automatically configures the database environment variables mentioned above for your Vercel preview environment, allowing the preview to connect to the database the branch.
+
+### Managing branches
+
+Database branches created for preview deployments are not removed from Neon automatically, so branches may start to accumulate in your Neon project after a period of time. You can manage the removal of old branches in the Neon Console or you can add this task to your CI/CD pipeline using the [Neon API](https://neon.tech/api-reference/v2). See [Manage branches](/docs/manage/branches) for information about how to remove branches using the console or API.
+
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To minimize disk space usage and stay within the Free Tier limits, avoid allowing branches to age beyond the 7-day window.
