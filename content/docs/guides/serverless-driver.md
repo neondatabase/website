@@ -20,21 +20,9 @@ npm install @neondatabase/serverless
 
 ## How to use it
 
-You can use the Neon serverless driver in the same way you would use `node-postgres`. For example, with your Neon database connection string defined by `env.DATABASE_URL`, you can use the driver in a serverless function as shown below:
+You can use the Neon serverless driver in the same way you would use `node-postgres`. Where you would import `pg`, you simply import `@neondatabase/serverless` instead. The following examples show how to use the Neon Serverless driver with Cloudfare Workers and Vercel Edge Functions.
 
-```js
-import { Client } from '@neondatabase/serverless';
-
-async function whatsTheTimeMrPostgres() {
-  const client = new Client(env.DATABASE_URL);
-  await client.connect();
-  const { rows: [{ now }] } = await client.query('select now();');
-  await client.end();
-  return now;
-}
-```
-
-## Neon serverless driver with Cloudflare
+### Neon serverless driver with Cloudflare
 
 This example shows how to create a minimal Cloudflare Worker that uses the Neon serverless driver to ask PostgreSQL for the current time.
 
@@ -98,9 +86,9 @@ Brief queries such as the one used in the example above can generally be run on 
 
 For a more extensive example that showcases the Neon serverless driver with Cloudflare Workers, see our [UNESCO World Heritage Sites]( Apphttps://github.com/neondatabase/serverless-cfworker-demo) and read the accompanying [blog post](https://neon.tech/blog/serverless-driver-for-postgres).
 
-## Neon serverless driver with Vercel Edge Functions
+### Neon serverless driver with Vercel Edge Functions
 
-This example shows how to create a minimal Vercel Edge Function with Next.js that uses the Neon serverless driver to ask PostgreSQL for the current time.
+This example shows how to create a minimal Vercel Edge Function with that uses the Neon serverless driver to ask PostgreSQL for the current time.
 
 1. Ensure that you have the latest version (>= v28.9) of the Vercel CLI. To check your version, use `vc --version`. To install or update Vercel CLI, use:
 
@@ -167,4 +155,4 @@ This example shows how to create a minimal Vercel Edge Function with Next.js tha
 
 1. View the function logs.
 
-    From your dashboard, click on the deployed project and choose the **Functions** tab. This tab displays logs from any running functions within your project. Use the dropdown to select the `api/hello` function.
+    From the Vercel dashboard, click on the deployed project and choose the **Functions** tab. This tab displays logs from any running functions within your project. Use the dropdown to select the `api/hello` function.
