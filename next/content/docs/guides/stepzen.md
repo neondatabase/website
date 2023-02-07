@@ -181,13 +181,13 @@ type Query {
 
 The `getCustomerList` query defined in the GraphQL schema returns an array of the type `Customer`.
 
-- The `@dbquery` directive identifies the query as a database query.
-- `type` defines the type of database.
-- `schema` defines the schema.
-- `table` defines the table in the database.
-- `configuration` defines the name of the connection configuration used to connect to the database.
+- The `@dbquery` directive identifies the query as a database query
+- `type` defines the type of database
+- `schema` defines the schema
+- `table` defines the table in the database
+- `configuration` defines the name of the connection configuration used to connect to the database
 
-Earlier, you saw that the CLI created connections based on foreign key relationships. For example, the `order` table has a foreign key relationship with the `customer` table. This means that you can query data from the `order` table, and get the related data from the `customer` table. you can query the customer linked to an order like this:
+Earlier, you saw that the CLI created connections based on foreign key relationships. For example, the `order` table has a foreign key relationship with the `customer` table. This means that you can query data from the `order` table, and get the related data from the `customer` table. You can query the customer linked to an order like this:
 
 ```graphql
 {
@@ -202,7 +202,7 @@ Earlier, you saw that the CLI created connections based on foreign key relations
 }
 ```
 
-Next to the `id` and `shippingcost` fields, the `name` and `email` fields are also requested from the `customer` table. So how does the query get the `customer` field?
+In addition to the `id` and `shippingcost` fields, the `name` and `email` fields are requested from the `customer` table. So how does the query get the `customer` field?
 
 The `getOrderList` query is defined in the GraphQL schema, and returns a list of the type `Order` with a field called `customerid`. This relationship is defined as a foreign key in the database and the GraphQL schema has a field called `customer`, which is linked to the `customerid` field.
 
@@ -239,13 +239,13 @@ type Query {
 }
 ```
 
-This GraphQL query is translated to the following SQL query, which is run on the Neon PostgreSQL database:
+This GraphQL query is translated to the following SQL query, which is run on the Neon PostgreSQL database.
 
 ```sql
 SELECT name, email FROM public.customer WHERE id = $1
 ```
 
-And together with the previous query, it translates to the following SQL query for the Neon PostgreSQL database:
+And together with the previous query, it is translated to the following SQL query for the Neon PostgreSQL database:
 
 ```sql
 SELECT id, shippingcost, customerid FROM public.order
@@ -258,10 +258,8 @@ StepZen reuses SQL queries or merges queries when possible to retrieve data from
 In addition to having StepZen generate the query that is sent to the Neon database, you can also define a raw query in the GraphQL schema. Defining a raw query is useful when you want to query data from multiple tables or when you want to use a more complex query. You can find an example in the `getOrderUsingCustomerid` query in the `postgresql/index.graphql` file.
 </Admonition>
 
-In this section, you explored the GraphQL API and learned how to query data from the Neon database. You also learned how you can use StepZen to combine data from your Neon database with REST API or other GraphQL APIs, for example, when you want to connect with an authentication service.
-
 ## Conclusion
 
-In this guide, you have learned how to generate a GraphQL API from a Neon database. You have used StepZen, which offers GraphQL-as-a-Service and a CLI to generate GraphQL APIs from data sources such as databases and REST APIs. Using StepZen, you can quickly generate a GraphQL API from a Neon database and use it to query data from the database. Also, you looked at how StepZen translates queries to the GraphQL API into SQL queries that run on your Neon database.
+In this guide, you have learned how to generate a GraphQL API from a Neon database. You have used StepZen, which offers GraphQL-as-a-Service and a CLI to generate GraphQL APIs from data sources such as databases and REST APIs. Using StepZen, you can quickly generate a GraphQL API from a Neon database and use it to query data from the database. You also looked at how StepZen translates queries to the GraphQL API into SQL queries that run on your Neon database.
 
 You can find the complete code example [here](https://github.com/stepzen-dev/examples).
