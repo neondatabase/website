@@ -53,9 +53,9 @@ On the Neon control panel, copy the Connection string tab to retrieve the connec
 
 To synchronize our database schema with our Prisma schema and seed data, run the following commands in your terminal:
 
-DATABASE_URL="<YOUR_NEON_CONNECTION_STRING>" npx prisma db push
-DATABASE_URL="<YOUR_NEON_CONNECTION_STRING>" npx prisma db seed
-Make sure to replace <YOUR_NEON_CONNECTION_STRING> with your connection string.
+DATABASE_URL=`<YOUR_NEON_CONNECTION_STRING>` npx prisma db push
+DATABASE_URL=`<YOUR_NEON_CONNECTION_STRING>` npx prisma db seed
+Make sure to replace `<YOUR_NEON_CONNECTION_STRING>` with your connection string.
 
 ## Deploy the application on Koyeb
 
@@ -126,7 +126,7 @@ ID          NAME                     DOMAINS                                    
 ec6a4311    express-neon             ["express-neon-myorg.koyeb.app"]          24 Jan 23 11:12 UTC
 ```
 
-The example application exposes a /planets endpoint that you can use to list planets from the database we prepared earlier. Once your deployment is live, you should see the following results when navigating to https://<YOUR_APP_URL>.koyeb.app/planets:
+The example application exposes a /planets endpoint that you can use to list planets from the database we prepared earlier. Once your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
 
 ```jason
 [
