@@ -34,12 +34,12 @@ For the integration to work, the database connection settings in your applicatio
 
 ## Add the Neon integration
 
-### Prerequisites
+Before you begin, ensure that you have met the following prerequisites:
 
 - A [Vercel account](https://vercel.com).
 - A Vercel project. If you do not have one, see [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project), in the _Vercel documentation_.
 
-## Add the integration
+To add the integration:
 
 1. Navigate to the [Neon Vercel integrations page](https://vercel.com/integrations/neon), and click **Add integration**.
 1. Select a Vercel account to add the integration to.
