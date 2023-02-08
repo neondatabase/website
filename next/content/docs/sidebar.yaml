@@ -66,6 +66,8 @@
       slug: guides/hasura
     - title: Java
       slug: guides/java
+    - title: Koyeb
+      slug: guides/koyeb
     - title: Laravel
       slug: guides/laravel
     - title: Next.js
