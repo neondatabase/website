@@ -94,7 +94,7 @@ To view integration permissions, manage integration access, or remove the Neon i
 1. On the Vercel dashboard, select **Settings** > **Integrations**.
 1. Find the **Neon** integration and select **Manage**.
 
-## Using the Neon integration with Vercel Preview Deployments
+## Using the Neon integration with preview deployments
 
 Vercel [Preview Deployments](https://vercel.com/docs/concepts/deployments/preview-deployments) enable teams to preview changes to an application in a live, production-like environment without merging those changes to the Git project's production branch, enabling anyone with access to the preview to provide feedback before changes are merged.
 
@@ -128,6 +128,6 @@ To use the integration with preview deployments:
 
 ### Managing preview deployment branches
 
-Branches created in Neon for preview deployments are not removed automatically, so they may start accumulating in your Neon project after a period of time. You can manage the removal of old branches in the Neon Console or you build it into to your CI/CD pipeline using the [Neon API](https://neon.tech/api-reference/v2). See [Manage branches](/docs/manage/branches) for information about how to remove branches using the console or API.
+Branches created in Neon for preview deployments are not removed automatically, so they may start accumulating in your Neon project after a period of time. You can manage the removal of old branches in the Neon Console or you build this task into to your CI/CD pipeline using the [Neon API](https://neon.tech/api-reference/v2). See [Manage branches](/docs/manage/branches) for information about how to remove branches using the console or API.
 
-It is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To minimize disk space usage and stay within the Free Tier limits, avoid allowing branches to age beyond seven days.
+It is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To minimize disk space usage and stay within the Free Tier limits, avoid allowing branches to age beyond the 7 day limit.
