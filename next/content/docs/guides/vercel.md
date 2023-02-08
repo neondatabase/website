@@ -11,7 +11,7 @@ This is a Beta version of Neon’s Vercel integration. For assistance or to sugg
 
 ## What the Neon integration does
 
-The Neon-Vercel integration connects your Vercel project to a Neon project and creates a database branch for each Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments).
+The Neon-Vercel integration connects your Vercel project to a Neon project and creates a database branch for every Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments).
 
 Optionally, based on your selection, the integration also creates a development branch, which you can use with your Vercel development environment.
 
@@ -26,6 +26,19 @@ The integration sets these environment variables in Vercel:
 The variables are set in your Vercel production, development, and preview environments, as required.
 
 ## How the integration works with preview deployments
+
+Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments) enable teams to collaborate effectively by automatically creating an isolated, production-like environment for every commit. This way, all changes can be previewed before they are merged into production.
+
+However, when databases are involved, teams often share a single database containing dummy data across all preview deployments. This setup is not ideal for these reasons:
+
+- If the shared database encounters an issue, so will all preview deployments.
+- Changes to the shared database schema might break all previously created preview deployments, making it a productivity bottleneck.
+
+![Shared database](/docs/guides/vercel_shared_database.png)
+
+Neon’s branching feature addresses all these challenges. A branch is a copy-on-write clone of your data, so creating it only takes a few seconds. This makes it a scalable and cost-effective solution for Preview Deployments, enabling you to create a branch for every pull request.
+
+![Branch database](/docs/guides/vercel_branch_database.png)
 
 When you push a branch to the GitHub repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting the required Vercel preview environment variables. An isolated copy of your database for each preview deployment provides reviewers with a true production-like environment with real data.
 
