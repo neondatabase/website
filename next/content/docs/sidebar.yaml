@@ -84,6 +84,8 @@
       slug: guides/sqlalchemy
     - title: Symfony
       slug: guides/symfony
+    - title: Vercel
+      slug: guides/vercel
 - title: Import data
   items:
     - title: Import from PostgreSQL
