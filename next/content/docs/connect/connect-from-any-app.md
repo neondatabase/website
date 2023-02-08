@@ -4,7 +4,7 @@ enableTableOfContents: true
 ---
 When connecting to Neon from an application or client, you will need to connect to a database in your Neon project. In Neon, a database belongs to a branch, which may the root branch of your project (`main`) or a child branch. The root branch in a Neon project has a default database named `neondb`.
 
-To connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through an endpoint, which is the compute instance associated with the branch. 
+To connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through an endpoint, which is the compute instance associated with the branch.
 
 ```text
 Project
@@ -24,9 +24,9 @@ You can obtain the connection details that you require from the **Connection Det
 A Neon connection string includes the user, the endpoint hostname, and the database name.
 
 ```text
-postgres://sally@ep-patient-glade-853637.us-east-2.aws.neon.tech/neondb
-             ^                       ^                              ^
-             |- <user>               |- <endpoint_hostname>         |- <database>
+postgres://sally@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb
+             ^                       ^                            ^
+             |- <user>               |- <endpoint_hostname>       |- <database>
 ```
 
 <Admonition type="note">
@@ -38,7 +38,7 @@ You can use the details from the connection string or the connection string itse
 `.env` file:
 
 ```text
-PGHOST='ep-patient-glade-853637.us-east-2.aws.neon.tech'
+PGHOST='ep-cold-poetry-404091.us-east-2.aws.neon.tech'
 PGDATABASE='neondb'
 PGUSER='sally'
 PGPASSWORD='<password>'
@@ -48,7 +48,7 @@ PGPORT='5432'
 Variable:
 
 ```text
-DATABASE_URL="postgres://sally:<password>@ep-patient-glade-853637.us-east-2.aws.neon.tech:5432/neondb"
+DATABASE_URL="postgres://sally:<password>@ep-cold-poetry-404091.us-east-2.aws.neon.tech:5432/neondb"
 ```
 
 Command-line:
