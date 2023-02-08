@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
 ---
 
-Each PostgreSQL connection creates a new process in the operating system, which consumes resources. For this reason, PostgreSQL limits the number of open connections. Neon permits 100 simultaneous PostgreSQL connections by default with a `max_connections=100` setting, which is the typical default for this parameter. In Neon, a small number of those connections are reserved for administrative purposes. A connection limit of 100 may not be sufficient for some applications. To increase the number of connections that Neon  supports, you can enable connection pooling for the [endpoint](/docs/reference/glossary/#endpoint) compute instance you use to connect to your database.
+Each PostgreSQL connection creates a new process in the operating system, which consumes resources. For this reason, PostgreSQL limits the number of open connections. Neon permits 100 simultaneous PostgreSQL connections by default with a `max_connections=100` setting, which is the typical default for this parameter. In Neon, a small number of those connections are reserved for administrative purposes. A connection limit of 100 may not be sufficient for some applications. To increase the number of connections that Neon supports, you can enable connection pooling for the compute [endpoint](/docs/reference/glossary/#compute-endpoint) you use to connect to your database.
 
 ## Connection pooling
 
@@ -17,17 +17,16 @@ With connection pooling enabled, Neon can handle up to 1000 concurrent connectio
 
 ## Enable connection pooling
 
-In Neon, connection pooling is configured for individual endpoint compute instances. It is disabled by default. You can enable connection pooling when creating or editing an endpoint.
+In Neon, connection pooling is configured for individual compute endpoints. It is disabled by default. You can enable connection pooling by editing an compute endpoint.
 
-To enable connection pooling for an existing endpoint:
+To enable connection pooling for a compute endpoint:
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
-2. On the **Dashboard**, select **Endpoints**.
-3. Find the endpoint you want to enable pooling for, click the kebab menu in the **Endpoints** table, and select **Edit**.
+2. On the **Dashboard**, select **Branches**.
+3. Select the branch with the compute endpoint you want to edit.
+3. Click the kebab menu in the **Endpoint** table, and select **Edit**.
 5. Toggle **Pooler enabled** to the on position.
 6. Click **Save**.
-
-You can also enable connection pooling when creating an endpoint. See [Create an endpoint](/docs/manage/endpoints#create-an-endpoint).
 
 ## Connection pooling notes and limitations
 

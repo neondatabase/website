@@ -1,5 +1,5 @@
 ---
-title: Manage computes
+title: Manage compute endpoints
 enableTableOfContents: true
 isDraft: false
 ---
