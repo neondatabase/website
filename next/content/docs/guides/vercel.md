@@ -45,7 +45,7 @@ The variables are set in your Vercel production, development, and preview enviro
 
         The database that you select becomes your production database. This database must reside on the root branch of your Neon project. The root branch is preselected.
 
-        You are given the option to create a branch for your Vercel development environment. When this option is selected (the default), the integration creates a branch named **dev** and sets Vercel environment variables for it.
+        You are given the option to create a branch for your Vercel development environment. When this option is selected (the default), the integration creates a branch named **vercel-dev** and sets Vercel environment variables for it.
 
         When you finish making selections, click **Continue**.
     1. Confirm the integration settings to allow the integration to perform the following actions:
