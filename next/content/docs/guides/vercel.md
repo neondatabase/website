@@ -34,11 +34,11 @@ However, when databases are involved, teams often share a single database contai
 - If the shared database encounters an issue, so will all preview deployments.
 - Changes to the shared database schema might break all previously created preview deployments, making it a productivity bottleneck.
 
-![Shared database](/docs/guides/vercel_shared_database.png)
+![Shared database](/docs/guides/vercel_shared_database.webp)
 
 Neon’s branching feature addresses all these challenges. A branch is a copy-on-write clone of your data, so creating it only takes a few seconds. This makes it a scalable and cost-effective solution for Preview Deployments, enabling you to create a branch for every pull request.
 
-![Branch database](/docs/guides/vercel_branch_database.png)
+![Branch database](/docs/guides/vercel_branch_database.webp)
 
 When you push a branch to the GitHub repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting the required Vercel preview environment variables. An isolated copy of your database for each preview deployment provides reviewers with a true production-like environment with real data.
 
