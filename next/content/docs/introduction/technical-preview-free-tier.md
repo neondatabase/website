@@ -11,8 +11,11 @@ The Technical Preview Free Tier has the following limits:
 
 - 1 Neon project
 - 10 branches, with a limit of 3GB of data per branch
-- 3 compute endpoints, each with up to 1 vCPU and 4GB of RAM (with 512MB of RAM allocated to PostgreSQL shared buffers)
+- A compute endpoint for each branch, each with up to 1 vCPU and 4GB of RAM (with 512MB of RAM allocated to PostgreSQL shared buffers)
+- 100 compute hours per month (total)
 - A point-in-time restore window of 7 days of _reasonable usage_
+
+You are always able to connect the primary compute endpoint of your Neon project, regardless of the compute hour limit.
 
 <Admonition type="note">
 Neon intends to offer a Free Tier beyond the Technical Preview period. The limits associated with that tier will be defined in the coming months. Technical Preview Free Tier limits are subject to change over the course of the Technical Preview.
