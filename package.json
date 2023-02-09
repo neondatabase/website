@@ -13,7 +13,7 @@
     "start": "next start",
     "format": "prettier --write .",
     "lint": "npm run lint:js && npm run lint:md",
-    "lint:fix": "npm run lint:js:fix && npn run lint:md:fix",
+    "lint:fix": "npm run lint:js:fix && npm run lint:md:fix",
     "lint:js": "eslint --ext .js,.jsx --ignore-path .gitignore .",
     "lint:js:fix": "eslint --fix --ext .js,.jsx --ignore-path .gitignore .",
     "lint:md": "markdownlint --ignore-path .gitignore .",
