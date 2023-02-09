@@ -1,4 +1,4 @@
-import { StaticImage } from 'gatsby-plugin-image';
+import Image from 'next/image';
 import React from 'react';
 
 import Button from 'components/shared/button';
@@ -7,8 +7,10 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
+import illustration from './images/illustration.png';
+
 const Hero = () => (
-  <section className="hero safe-paddings bg-black pt-[158px] text-white xl:pt-[136px] lg:pt-9 sm:pt-6">
+  <section className="hero safe-paddings overflow-hidden bg-black pt-[158px] text-white xl:pt-[136px] lg:pt-9 sm:pt-6">
     <Container
       className="flex w-full items-end justify-between space-x-14 border-b border-dashed border-gray-2 lg:flex-col lg:items-center lg:space-y-14 lg:space-x-0"
       size="sm"
@@ -41,16 +43,19 @@ const Hero = () => (
           </Link>
         </div>
       </div>
-      <StaticImage
-        className="lg:max-w-[464px]"
-        src="./images/illustration.png"
-        quality={70}
-        width={752}
-        height={616}
-        alt=""
-        loading="eager"
-        aria-hidden
-      />
+      <div>
+        <Image
+          className="lg:max-w-[464px]"
+          src={illustration}
+          quality={70}
+          width={752}
+          height={616}
+          alt=""
+          sizes="100%"
+          priority
+          aria-hidden
+        />
+      </div>
     </Container>
   </section>
 );

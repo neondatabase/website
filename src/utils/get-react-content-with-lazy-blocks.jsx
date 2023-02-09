@@ -2,7 +2,9 @@
 import parse, { attributesToProps } from 'html-react-parser';
 import isBoolean from 'lodash.isboolean';
 import isEmpty from 'lodash.isempty';
-import React from 'react';
+import Image from 'next/image';
+
+import AnchorHeading from '../components/shared/anchor-heading';
 
 function isBooleanString(string) {
   return string === 'true' || string === 'false';
@@ -57,7 +59,22 @@ function transformProps(props) {
   return transformedProps;
 }
 
-const sharedComponents = {};
+const sharedComponents = {
+  h2: AnchorHeading('h2'),
+  img: (props) => {
+    const urlWithoutSize = props.src.replace(/-\d+x\d+/i, '');
+
+    return (
+      <Image
+        src={urlWithoutSize}
+        width={props.width || 800}
+        height={props.height || 500}
+        quality={100}
+        alt={props.alt || 'Post image'}
+      />
+    );
+  },
+};
 
 export default function getReactContentWithLazyBlocks(content, pageComponents, includeBaseTags) {
   // https://github.com/remarkablemark/html-react-parser#htmlparser2
@@ -80,7 +97,10 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
     },
     replace: (domNode) => {
       if (domNode.type === 'tag') {
-        if (domNode.attribs?.class?.includes('wp-block-lazyblock')) {
+        if (
+          domNode.attribs?.class?.includes('wp-block-lazyblock') ||
+          domNode.attribs?.class?.includes('wp-block-image')
+        ) {
           const element =
             domNode.children[0].type === 'tag' ? domNode.children[0] : domNode.children[1];
 

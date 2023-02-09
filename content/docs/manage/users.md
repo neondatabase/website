@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-In Neon, users are PostgreSQL users. Each Neon project is created with a default user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This user owns the default database (`neondb`) that is created in a project's root branch. Each project also has a `web_access` PostgreSQL user, which is a system-managed user used by the Neon [SQL Editor](../../get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](../../connect/passwordless-connect). You cannot delete or modify this user.
+In Neon, users are PostgreSQL users. Each Neon project is created with a default user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This user owns the default database (`neondb`) that is created in a project's root branch. Each project also has a `web_access` PostgreSQL user, which is a system-managed user used by the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect). You cannot delete or modify this user.
 
 Additional users can be created in a project's root branch or child branches. There is no limit to the number of users you can create.
 
@@ -64,7 +64,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/api-keys/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a role with the API
 

@@ -6,7 +6,7 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import SubscriptionForm from 'components/shared/subscription-form';
 import { HUBSPOT_DEVELOPER_DAYS_1_FORM_ID } from 'constants/forms';
-import StraightLineSvg from 'images/developer-days/straight-line.inline.svg';
+import StraightLineSvg from 'images/pages/developer-days/straight-line.inline.svg';
 
 import LineSvg1 from './images/line-1.inline.svg';
 import LineSvg2 from './images/line-2.inline.svg';

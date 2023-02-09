@@ -4,7 +4,7 @@ export default {
   careers: '/careers/',
   blog: '/blog/',
   signup: 'https://console.neon.tech/sign_in',
-  security: '/docs/security/',
+  security: '/docs/security/security/',
   releaseNotes: '/docs/release-notes/',
   discord: 'https://discord.gg/YKY4CBXZT2',
   discussions: 'https://github.com/neondatabase/neon/discussions',

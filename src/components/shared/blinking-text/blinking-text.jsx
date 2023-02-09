@@ -2,7 +2,12 @@ import shuffle from 'lodash.shuffle';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 
-const BlinkingText = ({ text, parentElement, shouldAnimationStart, children }) => {
+const BlinkingText = ({
+  text = '',
+  parentElement = null,
+  shouldAnimationStart = false,
+  children = null,
+}) => {
   useEffect(() => {
     if (parentElement && shouldAnimationStart) {
       const letters = parentElement.querySelectorAll('.animate-text-blink');
@@ -20,21 +25,13 @@ const BlinkingText = ({ text, parentElement, shouldAnimationStart, children }) =
     }
   }, [parentElement, shouldAnimationStart]);
 
-  return (
-    <>
-      {text
-        ? text.split('').map((letter, index) => (
-            <span
-              className="animate-text-blink"
-              style={{ animationPlayState: 'paused' }}
-              key={index}
-            >
-              {letter}
-            </span>
-          ))
-        : children}
-    </>
-  );
+  return text
+    ? text.split('').map((letter, index) => (
+        <span className="animate-text-blink" style={{ animationPlayState: 'paused' }} key={index}>
+          {letter}
+        </span>
+      ))
+    : children;
 };
 
 BlinkingText.propTypes = {
@@ -42,13 +39,6 @@ BlinkingText.propTypes = {
   parentElement: PropTypes.object,
   shouldAnimationStart: PropTypes.bool,
   children: PropTypes.node,
-};
-
-BlinkingText.defaultProps = {
-  text: '',
-  parentElement: null,
-  shouldAnimationStart: false,
-  children: null,
 };
 
 export default BlinkingText;

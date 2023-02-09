@@ -1,6 +1,8 @@
+'use client';
+
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
-import { StaticImage } from 'gatsby-plugin-image';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { useCookie, useLocation } from 'react-use';
 
@@ -15,6 +17,7 @@ import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/fo
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import CheckIcon from './images/check.inline.svg';
+import illustration from './images/illustration.png';
 
 const appearAndExitAnimationVariants = {
   initial: { opacity: 0 },
@@ -94,7 +97,7 @@ const Hero = () => {
       <div className="relative min-w-[768px] bg-black p-8 text-white 2xl:min-w-0 lg:order-last lg:max-w-none lg:py-7 md:px-4">
         <div className="m-auto max-w-[520px]">
           <Link className="inline-block align-top lg:hidden" to="/">
-            <img src={logoWhite} alt="Neon" />
+            <img src={logoWhite} alt="Neon" width={128} height={36} />
           </Link>
           <h2 className="mt-28 text-[28px]  font-bold 2xl:mt-12 lg:mt-0 lg:max-w-[450px] md:text-[26px]">
             Neon Technical Preview
@@ -111,9 +114,9 @@ const Hero = () => {
             )}
           </ul>
         </div>
-        <StaticImage
+        <Image
           className="!absolute bottom-0 right-0 lg:!hidden"
-          src="./images/illustration.png"
+          src={illustration}
           alt=""
           aria-hidden
         />

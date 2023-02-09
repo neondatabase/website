@@ -9,7 +9,7 @@ import MENUS from 'constants/menus.js';
 
 import ThemeSelect from './theme-select';
 
-const Footer = ({ isDocPage, withTopBorder, theme }) => {
+const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) => {
   const isDarkTheme = theme === 'black';
   return (
     <footer
@@ -70,12 +70,6 @@ Footer.propTypes = {
   isDocPage: PropTypes.bool,
   withTopBorder: PropTypes.bool,
   theme: PropTypes.oneOf(['white', 'black']),
-};
-
-Footer.defaultProps = {
-  isDocPage: false,
-  withTopBorder: false,
-  theme: 'white',
 };
 
 export default Footer;

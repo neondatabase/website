@@ -1,5 +1,4 @@
-import { StaticImage } from 'gatsby-plugin-image';
-import React from 'react';
+import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
@@ -8,6 +7,13 @@ import LINKS from 'constants/links';
 import DiscourseIcon from 'icons/discourse.inline.svg';
 import GithubIcon from 'icons/github.inline.svg';
 import TwitterIcon from 'icons/twitter.inline.svg';
+
+import erikBernhardsson from './images/erik.jpg';
+import guillermoRauch from './images/guillermo-rauch.jpg';
+import gunnarMorling from './images/gunnar-morling.jpg';
+import johanEliasson from './images/johan-eliasson.jpg';
+import marieBraswell from './images/marie-braswell.jpg';
+import tobiasPetry from './images/tobias-petry.jpg';
 
 const HEADER = 'Join the community';
 
@@ -28,16 +34,7 @@ const links = [
 
 const items = [
   {
-    photo: (
-      <StaticImage
-        className="rounded-full"
-        imgClassName="rounded-full"
-        src="./images/gunnar-morling.jpg"
-        alt="Gunnar Morling"
-        width={64}
-        height={64}
-      />
-    ),
+    photo: gunnarMorling,
     name: 'Gunnar Morling',
     twitterAccount: 'gunnarmorling',
     twitterUrl:
@@ -51,16 +48,7 @@ const items = [
     ),
   },
   {
-    photo: (
-      <StaticImage
-        className="rounded-full"
-        imgClassName="rounded-full"
-        src="./images/guillermo-rauch.jpg"
-        alt="Guillermo Rauch"
-        width={64}
-        height={64}
-      />
-    ),
+    photo: guillermoRauch,
     name: 'Guillermo Rauch',
     twitterAccount: 'rauchg',
     twitterUrl:
@@ -73,16 +61,7 @@ const items = [
     ),
   },
   {
-    photo: (
-      <StaticImage
-        className="rounded-full"
-        imgClassName="rounded-full"
-        src="./images/marie-braswell.jpg"
-        alt="'Leigh Marie' Braswell"
-        width={64}
-        height={64}
-      />
-    ),
+    photo: marieBraswell,
     name: 'Leigh Marie Braswell',
     twitterAccount: 'LM_Braswell',
     twitterUrl:
@@ -96,16 +75,7 @@ const items = [
     ),
   },
   {
-    photo: (
-      <StaticImage
-        className="rounded-full"
-        imgClassName="rounded-full"
-        src="./images/erik.jpg"
-        alt="bernhardsson"
-        width={64}
-        height={64}
-      />
-    ),
+    photo: erikBernhardsson,
     name: 'Erik Bernhardsson',
     twitterAccount: 'bernhardsson',
     twitterUrl:
@@ -118,16 +88,7 @@ const items = [
     ),
   },
   {
-    photo: (
-      <StaticImage
-        className="rounded-full"
-        imgClassName="rounded-full"
-        src="./images/tobias-petry.jpg"
-        alt="Tobias_Petry.sql"
-        width={64}
-        height={64}
-      />
-    ),
+    photo: tobiasPetry,
     name: 'Tobias Petry',
     twitterAccount: 'tobias_petry',
     twitterUrl:
@@ -141,16 +102,7 @@ const items = [
     ),
   },
   {
-    photo: (
-      <StaticImage
-        className="rounded-full"
-        imgClassName="rounded-full"
-        src="./images/johan-eliasson.jpg"
-        alt="Johan Eliasson"
-        width={64}
-        height={64}
-      />
-    ),
+    photo: johanEliasson,
     name: 'Johan Eliasson',
     twitterAccount: 'elitasson',
     twitterUrl:
@@ -203,7 +155,9 @@ const Community = () => (
             key={index}
           >
             <div className="flex border-b border-b-gray-6 pb-6 xl:pb-4">
-              <div className="w-16 shrink-0">{photo}</div>
+              <div className="w-16 shrink-0">
+                <Image className="rounded-full" src={photo} alt={name} width={64} height={64} />
+              </div>
               <div className="ml-5 flex w-full flex-col justify-evenly">
                 <h4 className="font-semibold leading-none">{name}</h4>
                 <div className="flex justify-between">

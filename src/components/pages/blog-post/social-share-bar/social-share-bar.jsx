@@ -1,7 +1,8 @@
+'use client';
+
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { LinkedinShareButton, TwitterShareButton, FacebookShareButton } from 'react-share';
 
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
@@ -27,7 +28,7 @@ const links = [
   },
 ];
 
-const SocialShareBar = ({ className, slug, title }) => {
+const SocialShareBar = ({ className = null, slug, title }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(5000);
   return (
     <div className={clsx('fixed bottom-0 z-10 w-full max-w-[100vw] bg-white', className)}>
@@ -76,10 +77,6 @@ SocialShareBar.propTypes = {
   className: PropTypes.string,
   slug: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-};
-
-SocialShareBar.defaultProps = {
-  className: null,
 };
 
 export default SocialShareBar;

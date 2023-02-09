@@ -5,7 +5,11 @@ const useAlgoliaSearch = () => {
   const [query, setQuery] = useState();
   const [hasFocus, setFocus] = useState(false);
   const searchClient = useMemo(
-    () => algoliasearch(process.env.GATSBY_ALGOLIA_APP_ID, process.env.GATSBY_ALGOLIA_SEARCH_KEY),
+    () =>
+      algoliasearch(
+        process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+        process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY
+      ),
     []
   );
 

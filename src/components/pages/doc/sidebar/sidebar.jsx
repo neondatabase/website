@@ -5,7 +5,7 @@ import Search from 'components/shared/search';
 
 import Item from './item';
 
-const Sidebar = ({ className, sidebar, currentSlug }) => (
+const Sidebar = ({ className = null, sidebar, currentSlug }) => (
   <aside className={className}>
     <Search className="z-30" />
     <nav className="relative z-20 mt-5">
@@ -45,10 +45,6 @@ Sidebar.propTypes = {
     })
   ).isRequired,
   currentSlug: PropTypes.string.isRequired,
-};
-
-Sidebar.defaultProps = {
-  className: null,
 };
 
 export default Sidebar;

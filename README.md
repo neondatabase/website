@@ -1,20 +1,16 @@
-# Neon Gatsby
+# Neon Next.js
 
 ## Table of Contents
 
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-  - [Run the website](#run-the-website)
-  - [Build the website](#build-the-website)
-  - [Run the built website](#run-the-built-website)
-  - [Clean Gatsby cache](#clean-gatsby-cache)
-  - [Checks broken links](#checks-broken-links)
+  - [Learn more](#learn-more)
+  - [Build the website](#deploy-on-vercel)
 - [Project Structure](#project-structure)
 - [Code Style](#code-style)
   - [ESLint](#eslint)
   - [Prettier](#prettier)
   - [VS Code](#vs-code)
-- [Docs](#docs)
 
 ## Getting Started
 
@@ -41,8 +37,12 @@ cp .env.example .env
 ### Run the website
 
 ```bash
-npm run start
+npm run dev
 ```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `src/app/page.jsx`. The page auto-updates as you edit the file.
 
 ### Build the website
 
@@ -53,13 +53,7 @@ npm run build
 ### Run the built website
 
 ```bash
-npm run serve
-```
-
-### Clean Gatsby cache
-
-```bash
-npm run clean
+npm run start
 ```
 
 ### Checks broken links
@@ -72,27 +66,41 @@ _The command may take time, be patient. You can also specify which part of the w
 
 > N.B. The automatic check is done every Monday at midnight by GitHub CI. You can find the reports on the "Actions" tab
 
+### Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+### Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
 ## Project Structure
 
 ```text
-├── docs — Documentation sources in `mdbook` format, see [Documentation](#docs) section
+├── content — Documentation sources in `mdbook` format, see [Documentation](#docs) section
+├── public
 ├── src
+│   ├── app
 │   ├── components
 │   │  ├── pages — React components that are being used specifically on a certain page
 │   │  └── shared — React components that are being used across the whole website
 │   ├── hooks
+│   ├── icons
 │   ├── images
-│   ├── pages
+│   ├── lib
+│   ├── scripts
 │   ├── styles
-│   ├── templates
 │   ├── utils
-│   └── html.jsx — HTML template for all generated pages. Read more about it here — gatsbyjs.org/docs/custom-html
-├── static
-│   └── fonts
-├── gatsby-browser.js — Usage of the Gatsby browser APIs. Read more about it [here](gatsbyjs.org/docs/browser-apis)
-├── gatsby-config.js — Main configuration file for a Gatsby site. Read more about it [here](gatsbyjs.org/docs/gatsby-config)
-├── gatsby-node.js — Usage of the Gatsby Node APIs. [Read more about it here](gatsbyjs.org/docs/node-apis)
-└── gatsby-ssr.js — Usage of the Gatsby server-side rendering APIs. [Read more about it here](gatsbyjs.org/docs/ssr-apis)
+├── next.config.js — Main configuration file for a Next.js site. Read more about it [here](https://nextjs.org/docs/api-reference/next.config.js/introduction)
+├── postcss.config.js — Main configuration file of PostCSS. [Read more about it here](https://tailwindcss.com/docs/configuration#generating-a-post-css-configuration-file)
+└── tailwind.config.js — Main configuration file for Tailwind CSS [Read more about it here](https://tailwindcss.com/docs/configuration)
 ```
 
 ## Component Folder Structure
