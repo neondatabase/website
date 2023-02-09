@@ -1,7 +1,9 @@
+'use client';
+
 import clsx from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useCookie, useLocation } from 'react-use';
 
 import Button from 'components/shared/button';
@@ -37,11 +39,11 @@ const sizeClassNames = {
   },
 };
 const SubscriptionForm = ({
-  className,
+  className = null,
   formId,
-  successText,
-  submitButtonText,
-  size,
+  successText = 'Thank you for subscribing!',
+  submitButtonText = 'Subscribe',
+  size = 'md',
   localStorageKey,
 }) => {
   const [email, setEmail] = useState('');
@@ -245,13 +247,6 @@ SubscriptionForm.propTypes = {
   submitButtonText: PropTypes.string,
   size: PropTypes.oneOf(['sm', 'md']),
   localStorageKey: PropTypes.string.isRequired,
-};
-
-SubscriptionForm.defaultProps = {
-  className: null,
-  successText: 'Thank you for subscribing!',
-  submitButtonText: 'Subscribe',
-  size: 'md',
 };
 
 export default SubscriptionForm;

@@ -1,7 +1,8 @@
+'use client';
+
 import clsx from 'clsx';
-import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef } from 'react';
 import aa from 'search-insights';
 
 import Footer from 'components/shared/footer';
@@ -9,20 +10,20 @@ import Header from 'components/shared/header';
 import MobileMenu from 'components/shared/mobile-menu';
 import Topbar from 'components/shared/topbar';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
-import { ThemeContext, useDarkModeInit } from 'hooks/use-dark-mode';
 
 import SearchModal from '../header/search-modal';
 
 // Initialization of the search-insights library
 aa('init', {
-  appId: process.env.GATSBY_ALGOLIA_APP_ID,
-  apiKey: process.env.GATSBY_ALGOLIA_SEARCH_KEY,
+  appId: process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+  apiKey: process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY,
   useCookie: true,
 });
 
 let userToken = '';
 aa('getUserToken', null, (err, algoliaUserToken) => {
   if (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
     return;
   }
@@ -34,18 +35,18 @@ aa('setUserToken', userToken);
 
 const Layout = ({
   headerTheme,
-  footerTheme,
-  withOverflowHidden,
-  isSignIn,
+  footerTheme = 'white',
+  withOverflowHidden = false,
+  isSignIn = false,
   children,
-  isHeaderSticky,
-  headerWithBottomBorder,
-  footerWithTopBorder,
-  isDocPage,
+  isHeaderSticky = false,
+  headerWithBottomBorder = false,
+  footerWithTopBorder = false,
+  isDocPage = false,
 }) => {
   const headerRef = useRef(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useDarkModeInit();
+
   const [isMobileSearchModalOpen, setIsMobileSearchModalOpen] = useState(false);
   useBodyLockScroll(isMobileSearchModalOpen);
 
@@ -64,10 +65,8 @@ const Layout = ({
     setIsMobileMenuOpen((isMobileMenuOpen) => !isMobileMenuOpen);
   };
 
-  const themeContextValue = useMemo(() => [isDarkMode, setIsDarkMode], [isDarkMode, setIsDarkMode]);
-
   return (
-    <ThemeContext.Provider value={themeContextValue}>
+    <>
       <Topbar />
       {/* 44px is the height of the topbar */}
       <div className="relative flex min-h-[calc(100vh-44px)] flex-col">
@@ -98,7 +97,7 @@ const Layout = ({
         />
         <SearchModal isOpen={isMobileSearchModalOpen} closeModal={closeMobileSearchModal} />
       </div>
-    </ThemeContext.Provider>
+    </>
   );
 };
 
@@ -113,55 +112,5 @@ Layout.propTypes = {
   footerWithTopBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
 };
-
-Layout.defaultProps = {
-  footerTheme: 'white',
-  withOverflowHidden: false,
-  isSignIn: false,
-  isHeaderSticky: false,
-  headerWithBottomBorder: false,
-  footerWithTopBorder: false,
-  isDocPage: false,
-};
-
-export const query = graphql`
-  fragment wpPageSeo on WpPage {
-    seo {
-      title
-      metaDesc
-      metaKeywords
-      metaRobotsNoindex
-      opengraphTitle
-      opengraphDescription
-      opengraphUrl
-      twitterImage {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(layout: FIXED, width: 1200, height: 630, formats: JPG)
-          }
-        }
-      }
-    }
-  }
-
-  fragment wpPostSeo on WpPost {
-    seo {
-      title
-      metaDesc
-      metaKeywords
-      metaRobotsNoindex
-      opengraphTitle
-      opengraphDescription
-      opengraphUrl
-      twitterImage {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(layout: FIXED, width: 1200, height: 630, formats: JPG)
-          }
-        }
-      }
-    }
-  }
-`;
 
 export default Layout;

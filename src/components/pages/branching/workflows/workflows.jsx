@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
 import { InView, useInView } from 'react-intersection-observer';
 import { Alignment, Fit, Layout, useRive } from 'rive-react';

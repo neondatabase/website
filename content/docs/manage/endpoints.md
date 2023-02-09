@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-An endpoint is a Neon compute instance. A single read-write endpoint is created for your project's [root branch](../../reference/glossary/#root-branch) (`main`) by default.
+An endpoint is a Neon compute instance. A single read-write endpoint is created for your project's [root branch](/docs/reference/glossary#root-branch) (`main`) by default.
 
 To connect to a database that resides in a branch, you must connect via an endpoint that is associated with the branch. The following diagram shows the project's root branch (`main`) and a child branch, both of which have an associated endpoint. Applications and clients connect to a branch via an endpoint.
 
@@ -21,7 +21,7 @@ Project
 
 Endpoints can be  managed independently of branches. For example, you can create and delete endpoints as necessary, assigning them to the branch you want to connect to. However, creating an endpoint is only permitted if you have a branch without an endpoint, as an endpoint must be assigned to a branch. Also, a branch can have only one endpoint. Attempting to create an endpoint for a branch that already has an endpoint results in an error.
 
-Tier limits define the number of endpoints that you can create in a Neon project and the compute resources (vCPUs and RAM) available to an endpoint. The Neon [Free Tier](../../introduction/technical-preview-free-tier) allows up to 3 endpoints.
+Tier limits define the number of endpoints that you can create in a Neon project and the compute resources (vCPUs and RAM) available to an endpoint. The Neon [Free Tier](/docs/introduction/technical-preview-free-tier) allows up to 3 endpoints.
 
 ## Create an endpoint
 
@@ -30,7 +30,7 @@ To create an endpoint:
 1. In the Neon Console, select **Endpoints**.
 1. Select **New endpoint**.
 1. On the **Create endpoint** dialog, select a branch to assign the endpoint to. The branch you select must not have an associated endpoint.
-1. Choose wether to enable connection pooling. Enabling connection pooling increases the number of connections that the endpoint can support. For more information, see [Connection pooling](../../connect/connection-pooling).
+1. Choose wether to enable connection pooling. Enabling connection pooling increases the number of connections that the endpoint can support. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 1. Click **Create endpoint**.
 
 ## View endpoints
@@ -79,11 +79,11 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/api-keys/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create an endpoint with the API
 
-The following Neon API method creates an endpoint. The [Neon Free Tier](../../introduction/technical-preview-free-tier/) permits three endpoints per account. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Endpoint/createProjectEndpoint).
+The following Neon API method creates an endpoint. The [Neon Free Tier](/docs/introduction/technical-preview-free-tier/) permits three endpoints per account. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Endpoint/createProjectEndpoint).
 
 ```text
 POST /endpoints 
@@ -106,7 +106,7 @@ curl -X 'POST' \
 ```
 
 <Admonition type="note">
-You can enable connection pooling for an endpoint by adding the `"pooler_enabled": "true"` attribute to the request body. For more information about connection pooling support in Neon, see [Connection pooling](../../connect/connection-pooling).
+You can enable connection pooling for an endpoint by adding the `"pooler_enabled": "true"` attribute to the request body. For more information about connection pooling support in Neon, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
 Response:

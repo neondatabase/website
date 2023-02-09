@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import { motion, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
@@ -32,7 +34,7 @@ const variants = {
   },
 };
 
-const MobileNav = ({ className, sidebar, currentSlug }) => {
+const MobileNav = ({ className = null, sidebar, currentSlug }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [containerHeight, setContainerHeight] = useState(null);
   const { height } = useWindowSize();
@@ -124,10 +126,6 @@ MobileNav.propTypes = {
     })
   ).isRequired,
   currentSlug: PropTypes.string.isRequired,
-};
-
-MobileNav.defaultProps = {
-  className: null,
 };
 
 export default MobileNav;

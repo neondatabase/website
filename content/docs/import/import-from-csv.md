@@ -16,7 +16,7 @@ The following example uses the default `neondb` database, a table named `custome
    ```
 
    <Admonition type="note">
-   For more information about connecting to Neon with `psql`, see [Connect with psql](../../connect/query-with-psql-editor).
+   For more information about connecting to Neon with `psql`, see [Connect with psql](/docs/connect/query-with-psql-editor).
    </Admonition>
 
 2. Create the `customer` table.
@@ -32,7 +32,7 @@ The following example uses the default `neondb` database, a table named `custome
    ```
 
    <Admonition type="tip">
-   You can also create tables using the **SQL Editor** in the Neon Console. See [Query with Neon's SQL Editor](../../query-with-neon-sql-editor).
+   You can also create tables using the **SQL Editor** in the Neon Console. See [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
    </Admonition>
 
 3. Prepare a `customer.csv` file with the following data:

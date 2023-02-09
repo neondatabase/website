@@ -41,7 +41,7 @@ const variants = {
   },
 };
 
-const MobileMenu = ({ isOpen, headerRef, onOutsideClick }) => {
+const MobileMenu = ({ isOpen = false, headerRef, onOutsideClick }) => {
   const controls = useAnimation();
   const ref = useRef(null);
 
@@ -116,10 +116,6 @@ MobileMenu.propTypes = {
     }),
   ]).isRequired,
   onOutsideClick: PropTypes.func.isRequired,
-};
-
-MobileMenu.defaultProps = {
-  isOpen: false,
 };
 
 export default MobileMenu;

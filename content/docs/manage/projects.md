@@ -10,11 +10,11 @@ A project is the top-level object in the Neon object hierarchy. Tier limits defi
 
 A Neon project is created with the following resources by default:
 
-- A root branch called `main`. You can create child branches from the root branch or from a previously created branch. For more information, see [Branches](../branches).
-- A single read-write endpoint. An endpoint is the compute instance associated with a branch. For more information, see [Endpoints](../branches).
+- A root branch called `main`. You can create child branches from the root branch or from a previously created branch. For more information, see [Manage branches](/docs/manage/branches).
+- A single read-write endpoint. An endpoint is the compute instance associated with a branch. For more information, see [Manage endpoints](/docs/manage/endpoints).
 - A default database, called `neondb`, which resides in the project's root branch.
 - A default PostgreSQL user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
-- A `web_access` PostgreSQL user, which is used by the Neon [SQL Editor](../../get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](../../connect/passwordless-connect).
+- A `web_access` PostgreSQL user, which is used by the Neon [SQL Editor](docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect).
 
 ## Create a project
 
@@ -27,7 +27,7 @@ To create a Neon project:
 Upon creating a project, you are presented with a dialog that provides your connection details for the project, including your password. The password is required to connect to databases in the project from a client or application. Store your password in a safe location.
 
 <Admonition type="important">
-After closing the connection information dialog, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Users](../users).
+After closing the connection information dialog, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Users](/docs/manage/users).
 </Admonition>
 
 ## Edit a project
@@ -65,11 +65,11 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../../manage/api-keys/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys/#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a project with the API
 
-The following Neon API method creates a project. The [Neon Free Tier](../../introduction/technical-preview-free-tier/) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/createProject).
+The following Neon API method creates a project. The [Neon Free Tier](/docs/introduction/technical-preview-free-tier/) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/createProject).
 
 ```text
 POST /projects 

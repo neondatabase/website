@@ -1,15 +1,18 @@
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+'use client';
+
+import Image from 'next/image';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 
 import Link from 'components/shared/link';
 
-const Author = ({ author, isBlogPost }) => (
+const Author = ({ author, isBlogPost = false }) => (
   <div className="flex items-center">
-    <GatsbyImage
+    <Image
       className="w-10 shrink-0 rounded-full"
-      imgClassName="rounded-full"
-      image={getImage(author.postAuthor?.image?.localFile)}
+      src={author.postAuthor?.image?.mediaItemUrl}
+      width={40}
+      height={40}
       alt={author.title}
     />
     <span className="ml-3 flex flex-col text-lg leading-none transition-colors duration-200 group-hover:text-primary-1 group-active:text-primary-1">
@@ -26,17 +29,13 @@ Author.propTypes = {
     postAuthor: PropTypes.shape({
       role: PropTypes.string,
       image: PropTypes.shape({
-        localFile: PropTypes.shape({}).isRequired,
+        mediaItemUrl: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
   }).isRequired,
 };
 
-Author.defaultProps = {
-  isBlogPost: false,
-};
-
-const BlogPostAuthors = ({ authors, isBlogPost }) =>
+const BlogPostAuthors = ({ authors, isBlogPost = false }) =>
   authors?.map(({ author }, index) => (
     <Fragment key={index}>
       {author.postAuthor.url ? (
@@ -60,18 +59,15 @@ BlogPostAuthors.propTypes = {
       author: PropTypes.shape({
         title: PropTypes.string.isRequired,
         postAuthor: PropTypes.shape({
+          url: PropTypes.string,
           role: PropTypes.string,
           image: PropTypes.shape({
-            localFile: PropTypes.shape({}).isRequired,
+            mediaItemUrl: PropTypes.string.isRequired,
           }).isRequired,
         }).isRequired,
       }).isRequired,
     })
   ).isRequired,
-};
-
-BlogPostAuthors.defaultProps = {
-  isBlogPost: false,
 };
 
 export default BlogPostAuthors;

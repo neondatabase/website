@@ -1,13 +1,13 @@
 import clsx from 'clsx';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import logoBlack from 'images/logo-black.svg';
 import logoWhite from 'images/logo-white.svg';
 
-const Logo = ({ className, isThemeBlack }) =>
+const Logo = ({ className = null, isThemeBlack }) =>
   isThemeBlack ? (
-    <img
+    <Image
       className={clsx('h-9 2xl:h-8', className)}
       src={logoWhite}
       alt=""
@@ -17,7 +17,7 @@ const Logo = ({ className, isThemeBlack }) =>
     />
   ) : (
     <>
-      <img
+      <Image
         className={clsx('h-9 dark:hidden 2xl:h-8', className)}
         src={logoBlack}
         alt=""
@@ -25,7 +25,7 @@ const Logo = ({ className, isThemeBlack }) =>
         height={36}
         aria-hidden
       />
-      <img
+      <Image
         className={clsx('hidden h-9 dark:block 2xl:h-8', className)}
         src={logoWhite}
         alt=""
@@ -39,10 +39,6 @@ const Logo = ({ className, isThemeBlack }) =>
 Logo.propTypes = {
   className: PropTypes.string,
   isThemeBlack: PropTypes.bool.isRequired,
-};
-
-Logo.defaultProps = {
-  className: null,
 };
 
 export default Logo;

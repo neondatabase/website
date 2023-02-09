@@ -3,8 +3,6 @@ import React from 'react';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 
-import screenImage from './images/screen.svg';
-
 const items = [
   'Create a branch from a past point in time to reproduce an issue.',
   'Instantly restore a production database from a past point in time.',
@@ -29,7 +27,7 @@ const Recovery = () => (
         </ol>
         <img
           className="col-span-6 lg:col-span-full lg:mt-10 lg:w-full"
-          src={screenImage}
+          src="/images/pages/branching/screen.svg"
           width={710}
           height={420}
           alt=""

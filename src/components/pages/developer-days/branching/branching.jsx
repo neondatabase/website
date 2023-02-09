@@ -1,4 +1,6 @@
-import { StaticImage } from 'gatsby-plugin-image';
+'use client';
+
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -6,11 +8,12 @@ import CanvasVideo from 'components/shared/canvas-video';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
-import StraightLineSvg from 'images/developer-days/straight-line.inline.svg';
+import StraightLineSvg from 'images/pages/developer-days/straight-line.inline.svg';
 
 import ItemsList from '../items-list';
 import VideoModal from '../video-modal';
 
+import backgroundGradient from './images/bg-gradient-branching.jpg';
 import LineSvg from './images/line.inline.svg';
 import vercelLineSvg from './images/vercel-line.svg';
 
@@ -63,10 +66,9 @@ const Branching = () => {
           <p className="mt-3 text-center text-xl xl:mt-2.5 xl:text-base md:mt-2">{description}</p>
           <div className="relative mt-14 xl:mt-12 xl:w-full lg:mt-9 md:mt-6">
             <div className="absolute -inset-x-16 top-16 md:w-[150%]">
-              <StaticImage
+              <Image
                 className="rounded-[200px] opacity-30 blur-[70px] md:h-[132px]"
-                imgClassName="rounded-[200px]"
-                src="./images/bg-gradient-branching.jpg"
+                src={backgroundGradient}
                 width={1068}
                 height={520}
                 alt=""

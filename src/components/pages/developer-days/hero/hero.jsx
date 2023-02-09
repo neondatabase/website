@@ -1,6 +1,7 @@
-import { StaticImage } from 'gatsby-plugin-image';
+'use client';
+
+import Image from 'next/image';
 import React, { useState } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 import CanvasVideo from 'components/shared/canvas-video';
 import Container from 'components/shared/container';
@@ -10,6 +11,7 @@ import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import ItemsList from '../items-list';
 import VideoModal from '../video-modal';
 
+import backgroundGradient from './images/bg-gradient-hero.jpg';
 import bgShapeSvg from './images/bg-shape.svg';
 import StickerIcon from './images/sticker.inline.svg';
 
@@ -36,7 +38,6 @@ const items = [
 
 const Hero = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [containerRef, isContainerInView] = useInView();
   const [backgroundColor, setBackgroundColor] = useState('#f3f281');
   useBodyLockScroll(isOpenModal);
   return (
@@ -49,7 +50,7 @@ const Hero = () => {
         alt=""
         aria-hidden
       />
-      <Container className="flex w-full flex-col items-center" size="md" ref={containerRef}>
+      <Container className="flex w-full flex-col items-center" size="md">
         <time className="label-secondary-2 mx-auto" dateTime="2022-12-06">
           6th of December, 2022
         </time>
@@ -60,10 +61,9 @@ const Hero = () => {
         <div className="relative mt-14 xl:mt-12 xl:w-full lg:mt-9 md:mt-6">
           <StickerIcon className="absolute top-[-198px] right-[-154px] h-[300px] w-[300px] xl:hidden" />
           <div className="absolute -inset-x-16 top-16 md:w-[150%]">
-            <StaticImage
+            <Image
               className="rounded-[200px] opacity-30 blur-[70px] md:h-[132px]"
-              imgClassName="rounded-[200px]"
-              src="./images/bg-gradient-hero.jpg"
+              src={backgroundGradient}
               width={1068}
               height={520}
               alt=""
@@ -99,7 +99,7 @@ const Hero = () => {
           />
         </div>
       </Container>
-      {isContainerInView && (
+      {isOpenModal && (
         <VideoModal
           isOpenModal={isOpenModal}
           setIsOpenModal={setIsOpenModal}

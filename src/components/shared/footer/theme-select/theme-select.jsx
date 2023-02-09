@@ -1,20 +1,15 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import useOnClickOutside from 'hooks/use-click-outside';
-import useDarkMode from 'hooks/use-dark-mode';
-import useLocalStorage from 'hooks/use-local-storage';
 
 import ChevronsIcon from '../images/chevrons.inline.svg';
 import ThemeIcon from '../images/switcher.inline.svg';
 
 const ANIMATION_DURATION = 0.2;
-const themes = ['system', 'light', 'dark'];
-
-const isSystemDarkMode =
-  typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 const dropdownVariants = {
   hidden: { opacity: 0, y: '0', height: 0, pointerEvents: 'none', visibility: 'hidden' },
@@ -40,7 +35,7 @@ const itemVariants = {
   },
 };
 
-const ActiveThemeIcon = ({ theme }) => {
+const ActiveThemeIcon = ({ theme = '' }) => {
   if (theme === 'system') {
     return <ThemeIcon />;
   }
@@ -59,14 +54,9 @@ ActiveThemeIcon.propTypes = {
   theme: PropTypes.string,
 };
 
-ActiveThemeIcon.defaultProps = {
-  theme: '',
-};
-
-const ThemeSelect = ({ className }) => {
-  const [, setDarkMode] = useDarkMode();
-  const [storageTheme, setStorageTheme] = useLocalStorage('theme');
-  const [theme, setTheme] = useState(null);
+const ThemeSelect = ({ className = null }) => {
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme, themes } = useTheme();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -76,34 +66,17 @@ const ThemeSelect = ({ className }) => {
 
   useOnClickOutside([dropdownRef], handleClickOutside);
 
-  useEffect(() => {
-    const initTheme = storageTheme || 'system';
-
-    setTheme(initTheme);
-  }, [storageTheme]);
-
   const handleSelect = (value) => {
-    const newTheme = value;
-    setTheme(newTheme);
-    setStorageTheme(newTheme);
+    setTheme(value);
     setShowDropdown(false);
-
-    if (newTheme === 'dark' || (newTheme === 'system' && isSystemDarkMode)) {
-      setDarkMode(true);
-      document.documentElement.classList.add('disable-transition');
-      setTimeout(() => document.documentElement.classList.remove('disable-transition'), 0);
-    } else {
-      setDarkMode(false);
-      document.documentElement.classList.add('disable-transition');
-      setTimeout(() => document.documentElement.classList.remove('disable-transition'), 0);
-    }
   };
 
   const handleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
 
-  if (!theme) return null;
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   return (
     <div className={clsx('relative h-8 w-36', className)}>
@@ -155,10 +128,6 @@ const ThemeSelect = ({ className }) => {
 
 ThemeSelect.propTypes = {
   className: PropTypes.string,
-};
-
-ThemeSelect.defaultProps = {
-  className: null,
 };
 
 export default ThemeSelect;

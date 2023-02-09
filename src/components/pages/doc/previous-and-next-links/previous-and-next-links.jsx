@@ -6,7 +6,7 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 
 import ArrowIcon from './images/arrow.inline.svg';
 
-const PreviousAndNextLinks = ({ previousLink, nextLink }) => (
+const PreviousAndNextLinks = ({ previousLink = null, nextLink = null }) => (
   <div className="mt-10 flex w-full space-x-10 sm:mt-7 sm:space-x-0">
     {previousLink && (
       <Link
@@ -50,11 +50,6 @@ PreviousAndNextLinks.propTypes = {
     slug: PropTypes.string.isRequired,
     path: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
-};
-
-PreviousAndNextLinks.defaultProps = {
-  previousLink: null,
-  nextLink: null,
 };
 
 export default PreviousAndNextLinks;

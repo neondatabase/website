@@ -1,16 +1,20 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-@import './fonts';
-@import './global';
-@import './text';
-@import './safe-paddings';
-@import './grid-gap';
-@import './print-grid';
-@import './remove-autocomplete-styles';
-@import './with-highlighted-text';
-@import './highlighted-code';
-@import './doc-content.css';
-@import './blog-content.css';
-@import './skeleton.css';
-@import '../components/shared/search/input/input.css';
+@layer base {
+  body {
+    @apply relative min-w-[320px] font-sans text-black antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  .label-secondary-2 {
+    @apply rounded-[40px] bg-secondary-2 py-2 px-4 text-xs font-bold uppercase leading-none text-black;
+  }
+}
+
+@layer utilities {
+  .with-link-primary {
+    a {
+      @apply border-b border-transparent text-primary-1 transition-[border-color] duration-200 hover:border-primary-1;
+    }
+  }
+}

@@ -6,9 +6,10 @@ import { Configure, InstantSearch } from 'react-instantsearch-dom';
 import Input from 'components/shared/search/input';
 import Results from 'components/shared/search/results';
 import useAlgoliaSearch from 'hooks/use-algolia-search';
-import algoliaQueries from 'utils/algolia-queries';
 
-const indices = [{ name: algoliaQueries[0].indexName, title: 'Docs', hitComp: 'postPageHit' }];
+const indices = [
+  { name: process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME, title: 'Docs', hitComp: 'postPageHit' },
+];
 
 const SearchModal = ({ isOpen, closeModal }) => {
   const { query, setQuery, setFocus, hasFocus, searchClient } = useAlgoliaSearch();

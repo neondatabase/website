@@ -1,4 +1,4 @@
-import { StaticImage } from 'gatsby-plugin-image';
+import Image from 'next/image';
 import React from 'react';
 
 import Button from 'components/shared/button';
@@ -6,8 +6,10 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import LINKS from 'constants/links';
 
+import illustration from './images/illustration.png';
+
 const CTA = () => (
-  <section className="cta safe-paddings bg-black pt-[200px] text-white 2xl:pt-36 xl:pt-32 lg:pt-28 md:pt-20">
+  <section className="cta safe-paddings overflow-x-hidden bg-black pt-[200px] text-white 2xl:pt-36 xl:pt-32 lg:pt-28 md:pt-20">
     <Container
       className="flex items-center justify-between space-x-10 lg:flex-col lg:justify-center lg:space-y-16 lg:space-x-0 md:space-y-10"
       size="sm"
@@ -28,12 +30,13 @@ const CTA = () => (
           Try branching now
         </Button>
       </div>
-      <StaticImage
+      <Image
         className="lg:max-w-[464px]"
-        src="./images/illustration.png"
+        src={illustration}
         width={752}
         height={567}
         alt=""
+        sizes="100%"
         loading="lazy"
         aria-hidden
       />

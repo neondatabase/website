@@ -7,10 +7,10 @@ import SearchIcon from 'icons/search.inline.svg';
 
 const Input = connectSearchBox(
   ({
-    refine,
-    currentRefinement,
+    refine = () => null,
+    currentRefinement = null,
     onFocus,
-    hasFocus,
+    hasFocus = false,
     isNotFoundPage,
     isMobileSearch,
     className,
@@ -53,12 +53,6 @@ Input.propTypes = {
   currentRefinement: PropTypes.string,
   onFocus: PropTypes.func.isRequired,
   hasFocus: PropTypes.bool,
-};
-
-Input.defaultProps = {
-  refine: () => null,
-  currentRefinement: null,
-  hasFocus: false,
 };
 
 export default Input;
