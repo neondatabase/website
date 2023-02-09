@@ -29,6 +29,14 @@ To enable connection pooling for an existing endpoint:
 
 You can also enable connection pooling when creating an endpoint. See [Create an endpoint](/docs/manage/endpoints#create-an-endpoint).
 
+## Pooled and non-pooled connection strings
+
+Neon supports a `-pooler` option, which you can add to the hostname in your Neon connection string to enable connection pooling with PGBouncer. For example, the following connection string uses the `-pooler` option to enable connection pooling:
+
+`postgres://casey@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb`
+
+The `-poole`r option forces the connection to use a separate connection pooler port when connecting to the database. This feature supports workflows that require both pooled and non-pooled connections to the same database. For example, Prisma Migrate requires a direct connection to the database, while serverless applications that use Prisma Client require a pooled connection.
+
 ## Connection pooling notes and limitations
 
 Neon uses PgBouncer in _transaction mode_, which does not support PostgreSQL features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
