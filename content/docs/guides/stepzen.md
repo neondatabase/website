@@ -20,7 +20,7 @@ Before generating a GraphQL API, you must set up a Neon database, which you can 
 
 You can find the connection string for your database in the **Connection Details** widget in the Neon Console.
 
-![Connection details widget](/docs/guides/stepzen_connection_details.png)
+![Connection details widget](/docs/guides/connection_details.png)
 
 Using the connection string, you can seed the database with the data from the `init.sql` file, which you can find [here](https://github.com/stepzen-dev/examples/blob/main/with-neon/init.sql).
 
@@ -29,7 +29,7 @@ Running the `init.sql` file creates the `address`, `customer`, `product`, and `o
 You can seed the database directly from the terminal by running the following `psql` command:
 
 ```bash
-psql postgres://sally:*************@ep-morning-field-723223.us-east-2.aws.neon.tech/neondb < init.sql
+psql postgres://sally:*************@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb < init.sql
 ```
 
 The command takes a Neon connection string as the first argument and a file as the second argument.
@@ -75,7 +75,7 @@ Specify your data source with the `stepzen import` CLI. Answer the setup questio
 stepzen import postgresql
 
 ? What would you like your endpoint to be called? api/with-neon
-? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-morning-field-723223.us-east-2.aws.neon.tech:5432`)
+? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-cold-poetry-404091.us-east-2.aws.neon.tech:5432`)
 ? What is your database name? YOUR_NEON_DATABASE (e.g., `neondb`)
 ? What is the username? YOUR_NEON_USERNAME (e.g., `sally`)
 ? What is the password? [hidden] YOUR_NEON_PASSWORD
