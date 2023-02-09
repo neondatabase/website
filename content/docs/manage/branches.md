@@ -45,7 +45,6 @@ To view the branches in a Neon project:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table to view details about the branch.
-
 ![Branch details](/docs/manage/branch_details.png)
 
 <Admonition type="tip">
