@@ -61,7 +61,7 @@ To add the integration:
     1. Select the Vercel project to add the integration to.
     1. Select the Neon project, database, and role that Vercel will use to connect. The Neon Free Tier supports a single project per user. If desired, you can also create a new database and role for the integration.
 
-        The database that you select becomes your production database. This database must reside on the root branch of your Neon project. The root branch is preselected.
+        The database that you select becomes your production database. This database must reside on the primary branch of your Neon project. The primary branch is preselected.
 
         You are given the option to create a branch for your Vercel development environment. When this option is selected (the default), the integration creates a branch named **vercel-dev** and sets Vercel environment variables for it.
 
@@ -80,7 +80,7 @@ To add the integration:
     1. Navigate to the [Neon Console](https://console.neon.tech/).
     1. Select the project you connected to.
     1. Select **Branches**.
-    You will see the root branch of your project, and if you created a development branch, you will also see a `vercel-dev` branch.
+    You will see the primary branch of your project, and if you created a development branch, you will also see a `vercel-dev` branch.
 1. To view the results of the integration in Vercel:
     1. Navigate to [Vercel](https://vercel.com/).
     1. Select the Vercel project you added the integration to.
