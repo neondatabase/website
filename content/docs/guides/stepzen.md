@@ -20,7 +20,7 @@ Before generating a GraphQL API, you must set up a Neon database, which you can 
 
 You can find the connection string for your database in the **Connection Details** widget in the Neon Console.
 
-![Connection details widget](/docs/guides/stepzen_connection_details.png)
+![Connection details widget](/docs/guides/connection_details.png)
 
 Using the connection string, you can seed the database with the data from the `init.sql` file, which you can find [here](https://github.com/stepzen-dev/examples/blob/main/with-neon/init.sql).
 
