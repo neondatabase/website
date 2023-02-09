@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
 ---
 
-Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
+Data resides in a branch. Each Neon project has a primary branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
 
 A child branch is a copy-on-write clone the data in the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
@@ -28,7 +28,7 @@ To create a branch:
 3. Click **New Branch** to open the branch creation dialog.
 ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch.
-5. Select a parent branch. You can branch from your Neon project's [root branch](/docs/reference/glossary/#root-branch) (`main`) or a previously created branch.
+5. Select a parent branch. You can branch from your Neon project's [primary branch](/docs/reference/glossary/#primary-branch) (`main`) or a previously created branch.
 6. Select one of the following branching options:
     - **Head**: Creates a branch with data up to the current point in time (the default).
     - **Time**: Creates a branch with data up to the specified date and time.
@@ -149,7 +149,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
 ```
 
 - The `project_id` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**, or you can find it by listing the projects for your Neon account using the Neon API.
-- The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's root branch (`main`) or a previously created branch.
+- The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's primary branch (`main`) or a previously created branch.
 
 The response includes information about the branch, the branch's compute endpoint, and the `create_branch` and `start_compute` operations that have been initiated.
 
@@ -235,7 +235,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
 
 The `project_id` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**, or you can find it by listing the projects for your Neon account using the Neon API.
 
-The response lists the project's root branch and any child branches. The name of the root branch is `main`.
+The response lists the project's primary branch and any child branches. The name of the primary branch is `main`.
 
 Response:
 

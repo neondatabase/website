@@ -18,7 +18,7 @@ A branch is isolated from its originating data, so you are free to play around w
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means you can create a branch at any time without impacting the performance of your production system.
 
-Each Neon project has a [root branch](/docs/reference/glossary#root-branch) called `main`. The first branch that you create is branched from the project's root branch (`main`). Subsequent branches can be branched from `main` or from a previously created branch.
+Each Neon project has a [primary branch](/docs/reference/glossary#primary-branch) called `main`. The first branch that you create is branched from the project's primary branch. Subsequent branches can be branched from the primary branch or from a previously created branch.
 
 ## Branch compute endpoints
 
@@ -26,7 +26,7 @@ When creating a new branch, you have the option to create a compute endpoint to 
 
 A compute endpoint allows you to connect to the branch from a client or application and is read-write.
 
-Your Neon project's [root branch](/docs/reference/glossary#root-branch) has a compute endpoint by default.
+Your Neon project's primary branch has a compute endpoint by default.
 
 To connect to a database in a branch from a client or application, you must connect to the branch's compute endpoint. For more information connecting to a branch, see [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
 

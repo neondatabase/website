@@ -2,13 +2,13 @@
 title: Connect from any application
 enableTableOfContents: true
 ---
-When connecting to Neon from an application or client, you will need to connect to a database in your Neon project. In Neon, a database belongs to a branch, which may the root branch of your project (`main`) or a child branch. The root branch in a Neon project has a default database named `neondb`.
+When connecting to Neon from an application or client, you will need to connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch. The primary branch in a Neon project is created with a default database named `neondb`.
 
 To connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through a compute endpoint that is  associated with the branch.
 
 ```text
 Project
-    |----root branch (main) ---- compute endpoint <--- application/client
+    |----primary branch (main) ---- compute endpoint <--- application/client
              |    |
              |    |---- database (neondb)
              |

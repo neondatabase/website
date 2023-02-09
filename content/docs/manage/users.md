@@ -4,9 +4,9 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-In Neon, users are PostgreSQL users. Each Neon project is created with a default user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This user owns the default database (`neondb`) that is created in a project's root branch. Each project also has a `web_access` PostgreSQL user, which is a system-managed user used by the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect). You cannot delete or modify this user.
+In Neon, users are PostgreSQL users. Each Neon project is created with a default user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This user owns the default database (`neondb`) that is created in a project's primary branch. Each project also has a `web_access` PostgreSQL user, which is a system-managed user used by the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect). You cannot delete or modify this user.
 
-Additional users can be created in a project's root branch or child branches. There is no limit to the number of users you can create.
+Additional users can be created in a project's primary branch or child branches. There is no limit to the number of users you can create.
 
 Users belong to a branch. If you create a child branch, users from the parent branch are duplicated in the child branch. For example, if user `sally` exists in the parent branch, user `sally` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the user was created in the parent branch after that point in time, that user is not duplicated the child branch.
 

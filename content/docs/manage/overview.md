@@ -12,7 +12,7 @@ Neon account
     | 
     |- project 
     |      |
-    |      |---- root branch (main) ---- compute endpoint a
+    |      |---- primary branch (main) ---- compute endpoint a
     |                |    |
     |                |    |---- users
     |                |    |---- databases           
@@ -47,7 +47,7 @@ A project is the top-level object in the Neon object hierarchy. It is a containe
 
 ## Branches
 
-Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data per branch. For more information, see [Manage branches](/docs/manage/branches).
+Data resides in a branch. Each Neon project has a primary branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data per branch. For more information, see [Manage branches](/docs/manage/branches).
 
 ## Compute endpoint
 
@@ -55,8 +55,8 @@ A compute endpoint is a compute resource associated with a branch. A read-write 
 
 ## Users
 
-In Neon, users are PostgreSQL users. A user is required to create and access a database. A user belongs to a branch. There is no limit on the number of users you can create. The root branch of a Neon project is created with a user named for the Neon account that you registered with. For example, if you registered with a Google account for "Casey Smith", Neon creates a user named "Casey" in the root branch. This user is the owner of the default `neondb` database in your project's root branch. The root branch is also created with a `web_access` user, which is used by the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect). For more information, see [Manage users](/docs/manage/users).
+In Neon, users are PostgreSQL users. A user is required to create and access a database. A user belongs to a branch. There is no limit on the number of users you can create. The primary branch of a Neon project is created with a user named for the Neon account that you registered with. For example, if you registered with a Google account for "Casey Smith", Neon creates a user named "Casey" in the primary branch. This user is the owner of the default `neondb` database in your project's primary branch. The primary branch is also created with a `web_access` user, which is used by the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect). For more information, see [Manage users](/docs/manage/users).
 
 ## Databases
 
-As with any standalone instance of PostgreSQL, a database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In Neon, a database belongs to a branch. The root branch of a Neon project is created with a default database named `neondb`. There is no limit on the number of databases you can create. For more information, see [Manage databases](/docs/manage/databases).
+As with any standalone instance of PostgreSQL, a database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In Neon, a database belongs to a branch. The primary branch of a Neon project is created with a default database named `neondb`. There is no limit on the number of databases you can create. For more information, see [Manage databases](/docs/manage/databases).
