@@ -22,13 +22,13 @@ You can gather most of these details from the **Connection Details** widget on t
 The connection string includes the user name, hostname, and database name.
 
 ```text
-postgres://casey@ep-square-sea-260584.us-east-2.aws.neon.tech/neondb
+postgres://sally@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb
              ^                       ^                          ^
              |- <user name>          |- <hostname>              |- <database name>
 ```
 
-- user name: `casey`
-- hostname: `ep-square-sea-260584.us-east-2.aws.neon.tech`
+- user name: `sally`
+- hostname: `ep-cold-poetry-404091.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
 Passwords are only shown when they are created. If you misplaced your password, you can reset it by selecting the **Reset Password** link in the **Connection Details** widget, or by navigating to **Settings** > **Users**.
