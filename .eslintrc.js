@@ -3,7 +3,13 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ['airbnb', 'airbnb/hooks', 'airbnb/whitespace', 'prettier'],
+  extends: [
+    'airbnb',
+    'airbnb/hooks',
+    'airbnb/whitespace',
+    'prettier',
+    'plugin:@next/next/recommended',
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -21,10 +27,14 @@ module.exports = {
     'no-restricted-exports': ['error', { restrictedNamedExports: ['then'] }],
     'no-unused-vars': 'error',
     'no-shadow': 'off',
+    'no-undef': 'error',
+    'react/require-default-props': 0,
     'react/prop-types': 'error',
     'react/no-array-index-key': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/no-danger': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/forbid-prop-types': 'off',
     // Changes values from "function-expression" to "arrow-function", original rule setup — https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb/rules/react.js#L528
     'react/function-component-definition': [
       'error',
@@ -50,19 +60,6 @@ module.exports = {
           order: 'asc',
           caseInsensitive: true,
         },
-      },
-    ],
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: [
-          '.storybook/**',
-          'src/components/**/*.stories.js',
-          'src/components/**/*.stories.jsx',
-          'gatsby-config.js',
-          'gatsby-node.js',
-          'gatsby-ssr.js',
-        ],
       },
     ],
     'jsx-a11y/label-has-associated-control': [

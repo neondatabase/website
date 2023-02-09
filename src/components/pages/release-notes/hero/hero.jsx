@@ -7,7 +7,7 @@ import Container from 'components/shared/container';
 const TITLE = 'Release notes';
 const DESCRIPTION = 'The latest product updates from Neon';
 
-const Hero = ({ className, withContainer }) => {
+const Hero = ({ className = null, withContainer = false }) => {
   const Tag = withContainer ? Container : 'div';
   return (
     <div className={className}>
@@ -22,11 +22,6 @@ const Hero = ({ className, withContainer }) => {
 Hero.propTypes = {
   className: PropTypes.string,
   withContainer: PropTypes.bool,
-};
-
-Hero.defaultProps = {
-  className: null,
-  withContainer: false,
 };
 
 export default Hero;

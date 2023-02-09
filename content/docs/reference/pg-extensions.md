@@ -11,7 +11,7 @@ Unless otherwise noted, supported extensions can be installed from the Neon SQL 
 CREATE EXTENSION <extension_name>
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](../../get-started-with-neon/query-with-neon-sql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 <a id="default-extensions/"></a>
 
@@ -45,12 +45,14 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 | postgis_raster           | [3.3.0](https://postgis.net/docs/RT_reference.html)             | [3.3.1](https://postgis.net/docs/RT_reference.html)              |                                                                                                                    |
 | postgis_tiger_geocoder   | [3.3.0](https://postgis.net/docs/Extras.html#Tiger_Geocoder)    | [3.3.1](https://postgis.net/docs/Extras.html#Tiger_Geocoder)     | Cannot be installed using the Neon SQL Editor. Use your `psql` user credentials to install this extension.         |
 | postgis_topology         | [3.3.0](https://www.postgis.net/docs/Topology.html)             | [3.3.1](https://www.postgis.net/docs/Topology.html)              |                                                                                                                    |
+| postgis_sfcgal           | [1.3.10](https://oslandia.gitlab.io/SFCGAL/)                    | [1.3.10](https://oslandia.gitlab.io/SFCGAL/)                     |                                                                                                                    |
 | seg                      | [1.4](https://www.postgresql.org/docs/14/seg.html)              | [1.4](https://www.postgresql.org/docs/15/seg.html)               |                                                                                                                    |
 | tablefunc                | [1.0](https://www.postgresql.org/docs/14/tablefunc.html)        | [1.0](https://www.postgresql.org/docs/15/tablefunc.html)         |                                                                                                                    |
 | tcn                      | [1.0](https://www.postgresql.org/docs/14/tcn.html)              | [1.0](https://www.postgresql.org/docs/15/tcn.html)               |                                                                                                                    |
 | tsm_system_rows          | [1.0](https://www.postgresql.org/docs/14/tsm-system-rows.html)  | [1.0](https://www.postgresql.org/docs/15/tsm-system-rows.html)   |                                                                                                                    |
 | tsm_system_time          | [1.0](https://www.postgresql.org/docs/14/tsm-system-time.html)  | [1.0](https://www.postgresql.org/docs/15/tsm-system-time.html)   |                                                                                                                    |
 | unaccent                 | [1.1](https://www.postgresql.org/docs/14/unaccent.html)         | [1.1](https://www.postgresql.org/docs/15/unaccent.html)          |                                                                                                                    |
+| unit                     | [7.7](https://github.com/df7cb/postgresql-unit)                 | [7.7](https://github.com/df7cb/postgresql-unit)                  |                                                                                                                    |
 | uuid-ossp                | [1.1](https://www.postgresql.org/docs/14/uuid-ossp.html)        | [1.1](https://www.postgresql.org/docs/15/uuid-ossp.html)         | Double-quote the extension name when installing: `CREATE EXTENSION "uuid-ossp"`                                    |
 
 ## Extension support notes

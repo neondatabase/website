@@ -9,7 +9,20 @@ export const FIELD_TAGS = {
 };
 
 const Field = forwardRef(
-  ({ className, name, label, type, children, tag: Tag, error, isDisabled, ...otherProps }, ref) => (
+  (
+    {
+      className,
+      name,
+      label,
+      type = 'text',
+      children,
+      tag: Tag = 'input',
+      error,
+      isDisabled,
+      ...otherProps
+    },
+    ref
+  ) => (
     <div className={clsx('relative flex flex-col items-start', className)}>
       <label className="leading-none" htmlFor={name}>
         {label}
@@ -53,15 +66,6 @@ Field.propTypes = {
   error: PropTypes.string,
   children: PropTypes.node,
   isDisabled: PropTypes.bool,
-};
-
-Field.defaultProps = {
-  className: null,
-  type: 'text',
-  tag: 'input',
-  error: null,
-  children: null,
-  isDisabled: false,
 };
 
 export default Field;

@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
@@ -28,13 +30,13 @@ const Header = forwardRef(
   (
     {
       theme,
-      isMobileMenuOpen,
+      isMobileMenuOpen = false,
       onBurgerClick,
-      isSignIn,
-      isSticky,
-      withBottomBorder,
-      isDocPage,
-      onSearchClick,
+      isSignIn = false,
+      isSticky = false,
+      withBottomBorder = false,
+      isDocPage = false,
+      onSearchClick = null,
     },
     ref
   ) => {
@@ -178,15 +180,6 @@ Header.propTypes = {
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
   onSearchClick: PropTypes.func,
-};
-
-Header.defaultProps = {
-  isMobileMenuOpen: false,
-  withBottomBorder: false,
-  isSignIn: false,
-  isSticky: false,
-  isDocPage: false,
-  onSearchClick: null,
 };
 
 export default Header;

@@ -5,7 +5,7 @@ import React from 'react';
 
 const ANIMATION_DURATION = 0.2;
 
-const Burger = ({ className, isToggled, onClick }) => (
+const Burger = ({ className = null, isToggled = null, onClick = null }) => (
   <motion.button
     className={clsx('relative -mt-1 -mr-1 flex h-8 w-7 shrink rounded-full', className)}
     type="button"
@@ -93,12 +93,6 @@ Burger.propTypes = {
   className: PropTypes.string,
   isToggled: PropTypes.bool,
   onClick: PropTypes.func,
-};
-
-Burger.defaultProps = {
-  className: null,
-  isToggled: false,
-  onClick: null,
 };
 
 export default Burger;

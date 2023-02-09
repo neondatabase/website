@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx';
-import { Link as GatsbyLink } from 'gatsby';
+import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -31,17 +32,16 @@ const styles = {
 };
 
 const Link = ({
-  className: additionalClassName,
-  size,
-  theme,
-  to,
+  className: additionalClassName = null,
+  size = null,
+  theme = null,
+  to = null,
+  withArrow = false,
   children,
-  withArrow,
-
   ...props
 }) => {
   const className = clsx(
-    theme && size && styles.base,
+    size && theme && styles.base,
     styles.size[size],
     styles.theme[theme],
     additionalClassName
@@ -56,9 +56,9 @@ const Link = ({
 
   if (to.startsWith('/')) {
     return (
-      <GatsbyLink className={className} to={to} {...props}>
+      <NextLink className={className} href={to} {...props}>
         {content}
-      </GatsbyLink>
+      </NextLink>
     );
   }
 
@@ -76,14 +76,6 @@ Link.propTypes = {
   theme: PropTypes.oneOf(Object.keys(styles.theme)),
   children: PropTypes.node.isRequired,
   withArrow: PropTypes.bool,
-};
-
-Link.defaultProps = {
-  className: null,
-  to: null,
-  size: null,
-  theme: null,
-  withArrow: false,
 };
 
 export default Link;

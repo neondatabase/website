@@ -5,12 +5,12 @@ import { useInView } from 'react-intersection-observer';
 const CanvasVideo = ({
   srcMp4,
   srcWebm,
-  className,
+  className = '',
   inView,
-  autoPlay,
-  preload,
-  setBackgroundColor,
-  lazyLoading,
+  autoPlay = true,
+  preload = 'auto',
+  setBackgroundColor = undefined,
+  lazyLoading = true,
 }) => {
   const requestAnimationFrameId = useRef();
   const videoRef = useRef();
@@ -154,11 +154,4 @@ CanvasVideo.propTypes = {
   lazyLoading: PropTypes.bool,
 };
 
-CanvasVideo.defaultProps = {
-  className: '',
-  autoPlay: true,
-  preload: 'auto',
-  setBackgroundColor: undefined,
-  lazyLoading: true,
-};
 export default CanvasVideo;

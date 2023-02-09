@@ -1,10 +1,12 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import CodeBlock from 'components/shared/code-block';
 
-const CodeTabs = ({ children, labels }) => {
+const CodeTabs = ({ children = null, labels = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
@@ -49,11 +51,6 @@ const CodeTabs = ({ children, labels }) => {
 CodeTabs.propTypes = {
   children: PropTypes.node,
   labels: PropTypes.arrayOf(PropTypes.string),
-};
-
-CodeTabs.defaultProps = {
-  children: null,
-  labels: [],
 };
 
 export default CodeTabs;

@@ -1,10 +1,12 @@
 import clsx from 'clsx';
-import { StaticImage } from 'gatsby-plugin-image';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 
 import useClickOutside from 'hooks/use-click-outside';
 import CloseIcon from 'icons/close.inline.svg';
+
+import backgroundGradient from './images/bg-gradient-modal.jpg';
 
 const VideoModal = ({ isOpenModal, setIsOpenModal, title, description, videoId }) => {
   const contentRef = useRef();
@@ -34,10 +36,9 @@ const VideoModal = ({ isOpenModal, setIsOpenModal, title, description, videoId }
         <p className="mt-0.5">{description}</p>
         <div className="relative mt-5">
           <div className="absolute -inset-x-16 top-16 h-full sm:top-10">
-            <StaticImage
+            <Image
               className="h-full rounded-[200px] opacity-20 blur-[70px]"
-              imgClassName="rounded-[200px]"
-              src="./images/bg-gradient-modal.jpg"
+              src={backgroundGradient}
               width={1289}
               height={653}
               alt=""

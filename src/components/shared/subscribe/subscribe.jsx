@@ -1,4 +1,4 @@
-import { StaticImage } from 'gatsby-plugin-image';
+import Image from 'next/image';
 import React from 'react';
 
 import Container from 'components/shared/container';
@@ -12,6 +12,7 @@ import TwitterIcon from 'icons/twitter.inline.svg';
 
 // import DiscordIcon from './images/subscribe-discord.inline.svg';
 import GithubIcon from './images/subscribe-github.inline.svg';
+import illustration from './images/subscribe-illustration.jpg';
 
 const links = [
   {
@@ -38,9 +39,9 @@ const Subscribe = () => (
     className="safe-paddings my-48 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20"
   >
     <Container className="flex items-center justify-between lg:block" size="md">
-      <StaticImage
+      <Image
         className="max-w-[800px] 3xl:max-w-[660px] 2xl:max-w-[550px] xl:max-w-[430px] lg:!hidden"
-        src="../subscribe/images/subscribe-illustration.jpg"
+        src={illustration}
         alt=""
         loading="lazy"
         aria-hidden

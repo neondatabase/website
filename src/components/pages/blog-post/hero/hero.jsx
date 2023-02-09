@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import BlogPostAuthors from 'components/shared/blog-post-author';
 
-const Hero = ({ title, description, authors, date, readingTime, className }) => (
+const Hero = ({ title, description, authors, date, readingTime, className = null }) => (
   <>
     <div className={clsx('safe-paddings', className)}>
       <span className="t-base mb-3 hidden items-center leading-none text-gray-2 lg:flex">
@@ -36,12 +35,11 @@ Hero.propTypes = {
   authors: PropTypes.arrayOf(
     PropTypes.shape({
       author: PropTypes.shape({
-        postAuthor: PropTypes.shape({
-          url: PropTypes.string,
-        }),
         title: PropTypes.string.isRequired,
-        image: PropTypes.shape({
-          gatsbyImageData: PropTypes.shape().isRequired,
+        postAuthor: PropTypes.shape({
+          image: PropTypes.shape({
+            mediaItemUrl: PropTypes.string.isRequired,
+          }).isRequired,
         }),
       }),
     })
@@ -51,7 +49,4 @@ Hero.propTypes = {
   className: PropTypes.string,
 };
 
-Hero.defaultProps = {
-  className: null,
-};
 export default Hero;

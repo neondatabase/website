@@ -18,7 +18,7 @@ const borderClassNames = {
   info: 'border-gray-5',
 };
 
-const Admonition = ({ children, type, title }) => (
+const Admonition = ({ children = null, type = 'note', title = null }) => (
   <div
     className={clsx(
       'not-prose mt-5 flex flex-col rounded-[1px] border-l-4 bg-gray-9 px-5 py-4 leading-normal dark:bg-gray-1',
@@ -34,12 +34,6 @@ Admonition.propTypes = {
   children: PropTypes.node,
   type: PropTypes.oneOf(Object.keys(titleClassNames)),
   title: PropTypes.string,
-};
-
-Admonition.defaultProps = {
-  children: null,
-  type: 'note',
-  title: null,
 };
 
 export default Admonition;
