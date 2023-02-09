@@ -72,7 +72,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a compute endpoint with the API
 
-The following Neon API method creates a compute endpoint. 
+The following Neon API method creates a compute endpoint.
 
 ```text
 POST /endpoints 

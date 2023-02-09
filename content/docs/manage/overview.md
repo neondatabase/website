@@ -12,17 +12,17 @@ Neon account
     | 
     |- project 
     |      |
-    |      |---- root branch (main) ---- endpoint a (compute) 
+    |      |---- root branch (main) ---- compute endpoint a
     |                |    |
     |                |    |---- users
     |                |    |---- databases           
     |                |                         
-    |                |---- child branch 1 ---- endpoint b (compute) 
+    |                |---- child branch 1 ---- compute endpoint b 
     |                |          |    |
     |                |          |    |---- users
     |                |          |    |---- databases   
     |                |          |
-    |                |          |---- child branch 1.a ---- endpoint c (compute) 
+    |                |          |---- child branch 1.a ---- compute endpoint c 
     |                |                          |
     |                |                          |---- users
     |                |                          |---- databases
@@ -43,15 +43,15 @@ API keys are global and belong to the Neon account. API keys are used with the [
 
 ## Projects
 
-A project is the top-level object in the Neon object hierarchy. It is a container for all other objects, with the exception of API keys, which are global. Branches and endpoints belong to a project. A Neon project defines the region where project resources reside. A Neon account can have multiple projects, but tier limits define the number of projects per Neon account. For more information, see [Manage projects](/docs/manage/projects).
+A project is the top-level object in the Neon object hierarchy. It is a container for all other objects, with the exception of API keys, which are global. Branches and compute endpoints belong to a project. A Neon project defines the region where project resources reside. A Neon account can have multiple projects, but tier limits define the number of projects per Neon account. For more information, see [Manage projects](/docs/manage/projects).
 
 ## Branches
 
 Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data per branch. For more information, see [Manage branches](/docs/manage/branches).
 
-## Endpoints
+## Compute endpoint
 
-An endpoint is a compute resource associated with a branch. A read-write endpoint is created for a project's root branch by default. You can choose whether or not to create an endpoint when creating a branch. To connect to a database that resides in a branch, you must connect via an endpoint that is associated with the branch. Tier limits define the number of endpoints per project and the resources (vCPUs and RAM) available to an endpoint. For more information, see [Manage endpoints](/docs/manage/endpoints).
+A compute endpoint is a compute resource associated with a branch. A read-write compute endpoint is created for a project's primary branch by default. You can choose whether or not to create a compute endpoint when creating a branch. To connect to a database that resides in a branch, you must connect via a compute endpoint that is associated with the branch. Tier limits define the the resources (vCPUs and RAM) available to a compute endpoint. For more information, see [Manage compute endpoints](/docs/manage/endpoints).
 
 ## Users
 

@@ -39,14 +39,14 @@ Add a PostgreSQL client to your app, such as `Postgres.js`. For instructions, re
 Add your Neon connection string to your `.env` file.
 
 ```shell
-DATABASE_URL=postgres://<user>:<password>@<endpoint_hostname>:<port>/<database>
+DATABASE_URL=postgres://<user>:<password>@<hostname>:<port>/<database>
 ```
 
 where:
 
 - `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a project.
-- `<endpoint_hostname>` the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `<hostname>` the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 - `<port>` is the Neon port number. The default port number is `5432`.
 - `<database>` is the name of the database. The default Neon database is `neondb`
 

@@ -88,8 +88,8 @@ from sqlalchemy import create_engine
 
 USERNAME = <username>
 PASSWORD = <password>
-ENDPOINT = <endpoint_hostname>
-CONNSTR = f'postgresql://{USERNAME}:{PASSWORD}@{ENDPOINT}/neondb'
+HOST = <hostname>
+CONNSTR = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/neondb'
 
 engine = create_engine(CONNSTR)
 ```
@@ -98,7 +98,7 @@ where:
 
 - `<username>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
-- `<endpoint_hostname>` the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `<hostname>` the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 
 You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/users#reset-a-password).
 

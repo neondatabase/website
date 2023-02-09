@@ -11,7 +11,7 @@ A project is the top-level object in the Neon object hierarchy. Tier limits defi
 A Neon project is created with the following resources by default:
 
 - A root branch called `main`. You can create child branches from the root branch or from a previously created branch. For more information, see [Manage branches](/docs/manage/branches).
-- A single read-write endpoint. An endpoint is the compute instance associated with a branch. For more information, see [Manage endpoints](/docs/manage/endpoints).
+- A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage compute endpoints](/docs/manage/endpoints).
 - A default database, called `neondb`, which resides in the project's root branch.
 - A default PostgreSQL user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
 - A `web_access` PostgreSQL user, which is used by the Neon [SQL Editor](docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect).
@@ -43,7 +43,7 @@ To edit a Neon project:
 
 ## Delete a project
 
-Deleting a project is a permanent action, which also deletes any endpoints, branches, databases, and users that belong to the project.
+Deleting a project is a permanent action, which also deletes any compute endpoints, branches, databases, and users that belong to the project.
 
 To delete a project:
 
@@ -91,7 +91,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 
 Response:
 
-The response includes information about the roles, the default database, the root branch (`main`), and the read-write endpoint that is created with the project.  
+The response includes information about the roles, the default database, the root branch (`main`), and the read-write compute endpoint that is created with the project.  
 
 ```json
 {
