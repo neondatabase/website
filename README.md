@@ -11,6 +11,7 @@
   - [ESLint](#eslint)
   - [Prettier](#prettier)
   - [VS Code](#vs-code)
+- [Docs](#docs)
 
 ## Getting Started
 
