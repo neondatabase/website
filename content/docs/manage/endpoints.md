@@ -25,7 +25,7 @@ Tier limits define resources (vCPUs and RAM) available to a compute endpoint. Th
 
 ## View a compute endpoint
 
-A compute endpoint is always associated with a branch. To view a compute endpoint, select **Branches** in the Neon Console, and select a branch. If the branch has a compute endpoint, it is shown on the branch page.
+A compute endpoint is associated with a branch. To view a compute endpoint, select **Branches** in the Neon Console, and select a branch. If the branch has a compute endpoint, it is shown on the branch page.
 
 Compute endpoint details shown on the branch page include:
 
@@ -33,6 +33,19 @@ Compute endpoint details shown on the branch page include:
 - **Region**: The region where the compute endpoint resides.
 - **Type**: The type of compute endpoint. Currently, only `read_write` compute endpoints are supported.
 - **State**: The compute endpoint state (`Active`, `Idle`, or `Stopped`).
+
+## Create a compute endpoint
+
+You can only create a compute endpoint for a branch that does not have one.
+
+To create an endpoint:
+
+1. In the Neon Console, select **Branches**.
+1. Select a branch that does not have an endpoint
+1. Click **Add new compute endpoint**.
+1. On the **Create compute endpoint** dialog, choose whether to enable connection pooling and click **Create**. 
+
+For more information connection pooling in Neon, see [Connection pooling](/docs/connect/connection-pooling).
 
 ## Edit a compute endpoint
 
