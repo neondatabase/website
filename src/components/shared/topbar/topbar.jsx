@@ -12,7 +12,7 @@ const TopBar = () => (
       Create a Neon branch for every Vercel Preview Deployment
     </span>
     <span className="inline-flex items-center text-sm font-bold xs:hidden">
-      <span>Read More</span>
+      <span>Learn More</span>
       <ArrowRightIcon className="ml-1" />
     </span>
     <ArrowRightIcon className="ml-2 hidden xs:flex" />
