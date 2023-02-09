@@ -58,12 +58,14 @@ typings/
 .env*
 !.env.example
 
-# gatsby files
-.cache/
-# Do NOT ignore public in any subdirectory
-!*/public
-# only ignore it in the current directory
-/public
+# next files
+.next/
+
+# ignore local sitemap
+public/sitemap-0.xml
+
+sitemap.xml
+sitemap-0.xml
 
 # Mac files
 .DS_Store

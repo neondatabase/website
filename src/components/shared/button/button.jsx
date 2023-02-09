@@ -20,26 +20,15 @@ const styles = {
   },
 };
 
-const loaderStyles = 'bg-[url("/images/loader.svg")] bg-center bg-no-repeat text-transparent';
-
 const Button = ({
-  className: additionalClassName,
-  to,
+  className: additionalClassName = null,
+  to = null,
   size,
   theme,
   children,
-  loading,
-  disabled,
   ...otherProps
 }) => {
-  const className = clsx(
-    styles.base,
-    styles.size[size],
-    styles.theme[theme],
-    loading && loaderStyles,
-    disabled && 'cursor-not-allowed pointer-events-none',
-    additionalClassName
-  );
+  const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
 
   const Tag = to ? Link : 'button';
 
@@ -56,15 +45,6 @@ Button.propTypes = {
   size: PropTypes.oneOf(Object.keys(styles.size)).isRequired,
   theme: PropTypes.oneOf(Object.keys(styles.theme)).isRequired,
   children: PropTypes.node.isRequired,
-  loading: PropTypes.bool,
-  disabled: PropTypes.bool,
-};
-
-Button.defaultProps = {
-  className: null,
-  to: null,
-  loading: false,
-  disabled: false,
 };
 
 export default Button;

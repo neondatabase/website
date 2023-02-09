@@ -69,21 +69,23 @@
     - title: Laravel
       slug: guides/laravel
     - title: Next.js
-      slug: guides/vercel
+      slug: guides/nextjs
     - title: Node.js
       slug: guides/node
     - title: Prisma
       items:
         - title: Connect from Prisma
-          slug: guides/prisma  
+          slug: guides/prisma
         - title: Use Prisma With Neon
-          slug: guides/prisma-tutorial 
+          slug: guides/prisma-guide
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy
       slug: guides/sqlalchemy
     - title: Symfony
       slug: guides/symfony
+    - title: Vercel
+      slug: guides/vercel
 - title: Import data
   items:
     - title: Import from PostgreSQL

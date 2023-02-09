@@ -33,7 +33,11 @@ const wordVariants = {
   },
 };
 
-const TypingText = ({ className: additionalClassName, phrases, shouldAnimationStart }) => {
+const TypingText = ({
+  className: additionalClassName = null,
+  phrases,
+  shouldAnimationStart = false,
+}) => {
   const [activePhraseIndex, setActivePhraseIndex] = useState(0);
 
   const controls = useAnimation();
@@ -94,11 +98,6 @@ TypingText.propTypes = {
   className: PropTypes.string,
   phrases: PropTypes.arrayOf(PropTypes.string).isRequired,
   shouldAnimationStart: PropTypes.bool,
-};
-
-TypingText.defaultProps = {
-  className: null,
-  shouldAnimationStart: false,
 };
 
 export default TypingText;

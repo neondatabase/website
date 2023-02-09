@@ -1,6 +1,7 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
@@ -10,7 +11,7 @@ import CopyIcon from './images/copy.inline.svg';
 
 const DEFAULT_LANGUAGE = 'bash';
 
-const CodeBlock = ({ className, children, showLineNumbers, ...otherProps }) => {
+const CodeBlock = ({ className = null, children, showLineNumbers = false, ...otherProps }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const match = /language-(\w+)/.exec(className || '');
@@ -43,11 +44,6 @@ CodeBlock.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
   showLineNumbers: PropTypes.bool,
-};
-
-CodeBlock.defaultProps = {
-  className: null,
-  showLineNumbers: false,
 };
 
 export default CodeBlock;

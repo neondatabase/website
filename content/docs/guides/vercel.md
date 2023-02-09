@@ -1,73 +1,101 @@
 ---
-title: Connect a Next.js application to Neon
+title: Connect Vercel and Neon
 enableTableOfContents: true
-redirectFrom:
-  - /docs/quickstart/vercel
-  - /docs/integrations/vercel
+isDraft: false
 ---
 
-Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js application.
+This guide describes how to connect your Vercel project with Neon using the [Neon integration from the Vercel marketplace](https://vercel.com/integrations/neon).
 
-To create a Neon project and access it from a Next.js application:
-
-1. [Create a Neon project](#create-a-neon-project)
-2. [Create a Next.js project](#create-a-nextjs-project)
-3. [Add a PostgreSQL client to your app](#add-a-postgresql-client-to-your-app)
-4. [Add your Neon connection details](#add-your-neon-connection-details)
-5. [Connect to the Neon database](#connect-to-the-neon-database)
-
-## Create a Neon project
-
-If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
-
-1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
-2. Click **New Project**.
-3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
-
-For additional information about creating projects, see [Set up a project](/docs/get-started-with-neon/setting-up-a-project).
-
-## Create a Next.js project
-
-Create a Next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app/setup), in the Vercel documentation.
-
-## Add a PostgreSQL client to your app
-
-Add a PostgreSQL client to your app, such as `Postgres.js`. For instructions, refer to the [postgres.js Getting started](https://www.npmjs.com/package/postgres).
-
-## Add your Neon connection details
-
-Add your Neon connection string to your `.env` file.
-
-```shell
-DATABASE_URL=postgres://<user>:<password>@<endpoint_hostname>:<port>/<database>
-```
-
-where:
-
-- `<user>` is the database user.
-- `<password>` is the database user's password, which is provided to you when you create a project.
-- `<endpoint_hostname>` the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
-- `<port>` is the Neon port number. The default port number is `5432`.
-- `<database>` is the name of the database. The default Neon database is `neondb`
-
-You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
-
-## Connect to the Neon database
-
-From your API handlers or server functions, connect to the Neon database with the PostgreSQL client and your Neon connection details. For example:
-
-```javascript pages/api/hello_worlds.js
-import postgres from 'postgres';
-
-const sql = postgres(process.env.DATABASE_URL);
-
-const result = await sql.unsafe(req.body);
-```
-
-<Admonition type="important">
-Never expose your Neon credentials to the browser.
+<Admonition type="note">
+This is a Beta version of Neon’s Vercel integration. For assistance or to suggest improvements, contact [vercel-feedback@neon.tech](mailto:vercel-feedback@neon.tech).
 </Admonition>
 
-## Need help?
+## What the Neon integration does
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+The Neon-Vercel integration connects your Vercel project to a Neon project and creates a database branch for each Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments).
+
+Optionally, based on your selection, the integration also creates a development branch, which you can use with your Vercel development environment.
+
+The integration sets these environment variables in Vercel:
+
+- `PGHOST`
+- `PGUSER`
+- `PGDATABASE`
+- `PGPASSWORD`
+- `DATABASE_URL`
+
+The variables are set in your Vercel production, development, and preview environments, as required.
+
+## How the integration works with preview deployments
+
+When you push a branch to the GitHub repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting the required Vercel preview environment variables. An isolated copy of your database for each preview deployment provides reviewers with a true production-like environment with real data.
+
+For the integration to work, the database connection settings in your application must correspond to the Vercel production environment variable settings configured by your Neon integration. For example, if your applications's database connection is defined by a `DATABASE_URL` variable, make sure that setting in your application corresponds to the `DATABASE_URL` setting configured by the integration. You can find the environment variable settings in Vercel by navigating to the Vercel dashboard, selecting your project, and selecting **Settings** > **Environment Variables**.
+
+## Add the Neon integration
+
+Before you begin, ensure that you have met the following prerequisites:
+
+- A [Vercel account](https://vercel.com).
+- A Vercel project. If you do not have one, see [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project), in the _Vercel documentation_.
+
+To add the integration:
+
+1. Navigate to the [Neon Vercel integrations page](https://vercel.com/integrations/neon), and click **Add integration**.
+1. Select a Vercel account to add the integration to.
+1. Select the project to add the integration to.
+1. Review the permissions required by the integration, and click **Add Integration**.
+1. In the **Integrate Neon** dialog:
+    1. Select the Vercel project to add the integration to.
+    1. Select the Neon project, database, and role that Vercel will use to connect. The Neon Free Tier supports a single project per user. If desired, you can also create a new database and role for the integration.
+
+        The database that you select becomes your production database. This database must reside on the root branch of your Neon project. The root branch is preselected.
+
+        You are given the option to create a branch for your Vercel development environment. When this option is selected (the default), the integration creates a branch named **vercel-dev** and sets Vercel environment variables for it.
+
+        When you finish making selections, click **Continue**.
+    1. Confirm the integration settings to allow the integration to perform the following actions:
+        - Set the environment variables listed above for your Vercel production, development, and preview environments, as required.
+        - Reset the database user's password, enabling the integration to configure the `PGPASSWORD` and `DATABASE_URL` environment variables.
+        - Create database branches and compute endpoints for preview deployments.
+        - Create a development branch for your Vercel development environment (if you selected that option).
+
+        Click **Connect** to accept the settings and proceed with the integration.
+
+    Once the integration is added, you are presented with a **Success!** dialog where you can copy the new password for your database user.
+1. To view the results of the integration in Neon:
+    1. Navigate to the [Neon Console](https://console.neon.tech/).
+    1. Select the project you connected to.
+    1. Select **Branches**.
+    You will see the root branch of your project, and if you created a development branch, you will also see a `vercel-dev` branch.
+1. To view the results of the integration in Vercel:
+    1. Navigate to [Vercel](https://vercel.com/).
+    1. Select the Vercel project you added the integration to.
+    1. Select **Settings** > **Environment Variables**.
+    You will see the `PG*` and `DATABASE_URL` environment variables set by the integration.
+
+## Troubleshoot connection issues
+
+If the environment variables configured by the Neon integration already exist, you may encounter the following error due to an existing integration that sets one or more of the same environment variables.
+
+```text
+Failed to set environment variables in Vercel. Please make sure that the following environment variables are not set: PGHOST, PGUSER, PGDATABASE, PGPASSWORD, DATABASE_URL
+```
+
+In this case, you can remove the existing environment variables from your Vercel project settings and retry the Neon integration. To remove existing environment variables:
+
+1. From the Vercel project page, select **Settings**.
+1. Locate the environment variables required by the Neon integration and remove them.
+
+    <Admonition type="note">
+    Alternatively, you can remove the conflicting integration, assuming it no longer required. This may be a previous Neon integration or another integration. Removing the integration removes the variables set by the integration.
+    </Admonition>
+
+1. Once you have removed the variables, try adding the Neon integration again. See [Add the Neon integration](#add-the-neon-integration).
+
+## Manage your Neon integration
+
+To view integration permissions, manage integration access, or remove the Neon integration:
+
+1. On the Vercel dashboard, select **Settings** > **Integrations**.
+1. Find the **Neon** integration and select **Manage**.

@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import BlogPostAuthors from 'components/shared/blog-post-author';
 import Container from 'components/shared/container';
@@ -53,7 +52,7 @@ PostsList.propTypes = {
               postAuthor: PropTypes.shape({
                 role: PropTypes.string,
                 image: PropTypes.shape({
-                  localFile: PropTypes.shape({}).isRequired,
+                  mediaItemUrl: PropTypes.string.isRequired,
                 }).isRequired,
               }).isRequired,
             }).isRequired,

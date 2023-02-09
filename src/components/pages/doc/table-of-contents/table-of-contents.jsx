@@ -7,7 +7,7 @@ import TOCIcon from './images/toc.inline.svg';
 const linkClassName =
   'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-3 hover:text-black dark:text-gray-7 dark:hover:text-white';
 
-const TableOfContents = ({ className, contentRef }) => {
+const TableOfContents = ({ className = null, contentRef }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -83,10 +83,6 @@ TableOfContents.propTypes = {
       current: PropTypes.instanceOf(typeof Element === 'undefined' ? () => {} : Element),
     }),
   ]).isRequired,
-};
-
-TableOfContents.defaultProps = {
-  className: null,
 };
 
 export default TableOfContents;

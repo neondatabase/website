@@ -18,7 +18,7 @@ A branch is isolated from its originating data, so you are free to play around w
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means you can create a branch at any time without impacting the performance of your production system.
 
-Each Neon project has a [root branch](../../reference/glossary#root-branch) called `main`. The first branch that you create is branched from the project's root branch (`main`). Subsequent branches can be branched from `main` or from a previously created branch.
+Each Neon project has a [root branch](/docs/reference/glossary#root-branch) called `main`. The first branch that you create is branched from the project's root branch (`main`). Subsequent branches can be branched from `main` or from a previously created branch.
 
 ## Branch endpoints
 
@@ -26,9 +26,9 @@ When creating a new branch, you have the option to create an endpoint. An endpoi
 
 An endpoint allows you to connect to the branch from a client or application and is read-write.
 
-Your Neon project's [root branch](../../reference/glossary#root-branch) (`main`) has an endpoint included by default.
+Your Neon project's [root branch](/docs/reference/glossary#root-branch) (`main`) has an endpoint included by default.
 
-To connect to a database in a branch from a client or application, you must connect to the branch's endpoint. For more information connecting to a branch endpoint, see [Connect to a branch](../../manage/branches/#connect-to-a-branch).
+To connect to a database in a branch from a client or application, you must connect to the branch's endpoint. For more information connecting to a branch endpoint, see [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
 
 If a branch does not have an endpoint, it acts as a snapshot of the parent branch. You can add endpoint to a branch later if you wish to connect to it.
 
@@ -40,39 +40,39 @@ You can use Neon's branching feature in variety development workflows, a few of 
 
 Create a branch of your production database that developers are free to play with and modify. You can quickly create a branch with all of the data that existed in the parent branch, eliminating the setup time required to deploy and maintain a development database. 
 
-![development environment branch](./images/branching_dev_env.png)
+![development environment branch](/docs/introduction/branching_dev_env.png)
 
 Branching is so easy and cost-effective that you can create a branch for each developer. For example, you can create branches from a primary development branch to assign tasks to be worked on in parallel.
 
-![branch for each developer](./images/branching_each_dev.png)
+![branch for each developer](/docs/introduction/branching_each_dev.png)
 
 ### Testing
 
 Branching enables testers to use the most recent production data. Testers can create branches for testing schema changes, validating new queries, or testing potentially destructive queries before deploying them into production. A branch is isolated from its parent branch but has all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a database. Tests can also run on separate branches in parallel, with each branch having dedicated compute resources.
 
-![test environment branches](./images/branching_test.png)
+![test environment branches](/docs/introduction/branching_test.png)
 
 Another testing scenario enabled by branching is tracking down corruption or data quality issues. For example, you can create and dispose of multiple point-in-time branches to determine when a corruption or data quality issue first appeared.
 
-![data quality issue branch](./images/branching_issue.png)
+![data quality issue branch](/docs/introduction/branching_issue.png)
 
 ### Data recovery
 
 If you lose data due to an unintended deletion or some other event, you can create a branch with data as it existed before the event occurred, allowing you to recover the lost data.
 
-![data recovery branch](./images/branching_data_loss.png)
+![data recovery branch](/docs/introduction/branching_data_loss.png)
 
 ### Analytics
 
 You can run costly, long-running queries on an isolated branch of your production data, each with its own compute resources. With automation scripts, you can create and dispose of branches on a defined schedule to ensure that queries always run on an up-to-date copy of your production data.
 
-![analytics branches](./images/branching_analytics.png)
+![analytics branches](/docs/introduction/branching_analytics.png)
 
 ### Machine Learning
 
 You can create point-in-time branches to ensure repeatability when training machine learning models.
 
-![ML branches](./images/branching_ml.png)
+![ML branches](/docs/introduction/branching_ml.png)
 
 ### Staging
 
@@ -84,4 +84,4 @@ You can use branching to implement a data backup strategy. For example, you can 
 
 ## Get started with branching
 
-To start using branches, refer to the instructions in [Branches](../../get-started-with-neon/get-started-branching).
+To start using branches, refer to the instructions in [Manage branches](/docs/manage/branches).

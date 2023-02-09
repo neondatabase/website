@@ -1,3 +1,5 @@
+'use client';
+
 const { useState } = require('react');
 
 function useLocalStorage(key, initialValue) {

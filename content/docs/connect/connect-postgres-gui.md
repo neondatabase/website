@@ -17,7 +17,7 @@ The following details are typically required when configuring a connection:
 
 You can gather most of these details from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](./images/connection_details.png)
+![Connection details widget](/docs/connect/connection_details.png)
 
 The connection string includes the user name, hostname, and database name.
 
@@ -39,7 +39,7 @@ Neon uses the default PostgreSQL port, `5432`.
 
 In the GUI application or IDE, enter the connection details into the appropriate fields and connect. In the pgAdmin example shown below, clicking **Save** establishes the database connection.
 
-![Register - Server](./images/pgadmin4.png)
+![Register - Server](/docs/connect/pgadmin4.png)
 
 If the connection is successful, you should be able to view and interact with your database from the GUI application or IDE.
 
@@ -47,6 +47,7 @@ If the connection is successful, you should be able to view and interact with yo
 
 Connections from the following GUI applications and IDEs have been tested with Neon:
 
+- [Azure Data Studio](https://azure.microsoft.com/en-us/products/data-studio/) (requires the [PostgreSQL extension](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/postgres-extension?view=sql-server-ver16), and the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
 - [CLion](https://www.jetbrains.com/clion/)
 - [DataGrip](https://www.jetbrains.com/datagrip/)
 - [DBeaver](https://dbeaver.io/)
@@ -59,7 +60,7 @@ Connections from the following GUI applications and IDEs have been tested with N
 
 ## Connection issues
 
-Applications that use older client libraries or drivers that do not support Server Name Indication (SNI) may not permit connecting to Neon. If you encounter the following error, refer to [Connect from older clients](../connectivity-issues) for possible workarounds.
+Applications that use older client libraries or drivers that do not support Server Name Indication (SNI) may not permit connecting to Neon. If you encounter the following error, refer to [Connect from older clients](/docs/connect/connectivity-issues) for possible workarounds.
 
 ```txt
 ERROR: The endpoint ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=project%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.

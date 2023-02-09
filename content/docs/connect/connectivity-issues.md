@@ -100,7 +100,7 @@ Native client libraries:
 | pg8000            | Python      | yes (requires [scramp >= v1.4.3](https://pypi.org/project/scramp/), which is included in [pg8000 v1.29.3](https://pypi.org/project/pg8000/) and higher)  |
 | rust-postgres     | Rust        |                                                          |
 | PostgresClientKit | Swift       | no                                                       |
-| PostgresNIO       | Swift       |                                                          |
+| PostgresNIO       | Swift       | yes                                                      |
 | postgresql-client | TypeScript  | yes                                                      |
 
 ## Need help?

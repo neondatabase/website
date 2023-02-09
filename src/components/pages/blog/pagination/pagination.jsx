@@ -1,6 +1,7 @@
-import { navigate } from 'gatsby';
+'use client';
+
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import React from 'react';
 import ReactPaginate from 'react-paginate';
 
 import Container from 'components/shared/container';
@@ -9,6 +10,7 @@ import { BLOG_BASE_PATH } from 'constants/blog';
 import Arrow from './images/pagination-arrow.inline.svg';
 
 const Pagination = ({ currentPageIndex, pageCount }) => {
+  const router = useRouter();
   const pageLinkAndBreakLinkClassName =
     'flex justify-center items-center text-base font-semibold w-10 h-10 rounded-full transition-colors duration-200 mx-2 hover:text-primary-2 md:w-7 md:h-7 md:mx-0.5';
   const previousAndNextLinkClassName =
@@ -16,7 +18,7 @@ const Pagination = ({ currentPageIndex, pageCount }) => {
 
   const handlePageChange = ({ selected }) => {
     const navigatePath = selected === 0 ? BLOG_BASE_PATH : `${BLOG_BASE_PATH}${selected + 1}`;
-    navigate(navigatePath);
+    router.push(navigatePath);
   };
 
   return (

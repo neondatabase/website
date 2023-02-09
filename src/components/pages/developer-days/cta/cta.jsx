@@ -3,7 +3,7 @@ import React from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import StraightLineSvg from 'images/developer-days/straight-line.inline.svg';
+import StraightLineSvg from 'images/pages/developer-days/straight-line.inline.svg';
 
 import LineSvg from './images/line.inline.svg';
 
