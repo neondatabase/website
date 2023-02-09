@@ -7,7 +7,13 @@ import Link from 'components/shared/link';
 import ArrowIcon from 'icons/arrow-right.inline.svg';
 import PlayIcon from 'icons/play.inline.svg';
 
-const ItemsList = ({ className, items, setIsOpenModal, isUpcoming, buttonText }) => (
+const ItemsList = ({
+  className = null,
+  items,
+  setIsOpenModal,
+  isUpcoming = false,
+  buttonText = null,
+}) => (
   <div
     className={clsx(
       'absolute top-8 left-[38px] z-10 min-h-[520px] max-w-[330px] rounded-2xl px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] lg:pb-7 lg:pt-6 md:static md:mx-auto md:-mt-2 md:min-h-0 md:max-w-none md:rounded-t-none',
@@ -91,12 +97,6 @@ ItemsList.propTypes = {
   setIsOpenModal: PropTypes.func.isRequired,
   isUpcoming: PropTypes.bool,
   buttonText: PropTypes.string,
-};
-
-ItemsList.defaultProps = {
-  className: null,
-  isUpcoming: false,
-  buttonText: null,
 };
 
 export default ItemsList;

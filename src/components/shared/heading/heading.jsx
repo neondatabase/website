@@ -19,7 +19,15 @@ const styles = {
 
 const Heading = forwardRef(
   (
-    { className: additionalClassName, tag: Tag, size, theme, asHTML, children, ...otherProps },
+    {
+      className: additionalClassName = null,
+      tag: Tag,
+      size = null,
+      theme = null,
+      asHTML = false,
+      children,
+      ...otherProps
+    },
     ref
   ) => {
     const className = clsx(styles.size[size], styles.theme[theme], additionalClassName);
@@ -50,13 +58,6 @@ Heading.propTypes = {
   theme: PropTypes.oneOf(Object.keys(styles.theme)),
   asHTML: PropTypes.bool,
   children: PropTypes.node.isRequired,
-};
-
-Heading.defaultProps = {
-  size: null,
-  theme: null,
-  className: null,
-  asHTML: false,
 };
 
 export default Heading;

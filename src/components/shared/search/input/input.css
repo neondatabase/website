@@ -1,9 +1,10 @@
+@import 'tailwindcss/components';
 @layer components {
   .search-input {
     &::-webkit-search-cancel-button {
       @apply h-3 w-3 cursor-pointer appearance-none bg-black dark:bg-white;
-      -webkit-mask-image: url('components/shared/search/input/images/close.inline.svg');
-      mask-image: url('/images/quote.svg');
+      -webkit-mask-image: url('/images/close.svg');
+      mask-image: url('/images/close.svg');
       mask-size: 100%;
     }
   }

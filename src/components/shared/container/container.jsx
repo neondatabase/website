@@ -12,7 +12,7 @@ const styles = {
   },
 };
 
-const Container = forwardRef(({ className, size, children, ...otherProps }, ref) => (
+const Container = forwardRef(({ className = null, size, children, ...otherProps }, ref) => (
   <div
     id="container"
     className={clsx('relative mx-auto lg:max-w-none lg:px-8 md:px-4', styles.size[size], className)}
@@ -27,10 +27,6 @@ Container.propTypes = {
   className: PropTypes.string,
   size: PropTypes.oneOf(Object.keys(styles.size)).isRequired,
   children: PropTypes.node.isRequired,
-};
-
-Container.defaultProps = {
-  className: null,
 };
 
 export default Container;

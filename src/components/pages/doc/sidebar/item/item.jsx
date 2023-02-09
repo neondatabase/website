@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -11,7 +13,7 @@ const isActiveItem = (items, currentSlug) =>
     ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
   );
 
-const Item = ({ title, slug, isStandalone, items, currentSlug }) => {
+const Item = ({ title, slug = null, isStandalone = null, items = null, currentSlug }) => {
   const [isOpen, setIsOpen] = useState(slug === currentSlug);
 
   if (!isOpen && isActiveItem(items, currentSlug)) {
@@ -87,15 +89,7 @@ Item.propTypes = {
       ),
     })
   ),
-  isOpenByDefault: PropTypes.bool,
   currentSlug: PropTypes.string.isRequired,
-};
-
-Item.defaultProps = {
-  slug: null,
-  isStandalone: null,
-  items: null,
-  isOpenByDefault: false,
 };
 
 export default Item;

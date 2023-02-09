@@ -1,11 +1,16 @@
-import { StaticImage } from 'gatsby-plugin-image';
+'use client';
+
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import Search from 'components/shared/search';
+
+import illustration from './images/illustration.png';
 
 const CTA = ({ isDocsPage }) =>
   isDocsPage ? (
@@ -38,7 +43,8 @@ const Skeleton = () => (
   </div>
 );
 
-const Hero = ({ pathname }) => {
+const Hero = () => {
+  const pathname = usePathname();
   const [isDocsPage, setIsDocsPage] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -63,11 +69,11 @@ const Hero = ({ pathname }) => {
         </div>
 
         <div className="col-start-6 col-end-12 2xl:col-end-13 md:col-span-full">
-          <StaticImage
+          <Image
             className="w-full md:mx-auto md:max-w-xl"
             width={860}
             height={862}
-            src="./images/illustration.png"
+            src={illustration}
             alt="Illustration"
             loading="eager"
             quality={75}
@@ -76,10 +82,6 @@ const Hero = ({ pathname }) => {
       </Container>
     </section>
   );
-};
-
-Hero.propTypes = {
-  pathname: PropTypes.string.isRequired,
 };
 
 export default Hero;

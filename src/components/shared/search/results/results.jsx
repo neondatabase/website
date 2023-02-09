@@ -41,7 +41,7 @@ const HitCount = connectStateResults(
   }
 );
 
-const PageHit = ({ hit, insights, isNotFoundPage }) => (
+const PageHit = ({ hit, insights, isNotFoundPage = false }) => (
   <div className="with-highlighted-text">
     <Link
       className="block"
@@ -79,10 +79,6 @@ PageHit.propTypes = {
   }).isRequired,
   insights: PropTypes.func.isRequired,
   isNotFoundPage: PropTypes.bool,
-};
-
-PageHit.defaultProps = {
-  isNotFoundPage: false,
 };
 
 const HitWithInsights = connectHitInsights(aa)(PageHit);
@@ -124,7 +120,7 @@ const searchFooterClassNames = {
   notFound: 'rounded-b-[29px] px-6 xs:px-2.5',
 };
 
-const Results = ({ indices, type }) => {
+const Results = ({ indices, type = 'default' }) => {
   const [shouldShowAllResultsButton, setShouldShowAllResultsButton] = useState(false);
   const [allResultsShown, setAllResultsShown] = useState(false);
   const [containerHeight, setContainerHeight] = useState(null);
@@ -202,10 +198,6 @@ Results.propTypes = {
     })
   ).isRequired,
   type: PropTypes.oneOf(['default', 'mobile', 'notFound']),
-};
-
-Results.defaultProps = {
-  type: 'default',
 };
 
 export default Results;

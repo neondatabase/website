@@ -6,7 +6,7 @@ import useLottie from 'hooks/use-lottie';
 
 import animationData from './data/data-branching-illustration-lottie-data.json';
 
-const DataBranchingIllustration = ({ className, isInView }) => {
+const DataBranchingIllustration = ({ className = null, isInView }) => {
   const { animationRef, isAnimationReady } = useLottie({
     lottieOptions: { animationData },
     isInView,
@@ -27,10 +27,6 @@ const DataBranchingIllustration = ({ className, isInView }) => {
 DataBranchingIllustration.propTypes = {
   className: PropTypes.string,
   isInView: PropTypes.bool.isRequired,
-};
-
-DataBranchingIllustration.defaultProps = {
-  className: null,
 };
 
 export default DataBranchingIllustration;

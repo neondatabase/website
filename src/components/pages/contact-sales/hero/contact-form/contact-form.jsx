@@ -8,7 +8,7 @@ import * as yup from 'yup';
 import Button from 'components/shared/button';
 import Field from 'components/shared/field';
 import Link from 'components/shared/link';
-import { HUBSPOT_PRICING_FORM_ID, FORM_STATES } from 'constants/forms';
+import { HUBSPOT_CONTACT_SALES_FORM_ID, FORM_STATES } from 'constants/forms';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 const schema = yup
@@ -49,7 +49,7 @@ const ContactForm = ({ formState, setFormState }) => {
 
     try {
       const response = await sendHubspotFormData({
-        formId: HUBSPOT_PRICING_FORM_ID,
+        formId: HUBSPOT_CONTACT_SALES_FORM_ID,
         context,
         values: [
           {
