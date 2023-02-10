@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
 ---
 
-Each PostgreSQL connection creates a new process in the operating system, which consumes resources. For this reason, PostgreSQL limits the number of open connections. Neon permits 100 simultaneous PostgreSQL connections by default with a `max_connections=100` setting, which is the typical default for this parameter. In Neon, a small number of those connections are reserved for administrative purposes. A connection limit of 100 may not be sufficient for some applications. To increase the number of connections that Neon supports, you can enable connection pooling for the [compute endpoint](/docs/reference/glossary/#compute-endpoint) you use to connect to your database.
+Each PostgreSQL connection creates a new process in the operating system, which consumes resources. For this reason, PostgreSQL limits the number of open connections. Neon permits 100 simultaneous PostgreSQL connections by default with a `max_connections=100` setting, which is the typical default for this parameter. In Neon, a small number of those connections are reserved for administrative purposes. A connection limit of 100 may not be sufficient for some applications. To increase the number of connections that Neon supports, you can enable connection pooling.
 
 ## Connection pooling
 
@@ -17,16 +17,39 @@ Neon uses `PgBouncer` in `transaction mode`. For limitations associated with `tr
 
 ## Enable connection pooling
 
-In Neon, connection pooling is configured for individual compute endpoints. It is disabled by default. You can enable connection pooling by editing an compute endpoint.
+In Neon, a database resides on a branch, and you connect to the database via the compute endpoint associated with the branch. You can enable connection pooling for all connections to the compute endpoint or for individual connections. Both methods are described below.
+
+### Enable pooling for all connections
+
+This method enables pooling for all connections to a compute endpoint. All connection requests to the compute endpoint are directed to a connection pooler port. Direct connections to a database through the compute endpoint are not permitted.
 
 To enable connection pooling for a compute endpoint:
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
 1. On the **Dashboard**, select **Branches**.
-1. Select the branch with the compute endpoint you want to edit.
-1. Click the kebab menu in the **Endpoint** table, and select **Edit**.
+1. Find the branch with endpoint you want to enable pooling for, click the kebab menu in the **Endpoints** table, and select **Edit**.
 1. Toggle **Pooler enabled** to the on position.
 1. Click **Save**.
+
+You can also enable connection pooling when creating a compute endpoint. See [Create a compute endpoint](/docs/manage/endpoints#create-an-endpoint).
+
+### Enable pooling for individual connections
+
+This method enables pooling for individual connections that specify a `-pooler` option in the connection string. Connection requests that use the `-pooler` option are directed to a connection pooler port. Connections that do not use the `-pooler` option connect directly to the database. This method supports workflows that require both pooled and non-pooled connections to the same database.
+
+When using this method, ensure that connection pooling is not enabled for the compute endpoint, as described in [Enable pooling for all connections](#enable-pooling-for-all-connections).
+
+To connect to a database with a pooled connection, add the `-pooler` option to the hostname in your Neon connection string. For example:
+
+```text
+postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
+```
+
+To connect to the same database directly with a non-pooled connection, use the same connection string without the `-pooler` option:
+
+```text
+postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
+```
 
 ## Connection pooling notes and limitations
 
@@ -45,7 +68,7 @@ Error: undefined: Database error
 Error querying the database: db error: ERROR: prepared statement "s0" already exists
  ```
 
-You may encounter this error with other applications that require a direct connection to PostgreSQL or applications that are not compatible with PgBouncer in `transaction mode`. In these cases, do not enable connection pooling in Neon.
+You may encounter this error with other applications that require a direct connection to PostgreSQL or applications that are not compatible with PgBouncer in `transaction mode`. To address this issue, Neon supports pooled and non-pooled connections to the same database with a `-pooler` connection string option. For more information, see [Enable connection pooling](#enable-connection-pooling) for more information.
   
 For more information about using Prisma in a PgBouncer-enabled environment, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 
@@ -54,4 +77,3 @@ PostgreSQL features such as prepared statements and [LISTEN](https://www.postgre
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
-
