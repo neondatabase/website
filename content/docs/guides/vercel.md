@@ -15,7 +15,7 @@ Prerequisites:
 
 - A [Vercel account](https://vercel.com).
 - A Vercel project. If you do not have one, see [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project), in the _Vercel documentation_.
-- The integration sets the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` environment variables for your Vercel production, development, and preview environments. Ensure that these variables do not already exist in your Vercel project settings. See [Troubleshoot connection issues](#troubleshoot-connection-issues) for more information.
+- The integration sets the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` environment variables for your Vercel production, development, and preview environments. Ensure that these variables do not already exist in your Vercel project settings. For more information, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
 
 To add the integration:
 
@@ -32,20 +32,20 @@ To add the integration:
 
         The database that you select must reside on the primary branch of your Neon project. This branch will be your production branch. It is preselected for you.
 
-        You have the option to create a branch for your Vercel development environment. When this option is selected, the integration creates a branch named `vercel-dev` and sets Vercel environment variables for it.
+        You have the option to create a database branch for your Vercel development environment. Selecting this option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a copy-on-write clone of your production branch that you can modify without affecting your production branch.
 
         When you finish making selections, click **Continue**.
     1. Confirm the integration settings. This allows the integration to:
 
             - Reset the database user's password, enabling the integration to configure the environment variables that require a password.
             - Set environment variables for your Vercel project's production, development, and preview environments.
-            - Create database branches and compute endpoints for preview deployments.
+            - Create database branches for preview deployments.
             - Create a development branch for your Vercel development environment (if you selected that option).
-        ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
+    ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
 
         Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
 
-        Once the integration is added, you are presented with a **Success!** dialog where you can copy the new password for your database user.
+        Once the settings are configured, you are presented with a **Success!** dialog where you can copy the new password for your database user.
         ![Vercel integration success](/docs/guides/vercel_success.png)
     1. Click **Done** to complete the installation.
 1. To view the results of the integration in Neon:
