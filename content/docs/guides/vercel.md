@@ -3,46 +3,11 @@ title: Connect Vercel and Neon
 enableTableOfContents: true
 ---
 
-This guide describes how to connect your Vercel project with Neon using the [Neon integration from the Vercel marketplace](https://vercel.com/integrations/neon).
+This guide describes how to connect Vercel and Neon using the [Neon integration from the Vercel marketplace](https://vercel.com/integrations/neon). The integration connects your Vercel project to a Neon database and enables creating a database branch for each preview deployment. Optionally, the integration creates a development branch that you can use with your Vercel development environment.
 
 <Admonition type="note">
 This is a Beta version of Neon’s Vercel integration. For assistance or to suggest improvements, contact [vercel-feedback@neon.tech](mailto:vercel-feedback@neon.tech).
 </Admonition>
-
-## What the Neon integration does
-
-The Neon-Vercel integration connects your Vercel project to a Neon project and creates a database branch for every Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments).
-
-Optionally, based on your selection, the integration also creates a development branch, which you can use with your Vercel development environment.
-
-The integration sets these environment variables in Vercel:
-
-- `PGHOST`
-- `PGUSER`
-- `PGDATABASE`
-- `PGPASSWORD`
-- `DATABASE_URL`
-
-The variables are set in your Vercel production, development, and preview environments, as required.
-
-## How the integration works with preview deployments
-
-Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments) enable teams to collaborate effectively by automatically creating an isolated, production-like environment for every commit. This way, all changes can be previewed before they are merged into production.
-
-However, when databases are involved, teams often share a single database containing dummy data across all preview deployments. This setup is not ideal for these reasons:
-
-- If the shared database encounters an issue, so will all preview deployments.
-- Changes to the shared database schema might break all previously created preview deployments, making it a productivity bottleneck.
-
-![Shared database](/docs/guides/vercel_shared_database.webp)
-
-Neon’s branching feature addresses all of these challenges. A branch is a copy-on-write clone of your data, so creating it only takes a few seconds. This makes it a scalable and cost-effective solution for preview deployments, enabling you to create a branch for every pull request.
-
-![Branch database](/docs/guides/vercel_branch_database.webp)
-
-When you push a branch to the GitHub repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting the required Vercel preview environment variables. The newly created Neon branch will have same name as the Git branch containing the code changes.
-
-For a demo app that you can use to try the Neon-Vercel integration, refer to the [Database branching with Vercel Preview Deployments](https://neon.tech/blog/neon-vercel-integration) blog post, which demonstrates the integration with the [Naturesnap](https://github.com/neondatabase/naturesnap) application.
 
 ## Add the Neon integration
 
@@ -71,9 +36,9 @@ To add the integration:
         When you finish making selections, click **Continue**.
     1. Confirm the integration settings.
     ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
-        Confirming the settings allows the integration to perform the following actions:
+        Confirming the settings allows the integration to:
 
-            - Set the environment variables listed above for your Vercel production, development, and preview environments, as required.
+            - Set environment variables for your Vercel production, development, and preview environments, as required.
             - Reset the database user's password, enabling the integration to configure the `PGPASSWORD` and `DATABASE_URL` environment variables.
             - Create database branches and compute endpoints for preview deployments.
             - Create a development branch for your Vercel development environment (if you selected that option).
@@ -92,19 +57,46 @@ To add the integration:
     1. Navigate to [Vercel](https://vercel.com/).
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**.
-    You will see the `PG*` and `DATABASE_URL` environment variables set by the integration.
+    The following environment variables set in your Vercel production, development, and preview environments, as required.
+
+        - `PGHOST`
+        - `PGUSER`
+        - `PGDATABASE`
+        - `PGPASSWORD`
+        - `DATABASE_URL`
 
 <Admonition type="important">
 For the preview deployment integration to work, the database connection settings in your application must correspond to the Vercel production environment variable settings configured by your Neon integration. For example, if your applications's database connection is defined by a `DATABASE_URL` variable, make sure that setting in your application corresponds to the `DATABASE_URL` setting configured by the integration. You can find the environment variable settings in Vercel by navigating to the Vercel dashboard, selecting your project, and selecting **Settings** > **Environment Variables**.
 </Admonition>
 
+## How the integration works with preview deployments
+
+Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments) enable teams to collaborate effectively by automatically creating an isolated, production-like environment for every commit. This way, all changes can be previewed before they are merged into production.
+
+However, when databases are involved, teams often share a single database containing dummy data across all preview deployments. This setup is not ideal for these reasons:
+
+- If the shared database encounters an issue, so will all preview deployments.
+- Changes to the shared database schema might break all previously created preview deployments, making it a productivity bottleneck.
+
+![Shared database](/docs/guides/vercel_shared_database.webp)
+
+Neon’s branching feature addresses all of these challenges. A branch is a copy-on-write clone of your data, so creating it only takes a few seconds. This makes it a scalable and cost-effective solution for preview deployments, enabling you to create a branch for every pull request.
+
+![Branch database](/docs/guides/vercel_branch_database.webp)
+
+When you push a branch to the GitHub repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting the required Vercel preview environment variables. The newly created Neon branch will have same name as the Git branch containing the code changes.
+
+For a demo app that you can use to try the Neon-Vercel integration, refer to the [Database branching with Vercel Preview Deployments](https://neon.tech/blog/neon-vercel-integration) blog post, which demonstrates the integration with the [Naturesnap](https://github.com/neondatabase/naturesnap) application.
+
+
+
 ## Troubleshoot connection issues
 
 If the environment variables configured by the Neon integration already exist, you may encounter the following error due to an existing integration that sets one or more of the same environment variables.
 
-```text
-Failed to set environment variables in Vercel. Please make sure that the following environment variables are not set: PGHOST, PGUSER, PGDATABASE, PGPASSWORD, DATABASE_URL
-```
+    ```text
+    Failed to set environment variables in Vercel. Please make sure that the following environment variables are not set: PGHOST, PGUSER, PGDATABASE, PGPASSWORD, DATABASE_URL
+    ```
 
 In this case, you can remove the existing environment variables from your Vercel project settings and retry the Neon integration. To remove existing environment variables:
 
