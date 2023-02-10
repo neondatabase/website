@@ -1,38 +1,39 @@
 ---
 title: Use Neon with Koyeb
+subtitle: Integrate a serverless Neon Postgres database with your application running on Koyeb
 enableTableOfContents: true
 ---
 
-Integrate a serverless Neon Postgres database to your application running on Koyeb and benefit from Koyeb native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across our edge network with zero configuration.
+[Koyeb](https://www.koyeb.com/) is a developer-friendly serverless platform designed to easily deploy reliable and scalable applications globally. Koyeb offers native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across their edge network with zero configuration.
 
-Neon is a lightning-fast, cost-efficient, and easy-to-use serverless Postgres-compatible database provider. Not only a simple database provider, Neon can also be natively integrated into modern development workflows thanks to data branching which instantly deploys environments with an up-to-date copy of your production data.
-
-This guide explains how to connect a Neon Postgres database to an application running on Koyeb. To successfully follow this documentation, you will need to have:
+This guide describes how to connect a Neon Postgres database to an application running on Koyeb. To successfully follow the instructions in this guide, you require:
 
 - A Koyeb account to deploy the application. You can optionally install the Koyeb CLI if you prefer to follow this guide without leaving the terminal
 - A Neon account to deploy the PostgreSQL database
-- If you already have a Neon database running and want to quickly preview how to connect your Neon database to an application running on Koyeb, use the Deploy to Koyeb button below.
+- If you already have a Neon database and want to quickly connect it to an application running on Koyeb, use the Deploy to Koyeb button below.
+
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?...)
 
 ## Deploy to Koyeb
 
-Make sure to replace properly set the `DATABASE_URL` environment variable with the connection string of your Neon database.
+Make sure to replace and properly set the `DATABASE_URL` environment variable with the connection string of your Neon database.
 
 ## Create a Neon serverless PostgreSQL database
 
 To create a Neon PostgreSQL database, sign into your Neon account.
 
-On the Neon control panel, start by clicking the "Create a project" button to access the database creation page.
+In the Neon COnsole, click **Create a project**.
 
 1. Name your database, e.g., neon-koyeb
-1. Select the Postgres version to use for the database. Here, we use Postgres 15
-1 Pick the Region to run the database in. Here, we use Europe (Frankfurt) as our compute will be deployed in this region on Koyeb
-1. When you are done configuring your database, click the "Create project" button. Your database will be provisioned.
+1. Select a Postgres version to use for the database.
+1  Select a region to run the database in. Here, we use Europe (Frankfurt) as our compute will be deployed in this region on Koyeb
+1. When you are done configuring your database, click **Create project**.
 
-A modal will pop up with your connection string. Store this value in a safe place. It is required later.
+A dialog pops up with your connection string. Store this value in a safe place. It is required later.
 
 ## Prepare the database on your machine
 
-The application we will deploy on Koyeb that connects to the Neon PostgreSQL uses Prisma as an ORM. Prisma is an open-source ORM. We use it to synchronize our database schema with our Prisma schema.
+The application you will deploy on Koyeb connects to the Neon PostgreSQL using Prisma as an ORM. Prisma is an open-source ORM. It is used to synchronize the database schema with our Prisma schema.
 
 Before deploying the application, we will need to perform a migration to create the database schema and seed data.
 
@@ -149,5 +150,6 @@ The example application exposes a /planets endpoint that you can use to list pla
 
 To delete the example application and the Neon PostgreSQL database and avoid incurring any charges, follow these steps:
 
-From the Neon dashboard, click "Settings" for the database and click "Delete project". Follow the instructions.
-From the Koyeb control panel, select the App to delete. Under the "Settings" tab, click the "Delete" button and follow the instructions.
+1. From the Neon dashboard, click "Settings" for the database and click "Delete project". Follow the instructions.
+1. From the Koyeb control panel, select the App to delete.
+1. Under the "Settings" tab, click the "Delete" button and follow the instructions.
