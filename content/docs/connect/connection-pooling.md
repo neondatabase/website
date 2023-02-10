@@ -21,25 +21,25 @@ In Neon, a database resides on a branch, and you connect to the database via the
 
 ### Enable pooling for all connections
 
-This method enables pooling for all connections to a particular compute endpoint. All connection requests to the compute endpoint are directed to a connection pooler port.
+This method enables pooling for all connections to a compute endpoint. All connection requests to the compute endpoint are directed to a connection pooler port. Direct connections to a database through the compute endpoint are not permitted.
 
 To enable pooling for all connections to a compute endpoint:
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
-2. On the **Dashboard**, select **Endpoints**.
-3. Find the endpoint you want to enable pooling for, click the kebab menu in the **Endpoints** table, and select **Edit**.
+2. On the **Dashboard**, select **Branches**.
+3. Find branch with endpoint you want to enable pooling for, click the kebab menu in the **Endpoints** table, and select **Edit**.
 5. Toggle **Pooler enabled** to the on position.
 6. Click **Save**.
 
-You can also enable connection pooling when creating a compute endpoint. See [Create an endpoint](/docs/manage/endpoints#create-an-endpoint).
+You can also enable connection pooling when creating a compute endpoint. See [Create a compute endpoint](/docs/manage/endpoints#create-an-endpoint).
 
 ### Enable pooling for individual connections
 
-This method enables pooling for connections that specify a `-pooler` option in the connection string. Connection requests that use the `-pooler`option are directed to a connection pooler port. Connections that do not use the `-pooler` option connect directly to the database. This method supports workflows that require both pooled and non-pooled connections to the same database.
+This method enables pooling for individual connections that specify a `-pooler` option in the connection string. Connection requests that use the `-pooler` option are directed to a connection pooler port. Connections that do not use the `-pooler` option connect directly to the database. This method supports workflows that require both pooled and non-pooled connections to the same database.
 
 When using this method, ensure that connection pooling is not enabled for the compute endpoint, as described in [Enable pooling for all connections](#enable-pooling-for-all-connections).
 
-To use a pooled connection, add the `-pooler` option to the hostname in your Neon connection string. For example, the following connection string uses the `-pooler` option to connect via a pooled connection:
+To connect to a database with a pooled connection, add the `-pooler` option to the hostname in your Neon connection string. For example:
 
 ```text
 postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
