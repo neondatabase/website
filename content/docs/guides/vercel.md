@@ -6,7 +6,7 @@ enableTableOfContents: true
 This guide describes how to connect Vercel and Neon using the [Neon integration from the Vercel marketplace](https://vercel.com/integrations/neon). The integration connects your Vercel project to a Neon database and enables creating a database branch for each preview deployment. Optionally, the integration also creates a development branch that you can use with your Vercel development environment.
 
 <Admonition type="note">
-This is a Beta version of Neon’s Vercel integration. For assistance or to suggest improvements, contact [vercel-feedback@neon.tech](mailto:vercel-feedback@neon.tech).
+This is a Beta version of Neon’s Vercel integration. For assistance or to suggest improvements, contact [vercel-feedback@neon.tech](mailto:vercel-feedback@neon.tech) or post in the [Neon community](https://community.neon.tech/).
 </Admonition>
 
 ## Add the Neon integration
