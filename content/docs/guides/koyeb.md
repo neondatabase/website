@@ -1,6 +1,5 @@
 ---
 title: Use Neon with Koyeb
-subtitle: Integrate a serverless Neon Postgres database with your application running on Koyeb
 enableTableOfContents: true
 ---
 
@@ -10,9 +9,7 @@ This guide describes how to connect a Neon Postgres database to an application r
 
 - A Koyeb account to deploy the application. You can optionally install the Koyeb CLI if you prefer to follow this guide without leaving the terminal
 - A Neon account to deploy the PostgreSQL database
-- If you already have a Neon database and want to quickly connect it to an application running on Koyeb, use the Deploy to Koyeb button below.
-
-[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?...)
+- If you already have a Neon database and want to quickly connect it to an application running on Koyeb, use the Deploy to Koyeb button.
 
 ## Deploy to Koyeb
 
