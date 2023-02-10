@@ -45,8 +45,8 @@ To add the integration:
 
         Click **Connect** to accept the settings and proceed with the integration. If you experience a connection failures, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
 
-    Once the integration is added, you are presented with a **Success!** dialog where you can copy the new password for your database user.
-    ![Vercel integration success](/docs/guides/vercel_success.png)
+        Once the integration is added, you are presented with a **Success!** dialog where you can copy the new password for your database user.
+        ![Vercel integration success](/docs/guides/vercel_success.png)
     1. Click **Done** to complete the installation.
 1. To view the results of the integration in Neon:
     1. Navigate to the [Neon Console](https://console.neon.tech/).
