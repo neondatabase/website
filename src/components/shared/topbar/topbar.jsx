@@ -9,7 +9,7 @@ const TopBar = () => (
     to="/neon-vercel-integration"
   >
     <span className="mr-4 truncate border-r border-black border-opacity-20 py-1 pr-4 text-sm font-semibold">
-      Create a Neon branch for every Vercel Preview Deployment
+      Neon integration on Vercel: Create a branch for every Preview Deployment
     </span>
     <span className="inline-flex items-center text-sm font-bold xs:hidden">
       <span>Learn More</span>
