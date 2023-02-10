@@ -37,7 +37,7 @@ To connect to Neon from Prisma:
 
 where:
 
-- `<host>` the hostname of the Neon endpoint. An endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `<host>` the hostname of the Neon compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 - `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 

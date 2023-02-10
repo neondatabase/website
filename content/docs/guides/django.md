@@ -39,7 +39,7 @@ DATABASES = {
         'NAME': '<dbname>',
         'USER': '<user>',
         'PASSWORD': '<password>',
-        'HOST': '<endpoint_hostname>',
+        'HOST': '<hostname>',
         'PORT': '<port>',
     }
 }
@@ -50,7 +50,7 @@ where:
 - `<dbname>` is the name of the database. The default Neon database is `neondb`.
 - `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a project.
-- `<endpoint_hostname>` is the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `<hostname>` is the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 - `<port>` is the PostgreSQL port number. Neon uses the default port, `5432`.
 
 <Admonition type="note">

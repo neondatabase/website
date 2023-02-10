@@ -2,17 +2,17 @@
 title: Connect from any application
 enableTableOfContents: true
 ---
-When connecting to Neon from an application or client, you will need to connect to a database in your Neon project. In Neon, a database belongs to a branch, which may the root branch of your project (`main`) or a child branch. The root branch in a Neon project has a default database named `neondb`.
+When connecting to Neon from an application or client, you will need to connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch. The primary branch in a Neon project is created with a default database named `neondb`.
 
-To connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through an endpoint, which is the compute instance associated with the branch.
+To connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through a compute endpoint that is  associated with the branch.
 
 ```text
 Project
-    |----root branch (main) ---- endpoint (compute) <--- application/client
+    |----primary branch (main) ---- compute endpoint <--- application/client
              |    |
              |    |---- database (neondb)
              |
-             ---- child branch ---- endpoint (compute) <--- application/client
+             ---- child branch ---- compute endpoint <--- application/client
                             |
                             |---- database (mydb)  
 ```
@@ -21,16 +21,16 @@ You can obtain the connection details that you require from the **Connection Det
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
-A Neon connection string includes the user, the endpoint hostname, and the database name.
+A Neon connection string includes the user, the compute endpoint hostname, and the database name.
 
 ```text
-postgres://sally@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb
-             ^                       ^                           ^
-             |- <user>               |- <endpoint_hostname>      |- <database>
+postgres://sally@cold-poetry-404091.us-east-2.aws.neon.tech/neondb
+             ^                       ^                        ^
+             |- <user>               |- <hostname>            |- <database>
 ```
 
 <Admonition type="note">
-When an application or client requires a PostgreSQL host, it is the endpoint hostname that you should provide. An endpoint hostname, such as the one shown above, is comprised of an `endpoint_id` (`ep-cold-poetry-404091`), a region slug (`us-east-2`), the cloud platform (`aws`), and the Neon domain (`neon.tech`).
+When an application or client requires a PostgreSQL host, it is the hostname of the compute endpoint that you should provide. A hostname, such as the one shown above, is comprised of an `endpoint_id` (`ep-square-sea-260584`), a region slug (`us-east-2`), the cloud platform (`aws`), and the Neon domain (`neon.tech`).
 </Admonition>
 
 You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line, as shown:

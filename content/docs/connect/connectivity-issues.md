@@ -15,7 +15,7 @@ In most cases, this happens if your client library or application does not suppo
 
 ## Details
 
-To route incoming connections, we use different domain names for different endpoints. For example, to connect to the endpoint `ep-mute-recipe-239816`, we ask you to connect to `ep-mute-recipe-239816.us-east-2.aws.neon.tech`. However, the PostgreSQL wire protocol does not transfer the server domain name, so we rely on the SNI (Server Name Indication) extension of the `TLS` protocol, which allows a client to indicate what domain name it is attempting to connect to. This is the same mechanism that allows hosting several `https`-enabled websites on a single IP address. `SNI` support was added to the `libpq` (an official PostgreSQL client library) in version 14, released in September 2021. All `libpq`-based clients like Python's `psycopg2` and Ruby's `ruby-pg` should work if the system `libpq`  version is >= 14.
+To route incoming connections, we use different domain names for different compute endpoints. For example, to connect to the compute endpoint `ep-mute-recipe-239816`, we ask you to connect to `ep-mute-recipe-239816.us-east-2.aws.neon.tech`. However, the PostgreSQL wire protocol does not transfer the server domain name, so we rely on the SNI (Server Name Indication) extension of the `TLS` protocol, which allows a client to indicate what domain name it is attempting to connect to. This is the same mechanism that allows hosting several `https`-enabled websites on a single IP address. `SNI` support was added to the `libpq` (an official PostgreSQL client library) in version 14, released in September 2021. All `libpq`-based clients like Python's `psycopg2` and Ruby's `ruby-pg` should work if the system `libpq`  version is >= 14.
 
 ## Workarounds
 
@@ -23,7 +23,7 @@ If you encounter a `Project ID is not specified` error and a library or applicat
 
 ### A. Pass the endpoint ID as an option
 
-We support a special connection option named `project`, which you can set to identify the endpoint you are connecting to. More specifically, you can set pass `options=project%3Dmy-endpoint-123456` as a `GET` parameter in the connection string. The `%3D` is a URL-encoded `=`.
+We support a special connection option named `project`, which you can set to identify the compute endpoint you are connecting to. More specifically, you can set pass `options=project%3Dmy-endpoint-123456` as a `GET` parameter in the connection string. The `%3D` is a URL-encoded `=`.
 
 For example, instead of the following connection string:
 
