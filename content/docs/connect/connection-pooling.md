@@ -5,21 +5,25 @@ redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
 ---
 
-Each PostgreSQL connection creates a new process in the operating system, which consumes resources. For this reason, PostgreSQL limits the number of open connections. Neon permits 100 simultaneous PostgreSQL connections by default with a `max_connections=100` setting, which is the typical default for this parameter. In Neon, a small number of those connections are reserved for administrative purposes. A connection limit of 100 may not be sufficient for some applications. To increase the number of connections that Neon  supports, you can enable connection pooling for the [endpoint](/docs/reference/glossary/#endpoint) compute instance you use to connect to your database.
+Each PostgreSQL connection creates a new process in the operating system, which consumes resources. For this reason, PostgreSQL limits the number of open connections. Neon permits 100 simultaneous PostgreSQL connections by default with a `max_connections=100` setting, which is the typical default for this parameter. In Neon, a small number of those connections are reserved for administrative purposes. A connection limit of 100 may not be sufficient for some applications. To increase the number of connections that Neon supports, you can enable connection pooling.
 
 ## Connection pooling
 
-Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations or to running many instances of an application. With regular PostgreSQL, new connections are rejected when reaching the `max_connections` limit. To overcome this limitation, Neon supports connection pooling using [PgBouncer](https://www.pgbouncer.org/).
+Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations, to running many instances of an application, or to applications with serverless functions. With regular PostgreSQL, new connections are rejected when reaching the `max_connections` limit. To overcome this limitation, Neon supports connection pooling using [PgBouncer](https://www.pgbouncer.org/), allowing Neon to support up to 1000 concurrent connections.
 
 PgBouncer is an open-source connection pooler for PostgreSQL. When an application needs to connect to a database, PgBouncer provides a connection from the pool. Connections in the pool are routed to a smaller number of actual PostgreSQL connections. When a connection is no longer required, it is returned to the pool and is available to be used again. Maintaining a pool of available connections improves performance by reducing the number of connections that need to be created and torn down to service incoming requests. Connection pooling also helps avoid rejected connections. When all connections in the pool are being used, PgBouncer queues a new request until a connection from the pool becomes available.
 
-With connection pooling enabled, Neon can handle up to 1000 concurrent connections. Neon uses `PgBouncer` in `transaction mode`. For limitations associated with `transaction mode`, see [Connection pooling notes and limitations](#connection-pooling-notes-and-limitations). For more information about `PgBouncer`, refer to [https://www.pgbouncer.org/](https://www.pgbouncer.org/).
+Neon uses `PgBouncer` in `transaction mode`. For limitations associated with `transaction mode`, see [Connection pooling notes and limitations](#connection-pooling-notes-and-limitations). For more information about `PgBouncer`, refer to [https://www.pgbouncer.org/](https://www.pgbouncer.org/).
 
 ## Enable connection pooling
 
-In Neon, connection pooling is configured for individual endpoint compute instances. It is disabled by default. You can enable connection pooling when creating or editing an endpoint.
+In Neon, a database resides on a branch, and you connect to the database via the compute endpoint associated with the branch. You can enable connection pooling for all connections to the compute endpoint or for individual connections. Both methods are described below.
 
-To enable connection pooling for an existing endpoint:
+### Enable pooling for all connections
+
+This method enables pooling for all connections to a particular compute endpoint. All connection requests to the compute endpoint are directed to a connection pooler port.
+
+To enable pooling for all connections to a compute endpoint:
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
 2. On the **Dashboard**, select **Endpoints**.
@@ -27,15 +31,25 @@ To enable connection pooling for an existing endpoint:
 5. Toggle **Pooler enabled** to the on position.
 6. Click **Save**.
 
-You can also enable connection pooling when creating an endpoint. See [Create an endpoint](/docs/manage/endpoints#create-an-endpoint).
+You can also enable connection pooling when creating a compute endpoint. See [Create an endpoint](/docs/manage/endpoints#create-an-endpoint).
 
-## Pooled and non-pooled connection strings
+### Enable pooling for individual connections
 
-Neon supports a `-pooler` option, which you can add to the hostname in your Neon connection string to enable connection pooling with PGBouncer. For example, the following connection string uses the `-pooler` option to enable connection pooling:
+This method enables pooling for connections that specify a `-pooler` option in the connection string. Connection requests that use the `-pooler`option are directed to a connection pooler port. Connections that do not use the `-pooler` option connect directly to the database. This method supports workflows that require both pooled and non-pooled connections to the same database.
 
-`postgres://casey@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb`
+When using this method, ensure that connection pooling is not enabled for the compute endpoint, as described in [Enable pooling for all connections](#enable-pooling-for-all-connections).
 
-The `-poole`r option forces the connection to use a separate connection pooler port when connecting to the database. This feature supports workflows that require both pooled and non-pooled connections to the same database. For example, Prisma Migrate requires a direct connection to the database, while serverless applications that use Prisma Client require a pooled connection.
+To use a pooled connection, add the `-pooler` option to the hostname in your Neon connection string. For example, the following connection string uses the `-pooler` option to connect via a pooled connection:
+
+```text
+postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
+```
+
+To connect to the same database directly with a non-pooled connection, use the same connection string without the `-pooler` option:
+
+```text
+postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
+```
 
 ## Connection pooling notes and limitations
 
