@@ -41,7 +41,7 @@ Use the following instructions to connect to an existing Neon database from Hasu
 - A connection string for a branch in Neon project that includes your password. For example:
 
   ```text
-  postgres://<user>:<password>@<endpoint_hostname>:5432/neondb
+  postgres://<user>:<password>@<hostname>:5432/neondb
   ```
 
   Your project's connection string can be found on the Neon **Dashboard**, under **Connection Details**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/users#reset-a-password).

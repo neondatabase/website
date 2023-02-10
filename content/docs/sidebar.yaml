@@ -46,7 +46,7 @@
       slug: manage/projects
     - title: Branches
       slug: manage/branches
-    - title: Endpoints
+    - title: Compute endpoints
       slug: manage/endpoints
     - title: Users
       slug: manage/users

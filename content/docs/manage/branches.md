@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
 ---
 
-Data resides in a branch. Each Neon project has a root branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
+Data resides in a branch. Each Neon project has a primary branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
 
 A child branch is a copy-on-write clone the data in the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
@@ -28,12 +28,12 @@ To create a branch:
 3. Click **New Branch** to open the branch creation dialog.
 ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch.
-5. Select a parent branch. You can branch from your Neon project's [root branch](/docs/reference/glossary/#root-branch) (`main`) or a previously created branch.
+5. Select a parent branch. You can branch from your Neon project's [primary branch](/docs/reference/glossary/#primary-branch) (`main`) or a previously created branch.
 6. Select one of the following branching options:
     - **Head**: Creates a branch with data up to the current point in time (the default).
     - **Time**: Creates a branch with data up to the specified date and time.
     - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](/docs/reference/glossary#lsn).
-7. Select whether or not to create an endpoint. An endpoint is a Neon compute instance, which is required to connect to the branch. If you are unsure, you can add an endpoint later.
+7. Select whether or not to create a compute endpoint, which is required to connect to the branch. If you are unsure, you can add a compute endpoint later.
 8. Click **Create Branch** to create your branch.
 
 You are directed to the **Branches** page where you are shown the details for your new branch.
@@ -45,7 +45,6 @@ To view the branches in a Neon project:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table to view details about the branch.
-
 ![Branch details](/docs/manage/branch_details.png)
 
 <Admonition type="tip">
@@ -54,7 +53,7 @@ The **Branches** widget on the project **Dashboard** also shows the branches in 
 
 ## Connect to a branch
 
-Connecting to a database in a branch requires connecting via an endpoint, which is the compute instance associated with a branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
+Connecting to a database in a branch requires connecting via a compute endpoint tht is associated with a branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="tip">
 You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
@@ -63,22 +62,22 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 1. In the Neon Console, select a project.
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the user you want to connect with.
 ![Connection details widget](/docs/manage/connection_details.png)
-3. Copy the connection string. A connection string includes your user name, the endpoint hostname, and database name. The endpoint is the compute instance associated with the branch.
+3. Copy the connection string. A connection string includes your user name, the compute endpoint hostname, and database name.
 5. Add your password to the connection string as shown below, and connect with `psql`. You can connect using the same user and password that you use to connect to the parent branch.
 
   ```bash
-  psql postgres://casey:<password>@ep-shrill-limit-432460.us-east-2.aws.neon.tech/neondb
+  psql postgres://sally:<password>@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb
   ```
 
 <Admonition type="tip">
-A endpoint hostname starts with an `ep-` prefix. You can also find an endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
+A compute endpoint hostname starts with an `ep-` prefix. You can also find a compute endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
 </Admonition>
 
 If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the _Guides_ section in the documentation provide connection examples for various languages and frameworks. For more information about connecting, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Delete a branch
 
-Deleting a branch is a permanent action. Deleting a branch also deletes the databases and users that belong to the branch as well as the branch endpoint, which is the compute instance associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
+Deleting a branch is a permanent action. Deleting a branch also deletes the databases and users that belong to the branch as well as the compute endpoint associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
 
 To delete a branch:
 
@@ -125,10 +124,10 @@ The following Neon API method creates a branch. To view the API documentation fo
 POST /projects/{project_id}/branches 
 ```
 
-The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without an endpoint. The `branch` attribute specifies the parent branch.
+The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without a compute endpoint. The `branch` attribute specifies the parent branch.
 
 <Admonition type="note">
-This method does not require a request body. Without a request body, the method creates a branch from the project's `main` branch, and an endpoint is not created.
+This method does not require a request body. Without a request body, the method creates a branch from the project's primary branch, and a compute endpoint is not created.
 </Admonition>
 
 ```curl
@@ -149,9 +148,9 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
 ```
 
 - The `project_id` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**, or you can find it by listing the projects for your Neon account using the Neon API.
-- The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's root branch (`main`) or a previously created branch.
+- The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's primary branch (`main`) or a previously created branch.
 
-The response includes information about the branch, the branch's endpoint, and the `create_branch` and `start_compute` operations that have been initiated.
+The response includes information about the branch, the branch's compute endpoint, and the `create_branch` and `start_compute` operations that have been initiated.
 
 ```json
 {
@@ -235,7 +234,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
 
 The `project_id` for a Neon project is found in the Neon Console on the **Settings** tab, under **General Settings**, or you can find it by listing the projects for your Neon account using the Neon API.
 
-The response lists the project's root branch and any child branches. The name of the root branch is `main`.
+The response lists the project's primary branch and any child branches. The name of the primary branch is `main`.
 
 Response:
 
