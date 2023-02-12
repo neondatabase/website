@@ -5,15 +5,15 @@ enableTableOfContents: true
 
 This guide describes how to setup and deploy a Next.js application on Vercel that creates a database branch in Neon for each Preview Deployment. Schema changes are managed using Prisma.
 
-The example application is called NatureSnap. It is a simple photo gallery application for viewing nature photos. The application only displays photographs. The example shows how to modify the application to also display the name of the photographer, demonstrating how you can use Neon integration with Vercel to create a database branch for each preview deployment.
+The example application is called NatureSnap. It is a simple photo gallery application for viewing nature photos. The application currently displays photographs only. The example shows how to modify the application to add the name of the photographer, demonstrating how you can use Neon integration with Vercel to create a database branch for each preview deployment.
 
-## Prerequsites
+## Prerequisites
 
 - A Vercel account
 - A GitHub account
 - Prisma
 
-## Download the example application and install dependencies
+## Clone the example application and install dependencies
 
 1. Clone the example NatureSnap project.
 
@@ -99,23 +99,44 @@ Create Neon project and name it `naturesnap`.
 
 ![Create naturesnap project](/docs/guides/ns_create_project.png)
 
-Upon creating the project, you are presented with a dialog that provides connection details for the project. Passwords are reset in a later step, so you don't need this information yet.
+Upon creating the project, you are presented with a dialog that provides connection details for the project. Passwords are reset in a later step, so you don't need this information yet. You can close the dialog.
 
 ## Prepare your Neon project
 
-### Create a database user
+In this step you create a user (a PostgreSQL role) that will be use by the NatureSnap application and two databases, one for NatureSnap data, and one for the Prisma shadow database that is required to perform schema migrations.
+
+### Create the database user
+
+Create a database user named `naturesnap`. In the [Neon Console](https://console.neon.tech):
+
+1. Select **Users**.
+1. Select **New User**.
+1. Enter `naturesnap` as the user name.
+1. Click **Create**.
 
 role and two databases: naturesnap and shadow. Then add the DATABASE_URL and SHADOW_DATABASE_URL to the .env file:
 
 Create a database user that will be used by the application to access the application database. Name the user `naturesnap`.
 
-### Create an application database
+### Create the application database
 
-Create a database for the application. Name the database `naturesnap`.
+Create a database for the application. Name the database `naturesnap`. In the [Neon Console](https://console.neon.tech):
 
-### Create a shadow database for Prisma Migrate
+1. Select **Databases**.
+1. Click **New Database**.
+1. Enter  `naturesnap` as the database name.
+2. Select `naturesnap` as the database owner.
+1. Click **Create**.
 
-Create a shadow database for Prisma MIgrate, which is required to manage schema changes. Name the database `shadow`.
+### Create the shadow database for Prisma Migrate
+
+Create a shadow database for Prisma Migrate, which is required to manage schema changes. Name the database `shadow`. In the [Neon Console](https://console.neon.tech):
+
+1. Select **Databases**.
+1. Click **New Database**.
+1. Enter  `shadow` as the database name.
+2. Select `naturesnap` as the database owner.
+1. Click **Create**.
 
 ## Import the application data
 
