@@ -15,7 +15,74 @@ The example application is called NatureSnap. It is a simple photo gallery appli
 
 ## Download the example application and install dependencies
 
-Download the example NatureSnap application and install dependencies.
+1. Clone the example NatureSnap project.
+
+    ```bash
+    git clone https://github.com/neondatabase/naturesnap.git
+    ```
+
+    The project directory has the following structure:
+
+    ```bash
+    $ tree
+    └── naturesnap
+        ├── components
+        │   ├── Breadcrumbs.tsx
+        │   ├── Layout.tsx
+        │   ├── Navbar.tsx
+        │   ├── SnapCard.tsx
+        │   └── SnapGroup.tsx
+        ├── data.ts
+        ├── lib
+        │   ├── prisma.ts
+        │   └── utils.ts
+        ├── next.config.js
+        ├── package.json
+        ├── package-lock.json
+        ├── pages
+        │   ├── api
+        │   │   └── hello.ts
+        │   ├── _app.tsx
+        │   ├── _document.tsx
+        │   ├── index.tsx
+        │   └── my
+        │       └── index.tsx
+        ├── postcss.config.js
+        ├── prisma
+        │   ├── migrations
+        │   │   ├── 20230205191454_initial_migration
+        │   │   │   └── migration.sql
+        │   │   └── migration_lock.toml
+        │   └── schema.prisma
+        ├── public
+        │   ├── favicon.ico
+        │   ├── me.png
+        │   ├── user1.jpeg
+        │   ├── user2.jpeg
+        │   ├── user3.jpeg
+        │   ├── user4.jpeg
+        │   └── user5.jpeg
+        ├── README.md
+        ├── sql
+        │   ├── init.sql
+        │   └── migrate.sql
+        ├── styles
+        │   ├── globals.css
+        │   └── Home.module.css
+        ├── tailwind.config.js
+        ├── tsconfig.json
+        └── types.ts
+
+    12 directories, 35 files
+    ```
+
+2. Install the dependencies:
+
+    ```bash
+    cd naturesnap
+    npm install
+    npm install dotenv
+    ```
 
 ## Initialize a Git repository and push the application code to GitHub
 
@@ -23,12 +90,22 @@ Download the example NatureSnap application and install dependencies.
 
 ## Create a project in Neon
 
-- call it NatureSnap
-- create it in Frankfurt (?)
+Create Neon project and name it `naturesnap`.
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+2. Select **Create a project**.
+3. Enter `naturesnap` as the project name and select a PostgreSQL version and a region
+4. Click **Create Project**.
+
+![Create naturesnap project](/docs/guides/ns_create_project.png)
+
+Upon creating the project, you are presented with a dialog that provides connection details for the project. Passwords are reset in a later step, so you don't need this information yet.
 
 ## Prepare your Neon project
 
 ### Create a database user
+
+role and two databases: naturesnap and shadow. Then add the DATABASE_URL and SHADOW_DATABASE_URL to the .env file:
 
 Create a database user that will be used by the application to access the application database. Name the user `naturesnap`.
 
@@ -83,7 +160,6 @@ I added UI elements and changed the schema
 Generate the migration based on the updated schema
 Behind the scenes, I actually add data into the new table
 From the photo authors, I can infer some first users to topics connections and add them right away
-
 
 ## Conclusion
 
