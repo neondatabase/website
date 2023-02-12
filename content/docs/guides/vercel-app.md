@@ -125,30 +125,112 @@ Create a database for the application. Name the database `naturesnap`. In the [N
 1. Select **Databases**.
 1. Click **New Database**.
 1. Enter  `naturesnap` as the database name.
-2. Select `naturesnap` as the database owner.
+1. Select `naturesnap` as the database owner.
 1. Click **Create**.
 
 ![Create naturesnap user](/docs/guides/ns_create_app_db.png)
 
 ### Create the shadow database for Prisma Migrate
 
-Create a shadow database for Prisma Migrate, which is required to manage schema changes. Name the database `shadow`. In the [Neon Console](https://console.neon.tech):
+Create a shadow database for Prisma Migrate, which is required to manage schema changes. Name the database `shadow`. 
+
+In the [Neon Console](https://console.neon.tech):
 
 1. Select **Databases**.
 1. Click **New Database**.
 1. Enter  `shadow` as the database name.
-2. Select `naturesnap` as the database owner.
+1. Select `naturesnap` as the database owner.
 1. Click **Create**.
 
 ![Create naturesnap user](/docs/guides/ns_create_shadow_db.png)
 
+## Create a .env file and add database URLs
+
+1. Create a `.env` file at the root of your project director
+
+    ```bash
+    cd naturesnap
+    touch .env
+    ```
+
+1. Add the `DATABASE_URL` and `SHADOW_DATABASE_URL` settings to your `.env` file. These settings are required to migrate the database schema to your databases. When finished, your `.env`  file should appear similar to:
+
+    ```text
+    DATABASE_URL=postgres://naturesnap:************@ep-snowy-water-747999.us-east-2.aws.neon.tech/naturesnap?sslmode=require&connect_timeout=0
+    SHADOW_DATABASE_URL=postgres://naturesnap:************@ep-snowy-water-747999.us-east-2.aws.neon.tech/shadow?sslmode=require
+    ```
+
+## Migrate the project schema
+
+Run the `prisma migrate dev` command to migrate the schema defined in the project's `schema.prisma` file to your `naturesnap` database:
+
+```bash
+$ npx prisma migrate dev
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": PostgreSQL database "naturesnap", schema "public" at "ep-snowy-water-747999.us-east-2.aws.neon.tech:5432"
+Applying migration `20230205191454_initial_migration`
+The following migration(s) have been applied:
+
+migrations/
+  └─ 20230205191454_initial_migration/
+    └─ migration.sql
+
+Your database is now in sync with your schema.
+
+Running generate... (Use --skip-generate to skip the generators)
+npm WARN idealTree Removing dependencies.prisma in favor of devDependencies.prisma
+
+added 316 packages, and audited 317 packages in 7s
+
+113 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+changed 2 packages, and audited 317 packages in 4s
+
+113 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+✔ Generated Prisma Client (4.8.1 | library) to ./node_modules/@prisma/client in 63ms
+```
+
 ## Import the application data
 
-Import data for the NatureSnap application.
+From your project directory, run the following command to import data into the `naturesnap` database from the `/sql/init.sql` in your project directory:
+
+```bash
+psql postgres://naturesnap:5pFaWyG1dqAc@ep-snowy-water-747999.us-east-2.aws.neon.tech/naturesnap < sql/init.sql
+```
 
 ### Verify that data was imported
 
-Verify that the data was imported by viewing the data from the Neon Console.
+You can verify that the data was imported by viewing the tables in the Neon Console.
+
+In the [Neon Console](https://console.neon.tech):
+
+1. Select **Tables**
+1. Select your primary branch.
+1. Select the `naturesnap` database.
+1. Select an application table (`snaps`, `topics`, or `users`) to view the project data.
+
+![View application data](/docs/guides/ns_tables_view.png)
+
+## Run the application
+
+Run the following command to start the naturesnap application:
+
+```bash
+npm run dev
+```
+
+Navigate to http://localhost:3000 in your browser to view the application.
+
+![View application initial state](/docs/guides/ns_app_initial_view.png)
 
 ## Add the Neon Integration to your Vercel account
 
@@ -177,7 +259,7 @@ modify the UI & update the prisma schema
 ### Inspect the changes
 
 Check what I changed
-I maped users to the topics they participated in
+I mapped users to the topics they participated in
 I added UI elements and changed the schema
 
 ## Generate migration
