@@ -99,7 +99,7 @@ Create Neon project and name it `naturesnap`.
 
 ![Create naturesnap project](/docs/guides/ns_create_project.png)
 
-Upon creating the project, you are presented with a dialog that provides connection details for the project. Passwords are reset in a later step, so you don't need this information yet. You can close the dialog.
+Upon creating the project, you are presented with a dialog that provides connection details for your default project user. You can save the connection details, but a different user will be created for the application to access the database.
 
 ## Prepare your Neon project
 
@@ -107,7 +107,7 @@ In this step you create a user (a PostgreSQL role) that will be use by the Natur
 
 ### Create the database user
 
-Create a database user named `naturesnap`. In the [Neon Console](https://console.neon.tech):
+Create a database user named `naturesnap`. The application uses the `naturesnap` user to access the application database. In the [Neon Console](https://console.neon.tech):
 
 1. Select **Users**.
 1. Select **New User**.
@@ -116,9 +116,7 @@ Create a database user named `naturesnap`. In the [Neon Console](https://console
 
 ![Create naturesnap user](/docs/guides/ns_create_user.png)
 
-role and two databases: naturesnap and shadow. Then add the DATABASE_URL and SHADOW_DATABASE_URL to the .env file:
-
-Create a database user that will be used by the application to access the application database. Name the user `naturesnap`.
+Upon creating the user, you are presented with a dialog that provides connection details for the user. The password for the user will be reset in a later step, so you don't need to save this information now.
 
 ### Create the application database
 
@@ -130,6 +128,8 @@ Create a database for the application. Name the database `naturesnap`. In the [N
 2. Select `naturesnap` as the database owner.
 1. Click **Create**.
 
+![Create naturesnap user](/docs/guides/ns_create_app_db.png)
+
 ### Create the shadow database for Prisma Migrate
 
 Create a shadow database for Prisma Migrate, which is required to manage schema changes. Name the database `shadow`. In the [Neon Console](https://console.neon.tech):
@@ -139,6 +139,8 @@ Create a shadow database for Prisma Migrate, which is required to manage schema 
 1. Enter  `shadow` as the database name.
 2. Select `naturesnap` as the database owner.
 1. Click **Create**.
+
+![Create naturesnap user](/docs/guides/ns_create_shadow_db.png)
 
 ## Import the application data
 
