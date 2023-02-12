@@ -9,8 +9,8 @@ The example application is called NatureSnap. It is a simple photo gallery appli
 
 ## Prerequisites
 
-- A Vercel account
-- A GitHub account
+- A [Vercel account](https://vercel.com/signup)
+- A [GitHub account](https://github.com/join)
 - Prisma
 
 ## Clone the example application and install dependencies
@@ -95,7 +95,7 @@ Create Neon project and name it `naturesnap`.
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select **Create a project**.
 3. Enter `naturesnap` as the project name and select a PostgreSQL version and a region
-4. Click **Create Project**.
+4. Click **Create project**.
 
 ![Create naturesnap project](/docs/guides/ns_create_project.png)
 
@@ -113,6 +113,8 @@ Create a database user named `naturesnap`. In the [Neon Console](https://console
 1. Select **New User**.
 1. Enter `naturesnap` as the user name.
 1. Click **Create**.
+
+![Create naturesnap user](/docs/guides/ns_create_user.png)
 
 role and two databases: naturesnap and shadow. Then add the DATABASE_URL and SHADOW_DATABASE_URL to the .env file:
 
