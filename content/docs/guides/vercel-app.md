@@ -234,7 +234,7 @@ Navigate to http://localhost:3000 in your browser to view the application.
 
 ## Initialize a Git repository and push the application code to GitHub
 
-In the previous steps, you downloaded the application code and and performed sme initial configuration to get it up and running. In this step, you will initialize a Git repository locally so that you can push your code to a GitHub repository.
+In the previous steps, you downloaded the application code and got the application running. In this step, you will initialize a Git repository so that you can push your code to a GitHub repository.
 
 To do so, run `git init` from the source code folder:
 
@@ -251,9 +251,10 @@ git add .
 git commit -m 'Commit naturesnap code' 
 ```
 
-Checkpoint: git log -1 should show the commit:
+Run `git log -1` to view the commit:
 
 ```bash
+git log -1
 commit ca5ffcdc6ba1d32d60f254769034cd32e8423ba3 (HEAD -> master)
 ```
 
@@ -267,6 +268,8 @@ git push -u origin main
 
 ## Create a project in Vercel
 
+In the previous step, you push your code to a GitHub repository. You can now deploy your application to Vercel.
+
 1. Log in to your Vercel account.
 1. Select **Add New** > **Project**.
 1. Select your GitHib account.
@@ -276,9 +279,58 @@ git push -u origin main
 
 ![Deploy to Vercel](/docs/guides/ns_vercel_deploy.png)
 
+When the deployment completes successfully, you should be notified by Vercel and provided links for viewing the deployed application. You can also select **Depolyments** in Vercel, locate the the deployment, and select **Inspect Deployment** from the kebab menu to view the **Deployment** page where you can find links to the deployed application.
+
+![Completed Vercel deployment](/docs/guides/ns_vercel_deployment.png)
+
 ## Add the Neon Integration to your Vercel account
 
-Add the Neon-Vercel integration.
+In the previous step you deployed your application to Vercel. In this step, you will add the Neon integration to your Vercel project. The Neon integration does the following:
+
+- **Connects your Vercel project to your Neon project**: The connection is established by setting the following environment variables: `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` (you already set `DATABASE_URL` in Vercel, but the integration sets that variable to a new value)
+- **Creates a database branch for each preview deployment**: It enables the Neon to instantly create a database branch for each preview deployment generated when you commit a branch to your project's GitHub repository. This is the key feature of the Neon-Vercel integration. It allows you to deploy an independent copy of your database with each preview deployment that you are free to modify to preview changes to the database in the same way that you preview changes to your application. The database branch has the same data as the parent database. No more leaving the database out of the preview loop. No more dummy data. No more importing data to a staging database.
+- **Creates a database for your development environment**: Optionally, the Neon integration creates a `vercel-dev` branch for your Vercel development environment and configures environment variables for it.
+
+To add the integration:
+
+1. Navigate to the [Neon Vercel integrations page](https://vercel.com/integrations/neon), and click **Add integration**.
+![Add integration](/docs/guides/vercel_add_integration.png)
+1. Select a Vercel account to add the integration to.
+1. Select the Vercel project to add the integration to.
+1. Review the permissions required by the integration, and click **Add Integration**.
+1. In the **Integrate Neon** dialog:
+    1. Select a Vercel project.
+    ![Select a Vercel project](/docs/guides/vercel_select_project.png)
+    1. Select the Neon project, database, and role that Vercel will use to connect. The Neon Free Tier supports a single project per user. If desired, you can create a new project, database, and role for the integration.
+    ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
+
+        The database that you select must reside on the primary branch of your Neon project. This branch will be your production branch. It is preselected for you.
+
+        You have the option to create a database branch for your Vercel development environment. Selecting this option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a copy-on-write clone of your production branch that you can modify without affecting your production branch.
+
+        When you finish making selections, click **Continue**.
+    1. Confirm the integration settings. This allows the integration to:
+
+            - Reset the database user's password, enabling the integration to configure the environment variables that require a password.
+            - Set environment variables for your Vercel project's production, development, and preview environments.
+            - Create database branches for preview deployments.
+            - Create a development branch for your Vercel development environment (if you selected that option).
+    ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
+
+        Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
+
+        Once the settings are configured, you are presented with a **Success!** dialog where you can copy the new password for your database user.
+        ![Vercel integration success](/docs/guides/vercel_success.png)
+    1. Click **Done** to complete the installation.
+1. To view the results of the integration in Neon:
+    1. Navigate to the [Neon Console](https://console.neon.tech/).
+    1. Select the project you connected to.
+    1. Select **Branches**.
+    You will see the primary branch of your project. If you created a development branch, you will also see a `vercel-dev` branch.
+1. To view the results of the integration in Vercel:
+    1. Navigate to [Vercel](https://vercel.com/).
+    1. Select the Vercel project you added the integration to.
+    1. Select **Settings** > **Environment Variables**. You should see the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` variable settings added by the integration.
 
 ### View the results of the integration
 
