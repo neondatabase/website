@@ -231,7 +231,6 @@ Navigate to http://localhost:3000 in your browser to view the application.
 
 ![View application initial state](/docs/guides/ns_app_initial_view.png)
 
-
 ## Initialize a Git repository and push the application code to GitHub
 
 In the previous steps, you downloaded the application code and got the application running. In this step, you will initialize a Git repository so that you can push your code to a GitHub repository.
@@ -306,30 +305,28 @@ After renaming or removing the existing `DATABASE_URL` variable, you can proceed
 1. Navigate to the [Neon Vercel integrations page](https://vercel.com/integrations/neon), and click **Add integration**.
 ![Add integration](/docs/guides/vercel_add_integration.png)
 1. Select a Vercel account to add the integration to.
-1. Select the Vercel project to add the integration to.
+1. Select the Vercel project to add the integration to. Select the **naturesnap** project.
 1. Review the permissions required by the integration, and click **Add Integration**.
 1. In the **Integrate Neon** dialog:
-    1. Select a Vercel project.
-    ![Select a Vercel project](/docs/guides/vercel_select_project.png)
-    1. Select the Neon project, database, and role that Vercel will use to connect. The Neon Free Tier supports a single project per user. If desired, you can create a new project, database, and role for the integration.
-    ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
-
-        The database that you select must reside on the primary branch of your Neon project. This branch will be your production branch. It is preselected for you.
+    1. Select the Vercel project. Select the **naturesnap** project if it is not already selected.
+    ![Select a Vercel project](/docs/guides/ns_vercel_select_project.png)
+    1. Select the Neon **naturesnap** project, the **naturesnap** database, and the **naturesnap** role that Vercel will use to connect. 
+    ![Connect to Neon](/docs/guides/ns_vercel_connect_neon.png)
 
         You have the option to create a database branch for your Vercel development environment. Selecting this option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a copy-on-write clone of your production branch that you can modify without affecting your production branch.
 
         When you finish making selections, click **Continue**.
     1. Confirm the integration settings. This allows the integration to:
 
-            - Reset the database user's password, enabling the integration to configure the environment variables that require a password.
-            - Set environment variables for your Vercel project's production, development, and preview environments.
-            - Create database branches for preview deployments.
-            - Create a development branch for your Vercel development environment (if you selected that option).
-    ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
+        - Reset the database user's password, enabling the integration to configure the environment variables that require a password.
+        - Set environment variables for your Vercel project's production, development, and preview environments.
+        - Create database branches for preview deployments.
+        - Create a development branch for your Vercel development environment (if you selected that option).
+    ![Confirm integration settings](/docs/guides/ns_vercel_confirm_settings.png)
 
-        Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
+        Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](/docs/guides/vercel#troubleshoot-connection-issues).
 
-        Once the settings are configured, you are presented with a **Success!** dialog where you can copy the new password for your database user.
+        Once the settings are configured, you are presented with a **Success!** dialog where you can copy the new password for your database user. Copy the password. You will need it to update the URLs in your local `.env` file.
         ![Vercel integration success](/docs/guides/vercel_success.png)
     1. Click **Done** to complete the installation.
 1. To view the results of the integration in Neon:
@@ -337,62 +334,185 @@ After renaming or removing the existing `DATABASE_URL` variable, you can proceed
     1. Select the project you connected to.
     1. Select **Branches**.
     You will see the primary branch of your project. If you created a development branch, you will also see a `vercel-dev` branch.
+    ![Verify Neon settings](/docs/guides/ns_verify_neon.png)
 1. To view the results of the integration in Vercel:
     1. Navigate to [Vercel](https://vercel.com/).
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**. You should see the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` variable settings added by the integration.
+    ![Verify Vercel settings](/docs/guides/ns_verify_vercel.png)
 
-### View the results of the integration
+## Deploy a preview using the Neon integration
 
-View the results of the integration in Neon and Vercel
+You have successfully added the Neon integration. It's now time to try it. In the following steps, you will create a local Git branch to update the  **naturesnap** application and database schema. You will add a table to the database called `UserTopics`, which will associate a user with a topic (e.g., boats, flowers, islands, etc.), and you will make a change to the application so that that it display topics in color or black and white to indicate which topics a user has participated in. The changes you apply are already present in the **naturesnapp** application code, so you only need to uncomment a few lines.
 
-## Set the shadow database and development environment variables
+## Update your database and application
 
-couple of small things to really get me going in dev
-populate the shadow database url for prisma migrations
+1. Navigate to your local **naturesnapp** project directory, and create a Git branch:
 
-now i’m set to developer locally
-let’s check the env variables that i have locally
-these will need to be updated, so i’ll just pull the new set of env variables from vercel
-the app can run locally now and i use new neon branch here!
+    ```bash
+    git checkout -b add_user_topics
+    ```
 
-## Update the application and database locally
+1. In the your project's `prisma/schema.prisma` file, uncomment lines 20, 40, and lines 44 to 51 by removing the forward slashes. This change will add the `UserTopics` table.
 
-create a new branch
-Add new feature and table. I want to map the users of my app to the topics they participated in.
-Modify the UI & update the prisma schema
+    ```text
+            model User {
+            id      Int    @id @default(autoincrement())
+            username String @unique
+            avatar String
+            snaps   Snap[]
+    20      // topics  UserTopics[]
+            @@map("users")
+            }
 
-### Inspect the changes
+            model Snap {
+            id    Int    @id @default(autoincrement())
+            name  String
+            image String
+            author User @relation(fields: [authorId], references: [id])
+            authorId Int
+            topic Topic @relation(fields: [topicId], references: [id])
+            topicId Int
+            createdAt DateTime @default(now())
+            @@map("snaps")
+            }
 
-Check what I changed
-I mapped users to the topics they participated in
-I added UI elements and changed the schema
+            model Topic {
+            id    Int    @id @default(autoincrement())
+            name  String
+            snaps Snap[]
+    40      // users UserTopics[]
+            @@map("topics")
+            }
 
-## Generate migration
+    44      // model UserTopics {
+    45      //   id      Int    @id @default(autoincrement())
+    46      //   user    User @relation(fields: [userId], references: [id])
+    47      //   userId  Int
+    48      //   topic   Topic @relation(fields: [topicId], references: [id])
+    49      //   topicId Int
+    50      //   @@map("user_topics")
+    51      // }
+    ```
 
-Generate the migration based on the updated schema
-Behind the scenes, I add data into the new table
-From the photo authors, I can infer some first users to topics connections and add them right away
+1. In your project's `pages/index.tsx` file, uncomment lines 22 and 32:
+
+    ```text
+    22         // users: { select: { user: true }, distinct: ['userId'] },
+
+
+    32         // users: topic.users.map((u) => u.user),  
+    ```
+
+1. Update the `DATABASE_URL` and `SHADOW_DATABASE_URL` environment variables in your `.env` file at the root of your local project directory to point to your `vercel-dev` branch. You can find the URLs in your Vercel development environment variable settings.
+
+    ![Vercel development branch settings](/docs/guides/ns_vercel_dev_settings.png)
+
+   ```text
+    DATABASE_URL=postgres://naturesnap:<new_password>@ep-quiet-snow-121552.us-east-2.aws.neon.tech/naturesnap?sslmode=require&connect_timeout=0
+    SHADOW_DATABASE_URL=postgres://naturesnap:<new_password>@ep-quiet-snow-121552.us-east-2.aws.neon.tech/shadow?sslmode=require
+    ```
+
+1. At the root of your local project directory, run the Prisma Migrate command to create the `user_topics` table in Neon:
+
+    ```bash
+    npx prisma migrate dev --name add_user_topics
+    Environment variables loaded from .env
+    Prisma schema loaded from prisma/schema.prisma
+    Datasource "db": PostgreSQL database "naturesnap", schema "public" at "ep-snowy-water-747999.us-east-2.aws.neon.tech"
+
+    Applying migration `20230213195808_add_user_topics`
+
+    The following migration(s) have been created and applied from new schema changes:
+
+    migrations/
+    └─ 20230213195808_add_user_topics/
+        └─ migration.sql
+
+    Your database is now in sync with your schema.
+
+    ✔ Generated Prisma Client (4.9.0 | library) to ./node_modules/@prisma/client in 92ms
+    ```
+
+1. The `user_topics` table in your `vercel_dev` branch will be empty. Run the following query in the Neon SQL Editor to populate it with data:
+
+    In the Neon Console:
+
+    1. Navigate to the SQL Editor.
+    1. Select the `vercel-dev` branch and the `naturesnap` database.
+    1. Run the following query to populate the table:
+
+        ```sql
+        INSERT INTO user_topics ("userId", "topicId")
+        SELECT "authorId", "topicId"
+        FROM snaps
+        WHERE NOT EXISTS (
+        SELECT *
+        FROM user_topics
+        WHERE user_topics."userId" = snaps."authorId"
+            AND user_topics."topicId" = snaps."topicId"
+        )
+        ```
+
+        ![Add data in the SQL Editor](/docs/guides/ns_populate_user_topics.png)
+
+1. Run the following command to start the **naturesnap** application and view the changes locally:
+
+    ```bash
+    npm run dev
+    ```
+
+    You should now see user avatars associated with each topic, and the topics that are not participated in are shown in black and white.
+
+    ![Updated naturesnap app](/docs/guides/ns_app_updated_view.png)
+
+## Commit and push the changes
+
+1. Commit the changes:
+
+    ```bash
+    git add pages/index.tsx && git add prisma/* && git commit -m 'add user topics'
+    [add_user_topics 5226df1] add user topics
+    3 files changed, 26 insertions(+), 12 deletions(-)
+    create mode 100644 prisma/migrations/20230213195808_add_user_topics/migration.sql
+    ```
+
+1. Push the changes to a new branch on GitHub.
+
+    ```bash
+    git push --set-upstream origin add_user_topics
+    Enumerating objects: 15, done.
+    Counting objects: 100% (15/15), done.
+    Delta compression using up to 2 threads
+    Compressing objects: 100% (8/8), done.
+    Writing objects: 100% (9/9), 1.02 KiB | 1.02 MiB/s, done.
+    Total 9 (delta 4), reused 0 (delta 0), pack-reused 0
+    remote: Resolving deltas: 100% (4/4), completed with 4 local objects.
+    remote: 
+    remote: Create a pull request for 'add_user_topics' on GitHub by visiting:
+    remote:      https://github.com/user1/naturesnap/pull/new/add_user_topics
+    remote: 
+    To github.com:user1/naturesnap.git
+    * [new branch]      add_user_topics -> add_user_topics
+    Branch 'add_user_topics' set up to track remote branch 'add_user_topics' from 'origin'.
+    ```
+
+1. Create the pull request in GitHub by navigating to the provided link. Creating a pull request triggers a preview deployment in Vercel.
+
+1. View the status of your preview deployment in Vercel:
+
+    1. Select the **naturesnap** project.
+    2. Select **Deployments**.
+    3. Select the most recent deployment for your **naturesnap** project.
+
+    ![View preview deployment in Vercel](/docs/guides/ns_check_deployment.png)
+
+1. View your deployment preview branch in Neon
+
+    The Neon integration created a new branch for the preview deployment with the schema changes that you committed. The branch has the same name as your git branch, which is `add_user_topics`. In Vercel, the Neon integration sets the preview environment variables for the new branch. To view the branch, select **Branches** in the Neon Console.
+
+    ![View preview branch in Neon](/docs/guides/ns_neon_preview_branch.png)
 
 ## Conclusion
 
-Now it runs locally
-The new small icons on the list of topics are topic participants, the data that i’ve added
-The app now shows pictures in black/white for the topics that i haven’t participated in
-
-Time to commit the changes!
-just a quick check before i do that
-all good, ready to push this new branch to git
-
-my branch is on now github
-
-Vercel picks it up
-notifies Neon
-neon picked this up and created a new database branch for my preview, add user topics!
-
-In Vercel, Neon has pushed the new DATABASE_URL variable to the Vercel preview environment variables, specific to my new branch
-
-Vercel is building
-Deployed
-
-and this runs my migrations and seed the data as part of them too
+Following the instructions in this guide you have deployed the **naturesnap** application ...
