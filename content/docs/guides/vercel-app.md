@@ -15,16 +15,20 @@ The example application is called NatureSnap. It is a simple photo gallery appli
 
 ## Clone the example application and install dependencies
 
-1. Clone the example NatureSnap project.
+1. Download the example **naturesnap** project.
 
     ```bash
-    git clone https://github.com/neondatabase/naturesnap.git
+    wget https://github.com/neondatabase/naturesnap/archive/refs/heads/main.zip
+    unzip main.zip
+    rm main.zip
+    mv naturesnap-main naturesnap
     ```
 
-    The project directory has the following structure:
+    You can view the project's structure using the `tree` command:
 
     ```bash
-    $ tree
+    cd naturesnap
+    tree
     └── naturesnap
         ├── components
         │   ├── Breadcrumbs.tsx
@@ -76,17 +80,12 @@ The example application is called NatureSnap. It is a simple photo gallery appli
     12 directories, 35 files
     ```
 
-2. Install the dependencies:
+2. Install the dependencies in the project's root directory:
 
     ```bash
-    cd naturesnap
     npm install
     npm install dotenv
     ```
-
-## Initialize a Git repository and push the application code to GitHub
-
-## Deploy the application on Vercel
 
 ## Create a project in Neon
 
@@ -116,7 +115,7 @@ Create a database user named `naturesnap`. The application uses the `naturesnap`
 
 ![Create naturesnap user](/docs/guides/ns_create_user.png)
 
-Upon creating the user, you are presented with a dialog that provides connection details for the user. The password for the user will be reset in a later step, so you don't need to save this information now.
+Upon creating the user, you are presented with a dialog that provides connection details for the user. Copy the password
 
 ### Create the application database
 
@@ -128,7 +127,7 @@ Create a database for the application. Name the database `naturesnap`. In the [N
 1. Select `naturesnap` as the database owner.
 1. Click **Create**.
 
-![Create naturesnap user](/docs/guides/ns_create_app_db.png)
+![Create naturesnap database](/docs/guides/ns_create_app_db.png)
 
 ### Create the shadow database for Prisma Migrate
 
@@ -142,7 +141,7 @@ In the [Neon Console](https://console.neon.tech):
 1. Select `naturesnap` as the database owner.
 1. Click **Create**.
 
-![Create naturesnap user](/docs/guides/ns_create_shadow_db.png)
+![Create shadow database](/docs/guides/ns_create_shadow_db.png)
 
 ## Create a .env file and add database URLs
 
@@ -204,7 +203,7 @@ found 0 vulnerabilities
 From your project directory, run the following command to import data into the `naturesnap` database from the `/sql/init.sql` in your project directory:
 
 ```bash
-psql postgres://naturesnap:5pFaWyG1dqAc@ep-snowy-water-747999.us-east-2.aws.neon.tech/naturesnap < sql/init.sql
+psql postgres://naturesnap:************@ep-snowy-water-747999.us-east-2.aws.neon.tech/naturesnap < sql/init.sql
 ```
 
 ### Verify that data was imported
@@ -232,6 +231,51 @@ Navigate to http://localhost:3000 in your browser to view the application.
 
 ![View application initial state](/docs/guides/ns_app_initial_view.png)
 
+
+## Initialize a Git repository and push the application code to GitHub
+
+In the previous steps, you downloaded the application code and and performed sme initial configuration to get it up and running. In this step, you will initialize a Git repository locally so that you can push your code to a GitHub repository.
+
+To do so, run `git init` from the source code folder:
+
+```bash
+cd naturesnap
+git init
+Initialized empty Git repository in /home/user1/naturesnap/.git/
+```
+
+With the repository initialized, add and commit the files:
+
+```bash
+git add . 
+git commit -m 'Commit naturesnap code' 
+```
+
+Checkpoint: git log -1 should show the commit:
+
+```bash
+commit ca5ffcdc6ba1d32d60f254769034cd32e8423ba3 (HEAD -> master)
+```
+
+Push the code to your GitHub repository by adding the remote:
+
+```bash
+git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_GITHUB_REPOSITORY_NAME>.git
+git branch -M main
+git push -u origin main
+```
+
+## Create a project in Vercel
+
+1. Log in to your Vercel account.
+1. Select **Add New** > **Project**.
+1. Select your GitHib account.
+1. Import your `naturesnap` repository.
+1. On the Configure Project dialog, under Environment Variables, add entries for `DATABASE_URL` and `SHADOW_DATABASE_URL` variables that you defined earlier in your local `.env` file. These are required by Prisma.
+1. Click **Deploy**.
+
+![Deploy to Vercel](/docs/guides/ns_vercel_deploy.png)
+
 ## Add the Neon Integration to your Vercel account
 
 Add the Neon-Vercel integration.
@@ -253,8 +297,8 @@ the app can run locally now and i use new neon branch here!
 ## Update the application and database locally
 
 create a new branch
-Add new feature and table: i want to map the users of my app to the topics they participated in
-modify the UI & update the prisma schema
+Add new feature and table. I want to map the users of my app to the topics they participated in.
+Modify the UI & update the prisma schema
 
 ### Inspect the changes
 
@@ -265,14 +309,14 @@ I added UI elements and changed the schema
 ## Generate migration
 
 Generate the migration based on the updated schema
-Behind the scenes, I actually add data into the new table
+Behind the scenes, I add data into the new table
 From the photo authors, I can infer some first users to topics connections and add them right away
 
 ## Conclusion
 
 Now it runs locally
 The new small icons on the list of topics are topic participants, the data that i’ve added
-The app now shows in black/white, the topics that i haven’t participated in 
+The app now shows pictures in black/white for the topics that i haven’t participated in
 
 Time to commit the changes!
 just a quick check before i do that
