@@ -272,7 +272,7 @@ In the previous step, you push your code to a GitHub repository. You can now dep
 
 1. Log in to your Vercel account.
 1. Select **Add New** > **Project**.
-1. Select your GitHib account.
+1. Select your GitHub account.
 1. Import your `naturesnap` repository.
 1. On the Configure Project dialog, under Environment Variables, add entries for `DATABASE_URL` and `SHADOW_DATABASE_URL` variables that you defined earlier in your local `.env` file. These are required by Prisma.
 1. Click **Deploy**.
@@ -291,7 +291,17 @@ In the previous step you deployed your application to Vercel. In this step, you 
 - **Creates a database branch for each preview deployment**: It enables the Neon to instantly create a database branch for each preview deployment generated when you commit a branch to your project's GitHub repository. This is the key feature of the Neon-Vercel integration. It allows you to deploy an independent copy of your database with each preview deployment that you are free to modify to preview changes to the database in the same way that you preview changes to your application. The database branch has the same data as the parent database. No more leaving the database out of the preview loop. No more dummy data. No more importing data to a staging database.
 - **Creates a database for your development environment**: Optionally, the Neon integration creates a `vercel-dev` branch for your Vercel development environment and configures environment variables for it.
 
-To add the integration:
+Before you add the integration:
+
+The Neon integration sets the following variables: `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` in your Vercel project. If these variables are already configured, the integration cannot be added. In an earlier step, you configured the `DATABASE_URL` variable in order to deploy the **naturesnap** to Vercel. Now, you must remove or rename the `DATABASE_URL` variable before adding the Neon integration.
+
+1. In Vercel, select your **naturesnap** project.
+1. Select **Settings** > Environment Variables.
+1. Edit the `DATABASE_URL` variable to change its name or remove it.
+
+![Rename DATABASE_URL variable](/docs/guides/ns_vercel_rename_variable.png)
+
+After renaming or removing the existing `DATABASE_URL` variable, you can proceed with adding the Neon integration:
 
 1. Navigate to the [Neon Vercel integrations page](https://vercel.com/integrations/neon), and click **Add integration**.
 ![Add integration](/docs/guides/vercel_add_integration.png)
