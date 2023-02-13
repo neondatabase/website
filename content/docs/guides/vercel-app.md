@@ -102,7 +102,7 @@ Upon creating the project, you are presented with a dialog that provides connect
 
 ## Prepare your Neon project
 
-In this step you create a user (a PostgreSQL role) that will be use by the NatureSnap application and two databases, one for NatureSnap data, and one for the Prisma shadow database that is required to perform schema migrations.
+In this step you create a user (a PostgreSQL role) for the **naturesnap** application and two databases, one for **naturesnap** data, and one for the Prisma shadow database that is required to perform schema migrations.
 
 ### Create the database user
 
@@ -212,7 +212,7 @@ You can verify that the data was imported by viewing the tables in the Neon Cons
 
 In the [Neon Console](https://console.neon.tech):
 
-1. Select **Tables**
+1. Select **Tables**.
 1. Select your primary branch.
 1. Select the `naturesnap` database.
 1. Select an application table (`snaps`, `topics`, or `users`) to view the project data.
@@ -221,7 +221,7 @@ In the [Neon Console](https://console.neon.tech):
 
 ## Run the application
 
-Run the following command to start the naturesnap application:
+Run the following command to start the **naturesnap** application:
 
 ```bash
 npm run dev
@@ -327,7 +327,7 @@ After renaming or removing the existing `DATABASE_URL` variable, you can proceed
         Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](/docs/guides/vercel#troubleshoot-connection-issues).
 
         Once the settings are configured, you are presented with a **Success!** dialog where you can copy the new password for your database user. Copy the password. You will need it to update the URLs in your local `.env` file.
-        ![Vercel integration success](/docs/guides/vercel_success.png)
+        ![Vercel integration success](/docs/guides/ns_vercel_success.png)
     1. Click **Done** to complete the installation.
 1. To view the results of the integration in Neon:
     1. Navigate to the [Neon Console](https://console.neon.tech/).
