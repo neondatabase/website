@@ -296,7 +296,7 @@ Before you add the integration:
 The Neon integration sets the following variables: `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` in your Vercel project. If these variables are already configured, the integration cannot be added. In an earlier step, you configured the `DATABASE_URL` variable in order to deploy the **naturesnap** to Vercel. Now, you must remove or rename the `DATABASE_URL` variable before adding the Neon integration.
 
 1. In Vercel, select your **naturesnap** project.
-1. Select **Settings** > Environment Variables.
+1. Select **Settings** > **Environment Variables**.
 1. Edit the `DATABASE_URL` variable to change its name or remove it.
 
 ![Rename DATABASE_URL variable](/docs/guides/ns_vercel_rename_variable.png)
