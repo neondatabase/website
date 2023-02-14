@@ -381,4 +381,4 @@ You have successfully added the Neon integration. It's now time to try it. In th
 
 ## Conclusion
 
-Following the instructions in this guide you have deployed the **naturesnap** application ...
+Following the steps in this guide, you deployed an application to Vercel and added the Neon integration. You then made changes to the application and database schema, and when you created a pull request with your changes, the Neon integration automatically created a database branch for the preview deployment.
