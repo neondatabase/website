@@ -87,7 +87,13 @@
     - title: Symfony
       slug: guides/symfony
     - title: Vercel
-      slug: guides/vercel
+      items:
+        - title: The Neon-Vercel integration
+          slug: guides/vercel-integration
+        - title: Add the integration
+          slug: guides/vercel
+        - title: Deploy a Next.js app
+          slug: guides/vercel-app
 - title: Import data
   items:
     - title: Import from PostgreSQL

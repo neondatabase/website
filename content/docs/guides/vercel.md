@@ -1,9 +1,9 @@
 ---
-title: Connect Vercel and Neon
+title: Add the Neon integration
 enableTableOfContents: true
 ---
 
-This guide describes how to connect Vercel and Neon using the [Neon integration from the Vercel marketplace](https://vercel.com/integrations/neon). The integration connects your Vercel project to a Neon database and enables creating a database branch for each preview deployment. Optionally, the integration also creates a development branch that you can use with your Vercel development environment.
+This guide describes how to connect Neon and Vercel by adding the [Neon integration from the Vercel marketplace](https://vercel.com/integrations/neon). The integration connects your Vercel project to a Neon database and enables creating a database branch for each preview deployment. Optionally, the integration also creates a development branch that you can use with your Vercel development environment.
 
 <Admonition type="note">
 This is a Beta version of Neon’s Vercel integration. For assistance or to suggest improvements, contact [vercel-feedback@neon.tech](mailto:vercel-feedback@neon.tech) or post in the [Neon community](https://community.neon.tech/).
@@ -57,29 +57,6 @@ To add the integration:
     1. Navigate to [Vercel](https://vercel.com/).
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**. You should see the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` variable settings added by the integration.
-
-## How the integration works with preview deployments
-
-Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments) enable teams to collaborate effectively by automatically creating an isolated, production-like environment for every commit. This way, all changes can be previewed before they are merged into production.
-
-However, when databases are involved, teams often share a single database containing dummy data across all preview deployments. This setup is not ideal for these reasons:
-
-- If the shared database encounters an issue, so will all preview deployments.
-- Changes to the shared database schema might break all previously created preview deployments, making it a productivity bottleneck.
-
-![Shared database](/docs/guides/vercel_shared_database.webp)
-
-Neon’s branching feature addresses all of these challenges. A branch is a copy-on-write clone of your data, so creating it only takes a few seconds. This makes it a scalable and cost-effective solution for preview deployments, enabling you to create a branch for each pull request.
-
-![Branch database](/docs/guides/vercel_branch_database.webp)
-
-When you push a branch to the GitHub repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting the required Vercel preview environment variables. The newly created Neon branch will have same name as the Git branch containing the code changes.
-
-<Admonition type="important">
-For the preview deployment integration to work, the database connection settings in your application must correspond to the Vercel production environment variable settings configured by your Neon integration. For example, if your applications's database connection is defined by a `DATABASE_URL` variable, make sure that setting in your application corresponds to the `DATABASE_URL` setting configured by the integration. You can find the environment variable settings in Vercel by navigating to the Vercel dashboard, selecting your project, and selecting **Settings** > **Environment Variables**.
-</Admonition>
-
-For a demo app that you can use to try the Neon-Vercel integration, refer to the [Database branching with Vercel Preview Deployments](https://neon.tech/blog/neon-vercel-integration) blog post, which demonstrates the integration with the [Naturesnap](https://github.com/neondatabase/naturesnap) application.
 
 ## Troubleshoot connection issues
 
