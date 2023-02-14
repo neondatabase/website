@@ -39,7 +39,7 @@ The example application is called **naturesnap**. It is a simple photo gallery a
     ![Create naturesnap project](/docs/guides/ns_create_project.png)
 
     Upon creating the project, you are presented with a dialog that provides connection details for your default project user. You will create a different user for the application, so you do not have to save this information.
-4. Create the database user named `naturesnap`, which the application uses to access the `naturesnap` application database. In the [Neon Console](https://console.neon.tech):
+4. Create a database user named `naturesnap`, which the application uses to access the `naturesnap` application database. In the [Neon Console](https://console.neon.tech):
     1. Select **Users**.
     1. Select **New User**.
     1. Enter `naturesnap` as the user name.
@@ -154,7 +154,7 @@ In the previous step you deployed your application to Vercel. In this step, you 
 - **Creates a database branch for each preview deployment**: Neon instantly creates a database branch for each preview deployment generated when you commit a branch to your project's GitHub repository.
 - **Creates a database for your development environment**: By default, the integration creates a `vercel-dev` branch for your Vercel development environment and configures environment variables for it. You will use this branch to make schema changes.
 
-Before you add the integration:
+### Before you add the integration
 
 The Neon integration sets the following variables: `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` in your Vercel project. If these variables are already configured, the integration cannot be added. In an earlier step, you configured the `DATABASE_URL` variable in order to deploy the **naturesnap** to Vercel. Now, you must remove or rename the `DATABASE_URL` variable before adding the Neon integration.
 
@@ -164,7 +164,7 @@ The Neon integration sets the following variables: `PGHOST`, `PGUSER`, `PGDATABA
 
 ![Rename DATABASE_URL variable](/docs/guides/ns_vercel_rename_variable.png)
 
-## Add the integration
+### Add the integration
 
 1. Navigate to the [Neon Vercel integrations page](https://vercel.com/integrations/neon), and click **Add integration**.
 ![Add integration](/docs/guides/vercel_add_integration.png)
@@ -205,9 +205,9 @@ The Neon integration sets the following variables: `PGHOST`, `PGUSER`, `PGDATABA
     1. Select **Settings** > **Environment Variables**. You should see the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` variable settings added by the integration.
     ![Verify Vercel settings](/docs/guides/ns_verify_vercel.png)
 
-## Deploy a preview using the Neon integration
+## Deploy a preview
 
-You have successfully added the Neon integration. It's now time to try it. In the following steps, you will create a local Git branch to update the  **naturesnap** application and database schema. You will add a table to the database called `UserTopics`, which will associate a user with a topic (e.g., boats, flowers, islands, etc.), and you will change the application so that that it displays topics in black and white to indicate which topics a user has not participated. The changes are already present in the **naturesnapp** application code, so you only need to uncomment a few lines.
+You have successfully added the Neon integration. It's now time to try it. In the following steps, you will create a local Git branch to update the  **naturesnap** application and database schema. You will then add a table to the database called `UserTopics`, which associates a user with a topic (e.g., boats, flowers, islands, etc.), and change the application so that that it displays topics in black and white to indicate which topics a user has not participated. Finally, you will commit your changes and create a pull request, which triggers a deployment preview. The changes are already present in the **naturesnapp** application code, so you only need to uncomment a few lines.
 
 ### Update the schema and application
 
@@ -330,7 +330,7 @@ You have successfully added the Neon integration. It's now time to try it. In th
 
     ![Updated naturesnap app](/docs/guides/ns_app_updated_view.png)
 
-### Commit and push the changes
+### Push the changes and create a pull request
 
 1. Commit the changes:
 
