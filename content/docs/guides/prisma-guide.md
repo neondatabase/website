@@ -35,7 +35,7 @@ Prisma Migrate requires a "shadow" database to detect schema drift and generate 
 
 For cloud-hosted databases like Neon, you must create the shadow database manually. To create the shadow database:
 
-1. In the Neon Console, select **Settings** > **Databases**.
+1. In the Neon Console, select **Databases**.
 1. Click **New Database**.
 1. Select the branch where you want to create the database, enter a database name, and select a database owner. For simplicity, name the shadow database `shadow`, and select the same branch where the `neondb` database resides.
 
