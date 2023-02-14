@@ -21,7 +21,7 @@ In Neon, a database resides on a branch, and you connect to the database via the
 
 ### Enable pooling for all connections
 
-This method enables connection pooling for a compute endpoint. All connection requests to the compute endpoint will use a pooled connection. Direct connections to a database through the compute endpoint are not permitted.
+This method enables connection pooling for a compute endpoint. All connection requests to the compute endpoint use a pooled connection. Direct connections to a database through the compute endpoint are not permitted.
 
 To enable connection pooling for a compute endpoint:
 
@@ -35,7 +35,7 @@ You can also enable connection pooling when [creating a compute endpoint](/docs/
 
 ### Enable pooling for individual connections
 
-Enabling pooling for individual connections requires adding a `-pooler` suffix to the compute endpoint ID, which is part of the hostname. Connection requests that specify the `-pooler` suffix use a pooled connection. Connections that do not specify the `-pooler` suffix connect directly to the database. This method supports workflows that require both pooled and non-pooled connections to the same database.
+Enabling pooling for individual connections requires adding a `-pooler` suffix to the compute endpoint ID, which is part of the hostname. Connection requests that specify the `-pooler` suffix use a pooled connection. Connections that do not specify the `-pooler` suffix connect to the database directly.
 
 When using this method, ensure that connection pooling is not enabled for the compute endpoint, as described in [Enable pooling for all connections](#enable-pooling-for-all-connections). If connection pooling is enabled for the compute endpoint, all connections to the compute endpoint use a pooled connection.
 
