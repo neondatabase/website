@@ -21,7 +21,7 @@ In Neon, a database resides on a branch, and you connect to the database via the
 
 ### Enable pooling for all connections
 
-This method enables connection pooling for a compute endpoint. All connection requests to the compute endpoint are directed to a connection pooler port. Direct connections to a database through the compute endpoint are not permitted.
+This method enables connection pooling for a compute endpoint. All connection requests to the compute endpoint will use a pooled connection. Direct connections to a database through the compute endpoint are not permitted.
 
 To enable connection pooling for a compute endpoint:
 
@@ -35,17 +35,17 @@ You can also enable connection pooling when [creating a compute endpoint](/docs/
 
 ### Enable pooling for individual connections
 
-This method enables pooling for individual connections that specify a `-pooler` option. Connection requests that use the `-pooler` option are directed to a connection pooler port. Connections that do not use the `-pooler` option connect directly to the database. This method supports workflows that require both pooled and non-pooled connections to the same database.
+Enabling pooling for individual connections requires adding a `-pooler` suffix to the compute endpoint ID, which is part of the hostname. Connection requests that specify the `-pooler` suffix use a pooled connection. Connections that do not specify the `-pooler` suffix connect directly to the database. This method supports workflows that require both pooled and non-pooled connections to the same database.
 
-When using this method, ensure that connection pooling is not enabled for the compute endpoint, as described in [Enable pooling for all connections](#enable-pooling-for-all-connections).
+When using this method, ensure that connection pooling is not enabled for the compute endpoint, as described in [Enable pooling for all connections](#enable-pooling-for-all-connections). If connection pooling is enabled for the compute endpoint, all connections to the compute endpoint use a pooled connection.
 
-To connect to a database with a pooled connection, add the `-pooler` option to the hostname, as shown:
+To connect to a database with a pooled connection, add the `-pooler` suffix to the endpoint ID in the hostname, as shown:
 
 ```text
 postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
 ```
 
-To connect to the same database directly with a non-pooled connection, use the same connection string without the `-pooler` option:
+To connect to the same database directly with a non-pooled connection, use the same connection string without a `-pooler` suffix:
 
 ```text
 postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
@@ -58,7 +58,7 @@ Neon uses PgBouncer in _transaction mode_, which does not support PostgreSQL fea
 Some clients and applications may require connection pooling. For example, using Prisma Client with PgBouncer from a serverless function requires connection pooling. To ensure that connection pooling is enabled for clients and applications that require it, you can add the `?pgbouncer=true` flag to your Neon connection string, as shown in the following example:
 
 ```text
-postgres://casey:<password>@ep-square-sea-260584.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true"
+postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true
 ```
 
 Prisma Migrate, however, requires a direct connection to the database, and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in any environment that enables PgBouncer for connection pooling results in the following error:
@@ -68,11 +68,11 @@ Error: undefined: Database error
 Error querying the database: db error: ERROR: prepared statement "s0" already exists
  ```
 
-You may encounter this error with other applications that require a direct connection to PostgreSQL or applications that are not compatible with PgBouncer in `transaction mode`. To address this issue, Neon supports pooled and non-pooled connections to the same database with a `-pooler` connection string option. For more information, see [Enable connection pooling](#enable-connection-pooling).
+You may encounter this error with other applications that require a direct connection to PostgreSQL or applications that are not compatible with PgBouncer in `transaction mode`. To address this issue, Neon supports both pooled and non-pooled connections to the same database. For more information, see [Enable connection pooling](#enable-connection-pooling).
   
 For more information about using Prisma in a PgBouncer-enabled environment, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 
-PostgreSQL features such as prepared statements and [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html) are not supported with connection pooling. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section, in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
+PostgreSQL features such as prepared statements and [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html) are not supported with connection pooling in _transaction mode_. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section, in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
 ## Need help?
 
