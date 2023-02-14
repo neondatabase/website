@@ -17,7 +17,7 @@ Neon uses `PgBouncer` in `transaction mode`. For limitations associated with `tr
 
 ## Enable connection pooling
 
-In Neon, a database resides on a branch, and you connect to the database via the compute endpoint associated with the branch. You can enable connection pooling for all connections to a compute endpoint or for individual connections. Both methods are described below.
+In Neon, a database resides on a branch, and you connect to the database via the compute endpoint associated with the branch. You can enable connection pooling for all connections to a compute endpoint or for individual connections.
 
 ### Enable pooling for all connections
 
@@ -45,7 +45,7 @@ To connect to a database with a pooled connection, add the `-pooler` suffix to t
 postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
 ```
 
-To connect to the same database directly with a non-pooled connection, use the same connection string without a `-pooler` suffix:
+To connect to the same database directly with a non-pooled connection, use the same connection string without the `-pooler` suffix:
 
 ```text
 postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb

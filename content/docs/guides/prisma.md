@@ -48,7 +48,7 @@ You can find all of the connection details listed above, except for your passwor
 Prisma Migrate is a migration tool that allows you to easily evolve your database schema from prototyping to production. Prisma Migrate requires a shadow database to detect schema drift. This section describes how to configure a second Neon database as a shadow database, which is required to run the `prisma migrate dev` command.
 
 <Admonition type="note">
-Prisma Migrate requires a direct connection to the database and currently does not support connection pooling with PgBouncer. Migrations fail with an error if connection pooling is enabled in Neon. For more information, see [Prisma Migrate with PgBouncer](#prisma-migrate-with-pgbouncer).
+Prisma Migrate requires a direct connection to the database and currently does not support connection pooling with PgBouncer. Migrations fail with an error if a pooled connection is used. For more information, see [Prisma Migrate with PgBouncer](#prisma-migrate-with-pgbouncer).
 </Admonition>
 
 To configure a shadow database:
@@ -75,7 +75,7 @@ For more information about shadow databases, refer to [About the shadow database
 
 ## Prisma Migrate with PgBouncer
 
-Prisma Migrate requires a single, direct connection to the database. It currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in any environment that enables PgBouncer for connection pooling causes the following error:
+Prisma Migrate requires a direct connection to the database. It does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands with a pooled connection causes the following error:
 
 ```text
 Error undefined: Database error
@@ -83,19 +83,19 @@ Error querying the database: db error: ERROR: prepared statement
 "s0" already exists
 ```
 
-If you encounter this error, ensure that connection pooling in Neon is disabled. See [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling).
+If you encounter this error, ensure that you are using a direct connection to the database. Neon supports both pooled and non-pooled connections to the same database. See [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling) for more information.
 
 For more information about this issue, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#prisma-migrate-and-pgbouncer-workaround).
 
 ## Prisma Client with PgBouncer for serverless functions
 
-Serverless functions may require a large number of database connections. If you are using Prisma Client from a serverless function, add the `?pgbouncer=true` flag to your connection URL to enable connection pooling. For example:
+Serverless functions may require a large number of database connections. If you are using Prisma Client from a serverless function, ensure that connection pooling is enabled in Neon and add the `?pgbouncer=true` flag to your connection URL to require a pooled connection.
 
 ```text
 postgres://<user>:<password>@<host>:5432/neondb?pgbouncer=true
 ```
 
-Neon runs PgBouncer in [Transaction mode](https://www.pgbouncer.org/features.html).
+You can enable connection pooling in Neon for a compute endpoint or for individual connections. See [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling) for more information.
 
 For more information, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 
@@ -120,7 +120,7 @@ When you connect to an idle compute instance from Prisma, Neon automatically act
   postgres://<user>:<password>@<host>:5432/neondb?connect_timeout=10
   ```
 
-- If you are using connection pooling, set `pool_timeout` to 0 or a higher value. This setting defines the number of seconds to wait for a new connection from the pool. The default is 10 seconds. A setting of 0 means no timeout. A higher setting should provide the time required to avoid connection timeout issues. For example:
+- If you are using [connection pooling]((/docs/connect/connection-pooling), set `pool_timeout` to 0 or a higher value. This setting defines the number of seconds to wait for a new connection from the pool. The default is 10 seconds. A setting of 0 means no timeout. A higher setting should provide the time required to avoid connection timeout issues. For example:
 
   ```bash
   postgres://<user>:<password>@<host>:5432/neondb?pgbouncer=true&pool_timeout=20
