@@ -208,7 +208,7 @@ The Neon integration sets the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, an
 
 ## Deploy a preview
 
-You have successfully added the Neon integration. It's now time to try it. In the following steps, you will create a local Git branch to update the  **naturesnap** application and database schema. You will then add a model named `UserTopics` to your `schema.prisma` file, which associates a user with a topic (e.g., boats, flowers, islands, etc.), and change the application so that that it displays topics in black and white to identify the topics a user has not participated. Finally, you will commit your changes and create a pull request, which triggers a preview deployment in Vercel. The schema and application changes are already present in the **naturesnapp** application code, so you only need to uncomment a few lines.
+You have successfully added the Neon integration. It's now time to try it. In the following steps, you will create a local Git branch to update the  **naturesnap** application and database schema. You will then add a model named `UserTopics` to your `schema.prisma` file, which associates a user with a topic (e.g., boats, flowers, islands, etc.), and you will change the application so that that it displays topics in black and white to identify topics a user has not participated. Finally, you will commit your changes and create a pull request, which triggers a preview deployment in Vercel. The schema and application changes are already present in the **naturesnapp** application code, so you only need to uncomment a few lines.
 
 ### Update the schema and application
 
@@ -218,7 +218,7 @@ You have successfully added the Neon integration. It's now time to try it. In th
     git checkout -b add_user_topics
     ```
 
-1. In the your project's `prisma/schema.prisma` file, uncomment lines 20, 40, and lines 44 to 51 by removing the forward slashes. This change will add the `UserTopics` table.
+1. In your project's `prisma/schema.prisma` file, uncomment lines 20, 40, and lines 44 to 51 by removing the forward slashes. This change will add the `UserTopics` table.
 
     ```text
             model User {
@@ -299,10 +299,7 @@ You have successfully added the Neon integration. It's now time to try it. In th
     ✔ Generated Prisma Client (4.9.0 | library) to ./node_modules/@prisma/client in 92ms
     ```
 
-1. The `user_topics` table in your `vercel_dev` branch will be empty. Run the following query in the Neon SQL Editor to populate it with data:
-
-    In the Neon Console:
-
+1. The `user_topics` table in your `vercel_dev` branch will be empty. Use the Neon SQL Editor to populate it with data.  In the Neon Console:
     1. Navigate to the SQL Editor.
     1. Select the `vercel-dev` branch and the `naturesnap` database.
     1. Run the following query to populate the table:
@@ -327,7 +324,7 @@ You have successfully added the Neon integration. It's now time to try it. In th
     npm run dev
     ```
 
-    You should now see user avatars associated with each topic, and the topics that are not participated in are shown in black and white.
+    You should now see user avatars associated with each topic, and the topics not participated in are shown in black and white.
 
     ![Updated naturesnap app](/docs/guides/ns_app_updated_view.png)
 
@@ -362,7 +359,7 @@ You have successfully added the Neon integration. It's now time to try it. In th
     Branch 'add_user_topics' set up to track remote branch 'add_user_topics' from 'origin'.
     ```
 
-1. Create the pull request in GitHub by navigating to the provided link. Creating a pull request triggers a preview deployment in Vercel.
+1. Create the pull request in GitHub by navigating to the provided link. Creating the pull request triggers a preview deployment in Vercel.
 1. View the status of your preview deployment in Vercel:
 
     1. Select the **naturesnap** project.
@@ -372,10 +369,10 @@ You have successfully added the Neon integration. It's now time to try it. In th
     ![View preview deployment in Vercel](/docs/guides/ns_check_deployment.png)
 1. View your deployment preview branch in Neon
 
-    The Neon integration created a new branch for the preview deployment with the schema changes that you committed. The branch has the same name as your git branch, which is `add_user_topics`. In Vercel, the Neon integration sets the preview environment variables for the new branch. To view the branch, select **Branches** in the Neon Console.
+    The Neon integration created a new branch for the preview deployment with the schema changes that you pushed. The branch has the same name as your Git branch, which is `add_user_topics`. In Vercel, the Neon integration sets the preview environment variables for the preview branch. To view the branch, select **Branches** in the Neon Console.
 
     ![View preview branch in Neon](/docs/guides/ns_neon_preview_branch.png)
 
 ## Conclusion
 
-Following the steps in this guide, you deployed an application to Vercel and added the Neon integration. You then made changes to the application and database schema, and when you created a pull request with your changes, the Neon integration automatically created a database branch for the preview deployment.
+Following the steps in this guide, you deployed an application to Vercel and added the Neon integration. You then made changes to the application and database schema. When you created a pull request, the Neon integration automatically created a database branch for the preview deployment.

@@ -88,9 +88,9 @@
       slug: guides/symfony
     - title: Vercel
       items:
-        - title: The Neon-Vercel integration
+        - title: The Neon integration
           slug: guides/vercel-integration
-        - title: Add the integration
+        - title: Add the Neon integration
           slug: guides/vercel
         - title: Deploy a Next.js app
           slug: guides/vercel-app
