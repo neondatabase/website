@@ -20,6 +20,6 @@ Neon’s branching feature addresses all of these challenges. A branch is a copy
 
 When you push a branch to the GitHub repository associated with your Vercel project, triggering a preview deployment, the Neon integration automatically creates a database branch and connects it to your preview deployment by setting the required Vercel  environment variables.
 
-To add the integration to a Vercel project, refer to the instructions in [Add the Neon integration](/docs/guides/vercel-integration).
+To add the integration to a Vercel project, refer to the instructions in [Add the Neon integration](/docs/guides/vercel).
 
-For a demo app that you can use to try the Neon-Vercel integration, refer to [Deploy a Next.js app with Prisma and Vercel](/docs/guides/vercel-app), which demonstrates the integration with the [naturesnap](https://github.com/neondatabase/naturesnap) application.
+For a demo app that you can use to try the Neon-Vercel integration, refer to [Deploy a Next.js app with Prisma and Vercel](/docs/guides/vercel-app), which demonstrates the integration using the [naturesnap](https://github.com/neondatabase/naturesnap) example application.
