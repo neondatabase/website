@@ -17,7 +17,7 @@ Databases belong to branch. If you create a child branch, databases from the par
 To create a database:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select **Settings** > **Databases**.
+2. Select **Databases**.
 3. Click **New Database**.
 4. Select the branch where you want to create the database, enter a database name, and select a database owner.
 5. Click **Create**.
@@ -27,7 +27,7 @@ To create a database:
 To view databases:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select **Settings** > **Databases**
+2. Select **Databases**
 3. Select a branch to view the databases in the branch.
 
 ## Delete a database
@@ -37,7 +37,7 @@ Deleting a database is a permanent action. All database objects belonging to the
 To delete a database:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select **Settings** > **Databases**.
+2. Select **Databases**.
 3. Select a branch to view the databases in the branch.
 4. For the database you want to delete, click the delete icon.
 5. In the confirmation dialog, click **Delete**.
