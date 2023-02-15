@@ -17,27 +17,7 @@ Neon uses `PgBouncer` in `transaction mode`. For limitations associated with `tr
 
 ## Enable connection pooling
 
-In Neon, a database resides on a branch, and you connect to the database via the compute endpoint associated with the branch. You can enable connection pooling for all connections to a compute endpoint or for individual connections.
-
-### Enable pooling for all connections
-
-This method enables connection pooling for a compute endpoint. All connection requests to the compute endpoint use a pooled connection. Direct connections to a database through the compute endpoint are not permitted.
-
-To enable connection pooling for a compute endpoint:
-
-1. Navigate to the [Neon console](https://console.neon.tech/).
-1. On the **Dashboard**, select **Branches**.
-1. Find the branch with endpoint you want to enable pooling for, click the kebab menu in the **Compute endpoints** table, and select **Edit**.
-1. Toggle **Pooler enabled** to the on position.
-1. Click **Save**.
-
-You can also enable connection pooling when [creating a compute endpoint](/docs/manage/endpoints#create-a-compute-endpoint).
-
-### Enable pooling for individual connections
-
-Enabling pooling for individual connections requires adding a `-pooler` suffix to the compute endpoint ID, which is part of the hostname. Connection requests that specify the `-pooler` suffix use a pooled connection. Connections that do not specify the `-pooler` suffix connect to the database directly.
-
-When using this method, ensure that connection pooling is not enabled for the compute endpoint, as described in [Enable pooling for all connections](#enable-pooling-for-all-connections). If connection pooling is enabled for the compute endpoint, all connections to the compute endpoint use a pooled connection.
+Enabling connection pooling in Neon requires adding a `-pooler` suffix to the compute endpoint ID, which is part of the hostname. Connection requests that specify the `-pooler` suffix use a pooled connection. Connections that do not specify the `-pooler` suffix connect to the database directly.
 
 To connect to a database with a pooled connection, add the `-pooler` suffix to the endpoint ID in the hostname, as shown:
 
@@ -50,6 +30,10 @@ To connect to the same database directly with a non-pooled connection, use the s
 ```text
 postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
 ```
+
+<Admonition type="note">
+The previous method of enabling connection pooling for a compute endpoint is deprecated. When using a pooling-enabled connection, as described above, ensure that connection pooling is not enabled for the compute endpoint. To disable pooling for a compute endpoint, refer to the instructions in [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+/Admonition>
 
 ## Connection pooling notes and limitations
 

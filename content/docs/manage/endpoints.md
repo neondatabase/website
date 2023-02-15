@@ -49,14 +49,18 @@ For more information connection pooling in Neon, see [Connection pooling](/docs/
 
 ## Edit a compute endpoint
 
-You can edit a compute endpoint to modify the branch that it is associated with or to enable connection pooling.
+You can edit a compute endpoint to change the branch that it is associated with or the connection pooling setting.
+
+<Admonition type="note">
+Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](https://neon.tech/docs/connect/connection-pooling#enable-connection-pooling).
+/Admonition>
 
 To edit a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. Click the compute endpoint kebab menu, and select **Edit**.
-1. Select a new branch for the compute endpoint or enable connection pooling and click **Save**. If you are selecting a new branch for the compute endpoint, the branch must not have an associated compute endpoint.
+1. Select a new branch for the compute endpoint or change the connection pooling setting and click **Save**. If you are selecting a new branch for the compute endpoint, the branch must not have an associated compute endpoint.
 
 ## Delete a compute endpoint
 
