@@ -12,7 +12,7 @@ The Technical Preview Free Tier has the following limits:
 - 1 Neon project
 - 10 branches including the [primary branch](/docs/reference/glossary#primary-branch), with a limit of 3GB of data per branch
 - A [compute endpoint](/docs/reference/glossary#compute-endpoint) for each branch, each with up to 1 vCPU and 4GB of RAM (with 512MB of RAM allocated to PostgreSQL shared buffers)
-- 100 hours of Free Tier compute per month (total). Neon scales Free Tier compute to zero after 5 minutes of inactivity. Only active time of Free Tier compute is counted toward the limit. When you reach the limit, Free Tier compute endpoints assigned to [non-primary branches](/docs/reference/glossary#non-primary-branch) are unavailable until the limit is reset at the beginning of the next month. You are always able to connect to the compute endpoint assigned to the primary branch, regardless of the limit. This ensures that access to data on the primary branch is never interrupted.
+- 100 Free Tier compute hours per month (total). Neon scales Free Tier computes to zero after 5 minutes of inactivity. Only active compute time is counted toward the Free Tier compute hour limit. When you reach the limit, Free Tier computes assigned to [non-primary branches](/docs/reference/glossary#non-primary-branch) are unavailable until the limit is reset at the beginning of the next month. You are always able to connect to the compute assigned to the primary branch, regardless of the limit. This ensures that access to data on the primary branch is never interrupted.
 - A point-in-time restore window of 7 days of _reasonable usage_
 
 <Admonition type="note">
