@@ -42,7 +42,7 @@ Continuous integration and continuous delivery or continuous deployment.
 
 ### Compute
 
-A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon Compute runs PostgreSQL. Each Neon project contains a Compute. The amount of Compute resources available to a Neon project is currently subject to the limits defined by the Technical Preview Free Tier. A Neon Compute is stateless and is automatically activated or suspended based on user activity.
+A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon compute instance (also referred to as a [compute endpoint](#compute-endpoint)) runs PostgreSQL. The amount of compute resources available to a Neon project is currently subject to the limits defined by the Technical Preview Free Tier. A Neon compute instance is stateless and is automatically activated or suspended based on user activity.
 
 ### Connection pooling
 
@@ -80,7 +80,7 @@ A named collection of database objects. A Neon project has a default database na
 
 ### Compute endpoint
 
-The Neon compute instance associated with a branch. A single read-write compute endpoint is created for the project's primary branch. You can choose whether no not to create a compute endpoint when creating child branches. The compute endpoint hostname is required to connect to a Neon database from a client or application. A compute endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. A compute endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. A compute endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app). For more information about compute endpoints, see [Manage compute endpoints](/docs/manage/endpoints/).
+The Neon compute instance associated with a branch. Neon creates a single read-write compute endpoint for the project's primary branch. You can choose whether or not to create a compute endpoint when creating child branches. The compute endpoint hostname is required to connect to a Neon database from a client or application. A compute endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. A compute endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. A compute endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app). For more information about compute endpoints, see [Manage compute endpoints](/docs/manage/endpoints/).
 
 ### Free Tier
 
@@ -105,6 +105,10 @@ A browser-based graphical interface for managing Neon projects and resources.
 ### Neon user
 
 The user that registers and authenticates with Neon using a GitHub or Google account. Once authenticated, a Neon user can create and manage projects, branches, users, databases, and other project resources.
+
+### Non-primary branch
+
+A [branch](#branch) created from a [primary branch](#primary-branch) or another branch in your Neon project.
 
 ### Page
 
