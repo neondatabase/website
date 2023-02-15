@@ -55,6 +55,10 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 | unit                     | [7.7](https://github.com/df7cb/postgresql-unit)                 | [7.7](https://github.com/df7cb/postgresql-unit)                  |                                                                                                                    |
 | uuid-ossp                | [1.1](https://www.postgresql.org/docs/14/uuid-ossp.html)        | [1.1](https://www.postgresql.org/docs/15/uuid-ossp.html)         | Double-quote the extension name when installing: `CREATE EXTENSION "uuid-ossp"`                                    |
 
+| pgvector                 | [0.4.0](https://github.com/pgvector/pgvector)                 | [0.4.0](https://github.com/pgvector/pgvector)postgresql-unit)                  |
+| plls                     | [3.1.4](https://github.com/plv8/plv8/)            | [3.1.4](https://github.com/plv8/plv8/postgresql-unit)                  |   
+| plcoffee                 | [3.1.4](https://github.com/plv8/plv8/)            | [3.1.4](https://github.com/plv8/plv8/)                  |  
+
 ## Extension support notes
 
 - Neon supports the `uuid-ossp` extension for generating UUIDs rather than the `uuid` extension.
