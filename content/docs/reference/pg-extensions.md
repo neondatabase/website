@@ -39,6 +39,9 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 | pgcrypto                 | [1.3](https://www.postgresql.org/docs/14/pgcrypto.html)         | [1.3](https://www.postgresql.org/docs/15/pgcrypto.html)          |                                                                                                                    |
 | pgrowlocks               | [1.2](https://www.postgresql.org/docs/14/pgrowlocks.html)       | [1.2](https://www.postgresql.org/docs/15/pgrowlocks.html)        |                                                                                                                    |
 | pgstattuple              | [1.5](https://www.postgresql.org/docs/14/pgstattuple.html)      | [1.5](https://www.postgresql.org/docs/15/pgstattuple.html)       |                                                                                                                    |
+| pgvector                 | [0.4.0](https://github.com/pgvector/pgvector)                   | [0.4.0](https://github.com/pgvector/pgvector)postgresql-unit)    |                                                                                                                    |
+| plcoffee                 | [3.1.4](https://github.com/plv8/plv8/)                          | [3.1.4](https://github.com/plv8/plv8/)                           |                                                                                                                    |
+| plls                     | [3.1.4](https://github.com/plv8/plv8/)                          | [3.1.4](https://github.com/plv8/plv8/postgresql-unit)            |                                                                                                                    |  
 | plpgsql                  | [1.0](https://www.postgresql.org/docs/14/plpgsql.html)          | [1.0](https://www.postgresql.org/docs/15/plpgsql.html)           | Pre-installed with PostgreSQL.                                                                                     |
 | plv8                     | [3.1.4](https://plv8.github.io/)                                | [3.1.4](https://plv8.github.io/)                                 |                                                                                                                    |
 | postgis                  | [3.3.0](https://postgis.net/)                                   | [3.3.1](https://postgis.net/)                                    |                                                                                                                    |
@@ -54,10 +57,6 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 | unaccent                 | [1.1](https://www.postgresql.org/docs/14/unaccent.html)         | [1.1](https://www.postgresql.org/docs/15/unaccent.html)          |                                                                                                                    |
 | unit                     | [7.7](https://github.com/df7cb/postgresql-unit)                 | [7.7](https://github.com/df7cb/postgresql-unit)                  |                                                                                                                    |
 | uuid-ossp                | [1.1](https://www.postgresql.org/docs/14/uuid-ossp.html)        | [1.1](https://www.postgresql.org/docs/15/uuid-ossp.html)         | Double-quote the extension name when installing: `CREATE EXTENSION "uuid-ossp"`                                    |
-
-| pgvector                 | [0.4.0](https://github.com/pgvector/pgvector)                 | [0.4.0](https://github.com/pgvector/pgvector)postgresql-unit)                  |
-| plls                     | [3.1.4](https://github.com/plv8/plv8/)            | [3.1.4](https://github.com/plv8/plv8/postgresql-unit)                  |   
-| plcoffee                 | [3.1.4](https://github.com/plv8/plv8/)            | [3.1.4](https://github.com/plv8/plv8/)                  |  
 
 ## Extension support notes
 
