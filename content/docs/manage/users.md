@@ -20,7 +20,7 @@ To create a user:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Settings** > **Users**.
+3. Select **Users**.
 4. Select **New User**.
 5. In the user creation dialog, select the branch where you want to create the user and specify a user name. The length of the user name is limited to 63 bytes.
 6. Click **Create**.
@@ -33,7 +33,7 @@ To delete a user:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Settings** > **Users**.
+3. Select **Users**.
 4. Select a branch to view users in the branch.
 5. Click the delete icon for the user you want to delete.
 6. On the delete user dialog, click **Delete**.
@@ -44,7 +44,7 @@ To reset a user's password:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Settings** > **Users**.
+3. Select **Users**.
 4. Select a branch to view users in the branch.
 5. Select **Reset password**.
 6. On the confirmation dialog, click **Sure, reset**.

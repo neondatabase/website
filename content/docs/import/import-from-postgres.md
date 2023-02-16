@@ -35,7 +35,7 @@ A Neon connection string has the same format, where:
 - `<port>` is the Neon port number. The default port number is `5432`.
 - `<dbname>` is the database you are connecting to. The default Neon database is `neondb`.
 
-You can obtain a Neon connection string from the Neon **Dashboard**, under **Connection Details**. The connection string must include your project password, which was provided when you created the Neon project. If you have misplaced your password, you can reset it. Passwords are managed under **Settings** in the Neon Console.
+You can obtain a Neon connection string from the Neon **Dashboard**, under **Connection Details**. The connection string must include your project password, which was provided when you created the Neon project. If you have misplaced your password, you can reset it. Passwords are managed on the **Users** page in the Neon Console.
 
 The command for importing a database from PostgreSQL to Neon appears similar to the following:
 

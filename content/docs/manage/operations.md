@@ -19,7 +19,7 @@ Operations include:
 
 ## View operations
 
-The **Operations** widget on the Neon **Dashboard** displays operations. You can also view operations in **Settings** > **Operations**.
+The **Operations** widget on the Neon **Dashboard** displays operations. You can also view operations on the **Operations** page.
 
 Operation details include:
 

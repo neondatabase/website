@@ -31,7 +31,7 @@ postgres://sally@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb
 - hostname: `ep-cold-poetry-404091.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
-Passwords are only shown when they are created. If you misplaced your password, you can reset it by selecting the **Reset Password** link in the **Connection Details** widget, or by navigating to **Settings** > **Users**.
+Passwords are only shown when they are created. If you misplaced your password, you can reset it by selecting the **Reset Password** link in the **Connection Details** widget or by navigating to the **Users** page.
 
 Neon uses the default PostgreSQL port, `5432`.
 
