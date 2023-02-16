@@ -53,7 +53,7 @@ You can edit a compute endpoint to change the branch that it is associated with 
 
 <Admonition type="note">
 Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](https://neon.tech/docs/connect/connection-pooling#enable-connection-pooling).
-/Admonition>
+</Admonition>
 
 To edit a compute endpoint:
 
