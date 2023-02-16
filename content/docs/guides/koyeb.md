@@ -7,7 +7,7 @@ enableTableOfContents: true
 
 This guide describes how to connect a Neon Postgres database to an application running on Koyeb. To successfully follow the instructions in this guide, you require:
 
-- A [Koyeb account](https://app.koyeb.com/) to deploy the application. You can optionally install the [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli) if you prefer to follow this guide without leaving the terminal.
+- A [Koyeb account](https://app.koyeb.com/) to deploy the application. You can optionally install the [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli) if you prefer to follow this guide without leaving the terminal. The Koyeb CLI requires an API access token, which you can generate in the Koyeb [control panel](https://app.koyeb.com/), under **Account** > **API**.
 - A [Neon account](https://console.neon.tech/) to deploy the PostgreSQL database.
 
 ## Create a Neon project
@@ -82,7 +82,7 @@ The example application exposes a /planets endpoint that you can use to list pla
 
 ## Via the Koyeb CLI
 
-To deploy the example application using the Koyeb CLI, run the following command in your terminal:
+To deploy the example application using the [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli), run the following command in your terminal:
 
 ```bash
 koyeb app init express-neon \
@@ -110,11 +110,11 @@ Once the deployment of your application has finished, you can retrieve the publi
 
 ```bash
 $ koyeb app get express-neon
-ID          NAME                     DOMAINS                                    CREATED AT
-ec6a4311    express-neon             ["express-neon-myorg.koyeb.app"]          24 Jan 23 11:12 UTC
+ID          NAME         STATUS         DOMAINS                                CREATED AT          
+b8611a1d    express-neon HEALTHY       ["express-neon-myorg.koyeb.app"]       16 Feb 23 18:13 UTC
 ```
 
-The example application exposes a /planets endpoint that you can use to list planets from the database we prepared earlier. Once your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
+The example application exposes a `/planets` endpoint that you can use to list planets from the database we prepared earlier. Once your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
 
 ```jason
 [
@@ -135,8 +135,9 @@ The example application exposes a /planets endpoint that you can use to list pla
 
 ## Delete the example application and Neon database
 
-To delete the example application and the Neon PostgreSQL database and avoid incurring any charges, follow these steps:
+To delete the example application on Koyeb to avoid incurring any charges, follow these steps:
 
-1. From the Neon dashboard, click "Settings" for the database and click "Delete project". Follow the instructions.
-1. From the Koyeb control panel, select the App to delete.
-1. Under the "Settings" tab, click the "Delete" button and follow the instructions.
+1. From the Koyeb [control panel](https://app.koyeb.com/), select the App to delete.
+1. On the **Settings** tab, select **Danger Zone** and click **Delete**.
+
+To delete your Neon project, refer to [Delete a project](/docs/manage/projects#delete-a-project) for instructions.
