@@ -19,9 +19,9 @@ This guide describes how connect a Neon PostgreSQL database to an application de
 
 A dialog pops up with your Neon connection string. Store this value in a safe place. It is required later. The connection string specifies `neondb` as the database. This is the default database created with each Neon project. You can use this database with the example application.
 
-## Prepare the database on your machine
+## Prepare the database
 
-The example application connects to your Neon PostgreSQL database using [Prisma](https://www.prisma.io/) as an ORM. Prisma synchronizes the database schema with the Prisma schema included with the application code. Before you deploy the application, you will perform a migration to create the database schema and seed it with data.
+The example application connects to your Neon PostgreSQL database using [Prisma](https://www.prisma.io/) as an ORM. Prisma synchronizes the database schema with the Prisma schema included with the application. Before you deploy the application, you will perform a migration to create the database schema and seed it with data.
 
 ### Clone the example application
 
@@ -45,7 +45,7 @@ DATABASE_URL=`<YOUR_NEON_CONNECTION_STRING>` npx prisma db seed
 
 You can deploy on Koyeb using the control panel or the Koyeb CLI.
 
-### Via the Koyeb control panel
+### From the Koyeb control panel
 
 To deploy the application from the Koyeb [control panel](https://app.koyeb.com/), follow these steps:
 
@@ -80,7 +80,7 @@ The example application exposes a `/planets` endpoint that you can use to list p
 ]
 ```
 
-## Via the Koyeb CLI
+### From the Koyeb CLI
 
 The [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli) requires an API access token, which you can generate in the Koyeb [control panel](https://app.koyeb.com/), under **Account** > **API**.
 
@@ -98,7 +98,7 @@ koyeb app init express-neon \
 
 Make sure to replace `<YOUR_NEON_CONNECTION_STRING>` with your Neon connection string.
 
-### Access deployment logs
+### Access Koyeb deployment logs
 
 To track the app deployment and visualize build logs, execute the following command:
 
