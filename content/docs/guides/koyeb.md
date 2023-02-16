@@ -15,7 +15,7 @@ This guide describes how to connect a Neon Postgres database to an application r
 1. Navigate to the [Neon Console](https://console.neon.tech/).
 1. Select **Create a project**.
 1. Enter a name for the project (e.g., `neon-koyeb`), and select a PostgreSQL version and and region.
-1  Click **Create project**.
+1.  Click **Create project**.
 
 A dialog pops up with your connection string. Store this value in a safe place. It is required later. You may notice that the connection string `neondb` as the database. This is the default database created with each Neon project. You will use this database with the example application.
 
@@ -133,7 +133,7 @@ The example application exposes a `/planets` endpoint that you can use to list p
 ]
 ```
 
-## Delete the example application and Neon database
+## Delete the example application and Neon project
 
 To delete the example application on Koyeb to avoid incurring any charges, follow these steps:
 
