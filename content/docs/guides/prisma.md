@@ -89,7 +89,7 @@ For more information about this issue, refer to the [Prisma documentation](https
 
 ## Prisma Client with PgBouncer for serverless functions
 
-Serverless functions may require a large number of database connections. If you are using Prisma Client from a serverless function, enable connection pooling in Neon and add the `?pgbouncer=true` flag to your connection URL. You can enable connection pooling in Neon for individual connections by adding a -pooler suffix to the endpoint ID, which is part of the hostname (see [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling)). For example:
+Serverless functions may require a large number of database connections. If you are using Prisma Client from a serverless function, enable connection pooling in Neon and add the `?pgbouncer=true` flag to your connection URL. You can enable connection pooling in Neon for individual connections by adding a `-pooler` suffix to the endpoint ID, which is part of the hostname (see [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling)). For example:
 
 ```text
 postgres://sally:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true
