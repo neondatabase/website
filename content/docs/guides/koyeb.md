@@ -10,6 +10,8 @@ This guide describes how connect a Neon PostgreSQL database to an application de
 - A [Koyeb account](https://app.koyeb.com/) to deploy the application. Alternatively, you can install the [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli) if you prefer to deploy the application from your terminal.
 - A [Neon account](https://console.neon.tech/) to deploy the PostgreSQL database.
 
+The example application connects to your Neon PostgreSQL database using [Prisma](https://www.prisma.io/) as an ORM. Prisma synchronizes the database schema with the Prisma schema included with the application and seeds the database.
+
 ## Create a Neon project
 
 1. Navigate to the [Neon Console](https://console.neon.tech/).
@@ -17,29 +19,13 @@ This guide describes how connect a Neon PostgreSQL database to an application de
 1. Enter a name for the project (`neon-koyeb`, for example), and select a PostgreSQL version and region.
 1. Click **Create project**.
 
-A dialog pops up with your Neon connection string. Store this value in a safe place. It is required later. The connection string specifies `neondb` as the database. This is the default database created with each Neon project. You can use this database with the example application.
-
-## Prepare the database
-
-The example application connects to your Neon PostgreSQL database using [Prisma](https://www.prisma.io/) as an ORM. Prisma synchronizes the database schema with the Prisma schema included with the application. Before you deploy the application, you will perform a migration to create the database schema and seed it with data.
-
-### Clone the example application
-
-Clone the example application to your machine and navigate to the application directory by running the following commands:
+A dialog pops up with your Neon connection string, which appears similar to the following:
 
 ```bash
-git clone git@github.com:koyeb/example-express-prisma.git
-cd example-express-prisma
+postgres://<user>:<password>@<host>:<port>/neondb
 ```
 
-### Initialize and seed the database
-
-To synchronize your Neon database schema with the Prisma schema and seed the data, run the following commands in your terminal. Replace `<YOUR_NEON_CONNECTION_STRING>` with the Neon connection string that you saved when you created your Neon project.
-
-```bash
-DATABASE_URL=`<YOUR_NEON_CONNECTION_STRING>` npx prisma db push
-DATABASE_URL=`<YOUR_NEON_CONNECTION_STRING>` npx prisma db seed
-```
+Store this value in a safe place. It is required later. The connection string specifies `neondb` as the database. This is the default database created with each Neon project. You will use this database with the example application.
 
 ## Deploy the application on Koyeb
 
@@ -55,13 +41,13 @@ To deploy the application from the Koyeb [control panel](https://app.koyeb.com/)
 1. Keep `example-express-prisma` as the name and `main` as the branch.
 1. In **Build and deployment settings**, enable the **Override** setting and add the following **Build command**: `npm run postgres:init`
 1. Select the region closest to your Neon database.
-1. Under **Advanced** > **Environment variables**, add a `DATABASE_URL` environment variable to enable the application to connect to your Neon PostgreSQL database. Enter the Neon connection string that you used earlier.
+1. Under **Advanced** > **Environment variables**, add a `DATABASE_URL` environment variable to enable the application to connect to your Neon PostgreSQL database. Set the value to the Neon connection string provided to you when you created the Neon project.
 1. Enter a name for your app. For example, `express-neon`
 1. Click **Deploy**.
 
-Koyeb is now building the application. Once the build has finished, you can access your application running on Koyeb by clicking the URL ending with `.koyeb.app`.
+Koyeb builds the application. Once the build has finished, you can access your application running on Koyeb by clicking the URL ending with `.koyeb.app`.
 
-The example application exposes a `/planets` endpoint that you can use to list planets from the database you prepared earlier. Once your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
+The example application exposes a `/planets` endpoint that lists planets retrieved from the Neon database. Once your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
 
 ```json
 [
@@ -90,13 +76,14 @@ To deploy the example application using the Koyeb CLI, run the following command
 koyeb app init express-neon \
 --git github.com/koyeb/example-express-prisma \
 --git-branch main \
+--git-build-command "npm run postgres:init" \
 --ports 8080:http \
 --routes /:8080 \
 --env PORT=8080 \
---env DATABASE_URL="<YOUR_NEON_CONNECTION_STRING>"
+--env DATABASE_URL="postgres://<user>:<password>@<host>:5432/neondb"
 ```
 
-Make sure to replace `<YOUR_NEON_CONNECTION_STRING>` with your Neon connection string.
+Make sure to replace `<user>`, `<password>`, and `<host>` with your Neon connection string values.
 
 ### Access Koyeb deployment logs
 
@@ -113,7 +100,7 @@ Once the deployment of your application has finished, you can retrieve the publi
 ```bash
 $ koyeb app get express-neon
 ID          NAME         STATUS         DOMAINS                                CREATED AT          
-b8611a1d    express-neon HEALTHY       ["express-neon-myorg.koyeb.app"]       16 Feb 23 18:13 UTC
+b8611a1d    express-neon HEALTHY        ["express-neon-myorg.koyeb.app"]       16 Feb 23 18:13 UTC
 ```
 
 The example application exposes a `/planets` endpoint that you can use to list planets from the database you prepared earlier. Once your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
