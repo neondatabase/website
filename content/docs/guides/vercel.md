@@ -58,10 +58,6 @@ To add the integration:
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**. You should see the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` variable settings added by the integration.
 
-## Add the integration to another project
-
-To add the Neon integration to another project in Vercel, 
-
 ## How the integration works with preview deployments
 
 Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments) enable teams to collaborate effectively by automatically creating an isolated, production-like environment for every commit. This way, all changes can be previewed before they are merged into production.
