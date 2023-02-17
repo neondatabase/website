@@ -47,7 +47,7 @@ To deploy the application from the Koyeb [control panel](https://app.koyeb.com/)
 
 Koyeb builds the application. Once the build has finished, you can access your application running on Koyeb by clicking the URL ending with `.koyeb.app`.
 
-The example application exposes a `/planets` endpoint that lists planets retrieved from the Neon database. Once your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
+The example application exposes a `/planets` endpoint that you can use to list planets from the database. Once your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
 
 ```json
 [
@@ -103,7 +103,7 @@ ID          NAME         STATUS         DOMAINS                                C
 b8611a1d    express-neon HEALTHY        ["express-neon-myorg.koyeb.app"]       16 Feb 23 18:13 UTC
 ```
 
-The example application exposes a `/planets` endpoint that you can use to list planets from the database you prepared earlier. Once your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
+The example application exposes a `/planets` endpoint that you can use to list planets from the database. Once your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
 
 ```json
 [
