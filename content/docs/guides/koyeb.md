@@ -45,7 +45,7 @@ To deploy the application from the Koyeb [control panel](https://app.koyeb.com/)
 1. Enter a name for your app. For example, `express-neon`
 1. Click **Deploy**.
 
-Koyeb builds the application. Once the build has finished, you can access your application running on Koyeb by clicking the URL ending with `.koyeb.app`.
+Koyeb builds the application. Once the build and deployment have finished, you can access your application running on Koyeb by clicking the URL ending with `.koyeb.app`.
 
 The example application exposes a `/planets` endpoint that you can use to list planets from the database. Once your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
 
@@ -95,7 +95,7 @@ koyeb service logs express-neon/express-neon -t build
 
 ### Access your app
 
-Once the deployment of your application has finished, you can retrieve the public domain to access your application by running the following command:
+Once the build and deployment have finished, you can retrieve the public domain to access your application by running the following command:
 
 ```bash
 $ koyeb app get express-neon
