@@ -52,6 +52,8 @@
       slug: manage/users
     - title: Databases
       slug: manage/databases
+    - title: Integrations
+      slug: manage/integrations
     - title: Operations
       slug: manage/operations
 - title: Guides
