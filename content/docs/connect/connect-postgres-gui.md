@@ -56,6 +56,7 @@ Connections from the following GUI applications and IDEs have been tested with N
 - [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres)
 - [pgAdmin 4](https://www.pgadmin.org/)
 - [Postico](https://eggerapps.at/postico2/)
+- [Retool](https://retool.com/)
 - [TablePlus](https://tableplus.com/)
 
 ## Connection issues
