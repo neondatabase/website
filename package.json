@@ -27,6 +27,7 @@
     "algoliasearch": "^4.14.3",
     "clsx": "^1.2.1",
     "copy-to-clipboard": "^3.3.3",
+    "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
     "file-loader": "^6.2.0",
     "framer-motion": "^8.4.2",

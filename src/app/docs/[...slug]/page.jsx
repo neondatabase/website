@@ -32,7 +32,7 @@ export default async function DocPost({ params }) {
 
   const flatSidebar = await getFlatSidebar(getSidebar());
 
-  const isReleaseNotesIndex = currentSlug.match('release-notes');
+  const isReleaseNotesIndex = !!currentSlug.match('release-notes')?.length;
   const releaseNotes = await getAllReleaseNotes();
 
   const releaseNotesWithMdxSource = await Promise.all(
