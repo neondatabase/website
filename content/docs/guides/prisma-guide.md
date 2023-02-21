@@ -26,7 +26,7 @@ postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/ne
 ```
 
 <Admonition type="info">
-A Neon project is created with a default PostgreSQL user named for your account, and a default database named `neondb`. This guide uses the `neondb` database as the primary database.
+A Neon project is created with a default PostgreSQL role named for your account, and a default database named `neondb`. This guide uses the `neondb` database as the primary database.
 </Admonition>
 
 ## Create a shadow database for Prisma Migrate

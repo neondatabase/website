@@ -55,7 +55,7 @@ where:
 - The `Authorization: Bearer $NEON_API_KEY` entry in the header specifies your API key. Replace `$NEON_API_KEY` with an actual 64-bit API key. A request without this header, or containing an invalid or revoked API key, fails and returns a `401 Unauthorized` HTTP status code.
 - [`jq`](https://stedolan.github.io/jq/) is an optional third-party tool that formats the JSON response, making it easier to read.
 
-A response for a Neon user with a single project appears similar to the following:
+A response for a Neon role with a single project appears similar to the following:
 
 ```json
 {

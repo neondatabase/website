@@ -35,7 +35,7 @@ To connect using Neon's `psql` passwordless connect feature:
    casey=>
    ```
 
-   When using passwordless connect, the `psql` prompt shows your local terminal user name. However, you are logged in as the Neon `web_access` user, which you can verify by running this query:
+   When using passwordless connect, the `psql` prompt shows your local terminal user name. However, you are logged in with the Neon `web_access` role, which you can verify by running this query:
 
    ```sql
    SELECT current_user;

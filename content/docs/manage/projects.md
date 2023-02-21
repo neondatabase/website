@@ -13,8 +13,8 @@ A Neon project is created with the following resources by default:
 - A primary branch called `main`. You can create child branches from the primary branch or from a previously created branch. For more information, see [Manage branches](/docs/manage/branches).
 - A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage compute endpoints](/docs/manage/endpoints).
 - A default database, called `neondb`, which resides in the project's primary branch.
-- A default PostgreSQL user that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
-- A `web_access` PostgreSQL user, which is used by the Neon [SQL Editor](docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect).
+- A default PostgreSQL role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
+- A `web_access` PostgreSQL role, which is used by the Neon [SQL Editor](docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect).
 
 ## Create a project
 
@@ -27,7 +27,7 @@ To create a Neon project:
 Upon creating a project, you are presented with a dialog that provides your connection details for the project, including your password. The password is required to connect to databases in the project from a client or application. Store your password in a safe location.
 
 <Admonition type="important">
-After closing the connection information dialog, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Users](/docs/manage/users).
+After closing the connection information dialog, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Manage roles](/docs/manage/roles).
 </Admonition>
 
 ## Edit a project
@@ -43,7 +43,7 @@ To edit a Neon project:
 
 ## Delete a project
 
-Deleting a project is a permanent action, which also deletes any compute endpoints, branches, databases, and users that belong to the project.
+Deleting a project is a permanent action, which also deletes any compute endpoints, branches, databases, and roles that belong to the project.
 
 To delete a project:
 
