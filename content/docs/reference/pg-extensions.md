@@ -68,7 +68,7 @@ Neon updates supported extensions as new versions become available. Version upda
 SELECT * FROM pg_extension;
 ```
 
-You can update an extension to the latest version using `ALTER EXTENSION name UPDATE [ TO new_version ]` syntax. For example:
+You can update an extension to the latest version using `ALTER EXTENSION <extension_name> UPDATE TO <new_version>` syntax. For example:
 
   ```sql
   ALTER EXTENSION postgis_topology UPDATE TO '3.3.2';
