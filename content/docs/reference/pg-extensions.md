@@ -34,10 +34,10 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 | isn                      | [1.2](https://www.postgresql.org/docs/14/isn.html)              | [1.2](https://www.postgresql.org/docs/15/isn.html)               |                                                                                                                    |
 | lo                       | [1.1](https://www.postgresql.org/docs/14/lo.html)               | [1.1](https://www.postgresql.org/docs/15/lo.html)                |                                                                                                                    |
 | ltree                    | [1.2](https://www.postgresql.org/docs/14/ltree.html)            | [1.2](https://www.postgresql.org/docs/15/ltree.html)             |                                                                                                                    |
-| pgjwt                    | [0.2.0](https://github.com/michelp/pgjwt)                       | [0.2.0](https://github.com/michelp/pgjwt)         |  
 | pg_prewarm               | [1.2](https://www.postgresql.org/docs/14/pgprewarm.html)        | [1.2](https://www.postgresql.org/docs/15/pgprewarm.html)         |                                                                                                                    |
 | pg_trgm                  | [1.6](https://www.postgresql.org/docs/14/pgtrgm.html)           | [1.6](https://www.postgresql.org/docs/15/pgtrgm.html)            |                                                                                                                    |
 | pgcrypto                 | [1.3](https://www.postgresql.org/docs/14/pgcrypto.html)         | [1.3](https://www.postgresql.org/docs/15/pgcrypto.html)          |                                                                                                                    |
+| pgjwt                    | [0.2.0](https://github.com/michelp/pgjwt)                       | [0.2.0](https://github.com/michelp/pgjwt)                        |                                                                                                                    |
 | pgrowlocks               | [1.2](https://www.postgresql.org/docs/14/pgrowlocks.html)       | [1.2](https://www.postgresql.org/docs/15/pgrowlocks.html)        |                                                                                                                    |
 | pgstattuple              | [1.5](https://www.postgresql.org/docs/14/pgstattuple.html)      | [1.5](https://www.postgresql.org/docs/15/pgstattuple.html)       |                                                                                                                    |
 | pgvector                 | [0.4.0](https://github.com/pgvector/pgvector)                   | [0.4.0](https://github.com/pgvector/pgvector)                    |                                                                                                                    |
@@ -58,7 +58,21 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 | unaccent                 | [1.1](https://www.postgresql.org/docs/14/unaccent.html)         | [1.1](https://www.postgresql.org/docs/15/unaccent.html)          |                                                                                                                    |
 | unit                     | [7.7](https://github.com/df7cb/postgresql-unit)                 | [7.7](https://github.com/df7cb/postgresql-unit)                  |                                                                                                                    |
 | uuid-ossp                | [1.1](https://www.postgresql.org/docs/14/uuid-ossp.html)        | [1.1](https://www.postgresql.org/docs/15/uuid-ossp.html)         | Double-quote the extension name when installing: `CREATE EXTENSION "uuid-ossp"`                                    |
-| xml2                     | [1.1](https://www.postgresql.org/docs/current/xml2.html)        | [1.1](https://www.postgresql.org/docs/current/xml2.html)         |                                                                         |
+| xml2                     | [1.1](https://www.postgresql.org/docs/current/xml2.html)        | [1.1](https://www.postgresql.org/docs/current/xml2.html)         |                                                                                                                    |
+
+## Update an extension version
+
+Neon updates supported extensions as new versions become available. Version updates are communicated in the [Release notes](/docs/release-notes). To check the current version of extensions you have installed, query the `pg_extension` table:
+
+```bash
+SELECT * FROM pg_extension;
+```
+
+You can update an extension to the latest version using `ALTER EXTENSION name UPDATE [ TO new_version ]` syntax. For example:
+
+  ```sql
+  ALTER EXTENSION postgis_topology UPDATE TO '3.3.2';
+  ```
 
 ## Extension support notes
 
