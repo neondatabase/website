@@ -31,7 +31,153 @@ Operation details include:
 
 ## View operations with the Neon API
 
-You can also view operations using the Neon API, which provides operations data in an unmodified format. For example:
+You can use the [Neon API](https://neon.tech/api-reference/v2/) to view operations. The following methods are provided:
+
+### List operations
+
+Lists operations for the specified project. This method supports response pagination. For more information, see [List operations with pagination](#list-operations-with-pagination).
+
+```text
+/projects/{project_id}/operations/
+```
+
+cURL command:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY'
+```
+
+Response:
+
+```json
+{
+  "operations": [
+    {
+      "id": "97c7a650-e4ff-43d7-8c58-4c67f5050167",
+      "project_id": "autumn-disk-484331",
+      "branch_id": "br-wispy-dew-591433",
+      "endpoint_id": "ep-orange-art-714542",
+      "action": "check_availability",
+      "status": "finished",
+      "failures_count": 0,
+      "created_at": "2022-12-09T08:47:52Z",
+      "updated_at": "2022-12-09T08:47:56Z"
+    },
+    {
+      "id": "0f3daf10-2544-425c-86d3-9a9932ab25b9",
+      "project_id": "autumn-disk-484331",
+      "branch_id": "br-wispy-dew-591433",
+      "endpoint_id": "ep-orange-art-714542",
+      "action": "check_availability",
+      "status": "finished",
+      "failures_count": 0,
+      "created_at": "2022-12-09T04:47:39Z",
+      "updated_at": "2022-12-09T04:47:44Z"
+    },
+    {
+      "id": "fb8484df-51b4-4a40-b0fc-97b73998892b",
+      "project_id": "autumn-disk-484331",
+      "branch_id": "br-wispy-dew-591433",
+      "endpoint_id": "ep-orange-art-714542",
+      "action": "check_availability",
+      "status": "finished",
+      "failures_count": 0,
+      "created_at": "2022-12-09T02:47:05Z",
+      "updated_at": "2022-12-09T02:47:09Z"
+    }
+  ],
+  "pagination": {
+    "cursor": "2022-12-07T00:45:05.262011Z"
+  }
+}
+
+```
+
+### List operations with pagination
+
+Pagination allows you to limit the number of operations displayed, as the number of operations for project can be large. To paginate responses, issue an initial request with a `limit` value. For brevity, the limit is set to 1 in the following example.
+
+cURL command:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?limit=1' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY'
+```
+
+Response:
+
+```json
+{
+  "operations": [
+    {
+      "id": "97c7a650-e4ff-43d7-8c58-4c67f5050167",
+      "project_id": "autumn-disk-484331",
+      "branch_id": "br-wispy-dew-591433",
+      "endpoint_id": "ep-orange-art-714542",
+      "action": "check_availability",
+      "status": "finished",
+      "failures_count": 0,
+      "created_at": "2022-12-09T08:47:52Z",
+      "updated_at": "2022-12-09T08:47:56Z"
+    }
+  ],
+  "pagination": {
+    "cursor": "2022-12-09T08:47:52.20417Z"
+  }
+}
+```
+
+To list the next page of operations, add the `cursor` value returned in the response body of the initial or previous request and a `limit` value for the next page.
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?cursor=2022-12-09T08%3A47%3A52.20417Z&limit=1' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY'
+```
+
+Response:
+
+```json
+{
+  "operations": [
+    {
+      "id": "0f3daf10-2544-425c-86d3-9a9932ab25b9",
+      "project_id": "autumn-disk-484331",
+      "branch_id": "br-wispy-dew-591433",
+      "endpoint_id": "ep-orange-art-714542",
+      "action": "check_availability",
+      "status": "finished",
+      "failures_count": 0,
+      "created_at": "2022-12-09T04:47:39Z",
+      "updated_at": "2022-12-09T04:47:44Z"
+    }
+  ],
+  "pagination": {
+    "cursor": "2022-12-09T04:47:39.797163Z"
+  }
+}
+```
+
+### List operation
+
+This method shows only the details for the specified operation ID.
+
+```text
+/projects/{project_id}/operations/{operation_id}
+```
+
+cURL command:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/97c7a650-e4ff-43d7-8c58-4c67f5050167' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY'
+```
+
+Response:
 
 ```json
 {
@@ -49,7 +195,67 @@ You can also view operations using the Neon API, which provides operations data 
 }
 ```
 
-For information about using the Neon API, see [Neon API](/docs/reference/api-reference/).
+## Polling operation status
+
+Some Neon API requests may take a few moments to complete. When using the Neon API programmatically, it is recommended that you check the status of the operations initiated by a Neon API request before proceeding with dependent requests. For example, if you use API requests to create a branch and add a database to the branch, you should check operation status of the request to ensure that the branch was created before issuing the create database request.
+
+A Neon API request response includes information about the operations that were initiated. For example, the following operation information is returned for a create brach request:
+
+```json
+"operations": [
+    {
+      "id": "22acbb37-209b-4b90-a39c-8460090e1329",
+      "project_id": "autumn-disk-484331",
+      "branch_id": "br-dawn-scene-747675",
+      "action": "create_branch",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2022-12-08T19:55:43Z",
+      "updated_at": "2022-12-08T19:55:43Z"
+    },
+    {
+      "id": "055b17e6-ffe3-47ab-b545-cfd7db6fd8b8",
+      "project_id": "autumn-disk-484331",
+      "branch_id": "br-dawn-scene-747675",
+      "endpoint_id": "ep-small-bush-675287",
+      "action": "start_compute",
+      "status": "scheduling",
+      "failures_count": 0,
+      "created_at": "2022-12-08T19:55:43Z",
+      "updated_at": "2022-12-08T19:55:43Z"
+    }
+  ]
+  ```
+
+You can use the [getProjectOperation](https://neon.tech/api-reference/v2#/Operation/getProjectOperation) method to poll the status of an operation by the operation ID. For example:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/055b17e6-ffe3-47ab-b545-cfd7db6fd8b8' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY'
+```
+
+You can poll an operation at intervals of a few seconds until the `status` of the operation changes to `finished` before issuing a dependent request. In this case, the `start_compute` operation is polled to ensure that compute endpoint associated with the new branch is available.
+
+```json
+{
+  "operation": {
+      "id": "055b17e6-ffe3-47ab-b545-cfd7db6fd8b8",
+      "project_id": "autumn-disk-484331",
+      "branch_id": "br-dawn-scene-747675",
+      "endpoint_id": "ep-small-bush-675287",
+      "action": "start_compute",
+      "status": "finished",
+      "failures_count": 0,
+      "created_at": "2022-12-08T19:55:43Z",
+      "updated_at": "2022-12-08T19:55:43Z"
+  }
+}
+```
+
+Possible operation `status` values include `running`, `finished`, `failed`, `scheduling`.
+
+The same operation polling methodology can be applied to most Neon API requests. Your initial API request returns information about initiated operations. You can poll those operations to ensure they are finished before proceeding with a subsequent API request.
 
 ## Need help?
 
