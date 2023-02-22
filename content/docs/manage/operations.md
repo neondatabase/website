@@ -20,7 +20,7 @@ Operations include:
 
 ## View operations
 
-The **Operations** widget on the Neon **Dashboard** displays operations. You can also view operations on the **Operations** page.
+You can view operation in **Operations** widget on the Neon **Dashboard** or on the **Operations** page.
 
 ![Operations](/docs/manage/operations.png)
 
@@ -41,7 +41,7 @@ You can use the [Neon API](https://neon.tech/api-reference/v2/) to view operatio
 Lists operations for the specified project. This method supports response pagination. For more information, see [List operations with pagination](#list-operations-with-pagination).
 
 ```text
-/projects/{project_id}/operations/
+/projects/{project_id}/operations
 ```
 
 cURL command:
@@ -200,9 +200,9 @@ Response:
 
 ## Poll operation status
 
-Some Neon API requests may take a few moments to complete. When using the Neon API programmatically, you can check the `status` of the operations initiated by a request before proceeding with other requests. For example, if you use API requests to create a branch and add a database to the branch, you can check operation status of the create branch request before issuing the create database request.
+Some Neon API requests may take a few moments to complete. When using the Neon API programmatically, you can check the `status` of the operations before proceeding with the next request. For example, if you use API requests to create a branch and add a database to the branch, you may want to check the operation status of the create branch request before issuing the create database request.
 
-The response to a Neon API requests includes information about operations that were initiated. For example, a create branch request returns this operation information in the response:
+The response to a Neon API request includes information about the operations that were initiated. For example, a create branch request returns this operation information:
 
 ```json
 "operations": [
@@ -230,7 +230,7 @@ The response to a Neon API requests includes information about operations that w
   ]
   ```
 
-You can use the [Get operation details](https://neon.tech/api-reference/v2#/Operation/getProjectOperation) method to poll the status of an operation by the operation ID. For example:
+You can use the [Get operation details](https://neon.tech/api-reference/v2#/Operation/getProjectOperation) method to poll the status of an operation using the operation ID. For example:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/055b17e6-ffe3-47ab-b545-cfd7db6fd8b8' \
@@ -238,7 +238,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/05
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-You can poll an operation at intervals of a few seconds until the `status` of the operation changes to `finished` before issuing a dependent request. In this case, the `start_compute` operation is polled to ensure that compute endpoint associated with the new branch is available.
+You can poll an operation at intervals of a few seconds until the `status` of the operation changes to `finished` before issuing the next request. In this case, the `start_compute` operation is polled to ensure that the compute endpoint is available.
 
 ```json
 {
@@ -258,7 +258,7 @@ You can poll an operation at intervals of a few seconds until the `status` of th
 
 Possible operation `status` values include `running`, `finished`, `failed`, `scheduling`.
 
-The same operation polling methodology can be applied to most Neon API requests. Your initial API request returns information about initiated operations. You can poll those operations to ensure they are finished before proceeding with a subsequent API request.
+The same operation polling methodology can be applied to most Neon API requests.
 
 ## Need help?
 
