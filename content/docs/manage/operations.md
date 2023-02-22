@@ -202,7 +202,7 @@ Response:
 
 Some Neon API requests may take a few moments to complete. When using the Neon API programmatically, you can check the `status` of the operations before proceeding with the next request. For example, if you use API requests to create a branch and add a database to the branch, you may want to check the operation status of the create branch request before issuing the create database request.
 
-The response to a Neon API request includes information about the operations that were initiated. For example, a create branch request returns this operation information:
+The response to a Neon API request includes information about the operations that were initiated. For example, a create branch request initiates `create_branch` and `start_compute` operations.
 
 ```json
 "operations": [
@@ -230,7 +230,7 @@ The response to a Neon API request includes information about the operations tha
   ]
   ```
 
-You can use the [Get operation details](https://neon.tech/api-reference/v2#/Operation/getProjectOperation) method to poll the status of an operation using the operation ID. For example:
+You can use the [Get operation details](https://neon.tech/api-reference/v2#/Operation/getProjectOperation) method to poll the status of an operation using the operation ID. You might do so at intervals of a few seconds until the `status` of the operation changes to `finished` before you issue the next request. For example, this request polls the `start_compute` operation shown above:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/055b17e6-ffe3-47ab-b545-cfd7db6fd8b8' \
@@ -238,7 +238,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/05
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-You can poll an operation at intervals of a few seconds until the `status` of the operation changes to `finished` before issuing the next request. In this case, the `start_compute` operation is polled to ensure that the compute endpoint is available.
+Response:
 
 ```json
 {
@@ -257,8 +257,6 @@ You can poll an operation at intervals of a few seconds until the `status` of th
 ```
 
 Possible operation `status` values include `running`, `finished`, `failed`, `scheduling`.
-
-The same operation polling methodology can be applied to most Neon API requests.
 
 ## Need help?
 
