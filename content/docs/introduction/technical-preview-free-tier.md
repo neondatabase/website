@@ -16,8 +16,10 @@ The Technical Preview Free Tier has the following limits:
 - A point-in-time restore window of 7 days of _reasonable usage_
 
 <Admonition type="note">
-Neon intends to offer a Free Tier beyond the Technical Preview period. The limits associated with that tier will be defined in the coming months. Technical Preview Free Tier limits are subject to change over the course of the Technical Preview.
+On February 6th, 2023, Neon changed its Free Tier to remove the limit on the number of compute endpoints per project. The Free Tier now offers a compute endpoint for every branch and 100 Free Tier compute hours per month, as described above. This change went into effect immediately for **new** Neon projects. The change goes into effect for **all** Neon projects on March 29, 2023. If you have questions about how this change might impact your Neon project, please contact [support@neon.tech](mailto:support@neon.tech).
 </Admonition>
+
+Neon intends to offer a Free Tier beyond the Technical Preview period. The limits associated with that tier will be defined in the coming months. Technical Preview Free Tier limits are subject to change over the course of the Technical Preview.
 
 ## Data Size
 
