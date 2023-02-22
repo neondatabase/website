@@ -58,20 +58,6 @@ To add the integration:
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**. You should see the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` variable settings added by the integration.
 
-## Add the integration to another Vercel project
-
-If you already added the Neon Vercel integration to a Vercel project and want to add it to another Vercel project, complete the following steps:
-
-1. Ensure that the the Neon integration that you added previously has access to the Vercel project.
-    1. On the Vercel Dashboard, select **Integrations**.
-    1. For the Neon Postgres integration, select **Manage**.
-    1. On the Neon Postgres integration page, select **Manage Access** and make sure that the Neon integration has access to the Vercel project that you want to add the Neon integration to. You can so by granting access to **All Projects** or by selecting **Specific Projects** and choosing a Vercel project. If you previously granted access to all projects, no change is necessary.
-    1. Click **Save**.
-1. Navigate to this URL: [https://vercel.com/integrations/neon/new](https://vercel.com/integrations/neon/new).
-1. Follow the prompts. When you reach the **Integrate Neon** dialog, select the Vercel project that you want to add the integration to. Vercel projects that are already integrated with Neon are identified as `CONNECTED`.
-  ![Confirm integration settings](/docs/guides/vercel_add_new_project.png)
-1. Complete the steps outlined in [Add the Neon integration](#add-the-neon-integration).
-
 ## How the integration works with preview deployments
 
 Vercel [preview deployment](https://vercel.com/docs/concepts/deployments/preview-deployments) enable teams to collaborate effectively by automatically creating an isolated, production-like environment for every commit. This way, all changes can be previewed before they are merged into production.
