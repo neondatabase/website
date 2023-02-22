@@ -47,7 +47,17 @@ https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}
 
 You can use the the [Neon API v2 reference](https://neon.tech/api-reference/v2) to construct and execute Neon API requests. Click **Authorize** to add your API key token, and for each method, click **Try it out** and supply the required parameters and attributes. Click **Execute** to create and submit the request.
 
-The [Neon API v2 reference](https://neon.tech/api-reference/v2) also provides request and response body examples that you can reference when constructing your own requests. For branching API examples, you can also refer to examples provided in [Branching with the Neon API](/docs/manage/branches#branching-with-the-neon-api).
+The [Neon API v2 reference](https://neon.tech/api-reference/v2) also provides request and response body examples that you can reference when constructing your own requests.
+
+For Neon API examples, you can also refer to examples provided in the following topics:
+
+- [Manage API keys with the Neon API](/docs/manage/api-keys#manage-api-keys-with-the-neon-api)
+- [Manage projects with the Neon API](/docs/manage/projects#manage-projects-with-the-neon-api)
+- [Manage branches with the Neon API](/docs/manage/branches#branching-with-the-neon-api)
+- [Manage compute endpoints with the Neon API](/docs/manage/endpoints#manage-compute-endpoints-with-the-neon-api)
+- [Manage roles with the Neon API](/docs/manage/users#manage-roles-with-the-neon-api)
+- [Manage databases with the Neon API](/docs/manage/databases#manage-databases-with-the-neon-apii)
+- [View operations with the Neon API](/docs/manage/operations#view-operations-with-the-neon-api)
 
 ## Need help?
 
