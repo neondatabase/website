@@ -65,7 +65,7 @@ If you already added the Neon Vercel integration to a Vercel project and want to
 1. Ensure that the the Neon integration that you added previously has access to the Vercel project.
     1. On the Vercel Dashboard, select **Integrations**.
     1. For the Neon Postgres integration, select **Manage**.
-    1. On the Neon Postgres integration page, select **Manage Access** and make sure that the Neon integration has access to the Vercel project that you want to add the Neon integration to. You can so by granting access to **All Projects** or by selecting **Specific Projects** and choosing a Vercel project. If you previously granted access to all projects, no change is necessary.
+    1. On the Neon Postgres integration page, select **Manage Access** and make sure that the Neon integration has access to the Vercel project. You can do so by granting access to **All Projects** or by selecting **Specific Projects** and choosing a Vercel project. If you previously granted access to all projects, no change is necessary.
     1. Click **Save**.
 1. Navigate to this URL: [https://vercel.com/integrations/neon/new](https://vercel.com/integrations/neon/new).
 1. Follow the prompts. When you reach the **Integrate Neon** dialog, select the Vercel project that you want to add the integration to. Vercel projects that are already integrated with Neon are identified as `CONNECTED`.
@@ -88,12 +88,6 @@ Neon’s branching feature addresses all of these challenges. A branch is a copy
 ![Branch database](/docs/guides/vercel_branch_database.webp)
 
 When you push a branch to the GitHub repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting the required Vercel preview environment variables. The newly created Neon branch will have same name as the Git branch containing the code changes.
-
-<Admonition type="important">
-For the preview deployment integration to work, the database connection settings in your application must correspond to the Vercel production environment variable settings configured by your Neon integration. For example, if your applications's database connection is defined by a `DATABASE_URL` variable, make sure that setting in your application corresponds to the `DATABASE_URL` setting configured by the integration. You can find the environment variable settings in Vercel by navigating to the Vercel dashboard, selecting your project, and selecting **Settings** > **Environment Variables**.
-</Admonition>
-
-For a demo app that you can use to try the Neon-Vercel integration, refer to the [Database branching with Vercel Preview Deployments](https://neon.tech/blog/neon-vercel-integration) blog post, which demonstrates the integration with the [Naturesnap](https://github.com/neondatabase/naturesnap) application.
 
 ## Troubleshoot connection issues
 
