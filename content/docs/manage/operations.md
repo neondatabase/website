@@ -27,7 +27,7 @@ You can view operations in the **Operations** widget on the Neon **Dashboard** o
 
 Operation details include:
 
-- **ID**: The action performed by the operation.
+- **Action**: The action performed by the operation.
 - **Branch**: The branch on which the operation was performed.
 - **Status**: The status of the operation.
 - **Duration**: The duration of the operation.
