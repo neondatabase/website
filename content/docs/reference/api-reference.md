@@ -45,11 +45,11 @@ https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}
 
 ## Using the Neon API reference to construct and execute requests
 
-You can use the [Neon API v2 reference](https://neon.tech/api-reference/v2) to construct and execute Neon API requests. Click **Authorize** to add your API key token, and for each method, click **Try it out** and supply the required parameters and attributes. Click **Execute** to create and submit the request.
+You can use the [Neon API v2 reference](https://neon.tech/api-reference/v2) to construct and execute Neon API requests. Click **Authorize** to add your API key token. Then, for each method, you can click **Try it out** and supply the required parameters and attributes to execute the request.
 
 The [Neon API v2 reference](https://neon.tech/api-reference/v2) also provides request and response body examples that you can reference when constructing your own requests.
 
-For more Neon API examples, refer to the following topics:
+For additional Neon API examples, refer to the following topics:
 
 - [Manage API keys with the Neon API](/docs/manage/api-keys#manage-api-keys-with-the-neon-api)
 - [Manage projects with the Neon API](/docs/manage/projects#manage-projects-with-the-neon-api)
@@ -60,7 +60,7 @@ For more Neon API examples, refer to the following topics:
 - [View operations with the Neon API](/docs/manage/operations#view-operations-with-the-neon-api)
 
 <Admonition type="important">
-When using the Neon API programmatically, you can check the `status` of operations to ensure they are finished before proceeding with the next request. For more information, see [Poll operation status](/docs/manage/operations#poll-operation-status).
+When using the Neon API programmatically, you can poll the operation `status` to ensure that an operation is finished before proceeding with the next API request. For more information, see [Poll operation status](/docs/manage/operations#poll-operation-status).
 </Admonition>
 
 ## Need help?
