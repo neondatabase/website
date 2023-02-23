@@ -33,12 +33,12 @@ Operation details include:
 
 ## View operations with the Neon API
 
-You can use the [Neon API](https://neon.tech/api-reference/v2/) to view operations. The following topics are covered in this section:
+The following topics are covered in this section:
 
-- [List operations](#list-operations): How to list all operations for a Neon project
-- [List operations with pagination](#list-operations-with-pagination): How to list all operations for a Neon project and paginate the response
-- [List operation](#list-operation): How to retrieves the details for a specific operation by the operation ID
-- [Poll operation status](#poll-operation-status): How to poll an operation for its status
+- [List operations](#list-operations): Describes how to list all operations for a Neon project.
+- [List operations with pagination](#list-operations-with-pagination): Describes how to list all operations for a Neon project and paginate the response.
+- [List operation](#list-operation): Describes how to retrieve the details for a specific operation by the operation ID.
+- [Poll operation status](#poll-operation-status): Describes how to poll an operation for its status, which may be necessary to avoid failed requests due to in-progress operations when using the Neon API programmatically.
 
 ### List operations
 
