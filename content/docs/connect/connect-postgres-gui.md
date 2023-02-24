@@ -12,26 +12,26 @@ The following details are typically required when configuring a connection:
 - hostname
 - port
 - database name
-- user name
+- role name
 - password
 
-You can gather most of these details from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+You can gather most of these details from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
-The connection string includes the user name, hostname, and database name.
+The connection string includes the role name, hostname, and database name.
 
 ```text
 postgres://sally@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb
              ^                       ^                          ^
-             |- <user name>          |- <hostname>              |- <database name>
+             |- <role name>          |- <hostname>              |- <database name>
 ```
 
-- user name: `sally`
+- role name: `sally`
 - hostname: `ep-cold-poetry-404091.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
-Passwords are only shown when they are created. If you misplaced your password, you can reset it by selecting the **Reset Password** link in the **Connection Details** widget or by navigating to the **Users** page.
+Passwords are only shown when they are created. If you misplaced your password, you can reset it by selecting the **Reset Password** link in the **Connection Details** widget or by navigating to the **Roles** page.
 
 Neon uses the default PostgreSQL port, `5432`.
 

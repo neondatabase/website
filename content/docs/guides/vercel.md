@@ -27,7 +27,7 @@ To add the integration:
 1. In the **Integrate Neon** dialog:
     1. Select a Vercel project.
     ![Select a Vercel project](/docs/guides/vercel_select_project.png)
-    1. Select the Neon project, database, and role that Vercel will use to connect. The Neon Free Tier supports a single project per user. If desired, you can create a new project, database, and role for the integration.
+    1. Select the Neon project, database, and role that Vercel will use to connect. The Neon Free Tier supports a single project per Neon account. If desired, you can create a new project, database, and role for the integration.
     ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
         The database that you select must reside on the primary branch of your Neon project. This branch will be your production branch. It is preselected for you.

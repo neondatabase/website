@@ -48,8 +48,8 @@
       slug: manage/branches
     - title: Compute endpoints
       slug: manage/endpoints
-    - title: Users
-      slug: manage/users
+    - title: Roles
+      slug: manage/roles
     - title: Databases
       slug: manage/databases
     - title: Integrations
