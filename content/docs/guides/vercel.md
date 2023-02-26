@@ -81,29 +81,29 @@ After you add the Neon Vercel Integration to a Vercel project, Neon will create 
 
 1. Create a local branch.
 
-  ```bash
-  cd myapp
-  git checkout -b myapp-update-1
-  ```
+    ```bash
+    cd myapp
+    git checkout -b myapp-update-1
+    ```
 
-1. Make changes to your application on the local branch.
-1. Commit the changes. For example:
+2. Make changes to your application on the local branch.
+3. Commit the changes. For example:
 
-  ```bash
-  git commit -a -m "Update my app"
-  ```
+    ```bash
+    git commit -a -m "Update my app"
+    ```
 
-1. Push your commit to the remote repository:
+4. Push your commit to the remote repository:
 
-  ```bash
-  git push
-  ```
+    ```bash
+    git push
+    ```
 
-  The `git push` operation triggers the following actions:
-    - Creates a pull request in your GitHub repository
-    - Triggers a preview deployment in Vercel
-    - Creates a database branch in Neon
-    - Sets Vercel preview environment variables to connect the preview deployment to the database branch.
+    The `git push` operation triggers the following actions:
+      - Creates a pull request in your GitHub repository
+      - Triggers a preview deployment in Vercel
+      - Creates a database branch in Neon
+      - Sets Vercel preview environment variables to connect the preview deployment to the database branch.
 
 ## Add the integration to another Vercel project
 

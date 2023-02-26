@@ -92,7 +92,7 @@
       slug: guides/symfony
     - title: Vercel
       items:
-        - title: Use the Neon integration
+        - title: Connect with the Neon Vercel integration
           slug: guides/vercel
         - title: Connect manually
           slug: guides/vercel-manual
