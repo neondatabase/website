@@ -26,7 +26,7 @@ Neon’s branching feature addresses all of these challenges. A branch is a copy
 
 When you push a branch to the GitHub repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting the required Vercel preview environment variables. The newly created Neon branch will have same name as the Git branch containing the code changes.
 
-## Add the Neon integration
+## Add the Neon Vercel integration
 
 Prerequisites:
 
@@ -119,7 +119,7 @@ If you already added the Neon Vercel integration to a Vercel project and want to
   ![Confirm integration settings](/docs/guides/vercel_add_new_project.png)
 1. Complete the steps outlined in [Add the Neon integration](#add-the-neon-integration).
 
-### Troubleshoot connection issues
+## Troubleshoot connection issues
 
 If the environment variables configured by the Neon integration already exist, you may encounter the following error due to an existing integration that sets one or more of the same environment variables.
 
@@ -138,10 +138,9 @@ In this case, you can remove or rename the existing environment variables in you
 
 1. Try adding the Neon integration again. See [Add the Neon integration](#add-the-neon-integration).
 
-### Manage your Neon integration
+## Manage the Neon Vercel integration
 
 To view integration permissions, manage integration access, or remove the Neon integration:
 
 1. On the Vercel dashboard, select **Settings** > **Integrations**.
 1. Find the **Neon** integration and select **Manage**.
-
