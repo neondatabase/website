@@ -1,5 +1,5 @@
 ---
-title: Connect Vercel and Neon Manually
+title: Connect Vercel and Neon manually
 enableTableOfContents: true
 ---
 
@@ -72,6 +72,6 @@ Vercel environment variables can also be configured when you first deploy an app
 1. Select the environments to which the variable will apply (**Production**, **Preview**, **Development**)
 1. Click **Save**.
 
-![Add Vercel environment variable settings](/docs/guides/vercel_connect_neon.png)
+![Add Vercel environment variable settings](/docs/guides/vercel_env_settings.png)
 
-You must redploy your application in Vercel for the environment variable settings to take effect.
+You must redeploy your application in Vercel for the environment variable settings to take effect.
