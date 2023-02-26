@@ -91,7 +91,11 @@
     - title: Symfony
       slug: guides/symfony
     - title: Vercel
-      slug: guides/vercel
+      items:
+        - title: Use the Neon integration
+          slug: guides/vercel
+        - title: Connect manually
+          slug: guides/vercel-manual
 - title: Import data
   items:
     - title: Import from PostgreSQL
