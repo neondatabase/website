@@ -37,13 +37,13 @@ The password is only included in the connection string when the project is first
 
 ## Configure project environment variables in Vercel
 
-The environment variables required to connect your application to Neon depend on your application. Some applications use a `DATABASE_URL` environment variable:
+The environment variables required to connect your application to Neon depend on your application. Some applications use a `DATABASE_URL` environment variable with a database connection string:
 
 ```text
 DATABASE_URL="sally:<password>@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb"
 ```
 
-Others applications use `PG*` environment variables:
+Other applications may use `PG*` environment variables to define database connection details:
 
 ```text
 PGHOST=ep-cold-poetry-404091.us-east-2.aws.neon.tech
