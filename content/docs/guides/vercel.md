@@ -75,6 +75,36 @@ To add the integration:
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**. You should see the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` variable settings added by the integration.
 
+## Use the Neon Vercel integration
+
+After you add the Neon Vercel Integration to a Vercel project, Neon will create a database branch for each preview deployment. The  branch is created when you push commits made on your local branch to your application's GitHub repository. To see the integration in action, follow these steps:
+
+1. Create a local branch.
+
+  ```bash
+  cd myapp
+  git checkout -b myapp-update-1
+  ```
+
+1. Make changes to your application on the local branch.
+1. Commit the changes. For example:
+
+  ```bash
+  git commit -a -m "Update my app"
+  ```
+
+1. Push your commit to the remote repository:
+
+  ```bash
+  git push
+  ```
+
+  The `git push` operation triggers the following actions:
+    - Creates a pull request in your GitHub repository
+    - Triggers a preview deployment in Vercel
+    - Creates a database branch in Neon
+    - Sets Vercel preview environment variables to connect the preview deployment to the database branch.
+
 ## Add the integration to another Vercel project
 
 If you already added the Neon Vercel integration to a Vercel project and want to add it to another Vercel project, complete the following steps:
@@ -115,6 +145,3 @@ To view integration permissions, manage integration access, or remove the Neon i
 1. On the Vercel dashboard, select **Settings** > **Integrations**.
 1. Find the **Neon** integration and select **Manage**.
 
-## Use the Neon Vercel integration
-
-After adding the Neon Vercel Integration to a Vercel project, as described above, Neon creates a database branch for each preview deployment. In this example, the integration has been added to a sample project called `elements`. This example steps through updating the application locally, creating a PR request, which automatically creates a preview deployment in Vercel.
