@@ -49,7 +49,7 @@ Others applications use `PG*` environment variables:
 PGHOST=ep-cold-poetry-404091.us-east-2.aws.neon.tech
 PGUSER=sally
 PGDATABASE=neondb
-PGPASSWORD=*************
+PGPASSWORD=<password>
 PGPORT=5432
 ```
 
@@ -69,7 +69,7 @@ Vercel environment variables can also be configured when you first deploy an app
 1. Select **Environment variables**.
 1. Enter the environment variable name in the **Key** field and add the value.
 1. Click **Add another** if you need to add more variables.
-1. Select the environments to which the variable will apply (**Production**, **Preview**, **Development**)
+1. Select the Vercel environments to which the variable(s) will apply (**Production**, **Preview**, **Development**)
 1. Click **Save**.
 
 ![Add Vercel environment variable settings](/docs/guides/vercel_env_settings.png)
