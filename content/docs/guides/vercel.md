@@ -58,6 +58,7 @@ To add the integration:
             - Set environment variables for your Vercel project's production, development, and preview environments.
             - Create database branches for preview deployments.
             - Create a development branch for your Vercel development environment (if you selected that option).
+
     ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
 
         Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
@@ -80,7 +81,7 @@ To add the integration:
 
 ## Use the Neon Vercel integration
 
-After you add the Neon Vercel Integration to a Vercel project, Neon will create a database branch for each preview deployment. The  branch is created when you push commits made on your local branch to your application's GitHub repository. To see the integration in action, follow these steps:
+After you add the Neon Vercel Integration to a Vercel project, Neon will create a database branch for each preview deployment. The branch is created when you push commits made on your local branch to your application's GitHub repository. To see the integration in action, follow these steps:
 
 1. Create a local branch.
 
@@ -102,15 +103,13 @@ After you add the Neon Vercel Integration to a Vercel project, Neon will create 
     git push
     ```
 
-    With the Neon Vercel integration, the `git push` operation triggers the following actions:
+    Pushing the changes to the the remote repository triggers the following actions:
       - Creates a database branch in Neon. This branch is an isolated copy-on-write clone of your production branch, with its own dedicated compute endpoint. The branch is created with the same name as the `git` branch.
         ![Neon preview deployment branch](/docs/guides/vercel_neon_app_update.png)
       - Creates a preview deployment in Vercel, as expected.
         ![Neon preview deployment branch](/docs/guides/vercel_deployments.png)
       - Sets Vercel preview environment variables that connect the Vercel preview deployment to the new database branch.
         ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)
-
-    These action occur with every branch that you push.
 
 <Admonition type="note">
 The Neon Free Tier allows you to create up to 10 branches. To avoid running out of branches for new preview deployments, which will cause a deployment error in Vercel, remove old branches regularly. See [Manage branches](/docs/manage/branches) for instructions.
