@@ -17,7 +17,7 @@ Neon also provide a passwordless connect feature that uses `psql`. For more info
 
 The easiest way to connect to Neon using `psql` is with a connection string.
 
-You can obtain a connection string from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+You can obtain a connection string from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
@@ -29,7 +29,7 @@ psql postgres://sally:<password>@ep-cold-poetry-404091.us-east-2.aws.neon.tech/n
 
 ## Where do I obtain a password?
 
-A password was provided to you when you created your Neon project. If you have misplaced your password, refer to [Reset a password](/docs/manage/users#reset-a-password) for password reset instructions.
+A password was provided to you when you created your Neon project. If you have misplaced your password, refer to [Reset a password](/docs/manage/roles#reset-a-password) for password reset instructions.
 
 ## What port does Neon use?
 

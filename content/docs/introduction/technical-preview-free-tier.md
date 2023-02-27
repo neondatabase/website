@@ -9,15 +9,17 @@ The Neon cloud service is available for free during the Technical Preview. For i
 
 The Technical Preview Free Tier has the following limits:
 
-- 1 Neon project
-- 10 branches including the [primary branch](/docs/reference/glossary#primary-branch), with a limit of 3GB of data per branch
-- A [compute endpoint](/docs/reference/glossary#compute-endpoint) for each branch, each with up to 1 vCPU and 4GB of RAM (with 512MB of RAM allocated to PostgreSQL shared buffers)
-- 100 Free Tier compute hours per month (total). Neon scales Free Tier computes to zero after 5 minutes of inactivity. Only active compute time is counted toward the Free Tier compute hour limit. When you reach the limit, Free Tier computes assigned to [non-primary branches](/docs/reference/glossary#non-primary-branch) are unavailable until the limit is reset at the beginning of the next month. You are always able to connect to the compute assigned to the primary branch, regardless of the limit. This ensures that access to data on the primary branch is never interrupted.
-- A point-in-time restore window of 7 days of _reasonable usage_
+- 1 Neon project.
+- 10 branches including the [primary branch](/docs/reference/glossary#primary-branch), with a limit of 3GB of data per branch.
+- A [compute endpoint](/docs/reference/glossary#compute-endpoint) for each branch, each with up to 1 vCPU and 4GB of RAM (with 512MB of RAM allocated to PostgreSQL shared buffers).
+- 100 hours of compute endpoint usage time per month (total). Neon scales compute endpoints to zero after 5 minutes of inactivity. Only active usage time is counted toward the limit. When you reach the limit, compute endpoints assigned to [non-primary branches](/docs/reference/glossary#non-primary-branch) are unavailable until the limit is reset at the beginning of the next month. You are always able to connect to the compute endpoint assigned to the primary branch of your Neon project, regardless of the limit. This ensures that access to data on the primary branch of your project is never interrupted.
+- A point-in-time restore window of 7 days of _reasonable usage_.
 
 <Admonition type="note">
-Neon intends to offer a Free Tier beyond the Technical Preview period. The limits associated with that tier will be defined in the coming months. Technical Preview Free Tier limits are subject to change over the course of the Technical Preview.
+On February 6, 2023, Neon removed the limit on the number of compute endpoints per project. The Free Tier now offers a compute endpoint for every branch and 100 hours of compute endpoint usage time, as described above. The usage time limit is in effect for Neon projects created after this date. The limit will not be applied to Neon projects created before this date until March 29, 2023, to provide enough time for users to adjust their usage or upgrade to a Paid Tier. Neon will launch Paid Tiers before the end of March, 2023. If you have any questions about upgrading to a Paid Tier, please contact [support@neon.tech](mailto:support@neon.tech).
 </Admonition>
+
+Neon reserves the right to adjust Free Tier limits.
 
 ## Data Size
 

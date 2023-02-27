@@ -48,8 +48,8 @@
       slug: manage/branches
     - title: Compute endpoints
       slug: manage/endpoints
-    - title: Users
-      slug: manage/users
+    - title: Roles
+      slug: manage/roles
     - title: Databases
       slug: manage/databases
     - title: Integrations
@@ -91,7 +91,11 @@
     - title: Symfony
       slug: guides/symfony
     - title: Vercel
-      slug: guides/vercel
+      items:
+        - title: Connect with the Neon Vercel integration
+          slug: guides/vercel
+        - title: Connect manually
+          slug: guides/vercel-manual
 - title: Import data
   items:
     - title: Import from PostgreSQL
