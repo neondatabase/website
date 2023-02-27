@@ -102,13 +102,19 @@ After you add the Neon Vercel Integration to a Vercel project, Neon will create 
     git push
     ```
 
-    The `git push` operation triggers the following actions:
-      - Creates a database branch in Neon
+    With the Neon Vercel integration, the `git push` operation triggers the following actions:
+      - Creates a database branch in Neon. This branch is an isolated copy-on-write clone of your production branch, with its own dedicated compute endpoint. The branch is created with the same name as the `git` branch.
         ![Neon preview deployment branch](/docs/guides/vercel_neon_app_update.png)
-      - Creates a preview deployment in Vercel
+      - Creates a preview deployment in Vercel, as expected.
         ![Neon preview deployment branch](/docs/guides/vercel_deployments.png)
-      - Sets Vercel preview environment variables to connect the preview deployment to the database branch.
+      - Sets Vercel preview environment variables that connect the Vercel preview deployment to the new database branch.
         ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)
+
+    These action occur with every branch that you push.
+
+<Admonition type="note">
+The Neon Free Tier allows you to create up to 10 branches. To avoid running out of branches for new preview deployments, which will cause a deployment error in Vercel, remove old branches regularly. See [Manage branches](/docs/manage/branches) for instructions.
+</Admonition>
 
 ## Add the integration to another Vercel project
 
