@@ -22,13 +22,17 @@ Enabling connection pooling in Neon requires adding a `-pooler` suffix to the co
 To connect to a database with a pooled connection, add the `-pooler` suffix to the endpoint ID, as shown:
 
 ```text
-postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
+postgres://sally:<password>@ep-throbbing-boat-918849-pooler.us-east-2.aws.neon.tech/neondb
 ```
+
+Enabling the **Pooler** option in the Connection Details widget on the Neon **Dashboard** adds the `-pooler` suffix to a connection string that you can copy:
+
+![Enable pooler option](/docs/connect/enable_pooler.png)
 
 To connect to the same database directly with a non-pooled connection, use the same connection string without the `-pooler` suffix:
 
 ```text
-postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
+postgres://sally:<password>@ep-throbbing-boat-918849.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="note">
