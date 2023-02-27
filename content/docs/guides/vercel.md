@@ -44,7 +44,7 @@ To add the integration:
 1. In the **Integrate Neon** dialog:
     1. Select a Vercel project.
     ![Select a Vercel project](/docs/guides/vercel_select_project.png)
-    1. Select the Neon project, database, and role that Vercel will use to connect. The Neon Free Tier supports a single project per Neon account. If desired, you can create a new project, database, and role for the integration.
+    1. Select the Neon project, database, and role that Vercel will use to connect.
     ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
         The database that you select must reside on the primary branch of your Neon project. This branch will be your production branch. It is preselected for you.
@@ -70,10 +70,13 @@ To add the integration:
     1. Select the project you connected to.
     1. Select **Branches**.
     You will see the primary branch of your project. If you created a development branch, you will also see a `vercel-dev` branch.
+    ![Neon branches](/docs/guides/vercel_neon_branches.png)
 1. To view the results of the integration in Vercel:
     1. Navigate to [Vercel](https://vercel.com/).
     1. Select the Vercel project you added the integration to.
-    1. Select **Settings** > **Environment Variables**. You should see the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` variable settings added by the integration.
+    1. Select **Settings** > **Environment Variables**. 
+    You should see the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` variable settings added by the integration.
+    ![Vercel environment variables](/docs/guides/vercel_environment_variables.png)
 
 ## Use the Neon Vercel integration
 
