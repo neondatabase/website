@@ -33,7 +33,7 @@ postgres://sally:<password>@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb
 - hostname: `ep-cold-poetry-404091.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
-The password is only included in the connection string when the project is first created or after retting a the password. If you misplaced your password, you can reset it by selecting the **Reset Password** link on the **Connection Details** widget or by navigating to the **Roles** page.
+The password is only included in the connection string when the project is first created or after resetting a the password. If you misplaced your password, you can reset it by selecting the **Reset Password** link on the **Connection Details** widget or by navigating to the **Roles** page.
 
 ## Configure project environment variables in Vercel
 
