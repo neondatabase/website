@@ -103,10 +103,12 @@ After you add the Neon Vercel Integration to a Vercel project, Neon will create 
     ```
 
     The `git push` operation triggers the following actions:
-      - Creates a pull request in your GitHub repository
-      - Triggers a preview deployment in Vercel
       - Creates a database branch in Neon
+        ![Neon preview deployment branch](/docs/guides/vercel_neon_app_update.png)
+      - Creates a preview deployment in Vercel
+        ![Neon preview deployment branch](/docs/guides/vercel_deployments.png)
       - Sets Vercel preview environment variables to connect the preview deployment to the database branch.
+        ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)
 
 ## Add the integration to another Vercel project
 
