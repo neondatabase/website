@@ -76,7 +76,7 @@ To add the integration:
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**. 
     You should see the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` variable settings added by the integration.
-    ![Vercel environment variables](/docs/guides/vercel_environment_variables.png)
+    ![Vercel environment variables](/docs/guides/vercel_env_variables.png)
 
 ## Use the Neon Vercel integration
 
