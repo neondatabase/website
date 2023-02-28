@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
 ---
 
-Data resides in a branch. Each Neon project has a primary branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and users. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
+Data resides in a branch. Each Neon project has a primary branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
 
 A child branch is a copy-on-write clone the data in the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
@@ -60,10 +60,10 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 </Admonition>
 
 1. In the Neon Console, select a project.
-2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the user you want to connect with.
+2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
 ![Connection details widget](/docs/manage/connection_details.png)
-3. Copy the connection string. A connection string includes your user name, the compute endpoint hostname, and database name.
-5. Add your password to the connection string as shown below, and connect with `psql`. You can connect using the same user and password that you use to connect to the parent branch.
+3. Copy the connection string. A connection string includes your role name, the compute endpoint hostname, and database name.
+5. Add your password to the connection string as shown below, and connect with `psql`. You can connect using the same role and password that you use to connect to the parent branch.
 
   ```bash
   psql postgres://sally:<password>@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb
@@ -77,7 +77,7 @@ If you want to connect from an application, the **Connection Details** widget on
 
 ## Delete a branch
 
-Deleting a branch is a permanent action. Deleting a branch also deletes the databases and users that belong to the branch as well as the compute endpoint associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
+Deleting a branch is a permanent action. Deleting a branch also deletes the databases and roles that belong to the branch as well as the compute endpoint associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
 
 To delete a branch:
 
