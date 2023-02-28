@@ -59,7 +59,11 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 | unit                     | [7.7](https://github.com/df7cb/postgresql-unit)                 | [7.7](https://github.com/df7cb/postgresql-unit)                  |                                                                                                                    |
 | uuid-ossp                | [1.1](https://www.postgresql.org/docs/14/uuid-ossp.html)        | [1.1](https://www.postgresql.org/docs/15/uuid-ossp.html)         | Double-quote the extension name when installing: `CREATE EXTENSION "uuid-ossp"`                                    |
 | xml2                     | [1.1](https://www.postgresql.org/docs/current/xml2.html)        | [1.1](https://www.postgresql.org/docs/current/xml2.html)         |                                                                                                                    |
-
+| pg_graphql                     | [1.1](https://github.com/supabase/pg_graphql)        | [1.1](https://github.com/supabase/pg_graphql)
+| pg_jsonschema                     | [1.1](https://github.com/supabase/pg_jsonschema)        | [1.1](https://github.com/supabase/pg_jsonschema)
+| pg_hashids                     | [1.1](https://github.com/iCyberon/pg_hashids)        | [1.1](https://github.com/iCyberon/pg_hashids)
+| pgrouting                     | [1.1](https://github.com/pgRouting/pgrouting)        | [1.1](https://github.com/pgRouting/pgrouting)
+| hypopg                     | [1.1](https://github.com/HypoPG/hypopg)        | [1.1](https://github.com/HypoPG/hypopg)
 ## Update an extension version
 
 Neon updates supported extensions as new versions become available. Version updates are communicated in the [Release notes](/docs/release-notes). To check the current version of extensions you have installed, query the `pg_extension` table:
