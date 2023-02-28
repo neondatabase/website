@@ -3,6 +3,10 @@
         {
             "source": "/developer-days/:match*",
             "destination": "https://devdays2.vercel.app/developer-days/:match*"
+        },
+        {
+            "source": "/api/auth/:match*",
+            "destination": "https://devdays2.vercel.app/api/auth/:match*"
         }
     ]
 }
