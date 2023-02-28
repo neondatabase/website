@@ -5,14 +5,6 @@ enableTableOfContents: true
 
 Neon supports the PostgreSQL extensions shown in the following table. For extension documentation, select the extension version.
 
-Unless otherwise noted, supported extensions can be installed from the Neon SQL Editor using [CREATE EXTENSION](https://www.postgresql.org/docs/14/sql-createextension.html) syntax.
-
-```sql
-CREATE EXTENSION <extension_name>
-```
-
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
-
 <a id="default-extensions/"></a>
 
 | Extension                | Extension Version (PostgreSQL 14)                               | Extension Version (PostgreSQL 15)                                |Note                                                                                                                |
@@ -68,6 +60,16 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 | unit                     | [7.7](https://github.com/df7cb/postgresql-unit)                 | [7.7](https://github.com/df7cb/postgresql-unit)                  |                                                                                                                    |
 | uuid-ossp                | [1.1](https://www.postgresql.org/docs/14/uuid-ossp.html)        | [1.1](https://www.postgresql.org/docs/15/uuid-ossp.html)         | Double-quote the extension name when installing: `CREATE EXTENSION "uuid-ossp"`                                    |
 | xml2                     | [1.1](https://www.postgresql.org/docs/current/xml2.html)        | [1.1](https://www.postgresql.org/docs/current/xml2.html)         |                                                                                                                    |
+
+## Install an extension
+
+Unless otherwise noted, supported extensions can be installed using [CREATE EXTENSION](https://www.postgresql.org/docs/14/sql-createextension.html) syntax.
+
+```sql
+CREATE EXTENSION <extension_name>
+```
+
+You can install extensions from the Neon SQL Editor or from a client such as `psql` that permits running SQL queries. For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
 
 ## Update an extension version
 
