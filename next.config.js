@@ -58,6 +58,12 @@ module.exports = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/developer-days',
+        destination: 'https://devdays2.vercel.app/developer-days',
+        permanent: true,
+        basePath: false,
+      },
       ...docsRedirects,
     ];
   },
