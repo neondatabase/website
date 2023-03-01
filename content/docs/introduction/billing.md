@@ -29,10 +29,10 @@ Neon offers three plans, summarized below:
 |**CPU**                   | 1 shared CPU                      | Up to X CPUs     | Up to X CPUs              |
 |**RAM**                   | 1 GB                              | Up to X GB       | Up to X GB                |
 |**Storage**               | 3 GB                              | Up to X GB       | Up to X GB                |
-|**Dedicated resources**   | &#x2612;                          | &#x2612;         | &#x2611;                  |
-|**Auto-suspend compute**  | &#x2611;                          | &#x2611;         | &#x2611;                  |
-|**Always-on compute**     | &#x2612;                          | &#x2611;         | &#x2611;                  |
-|**Project sharing**       | &#x2612;                          | &#x2611;         | &#x2611;                  |
+|**Dedicated resources**   | No                                | No               | Yes                       |
+|**Auto-suspend compute**  | Yes                               | Yes              | Yes                       |
+|**Always-on compute**     | No                                | Yes              | Yes                       |
+|**Project sharing**       | No                                | Yes              | Yes                       |
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contracts, Volume Discounts |
 |**Support**               | Community                         | Support          | Support, Platform Support |
 
@@ -54,9 +54,7 @@ To access your billing page:
 
 ## Neon invoices
 
-A Neon invoice includes a total cost for the billing period and line items for each charge, which corresponding to Neon's [billing factors](#neon-billing-factors). Each line item is a per account metric, broken down by Neon project. The line item includes a per-unit cost calculation and a total cost for that line item. You can expand each line item to view a bar chart representing your daily usage.
-
-![Neon invoice](/docs/introduction/neon_invoice.png)
+A Neon invoice includes a total cost for the billing period and line items for each charge, which corresponding to Neon's [billing factors](#neon-billing-factors). Each line item is a per account metric, broken down by Neon project. The line item includes a per-unit cost calculation and a total cost for the line item. You can expand each line item to view a bar chart representing your daily usage.
 
 The current invoice provides totals as of the current date.
 
