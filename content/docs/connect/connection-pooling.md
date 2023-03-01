@@ -28,7 +28,7 @@ postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/
 To connect to the same database directly with a non-pooled connection, use the same connection string without the `-pooler` suffix:
 
 ```text
-postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
+postgres://casey:<password>@ep-square-sea-260584.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="note">
