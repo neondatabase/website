@@ -83,27 +83,43 @@ This section provides a detailed explanation of Neon's billing metrics, how they
 
 ### Written data
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+**Written data** is the amount of data in written to the Write-Ahead Log (WAL), which is a journal that keeps track of the changes to your data. Neon uses the WAL to keep a database change history, allowing you to restore data to a previous point in time (referred to as _point-in-time restore_). By default, Neon keeps a point-in-time restore window of 7 days, allowing you to create a database branch with data as it existed up to 7 days in the past. The Write-Ahead Log (WAL) also supports database branches. Each branch is a copy of your data (a snapshot) which will have its own point-in-time restore window as the branch ages and you make changes to the branch's data. The WAL holds a record of data in a branch. Removing a branch allows its data to be garbage collected as it ages out of the parent branch's point-in-time restore window, assuming no other branches hold the same data. You can manage the amount of **Written data** by adjusting your point-in-time restore window and removing old branches.
 
-Cost calculation: `data written (GiB) * price per GiB`
+Cost calculation for written data:
+
+```text
+data written (GiB) * price per GiB
+```
 
 ### Data transfer
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+**Data transfer** is the amount of data transferred (egressed) from Neon (out of AWS storage). Neon charges for each GiB of data transfer at the cost set by AWS in the region your Neon project is hosted. If you have a significant amount of data transfer, please contact the Neon Sales team to discuss possible volume-based solutions to reduce data transfer costs.
 
-Cost calculation: `data written (GiB) * price per GiB`
+Cost calculation for data transfer:
+
+```text
+data written (GiB) * price per GiB
+```
 
 ### Compute time
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Compute time depends on the number of compute endpoints in your Neon projects, the number of compute units (cores) per compute endpoint, the amount of time compute endpoints are active, and your scale-to-zero and autoscaling settings. In Neon, you have the option to scale compute resources to zero when not in use. A compute endpoint is placed into an idle state after 5 minutes of inactivity. Neon paid plans also support _always-on compute_, which helps avoid cold restarts and connection latency. Neon paid plans also support _autoscaling_, which allows you to specify a minimum and maximum number of compute units (cores) for each compute endpoint. Neon automatically adjusts compute resources within the minimum and maximum boundaries to adjust to workload activity. These configuration points can be adjusted to help manage compute time charges.
 
-Cost calculation: `number of CPU cores * (seconds active) / 60) * cost per hour`
+Cost calculation for compute time:
+
+```text
+number of CPU cores * (seconds active) / 60) * cost per hour
+```
 
 ### Data storage
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
-Cost calculation: `stored data (GiB) * (seconds stored / 60) * cost per hour`
+Cost calculation for compute time:
+
+```text
+stored data (GiB) * (seconds stored / 60) * cost per hour
+```
 
 ## Billing terms and definitions
 
