@@ -12,31 +12,35 @@ Neon offers offers three plans: **Free Tier**, **Pro**, and **Enterprise**. You 
 
 Neon's paid plans charge for usage based on the following metrics:
 
-- **Written data (GiB)**: The amount of data in written to the Write-Ahead Log (WAL) to support your point-in-time restore window and database branches.
-- **Data transfer (GiB)**: The amount of data transferred from Neon (out of AWS storage), charged for at cloud-provider cost.
-- **Compute time (per hour)**: The amount of active compute time, dictated by the number of compute endpoints and your scale-to-zero and autoscaling settings.
-- **Data storage (GiB)**: The amount of data stored in your Neon projects. Stored data includes the logical size of your data and the size of the the Write-Ahead Log (WAL).
+- **Written data**: The amount of data written to the Write-Ahead Log (WAL) to support your point-in-time restore window and database branches.
+- **Data transfer**: The amount of data transferred from Neon (out of AWS storage), charged for at cloud-provider cost.
+- **Active time**: The amount of time that your project's compute endpoints are active.
+- **Data storage**: The amount of data stored in your Neon projects. Stored data includes the logical size of your data and the size of the the Write-Ahead Log (WAL).
 
 For more information about Neon's billing metrics, see [Billing metrics explained](#billing-metrics-explained).
 
 ## Neon plans
 
-|                          | Free Tier                         | Pro              | Enterprise                |
-|:-------------------------|:----------------------------------|:-----------------|:--------------------------|
-|**Best for**              | Prototyping or personal use       | Business use     | Database fleets and resale|
-|**Projects**              | 1                                 | Unlimited        | Unlimited                 |
-|**Compute hours per month** | 100                             | Unlimited        | Unlimited                 |
-|**CPU**                   | 1 shared CPU                      | Up to X CPUs     | Up to X CPUs              |
-|**RAM**                   | 1 GB                              | Up to X GB       | Up to X GB                |
-|**Storage**               | 3 GB                              | Up to X GB       | Up to X GB                |
-|**Dedicated resources**   | &#120;                            | &#120;           | &check;                   |
-|**Auto-suspend compute**  | &check;                           | &check;          | &check;                   |
-|**Always-on compute**     | &#120;                            | &check;          | &check;                   |
-|**Project sharing**       | &#120;                            | &check;          | &check;                   |
-|**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contracts, Volume Discounts |
-|**Support**               | Community                         | Support          | Support, Platform Support |
+|                          | Free Tier                         | Pro (usage based)| Enterprise (volume based) |Platform Partnership (volume based)|
+|:-------------------------|:----------------------------------|:-----------------|:--------------------------|:----------------------|
+|**Best for**              | Prototyping or personal use       | Business use     | Database fleets           | database fleets, resale |
+|**Projects**              | 1                                 | Unlimited        | Unlimited                 | Unlimited               |
+|**Compute hours per month** | 100                             | Unlimited        | Unlimited                 | Unlimited               |
+|**CPU**                   | 1 shared CPU                      | Up to X CPUs     | Up to X CPUs              | Up to X CPUs            |
+|**RAM**                   | 1 GB                              | Up to X GB       | Up to X GB                | Up to X GB              |
+|**Storage**               | 3 GB                              | Up to X GB       | Up to X GB                | Up to X GB              |
+|**Dedicated resources**   | &#120;                            | &#120;           | &check;                   | &check;                 |
+|**Auto-suspend compute**  | &check;                           | &check;          | &check;                   | &check;                 |
+|**Always-on compute**     | &#120;                            | &check;          | &check;                   | &check;                 |
+|**Project sharing**       | &#120;                            | &check;          | &check;                   | &check;                 |
+|**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contract, Volume Discounts |Prepaid, Custom Contract, Wholesale Discounts|
+|**Support**               | Community Support                 | Support          | Support                   |Support, Platform Support|
 
-For more information about our **Pro** and **Enterprise** plans, please reach out to [sales@neon.tech](mailto:support@neon.tech). Our [Pricing](https://neon.tech/pricing) page provides additional information about our plans and a calculator that you can use to estimate costs and determine which plan is right for you.
+<Admonition type="note">
+The limits described above are plan defaults. If you would like to adjust limits to tailor one of our plans to your specific requirements, please contact [support@neon.tech](mailto:support@neon.tech).
+</Admonition>
+
+For more information about our plans, please reach out to [support@neon.tech](mailto:support@neon.tech). Our [Pricing](https://neon.tech/pricing) page provides additional information about our plans and a calculator that you can use to estimate costs and determine which plan is right for you.
 
 ## Account billing page
 
@@ -113,7 +117,7 @@ number of CPU cores * (seconds active) / 60) * cost per hour
 
 ### Data storage
 
-Data storage is the sum of the logical size of your data and the size of the Write-Ahead Log (WAL) for all of your Neon projects. The logical size is the sum of all database sizes in each Neon project. The size of the Write-Ahead Log (WAL) is dictated by factors ddescribed in the [Written data](#written-data) section above.
+Data storage is the sum of the logical size of your data and the size of the Write-Ahead Log (WAL) for all of your Neon projects. The logical size is the sum of all database sizes in each Neon project. The size of the Write-Ahead Log (WAL) is dictated by factors described in the [Written data](#written-data) section above.
 
 Cost calculation for compute time:
 
@@ -144,5 +148,7 @@ stored data (GiB) * (seconds stored / 60) * cost per hour
 - Resale: TBD
 - Scale-to-zero: TBD
 - Support: TBD
+- Volume Discounts
+- Wholesale Discounts
 - Write-Ahead Log (WAL): TBD
 - Written data: TBD
