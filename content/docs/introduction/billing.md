@@ -62,7 +62,7 @@ Each Neon account has a billing page, where you can:
 
 To access your billing page:
 
-1. Navigate to the Neon Console
+1. Navigate to the Neon Console.
 1. Select **Billing** from the sidebar.
 
 ## Neon invoices
