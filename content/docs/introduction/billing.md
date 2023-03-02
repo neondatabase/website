@@ -12,7 +12,7 @@ Neon offers offers three plans: Free Tier, Pro, and Enterprise. You can find ful
 
 Neon's paid plans charge for usage based on the following usage metrics:
 
-- **Written data (GiB)**: The amount of data in written to the Write-Ahead Log (WAL) to support your point-in-time restore window.
+- **Written data (GiB)**: The amount of data in written to the Write-Ahead Log (WAL) to support point-in-time restore and database branching.
 - **Data transfer (GiB)**: The amount of data transferred from Neon (out of AWS storage), charged for at cloud-provider cost.
 - **Compute time (per hour)**: The amount of active compute time, dictated by the number of compute endpoints and your scale-to-zero and autoscaling settings.
 - **Data storage (GiB)**: The amount of data stored in your Neon projects. Stored data includes the logical size of your data and the size of the the Write-Ahead Log (WAL)
@@ -33,14 +33,14 @@ Neon offers a Free Tier and two paid plans:
 |**CPU**                   | 1 shared CPU                      | Up to X CPUs     | Up to X CPUs              |
 |**RAM**                   | 1 GB                              | Up to X GB       | Up to X GB                |
 |**Storage**               | 3 GB                              | Up to X GB       | Up to X GB                |
-|**Dedicated resources**   | &#120;                                | &#120;               | &#128504;                       |
-|**Auto-suspend compute**  | &#128504;                               | &#128504;              | &#128504;                       |
-|**Always-on compute**     | &#120;                                | &#128504;              | &#128504;                       |
-|**Project sharing**       | &#120;                                | &#128504;              | &#128504;                       |
+|**Dedicated resources**   | &#120;                            | &#120;           | &#128504;                 |
+|**Auto-suspend compute**  | &#128504;                         | &#128504;        | &#128504;                 |
+|**Always-on compute**     | &#120;                            | &#128504;        | &#128504;                 |
+|**Project sharing**       | &#120;                            | &#128504;        | &#128504;                 |
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contracts, Volume Discounts |
 |**Support**               | Community                         | Support          | Support, Platform Support |
 
-For more information about our **Pro** and **Enterprise** plans, please reach out to us at [sales@neon.tech](mailto:support@neon.tech). Our [Pricing] page provides additional information about our plans and a calculator that you can use to estimate your costs and determine the which plan is right for you.
+For more information about our **Pro** and **Enterprise** plans, please reach out to [sales@neon.tech](mailto:support@neon.tech). Our [Pricing] page provides additional information about our plans and a calculator that you can use to estimate your costs and determine the which plan is right for you.
 
 ## Account billing page
 
@@ -108,3 +108,29 @@ Cost calculation: `number of CPU cores * (seconds active) / 60) * cost per hour`
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 Cost calculation: `stored data (GiB) * (seconds stored / 60) * cost per hour`
+
+## Billing terms and definitions
+
+- Always-on compute: TBD
+- Auto-suspend compute: TBD
+- Auto-scaling: TBD
+- Community support: TBD
+- Compute time: TBD
+- Compute endpoint: TBD
+- Database branching: TBD
+- Database fleets
+- Data transfer: TBD
+- Data storage: TBD
+- Dedicated resources: TBD
+- Enterprise plan: TBD
+- Enterprise support: TBD
+- Free Tier: TBD
+- Paid plan: TBD
+- Point-in-time restore window: TBD
+- Pro plan: TBD
+- Project sharing: TBD
+- Resale: TBD
+- Scale-to-zero: TBD
+- Support: TBD
+- Write-Ahead Log (WAL): TBD
+- Written data: TBD
