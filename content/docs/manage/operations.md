@@ -233,7 +233,7 @@ The response to a Neon API request includes information about the operations tha
   ]
   ```
 
-You can use the [Get operation details](https://neon.tech/api-reference/v2#/Operation/getProjectOperation) method to poll the status of an operation by the operation ID. You might do this at intervals of 5 seconds until the `status` of the operation changes to `finished` before issuing the next request. For example, this request polls the `start_compute` operation shown above:
+You can use the [Get operation details](https://api-docs.neon.tech/reference/listprojectoperations) method to poll the status of an operation by the operation ID. You might do this at intervals of 5 seconds until the `status` of the operation changes to `finished` before issuing the next request. For example, this request polls the `start_compute` operation shown above:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/055b17e6-ffe3-47ab-b545-cfd7db6fd8b8' \
