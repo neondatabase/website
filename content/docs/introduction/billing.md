@@ -17,13 +17,13 @@ Neon's paid plans charge for usage based on the following usage metrics:
 - **Compute time (per hour)**: The amount of active compute time, dictated by the number of compute endpoints and your scale-to-zero and autoscaling settings.
 - **Data storage (GiB)**: The amount of data stored in your Neon projects. Stored data includes the logical size of your data and the size of the the Write-Ahead Log (WAL)
 
-For more information about Neon's billing metrics, see [Billing metrics explained]().
+Neon applies billing at the account level.
+
+For more information about Neon's billing metrics, see [Billing metrics explained](#billing-metrics-explained).
 
 ## Neon plans
 
-Neon applies billing at the account level. You can create one or more Neon projects under one account, according to the terms of your plan.
-
-Neon offers three plans, summarized below:
+Neon offers a Free Tier and two paid plans:
 
 |                          | Free Tier                         | Pro              | Enterprise                |
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|
@@ -58,18 +58,18 @@ To access your billing page:
 
 ## Neon invoices
 
-A Neon invoice includes a total cost for the billing period and line items for each charge, which corresponding to Neon's [billing metrics](#neon-billing-metrics). Each line item is a per account metric, broken down by Neon project. The line item includes a per-unit cost calculation and a total cost for the line item. You can expand each line item to view a bar chart representing your daily usage.
+A Neon invoice includes the total cost for the billing period and a line item for each of Neon's [billing metrics](#neon-billing-metrics). Each line item is per account, broken out by Neon project. Each line item includes a per-unit cost calculation and a total line item cost. You can expand a line item to view a chart that shows your daily usage.
 
 The current invoice provides totals as of the current date.
 
-### Download an invoice
+### Download invoices
 
 You can download invoices from the **Billing** page.
 
 1. Navigate to the Billing page in the Neon Console. The current invoice is displayed.
 1. Download the invoice:
     1. To download the current invoice, click **Download PDF** from the top of of the page.
-    1. To download a past invoice, select the invoice from the **Latest invoices** list at the bottom of the page to open it, then click **Download PDF** from the top of of the page.
+    1. To download an invoice for a previous billing period, select the invoice from the **Latest invoices** list to open it, then click **Download PDF**.
 
 ## Cancel a subscription
 
