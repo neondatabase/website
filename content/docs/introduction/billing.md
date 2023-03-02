@@ -6,24 +6,20 @@ isDraft: true
 
 ## Overview
 
-Neon offers offers three plans: Free Tier, Pro, and Enterprise. You can find full descriptions of our [plans](#neon-plans) below.
+Neon offers offers three plans: **Free Tier**, **Pro**, and **Enterprise**. You can find details about our [plans](#neon-plans) below.
 
 ## Neon billing metrics
 
-Neon's paid plans charge for usage based on the following usage metrics:
+Neon's paid plans charge for usage based on the following metrics:
 
-- **Written data (GiB)**: The amount of data in written to the Write-Ahead Log (WAL) to support point-in-time restore and database branching.
+- **Written data (GiB)**: The amount of data in written to the Write-Ahead Log (WAL) to support your point-in-time restore window and database branches.
 - **Data transfer (GiB)**: The amount of data transferred from Neon (out of AWS storage), charged for at cloud-provider cost.
 - **Compute time (per hour)**: The amount of active compute time, dictated by the number of compute endpoints and your scale-to-zero and autoscaling settings.
-- **Data storage (GiB)**: The amount of data stored in your Neon projects. Stored data includes the logical size of your data and the size of the the Write-Ahead Log (WAL)
-
-Neon applies billing at the account level.
+- **Data storage (GiB)**: The amount of data stored in your Neon projects. Stored data includes the logical size of your data and the size of the the Write-Ahead Log (WAL).
 
 For more information about Neon's billing metrics, see [Billing metrics explained](#billing-metrics-explained).
 
 ## Neon plans
-
-Neon offers a Free Tier and two paid plans:
 
 |                          | Free Tier                         | Pro              | Enterprise                |
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|
@@ -33,14 +29,14 @@ Neon offers a Free Tier and two paid plans:
 |**CPU**                   | 1 shared CPU                      | Up to X CPUs     | Up to X CPUs              |
 |**RAM**                   | 1 GB                              | Up to X GB       | Up to X GB                |
 |**Storage**               | 3 GB                              | Up to X GB       | Up to X GB                |
-|**Dedicated resources**   | &#120;                            | &#120;           | &#128504;                 |
-|**Auto-suspend compute**  | &#128504;                         | &#128504;        | &#128504;                 |
-|**Always-on compute**     | &#120;                            | &#128504;        | &#128504;                 |
-|**Project sharing**       | &#120;                            | &#128504;        | &#128504;                 |
+|**Dedicated resources**   | &#120;                            | &#120;           | &check;                   |
+|**Auto-suspend compute**  | &check;                           | &check;          | &check;                   |
+|**Always-on compute**     | &#120;                            | &check;          | &check;                   |
+|**Project sharing**       | &#120;                            | &check;          | &check;                   |
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contracts, Volume Discounts |
 |**Support**               | Community                         | Support          | Support, Platform Support |
 
-For more information about our **Pro** and **Enterprise** plans, please reach out to [sales@neon.tech](mailto:support@neon.tech). Our [Pricing] page provides additional information about our plans and a calculator that you can use to estimate your costs and determine the which plan is right for you.
+For more information about our **Pro** and **Enterprise** plans, please reach out to [sales@neon.tech](mailto:support@neon.tech). Our [Pricing](https://neon.tech/pricing) page provides additional information about our plans and a calculator that you can use to estimate costs and determine the which plan is right for you.
 
 ## Account billing page
 
@@ -66,7 +62,7 @@ The current invoice provides totals as of the current date.
 
 You can download invoices from the **Billing** page.
 
-1. Navigate to the Billing page in the Neon Console. The current invoice is displayed.
+1. Navigate to the **Billing** page in the Neon Console. The current invoice is displayed.
 1. Download the invoice:
     1. To download the current invoice, click **Download PDF** from the top of of the page.
     1. To download an invoice for a previous billing period, select the invoice from the **Latest invoices** list to open it, then click **Download PDF**.
@@ -75,11 +71,11 @@ You can download invoices from the **Billing** page.
 
 To cancel your subscription to a Neon paid plan:
 
-1. Navigate to the Billing page in the Neon Console.
+1. Navigate to the **Billing** page in the Neon Console.
 1. Click **Cancel subscription**
-1. In the **Cancel Subscription** dialog, provide any details about the cancelled and click **Submit**.
+1. In the **Cancel Subscription** dialog, enter your cancellation request, and click **Submit**.
 
-This action initiates the cancellation. If your data exceeds  free-tier storage limits, you will be contacted by support with a request to reduce your storage before the paid plan is cancelled and free-tier limits are applied.
+This action initiates the cancellation. If your data exceeds  free-tier storage limits, you will be contacted by the Neon Support team with a request to reduce your storage before the paid plan is cancelled and free-tier limits are applied.
 
 ## Billing metrics explained
 
