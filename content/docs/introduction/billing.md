@@ -6,14 +6,18 @@ isDraft: true
 
 ## Overview
 
-Neon offers offers three base plans: Free Tier, Pro, and Enterprise. You can find full descriptions of our [plans](#neon-plans) below.
+Neon offers offers three plans: Free Tier, Pro, and Enterprise. You can find full descriptions of our [plans](#neon-plans) below.
 
-## Neon billing factors
+## Neon billing metrics
 
-- **Compute units:**
-- **Data storage:**
-- **Written data:**
-- **Data transfer:**
+Neon's paid plans charge for usage based on the following usage metrics:
+
+- **Written data (GiB)**: The amount of data in written to the Write-Ahead Log (WAL) to support your point-in-time restore window.
+- **Data transfer (GiB)**: The amount of data transferred from Neon (out of AWS storage), charged for at cloud-provider cost.
+- **Compute time (per hour)**: The amount of active compute time, dictated by the number of compute endpoints and your scale-to-zero and autoscaling settings.
+- **Data storage (GiB)**: The amount of data stored in your Neon projects. Stored data includes the logical size of your data and the size of the the Write-Ahead Log (WAL)
+
+For more information about Neon's billing metrics, see [Billing metrics explained]().
 
 ## Neon plans
 
@@ -29,10 +33,10 @@ Neon offers three plans, summarized below:
 |**CPU**                   | 1 shared CPU                      | Up to X CPUs     | Up to X CPUs              |
 |**RAM**                   | 1 GB                              | Up to X GB       | Up to X GB                |
 |**Storage**               | 3 GB                              | Up to X GB       | Up to X GB                |
-|**Dedicated resources**   | No                                | No               | Yes                       |
-|**Auto-suspend compute**  | Yes                               | Yes              | Yes                       |
-|**Always-on compute**     | No                                | Yes              | Yes                       |
-|**Project sharing**       | No                                | Yes              | Yes                       |
+|**Dedicated resources**   | &#120;                                | &#120;               | &#128504;                       |
+|**Auto-suspend compute**  | &#128504;                               | &#128504;              | &#128504;                       |
+|**Always-on compute**     | &#120;                                | &#128504;              | &#128504;                       |
+|**Project sharing**       | &#120;                                | &#128504;              | &#128504;                       |
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contracts, Volume Discounts |
 |**Support**               | Community                         | Support          | Support, Platform Support |
 
@@ -54,7 +58,7 @@ To access your billing page:
 
 ## Neon invoices
 
-A Neon invoice includes a total cost for the billing period and line items for each charge, which corresponding to Neon's [billing factors](#neon-billing-factors). Each line item is a per account metric, broken down by Neon project. The line item includes a per-unit cost calculation and a total cost for the line item. You can expand each line item to view a bar chart representing your daily usage.
+A Neon invoice includes a total cost for the billing period and line items for each charge, which corresponding to Neon's [billing metrics](#neon-billing-metrics). Each line item is a per account metric, broken down by Neon project. The line item includes a per-unit cost calculation and a total cost for the line item. You can expand each line item to view a bar chart representing your daily usage.
 
 The current invoice provides totals as of the current date.
 
@@ -76,3 +80,31 @@ To cancel your subscription to a Neon paid plan:
 1. In the **Cancel Subscription** dialog, provide any details about the cancelled and click **Submit**.
 
 This action initiates the cancellation. If your data exceeds  free-tier storage limits, you will be contacted by support with a request to reduce your storage before the paid plan is cancelled and free-tier limits are applied.
+
+## Billing metrics explained
+
+This section provides a detailed explanation of Neon's billing metrics, how they are calculated, and how you can manage associated costs.
+
+### Written data
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+Cost calculation: `data written (GiB) * price per GiB`
+
+### Data transfer
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+Cost calculation: `data written (GiB) * price per GiB`
+
+### Compute time
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+Cost calculation: `number of CPU cores * (seconds active) / 60) * cost per hour`
+
+### Data storage
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+Cost calculation: `stored data (GiB) * (seconds stored / 60) * cost per hour`
