@@ -36,7 +36,7 @@ For more information about Neon's billing metrics, see [Billing metrics explaine
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contracts, Volume Discounts |
 |**Support**               | Community                         | Support          | Support, Platform Support |
 
-For more information about our **Pro** and **Enterprise** plans, please reach out to [sales@neon.tech](mailto:support@neon.tech). Our [Pricing](https://neon.tech/pricing) page provides additional information about our plans and a calculator that you can use to estimate costs and determine the which plan is right for you.
+For more information about our **Pro** and **Enterprise** plans, please reach out to [sales@neon.tech](mailto:support@neon.tech). Our [Pricing](https://neon.tech/pricing) page provides additional information about our plans and a calculator that you can use to estimate costs and determine which plan is right for you.
 
 ## Account billing page
 
@@ -54,7 +54,7 @@ To access your billing page:
 
 ## Neon invoices
 
-A Neon invoice includes the total cost for the billing period and a line item for each of Neon's [billing metrics](#neon-billing-metrics). Each line item is per account, broken out by Neon project. Each line item includes a per-unit cost calculation and a total line item cost. You can expand a line item to view a chart that shows your daily usage.
+A Neon invoice includes the total cost for the billing period and a line item for each of Neon's [billing metrics](#neon-billing-metrics). Each line item is broken down by project and includes a per-unit cost calculation and a total cost. You can expand a line item to view daily usage chart.
 
 The current invoice provides totals as of the current date.
 
