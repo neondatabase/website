@@ -6,24 +6,33 @@ isDraft: true
 
 ## Overview
 
-Neon offers offers three plans: **Free Tier**, **Pro**, and **Enterprise**. You can find details about our [plans](#neon-plans) below.
+Neon offers offers these base plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. Our Pro plan is _usage-based_, which ensures that you never over-provision resources and only pay for what you use. Our **Enterprise** and **Platform Partnership** plans are volume-based with potential volume and wholesale discounts to meet large-scale demands. You can find details about our [plans](#neon-plans) below.
 
 ## Neon billing metrics
 
 Neon's paid plans charge for usage based on the following metrics:
 
-- **Written data**: The amount of data written to the Write-Ahead Log (WAL) to support your point-in-time restore window and database branches.
-- **Data transfer**: The amount of data transferred from Neon (out of AWS storage), charged for at cloud-provider cost.
-- **Active time**: The amount of time that your project's compute endpoints are active.
-- **Data storage**: The amount of data stored in your Neon projects. Stored data includes the logical size of your data and the size of the the Write-Ahead Log (WAL).
+- **Written data (GB)**: The number of bytes written to the Write-Ahead Log (WAL) for data changes.
+- **Data transfer (GB)**: The amount of data transferred out of Neon.
+- **Active compute time (Hours)**: The amount of time that your project's compute endpoints are active.
+- **Project storage (GB)**: The amount of data stored in your Neon projects.
 
-For more information about Neon's billing metrics, see [Billing metrics explained](#billing-metrics-explained).
+## Neon billing metrics (Simplified version)
+
+Neon's paid plans charge for usage based on the following metrics:
+
+- **Reads**: The amount of data transferred out of Neon.
+- **Writes**: The amount of data written to the Write-Ahead Log (WAL) for data changes.
+- **Compute time**: The amount of active compute time.
+- **Storage**: The amount of data stored in your Neon projects.
+
+For detailed information about Neon's billing metrics, see [Billing metrics explained](#billing-metrics-explained).
 
 ## Neon plans
 
 |                          | Free Tier                         | Pro (usage based)| Enterprise (volume based) |Platform Partnership (volume based)|
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|:----------------------|
-|**Best for**              | Prototyping or personal use       | Business use     | Database fleets           | database fleets, resale |
+|**Best for**              | Prototyping or personal use       | Business use, for simple setups with 1-3 active databases     | Database fleets           | database fleets, resale |
 |**Projects**              | 1                                 | Unlimited        | Unlimited                 | Unlimited               |
 |**Compute hours per month** | 100                             | Unlimited        | Unlimited                 | Unlimited               |
 |**CPU**                   | 1 shared CPU                      | Up to X CPUs     | Up to X CPUs              | Up to X CPUs            |
@@ -97,7 +106,7 @@ data written (GiB) * price per GiB
 
 ### Data transfer
 
-**Data transfer** is the amount of data transferred (egressed) from Neon (out of AWS storage). Neon charges for each GiB of data transfer at the cost set by AWS in the region your Neon project is hosted. If you have a significant amount of data transfer, please contact the Neon Sales team to discuss possible volume-based solutions to reduce data transfer costs.
+**Data transfer** is the amount of data transfer (egress) out of Neon. Neon charges for each GB of data transfer. If you have a significant amount of data transfer, please contact the Neon Sales team to discuss possible volume-based solutions to reduce data transfer costs.
 
 Cost calculation for data transfer:
 
@@ -109,15 +118,19 @@ data written (GiB) * price per GiB
 
 Compute time depends on the the amount of time compute endpoints are active and the number of compute units. Your workload, _scale-to-zero_, and _always-on compute_ settings influence the amount of active compute time. Neon is able to scale a compute endpoint to zero after 5 minutes of inactivity. Enabling _always-on compute_, keeps a compute endpoint active at all times to avoid cold restarts and connection latency, but adds to active compute time. The number of compute endpoints and your _autoscaling_ settings determine the amount of compute units. With autoscaling, you can specify a minimum and maximum number of compute units (cores) for each compute endpoint. Neon automatically adjusts compute resources within the minimum and maximum boundaries as your workload fluctuates.
 
+A Compute Unit (CU) is a measurement of compute resources in Neon, billed per second. CUs represent the size of a Neon compute instance (also referred to as an Endpoint). The amount of compute resources available to your Neon project determines the processing capacity of your Neon database. 1 CU has 1 CPU and 4GB RAM. CUs can be scaled to a minimum of 0.25 CU.
+
 Cost calculation for compute time:
 
 ```text
-number of CPU cores * (seconds active) / 60) * cost per hour
+compute units * active time (hours) * cost per hour
 ```
 
-### Data storage
+### Project storage
 
-Data storage is the sum of the logical size of your data and the size of the Write-Ahead Log (WAL) for all of your Neon projects. The logical size is the sum of all database sizes in each Neon project. The size of the Write-Ahead Log (WAL) is dictated by factors described in the [Written data](#written-data) section above.
+Project storage is the sum of the logical size of your data and the size of the Write-Ahead Log (WAL) for all of your Neon projects. The logical size is the sum of all database sizes in each Neon project. The size of the Write-Ahead Log (WAL) is dictated by factors described in the [Written data](#written-data) section above.
+
+Project storage reflects the unique storage associated with a Neon project. Traditionally, database users are billed for logical data. However, to account for branching and Neon's PITR we came up with Project storage. This metric differs from logical storage by not duplicating storage that is shared between branches. This allows users to create many branches without increasing storage costs. i.e branch 20TB database so now you have 40TB of logical but only 20TB of Project storage since....
 
 Cost calculation for compute time:
 
