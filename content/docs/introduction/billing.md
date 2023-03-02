@@ -6,7 +6,7 @@ isDraft: true
 
 ## Overview
 
-Neon offers offers these base plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. Our Pro plan is _usage-based_, which ensures that you never over-provision resources and only pay for what you use. Our **Enterprise** and **Platform Partnership** plans are volume-based with potential volume and wholesale discounts to meet large-scale demands. You can find details about our [plans](#neon-plans) below.
+Neon offers offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, which ensures that you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are volume-based and offer potential discounts for large-scale demands. You can more information about our [plans](#neon-plans) below.
 
 ## Neon billing metrics
 
@@ -26,13 +26,13 @@ Neon's paid plans charge for usage based on the following metrics:
 - **Compute time**: The amount of active compute time.
 - **Storage**: The amount of data stored in your Neon projects.
 
-For detailed information about Neon's billing metrics, see [Billing metrics explained](#billing-metrics-explained).
+For a detailed explanation of Neon's billing metrics, see [Billing metrics explained](#billing-metrics-explained).
 
 ## Neon plans
 
 |                          | Free Tier                         | Pro (usage based)| Enterprise (volume based) |Platform Partnership (volume based)|
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|:----------------------|
-|**Best for**              | Prototyping or personal use       | Business use, for simple setups with 1-3 active databases     | Database fleets           | database fleets, resale |
+|**Best for**              | Prototyping or personal use       | Business use, for setups with 1-3 active databases     | Database fleets           | database fleets or resale |
 |**Projects**              | 1                                 | Unlimited        | Unlimited                 | Unlimited               |
 |**Compute hours per month** | 100                             | Unlimited        | Unlimited                 | Unlimited               |
 |**CPU**                   | 1 shared CPU                      | Up to X CPUs     | Up to X CPUs              | Up to X CPUs            |
@@ -46,10 +46,10 @@ For detailed information about Neon's billing metrics, see [Billing metrics expl
 |**Support**               | Community Support                 | Support          | Support                   |Support, Platform Support|
 
 <Admonition type="note">
-The limits described above are plan defaults. If you would like to adjust limits to tailor one of our plans to your specific requirements, please contact [support@neon.tech](mailto:support@neon.tech).
+The limits described above are plan defaults. If you would like to adjust limits to tailor a plans to your specific requirements, please contact [support@neon.tech](mailto:support@neon.tech).
 </Admonition>
 
-For more information about our plans, please reach out to [support@neon.tech](mailto:support@neon.tech). Our [Pricing](https://neon.tech/pricing) page provides additional information about our plans and a calculator that you can use to estimate costs and determine which plan is right for you.
+For more information about our plans, please reach out to [support@neon.tech](mailto:support@neon.tech). Our [Pricing](https://neon.tech/pricing) page provides additional information and a calculator that you can use to estimate costs and determine which plan is right for you.
 
 ## Account billing page
 
