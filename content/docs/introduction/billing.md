@@ -103,7 +103,7 @@ data written (GiB) * price per GiB
 
 ### Compute time
 
-Compute time depends on the number of compute endpoints in your Neon projects, the number of compute units (cores) per compute endpoint, the amount of time compute endpoints are active, and your scale-to-zero and autoscaling settings. In Neon, you have the option to scale compute resources to zero when not in use. A compute endpoint is placed into an idle state after 5 minutes of inactivity. Neon paid plans also support _always-on compute_, which helps avoid cold restarts and connection latency. Neon paid plans also support _autoscaling_, which allows you to specify a minimum and maximum number of compute units (cores) for each compute endpoint. Neon automatically adjusts compute resources within the minimum and maximum boundaries to adjust to workload activity. These configuration points can be adjusted to help manage compute time charges.
+Compute time depends on the the amount of time compute endpoints are active and the number of compute units. Your workload, _scale-to-zero_, and _always-on compute_ settings influence the amount of active compute time. Neon is able to scale a compute endpoint to zero after 5 minutes of inactivity. Enabling _always-on compute_, keeps a compute endpoint active at all times to avoid cold restarts and connection latency, but adds to active compute time. The number of compute endpoints and your _autoscaling_ settings determine the amount of compute units. With autoscaling, you can specify a minimum and maximum number of compute units (cores) for each compute endpoint. Neon automatically adjusts compute resources within the minimum and maximum boundaries as your workload fluctuates.
 
 Cost calculation for compute time:
 
@@ -113,7 +113,7 @@ number of CPU cores * (seconds active) / 60) * cost per hour
 
 ### Data storage
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Data storage is the sum of the logical size of your data and the size of the Write-Ahead Log (WAL) for all of your Neon projects. The logical size is the sum of all database sizes in each Neon project. The size of the Write-Ahead Log (WAL) is dictated by factors ddescribed in the [Written data](#written-data) section above.
 
 Cost calculation for compute time:
 
