@@ -113,7 +113,7 @@
 - title: Reference
   items:
     - title: API
-      slug: reference/api-reference
+      link: `https://api-docs.neon.tech/reference/getting-started-with-neon-api`
     - title: Glossary
       slug: reference/glossary
     - title: PostgreSQL Compatibility
