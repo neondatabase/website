@@ -6,27 +6,20 @@ isDraft: true
 
 ## Overview
 
-Neon offers offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, which ensures that you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are volume-based and offer potential discounts for large-scale demands. You can more information about our [plans](#neon-plans) below.
-
-## Neon billing metrics
-
-Neon's paid plans charge for usage based on the following metrics:
-
-- **Written data (GB)**: The number of bytes written to the Write-Ahead Log (WAL) for data changes.
-- **Data transfer (GB)**: The amount of data transferred out of Neon.
-- **Active compute time (Hours)**: The amount of time that your project's compute endpoints are active.
-- **Project storage (GB)**: The amount of data stored in your Neon projects.
+Neon offers offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, which ensures that you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are volume based and offer potential volume-based discounts. You can find more information about our [plans](#neon-plans) below.
 
 ## Neon billing metrics (Simplified version)
 
 Neon's paid plans charge for usage based on the following metrics:
 
 - **Reads**: The amount of data transferred out of Neon.
-- **Writes**: The amount of data written to the Write-Ahead Log (WAL) for data changes.
+- **Writes**: The amount of data written for data changes.
 - **Compute time**: The amount of active compute time.
 - **Storage**: The amount of data stored in your Neon projects.
 
-For a detailed explanation of Neon's billing metrics, see [Billing metrics explained](#billing-metrics-explained).
+Usage costs are account based, but the Neon **Billing** page allows you to view usage by project. A Neon paid plan permit multiple Neon projects per account.
+
+See [Billing metrics explained](#billing-metrics-explained) for a detailed description of each metric and how Neon calculates usage costs.
 
 ## Neon plans
 
@@ -45,8 +38,8 @@ For a detailed explanation of Neon's billing metrics, see [Billing metrics expla
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contract, Volume Discounts |Prepaid, Custom Contract, Wholesale Discounts|
 |**Support**               | Community Support                 | Support          | Support                   |Support, Platform Support|
 
-<Admonition type="note">
-The limits described above are plan defaults. If you would like to adjust limits to tailor a plans to your specific requirements, please contact [support@neon.tech](mailto:support@neon.tech).
+<Admonition type="info">
+The limits described above are plan defaults. If you would like to adjust limits to tailor a plan to your specific requirements, please contact [support@neon.tech](mailto:support@neon.tech).
 </Admonition>
 
 For more information about our plans, please reach out to [support@neon.tech](mailto:support@neon.tech). Our [Pricing](https://neon.tech/pricing) page provides additional information and a calculator that you can use to estimate costs and determine which plan is right for you.
