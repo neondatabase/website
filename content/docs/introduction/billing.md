@@ -140,7 +140,9 @@ The _Storage_ metric counts the amount of data stored in your Neon projects. Sto
 
         Legend:
 
-        ####### point-in-time-recovery window (retained history in the form of WAL records)
+        ####### point-in-time-recovery window, which is 
+                retained data history in the form of WAL 
+                records
 
         ------- data history that has fallen out of the 
                 point-in-time-recovery window, and can no
