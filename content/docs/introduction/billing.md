@@ -12,10 +12,10 @@ Neon offers offers the following plans: **Free Tier**, **Pro**, **Enterprise**, 
 
 Neon's paid plans charge for usage based on the following metrics:
 
-- **Reads**: The amount of data transferred out of Neon.
-- **Writes**: The amount of data written for data changes.
+- **Data transfer**: The amount of data transferred out of Neon.
+- **Written data**: The amount of data written for data changes.
 - **Compute time**: The amount of active compute time.
-- **Storage**: The amount of data stored in your Neon projects.
+- **Project storage**: The amount of data stored in your Neon projects.
 
 See [Billing metrics explained](#billing-metrics-explained) for a detailed information about each metric and how Neon calculates usage cost.
 
@@ -87,24 +87,24 @@ This action initiates the cancellation. If your data exceeds  free-tier storage 
 
 This section provides a detailed explanation of Neon's billing metrics, how they are calculated, and how you can manage your costs.
 
-### Writes
+### Data transfer
 
-The _Writes_ metric counts the amount of data changes written to the Write-Ahead Log (WAL) to ensure durability of your data. Neon writes data changes to the WAL concurrently on multiple nodes to avoid compromising write speed.
-
-The cost calculation for writes is:
-
-```text
-written data (GiB) * price per GiB
-```
-
-### Reads
-
-The _Reads_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the cost set by the cloud provider (e.g., at the cost set by AWS). Neon does not apply a markup to the data transfer cost.
+The _Data transfer_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the cost set by the cloud provider (e.g., at the cost set by AWS). Neon does not apply a markup to the data transfer cost.
 
 The cost calculation for reads is:
 
 ```text
 data transferred (GiB) * price per GiB
+```
+
+### Written data
+
+The _Written data_ metric counts the amount of data changes written to the Write-Ahead Log (WAL) to ensure durability of your data. Neon writes data changes to the WAL concurrently on multiple nodes to avoid compromising write speed.
+
+The cost calculation for writes is:
+
+```text
+written data (GiB) * price per GiB
 ```
 
 ### Compute time
@@ -125,9 +125,9 @@ The cost calculation for compute time is:
 compute units * active time (hours) * cost per hour
 ```
 
-### Storage
+### Project storage
 
-The _Storage_ metric counts the amount of data stored in your Neon projects. Stored data is the sum of two values:
+The _Project storage_ metric counts the amount of data stored in your Neon projects. Project storage is the sum of two values:
 
 1. The logical size of of all databases in your Neon projects at a point in time (a snapshot), which includes PostgreSQL SLRU (simple least-recently-used) caches, and a small amount of metadata.
 2. The size of retained Write-Ahead Log (WAL), which is a record of data changes. Two factors determine the size of retained WAL:
