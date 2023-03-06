@@ -187,7 +187,7 @@ The _Storage_ metric counts the amount of data stored in your Neon projects. Sto
                            snapshot
        ```  
 
-      In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window. It should also be noted that database branches can share data history. For example, two branches created from the same parent at or around around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon keeps storage to a minimum through shared data history. Also, as time passes, if branch WAL size becomes too large, Neon will advance the branch snapshot to reduce the amount data changes stored as WAL in order to reduce overall storage.
+      In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window. It should also be noted that database branches can share data history. For example, two branches created from the same parent at or around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon keeps storage to a minimum through shared data history. Also, as time passes, Neon will advance the branch snapshot to reduce the amount data changes stored as WAL if it will reduce overall storage.
 
 The cost calculation for storage is:
 
