@@ -27,7 +27,7 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|:----------------------|
 |**Best for**              | Prototyping or personal use       | Business use, for setups with 1-3 active databases     | Database fleets           | database fleets or resale |
 |**Projects**              | 1                                 | Unlimited        | Unlimited                 | Unlimited               |
-|**Compute hours per month** | 100                             | Unlimited        | Unlimited                 | Unlimited               |
+|**Compute active time per month** | 100                             | Unlimited        | Unlimited                 | Unlimited               |
 |**CPU**                   | 1 shared CPU                      | Up to X CPUs     | Up to X CPUs              | Up to X CPUs            |
 |**RAM**                   | 1 GB                              | Up to X GB       | Up to X GB                | Up to X GB              |
 |**Storage**               | 3 GB                              | Up to X GB       | Up to X GB                | Up to X GB              |
@@ -89,7 +89,7 @@ This section provides a detailed explanation of Neon's billing metrics, how they
 
 ### Writes
 
-The **Writes** metric counts the amount of data changes written to the Write-Ahead Log (WAL) to ensure durability. Neon writes data changes to the WAL concurrently on multiple nodes to avoid compromising write speed.
+The _Writes_ metric counts the amount of data changes written to the Write-Ahead Log (WAL) to ensure durability. Neon writes data changes to the WAL concurrently on multiple nodes to avoid compromising write speed.
 
 The cost calculation for data changes written to the WAL is:
 
@@ -99,7 +99,7 @@ written data (GiB) * price per GiB
 
 ### Reads
 
-The **Reads** metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the cost set by the cloud provider (e.g., at the cost set by AWS). Neon does not apply a margin to the data transfer cost.
+The _Reads_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the cost set by the cloud provider (e.g., at the cost set by AWS). Neon does not apply a margin to the data transfer cost.
 
 The cost calculation for data transferred out of Neon is:
 
@@ -109,7 +109,15 @@ data transferred (GiB) * price per GiB
 
 ### Compute time
 
-The **Compute time** metric counts the amount of compute unit (CU) active time. The number of compute units depends on the number of compute endpoints you have and how many compute units per compute endpoint.  
+The _Compute time_ metric counts _Compute Unit (CU)_ active time, in hours. In Neon, a compute endpoint can have one or more CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an active state. A defined period of inactivity places the compute endpoint and its CUs into an idle state.
+
+Factors that affect the amount of compute time include:
+
+- The number of active compute endpoints
+- The number of CUs per compute endpoint
+- Neon's _auto-suspend compute_ feature, which suspends a compute endpoint (and its CUs) after a specified period of inactivity (5 minutes by default). You can increase or decrease the suspension threshold.
+- Neon's _autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down, depending on workload.
+- Neon's _always-on_ compute feature, which keeps one endpoint active indefinitely to avoid connection latency due to the time required to restart a compute endpoint.
 
 The cost calculation for compute time is:
 
@@ -117,16 +125,19 @@ The cost calculation for compute time is:
 compute units * active time (hours) * cost per hour
 ```
 
-### Project storage
+### Storage
 
-Project storage is the sum of the logical size of your data and the size of the Write-Ahead Log (WAL) for all of your Neon projects. The logical size is the sum of all database sizes in each Neon project. The size of the Write-Ahead Log (WAL) is dictated by factors described in the [Written data](#written-data) section above.
+The _Storage_ metric counts the amount of data stored in your Neon projects. Stored data has two components:
 
-Project storage reflects the unique storage associated with a Neon project. Traditionally, database users are billed for logical data. However, to account for branching and Neon's PITR we came up with Project storage. This metric differs from logical storage by not duplicating storage that is shared between branches. This allows users to create many branches without increasing storage costs. i.e branch 20TB database so now you have 40TB of logical but only 20TB of Project storage since....
+1. The logical size of of all databases in your Neon projects, which includes PostgreSQL SLRU (simple least-recently-used) caches, and a small amount of metadata.
+2. The size of retained Write-Ahead Log (WAL), which is a record of data changes. Two factors determine the size of retained WAL:
+   - Your _point-in-time-recovery window_, which you can think of as a data history. Neon retains a data history in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores 7 days of data history.
+   - _Database branches_. A database branch is a snapshot of your data at the point of branch creation plus WAL that record data changes on the branch. When a branch is first created, it adds no storage. No data changes have been introduced yet and the branch's snapshot data still exists in the parent branch's point-in-time restore window, which means that it shares this data in common with the parent branch. A branch only begins adding to storage when data changes are introduced and when the branch snapshot falls out of the parent branch's point-in-time-restore window. In other words, branches add storage when you modify data and when you allow the branch to grow older than the parent branch's point-in-time-restore window. For example, an 8-day old branch no longer shares data with a parent branch that has a 7 day point-in-time restore window.
 
-Cost calculation for compute time:
+The cost calculation for storage is:
 
 ```text
-stored data (GiB) * (seconds stored / 60) * cost per hour
+storage (GiB) * (seconds stored / 60) * cost per hour
 ```
 
 ## Billing terms and definitions
