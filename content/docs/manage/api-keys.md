@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/get-started-with-neon/api-keys
 ---
 
-Most actions performed in the Neon Console can be performed using the [Neon API](https://neon.tech/api-reference/v2/). Using the Neon API requires an API key. This topic describes how to generate, revoke, and use API keys.
+Most actions performed in the Neon Console can be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Using the Neon API requires an API key. This topic describes how to generate, revoke, and use API keys.
 
 API keys are global and belong to your Neon account. They can be used with any project that belongs to your Neon account. A Neon account can create unlimited API keys.
 
@@ -37,7 +37,7 @@ To revoke an API key:
 ## Make an API call
 
 <Admonition type="important">
-[Neon API v1](https://neon.tech/api-reference) is deprecated. Please migrate your applications to [Neon API v2](https://neon.tech/api-reference/v2/). The base URL for Neon API v2 is `https://console.neon.tech/api/v2/`.
+[Neon API v1](https://neon.tech/api-reference) is deprecated. Please migrate your applications to [Neon API v2](https://api-docs.neon.tech/reference/getting-started-with-neon-api). The base URL for Neon API v2 is `https://console.neon.tech/api/v2/`.
 </Admonition>
 
 The following `cURL` example uses the `/projects` endpoint to retrieve projects that belong to your Neon account.
@@ -78,11 +78,11 @@ A response for a Neon role with a single project appears similar to the followin
 }
 ```
 
-Refer to the [Neon API Reference](https://neon.tech/api-reference/v2/) for other supported Neon API methods.
+Refer to the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for other supported Neon API methods.
 
 ## Manage API keys with the Neon API
 
-API key actions performed in the Neon Console can also be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, and revoke API keys using the Neon API.
+API key actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). The following examples demonstrate how to create, view, and revoke API keys using the Neon API.
 
 ### Prerequisites
 
@@ -92,7 +92,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 ### Create an API key with the API
 
-The following Neon API method creates an API key. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/API%20Key/createApiKey).
+The following Neon API method creates an API key. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createapikey).
 
 ```text
 POST /api_keys 
@@ -120,7 +120,7 @@ The response includes an `id` for the key and a generated 64-bit `key` value, wh
 
 ### List API keys with the API
 
-The following Neon API method lists API keys for the your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/API%20Key/listApiKeys).
+The following Neon API method lists API keys for the your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listapikeys).
 
 ```text
 GET /api_keys
@@ -164,7 +164,7 @@ Response:
 
 ### Revoke an API key with the API
 
-The following Neon API method revokes the specified API key. The `key_id` is a required parameter. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/API%20Key/revokeApiKey).
+The following Neon API method revokes the specified API key. The `key_id` is a required parameter. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/revokeapikey).
 
 ```text
 DELETE /api_keys/{key_id}
