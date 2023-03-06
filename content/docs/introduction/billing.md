@@ -179,8 +179,8 @@ The _Storage_ metric counts the amount of data stored in your Neon projects. Sto
 
        ```text
        main   --------------------#######>
-                              |  ^
-                              |  snapshot
+                              |   ^
+                              |   snapshot
                               |
        branch A               ##########>
                               ^
