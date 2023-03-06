@@ -187,7 +187,7 @@ The _Project storage_ metric counts the amount of data stored in your Neon proje
                            snapshot
        ```  
 
-      In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window. It should also be noted that database branches can share data history. For example, two branches created from the same parent at or around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon keeps storage to a minimum through shared data history. Also, as time passes, Neon will advance the branch snapshot to reduce the amount data changes stored as WAL if it will reduce overall storage.
+      In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window. It should also be noted that database branches can share data history. For example, two branches created from the same parent at or around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon keeps storage to a minimum through shared data history. Also, if it will reduce overall storage, Neon will advance the branch snapshot to reduce the amount data changes stored as WAL.
 
 The cost calculation for storage is:
 
@@ -197,28 +197,27 @@ storage (GiB) * (seconds stored / 60) * cost per hour
 
 ## Billing terms and definitions
 
-- Always-on compute: TBD
-- Auto-suspend compute: TBD
-- Auto-scaling: TBD
-- Community support: TBD
-- Compute time: TBD
-- Compute endpoint: TBD
-- Database branching: TBD
-- Database fleets
-- Data transfer: TBD
-- Data storage: TBD
-- Dedicated resources: TBD
-- Enterprise plan: TBD
-- Enterprise support: TBD
-- Free Tier: TBD
-- Paid plan: TBD
-- Point-in-time restore window: TBD
-- Pro plan: TBD
-- Project sharing: TBD
-- Resale: TBD
-- Scale-to-zero: TBD
-- Support: TBD
-- Volume Discounts
-- Wholesale Discounts
-- Write-Ahead Log (WAL): TBD
-- Written data: TBD
+- Always-on compute: A Neon feature that allows you to keep a compute endpoint active indefinitely, which avoids latencies associated with restarting an idle compute endpoint.
+- Auto-suspend compute: A feature that suspends a compute endpoint (and its Compute Units) after a specified period of inactivity (5 minutes by default). If there is no activity on the compute endpoint for the defined period, it is placed into an idle state.
+- Auto-scaling: A feature that allows you to specify a minimum and maximum number of Compute Units (CU) for a compute endpoint. Neon scales compute resources up and down within these boundaries as workload fluctuates.
+- Community support: Community support is self-service support through the [Neon Community Forum](https://community.neon.tech/).
+- Compute time: The amount time that compute endpoints in your Neon projects are active. Various factors affect compute time. See [Compute time](#compute-time).
+- Compute endpoint: The compute instance associated with a branch.
+- Database branching: A Neon feature that allows you to create a copy-on-write branch of your project data.
+- Database fleets: A collection of database instances, typically managed as a single entity.
+- Data transfer: The movement of data out of Neon (egress). See [Data transfer](#data-transfer).
+- Dedicated resources: Resources including compute and storage dedicated to a single Neon account.
+- Enterprise plan: A volume-based paid plan offered by Neon. See [Neon plans](#neon-plans).
+- Free Tier: A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Technical Preview Free Tier](/docs/introduction/technical-preview-free-tier).
+- Paid plan: A paid Neon service tier. See [Neon plans](#neon-plans).
+- Point-in-time restore window: A retained database history stored as Write-Ahead-Log (WAL) records, which allows you to restore data to past point in time.
+- Pro plan: A usage-based paid plan offered by Neon. See [Neon plans](#neon-plans).
+- Project sharing: A feature that allows you to share Neon projects with other Neon user accounts.
+- Project storage: The amount of data stored in your Neon projects. See [Project storage](#project-storage).
+- Resale: Selling the Neon service as part of another service offering.
+- Scale-to-zero: Scale-to-zero refers to Neon's _Auto-suspend compute_ feature, which places a compute endpoint into an idle state when it is not being used.
+- Support: Technical support provided with Neon paid plans.
+- Volume Discounts: Large quantity discounts in compute and storage negotiated with Neon as part of an Enterprise or Platform Partnership service plan.
+- Wholesale Discounts: Large quantity discounts in compute and storage negotiated with Neon as part of a Platform Partnership service plan.
+- Write-Ahead Log (WAL): A transaction log that records data changes to ensure durability.
+- Written data: Data that Neon writes to the Write-Ahead Log (WAL).
