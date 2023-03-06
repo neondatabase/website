@@ -178,9 +178,9 @@ The _Storage_ metric counts the amount of data stored in your Neon projects. Sto
       b) or when the branch snapshot falls out of the parent branch's point-in-time-restore window, in which case the branch snapshot data is no longer shared in common with the parent branch.
 
        ```text
-        main   -------------------#######>
-                               |  ^
-                               |  snapshot
+        main   --------------------#######>
+                               |   ^
+                               |   snapshot
                                |
         branch A               ##########>
                                ^
