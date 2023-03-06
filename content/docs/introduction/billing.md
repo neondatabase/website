@@ -87,17 +87,17 @@ This section provides a detailed explanation of Neon's billing metrics and how t
 
 The _Data transfer_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the cost set by the cloud provider (e.g., at the cost set by AWS). Neon does not apply a markup to the data transfer cost.
 
-The cost calculation for reads is:
+The cost calculation for _Data transfer_ is:
 
 ```text
-data transferred (GiB) * price per GiB
+data transfer (GiB) * price per GiB
 ```
 
 ### Written data
 
 The _Written data_ metric counts the amount of data changes written to the Write-Ahead Log (WAL) to ensure durability of your data. Neon writes data changes to the WAL concurrently on multiple nodes to avoid compromising write speed.
 
-The cost calculation for writes is:
+The cost calculation for _Written data_ is:
 
 ```text
 written data (GiB) * price per GiB
@@ -115,7 +115,7 @@ Factors that affect the amount of compute time include:
 - Neon's _autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload. _This feature is not yet available._
 - Neon's _always-on_ compute feature, which keeps one endpoint active indefinitely to avoid connection latency due compute endpoint startup time. _This feature is not yet available._
 
-The cost calculation for compute time is:
+The cost calculation for _Compute time_ is:
 
 ```text
 compute units * active time (hours) * cost per hour
@@ -187,8 +187,8 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
 
       Database branches can also share data history. For example, two branches created from the same parent at or around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon keeps minimizes the storage cost of branches through shared data history. Also, if it helps minimize storage, Neon will advance the a branch snapshot to reduce the amount data changes stored as WAL.
 
-The cost calculation for storage is:
+The cost calculation for _Project storage_ is:
 
 ```text
-storage (GiB) * (seconds stored / 60) * cost per hour
+project storage (GiB) * (seconds stored / 60) * cost per hour
 ```
