@@ -31,7 +31,7 @@ When you push changes to the GitHub repository associated with your Vercel proje
 This topic describes how to add the Neon Vercel integration to your Vercel project.
 
 <Admonition type="important">
-The Neon Vercel integration connects one Vercel project to one Neon project. The integration does not currently support sharing a PostgreSQL database (a Neon project) between two or more Vercel projects,  nor does it support connecting two PostgreSQL databases (Neon projects) to a single Vercel project.
+The Neon Vercel integration connects one Vercel project to one Neon project. The integration does not currently support sharing a PostgreSQL database (a Neon project) between two or more Vercel projects, nor does it support connecting a single Vercel project to two PostgreSQL databases (two Neon projects).
 </Admonition>
 
 Prerequisites:
