@@ -134,17 +134,17 @@ The _Storage_ metric counts the amount of data stored in your Neon projects. Sto
    - Your _point-in-time-recovery window_, which you can think of as retained history. Neon retains a data history in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores 7 days of data history. Data that falls out of this window can no longer be accessed and is evicted from storage.
 
        ```text
-        main   ---------########>
-                        ^        
-                     snapshot
+       main   ---------########>
+                       ^        
+                    snapshot
 
-        Legend:
+       Legend:
 
-        ####### point-in-time-recovery window, which is 
+       ####### point-in-time-recovery window, which is 
                 retained data history in the form of WAL 
                 records
 
-        ------- data history that has fallen out of the 
+       ------- data history that has fallen out of the 
                 point-in-time-recovery window, and can no
                 longer be accessed
        ```
@@ -154,37 +154,37 @@ The _Storage_ metric counts the amount of data stored in your Neon projects. Sto
       When a branch is first created, it adds no storage. No data changes have been introduced yet and the branch's snapshot data still exists in the parent branch's point-in-time restore window, which means that it shares this data in common with the parent branch.
 
        ```text
-        main   ---------########>
-                        ^      |
+       main   ---------########>
+                       ^       |
                      snapshot  |
                                |
-        branch A               #>
-                               ^
-                            snapshot  
+       branch A               #>
+                              ^
+                           snapshot  
        ```
 
       A branch only begins adding to storage when a) data changes are introduced:
 
        ```text
-        main   -------------#######>
-                            ^  |
-                     snapshot  |
-                               |
-        branch A               ####>
-                               ^
-                            snapshot  
+       main   -------------#######>
+                           ^  |
+                    snapshot  |
+                              |
+       branch A               ####>
+                              ^
+                           snapshot  
        ```
 
       b) or when the branch snapshot falls out of the parent branch's point-in-time-restore window, in which case the branch snapshot data is no longer shared in common with the parent branch.
 
        ```text
-        main   --------------------#######>
-                               |   ^
-                               |   snapshot
-                               |
-        branch A               ##########>
-                               ^
-                            snapshot
+       main   --------------------#######>
+                              |  ^
+                              |  snapshot
+                              |
+       branch A               ##########>
+                              ^
+                           snapshot
        ```  
 
       In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window. It should also be noted that database branches can share data history. For example, two branches created from the same parent at or around around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon keeps storage to a minimum through shared data history. Also, as time passes, if branch WAL size becomes too large, Neon will advance the branch snapshot to reduce the amount data changes stored as WAL in order to reduce overall storage.
