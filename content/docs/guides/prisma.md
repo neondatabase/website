@@ -79,7 +79,7 @@ Prisma Migrate requires a direct connection to the database. It does not support
 
 ```text
 Error undefined: Database error
-Error querying the database: db error: ERROR: prepared statement 
+Error querying the database: db error: ERROR: prepared statement
 "s0" already exists
 ```
 
@@ -118,7 +118,7 @@ When you connect to an idle compute instance from Prisma, Neon automatically act
   postgres://sally:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb?connect_timeout=10
   ```
 
-- If you are using [connection pooling]((/docs/connect/connection-pooling), set `pool_timeout` to 0 or a higher value. This setting defines the number of seconds to wait for a new connection from the pool. The default is 10 seconds. A setting of 0 means no timeout. A higher setting should provide the time required to avoid connection timeout issues. For example:
+- If you are using [connection pooling](/docs/connect/connection-pooling), set `pool_timeout` to 0 or a higher value. This setting defines the number of seconds to wait for a new connection from the pool. The default is 10 seconds. A setting of 0 means no timeout. A higher setting should provide the time required to avoid connection timeout issues. For example:
 
   ```bash
   postgres://sally:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true&pool_timeout=20

@@ -17,18 +17,22 @@ Neon uses `PgBouncer` in `transaction mode`. For limitations associated with `tr
 
 ## Enable connection pooling
 
-Enabling connection pooling in Neon requires adding a `-pooler` suffix to the compute endpoint ID, which is part of the hostname. Connection requests that specify the `-pooler` suffix use a pooled connection. Connections that do not specify the `-pooler` suffix connect to the database directly.
+Enabling connection pooling in Neon requires adding a `-pooler` suffix to the compute endpoint ID, which is part of the hostname. Connection requests that specify the `-pooler` suffix use a pooled connection.
 
-To connect to a database with a pooled connection, add the `-pooler` suffix to the endpoint ID, as shown:
+Add the `-pooler` suffix to the endpoint ID, as shown:
 
 ```text
-postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
+postgres://sally:<password>@ep-throbbing-boat-918849-pooler.us-east-2.aws.neon.tech/neondb
 ```
+
+Enabling the **Pooler** option in the **Connection Details** widget on the Neon **Dashboard** adds the `-pooler` suffix to the connection string, which you can copy:
+
+![Enable pooler option](/docs/connect/enable_pooler.png)
 
 To connect to the same database directly with a non-pooled connection, use the same connection string without the `-pooler` suffix:
 
 ```text
-postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
+postgres://sally:<password>@ep-throbbing-boat-918849.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="note">

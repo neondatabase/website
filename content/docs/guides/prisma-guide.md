@@ -136,7 +136,7 @@ In this step, you will update the `datasource db` entry in your `schema.prisma` 
   <Admonition type="note">
   Prisma [naming conventions](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#naming-conventions) recommend using PascalCase when defining models. However, be aware that the letter case in your Prisma schema is reflected in PostgreSQL identifier names. If an identifier name in PostgreSQL includes an upper case letter, you must quote the name when specifying it in a PostgreSQL query. For example, the `Elements` table has an upper case letter in its name. When querying this table in PostgreSQL, you must enclose `Elements` in quotes: `SELECT * FROM "Elements"`. Otherwise, the identifier name is folded to lower case and the query will not find the table.
 
-  To name objects in your your Prism schema (and in the generated API) differently than they are named in your database, Prisma provides a mapping mechanism that you can use. For example, to map a model named "Elements" to  table named "elements", you can use the `@@map` API attribute in your Prisma schema.
+  To name objects in your Prisma schema (and in the generated API) differently than they are named in your database, Prisma provides a mapping mechanism that you can use. For example, to map a model named "Elements" to  table named "elements", you can use the `@@map` API attribute in your Prisma schema.
 
 For more information, see [Mapping collection/table and field/column names](https://www.prisma.io/docs/concepts/components/prisma-schema/names-in-underlying-database#mapping-collectiontable-and-fieldcolumn-names), in the _Prisma documentation_.
   </Admonition>

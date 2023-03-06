@@ -8,10 +8,10 @@ redirectFrom:
 
 The Neon API allows you to manage your Neon projects programmatically.
 
-Refer to the [Neon API v2 reference](https://neon.tech/api-reference/v2) for supported methods.
+Refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for supported methods.
 
 <Admonition type="warning">
-The [Neon API v1](https://neon.tech/api-reference) is deprecated. Please migrate your applications to [Neon API V2 ](https://neon.tech/api-reference/v2/). The base URL for the new Neon API is `https://console.neon.tech/api/v2`
+The [Neon API v1](https://neon.tech/api-reference) is deprecated. Please migrate your applications to [Neon API v2](https://api-docs.neon.tech/reference/getting-started-with-neon-api). The base URL for the new Neon API is `https://console.neon.tech/api/v2`
 </Admonition>
 
 The Neon API is a REST API. It provides resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and supports standard HTTP response codes, authentication, and verbs.
@@ -45,9 +45,23 @@ https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}
 
 ## Using the Neon API reference to construct and execute requests
 
-You can use the the [Neon API v2 reference](https://neon.tech/api-reference/v2) to construct and execute Neon API requests. Click **Authorize** to add your API key token, and for each method, click **Try it out** and supply the required parameters and attributes. Click **Execute** to create and submit the request.
+You can use the [Neon API v2 reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to execute Neon API requests. Select an endpoint, enter an API key token in the **Bearer** field, supply any required parameters and properties, and click **Try it!** to execute the request. For information about obtaining API keys, see [Manage API keys](/docs/manage/api-keys).
 
-The [Neon API v2 reference](https://neon.tech/api-reference/v2) also provides request and response body examples that you can reference when constructing your own requests. For branching API examples, you can also refer to examples provided in [Branching with the Neon API](/docs/manage/branches#branching-with-the-neon-api).
+The [Neon API v2 reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) also provides request and response body examples that you can reference when constructing your own requests.
+
+For additional Neon API examples, refer to the following topics:
+
+- [Manage API keys with the Neon API](/docs/manage/api-keys#manage-api-keys-with-the-neon-api)
+- [Manage projects with the Neon API](/docs/manage/projects#manage-projects-with-the-neon-api)
+- [Manage branches with the Neon API](/docs/manage/branches#branching-with-the-neon-api)
+- [Manage compute endpoints with the Neon API](/docs/manage/endpoints#manage-compute-endpoints-with-the-neon-api)
+- [Manage roles with the Neon API](/docs/manage/users#manage-roles-with-the-neon-api)
+- [Manage databases with the Neon API](/docs/manage/databases#manage-databases-with-the-neon-api)
+- [View operations with the Neon API](/docs/manage/operations#view-operations-with-the-neon-api)
+
+<Admonition type="important">
+When using the Neon API programmatically, you can poll the operation `status` to ensure that an operation is finished before proceeding with the next API request. For more information, see [Poll operation status](/docs/manage/operations#poll-operation-status).
+</Admonition>
 
 ## Need help?
 
