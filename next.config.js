@@ -58,6 +58,11 @@ module.exports = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/api-reference/v2',
+        destination: 'https://api-docs.neon.tech',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },
