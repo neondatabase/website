@@ -17,9 +17,7 @@ Neon's paid plans charge for usage based on the following metrics:
 - **Compute time**: The amount of active compute time.
 - **Project storage**: The amount of data stored in your Neon projects.
 
-See [Billing metrics explained](#billing-metrics-explained) for a detailed information about each metric and how Neon calculates usage cost.
-
-Usage costs are account based, but the Neon **Billing** page allows you to view usage by project.
+See [Billing metrics explained](#billing-metrics-explained) for detailed information about each metric and how Neon calculates usage cost.
 
 ## Neon plans
 
@@ -42,7 +40,7 @@ Usage costs are account based, but the Neon **Billing** page allows you to view 
 The limits described above are plan defaults. If you would like to adjust limits to tailor a plan to your specific requirements, please contact [support@neon.tech](mailto:support@neon.tech).
 </Admonition>
 
-For more information about our plans, please reach out to [support@neon.tech](mailto:support@neon.tech). Our [Pricing](https://neon.tech/pricing) page provides additional information and a calculator you can use to estimate costs and determine which plan is right for you.
+Our [Pricing](https://neon.tech/pricing) page provides additional information and a calculator you can use to estimate costs and determine which plan is right for you.
 
 ## Account billing page
 
@@ -60,9 +58,7 @@ To access your billing page:
 
 ## Neon invoices
 
-A Neon invoice includes the total cost for the billing period and a line item for each of Neon's [billing metrics](#neon-billing-metrics). Each line item is broken down by project and includes a per-unit cost calculation and a total cost. You can expand a line item to view a daily usage chart.
-
-The current invoice provides totals as of the current date.
+A Neon invoice includes the total cost for the billing period and a the cost for each of Neon's [billing metrics](#neon-billing-metrics).
 
 ### Download invoices
 
@@ -85,7 +81,7 @@ This action initiates the cancellation. If your data exceeds  free-tier storage 
 
 ## Billing metrics explained
 
-This section provides a detailed explanation of Neon's billing metrics, how they are calculated, and how you can manage your costs.
+This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account based. Refer to your billing invoice for a cost-per-project breakdown.
 
 ### Data transfer
 
@@ -109,15 +105,15 @@ written data (GiB) * price per GiB
 
 ### Compute time
 
-The _Compute time_ metric counts _Compute Unit (CU)_ active time, in hours. In Neon, a compute endpoint can have one or more CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an active state. A defined period of inactivity places the compute endpoint and its CUs into an idle state.
+The _Compute time_ metric counts _Compute Unit (CU)_ active time, in hours. In Neon, a compute endpoint can have .25 to 8 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an active state. A defined period of inactivity places the compute endpoint and its CUs into an idle state.
 
 Factors that affect the amount of compute time include:
 
 - The number of active compute endpoints
 - The number of CUs per compute endpoint
-- Neon's _auto-suspend compute_ feature, which suspends a compute endpoint (and its CUs) after a specified period of inactivity (5 minutes by default). You can increase or decrease the suspension threshold.
-- Neon's _autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload.
-- Neon's _always-on_ compute feature, which keeps one endpoint active indefinitely to avoid connection latency due compute endpoint startup time.
+- Neon's _auto-suspend compute_ feature, which suspends a compute endpoint (and its CUs) after a specified period of inactivity (5 minutes).
+- Neon's _autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload. _This feature is not yet available._
+- Neon's _always-on_ compute feature, which keeps one endpoint active indefinitely to avoid connection latency due compute endpoint startup time. _This feature is not yet available._
 
 The cost calculation for compute time is:
 
@@ -127,11 +123,11 @@ compute units * active time (hours) * cost per hour
 
 ### Project storage
 
-The _Project storage_ metric counts the amount of data stored in your Neon projects. Project storage is the sum of two values:
+The _Project storage_ metric counts the amount of data stored in all of your Neon projects. Project storage is the sum of two values:
 
-1. The logical size of of all databases in your Neon projects at a point in time (a snapshot), which includes PostgreSQL SLRU (simple least-recently-used) caches, and a small amount of metadata.
+1. The logical size of of all databases in your Neon projects, which includes PostgreSQL SLRU (simple least-recently-used) caches, and a small amount of metadata. You can think of this as a _snapshot_ of your data at a point in time.
 2. The size of retained Write-Ahead Log (WAL), which is a record of data changes. Two factors determine the size of retained WAL:
-   - Your _point-in-time-recovery window_, which you can think of as retained history. Neon retains a data history in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores 7 days of data history. Data that falls out of this window can no longer be accessed and is evicted from storage.
+   - Your _point-in-time-recovery window_, which you can think of as a _retained data history_. Neon retains a data history in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores seven days of data history. Data that falls out of this window is evicted from storage and no longer counted as project storage.
 
        ```text
        main   ---------########>
@@ -145,7 +141,7 @@ The _Project storage_ metric counts the amount of data stored in your Neon proje
                 records
 
        ------- data history that has fallen out of the 
-                point-in-time-recovery window, and can no
+                point-in-time-restore window, and can no
                 longer be accessed
        ```
 
@@ -175,7 +171,7 @@ The _Project storage_ metric counts the amount of data stored in your Neon proje
                            snapshot  
        ```
 
-      b) or when the branch snapshot falls out of the parent branch's point-in-time-restore window, in which case the branch snapshot data is no longer shared in common with the parent branch.
+      and b) when the branch snapshot falls out of the parent branch's point-in-time-restore window, in which case the branch snapshot data is no longer shared in common with the parent branch.
 
        ```text
        main   --------------------#######>
@@ -187,37 +183,12 @@ The _Project storage_ metric counts the amount of data stored in your Neon proje
                            snapshot
        ```  
 
-      In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window. It should also be noted that database branches can share data history. For example, two branches created from the same parent at or around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon keeps storage to a minimum through shared data history. Also, if it will reduce overall storage, Neon will advance the branch snapshot to reduce the amount data changes stored as WAL.
+      In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window.
+
+      Database branches can also share data history. For example, two branches created from the same parent at or around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon keeps minimizes the storage cost of branches through shared data history. Also, if it helps minimize storage, Neon will advance the a branch snapshot to reduce the amount data changes stored as WAL.
 
 The cost calculation for storage is:
 
 ```text
 storage (GiB) * (seconds stored / 60) * cost per hour
 ```
-
-## Billing terms and definitions
-
-- Always-on compute: A Neon feature that allows you to keep a compute endpoint active indefinitely, which avoids latencies associated with restarting an idle compute endpoint.
-- Auto-suspend compute: A feature that suspends a compute endpoint (and its Compute Units) after a specified period of inactivity (5 minutes by default). If there is no activity on the compute endpoint for the defined period, it is placed into an idle state.
-- Auto-scaling: A feature that allows you to specify a minimum and maximum number of Compute Units (CU) for a compute endpoint. Neon scales compute resources up and down within these boundaries as workload fluctuates.
-- Community support: Community support is self-service support through the [Neon Community Forum](https://community.neon.tech/).
-- Compute time: The amount time that compute endpoints in your Neon projects are active. Various factors affect compute time. See [Compute time](#compute-time).
-- Compute endpoint: The compute instance associated with a branch.
-- Database branching: A Neon feature that allows you to create a copy-on-write branch of your project data.
-- Database fleets: A collection of database instances, typically managed as a single entity.
-- Data transfer: The movement of data out of Neon (egress). See [Data transfer](#data-transfer).
-- Dedicated resources: Resources including compute and storage dedicated to a single Neon account.
-- Enterprise plan: A volume-based paid plan offered by Neon. See [Neon plans](#neon-plans).
-- Free Tier: A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Technical Preview Free Tier](/docs/introduction/technical-preview-free-tier).
-- Paid plan: A paid Neon service tier. See [Neon plans](#neon-plans).
-- Point-in-time restore window: A retained database history stored as Write-Ahead-Log (WAL) records, which allows you to restore data to past point in time.
-- Pro plan: A usage-based paid plan offered by Neon. See [Neon plans](#neon-plans).
-- Project sharing: A feature that allows you to share Neon projects with other Neon user accounts.
-- Project storage: The amount of data stored in your Neon projects. See [Project storage](#project-storage).
-- Resale: Selling the Neon service as part of another service offering.
-- Scale-to-zero: Scale-to-zero refers to Neon's _Auto-suspend compute_ feature, which places a compute endpoint into an idle state when it is not being used.
-- Support: Technical support provided with Neon paid plans.
-- Volume Discounts: Large quantity discounts in compute and storage negotiated with Neon as part of an Enterprise or Platform Partnership service plan.
-- Wholesale Discounts: Large quantity discounts in compute and storage negotiated with Neon as part of a Platform Partnership service plan.
-- Write-Ahead Log (WAL): A transaction log that records data changes to ensure durability.
-- Written data: Data that Neon writes to the Write-Ahead Log (WAL).
