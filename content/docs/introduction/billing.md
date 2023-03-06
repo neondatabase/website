@@ -129,10 +129,63 @@ compute units * active time (hours) * cost per hour
 
 The _Storage_ metric counts the amount of data stored in your Neon projects. Stored data is the sum of two values:
 
-1. The logical size of of all databases in your Neon projects, which includes PostgreSQL SLRU (simple least-recently-used) caches, and a small amount of metadata.
+1. The logical size of of all databases in your Neon projects at a point in time (a snapshot), which includes PostgreSQL SLRU (simple least-recently-used) caches, and a small amount of metadata.
 2. The size of retained Write-Ahead Log (WAL), which is a record of data changes. Two factors determine the size of retained WAL:
-   - Your _point-in-time-recovery window_, which you can think of as a data history. Neon retains a data history in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores 7 days of data history.
-   - _Database branches_. A database branch is a snapshot of your data at the point of branch creation plus WAL that records data changes on the branch. When a branch is first created, it adds no storage. No data changes have been introduced yet and the branch's snapshot data still exists in the parent branch's point-in-time restore window, which means that it shares this data in common with the parent branch. A branch only begins adding to storage when data changes are introduced and when the branch snapshot falls out of the parent branch's point-in-time-restore window. In other words, branches add storage when you modify data and when you allow the branch to grow older than the parent branch's point-in-time-restore window.
+   - Your _point-in-time-recovery window_, which you can think of as retained history. Neon retains a data history in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores 7 days of data history. Data that falls out of this window can no longer be accessed an is evicted from storage.
+
+       ```text
+        main   ---------########>
+                        ^        
+                     snapshot
+
+        Legend:
+
+        ####### point-in-time-recovery window (retained history in the form of WAL records)
+
+        ------- data history that has fallen out of the 
+                point-in-time-recovery window, and can no
+                longer be accessed
+       ```
+
+   - _Database branches_. A database branch is a snapshot of your data (including the parent branch's retained history) at the point of branch creation, plus WAL that records data changes from that point forward.
+
+      When a branch is first created, it adds no storage. No data changes have been introduced yet and the branch's snapshot data still exists in the parent branch's point-in-time restore window, which means that it shares this data in common with the parent branch.
+
+        ```text
+        main   ---------########>
+                        ^      |
+                     snapshot  |
+                               |
+        branch A               >
+                               ^
+                            snapshot  
+       ```
+
+      A branch only begins adding to storage when a) data changes are introduced:
+
+       ```text
+        main   -------------#######>
+                            ^  |
+                     snapshot  |
+                               |
+        branch A               ####>
+                               ^
+                            snapshot  
+       ```
+
+      b) or when when the branch snapshot falls out of the parent branch's point-in-time-restore window, in which case the branch snapshot data is no longer shared in common with the parent branch.
+
+       ```text
+        main   -------------------#######>
+                               |  ^
+                               |  snapshot
+                               |
+        branch A               ##########>
+                               ^
+                            snapshot
+       ```  
+
+      In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window. It should also be noted that a database branch can share a data history with other branches. For example, two branches created from the same parent at or around around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon optimizes branch storage through shared data history.
 
 The cost calculation for storage is:
 
