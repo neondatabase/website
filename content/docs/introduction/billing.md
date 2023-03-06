@@ -153,7 +153,7 @@ The _Storage_ metric counts the amount of data stored in your Neon projects. Sto
 
       When a branch is first created, it adds no storage. No data changes have been introduced yet and the branch's snapshot data still exists in the parent branch's point-in-time restore window, which means that it shares this data in common with the parent branch.
 
-        ```text
+       ```text
         main   ---------########>
                         ^      |
                      snapshot  |
