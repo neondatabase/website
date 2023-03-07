@@ -6,7 +6,7 @@ isDraft: true
 
 ## Overview
 
-Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, which ensures that you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are volume based and offer potential volume-based discounts. You can find out more about our [plans](#neon-plans) below.
+Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, ensuring you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are volume based and offer potential volume-based discounts. You can find out more about our [plans](#neon-plans) below.
 
 ## Neon billing metrics
 
@@ -21,7 +21,7 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 
 ## Neon plans
 
-|                          | Free Tier                         | Pro (usage based)| Enterprise (volume based) |Platform Partnership (volume based)|
+|                          | Free Tier                         | Pro (usage-based)| Enterprise (volume-based) |Platform Partnership (volume-based)|
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|:----------------------|
 |**Best for**              | Prototyping or personal use       | Business use, for setups with 1-3 active databases     | Database fleets           | database fleets or resale |
 |**Projects**              | 1                                 | Unlimited        | Unlimited                 | Unlimited               |
@@ -66,7 +66,7 @@ You can download invoices from the **Billing** page.
 
 1. Navigate to the **Billing** page in the Neon Console. The current invoice is displayed.
 1. Download the invoice:
-    1. To download the current invoice, click **Download PDF** from the top of of the page.
+    1. To download the current invoice, click **Download PDF** from the top of the page.
     1. To download an invoice for a previous billing period, select the invoice from the **Latest invoices** list to open it, then click **Download PDF**.
 
 ## Cancel a subscription
@@ -75,13 +75,13 @@ To cancel your subscription to a Neon paid plan:
 
 1. Navigate to the **Billing** page in the Neon Console.
 1. Click **Cancel subscription**.
-1. In the **Cancel Subscription** dialog, enter your cancellation request, and click **Submit**.
+1. Enter your cancellation request and and click **Submit**.
 
-This action initiates the cancellation. If your data exceeds  free-tier storage limits, you will be contacted by the Neon Support team with a request to reduce your storage before the paid plan is cancelled and free-tier limits are applied.
+This action initiates the cancellation. If your data exceeds  free-tier storage limits, you will be contacted by the Neon Support team with a request to reduce your storage before the paid plan is canceled and free-tier limits are applied.
 
 ## Billing metrics explained
 
-This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account based. If you require a project-based cost breakdown, refer to your [billing invoice](#neon-invoices).
+This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account-based. If you require a project-based cost breakdown, refer to your [billing invoice](#neon-invoices).
 
 ### Compute time
 
@@ -95,7 +95,7 @@ Factors that affect the amount of compute time include:
 - Neon's _autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload. _This feature is not yet available._
 - Neon's _always-on_ compute feature, which keeps one endpoint active indefinitely to avoid connection latency due compute endpoint startup time. _This feature is not yet available._
 
-The cost calculation for _Compute time_ is:
+The cost calculation for _Compute time_ is as follows:
 
 ```text
 compute units * active time (hours) * cost per hour
@@ -170,9 +170,9 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
 
       In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window.
 
-      Database branches can also share data history. For example, two branches created from the same parent at or around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon minimizes the storage cost of branches through shared data history. If it helps keeps storage size to a minimum, Neon will take a new a branch snapshot to reduce the amount data changes stored as WAL.
+      Database branches can also share data history. For example, two branches created from the same parent at or around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon minimizes the storage cost of branches through shared data history. If it helps keeps storage size to a minimum, Neon will also take a new a branch snapshot to reduce the amount data changes stored as WAL.
 
-The cost calculation for _Project storage_ is:
+The cost calculation for _Project storage_ is as follows:
 
 ```text
 project storage (GiB) * (seconds stored / 60) * cost per hour
@@ -182,7 +182,7 @@ project storage (GiB) * (seconds stored / 60) * cost per hour
 
 The _Written data_ metric counts the amount of data changes written to the Write-Ahead Log (WAL) to ensure durability of your data. Neon writes data changes to the WAL concurrently on multiple nodes to avoid compromising write speed.
 
-The cost calculation for _Written data_ is:
+The cost calculation for _Written data_ is as follows:
 
 ```text
 written data (GiB) * price per GiB
@@ -192,7 +192,7 @@ written data (GiB) * price per GiB
 
 The _Data transfer_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the cost set by the cloud provider (e.g., at the cost set by AWS). Neon does not apply a markup to the data transfer cost.
 
-The cost calculation for _Data transfer_ is:
+The cost calculation for _Data transfer_ is as follows:
 
 ```text
 data transfer (GiB) * price per GiB
