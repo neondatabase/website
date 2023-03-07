@@ -98,7 +98,7 @@ Factors that affect the amount of compute time include:
 The cost calculation for _Compute time_ is as follows:
 
 ```text
-compute units * active time (hours) * cost per hour
+compute units * active time (hours) * price per hour
 ```
 
 ### Project storage
@@ -175,7 +175,7 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
 The cost calculation for _Project storage_ is as follows:
 
 ```text
-project storage (GiB) * (seconds stored / 60) * cost per hour
+project storage (GiB) * (seconds stored / 60) * price per hour
 ```
 
 ### Written data
@@ -190,7 +190,7 @@ written data (GiB) * price per GiB
 
 ### Data transfer
 
-The _Data transfer_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the cost set by the cloud provider (e.g., at the cost set by AWS). Neon does not apply a markup to the data transfer cost.
+The _Data transfer_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the egress cost set by the cloud provider (e.g., at the cost set by AWS). Contact [sales@neon.tech](mailto:sales@neon.tech) for custom solutions to minimize data transfer costs.
 
 The cost calculation for _Data transfer_ is as follows:
 
