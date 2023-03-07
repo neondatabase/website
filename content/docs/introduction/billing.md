@@ -136,7 +136,7 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
 
        Legend:
 
-       ####### point-in-time-recovery window, which is 
+       ####### point-in-time-restore window, which is 
                 retained data history in the form of WAL 
                 records
 
