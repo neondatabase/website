@@ -37,7 +37,7 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 |**Support**               | Community Support                 | Support          | Support                   |Support, Platform Support|
 
 <Admonition type="info">
-The limits described above are plan defaults. If you would like to adjust the limits to tailor a plan to your specific requirements, please contact [support@neon.tech](mailto:support@neon.tech).
+The limits described above are plan defaults. If you would like to adjust the limits to tailor a plan to your specific requirements, please contact [sales@neon.tech](mailto:sales@neon.tech).
 </Admonition>
 
 Our [Pricing](https://neon.tech/pricing) page provides additional information and a calculator you can use to estimate costs and determine which plan is right for you.
