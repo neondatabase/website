@@ -137,7 +137,7 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
       ```text
       main   ---------########>
                       ^       |
-                    snapshot  |
+                   snapshot   |
                               |
       branch A               #>
                               ^
@@ -148,8 +148,8 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
 
       ```text
       main   -------------#######>
-                           ^  |
-                  snapshot    |
+                          ^   |
+                   snapshot   |
                               |
       branch A               ####>
                              ^
@@ -163,9 +163,9 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
                               |  ^
                               |  snapshot
                               |
-      branch A               ##########>
-                             ^
-                          snapshot
+      branch A                ##########>
+                              ^
+                           snapshot
       ```  
 
       In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window.
