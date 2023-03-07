@@ -136,12 +136,12 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
 
       ```text
       main   ---------########>
-                      ^       |
-                   snapshot   |
-                              |
+                      ^      |
+                   snapshot  |
+                             |
       branch A               #>
-                              ^
-                           snapshot  
+                             ^
+                          snapshot  
       ```
 
       A branch only begins adding to storage when a) data changes are introduced:
@@ -151,9 +151,9 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
                           ^   |
                    snapshot   |
                               |
-      branch A               ####>
-                             ^
-                          snapshot  
+      branch A                ####>
+                              ^
+                           snapshot  
       ```
 
       and b) when the branch snapshot falls out of the parent branch's point-in-time-restore window, in which case the branch snapshot data is no longer shared in common with the parent branch.
