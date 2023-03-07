@@ -6,7 +6,7 @@ isDraft: true
 
 ## Overview
 
-Neon offers offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, which ensures that you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are volume based and offer potential volume-based discounts. You can find out more about our [plans](#neon-plans) below.
+Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, which ensures that you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are volume based and offer potential volume-based discounts. You can find out more about our [plans](#neon-plans) below.
 
 ## Neon billing metrics
 
@@ -17,7 +17,7 @@ Neon's paid plans charge for usage based on the following metrics:
 - **Compute time**: The amount of active compute time.
 - **Project storage**: The amount of data stored in your Neon projects.
 
-See [Billing metrics explained](#billing-metrics-explained) for detailed information about each metric and how Neon calculates usage cost.
+See [Billing metrics explained](#billing-metrics-explained) for a detailed description of each metric and how Neon calculates costs.
 
 ## Neon plans
 
@@ -25,10 +25,10 @@ See [Billing metrics explained](#billing-metrics-explained) for detailed informa
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|:----------------------|
 |**Best for**              | Prototyping or personal use       | Business use, for setups with 1-3 active databases     | Database fleets           | database fleets or resale |
 |**Projects**              | 1                                 | Unlimited        | Unlimited                 | Unlimited               |
-|**Compute active time per month** | 100                             | Unlimited        | Unlimited                 | Unlimited               |
+|**Compute active time per month** | 100 hours                             | Unlimited        | Unlimited                 | Unlimited               |
 |**CPU**                   | 1 shared CPU                      | Up to X CPUs     | Up to X CPUs              | Up to X CPUs            |
 |**RAM**                   | 1 GB                              | Up to X GB       | Up to X GB                | Up to X GB              |
-|**Storage**               | 3 GB                              | Up to X GB       | Up to X GB                | Up to X GB              |
+|**Storage**               | 3 GB per branch                   | Up to X GB       | Up to X GB                | Up to X GB              |
 |**Dedicated resources**   | &#120;                            | &#120;           | &check;                   | &check;                 |
 |**Auto-suspend compute**  | &check;                           | &check;          | &check;                   | &check;                 |
 |**Always-on compute**     | &#120;                            | &check;          | &check;                   | &check;                 |
@@ -37,7 +37,7 @@ See [Billing metrics explained](#billing-metrics-explained) for detailed informa
 |**Support**               | Community Support                 | Support          | Support                   |Support, Platform Support|
 
 <Admonition type="info">
-The limits described above are plan defaults. If you would like to adjust limits to tailor a plan to your specific requirements, please contact [support@neon.tech](mailto:support@neon.tech).
+The limits described above are plan defaults. If you would like to adjust the limits to tailor a plan to your specific requirements, please contact [support@neon.tech](mailto:support@neon.tech).
 </Admonition>
 
 Our [Pricing](https://neon.tech/pricing) page provides additional information and a calculator you can use to estimate costs and determine which plan is right for you.
@@ -58,7 +58,7 @@ To access your billing page:
 
 ## Neon invoices
 
-A Neon invoice includes the total cost for the billing period and a the cost for each of Neon's [billing metrics](#neon-billing-metrics).
+A Neon invoice includes the total cost for the billing period and the cost broken down by [billing metric](#neon-billing-metrics).
 
 ### Download invoices
 
@@ -81,7 +81,7 @@ This action initiates the cancellation. If your data exceeds  free-tier storage 
 
 ## Billing metrics explained
 
-This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account based. Refer to your billing invoice for a cost-per-project breakdown.
+This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account based. If you require a project-based cost breakdown, refer to your [billing invoice](#neon-invoices).
 
 ### Data transfer
 
@@ -125,9 +125,9 @@ compute units * active time (hours) * cost per hour
 
 The _Project storage_ metric counts the amount of data stored in all of your Neon projects. Project storage is the sum of two values:
 
-1. The logical size of of all databases in your Neon projects, which includes PostgreSQL SLRU (simple least-recently-used) caches, and a small amount of metadata. You can think of this as a _snapshot_ of your data at a point in time.
-2. The size of retained Write-Ahead Log (WAL), which is a record of data changes. Two factors determine the size of retained WAL:
-   - Your _point-in-time-recovery window_, which you can think of as a _retained data history_. Neon retains a data history in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores seven days of data history. Data that falls out of this window is evicted from storage and no longer counted as project storage.
+1. The logical size of all databases in your Neon projects, which includes PostgreSQL SLRU (simple least-recently-used) caches, and a small amount of metadata. You can think of this as a _snapshot_ of your data at a point in time.
+2. The size of retained Write-Ahead Log (WAL), which is a record of data changes. Neon retains WAL to support _point-in-time restore_ and _database branching_. Two factors determine the size of retained WAL:
+   - The _point-in-time-recovery window_, which is _retained data history_ in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores seven days of data history. Data (WAL) that falls out of this window is evicted from storage and no longer counted toward project storage. The following diagram shows the primary branch of a Neon project (`main`) depicted as a timeline and a snapshot of your data that sits at the beginning of the point-in-time-restore window.
 
        ```text
        main   ---------########>
@@ -140,12 +140,12 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
                 retained data history in the form of WAL 
                 records
 
-       ------- data history that has fallen out of the 
+       ------- data history (WAL) that has fallen out of the 
                 point-in-time-restore window, and can no
                 longer be accessed
        ```
 
-   - _Database branches_. A database branch is a snapshot of your data (including the parent branch's retained history) at the point of branch creation, plus WAL records that capture data changes from that point forward.
+   - _Database branches_. A database branch is a snapshot of your data (including the parent branch's retained history) at the point of branch creation combined with WAL records that capture data changes from that point forward.
 
       When a branch is first created, it adds no storage. No data changes have been introduced yet and the branch's snapshot data still exists in the parent branch's point-in-time restore window, which means that it shares this data in common with the parent branch.
 
@@ -185,7 +185,7 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
 
       In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window.
 
-      Database branches can also share data history. For example, two branches created from the same parent at or around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon keeps minimizes the storage cost of branches through shared data history. Also, if it helps minimize storage, Neon will advance the a branch snapshot to reduce the amount data changes stored as WAL.
+      Database branches can also share data history. For example, two branches created from the same parent at or around the same time will share data history, which avoids additional storage. The same holds true for a branch created from another branch. Wherever possible, Neon minimizes the storage cost of branches through shared data history. If it helps keeps storage size to a minimum, Neon will take a new a branch snapshot to reduce the amount data changes stored as WAL.
 
 The cost calculation for _Project storage_ is:
 
