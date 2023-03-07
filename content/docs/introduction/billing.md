@@ -23,9 +23,9 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 
 |                          | Free Tier                         | Pro (usage-based)| Enterprise (volume-based) |Platform Partnership (volume-based)|
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|:----------------------|
-|**Best for**              | Prototyping or personal use       | Business use, for setups with 1-3 active databases     | Database fleets           | database fleets or resale |
+|**Best for**              | Prototyping or personal use       | Business use, for setups with 1-3 active databases  | Database fleets  | database fleets or resale |
 |**Projects**              | 1                                 | Unlimited        | Unlimited                 | Unlimited               |
-|**Compute active time per month** | 100 hours                             | Unlimited        | Unlimited                 | Unlimited               |
+|**Compute active time per month** | 100 hours                 | Unlimited        | Unlimited                 | Unlimited               |
 |**CPU**                   | 1 shared CPU                      | Up to X CPUs     | Up to X CPUs              | Up to X CPUs            |
 |**RAM**                   | 1 GB                              | Up to X GB       | Up to X GB                | Up to X GB              |
 |**Storage**               | 3 GB per branch                   | Up to X GB       | Up to X GB                | Up to X GB              |
