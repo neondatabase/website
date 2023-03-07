@@ -12,10 +12,10 @@ Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **P
 
 Neon's paid plans charge for usage based on the following metrics:
 
-- **Data transfer**: The amount of data transferred out of Neon.
-- **Written data**: The amount of data written for data changes.
 - **Compute time**: The amount of active compute time.
 - **Project storage**: The amount of data stored in your Neon projects.
+- **Written data**: The amount of data written for data changes.
+- **Data transfer**: The amount of data transferred out of Neon.
 
 See [Billing metrics explained](#billing-metrics-explained) for a detailed description of each metric and how Neon calculates costs.
 
@@ -83,29 +83,9 @@ This action initiates the cancellation. If your data exceeds  free-tier storage 
 
 This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account based. If you require a project-based cost breakdown, refer to your [billing invoice](#neon-invoices).
 
-### Data transfer
-
-The _Data transfer_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the cost set by the cloud provider (e.g., at the cost set by AWS). Neon does not apply a markup to the data transfer cost.
-
-The cost calculation for _Data transfer_ is:
-
-```text
-data transfer (GiB) * price per GiB
-```
-
-### Written data
-
-The _Written data_ metric counts the amount of data changes written to the Write-Ahead Log (WAL) to ensure durability of your data. Neon writes data changes to the WAL concurrently on multiple nodes to avoid compromising write speed.
-
-The cost calculation for _Written data_ is:
-
-```text
-written data (GiB) * price per GiB
-```
-
 ### Compute time
 
-The _Compute time_ metric counts _Compute Unit (CU)_ active time, in hours. In Neon, a compute endpoint can have .25 to 8 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an active state. A defined period of inactivity places the compute endpoint and its CUs into an idle state.
+The _Compute time_ metric counts _Compute Unit (CU)_ active time, in hours. In Neon, a compute endpoint can have up to 8 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an active state. A defined period of inactivity places the compute endpoint and its CUs into an idle state.
 
 Factors that affect the amount of compute time include:
 
@@ -123,65 +103,70 @@ compute units * active time (hours) * cost per hour
 
 ### Project storage
 
-The _Project storage_ metric counts the amount of data stored in all of your Neon projects. Project storage is the sum of two values:
+The _Project storage_ metric counts the amount of data stored in all of your Neon projects. Project storage includes:
 
-1. The logical size of all databases in your Neon projects, which includes PostgreSQL SLRU (simple least-recently-used) caches, and a small amount of metadata. You can think of this as a _snapshot_ of your data at a point in time.
-2. The size of retained Write-Ahead Log (WAL), which is a record of data changes. Neon retains WAL to support _point-in-time restore_ and _database branching_. Two factors determine the size of retained WAL:
-   - The _point-in-time-recovery window_, which is _retained data history_ in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores seven days of data history. Data (WAL) that falls out of this window is evicted from storage and no longer counted toward project storage. The following diagram shows the primary branch of a Neon project (`main`) depicted as a timeline and a snapshot of your data that sits at the beginning of the point-in-time-restore window.
+- **The logical data size of your data**
 
-       ```text
-       main   ---------########>
-                       ^        
-                    snapshot
+  This includes the size of all databases in your Neon projects, PostgreSQL SLRU (simple least-recently-used) caches, and a small amount of metadata. You can think of this as a _snapshot_ of your data at a point in time and similar to the data size that you would see in a standalone PostgreSQL installation.
 
-       Legend:
+- **Retained Write-Ahead Log (WAL)**
 
-       ####### point-in-time-restore window, which is 
-                retained data history in the form of WAL 
-                records
+  The WAL is a record of data changes. Neon retains WAL to support _point-in-time restore_ and _database branches_.
+  - The _point-in-time-recovery window_ is _retained data history_ in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores seven days of data history. Data (WAL) that falls out of this window is evicted from storage and no longer counted toward project storage. The following diagram shows the primary branch of a Neon project (`main`) depicted as a timeline and a snapshot of your data that sits at the beginning of the point-in-time-restore window.
 
-       ------- data history (WAL) that has fallen out of the 
-                point-in-time-restore window, and can no
-                longer be accessed
-       ```
+      ```text
+      main   ---------########>
+                      ^        
+                  snapshot
 
-   - _Database branches_. A database branch is a snapshot of your data (including the parent branch's retained history) at the point of branch creation combined with WAL records that capture data changes from that point forward.
+      Legend:
+
+      ####### point-in-time-restore window, which is 
+              retained data history in the form of WAL 
+              records
+
+      ------- data history (WAL) that has fallen out of the 
+              point-in-time-restore window, and can no
+              longer be accessed
+      ```
+
+  - A _database branch_ is a snapshot of your data (including the parent branch's retained history) at the point of branch creation combined with WAL records that capture data changes from that point forward.
 
       When a branch is first created, it adds no storage. No data changes have been introduced yet and the branch's snapshot data still exists in the parent branch's point-in-time restore window, which means that it shares this data in common with the parent branch.
 
-       ```text
-       main   ---------########>
-                       ^       |
-                     snapshot  |
-                               |
-       branch A               #>
+      ```text
+      main   ---------########>
+                      ^       |
+                    snapshot  |
+                              |
+      branch A               #>
                               ^
                            snapshot  
-       ```
+      ```
 
       A branch only begins adding to storage when a) data changes are introduced:
 
-       ```text
-       main   -------------#######>
+      ```text
+      main   -------------#######>
                            ^  |
-                    snapshot  |
+                  snapshot    |
                               |
-       branch A               ####>
-                              ^
-                           snapshot  
-       ```
+      branch A               ####>
+                             ^
+                          snapshot  
+      ```
 
       and b) when the branch snapshot falls out of the parent branch's point-in-time-restore window, in which case the branch snapshot data is no longer shared in common with the parent branch.
 
-       ```text
-       main   --------------------#######>
-                              |   ^
-                              |   snapshot
+      ```text
+      main   --------------------#######>
+                              |  ^
+                              |  snapshot
                               |
-       branch A               ##########>
-                              ^
-                           snapshot
-       ```  
+      branch A               ##########>
+                             ^
+                          snapshot
+      ```  
 
       In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window.
 
@@ -191,4 +176,24 @@ The cost calculation for _Project storage_ is:
 
 ```text
 project storage (GiB) * (seconds stored / 60) * cost per hour
+```
+
+### Written data
+
+The _Written data_ metric counts the amount of data changes written to the Write-Ahead Log (WAL) to ensure durability of your data. Neon writes data changes to the WAL concurrently on multiple nodes to avoid compromising write speed.
+
+The cost calculation for _Written data_ is:
+
+```text
+written data (GiB) * price per GiB
+```
+
+### Data transfer
+
+The _Data transfer_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the cost set by the cloud provider (e.g., at the cost set by AWS). Neon does not apply a markup to the data transfer cost.
+
+The cost calculation for _Data transfer_ is:
+
+```text
+data transfer (GiB) * price per GiB
 ```
