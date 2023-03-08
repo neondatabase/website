@@ -8,11 +8,11 @@ The Neon serverless driver (currently in Beta) allows you to query data from [Cl
 
 The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular `npm pg` package that you may already be familiar with, and it offers the same API.
 
-You learn more about the driver from the `README` on [GitHub](https://github.com/neondatabase/serverless).
+You can learn more about the driver from the [README on GitHub](https://github.com/neondatabase/serverless/blob/main/README.md).
 
 ## Install the Neon serverless driver
 
-As a drop-in replacement for the [node-postgres](https://node-postgres.com/) package, you simply install the Neon serverless driver where you would otherwise install `pg` and `@types/pg`.
+As a drop-in replacement for [node-postgres](https://node-postgres.com/), you simply install the Neon serverless driver where you would otherwise install `pg` and `@types/pg`.
 
 ```bash
 npm install @neondatabase/serverless
