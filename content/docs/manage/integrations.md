@@ -7,7 +7,7 @@ isDraft: false
 Neon supports integrations with partners such as Vercel. You can view and revoke integrations for a Neon project from the **Integrations** page in the Neon Console.
 
 <Admonition type="note">
-The **Integrations** appears empty if you have not configured any integrations.
+The **Integrations** page appears empty if you have not configured any integrations.
 </Admonition>
 
 ## View integrations
@@ -39,5 +39,5 @@ Neon currently supports the following integrations:
 - [Neon integration with Hasura](/docs/guides/hasura)
 
 <Admonition type="note">
-The **Integrations** page only shows Vercel integrations. Support for viewing other viewing other integrations will be added in a future release.
+Currently, the **Integrations** page only displays Vercel integrations.
 </Admonition>
