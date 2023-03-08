@@ -33,7 +33,11 @@ To revoke an integration:
 
 ## Supported integrations
 
-Neon current supports the following integrations:
+Neon currently supports the following integrations:
 
-- Neon Vercel Integration
-- Neon Hasura Integration
+- [Neon integration with Vercel](/docs/guides/vercel)
+- [Neon integration with Hasura](/docs/guides/hasura)
+
+<Admonition type="note">
+The **Integrations** page only shows Vercel integrations. Support for viewing other viewing other integrations will be added in a future release.
+</Admonition>
