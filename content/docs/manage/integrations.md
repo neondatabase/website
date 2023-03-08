@@ -7,7 +7,7 @@ isDraft: false
 Neon supports integrations with partners such as Vercel. You can view and revoke integrations for a Neon project from the **Integrations** page in the Neon Console.
 
 <Admonition type="note">
-The **Integrations** appears empty if you do not have any configured integrations.
+The **Integrations** appears empty if you have not configured any integrations.
 </Admonition>
 
 ## View integrations
