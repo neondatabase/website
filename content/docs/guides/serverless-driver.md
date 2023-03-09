@@ -6,7 +6,7 @@ isDraft: true
 
 The Neon serverless driver (currently in Beta) allows you to query data from [Cloudflare Workers](https://workers.cloudflare.com/), [Vercel Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions), and other environments that support WebSockets — places where TCP sockets are not available.
 
-The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular `npm pg` package that you may already be familiar with, and it offers the same API.
+The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package that you may already be familiar with, and it offers the same API.
 
 You can learn more about the driver from the [README on GitHub](https://github.com/neondatabase/serverless/blob/main/README.md).
 
@@ -119,13 +119,13 @@ To get started:
 1. Create a Next.js project.
 
     ```bash
-    npx create-next-app@latest --typescript
+    npx create-next-app@latest neon-ef-demo --typescript
     ```
 
 1. Enter the new directory.
 
     ```bash
-    cd my-app
+    cd neon-ef-demo
     ```
 
 1. Install the Neon serverless driver package.
