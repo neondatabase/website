@@ -211,21 +211,15 @@ data transfer (GB) * price per GB
 | AWS            | US East (Ohio)  | Written data  | $0.09600 | GB |
 | AWS            | US East (Ohio)| Data transfer  | $0.09000 | GB |
 |                |             |                |       |      |
-| *              | *           | *              | *     | *    |
-|                |             |                |       |      |
 | AWS            | US West (Oregon)| Data storage | $0.00014 | GB/Hour |
 | AWS            | US West (Oregon)     | Compute time  | $0.10200 | Compute/Hour |
 | AWS            | US West (Oregon)     | Written data  | $0.09600 | GB |
 | AWS            | US West (Oregon)  | Data transfer  | $0.09000 | GB |
 |                |             |                |       |      |
-| *              | *           | *              | *     | *    |
-|                |             |                |       |      |
 | AWS            | Europe (Frankfurt)| Data storage  | $0.00016 | GB/Hour |
 | AWS            | Europe (Frankfurt)| Compute time| $0.11800 | Compute/Hour |
 | AWS            | Europe (Frankfurt)     | Written data    | $0.096000 | GB |
 | AWS            | Europe (Frankfurt)     | Data transfer    | $0.09000 | GB |
-|                |             |                |       |      |
-| *              | *           | *              | *     | *    |
 |                |             |                |       |      |
 | AWS            | Asia Pacific (Singapore)  | Data storage    | $0.00016 | GB/Hour |
 | AWS            | Asia Pacific (Singapore)| Compute time    | $0.12100 | Compute/Hour |
