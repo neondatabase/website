@@ -81,19 +81,23 @@ This action initiates the cancellation. If your data exceeds  free-tier storage 
 
 ## Billing metrics explained
 
-This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account-based. If you require a project-based cost breakdown, refer to your [billing invoice](#neon-invoices).
+This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account-based. If you require a project-based cost breakdown, refer to your [billing invoice](#neon-invoices). For unit pricing, see [Pricing](#pricing).
+
+<Admonition type="note">
+Billing metrics measure data are calculated in gibibytes, otherwise known as binary gigabytes. One gibibyte equals 230 or 1,073,741,824 bytes.
+</Admonition>
 
 ### Compute time
 
-The _Compute time_ metric counts _Compute Unit (CU)_ active time, in hours. In Neon, a compute endpoint can have up to 8 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an active state. A defined period of inactivity places the compute endpoint and its CUs into an idle state.
+The _Compute time_ metric counts _Compute Unit (CU)_ active time. A CU has 1 vCPU and 4 GB of RAM. In Neon, a [compute endpoint](/docs/reference/glossary/#compute-endpoint) can have anywhere from .25 CUs to 8 CUs. The number of CUs determines the processing capacity of your Neon database. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an active state. A defined period of inactivity places the compute endpoint and its CUs into an idle state.
 
 Factors that affect the amount of compute time include:
 
 - The number of active compute endpoints
 - The number of CUs per compute endpoint
-- Neon's _auto-suspend compute_ feature, which suspends a compute endpoint (and its CUs) after a specified period of inactivity (5 minutes).
-- Neon's _autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload. _This feature is not yet available._
-- Neon's _always-on_ compute feature, which keeps one endpoint active indefinitely to avoid connection latency due compute endpoint startup time. _This feature is not yet available._
+- Neon's _auto-suspend compute_ feature, which suspends a compute endpoint (and its CUs) after a specified period of inactivity. The current default is five minutes. The ability to configure the period of inactivity is _coming soon_.
+- Neon's _autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload (_coming soon_).
+- Neon's _always-on_ compute feature, which keeps one endpoint active indefinitely to avoid connection latency due compute endpoint startup time (_coming soon_).
 
 The cost calculation for _Compute time_ is as follows:
 
@@ -141,7 +145,7 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
                              |
       branch A               #>
                              ^
-                          snapshot  
+                          snapshot
       ```
 
       A branch only begins adding to storage when a) data changes are introduced:
@@ -175,7 +179,7 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
 The cost calculation for _Project storage_ is as follows:
 
 ```text
-project storage (GiB) * (seconds stored / 60) * price per hour
+project storage (GB) * (seconds stored / 60) * price per hour
 ```
 
 ### Written data
@@ -185,15 +189,45 @@ The _Written data_ metric counts the amount of data changes written to the Write
 The cost calculation for _Written data_ is as follows:
 
 ```text
-written data (GiB) * price per GiB
+written data (GB) * price per GB
 ```
 
 ### Data transfer
 
-The _Data transfer_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the egress cost set by the cloud provider (e.g., at the cost set by AWS). Contact [sales@neon.tech](mailto:sales@neon.tech) for custom solutions to minimize data transfer costs.
+The _Data transfer_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GB of data transfer at the egress cost set by the cloud provider (e.g., at the cost set by AWS). Contact [sales@neon.tech](mailto:sales@neon.tech) for custom solutions to minimize data transfer costs.
 
 The cost calculation for _Data transfer_ is as follows:
 
 ```text
-data transfer (GiB) * price per GiB
+data transfer (GB) * price per GB
 ```
+
+## Pricing
+
+| Cloud provider | Region      | Billing metric | Price | Unit |
+|:---------------|:-----------|:--------------|:------|:-----|
+| AWS            | US East (Ohio)     | Data storage  | $0.00016 | GB/Hour |
+| AWS            | US East (Ohio)     | Compute time  | $0.10200 | Compute/Hour |
+| AWS            | US East (Ohio)  | Written data  | $0.09600 | GB |
+| AWS            | US East (Ohio)| Data transfer  | $0.09000 | GB |
+|                |             |                |       |      |
+| *              | *           | *              | *     | *    |
+|                |             |                |       |      |
+| AWS            | US West (Oregon)| Data storage | $0.00014 | GB/Hour |
+| AWS            | US West (Oregon)     | Compute time  | $0.10200 | Compute/Hour |
+| AWS            | US West (Oregon)     | Written data  | $0.09600 | GB |
+| AWS            | US West (Oregon)  | Data transfer  | $0.09000 | GB |
+|                |             |                |       |      |
+| *              | *           | *              | *     | *    |
+|                |             |                |       |      |
+| AWS            | Europe (Frankfurt)| Data storage  | $0.00016 | GB/Hour |
+| AWS            | Europe (Frankfurt)| Compute time| $0.11800 | Compute/Hour |
+| AWS            | Europe (Frankfurt)     | Written data    | $0.096000 | GB |
+| AWS            | Europe (Frankfurt)     | Data transfer    | $0.09000 | GB |
+|                |             |                |       |      |
+| *              | *           | *              | *     | *    |
+|                |             |                |       |      |
+| AWS            | Asia Pacific (Singapore)  | Data storage    | $0.00016 | GB/Hour |
+| AWS            | Asia Pacific (Singapore)| Compute time    | $0.12100 | Compute/Hour |
+| AWS            | Asia Pacific (Singapore)| Written data  | $0.09600 | GB |
+| AWS            | Asia Pacific (Singapore)| Data transfer  | $0.09000 | GBh |
