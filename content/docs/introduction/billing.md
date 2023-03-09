@@ -84,7 +84,7 @@ This action initiates the cancellation. If your data exceeds  free-tier storage 
 This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account-based. If you require a project-based cost breakdown, refer to your [billing invoice](#neon-invoices). For unit pricing, see [Pricing](#pricing).
 
 <Admonition type="note">
-Billing metrics measure data are calculated in gibibytes, otherwise known as binary gigabytes. One gibibyte equals 230 or 1,073,741,824 bytes.
+Billing metrics measure data are calculated in gibibytes, otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 </Admonition>
 
 ### Compute time
