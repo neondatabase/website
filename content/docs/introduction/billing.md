@@ -118,21 +118,21 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
   The WAL is a record of data changes. Neon retains WAL to support _point-in-time restore_ and _database branches_.
   - The _point-in-time-recovery window_ is _retained data history_ in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores seven days of data history. Data (WAL) that falls out of this window is evicted from storage and no longer counted toward project storage. The following diagram shows the primary branch of a Neon project (`main`) depicted as a timeline and a snapshot of your data that sits at the beginning of the point-in-time-restore window.
 
-    ![scheme 1](/docs/introduction/scheme-1.png)
+    ![scheme 1](/docs/introduction/scheme-1.jpg)
 
   - A _database branch_ is a snapshot of your data (including the parent branch's retained history) at the point of branch creation combined with WAL records that capture data changes from that point forward.
 
       When a branch is first created, it adds no storage. No data changes have been introduced yet and the branch's snapshot data still exists in the parent branch's point-in-time restore window, which means that it shares this data in common with the parent branch.
 
-      ![scheme 2](/docs/introduction/scheme-2.png)
+      ![scheme 2](/docs/introduction/scheme-2.jpg)
 
       A branch only begins adding to storage when a) data changes are introduced:
 
-      ![scheme 3](/docs/introduction/scheme-3.png)
+      ![scheme 3](/docs/introduction/scheme-3.jpg
 
       and b) when the branch snapshot falls out of the parent branch's point-in-time-restore window, in which case the branch snapshot data is no longer shared in common with the parent branch.
 
-      ![scheme 4](/docs/introduction/scheme-4.png)
+      ![scheme 4](/docs/introduction/scheme-4.jpg)
 
       In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window.
 
@@ -187,3 +187,16 @@ data transfer (GB) * price per GB
 | AWS            | Asia Pacific (Singapore)| Compute time    | $0.12100 | Compute/Hour |
 | AWS            | Asia Pacific (Singapore)| Written data  | $0.09600 | GB |
 | AWS            | Asia Pacific (Singapore)| Data transfer  | $0.09000 | GBh |
+
+## Support
+
+| Support type | Description | Plans |
+| :----------- | :---------- | :---- |
+| Type 1       | Description of Type 1 | Plan A, Plan B, Plan C |
+| Type 2       | Description of Type 2 | Plan D, Plan E, Plan F |
+| Type 3       | Description of Type 3 | Plan G, Plan H, Plan I |
+| Type 4       | Description of Type 4 | Plan J, Plan K, Plan L |
+
+Standard support is provided to all Pro, Enterprise, and Platform Partnership customers at no additional cost. Please contact sales@neon.tech for customer support requirements.
+
+To submit a support ticket, access the form **here**.
