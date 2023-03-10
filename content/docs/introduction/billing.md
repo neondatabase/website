@@ -118,59 +118,21 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
   The WAL is a record of data changes. Neon retains WAL to support _point-in-time restore_ and _database branches_.
   - The _point-in-time-recovery window_ is _retained data history_ in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores seven days of data history. Data (WAL) that falls out of this window is evicted from storage and no longer counted toward project storage. The following diagram shows the primary branch of a Neon project (`main`) depicted as a timeline and a snapshot of your data that sits at the beginning of the point-in-time-restore window.
 
-      ```text
-      main   ---------########>
-                      ^        
-                  snapshot
-
-      Legend:
-
-      ####### point-in-time-restore window, which is 
-              retained data history in the form of WAL 
-              records
-
-      ------- data history (WAL) that has fallen out of the 
-              point-in-time-restore window, and can no
-              longer be accessed
-      ```
+    ![scheme 1](/docs/introduction/scheme-1.png)
 
   - A _database branch_ is a snapshot of your data (including the parent branch's retained history) at the point of branch creation combined with WAL records that capture data changes from that point forward.
 
       When a branch is first created, it adds no storage. No data changes have been introduced yet and the branch's snapshot data still exists in the parent branch's point-in-time restore window, which means that it shares this data in common with the parent branch.
 
-      ```text
-      main   ---------########>
-                      ^      |
-                   snapshot  |
-                             |
-      branch A               #>
-                             ^
-                          snapshot
-      ```
+      ![scheme 2](/docs/introduction/scheme-2.png)
 
       A branch only begins adding to storage when a) data changes are introduced:
 
-      ```text
-      main   -------------#######>
-                          ^   |
-                   snapshot   |
-                              |
-      branch A                ####>
-                              ^
-                           snapshot  
-      ```
+      ![scheme 3](/docs/introduction/scheme-3.png)
 
       and b) when the branch snapshot falls out of the parent branch's point-in-time-restore window, in which case the branch snapshot data is no longer shared in common with the parent branch.
 
-      ```text
-      main   --------------------#######>
-                              |  ^
-                              |  snapshot
-                              |
-      branch A                ##########>
-                              ^
-                           snapshot
-      ```  
+      ![scheme 4](/docs/introduction/scheme-4.png)
 
       In other words, branches add storage when you modify data and when you allow the branch to age out of the parent branch's point-in-time-restore window.
 
