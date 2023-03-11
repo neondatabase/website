@@ -12,9 +12,9 @@ Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **P
 
 Neon's paid plans charge for usage based on the following metrics:
 
-- **Compute time**: The amount of active compute time.
+- **Compute time**: The amount time that Neon compute resources are active.
 - **Project storage**: The amount of data stored in your Neon projects.
-- **Written data**: The amount of data written for data changes.
+- **Written data**: The amount of data written to Neon storage to ensure durability and protect against data loss.
 - **Data transfer**: The amount of data transferred out of Neon.
 
 See [Billing metrics explained](#billing-metrics-explained) for a detailed description of each metric and how Neon calculates costs.
@@ -84,7 +84,7 @@ This action initiates the cancellation. If your data exceeds  free-tier storage 
 This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account-based. If you require a project-based cost breakdown, refer to your [billing invoice](#neon-invoices). For unit pricing, see [Unit prices](#unit-prices).
 
 <Admonition type="note">
-Billing metrics measure data are calculated in gibibytes, otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
+The **Project storage**, **Written data**, and **Data transfer** billing metrics are caclulated in gibibytes, otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 </Admonition>
 
 ### Compute time
