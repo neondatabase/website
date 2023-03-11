@@ -186,7 +186,7 @@ data transfer (GB) * price per GB
 | AWS            | Asia Pacific (Singapore)  | Data storage    | $0.00016 | GB/Hour |
 | AWS            | Asia Pacific (Singapore)| Compute time    | $0.12100 | Compute/Hour |
 | AWS            | Asia Pacific (Singapore)| Written data  | $0.09600 | GB |
-| AWS            | Asia Pacific (Singapore)| Data transfer  | $0.09000 | GBh |
+| AWS            | Asia Pacific (Singapore)| Data transfer  | $0.09000 | GB |
 
 ## Support
 
