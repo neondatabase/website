@@ -14,7 +14,7 @@ Neon's paid plans charge for usage based on the following metrics:
 
 - **Compute time**: The amount time that Neon compute resources are active.
 - **Project storage**: The amount of data stored in your Neon projects.
-- **Written data**: The amount of data written to Neon storage to ensure durability and protect against data loss.
+- **Written data**: The amount of data written from compute to Neon storage to ensure durability.
 - **Data transfer**: The amount of data transferred out of Neon.
 
 See [Billing metrics explained](#billing-metrics-explained) for a detailed description of each metric and how Neon calculates costs.
@@ -190,15 +190,12 @@ data transfer (GB) * price per GB
 
 ## Support
 
-Neon offers the following support for Free Tier and paid plans:
+The support channels for Neon Free Tier and paid plans are outlined below. If you have any questions about the Neon support channels, please contact [sales@neon.tech](mailto:sales@neon.tech).
 
-- Free Tier
-  - Access to the [Neon Community Forum](https://community.neon.tech/)
-  - Access to Neon support engineers by [email](mailto:support@neon.tech)
-- Pro and Enterprise plans
-  - Everything available with Free Tier
-  - Access to Neon support engineers by video link
-- Platform Partnership plan
-  - Everything available with Pro and Enterprise plans
-  - Resale customer access to Neon support engineers by [email](mailto:support@neon.tech) and video link
+| Support channels        | Free Tier           | Pro           | Enterprise     | Platform Partnership |
+| :------------------ | :-----------------: | :-----------: | :-----------: | :------------------: |
+| [Neon Community Forum](https://community.neon.tech/)   | ✔                  | ✔            | ✔            | ✔                   |
+| [Email support](mailto:support@neon.tech)       | ✔                  | ✔            | ✔            | ✔                   |
+| Video support       |                    | ✔            | ✔            | ✔                   |
+| Resale customer support        |                    |             |             | ✔                   |
   
