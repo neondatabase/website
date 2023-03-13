@@ -34,7 +34,7 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 |**Always-on compute**     | &#120;                            | &check;          | &check;                   | &check;                 |
 |**Project sharing**       | &#120;                            | &check;          | &check;                   | &check;                 |
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contract, Volume Discounts |Prepaid, Custom Contract, Wholesale Discounts|
-|**Support**               | Community Support                 | Support          | Support                   |Support, Platform Support|
+|**Support**               | Community, email                 | Community, email, video          | Community, email, video                   |Community, email, video, resale customer support|
 
 <Admonition type="info">
 The limits described above are plan defaults. If you would like to adjust the limits to tailor a plan to your specific requirements, please contact [sales@neon.tech](mailto:sales@neon.tech).
@@ -81,7 +81,7 @@ This action initiates the cancellation. If your data exceeds  free-tier storage 
 
 ## Billing metrics explained
 
-This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account-based. If you require a project-based cost breakdown, refer to your [billing invoice](#neon-invoices). For unit pricing, see [Unit prices](#unit-prices).
+This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account-based. If you require a project-based cost breakdown, refer to your [billing invoice](#neon-invoices). For unit pricing, see [Billing rates](#billing-rates).
 
 <Admonition type="note">
 The **Project storage**, **Written data**, and **Data transfer** billing metrics are caclulated in gibibytes, otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
@@ -109,9 +109,9 @@ compute units * active time (hours) * price per hour
 
 The _Project storage_ metric counts the amount of data stored in all of your Neon projects. Project storage includes:
 
-- **The logical data size of your data**
+- **Logical data size**
 
-  This includes the size of all databases in your Neon projects, PostgreSQL SLRU (simple least-recently-used) caches, and a small amount of metadata. You can think of this as a _snapshot_ of your data at a point in time and similar to the data size that you would see in a standalone PostgreSQL installation.
+  The size of all databases in your Neon projects. You can think of this as a _snapshot_ of your data at a point in time.
 
 - **Retained Write-Ahead Log (WAL)**
 
@@ -164,7 +164,7 @@ The cost calculation for _Data transfer_ is as follows:
 data transfer (GB) * price per GB
 ```
 
-## Unit prices
+## Billing rates
 
 | Cloud provider | Region      | Billing metric | Price | Unit |
 |:---------------|:-----------|:--------------|:------|:-----|
@@ -190,13 +190,15 @@ data transfer (GB) * price per GB
 
 ## Support
 
-| Support type | Description | Plans |
-| :----------- | :---------- | :---- |
-| Type 1       | Description of Type 1 | Plan A, Plan B, Plan C |
-| Type 2       | Description of Type 2 | Plan D, Plan E, Plan F |
-| Type 3       | Description of Type 3 | Plan G, Plan H, Plan I |
-| Type 4       | Description of Type 4 | Plan J, Plan K, Plan L |
+Neon offers the following support for Free Tier and paid plans:
 
-Standard support is provided to all Pro, Enterprise, and Platform Partnership customers at no additional cost. Please contact sales@neon.tech for customer support requirements.
-
-To submit a support ticket, access the form **here**.
+- Free Tier
+  - Access to the [Neon Community Forum](https://community.neon.tech/)
+  - Access to Neon support engineers by [email](mailto:support@neon.tech)
+- Pro and Enterprise plans
+  - Everything available with Free Tier
+  - Access to Neon support engineers by video link
+- Platform Partnership plan
+  - Everything available with Pro and Enterprise plans
+  - Resale customer access to Neon support engineers by [email](mailto:support@neon.tech) and video link
+  
