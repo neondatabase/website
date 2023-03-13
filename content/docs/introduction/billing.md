@@ -26,9 +26,9 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 |**Best for**              | Prototyping or personal use       | Business use, for setups with 1-3 active databases  | Database fleets  | database fleets or resale |
 |**Projects**              | 1                                 | Unlimited        | Unlimited                 | Unlimited               |
 |**Compute active time per month** | 100 hours                 | Unlimited        | Unlimited                 | Unlimited               |
-|**CPU**                   | 1 shared CPU                      | Up to X CPUs     | Up to X CPUs              | Up to X CPUs            |
-|**RAM**                   | 1 GB                              | Up to X GB       | Up to X GB                | Up to X GB              |
-|**Storage**               | 3 GB per branch                   | Up to X GB       | Up to X GB                | Up to X GB              |
+|**CPU**                   | .25 CPU                           | Up to 7 CPUs     | Up to 7 CPUs              | Up to 7 CPUs            |
+|**RAM**                   | 1 GB                              | Up to 32 GB      | Up to 32 GB               | Up to 32 GB             |
+|**Storage**               | 3 GB per branch                   | Unlimited        | Unlimited                 | Unlimited               |
 |**Dedicated resources**   | &#120;                            | &#120;           | &check;                   | &check;                 |
 |**Auto-suspend compute**  | &check;                           | &check;          | &check;                   | &check;                 |
 |**Always-on compute**     | &#120;                            | &check;          | &check;                   | &check;                 |
@@ -141,7 +141,7 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
 The cost calculation for _Project storage_ is as follows:
 
 ```text
-project storage (GB) * (seconds stored / 60) * price per hour
+project storage (GB) * (seconds stored / 3600) * price per hour
 ```
 
 ### Written data
