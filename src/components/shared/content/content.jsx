@@ -10,6 +10,8 @@ import React, { Fragment, forwardRef } from 'react';
 import Admonition from 'components/pages/doc/admonition';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import DefinitionList from 'components/pages/doc/definition-list';
+import LinksWithLogos from 'components/pages/doc/links-with-logos';
+import Navigation from 'components/pages/doc/navigation';
 import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
@@ -51,6 +53,8 @@ const components = {
   DefinitionList,
   Admonition,
   CodeTabs,
+  Navigation,
+  LinksWithLogos,
 };
 
 // eslint-disable-next-line no-return-assign
