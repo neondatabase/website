@@ -6,15 +6,15 @@ isDraft: true
 
 ## Overview
 
-Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, ensuring you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are volume based and offer potential volume-based discounts. You can find out more about our [plans](#neon-plans) below.
+Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, ensuring you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are volume-based and offer potential discounts. You can find out more about our [plans](#neon-plans) below.
 
 ## Neon billing metrics
 
-Neon's paid plans charge for usage based on the following metrics:
+Neon's charges for usage based on the following metrics:
 
 - **Compute time**: The amount time that Neon compute resources are active.
 - **Project storage**: The amount of data stored in your Neon projects.
-- **Written data**: The amount of data written from compute to Neon storage to ensure durability.
+- **Written data**: The amount of data written from compute to storage.
 - **Data transfer**: The amount of data transferred out of Neon.
 
 See [Billing metrics explained](#billing-metrics-explained) for a detailed description of each metric and how Neon calculates costs.
@@ -26,7 +26,7 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 |**Best for**              | Prototyping or personal use       | Business use, for setups with 1-3 active databases  | Database fleets  | database fleets or resale |
 |**Projects**              | 1                                 | Unlimited        | Unlimited                 | Unlimited               |
 |**Compute active time per month** | 100 hours                 | Unlimited        | Unlimited                 | Unlimited               |
-|**CPU**                   | .25 CPU                           | Up to 7 CPUs     | Up to 7 CPUs              | Up to 7 CPUs            |
+|**CPU**                   | 1 shared CPU                           | Up to 7 CPUs     | Up to 7 CPUs              | Up to 7 CPUs            |
 |**RAM**                   | 1 GB                              | Up to 32 GB      | Up to 32 GB               | Up to 32 GB             |
 |**Storage**               | 3 GB per branch                   | Unlimited        | Unlimited                 | Unlimited               |
 |**Dedicated resources**   | &#120;                            | &#120;           | &check;                   | &check;                 |
