@@ -4,13 +4,21 @@ title: Introduction to Neon
 
 Neon is a fully managed serverless PostgreSQL. Neon separates storage and compute and offers modern developer features such as serverless, branching, bottomless storage, and more.
 
+## New to Neon?
+
+The [Neon quickstart guide](/docs/get-started-with-neon/signing-up) will get you up and running with Neon in just a few minutes. You will learn how to:
+
+- Sign up
+- Create a project
+- Connect
+- Import data
+- Branch your data
+
 ## Neon Documentation
 
 **Get started**
 
 [Sign up](https://neon.tech/docs/get-started-with-neon/signing-up), create a project, and query data with the SQL Editor.
-
-## Guides
 
 <IntroNavigation>
 
@@ -55,3 +63,11 @@ Neon is a fully managed serverless PostgreSQL. Neon separates storage and comput
 [![Symfony](/images/technology-logos/symfony-logo.svg "Connect from Symfony with Doctrine to Neon")](/docs/guides/symfony)
 
 </TechnologyNavigation>
+
+## Continue learning
+
+If you have technical questions, chat live with developers in the official [Neon Discourse Community](https://community.neon.tech/).
+
+<div className="dark:hidden sm:hidden">![Community poster](/images/community-poster.png)</div>
+
+<div class="hidden dark:block sm:hidden">![Community poster](/images/community-poster-dark.png)</div>

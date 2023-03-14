@@ -60,7 +60,7 @@ const TechnologyNavigation = ({ children = null }) => {
         })}
       </ul>
       <button
-        className="mx-auto flex items-center rounded-full bg-gray-9 px-5 py-2 text-sm font-medium text-black dark:bg-gray-1 dark:text-white"
+        className="mx-auto flex items-center rounded-full bg-gray-9 px-5 py-2 text-sm font-medium text-black transition-colors duration-200 hover:bg-gray-8 dark:bg-gray-1 dark:text-white dark:hover:bg-gray-2"
         type="button"
         onClick={handleClick}
       >
