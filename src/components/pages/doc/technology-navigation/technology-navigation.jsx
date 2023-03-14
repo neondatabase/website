@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 
-const LinksWithLogos = ({ children = null }) => {
+const TechnologyNavigation = ({ children = null }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -17,7 +17,7 @@ const LinksWithLogos = ({ children = null }) => {
 
   return (
     <>
-      <ul className="not-prose !my-10 flex flex-wrap gap-5 !p-0">
+      <ul className="not-prose !mt-9 !mb-2 grid grid-cols-12 gap-5 !p-0">
         {React.Children.map(children, (child, index) => {
           const {
             children: {
@@ -30,18 +30,18 @@ const LinksWithLogos = ({ children = null }) => {
           return (
             <li
               className={clsx(
-                'flex-1 basis-[23%] before:hidden',
+                'col-span-3 before:hidden md:col-span-6',
                 isHiddenItem ? 'hidden' : 'block'
               )}
             >
               <NextLink
                 key={index}
                 href={href}
-                className="block rounded-[10px] border !border-gray-7 p-6 !transition-colors !duration-200 hover:bg-gray-9 dark:hover:bg-gray-1"
+                className="block h-full rounded-[10px] border !border-gray-7 p-6 !transition-colors !duration-200 hover:bg-gray-9 dark:hover:bg-gray-1"
               >
-                <div className="h-10">
+                <div className="h-12">
                   <img
-                    className="w-auto shrink-0 brightness-0 dark:brightness-100"
+                    className="w-auto shrink-0 dark:invert"
                     src={src}
                     width={80}
                     alt={alt + ' logo'}
@@ -60,14 +60,15 @@ const LinksWithLogos = ({ children = null }) => {
         })}
       </ul>
       <button
-        className="mx-auto flex items-center rounded-full bg-gray-9 p-2 font-medium text-black dark:bg-gray-1 dark:text-white"
+        className="mx-auto flex items-center rounded-full bg-gray-9 px-5 py-2 text-sm font-medium text-black dark:bg-gray-1 dark:text-white"
+        type="button"
         onClick={handleClick}
       >
         <span>{isOpen ? 'Hide' : 'Show more'}</span>
         <ChevronRight
           className={clsx(
             'ml-2 block shrink-0 text-black transition-[transform,color] duration-200 dark:text-white',
-            isOpen ? 'rotate-270' : 'rotate-90'
+            isOpen ? '-rotate-90' : 'rotate-90'
           )}
         />
       </button>
@@ -75,8 +76,8 @@ const LinksWithLogos = ({ children = null }) => {
   );
 };
 
-LinksWithLogos.propTypes = {
+TechnologyNavigation.propTypes = {
   children: PropTypes.node,
 };
 
-export default LinksWithLogos;
+export default TechnologyNavigation;
