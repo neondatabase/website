@@ -71,7 +71,7 @@ To cancel your subscription to a Neon paid plan:
 1. Click **Cancel subscription**.
 1. Enter your cancellation request and click **Submit**.
 
-This action initiates the cancellation. If your data exceeds [Free Tier](/docs/introduction/technical-preview-free-tier) storage limits, you will be contacted by the Neon Support team with a request to reduce your storage before the paid plan is canceled and Free Tier limits are applied.
+This action initiates the cancellation. If your data exceeds [Free Tier](/docs/introduction/technical-preview-free-tier) storage limits, you will need to reduce your storage before the paid plan is canceled and Free Tier limits are applied. Your request will be processed by the Neon Support team.
 
 ## Billing metrics explained
 
