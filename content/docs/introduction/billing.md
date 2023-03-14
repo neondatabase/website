@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, ensuring you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are volume-based and offer potential discounts. You can find out more about our [plans](#neon-plans) below.
+Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, ensuring you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are custom volume-based plans that offer potential discounts. You can find out more about our [plans](#neon-plans) below.
 
 ## Neon billing metrics
 
@@ -33,7 +33,7 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 |**Always-on compute (coming soon)**     | -                            | &check;          | &check;                   |
 |**Autoscaling (coming soon)**     | -                            | &check;          | &check;                   |
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contract, Volume Discounts |
-|**Support**               | Community, email                 | Community, email, video          | Community, email, video, resale customer support                   |
+|**Support**               | Community, support tickets                 | Community, support tickets, video chat          | Community, support tickets, video chat, resale customer support                   |
 
 <Admonition type="info">
 The limits described above are plan defaults. If you would like to adjust the limits to tailor a plan to your specific requirements, please contact [sales@neon.tech](mailto:sales@neon.tech).
@@ -45,10 +45,9 @@ Our [Pricing](https://neon.tech/pricing) page provides additional information an
 
 Each Neon account has a billing page, where you can:
 
-- View your current billing totals
-- Start a paid subscription
+- View your current billing total for the month-to-date, including a cost breakdown by [billing metric](#neon-billing-metrics).
 - Update your payment details
-- Download current and previous invoices
+- Download your latest invoices
 
 To access your billing page:
 
@@ -57,16 +56,14 @@ To access your billing page:
 
 ## Neon invoices
 
-A Neon invoice includes the total cost for the billing period and the cost broken down by [billing metric](#neon-billing-metrics).
+A Neon invoice includes an **Amount due** for billing period and the cost broken down by [billing metric](#neon-billing-metrics).
 
 ### Download invoices
 
 You can download invoices from the **Billing** page.
 
-1. Navigate to the **Billing** page in the Neon Console. The current invoice is displayed.
-1. Download the invoice:
-    1. To download the current invoice, click **Download PDF** from the top of the page.
-    1. To download an invoice for a previous billing period, select the invoice from the **Latest invoices** list to open it, then click **Download PDF**.
+1. Navigate to the **Billing** page in the Neon Console. 
+1. Under **Latest invoices**, locate the invoice you want to download and click the PDF download icon.
 
 ## Cancel a subscription
 
@@ -76,11 +73,11 @@ To cancel your subscription to a Neon paid plan:
 1. Click **Cancel subscription**.
 1. Enter your cancellation request and click **Submit**.
 
-This action initiates the cancellation. If your data exceeds  free-tier storage limits, you will be contacted by the Neon Support team with a request to reduce your storage before the paid plan is canceled and free-tier limits are applied.
+This action initiates the cancellation. If your data exceeds [Free Tier](/docs/introduction/technical-preview-free-tier) storage limits, you will be contacted by the Neon Support team with a request to reduce your storage before the paid plan is canceled and Free Tier limits are applied.
 
 ## Billing metrics explained
 
-This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account-based. If you require a project-based cost breakdown, refer to your [billing invoice](#neon-invoices). For unit pricing, see [Billing rates](#billing-rates).
+This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account-based. For the billing rate for each metric, see [Billing rates](#billing-rates).
 
 <Admonition type="note">
 The **Project storage**, **Written data**, and **Data transfer** billing metrics are calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
@@ -94,9 +91,11 @@ Factors that affect the amount of compute time include:
 
 - The number of active compute endpoints
 - The number of CUs per compute endpoint
-- Neon's _auto-suspend compute_ feature, which suspends a compute endpoint (and its CUs) after a specified period of inactivity. The current default is five minutes. The ability to configure the period of inactivity is _coming soon_.
+- Neon's _Auto-suspend compute_ feature, which suspends a compute endpoint (and its CUs) after a period of inactivity. The current default is five minutes.
+- Neon's _Configurable auto-suspend compute_ feature, which allows you to configure the timeout period for the  _Auto-suspend compute_ feature (_coming soon_).
+- Neon's _Always-on_ compute feature, which keeps an endpoint active indefinitely to avoid the few seconds of connection latency when waking an idle compute (_coming soon_).
 - Neon's _autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload (_coming soon_).
-- Neon's _always-on_ compute feature, which keeps one endpoint active indefinitely to avoid connection latency due compute endpoint startup time (_coming soon_).
+
 
 The cost calculation for _Compute time_ is as follows:
 
@@ -115,7 +114,7 @@ The _Project storage_ metric counts the amount of data stored in all of your Neo
 - **Retained Write-Ahead Log (WAL)**
 
   The WAL is a record of data changes. Neon retains WAL to support _point-in-time restore_ and _database branches_.
-  - The _point-in-time-recovery window_ is _retained data history_ in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores seven days of data history. Data (WAL) that falls out of this window is evicted from storage and no longer counted toward project storage. The following diagram shows the primary branch of a Neon project (`main`) depicted as a timeline and a snapshot of your data that sits at the beginning of the point-in-time-restore window.
+  - A _point-in-time-restore window_ is _retained data history_ in the form of WAL records. The default point-in-time-restore window is seven days, which means that Neon stores seven days of data history. Data (WAL) that falls out of this window is evicted from storage and no longer counted toward project storage. The following diagram shows the primary branch of a Neon project (`main`) depicted as a timeline and a snapshot of your data that sits at the beginning of the point-in-time-restore window.
 
     ![scheme 1](/docs/introduction/scheme-1.jpg)
 
@@ -195,7 +194,7 @@ The available support channels for the Neon Free Tier and paid plans are outline
 | :----------------------------------------- | :------------------:| :-----------: | :------------: |
 | [Neon Community Forum](https://community.neon.tech/) | &check;   | &check;       | &check;        |
 | Ability to submit support tickets          | &check;             | &check;       | &check;        |
-| Video support                              | -                   | &check;       | &check;        |
+| Video chat                                 | -                   | &check;       | &check;        |
 | Resale customer support                    | -                   | -             | &check;        |
 
 <Admonition type="note">
