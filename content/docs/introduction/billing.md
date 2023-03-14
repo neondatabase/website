@@ -19,9 +19,9 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 
 ## Neon plans
 
-|                          | Free Tier                         | Pro              | Custom (Enterprise or Platform Partnership)|
+|                          | Free Tier                         | Pro (usage-based)             | Custom (volume-based) (Enterprise or Platform Partnership)|
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|
-|**Best for**              | Prototyping or personal use       | Business use, for setups with 1-3 active databases  | Database fleets, Resale |
+|**Best for**              | Prototyping and personal projects       | Usage-based, small-to-medium sized teams, setups with 1 to 3 active databases  | Volume-based usage, medium-to-large sized teams, Database fleets, Resale |
 |**Projects**              | 1                                 | 20               | Unlimited                 |
 |**Compute active time per month** | 100 hours                 | Unlimited        | Unlimited                 |
 |**Compute size**          | Up to 1 vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
