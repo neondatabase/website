@@ -24,7 +24,7 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 |**Best for**              | Prototyping and personal projects       | Small-to-medium sized teams, setups with 1 to 3 active databases  | Medium-to-large sized teams, Database fleets, Resale |
 |**Projects**              | 1                                 | 20               | Unlimited                 |
 |**Compute active time per month** | 100 hours                 | Unlimited        | Unlimited                 |
-|**Compute size**          | Up to 1 vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
+|**Compute size**          | 1 Shared vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
 |**Storage**               | 3 GB per branch                   | 200 GB        | Unlimited                 |
 |**Dedicated resources**   | -                            | -           | &check;                   |
 |**Project sharing**       | -                            | &check;          | &check;                   |
