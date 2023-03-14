@@ -58,7 +58,7 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
         <ul
           className={clsx(
             'relative pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-6 dark:before:bg-gray-2',
-            !isOpen && 'sr-only'
+            !isOpen && 'sr-only h-0'
           )}
         >
           {items.map((item, index) => (
