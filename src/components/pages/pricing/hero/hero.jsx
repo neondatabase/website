@@ -60,7 +60,7 @@ const items = [
 ];
 
 const Hero = (props) => (
-  <section className="hero safe-paddings bg-black pt-44 text-white">
+  <section className="hero safe-paddings pt-44">
     <Container className="flex flex-col items-center" size="mdDoc">
       <Heading className="inline-flex flex-col text-center" tag="h1" size="lg">
         <span className="leading-dense text-primary-1">Start Free.</span>{' '}
