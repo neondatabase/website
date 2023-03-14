@@ -21,21 +21,21 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 
 ## Neon plans
 
-|                          | Free Tier                         | Pro (usage-based)| Enterprise (volume-based) |Platform Partnership (volume-based)|
-|:-------------------------|:----------------------------------|:-----------------|:--------------------------|:----------------------|
-|**Best for**              | Prototyping or personal use       | Business use, for setups with 1-3 active databases  | Database fleets  | database fleets or resale |
-|**Projects**              | 1                                 | Unlimited        | Unlimited                 | Unlimited               |
-|**Compute active time per month** | 100 hours                 | Unlimited        | Unlimited                 | Unlimited               |
-|**vCPU**                  | 1 shared vCPU                     | Up to 7 vCPUs     | Up to 7 vCPUs           | Up to 7 vCPUs            |
-|**RAM**                   | 1 GB                              | Up to 28 GB      | Up to 28 GB               | Up to 28 GB             |
-|**Storage**               | 3 GB per branch                   | Unlimited        | Unlimited                 | Unlimited               |
-|**Dedicated resources**   | &#120;                            | &#120;           | &check;                   | &check;                 |
-|**Project sharing**       | &#120;                            | &check;          | &check;                   | &check;                 |
-|**Auto-suspend compute**  | &check;                           | &check;          | &check;                   | &check;                 |
-|**Always-on compute (coming soon)**     | &#120;                            | &check;          | &check;                   | &check;                 |
-|**Autoscaling (coming soon)**     | &#120;                            | &check;          | &check;                   | &check;                 |
-|**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contract, Volume Discounts |Prepaid, Custom Contract, Wholesale Discounts|
-|**Support**               | Community, email                 | Community, email, video          | Community, email, video                   |Community, email, video, resale customer support|
+|                          | Free Tier                         | Pro              | Custom (Enterprise or Platform Partnership)|
+|:-------------------------|:----------------------------------|:-----------------|:--------------------------|
+|**Best for**              | Prototyping or personal use       | Business use, for setups with 1-3 active databases  | Database fleets, Resale |
+|**Projects**              | 1                                 | 20               | Unlimited                 |
+|**Compute active time per month** | 100 hours                 | Unlimited        | Unlimited                 |
+|**Compute size**          | Up to 1 vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
+|**Storage**               | 3 GB per branch                   | 200 GB        | Unlimited                 |
+|**Dedicated resources**   | -                            | -           | &check;                   |
+|**Project sharing**       | -                            | &check;          | &check;                   |
+|**Auto-suspend compute**  | &check;                           | &check;          | &check;                   |
+|**Configurable auto-suspend compute**  | -                           | &check;          | &check;                   |
+|**Always-on compute (coming soon)**     | -                            | &check;          | &check;                   |
+|**Autoscaling (coming soon)**     | -                            | &check;          | &check;                   |
+|**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contract, Volume Discounts |
+|**Support**               | Community, email                 | Community, email, video          | Community, email, video, resale customer support                   |
 
 <Admonition type="info">
 The limits described above are plan defaults. If you would like to adjust the limits to tailor a plan to your specific requirements, please contact [sales@neon.tech](mailto:sales@neon.tech).
@@ -191,12 +191,17 @@ data transfer (GiB) * price per GiB
 
 ## Support
 
-The available support channels for the Neon Free Tier and paid plans are outlined below. If you have any questions about our support channels, please contact [sales@neon.tech](mailto:sales@neon.tech).
+The available support channels for the Neon Free Tier and paid plans are outlined below. 
 
-| Support channels        | Free Tier           | Pro           | Enterprise     | Platform Partnership |
-| :------------------ | :-----------------: | :-----------: | :-----------: | :------------------: |
-| [Neon Community Forum](https://community.neon.tech/)   | ✔                  | ✔            | ✔            | ✔                   |
-| [Email support](mailto:support@neon.tech)       | ✔                  | ✔            | ✔            | ✔                   |
-| Video support       |                    | ✔            | ✔            | ✔                   |
-| Resale customer support        |                    |             |             | ✔                   |
-  
+| Support channels                           | Free Tier           | Pro           | Custom         |
+| :----------------------------------------- | :------------------:| :-----------: | :------------: |
+| [Neon Community Forum](https://community.neon.tech/) | &check;   | &check;       | &check;        |
+| Ability to submit support tickets          | &check;             | &check;       | &check;        |
+| Video support                              | -                   | &check;       | &check;        |
+| Resale customer support                    | -                   | -             | &check;        |
+
+<Admonition type="note">
+Pro plan users that submit support tickets through Neon's console can expect an initial response time of 2 business days, from 6am to 6pm Pacific Standard Time (UTC -8), Monday through Friday, excluding public holidays in the United States.
+
+Free tier users are not guaranteed a specific response time. For custom solutions, please contact [sales@neon.tech](mailto:sales@neon.tech).  
+</Admonition>
