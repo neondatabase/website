@@ -105,7 +105,7 @@ compute units * active time (hours) * price per hour
 
 The _Project storage_ metric counts the amount of data stored in all of your Neon projects. Project storage includes:
 
-- **Logical data size**
+- **Current data size**
 
   The size of all databases in your Neon projects. You can think of this as a _snapshot_ of your data at a point in time.
 
