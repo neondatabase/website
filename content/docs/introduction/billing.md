@@ -128,7 +128,7 @@ project storage (GiB) * (seconds stored / 3600) * price per hour
 
 ### Written data
 
-The _Written data_ metric counts the amount of data changes written to the Write-Ahead Log (WAL) to ensure durability of your data. Neon writes data changes to the WAL concurrently on multiple nodes to avoid compromising write speed.
+The _Written data_ metric counts the amount of data changes written to the Write-Ahead Log (WAL) to ensure durability of your data.
 
 The cost calculation for _Written data_ is as follows:
 
@@ -138,7 +138,7 @@ written data (GiB) * price per GiB
 
 ### Data transfer
 
-The _Data transfer_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the egress cost set by the cloud provider (e.g., at the cost set by AWS). Contact [sales@neon.tech](mailto:sales@neon.tech) for custom solutions to minimize data transfer costs.
+The _Data transfer_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the egress cost set by the cloud provider. Contact [sales@neon.tech](mailto:sales@neon.tech) for custom solutions to minimize data transfer costs.
 
 The cost calculation for _Data transfer_ is as follows:
 
@@ -172,7 +172,7 @@ data transfer (GiB) * price per GiB
 
 ## Support
 
-The available support channels for the Neon Free Tier and paid plans are outlined below. 
+Support channels for the Neon Free Tier and paid plans are outlined below.
 
 | Support channels                           | Free Tier           | Pro           | Custom         |
 | :----------------------------------------- | :------------------:| :-----------: | :------------: |
