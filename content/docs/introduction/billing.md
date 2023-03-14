@@ -73,7 +73,7 @@ To cancel your subscription to a Neon paid plan:
 
 This action initiates the cancellation. If your data exceeds [Free Tier](/docs/introduction/technical-preview-free-tier) storage limits, you will need to reduce your storage before the paid plan is canceled and Free Tier limits are applied. Your request will be processed by the Neon Support team.
 
-## Billing metrics explained
+## Billing and usage metrics explained
 
 This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account-based. For the billing rate for each metric, see [Billing rates](#billing-rates).
 
