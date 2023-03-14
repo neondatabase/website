@@ -59,7 +59,7 @@ const items = [
   },
 ];
 
-const Hero = (props) => (
+const Hero = () => (
   <section className="hero safe-paddings pt-44">
     <Container className="flex flex-col items-center" size="mdDoc">
       <Heading className="inline-flex flex-col text-center" tag="h1" size="lg">
@@ -72,7 +72,7 @@ const Hero = (props) => (
       </p>
       <ul className="relative mx-auto mt-14 grid max-w-[1220px] grid-cols-3 justify-between gap-x-8 pt-8">
         <span
-          className="absolute -right-8 top-0 h-full w-[calc(100%-32%)] rounded-[42px] bg-gradient-to-t from-transparent to-[#00E599] px-px pt-px"
+          className="absolute -right-8 top-0 h-full w-[68.5%] rounded-[42px] bg-gradient-to-t from-transparent to-[#00E599] px-px pt-px"
           style={{
             WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
             WebkitMaskComposite: 'xor',

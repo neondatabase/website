@@ -4,7 +4,7 @@ import Container from 'components/shared/container';
 
 import Link from 'components/shared/link';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
-import PropTypes from 'prop-types';
+
 import { useState } from 'react';
 import prototypeImage from './images/prototype.svg';
 
@@ -23,14 +23,12 @@ const items = [
   },
 ];
 
-const Estimates = (props) => {
+const Estimates = () => {
   const [selected, setSelected] = useState(items[0].type);
 
   const handleSelect = (item) => {
     setSelected(item);
   };
-
-  console.log(selected);
 
   return (
     <section className="estimates safe-paddings mt-48">
@@ -101,7 +99,5 @@ const Estimates = (props) => {
     </section>
   );
 };
-
-Estimates.propTypes = {};
 
 export default Estimates;
