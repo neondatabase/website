@@ -40,6 +40,8 @@ The [Neon quickstart guide](/docs/get-started-with-neon/signing-up) will get you
 
 <TechnologyNavigation>
 
+[![Vercel](/images/technology-logos/vercel-logo.svg "Connect with the Neon Vercel")](/docs/guides/vercel)
+
 [![Django](/images/technology-logos/django-logo.svg "Connect a Django application to Neon")](/docs/guides/django)
 
 [![Go](/images/technology-logos/go-logo.svg "Connect a Go application to Neon")](/docs/guides/go)
