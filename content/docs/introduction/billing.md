@@ -126,7 +126,7 @@ project storage (GiB) * (seconds stored / 3600) * price per hour
 
 ### Written data
 
-The _Written data_ metric counts the amount of data changes written to the Write-Ahead Log (WAL) to ensure durability of your data.
+The _Written data_ metric measures the amount of data changes written from storage. Neon handles makes sure this data is processed in a reliable way to ensure durability of your data.
 
 The cost calculation for _Written data_ is as follows:
 
