@@ -29,7 +29,7 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 |**Dedicated resources**   | -                            | -           | &check;                   |
 |**Project sharing**       | -                            | &check;          | &check;                   |
 |**Auto-suspend compute**  | &check;                           | &check;          | &check;                   |
-|**Configurable auto-suspend compute**  | -                           | &check;          | &check;                   |
+|**Configurable auto-suspend compute (coming soon)**  | -                           | &check;          | &check;                   |
 |**Always-on compute (coming soon)**     | -                            | &check;          | &check;                   |
 |**Autoscaling (coming soon)**     | -                            | &check;          | &check;                   |
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contract, Volume Discounts |
