@@ -191,7 +191,7 @@ data transfer (GiB) * price per GiB
 
 ## Support
 
-The support channels for Neon Free Tier and paid plans are outlined below. If you have any questions about the Neon support channels, please contact [sales@neon.tech](mailto:sales@neon.tech).
+The available support channels for the Neon Free Tier and paid plans are outlined below. If you have any questions about our support channels, please contact [sales@neon.tech](mailto:sales@neon.tech).
 
 | Support channels        | Free Tier           | Pro           | Enterprise     | Platform Partnership |
 | :------------------ | :-----------------: | :-----------: | :-----------: | :------------------: |
