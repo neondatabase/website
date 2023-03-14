@@ -4,8 +4,6 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-## Overview
-
 Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, ensuring you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are volume-based and offer potential discounts. You can find out more about our [plans](#neon-plans) below.
 
 ## Neon billing metrics
