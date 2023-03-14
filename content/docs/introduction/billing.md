@@ -30,10 +30,10 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 |**RAM**                   | 1 GB                              | Up to 28 GB      | Up to 28 GB               | Up to 28 GB             |
 |**Storage**               | 3 GB per branch                   | Unlimited        | Unlimited                 | Unlimited               |
 |**Dedicated resources**   | &#120;                            | &#120;           | &check;                   | &check;                 |
+|**Project sharing**       | &#120;                            | &check;          | &check;                   | &check;                 |
 |**Auto-suspend compute**  | &check;                           | &check;          | &check;                   | &check;                 |
 |**Always-on compute (coming soon)**     | &#120;                            | &check;          | &check;                   | &check;                 |
 |**Autoscaling (coming soon)**     | &#120;                            | &check;          | &check;                   | &check;                 |
-|**Project sharing**       | &#120;                            | &check;          | &check;                   | &check;                 |
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contract, Volume Discounts |Prepaid, Custom Contract, Wholesale Discounts|
 |**Support**               | Community, email                 | Community, email, video          | Community, email, video                   |Community, email, video, resale customer support|
 
