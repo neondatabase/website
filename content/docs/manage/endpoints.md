@@ -16,7 +16,7 @@ Project
              |
              ---- child branch ---- compute endpoint <--- application/client
                             |
-                            |---- database (mydb)  
+                            |---- database (mydb)
 ```
 
 You can assign a compute endpoint to the branch you want to connect to or remove an compute endpoint from a branch by deleting it.
@@ -43,7 +43,7 @@ To create an endpoint:
 1. In the Neon Console, select **Branches**.
 1. Select a branch that does not have an endpoint
 1. Click **Add new compute endpoint**.
-1. On the **Create compute endpoint** dialog, choose whether to enable connection pooling and click **Create**. 
+1. On the **Create compute endpoint** dialog, choose whether to enable connection pooling and click **Create**.
 
 For more information connection pooling in Neon, see [Connection pooling](/docs/connect/connection-pooling).
 
@@ -92,7 +92,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 The following Neon API method creates a compute endpoint.
 
 ```text
-POST /endpoints 
+POST /endpoints
 ```
 
 The API method appears as follows when specified in a cURL command. The branch that you specify cannot have an existing compute endpoint. A compute endpoint must be associated with a branch, and a branch can have only one compute endpoint. Neon currently supports read-write compute endpoints only.
