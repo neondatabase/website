@@ -2,23 +2,17 @@
 title: Introduction to Neon
 ---
 
-Neon is a fully managed serverless PostgreSQL. Neon separates storage and compute and offers modern developer features such as serverless, branching, bottomless storage, and more.
+Neon is a fully managed serverless PostgreSQL. Neon separates storage and compute to offer modern developer features such as serverless, branching, bottomless storage, and more.
 
 ## New to Neon?
 
-The [Neon quickstart guide](/docs/get-started-with-neon/signing-up) will get you up and running with Neon in just a few minutes. You will learn how to:
+Refer to our _Get started_ documentation to get up and running with Neon in just a few minutes. You will learn how to:
 
-- Sign up
-- Create a project
-- Connect
-- Import data
-- Branch your data
+- [Sign up](/docs/get-started-with-neon/signing-up)
+- [Create your first project](/docs/get-started-with-neon/setting-up-a-project)
+- [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
 
 ## Neon Documentation
-
-**Get started**
-
-[Sign up](https://neon.tech/docs/get-started-with-neon/signing-up), create a project, and query data with the SQL Editor.
 
 <IntroNavigation>
 
@@ -42,6 +36,8 @@ The [Neon quickstart guide](/docs/get-started-with-neon/signing-up) will get you
 
 [![Vercel](/images/technology-logos/vercel-logo.svg "Connect with the Neon Vercel")](/docs/guides/vercel)
 
+[![Prisma](/images/technology-logos/prisma-logo.svg "Connect from Prisma to Neon")](/docs/guides/prisma)
+
 [![Django](/images/technology-logos/django-logo.svg "Connect a Django application to Neon")](/docs/guides/django)
 
 [![Go](/images/technology-logos/go-logo.svg "Connect a Go application to Neon")](/docs/guides/go)
@@ -56,8 +52,6 @@ The [Neon quickstart guide](/docs/get-started-with-neon/signing-up) will get you
 
 [![Node.js](/images/technology-logos/nodejs-logo.svg "Connect a Node.js application to Neon")](/docs/guides/node)
 
-[![Prisma](/images/technology-logos/prisma-logo.svg "Connect from Prisma to Neon")](/docs/guides/prisma)
-
 [![Rust](/images/technology-logos/rust-logo.svg "Connect a Rust application to Neon")](/docs/guides/rust)
 
 [![SQLAlchemy](/images/technology-logos/sqlalchemy-logo.svg "Connect an SQLAlchemy application to Neon")](/docs/guides/sqlalchemy)
@@ -68,7 +62,7 @@ The [Neon quickstart guide](/docs/get-started-with-neon/signing-up) will get you
 
 ## Continue learning
 
-If you have technical questions, chat live with developers in the official [Neon Discourse Community](https://community.neon.tech/).
+If you have technical questions, reach out to Neon developers and community members in the official [Neon Discourse Community](https://community.neon.tech/).
 
 <div className="dark:hidden sm:hidden">![Community poster](/images/community-poster.png)</div>
 
