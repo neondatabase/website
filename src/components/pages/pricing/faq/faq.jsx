@@ -1,6 +1,8 @@
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 
+import Item from './item';
+
 const items = [
   {
     question: 'Does Neon charge for storage in database branches?',
