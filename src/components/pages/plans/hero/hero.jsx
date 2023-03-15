@@ -82,7 +82,7 @@ const Hero = () => (
           }}
         />
         <ul className="relative z-10 grid grid-cols-3 gap-x-8 lg:grid-cols-2 lg:gap-y-3 md:grid-cols-1">
-          {items.map(({ type, plans, subtitle, price, description, features, button }, index) => (
+          {items.map(({ type, subtitle, price, description, features, button }, index) => (
             <li
               className={clsx(
                 'flex flex-col px-10 pt-8 pb-10 xl:p-5 lg:p-7',
