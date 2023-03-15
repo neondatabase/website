@@ -20,5 +20,5 @@ export default {
   dashboard: 'https://console.neon.tech/sign_in',
   branching: '/branching/',
   contactSales: '/contact-sales/',
-  pricing: '/pricing/',
+  plans: '/plans/',
 };

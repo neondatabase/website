@@ -1,9 +1,9 @@
-import Estimates from 'components/pages/pricing/estimates';
-import Faq from 'components/pages/pricing/faq';
-import Hero from 'components/pages/pricing/hero';
+import Estimates from 'components/pages/plans/estimates';
+import Faq from 'components/pages/plans/faq';
+import Hero from 'components/pages/plans/hero';
 import Layout from 'components/shared/layout';
 
-const PricingPage = () => (
+const PlansPage = () => (
   <Layout
     className="bg-black text-white"
     headerTheme="black"
@@ -16,4 +16,4 @@ const PricingPage = () => (
   </Layout>
 );
 
-export default PricingPage;
+export default PlansPage;

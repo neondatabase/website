@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import Link from 'components/shared/link/link';
 
 const items = [
   {
@@ -44,6 +45,7 @@ const items = [
   },
   {
     type: 'Custom',
+    plans: ['Enterprise', 'Platform Partnership'],
     price: 'Contact us',
     description:
       'Custom volume-based plans for medium to large teams, database fleets, and resale. Contact our Sales team to learn more.',
@@ -61,7 +63,7 @@ const items = [
 ];
 
 const Hero = () => (
-  <section className="hero safe-paddings pt-44 2xl:pt-[150px] xl:pt-32 lg:pt-[50px]">
+  <section className="hero safe-paddings overflow-hidden pt-44 2xl:pt-[150px] xl:pt-32 lg:pt-[50px]">
     <Container className="flex flex-col items-center" size="mdDoc">
       <Heading className="inline-flex flex-col text-center" tag="h1" size="lg">
         <span className="leading-dense text-primary-1">Start Free.</span>{' '}
@@ -81,7 +83,7 @@ const Hero = () => (
           }}
         />
         <ul className="relative z-10 grid grid-cols-3 gap-x-8 lg:grid-cols-2 lg:gap-y-3 md:grid-cols-1">
-          {items.map(({ type, subtitle, price, description, features, button }) => (
+          {items.map(({ type, plans, subtitle, price, description, features, button }) => (
             <li
               className={clsx(
                 'flex flex-col px-10 pt-8 pb-10 xl:p-5 lg:p-7',
@@ -98,6 +100,18 @@ const Hero = () => (
               >
                 <span className="relative pb-[26px] md:flex md:flex-col md:pb-0">
                   <span className="text-xl font-semibold leading-tight">{type}</span>
+                  {plans && (
+                    <div className="absolute -right-36 top-0 flex gap-x-3.5 2xl:-bottom-1 2xl:right-auto 2xl:left-0 2xl:top-auto 2xl:w-[120%] md:static md:mt-2 xs:w-full xs:flex-col xs:items-start xs:gap-y-2">
+                      {plans.map((plan) => (
+                        <span
+                          className="rounded-[40px] bg-gray-2 py-2 px-[18px] text-xs uppercase leading-tight 2xl:py-1.5"
+                          key={plan}
+                        >
+                          {plan}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                   {subtitle && (
                     <span className="absolute bottom-0 left-0 font-normal leading-none tracking-[0.02em] text-gray-4 md:static md:pt-2.5">
                       {subtitle}
@@ -134,6 +148,13 @@ const Hero = () => (
           ))}
         </ul>
       </div>
+      <p className="mt-8 text-xl lg:mt-7 lg:text-lg">
+        See pricing & plan details{' '}
+        <Link className="font-semibold" to="/docs/introduction/billing" theme="underline-primary-1">
+          here
+        </Link>
+        .
+      </p>
     </Container>
   </section>
 );
