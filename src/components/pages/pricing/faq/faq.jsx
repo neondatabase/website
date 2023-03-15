@@ -14,12 +14,12 @@ const items = [
   {
     question: 'Can I upgrade or downgrade my subscription later?',
     answer:
-      'Yes. You can upgrade from Free Tier to our Pro plan by selecting [Go Pro]. To upgrade to a custom Enterprise or Platform Partnership plan, contact <a href="mailto:sales@neon.tech">sales@neon.tech</a>. For downgrade instructions, see <a href="/docs/introduction/billing">Billing</a>.',
+      'Yes. You can upgrade from Free Tier to our Pro plan by selecting <strong>Go Pro</strong>. To upgrade to a custom Enterprise or Platform Partnership plan, contact <a href="mailto:sales@neon.tech">sales@neon.tech</a>. For downgrade instructions, see <a href="/docs/introduction/billing">Billing</a>.',
   },
   {
     question: 'What payment methods do you accept?',
     answer:
-      'Neon accepts payment by credit card for the Pro plan. For the Enterprise & Platform Partnership plans Neon accepts payment by ACH and Wire.',
+      'Neon accepts payment by credit card for the Pro plan. For the Enterprise & Platform Partnership plans, Neon accepts payment by ACH and Wire.',
   },
   {
     question: 'When will I be billed?',
@@ -33,7 +33,7 @@ const items = [
   {
     question: 'Are there any setup fees or additional charges?',
     answer:
-      'No. There are no hidden setup fees or extra charges. For usage-based plans, Neon charges on the four metrics described on this page: Compute time, Project storage, Written Data, and Data Transfer. For additional information, refer to <a href="/docs/introduction/billing">Billing</a>.',
+      'No. There are no hidden setup fees or extra charges. For usage-based plans, Neon charges on the four metrics described in the <a href="/docs/introduction/billing">Billing</a> page: Compute time, Project storage, Written Data, and Data Transfer.',
   },
   {
     question: 'Are there any limits or restrictions on usage?',

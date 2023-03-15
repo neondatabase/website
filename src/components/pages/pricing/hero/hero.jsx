@@ -12,7 +12,7 @@ const items = [
       'Essential features to help you get started with Neon. Perfect for prototyping and personal projects.',
     features: [
       { title: '1 project' },
-      { title: '100 compute hours /month' },
+      { title: '100 active hours /month' },
       { title: 'Scale to 0' },
       { title: '1 shared CPU with 1 GB of RAM' },
       { title: '10 branches, with a limit of 3GB of data per branch' },
@@ -28,16 +28,16 @@ const items = [
     subtitle: 'Starting at',
     price: '$0',
     description:
-      'A usage-based plan for small-to-medium sized teams. Unlimited resources with advanced configuration options. Share your projects with anyone. Only pay for what you use with no fixed contract.',
+      'A usage-based plan for small-to-medium teams. Unlimited resources with advanced configuration options. Share your projects with anyone. Only pay for what you use with no fixed contract.',
     features: [
       { title: 'Configurable compute' },
       { title: 'Always on compute' },
       { title: 'Project sharing' },
-      { title: 'Pause Scale to 0', label: 'Coming soon' },
+      { title: 'Configurable auto-suspend compute', label: 'Coming soon' },
       { title: 'Autoscaling', label: 'Coming soon' },
     ],
     button: {
-      url: 'https://console.neon.tech/sign_in',
+      url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
       text: 'Upgrade',
       theme: 'primary',
     },
@@ -46,7 +46,7 @@ const items = [
     type: 'Custom',
     price: 'Contact us',
     description:
-      'Custom volume-based plans for medium to large sized teams, database fleets, and resale. Contact our Sales team to learn more.',
+      'Custom volume-based plans for medium to large teams, database fleets, and resale. Contact our Sales team to learn more.',
     features: [
       { title: 'Custom contracts' },
       { title: 'Prepaid plans' },
@@ -68,8 +68,8 @@ const Hero = () => (
         <span className="leading-dense">Only pay for what you use.</span>
       </Heading>
       <p className="mx-auto mt-7 max-w-[656px] text-center text-xl 2xl:mt-5 xl:max-w-[616px] xl:text-base lg:max-w-[464px]">
-        Neon brings serverless architecture to PostgreSQL, which allows us to offer flexible usage
-        and volume-based plans.
+        Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible
+        usage and volume-based plans.
       </p>
       <div className="relative mx-auto mt-14 max-w-[1220px] pt-8 xl:mt-10 xl:pt-3 lg:mt-7">
         <span

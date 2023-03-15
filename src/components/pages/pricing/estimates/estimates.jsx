@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 
 import circleSvg from './images/circle.svg';
 
@@ -20,17 +21,17 @@ const items = [
       },
       {
         name: 'Project storage',
-        usage: '0.6 GB',
+        usage: '0.6 GiB',
         price: '$0.03',
       },
       {
         name: 'Written data',
-        usage: '0.2 GB',
+        usage: '0.2 GiB',
         price: '$0.02',
       },
       {
         name: 'Data transfer',
-        usage: '0.01 GB',
+        usage: '0.01 GiB',
         price: '$0.001',
       },
     ],
@@ -45,17 +46,17 @@ const items = [
       },
       {
         name: 'Project storage',
-        usage: '22 GB',
+        usage: '22 GiB',
         price: '$2',
       },
       {
         name: 'Written data',
-        usage: '4 GB',
+        usage: '4 GiB',
         price: '$0.38',
       },
       {
         name: 'Data transfer',
-        usage: '3 GB',
+        usage: '3 GiB',
         price: '$0.27',
       },
     ],
@@ -70,17 +71,17 @@ const items = [
       },
       {
         name: 'Project storage',
-        usage: '115 GB',
+        usage: '115 GiB',
         price: '$10',
       },
       {
         name: 'Written data',
-        usage: '260 GB',
+        usage: '260 GiB',
         price: '$25',
       },
       {
         name: 'Data transfer',
-        usage: '74 GB',
+        usage: '74 GiB',
         price: '$7',
       },
     ],
@@ -108,9 +109,8 @@ const Estimates = () => {
             <span>Each user is unique.</span> However, we can give you some estimates.
           </h2>
           <p className="mt-7 text-center text-xl 2xl:mt-5 xl:text-base">
-            Contact{' '}
-            <Link className="font-semibold" theme="underline-primary-1" to="mailto:sales@neon.tech">
-              sales@neon.tech
+            <Link className="font-semibold" theme="underline-primary-1" to={LINKS.contactSales}>
+              Contact sales
             </Link>{' '}
             if you require assistance forecasting billing and usage.
           </p>
