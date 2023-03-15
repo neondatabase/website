@@ -15,7 +15,7 @@ Neon charges for usage based on the following metrics:
 - **Written data**: The amount of data written from compute to storage.
 - **Data transfer**: The amount of data transferred out of Neon.
 
-See [Billing metrics explained](#billing-metrics-explained) for a detailed description of each metric and how Neon calculates costs.
+See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) for a detailed description of each metric and how Neon calculates costs.
 
 ## Neon plans
 
