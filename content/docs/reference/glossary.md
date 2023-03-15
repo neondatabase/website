@@ -72,7 +72,7 @@ For information about connecting to Neon, see [Connect from any application](/do
 
 ### Compute size
 
-
+The number of Compute Units assigned to a Neon compute endpoint. A Neon CU has 1 vCPU and 4 GB of RAM, and a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of your compute endpoint.
 
 ### Compute time
 
