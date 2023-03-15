@@ -85,7 +85,7 @@ The **Project storage**, **Written data**, and **Data transfer** billing metrics
 
 ### Compute time
 
-The _Compute time_ metric counts _Compute Unit (CU)_ active time. A CU has 1 vCPU and 4 GB of RAM. In Neon, a [compute endpoint](/docs/reference/glossary/#compute-endpoint) can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of your Neon database. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an active state. A defined period of inactivity places the compute endpoint and its CUs into an idle state.
+The _Compute time_ metric is a measure of the amount of computing capacity utilized by Neon for a given time interval. Neon takes a measure of compute utilization every five seconds, which is averaged based on the observed computing capacity. Computing capacity is based on _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon [compute endpoint](/docs/reference/glossary/#compute-endpoint) can have anywhere from .25 to 7 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an active state. A defined period of inactivity places the compute endpoint and its CUs into an idle state.
 
 Factors that affect the amount of compute time include:
 
