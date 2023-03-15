@@ -8,7 +8,7 @@ Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **P
 
 ## Neon billing metrics
 
-Neon's charges for usage based on the following metrics:
+Neon charges for usage based on the following metrics:
 
 - **Compute time**: The amount time that Neon compute resources are active.
 - **Project storage**: The size of the data and history stored for your project.
@@ -152,23 +152,23 @@ data transfer (GiB) * price per GiB
 
 | Cloud provider | Region      | Billing metric | Price | Unit |
 |:---------------|:-----------|:--------------|:------|:-----|
-| AWS            | US East (Ohio)     | Data storage  | $0.00016 | GiB/Hour |
+| AWS            | US East (Ohio)     | Data storage  | $0.000164 | GiB/Hour |
 | AWS            | US East (Ohio)     | Compute time  | $0.10200 | Compute/Hour |
 | AWS            | US East (Ohio)  | Written data  | $0.09600 | GiB |
 | AWS            | US East (Ohio)| Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | US West (Oregon)| Data storage | $0.00016 | GiB/Hour |
+| AWS            | US West (Oregon)| Data storage | $0.000164 | GiB/Hour |
 | AWS            | US West (Oregon)     | Compute time  | $0.10200 | Compute/Hour |
 | AWS            | US West (Oregon)     | Written data  | $0.09600 | GiB |
 | AWS            | US West (Oregon)  | Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
 | AWS            | Europe (Frankfurt)| Data storage  | $0.00018 | GiB/Hour |
-| AWS            | Europe (Frankfurt)| Compute time| $0.10200 | Compute/Hour |
+| AWS            | Europe (Frankfurt)| Compute time| $0.11800 | Compute/Hour |
 | AWS            | Europe (Frankfurt)     | Written data    | $0.096000 | GiB |
 | AWS            | Europe (Frankfurt)     | Data transfer    | $0.09000 | GiB |
 |                |             |                |       |      |
 | AWS            | Asia Pacific (Singapore)  | Data storage    | $0.00018 | GiB/Hour |
-| AWS            | Asia Pacific (Singapore)| Compute time    | $0.10200 | Compute/Hour |
+| AWS            | Asia Pacific (Singapore)| Compute time    | $0.12100 | Compute/Hour |
 | AWS            | Asia Pacific (Singapore)| Written data  | $0.09600 | GiB |
 | AWS            | Asia Pacific (Singapore)| Data transfer  | $0.09000 | GiB |
 
