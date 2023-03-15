@@ -196,7 +196,7 @@ const Estimates = () => {
                         <span className="relative text-primary-1">
                           ${formattedPriceWithCommas}
                           <img
-                            className="absolute -top-4 left-1/2 h-auto w-[107px] max-w-none -translate-x-[calc(50%+10px)] 2xl:-top-3.5 xl:-translate-x-[calc(50%+18px)] lg:-top-4 sm:-translate-x-[calc(50%+8px)]"
+                            className="absolute -top-4 left-1/2 h-auto w-[107px] max-w-none -translate-x-[calc(50%+16px)] 2xl:-top-3.5 xl:-translate-x-[calc(50%+18px)] lg:-top-4 sm:-translate-x-[calc(50%+8px)]"
                             src={circleSvg}
                             width={107}
                             height={63}
