@@ -1,4 +1,5 @@
 - title: Introduction
+  slug: introduction
   items:
     - title: What is Neon?
       slug: introduction/about

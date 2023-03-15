@@ -1,5 +1,5 @@
 export default {
-  docs: '/docs/introduction/about/',
+  docs: '/docs/',
   aboutUs: '/about-us/',
   careers: '/careers/',
   blog: '/blog/',
