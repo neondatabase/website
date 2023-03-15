@@ -1,11 +1,12 @@
 'use client';
+
 import clsx from 'clsx';
-import Container from 'components/shared/container';
-
-import Link from 'components/shared/link';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
-
 import { useState } from 'react';
+
+import Container from 'components/shared/container';
+import Link from 'components/shared/link';
+
 import circleSvg from './images/circle.svg';
 
 const items = [
@@ -123,6 +124,7 @@ const Estimates = () => {
                       ? 'border-white text-white'
                       : 'border-dashed border-gray-4 text-gray-4'
                   )}
+                  type="button"
                   onClick={() => handleSelect(type)}
                 >
                   {type}
@@ -199,8 +201,8 @@ const Estimates = () => {
                             width={107}
                             height={63}
                             alt=""
-                            aria-hidden
                             loading="lazy"
+                            aria-hidden
                           />
                         </span>
                       </div>
