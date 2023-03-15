@@ -20,7 +20,7 @@ Refer to our _Get started_ documentation to get up and running with Neon in just
 
 [Import data](/docs/import/import-from-postgres "Import your own data or sample data that you can use to explore Neon")
 
-[Manage](/docs/manage/overview "Learn how to manage Neon projects, branches, compute resources, databases, and users.")
+[Manage](/docs/manage/overview "Learn how to manage Neon projects, branches, compute resources, databases, and roles.")
 
 [Branching](/docs/introduction/branching "Learn about branching and how you can use it to optimize development workflows.")
 
