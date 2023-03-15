@@ -18,7 +18,7 @@ const items = [
       { title: '10 branches, with a limit of 3GB of data per branch' },
     ],
     button: {
-      url: '/get-started',
+      url: 'https://console.neon.tech/sign_in',
       text: 'Get Started',
       theme: 'white-outline',
     },
@@ -37,7 +37,7 @@ const items = [
       { title: 'Autoscaling', label: 'Coming soon' },
     ],
     button: {
-      url: '/upgrade',
+      url: 'https://console.neon.tech/sign_in',
       text: 'Upgrade',
       theme: 'primary',
     },
