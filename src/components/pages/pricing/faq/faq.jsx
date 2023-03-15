@@ -1,9 +1,12 @@
 'use client';
+
+import { LazyMotion, m, domAnimation } from 'framer-motion';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link/link';
-import { LazyMotion, m, domAnimation } from 'framer-motion';
-import { useState } from 'react';
 
 const items = [
   {
@@ -72,7 +75,7 @@ const variantsAnimation = {
   },
 };
 
-const Item = ({ question, answer, linkText, linkUrl, index }) => {
+const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
   const [isOpen, setIsOpen] = useState(index === 0);
 
   const handleOpen = () => {
@@ -118,6 +121,14 @@ const Item = ({ question, answer, linkText, linkUrl, index }) => {
       </LazyMotion>
     </li>
   );
+};
+
+Item.propTypes = {
+  question: PropTypes.string.isRequired,
+  answer: PropTypes.string.isRequired,
+  linkText: PropTypes.string,
+  linkUrl: PropTypes.string,
+  index: PropTypes.number.isRequired,
 };
 
 const Faq = () => (
