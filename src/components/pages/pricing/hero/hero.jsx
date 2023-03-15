@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
@@ -78,7 +79,7 @@ const Hero = () => (
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
           }}
-        ></span>
+        />
         {items.map(({ type, subtitle, price, description, features, button }) => (
           <li
             className={clsx(

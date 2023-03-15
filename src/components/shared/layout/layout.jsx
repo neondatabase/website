@@ -105,6 +105,7 @@ const Layout = ({
 };
 
 Layout.propTypes = {
+  className: PropTypes.string,
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
   footerTheme: PropTypes.oneOf(['white', 'black']),
   withOverflowHidden: PropTypes.bool,
