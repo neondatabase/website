@@ -163,7 +163,7 @@ data transfer (GiB) * price per GiB
 |                |             |                |       |      |
 | AWS            | Europe (Frankfurt)| Compute time| $0.11800 | Compute/Hour |
 | AWS            | Europe (Frankfurt)| Project storage  | $0.00018 | GiB/Hour |
-| AWS            | Europe (Frankfurt)     | Written data    | $0.096000 | GiB |
+| AWS            | Europe (Frankfurt)     | Written data    | $0.09600 | GiB |
 | AWS            | Europe (Frankfurt)     | Data transfer    | $0.09000 | GiB |
 |                |             |                |       |      |
 | AWS            | Asia Pacific (Singapore)| Compute time    | $0.12100 | Compute/Hour |
