@@ -101,7 +101,7 @@ const Hero = () => (
                 <span className="relative pb-[26px] md:flex md:flex-col md:pb-0">
                   <span className="text-xl font-semibold leading-tight">{type}</span>
                   {plans && (
-                    <div className="absolute -right-36 top-0 flex gap-x-3.5 2xl:-bottom-1 2xl:right-auto 2xl:left-0 2xl:top-auto 2xl:w-[120%] md:static md:mt-2 xs:w-full xs:flex-col xs:items-start xs:gap-y-2">
+                    <div className="absolute -right-36 -top-0.5 flex gap-x-3.5 2xl:-bottom-1 2xl:right-auto 2xl:left-0 2xl:top-auto 2xl:w-[120%] md:static md:mt-2 xs:w-full xs:flex-col xs:items-start xs:gap-y-2">
                       {plans.map((plan) => (
                         <span
                           className="rounded-[40px] bg-gray-2 py-2 px-[18px] text-xs uppercase leading-tight 2xl:py-1.5"
