@@ -26,7 +26,7 @@ Refer to our _Get started_ documentation to get up and running with Neon in just
 
 [PostgreSQL extensions](/docs/reference/pg-extensions "Install supported PostgreSQL extensions")
 
-[Neon API](/docs/reference/api-reference "Manage Neon programmatically using the Neon API")
+[Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api "Manage Neon programmatically using the Neon API")
 
 </IntroNavigation>
 
