@@ -21,9 +21,9 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 
 |                          | Free Tier                         | Pro (usage-based)             | Custom - Enterprise or Platform Partnership (volume-based)|
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|
-|**Best for**              | Prototyping and personal projects       | Small-to-medium sized teams, setups with 1 to 3 active databases  | Medium-to-large sized teams, Database fleets, Resale |
+|**Best for**              | Prototyping and personal projects       | Small-to-medium teams, setups with 1 to 3 active databases  | Medium-to-large teams, Database fleets, Resale |
 |**Projects**              | 1                                 | 20               | Unlimited                 |
-|**Compute active time per month** | 100 hours                 | Unlimited        | Unlimited                 |
+|**Compute active time per month** | 100 hours*                 | Unlimited        | Unlimited                 |
 |**Compute size**          | 1 Shared vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
 |**Storage**               | 3 GB per branch                   | 200 GB        | Unlimited                 |
 |**Dedicated resources**   | -                            | -           | &check;                   |
@@ -34,10 +34,11 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contract, Volume Discounts |
 |**Support**               | Community, support tickets                 | Community, support tickets, video chat          | Community, support tickets, video chat, resale customer support                   |
 
-<Admonition type="info">
-The limits described above are plan defaults. If you would like to adjust the limits to tailor a plan to your specific requirements, please contact [sales@neon.tech](mailto:sales@neon.tech).
-</Admonition>
+The limits described above are plan defaults. If you want to adjust the limits to tailor a plan to your specific requirements, please contact [sales@neon.tech](mailto:sales@neon.tech).
 
+<Admonition type="note">
+*Regardless of the Free Tier 100 hour _compute active time per month_ limit, you are always able to connect to the compute endpoint assigned to the primary branch of your Neon project, which ensures that access to data on the primary branch of your project is never interrupted.
+</Admonition>
 
 ## Account billing page
 
@@ -75,7 +76,7 @@ This action initiates the cancellation. If your data exceeds [Free Tier](/docs/i
 
 ## Billing and usage metrics explained
 
-This section provides a detailed explanation of Neon's billing metrics and how they are calculated. Billing in Neon is account-based. For the billing rate for each metric, see [Billing rates](#billing-rates).
+This section provides a detailed explanation of Neon's billing and usage metrics and how they are calculated. Billing in Neon is account-based. For the billing rate for each metric, see [Billing rates](#billing-rates).
 
 <Admonition type="note">
 The **Project storage**, **Written data**, and **Data transfer** billing metrics are calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
@@ -94,6 +95,9 @@ Factors that affect the amount of compute time include:
 - Neon's _Always-on_ compute feature, which keeps an endpoint active indefinitely to avoid the few seconds of connection latency when waking an idle compute (_coming soon_).
 - Neon's _autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload (_coming soon_).
 
+<Admonition type="note">
+Neon uses a small amount of compute time, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
+</Admonition>
 
 The cost calculation for _Compute time_ is as follows:
 
@@ -109,14 +113,14 @@ The _Project storage_ metric measures the amount of data and history stored in y
 
   The size of all databases in your Neon projects. You can think of this as a _snapshot_ of your data at a point in time.
 
-- **Retained Write-Ahead Log (WAL) records**
+- **History**
 
-  Neon retains Write-Ahead Log (WAL) records to support _point-in-time restore_ and _database branching_.
-  - _Point-in-time restore_ is the ability to restore data to a past point in time. Neon stores seven days of data history in the form of WAL records for a Neon project. WAL records that fall out of this seven-day window are evicted from storage and no longer counted toward project storage.
-  - A _database branch_ is a snapshot of your data (including _data history_) at the point of branch creation combined with WAL records that capture data changes from that point forward.
-    When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's snapshot data still exists in the parent branch's _data history_, which means that it shares the data in common with the parent branch. A branch only begins adding to storage when data changes are introduced or when the branch starting point falls out of the parent branch's _data history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data and allow the branch to age out of the parent branch's _data history_.
+  Neon retains a history to support _point-in-time restore_ and _database branching_.
+  - _Point-in-time restore_ is the ability to restore data to a past point in time. Neon stores seven days of history in the form of WAL records for a Neon project. WAL records that fall out of this seven-day window are evicted from storage and no longer counted toward project storage.
+  - A _database branch_ is a snapshot of your data (including _history_) at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
+    When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's snapshot still exists in the parent branch's _history_, which means that it shares the data in common with the parent branch. A branch only begins adding to storage when data changes are introduced or when the branch starting point falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data and allow the branch to age out of the parent branch's _history_.
 
-    Database branches can also share a _data history_. For example, two branches created from the same parent at or around the same time will share a _data history_, which avoids additional storage. The same is true for a branch created from another branch. Wherever possible, Neon minimizes storage through shared data history. Additionally, to keep storage to a minimum, Neon will take a new branch snapshot if the amount data changes stored as WAL grows to the point that a new snapshot would consume less storage.
+    Database branches can also share a _history_. For example, two branches created from the same parent at or around the same time will share a _history_, which avoids additional storage. The same is true for a branch created from another branch. Wherever possible, Neon minimizes storage through shared history. Additionally, to keep storage to a minimum, Neon will take a new branch snapshot if the amount data changes grow to the point that a new snapshot would consume less storage.
 
 The cost calculation for _Project storage_ is as follows:
 
@@ -126,7 +130,7 @@ project storage (GiB) * (seconds stored / 3600) * price per hour
 
 ### Written data
 
-The _Written data_ metric measures the amount of data changes written from storage. Neon handles makes sure this data is processed in a reliable way to ensure durability of your data.
+The _Written data_ metric measures the amount of data changes written from storage. Neon processes this data in a reliable way to ensure durability of your data.
 
 The cost calculation for _Written data_ is as follows:
 
@@ -182,5 +186,5 @@ Support channels for the Neon Free Tier and paid plans are outlined below.
 <Admonition type="note">
 Pro plan users that submit support tickets through Neon's console can expect an initial response time of 2 business days, from 6am to 6pm Pacific Standard Time (UTC -8), Monday through Friday, excluding public holidays in the United States.
 
-Free tier users are not guaranteed a specific response time. For custom solutions, please contact [sales@neon.tech](mailto:sales@neon.tech).  
+Free Tier users are not guaranteed a specific response time. For custom solutions, please contact [sales@neon.tech](mailto:sales@neon.tech).  
 </Admonition>
