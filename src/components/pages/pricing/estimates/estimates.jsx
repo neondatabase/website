@@ -31,28 +31,28 @@ const Estimates = () => {
   };
 
   return (
-    <section className="estimates safe-paddings mt-48">
+    <section className="estimates safe-paddings mt-48 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20">
       <Container className="grid-gap-x grid grid-cols-12" size="mdDoc">
-        <div className="col-start-3 col-end-11 flex flex-col items-center">
+        <div className="col-start-3 col-end-11 flex flex-col items-center 2xl:col-span-full">
           <span className="text-lg uppercase leading-snug text-primary-1">
             Billing & usage estimates
           </span>
-          <h2 className="t-5xl mt-2.5 inline-flex flex-col text-center font-bold leading-tight">
+          <h2 className="mt-2.5 inline-flex flex-col text-center text-5xl font-bold leading-tight 2xl:max-w-[968px] 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:inline lg:text-[36px] lg:leading-tight">
             <span>Each user is unique.</span> However, we can give you some estimates.
           </h2>
-          <p className="mt-7 text-xl">
+          <p className="mt-7 text-xl 2xl:mt-5 xl:text-base">
             Contact{' '}
-            <Link theme="underline-primary-1" size="md" to="mailto:sales@neon.tech">
+            <Link className="font-semibold" theme="underline-primary-1" to="mailto:sales@neon.tech">
               sales@neon.tech
             </Link>{' '}
             if you require assistance forecasting billing and usage.
           </p>
-          <ul className="mt-[53px] mb-12 grid w-full grid-cols-3 gap-x-7">
+          <ul className="mt-[53px] mb-12 grid w-full grid-cols-3 gap-x-7 2xl:mx-auto 2xl:max-w-[801px] xl:mb-8 xl:mt-10 xl:max-w-[616px] xl:gap-x-5 lg:mb-6 lg:mt-7 md:mt-6 md:mb-5 md:gap-x-4">
             {items.map(({ type }) => (
               <li key={type}>
                 <button
                   className={clsx(
-                    'w-full rounded-[80px] border py-6 text-lg font-bold leading-none transition-colors duration-200 hover:border-white hover:text-white',
+                    'w-full rounded-[80px] border py-6 text-lg font-bold leading-none transition-colors duration-200 hover:border-white hover:text-white xl:py-4 md:py-3',
                     type === selected
                       ? 'border-white text-white'
                       : 'border-dashed border-gray-4 text-gray-4'
@@ -70,6 +70,7 @@ const Estimates = () => {
                 if (type === selected) {
                   return (
                     <m.img
+                      className="2xl:max-w-[592px] xl:max-w-[616px] lg:max-w-[584px] md:max-w-full"
                       key={type}
                       src={image}
                       width={740}

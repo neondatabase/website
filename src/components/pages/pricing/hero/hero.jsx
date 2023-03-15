@@ -18,7 +18,7 @@ const items = [
     ],
     button: {
       url: '/get-started',
-      text: 'Get started',
+      text: 'Get Started',
       theme: 'white-outline',
     },
   },
@@ -60,19 +60,19 @@ const items = [
 ];
 
 const Hero = () => (
-  <section className="hero safe-paddings pt-44">
+  <section className="hero safe-paddings pt-44 2xl:pt-[150px] xl:pt-32 lg:pt-[50px]">
     <Container className="flex flex-col items-center" size="mdDoc">
       <Heading className="inline-flex flex-col text-center" tag="h1" size="lg">
         <span className="leading-dense text-primary-1">Start Free.</span>{' '}
         <span className="leading-dense">Only pay for what you use.</span>
       </Heading>
-      <p className="mx-auto mt-7 max-w-[656px] text-center text-xl">
+      <p className="mx-auto mt-7 max-w-[656px] text-center text-xl 2xl:mt-5 xl:max-w-[616px] xl:text-base lg:max-w-[464px]">
         Neon brings serverless architecture to PostgreSQL, which allows us to offer flexible usage
         and volume-based plans.
       </p>
-      <ul className="relative mx-auto mt-14 grid max-w-[1220px] grid-cols-3 justify-between gap-x-8 pt-8">
+      <ul className="relative mx-auto mt-14 grid max-w-[1220px] grid-cols-3 justify-between gap-x-8 pt-8 xl:mt-10 xl:pt-3 lg:mt-7 lg:grid-cols-2 lg:gap-y-3 md:grid-cols-1">
         <span
-          className="absolute -right-8 top-0 h-full w-[68.5%] rounded-[42px] bg-gradient-to-t from-transparent to-[#00E599] px-px pt-px"
+          className="absolute -right-8 top-0 h-full w-[68.5%] rounded-[42px] bg-gradient-to-t from-transparent to-[#00E599] px-px pt-px xl:-right-3 xl:rounded-[28px] lg:-left-3 lg:h-[55%] lg:w-[calc(100%+24px)] md:-inset-x-2.5 md:h-[67%] md:w-[calc(100%+20px)]"
           style={{
             WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
             WebkitMaskComposite: 'xor',
@@ -82,26 +82,32 @@ const Hero = () => (
         {items.map(({ type, subtitle, price, description, features, button }) => (
           <li
             className={clsx(
-              'flex flex-col px-10 pt-8 pb-10',
-              type === 'Pro' ? '' : 'rounded-[20px] bg-gray-1'
+              'relative z-10 flex flex-col px-10 pt-8 pb-10 xl:p-5 lg:p-7',
+              { 'rounded-[20px] bg-gray-1': type !== 'Pro' },
+              type === 'Free Tier' && 'lg:order-1 lg:col-span-full'
             )}
             key={type}
           >
-            <div className="mb-8 flex min-h-[231px] flex-col">
-              <span className="relative pb-[26px]">
+            <div
+              className={clsx(
+                'mb-8 flex min-h-[231px] flex-col xl:mb-5 xl:min-h-[279px] md:min-h-max',
+                type === 'Free Tier' ? 'lg:min-h-max' : 'lg:min-h-[240px]'
+              )}
+            >
+              <span className="relative pb-[26px] md:flex md:flex-col md:pb-0">
                 <span className="text-xl font-semibold leading-tight">{type}</span>
                 {subtitle && (
-                  <span className="absolute bottom-0 left-0 font-normal leading-none tracking-[0.02em] text-gray-4">
+                  <span className="absolute bottom-0 left-0 font-normal leading-none tracking-[0.02em] text-gray-4 md:static md:pt-2.5">
                     {subtitle}
                   </span>
                 )}
               </span>
 
-              <h3 className="text-[36px] font-semibold leading-snug">{price}</h3>
+              <h3 className="text-[36px] font-semibold leading-snug lg:text-[32px]">{price}</h3>
               <p className="mt-2.5 text-gray-6">{description}</p>
             </div>
             <div className="mt-auto flex grow flex-col">
-              <ul className="mb-10 flex flex-col space-y-2.5">
+              <ul className="mb-10 flex flex-col space-y-2.5 xl:mb-5 lg:mb-7">
                 {features.map(({ title, label }) => (
                   <li
                     className="relative inline-flex gap-x-2.5 pl-4 before:absolute before:left-0 before:top-2 before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary-1"
