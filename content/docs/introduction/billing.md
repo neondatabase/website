@@ -151,23 +151,23 @@ data transfer (GiB) * price per GiB
 
 | Cloud provider | Region      | Billing metric | Price | Unit |
 |:---------------|:-----------|:--------------|:------|:-----|
-| AWS            | US East (Ohio)     | Compute time  | $0.10200 | Compute/Hour |
-| AWS            | US East (Ohio)     | Project storage  | $0.000164 | GiB/Hour |
+| AWS            | US East (Ohio)     | Compute time  | $0.10200 | ComputeHour |
+| AWS            | US East (Ohio)     | Project storage  | $0.000164 | GiBHour |
 | AWS            | US East (Ohio)  | Written data  | $0.09600 | GiB |
 | AWS            | US East (Ohio)| Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | US West (Oregon)     | Compute time  | $0.10200 | Compute/Hour |
-| AWS            | US West (Oregon)| Project storage | $0.000164 | GiB/Hour |
+| AWS            | US West (Oregon)     | Compute time  | $0.10200 | ComputeHour |
+| AWS            | US West (Oregon)| Project storage | $0.000164 | GiBHour |
 | AWS            | US West (Oregon)     | Written data  | $0.09600 | GiB |
 | AWS            | US West (Oregon)  | Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | Europe (Frankfurt)| Compute time| $0.11800 | Compute/Hour |
-| AWS            | Europe (Frankfurt)| Project storage  | $0.00018 | GiB/Hour |
+| AWS            | Europe (Frankfurt)| Compute time| $0.11800 | ComputeHour |
+| AWS            | Europe (Frankfurt)| Project storage  | $0.00018 | GiBHour |
 | AWS            | Europe (Frankfurt)     | Written data    | $0.09600 | GiB |
 | AWS            | Europe (Frankfurt)     | Data transfer    | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | Asia Pacific (Singapore)| Compute time    | $0.12100 | Compute/Hour |
-| AWS            | Asia Pacific (Singapore)  | Project storage    | $0.00018 | GiB/Hour |
+| AWS            | Asia Pacific (Singapore)| Compute time    | $0.12100 | ComputeHour |
+| AWS            | Asia Pacific (Singapore)  | Project storage    | $0.00018 | GiBHour |
 | AWS            | Asia Pacific (Singapore)| Written data  | $0.09600 | GiB |
 | AWS            | Asia Pacific (Singapore)| Data transfer  | $0.09000 | GiB |
 
