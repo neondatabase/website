@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "node ./src/scripts/build-algolia-search.js && next-sitemap",
+    "postbuild": "node ./src/scripts/build-algolia-search.js && node ./src/scripts/rss.js && next-sitemap",
     "start": "next start",
     "format": "prettier --write .",
     "lint": "npm run lint:js && npm run lint:md",
@@ -79,6 +79,7 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "feed": "^4.2.2",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "postcss": "^8.4.21",
