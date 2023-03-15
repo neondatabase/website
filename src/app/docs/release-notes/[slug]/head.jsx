@@ -21,7 +21,7 @@ const Head = ({ params }) => {
         rel="alternate"
         type="application/rss+xml"
         title="Release Notes RSS feed"
-        href={`${RELEASE_NOTES_BASE_PATH}/rss.xml`}
+        href={`${RELEASE_NOTES_BASE_PATH}rss.xml`}
       />
     </>
   );
