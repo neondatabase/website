@@ -45,7 +45,6 @@ const items = [
   },
   {
     type: 'Custom',
-    plans: ['Enterprise', 'Platform Partnership'],
     price: 'Contact us',
     description:
       'Custom volume-based plans for medium to large teams, database fleets, and resale. Contact our Sales team to learn more.',
@@ -83,14 +82,14 @@ const Hero = () => (
           }}
         />
         <ul className="relative z-10 grid grid-cols-3 gap-x-8 lg:grid-cols-2 lg:gap-y-3 md:grid-cols-1">
-          {items.map(({ type, plans, subtitle, price, description, features, button }) => (
+          {items.map(({ type, plans, subtitle, price, description, features, button }, index) => (
             <li
               className={clsx(
                 'flex flex-col px-10 pt-8 pb-10 xl:p-5 lg:p-7',
                 { 'rounded-[20px] bg-gray-1': type !== 'Pro' },
                 type === 'Free Tier' && 'lg:order-1 lg:col-span-full'
               )}
-              key={type}
+              key={index}
             >
               <div
                 className={clsx(
@@ -100,18 +99,6 @@ const Hero = () => (
               >
                 <span className="relative pb-[26px] md:flex md:flex-col md:pb-0">
                   <span className="text-xl font-semibold leading-tight">{type}</span>
-                  {plans && (
-                    <div className="absolute -right-36 -top-0.5 flex gap-x-3.5 2xl:-bottom-1 2xl:right-auto 2xl:left-0 2xl:top-auto 2xl:w-[120%] md:static md:mt-2 xs:w-full xs:flex-col xs:items-start xs:gap-y-2">
-                      {plans.map((plan) => (
-                        <span
-                          className="rounded-[40px] bg-gray-2 py-2 px-[18px] text-xs uppercase leading-tight 2xl:py-1.5"
-                          key={plan}
-                        >
-                          {plan}
-                        </span>
-                      ))}
-                    </div>
-                  )}
                   {subtitle && (
                     <span className="absolute bottom-0 left-0 font-normal leading-none tracking-[0.02em] text-gray-4 md:static md:pt-2.5">
                       {subtitle}
@@ -124,10 +111,10 @@ const Hero = () => (
               </div>
               <div className="mt-auto flex grow flex-col">
                 <ul className="mb-10 flex flex-col space-y-2.5 xl:mb-5 lg:mb-7">
-                  {features.map(({ title, label }) => (
+                  {features.map(({ title, label }, index) => (
                     <li
                       className="relative pl-4 before:absolute before:left-0 before:top-[9px] before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary-1"
-                      key={title}
+                      key={index}
                     >
                       <span>{title}</span>
                       {label && (
