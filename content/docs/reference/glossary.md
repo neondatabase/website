@@ -10,6 +10,10 @@ redirectFrom:
 
 See [Token](#token).
 
+### Active time
+
+The amount of active compute time for the Neon Free Tier. Free Tier users are limited to 100 hours of active compute time per month. See [Free Tier](/docs/introduction/technical-preview-free-tier).
+
 ### Activity Monitor
 
 A process that monitors a Neon Compute for activity. During periods of inactivity, the Activity Monitor gracefully places the Compute into an idle state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of complete inactivity. When a connection is made to an idle Compute, the Activity Monitor reactivates the Compute.
@@ -66,6 +70,14 @@ The connection string for a Neon is provided on the **Dashboard** in the Neon Co
 
 For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
 
+### Compute size
+
+
+
+### Compute time
+
+A billing metric that measures the amount of time that Neon compute resources are active. See [Compute time](/docs/introduction/billing#comput-time).
+
 ### Console
 
 See [Neon Console](#neon-console).
@@ -78,13 +90,21 @@ A part of the Neon architecture that manages cloud storage and compute resources
 
 A technique used to efficiently copy data. Neon uses the copy-on-write technique to efficiently copy data when creating a branch.
 
+### Data transfer
+
+A billing metric that measures the amount of data transferred out of Neon (egress). See [Data transfer](/docs/introduction/billing#data-transfer).
+
 ### Database
 
 A named collection of database objects. A Neon project has a default database named `neondb` which resides in the default `public` schema. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
 
+### Enterprise plan
+
+A custom volume-based paid plan offered by Neon. See [Neon plans](/docs/introduction/billing#neon-plans).
+
 ### Free Tier
 
-A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier/).
+A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Free Tier](/docs/reference/technical-preview-free-tier/).
 
 ### LSN
 
@@ -124,6 +144,10 @@ The Pageserver uploads immutable files to cloud storage, which is the final, hig
 
 The ability to authenticate without providing a password. Neon’s [Passwordless auth](#passwordless-auth) feature supports passwordless authentication.
 
+### Platform Partnership plan
+
+A custom volume-based paid plan offered by Neon that includes support for resale. See [Neon plans](/docs/introduction/billing#neon-plans).
+
 ### PostgreSQL role
 
 Two PostgreSQL roles (database users) are created with each Neon project. The first is named for the registered Neon account and can be used to access the Neon project from a client. This roles’s credentials can be managed and used for password-based `psql` authentication. The second role is the `web-access` system role, which is used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth) feature. The `web-access` role is system managed. It cannot be modified, removed, or used in other authentication scenarios.
@@ -132,9 +156,17 @@ Additional PostgreSQL roles can be created in the Neon Console.
 
 In PostgreSQL, a role with the `LOGIN` attribute is considered the same as a _database user_. For additional information, refer to [Database roles](https://www.postgresql.org/docs/14/user-manag.html) and [Role Attributes](https://www.postgresql.org/docs/14/role-attributes.html), in the PostgreSQL documentation.
 
+### Pro plan
+
+A usage-based paid plan offered by Neon. See [Neon plans](/docs/introduction/billing#neon-plans).
+
 ### Project
 
 A collection of branches, databases, roles, and other project resources and settings. A project contains a compute with a PostgreSQL server as well as storage for the project data.
+
+### Project storage
+
+A billing metric that measures the amount of data stored in your Neon projects. See [Project storage](/docs/introduction/billing#project-storage).
 
 ### Proxy
 
@@ -195,3 +227,7 @@ Write-ahead logs in a specific LSN range.
 ### WAL stream
 
 The stream of data that is written to the Write-Ahead Log (WAL) during transactional processing.
+
+### Written data
+
+A billing metric that measures the amount of data that Neon writes from compute to storage to ensure the durability of your data. See [Written data](/docs/introduction/billing#written-data).
