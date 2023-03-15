@@ -112,11 +112,13 @@ const Hero = () => (
                 <ul className="mb-10 flex flex-col space-y-2.5 xl:mb-5 lg:mb-7">
                   {features.map(({ title, label }) => (
                     <li
-                      className="relative inline-flex gap-x-2.5 pl-4 before:absolute before:left-0 before:top-[9px] before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary-1"
+                      className="relative pl-4 before:absolute before:left-0 before:top-[9px] before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary-1"
                       key={title}
                     >
                       <span>{title}</span>
-                      {label && <span className="text-sm italic text-secondary-2">{label}</span>}
+                      {label && (
+                        <span className="text-sm italic text-secondary-2">&nbsp; {label}</span>
+                      )}
                     </li>
                   ))}
                 </ul>
