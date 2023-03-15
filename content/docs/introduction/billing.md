@@ -91,9 +91,8 @@ Factors that affect the amount of compute time include:
 - The number of active compute endpoints
 - The number of CUs per compute endpoint
 - Neon's _Auto-suspend compute_ feature, which suspends a compute endpoint (and its CUs) after a period of inactivity. The current default is five minutes.
-- Neon's _Configurable auto-suspend compute_ feature, which allows you to configure the timeout period for the  _Auto-suspend compute_ feature (_coming soon_).
-- Neon's _Always-on_ compute feature, which keeps an endpoint active indefinitely to avoid the few seconds of connection latency when waking an idle compute (_coming soon_).
-- Neon's _autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload (_coming soon_).
+- Neon's _Configurable auto-suspend compute_ feature, which allows you to disable or configure the timeout period for the _Auto-suspend compute_ feature (_coming soon_).
+- Neon's _Autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload (_coming soon_).
 
 <Admonition type="note">
 Neon uses a small amount of compute time, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
