@@ -6,22 +6,88 @@ import Link from 'components/shared/link';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 
 import { useState } from 'react';
-import prototypeImage from './images/prototype.svg';
+import circleSvg from './images/circle.svg';
 
 const items = [
   {
     type: 'Prototype',
-    image: prototypeImage,
+    metrics: [
+      {
+        name: 'Compute hours',
+        usage: '224 Compute-hours',
+        price: '$7.17',
+      },
+      {
+        name: 'Project storage',
+        usage: '0.6 GB',
+        price: '$0.03',
+      },
+      {
+        name: 'Written data',
+        usage: '0.2 GB',
+        price: '$0.02',
+      },
+      {
+        name: 'Data transfer',
+        usage: '0.01 GB',
+        price: '$0.001',
+      },
+    ],
   },
   {
     type: 'Startup',
-    image: prototypeImage,
+    metrics: [
+      {
+        name: 'Compute hours',
+        usage: '730 Compute-hours',
+        price: '$187',
+      },
+      {
+        name: 'Project storage',
+        usage: '22 GB',
+        price: '$2',
+      },
+      {
+        name: 'Written data',
+        usage: '4 GB',
+        price: '$0.38',
+      },
+      {
+        name: 'Data transfer',
+        usage: '3 GB',
+        price: '$0.27',
+      },
+    ],
   },
   {
     type: 'Enterprise',
-    image: prototypeImage,
+    metrics: [
+      {
+        name: 'Compute hours',
+        usage: '19,400 Compute-hours',
+        price: '$4,966',
+      },
+      {
+        name: 'Project storage',
+        usage: '115 GB',
+        price: '$10',
+      },
+      {
+        name: 'Written data',
+        usage: '260 GB',
+        price: '$25',
+      },
+      {
+        name: 'Data transfer',
+        usage: '74 GB',
+        price: '$7',
+      },
+    ],
   },
 ];
+
+const gridClassName =
+  'grid grid-cols-[34%_auto_16%] gap-x-10 2xl:grid-cols-[30%_auto_16%] xl:grid-cols-[29%_auto_19%] lg:grid-cols-[28%_auto_16%]';
 
 const Estimates = () => {
   const [selected, setSelected] = useState(items[0].type);
@@ -32,22 +98,22 @@ const Estimates = () => {
 
   return (
     <section className="estimates safe-paddings mt-48 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20">
-      <Container className="grid-gap-x grid grid-cols-12" size="mdDoc">
-        <div className="col-start-3 col-end-11 flex flex-col items-center 2xl:col-span-full">
-          <span className="text-lg uppercase leading-snug text-primary-1">
+      <Container className="" size="mdDoc">
+        <div className="flex flex-col items-center">
+          <span className="text-center text-lg uppercase leading-snug text-primary-1">
             Billing & usage estimates
           </span>
           <h2 className="mt-2.5 inline-flex flex-col text-center text-5xl font-bold leading-tight 2xl:max-w-[968px] 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:inline lg:text-[36px] lg:leading-tight">
             <span>Each user is unique.</span> However, we can give you some estimates.
           </h2>
-          <p className="mt-7 text-xl 2xl:mt-5 xl:text-base">
+          <p className="mt-7 text-center text-xl 2xl:mt-5 xl:text-base">
             Contact{' '}
             <Link className="font-semibold" theme="underline-primary-1" to="mailto:sales@neon.tech">
               sales@neon.tech
             </Link>{' '}
             if you require assistance forecasting billing and usage.
           </p>
-          <ul className="mt-[53px] mb-12 grid w-full grid-cols-3 gap-x-7 2xl:mx-auto 2xl:max-w-[801px] xl:mb-8 xl:mt-10 xl:max-w-[616px] xl:gap-x-5 lg:mb-6 lg:mt-7 md:mt-6 md:mb-5 md:gap-x-4">
+          <ul className="mt-[53px] mb-12 grid w-full grid-cols-3 gap-x-7 2xl:mx-auto 2xl:max-w-[801px] xl:mb-8 xl:mt-10 xl:max-w-[616px] xl:gap-x-5 lg:mb-6 lg:mt-7 md:mt-6 md:mb-5 md:gap-x-4 sm:gap-x-2.5 xs:grid-cols-1 xs:gap-y-2">
             {items.map(({ type }) => (
               <li key={type}>
                 <button
@@ -64,17 +130,26 @@ const Estimates = () => {
               </li>
             ))}
           </ul>
+        </div>
+        <Container className="no-scrollbars md:-mx-4 md:overflow-x-auto md:px-4" size="mdDoc">
           <LazyMotion features={domAnimation}>
             <AnimatePresence initial={false} mode="wait">
-              {items.map(({ type, image }) => {
+              {items.map(({ type, metrics }) => {
+                const totalPrice = metrics.reduce(
+                  (acc, { price }) => acc + Number(price.slice(1).replace(/,/g, '')),
+                  0
+                );
+                const formattedPrice = totalPrice.toFixed(2).replace(/\.00$/, '');
+                const formattedPriceWithCommas = formattedPrice.replace(
+                  /\B(?=(\d{3})+(?!\d))/g,
+                  ','
+                );
+
                 if (type === selected) {
                   return (
-                    <m.img
-                      className="2xl:max-w-[592px] xl:max-w-[616px] lg:max-w-[584px] md:max-w-full"
+                    <m.div
+                      className="mx-auto w-full max-w-[740px] rounded-2xl bg-gray-1 p-10 2xl:max-w-[592px] 2xl:p-7 xl:max-w-[616px] lg:max-w-[584px] lg:p-6 lg:pb-8 md:min-w-[584px] md:max-w-none"
                       key={type}
-                      src={image}
-                      width={740}
-                      height={356}
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -89,13 +164,53 @@ const Estimates = () => {
                         transition: { duration: 0.2 },
                       }}
                       transition={{ ease: [0.25, 0.1, 0, 1] }}
-                    />
+                    >
+                      <div
+                        className={clsx(
+                          'mb-4 font-semibold uppercase leading-none tracking-[0.02em] text-gray-6',
+                          gridClassName
+                        )}
+                      >
+                        <span>Billing metric</span>
+                        <span>Avg usage</span>
+                        <span>Avg price</span>
+                      </div>
+                      {metrics.map(({ name, usage, price }) => (
+                        <div
+                          className={clsx(
+                            'border-b border-gray-2 py-3.5 font-semibold',
+                            gridClassName
+                          )}
+                        >
+                          <span className="">{name}</span>
+                          <span>
+                            {usage} <span className="text-gray-6">/month</span>
+                          </span>
+                          <span className="text-primary-1">{price}</span>
+                        </div>
+                      ))}
+                      <div className={clsx('mt-3.5 text-xl font-semibold', gridClassName)}>
+                        <span className="col-span-2 uppercase">Total:</span>
+                        <span className="relative text-primary-1">
+                          ${formattedPriceWithCommas}
+                          <img
+                            className="absolute -top-4 left-1/2 h-auto w-[107px] max-w-none -translate-x-[calc(50%+10px)] 2xl:-top-3.5 xl:-translate-x-[calc(50%+18px)] lg:-top-4 sm:-translate-x-[calc(50%+8px)]"
+                            src={circleSvg}
+                            width={107}
+                            height={63}
+                            alt=""
+                            aria-hidden
+                            loading="lazy"
+                          />
+                        </span>
+                      </div>
+                    </m.div>
                   );
                 }
               })}
             </AnimatePresence>
           </LazyMotion>
-        </div>
+        </Container>
       </Container>
     </section>
   );

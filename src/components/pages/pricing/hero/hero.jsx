@@ -119,7 +119,7 @@ const Hero = () => (
                 ))}
               </ul>
               <Button
-                className="mt-auto w-full max-w-[304px] py-6 text-lg font-bold leading-none"
+                className="mt-auto w-full max-w-[304px] py-6 text-lg font-bold leading-none sm:max-w-none"
                 theme={button.theme}
                 to={button.url}
               >
