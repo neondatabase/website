@@ -10,7 +10,7 @@ Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **P
 
 Neon charges for usage based on the following metrics:
 
-- **Compute time**: The amount time that Neon compute resources are active.
+- **Compute time**: A measure of the amount of computing capacity utilized by Neon for a given time interval.
 - **Project storage**: The size of the data and history stored for your project.
 - **Written data**: The amount of data written from compute to storage.
 - **Data transfer**: The amount of data transferred out of Neon.
