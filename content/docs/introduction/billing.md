@@ -23,6 +23,7 @@ See [Billing metrics explained](#billing-metrics-explained) for a detailed descr
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|
 |**Best for**              | Prototyping and personal projects       | Small-to-medium teams, setups with 1 to 3 active databases  | Medium-to-large teams, Database fleets, Resale |
 |**Projects**              | 1                                 | 20               | Unlimited                 |
+|**Branches**              | 10                                 | Unlimited               | Unlimited                 |
 |**Compute active time per month** | 100 hours*                 | Unlimited        | Unlimited                 |
 |**Compute size**          | 1 Shared vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
 |**Storage**               | 3 GB per branch                   | 200 GB        | Unlimited                 |
@@ -152,23 +153,23 @@ data transfer (GiB) * price per GiB
 
 | Cloud provider | Region      | Billing metric | Price | Unit |
 |:---------------|:-----------|:--------------|:------|:-----|
-| AWS            | US East (Ohio)     | Data storage  | $0.000164 | GiB/Hour |
 | AWS            | US East (Ohio)     | Compute time  | $0.10200 | Compute/Hour |
+| AWS            | US East (Ohio)     | Project storage  | $0.000164 | GiB/Hour |
 | AWS            | US East (Ohio)  | Written data  | $0.09600 | GiB |
 | AWS            | US East (Ohio)| Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | US West (Oregon)| Data storage | $0.000164 | GiB/Hour |
 | AWS            | US West (Oregon)     | Compute time  | $0.10200 | Compute/Hour |
+| AWS            | US West (Oregon)| Project storage | $0.000164 | GiB/Hour |
 | AWS            | US West (Oregon)     | Written data  | $0.09600 | GiB |
 | AWS            | US West (Oregon)  | Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | Europe (Frankfurt)| Data storage  | $0.00018 | GiB/Hour |
 | AWS            | Europe (Frankfurt)| Compute time| $0.11800 | Compute/Hour |
+| AWS            | Europe (Frankfurt)| Project storage  | $0.00018 | GiB/Hour |
 | AWS            | Europe (Frankfurt)     | Written data    | $0.096000 | GiB |
 | AWS            | Europe (Frankfurt)     | Data transfer    | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | Asia Pacific (Singapore)  | Data storage    | $0.00018 | GiB/Hour |
 | AWS            | Asia Pacific (Singapore)| Compute time    | $0.12100 | Compute/Hour |
+| AWS            | Asia Pacific (Singapore)  | Project storage    | $0.00018 | GiB/Hour |
 | AWS            | Asia Pacific (Singapore)| Written data  | $0.09600 | GiB |
 | AWS            | Asia Pacific (Singapore)| Data transfer  | $0.09000 | GiB |
 
