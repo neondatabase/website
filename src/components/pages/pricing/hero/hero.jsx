@@ -71,7 +71,7 @@ const Hero = () => (
         Neon brings serverless architecture to PostgreSQL, which allows us to offer flexible usage
         and volume-based plans.
       </p>
-      <ul className="relative mx-auto mt-14 grid max-w-[1220px] grid-cols-3 justify-between gap-x-8 pt-8 xl:mt-10 xl:pt-3 lg:mt-7 lg:grid-cols-2 lg:gap-y-3 md:grid-cols-1">
+      <div className="relative mx-auto mt-14 max-w-[1220px] pt-8 xl:mt-10 xl:pt-3 lg:mt-7">
         <span
           className="absolute -right-8 top-0 h-full w-[68.5%] rounded-[42px] bg-gradient-to-t from-transparent to-[#00E599] px-px pt-px xl:-right-3 xl:rounded-[28px] lg:-left-3 lg:h-[55%] lg:w-[calc(100%+24px)] md:-inset-x-2.5 md:h-[67%] md:w-[calc(100%+20px)]"
           style={{
@@ -80,56 +80,58 @@ const Hero = () => (
             maskComposite: 'exclude',
           }}
         />
-        {items.map(({ type, subtitle, price, description, features, button }) => (
-          <li
-            className={clsx(
-              'relative z-10 flex flex-col px-10 pt-8 pb-10 xl:p-5 lg:p-7',
-              { 'rounded-[20px] bg-gray-1': type !== 'Pro' },
-              type === 'Free Tier' && 'lg:order-1 lg:col-span-full'
-            )}
-            key={type}
-          >
-            <div
+        <ul className="relative z-10 grid grid-cols-3 gap-x-8 lg:grid-cols-2 lg:gap-y-3 md:grid-cols-1">
+          {items.map(({ type, subtitle, price, description, features, button }) => (
+            <li
               className={clsx(
-                'mb-8 flex min-h-[231px] flex-col xl:mb-5 xl:min-h-[279px] md:min-h-max',
-                type === 'Free Tier' ? 'lg:min-h-max' : 'lg:min-h-[240px]'
+                'flex flex-col px-10 pt-8 pb-10 xl:p-5 lg:p-7',
+                { 'rounded-[20px] bg-gray-1': type !== 'Pro' },
+                type === 'Free Tier' && 'lg:order-1 lg:col-span-full'
               )}
+              key={type}
             >
-              <span className="relative pb-[26px] md:flex md:flex-col md:pb-0">
-                <span className="text-xl font-semibold leading-tight">{type}</span>
-                {subtitle && (
-                  <span className="absolute bottom-0 left-0 font-normal leading-none tracking-[0.02em] text-gray-4 md:static md:pt-2.5">
-                    {subtitle}
-                  </span>
+              <div
+                className={clsx(
+                  'mb-8 flex min-h-[231px] flex-col xl:mb-5 xl:min-h-[279px] md:min-h-max',
+                  type === 'Free Tier' ? 'lg:min-h-max' : 'lg:min-h-[240px]'
                 )}
-              </span>
-
-              <h3 className="text-[36px] font-semibold leading-snug lg:text-[32px]">{price}</h3>
-              <p className="mt-2.5 text-gray-6">{description}</p>
-            </div>
-            <div className="mt-auto flex grow flex-col">
-              <ul className="mb-10 flex flex-col space-y-2.5 xl:mb-5 lg:mb-7">
-                {features.map(({ title, label }) => (
-                  <li
-                    className="relative inline-flex gap-x-2.5 pl-4 before:absolute before:left-0 before:top-2 before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary-1"
-                    key={title}
-                  >
-                    <span>{title}</span>
-                    {label && <span className="text-sm italic text-secondary-2">{label}</span>}
-                  </li>
-                ))}
-              </ul>
-              <Button
-                className="mt-auto w-full max-w-[304px] py-6 text-lg font-bold leading-none sm:max-w-none"
-                theme={button.theme}
-                to={button.url}
               >
-                {button.text}
-              </Button>
-            </div>
-          </li>
-        ))}
-      </ul>
+                <span className="relative pb-[26px] md:flex md:flex-col md:pb-0">
+                  <span className="text-xl font-semibold leading-tight">{type}</span>
+                  {subtitle && (
+                    <span className="absolute bottom-0 left-0 font-normal leading-none tracking-[0.02em] text-gray-4 md:static md:pt-2.5">
+                      {subtitle}
+                    </span>
+                  )}
+                </span>
+
+                <h3 className="text-[36px] font-semibold leading-snug lg:text-[32px]">{price}</h3>
+                <p className="mt-2.5 text-gray-6">{description}</p>
+              </div>
+              <div className="mt-auto flex grow flex-col">
+                <ul className="mb-10 flex flex-col space-y-2.5 xl:mb-5 lg:mb-7">
+                  {features.map(({ title, label }) => (
+                    <li
+                      className="relative inline-flex gap-x-2.5 pl-4 before:absolute before:left-0 before:top-[9px] before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary-1"
+                      key={title}
+                    >
+                      <span>{title}</span>
+                      {label && <span className="text-sm italic text-secondary-2">{label}</span>}
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  className="mt-auto w-full max-w-[304px] py-6 text-lg font-bold leading-none sm:max-w-none"
+                  theme={button.theme}
+                  to={button.url}
+                >
+                  {button.text}
+                </Button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </Container>
   </section>
 );

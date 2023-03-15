@@ -147,68 +147,66 @@ const Estimates = () => {
                   ','
                 );
 
-                if (type === selected) {
-                  return (
-                    <m.div
-                      className="mx-auto w-full max-w-[740px] rounded-2xl bg-gray-1 p-10 2xl:max-w-[592px] 2xl:p-7 xl:max-w-[616px] lg:max-w-[584px] lg:p-6 lg:pb-8 md:min-w-[584px] md:max-w-none"
-                      key={type}
-                      initial={{
-                        opacity: 0,
-                        translateY: 10,
-                      }}
-                      animate={{
-                        opacity: 1,
-                        translateY: 0,
-                        transition: { duration: 0.3 },
-                      }}
-                      exit={{
-                        opacity: 0,
-                        transition: { duration: 0.2 },
-                      }}
-                      transition={{ ease: [0.25, 0.1, 0, 1] }}
+                return type === selected ? (
+                  <m.div
+                    className="mx-auto w-full max-w-[740px] rounded-2xl bg-gray-1 p-10 2xl:max-w-[592px] 2xl:p-7 xl:max-w-[616px] lg:max-w-[584px] lg:p-6 lg:pb-8 md:min-w-[584px] md:max-w-none"
+                    key={type}
+                    initial={{
+                      opacity: 0,
+                      translateY: 10,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      translateY: 0,
+                      transition: { duration: 0.3 },
+                    }}
+                    exit={{
+                      opacity: 0,
+                      transition: { duration: 0.2 },
+                    }}
+                    transition={{ ease: [0.25, 0.1, 0, 1] }}
+                  >
+                    <div
+                      className={clsx(
+                        'mb-4 font-semibold uppercase leading-none tracking-[0.02em] text-gray-6',
+                        gridClassName
+                      )}
                     >
+                      <span>Billing metric</span>
+                      <span>Avg usage</span>
+                      <span>Avg price</span>
+                    </div>
+                    {metrics.map(({ name, usage, price }) => (
                       <div
                         className={clsx(
-                          'mb-4 font-semibold uppercase leading-none tracking-[0.02em] text-gray-6',
+                          'border-b border-gray-2 py-3.5 font-semibold',
                           gridClassName
                         )}
                       >
-                        <span>Billing metric</span>
-                        <span>Avg usage</span>
-                        <span>Avg price</span>
-                      </div>
-                      {metrics.map(({ name, usage, price }) => (
-                        <div
-                          className={clsx(
-                            'border-b border-gray-2 py-3.5 font-semibold',
-                            gridClassName
-                          )}
-                        >
-                          <span className="">{name}</span>
-                          <span>
-                            {usage} <span className="text-gray-6">/month</span>
-                          </span>
-                          <span className="text-primary-1">{price}</span>
-                        </div>
-                      ))}
-                      <div className={clsx('mt-3.5 text-xl font-semibold', gridClassName)}>
-                        <span className="col-span-2 uppercase">Total:</span>
-                        <span className="relative text-primary-1">
-                          ${formattedPriceWithCommas}
-                          <img
-                            className="absolute -top-4 left-1/2 h-auto w-[107px] max-w-none -translate-x-[calc(50%+16px)] 2xl:-top-3.5 xl:-translate-x-[calc(50%+18px)] lg:-top-4 sm:-translate-x-[calc(50%+8px)]"
-                            src={circleSvg}
-                            width={107}
-                            height={63}
-                            alt=""
-                            loading="lazy"
-                            aria-hidden
-                          />
+                        <span className="">{name}</span>
+                        <span>
+                          {usage} <span className="text-gray-6">/month</span>
                         </span>
+                        <span className="text-primary-1">{price}</span>
                       </div>
-                    </m.div>
-                  );
-                }
+                    ))}
+                    <div className={clsx('mt-3.5 text-xl font-semibold', gridClassName)}>
+                      <span className="col-span-2 uppercase">Total:</span>
+                      <span className="relative text-primary-1">
+                        ${formattedPriceWithCommas}
+                        <img
+                          className="absolute -top-4 left-1/2 h-auto w-[107px] max-w-none -translate-x-[calc(50%+16px)] 2xl:-top-3.5 xl:-translate-x-[calc(50%+18px)] lg:-top-4 sm:-translate-x-[calc(50%+8px)]"
+                          src={circleSvg}
+                          width={107}
+                          height={63}
+                          alt=""
+                          loading="lazy"
+                          aria-hidden
+                        />
+                      </span>
+                    </div>
+                  </m.div>
+                ) : null;
               })}
             </AnimatePresence>
           </LazyMotion>
