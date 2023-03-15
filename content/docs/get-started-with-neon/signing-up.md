@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/getting_started/
 ---
 
-Neon is currently in Technical Preview. You can sign up for Neon and use it for free during this period. For information about usage limits during the Technical Preview, see [Technical Preview Free Tier](/docs/introduction/technical-preview-free-tier).
+You can start using Neon for free and upgrade to one of our paid plans when you scale. For information about Free Tier usage limits, see [Free Tier](/docs/introduction/free-tier). For information about our paid-tier options, see [Billing](/docs/introduction/billing).
 
 To sign up for Neon:
 

@@ -24,7 +24,7 @@ The following table lists Neon PostgreSQL parameter settings that may differ fro
 | Parameter       | Value   | Note                                                                              |
 | --------------- | ------- | --------------------------------------------------------------------------------- |
 | fsync           | off     | Neon syncs data to the Neon Storage Engine to store your data safely and reliably |
-| max_connections |         | The value depends on compute size. Set to 100 for the Technical Preview.          |
+| max_connections |         | The value depends on compute size. Set to 100 by default.                         |
 | shared_buffers  |         | The value depends on compute size                                                 |
 | wal_level       | replica | Logical replication is currently not supported                                    |
 

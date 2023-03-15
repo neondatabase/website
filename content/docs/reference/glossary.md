@@ -42,7 +42,7 @@ Continuous integration and continuous delivery or continuous deployment.
 
 ### Compute
 
-A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon compute instance (also referred to as a [compute endpoint](#compute-endpoint)) runs PostgreSQL. The amount of compute resources available to a Neon project is currently subject to the limits defined by the Technical Preview Free Tier. A Neon compute instance is stateless and is automatically activated or suspended based on user activity.
+A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon compute instance (also referred to as a [compute endpoint](#compute-endpoint)) runs PostgreSQL. The amount of compute resources available to a Neon project is defined by tier (free or paid). A Neon compute instance is stateless and is automatically activated or suspended based on user activity.
 
 ### Compute endpoint
 
@@ -84,7 +84,7 @@ A named collection of database objects. A Neon project has a default database na
 
 ### Free Tier
 
-A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier/).
+A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Free Tier](/docs/introduction/free-tier).
 
 ### LSN
 
@@ -171,10 +171,6 @@ A feature of the Neon Console that enables running queries on a Neon project dat
 ### Storage
 
 Where data is recorded and stored. Neon storage consists of Pageserver which stores hot data and a cloud object store such as Amazon S3 that stores cold data for cost optimization and durability.
-
-### Technical Preview
-
-A preview of Neon during which users are able to try Neon's Free Tier. For more information, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier/).
 
 ### Token
 

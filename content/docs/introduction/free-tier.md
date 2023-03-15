@@ -1,13 +1,12 @@
 ---
-title: Technical Preview Free Tier
+title: Free Tier
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/technical-preview-free-tier
+  - /docs/introduction/technical-preview-free-tier
 ---
 
-The Neon cloud service is available for free during the Technical Preview. For information about how the Technical Preview fits within Neon's release plans, please refer to the [Neon roadmap](/docs/reference/roadmap).
-
-The Technical Preview Free Tier has the following limits:
+Neon's Free Tier has the following limits:
 
 - 1 Neon project.
 - 10 branches including the [primary branch](/docs/reference/glossary#primary-branch), with a limit of 3GB of data per branch.
@@ -23,7 +22,7 @@ Neon reserves the right to adjust Free Tier limits.
 
 ## Data Size
 
-Neon stores data in its own internal format. The data size limit in the Technical Preview free tier applies to the logical size of your branch. The logical size is the sum of all database sizes in the branch of your project. For information about checking the size of the data in your branch, see [Check the data size](/docs/manage/branches#check-the-data-size).
+Neon stores data in its own internal format. The data size limit in the Free Tier applies to the logical size of your branch. The logical size is the sum of all database sizes in the branch of your project. For information about checking the size of the data in your branch, see [Check the data size](/docs/manage/branches#check-the-data-size).
 
 <a id="#point-in-time-reset/"></a>
 
@@ -31,4 +30,4 @@ Neon stores data in its own internal format. The data size limit in the Technica
 
 Neon storage consumes extra space in order to support point-in-time restore, which enables you to restore your data to a historical state. Historical data is stored in log-based format.
 
-Neon limits the amount of modification history that is stored in the Technical Preview Free Tier.
+Neon limits the amount of modification history that is stored in the Free Tier.
