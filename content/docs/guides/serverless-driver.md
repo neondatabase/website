@@ -91,7 +91,7 @@ To get started:
       await client.end()
 
       return NextResponse.json({name: `The current time is ${currentTime}``,
-   });
+      });
     }
     ```
 
@@ -106,8 +106,6 @@ To get started:
 1. View the function logs.
 
     Click on the deployed project from the Vercel dashboard and choose the **Functions** tab. This tab displays logs from any functions running within your project. Use the dropdown to select the `api/hello` function.
-
-
 
 ### Neon serverless driver with Cloudflare
 
