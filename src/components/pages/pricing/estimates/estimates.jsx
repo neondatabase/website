@@ -37,7 +37,7 @@ const items = [
     ],
   },
   {
-    type: 'Startup',
+    type: 'Launch',
     metrics: [
       {
         name: 'Compute hours',
@@ -62,7 +62,7 @@ const items = [
     ],
   },
   {
-    type: 'Enterprise',
+    type: 'Scale',
     metrics: [
       {
         name: 'Compute hours',
@@ -115,8 +115,8 @@ const Estimates = () => {
             if you require assistance forecasting billing and usage.
           </p>
           <ul className="mt-[53px] mb-12 grid w-full grid-cols-3 gap-x-7 2xl:mx-auto 2xl:max-w-[801px] xl:mb-8 xl:mt-10 xl:max-w-[616px] xl:gap-x-5 lg:mb-6 lg:mt-7 md:mt-6 md:mb-5 md:gap-x-4 sm:gap-x-2.5 xs:grid-cols-1 xs:gap-y-2">
-            {items.map(({ type }) => (
-              <li key={type}>
+            {items.map(({ type }, index) => (
+              <li key={index}>
                 <button
                   className={clsx(
                     'w-full rounded-[80px] border py-6 text-lg font-bold leading-none transition-colors duration-200 hover:border-white hover:text-white xl:py-4 md:py-3',
@@ -136,7 +136,7 @@ const Estimates = () => {
         <Container className="no-scrollbars md:-mx-4 md:overflow-x-auto md:px-4" size="mdDoc">
           <LazyMotion features={domAnimation}>
             <AnimatePresence initial={false} mode="wait">
-              {items.map(({ type, metrics }) => {
+              {items.map(({ type, metrics }, index) => {
                 const totalPrice = metrics.reduce(
                   (acc, { price }) => acc + Number(price.slice(1).replace(/,/g, '')),
                   0
@@ -150,7 +150,7 @@ const Estimates = () => {
                 return type === selected ? (
                   <m.div
                     className="mx-auto w-full max-w-[740px] rounded-2xl bg-gray-1 p-10 2xl:max-w-[592px] 2xl:p-7 xl:max-w-[616px] lg:max-w-[584px] lg:p-6 lg:pb-8 md:min-w-[584px] md:max-w-none"
-                    key={type}
+                    key={index}
                     initial={{
                       opacity: 0,
                       translateY: 10,
@@ -176,12 +176,13 @@ const Estimates = () => {
                       <span>Avg usage</span>
                       <span>Avg price</span>
                     </div>
-                    {metrics.map(({ name, usage, price }) => (
+                    {metrics.map(({ name, usage, price }, index) => (
                       <div
                         className={clsx(
                           'border-b border-gray-2 py-3.5 font-semibold',
                           gridClassName
                         )}
+                        key={index}
                       >
                         <span className="">{name}</span>
                         <span>

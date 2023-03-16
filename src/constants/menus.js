@@ -50,8 +50,8 @@ export default {
       // ],
     },
     {
-      text: 'Plans',
-      to: LINKS.plans,
+      text: 'Pricing',
+      to: LINKS.pricing,
     },
   ],
   footer: [
@@ -71,8 +71,8 @@ export default {
           to: LINKS.careers,
         },
         {
-          text: 'Plans',
-          to: LINKS.plans,
+          text: 'Pricing',
+          to: LINKS.pricing,
         },
 
         // {
@@ -167,8 +167,8 @@ export default {
       to: LINKS.blog,
     },
     {
-      text: 'Plans',
-      to: LINKS.plans,
+      text: 'Pricing',
+      to: LINKS.pricing,
     },
     // {
     //   iconName: 'discord',

@@ -4,6 +4,7 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link/link';
+import LINKS from 'constants/links';
 
 const items = [
   {
@@ -54,7 +55,7 @@ const items = [
       { title: 'Volume discounts' },
     ],
     button: {
-      url: '/contact-sales',
+      url: LINKS.contactSales,
       text: 'Contact Sales',
       theme: 'white-outline',
     },
@@ -124,9 +125,10 @@ const Hero = () => (
                   ))}
                 </ul>
                 <Button
-                  className="mt-auto w-full max-w-[304px] py-6 text-lg font-bold leading-none sm:max-w-none"
+                  className="mt-auto w-full max-w-[304px] py-6 !text-lg sm:max-w-none"
                   theme={button.theme}
                   to={button.url}
+                  size="sm"
                 >
                   {button.text}
                 </Button>

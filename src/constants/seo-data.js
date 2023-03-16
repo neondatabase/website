@@ -44,8 +44,8 @@ export default {
       'Neon allows you to instantly branch your data the same way that you branch your code.',
     imagePath: '/images/social-previews/branching.jpg',
   },
-  plans: {
-    title: 'Plans — Neon',
+  pricing: {
+    title: 'Pricing — Neon',
     description:
       'Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible usage and volume-based plans.',
   },
