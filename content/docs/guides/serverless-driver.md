@@ -44,7 +44,7 @@ To get started:
     ```bash
     npx create-next-app@latest neon-ef-demo --typescript
     ```
-    
+
     Accept all defaults by pressing [Return].
 
 1. Enter the new directory.
@@ -58,7 +58,7 @@ To get started:
     ```bash
     vercel link
     ```
-    
+
     Again, accept all defaults by pressing [Return].
 
 1. Set your PostgreSQL credentials on Vercel.
@@ -68,13 +68,13 @@ To get started:
     ```
 
     Paste in your Neon connection string, which you can find on the Neon **Dashboard**. It will look something like this:
-    
-    ```
+
+    ```text
     postgres://<user>:<password>@<hostname>.neon.tech/<dbname>
     ```
-    
+
     Press `a` to select all Vercel environments, then [Return].
-    
+
     For more information about obtaining a Neon connection string, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 1. Install the Neon serverless driver package.
@@ -82,7 +82,7 @@ To get started:
     ```bash
     npm install @neondatabase/serverless
     ```
-    
+
 1. Replace the code in `/pages/api/hello.ts` with the code for your function:
 
     ```js
@@ -105,7 +105,11 @@ To get started:
     vercel deploy
     ```
 
-    Follow the prompts to deploy your function and once done, open the `Production` link. Add `/api/hello` to the URL to see the result of your Edge Function.
+    Follow the prompts to deploy your function and once done, open the `Production` link. Add `/api/hello` to the URL to see the result of your Edge Function. The response should appear similar to the following:
+
+    ```text
+    The time is Thu Mar 16 2023 18:23:59 GMT+0000 (Coordinated Universal Time)
+    ```
 
 1. View the function logs.
 
@@ -175,7 +179,7 @@ To get started:
     Go to the Worker URL, and you should see a text response similar to:
 
     ```text
-    The time is Wed Nov 23 2022 10:34:06 GMT+0000 (Coordinated Universal Time)
+    The time is Thu Mar 16 2023 18:23:59 GMT+0000 (Coordinated Universal Time)
     ```
 
     If the Worker has not been run in a while, you may experience a few seconds of latency, as both Cloudflare and Neon will perform cold starts. Subsequent refreshes are quicker.
@@ -186,13 +190,13 @@ Brief queries such as the one used in this example can generally be run on Cloud
 
 ## Serverless driver example application
 
-Neon provides an example application to help you get started with the Neon serverless driver on Vercel Edge Functions or Cloudflare Workers. The example application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
+Neon provides an example application to help you get started with the Neon serverless driver on Vercel Edge Functions or Cloudflare Workers. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
 
 ![UNESCO World Heritage sites app](/docs/relnotes/unesco_sites.png)
 
-There are different implementations of the example application to choose from:
+There are different implementations of the application to choose from:
 
-  - [neondatabase/neon-vercel-rawsql](https://github.com/neondatabase/neon-vercel-rawsql) demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions.
-  - [neondatabase/neon-vercel-zapatos](https://github.com/neondatabase/neon-vercel-zapatos) demonstrates using [Zapatos](https://jawj.github.io/zapatos/) with Neon's serverless driver on Vercel Edge Functions. Zapatos offers zero-abstraction Postgres for TypeScript.
-  - [neondatabase/neon-vercel-kysely](https://github.com/neondatabase/neon-vercel-kysely) demonstrates using [kysely](https://github.com/koskimas/kysely) and [kysely-codegen](https://github.com/RobinBlomberg/kysely-codegen) with Neon's serverless driver on Vercel Edge Functions. Kysely is a type-safe and autocompletion-friendly typescript SQL query builder. `kysely-codegen` generates Kysely type definitions from your database.
-  - [neondatabase/serverless-cfworker-demo](https://github.com/neondatabase/serverless-cfworker-demo) demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance. There is an accompanying blog post for this example. See [Edge-compatible Serverless Driver for Postgres](https://neon.tech/blog/serverless-driver-for-postgres).
+- [neondatabase/neon-vercel-rawsql](https://github.com/neondatabase/neon-vercel-rawsql) demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions.
+- [neondatabase/neon-vercel-zapatos](https://github.com/neondatabase/neon-vercel-zapatos) demonstrates using [Zapatos](https://jawj.github.io/zapatos/) with Neon's serverless driver on Vercel Edge Functions. Zapatos offers zero-abstraction Postgres for TypeScript.
+- [neondatabase/neon-vercel-kysely](https://github.com/neondatabase/neon-vercel-kysely) demonstrates using [kysely](https://github.com/koskimas/kysely) and [kysely-codegen](https://github.com/RobinBlomberg/kysely-codegen) with Neon's serverless driver on Vercel Edge Functions. Kysely is a type-safe and autocompletion-friendly typescript SQL query builder. `kysely-codegen` generates Kysely type definitions from your database.
+- [neondatabase/serverless-cfworker-demo](https://github.com/neondatabase/serverless-cfworker-demo) demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance. There is an accompanying blog post for this example. See [Edge-compatible Serverless Driver for Postgres](https://neon.tech/blog/serverless-driver-for-postgres).
