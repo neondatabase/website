@@ -1,5 +1,6 @@
 ---
 title: Connect from AWS Lambda
+subtitle: Learn how to set up a Neon database and connect from an AWS Lambda function
 enableTableOfContents: true
 ---
 
