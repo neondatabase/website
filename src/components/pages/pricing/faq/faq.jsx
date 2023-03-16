@@ -14,7 +14,7 @@ const items = [
   {
     question: 'Can I upgrade or downgrade my subscription later?',
     answer:
-      'Yes. You can upgrade from Free Tier to our Pro plan by selecting <strong>Go Pro</strong>. To upgrade to a custom Enterprise or Platform Partnership plan, contact <a href="mailto:sales@neon.tech">sales@neon.tech</a>. For downgrade instructions, see <a href="/docs/introduction/billing">Billing</a>.',
+      'Yes. You can upgrade from Free Tier to our Pro plan by selecting <a href="https://console.neon.tech/app/billing"><strong>Go Pro</strong></a>. To upgrade to a custom Enterprise or Platform Partnership plan, contact <a href="mailto:sales@neon.tech">sales@neon.tech</a>. For downgrade instructions, see <a href="/docs/introduction/billing">Billing</a>.',
   },
   {
     question: 'What payment methods do you accept?',
