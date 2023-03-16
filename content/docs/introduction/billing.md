@@ -161,7 +161,7 @@ data transfer (GiB) * price per GiB
 | AWS            | US West (Oregon)     | Written data  | $0.09600 | GiB |
 | AWS            | US West (Oregon)  | Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | Europe (Frankfurt)| Compute time| $0.11800 | ComputeHour |
+| AWS            | Europe (Frankfurt)| Compute time| $0.11800 | Compute-hour |
 | AWS            | Europe (Frankfurt)| Project storage  | $0.00018 | GiBHour |
 | AWS            | Europe (Frankfurt)     | Written data    | $0.09600 | GiB |
 | AWS            | Europe (Frankfurt)     | Data transfer    | $0.09000 | GiB |
