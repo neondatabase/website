@@ -2,23 +2,17 @@
 title: Introduction to Neon
 ---
 
-Neon is a fully managed serverless PostgreSQL. Neon separates storage and compute and offers modern developer features such as serverless, branching, bottomless storage, and more.
+Neon is a fully managed serverless PostgreSQL. Neon separates storage and compute to offer modern developer features such as serverless, branching, bottomless storage, and more.
 
 ## New to Neon?
 
-The [Neon quickstart guide](/docs/get-started-with-neon/signing-up) will get you up and running with Neon in just a few minutes. You will learn how to:
+Refer to our _Get started_ documentation to get up and running with Neon in just a few minutes. You will learn how to:
 
-- Sign up
-- Create a project
-- Connect
-- Import data
-- Branch your data
+- [Sign up](/docs/get-started-with-neon/signing-up)
+- [Create your first project](/docs/get-started-with-neon/setting-up-a-project)
+- [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
 
 ## Neon Documentation
-
-**Get started**
-
-[Sign up](https://neon.tech/docs/get-started-with-neon/signing-up), create a project, and query data with the SQL Editor.
 
 <IntroNavigation>
 
@@ -26,13 +20,13 @@ The [Neon quickstart guide](/docs/get-started-with-neon/signing-up) will get you
 
 [Import data](/docs/import/import-from-postgres "Import your own data or sample data that you can use to explore Neon")
 
-[Manage](/docs/manage/overview "Learn how to manage Neon projects, branches, compute resources, databases, and users.")
+[Manage](/docs/manage/overview "Learn how to manage Neon projects, branches, compute resources, databases, and roles.")
 
 [Branching](/docs/introduction/branching "Learn about branching and how you can use it to optimize development workflows.")
 
 [PostgreSQL extensions](/docs/reference/pg-extensions "Install supported PostgreSQL extensions")
 
-[Neon API](/docs/reference/api-reference "Manage Neon programmatically using the Neon API")
+[Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api "Manage Neon programmatically using the Neon API")
 
 </IntroNavigation>
 
@@ -41,6 +35,8 @@ The [Neon quickstart guide](/docs/get-started-with-neon/signing-up) will get you
 <TechnologyNavigation>
 
 [![Vercel](/images/technology-logos/vercel-logo.svg "Connect with the Neon Vercel")](/docs/guides/vercel)
+
+[![Prisma](/images/technology-logos/prisma-logo.svg "Connect from Prisma to Neon")](/docs/guides/prisma)
 
 [![Django](/images/technology-logos/django-logo.svg "Connect a Django application to Neon")](/docs/guides/django)
 
@@ -56,8 +52,6 @@ The [Neon quickstart guide](/docs/get-started-with-neon/signing-up) will get you
 
 [![Node.js](/images/technology-logos/nodejs-logo.svg "Connect a Node.js application to Neon")](/docs/guides/node)
 
-[![Prisma](/images/technology-logos/prisma-logo.svg "Connect from Prisma to Neon")](/docs/guides/prisma)
-
 [![Rust](/images/technology-logos/rust-logo.svg "Connect a Rust application to Neon")](/docs/guides/rust)
 
 [![SQLAlchemy](/images/technology-logos/sqlalchemy-logo.svg "Connect an SQLAlchemy application to Neon")](/docs/guides/sqlalchemy)
@@ -68,7 +62,7 @@ The [Neon quickstart guide](/docs/get-started-with-neon/signing-up) will get you
 
 ## Continue learning
 
-If you have technical questions, chat live with developers in the official [Neon Discourse Community](https://community.neon.tech/).
+If you have technical questions, reach out to Neon developers and community members in the official [Neon Discourse Community](https://community.neon.tech/).
 
 <div className="dark:hidden sm:hidden">![Community poster](/images/community-poster.png)</div>
 
