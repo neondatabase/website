@@ -1,12 +1,11 @@
 ---
 title: Connect a Go application to Neon
+subtitle: Set up a Neon project in seconds and connect to it from a Go application
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
 ---
-
-This topic describes how to create a Neon project and connect to it from a Go application.
 
 To connect to Neon from a Go application:
 
