@@ -12,7 +12,7 @@ You can learn more about the driver from the [README on GitHub](https://github.c
 
 ## Install the Neon serverless driver
 
-As a drop-in replacement for [node-postgres](https://node-postgres.com/), you simply install the Neon serverless driver where you would otherwise install `pg`. TypeScript types (the equivalent of `@types/pg`) are also included.
+As a drop-in replacement for [node-postgres](https://node-postgres.com/), you simply install the Neon serverless driver where you would otherwise install `pg`. The driver includes TypeScript types (the equivalent of `@types/pg`).
 
 ```bash
 npm install @neondatabase/serverless
@@ -29,7 +29,7 @@ This example shows how to create a minimal Vercel Edge Function that uses the Ne
 To complete these steps, you require:
 
 - A [Neon project](/docs/get-started-with-neon/setting-up-a-project).
-- A [a Vercel account](https://vercel.com/).
+- A [Vercel account](https://vercel.com/).
 
 To get started:
 
@@ -105,15 +105,11 @@ To get started:
     vercel deploy
     ```
 
-    Follow the prompts to deploy your function and once done, open the `Production` link. Add `/api/hello` to the URL to see the result of your Edge Function. The response should appear similar to the following:
+    Follow the prompts to deploy your function and once done, open the `Production` link. Add `/api/hello` to the URL to see the result of your Edge Function. You should see a text response similar to:
 
     ```text
     The time is Thu Mar 16 2023 18:23:59 GMT+0000 (Coordinated Universal Time)
     ```
-
-1. View the function logs.
-
-    Click on the deployed project from the Vercel dashboard and choose the **Functions** tab. This tab displays logs from any functions running within your project. Use the dropdown to select the `api/hello` function.
 
 ### Neon serverless driver with Cloudflare
 
@@ -150,10 +146,10 @@ To get started:
     npx wrangler secret put DATABASE_URL
     ```
 
-    You can find the connection string for your database on the Neon **Dashboard**. It appears similar to:
+    You can find the connection string for your database on the Neon **Dashboard**. It will look something like this:
 
     ```text
-    `postgres://<user>:<password>@<hostname>/<dbname>`. 
+    postgres://<user>:<password>@<hostname>.neon.tech/<dbname> 
     ```
 
     For information about obtaining a Neon connection string, see [Connect from any application](/docs/connect/connect-from-any-app).
@@ -188,7 +184,7 @@ To get started:
 Brief queries such as the one used in this example can generally be run on Cloudflare’s free plan. Queries with larger result sets may exceed the 10ms CPU time available to Workers on the free plan. In that case, you will see a Cloudflare error page, and you will need to upgrade your Cloudflare service to avoid this issue.
 </Admonition>
 
-## Serverless driver example application
+## Example application
 
 Neon provides an example application to help you get started with the Neon serverless driver on Vercel Edge Functions or Cloudflare Workers. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
 
