@@ -16,7 +16,8 @@ const items = [
     metrics: [
       {
         name: 'Compute hours',
-        usage: '224 Compute-hours',
+        usage: '56 hrs',
+        details: '224 hrs * 0.25 Compute Units',
         price: '$7.17',
       },
       {
@@ -41,7 +42,8 @@ const items = [
     metrics: [
       {
         name: 'Compute hours',
-        usage: '730 Compute-hours',
+        usage: '1,460 hrs',
+        details: '730 hrs * 2 Compute Units',
         price: '$187',
       },
       {
@@ -66,7 +68,8 @@ const items = [
     metrics: [
       {
         name: 'Compute hours',
-        usage: '19,400 Compute-hours',
+        usage: '38,000 hrs',
+        details: '19,000 hrs * 2 Compute Units',
         price: '$4,966',
       },
       {
@@ -176,7 +179,7 @@ const Estimates = () => {
                       <span>Avg usage</span>
                       <span>Avg price</span>
                     </div>
-                    {metrics.map(({ name, usage, price }, index) => (
+                    {metrics.map(({ name, usage, details, price }, index) => (
                       <div
                         className={clsx(
                           'border-b border-gray-2 py-3.5 font-semibold',
@@ -185,14 +188,19 @@ const Estimates = () => {
                         key={index}
                       >
                         <span className="">{name}</span>
-                        <span>
-                          {usage} <span className="text-gray-6">/month</span>
+                        <span className="inline-flex flex-col">
+                          <span>
+                            {usage} <span className="text-gray-6">/month</span>
+                          </span>
+                          <span className="font-normal text-gray-6">{details}</span>
                         </span>
                         <span className="text-primary-1">{price}</span>
                       </div>
                     ))}
                     <div className={clsx('mt-3.5 text-xl font-semibold', gridClassName)}>
-                      <span className="col-span-2 uppercase">Total:</span>
+                      <span className="col-span-2 inline-flex flex-col">
+                        <span className="uppercase">Total:</span>
+                      </span>
                       <span className="relative text-primary-1">
                         ${formattedPriceWithCommas}
                         <img
@@ -206,6 +214,9 @@ const Estimates = () => {
                         />
                       </span>
                     </div>
+                    <span className="mt-3 block text-base font-normal text-gray-6">
+                      *Pricing is based off of US East (Ohio)
+                    </span>
                   </m.div>
                 ) : null;
               })}
