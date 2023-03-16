@@ -183,3 +183,14 @@ Brief queries such as the one used in this example can generally be run on Cloud
 </Admonition>
 
 For a more in-depth example application that showcases the Neon serverless driver with Cloudflare Workers, see our [UNESCO World Heritage Sites]( Apphttps://github.com/neondatabase/serverless-cfworker-demo) and read the accompanying [blog post](https://neon.tech/blog/serverless-driver-for-postgres).
+
+## Serverless driver example application
+
+Neon provides an example application to help you get started with the Neon serverless driver on Vercel Edge Functions or Cloudflare Workers. The example application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
+
+![UNESCO World Heritage sites app](/docs/relnotes/unesco_sites.png)
+
+  - The [neondatabase/neon-vercel-rawsql](https://github.com/neondatabase/neon-vercel-rawsql) version of the example application demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions.
+  - The [neondatabase/neon-vercel-zapatos](https://github.com/neondatabase/neon-vercel-zapatos) version of the example application demonstrates using [Zapatos](https://jawj.github.io/zapatos/) with Neon's serverless driver on Vercel Edge Functions. Zapatos offers zero-abstraction Postgres for TypeScript.
+  - The [neondatabase/neon-vercel-kysely](https://github.com/neondatabase/neon-vercel-kysely) version of the example application demonstrates using [kysely](https://github.com/koskimas/kysely) and [kysely-codegen](https://github.com/RobinBlomberg/kysely-codegen) with Neon's serverless driver on Vercel Edge Functions. Kysely is a type-safe and autocompletion-friendly typescript SQL query builder. `kysely-codegen` generates Kysely type definitions from your database.
+ - The [neondatabase/serverless-cfworker-demo](https://github.com/neondatabase/serverless-cfworker-demo) version of the example application demonstrates using the Neon serverless driver on Cloudflare Workers.
