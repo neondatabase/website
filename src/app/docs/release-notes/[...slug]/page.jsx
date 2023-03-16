@@ -1,9 +1,12 @@
+import { notFound } from 'next/navigation';
+
+import Post from 'components/pages/doc/post';
 import Hero from 'components/pages/release-notes/hero';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
-import { RELEASE_NOTES_BASE_PATH } from 'constants/docs';
+import { RELEASE_NOTES_BASE_PATH, RELEASE_NOTES_DATE_SLUG_REGEX } from 'constants/docs';
 import { getAllReleaseNotes, getPostBySlug, RELEASE_NOTES_DIR_PATH } from 'utils/api-docs';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 import serializeMdx from 'utils/serialize-mdx';
@@ -11,14 +14,20 @@ import serializeMdx from 'utils/serialize-mdx';
 export async function generateStaticParams() {
   const releaseNotes = await getAllReleaseNotes();
 
-  return releaseNotes.map(({ slug }) => ({ slug }));
+  return releaseNotes.map(({ slug }) => {
+    const slugsArray = slug.split('/');
+
+    return {
+      slug: slugsArray,
+    };
+  });
 }
 
-export default async function ReleaseNotesPost({ params }) {
-  const { slug } = params;
-  const { data, content } = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
+const ReleaseNotePage = async ({ currentSlug }) => {
+  const { datetime, label } = getReleaseNotesDateFromSlug(currentSlug);
+  const { data, content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
   const mdxSource = await serializeMdx(content);
-  const { datetime, label } = getReleaseNotesDateFromSlug(slug);
+
   return (
     <>
       <Hero
@@ -42,7 +51,6 @@ export default async function ReleaseNotesPost({ params }) {
             >
               {data.label} release
             </Heading>
-
             <Content className="mt-8 prose-h3:text-xl" content={mdxSource} />
             <Link
               className="mt-10 font-semibold lg:mt-8"
@@ -56,5 +64,46 @@ export default async function ReleaseNotesPost({ params }) {
         </Container>
       </div>
     </>
+  );
+};
+
+const ReleaseNoteCategoryPage = async ({ currentSlug }) => {
+  const allReleaseNotes = await getAllReleaseNotes();
+  const fileOriginPath = process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH;
+
+  const currentReleaseNotes = await Promise.all(
+    allReleaseNotes
+      .filter((item) => item.label.charAt(0).toLowerCase() + item.label.slice(1) === currentSlug)
+      .map(async (item) => ({
+        ...item,
+        content: await serializeMdx(item.content),
+      }))
+  );
+
+  if (!currentReleaseNotes.length) return notFound();
+
+  return (
+    <Post
+      content={{}}
+      data={{}}
+      breadcrumbs={[]}
+      navigationLinks={{}}
+      currentSlug={currentSlug}
+      fileOriginPath={fileOriginPath}
+      releaseNotes={currentReleaseNotes}
+      releaseNotesActiveLabel={currentSlug}
+      isReleaseNotes
+    />
+  );
+};
+
+export default async function ReleaseNotesPost({ params: { slug } }) {
+  const currentSlug = slug.join('/');
+  const isReleaseNotePage = RELEASE_NOTES_DATE_SLUG_REGEX.test(currentSlug);
+
+  return isReleaseNotePage ? (
+    <ReleaseNotePage currentSlug={currentSlug} />
+  ) : (
+    <ReleaseNoteCategoryPage currentSlug={currentSlug} />
   );
 }
