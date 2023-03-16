@@ -45,7 +45,7 @@ To get started:
     npx create-next-app@latest neon-ef-demo --typescript
     ```
     
-    Press [Return] to accept all defaults.
+    Accept all defaults by pressing [Return].
 
 1. Enter the new directory.
 
@@ -53,13 +53,13 @@ To get started:
     cd neon-ef-demo
     ```
 
-1. Link your new project to your Vercel account. You can press [Return] to accept all the defaults here.
+1. Link your new project to your Vercel account.
 
     ```bash
     vercel link
     ```
     
-    Again, press [Return] to accept all defaults.
+    Again, accept all defaults by pressing [Return].
 
 1. Set your PostgreSQL credentials on Vercel.
 
@@ -150,10 +150,10 @@ To get started:
     You can find the connection string for your database on the Neon **Dashboard**. It appears similar to:
 
     ```text
-     `postgres://<user>:<password>@<hostname>/<dbname>`. 
-     ```
+    `postgres://<user>:<password>@<hostname>/<dbname>`. 
+    ```
 
-     For information about obtaining a Neon connection string, see [Connect from any application](/docs/connect/connect-from-any-app).
+    For information about obtaining a Neon connection string, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 1. Add code for the Worker by replacing the generated contents in `src/index.ts` with the following code:
 
