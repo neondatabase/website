@@ -156,7 +156,7 @@ data transfer (GiB) * price per GiB
 | AWS            | US East (Ohio)  | Written data  | $0.09600 | GiB |
 | AWS            | US East (Ohio)| Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | US West (Oregon)     | Compute time  | $0.10200 | ComputeHour |
+| AWS            | US West (Oregon)     | Compute time  | $0.10200 | Compute-hour |
 | AWS            | US West (Oregon)| Project storage | $0.000164 | GiBHour |
 | AWS            | US West (Oregon)     | Written data  | $0.09600 | GiB |
 | AWS            | US West (Oregon)  | Data transfer  | $0.09000 | GiB |
