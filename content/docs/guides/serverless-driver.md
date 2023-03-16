@@ -185,6 +185,3 @@ Brief queries such as the one used in this example can generally be run on Cloud
 </Admonition>
 
 For a more in-depth example application that showcases the Neon serverless driver with Cloudflare Workers, see our [UNESCO World Heritage Sites]( Apphttps://github.com/neondatabase/serverless-cfworker-demo) and read the accompanying [blog post](https://neon.tech/blog/serverless-driver-for-postgres).
-
-
-
