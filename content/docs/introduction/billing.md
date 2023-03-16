@@ -152,7 +152,7 @@ data transfer (GiB) * price per GiB
 | Cloud provider | Region      | Billing metric | Price | Unit |
 |:---------------|:-----------|:--------------|:------|:-----|
 | AWS            | US East (Ohio)     | Compute time  | $0.10200 | Compute-hour |
-| AWS            | US East (Ohio)     | Project storage  | $0.000164 | GiBHour |
+| AWS            | US East (Ohio)     | Project storage  | $0.000164 | GiB-Hour |
 | AWS            | US East (Ohio)  | Written data  | $0.09600 | GiB |
 | AWS            | US East (Ohio)| Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
