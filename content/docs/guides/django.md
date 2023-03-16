@@ -8,8 +8,6 @@ redirectFrom:
   - /docs/cloud/integrations/django/
 ---
 
-This guide describes how to create a Neon project and connect to it from a Django application.
-
 To connect to Neon from a Django application:
 
 1. [Create a Neon project](#create-a-neon-project)
