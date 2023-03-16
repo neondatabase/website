@@ -9,7 +9,7 @@ To set up a Neon project:
 3. Specify a name, a PostgreSQL version, a region, and click **Create Project**. Upon creating a project, you are presented with a dialog that provides connection details for the project including your password.
 
 <Admonition type="important">
-After closing the dialog, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For instructions, see [Reset a password](/docs/manage/users#reset-a-password).
+After closing the dialog, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For instructions, see [Reset a password](/docs/manage/roles#reset-a-password).
 </Admonition>
 
 For information about managing your Neon project, refer to the [Manage Neon overview](/docs/manage/overview) section of the documentation, which includes an overview of the objects that comprise a Neon project.

@@ -14,26 +14,28 @@ import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import SearchModal from '../header/search-modal';
 
 // Initialization of the search-insights library
-aa('init', {
-  appId: process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
-  apiKey: process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY,
-  useCookie: true,
-});
+if (process.env.NEXT_PUBLIC_ALGOLIA_APP_ID && process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY) {
+  let userToken = '';
+  aa('init', {
+    appId: process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+    apiKey: process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY,
+    useCookie: true,
+  });
+  aa('getUserToken', null, (err, algoliaUserToken) => {
+    if (err) {
+      // eslint-disable-next-line no-console
+      console.error(err);
+      return;
+    }
 
-let userToken = '';
-aa('getUserToken', null, (err, algoliaUserToken) => {
-  if (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
-    return;
-  }
+    userToken = algoliaUserToken;
+  });
 
-  userToken = algoliaUserToken;
-});
-
-aa('setUserToken', userToken);
+  aa('setUserToken', userToken);
+}
 
 const Layout = ({
+  className = null,
   headerTheme,
   footerTheme = 'white',
   withOverflowHidden = false,
@@ -84,7 +86,8 @@ const Layout = ({
         <main
           className={clsx(
             withOverflowHidden && 'overflow-hidden',
-            'flex flex-1 flex-col dark:bg-black'
+            'flex flex-1 flex-col dark:bg-black',
+            className
           )}
         >
           {children}
@@ -102,6 +105,7 @@ const Layout = ({
 };
 
 Layout.propTypes = {
+  className: PropTypes.string,
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
   footerTheme: PropTypes.oneOf(['white', 'black']),
   withOverflowHidden: PropTypes.bool,

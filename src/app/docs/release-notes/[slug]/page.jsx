@@ -18,6 +18,7 @@ export default async function ReleaseNotesPost({ params }) {
   const { slug } = params;
   const { data, content } = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
   const mdxSource = await serializeMdx(content);
+  const { datetime, label } = getReleaseNotesDateFromSlug(slug);
   return (
     <>
       <Hero
@@ -29,9 +30,9 @@ export default async function ReleaseNotesPost({ params }) {
           <article className="relative flex flex-col items-start">
             <time
               className="mt-3 whitespace-nowrap text-gray-2 dark:text-gray-5"
-              dateTime={getReleaseNotesDateFromSlug(slug)}
+              dateTime={datetime}
             >
-              {getReleaseNotesDateFromSlug(slug)}
+              {label}
             </time>
             <Heading
               className="!text-[36px] !leading-normal md:!text-3xl"

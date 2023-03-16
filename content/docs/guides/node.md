@@ -53,7 +53,7 @@ For additional information about creating projects, see [Set up a project](/docs
 Store your Neon credentials in your `.env` file.
 
 ```shell
-PGHOST='<endpoint_hostname>:<port>'
+PGHOST='<hostname>:<port>'
 PGDATABASE='<dbname>'
 PGUSER='<username>'
 PGPASSWORD='<password>'
@@ -62,13 +62,13 @@ ENDPOINT_ID='<endpoint_id>'
 
 where:
 
-- `<endpoint_hostname>` the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `<hostname>` the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 - `<dbname>` is the name of the database. The default Neon database is `neondb`
 - `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a project.
-- `<endpoint_id>` is the ID of the branch endpoint that you are connecting to. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396`.
+- `<endpoint_id>` is the ID of the compute endpoint that you are connecting to. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396`.
 
-You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/users#reset-a-password).
+You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/roles#reset-a-password).
 
 <Admonition type="important">
 To ensure the security of your data, never expose your Neon credentials to the browser.

@@ -39,18 +39,18 @@ Add a PostgreSQL client to your app, such as `Postgres.js`. For instructions, re
 Add your Neon connection string to your `.env` file.
 
 ```shell
-DATABASE_URL=postgres://<user>:<password>@<endpoint_hostname>:<port>/<database>
+DATABASE_URL=postgres://<user>:<password>@<hostname>:<port>/<database>
 ```
 
 where:
 
 - `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a project.
-- `<endpoint_hostname>` the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `<hostname>` the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 - `<port>` is the Neon port number. The default port number is `5432`.
 - `<database>` is the name of the database. The default Neon database is `neondb`
 
-You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](../../manage/users/#reset-a-password).
+You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../../connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/roles/#reset-a-password).
 
 ## Connect to the Neon database
 
