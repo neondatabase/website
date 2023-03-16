@@ -111,7 +111,6 @@ To get started:
 
     Click on the deployed project from the Vercel dashboard and choose the **Functions** tab. This tab displays logs from any functions running within your project. Use the dropdown to select the `api/hello` function.
 
-
 ### Neon serverless driver with Cloudflare
 
 This example shows how to create a minimal Cloudflare Worker that uses the Neon serverless driver to ask PostgreSQL for the current time.
@@ -185,16 +184,15 @@ To get started:
 Brief queries such as the one used in this example can generally be run on Cloudflare’s free plan. Queries with larger result sets may exceed the 10ms CPU time available to Workers on the free plan. In that case, you will see a Cloudflare error page, and you will need to upgrade your Cloudflare service to avoid this issue.
 </Admonition>
 
-For a more in-depth example application that showcases the Neon serverless driver with Cloudflare Workers, and employs caching for highest performance, see our [UNESCO World Heritage Sites app](https://github.com/neondatabase/serverless-cfworker-demo) and read the accompanying [blog post](https://neon.tech/blog/serverless-driver-for-postgres).
+## Serverless driver example application
 
-
-## Serverless driver example applications
-
-Neon provides several other versions of the example application to help you get started with the Neon serverless driver on Vercel Edge Functions or Cloudflare Workers. The example application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
+Neon provides an example application to help you get started with the Neon serverless driver on Vercel Edge Functions or Cloudflare Workers. The example application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
 
 ![UNESCO World Heritage sites app](/docs/relnotes/unesco_sites.png)
 
-  - The [neondatabase/neon-vercel-rawsql](https://github.com/neondatabase/neon-vercel-rawsql) version of the example application demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions.
-  - The [neondatabase/neon-vercel-zapatos](https://github.com/neondatabase/neon-vercel-zapatos) version of the example application demonstrates using [Zapatos](https://jawj.github.io/zapatos/) with Neon's serverless driver on Vercel Edge Functions. Zapatos offers zero-abstraction Postgres for TypeScript.
-  - The [neondatabase/neon-vercel-kysely](https://github.com/neondatabase/neon-vercel-kysely) version of the example application demonstrates using [kysely](https://github.com/koskimas/kysely) and [kysely-codegen](https://github.com/RobinBlomberg/kysely-codegen) with Neon's serverless driver on Vercel Edge Functions. Kysely is a type-safe and autocompletion-friendly typescript SQL query builder. `kysely-codegen` generates Kysely type definitions from your database.
- - The [neondatabase/serverless-cfworker-demo](https://github.com/neondatabase/serverless-cfworker-demo) version of the example application demonstrates using the Neon serverless driver on Cloudflare Workers.
+There are different implementations of the example application to choose from:
+
+  - [neondatabase/neon-vercel-rawsql](https://github.com/neondatabase/neon-vercel-rawsql) demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions.
+  - [neondatabase/neon-vercel-zapatos](https://github.com/neondatabase/neon-vercel-zapatos) demonstrates using [Zapatos](https://jawj.github.io/zapatos/) with Neon's serverless driver on Vercel Edge Functions. Zapatos offers zero-abstraction Postgres for TypeScript.
+  - [neondatabase/neon-vercel-kysely](https://github.com/neondatabase/neon-vercel-kysely) demonstrates using [kysely](https://github.com/koskimas/kysely) and [kysely-codegen](https://github.com/RobinBlomberg/kysely-codegen) with Neon's serverless driver on Vercel Edge Functions. Kysely is a type-safe and autocompletion-friendly typescript SQL query builder. `kysely-codegen` generates Kysely type definitions from your database.
+  - [neondatabase/serverless-cfworker-demo](https://github.com/neondatabase/serverless-cfworker-demo) demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance. There is an accompanying blog post for this example. See [Edge-compatible Serverless Driver for Postgres](https://neon.tech/blog/serverless-driver-for-postgres).
