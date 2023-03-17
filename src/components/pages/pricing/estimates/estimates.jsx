@@ -6,9 +6,11 @@ import { useState } from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
 
 import circleSvg from './images/circle.svg';
+import InfoIcon from './images/info.inline.svg';
 
 const items = [
   {
@@ -16,7 +18,8 @@ const items = [
     metrics: [
       {
         name: 'Compute hours',
-        usage: '224 Compute-hours',
+        usage: '56 hrs',
+        details: '224 hrs * 0.25 Compute Units',
         price: '$7.17',
       },
       {
@@ -41,7 +44,8 @@ const items = [
     metrics: [
       {
         name: 'Compute hours',
-        usage: '730 Compute-hours',
+        usage: '1,460 hrs',
+        details: '730 hrs * 2 Compute Units',
         price: '$187',
       },
       {
@@ -66,7 +70,8 @@ const items = [
     metrics: [
       {
         name: 'Compute hours',
-        usage: '19,400 Compute-hours',
+        usage: '38,000 hrs',
+        details: '19,000 hrs * 2 Compute Units',
         price: '$4,966',
       },
       {
@@ -149,7 +154,6 @@ const Estimates = () => {
 
                 return type === selected ? (
                   <m.div
-                    className="mx-auto w-full max-w-[740px] rounded-2xl bg-gray-1 p-10 2xl:max-w-[592px] 2xl:p-7 xl:max-w-[616px] lg:max-w-[584px] lg:p-6 lg:pb-8 md:min-w-[584px] md:max-w-none"
                     key={index}
                     initial={{
                       opacity: 0,
@@ -166,46 +170,66 @@ const Estimates = () => {
                     }}
                     transition={{ ease: [0.25, 0.1, 0, 1] }}
                   >
-                    <div
-                      className={clsx(
-                        'mb-4 font-semibold uppercase leading-none tracking-[0.02em] text-gray-6',
-                        gridClassName
-                      )}
-                    >
-                      <span>Billing metric</span>
-                      <span>Avg usage</span>
-                      <span>Avg price</span>
-                    </div>
-                    {metrics.map(({ name, usage, price }, index) => (
+                    <div className="mx-auto w-full max-w-[740px] rounded-2xl bg-gray-1 p-10 2xl:max-w-[592px] 2xl:p-7 xl:max-w-[616px] lg:max-w-[584px] lg:p-6 lg:pb-8 md:min-w-[584px] md:max-w-none">
                       <div
                         className={clsx(
-                          'border-b border-gray-2 py-3.5 font-semibold',
+                          'mb-4 font-semibold uppercase leading-none tracking-[0.02em] text-gray-6',
                           gridClassName
                         )}
-                        key={index}
                       >
-                        <span className="">{name}</span>
-                        <span>
-                          {usage} <span className="text-gray-6">/month</span>
-                        </span>
-                        <span className="text-primary-1">{price}</span>
+                        <span>Billing metric</span>
+                        <span>Avg usage</span>
+                        <span>Avg price</span>
                       </div>
-                    ))}
-                    <div className={clsx('mt-3.5 text-xl font-semibold', gridClassName)}>
-                      <span className="col-span-2 uppercase">Total:</span>
-                      <span className="relative text-primary-1">
-                        ${formattedPriceWithCommas}
-                        <img
-                          className="absolute -top-4 left-1/2 h-auto w-[107px] max-w-none -translate-x-[calc(50%+16px)] 2xl:-top-3.5 xl:-translate-x-[calc(50%+18px)] lg:-top-4 sm:-translate-x-[calc(50%+8px)]"
-                          src={circleSvg}
-                          width={107}
-                          height={63}
-                          alt=""
-                          loading="lazy"
-                          aria-hidden
-                        />
-                      </span>
+                      {metrics.map(({ name, usage, details, price }, index) => (
+                        <div
+                          className={clsx(
+                            'border-b border-gray-2 py-3.5 font-semibold',
+                            gridClassName
+                          )}
+                          key={index}
+                        >
+                          <span className="">{name}</span>
+                          <span className="inline-flex items-center gap-x-2.5">
+                            <span>
+                              {usage} <span className="text-gray-6">/month</span>
+                            </span>
+                            {details && (
+                              <span>
+                                <span
+                                  data-tooltip-id={`${name}-${index}`}
+                                  data-tooltip-content={details}
+                                >
+                                  <InfoIcon />
+                                </span>
+                                <Tooltip id={`${name}-${index}`} />
+                              </span>
+                            )}
+                          </span>
+                          <span className="text-primary-1">{price}</span>
+                        </div>
+                      ))}
+                      <div className={clsx('mt-3.5 text-xl font-semibold', gridClassName)}>
+                        <span className="col-span-2 inline-flex flex-col">
+                          <span className="uppercase">Total:</span>
+                        </span>
+                        <span className="relative text-primary-1">
+                          ${formattedPriceWithCommas}
+                          <img
+                            className="absolute -top-4 left-1/2 h-auto w-[107px] max-w-none -translate-x-[calc(50%+16px)] 2xl:-top-3.5 xl:-translate-x-[calc(50%+18px)] lg:-top-4 sm:-translate-x-[calc(50%+8px)]"
+                            src={circleSvg}
+                            width={107}
+                            height={63}
+                            alt=""
+                            loading="lazy"
+                            aria-hidden
+                          />
+                        </span>
+                      </div>
                     </div>
+                    <span className="mt-2.5 block text-center text-base font-normal text-gray-6">
+                      *Pricing is based off of US East (Ohio)
+                    </span>
                   </m.div>
                 ) : null;
               })}

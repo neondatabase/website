@@ -35,7 +35,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
         aria-controls={index}
         onClick={handleOpen}
       >
-        <h3 className="text-3xl font-bold leading-tight xl:text-2xl lg:text-xl">{question}</h3>
+        <h3 className="text-2xl font-bold leading-tight lg:text-xl">{question}</h3>
       </button>
       <LazyMotion features={domAnimation}>
         <m.div
