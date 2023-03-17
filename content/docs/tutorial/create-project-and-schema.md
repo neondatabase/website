@@ -57,5 +57,16 @@ The editor should report that the request ran successfully.
 In this step, you will add a row of data to the `elements` table. In the **SQL Editor**, enter the following query:
 
 ```sql
-INSERT INTO elements (id, elementName, atomicNumber, symbol) VALUES ('Hydrogen', 1, 'H');
+INSERT INTO elements (elementName, atomicNumber, symbol)
+VALUES
+  (1, 'Hydrogen', 1, 'H'),
+  (2, 'Helium', 2, 'He'),
+  (3, 'Lithium', 3, 'Li'),
+  (4, 'Beryllium', 4, 'Be'),
+  (5, 'Boron', 5, 'B'),
+  (6, 'Carbon', 6, 'C'),
+  (7, 'Nitrogen', 7, 'N'),
+  (8, 'Oxygen', 8, 'O'),
+  (9, 'Fluorine', 9, 'F'),
+  (10, 'Neon', 10, 'Ne');
 ```
