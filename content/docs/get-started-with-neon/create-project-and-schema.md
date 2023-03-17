@@ -7,25 +7,25 @@ enableTableOfContents: true
 
 If you do not have a Neon account, navigate to the [Sign-in page](https://console.neon.tech/sign_in) and create an account using your GitHub or Google account.
 
-![Neon sign-in page](/docs/tutorial/neon_signin.png)
+![Neon sign-in page](/docs/get-started-with-neon/neon_signin.png)
 
 ## Create a project
 
-After you have signed in, click on **Create a project**. Enter a name for your project or let Neon generate one for you, select a PostgreSQL version and a region region, and clock **Create project**. We recommend selecting the region closest to your application or user location.
+After you have signed in, click on **Create a project**. Enter a name for your project or let Neon generate one for you, select a PostgreSQL version and a region region, and click **Create project**. Select the region closest to your application or user location.
 
-![Neon create project](/docs/tutorial/neon_create_project.png)
+![Neon create project](/docs/get-started-with-neon/neon_create_project.png)
 
 ### What happens behind the scenes
 
 You may have noticed that your project was created in just a few seconds. That’s one of the benefits of Neon’s serverless architecture.
 
-Neon is serverless PostgreSQL that separates compute and storage. Because a Neon compute node is a stateless PostgreSQL instance, Neon can provision one very quickly.
+Neon is serverless PostgreSQL that separates compute and storage. A Neon compute node is a stateless PostgreSQL instance, which allows Neon to provision a PostgreSQL instance very quickly.
 
-Neon also suspends a compute node if it is inactive for five minutes, to save on compute resources. This is Neon's scale-to-zero feature.
+Neon's _Auto-suspend_ feature scales the compute node to zero if it is inactive for five minutes, to save on compute resources and cost.
 
-If you navigate to the **Branches** page in the Neon Console, you can view how an endpoint switches from an `Active` to an `Idle` states after a five minutes of inactivity. Active means that the compute node is running. `Idle`, on the other hand, means that the compute node is suspended.
+If you navigate to the **Branches** page in the Neon Console, you can view how an endpoint switches from an `Active` to an `Idle` state after a five minutes of inactivity. Active means that the compute node is running. `Idle`, on the other hand, means that the compute node is suspended.
 
-![Neon endpoint active](/docs/tutorial/neon_endpoint_active.png)
+![Neon endpoint active](/docs/get-started-with-neon/neon_endpoint_active.png)
 
 [Learn more about Neon’s architecture](https://neon.tech/docs/introduction/architecture-overview/).
 
