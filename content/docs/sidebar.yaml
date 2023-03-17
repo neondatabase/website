@@ -28,11 +28,11 @@
 - title: Neon tutorial
   slug: tutorial/neon-tutorial
   items:
-    - title: Creating a Neon project and add data
-      slug: tutorial/neon-tutorial
-    - title: Recovering lost data with Neon's branching feature
+    - title: Create a Neon project and add data
+      slug: tutorial/create-project-and-schema
+    - title: Recover lost data with Neon's branching feature
       slug: tutorial/data-recovery-with-branching
-    - title: Testing queries with a database branch
+    - title: Test queries with a database branch
       slug: tutorial/use-branching-for-test
 - title: Connect
   items:

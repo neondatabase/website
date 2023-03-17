@@ -1,5 +1,5 @@
 ---
-title: Use Neon branching for testing
+title: Test queries with a database branch
 enableTableOfContents: true
 ---
 
