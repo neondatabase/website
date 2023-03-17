@@ -9,6 +9,7 @@ import React, { Fragment, forwardRef } from 'react';
 
 import Admonition from 'components/pages/doc/admonition';
 import CodeTabs from 'components/pages/doc/code-tabs';
+import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import IntroNavigation from 'components/pages/doc/intro-navigation';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
@@ -55,6 +56,7 @@ const components = {
   CodeTabs,
   IntroNavigation,
   TechnologyNavigation,
+  CommunityBanner,
 };
 
 // eslint-disable-next-line no-return-assign
