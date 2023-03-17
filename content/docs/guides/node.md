@@ -1,5 +1,6 @@
 ---
 title: Connect a Node.js application to Neon
+subtitle: Set up a Neon project in seconds and connect from a Node.js application
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
