@@ -3,11 +3,11 @@ title: Data recovery with branching
 enableTableOfContents: true
 ---
 
-## Remove duplicates from the shoes table
+## Remove duplicates from the elements table
 
-You received an email from a colleague asking you to clean the data in the `shoes` table, because there is some some duplicate data on the front-end.
+Suppose that some duplicte rows have been introduced into the `elements` table.
 
-When you ran the `SELECT id, model, color FROM shoes` query, you noticed there were indeed a few duplicate rows.
+When you run the `SELECT id, model, color FROM shoes` query, you noticed there were indeed a few duplicate rows.
 
 ```text
 | # |         model        | color                                          |
