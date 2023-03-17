@@ -47,7 +47,7 @@ import (
 )
 
 func main() {
-    connStr := "user=<user> password=<password> dbname=neondb host=<endpoint_hostname>"
+    connStr := "user=<user> password=<password> dbname=neondb host=<hostname>"
     db, err := sql.Open("postgres", connStr)
     if err != nil {
         log.Fatal(err)
@@ -76,9 +76,9 @@ where:
 - `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a project.
 - `<dbname>` is the name of the database. The default Neon database is `neondb`.
-- `<endpoint_hostname>` is the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `<hostname>` is the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 
-You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/users#reset-a-password).
+You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/roles#reset-a-password).
 
 ## Need help?
 

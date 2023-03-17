@@ -50,7 +50,7 @@ module.exports = {
       },
       {
         source: '/docs',
-        destination: '/docs/introduction/about',
+        destination: '/docs/introduction',
         permanent: true,
       },
       {

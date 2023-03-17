@@ -24,7 +24,7 @@ Open the `.env` file in your Laravel app, and replace all the database credentia
 
 ```shell
 DB_CONNECTION=pgsql
-DB_HOST=<endpoint_hostname>
+DB_HOST=<hostname>
 DB_PORT=5432
 DB_DATABASE=<dbname>
 DB_USERNAME=<user>
@@ -33,12 +33,12 @@ DB_PASSWORD=<password>
 
 where:
 
-- `<endpoint_hostname>` the hostname of the branch endpoint. The endpoint hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `<hostname>` the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 - `<dbname>` is the name of the database. The default Neon database is `neondb`
 - `<user>` is the database user.
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 
-You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/users#reset-a-password).
+You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/roles#reset-a-password).
 
 ## Need help?
 

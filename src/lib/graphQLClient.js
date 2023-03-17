@@ -11,3 +11,10 @@ const requestHeaders = {
 export const graphQLClient = new GraphQLClient(process.env.WP_GRAPHQL_URL, {
   headers: requestHeaders,
 });
+
+export const graphQLClientAdmin = (authToken) =>
+  new GraphQLClient(process.env.WP_GRAPHQL_URL, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
