@@ -1,6 +1,6 @@
 ---
 title: Connect a Django application to Neon
-subtitle: Set up a Neon project in seconds and connect to it from a Django application
+subtitle: Set up a Neon project in seconds and connect from a Django application
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/

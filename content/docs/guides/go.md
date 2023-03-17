@@ -1,6 +1,6 @@
 ---
 title: Connect a Go application to Neon
-subtitle: Set up a Neon project in seconds and connect to it from a Go application
+subtitle: Set up a Neon project in seconds and connect from a Go application
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go

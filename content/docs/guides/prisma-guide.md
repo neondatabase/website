@@ -1,6 +1,6 @@
 ---
 title: Use Prisma with Neon
-subtitle: Learn how to use Prisma Migrate, Prisma Studio, and Prisma Client with Neon 
+subtitle: Follow this step-by-step guide to learn how to use Prisma with Neon 
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
