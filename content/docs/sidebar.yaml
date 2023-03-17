@@ -1,4 +1,5 @@
 - title: Introduction
+  slug: introduction
   items:
     - title: What is Neon?
       slug: introduction/about
@@ -14,6 +15,8 @@
       slug: introduction/technical-preview-free-tier
     - title: Regions
       slug: introduction/regions
+    - title: Billing
+      slug: introduction/billing
 - title: Get started
   items:
     - title: Sign up
@@ -104,6 +107,8 @@
       slug: import/import-from-heroku
     - title: Import from CSV
       slug: import/import-from-csv
+- title: Serverless driver
+  slug: serverless/serverless-driver
 - title: Security
   items:
     - title: Security

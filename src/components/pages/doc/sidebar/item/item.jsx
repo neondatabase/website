@@ -24,8 +24,10 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
     setIsOpen((isOpen) => !isOpen);
   };
 
+  const externalSlug = slug && slug.startsWith('http') ? slug : null;
   const docSlug = isStandalone ? `/${slug}` : `${DOCS_BASE_PATH}${slug}/`;
   const Tag = slug ? Link : 'button';
+
   return (
     <li className="flex flex-col">
       <Tag
@@ -36,7 +38,8 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
           }
         )}
         type={slug ? undefined : 'button'}
-        to={slug ? docSlug : undefined}
+        to={slug ? externalSlug || docSlug : undefined}
+        target={externalSlug ? '_blank' : '_self'}
         onClick={handleClick}
       >
         <span className="leading-snug">{title}</span>
@@ -55,7 +58,7 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
         <ul
           className={clsx(
             'relative pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-6 dark:before:bg-gray-2',
-            !isOpen && 'sr-only'
+            !isOpen && 'sr-only h-0'
           )}
         >
           {items.map((item, index) => (
