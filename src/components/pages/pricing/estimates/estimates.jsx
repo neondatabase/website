@@ -6,11 +6,11 @@ import { useState } from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
-import Tooltip from 'components/shared/tooltip';
+// import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
 
 import circleSvg from './images/circle.svg';
-import InfoIcon from './images/info.inline.svg';
+// import InfoIcon from './images/info.inline.svg';
 
 const items = [
   {
@@ -181,7 +181,7 @@ const Estimates = () => {
                         <span>Avg usage</span>
                         <span>Avg price</span>
                       </div>
-                      {metrics.map(({ name, usage, details, price }, index) => (
+                      {metrics.map(({ name, usage, price }, index) => (
                         <div
                           className={clsx(
                             'border-b border-gray-2 py-3.5 font-semibold',
@@ -189,12 +189,12 @@ const Estimates = () => {
                           )}
                           key={index}
                         >
-                          <span className="">{name}</span>
+                          <span>{name}</span>
                           <span className="inline-flex items-center gap-x-2.5">
                             <span>
                               {usage} <span className="text-gray-6">/month</span>
                             </span>
-                            {details && (
+                            {/* {details && (
                               <span>
                                 <span
                                   data-tooltip-id={`${name}-${index}`}
@@ -204,7 +204,7 @@ const Estimates = () => {
                                 </span>
                                 <Tooltip id={`${name}-${index}`} />
                               </span>
-                            )}
+                            )} */}
                           </span>
                           <span className="text-primary-1">{price}</span>
                         </div>
