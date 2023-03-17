@@ -6,9 +6,11 @@ import { useState } from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+// import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
 
 import circleSvg from './images/circle.svg';
+// import InfoIcon from './images/info.inline.svg';
 
 const items = [
   {
@@ -16,7 +18,8 @@ const items = [
     metrics: [
       {
         name: 'Compute hours',
-        usage: '224 Compute-hours',
+        usage: '56 hrs',
+        details: '224 hrs * 0.25 Compute Units',
         price: '$7.17',
       },
       {
@@ -37,11 +40,12 @@ const items = [
     ],
   },
   {
-    type: 'Startup',
+    type: 'Launch',
     metrics: [
       {
         name: 'Compute hours',
-        usage: '730 Compute-hours',
+        usage: '1,460 hrs',
+        details: '730 hrs * 2 Compute Units',
         price: '$187',
       },
       {
@@ -62,11 +66,12 @@ const items = [
     ],
   },
   {
-    type: 'Enterprise',
+    type: 'Scale',
     metrics: [
       {
         name: 'Compute hours',
-        usage: '19,400 Compute-hours',
+        usage: '38,000 hrs',
+        details: '19,000 hrs * 2 Compute Units',
         price: '$4,966',
       },
       {
@@ -115,8 +120,8 @@ const Estimates = () => {
             if you require assistance forecasting billing and usage.
           </p>
           <ul className="mt-[53px] mb-12 grid w-full grid-cols-3 gap-x-7 2xl:mx-auto 2xl:max-w-[801px] xl:mb-8 xl:mt-10 xl:max-w-[616px] xl:gap-x-5 lg:mb-6 lg:mt-7 md:mt-6 md:mb-5 md:gap-x-4 sm:gap-x-2.5 xs:grid-cols-1 xs:gap-y-2">
-            {items.map(({ type }) => (
-              <li key={type}>
+            {items.map(({ type }, index) => (
+              <li key={index}>
                 <button
                   className={clsx(
                     'w-full rounded-[80px] border py-6 text-lg font-bold leading-none transition-colors duration-200 hover:border-white hover:text-white xl:py-4 md:py-3',
@@ -136,7 +141,7 @@ const Estimates = () => {
         <Container className="no-scrollbars md:-mx-4 md:overflow-x-auto md:px-4" size="mdDoc">
           <LazyMotion features={domAnimation}>
             <AnimatePresence initial={false} mode="wait">
-              {items.map(({ type, metrics }) => {
+              {items.map(({ type, metrics }, index) => {
                 const totalPrice = metrics.reduce(
                   (acc, { price }) => acc + Number(price.slice(1).replace(/,/g, '')),
                   0
@@ -149,8 +154,7 @@ const Estimates = () => {
 
                 return type === selected ? (
                   <m.div
-                    className="mx-auto w-full max-w-[740px] rounded-2xl bg-gray-1 p-10 2xl:max-w-[592px] 2xl:p-7 xl:max-w-[616px] lg:max-w-[584px] lg:p-6 lg:pb-8 md:min-w-[584px] md:max-w-none"
-                    key={type}
+                    key={index}
                     initial={{
                       opacity: 0,
                       translateY: 10,
@@ -166,45 +170,66 @@ const Estimates = () => {
                     }}
                     transition={{ ease: [0.25, 0.1, 0, 1] }}
                   >
-                    <div
-                      className={clsx(
-                        'mb-4 font-semibold uppercase leading-none tracking-[0.02em] text-gray-6',
-                        gridClassName
-                      )}
-                    >
-                      <span>Billing metric</span>
-                      <span>Avg usage</span>
-                      <span>Avg price</span>
-                    </div>
-                    {metrics.map(({ name, usage, price }) => (
+                    <div className="mx-auto w-full max-w-[740px] rounded-2xl bg-gray-1 p-10 2xl:max-w-[592px] 2xl:p-7 xl:max-w-[616px] lg:max-w-[584px] lg:p-6 lg:pb-8 md:min-w-[584px] md:max-w-none">
                       <div
                         className={clsx(
-                          'border-b border-gray-2 py-3.5 font-semibold',
+                          'mb-4 font-semibold uppercase leading-none tracking-[0.02em] text-gray-6',
                           gridClassName
                         )}
                       >
-                        <span className="">{name}</span>
-                        <span>
-                          {usage} <span className="text-gray-6">/month</span>
-                        </span>
-                        <span className="text-primary-1">{price}</span>
+                        <span>Billing metric</span>
+                        <span>Avg usage</span>
+                        <span>Avg price</span>
                       </div>
-                    ))}
-                    <div className={clsx('mt-3.5 text-xl font-semibold', gridClassName)}>
-                      <span className="col-span-2 uppercase">Total:</span>
-                      <span className="relative text-primary-1">
-                        ${formattedPriceWithCommas}
-                        <img
-                          className="absolute -top-4 left-1/2 h-auto w-[107px] max-w-none -translate-x-[calc(50%+16px)] 2xl:-top-3.5 xl:-translate-x-[calc(50%+18px)] lg:-top-4 sm:-translate-x-[calc(50%+8px)]"
-                          src={circleSvg}
-                          width={107}
-                          height={63}
-                          alt=""
-                          loading="lazy"
-                          aria-hidden
-                        />
-                      </span>
+                      {metrics.map(({ name, usage, price }, index) => (
+                        <div
+                          className={clsx(
+                            'border-b border-gray-2 py-3.5 font-semibold',
+                            gridClassName
+                          )}
+                          key={index}
+                        >
+                          <span>{name}</span>
+                          <span className="inline-flex items-center gap-x-2.5">
+                            <span>
+                              {usage} <span className="text-gray-6">/month</span>
+                            </span>
+                            {/* {details && (
+                              <span>
+                                <span
+                                  data-tooltip-id={`${name}-${index}`}
+                                  data-tooltip-content={details}
+                                >
+                                  <InfoIcon />
+                                </span>
+                                <Tooltip id={`${name}-${index}`} />
+                              </span>
+                            )} */}
+                          </span>
+                          <span className="text-primary-1">{price}</span>
+                        </div>
+                      ))}
+                      <div className={clsx('mt-3.5 text-xl font-semibold', gridClassName)}>
+                        <span className="col-span-2 inline-flex flex-col">
+                          <span className="uppercase">Total:</span>
+                        </span>
+                        <span className="relative text-primary-1">
+                          ${formattedPriceWithCommas}
+                          <img
+                            className="absolute -top-4 left-1/2 h-auto w-[107px] max-w-none -translate-x-[calc(50%+16px)] 2xl:-top-3.5 xl:-translate-x-[calc(50%+18px)] lg:-top-4 sm:-translate-x-[calc(50%+8px)]"
+                            src={circleSvg}
+                            width={107}
+                            height={63}
+                            alt=""
+                            loading="lazy"
+                            aria-hidden
+                          />
+                        </span>
+                      </div>
                     </div>
+                    <span className="mt-2.5 block text-center text-base font-normal text-gray-6">
+                      *Pricing is based off of US East (Ohio)
+                    </span>
                   </m.div>
                 ) : null;
               })}

@@ -64,6 +64,4 @@ Refer to our _Get started_ documentation to get up and running with Neon in just
 
 If you have technical questions, reach out to Neon developers and community members in the official [Neon Discourse Community](https://community.neon.tech/).
 
-<div className="dark:hidden sm:hidden">![Community poster](/images/community-poster.png)</div>
-
-<div class="hidden dark:block sm:hidden">![Community poster](/images/community-poster-dark.png)</div>
+<CommunityBanner>Welcome to the <br /> Neon Discourse Community!</CommunityBanner>

@@ -18,9 +18,10 @@ To use the SQL Editor:
 You can use the following queries to try the SQL Editor:
 
 ```sql
-CREATE TABLE t (c int);
-INSERT INTO t SELECT generate_series(1,100);
-SELECT count(*) FROM t;
+CREATE TABLE playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+INSERT INTO playing_with_neon(name, value)
+SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
+SELECT * FROM playing_with_neon;
 ```
 
 Running multiple query statements at once returns a separate result set for each statement. The result sets are displayed in separate tabs, numbered in order of execution.

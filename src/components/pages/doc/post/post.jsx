@@ -36,7 +36,7 @@ ReleaseNotes.propTypes = {
 };
 
 const Post = ({
-  data: { title, enableTableOfContents },
+  data: { title, subtitle, enableTableOfContents },
   content,
   breadcrumbs,
   navigationLinks: { previousLink, nextLink },
@@ -61,6 +61,9 @@ const Post = ({
         ) : (
           <article>
             <h1 className="text-[36px] font-semibold leading-tight xl:text-3xl">{title}</h1>
+            {subtitle && (
+              <p className="my-2 text-xl leading-tight text-gray-4 dark:text-gray-6">{subtitle}</p>
+            )}
             <Content className="mt-5" content={content} ref={contentRef} />
           </article>
         )}
@@ -82,6 +85,7 @@ const Post = ({
 Post.propTypes = {
   data: PropTypes.shape({
     title: PropTypes.string,
+    subtitle: PropTypes.string,
     enableTableOfContents: PropTypes.bool,
   }).isRequired,
   content: PropTypes.shape({}).isRequired,
