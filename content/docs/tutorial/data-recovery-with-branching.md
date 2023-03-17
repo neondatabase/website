@@ -5,56 +5,70 @@ enableTableOfContents: true
 
 ## Remove duplicates from the elements table
 
-Suppose that some duplicte rows have been introduced into the `elements` table.
+Suppose that you asked a fellow developer, Albert Einstein III, to finish populating the `elements` table with data. Being rather absent minded, Albert inserts a few duplicate rows. You noticed the duplicates when running the following query:
 
-When you run the `SELECT id, model, color FROM shoes` query, you noticed there were indeed a few duplicate rows.
-
-```text
-| # |         model        | color                                          |
-|---|----------------------|------------------------------------------------|
-| 1 | Air Zoom Alphafly    | Scream Green/Bright Crimson/Honeydew/Black     |
-| 2 | Air Zoom Alphafly    | Scream Green/Bright Crimson/Honeydew/Black     |
+```sql
+SELECT * FROM elements ORDER BY id;
 ```
 
-To fix that issue, you write a query to remove duplicates from the `shoes` tables.
+```text
+SELECT * FROM elements ORDER BY id;
+ id | elementname | atomicnumber | symbol 
+----+-------------+--------------+--------
+  1 | Hydrogen    |            1 | H
+  2 | Helium      |            2 | He
+  3 | Lithium     |            3 | Li
+  4 | Beryllium   |            4 | Be
+  5 | Boron       |            5 | B
+  6 | Carbon      |            6 | C
+  7 | Nitrogen    |            7 | N
+  7 | Nitrogen    |            7 | N
+  8 | Oxygen      |            8 | O
+  8 | Oxygen      |            8 | O
+  9 | Fluorine    |            9 | F
+  9 | Fluorine    |            9 | F
+ 10 | Neon        |           10 | Ne
+ 10 | Neon        |           10 | Ne
+ 11 | Sodium      |           11 | Na
+ 11 | Sodium      |           11 | Na
+ 12 | Magnesium   |           12 | Mg
+ 13 | Aluminum    |           13 | Al
+ 14 | Silicon     |           14 | Si
+ 15 | Phosphorus  |           15 | P
+ 16 | Sulfur      |           16 | S
+ 17 | Chlorine    |           17 | Cl
+ 18 | Argon       |           18 | Ar
+ 19 | Potassium   |           19 | K
+ 20 | Calcium     |           20 | Ca
+(25 rows)
+```
+
+To fix that issue, you write a query to remove duplicates from the `elements` table.
 
 ## Run the remove duplicates query on a branch
 
 Run the following query to see the duplicates:
 
 ```sql
-SELECT model, color, COUNT(*) 
-FROM (select brand, model, description, color from shoes) AS s
-GROUP BY brand, model, description, color
-HAVING COUNT(*) > 1
+SELECT id, elementName, atomicNumber, symbol, COUNT(*) as count
+FROM elements
+GROUP BY id, elementName, atomicNumber, symbol
+HAVING COUNT(*) > 1;
 ```
 
 ```text
-| # |         model        | color                                        | count |
-|---|----------------------|----------------------------------------------|-------|
-| 1 | Invincible Run 2     | Black/Summit White/Summit White              | 2     |
-| 2 | Pegasus 39           | Black/Ashen Slate/Cobalt Bliss/White         | 2     |
-| 3 | Air Zoom Pegasus 39  | Black/Thunder Blue/Citron Pulse/Hyper Royal  | 2     |
+id | elementname | atomicnumber | symbol | count 
+----+-------------+--------------+--------+-------
+  7 | Nitrogen    |            7 | N      |     2
+  9 | Fluorine    |            9 | F      |     2
+ 11 | Sodium      |           11 | Na     |     2
+  8 | Oxygen      |            8 | O      |     2
+ 10 | Neon        |           10 | Ne     |     2
 ```
 
-Now, suppose that you accidentally ran a DELETE state to remove duplicates, but the statement you wrote actually deleted a majority of your data. For example, the following command deletes all but one record:  
+Now, suppose that you ran a `DELETE` statement to remove the duplicates, but the statement you wrote actually deleted a majority of your data. Somehow you've ended up with only the duplicate rows left in your database.
 
-```sql
-DELETE FROM shoes a USING shoes b
-WHERE a.id > b.id
-```
-
-And run `SELECT * FROM shoes` to see the result:
-
-```text
-| # |         model        | color                                        |
-|---|----------------------|----------------------------------------------|
-| 1 | Air Zoom Alphafly    | Scream Green/Bright Crimson/Honeydew/Black   |
-```
-
-Now, you are in a panic because the only available shoe on your website is the `Air Zoom Alphafly`.
-
-With Neon, you can recover from a scenario like this very easily.
+With Neon, you can recover from a data loss scenario like this very easily.
 
 ## Recover the lost data
 
