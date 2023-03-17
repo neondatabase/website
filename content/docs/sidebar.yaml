@@ -25,6 +25,8 @@
       slug: get-started-with-neon/setting-up-a-project
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
+    - title: Neon tutorial
+      slug: get-started-with-neon/neon-tutorial
 - title: Connect
   items:
     - title: Connect from any application
