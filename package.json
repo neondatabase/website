@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "dev:build": "next build",
     "postbuild": "node ./src/scripts/build-algolia-search.js && node ./src/scripts/rss.js && next-sitemap",
     "start": "next start",
     "format": "prettier --write .",
