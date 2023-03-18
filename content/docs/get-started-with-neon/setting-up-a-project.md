@@ -10,13 +10,13 @@ To create your first project:
 
 ![Create a project](/docs/get-started-with-neon/create_project.png)
 
-3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
+3. On the **Project Creation** dialog, specify a name, a PostgreSQL version, a region, and click **Create project**.
 
 ![Select project options](/docs/get-started-with-neon/select_project_options.png)
 
-4. Upon creating a project, you are presented with a modal that provides connection details for the project's default database (`neondb`). You can copy connection details now or access them later from the **Connection details** widget on the Neon **Dashboard**.
+4. Upon creating a project, you are presented with the connection details for the project's default database (`neondb`). You can copy your connection details now or access them later from the **Connection details** widget on the Neon **Dashboard**.
 
-![Select project options](/docs/get-started-with-neon/select_project_options.png)
+![Select project options](/docs/get-started-with-neon/connecion_details_modal.png)
 
 For information about managing your Neon project, refer to the [Manage Neon overview](/docs/manage/overview) section of the documentation, which includes an overview of the objects included in a Neon project.
 
