@@ -16,7 +16,7 @@ To create your first project:
 
 4. Upon creating a project, you are presented with the connection details for the project's default database (`neondb`). You can copy your connection details now or access them later from the **Connection details** widget on the Neon **Dashboard**.
 
-![Select project options](/docs/get-started-with-neon/connecion_details_modal.png)
+![Connection details dialog](/docs/get-started-with-neon/connecion_details_modal.png)
 
 For information about managing your Neon project, refer to the [Manage Neon overview](/docs/manage/overview) section of the documentation, which includes an overview of the objects included in a Neon project.
 
