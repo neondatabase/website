@@ -1,5 +1,6 @@
 ---
 title: Sign up
+subtitle: Sign up for Neon in just a few seconds and start for free
 redirectFrom:
   - /docs/quickstart/console/
   - /docs/cloud/getting-started/
