@@ -1,5 +1,6 @@
 ---
 title: Set up a Project
+subtitle: Set up a Neon project in a just a few clicks 
 ---
 
 To set up a Neon project:
