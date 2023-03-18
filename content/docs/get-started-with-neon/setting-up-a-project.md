@@ -14,18 +14,16 @@ To create your first project:
 
 ![Select project options](/docs/get-started-with-neon/select_project_options.png)
 
-4. Upon creating a project, you are presented with the connection details for the project's default database (`neondb`). You can copy your connection details now or access them later from the **Connection details** widget on the Neon **Dashboard**.
+4. You are presented with the connection details for the project's default database (`neondb`). You can copy the connection details now or retrieve them later from the **Connection details** widget on the Neon **Dashboard**.
 
 ![Connection details dialog](/docs/get-started-with-neon/connection_details_modal.png)
 
-You can query a Neon project database from the Neon SQL Editor or a client. For instructions, see:
+## Next steps
 
 - [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
-- [Connect with psql](/docs/get-started-with-neon/query-with-psql-editor)
-
-For information about connecting to Neon from any application or client, see [Connect from any application](/docs/connect/connect-from-any-app).
-
-For information about managing your Neon project, refer to the [Manage Neon overview](/docs/manage/overview), which describes the objects that are part of Neon project.
+- [Connect to Neon with psql](/docs/get-started-with-neon/query-with-psql-editor)
+- [Connect to Neon from other applications or clients](/docs/connect/connect-from-any-app)
+- [Learn about managing your Neon project](/docs/manage/overview)
 
 ## Need help?
 
