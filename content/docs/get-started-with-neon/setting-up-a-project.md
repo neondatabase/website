@@ -1,19 +1,24 @@
 ---
-title: Set up a Project
-subtitle: Set up a Neon project in a just a few clicks 
+title: Create your first project
+subtitle: Create a Neon project in a just a few clicks 
 ---
 
-To set up a Neon project:
+To create your first project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-2. If you are creating your very first project, click **Create the first project**. Otherwise, click **New Project**.
-3. Specify a name, a PostgreSQL version, a region, and click **Create Project**. Upon creating a project, you are presented with a dialog that provides connection details for the project including your password.
+2. Select **Create a project**.
 
-<Admonition type="important">
-After closing the dialog, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For instructions, see [Reset a password](/docs/manage/roles#reset-a-password).
-</Admonition>
+![Create a project](/docs/get-started-with-neon/create_project.png)
 
-For information about managing your Neon project, refer to the [Manage Neon overview](/docs/manage/overview) section of the documentation, which includes an overview of the objects that comprise a Neon project.
+3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
+
+![Select project options](/docs/get-started-with-neon/select_project_options.png)
+
+4. Upon creating a project, you are presented with a modal that provides connection details for the project's default database (`neondb`). You can copy connection details now or access them later from the **Connection details** widget on the Neon **Dashboard**.
+
+![Select project options](/docs/get-started-with-neon/select_project_options.png)
+
+For information about managing your Neon project, refer to the [Manage Neon overview](/docs/manage/overview) section of the documentation, which includes an overview of the objects included in a Neon project.
 
 You can query a Neon project database from the Neon SQL Editor or a client. For instructions, see:
 
