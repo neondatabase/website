@@ -43,7 +43,7 @@ To create the `elements` table:
 
 ```sql
 CREATE TABLE elements (
-  id TEXT DEFAULT NOT NULL,
+  id INTEGER NOT NULL,
   elementName TEXT NOT NULL,
   atomicNumber INTEGER NOT NULL,
   symbol TEXT NOT NULL
@@ -54,10 +54,10 @@ The editor should report that the request ran successfully.
 
 ## Insert data into the elements table
 
-In this step, you will add a row of data to the `elements` table. In the **SQL Editor**, enter the following query:
+In this step, you will add data to the `elements` table. In the **SQL Editor**, enter the following query:
 
 ```sql
-INSERT INTO elements (elementName, atomicNumber, symbol)
+INSERT INTO elements (id, elementName, atomicNumber, symbol)
 VALUES
   (1, 'Hydrogen', 1, 'H'),
   (2, 'Helium', 2, 'He'),

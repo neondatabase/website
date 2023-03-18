@@ -3,9 +3,7 @@ title: Data recovery with branching
 enableTableOfContents: true
 ---
 
-## Remove duplicates from the elements table
-
-Suppose that you asked a fellow developer, Albert Einstein III, to finish populating the `elements` table with data. Being rather absent minded, Albert inserts a few duplicate rows. You noticed the duplicates when running the following query:
+Suppose that you asked a fellow developer, Albert Einstein III, to finish populating the `elements` table with data. Being rather absent minded, Albert inserted a few duplicate rows. You noticed the duplicates when running the following query:
 
 ```sql
 SELECT * FROM elements ORDER BY id;
@@ -40,39 +38,16 @@ SELECT * FROM elements ORDER BY id;
  18 | Argon       |           18 | Ar
  19 | Potassium   |           19 | K
  20 | Calcium     |           20 | Ca
-(25 rows)
+...
 ```
 
-To fix that issue, you write a query to remove duplicates from the `elements` table.
-
-## Run the remove duplicates query on a branch
-
-Run the following query to see the duplicates:
-
-```sql
-SELECT id, elementName, atomicNumber, symbol, COUNT(*) as count
-FROM elements
-GROUP BY id, elementName, atomicNumber, symbol
-HAVING COUNT(*) > 1;
-```
-
-```text
-id | elementname | atomicnumber | symbol | count 
-----+-------------+--------------+--------+-------
-  7 | Nitrogen    |            7 | N      |     2
-  9 | Fluorine    |            9 | F      |     2
- 11 | Sodium      |           11 | Na     |     2
-  8 | Oxygen      |            8 | O      |     2
- 10 | Neon        |           10 | Ne     |     2
-```
-
-Now, suppose that you ran a `DELETE` statement to remove the duplicates, but the statement you wrote actually deleted a majority of your data. Somehow you've ended up with only the duplicate rows left in your database.
+You decide to write a query to remove the duplicate rows, but your `DELETE` statement has an error in it that deletes a majority of your data. Somehow you've ended up with only the duplicate rows left in your database.
 
 With Neon, you can recover from a data loss scenario like this very easily.
 
 ## Recover the lost data
 
-You can use Neon branching to recover the lost data in seconds. All you need to do is to check on the SQL Editor what time you performed the `DELETE` operation.
+You can use Neon branching to recover the lost data in seconds. All you need to do is to check on the SQL Editor for the time you performed the `DELETE` operation.
 
 ![image6](https://user-images.githubusercontent.com/13738772/213742652-05006170-1274-4cf9-8e8a-69dcc28d0065.png)
 
