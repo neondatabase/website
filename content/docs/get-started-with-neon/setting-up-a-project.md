@@ -1,6 +1,6 @@
 ---
 title: Create your first project
-subtitle: Create a Neon project in a just a few clicks 
+subtitle: Create a Neon project in seconds with just a few clicks 
 ---
 
 To create your first project:
@@ -16,9 +16,7 @@ To create your first project:
 
 4. Upon creating a project, you are presented with the connection details for the project's default database (`neondb`). You can copy your connection details now or access them later from the **Connection details** widget on the Neon **Dashboard**.
 
-![Connection details dialog](/docs/get-started-with-neon/connecion_details_modal.png)
-
-For information about managing your Neon project, refer to the [Manage Neon overview](/docs/manage/overview) section of the documentation, which includes an overview of the objects included in a Neon project.
+![Connection details dialog](/docs/get-started-with-neon/connection_details_modal.png)
 
 You can query a Neon project database from the Neon SQL Editor or a client. For instructions, see:
 
@@ -27,7 +25,7 @@ You can query a Neon project database from the Neon SQL Editor or a client. For 
 
 For information about connecting to Neon from any application or client, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-Most operations supported by the Neon Console can also be performed programmatically using the [Neon API](/docs/reference/api-reference).
+For information about managing your Neon project, refer to the [Manage Neon overview](/docs/manage/overview), which describes the objects that are part of Neon project.
 
 ## Need help?
 
