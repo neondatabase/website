@@ -6,6 +6,8 @@ redirectFrom:
   - /docs/get-started-with-neon/tutorials
 ---
 
+The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, allows you to save queries, and offers **Explain** and **Analyze** features.
+
 <a id="query-via-ui/"></a>
 
 To use the SQL Editor:
@@ -15,6 +17,8 @@ To use the SQL Editor:
 3. Select the **SQL Editor**.
 4. Select a branch and database.
 5. Enter a query into the editor and click **Run** to view the results.
+
+![Neon SQL Editor](/docs/get-started-with-neon/sql_editor.png)
 
 You can use the following queries to try the SQL Editor:
 
