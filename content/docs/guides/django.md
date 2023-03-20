@@ -1,13 +1,12 @@
 ---
 title: Connect a Django application to Neon
+subtitle: Set up a Neon project in seconds and connect from a Django application
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
 ---
-
-This guide describes how to create a Neon project and connect to it from a Django application.
 
 To connect to Neon from a Django application:
 

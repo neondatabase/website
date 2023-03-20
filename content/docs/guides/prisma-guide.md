@@ -1,5 +1,6 @@
 ---
 title: Use Prisma with Neon
+subtitle: Follow this step-by-step guide to learn how to use Prisma with Neon 
 enableTableOfContents: true
 isDraft: false
 redirectFrom:

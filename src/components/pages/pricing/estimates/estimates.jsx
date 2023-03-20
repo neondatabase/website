@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
-import Tooltip from 'components/shared/tooltip';
+// import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
 
 import circleSvg from './images/circle.svg';
@@ -189,20 +189,24 @@ const Estimates = () => {
                           )}
                           key={index}
                         >
-                          <span className="">{name}</span>
-                          <span className="inline-flex items-center gap-x-2.5">
+                          <span>{name}</span>
+                          <span className="inline-flex items-center gap-x-2.5 lg:flex-col lg:items-start">
                             <span>
                               {usage} <span className="text-gray-6">/month</span>
                             </span>
                             {details && (
-                              <span>
+                              <span className="relative">
                                 <span
+                                  className="peer cursor-pointer lg:hidden"
                                   data-tooltip-id={`${name}-${index}`}
                                   data-tooltip-content={details}
                                 >
                                   <InfoIcon />
                                 </span>
-                                <Tooltip id={`${name}-${index}`} />
+                                <span className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-gray-2 p-2 text-sm font-normal leading-none text-gray-6 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:translate-y-0 lg:bg-transparent lg:p-0 lg:opacity-100">
+                                  {details}
+                                </span>
+                                <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-t-4 border-b-4 border-r-4 border-transparent border-r-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
                               </span>
                             )}
                           </span>

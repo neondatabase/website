@@ -1,5 +1,6 @@
 ---
 title: Connect a Java application to Neon
+subtitle: Set up a Neon project in seconds and connect with JDBC or Spring Data
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
