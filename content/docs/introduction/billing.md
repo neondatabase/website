@@ -25,7 +25,7 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 |**Branches**              | 10                                 | Unlimited               | Unlimited                 |
 |**Compute active time per month** | 100 hours*                 | Unlimited        | Unlimited                 |
 |**Compute size**          | 1 Shared vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
-|**Storage**               | 3 GB per branch                   | 200 GB        | Unlimited                 |
+|**Storage**               | 3 GB per branch                   | Unlimited*        | Unlimited                 |
 |**Dedicated resources**   | -                            | -           | &check;                   |
 |**Project sharing**       | -                            | &check;          | &check;                   |
 |**Auto-suspend compute**  | &check;                           | &check;          | &check;                   |
@@ -34,11 +34,13 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contract, Volume Discounts |
 |**Support**               | Community, support tickets                 | Community, support tickets, video chat          | Community, support tickets, video chat, resale customer support                   |
 
-The limits described above are plan defaults. If you want to adjust the limits to tailor a plan to your specific requirements, please contact [sales@neon.tech](mailto:sales@neon.tech).
 
-<Admonition type="note">
-*Regardless of the Free Tier 100 hour _compute active time per month_ limit, you are always able to connect to the compute endpoint assigned to the primary branch of your Neon project, which ensures that access to data on the primary branch of your project is never interrupted.
-</Admonition>
+**Notes:**
+
+- The limits described above are plan defaults. If you want to adjust the limits to tailor a plan to your specific requirements, please contact [sales@neon.tech](mailto:sales@neon.tech).
+- The Pro plan has a 200 GB safety limit on storage to protect your account from unintended usage, but the Pro plan supports any data size. To increase the safety limit for your Pro account, simply send a request to [sales@neon.tech](sales@neon.tech) with the data storage size that you require.
+- The Free Tier has a 100 hour _compute active time per month_ limit, but you are always able to connect to the compute endpoint assigned to the primary branch of your Neon project, which ensures that access to data on the primary branch of your project is never interrupted.
+
 
 ## Account billing page
 

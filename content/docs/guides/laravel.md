@@ -1,5 +1,6 @@
 ---
 title: Connect from Laravel to Neon
+subtitle: Set up a Neon project in seconds and connect from a Laravel application
 enableTableOfContents: true
 ---
 

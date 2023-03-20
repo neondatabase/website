@@ -1,5 +1,6 @@
 ---
 title: Connect a Next.js application to Neon
+subtitle: Set up a Neon project in seconds and connect from a Next.js application
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel

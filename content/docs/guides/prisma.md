@@ -1,5 +1,6 @@
 ---
 title: Connect from Prisma to Neon
+subtitle: Create a Neon project in seconds and connect from Prisma 
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/prisma
