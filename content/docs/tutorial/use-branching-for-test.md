@@ -33,7 +33,6 @@ SELECT * FROM elements ORDER BY id;
 
 You find that the query successfully removed duplicates from the `elements` table. You can now safely apply the query to your primary branch delete the test branch.
 
-
 ## Conclusion
 
 Congratulations. You completed the _Neon tutorial_. Here is a recap of what was covered:
