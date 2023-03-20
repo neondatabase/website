@@ -3,7 +3,7 @@ title: Data recovery with branching
 enableTableOfContents: true
 ---
 
-Suppose that you asked a fellow developer, Albert Einstein III, to finish populating the `elements` table with data. Being rather absent minded, Albert inserted a few duplicate rows. You noticed the duplicates when running the following query:
+Suppose that you tried to populate the `elements` table with more data but you accidentally inserted several duplicate rows:
 
 ```sql
 SELECT * FROM elements ORDER BY id;
@@ -41,17 +41,28 @@ SELECT * FROM elements ORDER BY id;
 ...
 ```
 
-You decide to write a query to remove the duplicate rows, but your `DELETE` statement has an error in it that deletes a majority of your data. Somehow you've ended up with only the duplicate rows left in your database.
+You decide to write a query to remove the duplicate rows, but your `DELETE` statement has an error that deletes a majority of your data. With Neon, you can recover from a data loss scenario like this very easily.
 
-With Neon, you can recover from a data loss scenario like this very easily.
+## Recover lost data
 
-## Recover the lost data
+You can use Neon branching to recover the lost data in seconds. All you require is a point in time to recover to. Since you ran the `DELETE` query from the Neon SQL Editor, you can check the **History** for the date and time you ran the query.
 
-You can use Neon branching to recover the lost data in seconds. All you need to do is to check on the SQL Editor for the time you performed the `DELETE` operation.
+![Find query time](/docs/tutorial/delete_query_time)
 
-![image6](https://user-images.githubusercontent.com/13738772/213742652-05006170-1274-4cf9-8e8a-69dcc28d0065.png)
+Now that you know when the data loss occurred, you can restore your data to a past point in time by creating a database branch.
 
-Now, let’s move to the Branches page and click on New Branch
+1. Navigate to the **Branches** page in the Neon Console.
+![Branches page](/docs/tutorial/branches_page.png)
+1. Click **New Branch** to open the branch creation dialog.
+
+1. Enter a name for the branch.
+1. Select a parent branch. You can branch from your Neon project's [primary branch](/docs/reference/glossary/#primary-branch) (`main`) or a previously created branch.
+1. Select one of the following branching options:
+    - **Head**: Creates a branch with data up to the current point in time (the default).
+    - **Time**: Creates a branch with data up to the specified date and time.
+    - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](/docs/reference/glossary#lsn).
+1. Select whether or not to create a compute endpoint, which is required to connect to the branch. If you are unsure, you can add a compute endpoint later.
+1. Click **Create Branch** to create your branch.
 
 ![image4](https://user-images.githubusercontent.com/13738772/213742714-1f1a5b24-d04c-469c-b9fe-cdbe9b92ff9c.png)
 
