@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
 import { RELEASE_NOTES_BASE_PATH } from 'constants/docs';
+import PlansIcon from 'icons/calendar-icon.inline.svg';
 import ConsoleIcon from 'icons/console-icon.inline.svg';
 import DocsIcon from 'icons/docs-icon.inline.svg';
-import ServerlessIcon from 'icons/serverless-icon.inline.svg';
+import DriversIcon from 'icons/gear-icon.inline.svg';
 import StorageIcon from 'icons/storage-icon.inline.svg';
 
 export const RELEASE_NOTES_CATEGORIES = [
@@ -26,12 +27,12 @@ export const RELEASE_NOTES_CATEGORIES = [
   },
   {
     tag: 'Drivers',
-    icon: ServerlessIcon,
+    icon: DriversIcon,
     slug: 'drivers',
   },
   {
     tag: 'Plans',
-    icon: ServerlessIcon,
+    icon: PlansIcon,
     slug: 'plans',
   },
 ];
