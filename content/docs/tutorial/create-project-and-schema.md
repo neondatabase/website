@@ -15,23 +15,17 @@ After you have signed in, click on **Create a project**. Enter a name for your p
 
 ![Neon create project](/docs/get-started-with-neon/neon_create_project.png)
 
-### What happens behind the scenes
+You may have noticed that your project was created in just a few seconds. That’s one of the benefits of Neon’s serverless architecture. Neon is serverless PostgreSQL that separates compute and storage. A Neon compute node is a stateless PostgreSQL instance, which allows Neon to provision a PostgreSQL instance very quickly.
 
-You may have noticed that your project was created in just a few seconds. That’s one of the benefits of Neon’s serverless architecture.
-
-Neon is serverless PostgreSQL that separates compute and storage. A Neon compute node is a stateless PostgreSQL instance, which allows Neon to provision a PostgreSQL instance very quickly.
-
-Neon's _Auto-suspend_ feature scales the compute node to zero if it is inactive for five minutes, to save on compute resources and cost.
-
-If you navigate to the **Branches** page in the Neon Console, you can view how an endpoint switches from an `Active` to an `Idle` state after a five minutes of inactivity. Active means that the compute node is running. `Idle`, on the other hand, means that the compute node is suspended.
+Neon's _Auto-suspend_ feature will scale your compute node to zero after five minutes of activity to save on compute resources and cost. If you navigate to the **Branches** page in the Neon Console, you can view how a compute endpoint switches from an `Active` to an `Idle` state. Active means that the compute node is running. `Idle` means that the compute node is suspended.
 
 ![Neon endpoint active](/docs/get-started-with-neon/neon_endpoint_active.png)
 
-[Learn more about Neon’s architecture](https://neon.tech/docs/introduction/architecture-overview/).
+To learn more about Neon's serverless architecture, refer to the [Neon architecture](https://neon.tech/docs/introduction/architecture-overview/) documentation.
 
 ## Create a table
 
-This tutorial uses an `elements` table with data from the periodic table. The example is loosely based on [Neon's Neon with Next.js and Prisma application](https://github.com/neondatabase/examples/tree/main/with-nextjs-prisma), which you can find in our [examples repo](https://github.com/neondatabase/examples) on GitHub.
+This tutorial uses an `elements` table with data from the periodic table. The example is loosely based on the [Neon with Next.js and Prisma application](https://github.com/neondatabase/examples/tree/main/with-nextjs-prisma), which you can find in our [examples repo](https://github.com/neondatabase/examples) on GitHub.
 
 To create the `elements` table:
 
