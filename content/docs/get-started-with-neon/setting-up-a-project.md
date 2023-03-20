@@ -10,7 +10,7 @@ To create your first project:
 
 ![Create a project](/docs/get-started-with-neon/create_project.png)
 
-3. On the **Project Creation** dialog, specify a name, a PostgreSQL version, a region, and click **Create project**.
+3. On the **Project Creation** dialog, specify a name, a PostgreSQL version, a region, and click **Create a project**.
 
 ![Select project options](/docs/get-started-with-neon/select_project_options.png)
 

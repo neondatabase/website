@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/get-started-with-neon/tutorials
 ---
 
-The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, allows you to save queries, and offers **Explain** and **Analyze** features.
+The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides **Explain** and **Analyze** features.
 
 <a id="query-via-ui/"></a>
 
@@ -31,11 +31,11 @@ SELECT * FROM playing_with_neon;
 
 Running multiple query statements at once returns a separate result set for each statement. The result sets are displayed in separate tabs, numbered in order of execution.
 
+To clear the editor, click **New Query**.
+
 <Admonition type="tip">
 When querying objects such as tables and columns with upper case letters in their name, remember to enclose the identifier name in quotes. For example: `SELECT * FROM "Company"`. PostgreSQL folds identifier names to lower case unless they are quoted. The same applies when creating objects in PostgreSQL. For example, `CREATE TABLE DEPARTMENT(id INT)` creates a table named `department` in PostgreSQL. For more information about how quoted and unquoted identifiers are treated by PostgreSQL, see [Identifiers and Key Words](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS), in the _PostgreSQL documentation_.
 </Admonition>
-
-To clear the editor, click **New Query**.
 
 ## Saving queries
 
