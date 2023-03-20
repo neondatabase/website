@@ -1,7 +1,7 @@
-import { notFound } from 'next/navigation';
-
+/* eslint-disable react/prop-types */
 import Post from 'components/pages/doc/post';
 import Hero from 'components/pages/release-notes/hero';
+import { RELEASE_NOTES_CATEGORIES } from 'components/pages/release-notes/release-notes-filter';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Heading from 'components/shared/heading';
@@ -14,7 +14,7 @@ import serializeMdx from 'utils/serialize-mdx';
 export async function generateStaticParams() {
   const releaseNotes = await getAllReleaseNotes();
 
-  return releaseNotes.map(({ slug }) => {
+  return [...RELEASE_NOTES_CATEGORIES, ...releaseNotes].map(({ slug }) => {
     const slugsArray = slug.split('/');
 
     return {
@@ -67,20 +67,8 @@ const ReleaseNotePage = async ({ currentSlug }) => {
   );
 };
 
-const ReleaseNoteCategoryPage = async ({ currentSlug }) => {
-  const allReleaseNotes = await getAllReleaseNotes();
+const ReleaseNoteCategoryPage = ({ currentSlug, currentReleaseNotes }) => {
   const fileOriginPath = process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH;
-
-  const currentReleaseNotes = await Promise.all(
-    allReleaseNotes
-      .filter((item) => item.label.charAt(0).toLowerCase() + item.label.slice(1) === currentSlug)
-      .map(async (item) => ({
-        ...item,
-        content: await serializeMdx(item.content),
-      }))
-  );
-
-  if (!currentReleaseNotes.length) return notFound();
 
   return (
     <Post
@@ -97,13 +85,22 @@ const ReleaseNoteCategoryPage = async ({ currentSlug }) => {
   );
 };
 
-export default async function ReleaseNotesPost({ params: { slug } }) {
-  const currentSlug = slug.join('/');
+export default async function ReleaseNotesPost({ params }) {
+  const currentSlug = params?.slug.join('/');
   const isReleaseNotePage = RELEASE_NOTES_DATE_SLUG_REGEX.test(currentSlug);
+  const allReleaseNotes = await getAllReleaseNotes();
+  const currentReleaseNotes = await Promise.all(
+    allReleaseNotes
+      .filter((item) => item.label.charAt(0).toLowerCase() + item.label.slice(1) === currentSlug)
+      .map(async (item) => ({
+        ...item,
+        content: await serializeMdx(item.content),
+      }))
+  );
 
   return isReleaseNotePage ? (
     <ReleaseNotePage currentSlug={currentSlug} />
   ) : (
-    <ReleaseNoteCategoryPage currentSlug={currentSlug} />
+    <ReleaseNoteCategoryPage currentSlug={currentSlug} currentReleaseNotes={currentReleaseNotes} />
   );
 }
