@@ -7,7 +7,7 @@ In the previous example, a `DELETE` query was executed on the `elements` table t
 
 Since a `DELETE` query is a potentially destructive operation, it is recommended that you test `DELETE` queries before you run them on your production database to make sure they work as intended. You can do this easily in Neon by creating a test branch.
 
-Navigate to the `Branches` page and click on the **New Branch** button to create a new branch. Name the branch `test_branch`.
+Navigate to the **Branches** page and click on the **New Branch** button to create a new branch. Name the branch `test_branch`.
 
 This time, create the branch from `Head`, which creates a branch with the most up-to-date state of your database. Specify the recovery branch you created previously as the parent branch.
 
@@ -33,7 +33,7 @@ Next, run the following query to verify that the query ran as intended:
 SELECT * FROM elements ORDER BY id;
 ```
 
-You find that the query successfully removed duplicates from the `elements` table. You can now safely apply the query to your production branch and delete the test branch.
+You find that the query successfully removed duplicates from the `elements` table. You can now safely apply the query to your production branch, and the test branch can be deleted.
 
 ## Conclusion
 

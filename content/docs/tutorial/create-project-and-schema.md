@@ -3,7 +3,7 @@ title: Create a Neon project and add data
 enableTableOfContents: true
 ---
 
-The steps that follow describe how to sign up for Neon, create a Neon project, and create a table and insert data using the Neon SQL Editor. You are also introduced to the **Tables** feature in the Neon Console, which you can use to explore your data.
+The steps that follow describe how to sign up for Neon, create a Neon project, and create a table and insert data using the Neon **SQL Editor**. You are also introduced to the **Tables** feature in the Neon Console, which you can use to explore your data.
 
 ## Create a Neon account
 
@@ -38,7 +38,7 @@ To learn more about Neon's serverless architecture, refer to the [Neon architect
 
 This tutorial uses a table called `elements`, which contains data from the [periodic table](https://en.wikipedia.org/wiki/Periodic_table). The example is based on the [Neon with Next.js and Prisma application](https://github.com/neondatabase/examples/tree/main/with-nextjs-prisma), which you can find in our [examples repo](https://github.com/neondatabase/examples) on GitHub.
 
-In the following steps, you will use the Neon **SQL Editor** to create the `elements` table. The SQL Editor allows you to query your databases directly the Neon Console. For more information about this feature, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+In the following steps, you will use the Neon **SQL Editor** to create the `elements` table. The **SQL Editor** allows you to query your databases directly the Neon Console. For more information about this feature, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 To create the `elements` table:
 
