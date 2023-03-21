@@ -3,7 +3,7 @@ title: Data recovery with branching
 enableTableOfContents: true
 ---
 
-The instructions that follow demonstrate how you can use Neon's branching feature to recover lost data.
+The instructions that follow demonstrate how to use Neon's branching feature to recover lost data.
 
 Suppose that you tried to populate the `elements` table with more data but you accidentally inserted several duplicate rows, which you discover when you run the following query:
 
@@ -24,7 +24,7 @@ HAVING COUNT(*) > 1;
  7  | Nitrogen    |            7 | N      |     2
 ```
 
-You decide to write a query to remove the duplicate rows, but an error in your `DELETE` statement causes most of your data to be deleted.
+You decide to write a query to remove the duplicate rows, but an error in your `DELETE` statement causes most of your data to be deleted. There is an `=` where there should have been a `>` in the last line of the query.
 
 ```sql
 DELETE FROM elements
@@ -36,7 +36,7 @@ WHERE (id, elementName, atomicNumber, symbol) IN (
 );
 ```
 
-There was an `=` where there should have been a `>` in the last line of your `DELETE` query, leaving you with only the duplicate rows.
+Upon inspecting the data in your table, you find that the `DELETE` query left you with only the duplicate rows:
 
 ```sql
 SELECT * FROM elements ORDER BY id;
@@ -57,7 +57,7 @@ SELECT * FROM elements ORDER BY id;
  9  | Fluorine    |            9 | F
 ```
 
-With Neon, you can recover from a data loss scenario like this very easily.
+With Neon, you can recover from data loss scenarios like this very easily.
 
 ## Recover lost data
 
@@ -75,7 +75,6 @@ Now that you know when the data loss occurred, you can restore your data to a po
 1. Select the **Time** option to create a branch with data up to a specific date and time. You determined that the data loss occurred on March 20, 2023 at 8:58am, so you set it to 8:57am, just before you ran the `DELETE` query.
 ![Create a point in time branch](/docs/get-started-with-neon/create_branch_time.png)
 1. Click **Create Branch** to create your branch. You should see a dialog similar to the following with the connection details for your new branch.
-
 ![New branch connection details](/docs/get-started-with-neon/new_branch_connection_details.png)
 
 ## Verify that data was recovered
@@ -90,11 +89,11 @@ To verify that the new branch includes the lost data:
 SELECT * FROM elements ORDER BY id;
 ```
 
-You should see the data as it existed before you ran the problematic `DELETE` query. You can now run a revised `DELETE` statement to remove the duplicate rows, which you will do in the next section.
+You should see the data as it existed before you ran the problematic `DELETE` query. You can now run a revised `DELETE` statement to remove the duplicate rows, which you will do in the next part of the tutorial.
 
 What have you seen in this example?
 
-To recover the data, you used Neon's database branching feature to create a branch from a past point in time. Neon keeps a 7-day history by default, which makes recovery scenarios like this very easy. But this was a simple example. More serious data loss scenarios can be addressed just as easily using Neon's database branching feature, as was the case for this Neon user:
+To recover the data, you used Neon's database branching feature to create a branch from a past point in time. Neon keeps a 7-day history by default, which makes recovery scenarios like this very easy. But this was a simple example. More serious data loss scenarios can be addressed just as easily, as was the case for this Neon user:
 
 ![Branches page](/docs/get-started-with-neon/data_recovery_twitter.png)
 

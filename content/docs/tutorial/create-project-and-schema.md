@@ -61,7 +61,7 @@ The editor should report that the request ran successfully.
 
 ## Insert data
 
-In this step, you will add data to the `elements` table. In the **SQL Editor**, click **New Query** to clear the editor, and enter the following `INSERT` query to add some data to your table:
+In this step, you will add data to the `elements` table. In the **SQL Editor**, click **New Query** to clear the editor, and enter the following `INSERT` query to add data to your table:
 
 ```sql
 INSERT INTO elements (id, elementName, atomicNumber, symbol)
@@ -78,8 +78,8 @@ VALUES
   (10, 'Neon', 10, 'Ne');
 ```
 
-To view the data that you added, select **Tables** from the sidebar in the Neon Console and select the `elements` table. The data you inserted should be visible.
+To view the data that you added, select **Tables** from the sidebar in the Neon Console and select the `elements` table. The **Tables** feature allows you to easily explore the data in your Neon databases.
+
+The data you inserted should be visible.
 
 ![Neon tables](/docs/get-started-with-neon/neon_tables.png)
-
-The **Tables** feature in the Neon allows you to easily explore the data in your Neon databases.
