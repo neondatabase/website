@@ -3,43 +3,28 @@ title: Data recovery with branching
 enableTableOfContents: true
 ---
 
-Suppose that you tried to populate the `elements` table with more data but you accidentally inserted several duplicate rows, which you discover when you run the following query:
+This part of the tutorial demonstrates how you can use Neon's branching feature to recover lost data.
+
+Suppose that you tried to populate the `elements` table with more data but you accidentally inserted several duplicate rows, which you discover when you run the following query to perform a quick check:
 
 ```sql
-SELECT * FROM elements ORDER BY id;
+SELECT id, elementName, atomicNumber, symbol, COUNT(*) as count
+FROM elements
+GROUP BY id, elementName, atomicNumber, symbol
+HAVING COUNT(*) > 1;
 ```
 
 ```text
- id | elementname | atomicnumber | symbol 
-----+-------------+--------------+--------
-  1 | Hydrogen    |            1 | H
-  2 | Helium      |            2 | He
-  3 | Lithium     |            3 | Li
-  4 | Beryllium   |            4 | Be
-  5 | Boron       |            5 | B
-  6 | Carbon      |            6 | C
-  7 | Nitrogen    |            7 | N
-  7 | Nitrogen    |            7 | N
-  8 | Oxygen      |            8 | O
-  8 | Oxygen      |            8 | O
-  9 | Fluorine    |            9 | F
-  9 | Fluorine    |            9 | F
- 10 | Neon        |           10 | Ne
- 10 | Neon        |           10 | Ne
- 11 | Sodium      |           11 | Na
- 11 | Sodium      |           11 | Na
- 12 | Magnesium   |           12 | Mg
- 13 | Aluminum    |           13 | Al
- 14 | Silicon     |           14 | Si
- 15 | Phosphorus  |           15 | P
- 16 | Sulfur      |           16 | S
- 17 | Chlorine    |           17 | Cl
- 18 | Argon       |           18 | Ar
- 19 | Potassium   |           19 | K
- 20 | Calcium     |           20 | Ca
+ id | elementname | atomicnumber | symbol | count
+----+-------------+--------------+--------+-------
+ 9  | Fluorine    |            9 | F      |     2
+ 10 | Neon        |           10 | Ne     |     2
+ 11 | Sodium      |           11 | Na     |     2
+ 8  | Oxygen      |            8 | O      |     2
+ 7  | Nitrogen    |            7 | N      |     2
 ```
 
-You write a query to remove the duplicate rows, but an error in your `DELETE` statement caused most of your data to be deleted. There is an `=` where there should have been a `>` on the last line of your query, which leaves you with only the duplicate rows.
+You write a query to remove the duplicate rows, but an error in your `DELETE` statement causes most of your data to be deleted.
 
 ```sql
 DELETE FROM elements
@@ -49,6 +34,27 @@ WHERE (id, elementName, atomicNumber, symbol) IN (
   GROUP BY id, elementName, atomicNumber, symbol
   HAVING COUNT(*) = 1
 );
+```
+
+There was an `=` where there should have been a `>` in the last line of your `DELETE` query, leaving you with only the duplicate rows.
+
+```sql
+SELECT * FROM elements ORDER BY id;
+```
+
+```text
+ id | elementname | atomicnumber | symbol 
+----+-------------+--------------+--------
+ 10 | Neon        |           10 | Ne
+ 10 | Neon        |           10 | Ne
+ 11 | Sodium      |           11 | Na
+ 11 | Sodium      |           11 | Na
+ 7  | Nitrogen    |            7 | N
+ 7  | Nitrogen    |            7 | N
+ 8  | Oxygen      |            8 | O
+ 8  | Oxygen      |            8 | O
+ 9  | Fluorine    |            9 | F
+ 9  | Fluorine    |            9 | F
 ```
 
 With Neon, you can recover from a data loss scenario like this very easily.
@@ -66,7 +72,7 @@ Now that you know when the data loss occurred, you can restore your data to a po
 1. Click **New Branch** to open the branch creation dialog.
 1. Enter a name for the branch.
 1. Select the parent branch. The data loss occurred on your project's [primary branch](/docs/reference/glossary/#primary-branch) (`main`), so select that one.
-1. Select the **Time** option to create a branch with data up to a specific date and time. You determined that the data loss occurred on March 20, 2023 at 9:16am, so you set it to the same date but at 9:15:59am, just before you ran the `DELETE` query.
+1. Select the **Time** option to create a branch with data up to a specific date and time. You determined that the data loss occurred on March 20, 2023 at 8:58am, so you set it to the same date but at 8:57am, just before you ran the `DELETE` query.
 ![Create a point in time branch](/docs/get-started-with-neon/create_branch_time.png)
 1. Click **Create Branch** to create your branch. You should see a message similar to the following with the connection details for your new branch.
 
