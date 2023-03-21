@@ -75,4 +75,6 @@ VALUES
 
 To view the data that you added, select **Tables** from the sidebar in the Neon Console and select the `elements` table. The data you just inserted should be visible.
 
+![Neon tables](/docs/get-started-with-neon/neon_tables.png)
+
 The **Tables** feature in the Neon allows you to easily explore the data in your Neon databases.
