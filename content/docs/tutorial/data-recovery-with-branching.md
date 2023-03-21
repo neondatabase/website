@@ -93,9 +93,7 @@ You should see the data as it existed before you ran the problematic `DELETE` qu
 
 What have you seen in this example?
 
-To recover the data, you used Neon's database branching feature to create a branch from a past point in time. Neon keeps a 7-day history by default, which makes recovery scenarios like this very easy. But this was a simple example. More serious data loss scenarios can be addressed just as easily, as was the case for this Neon user:
-
-![Branches page](/docs/get-started-with-neon/data_recovery_twitter.png)
+To recover the data, you used Neon's database branching feature to create a branch from a past point in time. Neon keeps a 7-day history by default, which makes recovery scenarios like this very easy. 
 
 Neon also supports creating branches from **Head** (the most up-to-date state of the database) or from an **LSN** (Log Sequence Number), which is a unique identifier that is assigned to each transaction in the database.
 
