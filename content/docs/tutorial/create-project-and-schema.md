@@ -3,7 +3,7 @@ title: Create a Neon project and add data
 enableTableOfContents: true
 ---
 
-The steps that follow describe how to create a Neon account and create a table and insert dta using the Neon SQL Editor. You are also introduced to the Tables feature in the Neon Console, which you can use to explore your data.
+The steps that follow describe how to sign up for Neon, create a Neon project, and create a table and insert data using the Neon SQL Editor. You are also introduced to the **Tables** feature in the Neon Console, which you can use to explore your data.
 
 ## Create a Neon account
 
