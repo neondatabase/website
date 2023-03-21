@@ -58,6 +58,11 @@ module.exports = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/driver',
+        destination: '/docs/serverless/serverless-driver',
+        permanent: false,
+      },
       ...docsRedirects,
     ];
   },
