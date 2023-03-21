@@ -3,9 +3,9 @@ title: Data recovery with branching
 enableTableOfContents: true
 ---
 
-This part of the tutorial demonstrates how you can use Neon's branching feature to recover lost data.
+The instructions that follow demonstrate how you can use Neon's branching feature to recover lost data.
 
-Suppose that you tried to populate the `elements` table with more data but you accidentally inserted several duplicate rows, which you discover when you run the following query to perform a quick check:
+Suppose that you tried to populate the `elements` table with more data but you accidentally inserted several duplicate rows, which you discover when you run the following query:
 
 ```sql
 SELECT id, elementName, atomicNumber, symbol, COUNT(*) as count
@@ -61,20 +61,20 @@ With Neon, you can recover from a data loss scenario like this very easily.
 
 ## Recover lost data
 
-You can use Neon branching to recover lost data in seconds. The only requirement is that you know the point in time to recover to. Since you ran the `DELETE` query from the Neon SQL Editor, you can check the  **History** for the date and time you ran the problematic query.
+You can use Neon branching to recover lost data in seconds. The only requirement is that you know the point in time to recover to. Since you ran the `DELETE` query from the Neon **SQL Editor**, you can check the  **History** for the date and time you ran the problematic query.
 
 ![Find query time](/docs/get-started-with-neon/delete_query_time.png)
 
-Now that you know when the data loss occurred, you can restore your data to a point in time just before that.
+Now that you know when the data loss occurred, you can restore your data to a point in time just before that by creating a database branch.
 
 1. Navigate to the **Branches** page in the Neon Console.
 ![Branches page](/docs/get-started-with-neon/branches_page.png)
 1. Click **New Branch** to open the branch creation dialog.
 1. Enter a name for the branch.
-1. Select the parent branch. The data loss occurred on your project's [primary branch](/docs/reference/glossary/#primary-branch) (`main`), so select that one.
+1. Select the parent branch. The data loss occurred on your project's [primary branch](/docs/reference/glossary/#primary-branch) (`main`), so select that branch as the parent.
 1. Select the **Time** option to create a branch with data up to a specific date and time. You determined that the data loss occurred on March 20, 2023 at 8:58am, so you set it to 8:57am, just before you ran the `DELETE` query.
 ![Create a point in time branch](/docs/get-started-with-neon/create_branch_time.png)
-1. Click **Create Branch** to create your branch. You should see a message similar to the following with the connection details for your new branch.
+1. Click **Create Branch** to create your branch. You should see a dialog similar to the following with the connection details for your new branch.
 
 ![New branch connection details](/docs/get-started-with-neon/new_branch_connection_details.png)
 
@@ -98,6 +98,6 @@ To recover the data, you used Neon's database branching feature to create a bran
 
 ![Branches page](/docs/get-started-with-neon/data_recovery_twitter.png)
 
-Neon also supports creating branches from **Head** (the most up-to-date state of the database) or from an **LSN** (Log Sequence Number), which is a unique identifier that is assigned to each transaction in the database. 
+Neon also supports creating branches from **Head** (the most up-to-date state of the database) or from an **LSN** (Log Sequence Number), which is a unique identifier that is assigned to each transaction in the database.
 
 To learn more about Neon's branching feature and the workflows it supports, see [Branching](/docs/introduction/branching).

@@ -3,13 +3,15 @@ title: Test queries with a database branch
 enableTableOfContents: true
 ---
 
-In the previous example, a `DELETE` query was executed on the `elements` table to remove duplicates, but the query deleted most of the data to a minor error.
+In the previous example, a `DELETE` query was executed on the `elements` table to remove duplicates, but the problematic query deleted most of the data.
 
-Since a `DELETE` is a potentially destructive operation, it is recommended that you test `DELETE` queries before you run them on your production database to make sure they work as intended. You can easily do this in Neon by creating a database branch for testing.
+Since a `DELETE` is a potentially destructive operation, it is recommended that you test `DELETE` queries before you run them on your production database to make sure they work as intended. You can do this easily in Neon by creating a database branch for testing.
 
 Navigate to the `Branches` page and click on the `New Branch` button to create a new branch. Call it `test`.
 
 This time, create a branch from `Head`, which creates a branch with the most up-to-date state of your database. Specify the recovery branch you created previously as the parent branch.
+
+![Neon test branch](/docs/get-started-with-neon/create_test_branch.png)
 
 ## Test your query
 
@@ -25,13 +27,13 @@ WHERE (id, elementName, atomicNumber, symbol) IN (
 );
 ```
 
-In the Neon SQL Editor, run the following query to verify that the query ran as intended:
+In the Neon **SQL Editor**, select the test branch and run the following query to verify that the query ran as intended:
 
 ```sql
 SELECT * FROM elements ORDER BY id;
 ```
 
-You find that the query successfully removed duplicates from the `elements` table. You can now safely apply the query to your primary branch delete the test branch.
+You find that the query successfully removed duplicates from the `elements` table. You can now safely apply the query to your production branch and delete the test branch.
 
 ## Conclusion
 

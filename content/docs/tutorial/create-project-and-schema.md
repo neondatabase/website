@@ -3,28 +3,33 @@ title: Create a Neon project and add data
 enableTableOfContents: true
 ---
 
+The steps that follow describe how to create a Neon account and create a table and insert dta using the Neon SQL Editor. You are also introduced to the Tables feature in the Neon Console, which you can use to explore your data.
+
 ## Create a Neon account
 
 If you do not have a Neon account, navigate to the [Sign-in page](https://console.neon.tech/sign_in) and create an one using your GitHub or Google account.
 
-When you sig up, you are automatically enrolled in Neon's [Free Tier](/docs/introduction/technical-preview-free-tier). If you are require larger compute and storage limits, Neon also offers paid plans. For more information about those, see [Neon plans](/docs/introduction/billing#neon-plans). 
+When you sign up, you are automatically enrolled in Neon's [Free Tier](/docs/introduction/technical-preview-free-tier). If you are require larger compute and storage limits, Neon also offers paid plans. For more information, see [Neon plans](/docs/introduction/billing#neon-plans).
 
 ![Neon sign-in page](/docs/get-started-with-neon/neon_signin.png)
 
 ## Create a project
 
-After you have signed in, click on **Create a project**. Enter a name for your project or let Neon generate one for you, select a PostgreSQL version and a region, and click **Create project**. It is generally recommended that you select the region closest to your application or user location. For more information about Neon's region support, see [Regions](/docs/introduction/regions).
+After you sign in, click **Create a project**. Enter a name for your project or let Neon generate one for you, select a PostgreSQL version and a region, and click **Create project**.
+
+- Neon supports both PostgreSQL 14 and 15. PostgreSQL 15 is the default.
+- Neon supports several regions. For information about Neon's region support, see [Regions](/docs/introduction/regions).
 
 ![Neon create project](/docs/get-started-with-neon/neon_create_project.png)
 
 You may have noticed that your project was created in just a few seconds. That’s one of the benefits of Neon’s serverless architecture. Neon is serverless PostgreSQL that separates compute and storage. A Neon compute is a stateless PostgreSQL instance, which allows Neon to provision PostgreSQL very quickly.
 
-Neon's _Auto-suspend_ feature will scale your compute to zero after five minutes of activity to save on compute resources and cost. If you navigate to the **Branches** page in the Neon Console, you can watch how a compute switches from an `Active` to an `Idle` state. Active means that the compute is running. `Idle` means that the compute is suspended.
+Another benefit of Neon's serverless architecture is that Neon is able to scale compute resources to zero after a period of inactivity to save on compute costs. This feature, referred to as _Auto-suspend_, suspends a compute after five minutes of inactivity. If you navigate to the **Branches** page in the Neon Console, you can watch how a compute switches from an `Active` to an `Idle` state. Active means that the compute is running. `Idle` means that the compute is suspended.
 
 ![Neon endpoint active](/docs/get-started-with-neon/neon_endpoint_active.png)
 
 <Admonition type="tip">
-In Neon, a compute is referred to as a _compute endpoint_. The **Branches** widget on the Neon **Dashboard** also shows the state of your compute endpoints. A compute endpoint is required to connect to your database branches, including your projects primary branch. For more information, see [Compute endpoints](/docs/manage/endpoints).
+The **Branches** widget on the Neon **Dashboard** also shows the state of your compute endpoints.
 </Admonition>
 
 To learn more about Neon's serverless architecture, refer to the [Neon architecture](https://neon.tech/docs/introduction/architecture-overview/) documentation.
@@ -54,7 +59,7 @@ CREATE TABLE elements (
 
 The editor should report that the request ran successfully.
 
-## Insert data into the elements table
+## Insert data
 
 In this step, you will add data to the `elements` table. In the **SQL Editor**, click **New Query** to clear the editor, and enter the following `INSERT` query to add some data to your table:
 
@@ -73,7 +78,7 @@ VALUES
   (10, 'Neon', 10, 'Ne');
 ```
 
-To view the data that you added, select **Tables** from the sidebar in the Neon Console and select the `elements` table. The data you just inserted should be visible.
+To view the data that you added, select **Tables** from the sidebar in the Neon Console and select the `elements` table. The data you inserted should be visible.
 
 ![Neon tables](/docs/get-started-with-neon/neon_tables.png)
 
