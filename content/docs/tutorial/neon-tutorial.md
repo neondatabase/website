@@ -6,7 +6,7 @@ enableTableOfContents: false
 
 Welcome to the _Neon tutorial_. The purpose of this tutorial is to introduce you to basic concepts and features of Neon. The tutorial consists of several sections, each covering a different concept or feature.
 
-The _Neon Tutorial_ covers the following topics:
+The tutorial covers the following topics:
 
 - [Create a Neon project and add data](/docs/tutorial/create-project-and-schema)
 - [Recover lost data with branching](/docs/tutorial/data-recovery-with-branching)
