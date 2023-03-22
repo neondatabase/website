@@ -88,7 +88,7 @@ The number of Compute Units (CU) assigned to a Neon compute endpoint. A Neon CU 
 
 ### Compute time
 
-A billing metric that measures the amount of computing capacity utilized over a given time interval. See [Compute time](/docs/introduction/billing#comput-time).
+A billing metric that measures the amount of computing capacity used within a specified time period. See [Compute time](/docs/introduction/billing#comput-time).
 
 ### Console
 
