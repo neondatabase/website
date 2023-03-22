@@ -97,6 +97,6 @@ To recover the data, you used Neon's database branching feature to create a bran
 
 Neon also supports creating branches from **Head** (the most up-to-date state of the database) or from an **LSN** (Log Sequence Number), which is a unique identifier assigned to each transaction in the database.
 
-For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to create branches to discover and recover to the last know good.
+For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to create branches to recover to the last known good.
 
 To learn more about Neon's branching feature and the workflows it supports, see [Branching](/docs/introduction/branching).
