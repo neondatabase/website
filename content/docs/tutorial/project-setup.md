@@ -11,7 +11,7 @@ If you do not have a Neon account, navigate to the [Neon sign-in page](https://c
 
 When you sign up, you are automatically enrolled in Neon's [Free Tier](/docs/introduction/technical-preview-free-tier). If you require larger compute and storage limits, Neon also offers paid plans. For more information, see [Neon plans](/docs/introduction/billing#neon-plans).
 
-![Neon sign-in page](/docs/get-started-with-neon/neon_signin.png)
+![Neon sign-in page](/docs/tutorial/neon_signin.png)
 
 ## Create a project
 
@@ -20,7 +20,7 @@ After you sign in, click **Create a project**. Enter a name for your project or 
 - Neon supports both PostgreSQL 14 and 15. PostgreSQL 15 is the default.
 - Neon supports several regions. For more information, see [Regions](/docs/introduction/regions).
 
-![Neon create project](/docs/get-started-with-neon/neon_create_project.png)
+![Neon create project](/docs/tutorial/neon_create_project.png)
 
 You may have noticed that your project was created in just a few seconds. That’s one of the benefits of Neon’s serverless architecture. Neon is serverless PostgreSQL that separates compute and storage. A Neon compute is a stateless PostgreSQL instance, which allows Neon to provision PostgreSQL very quickly.
 
@@ -28,7 +28,7 @@ Another benefit of Neon's serverless architecture is that Neon can scale compute
 
 If you navigate to the **Branches** page in the Neon Console, you can watch how a compute switches between `Active` and `Idle` states. Active means that the compute is running. `Idle` means that the compute is suspended.
 
-![Neon endpoint active](/docs/get-started-with-neon/neon_endpoint_active.png)
+![Neon endpoint active](/docs/tutorial/neon_endpoint_active.png)
 
 <Admonition type="tip">
 The **Branches** widget on the Neon **Dashboard** also shows the state of your compute endpoints.
@@ -82,6 +82,6 @@ VALUES
 
 To view the data that you added, you can use the **Tables** feature in the Neon console, which allows you to explore the data in your Neon databases.
 
-Select **Tables** from the sidebar in the Neon Console and select the `elements` table. The data you inserted should be visible.
+Select **Tables** from the sidebar and select the `elements` table. The data you inserted should be visible.
 
-![Neon tables](/docs/get-started-with-neon/neon_tables.png)
+![Neon tables](/docs/tutorial/neon_tables.png)

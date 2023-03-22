@@ -11,7 +11,7 @@ Navigate to the **Branches** page and click on the **New Branch** button to crea
 
 This time, create the branch from `Head`, which creates a branch with the most up-to-date state of your database. Specify the recovery branch you created previously as the parent branch.
 
-![Neon test branch](/docs/get-started-with-neon/create_test_branch.png)
+![Neon test branch](/docs/tutorial/create_test_branch.png)
 
 ## Test your query
 
