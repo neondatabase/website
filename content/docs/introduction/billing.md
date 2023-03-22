@@ -20,11 +20,7 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 
 |                          | Free Tier                         | Pro (usage-based)             | Custom - Enterprise or Platform Partnership (volume-based)|
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|
-<<<<<<< Updated upstream
-|**Best for**              | Prototyping and personal projects       | Small-to-medium teams, setups with 1 to 3 active databases  | Medium-to-large teams, Database fleets, Resale |
-=======
 |**Best for**              | Prototyping and personal projects       | Small to medium teams, setups with 1 to 3 active databases  | Medium to large teams, Database fleets, Resale |
->>>>>>> Stashed changes
 |**Projects**              | 1                                 | 20               | Unlimited                 |
 |**Branches**              | 10                                 | Unlimited               | Unlimited                 |
 |**Compute active time per month** | 100 hours*                 | Unlimited        | Unlimited                 |
@@ -37,7 +33,6 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 |**Autoscaling (coming soon)**     | -                            | &check;          | &check;                   |
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contract, Volume Discounts |
 |**Support**               | Community, support tickets                 | Community, support tickets, video chat          | Community, support tickets, video chat, resale customer support                   |
-
 
 **Notes:**
 
