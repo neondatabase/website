@@ -93,10 +93,8 @@ You should see the data as it existed before you ran the problematic `DELETE` qu
 
 What have you seen in this example?
 
-To recover the data, you used Neon's database branching feature to create a branch from a past point in time. Neon keeps a 7-day history by default, which makes recovery scenarios like this very easy.
+To recover the data, you can use Neon's branching feature to create a branch with data from a past point in time. Neon keeps a 7-day history by default to enable point-in-time recovery.
 
 Neon also supports creating branches from **Head** (the most up-to-date state of the database) or from an **LSN** (Log Sequence Number), which is a unique identifier assigned to each transaction in the database.
 
 For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to create branches to recover to the last known good.
-
-To learn more about Neon's branching feature and the workflows it supports, see [Branching](/docs/introduction/branching).

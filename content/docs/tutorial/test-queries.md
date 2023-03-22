@@ -5,7 +5,7 @@ enableTableOfContents: true
 
 In the previous example, a `DELETE` query was executed on the `elements` table to remove duplicates, but the problematic query deleted most of your data.
 
-Since a `DELETE` query is a potentially destructive operation, it is recommended that you test `DELETE` queries before you run them on your production database to make sure they work as intended. You can do this easily in Neon by creating a test branch.
+Since a `DELETE` query is a potentially destructive operation, it is recommended that you test `DELETE` queries before you run them on your production database to make sure they work as intended. You can do this in Neon by creating a test branch.
 
 Navigate to the **Branches** page and click on the **New Branch** button to create a new branch. Name the branch `test_branch`.
 
@@ -41,6 +41,6 @@ Congratulations. You have completed the _Neon tutorial_. Here is a recap of what
 
 - You learned how to set up a Neon project.
 - You learned how to create a table and insert data using the Neon **SQL Editor**.
-- You learned hwo to explore data using the **Tables** feature in the Neon Console.
+- You learned how to explore data using the **Tables** feature in the Neon Console.
 - You learned about Neon's database branching feature and how you can use it to recover lost data.
 - You learned how to use a branch to test a potentially destructive query before running it in production.
