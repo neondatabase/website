@@ -59,7 +59,7 @@ SELECT * FROM elements ORDER BY id;
 
 With Neon, you can recover from data loss scenarios like this very easily.
 
-## Recover lost data
+## Create a branch to recover lost data
 
 You can use the Neon branching feature to recover lost data in seconds. The only requirement is that you know the point in time to recover to. Since you ran the `DELETE` query from the Neon **SQL Editor**, you can check the **History** for the date and time you ran the problematic query.
 
