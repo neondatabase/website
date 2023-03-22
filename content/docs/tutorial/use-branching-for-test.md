@@ -1,5 +1,5 @@
 ---
-title: Test queries with a database branch
+title: Test queries with branching
 enableTableOfContents: true
 ---
 
@@ -33,13 +33,14 @@ Next, run the following query to verify that the query ran as intended:
 SELECT * FROM elements ORDER BY id;
 ```
 
-You find that the query successfully removed duplicates from the `elements` table. You can now safely apply the query to your production branch, and the test branch can be deleted.
+You should find that the query successfully removed duplicates from the `elements` table. You can now safely apply the query to your production branch, and the test branch can be deleted.
 
 ## Conclusion
 
-Congratulations. You completed the _Neon tutorial_. Here is a recap of what was covered:
+Congratulations. You have completed the _Neon tutorial_. Here is a recap of what was covered:
 
-- You learned how to create a Neon project.
-- You created a table and inserted data using the Neon **SQL Editor**.
-- You learned about Neon's database branching feature and how you can use it to recover lost data
-- You learned how you can use branches to test potentially destructive queries before before running them in production.
+- You learned how to set up a Neon project.
+- You learned how to create a table and insert data using the Neon **SQL Editor**.
+- You learned hwo to explore data using the **Tables** feature in the Neon Console.
+- You learned about Neon's database branching feature and how you can use it to recover lost data.
+- You learned how to use a branch to test a potentially destructive query before running it in production.

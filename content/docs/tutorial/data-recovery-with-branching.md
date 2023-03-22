@@ -1,5 +1,5 @@
 ---
-title: Data recovery with branching
+title: Recover lost data with branching
 enableTableOfContents: true
 ---
 
@@ -24,7 +24,7 @@ HAVING COUNT(*) > 1;
  7  | Nitrogen    |            7 | N      |     2
 ```
 
-You decide to write a query to remove the duplicate rows, but an error in your `DELETE` statement causes most of your data to be deleted. There is an `=` where there should have been a `>` in the last line of the query.
+You decide to write a query to remove the duplicate rows, but an error in your `DELETE` statement deletes most of your data. There is an `=` where there should have been a `>` in the last line of your query:
 
 ```sql
 DELETE FROM elements
@@ -36,7 +36,7 @@ WHERE (id, elementName, atomicNumber, symbol) IN (
 );
 ```
 
-Upon inspecting the data in your table, you find that the `DELETE` query left you with only the duplicate rows:
+Upon inspecting the data in your table, you find that your `DELETE` query left you with only the duplicate rows:
 
 ```sql
 SELECT * FROM elements ORDER BY id;
@@ -61,7 +61,7 @@ With Neon, you can recover from data loss scenarios like this very easily.
 
 ## Recover lost data
 
-You can use Neon branching to recover lost data in seconds. The only requirement is that you know the point in time to recover to. Since you ran the `DELETE` query from the Neon **SQL Editor**, you can check the  **History** for the date and time you ran the problematic query.
+You can use the Neon branching feature to recover lost data in seconds. The only requirement is that you know the point in time to recover to. Since you ran the `DELETE` query from the Neon **SQL Editor**, you can check the **History** for the date and time you ran the problematic query.
 
 ![Find query time](/docs/get-started-with-neon/delete_query_time.png)
 
@@ -93,8 +93,10 @@ You should see the data as it existed before you ran the problematic `DELETE` qu
 
 What have you seen in this example?
 
-To recover the data, you used Neon's database branching feature to create a branch from a past point in time. Neon keeps a 7-day history by default, which makes recovery scenarios like this very easy. 
+To recover the data, you used Neon's database branching feature to create a branch from a past point in time. Neon keeps a 7-day history by default, which makes recovery scenarios like this very easy.
 
-Neon also supports creating branches from **Head** (the most up-to-date state of the database) or from an **LSN** (Log Sequence Number), which is a unique identifier that is assigned to each transaction in the database.
+Neon also supports creating branches from **Head** (the most up-to-date state of the database) or from an **LSN** (Log Sequence Number), which is a unique identifier assigned to each transaction in the database.
+
+For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to create branches to discover and recover to the last know good.
 
 To learn more about Neon's branching feature and the workflows it supports, see [Branching](/docs/introduction/branching).
