@@ -4,7 +4,7 @@ subtitle: Use Neon branching to restore your data to past state
 enableTableOfContents: true
 ---
 
-The instructions that follow demonstrate how to use Neon's branching feature to recover lost data.
+The following instructions demonstrate how to use Neon's branching feature to recover lost data.
 
 Suppose that you tried to populate the `elements` table with more data but you accidentally inserted several duplicate rows, which you discover when you run the following query:
 

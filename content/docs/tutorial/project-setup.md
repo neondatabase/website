@@ -16,16 +16,18 @@ When you sign up, you are automatically enrolled in Neon's [Free Tier](/docs/int
 
 ## Create a project
 
-After you sign in, click **Create a project**. Enter a name for your project or let Neon generate one for you. Select a PostgreSQL version and a region, and click **Create project**.
+After you sign in:
 
-- Neon supports both PostgreSQL 14 and 15. PostgreSQL 15 is the default.
-- Neon supports several regions. For more information, see [Regions](/docs/introduction/regions).
+1. Click **Create a project**.
+2. Enter a name for your project or let Neon generate one for you.
+3. Select a PostgreSQL version and a region.
+4. Click **Create project**.
 
 ![Neon create project](/docs/tutorial/neon_create_project.png)
 
 You may have noticed that your project was created in just a few seconds. That’s one of the benefits of Neon’s serverless architecture. Neon is serverless PostgreSQL that separates compute and storage. A Neon compute is a stateless PostgreSQL instance, which allows Neon to provision PostgreSQL very quickly.
 
-Another benefit of Neon's serverless architecture is that Neon can scale compute resources to zero after a period of inactivity to save on compute costs. This feature, referred to as _Auto-suspend_, suspends a compute after five minutes of inactivity, by default.
+Another benefit of Neon's serverless architecture is that Neon can scale compute resources to zero after a period of inactivity to save on compute costs. This feature, called _Auto-suspend_, suspends a compute after five minutes of inactivity, by default.
 
 If you navigate to the **Branches** page in the Neon Console, you can watch how a compute switches between `Active` and `Idle` states. Active means that the compute is running. `Idle` means that the compute is suspended.
 

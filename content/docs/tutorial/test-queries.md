@@ -4,13 +4,13 @@ subtitle: Create a Neon branch to test queries before running them in production
 enableTableOfContents: true
 ---
 
-In the previous _data recovery_ example, a `DELETE` query was executed on the `elements` table to remove duplicates, but the problematic query deleted most of your data.
+In the previous _data recovery_ example, you ran a `DELETE` query on the `elements` table to remove duplicates, but the problematic query deleted most of your data.
 
-Since a `DELETE` query is a potentially destructive operation, it is recommended that you test `DELETE` queries before you run them on your production database to make sure they work as intended. You can do this in Neon by creating a test branch.
+Since `DELETE` queries are potentially destructive, it is recommended that you test them before running them on your production database. You can do this in Neon by creating a test branch.
 
 ## Create a test branch
 
-Navigate to the **Branches** page and click on the **New Branch** button to create a new branch. Name the branch `test_branch`.
+Navigate to the **Branches** page and click the **New Branch** button to create a new branch. Name the branch `test_branch`.
 
 This time, create the branch from `Head`, which creates a branch with the most up-to-date state of your database. Specify the recovery branch you created previously as the parent branch.
 
