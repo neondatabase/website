@@ -12,7 +12,7 @@ See [Token](#token).
 
 ### Active time
 
-The amount of active compute time for the Neon Free Tier. Free Tier users are limited to 100 hours of active compute time per month. See [Free Tier](/docs/introduction/technical-preview-free-tier).
+The amount of active compute hours. Neon Free Tier users are provided with 100 hours of active compute hours per month. See [Free Tier](/docs/introduction/technical-preview-free-tier) for more information.
 
 ### Activity Monitor
 
@@ -84,11 +84,11 @@ For information about connecting to Neon, see [Connect from any application](/do
 
 ### Compute size
 
-The number of Compute Units assigned to a Neon compute endpoint. A Neon CU has 1 vCPU and 4 GB of RAM, and a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of your compute endpoint.
+The number of Compute Units (CU) assigned to a Neon compute endpoint. A Neon CU has 1 vCPU and 4 GB of RAM, and a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of the compute endpoint.
 
 ### Compute time
 
-A billing metric that measures the amount of time that Neon compute resources are active. See [Compute time](/docs/introduction/billing#comput-time).
+A billing metric that measures the amount of computing capacity utilized over a given time interval. See [Compute time](/docs/introduction/billing#comput-time).
 
 ### Console
 
@@ -158,6 +158,10 @@ A [branch](#branch) created from a [primary branch](#primary-branch) or another 
 
 An 8KB unit of data, which is the smallest unit that PostgreSQL uses for storing relations and indexes on disk. In Neon, a page is also the smallest unit of data that resides on a Pageserver. For information about PostgreSQL page format, see [Database Page Layout](https://www.postgresql.org/docs/14/storage-page-layout.html), in the _PostgreSQL Documentation_.
 
+### Paid plan
+
+ A paid Neon service tier. See [Neon plans](#neon-plans).
+
 ### Pageserver
 
 A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the user-defined retention period.
@@ -171,6 +175,10 @@ The ability to authenticate without providing a password. Neon’s [Passwordless
 ### Platform Partnership plan
 
 A custom volume-based paid plan offered by Neon that includes support for resale. See [Neon plans](/docs/introduction/billing#neon-plans).
+
+### Point-in-time restore
+
+Restoration of data to a state that existed at an earlier time. Neon retains a data history in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. See [Create a branch](/docs/manage/branches#create-a-branch) for more information. Neon retains 7-day history by default.
 
 ### PostgreSQL role
 
@@ -188,9 +196,13 @@ A usage-based paid plan offered by Neon. See [Neon plans](/docs/introduction/bil
 
 A collection of branches, databases, roles, and other project resources and settings. A project contains a compute with a PostgreSQL server as well as storage for the project data.
 
+### Project sharing
+
+A feature that allows you to share Neon projects with other Neon users. See [Share a project](https://neon.tech/docs/manage/projects#share-a-project) for more information.
+
 ### Project storage
 
-A billing metric that measures the amount of data stored in your Neon projects. See [Project storage](/docs/introduction/billing#project-storage).
+A billing metric that measures the data and data history stored in your Neon projects. See [Project storage](/docs/introduction/billing#project-storage).
 
 ### Proxy
 
@@ -204,6 +216,10 @@ A Neon feature that allows you to connect to a Neon project with a single `psql`
 
 The geographic location where Neon project resource are located. Neon supports creating projects in several Amazon Web Services (AWS) regions. For information about regions supported by Neon, see [Regions](/docs/introduction/regions).
 
+### Resale
+
+Selling the Neon service as part of another service offering. Neon's Platform Partnership plan includes permits resale of the Neon service. See [Neon plans](/docs/introduction/billing#neon-plans) for more information.
+
 ### Primary branch
 
 Each Neon project is created with a primary branch called `main`. This is your project's root branch. You can rename a primary branch, but you cannot delete it. Each branch, including the primary branch, has a dedicated [compute endpoint](#compute-endpoint). Connecting to a branch requires connecting to the branch's compute endpoint. For more information, see [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
@@ -211,6 +227,10 @@ Each Neon project is created with a primary branch called `main`. This is your p
 ### Safekeeper
 
 A Neon architecture component responsible for the durability of database changes. PostgreSQL streams WAL records to Safekeepers. A quorum algorithm based on Paxos ensures that when a transaction is committed, it is stored on a majority of Safekeepers and can be recovered if a node is lost. Safekeepers are deployed in different availability zones to ensure high availability and durability.
+
+### Scale-to-zero
+
+Scale-to-zero refers to Neon's _Auto-suspend compute_ feature, which places a compute endpoint into an `Idle` state when it is not being used. Neon suspends a compute after five minutes of inactivity, by default.
 
 ### Serverless
 
@@ -242,7 +262,7 @@ See [Neon user](#neon-user) and [PostgreSQL role](#postgresql-role).
 
 ### WAL
 
-Write-Ahead Logging (WAL). A standard method for ensuring data integrity. Neon relies on WAL to separate storage and compute.
+See [Write-Ahead Logging](#write-ahead-logging).
 
 ### WAL slice
 
@@ -252,6 +272,10 @@ Write-ahead logs in a specific LSN range.
 
 The stream of data that is written to the Write-Ahead Log (WAL) during transactional processing.
 
+### Write-Ahead Logging
+
+Write-Ahead Logging (WAL). A standard method for ensuring data integrity. Neon relies on WAL to separate storage and compute.
+
 ### Written data
 
-A billing metric that measures the amount of data that Neon writes from compute to storage to ensure the durability of your data. See [Written data](/docs/introduction/billing#written-data).
+A billing metric that measures the amount of data changes that Neon writes from compute to storage to ensure the durability of your data. See [Written data](/docs/introduction/billing#written-data).
