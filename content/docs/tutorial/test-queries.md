@@ -1,6 +1,6 @@
 ---
 title: Test queries with branching
-subtitle: Create a Neon branch to test potentially destructive queries
+subtitle: Create a Neon branch to test queries before running them in production
 enableTableOfContents: true
 ---
 
