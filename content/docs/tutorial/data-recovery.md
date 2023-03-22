@@ -1,5 +1,6 @@
 ---
 title: Recover lost data with branching
+subtitle: Use Neon branching to restore your data to past state
 enableTableOfContents: true
 ---
 

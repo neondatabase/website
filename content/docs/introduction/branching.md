@@ -48,7 +48,7 @@ Branching is so easy and cost-effective that you can create a branch for each de
 
 ### Preview deployments
 
-With Neon's branching capabilities, you can create a branch for each preview deployment. You can automate creating a database branch for every pull request in your CI/CD pipeline using the Neon API. If you use Vercel, the Neon Vercel Integration automates this task for you. For more information, see [Connect with the Neon Vercel integration](/docs/guides/vercel).
+With Neon's branching capabilities, you can create a branch for each preview deployment. You can automate branch creation for every pull request using the Neon API or, if you use Vercel, you can use the Neon Vercel Integration, which automates this task for you. For more information, see [Connect with the Neon Vercel integration](/docs/guides/vercel).
 
 ### Testing
 
@@ -70,7 +70,7 @@ If you lose data due to an unintended deletion or some other event, you can crea
 
 For a simple example showing how you can use a branch to recover lost data, refer to [Recover lost data with branching](/docs/tutorial/data-recovery), in the _Neon tutorial_.
 
-For a more -in-depth example of this capability, refer to our [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres) blog post, which demonstrates how you can use database branches to recover data from a past point in time.
+For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to create branches to recover to the last known good.
 
 ### Analytics
 

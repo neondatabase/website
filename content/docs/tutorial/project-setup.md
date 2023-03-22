@@ -4,7 +4,7 @@ subtitle: Learn how to sign up for Neon, create a project, and add data
 enableTableOfContents: true
 ---
 
-The steps that follow describe how to sign up for Neon, create a Neon project, and create a table and insert data using the Neon **SQL Editor**. You are also introduced to the **Tables** feature, which allows explore your data from the Neon Console.
+The steps that follow describe how to sign up for Neon, create a Neon project, and create a table and insert data using the Neon **SQL Editor**. You are also introduced to the **Tables** feature, which allows view your data from the Neon Console.
 
 ## Create a Neon account
 
@@ -80,6 +80,8 @@ VALUES
   (9, 'Fluorine', 9, 'F'),
   (10, 'Neon', 10, 'Ne');
 ```
+
+## View your data
 
 To view the data that you added, you can use the **Tables** feature in the Neon console, which allows you to explore the data in your Neon databases.
 
