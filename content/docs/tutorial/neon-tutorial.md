@@ -8,6 +8,6 @@ Welcome to the _Neon tutorial_. The purpose of this tutorial is to introduce you
 
 The tutorial covers the following topics:
 
-- [Create a Neon project and add data](/docs/tutorial/create-project-and-schema)
-- [Recover lost data with branching](/docs/tutorial/data-recovery-with-branching)
-- [Test queries with branching](/docs/tutorial/use-branching-for-test)
+- [Set up a Neon project and add data](/docs/tutorial/project-setup)
+- [Recover lost data with branching](/docs/tutorial/data-recovery)
+- [Test queries with branching](/docs/tutorial/test-queries)
