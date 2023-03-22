@@ -1,5 +1,6 @@
 ---
 title: Set up a Neon project and add data
+subtitle: Learn how to sign up for Neon, create a project, and add data
 enableTableOfContents: true
 ---
 
