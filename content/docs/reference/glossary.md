@@ -202,7 +202,7 @@ A feature that allows you to share Neon projects with other Neon users. See [Sha
 
 ### Project storage
 
-A billing metric that measures the data and data history stored in your Neon projects. See [Project storage](/docs/introduction/billing#project-storage).
+A billing metric that measures the data and history stored in your Neon projects. See [Project storage](/docs/introduction/billing#project-storage).
 
 ### Proxy
 
