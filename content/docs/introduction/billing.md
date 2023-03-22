@@ -9,7 +9,7 @@ Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **P
 
 Neon charges for usage based on the following metrics:
 
-- **Compute time**: A measure of the amount of computing capacity utilized by Neon for a given time interval.
+- **Compute time**: The amount of computing capacity used within a specified time period.
 - **Project storage**: The size of the data and history stored for your project.
 - **Written data**: The amount of data written from compute to storage.
 - **Data transfer**: The amount of data transferred out of Neon.
@@ -131,7 +131,7 @@ project storage (GiB) * (seconds stored / 3600) * price per hour
 
 ### Written data
 
-The _Written data_ metric measures the amount of data changes written from storage. Neon processes this data in a reliable way to ensure durability of your data.
+The _Written data_ metric measures the amount of data changes written from compute to storage. Neon processes this data in a reliable way to ensure durability of your data.
 
 The cost calculation for _Written data_ is as follows:
 
