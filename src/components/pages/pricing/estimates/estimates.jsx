@@ -232,7 +232,7 @@ const Estimates = () => {
                       </div>
                     </div>
                     <span className="mt-2.5 block text-center text-base font-normal text-gray-6">
-                      *Pricing is based off of US East (Ohio)
+                      *Pricing is based on the US East (Ohio) region
                     </span>
                   </m.div>
                 ) : null;

@@ -14,7 +14,7 @@ const items = [
   {
     question: 'Can I upgrade or downgrade my subscription later?',
     answer:
-      'Yes. You can upgrade from Free Tier to our Pro plan by selecting <a href="https://console.neon.tech/app/billing"><strong>Go Pro</strong></a>. To upgrade to a custom Enterprise or Platform Partnership plan, contact <a href="mailto:sales@neon.tech">sales@neon.tech</a>. For downgrade instructions, see <a href="/docs/introduction/billing">Billing</a>.',
+      'Yes. You can upgrade from Free Tier to our Pro plan by selecting <a href="https://console.neon.tech/app/billing"><strong>Upgrade to Pro</strong></a>. To upgrade to a custom Enterprise or Platform Partnership plan, contact <a href="https://neon.tech/contact-sales"><strong>Sales</strong></a>. For downgrade instructions, see <a href="/docs/introduction/billing">Billing</a>.',
   },
   {
     question: 'What payment methods do you accept?',
@@ -33,17 +33,17 @@ const items = [
   {
     question: 'Are there any setup fees or additional charges?',
     answer:
-      'No. There are no hidden setup fees or extra charges. For usage-based plans, Neon charges on the four metrics described in the <a href="/docs/introduction/billing">Billing</a> page: Compute time, Project storage, Written Data, and Data Transfer.',
+      'No. There are no hidden setup fees or extra charges. For usage-based plans, Neon charges on the four metrics described on our <a href="/docs/introduction/billing">Billing</a> page: Compute time, Project storage, Written Data, and Data Transfer.',
   },
   {
     question: 'Are there any limits or restrictions on usage?',
     answer:
-      'Neon places safety limits on usage-based accounts to protect against unintended usage. For example, a usage-based plan may offer unlimited projects, compute, and storage, but Neon places safety limits on those resources to protect your account and prevent abuse. For more information, see <a href="/docs/introduction/billing#safety-limits">Safety limits</a>.',
+      'Neon places implements limits to protect against unintended usage. For example, a usage-based plan may offer unlimited projects, compute, and storage, but Neon places safety limits on those resources to protect your account and prevent abuse. For more information, see <a href="/docs/introduction/billing">Billing</a>.',
   },
   {
     question: 'Is there a minimum commitment period?',
     answer:
-      'The Neon Pro plan is usage-based and has no commitment period.  You can end your subscription at any time. For more information, see <a href="/docs/introduction/billing#neon-plans">Neon plans</a>.',
+      'The Neon Pro plan is usage-based and has no commitment period.  You can end your subscription at any time. For more information, see <a href="/docs/introduction/billing#cancel-a-subscription">Cancel a subscription</a>.',
   },
   {
     question: 'How secure is the payment process?',
@@ -53,7 +53,7 @@ const items = [
   {
     question: 'Where should I direct pricing-related questions?',
     answer:
-      'Please contact <a href="mailto:sales@neon.tech">sales@neon.tech</a> with any questions about plans or pricing.',
+      'Please contact <a href="https://neon.tech/contact-sales"><strong>Sales</strong></a> with any questions about plans or pricing.',
   },
 ];
 
