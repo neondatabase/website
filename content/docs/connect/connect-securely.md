@@ -1,10 +1,11 @@
 ---
 title: Connecting to Neon securely
+subtitle: How to connect to Neon securely when using connection strings
 enableTableOfContents: true
 isDraft: true
 ---
 
-This topic describes how to connect to Neon securely.
+This topic describes how to connect to Neon securely to avoid having your database connection compromised.
 
 ## Connection modes
 
@@ -30,22 +31,22 @@ The choice of which mode to use depends on the specific security requirements of
 
 The required configuration for your connection depends on the client you are using.
 
-### psql command-line client
+### Connect from the psql command-line client
 
-To use the `psql` command-line client with `sslmode=verify-full`, you need to provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable. For example, on Debian or Ubuntu systems, you can connect with `verify-full` by setting `PGSSLROOTCERT` to the location of your system's root certificates:
+To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable. For example, on Debian or Ubuntu systems, you can connect with `verify-full` by setting `PGSSLROOTCERT` to the location of your system's root certificates:
 
 ```bash
 export PGSSLROOTCERT=/etc/ssl/certs/ca-certificates.crt
 psql postgres://sally:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?sslmode=verify-full
 ```
 
-See [Location of system root certificates](#location-of-system-root-certificates) below to find the appropriate path for your operating system and distribution.
+Refer to [Location of system root certificates](#location-of-system-root-certificates) below to find the path to system root certificates for your operating system and distribution.
 
-### Other clients and libraries
+### Connect from other clients and libraries
 
 If the client application uses a popular PostgreSQL client library, such as `psycopg2` for Python or JDBC for Java, the library typically provides built-in support for SSL/TLS encryption and verification, allowing you to specify an `sslmode` setting in the connection parameters.
 
-However, if the client application uses a non-standard PostgreSQL client, SSL/TLS may not be enabled by default. In this case, you must manually configure the client to use SSL/TLS and specify the `sslmode` setting. Please refer to the client or driver documentation for how to configure the path to the system's root certificates.
+However, if the client application uses a non-standard PostgreSQL client, SSL/TLS may not be enabled by default. In this case, you must manually configure the client to use SSL/TLS and specify the `sslmode` setting. Please refer to the client or driver documentation for how to configure the path to your system's root certificates.
 
 ### Location of system root certificates
 
