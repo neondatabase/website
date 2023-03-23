@@ -38,10 +38,10 @@ const getAllPosts = async () => {
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
-        data: { title, isDraft, redirectFrom },
+        data: { title, subtitle, isDraft, redirectFrom },
         content,
       } = data;
-      return { slug: slugWithoutFirstSlash, title, isDraft, content, redirectFrom };
+      return { slug: slugWithoutFirstSlash, title, subtitle, isDraft, content, redirectFrom };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };

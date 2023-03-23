@@ -1,5 +1,6 @@
 ---
 title: Connect from Symfony with Doctrine to Neon
+subtitle: Set up a Neon project in seconds and connect from Symfony with Doctrine
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/symfony

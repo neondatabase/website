@@ -14,9 +14,10 @@ A Neon project is created with the following resources by default:
 - A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage compute endpoints](/docs/manage/endpoints).
 - A default database, called `neondb`, which resides in the project's primary branch.
 - A default PostgreSQL role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
-- A `web_access` PostgreSQL role, which is used by the Neon [SQL Editor](docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect).
 
 ## Create a project
+
+Neon Free Tier users can create a single project. Paid plans can have multiple projects.
 
 To create a Neon project:
 
@@ -26,9 +27,13 @@ To create a Neon project:
 
 Upon creating a project, you are presented with a dialog that provides your connection details for the project, including your password. The password is required to connect to databases in the project from a client or application. Store your password in a safe location.
 
-<Admonition type="important">
-After closing the connection information dialog, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Manage roles](/docs/manage/roles).
-</Admonition>
+## View projects
+
+To view your projects:
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+1. Select **Home** or the Neon logo at the top left of the Console.
+1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
 ## Edit a project
 
@@ -53,12 +58,25 @@ To delete a project:
 4. Click **Delete project.**
 5. On the confirmation dialog, click **Delete**.
 
+## Share a project
+
+Neon paid plan users can share a project with other Neon users.
+
+To share a project:
+
+1. In the Neon Console, select a project.
+1. Select **Settings**.
+1. Under **Grant access to your project**, enter the email address of the person you want to share access with.
+1. Click **Grant access**.
+
+The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
+
 ## Manage projects with the Neon API
 
-Project actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete projects using the Neon API. For other project-related API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
+Project actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete projects using the Neon API. For other project-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://neon.tech/api-reference/v2/).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -69,7 +87,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a project with the API
 
-The following Neon API method creates a project. The [Neon Free Tier](/docs/introduction/technical-preview-free-tier/) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/createProject).
+The following Neon API method creates a project. The [Neon Free Tier](/docs/introduction/technical-preview-free-tier/) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
 
 ```text
 POST /projects 
@@ -202,7 +220,7 @@ The response includes information about the roles, the default database, the pri
 
 ### List projects with the API
 
-The following Neon API method lists projects for your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/listProjects).
+The following Neon API method lists projects for your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojects).
 
 ```text
 GET /projects
@@ -241,7 +259,7 @@ Response:
 
 ### Update a project with the API
 
-The following Neon API method updates the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/updateProject).
+The following Neon API method updates the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateproject).
 
 ```text
 PATCH /projects/{project_id}
@@ -285,7 +303,7 @@ Response:
 
 ### Delete a project with the API
 
-The following Neon API method deletes the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Project/deleteProject).
+The following Neon API method deletes the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteproject).
 
 ```text
 DELETE /projects/{project_id}

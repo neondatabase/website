@@ -16,7 +16,7 @@ Project
              |
              ---- child branch ---- compute endpoint <--- application/client
                             |
-                            |---- database (mydb)  
+                            |---- database (mydb)
 ```
 
 You can assign a compute endpoint to the branch you want to connect to or remove an compute endpoint from a branch by deleting it.
@@ -43,7 +43,7 @@ To create an endpoint:
 1. In the Neon Console, select **Branches**.
 1. Select a branch that does not have an endpoint
 1. Click **Add new compute endpoint**.
-1. On the **Create compute endpoint** dialog, choose whether to enable connection pooling and click **Create**. 
+1. On the **Create compute endpoint** dialog, choose whether to enable connection pooling and click **Create**.
 
 For more information connection pooling in Neon, see [Connection pooling](/docs/connect/connection-pooling).
 
@@ -75,10 +75,10 @@ To delete a compute endpoint:
 
 ## Manage compute endpoints with the Neon API
 
-Compute endpoint actions performed in the Neon Console can also be performed using the [Neon API](https://neon.tech/api-reference/v2/). The following examples demonstrate how to create, view, update, and delete compute endpoints using the Neon API. For other compute endpoint API methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
+Compute endpoint actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). The following examples demonstrate how to create, view, update, and delete compute endpoints using the Neon API. For other compute endpoint API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://neon.tech/api-reference/v2/).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -92,7 +92,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 The following Neon API method creates a compute endpoint.
 
 ```text
-POST /endpoints 
+POST /endpoints
 ```
 
 The API method appears as follows when specified in a cURL command. The branch that you specify cannot have an existing compute endpoint. A compute endpoint must be associated with a branch, and a branch can have only one compute endpoint. Neon currently supports read-write compute endpoints only.
@@ -159,7 +159,7 @@ Response:
 
 ### List compute endpoints with the API
 
-The following Neon API method lists compute endpoints for the specified project. A compute endpoint belongs to a Neon project. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Endpoint/listProjectEndpoints).
+The following Neon API method lists compute endpoints for the specified project. A compute endpoint belongs to a Neon project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectendpoints).
 
 ```text
 GET /projects/{project_id}/endpoints
@@ -229,7 +229,7 @@ Response:
 
 ### Update a compute endpoint with the API
 
-The following Neon API method updates the specified compute endpoint. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Endpoint/updateProjectEndpoint).
+The following Neon API method updates the specified compute endpoint. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateprojectendpoint).
 
 ```text
 PATCH /projects/{project_id}/endpoints/{endpoint_id}
@@ -306,7 +306,7 @@ Response:
 
 ### Delete a compute endpoint with the API
 
-The following Neon API method deletes the specified compute endpoint. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Endpoint/deleteProjectEndpoint).
+The following Neon API method deletes the specified compute endpoint. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectendpoint).
 
 ```text
 DELETE /projects/{project_id}/endpoints/{endpoint_id}

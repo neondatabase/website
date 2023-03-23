@@ -44,12 +44,12 @@ To delete a database:
 
 ## Manage databases with the Neon API
 
-Database actions performed in the Neon Console can also be also performed using the Neon API. The following examples demonstrate how to create, view, update, and delete databases using the Neon API. For other database-related methods, refer to the [Neon API reference](https://neon.tech/api-reference/v2/).
+Database actions performed in the Neon Console can also be also performed using the Neon API. The following examples demonstrate how to create, view, update, and delete databases using the Neon API. For other database-related methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 In Neon, databases belong to branches, which means that when you create a database, it is created in a branch.  Database-related requests are therefore performed using branch API methods.
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://neon.tech/api-reference/v2/).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -60,7 +60,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a database with the API
 
-The following Neon API method creates a database. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/createProjectBranchDatabase).
+The following Neon API method creates a database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdatabase).
 
 ```text
 POST /projects/{project_id}/branches/{branch_id}/databases
@@ -122,7 +122,7 @@ Response:
 
 ### List databases with the API
 
-The following Neon API method lists databases for the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/listProjectBranchDatabases).
+The following Neon API method lists databases for the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranchdatabases).
 
 ```text
 GET /projects/{project_id}/branches/{branch_id}/databases
@@ -163,7 +163,7 @@ Response:
 
 ### Update a database with the API
 
-The following Neon API method updates the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/updateProjectBranchDatabase).
+The following Neon API method updates the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateprojectbranchdatabase).
 
 ```text
 PATCH /projects/{project_id}/branches/{branch_id}/databases/{database_name}
@@ -224,7 +224,7 @@ Response:
 
 ### Delete a database with the API
 
-The following Neon API method deletes the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/api-reference/v2/#/Branch/deleteProjectBranchDatabase).
+The following Neon API method deletes the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranchdatabase).
 
 ```text
 DELETE /projects/{project_id}/branches/{branch_id}/databases/{database_name}

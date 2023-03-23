@@ -1,5 +1,6 @@
 ---
 title: Use StepZen with Neon
+subtitle: Learn how to use StepZen to build a GraphQL API for your Neon database
 enableTableOfContents: true
 isDraft: false
 ---

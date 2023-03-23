@@ -46,11 +46,17 @@ Branching is so easy and cost-effective that you can create a branch for each de
 
 ![branch for each developer](/docs/introduction/branching_each_dev.png)
 
+### Preview deployments
+
+With Neon's branching capabilities, you can create a branch for each preview deployment. You can automate branch creation for every pull request using the Neon API or, if you use Vercel, you can use the Neon Vercel Integration, which automates this task for you. For more information, see [Connect with the Neon Vercel integration](/docs/guides/vercel).
+
 ### Testing
 
 Branching enables testers to use the most recent production data. Testers can create branches for testing schema changes, validating new queries, or testing potentially destructive queries before deploying them into production. A branch is isolated from its parent branch but has all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a database. Tests can also run on separate branches in parallel, with each branch having dedicated compute resources.
 
 ![test environment branches](/docs/introduction/branching_test.png)
+
+For a simple example showing how you can use a branch to test queries, refer to [Test queries with branching](/docs/tutorial/test-queries), in the _Neon tutorial_.
 
 Another testing scenario enabled by branching is tracking down corruption or data quality issues. For example, you can create and dispose of multiple point-in-time branches to determine when a corruption or data quality issue first appeared.
 
@@ -62,7 +68,9 @@ If you lose data due to an unintended deletion or some other event, you can crea
 
 ![data recovery branch](/docs/introduction/branching_data_loss.png)
 
-For an example of this capability, refer to our [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres) blog post, which demonstrates how you can use database branches to recover data from a past point in time.
+For a simple example showing how you can use a branch to recover lost data, refer to [Recover lost data with branching](/docs/tutorial/data-recovery), in the _Neon tutorial_.
+
+For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to create branches to recover to the last known good.
 
 ### Analytics
 
@@ -75,10 +83,6 @@ You can run costly, long-running queries on an isolated branch of your productio
 You can create point-in-time branches to ensure repeatability when training machine learning models.
 
 ![ML branches](/docs/introduction/branching_ml.png)
-
-### Staging
-
-With Neon's branching capabilities, you can create a staging database by branching your production database. Using the Neon API, you can automate creating a database branch based on the staging branch for every pull request in your CI/CD pipeline.
 
 ### Backups
 

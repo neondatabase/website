@@ -17,18 +17,22 @@ Neon uses `PgBouncer` in `transaction mode`. For limitations associated with `tr
 
 ## Enable connection pooling
 
-Enabling connection pooling in Neon requires adding a `-pooler` suffix to the compute endpoint ID, which is part of the hostname. Connection requests that specify the `-pooler` suffix use a pooled connection. Connections that do not specify the `-pooler` suffix connect to the database directly.
+Enabling connection pooling in Neon requires adding a `-pooler` suffix to the compute endpoint ID, which is part of the hostname. Connection requests that specify the `-pooler` suffix use a pooled connection.
 
-To connect to a database with a pooled connection, add the `-pooler` suffix to the endpoint ID, as shown:
+Add the `-pooler` suffix to the endpoint ID, as shown:
 
 ```text
-postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
+postgres://sally:<password>@ep-throbbing-boat-918849-pooler.us-east-2.aws.neon.tech/neondb
 ```
+
+Enabling the **Pooler** option in the **Connection Details** widget on the Neon **Dashboard** adds the `-pooler` suffix to the connection string, which you can copy:
+
+![Enable pooler option](/docs/connect/enable_pooler.png)
 
 To connect to the same database directly with a non-pooled connection, use the same connection string without the `-pooler` suffix:
 
 ```text
-postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb
+postgres://sally:<password>@ep-throbbing-boat-918849.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="note">
@@ -50,10 +54,39 @@ Prisma Migrate, however, requires a direct connection to the database, and curre
 ```text
 Error: undefined: Database error
 Error querying the database: db error: ERROR: prepared statement "s0" already exists
- ```
+```
+
+When updating your database schema using Prisma Migrate, you need to use a non-pooled connection URL. You can configure the non-pooled connection string by using the `directUrl` property in the datasource block.
+
+Update your .env file with the following changes:
+
+1. Rename the `DATABASE_URL` environment variable to `DIRECT_URL`
+1. Create a `DATABASE_URL` environment variable and paste in the new connection string from the dashboard as its value
+1. Append the `?pgbouncer=true` flag to the `DATABASE_URL` variable
+
+Your .env file should resemble the following:
+
+```
+DATABASE_URL="postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true"
+DIRECT_URL="postgres://casey:<password>@ep-square-sea-260584.us-east-2.aws.neon.tech:5432/neondb"
+```
+
+Update your Prisma schema by setting the `directUrl` in the datasource block:
+
+```
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directURL         = env("DIRECT_URL")
+}
+```
+
+<Admonition type="note">
+This feature is available from Prisma version [4.10.0](https://github.com/prisma/prisma/releases/tag/4.10.0) and higher.
+</Admonition>
 
 You may encounter this error with other applications that require a direct connection to PostgreSQL or applications that are not compatible with PgBouncer in `transaction mode`. To address this issue, Neon supports both pooled and non-pooled connections to the same database. For more information, see [Enable connection pooling](#enable-connection-pooling).
-  
+
 For more information about using Prisma in a PgBouncer-enabled environment, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 
 PostgreSQL features such as prepared statements and [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html) are not supported with connection pooling in _transaction mode_. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section, in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.

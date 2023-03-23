@@ -35,6 +35,7 @@ if (process.env.NEXT_PUBLIC_ALGOLIA_APP_ID && process.env.NEXT_PUBLIC_ALGOLIA_SE
 }
 
 const Layout = ({
+  className = null,
   headerTheme,
   footerTheme = 'white',
   withOverflowHidden = false,
@@ -85,7 +86,8 @@ const Layout = ({
         <main
           className={clsx(
             withOverflowHidden && 'overflow-hidden',
-            'flex flex-1 flex-col dark:bg-black'
+            'flex flex-1 flex-col dark:bg-black',
+            className
           )}
         >
           {children}
@@ -103,6 +105,7 @@ const Layout = ({
 };
 
 Layout.propTypes = {
+  className: PropTypes.string,
   headerTheme: PropTypes.oneOf(['white', 'black']).isRequired,
   footerTheme: PropTypes.oneOf(['white', 'black']),
   withOverflowHidden: PropTypes.bool,
