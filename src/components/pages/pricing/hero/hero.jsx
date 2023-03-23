@@ -32,7 +32,7 @@ const items = [
     description:
       'A usage-based plan for small to medium teams. Unlimited resources with advanced configuration options. Share your projects with anyone. Only pay for what you use with no fixed contract.',
     features: [
-      { title: '20 projects, unlimited branches' },
+      { title: 'Unlimited resources' },
       { title: 'Project sharing' },
       { title: 'Configurable compute size' },
       { title: 'Configurable auto-suspend compute', label: 'coming soon' },
