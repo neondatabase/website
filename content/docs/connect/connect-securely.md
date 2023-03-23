@@ -37,7 +37,7 @@ The required configuration for your connection depends on the client you are usi
 
 ### Connect from the psql client
 
-To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable. For example, on Debian or Ubuntu systems, you can connect with `verify-full` by setting `PGSSLROOTCERT` to the location of your system's root certificates:
+To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable. For example, on Debian-based Linux systems, you can connect with `verify-full` by setting `PGSSLROOTCERT` to the location of your system's root certificates:
 
 ```bash
 export PGSSLROOTCERT=/etc/ssl/certs/ca-certificates.crt
@@ -56,7 +56,7 @@ However, if the client application uses a non-standard PostgreSQL client, SSL/TL
 
 The location of root certificates varies depending on the operating system or distribution you are using. Here are some common locations where you can find root certificates on popular operating systems and distributions:
 
-- Linux (Debian-based distributions including Ubuntu):
+- Linux (Debian-based distributions):
 
     ```bash
     /etc/ssl/certs/ca-certificates.crt
@@ -68,17 +68,9 @@ The location of root certificates varies depending on the operating system or di
     /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
     ```
 
-    or, on some Red Hat systems, root certificate are stored in:
-
-    ```bash
-    /etc/pki/tls/certs/ca-bundle.crt
-    ```
-
 - macOS:
 
-    ```text
-    /etc/ssl/cert.pem
-    ```
+  On macOS, the system's root certificates are stored in the Keychain Access application. These root certificates are automatically used by most applications that require SSL/TLS connections. Therefore, you typically do not need to specify the root CA path when connecting to a PostgreSQL database from macOS.
 
 - Windows
 
