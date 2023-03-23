@@ -1,5 +1,5 @@
 ---
-title: Connecting to Neon securely
+title: Connect to Neon securely
 subtitle: Learn how to connect to Neon securely when using connection strings
 enableTableOfContents: true
 isDraft: true
