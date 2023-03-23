@@ -15,4 +15,6 @@ Type "help" for help.
 neondb=>
 ```
 
+However, there are different levels of protection when using SSL/TLS encryption, which you can configure by appending an `sslmode` parameter to your connection string. For instructions, see [/docs/connect/connect-securely].
+
 In addition to enforcing SSL/TLS for all connections, Neon implements the SNI (Server Name Indication) extension of the TLS protocol to ensure that clients access the correct SSL certificate for the Neon compute endpoint they are connecting to. SNI is an extension of the TLS protocol. The `libpq` PostgreSQL client library includes SNI support, in version 14 and higher. Please refer to the discussion in [Connect from old clients](/docs/connect/connectivity-issues/) for workarounds for clients that do not support SNI.

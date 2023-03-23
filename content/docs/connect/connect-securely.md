@@ -1,11 +1,15 @@
 ---
 title: Connecting to Neon securely
-subtitle: How to connect to Neon securely when using connection strings
+subtitle: Learn how to connect to Neon securely when using connection strings
 enableTableOfContents: true
 isDraft: true
 ---
 
 This topic describes how to connect to Neon securely using a connection string.
+
+Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Neon rejects connections that do not use SSL/TLS, behaving in the same way as standalone PostgreSQL with only `hostssl` records in a `pg_hba.conf` configuration file.
+
+However, there are different levels of protection when using SSL/TLS encryption, which you can configure by appending an `sslmode` parameter to your connection string.
 
 ## Connection modes
 
@@ -33,7 +37,7 @@ The choice of which mode to use depends on the specific security requirements of
 
 The required configuration for your connection depends on the client you are using.
 
-### Connect from the psql command-line client
+### Connect from the psql client
 
 To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable. For example, on Debian or Ubuntu systems, you can connect with `verify-full` by setting `PGSSLROOTCERT` to the location of your system's root certificates:
 
@@ -44,7 +48,7 @@ psql postgres://sally:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?ssl
 
 Refer to [Location of system root certificates](#location-of-system-root-certificates) below to find the path to system root certificates for your operating system and distribution.
 
-### Connect from other clients and libraries
+### Connect from other clients
 
 If the client application uses a popular PostgreSQL client library, such as `psycopg2` for Python or JDBC for Java, the library typically provides built-in support for SSL/TLS encryption and verification, allowing you to specify an `sslmode` setting in the connection parameters.
 
@@ -84,4 +88,8 @@ The location of root certificates varies depending on the operating system or di
 
   However, if you are using a language that requires specifying the CA root path, such as C or PHP, you can obtain a bundle of root certificates from the Mozilla CA Certificate program provided by the Curl project. You can download the bundle at https://curl.se/docs/caextract.html. After downloading the file, you will need to configure your driver to point to the bundle.
 
-The system root certificate locations listed above may differ depending on the version and distribution the operating system you are using. Additionally, some applications may have their own certificate stores, separate from the operating system's default store. If you do not find the root certificates in the locations listed above, refer to your operating system or distribution documentation.
+System root certificate locations listed above may differ depending on the version, distribution, and configuration of your operating system. If you do not find the root certificates in the locations listed above, refer to your operating system  documentation.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
