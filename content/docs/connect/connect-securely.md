@@ -78,7 +78,7 @@ The location of root certificates varies depending on the operating system or di
 
   However, if you are using a language that requires specifying the CA root path, such as C or PHP, you can obtain a bundle of root certificates from the Mozilla CA Certificate program provided by the Curl project. You can download the bundle at https://curl.se/docs/caextract.html. After downloading the file, you will need to configure your driver to point to the bundle.
 
-System root certificate locations listed above may differ depending on the version, distribution, and configuration of your operating system. If you do not find the root certificates in the locations listed above, refer to your operating system  documentation.
+System root certificate locations listed above may differ depending on the version, distribution, and configuration of your operating system. If you do not find the root certificates in these locations, refer to your operating system documentation.
 
 ## Need help?
 
