@@ -37,10 +37,10 @@ The required configuration for your connection depends on the client you are usi
 
 ### Connect from the psql client
 
-To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable. For example, on Debian-based Linux systems, you can connect with `verify-full` by setting `PGSSLROOTCERT` to the location of your system's root certificates:
+To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable. For example, you can connect with `verify-full` by setting `PGSSLROOTCERT` to the location of your system's root certificates:
 
 ```bash
-export PGSSLROOTCERT=/etc/ssl/certs/ca-certificates.crt
+export PGSSLROOTCERT=/path/to/root/certs/
 psql postgres://sally:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?sslmode=verify-full
 ```
 
