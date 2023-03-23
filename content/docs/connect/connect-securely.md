@@ -50,11 +50,11 @@ Refer to [Location of system root certificates](#location-of-system-root-certifi
 
 If the client application uses a popular PostgreSQL client library, such as `psycopg2` for Python or JDBC for Java, the library typically provides built-in support for SSL/TLS encryption and verification, allowing you to specify an `sslmode` setting in the connection parameters.
 
-However, if the client application uses a non-standard PostgreSQL client, SSL/TLS may not be enabled by default. In this case, you must manually configure the client to use SSL/TLS and specify the `sslmode` setting. Please refer to the client or driver documentation for how to configure the path to your system's root certificates.
+However, if the client application uses a non-standard PostgreSQL client, SSL/TLS may not be enabled by default. In this case, you must manually configure the client to use SSL/TLS and specify the `sslmode` setting. Please refer to the client or the client's driver documentation for how to configure the path to your system's root certificates.
 
 ### Location of system root certificates
 
-The location of root certificates varies depending on the operating system or distribution you are using. Here are some common locations where you can find root certificates on popular operating systems and distributions:
+The location of root certificates varies depending on the operating system or distribution you are using. You should only configure a a path to a CA root store if your client or driver absolutely requires it. Here are some common locations where you can find root certificates on popular operating systems and distributions:
 
 - Linux (Debian-based distributions):
 
