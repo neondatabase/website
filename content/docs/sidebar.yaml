@@ -34,6 +34,8 @@
       slug: connect/query-with-psql-editor
     - title: Connect from old clients
       slug: connect/connectivity-issues
+    - title: Connect to Neon securely
+      slug: connect/connect-securely
     - title: Connection pooling
       slug: connect/connection-pooling
 - title: Manage

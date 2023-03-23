@@ -5,17 +5,17 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-This topic describes how to connect to Neon securely to avoid having your database connection compromised.
+This topic describes how to connect to Neon securely using a connection string.
 
 ## Connection modes
 
-When connecting to Neon or any PostgreSQL database using TLS/SSL, the `sslmode` parameter setting determines the security of the connection. You can append the `sslmode` parameter to your Neon connection string. For example:
+When connecting to Neon or any PostgreSQL database, the `sslmode` parameter setting determines the security of the connection. You can append the `sslmode` parameter to your Neon connection string as shown:
 
 ```text
 postgres://sally:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?sslmode=verify-full
 ```
 
-Neon permits specifying the following modes, in order of least to most secure.
+Neon permits specifying the following `sslmode` settings, in order of least to most secure.
 
 | sslmode | Description |
 | --- | --- |
@@ -25,7 +25,9 @@ Neon permits specifying the following modes, in order of least to most secure.
 | verify-ca | Encryption is required and the server's SSL/TLS certificate is verified. In addition, the client verifies that the server's certificate has been signed by a trusted certificate authority (CA). |
 | verify-full | Encryption is required and the server's SSL/TLS certificate is fully verified, including hostname verification, expiration checks, and revocation checks. In addition, the client verifies that the server's certificate has been signed by a trusted certificate authority (CA). |
 
-The choice of which mode to use depends on the specific security requirements of the application and the level of risk that you are willing to tolerate. Neon recommends `verify-full` mode, which ensures the highest level of security and protects against a wide range of attacks. The following sections describe how to configure connections using `verify-full` mode.
+Neon requires an encrypted connection, so specifying the `allow` and `prefer` settings always use encryption.
+
+The choice of which mode to use depends on the specific security requirements of the application and the level of risk that you are willing to tolerate. Neon recommends that you always use `verify-full` mode, which ensures the highest level of security and protects against a wide range of attacks including man-in-the-middle attacks. The following sections describe how to configure connections using `verify-full` mode.
 
 ## Connection configuration
 
