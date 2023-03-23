@@ -58,7 +58,9 @@ psql postgres://sally:<password>@ep-cold-poetry-404091.us-east-2.aws.neon.tech/n
 ```
 
 <Admonition type="note">
-For information about connecting with `psql`, see [Connect with psql](/docs/connect/query-with-psql-editor). Please be aware that some older client libraries and drivers, including older `psql` executables, are built without SNI support and require a workaround. For more information, see [Connect from older clients](/docs/connect/connectivity-issues).
+Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
+
+Please be aware that some older client libraries and drivers, including older `psql` executables, are built without SNI support and require a workaround. For more information, see [Connect from older clients](/docs/connect/connectivity-issues).
 
 Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, such as DBeaver, DataGrip, and CLion, do not support inclusion of a role name and password in a database connection string. When you find that a full connection string is not accepted, try entering the role name and password values in the appropriate fields in the tool's UI when configuring a connection to Neon.
 

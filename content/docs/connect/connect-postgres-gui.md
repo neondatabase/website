@@ -35,6 +35,10 @@ Passwords are only shown when they are created. If you misplaced your password, 
 
 Neon uses the default PostgreSQL port, `5432`.
 
+<Admonition type="note">
+Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
+</Admonition>
+
 ## Connect to the database
 
 In the GUI application or IDE, enter the connection details into the appropriate fields and connect. In the pgAdmin example shown below, clicking **Save** establishes the database connection.

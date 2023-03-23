@@ -27,6 +27,10 @@ From your terminal or command prompt, run the `psql` client with the connection 
 psql postgres://sally:<password>@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb
 ```
 
+<Admonition type="note">
+Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
+</Admonition>
+
 ## Where do I obtain a password?
 
 A password was provided to you when you created your Neon project. If you have misplaced your password, refer to [Reset a password](/docs/manage/roles#reset-a-password) for password reset instructions.
