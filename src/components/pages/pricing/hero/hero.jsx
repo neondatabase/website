@@ -35,8 +35,8 @@ const items = [
       { title: '20 projects, unlimited branches' },
       { title: 'Project sharing' },
       { title: 'Configurable compute size' },
-      { title: 'Configurable auto-suspend compute', label: 'Coming soon' },
-      { title: 'Autoscaling', label: 'Coming soon' },
+      { title: 'Configurable auto-suspend compute', label: 'coming soon' },
+      { title: 'Autoscaling', label: 'coming soon' },
     ],
     button: {
       url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
