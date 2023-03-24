@@ -30,9 +30,9 @@ To create your database cache:
 ![Connection details widget](/docs/guides/welcome_to_polyscale.png)
 If you already have an account, click the **New Cache** button in the upper right of the Polyscale dashboard.
 3. Enter a name for the cache, select PostgreSQL type, enter the Neon hostname you copied earlier, and enter the database port number. Neon uses the default PostgreSQL port, `5432`. Leave the default values for the other settings.
-![Create a Polyscale cache(/docs/guides/polyscale_create_cache.png)
+![Create a Polyscale cache](/docs/guides/polyscale_create_cache.png)
 4. Click **Create**. A cache is created for your Neon database, and you are provided with a Polyscale connection string, which is used in place of your original Neon connection string. Simply replace the user name, password, and database name with the values from your Neon connection string.
-![Create a Polyscale cache(/docs/guides/polyscale_success.png)
+![Create a Polyscale cache](/docs/guides/polyscale_success.png)
 
 Once queries are passing through PolyScale, you can monitor traffic and caching behavior on the **Observability** tab in Polyscale.
 
