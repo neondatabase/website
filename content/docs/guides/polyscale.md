@@ -17,7 +17,13 @@ In the **Connection Details** widget on the Neon **Dashboard**, select a branch,
 
 The connection string includes the user name, password, hostname, and database name.
 
-Copy the hostname. In the example above, the hostname is this part of the connection string: `ep-shy-tree-275608.us-east-2.aws.neon.tech`. Also make note of the user, password, and database name. You will need those later when you configure your database application to connect to Polyscale.
+Copy the hostname. In the example above, the hostname is this part of the connection string:
+
+```text
+ ep-shy-tree-275608.us-east-2.aws.neon.tech
+ ```
+
+Also, make note of the user, password, and database name. You will need those details when you configure a connection from your  application to Polyscale.
 
 ## Create a Polyscale cache
 
@@ -31,12 +37,12 @@ To create the database cache:
 If you already have a Polyscale account, click the **New Cache** button in the upper right of the Polyscale dashboard.
 3. Enter a name for the cache, select the PostgreSQL type, enter the Neon hostname you copied earlier, and enter the database port number. Neon uses the default PostgreSQL port, `5432`. Leave the default values for the other settings. The **Auto-cache** setting tells Polyscale to create your cache, so this setting must remain enabled.
 ![Create a Polyscale cache](/docs/guides/polyscale_create_cache.png)
-4. Click **Create**. A cache is created for your Neon database, and you are provided with a Polyscale connection string that you can use in your applications in place of your Neon connection string. Simply provide the user name, password, and database name, which you can find in your Neon connection string.
+4. Click **Create**. Polyscale creates a cache for your Neon database and provides a new connection string that you can use in your applications in place of the Neon connection string. Simply provide the user name, password, and database name, which you can find in your Neon connection string.
 ![Create a Polyscale cache](/docs/guides/polyscale_success.png)
 
 Once queries from your application start passing through PolyScale, you can monitor traffic and caching behavior on the **Observability** tab in Polyscale. For more information, see [Observability](https://docs.polyscale.ai/database-observability/), in the _Polyscale documentation_.
 
-By default, PolyScale automatically caches all queries that pass through the platform. That means you can connect to PolyScale and any queries that you run will be cached.
+By default, PolyScale automatically caches all queries that pass through the platform. That means you can connect to PolyScale, and any queries you run will be cached.
 
 PolyScale identifies caching opportunities by recognizing and remembering patterns in query traffic. New queries typically begin to see cache hits on or about the third query. For more information, see [Time To First Hit](https://docs.polyscale.ai/how-does-it-work/#time-to-first-hit-ttfh), in the _Polyscale documentation_.
 
