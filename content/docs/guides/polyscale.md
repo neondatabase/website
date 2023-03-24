@@ -27,17 +27,17 @@ Also, make note of the user, password, and database name. You will need those de
 
 ## Create a Polyscale cache
 
-A Polyscale account can have one or more caches defined. A cache identifies a database by the hostname and port number. Typically, you create one cache per database.
+A Polyscale account can have one or more caches. A cache identifies a database by the hostname and port number. Typically, you create one cache per database.
 
 To create the database cache:
 
-1. Log into [Polyscale](https://app.polyscale.ai/signup/). If you do not have an account, you can create one by logging in with your GitHub or Google account. PolyScale has a free tier and does not require a credit card ti sign up.
+1. Log into [Polyscale](https://app.polyscale.ai/signup/). If you do not have an account, you can create one by logging in with your GitHub or Google account. PolyScale has a free tier and does not require a credit card to sign up.
 2. If you have just signed up for Polyscale, select **Create new cache** from the **Welcome to Polyscale** dialog.
 ![Connection details widget](/docs/guides/welcome_to_polyscale.png)
-If you already have a Polyscale account, click the **New Cache** button in the upper right of the Polyscale dashboard.
-3. Enter a name for the cache, select the PostgreSQL type, enter the Neon hostname you copied earlier, and enter the database port number. Neon uses the default PostgreSQL port, `5432`. Leave the default values for the other settings. The **Auto-cache** setting tells Polyscale to create your cache, so this setting must remain enabled.
+If you already have a Polyscale account, click the **New Cache** button in the upper right corner of the Polyscale dashboard.
+3. Enter a name for the cache, select `PostgreSQL` as the type, enter the Neon hostname you copied earlier, and enter the database port number. Neon uses the default PostgreSQL port, `5432`. Leave the default values for the other settings. The **Caching** setting enables the database query cache, so this setting should remain enabled.
 ![Create a Polyscale cache](/docs/guides/polyscale_create_cache.png)
-4. Click **Create**. Polyscale creates a cache for your Neon database and provides a new connection string that you can use in your applications in place of the Neon connection string. Simply provide the user name, password, and database name, which you can find in your Neon connection string.
+4. Click **Create**. Polyscale creates a cache for your Neon database and provides a new **Connection URI** to use in your application in place of the Neon connection string. Simply replace `[USERNAME]`, `[PASSWORD]`, and `[DATABASE]` with the values from your Neon connection string.
 ![Create a Polyscale cache](/docs/guides/polyscale_success.png)
 
 Once queries from your application start passing through PolyScale, you can monitor traffic and caching behavior on the **Observability** tab in Polyscale. For more information, see [Observability](https://docs.polyscale.ai/database-observability/), in the _Polyscale documentation_.
