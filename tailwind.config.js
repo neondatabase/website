@@ -81,6 +81,12 @@ module.exports = {
       lineHeight: {
         dense: '1.125',
       },
+      backgroundImage: () => ({
+        'community-light':
+          'radial-gradient(100% 2244.95% at 100% 100%, rgba(217, 238, 242, 0.5) 0%, rgba(217, 238, 242, 0.1) 70.08%);',
+        'community-dark':
+          'radial-gradient(100% 2244.95% at 100% 100%, #262626 0%, rgba(38, 38, 38, 0.1) 63.96%);',
+      }),
       keyframes: (theme) => ({
         'text-blink': {
           '0%': {

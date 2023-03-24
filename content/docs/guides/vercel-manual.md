@@ -1,5 +1,6 @@
 ---
 title: Connect Vercel and Neon manually
+subtitle: Learn how to manually connect a Vercel project to a Neon database
 enableTableOfContents: true
 ---
 

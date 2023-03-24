@@ -14,9 +14,10 @@ A Neon project is created with the following resources by default:
 - A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage compute endpoints](/docs/manage/endpoints).
 - A default database, called `neondb`, which resides in the project's primary branch.
 - A default PostgreSQL role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
-- A `web_access` PostgreSQL role, which is used by the Neon [SQL Editor](docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect).
 
 ## Create a project
+
+Neon Free Tier users can create a single project. Paid plans can have multiple projects.
 
 To create a Neon project:
 
@@ -26,9 +27,13 @@ To create a Neon project:
 
 Upon creating a project, you are presented with a dialog that provides your connection details for the project, including your password. The password is required to connect to databases in the project from a client or application. Store your password in a safe location.
 
-<Admonition type="important">
-After closing the connection information dialog, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For password reset instructions, see [Manage roles](/docs/manage/roles).
-</Admonition>
+## View projects
+
+To view your projects:
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+1. Select **Home** or the Neon logo at the top left of the Console.
+1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
 ## Edit a project
 
@@ -52,6 +57,19 @@ To delete a project:
 3. Select **Settings** > **General**.
 4. Click **Delete project.**
 5. On the confirmation dialog, click **Delete**.
+
+## Share a project
+
+Neon paid plan users can share a project with other Neon users.
+
+To share a project:
+
+1. In the Neon Console, select a project.
+1. Select **Settings**.
+1. Under **Grant access to your project**, enter the email address of the person you want to share access with.
+1. Click **Grant access**.
+
+The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
 
 ## Manage projects with the Neon API
 

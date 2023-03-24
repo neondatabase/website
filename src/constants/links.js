@@ -1,5 +1,5 @@
 export default {
-  docs: '/docs/introduction/about/',
+  docs: '/docs/',
   aboutUs: '/about-us/',
   careers: '/careers/',
   blog: '/blog/',
@@ -20,4 +20,5 @@ export default {
   dashboard: 'https://console.neon.tech/sign_in',
   branching: '/branching/',
   contactSales: '/contact-sales/',
+  pricing: '/pricing/',
 };

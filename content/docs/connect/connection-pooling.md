@@ -54,10 +54,39 @@ Prisma Migrate, however, requires a direct connection to the database, and curre
 ```text
 Error: undefined: Database error
 Error querying the database: db error: ERROR: prepared statement "s0" already exists
- ```
+```
+
+When updating your database schema using Prisma Migrate, you need to use a non-pooled connection URL. You can configure the non-pooled connection string by using the `directUrl` property in the datasource block.
+
+Update your .env file with the following changes:
+
+1. Rename the `DATABASE_URL` environment variable to `DIRECT_URL`
+1. Create a `DATABASE_URL` environment variable and paste in the new connection string from the dashboard as its value
+1. Append the `?pgbouncer=true` flag to the `DATABASE_URL` variable
+
+Your .env file should resemble the following:
+
+```
+DATABASE_URL="postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true"
+DIRECT_URL="postgres://casey:<password>@ep-square-sea-260584.us-east-2.aws.neon.tech:5432/neondb"
+```
+
+Update your Prisma schema by setting the `directUrl` in the datasource block:
+
+```
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directURL         = env("DIRECT_URL")
+}
+```
+
+<Admonition type="note">
+This feature is available from Prisma version [4.10.0](https://github.com/prisma/prisma/releases/tag/4.10.0) and higher.
+</Admonition>
 
 You may encounter this error with other applications that require a direct connection to PostgreSQL or applications that are not compatible with PgBouncer in `transaction mode`. To address this issue, Neon supports both pooled and non-pooled connections to the same database. For more information, see [Enable connection pooling](#enable-connection-pooling).
-  
+
 For more information about using Prisma in a PgBouncer-enabled environment, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 
 PostgreSQL features such as prepared statements and [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html) are not supported with connection pooling in _transaction mode_. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section, in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
