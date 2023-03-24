@@ -12,17 +12,19 @@ Refer to our _Get started_ documentation to get up and running with Neon in just
 - [Create your first project](/docs/get-started-with-neon/setting-up-a-project)
 - [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
 
+Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about basic concepts and features of Neon, including database branching.
+
 ## Neon Documentation
 
 <IntroNavigation>
 
-[Connect](/docs/connect/connect-from-any-app "Learn to connect to a Neon database from any application.")
+[Connect](/docs/connect/connect-from-any-app "Learn to connect to a Neon database from any application")
 
 [Import data](/docs/import/import-from-postgres "Import your own data or sample data that you can use to explore Neon")
 
-[Manage](/docs/manage/overview "Learn how to manage Neon projects, branches, compute resources, databases, and roles.")
+[Manage](/docs/manage/overview "Learn how to manage Neon projects, branches, compute resources, databases, and roles")
 
-[Branching](/docs/introduction/branching "Learn about branching and how you can use it to optimize development workflows.")
+[Branching](/docs/introduction/branching "Learn about branching and how you can use it to optimize development workflows")
 
 [PostgreSQL extensions](/docs/reference/pg-extensions "Install supported PostgreSQL extensions")
 

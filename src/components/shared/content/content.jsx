@@ -34,7 +34,7 @@ const components = {
     return <code {...props} />;
   },
   pre: (props) => <div {...props} />,
-  link: (props) => {
+  a: (props) => {
     const { href, children, ...otherProps } = props;
     return (
       <Link to={href} {...otherProps}>

@@ -14,10 +14,10 @@ const items = [
       'Essential features to help you get started with Neon. Perfect for prototyping and personal projects.',
     features: [
       { title: '1 project' },
-      { title: '100 active hours /month' },
-      { title: 'Scale to 0' },
-      { title: '1 shared CPU with 1 GB of RAM' },
-      { title: '10 branches, with a limit of 3GB of data per branch' },
+      { title: '10 branches' },
+      { title: '3 GB of data per branch' },
+      { title: '100 compute hours/month' },
+      { title: 'Auto-suspend compute' },
     ],
     button: {
       url: 'https://console.neon.tech/sign_in',
@@ -30,13 +30,13 @@ const items = [
     subtitle: 'Starting at',
     price: '$0',
     description:
-      'A usage-based plan for small-to-medium teams. Unlimited resources with advanced configuration options. Share your projects with anyone. Only pay for what you use with no fixed contract.',
+      'A usage-based plan for small to medium teams. Unlimited resources with advanced configuration options. Share your projects with anyone. Only pay for what you use with no fixed contract.',
     features: [
-      { title: 'Configurable compute' },
-      { title: 'Always on compute' },
+      { title: 'Unlimited resources' },
       { title: 'Project sharing' },
-      { title: 'Configurable auto-suspend compute', label: 'Coming soon' },
-      { title: 'Autoscaling', label: 'Coming soon' },
+      { title: 'Configurable compute size' },
+      { title: 'Configurable auto-suspend compute', label: 'coming soon' },
+      { title: 'Autoscaling', label: 'coming soon' },
     ],
     button: {
       url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
