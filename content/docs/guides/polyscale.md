@@ -1,6 +1,6 @@
 ---
 title: Connect Neon to Polyscale
-subtitle: Connect Neon to Polyscale in minutes to cache your data globally
+subtitle: Connect Neon to Polyscale to distribute and cache your data globally
 enableTableOfContents: true
 isDraft: false
 ---
