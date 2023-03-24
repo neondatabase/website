@@ -61,18 +61,24 @@ A Neon invoice includes an **Amount due** for the billing period and a cost brea
 
 You can download invoices from the **Billing** page.
 
-1. Navigate to the **Billing** page in the Neon Console. 
+1. Navigate to the **Billing** page in the Neon Console.
 1. Under **Latest invoices**, locate the invoice you want to download and click the PDF download icon.
 
 ## Cancel a subscription
 
-To cancel your subscription to a Neon paid plan:
+To cancel a Pro plan subscription:
 
 1. Navigate to the **Billing** page in the Neon Console.
 1. Click **Request subscription cancellation** at the bottom of the page.
 1. Enter your cancellation request into the **Unsubscribe** dialog and click **Send**.
 
-This action initiates the cancellation. If your data exceeds [Free Tier](/docs/introduction/technical-preview-free-tier) storage limits, you will need to reduce your storage before the paid plan is canceled and Free Tier limits are applied. Your request will be processed by the Neon Support team.
+The request is sent to the Neon Support team, who will respond to you with a request confirmation.
+
+Canceling a subscription to the Pro plan downgrades your account to the Neon Free Tier. The Neon Support team will ask you to remove any projects or storage that exceed [Neon's Free Tier limits](/docs/introduction/technical-preview-free-tier). The subscription cancellation goes into effect at the beginning of the next billing period (the start of the month following the cancellation request).
+
+If usage is not reduced in accordance with Neon's Free tier limits, Neon suspends projects and branches other than those it determines to be the most active. After 60 days, Neon reserves the right to remove any project or storage that exceeds Neon's Free Tier limits.
+
+Cancellation of Enterprise, Platform Partnership, or other customized plans are handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
 
 ## Billing and usage metrics explained
 
