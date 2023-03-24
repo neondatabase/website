@@ -18,14 +18,14 @@ const items = [
     metrics: [
       {
         name: 'Compute hours',
-        usage: '56 hrs',
-        details: '224 hrs * 0.25 Compute Units',
+        usage: '70 hrs',
+        details: '281 hrs * 0.25 Compute Units',
         price: '$7.17',
       },
       {
         name: 'Project storage',
         usage: '0.6 GiB',
-        price: '$0.03',
+        price: '$0.07',
       },
       {
         name: 'Written data',
@@ -44,14 +44,14 @@ const items = [
     metrics: [
       {
         name: 'Compute hours',
-        usage: '1,460 hrs',
-        details: '730 hrs * 2 Compute Units',
-        price: '$187',
+        usage: '1,825 hrs',
+        details: '730 hrs * 2.5 Compute Units',
+        price: '$186.15',
       },
       {
         name: 'Project storage',
         usage: '22 GiB',
-        price: '$2',
+        price: '$2.63',
       },
       {
         name: 'Written data',
@@ -70,14 +70,14 @@ const items = [
     metrics: [
       {
         name: 'Compute hours',
-        usage: '38,000 hrs',
-        details: '19,000 hrs * 2 Compute Units',
-        price: '$4,966',
+        usage: '48,904 hrs',
+        details: '12,226 hrs * 4 Compute Units',
+        price: '$4,988',
       },
       {
         name: 'Project storage',
         usage: '115 GiB',
-        price: '$10',
+        price: '$14',
       },
       {
         name: 'Written data',
