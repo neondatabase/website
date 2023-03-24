@@ -1,74 +1,43 @@
 ---
 title: Use PolyScale with Neon
+subtitle: Connect Neon to Polyscale in minutes to distribute your data globally
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
 
-Note: content has not ben validated
+[PolyScale](https://docs.polyscale.ai/) is a serverless database cache service. Using PolyScale, you can distribute and cache your data globally, seamlessly scaling your current database without altering transactional semantics. No coding or infrastructure changes are required. You can connect Neon to PolyScale in minutes, providing your data-driven apps with speedy access to your Neon data from anywhere in the world.
 
-[PolyScale](https://docs.polyscale.ai/) is a serverless database cache service. Using PolyScale, your data can be distributed globally and cached, seamlessly scaling your current database without altering transactional semantics. No coding or infrastructure changes are required. You can connect Neon to PolyScale in minutes, providing your data-driven apps with speedy access to your Neon data from anywhere in the world.
+Follow the steps below to connect your Neon database with Polyscale:
 
-This guide explains how to connect Neon to a PolyScale cache.
+## Retrieve your Neon connection details
 
-This vide from PolyScale shows how to gt connected, or you can read the steps below.
+In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
-[![Connecting PolyScale to Neon](https://i3.ytimg.com/vi/a94XtB_m9k4/maxresdefault.jpg)](https://www.youtube.com/watch?v=a94XtB_m9k4)
+![Connection details widget](/docs/guides/connection_details.png)
 
-## Create a PolyScale account
+The connection string includes the user name, password, hostname, and database name.
 
-You can set up a free PolyScale account [here](https://app.polyscale.ai/signup/). PolyScale has a free tier and does not require a credit card.
+Copy the hostname, which appears similar to this: `ep-shy-tree-275608.us-east-2.aws.neon.tech`
 
-## Retrieve your Neon connection string
+## Create a Polyscale cache
 
-In the **Connection Details** widget on the Neon Dashboard, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+A Polyscale account can have one or more caches defined. A cache simply identifies a database origin via a hostname and port. Typically you create a cache per database for simplicity.
 
-![Connection details widget](./images/connection_details.png)
+To create your database cache:
 
-The connection string includes the user name, hostname, and database name.
+1. Log into [Polyscale](https://app.polyscale.ai/signup/). If you do not have an account, you can create one by logging in with your GitHub or Google account. PolyScale has a free tier and does not require a credit card.
+2. If you have just signed up for Polyscale, select **Create new cache** from the **Welcome to Polyscale** dialog.
+![Connection details widget](/docs/guides/welcome_to_polyscale.png)
+If you already have an account, click the **New Cache** button in the upper right of the Polyscale dashboard.
+3. Enter a name for the cache, select PostgreSQL type, enter the Neon hostname you copied earlier, and enter the database port number. Neon uses the default PostgreSQL port, `5432`. Leave the default values for the other settings.
+![Create a Polyscale cache(/docs/guides/polyscale_create_cache.png)
+4. Click **Create**. A cache is created for your Neon database, and you are provided with a Polyscale connection string, which is used in place of your original Neon connection string. Simply replace the user name, password, and database name with the values from your Neon connection string.
+![Create a Polyscale cache(/docs/guides/polyscale_success.png)
 
-```text
-postgres://casey@ep-square-sea-260584.us-east-2.aws.neon.tech/neondb
-             ^                       ^                          ^
-             |- <user name>          |- <hostname>              |- <database name>
-```
+Once queries are passing through PolyScale, you can monitor traffic and caching behavior on the **Observability** tab in Polyscale.
 
-- user name: `casey`
-- hostname: `ep-square-sea-260584.us-east-2.aws.neon.tech`
-- database name: `neondb`
+By default, PolyScale automatically caches all queries that pass through the platform. That means you can connect to PolyScale and any queries that you run will be cached.
 
-Passwords are only shown when they are created. If you misplaced your password, you can reset it by selecting the **Reset Password** link in the **Connection Details** widget, or by navigating to **Settings** > **Users**.
+PolyScale identifies caching opportunities by recognizing and remembering patterns in query traffic. New queries typically begin to see cache hits on or about the third query. For more information, see [Time To First Hit](https://docs.polyscale.ai/how-does-it-work/#time-to-first-hit-ttfh), in the _Polyscale documentation_.
 
-Neon uses the default PostgreSQL port, `5432`.
-
-## Create a PolyScale Cache
-
-A Polyscale account can have one or more caches defined. A cache simply identifies a database origin via a hostname and port that you wish to cache data for. Typically you create a cache per database for simplicity.
-
-To create a new cache, click the **New Cache** button in the upper right of the caches dashboard and enter the hostname and port of the database you wish to connect to.
-
-## Connect to the PolyScale Cache
-
-To connect to the origin database via PolyScale simply update any client applications as follows:
-
-1. Use a PolyScale database hostname and port.
-
-- Hostname: `psedge.global`
-- Port: The PolyScale port for PostgreSQL is `5432`.
-
-2. Provide a PolyScale Cache ID as part of the connection string
-
-The Cache ID can be found under the Settings tab of any cache (as detailed in Step 2 above). For MySQL, MariaDB and SQL Server, this is prepended to the database username separated with a hyphen (see example below). For PostgreSQL, an application_name property containing the PolyScale Cache ID is required as part of the connection string e.g. application_name=my_database_password.
-
-For further details, see Getting Connected.
-
-Note: PolyScale does not save your database username and password. To connect to your database via PolyScale, no database credentials on the origin database change.
-
-## Cache Automation
-
-Once queries are passing through PolyScale, switch to the Observability tab to view the traffic and cache behavior.
-
-As default, PolyScale will automatically manage the caching of all queries that pass through the platform. That means you can simply connect to PolyScale and queries will begin to be cached.
-
-Keep in mind that the cache will require some period of warming before queries are cached. PolyScale's machine learning algorithms identify caching opportunities by recognizing and remembering patterns in query traffic. For new queries, you will typically begin to see cache hits on or about the third query. (You can read more about Time To First Hit here.)
-
-Read more about Cache Configuration.
+For more information about using and configuring Polyscale, refer to the [Polyscale documentation](https://docs.polyscale.ai/).
