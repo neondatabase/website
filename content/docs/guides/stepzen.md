@@ -30,7 +30,7 @@ Running the `init.sql` file creates the `address`, `customer`, `product`, and `o
 You can seed the database directly from the terminal by running the following `psql` command:
 
 ```bash
-psql postgres://sally:*************@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb < init.sql
+psql postgres://daniel:*************@ep-restless-rice-862380.us-east-2.aws.neon.tech/neondb < init.sql
 ```
 
 The command takes a Neon connection string as the first argument and a file as the second argument.
@@ -76,9 +76,9 @@ Specify your data source with the `stepzen import` CLI. Answer the setup questio
 stepzen import postgresql
 
 ? What would you like your endpoint to be called? api/with-neon
-? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-cold-poetry-404091.us-east-2.aws.neon.tech:5432`)
+? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-restless-rice-862380.us-east-2.aws.neon.tech:5432`)
 ? What is your database name? YOUR_NEON_DATABASE (e.g., `neondb`)
-? What is the username? YOUR_NEON_USERNAME (e.g., `sally`)
+? What is the username? YOUR_NEON_USERNAME (e.g., `daniel`)
 ? What is the password? [hidden] YOUR_NEON_PASSWORD
 ? Automatically link types based on foreign key relationships using @materializer
  (https://stepzen.com/docs/features/linking-types) Yes

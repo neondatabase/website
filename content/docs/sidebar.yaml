@@ -88,6 +88,8 @@
       slug: guides/nextjs
     - title: Node.js
       slug: guides/node
+    - title: Polyscale
+      slug: guides/polyscale
     - title: Prisma
       items:
         - title: Connect from Prisma
