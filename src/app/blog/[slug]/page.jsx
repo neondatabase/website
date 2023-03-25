@@ -1,3 +1,4 @@
+import { previewData as getPreviewData } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 import Hero from 'components/pages/blog-post/hero';
@@ -5,11 +6,21 @@ import PostContent from 'components/pages/blog-post/post-content';
 import SocialShareBar from 'components/pages/blog-post/social-share-bar';
 import Layout from 'components/shared/layout';
 import SubscribeMinimalistic from 'components/shared/subscribe-minimalistic';
-import { getAllWpPosts, getWpPostBySlug } from 'utils/api-posts';
+import { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData } from 'utils/api-posts';
 
 const BlogPage = async ({ params }) => {
-  const { post } = await getWpPostBySlug(params?.slug);
+  const previewData = getPreviewData();
+  const isPreviewMode = !!previewData;
 
+  let postResult;
+
+  if (isPreviewMode) {
+    postResult = await getWpPreviewPostData(previewData.id, previewData.status);
+  } else {
+    postResult = await getWpPostBySlug(params?.slug);
+  }
+
+  const { post } = postResult;
   if (!post) return notFound();
 
   const { slug, title, content, pageBlogPost, date, readingTime } = post;
@@ -33,6 +44,14 @@ const BlogPage = async ({ params }) => {
       </article>
       <SubscribeMinimalistic />
       <SocialShareBar className="hidden md:block" slug={shareUrl} title={title} />
+      {isPreviewMode && (
+        <a
+          href={`/api/exit-preview?slug=${previewData.slug}&pageType=blog`}
+          className="t-base fixed left-5 bottom-5 inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-primary-1 py-[14px] px-[26px] py-[11px] text-center font-bold !leading-none text-black outline-none transition-colors duration-200 hover:bg-[#00e5bf]"
+        >
+          Preview Mode
+        </a>
+      )}
     </Layout>
   );
 };

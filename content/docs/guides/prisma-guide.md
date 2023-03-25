@@ -1,5 +1,6 @@
 ---
 title: Use Prisma with Neon
+subtitle: Follow this step-by-step guide to learn how to use Prisma with Neon 
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
@@ -47,41 +48,41 @@ postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/sh
 
 ## Set up your Prisma project
 
-Deploy a sample Typescript project and set up Prisma. 
+Deploy a sample Typescript project and set up Prisma.
 
 To complete these steps, you require Node.js v14.17.0 or higher. For more information about Prisma's system requirements, see [System requirements](https://www.prisma.io/docs/reference/system-requirements).
 
 1. Create a project directory and navigate to it.
 
-    ```bash
-    mkdir hello-neon-prisma
-    cd hello-neon-prisma
-    ```
+   ```bash
+   mkdir hello-neon-prisma
+   cd hello-neon-prisma
+   ```
 
 1. Initialize a TypeScript project using `npm`. This creates a `package.json` file with the initial setup for your TypeScript project.
 
-    ```bash
-    npm init -y
-    npm install typescript ts-node @types/node --save-dev
-    ```
+   ```bash
+   npm init -y
+   npm install typescript ts-node @types/node --save-dev
+   ```
 
 1. Initialize TypeScript:
 
-    ```bash
-    npx tsc --init
-    ```
+   ```bash
+   npx tsc --init
+   ```
 
 1. Install the Prisma CLI, which is a Prisma project dependency:
 
-    ```bash
-    npm install prisma --save-dev
-    ```
+   ```bash
+   npm install prisma --save-dev
+   ```
 
 1. Set up Prisma with the Prisma CLI `init` command. This creates a `prisma` directory with a Prisma schema file and configures PostgreSQL as your database.
 
-    ```bash
-    npx prisma init --datasource-provider postgresql
-    ```
+   ```bash
+   npx prisma init --datasource-provider postgresql
+   ```
 
 ## Connect your Prisma project to Neon
 
@@ -110,36 +111,36 @@ In this step, you will update the `datasource db` entry in your `schema.prisma` 
 
 2. Add the model for the `Elements` table.
 
-    Your `schema.prisma` file should now appear as follows:
+   Your `schema.prisma` file should now appear as follows:
 
-    ```text
-    // This is your Prisma schema file,
-    // learn more about it in the docs: https://pris.ly/d/prisma-schema
+   ```text
+   // This is your Prisma schema file,
+   // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-    generator client {
-      provider = "prisma-client-js"
-    }
+   generator client {
+     provider = "prisma-client-js"
+   }
 
-    datasource db {
-      provider = "postgresql"
-      url      = env("DATABASE_URL")
-      shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-    }
+   datasource db {
+     provider = "postgresql"
+     url      = env("DATABASE_URL")
+     shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+   }
 
-    model Elements {
-      AtomicNumber Int @id
-      Element String?
-      Symbol  String?  
-    }
-    ```
+   model Elements {
+     AtomicNumber Int @id
+     Element String?
+     Symbol  String?
+   }
+   ```
 
   <Admonition type="note">
   Prisma [naming conventions](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#naming-conventions) recommend using PascalCase when defining models. However, be aware that the letter case in your Prisma schema is reflected in PostgreSQL identifier names. If an identifier name in PostgreSQL includes an upper case letter, you must quote the name when specifying it in a PostgreSQL query. For example, the `Elements` table has an upper case letter in its name. When querying this table in PostgreSQL, you must enclose `Elements` in quotes: `SELECT * FROM "Elements"`. Otherwise, the identifier name is folded to lower case and the query will not find the table.
 
-  To name objects in your your Prism schema (and in the generated API) differently than they are named in your database, Prisma provides a mapping mechanism that you can use. For example, to map a model named "Elements" to  table named "elements", you can use the `@@map` API attribute in your Prisma schema.
+To name objects in your Prisma schema (and in the generated API) differently than they are named in your database, Prisma provides a mapping mechanism that you can use. For example, to map a model named "Elements" to table named "elements", you can use the `@@map` API attribute in your Prisma schema.
 
 For more information, see [Mapping collection/table and field/column names](https://www.prisma.io/docs/concepts/components/prisma-schema/names-in-underlying-database#mapping-collectiontable-and-fieldcolumn-names), in the _Prisma documentation_.
-  </Admonition>
+</Admonition>
 
 ## Run a migration to create the table in Neon
 
@@ -209,37 +210,37 @@ model Elements {
   Element String?
   Symbol  String?
   AtomicMass Decimal
-}     
+}
 ```
 
 3. Apply the schema change to your database using the `prisma migrate dev` command. In this example, the name given to the migration is `add-field`.
 
-    ```bash
-    $> npx prisma migrate dev --name add-field
-    ```
+   ```bash
+   $> npx prisma migrate dev --name add-field
+   ```
 
-    This command creates a new SQL migration file for the migration, applies the generated SQL migration to your database, and regenerates the Prisma Client. The output resembles the following:
+   This command creates a new SQL migration file for the migration, applies the generated SQL migration to your database, and regenerates the Prisma Client. The output resembles the following:
 
-    ```bash
-    Environment variables loaded from .env
-    Prisma schema loaded from prisma/schema.prisma
-    Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-white-thunder-826300.us-east-2.aws.neon.tech:5432"
+   ```bash
+   Environment variables loaded from .env
+   Prisma schema loaded from prisma/schema.prisma
+   Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-white-thunder-826300.us-east-2.aws.neon.tech:5432"
 
-    Applying migration `20230113120852_add_field`
+   Applying migration `20230113120852_add_field`
 
-    The following migration(s) have been created and applied from new schema changes:
+   The following migration(s) have been created and applied from new schema changes:
 
-    migrations/
-      └─ 20230113120852_add_field/
-        └─ migration.sql
+   migrations/
+     └─ 20230113120852_add_field/
+       └─ migration.sql
 
-    Your database is now in sync with your schema.
+   Your database is now in sync with your schema.
 
-    ✔ Generated Prisma Client (4.8.1 | library) to ./node_modules/@prisma/client in 
-    91ms
-    ```
+   ✔ Generated Prisma Client (4.8.1 | library) to ./node_modules/@prisma/client in
+   91ms
+   ```
 
-    You can view the migration in your `prisma/migrations` folder.
+   You can view the migration in your `prisma/migrations` folder.
 
 ## Add data to your table
 
@@ -302,9 +303,9 @@ touch query.js
 Add the following code to the `query.ts` file:
 
 ```ts
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function main() {
   // ... write Prisma Client queries here
@@ -312,13 +313,13 @@ async function main() {
 
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
 ```
 
 This code contains a `main()` function that's invoked at the end of the script. It also instantiates Prisma Client, which acts as the query interface to your database.
@@ -328,9 +329,9 @@ This code contains a `main()` function that's invoked at the end of the script. 
 Add a query to the `main()` function in your `query.ts` file that creates a new record in the `Elements` table and logs the result to the console. With the query added, your `query.ts` file will look like this:
 
 ```ts
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function main() {
   const elements = await prisma.elements.create({
@@ -340,19 +341,19 @@ async function main() {
       Symbol: 'O',
       AtomicMass: 15.999,
     },
-  })
-  console.log(elements)
+  });
+  console.log(elements);
 }
 
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
 ```
 
 Next, execute the `query.ts` script with the following command:
@@ -371,24 +372,24 @@ Prisma Client offers various queries to read data from your database. In this se
 Delete the previous query from your `query.ts` file and replace it with the `findMany` query. Your `query.ts` file should now appear as follows:
 
 ```ts
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function main() {
-  const elements = await prisma.elements.findMany()
-  console.log(elements)
+  const elements = await prisma.elements.findMany();
+  console.log(elements);
 }
 
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
 ```
 
 Execute the `query.ts` script again to retrieve the records from the `Elements` table.

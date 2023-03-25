@@ -1,5 +1,6 @@
 ---
 title: Use Neon with Koyeb
+subtitle: Learn how to connect a Neon PostgreSQL database to an application deployed with Koyeb
 enableTableOfContents: true
 ---
 

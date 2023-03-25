@@ -11,20 +11,21 @@ import TableOfContents from 'components/pages/doc/table-of-contents';
 import Hero from 'components/pages/release-notes/hero';
 // import Pagination from 'components/pages/release-notes/pagination';
 import ReleaseNoteList from 'components/pages/release-notes/release-note-list';
+import ReleaseNotesFilter from 'components/pages/release-notes/release-notes-filter';
 import Content from 'components/shared/content';
 
 // TODO: Add pagination for release notes
-
-const ReleaseNotes = ({ title, items }) => (
+const ReleaseNotes = ({ currentSlug, items }) => (
   <>
-    <Hero title={title} />
+    <Hero />
+    <ReleaseNotesFilter currentSlug={currentSlug} />
     <ReleaseNoteList items={items} />
     {/* {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />} */}
   </>
 );
 
 ReleaseNotes.propTypes = {
-  title: PropTypes.string.isRequired,
+  currentSlug: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string.isRequired,
@@ -35,7 +36,7 @@ ReleaseNotes.propTypes = {
 };
 
 const Post = ({
-  data: { title, enableTableOfContents },
+  data: { title, subtitle, enableTableOfContents },
   content,
   breadcrumbs,
   navigationLinks: { previousLink, nextLink },
@@ -56,10 +57,13 @@ const Post = ({
       >
         {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
         {isReleaseNotes ? (
-          <ReleaseNotes title={title} items={releaseNotes} />
+          <ReleaseNotes currentSlug={currentSlug} items={releaseNotes} />
         ) : (
           <article>
             <h1 className="text-[36px] font-semibold leading-tight xl:text-3xl">{title}</h1>
+            {subtitle && (
+              <p className="my-2 text-xl leading-tight text-gray-4 dark:text-gray-6">{subtitle}</p>
+            )}
             <Content className="mt-5" content={content} ref={contentRef} />
           </article>
         )}
@@ -81,6 +85,7 @@ const Post = ({
 Post.propTypes = {
   data: PropTypes.shape({
     title: PropTypes.string,
+    subtitle: PropTypes.string,
     enableTableOfContents: PropTypes.bool,
   }).isRequired,
   content: PropTypes.shape({}).isRequired,

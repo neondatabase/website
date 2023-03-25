@@ -1,27 +1,29 @@
 ---
-title: Set up a Project
+title: Create your first project
+subtitle: Create a Neon project in seconds with just a few clicks 
 ---
 
-To set up a Neon project:
+To create your first project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-2. If you are creating your very first project, click **Create the first project**. Otherwise, click **New Project**.
-3. Specify a name, a PostgreSQL version, a region, and click **Create Project**. Upon creating a project, you are presented with a dialog that provides connection details for the project including your password.
+2. Select **Create a project**.
 
-<Admonition type="important">
-After closing the dialog, your password is no longer accessible. If you forget or misplace your password, your only option is to reset it. For instructions, see [Reset a password](/docs/manage/roles#reset-a-password).
-</Admonition>
+![Create a project](/docs/get-started-with-neon/create_project.png)
 
-For information about managing your Neon project, refer to the [Manage Neon overview](/docs/manage/overview) section of the documentation, which includes an overview of the objects that comprise a Neon project.
+3. On the **Project Creation** dialog, specify a name, a PostgreSQL version, a region, and click **Create project**.
 
-You can query a Neon project database from the Neon SQL Editor or a client. For instructions, see:
+![Select project options](/docs/get-started-with-neon/select_project_options.png)
+
+4. You are presented with the connection details for your new project. You can save the connection details or retrieve them later from the **Connection details** widget on the Neon **Dashboard**.
+
+![Connection details dialog](/docs/get-started-with-neon/connection_details_modal.png)
+
+## Next steps
 
 - [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
-- [Connect with psql](/docs/get-started-with-neon/query-with-psql-editor)
-
-For information about connecting to Neon from any application or client, see [Connect from any application](/docs/connect/connect-from-any-app).
-
-Most operations supported by the Neon Console can also be performed programmatically using the [Neon API](/docs/reference/api-reference).
+- [Connect to Neon with psql](/docs/get-started-with-neon/query-with-psql-editor)
+- [Connect to Neon from other applications or clients](/docs/connect/connect-from-any-app)
+- [Learn about managing your Neon project](/docs/manage/overview)
 
 ## Need help?
 

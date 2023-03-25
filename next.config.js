@@ -50,13 +50,18 @@ module.exports = {
       },
       {
         source: '/docs',
-        destination: '/docs/introduction/about',
+        destination: '/docs/introduction',
         permanent: true,
       },
       {
         source: '/early-access',
         destination: '/',
         permanent: true,
+      },
+      {
+        source: '/driver',
+        destination: '/docs/serverless/serverless-driver',
+        permanent: false,
       },
       ...docsRedirects,
     ];

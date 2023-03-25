@@ -23,7 +23,6 @@ const SEO = ({
 
   return (
     <>
-      <meta charSet="utf-8" />
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />
       <meta
         name="viewport"

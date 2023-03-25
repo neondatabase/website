@@ -1,5 +1,6 @@
 ---
 title: Connect an SQLAlchemy application to Neon
+subtitle: Set up a Neon project in seconds and connect from an SQLAlchemy application
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
