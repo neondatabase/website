@@ -20,7 +20,7 @@ The connection string includes the user name, password, hostname, and database n
 Copy the hostname. In the example above, the hostname is this part of the connection string:
 
 ```text
- ep-shy-tree-275608.us-east-2.aws.neon.tech
+ ep-restless-rice-862380.us-east-2.aws.neon.tech
  ```
 
 Also, make note of the user, password, and database name. You will need those details when you configure a connection from your  application to Polyscale.
