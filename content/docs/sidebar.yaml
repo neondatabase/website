@@ -34,6 +34,10 @@
       slug: tutorial/data-recovery
     - title: Test queries with branching
       slug: tutorial/test-queries
+- title: Developer workflows
+  items:
+    - title: Manage schema changes
+    - slug: workflows/schema-changes
 - title: Connect
   items:
     - title: Connect from any application
