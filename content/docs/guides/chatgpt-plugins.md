@@ -1,6 +1,6 @@
 ---
 title: ChatGPT plugins  
-subtitle: Learn how to use Neon PostgreSQL as a vector database for your ChatGPT Retrieval Plugin
+subtitle: Learn how to use Neon PostgreSQL as a vector database for your ChatGPT retrieval plugin
 enableTableOfContents: true
 isDraft: false
 ---
@@ -11,46 +11,48 @@ Follow the steps below to get started.
 
 ## Install dependencies
 
-1. Install Python 3.10, if not already installed. For instructions, see [Getting and installing the latest version of Python](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python).
-2. Clone the repository.
+Install the following dependencies:
 
-  ```bash
-   git clone https://github.com/openai/chatgpt-retrieval-plugin.git
-   ```
+1. Install Python 3.10, if not already installed. For instructions, see [Getting and installing the latest version of Python](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python), in the _Python documentation_.
+2. Clone the ChatGPT Retrieval Plugin repository:
 
-3. Navigate to the cloned repository directory.
+    ```bash
+    git clone https://github.com/openai/chatgpt-retrieval-plugin.git
+    ```
 
-  ```bash
-  cd /path/to/chatgpt-retrieval-plugin
-  ```
+3. Navigate to the cloned repository directory:
 
-4. Install poetry.
+    ```bash
+    cd /path/to/chatgpt-retrieval-plugin
+    ```
 
-  ```bash
-  pip install poetry
-  ```
+4. Install [poetry](https://python-poetry.org/docs/). It's required for dependency management and packaging in Python.
 
-5. Create a new virtual environment with Python 3.10: `poetry env use python3.10`
+    ```bash
+    pip install poetry
+    ```
 
-```bash
-poetry env use python3.10
-```
+5. Create a new virtual environment with Python 3.10:
 
-6. Activate the virtual environment.
+    ```bash
+    poetry env use python3.10
+    ```
 
-  ```bash
-  poetry shell
-  ```
+6. Activate the virtual environment:
 
-7. Install app dependencies.
+    ```bash
+    poetry shell
+    ```
 
-  ```bash
-  poetry install
-  ```
+7. Install application dependencies:
+
+    ```bash
+    poetry install
+    ```
 
 ## Set Environment Variables
 
-Set the required environment variables for your chosen datastore and vector database:
+Set the required environment variables for PostgreSQL and Neon as the vector database:
 
 ```bash
 export DATASTORE=<your_datastore>
@@ -65,6 +67,8 @@ export DATABASE_URL=<connection_string>
 ```
 
 You can obtain a connection string from the **Connection Details** widget on th Neon **Dashboard**. For instructions, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+
 
 ### Run the API Locally
 
