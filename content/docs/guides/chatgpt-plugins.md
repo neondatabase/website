@@ -77,7 +77,7 @@ export DATABASE_URL=<connection_string>
 
 where:
 
-- `DATASTORE`: This specifies the vector database provider you want to use to store and query embeddings. Set this value to `postgresql`.
+- `DATASTORE`: This specifies the vector database provider you want to use to store and query embeddings. Set this value to `postgres`.
 - `BEARER_TOKEN`: This is the secret token that you need to authenticate your requests to the API. You can generate one using any tool or method you prefer, such as [jwt.io](https://jwt.io/).
 - `OPEN_API_KEY`: This is your OpenAI API key that you need to generate embeddings using the text-embedding-ada-002 model. You can get an API key by creating an account on [OpenAI](https://openai.com/). See [API keys](https://platform.openai.com/account/api-keys), in the _OpenAI documentation_.
 - `DATABASE_URL`: This is the Neon PostgreSQL connection string for the database that you will use to store embeddings. You can obtain a connection string from the **Connection Details** widget on th Neon **Dashboard**. For instructions, see [Connect from any application](/docs/connect/connect-from-any-app). It will look similar to the following:
