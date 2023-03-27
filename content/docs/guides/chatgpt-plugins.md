@@ -26,7 +26,7 @@ Install the following dependencies:
     cd /path/to/chatgpt-retrieval-plugin
     ```
 
-4. Install [poetry](https://python-poetry.org/docs/). It's required for dependency management and packaging in Python.
+4. Install [poetry](https://python-poetry.org/docs/). It's required for dependency management.
 
     ```bash
     pip install poetry
@@ -52,7 +52,9 @@ Install the following dependencies:
 
 ## Set Environment Variables
 
-Set the required environment variables for PostgreSQL and Neon as the vector database:
+Set the required environment variables:
+
+1. Set the environment variables for PostgreSQL and Neon as the vector database:
 
 ```bash
 export DATASTORE=<your_datastore>
@@ -60,15 +62,24 @@ export BEARER_TOKEN=<your_bearer_token>
 export OPENAI_API_KEY=<your_openai_api_key>
 ```
 
-Set the `DATABASE_URL` environment variable to your Neon PostgreSQL connection string:
+where:
+
+- `DATASTORE`: This specifies the vector database provider you want to use to store and query embeddings. Set this value to `postgresql`.
+- `BEARER_TOKEN`: This is the secret token that you need to authenticate your requests to the API. You can generate one using any tool or method you prefer, such as [jwt.io](https://jwt.io/).
+- `OPEN_API_KEY`: This is your OpenAI API key that you need to generate embeddings using the text-embedding-ada-002 model. You can get an API key by creating an account on [OpenAI](https://openai.com/). See [API keys](https://platform.openai.com/account/api-keys), in the _OpenAI documentation_.
+
+
+2. Set the `DATABASE_URL` environment variable to your Neon PostgreSQL connection string:
 
 ```bash
 export DATABASE_URL=<connection_string>
 ```
 
-You can obtain a connection string from the **Connection Details** widget on th Neon **Dashboard**. For instructions, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can obtain a connection string from the **Connection Details** widget on th Neon **Dashboard**. For instructions, see [Connect from any application](/docs/connect/connect-from-any-app). It will look similar to the following:
 
-
+```text
+postgres://daniel:<password>@ep-aged-silence-344434.us-east-2.aws.neon.tech/neondb
+```
 
 ### Run the API Locally
 
