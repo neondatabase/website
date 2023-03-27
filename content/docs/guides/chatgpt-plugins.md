@@ -1,13 +1,11 @@
 ---
 title: Set up the ChatGPT Retrieval Plugin with Neon  
-subtitle: Learn how to use Neon as a vector database for the ChatGPT Retrieval Plugin
+subtitle: Learn how to set up and run the ChatGPT Retrieval Plugin with Neon as a vector database
 enableTableOfContents: true
 isDraft: false
 ---
 
-This guide describes how to set up and run the [ChatGPT Retrieval Plugin](https://github.com/openai/chatgpt-retrieval-plugin) with Neon as the vector database.
-
-The ChatGPT Retrieval Plugin enables enables semantic search and retrieval of personal or organizational documents using natural language queries. It allows users to obtain the most relevant document snippets from their data sources, such as files, notes, or emails, by asking questions or expressing needs in natural language. Enterprises can make their internal documents available to their employees through ChatGPT using this plugin.
+The [ChatGPT Retrieval Plugin](https://github.com/openai/chatgpt-retrieval-plugin) enables enables semantic search and retrieval of personal or organizational documents using natural language queries. It allows users to obtain the most relevant document snippets from their data sources, such as files, notes, or emails, by asking questions or expressing needs in natural language. Enterprises can make their internal documents available to their employees through ChatGPT using this plugin.
 
 Follow the steps below to get started.
 
