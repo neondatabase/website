@@ -88,7 +88,7 @@
       slug: guides/nextjs
     - title: Node.js
       slug: guides/node
-    - title: Polyscale
+    - title: PolyScale
       slug: guides/polyscale
     - title: Prisma
       items:
