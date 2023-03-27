@@ -64,9 +64,9 @@ Install the `pgvector` extension on Neon:
 CREATE EXTENSION pgvector
 ```
 
-## Set Environment Variables
+## Set local environment variables
 
-Set the required environment variables:
+Set the required local environment variables for the ChatGPT Retrieval Plugin.
 
 ```bash
 export DATASTORE=<your_datastore>
@@ -96,7 +96,7 @@ poetry run start
 
 You can access the API documentation at [http://0.0.0.0:8000/docs](http://0.0.0.0:8000/docs) and test the API endpoints (make sure to add your bearer token).
 
-For more information on setting up, developing, and deploying the ChatGPT Retrieval Plugin, refer to the full [Development](https://github.com/openai/chatgpt-retrieval-plugin#development) section in the `openai/chatgpt-retrieval-plugin`  repository.
+For more information on setting up, developing, and deploying the ChatGPT Retrieval Plugin, refer to the [Development](https://github.com/openai/chatgpt-retrieval-plugin#development) section in the `openai/chatgpt-retrieval-plugin` repository.
 
 ## Conclusion
 
