@@ -8,6 +8,9 @@ redirectFrom:
   - /docs/cloud/integrations/django/
 ---
 
+Watch the video below to learn how to connect a Django application to Neon.
+[![Connection to Django](/images/neon-django.jpeg)](https://www.youtube.com/watch?v=qx9nshX9CQQ&t=1570s)
+
 To connect to Neon from a Django application:
 
 1. [Create a Neon project](#create-a-neon-project)
@@ -56,7 +59,7 @@ where:
 Neon places computes into an idle state and closes connections after 5 minutes of inactivity (see [Compute lifecycle](https://neon.tech/docs/introduction/compute-lifecycle/)). To avoid connection errors, you can set the Django [CONN_MAX_AGE](https://docs.djangoproject.com/en/4.1/ref/settings/#std-setting-CONN_MAX_AGE) setting to 0 to close database connections at the end of each request so that your application does not attempt to reuse connections that were closed by Neon. From Django 4.1, you can use a higher `CONN_MAX_AGE` setting in combination with the [CONN_HEALTH_CHECKS](https://docs.djangoproject.com/en/4.1/ref/settings/#conn-health-checks) setting to enable connection reuse while preventing errors that might occur due to closed connections. For more information about these configuration options, see [Connection management](https://docs.djangoproject.com/en/4.1/ref/databases#connection-management), in the _Django documentation_.
 </Admonition>
 
-You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/roles#reset-a-password).
+You can find all of the connection details listed above, except for your password, in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/roles#reset-a-password).
 
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings#databases), in the Django documentation.
 
