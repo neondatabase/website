@@ -1,11 +1,13 @@
 ---
-title: ChatGPT plugins  
-subtitle: Learn how to use Neon PostgreSQL as a vector database for your ChatGPT retrieval plugin
+title: Set up the ChatGPT Retrieval Plugin with Neon as the vector database  
+subtitle: Learn how to use Neon as a vector database for the ChatGPT Retrieval Plugin
 enableTableOfContents: true
 isDraft: false
 ---
 
-This guide describes how to set up and run a [ChatGPT Retrieval Plugin](https://github.com/openai/chatgpt-retrieval-plugin) with Neon as the vector database.
+This guide describes how to set up and run the [ChatGPT Retrieval Plugin](https://github.com/openai/chatgpt-retrieval-plugin) with Neon as the vector database.
+
+The ChatGPT Retrieval Plugin enables search and retrieval of personal or organizational documents using natural language queries.
 
 Follow the steps below to get started.
 
@@ -49,6 +51,20 @@ Install the following dependencies:
     ```bash
     poetry install
     ```
+
+## Install the pgvector extension on Neon
+
+Install the `pgvector` extension on Neon:
+
+1. Navigate to the Neon Console.
+1. Select your Neon project.
+1. Select **SQL Editor** from the sidebar.
+1. Select the branch and database that you will use.
+1. Run the following statement to install the `pgvector` extension.
+
+```sql
+CREATE EXTENSION pgvector
+```
 
 ## Set Environment Variables
 
