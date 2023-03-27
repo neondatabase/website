@@ -8,21 +8,21 @@ redirectFrom:
 
 <a id="branches-coming-soon/"></a>
 
-Neon allows you to instantly branch your data in the same way that you branch your code. You can quickly and cost-effectively branch your data for development, testing, staging, and various of other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. See [Branching workflows](#branching-workflows) for a discussion of different ways you can integrate branching into your development workflows.
+Neon allows you to instantly branch your data in the same way that you branch your code. You can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. See [Branching workflows](#branching-workflows) for a discussion of different ways you can integrate branching into your development workflows.
 
 ## What is a branch?
 
 A branch is a copy-on-write clone of your data. You can create a branch from a current or past state. For example, you can create a branch that includes all data up to the current point in time or an earlier point in time.
 
-A branch is isolated from its originating data, so you are free to play around with it, modify it, and delete it when it's no longer needed. Changes to a branch are independent. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are saved as a delta.
+A branch is isolated from its originating data, so you are free to play around with it, modify it, or delete it when it's no longer needed. Changes to a branch are independent. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are saved as a delta.
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means you can create a branch at any time without impacting the performance of your production system.
 
-Each Neon project has a [primary branch](/docs/reference/glossary#primary-branch) called `main`. The first branch that you create is branched from the project's primary branch. Subsequent branches can be branched from the primary branch or from a previously created branch.
+Each Neon project is created with a [primary branch](/docs/reference/glossary#primary-branch) called `main`. The first branch that you create is branched from the project's primary branch. Subsequent branches can be branched from the primary branch or from a previously created branch.
 
 ## Branch compute endpoints
 
-When creating a new branch, you have the option to create a compute endpoint to associate with the branch.
+When creating a new branch, you have the option to create a compute endpoint for the branch.
 
 A compute endpoint allows you to connect to the branch from a client or application and is read-write.
 
@@ -30,7 +30,7 @@ Your Neon project's primary branch has a compute endpoint by default.
 
 To connect to a database in a branch from a client or application, you must connect to the branch's compute endpoint. For more information connecting to a branch, see [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
 
-If a branch does not have a compute endpoint, you can add one at any time.
+If a branch does not have a compute endpoint, you can add one. See [Create a compute endpoint](/docs/manage/endpoints#create-a-compute-endpoint).
 
 ## Branching workflows
 
@@ -52,7 +52,7 @@ With Neon's branching capabilities, you can create a branch for each preview dep
 
 ### Testing
 
-Branching enables testers to use the most recent production data. Testers can create branches for testing schema changes, validating new queries, or testing potentially destructive queries before deploying them into production. A branch is isolated from its parent branch but has all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a database. Tests can also run on separate branches in parallel, with each branch having dedicated compute resources.
+Branching enables testers to use the most recent production data. Testers can create branches for testing schema changes, validating new queries, or testing potentially destructive queries before deploying them to production. A branch is isolated from its parent branch but has all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a database. Tests can also run on separate branches in parallel, with each branch having dedicated compute resources.
 
 ![test environment branches](/docs/introduction/branching_test.png)
 
@@ -70,7 +70,7 @@ If you lose data due to an unintended deletion or some other event, you can crea
 
 For a simple example showing how you can use a branch to recover lost data, refer to [Recover lost data with branching](/docs/tutorial/data-recovery), in the _Neon tutorial_.
 
-For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to create branches to recover to the last known good.
+For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to recover to the last known good.
 
 ### Analytics
 
