@@ -6,7 +6,7 @@ subtitle: Learn how to manage schema changes between Neon database branches
 
 This topic describes how to use a schema management application to manage schema changes between Neon database branches in scenarios where you alter a database schema on a development branch of your database and want to apply those changes back to your production database.
 
-This example uses the [dbForge Schema Compare](https://www.devart.com/dbforge/postgresql/schemacompare/) application from Devart. dbForge Schema Compare is a tool for easy and effective comparison and synchronization of PostgreSQL database structure differences. It helps compare database schemas, gives comprehensive information on all differences, and generates clear and accurate SQL synchronization scripts to deploy database changes.
+The example uses the [dbForge Schema Compare](https://www.devart.com/dbforge/postgresql/schemacompare/) application from Devart. dbForge Schema Compare is a tool for easy and effective comparison and synchronization of PostgreSQL database structure differences. It helps compare database schemas, gives comprehensive information on all differences, and generates clear and accurate SQL synchronization scripts to deploy database changes.
 
 The are various schema management application alternatives, including open source options that you can also use to manage schema changes. Here are a few examples:
 
