@@ -88,7 +88,7 @@ where:
     postgres://daniel:<password>@ep-aged-silence-344434.us-east-2.aws.neon.tech/neondb
     ```
 
-### Run the API Locally
+## Run the API Locally
 
 Run the API locally.
 
