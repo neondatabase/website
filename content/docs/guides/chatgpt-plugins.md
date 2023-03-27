@@ -94,10 +94,10 @@ Run the API locally.
 poetry run start
 ```
 
-Access the API documentation at [http://0.0.0.0:8000/docs](http://0.0.0.0:8000/docs) and test the API endpoints (make sure to add your bearer token).
+You can access the API documentation at [http://0.0.0.0:8000/docs](http://0.0.0.0:8000/docs) and test the API endpoints (make sure to add your bearer token).
 
-For more detailed information on setting up, developing, and deploying the ChatGPT Retrieval Plugin, refer to the full [Development](https://github.com/openai/chatgpt-retrieval-plugin#development) section in the `openai/chatgpt-retrieval-plugin`  repository.
+For more information on setting up, developing, and deploying the ChatGPT Retrieval Plugin, refer to the full [Development](https://github.com/openai/chatgpt-retrieval-plugin#development) section in the `openai/chatgpt-retrieval-plugin`  repository.
 
 ## Conclusion
 
-By enabling Neon PostgreSQL as a vector database option for ChatGPT plugins, we provide developers with more choice and flexibility in creating powerful chatbot applications. We encourage you to give it a try and experience the benefits of using Neon as your vector database for the ChatGPT Retrieval Plugin.
+By enabling Neon as a vector database option for ChatGPT plugins, we provide developers with more choice and flexibility in creating powerful chatbot applications. We encourage you to give it a try and experience the benefits of using Neon as the vector  database for the ChatGPT Retrieval Plugin.
