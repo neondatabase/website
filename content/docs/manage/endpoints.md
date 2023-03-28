@@ -4,9 +4,9 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-A single read-write compute endpoint is created for your project's [primary branch](/docs/reference/glossary#primary-branch) (`main`) by default.
+A single read-write compute endpoint is created for your project's [primary branch](/docs/reference/glossary#primary-branch), by default.
 
-To connect to a database that resides in a branch, you must connect via a compute endpoint that is associated with the branch. The following diagram shows the project's primary branch (`main`) and a child branch, both of which have an associated compute endpoint. Applications and clients connect to a branch via a compute endpoint.
+To connect to a database that resides in a branch, you must connect via a compute endpoint associated with the branch. The following diagram shows the project's primary branch (`main`) and a child branch, both of which have an associated compute endpoint.
 
 ```text
 Project
@@ -19,9 +19,7 @@ Project
                             |---- database (mydb)
 ```
 
-You can assign a compute endpoint to the branch you want to connect to or remove an compute endpoint from a branch by deleting it.
-
-Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The Neon [Free Tier](/docs/introduction/technical-preview-free-tier) allows up to 1vCPU and 4GB of RAM per compute endpoint.
+Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The Neon [Free Tier](/docs/introduction/technical-preview-free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint.
 
 ## View a compute endpoint
 
@@ -29,7 +27,7 @@ A compute endpoint is associated with a branch. To view a compute endpoint, sele
 
 Compute endpoint details shown on the branch page include:
 
-- **Host**: The compute endpoint name.
+- **Host**: The compute endpoint hostname.
 - **Region**: The region where the compute endpoint resides.
 - **Type**: The type of compute endpoint. Currently, only `read_write` compute endpoints are supported.
 - **State**: The compute endpoint state (`Active`, `Idle`, or `Stopped`).
@@ -49,7 +47,7 @@ For more information connection pooling in Neon, see [Connection pooling](/docs/
 
 ## Edit a compute endpoint
 
-You can edit a compute endpoint to change the branch or the connection pooling setting.
+You can edit a compute endpoint to change the branch that it is associated with. The branch you want to associated the endpoint with cannot have an existing compute endpoint.
 
 <Admonition type="note">
 Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](https://neon.tech/docs/connect/connection-pooling#enable-connection-pooling).
@@ -60,7 +58,7 @@ To edit a compute endpoint:
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. Click the compute endpoint kebab menu, and select **Edit**.
-1. Select a new branch or change the connection pooling setting and click **Save**. If you are selecting a new branch, the branch must not have an associated compute endpoint.
+1. Select a new branch and click **Save**.
 
 ## Delete a compute endpoint
 
@@ -78,24 +76,24 @@ To delete a compute endpoint:
 Compute endpoint actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). The following examples demonstrate how to create, view, update, and delete compute endpoints using the Neon API. For other compute endpoint API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a compute endpoint with the API
 
 The following Neon API method creates a compute endpoint.
 
 ```text
-POST /endpoints
+POST /projects/{project_id}/endpoints
 ```
 
-The API method appears as follows when specified in a cURL command. The branch that you specify cannot have an existing compute endpoint. A compute endpoint must be associated with a branch, and a branch can have only one compute endpoint. Neon currently supports read-write compute endpoints only.
+The API method appears as follows when specified in a cURL command. The branch you specify cannot have an existing compute endpoint. A compute endpoint must be associated with a branch, and a branch can have only one compute endpoint. Neon currently supports read-write compute endpoints only.
 
 ```bash
 curl -X 'POST' \
@@ -110,10 +108,6 @@ curl -X 'POST' \
   }
 }'
 ```
-
-<Admonition type="note">
-You can enable connection pooling for a compute endpoint by adding the `"pooler_enabled": "true"` attribute to the request body. For more information about connection pooling support in Neon, see [Connection pooling](/docs/connect/connection-pooling).
-</Admonition>
 
 Response:
 

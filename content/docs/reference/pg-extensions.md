@@ -93,8 +93,8 @@ You can update an extension to the latest version using `ALTER EXTENSION <extens
 
 ## Extension support notes
 
-- Neon supports the `uuid-ossp` extension for generating UUIDs rather than the `uuid` extension.
-- The `sslinfo` extension is not supported, as Neon handles connections via a proxy that checks SSL.
+- Neon supports the `uuid-ossp` extension for generating UUIDs instead of the `uuid` extension.
+- The `sslinfo` extension is not supported. Neon handles connections via a proxy that checks SSL.
 - The `pg_cron` extension is not supported. Neon scales to zero when it is not being used, which means that a scheduler that runs inside the database cannot be implemented. Consider using an scheduler that runs externally instead.
 - The `file_fdw` extension is not supported. Files would not remain accessible when Neon scales to zero.
 

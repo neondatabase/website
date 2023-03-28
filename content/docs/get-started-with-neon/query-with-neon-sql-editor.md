@@ -49,7 +49,7 @@ To save a query:
 
 The query is added to the **Saved** list in the left pane of the SQL Editor. You can rerun a query by selecting it from the **Saved** list.
 
-You can rename or delete a saved query by selecting **Rename** or **Delete** from the the kebab menu associated with the saved query.
+You can rename or delete a saved query by selecting **Rename** or **Delete** from the kebab menu associated with the saved query.
 
 ## View the query history
 
