@@ -51,6 +51,7 @@ Connections from the following GUI applications and IDEs have been tested with N
 - [CLion](https://www.jetbrains.com/clion/)
 - [DataGrip](https://www.jetbrains.com/datagrip/)
 - [DBeaver](https://dbeaver.io/)
+- [dbForge](https://www.devart.com/dbforge/) and the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
 - [DbVisualizer](https://www.dbvis.com/)
 - [DronaHQ hosted cloud version](https://www.dronahq.com/) (requires selecting **Connect using SSL** when creating a connector)
 - [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres)
