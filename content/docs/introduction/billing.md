@@ -129,7 +129,7 @@ To estimate your own compute time monthly cost:
 1. Determine the compute size that you require, in Compute Units (CUs). Neon supports compute size between .25 CUs and 7 CUs. One CU has 1 vCPU and 4GB of RAM.
 1. Determine the amount of active time per month for your database, in hours.
 1. Determine the rate (price per hour) for compute time in your region. See [Billing rates](#billing-rates). The prices shown in the table above are based on US East (Ohio) _Compute time_ rates.
-1. Input the values into the _Compute time_ cost calculation formula shown above. For example:
+1. Input the values into the _Compute time_ cost-calculation formula shown above. For example:
 
 ```text
 1 * 730 * 0.10200 = 74.46
