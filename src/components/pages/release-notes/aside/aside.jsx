@@ -9,7 +9,7 @@ const Aside = ({ slug, isReleaseDateExist = false }) => {
   const { category, capitalisedCategory } = getReleaseNotesCategoryFromSlug(slug);
 
   return (
-    <aside className="absolute left-0 top-0.5 z-10 flex min-w-[8rem] max-w-fit flex-col items-end gap-3 rounded-md xl:sticky xl:top-10 xl:mt-0 xl:mr-9 xl:max-h-24 sm:static sm:max-h-max sm:flex-row sm:items-center sm:space-x-5">
+    <aside className="absolute left-0 top-0.5 z-10 flex min-w-[8rem] max-w-fit flex-col items-end gap-3 rounded-md xl:sticky xl:top-10 xl:mt-0 xl:mr-9 xl:max-h-24 sm:static sm:max-h-max sm:flex-row sm:items-center">
       {!isReleaseDateExist && (
         <time className="whitespace-nowrap text-xl font-semibold leading-none" dateTime={datetime}>
           {label}
