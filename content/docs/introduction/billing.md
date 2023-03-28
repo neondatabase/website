@@ -132,7 +132,7 @@ To estimate your own compute time monthly cost:
 1. Input the values into the _Compute time_ cost-calculation formula shown above. For example:
 
     ```text
-    1 * 730 * 0.10200 = 74.46
+    1 CU * 730 hrs * $0.10200 = $74.46
     ```
 
 ### Project storage
