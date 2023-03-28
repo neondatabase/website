@@ -131,9 +131,9 @@ To estimate your own compute time monthly cost:
 1. Determine the rate (price per hour) for compute time in your region. See [Billing rates](#billing-rates). The prices shown in the table above are based on US East (Ohio) _Compute time_ rates.
 1. Input the values into the _Compute time_ cost-calculation formula shown above. For example:
 
-```text
-1 * 730 * 0.10200 = 74.46
-```
+    ```text
+    1 * 730 * 0.10200 = 74.46
+    ```
 
 ### Project storage
 
