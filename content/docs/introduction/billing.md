@@ -124,18 +124,12 @@ For an idea of compute time cost per month based on compute size, refer to the f
 - Internal applications with consistent usage are likely to be active during working hours (173 hrs/mth).
 - Internal applications with moderate usage are likely to be active during half of working hours (87 hrs/mth).
 
-To estimate your own compute time cost:
+To estimate your own compute time monthly cost:
 
-1. Determine the compute size that you require. Neon supports compute size between .25 CUs and 7 CUs. One CU has 1 vCPU and 4GB of RAM.
-1. Determine the amount of active for your database in hours.
-1. Determine the rate (price per hour) for compute time in your region. See [Bill rates](#billing-rates). The prices shown in the table above are based on US East (Ohio) compute time rates.
-1. Input the values into the following formula:
-
-```text
-compute units * active time (hours) * price per hour
-```
-
-For example:
+1. Determine the compute size that you require, in Compute Units (CUs). Neon supports compute size between .25 CUs and 7 CUs. One CU has 1 vCPU and 4GB of RAM.
+1. Determine the amount of active time per month for your database, in hours.
+1. Determine the rate (price per hour) for compute time in your region. See [Billing rates](#billing-rates). The prices shown in the table above are based on US East (Ohio) _Compute time_ rates.
+1. Input the values into the _Compute time_ cost calculation formula shown above. For example:
 
 ```text
 1 * 730 * 0.10200 = 74.46
