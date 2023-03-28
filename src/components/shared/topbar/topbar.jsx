@@ -9,7 +9,7 @@ const TopBar = () => (
     to="https://devdays.neon.tech"
   >
     <span className="mr-4 truncate border-r border-black border-opacity-20 py-1 pr-4 text-sm font-semibold">
-      Join us on March 29th for Developer Days!
+      Join us on March 29th for Developer Days #2!
     </span>
     <span className="inline-flex items-center text-sm font-bold xs:hidden">
       <span>Learn More</span>
