@@ -110,6 +110,37 @@ The cost calculation for _Compute time_ is as follows:
 compute units * active time (hours) * price per hour
 ```
 
+#### Monthly compute time cost estimates
+
+For an idea of compute time cost per month based on compute size, refer to the following table:
+
+| Compute size (CU) | 730 hrs/mth (all hours) | 173 hrs/mth (working hours)  | 87 hrs/mth (half of working hours) |
+| :------- | :------- | :------- | :------- |
+| 0.25 CU    | $18.62    | $4.41    | $2.22    |
+| 0.5 CU    | $37.23    | $8.82    | $4.44    |
+| 1 CU    | $74.46    | $17.65    | $8.87    |
+
+- Public-facing applications are likely to be active for all hours in a month (730 hrs/mth).
+- Internal applications with consistent usage are likely to be active during working hours (173 hrs/mth).
+- Internal applications with moderate usage are likely to be active during half of working hours (87 hrs/mth).
+
+To estimate your own compute time cost:
+
+1. Determine the compute size that you require. Neon supports compute size between .25 CUs and 7 CUs. One CU has 1 vCPU and 4GB of RAM.
+1. Determine the amount of active for your database in hours.
+1. Determine the rate (price per hour) for compute time in your region. See [Bill rates](#billing-rates). The prices shown in the table above are based on US East (Ohio) compute time rates.
+1. Input the values into the following formula:
+
+```text
+compute units * active time (hours) * price per hour
+```
+
+For example:
+
+```text
+1 * 730 * 0.10200 = 74.46
+```
+
 ### Project storage
 
 The _Project storage_ metric measures the amount of data and history stored in your Neon projects. Project storage includes:
