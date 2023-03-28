@@ -35,7 +35,7 @@ Neon account
 
 ## Neon account
 
-This is the account used to register with Neon. Neon currently supports registering with GitHub, Google, or partner accounts.
+This is the account you used to sign up with Neon. Neon currently supports signing up with GitHub, Google, or partner accounts.
 
 ## API keys
 
@@ -47,7 +47,7 @@ A project is the top-level object in the Neon object hierarchy. It is a containe
 
 ## Branches
 
-Data resides in a branch. Each Neon project has a primary branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data per branch. For more information, see [Manage branches](/docs/manage/branches).
+Data resides in a branch. Each Neon project is created with a primary branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data per branch. For more information, see [Manage branches](/docs/manage/branches).
 
 ## Compute endpoint
 
@@ -55,7 +55,7 @@ A compute endpoint is a compute resource associated with a branch. A read-write 
 
 ## Roles
 
-In Neon, roles are PostgreSQL roles. A role is required to create and access a database. A role belongs to a branch. There is no limit on the number of roles you can create. The primary branch of a Neon project is created with a role named for the Neon account that you registered with. For example, if you registered with a Google account for "Casey Smith", Neon creates a role named "Casey" in the primary branch. This role is the owner of the default `neondb` database in your project's primary branch. The primary branch is also created with a `web_access` role, which is used by the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect). For more information, see [Manage roles](/docs/manage/roles).
+In Neon, roles are PostgreSQL roles. A role is required to create and access a database. A role belongs to a branch. There is no limit on the number of roles you can create. The primary branch of a Neon project is created with a role named for the Neon account that you registered with. For example, if you registered with a Google account for "Casey Smith", Neon creates a role named "Casey" in the primary branch. This role is the owner of the default `neondb` database in your project's primary branch. For more information, see [Manage roles](/docs/manage/roles).
 
 ## Databases
 

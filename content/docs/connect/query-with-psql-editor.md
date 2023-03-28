@@ -29,7 +29,7 @@ psql postgres://sally:<password>@ep-cold-poetry-404091.us-east-2.aws.neon.tech/n
 
 ## Where do I obtain a password?
 
-A password was provided to you when you created your Neon project. If you have misplaced your password, refer to [Reset a password](/docs/manage/roles#reset-a-password) for password reset instructions.
+You can obtain a Neon connection string with your password from the Neon **Dashboard**, under **Connection Details**.
 
 ## What port does Neon use?
 

@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/get-started-with-neon/projects
 ---
 
-A project is the top-level object in the Neon object hierarchy. Tier limits define how many projects you can create. Neon's free tier permits one project per Neon account.
+A project is the top-level object in the [Neon object hierarchy](/docs/manage/overview). Tier limits define how many projects you can create. Neon's Free Tier permits one project per Neon account.
 
 A Neon project is created with the following resources by default:
 
@@ -22,10 +22,10 @@ Neon Free Tier users can create a single project. Paid plans can have multiple p
 To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-2. If you are creating your very first project, click **Create your first project**. Otherwise, click **New Project**.
-3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
+2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
+3. Specify a name, a PostgreSQL version, and a region, and click **Create Project**.
 
-Upon creating a project, you are presented with a dialog that provides your connection details for the project, including your password. The password is required to connect to databases in the project from a client or application. Store your password in a safe location.
+Upon creating a project, you are presented with a dialog that provides your connection details for the default `neondb` database, including your password.
 
 ## View projects
 
@@ -37,14 +37,14 @@ To view your projects:
 
 ## Edit a project
 
-Only changing the project name and enabling or disabling connection pooling are permitted when editing a project.
+You are permitted to change the project name when editing a project.
 
 To edit a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to edit.
-3. Select **Settings** > **General**.
-4. Make your changes and click **Save**.
+3. Select **Settings**.
+4. Make your change and click **Save**.
 
 ## Delete a project
 
@@ -54,19 +54,19 @@ To delete a project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to delete.
-3. Select **Settings** > **General**.
+3. Select **Settings**.
 4. Click **Delete project.**
 5. On the confirmation dialog, click **Delete**.
 
 ## Share a project
 
-Neon paid plan users can share a project with other Neon users.
+Neon paid plan users can share a project with other Neon accounts.
 
 To share a project:
 
 1. In the Neon Console, select a project.
 1. Select **Settings**.
-1. Under **Grant access to your project**, enter the email address of the person you want to share access with.
+1. Under **Grant access to your project**, enter the email address of the account you want to share access with.
 1. Click **Grant access**.
 
 The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
@@ -76,7 +76,7 @@ The email you specify is added to the list of **People who have access to the pr
 Project actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete projects using the Neon API. For other project-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
