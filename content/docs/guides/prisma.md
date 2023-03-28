@@ -46,7 +46,7 @@ You can find all of the connection details listed above in the **Connection Deta
 
 ## Configure a shadow database for Prisma Migrate
 
-Prisma Migrate is a migration tool that allows you to easily evolve your database schema from prototyping to production. Prisma Migrate requires a shadow database to detect schema drift. This section describes how to configure a second Neon database as a shadow database, which is required to run the `prisma migrate dev` command.
+Prisma Migrate is a migration tool that allows you to evolve your database schema from prototyping to production. Prisma Migrate requires a shadow database to detect schema drift. This section describes how to configure a second Neon database as a shadow database, which is required to run the `prisma migrate dev` command.
 
 <Admonition type="note">
 Prisma Migrate requires a direct connection to the database and does not support connection pooling with PgBouncer. Migrations fail with an error if you use a pooled connection. For more information, see [Prisma Migrate with PgBouncer](#prisma-migrate-with-pgbouncer).
@@ -86,7 +86,26 @@ Error querying the database: db error: ERROR: prepared statement
 
 If you encounter this error, ensure that you are using a direct connection to the database. Neon supports both pooled and non-pooled connections to the same database. See [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling) for more information.
 
-For more information about this issue, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#prisma-migrate-and-pgbouncer-workaround).
+You can configure Prisma Migrate to use a non-pooled connection string by adding the `directUrl` property to the datasource block in your `schema.prisma` file. For example:
+
+```text
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+```
+
+<Admonition type="note">
+This feature is available from Prisma version [4.10.0](https://github.com/prisma/prisma/releases/tag/4.10.0) and higher.
+</Admonition>
+
+Next, update your `.env` file with both the `DATABASE_URL` and `DIRECT_URL` variables settings. As shown in the following example, set `DATABASE_URL` to the pooled connection string for your Neon database, and set `DIRECT_URL` to the non-pooled connection string.
+
+```text
+DATABASE_URL="postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true"
+DIRECT_URL="postgres://casey:<password>@ep-square-sea-260584.us-east-2.aws.neon.tech:5432/neondb"
+```
 
 ## Prisma Client with PgBouncer for serverless functions
 

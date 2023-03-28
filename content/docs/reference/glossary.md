@@ -16,7 +16,7 @@ The amount of active compute hours. Neon Free Tier users are provided with 100 h
 
 ### Activity Monitor
 
-A process that monitors a Neon compute for activity. During periods of inactivity, the Activity Monitor gracefully places the Compute into an `Idle` state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of complete inactivity. When a connection is made to an idle compute, the Activity Monitor reactivates the compute.
+A process that monitors a Neon compute for activity. During periods of inactivity, the Activity Monitor gracefully places the Compute into an `Idle` state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of inactivity. When a connection is made to an idle compute, the Activity Monitor reactivates the compute.
 
 ### API
 
@@ -24,11 +24,11 @@ See [Neon API](#neon-api).
 
 ### API Key
 
-A unique identifier used to authenticate a user or a calling program to an API. An API key is required to authenticate to the Neon API. For more information, see [Using API keys](/docs/get-started-with-neon/using-api-keys/).
+A unique identifier used to authenticate a user or a calling program to an API. An API key is required to authenticate to the Neon API. For more information, see [Manage API keys](/docs/get-started-with-neon/using-api-keys/).
 
 ### Auto-suspend compute
 
-A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. You can monitor the state of an compute endpoint in the Branches widget on the Neon **Dashboard**.
+A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. You can monitor the state of a compute endpoint in the **Branches** widget on the Neon **Dashboard**.
 
 ### Autoscaling
 
@@ -46,7 +46,7 @@ A mechanism that manages the lag between the Pageserver and compute node or the 
 
 ### Branch
 
-A [copy-on-write](#copy-on-write) clone of a Neon project's primary branch or previously created child branch. A branch can be created from the current or past state of the parent branch. A branch created from the current state of the parent branch includes the databases and roles that existed in the parent branch at the time of branch creation. A branch created from a past state of the parent branch includes the databases and roles that existed in the past state. The data in a branch can be modified independently from its originating data. See [Branching](/docs/introduction/branching). Each branch has a dedicated [compute endpoint](#compute-endpoint), which is the compute instance associated with the branch. Connecting to a database in a branch requires connecting via the branch's compute endpoint. For more information, see [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
+A [copy-on-write](#copy-on-write) clone of a Neon project's primary branch or previously created child branch. A branch can be created from the current or past state of the parent branch. A branch created from the current state of the parent branch includes the databases and roles that existed in the parent branch at the time of branch creation. A branch created from a past state of the parent branch includes the databases and roles that existed in the past state. The data in a branch can be modified independently from its originating data. See [Branching](/docs/introduction/branching). Connecting to a database in a branch requires connecting via the branch's compute endpoint. For more information, see [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
 
 ### Branching
 
@@ -58,11 +58,11 @@ Continuous integration and continuous delivery or continuous deployment.
 
 ### Compute
 
-A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon compute instance (also referred to as a [compute endpoint](#compute-endpoint)) runs PostgreSQL. The amount of compute resources available to a Neon project is currently subject to the limits defined by the Technical Preview Free Tier. A Neon compute instance is stateless and is automatically activated or suspended based on user activity.
+A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon compute instance (also referred to as a [compute endpoint](#compute-endpoint)) runs PostgreSQL. The amount of compute resources available to a Neon project is defined by tier. Neon supports free  and paid tiers.
 
 ### Compute endpoint
 
-The Neon compute instance associated with a branch. Neon creates a single read-write compute endpoint for the project's primary branch. You can choose whether or not to create a compute endpoint when creating child branches. The compute endpoint hostname is required to connect to a Neon database from a client or application. A compute endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. A compute endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. A compute endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app). For more information about compute endpoints, see [Manage compute endpoints](/docs/manage/endpoints/).
+A Neon compute instance. Neon creates a single read-write compute endpoint for the project's primary branch. You can choose whether or not to create a compute endpoint when creating child branches. The compute endpoint hostname is required to connect to a Neon database from a client or application. A compute endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. A compute endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. A compute endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app). For more information about compute endpoints, see [Manage compute endpoints](/docs/manage/endpoints/).
 
 ### Connection pooling
 
@@ -70,7 +70,7 @@ A method of creating a pool of connections and caching those connections for reu
 
 ### Connection string
 
-A string containing details for connecting to a Neon project branch. The details include a user name (role), compute endpoint hostname, and database name; for example:
+A string containing details for connecting to a Neon database. The details include a user name (role), compute endpoint hostname, and database name; for example:
 
 ```terminal
 postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
@@ -78,9 +78,7 @@ postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
 
 The compute endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
 
-The connection string for a Neon is provided on the **Dashboard** in the Neon Console, under **Connection Details**. The connection string that is displayed immediately after creating a project also includes the user’s password, temporarily. For security reasons, the password is removed from the connection string after navigating away from the Neon Console or refreshing the browser. If you misplace your password, your only option is to reset it.
-
-For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
+Connection strings for a Neon databases can be obtained from the **Connection Details** widget on the Neon **Dashboard**. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ### Compute size
 

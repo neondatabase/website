@@ -3,7 +3,7 @@ title: Passwordless connect
 enableTableOfContents: true
 ---
 
-Neon's `psql` passwordless connect feature helps you quickly authenticate a connection to Neon without having to provide a password.
+Neon's `psql` passwordless connect feature helps you quickly authenticate a connection to Neon without providing a password.
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
 
@@ -23,9 +23,9 @@ To connect using Neon's `psql` passwordless connect feature:
        https://console.neon.tech/psql_session/6d32af5ef8215b62
    ```
 
-2. In your browser, navigate to the provided link where you are asked to select a Neon project to connect to. If your project has more than one compute endpoint, you are also asked to select one. Select the compute endpoint that is associated with the branch you want to connect to.
+2. In your browser, navigate to the provided link. Log in to Neon if you are not already logged in. You are asked to select a Neon project to connect to. If your project has more than one compute endpoint, you are also asked to select one.
 
-   After making your selection, you are directed to check the terminal where information similar to the following is displayed:
+   After making your selections, you are advised that you can return to your terminal or command window where information similar to the following is displayed:
 
    ```bash
    NOTICE:  Connecting to database.
@@ -33,15 +33,6 @@ To connect using Neon's `psql` passwordless connect feature:
    Type "help" for help.
 
    casey=>
-   ```
-
-   When using passwordless connect, the `psql` prompt shows your local terminal user name. However, you are logged in with the Neon `web_access` role, which you can verify by running this query:
-
-   ```sql
-   SELECT current_user;
-    current_user
-   --------------
-    web_access
    ```
 
    The passwordless connect feature connects to the first database created in the branch. To check the database you are connected to, issue this query:
