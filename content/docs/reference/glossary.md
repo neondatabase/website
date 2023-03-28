@@ -16,7 +16,7 @@ The amount of active compute hours. Neon Free Tier users are provided with 100 h
 
 ### Activity Monitor
 
-A process that monitors a Neon compute for activity. During periods of inactivity, the Activity Monitor gracefully places the Compute into an `Idle` state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of inactivity. When a connection is made to an idle compute, the Activity Monitor reactivates the compute.
+A process that monitors a Neon compute instance for activity. During periods of inactivity, the Activity Monitor gracefully places the compute into an `Idle` state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of inactivity. When a connection is made to an idle compute, the Activity Monitor reactivates the compute.
 
 ### API
 
@@ -28,7 +28,7 @@ A unique identifier used to authenticate a user or a calling program to an API. 
 
 ### Auto-suspend compute
 
-A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. You can monitor the state of a compute endpoint in the **Branches** widget on the Neon **Dashboard**.
+A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. You can monitor the state of a compute endpoint in the **Branches** widget on the Neon **Dashboard**.
 
 ### Autoscaling
 
@@ -82,7 +82,7 @@ Connection strings for a Neon databases can be obtained from the **Connection De
 
 ### Compute size
 
-The number of Compute Units (CU) assigned to a Neon compute endpoint. A Neon CU has 1 vCPU and 4 GB of RAM, and a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of the compute endpoint.
+The number of Compute Units (CU) assigned to a Neon compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. A Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of the compute endpoint.
 
 ### Compute time
 
@@ -94,11 +94,11 @@ See [Neon Console](#neon-console).
 
 ### Control Plane
 
-A part of the Neon architecture that manages cloud storage and compute resources.
+The part of the Neon architecture that manages cloud storage and compute resources.
 
 ### Copy-on-write
 
-A technique used to efficiently copy data. Neon uses the copy-on-write technique to efficiently copy data when creating a branch.
+A technique used to copy data efficiently. Neon uses the copy-on-write technique to copy data when creating a branch.
 
 ### Data transfer
 
@@ -106,7 +106,7 @@ A billing metric that measures the amount of data transferred out of Neon (egres
 
 ### Database
 
-A named collection of database objects. A Neon project has a default database named `neondb` which resides in the default `public` schema. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
+A named collection of database objects. A Neon project has a default database named `neondb` which resides in the default `public` schema. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as the `postgres`, `template0`, or `template1` databases.
 
 ### Database branching
 
@@ -130,11 +130,11 @@ A Neon service tier for which there are no usage charges. For information about 
 
 ### LSN
 
-Log Sequence Number. A byte offset to a location in the [WAL stream](#wal-stream).
+Log Sequence Number. A byte offset to a location in the [WAL stream](#wal-stream). The Neon branching feature supports creating branches with data up to a specified LSN.
 
 ### Neon
 
-A fully managed serverless PostgreSQL. Neon separates storage and compute and offers modern developer features such as branching and bottomless storage. For more information, see [What is Neon?](/docs/introduction/about/).
+A fully managed serverless PostgreSQL. Neon separates storage and compute to offer modern developer features such as branching, autoscaling, and bottomless storage. For more information, see [What is Neon?](/docs/introduction/about/).
 
 ### Neon API
 
@@ -162,7 +162,7 @@ An 8KB unit of data, which is the smallest unit that PostgreSQL uses for storing
 
 ### Pageserver
 
-A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the user-defined retention period.
+A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined retention period. Neon retains 7-day history, by default.
 
 The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. Once a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
 
@@ -176,13 +176,13 @@ A custom volume-based paid plan offered by Neon that includes support for resale
 
 ### Point-in-time restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a data history in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. See [Create a branch](/docs/manage/branches#create-a-branch) for more information. Neon retains 7-day history by default.
+Restoration of data to a state that existed at an earlier time. Neon retains a data history in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. See [Create a branch](/docs/manage/branches#create-a-branch) for more information. Neon retains 7-day history, by default.
 
 ### PostgreSQL role
 
-Two PostgreSQL roles (database users) are created with each Neon project. The first is named for the registered Neon account and can be used to access the Neon project from a client. This roles’s credentials can be managed and used for password-based `psql` authentication. The second role is the `web-access` system role, which is used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth) feature. The `web-access` role is system managed. It cannot be modified, removed, or used in other authentication scenarios.
+A PostgreSQL role named for the registered Neon account is created with each Neon project. This user can access a Neon database from a client. Older projects may have a `web-access` system role, used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth). The `web-access` role is system managed. It cannot be modified, removed, or used in other authentication scenarios.
 
-Additional PostgreSQL roles can be created in the Neon Console.
+Additional PostgreSQL roles can be created in the Neon Console. You can think of a PostgreSQL role as a "database user".
 
 In PostgreSQL, a role with the `LOGIN` attribute is considered the same as a _database user_. For additional information, refer to [Database roles](https://www.postgresql.org/docs/14/user-manag.html) and [Role Attributes](https://www.postgresql.org/docs/14/role-attributes.html), in the PostgreSQL documentation.
 
@@ -192,7 +192,7 @@ A usage-based paid plan offered by Neon. See [Neon plans](/docs/introduction/bil
 
 ### Project
 
-A collection of branches, databases, roles, and other project resources and settings. A project contains a compute with a PostgreSQL server as well as storage for the project data.
+A collection of branches, databases, roles, and other project resources and settings. A project contains a compute with a PostgreSQL server and storage for the project data.
 
 ### Project sharing
 
@@ -200,15 +200,15 @@ A feature that allows you to share Neon projects with other Neon users. See [Sha
 
 ### Project storage
 
-A billing metric that measures the data and history stored in your Neon projects. See [Project storage](/docs/introduction/billing#project-storage).
+The amount of data stored in your Neon project. Also, a billing metric that measures the data and history, in GiB-hours, stored in your Neon project. See [Project storage](/docs/introduction/billing#project-storage).
 
 ### Proxy
 
-A Neon component which functions as a multitenant service that accepts and handles connections from clients that use the PostgreSQL protocol.
+A Neon component that functions as a multitenant service that accepts and handles connections from clients that use the PostgreSQL protocol.
 
 ### Passwordless auth
 
-A Neon feature that allows you to connect to a Neon project with a single `psql` command. See [Query with psql](/docs/get-started-with-neon/query-with-psql-editor/).
+A Neon feature that allows you to connect to a Neon project with a single `psql` command. See [Passwordless auth](/docs/connect/passwordless-connect).
 
 ### Region
 
@@ -240,19 +240,19 @@ Server Name Indication. A TLS protocol extension that allows a client or browser
 
 ### SQL Editor
 
-A feature of the Neon Console that enables running queries on a Neon project database. The SQL Editor also enables saving queries, viewing query history, and analyzing or explaining queries.
+A feature of the Neon Console that enables running queries on a Neon database. The SQL Editor also enables saving queries, viewing query history, and analyzing or explaining queries.
 
 ### Storage
 
-Where data is recorded and stored. Neon storage consists of Pageserver which stores hot data and a cloud object store such as Amazon S3 that stores cold data for cost optimization and durability.
+Where data is recorded and stored. Neon storage consists of Pageservers, which store hot data, and a cloud object store, such as Amazon S3, that stores cold data for cost optimization and durability.
 
 ### Technical Preview
 
-A preview of Neon during which users are able to try Neon's Free Tier. For more information, see [Technical Preview Free Tier](/docs/reference/technical-preview-free-tier/).
+A preview period during which users can try Neon.
 
 ### Token
 
-An encrypted access token that enables you to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Using API keys](https://neon.tech/docs/get-started-with-neon/using-api-keys/).
+An encrypted access token that enables you to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Manage API keys](https://neon.tech/docs/get-started-with-neon/using-api-keys/).
 
 ### User
 
@@ -268,7 +268,7 @@ Write-ahead logs in a specific LSN range.
 
 ### WAL stream
 
-The stream of data that is written to the Write-Ahead Log (WAL) during transactional processing.
+The stream of data written to the Write-Ahead Log (WAL) during transactional processing.
 
 ### Write-Ahead Logging (WAL)
 

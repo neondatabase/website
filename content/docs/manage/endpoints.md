@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-A single read-write compute endpoint is created for your project's [primary branch](/docs/reference/glossary#primary-branch) by default.
+A single read-write compute endpoint is created for your project's [primary branch](/docs/reference/glossary#primary-branch), by default.
 
 To connect to a database that resides in a branch, you must connect via a compute endpoint associated with the branch. The following diagram shows the project's primary branch (`main`) and a child branch, both of which have an associated compute endpoint.
 

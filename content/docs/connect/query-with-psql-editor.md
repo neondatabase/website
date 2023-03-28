@@ -12,7 +12,7 @@ The following instructions require a working installation of [psql](https://www.
 <Admonition type="note">
 A Neon compute instance runs PostgreSQL, which means that any PostgreSQL application or standard utility such as `psql` is compatible with Neon. You can also use PostgreSQL client libraries and drivers to connect. However, please be aware that some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connect from older clients](/docs/connect/connectivity-issues).
 
-Neon also provides a passwordless connect feature that uses `psql`. For more information, see [Passwordless connect](/docs/connect/passwordless-connect).
+Neon also provides a passwordless auth feature that uses `psql`. For more information, see [Passwordless auth](/docs/connect/passwordless-connect).
 </Admonition>
 
 The easiest way to connect to Neon using `psql` is with a connection string.

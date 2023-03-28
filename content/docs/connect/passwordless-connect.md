@@ -1,13 +1,13 @@
 ---
-title: Passwordless connect
+title: Passwordless auth
 enableTableOfContents: true
 ---
 
-Neon's `psql` passwordless connect feature helps you quickly authenticate a connection to Neon without providing a password.
+Neon's `psql` passwordless auth feature helps you quickly authenticate a connection to Neon without providing a password.
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
 
-To connect using Neon's `psql` passwordless connect feature:
+To connect using Neon's `psql` passwordless auth feature:
 
 1. In your terminal, run the following command:
 
@@ -35,7 +35,7 @@ To connect using Neon's `psql` passwordless connect feature:
    casey=>
    ```
 
-   The passwordless connect feature connects to the first database created in the branch. To check the database you are connected to, issue this query:
+   The passwordless auth feature connects to the first database created in the branch. To check the database you are connected to, issue this query:
 
    ```sql
    SELECT current_database();
@@ -44,7 +44,7 @@ To connect using Neon's `psql` passwordless connect feature:
     neondb
     ```
 
-    Switching databases from the `psql` prompt (using `\c <database_name>`, for example) after you have authenticated restarts the passwordless connect authentication process to authenticate a connection to the new database.
+    Switching databases from the `psql` prompt (using `\c <database_name>`, for example) after you have authenticated restarts the passwordless auth authentication process to authenticate a connection to the new database.
 
 ## Running queries
 
