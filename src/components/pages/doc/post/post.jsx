@@ -29,7 +29,6 @@ ReleaseNotes.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
       content: PropTypes.shape({}).isRequired,
     })
   ).isRequired,
@@ -97,11 +96,8 @@ Post.propTypes = {
   isReleaseNotes: PropTypes.bool,
   releaseNotes: PropTypes.arrayOf(
     PropTypes.shape({
-      content: PropTypes.shape({}),
-      data: PropTypes.shape({
-        label: PropTypes.string,
-      }),
       slug: PropTypes.string,
+      content: PropTypes.shape({}),
     })
   ),
   currentSlug: PropTypes.string.isRequired,
