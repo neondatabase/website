@@ -70,9 +70,9 @@ where:
 For example:
 
 ```shell
-$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgres://jsmith:Wij8mIDXoQ8H@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgres://jsmith:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
 
-heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgres://jsmith:Wij8mIDXoQ8H@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgres://jsmith:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
 
 pg_dump: last built-in OID is 16383
 pg_dump: reading extensions
