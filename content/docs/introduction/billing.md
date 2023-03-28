@@ -112,7 +112,7 @@ compute units * active time (hours) * price per hour
 
 #### Monthly compute time cost estimates
 
-For an idea of compute time cost per month based on compute size, refer to the following table:
+For an idea of compute time cost per month based on compute size and usage, refer to the following table:
 
 | Compute size (CU) | 730 hrs/mth (all hours) | 173 hrs/mth (working hours)  | 87 hrs/mth (half of working hours) |
 | :------- | :------- | :------- | :------- |
