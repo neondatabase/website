@@ -19,6 +19,13 @@ Before you can create a branch, you must have a Neon project. If you do not have
 When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To keep disk space usage to a minimum, it is recommended that you avoid allowing branches to age beyond the 7-day point-in-time restore window.
 </Admonition>
 
+## Branch types
+
+In Neon, there is always a primary branch. All other branches are considered non-primary branches.
+
+- **primary branch:**: Each Neon project is created with a primary branch called `main`. You can change or rename the primary branch, but you cannot delete it. The primary branch has an associated [compute endpoint](/docs/reference/glossary#compute-endpoint). You cannot remove a primary branch's compute endpoint. For [Free Tier](/docs/introduction/technical-preview-free-tier) users, the compute endpoint associated with the primary branch remains accessible if the Free Tier active compute time limit is exceeded. For [Pro plan](/docs/introduction/billing#neon-plans) users, there is a safety limit of 20 simultaneously active compute endpoints. The compute endpoint associated with primary branch is exempt from this limit and always accessible. By ensuring access to the compute endpoint associated with the primary branch, uninterrupted access to data on the primary branch is consistently maintained.
+- **non-primary branch:** Any branch that is not designated as the primary branch is considered a non-primary branch. You can rename or delete a non-primary branch. You can also remove a compute endpoint from a non-primary branch. For [Free Tier](/docs/introduction/technical-preview-free-tier) users, compute endpoints associated with non-primary branches are suspended if the Free Tier active compute time limit is exceeded. For [Pro plan](/docs/introduction/billing#neon-plans) users, safety limits prevent more than 20 active compute endpoints, by default. Beyond that limit, a compute endpoint associated with a non-primary branch cannot be activated.
+
 ## Create a branch
 
 To create a branch:

@@ -150,7 +150,7 @@ The user account that registers and authenticates with Neon using a GitHub or Go
 
 ### Non-primary branch
 
-A [branch](#branch) created from a [primary branch](#primary-branch) or another branch in your Neon project.
+Any branch that is not designated as the primary branch is considered a non-primary branch. You can rename or delete a non-primary branch. You can also remove a compute endpoint from a non-primary branch. For [Free Tier](/docs/introduction/technical-preview-free-tier) users, compute endpoints associated with non-primary branches are suspended if the Free Tier active compute time limit is exceeded. For [Pro plan](/docs/introduction/billing#neon-plans) users, safety limits prevent more than 20 active compute endpoints, by default. Beyond that limit, a compute endpoint associated with a non-primary branch cannot be activated.
 
 ### Page
 
@@ -158,7 +158,7 @@ An 8KB unit of data, which is the smallest unit that PostgreSQL uses for storing
 
 ### Paid plan
 
- A paid Neon service tier. See [Neon plans](#neon-plans).
+ A paid Neon service tier. See [Neon plans](/docs/introduction/billing#neon-plans).
 
 ### Pageserver
 
@@ -185,6 +185,10 @@ A PostgreSQL role named for the registered Neon account is created with each Neo
 Additional PostgreSQL roles can be created in the Neon Console. You can think of a PostgreSQL role as a "database user".
 
 In PostgreSQL, a role with the `LOGIN` attribute is considered the same as a _database user_. For additional information, refer to [Database roles](https://www.postgresql.org/docs/14/user-manag.html) and [Role Attributes](https://www.postgresql.org/docs/14/role-attributes.html), in the PostgreSQL documentation.
+
+### Primary branch
+
+Each Neon project is created with a primary branch called `main`. You can change or rename the primary branch, but you cannot delete it. The primary branch has an associated [compute endpoint](#compute-endpoint). You cannot remove a primary branch's compute endpoint. For [Free Tier](/docs/introduction/technical-preview-free-tier) users, the compute endpoint associated with the primary branch remains accessible if the Free Tier active compute time limit is exceeded. For [Pro plan](/docs/introduction/billing#neon-plans) users, there is a safety limit of 20 simultaneously active compute endpoints. The compute endpoint associated with primary branch is exempt from this limit and always accessible. By ensuring access to the compute endpoint associated with the primary branch, uninterrupted access to data on the primary branch is consistently maintained.
 
 ### Pro plan
 
@@ -217,10 +221,6 @@ The geographic location where Neon project resource are located. Neon supports c
 ### Resale
 
 Selling the Neon service as part of another service offering. Neon's Platform Partnership plan offers resale of the Neon service as an option. See [Neon plans](/docs/introduction/billing#neon-plans) for more information.
-
-### Primary branch
-
-Each Neon project is created with a primary branch called `main`. This is your project's root branch. You can rename a primary branch, but you cannot delete it. Each branch, including the primary branch, has a dedicated [compute endpoint](#compute-endpoint). Connecting to a branch requires connecting to the branch's compute endpoint. For more information, see [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
 
 ### Safekeeper
 
