@@ -21,7 +21,7 @@ To migrate your data from Heroku to Neon:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Enter a name for your project and click **Create Project**.
+3. Specify your project settings and click **Create Project**.
 4. After creating a project, you are directed to the Neon **Dashboard**, where a connection string with your password is provided under **Connection Details**. Copy the connection string. It is required to import your data from Heroku.
 
     The example connection string used the instructions that follow is:

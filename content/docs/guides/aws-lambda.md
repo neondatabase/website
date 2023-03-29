@@ -24,7 +24,7 @@ If you do not have one already, create a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Specify a name, a PostgreSQL version, and a region, and click **Create Project**.
+3. Specify your project settings and click **Create Project**.
 
 ## Create a table in Neon
 

@@ -18,7 +18,7 @@ This guide steps you through how to connect from Prisma to Neon, how to use Pris
 ## Create a Neon project and copy the connection string
 
 1. In the Neon Console, click **Create a project** to open the **Project Creation** dialog.
-1. Specify a name, a PostgreSQL version, and a region, and click **Create Project**.
+1. Specify your project settings and click **Create Project**.
 
 The project is created and you are presented with a dialog that provides connection details. Copy the connection string, which looks similar to the following:
 
