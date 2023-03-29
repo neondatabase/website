@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/manage/users
 ---
 
-In Neon, roles are PostgreSQL roles. You can think of a role s a database user. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in a project's primary branch.
+In Neon, roles are PostgreSQL roles. You can think of a role as a database user. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in a project's primary branch.
 
 Additional roles can be created in a project's primary branch or child branches. There is no limit to the number of roles you can create.
 
