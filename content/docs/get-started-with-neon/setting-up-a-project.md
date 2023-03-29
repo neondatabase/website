@@ -10,7 +10,7 @@ To create your first project:
 
 ![Create a project](/docs/get-started-with-neon/create_project.png)
 
-3. On the **Project Creation** dialog, specify a name, a PostgreSQL version, and a region. If you are a [Neon paid plan](https://neon.tech/docs/introduction/billing#neon-plans) user, you can also specify compute size settings. Neon supports fixed size computes and Autoscaling (beta). For more information about these options, see [Compute size configuration](/docs/manage/projects#compute-size-configuration).
+3. On the **Project Creation** dialog, specify a name, a PostgreSQL version, and a region. If you are a [Neon paid plan](https://neon.tech/docs/introduction/billing#neon-plans) user, you can also specify compute size settings (not shown below). Neon supports fixed size computes and Autoscaling (beta). For more information about these options, see [Compute size configuration](/docs/manage/projects#compute-size-configuration).
 
 ![Select project options](/docs/get-started-with-neon/select_project_options.png)
 
