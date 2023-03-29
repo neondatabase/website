@@ -68,8 +68,8 @@ _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute e
 
 Neon supports two compute size configuration options:
 
-- **Fixed Size:** This option allows you to select a fixed compute size ranging from .25 CUs to 3 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. Currently, _Autoscaling_ supports a range of 1 to 3 CUs. The 1/4 CU and 1/2 CU settings, called _shared compute_, will be supported with _Autoscaling_ in a future release.
+- **Fixed Size:** This option allows you to select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
+- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. Currently, _Autoscaling_ supports a range of 1 to 7 CUs. The 1/4 CU and 1/2 CU settings, called _shared compute_, will be supported with _Autoscaling_ in a future release. For information about how Neon implements the _Autoscaling_ feature, see [Scaling serverless Postgres: How we implement autoscaling](https://neon.tech/blog/postgres-autoscaling).
 
 <Admonition type="note">
 Switching between **Fixed Size** and **Autoscaling** is not yet supported.
