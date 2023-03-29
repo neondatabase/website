@@ -47,18 +47,31 @@ For more information connection pooling in Neon, see [Connection pooling](/docs/
 
 ## Edit a compute endpoint
 
-You can edit a compute endpoint to change the branch that it is associated with. The branch you want to associated the endpoint with cannot have an existing compute endpoint.
-
-<Admonition type="note">
-Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](https://neon.tech/docs/connect/connection-pooling#enable-connection-pooling).
-</Admonition>
+Neon paid plan users can edit a compute endpoint to change the [compute size configuration](#compute-size-configuration).
 
 To edit a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. Click the compute endpoint kebab menu, and select **Edit**.
-1. Select a new branch and click **Save**.
+1. Specify your changes and click **Save**.
+
+<Admonition type="note">
+Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](https://neon.tech/docs/connect/connection-pooling#enable-connection-pooling).
+</Admonition>
+
+### Compute size configuration
+
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 3 CUs. Larger compute sizes will be supported in a future release.
+
+Neon supports two compute size configuration options:
+
+- **Fixed Size:** This option allows you to select a fixed compute size ranging from .25 CUs to 3 CUs. A fixed-size compute does not scale to meet workload demand.
+- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. Currently, _Autoscaling_ supports a range of 1 to 3 CUs. Partial minimum compute size settings (1/4 CUs and 1/2 CUs), called _shared compute_, will be supported in a future release.
+
+<Admonition type="note">
+Switching between **Fixed Size** and **Autoscaling** is not yet supported.
+</Admonition>
 
 ## Delete a compute endpoint
 
