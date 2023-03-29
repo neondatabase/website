@@ -28,7 +28,7 @@ To create a Neon project:
 
 Upon creating a project, you are presented with a dialog that provides your connection details for the default `neondb` database, including your password.
 
-### Compute size configuration
+## Compute size configuration
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 3 CUs. Larger compute sizes will be supported in a future release.
 
