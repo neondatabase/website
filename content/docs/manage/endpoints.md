@@ -69,7 +69,7 @@ _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute e
 Neon supports two compute size configuration options:
 
 - **Fixed Size:** This option allows you to select a fixed compute size ranging from .25 CUs to 3 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. Currently, _Autoscaling_ supports a range of 1 to 3 CUs. Partial minimum compute size settings (1/4 CUs and 1/2 CUs), called _shared compute_, will be supported in a future release.
+- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. Currently, _Autoscaling_ supports a range of 1 to 3 CUs. Partial compute size settings (1/4 CUs and 1/2 CUs), called _shared compute_, will be supported in a future release.
 
 <Admonition type="note">
 Switching between **Fixed Size** and **Autoscaling** is not yet supported.
