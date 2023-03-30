@@ -1,3 +1,4 @@
+import Calculator from 'components/pages/pricing/calculator';
 import Estimates from 'components/pages/pricing/estimates';
 import Faq from 'components/pages/pricing/faq';
 import Hero from 'components/pages/pricing/hero';
@@ -12,6 +13,7 @@ const PricingPage = () => (
   >
     <Hero />
     <Estimates />
+    <Calculator />
     <Faq />
   </Layout>
 );
