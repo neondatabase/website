@@ -22,7 +22,7 @@ When working with branches, it is important to remove old and unused branches. B
 Each Neon project is created with a primary branch called `main`. You can designate any branch as the primary branch for your project or rename the primary branch, but you cannot delete a primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
 
 - For [Free Tier](/docs/introduction/technical-preview-free-tier) users, the compute endpoint associated with the primary branch remains accessible if the Free Tier _compute active time_ limit of 100 hours per month is exceeded.
-- For [paid plan](/docs/introduction/billing#neon-plans) users, the compute endpoint associated with primary branch is exempt from the limit on simultaneously active computes, which ensures that it is always available. Neon has a safety limit of 20 simultaneously active computes to protect your account from misuse.
+- For [paid plan](/docs/introduction/billing#neon-plans) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, which ensures that it is always available. Neon has a safety limit of 20 simultaneously active computes to protect your account from misuse.
 
 ## Non-primary branch
 
