@@ -13,18 +13,23 @@ For more information about branches and how you can use them in your development
 
 You can create and manage branches using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). This topic covers both methods.
 
-Before you can create a branch, you must have a Neon project. If you do not have a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
-
 <Admonition type="important">
 When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To keep disk space usage to a minimum, it is recommended that you avoid allowing branches to age beyond the 7-day point-in-time restore window.
 </Admonition>
 
-## Branch types
+## The primary branch
 
-In Neon, there is always a primary branch. All other branches are considered non-primary branches.
+Each Neon project is created with a primary branch called `main`. You can change or rename a primary branch, but you cannot delete it. Nor can you delete a primary branch's [compute endpoint](/docs/reference/glossary#compute-endpoint). The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
 
-- **primary branch:**: Each Neon project is created with a primary branch called `main`. You can change or rename the primary branch, but you cannot delete it. The primary branch has an associated [compute endpoint](/docs/reference/glossary#compute-endpoint). You cannot remove a primary branch's compute endpoint. For [Free Tier](/docs/introduction/technical-preview-free-tier) users, the compute endpoint associated with the primary branch remains accessible if the Free Tier active compute time limit is exceeded. For [Pro plan](/docs/introduction/billing#neon-plans) users, there is a safety limit of 20 simultaneously active compute endpoints. The compute endpoint associated with primary branch is exempt from this limit and always accessible. By ensuring access to the compute endpoint associated with the primary branch, uninterrupted access to data on the primary branch is consistently maintained.
-- **non-primary branch:** Any branch that is not designated as the primary branch is considered a non-primary branch. You can rename or delete a non-primary branch. You can also remove a compute endpoint from a non-primary branch. For [Free Tier](/docs/introduction/technical-preview-free-tier) users, compute endpoints associated with non-primary branches are suspended if the Free Tier active compute time limit is exceeded. For [Pro plan](/docs/introduction/billing#neon-plans) users, safety limits prevent more than 20 active compute endpoints, by default. Beyond that limit, a compute endpoint associated with a non-primary branch cannot be activated.
+- For [Free Tier](/docs/introduction/technical-preview-free-tier) users, the compute endpoint associated with the primary branch remains accessible if the Free Tier active compute time limit of 100 hours is exceeded.
+- For [paid plan](/docs/introduction/billing#neon-plans) users, the compute endpoint associated with primary branch is exempt from the limit on simultaneously active computes, which ensures that it is always available. Neon has a safety limit of 20 simultaneously active computes to protect your account from misuse.
+
+## Non-primary branches
+
+Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches. You can also remove a compute endpoint from a non-primary branch.
+
+- For [Free Tier](/docs/introduction/technical-preview-free-tier) users, compute endpoints associated with non-primary branches are suspended if the Free Tier active compute time limit of 100 hours is exceeded.
+- For [paid plan](/docs/introduction/billing#neon-plans) users, safety limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains in a suspended state.
 
 ## Create a branch
 
@@ -54,9 +59,27 @@ To view the branches in a Neon project:
 3. Select a branch from the table to view details about the branch.
 ![Branch details](/docs/manage/branch_details.png)
 
-<Admonition type="tip">
-The **Branches** widget on the project **Dashboard** also shows the branches in a Neon project.
-</Admonition>
+## Rename a branch
+
+Neon permits renaming a branch, including your project's primary branch. To rename a branch:
+
+1. In the Neon Console, select a project.
+2. Select **Branches** to view the branches for the project.
+3. Select a branch from the table.
+4. Click **Rename**.
+5. Specify a new name for the branch and click **Save**.
+
+## Set a branch as primary
+
+Each Neon project is created with a primary branch called `main`, but you can designate any branch as your project's primary branch. The benefit of the primary branch is that the compute endpoint associated with the primary branch remains accessible if you exceed project limits, ensuring uninterrupted access to data on the primary branch. For more information, see [Branch types](#branch-types).
+
+To set a branch as the primary branch:
+
+1. In the Neon Console, select a project.
+2. Select **Branches** to view the branches for the project.
+3. Select a branch from the table.
+4. Click **Set as primary**.
+5. In the **Set as primary** confirmation dialog, click **Set as Primary** to confirm your selection.
 
 ## Connect to a branch
 
