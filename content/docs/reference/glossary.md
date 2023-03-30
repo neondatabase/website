@@ -150,7 +150,7 @@ The user account that registers and authenticates with Neon using a GitHub or Go
 
 ### Non-primary branch
 
-Any branch that is not designated as the [primary branch](#primary-branch) is considered a non-primary branch. For more information, see [Non-primary branch](https://neon.tech/docs/manage/branches#non-primary-branch).
+Any branch not designated as the [primary branch](#primary-branch) is considered a non-primary branch. For more information, see [Non-primary branch](https://neon.tech/docs/manage/branches#non-primary-branch).
 
 ### Page
 

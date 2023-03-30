@@ -24,7 +24,7 @@ Each Neon project is created with a primary branch called `main`. You can design
 - For [Free Tier](/docs/introduction/technical-preview-free-tier) users, the compute endpoint associated with the primary branch remains accessible if the Free Tier _compute active time_ limit of 100 hours per month is exceeded.
 - For [paid plan](/docs/introduction/billing#neon-plans) users, the compute endpoint associated with primary branch is exempt from the limit on simultaneously active computes, which ensures that it is always available. Neon has a safety limit of 20 simultaneously active computes to protect your account from misuse.
 
-## Non-primary branches
+## Non-primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches. You can also remove a compute endpoint from a non-primary branch.
 
