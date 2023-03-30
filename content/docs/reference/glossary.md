@@ -32,7 +32,7 @@ A feature that suspends a compute endpoint after a specified period of inactivit
 
 ### Autoscaling
 
-A feature that allows you to specify a minimum and maximum number of Compute Units (CU) for a compute endpoint. Neon scales compute resources up and down within the specified boundaries to meet workload demand. This feature is not yet available.
+A feature that allows you to specify a minimum and maximum number of Compute Units (CU) for a compute endpoint. Neon scales compute resources up and down within the specified boundaries to meet workload demand.
 
 ### Availability Checker
 

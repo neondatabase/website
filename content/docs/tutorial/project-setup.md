@@ -20,8 +20,7 @@ After you sign in:
 
 1. Click **Create a project**.
 2. Enter a name for your project or let Neon generate one for you.
-3. Select a PostgreSQL version and a region.
-4. Click **Create project**.
+3. Specify your project settings and click **Create Project**.
 
 ![Neon create project](/docs/tutorial/neon_create_project.png)
 

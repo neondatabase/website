@@ -17,15 +17,27 @@ A Neon project is created with the following resources, by default:
 
 ## Create a project
 
-Neon Free Tier users can create a single project. Paid plans can have multiple projects.
+Neon Free Tier users can create a single project. Support for multiple projects is available to Neon [paid plan](/docs/introduction/billing#neon-plans) users.
 
 To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
-3. Specify a name, a PostgreSQL version, and a region, and click **Create Project**.
+3. Specify a name, a PostgreSQL version, and a region. If you are a Neon [paid plan](/docs/introduction/billing#neon-plans) user, you can also specify compute size settings. Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size configuration](#compute-size-configuration).
+4. Click **Create Project**.
 
 Upon creating a project, you are presented with a dialog that provides your connection details for the default `neondb` database, including your password.
+
+## Compute size configuration
+
+Neon [paid plan](/docs/introduction/billing#neon-plans) users can configure compute size settings when [creating a project](#create-a-project).
+
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
+
+Neon supports two compute size configuration options:
+
+- **Fixed Size:** This option allows you to select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
+- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. Currently, _Autoscaling_ supports a range of 1 to 7 CUs. The 1/4 CU and 1/2 CU settings, called _shared compute_, will be supported with _Autoscaling_ in a future release. For information about how Neon implements the _Autoscaling_ feature, see [Scaling serverless Postgres: How we implement autoscaling](https://neon.tech/blog/postgres-autoscaling).
 
 ## View projects
 
