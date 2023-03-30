@@ -9,6 +9,7 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import CheckIcon from 'icons/black-check.inline.svg';
 import InfoIcon from 'icons/info.inline.svg';
+import ThumbIcon from 'icons/thumb.inline.svg';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const PROJECT_STORAGE_PRICE = 0.000164;
@@ -129,15 +130,17 @@ const Calculator = () => {
                     aria-label="Compute units"
                     onValueChange={(value) => setComputeUnits(value[0])}
                   >
-                    <Slider.Track className="relative h-1 w-full grow rounded-full bg-[#242628]">
-                      <Slider.Range className="absolute h-full rounded-full bg-[#00E599] dark:bg-white" />
+                    <Slider.Track className="relative h-[4px] w-full grow rounded-[10px] bg-[#242628]">
+                      <Slider.Range className="absolute h-full h-[6px] rounded-full bg-primary-1" />
                     </Slider.Track>
                     <Slider.Thumb
                       className={clsx(
-                        'block h-5 w-5 cursor-pointer rounded-full bg-[#C9CBCF]',
+                        'flex cursor-pointer items-center justify-center rounded-full',
                         'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                       )}
-                    />
+                    >
+                      <ThumbIcon aria-hidden />
+                    </Slider.Thumb>
                   </Slider.Root>
                   <span className="text-[12px] tracking-tight text-[#C9CBCF]">
                     &#62;{COMPUTE_UNITS_VALUES.max}
@@ -170,15 +173,17 @@ const Calculator = () => {
                     aria-label="Active time"
                     onValueChange={(value) => setActiveTime(value[0])}
                   >
-                    <Slider.Track className="relative h-1 w-full grow rounded-full bg-[#242628]">
-                      <Slider.Range className="absolute h-full rounded-full bg-[#00E599] dark:bg-white" />
+                    <Slider.Track className="relative h-[4px] w-full grow rounded-[10px] bg-[#242628]">
+                      <Slider.Range className="absolute h-full h-[6px] rounded-full bg-primary-1" />
                     </Slider.Track>
                     <Slider.Thumb
                       className={clsx(
-                        'block h-5 w-5 cursor-pointer rounded-full bg-[#C9CBCF]',
+                        'flex cursor-pointer items-center justify-center rounded-full',
                         'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                       )}
-                    />
+                    >
+                      <ThumbIcon aria-hidden />
+                    </Slider.Thumb>
                   </Slider.Root>
                   <span className="text-[12px] tracking-tight text-[#C9CBCF]">
                     {COMPUTE_TIME_VALUES.max}
@@ -223,15 +228,17 @@ const Calculator = () => {
                     aria-label="Compute units"
                     onValueChange={(value) => setStorageValue(value[0])}
                   >
-                    <Slider.Track className="relative h-1 w-full grow rounded-full bg-[#242628]">
-                      <Slider.Range className="absolute h-full rounded-full bg-[#00E599] dark:bg-white" />
+                    <Slider.Track className="relative h-[4px] w-full grow rounded-[10px] bg-[#242628]">
+                      <Slider.Range className="absolute h-full h-[6px] rounded-full bg-primary-1" />
                     </Slider.Track>
                     <Slider.Thumb
                       className={clsx(
-                        'block h-5 w-5 cursor-pointer rounded-full bg-[#C9CBCF]',
+                        'flex cursor-pointer items-center justify-center rounded-full',
                         'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                       )}
-                    />
+                    >
+                      <ThumbIcon aria-hidden />
+                    </Slider.Thumb>
                   </Slider.Root>
                   <span className="text-[12px] tracking-tight text-[#C9CBCF]">&#62;1 TB</span>
                 </div>
