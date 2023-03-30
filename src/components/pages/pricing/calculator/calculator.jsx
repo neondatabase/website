@@ -2,11 +2,13 @@
 
 import * as Slider from '@radix-ui/react-slider';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import CheckIcon from 'icons/black-check.inline.svg';
+import InfoIcon from 'icons/info.inline.svg';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const PROJECT_STORAGE_PRICE = 0.000164;
@@ -17,7 +19,7 @@ const PERCENTAGE_OF_MONTHLY_COST = 0.1;
 
 const COMPUTE_UNITS_VALUES = {
   min: 0.25,
-  max: 7,
+  max: 32,
   step: 1,
   default: 1,
 };
@@ -26,7 +28,7 @@ const COMPUTE_TIME_VALUES = {
   min: 0.5,
   max: 24,
   step: 1,
-  default: 5,
+  default: 10,
 };
 
 const STORAGE_VALUES = {
@@ -83,29 +85,9 @@ const Calculator = () => {
     [dataTransferCost, isAdvanced, totalCost, writtenDataCost]
   );
 
-  const handleComputeUnitsChange = (value) => {
-    setComputeUnits(value[0]);
-  };
-
-  const handleActiveTimeChange = (value) => {
-    setActiveTime(value[0]);
-  };
-
-  const handleStorageValueChange = (value) => {
-    setStorageValue(value[0]);
-  };
-
-  const handleDataTransferChange = (event) => {
-    setDataTransferValue(event.target.value);
-  };
-
-  const handleWrittenDataChange = (event) => {
-    setWrittenDataValue(event.target.value);
-  };
-
   return (
     <section className="faq safe-paddings my-40 2xl:my-32 xl:my-28 lg:my-24 md:my-20">
-      <Container className="" size="mdDoc">
+      <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <span className="text-center text-lg uppercase leading-snug text-primary-1">
             Pricing Calculator
@@ -123,7 +105,13 @@ const Calculator = () => {
               </h3>
               <div className="mt-8 flex flex-col gap-2">
                 <div className="flex justify-between">
-                  <h4 className="font-medium leading-none tracking-tight">Compute size</h4>
+                  <h4 className="font-medium leading-none tracking-tight">
+                    <span>Compute size</span>
+                    <Tooltip
+                      id="compute"
+                      content="A Compute Unit (CU) is a measure of processing power and memory. In Neon, a CU has 1 vCPU and 4 GB of RAM. The number CUs defines the processing power of your Neon compute."
+                    />
+                  </h4>
                   <p className="text-[15px] font-medium leading-none tracking-tight">
                     {computeUnits}vCPU - 4GB RAM
                   </p>
@@ -139,14 +127,14 @@ const Calculator = () => {
                     max={COMPUTE_UNITS_VALUES.max}
                     step={COMPUTE_UNITS_VALUES.step}
                     aria-label="Compute units"
-                    onValueChange={handleComputeUnitsChange}
+                    onValueChange={(value) => setComputeUnits(value[0])}
                   >
                     <Slider.Track className="relative h-1 w-full grow rounded-full bg-[#242628]">
                       <Slider.Range className="absolute h-full rounded-full bg-[#00E599] dark:bg-white" />
                     </Slider.Track>
                     <Slider.Thumb
                       className={clsx(
-                        'block h-5 w-5 rounded-full bg-[#C9CBCF]',
+                        'block h-5 w-5 cursor-pointer rounded-full bg-[#C9CBCF]',
                         'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                       )}
                     />
@@ -158,7 +146,13 @@ const Calculator = () => {
               </div>
               <div className="mt-8 flex flex-col gap-2">
                 <div className="flex justify-between">
-                  <h4 className="font-medium leading-none tracking-tight">Active time</h4>
+                  <h4 className="font-medium leading-none tracking-tight">
+                    Active time
+                    <Tooltip
+                      id="activeTime"
+                      content="The number of hours per day that your compute resources are active, on average."
+                    />
+                  </h4>
                   <p className="text-[15px] font-medium leading-none tracking-tight">
                     {activeTime} hours <span className="text-[#94979E]">/day</span>
                   </p>
@@ -174,14 +168,14 @@ const Calculator = () => {
                     max={COMPUTE_TIME_VALUES.max}
                     step={COMPUTE_TIME_VALUES.step}
                     aria-label="Active time"
-                    onValueChange={handleActiveTimeChange}
+                    onValueChange={(value) => setActiveTime(value[0])}
                   >
                     <Slider.Track className="relative h-1 w-full grow rounded-full bg-[#242628]">
                       <Slider.Range className="absolute h-full rounded-full bg-[#00E599] dark:bg-white" />
                     </Slider.Track>
                     <Slider.Thumb
                       className={clsx(
-                        'block h-5 w-5 rounded-full bg-[#C9CBCF]',
+                        'block h-5 w-5 cursor-pointer rounded-full bg-[#C9CBCF]',
                         'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                       )}
                     />
@@ -227,14 +221,14 @@ const Calculator = () => {
                     max={STORAGE_VALUES.max}
                     step={STORAGE_VALUES.step}
                     aria-label="Compute units"
-                    onValueChange={handleStorageValueChange}
+                    onValueChange={(value) => setStorageValue(value[0])}
                   >
                     <Slider.Track className="relative h-1 w-full grow rounded-full bg-[#242628]">
                       <Slider.Range className="absolute h-full rounded-full bg-[#00E599] dark:bg-white" />
                     </Slider.Track>
                     <Slider.Thumb
                       className={clsx(
-                        'block h-5 w-5 rounded-full bg-[#C9CBCF]',
+                        'block h-5 w-5 cursor-pointer rounded-full bg-[#C9CBCF]',
                         'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                       )}
                     />
@@ -269,7 +263,7 @@ const Calculator = () => {
                       max={100}
                       placeholder="10"
                       value={dataTransferValue}
-                      onChange={handleDataTransferChange}
+                      onChange={(event) => setDataTransferValue(event?.target?.value)}
                     />
                     <span>GiB</span>
                   </li>
@@ -284,7 +278,7 @@ const Calculator = () => {
                       max={100}
                       placeholder="10"
                       value={writtenDataValue}
-                      onChange={handleWrittenDataChange}
+                      onChange={(event) => setWrittenDataValue(event?.target?.value)}
                     />
                     <span>GiB</span>
                   </li>
@@ -331,12 +325,12 @@ const Calculator = () => {
               </li>
               <li className="relative flex pl-[3.25rem] text-lg leading-none tracking-tight text-black after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05]">
                 <CheckIcon className="mr-2" />
-                {isAdvanced && <span className="mr-1 font-semibold">3 GiB</span>}
+                {isAdvanced && <span className="mr-1 font-semibold">{writtenDataValue} GiB</span>}
                 <span>written data</span>
               </li>
               <li className="relative flex pl-[3.25rem] text-lg leading-none tracking-tight text-black">
                 <CheckIcon className="mr-2" />
-                {isAdvanced && <span className="mr-1 font-semibold">3 GiB</span>}
+                {isAdvanced && <span className="mr-1 font-semibold">{dataTransferValue} GiB</span>}
                 <span>data transfer</span>
               </li>
             </ul>
@@ -353,6 +347,27 @@ const Calculator = () => {
       </Container>
     </section>
   );
+};
+
+const Tooltip = ({ content, id }) => (
+  <span className="relative ml-1 inline-flex align-middle">
+    <span
+      className="peer cursor-pointer lg:hidden"
+      data-tooltip-id={id}
+      data-tooltip-content={content}
+    >
+      <InfoIcon />
+    </span>
+    <span className="pointer-events-none absolute left-[calc(100%+10px)] top-1/2 z-50 w-[15rem] -translate-y-1/2 rounded-[4px] rounded-sm bg-[#242628] px-4 py-1.5 text-sm font-normal leading-snug leading-none tracking-tight text-[#AFB1B6] opacity-0 shadow-tooltip transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:translate-y-0 lg:bg-transparent lg:p-0 lg:opacity-100">
+      {content}
+    </span>
+    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-t-4 border-b-4 border-r-4 border-transparent border-r-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
+  </span>
+);
+
+Tooltip.propTypes = {
+  id: PropTypes.string,
+  content: PropTypes.string,
 };
 
 export default Calculator;
