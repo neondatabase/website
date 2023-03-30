@@ -31,4 +31,4 @@ Neon stores data in its own internal format. The data size limit in the Free Tie
 
 Neon storage consumes extra space in order to support point-in-time restore, which enables you to restore your data to a past state. Data history is stored in log-based format.
 
-The Neon Free Tier limits the amount of dta history that can be stored.
+The Neon Free Tier limits the amount of data history that can be stored.
