@@ -20,13 +20,13 @@ Autoscaling is the process of automatically increasing or decreasing the CPU and
 
 To understand how autoscaling works, we’ll start from a high-level overview of Neon’s architecture and zoom into the particular components that make up the autoscaling system.
 
-[High-level architecture diagram](/docs/introduction/autoscale-high-level-architecture.webp)
+![High-level architecture diagram](/docs/introduction/autoscale-high-level-architecture.webp)
 
 At a very high level, Neon runs many compute endpoints, which are each individual Postgres instances. The storage is decoupled from the endpoints, meaning that the Postgres servers running queries are physically separate from where the data is stored. This separation provides many benefits – and it is also important for autoscaling. (See also: [Heikki’s blog post about Neon’s architecture](https://neon.tech/blog/architecture-decisions-in-neon), which goes into more depth on this subject.)
 
 Zooming in a little, each Postgres instance is running in its own VM1 in some Kubernetes cluster, with each node in the Kubernetes cluster hosting many VMs. At its core, we implement autoscaling by allocating (and removing) CPUs and memory from each VM — there’s only a couple Postgres-specific considerations.
 
-[Autoscaling diagram](/docs/introduction/autoscale-architecture.webp)
+![Autoscaling diagram](/docs/introduction/autoscale-architecture.webp)
 
 At a very high level, Neon runs many compute endpoints, which are each individual Postgres instances. The storage is decoupled from the endpoints, meaning that the Postgres servers running queries are physically separate from where the data is stored. This separation provides many benefits – and it is also important for autoscaling. (See also: [Heikki’s blog post about Neon’s architecture](https://neon.tech/blog/architecture-decisions-in-neon), which goes into more depth on this subject.)
 
