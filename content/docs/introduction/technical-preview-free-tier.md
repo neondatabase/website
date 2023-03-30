@@ -5,6 +5,8 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
 ---
 
+The Neon cloud service is currently in Technical Preview. For information about how the Technical Preview fits within Neon's release plans, please refer to the [Neon roadmap](/docs/reference/roadmap).
+
 The Neon Free Tier has the following limits:
 
 - 1 Neon project.
