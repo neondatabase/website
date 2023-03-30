@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
 ---
 
-Data resides in a branch. Each Neon project is created with a primary branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
+Data resides in a branch. Each Neon project is created with a [primary branch](#primary-branch) called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
 
 A child branch is a copy-on-write clone the data in the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
@@ -17,18 +17,18 @@ You can create and manage branches using the Neon Console or [Neon API](https://
 When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated, which can lead to excessive disk space consumption. The Neon Free Tier limits the point-in-time restore window for a project to 7 days. To keep disk space usage to a minimum, it is recommended that you avoid allowing branches to age beyond the 7-day point-in-time restore window.
 </Admonition>
 
-## The primary branch
+## Primary branch
 
-Each Neon project is created with a primary branch called `main`. You can change or rename a primary branch, but you cannot delete it. Nor can you delete a primary branch's [compute endpoint](/docs/reference/glossary#compute-endpoint). The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
+Each Neon project is created with a primary branch called `main`. You can designate any branch as the primary branch for your project or rename the primary branch, but you cannot delete a primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
 
-- For [Free Tier](/docs/introduction/technical-preview-free-tier) users, the compute endpoint associated with the primary branch remains accessible if the Free Tier active compute time limit of 100 hours is exceeded.
+- For [Free Tier](/docs/introduction/technical-preview-free-tier) users, the compute endpoint associated with the primary branch remains accessible if the Free Tier _compute active time_ limit of 100 hours per month is exceeded.
 - For [paid plan](/docs/introduction/billing#neon-plans) users, the compute endpoint associated with primary branch is exempt from the limit on simultaneously active computes, which ensures that it is always available. Neon has a safety limit of 20 simultaneously active computes to protect your account from misuse.
 
 ## Non-primary branches
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches. You can also remove a compute endpoint from a non-primary branch.
 
-- For [Free Tier](/docs/introduction/technical-preview-free-tier) users, compute endpoints associated with non-primary branches are suspended if the Free Tier active compute time limit of 100 hours is exceeded.
+- For [Free Tier](/docs/introduction/technical-preview-free-tier) users, compute endpoints associated with non-primary branches are suspended if the Free Tier  _compute active time_ limit of 100 hours per month is exceeded.
 - For [paid plan](/docs/introduction/billing#neon-plans) users, safety limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains in a suspended state.
 
 ## Create a branch
@@ -71,7 +71,7 @@ Neon permits renaming a branch, including your project's primary branch. To rena
 
 ## Set a branch as primary
 
-Each Neon project is created with a primary branch called `main`, but you can designate any branch as your project's primary branch. The benefit of the primary branch is that the compute endpoint associated with the primary branch remains accessible if you exceed project limits, ensuring uninterrupted access to data on the primary branch. For more information, see [Branch types](#branch-types).
+Each Neon project is created with a primary branch called `main`, but you can designate any branch as your project's primary branch. The benefit of the primary branch is that the compute endpoint associated with the primary branch remains accessible if you exceed project limits, ensuring uninterrupted access to data on the primary branch. For more information, see [Primary branch](#primary-branch).
 
 To set a branch as the primary branch:
 
