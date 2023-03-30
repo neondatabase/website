@@ -9,9 +9,11 @@ import Container from 'components/shared/container';
 import CheckIcon from 'icons/black-check.inline.svg';
 
 const COMPUTE_TIME_PRICE = 0.102;
-const PROJECT_STORAGE_PER_HOUR_PRICE = 0.000164;
-const PERCENT_OF_MONTHLY_COST = 0.1;
-const HOURS_STORED = 168;
+const PROJECT_STORAGE_PRICE = 0.000164;
+const PROJECT_STORAGE_HOURS = 168;
+const DATA_TRANSFER_PRICE = 0.09;
+const WRITTEN_DATA_PRICE = 0.096;
+const PERCENTAGE_OF_MONTHLY_COST = 0.1;
 
 const COMPUTE_UNITS_VALUES = {
   min: 0.25,
@@ -35,9 +37,12 @@ const STORAGE_VALUES = {
 };
 
 const Calculator = () => {
+  const [isAdvanced, setIsAdvanced] = useState(false);
   const [computeUnits, setComputeUnits] = useState(COMPUTE_UNITS_VALUES.default);
   const [activeTime, setActiveTime] = useState(COMPUTE_TIME_VALUES.default);
   const [storageValue, setStorageValue] = useState(STORAGE_VALUES.default);
+  const [dataTransferValue, setDataTransferValue] = useState(10);
+  const [writtenDataValue, setWrittenDataValue] = useState(10);
   const [writtenAndTransferDataCost, setWrittenAndTransferDataCost] = useState(0);
 
   const computeTimeCost = useMemo(
@@ -46,18 +51,37 @@ const Calculator = () => {
   );
 
   const storageCost = useMemo(
-    () => storageValue * HOURS_STORED * PROJECT_STORAGE_PER_HOUR_PRICE,
+    () => storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE,
     [storageValue]
   );
+
+  const dataTransferCost = useMemo(
+    () => dataTransferValue * DATA_TRANSFER_PRICE,
+    [dataTransferValue]
+  );
+
+  const writtenDataCost = useMemo(() => writtenDataValue * WRITTEN_DATA_PRICE, [writtenDataValue]);
 
   const totalCost = useMemo(
     () => computeTimeCost + storageCost + writtenAndTransferDataCost,
     [computeTimeCost, storageCost, writtenAndTransferDataCost]
   );
 
-  useEffect(() => {
-    setWrittenAndTransferDataCost(totalCost * PERCENT_OF_MONTHLY_COST);
-  }, [totalCost]);
+  const estimatedPrice = useMemo(
+    () =>
+      computeUnits > 8 || storageValue >= 200 || totalCost >= 420
+        ? 'Custom'
+        : `$${totalCost.toFixed(2)}`,
+    [computeUnits, storageValue, totalCost]
+  );
+
+  useEffect(
+    () =>
+      isAdvanced
+        ? setWrittenAndTransferDataCost(dataTransferCost + writtenDataCost)
+        : setWrittenAndTransferDataCost(totalCost * PERCENTAGE_OF_MONTHLY_COST),
+    [dataTransferCost, isAdvanced, totalCost, writtenDataCost]
+  );
 
   const handleComputeUnitsChange = (value) => {
     setComputeUnits(value[0]);
@@ -69,6 +93,14 @@ const Calculator = () => {
 
   const handleStorageValueChange = (value) => {
     setStorageValue(value[0]);
+  };
+
+  const handleDataTransferChange = (event) => {
+    setDataTransferValue(event.target.value);
+  };
+
+  const handleWrittenDataChange = (event) => {
+    setWrittenDataValue(event.target.value);
   };
 
   return (
@@ -83,9 +115,9 @@ const Calculator = () => {
           </h2>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-[1220px] grid-cols-[1fr_338px] gap-2">
+        <div className="mx-auto mt-12 grid max-w-[1220px] grid-cols-[1fr_338px] gap-[10px]">
           <div className="row-span-1 flex rounded-lg bg-[#131415]">
-            <div className="grow p-7 pb-8">
+            <div className="grow px-7 py-6">
               <h3 className="text-2xl font-medium leading-none tracking-tight text-white">
                 Compute
               </h3>
@@ -173,7 +205,7 @@ const Calculator = () => {
           </div>
 
           <div className="row-span-1 flex rounded-lg bg-[#131415]">
-            <div className="grow p-7 pb-8">
+            <div className="grow px-7 py-6 pb-8">
               <h3 className="text-2xl font-medium leading-none tracking-tighter text-white">
                 Project storage
               </h3>
@@ -220,19 +252,55 @@ const Calculator = () => {
           </div>
 
           <div className="row-span-1 flex rounded-lg bg-[#131415]">
-            <div className="grow p-7 pb-8">
-              <h3 className="text-2xl font-medium leading-none tracking-tighter text-white [text-shadow:0px_0px_20px_rgba(255,_255,_255,_0.05)]">
+            <div className="grow px-6 pt-5 pb-7">
+              <h3 className="text-2xl font-medium leading-none tracking-tight text-white [text-shadow:0px_0px_20px_rgba(255,_255,_255,_0.05)]">
                 Data transfer and Written data
               </h3>
-              <p className="text-base tracking-tight text-[#94979E]">
-                Accounts for x% of your monthly cost, on average.
-                <button
-                  className="relative mx-2 text-primary-1 after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-full after:bg-primary-1 after:opacity-40"
-                  type="button"
-                >
-                  Are you an advanced user?
-                </button>
-              </p>
+              {isAdvanced ? (
+                <ul className="mt-7 flex gap-14">
+                  <li>
+                    <label htmlFor="dataTransfer">Data transfer</label>
+                    <input
+                      id="dataTransfer"
+                      className="ml-8 mr-2 w-14 border-none bg-[rgba(36,38,40,.6)] px-2 text-center text-[15px] tracking-tight"
+                      name="data-transfer"
+                      type="number"
+                      min={0}
+                      max={100}
+                      placeholder="10"
+                      value={dataTransferValue}
+                      onChange={handleDataTransferChange}
+                    />
+                    <span>GiB</span>
+                  </li>
+                  <li>
+                    <label htmlFor="writtenData">Written data</label>
+                    <input
+                      id="writtenData"
+                      className="ml-8 mr-2 w-14 border-none bg-[rgba(36,38,40,.6)] px-2 text-center text-[15px] tracking-tight"
+                      name="written-data"
+                      type="number"
+                      min={0}
+                      max={100}
+                      placeholder="10"
+                      value={writtenDataValue}
+                      onChange={handleWrittenDataChange}
+                    />
+                    <span>GiB</span>
+                  </li>
+                </ul>
+              ) : (
+                <p className="text-base tracking-tight text-[#94979E]">
+                  Accounts for x% of your monthly cost, on average.
+                  <button
+                    className="relative mx-2 text-primary-1 after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-full after:bg-primary-1 after:opacity-40"
+                    type="button"
+                    onClick={() => setIsAdvanced(true)}
+                  >
+                    Are you an advanced user?
+                  </button>
+                </p>
+              )}
             </div>
             <div className="flex w-[189px] shrink-0 flex-col items-center justify-center border-l border-dashed border-[#303236]">
               <p className="text-[40px] leading-none tracking-tighter text-[#00E599]">
@@ -242,12 +310,12 @@ const Calculator = () => {
             </div>
           </div>
 
-          <div className="col-start-2 row-span-3 row-start-1 rounded-lg bg-secondary-2 p-7">
+          <div className="col-start-2 row-span-3 row-start-1 flex flex-col rounded-lg bg-secondary-2 p-7 pb-9">
             <h3 className="text-center text-lg font-semibold leading-none tracking-tight text-black [text-shadow:0px_0px_20px_rgba(255,_255,_255,_0.05)]">
               Estimated price
             </h3>
             <p className="mt-8 text-center text-[72px] font-medium leading-none tracking-tighter text-black">
-              $<span>{totalCost.toFixed(2)}</span>
+              <span>{estimatedPrice}</span>
               <span className="mt-1 block text-base tracking-normal">/per month</span>
             </p>
             <ul className="my-11 flex flex-col space-y-8">
@@ -263,12 +331,12 @@ const Calculator = () => {
               </li>
               <li className="relative flex pl-[3.25rem] text-lg leading-none tracking-tight text-black after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05]">
                 <CheckIcon className="mr-2" />
-                {/* <span className="mr-1 font-semibold">3 GB</span> */}
+                {isAdvanced && <span className="mr-1 font-semibold">3 GiB</span>}
                 <span>written data</span>
               </li>
               <li className="relative flex pl-[3.25rem] text-lg leading-none tracking-tight text-black">
                 <CheckIcon className="mr-2" />
-                {/* <span className="mr-1 font-semibold">3 GB</span> */}
+                {isAdvanced && <span className="mr-1 font-semibold">3 GiB</span>}
                 <span>data transfer</span>
               </li>
             </ul>
