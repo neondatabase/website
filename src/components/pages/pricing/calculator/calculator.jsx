@@ -1,6 +1,7 @@
 'use client';
 
 import * as Slider from '@radix-ui/react-slider';
+import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
@@ -266,55 +267,75 @@ const Calculator = () => {
           </div>
 
           <div className="row-span-1 flex rounded-lg bg-gray-1 md:flex-col">
-            <div className="grow px-6 pt-7 pb-9 xl:py-8 lg:pb-6 md:px-5 md:py-5">
+            <div className="min-h-[141px] grow px-6 pt-7 pb-9 xl:min-h-[152px] xl:py-8 lg:pb-6 md:px-5 md:py-5">
               <h3 className="text-2xl font-medium leading-none tracking-tight text-white [text-shadow:0px_0px_20px_rgba(255,_255,_255,_0.05)] xl:text-xl">
                 Data transfer and Written data
               </h3>
-              {isAdvanced ? (
-                <ul className="mt-7 flex gap-14">
-                  <li>
-                    <label htmlFor="dataTransfer">Data transfer</label>
-                    <input
-                      id="dataTransfer"
-                      className="ml-8 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight"
-                      name="data-transfer"
-                      type="number"
-                      min={0}
-                      max={100}
-                      placeholder="10"
-                      value={dataTransferValue}
-                      onChange={(event) => setDataTransferValue(event?.target?.value)}
-                    />
-                    <span>GiB</span>
-                  </li>
-                  <li>
-                    <label htmlFor="writtenData">Written data</label>
-                    <input
-                      id="writtenData"
-                      className="ml-8 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight"
-                      name="written-data"
-                      type="number"
-                      min={0}
-                      max={100}
-                      placeholder="10"
-                      value={writtenDataValue}
-                      onChange={(event) => setWrittenDataValue(event?.target?.value)}
-                    />
-                    <span>GiB</span>
-                  </li>
-                </ul>
-              ) : (
-                <p className="mt-5 text-base tracking-tight text-[#94979E]">
-                  Accounts for x% of your monthly cost, on average.
-                  <button
-                    className="relative mx-2 text-primary-1 after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-full after:bg-primary-1 after:opacity-40 xl:mx-0 xl:block"
-                    type="button"
-                    onClick={() => setIsAdvanced(true)}
-                  >
-                    Are you an advanced user?
-                  </button>
-                </p>
-              )}
+              <LazyMotion features={domAnimation}>
+                <AnimatePresence initial={false} mode="wait">
+                  {isAdvanced ? (
+                    <m.ul
+                      className="mt-7 flex gap-14"
+                      initial={{
+                        opacity: 0,
+                        translateY: 10,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        translateY: 0,
+                        transition: { duration: 0.3 },
+                      }}
+                      exit={{
+                        opacity: 0,
+                        transition: { duration: 0.2 },
+                      }}
+                      transition={{ ease: [0.25, 0.1, 0, 1] }}
+                    >
+                      <li>
+                        <label htmlFor="dataTransfer">Data transfer</label>
+                        <input
+                          id="dataTransfer"
+                          className="ml-8 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight"
+                          name="data-transfer"
+                          type="number"
+                          min={0}
+                          max={100}
+                          placeholder="10"
+                          value={dataTransferValue}
+                          onChange={(event) => setDataTransferValue(event?.target?.value)}
+                        />
+                        <span>GiB</span>
+                      </li>
+                      <li>
+                        <label htmlFor="writtenData">Written data</label>
+                        <input
+                          id="writtenData"
+                          className="ml-8 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight"
+                          name="written-data"
+                          type="number"
+                          min={0}
+                          max={100}
+                          placeholder="10"
+                          value={writtenDataValue}
+                          onChange={(event) => setWrittenDataValue(event?.target?.value)}
+                        />
+                        <span>GiB</span>
+                      </li>
+                    </m.ul>
+                  ) : (
+                    <p className="mt-5 text-base tracking-tight text-[#94979E]">
+                      Accounts for x% of your monthly cost, on average.
+                      <button
+                        className="relative mx-2 border-b border-primary-1 text-primary-1 transition-colors duration-200 hover:border-transparent xl:mx-0 xl:block"
+                        type="button"
+                        onClick={() => setIsAdvanced(true)}
+                      >
+                        Are you an advanced user?
+                      </button>
+                    </p>
+                  )}
+                </AnimatePresence>
+              </LazyMotion>
             </div>
             <div className="flex w-[189px] shrink-0 flex-col items-center justify-center border-l border-dashed border-[#303236] xl:w-[155px] lg:w-[168px] md:w-full md:flex-row md:items-center md:justify-between md:border-l-0 md:border-t md:px-5 md:py-5">
               <h2 className="hidden text-base font-medium leading-none tracking-tight md:block">
