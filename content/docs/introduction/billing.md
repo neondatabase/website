@@ -24,7 +24,7 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 |**Projects**              | 1                                 | 20               | Unlimited                 |
 |**Branches**              | 10                                 | Unlimited               | Unlimited                 |
 |**Compute active time per month** | 100 hours*                 | Unlimited        | Unlimited                 |
-|**Compute size**          | 1 Shared vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
+|**Compute size**          | 1 shared vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
 |**Storage**               | 3 GB per branch                   | Unlimited*        | Unlimited                 |
 |**Dedicated resources**   | -                            | -           | &check;                   |
 |**Project sharing**       | -                            | &check;          | &check;                   |
@@ -186,7 +186,7 @@ data transfer (GiB) * price per GiB
 | Cloud provider | Region      | Billing metric | Price | Unit |
 |:---------------|:-----------|:--------------|:------|:-----|
 | AWS            | US East (Ohio)     | Compute time  | $0.10200 | Compute-hour |
-| AWS            | US East (Ohio)     | Project storage  | $0.000164 | GiB-Hour |
+| AWS            | US East (Ohio)     | Project storage  | $0.000164 | GiB-hour |
 | AWS            | US East (Ohio)  | Written data  | $0.09600 | GiB |
 | AWS            | US East (Ohio)| Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |

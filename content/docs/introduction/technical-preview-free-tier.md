@@ -15,7 +15,7 @@ The Neon Free Tier has the following limits:
 
 - 1 Neon project.
 - 10 branches including the [primary branch](/docs/reference/glossary#primary-branch), with a limit of 3GB of data per branch.
-- A [compute endpoint](/docs/reference/glossary#compute-endpoint) for each branch, each with 1 shared vCPU with up to 1 GB of RAM.
+- A [compute endpoint](/docs/reference/glossary#compute-endpoint) for each branch, each with 1 shared vCPU with 1 GB of RAM.
 - 100 hours of _compute active time_ per month (total). Neon scales compute endpoints to zero after 5 minutes of inactivity. Only active time is counted toward the limit. When you reach the limit, compute endpoints assigned to [non-primary branches](/docs/reference/glossary#non-primary-branch) are unavailable until the limit is reset at the beginning of the next month. You are always able to connect to the compute endpoint assigned to the primary branch of your Neon project, regardless of the limit. This ensures that access to data on the primary branch of your project is never interrupted.
 - A point-in-time restore window of 7 days of _reasonable usage_.
 
