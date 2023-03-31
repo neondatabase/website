@@ -49,12 +49,12 @@ const Calculator = () => {
   const [writtenAndTransferDataCost, setWrittenAndTransferDataCost] = useState(0);
 
   const computeTimeCost = useMemo(
-    () => computeUnits * activeTime * COMPUTE_TIME_PRICE,
+    () => computeUnits * activeTime * COMPUTE_TIME_PRICE * 30,
     [activeTime, computeUnits]
   );
 
   const storageCost = useMemo(
-    () => storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE,
+    () => storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE * 30,
     [storageValue]
   );
 
@@ -114,7 +114,10 @@ const Calculator = () => {
                     />
                   </h4>
                   <p className="text-[15px] font-medium leading-none tracking-tight">
-                    {computeUnits}vCPU - 4GB RAM
+                    <span className="after:mx-2 after:inline-block after:h-[4px] after:w-[4px] after:rounded-full after:bg-primary-1 after:align-middle">
+                      {computeUnits}vCPU
+                    </span>
+                    <span>4GB RAM</span>
                   </p>
                 </div>
                 <div className="flex items-center py-[4px]">
