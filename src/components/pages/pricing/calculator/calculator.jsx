@@ -35,7 +35,7 @@ const COMPUTE_TIME_VALUES = {
 };
 
 const STORAGE_VALUES = {
-  min: 0,
+  min: 1,
   max: 1000,
   step: 10,
   default: 50,
@@ -219,7 +219,7 @@ const Calculator = () => {
               </h3>
               <div className="mt-7 flex flex-col gap-2">
                 <div className="flex justify-between">
-                  <h4 className="font-medium leading-none tracking-tight">Compute units</h4>
+                  <h4 className="font-medium leading-none tracking-tight">Data storage</h4>
                   <p className="text-[15px] font-medium leading-none tracking-tight">
                     {storageValue} GiB
                   </p>
@@ -324,7 +324,7 @@ const Calculator = () => {
                     </m.ul>
                   ) : (
                     <p className="mt-5 text-base tracking-tight text-[#94979E]">
-                      Accounts for x% of your monthly cost, on average.
+                      Accounts for 10% of your monthly cost, on average.
                       <button
                         className="relative mx-2 border-b border-primary-1 text-primary-1 transition-colors duration-200 hover:border-transparent xl:mx-0 xl:block"
                         type="button"
