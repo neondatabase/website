@@ -104,7 +104,7 @@ const Estimates = () => {
   };
 
   return (
-    <section className="estimates safe-paddings mt-48 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20">
+    <section className="estimates safe-paddings mt-56 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20">
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <span className="text-center text-lg uppercase leading-snug text-primary-1">
