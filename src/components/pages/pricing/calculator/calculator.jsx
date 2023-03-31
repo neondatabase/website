@@ -99,7 +99,7 @@ const Calculator = () => {
         </div>
 
         <div className="mx-auto mt-12 grid max-w-[1220px] grid-cols-[1fr_338px] gap-[10px]">
-          <div className="row-span-1 flex rounded-lg bg-[#131415]">
+          <div className="row-span-1 flex rounded-lg bg-gray-1">
             <div className="grow px-7 py-6">
               <h3 className="text-2xl font-medium leading-none tracking-tight text-white">
                 Compute
@@ -130,7 +130,7 @@ const Calculator = () => {
                     aria-label="Compute units"
                     onValueChange={(value) => setComputeUnits(value[0])}
                   >
-                    <Slider.Track className="relative h-[4px] w-full grow rounded-[10px] bg-[#242628]">
+                    <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
                       <Slider.Range className="absolute h-full h-[6px] rounded-full bg-primary-1" />
                     </Slider.Track>
                     <Slider.Thumb
@@ -173,7 +173,7 @@ const Calculator = () => {
                     aria-label="Active time"
                     onValueChange={(value) => setActiveTime(value[0])}
                   >
-                    <Slider.Track className="relative h-[4px] w-full grow rounded-[10px] bg-[#242628]">
+                    <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
                       <Slider.Range className="absolute h-full h-[6px] rounded-full bg-primary-1" />
                     </Slider.Track>
                     <Slider.Thumb
@@ -203,7 +203,7 @@ const Calculator = () => {
             </div>
           </div>
 
-          <div className="row-span-1 flex rounded-lg bg-[#131415]">
+          <div className="row-span-1 flex rounded-lg bg-gray-1">
             <div className="grow px-7 py-6 pb-8">
               <h3 className="text-2xl font-medium leading-none tracking-tighter text-white">
                 Project storage
@@ -228,7 +228,7 @@ const Calculator = () => {
                     aria-label="Compute units"
                     onValueChange={(value) => setStorageValue(value[0])}
                   >
-                    <Slider.Track className="relative h-[4px] w-full grow rounded-[10px] bg-[#242628]">
+                    <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
                       <Slider.Range className="absolute h-full h-[6px] rounded-full bg-primary-1" />
                     </Slider.Track>
                     <Slider.Thumb
@@ -252,8 +252,8 @@ const Calculator = () => {
             </div>
           </div>
 
-          <div className="row-span-1 flex rounded-lg bg-[#131415]">
-            <div className="grow px-6 pt-5 pb-7">
+          <div className="row-span-1 flex rounded-lg bg-gray-1">
+            <div className="grow px-6 pt-7 pb-9">
               <h3 className="text-2xl font-medium leading-none tracking-tight text-white [text-shadow:0px_0px_20px_rgba(255,_255,_255,_0.05)]">
                 Data transfer and Written data
               </h3>
@@ -263,7 +263,7 @@ const Calculator = () => {
                     <label htmlFor="dataTransfer">Data transfer</label>
                     <input
                       id="dataTransfer"
-                      className="ml-8 mr-2 w-14 border-none bg-[rgba(36,38,40,.6)] px-2 text-center text-[15px] tracking-tight"
+                      className="ml-8 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight"
                       name="data-transfer"
                       type="number"
                       min={0}
@@ -278,7 +278,7 @@ const Calculator = () => {
                     <label htmlFor="writtenData">Written data</label>
                     <input
                       id="writtenData"
-                      className="ml-8 mr-2 w-14 border-none bg-[rgba(36,38,40,.6)] px-2 text-center text-[15px] tracking-tight"
+                      className="ml-8 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight"
                       name="written-data"
                       type="number"
                       min={0}
@@ -291,7 +291,7 @@ const Calculator = () => {
                   </li>
                 </ul>
               ) : (
-                <p className="text-base tracking-tight text-[#94979E]">
+                <p className="mt-5 text-base tracking-tight text-[#94979E]">
                   Accounts for x% of your monthly cost, on average.
                   <button
                     className="relative mx-2 text-primary-1 after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-full after:bg-primary-1 after:opacity-40"
@@ -357,7 +357,7 @@ const Calculator = () => {
 };
 
 const Tooltip = ({ content, id }) => (
-  <span className="relative ml-1 inline-flex align-middle">
+  <span className="relative ml-2 inline-flex align-middle">
     <span
       className="peer cursor-pointer lg:hidden"
       data-tooltip-id={id}
