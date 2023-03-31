@@ -60,16 +60,14 @@ To add the integration:
 
           When you finish making selections, click **Continue**.
     1. Confirm the integration settings. This allows the integration to:
+        - Set environment variables for your Vercel project's production, development, and preview environments.
+        - Create database branches for preview deployments.
+        - Create a development branch for your Vercel development environment.
+        ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
+    1. Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
 
-      - Set environment variables for your Vercel project's production, development, and preview environments.
-      - Create database branches for preview deployments.
-      - Create a development branch for your Vercel development environment.
-      ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
-
-      Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
-
-      Once the settings are configured, you are presented with a **Success!** dialog.
-      ![Vercel integration success](/docs/guides/vercel_success.png)
+        Once the settings are configured, you are presented with a **Success!** dialog.
+        ![Vercel integration success](/docs/guides/vercel_success.png)
     1. Click **Done** to complete the installation.
 1. To view the results of the integration in Neon:
     1. Navigate to the [Neon Console](https://console.neon.tech/).
