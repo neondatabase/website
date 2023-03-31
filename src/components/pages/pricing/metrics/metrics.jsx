@@ -13,25 +13,25 @@ const items = [
   {
     icon: ComputeTimeIcon,
     name: 'Compute time',
-    price: 'From $0.072 /Compute-hour',
+    price: 'From $0.102 /hour',
     details: 'The amount time that your Neon compute resources are active.',
   },
   {
     icon: ProjectStorageIcon,
     name: 'Project storage',
-    price: 'From $0.072 /Gigabyte-hour',
+    price: 'From $0.000164 /Gigabyte-hour',
     details: 'The amount of data stored in your Neon projects.',
   },
   {
     icon: WrittenDataIcon,
     name: 'Written data',
-    price: 'From $0.072 /Gigabyte',
+    price: 'From $0.096 /Gigabyte',
     details: 'The amount of data written to Neon storage to ensure durability.',
   },
   {
     icon: DataTransferIcon,
     name: 'Data transfer',
-    price: 'From $0.072 /Gigabyte',
+    price: 'From $0.09 /Gigabyte',
     details: 'The amount of data transferred out of Neon.',
   },
 ];
