@@ -63,7 +63,7 @@ To add the integration:
         - Set environment variables for your Vercel project's production, development, and preview environments.
         - Create database branches for preview deployments.
         - Create a development branch for your Vercel development environment.
-        ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
+      ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
     1. Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
 
         Once the settings are configured, you are presented with a **Success!** dialog.
