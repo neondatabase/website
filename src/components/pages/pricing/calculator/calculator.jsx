@@ -1,8 +1,8 @@
 'use client';
 
 import * as Slider from '@radix-ui/react-slider';
-import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
+import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
