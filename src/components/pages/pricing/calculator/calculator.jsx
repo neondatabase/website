@@ -14,7 +14,7 @@ import ThumbIcon from 'icons/thumb.inline.svg';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const PROJECT_STORAGE_PRICE = 0.000164;
-const PROJECT_STORAGE_HOURS = 168;
+const PROJECT_STORAGE_HOURS = 24 * (3600 / 3600);
 const DATA_TRANSFER_PRICE = 0.09;
 const WRITTEN_DATA_PRICE = 0.096;
 const PERCENTAGE_OF_MONTHLY_COST = 0.1;
@@ -55,7 +55,7 @@ const Calculator = () => {
   );
 
   const storageCost = useMemo(
-    () => storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE,
+    () => storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE * AVERAGE_DAYS_IN_MONTH,
     [storageValue]
   );
 
