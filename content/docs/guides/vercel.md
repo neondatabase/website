@@ -139,9 +139,9 @@ If you already added the Neon Vercel integration to a Vercel project and want to
 
 If the environment variables configured by the Neon integration already exist, you may encounter the following error due to an existing integration that sets one or more of the same environment variables.
 
-    ```text
-    Failed to set environment variables in Vercel. Please make sure that the following environment variables are not set: PGHOST, PGUSER, PGDATABASE, PGPASSWORD, DATABASE_URL
-    ```
+```text
+Failed to set environment variables in Vercel. Please make sure that the following environment variables are not set: PGHOST, PGUSER, PGDATABASE, PGPASSWORD, DATABASE_URL
+```
 
 In this case, you can remove or rename the existing environment variables in your Vercel project settings and retry the Neon integration.
 
@@ -152,7 +152,7 @@ In this case, you can remove or rename the existing environment variables in you
 Alternatively, you can remove the conflicting integration, assuming it no longer required. This may be a previous Neon integration or another integration. Removing the integration removes the variables set by the integration.
 </Admonition>
 
-1. Try adding the Neon integration again. See [Add the Neon integration](#add-the-neon-integration).
+1. Try adding the Neon integration again. See [Add the Neon Vercel integration](#add-the-neon-vercel-integration).
 
 ## Manage the Neon Vercel integration
 
