@@ -17,6 +17,7 @@ const PROJECT_STORAGE_HOURS = 168;
 const DATA_TRANSFER_PRICE = 0.09;
 const WRITTEN_DATA_PRICE = 0.096;
 const PERCENTAGE_OF_MONTHLY_COST = 0.1;
+const AVERAGE_DAYS_IN_MONTH = 30.416666;
 
 const COMPUTE_UNITS_VALUES = {
   min: 0.25,
@@ -49,12 +50,12 @@ const Calculator = () => {
   const [writtenAndTransferDataCost, setWrittenAndTransferDataCost] = useState(0);
 
   const computeTimeCost = useMemo(
-    () => computeUnits * activeTime * COMPUTE_TIME_PRICE * 30,
+    () => computeUnits * activeTime * COMPUTE_TIME_PRICE * AVERAGE_DAYS_IN_MONTH,
     [activeTime, computeUnits]
   );
 
   const storageCost = useMemo(
-    () => storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE * 30,
+    () => storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE * AVERAGE_DAYS_IN_MONTH,
     [storageValue]
   );
 
