@@ -45,8 +45,8 @@ To add the integration:
 
 1.  Navigate to the [Neon Vercel integrations page](https://vercel.com/integrations/neon), and click **Add integration**.
     ![Add integration](/docs/guides/vercel_add_integration.png)
-1.  Select a Vercel account to add the integration to.
-1.  Select the Vercel project to add the integration to.
+1.  Select a Vercel Account to add the integration to.
+1.  Select the Vercel project to which the integration will be added.
 1.  Review the permissions required by the integration, and click **Add Integration**.
 1.  In the **Integrate Neon** dialog:
 
@@ -55,15 +55,14 @@ To add the integration:
     1.  Select the Neon project, database, and role that Vercel will use to connect.
         ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
-            The [primary branch](/docs/reference/glossary#primary-branch) of your Neon project is preselected as the production branch.
+            The [primary branch](/docs/reference/glossary#primary-branch) of your Neon project is preselected as your **Production branch**.
 
-            You have the option to create a database branch for your Vercel development environment. Selecting this option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a copy-on-write clone of your production branch that you can modify without affecting your production branch.
+            The **Create a branch for your development environment** creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a copy-on-write clone of your production branch that you can modify without affecting your production branch.
 
             When you finish making selections, click **Continue**.
 
     1.  Confirm the integration settings. This allows the integration to:
 
-            - Reset the database user's password, enabling the integration to configure the environment variables that require a password.
             - Set environment variables for your Vercel project's production, development, and preview environments.
             - Create database branches for preview deployments.
             - Create a development branch for your Vercel development environment.
@@ -72,7 +71,7 @@ To add the integration:
 
         Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
 
-        Once the settings are configured, you are presented with a **Success!** dialog where you can copy the new password for your database user.
+        Once the settings are configured, you are presented with a **Success!** dialog.
         ![Vercel integration success](/docs/guides/vercel_success.png)
 
     1. Click **Done** to complete the installation.
