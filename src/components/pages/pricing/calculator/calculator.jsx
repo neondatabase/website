@@ -37,7 +37,6 @@ const COMPUTE_TIME_VALUES = {
 const STORAGE_VALUES = {
   min: 1,
   max: 1000,
-  step: 10,
   default: 50,
 };
 
@@ -56,7 +55,7 @@ const Calculator = () => {
   );
 
   const storageCost = useMemo(
-    () => storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE * AVERAGE_DAYS_IN_MONTH,
+    () => storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE,
     [storageValue]
   );
 
@@ -233,7 +232,6 @@ const Calculator = () => {
                     defaultValue={[STORAGE_VALUES.default]}
                     min={STORAGE_VALUES.min}
                     max={STORAGE_VALUES.max}
-                    step={STORAGE_VALUES.step}
                     aria-label="Compute units"
                     onValueChange={(value) => setStorageValue(value[0])}
                   >
