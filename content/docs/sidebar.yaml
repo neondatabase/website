@@ -129,7 +129,7 @@
 - title: Reference
   items:
     - title: Neon API reference
-      url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+      slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
     - title: SDKs
       slug: reference/sdk
     - title: Glossary
