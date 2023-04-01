@@ -1,6 +1,6 @@
 ---
-title: Supported PostgreSQL Extensions
-subtitle: 
+title: The pgvector extension
+subtitle: Learn how to use the pgvector extension for embeddings and vector similarity
 enableTableOfContents: true
 ---
 
