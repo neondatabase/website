@@ -16,10 +16,10 @@ Why use Neon and StepZen together? Neon is serverless PostgreSQL. Neon separates
 Before generating a GraphQL API, you must set up a Neon database, which you can do it in a few steps:
 
 1. Sign in to Neon, or [sign up](/docs/get-started-with-neon/signing-up) if you do not yet have an account.
-2. [Create a new project](/docs/get-started-with-neon/setting-up-a-project).
+2. [Create a project](/docs/get-started-with-neon/setting-up-a-project).
 3. [Create a database](/docs/manage/databases#create-a-database) or use the default `neondb` database.
 
-You can find the connection string for your database in the **Connection Details** widget in the Neon Console.
+You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**.
 
 ![Connection details widget](/docs/guides/connection_details.png)
 
@@ -30,7 +30,7 @@ Running the `init.sql` file creates the `address`, `customer`, `product`, and `o
 You can seed the database directly from the terminal by running the following `psql` command:
 
 ```bash
-psql postgres://sally:*************@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb < init.sql
+psql postgres://daniel:*************@ep-restless-rice-862380.us-east-2.aws.neon.tech/neondb < init.sql
 ```
 
 The command takes a Neon connection string as the first argument and a file as the second argument.
@@ -76,9 +76,9 @@ Specify your data source with the `stepzen import` CLI. Answer the setup questio
 stepzen import postgresql
 
 ? What would you like your endpoint to be called? api/with-neon
-? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-cold-poetry-404091.us-east-2.aws.neon.tech:5432`)
+? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-restless-rice-862380.us-east-2.aws.neon.tech:5432`)
 ? What is your database name? YOUR_NEON_DATABASE (e.g., `neondb`)
-? What is the username? YOUR_NEON_USERNAME (e.g., `sally`)
+? What is the username? YOUR_NEON_USERNAME (e.g., `daniel`)
 ? What is the password? [hidden] YOUR_NEON_PASSWORD
 ? Automatically link types based on foreign key relationships using @materializer
  (https://stepzen.com/docs/features/linking-types) Yes
@@ -103,13 +103,13 @@ configurationset:
       uri: YOUR_NEON_DSN?user=YOUR_NEON_USERNAME&password=YOUR_NEON_PASSWORD&options=project=YOUR_NEON_PROJECT_ID&sslmode=require
 ```
 
-As shown above, you need to append `&options=project=YOUR_NEON_PROJECT_ID` to the `uri` connection string. This is needed to establish a secure connection to the Neon database. The `project` option is the ID of the project in Neon. You can find the project ID in the Neon Console under **Settings**, or in the URL of your project.
+As shown above, you need to append `&options=project=YOUR_NEON_PROJECT_ID` to the `uri` connection string. This is needed to establish a secure connection to the Neon database. The `project` option is the ID of the project in Neon. You can find the project ID in the Neon Console under **Settings** or in the URL of your project.
 
 The next section explores the GraphQL API to see how the connection between the Neon PostgreSQL database and StepZen works.
 
 ## Explore the GraphQL API
 
-The GraphQL schema that StepZen generates still needs to be deployed to the cloud before your are able to explore the GraphQL API. With StepZen, you have multiple options to deploy your schema. You can deploy it to the StepZen cloud or run it locally using Docker. This guide uses the StepZen cloud, which the fastest way to get started.
+The GraphQL schema that StepZen generates still needs to be deployed to the cloud before you are able to explore the GraphQL API. With StepZen, you have multiple options to deploy your schema. You can deploy it to the StepZen cloud or run it locally using Docker. This guide uses the StepZen cloud, which the fastest way to get started.
 
 To deploy the schema to the StepZen cloud, run the following command:
 
@@ -119,7 +119,7 @@ stepzen start
 
 Once the schema is deployed, you can explore the GraphQL API in the [StepZen dashboard](https://dashboard.stepzen.com/explorer).
 
-From the dashboard you can view the GraphQL schema, try out queries and mutations, and generate code snippets for your favorite programming language.
+From the dashboard, you can view the GraphQL schema, try out queries and mutations, and generate code snippets for your favorite programming language.
 
 The CLI also outputs the URL of your GraphQL API endpoint. You can use this endpoint to query your API from other tools or applications.
 
@@ -188,7 +188,7 @@ The `getCustomerList` query defined in the GraphQL schema returns an array of th
 - `table` defines the table in the database
 - `configuration` defines the name of the connection configuration used to connect to the database
 
-Earlier, you saw that the CLI created connections based on foreign key relationships. For example, the `order` table has a foreign key relationship with the `customer` table. This means that you can query data from the `order` table, and get the related data from the `customer` table. You can query the customer linked to an order like this:
+Earlier, the CLI created connections based on foreign key relationships. For example, the `order` table has a foreign key relationship with the `customer` table. This means that you can query data from the `order` table, and get the related data from the `customer` table. You can query the customer linked to an order like this:
 
 ```graphql
 {

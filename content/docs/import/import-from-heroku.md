@@ -21,14 +21,14 @@ To migrate your data from Heroku to Neon:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Enter a name for your project and click **Create Project**.
-4. After creating a project, you are directed to the Neon **Dashboard**, where a connection string with your password is provided under **Connection Details**. The connection string includes your password until you navigate away from the Neon Console or refresh the browser page. Copy the connection string. It is required to import your data from Heroku.
+3. Specify your project settings and click **Create Project**.
+4. After creating a project, you are directed to the Neon **Dashboard**, where a connection string with your password is provided under **Connection Details**. Copy the connection string. It is required to import your data from Heroku.
 
-The example connection string used the instructions that follow is:
+    The example connection string used the instructions that follow is:
 
-```sh
-postgres://jsmith:Wij8mIDXoQ8H@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
-```
+    ```sh
+    postgres://jsmith:Wij8mIDXoQ8H@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+    ```
 
 ## Retrieve your Heroku app name and database name
 
@@ -70,9 +70,9 @@ where:
 For example:
 
 ```shell
-$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgres://jsmith:Wij8mIDXoQ8H@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgres://jsmith:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
 
-heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgres://jsmith:Wij8mIDXoQ8H@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgres://jsmith:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
 
 pg_dump: last built-in OID is 16383
 pg_dump: reading extensions

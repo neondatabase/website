@@ -10,11 +10,13 @@ To create your first project:
 
 ![Create a project](/docs/get-started-with-neon/create_project.png)
 
-3. On the **Project Creation** dialog, specify a name, a PostgreSQL version, a region, and click **Create project**.
+3. On the **Project Creation** dialog, specify a name, a PostgreSQL version, and a region. If you are a [Neon paid plan](https://neon.tech/docs/introduction/billing#neon-plans) user, you can also specify compute size settings (not shown below). Neon supports fixed size computes and Autoscaling (beta). For more information about these options, see [Compute size configuration](/docs/manage/projects#compute-size-configuration).
 
 ![Select project options](/docs/get-started-with-neon/select_project_options.png)
 
-4. You are presented with the connection details for your new project. You can save the connection details or retrieve them later from the **Connection details** widget on the Neon **Dashboard**.
+4. Click **Create project**.
+
+5. You are presented with the connection details for your new project. You can save the connection details or retrieve them later from the **Connection details** widget on the Neon **Dashboard**.
 
 ![Connection details dialog](/docs/get-started-with-neon/connection_details_modal.png)
 
