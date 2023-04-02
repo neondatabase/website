@@ -2,6 +2,7 @@
 title: The pgvector extension
 subtitle: Learn how to use the pgvector extension for embeddings and vector similarity
 enableTableOfContents: true
+isDraft: true
 ---
 
 The pgvector extension is a versatile tool for implementing vector similarity search and embeddings storage in PostgreSQL databases. Particularly beneficial for applications involving natural language processing, such as those built on top of OpenAI's GPT models, pgvector offers a range of advanced features and options for optimization. In this article, we will cover the concepts of vector similarity and embeddings, explain how to enable and optimize the pgvector extension, and demonstrate how to create tables, store, and query vectors effectively in a cloud-hosted PostgreSQL database.
@@ -21,7 +22,7 @@ Embeddings facilitate the representation of complex data structures, such as tex
 You can enable the pgvector extension by running the following CREATE EXTENSION statement in the Neon SQL Editor or from a client such as psql that is connected to Neon.
 
 ```sql
-CREATE EXTENSION pgvector
+CREATE EXTENSION vector;
 ```
 
 For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
