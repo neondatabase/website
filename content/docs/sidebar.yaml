@@ -110,6 +110,17 @@
           slug: guides/vercel
         - title: Connect manually
           slug: guides/vercel-manual
+- title: AI integration
+  slug: ai-integration/overview
+  items:
+    - title: ChatPGT Retrieval Plugina
+      slug: ai-integration/chatgpt-retrieval-plugin
+    - title: Build an AI-powered chatbot
+      slug: ai-integration/ai-chatbot
+    - title: The pg_tiktoken extension
+      slug: ai-integration/pg_tiktoken
+    - title: The pgvector extension
+      slug: ai-integration/pgvector
 - title: Import data
   items:
     - title: Import from PostgreSQL
