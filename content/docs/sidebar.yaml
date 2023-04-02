@@ -113,7 +113,7 @@
 - title: AI integration
   slug: ai-integration/overview
   items:
-    - title: ChatPGT Retrieval Plugina
+    - title: ChatPGT Retrieval Plugin
       slug: ai-integration/chatgpt-retrieval-plugin
     - title: Build an AI-powered chatbot
       slug: ai-integration/ai-chatbot
