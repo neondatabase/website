@@ -1,6 +1,6 @@
 ---
 title: Connect to Neon securely
-subtitle: Learn how to connect to Neon securely when using connection strings
+subtitle: Learn how to connect to Neon securely when using a connection string
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
