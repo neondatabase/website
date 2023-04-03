@@ -31,25 +31,23 @@ Neon requires an encrypted connection, so specifying the `allow` and `prefer` se
 
 The choice of which mode to use depends on the specific security requirements of the application and the level of risk that you are willing to tolerate. Neon recommends that you always use `verify-full` mode, which ensures the highest level of security and protects against a wide range of attacks including man-in-the-middle attacks. The following sections describe how to configure connections using `verify-full` mode.
 
-## Connection configuration
-
 The required configuration for your connection depends on the client you are using.
 
-### Connect from the psql client
+## Connect from the psql client
 
-To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable. For example, you can connect with `verify-full` by setting `PGSSLROOTCERT` to the location of your system's root certificates:
+To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable to the location of your operating system's root certificates:
 
-Refer to [Location of system root certificates](#location-of-system-root-certificates) below to find the path to system root certificates for your operating system and distribution.
+Refer to [Location of system root certificates](#location-of-system-root-certificates) below to find the path to system root certificates for your operating system.
 
-### Connect from other clients
+## Connect from other clients
 
 If the client application uses a popular PostgreSQL client library, such as `psycopg2` for Python or JDBC for Java, the library typically provides built-in support for SSL/TLS encryption and verification, allowing you to specify an `sslmode` setting in the connection parameters.
 
-However, if the client application uses a non-standard PostgreSQL client, SSL/TLS may not be enabled by default. In this case, you must manually configure the client to use SSL/TLS and specify the `sslmode` setting. Please refer to the client or the client's driver documentation for how to configure the path to your system's root certificates.
+However, if the client application uses a non-standard PostgreSQL client, SSL/TLS may not be enabled by default. In this case, you must manually configure the client to use SSL/TLS and specify the `sslmode` setting. Refer to the client or the client's driver documentation for how to configure the path to your operating system's root certificates.
 
 ### Location of system root certificates
 
-The location of root certificates varies depending on the operating system or distribution you are using. You should only configure a path to a CA root store if your client or driver  requires it. Here are some locations where you may find the required root certificates on popular operating systems and distributions:
+The location of root certificates varies depending on the operating system or distribution you are using. You should only configure a path to a CA root store if your client or driver  requires it. Here are some locations where you might find the required root certificates on popular operating systems:
 
 - Debian, Ubuntu, Gentoo, etc.
 
@@ -57,7 +55,7 @@ The location of root certificates varies depending on the operating system or di
   /etc/ssl/certs/ca-certificates.crt
   ```
 
-- Fedora, RedHat
+- CentOS, Fedora, RedHat
 
   ```bash
   /etc/pki/tls/certs/ca-bundle.crt
@@ -67,12 +65,6 @@ The location of root certificates varies depending on the operating system or di
 
   ```bash
   /etc/ssl/ca-bundle.pem
-  ```
-  
-- CentOS, RHEL 7
-
-  ```bash
-  /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
   ```
   
 - Alpine Linux
@@ -99,7 +91,7 @@ The location of root certificates varies depending on the operating system or di
 
   However, if you are using a language that requires specifying the CA root path, such as C or PHP, you can obtain a bundle of root certificates from the Mozilla CA Certificate program provided by the Curl project. You can download the bundle at https://curl.se/docs/caextract.html. After downloading the file, you will need to configure your driver to point to the bundle.
 
-System root certificate locations listed above may differ depending on the version, distribution, and configuration of your operating system. If you do not find the root certificates in these locations, refer to your operating system documentation.
+The system root certificate locations listed above may differ depending on the version, distribution, and configuration of your operating system. If you do not find the root certificates in these locations, refer to your operating system documentation.
 
 ## Need help?
 
