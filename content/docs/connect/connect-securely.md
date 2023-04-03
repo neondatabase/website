@@ -49,7 +49,15 @@ However, if the client application uses a non-standard PostgreSQL client, SSL/TL
 
 ### Location of system root certificates
 
-The location of root certificates varies depending on the operating system or distribution you are using. You should only configure a a path to a CA root store if your client or driver absolutely requires it. Here are some common locations where you can find root certificates on popular operating systems and distributions:
+The location of root certificates varies depending on the operating system or distribution you are using. You should only configure a path to a CA root store if your client or driver  requires it. Here are some common locations where you can find root certificates on popular operating systems and distributions:
+
+- Linux (Debian-based distributions):
+
+```bash
+/etc/ssl/certs/ca-certificates.crt
+```
+
+- Linux (Red Hat-based distributions):
 
 - macOS:
 
@@ -63,8 +71,7 @@ The location of root certificates varies depending on the operating system or di
 
 System root certificate locations listed above may differ depending on the version, distribution, and configuration of your operating system. If you do not find the root certificates in these locations, refer to your operating system documentation.
 
-- Linux (Debian-based distributions):
-- Linux (Red Hat-based distributions):
+
 
 ## Need help?
 
