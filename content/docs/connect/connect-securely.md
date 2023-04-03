@@ -49,19 +49,49 @@ However, if the client application uses a non-standard PostgreSQL client, SSL/TL
 
 ### Location of system root certificates
 
-The location of root certificates varies depending on the operating system or distribution you are using. You should only configure a path to a CA root store if your client or driver  requires it. Here are some common locations where you can find root certificates on popular operating systems and distributions:
+The location of root certificates varies depending on the operating system or distribution you are using. You should only configure a path to a CA root store if your client or driver  requires it. Here are some locations where you may find the required root certificates on popular operating systems and distributions:
 
-- Linux (Debian-based distributions):
+- Debian, Ubuntu, Gentoo, etc.
 
-```bash
-/etc/ssl/certs/ca-certificates.crt
-```
+  ```bash
+  /etc/ssl/certs/ca-certificates.crt
+  ```
 
-- Linux (Red Hat-based distributions):
+- Fedora, RedHat
+
+  ```bash
+  /etc/pki/tls/certs/ca-bundle.crt
+  ```
+
+- OpenSUSE
+
+  ```bash
+  /etc/ssl/ca-bundle.pem
+  ```
+  
+- CentOS, RHEL 7
+
+  ```bash
+  /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+  ```
+  
+- Alpine Linux
+
+  ```bash
+  /etc/ssl/cert.pem
+  ```
+
+- Android
+
+  ```bash
+  /system/etc/security/cacerts
+  ```
 
 - macOS:
 
-  On macOS, the system's root certificates are stored in the Keychain Access application. These root certificates are automatically used by most applications that require SSL/TLS connections. Therefore, you typically do not need to specify the root CA path when connecting to a PostgreSQL database from macOS.
+  ```bash
+  /etc/ssl/cert.pem
+  ```
 
 - Windows
 
@@ -70,8 +100,6 @@ The location of root certificates varies depending on the operating system or di
   However, if you are using a language that requires specifying the CA root path, such as C or PHP, you can obtain a bundle of root certificates from the Mozilla CA Certificate program provided by the Curl project. You can download the bundle at https://curl.se/docs/caextract.html. After downloading the file, you will need to configure your driver to point to the bundle.
 
 System root certificate locations listed above may differ depending on the version, distribution, and configuration of your operating system. If you do not find the root certificates in these locations, refer to your operating system documentation.
-
-
 
 ## Need help?
 
