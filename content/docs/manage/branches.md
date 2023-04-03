@@ -22,14 +22,14 @@ When working with branches, it is important to remove old and unused branches. B
 Each Neon project has a primary branch called `main`, by default. In the Neon Console, your primary branch is identified by a `PRIMARY` tag. You can designate any branch as the primary branch for your project or rename the primary branch, but you cannot delete a primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
 
 - For [Free Tier](/docs/introduction/technical-preview-free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the Free Tier _compute active time_ limit of 100 hours per month.
-- For [Pro plan](/docs/introduction/billing#neon-plans) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a safety limit of 20 simultaneously active computes to protect your account from misuse.
+- For [Pro plan](/docs/introduction/billing#neon-plans) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes.
 
 ## Non-primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
 - For [Free Tier](/docs/introduction/technical-preview-free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Free Tier  _compute active time_ limit of 100 hours per month.
-- For [Pro plan](/docs/introduction/billing#neon-plans) users, safety limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
+- For [Pro plan](/docs/introduction/billing#neon-plans) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Create a branch
 
