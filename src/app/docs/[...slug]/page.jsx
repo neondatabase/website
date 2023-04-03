@@ -61,6 +61,7 @@ export default async function DocPost({ params }) {
       breadcrumbs={breadcrumbs}
       navigationLinks={navigationLinks}
       isReleaseNotes={isReleaseNotesIndex}
+      releaseNotesActiveLabel="all"
       currentSlug={currentSlug}
       fileOriginPath={fileOriginPath}
       releaseNotes={releaseNotesWithMdxSource}

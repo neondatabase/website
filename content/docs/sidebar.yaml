@@ -11,7 +11,7 @@
       slug: introduction/branching
     - title: Neon roadmap
       slug: introduction/roadmap
-    - title: Technical Preview Free Tier
+    - title: Free Tier
       slug: introduction/technical-preview-free-tier
     - title: Regions
       slug: introduction/regions
@@ -40,7 +40,7 @@
       slug: connect/connect-from-any-app
     - title: Connect a GUI or IDE
       slug: connect/connect-postgres-gui
-    - title: Passwordless connect
+    - title: Passwordless auth
       slug: connect/passwordless-connect
     - title: Connect with psql
       slug: connect/query-with-psql-editor
@@ -90,6 +90,8 @@
       slug: guides/nextjs
     - title: Node.js
       slug: guides/node
+    - title: PolyScale
+      slug: guides/polyscale
     - title: Prisma
       items:
         - title: Connect from Prisma

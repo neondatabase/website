@@ -43,7 +43,7 @@ Neon supports the PostgreSQL extensions shown in the following table. For extens
 | pgrowlocks               | [1.2](https://www.postgresql.org/docs/14/pgrowlocks.html)       | [1.2](https://www.postgresql.org/docs/15/pgrowlocks.html)        |                                                                                                                    |
 | pgstattuple              | [1.5](https://www.postgresql.org/docs/14/pgstattuple.html)      | [1.5](https://www.postgresql.org/docs/15/pgstattuple.html)       |                                                                                                                    |
 | pgTAP                    | [1.2.1](https://pgtap.org/documentation.html)                   | [1.2.1](https://pgtap.org/documentation.html)       |                                                                                                                    |
-| pgvector                 | [0.4.0](https://github.com/pgvector/pgvector)                   | [0.4.0](https://github.com/pgvector/pgvector)                    |                                                                                                                    |
+| pgvector                 | [0.4.0](https://github.com/pgvector/pgvector)                   | [0.4.0](https://github.com/pgvector/pgvector)                    | Install with `CREATE EXTENSION vector;`                                                                                                                    |
 | plcoffee                 | [3.1.5](https://github.com/plv8/plv8/)                          | [3.1.5](https://github.com/plv8/plv8/)                           |                                                                                                                    |
 | plls                     | [3.1.5](https://github.com/plv8/plv8/)                          | [3.1.5](https://github.com/plv8/plv8/)                           |                                                                                                                    |  
 | plpgsql                  | [1.0](https://www.postgresql.org/docs/14/plpgsql.html)          | [1.0](https://www.postgresql.org/docs/15/plpgsql.html)           | Pre-installed with PostgreSQL.                                                                                     |
@@ -93,8 +93,8 @@ You can update an extension to the latest version using `ALTER EXTENSION <extens
 
 ## Extension support notes
 
-- Neon supports the `uuid-ossp` extension for generating UUIDs rather than the `uuid` extension.
-- The `sslinfo` extension is not supported, as Neon handles connections via a proxy that checks SSL.
+- Neon supports the `uuid-ossp` extension for generating UUIDs instead of the `uuid` extension.
+- The `sslinfo` extension is not supported. Neon handles connections via a proxy that checks SSL.
 - The `pg_cron` extension is not supported. Neon scales to zero when it is not being used, which means that a scheduler that runs inside the database cannot be implemented. Consider using an scheduler that runs externally instead.
 - The `file_fdw` extension is not supported. Files would not remain accessible when Neon scales to zero.
 

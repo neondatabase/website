@@ -30,14 +30,14 @@ where:
 A Neon connection string has the same format, where:
 
 - `<user>` is the Neon database role.
-- `<password>` is the database role's password, which is provided to you when you create a Neon project.
-- `<hostname>` is the hostname of the Neon compute endpoint, can be found under **Connection Details** on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console.
+- `<password>` is the database role's password.
+- `<hostname>` is the hostname of the Neon compute endpoint, which can be found under **Connection Details** on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console.
 - `<port>` is the Neon port number. The default port number is `5432`.
 - `<dbname>` is the database you are connecting to. The default Neon database is `neondb`.
 
-You can obtain a Neon connection string from the Neon **Dashboard**, under **Connection Details**. The connection string must include your project password, which was provided when you created the Neon project. If you have misplaced your password, you can reset it. Passwords are managed on the **Roles** page in the Neon Console.
+You can obtain a Neon connection string from the Neon **Dashboard**, under **Connection Details**.
 
-The command for importing a database from PostgreSQL to Neon appears similar to the following:
+The command for importing a database from a PostgreSQL instance to Neon will appear similar to the following:
 
 ```bash
 pg_dump postgres://mypguser:a1B2c3D4e5F6@<hostname>:5432/mydb | psql postgres://myneonrole:a1B2c3D4e5F6@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb

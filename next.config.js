@@ -58,6 +58,16 @@ module.exports = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/driver',
+        destination: '/docs/serverless/serverless-driver',
+        permanent: false,
+      },
+      {
+        source: '/blog/postgres-autoscaling',
+        destination: '/blog/scaling-serverless-postgres',
+        permanent: false,
+      },
       ...docsRedirects,
     ];
   },

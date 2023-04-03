@@ -12,12 +12,12 @@ API keys are global and belong to your Neon account. They can be used with any p
 
 ## Create an API key
 
-An API key is a randomly-generated 64-bit key that you must provide when calling Neon API methods. An API key remains valid until it is revoked.
+An API key (or token) is a randomly-generated 64-bit key that you must provide when calling Neon API methods. An API key remains valid until it is revoked.
 
 To generate an API key:
 
 1. Log in to the [Neon Console](https://console.neon.tech).
-2. Click your account in the upper right corner of the Neon Console, and select **Account**.
+2. Click your account in the bottom left corner of the Neon Console, and select **Account**.
 3. Select **Developer Settings** and click **Generate new API Key**.
 4. Enter a name for the API key.
 5. Click **Create** and copy the generated key.
@@ -30,9 +30,9 @@ An API key that is no longer needed can be revoked. This action cannot be revers
 
 To revoke an API key:
 
-1. Click your account in the upper right corner of the Neon Console and select **Account**.
+1. Click your account in the bottom left corner of the Neon Console and select **Account**.
 2. Select **Developer Settings** to see a list of API keys.
-3. To revoke a key, click **Revoke**. The key is immediately revoked. Any request using the key now fails.
+3. To revoke a key, click **Revoke**. The key is immediately revoked. Any request that uses the key now fails.
 
 ## Make an API call
 
@@ -78,7 +78,7 @@ A response for a Neon role with a single project appears similar to the followin
 }
 ```
 
-Refer to the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for other supported Neon API methods.
+Refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for other supported Neon API methods.
 
 ## Manage API keys with the Neon API
 
@@ -98,7 +98,7 @@ The following Neon API method creates an API key. To view the API documentation 
 POST /api_keys 
 ```
 
-The API method appears as follows when specified in a cURL command. You must specify the `key_name` attribute and with a name for the API key.
+The API method appears as follows when specified in a cURL command. You must specify the `key_name` attribute and a name for the API key.
 
 ```bash
 curl https://console.neon.tech/api/v2/api_keys \
@@ -120,7 +120,7 @@ The response includes an `id` for the key and a generated 64-bit `key` value, wh
 
 ### List API keys with the API
 
-The following Neon API method lists API keys for the your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listapikeys).
+The following Neon API method lists API keys for your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listapikeys).
 
 ```text
 GET /api_keys

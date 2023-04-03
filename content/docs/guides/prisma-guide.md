@@ -18,7 +18,7 @@ This guide steps you through how to connect from Prisma to Neon, how to use Pris
 ## Create a Neon project and copy the connection string
 
 1. In the Neon Console, click **Create a project** to open the **Project Creation** dialog.
-1. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
+1. Specify your project settings and click **Create Project**.
 
 The project is created and you are presented with a dialog that provides connection details. Copy the connection string, which looks similar to the following:
 
@@ -135,9 +135,9 @@ In this step, you will update the `datasource db` entry in your `schema.prisma` 
    ```
 
   <Admonition type="note">
-  Prisma [naming conventions](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#naming-conventions) recommend using PascalCase when defining models. However, be aware that the letter case in your Prisma schema is reflected in PostgreSQL identifier names. If an identifier name in PostgreSQL includes an upper case letter, you must quote the name when specifying it in a PostgreSQL query. For example, the `Elements` table has an upper case letter in its name. When querying this table in PostgreSQL, you must enclose `Elements` in quotes: `SELECT * FROM "Elements"`. Otherwise, the identifier name is folded to lower case and the query will not find the table.
+  Prisma [naming conventions](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#naming-conventions) recommend using PascalCase when defining models. However, be aware that the letter case in your Prisma schema is reflected in PostgreSQL identifier names. If an identifier name in PostgreSQL includes an upper case letter, you must quote the name when specifying it in a PostgreSQL query. For example, the `Elements` table has an upper case letter in its name. When querying this table in PostgreSQL, you must enclose `Elements` in quotes: `SELECT * FROM "Elements"`. Otherwise, the identifier name is changed to lowercase, and the query will not find the table.
 
-To name objects in your Prisma schema (and in the generated API) differently than they are named in your database, Prisma provides a mapping mechanism that you can use. For example, to map a model named "Elements" to table named "elements", you can use the `@@map` API attribute in your Prisma schema.
+To name objects in your Prisma schema (and in the generated API) differently than how they are named in your database, Prisma provides a mapping mechanism that you can use. For example, to map a model named "Elements" to table named "elements", you can use the `@@map` API attribute in your Prisma schema.
 
 For more information, see [Mapping collection/table and field/column names](https://www.prisma.io/docs/concepts/components/prisma-schema/names-in-underlying-database#mapping-collectiontable-and-fieldcolumn-names), in the _Prisma documentation_.
 </Admonition>
@@ -196,7 +196,7 @@ To view the `Elements` table that was created in your `neondb` database by the m
 1. Navigate to the [Neon console](https://console.neon.tech/).
 2. Select your project.
 3. Select **Tables**.
-4. Select the `neondb` database and default `public` schema. The `Elements` table should be visible in the sidebar. The table has no data at this point. Data will be added later in this guide.
+4. Select the `neondb` database and default `public` schema. The `Elements` table should be visible in the sidebar. The table has no data at this point. Data is added later in this guide.
 
 ## Evolve your schema with Prisma Migrate
 
@@ -258,7 +258,7 @@ You have a couple of options for adding data to the `Elements` table. You can ad
 INSERT INTO "Elements" VALUES  (10, 'Neon', 'Ne', 20.1797);
 ```
 
-To verify that data was added, run:
+To verify that data was added, run the following query:
 
 ```sql
 SELECT * FROM "Elements";
@@ -416,13 +416,13 @@ $ npx ts-node query.ts
 
 Instead of creating data models in your Prisma schema and using Prisma Migrate to create the tables in your database, as you did for the `Elements` table in the previous steps, you can use Prisma's [Introspection](https://www.prisma.io/docs/concepts/components/introspection) capability to generate data models from an existing database.
 
-Introspection is often used to generate an initial version of the data model when adding Prisma to an existing project, and may be more convenient than developing your data model manually, especially if you have numerous tables or tables with many columns.
+Introspection is often used to generate an initial version of the data model when adding Prisma to an existing project and may be more convenient than developing your data model manually, especially if you have numerous tables or tables with many columns.
 
-Another use case for Introspection is when using plain SQL for schema changes or a tool other than Prisma Migrate to perform schema migrations. In these cases, you might introspect your database after each schema change to re-generate your Prisma Client to reflect the changes in your Prisma Client API.
+Another use case for Introspection is when using plain SQL for schema changes or a tool other than Prisma Migrate to perform schema migrations. In these cases, you might introspect your database after each schema change to regenerate your Prisma Client to reflect the changes in your Prisma Client API.
 
 ### Create a schema in Neon
 
-Let's assume your database has an extended version of the `Elements` table that was used in the previous steps. This table is called `Elements_ext`. Let's create that table in the Neon SQL Editor:
+Let's assume your database has an extended version of the `Elements` table used in the previous steps. This table is called `Elements_ext`. Let's create that table in the Neon SQL Editor:
 
 1. Navigate to the [Neon console](https://console.neon.tech/).
 1. Select your project.
@@ -464,7 +464,7 @@ CREATE TABLE "Elements_ext" (
 ```
 
 <Admonition type="info">
-You can find the `Elements` and `Elements_ext` tables in Neon's example GitHub repository with a full sets of data that you can import and play around with. [Elements data set](https://github.com/neondatabase/examples/tree/main/elements_data_set).
+You can find the `Elements` and `Elements_ext` tables in Neon's example GitHub repository with a full set of data that you can import and play around with. [Elements data set](https://github.com/neondatabase/examples/tree/main/elements_data_set).
 </Admonition>
 
 ### Run prisma db pull
@@ -530,7 +530,7 @@ You can read more about this workflow in the Prisma documentation. See [Introspe
 
 ## Conclusion
 
-Congratulations! You have completed the _Use Prisma with Neon_ guide. To recap, you have learned how to connect from Prisma to Neon, how to use Prisma Migrate to evolve a schema, how to add data using the Neon SQL Editor and Prisma Studio, how to send queries using Prisma Client, and finally, how to introspect an existing database.
+You have completed the _Use Prisma with Neon_ guide. To recap, you have learned how to connect from Prisma to Neon, use Prisma Migrate to evolve a schema, add data using the Neon SQL Editor and Prisma Studio, send queries using Prisma Client, and finally, introspect an existing database.
 
 ## Need help?
 
