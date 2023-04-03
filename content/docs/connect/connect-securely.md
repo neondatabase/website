@@ -35,6 +35,10 @@ The choice of which mode to use depends on the specific security requirements of
 
 The required configuration for your connection depends on the client you are using.
 
+### Connect from the psql client
+
+To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable. For example, you can connect with `verify-full` by setting `PGSSLROOTCERT` to the location of your system's root certificates:
+
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
