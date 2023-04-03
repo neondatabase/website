@@ -94,7 +94,7 @@ Native client libraries:
 | JDBC              | Java        | &check;                                                      |
 | R2DBC             | Java        |                                                          |
 | node-postgres     | JavaScript  | &check; when `ssl: {'sslmode': 'require'}` option passed     |
-| postgres.js       | JavaScript  | &#x2717;                                                       |
+| postgres.js       | JavaScript  | &check; when `ssl: 'require'` option passed                                                |
 | pgmoon            | Lua         |                                                          |
 | asyncpg           | Python      | &check;                                                      |
 | pg8000            | Python      | &check; (requires [scramp >= v1.4.3](https://pypi.org/project/scramp/), which is included in [pg8000 v1.29.3](https://pypi.org/project/pg8000/) and higher)  |
