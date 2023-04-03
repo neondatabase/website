@@ -14,7 +14,7 @@ This is a Beta version of the Neon Vercel Integration. For assistance or to sugg
 
 Vercel [preview deployments](https://vercel.com/docs/concepts/deployments/preview-deployments) enable teams to collaborate effectively by automatically creating an isolated, production-like environment for every commit. This allows changes to be previewed before they are merged into production.
 
-However, when databases are involved, teams often use a single database containing dummy data for all previews deployments. This setup is not ideal for these reasons:
+However, when databases are involved, teams often use a single database containing dummy data for all preview deployments. This setup is not ideal for these reasons:
 
 - If the shared database encounters an issue, so will all preview deployments.
 - Changes to the shared database schema might break all previously created preview deployments, making it a productivity bottleneck.
@@ -66,7 +66,7 @@ To add the integration:
             - Reset the database user's password, enabling the integration to configure the environment variables that require a password.
             - Set environment variables for your Vercel project's production, development, and preview environments.
             - Create database branches for preview deployments.
-            - Create a development branch for your Vercel development environment (if you selected that option).
+            - Create a development branch for your Vercel development environment.
 
     ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
 
@@ -120,7 +120,7 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
      ![Neon preview deployment branch](/docs/guides/vercel_deployments.png)
    - The integration creates a database branch in Neon. This branch is an isolated copy-on-write clone of your production branch, with its own dedicated compute endpoint. The branch is created with the same name as your `git` branch.
      ![Neon preview deployment branch](/docs/guides/vercel_neon_app_update.png)
-   - The integration sets Vercel preview environment variables to connect the your preview deployment to the new database branch.
+   - The integration sets Vercel preview environment variables to connect the preview deployment to the new database branch.
      ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)
 
 <Admonition type="note">
@@ -131,7 +131,7 @@ The Neon Free Tier allows you to create up to 10 branches. To avoid running out 
 
 If you already added the Neon Vercel integration to a Vercel project and want to add it to another Vercel project, complete the following steps:
 
-1. Ensure that the the Neon Vercel integration that you added previously has access to the Vercel project.
+1. Ensure that the Neon Vercel integration that you added previously has access to the Vercel project.
    1. On the Vercel Dashboard, select **Integrations**.
    1. Find the Neon Postgres integration, and select **Manage**.
    1. On the Neon Postgres integration page, select **Manage Access** and make sure that the Neon integration has access to the Vercel project. You can do so by granting access to **All Projects** or by selecting **Specific Projects** and choosing a Vercel project. If you previously granted access to all projects, no change is necessary.
