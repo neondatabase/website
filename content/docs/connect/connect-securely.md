@@ -17,7 +17,7 @@ When connecting to Neon or any PostgreSQL database, the `sslmode` parameter sett
 postgres://sally:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?sslmode=verify-full
 ```
 
-Neon permits specifying the following `sslmode` settings, in order of least to most secure.
+Neon supports the following `sslmode` settings, in order of least to most secure.
 
 | sslmode | Description |
 | --- | --- |
