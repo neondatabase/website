@@ -14,7 +14,7 @@ import ThumbIcon from 'icons/thumb.inline.svg';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const PROJECT_STORAGE_PRICE = 0.000164;
-const PROJECT_STORAGE_HOURS = 24 * (3600 / 3600);
+const PROJECT_STORAGE_HOURS = 24;
 const DATA_TRANSFER_PRICE = 0.09;
 const WRITTEN_DATA_PRICE = 0.096;
 const PERCENTAGE_OF_MONTHLY_COST = 0.1;
@@ -22,8 +22,8 @@ const AVERAGE_DAYS_IN_MONTH = 30.416666;
 
 const COMPUTE_UNITS_VALUES = {
   min: 0.25,
-  max: 32,
-  step: 1,
+  max: 8,
+  step: 0.25,
   default: 1,
 };
 
@@ -40,6 +40,16 @@ const STORAGE_VALUES = {
   default: 50,
 };
 
+const calculateComputeCost = (computeUnits, activeTime) =>
+  computeUnits * activeTime * COMPUTE_TIME_PRICE * AVERAGE_DAYS_IN_MONTH;
+
+const calculateStorageCost = (storageValue) =>
+  storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE * AVERAGE_DAYS_IN_MONTH;
+
+const calculateDataTransferCost = (dataTransferValue) => dataTransferValue * DATA_TRANSFER_PRICE;
+
+const calculateWrittenDataCost = (writtenDataValue) => writtenDataValue * WRITTEN_DATA_PRICE;
+
 const Calculator = () => {
   const [isAdvanced, setIsAdvanced] = useState(false);
   const [computeUnits, setComputeUnits] = useState(COMPUTE_UNITS_VALUES.default);
@@ -50,21 +60,21 @@ const Calculator = () => {
   const [writtenAndTransferDataCost, setWrittenAndTransferDataCost] = useState(0);
 
   const computeTimeCost = useMemo(
-    () => computeUnits * activeTime * COMPUTE_TIME_PRICE * AVERAGE_DAYS_IN_MONTH,
-    [activeTime, computeUnits]
+    () => calculateComputeCost(computeUnits, activeTime),
+    [computeUnits, activeTime]
   );
 
-  const storageCost = useMemo(
-    () => storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE * AVERAGE_DAYS_IN_MONTH,
-    [storageValue]
-  );
+  const storageCost = useMemo(() => calculateStorageCost(storageValue), [storageValue]);
 
   const dataTransferCost = useMemo(
-    () => dataTransferValue * DATA_TRANSFER_PRICE,
+    () => calculateDataTransferCost(dataTransferValue),
     [dataTransferValue]
   );
 
-  const writtenDataCost = useMemo(() => writtenDataValue * WRITTEN_DATA_PRICE, [writtenDataValue]);
+  const writtenDataCost = useMemo(
+    () => calculateWrittenDataCost(writtenDataValue),
+    [writtenDataValue]
+  );
 
   const totalCost = useMemo(
     () => computeTimeCost + storageCost + writtenAndTransferDataCost,
@@ -73,7 +83,7 @@ const Calculator = () => {
 
   const estimatedPrice = useMemo(
     () =>
-      computeUnits > 8 || storageValue >= 200 || totalCost >= 420
+      computeUnits >= 8 || storageValue >= 200 || totalCost >= 420
         ? 'Custom'
         : `$${totalCost.toFixed(2)}`,
     [computeUnits, storageValue, totalCost]
