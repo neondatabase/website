@@ -264,7 +264,7 @@ A feature of the Neon Console that enables running queries on a Neon database. T
 
 ### start_compute
 
-A Neon Control Plane operation that starts a compute endpoint when there is an event or action that requires compute resources. For example, connecting to a suspended compute endpoint initiates this operation. See [Operations](https://neon.tech/docs/manage/operations) for more information.
+A Neon Control Plane operation that starts a compute endpoint when there is an event or action that requires compute resources. For example, connecting to a suspended compute endpoint initiates this operation. See [Operations](https://neon.tech/docs/manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](dprice-add-operation-glossary-entries).
 
 ### Storage
 
@@ -272,7 +272,7 @@ Where data is recorded and stored. Neon storage consists of Pageservers, which s
 
 ### suspend_compute
 
-A Neon Control Plane operation that suspends a compute endpoint after a period of inactivity. For information about how Neon manages compute resources, see Compute lifecycle. See [Operations](https://neon.tech/docs/manage/operations) for more information.
+A Neon Control Plane operation that suspends a compute endpoint after a period of inactivity. See [Operations](https://neon.tech/docs/manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](dprice-add-operation-glossary-entries).
 
 ### Technical Preview
 
