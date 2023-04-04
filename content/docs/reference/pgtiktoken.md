@@ -6,76 +6,92 @@ enableTableOfContents: true
 
 The `pg_tiktoken` extension enables fast and efficient tokenization of data in your PostgreSQL database using OpenAI's [tiktoken](https://github.com/openai/tiktoken) library.
 
-This topic guides you through the process of using the `pg_tiktoken` extension. It demonstrate how to install the extension, use the `tiktoken_count` and `tiktoken_encode` functions, and manage text tokens efficiently.
+This topic guides you through using the `pg_tiktoken` extension. It demonstrate how to install the extension, use the `tiktoken_count` and `tiktoken_encode` functions, and manage text tokens efficiently.
 
 ## What is a token?
 
-Language models process text in units called tokens. In English, a token can be as short as a single character or as long as a complete word, such as "a" or "apple." In some languages, tokens may comprise less than a single character or even extend beyond a single word.
+Language models process text in units called tokens. A token can be as short as a single character or as long as a complete word, such as "a" or "apple." In some languages, tokens may comprise less than a single character or even extend beyond a single word.
 
-For example, consider the sentence "Neon is Serverless Postgres." It can be divided into seven tokens: ["Ne", "on", "is", "Server", "less", "Post", "gres"].
+For example, consider the sentence "Neon is serverless Postgres." It can be divided into seven tokens: ["Ne", "on", "is", "server", "less", "Post", "gres"].
 
 ## What problem does pg_tiktoken solve?
 
-The `pg_tiktoken` extension makes it easy to tokenize text data in a PostgreSQL database. The extension offers two key functions:
+The `pg_tiktoken` extension makes it easy to tokenize text data stored in a PostgreSQL database. The extension offers two key functions:
 
-- `tiktoken_encode`: Simplifies tokenization by accepting text inputs and returning tokenized outputs. This functionality allows users to seamlessly tokenize their text data, facilitating analysis and various use cases.
-- `tiktoken_count`: Determines the number of tokens in a given text. This feature is particularly useful for adhering to text length limitations, such as those set by OpenAI's language models. 
-
-By leveraging these functions, `pg_tiktoken` effectively simplifies text data tokenization and management within Postgres databases.
+- `tiktoken_encode`: Simplifies tokenization by accepting text inputs and returning tokenized outputs, allowing you to seamlessly tokenize your text data.
+- `tiktoken_count`: Determines the number of tokens in a given text. This feature is particularly useful for adhering to text length limitations, such as those set by OpenAI's language models.
 
 ## Installing the pg_tiktoken extension
 
-You can enable the `pg_tiktoken` extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
+You can install the `pg_tiktoken` extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
 
 ```sql
 CREATE EXTENSION pg_tiktoken
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
+For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
 
-## Using the tiktoken_encode Function
+## Using the tiktoken_encode function
 
-The `tiktoken_encode` function tokenizes text inputs and returns a tokenized output, simplifying the analysis and processing of text data. Like `tiktoken_count`, the function also accepts both encoding names and OpenAI model names as the first argument:
+The `tiktoken_encode` function tokenizes text inputs and returns a tokenized output. The function accepts both encoding names and OpenAI model names as the first argument and the text to tokenize as the second argument, as shown:
 
 ```sql
 SELECT tiktoken_encode('text-davinci-003', 'The universe is a vast and captivating mystery, waiting to be explored and understood.');
-tiktoken_encode
 
----------------
-
-{464,6881,318,257,5909,290,3144,39438,10715,11,4953,284,307,18782,290,7247,13}
+tiktoken_encode 
+--------------------------------------------------------------------------------
+ {464,6881,318,257,5909,290,3144,39438,10715,11,4953,284,307,18782,290,7247,13}
+(1 row)
 ```
 
-This will tokenize the input text using the BPE algorithm and return the tokenized output.
+The `tiktoken_encode` function tokenizes the text using the [Byte Pair Encoding (BPE)](https://en.wikipedia.org/wiki/Byte_pair_encoding) algorithm.
 
-The `tiktoken_count` function return the number of tokens in a text:
+## Using the tiktoken_count function
+
+The `tiktoken_count` function returns the number of tokens in a text:
 
 ```sql
-SELECT tiktoken_count('text-davinci-003', 'The universe is a vast and captivating mystery, waiting to be explored and understood.');
+neondb=> SELECT tiktoken_count('text-davinci-003', 'The universe is a vast and captivating mystery, waiting to be explored and understood.');
 
-tiktoken_count
-
----------------
-
-17
+ tiktoken_count 
+----------------
+             17
+(1 row)
 ```
 
-## Integrating pg_tiktoken with the ChatGPT Model
+## Supported models
 
-The pg_tiktoken extension allows you to store message history in a Postgres database and retrieve messages that comply with OpenAI's model limitations.
+The `tiktoken_count` and `tiktoken_encode` functions accept both encoding and OpenAI model names as the first argument:
 
-For example, consider the "message" table below:
+```text
+tiktoken_count(<encoding or model>,<text>)
+```
+
+The following models are supported:
+
+| Encoding name      | OpenAI models                                      |
+|:-------------------|:---------------------------------------------------|
+| cl100k_base        | ChatGPT models, text-embedding-ada-002            |
+| p50k_base          | Code models, text-davinci-002, text-davinci-003    |
+| p50k_edit          | Use for edit models like text-davinci-edit-001, code-davinci-edit-001 |
+| r50k_base (or gpt2)| GPT-3 models like davinci                         |
+
+## Integrating pg_tiktoken with the ChatGPT model
+
+The `pg_tiktoken` extension allows you to store your chat message history in a PostgreSQL database and retrieve messages that comply with OpenAI's model limitations.
+
+For example, consider the `message` table below:
 
 ```sql
 CREATE TABLE message (
-  role VARCHAR(50) NOT NULL, -- corresponds to 'system', 'user', or 'assistant'
+  role VARCHAR(50) NOT NULL, -- equals to 'system', 'user' or 'assistant'
   content TEXT NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT NOW(),
   n_tokens INTEGER -- number of content tokens
 );
 ```
 
-The gpt-3.5-turbo model requires specific parameters:
+The [gpt-3.5-turbo chat model](https://platform.openai.com/docs/guides/chat/introduction) requires specific parameters:
 
 ```json
 {
@@ -88,20 +104,20 @@ The gpt-3.5-turbo model requires specific parameters:
 }
 ```
 
-The "messages" parameter is an array of message objects, with each object containing two crucial pieces of information: the role of the message sender (either "system," "user," or "assistant") and the actual message content. Conversations can be brief, with just one message, or span multiple pages as long as the combined message tokens do not exceed the 4096-token limit.
+The `messages` parameter is an array of message objects, with each object containing two pieces of information: The `role` of the message sender (either `system`, `user`, or `assistant`) and the actual message `content`. Conversations can be brief, with just one message, or span multiple pages as long, as the combined message tokens do not exceed the 4096-token limit.
 
-To insert role, content, and the number of tokens into the database, use the following query:
+To insert `role`, `content`, and the number of tokens into the database, use the following query:
 
 ```sql
 INSERT INTO message (role, content, n_tokens)
-VALUES ('user', 'Hello, how are you?', tiktoken_count('Hello, how are you?'));
+VALUES ('user', 'Hello, how are you?', tiktoken_count('text-davinci-003','Hello, how are you?'));
 ```
 
 ## Managing Text Tokens
 
-When a conversation contains more tokens than a model can process (e.g., over 4096 tokens for gpt-3.5-turbo), you'll need to truncate the text to fit within the model's limit. However, note that if you remove a message from the conversation, the model will lose knowledge of it.
+When a conversation contains more tokens than a model can process (e.g., over 4096 tokens for `gpt-3.5-turbo`), you will need to truncate the text to fit within the model's limit. However,t if you remove a message from the conversation, the model will lose knowledge of it.
 
-Additionally, lengthy conversations may result in incomplete replies. For example, if a gpt-3.5-turbo conversation spans 4090 tokens, the response will be limited to just six tokens.
+Additionally, lengthy conversations may result in incomplete replies. For example, if a `gpt-3.5-turbo` conversation spans 4090 tokens, the response will be limited to just six tokens.
 
 The following query retrieves messages up to your desired token limits:
 
@@ -117,13 +133,13 @@ FROM cte
 WHERE cumulative_sum <= <MAX_HISTORY_TOKENS>;
 ```
 
-`MAX_HISTORY_TOKENS` represents the conversation history to maintain for chat completion, following this formula:
+`<MAX_HISTORY_TOKENS>` represents the conversation history to maintain for chat completion, following this formula:
 
 ```text
 MAX_HISTORY_TOKENS = MODEL_MAX_TOKENS – NUM_SYSTEM_TOKENS – NUM_COMPLETION_TOKENS
 ```
 
-For example, let's assume the desired completion length is 100 tokens (`NUM_COMPLETION_TOKENS=90`).
+For example, assume the desired completion length is 100 tokens (`NUM_COMPLETION_TOKENS=90`).
 
 ```text
 MAX_HISTORY_TOKENS = 4096 – 6 – 90 = 4000
@@ -145,26 +161,9 @@ MAX_HISTORY_TOKENS = 4096 – 6 – 90 = 4000
 }
 ```
 
-## Supported Models
-
-The `tiktoken_count` and `tiktoken_encode` functions accept both encoding and OpenAI model names as the first argument:
-
-```text
-tiktoken_count(<encoding or model>,<text>)
-```
-
-The following models are supported:
-
-| Encoding name      | OpenAI models                                      |
-|:-------------------|:---------------------------------------------------|
-| cl100k_base        | ChatGPT models, text-embedding-ada-002            |
-| p50k_base          | Code models, text-davinci-002, text-davinci-003    |
-| p50k_edit          | Use for edit models like text-davinci-edit-001, code-davinci-edit-001 |
-| r50k_base (or gpt2)| GPT-3 models like davinci                         |
-
 ## Conclusion
 
-The `pg_tiktoken` extension offers fast and efficient tokenization within PostgreSQL databases, simplifying the analysis and processing of text data for various applications. We demonstrated how to use `tiktoken_count` to retrieve messages that fit within OpenAI's model limits and avoid failing API calls. By incorporating the `pg_tiktoken` extension into your database, you can streamline your natural language processing tasks and improve your application's efficiency.
+The `pg_tiktoken` extension offers fast and efficient tokenization within PostgreSQL databases, simplifying the analysis and processing of text data. We demonstrated how to use `tiktoken_count` to retrieve messages that fit within OpenAI's model limits and avoid failing API calls. By incorporating the `pg_tiktoken` extension into your database, you can streamline your natural language processing tasks and improve your application's efficiency.
 
 As you explore the capabilities of the `pg_tiktoken extension`, we encourage you to provide feedback and suggest features you'd like to see added in future updates. We look forward to seeing the innovative natural language processing applications you create using `pg_tiktoken`.
 
