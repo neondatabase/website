@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 The `pg_tiktoken` extension enables fast and efficient tokenization of data in your PostgreSQL database using OpenAI's [tiktoken](https://github.com/openai/tiktoken) library.
 
-This topic guides you through using the `pg_tiktoken` extension. It demonstrate how to install the extension, use the `tiktoken_count` and `tiktoken_encode` functions, and manage text tokens efficiently.
+This topic describes how to install the extension, use its functions for tokenization and token management, and how you can use the extension with ChatGPT models.
 
 ## What is a token?
 
@@ -14,9 +14,9 @@ Language models process text in units called tokens. A token can be as short as 
 
 For example, consider the sentence "Neon is serverless Postgres." It can be divided into seven tokens: ["Ne", "on", "is", "server", "less", "Post", "gres"].
 
-## What problem does pg_tiktoken solve?
+## pg_tiktoken functions
 
-The `pg_tiktoken` extension makes it easy to tokenize text data stored in a PostgreSQL database. The extension offers two key functions:
+The `pg_tiktoken` offers two functions:
 
 - `tiktoken_encode`: Simplifies tokenization by accepting text inputs and returning tokenized outputs, allowing you to seamlessly tokenize your text data.
 - `tiktoken_count`: Determines the number of tokens in a given text. This feature is particularly useful for adhering to text length limitations, such as those set by OpenAI's language models.
@@ -33,7 +33,7 @@ For information about using the Neon **SQL Editor**, see [Query with Neon's SQL 
 
 ## Using the tiktoken_encode function
 
-The `tiktoken_encode` function tokenizes text inputs and returns a tokenized output. The function accepts both encoding names and OpenAI model names as the first argument and the text to tokenize as the second argument, as shown:
+The `tiktoken_encode` function tokenizes text inputs and returns a tokenized output. The function accepts encoding names and OpenAI model names as the first argument and the text you want to tokenize as the second argument, as shown:
 
 ```sql
 SELECT tiktoken_encode('text-davinci-003', 'The universe is a vast and captivating mystery, waiting to be explored and understood.');
@@ -48,7 +48,7 @@ The `tiktoken_encode` function tokenizes the text using the [Byte Pair Encoding 
 
 ## Using the tiktoken_count function
 
-The `tiktoken_count` function returns the number of tokens in a text:
+The `tiktoken_count` function returns the number of tokens in a text. The function accepts encoding names and OpenAI model names as the first argument and the text you want to count tokens for as the second argument, as shown:
 
 ```sql
 neondb=> SELECT tiktoken_count('text-davinci-003', 'The universe is a vast and captivating mystery, waiting to be explored and understood.');
@@ -76,7 +76,7 @@ The following models are supported:
 | p50k_edit          | Use for edit models like text-davinci-edit-001, code-davinci-edit-001 |
 | r50k_base (or gpt2)| GPT-3 models like davinci                         |
 
-## Integrating pg_tiktoken with the ChatGPT model
+## Integrate pg_tiktoken with ChatGPT models
 
 The `pg_tiktoken` extension allows you to store your chat message history in a PostgreSQL database and retrieve messages that comply with OpenAI's model limitations.
 
@@ -113,9 +113,9 @@ INSERT INTO message (role, content, n_tokens)
 VALUES ('user', 'Hello, how are you?', tiktoken_count('text-davinci-003','Hello, how are you?'));
 ```
 
-## Managing Text Tokens
+## Managing text tokens
 
-When a conversation contains more tokens than a model can process (e.g., over 4096 tokens for `gpt-3.5-turbo`), you will need to truncate the text to fit within the model's limit. However,t if you remove a message from the conversation, the model will lose knowledge of it.
+When a conversation contains more tokens than a model can process (e.g., over 4096 tokens for `gpt-3.5-turbo`), you will need to truncate the text to fit within the model's limit.
 
 Additionally, lengthy conversations may result in incomplete replies. For example, if a `gpt-3.5-turbo` conversation spans 4090 tokens, the response will be limited to just six tokens.
 
@@ -133,7 +133,7 @@ FROM cte
 WHERE cumulative_sum <= <MAX_HISTORY_TOKENS>;
 ```
 
-`<MAX_HISTORY_TOKENS>` represents the conversation history to maintain for chat completion, following this formula:
+`<MAX_HISTORY_TOKENS>` represents the conversation history you want to keep for chat completion, following this formula:
 
 ```text
 MAX_HISTORY_TOKENS = MODEL_MAX_TOKENS – NUM_SYSTEM_TOKENS – NUM_COMPLETION_TOKENS
@@ -163,7 +163,7 @@ MAX_HISTORY_TOKENS = 4096 – 6 – 90 = 4000
 
 ## Conclusion
 
-The `pg_tiktoken` extension offers fast and efficient tokenization within PostgreSQL databases, simplifying the analysis and processing of text data. We demonstrated how to use `tiktoken_count` to retrieve messages that fit within OpenAI's model limits and avoid failing API calls. By incorporating the `pg_tiktoken` extension into your database, you can streamline your natural language processing tasks and improve your application's efficiency.
+The `pg_tiktoken` extension offers fast and efficient tokenization and token management for data stored in your PostgreSQL database. By incorporating the `pg_tiktoken` extension into your database, you can streamline your natural language processing tasks.
 
 As you explore the capabilities of the `pg_tiktoken extension`, we encourage you to provide feedback and suggest features you'd like to see added in future updates. We look forward to seeing the innovative natural language processing applications you create using `pg_tiktoken`.
 
@@ -172,3 +172,7 @@ As you explore the capabilities of the `pg_tiktoken extension`, we encourage you
 - [Open AI tiktoken source code on GitHub](https://github.com/openai/tiktoken)
 - [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
 - [Announcing pg_tiktoken: A Postgres Extension for Fast BPE Tokenization](https://neon.tech/blog/announcing-pg_tiktoken-a-postgres-extension-for-fast-bpe-tokenization)
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
