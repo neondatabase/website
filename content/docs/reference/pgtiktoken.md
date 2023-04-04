@@ -1,12 +1,12 @@
 ---
 title: The pg_tiktoken extension
-subtitle: Efficiently tokenize data and manage tokens in your PostgreSQL database
+subtitle: Efficiently tokenize data in your PostgreSQL database using OpenAI's `tiktoken` library
 enableTableOfContents: true
 ---
 
-`pg_tiktoken` is a PostgreSQL extension that enables efficient tokenization using OpenAI's `tiktoken` library, based on the [Byte Pair Encoding (BPE)](https://en.wikipedia.org/wiki/Byte_pair_encoding) algorithm. This plugin is designed to streamline natural language processing tasks within your PostgreSQL database.
+`pg_tiktoken` is a PostgreSQL extension that enables fast and efficient tokenization of data in your PostgreSQL database using OpenAI's [tiktoken](https://github.com/openai/tiktoken) library.
 
-This article will guide you through the process of using the `pg_tiktoken` extension, illustrating its capabilities with examples. We will demonstrate how to install the extension, use the `tiktoken_count` and `tiktoken_encode` functions, and manage text tokens efficiently.
+This topic guides you through the process of using the `pg_tiktoken` extension, illustrating its capabilities with examples. It demonstrate how to install the extension, use the `tiktoken_count` and `tiktoken_encode` functions, and manage text tokens efficiently.
 
 ## What is a token?
 
@@ -16,11 +16,12 @@ For example, consider the sentence "Neon is Serverless Postgres." It can be divi
 
 ## What problem does pg_tiktoken solve?
 
-The `pg_tiktoken` extension addresses the challenge of tokenizing text data within a PostgreSQL database. By offering two key functions, `tiktoken_encode` and `tiktoken_count`, it streamlines the process of analyzing and processing text data for a range of applications.
+The `pg_tiktoken` extension makes it easy to tokenize text data in a PostgreSQL database. The extension offers two key functions:
 
-The `tiktoken_encode` function simplifies tokenization by accepting text inputs and returning tokenized outputs. This functionality allows users to seamlessly tokenize their text data, facilitating analysis and various use cases.
+- `tiktoken_encode`: Simplifies tokenization by accepting text inputs and returning tokenized outputs. This functionality allows users to seamlessly tokenize their text data, facilitating analysis and various use cases.
+- `tiktoken_count`: Determines the number of tokens in a given text. This feature is particularly useful for adhering to text length limitations, such as those set by OpenAI's language models. 
 
-The `tiktoken_count` function provides users with the ability to determine the number of tokens in a given text. This feature proves particularly useful for adhering to text length limitations, such as those set by OpenAI's language models. By leveraging these functions, `pg_tiktoken` effectively simplifies text data tokenization and management within Postgres databases.
+By leveraging these functions, `pg_tiktoken` effectively simplifies text data tokenization and management within Postgres databases.
 
 ## Installing the pg_tiktoken extension
 
