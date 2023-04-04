@@ -12,6 +12,6 @@ On June 15th, 2022, the Neon team announced the **Technical Preview**, making Ne
 
 On December 6th, 2022, Neon released its branching feature and dropped the invite gate, welcoming everyone to try Neon's Free Tier.
 
-On March 15th, 2023, Neon launched paid tiers, proving increased storage and compute limits and access to added features. For more information about Neon's paid-tier plans, refer to our [Pricing](https://neon.tech/pricing) page.
+On March 15th, 2023, Neon launched paid plans, providing increased limits and added features, including _Project sharing_ and _Autoscaling_. For information about Neon's paid  plans, refer to our [Pricing](https://neon.tech/pricing) page.
 
 Support for more regions and additional features will be released in the coming months.
