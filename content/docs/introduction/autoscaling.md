@@ -18,7 +18,7 @@ A Beta version of Neon's Autoscaling feature is now available for [paid plan](ht
 
 ## How to enable Autoscaling
 
-The Autoscaling feature can be enabled when creating a Neon project or by editing a compute endpoint. For instructions, see:
+The Autoscaling feature can be enabled when creating a Neon project. For existing projects, you can enable Autoscaling by editing a compute endpoint. For instructions, see:
 
 - [Create a project](/docs/manage/projects#create-a-project)
 - [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint)
