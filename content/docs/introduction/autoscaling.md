@@ -4,7 +4,7 @@ subtitle: Learn how Neon automatically and transparently scales compute on deman
 enableTableOfContents: true
 ---
 
-Neon's Autoscaling feature dynamically adjusts the allocation of vCPU and RAM for a Neon compute instance in response to the current load, eliminating the need for manual intervention.
+A Beta version of Neon's Autoscaling feature is now available for [paid plan](https://neon.tech/docs/introduction/billing#neon-plans) users in selected regions. The Autoscaling feature dynamically adjusts the allocation of vCPU and RAM for a Neon compute endpoint in response to the current load, eliminating the need for manual intervention.
 
 ## Benefits of Autoscaling
 
@@ -15,6 +15,13 @@ Neon's Autoscaling feature dynamically adjusts the allocation of vCPU and RAM fo
 - Streamlined management: By minimizing the need for manual intervention, autoscaling simplifies the maintenance and monitoring process for development teams.
 - Cost effectiveness: Autoscaling optimizes resource utilization, ensuring that organizations pay only for the resources they genuinely require, rather than over-provisioning for peak loads.
 - Range-bound scaling: Autoscaling operates within a predefined range of vCPU and RAM, providing reassurance that your compute resources do not scale indefinitely.
+
+## How to enable Autoscaling
+
+The Autoscaling feature can be enabled when creating a Neon project or by editing a compute endpoint. For instructions, see:
+
+- [Create a project](/docs/manage/projects#create-a-project).
+- [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
 ## How Autoscaling works
 
@@ -28,7 +35,7 @@ Focusing more closely, each PostgreSQL instance operates within its own virtual 
 
 ![Autoscaling diagram](/docs/introduction/autoscale-architecture.webp)
 
-## Autoscaling agent
+### Autoscaling agent
 
 Each Kubernetes node hosts a single instance of the autoscaler-agent, which serves as the control mechanism for the autoscaling system. The agent collects metrics from the VMs on its node, makes scaling decisions, and performs the necessary checks and requests to implement those decisions.
 
@@ -45,13 +52,13 @@ However, potential conflicts may arise if the Kubernetes scheduler assigns tasks
 
 Neon treats the Kubernetes' scheduler as the single source of truth for resource allocation. The autoscaler-agent must obtain approval for all upscaling from the scheduler. With the scheduler maintaining a global view of all resource usage changes and requiring pre-approval for any additional resource usage (either via the autoscaler-agent or standard scheduling), it assumes responsibility for preventing overcommitting. In the rare event that a node exhausts its resources, new pods will not be scheduled on that node, and the autoscaler-agent will be denied permission to allocate more resources for its VMs.
 
-## Handling VMs with NeonVM
+### Handling VMs with NeonVM
 
 Kubernetes does not inherently support the creation or management of VMs. To address this limitation, Neon uses a tool called [NeonVM](https://github.com/neondatabase/autoscaling/tree/main/neonvm). Similar to other VMs-in-Kubernetes projects, NeonVM offers a custom resource definition and controller for VMs, handling more intricate tasks related to VMs, such as adding or removing CPUs and memory. Internally, NeonVM utilizes [QEMU](https://www.qemu.org/) and [KVM](https://www.linux-kvm.org/page/Main_Page) (when available) to achieve near-native performance.
 
 Consequently, when the autoscaler-agent needs to modify a VM's resource allocation, it simply updates the corresponding NeonVM object in Kubernetes. The VM controller then manages the rest of the process.
 
-## Live migration
+### Live migration
 
 Despite the measures described thus far, it remains feasible for a Kubernetes node to become saturated. Under such circumstances, accommodating scaling requests would be impossible until other VMs scaled down. This outcome is undesirable, necessitating an alternative solution, which NeonVM fortunately provides.
 
@@ -59,7 +66,7 @@ QEMU, among other hypervisors, offers the capability to "live migrate" a VM, ena
 
 NeonVM manages this entire process, allowing for the proactive reduction of node load by migrating VMs away before reaching capacity. Although it is still possible for the node to fill up in the interim, the separation of storage and compute implies that the VMs typically have minimal disk usage, resulting in faster migrations. Without this feature, network bandwidth limitations could significantly hinder the process of creating space for new VMs.
 
-## Memory scaling
+### Memory scaling
 
 Memory management presents additional challenges, as it is slightly more complex to handle than CPU usage. When a VM experiences a sudden spike in CPU usage, the worst-case scenario typically involves increased query latencies. However, a sudden increase in memory usage might result in PostgreSQL being terminated by the Linux kernel due to memory exhaustion, causing an abrupt termination of all ongoing queries.
 
@@ -69,7 +76,7 @@ Memory consumption can escalate rapidly. Relying solely on the autoscaler-agent'
 
 When the cgroup `memory.high` signal is activated, the vm-informant temporarily freezes the cgroup (halting Postgres) to prevent further allocations and requests additional memory from the autoscaler-agent. The autoscaler-agent then seeks memory from the scheduler and NeonVM. If memory is allocated swiftly, the cgroup is unfrozen, allowing Postgres to resume execution. The vm-informant will also lift the freeze after a brief timeout (currently 20ms) if memory was not made available in time. Any duration spent waiting while the Postgres cgroup is frozen will introduce latency to ongoing and future queries.
 
-## Local File Cache
+### Local File Cache
 
 As a final enhancement to expedite queries, a Postgres extension has been incorporated to introduce a cache in front of the storage layer. 
 Numerous queries can substantially benefit from increased memory, particularly those necessitating multiple database scans (such as creating an index). The local file cache capitalizes on any additional memory allocated to the VM by dedicating a portion of it to the cache. The cache is stored in a single file within a `tmpfs` to minimize disk usage, with entries maintained as 1 MB chunks and evicted using a Least Recently Used (LRU) policy. Due to the storage model, writebacks are not required, resulting in near-instant evictions.
