@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 The `pg_tiktoken` extension enables fast and efficient tokenization of data in your PostgreSQL database using OpenAI's [tiktoken](https://github.com/openai/tiktoken) library.
 
-This topic describes how to install the extension, use its functions for tokenization and token management, and how you can use the extension with ChatGPT models.
+This topic describes how to install the extension, use its functions for tokenization and token management, and how to use the extension with ChatGPT models.
 
 ## What is a token?
 
@@ -18,8 +18,8 @@ For example, consider the sentence "Neon is serverless Postgres." It can be divi
 
 The `pg_tiktoken` offers two functions:
 
-- `tiktoken_encode`: Simplifies tokenization by accepting text inputs and returning tokenized outputs, allowing you to seamlessly tokenize your text data.
-- `tiktoken_count`: Determines the number of tokens in a given text. This feature is particularly useful for adhering to text length limitations, such as those set by OpenAI's language models.
+- `tiktoken_encode`: Accepts text inputs and returns tokenized output, allowing you to seamlessly tokenize your text data.
+- `tiktoken_count`: Counts the number of tokens in a given text. This feature helps you adhere to text length limits, such as those set by OpenAI's language models.
 
 ## Installing the pg_tiktoken extension
 
@@ -33,7 +33,7 @@ For information about using the Neon **SQL Editor**, see [Query with Neon's SQL 
 
 ## Using the tiktoken_encode function
 
-The `tiktoken_encode` function tokenizes text inputs and returns a tokenized output. The function accepts encoding names and OpenAI model names as the first argument and the text you want to tokenize as the second argument, as shown:
+The `tiktoken_encode` function tokenizes text input and returns a tokenized output. The function accepts encoding names and OpenAI model names as the first argument and the text you want to tokenize as the second argument, as shown:
 
 ```sql
 SELECT tiktoken_encode('text-davinci-003', 'The universe is a vast and captivating mystery, waiting to be explored and understood.');
@@ -44,11 +44,11 @@ tiktoken_encode
 (1 row)
 ```
 
-The `tiktoken_encode` function tokenizes the text using the [Byte Pair Encoding (BPE)](https://en.wikipedia.org/wiki/Byte_pair_encoding) algorithm.
+The function tokenizes text using the [Byte Pair Encoding (BPE)](https://en.wikipedia.org/wiki/Byte_pair_encoding) algorithm.
 
 ## Using the tiktoken_count function
 
-The `tiktoken_count` function returns the number of tokens in a text. The function accepts encoding names and OpenAI model names as the first argument and the text you want to count tokens for as the second argument, as shown:
+The `tiktoken_count` function counts the number of tokens in a text. The function accepts encoding names and OpenAI model names as the first argument and text as the second argument, as shown:
 
 ```sql
 neondb=> SELECT tiktoken_count('text-davinci-003', 'The universe is a vast and captivating mystery, waiting to be explored and understood.');
@@ -69,7 +69,7 @@ tiktoken_count(<encoding or model>,<text>)
 
 The following models are supported:
 
-| Encoding name      | OpenAI models                                      |
+| Encoding name      | OpenAI model                                      |
 |:-------------------|:---------------------------------------------------|
 | cl100k_base        | ChatGPT models, text-embedding-ada-002            |
 | p50k_base          | Code models, text-davinci-002, text-davinci-003    |
@@ -78,7 +78,7 @@ The following models are supported:
 
 ## Integrate pg_tiktoken with ChatGPT models
 
-The `pg_tiktoken` extension allows you to store your chat message history in a PostgreSQL database and retrieve messages that comply with OpenAI's model limitations.
+The `pg_tiktoken` extension allows you to store chat message history in a PostgreSQL database and retrieve messages that comply with OpenAI's model limitations.
 
 For example, consider the `message` table below:
 
@@ -104,7 +104,7 @@ The [gpt-3.5-turbo chat model](https://platform.openai.com/docs/guides/chat/intr
 }
 ```
 
-The `messages` parameter is an array of message objects, with each object containing two pieces of information: The `role` of the message sender (either `system`, `user`, or `assistant`) and the actual message `content`. Conversations can be brief, with just one message, or span multiple pages as long, as the combined message tokens do not exceed the 4096-token limit.
+The `messages` parameter is an array of message objects, with each object containing two pieces of information: The `role` of the message sender (either `system`, `user`, or `assistant`) and the actual message `content`. Conversations can be brief, with just one message, or span multiple pages as long as the combined message tokens do not exceed the 4096-token limit.
 
 To insert `role`, `content`, and the number of tokens into the database, use the following query:
 
