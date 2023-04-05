@@ -42,19 +42,15 @@ To create a table for storing vectors, use the following SQL command, adjusting 
 ```sql
 CREATE TABLE items (
   id BIGSERIAL PRIMARY KEY,
-  embedding VECTOR(1536)
+  embedding VECTOR(3)
 );
 ```
 
-This command generates a table named `items` with an `embedding` column capable of storing vectors with 1536 dimensions.
-
-<Admonition type="note">
-OpenAI uses 1536 tokens in their `text-embedding-ada-002` model to represent each piece of text, which creates more accurate embeddings for natural language processing tasks. For more information, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
-</Admonition>
+This command generates a table named `items` with an `embedding` column capable of storing vectors with 3 dimensions. OpenAI's  `text-embedding-ada-002` model supports 1536 dimensions for each piece of text, which creates more accurate embeddings for natural language processing tasks. For more information, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
 
 ## Storing vectors and embeddings
 
-Once you have generated an embedding using a service like the OpenAI API, you can store the resulting vector in the database. Using a PostgreSQL client library in your preferred programming language, execute an `INSERT` statement:
+Once you have generated an embedding using a service like the OpenAI API, you can store the resulting vector in the database. Using a PostgreSQL client library in your preferred programming language, you can execute an `INSERT` statement similar to the following:
 
 ```sql
 INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]');
@@ -64,13 +60,17 @@ This command inserts two new rows into the items table with the provided embeddi
 
 ## Querying vectors
 
-To retrieve vectors and calculate similarity, use SQL SELECT statements and the built-in vector operators. For instance, you can find the top 5 most similar items to a given embedding using the following query:
+To retrieve vectors and calculate similarity, use `SELECT` statements and the built-in vector operators. For instance, you can find the top 5 most similar items to a given embedding using the following query:
 
 ```sql
-SELECT * FROM items ORDER BY embedding <-> '[1, 2, 3, ..., 1536]' LIMIT 5;
+SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
 ```
 
-his query computes the Euclidean distance (L2 distance) between the given vector and the vectors stored in the items table, sorts the results by the calculated distance, and returns the top 5 most similar items. Alternatively, you can use other distance metrics, such as cosine similarity or Manhattan distance, to fine-tune the similarity search.
+This query computes the Euclidean distance (L2 distance) between the given vector and the vectors stored in the items table, sorts the results by the calculated distance, and returns the top 5 most similar items. Alternatively, you can use other distance metrics, such as cosine similarity or Manhattan distance, to fine-tune the similarity search.
+
+`pgvector` also supports inner product (<#>) and cosine distance (<=>). `<#>` returns the negative inner product since PostgreSQL only supports `ASC` order index scans on operators.
+
+For more information about query vectors, refer to the [pgvector README](https://github.com/pgvector/pgvector).
 
 ## Indexing vectors
 
