@@ -33,7 +33,7 @@ Focusing more closely, each PostgreSQL instance operates within its own virtual 
 
 ### Autoscaling agent
 
-Each Kubernetes node hosts a single instance of the autoscaler-agent, which serves as the control mechanism for the autoscaling system. The agent collects metrics from the VMs on its node, makes scaling decisions, and performs the necessary checks and requests to implement those decisions.
+Each Kubernetes node hosts a single instance of the [autoscaler-agent](/docs/reference/glossary#autoscaler-agent), which serves as the control mechanism for the autoscaling system. The agent collects metrics from the VMs on its node, makes scaling decisions, and performs the necessary checks and requests to implement those decisions.
 
 While the program may appear simple at first glance—merely collecting metrics and determining the appropriate number of compute units for a VM—the system's complexity arises from the need to gracefully handle various challenging situations. Examples of such circumstances include:
 
