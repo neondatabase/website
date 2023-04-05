@@ -4,19 +4,19 @@ subtitle: Learn how Neon automatically and transparently scales compute on deman
 enableTableOfContents: true
 ---
 
-Autoscaling is the process of automatically increasing or decreasing the CPU and memory allocated to a Neon compute based on its current load without requiring manual intervention.
+Neon's Autoscaling feature automatically increases or decreases the vCPU and RAM allocated to a Neon compute based on its current load without requiring manual intervention.
 
 ## Benefits of Autoscaling
 
-- Accommodate varying and unexpected workloads: Many workloads, such as e-commerce sites with differing loads across regions or daily and weekly fluctuations, vary over time. Autoscaling helps handle these variations efficiently.
-- Highly scalable: Autoscaling enables applications to seamlessly handle a large number of requests and adapt to rapid growth in traffic without manual intervention.
-- Save time: Managing your database can be time-consuming. Autoscaling frees up your time to add features and improve your application.
-- Scale without restarting: Autoscaling requires the ability to scale without restarting, which is a valuable feature in itself.
-- Simplified management: Autoscaling reduces the need for manual intervention making it easier for teams to maintain and monitor their applications.
-- Cost efficiency: Autoscaling optimizes resource usage, meaning you only pay for the resources you actually need rather than over-provisioning for peak loads.
-- Autoscaling operates within a range of compute units, so you can sleep soundly knowing that your endpoint won’t scale to infinity.
+- Adaptability to fluctuating and unforeseen workloads: Autoscaling is particularly beneficial for workloads that experience variations over time, such as e-commerce sites with region-specific or daily and weekly changes in demand. This feature allows for efficient handling of these fluctuations.
+- Enhanced scalability: Autoscaling permits applications to accommodate a substantial volume of requests and adapt to rapid traffic growth without necessitating manual intervention.
+- Time-saving: Database management can be labor-intensive. By employing autoscaling, developers can allocate more time to enhancing features and refining their applications.
+- Scaling without restarting: A crucial aspect of Autoscaling is its ability to scale without restarting the application, which is an advantageous feature in itself.
+- Streamlined management: By minimizing the need for manual intervention, autoscaling simplifies the maintenance and monitoring process for development teams.
+- Cost effectiveness: Autoscaling optimizes resource utilization, ensuring that organizations pay only for the resources they genuinely require, rather than over-provisioning for peak loads.
+- Range-bound scaling: Autoscaling operates within a predefined range of vCPU and RAM, providing reassurance that your compute resources do not scale indefinitely.
 
-## How it works
+## How Autoscaling works
 
 To understand how autoscaling works, we’ll start from a high-level overview of Neon’s architecture and zoom into the particular components that make up the autoscaling system.
 
