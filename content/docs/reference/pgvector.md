@@ -66,19 +66,21 @@ To retrieve vectors and calculate similarity, use `SELECT` statements and the bu
 SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
 ```
 
-This query computes the Euclidean distance (L2 distance) between the given vector and the vectors stored in the items table, sorts the results by the calculated distance, and returns the top 5 most similar items. Alternatively, you can use other distance metrics, such as cosine similarity or Manhattan distance, to fine-tune the similarity search.
+This query computes the Euclidean distance (L2 distance) between the given vector and the vectors stored in the items table, sorts the results by the calculated distance, and returns the top 5 most similar items. 
 
-`pgvector` also supports inner product (<#>) and cosine distance (<=>). `<#>` returns the negative inner product since PostgreSQL only supports `ASC` order index scans on operators.
+`pgvector` also supports inner product (`<#>`) and cosine distance (`<=>`). `<#>` returns the negative inner product since PostgreSQL only supports `ASC` order index scans on operators.
 
-For more information about query vectors, refer to the [pgvector README](https://github.com/pgvector/pgvector).
+For more information about querying vectors, refer to the [pgvector README](https://github.com/pgvector/pgvector).
 
 ## Indexing vectors
 
-For optimal performance, consider tuning the PostgreSQL configuration parameters, such as shared_buffers, work_mem, and maintenance_work_mem. Moreover, using an index on the vector column can significantly improve query performance. For example, you can create an index on the "embedding" column using the following SQL command:
+Using an index on the vector column can improve query performance at the cost of some recall. Add an index for each distance function you want to use. For example, the following adds an index to the embedding column for the L2 distance distance function:
 
 ```sql
-CREATE INDEX items_embedding_idx ON items USING gin(embedding);
+CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
 ```
+
+For additional indexing guidance and examples, see [Indexing](https://github.com/pgvector/pgvector/tree/8bf360ed84bfdeba9caa19e9f193fd9ad8dd9e73#indexing), in the _pgvector README_.
 
 ## Conclusion
 
