@@ -16,7 +16,7 @@ The Neon Free Tier has the following limits:
 - A point-in-time restore window of 7 days of _reasonable usage_.
 
 <Admonition type="note">
-On February 6, 2023, Neon removed the limit on the number of compute endpoints per project. The Free Tier now offers a compute endpoint for every branch and 100 hours of compute endpoint _active time_, as described above. The _active time_ limit is in effect for Neon projects created after this date. The limit will not be applied to Neon projects created before this date until April 1, 2023, to provide enough time for users to adjust their usage or upgrade to a paid plan. Neon launched paid plans in March, 2023. For information about our paid plans, refer to our [Pricing](https://neon.tech/pricing) page.
+On February 24, 2023, Neon removed the limit on the number of compute endpoints per project. The Free Tier now offers a compute endpoint for every branch and 100 hours of compute endpoint _active time_, as described above. The _active time_ limit is in effect for Neon projects created after this date. The limit will not be applied to Neon projects created before this date until April 1, 2023, to provide enough time for users to adjust their usage or upgrade to a paid plan. Neon launched paid plans in March, 2023. For information about our paid plans, refer to our [Pricing](https://neon.tech/pricing) page.
 </Admonition>
 
 Neon reserves the right to adjust Free Tier limits.
