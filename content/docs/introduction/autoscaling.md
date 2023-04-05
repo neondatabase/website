@@ -37,12 +37,10 @@ Each Kubernetes node hosts a single instance of the [autoscaler-agent](/docs/ref
 
 While the program may appear simple at first glance—merely collecting metrics and determining the appropriate number of compute units for a VM—the system's complexity arises from the need to gracefully handle various challenging situations. Examples of such circumstances include:
 
-Unfortunately though, what makes the system complex is that it needs to gracefully handle a variety of “annoying” circumstances – things like:
-
 - How to manage upscaling when all resources are allocated
 - What actions to take if PostgreSQL begins using memory too rapidly for the metrics collection to detect in time
 
-A primary concern is ensuring that resources are not overcommitted. Overcommitting CPU resources may be acceptable; however, if more memory is allocated than is available, Kubernetes will terminate VMs. This is generally undesirable, as PostgreSQL connections are stateful, and recovery is not a simple process if a VM is terminated. To avoid this situation, the autoscaler-agent must be made aware of the resource usage on each node.
+A primary concern is ensuring that resources are not overcommitted. If more memory is allocated than is available, Kubernetes will terminate VMs. This is generally undesirable, as PostgreSQL connections are stateful, and recovery is not a simple process if a VM is terminated. To avoid this situation, the autoscaler-agent must be made aware of the resource usage on each node.
 
 However, potential conflicts may arise if the [Kubernetes scheduler](/docs/reference/glossary#kubernetes-scheduler) assigns tasks to a node simultaneously with the autoscaler-agent, which could lead to overcommitting resources. To resolve this issue, the scheduler is modified to enable coordination with the autoscaler-agent.
 
@@ -83,4 +81,4 @@ Additionally, the vm-informant adjusts the file cache size when scaling occurs t
 
 This topic has covered the fundamentals of autoscaling, its advantages, and the technical specifics of Neon's implementation.
 
-To further explore Neon's autoscaling implementation, visit the [Autoscaling GitHub repository](https://github.com/neondatabase/autoscaling). While not primarily designed for external use, Neon welcomes exploration and contributions.
+To further explore Neon's autoscaling implementation, visit Noen's [Autoscaling](https://github.com/neondatabase/autoscaling) GitHub repository. While not primarily designed for external use, Neon welcomes exploration and contributions.
