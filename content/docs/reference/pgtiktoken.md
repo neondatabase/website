@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 The `pg_tiktoken` extension enables fast and efficient tokenization of data in your PostgreSQL database using OpenAI's [tiktoken](https://github.com/openai/tiktoken) library.
 
-This topic describes how to install the extension, use its functions for tokenization and token management, and how to use the extension with ChatGPT models.
+This topic provides guidance on installing the extension, utilizing its features for tokenization and token management, and integrating the extension with ChatGPT models.
 
 ## What is a token?
 
@@ -163,7 +163,7 @@ MAX_HISTORY_TOKENS = 4096 – 6 – 90 = 4000
 
 ## Conclusion
 
-The `pg_tiktoken` extension offers fast and efficient tokenization and token management for data stored in your PostgreSQL database. By incorporating the `pg_tiktoken` extension into your database, you can streamline your natural language processing tasks.
+In conclusion, the `pg_tiktoken` extension is a valuable tool for tokenizing text data and managing tokens within PostgreSQL databases. By leveraging OpenAI's tiktoken library, it simplifies the process of tokenization and working with token limits, enabling you to integrate more easily with with OpenAI's language models.
 
 As you explore the capabilities of the `pg_tiktoken extension`, we encourage you to provide feedback and suggest features you'd like to see added in future updates. We look forward to seeing the innovative natural language processing applications you create using `pg_tiktoken`.
 
