@@ -21,7 +21,7 @@ The `pg_tiktoken` offers two functions:
 - `tiktoken_encode`: Accepts text inputs and returns tokenized output, allowing you to seamlessly tokenize your text data.
 - `tiktoken_count`: Counts the number of tokens in a given text. This feature helps you adhere to text length limits, such as those set by OpenAI's language models.
 
-## Installing the pg_tiktoken extension
+## Install the pg_tiktoken extension
 
 You can install the `pg_tiktoken` extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
 
@@ -31,7 +31,7 @@ CREATE EXTENSION pg_tiktoken
 
 For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
 
-## Using the tiktoken_encode function
+## Use the tiktoken_encode function
 
 The `tiktoken_encode` function tokenizes text input and returns a tokenized output. The function accepts encoding names and OpenAI model names as the first argument and the text you want to tokenize as the second argument, as shown:
 
@@ -46,7 +46,7 @@ tiktoken_encode
 
 The function tokenizes text using the [Byte Pair Encoding (BPE)](https://en.wikipedia.org/wiki/Byte_pair_encoding) algorithm.
 
-## Using the tiktoken_count function
+## Use the tiktoken_count function
 
 The `tiktoken_count` function counts the number of tokens in a text. The function accepts encoding names and OpenAI model names as the first argument and text as the second argument, as shown:
 
@@ -113,7 +113,7 @@ INSERT INTO message (role, content, n_tokens)
 VALUES ('user', 'Hello, how are you?', tiktoken_count('text-davinci-003','Hello, how are you?'));
 ```
 
-## Managing text tokens
+## Manage text tokens
 
 When a conversation contains more tokens than a model can process (e.g., over 4096 tokens for `gpt-3.5-turbo`), you will need to truncate the text to fit within the model's limit.
 
@@ -167,7 +167,7 @@ In conclusion, the `pg_tiktoken` extension is a valuable tool for tokenizing tex
 
 As you explore the capabilities of the `pg_tiktoken extension`, we encourage you to provide feedback and suggest features you'd like to see added in future updates. We look forward to seeing the innovative natural language processing applications you create using `pg_tiktoken`.
 
-## Resources:
+## Resources
 
 - [Open AI tiktoken source code on GitHub](https://github.com/openai/tiktoken)
 - [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
