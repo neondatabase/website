@@ -15,15 +15,15 @@ Vector similarity is a method used to measure how similar two items are by repre
 
 ### Embeddings
 
-An embedding is a way to represent data points (such as words, images, or other elements) as vectors. Embeddings help capture the relationships and similarities between data points, making it easier for machine learning algorithms to process and analyze them.
+An embedding is a technique that transforms data points into vectors, enabling machine learning algorithms to efficiently process and analyze them. This transformation captures the relationships and similarities between data points, allowing algorithms to identify patterns and make accurate predictions.
 
-A simple example involves word embeddings for natural language processing. Suppose you have three words: "apple", "orange", and "car". We can represent each word as a vector in a 2-dimensional space:
+A widely used example of embeddings is in natural language processing, where words are represented as vectors. For instance, consider the words "apple", "orange", and "car". By representing each word as a vector in a 2-dimensional space, you can visually observe their relationships:
 
 Apple: (1.2, 0.8)
 Orange: (1.1, 0.9)
 Car: (0.3, 1.5)
 
-In this 2D space, the vectors for "apple" and "orange" are close together, indicating that they are more similar to each other than they are to "car". This embedding has captured the relationship between these words in a way that a machine learning algorithm can understand and use.
+In this space, the vectors for "apple" and "orange" are closer together than either is to "car", indicating that they are more similar to each other than to "car". This relationship is captured by vectors in a way that machine learning algorithms can easily understand and utilize for a variety of tasks.
 
 ## Enable the pgvector extension
 
@@ -35,7 +35,7 @@ CREATE EXTENSION vector;
 
 For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
 
-## Creating a table to store vectors
+## Create a table to store vectors
 
 To create a table for storing vectors, use the following SQL command, adjusting the dimensions as needed:
 
@@ -47,6 +47,10 @@ CREATE TABLE items (
 ```
 
 This command generates a table named `items` with an `embedding` column capable of storing vectors with 1536 dimensions.
+
+<Admonition type="note">
+OpenAI uses 1536 tokens in their `text-embedding-ada-002` model to represent each piece of text. This helps to create more accurate embeddings for natural language processing tasks. For more information, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
+</Admonition>
 
 ## Storing vectors and embeddings
 
