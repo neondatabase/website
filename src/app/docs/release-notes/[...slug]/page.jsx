@@ -6,8 +6,9 @@ import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
-import { RELEASE_NOTES_BASE_PATH, RELEASE_NOTES_DATE_SLUG_REGEX } from 'constants/docs';
+import { RELEASE_NOTES_BASE_PATH, RELEASE_NOTES_SLUG_REGEX } from 'constants/docs';
 import { getAllReleaseNotes, getPostBySlug, RELEASE_NOTES_DIR_PATH } from 'utils/api-docs';
+import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 import serializeMdx from 'utils/serialize-mdx';
 
@@ -25,7 +26,8 @@ export async function generateStaticParams() {
 
 const ReleaseNotePage = async ({ currentSlug }) => {
   const { datetime, label } = getReleaseNotesDateFromSlug(currentSlug);
-  const { data, content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
+  const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
+  const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
   const mdxSource = await serializeMdx(content);
 
   return (
@@ -49,7 +51,7 @@ const ReleaseNotePage = async ({ currentSlug }) => {
               size="sm"
               theme="black"
             >
-              {data.label} release
+              {capitalisedCategory} release
             </Heading>
             <Content className="mt-8 prose-h3:text-xl" content={mdxSource} />
             <Link
@@ -87,11 +89,16 @@ const ReleaseNoteCategoryPage = ({ currentSlug, currentReleaseNotes }) => {
 
 export default async function ReleaseNotesPost({ params }) {
   const currentSlug = params?.slug.join('/');
-  const isReleaseNotePage = RELEASE_NOTES_DATE_SLUG_REGEX.test(currentSlug);
+  const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
   const allReleaseNotes = await getAllReleaseNotes();
   const currentReleaseNotes = await Promise.all(
     allReleaseNotes
-      .filter((item) => item.label.charAt(0).toLowerCase() + item.label.slice(1) === currentSlug)
+      .filter((item) => {
+        const { slug } = item;
+        const { category } = getReleaseNotesCategoryFromSlug(slug);
+
+        return category === currentSlug;
+      })
       .map(async (item) => ({
         ...item,
         content: await serializeMdx(item.content),

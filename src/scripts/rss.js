@@ -24,14 +24,17 @@ const { getAllReleaseNotes, getPostBySlug, RELEASE_NOTES_DIR_PATH } = require('.
     });
 
     releaseNotes.forEach((post) => {
-      const { excerpt } = getPostBySlug(post.slug, RELEASE_NOTES_DIR_PATH);
-      const url = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${RELEASE_NOTES_BASE_PATH}${post.slug}`;
+      const { slug } = post;
+      const { excerpt } = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
+      const url = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${RELEASE_NOTES_BASE_PATH}${slug}`;
+      const category = slug.slice(slug.lastIndexOf('-') + 1);
+      const capitalisedCategory = category.charAt(0).toUpperCase() + category.slice(1);
 
       feed.addItem({
         id: url,
         link: url,
         date: new Date(post.slug),
-        title: `${post.label} release`,
+        title: `${capitalisedCategory} release`,
         description: excerpt,
       });
     });
