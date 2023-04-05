@@ -8,6 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import LINKS from 'constants/links';
 import CheckIcon from 'icons/black-check.inline.svg';
 import InfoIcon from 'icons/info.inline.svg';
 import ThumbIcon from 'icons/thumb.inline.svg';
@@ -82,11 +83,8 @@ const Calculator = () => {
   );
 
   const estimatedPrice = useMemo(
-    () =>
-      computeUnits >= 8 || storageValue >= 200 || totalCost >= 420
-        ? 'Custom'
-        : `$${totalCost.toFixed(2)}`,
-    [computeUnits, storageValue, totalCost]
+    () => (totalCost >= 208 ? 'Custom' : `$${totalCost.toFixed(2)}`),
+    [totalCost]
   );
 
   useEffect(
@@ -113,12 +111,12 @@ const Calculator = () => {
           <div className="row-span-1 flex rounded-lg bg-gray-1 md:flex-col">
             <div className="grow px-7 py-6 xl:py-5 xl:px-6 md:px-5 md:pb-3">
               <h3 className="text-2xl font-medium leading-none tracking-tight text-white xl:text-xl">
-                Compute
+                Compute size
               </h3>
               <div className="mt-8 flex flex-col gap-2 md:mt-7">
                 <div className="flex justify-between">
                   <h4 className="font-medium leading-none tracking-tight">
-                    <span>Compute size</span>
+                    <span>Compute units</span>
                     <Tooltip
                       id="compute"
                       content="A Compute Unit (CU) is a measure of processing power and memory. In Neon, a CU has 1 vCPU and 4 GB of RAM. The number CUs defines the processing power of your Neon compute."
@@ -128,7 +126,7 @@ const Calculator = () => {
                     <span className="after:mx-2 after:inline-block after:h-[4px] after:w-[4px] after:rounded-full after:bg-primary-1 after:align-middle">
                       {computeUnits}vCPU
                     </span>
-                    <span>4GB RAM</span>
+                    <span>{computeUnits * 4}GB RAM</span>
                   </p>
                 </div>
                 <div className="flex items-center py-[4px]">
@@ -175,7 +173,7 @@ const Calculator = () => {
                   </p>
                 </div>
                 <div className="flex items-center py-[5px]">
-                  <span className="text-[12px] tracking-tight text-[#C9CBCF]">
+                  <span className="shrink-0 text-[12px] tracking-tight text-[#C9CBCF]">
                     {COMPUTE_TIME_VALUES.min} h
                   </span>
                   <Slider.Root
@@ -275,15 +273,15 @@ const Calculator = () => {
           </div>
 
           <div className="row-span-1 flex rounded-lg bg-gray-1 md:flex-col">
-            <div className="min-h-[141px] grow px-6 pt-7 pb-9 xl:min-h-[152px] xl:py-8 lg:pb-6 md:px-5 md:py-5">
-              <h3 className="text-2xl font-medium leading-none tracking-tight text-white [text-shadow:0px_0px_20px_rgba(255,_255,_255,_0.05)] xl:text-xl">
+            <div className="min-h-[141px] grow px-6 pt-7 pb-9 xl:min-h-[161px] xl:py-8 lg:pb-6 md:px-5 md:py-5 xs:min-h-[214px]">
+              <h3 className="text-2xl font-medium leading-none tracking-tight text-white xl:text-xl">
                 Data transfer and Written data
               </h3>
               <LazyMotion features={domAnimation}>
                 <AnimatePresence initial={false} mode="wait">
                   {isAdvanced ? (
                     <m.ul
-                      className="mt-7 flex gap-14"
+                      className="mt-7 flex items-center gap-x-14 xl:flex-wrap xl:gap-x-7 sm:gap-4"
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -303,14 +301,17 @@ const Calculator = () => {
                         <label htmlFor="dataTransfer">Data transfer</label>
                         <input
                           id="dataTransfer"
-                          className="ml-8 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight"
+                          className="ml-8 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight xl:mx-2"
                           name="data-transfer"
                           type="number"
                           min={0}
-                          max={100}
+                          max={1000}
                           placeholder="10"
                           value={dataTransferValue}
-                          onChange={(event) => setDataTransferValue(event?.target?.value)}
+                          onChange={(event) => {
+                            if (event?.target?.value > 1000) return false;
+                            return setDataTransferValue(event?.target?.value);
+                          }}
                         />
                         <span>GiB</span>
                       </li>
@@ -318,29 +319,57 @@ const Calculator = () => {
                         <label htmlFor="writtenData">Written data</label>
                         <input
                           id="writtenData"
-                          className="ml-8 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight"
+                          className="ml-8 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight xl:mx-2"
                           name="written-data"
                           type="number"
                           min={0}
-                          max={100}
+                          max={1000}
                           placeholder="10"
                           value={writtenDataValue}
-                          onChange={(event) => setWrittenDataValue(event?.target?.value)}
+                          onChange={(event) => {
+                            if (event?.target?.value > 1000) return false;
+                            setWrittenDataValue(event?.target?.value);
+                          }}
                         />
                         <span>GiB</span>
                       </li>
+                      <li>
+                        <button
+                          className="relative mx-2 border-b border-primary-1 text-primary-1 transition-colors duration-200 hover:border-transparent xl:mx-0 xl:block"
+                          type="button"
+                          onClick={() => setIsAdvanced(false)}
+                        >
+                          Use average
+                        </button>
+                      </li>
                     </m.ul>
                   ) : (
-                    <p className="mt-5 text-base tracking-tight text-[#94979E]">
+                    <m.p
+                      className="mt-7 text-base tracking-tight text-[#94979E]"
+                      initial={{
+                        opacity: 0,
+                        translateY: 10,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        translateY: 0,
+                        transition: { duration: 0.3 },
+                      }}
+                      exit={{
+                        opacity: 0,
+                        transition: { duration: 0.2 },
+                      }}
+                      transition={{ ease: [0.25, 0.1, 0, 1] }}
+                    >
                       Accounts for 10% of your monthly cost, on average.
                       <button
                         className="relative mx-2 border-b border-primary-1 text-primary-1 transition-colors duration-200 hover:border-transparent xl:mx-0 xl:block"
                         type="button"
                         onClick={() => setIsAdvanced(true)}
                       >
-                        Are you an advanced user?
+                        Use advanced parameters
                       </button>
-                    </p>
+                    </m.p>
                   )}
                 </AnimatePresence>
               </LazyMotion>
@@ -358,8 +387,8 @@ const Calculator = () => {
             </div>
           </div>
 
-          <div className="col-start-2 row-span-3 row-start-1 flex flex-col rounded-lg bg-secondary-2 p-7 pb-9 lg:col-start-1 lg:row-span-1 lg:grid lg:grid-cols-2 lg:gap-x-60 sm:grid-cols-1 sm:gap-x-0">
-            <h3 className="text-center text-lg font-semibold leading-none tracking-tight text-black [text-shadow:0px_0px_20px_rgba(255,_255,_255,_0.05)] lg:col-start-2 sm:col-start-1">
+          <div className="col-start-2 row-span-3 row-start-1 flex flex-col rounded-lg bg-secondary-2 p-7 pb-9 lg:col-start-1 lg:row-span-1 lg:grid lg:grid-cols-2 lg:gap-x-32 sm:grid-cols-1 sm:gap-x-0">
+            <h3 className="text-center text-lg font-semibold leading-none tracking-tight text-black lg:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
             <p className="mt-8 text-center text-[72px] font-medium leading-none tracking-tighter text-black xl:mt-10 xl:text-[60px] lg:col-start-2 sm:col-start-1 sm:mt-8">
@@ -389,12 +418,12 @@ const Calculator = () => {
               </li>
             </ul>
             <Button
-              className="mt-auto w-full !bg-black py-6 !text-lg !text-white xl:mt-4 lg:col-start-2 lg:mt-8 sm:col-start-1 sm:mx-auto sm:mt-1 sm:max-w-[200px]"
+              className="mt-auto w-full max-w-[260px] !bg-black py-6 !text-lg !text-white xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1 sm:mt-1"
               theme="primary"
-              to="https://console.neon.tech/sign_in"
+              to={estimatedPrice === 'Custom' ? LINKS.contactSales : LINKS.dashboard}
               size="sm"
             >
-              Get Started
+              {estimatedPrice === 'Custom' ? 'Contact Sales' : 'Get Started'}
             </Button>
           </div>
         </div>
