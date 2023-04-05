@@ -4,7 +4,7 @@ subtitle: Learn how Neon automatically and transparently scales compute on deman
 enableTableOfContents: true
 ---
 
-A Beta version of Neon's Autoscaling feature is now available for [paid plan](https://neon.tech/docs/introduction/billing#neon-plans) users in selected regions. The Autoscaling feature dynamically adjusts the allocation of vCPU and RAM for a Neon compute endpoint in response to the current load, eliminating the need for manual intervention.
+A Beta version of Neon's _Autoscaling_ feature is now available for [paid plan](https://neon.tech/docs/introduction/billing#neon-plans) users in selected regions. The Autoscaling feature dynamically adjusts the allocation of vCPU and RAM for a Neon compute endpoint in response to the current load, eliminating the need for manual intervention.
 
 ## Benefits of Autoscaling
 
