@@ -40,7 +40,7 @@ A control mechanism in the Neon autoscaling system that collects metrics from VM
 
 ### Autoscaling
 
-A feature that automatically adjusts the allocation of vCPU and RAM for compute endpoints within specified minimum and maximum compute size boundaries, optimizing for performance and cost-efficiency.
+A feature that automatically adjusts the allocation of vCPU and RAM for compute endpoints within specified minimum and maximum compute size boundaries, optimizing for performance and cost-efficiency. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 ### Availability Checker
 
