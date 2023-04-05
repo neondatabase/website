@@ -281,7 +281,7 @@ const Calculator = () => {
                 <AnimatePresence initial={false} mode="wait">
                   {isAdvanced ? (
                     <m.ul
-                      className="mt-7 flex items-center gap-x-14 xl:flex-wrap xl:gap-x-7 sm:gap-4"
+                      className="mt-7 flex items-center gap-x-12 xl:flex-wrap xl:gap-x-7 sm:gap-4"
                       initial={{
                         opacity: 0,
                         translateY: 10,
