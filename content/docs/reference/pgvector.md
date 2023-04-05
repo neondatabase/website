@@ -49,7 +49,7 @@ CREATE TABLE items (
 This command generates a table named `items` with an `embedding` column capable of storing vectors with 1536 dimensions.
 
 <Admonition type="note">
-OpenAI uses 1536 tokens in their `text-embedding-ada-002` model to represent each piece of text. This helps to create more accurate embeddings for natural language processing tasks. For more information, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
+OpenAI uses 1536 tokens in their `text-embedding-ada-002` model to represent each piece of text, which creates more accurate embeddings for natural language processing tasks. For more information, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
 </Admonition>
 
 ## Storing vectors and embeddings
