@@ -65,20 +65,17 @@ const calculateWrittenDataCost = (writtenDataValue) => writtenDataValue * WRITTE
 
 const Calculator = () => {
   const [isAdvanced, setIsAdvanced] = useState(false);
-  const [computeUnits, setComputeUnits] = useState(COMPUTE_UNITS_VALUES.default);
+  const [computeUnits, setComputeUnits] = useState(1);
   const [activeTime, setActiveTime] = useState(COMPUTE_TIME_VALUES.default);
   const [storageValue, setStorageValue] = useState(STORAGE_VALUES.default);
   const [dataTransferValue, setDataTransferValue] = useState(10);
   const [writtenDataValue, setWrittenDataValue] = useState(10);
   const [writtenAndTransferDataCost, setWrittenAndTransferDataCost] = useState(0);
 
-  const computeTimeCost = useMemo(() => {
-    let computeUnitsValue = computeUnits;
-
-    if (computeUnits >= 0.75) computeUnitsValue = Number(COMPUTE_UNITS_RANGES[computeUnits]);
-
-    return calculateComputeCost(computeUnitsValue, activeTime);
-  }, [computeUnits, activeTime]);
+  const computeTimeCost = useMemo(
+    () => calculateComputeCost(computeUnits, activeTime),
+    [computeUnits, activeTime]
+  );
 
   const storageCost = useMemo(() => calculateStorageCost(storageValue), [storageValue]);
 
@@ -139,15 +136,13 @@ const Calculator = () => {
                   </h4>
                   <p className="text-[15px] font-medium leading-none tracking-tight">
                     <span className="after:mx-2 after:inline-block after:h-[4px] after:w-[4px] after:rounded-full after:bg-primary-1 after:align-middle">
-                      {COMPUTE_UNITS_RANGES[computeUnits]}vCPU
+                      {computeUnits <= 0.5 ? COMPUTE_UNITS_RANGES[computeUnits] : computeUnits}vCPU
                     </span>
                     <span>{computeUnits * 4}GB RAM</span>
                   </p>
                 </div>
                 <div className="flex items-center py-[4px]">
-                  <span className="text-[12px] tracking-tight text-[#C9CBCF]">
-                    {COMPUTE_UNITS_VALUES.min}
-                  </span>
+                  <span className="text-[12px] tracking-tight text-[#C9CBCF]">1/4</span>
                   <Slider.Root
                     className="md:w-aut md:pb-3o relative mx-4 flex h-5 w-64 grow touch-none items-center"
                     defaultValue={[COMPUTE_UNITS_VALUES.default]}
@@ -155,7 +150,14 @@ const Calculator = () => {
                     max={COMPUTE_UNITS_VALUES.max}
                     step={COMPUTE_UNITS_VALUES.step}
                     aria-label="Compute units"
-                    onValueChange={(value) => setComputeUnits(value[0])}
+                    onValueChange={(value) => {
+                      let computeUnitsValue = value[0];
+
+                      if (value[0] >= 0.75)
+                        computeUnitsValue = Number(COMPUTE_UNITS_RANGES[value[0]]);
+
+                      setComputeUnits(computeUnitsValue);
+                    }}
                   >
                     <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
                       <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
