@@ -63,4 +63,4 @@ Many queries benefit from this additional memory, particularly those requiring m
 
 ## Autoscaling source code
 
-To further explore Neon's autoscaling implementation, visit Noen's [Autoscaling](https://github.com/neondatabase/autoscaling) GitHub repository. While not primarily designed for external use, Neon welcomes exploration and contributions.
+To further explore Neon's autoscaling implementation, visit Neon's [Autoscaling](https://github.com/neondatabase/autoscaling) GitHub repository. While not primarily designed for external use, Neon welcomes exploration and contributions.
