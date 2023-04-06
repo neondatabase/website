@@ -68,9 +68,9 @@ A Neon Control Plane operation that checks the availability of data in a branch 
 
 Continuous integration and continuous delivery or continuous deployment.
 
-### cgroup
+### cgroups
 
-Control group, a Linux kernel feature that allows the organization, prioritization, and accounting of system resources for a group of processes.
+Control groups, a Linux kernel feature that allows the organization, prioritization, and accounting of system resources for groups of processes.
 
 ### Compute
 
