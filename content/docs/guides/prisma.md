@@ -1,27 +1,33 @@
 ---
 title: Connect from Prisma to Neon
-subtitle: Create a Neon project in seconds and connect from Prisma 
+subtitle: Learn how to connect to Neon from Prisma
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/prisma
   - /docs/integrations/prisma
+  - /docs/guides/prisma-guide
 ---
 
-Prisma is an open-source, next-generation ORM that allows you to manage and interact with your database. This guide describes how to connect from Prisma to Neon.
+Prisma is an open-source, next-generation ORM that allows you to manage and interact with your database. This guide describes how to connect from Prisma to Neon. It also covers how to connect when using Prisma Client from serverless functions and how to address connection timeout issues.
 
-## Create a Neon project
+For infomration about using Prisma MIgrate with Neon, see [Use Prisma Migrate with Neon](/docs/guides/prisma-migrate).
 
-If you do not have one already, create a Neon project. Save your connection string. It is required when defining connection settings.
+## Prerequisites
 
-1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
-2. Click **New Project**.
-3. Specify your project settings and click **Create Project**.
+- A Neon project. If you do not have one, see [Create a project](/docs/manage/projects#create-a-project).
+- A Prisma project. If you do not have one, see [Set up Prisma](https://www.prisma.io/docs/getting-started/setup-prisma), in the _Prisma documentation_.
 
 ## Connect to Neon from Prisma
 
-To connect to Neon from Prisma:
+To connect your database:
 
-1. Add the following lines to your `prisma/schema.prisma` file to identify the data source and database URL:
+1. In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+
+![Connection details widget](/docs/guides/connection_details.png)
+
+The connection string includes the user name, password, hostname, and database name.
+
+2. Add the following lines to your `prisma/schema.prisma` file to identify the data source and database URL:
 
    ```typescript
    datasource db {
@@ -30,82 +36,11 @@ To connect to Neon from Prisma:
    }
    ```
 
-2. Add a `DATABASE_URL` setting to your `.env` file and set it to the Neon connection string that you copied in the previous step.
+3. Add a `DATABASE_URL` setting to your `.env` file and set it to the Neon connection string that you copied in the previous step.
 
    ```shell
    DATABASE_URL="postgres://<user>:<password>@<host>:5432/neondb"
    ```
-
-   where:
-
-   - `<host>` the hostname of the Neon compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
-   - `<user>` is the database user.
-   - `<password>` is the database user's password.
-
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
-
-## Configure a shadow database for Prisma Migrate
-
-Prisma Migrate is a migration tool that allows you to evolve your database schema from prototyping to production. Prisma Migrate requires a shadow database to detect schema drift. This section describes how to configure a second Neon database as a shadow database, which is required to run the `prisma migrate dev` command.
-
-<Admonition type="note">
-Prisma Migrate requires a direct connection to the database and does not support connection pooling with PgBouncer. Migrations fail with an error if you use a pooled connection. For more information, see [Prisma Migrate with PgBouncer](#prisma-migrate-with-pgbouncer).
-</Admonition>
-
-To configure a shadow database:
-
-1. Create another database in your Neon project and copy the connection string. Refer to [Create a database](/docs/manage/databases#create-a-database) for instructions. For information about obtaining a connection string, see [Connect from any application](/docs/connect/connect-from-any-app/).
-
-1. Add the `shadowDatabaseUrl` setting to your `prisma/schema.prisma` file to identify the shadow database URL:
-
-   ```typescript
-   datasource db {
-     provider = "postgresql"
-     url   = env("DATABASE_URL")
-     shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-   }
-   ```
-
-1. Add a `SHADOW_DATABASE_URL` environment variable to your `.env` file and set it to the Neon connection string that you copied in the previous step.
-
-   ```shell
-   SHADOW_DATABASE_URL="postgres://<user>:<password>@<host>:5432/<dbname>"
-   ```
-
-For more information about shadow databases, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the _Prisma documentation_.
-
-## Prisma Migrate with PgBouncer
-
-Prisma Migrate requires a direct connection to the database. It does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands with a pooled connection causes the following error:
-
-```text
-Error undefined: Database error
-Error querying the database: db error: ERROR: prepared statement
-"s0" already exists
-```
-
-If you encounter this error, ensure that you are using a direct connection to the database. Neon supports both pooled and non-pooled connections to the same database. See [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling) for more information.
-
-You can configure Prisma Migrate to use a non-pooled connection string by adding the `directUrl` property to the datasource block in your `schema.prisma` file. For example:
-
-```text
-datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-}
-```
-
-<Admonition type="note">
-This feature is available from Prisma version [4.10.0](https://github.com/prisma/prisma/releases/tag/4.10.0) and higher.
-</Admonition>
-
-Next, update your `.env` file with both the `DATABASE_URL` and `DIRECT_URL` variables settings. As shown in the following example, set `DATABASE_URL` to the pooled connection string for your Neon database, and set `DIRECT_URL` to the non-pooled connection string.
-
-```text
-DATABASE_URL="postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true"
-DIRECT_URL="postgres://casey:<password>@ep-square-sea-260584.us-east-2.aws.neon.tech:5432/neondb"
-```
 
 ## Prisma Client with PgBouncer for serverless functions
 
@@ -128,7 +63,7 @@ Please make sure your database server is running at `ep-white-thunder-826300.us-
 
 This error most likely means that the Prisma query engine timed out before the Neon compute instance was activated.
 
-A Neon compute instance has two main states: _Active_ and _Idle_. Active means that the compute instance is currently running. If there is no query activity for 5 minutes, Neon places a compute instance into an idle state. For more information, see [Compute lifecycle](/docs/introduction/compute-lifecycle/).
+A Neon compute instance has two main states: _Active_ and _Idle_. Active means that the compute instance is currently running. If there is no query activity for 5 minutes, Neon places a compute instance into an idle state by default. For more information, see [Compute lifecycle](/docs/introduction/compute-lifecycle/).
 
 When you connect to an idle compute instance from Prisma, Neon automatically activates it. Activation typically happens within a few seconds but added latency can result in a connection timeout. To address this issue, try adjusting your Neon connection string with the following parameters:
 
