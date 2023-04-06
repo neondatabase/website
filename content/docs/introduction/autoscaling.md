@@ -42,7 +42,7 @@ A Neon-modified [Kubernetes scheduler](/docs/reference/glossary#kubernetes-sched
 
 ### NeonVM
 
-Kubernetes does not support the creation or management of VMs. To address this limitation, Neon uses a tool called [NeonVM](/docs/reference/glossary#neonvm). This tool is a custom resource definition and controller for VMs, handling tasks such as adding or removing CPUs and memory. Internally, NeonVM utilizes [QEMU](/docs/reference/glossary#qemu) and [KVM](/docs/reference/glossary#kvm) (where available) to achieve near-native performance.
+Kubernetes does not natively support the creation or management of VMs. To address this, Neon uses a tool called [NeonVM](/docs/reference/glossary#neonvm). This tool is a custom resource definition and controller for VMs, handling tasks such as adding or removing CPUs and memory. Internally, NeonVM utilizes [QEMU](/docs/reference/glossary#qemu) and [KVM](/docs/reference/glossary#kvm) (where available) to achieve near-native performance.
 
 When an autoscaler-agent needs to modify a VM's resource allocation, it simply updates the corresponding NeonVM object in Kubernetes, and the VM controller then manages the rest of the process.
 
