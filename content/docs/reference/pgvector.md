@@ -66,7 +66,7 @@ To retrieve vectors and calculate similarity, use `SELECT` statements and the bu
 SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
 ```
 
-This query computes the Euclidean distance (L2 distance) between the given vector and the vectors stored in the items table, sorts the results by the calculated distance, and returns the top 5 most similar items. 
+This query computes the Euclidean distance (L2 distance) between the given vector and the vectors stored in the items table, sorts the results by the calculated distance, and returns the top 5 most similar items.
 
 `pgvector` also supports inner product (`<#>`) and cosine distance (`<=>`). `<#>` returns the negative inner product since PostgreSQL only supports `ASC` order index scans on operators.
 
@@ -74,7 +74,9 @@ For more information about querying vectors, refer to the [pgvector README](http
 
 ## Indexing vectors
 
-Using an index on the vector column can improve query performance at the cost of some recall. Add an index for each distance function you want to use. For example, the following adds an index to the embedding column for the L2 distance distance function:
+Using an index on the vector column can improve query performance at the cost of some recall.
+
+Add an index for each distance function you want to use. For example, the following query adds an index to the embedding column for the L2 distance distance function:
 
 ```sql
 CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
