@@ -9,6 +9,8 @@
       slug: introduction/compute-lifecycle
     - title: Branching
       slug: introduction/branching
+    - title: Autoscaling
+      slug: introduction/autoscaling
     - title: Neon roadmap
       slug: introduction/roadmap
     - title: Free Tier

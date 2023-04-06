@@ -2,14 +2,14 @@ import MobileNav from 'components/pages/doc/mobile-nav';
 import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
-import { RELEASE_NOTES_DATE_SLUG_REGEX } from 'constants/docs';
+import { RELEASE_NOTES_SLUG_REGEX } from 'constants/docs';
 import { getSidebar } from 'utils/api-docs';
 
 // eslint-disable-next-line react/prop-types
 const ReleaseNoteLayout = async ({ children, params: { slug } }) => {
   const sidebar = await getSidebar();
   const currentSlug = slug.join('/');
-  const isReleaseNotePage = RELEASE_NOTES_DATE_SLUG_REGEX.test(currentSlug);
+  const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
 
   return (
     <Layout
