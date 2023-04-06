@@ -84,7 +84,7 @@ For additional indexing guidance and examples, see [Indexing](https://github.com
 
 ## Resources
 
-- [pgvector source code: github.com/pgvector/pgvector](github.com/pgvector/pgvector)
+`pgvector` source code: [github.com/pgvector/pgvector](github.com/pgvector/pgvector)
 
 ## Need help?
 
