@@ -23,9 +23,9 @@ const AVERAGE_DAYS_IN_MONTH = 30.416666;
 
 const COMPUTE_UNITS_VALUES = {
   min: 0.25,
-  max: 7,
+  max: 2.25,
   step: 0.25,
-  default: 1,
+  default: 0.75,
 };
 
 const COMPUTE_TIME_VALUES = {
@@ -39,6 +39,18 @@ const STORAGE_VALUES = {
   min: 1,
   max: 200,
   default: 50,
+};
+
+const COMPUTE_UNITS_RANGES = {
+  0.25: '1/4',
+  0.5: '1/2',
+  0.75: '1',
+  1: '2',
+  1.25: '3',
+  1.5: '4',
+  1.75: '5',
+  2: '6',
+  2.25: '7',
 };
 
 const calculateComputeCost = (computeUnits, activeTime) =>
@@ -60,10 +72,13 @@ const Calculator = () => {
   const [writtenDataValue, setWrittenDataValue] = useState(10);
   const [writtenAndTransferDataCost, setWrittenAndTransferDataCost] = useState(0);
 
-  const computeTimeCost = useMemo(
-    () => calculateComputeCost(computeUnits, activeTime),
-    [computeUnits, activeTime]
-  );
+  const computeTimeCost = useMemo(() => {
+    let computeUnitsValue = computeUnits;
+
+    if (computeUnits >= 0.75) computeUnitsValue = Number(COMPUTE_UNITS_RANGES[computeUnits]);
+
+    return calculateComputeCost(computeUnitsValue, activeTime);
+  }, [computeUnits, activeTime]);
 
   const storageCost = useMemo(() => calculateStorageCost(storageValue), [storageValue]);
 
@@ -124,7 +139,7 @@ const Calculator = () => {
                   </h4>
                   <p className="text-[15px] font-medium leading-none tracking-tight">
                     <span className="after:mx-2 after:inline-block after:h-[4px] after:w-[4px] after:rounded-full after:bg-primary-1 after:align-middle">
-                      {computeUnits}vCPU
+                      {COMPUTE_UNITS_RANGES[computeUnits]}vCPU
                     </span>
                     <span>{computeUnits * 4}GB RAM</span>
                   </p>
@@ -154,9 +169,7 @@ const Calculator = () => {
                       <ThumbIcon aria-hidden />
                     </Slider.Thumb>
                   </Slider.Root>
-                  <span className="text-[12px] tracking-tight text-[#C9CBCF]">
-                    &#62;{COMPUTE_UNITS_VALUES.max}
-                  </span>
+                  <span className="text-[12px] tracking-tight text-[#C9CBCF]">&#62;7</span>
                 </div>
               </div>
               <div className="mt-8 flex flex-col gap-2 xl:mt-6 md:mt-6">
@@ -334,7 +347,7 @@ const Calculator = () => {
                           value={writtenDataValue}
                           onChange={(event) => {
                             if (event?.target?.value > 1000) return false;
-                            setWrittenDataValue(event?.target?.value);
+                            return setWrittenDataValue(event?.target?.value);
                           }}
                         />
                         <span>GiB</span>
