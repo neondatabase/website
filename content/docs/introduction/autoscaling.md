@@ -17,7 +17,7 @@ Neon's Autoscaling feature offers the following benefits:
 
 ## How to enable Autoscaling
 
-You can enable Autoscaling when creating a Neon project or afterward using a simple compute configuration dialog. If you have multiple computes, you can enable Autoscaling for each compute individually. For instructions, see:
+You can enable Autoscaling when creating a Neon project or afterward using a simple compute configuration dialog. For instructions, see:
 
 - [Create a project](/docs/manage/projects#create-a-project)
 - [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint)
