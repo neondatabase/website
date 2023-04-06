@@ -11,7 +11,7 @@ A Beta version of Neon's _Autoscaling_ feature is now available for [paid plan](
 Neon's Autoscaling feature offers the following benefits:
 
 - **On-demand scaling:** Autoscaling helps with workloads that experience variations over time, such as applications with region or time-based changes in demand.
-- **Cost effectiveness**: Autoscaling optimizes resource utilization, ensuring that organizations pay only for the resources they require, rather than over-provisioning for peak loads.
+- **Cost effectiveness**: Autoscaling optimizes resource utilization, ensuring that organizations only pay for required resources, rather than over-provisioning to handle peak loads.
 - **Resource and cost control**: Autoscaling operates within a user-defined range, providing reassurance that your compute resources and associated costs do not scale indefinitely.
 - **No manual intervention**: After you enable Autoscaling and set scaling limits, no manual intervention is required, allowing you to focus on your applications.
 
@@ -28,7 +28,7 @@ A Neon project can have one or more computes, each representing an individual Po
 
 ![High-level architecture diagram](/docs/introduction/autoscale-high-level-architecture.webp)
 
-Looking more closely, each PostgreSQL instance operates within its own virtual machine inside a [Kubernetes cluster](/docs/reference/glossary#kubernetes-cluster), with multiple VMs hosted on each node of the cluster. Autoscaling is implemented by allocating and deallocating vCPU and RAM to each VM.
+Looking more closely, you can see that each PostgreSQL instance operates within its own virtual machine inside a [Kubernetes cluster](/docs/reference/glossary#kubernetes-cluster), with multiple VMs hosted on each node of the cluster. Autoscaling is implemented by allocating and deallocating vCPU and RAM to each VM.
 
 ![Autoscaling diagram](/docs/introduction/autoscale-architecture.webp)
 
@@ -52,14 +52,14 @@ This allows for the proactive reduction of node load by migrating VMs away befor
 
 ### Memory scaling
 
-Memory consumption on a VM can escalate rapidly in certain scenarios. Fortunately, Neon's Autoscaling system is able to detect memory usage increases without constantly requesting metrics from the VM. This is accomplished using [cgroups](/docs/reference/glossary#cgroup), which provide notification when memory usage crosses a specified threshold. Running PostgreSQL within a cgroup inside the VM allows for the receipt of such notifications. Using cgroups in this way requires running a [vm-informant](/docs/reference/glossary#vm-informant) in the VM alongside PostgreSQL to both (a) request more resources from the autoscaler-agent when PostgreSQL consumes too much memory, and (b) to verify that downscaling requests from an autoscaler-agent will leave sufficient memory.
+Memory consumption on a VM can escalate rapidly in specific scenarios. Fortunately, Neon's Autoscaling system is able to detect memory usage increases without constantly requesting metrics from the VM. This is accomplished using [cgroups](/docs/reference/glossary#cgroup), which provide notification when memory usage crosses a specified threshold. Running PostgreSQL within a cgroup inside the VM allows for the receipt of such notifications. Using cgroups in this way requires running a [vm-informant](/docs/reference/glossary#vm-informant) in the VM alongside PostgreSQL to both (a) request more resources from the autoscaler-agent when PostgreSQL consumes too much memory and (b) verify that downscaling requests from an autoscaler-agent will leave sufficient memory.
 
-When the cgroup `memory.high` signal is activated, the vm-informant temporarily freezes the cgroup (halting the PostgreSQL instance) to prevent further allocations and requests additional memory from the autoscaler-agent. The autoscaler-agent then seeks memory from the scheduler and NeonVM. If memory is allocated swiftly, the cgroup is unfrozen, allowing PostgreSQL to resume execution. The vm-informant also lifts the freeze after a brief timeout (currently 20ms) if memory is not made available in time. 
+When the cgroup `memory.high` signal is activated, the vm-informant temporarily freezes the cgroup (halting the PostgreSQL instance) to prevent further allocations and requests additional memory from the autoscaler-agent. The autoscaler-agent then seeks memory from the scheduler and NeonVM. If memory is allocated swiftly, the cgroup is unfrozen, allowing PostgreSQL to resume execution. The vm-informant also lifts the freeze after a brief timeout (currently 20ms) if memory is not made available in time.
 
 ### Local File Cache
 
-To expedite queries, the Autoscaling system incorporates a PostgreSQL extension the places a cache in front of the storage layer.
-Many queries benefit from this additional memory, particularly those requiring multiple database scans (such as creating an index). The [local file cache](/docs/reference/glossary#local-file-cache) capitalizes on the additional memory allocated to the VM by dedicating a portion of it to the cache. The cache is stored in a single file within a [tmpfs](/docs/reference/glossary#tmpfs) to minimize disk usage, with entries maintained as 1 MB chunks and evicted using a [Least Recently Used (LRU) policy](/docs/reference/glossary#lru-policy). Due to the storage model, writebacks are not required, resulting in near-instant evictions. The vm-informant adjusts the file cache size when scaling occurs through the autoscaler-agent, ensuring seamless operation.
+To expedite queries, the Autoscaling system incorporates a PostgreSQL extension then places a cache in front of the storage layer.
+Many queries benefit from this additional memory, particularly those requiring multiple database scans (such as creating an index). The [local file cache](/docs/reference/glossary#local-file-cache) capitalizes on the additional memory allocated to the VM by dedicating a portion to the cache. The cache is stored in a single file within a [tmpfs](/docs/reference/glossary#tmpfs) to minimize disk usage, with entries maintained as 1 MB chunks and evicted using a [Least Recently Used (LRU) policy](/docs/reference/glossary#lru-policy). Due to the storage model, writebacks are not required, resulting in near-instant evictions. The vm-informant adjusts the file cache size when scaling occurs through the autoscaler-agent, ensuring seamless operation.
 
 ## Autoscaling source code
 
