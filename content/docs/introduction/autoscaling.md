@@ -10,7 +10,7 @@ A Beta version of Neon's _Autoscaling_ feature is now available for [paid plan](
 
 Neon's Autoscaling feature offers the following benefits:
 
-- **On-demand scaling:** Autoscaling helps with workloads that experience variations over time, such as applications with region or time-based changes in demand.
+- **On-demand scaling:** Autoscaling helps with workloads that experience variations over time, such as applications with regional or time-based changes in demand.
 - **Cost effectiveness**: Autoscaling optimizes resource utilization, ensuring that organizations only pay for required resources, rather than over-provisioning to handle peak loads.
 - **Resource and cost control**: Autoscaling operates within a user-defined range, ensuring that your compute resources and associated costs do not scale indefinitely.
 - **No manual intervention**: After you enable Autoscaling and set scaling limits, no manual intervention is required, allowing you to focus on your applications.
