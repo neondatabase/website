@@ -6,11 +6,15 @@ enableTableOfContents: true
 
 A Beta version of Neon's _Autoscaling_ feature is now available for [paid plan](https://neon.tech/docs/introduction/billing#neon-plans) users in selected regions. The Autoscaling feature dynamically adjusts the allocation of vCPU and RAM for a Neon compute endpoint in response to the current load, eliminating the need for manual intervention.
 
-## Benefits of Autoscaling
+## How does Autoscaling help?
 
-Autoscaling provides adaptability to fluctuating and unforeseen workloads, making it beneficial for workloads that experience variations over time, such as e-commerce sites with region-specific or daily and weekly changes in demand. Enhanced scalability is another benefit, as autoscaling permits applications to accommodate a substantial volume of requests and adapt to rapid traffic growth without necessitating manual intervention or application restarts. Autoscaling also saves time in database management, enabling developers to allocate more time to enhancing features and refining their applications.
+Neon's Autoscaling feature offers the following benefits:
 
-Cost effectiveness is another advantage, as autoscaling optimizes resource utilization, ensuring that organizations pay only for the resources they genuinely require, rather than over-provisioning for peak loads. Additionally, the Autoscaling feature operates within a predefined compute size range, providing reassurance that your compute resources do not scale indefinitely.
+- **Workload adaptability:** Autoscaling is beneficial for workloads that experience variations over time, such as sites with region-specific or daily and weekly changes in demand.
+- **Time-saving**: No manual intervention is required. Developers can allocate more time to enhancing features and refining their applications.
+- **No downtime:** There are no thresholds that require a service or application restart.
+- **Cost effectiveness**: Autoscaling optimizes resource utilization, ensuring that organizations pay only for the resources they require, rather than over-provisioning for peak loads.
+- **Range-bound scaling**: Autoscaling operates within a user-defined range, providing reassurance that your compute resources do not scale indefinitely.
 
 ## How to enable Autoscaling
 
@@ -21,19 +25,17 @@ The Autoscaling feature can be enabled when creating a Neon project. For existin
 
 ## How Autoscaling works
 
-In order to understand the functionality of Autoscaling, it is essential to start with a high-level view and then proceed to examine the specific components that make up the autoscaling system.
-
-At a high level, a Neon project can have one or more computes, each representing an individual PostgreSQL instance. Storage is decoupled from these computes, meaning that the PostgreSQL servers executing queries are physically separate from the data storage location. This separation offers numerous advantages and is crucial for autoscaling.
+A Neon project can have one or more computes, each representing an individual PostgreSQL instance. Storage is decoupled from these computes, meaning that the PostgreSQL servers executing queries are physically separate from the data storage location. This separation offers numerous advantages, including enablement of Neon's autoscaling feature.
 
 ![High-level architecture diagram](/docs/introduction/autoscale-high-level-architecture.webp)
 
-Focusing more closely, each PostgreSQL instance operates within its own virtual machine inside a [Kubernetes cluster](/docs/reference/glossary#kubernetes-cluster), with multiple VMs hosted on each node of the cluster. Fundamentally, autoscaling is implemented by allocating and deallocating vCPU and RAM to each VM, with only a few PostgreSQL-specific considerations involved.
+Looking more closely, each PostgreSQL instance operates within its own virtual machine inside a [Kubernetes cluster](/docs/reference/glossary#kubernetes-cluster), with multiple VMs hosted on each node of the cluster. Fundamentally, autoscaling is implemented by allocating and deallocating vCPU and RAM to each VM.
 
 ![Autoscaling diagram](/docs/introduction/autoscale-architecture.webp)
 
-### Autoscaling agent
+### The Autoscaling agent
 
-Each Kubernetes node hosts a single instance of the [autoscaler-agent](/docs/reference/glossary#autoscaler-agent), which serves as the control mechanism for the autoscaling system. The agent collects metrics from the VMs on its node, makes scaling decisions, and performs the necessary checks and requests to implement those decisions.
+Each Kubernetes node hosts a single instance of the [autoscaler-agent](/docs/reference/glossary#autoscaler-agent), which serves as the control mechanism for Neon's autoscaling system. The agent collects metrics from the VMs on its node, makes scaling decisions, and performs the necessary checks and requests to implement those decisions.
 
 While the program may appear simple at first glance—merely collecting metrics and determining the appropriate number of compute units for a VM—the system's complexity arises from the need to gracefully handle various challenging situations. Examples of such circumstances include:
 
