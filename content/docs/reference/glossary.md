@@ -210,7 +210,7 @@ The user account that registers and authenticates with Neon using a GitHub or Go
 
 ### NeonVM
 
-A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes cluster, allowing for the allocation and deallocation of vCPU and RAM. For more information, refer to the [NeonVM](https://github.com/neondatabase/autoscaling/tree/main/neonvm) GitHub repository.
+A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes cluster, allowing for the allocation and deallocation of vCPU and RAM. For more information, refer to the NeonVM source in the [neondatabase/autoscaling](https://github.com/neondatabase/autoscaling/tree/main/neonvm) repository.
 
 ### Non-primary branch
 
@@ -352,7 +352,7 @@ A program that runs inside the VM alongside PostgreSQL, responsible for requesti
 
 ### vCPU
 
-Virtual Central Processing Unit, a unit of processing power allocated to a virtual machine or compute instance.
+Virtual CPU, a unit of processing power allocated to a virtual machine or compute instance.
 
 ### WAL
 

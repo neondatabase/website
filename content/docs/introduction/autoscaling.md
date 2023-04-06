@@ -54,7 +54,7 @@ The live migration process allows for the proactive reduction of node load by mi
 
 ### Memory scaling
 
-PostgreSQL's memory consumption can escalate rapidly in specific scenarios. Fortunately, Neon's Autoscaling system is able to detect memory usage increases without constantly requesting metrics from the VM. This is accomplished by running PostgreSQL within a [cgroup](/docs/reference/glossary#cgroup), which provides notifications when memory usage crosses a specified threshold. Using cgroups in this way requires running our [vm-informant](/docs/reference/glossary#vm-informant) in the VM alongside PostgreSQL to request more resources from the autoscaler-agent when PostgreSQL consumes too much memory. The vm-informant also verifies that downscaling requests from an autoscaler-agent will leave sufficient memory leftover.
+PostgreSQL's memory consumption can escalate rapidly in specific scenarios. Fortunately, Neon's Autoscaling system is able to detect memory usage increases without constantly requesting metrics from the VM. This is accomplished by running PostgreSQL within a [cgroups](/docs/reference/glossary#cgroups), which provides notifications when memory usage crosses a specified threshold. Using cgroups in this way requires running our [vm-informant](/docs/reference/glossary#vm-informant) in the VM alongside PostgreSQL to request more resources from the autoscaler-agent when PostgreSQL consumes too much memory. The vm-informant also verifies that downscaling requests from an autoscaler-agent will leave sufficient memory leftover.
 
 ### Local file cache
 
