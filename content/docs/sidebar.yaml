@@ -114,6 +114,8 @@
   items:
     - title: Extensions overview
       slug: extensions/pg-extensions
+    - title: pg_toktoken
+      slug: extensions/pg_tiktoken
     - title: pgvector
       slug: extensions/pgvector
 - title: Import data
