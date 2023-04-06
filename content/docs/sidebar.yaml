@@ -114,7 +114,7 @@
           slug: guides/vercel-manual
 - title: Extensions
   items:
-    - title: Extensions overview
+    - title: Supported extensions
       slug: extensions/pg-extensions
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
