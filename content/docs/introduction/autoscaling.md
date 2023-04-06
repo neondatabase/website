@@ -6,19 +6,18 @@ enableTableOfContents: true
 
 A Beta version of Neon's _Autoscaling_ feature is now available for [paid plan](https://neon.tech/docs/introduction/billing#neon-plans) users in selected regions. The Autoscaling feature dynamically adjusts the allocation of vCPU and RAM for a Neon compute endpoint in response to the current load, eliminating the need for manual intervention.
 
-## How does Autoscaling help?
+## Autoscaling benefits
 
 Neon's Autoscaling feature offers the following benefits:
 
-- **Workload adaptability:** Autoscaling is beneficial for workloads that experience variations over time, such as sites with region-specific or daily and weekly changes in demand.
-- **Time-saving**: No manual intervention is required. Developers can allocate more time to enhancing features and refining their applications.
-- **No downtime:** There are no thresholds that require a service or application restart.
+- **Scaling on demand** Autoscaling is beneficial for workloads that experience variations over time, such as sites with region-specific or daily and weekly changes in demand.
 - **Cost effectiveness**: Autoscaling optimizes resource utilization, ensuring that organizations pay only for the resources they require, rather than over-provisioning for peak loads.
-- **Range-bound scaling**: Autoscaling operates within a user-defined range, providing reassurance that your compute resources do not scale indefinitely.
+- **Cost control**: Autoscaling operates within a user-defined range, providing reassurance that your compute resources and costs do not scale indefinitely.
+- **No manual intervention**: After you enable Autoscaling and set scaling boundaries, no manual intervention is required, allowing you to focus on your application development work.
 
 ## How to enable Autoscaling
 
-The Autoscaling feature can be enabled when creating a Neon project. For existing projects, you can enable Autoscaling by editing a compute endpoint. For instructions, see:
+You can enable Autoscaling when creating a Neon project or afterward using a simple compute endpoint configuration dialog. If you have multiple compute endpoints, you can enable and configure Autoscaling for each compute endpoint individually. For instructions, see:
 
 - [Create a project](/docs/manage/projects#create-a-project)
 - [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint)
