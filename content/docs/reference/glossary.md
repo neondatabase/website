@@ -34,9 +34,13 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. You can monitor the state of a compute endpoint in the **Branches** widget on the Neon **Dashboard**.
 
+### autoscaler-agent
+
+A control mechanism in the Neon autoscaling system that collects metrics from VMs, makes scaling decisions, and performs checks and requests to implement those decisions.
+
 ### Autoscaling
 
-A feature that allows you to specify a minimum and maximum number of Compute Units (CU) for a compute endpoint. Neon scales compute resources up and down within the specified boundaries to meet workload demand.
+A feature that automatically adjusts the allocation of vCPU and RAM for compute endpoints within specified minimum and maximum compute size boundaries, optimizing for performance and cost-efficiency. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 ### Availability Checker
 
@@ -63,6 +67,10 @@ A Neon Control Plane operation that checks the availability of data in a branch 
 ### CI/CD
 
 Continuous integration and continuous delivery or continuous deployment.
+
+### cgroups
+
+Control groups, a Linux kernel feature that allows the organization, prioritization, and accounting of system resources for groups of processes.
 
 ### Compute
 
@@ -148,9 +156,41 @@ A custom volume-based paid plan offered by Neon. See [Neon plans](/docs/introduc
 
 A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Free Tier](/docs/reference/technical-preview-free-tier/).
 
+### Kubernetes
+
+An open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications.
+
+### Kubernetes cluster
+
+A set of interconnected nodes that run containerized applications and services using Kubernetes, an open-source orchestration platform for automating deployment, scaling, and management of containerized applications. The cluster consists of at least one control plane node, which manages the overall state of the cluster, and multiple worker nodes, where the actual application containers are deployed and executed. The worker nodes communicate with the control plane node to ensure the desired state of the applications is maintained.
+
+### Kubernetes node
+
+A worker machine in a Kubernetes cluster, which runs containerized applications.
+
+### Kubernetes scheduler
+
+A component of Kubernetes that assigns newly created pods to nodes based on resource availability and other constraints.
+
+### KVM
+
+Kernel-based Virtual Machine, a virtualization infrastructure built into the Linux kernel that allows it to act as a hypervisor for virtual machines.
+
+### Live migration
+
+A feature provided by some hypervisors, such as QEMU, that allows the transfer of a running virtual machine from one host to another with minimal interruption.
+
+### Local File Cache
+
+A layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute instance. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly.
+
 ### LSN
 
 Log Sequence Number. A byte offset to a location in the [WAL stream](#wal-stream). The Neon branching feature supports creating branches with data up to a specified LSN.
+
+### LRU policy
+
+Least Recently Used policy, an algorithm for cache replacement that evicts the least recently accessed items first.
 
 ### Neon
 
@@ -167,6 +207,10 @@ A browser-based graphical interface for managing Neon projects and resources.
 ### Neon user
 
 The user account that registers and authenticates with Neon using a GitHub or Google account. Once authenticated, a Neon user account can create and manage projects, branches, users, databases, and other project resources.
+
+### NeonVM
+
+A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes cluster, allowing for the allocation and deallocation of vCPU and RAM. For more information, refer to the NeonVM source in the [neondatabase/autoscaling](https://github.com/neondatabase/autoscaling/tree/main/neonvm) repository.
 
 ### Non-primary branch
 
@@ -197,6 +241,10 @@ A custom volume-based paid plan offered by Neon that includes support for resale
 ### Point-in-time restore
 
 Restoration of data to a state that existed at an earlier time. Neon retains a data history in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. See [Create a branch](/docs/manage/branches#create-a-branch) for more information. Neon retains 7-day history, by default.
+
+### PostgreSQL
+
+An open-source relational database management system (RDBMS) emphasizing extensibility and SQL compliance.
 
 ### PostgreSQL role
 
@@ -233,6 +281,14 @@ A Neon component that functions as a multitenant service that accepts and handle
 ### Passwordless auth
 
 A Neon feature that allows you to connect to a Neon project with a single `psql` command. See [Passwordless auth](/docs/connect/passwordless-connect).
+
+### QEMU
+
+A free and open-source emulator and virtualizer that performs hardware virtualization.
+
+### RAM
+
+Random Access Memory, a type of computer memory used to store data that is being actively processed.
 
 ### Region
 
@@ -282,9 +338,21 @@ A preview period during which users can try Neon.
 
 An encrypted access token that enables you to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Manage API keys](https://neon.tech/docs/get-started-with-neon/using-api-keys/).
 
+### tmpfs
+
+A temporary file storage system that uses a portion of a system's RAM to store files, improving performance by reducing disk usage.
+
 ### User
 
 See [Neon user](#neon-user) and [PostgreSQL role](#postgresql-role).
+
+### vm-informant
+
+A program that runs inside the VM alongside PostgreSQL, responsible for requesting more resources from the autoscaler-agent and validating proposed downscaling to ensure sufficient memory.
+
+### vCPU
+
+Virtual CPU, a unit of processing power allocated to a virtual machine or compute instance.
 
 ### WAL
 
