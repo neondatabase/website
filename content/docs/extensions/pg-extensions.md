@@ -1,5 +1,5 @@
 ---
-title: Extensions overview
+title: Supported extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
