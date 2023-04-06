@@ -7,10 +7,6 @@ redirectFrom:
 
 The Neon cloud service is currently in Technical Preview. For information about how the Technical Preview fits within Neon's release plans, please refer to the [Neon roadmap](/docs/reference/roadmap).
 
-<Admonition type="note">
-From February 6, 2023, the Neon Free Tier offers a compute endpoint for every branch and 100 hours of _compute active time_ per month. The _compute active time_ limit is in effect for Neon projects created after this date. The limit will not be applied to Neon projects created before this date until April 1, 2023, to provide enough time for users to adjust their usage or upgrade to a paid plan. Neon launched paid plans on March 15, 2023. For information about paid plans, refer to our [Pricing](https://neon.tech/pricing) page.
-</Admonition>
-
 The Neon Free Tier has the following limits:
 
 - 1 Neon project.
