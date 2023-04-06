@@ -23,7 +23,7 @@ const AVERAGE_DAYS_IN_MONTH = 30.416666;
 
 const COMPUTE_UNITS_VALUES = {
   min: 0.25,
-  max: 8,
+  max: 7,
   step: 0.25,
   default: 1,
 };
@@ -37,7 +37,7 @@ const COMPUTE_TIME_VALUES = {
 
 const STORAGE_VALUES = {
   min: 1,
-  max: 1000,
+  max: 200,
   default: 50,
 };
 
@@ -107,19 +107,19 @@ const Calculator = () => {
           </h2>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-[1220px] grid-cols-[1fr_338px] gap-[10px] 2xl:grid-cols-[1fr_314px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
+        <div className="mx-auto mt-12 grid max-w-[1220px] grid-cols-[1fr_314px] gap-[10px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
           <div className="row-span-1 flex rounded-lg bg-gray-1 md:flex-col">
             <div className="grow px-7 py-6 xl:py-5 xl:px-6 md:px-5 md:pb-3">
               <h3 className="text-2xl font-medium leading-none tracking-tight text-white xl:text-xl">
-                Compute size
+                Compute time
               </h3>
               <div className="mt-8 flex flex-col gap-2 md:mt-7">
                 <div className="flex justify-between">
                   <h4 className="font-medium leading-none tracking-tight">
-                    <span>Compute units</span>
+                    <span>Compute size</span>
                     <Tooltip
                       id="compute"
-                      content="A Compute Unit (CU) is a measure of processing power and memory. In Neon, a CU has 1 vCPU and 4 GB of RAM. The number CUs defines the processing power of your Neon compute."
+                      content="Compute size is measured in Compute Units (CU). In Neon, a CU has 1 vCPU and 4 GB of RAM. The number of CUs defines the processing power of your Neon compute."
                     />
                   </h4>
                   <p className="text-[15px] font-medium leading-none tracking-tight">
@@ -162,7 +162,7 @@ const Calculator = () => {
               <div className="mt-8 flex flex-col gap-2 xl:mt-6 md:mt-6">
                 <div className="flex justify-between">
                   <h4 className="font-medium leading-none tracking-tight">
-                    Active time
+                    Active time per day
                     <Tooltip
                       id="activeTime"
                       content="The number of hours per day that your compute resources are active, on average."
@@ -226,7 +226,7 @@ const Calculator = () => {
               </h3>
               <div className="mt-7 flex flex-col gap-2">
                 <div className="flex justify-between">
-                  <h4 className="font-medium leading-none tracking-tight">Data storage</h4>
+                  <h4 className="font-medium leading-none tracking-tight">Data</h4>
                   <p className="text-[15px] font-medium leading-none tracking-tight">
                     {storageValue} GiB
                   </p>
@@ -255,7 +255,9 @@ const Calculator = () => {
                       <ThumbIcon aria-hidden />
                     </Slider.Thumb>
                   </Slider.Root>
-                  <span className="text-[12px] tracking-tight text-[#C9CBCF]">&#62;1 TB</span>
+                  <span className="text-[12px] tracking-tight text-[#C9CBCF]">
+                    &#62;{STORAGE_VALUES.max} GiB
+                  </span>
                 </div>
               </div>
             </div>
@@ -276,12 +278,16 @@ const Calculator = () => {
             <div className="min-h-[141px] grow px-6 pt-7 pb-9 xl:min-h-[161px] xl:py-8 lg:pb-6 md:px-5 md:py-5 xs:min-h-[214px]">
               <h3 className="text-2xl font-medium leading-none tracking-tight text-white xl:text-xl">
                 Data transfer and Written data
+                <Tooltip
+                  id="data"
+                  content="Written data is the amount of data written from compute to storage. Data transfer is the amount of data transferred out of Neon."
+                />
               </h3>
               <LazyMotion features={domAnimation}>
                 <AnimatePresence initial={false} mode="wait">
                   {isAdvanced ? (
                     <m.ul
-                      className="mt-7 flex items-center gap-x-12 xl:flex-wrap xl:gap-x-7 sm:gap-4"
+                      className="mt-7 flex items-center gap-x-10 xl:flex-wrap xl:gap-x-7 sm:gap-4"
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -301,7 +307,7 @@ const Calculator = () => {
                         <label htmlFor="dataTransfer">Data transfer</label>
                         <input
                           id="dataTransfer"
-                          className="ml-8 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight xl:mx-2"
+                          className="ml-5 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight xl:mx-2"
                           name="data-transfer"
                           type="number"
                           min={0}
@@ -319,7 +325,7 @@ const Calculator = () => {
                         <label htmlFor="writtenData">Written data</label>
                         <input
                           id="writtenData"
-                          className="ml-8 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight xl:mx-2"
+                          className="ml-5 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight xl:mx-2"
                           name="written-data"
                           type="number"
                           min={0}
@@ -335,11 +341,11 @@ const Calculator = () => {
                       </li>
                       <li>
                         <button
-                          className="relative mx-2 border-b border-primary-1 text-primary-1 transition-colors duration-200 hover:border-transparent xl:mx-0 xl:block"
+                          className="relative mx-0 border-b border-primary-1 text-primary-1 transition-colors duration-200 hover:border-transparent xl:mx-0 xl:block"
                           type="button"
                           onClick={() => setIsAdvanced(false)}
                         >
-                          Use average
+                          Use average percentage
                         </button>
                       </li>
                     </m.ul>
@@ -367,7 +373,7 @@ const Calculator = () => {
                         type="button"
                         onClick={() => setIsAdvanced(true)}
                       >
-                        Use advanced parameters
+                        Enter your own values
                       </button>
                     </m.p>
                   )}
@@ -387,15 +393,18 @@ const Calculator = () => {
             </div>
           </div>
 
-          <div className="col-start-2 row-span-3 row-start-1 flex flex-col rounded-lg bg-secondary-2 p-7 pb-9 lg:col-start-1 lg:row-span-1 lg:grid lg:grid-cols-2 lg:gap-x-32 sm:grid-cols-1 sm:gap-x-0">
+          <div className="col-start-2 row-span-3 row-start-1 flex flex-col items-center rounded-lg bg-secondary-2 p-7 pb-9 lg:col-start-1 lg:row-span-1 lg:grid lg:grid-cols-2 lg:gap-x-32 sm:grid-cols-1 sm:gap-x-0">
             <h3 className="text-center text-lg font-semibold leading-none tracking-tight text-black lg:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
             <p className="mt-8 text-center text-[72px] font-medium leading-none tracking-tighter text-black xl:mt-10 xl:text-[60px] lg:col-start-2 sm:col-start-1 sm:mt-8">
               <span>{estimatedPrice}</span>
-              <span className="mt-1 block text-base tracking-normal">/per month</span>
+              <span className="mt-1 block text-xl leading-normal tracking-normal">per month</span>
+              <span className="mt-1 block text-base font-normal tracking-normal">
+                based on the US East (Ohio) region
+              </span>
             </p>
-            <ul className="my-11 flex flex-col space-y-8 text-lg leading-none tracking-tight text-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:my-8 sm:items-center">
+            <ul className="my-11 flex w-full flex-col space-y-8 text-lg leading-none tracking-tight text-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:my-8 sm:items-center">
               <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0">
                 <CheckIcon className="mr-2" />
                 <span className="mr-1 font-semibold">{computeUnits}</span>

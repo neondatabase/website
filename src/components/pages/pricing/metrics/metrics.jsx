@@ -14,25 +14,25 @@ const items = [
     icon: ComputeTimeIcon,
     name: 'Compute time',
     price: 'From $0.102 /hour',
-    details: 'The amount time that your Neon compute resources are active.',
+    details: 'Compute time is the amount of computing capacity used per hour.',
   },
   {
     icon: ProjectStorageIcon,
     name: 'Project storage',
     price: 'From $0.000164 /Gigabyte-hour',
-    details: 'The amount of data stored in your Neon projects.',
+    details: 'Project storage is the amount of data and history in your Neon projects.',
   },
   {
     icon: WrittenDataIcon,
     name: 'Written data',
     price: 'From $0.096 /Gigabyte',
-    details: 'The amount of data written to Neon storage to ensure durability.',
+    details: 'Written data is the amount of data written from Neon compute to storage.',
   },
   {
     icon: DataTransferIcon,
     name: 'Data transfer',
     price: 'From $0.09 /Gigabyte',
-    details: 'The amount of data transferred out of Neon.',
+    details: 'Data transfer is the amount of data transferred out of Neon.',
   },
 ];
 
@@ -46,7 +46,7 @@ const Metrics = () => (
       <ul className="mt-14 grid w-full grid-cols-4 gap-x-9 xl:gap-x-5 lg:grid-cols-2 lg:gap-4 sm:grid-cols-1">
         {items.map(({ icon: Icon, name, price, details }, index) => (
           <li className="rounded-[20px] bg-gray-1 p-7" key={index}>
-            <Icon className="" aria-hidden />
+            <Icon className="h-[44px] w-auto" aria-hidden />
             <h2 className="mt-5 text-2xl font-semibold leading-tight">{name}</h2>
             <span className="mt-3 block text-base font-light leading-normal text-code-gray-1">
               {price}
