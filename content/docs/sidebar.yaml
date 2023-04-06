@@ -110,6 +110,12 @@
           slug: guides/vercel
         - title: Connect manually
           slug: guides/vercel-manual
+- title: Extensions
+  items:
+    - title: Extensions overview
+      slug: extensions/pg-extensions
+    - title: pgvector
+      slug: extensions/pgvector
 - title: Import data
   items:
     - title: Import from PostgreSQL
