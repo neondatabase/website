@@ -35,7 +35,7 @@ To configure a shadow database:
 
 1. Add a `SHADOW_DATABASE_URL` environment variable to your `.env` file and set it to the databasen connection string that you copied in the previous step. The following example uses a shadow database named `shadow_db`. Use the database name that you gave to your shadow database.
 
-   ```shell
+   ```text
    SHADOW_DATABASE_URL="postgres://daniel:<password>@ep-restless-rice-862380.us-east-2.aws.neon.tech:5432/shadow_db"
    ```
 
@@ -53,7 +53,7 @@ If you encounter this error, ensure that you are using a direct connection to th
 
 You can configure Prisma Migrate to use a direct connection string while allowing applications that use Prisma Client with a pooled connection by adding a `directUrl` property to the datasource block in your `schema.prisma` file. For example:
 
-```text
+```typescript
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")

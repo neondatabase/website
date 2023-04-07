@@ -22,9 +22,7 @@ To configure Prisma Migrate with Neon, see [Use Prisma Migrate with Neon](/docs/
 To establish a basic connection from Prisma to Neon, perform the following steps:
 
 1. Retrieve your Neon connection string. In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-
   ![Connection details widget](/docs/guides/connection_details.png)
-
   The connection string includes the user name, password, hostname, and database name.
 
 2. Add the following lines to your `prisma/schema.prisma` file to identify the data source and database URL:
