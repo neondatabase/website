@@ -10,22 +10,22 @@ redirectFrom:
 
 Prisma is an open-source, next-generation ORM that allows you to manage and interact with your database. This guide describes how to connect from Prisma to Neon. It also covers how to connect when using Prisma Client from serverless functions and how to address connection timeout issues.
 
-For infomration about using Prisma MIgrate with Neon, see [Use Prisma Migrate with Neon](/docs/guides/prisma-migrate).
+For information about using Prisma Migrate with Neon, see [Use Prisma Migrate with Neon](/docs/guides/prisma-migrate).
 
 ## Prerequisites
 
-- A Neon project. If you do not have one, see [Create a project](/docs/manage/projects#create-a-project).
-- A Prisma project. If you do not have one, see [Set up Prisma](https://www.prisma.io/docs/getting-started/setup-prisma), in the _Prisma documentation_.
+- A Neon project. See [Create a project](/docs/manage/projects#create-a-project).
+- A Prisma project. See [Set up Prisma](https://www.prisma.io/docs/getting-started/setup-prisma), in the _Prisma documentation_.
 
 ## Connect to Neon from Prisma
 
-To connect your database:
+To connect from Prisma to Neon, perform the following steps:
 
 1. In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](/docs/guides/connection_details.png)
+  ![Connection details widget](/docs/guides/connection_details.png)
 
-The connection string includes the user name, password, hostname, and database name.
+  The connection string includes the user name, password, hostname, and database name.
 
 2. Add the following lines to your `prisma/schema.prisma` file to identify the data source and database URL:
 
@@ -36,7 +36,7 @@ The connection string includes the user name, password, hostname, and database n
    }
    ```
 
-3. Add a `DATABASE_URL` setting to your `.env` file and set it to the Neon connection string that you copied in the previous step.
+3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step.
 
    ```shell
    DATABASE_URL="postgres://<user>:<password>@<host>:5432/neondb"
