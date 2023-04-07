@@ -8,7 +8,7 @@ redirectFrom:
   - /docs/guides/prisma-guide
 ---
 
-Prisma is an open-source, next-generation ORM that allows you to manage and interact with your database. This guide describes how to connect from Prisma to Neon. It also covers how to connect when using Prisma Client from serverless functions and how to address connection timeout issues.
+Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide explains how to connect Prisma to Neon, as well as how to establish connections when using Prisma Client in serverless functions and resolve connection timeout issues.
 
 For information about using Prisma Migrate with Neon, see [Use Prisma Migrate with Neon](/docs/guides/prisma-migrate).
 
@@ -19,9 +19,9 @@ For information about using Prisma Migrate with Neon, see [Use Prisma Migrate wi
 
 ## Connect to Neon from Prisma
 
-To connect from Prisma to Neon, perform the following steps:
+To establish a basic connection from Prisma to Neon, perform the following steps:
 
-1. In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+1. Retrieve you Neon connection string. In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
   ![Connection details widget](/docs/guides/connection_details.png)
 
@@ -42,17 +42,19 @@ To connect from Prisma to Neon, perform the following steps:
    DATABASE_URL="postgres://<user>:<password>@<host>:5432/neondb"
    ```
 
+If you are using Prisma Client from a serverless function, see [Prisma Client with PgBouncer for serverless functions](#prisma-client-with-pgbouncer-for-serverless-functions) for information about configuring a pooled connection. To adjust your connection string to avoid connection timeouts issues, see [Connection timeouts](#connection-timeouts).
+
 ## Prisma Client with PgBouncer for serverless functions
 
-Serverless functions typically require a large number of database connections. If you are using Prisma Client from a serverless function, use a pooled connection string and append the `?pgbouncer=true` flag to the connection string, as shown:
+Serverless functions typically require a large number of database connections. If you are using Prisma Client from a serverless function, adjust your Neon connection string by adding a `-pooler` suffix to the endpoint ID and appending the `?pgbouncer=true` flag to the connection string, as shown:
 
 ```text
 postgres://sally:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true
 ```
 
-A pooled connection string adds a `-pooler` suffix to the endpoint ID, which tells Neon to use a pooled connection to the database rather than a direct connection. The following connection string includes the  `-pooler` suffix and the `?pgbouncer=true` flag.
+The `-pooler` suffix tells Neon to use a pooled connection to the database rather than a direct connection. The `?pgbouncer=true` flag requires that the connection uses PgBouncer, which is the pooler used by Neon.
 
-For more information about pooled connection strings, see [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling). For related information, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
+For more information about PgBouncer and pooled connection strings, see [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling). For related information, refer to the [Add pgbouncer to the connection URL](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url), in the _Prisma documentation_.
 
 ## Connection timeouts
 
