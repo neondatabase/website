@@ -54,7 +54,7 @@ To add the integration:
     1. Select the Neon project, database, and role that Vercel will use to connect.
       ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
-          The [primary branch](/docs/reference/glossary#primary-branch) of your Neon project is preselected as your **Production branch**.
+          The root branch of your Neon project is preselected as your **Production branch**.
 
           The **Create a branch for your development environment** creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a copy-on-write clone of your production branch that you can modify without affecting your production branch.
 
@@ -73,7 +73,7 @@ To add the integration:
     1. Navigate to the [Neon Console](https://console.neon.tech/).
     1. Select the project you connected to.
     1. Select **Branches**.
-       You will see the primary branch of your project. If you created a development branch, you will also see a `vercel-dev` branch.
+       You will see the root branch of your project. If you created a development branch, you will also see a `vercel-dev` branch.
        ![Neon branches](/docs/guides/vercel_neon_branches.png)
 1. To view the results of the integration in Vercel:
     1. Navigate to [Vercel](https://vercel.com/).
