@@ -7,7 +7,9 @@ redirectFrom:
   - /docs/integrations/prisma
 ---
 
-Prisma Migrate is a migration tool that allows you to evolve your database schema from prototyping to production. Prisma Migrate requires a shadow database to detect schema drift. This topic describes configuring a second Neon database as a shadow database. It also describes how to  configure connections when connecting to the same Neon database from Prisma Migrate and serverless applications that use Prisma Client with a pooled database connection.
+Prisma Migrate is a migration tool that allows you to evolve your database schema from prototyping to production. Prisma Migrate requires a shadow database to detect schema drift. This topic describes configuring a second Neon database as a shadow database.
+
+This topic also describes how to configure Prisma Migrate when you need to connect to the same Neon database from Prisma Migrate, which requires a direct database connection, and serverless functions that require a pooled database connection.
 
 For more information about shadow databases, refer to [About the shadow database](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database), in the _Prisma documentation_.
 
