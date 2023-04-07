@@ -47,7 +47,7 @@ Error querying the database: db error: ERROR: prepared statement
 
 If you encounter this error, ensure that you are using a direct connection to the database for Prisma Migrate. Neon supports both pooled and direct connections to the same database. See [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling) for more information.
 
-You can configure Prisma Migrate to use a direct connection string while allowing applications that use Prisma Client with a pooled connection by adding a `directUrl` property to the datasource block in your `schema.prisma` file. For example:
+You can configure Prisma Migrate to use a direct connection string while allowing applications to use Prisma Client with a pooled connection by adding a `directUrl` property to the datasource block in your `schema.prisma` file. For example:
 
 ```typescript
 datasource db {
