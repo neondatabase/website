@@ -47,9 +47,9 @@ Error querying the database: db error: ERROR: prepared statement
 "s0" already exists
 ```
 
-If you encounter this error, ensure that you are using a direct connection to the database for Prisma Migrate. Neon supports both pooled and direct connections to the same database. See [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling) for more information.
+To avoid this issue, ensure that you are using a direct connection to the database for Prisma Migrate. Neon supports both pooled and direct connections to the same database. See [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling) for more information.
 
-You can configure Prisma Migrate to use a direct connection string while allowing applications to use Prisma Client with a pooled connection by adding a `directUrl` property to the datasource block in your `schema.prisma` file. For example:
+You can configure Prisma Migrate to use a direct connection while allowing applications to use Prisma Client with a pooled connection by adding a `directUrl` property to the datasource block in your `schema.prisma` file. For example:
 
 ```typescript
 datasource db {
@@ -71,7 +71,7 @@ After adding the `directUrl` property to your `schema.prisma` file, update the `
 
 Your `SHADOW_DATABASE_URL` variable can continue to use the same direct database connection string.
 
-For example:
+When you are finished updating your `.env` file, your variable settings should appear similar to the following:
 
 ```text
 DATABASE_URL="postgres://daniel:<password>@ep-restless-rice-862380-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true"
