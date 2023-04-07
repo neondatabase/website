@@ -8,7 +8,7 @@ redirectFrom:
   - /docs/guides/prisma-guide
 ---
 
-Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide explains how to connect Prisma to Neon, how to establish connections when using Prisma Client in serverless functions, and how to resolve connection timeout issues.
+Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide explains how to connect Prisma to Neon, establish connections when using Prisma Client in serverless functions, and resolve connection timeout issues.
 
 To configure Prisma Migrate with Neon, see [Use Prisma Migrate with Neon](/docs/guides/prisma-migrate).
 
@@ -44,7 +44,7 @@ If you are using Prisma Client from a serverless function, see [Connect from ser
 
 ## Connect from serverless functions
 
-Serverless functions typically require a large number of database connections. If you are connecting from Prisma Client to Neon from a serverless function, you should use a pooled connection string. Neon uses the PgBouncer connection pooler, which maintains a pool of connections to the database, allowing Neon to support a large number of concurrent connections.
+Serverless functions typically require a large number of database connections. When connecting from Prisma Client to Neon from a serverless function, you should use a pooled connection string. Neon uses the PgBouncer connection pooler, which maintains a pool of connections to the database, allowing Neon to support a large number of concurrent connections.
 
 To use a pooled connection from Prisma, adjust your Neon connection string by adding a `-pooler` suffix to the endpoint ID and appending the `?pgbouncer=true` flag to the connection string, as shown:
 
@@ -73,17 +73,17 @@ This error most likely means that the Prisma query engine timed out before the N
 
 A Neon compute has two main states: _Active_ and _Idle_. Active means that the compute is currently running. If there is no query activity for 5 minutes, Neon places a compute into an idle state by default. For more information, see [Compute lifecycle](/docs/introduction/compute-lifecycle/).
 
-When you connect to an idle compute from Prisma, Neon automatically activates the it. Activation typically happens within a few seconds but added latency can result in a connection timeout. To address this issue, your can adjust your Neon connection string as follows:
+When you connect to an idle compute from Prisma, Neon automatically activates it. Activation typically happens within a few seconds but added latency can result in a connection timeout. To address this issue, your can adjust your Neon connection string as follows:
 
 - Add a `connect_timeout` parameter and set it to 0 or a higher value. This parameter defines the maximum number of seconds to wait for a new connection to be opened. The default value is 5 seconds. A setting of 0 means no timeout. A higher setting should provide the time required to avoid connection timeout issues. For example:
 
-  ```bash
+  ```text
   DATABASE_URL=postgres://daniel:<password>@ep-restless-rice-862380-pooler.us-east-2.aws.neon.tech/neondb?connect_timeout=10
   ```
 
-- If you are using [pooled connection](/docs/connect/connection-pooling), set `pool_timeout` to 0 or a higher value. This setting defines the number of seconds to wait for a new connection from the pool. The default is 10 seconds. A setting of 0 means no timeout. A higher setting should provide the time required to avoid connection timeout issues. For example:
+- If using a [pooled connection](/docs/connect/connection-pooling), set `pool_timeout` to 0 or a higher value. This setting defines the number of seconds to wait for a new connection from the pool. The default is 10 seconds. A setting of 0 means no timeout. A higher setting should provide the time required to avoid connection timeout issues. For example:
 
-  ```bash
+  ```text
   DATABASE_URL=postgres://daniel:<password>@ep-restless-rice-862380-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true&pool_timeout=20
   ```
 
