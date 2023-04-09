@@ -19,7 +19,7 @@ You can view compute state transitions in the **Branches** widget on the Neon **
 
 ## Compute configuration
 
-During the [Technical Preview](/docs/reference/technical-preview-free-tier), Neon only supports modifying session-level configuration parameters. Parameters are reset when the session terminates, such as when the the compute suspends due to inactivity.
+During the [Technical Preview](/docs/reference/technical-preview-free-tier), Neon only supports modifying session-level configuration parameters. Parameters are reset when the session terminates, such as when the compute suspends due to inactivity.
 
 For information about Neon's PostgreSQL server configuration, see [Neon PostgreSQL parameter settings](/docs/reference/compatibility#neon-postgresql-parameter-settings).
 
