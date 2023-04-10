@@ -20,6 +20,7 @@ const DATA_TRANSFER_PRICE = 0.09;
 const WRITTEN_DATA_PRICE = 0.096;
 const PERCENTAGE_OF_MONTHLY_COST = 0.1;
 const AVERAGE_DAYS_IN_MONTH = 30.416666;
+const CUSTOM_THRESHOLD = 416;
 
 const COMPUTE_UNITS_VALUES = {
   min: 0.25,
@@ -93,11 +94,8 @@ const Calculator = () => {
     () => computeTimeCost + storageCost + writtenAndTransferDataCost,
     [computeTimeCost, storageCost, writtenAndTransferDataCost]
   );
-
-  const estimatedPrice = useMemo(
-    () => (totalCost >= 416 ? 'Custom' : `$${totalCost.toFixed(2)}`),
-    [totalCost]
-  );
+  
+  const estimatedPrice = totalCost.toFixed(2);
 
   useEffect(
     () =>
@@ -444,10 +442,10 @@ const Calculator = () => {
             <Button
               className="mt-auto w-full max-w-[260px] !bg-black py-6 !text-lg !text-white xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1 sm:mt-1"
               theme="primary"
-              to={estimatedPrice === 'Custom' ? LINKS.contactSales : LINKS.dashboard}
+              to={estimatedPrice >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               size="sm"
             >
-              {estimatedPrice === 'Custom' ? 'Get Custom Quote' : 'Get Started'}
+              {estimatedPrice >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </Button>
           </div>
         </div>
