@@ -1,6 +1,8 @@
 ---
-title: Supported PostgreSQL Extensions
+title: Supported extensions
 enableTableOfContents: true
+redirectFrom:
+  - /docs/reference/pg-extensions
 ---
 
 Neon supports the PostgreSQL extensions shown in the following table. For extension documentation, select the extension version.
