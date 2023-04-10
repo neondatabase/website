@@ -96,8 +96,8 @@
       items:
         - title: Connect from Prisma
           slug: guides/prisma
-        - title: Use Prisma With Neon
-          slug: guides/prisma-guide
+        - title: Use Prisma Migrate With Neon
+          slug: guides/prisma-migrate
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy
