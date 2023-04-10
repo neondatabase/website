@@ -60,7 +60,7 @@ To edit a compute endpoint:
 Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](https://neon.tech/docs/connect/connection-pooling#enable-connection-pooling).
 </Admonition>
 
-## Compute size configuration
+### Compute size configuration
 
 Neon [paid plan](/docs/introduction/billing#neon-plans) users can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
 
@@ -75,12 +75,14 @@ Neon supports two compute size configuration options:
 Switching between **Fixed Size** and **Autoscaling** is not yet supported.
 </Admonition>
 
-## Auto-suspend delay configuration
+### Auto-suspend delay configuration
 
-Neon suspends a compute after 5 seconds of inactivity, by default. This feature is also referred to a _scale-to-zero_. You can adjust the delay period to suit your requirements.
+Neon's _Auto-suspend_ feature places a compute endpoint into an `Idle` state after a period of inactivity. This feature is also referred to as "scale-to-zero". Suspension occurs after 5 minutes of inactivity, by default, but you can adjust the delay period. For example, you can increase the delay period to reduce the number of suspensions or you an disable _Auto-suspend_ entirely to ensure that a compute endpoint is always active.
 
-- A value of 0 means use the default (5 seconds).
-- A value of -1 means never suspend. The maximum value is 86400 seconds (24 hours).
+The maximum setting is 86400 seconds (24-hours), and the following settings have a special meaning:
+
+- `0` means use the default setting (5 seconds).
+- `-1` means never suspend the compute endpoint. The maximum value is 86400 seconds (24 hours).
 
 ## Delete a compute endpoint
 
