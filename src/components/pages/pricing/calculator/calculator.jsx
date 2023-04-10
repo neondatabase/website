@@ -182,7 +182,7 @@ const Calculator = () => {
                     />
                   </h4>
                   <p className="text-[15px] font-medium leading-none tracking-tight">
-                    {activeTime} hours <span className="text-[#94979E]">per day</span>
+                    {activeTime} `hour${activeTime <= 1 ? '' : 's'}` <span className="text-[#94979E]">per day</span>
                   </p>
                 </div>
                 <div className="flex items-center py-[5px]">
@@ -227,7 +227,7 @@ const Calculator = () => {
                 </span>
               </p>
               <span className="mt-12 text-sm leading-none text-[#EFEFF0] xl:mt-10 md:hidden">
-                <span className="text-[#00E599]">${COMPUTE_TIME_PRICE}</span> / hour
+                <span className="text-[#00E599]">${COMPUTE_TIME_PRICE}</span> per hour
               </span>
             </div>
           </div>
