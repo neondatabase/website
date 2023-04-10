@@ -182,7 +182,7 @@ const Calculator = () => {
                     />
                   </h4>
                   <p className="text-[15px] font-medium leading-none tracking-tight">
-                    {activeTime} hours <span className="text-[#94979E]">/day</span>
+                    {activeTime} hours <span className="text-[#94979E]">per day</span>
                   </p>
                 </div>
                 <div className="flex items-center py-[5px]">
@@ -223,7 +223,7 @@ const Calculator = () => {
               <p className="mt-12 text-[40px] leading-none tracking-tighter text-[#00E599] xl:text-3xl md:mt-0 md:text-xl">
                 ${computeTimeCost.toFixed(2)}
                 <span className="block text-center text-sm leading-none tracking-normal text-[#EFEFF0] md:ml-1 md:inline-block md:align-middle">
-                  per /month
+                  per month
                 </span>
               </p>
               <span className="mt-12 text-sm leading-none text-[#EFEFF0] xl:mt-10 md:hidden">
