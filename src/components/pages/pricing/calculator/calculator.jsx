@@ -419,23 +419,23 @@ const Calculator = () => {
                 based on the US East (Ohio) region
               </span>
             </p>
-            <ul className="my-11 flex w-full flex-col space-y-8 text-lg leading-none tracking-tight text-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:my-8 sm:items-center">
-              <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0">
+            <ul className="my-11 flex w-full flex-col space-y-8 text-lg leading-none tracking-tight text-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:my-8 sm:mx-auto sm:max-w-[260px]">
+              <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-16">
                 <CheckIcon className="mr-2" />
                 <span className="mr-1 font-semibold">{computeUnits}</span>
                 <span>compute units</span>
               </li>
-              <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0">
+              <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-16">
                 <CheckIcon className="mr-2" />
                 <span className="mr-1 font-semibold">{storageValue} GiB</span>
                 <span>storage</span>
               </li>
-              <li className="relative flex pl-[3.25rem] text-black after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0">
+              <li className="relative flex pl-[3.25rem] text-black after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-16">
                 <CheckIcon className="mr-2" />
                 {isAdvanced && <span className="mr-1 font-semibold">{writtenDataValue} GiB</span>}
                 <span>written data</span>
               </li>
-              <li className="relative flex pl-[3.25rem] lg:pl-0">
+              <li className="relative flex pl-[3.25rem] lg:pl-0 sm:pl-16">
                 <CheckIcon className="mr-2" />
                 {isAdvanced && <span className="mr-1 font-semibold">{dataTransferValue} GiB</span>}
                 <span>data transfer</span>
