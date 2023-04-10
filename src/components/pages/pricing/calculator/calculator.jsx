@@ -95,7 +95,7 @@ const Calculator = () => {
   );
 
   const estimatedPrice = useMemo(
-    () => (totalCost >= 208 ? 'Custom' : `$${totalCost.toFixed(2)}`),
+    () => (totalCost >= 416 ? 'Custom' : `$${totalCost.toFixed(2)}`),
     [totalCost]
   );
 
