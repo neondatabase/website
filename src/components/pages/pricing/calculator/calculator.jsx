@@ -447,7 +447,7 @@ const Calculator = () => {
               to={estimatedPrice === 'Custom' ? LINKS.contactSales : LINKS.dashboard}
               size="sm"
             >
-              {estimatedPrice === 'Custom' ? 'Contact Sales' : 'Get Started'}
+              {estimatedPrice === 'Custom' ? 'Get Custom Quote' : 'Get Started'}
             </Button>
           </div>
         </div>
