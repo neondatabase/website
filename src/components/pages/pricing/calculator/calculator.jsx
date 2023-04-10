@@ -95,7 +95,7 @@ const Calculator = () => {
     [computeTimeCost, storageCost, writtenAndTransferDataCost]
   );
   
-  const estimatedPrice = totalCost.toFixed(2);
+  const estimatedPrice = `$${totalCost.toFixed(2)}`;
 
   useEffect(
     () =>
@@ -442,10 +442,10 @@ const Calculator = () => {
             <Button
               className="mt-auto w-full max-w-[260px] !bg-black py-6 !text-lg !text-white xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1 sm:mt-1"
               theme="primary"
-              to={estimatedPrice >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
+              to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               size="sm"
             >
-              {estimatedPrice >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
+              {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </Button>
           </div>
         </div>
