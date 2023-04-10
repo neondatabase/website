@@ -47,7 +47,7 @@ For more information connection pooling in Neon, see [Connection pooling](/docs/
 
 ## Edit a compute endpoint
 
-Neon paid plan users can edit a compute endpoint to change the [compute size configuration](#compute-size-configuration).
+Neon paid plan users can edit a compute endpoint to change the [compute size](#compute-size-configuration) or [Auto-suspend](#auto-suspend-delay-configuration) configuration.
 
 To edit a compute endpoint:
 
@@ -74,6 +74,13 @@ Neon supports two compute size configuration options:
 <Admonition type="note">
 Switching between **Fixed Size** and **Autoscaling** is not yet supported.
 </Admonition>
+
+## Auto-suspend delay configuration
+
+Neon suspends a compute after 5 seconds of inactivity, by default. This feature is also referred to a _scale-to-zero_. You can adjust the delay period to suit your requirements.
+
+- A value of 0 means use the default (5 seconds).
+- A value of -1 means never suspend. The maximum value is 86400 seconds (24 hours).
 
 ## Delete a compute endpoint
 
