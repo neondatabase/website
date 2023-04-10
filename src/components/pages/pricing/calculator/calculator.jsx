@@ -94,7 +94,7 @@ const Calculator = () => {
     () => computeTimeCost + storageCost + writtenAndTransferDataCost,
     [computeTimeCost, storageCost, writtenAndTransferDataCost]
   );
-  
+
   const estimatedPrice = `$${totalCost.toFixed(2)}`;
 
   useEffect(
@@ -223,7 +223,7 @@ const Calculator = () => {
               <p className="mt-12 text-[40px] leading-none tracking-tighter text-[#00E599] xl:text-3xl md:mt-0 md:text-xl">
                 ${computeTimeCost.toFixed(2)}
                 <span className="block text-center text-sm leading-none tracking-normal text-[#EFEFF0] md:ml-1 md:inline-block md:align-middle">
-                  /month
+                  per /month
                 </span>
               </p>
               <span className="mt-12 text-sm leading-none text-[#EFEFF0] xl:mt-10 md:hidden">
@@ -281,7 +281,7 @@ const Calculator = () => {
               <p className="text-[40px] leading-none tracking-tighter text-[#00E599] xl:text-3xl md:text-xl">
                 ${storageCost.toFixed(2)}
                 <span className="block text-center text-sm leading-none tracking-normal text-[#EFEFF0] md:ml-1 md:inline-block md:align-middle">
-                  /month
+                  per month
                 </span>
               </p>
             </div>
@@ -400,7 +400,7 @@ const Calculator = () => {
               <p className="text-[40px] leading-none tracking-tighter text-[#00E599] xl:text-3xl md:text-xl">
                 ${writtenAndTransferDataCost.toFixed(2)}
                 <span className="block text-center text-sm leading-none tracking-normal text-[#EFEFF0] md:ml-1 md:inline-block md:align-middle">
-                  /month
+                  per month
                 </span>
               </p>
             </div>
@@ -418,22 +418,22 @@ const Calculator = () => {
               </span>
             </p>
             <ul className="my-11 flex w-full flex-col space-y-8 text-lg leading-none tracking-tight text-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:my-8 sm:mx-auto sm:max-w-[260px]">
-              <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-16">
+              <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
                 <CheckIcon className="mr-2" />
                 <span className="mr-1 font-semibold">{computeUnits}</span>
                 <span>compute units</span>
               </li>
-              <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-16">
+              <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
                 <CheckIcon className="mr-2" />
                 <span className="mr-1 font-semibold">{storageValue} GiB</span>
                 <span>storage</span>
               </li>
-              <li className="relative flex pl-[3.25rem] text-black after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-16">
+              <li className="relative flex pl-[3.25rem] text-black after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
                 <CheckIcon className="mr-2" />
                 {isAdvanced && <span className="mr-1 font-semibold">{writtenDataValue} GiB</span>}
                 <span>written data</span>
               </li>
-              <li className="relative flex pl-[3.25rem] lg:pl-0 sm:pl-16">
+              <li className="relative flex pl-[3.25rem] lg:pl-0 sm:pl-14">
                 <CheckIcon className="mr-2" />
                 {isAdvanced && <span className="mr-1 font-semibold">{dataTransferValue} GiB</span>}
                 <span>data transfer</span>
