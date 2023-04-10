@@ -182,7 +182,7 @@ const Calculator = () => {
                     />
                   </h4>
                   <p className="text-[15px] font-medium leading-none tracking-tight">
-                    {activeTime} `hour${activeTime <= 1 ? '' : 's'}` <span className="text-[#94979E]">per day</span>
+                    {activeTime} hour{activeTime <= 1 ? '' : 's'} <span className="text-[#94979E]">per day</span>
                   </p>
                 </div>
                 <div className="flex items-center py-[5px]">
