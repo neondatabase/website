@@ -8,7 +8,7 @@ redirectFrom:
   - /docs/guides/prisma-guide
 ---
 
-Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide explains how to connect Prisma to Neon, establish connections when using Prisma Client in serverless functions, and resolve connection timeout issues.
+Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide explains how to connect Prisma to Neon, establish connections when using Prisma Client in serverless functions, and resolve [connection timeout](#connection-timeouts) issues.
 
 To configure Prisma Migrate with Neon, see [Use Prisma Migrate with Neon](/docs/guides/prisma-migrate).
 
@@ -40,7 +40,9 @@ To establish a basic connection from Prisma to Neon, perform the following steps
    DATABASE_URL="postgres://daniel:<password>@ep-restless-rice-862380.us-east-2.aws.neon.tech/neondb"
    ```
 
+<Admonition type="important">
 If you are using Prisma Client from a serverless function, see [Connect from serverless functions](#connect-from-serverless-functions). To adjust your connection string to avoid connection timeouts issues, see [Connection timeouts](#connection-timeouts).
+</Admonition>
 
 ## Connect from serverless functions
 
