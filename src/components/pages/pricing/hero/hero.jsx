@@ -16,7 +16,7 @@ const items = [
       { title: '1 project' },
       { title: '10 branches' },
       { title: '3 GB of data per branch' },
-      { title: '100 compute hours/month' },
+      { title: 'A shared compute with 1 GB of RAM' },
       { title: 'Auto-suspend compute' },
     ],
     button: {
@@ -32,11 +32,11 @@ const items = [
     description:
       'A usage-based plan for small to medium teams. Unlimited resources with advanced configuration options. Share your projects with anyone. Only pay for what you use with no fixed contract.',
     features: [
-      { title: 'Unlimited resources' },
+      { title: 'Unlimited branches' },
       { title: 'Project sharing' },
       { title: 'Configurable compute size' },
+      { title: 'Autoscaling', label: 'beta' },
       { title: 'Configurable auto-suspend compute', label: 'coming soon' },
-      { title: 'Autoscaling', label: 'coming soon' },
     ],
     button: {
       url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
