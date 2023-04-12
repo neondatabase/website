@@ -11,7 +11,7 @@ You example project used in the guide simulates a marketplace of products, where
 
 ## Prerequisites
 
-- A [Grafbase account](https://grafbase.com/)
+- [The Grafbase CLI](https://website-git-gb-3006-add-changelog-for-resolvers.grafbase-vercel.dev/cli)
 - A Neon project. See [Create a Neon project]()
 
 ## Create a backend with Grafbase
@@ -24,7 +24,7 @@ You example project used in the guide simulates a marketplace of products, where
     npx grafbase init
     ```
 
-2. In your project directory, open the `grafbase/schema.graphql` file and replace the contents with the following schema:
+2. In your project directory, open the `grafbase/schema.graphql` file and replace the existing content with the following schema:
 
     ```graphql
     extend type Mutation {
@@ -46,14 +46,23 @@ You example project used in the guide simulates a marketplace of products, where
     CREATE TABLE product_visits(id SERIAL PRIMARY KEY, product_id TEXT NOT NULL);
     ```
 
-This table stores product page view data used to dynamically calculate a product price.
+This table stores product page view data that the application uses to dynamically calculate a product price.
 
 ## Create the resolvers
 
-The schema includes a custom `addProductVisit` query and `prodcut/price` a field resolver. To create resolvers for those, create the following files in your project directory:
+The schema includes a custom `addProductVisit` query and `prodcut/price` a field. To create resolvers for those, create the following files in your project directory:
 
 - `grafbase/resolvers/add-product-visit.js`
 - `grafbase/resolvers/product/price.js`
+
+```bash
+cd grafbase
+mkdir resolvers
+cd resolvers
+touch add-product-visit.js
+mkdir product 
+touch price.js
+```
 
 Add the following code to each file:
 
@@ -70,6 +79,7 @@ More code will be added to these files in a later step.
 Inside the `grafbase` directory in your project, run the following commands to install the Neon serverless driver:
 
   ```bash
+  cd grafbase-neon/grafbase
   npm init -y
   npm install @neondatabase/serverless
   ```
