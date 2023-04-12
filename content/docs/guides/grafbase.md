@@ -2,7 +2,7 @@
 title: Use Grafbase resolvers with Neon
 subtitle: Learn how to use Grafbase with Neon
 enableTableOfContents: true
-isDraft: false
+isDraft: true
 ---
 
 Grafbase allows you to combine your data sources into a centralized GraphQL endpoint, which you can deploy at the edge using the [Grafbase Edge Gateway](https://website-git-gb-3006-add-changelog-for-resolvers.grafbase-vercel.dev/docs/edge-gateway).
@@ -39,7 +39,7 @@ type Product @model {
 
 Navigate to the Neon Console and select your project. Run the following statement in the **SQL Editor**:
 
-```
+```sql
 CREATE TABLE product_visits(id SERIAL PRIMARY KEY, product_id TEXT NOT NULL);
 ```
 
@@ -58,7 +58,6 @@ export default function Resolver(root, params) {
 ```
 
 ## Install the Neon serverless driver
-
 
 Inside the grafbase directory, run the following:
 
@@ -83,7 +82,7 @@ Add your connection string to the file grafbase/.env in this format:
 DATABASE_URL=postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb
 ```
 
-# Add code to your resolvers
+## Add code to your resolvers
 
 In both resolvers, we'll use the @neondatabase/serverless NPM dependency to connect to our Neon database.
 
@@ -135,13 +134,13 @@ We're now ready to start playing with it!
 
 Start the Grafbase CLI:
 
-```
+```bash
 npx grafbase dev
 ```
 
 Then go to http://localhost:4000 and execute the following GraphQL mutation, which will create a new product:
 
-```
+```graphql
 mutation {
   productCreate(input: { name: "Super Product" }) {
     product {
@@ -162,7 +161,7 @@ mutation {
 
 Then try to query the same product, and check the price:
 
-```
+```graphql
 query {
   product(input: { by: "PREVIOUS_PRODUCT_ID" }) {
     id
