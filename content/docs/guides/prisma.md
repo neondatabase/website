@@ -54,11 +54,9 @@ To use a pooled connection from Prisma, adjust your Neon connection string by ad
 DATABASE_URL=postgres://daniel:<password>@ep-restless-rice-862380-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true
 ```
 
-<pre style="background-color:#f8f8f8;border:1px solid #ccc;padding:10px;">
-<code>
-DATABASE_URL=postgres://daniel:&lt;password&gt;@ep-restless-rice-862380<strong>-pooler</strong>.us-east-2.aws.neon.tech/neondb?pgbouncer=true
-</code>
-</pre>
+`DATABASE_URL=postgres://daniel:<password>@ep-restless-rice-862380-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true`
+
+`DATABASE_URL=postgres://daniel:<password>@ep-restless-rice-862380`**-pooler**`.us-east-2.aws.neon.tech/neondb**?pgbouncer=true**`
 
 The `-pooler` suffix tells Neon to use a pooled connection to the database rather than a direct connection. The `?pgbouncer=true` flag requires that the connection uses PgBouncer.
 
