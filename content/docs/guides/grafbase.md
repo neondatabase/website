@@ -5,51 +5,56 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Grafbase allows you to combine your data sources into a centralized GraphQL endpoint, which you can deploy at the edge using the [Grafbase Edge Gateway](https://website-git-gb-3006-add-changelog-for-resolvers.grafbase-vercel.dev/docs/edge-gateway).
+Grafbase allows you to combine your data sources into a centralized GraphQL endpoint. This guide describes how to create a new GraphQL API using Grafbase and use Grafbase [resolvers](https://website-git-gb-3006-add-changelog-for-resolvers.grafbase-vercel.dev/docs/edge-gateway/resolvers) to interact with your Neon database at the edge.
 
-This guide describes how to create a new GraphQL API using Grafbase and use Grafbase [resolvers](https://website-git-gb-3006-add-changelog-for-resolvers.grafbase-vercel.dev/docs/edge-gateway/resolvers) to interact with your Neon database at the edge.
+You example project used in the guide simulates a marketplace of products, where product price is dynamically calculated and retrieved based on data in your Neon database.
 
 ## Prerequisites
 
-- A Grafbase account
-- A Neon project
+- A [Grafbase account](https://grafbase.com/)
+- A Neon project. See [Create a Neon project]()
 
 ## Create a backend with Grafbase
 
-Inside a new directory or an existing project run the following command:
+1. Create a directory for your Grafbase project and run the following command to initialize it:
 
-```bash
-npx grafbase init
-```
+  ```bash
+  cd grafbase-neon
+  npx grafbase init
+  ```
 
-You will simulate a marketplace of products, where the price is dynamically calculated and retrieved based on data in an external database.
+2. In your project directory, open the `grafbase/schema.graphql` file and replace the contents with the following schema:
 
-Open the file grafbase/schema.graphql and replace the contents with this schema:
+  ```graphql
+  extend type Mutation {
+    addProductVisit(productId: ID!): ID! @resolver(name: "add-product-visit")
+  }
 
-```graphql
-extend type Mutation {
-  addProductVisit(productId: ID!): ID! @resolver(name: "add-product-visit")
-}
+  type Product @model {
+    name: String!
+    price: Float @resolver(name: "product/price")
+  }
+  ```
 
-type Product @model {
-  name: String!
-  price: Float @resolver(name: "product/price")
-}
-```
+## Create the schema in Neon
 
-Navigate to the Neon Console and select your project. Run the following statement in the **SQL Editor**:
+1. Navigate to the Neon Console and select your project.
+2. Open the **SQL Editor**and run the following `CREATE TABLE` statement:
 
 ```sql
 CREATE TABLE product_visits(id SERIAL PRIMARY KEY, product_id TEXT NOT NULL);
 ```
 
-This statement creates a table in Neon where you will store product page views that will be used to dynamically calculate a product price.
+This table stores product page view data used to dynamically calculate a product price.
 
 ## Create the resolvers
 
-The schema includes a custom query `addProductVisit` and a field resolver `prodcut/price`. We have to create them, let's do that now.
+The schema includes a custom `addProductVisit` query and `prodcut/price` a field resolver. To create resolvers for those, create the following files in your project directory:
 
-Create the file grafbase/resolvers/add-product-visit.js and grafbase/resolvers/product/price.js and add the following:
+- `grafbase/resolvers/add-product-visit.js`
+- `grafbase/resolvers/product/price.js`
+
+Add the following code to each file:
 
 ```graphql
 export default function Resolver(root, params) {
@@ -57,26 +62,29 @@ export default function Resolver(root, params) {
 }
 ```
 
+More code will be added to these files in a later step.
+
 ## Install the Neon serverless driver
 
-Inside the grafbase directory, run the following:
+Inside the `grafbase` directory in your project, run the following commands to install the Neon serverless driver:
 
 ```bash
 npm init -y
 npm install @neondatabase/serverless
 ```
 
-## Retrive your Neon connection string
+## Retrieve your Neon connection string
 
-We'll be forwarding queries to our newly created database in Neon, from the previously visited dashboard, copy the line inside the Connection string input in the Connection Details card.
+A database connection string is required to forward queries are forwarded to your Neon database. 
 
-The connection string should look something like this
+1. Navigate to the Neon Dashboard.
+2. Copy the connection string for your database from the **Connection Details** widget. The connection string should look something like this:
 
-```text
-postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb
-```
+  ```text
+  postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb
+  ```
 
-Add your connection string to the file grafbase/.env in this format:
+3. Add the connection string to a `DATABASE_URL` variable in your `grafbase/.env` file. For example:
 
 ```text
 DATABASE_URL=postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb
@@ -84,9 +92,7 @@ DATABASE_URL=postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-centra
 
 ## Add code to your resolvers
 
-In both resolvers, we'll use the @neondatabase/serverless NPM dependency to connect to our Neon database.
-
-Inside respolvers/product/add-product-visit we will insert a new record in the product_visits with the productId each time this resolver is queried.
+1. In the `respolvers/product/add-product-visit` resolver, add the following code, which will insert a new record in the `product_visits` table with the `productId` each time the resolver is queried.
 
 ```graphql
 // grafbase/resolvers/add-product-visit.js
@@ -105,7 +111,7 @@ export default async function Resolver(_, { productId }) {
 }
 ```
 
-On product/price we will calculate the product price based on the number of visits (interest) in the product.
+In the `product/price` resolver, add the following code, which calculates the product price based on the number of visits (interest) in the product.
 
 ```graphql
 // grafbase/resolvers/product/price.js
@@ -126,19 +132,15 @@ export default async function Resolver({ id }) {
 }
 ```
 
-You can learn more about Neon and Postgres by reading their documentation introduction.
-
 ## Test the resolvers
 
-We're now ready to start playing with it!
-
-Start the Grafbase CLI:
+1. Start the Grafbase CLI:
 
 ```bash
 npx grafbase dev
 ```
 
-Then go to http://localhost:4000 and execute the following GraphQL mutation, which will create a new product:
+2. Go to http://localhost:4000 and execute the following GraphQL mutation, which creates a new product:
 
 ```graphql
 mutation {
@@ -151,7 +153,7 @@ mutation {
 }
 ```
 
-Grab the id, and then use it to execute the following mutation, which will add a row in our database table:
+Grab the `id`, and then use it to execute the following mutation, which will add a row in our database table:
 
 ```graphql
 mutation {
@@ -171,4 +173,4 @@ query {
 }
 ```
 
-That's it! You'll see how the price increase as you query more and more `addProductVisit`.
+You will see how the price increase as you query more and more `addProductVisit`.
