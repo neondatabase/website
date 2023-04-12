@@ -47,7 +47,7 @@ For more information connection pooling in Neon, see [Connection pooling](/docs/
 
 ## Edit a compute endpoint
 
-Neon paid plan users can edit a compute endpoint to change the [compute size](#compute-size-configuration) or [Auto-suspend](#auto-suspend-delay-configuration) configuration.
+Neon paid plan users can edit a compute endpoint to change the [compute size](#compute-size-configuration) or [Auto-suspend](#auto-suspend-configuration) configuration.
 
 To edit a compute endpoint:
 
@@ -75,11 +75,11 @@ Neon supports two compute size configuration options:
 Switching between **Fixed Size** and **Autoscaling** is not yet supported.
 </Admonition>
 
-### Auto-suspend delay configuration
+### Auto-suspend configuration
 
-Neon's _Auto-suspend_ feature places a compute endpoint into an `Idle` state after a period of inactivity. This feature is also referred to as "scale-to-zero". Suspension occurs after 5 minutes of inactivity, by default, but you can adjust the delay period. For example, you can increase the delay period to reduce the number of suspensions or you an disable _Auto-suspend_ entirely to ensure that a compute endpoint is always active.
+Neon's _Auto-suspend_ feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable Auto-suspend completely to maintain an "always-active" compute endpoint. An always-active endpoint eliminates the few seconds of latency required to reactivate a compte but may increase your compute time and associated costs.
 
-The maximum setting is 86400 seconds (24-hours), and the following settings have a special meaning:
+The maximum ***Auto-suspend delay** setting is 86400 seconds (24-hours), and the following settings have a special meaning:
 
 - `0` means use the default setting (5 seconds).
 - `-1` means never suspend the compute endpoint. The maximum value is 86400 seconds (24 hours).
