@@ -1,18 +1,22 @@
 ---
 title: Use Grafbase resolvers with Neon
-subtitle: Learn how to use Grafbase resolvers with Neon
+subtitle: Learn how to build and deploy serverless GraphQL backend with Grafbase and Neon
 enableTableOfContents: true
 isDraft: true
 ---
 
-Grafbase allows you to combine your data sources into a centralized GraphQL endpoint. This guide describes how to create a new GraphQL API using Grafbase and use Grafbase [resolvers](https://website-git-gb-3006-add-changelog-for-resolvers.grafbase-vercel.dev/docs/edge-gateway/resolvers) to interact with your Neon database at the edge.
+_This guide was contributed by Josep Vidal from Grafbase_
+
+Grafbase allows you to combine your data sources into a centralized GraphQL endpoint and deploy a serverless GraphQL backend.
+
+This guide describes how to create a GraphQL API using Grafbase and use Grafbase [resolvers](https://website-git-gb-3006-add-changelog-for-resolvers.grafbase-vercel.dev/docs/edge-gateway/resolvers) with the [Neon serverless driver](/docs/serverless/serverless-driver) to interact with your Neon database at the edge.
 
 The example project in this guide simulates a marketplace of products, where the product price is dynamically calculated based on data retrieved from your Neon database.
 
 ## Prerequisites
 
-- [Grafbase CLI](https://website-git-gb-3006-add-changelog-for-resolvers.grafbase-vercel.dev/cli)
-- A Neon project. See [Create a Neon project](https://neon.tech/docs/manage/projects#create-a-project)
+- The [Grafbase CLI](https://website-git-gb-3006-add-changelog-for-resolvers.grafbase-vercel.dev/cli)
+- A Neon project. See [Create a Neon project](https://neon.tech/docs/manage/projects#create-a-project).
 
 ## Create a backend with Grafbase
 
@@ -46,7 +50,7 @@ The example project in this guide simulates a marketplace of products, where the
     CREATE TABLE product_visits(id SERIAL PRIMARY KEY, product_id TEXT NOT NULL);
     ```
 
-  This table stores product page view data that the application uses to dynamically calculate a product price.
+    The `product_visits` table stores product page view data that the application uses to dynamically calculate a product price.
 
 ## Create the resolvers
 
@@ -91,13 +95,13 @@ Inside the `grafbase` directory in your project, run the following commands to i
 A database connection string is required to forward queries to your Neon database. To retrieve the connection string for your database:
 
 1. Navigate to the Neon **Dashboard**.
-2. Copy the connection string for your database from the **Connection Details** widget. The connection string should look something like this:
+2. Copy the connection string for your database from the **Connection Details** widget. The connection string should appear similar to the following:
 
     ```text
     postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb
     ```
 
-3. Add the connection string to a `DATABASE_URL` variable in your `grafbase/.env` file. For example:
+3. Add a `DATABASE_URL` environment variable to your `grafbase/.env` file and set the value to your connection string. For example:
 
     ```text
     DATABASE_URL=postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb
@@ -126,7 +130,7 @@ A database connection string is required to forward queries to your Neon databas
     }
     ```
 
-In the `product/price` resolver, add the following code, which calculates the product price based on the number of product visits, which represents customer interest in the product.
+2. In the `grafbase/resolvers/product/price.js` resolver, add the following code, which calculates the product price based on the number of product visits (the number of vists represents customer interest in the product).
 
     ```graphql
     // grafbase/resolvers/product/price.js
@@ -151,7 +155,7 @@ In the `product/price` resolver, add the following code, which calculates the pr
 
 ## Test the resolvers
 
-Your application is now ready. To test the resolver functions with Neon, perform the following steps:
+To test the resolver functions with Neon, perform the following steps:
 
 1. Start the Grafbase CLI:
 
@@ -172,7 +176,7 @@ Your application is now ready. To test the resolver functions with Neon, perform
     }
     ```
 
-3. Grab the `id`, and then use it to execute the following mutation, which will add a row in our database table:
+3. Use the product `id` to execute the following mutation, which adds a row to the database table in Neon:
 
     ```graphql
     mutation {
@@ -192,4 +196,4 @@ Your application is now ready. To test the resolver functions with Neon, perform
     }
     ```
 
-The price increases as you run more `addProductVisit` queries.
+5. Run the query several more times and watch how the price increases as "interest" in the product increases.
