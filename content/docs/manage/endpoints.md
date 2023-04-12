@@ -47,7 +47,7 @@ For more information connection pooling in Neon, see [Connection pooling](/docs/
 
 ## Edit a compute endpoint
 
-Neon paid plan users can edit a compute endpoint to change the [compute size configuration](#compute-size-configuration).
+Neon paid plan users can edit a compute endpoint to change the [compute size](#compute-size-configuration) or [Auto-suspend](#auto-suspend-configuration) configuration.
 
 To edit a compute endpoint:
 
@@ -60,7 +60,7 @@ To edit a compute endpoint:
 Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](https://neon.tech/docs/connect/connection-pooling#enable-connection-pooling).
 </Admonition>
 
-## Compute size configuration
+### Compute size configuration
 
 Neon [paid plan](/docs/introduction/billing#neon-plans) users can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
 
@@ -74,6 +74,15 @@ Neon supports two compute size configuration options:
 <Admonition type="note">
 Switching between **Fixed Size** and **Autoscaling** is not yet supported.
 </Admonition>
+
+### Auto-suspend configuration
+
+Neon's _Auto-suspend_ feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable _Auto-suspend_ completely to maintain an "always-active" compute endpoint. An "always-active" configuration eliminates the few seconds of latency required to reactivate a compute endpoint but is likely to increase your compute time usage.
+
+The maximum **Auto-suspend delay** setting is 86400 seconds (24-hours), and the following settings have a special meaning:
+
+- `0` means use the default setting (5 minutes / 300 seconds).
+- `-1` means never suspend the compute endpoint. The maximum value is 86400 seconds (24 hours).
 
 ## Delete a compute endpoint
 

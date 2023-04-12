@@ -32,7 +32,7 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 ### Auto-suspend compute
 
-A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. You can monitor the state of a compute endpoint in the **Branches** widget on the Neon **Dashboard**.
+A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Neon Pro plan users can configure the _Auto-suspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable Auto-suspend completely to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
 ### autoscaler-agent
 
@@ -304,7 +304,7 @@ A Neon architecture component responsible for the durability of database changes
 
 ### Scale-to-zero
 
-Scale-to-zero refers to Neon's _Auto-suspend compute_ feature, which places a compute endpoint into an `Idle` state when it is not being used. Neon suspends a compute after five minutes of inactivity, by default.
+Scale-to-zero refers to Neon's _Auto-suspend compute_ feature, which places a compute endpoint into an `Idle` state when it is not being used. Neon suspends a compute after five minutes of inactivity, by default. See [Auto-suspend compute](#auto-suspend-compute).
 
 ### Serverless
 
