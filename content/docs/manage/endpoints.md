@@ -77,11 +77,11 @@ Switching between **Fixed Size** and **Autoscaling** is not yet supported.
 
 ### Auto-suspend configuration
 
-Neon's _Auto-suspend_ feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable Auto-suspend completely to maintain an "always-active" compute endpoint. An always-active endpoint eliminates the few seconds of latency required to reactivate a compte but may increase your compute time and associated costs.
+Neon's _Auto-suspend_ feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable Auto-suspend completely to maintain an "always-active" compute endpoint. An always-active compute endpoint eliminates the few seconds of latency required to reactivate a compute but may increase your compute time and associated costs.
 
 The maximum ***Auto-suspend delay** setting is 86400 seconds (24-hours), and the following settings have a special meaning:
 
-- `0` means use the default setting (5 seconds).
+- `0` means use the default setting (5 minutes / 300 seconds).
 - `-1` means never suspend the compute endpoint. The maximum value is 86400 seconds (24 hours).
 
 ## Delete a compute endpoint
