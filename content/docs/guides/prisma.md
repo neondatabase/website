@@ -50,7 +50,7 @@ Serverless functions typically require a large number of database connections. W
 
 To use a pooled connection from Prisma, adjust your Neon connection string by adding a `-pooler` suffix to the endpoint ID and appending the `?pgbouncer=true` flag to the connection string, as shown:
 
-`DATABASE_URL=postgres://daniel:\<password\>@ep-restless-rice-862380<b>-pooler</b>.us-east-2.aws.neon.tech/neondb<b>?pgbouncer=true</b>`
+<mark style="background-color: #f0f0f0;">DATABASE_URL=postgres://daniel:&lt;password&gt;@ep-restless-rice-862380<b>-pooler</b>.us-east-2.aws.neon.tech/neondb<b>?pgbouncer=true</b></mark>
 
 DATABASE_URL=postgres://daniel:\<password\>@ep-restless-rice-862380<b>-pooler</b>.us-east-2.aws.neon.tech/neondb<b>?pgbouncer=true</b>
 
