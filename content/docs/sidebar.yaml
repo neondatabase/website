@@ -138,8 +138,8 @@
       slug: security/secure-connections
 - title: Reference
   items:
-    - title: API
-      slug: reference/api-reference
+    - title: Neon API
+      slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
     - title: SDKs
       slug: reference/sdk
     - title: Glossary

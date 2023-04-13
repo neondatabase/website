@@ -39,7 +39,7 @@ This is the account you used to sign up with Neon. Neon currently supports signi
 
 ## API keys
 
-API keys are global and belong to the Neon account. API keys are used with the [Neon API](/docs/reference/api-reference) to create and manage Neon projects or objects within a Neon project. A Neon account can create unlimited API keys. For more information, see [Manage API keys](/docs/manage/api-keys).
+API keys are global and belong to the Neon account. API keys are used with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to create and manage Neon projects or objects within a Neon project. A Neon account can create unlimited API keys. For more information, see [Manage API keys](/docs/manage/api-keys).
 
 ## Projects
 
