@@ -67,6 +67,7 @@ mkdir resolvers
 cd resolvers
 touch add-product-visit.js
 mkdir product 
+cd product
 touch price.js
 ```
 
