@@ -45,7 +45,9 @@ In the GUI application or IDE, enter the connection details into the appropriate
 
 ![Register - Server](/docs/connect/pgadmin4.png)
 
-If the connection is successful, you should be able to view and interact with your database from the GUI application or IDE.
+Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For example, the DBeaver client has a **URL** field, but connecting to Neon requires specifying the connection details as shown:
+
+![DBeaver connection](/docs/connect/dbeaver_connection.png)
 
 ## Tested GUI applications and IDEs
 
