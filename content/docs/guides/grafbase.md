@@ -23,7 +23,6 @@ The example project in this guide simulates a marketplace of products, where the
 1. Create a directory and initialize your Grafbase project by running the following commands:
 
     ```bash
-    cd grafbase-neon
     npx grafbase init
     ```
 
