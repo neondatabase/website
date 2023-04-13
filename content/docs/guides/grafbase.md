@@ -113,8 +113,6 @@ A database connection string is required to forward queries to your Neon databas
 
     ```graphql
     // grafbase/resolvers/add-product-visit.js
-    import dotenv from 'dotenv';
-    dotenv.config();
     import { Client } from '@neondatabase/serverless'
 
     export default async function Resolver(_, { productId }) {
@@ -134,8 +132,6 @@ A database connection string is required to forward queries to your Neon databas
 
     ```graphql
     // grafbase/resolvers/product/price.js
-    import dotenv from 'dotenv';
-    dotenv.config();
     import { Client } from '@neondatabase/serverless'
 
     export default async function Resolver({ id }) {
