@@ -9,9 +9,11 @@
       slug: introduction/compute-lifecycle
     - title: Branching
       slug: introduction/branching
+    - title: Autoscaling
+      slug: introduction/autoscaling
     - title: Neon roadmap
       slug: introduction/roadmap
-    - title: Technical Preview Free Tier
+    - title: Free Tier
       slug: introduction/technical-preview-free-tier
     - title: Regions
       slug: introduction/regions
@@ -40,7 +42,7 @@
       slug: connect/connect-from-any-app
     - title: Connect a GUI or IDE
       slug: connect/connect-postgres-gui
-    - title: Passwordless connect
+    - title: Passwordless auth
       slug: connect/passwordless-connect
     - title: Connect with psql
       slug: connect/query-with-psql-editor
@@ -88,14 +90,14 @@
       slug: guides/nextjs
     - title: Node.js
       slug: guides/node
-    - title: Polyscale
+    - title: PolyScale
       slug: guides/polyscale
     - title: Prisma
       items:
         - title: Connect from Prisma
           slug: guides/prisma
-        - title: Use Prisma With Neon
-          slug: guides/prisma-guide
+        - title: Use Prisma Migrate With Neon
+          slug: guides/prisma-migrate
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy
@@ -110,6 +112,14 @@
           slug: guides/vercel
         - title: Connect manually
           slug: guides/vercel-manual
+- title: Extensions
+  items:
+    - title: Supported extensions
+      slug: extensions/pg-extensions
+    - title: pg_tiktoken
+      slug: extensions/pg_tiktoken
+    - title: pgvector
+      slug: extensions/pgvector
 - title: Import data
   items:
     - title: Import from PostgreSQL
@@ -128,15 +138,13 @@
       slug: security/secure-connections
 - title: Reference
   items:
-    - title: API
-      slug: reference/api-reference
+    - title: Neon API
+      slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
     - title: SDKs
       slug: reference/sdk
     - title: Glossary
       slug: reference/glossary
     - title: PostgreSQL Compatibility
       slug: reference/compatibility
-    - title: PostgreSQL Extensions
-      slug: reference/pg-extensions
 - title: Release notes
   slug: release-notes

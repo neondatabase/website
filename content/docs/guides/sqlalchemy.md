@@ -22,11 +22,11 @@ To connect to Neon from SQLAlchemy:
 
 ## Create a Neon project
 
-If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
+If you do not have one already, create a Neon project. Save your connection details, including your password. They are required when defining connection settings.
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
+3. Specify your project settings and click **Create Project**.
 
 ## Install psycopg2
 
@@ -70,9 +70,9 @@ with conn.cursor() as cur:
 where:
 
 - `<username>` is the database user.
-- `<password>` is the database user's password, which is provided to you when you create a Neon project.
+- `<password>` is the database user's password.
 
-You can find all of the connection details mentioned above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/users#reset-a-password).
+You can find all of the connection details mentioned above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 <Admonition type="note">
 This example was tested with Python 3 and psycopg2 version 2.9.3.
@@ -80,7 +80,7 @@ This example was tested with Python 3 and psycopg2 version 2.9.3.
 
 ## Create an SQLAlchemy engine for your Neon project
 
-SQLAlchemy uses engine abstraction to manage database connections, and exposes a `create_engine` function as the primary endpoint for engine initialization.
+SQLAlchemy uses engine abstraction to manage database connections and exposes a `create_engine` function as the primary endpoint for engine initialization.
 
 The following example creates an SQLAlchemy engine that points to your Neon branch:
 
@@ -101,7 +101,7 @@ where:
 - `<password>` is the database user's password, which is provided to you when you create a Neon project.
 - `<hostname>` the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 
-You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/roles#reset-a-password).
+You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 For additional information about connecting from SQLAlchemy, refer to the following topics in the SQLAlchemy documentation:
 

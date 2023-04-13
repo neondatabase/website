@@ -31,11 +31,6 @@ const items = [
       'Discounts are applied for longer duration contracts as well as bulk consumption purchases.',
   },
   {
-    question: 'Are there any setup fees or additional charges?',
-    answer:
-      'No. There are no hidden setup fees or extra charges. For usage-based plans, Neon charges on the four metrics described on our <a href="/docs/introduction/billing">Billing</a> page: Compute time, Project storage, Written Data, and Data Transfer.',
-  },
-  {
     question: 'Are there any limits or restrictions on usage?',
     answer:
       'Neon places implements limits to protect against unintended usage. For example, a usage-based plan may offer unlimited projects, compute, and storage, but Neon places safety limits on those resources to protect your account and prevent abuse. For more information, see <a href="/docs/introduction/billing">Billing</a>.',
