@@ -59,7 +59,7 @@ The schema includes an `addProductVisit` query and `prodcut/price` field. Create
 - `grafbase/resolvers/add-product-visit.js`
 - `grafbase/resolvers/product/price.js`
 
-You can use the following command to create the files:
+You can use the following commands to create the files:
 
 ```bash
 cd grafbase
