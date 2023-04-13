@@ -9,6 +9,8 @@
       slug: introduction/compute-lifecycle
     - title: Branching
       slug: introduction/branching
+    - title: Autoscaling
+      slug: introduction/autoscaling
     - title: Neon roadmap
       slug: introduction/roadmap
     - title: Free Tier
@@ -94,8 +96,8 @@
       items:
         - title: Connect from Prisma
           slug: guides/prisma
-        - title: Use Prisma With Neon
-          slug: guides/prisma-guide
+        - title: Use Prisma Migrate With Neon
+          slug: guides/prisma-migrate
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy
@@ -110,6 +112,14 @@
           slug: guides/vercel
         - title: Connect manually
           slug: guides/vercel-manual
+- title: Extensions
+  items:
+    - title: Supported extensions
+      slug: extensions/pg-extensions
+    - title: pg_tiktoken
+      slug: extensions/pg_tiktoken
+    - title: pgvector
+      slug: extensions/pgvector
 - title: Import data
   items:
     - title: Import from PostgreSQL
@@ -136,7 +146,5 @@
       slug: reference/glossary
     - title: PostgreSQL Compatibility
       slug: reference/compatibility
-    - title: PostgreSQL Extensions
-      slug: reference/pg-extensions
 - title: Release notes
   slug: release-notes
