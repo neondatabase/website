@@ -52,7 +52,7 @@ The example project in this guide simulates a marketplace of products, where the
 
     The `product_visits` table stores product page view data that the application uses to dynamically calculate a product price.
 
-## Create the resolvers
+## Create the resolver files
 
 The schema includes an `addProductVisit` query and `prodcut/price` field. Create resolvers for those by creating the following files in your project directory:
 
@@ -71,15 +71,7 @@ cd product
 touch price.js
 ```
 
-Add the following code to each file:
-
-  ```graphql
-  export default function Resolver(root, params) {
-    // ...
-  }
-  ```
-
-You will expand the code in these files in a later step.
+You will add code to these files in a later step.
 
 ## Install the Neon serverless driver
 
@@ -152,7 +144,7 @@ A database connection string is required to forward queries to your Neon databas
 
 ## Test the resolvers
 
-To test the resolver functions with Neon, perform the following steps:
+To test the resolvers with Neon, perform the following steps:
 
 1. Start the Grafbase CLI:
 
