@@ -15,7 +15,7 @@ The example project in this guide simulates a marketplace of products, where the
 
 ## Prerequisites
 
-- The [Grafbase CLI](https://website-git-gb-3006-add-changelog-for-resolvers.grafbase-vercel.dev/cli)
+- The [Grafbase CLI](https://grafbase.com/cli)
 - A Neon project. See [Create a Neon project](https://neon.tech/docs/manage/projects#create-a-project).
 
 ## Create a backend with Grafbase
