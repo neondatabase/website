@@ -1,6 +1,6 @@
 ---
 title: Use Grafbase resolvers with Neon
-subtitle: Learn how to build and deploy serverless GraphQL backend with Grafbase and Neon
+subtitle: Learn how to build and deploy serverless GraphQL backends with Grafbase and Neon
 enableTableOfContents: true
 isDraft: true
 ---
