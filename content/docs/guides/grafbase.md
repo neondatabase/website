@@ -100,7 +100,7 @@ A database connection string is required to forward queries to your Neon databas
     DATABASE_URL=postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb
     ```
 
-## Add code to your resolvers
+## Add code to the resolvers
 
 1. In the `resolvers/product/add-product-visit` resolver, add the following code, which inserts a new record in the `product_visits` table with a `productId` each time the resolver is queried.
 
