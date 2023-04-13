@@ -59,7 +59,7 @@ The schema includes an `addProductVisit` query and `prodcut/price` field. Create
 - `grafbase/resolvers/add-product-visit.js`
 - `grafbase/resolvers/product/price.js`
 
-You can use the following command to create the files:
+You can use the following commands to create the files:
 
 ```bash
 cd grafbase
@@ -67,6 +67,7 @@ mkdir resolvers
 cd resolvers
 touch add-product-visit.js
 mkdir product 
+cd product
 touch price.js
 ```
 
@@ -85,7 +86,7 @@ You will expand the code in these files in a later step.
 Inside the `grafbase` directory in your project, run the following commands to install the Neon serverless driver:
 
   ```bash
-  cd grafbase-neon/grafbase
+cd ..
   npm init -y
   npm install @neondatabase/serverless
   ```
@@ -109,7 +110,7 @@ A database connection string is required to forward queries to your Neon databas
 
 ## Add code to your resolvers
 
-1. In the `respolvers/product/add-product-visit` resolver, add the following code, which inserts a new record in the `product_visits` table with a `productId` each time the resolver is queried.
+1. In the `resolvers/product/add-product-visit` resolver, add the following code, which inserts a new record in the `product_visits` table with a `productId` each time the resolver is queried.
 
     ```graphql
     // grafbase/resolvers/add-product-visit.js
