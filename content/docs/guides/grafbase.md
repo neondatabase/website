@@ -23,7 +23,8 @@ The example project in this guide simulates a marketplace of products, where the
 1. Create a directory and initialize your Grafbase project by running the following commands:
 
     ```bash
-    npx grafbase init
+    npx grafbase init grafbase-neon
+    cd grafbase-neon
     ```
 
 2. In your project directory, open the `grafbase/schema.graphql` file and replace the existing content with the following schema:
