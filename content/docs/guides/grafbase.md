@@ -110,7 +110,7 @@ A database connection string is required to forward queries to your Neon databas
 
 ## Add code to your resolvers
 
-1. In the `respolvers/product/add-product-visit` resolver, add the following code, which inserts a new record in the `product_visits` table with a `productId` each time the resolver is queried.
+1. In the `resolvers/product/add-product-visit` resolver, add the following code, which inserts a new record in the `product_visits` table with a `productId` each time the resolver is queried.
 
     ```graphql
     // grafbase/resolvers/add-product-visit.js
