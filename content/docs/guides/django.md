@@ -8,9 +8,6 @@ redirectFrom:
   - /docs/cloud/integrations/django/
 ---
 
-Watch the video below to learn how to connect a Django application to Neon.
-[![Connection to Django](/images/neon-django.jpeg)](https://www.youtube.com/watch?v=qx9nshX9CQQ&t=1570s)
-
 To connect to Neon from a Django application:
 
 1. [Create a Neon project](#create-a-neon-project)
@@ -66,6 +63,11 @@ For additional information about Django project settings, see [Django Settings: 
 <Admonition type="note">
 Running Django tests is currently not supported. The Django test runner must be able to create a database for tests, which is not yet supported by Neon.
 </Admonition>
+
+## Video course: Micro eCommerce with Django and Neon
+
+Watch Justin Mitchel's video course, _Micro eCommerce with Python, Django, Neon Serverless Postgres, Stripe, TailwindCSS and more_, to learn how to connect a Django application to Neon.
+[![Connection to Django](/images/neon-django.jpeg)](https://www.youtube.com/watch?v=qx9nshX9CQQ&t=1570s)
 
 ## Need help?
 
