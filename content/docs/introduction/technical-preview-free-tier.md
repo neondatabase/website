@@ -10,7 +10,7 @@ The Neon cloud service is currently in Technical Preview. For information about 
 The Neon Free Tier has the following limits:
 
 - 1 Neon project.
-- 10 branches including the [primary branch](/docs/reference/glossary#primary-branch), with a limit of 3GB of data per branch.
+- 10 branches including the [primary branch](/docs/reference/glossary#primary-branch), with a limit of 3 GB of data per branch.
 - A [compute endpoint](/docs/reference/glossary#compute-endpoint) for every branch, each with 1 shared vCPU with 1 GB of RAM.
 - No limit on _compute active time_ for the primary branch, which ensures that access to data on the primary branch is never interrupted.
 - 100 hours of _compute active time_ per month (total) on non-primary branches. When you reach the limit, compute endpoints assigned to [non-primary branches](/docs/reference/glossary#non-primary-branch) are unavailable until the limit resets at the beginning of the next month.
