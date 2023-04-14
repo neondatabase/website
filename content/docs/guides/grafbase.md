@@ -120,7 +120,7 @@ A database connection string is required to forward queries to your Neon databas
     }
     ```
 
-2. In the `grafbase/resolvers/product/price.js` resolver, add the following code, which calculates the product price based on the number of product visits (the number of vists represents customer interest in the product).
+2. In the `grafbase/resolvers/product/price.js` resolver, add the following code, which calculates the product price based on the number of product visits (the number of visits represents customer interest in the product).
 
     ```javascript
     # grafbase/resolvers/product/price.js
