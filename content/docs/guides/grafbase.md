@@ -77,7 +77,7 @@ You will add code to these files in a later step.
 Inside the `grafbase` directory in your project, run the following commands to install the Neon serverless driver:
 
   ```bash
-cd ..
+  cd ..
   npm init -y
   npm install @neondatabase/serverless
   ```
