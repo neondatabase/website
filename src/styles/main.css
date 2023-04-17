@@ -3,6 +3,13 @@
     @apply relative min-w-[320px] font-sans text-black antialiased;
     -webkit-tap-highlight-color: transparent;
   }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number'] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield !important;
+  }
 }
 
 @layer components {

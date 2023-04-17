@@ -93,11 +93,11 @@ const getAllReleaseNotes = async () => {
       const post = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
 
       const {
-        data: { label, isDraft },
+        data: { isDraft },
         content,
       } = post;
 
-      return { slug: slug.replace('/', ''), label, isDraft, content };
+      return { slug: slug.replace('/', ''), isDraft, content };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };

@@ -62,6 +62,11 @@ For additional information about Django project settings, see [Django Settings: 
 Running Django tests is currently not supported. The Django test runner must be able to create a database for tests, which is not yet supported by Neon.
 </Admonition>
 
+## Video course: Micro eCommerce with Django and Neon
+
+Watch Justin Mitchel's video course, _Micro eCommerce with Python, Django, Neon Serverless Postgres, Stripe, TailwindCSS and more_, to learn how to connect a Django application to Neon.
+[![Connection to Django](/images/neon-django.jpeg)](https://www.youtube.com/watch?v=qx9nshX9CQQ&t=1570s)
+
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

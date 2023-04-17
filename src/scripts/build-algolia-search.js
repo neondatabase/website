@@ -18,12 +18,15 @@ const transformPostsToSearchObjects = async (posts, releaseNotes) => {
     };
   });
 
-  const transformedReleaseNotes = await releaseNotes.map(({ label, slug, content }) => {
+  const transformedReleaseNotes = await releaseNotes.map(({ slug, content }) => {
     const contentPlainText = getExcerpt(content);
+    const slugDatePiece = slug.slice(0, 10);
+    const category = slug.slice(slug.lastIndexOf('-') + 1);
+    const capitalisedCategory = category.charAt(0).toUpperCase() + category.slice(1);
 
     return {
-      objectID: `${label} release - ${slug}`,
-      title: `${label} release - ${slug}`,
+      objectID: `${capitalisedCategory} release - ${slug}`,
+      title: `${capitalisedCategory} release - ${slugDatePiece}`,
       slug: generateReleaseNotePath(slug),
       excerpt: contentPlainText,
     };

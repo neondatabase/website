@@ -16,7 +16,7 @@ const items = [
     icon: SeamlessIcon,
     title: 'Seamless integration',
     description:
-      'Integrate branching into your CI/CD pipeline using the <a href="/docs/reference/api-reference/">Neon API</a>.',
+      'Integrate branching into your CI/CD pipeline using the <a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api">Neon API</a>.',
   },
 ];
 

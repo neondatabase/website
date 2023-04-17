@@ -23,22 +23,23 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 |**Best for**              | Prototyping and personal projects       | Small to medium teams, setups with 1 to 3 active databases  | Medium to large teams, Database fleets, Resale |
 |**Projects**              | 1                                 | 20               | Unlimited                 |
 |**Branches**              | 10                                 | Unlimited               | Unlimited                 |
-|**Compute active time per month** | 100 hours*                 | Unlimited        | Unlimited                 |
-|**Compute size**          | 1 Shared vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
+|**Compute active time per month** | No limit on the primary branch. 100 hours on non-primary branches.*                 | Unlimited        | Unlimited                 |
+|**Compute size**          | 1 shared vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
 |**Storage**               | 3 GB per branch                   | Unlimited*        | Unlimited                 |
 |**Dedicated resources**   | -                            | -           | &check;                   |
 |**Project sharing**       | -                            | &check;          | &check;                   |
 |**Auto-suspend compute**  | &check;                           | &check;          | &check;                   |
-|**Configurable auto-suspend compute (coming soon)**  | -                           | &check;          | &check;                   |
-|**Autoscaling (coming soon)**     | -                            | &check;          | &check;                   |
+|**Configurable auto-suspend compute**  | -                           | &check;          | &check;                   |
+|**Autoscaling**     | -                            | &check;          | &check;                   |
 |**Payment**               | Free                              | Credit Card, Pay As You Go with monthly invoicing | Prepaid, Custom Contract, Volume Discounts |
 |**Support**               | Community, support tickets                 | Community, support tickets, video chat          | Community, support tickets, video chat, resale customer support                   |
 
 **Notes:**
 
-- The limits described above are plan defaults. If you want to adjust the limits to tailor a plan to your specific requirements, please contact [Sales](https://neon.tech/contact-sales).
-- The Pro plan has a 200 GB safety limit on storage to protect your account from unintended usage but supports any data size. To increase the safety limit for your Pro account, simply submit a [Sales](https://neon.tech/contact-sales) request with the data storage size that you require.
-- The Free Tier has a 100 hour _compute active time per month_ limit, but you are always able to connect to the compute endpoint assigned to the primary branch of your Neon project, which ensures that access to data on the primary branch of your project is never interrupted.
+- The Pro plan has a default limit of 200 GB of storage but supports any data size. To request an increase, contact [Sales](https://neon.tech/contact-sales).
+- The Pro plan has a default limit of 20 simultaneously active computes but supports a higher limit. To request an increase, contact [Sales](https://neon.tech/contact-sales).
+- The Free Tier has a _compute active time_ limit of 100 hours per month for non-primary branches. See [Free Tier](/docs/introduction/technical-preview-free-tier) for more information.
+- Regardless of the Free Tier or Pro plan compute limits described above, the compute endpoint assigned to the primary branch of your Neon project is always available, ensuring that access to data on the primary branch of your project is never interrupted. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
 
 ## Account billing page
 
@@ -96,9 +97,9 @@ Factors that affect the amount of compute time include:
 
 - The number of active compute endpoints
 - The number of CUs per compute endpoint
-- Neon's _Auto-suspend compute_ feature, which suspends a compute endpoint (and its CUs) after a period of inactivity. The current default is five minutes.
-- Neon's _Configurable auto-suspend compute_ feature, which allows you to disable or configure the timeout period for the _Auto-suspend compute_ feature (_coming soon_).
-- Neon's _Autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload (_coming soon_).
+- Neon's _Auto-suspend compute_ feature, which suspends a compute endpoint (and its CUs) after a period of inactivity. The default is five minutes.
+- Neon's _Configurable auto-suspend compute_ feature, which allows you to configure or disable the timeout period for the _Auto-suspend compute_ feature.
+- Neon's _Autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload.
 
 <Admonition type="note">
 Neon uses a small amount of compute time, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
@@ -186,7 +187,7 @@ data transfer (GiB) * price per GiB
 | Cloud provider | Region      | Billing metric | Price | Unit |
 |:---------------|:-----------|:--------------|:------|:-----|
 | AWS            | US East (Ohio)     | Compute time  | $0.10200 | Compute-hour |
-| AWS            | US East (Ohio)     | Project storage  | $0.000164 | GiB-Hour |
+| AWS            | US East (Ohio)     | Project storage  | $0.000164 | GiB-hour |
 | AWS            | US East (Ohio)  | Written data  | $0.09600 | GiB |
 | AWS            | US East (Ohio)| Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |

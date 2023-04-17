@@ -1,5 +1,5 @@
 ---
-label: 'Template'
+isDraft: true
 ---
 
 ### Release note template

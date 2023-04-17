@@ -81,6 +81,9 @@ module.exports = {
       lineHeight: {
         dense: '1.125',
       },
+      boxShadow: {
+        tooltip: '0px 2px 20px rgba(0, 0, 0, 0.3)',
+      },
       backgroundImage: () => ({
         'community-light':
           'radial-gradient(100% 2244.95% at 100% 100%, rgba(217, 238, 242, 0.5) 0%, rgba(217, 238, 242, 0.1) 70.08%);',
