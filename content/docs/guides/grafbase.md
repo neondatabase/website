@@ -2,7 +2,7 @@
 title: Use Grafbase Edge Resolvers with Neon
 subtitle: Learn how to build and deploy serverless GraphQL backends with Grafbase and Neon
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
 
 _This guide was contributed by Josep Vidal from Grafbase_
