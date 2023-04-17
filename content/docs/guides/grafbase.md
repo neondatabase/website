@@ -2,7 +2,7 @@
 title: Use Grafbase Edge Resolvers with Neon
 subtitle: Learn how to build and deploy serverless GraphQL backends with Grafbase and Neon
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
 
 _This guide was contributed by Josep Vidal from Grafbase_
@@ -77,7 +77,7 @@ You will add code to these files in a later step.
 Inside the `grafbase` directory in your project, run the following commands to install the Neon serverless driver:
 
   ```bash
-cd ..
+  cd ..
   npm init -y
   npm install @neondatabase/serverless
   ```
