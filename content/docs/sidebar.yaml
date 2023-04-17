@@ -78,6 +78,8 @@
       slug: guides/django
     - title: Go
       slug: guides/go
+    - title: Grafbase
+      slug: guides/grafbase
     - title: Hasura
       slug: guides/hasura
     - title: Java
