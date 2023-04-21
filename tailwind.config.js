@@ -18,10 +18,10 @@ module.exports = {
       inherit: 'inherit',
       current: 'currentColor',
       transparent: 'transparent',
-      black: '#1a1a1a',
+      black: '#0c0d0d',
       white: '#ffffff',
       primary: {
-        1: '#00e699',
+        1: '#00e599',
         2: '#00cc88',
       },
       secondary: {
@@ -33,17 +33,19 @@ module.exports = {
         6: '#d9eef2',
         7: '#259df4',
         8: '#0055FF',
+        9: '#ade0eb',
       },
       gray: {
         1: '#262626',
-        2: '#404040',
+        2: '#303236',
         3: '#595959',
         4: '#808080',
         5: '#b3b3b3',
         6: '#cccccc',
-        7: '#e5e5e5',
+        7: '#afb1b6',
         8: '#f2f2f2',
         9: '#FAFAFA',
+        10: '#131415',
       },
       code: {
         'green-1': '#078345',
@@ -80,6 +82,9 @@ module.exports = {
       },
       lineHeight: {
         dense: '1.125',
+      },
+      letterSpacing: {
+        tighter: '-0.04em',
       },
       boxShadow: {
         tooltip: '0px 2px 20px rgba(0, 0, 0, 0.3)',

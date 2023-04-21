@@ -9,7 +9,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import LINKS from 'constants/links';
-import CheckIcon from 'icons/black-check.inline.svg';
+import CheckIcon from 'icons/check.inline.svg';
 import InfoIcon from 'icons/info.inline.svg';
 import ThumbIcon from 'icons/thumb.inline.svg';
 
@@ -182,7 +182,8 @@ const Calculator = () => {
                     />
                   </h4>
                   <p className="text-[15px] font-medium leading-none tracking-tight">
-                    {activeTime} hour{activeTime <= 1 ? '' : 's'} <span className="text-[#94979E]">per day</span>
+                    {activeTime} hour{activeTime <= 1 ? '' : 's'}{' '}
+                    <span className="text-[#94979E]">per day</span>
                   </p>
                 </div>
                 <div className="flex items-center py-[5px]">
