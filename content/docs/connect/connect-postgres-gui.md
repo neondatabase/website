@@ -54,6 +54,7 @@ Connections from the following GUI applications and IDEs have been tested with N
 - [dbForge](https://www.devart.com/dbforge/)
 - [DbVisualizer](https://www.dbvis.com/)
 - [DronaHQ hosted cloud version](https://www.dronahq.com/) (requires selecting **Connect using SSL** when creating a connector)
+- [Metabase](https://www.metabase.com/)
 - [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres)
 - [pgAdmin 4](https://www.pgadmin.org/)
 - [Postico](https://eggerapps.at/postico2/)
