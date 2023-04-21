@@ -33,7 +33,7 @@ Neon pays close attention to the proper security of its information and communic
 
 If you identify a security vulnerability, please proceed as follows under the principle of responsible disclosure:
 
-- Report the security vulnerability to Neon by contacting us at [security@neon.tech](mailto:security@neon.tech). Provide as much information about the security vulnerability as possible.
+- Report the security vulnerability to Neon by contacting [support@neon.tech](mailto:support@neon.tech). Provide as much information about the security vulnerability as possible.
 - Do not exploit the security vulnerability; for example, by using it to breach data, change the data of third parties, or deliberately disrupt the availability of the service.
 - All activities relating to the discovery of the security vulnerability should be performed within the framework of the law.
 - Do not inform any third parties about the security vulnerability. All communication regarding the security vulnerability will be coordinated by Neon and our partners.
