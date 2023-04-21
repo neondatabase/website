@@ -1,6 +1,7 @@
 ---
 title: Connect with pgcli
 enableTableOfContents: true
+isDraft: true
 ---
 
 The following instructions require a working installation of [pgcli](https://www.pgcli.com/). The `pgcli` client is an alternative command-line client for PostgreSQL with an auto-completing interactive interface. It offers additional features such as syntax highlighting, smart completion, and query history. For more information about `pgcli`, refer to the [pgcli documentation](https://www.pgcli.com/docs).
@@ -13,7 +14,7 @@ You can obtain a connection string from the **Connection Details** widget on the
 From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**, but be sure to add your password, as shown:
 
 ```bash
-psql postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech/neondb
+pgcli postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech/neondb
 ```
 
 ## Where do I obtain a password?
@@ -25,7 +26,7 @@ You can obtain a Neon connection string with your password from the Neon **Dashb
 Neon uses the default PostgreSQL port, `5432`. If you need to specify the port in your connection string, you can do so as follows:
 
 ```bash
-psql postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech:5432/neondb
+pgcli postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech:5432/neondb
 ```
   
 ## Running queries
