@@ -22,17 +22,17 @@ const Scalability = () => {
       <Container className="flex items-center justify-between lg:block" size="md">
         <div className="ml-[150px] max-w-[600px] 3xl:ml-[126px] 3xl:max-w-[504px] 2xl:ml-[104px] 2xl:max-w-[416px] xl:ml-0 xl:max-w-[400px] lg:max-w-none">
           <Heading tag="h2" size="xl" theme="black">
-            On Demand Scalability
+            On-demand scalability
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            We separated storage and compute to make on demand scalability possible. Compute
-            activates on an incoming connection and shuts down to save resources on inactivity.
+            We separated storage and compute to make on-demand scalability possible. Compute
+            activates on an incoming connection and scales to zero on inactivity to save resources.
           </p>
           <p className="t-xl mt-5 2xl:mt-4 xl:mt-3">
             Compute is fully client-compatible with Postgres because it is Postgres!
           </p>
           <p className="t-xl mt-5 2xl:mt-4 xl:mt-3">
-            As the workload changes Neon adjusts the amount of resources dedicated to the compute.
+            Neon dynamically adjusts the allocation of compute resources based on workload.
           </p>
           {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-secondary-3">
             Explore Neon&apos;s architecture

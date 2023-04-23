@@ -92,13 +92,13 @@ const Features = () => {
       animationRef: highAvailabilityAnimationRef,
       title: 'Reliable',
       description:
-        'Neon Cloud provides high availability without a maintenance burden and a need for expert advice.',
+        'Neon provides high availability without a maintenance burden or the need for expert advice.',
     },
     {
       animationVisibilityRef: autoBackupAnimationVisibilityRef,
       animationRef: autoBackupAnimationRef,
-      title: 'Auto-Backup',
-      description: 'Incremental auto backup functionality keeps your data safe 24/7.',
+      title: 'Auto-backup',
+      description: 'Incremental auto-backup functionality ensures your data remains safe 24/7.',
     },
     // {
     //   animationVisibilityRef: autoScalingAnimationVisibilityRef,
@@ -124,14 +124,14 @@ const Features = () => {
     {
       animationVisibilityRef: openSourceAnimationVisibilityRef,
       animationRef: openSourceAnimationRef,
-      title: 'Open Source',
+      title: 'Open source',
       description: (
         <>
-          Check{' '}
+          Explore our{' '}
           <Link to={LINKS.github} theme="underline-primary-1">
-            our repository
+            GitHub repository
           </Link>{' '}
-          on GitHub. We develop in public under the Apache 2.0 license.
+          where we publicly develop our project under the Apache 2.0 license.
         </>
       ),
     },
@@ -158,7 +158,7 @@ const Features = () => {
           />
         </Heading>
         <p className="t-3xl mx-auto mt-5 max-w-[940px] text-center text-white 2xl:mt-4 2xl:max-w-[800px] xl:mt-3.5 xl:max-w-[610px] lg:max-w-[580px]">
-          Neon provides true cloud native features essential for modern application development.
+          Neon provides true cloud native features that are essential for modern application development.
         </p>
         <ul className="grid-gap-x mt-[92px] grid grid-cols-12 gap-y-[92px] 2xl:mt-[76px] 2xl:gap-y-[76px] xl:mt-16 xl:gap-y-16 md:grid-cols-1">
           {items.map(({ animationVisibilityRef, animationRef, title, description, tag }, index) => (
