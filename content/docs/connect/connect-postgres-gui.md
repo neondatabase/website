@@ -35,13 +35,19 @@ Passwords are only shown when they are created. If you misplaced your password, 
 
 Neon uses the default PostgreSQL port, `5432`.
 
+<Admonition type="note">
+Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
+</Admonition>
+
 ## Connect to the database
 
 In the GUI application or IDE, enter the connection details into the appropriate fields and connect. In the pgAdmin example shown below, clicking **Save** establishes the database connection.
 
 ![Register - Server](/docs/connect/pgadmin4.png)
 
-If the connection is successful, you should be able to view and interact with your database from the GUI application or IDE.
+Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For example, the DBeaver client has a **URL** field, but connecting to Neon requires specifying the connection details as shown:
+
+![DBeaver connection](/docs/connect/dbeaver_connection.png)
 
 ## Tested GUI applications and IDEs
 

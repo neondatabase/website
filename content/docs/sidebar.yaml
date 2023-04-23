@@ -48,6 +48,8 @@
       slug: connect/query-with-psql-editor
     - title: Connect from old clients
       slug: connect/connectivity-issues
+    - title: Connect securely
+      slug: connect/connect-securely
     - title: Connection pooling
       slug: connect/connection-pooling
 - title: Manage
@@ -133,11 +135,7 @@
 - title: Serverless driver
   slug: serverless/serverless-driver
 - title: Security
-  items:
-    - title: Security
-      slug: security/security
-    - title: Secure connections
-      slug: security/secure-connections
+  slug: security/security-overview
 - title: Reference
   items:
     - title: Neon API
