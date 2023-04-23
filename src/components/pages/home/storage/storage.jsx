@@ -32,8 +32,8 @@ const Storage = () => {
           </p>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
             Neon storage uses the "copy-on-write" technique to deliver data branching, online checkpointing,
-            and point in time restore. This eliminates expensive "full-data" backup
-            and restore operations required for traditional database-as-a-service systems.
+            and point-in-time restore. This eliminates expensive full-data backup
+            and restore operations required with traditional database-as-a-service systems.
           </p>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
             Our storage technology is open source and written in Rust.

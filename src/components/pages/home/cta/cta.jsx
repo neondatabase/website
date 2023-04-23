@@ -93,7 +93,7 @@ const CTA = () => {
           />
         </Heading>
         <motion.p className="t-3xl mt-5 text-white 2xl:mt-4" variants={pVariants}>
-          Launch serverless Postgres with a single command:
+          Launch serverless Postgres with a single command
         </motion.p>
         <motion.div
           id="cta-input"

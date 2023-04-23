@@ -25,13 +25,13 @@ const DataBranching = () => {
             Data branching
           </Heading>
           <p className="t-xl mt-8 3xl:max-w-[504px] 2xl:mt-7 2xl:max-w-[416px] xl:mt-6 lg:max-w-none">
-            Neon allows you to instantly branch your Postgres database to support a modern development
-            workflow. You can create a branches for your test environments and for every deployment
+            Neon allows you to instantly branch your Postgres database to support modern development
+            workflows. You can create branches for test environments and for every deployment
             in your CI/CD pipeline.
           </p>
 
           <p className="t-xl mt-8 3xl:max-w-[504px] 2xl:mt-7 2xl:max-w-[416px] xl:mt-6 lg:max-w-none">
-            Branches are implemented using the "copy on write" technique, making them virtually free.
+            Branches are created using the "copy on write" technique, making them virtually free.
           </p>
           <Link
             className="mt-6 inline-block text-2xl font-semibold before:-bottom-1 before:h-1 2xl:text-xl xl:text-lg"

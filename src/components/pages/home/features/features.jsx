@@ -131,7 +131,7 @@ const Features = () => {
           <Link to={LINKS.github} theme="underline-primary-1">
             GitHub repository
           </Link>{' '}
-          where we publicly develop our project under the Apache 2.0 license.
+          where we publicly develop Neon under the Apache 2.0 license.
         </>
       ),
     },
