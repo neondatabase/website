@@ -1,8 +1,9 @@
 ---
-title: 'Security'
+title: Security
 enableTableOfContents: true
 redirectFrom:
   - /docs/security
+  - /docs/security/security
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users.
