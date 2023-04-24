@@ -9,7 +9,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import LINKS from 'constants/links';
-import CheckIcon from 'icons/check.inline.svg';
+// import CheckIcon from 'icons/check.inline.svg';
 import InfoIcon from 'icons/info.inline.svg';
 import ThumbIcon from 'icons/thumb.inline.svg';
 
@@ -109,188 +109,157 @@ const Calculator = () => {
     <section className="faq safe-paddings my-40 2xl:my-32 xl:my-28 lg:my-24 md:my-20">
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
-          <span className="text-center text-lg uppercase leading-snug text-primary-1">
+          <span className="rounded-full bg-[rgba(19,236,182,0.1)] py-[7px] px-[14px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
             Pricing Calculator
           </span>
-          <h2 className="mt-2.5 inline-flex flex-col text-center text-5xl font-bold leading-tight 2xl:max-w-[968px] 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:inline lg:text-[36px] lg:leading-tight">
+          <h2 className="mt-2.5 inline-flex flex-col text-center text-5xl font-medium leading-none tracking-tighter 2xl:max-w-[968px] 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:inline lg:text-[36px] lg:leading-tight">
             Calculate your monthly bill based <br /> on compute time and storage
           </h2>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-[1220px] grid-cols-[1fr_314px] gap-[10px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
-          <div className="row-span-1 flex rounded-lg bg-gray-1 md:flex-col">
-            <div className="grow px-7 py-6 xl:py-5 xl:px-6 md:px-5 md:pb-3">
-              <h3 className="text-2xl font-medium leading-none tracking-tight text-white xl:text-xl">
+        <div className="mx-auto mt-12 grid max-w-[1000px] grid-cols-[1fr_298px] gap-[40px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
+          <div className="row-span-1 flex rounded-[10px] bg-gray-10 md:flex-col">
+            <div className="grow p-5 xl:py-5 xl:px-6 md:px-5 md:pb-3">
+              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
                 Compute time
               </h3>
-              <div className="mt-8 flex flex-col gap-2 md:mt-7">
-                <div className="flex justify-between">
-                  <h4 className="font-medium leading-none tracking-tight">
-                    <span>Compute size</span>
-                    <Tooltip
-                      id="compute"
-                      content="Compute size is measured in Compute Units (CU). In Neon, a CU has 1 vCPU and 4 GB of RAM. The number of CUs defines the processing power of your Neon compute."
-                    />
-                  </h4>
-                  <p className="text-[15px] font-medium leading-none tracking-tight">
-                    <span className="after:mx-2 after:inline-block after:h-[4px] after:w-[4px] after:rounded-full after:bg-primary-1 after:align-middle">
-                      {computeUnits <= 0.5 ? COMPUTE_UNITS_RANGES[computeUnits] : computeUnits}vCPU
-                    </span>
-                    <span>{computeUnits * 4}GB RAM</span>
-                  </p>
-                </div>
-                <div className="flex items-center py-[4px]">
-                  <span className="text-[12px] tracking-tight text-[#C9CBCF]">1/4</span>
-                  <Slider.Root
-                    className="md:w-aut md:pb-3o relative mx-4 flex h-5 w-64 grow touch-none items-center"
-                    defaultValue={[COMPUTE_UNITS_VALUES.default]}
-                    min={COMPUTE_UNITS_VALUES.min}
-                    max={COMPUTE_UNITS_VALUES.max}
-                    step={COMPUTE_UNITS_VALUES.step}
-                    aria-label="Compute units"
-                    onValueChange={(value) => {
-                      let computeUnitsValue = value[0];
+              <div className="mt-8 grid grid-cols-[1fr_290px_1fr] items-center gap-4 md:mt-7">
+                <h4 className="text-[15px] leading-none tracking-tight text-gray-9">
+                  <span>Compute size</span>
+                  <Tooltip
+                    id="compute"
+                    content="Compute size is measured in Compute Units (CU). In Neon, a CU has 1 vCPU and 4 GB of RAM. The number of CUs defines the processing power of your Neon compute."
+                  />
+                </h4>
+                <Slider.Root
+                  className="relative flex h-1 w-full grow touch-none items-center md:w-auto md:pb-3"
+                  defaultValue={[COMPUTE_UNITS_VALUES.default]}
+                  min={COMPUTE_UNITS_VALUES.min}
+                  max={COMPUTE_UNITS_VALUES.max}
+                  step={COMPUTE_UNITS_VALUES.step}
+                  aria-label="Compute units"
+                  onValueChange={(value) => {
+                    let computeUnitsValue = value[0];
 
-                      if (value[0] >= 0.75)
-                        computeUnitsValue = Number(COMPUTE_UNITS_RANGES[value[0]]);
+                    if (value[0] >= 0.75)
+                      computeUnitsValue = Number(COMPUTE_UNITS_RANGES[value[0]]);
 
-                      setComputeUnits(computeUnitsValue);
-                    }}
+                    setComputeUnits(computeUnitsValue);
+                  }}
+                >
+                  <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
+                    <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
+                  </Slider.Track>
+                  <Slider.Thumb
+                    className={clsx(
+                      'flex cursor-pointer items-center justify-center rounded-full',
+                      'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
+                    )}
                   >
-                    <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
-                      <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
-                    </Slider.Track>
-                    <Slider.Thumb
-                      className={clsx(
-                        'flex cursor-pointer items-center justify-center rounded-full',
-                        'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
-                      )}
-                    >
-                      <ThumbIcon aria-hidden />
-                    </Slider.Thumb>
-                  </Slider.Root>
-                  <span className="text-[12px] tracking-tight text-[#C9CBCF]">&#62;7</span>
-                </div>
-              </div>
-              <div className="mt-8 flex flex-col gap-2 xl:mt-6 md:mt-6">
-                <div className="flex justify-between">
-                  <h4 className="font-medium leading-none tracking-tight">
-                    Active time per day
-                    <Tooltip
-                      id="activeTime"
-                      content="The number of hours per day that your compute resources are active, on average."
-                    />
-                  </h4>
-                  <p className="text-[15px] font-medium leading-none tracking-tight">
-                    {activeTime} hour{activeTime <= 1 ? '' : 's'}{' '}
-                    <span className="text-[#94979E]">per day</span>
-                  </p>
-                </div>
-                <div className="flex items-center py-[5px]">
-                  <span className="shrink-0 text-[12px] tracking-tight text-[#C9CBCF]">
-                    {COMPUTE_TIME_VALUES.min} h
+                    <ThumbIcon aria-hidden />
+                  </Slider.Thumb>
+                </Slider.Root>
+                <p className="text-[15px] leading-none tracking-tight text-gray-9">
+                  <span className="after:mx-2 after:inline-block after:h-[4px] after:w-[4px] after:rounded-full after:bg-primary-1 after:align-middle">
+                    {computeUnits <= 0.5 ? COMPUTE_UNITS_RANGES[computeUnits] : computeUnits}vCPU
                   </span>
-                  <Slider.Root
-                    className="md:w-aut md:pb-3o relative mx-4 flex h-5 w-64 grow touch-none items-center"
-                    defaultValue={[COMPUTE_TIME_VALUES.default]}
-                    min={COMPUTE_TIME_VALUES.min}
-                    max={COMPUTE_TIME_VALUES.max}
-                    step={COMPUTE_TIME_VALUES.step}
-                    aria-label="Active time"
-                    onValueChange={(value) => setActiveTime(value[0])}
+                  <span>{computeUnits * 4}GB RAM</span>
+                </p>
+              </div>
+              <div className="mt-8 grid grid-cols-[1fr_290px_1fr] items-center gap-4 xl:mt-6 md:mt-6">
+                <h4 className="text-[15px] leading-none tracking-tight text-gray-9">
+                  Active time per day
+                  <Tooltip
+                    id="activeTime"
+                    content="The number of hours per day that your compute resources are active, on average."
+                  />
+                </h4>
+                <Slider.Root
+                  className="relative flex h-1 w-full grow touch-none items-center md:w-auto md:pb-3"
+                  defaultValue={[COMPUTE_TIME_VALUES.default]}
+                  min={COMPUTE_TIME_VALUES.min}
+                  max={COMPUTE_TIME_VALUES.max}
+                  step={COMPUTE_TIME_VALUES.step}
+                  aria-label="Active time"
+                  onValueChange={(value) => setActiveTime(value[0])}
+                >
+                  <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
+                    <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
+                  </Slider.Track>
+                  <Slider.Thumb
+                    className={clsx(
+                      'flex cursor-pointer items-center justify-center rounded-full',
+                      'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
+                    )}
                   >
-                    <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
-                      <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
-                    </Slider.Track>
-                    <Slider.Thumb
-                      className={clsx(
-                        'flex cursor-pointer items-center justify-center rounded-full',
-                        'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
-                      )}
-                    >
-                      <ThumbIcon aria-hidden />
-                    </Slider.Thumb>
-                  </Slider.Root>
-                  <span className="text-[12px] tracking-tight text-[#C9CBCF]">
-                    {COMPUTE_TIME_VALUES.max}
-                  </span>
-                </div>
+                    <ThumbIcon aria-hidden />
+                  </Slider.Thumb>
+                </Slider.Root>
+                <p className="text-[15px] leading-none tracking-tight">
+                  {activeTime} hour{activeTime <= 1 ? '' : 's'}{' '}
+                  <span className="text-gray-7">per day</span>
+                </p>
               </div>
-            </div>
-            <div className="flex w-[189px] shrink-0 flex-col items-center border-l border-dashed border-[#303236] py-8 xl:w-[155px] lg:w-[168px] md:w-full md:flex-row md:items-center md:justify-between md:border-l-0 md:border-t md:px-5 md:py-5">
-              <h2 className="text-lg font-medium leading-none tracking-tight md:text-base">
-                Subtotal
-              </h2>
-              <p className="mt-12 text-[40px] leading-none tracking-tighter text-[#00E599] xl:text-3xl md:mt-0 md:text-xl">
-                ${computeTimeCost.toFixed(2)}
-                <span className="block text-center text-sm leading-none tracking-normal text-[#EFEFF0] md:ml-1 md:inline-block md:align-middle">
-                  per month
-                </span>
-              </p>
-              <span className="mt-12 text-sm leading-none text-[#EFEFF0] xl:mt-10 md:hidden">
-                <span className="text-[#00E599]">${COMPUTE_TIME_PRICE}</span> per hour
-              </span>
+              <div className="mt-8 flex justify-between border-t border-dashed border-gray-2 py-4">
+                <p className="text-sm font-medium leading-none">
+                  <span className="uppercase">Subtotal: </span>
+                  <span className="text-primary-1">${computeTimeCost.toFixed(2)} </span>
+                  <span className="font-normal text-gray-7">per month</span>
+                </p>
+                <p className="text-sm leading-none text-[#EFEFF0] xl:mt-10 md:hidden">
+                  <span className="text-[#00E599]">${COMPUTE_TIME_PRICE}</span> per hour
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="row-span-1 flex rounded-lg bg-gray-1 md:flex-col">
-            <div className="grow px-7 py-6 pb-8 xl:py-5 xl:px-6 md:px-5 md:pb-3">
-              <h3 className="text-2xl font-medium leading-none tracking-tighter text-white xl:text-xl">
+          <div className="row-span-1 flex rounded-[10px] bg-gray-10 md:flex-col">
+            <div className="grow p-5 xl:py-5 xl:px-6 md:px-5 md:pb-3">
+              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
                 Project storage
               </h3>
-              <div className="mt-7 flex flex-col gap-2">
-                <div className="flex justify-between">
-                  <h4 className="font-medium leading-none tracking-tight">Data</h4>
-                  <p className="text-[15px] font-medium leading-none tracking-tight">
-                    {storageValue} GiB
-                  </p>
-                </div>
-                <div className="flex items-center py-[4px]">
-                  <span className="text-[12px] tracking-tight text-[#C9CBCF]">
-                    {STORAGE_VALUES.min} GiB
-                  </span>
-                  <Slider.Root
-                    className="relative mx-4 flex h-5 w-64 grow touch-none items-center md:w-auto"
-                    defaultValue={[STORAGE_VALUES.default]}
-                    min={STORAGE_VALUES.min}
-                    max={STORAGE_VALUES.max}
-                    aria-label="Compute units"
-                    onValueChange={(value) => setStorageValue(value[0])}
+              <div className="mt-8 grid grid-cols-[1fr_290px_1fr] items-center gap-4 md:mt-7">
+                <h4 className="text-[15px] leading-none tracking-tight text-gray-9">Data</h4>
+                <Slider.Root
+                  className="relative flex h-1 w-full grow touch-none items-center md:w-auto md:pb-3"
+                  defaultValue={[STORAGE_VALUES.default]}
+                  min={STORAGE_VALUES.min}
+                  max={STORAGE_VALUES.max}
+                  aria-label="Compute units"
+                  onValueChange={(value) => setStorageValue(value[0])}
+                >
+                  <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
+                    <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
+                  </Slider.Track>
+                  <Slider.Thumb
+                    className={clsx(
+                      'flex cursor-pointer items-center justify-center rounded-full',
+                      'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
+                    )}
                   >
-                    <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
-                      <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
-                    </Slider.Track>
-                    <Slider.Thumb
-                      className={clsx(
-                        'flex cursor-pointer items-center justify-center rounded-full',
-                        'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
-                      )}
-                    >
-                      <ThumbIcon aria-hidden />
-                    </Slider.Thumb>
-                  </Slider.Root>
-                  <span className="text-[12px] tracking-tight text-[#C9CBCF]">
-                    &#62;{STORAGE_VALUES.max} GiB
-                  </span>
-                </div>
+                    <ThumbIcon aria-hidden />
+                  </Slider.Thumb>
+                </Slider.Root>
+                <p className="text-[15px] leading-none tracking-tight text-gray-9">
+                  {storageValue} GiB
+                </p>
               </div>
-            </div>
-            <div className="flex w-[189px] shrink-0 flex-col items-center justify-center border-l border-dashed border-[#303236] py-8 xl:w-[155px] lg:w-[168px] md:w-full md:flex-row md:items-center md:justify-between md:border-l-0 md:border-t md:px-5 md:py-5">
-              <h2 className="hidden text-base font-medium leading-none tracking-tight md:block">
-                Subtotal
-              </h2>
-              <p className="text-[40px] leading-none tracking-tighter text-[#00E599] xl:text-3xl md:text-xl">
-                ${storageCost.toFixed(2)}
-                <span className="block text-center text-sm leading-none tracking-normal text-[#EFEFF0] md:ml-1 md:inline-block md:align-middle">
-                  per month
-                </span>
-              </p>
+              <div className="mt-8 flex justify-between border-t border-dashed border-gray-2 py-4">
+                <p className="text-sm font-medium leading-none">
+                  <span className="uppercase">Subtotal: </span>
+                  <span className="text-primary-1">${storageCost.toFixed(2)} </span>
+                  <span className="font-normal text-gray-7">per month</span>
+                </p>
+                <p className="text-sm leading-none text-[#EFEFF0] xl:mt-10 md:hidden">
+                  <span className="text-[#00E599]">${COMPUTE_TIME_PRICE}</span> per hour
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="row-span-1 flex rounded-lg bg-gray-1 md:flex-col">
-            <div className="min-h-[141px] grow px-6 pt-7 pb-9 xl:min-h-[161px] xl:py-8 lg:pb-6 md:px-5 md:py-5 xs:min-h-[214px]">
-              <h3 className="text-2xl font-medium leading-none tracking-tight text-white xl:text-xl">
+          <div className="row-span-1 rounded-[10px] bg-gray-10 p-5 md:flex-col">
+            <div className="min-h-[141px] xl:min-h-[161px] xl:py-8 lg:pb-6 md:px-5 md:py-5 xs:min-h-[214px]">
+              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
                 Data transfer and Written data
                 <Tooltip
                   id="data"
@@ -394,54 +363,55 @@ const Calculator = () => {
                 </AnimatePresence>
               </LazyMotion>
             </div>
-            <div className="flex w-[189px] shrink-0 flex-col items-center justify-center border-l border-dashed border-[#303236] xl:w-[155px] lg:w-[168px] md:w-full md:flex-row md:items-center md:justify-between md:border-l-0 md:border-t md:px-5 md:py-5">
-              <h2 className="hidden text-base font-medium leading-none tracking-tight md:block">
-                Subtotal
-              </h2>
-              <p className="text-[40px] leading-none tracking-tighter text-[#00E599] xl:text-3xl md:text-xl">
-                ${writtenAndTransferDataCost.toFixed(2)}
-                <span className="block text-center text-sm leading-none tracking-normal text-[#EFEFF0] md:ml-1 md:inline-block md:align-middle">
-                  per month
-                </span>
+            <div className="mt-8 flex justify-between border-t border-dashed border-gray-2 py-4">
+              <p className="text-sm font-medium leading-none">
+                <span className="uppercase">Subtotal: </span>
+                <span className="text-primary-1">${writtenAndTransferDataCost.toFixed(2)} </span>
+                <span className="font-normal text-gray-7">per month</span>
               </p>
             </div>
           </div>
 
-          <div className="col-start-2 row-span-3 row-start-1 flex flex-col items-center rounded-lg bg-secondary-2 p-7 pb-9 lg:col-start-1 lg:row-span-1 lg:grid lg:grid-cols-2 lg:gap-x-32 sm:grid-cols-1 sm:gap-x-0">
-            <h3 className="text-center text-lg font-semibold leading-none tracking-tight text-black lg:col-start-2 sm:col-start-1">
+          <div className="col-start-2 row-span-3 row-start-1 flex flex-col items-center self-start rounded-[10px] border border-secondary-2 p-7 pb-9 lg:col-start-1 lg:row-span-1 lg:grid lg:grid-cols-2 lg:gap-x-32 sm:grid-cols-1 sm:gap-x-0">
+            <h3 className="text-center text-lg leading-none tracking-tight text-white lg:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
-            <p className="mt-8 text-center text-[72px] font-medium leading-none tracking-tighter text-black xl:mt-10 xl:text-[60px] lg:col-start-2 sm:col-start-1 sm:mt-8">
-              <span>{estimatedPrice}</span>
-              <span className="mt-1 block text-xl leading-normal tracking-normal">per month</span>
-              <span className="mt-1 block text-base font-normal tracking-normal">
-                based on the US East (Ohio) region
+            <p className="mt-8 text-center text-white xl:mt-10 xl:text-[60px] lg:col-start-2 sm:col-start-1 sm:mt-8">
+              <span className="text-[64px] font-light tracking-[-0.06em] text-secondary-2">
+                {estimatedPrice}
               </span>
+              <span className="mt-1 block text-base font-medium leading-normal tracking-normal">
+                per month
+              </span>
+              {/* <span className="mt-1 block text-base font-medium tracking-normal"> */}
+              {/*   based on the US East (Ohio) region */}
+              {/* </span> */}
             </p>
-            <ul className="my-11 flex w-full flex-col space-y-8 text-lg leading-none tracking-tight text-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:my-8 sm:mx-auto sm:max-w-[260px]">
-              <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
-                <CheckIcon className="mr-2" />
-                <span className="mr-1 font-semibold">{computeUnits}</span>
-                <span>compute units</span>
-              </li>
-              <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
-                <CheckIcon className="mr-2" />
-                <span className="mr-1 font-semibold">{storageValue} GiB</span>
-                <span>storage</span>
-              </li>
-              <li className="relative flex pl-[3.25rem] text-black after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
-                <CheckIcon className="mr-2" />
-                {isAdvanced && <span className="mr-1 font-semibold">{writtenDataValue} GiB</span>}
-                <span>written data</span>
-              </li>
-              <li className="relative flex pl-[3.25rem] lg:pl-0 sm:pl-14">
-                <CheckIcon className="mr-2" />
-                {isAdvanced && <span className="mr-1 font-semibold">{dataTransferValue} GiB</span>}
-                <span>data transfer</span>
-              </li>
-            </ul>
+            {/* <ul className="my-11 flex w-full flex-col space-y-8 text-lg leading-none tracking-tight text-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:my-8 sm:mx-auto sm:max-w-[260px]"> */}
+            {/*   <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14"> */}
+            {/*     <CheckIcon className="mr-2" /> */}
+            {/*     <span className="mr-1 font-semibold">{computeUnits}</span> */}
+            {/*     <span>compute units</span> */}
+            {/*   </li> */}
+            {/*   <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14"> */}
+            {/*     <CheckIcon className="mr-2" /> */}
+            {/*     <span className="mr-1 font-semibold">{storageValue} GiB</span> */}
+            {/*     <span>storage</span> */}
+            {/*   </li> */}
+            {/*   <li className="relative flex pl-[3.25rem] text-black after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14"> */}
+            {/*     <CheckIcon className="mr-2" /> */}
+            {/*     {isAdvanced && <span className="mr-1 font-semibold">{writtenDataValue} GiB</span>} */}
+            {/*     <span>written data</span> */}
+            {/*   </li> */}
+            {/*   <li className="relative flex pl-[3.25rem] lg:pl-0 sm:pl-14"> */}
+            {/*     <CheckIcon className="mr-2" /> */}
+            {/*     {isAdvanced && <span className="mr-1 font-semibold">{dataTransferValue} GiB</span>} */}
+            {/*     <span>data transfer</span> */}
+            {/*   </li> */}
+            {/* </ul> */}
+
             <Button
-              className="mt-auto w-full max-w-[260px] !bg-black py-6 !text-lg !text-white xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1 sm:mt-1"
+              className="mt-4 w-full max-w-[260px] !bg-secondary-2 py-6 !text-lg xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1 sm:mt-1"
               theme="primary"
               to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               size="sm"
