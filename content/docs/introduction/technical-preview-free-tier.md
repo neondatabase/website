@@ -18,4 +18,4 @@ The Neon Free Tier includes:
 
 Neon reserves the right to adjust Free Tier limits.
 
-For increased limits and added features, see [Neon paid plans](/docs/introduction/billing#neon-plans).
+For increased limits and added features, see [Neon plans](/docs/introduction/billing#neon-plans).
