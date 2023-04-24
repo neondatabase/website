@@ -8,7 +8,9 @@ redirectFrom:
 
 Neon is currently in Technical Preview. For information about how the Technical Preview fits within Neon's release plans, refer to the [Neon roadmap](/docs/reference/roadmap).
 
-The Neon Free Tier includes:
+The Neon Free Tier is perfect for personal projects, small websites, prototyping, and evaluation.
+
+The Free Tier includes:
 
 - One Neon project
 - Up to 10 branches including the [primary branch](/docs/reference/glossary#primary-branch)
@@ -16,6 +18,8 @@ The Neon Free Tier includes:
 - A shared compute with 1 GB of RAM
 - A [point-in-time restore](/docs/reference/glossary#point-in-time-restore) window of 7 days
 
-The Neon Free Tier is intended for personal projects, small websites, prototypes, and evaluation. We reserve the right to adjust Free Tier limits and discontinue access in exceptional cases where misuse is identified, in order to protect the integrity of our platform and ensure a positive experience for all users.
+<Admonition type="note">
+Neon reserves the right to adjust Free Tier limits and discontinue access in exceptional cases where misuse is identified, in order to protect the integrity of our platform and ensure a positive experience for all users.
+</Admonition>
 
 For increased limits and added features, see [Neon plans](/docs/introduction/billing#neon-plans).
