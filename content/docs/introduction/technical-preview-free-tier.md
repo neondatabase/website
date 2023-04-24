@@ -1,6 +1,6 @@
 ---
 title: The Neon Free Tier
-subtitle: Start for free with Neon's generous Free Tier. Scale as you grow.
+subtitle: Start for free with Neon's generous Free Tier. Upgrade when you are ready to scale.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/technical-preview-free-tier
@@ -16,6 +16,6 @@ The Neon Free Tier includes:
 - A shared compute with 1 GB of RAM
 - A [point-in-time restore](/docs/reference/glossary#point-in-time-restore) window of 7 days
 
-Neon reserves the right to adjust Free Tier limits.
+The Neon Free Tier is perfect for personal projects, small websites, prototypes, and evaluation. We reserve the right to adjust Free Tier limits and discontinue access in exceptional cases where misuse is identified, in order to protect the integrity of our platform and ensure a positive experience for all users.
 
 For increased limits and added features, see [Neon plans](/docs/introduction/billing#neon-plans).
