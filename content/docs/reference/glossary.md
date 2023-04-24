@@ -10,10 +10,6 @@ redirectFrom:
 
 See [Token](#token).
 
-### Active time
-
-The amount of active compute hours. Neon Free Tier users are provided with 100 hours of active compute hours per month. See [Free Tier](/docs/introduction/technical-preview-free-tier) for more information.
-
 ### Activity Monitor
 
 A process that monitors a Neon compute instance for activity. During periods of inactivity, the Activity Monitor gracefully places the compute into an `Idle` state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of inactivity. When a connection is made to an idle compute, the Activity Monitor reactivates the compute.
