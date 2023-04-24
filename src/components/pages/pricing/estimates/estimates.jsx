@@ -9,12 +9,15 @@ import Link from 'components/shared/link';
 // import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
 
-import circleSvg from './images/circle.svg';
-import InfoIcon from './images/info.inline.svg';
+import ScaleIcon from './svg/fullsize-icon.inline.svg';
+import ProtoIcon from './svg/gear-icon.inline.svg';
+import InfoIcon from './svg/info.inline.svg';
+import LaunchIcon from './svg/spaceship-icon.inline.svg';
 
 const items = [
   {
     type: 'Prototype',
+    icon: ProtoIcon,
     metrics: [
       {
         name: 'Compute hours',
@@ -41,6 +44,7 @@ const items = [
   },
   {
     type: 'Launch',
+    icon: LaunchIcon,
     metrics: [
       {
         name: 'Compute hours',
@@ -67,6 +71,7 @@ const items = [
   },
   {
     type: 'Scale',
+    icon: ScaleIcon,
     metrics: [
       {
         name: 'Compute hours',
@@ -94,7 +99,7 @@ const items = [
 ];
 
 const gridClassName =
-  'grid grid-cols-[34%_auto_16%] gap-x-10 2xl:grid-cols-[30%_auto_16%] xl:grid-cols-[29%_auto_19%] lg:grid-cols-[28%_auto_16%]';
+  'grid grid-cols-[32%_auto_16%] gap-x-10 xl:grid-cols-[29%_auto_19%] lg:grid-cols-[28%_auto_16%]';
 
 const Estimates = () => {
   const [selected, setSelected] = useState(items[0].type);
@@ -106,140 +111,140 @@ const Estimates = () => {
   return (
     <section className="estimates safe-paddings mt-56 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20">
       <Container size="mdDoc">
-        <div className="mx-auto flex max-w-[972px] flex-col items-center">
-          <span className="text-center text-lg uppercase leading-snug text-primary-1">
-            Billing & usage estimates
-          </span>
-          <h2 className="mt-2.5 inline-flex flex-col text-center text-5xl font-bold leading-tight 2xl:max-w-[968px] 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:inline lg:text-[36px] lg:leading-tight">
-            <span>Each user is unique.</span> However, we can give you some estimates.
-          </h2>
-          <p className="mt-7 text-center text-xl 2xl:mt-5 xl:text-base">
-            <Link className="font-semibold" theme="underline-primary-1" to={LINKS.contactSales}>
-              Contact sales
-            </Link>{' '}
-            if you require assistance forecasting billing and usage.
-          </p>
-          <ul className="mt-[53px] mb-12 grid w-full grid-cols-3 gap-x-7 2xl:mx-auto 2xl:max-w-[801px] xl:mb-8 xl:mt-10 xl:max-w-[616px] xl:gap-x-5 lg:mb-6 lg:mt-7 md:mt-6 md:mb-5 md:gap-x-4 sm:gap-x-2.5 xs:grid-cols-1 xs:gap-y-2">
-            {items.map(({ type }, index) => (
-              <li key={index}>
-                <button
-                  className={clsx(
-                    'w-full rounded-[80px] border py-6 text-lg font-bold leading-none transition-colors duration-200 hover:border-white hover:text-white xl:py-4 md:py-3',
-                    type === selected
-                      ? 'border-white text-white'
-                      : 'border-dashed border-gray-4 text-gray-4'
-                  )}
-                  type="button"
-                  onClick={() => handleSelect(type)}
-                >
-                  {type}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <Container className="no-scrollbars md:-mx-4 md:overflow-x-auto md:px-4" size="mdDoc">
-          <LazyMotion features={domAnimation}>
-            <AnimatePresence initial={false} mode="wait">
-              {items.map(({ type, metrics }, index) => {
-                const totalPrice = metrics.reduce(
-                  (acc, { price }) => acc + Number(price.slice(1).replace(/,/g, '')),
-                  0
-                );
-                const formattedPrice = totalPrice.toFixed(2).replace(/\.00$/, '');
-                const formattedPriceWithCommas = formattedPrice.replace(
-                  /\B(?=(\d{3})+(?!\d))/g,
-                  ','
-                );
-
-                return type === selected ? (
-                  <m.div
-                    key={index}
-                    initial={{
-                      opacity: 0,
-                      translateY: 10,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      translateY: 0,
-                      transition: { duration: 0.3 },
-                    }}
-                    exit={{
-                      opacity: 0,
-                      transition: { duration: 0.2 },
-                    }}
-                    transition={{ ease: [0.25, 0.1, 0, 1] }}
+        <div className="mx-auto flex max-w-[1220px] items-center justify-between gap-4 lg:flex-col lg:gap-16">
+          <div className="w-[48%] lg:flex lg:w-full lg:flex-col lg:items-center">
+            <span className="rounded-full bg-[rgba(19,236,182,0.1)] py-[7px] px-[14px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
+              Billing & usage estimates
+            </span>
+            <h2 className="mt-3 text-[56px] font-medium leading-none tracking-tighter 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:text-center lg:text-[36px] lg:leading-tight">
+              <span className="text-primary-1">Each user is unique.</span> However, we can give you
+              some estimates.
+            </h2>
+            <p className="mt-4 text-lg font-light leading-snug 2xl:mt-5 xl:text-base lg:text-center">
+              <Link
+                className="!border-b font-normal"
+                theme="underline-primary-1"
+                to={LINKS.contactSales}
+              >
+                Contact sales
+              </Link>{' '}
+              if you require assistance forecasting billing and usage. Pricing is based on the US
+              East (Ohio) region
+            </p>
+          </div>
+          <div className="w-[38%] lg:w-full">
+            <ul className="flex gap-8 py-2 lg:mx-auto lg:max-w-[584px] lg:px-6 md:max-w-full md:px-0 xs:gap-4">
+              {items.map(({ type, icon: Icon }, index) => (
+                <li key={index}>
+                  <button
+                    className={clsx(
+                      'flex gap-1.5 border-b pb-1.5 text-sm font-medium uppercase leading-none tracking-[0.04em] text-white transition-colors duration-200 hover:text-primary-1',
+                      type === selected ? 'border-primary-1 text-primary-1' : 'border-transparent'
+                    )}
+                    type="button"
+                    onClick={() => handleSelect(type)}
                   >
-                    <div className="mx-auto w-full max-w-[740px] rounded-2xl bg-gray-1 p-10 2xl:max-w-[592px] 2xl:p-7 xl:max-w-[616px] lg:max-w-[584px] lg:p-6 lg:pb-8 md:min-w-[584px] md:max-w-none">
-                      <div
-                        className={clsx(
-                          'mb-4 font-semibold uppercase leading-none tracking-[0.02em] text-gray-6',
-                          gridClassName
-                        )}
+                    <Icon className="" />
+                    {type}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <Container
+              className="no-scrollbars mt-7 2xl:px-0 md:-mx-4 md:overflow-x-auto md:px-0"
+              size="mdDoc"
+            >
+              <LazyMotion features={domAnimation}>
+                <AnimatePresence initial={false} mode="wait">
+                  {items.map(({ type, metrics }, index) => {
+                    const totalPrice = metrics.reduce(
+                      (acc, { price }) => acc + Number(price.slice(1).replace(/,/g, '')),
+                      0
+                    );
+                    const formattedPrice = totalPrice.toFixed(2).replace(/\.00$/, '');
+                    const formattedPriceWithCommas = formattedPrice.replace(
+                      /\B(?=(\d{3})+(?!\d))/g,
+                      ','
+                    );
+
+                    return type === selected ? (
+                      <m.div
+                        key={index}
+                        initial={{
+                          opacity: 0,
+                          translateY: 10,
+                        }}
+                        animate={{
+                          opacity: 1,
+                          translateY: 0,
+                          transition: { duration: 0.3 },
+                        }}
+                        exit={{
+                          opacity: 0,
+                          transition: { duration: 0.2 },
+                        }}
+                        transition={{ ease: [0.25, 0.1, 0, 1] }}
                       >
-                        <span>Billing metric</span>
-                        <span>Avg usage</span>
-                        <span>Avg price</span>
-                      </div>
-                      {metrics.map(({ name, usage, details, price }, index) => (
-                        <div
-                          className={clsx(
-                            'border-b border-gray-2 py-3.5 font-semibold',
-                            gridClassName
-                          )}
-                          key={index}
-                        >
-                          <span>{name}</span>
-                          <span className="inline-flex items-center gap-x-2.5 lg:flex-col lg:items-start">
-                            <span>
-                              {usage} <span className="text-gray-6">/month</span>
-                            </span>
-                            {details && (
-                              <span className="relative">
-                                <span
-                                  className="peer cursor-pointer lg:hidden"
-                                  data-tooltip-id={`${name}-${index}`}
-                                  data-tooltip-content={details}
-                                >
-                                  <InfoIcon />
-                                </span>
-                                <span className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-gray-2 p-2 text-sm font-normal leading-none text-gray-6 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:translate-y-0 lg:bg-transparent lg:p-0 lg:opacity-100">
-                                  {details}
-                                </span>
-                                <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-t-4 border-b-4 border-r-4 border-transparent border-r-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
-                              </span>
+                        <div className="mx-auto w-full xl:max-w-[616px] lg:max-w-[584px] lg:p-6 lg:pb-8 md:min-w-[584px] md:max-w-none md:px-4">
+                          <div
+                            className={clsx(
+                              'border-b border-[rgba(255,255,255,0.06)] pb-3 text-[12px] uppercase leading-none tracking-[0.04em] text-gray-4',
+                              gridClassName
                             )}
-                          </span>
-                          <span className="text-primary-1">{price}</span>
+                          >
+                            <span>Billing metric</span>
+                            <span>Avg usage</span>
+                            <span>Avg price</span>
+                          </div>
+                          {metrics.map(({ name, usage, details, price }, index) => (
+                            <div
+                              className={clsx(
+                                'border-b border-[rgba(255,255,255,0.06)] py-2.5 text-[15px] tracking-[-0.02em] text-[#EFEFF0]',
+                                gridClassName
+                              )}
+                              key={index}
+                            >
+                              <span>{name}</span>
+                              <span className="inline-flex items-center gap-x-2.5 lg:flex-col lg:items-start">
+                                <span className="">
+                                  {usage} <span className="text-gray-7">/month</span>
+                                </span>
+                                {details && (
+                                  <span className="relative">
+                                    <span
+                                      className="peer cursor-pointer lg:hidden"
+                                      data-tooltip-id={`${name}-${index}`}
+                                      data-tooltip-content={details}
+                                    >
+                                      <InfoIcon />
+                                    </span>
+                                    <span className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-gray-2 p-2 text-sm font-normal leading-none text-gray-6 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:translate-y-0 lg:bg-transparent lg:p-0 lg:opacity-100">
+                                      {details}
+                                    </span>
+                                    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-t-4 border-b-4 border-r-4 border-transparent border-r-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
+                                  </span>
+                                )}
+                              </span>
+                              <span className="text-[15px] text-[#EFEFF0]">{price}</span>
+                            </div>
+                          ))}
+                          <div className={clsx('mt-2 text-base font-medium', gridClassName)}>
+                            <span className="col-span-2 inline-flex flex-col">
+                              <span className="uppercase text-[#EFEFF0]">Total price:</span>
+                            </span>
+                            <span className="relative tracking-[0.04em] text-primary-1">
+                              ${formattedPriceWithCommas}
+                            </span>
+                          </div>
                         </div>
-                      ))}
-                      <div className={clsx('mt-3.5 text-xl font-semibold', gridClassName)}>
-                        <span className="col-span-2 inline-flex flex-col">
-                          <span className="uppercase">Total:</span>
-                        </span>
-                        <span className="relative text-primary-1">
-                          ${formattedPriceWithCommas}
-                          <img
-                            className="absolute -top-4 left-1/2 h-auto w-[107px] max-w-none -translate-x-[calc(50%+16px)] 2xl:-top-3.5 xl:-translate-x-[calc(50%+18px)] lg:-top-4 sm:-translate-x-[calc(50%+8px)]"
-                            src={circleSvg}
-                            width={107}
-                            height={63}
-                            alt=""
-                            loading="lazy"
-                            aria-hidden
-                          />
-                        </span>
-                      </div>
-                    </div>
-                    <span className="mt-2.5 block text-center text-base font-normal text-gray-6">
-                      *Pricing is based on the US East (Ohio) region
-                    </span>
-                  </m.div>
-                ) : null;
-              })}
-            </AnimatePresence>
-          </LazyMotion>
-        </Container>
+                      </m.div>
+                    ) : null;
+                  })}
+                </AnimatePresence>
+              </LazyMotion>
+            </Container>
+          </div>
+        </div>
       </Container>
     </section>
   );
