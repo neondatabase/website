@@ -1,5 +1,6 @@
 ---
 title: The Neon Free Tier
+subtitle: Start for free with Neon's generous Free Tier. Scale as you grow.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/technical-preview-free-tier
