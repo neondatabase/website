@@ -18,8 +18,8 @@ The Free Tier includes:
 - A shared compute with 1 GB of RAM
 - A [point-in-time restore](/docs/reference/glossary#point-in-time-restore) window of 7 days
 
+For increased limits and added features, upgrade to Pro plan. see [Neon plans](/docs/introduction/billing#neon-plans) for more information.
+
 <Admonition type="note">
 Neon reserves the right to adjust Free Tier limits and discontinue access in exceptional cases where misuse is identified, in order to protect the integrity of our platform and ensure a positive experience for all users.
 </Admonition>
-
-For increased limits and added features, see [Neon plans](/docs/introduction/billing#neon-plans).
