@@ -63,7 +63,7 @@ export default {
           to: LINKS.blog,
         },
         {
-          text: 'About Us',
+          text: 'About us',
           to: LINKS.aboutUs,
         },
         {
@@ -135,11 +135,11 @@ export default {
       heading: 'Legal',
       links: [
         {
-          text: 'Privacy policy',
+          text: 'Privacy Policy',
           to: LINKS.privacy,
         },
         {
-          text: 'Terms of service',
+          text: 'Terms of Service',
           to: LINKS.terms,
         },
       ],

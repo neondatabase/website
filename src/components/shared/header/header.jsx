@@ -135,11 +135,11 @@ const Header = forwardRef(
                   isThemeBlack ? 'text-white' : 'text-black'
                 )}
               />
-              <span>Star Us</span>
+              <span>Star us</span>
             </Button>
             {isSignIn && (
               <Button className="py-[11px]" to={LINKS.dashboard} size="xs" theme="primary">
-                Sign In
+                Sign in
               </Button>
             )}
             {!isSignIn && (

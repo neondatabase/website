@@ -104,7 +104,7 @@
           "ddd": 0,
           "ind": 6,
           "ty": 5,
-          "nm": "Pay for the actual usage instead of number of instances.",
+          "nm": "Pay for actual usage rather than the number of instances.",
           "sr": 1,
           "ks": {
             "o": {
@@ -133,7 +133,7 @@
                   "s": {
                     "s": 40,
                     "f": "IBMPlexMono-Regular",
-                    "t": "Pay for the\ractual usage instead\rof number of instances.",
+                    "t": "Pay for actual\rusage rather than\rthe number of instances.",
                     "j": 0,
                     "tr": 0,
                     "lh": 55,
