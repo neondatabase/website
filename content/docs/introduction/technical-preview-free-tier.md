@@ -21,5 +21,5 @@ The Free Tier includes:
 For increased limits and added features, upgrade to our **Pro** plan. see [Neon plans](/docs/introduction/billing#neon-plans) for more information.
 
 <Admonition type="note">
-Neon reserves the right to adjust Free Tier limits and discontinue access in exceptional cases where misuse is identified, in order to protect the integrity of our platform and ensure a positive experience for all users.
+Neon reserves the right to adjust Free Tier limits, and to discontinue access in exceptional cases where misuse is identified, in order to protect the integrity of our platform and ensure a positive experience for all users.
 </Admonition>
