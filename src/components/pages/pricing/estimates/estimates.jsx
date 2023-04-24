@@ -8,10 +8,10 @@ import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 // import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
+import InfoIcon from 'icons/info.inline.svg';
 
 import ScaleIcon from './svg/fullsize-icon.inline.svg';
 import ProtoIcon from './svg/gear-icon.inline.svg';
-import InfoIcon from './svg/info.inline.svg';
 import LaunchIcon from './svg/spaceship-icon.inline.svg';
 
 const items = [

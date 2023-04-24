@@ -9,9 +9,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import LINKS from 'constants/links';
-// import CheckIcon from 'icons/check.inline.svg';
 import InfoIcon from 'icons/info.inline.svg';
-import ThumbIcon from 'icons/thumb.inline.svg';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const PROJECT_STORAGE_PRICE = 0.000164;
@@ -106,25 +104,24 @@ const Calculator = () => {
   );
 
   return (
-    <section className="faq safe-paddings my-40 2xl:my-32 xl:my-28 lg:my-24 md:my-20">
+    <section className="faq safe-paddings my-40 mt-[17.25rem] 2xl:my-32 xl:my-28 lg:my-24 md:my-20">
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <span className="rounded-full bg-[rgba(19,236,182,0.1)] py-[7px] px-[14px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
             Pricing Calculator
           </span>
-          <h2 className="mt-2.5 inline-flex flex-col text-center text-5xl font-medium leading-none tracking-tighter 2xl:max-w-[968px] 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:inline lg:text-[36px] lg:leading-tight">
+          <h2 className="mt-2 inline-flex flex-col text-center text-[56px] font-medium leading-none tracking-tighter 2xl:max-w-[968px] 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:inline lg:text-[36px] lg:leading-tight">
             Calculate your monthly bill based <br /> on compute time and storage
           </h2>
         </div>
-
-        <div className="mx-auto mt-12 grid max-w-[1000px] grid-cols-[1fr_298px] gap-[40px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
+        <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[24px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
           <div className="row-span-1 flex rounded-[10px] bg-gray-10 md:flex-col">
             <div className="grow p-5 xl:py-5 xl:px-6 md:px-5 md:pb-3">
               <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
                 Compute time
               </h3>
-              <div className="mt-8 grid grid-cols-[1fr_290px_1fr] items-center gap-4 md:mt-7">
-                <h4 className="text-[15px] leading-none tracking-tight text-gray-9">
+              <div className="mt-7 grid grid-cols-[1fr_290px_152px] items-center gap-4 md:mt-7">
+                <h4 className="text-right text-[15px] leading-none tracking-tight text-gray-9">
                   <span>Compute size</span>
                   <Tooltip
                     id="compute"
@@ -132,7 +129,7 @@ const Calculator = () => {
                   />
                 </h4>
                 <Slider.Root
-                  className="relative flex h-1 w-full grow touch-none items-center md:w-auto md:pb-3"
+                  className="relative flex h-1 w-full grow touch-none items-center"
                   defaultValue={[COMPUTE_UNITS_VALUES.default]}
                   min={COMPUTE_UNITS_VALUES.min}
                   max={COMPUTE_UNITS_VALUES.max}
@@ -147,7 +144,7 @@ const Calculator = () => {
                     setComputeUnits(computeUnitsValue);
                   }}
                 >
-                  <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
+                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-3">
                     <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
                   </Slider.Track>
                   <Slider.Thumb
@@ -156,7 +153,7 @@ const Calculator = () => {
                       'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                     )}
                   >
-                    <ThumbIcon aria-hidden />
+                    <span className="h-2.5 w-1 rounded-[1px] bg-primary-1" />
                   </Slider.Thumb>
                 </Slider.Root>
                 <p className="text-[15px] leading-none tracking-tight text-gray-9">
@@ -166,16 +163,16 @@ const Calculator = () => {
                   <span>{computeUnits * 4}GB RAM</span>
                 </p>
               </div>
-              <div className="mt-8 grid grid-cols-[1fr_290px_1fr] items-center gap-4 xl:mt-6 md:mt-6">
-                <h4 className="text-[15px] leading-none tracking-tight text-gray-9">
-                  Active time per day
+              <div className="mt-5 grid grid-cols-[1fr_290px_152px] items-center gap-4 xl:mt-6 md:mt-6">
+                <h4 className="text-right text-[15px] leading-none tracking-tight text-gray-9">
+                  Active time
                   <Tooltip
                     id="activeTime"
                     content="The number of hours per day that your compute resources are active, on average."
                   />
                 </h4>
                 <Slider.Root
-                  className="relative flex h-1 w-full grow touch-none items-center md:w-auto md:pb-3"
+                  className="relative flex h-1 w-full grow touch-none items-center"
                   defaultValue={[COMPUTE_TIME_VALUES.default]}
                   min={COMPUTE_TIME_VALUES.min}
                   max={COMPUTE_TIME_VALUES.max}
@@ -183,7 +180,7 @@ const Calculator = () => {
                   aria-label="Active time"
                   onValueChange={(value) => setActiveTime(value[0])}
                 >
-                  <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
+                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-3">
                     <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
                   </Slider.Track>
                   <Slider.Thumb
@@ -192,7 +189,7 @@ const Calculator = () => {
                       'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                     )}
                   >
-                    <ThumbIcon aria-hidden />
+                    <span className="h-2.5 w-1 rounded-[1px] bg-primary-1" />
                   </Slider.Thumb>
                 </Slider.Root>
                 <p className="text-[15px] leading-none tracking-tight">
@@ -200,14 +197,14 @@ const Calculator = () => {
                   <span className="text-gray-7">per day</span>
                 </p>
               </div>
-              <div className="mt-8 flex justify-between border-t border-dashed border-gray-2 py-4">
+              <div className="mt-5 grid grid-cols-[1fr_152px] border-t border-dashed border-gray-2 pt-6 pb-2 text-[#EFEFF0]">
                 <p className="text-sm font-medium leading-none">
-                  <span className="uppercase">Subtotal: </span>
+                  <span className="uppercase">Subtotal:</span>
                   <span className="text-primary-1">${computeTimeCost.toFixed(2)} </span>
                   <span className="font-normal text-gray-7">per month</span>
                 </p>
-                <p className="text-sm leading-none text-[#EFEFF0] xl:mt-10 md:hidden">
-                  <span className="text-[#00E599]">${COMPUTE_TIME_PRICE}</span> per hour
+                <p className="text-sm leading-none xl:mt-10 md:hidden">
+                  ${COMPUTE_TIME_PRICE} <span className="text-gray-7">per hour</span>
                 </p>
               </div>
             </div>
@@ -218,17 +215,19 @@ const Calculator = () => {
               <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
                 Project storage
               </h3>
-              <div className="mt-8 grid grid-cols-[1fr_290px_1fr] items-center gap-4 md:mt-7">
-                <h4 className="text-[15px] leading-none tracking-tight text-gray-9">Data</h4>
+              <div className="mt-7 grid grid-cols-[1fr_290px_152px] items-center gap-4 md:mt-7">
+                <h4 className="text-right text-[15px] leading-none tracking-tight text-gray-9">
+                  Data
+                </h4>
                 <Slider.Root
-                  className="relative flex h-1 w-full grow touch-none items-center md:w-auto md:pb-3"
+                  className="relative flex h-1 w-full grow touch-none items-center"
                   defaultValue={[STORAGE_VALUES.default]}
                   min={STORAGE_VALUES.min}
                   max={STORAGE_VALUES.max}
                   aria-label="Compute units"
                   onValueChange={(value) => setStorageValue(value[0])}
                 >
-                  <Slider.Track className="relative h-[6px] w-full grow rounded-[10px] bg-gray-2">
+                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-3">
                     <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
                   </Slider.Track>
                   <Slider.Thumb
@@ -237,16 +236,16 @@ const Calculator = () => {
                       'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                     )}
                   >
-                    <ThumbIcon aria-hidden />
+                    <span className="h-2.5 w-1 rounded-[1px] bg-primary-1" />
                   </Slider.Thumb>
                 </Slider.Root>
                 <p className="text-[15px] leading-none tracking-tight text-gray-9">
                   {storageValue} GiB
                 </p>
               </div>
-              <div className="mt-8 flex justify-between border-t border-dashed border-gray-2 py-4">
+              <div className="mt-6 grid grid-cols-[1fr_152px] border-t border-dashed border-gray-2 pt-6 pb-2 text-[#EFEFF0]">
                 <p className="text-sm font-medium leading-none">
-                  <span className="uppercase">Subtotal: </span>
+                  <span className="uppercase">Subtotal:</span>
                   <span className="text-primary-1">${storageCost.toFixed(2)} </span>
                   <span className="font-normal text-gray-7">per month</span>
                 </p>
@@ -258,7 +257,7 @@ const Calculator = () => {
           </div>
 
           <div className="row-span-1 rounded-[10px] bg-gray-10 p-5 md:flex-col">
-            <div className="min-h-[141px] xl:min-h-[161px] xl:py-8 lg:pb-6 md:px-5 md:py-5 xs:min-h-[214px]">
+            <div className="min-h-[126px] xl:py-8 lg:pb-6 md:px-5 md:py-5 xs:min-h-[214px]">
               <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
                 Data transfer and Written data
                 <Tooltip
@@ -270,7 +269,7 @@ const Calculator = () => {
                 <AnimatePresence initial={false} mode="wait">
                   {isAdvanced ? (
                     <m.ul
-                      className="mt-7 flex items-center gap-x-10 xl:flex-wrap xl:gap-x-7 sm:gap-4"
+                      className="mt-5 flex items-center gap-x-8 text-[15px] tracking-tight text-gray-9 xl:flex-wrap xl:gap-x-7 sm:gap-4"
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -290,7 +289,7 @@ const Calculator = () => {
                         <label htmlFor="dataTransfer">Data transfer</label>
                         <input
                           id="dataTransfer"
-                          className="ml-5 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight xl:mx-2"
+                          className="mx-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight xl:mx-2"
                           name="data-transfer"
                           type="number"
                           min={0}
@@ -308,7 +307,7 @@ const Calculator = () => {
                         <label htmlFor="writtenData">Written data</label>
                         <input
                           id="writtenData"
-                          className="ml-5 mr-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight xl:mx-2"
+                          className="mx-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight xl:mx-2"
                           name="written-data"
                           type="number"
                           min={0}
@@ -334,7 +333,7 @@ const Calculator = () => {
                     </m.ul>
                   ) : (
                     <m.p
-                      className="mt-7 text-base tracking-tight text-[#94979E]"
+                      className="mt-5 text-[15px] tracking-tight text-gray-9"
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -363,7 +362,7 @@ const Calculator = () => {
                 </AnimatePresence>
               </LazyMotion>
             </div>
-            <div className="mt-8 flex justify-between border-t border-dashed border-gray-2 py-4">
+            <div className="flex justify-between border-t border-dashed border-gray-2 pt-6 text-[#EFEFF0]">
               <p className="text-sm font-medium leading-none">
                 <span className="uppercase">Subtotal: </span>
                 <span className="text-primary-1">${writtenAndTransferDataCost.toFixed(2)} </span>
@@ -376,13 +375,11 @@ const Calculator = () => {
             <h3 className="text-center text-lg leading-none tracking-tight text-white lg:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
-            <p className="mt-8 text-center text-white xl:mt-10 xl:text-[60px] lg:col-start-2 sm:col-start-1 sm:mt-8">
+            <p className="mt-6 text-center leading-none text-white xl:mt-10 xl:text-[60px] lg:col-start-2 sm:col-start-1 sm:mt-8">
               <span className="text-[64px] font-light tracking-[-0.06em] text-secondary-2">
                 {estimatedPrice}
               </span>
-              <span className="mt-1 block text-base font-medium leading-normal tracking-normal">
-                per month
-              </span>
+              <span className="mt-2 block text-base font-medium tracking-normal">per month</span>
               {/* <span className="mt-1 block text-base font-medium tracking-normal"> */}
               {/*   based on the US East (Ohio) region */}
               {/* </span> */}
@@ -411,7 +408,7 @@ const Calculator = () => {
             {/* </ul> */}
 
             <Button
-              className="mt-4 w-full max-w-[260px] !bg-secondary-2 py-6 !text-lg xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1 sm:mt-1"
+              className="my-7 w-full max-w-[260px] !bg-secondary-2 py-[17px] !text-lg xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1 sm:mt-1"
               theme="primary"
               to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               size="sm"
@@ -426,7 +423,7 @@ const Calculator = () => {
 };
 
 const Tooltip = ({ content, id }) => (
-  <span className="relative ml-2 inline-flex align-middle">
+  <span className="relative ml-2 inline-flex text-left align-middle">
     <span
       className="peer cursor-pointer lg:hidden"
       data-tooltip-id={id}
