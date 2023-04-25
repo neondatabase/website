@@ -27,7 +27,9 @@ Sign into [WunderGraph Cloud](https://cloud.wundergraph.com/) and follow these s
 
 The deployment will take one or two minutes.
 
-### One minute video on how to integrate Neon into your WunderGraph project
+### Neon-Wundergraph integration video
+
+This one minute video demonstrates how to integrate Neon into your WunderGraph project.
 
 [![How to integrate Neon into your WunderGraph project](/docs/guides/wundergraph_video_thumbnail_1.jpg)](https://www.youtube.com/watch?v=cu5vwql5q0A)
 
@@ -83,9 +85,9 @@ WunderGraph creates a role named `wundergraph-$project_id` in the Neon project s
 WunderGraph configures a environment variable called `NEON_DATABASE_URL`. Please use this variable wherever you need to provide a database URL.
 </Admonition>
 
-## Configuring your WunderGraph project with Neon
+## Set up the WunderGraph project locally
 
-The following steps describe how to set up your Wundergraph project locally.
+The following steps describe how to set up your Wundergraph project locally and configure access to Neon.
 
 1. In WunderGraph Cloud, select your project and click **View Git repository** to view your Wundergraph project repository. 
 2. Clone the repository and open it in your favorite IDE.
@@ -136,7 +138,7 @@ The following steps describe how to set up your Wundergraph project locally.
     });
     ```
 
-5. Write an operation that turns your Neon Database into an API that exposes data that you can pass through the frontend. To do so, navigate to the `operations` folder inside your `.wundergraph` directory and create a new file called `Users.graphql`. 
+5. Write an operation that turns your Neon database into an API that exposes data that you can pass through the frontend. To do so, navigate to the `operations` folder inside your `.wundergraph` directory and create a new file called `Users.graphql`. 
 
     <Admonition type="info">
     With WunderGraph you can write operations in either GraphQL or TypeScript.
@@ -160,13 +162,12 @@ This operation queries your Neon database using GraphQL and exposes the data via
 
 This section describes how to configure the frontend application.
 
-In your local project, navigate to the `pages` directory and open the `index` file.
+1. In your local project, navigate to the `pages` directory and open the `index` file.
+2. In the index file, make the following three changes or replace the existing code with the code shown below:
 
-In the index file, make the following three changes or replace the existing code with the code shown below:
-
-- Get the data from the `Users` endpoint using the `UseQuery` hook.
-- On line 62, update the copy to read: "This is the result of your **Users** Query".
-- On line 66, pass the `users` variable through to the frontend.
+	- Get the data from the `Users` endpoint using the `UseQuery` hook.
+	- On line 62, update the copy to read: "This is the result of your **Users** Query".
+	- On line 66, pass the `users` variable through to the frontend.
 
 ```typescript
 import { NextPage } from 'next';
@@ -282,7 +283,7 @@ const Home: NextPage = () => {
 export default withWunderGraph(Home);
 ```
 
-## Final result
+## Run the application
 
 Run `npm run dev` and navigate to [http://localhost:3000](http://localhost:3000) when the application is finished building.
 
@@ -312,11 +313,11 @@ In under 15 minutes, you were able to:
 8. Commit your changes and trigger a new deployment without a CI/CD pipeline or devops team
 9. See your new operations available in real time with real-time metrics
 
-With WunderGraph, you easily turned your Neon database into an API and exposed it via JSON-RPC. You can now have a 100% serverless stack built on the edge in minutes. 
+With WunderGraph, you easily turned your Neon database into an API and exposed it via JSON-RPC. You can now have a 100% serverless stack built on the edge in minutes.
 
 If you had trouble with any of the steps outlined above, refer to the video guide below.
 
-## Full video guide
+## Video guide
 
 [![Wundergraph video guide](/docs/guides/wundergraph_video_thumbnail_2.jpg)](https://www.youtube.com/watch?v=JqOADpG5q-s)
 
