@@ -104,7 +104,7 @@ The following steps describe how to set up your Wundergraph project locally.
 
     These commands install the required dependencies and start your project locally.
 
-4. Inside the `.wundergraph` directory, open the `wundergraph.config.ts` file and add Neon as a datasource, as shown:
+4. Inside the `.wundergraph` directory, open the `wundergraph.config.ts` file and add Neon as a datasource, as shown below, or simply replace the existing code with this code:
 
     ```typescript
     import { configureWunderGraphApplication, introspect, authProviders, EnvironmentVariable } from '@wundergraph/sdk';
@@ -162,7 +162,7 @@ This section describes how to configure the frontend application.
 
 In your local project, navigate to the `pages` directory and open the `index` file.
 
-In the index file, make the following three changes:
+In the index file, make the following three changes or replace the existing code with the code shown below:
 
 - Get the data from the `Users` endpoint using the `UseQuery` hook.
 - On line 62, update the copy to read: "This is the result of your **Users** Query".
@@ -284,35 +284,37 @@ export default withWunderGraph(Home);
 
 ## Final result
 
-If you have your application running locally, this is what you should see:
+Run `npm run dev` and navigate to [http://localhost:3000](http://localhost:3000) when the application is finished building.
+
+If your application runs successfully, this is what you should see:
 
 ![WunderGraph operations result](/docs/guides/wundergraph_operation_result.jpg)
 
-But let's take it one step further. Git commit your changes and merge it into your main branch.
+To take the setup one step further, commit the changes to your GitHub repository and merge them into your `main` branch.
 
-Once you merge your changes to your main branch, switch back to `WunderGraph Cloud` and check out the `deployments` tab. You should see a deployment has triggered. Give it a couple seconds.
+Once you merge the changes, navigate to `WunderGraph Cloud` and view out the **Deployments** tab. You should see that a deployment was triggered. Give the deployment a few seconds to finish.
 
-Once your deployment is done, if you switch over to the `Operations` tab, you should see your new endpoint that you just created and added to your application! Click it to see your data in real time!
+Once the deployment is ready, navigate to the **Operations** tab. You should see the new endpoint that you created and added to your application. Click it to see your data in real time.
 
-This was just a tiny demo, but you can clearly see the power behind Neon and WunderGraph. You can now easily full serverless apps in minutes.
+This was only a brief demonstration, but you can clearly see the power of Neon and WunderGraph. You can now easily deploy fully serverless apps in minutes.
 
 ## Key takeaways
-
-Let's recap.
 
 In under 15 minutes, you were able to:
 
 1. Create a WunderGraph Cloud account
-2. Create a brand new Next.js project hosted in a region near you
-3. Set up a Neon database with fake data
+2. Create a new Next.js project hosted in a region near you
+3. Set up a Neon database with sample data
 4. Connect your WunderGraph application with your Neon database
 5. Add Neon to your WunderGraph project using a code first approach
-6. Wrote a GraphQL operation to query your Neon database
-7. Updated your frontend to display the results of your GraphQL operation securely in your frontend using JSON-RPC
-8. You committed your changes and triggered a new deployment without a CI/CD pipeline or devops team
-9. Saw your new operations available in real time with real time metrics.
+6. Write a GraphQL operation to query your Neon database
+7. Update the frontend to display the results of your GraphQL operation securely using JSON-RPC
+8. Commit your changes and trigger a new deployment without a CI/CD pipeline or devops team
+9. See your new operations available in real time with real-time metrics
 
-With WunderGraph, You easily turned your Neon database into an API and exposed it via JSON-RPC. You can now have a 100% serverless stack built on the edge in minutes. If you got lost at any step during the guide, you can also see the video guide below.
+With WunderGraph, you easily turned your Neon database into an API and exposed it via JSON-RPC. You can now have a 100% serverless stack built on the edge in minutes. 
+
+If you had trouble with any of the steps outlined above, refer to the video guide below.
 
 ## Full video guide
 
