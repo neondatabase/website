@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-_This guide was contributed by the team at Wundergraph_
+_This guide was contributed by the team at WunderGraph_
 
 WunderGraph is an open-source Backend for Frontend (BFF) Framework designed to optimize Developer Workflows through API Composition. Developers can compose multiple APIs into a single unified interface and generate typesafe API clients that include authentication and file uploads. This guide shows how you can pair WunderGraph with your Neon database and start building applications right away.
 
@@ -29,7 +29,7 @@ Sign into [WunderGraph Cloud](https://cloud.wundergraph.com/) and follow these s
 
 The deployment will take one or two minutes.
 
-### Neon-Wundergraph integration video
+### Neon-WunderGraph integration video
 
 This one minute video demonstrates how to integrate Neon into your WunderGraph project.
 
@@ -91,7 +91,7 @@ WunderGraph configures a environment variable called `NEON_DATABASE_URL`. Please
 
 The following steps describe how to set up your Wundergraph project locally and configure access to Neon.
 
-1. In WunderGraph Cloud, select your project and click **View Git repository** to view your Wundergraph project repository. 
+1. In WunderGraph Cloud, select your project and click **View Git repository** to view your WunderGraph project repository.
 2. Clone the repository and open it in your favorite IDE.
 
 	```bash
