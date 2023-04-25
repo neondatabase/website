@@ -36,7 +36,7 @@ This deployment will take about 1-2 minutes.
 
 ### 1 minute video on how to integrate Neon into your WunderGraph project
 
-{% youtube videoId="cu5vwql5q0A" /%}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cu5vwql5q0A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 In the meantime, while this is deploying. Let's fill our Neon database with some fake data. Navigate over to your [Neon Console](https://console.neon.tech/) and select `SQL editor` from the left hand side.
 
@@ -311,7 +311,7 @@ With WunderGraph, You easily turned your Neon database into an API and exposed i
 
 ## Full video guide
 
-{% youtube videoId="JqOADpG5q-s" /%}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JqOADpG5q-s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Need help?
 
