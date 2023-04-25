@@ -89,13 +89,20 @@ The following steps describe how to set up your Wundergraph project locally.
 
 1. In WunderGraph Cloud, select your project and click **View Git repository** to view your Wundergraph project repository. 
 2. Clone the repository and open it in your favorite IDE.
+
+	```bash
+	git clone https://github.com/<user>/wundergraph.git
+	cd wundergraph
+	code .
+	```
+
 3. Once the project is cloned, run the following commands from your project directory:
 
     ```bash
     npm install && npm run dev
     ```
 
-    This just installs the necessary dependencies and starts your project locally.
+    These commands install the required dependencies and start your project locally.
 
 4. Inside the `.wundergraph` directory, open the `wundergraph.config.ts` file and add Neon as a datasource, as shown:
 
