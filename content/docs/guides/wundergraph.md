@@ -87,77 +87,79 @@ WunderGraph configures a environment variable called `NEON_DATABASE_URL`. Please
 
 The following steps describe how to set up your Wundergraph project locally.
 
-In WunderGraph Cloud, select your project and click **View Git repository** button to view the repository for your Wundergraph project. Clone the repository and open it up in your favorite IDE.
+1. In WunderGraph Cloud, select your project and click **View Git repository** to view your Wundergraph project repository. 
+2. Clone the repository and open it in your favorite IDE.
+3. Once the project is cloned, run the following commands from your project directory:
 
-Once the project is cloned, CD into it and run the following:
+    ```bash
+    npm install && npm run dev
+    ```
 
-```bash
-npm install && npm run dev
-```
+    This just installs the necessary dependencies and starts your project locally.
 
-This just installs the necessary dependencies and starts your project locally.
+4. Inside the `.wundergraph` directory, open the `wundergraph.config.ts` file and add Neon as a datasource, as shown:
 
-Inside the `.wundergraph` directory, open the `wundergraph.config.ts` file and add Neon as a datasource.
+    ```typescript
+    import { configureWunderGraphApplication, introspect, authProviders, EnvironmentVariable } from '@wundergraph/sdk';
+    import operations from './wundergraph.operations'
+    import server from './wundergraph.server'
 
-```typescript
-import { configureWunderGraphApplication, introspect, authProviders, EnvironmentVariable } from '@wundergraph/sdk';
-import operations from './wundergraph.operations'
-import server from './wundergraph.server'
+    const spaceX = introspect.graphql({
+        apiNamespace: 'spacex',
+        url: 'https://spacex-api.fly.dev/graphql/',
+    });
 
-const spaceX = introspect.graphql({
-	apiNamespace: 'spacex',
-	url: 'https://spacex-api.fly.dev/graphql/',
-});
+    // Add your neon datasource
+    const neon = introspect.postgresql({
+    apiNamespace: 'neon',
+    //Your database URL can be found in the Neon console 
+    databaseURL: new EnvironmentVariable('NEON_DATABASE_URL'),
+    });
 
-// Add your neon datasource
-const neon = introspect.postgresql({
-  apiNamespace: 'neon',
-  //Your database URL can be found in the Neon console 
-  databaseURL: new EnvironmentVariable('NEON_DATABASE_URL'),
-});
+    configureWunderGraphApplication({
+        // Add neon inside your APIs array
+    apis: [spaceX, neon],
+    server,
+    operations,
+    codeGenerators: [
+        {
+        templates: [...templates.typescript.all],
+        },
+    ],
+    });
+    ```
 
-configureWunderGraphApplication({
-    // Add neon inside your APIs array
-  apis: [spaceX, neon],
-  server,
-  operations,
-  codeGenerators: [
+5. Write an operation that turns your Neon Database into an API that exposes data that you can pass through the frontend. To do so, navigate to the `operations` folder inside your `.wundergraph` directory and create a new file called `Users.graphql`. 
+
+    <Admonition type="info">
+    With WunderGraph you can write operations in either GraphQL or TypeScript.
+    </Admonition>
+
+    Inside your `Users.graphql` file, add the following code:
+
+    ```graphql
     {
-      templates: [...templates.typescript.all],
-    },
-  ],
-});
-```
+        neon_findFirstusers {
+            id
+            name
+            email
+        }
+    }
+    ```
 
-Now that you have added Neon as a datasource, write an operation that turns our Neon Database into an API that exposes some data that we can pass through to our frontend.
+This operation queries your Neon database using GraphQL and exposes the data via JSON-RPC. In the next section, you will add the operation to the frontend.
 
-Navigate over to your `operations` folder inside your `.wundergraph` directory and create a new file called `Users.graphql`.
+## Configuring the frontend
 
-With WunderGraph you can write operations in either GraphQL or TypeScript.
+This section describes how to configure the frontend application.
 
-Inside your `Users.graphql` file, add the following code:
+In your local project, navigate to the `pages` directory and open the `index` file.
 
-```graphql
-{
-	neon_findFirstusers {
-		id
-		name
-		email
-	}
-}
-```
+In the index file, make the following three changes:
 
-You just wrote an operation that queries your Neon database using graphql and exposes the data via JSON-RPC. In the next section, you will add it to the frontend.
-
-## Frontend work
-
-Switch over to your `pages` directory and open the `index` file.
-
-You can ignore most of the code, but we want to change three things:
-
-1. Get the data from the Users endpoint using UseQuery hook.
-2. On line 62, Update the copy slightly to read: "This is the result of your **Users** Query".
-3. On line 66, pass your users variable through to the frontend.
+- Get the data from the `Users` endpoint using the `UseQuery` hook.
+- On line 62, update the copy to read: "This is the result of your **Users** Query".
+- On line 66, pass the `users` variable through to the frontend.
 
 ```typescript
 import { NextPage } from 'next';
