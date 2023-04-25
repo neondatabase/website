@@ -104,7 +104,7 @@ const Hero = () => (
                   {price}
                 </h3>
                 <Button
-                  className="mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg tracking-[-0.02em] lg:max-w-[304px] sm:max-w-none"
+                  className="mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg tracking-tight lg:max-w-[304px] sm:max-w-none"
                   theme="primary"
                   to={button.url}
                   size="sm"
