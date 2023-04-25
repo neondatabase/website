@@ -1,6 +1,6 @@
 import Calculator from 'components/pages/pricing/calculator';
 import Estimates from 'components/pages/pricing/estimates';
-// import Faq from 'components/pages/pricing/faq';
+import Faq from 'components/pages/pricing/faq';
 import Hero from 'components/pages/pricing/hero';
 import Metrics from 'components/pages/pricing/metrics';
 import Layout from 'components/shared/layout';
@@ -16,7 +16,7 @@ const PricingPage = () => (
     <Metrics />
     <Estimates />
     <Calculator />
-    {/* <Faq /> */}
+    <Faq />
   </Layout>
 );
 

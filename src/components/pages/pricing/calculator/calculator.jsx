@@ -104,10 +104,10 @@ const Calculator = () => {
   );
 
   return (
-    <section className="faq safe-paddings my-40 mt-[17.25rem] 2xl:my-32 xl:my-28 lg:my-24 md:my-20">
+    <section className="faq safe-paddings mb-32 mt-[17.25rem] 2xl:my-32 xl:my-28 lg:my-24 md:my-20">
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
-          <span className="rounded-full bg-[rgba(19,236,182,0.1)] py-[7px] px-[14px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
+          <span className="rounded-full bg-[rgba(19,236,182,0.1)] px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
             Pricing Calculator
           </span>
           <h2 className="mt-2 inline-flex flex-col text-center text-[56px] font-medium leading-none tracking-tighter 2xl:max-w-[968px] 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:inline lg:text-[36px] lg:leading-tight">
@@ -116,7 +116,7 @@ const Calculator = () => {
         </div>
         <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[24px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
           <div className="row-span-1 flex rounded-[10px] bg-gray-10 md:flex-col">
-            <div className="grow p-5 xl:py-5 xl:px-6 md:px-5 md:pb-3">
+            <div className="grow p-5 xl:px-6 xl:py-5 md:px-5 md:pb-3">
               <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
                 Compute time
               </h3>
@@ -197,9 +197,9 @@ const Calculator = () => {
                   <span className="text-gray-7">per day</span>
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-[1fr_152px] border-t border-dashed border-gray-2 pt-6 pb-2 text-[#EFEFF0]">
+              <div className="mt-5 grid grid-cols-[1fr_152px] border-t border-dashed border-gray-2 pb-2 pt-6 text-[#EFEFF0]">
                 <p className="text-sm font-medium leading-none">
-                  <span className="uppercase">Subtotal:</span>
+                  <span className="uppercase">Subtotal: </span>
                   <span className="text-primary-1">${computeTimeCost.toFixed(2)} </span>
                   <span className="font-normal text-gray-7">per month</span>
                 </p>
@@ -211,7 +211,7 @@ const Calculator = () => {
           </div>
 
           <div className="row-span-1 flex rounded-[10px] bg-gray-10 md:flex-col">
-            <div className="grow p-5 xl:py-5 xl:px-6 md:px-5 md:pb-3">
+            <div className="grow p-5 xl:px-6 xl:py-5 md:px-5 md:pb-3">
               <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
                 Project storage
               </h3>
@@ -243,9 +243,9 @@ const Calculator = () => {
                   {storageValue} GiB
                 </p>
               </div>
-              <div className="mt-6 grid grid-cols-[1fr_152px] border-t border-dashed border-gray-2 pt-6 pb-2 text-[#EFEFF0]">
+              <div className="mt-6 grid grid-cols-[1fr_152px] border-t border-dashed border-gray-2 pb-2 pt-6 text-[#EFEFF0]">
                 <p className="text-sm font-medium leading-none">
-                  <span className="uppercase">Subtotal:</span>
+                  <span className="uppercase">Subtotal: </span>
                   <span className="text-primary-1">${storageCost.toFixed(2)} </span>
                   <span className="font-normal text-gray-7">per month</span>
                 </p>
@@ -408,7 +408,7 @@ const Calculator = () => {
             {/* </ul> */}
 
             <Button
-              className="my-7 w-full max-w-[260px] !bg-secondary-2 py-[17px] !text-lg xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1 sm:mt-1"
+              className="my-7 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1 sm:mt-1"
               theme="primary"
               to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               size="sm"
@@ -423,7 +423,7 @@ const Calculator = () => {
 };
 
 const Tooltip = ({ content, id }) => (
-  <span className="relative ml-2 inline-flex text-left align-middle">
+  <span className="relative ml-2 inline-flex text-left align-middle normal-case">
     <span
       className="peer cursor-pointer lg:hidden"
       data-tooltip-id={id}
@@ -434,7 +434,7 @@ const Tooltip = ({ content, id }) => (
     <span className="pointer-events-none absolute left-[calc(100%+10px)] top-1/2 z-50 w-[15rem] -translate-y-1/2 rounded-[4px] bg-gray-2 px-4 py-1.5 text-sm font-normal leading-snug tracking-tight text-[#AFB1B6] opacity-0 shadow-tooltip transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:hidden lg:translate-y-0 lg:bg-transparent lg:p-0">
       {content}
     </span>
-    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-t-4 border-b-4 border-r-4 border-transparent border-r-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
+    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-4 border-r-4 border-t-4 border-transparent border-r-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
   </span>
 );
 

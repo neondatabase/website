@@ -1,10 +1,8 @@
 import clsx from 'clsx';
-import React from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 
@@ -83,7 +81,7 @@ const Hero = () => (
           {items.map(({ type, price, description, features, button }, index) => (
             <li
               className={clsx(
-                'flex flex-col rounded-[10px] px-7 pt-5 pb-5 xl:p-5 lg:p-7',
+                'flex flex-col rounded-[10px] px-7 pb-5 pt-5 xl:p-5 lg:p-7',
                 type === 'Pro' ? 'border border-primary-1' : 'bg-gray-10',
                 type === 'Free Tier' && 'lg:order-1 lg:col-span-full'
               )}
@@ -106,7 +104,7 @@ const Hero = () => (
                   {price}
                 </h3>
                 <Button
-                  className="mt-7 w-full border border-transparent bg-[var(--accentColor)] !py-4 !text-lg tracking-[-0.02em] lg:max-w-[304px] sm:max-w-none"
+                  className="mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg tracking-[-0.02em] lg:max-w-[304px] sm:max-w-none"
                   theme="primary"
                   to={button.url}
                   size="sm"
@@ -127,7 +125,7 @@ const Hero = () => (
                       />
                       <span>{title}</span>
                       {label && (
-                        <span className="ml-2 whitespace-nowrap rounded-full bg-[rgba(19,236,182,0.08)] py-1 px-3 align-middle text-[10px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
+                        <span className="ml-2 whitespace-nowrap rounded-full bg-[rgba(19,236,182,0.08)] px-3 py-1 align-middle text-[10px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
                           {label}
                         </span>
                       )}
@@ -139,13 +137,6 @@ const Hero = () => (
           ))}
         </ul>
       </div>
-      <p className="mt-8 text-xl font-light leading-snug xl:text-base lg:mt-7">
-        See pricing & plan details{' '}
-        <Link className="font-normal" to="/docs/introduction/billing" theme="underline-primary-1">
-          here
-        </Link>
-        .
-      </p>
     </Container>
   </section>
 );

@@ -109,11 +109,11 @@ const Estimates = () => {
   };
 
   return (
-    <section className="estimates safe-paddings mt-56 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20">
+    <section className="estimates safe-paddings mt-[22rem] 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20">
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[1220px] items-center justify-between gap-4 lg:flex-col lg:gap-16">
           <div className="w-[48%] lg:flex lg:w-full lg:flex-col lg:items-center">
-            <span className="rounded-full bg-[rgba(19,236,182,0.1)] py-[7px] px-[14px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
+            <span className="rounded-full bg-[rgba(19,236,182,0.1)] px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
               Billing & usage estimates
             </span>
             <h2 className="mt-3 text-[56px] font-medium leading-none tracking-tighter 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:text-center lg:text-[36px] lg:leading-tight">
@@ -221,7 +221,7 @@ const Estimates = () => {
                                     <span className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-gray-2 p-2 text-sm font-normal leading-none text-gray-6 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:translate-y-0 lg:bg-transparent lg:p-0 lg:opacity-100">
                                       {details}
                                     </span>
-                                    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-t-4 border-b-4 border-r-4 border-transparent border-r-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
+                                    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-4 border-r-4 border-t-4 border-transparent border-r-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
                                   </span>
                                 )}
                               </span>
