@@ -8,7 +8,7 @@ redirectFrom:
 
 Neon is currently in Technical Preview. For information about how the Technical Preview fits within Neon's release plans, refer to the [Neon roadmap](/docs/reference/roadmap).
 
-The Neon Free Tier is perfect for a personal project, small website, prototyping, or evaluation.
+The Neon Free Tier is intended for a personal project, small website, prototyping, or evaluation.
 
 The Free Tier includes:
 
