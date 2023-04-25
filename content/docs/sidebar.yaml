@@ -110,6 +110,8 @@
       slug: guides/stepzen
     - title: Symfony
       slug: guides/symfony
+    - title: WunderGraph
+      slug: guides/wundergraph
     - title: Vercel
       items:
         - title: Connect with the Neon Vercel integration
