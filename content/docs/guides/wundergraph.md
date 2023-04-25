@@ -7,41 +7,33 @@ isDraft: false
 
 WunderGraph is an open-source Backend for Frontend (BFF) Framework designed to optimize Developer Workflows through API Composition. Developers can compose multiple APIs into a single unified interface and generate typesafe API clients that include authentication and file uploads. This guide shows how you can pair WunderGraph with your Neon database and start building applications right away.
 
-With WunderGraph, you can easily introspect your data sources and combine them into your virtual graph. WunderGraph treats APIs as dependencies. You can easily turn your Neon database into a GraphQL API or expose it via JSON-RPC / REST. With an easy-to-deploy database like Neon, you can now have a 100% serverless stack. Build your own stateful serverless apps on the edge now.
+With WunderGraph, you can easily introspect your data sources and combine them into your virtual graph. WunderGraph treats APIs as dependencies. You can easily turn your Neon database into a GraphQL API or expose it via JSON-RPC or REST. With an easy-to-deploy database like Neon, you can now have a 100% serverless stack and build your own stateful serverless apps on the edge.
 
-The starter guide will show you how to set up a full stack app with Neon and WunderGraph where you are exposing Neon securely to your Next.js frontend in under 15 minutes. WunderGraph and Neon can be used with a wide range of frontend clients, but for this demo we'll be using Next.js
+This guide demonstrates setting up a full-stack app with Neon and WunderGraph, securely exposing Neon to your Next.js frontend in under 15 minutes. While WunderGraph and Neon are compatible with a variety of frontend clients, this demo focuses on using Next.js.
 
 ## Prerequisites
 
-- A [WunderGraph Cloud](https://cloud.wundergraph.com/) Account
+- A [WunderGraph Cloud](https://cloud.wundergraph.com/) account
 - A Neon project. See [Create a Neon project](https://neon.tech/docs/manage/projects#create-a-project).
-
-You can also use Neon locally with a WunderGraph project. You just need to use the WunderGraph SDK
-
-```bash
-npm i @wundergraph/sdk
-```
-
-If using Neon Locally, skip ahead to the **Configuring your WunderGraph project with Neon** section
 
 ## Installation
 
-Once you are signed into [WunderGraph Cloud](https://cloud.wundergraph.com/) follow these steps:
+Sign into [WunderGraph Cloud](https://cloud.wundergraph.com/) and follow these steps:
 
-1. Click  the `New Project` button in the top right.
-2. Choose the `Next.js` template and give your project a name.
-3. Choose the region closest to you and hit deploy!
+1. Click  **New Project**.
+2. Choose the `NEXT.js` template and give your repository a name.
+3. Choose the region closest to you
+4. Click **Deploy**.
 
-This deployment will take about 1-2 minutes.
+The deployment will take one or two minutes.
 
 ### One minute video on how to integrate Neon into your WunderGraph project
 
 [![How to integrate Neon into your WunderGraph project](/docs/guides/wundergraph_video_thumbnail_1.jpg)](https://www.youtube.com/watch?v=cu5vwql5q0A)
 
+While the project is deploying, add some sample data to your Neon database. Navigate to the [Neon Console](https://console.neon.tech/) and select **SQL Editor** from the sidebar.
 
-In the meantime, while this is deploying. Let's fill our Neon database with some fake data. Navigate over to your [Neon Console](https://console.neon.tech/) and select **SQL Editor** from the left hand side.
-
-Insert the following fake data into your database.
+Run the following SQL statements in the **SQL Editor** to add the sample data.
 
 ```sql
 create table if not exists Users (
@@ -67,32 +59,35 @@ alter table Users add column updatedAt timestamptz not null default now();
 alter table Users add column lastLogin timestamptz not null default now();
 ```
 
-Now that your database has some data, navigate back over to WunderGraph Cloud.
+Now that your database has some data, navigate back to WunderGraph Cloud.
 
-Once your project is deployed, click on the project you just created and then navigate to the settings page of your WunderGraph Cloud project, click on the `Integrations` tab and click on the `Connect Neon` button.
+Select the project you just created and navigate to the **Settings** page.
 
-![WunderGraph Settings](/docs/guides/wundergraph_settings.jpg)
+Select the **Integrations** tab and click **Connect Neon**.
 
-Now you will be directed to Neon. You can verify the permissions that are given to WunderGraph and click `authorize`.
+![WunderGraph Settings](/docs/guides/wundergraph_settings.png)
 
-You will then be redirected back to WunderGraph Cloud. If you are a part of multiple organizations, you will be asked to select the organization to which you want to connect with Neon. Click `Next`.
+You are directed to Neon to authorize WunderGraph. Review the permissions and click **Authorize** to continue.
 
-Select the Neon project that you want to connect to your WunderGraph project and click `connect` projects.
+You are directed back to WunderGraph Cloud. If you are a part of multiple organizations, you are asked to select the organization to which you want to connect with Neon.
 
-![WunderGraph connect projects](/docs/guides/wundergraph_connect_projects.jpg)
+Select the Neon project and WunderGraph project that you want to connect and click **Connect Projects**.
 
-That's it.
+![WunderGraph connect projects](/docs/guides/wundergraph_connect_projects.png)
 
-### Important instructions
+Your Neon and Wundergraph projects are now connected.
 
-- WunderGraph creates a role named `wundergraph-$project_id` in the Neon project selected during the integration process, please do not delete or change the password of the role.
-- WunderGraph configures a environment variable called `NEON_DATABASE_URL`. Please use this variable wherever you need the database url.
+<Admonition type="important">
+WunderGraph creates a role named `wundergraph-$project_id` in the Neon project selected during the integration process. Please do not delete or change the password for this role.
+
+WunderGraph configures a environment variable called `NEON_DATABASE_URL`. Please use this variable wherever you need to provide a database URL.
+</Admonition>
 
 ## Configuring your WunderGraph project with Neon
 
-Now that you have synced your WunderGraph Cloud account with Neon. Let's set it up locally.
+The following steps describe how to set up your Wundergraph project locally.
 
-Inside your project overview, click the **view git repository** button to be directed to your repo where this new project lives. Clone the repo and open it up in your favorite IDE.
+In WunderGraph Cloud, select your project and click **View Git repository** button to view the repository for your Wundergraph project. Clone the repository and open it up in your favorite IDE.
 
 Once the project is cloned, CD into it and run the following:
 
