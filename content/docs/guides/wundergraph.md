@@ -5,6 +5,8 @@ enableTableOfContents: true
 isDraft: false
 ---
 
+_This guide was contributed by the team at Wundergraph_
+
 WunderGraph is an open-source Backend for Frontend (BFF) Framework designed to optimize Developer Workflows through API Composition. Developers can compose multiple APIs into a single unified interface and generate typesafe API clients that include authentication and file uploads. This guide shows how you can pair WunderGraph with your Neon database and start building applications right away.
 
 With WunderGraph, you can easily introspect your data sources and combine them into your virtual graph. WunderGraph treats APIs as dependencies. You can easily turn your Neon database into a GraphQL API or expose it via JSON-RPC or REST. With an easy-to-deploy database like Neon, you can now have a 100% serverless stack and build your own stateful serverless apps on the edge.
@@ -287,7 +289,7 @@ export default withWunderGraph(Home);
 
 Run `npm run dev` and navigate to [http://localhost:3000](http://localhost:3000) when the application is finished building.
 
-If your application runs successfully, this is what you should see:
+If your application runs successfully, you should see the following:
 
 ![WunderGraph operations result](/docs/guides/wundergraph_operation_result.jpg)
 
@@ -297,7 +299,7 @@ Once you merge the changes, navigate to `WunderGraph Cloud` and view out the **D
 
 Once the deployment is ready, navigate to the **Operations** tab. You should see the new endpoint that you created and added to your application. Click it to see your data in real time.
 
-This was only a brief demonstration, but you can clearly see the power of Neon and WunderGraph. You can now easily deploy fully serverless apps in minutes.
+This was a brief demonstration, but you can clearly see the power of Neon and WunderGraph. You can now easily deploy fully serverless apps in minutes.
 
 ## Key takeaways
 
