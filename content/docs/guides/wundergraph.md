@@ -13,7 +13,9 @@ With WunderGraph, you can easily introspect your data sources and combine them w
 
 This guide demonstrates setting up a full-stack app with Neon and WunderGraph, securely exposing Neon to your Next.js frontend in under 15 minutes. While WunderGraph and Neon are compatible with a variety of frontend clients, this demo focuses on using Next.js.
 
-This guide is also available in video format. See [Video guide](#video-guide).
+<Admonition type="info">
+This guide is also available in video format. See [Neon with WunderGraph video guide](#neon-with-wundergraph-video-guide).
+</Admonition>
 
 ## Prerequisites
 
@@ -306,7 +308,7 @@ In under 15 minutes, you were able to:
 
 If you had trouble with any of the steps outlined above, refer to the video guide below.
 
-## Video guide
+## Neon with WunderGraph video guide
 
 <iframe width="796" height="447" src="https://www.youtube.com/embed/JqOADpG5q-s" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
