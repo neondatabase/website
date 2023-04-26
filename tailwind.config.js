@@ -18,6 +18,7 @@ module.exports = {
       inherit: 'inherit',
       current: 'currentColor',
       transparent: 'transparent',
+      transparentGreen: 'rgba(19,236,182,0.1)',
       black: '#0c0d0d',
       white: '#ffffff',
       primary: {

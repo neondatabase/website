@@ -5,6 +5,7 @@ import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
 import Container from 'components/shared/container';
+import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 // import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
@@ -113,13 +114,15 @@ const Estimates = () => {
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[1220px] items-center justify-between gap-4 lg:flex-col lg:gap-16">
           <div className="w-[48%] lg:flex lg:w-full lg:flex-col lg:items-center">
-            <span className="rounded-full bg-[rgba(19,236,182,0.1)] px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
-              Billing & usage estimates
-            </span>
-            <h2 className="mt-3 text-[56px] font-medium leading-none tracking-tighter 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:text-center lg:text-[36px] lg:leading-tight">
+            <Heading
+              className="lg:text-center"
+              badge="Billing & usage estimates"
+              tag="h2"
+              size="2sm"
+            >
               <span className="text-primary-1">Each user is unique.</span> However, we can give you
               some estimates.
-            </h2>
+            </Heading>
             <p className="mt-4 text-lg font-light leading-snug 2xl:mt-5 xl:text-base lg:text-center">
               <Link
                 className="!border-b font-normal"
@@ -132,7 +135,7 @@ const Estimates = () => {
               East (Ohio) region
             </p>
           </div>
-          <div className="w-[38%] lg:w-full">
+          <div className="w-[38%] overflow-x-hidden lg:w-full">
             <ul className="flex gap-8 py-2 lg:mx-auto lg:max-w-[584px] lg:px-6 md:max-w-full md:px-0 xs:gap-4">
               {items.map(({ type, icon: Icon }, index) => (
                 <li key={index}>
@@ -151,7 +154,7 @@ const Estimates = () => {
               ))}
             </ul>
             <Container
-              className="no-scrollbars mt-7 2xl:px-0 md:-mx-4 md:overflow-x-auto md:px-0"
+              className="no-scrollbars mt-7 2xl:!px-0 md:-mx-4 md:overflow-x-auto md:px-0"
               size="mdDoc"
             >
               <LazyMotion features={domAnimation}>

@@ -88,6 +88,8 @@ const Hero = () => (
               style={{
                 '--accentColor':
                   type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
+                '--hoverColor':
+                  type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e5bf' : '#f0f075',
               }}
               key={index}
             >
@@ -97,35 +99,35 @@ const Hero = () => (
                   type === 'Free Tier' ? 'lg:min-h-max' : 'lg:min-h-[345px]'
                 )}
               >
-                <span className="text-xl font-medium leading-none tracking-[-0.02em] text-[var(--accentColor)]">
+                <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
                   {type}
                 </span>
                 <h3 className="mt-7 text-[36px] font-light leading-none tracking-tighter lg:text-[32px]">
                   {price}
                 </h3>
                 <Button
-                  className="mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg tracking-tight lg:max-w-[304px] sm:max-w-none"
+                  className="mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg tracking-tight hover:!bg-[var(--hoverColor)] lg:max-w-[304px] sm:max-w-none"
                   theme="primary"
                   to={button.url}
                   size="sm"
                 >
                   {button.text}
                 </Button>
-                <p className="mt-9 font-light leading-snug tracking-[-0.02em] text-gray-7 lg:mt-7">
+                <p className="mt-9 font-light leading-snug tracking-tight text-gray-7 lg:mt-7">
                   {description}
                 </p>
               </div>
               <div className="mt-auto flex grow flex-col">
                 <ul className="mb-8 flex flex-col space-y-4 xl:mb-5 lg:mb-7">
                   {features.map(({ title, label }, index) => (
-                    <li className="relative pl-6 leading-tight tracking-[-0.02em]" key={index}>
+                    <li className="relative pl-6 leading-tight tracking-tight" key={index}>
                       <CheckIcon
                         className="absolute left-0 top-[2px] h-4 w-4 text-[var(--accentColor)]"
                         aria-hidden
                       />
                       <span>{title}</span>
                       {label && (
-                        <span className="ml-2 whitespace-nowrap rounded-full bg-[rgba(19,236,182,0.08)] px-3 py-1 align-middle text-[10px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
+                        <span className="ml-2 whitespace-nowrap rounded-full bg-transparentGreen px-3 py-1 align-middle text-[10px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
                           {label}
                         </span>
                       )}

@@ -8,6 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import Heading from 'components/shared/heading';
 import LINKS from 'constants/links';
 import InfoIcon from 'icons/info.inline.svg';
 
@@ -107,12 +108,10 @@ const Calculator = () => {
     <section className="faq safe-paddings mb-32 mt-[17.25rem] 2xl:my-32 xl:my-28 lg:my-24 md:my-20">
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
-          <span className="rounded-full bg-[rgba(19,236,182,0.1)] px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
-            Pricing Calculator
-          </span>
-          <h2 className="mt-2 inline-flex flex-col text-center text-[56px] font-medium leading-none tracking-tighter 2xl:max-w-[968px] 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:inline lg:text-[36px] lg:leading-tight">
-            Calculate your monthly bill based <br /> on compute time and storage
-          </h2>
+          <Heading className="text-center lg:inline" badge="Pricing Calculator" tag="h2" size="2sm">
+            Calculate your monthly bill based <br className="sm:hidden" /> on compute time and
+            storage
+          </Heading>
         </div>
         <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[24px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
           <div className="row-span-1 flex rounded-[10px] bg-gray-10 md:flex-col">
@@ -120,8 +119,8 @@ const Calculator = () => {
               <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
                 Compute time
               </h3>
-              <div className="mt-7 grid grid-cols-[1fr_290px_152px] items-center gap-4 md:mt-7">
-                <h4 className="text-right text-[15px] leading-none tracking-tight text-gray-9">
+              <div className="mt-7 grid grid-cols-[1fr_290px_152px] items-center gap-4 lg:grid-cols-[90px_1fr_140px] md:mt-7">
+                <h4 className="nowrap text-right text-[15px] leading-none tracking-tight text-gray-9">
                   <span>Compute size</span>
                   <Tooltip
                     id="compute"
@@ -163,8 +162,8 @@ const Calculator = () => {
                   <span>{computeUnits * 4}GB RAM</span>
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-[1fr_290px_152px] items-center gap-4 xl:mt-6 md:mt-6">
-                <h4 className="text-right text-[15px] leading-none tracking-tight text-gray-9">
+              <div className="mt-5 grid grid-cols-[1fr_290px_152px] items-center gap-4 xl:mt-6 lg:mt-6 lg:grid-cols-[90px_1fr_140px]">
+                <h4 className="nowrap text-right text-[15px] leading-none tracking-tight text-gray-9">
                   Active time
                   <Tooltip
                     id="activeTime"
@@ -197,13 +196,13 @@ const Calculator = () => {
                   <span className="text-gray-7">per day</span>
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-[1fr_152px] border-t border-dashed border-gray-2 pb-2 pt-6 text-[#EFEFF0]">
+              <div className="mt-5 grid grid-cols-[1fr_152px] border-t border-dashed border-gray-2 pb-2 pt-6 text-[#EFEFF0] lg:grid-cols-[1fr_140px]">
                 <p className="text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
                   <span className="text-primary-1">${computeTimeCost.toFixed(2)} </span>
                   <span className="font-normal text-gray-7">per month</span>
                 </p>
-                <p className="text-sm leading-none xl:mt-10 md:hidden">
+                <p className="text-sm leading-none">
                   ${COMPUTE_TIME_PRICE} <span className="text-gray-7">per hour</span>
                 </p>
               </div>
@@ -215,7 +214,7 @@ const Calculator = () => {
               <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
                 Project storage
               </h3>
-              <div className="mt-7 grid grid-cols-[1fr_290px_152px] items-center gap-4 md:mt-7">
+              <div className="mt-7 grid grid-cols-[1fr_290px_152px] items-center gap-4 lg:grid-cols-[90px_1fr_140px] md:mt-7">
                 <h4 className="text-right text-[15px] leading-none tracking-tight text-gray-9">
                   Data
                 </h4>
@@ -243,21 +242,21 @@ const Calculator = () => {
                   {storageValue} GiB
                 </p>
               </div>
-              <div className="mt-6 grid grid-cols-[1fr_152px] border-t border-dashed border-gray-2 pb-2 pt-6 text-[#EFEFF0]">
+              <div className="mt-6 grid grid-cols-[1fr_152px] border-t border-dashed border-gray-2 pb-2 pt-6 text-[#EFEFF0] lg:grid-cols-[1fr_140px]">
                 <p className="text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
                   <span className="text-primary-1">${storageCost.toFixed(2)} </span>
                   <span className="font-normal text-gray-7">per month</span>
                 </p>
-                <p className="text-sm leading-none text-[#EFEFF0] xl:mt-10 md:hidden">
+                <p className="text-sm leading-none text-[#EFEFF0]">
                   <span className="text-[#00E599]">${COMPUTE_TIME_PRICE}</span> per hour
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="row-span-1 rounded-[10px] bg-gray-10 p-5 md:flex-col">
-            <div className="min-h-[126px] xl:py-8 lg:pb-6 md:px-5 md:py-5 xs:min-h-[214px]">
+          <div className="row-span-1 rounded-[10px] bg-gray-10 p-5 md:flex-col md:p-0">
+            <div className="min-h-[202px] xl:py-8 lg:pb-6 md:px-5 md:py-5 [@media(min-width:444px)]:min-h-[142px] [@media(min-width:617px)]:min-h-[auto]">
               <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
                 Data transfer and Written data
                 <Tooltip
@@ -323,7 +322,7 @@ const Calculator = () => {
                       </li>
                       <li>
                         <button
-                          className="relative mx-0 border-b border-primary-1 text-primary-1 transition-colors duration-200 hover:border-transparent xl:mx-0 xl:block"
+                          className="relative mx-0 border-b border-primary-1 text-primary-1 transition-colors duration-200 hover:border-transparent"
                           type="button"
                           onClick={() => setIsAdvanced(false)}
                         >
@@ -351,7 +350,7 @@ const Calculator = () => {
                     >
                       Accounts for 10% of your monthly cost, on average.
                       <button
-                        className="relative mx-2 border-b border-primary-1 text-primary-1 transition-colors duration-200 hover:border-transparent xl:mx-0 xl:block"
+                        className="relative mx-2 border-b border-primary-1 text-primary-1 transition-colors duration-200 hover:border-transparent"
                         type="button"
                         onClick={() => setIsAdvanced(true)}
                       >
@@ -362,7 +361,7 @@ const Calculator = () => {
                 </AnimatePresence>
               </LazyMotion>
             </div>
-            <div className="flex justify-between border-t border-dashed border-gray-2 pt-6 text-[#EFEFF0]">
+            <div className="flex justify-between border-t border-dashed border-gray-2 pb-2 pt-6 text-[#EFEFF0] md:px-5">
               <p className="text-sm font-medium leading-none">
                 <span className="uppercase">Subtotal: </span>
                 <span className="text-primary-1">${writtenAndTransferDataCost.toFixed(2)} </span>
@@ -423,12 +422,8 @@ const Calculator = () => {
 };
 
 const Tooltip = ({ content, id }) => (
-  <span className="relative ml-2 inline-flex text-left align-middle normal-case">
-    <span
-      className="peer cursor-pointer lg:hidden"
-      data-tooltip-id={id}
-      data-tooltip-content={content}
-    >
+  <span className="relative ml-2 inline-flex text-left align-middle normal-case lg:hidden">
+    <span className="peer cursor-pointer" data-tooltip-id={id} data-tooltip-content={content}>
       <InfoIcon />
     </span>
     <span className="pointer-events-none absolute left-[calc(100%+10px)] top-1/2 z-50 w-[15rem] -translate-y-1/2 rounded-[4px] bg-gray-2 px-4 py-1.5 text-sm font-normal leading-snug tracking-tight text-[#AFB1B6] opacity-0 shadow-tooltip transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:hidden lg:translate-y-0 lg:bg-transparent lg:p-0">

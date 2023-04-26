@@ -3,10 +3,11 @@
 import useScrollPosition from '@react-hook/window-scroll';
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
 import clsx from 'clsx';
-import React, { useState, useRef, useMemo, createRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
+import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import useWindowSize from 'hooks/use-window-size';
@@ -123,9 +124,8 @@ const items = [
 ];
 
 const Metrics = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const sectionRef = useRef();
-  const slideRefs = useMemo(() => [...Array(items.length)].map(() => createRef()), []);
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const { height: pageHeight } = useWindowSize();
   const scrollY = useScrollPosition();
   const [contentRef, isContentInView] = useInView({ triggerOnce: true });
@@ -150,9 +150,9 @@ const Metrics = () => {
   useEffect(() => {
     if (!animationStageInput || !animationReverseInput) return;
 
-    animationReverseInput.value = currentSlide < animationStageInput.value;
-    animationStageInput.value = currentSlide;
-  }, [currentSlide, animationStageInput, animationReverseInput]);
+    animationReverseInput.value = currentSectionIndex < animationStageInput.value;
+    animationStageInput.value = currentSectionIndex;
+  }, [currentSectionIndex, animationStageInput, animationReverseInput]);
 
   useEffect(() => {
     const currentScrollTop = scrollY;
@@ -162,7 +162,7 @@ const Metrics = () => {
 
     switchPoints.forEach((_, index) => {
       if (currentScrollTop > switchPoints[index] && currentScrollTop < switchPoints[index + 1]) {
-        setCurrentSlide(index);
+        setCurrentSectionIndex(index);
       }
     });
   }, [pageHeight, scrollY]);
@@ -171,12 +171,9 @@ const Metrics = () => {
     <section className="safe-paddings mt-60 lg:mt-24 md:mt-20" ref={sectionRef}>
       <div className="relative flex flex-col">
         <Container className="flex flex-col items-center" size="mdDoc">
-          <span className="rounded-full bg-[rgba(19,236,182,0.1)] px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
-            Metrics
-          </span>
-          <h2 className="mt-3 text-[56px] font-medium leading-none tracking-tighter 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:text-center lg:text-[36px] lg:leading-tight">
+          <Heading className="text-center" badge="Metrics" tag="h2" size="2sm">
             Neon charges on <span className="text-primary-1">4 metrics</span>
-          </h2>
+          </Heading>
           <p className="mt-4 text-lg font-light leading-snug 2xl:mt-5 xl:text-base lg:text-center">
             Refer to our{' '}
             <Link
@@ -204,8 +201,7 @@ const Metrics = () => {
               {items.map(({ name, priceFrom, details, prices }, index) => (
                 <div
                   className="flex h-screen min-h-[900px] flex-col justify-center px-6 2xl:min-h-[835px] lg:min-h-[770px]"
-                  key={name}
-                  ref={slideRefs[index]}
+                  key={index}
                 >
                   <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white">
                     {name}
@@ -225,7 +221,7 @@ const Metrics = () => {
                         <span className="">{name}</span>
                         <span className="">
                           ${price} /{' '}
-                          <span className="font-light tracking-tight text-gray-7">${unit}</span>
+                          <span className="font-light tracking-tight text-gray-7">{unit}</span>
                         </span>
                       </div>
                     ))}

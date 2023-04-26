@@ -1,4 +1,5 @@
 import Container from 'components/shared/container';
+import Heading from 'components/shared/heading';
 
 import Item from './item';
 
@@ -54,9 +55,9 @@ const items = [
 const Faq = () => (
   <section className="faq safe-paddings bg-gray-10 py-36 2xl:py-32 xl:py-28 lg:py-24 md:py-20">
     <Container className="max-w-[968px]" size="mdDoc">
-      <h2 className="text-center text-[56px] font-medium leading-none tracking-tighter 2xl:text-[44px] 2xl:leading-snug xl:text-4xl lg:inline lg:text-[36px] lg:leading-tight">
+      <Heading className="text-center lg:inline" tag="h2" size="2sm">
         Frequently Asked Questions
-      </h2>
+      </Heading>
       <ul className="mt-12 xl:mt-3.5">
         {items.map((item, index) => (
           <Item {...item} key={index} index={index} />
