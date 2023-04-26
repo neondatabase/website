@@ -12,7 +12,7 @@ See [Token](#token).
 
 ### Active time
 
-The amount of active compute hours. Neon Free Tier users are provided with 100 hours of active compute hours per month. See [Free Tier](/docs/introduction/technical-preview-free-tier) for more information.
+The amount of active compute hours per month. For Neon Free Tier users, there is no limit on _Active time_ for the [primary branch](#primary-branch) compute. There is a limit of 100 hours of _Active time_ per month for [non-primary branch](#non-primary-branch) computes. The _Active time_ on the primary branch compute is counted toward the 100 hour limit. You can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**. See [Free Tier](/docs/introduction/technical-preview-free-tier) for more information.
 
 ### Activity Monitor
 
