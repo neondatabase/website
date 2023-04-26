@@ -7,9 +7,9 @@ isDraft: false
 
 _This guide was contributed by the team at WunderGraph_
 
-WunderGraph is an open-source Backend for Frontend (BFF) Framework designed to optimize Developer Workflows through API Composition. Developers can compose multiple APIs into a single unified interface and generate typesafe API clients that include authentication and file uploads. This guide shows how you can pair WunderGraph with your Neon database and start building applications right away.
+WunderGraph is an open-source Backend for Frontend (BFF) framework designed to optimize developer workflows through API composition. Developers can use this framework to compose multiple APIs into a single unified interface and generate typesafe API clients that include authentication and file uploads. This guide shows how you can pair WunderGraph with your Neon database to accelerate application development.
 
-With WunderGraph, you can easily introspect your data sources and combine them into your virtual graph. WunderGraph treats APIs as dependencies. You can easily turn your Neon database into a GraphQL API or expose it via JSON-RPC or REST. With an easy-to-deploy database like Neon, you can now have a 100% serverless stack and build your own stateful serverless apps on the edge.
+With WunderGraph, you can easily introspect your data sources and combine them within your virtual graph. WunderGraph treats APIs as dependencies. You can easily turn your Neon database into a GraphQL API or expose it via JSON-RPC or REST. With an easy-to-deploy PostgreSQL database like Neon, you can now have a 100% serverless stack and build your own stateful serverless apps on the edge.
 
 This guide demonstrates setting up a full-stack app with Neon and WunderGraph, securely exposing Neon to your Next.js frontend in under 15 minutes. While WunderGraph and Neon are compatible with a variety of frontend clients, this demo focuses on using Next.js.
 
@@ -24,65 +24,63 @@ Sign into [WunderGraph Cloud](https://cloud.wundergraph.com/) and follow these s
 
 1. Click  **New Project**.
 2. Choose the `NEXT.js` template and give your repository a name.
-3. Choose the region closest to you
+3. Select the region closest to you.
 4. Click **Deploy**.
 
 The deployment will take one or two minutes.
 
 ### Neon-WunderGraph integration video
 
-This one minute video demonstrates how to integrate Neon into your WunderGraph project.
+This short video demonstrates how to integrate Neon into your WunderGraph project.
 
 <iframe width="796" height="447" src="https://www.youtube.com/embed/cu5vwql5q0A" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-While the project is deploying, add some sample data to your Neon database. Navigate to the [Neon Console](https://console.neon.tech/) and select **SQL Editor** from the sidebar.
+### Add sample data to Neon
 
-Run the following SQL statements in the **SQL Editor** to add the sample data.
+While the project is deploying, add some sample data to your Neon database. 
 
-```sql
-create table if not exists Users (
-    id serial primary key not null,
-    email text not null,
-    name text not null,
-    unique (email)
-);
+1. Navigate to the [Neon Console](https://console.neon.tech/) and select **SQL Editor** from the sidebar.
+2. Run the following SQL statements in the **SQL Editor** to add the sample data.
 
-create table if not exists Messages (
-  id serial primary key not null,
-  user_id int not null references Users(id),
-  message text not null
-);
+	```sql
+	create table if not exists Users (
+		id serial primary key not null,
+		email text not null,
+		name text not null,
+		unique (email)
+	);
 
-insert into Users (email, name) VALUES ('Jens@wundergraph.com','Jens@WunderGraph');
-insert into Messages (user_id, message) VALUES ((select id from Users where email = 'Jens@wundergraph.com'),'Hey, welcome to the WunderGraph!');
-insert into Messages (user_id, message) VALUES ((select id from Users where email = 'Jens@wundergraph.com'),'This is WunderGraph!');
-insert into Messages (user_id, message) VALUES ((select id from Users where email = 'Jens@wundergraph.com'),'WunderGraph!');
+	create table if not exists Messages (
+	id serial primary key not null,
+	user_id int not null references Users(id),
+	message text not null
+	);
 
-alter table Users add column updatedAt timestamptz not null default now();
+	insert into Users (email, name) VALUES ('Jens@wundergraph.com','Jens@WunderGraph');
+	insert into Messages (user_id, message) VALUES ((select id from Users where email = 'Jens@wundergraph.com'),'Hey, welcome to the WunderGraph!');
+	insert into Messages (user_id, message) VALUES ((select id from Users where email = 'Jens@wundergraph.com'),'This is WunderGraph!');
+	insert into Messages (user_id, message) VALUES ((select id from Users where email = 'Jens@wundergraph.com'),'WunderGraph!');
 
-alter table Users add column lastLogin timestamptz not null default now();
-```
+	alter table Users add column updatedAt timestamptz not null default now();
 
-Now that your database has some data, navigate back to WunderGraph Cloud.
+	alter table Users add column lastLogin timestamptz not null default now();
+	```
 
-Select the project you just created and navigate to the **Settings** page.
+### Connect Neon and Wundergraph
 
-Select the **Integrations** tab and click **Connect Neon**.
+1. Now that your database has some data, navigate back to WunderGraph Cloud.
+2. Select the project you just created and navigate to the **Settings** page.
+3. Select the **Integrations** tab and click **Connect Neon**.
+    ![WunderGraph Settings](/docs/guides/wundergraph_settings.png)
+4. You are directed to Neon to authorize WunderGraph. Review the permissions and click **Authorize** to continue.
+    You are directed back to WunderGraph Cloud. If you are a part of multiple organizations, you are asked to select the organization to connect with Neon.
+5. Select the Neon project and WunderGraph project that you want to connect, and click **Connect Projects**.
+    ![WunderGraph connect projects](/docs/guides/wundergraph_connect_projects.png)
 
-![WunderGraph Settings](/docs/guides/wundergraph_settings.png)
-
-You are directed to Neon to authorize WunderGraph. Review the permissions and click **Authorize** to continue.
-
-You are directed back to WunderGraph Cloud. If you are a part of multiple organizations, you are asked to select the organization to which you want to connect with Neon.
-
-Select the Neon project and WunderGraph project that you want to connect and click **Connect Projects**.
-
-![WunderGraph connect projects](/docs/guides/wundergraph_connect_projects.png)
-
-Your Neon and Wundergraph projects are now connected.
+  Your Neon and Wundergraph projects are now connected.
 
 <Admonition type="important">
-WunderGraph creates a role named `wundergraph-$project_id` in the Neon project selected during the integration process. Please do not delete or change the password for this role.
+WunderGraph creates a role named `wundergraph-$project_id` in the Neon project that you selected during the integration process. Please do not delete or change the password for this role.
 
 WunderGraph configures a environment variable called `NEON_DATABASE_URL`. Please use this variable wherever you need to provide a database URL.
 </Admonition>
@@ -92,7 +90,7 @@ WunderGraph configures a environment variable called `NEON_DATABASE_URL`. Please
 The following steps describe how to set up your Wundergraph project locally and configure access to Neon.
 
 1. In WunderGraph Cloud, select your project and click **View Git repository** to view your WunderGraph project repository.
-2. Clone the repository and open it in your favorite IDE.
+2. Clone the repository and open it in your IDE. For example:
 
 	```bash
 	git clone https://github.com/<user>/wundergraph.git
@@ -100,7 +98,7 @@ The following steps describe how to set up your Wundergraph project locally and 
 	code .
 	```
 
-3. Once the project is cloned, run the following commands from your project directory:
+3. Once the project is cloned, run the following commands in your project directory:
 
     ```bash
     npm install && npm run dev
@@ -164,10 +162,10 @@ This operation queries your Neon database using GraphQL and exposes the data via
 
 This section describes how to configure the frontend application.
 
-1. In your local project, navigate to the `pages` directory and open the `index` file.
-2. In the index file, make the following three changes or replace the existing code with the code shown below:
+1. In your local project, navigate to the `pages` directory and open the `index.tsx` file.
+2. In the `index.tsx` file, make the following three changes or replace the existing code with the code shown below:
 
-	- Get the data from the `Users` endpoint using the `UseQuery` hook.
+	- Retrieve the data from the `Users` endpoint using the `UseQuery` hook.
 	- On line 62, update the copy to read: "This is the result of your **Users** Query".
 	- On line 66, pass the `users` variable through to the frontend.
 
@@ -287,42 +285,34 @@ export default withWunderGraph(Home);
 
 ## Run the application
 
-Run `npm run dev` and navigate to [http://localhost:3000](http://localhost:3000) when the application is finished building.
-
-If your application runs successfully, you should see the following:
-
-![WunderGraph operations result](/docs/guides/wundergraph_operation_result.jpg)
-
-To take the setup one step further, commit the changes to your GitHub repository and merge them into your `main` branch.
-
-Once you merge the changes, navigate to `WunderGraph Cloud` and view out the **Deployments** tab. You should see that a deployment was triggered. Give the deployment a few seconds to finish.
-
-Once the deployment is ready, navigate to the **Operations** tab. You should see the new endpoint that you created and added to your application. Click it to see your data in real time.
-
-This was a brief demonstration, but you can clearly see the power of Neon and WunderGraph. You can now easily deploy fully serverless apps in minutes.
+1. Run `npm run dev`.
+2. Navigate to [http://localhost:3000](http://localhost:3000) when the application is finished building. If your application runs successfully, you should see the following:
+  ![WunderGraph operations result](/docs/guides/wundergraph_operation_result.jpg)
+3. To take the setup one step further, commit the changes to your GitHub repository and merge them into your `main` branch.
+4. Once you merge the changes, navigate to `WunderGraph Cloud` and view out the **Deployments** tab. You should see that a deployment was triggered. Give the deployment a few seconds to finish.
+5. Once the deployment is ready, navigate to the **Operations** tab. You should see the new endpoint that you created and added to your application. Click it to see your data in real time.
 
 ## Key takeaways
+
+This guide provided a brief demonstration showcasing the capabilities of Neon and WunderGraph, which enable you to turn your Neon database into an API exposed via JSON-RPC and rapidly deploy fully serverless apps on the edge in a matter of minutes. The power of Neon with WunderGraph lies in simplifying the development process, allowing you to focus on creating valuable and efficient applications.
 
 In under 15 minutes, you were able to:
 
 1. Create a WunderGraph Cloud account
-2. Create a new Next.js project hosted in a region near you
+2. Create a Next.js project hosted in a region near you
 3. Set up a Neon database with sample data
 4. Connect your WunderGraph application with your Neon database
 5. Add Neon to your WunderGraph project using a code first approach
 6. Write a GraphQL operation to query your Neon database
 7. Update the frontend to display the results of your GraphQL operation securely using JSON-RPC
-8. Commit your changes and trigger a new deployment without a CI/CD pipeline or devops team
-9. See your new operations available in real time with real-time metrics
-
-With WunderGraph, you easily turned your Neon database into an API and exposed it via JSON-RPC. You can now have a 100% serverless stack built on the edge in minutes.
+8. Commit your changes and trigger a deployment without a CI/CD pipeline or Devops team
+9. View your new operations in real time with real-time metrics
 
 If you had trouble with any of the steps outlined above, refer to the video guide below.
 
 ## Video guide
 
 <iframe width="796" height="447" src="https://www.youtube.com/embed/JqOADpG5q-s" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
 
 ## Need help?
 
