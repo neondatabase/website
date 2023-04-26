@@ -13,6 +13,8 @@ With WunderGraph, you can easily introspect your data sources and combine them w
 
 This guide demonstrates setting up a full-stack app with Neon and WunderGraph, securely exposing Neon to your Next.js frontend in under 15 minutes. While WunderGraph and Neon are compatible with a variety of frontend clients, this demo focuses on using Next.js.
 
+This guide is also available in video format. See [Video guide](#video-guide).
+
 ## Prerequisites
 
 - A [WunderGraph Cloud](https://cloud.wundergraph.com/) account
@@ -28,12 +30,6 @@ Sign into [WunderGraph Cloud](https://cloud.wundergraph.com/) and follow these s
 4. Click **Deploy**.
 
 The deployment will take one or two minutes.
-
-### Neon-WunderGraph integration video
-
-This short video demonstrates how to integrate Neon into your WunderGraph project.
-
-<iframe width="796" height="447" src="https://www.youtube.com/embed/cu5vwql5q0A" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### Add sample data to Neon
 
