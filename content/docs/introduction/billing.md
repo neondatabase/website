@@ -23,7 +23,7 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 |**Best for**              | Prototyping and personal projects       | Small to medium teams, setups with 1 to 3 active databases  | Medium to large teams, Database fleets, Resale |
 |**Projects**              | 1                                 | 20               | Unlimited                 |
 |**Branches**              | 10                                 | Unlimited               | Unlimited                 |
-|**Compute _Active time_ per month** | No limit on the [primary branch](/docs/reference/glossary#primary-branch) compute. 100 hours for [non-primary branch](https://neon.tech/docs/reference/glossary#non-primary-branch) computes*                 | Unlimited        | Unlimited                 |
+|**Compute _[Active time](/docs/reference/glossary#active-time)_ per month** | No limit on the [primary branch](/docs/reference/glossary#primary-branch) compute. 100 hours for [non-primary branch](https://neon.tech/docs/reference/glossary#non-primary-branch) computes*                 | Unlimited        | Unlimited                 |
 |**Compute size**          | 1 shared vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
 |**Storage**               | 3 GB per branch                   | Unlimited*        | Unlimited                 |
 |**Dedicated resources**   | -                            | -           | &check;                   |
