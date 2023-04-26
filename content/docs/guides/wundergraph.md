@@ -33,7 +33,7 @@ The deployment will take one or two minutes.
 
 This one minute video demonstrates how to integrate Neon into your WunderGraph project.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/cu5vwql5q0A" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="796" height="447" src="https://www.youtube.com/embed/cu5vwql5q0A" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 While the project is deploying, add some sample data to your Neon database. Navigate to the [Neon Console](https://console.neon.tech/) and select **SQL Editor** from the sidebar.
 
@@ -321,7 +321,7 @@ If you had trouble with any of the steps outlined above, refer to the video guid
 
 ## Video guide
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/JqOADpG5q-s" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="796" height="447" src="https://www.youtube.com/embed/JqOADpG5q-s" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Need help?
 
