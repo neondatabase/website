@@ -1,6 +1,6 @@
 ---
 title: Use WunderGraph with Neon
-subtitle: Develop apps at lightning-fast speed by leveraging the combined power of Neon and WunderGraph
+subtitle: Leverage the power of Neon and WunderGraph to build fully serverless apps in minutes
 enableTableOfContents: true
 isDraft: false
 ---
