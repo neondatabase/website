@@ -158,7 +158,7 @@ The following steps describe how to set up your Wundergraph project locally and 
 
 This operation queries your Neon database using GraphQL and exposes the data via JSON-RPC. In the next section, you will add the operation to the frontend.
 
-## Configuring the frontend
+## Configure the frontend
 
 This section describes how to configure the frontend application.
 
