@@ -37,10 +37,10 @@ This short video demonstrates how to integrate Neon into your WunderGraph projec
 
 ### Add sample data to Neon
 
-While the project is deploying, add some sample data to your Neon database. 
+While the project is deploying, add some sample data to your Neon database.
 
 1. Navigate to the [Neon Console](https://console.neon.tech/) and select **SQL Editor** from the sidebar.
-2. Run the following SQL statements in the **SQL Editor** to add the sample data.
+2. Run the following SQL statements to add the sample data.
 
 	```sql
 	create table if not exists Users (
