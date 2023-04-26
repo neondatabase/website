@@ -89,7 +89,7 @@ const Hero = () => (
                 '--accentColor':
                   type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
                 '--hoverColor':
-                  type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e5bf' : '#f0f075',
+                  type === 'Free Tier' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
               }}
               key={index}
             >
@@ -106,7 +106,7 @@ const Hero = () => (
                   {price}
                 </h3>
                 <Button
-                  className="mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg tracking-tight hover:!bg-[var(--hoverColor)] lg:max-w-[304px] sm:max-w-none"
+                  className="mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight hover:!bg-[var(--hoverColor)] lg:max-w-[304px] sm:max-w-none"
                   theme="primary"
                   to={button.url}
                   size="sm"
@@ -127,7 +127,7 @@ const Hero = () => (
                       />
                       <span>{title}</span>
                       {label && (
-                        <span className="ml-2 whitespace-nowrap rounded-full bg-transparentGreen px-3 py-1 align-middle text-[10px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
+                        <span className="ml-2 whitespace-nowrap rounded-full bg-primary-4 px-3 py-1 align-middle text-[10px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
                           {label}
                         </span>
                       )}

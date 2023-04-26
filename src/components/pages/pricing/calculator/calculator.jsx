@@ -10,6 +10,8 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import LINKS from 'constants/links';
+import ArrowRight from 'icons/arrow-right-thin.inline.svg';
+import CheckIcon from 'icons/check.inline.svg';
 import InfoIcon from 'icons/info.inline.svg';
 
 const COMPUTE_TIME_PRICE = 0.102;
@@ -105,7 +107,7 @@ const Calculator = () => {
   );
 
   return (
-    <section className="faq safe-paddings mb-32 mt-[17.25rem] 2xl:my-32 xl:my-28 lg:my-24 md:my-20">
+    <section className="faq safe-paddings mb-40 mt-[17.25rem] 2xl:my-32 xl:my-28 lg:my-24 md:my-20">
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <Heading className="text-center lg:inline" badge="Pricing Calculator" tag="h2" size="2sm">
@@ -113,14 +115,14 @@ const Calculator = () => {
             storage
           </Heading>
         </div>
-        <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[24px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
+        <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[20px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
           <div className="row-span-1 flex rounded-[10px] bg-gray-10 md:flex-col">
             <div className="grow p-5 xl:px-6 xl:py-5 md:px-5 md:pb-3">
-              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
+              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9">
                 Compute time
               </h3>
-              <div className="mt-7 grid grid-cols-[1fr_290px_152px] items-center gap-4 lg:grid-cols-[90px_1fr_140px] md:mt-7">
-                <h4 className="nowrap text-right text-[15px] leading-none tracking-tight text-gray-9">
+              <div className="mt-5 grid grid-cols-2 items-center gap-2 md:mt-7">
+                <h4 className="text-sm leading-none tracking-tight text-gray-9">
                   <span>Compute size</span>
                   <Tooltip
                     id="compute"
@@ -128,7 +130,7 @@ const Calculator = () => {
                   />
                 </h4>
                 <Slider.Root
-                  className="relative flex h-1 w-full grow touch-none items-center"
+                  className="relative col-span-2 row-start-2 flex h-1 w-full grow touch-none items-center"
                   defaultValue={[COMPUTE_UNITS_VALUES.default]}
                   min={COMPUTE_UNITS_VALUES.min}
                   max={COMPUTE_UNITS_VALUES.max}
@@ -155,15 +157,15 @@ const Calculator = () => {
                     <span className="h-2.5 w-1 rounded-[1px] bg-primary-1" />
                   </Slider.Thumb>
                 </Slider.Root>
-                <p className="text-[15px] leading-none tracking-tight text-gray-9">
+                <p className="text-right text-sm leading-none tracking-tight text-gray-9">
                   <span className="after:mx-2 after:inline-block after:h-[4px] after:w-[4px] after:rounded-full after:bg-primary-1 after:align-middle">
                     {computeUnits <= 0.5 ? COMPUTE_UNITS_RANGES[computeUnits] : computeUnits}vCPU
                   </span>
                   <span>{computeUnits * 4}GB RAM</span>
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-[1fr_290px_152px] items-center gap-4 xl:mt-6 lg:mt-6 lg:grid-cols-[90px_1fr_140px]">
-                <h4 className="nowrap text-right text-[15px] leading-none tracking-tight text-gray-9">
+              <div className="mt-6 grid grid-cols-2 items-center gap-2 xl:mt-6 lg:mt-6">
+                <h4 className="text-sm leading-none tracking-tight text-gray-9">
                   Active time
                   <Tooltip
                     id="activeTime"
@@ -171,7 +173,7 @@ const Calculator = () => {
                   />
                 </h4>
                 <Slider.Root
-                  className="relative flex h-1 w-full grow touch-none items-center"
+                  className="relative col-span-2 row-start-2 flex h-1 w-full grow touch-none items-center"
                   defaultValue={[COMPUTE_TIME_VALUES.default]}
                   min={COMPUTE_TIME_VALUES.min}
                   max={COMPUTE_TIME_VALUES.max}
@@ -191,18 +193,18 @@ const Calculator = () => {
                     <span className="h-2.5 w-1 rounded-[1px] bg-primary-1" />
                   </Slider.Thumb>
                 </Slider.Root>
-                <p className="text-[15px] leading-none tracking-tight">
+                <p className="text-right text-sm leading-none tracking-tight">
                   {activeTime} hour{activeTime <= 1 ? '' : 's'}{' '}
                   <span className="text-gray-7">per day</span>
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-[1fr_152px] border-t border-dashed border-gray-2 pb-2 pt-6 text-[#EFEFF0] lg:grid-cols-[1fr_140px]">
+              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-gray-2 pb-2 pt-6 text-gray-94 ">
                 <p className="text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
                   <span className="text-primary-1">${computeTimeCost.toFixed(2)} </span>
                   <span className="font-normal text-gray-7">per month</span>
                 </p>
-                <p className="text-sm leading-none">
+                <p className="text-right text-sm leading-none">
                   ${COMPUTE_TIME_PRICE} <span className="text-gray-7">per hour</span>
                 </p>
               </div>
@@ -211,15 +213,13 @@ const Calculator = () => {
 
           <div className="row-span-1 flex rounded-[10px] bg-gray-10 md:flex-col">
             <div className="grow p-5 xl:px-6 xl:py-5 md:px-5 md:pb-3">
-              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
+              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9">
                 Project storage
               </h3>
-              <div className="mt-7 grid grid-cols-[1fr_290px_152px] items-center gap-4 lg:grid-cols-[90px_1fr_140px] md:mt-7">
-                <h4 className="text-right text-[15px] leading-none tracking-tight text-gray-9">
-                  Data
-                </h4>
+              <div className="mt-5 grid grid-cols-2 items-center gap-2 md:mt-7">
+                <h4 className="text-sm leading-none tracking-tight text-gray-9">Data</h4>
                 <Slider.Root
-                  className="relative flex h-1 w-full grow touch-none items-center"
+                  className="relative col-span-2 row-start-2 flex h-1 w-full grow touch-none items-center"
                   defaultValue={[STORAGE_VALUES.default]}
                   min={STORAGE_VALUES.min}
                   max={STORAGE_VALUES.max}
@@ -238,26 +238,26 @@ const Calculator = () => {
                     <span className="h-2.5 w-1 rounded-[1px] bg-primary-1" />
                   </Slider.Thumb>
                 </Slider.Root>
-                <p className="text-[15px] leading-none tracking-tight text-gray-9">
+                <p className="text-right text-sm leading-none tracking-tight text-gray-9">
                   {storageValue} GiB
                 </p>
               </div>
-              <div className="mt-6 grid grid-cols-[1fr_152px] border-t border-dashed border-gray-2 pb-2 pt-6 text-[#EFEFF0] lg:grid-cols-[1fr_140px]">
+              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-gray-2 pb-2 pt-6 text-gray-94">
                 <p className="text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
                   <span className="text-primary-1">${storageCost.toFixed(2)} </span>
                   <span className="font-normal text-gray-7">per month</span>
                 </p>
-                <p className="text-sm leading-none text-[#EFEFF0]">
-                  <span className="text-[#00E599]">${COMPUTE_TIME_PRICE}</span> per hour
+                <p className="text-right text-sm leading-none text-gray-7">
+                  <span className="text-gray-94">${COMPUTE_TIME_PRICE}</span> per hour
                 </p>
               </div>
             </div>
           </div>
 
           <div className="row-span-1 rounded-[10px] bg-gray-10 p-5 md:flex-col md:p-0">
-            <div className="min-h-[202px] xl:py-8 lg:pb-6 md:px-5 md:py-5 [@media(min-width:444px)]:min-h-[142px] [@media(min-width:617px)]:min-h-[auto]">
-              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9 xl:text-xl">
+            <div className="min-h-[202px] md:px-5 md:py-5 [@media(min-width:428px)]:min-h-[151px] [@media(min-width:606px)]:min-h-[auto]">
+              <h3 className="flex items-center text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9">
                 Data transfer and Written data
                 <Tooltip
                   id="data"
@@ -268,7 +268,7 @@ const Calculator = () => {
                 <AnimatePresence initial={false} mode="wait">
                   {isAdvanced ? (
                     <m.ul
-                      className="mt-5 flex items-center gap-x-8 text-[15px] tracking-tight text-gray-9 xl:flex-wrap xl:gap-x-7 sm:gap-4"
+                      className="mb-4 mt-5 flex items-center gap-x-8 text-[15px] tracking-tight text-gray-9 xl:flex-wrap xl:gap-x-7 sm:gap-4"
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -284,11 +284,11 @@ const Calculator = () => {
                       }}
                       transition={{ ease: [0.25, 0.1, 0, 1] }}
                     >
-                      <li>
+                      <li className="flex">
                         <label htmlFor="dataTransfer">Data transfer</label>
                         <input
                           id="dataTransfer"
-                          className="mx-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight xl:mx-2"
+                          className="ml-2 w-12 rounded-l-sm border-r border-gray-2 bg-[#242628] pl-2 pr-1 text-[15px] tracking-tight xl:ml-2"
                           name="data-transfer"
                           type="number"
                           min={0}
@@ -300,13 +300,15 @@ const Calculator = () => {
                             return setDataTransferValue(event?.target?.value);
                           }}
                         />
-                        <span>GiB</span>
+                        <span className="rounded-r-sm bg-[#242628] px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-gray-6">
+                          GiB
+                        </span>
                       </li>
-                      <li>
+                      <li className="flex">
                         <label htmlFor="writtenData">Written data</label>
                         <input
                           id="writtenData"
-                          className="mx-2 w-14 border-none bg-gray-2 px-2 text-center text-[15px] tracking-tight xl:mx-2"
+                          className="ml-2 w-12 rounded-l-sm border-r border-gray-2 bg-[#242628] pl-2 pr-1 text-[15px] tracking-tight xl:ml-2"
                           name="written-data"
                           type="number"
                           min={0}
@@ -318,11 +320,13 @@ const Calculator = () => {
                             return setWrittenDataValue(event?.target?.value);
                           }}
                         />
-                        <span>GiB</span>
+                        <span className="rounded-r-sm bg-[#242628] px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-gray-6">
+                          GiB
+                        </span>
                       </li>
                       <li>
                         <button
-                          className="relative mx-0 border-b border-primary-1 text-primary-1 transition-colors duration-200 hover:border-transparent"
+                          className="relative mx-0 inline-flex items-center text-primary-1 transition-colors duration-200 hover:text-[#00ffaa]"
                           type="button"
                           onClick={() => setIsAdvanced(false)}
                         >
@@ -332,7 +336,7 @@ const Calculator = () => {
                     </m.ul>
                   ) : (
                     <m.p
-                      className="mt-5 text-[15px] tracking-tight text-gray-9"
+                      className="mb-4 mt-5 text-[15px] tracking-tight text-gray-9"
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -350,18 +354,22 @@ const Calculator = () => {
                     >
                       Accounts for 10% of your monthly cost, on average.
                       <button
-                        className="relative mx-2 border-b border-primary-1 text-primary-1 transition-colors duration-200 hover:border-transparent"
+                        className="group relative mx-2 inline-flex items-center text-primary-1 transition-colors duration-200 hover:text-[#00ffaa]"
                         type="button"
                         onClick={() => setIsAdvanced(true)}
                       >
                         Enter your own values
+                        <ArrowRight
+                          className="ml-1 transition duration-200 group-hover:translate-x-1"
+                          aria-hidden
+                        />
                       </button>
                     </m.p>
                   )}
                 </AnimatePresence>
               </LazyMotion>
             </div>
-            <div className="flex justify-between border-t border-dashed border-gray-2 pb-2 pt-6 text-[#EFEFF0] md:px-5">
+            <div className="flex justify-between border-t border-dashed border-gray-2 pb-2 pt-6 text-gray-94 md:px-5 md:pb-5">
               <p className="text-sm font-medium leading-none">
                 <span className="uppercase">Subtotal: </span>
                 <span className="text-primary-1">${writtenAndTransferDataCost.toFixed(2)} </span>
@@ -370,7 +378,7 @@ const Calculator = () => {
             </div>
           </div>
 
-          <div className="col-start-2 row-span-3 row-start-1 flex flex-col items-center self-start rounded-[10px] border border-secondary-2 p-7 pb-9 lg:col-start-1 lg:row-span-1 lg:grid lg:grid-cols-2 lg:gap-x-32 sm:grid-cols-1 sm:gap-x-0">
+          <div className="col-start-2 row-span-3 row-start-1 flex flex-col items-center self-start rounded-[10px] border border-secondary-2 p-6 lg:col-start-1 lg:row-span-1 lg:grid lg:grid-cols-2 lg:gap-x-32 sm:grid-cols-1 sm:gap-x-0">
             <h3 className="text-center text-lg leading-none tracking-tight text-white lg:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
@@ -379,41 +387,40 @@ const Calculator = () => {
                 {estimatedPrice}
               </span>
               <span className="mt-2 block text-base font-medium tracking-normal">per month</span>
-              {/* <span className="mt-1 block text-base font-medium tracking-normal"> */}
-              {/*   based on the US East (Ohio) region */}
-              {/* </span> */}
             </p>
-            {/* <ul className="my-11 flex w-full flex-col space-y-8 text-lg leading-none tracking-tight text-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:my-8 sm:mx-auto sm:max-w-[260px]"> */}
-            {/*   <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14"> */}
-            {/*     <CheckIcon className="mr-2" /> */}
-            {/*     <span className="mr-1 font-semibold">{computeUnits}</span> */}
-            {/*     <span>compute units</span> */}
-            {/*   </li> */}
-            {/*   <li className="relative flex pl-[3.25rem] after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14"> */}
-            {/*     <CheckIcon className="mr-2" /> */}
-            {/*     <span className="mr-1 font-semibold">{storageValue} GiB</span> */}
-            {/*     <span>storage</span> */}
-            {/*   </li> */}
-            {/*   <li className="relative flex pl-[3.25rem] text-black after:absolute after:left-0 after:-bottom-4 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14"> */}
-            {/*     <CheckIcon className="mr-2" /> */}
-            {/*     {isAdvanced && <span className="mr-1 font-semibold">{writtenDataValue} GiB</span>} */}
-            {/*     <span>written data</span> */}
-            {/*   </li> */}
-            {/*   <li className="relative flex pl-[3.25rem] lg:pl-0 sm:pl-14"> */}
-            {/*     <CheckIcon className="mr-2" /> */}
-            {/*     {isAdvanced && <span className="mr-1 font-semibold">{dataTransferValue} GiB</span>} */}
-            {/*     <span>data transfer</span> */}
-            {/*   </li> */}
-            {/* </ul> */}
-
             <Button
-              className="my-7 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1 sm:mt-1"
+              className="my-6 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg font-medium xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1"
               theme="primary"
               to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               size="sm"
             >
               {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </Button>
+            <ul className="my-12 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:mx-auto sm:my-8 sm:max-w-[260px]">
+              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
+                <CheckIcon className="mr-2 w-4 text-secondary-2" />
+                <span className="mr-1">{computeUnits}</span>
+                <span>compute units</span>
+              </li>
+              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
+                <CheckIcon className="mr-2 w-4 text-secondary-2" />
+                <span className="mr-1">{storageValue} GiB</span>
+                <span>storage</span>
+              </li>
+              <li className="relative flex text-base leading-tight tracking-tight text-black text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
+                <CheckIcon className="mr-2 w-4 text-secondary-2" />
+                {isAdvanced && <span className="mr-1">{writtenDataValue} GiB</span>}
+                <span>written data</span>
+              </li>
+              <li className="relative flex text-base leading-tight tracking-tight text-white lg:pl-0 sm:pl-14">
+                <CheckIcon className="mr-2 w-4 text-secondary-2" />
+                {isAdvanced && <span className="mr-1">{dataTransferValue} GiB</span>}
+                <span>data transfer</span>
+              </li>
+            </ul>
+            <span className="mt-6 block text-base font-light tracking-tight text-gray-7 sm:text-center">
+              Based on the US East (Ohio) region
+            </span>
           </div>
         </div>
       </Container>

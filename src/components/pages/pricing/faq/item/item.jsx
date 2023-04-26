@@ -64,7 +64,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
           />
           {linkText && linkUrl && (
             <Link
-              className="ml-[42px] mt-3 border-b border-primary-1 pb-1.5 !text-base font-normal leading-none !text-primary-1 xl:mt-4 lg:mt-3 lg:!text-base md:mt-2.5"
+              className="ml-[42px] mt-3 border-b border-primary-3 pb-1.5 !text-base font-normal leading-none !text-primary-1 hover:!border-primary-1 xl:mt-4 lg:mt-3 lg:!text-base md:mt-2.5"
               size="sm"
               theme="white"
               to={linkUrl}

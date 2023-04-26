@@ -125,7 +125,7 @@ const Estimates = () => {
             </Heading>
             <p className="mt-4 text-lg font-light leading-snug 2xl:mt-5 xl:text-base lg:text-center">
               <Link
-                className="!border-b font-normal"
+                className="!border-b !border-primary-3 font-normal hover:!border-primary-1"
                 theme="underline-primary-1"
                 to={LINKS.contactSales}
               >
@@ -141,8 +141,19 @@ const Estimates = () => {
                 <li key={index}>
                   <button
                     className={clsx(
-                      'flex gap-1.5 border-b pb-1.5 text-sm font-medium uppercase leading-none tracking-[0.04em] text-white transition-colors duration-200 hover:text-primary-1',
-                      type === selected ? 'border-primary-1 text-primary-1' : 'border-transparent'
+                      'flex gap-1.5 border-b pb-1.5 text-sm font-medium uppercase leading-none tracking-[0.04em] text-white transition-colors duration-200',
+                      type === selected && index === 0
+                        ? '!border-primary-1 !text-primary-1'
+                        : 'border-transparent',
+                      type === selected && index === 1
+                        ? '!border-secondary-2 !text-secondary-2'
+                        : 'border-transparent',
+                      type === selected && index === 2
+                        ? '!border-secondary-9 !text-secondary-9'
+                        : 'border-transparent',
+                      index === 0 && 'hover:text-primary-1',
+                      index === 1 && 'hover:text-secondary-2',
+                      index === 2 && 'hover:text-secondary-9'
                     )}
                     type="button"
                     onClick={() => handleSelect(type)}

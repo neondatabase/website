@@ -28,7 +28,7 @@ const CTA = () => (
       <div className="col-span-7 col-start-6 lg:col-span-full">
         <Image
           className="mx-auto"
-          src="/images/pages/pricing/cta-image.png"
+          src="/images/pages/pricing/cta.jpg"
           width={842}
           height={538}
           alt=""

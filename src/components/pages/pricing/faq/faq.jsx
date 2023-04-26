@@ -53,7 +53,7 @@ const items = [
 ];
 
 const Faq = () => (
-  <section className="faq safe-paddings bg-gray-10 py-36 2xl:py-32 xl:py-28 lg:py-24 md:py-20">
+  <section className="faq safe-paddings bg-gray-10 py-40 2xl:py-32 xl:py-28 lg:py-24 md:py-20">
     <Container className="max-w-[968px]" size="mdDoc">
       <Heading className="text-center lg:inline" tag="h2" size="2sm">
         Frequently Asked Questions

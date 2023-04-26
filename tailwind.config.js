@@ -18,12 +18,13 @@ module.exports = {
       inherit: 'inherit',
       current: 'currentColor',
       transparent: 'transparent',
-      transparentGreen: 'rgba(19,236,182,0.1)',
       black: '#0c0d0d',
       white: '#ffffff',
       primary: {
         1: '#00e599',
         2: '#00cc88',
+        3: 'rgb(0,229,153,0.4)',
+        4: 'rgba(19,236,182,0.1)',
       },
       secondary: {
         1: '#ff4c79',
@@ -39,13 +40,14 @@ module.exports = {
       gray: {
         1: '#262626',
         2: '#303236',
-        3: '#494B50',
-        4: '#61646B',
+        3: '#494b50',
+        4: '#61646b',
         5: '#b3b3b3',
-        6: '#cccccc',
+        6: '#94979e',
         7: '#afb1b6',
         8: '#f2f2f2',
-        9: '#E4E5E7',
+        9: '#e4e5e7',
+        94: '#efeff0',
         10: '#131415',
       },
       code: {
