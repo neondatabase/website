@@ -65,7 +65,7 @@ Running Django tests is currently not supported. The Django test runner must be 
 ## Video course: Micro eCommerce with Django and Neon
 
 Watch Justin Mitchel's video course, _Micro eCommerce with Python, Django, Neon Serverless Postgres, Stripe, TailwindCSS and more_, to learn how to connect a Django application to Neon.
-[![Connection to Django](/images/neon-django.jpeg)](https://www.youtube.com/watch?v=qx9nshX9CQQ&t=1570s)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qx9nshX9CQQ?start=1569" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Need help?
 
