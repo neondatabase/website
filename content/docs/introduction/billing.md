@@ -38,7 +38,7 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 
 - The Pro plan has default limits of 200 GB of storage and 20 simultaneously active computes. To increase these limits, reach out to our [Sales](https://neon.tech/contact-sales) team. The simultaneously active compute limit does affect the primary branch compute.
 - The Free Tier has an _Active time_ limit of 100 hours per month for non-primary branch computes. _Active time_ on the primary branch compute is counted toward the 100 hour limit. See [Free Tier](/docs/introduction/technical-preview-free-tier) for more information.
-- **There is no limit on _[Active time](/docs/reference/glossary#active-time)_ for the [primary branch](/docs/reference/glossary#primary-branch) compute.** This ensures that access to data on the primary branch is never interrupted. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
+- **There is no limit on _[Active time](/docs/reference/glossary#active-time)_ for the [primary branch](/docs/reference/glossary#primary-branch) compute. This ensures that access to data on the primary branch is never interrupted.**
 
 ## Account billing page
 
