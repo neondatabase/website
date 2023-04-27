@@ -29,7 +29,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
             </Link>
             {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />}
           </div>
-          <div className="space-y-[18px] leading-none">
+          <div className="space-y-[18px] leading-none tracking-tight text-gray-8">
             <p>Made in SF and the World</p>
             <p>Neon 2023 Ⓒ All rights reserved</p>
           </div>
@@ -37,14 +37,15 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
         <div className="flex space-x-[123px] xl:space-x-8 md:hidden">
           {MENUS.footer.map(({ heading, links }, index) => (
             <div className={clsx('flex flex-col xl:w-full')} key={index}>
-              <h3 className="relative text-sm font-bold uppercase leading-none tracking-wider">
+              <h3 className="relative text-[13px] font-semibold uppercase leading-none tracking-wider text-gray-6">
                 {heading}
               </h3>
               <ul className="mt-6 flex grow flex-col space-y-[18px]">
-                {links.map(({ to, text }, index) => {
+                {links.map(({ to, text, icon: Icon }, index) => {
                   const isExternalUrl = to.startsWith('http');
                   return (
-                    <li className="flex" key={index}>
+                    <li className="flex items-center gap-2" key={index}>
+                      {Icon && <Icon width={16} aria-hidden />}
                       <Link
                         className="relative whitespace-nowrap leading-none"
                         to={to}

@@ -40,7 +40,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
       >
         <ArrowIcon
           className={clsx('shrink-0 text-primary-1 transition duration-200', {
-            'rotate-90': isOpen,
+            'rotate-90 fill-primary-1 !text-black': isOpen,
           })}
           aria-hidden
         />

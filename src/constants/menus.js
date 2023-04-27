@@ -1,3 +1,9 @@
+import DiscourseIcon from 'icons/discourse.inline.svg';
+import GithubIcon from 'icons/github.inline.svg';
+import LinkedinIcon from 'icons/linkedin.inline.svg';
+import TwitterIcon from 'icons/twitter.inline.svg';
+import YoutubeIcon from 'icons/youtube.inline.svg';
+
 import LINKS from './links';
 
 export default {
@@ -108,10 +114,12 @@ export default {
         {
           text: 'Twitter',
           to: LINKS.twitter,
+          icon: TwitterIcon,
         },
         {
           text: 'LinkedIn',
           to: LINKS.linkedin,
+          icon: LinkedinIcon,
         },
         // {
         //   text: 'Discord',
@@ -120,14 +128,17 @@ export default {
         {
           text: 'GitHub',
           to: LINKS.github,
+          icon: GithubIcon,
         },
         {
           text: 'Discourse',
           to: LINKS.discourse,
+          icon: DiscourseIcon,
         },
         {
           text: 'YouTube',
           to: LINKS.youtube,
+          icon: YoutubeIcon,
         },
       ],
     },
