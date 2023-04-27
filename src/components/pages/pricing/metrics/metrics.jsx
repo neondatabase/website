@@ -191,8 +191,8 @@ const Metrics = () => {
             for rates per region.
           </p>
         </Container>
-        <Container className="grid h-full w-full grid-cols-12 items-start xl:grid-cols-1" size="sm">
-          <div className="relative col-span-7 col-start-1 h-full xl:col-span-full xl:hidden">
+        <Container className="grid h-full w-full grid-cols-12 items-start lg:grid-cols-1" size="sm">
+          <div className="relative col-span-7 col-start-1 h-full lg:col-span-full lg:hidden">
             <div className="sticky top-0 h-screen min-h-[770px] 2xl:min-h-[835px]">
               <div
                 className={clsx('absolute flex h-full w-full items-center justify-center px-16')}
@@ -201,15 +201,15 @@ const Metrics = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-5 col-start-8 text-left xl:col-span-full">
+          <div className="col-span-5 col-start-8 text-left lg:col-span-full">
             <div className="space-y-14" ref={contentRef}>
               {items.map(({ image, name, priceFrom, details, prices }, index) => (
                 <div
-                  className="flex h-screen min-h-[900px] flex-col justify-center px-6 2xl:min-h-[835px] xl:h-auto xl:min-h-0"
+                  className="flex h-screen min-h-[900px] flex-col justify-center px-6 2xl:min-h-[835px] lg:h-auto lg:min-h-0 lg:px-0"
                   key={index}
                 >
                   <Image
-                    className="my-12 hidden max-w-full xl:block"
+                    className="my-12 hidden max-w-full lg:block"
                     width={590}
                     height={830}
                     src={image}
