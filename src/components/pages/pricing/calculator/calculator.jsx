@@ -407,7 +407,7 @@ const Calculator = () => {
                 <span className="mr-1">{storageValue} GiB</span>
                 <span>storage</span>
               </li>
-              <li className="relative flex text-base leading-tight tracking-tight text-black text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
+              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 {isAdvanced && <span className="mr-1">{writtenDataValue} GiB</span>}
                 <span>written data</span>

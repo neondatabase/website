@@ -3,6 +3,7 @@
 import useScrollPosition from '@react-hook/window-scroll';
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
 import clsx from 'clsx';
+import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -14,6 +15,7 @@ import useWindowSize from 'hooks/use-window-size';
 
 const items = [
   {
+    image: '/images/pages/pricing/metrics-1.png',
     name: 'Compute time',
     priceFrom: 'From $0.102 /hour',
     details: 'Compute time is the amount of computing capacity used per hour.',
@@ -41,6 +43,7 @@ const items = [
     ],
   },
   {
+    image: '/images/pages/pricing/metrics-2.png',
     name: 'Project storage',
     priceFrom: 'From $0.000164 /Gigabyte-hour',
     details: 'Project storage is the amount of data and history in your Neon projects.',
@@ -68,6 +71,7 @@ const items = [
     ],
   },
   {
+    image: '/images/pages/pricing/metrics-3.png',
     name: 'Written data',
     priceFrom: 'From $0.096 /Gigabyte',
     details: 'Written data is the amount of data written from Neon compute to storage.',
@@ -95,6 +99,7 @@ const items = [
     ],
   },
   {
+    image: '/images/pages/pricing/metrics-4.png',
     name: 'Data transfer',
     priceFrom: 'From $0.09 /Gigabyte',
     details: 'Data transfer is the amount of data transferred out of Neon.',
@@ -186,8 +191,8 @@ const Metrics = () => {
             for rates per region.
           </p>
         </Container>
-        <Container className="grid h-full w-full grid-cols-12 items-start xs:gap-8" size="sm">
-          <div className="relative col-span-7 col-start-1 h-full">
+        <Container className="grid h-full w-full grid-cols-12 items-start xl:grid-cols-1" size="sm">
+          <div className="relative col-span-7 col-start-1 h-full xl:col-span-full xl:hidden">
             <div className="sticky top-0 h-screen min-h-[770px] 2xl:min-h-[835px]">
               <div
                 className={clsx('absolute flex h-full w-full items-center justify-center px-16')}
@@ -196,13 +201,20 @@ const Metrics = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-5 col-start-8 text-left">
-            <div className="space-y-14 lg:space-y-0" ref={contentRef}>
-              {items.map(({ name, priceFrom, details, prices }, index) => (
+          <div className="col-span-5 col-start-8 text-left xl:col-span-full">
+            <div className="space-y-14" ref={contentRef}>
+              {items.map(({ image, name, priceFrom, details, prices }, index) => (
                 <div
-                  className="flex h-screen min-h-[900px] flex-col justify-center px-6 2xl:min-h-[835px] lg:min-h-[770px]"
+                  className="flex h-screen min-h-[900px] flex-col justify-center px-6 2xl:min-h-[835px] xl:h-auto xl:min-h-0"
                   key={index}
                 >
+                  <Image
+                    className="my-12 hidden max-w-full xl:block"
+                    width={590}
+                    height={830}
+                    src={image}
+                    alt={`${name} illustration`}
+                  />
                   <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white">
                     {name}
                     <span className="block font-light text-primary-1">{priceFrom}</span>
