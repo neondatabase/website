@@ -14,6 +14,7 @@ import ArrowRight from 'icons/arrow-right-thin.inline.svg';
 import CheckIcon from 'icons/check.inline.svg';
 import infoHoveredIcon from 'icons/tooltip-hovered.svg';
 import infoIcon from 'icons/tooltip.svg';
+import lines from 'images/pages/pricing/yellow-lines.svg';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const PROJECT_STORAGE_PRICE = 0.000164;
@@ -391,31 +392,41 @@ const Calculator = () => {
               </span>
               <span className="mb-1 block text-[26px] tracking-normal">/mo</span>
             </p>
-            <Button
-              className="mb-7 mt-11 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg font-medium xl:mt-4 lg:col-start-2 lg:mx-auto lg:ml-0 lg:mt-8 sm:col-start-1"
-              theme="primary"
-              to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
-              size="sm"
-            >
-              {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
-            </Button>
+            <p className="relative lg:col-start-2 lg:justify-self-start sm:col-start-1">
+              <Button
+                className="relative z-20 mb-7 mt-11 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg font-medium xl:mt-4 lg:ml-0 lg:mt-8 lg:w-[220px]"
+                theme="primary"
+                to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
+                size="sm"
+              >
+                {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
+              </Button>
+              <img
+                className="pointer-events-none absolute left-1/2 top-2 z-10 min-w-[120%] -translate-x-1/2 lg:top-0"
+                src={lines}
+                width={296}
+                height={134}
+                loading="lazy"
+                alt=""
+              />
+            </p>
             <ul className="my-12 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-pricing-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-start sm:row-span-1 sm:mx-auto sm:my-8 sm:ml-0 sm:max-w-[260px]">
-              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
+              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 <span className="mr-1">{computeUnits}</span>
                 <span>compute units</span>
               </li>
-              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
+              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 <span className="mr-1">{storageValue} GiB</span>
                 <span>storage</span>
               </li>
-              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
+              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 {isAdvanced && <span className="mr-1">{writtenDataValue} GiB</span>}
                 <span>written data</span>
               </li>
-              <li className="relative flex text-base leading-tight tracking-tight text-white lg:pl-0 sm:pl-0">
+              <li className="relative flex items-center text-base leading-tight tracking-tight text-white lg:pl-0 sm:pl-0">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 {isAdvanced && <span className="mr-1">{dataTransferValue} GiB</span>}
                 <span>data transfer</span>
@@ -432,7 +443,7 @@ const Calculator = () => {
 };
 
 const Tooltip = ({ content, id }) => (
-  <span className="relative ml-2 inline-flex text-left align-middle normal-case lg:hidden">
+  <span className="relative ml-[6px] inline-flex text-left align-middle normal-case lg:hidden">
     <span className="group peer cursor-pointer" data-tooltip-id={id} data-tooltip-content={content}>
       <img
         className="group-hover:hidden"
@@ -451,10 +462,10 @@ const Tooltip = ({ content, id }) => (
         alt=""
       />
     </span>
-    <span className="pointer-events-none absolute left-[calc(100%+10px)] top-1/2 z-50 w-[15rem] -translate-y-1/2 rounded-[4px] bg-pricing-gray-2 px-3 py-[10px] text-[12px] font-normal leading-dense tracking-tight text-pricing-gray-9 opacity-0 shadow-tooltip transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:hidden lg:translate-y-0 lg:bg-transparent lg:p-0">
+    <span className="pointer-events-none absolute	left-[calc(100%+12px)] top-1/2 z-50 w-[14rem] -translate-y-1/2 rounded-[4px] bg-pricing-gray-2 px-3 py-[10px] text-[12px] font-normal leading-dense tracking-wide text-pricing-gray-9 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:hidden lg:translate-y-0 lg:bg-transparent lg:p-0">
       {content}
     </span>
-    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-4 border-r-4 border-t-4 border-transparent border-r-pricing-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
+    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-8 border-r-8 border-t-8 border-transparent border-r-pricing-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
   </span>
 );
 

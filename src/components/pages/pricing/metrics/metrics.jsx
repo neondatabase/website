@@ -162,7 +162,7 @@ const Metrics = () => {
   useEffect(() => {
     const currentScrollTop = scrollY;
     const switchPoints = [...Array(items.length + 1)].map(
-      (_, index) => sectionRef.current.offsetTop + pageHeight * index - pageHeight + 700
+      (_, index) => sectionRef.current.offsetTop + pageHeight * index - pageHeight + 350
     );
 
     switchPoints.forEach((_, index) => {
@@ -205,7 +205,7 @@ const Metrics = () => {
             <div className="space-y-14" ref={contentRef}>
               {items.map(({ image, name, priceFrom, details, prices }, index) => (
                 <div
-                  className="flex h-screen min-h-[900px] flex-col justify-center px-6 2xl:min-h-[835px] lg:h-auto lg:min-h-0 lg:px-0"
+                  className="flex h-[78vh] min-h-[770px] flex-col justify-center px-6 2xl:min-h-[835px] lg:h-auto lg:min-h-0 lg:px-0"
                   key={index}
                 >
                   <Image
@@ -222,16 +222,16 @@ const Metrics = () => {
                   <p className="mt-2 text-lg leading-tight tracking-tight">{details}</p>
                   <div className="mt-8 max-w-[464px]">
                     <div className="grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-3 text-[12px] uppercase leading-none text-pricing-gray-4">
-                      <span className="">Region</span>
-                      <span className="">Price</span>
+                      <span>Region</span>
+                      <span>Price</span>
                     </div>
                     {prices.map(({ name, price, unit }, index) => (
                       <div
                         className="text-gray-94 grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-3 text-[15px] leading-none sm:gap-x-10"
                         key={index}
                       >
-                        <span className="">{name}</span>
-                        <span className="">
+                        <span>{name}</span>
+                        <span>
                           ${price} /{' '}
                           <span className="font-light tracking-tight text-pricing-gray-7">
                             {unit}

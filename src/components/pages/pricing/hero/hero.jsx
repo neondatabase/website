@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 
 import Button from 'components/shared/button';
@@ -5,6 +7,7 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
+import lines from 'images/pages/pricing/green-lines.svg';
 
 const items = [
   {
@@ -70,7 +73,7 @@ const Hero = () => (
         size="lg"
       >
         <span className="text-pricing-primary-1">Start Free.</span>{' '}
-        <span className="">Only pay for what you use.</span>
+        <span>Only pay for what you use.</span>
       </Heading>
       <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug 2xl:mt-5 xl:max-w-[616px] xl:text-base lg:max-w-[464px]">
         Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible
@@ -112,12 +115,16 @@ const Hero = () => (
                   size="sm"
                 >
                   {button.text}
-                  {/* <Lines */}
-                  {/*   className={clsx( */}
-                  {/*     type === 'Pro' ? '-top-8' : 'hidden', */}
-                  {/*     'pointer-events-none absolute left-1/2 -z-10 w-[120%] min-w-[200px] -translate-x-1/2 [&>*]:!min-h-[180px]' */}
-                  {/*   )} */}
-                  {/* /> */}
+                  <img
+                    className={clsx(
+                      type === 'Pro' ? '-top-8' : 'hidden',
+                      'pointer-events-none absolute left-1/2 -z-10 min-w-[120%] -translate-x-1/2 sm:min-w-full'
+                    )}
+                    src={lines}
+                    width={376}
+                    height={134}
+                    alt=""
+                  />
                 </Button>
                 <p className="mt-9 font-light leading-snug tracking-tight text-pricing-gray-7 lg:mt-7">
                   {description}

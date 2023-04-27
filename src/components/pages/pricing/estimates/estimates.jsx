@@ -159,7 +159,7 @@ const Estimates = () => {
                     type="button"
                     onClick={() => handleSelect(type)}
                   >
-                    <Icon className="" />
+                    <Icon aria-hidden />
                     {type}
                   </button>
                 </li>
@@ -214,14 +214,14 @@ const Estimates = () => {
                           {metrics.map(({ name, usage, details, price }, index) => (
                             <div
                               className={clsx(
-                                'border-b border-[rgba(255,255,255,0.06)] py-2.5 text-[15px] tracking-[-0.02em] text-[#EFEFF0]',
+                                'text-primary-94 border-b border-[rgba(255,255,255,0.06)] py-2.5 text-[15px] tracking-[-0.06em]',
                                 gridClassName
                               )}
                               key={index}
                             >
                               <span>{name}</span>
-                              <span className="inline-flex items-center gap-x-2.5 xl:flex-col xl:items-start">
-                                <span className="">
+                              <span className="inline-flex items-center gap-x-[7px] xl:flex-col xl:items-start">
+                                <span>
                                   {usage} <span className="text-pricing-gray-7">/month</span>
                                 </span>
                                 {details && (
