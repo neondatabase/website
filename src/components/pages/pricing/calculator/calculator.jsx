@@ -385,43 +385,43 @@ const Calculator = () => {
             <h3 className="text-lg leading-none tracking-tight text-white lg:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
-            <p className="mt-6 leading-none text-white xl:mt-10 lg:col-start-2 sm:col-start-1 sm:mt-8">
+            <p className="mt-6 flex items-end gap-2 leading-none text-white xl:mt-10 lg:col-start-2 sm:col-start-1 sm:mt-8">
               <span className="text-[56px] font-light tracking-[-0.06em] text-secondary-2">
                 {estimatedPrice}
               </span>
-              <span className="mt-2 block text-lg tracking-normal">per month</span>
+              <span className="mb-1 block text-[26px] tracking-normal">/mo</span>
             </p>
             <Button
-              className="my-6 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg font-medium xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1"
+              className="mb-7 mt-11 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg font-medium xl:mt-4 lg:col-start-2 lg:mx-auto lg:ml-0 lg:mt-8 sm:col-start-1"
               theme="primary"
               to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               size="sm"
             >
               {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </Button>
-            <ul className="my-12 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-pricing-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:mx-auto sm:my-8 sm:max-w-[260px]">
-              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-14">
+            <ul className="my-12 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-pricing-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-start sm:row-span-1 sm:mx-auto sm:my-8 sm:ml-0 sm:max-w-[260px]">
+              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 <span className="mr-1">{computeUnits}</span>
                 <span>compute units</span>
               </li>
-              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-14">
+              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 <span className="mr-1">{storageValue} GiB</span>
                 <span>storage</span>
               </li>
-              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-14">
+              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 {isAdvanced && <span className="mr-1">{writtenDataValue} GiB</span>}
                 <span>written data</span>
               </li>
-              <li className="relative flex text-base leading-tight tracking-tight text-white lg:pl-0 sm:pl-14">
+              <li className="relative flex text-base leading-tight tracking-tight text-white lg:pl-0 sm:pl-0">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 {isAdvanced && <span className="mr-1">{dataTransferValue} GiB</span>}
                 <span>data transfer</span>
               </li>
             </ul>
-            <span className="mt-6 block text-base font-light tracking-tight text-pricing-gray-7 sm:text-center">
+            <span className="mt-6 block text-base font-light tracking-tight text-pricing-gray-7">
               Based on the US East (Ohio) region
             </span>
           </div>
