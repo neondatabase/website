@@ -6,11 +6,21 @@ const { getAllPosts, getAllReleaseNotes } = require('../utils/api-docs');
 const generateDocPagePath = require('../utils/generate-doc-page-path');
 const generateReleaseNotePath = require('../utils/generate-release-note-path');
 
+const trimContent = (content) =>
+  content
+    .replace(/```(.|\n)*?```/g, '') // remove code blocks
+    .replace(/<(.|\n)*?>/g, '') // remove html tags
+    .replace(/(\r\n|\n|\r)/gm, ' ') // replace new lines with spaces
+    .replace(/\s+/g, ' ') // replace multiple spaces with single space
+    .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // replace markdown links with link text
+    .replace(/([*~`#])/g, '') // remove markdown formatting
+    .trim();
+
 const transformPostsToSearchObjects = async (posts, releaseNotes) => {
   const records = [];
 
   await posts.map(({ title, slug, content }) => {
-    const chunks = chunk(content, 300);
+    const chunks = chunk(trimContent(content), 300);
 
     return chunks.forEach((chunk, index) => {
       records.push({
@@ -26,7 +36,7 @@ const transformPostsToSearchObjects = async (posts, releaseNotes) => {
     const slugDatePiece = slug.slice(0, 10);
     const category = slug.slice(slug.lastIndexOf('-') + 1);
     const capitalisedCategory = category.charAt(0).toUpperCase() + category.slice(1);
-    const chunks = chunk(content, 300);
+    const chunks = chunk(trimContent(content), 300);
 
     return chunks.forEach((chunk, index) => {
       records.push({
