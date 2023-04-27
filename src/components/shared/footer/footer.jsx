@@ -44,15 +44,15 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                 {links.map(({ to, text, icon: Icon }, index) => {
                   const isExternalUrl = to.startsWith('http');
                   return (
-                    <li className="flex items-center gap-2" key={index}>
-                      {Icon && <Icon width={16} aria-hidden />}
+                    <li className="flex" key={index}>
                       <Link
-                        className="relative whitespace-nowrap leading-none"
+                        className="relative flex items-center gap-2 whitespace-nowrap leading-none"
                         to={to}
                         theme={isDarkTheme ? 'white' : 'black'}
                         target={isExternalUrl ? '_blank' : null}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
                       >
+                        {Icon && <Icon width={16} aria-hidden />}
                         {text}
                       </Link>
                     </li>
