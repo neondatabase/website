@@ -5,10 +5,11 @@ enableTableOfContents: true
 
 Neon offers the following plans: **Free Tier**, **Pro**, **Enterprise**, and **Platform Partnership**. The Pro plan is _usage-based_, ensuring you never over-provision and only pay for what you use. The **Enterprise** and **Platform Partnership** plans are custom volume-based plans that offer potential discounts. You can find out more about our [plans](#neon-plans) below.
 
-## Neon billing metrics
+## Billing and usage metrics
 
-Neon charges for usage based on the following metrics:
+Neon tracks and bills for usage based on the following metrics:
 
+- **Active time**: The number of active compute hours per month for all computes in a Neon project.
 - **Compute time**: The amount of computing capacity used within a specified time period.
 - **Project storage**: The size of the data and history stored for your project.
 - **Written data**: The amount of data written from compute to storage.
@@ -88,9 +89,13 @@ This section provides a detailed explanation of Neon's billing and usage metrics
 The **Project storage**, **Written data**, and **Data transfer** billing metrics are calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 </Admonition>
 
+### Active time
+
+The _Active time_ metric is a usage metric rather than a billing metric. It is a factor of the _Compute time_ <u>billing</u> metric. It tracks the number of active compute hours per month for all computes in a Neon project. The hours that a compute is in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) are not counted as _Active time_. The **Neon Free Tier** limits non-primary branch computes to 100 hours of _Active time_ per month, but there is no _Active time_ limit on the primary branch compute. For more information, see [Free Tier](/docs/introduction/technical-preview-free-tier).
+
 ### Compute time
 
-The _Compute time_ metric measures the amount of computing capacity used within a given time period. Neon takes a measure of compute utilization every five seconds, which is averaged based on the observed computing capacity. Computing capacity is based on _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon [compute endpoint](/docs/reference/glossary/#compute-endpoint) can have anywhere from .25 to 7 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an `Active` state. A defined period of inactivity places the compute endpoint and its CUs into an `Idle` state.
+The _Compute time_ billing metric measures the amount of computing capacity used within a given time period. Neon takes a measure of compute utilization every five seconds, which is averaged based on the observed computing capacity. Computing capacity is based on _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon [compute endpoint](/docs/reference/glossary/#compute-endpoint) can have anywhere from .25 to 7 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an `Active` state. A defined period of inactivity places the compute endpoint and its CUs into an `Idle` state.
 
 Factors that affect the amount of compute time include:
 
@@ -130,7 +135,7 @@ The prices shown in the table are based on US East (Ohio) _Compute time_ rates.
 To estimate your own compute time monthly cost:
 
 1. Determine the compute size that you require, in Compute Units (CUs). Neon supports compute size between .25 CUs and 7 CUs. One CU has 1 vCPU and 4GB of RAM.
-1. Determine the amount of active time per month for your database, in hours.
+1. Determine the amount of _Active time_ per month for your database, in hours.
 1. Determine the rate (price per hour) for compute time in your region. See [Billing rates](#billing-rates).
 1. Input the values into the _Compute time_ cost-calculation formula shown above. For example:
 
@@ -140,7 +145,7 @@ To estimate your own compute time monthly cost:
 
 ### Project storage
 
-The _Project storage_ metric measures the amount of data and history stored in your Neon projects. Project storage includes:
+The _Project storage_ billing metric measures the amount of data and history stored in your Neon projects. Project storage includes:
 
 - **Current data size**
 
@@ -163,7 +168,7 @@ project storage (GiB) * (seconds stored / 3600) * price per hour
 
 ### Written data
 
-The _Written data_ metric measures the amount of data changes written from compute to storage to ensure the durability of your data.
+The _Written data_ billing metric measures the amount of data changes written from compute to storage to ensure the durability of your data.
 
 The cost calculation for _Written data_ is as follows:
 
@@ -173,7 +178,7 @@ written data (GiB) * price per GiB
 
 ### Data transfer
 
-The _Data transfer_ metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the egress cost set by the cloud provider. Contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
+The _Data transfer_ billing metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the egress cost set by the cloud provider. Contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
 
 The cost calculation for _Data transfer_ is as follows:
 
