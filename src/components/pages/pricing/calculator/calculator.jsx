@@ -12,7 +12,8 @@ import Heading from 'components/shared/heading';
 import LINKS from 'constants/links';
 import ArrowRight from 'icons/arrow-right-thin.inline.svg';
 import CheckIcon from 'icons/check.inline.svg';
-import InfoIcon from 'icons/info.inline.svg';
+import infoHoveredIcon from 'icons/tooltip-hovered.svg';
+import infoIcon from 'icons/tooltip.svg';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const PROJECT_STORAGE_PRICE = 0.000164;
@@ -121,7 +122,7 @@ const Calculator = () => {
               <h3 className="text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
                 Compute time
               </h3>
-              <div className="mt-5 grid grid-cols-2 items-center gap-2 md:mt-7">
+              <div className="mt-5 grid grid-cols-2 items-center gap-3 md:mt-7">
                 <h4 className="inline-flex items-center text-sm leading-none tracking-tight text-pricing-gray-9">
                   <span>Compute size</span>
                   <Tooltip
@@ -164,7 +165,7 @@ const Calculator = () => {
                   <span>{computeUnits * 4}GB RAM</span>
                 </p>
               </div>
-              <div className="mt-6 grid grid-cols-2 items-center gap-2 xl:mt-6 lg:mt-6">
+              <div className="mt-6 grid grid-cols-2 items-center gap-3 xl:mt-6 lg:mt-6">
                 <h4 className="inline-flex items-center text-sm leading-none tracking-tight text-pricing-gray-9">
                   Active time
                   <Tooltip
@@ -198,7 +199,7 @@ const Calculator = () => {
                   <span className="text-pricing-gray-7">per day</span>
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-pricing-gray-2 pb-2 pt-6 text-pricing-gray-94 ">
+              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-pricing-gray-2 pb-2 pt-5 text-pricing-gray-94 ">
                 <p className="text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
                   <span className="text-pricing-primary-1">${computeTimeCost.toFixed(2)} </span>
@@ -216,7 +217,7 @@ const Calculator = () => {
               <h3 className="text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
                 Project storage
               </h3>
-              <div className="mt-5 grid grid-cols-2 items-center gap-2 md:mt-7">
+              <div className="mt-5 grid grid-cols-2 items-center gap-3 md:mt-7">
                 <h4 className="text-sm leading-none tracking-tight text-pricing-gray-9">Data</h4>
                 <Slider.Root
                   className="relative col-span-2 row-start-2 flex h-1 w-full grow touch-none items-center"
@@ -242,7 +243,7 @@ const Calculator = () => {
                   {storageValue} GiB
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-pricing-gray-2 pb-2 pt-6 text-pricing-gray-94">
+              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-pricing-gray-2 pb-2 pt-5 text-pricing-gray-94">
                 <p className="text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
                   <span className="text-pricing-primary-1">${storageCost.toFixed(2)} </span>
@@ -380,15 +381,15 @@ const Calculator = () => {
             </div>
           </div>
 
-          <div className="col-start-2 row-span-3 row-start-1 flex flex-col items-center self-start rounded-[10px] border border-secondary-2 p-6 lg:col-start-1 lg:row-span-1 lg:grid lg:grid-cols-2 lg:gap-x-32 sm:grid-cols-1 sm:gap-x-0">
-            <h3 className="text-center text-lg leading-none tracking-tight text-white lg:col-start-2 sm:col-start-1">
+          <div className="col-start-2 row-span-3 row-start-1 flex flex-col self-start rounded-[10px] border border-secondary-2 px-6 py-7 lg:col-start-1 lg:row-span-1 lg:grid lg:grid-cols-2 lg:gap-x-32 sm:grid-cols-1 sm:gap-x-0">
+            <h3 className="text-lg leading-none tracking-tight text-white lg:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
-            <p className="mt-6 text-center leading-none text-white xl:mt-10 xl:text-[60px] lg:col-start-2 sm:col-start-1 sm:mt-8">
-              <span className="text-[64px] font-light tracking-[-0.06em] text-secondary-2">
+            <p className="mt-6 leading-none text-white xl:mt-10 lg:col-start-2 sm:col-start-1 sm:mt-8">
+              <span className="text-[56px] font-light tracking-[-0.06em] text-secondary-2">
                 {estimatedPrice}
               </span>
-              <span className="mt-2 block text-base font-medium tracking-normal">per month</span>
+              <span className="mt-2 block text-lg tracking-normal">per month</span>
             </p>
             <Button
               className="my-6 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg font-medium xl:mt-4 lg:col-start-2 lg:mx-auto lg:mt-8 sm:col-start-1"
@@ -432,10 +433,25 @@ const Calculator = () => {
 
 const Tooltip = ({ content, id }) => (
   <span className="relative ml-2 inline-flex text-left align-middle normal-case lg:hidden">
-    <span className="peer cursor-pointer" data-tooltip-id={id} data-tooltip-content={content}>
-      <InfoIcon />
+    <span className="group peer cursor-pointer" data-tooltip-id={id} data-tooltip-content={content}>
+      <img
+        className="group-hover:hidden"
+        src={infoIcon}
+        width={14}
+        height={14}
+        loading="lazy"
+        alt=""
+      />
+      <img
+        className="hidden group-hover:block"
+        src={infoHoveredIcon}
+        width={14}
+        height={14}
+        loading="lazy"
+        alt=""
+      />
     </span>
-    <span className="pointer-events-none absolute left-[calc(100%+10px)] top-1/2 z-50 w-[15rem] -translate-y-1/2 rounded-[4px] bg-pricing-gray-2 px-4 py-1.5 text-sm font-normal leading-snug tracking-tight text-[#AFB1B6] opacity-0 shadow-tooltip transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:hidden lg:translate-y-0 lg:bg-transparent lg:p-0">
+    <span className="pointer-events-none absolute left-[calc(100%+10px)] top-1/2 z-50 w-[15rem] -translate-y-1/2 rounded-[4px] bg-pricing-gray-2 px-3 py-[10px] text-[12px] font-normal leading-dense tracking-tight text-pricing-gray-9 opacity-0 shadow-tooltip transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:hidden lg:translate-y-0 lg:bg-transparent lg:p-0">
       {content}
     </span>
     <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-4 border-r-4 border-t-4 border-transparent border-r-pricing-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
