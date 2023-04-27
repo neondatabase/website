@@ -15,7 +15,7 @@ import useWindowSize from 'hooks/use-window-size';
 
 const items = [
   {
-    image: '/images/pages/pricing/metrics-1.png',
+    image: '/images/pages/pricing/metrics-1-mobile.jpg',
     name: 'Compute time',
     priceFrom: 'From $0.102 /hour',
     details: 'Compute time is the amount of computing capacity used per hour.',
@@ -43,7 +43,7 @@ const items = [
     ],
   },
   {
-    image: '/images/pages/pricing/metrics-2.png',
+    image: '/images/pages/pricing/metrics-2-mobile.jpg',
     name: 'Project storage',
     priceFrom: 'From $0.000164 /Gigabyte-hour',
     details: 'Project storage is the amount of data and history in your Neon projects.',
@@ -71,7 +71,7 @@ const items = [
     ],
   },
   {
-    image: '/images/pages/pricing/metrics-3.png',
+    image: '/images/pages/pricing/metrics-3-mobile.jpg',
     name: 'Written data',
     priceFrom: 'From $0.096 /Gigabyte',
     details: 'Written data is the amount of data written from Neon compute to storage.',
@@ -99,7 +99,7 @@ const items = [
     ],
   },
   {
-    image: '/images/pages/pricing/metrics-4.png',
+    image: '/images/pages/pricing/metrics-4-mobile.jpg',
     name: 'Data transfer',
     priceFrom: 'From $0.09 /Gigabyte',
     details: 'Data transfer is the amount of data transferred out of Neon.',
