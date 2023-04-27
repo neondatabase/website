@@ -33,7 +33,7 @@ Compute endpoint details shown on the branch page include:
 - **Compute size**: The size of the compute endpoint. Neon [Pro plan](/docs/introduction/billing) users can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint.
 - **Compute size (min)**: The minimum compute size for the compute endpoint. This column appears when the [Autoscaling](/docs/introduction/autoscaling) feature is enabled, which is only available to Neon Pro plan users.
 - **Compute size (max)**: The maximum compute size for the compute endpoint. This column appears when the Autoscaling feature is enabled, which is only available to Neon Pro plan users.
-- **Auto-suspend delay**: The number of seconds of activity after which a compute endpoint is automatically suspended. The default is 300 seconds (5 minutes). For more information, see [Auto-suspend configuration](#auto-suspend-configuration).
+- **Auto-suspend delay**: The number of seconds of inactivity after which a compute endpoint is automatically suspended. The default is 300 seconds (5 minutes). For more information, see [Auto-suspend configuration](#auto-suspend-configuration).
 - **Last active**: The date and time the compute was last active.
 - **Status**: The compute endpoint status (`Active`, `Idle`, or `Stopped`).
 
