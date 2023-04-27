@@ -118,7 +118,7 @@ const Calculator = () => {
         <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[20px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
           <div className="row-span-1 flex rounded-[10px] bg-pricing-gray-10 md:flex-col">
             <div className="grow p-5 xl:px-6 xl:py-5 md:px-5 md:pb-3">
-              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-pricing-secondary-9">
+              <h3 className="text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
                 Compute time
               </h3>
               <div className="mt-5 grid grid-cols-2 items-center gap-2 md:mt-7">
@@ -213,7 +213,7 @@ const Calculator = () => {
 
           <div className="row-span-1 flex rounded-[10px] bg-pricing-gray-10 md:flex-col">
             <div className="grow p-5 xl:px-6 xl:py-5 md:px-5 md:pb-3">
-              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-pricing-secondary-9">
+              <h3 className="text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
                 Project storage
               </h3>
               <div className="mt-5 grid grid-cols-2 items-center gap-2 md:mt-7">
@@ -257,7 +257,7 @@ const Calculator = () => {
 
           <div className="row-span-1 rounded-[10px] bg-pricing-gray-10 p-5 md:flex-col md:p-0">
             <div className="min-h-[202px] md:px-5 md:py-5 [@media(min-width:428px)]:min-h-[151px] [@media(min-width:606px)]:min-h-[auto]">
-              <h3 className="flex items-center text-sm font-medium uppercase leading-none tracking-[0.04em] text-pricing-secondary-9">
+              <h3 className="flex items-center text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
                 Data transfer and Written data
                 <Tooltip
                   id="data"
@@ -399,17 +399,17 @@ const Calculator = () => {
               {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </Button>
             <ul className="my-12 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-pricing-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:mx-auto sm:my-8 sm:max-w-[260px]">
-              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
+              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-14">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 <span className="mr-1">{computeUnits}</span>
                 <span>compute units</span>
               </li>
-              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
+              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-14">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 <span className="mr-1">{storageValue} GiB</span>
                 <span>storage</span>
               </li>
-              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
+              <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-14">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 {isAdvanced && <span className="mr-1">{writtenDataValue} GiB</span>}
                 <span>written data</span>

@@ -106,6 +106,7 @@ module.exports = {
       },
       letterSpacing: {
         tighter: '-0.04em',
+        wider: '0.04em',
       },
       boxShadow: {
         tooltip: '0px 2px 20px rgba(0, 0, 0, 0.3)',

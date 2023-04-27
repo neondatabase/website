@@ -8,7 +8,7 @@ import aa from 'search-insights';
 import Footer from 'components/shared/footer';
 import Header from 'components/shared/header';
 import MobileMenu from 'components/shared/mobile-menu';
-// import Topbar from 'components/shared/topbar';
+import Topbar from 'components/shared/topbar';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 
 import SearchModal from '../header/search-modal';
@@ -69,7 +69,7 @@ const Layout = ({
 
   return (
     <>
-      {/* <Topbar /> */}
+      <Topbar />
       {/* 44px is the height of the topbar */}
       <div className="relative flex min-h-[calc(100vh-44px)] flex-col">
         <Header

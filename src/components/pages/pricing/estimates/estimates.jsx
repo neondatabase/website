@@ -141,7 +141,7 @@ const Estimates = () => {
                 <li key={index}>
                   <button
                     className={clsx(
-                      'flex gap-1.5 border-b pb-1.5 text-sm font-medium uppercase leading-none tracking-[0.04em] text-white transition-colors duration-200',
+                      'flex gap-1.5 border-b pb-1.5 text-sm font-medium uppercase leading-none tracking-wider text-white transition-colors duration-200',
                       type === selected && index === 0
                         ? '!border-pricing-primary-1 !text-pricing-primary-1'
                         : 'border-transparent',
@@ -202,7 +202,7 @@ const Estimates = () => {
                         <div className="mx-auto w-full xl:max-w-[616px] lg:max-w-[584px] lg:p-6 lg:pb-8 md:min-w-[584px] md:max-w-none md:px-4">
                           <div
                             className={clsx(
-                              'border-b border-[rgba(255,255,255,0.06)] pb-3 text-[12px] uppercase leading-none tracking-[0.04em] text-pricing-gray-4',
+                              'border-b border-[rgba(255,255,255,0.06)] pb-3 text-[12px] uppercase leading-none tracking-wider text-pricing-gray-4',
                               gridClassName
                             )}
                           >
@@ -246,7 +246,7 @@ const Estimates = () => {
                             <span className="col-span-2 inline-flex flex-col">
                               <span className="uppercase text-[#EFEFF0]">Total price:</span>
                             </span>
-                            <span className="relative tracking-[0.04em] text-pricing-primary-1">
+                            <span className="relative tracking-wider text-pricing-primary-1">
                               ${formattedPriceWithCommas}
                             </span>
                           </div>
