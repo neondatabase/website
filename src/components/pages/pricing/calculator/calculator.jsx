@@ -122,7 +122,7 @@ const Calculator = () => {
                 Compute time
               </h3>
               <div className="mt-5 grid grid-cols-2 items-center gap-2 md:mt-7">
-                <h4 className="text-sm leading-none tracking-tight text-pricing-gray-9">
+                <h4 className="inline-flex items-center text-sm leading-none tracking-tight text-pricing-gray-9">
                   <span>Compute size</span>
                   <Tooltip
                     id="compute"
@@ -165,7 +165,7 @@ const Calculator = () => {
                 </p>
               </div>
               <div className="mt-6 grid grid-cols-2 items-center gap-2 xl:mt-6 lg:mt-6">
-                <h4 className="text-sm leading-none tracking-tight text-pricing-gray-9">
+                <h4 className="inline-flex items-center text-sm leading-none tracking-tight text-pricing-gray-9">
                   Active time
                   <Tooltip
                     id="activeTime"

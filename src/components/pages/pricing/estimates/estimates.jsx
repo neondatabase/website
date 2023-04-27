@@ -135,7 +135,7 @@ const Estimates = () => {
               East (Ohio) region
             </p>
           </div>
-          <div className="w-[38%] overflow-x-hidden lg:w-full">
+          <div className="w-[38%] xl:overflow-x-hidden lg:w-full">
             <ul className="flex gap-8 py-2 lg:mx-auto lg:max-w-[584px] lg:px-6 md:max-w-full md:px-0 xs:gap-4">
               {items.map(({ type, icon: Icon }, index) => (
                 <li key={index}>
@@ -219,23 +219,23 @@ const Estimates = () => {
                               key={index}
                             >
                               <span>{name}</span>
-                              <span className="inline-flex items-center gap-x-2.5 lg:flex-col lg:items-start">
+                              <span className="inline-flex items-center gap-x-2.5 xl:flex-col xl:items-start">
                                 <span className="">
                                   {usage} <span className="text-pricing-gray-7">/month</span>
                                 </span>
                                 {details && (
                                   <span className="relative">
                                     <span
-                                      className="peer cursor-pointer lg:hidden"
+                                      className="peer cursor-pointer xl:hidden"
                                       data-tooltip-id={`${name}-${index}`}
                                       data-tooltip-content={details}
                                     >
                                       <InfoIcon />
                                     </span>
-                                    <span className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-pricing-gray-2 p-2 text-sm font-normal leading-none text-pricing-gray-6 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:translate-y-0 lg:bg-transparent lg:p-0 lg:opacity-100">
+                                    <span className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-pricing-gray-2 p-2 text-sm font-normal leading-none text-pricing-gray-6 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 xl:static xl:mt-1.5 xl:translate-y-0 xl:bg-transparent xl:p-0 xl:opacity-100">
                                       {details}
                                     </span>
-                                    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-4 border-r-4 border-t-4 border-transparent border-r-pricing-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
+                                    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-4 border-r-4 border-t-4 border-transparent border-r-pricing-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 xl:hidden" />
                                   </span>
                                 )}
                               </span>
@@ -246,7 +246,7 @@ const Estimates = () => {
                             <span className="col-span-2 inline-flex flex-col">
                               <span className="uppercase text-[#EFEFF0]">Total price:</span>
                             </span>
-                            <span className="relative tracking-wider text-pricing-primary-1">
+                            <span className="relative tracking-[0.04em] text-pricing-primary-1">
                               ${formattedPriceWithCommas}
                             </span>
                           </div>
