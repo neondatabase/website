@@ -30,7 +30,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
   };
 
   return (
-    <li className="border-b border-gray-2 py-6 xl:py-5 lg:py-4">
+    <li className="border-b border-pricing-gray-2 py-6 xl:py-5 lg:py-4">
       <button
         className="flex w-full items-start gap-4 text-left"
         type="button"
@@ -39,8 +39,8 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
         onClick={handleOpen}
       >
         <ArrowIcon
-          className={clsx('shrink-0 text-primary-1 transition duration-200', {
-            'rotate-90 fill-primary-1 !text-black': isOpen,
+          className={clsx('shrink-0 text-pricing-primary-1 transition duration-200', {
+            'rotate-90 fill-pricing-primary-1 !text-pricing-black': isOpen,
           })}
           aria-hidden
         />
@@ -64,7 +64,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
           />
           {linkText && linkUrl && (
             <Link
-              className="ml-[42px] mt-3 border-b border-primary-3 pb-1.5 !text-base font-normal leading-none !text-primary-1 hover:!border-primary-1 xl:mt-4 lg:mt-3 lg:!text-base md:mt-2.5"
+              className="ml-[42px] mt-3 border-b border-pricing-primary-3 pb-1.5 !text-base font-normal leading-none !text-pricing-primary-1 hover:!border-pricing-primary-1 xl:mt-4 lg:mt-3 lg:!text-base md:mt-2.5"
               size="sm"
               theme="white"
               to={linkUrl}

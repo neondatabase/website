@@ -69,7 +69,7 @@ const Hero = () => (
         tag="h1"
         size="lg"
       >
-        <span className="text-primary-1">Start Free.</span>{' '}
+        <span className="text-pricing-primary-1">Start Free.</span>{' '}
         <span className="">Only pay for what you use.</span>
       </Heading>
       <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug 2xl:mt-5 xl:max-w-[616px] xl:text-base lg:max-w-[464px]">
@@ -82,7 +82,7 @@ const Hero = () => (
             <li
               className={clsx(
                 'flex flex-col rounded-[10px] px-7 pb-5 pt-5 xl:p-5 lg:p-7',
-                type === 'Pro' ? 'border border-primary-1' : 'bg-gray-10',
+                type === 'Pro' ? 'border border-pricing-primary-1' : 'bg-pricing-gray-10',
                 type === 'Free Tier' && 'lg:order-1 lg:col-span-full'
               )}
               style={{
@@ -95,7 +95,7 @@ const Hero = () => (
             >
               <div
                 className={clsx(
-                  'mb-6 flex min-h-[330px] flex-col border-b border-dashed border-gray-2 pb-4 xl:mb-5 xl:min-h-[350px] md:min-h-max',
+                  'mb-6 flex min-h-[330px] flex-col border-b border-dashed border-pricing-gray-2 pb-4 xl:mb-5 xl:min-h-[350px] md:min-h-max',
                   type === 'Free Tier' ? 'lg:min-h-max' : 'lg:min-h-[345px]'
                 )}
               >
@@ -106,14 +106,20 @@ const Hero = () => (
                   {price}
                 </h3>
                 <Button
-                  className="mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight hover:!bg-[var(--hoverColor)] lg:max-w-[304px] sm:max-w-none"
+                  className="relative mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight hover:!bg-[var(--hoverColor)] lg:max-w-[304px] sm:max-w-none"
                   theme="primary"
                   to={button.url}
                   size="sm"
                 >
                   {button.text}
+                  {/* <Lines */}
+                  {/*   className={clsx( */}
+                  {/*     type === 'Pro' ? '-top-8' : 'hidden', */}
+                  {/*     'pointer-events-none absolute left-1/2 -z-10 w-[120%] min-w-[200px] -translate-x-1/2 [&>*]:!min-h-[180px]' */}
+                  {/*   )} */}
+                  {/* /> */}
                 </Button>
-                <p className="mt-9 font-light leading-snug tracking-tight text-gray-7 lg:mt-7">
+                <p className="mt-9 font-light leading-snug tracking-tight text-pricing-gray-7 lg:mt-7">
                   {description}
                 </p>
               </div>
@@ -127,7 +133,7 @@ const Hero = () => (
                       />
                       <span>{title}</span>
                       {label && (
-                        <span className="ml-2 whitespace-nowrap rounded-full bg-primary-4 px-3 py-1 align-middle text-[10px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
+                        <span className="ml-2 whitespace-nowrap rounded-full bg-pricing-primary-4 px-3 py-1 align-middle text-[10px] font-semibold uppercase leading-none tracking-[0.02em] text-pricing-primary-1">
                           {label}
                         </span>
                       )}

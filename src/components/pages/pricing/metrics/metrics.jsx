@@ -177,12 +177,12 @@ const Metrics = () => {
       <div className="relative flex flex-col">
         <Container className="flex flex-col items-center" size="mdDoc">
           <Heading className="text-center" badge="Metrics" tag="h2" size="2sm">
-            Neon charges on <span className="text-primary-1">4 metrics</span>
+            Neon charges on <span className="text-pricing-primary-1">4 metrics</span>
           </Heading>
           <p className="mt-4 text-lg font-light leading-snug 2xl:mt-5 xl:text-base lg:text-center">
             Refer to our{' '}
             <Link
-              className="!border-b !border-primary-3 font-normal hover:!border-primary-1"
+              className="!border-b !border-pricing-primary-3 font-normal hover:!border-pricing-primary-1"
               theme="underline-primary-1"
               to={`${LINKS.docs}introduction/billing`}
             >
@@ -217,11 +217,11 @@ const Metrics = () => {
                   />
                   <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white">
                     {name}
-                    <span className="block font-light text-primary-1">{priceFrom}</span>
+                    <span className="block font-light text-pricing-primary-1">{priceFrom}</span>
                   </h2>
                   <p className="mt-2 text-lg leading-tight tracking-tight">{details}</p>
                   <div className="mt-8 max-w-[464px]">
-                    <div className="grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-3 text-[12px] uppercase leading-none text-gray-4">
+                    <div className="grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-3 text-[12px] uppercase leading-none text-pricing-gray-4">
                       <span className="">Region</span>
                       <span className="">Price</span>
                     </div>
@@ -233,7 +233,9 @@ const Metrics = () => {
                         <span className="">{name}</span>
                         <span className="">
                           ${price} /{' '}
-                          <span className="font-light tracking-tight text-gray-7">{unit}</span>
+                          <span className="font-light tracking-tight text-pricing-gray-7">
+                            {unit}
+                          </span>
                         </span>
                       </div>
                     ))}

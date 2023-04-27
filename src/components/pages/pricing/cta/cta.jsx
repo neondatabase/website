@@ -10,7 +10,7 @@ const CTA = () => (
     <Container className="grid grid-cols-12 items-center gap-4" size="md">
       <div className="col-span-4 col-start-2 mb-20 xl:col-span-5 xl:col-start-1 lg:col-span-full">
         <Heading className="nowrap lg:text-center" tag="h2" size="2sm">
-          Still have a <span className="text-primary-1">question?</span>
+          Still have a <span className="text-pricing-primary-1">question?</span>
         </Heading>
         <p className="mt-4 text-lg font-light leading-snug 2xl:mt-5 xl:text-base lg:text-center">
           Interested in increasing your free tier limits or learning about pricing? Complete the

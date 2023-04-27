@@ -116,13 +116,13 @@ const Calculator = () => {
           </Heading>
         </div>
         <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[20px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
-          <div className="row-span-1 flex rounded-[10px] bg-gray-10 md:flex-col">
+          <div className="row-span-1 flex rounded-[10px] bg-pricing-gray-10 md:flex-col">
             <div className="grow p-5 xl:px-6 xl:py-5 md:px-5 md:pb-3">
-              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9">
+              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-pricing-secondary-9">
                 Compute time
               </h3>
               <div className="mt-5 grid grid-cols-2 items-center gap-2 md:mt-7">
-                <h4 className="text-sm leading-none tracking-tight text-gray-9">
+                <h4 className="text-sm leading-none tracking-tight text-pricing-gray-9">
                   <span>Compute size</span>
                   <Tooltip
                     id="compute"
@@ -145,8 +145,8 @@ const Calculator = () => {
                     setComputeUnits(computeUnitsValue);
                   }}
                 >
-                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-3">
-                    <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
+                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-pricing-gray-3">
+                    <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
                   <Slider.Thumb
                     className={clsx(
@@ -154,18 +154,18 @@ const Calculator = () => {
                       'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                     )}
                   >
-                    <span className="h-2.5 w-1 rounded-[1px] bg-primary-1" />
+                    <span className="h-2.5 w-1 rounded-[1px] bg-pricing-primary-1" />
                   </Slider.Thumb>
                 </Slider.Root>
-                <p className="text-right text-sm leading-none tracking-tight text-gray-9">
-                  <span className="after:mx-2 after:inline-block after:h-[4px] after:w-[4px] after:rounded-full after:bg-primary-1 after:align-middle">
+                <p className="text-right text-sm leading-none tracking-tight text-pricing-gray-9">
+                  <span className="after:mx-2 after:inline-block after:h-[4px] after:w-[4px] after:rounded-full after:bg-pricing-primary-1 after:align-middle">
                     {computeUnits <= 0.5 ? COMPUTE_UNITS_RANGES[computeUnits] : computeUnits}vCPU
                   </span>
                   <span>{computeUnits * 4}GB RAM</span>
                 </p>
               </div>
               <div className="mt-6 grid grid-cols-2 items-center gap-2 xl:mt-6 lg:mt-6">
-                <h4 className="text-sm leading-none tracking-tight text-gray-9">
+                <h4 className="text-sm leading-none tracking-tight text-pricing-gray-9">
                   Active time
                   <Tooltip
                     id="activeTime"
@@ -181,8 +181,8 @@ const Calculator = () => {
                   aria-label="Active time"
                   onValueChange={(value) => setActiveTime(value[0])}
                 >
-                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-3">
-                    <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
+                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-pricing-gray-3">
+                    <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
                   <Slider.Thumb
                     className={clsx(
@@ -190,34 +190,34 @@ const Calculator = () => {
                       'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                     )}
                   >
-                    <span className="h-2.5 w-1 rounded-[1px] bg-primary-1" />
+                    <span className="h-2.5 w-1 rounded-[1px] bg-pricing-primary-1" />
                   </Slider.Thumb>
                 </Slider.Root>
                 <p className="text-right text-sm leading-none tracking-tight">
                   {activeTime} hour{activeTime <= 1 ? '' : 's'}{' '}
-                  <span className="text-gray-7">per day</span>
+                  <span className="text-pricing-gray-7">per day</span>
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-gray-2 pb-2 pt-6 text-gray-94 ">
+              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-pricing-gray-2 pb-2 pt-6 text-pricing-gray-94 ">
                 <p className="text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
-                  <span className="text-primary-1">${computeTimeCost.toFixed(2)} </span>
-                  <span className="font-normal text-gray-7">per month</span>
+                  <span className="text-pricing-primary-1">${computeTimeCost.toFixed(2)} </span>
+                  <span className="font-normal text-pricing-gray-7">per month</span>
                 </p>
                 <p className="text-right text-sm leading-none">
-                  ${COMPUTE_TIME_PRICE} <span className="text-gray-7">per hour</span>
+                  ${COMPUTE_TIME_PRICE} <span className="text-pricing-gray-7">per hour</span>
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="row-span-1 flex rounded-[10px] bg-gray-10 md:flex-col">
+          <div className="row-span-1 flex rounded-[10px] bg-pricing-gray-10 md:flex-col">
             <div className="grow p-5 xl:px-6 xl:py-5 md:px-5 md:pb-3">
-              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9">
+              <h3 className="text-sm font-medium uppercase leading-none tracking-[0.04em] text-pricing-secondary-9">
                 Project storage
               </h3>
               <div className="mt-5 grid grid-cols-2 items-center gap-2 md:mt-7">
-                <h4 className="text-sm leading-none tracking-tight text-gray-9">Data</h4>
+                <h4 className="text-sm leading-none tracking-tight text-pricing-gray-9">Data</h4>
                 <Slider.Root
                   className="relative col-span-2 row-start-2 flex h-1 w-full grow touch-none items-center"
                   defaultValue={[STORAGE_VALUES.default]}
@@ -226,8 +226,8 @@ const Calculator = () => {
                   aria-label="Compute units"
                   onValueChange={(value) => setStorageValue(value[0])}
                 >
-                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-3">
-                    <Slider.Range className="absolute h-full rounded-full bg-primary-1" />
+                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-pricing-gray-3">
+                    <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
                   <Slider.Thumb
                     className={clsx(
@@ -235,29 +235,29 @@ const Calculator = () => {
                       'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                     )}
                   >
-                    <span className="h-2.5 w-1 rounded-[1px] bg-primary-1" />
+                    <span className="h-2.5 w-1 rounded-[1px] bg-pricing-primary-1" />
                   </Slider.Thumb>
                 </Slider.Root>
-                <p className="text-right text-sm leading-none tracking-tight text-gray-9">
+                <p className="text-right text-sm leading-none tracking-tight text-pricing-gray-9">
                   {storageValue} GiB
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-gray-2 pb-2 pt-6 text-gray-94">
+              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-pricing-gray-2 pb-2 pt-6 text-pricing-gray-94">
                 <p className="text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
-                  <span className="text-primary-1">${storageCost.toFixed(2)} </span>
-                  <span className="font-normal text-gray-7">per month</span>
+                  <span className="text-pricing-primary-1">${storageCost.toFixed(2)} </span>
+                  <span className="font-normal text-pricing-gray-7">per month</span>
                 </p>
-                <p className="text-right text-sm leading-none text-gray-7">
-                  <span className="text-gray-94">${COMPUTE_TIME_PRICE}</span> per hour
+                <p className="text-right text-sm leading-none text-pricing-gray-7">
+                  <span className="text-pricing-gray-94">${COMPUTE_TIME_PRICE}</span> per hour
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="row-span-1 rounded-[10px] bg-gray-10 p-5 md:flex-col md:p-0">
+          <div className="row-span-1 rounded-[10px] bg-pricing-gray-10 p-5 md:flex-col md:p-0">
             <div className="min-h-[202px] md:px-5 md:py-5 [@media(min-width:428px)]:min-h-[151px] [@media(min-width:606px)]:min-h-[auto]">
-              <h3 className="flex items-center text-sm font-medium uppercase leading-none tracking-[0.04em] text-secondary-9">
+              <h3 className="flex items-center text-sm font-medium uppercase leading-none tracking-[0.04em] text-pricing-secondary-9">
                 Data transfer and Written data
                 <Tooltip
                   id="data"
@@ -268,7 +268,7 @@ const Calculator = () => {
                 <AnimatePresence initial={false} mode="wait">
                   {isAdvanced ? (
                     <m.ul
-                      className="mb-4 mt-5 flex items-center gap-x-8 text-[15px] tracking-tight text-gray-9 xl:flex-wrap xl:gap-x-7 sm:gap-4"
+                      className="mb-4 mt-5 flex items-center gap-x-8 text-[15px] tracking-tight text-pricing-gray-9 xl:flex-wrap xl:gap-x-7 sm:gap-4"
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -288,7 +288,7 @@ const Calculator = () => {
                         <label htmlFor="dataTransfer">Data transfer</label>
                         <input
                           id="dataTransfer"
-                          className="ml-2 w-12 rounded-l-sm border-r border-gray-2 bg-[#242628] pl-2 pr-1 text-[15px] tracking-tight xl:ml-2"
+                          className="ml-2 w-12 rounded-l-sm border-r border-pricing-gray-2 bg-[#242628] pl-2 pr-1 text-[15px] tracking-tight xl:ml-2"
                           name="data-transfer"
                           type="number"
                           min={0}
@@ -300,7 +300,7 @@ const Calculator = () => {
                             return setDataTransferValue(event?.target?.value);
                           }}
                         />
-                        <span className="rounded-r-sm bg-[#242628] px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-gray-6">
+                        <span className="rounded-r-sm bg-[#242628] px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-pricing-gray-6">
                           GiB
                         </span>
                       </li>
@@ -308,7 +308,7 @@ const Calculator = () => {
                         <label htmlFor="writtenData">Written data</label>
                         <input
                           id="writtenData"
-                          className="ml-2 w-12 rounded-l-sm border-r border-gray-2 bg-[#242628] pl-2 pr-1 text-[15px] tracking-tight xl:ml-2"
+                          className="ml-2 w-12 rounded-l-sm border-r border-pricing-gray-2 bg-[#242628] pl-2 pr-1 text-[15px] tracking-tight xl:ml-2"
                           name="written-data"
                           type="number"
                           min={0}
@@ -320,13 +320,13 @@ const Calculator = () => {
                             return setWrittenDataValue(event?.target?.value);
                           }}
                         />
-                        <span className="rounded-r-sm bg-[#242628] px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-gray-6">
+                        <span className="rounded-r-sm bg-[#242628] px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-pricing-gray-6">
                           GiB
                         </span>
                       </li>
                       <li>
                         <button
-                          className="relative mx-0 inline-flex items-center text-primary-1 transition-colors duration-200 hover:text-[#00ffaa]"
+                          className="relative mx-0 inline-flex items-center text-pricing-primary-1 transition-colors duration-200 hover:text-[#00ffaa]"
                           type="button"
                           onClick={() => setIsAdvanced(false)}
                         >
@@ -336,7 +336,7 @@ const Calculator = () => {
                     </m.ul>
                   ) : (
                     <m.p
-                      className="mb-4 mt-5 text-[15px] tracking-tight text-gray-9"
+                      className="mb-4 mt-5 text-[15px] tracking-tight text-pricing-gray-9"
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -354,7 +354,7 @@ const Calculator = () => {
                     >
                       Accounts for 10% of your monthly cost, on average.
                       <button
-                        className="group relative mx-2 inline-flex items-center text-primary-1 transition-colors duration-200 hover:text-[#00ffaa]"
+                        className="group relative mx-2 inline-flex items-center text-pricing-primary-1 transition-colors duration-200 hover:text-[#00ffaa]"
                         type="button"
                         onClick={() => setIsAdvanced(true)}
                       >
@@ -369,11 +369,13 @@ const Calculator = () => {
                 </AnimatePresence>
               </LazyMotion>
             </div>
-            <div className="flex justify-between border-t border-dashed border-gray-2 pb-2 pt-6 text-gray-94 md:px-5 md:pb-5">
+            <div className="flex justify-between border-t border-dashed border-pricing-gray-2 pb-2 pt-6 text-pricing-gray-94 md:px-5 md:pb-5">
               <p className="text-sm font-medium leading-none">
                 <span className="uppercase">Subtotal: </span>
-                <span className="text-primary-1">${writtenAndTransferDataCost.toFixed(2)} </span>
-                <span className="font-normal text-gray-7">per month</span>
+                <span className="text-pricing-primary-1">
+                  ${writtenAndTransferDataCost.toFixed(2)}{' '}
+                </span>
+                <span className="font-normal text-pricing-gray-7">per month</span>
               </p>
             </div>
           </div>
@@ -396,7 +398,7 @@ const Calculator = () => {
             >
               {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </Button>
-            <ul className="my-12 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:mx-auto sm:my-8 sm:max-w-[260px]">
+            <ul className="my-12 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-pricing-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-center sm:row-span-1 sm:mx-auto sm:my-8 sm:max-w-[260px]">
               <li className="relative flex text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-[#0C0D0D] after:opacity-[0.05] lg:pl-0 sm:pl-14">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" />
                 <span className="mr-1">{computeUnits}</span>
@@ -418,7 +420,7 @@ const Calculator = () => {
                 <span>data transfer</span>
               </li>
             </ul>
-            <span className="mt-6 block text-base font-light tracking-tight text-gray-7 sm:text-center">
+            <span className="mt-6 block text-base font-light tracking-tight text-pricing-gray-7 sm:text-center">
               Based on the US East (Ohio) region
             </span>
           </div>
@@ -433,10 +435,10 @@ const Tooltip = ({ content, id }) => (
     <span className="peer cursor-pointer" data-tooltip-id={id} data-tooltip-content={content}>
       <InfoIcon />
     </span>
-    <span className="pointer-events-none absolute left-[calc(100%+10px)] top-1/2 z-50 w-[15rem] -translate-y-1/2 rounded-[4px] bg-gray-2 px-4 py-1.5 text-sm font-normal leading-snug tracking-tight text-[#AFB1B6] opacity-0 shadow-tooltip transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:hidden lg:translate-y-0 lg:bg-transparent lg:p-0">
+    <span className="pointer-events-none absolute left-[calc(100%+10px)] top-1/2 z-50 w-[15rem] -translate-y-1/2 rounded-[4px] bg-pricing-gray-2 px-4 py-1.5 text-sm font-normal leading-snug tracking-tight text-[#AFB1B6] opacity-0 shadow-tooltip transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:hidden lg:translate-y-0 lg:bg-transparent lg:p-0">
       {content}
     </span>
-    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-4 border-r-4 border-t-4 border-transparent border-r-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
+    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-4 border-r-4 border-t-4 border-transparent border-r-pricing-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
   </span>
 );
 
