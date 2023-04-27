@@ -215,7 +215,7 @@ const Metrics = () => {
                     src={image}
                     alt={`${name} illustration`}
                   />
-                  <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white">
+                  <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white sm:text-3xl">
                     {name}
                     <span className="block font-light text-pricing-primary-1">{priceFrom}</span>
                   </h2>
@@ -227,7 +227,7 @@ const Metrics = () => {
                     </div>
                     {prices.map(({ name, price, unit }, index) => (
                       <div
-                        className="grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-3 text-[15px] leading-none text-[#EFEFF0]"
+                        className="text-gray-94 grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-3 text-[15px] leading-none sm:gap-x-10"
                         key={index}
                       >
                         <span className="">{name}</span>
