@@ -30,7 +30,12 @@ Compute endpoint details shown on the branch page include:
 - **Host**: The compute endpoint hostname.
 - **Region**: The region where the compute endpoint resides.
 - **Type**: The type of compute endpoint. Currently, only `read_write` compute endpoints are supported.
-- **State**: The compute endpoint state (`Active`, `Idle`, or `Stopped`).
+- **Compute size**: The size of the compute endpoint. Neon [Pro plan](/docs/introduction/billing) users can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint.
+- **Compute size (min)**: The minimum compute size for the compute endpoint. This column appears when the [Autoscaling](/docs/introduction/autoscaling) feature is enabled, which is only available to Neon Pro plan users.
+- **Compute size (max)**: The maximum compute size for the compute endpoint. This column appears when the Autoscaling feature is enabled, which is only available to Neon Pro plan users.
+- **Auto-suspend delay**: The number of seconds of activity after which a compute endpoint is automatically suspended. The default is 300 seconds (5 minutes). For more information, see [Auto-suspend configuration](#auto-suspend-configuration).
+- **Last active**: The date and time the compute was last active.
+- **Status**: The compute endpoint status (`Active`, `Idle`, or `Stopped`).
 
 ## Create a compute endpoint
 
@@ -79,10 +84,10 @@ Switching between **Fixed Size** and **Autoscaling** is not yet supported.
 
 Neon's _Auto-suspend_ feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable _Auto-suspend_ completely to maintain an "always-active" compute endpoint. An "always-active" configuration eliminates the few seconds of latency required to reactivate a compute endpoint but is likely to increase your compute time usage.
 
-The maximum **Auto-suspend delay** setting is 86400 seconds (24-hours), and the following settings have a special meaning:
+The maximum **Auto-suspend delay** setting is 604800 seconds (7 days), and the following settings have a special meaning:
 
 - `0` means use the default setting (5 minutes / 300 seconds).
-- `-1` means never suspend the compute endpoint. The maximum value is 86400 seconds (24 hours).
+- `-1` means never suspend the compute endpoint.
 
 ## Delete a compute endpoint
 
