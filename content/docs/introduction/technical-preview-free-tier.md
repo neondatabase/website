@@ -5,27 +5,19 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
 ---
 
-The Neon cloud service is currently in Technical Preview. For information about how the Technical Preview fits within Neon's release plans, please refer to the [Neon roadmap](/docs/reference/roadmap).
+Neon is currently in Technical Preview. For information about how the Technical Preview fits within Neon's release plans, refer to the [Neon roadmap](/docs/reference/roadmap).
 
-The Neon Free Tier has the following limits:
+The Neon Free Tier is intended for personal projects, prototyping, or evaluation. It includes the following:
 
-- 1 Neon project.
-- 10 branches including the [primary branch](/docs/reference/glossary#primary-branch), with a limit of 3 GB of data per branch.
-- A [compute endpoint](/docs/reference/glossary#compute-endpoint) for every branch, each with 1 shared vCPU with 1 GB of RAM.
-- No limit on _compute active time_ for the primary branch, which ensures that access to data on the primary branch is never interrupted.
-- 100 hours of _compute active time_ per month (total) on non-primary branches. When you reach the limit, compute endpoints assigned to [non-primary branches](/docs/reference/glossary#non-primary-branch) are unavailable until the limit resets at the beginning of the next month.
+- One Neon project with up to 10 branches.
+- 3 GB of storage per branch.
+- A shared compute with 1 GB of RAM for each branch.
+- **No limit on [Active time](/docs/reference/glossary#active-time) for the [primary branch](/docs/reference/glossary#primary-branch) compute. This ensures that access to data on the primary branch is never interrupted.**
+- 100 hours of _Active time_ per month (total) for non-primary branch computes. The _Active time_ on your primary branch compute is counted toward the 100 hour limit. If you reach the 100 hour limit for the current month, non-primary branch computes are suspended until the limit resets at the beginning of the next month. Your primary branch compute is unaffected. You can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**.
 - A point-in-time restore window of 7 days of _reasonable usage_.
 
-Neon reserves the right to adjust Free Tier limits.
+For higher limits and access to advanced features like _Autoscaling_, _Unlimited storage_, and _Project sharing_, upgrade to our **Pro** plan. For more information, see [Neon Plans](/docs/introduction/billing#neon-plans), or select **Upgrade to Pro** in the [Neon Console](https://console.neon.tech/).
 
-## Data Size
-
-Neon stores data in its own internal format. The data size limit in the Free Tier applies to the logical size of your branch. The logical size is the sum of all database sizes in the branch of your project. For information about checking the size of the data in your branch, see [Check the data size](/docs/manage/branches#check-the-data-size).
-
-<a id="#point-in-time-reset/"></a>
-
-## Point-in-time restore
-
-Neon storage consumes extra space in order to support point-in-time restore, which enables you to restore your data to a past state. History is stored in log-based format.
-
-The Neon Free Tier limits the amount of history that can be stored.
+<Admonition type="note">
+Neon reserves the right to adjust Free Tier limits, and to discontinue or limit compute usage in exceptional cases where misuse is identified, in order to protect the integrity of our platform and ensure a positive experience for all users.
+</Admonition>
