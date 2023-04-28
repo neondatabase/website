@@ -55,6 +55,7 @@ Connections from the following GUI applications and IDEs have been tested with N
 
 - [Azure Data Studio](https://azure.microsoft.com/en-us/products/data-studio/) (requires the [PostgreSQL extension](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/postgres-extension?view=sql-server-ver16), and the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
 - [CLion](https://www.jetbrains.com/clion/)
+- [Datagran](https://www.datagran.io/) (requires the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
 - [DataGrip](https://www.jetbrains.com/datagrip/)
 - [DBeaver](https://dbeaver.io/)
 - [dbForge](https://www.devart.com/dbforge/)
