@@ -124,7 +124,7 @@ const Estimates = () => {
               <span className="text-pricing-primary-1">Each user is unique.</span> However, we can
               give you some estimates.
             </Heading>
-            <p className="mt-4 text-lg font-light leading-snug 2xl:mt-5 xl:text-base lg:text-center">
+            <p className="mt-4 text-lg font-light leading-snug xl:text-base lg:text-center">
               <Link
                 className="!border-b !border-pricing-primary-3 font-normal hover:!border-pricing-primary-1"
                 theme="underline-primary-1"

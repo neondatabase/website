@@ -80,7 +80,7 @@ const Hero = () => (
         usage and volume-based plans.
       </p>
       <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-10 lg:mt-7">
-        <ul className="relative z-10 grid grid-cols-3 gap-x-11 lg:grid-cols-2 lg:gap-y-3 md:grid-cols-1">
+        <ul className="relative z-10 grid grid-cols-3 gap-x-11 xl:gap-x-8 lg:grid-cols-2 lg:gap-y-8 md:grid-cols-1">
           {items.map(({ type, price, description, features, button }, index) => (
             <li
               className={clsx(

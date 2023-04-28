@@ -15,7 +15,7 @@ const CTA = () => (
         <Heading className="whitespace-nowrap lg:text-center" tag="h2" size="2sm">
           Still have a <span className="text-pricing-primary-1">question?</span>
         </Heading>
-        <p className="mt-4 text-lg font-light leading-snug 2xl:mt-5 xl:text-base lg:text-center">
+        <p className="mt-4 text-lg font-light leading-snug xl:text-base lg:text-center">
           Interested in increasing your free tier limits or learning about pricing? Complete the
           form below to get in touch with our Sales team
         </p>

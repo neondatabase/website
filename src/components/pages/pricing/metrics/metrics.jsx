@@ -179,7 +179,7 @@ const Metrics = () => {
           <Heading className="text-center" badge="Metrics" tag="h2" size="2sm">
             Neon charges on <span className="text-pricing-primary-1">4 metrics</span>
           </Heading>
-          <p className="mt-4 text-lg font-light leading-snug 2xl:mt-5 xl:text-base lg:text-center">
+          <p className="mt-4 text-lg font-light leading-snug xl:text-base lg:text-center">
             Refer to our{' '}
             <Link
               className="!border-b !border-pricing-primary-3 font-normal hover:!border-pricing-primary-1"
@@ -192,7 +192,7 @@ const Metrics = () => {
           </p>
         </Container>
         <Container className="grid h-full w-full grid-cols-12 items-start lg:grid-cols-1" size="sm">
-          <div className="relative col-span-7 col-start-1 h-full lg:col-span-full lg:hidden">
+          <div className="relative col-span-7 col-start-1 h-full xl:col-span-6 lg:col-span-full lg:hidden">
             <div className="sticky top-0 h-screen min-h-[770px] 2xl:min-h-[835px]">
               <div
                 className={clsx('absolute flex h-full w-full items-center justify-center px-16')}
@@ -201,7 +201,7 @@ const Metrics = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-5 col-start-8 text-left lg:col-span-full">
+          <div className="col-span-5 col-start-8 text-left xl:col-span-6 lg:col-span-full">
             <div className="space-y-14" ref={contentRef}>
               {items.map(({ image, name, priceFrom, details, prices }, index) => (
                 <div
@@ -209,7 +209,7 @@ const Metrics = () => {
                   key={index}
                 >
                   <Image
-                    className="my-12 hidden max-w-full lg:block"
+                    className="my-14 hidden max-w-full lg:mx-auto lg:block"
                     width={590}
                     height={830}
                     src={image}
