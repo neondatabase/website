@@ -66,6 +66,7 @@ Connections from the following GUI applications and IDEs have been tested with N
 - [Postico](https://eggerapps.at/postico2/)
 - [Retool](https://retool.com/)
 - [TablePlus](https://tableplus.com/)
+- [Twilio Segment](https://segment.com/) (requires the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
 
 ## Connection issues
 
