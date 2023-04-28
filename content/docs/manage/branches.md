@@ -63,11 +63,11 @@ Branch details shown on the branch page include:
 - **ID**: The branch ID. Branch IDs have a `br-` prefix.
 - **Created**: The date and time the branch was created.
 - **Current Data Size**: The current data size of the branch.
-- **Active Time**: The amount of active time for the current month for the compute endpoint associated with the branch.
-- **Compute Time**: The amount of compute time 
-- **Written Data**: The amount of data written from the branch compute to storage.
-- **Data Transfer**: The amount of data transferred out of the branch (and Neon).
-- **Parent Branch**: The parent branch.
+- **Active Time**: The amount of wall-clock time the branch's compute endpoint has been active during the current billing period.
+- **Compute Time**: The amount of Compute Unit (CU) hours spent by the branch's compute endpoint in the current billing period.
+- **Written Data**: The amount of data changes written from the branch's compute endpoint to storage in the current billing period.
+- **Data Transfer**: The amount of data transferred out of the branch (egress) in the current billing period.
+- **Parent Branch**: The branch from which this branch was created.
 - **Date**: The date the parent branch was created.
 - **Time**: The time the parent branch was created.
 
