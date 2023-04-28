@@ -2,7 +2,6 @@
 
 import useScrollPosition from '@react-hook/window-scroll';
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
-import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -143,8 +142,7 @@ const Metrics = () => {
       alignment: Alignment.Center,
     }),
   });
-  const animationStageInput = useStateMachineInput(rive, 'SM', 'Stage (0-3)', 0);
-  const animationReverseInput = useStateMachineInput(rive, 'SM', 'Reverse', false);
+  const animationStageInput = useStateMachineInput(rive, 'SM', 'Stage (0-6)', 0);
 
   useEffect(() => {
     if (rive && isContentInView) {
@@ -153,11 +151,30 @@ const Metrics = () => {
   }, [rive, isContentInView]);
 
   useEffect(() => {
-    if (!animationStageInput || !animationReverseInput) return;
+    if (!animationStageInput) return;
 
-    animationReverseInput.value = currentSectionIndex < animationStageInput.value;
-    animationStageInput.value = currentSectionIndex;
-  }, [currentSectionIndex, animationStageInput, animationReverseInput]);
+    // change animation input on scroll UP
+    if (
+      (currentSectionIndex === 0 && animationStageInput.value === 1) ||
+      (currentSectionIndex === 0 && animationStageInput.value === 5)
+    ) {
+      animationStageInput.value = 6;
+    } else if (
+      (currentSectionIndex === 1 && animationStageInput.value === 2) ||
+      (currentSectionIndex === 1 && animationStageInput.value === 4)
+    ) {
+      animationStageInput.value = 5;
+    } else if (
+      (currentSectionIndex === 2 && animationStageInput.value === 3) ||
+      (currentSectionIndex === 2 && animationStageInput.value === 3)
+    ) {
+      animationStageInput.value = 4;
+    }
+    // ... and on scroll DOWN
+    else {
+      animationStageInput.value = currentSectionIndex;
+    }
+  }, [currentSectionIndex, animationStageInput]);
 
   useEffect(() => {
     const currentScrollTop = scrollY;
@@ -173,7 +190,7 @@ const Metrics = () => {
   }, [pageHeight, scrollY]);
 
   return (
-    <section className="safe-paddings mt-60 lg:mt-24 md:mt-20" ref={sectionRef}>
+    <section className="safe-paddings mt-60 xl:mt-40 lg:mt-24 md:mt-20" ref={sectionRef}>
       <div className="relative flex flex-col">
         <Container className="flex flex-col items-center" size="mdDoc">
           <Heading className="text-center" badge="Metrics" tag="h2" size="2sm">
@@ -193,10 +210,8 @@ const Metrics = () => {
         </Container>
         <Container className="grid h-full w-full grid-cols-12 items-start lg:grid-cols-1" size="sm">
           <div className="relative col-span-7 col-start-1 h-full xl:col-span-6 lg:col-span-full lg:hidden">
-            <div className="sticky top-0 h-screen min-h-[770px] 2xl:min-h-[835px]">
-              <div
-                className={clsx('absolute flex h-full w-full items-center justify-center px-16')}
-              >
+            <div className="sticky top-0 h-screen min-h-[760px]">
+              <div className="absolute flex h-full w-full items-center justify-center px-16 xl:pl-0">
                 <RiveComponent width={590} height={830} aria-hidden />
               </div>
             </div>
@@ -205,7 +220,7 @@ const Metrics = () => {
             <div className="space-y-14" ref={contentRef}>
               {items.map(({ image, name, priceFrom, details, prices }, index) => (
                 <div
-                  className="flex h-[78vh] min-h-[770px] flex-col justify-center px-6 2xl:min-h-[835px] lg:h-auto lg:min-h-0 lg:px-0"
+                  className="flex h-[78vh] min-h-[760px] flex-col justify-center px-6 xl:pl-3 xl:pr-0 lg:h-auto lg:min-h-0 lg:px-0"
                   key={index}
                 >
                   <Image
@@ -215,19 +230,21 @@ const Metrics = () => {
                     src={image}
                     alt={`${name} illustration`}
                   />
-                  <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white sm:text-3xl">
+                  <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white xl:text-[28px] sm:text-3xl">
                     {name}
                     <span className="block font-light text-pricing-primary-1">{priceFrom}</span>
                   </h2>
-                  <p className="mt-2 text-lg leading-tight tracking-tight">{details}</p>
-                  <div className="mt-8 max-w-[464px]">
-                    <div className="grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-3 text-[12px] uppercase leading-none text-pricing-gray-4">
+                  <p className="mt-2 text-lg leading-tight tracking-tight xl:text-base">
+                    {details}
+                  </p>
+                  <div className="mt-8 max-w-[464px] xl:mt-5">
+                    <div className="grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-2.5 text-[12px] uppercase leading-none text-pricing-gray-4 xl:gap-x-[20%]">
                       <span>Region</span>
                       <span>Price</span>
                     </div>
                     {prices.map(({ name, price, unit }, index) => (
                       <div
-                        className="text-gray-94 grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-3 text-[15px] leading-none sm:gap-x-10"
+                        className="text-gray-94 grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-[15px] text-[15px] leading-none xl:gap-x-[20%] xl:py-3.5 sm:gap-x-10"
                         key={index}
                       >
                         <span>{name}</span>

@@ -101,7 +101,7 @@ const items = [
 ];
 
 const gridClassName =
-  'grid grid-cols-[32%_auto_16%] gap-x-10 xl:grid-cols-[29%_auto_19%] lg:grid-cols-[28%_auto_16%]';
+  'grid grid-cols-[32%_auto_16%] gap-x-10 xl:grid-cols-[31%_auto_20%] lg:grid-cols-[28%_auto_16%]';
 
 const Estimates = () => {
   const [selected, setSelected] = useState(items[0].type);
@@ -111,10 +111,10 @@ const Estimates = () => {
   };
 
   return (
-    <section className="estimates safe-paddings mt-[22rem] 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20">
+    <section className="estimates safe-paddings mt-[22rem] 2xl:mt-40 xl:mt-14 lg:mt-24 md:mt-20">
       <Container size="mdDoc">
-        <div className="mx-auto flex max-w-[1220px] items-center justify-between gap-4 lg:flex-col lg:gap-16">
-          <div className="w-[48%] lg:flex lg:w-full lg:flex-col lg:items-center">
+        <div className="mx-auto flex max-w-[1220px] items-center justify-between gap-4 xl:justify-start xl:gap-[6%] lg:flex-col lg:gap-16">
+          <div className="w-[48%] xl:w-[45%] lg:flex lg:w-full lg:flex-col lg:items-center">
             <Heading
               className="lg:text-center"
               badge="Billing & usage estimates"
@@ -136,8 +136,8 @@ const Estimates = () => {
               East (Ohio) region
             </p>
           </div>
-          <div className="w-[38%] xl:overflow-x-hidden lg:w-full">
-            <ul className="flex gap-8 py-2 lg:mx-auto lg:max-w-[584px] lg:px-6 md:max-w-full md:px-0 xs:gap-4">
+          <div className="w-[38%] xl:w-[49%] xl:overflow-x-hidden lg:w-full">
+            <ul className="flex gap-8 py-2 xl:pt-3 xl:pb-1 lg:mx-auto lg:max-w-[584px] lg:px-6 md:max-w-full md:px-0 xs:gap-4">
               {items.map(({ type, icon: Icon }, index) => (
                 <li key={index}>
                   <button
@@ -214,7 +214,7 @@ const Estimates = () => {
                           {metrics.map(({ name, usage, details, price }, index) => (
                             <div
                               className={clsx(
-                                'text-primary-94 border-b border-[rgba(255,255,255,0.06)] py-2.5 text-[15px] tracking-[-0.06em]',
+                                'text-primary-94 border-b border-[rgba(255,255,255,0.06)] py-[12px] text-[15px] tracking-[-0.06em] xl:py-3',
                                 gridClassName
                               )}
                               key={index}
@@ -225,9 +225,9 @@ const Estimates = () => {
                                   {usage} <span className="text-pricing-gray-7">/month</span>
                                 </span>
                                 {details && (
-                                  <span className="relative">
+                                  <span className="relative xl:hidden">
                                     <span
-                                      className="group peer cursor-pointer xl:hidden"
+                                      className="group peer cursor-pointer"
                                       data-tooltip-id={`${name}-${index}`}
                                       data-tooltip-content={details}
                                     >
@@ -248,19 +248,19 @@ const Estimates = () => {
                                         alt=""
                                       />
                                     </span>
-                                    <span className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-pricing-gray-2 p-2 text-sm font-normal leading-none text-pricing-gray-6 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 xl:static xl:mt-1.5 xl:translate-y-0 xl:whitespace-normal xl:bg-transparent	 xl:p-0 xl:opacity-100">
+                                    <span className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-pricing-gray-2 p-2 text-sm font-normal leading-none text-pricing-gray-6 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 xl:static xl:mt-1.5 xl:translate-y-0 xl:whitespace-normal xl:bg-transparent xl:p-0 xl:opacity-100">
                                       {details}
                                     </span>
-                                    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-4 border-r-4 border-t-4 border-transparent border-r-pricing-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 xl:hidden" />
+                                    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-4 border-r-4 border-t-4 border-transparent border-r-pricing-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100" />
                                   </span>
                                 )}
                               </span>
-                              <span className="text-[15px] text-[#EFEFF0]">{price}</span>
+                              <span className="text-[15px] text-pricing-gray-94">{price}</span>
                             </div>
                           ))}
                           <div className={clsx('mt-2 text-base font-medium', gridClassName)}>
                             <span className="col-span-2 inline-flex flex-col">
-                              <span className="uppercase text-[#EFEFF0]">Total price:</span>
+                              <span className="uppercase text-pricing-gray-94">Total price:</span>
                             </span>
                             <span className="relative tracking-[0.04em] text-pricing-primary-1">
                               ${formattedPriceWithCommas}

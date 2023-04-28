@@ -58,7 +58,7 @@ const Faq = () => (
       <Heading className="text-center lg:inline" tag="h2" size="2sm">
         Frequently Asked Questions
       </Heading>
-      <ul className="mt-12 xl:mt-3.5">
+      <ul className="mt-12 xl:mx-auto xl:mt-9 xl:max-w-3xl">
         {items.map((item, index) => (
           <Item {...item} key={index} index={index} />
         ))}

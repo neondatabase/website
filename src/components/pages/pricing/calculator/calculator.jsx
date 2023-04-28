@@ -109,16 +109,21 @@ const Calculator = () => {
   );
 
   return (
-    <section className="faq safe-paddings mb-40 mt-[17.25rem] 2xl:my-32 xl:my-28 lg:my-24 md:my-20">
+    <section className="faq safe-paddings mb-40 mt-[17.25rem] xl:mt-40 xl:mb-36 lg:my-24 md:my-20">
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
-          <Heading className="text-center lg:inline" badge="Pricing Calculator" tag="h2" size="2sm">
+          <Heading
+            className="text-center xl:mx-auto xl:max-w-2xl lg:inline"
+            badge="Pricing Calculator"
+            tag="h2"
+            size="2sm"
+          >
             Calculate your monthly bill based <wbr /> on compute time and storage
           </Heading>
         </div>
-        <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[20px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
+        <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[20px] xl:mt-11 xl:gap-x-[21px] xl:gap-y-[21px] lg:grid-cols-1 sm:mt-6">
           <div className="row-span-1 flex rounded-[10px] bg-pricing-gray-10 md:flex-col">
-            <div className="grow p-5 xl:px-6 xl:py-5 md:px-5 md:pb-3">
+            <div className="grow p-5 pb-0 xl:px-6 xl:py-5 md:px-5 md:pb-3">
               <h3 className="text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
                 Compute time
               </h3>
@@ -199,7 +204,7 @@ const Calculator = () => {
                   <span className="text-pricing-gray-7">per day</span>
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-pricing-gray-2 pb-2 pt-5 text-pricing-gray-94 ">
+              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-pricing-gray-2 pt-5 text-pricing-gray-94 ">
                 <p className="text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
                   <span className="text-pricing-primary-1">${computeTimeCost.toFixed(2)} </span>
@@ -213,7 +218,7 @@ const Calculator = () => {
           </div>
 
           <div className="row-span-1 flex rounded-[10px] bg-pricing-gray-10 md:flex-col">
-            <div className="grow p-5 xl:px-6 xl:py-5 md:px-5 md:pb-3">
+            <div className="grow p-5 pb-0 xl:px-6 xl:py-5 md:px-5 md:pb-3">
               <h3 className="text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
                 Project storage
               </h3>
@@ -243,7 +248,7 @@ const Calculator = () => {
                   {storageValue} GiB
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-pricing-gray-2 pb-2 pt-5 text-pricing-gray-94">
+              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-pricing-gray-2 pt-5 text-pricing-gray-94">
                 <p className="text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
                   <span className="text-pricing-primary-1">${storageCost.toFixed(2)} </span>
@@ -256,7 +261,7 @@ const Calculator = () => {
             </div>
           </div>
 
-          <div className="row-span-1 rounded-[10px] bg-pricing-gray-10 p-5 md:flex-col md:p-0">
+          <div className="row-span-1 rounded-[10px] bg-pricing-gray-10 p-5 pb-0 md:flex-col md:p-0">
             <div className="min-h-[202px] md:px-5 md:py-5 [@media(min-width:428px)]:min-h-[151px] [@media(min-width:606px)]:min-h-[auto]">
               <h3 className="flex items-center text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
                 Data transfer and Written data
@@ -385,15 +390,15 @@ const Calculator = () => {
             <h3 className="text-lg leading-none tracking-tight text-white lg:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
-            <p className="mt-6 flex items-end gap-2 leading-none text-white xl:mt-10 lg:col-start-2 sm:col-start-1 sm:mt-8">
+            <p className="mt-6 flex items-end gap-2 leading-none text-white xl:mt-7 lg:col-start-2 sm:col-start-1 sm:mt-8">
               <span className="text-[56px] font-light tracking-[-0.06em] text-secondary-2">
                 {estimatedPrice}
               </span>
               <span className="mb-1 block text-[26px] tracking-normal">/mo</span>
             </p>
-            <p className="relative lg:col-start-2 lg:justify-self-start sm:col-start-1">
+            <p className="relative mb-7 mt-11 xl:mt-10 xl:mb-8 lg:col-start-2 lg:justify-self-start sm:col-start-1">
               <Button
-                className="relative z-20 mb-7 mt-11 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg font-medium xl:mt-4 lg:ml-0 lg:mt-8 lg:w-[220px]"
+                className="relative z-20 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg font-medium lg:ml-0 lg:mt-8 lg:w-[220px]"
                 theme="primary"
                 to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
                 size="sm"
@@ -401,7 +406,7 @@ const Calculator = () => {
                 {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
               </Button>
               <img
-                className="pointer-events-none absolute left-1/2 top-2 z-10 min-w-[120%] -translate-x-1/2 lg:top-0"
+                className="pointer-events-none absolute left-1/2 -top-8 z-10 min-w-[120%] -translate-x-1/2 lg:top-0"
                 src={lines}
                 width={296}
                 height={134}
@@ -409,7 +414,7 @@ const Calculator = () => {
                 alt=""
               />
             </p>
-            <ul className="my-12 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-pricing-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-start sm:row-span-1 sm:mx-auto sm:my-8 sm:ml-0 sm:max-w-[260px]">
+            <ul className="my-9 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-pricing-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-start sm:row-span-1 sm:mx-auto sm:my-8 sm:ml-0 sm:max-w-[260px]">
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" aria-hidden />
                 <span className="mr-1">{computeUnits}</span>
@@ -464,7 +469,7 @@ const Tooltip = ({ content, id }) => (
     <span className="pointer-events-none absolute	left-[calc(100%+12px)] top-1/2 z-50 w-[14rem] -translate-y-1/2 rounded-[4px] bg-pricing-gray-2 px-3 py-[10px] text-[12px] font-normal leading-dense tracking-wide text-pricing-gray-9 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:hidden lg:translate-y-0 lg:bg-transparent lg:p-0">
       {content}
     </span>
-    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-8 border-r-8 border-t-8 border-transparent border-r-pricing-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
+    <span className="absolute left-[calc(100%+8px)] top-1/2 h-4 w-4 -translate-y-1/2 rotate-45 rounded bg-pricing-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
   </span>
 );
 

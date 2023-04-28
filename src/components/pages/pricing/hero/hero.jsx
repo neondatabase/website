@@ -65,7 +65,7 @@ const items = [
 ];
 
 const Hero = () => (
-  <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-32 lg:pt-[50px]">
+  <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[50px]">
     <Container className="flex flex-col items-center" size="mdDoc">
       <Heading
         className="inline-flex flex-col text-center font-medium !leading-none tracking-tighter"
@@ -75,16 +75,16 @@ const Hero = () => (
         <span className="text-pricing-primary-1">Start Free.</span>{' '}
         <span>Only pay for what you use.</span>
       </Heading>
-      <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug 2xl:mt-5 xl:max-w-[616px] xl:text-base lg:max-w-[464px]">
+      <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[590px] xl:text-lg lg:max-w-[464px]">
         Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible
         usage and volume-based plans.
       </p>
-      <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-10 lg:mt-7">
-        <ul className="relative z-10 grid grid-cols-3 gap-x-11 xl:gap-x-8 lg:grid-cols-2 lg:gap-y-8 md:grid-cols-1">
+      <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-12 lg:mt-7">
+        <ul className="relative z-10 grid grid-cols-3 gap-x-11 xl:gap-x-6 lg:grid-cols-2 lg:gap-y-8 md:grid-cols-1">
           {items.map(({ type, price, description, features, button }, index) => (
             <li
               className={clsx(
-                'flex flex-col rounded-[10px] px-7 pb-5 pt-5 xl:p-5 lg:p-7',
+                'flex flex-col rounded-[10px] px-7 py-5 xl:p-5 xl:pb-3 lg:p-7',
                 type === 'Pro' ? 'border border-pricing-primary-1' : 'bg-pricing-gray-10',
                 type === 'Free Tier' && 'lg:order-1 lg:col-span-full'
               )}
@@ -98,40 +98,39 @@ const Hero = () => (
             >
               <div
                 className={clsx(
-                  'mb-6 flex min-h-[330px] flex-col border-b border-dashed border-pricing-gray-2 pb-4 xl:mb-5 xl:min-h-[350px] md:min-h-max',
+                  'mb-6 flex min-h-[330px] flex-col border-b border-dashed border-pricing-gray-2 pb-4 xl:mb-6 xl:min-h-[348px] md:min-h-max',
                   type === 'Free Tier' ? 'lg:min-h-max' : 'lg:min-h-[345px]'
                 )}
               >
                 <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
                   {type}
                 </span>
-                <h3 className="mt-7 text-[36px] font-light leading-none tracking-tighter lg:text-[32px]">
+                <h3 className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px]">
                   {price}
                 </h3>
                 <Button
-                  className="relative mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight hover:!bg-[var(--hoverColor)] lg:max-w-[304px] sm:max-w-none"
+                  className="relative mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight hover:!bg-[var(--hoverColor)] xl:mt-8 lg:max-w-[304px] sm:max-w-none"
                   theme="primary"
                   to={button.url}
                   size="sm"
                 >
                   {button.text}
-                  <img
-                    className={clsx(
-                      type === 'Pro' ? '-top-8' : 'hidden',
-                      'pointer-events-none absolute left-1/2 -z-10 min-w-[120%] -translate-x-1/2 sm:min-w-full'
-                    )}
-                    src={lines}
-                    width={376}
-                    height={134}
-                    alt=""
-                  />
+                  {type === 'Pro' && (
+                    <img
+                      className="pointer-events-none absolute -top-8 left-1/2 -z-10 min-w-[120%] -translate-x-1/2 sm:min-w-full"
+                      src={lines}
+                      width={376}
+                      height={134}
+                      alt=""
+                    />
+                  )}
                 </Button>
                 <p className="mt-9 font-light leading-snug tracking-tight text-pricing-gray-7 lg:mt-7">
                   {description}
                 </p>
               </div>
               <div className="mt-auto flex grow flex-col">
-                <ul className="mb-8 flex flex-col space-y-4 xl:mb-5 lg:mb-7">
+                <ul className="mb-4 flex flex-col space-y-4 xl:mb-5 lg:mb-7">
                   {features.map(({ title, label }, index) => (
                     <li className="relative pl-6 leading-tight tracking-tight" key={index}>
                       <CheckIcon
