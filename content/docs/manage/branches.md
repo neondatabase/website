@@ -57,7 +57,23 @@ To view the branches in a Neon project:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table to view details about the branch.
-![Branch details](/docs/manage/branch_details.png)
+
+Branch details shown on the branch page include:
+
+- **ID**: The branch ID. Branch IDs have a `br-` prefix.
+- **Created**: The date and time the branch was created.
+- **Current Data Size**: The current data size of the branch.
+- **Active Time**: The amount of wall-clock time the branch's compute endpoint has been active during the current billing period.
+- **Compute Time**: The amount of Compute Unit (CU) hours spent by the branch's compute endpoint in the current billing period.
+- **Written Data**: The amount of data changes written from the branch's compute endpoint to storage in the current billing period.
+- **Data Transfer**: The amount of data transferred out of the branch (egress) in the current billing period.
+- **Parent Branch**: The branch from which this branch was created.
+- **Date**: The date the parent branch was created.
+- **Time**: The time the parent branch was created.
+
+For information more information about **Active Time**, **Compute Time**, **Written Data**, and **Data Transfer** usage metrics, refer to the [Billing] section.
+
+The branch details page also includes details about the compute endpoint associated with the branch. For more information, see [View a compute endpoint](/docs/manage/endpoints#view-a-compute-endpoint).
 
 ## Rename a branch
 
