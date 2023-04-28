@@ -113,8 +113,7 @@ const Calculator = () => {
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <Heading className="text-center lg:inline" badge="Pricing Calculator" tag="h2" size="2sm">
-            Calculate your monthly bill based <br className="sm:hidden" /> on compute time and
-            storage
+            Calculate your monthly bill based <wbr /> on compute time and storage
           </Heading>
         </div>
         <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[20px] xl:mt-10 lg:grid-cols-1 sm:mt-6">
@@ -412,22 +411,22 @@ const Calculator = () => {
             </p>
             <ul className="my-12 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-pricing-black lg:col-span-1 lg:row-span-3 lg:row-start-1 lg:my-0 lg:self-start sm:row-span-1 sm:mx-auto sm:my-8 sm:ml-0 sm:max-w-[260px]">
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
-                <CheckIcon className="mr-2 w-4 text-secondary-2" />
+                <CheckIcon className="mr-2 w-4 text-secondary-2" aria-hidden />
                 <span className="mr-1">{computeUnits}</span>
                 <span>compute units</span>
               </li>
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
-                <CheckIcon className="mr-2 w-4 text-secondary-2" />
+                <CheckIcon className="mr-2 w-4 text-secondary-2" aria-hidden />
                 <span className="mr-1">{storageValue} GiB</span>
                 <span>storage</span>
               </li>
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] lg:pl-0 sm:pl-0">
-                <CheckIcon className="mr-2 w-4 text-secondary-2" />
+                <CheckIcon className="mr-2 w-4 text-secondary-2" aria-hidden />
                 {isAdvanced && <span className="mr-1">{writtenDataValue} GiB</span>}
                 <span>written data</span>
               </li>
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white lg:pl-0 sm:pl-0">
-                <CheckIcon className="mr-2 w-4 text-secondary-2" />
+                <CheckIcon className="mr-2 w-4 text-secondary-2" aria-hidden />
                 {isAdvanced && <span className="mr-1">{dataTransferValue} GiB</span>}
                 <span>data transfer</span>
               </li>
