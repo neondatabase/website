@@ -11,7 +11,7 @@ import lines from 'images/pages/pricing/green-lines-small.svg';
 const CTA = () => (
   <section className="safe-paddings pt-16">
     <Container className="grid grid-cols-12 items-center gap-4" size="md">
-      <div className="col-span-4 col-start-2 mb-24 xl:col-span-5 xl:col-start-1 lg:col-span-full">
+      <div className="z-10 col-span-4 col-start-2 mb-24 xl:col-span-5 xl:col-start-1 lg:col-span-full">
         <Heading className="whitespace-nowrap lg:text-center" tag="h2" size="2sm">
           Still have a <span className="text-pricing-primary-1">question?</span>
         </Heading>

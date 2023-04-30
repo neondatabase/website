@@ -9,7 +9,7 @@ const styles = {
     lg: 'text-[72px] font-bold leading-tight 2xl:text-6xl xl:text-[56px] xl:leading-dense md:text-[44px]',
     md: 't-6xl font-bold leading-dense',
     '2sm':
-      'text-[56px] font-medium leading-none tracking-tighter xl:text-[44px] lg:text-[36px] lg:leading-tight',
+      'text-[56px] font-medium leading-none tracking-tighter xl:text-[44px] lg:text-[40px] lg:leading-tight sm:text-[30px]',
     sm: 't-4xl font-semibold',
     xs: 't-base font-bold tracking-wider uppercase',
   },
@@ -20,7 +20,7 @@ const styles = {
 };
 
 const HeadingBadge = ({ text }) => (
-  <span className="nowrap mb-2 inline-block rounded-full bg-pricing-primary-4 px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1">
+  <span className="nowrap mb-2 inline-block rounded-full bg-pricing-primary-4 px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1 lg:mb-[4px]">
     {text}
   </span>
 );
