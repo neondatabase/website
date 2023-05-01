@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-The Neon **Pro** plan is a usage-based plan intended for small to medium teams or projects that require more compute and storage than are provided with the [Neon Free Tier](../introduction/technical-preview-free-tier). Because the Pro plan is usage-based, you never have to worry about over-provisioning and you only pay for what you use. If you find that the Pro plan is more than you need, you can easily revert back to the Free Tier in just a few clicks. Our intention is to make upgrading to Pro risk-free and hassle-free as possible for users who want to try it. The Pro plan has no fixed contract or obligations.
+The Neon **Pro** plan is a usage-based plan intended for small to medium teams or projects requiring more compute and storage than the [Neon Free Tier](../introduction/technical-preview-free-tier) provides. Because the Pro plan is usage-based, you never have to worry about over-provisioning, and you only pay for what you use. If you find that the Pro plan is more than you need, you can easily revert back to the Free Tier in just a few clicks. Our intention is to make upgrading to Pro risk-free and hassle-free as possible for users who want to try it. The Pro plan has no fixed contract or obligations.
 
 The Pro plan bills for usage on a monthly basis. For information about our billing metrics and prices, please refer to our [Billing](../introduction/billing) page. For a calculator you can use to estimate monthly costs, see the [Pricing](https://neon.tech/pricing) page on our website. If you still have questions or need help estimating monthly costs, please do not hesitate to reach out to our [Sales](https://neon.tech/contact-sales) team. We're ready to help.
 
