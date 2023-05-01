@@ -166,7 +166,7 @@ const Estimates = () => {
               ))}
             </ul>
             <Container
-              className="no-scrollbars mt-7 2xl:!px-0 md:-mx-4 md:overflow-x-auto md:px-0"
+              className="no-scrollbars mt-7 2xl:!px-0 md:-mx-4 md:overflow-x-auto md:overflow-y-hidden md:px-0"
               size="mdDoc"
             >
               <LazyMotion features={domAnimation}>

@@ -123,7 +123,7 @@ const Calculator = () => {
         </div>
         <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[20px] xl:mt-11 xl:gap-x-[20px] lg:grid-cols-1 sm:mt-6">
           <div className="row-span-1 flex rounded-[10px] bg-pricing-gray-10 md:flex-col">
-            <div className="grow p-5 pb-0 xl:px-6 xl:pt-5 xl:pb-7 md:px-5 md:pb-3">
+            <div className="grow p-5 xl:px-6 xl:py-5 md:px-5">
               <h3 className="text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
                 Compute time
               </h3>
@@ -218,7 +218,7 @@ const Calculator = () => {
           </div>
 
           <div className="row-span-1 flex rounded-[10px] bg-pricing-gray-10 md:flex-col">
-            <div className="grow p-5 pb-0 xl:px-6 xl:pt-5 xl:pb-7 md:px-5 md:pb-3">
+            <div className="grow p-5 xl:px-6 xl:py-5 md:px-5">
               <h3 className="text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
                 Project storage
               </h3>
@@ -261,7 +261,7 @@ const Calculator = () => {
             </div>
           </div>
 
-          <div className="row-span-1 rounded-[10px] bg-pricing-gray-10 p-5 pb-0 xl:px-6 xl:pt-5 xl:pb-7 md:flex-col md:p-0">
+          <div className="row-span-1 rounded-[10px] bg-pricing-gray-10 p-5 xl:px-6 xl:py-5 md:flex-col md:p-0">
             <div className="min-h-[202px] md:px-5 md:py-5 [@media(min-width:428px)]:min-h-[151px] [@media(min-width:606px)]:min-h-[auto]">
               <h3 className="flex items-center text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
                 Data transfer and Written data
@@ -375,7 +375,7 @@ const Calculator = () => {
                 </AnimatePresence>
               </LazyMotion>
             </div>
-            <div className="flex justify-between border-t border-dashed border-pricing-gray-2 pt-5 text-pricing-gray-94 xl:pb-0 md:px-5 md:pb-5">
+            <div className="flex justify-between border-t border-dashed border-pricing-gray-2 pt-5 text-pricing-gray-94 md:px-5 md:py-5">
               <p className="text-sm font-medium leading-none">
                 <span className="uppercase">Subtotal: </span>
                 <span className="text-pricing-primary-1">
