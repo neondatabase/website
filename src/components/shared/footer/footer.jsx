@@ -15,7 +15,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
   return (
     <footer
       className={clsx(
-        'safe-paddings mt-auto overflow-hidden dark:bg-black dark:text-white',
+        'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-black dark:text-white',
         !isDarkTheme && withTopBorder && 'border-t border-gray-7 dark:border-gray-2',
         isDarkTheme && withTopBorder && 'border-t border-gray-2',
         // eslint-disable-next-line no-nested-ternary

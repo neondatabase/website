@@ -196,7 +196,7 @@ const Metrics = () => {
           <Heading className="text-center" badge="Metrics" tag="h2" size="2sm">
             Neon charges on <span className="text-pricing-primary-1">4 metrics</span>
           </Heading>
-          <p className="mt-4 text-lg font-light leading-snug xl:text-base lg:mt-1 lg:text-center">
+          <p className="mt-4 text-lg font-light leading-snug xl:text-base lg:mt-2 lg:text-center">
             Refer to our{' '}
             <Link
               className="!border-b !border-pricing-primary-3 font-normal hover:!border-pricing-primary-1"
@@ -227,7 +227,7 @@ const Metrics = () => {
                   key={index}
                 >
                   <Image
-                    className="my-14 hidden max-w-full md:mx-auto md:block"
+                    className="md:my-13 my-14 hidden max-w-full md:mx-auto md:block md:max-w-[80%]"
                     width={590}
                     height={830}
                     src={image}

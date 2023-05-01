@@ -101,7 +101,7 @@ const items = [
 ];
 
 const gridClassName =
-  'grid grid-cols-[32%_auto_16%] gap-x-10 xl:grid-cols-[31%_auto_20%] lg:grid-cols-[28%_auto_16%]';
+  'grid grid-cols-[32%_auto_16%] gap-x-10 xl:grid-cols-[31%_auto_20%] lg:grid-cols-[30%_auto_18%]';
 
 const Estimates = () => {
   const [selected, setSelected] = useState(items[0].type);
@@ -111,20 +111,15 @@ const Estimates = () => {
   };
 
   return (
-    <section className="estimates safe-paddings mt-[22rem] 2xl:mt-40 xl:mt-14 lg:mt-24 md:mt-20">
+    <section className="estimates safe-paddings mt-[22rem] 2xl:mt-40 xl:mt-14 lg:mt-0 md:mt-16">
       <Container size="mdDoc">
-        <div className="mx-auto flex max-w-[1220px] items-center justify-between gap-4 xl:justify-start xl:gap-[6%] lg:flex-col lg:gap-16">
-          <div className="w-[48%] xl:w-[45%] lg:flex lg:w-full lg:flex-col lg:items-center">
-            <Heading
-              className="lg:text-center"
-              badge="Billing & usage estimates"
-              tag="h2"
-              size="2sm"
-            >
+        <div className="mx-auto flex max-w-[1220px] items-center justify-between gap-4 xl:justify-start xl:gap-[6%] lg:gap-[2%] md:flex-wrap md:gap-8">
+          <div className="w-[48%] xl:w-[45%] lg:flex lg:w-[43%] lg:flex-col lg:items-start md:w-full">
+            <Heading badge="Billing & usage estimates" tag="h2" size="2sm">
               <span className="text-pricing-primary-1">Each user is unique.</span> However, we can
               give you some estimates.
             </Heading>
-            <p className="mt-4 text-lg font-light leading-snug xl:text-base lg:text-center">
+            <p className="mt-4 text-lg font-light leading-snug xl:text-base lg:mt-3">
               <Link
                 className="!border-b !border-pricing-primary-3 font-normal hover:!border-pricing-primary-1"
                 theme="underline-primary-1"
@@ -136,8 +131,8 @@ const Estimates = () => {
               East (Ohio) region
             </p>
           </div>
-          <div className="w-[38%] xl:w-[49%] xl:overflow-x-hidden lg:w-full">
-            <ul className="flex gap-8 py-2 xl:pt-3 xl:pb-1 lg:mx-auto lg:max-w-[584px] lg:px-6 md:max-w-full md:px-0 xs:gap-4">
+          <div className="w-[38%] xl:w-[49%] xl:overflow-x-hidden lg:w-[55%] md:w-full">
+            <ul className="flex gap-8 py-2 xl:pt-3 xl:pb-1 lg:mx-auto lg:max-w-[584px] lg:pl-6 md:max-w-full md:px-0 xs:gap-4">
               {items.map(({ type, icon: Icon }, index) => (
                 <li key={index}>
                   <button
@@ -200,7 +195,7 @@ const Estimates = () => {
                         }}
                         transition={{ ease: [0.25, 0.1, 0, 1] }}
                       >
-                        <div className="mx-auto w-full xl:max-w-[616px] lg:max-w-[584px] lg:p-6 lg:pb-8 md:min-w-[584px] md:max-w-none md:px-4">
+                        <div className="mx-auto w-full xl:max-w-[616px] lg:max-w-[584px] lg:pl-6 md:min-w-[375px] md:px-4">
                           <div
                             className={clsx(
                               'border-b border-[rgba(255,255,255,0.06)] pb-3 text-[12px] uppercase leading-none tracking-wider text-pricing-gray-4',

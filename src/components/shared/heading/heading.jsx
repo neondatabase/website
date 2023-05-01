@@ -9,7 +9,7 @@ const styles = {
     lg: 'text-[72px] font-bold leading-tight 2xl:text-6xl xl:text-[56px] xl:leading-dense md:text-[44px]',
     md: 't-6xl font-bold leading-dense',
     '2sm':
-      'text-[56px] font-medium leading-none tracking-tighter xl:text-[44px] lg:text-[40px] lg:leading-tight sm:text-[30px]',
+      'text-[56px] font-medium leading-none tracking-tighter xl:text-[44px] lg:text-[40px] sm:text-[30px]',
     sm: 't-4xl font-semibold',
     xs: 't-base font-bold tracking-wider uppercase',
   },
