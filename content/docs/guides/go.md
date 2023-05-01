@@ -38,7 +38,6 @@ package main
 import (
     "database/sql"
     "fmt"
-    "log"
 
     _ "github.com/lib/pq"
 )
@@ -47,23 +46,15 @@ func main() {
     connStr := "user=<user> password=<password> dbname=neondb host=<hostname>"
     db, err := sql.Open("postgres", connStr)
     if err != nil {
-        log.Fatal(err)
+        panic(err)
     }
     defer db.Close()
-
-    rows, err := db.Query("select version()")
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer rows.Close()
-
+    
     var version string
-    for rows.Next() {
-        err := rows.Scan(&version)
-        if err != nil {
-            log.Fatal(err)
-        }
+    if err := db.QueryRow("select version()").Scan(&version); err != nil {
+        panic(err)
     }
+
     fmt.Printf("version=%s\n", version)
 }
 ```
