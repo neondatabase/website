@@ -16,6 +16,44 @@
   .label-secondary-2 {
     @apply rounded-[40px] bg-secondary-2 py-2 px-4 text-xs font-bold uppercase leading-none text-black;
   }
+
+  .pricing-card {
+    position: relative;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      transform-origin: center;
+      pointer-events: none;
+    }
+
+    &:before {
+      border-top: 1px solid #00e599;
+      border-bottom: 1px solid #00e599;
+      transform: scale3d(0, 1, 1);
+      border-radius: 10px;
+    }
+
+    &:after {
+      border-left: 1px solid #00e599;
+      border-right: 1px solid #00e599;
+      transform: scale3d(1, 0, 1);
+      border-radius: 10px;
+    }
+  }
+
+  .pricing-active-card {
+    &:before,
+    &:after {
+      transform: scale3d(1, 1, 1);
+      transition: transform 0.5s;
+    }
+  }
 }
 
 @layer utilities {

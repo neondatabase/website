@@ -142,9 +142,11 @@ module.exports = {
               '-1px -1px 0 transparent, 1px -1px 0 transparent, -1px 1px 0 transparent, 1px 1px 0 transparent',
           },
         },
+        'neon-border-light': {},
       }),
       animation: {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        'neon-border-light': 'neon-border-light 0.4s ease',
       },
       typography: () => ({
         DEFAULT: {

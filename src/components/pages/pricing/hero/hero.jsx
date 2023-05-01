@@ -1,10 +1,12 @@
 'use client';
 
 import clsx from 'clsx';
+import { useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import lines from 'images/pages/pricing/green-lines.svg';
@@ -64,106 +66,117 @@ const items = [
   },
 ];
 
-const Hero = () => (
-  <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-[40px]">
-    <Container className="flex flex-col items-center" size="mdDoc">
-      <Heading
-        className="inline-flex flex-col text-center font-medium !leading-none tracking-tighter md:text-4xl"
-        tag="h1"
-        size="lg"
-      >
-        <span className="text-pricing-primary-1">Start Free.</span>{' '}
-        <span>Only pay for what you use.</span>
-      </Heading>
-      <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
-        Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible
-        usage and volume-based plans.
-      </p>
-      <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-12 md:mt-9">
-        <ul className="relative z-10 grid grid-cols-3 gap-x-11 xl:gap-x-6 lg:grid-cols-2 lg:gap-x-4 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
-          {items.map(({ type, price, description, features, button }, index) => (
-            <li
-              className={clsx(
-                'flex flex-col rounded-[10px] px-7 py-5 xl:p-5 xl:pb-3 lg:p-5',
-                type === 'Pro'
-                  ? 'border border-pricing-primary-1 lg:-order-1 lg:col-span-full'
-                  : 'bg-pricing-gray-10'
-              )}
-              style={{
-                '--accentColor':
-                  type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
-                '--hoverColor':
-                  type === 'Free Tier' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
-              }}
-              key={index}
-            >
-              <div className="mb-6 flex min-h-[330px] flex-col border-b border-dashed border-pricing-gray-2 pb-4 xl:mb-7 xl:min-h-[348px] lg:min-h-max">
-                <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
-                  {type}
-                </span>
-                <h3 className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px]">
-                  {price}
-                </h3>
-                <Button
-                  className={clsx(
-                    'relative mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight hover:!bg-[var(--hoverColor)] xl:mt-8 lg:max-w-[304px] sm:max-w-none',
-                    type === 'Pro' ? 'lg:absolute lg:right-8 lg:top-0 md:relative md:right-0' : ''
-                  )}
-                  theme="primary"
+const Hero = () => {
+  const [activeItemIndex, setActiveItemIndex] = useState(1);
+
+  return (
+    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-[40px]">
+      <Container className="flex flex-col items-center" size="mdDoc">
+        <Heading
+          className="inline-flex flex-col text-center font-medium !leading-none tracking-tighter md:text-4xl"
+          tag="h1"
+          size="lg"
+        >
+          <span className="text-pricing-primary-1">Start Free.</span>{' '}
+          <span>Only pay for what you use.</span>
+        </Heading>
+        <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
+          Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible
+          usage and volume-based plans.
+        </p>
+        <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-12 md:mt-9">
+          <ul className="relative z-10 grid grid-cols-3 gap-x-11 xl:gap-x-6 lg:grid-cols-2 lg:gap-x-4 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
+            {items.map(({ type, price, description, features, button }, index) => (
+              <li
+                className={clsx(
+                  'pricing-card group rounded-[10px]',
+                  activeItemIndex === index && 'pricing-active-card',
+                  type === 'Pro' ? 'lg:-order-1 lg:col-span-full' : 'bg-pricing-gray-10'
+                )}
+                style={{
+                  '--accentColor':
+                    type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
+                  '--hoverColor':
+                    type === 'Free Tier' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
+                }}
+                key={index}
+                onPointerEnter={() => setActiveItemIndex(index)}
+                onPointerLeave={(e) => console.log(e)}
+              >
+                <Link
+                  className="flex min-h-full flex-col px-7 py-5 xl:p-5 xl:pb-3 lg:p-5"
                   to={button.url}
-                  size="sm"
                 >
-                  {button.text}
-                  {type === 'Pro' && (
-                    <img
-                      className="pointer-events-none absolute -top-8 left-1/2 -z-10 min-w-[120%] -translate-x-1/2 sm:min-w-full"
-                      src={lines}
-                      width={376}
-                      height={134}
-                      alt=""
-                    />
-                  )}
-                </Button>
-                <p
-                  className={clsx(
-                    'mt-9 font-light leading-snug tracking-tight text-pricing-gray-7 md:mt-9',
-                    type === 'Pro' ? 'lg:mt-5' : 'lg:min-h-[66px]'
-                  )}
-                >
-                  {description}
-                </p>
-              </div>
-              <div className="mt-auto flex grow flex-col">
-                <ul
-                  className={clsx(
-                    'mb-4 flex flex-col flex-wrap space-y-4 xl:mb-5 lg:mb-2.5',
-                    type === 'Pro'
-                      ? 'lg:max-h-28 lg:gap-x-16 lg:gap-y-4 lg:space-y-0 md:max-h-max md:gap-4'
-                      : ''
-                  )}
-                >
-                  {features.map(({ title, label }, index) => (
-                    <li className="relative pl-6 leading-tight tracking-tight" key={index}>
-                      <CheckIcon
-                        className="absolute left-0 top-[2px] h-4 w-4 text-[var(--accentColor)]"
-                        aria-hidden
-                      />
-                      <span>{title}</span>
-                      {label && (
-                        <span className="ml-2 whitespace-nowrap rounded-full bg-pricing-primary-4 px-3 py-1 align-middle text-[10px] font-semibold uppercase leading-none tracking-[0.02em] text-pricing-primary-1">
-                          {label}
-                        </span>
+                  <div className="mb-6 flex min-h-[330px] flex-col border-b border-dashed border-pricing-gray-2 pb-4 xl:mb-7 xl:min-h-[348px] lg:min-h-max">
+                    <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
+                      {type}
+                    </span>
+                    <h3 className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px]">
+                      {price}
+                    </h3>
+                    <Button
+                      className={clsx(
+                        'relative mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 lg:max-w-[304px] sm:max-w-none',
+                        type === 'Pro'
+                          ? 'lg:absolute lg:right-8 lg:top-0 md:relative md:right-0'
+                          : ''
                       )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </Container>
-  </section>
-);
+                      theme="primary"
+                      size="sm"
+                    >
+                      {button.text}
+                      {type === 'Pro' && (
+                        <img
+                          className="pointer-events-none absolute -top-8 left-1/2 -z-10 min-w-[120%] -translate-x-1/2 sm:min-w-full"
+                          src={lines}
+                          width={376}
+                          height={134}
+                          alt=""
+                        />
+                      )}
+                    </Button>
+                    <p
+                      className={clsx(
+                        'mt-9 font-light leading-snug tracking-tight text-pricing-gray-7 md:mt-9',
+                        type === 'Pro' ? 'lg:mt-5' : 'lg:min-h-[66px]'
+                      )}
+                    >
+                      {description}
+                    </p>
+                  </div>
+                  <div className="mt-auto flex grow flex-col">
+                    <ul
+                      className={clsx(
+                        'mb-4 flex flex-col flex-wrap space-y-4 xl:mb-5 lg:mb-2.5',
+                        type === 'Pro'
+                          ? 'lg:max-h-28 lg:gap-x-16 lg:gap-y-4 lg:space-y-0 md:max-h-max md:gap-4'
+                          : ''
+                      )}
+                    >
+                      {features.map(({ title, label }, index) => (
+                        <li className="relative pl-6 leading-tight tracking-tight" key={index}>
+                          <CheckIcon
+                            className="absolute left-0 top-[2px] h-4 w-4 text-[var(--accentColor)]"
+                            aria-hidden
+                          />
+                          <span>{title}</span>
+                          {label && (
+                            <span className="ml-2 whitespace-nowrap rounded-full bg-pricing-primary-4 px-3 py-1 align-middle text-[10px] font-semibold uppercase leading-none tracking-[0.02em] text-pricing-primary-1">
+                              {label}
+                            </span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Container>
+    </section>
+  );
+};
 
 export default Hero;
