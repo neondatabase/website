@@ -113,8 +113,8 @@ const Button = ({
       blur: {
         opacity: 1,
         backgroundColor: animationColor,
-        height: 16,
-        width: 16,
+        height: 26,
+        width: 26,
         x: mouseXPosition,
         y: mouseYPosition,
       },
@@ -126,11 +126,11 @@ const Button = ({
     const { left, top } = ticketRef.current.getBoundingClientRect();
 
     if (event.clientX !== null) {
-      setMouseXPosition(event.clientX - left - 8);
+      setMouseXPosition(event.clientX - left - 13);
     }
 
     if (event.clientY !== null) {
-      setMouseYPosition(event.clientY - top - 8);
+      setMouseYPosition(event.clientY - top - 13);
     }
   };
 
@@ -155,7 +155,7 @@ const Button = ({
       {...otherProps}
     >
       <motion.span
-        className="absolute top-0 left-0 rounded-full blur-lg"
+        className="absolute top-0 left-0 rounded-full blur-xl"
         variants={cursorBlurVariants}
         animate={cursorAnimationVariant}
         transition={{
