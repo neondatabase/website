@@ -71,28 +71,24 @@ const Hero = () => {
   const [activeItemIndex, setActiveItemIndex] = useState(1);
   const controls = useAnimation();
 
-  const borderLightVariants = useMemo(() => ({
+  const borderLightVariants = useMemo(
+    () => ({
       from: {
         opacity: 0,
       },
       to: {
-        opacity:
-          // eslint-disable-next-line no-nested-ternary
-          hoverCount === 0
-            ? [0, 1, 0.5, 1, 0.75, 1]
-            : hoverCount === 1
-            ? [0, 0.4, 0.2, 1, 0.5, 1]
-            : [0, 1],
+        opacity: hoverCount === 0 ? [0, 1, 0.5, 1, 0.75, 1] : [0, 0.4, 0.2, 1, 0.5, 1],
         transition: {
           ease: 'easeInOut',
-          // eslint-disable-next-line no-nested-ternary
-          duration: hoverCount === 0 ? 0.5 : hoverCount === 1 ? 1 : 0.3,
+          duration: hoverCount === 0 ? 0.5 : 1,
         },
       },
       exit: {
         opacity: 0,
       },
-    }), [hoverCount]);
+    }),
+    [hoverCount]
+  );
 
   useEffect(() => {
     controls.start('to');
@@ -130,7 +126,7 @@ const Hero = () => {
                 key={index}
                 onPointerEnter={() => {
                   setActiveItemIndex(index);
-                  setHoverCount((prev) => (prev === 2 ? 0 : prev + 1));
+                  setHoverCount((prev) => (prev === 1 ? 0 : prev + 1));
                   controls.start('to');
                 }}
               >

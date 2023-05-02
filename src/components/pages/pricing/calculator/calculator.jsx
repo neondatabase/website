@@ -1,7 +1,6 @@
 'use client';
 
 import * as Slider from '@radix-ui/react-slider';
-import clsx from 'clsx';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
@@ -154,12 +153,7 @@ const Calculator = () => {
                   <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-pricing-gray-3">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
-                  <Slider.Thumb
-                    className={clsx(
-                      'flex cursor-pointer items-center justify-center rounded-full',
-                      'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
-                    )}
-                  >
+                  <Slider.Thumb className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75">
                     <span className="h-2.5 w-1 rounded-[1px] bg-pricing-primary-1" />
                   </Slider.Thumb>
                 </Slider.Root>
@@ -190,12 +184,7 @@ const Calculator = () => {
                   <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-pricing-gray-3">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
-                  <Slider.Thumb
-                    className={clsx(
-                      'flex cursor-pointer items-center justify-center rounded-full',
-                      'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
-                    )}
-                  >
+                  <Slider.Thumb className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75">
                     <span className="h-2.5 w-1 rounded-[1px] bg-pricing-primary-1" />
                   </Slider.Thumb>
                 </Slider.Root>
@@ -235,12 +224,7 @@ const Calculator = () => {
                   <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-pricing-gray-3">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
-                  <Slider.Thumb
-                    className={clsx(
-                      'flex cursor-pointer items-center justify-center rounded-full',
-                      'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
-                    )}
-                  >
+                  <Slider.Thumb className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75">
                     <span className="h-2.5 w-1 rounded-[1px] bg-pricing-primary-1" />
                   </Slider.Thumb>
                 </Slider.Root>
