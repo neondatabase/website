@@ -7,13 +7,13 @@ isDraft: true
 
 [Vercel Storage](https://vercel.com/docs/storage) is a collection of managed storage products that you can integrate with your frontend framework. Included in this suite of products is [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres), which is serverless Postgres **powered by Neon**. 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gA8cHj3w5XI?start=241" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="796" height="447" src="https://www.youtube.com/embed/gA8cHj3w5XI?start=205" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 Vercel Postgres is currently available in [Beta](https://vercel.com/docs/concepts/release-phases#beta) on Vercel's [Pro and Hobby plans](https://vercel.com/docs/concepts/payments-and-billing/pro).
 
 With _Vercel Postgres_, creating, deleting, and managing a Postgres instance happens in the Vercel dashboard rather than the Neon Console or using the Neon API. Furthermore, you do not need a Neon account to use Vercel Postgres. Everything is managed from Vercel.
 
-Using Vercel Postgres is an alternative to using Neon directly or through the [Neon Vercel Integration](https://vercel.com/integrations/neon), which is on the Vercel Integration Marketplace.
+Vercel Postgres is an alternative to using Neon directly through one of the other Vercel integration options described in the [Vercel with Neon overview](../guides/vercel-verview).
 
 Use the following resources to get started with Vercel Postgres:
 
