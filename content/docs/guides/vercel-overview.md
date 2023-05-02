@@ -1,8 +1,8 @@
 ---
-title: Vercel with Neon overview
+title: Neon and Vercel integration overview
 subtitle: Learn about different ways you can integrate Neon and Vercel
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
 
 Neon supports several options for integrating with Vercel:

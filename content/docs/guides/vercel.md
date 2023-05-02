@@ -1,6 +1,6 @@
 ---
 title: Connect with the Neon Vercel integration
-subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel Integration and create a branch for each preview deployment
+subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel Integration
 enableTableOfContents: true
 ---
 
