@@ -70,14 +70,7 @@ const ChatWidget = () => {
   }, []);
 
   const handleExampleClick = (e) => {
-    setMessages([
-      ...messages,
-      { content: e.target.textContent, role: 'user' },
-      {
-        role: 'bot',
-        content: 'Here is an example of how to create a project:',
-      },
-    ]);
+    setMessages([...messages, { content: e.target.textContent, role: 'user' }]);
   };
 
   const handleInputChange = (e) => {
