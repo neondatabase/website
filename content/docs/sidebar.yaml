@@ -15,10 +15,12 @@
       slug: introduction/roadmap
     - title: Free Tier
       slug: introduction/technical-preview-free-tier
-    - title: Regions
-      slug: introduction/regions
+    - title: Pro plan
+      slug: introduction/pro-plan
     - title: Billing
       slug: introduction/billing
+    - title: Regions
+      slug: introduction/regions
 - title: Get started
   items:
     - title: Sign up
