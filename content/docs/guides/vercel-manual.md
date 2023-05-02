@@ -74,3 +74,7 @@ Vercel environment variables can also be configured when you first deploy an app
 ![Add Vercel environment variable settings](/docs/guides/vercel_env_settings.png)
 
 You must redeploy your application in Vercel for the environment variable settings to take effect.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
