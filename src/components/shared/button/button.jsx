@@ -1,8 +1,65 @@
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Link from 'components/shared/link';
+
+// eslint-disable-next-line react/prop-types
+const LinesIllustration = ({ color }) => (
+  <motion.span
+    className="pointer-events-none absolute -top-3/4 left-1/2 -z-10 block w-[116%] -translate-x-1/2"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+  >
+    <svg className="max-w-full" width="390" height="144" viewBox="0 0 390 144" fill="none">
+      <g filter="url(#a)" opacity=".6">
+        <path
+          fill="url(#b)"
+          d="M34 43.931C34 38.446 38.446 34 43.931 34h302.138c5.485 0 9.931 4.446 9.931 9.931C356 78.211 328.211 106 293.931 106H96.069C61.789 106 34 78.21 34 43.931Z"
+        />
+        <path
+          stroke="#0C0D0D"
+          d="M34.5 43.931a9.431 9.431 0 0 1 9.431-9.431h302.138a9.43 9.43 0 0 1 9.431 9.431c0 34.004-27.565 61.569-61.569 61.569H96.069C62.065 105.5 34.5 77.935 34.5 43.931Z"
+        />
+      </g>
+      <path
+        stroke="#0C0D0D"
+        d="M7 17.5h376M7 15.5h376M7 13.5h376M7 11.5h376M7 9.5h376M7 21.5h376M7 19.5h376M7 23.5h376M7 25.5h376M7 27.5h376M7 31.5h376M7 29.5h376M7 33.5h376M7 35.5h376M7 37.5h376M7 41.5h376M7 39.5h376M7 43.5h376M7 45.5h376M7 47.5h376M7 51.5h376M7 49.5h376M7 53.5h376M7 55.5h376M7 57.5h376M7 61.5h376M7 59.5h376M7 63.5h376M7 65.5h376M7 67.5h376M7 71.5h376M7 69.5h376M7 73.5h376M7 75.5h376M7 77.5h376M7 81.5h376M7 79.5h376M7 83.5h376M7 85.5h376M7 87.5h376M7 91.5h376M7 89.5h376M7 93.5h376M7 95.5h376M7 97.5h376M7 101.5h376M7 99.5h376M7 103.5h376M7 105.5h376M7 107.5h376M7 111.5h376M7 109.5h376M7 113.5h376M7 115.5h376M7 117.5h376M7 121.5h376M7 119.5h376M7 123.5h376M7 125.5h376M7 127.5h376M7 131.5h376M7 129.5h376M7 133.5h376M7 135.5h376M7 137.5h376M7 141.5h376M7 139.5h376M7 143.5h376"
+      />
+      <defs>
+        <linearGradient
+          id="b"
+          x1="200.963"
+          x2="200.963"
+          y1="34"
+          y2="126"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset=".789" stopColor={color} />
+          <stop offset="1" stopColor={color} stopOpacity="0" />
+        </linearGradient>
+        <filter
+          id="a"
+          width="390"
+          height="140"
+          x="0"
+          y="0"
+          colorInterpolationFilters="sRGB"
+          filterUnits="userSpaceOnUse"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+          <feGaussianBlur result="effect1_foregroundBlur_15185_26338" stdDeviation="17" />
+        </filter>
+      </defs>
+    </svg>
+    <motion.span
+      className="mx-auto block h-[1.1px] w-full bg-button-overlay bg-blend-overlay"
+      animate={{ y: [0, -144] }}
+      transition={{ ease: 'linear', duration: 4, repeat: Infinity }}
+    />
+  </motion.span>
+);
 
 const styles = {
   base: 'inline-flex items-center justify-center font-bold !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
@@ -24,6 +81,8 @@ const styles = {
 const Button = ({
   className: additionalClassName = null,
   to = null,
+  isAnimated = false,
+  animationColor = '#00E599',
   size,
   theme,
   children,
@@ -33,7 +92,12 @@ const Button = ({
 
   const Tag = to ? Link : 'button';
 
-  return (
+  return isAnimated ? (
+    <Tag className={clsx('relative', className)} to={to} {...otherProps}>
+      {children}
+      <LinesIllustration color={animationColor} />
+    </Tag>
+  ) : (
     <Tag className={className} to={to} {...otherProps}>
       {children}
     </Tag>
@@ -46,6 +110,8 @@ Button.propTypes = {
   size: PropTypes.oneOf(Object.keys(styles.size)).isRequired,
   theme: PropTypes.oneOf(Object.keys(styles.theme)).isRequired,
   children: PropTypes.node.isRequired,
+  animationColor: PropTypes.string,
+  isAnimated: PropTypes.bool,
 };
 
 export default Button;

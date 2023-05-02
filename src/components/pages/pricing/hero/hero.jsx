@@ -1,7 +1,8 @@
 'use client';
 
 import clsx from 'clsx';
-import { useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect, useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -9,7 +10,6 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
-import lines from 'images/pages/pricing/green-lines.svg';
 
 const items = [
   {
@@ -67,7 +67,36 @@ const items = [
 ];
 
 const Hero = () => {
+  const [hoverCount, setHoverCount] = useState(0);
   const [activeItemIndex, setActiveItemIndex] = useState(1);
+  const controls = useAnimation();
+
+  const borderLightVariants = useMemo(() => ({
+      from: {
+        opacity: 0,
+      },
+      to: {
+        opacity:
+          // eslint-disable-next-line no-nested-ternary
+          hoverCount === 0
+            ? [0, 1, 0.5, 1, 0.75, 1]
+            : hoverCount === 1
+            ? [0, 0.4, 0.2, 1, 0.5, 1]
+            : [0, 1],
+        transition: {
+          ease: 'easeInOut',
+          // eslint-disable-next-line no-nested-ternary
+          duration: hoverCount === 0 ? 0.5 : hoverCount === 1 ? 1 : 0.3,
+        },
+      },
+      exit: {
+        opacity: 0,
+      },
+    }), [hoverCount]);
+
+  useEffect(() => {
+    controls.start('to');
+  }, [controls]);
 
   return (
     <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-[40px]">
@@ -89,9 +118,8 @@ const Hero = () => {
             {items.map(({ type, price, description, features, button }, index) => (
               <li
                 className={clsx(
-                  'pricing-card group rounded-[10px]',
-                  activeItemIndex === index && 'pricing-active-card',
-                  type === 'Pro' ? 'lg:-order-1 lg:col-span-full' : 'bg-pricing-gray-10'
+                  'group relative rounded-[10px]',
+                  type === 'Pro' && 'lg:-order-1 lg:col-span-full'
                 )}
                 style={{
                   '--accentColor':
@@ -100,11 +128,17 @@ const Hero = () => {
                     type === 'Free Tier' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
                 }}
                 key={index}
-                onPointerEnter={() => setActiveItemIndex(index)}
-                onPointerLeave={(e) => console.log(e)}
+                onPointerEnter={() => {
+                  setActiveItemIndex(index);
+                  setHoverCount((prev) => (prev === 2 ? 0 : prev + 1));
+                  controls.start('to');
+                }}
               >
                 <Link
-                  className="flex min-h-full flex-col px-7 py-5 xl:p-5 xl:pb-3 lg:p-5"
+                  className={clsx(
+                    'relative z-10 flex min-h-full flex-col rounded-[10px] px-7 py-5 transition-colors duration-500 xl:p-5 xl:pb-3 lg:p-5',
+                    activeItemIndex !== index ? 'bg-pricing-gray-10' : 'bg-transparent'
+                  )}
                   to={button.url}
                 >
                   <div className="mb-6 flex min-h-[330px] flex-col border-b border-dashed border-pricing-gray-2 pb-4 xl:mb-7 xl:min-h-[348px] lg:min-h-max">
@@ -116,24 +150,17 @@ const Hero = () => {
                     </h3>
                     <Button
                       className={clsx(
-                        'relative mt-7 w-full border border-transparent !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 lg:max-w-[304px] sm:max-w-none',
+                        'relative mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 lg:max-w-[304px] sm:max-w-none',
                         type === 'Pro'
                           ? 'lg:absolute lg:right-8 lg:top-0 md:relative md:right-0'
                           : ''
                       )}
+                      isAnimated={activeItemIndex === index}
+                      animationColor="var(--accentColor)"
                       theme="primary"
                       size="sm"
                     >
                       {button.text}
-                      {type === 'Pro' && (
-                        <img
-                          className="pointer-events-none absolute -top-8 left-1/2 -z-10 min-w-[120%] -translate-x-1/2 sm:min-w-full"
-                          src={lines}
-                          width={376}
-                          height={134}
-                          alt=""
-                        />
-                      )}
                     </Button>
                     <p
                       className={clsx(
@@ -170,6 +197,17 @@ const Hero = () => {
                     </ul>
                   </div>
                 </Link>
+                <motion.span
+                  className={clsx(
+                    'pointer-events-none absolute top-0 left-0 z-20 h-full w-full rounded-[10px] border border-transparent transition-colors duration-300',
+                    activeItemIndex === index && 'border-[var(--accentColor)]'
+                  )}
+                  initial="from"
+                  exit="exit"
+                  variants={borderLightVariants}
+                  animate={controls}
+                  aria-hidden
+                />
               </li>
             ))}
           </ul>

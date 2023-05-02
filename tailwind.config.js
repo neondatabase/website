@@ -112,6 +112,7 @@ module.exports = {
         tooltip: '0px 2px 20px rgba(0, 0, 0, 0.3)',
       },
       backgroundImage: () => ({
+        'button-overlay': 'linear-gradient(0deg, transparent 0%, #0C0D0D 100%);',
         'community-light':
           'radial-gradient(100% 2244.95% at 100% 100%, rgba(217, 238, 242, 0.5) 0%, rgba(217, 238, 242, 0.1) 70.08%);',
         'community-dark':
