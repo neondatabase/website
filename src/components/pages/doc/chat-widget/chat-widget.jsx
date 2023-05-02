@@ -1,0 +1,282 @@
+'use client';
+
+import * as Dialog from '@radix-ui/react-dialog';
+import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+
+import AIIcon from './images/ai.inline.svg';
+import CloseIcon from './images/close.inline.svg';
+import ExampleIcon from './images/example.inline.svg';
+import SendIcon from './images/send.inline.svg';
+import Message from './message';
+
+const items = [
+  'What’s Neon?',
+  'How to sign up for Neon?',
+  'How to create a project?',
+  'How to get started with the Neon API?',
+];
+
+const COMMAND = '⌘';
+const CTRL = 'Ctrl';
+
+const animationVariants = {
+  initial: {
+    opacity: 0,
+    y: 20,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.2,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 20,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
+
+const ChatWidget = () => {
+  const [commandKey, setCommandKey] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [inputText, setInputText] = useState('');
+
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const { userAgent } = window.navigator;
+    setCommandKey(userAgent.indexOf('Mac') !== -1 ? COMMAND : CTRL);
+  }, []);
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+      setIsOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  const handleExampleClick = (e) => {
+    setMessages([
+      ...messages,
+      { content: e.target.textContent, role: 'user' },
+      {
+        role: 'bot',
+        content: 'Here is an example of how to create a project:',
+      },
+    ]);
+  };
+
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newMessages = [
+      {
+        role: 'user',
+        content: inputText,
+      },
+    ];
+    setMessages([...messages, ...newMessages]);
+    setInputText('');
+  };
+
+  const fetchCompletionStream = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/open-ai', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [...messages, { content: inputText, role: 'user' }],
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const data = response.body;
+      if (!data) {
+        return;
+      }
+
+      const reader = data.getReader();
+      const decoder = new TextDecoder();
+      let done = false;
+
+      let completion = '';
+      const msg = Array.from(messages);
+      while (!done) {
+        const { value, done: doneReading } = await reader.read();
+
+        done = doneReading;
+        const chunkValue = decoder.decode(value);
+
+        completion += chunkValue;
+        setMessages([
+          ...msg,
+          {
+            role: 'assistant',
+            content: completion,
+            sender: false,
+          },
+        ]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    setLoading(false);
+  }, [inputText, messages]);
+
+  const handleInputKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
+    }
+  };
+
+  useEffect(() => {
+    if (messages.length > 0 && messages[messages.length - 1].role === 'user') {
+      fetchCompletionStream();
+    }
+    messagesEndRef?.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }, [fetchCompletionStream, messages]);
+
+  return (
+    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+      <Dialog.Trigger asChild>
+        <button
+          className="chat-widget mt-32 flex flex-col text-sm focus:outline-none"
+          type="button"
+        >
+          <span className="flex h-11 w-11 items-center justify-center rounded-[10px] dark:bg-gray-new-8">
+            <AIIcon className="h-[26px] w-[26px]" />
+          </span>
+          <div className="mt-2.5 flex w-full items-center justify-between">
+            <h3 className="font-semibold leading-none">Neon Docs AI</h3>
+            {commandKey && (
+              <span className="rounded-sm bg-gray-new-15 px-1.5 py-1 leading-none">
+                {commandKey} + K
+              </span>
+            )}
+          </div>
+          <p className="mt-1.5 leading-tight text-gray-7">
+            We brought ChatGPT straight to the docs
+          </p>
+          <span className="mt-1.5 leading-tight dark:text-primary-1">Ask a question</span>
+        </button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/80 data-[state=closed]:animate-fade-out-overlay data-[state=open]:animate-fade-in-overlay" />
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2">
+          <div className="relative flex flex-col rounded-[10px] border border-gray-new-20 bg-gray-new-8 pt-4 data-[state=open]:animate-dialog-show data-[state=closed]:animate-dialog-hide dark:text-white">
+            <Dialog.Title className="text-20 px-5 leading-tight">
+              Ask Neon AI a question
+            </Dialog.Title>
+
+            <LazyMotion features={domAnimation}>
+              <AnimatePresence initial={false} mode="wait">
+                {messages.length > 0 ? (
+                  <m.div
+                    className="mt-6 flex max-h-[400px] flex-col overflow-y-auto"
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={animationVariants}
+                  >
+                    {messages.map((message, index) => (
+                      <Message message={message} key={index} />
+                    ))}
+                    {loading && (
+                      <div className="flex items-center px-5 py-2.5">
+                        <span className="mr-3 flex h-7 w-7 items-center justify-center rounded-full bg-primary-1/10">
+                          <ExampleIcon />
+                        </span>
+                        <span className="h-4 w-1 animate-pulse bg-gray-new-50" />
+                      </div>
+                    )}
+                    <div ref={messagesEndRef} />
+                  </m.div>
+                ) : (
+                  <m.div
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={animationVariants}
+                  >
+                    <Dialog.Description className="mt-7 px-5 leading-none text-gray-new-50">
+                      Examples
+                    </Dialog.Description>
+                    <ul className="mt-3 px-2.5">
+                      {items.map((title, index) => (
+                        <li className="flex" key={index}>
+                          <button
+                            className="flex w-full items-center justify-start rounded py-2 px-2.5 transition-colors duration-200 hover:bg-gray-new-15/60 focus:bg-gray-new-15/60 focus:outline-none"
+                            type="button"
+                            onClick={handleExampleClick}
+                          >
+                            <ExampleIcon className="mr-3 h-4 w-4" />
+                            <span>{title}</span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </m.div>
+                )}
+              </AnimatePresence>
+            </LazyMotion>
+            <form className="group relative mt-12 w-full px-5 pb-5" onSubmit={handleSubmit}>
+              <input
+                className="peer w-full appearance-none rounded border border-gray-new-20 bg-black py-2 px-2.5 text-base leading-normal transition-colors duration-200 placeholder:text-gray-new-30 focus:border-gray-new-40 focus:outline-none"
+                type="text"
+                placeholder="How can I help you?"
+                value={inputText}
+                onKeyDown={handleInputKeyDown}
+                onChange={handleInputChange}
+              />
+              <button
+                className="absolute bottom-[30px] right-[30px] h-5 w-5 opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
+                type="submit"
+              >
+                <SendIcon />
+              </button>
+            </form>
+
+            <Dialog.Close asChild>
+              <button
+                className="absolute top-4 right-5 flex h-6 w-6 items-center justify-center"
+                aria-label="Close"
+                type="button"
+              >
+                <CloseIcon className="h-4 w-4" />
+              </button>
+            </Dialog.Close>
+          </div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+  );
+};
+
+export default ChatWidget;

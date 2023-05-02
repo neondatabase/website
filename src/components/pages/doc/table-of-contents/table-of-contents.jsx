@@ -7,7 +7,7 @@ import TOCIcon from './images/toc.inline.svg';
 const linkClassName =
   'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white';
 
-const TableOfContents = ({ className = null, contentRef }) => {
+const TableOfContents = ({ contentRef }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -36,42 +36,40 @@ const TableOfContents = ({ className = null, contentRef }) => {
   if (items.length === 0) return null;
 
   return (
-    <div className={clsx('h-full xl:hidden', className)}>
-      <nav className="sticky bottom-10 top-10 max-h-[calc(100vh-40px-40px)] overflow-y-auto overflow-x-hidden">
-        <h3 className="flex items-center space-x-2 py-2 text-sm font-semibold leading-tight">
-          <TOCIcon className="h-3.5 w-3.5 text-black-new dark:text-white" />
-          <span>On this page</span>
-        </h3>
-        <ul className="mt-2.5">
-          {items.map((item, index) => {
-            const linkHref = `#${item.id}`;
+    <>
+      <h3 className="flex items-center space-x-2 py-2 text-sm font-semibold leading-tight">
+        <TOCIcon className="h-3.5 w-3.5 text-black dark:text-white" />
+        <span>On this page</span>
+      </h3>
+      <ul className="mt-2.5">
+        {items.map((item, index) => {
+          const linkHref = `#${item.id}`;
 
-            return (
-              <li key={index}>
-                {item.localName === 'h2' && (
-                  <a
-                    className={linkClassName}
-                    href={linkHref}
-                    onClick={(e) => handleAnchorClick(e, linkHref)}
-                  >
-                    {item.textContent}
-                  </a>
-                )}
-                {item.localName === 'h3' && (
-                  <a
-                    className={clsx(linkClassName, 'ml-3')}
-                    href={linkHref}
-                    onClick={(e) => handleAnchorClick(e, linkHref)}
-                  >
-                    {item.textContent}
-                  </a>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </div>
+          return (
+            <li key={index}>
+              {item.localName === 'h2' && (
+                <a
+                  className={linkClassName}
+                  href={linkHref}
+                  onClick={(e) => handleAnchorClick(e, linkHref)}
+                >
+                  {item.textContent}
+                </a>
+              )}
+              {item.localName === 'h3' && (
+                <a
+                  className={clsx(linkClassName, 'ml-3')}
+                  href={linkHref}
+                  onClick={(e) => handleAnchorClick(e, linkHref)}
+                >
+                  {item.textContent}
+                </a>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </>
   );
 };
 

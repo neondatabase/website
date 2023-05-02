@@ -14,6 +14,8 @@ import ReleaseNoteList from 'components/pages/release-notes/release-note-list';
 import ReleaseNotesFilter from 'components/pages/release-notes/release-notes-filter';
 import Content from 'components/shared/content';
 
+import ChatWidget from '../chat-widget';
+
 // TODO: Add pagination for release notes
 const ReleaseNotes = ({ currentSlug, items }) => (
   <>
@@ -74,10 +76,16 @@ const Post = ({
         </div>
       </div>
       {enableTableOfContents && (
-        <TableOfContents
-          className="col-start-11 col-end-13 -ml-11 pb-20 pt-[110px] 2xl:ml-0"
-          contentRef={contentRef}
-        />
+        <div
+          className={clsx(
+            'col-start-11 col-end-13 -ml-11 h-full pb-20 pt-[110px] 2xl:ml-0 xl:hidden'
+          )}
+        >
+          <nav className="no-scrollbars sticky top-10 bottom-10 max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
+            <TableOfContents contentRef={contentRef} />
+            <ChatWidget />
+          </nav>
+        </div>
       )}
     </>
   );
