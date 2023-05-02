@@ -5,11 +5,15 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-[Vercel Storage](https://vercel.com/docs/storage) is a collection of managed storage products that you can integrate with your frontend framework. Included in this suite of products is [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres), which is serverless Postgres **powered by Neon**. Vercel Postgres is currently available in [Beta](https://vercel.com/docs/concepts/release-phases#beta) on Vercel's [Pro and Hobby plans](https://vercel.com/docs/concepts/payments-and-billing/pro).
+[Vercel Storage](https://vercel.com/docs/storage) is a collection of managed storage products that you can integrate with your frontend framework. Included in this suite of products is [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres), which is serverless Postgres **powered by Neon**. 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gA8cHj3w5XI?start=241" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+Vercel Postgres is currently available in [Beta](https://vercel.com/docs/concepts/release-phases#beta) on Vercel's [Pro and Hobby plans](https://vercel.com/docs/concepts/payments-and-billing/pro).
 
 With _Vercel Postgres_, creating, deleting, and managing a Postgres instance happens in the Vercel dashboard rather than the Neon Console or using the Neon API. Furthermore, you do not need a Neon account to use Vercel Postgres. Everything is managed from Vercel.
 
-Using Vercel Postgres is an alternative to using Neon directly or through the [Neon Vercel Integration](https://vercel.com/integrations/neon), which is published by Neon and available on the Vercel Integration Marketplace.
+Using Vercel Postgres is an alternative to using Neon directly or through the [Neon Vercel Integration](https://vercel.com/integrations/neon), which is on the Vercel Integration Marketplace.
 
 Use the following resources to get started with Vercel Postgres:
 
@@ -20,3 +24,7 @@ Use the following resources to get started with Vercel Postgres:
 - Deploy one of the [Vercel Postgres starter templates](https://vercel.com/templates?database=vercel-postgres) to start reading and writing data in minutes.
 - Read [Vercel Postgres Limits](https://vercel.com/docs/storage/vercel-postgres/limits) to learn about Vercel Postgres technical limits.
 - Refer to [Vercel Postgres Pricing](https://vercel.com/docs/storage/vercel-postgres/usage-and-pricing) to learn about the Vercel Postgres usage and pricing model.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
