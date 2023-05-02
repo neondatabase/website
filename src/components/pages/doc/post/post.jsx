@@ -75,18 +75,17 @@ const Post = ({
           <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
         </div>
       </div>
-      {enableTableOfContents && (
-        <div
-          className={clsx(
-            'col-start-11 col-end-13 -ml-11 h-full pb-20 pt-[110px] 2xl:ml-0 xl:hidden'
-          )}
-        >
-          <nav className="no-scrollbars sticky top-10 bottom-10 max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
-            <TableOfContents contentRef={contentRef} />
-            <ChatWidget />
-          </nav>
-        </div>
-      )}
+
+      <div
+        className={clsx(
+          'col-start-11 col-end-13 -ml-11 h-full pb-20 pt-[110px] 2xl:ml-0 xl:hidden'
+        )}
+      >
+        <nav className="no-scrollbars sticky top-10 bottom-10 max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
+          {enableTableOfContents && <TableOfContents contentRef={contentRef} />}
+          <ChatWidget className={clsx({ 'mt-32': enableTableOfContents })} />
+        </nav>
+      </div>
     </>
   );
 };

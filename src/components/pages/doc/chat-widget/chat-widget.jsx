@@ -1,7 +1,9 @@
 'use client';
 
 import * as Dialog from '@radix-ui/react-dialog';
+import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
+import PropTypes from 'prop-types';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import AIIcon from './images/ai.inline.svg';
@@ -41,7 +43,7 @@ const animationVariants = {
   },
 };
 
-const ChatWidget = () => {
+const ChatWidget = ({ className = null }) => {
   const [commandKey, setCommandKey] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [inputText, setInputText] = useState('');
@@ -160,7 +162,7 @@ const ChatWidget = () => {
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>
         <button
-          className="chat-widget mt-32 flex flex-col text-sm focus:outline-none"
+          className={clsx('chat-widget flex flex-col text-sm focus:outline-none', className)}
           type="button"
         >
           <span className="flex h-11 w-11 items-center justify-center rounded-[10px] dark:bg-gray-new-8">
@@ -270,6 +272,10 @@ const ChatWidget = () => {
       </Dialog.Portal>
     </Dialog.Root>
   );
+};
+
+ChatWidget.propTypes = {
+  className: PropTypes.string,
 };
 
 export default ChatWidget;
