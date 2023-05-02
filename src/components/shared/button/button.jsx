@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { useRef, useState, useMemo } from 'react';
 
 import Link from 'components/shared/link';
 
@@ -91,11 +92,78 @@ const Button = ({
   ...otherProps
 }) => {
   const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
+  const [cursorAnimationVariant, setCursorAnimationVariant] = useState('default');
+  const [mouseXPosition, setMouseXPosition] = useState(0);
+  const [mouseYPosition, setMouseYPosition] = useState(0);
+  const ticketRef = useRef(null);
+  const cursorBlurVariants = useMemo(
+    () => ({
+      default: {
+        opacity: 1,
+        backgroundColor: 'transparent',
+        height: 10,
+        width: 10,
+        x: mouseXPosition,
+        y: mouseYPosition,
+        transition: {
+          type: 'spring',
+          mass: 0.1,
+        },
+      },
+      blur: {
+        opacity: 1,
+        backgroundColor: animationColor,
+        height: 16,
+        width: 16,
+        x: mouseXPosition,
+        y: mouseYPosition,
+      },
+    }),
+    [animationColor, mouseXPosition, mouseYPosition]
+  );
+
+  const handleMouseMove = (event) => {
+    const { left, top } = ticketRef.current.getBoundingClientRect();
+
+    if (event.clientX !== null) {
+      setMouseXPosition(event.clientX - left - 8);
+    }
+
+    if (event.clientY !== null) {
+      setMouseYPosition(event.clientY - top - 8);
+    }
+  };
+
+  const handleMouseEnter = () => {
+    setCursorAnimationVariant('blur');
+  };
+
+  const handleMouseLeave = () => {
+    setCursorAnimationVariant('default');
+  };
 
   const Tag = to ? Link : 'button';
 
   return isAnimated ? (
-    <Tag className={clsx('relative', className)} to={to} {...otherProps}>
+    <Tag
+      className={clsx('relative', className)}
+      to={to}
+      ref={ticketRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      {...otherProps}
+    >
+      <motion.span
+        className="absolute top-0 left-0 rounded-full blur-lg"
+        variants={cursorBlurVariants}
+        animate={cursorAnimationVariant}
+        transition={{
+          type: 'spring',
+          stiffness: 500,
+          damping: 28,
+        }}
+      />
       {children}
       <LinesIllustration color={animationColor} />
     </Tag>
