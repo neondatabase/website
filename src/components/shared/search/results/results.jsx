@@ -63,7 +63,7 @@ const PageHit = ({ hit, insights, isNotFoundPage = false }) => (
         'mt-1.5 block text-xs leading-relaxed text-gray-2 dark:text-gray-7',
         isNotFoundPage ? 'text-sm' : 'text-xs'
       )}
-      attribute="excerpt"
+      attribute="content"
       hit={hit}
       tagName="mark"
     />
@@ -74,7 +74,7 @@ PageHit.propTypes = {
   hit: PropTypes.shape({
     objectID: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    excerpt: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
   insights: PropTypes.func.isRequired,
