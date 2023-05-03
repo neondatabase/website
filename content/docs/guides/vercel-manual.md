@@ -1,13 +1,13 @@
 ---
 title: Connect Vercel and Neon manually
-subtitle: Learn how to manually connect a Vercel project to a Neon database
+subtitle: Learn how to connect a Vercel project to a Neon database manually
 enableTableOfContents: true
 ---
 
 This guide describes how to manually connect a Vercel project to a Neon database.
 
 <Admonition type="note">
-Alternatively, you can connect using the [Neon Vercel Integration](https://vercel.com/integrations/neon), which automatically creates a branch for each preview deployment. For more information, see [Connect with the Neon Vercel Integration](/docs/guides/vercel).
+For other Vercel integration options, refer to the [Neon and Vercel integration overview](../guides/vercel-overview).
 </Admonition>
 
 ## Prerequisites
@@ -74,3 +74,7 @@ Vercel environment variables can also be configured when you first deploy an app
 ![Add Vercel environment variable settings](/docs/guides/vercel_env_settings.png)
 
 You must redeploy your application in Vercel for the environment variable settings to take effect.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
