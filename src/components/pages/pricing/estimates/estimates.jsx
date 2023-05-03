@@ -129,15 +129,20 @@ const Estimates = () => {
     }),
   });
 
-  const prototypeClickInput = useStateMachineInput(prototypeRive, 'SM', 'active');
-  const prototypeHoverInput = useStateMachineInput(prototypeRive, 'SM', 'hover');
-  const prototypeUnhoverInput = useStateMachineInput(prototypeRive, 'SM', 'unhover');
+  const prototypeHoverInput = useStateMachineInput(prototypeRive, 'SM', 'hover', false);
+  const prototypeActiveInput = useStateMachineInput(prototypeRive, 'SM', 'active', false);
   const launchClickInput = useStateMachineInput(launchRive, 'SM', 'click');
   const launchHoverInput = useStateMachineInput(launchRive, 'SM', 'hover');
   const launchUnhoverInput = useStateMachineInput(launchRive, 'SM', 'unhover');
   const scaleClickInput = useStateMachineInput(scaleRive, 'SM', 'go');
   const scaleHoverInput = useStateMachineInput(scaleRive, 'SM', 'hover');
   const scaleUnhoverInput = useStateMachineInput(scaleRive, 'SM', 'unhover');
+
+  useEffect(() => {
+    if (selected === 'Prototype' && prototypeActiveInput) {
+      prototypeActiveInput.value = true;
+    }
+  }, [prototypeActiveInput, selected]);
 
   useEffect(() => {
     if (!isContentInView) return;
@@ -158,8 +163,8 @@ const Estimates = () => {
   const handleSelect = (type) => {
     setSelected(type);
 
-    if (type === 'Prototype' && prototypeClickInput) {
-      prototypeClickInput.fire();
+    if (type === 'Prototype' && prototypeActiveInput) {
+      prototypeActiveInput.value = true;
     }
 
     if (type === 'Launch' && launchClickInput) {
@@ -173,7 +178,8 @@ const Estimates = () => {
 
   const handlePointerEnter = (type) => {
     if (type === 'Prototype' && prototypeHoverInput) {
-      prototypeHoverInput.fire();
+      prototypeHoverInput.value = true;
+      prototypeActiveInput.value = false;
     }
 
     if (type === 'Launch' && launchHoverInput) {
@@ -186,8 +192,8 @@ const Estimates = () => {
   };
 
   const handlePointerLeave = (type) => {
-    if (type === 'Prototype' && prototypeUnhoverInput) {
-      prototypeUnhoverInput.fire();
+    if (type === 'Prototype' && prototypeHoverInput) {
+      prototypeHoverInput.value = false;
     }
 
     if (type === 'Launch' && launchUnhoverInput) {
