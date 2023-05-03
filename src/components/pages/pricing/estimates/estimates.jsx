@@ -1,8 +1,10 @@
 'use client';
 
+import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
@@ -105,9 +107,109 @@ const gridClassName =
 
 const Estimates = () => {
   const [selected, setSelected] = useState(items[0].type);
+  const [contentRef, isContentInView] = useInView({ rootMargin: '50px 0px', triggerOnce: true });
+  const { rive: prototypeRive, RiveComponent: PrototypeIconComponent } = useRive({
+    src: '/animations/pages/pricing/icon-prototype.riv',
+    autoplay: false,
+    stateMachines: 'SM',
+    layout: new Layout({
+      fit: Fit.FitWidth,
+      alignment: Alignment.Center,
+    }),
+  });
+  const { rive: launchRive, RiveComponent: LaunchIconComponent } = useRive({
+    src: '/animations/pages/pricing/icon-launch.riv',
+    autoplay: false,
+    stateMachines: 'SM',
+    layout: new Layout({
+      fit: Fit.FitWidth,
+      alignment: Alignment.Center,
+    }),
+    onLoad: () => {
+      launchRive?.resizeDrawingSurfaceToCanvas();
+    },
+  });
+  const { rive: scaleRive, RiveComponent: ScaleIconComponent } = useRive({
+    src: '/animations/pages/pricing/icon-scale.riv',
+    autoplay: false,
+    stateMachines: 'SM',
+    layout: new Layout({
+      fit: Fit.FitWidth,
+      alignment: Alignment.Center,
+    }),
+    onLoad: () => {
+      scaleRive?.resizeDrawingSurfaceToCanvas();
+    },
+  });
 
-  const handleSelect = (item) => {
-    setSelected(item);
+  const prototypeClickInput = useStateMachineInput(prototypeRive, 'SM', 'click');
+  const prototypeHoverInput = useStateMachineInput(prototypeRive, 'SM', 'hover');
+  const prototypeUnhoverInput = useStateMachineInput(prototypeRive, 'SM', 'unhover');
+  const launchClickInput = useStateMachineInput(launchRive, 'SM', 'click');
+  const launchHoverInput = useStateMachineInput(launchRive, 'SM', 'hover');
+  const launchUnhoverInput = useStateMachineInput(launchRive, 'SM', 'unhover');
+  const scaleClickInput = useStateMachineInput(scaleRive, 'SM', 'click');
+  const scaleHoverInput = useStateMachineInput(scaleRive, 'SM', 'hover');
+  const scaleUnhoverInput = useStateMachineInput(scaleRive, 'SM', 'unhover');
+
+  useEffect(() => {
+    if (!isContentInView) return;
+
+    if (prototypeRive) {
+      prototypeRive.play();
+    }
+
+    if (launchRive) {
+      launchRive.play();
+    }
+
+    if (scaleRive) {
+      scaleRive.play();
+    }
+  }, [prototypeRive, isContentInView, launchRive, scaleRive]);
+
+  const handleSelect = (type) => {
+    setSelected(type);
+
+    if (type === 'Prototype' && prototypeClickInput) {
+      prototypeClickInput.fire();
+    }
+
+    if (type === 'Launch' && launchClickInput) {
+      launchClickInput.fire();
+    }
+
+    if (type === 'Scale' && scaleClickInput) {
+      scaleClickInput.fire();
+    }
+  };
+
+  const handlePointerEnter = (type) => {
+    if (type === 'Prototype' && prototypeHoverInput) {
+      prototypeHoverInput.fire();
+    }
+
+    if (type === 'Launch' && launchHoverInput) {
+      launchHoverInput.fire();
+    }
+
+    if (type === 'Scale' && scaleHoverInput) {
+      scaleHoverInput.fire();
+    }
+  };
+
+  const handlePointerLeave = (type) => {
+    if (type === 'Prototype' && prototypeUnhoverInput) {
+      prototypeUnhoverInput.fire();
+    }
+
+    if (type === 'Launch' && launchUnhoverInput) {
+      launchUnhoverInput.fire();
+    }
+
+    if (type === 'Scale' && scaleUnhoverInput) {
+      scaleUnhoverInput.fire();
+    }
   };
 
   return (
@@ -132,12 +234,15 @@ const Estimates = () => {
             </p>
           </div>
           <div className="w-[38%] xl:w-[49%] xl:overflow-x-hidden lg:w-[55%] md:w-full">
-            <ul className="flex gap-8 py-2 xl:pt-3 xl:pb-1 lg:mx-auto lg:max-w-[584px] lg:pl-6 md:max-w-full md:px-0 xs:gap-4">
-              {items.map(({ type, icon: Icon }, index) => (
+            <ul
+              className="flex gap-8 py-2 xl:pt-3 xl:pb-1 lg:mx-auto lg:max-w-[584px] lg:pl-6 md:max-w-full md:px-0 xs:gap-4"
+              ref={contentRef}
+            >
+              {items.map(({ type }, index) => (
                 <li key={index}>
                   <button
                     className={clsx(
-                      'flex gap-1.5 border-b pb-1.5 text-sm font-medium uppercase leading-none tracking-wider text-white transition-colors duration-200',
+                      'flex items-center border-b pb-1.5 text-sm font-medium uppercase leading-none tracking-wider text-white transition-colors duration-200',
                       type === selected && index === 0
                         ? '!border-pricing-primary-1 !text-pricing-primary-1'
                         : 'border-transparent',
@@ -153,9 +258,13 @@ const Estimates = () => {
                     )}
                     type="button"
                     onClick={() => handleSelect(type)}
+                    onPointerEnter={() => handlePointerEnter(type)}
+                    onPointerLeave={() => handlePointerLeave(type)}
                   >
-                    <Icon aria-hidden />
-                    {type}
+                    {index === 0 && <PrototypeIconComponent className="h-5 w-5" aria-hidden />}
+                    {index === 1 && <LaunchIconComponent className="h-5 w-5" aria-hidden />}
+                    {index === 2 && <ScaleIconComponent className="h-5 w-5" aria-hidden />}
+                    <span>{type}</span>
                   </button>
                 </li>
               ))}
