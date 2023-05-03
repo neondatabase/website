@@ -1,16 +1,16 @@
 'use client';
 
-import useScrollPosition from '@react-hook/window-scroll';
+// import useScrollPosition from '@react-hook/window-scroll';
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
-import Image from 'next/image';
-import React, { useState, useRef, useEffect } from 'react';
+// import Image from 'next/image';
+import React, { useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import useWindowSize from 'hooks/use-window-size';
+// import useWindowSize from 'hooks/use-window-size';
 
 const items = [
   {
@@ -128,10 +128,12 @@ const items = [
 ];
 
 const Metrics = () => {
-  const sectionRef = useRef();
-  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-  const { height: pageHeight } = useWindowSize();
-  const scrollY = useScrollPosition();
+  const topRef = useRef(null);
+  const riveRef = useRef(null);
+  const animationRef = useRef(null);
+  // const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+  // const { height: pageHeight } = useWindowSize();
+  // const scrollY = useScrollPosition();
   const [contentRef, isContentInView] = useInView({ triggerOnce: true });
   const { RiveComponent, rive } = useRive({
     src: '/animations/pages/pricing/pricing.riv',
@@ -151,47 +153,85 @@ const Metrics = () => {
   }, [rive, isContentInView]);
 
   useEffect(() => {
-    if (!animationStageInput) return;
+    // TODO: detect scroll direction
+    if (animationStageInput && topRef.current !== null) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > topRef.current * 1 && animationStageInput.value === 0) {
+          animationStageInput.value = 1;
+        } else if (window.scrollY > topRef.current * 2 && animationStageInput.value === 1) {
+          animationStageInput.value = 2;
+          // TODO: connect with scroll ???
+          riveRef.current.style.transform = 'translateY(-300px)';
+        } else if (window.scrollY > topRef.current * 3 && animationStageInput.value === 2) {
+          animationStageInput.value = 3;
+        }
+      });
+    }
+  }, [animationStageInput]);
 
-    // change animation input on scroll UP
-    if (
-      (currentSectionIndex === 0 && animationStageInput.value === 1) ||
-      (currentSectionIndex === 0 && animationStageInput.value === 5)
-    ) {
-      animationStageInput.value = 6;
-    } else if (
-      (currentSectionIndex === 1 && animationStageInput.value === 2) ||
-      (currentSectionIndex === 1 && animationStageInput.value === 4)
-    ) {
-      animationStageInput.value = 5;
-    } else if (
-      (currentSectionIndex === 2 && animationStageInput.value === 3) ||
-      (currentSectionIndex === 2 && animationStageInput.value === 3)
-    ) {
-      animationStageInput.value = 4;
-    }
-    // ... and on scroll DOWN
-    else {
-      animationStageInput.value = currentSectionIndex;
-    }
-  }, [currentSectionIndex, animationStageInput]);
+  // useEffect(() => {
+  //   if (!animationStageInput) return;
+
+  //   // change animation input on scroll UP
+  //   if (
+  //     (currentSectionIndex === 0 && animationStageInput.value === 1) ||
+  //     (currentSectionIndex === 0 && animationStageInput.value === 5)
+  //   ) {
+  //     animationStageInput.value = 6;
+  //   } else if (
+  //     (currentSectionIndex === 1 && animationStageInput.value === 2) ||
+  //     (currentSectionIndex === 1 && animationStageInput.value === 4)
+  //   ) {
+  //     animationStageInput.value = 5;
+  //   } else if (
+  //     (currentSectionIndex === 2 && animationStageInput.value === 3) ||
+  //     (currentSectionIndex === 2 && animationStageInput.value === 3)
+  //   ) {
+  //     animationStageInput.value = 4;
+  //   }
+  //   // ... and on scroll DOWN
+  //   else {
+  //     animationStageInput.value = currentSectionIndex;
+  //   }
+  // }, [currentSectionIndex, animationStageInput]);
+
+  // useEffect(() => {
+  //   const currentScrollTop = scrollY;
+  //   const switchPoints = [...Array(items.length + 1)].map(
+  //     (_, index) => sectionRef.current.offsetTop + pageHeight * index - pageHeight + 350
+  //   );
+
+  //   switchPoints.forEach((_, index) => {
+  //     if (currentScrollTop > switchPoints[index] && currentScrollTop < switchPoints[index + 1]) {
+  //       setCurrentSectionIndex(index);
+  //     }
+  //   });
+  // }, [pageHeight, scrollY]);
+
+  //  mt-60 xl:mt-40 lg:mt-28 md:mt-20
 
   useEffect(() => {
-    const currentScrollTop = scrollY;
-    const switchPoints = [...Array(items.length + 1)].map(
-      (_, index) => sectionRef.current.offsetTop + pageHeight * index - pageHeight + 350
-    );
+    const content = document.querySelector('#pricing-content');
+    const sticky = document.querySelector('#pricing-sticky');
 
-    switchPoints.forEach((_, index) => {
-      if (currentScrollTop > switchPoints[index] && currentScrollTop < switchPoints[index + 1]) {
-        setCurrentSectionIndex(index);
-      }
-    });
-  }, [pageHeight, scrollY]);
+    const shift =
+      window.scrollY +
+      (animationRef.current?.getBoundingClientRect().y || 0) -
+      // top bar compensation:
+      ((content?.getBoundingClientRect().y || 0) + window.scrollY) -
+      // if content is smaller than window height, center it:
+      (window.innerHeight - (animationRef.current?.clientHeight || 0)) / 2;
+
+    topRef.current = shift;
+
+    content.style.height = `${(content?.clientHeight || 0) + shift * 3}px`;
+    sticky.style.position = 'sticky';
+    sticky.style.top = `${shift * -1}px`;
+  }, []);
 
   return (
-    <section className="safe-paddings mt-60 xl:mt-40 lg:mt-28 md:mt-20" ref={sectionRef}>
-      <div className="relative flex flex-col">
+    <section className="safe-paddings pt-60" ref={contentRef}>
+      <div className="flex flex-col">
         <Container className="flex flex-col items-center" size="mdDoc">
           <Heading className="text-center" badge="Metrics" tag="h2" size="2sm">
             Neon charges on <span className="text-pricing-primary-1">4 metrics</span>
@@ -208,44 +248,36 @@ const Metrics = () => {
             for rates per region.
           </p>
         </Container>
-        <Container
-          className="grid h-full w-full grid-cols-12 items-start lg:px-6 md:grid-cols-1"
-          size="sm"
-        >
-          <div className="relative col-span-7 col-start-1 h-full xl:col-span-6 md:col-span-full md:hidden">
-            <div className="sticky top-0 h-screen min-h-[760px]">
-              <div className="absolute flex h-full w-full items-center justify-center px-16 xl:pl-0">
-                <RiveComponent width={590} height={830} aria-hidden />
-              </div>
-            </div>
-          </div>
-          <div className="col-span-5 col-start-8 text-left xl:col-span-6 md:col-span-full">
-            <div className="space-y-14 lg:space-y-0" ref={contentRef}>
-              {items.map(({ image, name, priceFrom, details, prices }, index) => (
+        <Container className="py-40" size="mdDoc">
+          <div className="" ref={animationRef}>
+            <div className="grid grid-cols-12">
+              <div className="col-span-7">
                 <div
-                  className="flex h-[78vh] min-h-[760px] flex-col justify-center px-6 xl:pl-3 xl:pr-0 lg:px-0 md:h-auto md:min-h-0 md:px-0"
-                  key={index}
+                  className="h-[566px] -translate-y-[100px] transition-transform duration-1000"
+                  ref={riveRef}
                 >
-                  <Image
-                    className="md:my-13 my-14 hidden max-w-full md:mx-auto md:block md:max-w-[80%]"
-                    width={590}
-                    height={830}
-                    src={image}
-                    alt={`${name} illustration`}
-                  />
+                  <div className="aspect-[0.6086956522] w-[590px]">
+                    {isContentInView ? <RiveComponent /> : null}
+                  </div>
+                </div>
+              </div>
+              <div className="col-span-5">
+                <div className="pt-10 text-white">
                   <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white xl:text-[28px]">
-                    {name}
-                    <span className="block font-light text-pricing-primary-1">{priceFrom}</span>
+                    {items[0].name}
+                    <span className="block font-light text-pricing-primary-1">
+                      {items[0].priceFrom}
+                    </span>
                   </h2>
                   <p className="mt-2 text-lg leading-tight tracking-tight xl:text-base">
-                    {details}
+                    {items[0].details}
                   </p>
                   <div className="mt-8 max-w-[464px] xl:mt-5">
                     <div className="grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-2.5 text-[12px] uppercase leading-none text-pricing-gray-4 xl:gap-x-[20%] lg:gap-x-1">
                       <span>Region</span>
                       <span>Price</span>
                     </div>
-                    {prices.map(({ name, price, unit }, index) => (
+                    {items[0].prices.map(({ name, price, unit }, index) => (
                       <div
                         className="text-gray-94 grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-[15px] text-[15px] leading-none xl:gap-x-[20%] xl:py-3.5 lg:gap-x-1"
                         key={index}
@@ -261,7 +293,7 @@ const Metrics = () => {
                     ))}
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </Container>

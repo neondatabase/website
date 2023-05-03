@@ -110,8 +110,10 @@ const Estimates = () => {
     setSelected(item);
   };
 
+  //  mt-[22rem] 2xl:mt-40 xl:mt-14 lg:mt-0 md:mt-16
+
   return (
-    <section className="estimates safe-paddings mt-[22rem] 2xl:mt-40 xl:mt-14 lg:mt-0 md:mt-16">
+    <section className="estimates safe-paddings">
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[1220px] items-center justify-between gap-4 xl:justify-start xl:gap-[6%] lg:gap-[2%] md:flex-wrap md:gap-8">
           <div className="w-[48%] xl:w-[45%] lg:flex lg:w-[43%] lg:flex-col lg:items-start md:w-full">

@@ -13,12 +13,16 @@ const PricingPage = () => (
     footerTheme="pricing"
     footerWithTopBorder
   >
-    <Hero />
-    <Metrics />
-    <Estimates />
-    <Calculator />
-    <Faq />
-    <CTA />
+    <div id="pricing-content">
+      <div id="pricing-sticky">
+        <Hero />
+        <Metrics />
+        <Estimates />
+        <Calculator />
+        <Faq />
+        <CTA />
+      </div>
+    </div>
   </Layout>
 );
 
