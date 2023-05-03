@@ -9,7 +9,6 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import links from 'constants/links';
-import lines from 'images/pages/pricing/green-lines-small.svg';
 
 const CTA = () => {
   const [contentRef, isContentInView] = useInView({ rootMargin: '50px 0px', triggerOnce: true });
@@ -47,23 +46,16 @@ const CTA = () => {
             Interested in increasing your free tier limits or learning about pricing? Complete the
             form below to get in touch with our Sales team
           </p>
-          <p className="relative mt-8 inline-flex justify-center md:mx-auto md:mt-6 md:flex md:w-44">
-            <Button
-              className="relative z-20 !py-5 !px-14 !text-lg tracking-tight"
-              theme="primary"
-              to={links.contactSales}
-              size="sm"
-            >
-              Talk to sales
-            </Button>
-            <img
-              className="pointer-events-none absolute -top-7 left-1/2 z-10 min-w-[130%] -translate-x-1/2"
-              src={lines}
-              width={267}
-              height={140}
-              alt=""
-            />
-          </p>
+          <Button
+            className="mt-8 inline-flex !py-5 !px-14 !text-lg tracking-tight md:mx-auto md:mt-6 md:flex md:w-44"
+            theme="primary"
+            to={links.contactSales}
+            size="sm"
+            animationSize="sm"
+            isAnimated
+          >
+            Talk to sales
+          </Button>
         </div>
         <div className="relative col-span-7 col-start-6 md:col-span-full" ref={contentRef}>
           <Image

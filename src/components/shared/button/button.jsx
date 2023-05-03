@@ -8,57 +8,105 @@ import { useRef, useState, useMemo } from 'react';
 import Link from 'components/shared/link';
 
 // eslint-disable-next-line react/prop-types
-const LinesIllustration = ({ color }) => (
+const LinesIllustration = ({ color, size }) => (
   <motion.span
-    className="pointer-events-none absolute -top-1/2 left-1/2 -z-10 block w-[113%] -translate-x-1/2"
+    className={clsx(
+      'pointer-events-none absolute -top-1/2 left-1/2 -z-10 block -translate-x-1/2',
+      size === 'sm' ? 'w-[126%]' : 'w-[113%]'
+    )}
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     aria-hidden
   >
-    <svg className="h-auto max-w-full" width="390" height="144" viewBox="0 0 390 144" fill="none">
-      <g filter="url(#a)" opacity=".6">
-        <path
-          fill="url(#b)"
-          d="M34 43.931C34 38.446 38.446 34 43.931 34h302.138c5.485 0 9.931 4.446 9.931 9.931C356 78.211 328.211 106 293.931 106H96.069C61.789 106 34 78.21 34 43.931Z"
-        />
+    {size === 'sm' ? (
+      <svg className="h-auto max-w-full" width="279" height="152" viewBox="0 0 279 152" fill="none">
+        <g filter="url(#a)" opacity=".6">
+          <path
+            fill="url(#b)"
+            d="M30 62c0-17.673 14.327-32 32-32h155c17.673 0 32 14.327 32 32 0 33.137-26.863 60-60 60H90c-33.137 0-60-26.863-60-60Z"
+          />
+          <path
+            stroke="#0C0D0D"
+            d="M30.5 62c0-17.397 14.103-31.5 31.5-31.5h155c17.397 0 31.5 14.103 31.5 31.5 0 32.86-26.639 59.5-59.5 59.5H90c-32.86 0-59.5-26.64-59.5-59.5Z"
+          />
+        </g>
         <path
           stroke="#0C0D0D"
-          d="M34.5 43.931a9.431 9.431 0 0 1 9.431-9.431h302.138a9.43 9.43 0 0 1 9.431 9.431c0 34.004-27.565 61.569-61.569 61.569H96.069C62.065 105.5 34.5 77.935 34.5 43.931Z"
+          d="M6 13.5h267m-267-2h267M6 9.5h267M6 7.5h267M6 5.5h267M6 17.5h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 4h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 4h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 4h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 4h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 4h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 4h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 4h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 4h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 4h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 4h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 4h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 4h267m-267-2h267m-267 4h267m-267 2h267m-267 2h267m-267 2h267"
         />
-      </g>
-      <path
-        stroke="#0C0D0D"
-        d="M7 17.5h376M7 15.5h376M7 13.5h376M7 11.5h376M7 9.5h376M7 21.5h376M7 19.5h376M7 23.5h376M7 25.5h376M7 27.5h376M7 31.5h376M7 29.5h376M7 33.5h376M7 35.5h376M7 37.5h376M7 41.5h376M7 39.5h376M7 43.5h376M7 45.5h376M7 47.5h376M7 51.5h376M7 49.5h376M7 53.5h376M7 55.5h376M7 57.5h376M7 61.5h376M7 59.5h376M7 63.5h376M7 65.5h376M7 67.5h376M7 71.5h376M7 69.5h376M7 73.5h376M7 75.5h376M7 77.5h376M7 81.5h376M7 79.5h376M7 83.5h376M7 85.5h376M7 87.5h376M7 91.5h376M7 89.5h376M7 93.5h376M7 95.5h376M7 97.5h376M7 101.5h376M7 99.5h376M7 103.5h376M7 105.5h376M7 107.5h376M7 111.5h376M7 109.5h376M7 113.5h376M7 115.5h376M7 117.5h376M7 121.5h376M7 119.5h376M7 123.5h376M7 125.5h376M7 127.5h376M7 131.5h376M7 129.5h376M7 133.5h376M7 135.5h376M7 137.5h376M7 141.5h376M7 139.5h376M7 143.5h376"
-      />
-      <defs>
-        <linearGradient
-          id="b"
-          x1="200.963"
-          x2="200.963"
-          y1="34"
-          y2="126"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset=".789" stopColor={color} />
-          <stop offset="1" stopColor={color} stopOpacity="0" />
-        </linearGradient>
-        <filter
-          id="a"
-          width="390"
-          height="140"
-          x="0"
-          y="0"
-          colorInterpolationFilters="sRGB"
-          filterUnits="userSpaceOnUse"
-        >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
-          <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-          <feGaussianBlur result="effect1_foregroundBlur_15185_26338" stdDeviation="17" />
-        </filter>
-      </defs>
-    </svg>
+        <defs>
+          <linearGradient
+            id="b"
+            x1="143.556"
+            x2="143.556"
+            y1="30"
+            y2="147.556"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset=".789" stopColor={color} />
+            <stop offset="1" stopColor={color} stopOpacity="0" />
+          </linearGradient>
+          <filter
+            id="a"
+            width="279"
+            height="152"
+            x="0"
+            y="0"
+            colorInterpolationFilters="sRGB"
+            filterUnits="userSpaceOnUse"
+          >
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+            <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+            <feGaussianBlur result="effect1_foregroundBlur_14543_27724" stdDeviation="15" />
+          </filter>
+        </defs>
+      </svg>
+    ) : (
+      <svg className="h-auto max-w-full" width="390" height="144" viewBox="0 0 390 144" fill="none">
+        <g filter="url(#a)" opacity=".6">
+          <path
+            fill="url(#b)"
+            d="M34 43.931C34 38.446 38.446 34 43.931 34h302.138c5.485 0 9.931 4.446 9.931 9.931C356 78.211 328.211 106 293.931 106H96.069C61.789 106 34 78.21 34 43.931Z"
+          />
+          <path
+            stroke="#0C0D0D"
+            d="M34.5 43.931a9.431 9.431 0 0 1 9.431-9.431h302.138a9.43 9.43 0 0 1 9.431 9.431c0 34.004-27.565 61.569-61.569 61.569H96.069C62.065 105.5 34.5 77.935 34.5 43.931Z"
+          />
+        </g>
+        <path
+          stroke="#0C0D0D"
+          d="M7 17.5h376M7 15.5h376M7 13.5h376M7 11.5h376M7 9.5h376M7 21.5h376M7 19.5h376M7 23.5h376M7 25.5h376M7 27.5h376M7 31.5h376M7 29.5h376M7 33.5h376M7 35.5h376M7 37.5h376M7 41.5h376M7 39.5h376M7 43.5h376M7 45.5h376M7 47.5h376M7 51.5h376M7 49.5h376M7 53.5h376M7 55.5h376M7 57.5h376M7 61.5h376M7 59.5h376M7 63.5h376M7 65.5h376M7 67.5h376M7 71.5h376M7 69.5h376M7 73.5h376M7 75.5h376M7 77.5h376M7 81.5h376M7 79.5h376M7 83.5h376M7 85.5h376M7 87.5h376M7 91.5h376M7 89.5h376M7 93.5h376M7 95.5h376M7 97.5h376M7 101.5h376M7 99.5h376M7 103.5h376M7 105.5h376M7 107.5h376M7 111.5h376M7 109.5h376M7 113.5h376M7 115.5h376M7 117.5h376M7 121.5h376M7 119.5h376M7 123.5h376M7 125.5h376M7 127.5h376M7 131.5h376M7 129.5h376M7 133.5h376M7 135.5h376M7 137.5h376M7 141.5h376M7 139.5h376M7 143.5h376"
+        />
+        <defs>
+          <linearGradient
+            id="b"
+            x1="200.963"
+            x2="200.963"
+            y1="34"
+            y2="126"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset=".789" stopColor={color} />
+            <stop offset="1" stopColor={color} stopOpacity="0" />
+          </linearGradient>
+          <filter
+            id="a"
+            width="390"
+            height="140"
+            x="0"
+            y="0"
+            colorInterpolationFilters="sRGB"
+            filterUnits="userSpaceOnUse"
+          >
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+            <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+            <feGaussianBlur result="effect1_foregroundBlur_15185_26338" stdDeviation="17" />
+          </filter>
+        </defs>
+      </svg>
+    )}
     <motion.span
-      className="absolute block h-[10px] w-full bg-button-overlay bg-blend-overlay"
+      className="absolute block h-[4px] w-full bg-button-overlay bg-blend-overlay"
       animate={{ y: [0, -144] }}
       transition={{ ease: 'linear', duration: 4, repeat: Infinity }}
     />
@@ -87,6 +135,7 @@ const Button = ({
   to = null,
   isAnimated = false,
   animationColor = '#00E599',
+  animationSize = 'xs',
   size,
   theme,
   children,
@@ -167,7 +216,7 @@ const Button = ({
         aria-hidden
       />
       {children}
-      <LinesIllustration color={animationColor} />
+      <LinesIllustration color={animationColor} size={animationSize} />
     </Tag>
   ) : (
     <Tag className={className} to={to} {...otherProps}>
@@ -182,6 +231,7 @@ Button.propTypes = {
   size: PropTypes.oneOf(Object.keys(styles.size)).isRequired,
   theme: PropTypes.oneOf(Object.keys(styles.theme)).isRequired,
   children: PropTypes.node.isRequired,
+  animationSize: PropTypes.oneOf(['xs', 'sm']),
   animationColor: PropTypes.string,
   isAnimated: PropTypes.bool,
 };
