@@ -114,11 +114,11 @@
       slug: guides/wundergraph
     - title: Vercel
       items:
-        - title: Vercel overview
+        - title: Vercel integrations
           slug: guides/vercel-overview
         - title: Vercel Postgres
           slug: guides/vercel-postgres
-        - title: Connect with the Neon Vercel integration
+        - title: The Neon Vercel Integration
           slug: guides/vercel
         - title: Connect manually
           slug: guides/vercel-manual
