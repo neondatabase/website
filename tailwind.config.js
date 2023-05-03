@@ -112,7 +112,7 @@ module.exports = {
         tooltip: '0px 2px 20px rgba(0, 0, 0, 0.3)',
       },
       backgroundImage: () => ({
-        'button-overlay': 'linear-gradient(0deg, transparent 0%, #0C0D0D 100%);',
+        'button-overlay': 'linear-gradient(0deg, rgba(12,13,13,0) 0%, rgba(12,13,13,1) 100%);',
         'community-light':
           'radial-gradient(100% 2244.95% at 100% 100%, rgba(217, 238, 242, 0.5) 0%, rgba(217, 238, 242, 0.1) 70.08%);',
         'community-dark':
@@ -143,11 +143,9 @@ module.exports = {
               '-1px -1px 0 transparent, 1px -1px 0 transparent, -1px 1px 0 transparent, 1px 1px 0 transparent',
           },
         },
-        'neon-border-light': {},
       }),
       animation: {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-        'neon-border-light': 'neon-border-light 0.4s ease',
       },
       typography: () => ({
         DEFAULT: {

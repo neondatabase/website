@@ -57,7 +57,7 @@ const LinesIllustration = ({ color }) => (
       </defs>
     </svg>
     <motion.span
-      className="mx-auto block h-[1.1px] w-full bg-button-overlay bg-blend-overlay"
+      className="mx-auto block h-[10px] w-full bg-button-overlay bg-blend-overlay"
       animate={{ y: [0, -144] }}
       transition={{ ease: 'linear', duration: 4, repeat: Infinity }}
     />
