@@ -14,14 +14,9 @@ import LINKS from 'constants/links';
 import infoHoveredIcon from 'icons/tooltip-hovered.svg';
 import infoIcon from 'icons/tooltip.svg';
 
-import ScaleIcon from './svg/fullsize-icon.inline.svg';
-import ProtoIcon from './svg/gear-icon.inline.svg';
-import LaunchIcon from './svg/spaceship-icon.inline.svg';
-
 const items = [
   {
     type: 'Prototype',
-    icon: ProtoIcon,
     metrics: [
       {
         name: 'Compute hours',
@@ -48,7 +43,6 @@ const items = [
   },
   {
     type: 'Launch',
-    icon: LaunchIcon,
     metrics: [
       {
         name: 'Compute hours',
@@ -75,7 +69,6 @@ const items = [
   },
   {
     type: 'Scale',
-    icon: ScaleIcon,
     metrics: [
       {
         name: 'Compute hours',
@@ -125,9 +118,6 @@ const Estimates = () => {
       fit: Fit.FitWidth,
       alignment: Alignment.Center,
     }),
-    onLoad: () => {
-      launchRive?.resizeDrawingSurfaceToCanvas();
-    },
   });
   const { rive: scaleRive, RiveComponent: ScaleIconComponent } = useRive({
     src: '/animations/pages/pricing/icon-scale.riv',
@@ -137,18 +127,15 @@ const Estimates = () => {
       fit: Fit.FitWidth,
       alignment: Alignment.Center,
     }),
-    onLoad: () => {
-      scaleRive?.resizeDrawingSurfaceToCanvas();
-    },
   });
 
-  const prototypeClickInput = useStateMachineInput(prototypeRive, 'SM', 'click');
+  const prototypeClickInput = useStateMachineInput(prototypeRive, 'SM', 'active');
   const prototypeHoverInput = useStateMachineInput(prototypeRive, 'SM', 'hover');
   const prototypeUnhoverInput = useStateMachineInput(prototypeRive, 'SM', 'unhover');
   const launchClickInput = useStateMachineInput(launchRive, 'SM', 'click');
   const launchHoverInput = useStateMachineInput(launchRive, 'SM', 'hover');
   const launchUnhoverInput = useStateMachineInput(launchRive, 'SM', 'unhover');
-  const scaleClickInput = useStateMachineInput(scaleRive, 'SM', 'click');
+  const scaleClickInput = useStateMachineInput(scaleRive, 'SM', 'go');
   const scaleHoverInput = useStateMachineInput(scaleRive, 'SM', 'hover');
   const scaleUnhoverInput = useStateMachineInput(scaleRive, 'SM', 'unhover');
 
@@ -242,7 +229,7 @@ const Estimates = () => {
                 <li key={index}>
                   <button
                     className={clsx(
-                      'flex items-center border-b pb-1.5 text-sm font-medium uppercase leading-none tracking-wider text-white transition-colors duration-200',
+                      'relative flex items-center border-b pl-5 pb-2 text-sm font-medium uppercase leading-none tracking-wider text-white transition-colors duration-200',
                       type === selected && index === 0
                         ? '!border-pricing-primary-1 !text-pricing-primary-1'
                         : 'border-transparent',
@@ -261,9 +248,24 @@ const Estimates = () => {
                     onPointerEnter={() => handlePointerEnter(type)}
                     onPointerLeave={() => handlePointerLeave(type)}
                   >
-                    {index === 0 && <PrototypeIconComponent className="h-5 w-5" aria-hidden />}
-                    {index === 1 && <LaunchIconComponent className="h-5 w-5" aria-hidden />}
-                    {index === 2 && <ScaleIconComponent className="h-5 w-5" aria-hidden />}
+                    {isContentInView && index === 0 ? (
+                      <PrototypeIconComponent
+                        className="absolute -left-[4px] -top-[4px] h-[22px] w-[22px]"
+                        aria-hidden
+                      />
+                    ) : null}
+                    {isContentInView && index === 1 ? (
+                      <LaunchIconComponent
+                        className="absolute -left-[4px] -top-[4px] h-[22px] w-[22px]"
+                        aria-hidden
+                      />
+                    ) : null}
+                    {isContentInView && index === 2 ? (
+                      <ScaleIconComponent
+                        className="absolute -left-[4px] -top-[4px] h-[22px] w-[22px]"
+                        aria-hidden
+                      />
+                    ) : null}
                     <span>{type}</span>
                   </button>
                 </li>

@@ -13,7 +13,6 @@ import ArrowRight from 'icons/arrow-right-thin.inline.svg';
 import CheckIcon from 'icons/check.inline.svg';
 import infoHoveredIcon from 'icons/tooltip-hovered.svg';
 import infoIcon from 'icons/tooltip.svg';
-import lines from 'images/pages/pricing/yellow-lines.svg';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const PROJECT_STORAGE_PRICE = 0.000164;
@@ -370,7 +369,7 @@ const Calculator = () => {
             </div>
           </div>
 
-          <div className="col-start-2 row-span-3 row-start-1 flex flex-col self-auto rounded-[10px] border border-secondary-2 px-6 py-7 lg:px-5 md:col-start-1 md:row-span-1 md:grid md:grid-cols-2 md:gap-x-32 sm:grid-cols-1 sm:gap-x-0">
+          <div className="relative z-10 col-start-2 row-span-3 row-start-1 flex flex-col self-auto rounded-[10px] border border-secondary-2 px-6 py-7 lg:px-5 md:col-start-1 md:row-span-1 md:grid md:grid-cols-2 md:gap-x-32 sm:grid-cols-1 sm:gap-x-0">
             <h3 className="text-lg leading-none tracking-tight text-white md:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
@@ -380,24 +379,18 @@ const Calculator = () => {
               </span>
               <span className="mb-1 block text-[26px] tracking-normal lg:text-[24px]">/mo</span>
             </p>
-            <p className="relative mb-7 mt-11 xl:mt-10 xl:mb-8 lg:my-8 md:col-start-2 sm:col-start-1">
-              <Button
-                className="relative z-20 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg font-medium md:w-full md:max-w-[340px]"
-                theme="primary"
-                to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
-                size="sm"
-              >
-                {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
-              </Button>
-              <img
-                className="pointer-events-none absolute left-1/2 -top-8 z-10 min-w-[120%] -translate-x-1/2 lg:-top-4 md:hidden"
-                src={lines}
-                width={296}
-                height={134}
-                loading="lazy"
-                alt=""
-              />
-            </p>
+            <Button
+              className="mb-7 mt-11 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg font-medium xl:mt-10 xl:mb-8 lg:my-8 md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1"
+              to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
+              theme="primary"
+              size="sm"
+              animationSize="sm"
+              animationColor="#f0f075"
+              animationClassName="-top-3/4 w-[118%]"
+              isAnimated
+            >
+              {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
+            </Button>
             <ul className="md: my-9 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-pricing-black xl:mt-12 lg:mt-4 lg:space-y-6 md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2">
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:pl-0">
                 <CheckIcon className="mr-2 w-4 text-secondary-2" aria-hidden />

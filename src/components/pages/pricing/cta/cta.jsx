@@ -42,7 +42,7 @@ const CTA = () => {
           <Heading className="whitespace-nowrap md:text-center" tag="h2" size="2sm">
             Still have a <span className="text-pricing-primary-1">question?</span>
           </Heading>
-          <p className="mt-4 text-lg font-light leading-snug xl:text-base md:mx-auto md:max-w-[570px] md:text-center">
+          <p className="mt-4 text-lg font-light leading-snug xl:text-base md:mx-auto md:max-w-[550px] md:text-center">
             Interested in increasing your free tier limits or learning about pricing? Complete the
             form below to get in touch with our Sales team
           </p>
@@ -52,6 +52,7 @@ const CTA = () => {
             to={links.contactSales}
             size="sm"
             animationSize="sm"
+            animationClassName="w-[126%]"
             isAnimated
           >
             Talk to sales
@@ -63,7 +64,7 @@ const CTA = () => {
             src="/images/pages/pricing/cta.jpg"
             width={842}
             height={538}
-            quality={80}
+            quality={100}
             alt=""
           />
           <div ref={setRiveRef}>
