@@ -63,6 +63,7 @@ const CTA = () => {
             src="/images/pages/pricing/cta.jpg"
             width={842}
             height={538}
+            quality={80}
             alt=""
           />
           <div ref={setRiveRef}>
