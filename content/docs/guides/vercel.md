@@ -1,6 +1,6 @@
 ---
 title: Connect with the Neon Vercel integration
-subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel Integration and create a branch for each preview deployment
+subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel Integration
 enableTableOfContents: true
 ---
 
@@ -158,3 +158,7 @@ To view integration permissions, manage integration access, or remove the Neon i
 
 1. On the Vercel dashboard, select **Settings** > **Integrations**.
 1. Find the **Neon** integration and select **Manage**.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
