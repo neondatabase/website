@@ -10,11 +10,12 @@ import Link from 'components/shared/link';
 // eslint-disable-next-line react/prop-types
 const LinesIllustration = ({ color }) => (
   <motion.span
-    className="pointer-events-none absolute -top-3/4 left-1/2 -z-10 block w-[116%] -translate-x-1/2"
+    className="pointer-events-none absolute -top-1/2 left-1/2 -z-10 block w-[113%] -translate-x-1/2"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
+    aria-hidden
   >
-    <svg className="max-w-full" width="390" height="144" viewBox="0 0 390 144" fill="none">
+    <svg className="h-auto max-w-full" width="390" height="144" viewBox="0 0 390 144" fill="none">
       <g filter="url(#a)" opacity=".6">
         <path
           fill="url(#b)"
@@ -57,7 +58,7 @@ const LinesIllustration = ({ color }) => (
       </defs>
     </svg>
     <motion.span
-      className="mx-auto block h-[10px] w-full bg-button-overlay bg-blend-overlay"
+      className="absolute block h-[10px] w-full bg-button-overlay bg-blend-overlay"
       animate={{ y: [0, -144] }}
       transition={{ ease: 'linear', duration: 4, repeat: Infinity }}
     />
@@ -95,7 +96,7 @@ const Button = ({
   const [cursorAnimationVariant, setCursorAnimationVariant] = useState('default');
   const [mouseXPosition, setMouseXPosition] = useState(0);
   const [mouseYPosition, setMouseYPosition] = useState(0);
-  const ticketRef = useRef(null);
+  const buttonRef = useRef(null);
   const cursorBlurVariants = useMemo(
     () => ({
       default: {
@@ -123,7 +124,7 @@ const Button = ({
   );
 
   const handleMouseMove = (event) => {
-    const { left, top } = ticketRef.current.getBoundingClientRect();
+    const { left, top } = buttonRef.current.getBoundingClientRect();
 
     if (event.clientX !== null) {
       setMouseXPosition(event.clientX - left - 13);
@@ -148,7 +149,7 @@ const Button = ({
     <Tag
       className={clsx('relative', className)}
       to={to}
-      ref={ticketRef}
+      ref={buttonRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -163,6 +164,7 @@ const Button = ({
           stiffness: 500,
           damping: 28,
         }}
+        aria-hidden
       />
       {children}
       <LinesIllustration color={animationColor} />

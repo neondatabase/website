@@ -12,15 +12,22 @@ import links from 'constants/links';
 import lines from 'images/pages/pricing/green-lines-small.svg';
 
 const CTA = () => {
-  const [contentRef, isContentInView] = useInView({ rootMargin: '30px 0px', triggerOnce: true });
-  const { RiveComponent, rive } = useRive({
+  const [contentRef, isContentInView] = useInView({ rootMargin: '50px 0px', triggerOnce: true });
+  const {
+    rive,
+    RiveComponent,
+    setContainerRef: setRiveRef,
+  } = useRive({
     src: '/animations/pages/pricing/flip-numbers.riv',
-    autoplay: true,
+    autoplay: false,
     stateMachines: 'SM',
     layout: new Layout({
       fit: Fit.FitWidth,
       alignment: Alignment.Center,
     }),
+    onLoad: () => {
+      rive?.resizeDrawingSurfaceToCanvas();
+    },
   });
 
   useEffect(() => {
@@ -66,12 +73,16 @@ const CTA = () => {
             height={538}
             alt=""
           />
-          <RiveComponent
-            className="absolute top-[142px] left-1/2 h-[140px] w-[74px] -translate-x-1/2 xl:top-[124px] xl:h-[78px] xl:w-[58px] md:hidden"
-            width={74}
-            height={140}
-            aria-hidden
-          />
+          <div ref={setRiveRef}>
+            {isContentInView ? (
+              <RiveComponent
+                className="absolute top-[184px] left-1/2 h-[140px] w-[89px] -translate-x-1/2 2xl:top-[142px] 2xl:h-[140px] 2xl:w-[74px] xl:top-[124px] xl:h-[78px] xl:w-[58px] md:hidden"
+                width={74}
+                height={140}
+                aria-hidden
+              />
+            ) : null}
+          </div>
         </div>
       </Container>
     </section>
