@@ -36,7 +36,7 @@ Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about
 
 <TechnologyNavigation>
 
-[![Vercel](/images/technology-logos/vercel-logo.svg "Connect with the Neon Vercel")](/docs/guides/vercel)
+[![Vercel](/images/technology-logos/vercel-logo.svg "Integrate Neon with Vercel")](/docs/guides/vercel-overview)
 
 [![Prisma](/images/technology-logos/prisma-logo.svg "Connect from Prisma to Neon")](/docs/guides/prisma)
 
