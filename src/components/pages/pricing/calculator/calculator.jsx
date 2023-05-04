@@ -77,7 +77,7 @@ const thumbVariants = {
     width: 23,
     height: 23,
     border: '2px solid #00E599',
-    borderRadius: 9,
+    borderRadius: 7,
     backgroundColor: '#131415',
     transition: {
       duration: 0.2,
@@ -87,12 +87,12 @@ const thumbVariants = {
     width: 28,
     height: 28,
     border: '2px solid #00E599',
-    borderRadius: 8,
+    borderRadius: 6,
     backgroundColor: '#131415',
     transition: {
       duration: 0.1,
       backgroundColor: {
-        duration: 0.5,
+        duration: 0.3,
       },
     },
   },
@@ -193,7 +193,7 @@ const Calculator = () => {
                       className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
                       onPointerEnter={() => computeSizeControls.start('hover')}
                       onPointerDown={() => computeSizeControls.start('to')}
-                      onPointerUp={() => computeSizeControls.start('from')}
+                      onPointerUp={() => computeSizeControls.start('hover')}
                       onPointerLeave={() => computeSizeControls.start('from')}
                     >
                       <m.span
@@ -234,14 +234,14 @@ const Calculator = () => {
                   </Slider.Track>
                   <LazyMotion features={domAnimation}>
                     <Slider.Thumb
-                      className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
+                      className="flex cursor-pointer items-center justify-center rounded-full"
                       onPointerEnter={() => activeTimeControls.start('hover')}
                       onPointerDown={() => activeTimeControls.start('to')}
-                      onPointerUp={() => activeTimeControls.start('from')}
+                      onPointerUp={() => activeTimeControls.start('hover')}
                       onPointerLeave={() => activeTimeControls.start('from')}
                     >
                       <m.span
-                        className="absolute h-2.5 w-1 rounded-[1px] bg-pricing-primary-1"
+                        className="absolute h-2.5 w-1 rounded-[1px] bg-pricing-primary-1 before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
                         initial="from"
                         animate={activeTimeControls}
                         variants={thumbVariants}
@@ -290,7 +290,7 @@ const Calculator = () => {
                       className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
                       onPointerEnter={() => projectStorageControls.start('hover')}
                       onPointerDown={() => projectStorageControls.start('to')}
-                      onPointerUp={() => projectStorageControls.start('from')}
+                      onPointerUp={() => projectStorageControls.start('hover')}
                       onPointerLeave={() => projectStorageControls.start('from')}
                     >
                       <m.span
