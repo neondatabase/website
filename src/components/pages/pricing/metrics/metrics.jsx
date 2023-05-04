@@ -127,14 +127,19 @@ const items = [
   },
 ];
 
+const ITEMS_COUNT = 4;
+
 const Metrics = () => {
-  const topRef = useRef(null);
+  const scrollYRef = useRef(null);
+  const scrollDirectionRef = useRef(null);
+  const stickyTopValueRef = useRef(null);
+  const freezeAreaHeightRef = useRef(null);
   const anchorRef = useRef(null);
   const riveRef = useRef(null);
 
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
 
-  const scrollY = useScrollPosition();
+  const scrollY = useScrollPosition(60);
 
   const [contentRef, isContentInView] = useInView({ triggerOnce: true });
   const { RiveComponent, rive } = useRive({
@@ -195,19 +200,18 @@ const Metrics = () => {
 
     const { scrollY, innerHeight } = window;
 
+    const anchorHeight = anchorRef.current?.clientHeight || 0;
     const anchorDocumentGap = anchorRef.current?.getBoundingClientRect().y || 0;
     const stickyDocumentGap = (content?.getBoundingClientRect().y || 0) + scrollY;
-    const anchorWindowGap = (innerHeight - (anchorRef.current?.clientHeight || 0)) / 2;
+    const anchorWindowGap = (innerHeight - anchorHeight) / 2;
 
-    const stickyTopValue = scrollY + anchorDocumentGap - stickyDocumentGap - anchorWindowGap;
+    stickyTopValueRef.current = scrollY + anchorDocumentGap - stickyDocumentGap - anchorWindowGap;
 
-    topRef.current = stickyTopValue;
+    freezeAreaHeightRef.current = Math.max(anchorHeight, innerHeight) * ITEMS_COUNT;
 
-    content.style.height = `${
-      (content?.clientHeight || 0) + (anchorRef.current?.clientHeight || 0) * items.length
-    }px`;
+    content.style.height = `${(content?.clientHeight || 0) + freezeAreaHeightRef.current}px`;
     sticky.style.position = 'sticky';
-    sticky.style.top = `${stickyTopValue * -1}px`;
+    sticky.style.top = `${stickyTopValueRef.current * -1}px`;
   }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -222,19 +226,32 @@ const Metrics = () => {
   }, [calcStickyTopValue, debauncedCalcStickyTopValue]);
 
   useEffect(() => {
-    const delta = scrollY - topRef.current;
-    const height = anchorRef.current?.clientHeight || 0;
+    const border = freezeAreaHeightRef.current / ITEMS_COUNT;
+    const delta = scrollY - stickyTopValueRef.current;
 
-    const sectionIdx = items.findIndex((_, idx) => delta < height * (idx + 1));
+    if (delta < 0) {
+      return;
+    }
 
-    if (sectionIdx !== -1 && sectionIdx !== currentSectionIndex) {
+    const sectionIdx = Math.min(ITEMS_COUNT - 1, Math.round(delta / border));
+
+    if (sectionIdx !== currentSectionIndex) {
       setCurrentSectionIndex(sectionIdx);
     }
   }, [currentSectionIndex, scrollY]);
 
+  useEffect(() => {
+    if (scrollY > scrollYRef.current) {
+      scrollDirectionRef.current = 'DOWN';
+    } else {
+      scrollDirectionRef.current = 'UP';
+    }
+    scrollYRef.current = scrollY;
+  }, [scrollY]);
+
   return (
     <section className="safe-paddings pb-80 pt-60 3xl:py-36 lg:pt-32" ref={contentRef}>
-      <Container className="relative z-10 flex flex-col items-center" size="md">
+      <Container className="relative z-10 flex flex-col items-center" size="mdDoc">
         <Heading className="text-center" badge="Metrics" tag="h2" size="2sm">
           Neon charges on <span className="text-pricing-primary-1">4 metrics</span>
         </Heading>
@@ -250,7 +267,7 @@ const Metrics = () => {
           for rates per region.
         </p>
       </Container>
-      <Container className="relative z-0 pt-52 3xl:pt-20 lg:pt-16" size="md">
+      <Container className="relative z-0 pt-52 3xl:pt-20 lg:pt-16" size="mdDoc">
         <div className="h-[367px] 3xl:h-[326px] lg:h-[324px]" ref={anchorRef}>
           <div className="grid-gap-x grid h-full grid-cols-12">
             <div className="col-span-5 col-start-2 3xl:col-span-6 3xl:col-start-1">
@@ -263,21 +280,45 @@ const Metrics = () => {
                 </div>
               </div>
             </div>
-            <div className="col-span-5 col-start-8 3xl:col-span-6 3xl:col-start-7">
+            <div className="relative col-span-5 col-start-8 3xl:col-span-6 3xl:col-start-7">
               <AnimatePresence>
                 {items.map(
                   ({ name, priceFrom, details, prices }, idx) =>
                     currentSectionIndex === idx && (
                       <motion.div
                         key={idx}
-                        initial="collapsed"
-                        animate="open"
-                        exit="collapsed"
+                        className="absolute top-0 left-0 h-full w-full"
                         variants={{
-                          open: { opacity: 1, height: 'auto' },
-                          collapsed: { opacity: 0, height: 0 },
+                          initial: {
+                            zIndex: 1,
+                            y: scrollDirectionRef.current === 'DOWN' ? 100 : -100,
+                            opacity: 0,
+                          },
+                          animate: {
+                            zIndex: 2,
+                            y: 0,
+                            opacity: 1,
+                            transition: {
+                              duration: 1.1,
+                              ease: 'easeOut',
+                            },
+                          },
+                          exit: {
+                            zIndex: 0,
+                            y: scrollDirectionRef.current === 'DOWN' ? -50 : 50,
+                            opacity: 0,
+                            transition: {
+                              duration: 0.4,
+                              ease: 'linear',
+                              opacity: {
+                                duration: 0.3,
+                              },
+                            },
+                          },
                         }}
-                        transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
                       >
                         <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white xl:text-[28px]">
                           {name}
