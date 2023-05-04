@@ -131,13 +131,10 @@ const Estimates = () => {
 
   const prototypeHoverInput = useStateMachineInput(prototypeRive, 'SM', 'hover', false);
   const prototypeActiveInput = useStateMachineInput(prototypeRive, 'SM', 'active', true);
-
-  const launchClickInput = useStateMachineInput(launchRive, 'SM', 'click');
-  const launchHoverInput = useStateMachineInput(launchRive, 'SM', 'hover');
-  const launchUnhoverInput = useStateMachineInput(launchRive, 'SM', 'unhover');
-  const scaleClickInput = useStateMachineInput(scaleRive, 'SM', 'go');
-  const scaleHoverInput = useStateMachineInput(scaleRive, 'SM', 'hover');
-  const scaleUnhoverInput = useStateMachineInput(scaleRive, 'SM', 'unhover');
+  const launchHoverInput = useStateMachineInput(launchRive, 'SM', 'hover', false);
+  const launchActiveInput = useStateMachineInput(launchRive, 'SM', 'active', false);
+  const scaleHoverInput = useStateMachineInput(scaleRive, 'SM', 'hover', false);
+  const scaleActiveInput = useStateMachineInput(scaleRive, 'SM', 'active', false);
 
   useEffect(() => {
     if (!isContentInView) return;
@@ -151,14 +148,8 @@ const Estimates = () => {
     setSelected(type);
 
     prototypeActiveInput.value = !!(type === 'Prototype' && prototypeActiveInput);
-
-    if (type === 'Launch' && launchClickInput) {
-      launchClickInput.fire();
-    }
-
-    if (type === 'Scale' && scaleClickInput) {
-      scaleClickInput.fire();
-    }
+    launchActiveInput.value = !!(type === 'Launch' && launchActiveInput);
+    scaleActiveInput.value = !!(type === 'Scale' && scaleActiveInput);
   };
 
   const handlePointerEnter = (type) => {
@@ -167,11 +158,11 @@ const Estimates = () => {
     }
 
     if (type === 'Launch' && launchHoverInput) {
-      launchHoverInput.fire();
+      launchHoverInput.value = true;
     }
 
     if (type === 'Scale' && scaleHoverInput) {
-      scaleHoverInput.fire();
+      scaleHoverInput.value = true;
     }
   };
 
@@ -180,12 +171,12 @@ const Estimates = () => {
       prototypeHoverInput.value = false;
     }
 
-    if (type === 'Launch' && launchUnhoverInput) {
-      launchUnhoverInput.fire();
+    if (type === 'Launch' && launchHoverInput) {
+      launchHoverInput.value = false;
     }
 
-    if (type === 'Scale' && scaleUnhoverInput) {
-      scaleUnhoverInput.fire();
+    if (type === 'Scale' && scaleHoverInput) {
+      scaleHoverInput.value = false;
     }
   };
 

@@ -1,7 +1,7 @@
 'use client';
 
 import * as Slider from '@radix-ui/react-slider';
-import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
+import { LazyMotion, domAnimation, m, AnimatePresence, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -65,6 +65,26 @@ const calculateDataTransferCost = (dataTransferValue) => dataTransferValue * DAT
 
 const calculateWrittenDataCost = (writtenDataValue) => writtenDataValue * WRITTEN_DATA_PRICE;
 
+const thumbVariants = {
+  from: {
+    width: 4,
+    height: 10,
+    border: 'none',
+    borderRadius: 1,
+    backgroundColor: '#00E599',
+  },
+  to: {
+    width: 20,
+    height: 20,
+    border: '2px solid #00E599',
+    borderRadius: 5,
+    backgroundColor: '#131415',
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
 const Calculator = () => {
   const [isAdvanced, setIsAdvanced] = useState(false);
   const [computeUnits, setComputeUnits] = useState(1);
@@ -73,6 +93,9 @@ const Calculator = () => {
   const [dataTransferValue, setDataTransferValue] = useState(10);
   const [writtenDataValue, setWrittenDataValue] = useState(10);
   const [writtenAndTransferDataCost, setWrittenAndTransferDataCost] = useState(0);
+  const computeSizeControls = useAnimation();
+  const activeTimeControls = useAnimation();
+  const projectStorageControls = useAnimation();
 
   const computeTimeCost = useMemo(
     () => calculateComputeCost(computeUnits, activeTime),
@@ -152,9 +175,20 @@ const Calculator = () => {
                   <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-pricing-gray-3">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
-                  <Slider.Thumb className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75">
-                    <span className="h-2.5 w-1 rounded-[1px] bg-pricing-primary-1" />
-                  </Slider.Thumb>
+                  <LazyMotion features={domAnimation}>
+                    <Slider.Thumb
+                      className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
+                      onPointerDown={() => computeSizeControls.start('to')}
+                      onPointerOut={() => computeSizeControls.start('from')}
+                    >
+                      <m.span
+                        className="h-2.5 w-1 rounded-[1px] bg-pricing-primary-1"
+                        initial="from"
+                        animate={computeSizeControls}
+                        variants={thumbVariants}
+                      />
+                    </Slider.Thumb>
+                  </LazyMotion>
                 </Slider.Root>
                 <p className="text-right text-sm leading-none tracking-tight text-pricing-gray-9">
                   <span className="after:mx-2 after:inline-block after:h-[4px] after:w-[4px] after:rounded-full after:bg-pricing-primary-1 after:align-middle">
@@ -183,9 +217,20 @@ const Calculator = () => {
                   <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-pricing-gray-3">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
-                  <Slider.Thumb className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75">
-                    <span className="h-2.5 w-1 rounded-[1px] bg-pricing-primary-1" />
-                  </Slider.Thumb>
+                  <LazyMotion features={domAnimation}>
+                    <Slider.Thumb
+                      className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
+                      onPointerDown={() => activeTimeControls.start('to')}
+                      onPointerOut={() => activeTimeControls.start('from')}
+                    >
+                      <m.span
+                        className="h-2.5 w-1 rounded-[1px] bg-pricing-primary-1"
+                        initial="from"
+                        animate={activeTimeControls}
+                        variants={thumbVariants}
+                      />
+                    </Slider.Thumb>
+                  </LazyMotion>
                 </Slider.Root>
                 <p className="text-right text-sm leading-none tracking-tight">
                   {activeTime} hour{activeTime <= 1 ? '' : 's'}{' '}
@@ -223,9 +268,20 @@ const Calculator = () => {
                   <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-pricing-gray-3">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
-                  <Slider.Thumb className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75">
-                    <span className="h-2.5 w-1 rounded-[1px] bg-pricing-primary-1" />
-                  </Slider.Thumb>
+                  <LazyMotion features={domAnimation}>
+                    <Slider.Thumb
+                      className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
+                      onPointerDown={() => projectStorageControls.start('to')}
+                      onPointerOut={() => projectStorageControls.start('from')}
+                    >
+                      <m.span
+                        className="h-2.5 w-1 rounded-[1px] bg-pricing-primary-1"
+                        initial="from"
+                        animate={projectStorageControls}
+                        variants={thumbVariants}
+                      />
+                    </Slider.Thumb>
+                  </LazyMotion>
                 </Slider.Root>
                 <p className="text-right text-sm leading-none tracking-tight text-pricing-gray-9">
                   {storageValue} GiB
