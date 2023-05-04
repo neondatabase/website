@@ -425,23 +425,29 @@ const Calculator = () => {
             </div>
           </div>
 
-          <div className="relative z-10 col-start-2 row-span-3 row-start-1 flex flex-col self-auto rounded-[10px] border border-secondary-2 px-6 py-7 lg:px-5 md:col-start-1 md:row-span-1 md:grid md:grid-cols-2 md:gap-x-32 sm:grid-cols-1 sm:gap-x-0">
+          <div
+            className="relative z-10 col-start-2 row-span-3 row-start-1 flex flex-col self-auto rounded-[10px] border border-[var(--accentColor)] px-6 py-7 transition-colors duration-200 lg:px-5 md:col-start-1 md:row-span-1 md:grid md:grid-cols-2 md:gap-x-32 sm:grid-cols-1 sm:gap-x-0"
+            style={{
+              '--accentColor': totalCost >= CUSTOM_THRESHOLD ? '#f0f075' : '#00e599',
+              '--hoverColor': totalCost >= CUSTOM_THRESHOLD ? '#f5f5a3' : '#00ffaa',
+            }}
+          >
             <h3 className="text-lg leading-none tracking-tight text-white md:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
             <p className="mt-6 flex items-end gap-2 leading-none text-white xl:mt-7 lg:mt-5 md:col-start-2 sm:col-start-1">
-              <span className="text-[56px] font-light tracking-[-0.06em] text-secondary-2 lg:text-[44px]">
+              <span className="text-[56px] font-light tracking-[-0.06em] text-[var(--accentColor)] transition-colors duration-200 lg:text-[44px]">
                 {estimatedPrice}
               </span>
               <span className="mb-1 block text-[26px] tracking-normal lg:text-[24px]">/mo</span>
             </p>
             <Button
-              className="mb-7 mt-11 w-full max-w-[260px] !bg-secondary-2 !py-[17px] !text-lg font-medium xl:mt-10 xl:mb-8 lg:my-8 md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1"
+              className="mb-7 mt-11 w-full max-w-[260px] !bg-[var(--accentColor)] !py-[17px] !text-lg font-medium hover:!bg-[var(--hoverColor)] xl:mt-10 xl:mb-8 lg:my-8 md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1"
               to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               theme="primary"
               size="sm"
               animationSize="sm"
-              animationColor="#f0f075"
+              animationColor="var(--accentColor)"
               animationClassName="-top-3/4 w-[118%]"
               isAnimated
             >
@@ -449,22 +455,34 @@ const Calculator = () => {
             </Button>
             <ul className="md: my-9 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-pricing-black xl:mt-12 lg:mt-4 lg:space-y-6 md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2">
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:pl-0">
-                <CheckIcon className="mr-2 w-4 text-secondary-2" aria-hidden />
+                <CheckIcon
+                  className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
+                  aria-hidden
+                />
                 <span className="mr-1">{computeUnits}</span>
                 <span>compute units</span>
               </li>
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:pl-0">
-                <CheckIcon className="mr-2 w-4 text-secondary-2" aria-hidden />
+                <CheckIcon
+                  className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
+                  aria-hidden
+                />
                 <span className="mr-1">{storageValue} GiB</span>
                 <span>storage</span>
               </li>
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:pl-0">
-                <CheckIcon className="mr-2 w-4 text-secondary-2" aria-hidden />
+                <CheckIcon
+                  className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
+                  aria-hidden
+                />
                 {isAdvanced && <span className="mr-1">{writtenDataValue} GiB</span>}
                 <span>written data</span>
               </li>
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white md:pl-0 sm:pl-0">
-                <CheckIcon className="mr-2 w-4 text-secondary-2" aria-hidden />
+                <CheckIcon
+                  className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
+                  aria-hidden
+                />
                 {isAdvanced && <span className="mr-1">{dataTransferValue} GiB</span>}
                 <span>data transfer</span>
               </li>
