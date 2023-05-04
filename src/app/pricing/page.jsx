@@ -13,8 +13,8 @@ const PricingPage = () => (
     footerTheme="pricing"
     footerWithTopBorder
   >
-    <div id="pricing-content">
-      <div id="pricing-sticky">
+    <div id="pricing-content" className="md:!h-auto">
+      <div id="pricing-sticky" className="md:!static">
         <Hero />
         <Metrics />
         <Estimates />

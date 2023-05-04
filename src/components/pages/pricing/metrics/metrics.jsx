@@ -4,6 +4,7 @@ import useScrollPosition from '@react-hook/window-scroll';
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
 import { motion, AnimatePresence } from 'framer-motion';
 import debounce from 'lodash.debounce';
+import Image from 'next/image';
 import { useRef, useEffect, useCallback, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -188,7 +189,7 @@ const Metrics = () => {
 
   useEffect(() => {
     if (currentSectionIndex >= 2) {
-      riveRef.current.style.transform = 'translateY(-20%)';
+      riveRef.current.style.transform = 'translateY(-8%)';
     } else {
       riveRef.current.style.transform = 'translateY(0)';
     }
@@ -250,7 +251,10 @@ const Metrics = () => {
   }, [scrollY]);
 
   return (
-    <section className="safe-paddings pb-80 pt-60 3xl:py-36 lg:pt-32" ref={contentRef}>
+    <section
+      className="safe-paddings pb-[288px] pt-60 2xl:pt-36 2xl:pb-60 xl:pb-44 lg:pt-32 lg:pb-48 md:pb-24 md:pt-20"
+      ref={contentRef}
+    >
       <Container className="relative z-10 flex flex-col items-center" size="mdDoc">
         <Heading className="text-center" badge="Metrics" tag="h2" size="2sm">
           Neon charges on <span className="text-pricing-primary-1">4 metrics</span>
@@ -267,20 +271,20 @@ const Metrics = () => {
           for rates per region.
         </p>
       </Container>
-      <Container className="relative z-0 pt-52 3xl:pt-20 lg:pt-16" size="mdDoc">
-        <div className="h-[367px] 3xl:h-[326px] lg:h-[324px]" ref={anchorRef}>
+      <Container className="relative z-0 pt-52 2xl:pt-32 lg:pt-16 md:hidden" size="mdDoc">
+        <div className="h-[367px] 2xl:h-[326px] lg:h-[324px]" ref={anchorRef}>
           <div className="grid-gap-x grid h-full grid-cols-12">
-            <div className="col-span-5 col-start-2 3xl:col-span-6 3xl:col-start-1">
+            <div className="col-span-5 col-start-2 2xl:col-span-6 2xl:col-start-1">
               <div
-                className="relative -top-[200px] transition-transform duration-700 3xl:-top-[100px] lg:-top-[50px]"
+                className="relative -top-[200px] transition-transform duration-700 2xl:-top-[150px] xl:-top-[120px] lg:-top-[50px]"
                 ref={riveRef}
               >
-                <div className="aspect-[0.6086956522] w-[590px] 3xl:mx-auto 3xl:w-[390px] lg:w-[320px]">
+                <div className="aspect-[0.6086956522] w-[590px] 2xl:mx-auto 2xl:w-[490px] xl:w-[390px] lg:w-[320px]">
                   {isContentInView ? <RiveComponent /> : null}
                 </div>
               </div>
             </div>
-            <div className="relative col-span-5 col-start-8 3xl:col-span-6 3xl:col-start-7">
+            <div className="relative col-span-5 col-start-8 2xl:col-span-6 2xl:col-start-7">
               <AnimatePresence>
                 {items.map(
                   ({ name, priceFrom, details, prices }, idx) =>
@@ -320,7 +324,7 @@ const Metrics = () => {
                         animate="animate"
                         exit="exit"
                       >
-                        <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white xl:text-[28px]">
+                        <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white xl:text-[28px] lg:text-2xl">
                           {name}
                           <span className="block font-light text-pricing-primary-1">
                             {priceFrom}
@@ -356,6 +360,42 @@ const Metrics = () => {
             </div>
           </div>
         </div>
+      </Container>
+      <Container size="mdDoc" className="hidden md:block">
+        {items.map(({ image, name, priceFrom, details, prices }, idx) => (
+          <div key={idx}>
+            <Image
+              className="md:my-13 my-14 hidden max-w-full md:mx-auto md:block md:max-w-[80%]"
+              width={590}
+              height={830}
+              src={image}
+              alt={`${name} illustration`}
+            />
+            <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white xl:text-[28px]">
+              {name}
+              <span className="block font-light text-pricing-primary-1">{priceFrom}</span>
+            </h2>
+            <p className="mt-2 text-lg leading-tight tracking-tight xl:text-base">{details}</p>
+            <div className="mt-8 max-w-[464px] xl:mt-5">
+              <div className="grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-2.5 text-[12px] uppercase leading-none text-pricing-gray-4 xl:gap-x-[20%] lg:gap-x-1">
+                <span>Region</span>
+                <span>Price</span>
+              </div>
+              {prices.map(({ name, price, unit }, index) => (
+                <div
+                  className="text-gray-94 grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-[15px] text-[15px] leading-none xl:gap-x-[20%] xl:py-3.5 lg:gap-x-1"
+                  key={index}
+                >
+                  <span>{name}</span>
+                  <span>
+                    ${price} /{' '}
+                    <span className="font-light tracking-tight text-pricing-gray-7">{unit}</span>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </Container>
     </section>
   );
