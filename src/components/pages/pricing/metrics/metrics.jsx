@@ -3,7 +3,7 @@
 import useScrollPosition from '@react-hook/window-scroll';
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
 import { motion, AnimatePresence } from 'framer-motion';
-import debounce from 'lodash.debounce';
+// import debounce from 'lodash.debounce';
 import Image from 'next/image';
 import { useRef, useEffect, useCallback, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -216,15 +216,15 @@ const Metrics = () => {
   }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debauncedCalcStickyTopValue = useCallback(debounce(calcStickyTopValue, 300), []);
+  // const debauncedCalcStickyTopValue = useCallback(debounce(calcStickyTopValue, 300), []);
 
   useEffect(() => {
     calcStickyTopValue();
 
-    window.addEventListener('resize', debauncedCalcStickyTopValue);
+    //   window.addEventListener('resize', debauncedCalcStickyTopValue);
 
-    return () => window.removeEventListener('resize', debauncedCalcStickyTopValue);
-  }, [calcStickyTopValue, debauncedCalcStickyTopValue]);
+    //   return () => window.removeEventListener('resize', debauncedCalcStickyTopValue);
+  }, [calcStickyTopValue]);
 
   useEffect(() => {
     const border = freezeAreaHeightRef.current / ITEMS_COUNT;
@@ -252,7 +252,7 @@ const Metrics = () => {
 
   return (
     <section
-      className="safe-paddings pb-[288px] pt-60 2xl:pt-36 2xl:pb-60 xl:pb-44 lg:pt-32 lg:pb-48 md:pb-24 md:pt-20"
+      className="safe-paddings pb-[288px] pt-60 2xl:pt-36 2xl:pb-60 xl:pb-44 lg:pt-32 lg:pb-36 md:pb-24 md:pt-20"
       ref={contentRef}
     >
       <Container className="relative z-10 flex flex-col items-center" size="mdDoc">
@@ -271,7 +271,7 @@ const Metrics = () => {
           for rates per region.
         </p>
       </Container>
-      <Container className="relative z-0 pt-52 2xl:pt-32 lg:pt-16 md:hidden" size="mdDoc">
+      <Container className="relative z-0 pt-52 2xl:pt-32 lg:pt-24 md:hidden" size="mdDoc">
         <div className="h-[367px] 2xl:h-[326px] lg:h-[324px]" ref={anchorRef}>
           <div className="grid-gap-x grid h-full grid-cols-12">
             <div className="col-span-5 col-start-2 2xl:col-span-6 2xl:col-start-1">
