@@ -73,14 +73,14 @@ const thumbVariants = {
     borderRadius: 1,
     backgroundColor: '#00E599',
   },
-  to: {
+  click: {
     width: 23,
     height: 23,
     border: '2px solid #00E599',
     borderRadius: 7,
     backgroundColor: '#131415',
     transition: {
-      duration: 0.2,
+      duration: 0.1,
     },
   },
   hover: {
@@ -192,7 +192,7 @@ const Calculator = () => {
                     <Slider.Thumb
                       className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
                       onPointerEnter={() => computeSizeControls.start('hover')}
-                      onPointerDown={() => computeSizeControls.start('to')}
+                      onPointerDown={() => computeSizeControls.start('click')}
                       onPointerUp={() => computeSizeControls.start('hover')}
                       onPointerLeave={() => computeSizeControls.start('from')}
                     >
@@ -236,7 +236,7 @@ const Calculator = () => {
                     <Slider.Thumb
                       className="flex cursor-pointer items-center justify-center rounded-full"
                       onPointerEnter={() => activeTimeControls.start('hover')}
-                      onPointerDown={() => activeTimeControls.start('to')}
+                      onPointerDown={() => activeTimeControls.start('click')}
                       onPointerUp={() => activeTimeControls.start('hover')}
                       onPointerLeave={() => activeTimeControls.start('from')}
                     >
@@ -289,7 +289,7 @@ const Calculator = () => {
                     <Slider.Thumb
                       className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
                       onPointerEnter={() => projectStorageControls.start('hover')}
-                      onPointerDown={() => projectStorageControls.start('to')}
+                      onPointerDown={() => projectStorageControls.start('click')}
                       onPointerUp={() => projectStorageControls.start('hover')}
                       onPointerLeave={() => projectStorageControls.start('from')}
                     >
