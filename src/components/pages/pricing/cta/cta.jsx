@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import Button from 'components/shared/button';
+import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import links from 'constants/links';
@@ -46,17 +46,18 @@ const CTA = () => {
             Interested in increasing your free tier limits or learning about pricing? Complete the
             form below to get in touch with our Sales team
           </p>
-          <Button
+          <AnimatedButton
             className="mt-8 inline-flex !py-5 !px-14 !text-lg tracking-tight md:mx-auto md:mt-6 md:flex md:w-44"
             theme="primary"
             to={links.contactSales}
             size="sm"
             animationSize="sm"
             animationClassName="w-[126%]"
+            spread={3}
             isAnimated
           >
             Talk to sales
-          </Button>
+          </AnimatedButton>
         </div>
         <div className="relative col-span-7 col-start-6 md:col-span-full" ref={contentRef}>
           <Image

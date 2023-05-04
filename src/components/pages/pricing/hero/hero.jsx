@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 
-import Button from 'components/shared/button';
+import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
@@ -40,7 +40,7 @@ const items = [
       { title: 'Project sharing' },
       { title: 'Configurable compute size' },
       { title: 'Autoscaling', label: 'beta' },
-      { title: 'Configurable auto-suspend compute', label: 'coming soon' },
+      { title: 'Auto-suspend compute', label: 'coming soon' },
     ],
     button: {
       url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
@@ -144,7 +144,7 @@ const Hero = () => {
                     <h3 className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px]">
                       {price}
                     </h3>
-                    <Button
+                    <AnimatedButton
                       className={clsx(
                         'relative mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 lg:max-w-[304px] sm:max-w-none',
                         type === 'Pro'
@@ -155,9 +155,10 @@ const Hero = () => {
                       animationColor="var(--accentColor)"
                       theme="primary"
                       size="sm"
+                      spread={2}
                     >
                       {button.text}
-                    </Button>
+                    </AnimatedButton>
                     <p
                       className={clsx(
                         'mt-9 font-light leading-snug tracking-tight text-pricing-gray-7 md:mt-9',

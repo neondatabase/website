@@ -5,7 +5,7 @@ import { LazyMotion, domAnimation, m, AnimatePresence, useAnimation } from 'fram
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
-import Button from 'components/shared/button';
+import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import LINKS from 'constants/links';
@@ -444,7 +444,7 @@ const Calculator = () => {
               </span>
               <span className="mb-1 block text-[26px] tracking-normal lg:text-[24px]">/mo</span>
             </p>
-            <Button
+            <AnimatedButton
               className="mb-7 mt-11 w-full max-w-[260px] !bg-[var(--accentColor)] !py-[17px] !text-lg font-medium hover:!bg-[var(--hoverColor)] xl:mt-10 xl:mb-8 lg:my-8 md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1"
               to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               theme="primary"
@@ -452,11 +452,12 @@ const Calculator = () => {
               animationSize="sm"
               animationColor="var(--accentColor)"
               animationClassName="-top-3/4 w-[118%]"
+              spread={1}
               isAnimated
             >
               {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
-            </Button>
-            <ul className="md: my-9 flex w-full flex-col space-y-7 text-lg leading-none tracking-tight text-pricing-black xl:mt-12 lg:mt-4 lg:space-y-6 md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2">
+            </AnimatedButton>
+            <ul className="md: my-9 flex w-full flex-grow flex-col space-y-4 text-lg leading-none tracking-tight text-pricing-black xl:mt-12 lg:mt-4 lg:space-y-6 md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2">
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:pl-0">
                 <CheckIcon
                   className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
