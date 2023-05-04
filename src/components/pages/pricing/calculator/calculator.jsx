@@ -31,7 +31,7 @@ const COMPUTE_UNITS_VALUES = {
 };
 
 const COMPUTE_TIME_VALUES = {
-  min: 0.5,
+  min: 1,
   max: 24,
   step: 1,
   default: 10,
