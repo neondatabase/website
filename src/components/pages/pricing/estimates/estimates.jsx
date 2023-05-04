@@ -153,15 +153,15 @@ const Estimates = () => {
   };
 
   const handlePointerEnter = (type) => {
-    if (type === 'Prototype' && prototypeHoverInput) {
+    if (type === 'Prototype' && type !== selected && prototypeHoverInput) {
       prototypeHoverInput.value = true;
     }
 
-    if (type === 'Launch' && launchHoverInput) {
+    if (type === 'Launch' && type !== selected && launchHoverInput) {
       launchHoverInput.value = true;
     }
 
-    if (type === 'Scale' && scaleHoverInput) {
+    if (type === 'Scale' && type !== selected && scaleHoverInput) {
       scaleHoverInput.value = true;
     }
   };
