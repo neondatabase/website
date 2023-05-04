@@ -130,7 +130,8 @@ const Estimates = () => {
   });
 
   const prototypeHoverInput = useStateMachineInput(prototypeRive, 'SM', 'hover', false);
-  const prototypeActiveInput = useStateMachineInput(prototypeRive, 'SM', 'active', false);
+  const prototypeActiveInput = useStateMachineInput(prototypeRive, 'SM', 'active', true);
+
   const launchClickInput = useStateMachineInput(launchRive, 'SM', 'click');
   const launchHoverInput = useStateMachineInput(launchRive, 'SM', 'hover');
   const launchUnhoverInput = useStateMachineInput(launchRive, 'SM', 'unhover');
@@ -139,33 +140,17 @@ const Estimates = () => {
   const scaleUnhoverInput = useStateMachineInput(scaleRive, 'SM', 'unhover');
 
   useEffect(() => {
-    if (selected === 'Prototype' && prototypeActiveInput) {
-      prototypeActiveInput.value = true;
-    }
-  }, [prototypeActiveInput, selected]);
-
-  useEffect(() => {
     if (!isContentInView) return;
 
-    if (prototypeRive) {
-      prototypeRive.play();
-    }
-
-    if (launchRive) {
-      launchRive.play();
-    }
-
-    if (scaleRive) {
-      scaleRive.play();
-    }
+    prototypeRive?.play();
+    launchRive?.play();
+    scaleRive?.play();
   }, [prototypeRive, isContentInView, launchRive, scaleRive]);
 
   const handleSelect = (type) => {
     setSelected(type);
 
-    if (type === 'Prototype' && prototypeActiveInput) {
-      prototypeActiveInput.value = true;
-    }
+    prototypeActiveInput.value = !!(type === 'Prototype' && prototypeActiveInput);
 
     if (type === 'Launch' && launchClickInput) {
       launchClickInput.fire();
@@ -179,7 +164,6 @@ const Estimates = () => {
   const handlePointerEnter = (type) => {
     if (type === 'Prototype' && prototypeHoverInput) {
       prototypeHoverInput.value = true;
-      prototypeActiveInput.value = false;
     }
 
     if (type === 'Launch' && launchHoverInput) {
