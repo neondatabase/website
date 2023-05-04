@@ -234,7 +234,7 @@ const Calculator = () => {
                   </Slider.Track>
                   <LazyMotion features={domAnimation}>
                     <Slider.Thumb
-                      className="flex cursor-pointer items-center justify-center rounded-full"
+                      className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
                       onPointerEnter={() => activeTimeControls.start('hover')}
                       onPointerDown={() => activeTimeControls.start('click')}
                       onPointerUp={() => activeTimeControls.start('hover')}
