@@ -25,3 +25,17 @@
     }
   }
 }
+
+@keyframes lineAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-150px);
+  }
+}
+
+.button-line-animation {
+  animation: lineAnimation 5s linear infinite;
+  animation-timing-function: steps(75);
+}
