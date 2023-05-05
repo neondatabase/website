@@ -21,7 +21,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
         // eslint-disable-next-line no-nested-ternary
         isDarkTheme
           ? theme === 'pricing'
-            ? 'bg-pricing-black text-white'
+            ? 'border-gray-new-15 bg-pricing-black text-white'
             : 'bg-black text-white'
           : 'bg-white text-black'
       )}

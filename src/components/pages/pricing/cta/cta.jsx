@@ -47,7 +47,7 @@ const CTA = () => {
             form below to get in touch with our Sales team
           </p>
           <AnimatedButton
-            className="mt-8 inline-flex !py-5 !px-14 !text-lg tracking-tight md:mx-auto md:mt-6 md:flex md:w-52"
+            className="mt-8 inline-flex !py-5 !px-14 !text-lg tracking-tight hover:bg-[#00FFAA] md:mx-auto md:mt-6 md:flex md:w-52"
             theme="primary"
             to={links.contactSales}
             size="sm"

@@ -352,7 +352,7 @@ const Calculator = () => {
                         <label htmlFor="dataTransfer">Data transfer</label>
                         <input
                           id="dataTransfer"
-                          className="ml-2 w-12 rounded-l-sm border-r border-gray-new-20 bg-[#242628] pl-2 pr-1 text-[15px] tracking-tight xl:ml-2"
+                          className="ml-2 w-12 rounded-l-sm border-r border-gray-new-20 bg-gray-new-15 pl-2 pr-1 text-[15px] tracking-tight focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75 xl:ml-2"
                           name="data-transfer"
                           type="number"
                           min={0}
@@ -364,7 +364,7 @@ const Calculator = () => {
                             return setDataTransferValue(event?.target?.value);
                           }}
                         />
-                        <span className="rounded-r-sm bg-[#242628] px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-gray-new-60">
+                        <span className="rounded-r-sm bg-gray-new-15 px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-gray-new-60">
                           GiB
                         </span>
                       </li>
@@ -372,7 +372,7 @@ const Calculator = () => {
                         <label htmlFor="writtenData">Written data</label>
                         <input
                           id="writtenData"
-                          className="ml-2 w-12 rounded-l-sm border-r border-gray-new-20 bg-[#242628] pl-2 pr-1 text-[15px] tracking-tight xl:ml-2"
+                          className="ml-2 w-12 rounded-l-sm border-r border-gray-new-20 bg-gray-new-15 pl-2 pr-1 text-[15px] tracking-tight focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75 xl:ml-2"
                           name="written-data"
                           type="number"
                           min={0}
@@ -384,7 +384,7 @@ const Calculator = () => {
                             return setWrittenDataValue(event?.target?.value);
                           }}
                         />
-                        <span className="rounded-r-sm bg-[#242628] px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-gray-new-60">
+                        <span className="rounded-r-sm bg-gray-new-15 px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-gray-new-60">
                           GiB
                         </span>
                       </li>
@@ -467,7 +467,7 @@ const Calculator = () => {
               size="sm"
               animationSize="sm"
               animationColor="var(--accentColor)"
-              animationClassName="-top-3/4 w-[118%]"
+              animationClassName="-top-3/4 w-[118%] sm:w-[110%]"
               spread={1}
               isAnimated
             >

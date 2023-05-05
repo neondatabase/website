@@ -59,7 +59,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
           }}
         >
           <p
-            className="with-link-primary pl-[42px] pr-24 pt-4 text-base font-light leading-tight text-gray-new-94 xl:pt-[11px] xl:pr-12 lg:pt-3.5 lg:pr-0 md:pt-3"
+            className="with-link-primary pl-[42px] pr-24 pt-2.5 text-base font-light leading-tight text-gray-new-94 xl:pr-12 lg:pr-0"
             dangerouslySetInnerHTML={{ __html: answer }}
           />
           {linkText && linkUrl && (
