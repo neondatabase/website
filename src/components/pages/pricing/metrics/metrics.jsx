@@ -132,7 +132,7 @@ const items = [
 const Metrics = () => {
   const sectionRef = useRef();
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-  const { height: pageHeight } = useWindowSize();
+  const { width: windowWidth, height: pageHeight } = useWindowSize();
   const scrollY = useScrollPosition();
   const [contentRef, isContentInView] = useInView({ triggerOnce: true });
   const { RiveComponent, rive } = useRive({
@@ -227,10 +227,12 @@ const Metrics = () => {
             <div className="lg:space-y-0" ref={contentRef}>
               {items.map(({ image, name, priceFrom, details, prices }, index) => (
                 <motion.div
-                  initial={{ opacity: 0.3 }}
-                  className="flex h-[78vh] min-h-[760px] flex-col justify-center px-6 xl:pl-3 xl:pr-0 lg:px-0 md:h-auto md:min-h-0 md:px-0 md:!opacity-100"
+                  initial={{ opacity: windowWidth < 768 ? 1 : 0.3 }}
+                  className="flex h-[78vh] min-h-[760px] flex-col justify-center px-6 xl:pl-3 xl:pr-0 lg:px-0 md:h-auto md:min-h-0 md:px-0"
                   key={index}
-                  animate={{ opacity: currentSectionIndex === index ? 1 : 0.3 }}
+                  animate={{
+                    opacity: currentSectionIndex === index || windowWidth < 768 ? 1 : 0.3,
+                  }}
                 >
                   <Image
                     className="md:my-13 my-14 hidden max-w-full md:mx-auto md:block md:max-w-[80%] sm:max-w-full"
