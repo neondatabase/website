@@ -146,12 +146,12 @@ const Hero = () => {
                       {type}
                     </span>
                     <h3
-                      className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px]"
+                      className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px] md:mt-4"
                       dangerouslySetInnerHTML={{ __html: price }}
                     />
                     <AnimatedButton
                       className={clsx(
-                        'relative mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 sm:max-w-none',
+                        'relative mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 md:mt-7 sm:max-w-none',
                         type === 'Pro'
                           ? 'lg:absolute lg:right-8 lg:top-0 lg:max-w-[210px] md:relative md:right-0 md:max-w-[304px]'
                           : 'lg:max-w-[304px]'
@@ -166,7 +166,7 @@ const Hero = () => {
                     </AnimatedButton>
                     <p
                       className={clsx(
-                        'mt-9 font-light leading-snug tracking-tight text-gray-new-70 md:mt-9',
+                        'mt-9 font-light leading-snug tracking-tight text-gray-new-70 md:mt-8',
                         type === 'Pro' ? 'lg:mt-5' : 'lg:min-h-[66px]'
                       )}
                     >
@@ -176,14 +176,15 @@ const Hero = () => {
                   <div className="mt-auto flex grow flex-col">
                     <ul
                       className={clsx(
-                        'mb-4 flex flex-col flex-wrap space-y-4 xl:mb-5 lg:mb-2.5',
-                        type === 'Pro'
-                          ? 'lg:max-h-28 lg:gap-x-16 lg:gap-y-4 lg:space-y-0 md:max-h-max md:gap-4'
-                          : ''
+                        'mb-4 flex flex-col flex-wrap space-y-4 xl:mb-5 lg:mb-2.5 md:mb-7',
+                        type === 'Pro' ? 'lg:max-h-28 lg:gap-4 lg:space-y-0 md:max-h-max' : ''
                       )}
                     >
                       {features.map(({ title, label }, index) => (
-                        <li className="relative pl-6 leading-tight tracking-tight" key={index}>
+                        <li
+                          className="relative pl-6 leading-tight tracking-tight lg:w-1/3 md:w-full"
+                          key={index}
+                        >
                           <CheckIcon
                             className="absolute left-0 top-[2px] h-4 w-4 text-[var(--accentColor)]"
                             aria-hidden

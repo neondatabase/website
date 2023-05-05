@@ -130,7 +130,7 @@ const Calculator = () => {
   );
 
   return (
-    <section className="faq safe-paddings mb-40 mt-[17.25rem] xl:mt-40 xl:mb-36 lg:mt-32 lg:mb-24 md:mt-24 md:mb-20">
+    <section className="safe-paddings mb-40 mt-[17.25rem] xl:mt-40 xl:mb-36 lg:mt-32 lg:mb-16 md:my-20">
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <Heading
@@ -438,14 +438,14 @@ const Calculator = () => {
             <h3 className="text-lg font-medium leading-none tracking-tight text-white md:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
-            <p className="mt-6 flex items-end gap-x-2 leading-none text-white md:col-start-2 sm:col-start-1">
-              <span className="text-[56px] font-light tracking-[-0.06em] text-[var(--accentColor)] transition-colors duration-200 lg:text-[40px]">
+            <p className="mt-6 flex items-end gap-x-2 leading-none text-white lg:mt-4 md:col-start-2 sm:col-start-1 sm:mt-6">
+              <span className="text-[56px] font-light tracking-[-0.06em] text-[var(--accentColor)] transition-colors duration-200 lg:text-[40px] sm:text-[44px]">
                 {estimatedPrice}
               </span>
               <span className="mb-1 block text-xl tracking-normal">/mo</span>
             </p>
             <AnimatedButton
-              className="my-6 w-full max-w-[260px] !bg-[var(--accentColor)] !py-[17px] !text-lg font-medium hover:!bg-[var(--hoverColor)] md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1"
+              className="my-6 w-full max-w-[260px] !bg-[var(--accentColor)] !py-[17px] !text-lg font-medium hover:!bg-[var(--hoverColor)] lg:my-5 md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1 sm:my-8"
               to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               theme="primary"
               size="sm"
@@ -457,8 +457,8 @@ const Calculator = () => {
             >
               {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </AnimatedButton>
-            <ul className="my-7 flex w-full flex-grow flex-col space-y-3.5 text-lg leading-none tracking-tight text-pricing-black md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2">
-              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:pl-0">
+            <ul className="my-7 flex w-full flex-grow flex-col space-y-3.5 text-lg leading-none tracking-tight text-pricing-black lg:mt-2.5 md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2 sm:max-h-20 sm:flex-wrap sm:gap-y-6 sm:gap-x-2 sm:space-y-0">
+              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:w-1/2 sm:pl-0">
                 <CheckIcon
                   className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
                   aria-hidden
@@ -466,7 +466,7 @@ const Calculator = () => {
                 <span className="mr-1">{computeUnits}</span>
                 <span>compute units</span>
               </li>
-              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:pl-0">
+              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:w-1/2 sm:pl-0">
                 <CheckIcon
                   className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
                   aria-hidden
@@ -474,7 +474,7 @@ const Calculator = () => {
                 <span className="mr-1">{storageValue} GiB</span>
                 <span>storage</span>
               </li>
-              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:pl-0">
+              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:w-1/2 sm:pl-0">
                 <CheckIcon
                   className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
                   aria-hidden
@@ -482,7 +482,7 @@ const Calculator = () => {
                 {isAdvanced && <span className="mr-1">{writtenDataValue} GiB</span>}
                 <span>written data</span>
               </li>
-              <li className="relative flex items-center text-base leading-tight tracking-tight text-white md:pl-0 sm:pl-0">
+              <li className="relative flex items-center text-base leading-tight tracking-tight text-white md:pl-0 sm:w-1/2 sm:pl-0">
                 <CheckIcon
                   className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
                   aria-hidden
@@ -491,7 +491,7 @@ const Calculator = () => {
                 <span>data transfer</span>
               </li>
             </ul>
-            <span className="block text-sm font-light tracking-tight text-gray-new-60 xl:mt-auto lg:text-[13px] md:mt-8">
+            <span className="block text-sm font-light tracking-tight text-gray-new-60 xl:mt-auto md:mt-8">
               Based on the US East (Ohio) region
             </span>
           </div>

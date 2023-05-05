@@ -183,8 +183,8 @@ const Estimates = () => {
   return (
     <section className="estimates safe-paddings mt-60 2xl:mt-40 xl:mt-14 lg:mt-0 md:mt-16">
       <Container size="mdDoc">
-        <div className="mx-auto flex max-w-[1220px] items-center justify-between gap-4 xl:justify-start xl:gap-[6%] lg:gap-[2%] md:flex-wrap md:gap-8">
-          <div className="w-[48%] xl:w-[45%] lg:flex lg:w-[43%] lg:flex-col lg:items-start md:w-full">
+        <div className="mx-auto flex max-w-[1220px] items-center justify-between gap-4 xl:justify-start xl:gap-[6%] lg:gap-[2%] md:flex-wrap md:gap-16">
+          <div className="w-[48%] xl:w-[45%] lg:flex lg:w-[43%] lg:flex-col lg:items-start md:relative md:w-full md:after:absolute md:after:-bottom-10 md:after:block md:after:h-[1px] md:after:w-full md:after:bg-[rgba(255,255,255,0.07)]">
             <Heading badge="Billing & usage estimates" tag="h2" size="2sm">
               <span className="text-pricing-primary-1">Each user is unique.</span> However, we can
               give you some estimates.

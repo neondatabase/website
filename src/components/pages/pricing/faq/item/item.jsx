@@ -44,7 +44,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
           })}
           aria-hidden
         />
-        <h3 className="text-[22px] font-medium leading-tight tracking-tight xl:text-xl">
+        <h3 className="text-[22px] font-medium leading-tight tracking-tight xl:text-xl md:text-lg">
           {question}
         </h3>
       </button>
@@ -67,7 +67,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
           />
           {linkText && linkUrl && (
             <Link
-              className="my-2.5 ml-[42px] border-b border-pricing-primary-3 pb-1.5 !text-base font-normal leading-none !text-pricing-primary-1 hover:!border-pricing-primary-1 lg:!text-base"
+              className="my-2.5 ml-[42px] border-b border-pricing-primary-3 pb-1.5 !text-base font-normal leading-none !text-pricing-primary-1 hover:!border-pricing-primary-1 lg:mt-4 lg:!text-base"
               size="sm"
               theme="white"
               to={linkUrl}

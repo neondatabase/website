@@ -216,8 +216,8 @@ const Metrics = () => {
           className="grid h-full w-full grid-cols-12 items-start lg:px-6 md:grid-cols-1"
           size="sm"
         >
-          <div className="relative col-span-7 col-start-1 h-full xl:col-span-6 md:col-span-full md:hidden">
-            <div className="sticky top-0 h-screen min-h-[960px]">
+          <div className="relative col-span-7 col-start-1 h-full xl:col-span-6 lg:-ml-8 md:col-span-full md:hidden">
+            <div className="sticky top-0 h-screen min-h-[1020px]">
               <div className="absolute flex h-full w-full items-center justify-center pl-20 pr-24 xl:pr-10 xl:pl-0">
                 <RiveComponent width={590} height={830} aria-hidden />
               </div>

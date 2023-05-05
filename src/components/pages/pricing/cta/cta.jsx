@@ -64,7 +64,7 @@ const CTA = () => {
           ref={contentRef}
         >
           <img
-            className="mx-auto min-h-[345px] lg:min-h-0"
+            className="relative mx-auto min-h-[345px] lg:min-h-0 sm:left-1/2 sm:right-1/2 sm:-ml-[50vw] sm:-mr-[50vw] sm:w-screen sm:min-w-[100vw]"
             src="/images/pages/pricing/cta.jpg"
             width={842}
             height={538}
