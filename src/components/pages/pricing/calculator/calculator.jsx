@@ -172,14 +172,13 @@ const Calculator = () => {
                     setComputeUnits(computeUnitsValue);
                   }}
                 >
-                  <Slider.Track className="slider-track relative h-[2px] w-full grow rounded-[10px] bg-gray-new-30">
+                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-new-30">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
                   <LazyMotion features={domAnimation}>
                     <Slider.Thumb
                       className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
                       onPointerEnter={() => computeSizeControls.start('click')}
-                      onPointerDown={() => computeSizeControls.start('click')}
                       onPointerLeave={() => computeSizeControls.start('from')}
                     >
                       <m.span
@@ -215,14 +214,13 @@ const Calculator = () => {
                   aria-label="Active time"
                   onValueChange={(value) => setActiveTime(value[0])}
                 >
-                  <Slider.Track className="slider-track relative h-[2px] w-full grow rounded-[10px] bg-gray-new-30">
+                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-new-30">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
                   <LazyMotion features={domAnimation}>
                     <Slider.Thumb
                       className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
                       onPointerEnter={() => activeTimeControls.start('click')}
-                      onPointerDown={() => activeTimeControls.start('click')}
                       onPointerLeave={() => activeTimeControls.start('from')}
                     >
                       <m.span
@@ -274,7 +272,6 @@ const Calculator = () => {
                     <Slider.Thumb
                       className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
                       onPointerEnter={() => projectStorageControls.start('click')}
-                      onPointerDown={() => projectStorageControls.start('click')}
                       onPointerLeave={() => projectStorageControls.start('from')}
                     >
                       <m.span
