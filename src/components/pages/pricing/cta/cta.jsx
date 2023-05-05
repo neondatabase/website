@@ -38,7 +38,7 @@ const CTA = () => {
   return (
     <section className="safe-paddings pt-16">
       <Container className="grid grid-cols-12 items-center gap-4" size="md">
-        <div className="z-10 col-span-4 col-start-2 mb-24 xl:col-span-5 xl:col-start-1 lg:mb-8 md:col-span-full">
+        <div className="z-10 col-span-4 col-start-2 mb-24 xl:col-span-5 xl:col-start-1 lg:mb-12 md:col-span-full">
           <Heading className="whitespace-nowrap md:text-center" tag="h2" size="2sm">
             Still have a <span className="text-pricing-primary-1">question?</span>
           </Heading>
@@ -47,7 +47,7 @@ const CTA = () => {
             form below to get in touch with our Sales team
           </p>
           <AnimatedButton
-            className="mt-8 inline-flex !py-5 !px-14 !text-lg tracking-tight hover:bg-[#00FFAA] md:mx-auto md:mt-6 md:flex md:w-52"
+            className="mt-8 inline-flex !py-5 !px-14 !text-lg tracking-tight hover:bg-[#00FFAA] xl:!px-11 xl:!py-[17px] md:mx-auto md:mt-6 md:flex md:w-48"
             theme="primary"
             to={links.contactSales}
             size="sm"
@@ -59,7 +59,10 @@ const CTA = () => {
             Talk to sales
           </AnimatedButton>
         </div>
-        <div className="relative col-span-7 col-start-6 md:z-20 md:col-span-full" ref={contentRef}>
+        <div
+          className="relative col-span-7 col-start-6 self-end md:z-20 md:col-span-full"
+          ref={contentRef}
+        >
           <Image
             className="mx-auto min-h-[345px] lg:min-h-0"
             src="/images/pages/pricing/cta.jpg"

@@ -67,6 +67,7 @@ const items = [
 ];
 
 const Hero = () => {
+  const [isLoad, setIsLoad] = useState(false);
   const [hoverCount, setHoverCount] = useState(0);
   const [activeItemIndex, setActiveItemIndex] = useState(1);
   const controls = useAnimation();
@@ -93,6 +94,10 @@ const Hero = () => {
   useEffect(() => {
     controls.start('to');
   }, [controls]);
+
+  useEffect(() => {
+    setIsLoad(true);
+  }, []);
 
   return (
     <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-[40px]">
@@ -147,10 +152,10 @@ const Hero = () => {
                     />
                     <AnimatedButton
                       className={clsx(
-                        'relative mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 lg:max-w-[304px] sm:max-w-none',
+                        'relative mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 sm:max-w-none',
                         type === 'Pro'
-                          ? 'lg:absolute lg:right-8 lg:top-0 md:relative md:right-0'
-                          : ''
+                          ? 'lg:absolute lg:right-8 lg:top-0 lg:max-w-[210px] md:relative md:right-0'
+                          : 'lg:max-w-[304px]'
                       )}
                       isAnimated={activeItemIndex === index}
                       animationColor="var(--accentColor)"
@@ -198,6 +203,7 @@ const Hero = () => {
                 <motion.span
                   className={clsx(
                     'pointer-events-none absolute top-0 left-0 z-20 h-full w-full rounded-[10px] border border-transparent transition-colors duration-300',
+                    isLoad !== true && '!opacity-100',
                     activeItemIndex === index && 'border-[var(--accentColor)]'
                   )}
                   initial="from"

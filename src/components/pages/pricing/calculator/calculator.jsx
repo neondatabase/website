@@ -83,19 +83,6 @@ const thumbVariants = {
       duration: 0.1,
     },
   },
-  hover: {
-    width: 20,
-    height: 20,
-    border: '2px solid #00E599',
-    borderRadius: 4,
-    backgroundColor: '#131415',
-    transition: {
-      duration: 0.1,
-      backgroundColor: {
-        duration: 0.3,
-      },
-    },
-  },
 };
 
 const Calculator = () => {
@@ -191,9 +178,8 @@ const Calculator = () => {
                   <LazyMotion features={domAnimation}>
                     <Slider.Thumb
                       className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
-                      onPointerEnter={() => computeSizeControls.start('hover')}
+                      onPointerEnter={() => computeSizeControls.start('click')}
                       onPointerDown={() => computeSizeControls.start('click')}
-                      onPointerUp={() => computeSizeControls.start('hover')}
                       onPointerLeave={() => computeSizeControls.start('from')}
                     >
                       <m.span
@@ -235,9 +221,8 @@ const Calculator = () => {
                   <LazyMotion features={domAnimation}>
                     <Slider.Thumb
                       className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
-                      onPointerEnter={() => activeTimeControls.start('hover')}
+                      onPointerEnter={() => activeTimeControls.start('click')}
                       onPointerDown={() => activeTimeControls.start('click')}
-                      onPointerUp={() => activeTimeControls.start('hover')}
                       onPointerLeave={() => activeTimeControls.start('from')}
                     >
                       <m.span
@@ -288,9 +273,8 @@ const Calculator = () => {
                   <LazyMotion features={domAnimation}>
                     <Slider.Thumb
                       className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
-                      onPointerEnter={() => projectStorageControls.start('hover')}
+                      onPointerEnter={() => projectStorageControls.start('click')}
                       onPointerDown={() => projectStorageControls.start('click')}
-                      onPointerUp={() => projectStorageControls.start('hover')}
                       onPointerLeave={() => projectStorageControls.start('from')}
                     >
                       <m.span
@@ -445,7 +429,7 @@ const Calculator = () => {
           </div>
 
           <div
-            className="relative z-10 col-start-2 row-span-3 row-start-1 flex flex-col self-auto rounded-[10px] border border-[var(--accentColor)] px-6 py-7 pb-3.5 transition-colors duration-200 lg:px-5 md:col-start-1 md:row-span-1 md:grid md:grid-cols-2 md:gap-x-32 sm:grid-cols-1 sm:gap-x-0"
+            className="relative z-10 col-start-2 row-span-3 row-start-1 flex flex-col self-start rounded-[10px] border border-[var(--accentColor)] px-6 pb-5 pt-6 transition-colors duration-200 lg:px-5 md:col-start-1 md:row-span-1 md:grid md:grid-cols-2 md:gap-x-32 sm:grid-cols-1 sm:gap-x-0"
             style={{
               '--accentColor': totalCost >= CUSTOM_THRESHOLD ? '#f0f075' : '#00e599',
               '--hoverColor': totalCost >= CUSTOM_THRESHOLD ? '#f5f5a3' : '#00ffaa',
@@ -454,14 +438,14 @@ const Calculator = () => {
             <h3 className="text-lg leading-none tracking-tight text-white md:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
-            <p className="mt-6 flex items-end gap-x-2 leading-none text-white xl:mt-7 lg:mt-5 md:col-start-2 sm:col-start-1">
+            <p className="mt-6 flex items-end gap-x-2 leading-none text-white md:col-start-2 sm:col-start-1">
               <span className="text-[56px] font-light tracking-[-0.06em] text-[var(--accentColor)] transition-colors duration-200 lg:text-[40px]">
                 {estimatedPrice}
               </span>
               <span className="mb-1 block text-[26px] tracking-normal lg:text-[24px]">/mo</span>
             </p>
             <AnimatedButton
-              className="mb-7 mt-11 w-full max-w-[260px] !bg-[var(--accentColor)] !py-[17px] !text-lg font-medium hover:!bg-[var(--hoverColor)] xl:mt-10 xl:mb-8 lg:my-8 md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1"
+              className="my-6 w-full max-w-[260px] !bg-[var(--accentColor)] !py-[17px] !text-lg font-medium hover:!bg-[var(--hoverColor)] md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1"
               to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               theme="primary"
               size="sm"
@@ -473,7 +457,7 @@ const Calculator = () => {
             >
               {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </AnimatedButton>
-            <ul className="md: my-9 flex w-full flex-grow flex-col space-y-4 text-lg leading-none tracking-tight text-pricing-black xl:mt-12 lg:mt-4 lg:space-y-6 md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2">
+            <ul className="my-7 flex w-full flex-grow flex-col space-y-3.5 text-lg leading-none tracking-tight text-pricing-black md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2">
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:pl-0">
                 <CheckIcon
                   className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
@@ -507,7 +491,7 @@ const Calculator = () => {
                 <span>data transfer</span>
               </li>
             </ul>
-            <span className="mt-6 block text-base font-light tracking-tight text-gray-new-70 xl:mt-auto lg:text-[13px] md:mt-8">
+            <span className="block text-sm font-light tracking-tight text-gray-new-60 xl:mt-auto lg:text-[13px] md:mt-8">
               Based on the US East (Ohio) region
             </span>
           </div>
