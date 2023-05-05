@@ -155,14 +155,14 @@ const Calculator = () => {
             Calculate your monthly bill based <wbr /> on compute time and storage
           </Heading>
         </div>
-        <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[20px] xl:mt-11 xl:gap-x-[20px] lg:mt-10 lg:grid-cols-[1fr_224px] md:mt-9 md:grid-cols-1 md:gap-y-[15px]">
-          <div className="row-span-1 flex rounded-[10px] bg-pricing-gray-10 md:flex-col">
+        <div className="mx-auto mt-16 grid max-w-[968px] grid-cols-[1fr_298px] gap-x-[40px] gap-y-[20px] xl:mt-11 xl:gap-x-[20px] lg:mt-10 lg:grid-cols-[1fr_240px] lg:gap-x-[18px] lg:gap-y-[18px] md:mt-9 md:grid-cols-1 md:gap-y-[15px]">
+          <div className="row-span-1 flex rounded-[10px] bg-gray-new-8 md:flex-col">
             <div className="grow p-5 xl:px-6 xl:py-5 md:px-5">
-              <h3 className="text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
+              <h3 className="text-sm font-medium uppercase leading-none tracking-wider text-secondary-9">
                 Compute time
               </h3>
               <div className="mt-5 grid grid-cols-2 items-center gap-3 md:mt-5">
-                <h4 className="inline-flex items-center text-sm leading-none tracking-tight text-pricing-gray-9">
+                <h4 className="inline-flex items-center text-sm leading-none tracking-tight text-gray-new-90">
                   <span>Compute size</span>
                   <Tooltip
                     id="compute"
@@ -185,7 +185,7 @@ const Calculator = () => {
                     setComputeUnits(computeUnitsValue);
                   }}
                 >
-                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-pricing-gray-3">
+                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-new-30">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
                   <LazyMotion features={domAnimation}>
@@ -205,7 +205,7 @@ const Calculator = () => {
                     </Slider.Thumb>
                   </LazyMotion>
                 </Slider.Root>
-                <p className="text-right text-sm leading-none tracking-tight text-pricing-gray-9">
+                <p className="text-right text-sm leading-none tracking-tight text-gray-new-90">
                   <span className="after:mx-2 after:inline-block after:h-[4px] after:w-[4px] after:rounded-full after:bg-pricing-primary-1 after:align-middle">
                     {computeUnits <= 0.5 ? COMPUTE_UNITS_RANGES[computeUnits] : computeUnits}vCPU
                   </span>
@@ -213,7 +213,7 @@ const Calculator = () => {
                 </p>
               </div>
               <div className="mt-6 grid grid-cols-2 items-center gap-3 xl:mt-6 lg:mt-6">
-                <h4 className="inline-flex items-center text-sm leading-none tracking-tight text-pricing-gray-9">
+                <h4 className="inline-flex items-center text-sm leading-none tracking-tight text-gray-new-90">
                   Active time
                   <Tooltip
                     id="activeTime"
@@ -229,7 +229,7 @@ const Calculator = () => {
                   aria-label="Active time"
                   onValueChange={(value) => setActiveTime(value[0])}
                 >
-                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-pricing-gray-3">
+                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-new-30">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
                   <LazyMotion features={domAnimation}>
@@ -251,29 +251,29 @@ const Calculator = () => {
                 </Slider.Root>
                 <p className="text-right text-sm leading-none tracking-tight">
                   {activeTime} hour{activeTime <= 1 ? '' : 's'}{' '}
-                  <span className="text-pricing-gray-7">per day</span>
+                  <span className="text-gray-new-70">per day</span>
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-pricing-gray-2 pt-5 text-pricing-gray-94 ">
+              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-gray-new-20 pt-5 text-gray-new-94 ">
                 <p className="whitespace-nowrap text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
                   <span className="text-pricing-primary-1">${computeTimeCost.toFixed(2)} </span>
-                  <span className="font-normal text-pricing-gray-7">per month</span>
+                  <span className="font-normal text-gray-new-70">per month</span>
                 </p>
                 <p className="text-right text-sm leading-none">
-                  ${COMPUTE_TIME_PRICE} <span className="text-pricing-gray-7">per hour</span>
+                  ${COMPUTE_TIME_PRICE} <span className="text-gray-new-70">per hour</span>
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="row-span-1 flex rounded-[10px] bg-pricing-gray-10 md:flex-col">
+          <div className="row-span-1 flex rounded-[10px] bg-gray-new-8 md:flex-col">
             <div className="grow p-5 xl:px-6 xl:py-5 md:px-5">
-              <h3 className="text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
+              <h3 className="text-sm font-medium uppercase leading-none tracking-wider text-secondary-9">
                 Project storage
               </h3>
               <div className="mt-5 grid grid-cols-2 items-center gap-3 md:mt-5">
-                <h4 className="text-sm leading-none tracking-tight text-pricing-gray-9">Data</h4>
+                <h4 className="text-sm leading-none tracking-tight text-gray-new-90">Data</h4>
                 <Slider.Root
                   className="relative col-span-2 row-start-2 flex h-1 w-full grow touch-none items-center"
                   defaultValue={[STORAGE_VALUES.default]}
@@ -282,7 +282,7 @@ const Calculator = () => {
                   aria-label="Compute units"
                   onValueChange={(value) => setStorageValue(value[0])}
                 >
-                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-pricing-gray-3">
+                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-new-30">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
                   <LazyMotion features={domAnimation}>
@@ -302,26 +302,26 @@ const Calculator = () => {
                     </Slider.Thumb>
                   </LazyMotion>
                 </Slider.Root>
-                <p className="text-right text-sm leading-none tracking-tight text-pricing-gray-9">
+                <p className="text-right text-sm leading-none tracking-tight text-gray-new-90">
                   {storageValue} GiB
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-pricing-gray-2 pt-5 text-pricing-gray-94">
+              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-gray-new-20 pt-5 text-gray-new-94">
                 <p className="whitespace-nowrap text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
                   <span className="text-pricing-primary-1">${storageCost.toFixed(2)} </span>
-                  <span className="font-normal text-pricing-gray-7">per month</span>
+                  <span className="font-normal text-gray-new-70">per month</span>
                 </p>
-                <p className="text-right text-sm leading-none text-pricing-gray-7">
-                  <span className="text-pricing-gray-94">${COMPUTE_TIME_PRICE}</span> per hour
+                <p className="text-right text-sm leading-none text-gray-new-70">
+                  <span className="text-gray-new-94">${COMPUTE_TIME_PRICE}</span> per hour
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="row-span-1 rounded-[10px] bg-pricing-gray-10 p-5 xl:px-6 xl:py-5 md:flex-col md:p-0">
+          <div className="row-span-1 rounded-[10px] bg-gray-new-8 p-5 xl:px-6 xl:py-5 md:flex-col md:p-0">
             <div className="md:px-5 md:py-5">
-              <h3 className="flex items-center text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
+              <h3 className="flex items-center text-sm font-medium uppercase leading-none tracking-wider text-secondary-9">
                 Data transfer and Written data
                 <Tooltip
                   id="data"
@@ -332,7 +332,7 @@ const Calculator = () => {
                 <AnimatePresence initial={false} mode="wait">
                   {isAdvanced ? (
                     <m.ul
-                      className="mb-4 mt-5 flex items-center gap-x-8 text-[15px] tracking-tight text-pricing-gray-9 xl:mb-5 xl:flex-wrap xl:gap-x-7 md:mb-0 sm:gap-4"
+                      className="mb-4 mt-5 flex items-center gap-x-8 text-[15px] tracking-tight text-gray-new-90 xl:mb-5 xl:flex-wrap xl:gap-x-7 md:mb-0 sm:gap-4"
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -352,7 +352,7 @@ const Calculator = () => {
                         <label htmlFor="dataTransfer">Data transfer</label>
                         <input
                           id="dataTransfer"
-                          className="ml-2 w-12 rounded-l-sm border-r border-pricing-gray-2 bg-[#242628] pl-2 pr-1 text-[15px] tracking-tight xl:ml-2"
+                          className="ml-2 w-12 rounded-l-sm border-r border-gray-new-20 bg-[#242628] pl-2 pr-1 text-[15px] tracking-tight xl:ml-2"
                           name="data-transfer"
                           type="number"
                           min={0}
@@ -364,7 +364,7 @@ const Calculator = () => {
                             return setDataTransferValue(event?.target?.value);
                           }}
                         />
-                        <span className="rounded-r-sm bg-[#242628] px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-pricing-gray-6">
+                        <span className="rounded-r-sm bg-[#242628] px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-gray-new-60">
                           GiB
                         </span>
                       </li>
@@ -372,7 +372,7 @@ const Calculator = () => {
                         <label htmlFor="writtenData">Written data</label>
                         <input
                           id="writtenData"
-                          className="ml-2 w-12 rounded-l-sm border-r border-pricing-gray-2 bg-[#242628] pl-2 pr-1 text-[15px] tracking-tight xl:ml-2"
+                          className="ml-2 w-12 rounded-l-sm border-r border-gray-new-20 bg-[#242628] pl-2 pr-1 text-[15px] tracking-tight xl:ml-2"
                           name="written-data"
                           type="number"
                           min={0}
@@ -384,7 +384,7 @@ const Calculator = () => {
                             return setWrittenDataValue(event?.target?.value);
                           }}
                         />
-                        <span className="rounded-r-sm bg-[#242628] px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-pricing-gray-6">
+                        <span className="rounded-r-sm bg-[#242628] px-2 pt-[3px] align-middle text-[11px] font-medium tracking-tight text-gray-new-60">
                           GiB
                         </span>
                       </li>
@@ -400,7 +400,7 @@ const Calculator = () => {
                     </m.ul>
                   ) : (
                     <m.p
-                      className="mb-4 mt-5 inline-flex flex-wrap gap-2 text-[15px] tracking-tight text-pricing-gray-9 xl:mb-5 md:mb-0"
+                      className="mb-4 mt-5 inline-flex flex-wrap gap-2 text-[15px] tracking-tight text-gray-new-90 xl:mb-5 md:mb-0"
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -433,13 +433,13 @@ const Calculator = () => {
                 </AnimatePresence>
               </LazyMotion>
             </div>
-            <div className="flex justify-between border-t border-dashed border-pricing-gray-2 pt-5 text-pricing-gray-94 md:px-5 md:py-5">
+            <div className="flex justify-between border-t border-dashed border-gray-new-20 pt-5 text-gray-new-94 md:px-5 md:py-5">
               <p className="text-sm font-medium leading-none">
                 <span className="uppercase">Subtotal: </span>
                 <span className="text-pricing-primary-1">
                   ${writtenAndTransferDataCost.toFixed(2)}{' '}
                 </span>
-                <span className="font-normal text-pricing-gray-7">per month</span>
+                <span className="font-normal text-gray-new-70">per month</span>
               </p>
             </div>
           </div>
@@ -454,8 +454,8 @@ const Calculator = () => {
             <h3 className="text-lg leading-none tracking-tight text-white md:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
-            <p className="mt-6 flex items-end gap-2 leading-none text-white xl:mt-7 lg:mt-5 md:col-start-2 sm:col-start-1">
-              <span className="text-[56px] font-light tracking-[-0.06em] text-[var(--accentColor)] transition-colors duration-200 lg:text-[44px]">
+            <p className="mt-6 flex items-end gap-x-2 leading-none text-white xl:mt-7 lg:mt-5 md:col-start-2 sm:col-start-1">
+              <span className="text-[56px] font-light tracking-[-0.06em] text-[var(--accentColor)] transition-colors duration-200 lg:text-[40px]">
                 {estimatedPrice}
               </span>
               <span className="mb-1 block text-[26px] tracking-normal lg:text-[24px]">/mo</span>
@@ -507,7 +507,7 @@ const Calculator = () => {
                 <span>data transfer</span>
               </li>
             </ul>
-            <span className="mt-6 block text-base font-light tracking-tight text-pricing-gray-7 xl:mt-auto lg:text-[14px] md:mt-8">
+            <span className="mt-6 block text-base font-light tracking-tight text-gray-new-70 xl:mt-auto lg:text-[14px] md:mt-8">
               Based on the US East (Ohio) region
             </span>
           </div>
@@ -537,10 +537,10 @@ const Tooltip = ({ content, id }) => (
         alt=""
       />
     </span>
-    <span className="pointer-events-none absolute	left-[calc(100%+12px)] top-1/2 z-50 w-[14rem] -translate-y-1/2 rounded-[4px] bg-pricing-gray-2 px-3 py-[10px] text-[12px] font-normal leading-dense tracking-wide text-pricing-gray-9 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:hidden lg:translate-y-0 lg:bg-transparent lg:p-0">
+    <span className="pointer-events-none absolute	left-[calc(100%+12px)] top-1/2 z-50 w-[14rem] -translate-y-1/2 rounded-[4px] bg-gray-new-20 px-3 py-[10px] text-[12px] font-normal leading-dense tracking-wide text-gray-new-90 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:static lg:mt-1.5 lg:hidden lg:translate-y-0 lg:bg-transparent lg:p-0">
       {content}
     </span>
-    <span className="absolute left-[calc(100%+8px)] top-1/2 h-4 w-4 -translate-y-1/2 rotate-45 rounded bg-pricing-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
+    <span className="absolute left-[calc(100%+8px)] top-1/2 h-4 w-4 -translate-y-1/2 rotate-45 rounded bg-gray-new-20 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 lg:hidden" />
   </span>
 );
 

@@ -1,1 +1,3 @@
-export { default } from './animated-button';
+import AnimatedButton from './animated-button';
+
+export default AnimatedButton;

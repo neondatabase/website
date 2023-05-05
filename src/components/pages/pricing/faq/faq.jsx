@@ -53,12 +53,12 @@ const items = [
 ];
 
 const Faq = () => (
-  <section className="faq safe-paddings bg-pricing-gray-10 py-40 2xl:py-32 xl:py-28 lg:py-20 md:py-16">
+  <section className="faq safe-paddings bg-gray-new-8 py-40 2xl:py-32 xl:py-28 lg:py-20 md:py-16">
     <Container className="max-w-[968px]" size="mdDoc">
       <Heading className="text-center" tag="h2" size="2sm">
         Frequently Asked Questions
       </Heading>
-      <ul className="mt-12 xl:mx-auto xl:mt-9 xl:max-w-3xl lg:mt-7 md:mt-5">
+      <ul className="mt-12 xl:mx-auto xl:mt-10 xl:max-w-3xl lg:mt-7 md:mt-6">
         {items.map((item, index) => (
           <Item {...item} key={index} index={index} />
         ))}

@@ -37,7 +37,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
           </div>
           <div
             className={clsx(
-              { 'tracking-tight text-pricing-gray-8': theme === 'pricing' },
+              { 'tracking-tight text-gray-new-80': theme === 'pricing' },
               'space-y-[18px] leading-none'
             )}
           >
@@ -50,7 +50,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
             <div className={clsx('flex flex-col xl:w-full')} key={index}>
               <h3
                 className={clsx(
-                  { 'text-[13px] font-semibold text-pricing-gray-6': theme === 'pricing' },
+                  { 'text-[13px] font-semibold text-gray-new-60': theme === 'pricing' },
                   'relative text-sm font-bold uppercase leading-none tracking-wider'
                 )}
               >

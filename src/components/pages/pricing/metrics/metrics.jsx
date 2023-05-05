@@ -2,6 +2,7 @@
 
 import useScrollPosition from '@react-hook/window-scroll';
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
+import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -235,13 +236,20 @@ const Metrics = () => {
                   />
                   <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white xl:text-[28px]">
                     {name}
-                    <span className="block font-light text-pricing-primary-1">{priceFrom}</span>
+                    <span
+                      className={clsx(
+                        'block font-light',
+                        index === 2 || index === 3 ? 'text-secondary-2' : 'text-pricing-primary-1'
+                      )}
+                    >
+                      {priceFrom}
+                    </span>
                   </h2>
                   <p className="mt-2 text-lg leading-tight tracking-tight xl:text-base">
                     {details}
                   </p>
                   <div className="mt-8 max-w-[464px] xl:mt-5">
-                    <div className="grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-2.5 text-[12px] uppercase leading-none text-pricing-gray-4 xl:gap-x-[20%] lg:gap-x-1">
+                    <div className="grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-2.5 text-[12px] uppercase leading-none text-gray-new-40 xl:gap-x-[20%] lg:gap-x-1">
                       <span>Region</span>
                       <span>Price</span>
                     </div>
@@ -253,9 +261,7 @@ const Metrics = () => {
                         <span>{name}</span>
                         <span>
                           ${price} /{' '}
-                          <span className="font-light tracking-tight text-pricing-gray-7">
-                            {unit}
-                          </span>
+                          <span className="font-light tracking-tight text-gray-new-70">{unit}</span>
                         </span>
                       </div>
                     ))}

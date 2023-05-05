@@ -1,10 +1,6 @@
 @layer base {
-  html {
-    /*@apply overflow-x-hidden;*/
-  }
-
   body {
-    @apply relative min-w-[320px] font-sans text-black antialiased;
+    @apply relative min-w-[320px] !overflow-x-hidden font-sans text-black antialiased;
     -webkit-tap-highlight-color: transparent;
   }
 

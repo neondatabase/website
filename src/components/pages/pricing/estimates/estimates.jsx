@@ -218,11 +218,11 @@ const Estimates = () => {
                         ? '!border-secondary-2 !text-secondary-2'
                         : 'border-transparent',
                       type === selected && index === 2
-                        ? '!border-pricing-secondary-9 !text-pricing-secondary-9'
+                        ? '!border-secondary-9 !text-secondary-9'
                         : 'border-transparent',
                       index === 0 && 'hover:text-pricing-primary-1',
                       index === 1 && 'hover:text-secondary-2',
-                      index === 2 && 'hover:text-pricing-secondary-9'
+                      index === 2 && 'hover:text-secondary-9'
                     )}
                     type="button"
                     onClick={() => handleSelect(type)}
@@ -290,7 +290,7 @@ const Estimates = () => {
                         <div className="mx-auto w-full xl:max-w-[616px] lg:max-w-[584px] lg:pl-6 md:min-w-[375px] md:px-4">
                           <div
                             className={clsx(
-                              'border-b border-[rgba(255,255,255,0.06)] pb-3 text-[12px] uppercase leading-none tracking-wider text-pricing-gray-4',
+                              'border-b border-[rgba(255,255,255,0.06)] pb-3 text-[12px] uppercase leading-none tracking-wider text-gray-new-40',
                               gridClassName
                             )}
                           >
@@ -309,7 +309,7 @@ const Estimates = () => {
                               <span>{name}</span>
                               <span className="inline-flex items-center gap-x-[7px] xl:flex-col xl:items-start">
                                 <span>
-                                  {usage} <span className="text-pricing-gray-7">/month</span>
+                                  {usage} <span className="text-gray-new-70">/month</span>
                                 </span>
                                 {details && (
                                   <span className="relative xl:hidden">
@@ -335,19 +335,19 @@ const Estimates = () => {
                                         alt=""
                                       />
                                     </span>
-                                    <span className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-pricing-gray-2 p-2 text-sm font-normal leading-none text-pricing-gray-6 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 xl:static xl:mt-1.5 xl:translate-y-0 xl:whitespace-normal xl:bg-transparent xl:p-0 xl:opacity-100">
+                                    <span className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-gray-new-20 p-2 text-sm font-normal leading-none text-gray-new-60 opacity-0 transition-opacity duration-200 peer-hover:opacity-100 xl:static xl:mt-1.5 xl:translate-y-0 xl:whitespace-normal xl:bg-transparent xl:p-0 xl:opacity-100">
                                       {details}
                                     </span>
-                                    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-4 border-r-4 border-t-4 border-transparent border-r-pricing-gray-2 opacity-0 transition-opacity duration-200 peer-hover:opacity-100" />
+                                    <span className="absolute left-[calc(100%+6px)] top-1/2 h-0 w-0 -translate-y-1/2 border-b-4 border-r-4 border-t-4 border-transparent border-r-gray-new-20 opacity-0 transition-opacity duration-200 peer-hover:opacity-100" />
                                   </span>
                                 )}
                               </span>
-                              <span className="text-[15px] text-pricing-gray-94">{price}</span>
+                              <span className="text-[15px] text-gray-new-94">{price}</span>
                             </div>
                           ))}
                           <div className={clsx('mt-2 text-base font-medium', gridClassName)}>
                             <span className="col-span-2 inline-flex flex-col">
-                              <span className="uppercase text-pricing-gray-94">Total price:</span>
+                              <span className="uppercase text-gray-new-94">Total price:</span>
                             </span>
                             <span className="relative tracking-[0.04em] text-pricing-primary-1">
                               ${formattedPriceWithCommas}

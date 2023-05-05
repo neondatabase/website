@@ -30,7 +30,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
   };
 
   return (
-    <li className="border-b border-pricing-gray-2 py-[14px] xl:py-[15px] lg:py-4">
+    <li className="border-b border-gray-new-20 py-[14px] xl:py-[15px] lg:py-4">
       <button
         className="flex w-full items-start gap-4 text-left"
         type="button"
@@ -59,12 +59,12 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
           }}
         >
           <p
-            className="with-link-primary pl-[42px] pr-24 pt-4 text-base font-light leading-tight text-pricing-gray-94 xl:pt-[11px] xl:pr-12 lg:pt-3.5 lg:pr-0 md:pt-3"
+            className="with-link-primary pl-[42px] pr-24 pt-4 text-base font-light leading-tight text-gray-new-94 xl:pt-[11px] xl:pr-12 lg:pt-3.5 lg:pr-0 md:pt-3"
             dangerouslySetInnerHTML={{ __html: answer }}
           />
           {linkText && linkUrl && (
             <Link
-              className="my-2 ml-[42px] border-b border-pricing-primary-3 pb-1.5 !text-base font-normal leading-none !text-pricing-primary-1 hover:!border-pricing-primary-1 xl:mt-4 xl:mb-0 lg:mt-3 lg:!text-base md:mt-2.5"
+              className="my-2 ml-[42px] border-b border-pricing-primary-3 pb-1.5 !text-base font-normal leading-none !text-pricing-primary-1 hover:!border-pricing-primary-1 xl:mt-3 xl:mb-2 lg:!text-base md:mb-0"
               size="sm"
               theme="white"
               to={linkUrl}

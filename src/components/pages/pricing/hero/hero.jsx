@@ -133,11 +133,11 @@ const Hero = () => {
                 <Link
                   className={clsx(
                     'relative z-10 flex min-h-full flex-col rounded-[10px] px-7 py-5 transition-colors duration-500 xl:p-5 xl:pb-3 lg:p-5',
-                    activeItemIndex !== index ? 'bg-pricing-gray-10' : 'bg-transparent'
+                    activeItemIndex !== index ? 'bg-gray-new-8' : 'bg-transparent'
                   )}
                   to={button.url}
                 >
-                  <div className="mb-6 flex min-h-[330px] flex-col border-b border-dashed border-pricing-gray-2 pb-4 xl:mb-7 xl:min-h-[348px] lg:min-h-max">
+                  <div className="mb-6 flex min-h-[330px] flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-7 xl:min-h-[348px] lg:min-h-max">
                     <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
                       {type}
                     </span>
@@ -161,7 +161,7 @@ const Hero = () => {
                     </AnimatedButton>
                     <p
                       className={clsx(
-                        'mt-9 font-light leading-snug tracking-tight text-pricing-gray-7 md:mt-9',
+                        'mt-9 font-light leading-snug tracking-tight text-gray-new-70 md:mt-9',
                         type === 'Pro' ? 'lg:mt-5' : 'lg:min-h-[66px]'
                       )}
                     >
