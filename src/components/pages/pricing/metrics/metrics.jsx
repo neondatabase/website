@@ -200,7 +200,7 @@ const Metrics = () => {
           <p className="mt-4 text-lg font-light leading-snug xl:text-base lg:mt-2 lg:text-center">
             Refer to our{' '}
             <Link
-              className="!border-b !border-pricing-primary-3 font-normal hover:!border-pricing-primary-1"
+              className="!border-b !border-pricing-primary-3 font-normal duration-500 hover:!border-pricing-primary-1"
               theme="underline-primary-1"
               to={`${LINKS.docs}introduction/billing`}
             >

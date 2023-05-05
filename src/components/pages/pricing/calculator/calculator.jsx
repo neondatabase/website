@@ -74,20 +74,20 @@ const thumbVariants = {
     backgroundColor: '#00E599',
   },
   click: {
-    width: 23,
-    height: 23,
+    width: 16,
+    height: 16,
     border: '2px solid #00E599',
-    borderRadius: 7,
+    borderRadius: 5,
     backgroundColor: '#131415',
     transition: {
       duration: 0.1,
     },
   },
   hover: {
-    width: 28,
-    height: 28,
+    width: 20,
+    height: 20,
     border: '2px solid #00E599',
-    borderRadius: 6,
+    borderRadius: 4,
     backgroundColor: '#131415',
     transition: {
       duration: 0.1,
@@ -445,7 +445,7 @@ const Calculator = () => {
           </div>
 
           <div
-            className="relative z-10 col-start-2 row-span-3 row-start-1 flex flex-col self-auto rounded-[10px] border border-[var(--accentColor)] px-6 py-7 transition-colors duration-200 lg:px-5 md:col-start-1 md:row-span-1 md:grid md:grid-cols-2 md:gap-x-32 sm:grid-cols-1 sm:gap-x-0"
+            className="relative z-10 col-start-2 row-span-3 row-start-1 flex flex-col self-auto rounded-[10px] border border-[var(--accentColor)] px-6 py-7 pb-3.5 transition-colors duration-200 lg:px-5 md:col-start-1 md:row-span-1 md:grid md:grid-cols-2 md:gap-x-32 sm:grid-cols-1 sm:gap-x-0"
             style={{
               '--accentColor': totalCost >= CUSTOM_THRESHOLD ? '#f0f075' : '#00e599',
               '--hoverColor': totalCost >= CUSTOM_THRESHOLD ? '#f5f5a3' : '#00ffaa',
@@ -507,7 +507,7 @@ const Calculator = () => {
                 <span>data transfer</span>
               </li>
             </ul>
-            <span className="mt-6 block text-base font-light tracking-tight text-gray-new-70 xl:mt-auto lg:text-[14px] md:mt-8">
+            <span className="mt-6 block text-base font-light tracking-tight text-gray-new-70 xl:mt-auto lg:text-[13px] md:mt-8">
               Based on the US East (Ohio) region
             </span>
           </div>

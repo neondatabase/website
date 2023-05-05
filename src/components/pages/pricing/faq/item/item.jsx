@@ -23,14 +23,14 @@ const variantsAnimation = {
 };
 
 const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
-  const [isOpen, setIsOpen] = useState(index === 0);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
   };
 
   return (
-    <li className="border-b border-gray-new-20 py-[14px] xl:py-[15px] lg:py-4">
+    <li className="border-b border-gray-new-20 py-3.5">
       <button
         className="flex w-full items-start gap-4 text-left"
         type="button"
@@ -59,12 +59,15 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
           }}
         >
           <p
-            className="with-link-primary pl-[42px] pr-24 pt-2.5 text-base font-light leading-tight text-gray-new-94 xl:pr-12 lg:pr-0"
+            className={clsx(
+              'with-link-primary pl-[42px] pr-24 pt-2.5 text-base font-light leading-tight text-gray-new-94 xl:pr-12 lg:pr-0',
+              linkText && linkUrl ? 'pb-0' : 'pb-2.5'
+            )}
             dangerouslySetInnerHTML={{ __html: answer }}
           />
           {linkText && linkUrl && (
             <Link
-              className="my-2 ml-[42px] border-b border-pricing-primary-3 pb-1.5 !text-base font-normal leading-none !text-pricing-primary-1 hover:!border-pricing-primary-1 xl:mt-3 xl:mb-2 lg:!text-base md:mb-0"
+              className="my-2.5 ml-[42px] border-b border-pricing-primary-3 pb-1.5 !text-base font-normal leading-none !text-pricing-primary-1 hover:!border-pricing-primary-1 lg:!text-base"
               size="sm"
               theme="white"
               to={linkUrl}

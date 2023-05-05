@@ -32,7 +32,7 @@ const items = [
   },
   {
     type: 'Pro',
-    price: 'Starting at $0',
+    price: 'Starting at <span class="font-normal text-pricing-primary-1">$0.00</span>',
     description:
       'A usage-based plan for small to medium teams. Unlimited resources with advanced configuration options. Share your projects with anyone. Only pay for what you use with no fixed contract.',
     features: [
@@ -141,9 +141,10 @@ const Hero = () => {
                     <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
                       {type}
                     </span>
-                    <h3 className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px]">
-                      {price}
-                    </h3>
+                    <h3
+                      className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px]"
+                      dangerouslySetInnerHTML={{ __html: price }}
+                    />
                     <AnimatedButton
                       className={clsx(
                         'relative mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 lg:max-w-[304px] sm:max-w-none',
