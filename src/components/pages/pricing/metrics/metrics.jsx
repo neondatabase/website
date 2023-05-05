@@ -46,7 +46,7 @@ const items = [
   {
     image: '/images/pages/pricing/metrics-4-mobile.jpg',
     name: 'Data transfer',
-    priceFrom: 'From $0.09 /Gigabyte',
+    priceFrom: 'From $0.09 /GiB',
     details: 'Data transfer is the amount of data transferred out of Neon.',
     prices: [
       {
@@ -102,7 +102,7 @@ const items = [
   {
     image: '/images/pages/pricing/metrics-3-mobile.jpg',
     name: 'Written data',
-    priceFrom: 'From $0.096 /Gigabyte',
+    priceFrom: 'From $0.096 /GiB',
     details: 'Written data is the amount of data written from Neon compute to storage.',
     prices: [
       {
