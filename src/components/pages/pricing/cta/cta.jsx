@@ -59,7 +59,7 @@ const CTA = () => {
             Talk to sales
           </AnimatedButton>
         </div>
-        <div className="relative col-span-7 col-start-6 md:col-span-full" ref={contentRef}>
+        <div className="relative col-span-7 col-start-6 md:z-20 md:col-span-full" ref={contentRef}>
           <Image
             className="mx-auto min-h-[345px] md:min-h-0"
             src="/images/pages/pricing/cta.jpg"
