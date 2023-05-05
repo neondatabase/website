@@ -22,6 +22,11 @@ const items = [
     details: 'Compute time is the amount of computing capacity used per hour.',
     prices: [
       {
+        name: 'US East (N. Virginia)',
+        price: '0.102',
+        unit: 'Compute-hour',
+      },
+      {
         name: 'US East (Ohio)',
         price: '0.102',
         unit: 'Compute-hour',
@@ -49,6 +54,11 @@ const items = [
     priceFrom: 'From $0.09 /GiB',
     details: 'Data transfer is the amount of data transferred out of Neon.',
     prices: [
+      {
+        name: 'US East (N. Virginia)',
+        price: '0.09',
+        unit: 'GiB',
+      },
       {
         name: 'US East (Ohio)',
         price: '0.09',
@@ -78,6 +88,11 @@ const items = [
     details: 'Project storage is the amount of data and history in your Neon projects.',
     prices: [
       {
+        name: 'US East (N. Virginia)',
+        price: '0.000164',
+        unit: 'GiB-hour',
+      },
+      {
         name: 'US East (Ohio)',
         price: '0.000164',
         unit: 'GiB-hour',
@@ -105,6 +120,11 @@ const items = [
     priceFrom: 'From $0.096 /GiB',
     details: 'Written data is the amount of data written from Neon compute to storage.',
     prices: [
+      {
+        name: 'US East (N. Virginia)',
+        price: '0.096',
+        unit: 'GiB',
+      },
       {
         name: 'US East (Ohio)',
         price: '0.096',
