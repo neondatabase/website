@@ -185,7 +185,7 @@ const Calculator = () => {
                     setComputeUnits(computeUnitsValue);
                   }}
                 >
-                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-new-30">
+                  <Slider.Track className="slider-track relative h-[2px] w-full grow rounded-[10px] bg-gray-new-30">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
                   <LazyMotion features={domAnimation}>
@@ -229,7 +229,7 @@ const Calculator = () => {
                   aria-label="Active time"
                   onValueChange={(value) => setActiveTime(value[0])}
                 >
-                  <Slider.Track className="relative h-[2px] w-full grow rounded-[10px] bg-gray-new-30">
+                  <Slider.Track className="slider-track relative h-[2px] w-full grow rounded-[10px] bg-gray-new-30">
                     <Slider.Range className="absolute h-full rounded-full bg-pricing-primary-1" />
                   </Slider.Track>
                   <LazyMotion features={domAnimation}>

@@ -349,7 +349,14 @@ const Estimates = () => {
                             <span className="col-span-2 inline-flex flex-col">
                               <span className="uppercase text-gray-new-94">Total price:</span>
                             </span>
-                            <span className="relative tracking-[0.04em] text-pricing-primary-1">
+                            <span
+                              className={clsx(
+                                'relative tracking-[0.04em]',
+                                index === 0 && 'text-pricing-primary-1',
+                                index === 1 && 'text-secondary-2',
+                                index === 2 && 'text-secondary-9'
+                              )}
+                            >
                               ${formattedPriceWithCommas}
                             </span>
                           </div>
