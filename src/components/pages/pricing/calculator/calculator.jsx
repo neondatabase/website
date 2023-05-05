@@ -320,7 +320,7 @@ const Calculator = () => {
           </div>
 
           <div className="row-span-1 rounded-[10px] bg-pricing-gray-10 p-5 xl:px-6 xl:py-5 md:flex-col md:p-0">
-            <div className="min-h-[202px] md:px-5 md:py-5 [@media(min-width:428px)]:min-h-[151px] [@media(min-width:606px)]:min-h-[auto]">
+            <div className="md:px-5 md:py-5">
               <h3 className="flex items-center text-sm font-medium uppercase leading-none tracking-wider text-pricing-secondary-9">
                 Data transfer and Written data
                 <Tooltip
@@ -332,7 +332,7 @@ const Calculator = () => {
                 <AnimatePresence initial={false} mode="wait">
                   {isAdvanced ? (
                     <m.ul
-                      className="mb-4 mt-5 flex items-center gap-x-8 text-[15px] tracking-tight text-pricing-gray-9 xl:mb-5 xl:flex-wrap xl:gap-x-7 sm:gap-4"
+                      className="mb-4 mt-5 flex items-center gap-x-8 text-[15px] tracking-tight text-pricing-gray-9 xl:mb-5 xl:flex-wrap xl:gap-x-7 md:mb-0 sm:gap-4"
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -400,7 +400,7 @@ const Calculator = () => {
                     </m.ul>
                   ) : (
                     <m.p
-                      className="mb-4 mt-5 text-[15px] tracking-tight text-pricing-gray-9 xl:mb-5"
+                      className="mb-4 mt-5 inline-flex flex-wrap gap-2 text-[15px] tracking-tight text-pricing-gray-9 xl:mb-5 md:mb-0"
                       initial={{
                         opacity: 0,
                         translateY: 10,
@@ -418,7 +418,7 @@ const Calculator = () => {
                     >
                       Accounts for 10% of your monthly cost, on average.
                       <button
-                        className="group relative mx-2 inline-flex items-center text-pricing-primary-1 transition-colors duration-200 hover:text-[#00ffaa]"
+                        className="group relative inline-flex items-center text-pricing-primary-1 transition-colors duration-200 hover:text-[#00ffaa]"
                         type="button"
                         onClick={() => setIsAdvanced(true)}
                       >

@@ -201,7 +201,7 @@ const Estimates = () => {
               East (Ohio) region
             </p>
           </div>
-          <div className="w-[38%] xl:w-[49%] xl:overflow-x-hidden lg:w-[55%] md:w-full">
+          <div className="w-[38%] xl:w-[49%] xl:overflow-hidden lg:w-[55%] md:w-full">
             <ul
               className="flex gap-8 py-2 xl:pt-3 xl:pb-1 lg:mx-auto lg:max-w-[584px] lg:pl-6 md:max-w-full md:px-0 xs:gap-4"
               ref={contentRef}
