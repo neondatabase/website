@@ -123,7 +123,10 @@ const Header = forwardRef(
 
           <div className="flex space-x-5 lg:hidden">
             <Button
-              className="relative py-[11px] pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden"
+              className={clsx(
+                'relative py-[11px] pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden',
+                theme === 'pricing' && '!bg-pricing-black'
+              )}
               to={LINKS.github}
               size="xs"
               theme={isThemeBlack ? 'tertiary' : 'quaternary'}
