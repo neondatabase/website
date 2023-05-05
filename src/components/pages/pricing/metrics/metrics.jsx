@@ -1,8 +1,9 @@
 'use client';
 
 import useScrollPosition from '@react-hook/window-scroll';
-import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
+import { Alignment, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -45,7 +46,7 @@ const items = [
   {
     image: '/images/pages/pricing/metrics-2-mobile.jpg',
     name: 'Project storage',
-    priceFrom: 'From $0.000164 /Gigabyte-hour',
+    priceFrom: 'From $0.000164 /GiB-hour',
     details: 'Project storage is the amount of data and history in your Neon projects.',
     prices: [
       {
@@ -139,7 +140,7 @@ const Metrics = () => {
     autoplay: false,
     stateMachines: 'SM',
     layout: new Layout({
-      fit: Fit.FitWidth,
+      // fit: Fit.FitWidth,
       alignment: Alignment.Center,
     }),
   });
@@ -179,8 +180,10 @@ const Metrics = () => {
 
   useEffect(() => {
     const currentScrollTop = scrollY;
+    // 816 = 760 + 56
+    const switchPointMultiplier = pageHeight < 975 ? 760 * 1 : pageHeight * 0.78;
     const switchPoints = [...Array(items.length + 1)].map(
-      (_, index) => sectionRef.current.offsetTop + pageHeight * index - pageHeight + 350
+      (_, index) => sectionRef.current.offsetTop + 130 + index * switchPointMultiplier - 200
     );
 
     switchPoints.forEach((_, index) => {
@@ -221,11 +224,13 @@ const Metrics = () => {
             </div>
           </div>
           <div className="col-span-5 col-start-8 text-left xl:col-span-6 md:col-span-full">
-            <div className="space-y-14 lg:space-y-0" ref={contentRef}>
+            <div className="lg:space-y-0" ref={contentRef}>
               {items.map(({ image, name, priceFrom, details, prices }, index) => (
-                <div
-                  className="flex h-[78vh] min-h-[760px] flex-col justify-center px-6 xl:pl-3 xl:pr-0 lg:px-0 md:h-auto md:min-h-0 md:px-0"
+                <motion.div
+                  initial={{ opacity: 0.3 }}
+                  className="flex h-[78vh] min-h-[760px] flex-col justify-center px-6 xl:pl-3 xl:pr-0 lg:px-0 md:h-auto md:min-h-0 md:px-0 md:!opacity-100"
                   key={index}
+                  animate={{ opacity: currentSectionIndex === index ? 1 : 0.3 }}
                 >
                   <Image
                     className="md:my-13 my-14 hidden max-w-full md:mx-auto md:block md:max-w-[80%]"
@@ -266,7 +271,7 @@ const Metrics = () => {
                       </div>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
