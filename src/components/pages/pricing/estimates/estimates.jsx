@@ -197,8 +197,7 @@ const Estimates = () => {
               >
                 Contact sales
               </Link>{' '}
-              if you require assistance forecasting billing and usage. Pricing is based on the US
-              East (Ohio) region
+              if you require assistance forecasting billing and usage.
             </p>
           </div>
           <div className="w-[38%] xl:w-[49%] xl:overflow-hidden lg:w-[55%] md:w-full">
