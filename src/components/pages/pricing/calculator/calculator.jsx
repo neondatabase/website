@@ -226,7 +226,7 @@ const Calculator = () => {
                       onPointerLeave={() => activeTimeControls.start('from')}
                     >
                       <m.span
-                        className="absolute h-2.5 w-1 rounded-[1px] bg-pricing-primary-1 before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
+                        className="absolute h-2.5 w-1 rounded-[1px] bg-pricing-primary-1"
                         initial="from"
                         animate={activeTimeControls}
                         variants={thumbVariants}
@@ -435,14 +435,14 @@ const Calculator = () => {
               '--hoverColor': totalCost >= CUSTOM_THRESHOLD ? '#f5f5a3' : '#00ffaa',
             }}
           >
-            <h3 className="text-lg leading-none tracking-tight text-white md:col-start-2 sm:col-start-1">
+            <h3 className="text-lg font-medium leading-none tracking-tight text-white md:col-start-2 sm:col-start-1">
               Estimated price
             </h3>
             <p className="mt-6 flex items-end gap-x-2 leading-none text-white md:col-start-2 sm:col-start-1">
               <span className="text-[56px] font-light tracking-[-0.06em] text-[var(--accentColor)] transition-colors duration-200 lg:text-[40px]">
                 {estimatedPrice}
               </span>
-              <span className="mb-1 block text-[26px] tracking-normal lg:text-[24px]">/mo</span>
+              <span className="mb-1 block text-xl tracking-normal">/mo</span>
             </p>
             <AnimatedButton
               className="my-6 w-full max-w-[260px] !bg-[var(--accentColor)] !py-[17px] !text-lg font-medium hover:!bg-[var(--hoverColor)] md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1"

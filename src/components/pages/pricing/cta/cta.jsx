@@ -1,7 +1,7 @@
 'use client';
 
 import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -63,12 +63,12 @@ const CTA = () => {
           className="relative col-span-7 col-start-6 self-end md:z-20 md:col-span-full"
           ref={contentRef}
         >
-          <Image
+          <img
             className="mx-auto min-h-[345px] lg:min-h-0"
             src="/images/pages/pricing/cta.jpg"
             width={842}
             height={538}
-            quality={100}
+            loading="lazy"
             alt=""
           />
           <div ref={setRiveRef}>

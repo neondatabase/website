@@ -233,7 +233,7 @@ const Metrics = () => {
                   animate={{ opacity: currentSectionIndex === index ? 1 : 0.3 }}
                 >
                   <Image
-                    className="md:my-13 my-14 hidden max-w-full md:mx-auto md:block md:max-w-[80%]"
+                    className="md:my-13 my-14 hidden max-w-full md:mx-auto md:block md:max-w-[80%] sm:max-w-full"
                     width={590}
                     height={830}
                     src={image}
