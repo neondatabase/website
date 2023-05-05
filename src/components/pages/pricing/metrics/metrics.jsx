@@ -1,7 +1,7 @@
 'use client';
 
 import useScrollPosition from '@react-hook/window-scroll';
-import { Alignment, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
+import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -140,7 +140,7 @@ const Metrics = () => {
     autoplay: false,
     stateMachines: 'SM',
     layout: new Layout({
-      // fit: Fit.FitWidth,
+      fit: Fit.FitWidth,
       alignment: Alignment.Center,
     }),
   });
@@ -217,8 +217,8 @@ const Metrics = () => {
           size="sm"
         >
           <div className="relative col-span-7 col-start-1 h-full xl:col-span-6 md:col-span-full md:hidden">
-            <div className="sticky top-0 h-screen min-h-[760px]">
-              <div className="absolute flex h-full w-full items-center justify-center px-16 xl:pl-0">
+            <div className="sticky top-0 h-screen min-h-[960px]">
+              <div className="absolute flex h-full w-full items-center justify-center pl-20 pr-24 xl:pr-10 xl:pl-0">
                 <RiveComponent width={590} height={830} aria-hidden />
               </div>
             </div>
