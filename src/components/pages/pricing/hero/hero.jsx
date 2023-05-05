@@ -182,7 +182,10 @@ const Hero = () => {
                     >
                       {features.map(({ title, label }, index) => (
                         <li
-                          className="relative pl-6 leading-tight tracking-tight lg:w-1/3 md:w-full"
+                          className={clsx(
+                            'relative pl-6 leading-tight tracking-tight',
+                            type === 'Pro' && 'lg:w-1/3 md:w-full'
+                          )}
                           key={index}
                         >
                           <CheckIcon
