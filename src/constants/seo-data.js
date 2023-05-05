@@ -48,5 +48,6 @@ export default {
     title: 'Pricing — Neon',
     description:
       'Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible usage and volume-based plans.',
+    imagePath: '/images/social-previews/pricing.jpg',
   },
 };

@@ -2,7 +2,7 @@
 import clsx from 'clsx';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 
@@ -31,43 +31,48 @@ const styles = {
   },
 };
 
-const Link = ({
-  className: additionalClassName = null,
-  size = null,
-  theme = null,
-  to = null,
-  withArrow = false,
-  children,
-  ...props
-}) => {
-  const className = clsx(
-    size && theme && styles.base,
-    styles.size[size],
-    styles.theme[theme],
-    additionalClassName
-  );
+const Link = forwardRef(
+  (
+    {
+      className: additionalClassName = null,
+      size = null,
+      theme = null,
+      to = null,
+      withArrow = false,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const className = clsx(
+      size && theme && styles.base,
+      styles.size[size],
+      styles.theme[theme],
+      additionalClassName
+    );
 
-  const content = (
-    <>
-      {withArrow ? <span>{children}</span> : children}
-      {withArrow && <ArrowRightIcon className={clsx('ml-2 shrink-0')} />}
-    </>
-  );
+    const content = (
+      <>
+        {withArrow ? <span>{children}</span> : children}
+        {withArrow && <ArrowRightIcon className={clsx('ml-2 shrink-0')} />}
+      </>
+    );
 
-  if (to.startsWith('/')) {
+    if (to.startsWith('/')) {
+      return (
+        <NextLink className={className} href={to} ref={ref} {...props}>
+          {content}
+        </NextLink>
+      );
+    }
+
     return (
-      <NextLink className={className} href={to} {...props}>
+      <a className={className} href={to} ref={ref} {...props}>
         {content}
-      </NextLink>
+      </a>
     );
   }
-
-  return (
-    <a className={className} href={to} {...props}>
-      {content}
-    </a>
-  );
-};
+);
 
 Link.propTypes = {
   className: PropTypes.string,

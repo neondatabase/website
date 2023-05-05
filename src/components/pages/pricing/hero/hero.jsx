@@ -1,10 +1,15 @@
-import clsx from 'clsx';
+'use client';
 
-import Button from 'components/shared/button';
+import clsx from 'clsx';
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect, useMemo, useState } from 'react';
+
+import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import Link from 'components/shared/link/link';
+import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import CheckIcon from 'icons/check.inline.svg';
 
 const items = [
   {
@@ -27,8 +32,7 @@ const items = [
   },
   {
     type: 'Pro',
-    subtitle: 'Starting at',
-    price: '$0',
+    price: 'Starting at <span class="font-normal text-pricing-primary-1">$0.00</span>',
     description:
       'A usage-based plan for small to medium teams. Unlimited resources with advanced configuration options. Share your projects with anyone. Only pay for what you use with no fixed contract.',
     features: [
@@ -36,7 +40,6 @@ const items = [
       { title: 'Project sharing' },
       { title: 'Configurable compute size' },
       { title: 'Autoscaling', label: 'beta' },
-      { title: 'Configurable auto-suspend compute', label: 'coming soon' },
     ],
     button: {
       url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
@@ -62,90 +65,163 @@ const items = [
   },
 ];
 
-const Hero = () => (
-  <section className="hero safe-paddings overflow-hidden pt-44 2xl:pt-[150px] xl:pt-32 lg:pt-[50px]">
-    <Container className="flex flex-col items-center" size="mdDoc">
-      <Heading className="inline-flex flex-col text-center" tag="h1" size="lg">
-        <span className="leading-dense text-primary-1">Start Free.</span>{' '}
-        <span className="leading-dense">Only pay for what you use.</span>
-      </Heading>
-      <p className="mx-auto mt-7 max-w-[656px] text-center text-xl 2xl:mt-5 xl:max-w-[616px] xl:text-base lg:max-w-[464px]">
-        Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible
-        usage and volume-based plans.
-      </p>
-      <div className="relative mx-auto mt-14 max-w-[1220px] pt-8 xl:mt-10 xl:pt-3 lg:mt-7">
-        <span
-          className="absolute -right-8 top-0 h-full w-[68.5%] rounded-[42px] bg-gradient-to-t from-transparent to-[#00E599] px-px pt-px xl:-right-3 xl:rounded-[28px] lg:-left-3 lg:h-[55%] lg:w-[calc(100%+24px)] md:-inset-x-2.5 md:h-[67%] md:w-[calc(100%+20px)]"
-          style={{
-            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-            WebkitMaskComposite: 'xor',
-            maskComposite: 'exclude',
-          }}
-        />
-        <ul className="relative z-10 grid grid-cols-3 gap-x-8 lg:grid-cols-2 lg:gap-y-3 md:grid-cols-1">
-          {items.map(({ type, subtitle, price, description, features, button }, index) => (
-            <li
-              className={clsx(
-                'flex flex-col px-10 pt-8 pb-10 xl:p-5 lg:p-7',
-                { 'rounded-[20px] bg-gray-1': type !== 'Pro' },
-                type === 'Free Tier' && 'lg:order-1 lg:col-span-full'
-              )}
-              key={index}
-            >
-              <div
-                className={clsx(
-                  'mb-8 flex min-h-[231px] flex-col xl:mb-5 xl:min-h-[279px] md:min-h-max',
-                  type === 'Free Tier' ? 'lg:min-h-max' : 'lg:min-h-[240px]'
-                )}
-              >
-                <span className="relative pb-[26px] md:flex md:flex-col md:pb-0">
-                  <span className="text-xl font-semibold leading-tight">{type}</span>
-                  {subtitle && (
-                    <span className="absolute bottom-0 left-0 font-normal leading-none tracking-[0.02em] text-gray-4 md:static md:pt-2.5">
-                      {subtitle}
-                    </span>
-                  )}
-                </span>
+const Hero = () => {
+  const [isLoad, setIsLoad] = useState(false);
+  const [hoverCount, setHoverCount] = useState(0);
+  const [activeItemIndex, setActiveItemIndex] = useState(1);
+  const controls = useAnimation();
 
-                <h3 className="text-[36px] font-semibold leading-snug lg:text-[32px]">{price}</h3>
-                <p className="mt-2.5 text-gray-6">{description}</p>
-              </div>
-              <div className="mt-auto flex grow flex-col">
-                <ul className="mb-10 flex flex-col space-y-2.5 xl:mb-5 lg:mb-7">
-                  {features.map(({ title, label }, index) => (
-                    <li
-                      className="relative pl-4 before:absolute before:left-0 before:top-[9px] before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary-1"
-                      key={index}
-                    >
-                      <span>{title}</span>
-                      {label && (
-                        <span className="text-sm italic text-secondary-2">&nbsp; {label}</span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-                <Button
-                  className="mt-auto w-full max-w-[304px] py-6 !text-lg sm:max-w-none"
-                  theme={button.theme}
+  const borderLightVariants = useMemo(
+    () => ({
+      from: {
+        opacity: 0,
+      },
+      to: {
+        opacity: hoverCount === 0 ? [0, 1, 0.5, 1, 0.75, 1] : [0, 0.4, 0.2, 1, 0.5, 1],
+        transition: {
+          ease: 'easeInOut',
+          duration: hoverCount === 0 ? 0.5 : 1,
+        },
+      },
+      exit: {
+        opacity: 0,
+      },
+    }),
+    [hoverCount]
+  );
+
+  useEffect(() => {
+    controls.start('to');
+  }, [controls]);
+
+  useEffect(() => {
+    setIsLoad(true);
+  }, []);
+
+  return (
+    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-[40px]">
+      <Container className="flex flex-col items-center" size="mdDoc">
+        <Heading
+          className="inline-flex flex-col text-center font-medium !leading-none tracking-tighter md:text-4xl"
+          tag="h1"
+          size="lg"
+        >
+          <span className="text-pricing-primary-1">Start Free.</span>{' '}
+          <span>Only pay for what you use.</span>
+        </Heading>
+        <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
+          Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible
+          usage and volume-based plans.
+        </p>
+        <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-12 md:mt-9">
+          <ul className="relative z-10 grid grid-cols-3 gap-x-11 xl:gap-x-6 lg:grid-cols-2 lg:gap-x-4 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
+            {items.map(({ type, price, description, features, button }, index) => (
+              <li
+                className={clsx(
+                  'group relative rounded-[10px]',
+                  type === 'Pro' && 'lg:-order-1 lg:col-span-full'
+                )}
+                style={{
+                  '--accentColor':
+                    type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
+                  '--hoverColor':
+                    type === 'Free Tier' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
+                }}
+                key={index}
+                onPointerEnter={() => {
+                  setActiveItemIndex(index);
+                  setHoverCount((prev) => (prev === 1 ? 0 : prev + 1));
+                  controls.start('to');
+                }}
+              >
+                <Link
+                  className={clsx(
+                    'relative z-10 flex min-h-full flex-col rounded-[10px] px-7 py-5 transition-colors duration-500 xl:p-5 xl:pb-3 lg:p-5',
+                    activeItemIndex !== index ? 'bg-gray-new-8' : 'bg-transparent'
+                  )}
                   to={button.url}
-                  size="sm"
                 >
-                  {button.text}
-                </Button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <p className="mt-8 text-xl lg:mt-7 lg:text-lg">
-        See pricing & plan details{' '}
-        <Link className="font-semibold" to="/docs/introduction/billing" theme="underline-primary-1">
-          here
-        </Link>
-        .
-      </p>
-    </Container>
-  </section>
-);
+                  <div className="mb-6 flex min-h-[330px] flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-7 xl:min-h-[348px] lg:min-h-max">
+                    <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
+                      {type}
+                    </span>
+                    <h3
+                      className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px] md:mt-4"
+                      dangerouslySetInnerHTML={{ __html: price }}
+                    />
+                    <AnimatedButton
+                      className={clsx(
+                        'relative mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 md:mt-7 sm:max-w-none',
+                        type === 'Pro'
+                          ? 'lg:absolute lg:right-8 lg:top-0 lg:max-w-[210px] md:relative md:right-0 md:max-w-[304px]'
+                          : 'lg:max-w-[304px]'
+                      )}
+                      isAnimated={activeItemIndex === index}
+                      animationColor="var(--accentColor)"
+                      theme="primary"
+                      size="sm"
+                      spread={2}
+                    >
+                      {button.text}
+                    </AnimatedButton>
+                    <p
+                      className={clsx(
+                        'mt-9 font-light leading-snug tracking-tight text-gray-new-70 md:mt-8',
+                        type === 'Pro' ? 'lg:mt-5' : 'lg:min-h-[66px]'
+                      )}
+                    >
+                      {description}
+                    </p>
+                  </div>
+                  <div className="mt-auto flex grow flex-col">
+                    <ul
+                      className={clsx(
+                        'mb-4 flex flex-col flex-wrap space-y-4 xl:mb-5 lg:mb-2.5 md:mb-7',
+                        type === 'Pro' ? 'lg:max-h-28 lg:gap-4 lg:space-y-0 md:max-h-max' : ''
+                      )}
+                    >
+                      {features.map(({ title, label }, index) => (
+                        <li
+                          className={clsx(
+                            'relative pl-6 leading-tight tracking-tight',
+                            type === 'Pro' && 'lg:w-1/3 md:w-full'
+                          )}
+                          key={index}
+                        >
+                          <CheckIcon
+                            className="absolute left-0 top-[2px] h-4 w-4 text-[var(--accentColor)]"
+                            aria-hidden
+                          />
+                          <span>{title}</span>
+                          {label && (
+                            <span className="ml-2 whitespace-nowrap rounded-full bg-pricing-primary-4 px-3 py-1 align-middle text-[10px] font-semibold uppercase leading-none tracking-[0.02em] text-pricing-primary-1">
+                              {label}
+                            </span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Link>
+                <motion.span
+                  className={clsx(
+                    'pointer-events-none absolute top-0 left-0 z-20 h-full w-full rounded-[10px] border border-transparent transition-colors duration-300 md:border-[var(--accentColor)] md:!opacity-100',
+                    isLoad !== true && '!opacity-100',
+                    activeItemIndex === index && 'border-[var(--accentColor)]'
+                  )}
+                  initial="from"
+                  exit="exit"
+                  variants={borderLightVariants}
+                  animate={controls}
+                  aria-hidden
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Container>
+    </section>
+  );
+};
 
 export default Hero;

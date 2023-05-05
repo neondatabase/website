@@ -53,16 +53,12 @@ const items = [
 ];
 
 const Faq = () => (
-  <section className="faq safe-paddings my-40 2xl:my-32 xl:my-28 lg:my-24 md:my-20">
-    <Container className="grid-gap-x grid grid-cols-12" size="mdDoc">
-      <Heading
-        className="col-span-4 !leading-dense xl:col-start-2 xl:col-end-12 lg:col-span-full lg:text-5xl md:text-[36px]"
-        tag="h2"
-        size="lg"
-      >
+  <section className="faq safe-paddings bg-gray-new-8 py-40 2xl:py-32 xl:py-28 lg:py-20 md:py-16">
+    <Container className="max-w-[968px]" size="mdDoc">
+      <Heading className="text-center" tag="h2" size="2sm">
         Frequently Asked Questions
       </Heading>
-      <ul className="col-start-6 col-end-13 pt-2.5 2xl:col-start-5 xl:col-start-2 xl:col-end-12 xl:pt-3.5 lg:col-span-full">
+      <ul className="mt-12 xl:mx-auto xl:mt-10 xl:max-w-3xl lg:mt-7 md:mt-6">
         {items.map((item, index) => (
           <Item {...item} key={index} index={index} />
         ))}
