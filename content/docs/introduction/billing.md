@@ -190,30 +190,32 @@ data transfer (GiB) * price per GiB
 
 | Cloud provider | Region      | Billing metric | Price | Unit |
 |:---------------|:-----------|:--------------|:------|:-----|
-| AWS            | US East (N. Virginia)     | Compute time  | $0.10200 | Compute-hour |
+| AWS            | US East (N. Virginia)     | Compute time  | $0.0255 | Compute-hour*  |
 | AWS            | US East (N. Virginia)     | Project storage  | $0.000164 | GiB-hour |
 | AWS            | US East (N. Virginia)  | Written data  | $0.09600 | GiB |
 | AWS            | US East (N. Virginia)| Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | US East (Ohio)     | Compute time  | $0.10200 | Compute-hour |
+| AWS            | US East (Ohio)     | Compute time  | $0.0255 | Compute-hour* |
 | AWS            | US East (Ohio)     | Project storage  | $0.000164 | GiB-hour |
 | AWS            | US East (Ohio)  | Written data  | $0.09600 | GiB |
 | AWS            | US East (Ohio)| Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | US West (Oregon)     | Compute time  | $0.10200 | Compute-hour |
+| AWS            | US West (Oregon)     | Compute time  | $0.0255 | Compute-hour* |
 | AWS            | US West (Oregon)| Project storage | $0.000164 | GiB-hour |
 | AWS            | US West (Oregon)     | Written data  | $0.09600 | GiB |
 | AWS            | US West (Oregon)  | Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | Europe (Frankfurt)| Compute time| $0.11800 | Compute-hour |
+| AWS            | Europe (Frankfurt)| Compute time| $0.0295 | Compute-hour* |
 | AWS            | Europe (Frankfurt)| Project storage  | $0.00018 | GiB-hour |
 | AWS            | Europe (Frankfurt)     | Written data    | $0.09600 | GiB |
 | AWS            | Europe (Frankfurt)     | Data transfer    | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | Asia Pacific (Singapore)| Compute time    | $0.12100 | Compute-hour |
+| AWS            | Asia Pacific (Singapore)| Compute time    | $0.03025 | Compute-hour* |
 | AWS            | Asia Pacific (Singapore)  | Project storage    | $0.00018 | GiB-hour |
 | AWS            | Asia Pacific (Singapore)| Written data  | $0.09600 | GiB |
 | AWS            | Asia Pacific (Singapore)| Data transfer  | $0.09000 | GiB |
+
+*The _Compute-hour_ price is for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU), the smallest CU size offered by Neon. A <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU) CU has .25 vCPU and 1 GB of RAM. Neon currently supports computes with up to 7 CU (7 vCPU and 28 GB of RAM).
 
 ## Support
 
