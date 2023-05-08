@@ -18,32 +18,32 @@ const items = [
   {
     image: '/images/pages/pricing/metrics-1-mobile.jpg',
     name: 'Compute time',
-    priceFrom: 'From $0.102 /hour',
+    priceFrom: 'From $0.0255 /hour',
     details: 'Compute time is the amount of computing capacity used per hour.',
     prices: [
       {
         name: 'US East (N. Virginia)',
-        price: '0.102',
+        price: '0.0255',
         unit: 'Compute-hour',
       },
       {
         name: 'US East (Ohio)',
-        price: '0.102',
+        price: '0.0255',
         unit: 'Compute-hour',
       },
       {
         name: 'US West (Oregon)',
-        price: '0.102',
+        price: '0.0255',
         unit: 'Compute-hour',
       },
       {
         name: 'Europe (Frankfurt)',
-        price: '0.118',
+        price: '0.0295',
         unit: 'Compute-hour',
       },
       {
         name: 'Asia Pacific (Singapore)',
-        price: '0.121',
+        price: '0.03025',
         unit: 'Compute-hour',
       },
     ],
