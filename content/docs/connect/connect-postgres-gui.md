@@ -19,6 +19,8 @@ You can gather most of these details from the **Connection Details** widget on t
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
+Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
+
 The connection string includes the role name, hostname, and database name.
 
 ```text
