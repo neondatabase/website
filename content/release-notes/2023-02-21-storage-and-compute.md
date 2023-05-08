@@ -2,6 +2,7 @@
 
 - Compute: Added support for the PostgreSQL `xml2` and `pgjwt` extensions. For more information about PostgreSQL extensions supported by Neon, see [PostgreSQL extensions](https://neon.tech/docs/reference/pg-extensions/).
 - Compute: Updated the versions for the following PostgreSQL extensions:
+
   - Updated the `address_standardizer`, `address_standardizer_data_us`, `postgis`, `postgis_raster`, `postgis_tiger_geocoder`, `postgis_topology` extensions to version `3.3.2`.
   - Updated the `plv8`, `plls`, `plcoffee` extensions to `3.1.5`.
   - Updated the `h3_pg` extension to `4.1.2`.
@@ -14,4 +15,4 @@
 
 - Pageserver: Corrected the storage size metrics calculation to ensure that only active branches are counted.
 - Proxy: Enabled `OpenTelemetry` tracing to capture all incoming requests. This change enables Neon to perform an end-to-end trace when a new
-connection is established.
+  connection is established.
