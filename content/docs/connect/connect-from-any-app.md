@@ -21,7 +21,7 @@ You can obtain the connection details you require from the **Connection Details*
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
-You can enable the **Pooler** option if you require a pooled connection string. The **Pooler** option adds `-pooler` to the hostname, which tells Neon to use a pooled connection. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
+Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
 
 A Neon connection string includes the role, the compute endpoint hostname, and the database name.
 
