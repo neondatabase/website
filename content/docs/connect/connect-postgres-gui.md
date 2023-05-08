@@ -54,12 +54,15 @@ Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, s
 Connections from the following GUI applications and IDEs have been tested with Neon:
 
 - [Azure Data Studio](https://azure.microsoft.com/en-us/products/data-studio/) (requires the [PostgreSQL extension](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/postgres-extension?view=sql-server-ver16), and the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
+- [Beekeeper Studio](https://www.beekeeperstudio.io/) (requires the **Enable SSL** option)
 - [CLion](https://www.jetbrains.com/clion/)
+- [Datagran](https://www.datagran.io/) (requires the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
 - [DataGrip](https://www.jetbrains.com/datagrip/)
 - [DBeaver](https://dbeaver.io/)
 - [dbForge](https://www.devart.com/dbforge/)
 - [DbVisualizer](https://www.dbvis.com/)
 - [DronaHQ hosted cloud version](https://www.dronahq.com/) (requires selecting **Connect using SSL** when creating a connector)
+- [Luna Modeler](https://www.datensen.com/data-modeling/luna-modeler-for-relational-databases.html) (requires enabling the SSL/TLS option)
 - [Metabase](https://www.metabase.com/)
 - [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres)
 - [pgAdmin 4](https://www.pgadmin.org/)
