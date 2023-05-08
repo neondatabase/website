@@ -130,7 +130,10 @@ const Calculator = () => {
   );
 
   return (
-    <section className="safe-paddings mb-40 mt-[17.25rem] xl:mt-40 xl:mb-36 lg:mt-32 lg:mb-16 md:my-20">
+    <section
+      id="calc"
+      className="safe-paddings mb-40 mt-[17.25rem] xl:mt-40 xl:mb-36 lg:mt-32 lg:mb-16 md:my-20"
+    >
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <Heading
