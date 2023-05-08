@@ -15,8 +15,9 @@ import illustration from './images/illustration.png';
 const CTA = ({ isDocsPage }) =>
   isDocsPage ? (
     <div className="flex w-full flex-col">
-      <Search className="my-8" isNotFoundPage />
-      <Link className="mt-4 self-start lg:mt-0" size="lg" theme="black-primary-1" to="/">
+      <Search className="my-8" />
+      <span className="h-px w-full bg-gray-6 dark:bg-gray-4" />
+      <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
         Back to home
       </Link>
     </div>
