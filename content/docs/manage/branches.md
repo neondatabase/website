@@ -112,7 +112,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 5. Connect with `psql` as shown below.
 
   ```bash
-  psql postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech/neondb
+  psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
   ```
 
 <Admonition type="tip">

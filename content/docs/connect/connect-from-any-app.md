@@ -26,9 +26,9 @@ Neon supports pooled and direct connections to the database. Use a pooled connec
 A Neon connection string includes the role, the compute endpoint hostname, and the database name.
 
 ```text
-postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech/neondb
-             ^                          ^                               ^
-             |- <role>                  |- <hostname>                   |- <database>
+postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+             ^                                   ^                         ^
+             |- <role>                           |- <hostname>             |- <database>
 ```
 
 You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line, as shown:
@@ -36,7 +36,7 @@ You can use the details from the connection string or the connection string itse
 `.env` file:
 
 ```text
-PGHOST='ep-restless-rice.us-east-2.aws.neon.tech'
+PGHOST='ep-mute-rain-952417.us-east-2.aws.neon.tech'
 PGDATABASE='neondb'
 PGUSER='daniel'
 PGPASSWORD='<password>'
@@ -46,13 +46,13 @@ PGPORT='5432'
 Variable:
 
 ```text
-DATABASE_URL="postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech:5432/neondb"
+DATABASE_URL="postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech:5432/neondb"
 ```
 
 Command-line:
 
 ```bash
-psql postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech/neondb
+psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="note">

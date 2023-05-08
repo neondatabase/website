@@ -22,13 +22,13 @@ You can gather most of these details from the **Connection Details** widget on t
 The connection string includes the role name, hostname, and database name.
 
 ```text
-postgres://sally@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb
-             ^                       ^                          ^
-             |- <role name>          |- <hostname>              |- <database name>
+postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+             ^                                   ^                         ^
+             |- <role>                           |- <hostname>             |- <database>
 ```
 
-- role name: `sally`
-- hostname: `ep-cold-poetry-404091.us-east-2.aws.neon.tech`
+- role name: `daniel`
+- hostname: `ep-mute-rain-952417.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
 Passwords are only shown when they are created. If you misplaced your password, you can reset it by selecting the **Reset Password** link in the **Connection Details** widget or by navigating to the **Roles** page.
