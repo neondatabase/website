@@ -36,7 +36,7 @@ postgres://sally:<password>@ep-throbbing-boat-918849.us-east-2.aws.neon.tech/neo
 ```
 
 <Admonition type="note">
-The previous method of enabling connection pooling for a compute endpoint is deprecated. When using a pooling-enabled connection, as described above, ensure that connection pooling is not enabled for the compute endpoint. To disable pooling for a compute endpoint, refer to the instructions in [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+The previous method of enabling connection pooling for a compute endpoint is deprecated. When using a pooling-enabled connection, as described above, ensure that connection pooling is not enabled for the compute endpoint. To disable pooling for a compute endpoint, refer to the instructions in [Edit a compute endpoint](../manage/endpoints#edit-a-compute-endpoint).
 </Admonition>
 
 ## Connection pooling notes and limitations

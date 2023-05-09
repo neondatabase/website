@@ -62,7 +62,7 @@ To edit a compute endpoint:
 1. Specify your changes and click **Save**.
 
 <Admonition type="note">
-Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](https://neon.tech/docs/connect/connection-pooling#enable-connection-pooling).
+Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](../connect/connection-pooling#enable-connection-pooling).
 </Admonition>
 
 ### Compute size configuration

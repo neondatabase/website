@@ -56,7 +56,7 @@ Branching enables testers to use the most recent production data. Testers can cr
 
 ![test environment branches](/docs/introduction/branching_test.png)
 
-For a simple example showing how you can use a branch to test queries, refer to [Test queries with branching](/docs/tutorial/test-queries), in the _Neon tutorial_.
+For a simple example showing how you can use a branch to test queries, refer to [Test queries with branching](../tutorial/test-queries), in the _Neon tutorial_.
 
 Another testing scenario enabled by branching is tracking down corruption or data quality issues. For example, you can create and dispose of multiple point-in-time branches to determine when a corruption or data quality issue first appeared.
 

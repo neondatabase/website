@@ -9,11 +9,11 @@ Neon is protocol and application-compatible with PostgreSQL. However, when using
 
 ## PostgreSQL versions
 
-Neon cloud service is currently compatible with PostgreSQL 14 and PostgreSQL 15. You can select the PostgreSQL version you want to use when creating a Neon project. PostgreSQL 15 is selected, by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects).
+Neon cloud service is currently compatible with PostgreSQL 14 and PostgreSQL 15. You can select the PostgreSQL version you want to use when creating a Neon project. PostgreSQL 15 is selected, by default. For information about creating a Neon project, See [Manage projects](../manage/projects).
 
 ## Permissions and extension support
 
-The Neon cloud service does not currently provide roles with access permissions other than those granted to standard database owners in PostgreSQL. Therefore, Neon roles cannot access replication methods, create additional roles from a PostgreSQL connection, or install PostgreSQL extensions other than those permitted by Neon. For information about the PostgreSQL extensions that Neon supports, see [PostgreSQL Extensions](/docs/reference/pg-extensions).
+The Neon cloud service does not currently provide roles with access permissions other than those granted to standard database owners in PostgreSQL. Therefore, Neon roles cannot access replication methods, create additional roles from a PostgreSQL connection, or install PostgreSQL extensions other than those permitted by Neon. For information about the PostgreSQL extensions that Neon supports, see [PostgreSQL Extensions](../extensions/pg-extensions).
 
 <a id="default-parameters/"></a>
 
@@ -29,7 +29,7 @@ The following table lists Neon PostgreSQL parameter settings that may differ fro
 | wal_level       | replica | Logical replication is currently not supported                                    |
 
 <Admonition type="note">
-You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling]../connect/connection-pooling).
 </Admonition>
 
 ## Unlogged tables

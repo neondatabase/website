@@ -131,7 +131,7 @@ If you already added the Neon Vercel integration to a Vercel project and want to
 1. Navigate to this URL: [https://vercel.com/integrations/neon/new](https://vercel.com/integrations/neon/new).
 1. Follow the prompts. When you reach the **Integrate Neon** dialog, select the Vercel project that you want to add the integration to. Vercel projects that are already integrated with Neon are identified as `CONNECTED`.
    ![Confirm integration settings](/docs/guides/vercel_add_new_project.png)
-1. Complete the steps outlined in [Add the Neon integration](#add-the-neon-integration).
+1. Complete the steps outlined in [Add the Neon integration](#add-the-neon-vercel-integration).
 
 ## Troubleshoot connection issues
 
