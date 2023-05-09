@@ -7,12 +7,12 @@ redirectFrom:
   - /docs/cloud/getting_started/
 ---
 
-You can sign up for Neon for free or and upgrade to one of our paid plans when you scale. For information about our Free Tier limits, see [Free Tier](/docs/introduction/technical-preview-free-tier). For information about Neon's paid plans, see [Billing](/docs/introduction/billing).
+You can sign up for free and upgrade to a paid plan when you are ready to scale. For information about our Free Tier limits, see [Free Tier](/docs/introduction/technical-preview-free-tier). For information about Neon's paid plan options, see [Billing](../introduction/billing.md).
 
-Signing up for Neon is easy. Simply navigate to [https://console.neon.tech](https://console.neon.tech) and sign in with your Github or Google account.
+Signing up for Neon is easy. Simply navigate to [https://console.neon.tech](https://console.neon.tech) and sign in with a Github or Google account.
 ![Neon console sign up](/docs/get-started-with-neon/neon_signin.png)
 
-After signing in, you are directed to the Neon Console where you can create your first project. For instructions, see [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
+After signing in, you are directed to the Neon Console where you can create your first project. For instructions, see [Create your first project](../get-started-with-neon/setting-up-a-project).
 
 ## Need help?
 
