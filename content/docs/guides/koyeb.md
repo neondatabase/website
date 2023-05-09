@@ -130,4 +130,4 @@ To delete the example application on Koyeb to avoid incurring any charges, follo
 1. From the Koyeb [control panel](https://app.koyeb.com/), select the **App** to delete.
 1. On the **Settings** tab, select **Danger Zone** and click **Delete**.
 
-To delete your Neon project, refer to [Delete a project](/docs/manage/projects#delete-a-project).
+To delete your Neon project, refer to [Delete a project](../manage/projects#delete-a-project).

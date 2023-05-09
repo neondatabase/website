@@ -40,11 +40,11 @@ You can use Neon's branching feature in variety development workflows, a few of 
 
 Create a branch of your production database that developers are free to play with and modify. You can quickly create a branch with all of the data that existed in the parent branch, eliminating the setup time required to deploy and maintain a development database.
 
-![development environment branch](../introduction/branching_dev_env.png)
+![development environment branch](/docs/introduction/branching_dev_env.png)
 
 Branching is so easy and cost-effective that you can create a branch for each developer. For example, you can create branches from a primary development branch to assign tasks to be worked on in parallel.
 
-![branch for each developer](../introduction/branching_each_dev.png)
+![branch for each developer](/docs/introduction/branching_each_dev.png)
 
 ### Preview deployments
 
@@ -54,13 +54,13 @@ With Neon's branching capabilities, you can create a branch for each preview dep
 
 Branching enables testers to use the most recent production data. Testers can create branches for testing schema changes, validating new queries, or testing potentially destructive queries before deploying them to production. A branch is isolated from its parent branch but has all of the parent branch's data up to the point of branch creation, which eliminates the effort involved in hydrating a database. Tests can also run on separate branches in parallel, with each branch having dedicated compute resources.
 
-![test environment branches](../introduction/branching_test.png)
+![test environment branches](/docs/introduction/branching_test.png)
 
 For a simple example showing how you can use a branch to test queries, refer to [Test queries with branching](/docs/tutorial/test-queries), in the _Neon tutorial_.
 
 Another testing scenario enabled by branching is tracking down corruption or data quality issues. For example, you can create and dispose of multiple point-in-time branches to determine when a corruption or data quality issue first appeared.
 
-![data quality issue branch](../introduction/branching_issue.png)
+![data quality issue branch](/docs/introduction/branching_issue.png)
 
 ### Data recovery
 
@@ -68,7 +68,7 @@ If you lose data due to an unintended deletion or some other event, you can crea
 
 ![data recovery branch](/docs/introduction/branching_data_loss.png)
 
-For a simple example showing how you can use a branch to recover lost data, refer to [Recover lost data with branching](/docs/tutorial/data-recovery), in the _Neon tutorial_.
+For a simple example showing how you can use a branch to recover lost data, refer to [Recover lost data with branching](../tutorial/data-recovery), in the _Neon tutorial_.
 
 For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to recover to the last known good.
 
@@ -90,4 +90,4 @@ You can use branching to implement a data backup strategy. For example, you can 
 
 ## Get started with branching
 
-To start using branches, refer to the instructions in [Manage branches](/docs/manage/branches).
+To start using branches, refer to the instructions in [Manage branches](../manage/branches).

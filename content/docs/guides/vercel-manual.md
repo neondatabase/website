@@ -12,7 +12,7 @@ For other Vercel integration options, refer to the [Neon and Vercel integration 
 
 ## Prerequisites
 
-- A Neon project. If you do not have one, see [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
+- A Neon project. If you do not have one, see [Create your first project](../get-started-with-neon/setting-up-a-project).
 - A [Vercel account](https://vercel.com).
 - A project deployed to Vercel. If you do not have one, see [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project), in the _Vercel documentation_.
 
@@ -20,7 +20,7 @@ For other Vercel integration options, refer to the [Neon and Vercel integration 
 
 You can these details from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection details widget](../connect/connection_details.png)
 
 The connection string includes the role name, hostname, and database name. For example:
 

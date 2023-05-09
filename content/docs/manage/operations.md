@@ -14,7 +14,7 @@ An operation is an action performed by the Neon Control Plane on a Neon object o
 | `create_timeline`  | Creates a [project](../reference/glossary#project) with a primary branch.  |
 | `delete_tenant`  | Deletes stored data when a Neon project is deleted.  |
 | `start_compute`   |Starts a compute endpoint when there is an event or action that requires compute resources. For example, connecting to a suspended compute endpoint initiates this operation.  |
-| `suspend_compute`  | Suspends a compute endpoint after a period of inactivity. For information about how Neon manages compute resources, see [Compute lifecycle](/docs/introduction/compute-lifecycle/).  |
+| `suspend_compute`  | Suspends a compute endpoint after a period of inactivity. For information about how Neon manages compute resources, see [Compute lifecycle](../introduction/compute-lifecycle/).  |
 
 ## View operations
 

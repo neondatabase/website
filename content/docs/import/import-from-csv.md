@@ -16,7 +16,7 @@ The following example uses the default `neondb` database, a table named `custome
    ```
 
    <Admonition type="note">
-   For more information about connecting to Neon with `psql`, see [Connect with psql](/docs/connect/query-with-psql-editor).
+   For more information about connecting to Neon with `psql`, see [Connect with psql](../connect/query-with-psql-editor).
    </Admonition>
 
 2. Create the `customer` table.
