@@ -31,6 +31,10 @@ postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
              |- <role>                           |- <hostname>             |- <database>
 ```
 
+<Admonition type="note">
+The hostname includes the ID of the compute endpoint, which has an `ep-` prefix: `ep-mute-rain-952417`. For more information about Neon connection strings, see [Connection string](../reference/glossary#connection-string).
+</Admonition>
+
 You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line, as shown:
 
 `.env` file:
