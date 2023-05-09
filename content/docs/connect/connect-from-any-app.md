@@ -21,22 +21,26 @@ You can obtain the connection details you require from the **Connection Details*
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
-You can enable the **Pooler** option if you require a pooled connection string. The **Pooler** option adds `-pooler` to the hostname, which tells Neon to use a pooled connection. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
+Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
 
 A Neon connection string includes the role, the compute endpoint hostname, and the database name.
 
 ```text
-postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech/neondb
-             ^                          ^                               ^
-             |- <role>                  |- <hostname>                   |- <database>
+postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+             ^                                   ^                         ^
+             |- <role>                           |- <hostname>             |- <database>
 ```
+
+<Admonition type="note">
+The hostname includes the ID of the compute endpoint, which has an `ep-` prefix: `ep-mute-rain-952417`. For more information about Neon connection strings, see [Connection string](../reference/glossary#connection-string).
+</Admonition>
 
 You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line, as shown:
 
 `.env` file:
 
 ```text
-PGHOST='ep-restless-rice.us-east-2.aws.neon.tech'
+PGHOST='ep-mute-rain-952417.us-east-2.aws.neon.tech'
 PGDATABASE='neondb'
 PGUSER='daniel'
 PGPASSWORD='<password>'
@@ -46,13 +50,13 @@ PGPORT='5432'
 Variable:
 
 ```text
-DATABASE_URL="postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech:5432/neondb"
+DATABASE_URL="postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech:5432/neondb"
 ```
 
 Command-line:
 
 ```bash
-psql postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech/neondb
+psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="note">
@@ -71,7 +75,7 @@ Neon uses the default PostgreSQL port, `5432`.
 
 The **Connection Details** widget on the **Neon Dashboard** also provides connection examples for different programming languages and application frameworks, constructed for the branch, database, and role that you select. Click **connection examples**  in the **Connection Details** widget to view or copy the examples.
 
-![Connection details widget](/docs/connect/code_connection_examples.png)
+![Language and framework connection examples](/docs/connect/code_connection_examples.png)
 
 Our *Guides* documentation also provides connection examples.
 
