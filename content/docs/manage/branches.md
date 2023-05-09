@@ -44,7 +44,7 @@ To create a branch:
 6. Select one of the following branching options:
     - **Head**: Creates a branch with data up to the current point in time (the default).
     - **Time**: Creates a branch with data up to the specified date and time.
-    - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](/docs/reference/glossary#lsn).
+    - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](../reference/glossary#lsn).
 7. Select whether or not to create a compute endpoint, which is required to connect to the branch. If you are unsure, you can add a compute endpoint later.
 8. Click **Create Branch** to create your branch.
 
