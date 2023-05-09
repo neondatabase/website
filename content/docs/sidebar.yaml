@@ -116,7 +116,7 @@
       slug: guides/wundergraph
     - title: Vercel
       items:
-        - title: Vercel integrations
+        - title: Overview
           slug: guides/vercel-overview
         - title: Vercel Postgres
           slug: guides/vercel-postgres

@@ -30,7 +30,7 @@ Compute endpoint details shown on the branch page include:
 - **Host**: The compute endpoint hostname.
 - **Region**: The region where the compute endpoint resides.
 - **Type**: The type of compute endpoint. Currently, only `read_write` compute endpoints are supported.
-- **Compute size**: The size of the compute endpoint. Neon [Pro plan](../introduction/billing) users can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint.
+- **Compute size**: The size of the compute endpoint. Neon [Pro plan](../introduction/billing#neon-plans) users can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint.
 - **Compute size (min)**: The minimum compute size for the compute endpoint. This column appears when the [Autoscaling](../introduction/autoscaling) feature is enabled, which is only available to Neon Pro plan users.
 - **Compute size (max)**: The maximum compute size for the compute endpoint. This column appears when the Autoscaling feature is enabled, which is only available to Neon Pro plan users.
 - **Auto-suspend delay**: The number of seconds of inactivity after which a compute endpoint is automatically suspended. The default is 300 seconds (5 minutes). For more information, see [Auto-suspend configuration](#auto-suspend-configuration).

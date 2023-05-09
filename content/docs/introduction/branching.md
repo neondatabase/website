@@ -28,7 +28,7 @@ A compute endpoint allows you to connect to the branch from a client or applicat
 
 Your Neon project's primary branch has a compute endpoint, by default.
 
-To connect to a database in a branch from a client or application, you must connect to the branch's compute endpoint. For more information connecting to a branch, see [Connect to a branch](../manage/branches#connect-to-a-branch)).
+To connect to a database in a branch from a client or application, you must connect to the branch's compute endpoint. For more information connecting to a branch, see [Connect to a branch](../manage/branches#connect-to-a-branch).
 
 If a branch does not have a compute endpoint, you can add one. See [Create a compute endpoint](../manage/endpoints#create-a-compute-endpoint).
 

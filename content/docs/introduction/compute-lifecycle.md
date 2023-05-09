@@ -7,7 +7,7 @@ redirectFrom:
 
 A compute node in Neon is a stateless PostgresSQL process due to the separation of storage and compute. It has two main states: `Active` and `Idle`.
 
-Active means that PostgreSQL is currently running. If there are no active queries for 5 minutes, by default, the activity monitor gracefully places the compute node into the `Idle` state to save energy and resources. Neon [Pro plan](../introduction/billing#neon-plans) users can configure the period of inactivity after which a compute is placed into an `Idle` state by modifying the **Auto-suspend delay** setting. To learn more about this feature, see [Edit a compute endpoint](../manage/endpoints#edit-a-compute-endpoint).
+Active means that PostgreSQL is currently running. If there are no active queries for 5 minutes, by default, the activity monitor gracefully places the compute node into the `Idle` state to save energy and resources. Neon [Pro plan](../introduction/pro-plan) users can configure the period of inactivity after which a compute is placed into an `Idle` state by modifying the **Auto-suspend delay** setting. To learn more about this feature, see [Edit a compute endpoint](../manage/endpoints#edit-a-compute-endpoint).
 
 The activity monitor is conservative. It treats "idle in transaction" connections as active to avoid breaking application logic that relies on long-lasting transactions. However, the activity monitor closes idle connections after the defined period of "complete" inactivity.
 

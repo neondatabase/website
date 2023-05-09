@@ -25,15 +25,9 @@ Add the `-pooler` suffix to the endpoint ID, as shown:
 postgres://sally:<password>@ep-throbbing-boat-918849-pooler.us-east-2.aws.neon.tech/neondb
 ```
 
-Enabling the **Pooler** option in the **Connection Details** widget on the Neon **Dashboard** adds the `-pooler` suffix to the connection string, which you can copy:
+The **Connection Details** widget on the Neon **Dashboard** provides **Pooled connection** and **Direct connection** tabs, allowing you to copy a connection string with or without the `-pooler` option.
 
-![Enable pooler option](/docs/connect/enable_pooler.png)
-
-To connect to the same database directly with a non-pooled connection, use the same connection string without the `-pooler` suffix:
-
-```text
-postgres://sally:<password>@ep-throbbing-boat-918849.us-east-2.aws.neon.tech/neondb
-```
+![Connection Details pooled connection string](/docs/connect/connection_details_pooled.png)
 
 <Admonition type="note">
 The previous method of enabling connection pooling for a compute endpoint is deprecated. When using a pooling-enabled connection, as described above, ensure that connection pooling is not enabled for the compute endpoint. To disable pooling for a compute endpoint, refer to the instructions in [Edit a compute endpoint](../manage/endpoints#edit-a-compute-endpoint).

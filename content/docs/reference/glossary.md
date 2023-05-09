@@ -328,7 +328,7 @@ Where data is recorded and stored. Neon storage consists of Pageservers, which s
 
 ### suspend_compute
 
-A Neon Control Plane operation that suspends a compute endpoint after a period of inactivity. See [Operations](../manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](dprice-add-operation-glossary-entries).
+A Neon Control Plane operation that suspends a compute endpoint after a period of inactivity. See [Operations](../manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](../introduction/compute-lifecycle).
 
 ### Technical Preview
 
@@ -356,7 +356,7 @@ Virtual CPU, a unit of processing power allocated to a virtual machine or comput
 
 ### WAL
 
-See [Write-Ahead Logging](#write-ahead-logging).
+See [Write-Ahead Logging](#write-ahead-logging-wal).
 
 ### WAL slice
 
