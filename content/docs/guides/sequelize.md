@@ -4,9 +4,9 @@ subtitle: Set up a Neon project in seconds and connect from Sequelize
 enableTableOfContents: true
 ---
 
-[Sequelize](https://sequelize.org/) is a promise-based Node.js and TypeScript Object-Relational Mapping (ORM) library for SQL databases such as PostgreSQL. It provides a high-level abstraction for working with SQL databases and allows developers to interact with databases using JavaScript or TypeScript instead of writing SQL queries. It supports various features like transactions, relations, read replication, and more.
+[Sequelize](https://sequelize.org/) is a promise-based Node.js Object-Relational Mapping (ORM) library for SQL databases such as PostgreSQL. It provides a high-level abstraction for working with SQL databases and allows developers to interact with databases using JavaScript or TypeScript instead of writing SQL queries. It supports various features like transactions, relations, read replication, and more.
 
-This guide provides a simple example showing how to set up Sequelize and connect to a Neon database. For more more information about using Sequelize, please refer to the [Sequelize documentation]().
+This guide provides a simple example showing how to set up Sequelize and connect to a Neon database. For more more information about using Sequelize, please refer to the [Sequelize documentation](https://sequelize.org/docs/v6/).
 
 ## Prerequisites
 
@@ -69,16 +69,17 @@ npm install --save sequelize pg pg-hstore
 
 2. In the `dbTest.js` file, add the following code. Replace the connection string with your own Neon connection string.
 
-    Neon requires a secure SSL connection. The `require: true` option tells Sequelize to attempt to connect over SSL.
+    <Admonition type="note">
+    Neon requires a secure SSL connection. The `require: true` option tells Sequelize to connect over SSL.
+    </Admonition>
 
     ```js
     const { Sequelize } = require('sequelize');
 
-    const sequelize = new Sequelize('postgres://<user>:<password>@ep-crimson-wildflower-123456.eu-central-1.aws.neon.tech/neondb', {
+    const sequelize = new Sequelize('postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb', {
     dialectOptions: {
         ssl: {
-        require: true,
-        rejectUnauthorized: false // added for TLS/SSL connection
+        require: true
         }
     }
     });
@@ -86,15 +87,20 @@ npm install --save sequelize pg pg-hstore
     sequelize.authenticate()
     .then(() => {
         console.log('Connection has been established successfully.');
+
+        // Query the PostgreSQL version
+        sequelize.query("SELECT version();")
+        .then(results => {
+            console.log('PostgreSQL Version:', results[0][0].version);
+        })
+        .catch(err => {
+            console.error('Unable to retrieve PostgreSQL version:', err);
+        });
     })
     .catch(err => {
         console.error('Unable to connect to the database:', err);
     });
     ```
-
-    <Admonition type="info">
-    The `rejectUnauthorized: false` option in the script above tells Sequelize to ignore any issues with the SSL certificate, but this option can leave you vulnerable to "man in the middle" attacks. Therefore, it is recommended to use this setting only for local testing or if your PostgreSQL server uses a self-signed certificate. For production use, you should use a valid certificate and remove the `rejectUnauthorized: false` option.
-    </Admonition>
 
 ## Run the script to test the connection
 
@@ -104,7 +110,7 @@ Save your file and exit the text editor. Then, run your script with Node.
 node dbTest.js
 ```
 
-If everything is set up correctly, you should see "Connection has been established successfully." If not, the error message should give you a clue about what's going wrong.
+If everything is set up correctly, you should see "Connection has been established successfully", and the PostgreSQL version you are connecting to should be returned.
 
 <Admonition type="important">
 Remember to handle your connection string securely, as it contains sensitive information. In a real project, you would not hardcode the connection string into your application; instead, you would use environment variables or some other secure configuration method.
