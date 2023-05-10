@@ -1,6 +1,6 @@
 ---
 title: Connect from Sequelize to Neon
-subtitle: Set up a Neon project in seconds and connect from Sequelize
+subtitle: Learn how to connect to a Neon database from Sequelize
 enableTableOfContents: true
 ---
 
