@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 [Sequelize](https://sequelize.org/) is a promise-based Node.js Object-Relational Mapping (ORM) library for SQL databases such as PostgreSQL. It provides a high-level abstraction for working with SQL databases and allows developers to interact with databases using JavaScript or TypeScript instead of writing SQL queries. It supports various features like transactions, relations, read replication, and more.
 
-This guide provides a simple example showing how to set up Sequelize and connect to a Neon database. For more more information about using Sequelize, please refer to the [Sequelize documentation](https://sequelize.org/docs/v6/).
+This guide provides a simple example showing how to set up Sequelize and connect to a Neon database. For more information about using Sequelize, please refer to the [Sequelize documentation](https://sequelize.org/docs/v6/).
 
 ## Prerequisites
 
