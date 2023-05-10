@@ -21,7 +21,7 @@ You can obtain the connection details you require from the **Connection Details*
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
-Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
+Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](../connect/connection-pooling#connection-pooling).
 
 A Neon connection string includes the role, the compute endpoint hostname, and the database name.
 
@@ -60,7 +60,7 @@ psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/ne
 ```
 
 <Admonition type="note">
-Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
+Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](../connect/connect-securely).
 </Admonition>
 
 ## Where do I obtain a password?
@@ -81,8 +81,8 @@ Our *Guides* documentation also provides connection examples.
 
 ## Connection notes
 
-- Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connect from older clients](/docs/connect/connectivity-issues).
-- Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For an example, see [Connect a GUI or IDE](/docs/connect/connect-postgres-gui#connect-to-the-database).
+- Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](../reference/glossary#sni) support and require a workaround. For more information, see [Connect from old clients](../connect/connectivity-issues).
+- Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For an example, see [Connect a GUI or IDE](../connect/connect-postgres-gui#connect-to-the-database).
 
 ## Need help?
 

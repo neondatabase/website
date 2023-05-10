@@ -116,7 +116,7 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
      ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)
 
 <Admonition type="note">
-The Neon Free Tier allows you to create up to 10 branches. To avoid running out of branches for new preview deployments, remove old branches regularly. See [Manage branches](/docs/manage/branches) for instructions.
+The Neon Free Tier allows you to create up to 10 branches. To avoid running out of branches for new preview deployments, remove old branches regularly. See [Manage branches](../manage/branches) for instructions.
 </Admonition>
 
 ## Add the integration to another Vercel project
@@ -131,7 +131,7 @@ If you already added the Neon Vercel integration to a Vercel project and want to
 1. Navigate to this URL: [https://vercel.com/integrations/neon/new](https://vercel.com/integrations/neon/new).
 1. Follow the prompts. When you reach the **Integrate Neon** dialog, select the Vercel project that you want to add the integration to. Vercel projects that are already integrated with Neon are identified as `CONNECTED`.
    ![Confirm integration settings](/docs/guides/vercel_add_new_project.png)
-1. Complete the steps outlined in [Add the Neon integration](#add-the-neon-integration).
+1. Complete the steps outlined in [Add the Neon integration](#add-the-neon-vercel-integration).
 
 ## Troubleshoot connection issues
 

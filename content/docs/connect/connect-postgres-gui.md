@@ -38,7 +38,7 @@ Passwords are only shown when they are created. If you misplaced your password, 
 Neon uses the default PostgreSQL port, `5432`.
 
 <Admonition type="note">
-Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
+Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](../connect/connect-securely).
 </Admonition>
 
 ## Connect to the database
@@ -55,10 +55,10 @@ Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, s
 
 Connections from the following GUI applications and IDEs have been tested with Neon:
 
-- [Azure Data Studio](https://azure.microsoft.com/en-us/products/data-studio/) (requires the [PostgreSQL extension](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/postgres-extension?view=sql-server-ver16), and the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
+- [Azure Data Studio](https://azure.microsoft.com/en-us/products/data-studio/) (requires the [PostgreSQL extension](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/postgres-extension?view=sql-server-ver16), and the [option D](../connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
 - [Beekeeper Studio](https://www.beekeeperstudio.io/) (requires the **Enable SSL** option)
 - [CLion](https://www.jetbrains.com/clion/)
-- [Datagran](https://www.datagran.io/) (requires the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
+- [Datagran](https://www.datagran.io/) (requires the [option D](../connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
 - [DataGrip](https://www.jetbrains.com/datagrip/)
 - [DBeaver](https://dbeaver.io/)
 - [dbForge](https://www.devart.com/dbforge/)
@@ -71,11 +71,11 @@ Connections from the following GUI applications and IDEs have been tested with N
 - [Postico](https://eggerapps.at/postico2/)
 - [Retool](https://retool.com/)
 - [TablePlus](https://tableplus.com/)
-- [Segment](https://segment.com/) (requires the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
+- [Segment](https://segment.com/) (requires the [option D](../connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
 
 ## Connection issues
 
-Applications that use older client libraries or drivers that do not support Server Name Indication (SNI) may not permit connecting to Neon. If you encounter the following error, refer to [Connect from older clients](/docs/connect/connectivity-issues) for possible workarounds.
+Applications that use older client libraries or drivers that do not support Server Name Indication (SNI) may not permit connecting to Neon. If you encounter the following error, refer to [Connect from old clients](../connect/connectivity-issues) for possible workarounds.
 
 ```txt
 ERROR: The endpoint ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=project%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
