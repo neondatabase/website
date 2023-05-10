@@ -4,9 +4,9 @@ subtitle: Set up a Neon project in seconds and connect from Sequelize
 enableTableOfContents: true
 ---
 
-Sequelize is a promise-based Node.js Object-Relational Mapping (ORM) library for SQL databases such as PostgreSQL. It provides a high-level abstraction for working with SQL databases and allows developers to interact with databases using JavaScript instead of writing SQL queries. It supports various features like transactions, relations, read replication, and more.
+[Sequelize](https://sequelize.org/) is a promise-based Node.js and TypeScript Object-Relational Mapping (ORM) library for SQL databases such as PostgreSQL. It provides a high-level abstraction for working with SQL databases and allows developers to interact with databases using JavaScript or TypeScript instead of writing SQL queries. It supports various features like transactions, relations, read replication, and more.
 
-This guide provides a simple example showing how to set up Sequelize and connect to a Neon database.
+This guide provides a simple example showing how to set up Sequelize and connect to a Neon database. For more more information about using Sequelize, please refer to the [Sequelize documentation]().
 
 ## Prerequisites
 
@@ -29,7 +29,7 @@ This guide provides a simple example showing how to set up Sequelize and connect
 
 ## Retrieve your Neon connection string
 
-A database connection string is required to connect to your Neon database. To retrieve the connection string for your database:
+A database connection string is required to connect to your Neon database. To retrieve a connection string for your database:
 
 1. Navigate to the Neon **Dashboard**.
 2. Copy the connection string for your database from the **Connection Details** widget. The connection string should appear similar to the following:
@@ -67,7 +67,7 @@ npm install --save sequelize pg pg-hstore
     nano dbTest.js
     ```
 
-2. In the `dbTest.js` file, add the following code. Replace 'your_connection_string' with your Neon connection string.
+2. In the `dbTest.js` file, add the following code. Replace the connection string with your own Neon connection string.
 
     Neon requires a secure SSL connection. The `require: true` option tells Sequelize to attempt to connect over SSL.
 
@@ -92,9 +92,9 @@ npm install --save sequelize pg pg-hstore
     });
     ```
 
-<Admonition type="info">
-The `rejectUnauthorized: false` option in the script above tells Sequelize to ignore any issues with the SSL certificate, but this option can leave you vulnerable to "man in the middle" attacks. Therefore, it is recommended to use this setting only for local testing or if your PostgreSQL server uses a self-signed certificate. For production use, you should use a valid certificate and remove the `rejectUnauthorized: false` option.
-</Admonition>
+    <Admonition type="info">
+    The `rejectUnauthorized: false` option in the script above tells Sequelize to ignore any issues with the SSL certificate, but this option can leave you vulnerable to "man in the middle" attacks. Therefore, it is recommended to use this setting only for local testing or if your PostgreSQL server uses a self-signed certificate. For production use, you should use a valid certificate and remove the `rejectUnauthorized: false` option.
+    </Admonition>
 
 ## Run the script to test the connection
 
@@ -107,7 +107,7 @@ node dbTest.js
 If everything is set up correctly, you should see "Connection has been established successfully." If not, the error message should give you a clue about what's going wrong.
 
 <Admonition type="important">
-Remember to handle your connection string securely, as it contains sensitive information. In a real project, you would not hardcode this into your application; instead, you would use environment variables or some other secure configuration method.
+Remember to handle your connection string securely, as it contains sensitive information. In a real project, you would not hardcode the connection string into your application; instead, you would use environment variables or some other secure configuration method.
 </Admonition>
 
 ## Need help?
