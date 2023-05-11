@@ -50,13 +50,13 @@ To use a pooled connection from Prisma, adjust your Neon connection string by ad
 
 `DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true`
 
-The `-pooler` suffix tells Neon to use a pooled connection to the database rather than a direct connection. The `?pgbouncer=true` flag requires that the connection uses PgBouncer.
+The `-pooler` suffix tells Neon to use a pooled connection rather than a direct connection. The `?pgbouncer=true` flag requires that the connection uses PgBouncer.
 
 <Admonition type="info">
-The **Connection Details** widget on the Neon **Dashboard** provides a **Pooled connection** tab that provides a pooled connection string that you can copy and paste.
+The **Connection Details** widget on the Neon **Dashboard** provides a **Pooled connection** tab with a pooled connection string that you can copy and paste.
 </Admonition>
 
-For more information about PgBouncer and pooled connection strings, see [Enable connection pooling](../connect/connection-pooling#enable-connection-pooling). For related information in the _Prisma documentation_, refer to the [Add pgbouncer to the connection URL](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
+For more information about PgBouncer and pooled connection strings, see [Enable connection pooling](../connect/connection-pooling#enable-connection-pooling). For related information in the _Prisma documentation_, refer to [Add pgbouncer to the connection URL](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 
 ## Connection timeouts
 
