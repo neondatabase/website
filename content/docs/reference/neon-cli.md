@@ -29,7 +29,6 @@ Options:
                   [string] [choices: "json", "yaml", "table"] [default: "table"]
   --api-host    The API host              [default: "https://console.neon.tech"]
   --config-dir  Path to config directory
-
                             [string] [default: "/home/<username>/.config/.neonctl"]
   --oauth-host  URL to Neon OAUTH host     [default: "https://oauth2.neon.tech"]
   --client-id   OAuth client id                    [string] [default: "neonctl"]
