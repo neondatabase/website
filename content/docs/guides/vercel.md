@@ -86,7 +86,7 @@ To add the integration:
 
 After you add the Neon Vercel Integration to a Vercel project, Neon creates a database branch for each preview deployment. The branch is created when you push commits made on your local branch to your application's GitHub repository. To see the integration in action, follow these steps:
 
-1. Create a branch in your local `git` repository.
+1. Create a branch in your local GitHub repository.
 
    ```bash
    cd myapp
