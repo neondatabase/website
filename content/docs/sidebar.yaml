@@ -148,6 +148,8 @@
   items:
     - title: Neon API
       slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+    - title: Neon CLI
+      slug: reference/neon-cli
     - title: SDKs
       slug: reference/sdk
     - title: Glossary
