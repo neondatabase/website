@@ -397,7 +397,7 @@ const Calculator = () => {
                       }}
                       transition={{ ease: [0.25, 0.1, 0, 1] }}
                     >
-                      Accounts for 10% of your monthly cost, on average.
+                      Accounts for 5% of your monthly cost, on average.
                       <button
                         className="group relative inline-flex items-center text-pricing-primary-1 transition-colors duration-200 hover:text-[#00ffaa]"
                         type="button"
