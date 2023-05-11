@@ -18,6 +18,6 @@ PostgreSQL streams [Write-Ahead Log (WAL)](../reference/glossary#wal) to the Saf
 
 Pageservers are responsible for serving read requests. To do that, Pageservers process the incoming WAL stream into a custom storage format that makes all [page](../reference/glossary#page) versions easily accessible. Pageservers also upload data to cloud object storage, and download the data on demand.
 
-Neon uses cloud object storage, such as S3, Azure Blob Storage, or Google Cloud Storage, for long-term data storage.
+Neon uses cloud object storage such as S3 for long-term data storage. Stored data is [encrypted at rest](../reference/glossary#data-at-rest-encryption).
 
 Safekeepers can be thought of as an ultra reliable write buffer that holds the latest data until it is processed and uploaded to cloud storage. Safekeepers implement the Paxos protocol for reliability. Pageservers also function as a read cache for cloud storage, providing fast random access to data pages.
