@@ -24,9 +24,9 @@ To create a role:
 2. Select a project.
 3. Select **Roles**.
 4. Select the branch where you want to create the role.
-4. Click **New Role**.
-5. In the role creation dialog, specify a role name. The length of the role name is limited to 63 bytes.
-6. Click **Create**. The role is created and you are provided with the password for the role.
+5. Click **New Role**.
+6. In the role creation dialog, specify a role name. The length of the role name is limited to 63 bytes.
+7. Click **Create**. The role is created and you are provided with the password for the role.
 
 ## Delete a role
 
@@ -66,7 +66,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a role with the API
 

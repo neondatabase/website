@@ -1,6 +1,6 @@
 ---
 title: Query with Neon's SQL Editor
-subtitle: Query your database from the Neon Console using the Neon SQL Editor   
+subtitle: Query your database from the Neon Console using the Neon SQL Editor
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/tutorials
@@ -34,7 +34,7 @@ Running multiple query statements at once returns a separate result set for each
 To clear the editor, click **New Query**.
 
 <Admonition type="tip">
-When querying objects such as tables and columns with upper case letters in their name, remember to enclose the identifier name in quotes. For example: `SELECT * FROM "Company"`. PostgreSQL folds identifier names to lower case unless they are quoted. The same applies when creating objects in PostgreSQL. For example, `CREATE TABLE DEPARTMENT(id INT)` creates a table named `department` in PostgreSQL. For more information about how quoted and unquoted identifiers are treated by PostgreSQL, see [Identifiers and Key Words](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS), in the _PostgreSQL documentation_.
+When querying objects such as tables and columns with upper case letters in their name, remember to enclose the identifier name in quotes. For example: `SELECT * FROM "Company"`. PostgreSQL changes identifier names to lower case unless they are quoted. The same applies when creating objects in PostgreSQL. For example, `CREATE TABLE DEPARTMENT(id INT)` creates a table named `department` in PostgreSQL. For more information about how quoted and unquoted identifiers are treated by PostgreSQL, see [Identifiers and Key Words](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS), in the _PostgreSQL documentation_.
 </Admonition>
 
 ## Save your queries

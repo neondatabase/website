@@ -9,7 +9,7 @@ enableTableOfContents: true
 This guide describes how connect a Neon PostgreSQL database to an application deployed with Koyeb. To follow the instructions in this guide, you require:
 
 - A [Koyeb account](https://app.koyeb.com/) to deploy the application. Alternatively, you can install the [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli) if you prefer to deploy the application from your terminal.
-- A Neon account to deploy the PostgreSQL database. If you do not have one, see [Sign up](https://neon.tech/docs/get-started-with-neon/signing-up).
+- A Neon account to deploy the PostgreSQL database. If you do not have one, see [Sign up](../get-started-with-neon/signing-up).
 
 The example application connects to your Neon PostgreSQL database using [Prisma](https://www.prisma.io/) as an ORM. Prisma synchronizes the database schema with the Prisma schema included with the application and seeds the database.
 
@@ -52,18 +52,18 @@ The example application exposes a `/planets` endpoint that you can use to list p
 
 ```json
 [
-{
+  {
     "id": 1,
     "name": "Mercury"
-},
-{
+  },
+  {
     "id": 2,
     "name": "Venus"
-},
-{
+  },
+  {
     "id": 3,
     "name": "Mars"
-}
+  }
 ]
 ```
 
@@ -100,7 +100,7 @@ Once the build and deployment have finished, you can retrieve the public domain 
 
 ```bash
 $ koyeb app get express-neon
-ID          NAME         STATUS         DOMAINS                                CREATED AT          
+ID          NAME         STATUS         DOMAINS                                CREATED AT
 b8611a1d    express-neon HEALTHY        ["express-neon-myorg.koyeb.app"]       16 Feb 23 18:13 UTC
 ```
 
@@ -108,18 +108,18 @@ The example application exposes a `/planets` endpoint that you can use to list p
 
 ```json
 [
-{
+  {
     "id": 1,
     "name": "Mercury"
-},
-{
+  },
+  {
     "id": 2,
     "name": "Venus"
-},
-{
+  },
+  {
     "id": 3,
     "name": "Mars"
-}
+  }
 ]
 ```
 
@@ -130,4 +130,4 @@ To delete the example application on Koyeb to avoid incurring any charges, follo
 1. From the Koyeb [control panel](https://app.koyeb.com/), select the **App** to delete.
 1. On the **Settings** tab, select **Danger Zone** and click **Delete**.
 
-To delete your Neon project, refer to [Delete a project](/docs/manage/projects#delete-a-project).
+To delete your Neon project, refer to [Delete a project](../manage/projects#delete-a-project).
