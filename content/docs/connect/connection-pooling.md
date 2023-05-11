@@ -37,7 +37,7 @@ The previous method of enabling connection pooling for a compute endpoint is dep
 
 Neon uses PgBouncer in _transaction mode_, which does not support PostgreSQL features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
-Some clients and applications may require connection pooling. For example, using Prisma Client with PgBouncer from a serverless function requires connection pooling. To ensure that a poole connection is used, use a pooled connection string (described in the section above) and add the `?pgbouncer=true` flag to the connection string, as shown in the following example:
+Some clients and applications may require connection pooling. For example, using Prisma Client with PgBouncer from a serverless function requires connection pooling. To ensure that a pooled connection is used, use a pooled connection string (described in the section above) and add the `?pgbouncer=true` flag to the connection string, as shown in the following example:
 
 ```text
 postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true
