@@ -1,17 +1,15 @@
 ---
 title: Neon CLI
-subtitle: Learn how to use the Neon CLI to manage your projects from the command line
+subtitle: Use the Neon CLI to manage Neon projects from the command line
 enableTableOfContents: true
 isDraft: true
 ---
 
-Neon provides multiple ways to interact with your projects. With the command-line interface (CLI) you can interact with Neon from a terminal, or through automation, enabling you to authenticate to Neon, create and manage projects and roles, and more.
-
-If you would like to interact with Neon programmatically, check out the to the [Neon API documentation](/docs/reference/api-reference).
+Neon offers several methods for working with your projects. Utilizing the Neon Command Line Interface (CLI), you can operate Neon directly from a terminal or via automation. The Neon CLI facilitates numerous functions, such as Neon authentication, project creation and management, role assignment, and more.
 
 ## Synopsis
 
-The `neonctl` command can be called from command line. Without arguments, it displays command usage and help:
+The `neonctl` command can be called from command line. Without any arguments, it displays command usage and help:
 
 ```bash
 usage: neonctl <cmd> [args]
@@ -28,11 +26,11 @@ Options:
   --version     Show version number                                    [boolean]
   --help        Show help                                              [boolean]
   --output      Set output format
-
                   [string] [choices: "json", "yaml", "table"] [default: "table"]
   --api-host    The API host              [default: "https://console.neon.tech"]
   --config-dir  Path to config directory
-                            [string] [default: "/home/dtprice/.config/.neonctl"]
+
+                            [string] [default: "/home/<username>/.config/.neonctl"]
   --oauth-host  URL to Neon OAUTH host     [default: "https://oauth2.neon.tech"]
   --client-id   OAuth client id                    [string] [default: "neonctl"]
   --token       Auth token                                [string] [default: ""]
@@ -74,46 +72,26 @@ To authenticate to Neon, run the following command:
 neonctl auth
 ```
 
+The command launches a browser window where you can authorize the Neon CLI to access your Neon account. After granting permission, your credentials are saved locally to a credentials file.
+
 ## Commands
 
 ### neonctl auth
 
-Authenticates the user or caller to Neon.
-
-#### Prerequisites
-
-#### Arguments
-
-#### Options
-
-#### Examples
-
-```shell
-neonctl auth
-INFO: Discovering oauth server
-INFO: Listening on port 41215
-```
-
-Auth screen1
-Auth screen 2
-
-```shell
-INFO: Callback received: /callback?code=xon8t4VLupzvS-NdTLETWVn26axOi4IXCxNdGUndqCQ.vvwVeVm-A9l6L4YteB3d6VmuxDTjd2SxJmdXqz6t__o&scope=openid+offline+offline_access+urn%3Aneoncloud%3Aprojects%3Acreate+urn%3Aneoncloud%3Aprojects%3Aread+urn%3Aneoncloud%3Aprojects%3Aupdate+urn%3Aneoncloud%3Aprojects%3Adelete&state=CCWoT0a7XgC7Gu5_PFzRE4Rio0TPZJBqNCZ3WB3vASo
-INFO: Saved credentials to /home/dtprice/.config/.neonctl/credentials.json
-INFO: Auth complete
-```
+Authenticates the user or caller to Neon. See [Connect](#connect).
 
 ### neonctl me
 
 Returns information about the authenticated user.
 
-#### Prerequisites
-
-#### Arguments
-
-#### Options
-
-#### Examples
+```bash
+$> neonctl me
+┌────────────────┬──────────────────────────┬────────────┬────────────────┐
+│ Login          │ Email                    │ Name       │ Projects Limit │
+├────────────────┼──────────────────────────┼────────────┼────────────────┤
+│ user1          │ user1@example.com        │ User1      │ 1              │
+└────────────────┴──────────────────────────┴────────────┴────────────────┘
+```
 
 ### neonctl roles
 
@@ -122,14 +100,6 @@ For creating and managing roles.
 ### neonctl projects
 
 For creating and managing Neon projects.
-
-#### Prerequisites
-
-#### Arguments
-
-#### Options
-
-#### Examples
 
 ## Options
 
