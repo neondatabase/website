@@ -21,22 +21,26 @@ You can obtain the connection details you require from the **Connection Details*
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
-You can enable the **Pooler** option if you require a pooled connection string. The **Pooler** option adds `-pooler` to the hostname, which tells Neon to use a pooled connection. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
+Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](../connect/connection-pooling#connection-pooling).
 
 A Neon connection string includes the role, the compute endpoint hostname, and the database name.
 
 ```text
-postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech/neondb
-             ^                          ^                               ^
-             |- <role>                  |- <hostname>                   |- <database>
+postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+             ^                                   ^                         ^
+             |- <role>                           |- <hostname>             |- <database>
 ```
+
+<Admonition type="note">
+The hostname includes the ID of the compute endpoint, which has an `ep-` prefix: `ep-mute-rain-952417`. For more information about Neon connection strings, see [Connection string](../reference/glossary#connection-string).
+</Admonition>
 
 You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line, as shown:
 
 `.env` file:
 
 ```text
-PGHOST='ep-restless-rice.us-east-2.aws.neon.tech'
+PGHOST='ep-mute-rain-952417.us-east-2.aws.neon.tech'
 PGDATABASE='neondb'
 PGUSER='daniel'
 PGPASSWORD='<password>'
@@ -46,17 +50,17 @@ PGPORT='5432'
 Variable:
 
 ```text
-DATABASE_URL="postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech:5432/neondb"
+DATABASE_URL="postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech:5432/neondb"
 ```
 
 Command-line:
 
 ```bash
-psql postgres://daniel:<password>@ep-restless-rice.us-east-2.aws.neon.tech/neondb
+psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="note">
-Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
+Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](../connect/connect-securely).
 </Admonition>
 
 ## Where do I obtain a password?
@@ -71,14 +75,14 @@ Neon uses the default PostgreSQL port, `5432`.
 
 The **Connection Details** widget on the **Neon Dashboard** also provides connection examples for different programming languages and application frameworks, constructed for the branch, database, and role that you select. Click **connection examples**  in the **Connection Details** widget to view or copy the examples.
 
-![Connection details widget](/docs/connect/code_connection_examples.png)
+![Language and framework connection examples](/docs/connect/code_connection_examples.png)
 
 Our *Guides* documentation also provides connection examples.
 
 ## Connection notes
 
-- Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connect from older clients](/docs/connect/connectivity-issues).
-- Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For an example, see [Connect a GUI or IDE](/docs/connect/connect-postgres-gui#connect-to-the-database).
+- Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](../reference/glossary#sni) support and require a workaround. For more information, see [Connect from old clients](../connect/connectivity-issues).
+- Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For an example, see [Connect a GUI or IDE](../connect/connect-postgres-gui#connect-to-the-database).
 
 ## Need help?
 

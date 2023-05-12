@@ -18,27 +18,32 @@ const items = [
   {
     image: '/images/pages/pricing/metrics-1-mobile.jpg',
     name: 'Compute time',
-    priceFrom: 'From $0.102 /hour',
+    priceFrom: 'From $0.0255 /hour',
     details: 'Compute time is the amount of computing capacity used per hour.',
     prices: [
       {
+        name: 'US East (N. Virginia)',
+        price: '0.0255',
+        unit: 'Compute-hour',
+      },
+      {
         name: 'US East (Ohio)',
-        price: '0.102',
+        price: '0.0255',
         unit: 'Compute-hour',
       },
       {
         name: 'US West (Oregon)',
-        price: '0.102',
+        price: '0.0255',
         unit: 'Compute-hour',
       },
       {
         name: 'Europe (Frankfurt)',
-        price: '0.118',
+        price: '0.0295',
         unit: 'Compute-hour',
       },
       {
         name: 'Asia Pacific (Singapore)',
-        price: '0.121',
+        price: '0.03025',
         unit: 'Compute-hour',
       },
     ],
@@ -46,9 +51,14 @@ const items = [
   {
     image: '/images/pages/pricing/metrics-4-mobile.jpg',
     name: 'Data transfer',
-    priceFrom: 'From $0.09 /Gigabyte',
+    priceFrom: 'From $0.09 /GiB',
     details: 'Data transfer is the amount of data transferred out of Neon.',
     prices: [
+      {
+        name: 'US East (N. Virginia)',
+        price: '0.09',
+        unit: 'GiB',
+      },
       {
         name: 'US East (Ohio)',
         price: '0.09',
@@ -78,6 +88,11 @@ const items = [
     details: 'Project storage is the amount of data and history in your Neon projects.',
     prices: [
       {
+        name: 'US East (N. Virginia)',
+        price: '0.000164',
+        unit: 'GiB-hour',
+      },
+      {
         name: 'US East (Ohio)',
         price: '0.000164',
         unit: 'GiB-hour',
@@ -102,9 +117,14 @@ const items = [
   {
     image: '/images/pages/pricing/metrics-3-mobile.jpg',
     name: 'Written data',
-    priceFrom: 'From $0.096 /Gigabyte',
+    priceFrom: 'From $0.096 /GiB',
     details: 'Written data is the amount of data written from Neon compute to storage.',
     prices: [
+      {
+        name: 'US East (N. Virginia)',
+        price: '0.096',
+        unit: 'GiB',
+      },
       {
         name: 'US East (Ohio)',
         price: '0.096',

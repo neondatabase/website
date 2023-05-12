@@ -24,7 +24,7 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 |**Best for**              | Prototyping and personal projects       | Small to medium teams, setups with 1 to 3 active databases  | Medium to large teams, Database fleets, Resale |
 |**Projects**              | 1                                 | 20               | Unlimited                 |
 |**Branches**              | 10                                 | Unlimited               | Unlimited                 |
-|**Active time per month** | No limit on the [primary branch](/docs/reference/glossary#primary-branch) compute. 100 hours for [non-primary branch](https://neon.tech/docs/reference/glossary#non-primary-branch) computes*                 | Unlimited        | Unlimited                 |
+|**Active time per month** | No limit on the [primary branch](../reference/glossary#primary-branch) compute. 100 hours for [non-primary branch](../reference/glossary#non-primary-branch) computes*                 | Unlimited        | Unlimited                 |
 |**Compute size**          | 1 shared vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
 |**Storage**               | 3 GB per branch                   | Unlimited*        | Unlimited                 |
 |**Dedicated resources**   | -                            | -           | &check;                   |
@@ -38,14 +38,14 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 **Notes:**
 
 - The Pro plan has default limits of 200 GB of storage and 20 simultaneously active computes. To increase these limits, reach out to our [Sales](https://neon.tech/contact-sales) team. The simultaneously active compute limit does affect the primary branch compute.
-- The Free Tier has an [Active time](/docs/reference/glossary#active-time) limit of 100 hours per month for non-primary branch computes. _Active time_ on the primary branch compute is counted toward the 100 hour limit. See [Free Tier](/docs/introduction/technical-preview-free-tier) for more information.
+- The Free Tier has an [Active time](../reference/glossary#active-time) limit of 100 hours per month for non-primary branch computes. _Active time_ on the primary branch compute is counted toward the 100 hour limit. See [Free Tier](../introduction/technical-preview-free-tier) for more information.
 - **There is no limit on Active time for the primary branch compute. This ensures that access to data on the primary branch is never interrupted.**
 
 ## Account billing page
 
 A Neon account subscribed to a paid plan has access to a **Billing** page in the Neon Console, where you can:
 
-- View your current billing total for the month-to-date, including a cost breakdown by [billing metric](#neon-billing-metrics).
+- View your current billing total for the month-to-date, including a cost breakdown by [billing metric](#billing-and-usage-metrics).
 - Update your payment details
 - Download invoices
 
@@ -56,7 +56,7 @@ To access your **Billing** page:
 
 ## Neon invoices
 
-A Neon invoice includes an **Amount due** for the billing period and a cost breakdown by [billing metric](#neon-billing-metrics).
+A Neon invoice includes an **Amount due** for the billing period and a cost breakdown by [billing metric](#billing-and-usage-metrics).
 
 ### Download invoices
 
@@ -75,7 +75,7 @@ To cancel a Pro plan subscription:
 
 The request is sent to the Neon Support team, who will respond to you with a request confirmation.
 
-Canceling a subscription to the Pro plan downgrades your account to the Neon Free Tier. The Neon Support team will ask you to remove any projects or storage that exceed [Neon's Free Tier limits](/docs/introduction/technical-preview-free-tier). The subscription cancellation goes into effect at the beginning of the next billing period (the start of the month following the cancellation request).
+Canceling a subscription to the Pro plan downgrades your account to the Neon Free Tier. The Neon Support team will ask you to remove any projects or storage that exceed [Neon's Free Tier limits](../introduction/technical-preview-free-tier). The subscription cancellation goes into effect at the beginning of the next billing period (the start of the month following the cancellation request).
 
 If usage is not reduced in accordance with Neon's Free tier limits, Neon suspends projects and branches other than those it determines to be the most active. After 60 days, Neon reserves the right to remove any project or storage that exceeds Neon's Free Tier limits.
 
@@ -91,11 +91,11 @@ The **Project storage**, **Written data**, and **Data transfer** billing metrics
 
 ### Active time
 
-The _Active time_ metric is a usage metric rather than a billing metric. It is a factor of the _Compute time_ <u>billing</u> metric. It tracks the number of active compute hours per month for all computes in a Neon project. The hours that a compute is in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) are not counted as _Active time_. The **Neon Free Tier** limits non-primary branch computes to 100 hours of _Active time_ per month, but there is no _Active time_ limit on the primary branch compute. For more information, see [Free Tier](/docs/introduction/technical-preview-free-tier).
+The _Active time_ metric is a usage metric rather than a billing metric. It is a factor of the _Compute time_ <u>billing</u> metric. It tracks the number of active compute hours per month for all computes in a Neon project. The hours that a compute is in an `Idle` state due to [auto-suspension](../reference/glossary#auto-suspend-compute) are not counted as _Active time_. The **Neon Free Tier** limits non-primary branch computes to 100 hours of _Active time_ per month, but there is no _Active time_ limit on the primary branch compute. For more information, see [Free Tier](../introduction/technical-preview-free-tier).
 
 ### Compute time
 
-The _Compute time_ billing metric measures the amount of computing capacity used within a given time period. Neon takes a measure of compute utilization every five seconds, which is averaged based on the observed computing capacity. Computing capacity is based on _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon [compute endpoint](/docs/reference/glossary/#compute-endpoint) can have anywhere from .25 to 7 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an `Active` state. A defined period of inactivity places the compute endpoint and its CUs into an `Idle` state.
+The _Compute time_ billing metric measures the amount of computing capacity used within a given time period. Neon takes a measure of compute utilization every five seconds, which is averaged based on the observed computing capacity. Computing capacity is based on _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon [compute endpoint](../reference/glossary/#compute-endpoint) can have anywhere from .25 to 7 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an `Active` state. A defined period of inactivity places the compute endpoint and its CUs into an `Idle` state.
 
 Factors that affect the amount of compute time include:
 
@@ -190,30 +190,32 @@ data transfer (GiB) * price per GiB
 
 | Cloud provider | Region      | Billing metric | Price | Unit |
 |:---------------|:-----------|:--------------|:------|:-----|
-| AWS            | US East (N. Virginia)     | Compute time  | $0.10200 | Compute-hour |
+| AWS            | US East (N. Virginia)     | Compute time  | $0.0255 | Compute-hour*  |
 | AWS            | US East (N. Virginia)     | Project storage  | $0.000164 | GiB-hour |
 | AWS            | US East (N. Virginia)  | Written data  | $0.09600 | GiB |
 | AWS            | US East (N. Virginia)| Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | US East (Ohio)     | Compute time  | $0.10200 | Compute-hour |
+| AWS            | US East (Ohio)     | Compute time  | $0.0255 | Compute-hour* |
 | AWS            | US East (Ohio)     | Project storage  | $0.000164 | GiB-hour |
 | AWS            | US East (Ohio)  | Written data  | $0.09600 | GiB |
 | AWS            | US East (Ohio)| Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | US West (Oregon)     | Compute time  | $0.10200 | Compute-hour |
+| AWS            | US West (Oregon)     | Compute time  | $0.0255 | Compute-hour* |
 | AWS            | US West (Oregon)| Project storage | $0.000164 | GiB-hour |
 | AWS            | US West (Oregon)     | Written data  | $0.09600 | GiB |
 | AWS            | US West (Oregon)  | Data transfer  | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | Europe (Frankfurt)| Compute time| $0.11800 | Compute-hour |
+| AWS            | Europe (Frankfurt)| Compute time| $0.0295 | Compute-hour* |
 | AWS            | Europe (Frankfurt)| Project storage  | $0.00018 | GiB-hour |
 | AWS            | Europe (Frankfurt)     | Written data    | $0.09600 | GiB |
 | AWS            | Europe (Frankfurt)     | Data transfer    | $0.09000 | GiB |
 |                |             |                |       |      |
-| AWS            | Asia Pacific (Singapore)| Compute time    | $0.12100 | Compute-hour |
+| AWS            | Asia Pacific (Singapore)| Compute time    | $0.03025 | Compute-hour* |
 | AWS            | Asia Pacific (Singapore)  | Project storage    | $0.00018 | GiB-hour |
 | AWS            | Asia Pacific (Singapore)| Written data  | $0.09600 | GiB |
 | AWS            | Asia Pacific (Singapore)| Data transfer  | $0.09000 | GiB |
+
+*The _Compute-hour_ price is for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU), the smallest CU size offered by Neon. A <sup>1</sup>&frasl;<sub>4</sub> CU has .25 vCPU and 1 GB of RAM. Neon currently supports computes with up to 7 CU (7 vCPU and 28 GB of RAM).
 
 ## Support
 

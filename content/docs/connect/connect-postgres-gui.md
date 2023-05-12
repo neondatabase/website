@@ -19,16 +19,18 @@ You can gather most of these details from the **Connection Details** widget on t
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
+Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
+
 The connection string includes the role name, hostname, and database name.
 
 ```text
-postgres://sally@ep-cold-poetry-404091.us-east-2.aws.neon.tech/neondb
-             ^                       ^                          ^
-             |- <role name>          |- <hostname>              |- <database name>
+postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+             ^                                   ^                         ^
+             |- <role>                           |- <hostname>             |- <database>
 ```
 
-- role name: `sally`
-- hostname: `ep-cold-poetry-404091.us-east-2.aws.neon.tech`
+- role name: `daniel`
+- hostname: `ep-mute-rain-952417.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
 Passwords are only shown when they are created. If you misplaced your password, you can reset it by selecting the **Reset Password** link in the **Connection Details** widget or by navigating to the **Roles** page.
@@ -36,7 +38,7 @@ Passwords are only shown when they are created. If you misplaced your password, 
 Neon uses the default PostgreSQL port, `5432`.
 
 <Admonition type="note">
-Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
+Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](../connect/connect-securely).
 </Admonition>
 
 ## Connect to the database
@@ -53,24 +55,27 @@ Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, s
 
 Connections from the following GUI applications and IDEs have been tested with Neon:
 
-- [Azure Data Studio](https://azure.microsoft.com/en-us/products/data-studio/) (requires the [PostgreSQL extension](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/postgres-extension?view=sql-server-ver16), and the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
+- [Azure Data Studio](https://azure.microsoft.com/en-us/products/data-studio/) (requires the [PostgreSQL extension](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/postgres-extension?view=sql-server-ver16), and the [option D](../connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
+- [Beekeeper Studio](https://www.beekeeperstudio.io/) (requires the **Enable SSL** option)
 - [CLion](https://www.jetbrains.com/clion/)
+- [Datagran](https://www.datagran.io/) (requires the [option D](../connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
 - [DataGrip](https://www.jetbrains.com/datagrip/)
 - [DBeaver](https://dbeaver.io/)
 - [dbForge](https://www.devart.com/dbforge/)
 - [DbVisualizer](https://www.dbvis.com/)
 - [DronaHQ hosted cloud version](https://www.dronahq.com/) (requires selecting **Connect using SSL** when creating a connector)
+- [Luna Modeler](https://www.datensen.com/data-modeling/luna-modeler-for-relational-databases.html) (requires enabling the SSL/TLS option)
 - [Metabase](https://www.metabase.com/)
 - [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres)
 - [pgAdmin 4](https://www.pgadmin.org/)
 - [Postico](https://eggerapps.at/postico2/)
 - [Retool](https://retool.com/)
 - [TablePlus](https://tableplus.com/)
-- [Segment](https://segment.com/) (requires the [option D](/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
+- [Segment](https://segment.com/) (requires the [option D](../connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field) connection workaround)
 
 ## Connection issues
 
-Applications that use older client libraries or drivers that do not support Server Name Indication (SNI) may not permit connecting to Neon. If you encounter the following error, refer to [Connect from older clients](/docs/connect/connectivity-issues) for possible workarounds.
+Applications that use older client libraries or drivers that do not support Server Name Indication (SNI) may not permit connecting to Neon. If you encounter the following error, refer to [Connect from old clients](../connect/connectivity-issues) for possible workarounds.
 
 ```txt
 ERROR: The endpoint ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=project%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
