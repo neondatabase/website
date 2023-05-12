@@ -2,7 +2,6 @@
 import SEO from 'components/shared/seo';
 import { RELEASE_NOTES_SLUG_REGEX } from 'constants/docs';
 import SEO_DATA from 'constants/seo-data';
-import { getPostBySlug, RELEASE_NOTES_DIR_PATH } from 'utils/api-docs';
 
 const Head = ({ params: { slug } }) => {
   let label = '';
@@ -10,7 +9,9 @@ const Head = ({ params: { slug } }) => {
   const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
 
   if (isReleaseNotePage) {
-    label = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH)?.data?.label;
+    const note = currentSlug.match(/(\w+)$/)?.[1];
+    // Uppercase the first letter of the note
+    label = note.charAt(0).toUpperCase() + note.slice(1);
   }
 
   return (
