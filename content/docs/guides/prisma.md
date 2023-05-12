@@ -14,7 +14,7 @@ To configure Prisma Migrate with Neon, see [Use Prisma Migrate with Neon](../gui
 
 ## Prerequisites
 
-- A Neon project. See [Create a project]../manage/projects#create-a-project).
+- A Neon project. See [Create a project](../manage/projects#create-a-project).
 - A Prisma project. See [Set up Prisma](https://www.prisma.io/docs/getting-started/setup-prisma), in the _Prisma documentation_.
 
 ## Connect to Neon from Prisma
