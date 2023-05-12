@@ -19,7 +19,7 @@ const PROJECT_STORAGE_PRICE = 0.000164;
 const PROJECT_STORAGE_HOURS = 24;
 const DATA_TRANSFER_PRICE = 0.09;
 const WRITTEN_DATA_PRICE = 0.096;
-const PERCENTAGE_OF_MONTHLY_COST = 0.1;
+const PERCENTAGE_OF_MONTHLY_COST = 0.05;
 const AVERAGE_DAYS_IN_MONTH = 30.416666;
 const CUSTOM_THRESHOLD = 416;
 
@@ -397,7 +397,7 @@ const Calculator = () => {
                       }}
                       transition={{ ease: [0.25, 0.1, 0, 1] }}
                     >
-                      Accounts for 10% of your monthly cost, on average.
+                      Accounts for 5% of your monthly cost, on average.
                       <button
                         className="group relative inline-flex items-center text-pricing-primary-1 transition-colors duration-200 hover:text-[#00ffaa]"
                         type="button"

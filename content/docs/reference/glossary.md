@@ -124,6 +124,10 @@ A Neon Control Plane operation that creates a branch in a Neon project. For rela
 
 A Neon Control Plane operation that creates a project with a primary branch. See [Operations](../manage/operations) for more information.
 
+### Data-at-rest encryption
+
+A method of storing inactive data that converts plaintext data into a coded form or cipher text, making it unreadable without an encryption key. Neon stores inactive data in [NVMe SSD volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes). The data on NVMe instance storage is encrypted using an XTS-AES-256 block cipher implemented in a hardware module on the instance.
+
 ### Data transfer
 
 A billing metric that measures the amount of data transferred out of Neon (egress). See [Data transfer](../introduction/billing#data-transfer).

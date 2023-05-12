@@ -65,7 +65,7 @@ where:
 - `<dbname>` is the name of the database. The default Neon database is `neondb`
 - `<user>` is the database user.
 - `<password>` is the database user's password.
-- `<endpoint_id>` is the ID of the compute endpoint that you are connecting to. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396`.
+- `<endpoint_id>` is the ID of the compute endpoint that you are connecting to. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396`. If a pooled `<hostname>` such as `ep-tight-salad-272396-pooler.us-east-2.aws.neon.tech` was used for `PGHOST`, be sure to include the `-pooler` suffix in the `<endpoint_id>`: `ep-tight-salad-272396-pooler`.
 
 You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
 
