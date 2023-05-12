@@ -48,7 +48,7 @@ Now, on your Neon Serverless Postgres system, use the `pg_restore` command to re
 1. Parse your connection string to identify the individual components: username, password, hostname, port, and database name. For instance, for the connection string shown above, the components would be:
 
 User: daniel
-Password: <password>
+Password: `<password>`
 Hostname: ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech
 Port: 5432
 Database name: neondb
