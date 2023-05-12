@@ -52,18 +52,18 @@ The example application exposes a `/planets` endpoint that you can use to list p
 
 ```json
 [
-  {
+{
     "id": 1,
     "name": "Mercury"
-  },
-  {
+},
+{
     "id": 2,
     "name": "Venus"
-  },
-  {
+},
+{
     "id": 3,
     "name": "Mars"
-  }
+}
 ]
 ```
 
@@ -100,7 +100,7 @@ Once the build and deployment have finished, you can retrieve the public domain 
 
 ```bash
 $ koyeb app get express-neon
-ID          NAME         STATUS         DOMAINS                                CREATED AT
+ID          NAME         STATUS         DOMAINS                                CREATED AT          
 b8611a1d    express-neon HEALTHY        ["express-neon-myorg.koyeb.app"]       16 Feb 23 18:13 UTC
 ```
 
@@ -108,18 +108,18 @@ The example application exposes a `/planets` endpoint that you can use to list p
 
 ```json
 [
-  {
+{
     "id": 1,
     "name": "Mercury"
-  },
-  {
+},
+{
     "id": 2,
     "name": "Venus"
-  },
-  {
+},
+{
     "id": 3,
     "name": "Mars"
-  }
+}
 ]
 ```
 

@@ -24,9 +24,9 @@ To create a role:
 2. Select a project.
 3. Select **Roles**.
 4. Select the branch where you want to create the role.
-5. Click **New Role**.
-6. In the role creation dialog, specify a role name. The length of the role name is limited to 63 bytes.
-7. Click **Create**. The role is created and you are provided with the password for the role.
+4. Click **New Role**.
+5. In the role creation dialog, specify a role name. The length of the role name is limited to 63 bytes.
+6. Click **Create**. The role is created and you are provided with the password for the role.
 
 ## Delete a role
 

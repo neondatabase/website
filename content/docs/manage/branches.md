@@ -28,7 +28,7 @@ Each Neon project has a primary branch called `main`, by default. In the Neon Co
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
-- For [Free Tier](../introduction/technical-preview-free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Free Tier _compute active time_ limit of 100 hours per month.
+- For [Free Tier](../introduction/technical-preview-free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Free Tier  _compute active time_ limit of 100 hours per month.
 - For [Pro plan](../introduction/billing#neon-plans) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Create a branch
@@ -38,13 +38,13 @@ To create a branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Click **New Branch** to open the branch creation dialog.
-   ![Create branch dialog](/docs/manage/create_branch.png)
+![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch.
 5. Select a parent branch. You can branch from your Neon project's [primary branch](#primary-branch) or a [non-primary branch](#non-primary-branch).
 6. Select one of the following branching options:
-   - **Head**: Creates a branch with data up to the current point in time (the default).
-   - **Time**: Creates a branch with data up to the specified date and time.
-   - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](../reference/glossary#lsn).
+    - **Head**: Creates a branch with data up to the current point in time (the default).
+    - **Time**: Creates a branch with data up to the specified date and time.
+    - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](../reference/glossary#lsn).
 7. Select whether or not to create a compute endpoint, which is required to connect to the branch. If you are unsure, you can add a compute endpoint later.
 8. Click **Create Branch** to create your branch.
 
@@ -107,13 +107,13 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 
 1. In the Neon Console, select a project.
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
-   ![Connection details widget](/docs/connect/connection_details.png)
+![Connection details widget](/docs/connect/connection_details.png)
 3. Copy the connection string. A connection string includes your role name, the compute endpoint hostname, and database name.
-4. Connect with `psql` as shown below.
+5. Connect with `psql` as shown below.
 
-```bash
-psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
-```
+  ```bash
+  psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+  ```
 
 <Admonition type="tip">
 A compute endpoint hostname starts with an `ep-` prefix. You can also find a compute endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
@@ -130,8 +130,8 @@ To delete a branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Select a branch from the table.
-4. Click **Delete**.
-5. On the confirmation dialog, click **Delete**.
+3. Click **Delete**.
+4. On the confirmation dialog, click **Delete**.
 
 ## Check the data size
 
@@ -167,7 +167,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranch).
 
 ```text
-POST /projects/{project_id}/branches
+POST /projects/{project_id}/branches 
 ```
 
 The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without a compute endpoint. The `branch` attribute specifies the parent branch.

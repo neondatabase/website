@@ -2,7 +2,6 @@
 title: Connect from any application
 enableTableOfContents: true
 ---
-
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch. The primary branch in a Neon project is created with a default database named `neondb`.
 
 To connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through a compute endpoint associated with the branch.
@@ -15,7 +14,7 @@ Project
              |
              ---- child branch ---- compute endpoint <--- application/client
                             |
-                            |---- database (mydb)
+                            |---- database (mydb)  
 ```
 
 You can obtain the connection details you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
@@ -74,11 +73,11 @@ Neon uses the default PostgreSQL port, `5432`.
 
 ## Connection examples
 
-The **Connection Details** widget on the **Neon Dashboard** also provides connection examples for different programming languages and application frameworks, constructed for the branch, database, and role that you select. Click **connection examples** in the **Connection Details** widget to view or copy the examples.
+The **Connection Details** widget on the **Neon Dashboard** also provides connection examples for different programming languages and application frameworks, constructed for the branch, database, and role that you select. Click **connection examples**  in the **Connection Details** widget to view or copy the examples.
 
 ![Language and framework connection examples](/docs/connect/code_connection_examples.png)
 
-Our _Guides_ documentation also provides connection examples.
+Our *Guides* documentation also provides connection examples.
 
 ## Connection notes
 

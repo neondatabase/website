@@ -44,7 +44,7 @@ SELECT * FROM elements ORDER BY id;
 ```
 
 ```text
- id | elementname | atomicnumber | symbol
+ id | elementname | atomicnumber | symbol 
 ----+-------------+--------------+--------
  10 | Neon        |           10 | Ne
  10 | Neon        |           10 | Ne
@@ -69,14 +69,14 @@ You can use the Neon branching feature to recover lost data in seconds. The only
 Now that you know when the data loss occurred, you can restore your data to a point in time just before that by creating a database branch.
 
 1. Navigate to the **Branches** page in the Neon Console.
-   ![Branches page](/docs/tutorial/branches_page.png)
+![Branches page](/docs/tutorial/branches_page.png)
 1. Click **New Branch** to open the branch creation dialog.
 1. Enter a name for the branch.
 1. Select the parent branch. The data loss occurred on your project's [primary branch](../reference/glossary/#primary-branch) (`main`), so select that branch as the parent.
 1. Select the **Time** option to create a branch with data up to a specific date and time. You determined that the data loss occurred on March 20, 2023 at 8:58am, so you set it to 8:57am, just before you ran the `DELETE` query.
-   ![Create a point in time branch](/docs/tutorial/create_branch_time.png)
+![Create a point in time branch](/docs/tutorial/create_branch_time.png)
 1. Click **Create Branch** to create your branch. You should see a dialog similar to the following with the connection details for your new branch.
-   ![New branch connection details](/docs/tutorial/new_branch_connection_details.png)
+![New branch connection details](/docs/tutorial/new_branch_connection_details.png)
 
 ## Verify that data was recovered
 

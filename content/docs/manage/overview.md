@@ -3,32 +3,31 @@ title: Overview of the Neon object hierarchy
 enableTableOfContents: true
 isDraft: false
 ---
-
 Managing your Neon project requires an understanding of the Neon object hierarchy. The following diagram shows how objects in Neon are related. See below for a description of of each object.
 
 ```text
 Neon account
     |
     |- API keys
-    |
-    |- project
+    | 
+    |- project 
     |      |
     |      |---- primary branch (main) ---- compute endpoint a
     |                |    |
     |                |    |---- roles
-    |                |    |---- databases
-    |                |
-    |                |---- child branch 1 ---- compute endpoint b
+    |                |    |---- databases           
+    |                |                         
+    |                |---- child branch 1 ---- compute endpoint b 
     |                |          |    |
     |                |          |    |---- roles
-    |                |          |    |---- databases
+    |                |          |    |---- databases   
     |                |          |
-    |                |          |---- child branch 1.a ---- compute endpoint c
+    |                |          |---- child branch 1.a ---- compute endpoint c 
     |                |                          |
     |                |                          |---- roles
     |                |                          |---- databases
     |                |
-    |                |---- child branch 2
+    |                |---- child branch 2 
     |                                |
     |                                |---- roles
     |                                |---- databases

@@ -55,7 +55,7 @@ If you have multiple databases to import, each database must be imported separat
 
 When importing a database, be aware of the following:
 
-- If you are importing a database from an archive using `pg_dump` that is not in plain-text format, use the `pg_restore` utility instead of `psql` to restore the database to Neon.
+- If you are importing a database from an archive using `pg_dump` that is  not in plain-text format, use the `pg_restore` utility instead of `psql` to restore the database to Neon.
 - Neon is not able to create databases, so you can not use `pg_dumpall` or `pg_dump` with the `-C` option.
 - Because `pg_dump` dumps a single database, it does not include information about roles stored in the global `pg_authid` catalog. Also, Neon does not support creating roles using `psql`. You can only create roles using the Neon Console. If you do not create roles in Neon before importing a database that has roles, you will receive "role does not exist" errors during the import operation. You can ignore this warning. It does not prevent data from being imported.
 - Some PostgreSQL features that require access to the local file system are not supported by Neon. For example, tablespaces and large objects are not supported. Please take this into account when importing a database from PostgreSQL to Neon.

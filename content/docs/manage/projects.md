@@ -102,7 +102,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 The following Neon API method creates a project. The [Neon Free Tier](../introduction/technical-preview-free-tier) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
 
 ```text
-POST /projects
+POST /projects 
 ```
 
 The API method appears as follows when specified in a cURL command. The `myproject` name value is a user-specified name for the project.
@@ -121,7 +121,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 
 Response:
 
-The response includes information about the roles, the default database, the primary branch (`main`), and the read-write compute endpoint that is created with the project.
+The response includes information about the roles, the default database, the primary branch (`main`), and the read-write compute endpoint that is created with the project.  
 
 ```json
 {

@@ -74,7 +74,7 @@ Control groups, a Linux kernel feature that allows the organization, prioritizat
 
 ### Compute
 
-A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon compute instance (also referred to as a [compute endpoint](#compute-endpoint)) runs PostgreSQL. The amount of compute resources available to a Neon project is defined by tier. Neon supports free and paid tiers.
+A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon compute instance (also referred to as a [compute endpoint](#compute-endpoint)) runs PostgreSQL. The amount of compute resources available to a Neon project is defined by tier. Neon supports free  and paid tiers.
 
 ### Compute endpoint
 
@@ -226,7 +226,7 @@ An 8KB unit of data, which is the smallest unit that PostgreSQL uses for storing
 
 ### Paid plan
 
-A paid Neon service tier. See [Neon plans](../introduction/billing#neon-plans).
+ A paid Neon service tier. See [Neon plans](../introduction/billing#neon-plans).
 
 ### Pageserver
 

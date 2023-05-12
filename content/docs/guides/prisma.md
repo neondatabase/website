@@ -22,8 +22,8 @@ To configure Prisma Migrate with Neon, see [Use Prisma Migrate with Neon](../gui
 To establish a basic connection from Prisma to Neon, perform the following steps:
 
 1. Retrieve your Neon connection string. In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-   ![Connection details widget](/docs/connect/connection_details.png)
-   The connection string includes the user name, password, hostname, and database name.
+  ![Connection details widget](/docs/connect/connection_details.png)
+  The connection string includes the user name, password, hostname, and database name.
 
 2. Add the following lines to your `prisma/schema.prisma` file to identify the data source and database URL:
 
@@ -76,11 +76,11 @@ When you connect to an idle compute from Prisma, Neon automatically activates it
 - Add a `connect_timeout` parameter and set it to 0 or a higher value. This parameter defines the maximum number of seconds to wait for a new connection to be opened. The default value is 5 seconds. A setting of 0 means no timeout. A higher setting should provide the time required to avoid connection timeout issues. For example:
 
   `DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417-pooler.us-east-2.aws.neon.tech/neondb?connect_timeout=10`
-
+  
 - If using a [pooled connection](../connect/connection-pooling), set `pool_timeout` to 0 or a higher value. This setting defines the number of seconds to wait for a new connection from the pool. The default is 10 seconds. A setting of 0 means no timeout. A higher setting should provide the time required to avoid connection timeout issues. For example:
 
   `DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true&pool_timeout=20`
-
+  
 For additional information about connecting from Prisma, refer to the following resources in the _Prisma documentation_:
 
 - [Connection management](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management)

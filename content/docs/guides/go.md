@@ -49,7 +49,7 @@ func main() {
         panic(err)
     }
     defer db.Close()
-
+    
     var version string
     if err := db.QueryRow("select version()").Scan(&version); err != nil {
         panic(err)

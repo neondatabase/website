@@ -1,6 +1,6 @@
 ---
 title: Use Prisma Migrate with Neon
-subtitle: Learn how to use Prisma Migrate with Neon
+subtitle: Learn how to use Prisma Migrate with Neon 
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/prisma
@@ -19,7 +19,7 @@ To configure a shadow database:
 
 1. Create another database in your Neon project and copy the connection string. Refer to [Create a database](../manage/databases#create-a-database) for instructions. You can name the shadow database whatever you like.
 
-   For information about obtaining a connection string, see [Connect from any application](../connect/connect-from-any-app/).
+    For information about obtaining a connection string, see [Connect from any application](../connect/connect-from-any-app/).
 
 1. Add the `shadowDatabaseUrl` setting to your `prisma/schema.prisma` file to identify the shadow database URL:
 
