@@ -8,11 +8,12 @@ import ConsoleIcon from 'icons/console-icon.inline.svg';
 import DocsIcon from 'icons/docs-icon.inline.svg';
 import DriversIcon from 'icons/gear-icon.inline.svg';
 import StorageIcon from 'icons/storage-icon.inline.svg';
+import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
 
 export const RELEASE_NOTES_CATEGORIES = [
   {
     icon: StorageIcon,
-    slug: 'storage',
+    slug: 'storage-and-compute',
   },
   {
     icon: ConsoleIcon,
@@ -54,6 +55,7 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
       </li>
       {RELEASE_NOTES_CATEGORIES.map(({ slug, icon: Icon }, index) => {
         const isCategoryActive = currentSlug === slug;
+        const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(slug);
 
         return (
           <li key={index}>
@@ -78,7 +80,7 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
                       : 'text-gray-6 dark:text-gray-4'
                   )}
                 />
-                <span>{slug.charAt(0).toUpperCase() + slug.slice(1)}</span>
+                <span>{capitalisedCategory}</span>
               </span>
             </Link>
           </li>

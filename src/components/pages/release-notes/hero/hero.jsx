@@ -16,8 +16,8 @@ const Hero = ({ className = null, withContainer = false }) => {
     <div className={className}>
       <Tag className={clsx('mb-6 sm:mb-7')} size="sm">
         <h1 className="text-[36px] font-semibold xl:text-3xl">{TITLE}</h1>
-        <div className="mt-3 flex items-center justify-between sm:flex-col sm:items-start sm:gap-y-4">
-          <p>{DESCRIPTION}</p>
+        <div className="flex items-center justify-between sm:flex-col sm:items-start sm:gap-y-4">
+          <p className="mr-3">{DESCRIPTION}</p>
           <a
             className="flex items-center text-secondary-8 transition-colors duration-200 hover:text-secondary-7 dark:text-primary-1 dark:hover:text-primary-2"
             href={`${RELEASE_NOTES_BASE_PATH}rss.xml`}
