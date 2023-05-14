@@ -22,7 +22,7 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 |                          | Free Tier                         | Pro (usage-based)             | Custom - Enterprise or Platform Partnership (volume-based)|
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|
 |**Best for**              | Prototyping and personal projects       | Small to medium teams, setups with 1 to 3 active databases  | Medium to large teams, Database fleets, Resale |
-|**Projects**              | 1                                 | 20               | Unlimited                 |
+|**Projects**              | 1                                 | Unlimited*               | Unlimited                 |
 |**Branches**              | 10                                 | Unlimited               | Unlimited                 |
 |**Active time per month** | No limit on the [primary branch](../reference/glossary#primary-branch) compute. 100 hours for [non-primary branch](../reference/glossary#non-primary-branch) computes*                 | Unlimited        | Unlimited                 |
 |**Compute size**          | 1 shared vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
@@ -37,7 +37,7 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 
 **Notes:**
 
-- The Pro plan has default limits of 200 GB of storage and 20 simultaneously active computes. To increase these limits, reach out to our [Sales](https://neon.tech/contact-sales) team. The simultaneously active compute limit does affect the primary branch compute.
+- The Pro plan has default limits of 20 projects, 200 GB of storage, and 20 simultaneously active computes. To increase these limits, reach out to our [Sales](https://neon.tech/contact-sales) team. The simultaneously active compute limit does not affect the primary branch compute.
 - The Free Tier has an [Active time](../reference/glossary#active-time) limit of 100 hours per month for non-primary branch computes. _Active time_ on the primary branch compute is counted toward the 100 hour limit. See [Free Tier](../introduction/technical-preview-free-tier) for more information.
 - **There is no limit on Active time for the primary branch compute. This ensures that access to data on the primary branch is never interrupted.**
 
