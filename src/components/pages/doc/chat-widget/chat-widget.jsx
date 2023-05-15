@@ -44,14 +44,15 @@ const animationVariants = {
 };
 
 const ChatWidget = ({ className = null }) => {
-  const [commandKey, setCommandKey] = useState(null);
+  const [commandKey, setCommandKey] = useState(COMMAND);
   const [isOpen, setIsOpen] = useState(false);
   const [inputText, setInputText] = useState('');
-
+  const [error, setError] = useState('');
   const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
+  // determine what hotkey icon shoould we render
   useLayoutEffect(() => {
     const { userAgent } = window.navigator;
     setCommandKey(userAgent.indexOf('Mac') !== -1 ? COMMAND : CTRL);
@@ -63,36 +64,28 @@ const ChatWidget = ({ className = null }) => {
     }
   };
 
+  // attach event listeners
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
-
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
-  const handleExampleClick = (e) => {
-    setMessages([...messages, { content: e.target.textContent, role: 'user' }]);
-  };
+  const handleInputChange = (e) => setInputText(e.target.value);
 
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
+  const handleExampleClick = (e) => {
+    setMessages([...messages, { role: 'user', content: e.target.textContent }]);
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const newMessages = [
-      {
-        role: 'user',
-        content: inputText,
-      },
-    ];
-    setMessages([...messages, ...newMessages]);
+    e?.preventDefault();
+    setMessages([...messages, { role: 'user', content: inputText }]);
     setInputText('');
   };
 
   const fetchCompletionStream = useCallback(async () => {
-    setLoading(true);
+    setIsLoading(true);
     try {
       const response = await fetch('/api/open-ai', {
         method: 'POST',
@@ -100,47 +93,85 @@ const ChatWidget = ({ className = null }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          messages: [...messages, { content: inputText, role: 'user' }],
+          messages,
         }),
       });
 
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-
-      const data = response.body;
-      if (!data) {
-        return;
-      }
-
-      const reader = data.getReader();
-      const decoder = new TextDecoder();
-      let done = false;
-
-      let completion = '';
-      const msg = Array.from(messages);
-      while (!done) {
-        const { value, done: doneReading } = await reader.read();
-
-        done = doneReading;
-        const chunkValue = decoder.decode(value);
-
-        completion += chunkValue;
-        setMessages([
-          ...msg,
-          {
-            role: 'assistant',
-            content: completion,
-            sender: false,
-          },
-        ]);
+      // @TODO: the endpoints are inconsistent, fix it
+      if (response.ok) {
+        const data = await response.json();
+        // Process the response data here
+        const msg = JSON.parse(data)?.completion?.choices?.[0]?.message;
+        if (msg) {
+          setMessages([...messages, { role: msg.role, content: msg.content }]);
+        }
+      } else {
+        // Handle non-OK response status
+        throw new Error('Something went wrong. Please, reopen and try again!');
       }
     } catch (error) {
-      console.log(error);
+      // Handle network errors or exceptions
+      console.error('Error:', error);
+      setError(error.message);
     }
+    setIsLoading(false);
+  }, [messages]);
 
-    setLoading(false);
-  }, [inputText, messages]);
+  // @TODO: handle onde the endpoint is determined
+  // const _fetchCompletionStream = useCallback(async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await fetch('/api/open-ai', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         messages: [...messages, { content: inputText, role: 'user' }],
+  //       }),
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(response.statusText);
+  //     }
+
+  //     console.log('on client', response.completion);
+
+  //     const data = response.body;
+  //     if (!data) {
+  //       return;
+  //     }
+
+  //     const reader = data.getReader();
+  //     console.log({ reader });
+  //     const decoder = new TextDecoder();
+  //     let done = false;
+
+  //     let completion = '';
+  //     const msg = Array.from(messages);
+  //     while (!done) {
+  //       const { value, done: doneReading } = await reader.read();
+  //       console.log({ value, doneReading });
+  //       done = doneReading;
+  //       const chunkValue = decoder.decode(value);
+  //       console.log({ chunkValue });
+
+  //       completion += chunkValue;
+  //       setMessages([
+  //         ...msg,
+  //         {
+  //           role: 'assistant',
+  //           content: completion,
+  //           sender: false,
+  //         },
+  //       ]);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  //   setIsLoading(false);
+  // }, [inputText, messages]);
 
   const handleInputKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -148,8 +179,16 @@ const ChatWidget = ({ className = null }) => {
     }
   };
 
+  const handleOpenChange = (isOpen) => {
+    if (!isOpen) {
+      setMessages([]);
+      setError('');
+    }
+    setIsOpen(isOpen);
+  };
+
   useEffect(() => {
-    if (messages.length > 0 && messages[messages.length - 1].role === 'user') {
+    if (messages[messages.length - 1]?.role === 'user') {
       fetchCompletionStream();
     }
     messagesEndRef?.current?.scrollIntoView({
@@ -159,7 +198,7 @@ const ChatWidget = ({ className = null }) => {
   }, [fetchCompletionStream, messages]);
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog.Root open={isOpen} onOpenChange={handleOpenChange}>
       <Dialog.Trigger asChild>
         <button
           className={clsx('chat-widget flex flex-col text-sm focus:outline-none', className)}
@@ -206,7 +245,7 @@ const ChatWidget = ({ className = null }) => {
                     {messages.map((message, index) => (
                       <Message message={message} key={index} />
                     ))}
-                    {loading && (
+                    {isLoading && (
                       <div className="flex items-center px-5 py-2.5">
                         <span className="mr-3 flex h-7 w-7 items-center justify-center rounded-full bg-secondary-8/10 dark:bg-primary-1/10">
                           <ExampleIcon className="text-secondary-8 dark:text-primary-1" />
@@ -244,22 +283,26 @@ const ChatWidget = ({ className = null }) => {
                 )}
               </AnimatePresence>
             </LazyMotion>
-            <form className="group relative mt-12 w-full px-5 pb-5" onSubmit={handleSubmit}>
-              <input
-                className="peer w-full appearance-none rounded border border-gray-new-90 py-2 px-2.5 text-base leading-normal transition-colors duration-200 placeholder:text-gray-new-80 focus:outline-none dark:border-gray-new-20 dark:bg-black dark:placeholder:text-gray-new-30"
-                type="text"
-                placeholder="How can I help you?"
-                value={inputText}
-                onKeyDown={handleInputKeyDown}
-                onChange={handleInputChange}
-              />
-              <button
-                className="absolute bottom-[30px] right-[30px] h-5 w-5 opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
-                type="submit"
-              >
-                <SendIcon className="text-gray-new-20 dark:text-gray-new-90" />
-              </button>
-            </form>
+            {error ? (
+              <span>{error}</span>
+            ) : (
+              <form className="group relative mt-12 w-full px-5 pb-5" onSubmit={handleSubmit}>
+                <input
+                  className="peer w-full appearance-none rounded border border-gray-new-90 py-2 px-2.5 text-base leading-normal transition-colors duration-200 placeholder:text-gray-new-80 focus:outline-none dark:border-gray-new-20 dark:bg-black dark:placeholder:text-gray-new-30"
+                  type="text"
+                  placeholder="How can I help you?"
+                  value={inputText}
+                  onKeyDown={handleInputKeyDown}
+                  onChange={handleInputChange}
+                />
+                <button
+                  className="absolute bottom-[30px] right-[30px] h-5 w-5 opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
+                  type="submit"
+                >
+                  <SendIcon className="text-gray-new-20 dark:text-gray-new-90" />
+                </button>
+              </form>
+            )}
 
             <Dialog.Close asChild>
               <button
