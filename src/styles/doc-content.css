@@ -20,7 +20,7 @@
     }
 
     h2 {
-      @apply mt-10 mb-3;
+      @apply mb-3 mt-10;
     }
 
     p {
@@ -109,13 +109,16 @@
 
       code {
         text-shadow: unset;
+        white-space: break-spaces !important;
 
-        @apply highlighted-code !font-mono text-sm !text-black dark:!text-white dark:![text-shadow:unset];
+        @apply highlighted-code !max-w-full !break-words !font-mono text-sm !text-black dark:!text-white dark:![text-shadow:unset];
       }
     }
 
     :not(pre) > code {
-      @apply !rounded-sm bg-gray-8 !px-1.5 !py-0.5 !font-mono !font-normal !text-black dark:bg-gray-2 dark:!text-white;
+      white-space: break-spaces !important;
+
+      @apply !max-w-full !break-words !rounded-sm bg-gray-8 !px-1.5 !py-0.5 !font-mono !font-normal !text-black dark:bg-gray-2 dark:!text-white;
 
       &::before,
       &::after {

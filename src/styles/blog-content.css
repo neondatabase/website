@@ -68,13 +68,16 @@
 
       code {
         text-shadow: unset;
+        white-space: break-spaces !important;
 
-        @apply highlighted-code !font-mono !text-base !text-black;
+        @apply highlighted-code !max-w-full !break-words !font-mono !text-base !text-black;
       }
     }
 
     :not(pre) > code {
-      @apply !rounded-sm !border !border-[#E5E5E5] bg-[#FBFBFB] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
+      white-space: break-spaces !important;
+
+      @apply !max-w-full !break-words !rounded-sm !border !border-[#E5E5E5] bg-[#FBFBFB] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
 
       &::before,
       &::after {
