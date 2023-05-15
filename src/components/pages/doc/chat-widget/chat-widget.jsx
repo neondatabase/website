@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import AIIcon from './images/ai.inline.svg';
+import AttentionIcon from './images/attention.inline.svg';
 import CloseIcon from './images/close.inline.svg';
 import ExampleIcon from './images/example.inline.svg';
 import SendIcon from './images/send.inline.svg';
@@ -247,7 +248,7 @@ const ChatWidget = ({ className = null }) => {
                     ))}
                     {isLoading && (
                       <div className="flex items-center px-5 py-2.5">
-                        <span className="mr-3 flex h-7 w-7 items-center justify-center rounded-full bg-secondary-8/10 dark:bg-primary-1/10">
+                        <span className="mr-3 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary-8/10 dark:bg-primary-1/10">
                           <ExampleIcon className="text-secondary-8 dark:text-primary-1" />
                         </span>
                         <span className="h-4 w-1 animate-pulse bg-gray-new-50" />
@@ -284,7 +285,14 @@ const ChatWidget = ({ className = null }) => {
               </AnimatePresence>
             </LazyMotion>
             {error ? (
-              <span>{error}</span>
+              <div className="flex px-5 pt-2.5 pb-5">
+                <span className="mr-3 flex h-7 w-7 items-center justify-center rounded-full bg-secondary-1/10">
+                  <AttentionIcon className="h-auto w-3.5" />
+                </span>
+                <span>
+                  <span className="text-secondary-1">Attention:</span> {error}
+                </span>
+              </div>
             ) : (
               <form className="group relative mt-12 w-full px-5 pb-5" onSubmit={handleSubmit}>
                 <input
