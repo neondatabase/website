@@ -40,14 +40,16 @@ const Header = forwardRef(
     },
     ref
   ) => {
-    const isThemeBlack = theme === 'black' || theme === 'pricing';
+    const isThemeBlack = theme === 'black' || theme === 'pricing' || theme === 'gray-8';
 
     return (
       <header
         className={clsx(
           'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-black lg:relative lg:h-14',
-          // eslint-disable-next-line no-nested-ternary
-          isThemeBlack ? (theme === 'pricing' ? 'lg:bg-pricing-black' : 'lg:bg-black') : 'bg-white',
+          theme === 'gray-8' && 'bg-gray-new-8',
+          theme === 'black' && 'lg:bg-black',
+          theme === 'pricing' && 'lg:bg-pricing-black',
+          theme === 'white' && 'bg-white',
           isSticky && 'sticky top-0 z-50 md:relative',
           withBottomBorder && 'border-b border-gray-7 dark:border-gray-2'
         )}

@@ -1,20 +1,25 @@
 'use client';
 
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useInView } from 'react-intersection-observer';
+// import { useInView } from 'react-intersection-observer';
 
 import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
-import SocialShare from 'components/pages/blog-post/social-share';
+// import SocialShare from 'components/pages/blog-post/social-share';
 import BlogPostAuthors from 'components/shared/blog-post-author';
 import CodeBlock from 'components/shared/code-block';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
-const PostContent = ({ title, content, authors, slug }) => {
-  const [socialShareRef, isSocialShareInView] = useInView({
-    threshold: 0.5,
-  });
+const PostContent = ({
+  // title,
+  content,
+  authors,
+  //  slug
+}) => {
+  // const [socialShareRef, isSocialShareInView] = useInView({
+  //   threshold: 0.5,
+  // });
   const contentWithLazyBlocks = getReactContentWithLazyBlocks(
     content,
     {
@@ -23,22 +28,22 @@ const PostContent = ({ title, content, authors, slug }) => {
     },
     true
   );
-  const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog/${slug}`;
+  // const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog/${slug}`;
 
   return (
     <>
-      <SocialShare
+      {/* <SocialShare
         className={clsx(
-          'sticky top-28 col-span-1 col-start-10 row-start-2 row-end-4 ml-3 mt-6 transition-opacity duration-150 md:hidden',
+          'sticky top-28 col-span-4 col-start-10 row-start-2 row-end-4 ml-3 mt-6 transition-opacity duration-150 md:hidden',
           isSocialShareInView ? 'invisible opacity-0' : 'visible opacity-100'
         )}
         slug={shareUrl}
         title={title}
         isSticky
-      />
+      /> */}
 
       <Content
-        className="col-start-2 col-end-10 mt-8 md:col-span-full sm:mt-4"
+        className="prose-invert col-start-4 col-end-10 mt-8 md:col-span-full sm:mt-4"
         html={contentWithLazyBlocks}
       />
 
@@ -46,13 +51,13 @@ const PostContent = ({ title, content, authors, slug }) => {
         <BlogPostAuthors authors={authors} isBlogPost />
       </div>
 
-      <SocialShare
+      {/* <SocialShare
         className="col-start-2 col-end-10 mt-8 md:hidden"
         slug={shareUrl}
         title={title}
         ref={socialShareRef}
         withTopBorder
-      />
+      /> */}
     </>
   );
 };
