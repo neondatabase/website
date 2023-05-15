@@ -114,12 +114,12 @@ const Calculator = () => {
     [writtenDataValue]
   );
 
-  const totalCost = useMemo(
-    () => computeTimeCost + storageCost + writtenAndTransferDataCost,
-    [computeTimeCost, storageCost, writtenAndTransferDataCost]
-  );
+  const totalCost = useMemo(() => computeTimeCost + storageCost, [computeTimeCost, storageCost]);
 
-  const estimatedPrice = `$${totalCost.toFixed(2)}`;
+  const estimatedPrice = useMemo(
+    () => (totalCost + writtenAndTransferDataCost).toFixed(2),
+    [totalCost, writtenAndTransferDataCost]
+  );
 
   useEffect(
     () =>
@@ -130,7 +130,10 @@ const Calculator = () => {
   );
 
   return (
-    <section className="safe-paddings mb-40 mt-[17.25rem] xl:mt-40 xl:mb-36 lg:mt-32 lg:mb-16 md:my-20">
+    <section
+      id="calc"
+      className="safe-paddings mb-40 mt-[17.25rem] xl:mt-40 xl:mb-36 lg:mt-32 lg:mb-16 md:my-20"
+    >
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <Heading
@@ -428,8 +431,8 @@ const Calculator = () => {
           <div
             className="relative z-10 col-start-2 row-span-3 row-start-1 flex flex-col self-start rounded-[10px] border border-[var(--accentColor)] px-6 pb-5 pt-6 transition-colors duration-200 lg:px-5 md:col-start-1 md:row-span-1 md:grid md:grid-cols-2 md:gap-x-32 sm:grid-cols-1 sm:gap-x-0"
             style={{
-              '--accentColor': totalCost >= CUSTOM_THRESHOLD ? '#f0f075' : '#00e599',
-              '--hoverColor': totalCost >= CUSTOM_THRESHOLD ? '#f5f5a3' : '#00ffaa',
+              '--accentColor': estimatedPrice >= CUSTOM_THRESHOLD ? '#f0f075' : '#00e599',
+              '--hoverColor': estimatedPrice >= CUSTOM_THRESHOLD ? '#f5f5a3' : '#00ffaa',
             }}
           >
             <h3 className="text-lg font-medium leading-none tracking-tight text-white md:col-start-2 sm:col-start-1">
@@ -437,13 +440,13 @@ const Calculator = () => {
             </h3>
             <p className="mt-6 flex items-end gap-x-2 leading-none text-white lg:mt-4 md:col-start-2 sm:col-start-1 sm:mt-6">
               <span className="text-[56px] font-light tracking-[-0.06em] text-[var(--accentColor)] transition-colors duration-200 lg:text-[40px] sm:text-[44px]">
-                {estimatedPrice}
+                ${estimatedPrice}
               </span>
               <span className="mb-1 block text-xl tracking-normal">/mo</span>
             </p>
             <AnimatedButton
               className="my-6 w-full max-w-[260px] !bg-[var(--accentColor)] !py-[17px] !text-lg font-medium hover:!bg-[var(--hoverColor)] lg:my-5 md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1 sm:my-8"
-              to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
+              to={estimatedPrice >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               theme="primary"
               size="sm"
               animationSize="sm"
@@ -452,7 +455,7 @@ const Calculator = () => {
               spread={1}
               isAnimated
             >
-              {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
+              {estimatedPrice >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </AnimatedButton>
             <ul className="my-7 flex w-full flex-grow flex-col space-y-3.5 text-lg leading-none tracking-tight text-pricing-black lg:mt-2.5 md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2 sm:max-h-20 sm:flex-wrap sm:gap-y-6 sm:gap-x-2 sm:space-y-0">
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:w-1/2 sm:pl-0">
