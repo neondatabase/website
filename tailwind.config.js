@@ -18,7 +18,10 @@ module.exports = {
       inherit: 'inherit',
       current: 'currentColor',
       transparent: 'transparent',
-      black: '#1a1a1a',
+      black: {
+        DEFAULT: '#1a1a1a',
+        new: '#0c0d0d',
+      },
       white: '#ffffff',
       primary: {
         1: '#00e699',
@@ -61,6 +64,7 @@ module.exports = {
         95: '#F2F2F3',
         98: '#FAFAFA',
       },
+      yellow: '#f0f075',
       code: {
         'green-1': '#078345',
         'green-2': '#47D18C',

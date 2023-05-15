@@ -1,6 +1,6 @@
 @layer components {
   .prose-blog {
-    @apply max-w-none text-white;
+    @apply max-w-none text-gray-new-90;
 
     a:not(.anchor) {
       @apply border-b-2 border-b-primary-1 no-underline transition-colors duration-200 ease-in-out hover:text-primary-1 sm:break-words;
@@ -64,20 +64,20 @@
     }
 
     pre {
-      @apply !border !border-[#E5E5E5] !bg-[#FBFBFB];
+      @apply !bg-black-new;
 
       code {
-        text-shadow: unset;
+        text-shadow: unset !important;
         white-space: break-spaces !important;
 
-        @apply highlighted-code !max-w-full !break-words !font-mono !text-base !text-black;
+        @apply highlighted-code !max-w-full !break-words !font-mono !text-base !text-white;
       }
     }
 
     :not(pre) > code {
       white-space: break-spaces !important;
 
-      @apply !max-w-full !break-words !rounded-sm !border !border-[#E5E5E5] bg-[#FBFBFB] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
+      @apply !max-w-full !break-words !rounded-sm bg-yellow/10 !px-1.5 !py-0.5 !font-mono !font-normal !text-yellow;
 
       &::before,
       &::after {

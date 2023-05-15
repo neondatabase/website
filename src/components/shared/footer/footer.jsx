@@ -18,7 +18,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
         'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-black dark:text-white',
         !isDarkTheme && withTopBorder && 'border-t border-gray-7 dark:border-gray-2',
         isDarkTheme && withTopBorder && 'border-t border-gray-2',
-        theme === 'pricing' && 'border-gray-new-15 bg-pricing-black text-white',
+        theme === 'pricing' && 'border-gray-new-15 bg-black-new text-white',
         theme === 'black' && 'bg-black text-white',
         theme === 'gray-8' && 'bg-gray-new-8 text-white',
         theme === 'white' && 'bg-white text-black'

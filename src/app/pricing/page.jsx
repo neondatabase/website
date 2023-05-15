@@ -8,7 +8,7 @@ import Layout from 'components/shared/layout';
 
 const PricingPage = () => (
   <Layout
-    className="bg-pricing-black text-white"
+    className="bg-black-new text-white"
     headerTheme="pricing"
     footerTheme="pricing"
     footerWithTopBorder
