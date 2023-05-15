@@ -440,7 +440,7 @@ const Calculator = () => {
             </h3>
             <p className="mt-6 flex items-end gap-x-2 leading-none text-white lg:mt-4 md:col-start-2 sm:col-start-1 sm:mt-6">
               <span className="text-[56px] font-light tracking-[-0.06em] text-[var(--accentColor)] transition-colors duration-200 lg:text-[40px] sm:text-[44px]">
-                {estimatedPrice}
+                ${estimatedPrice}
               </span>
               <span className="mb-1 block text-xl tracking-normal">/mo</span>
             </p>
