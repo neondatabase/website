@@ -73,9 +73,9 @@ To cancel a Pro plan subscription:
 1. Click **Request subscription cancellation** at the bottom of the page.
 1. Follow the instructions and click **Request downgrade**.
 
-Cancelling your Pro plan subscription downgrades your account to the [Free Tier](../introduction/technical-preview-free-tier).
+Cancelling your Pro plan subscription downgrades your account to the Free Tier.
 
-You will be required to remove any projects, branches, or data that exceed the Free Tier limits of 1 project, 10 branches, and 3 GBs of data per branch. The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade request).
+You will be required to remove any projects, branches, or data that exceed [Free Tier limits](../introduction/technical-preview-free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade request).
 
 For cancellation of Enterprise or Platform Partnership plans, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans are handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
 
