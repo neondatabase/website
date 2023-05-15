@@ -71,15 +71,13 @@ To cancel a Pro plan subscription:
 
 1. Navigate to the **Billing** page in the Neon Console.
 1. Click **Request subscription cancellation** at the bottom of the page.
-1. Enter your cancellation request into the **Unsubscribe** dialog and click **Send**.
+1. Follow the instructions and click **Request downgrade**.
 
-The request is sent to the Neon Support team, who will respond to you with a request confirmation.
+Cancelling your Pro plan subscription downgrades your account to the [Free Tier](../introduction/technical-preview-free-tier).
 
-Canceling a subscription to the Pro plan downgrades your account to the Neon Free Tier. The Neon Support team will ask you to remove any projects or storage that exceed [Neon's Free Tier limits](../introduction/technical-preview-free-tier). The subscription cancellation goes into effect at the beginning of the next billing period (the start of the month following the cancellation request).
+You will be required to remove any projects, branches, or data that exceed the Free Tier limits of 1 project, 10 branches, and 3 GBs of data per branch. The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade request).
 
-If usage is not reduced in accordance with Neon's Free tier limits, Neon suspends projects and branches other than those it determines to be the most active. After 60 days, Neon reserves the right to remove any project or storage that exceeds Neon's Free Tier limits.
-
-Cancellation of Enterprise, Platform Partnership, or other customized plans are handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
+For cancellation of Enterprise or Platform Partnership plans, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans are handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
 
 ## Billing and usage metrics explained
 
