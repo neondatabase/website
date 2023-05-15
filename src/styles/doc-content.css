@@ -137,4 +137,22 @@
       }
     }
   }
+
+  .prose-chat {
+    > * {
+      &:first-child {
+        @apply mt-0;
+      }
+
+      &:last-child {
+        @apply mb-0;
+      }
+    }
+
+    @apply prose-doc;
+
+    :not(pre) > code {
+      @apply bg-gray-new-90 dark:bg-gray-new-15;
+    }
+  }
 }
