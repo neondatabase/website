@@ -26,7 +26,7 @@ const ReleaseNoteList = ({ items }) => (
         >
           <Aside slug={slug} isReleaseDateExist={isReleaseDateExist} />
 
-          <div className="relative pl-56 before:absolute before:top-3 before:left-[175px] before:h-[9px] before:w-[9px] before:rounded-full before:bg-primary-1 dark:before:bg-secondary-2 xl:max-w-[75%] xl:pl-0 xl:before:hidden sm:max-w-full">
+          <div className="relative w-full pl-56 before:absolute before:top-3 before:left-[175px] before:h-[9px] before:w-[9px] before:rounded-full before:bg-primary-1 dark:before:bg-secondary-2 xl:max-w-[75%] xl:pl-0 xl:before:hidden sm:max-w-full">
             <Content content={content} />
             <Link
               className="flex items-center font-medium text-secondary-8 hover:text-secondary-7 dark:text-primary-1"
