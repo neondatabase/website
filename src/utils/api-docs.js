@@ -4,10 +4,12 @@ const path = require('path');
 const { glob } = require('glob');
 const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
+const slugify = require('slugify');
 
 const { RELEASE_NOTES_DIR_PATH } = require('../constants/docs');
 
 const getExcerpt = require('./get-excerpt');
+const parseMDXHeading = require('./parse-mdx-heading');
 
 const DOCS_DIR_PATH = 'content/docs';
 
@@ -99,6 +101,26 @@ const getAllReleaseNotes = async () => {
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
+const getTableOfContents = (content) => {
+  const headings = content.match(/(#+)\s(.*)/g) || [];
+  const arr = headings.map((item) => item.replace(/(#+)\s/, '$1 '));
+
+  const toc = [];
+
+  arr.forEach((item) => {
+    const [depth, title] = parseMDXHeading(item);
+    if (title && depth && depth <= 2) {
+      toc.push({
+        title: title.replace(/[^a-zA-Z\s]/g, ''),
+        id: slugify(title, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
+        level: depth + 1,
+      });
+    }
+  });
+
+  return toc;
+};
+
 module.exports = {
   getPostSlugs,
   getPostBySlug,
@@ -108,6 +130,7 @@ module.exports = {
   getDocPreviousAndNextLinks,
   getAllReleaseNotes,
   getAllPosts,
+  getTableOfContents,
   DOCS_DIR_PATH,
   RELEASE_NOTES_DIR_PATH,
 };

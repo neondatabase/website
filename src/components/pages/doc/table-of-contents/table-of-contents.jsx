@@ -1,21 +1,12 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
 
 import TOCIcon from './images/toc.inline.svg';
 
 const linkClassName =
   'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white';
 
-const TableOfContents = ({ contentRef }) => {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    if (contentRef.current) {
-      setItems([...contentRef.current.querySelectorAll('h2, h3')]);
-    }
-  }, [contentRef]);
-
+const TableOfContents = ({ items }) => {
   const handleAnchorClick = (e, anchor) => {
     e.preventDefault();
     document.querySelector(anchor).scrollIntoView({
@@ -47,22 +38,22 @@ const TableOfContents = ({ contentRef }) => {
 
           return (
             <li key={index}>
-              {item.localName === 'h2' && (
+              {item.level === 2 && (
                 <a
                   className={linkClassName}
                   href={linkHref}
                   onClick={(e) => handleAnchorClick(e, linkHref)}
                 >
-                  {item.textContent}
+                  {item.title}
                 </a>
               )}
-              {item.localName === 'h3' && (
+              {item.level === 3 && (
                 <a
                   className={clsx(linkClassName, 'ml-3')}
                   href={linkHref}
                   onClick={(e) => handleAnchorClick(e, linkHref)}
                 >
-                  {item.textContent}
+                  {item.title}
                 </a>
               )}
             </li>
@@ -74,13 +65,13 @@ const TableOfContents = ({ contentRef }) => {
 };
 
 TableOfContents.propTypes = {
-  className: PropTypes.string,
-  contentRef: PropTypes.oneOfType([
-    PropTypes.func,
+  items: PropTypes.arrayOf(
     PropTypes.shape({
-      current: PropTypes.instanceOf(typeof Element === 'undefined' ? () => {} : Element),
-    }),
-  ]).isRequired,
+      id: PropTypes.string.isRequired,
+      level: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default TableOfContents;

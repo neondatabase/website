@@ -12,6 +12,7 @@ import {
   getFlatSidebar,
   getPostBySlug,
   getSidebar,
+  getTableOfContents,
 } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
 import serializeMdx from 'utils/serialize-mdx';
@@ -71,7 +72,6 @@ export default async function DocPost({ params }) {
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
   const navigationLinks = getDocPreviousAndNextLinks(currentSlug, flatSidebar);
-
   const fileOriginPath = isReleaseNotesIndex
     ? process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH
     : `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;
@@ -80,6 +80,7 @@ export default async function DocPost({ params }) {
 
   const { data, content } = getPostBySlug(currentSlug, DOCS_DIR_PATH);
   const mdxSource = await serializeMdx(content);
+  const tableOfContents = getTableOfContents(content);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -107,6 +108,7 @@ export default async function DocPost({ params }) {
         currentSlug={currentSlug}
         fileOriginPath={fileOriginPath}
         releaseNotes={releaseNotesWithMdxSource}
+        tableOfContents={tableOfContents}
       />
     </>
   );

@@ -4,7 +4,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import AIIcon from './images/ai.inline.svg';
 import AttentionIcon from './images/attention.inline.svg';
@@ -54,7 +54,7 @@ const ChatWidget = ({ className = null }) => {
   const messagesEndRef = useRef(null);
 
   // determine what hotkey icon shoould we render
-  useLayoutEffect(() => {
+  useEffect(() => {
     const { userAgent } = window.navigator;
     setCommandKey(userAgent.indexOf('Mac') !== -1 ? COMMAND : CTRL);
   }, []);
