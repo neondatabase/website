@@ -1,13 +1,13 @@
 export default async function handler(req, res) {
-  const { messages } = req.body;
+  const { message } = req.body;
   try {
-    const response = await fetch('https://chatbot-two-khaki.vercel.app/api/messages/completion', {
+    const response = await fetch(process.env.AI_DOCS_CHAT_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        messages,
+        message,
       }),
     });
 

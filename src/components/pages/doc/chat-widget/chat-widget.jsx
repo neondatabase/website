@@ -6,6 +6,8 @@ import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import useControlKey from 'hooks/use-control-key';
+
 import AIIcon from './images/ai.inline.svg';
 import AttentionIcon from './images/attention.inline.svg';
 import CloseIcon from './images/close.inline.svg';
@@ -19,9 +21,6 @@ const items = [
   'How to create a project?',
   'How to get started with the Neon API?',
 ];
-
-const COMMAND = '⌘';
-const CTRL = 'Ctrl';
 
 const animationVariants = {
   initial: {
@@ -44,44 +43,42 @@ const animationVariants = {
   },
 };
 
+const handleKeyDown = (cb) => (e) => {
+  if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+    cb(true);
+  }
+};
+
 const ChatWidget = ({ className = null }) => {
-  const [commandKey, setCommandKey] = useState(COMMAND);
-  const [isOpen, setIsOpen] = useState(false);
+  // state
   const [inputText, setInputText] = useState('');
-  const [error, setError] = useState('');
   const [messages, setMessages] = useState([]);
+  const [error, setError] = useState('');
+  // aux flags
+  const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  // aux ref
   const messagesEndRef = useRef(null);
 
-  // determine what hotkey icon shoould we render
-  useEffect(() => {
-    const { userAgent } = window.navigator;
-    setCommandKey(userAgent.indexOf('Mac') !== -1 ? COMMAND : CTRL);
-  }, []);
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
-      setIsOpen(true);
-    }
-  };
+  const [commandKey] = useControlKey();
 
   // attach event listeners
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown(setIsOpen));
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', handleKeyDown(setIsOpen));
     };
   }, []);
 
   const handleInputChange = (e) => setInputText(e.target.value);
 
   const handleExampleClick = (e) => {
-    setMessages([...messages, { role: 'user', content: e.target.textContent }]);
+    setMessages([{ role: 'user', content: e.target.textContent }]);
   };
 
   const handleSubmit = async (e) => {
     e?.preventDefault();
-    setMessages([...messages, { role: 'user', content: inputText }]);
+    setMessages((prevMessages) => prevMessages.concat({ role: 'user', content: inputText }));
     setInputText('');
   };
 
@@ -94,18 +91,19 @@ const ChatWidget = ({ className = null }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          messages,
+          message: messages[messages.length - 1],
         }),
       });
 
-      // @TODO: the endpoints are inconsistent, fix it
       if (response.ok) {
         const data = await response.json();
+        console.log({ data });
+        setMessages((prevMessages) => prevMessages.concat({ role: 'assistant', content: data }));
         // Process the response data here
-        const msg = JSON.parse(data)?.completion?.choices?.[0]?.message;
-        if (msg) {
-          setMessages([...messages, { role: msg.role, content: msg.content }]);
-        }
+        // const msg = JSON.parse(data)?.completion?.choices?.[0]?.message;
+        // if (msg) {
+        //   setMessages([...messages, { role: msg.role, content: msg.content }]);
+        // }
       } else {
         // Handle non-OK response status
         throw new Error('Something went wrong. Please, reopen and try again!');
@@ -113,7 +111,7 @@ const ChatWidget = ({ className = null }) => {
     } catch (error) {
       // Handle network errors or exceptions
       console.error('Error:', error);
-      setError(error.message);
+      setError(error?.message ?? error);
     }
     setIsLoading(false);
   }, [messages]);
@@ -235,7 +233,7 @@ const ChatWidget = ({ className = null }) => {
 
             <LazyMotion features={domAnimation}>
               <AnimatePresence initial={false} mode="wait">
-                {messages.length > 0 ? (
+                {messages.length ? (
                   <m.div
                     className="mt-6 flex max-h-[400px] flex-col overflow-y-auto"
                     initial="initial"
