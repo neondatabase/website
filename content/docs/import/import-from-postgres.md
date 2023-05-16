@@ -7,63 +7,103 @@ redirectFrom:
 
 This topic describes how to import an existing PostgreSQL database to Neon.
 
-- [Using pg_dump with psql]
-- [Using pg_dump with pg_restore]
-- [Importing data from another Neon project]
+- [Use pg_dump with psql](#use-pg_dump-with-psql)
+- [Use pg_dump with pg_restore](#use-pg_dump-with-pg_restore)
+- [Import a database from another Neon project](#import-a-database-from-another-neon-project)
 
-## Using pg_dump with psql
+## Use pg_dump with psql
 
-This topic shows how to use the `pg_dump` utility with `psql` to dump data from an existing PostgreSQL instance and import it into Neon.
+This section describes how to use the `pg_dump` utility with `psql` to dump data from an existing PostgreSQL database and import it into your Neon database.
 
-This example uses the following command:
+This example uses the following command, which you can from a terminal or command window where you have access to the `pg_dump` and `psql` utilities.
 
 ```bash
 pg_dump <connection-string> | psql <connection-string>
 ```
 
-The format for a PostgreSQL connection string is:
+The first connection string is for your existing PostgreSQL database. The second is for your Neon database.
+
+A PostgreSQL connection string has the following format:
 
 ```bash
 postgres://<user>:<password>@<hostname>:<port>/<dbname>
 ```
 
+You can obtain the connection string for your Neon database from the Neon **Dashboard**, under **Connection Details**. It will look something like this:
+
+```bash
+postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+```
+
 where:
 
-- `<user>` is your PostgreSQL user.
-- `<password>` is your PostgreSQL user's password.
-- `<hostname>` is the hostname of the PostgreSQL instance.
-- `<port>` is the port number of the PostgreSQL instance. The default port number is `5432`.
-- `<dbname>` is the name of the database.
+- `<user>` is the PostgreSQL role.
+- `<password>` is the role's password.
+- `ep-polished-water-579720.us-east-2.aws.neon.tech` is the hostname of the Neon PostgreSQL instance. Your hostname will differ.
+- `5432` is the port number of the PostgreSQL instance. Neon uses the default PostgreSQL port number, `5432`.
+- `neondb` is the name of the default Neon database. You can import data into this database or create your own database. For instructions, see [Create a database](../docs/manage/databases#create-a-database).
 
-A Neon connection string has the same format, where:
-
-- `<user>` is the Neon database role.
-- `<password>` is the database role's password.
-- `<hostname>` is the hostname of the Neon compute endpoint, which can be found under **Connection Details** on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console.
-- `<port>` is the Neon port number. The default port number is `5432`.
-- `<dbname>` is the database you are connecting to. The default Neon database is `neondb`.
-
-You can obtain a Neon connection string from the Neon **Dashboard**, under **Connection Details**.
-
-The command for importing a database from a PostgreSQL instance to Neon will appear similar to the following:
+After you add the connection strings from your existing PostgreSQL database and your Neon database, your command will appear similar to the following:
 
 ```bash
-pg_dump postgres://mypguser:a1B2c3D4e5F6@<hostname>:5432/mydb | psql postgres://myneonrole:a1B2c3D4e5F6@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+pg_dump postgres://<user>:<password>@<hostname>:5432/<dbname> | psql postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/<dbname>
 ```
 
-The command for importing a database from one Neon project to another uses two Neon connection strings:
-
-```bash
-pg_dump postgres://myneonrole:a1B2c3D4e5F6@ep-dawn-union-749234.us-east-2.aws.neon.tech:5432/neondb | psql postgres://myneonrole:a1B2c3D4e5F6@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
-```
+Run the command to import your data.
 
 If you have multiple databases to import, each database must be imported separately.
 
-## Using pg_dump with pg_restore
+## Use pg_dump with pg_restore
 
-## Importing data from another Neon project
+This section describes how to use the `pg_dump` utility with `pg_restore` to dump data from an existing PostgreSQL database and import it into your Neon database.
 
-This section describes how to import a database from one Neon project to another. For example, you can use the instructions to migrate a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15, or from a Neon project created in one region to another.
+1. Start by retrieving the connection details for the existing PostgreSQL database and your Neon database.
+
+  You can obtain the connection string for your Neon database from the Neon **Dashboard**, under **Connection Details**. It will look something like this:
+
+  ```bash
+  postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+  ```
+
+2. Dump the database from your existing PostgreSQL instance. You can use a `pg_dump` command similar to the following:
+
+  ```bash
+  pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.sql --format=p
+  ```
+
+The `pg_dump` command provides a number of options that you can use to modify or customize your database dump. For example,
+
+3. Load the database dump into Neon using `pg_restore`. For example:
+
+  ```bash
+  pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc -j 2 employees.sql.gz -c -v
+  ```
+
+  As with `pg_dump`, the `pg_restore` command provides a number of options that you can use to modify or customize your database dump. For example,
+
+## Import a database from another Neon project
+
+This section describes how to import a database from another Neon project. For example, you can use these instructions to move a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15, or from a Neon project created in one region to a project in created in a different region.
+
+<Admonition type="note">
+The Neon Free Tier provides a single Neon project. If you need to move your data to a new Neon project created in a different region or with a different PostgreSQL version, dump your database first, delete your Neon project, create a new Neon project with the desired region or PostgreSQL version, and import your data into the new project. For the dump and restore procedure, refer to [Use pg_dump with pg_restore](#use-pg_dump-with-pg_restore).
+</Admonition>
+
+1. Start by retrieving the connection details for your Neon databases.
+
+  You can obtain the connection string for your Neon databases from the Neon **Dashboard**, under **Connection Details**. The connection strings will look something like this:
+
+  ```bash
+  postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/<dbname>
+  ```
+
+2. Prepare your dump and import command. It will look something like this:
+
+```bash
+pg_dump postgres://myneonrole:a1B2c3D4e5F6@ep-dawn-union-749234.us-east-2.aws.neon.tech:5432/<dbname> | psql postgres://myneonrole:a1B2c3D4e5F6@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/<dbname>
+```
+
+3. Run the dump and import command.
 
 ## Data import notes
 
