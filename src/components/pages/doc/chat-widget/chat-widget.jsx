@@ -50,9 +50,9 @@ const handleKeyDown = (cb) => (e) => {
   }
 };
 
-const ChatWidget = ({ className = null }) => {
+const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) => {
   // state
-  const [isMounted, setIsMounted] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
   const [inputText, setInputText] = useState('');
   // aux flags
   const [isOpen, setIsOpen] = useState(false);
@@ -60,10 +60,14 @@ const ChatWidget = ({ className = null }) => {
   const messagesEndRef = useRef(null);
 
   const [commandKey] = useControlKey();
-  const { messages, setMessages, isLoading, error, setError } = useDocsAIChatStream(isMounted);
+  const { messages, setMessages, isLoading, error, setError } = useDocsAIChatStream({
+    isMounted,
+    signal: abortControllerSignal,
+  });
 
   // attach event listeners
   useEffect(() => {
+    setIsMounted(true);
     window.addEventListener('keydown', handleKeyDown(setIsOpen));
     return () => {
       window.removeEventListener('keydown', handleKeyDown(setIsOpen));
@@ -99,8 +103,9 @@ const ChatWidget = ({ className = null }) => {
   const handleOpenChange = (isOpen) => {
     if (!isOpen) {
       // reset the state completely
-      setMessages([]);
+      abortStream();
       setError(null);
+      setMessages([]);
     }
     setIsOpen(isOpen);
   };
@@ -207,6 +212,7 @@ const ChatWidget = ({ className = null }) => {
                   type="text"
                   placeholder="How can I help you?"
                   value={inputText}
+                  autoFocus
                   onKeyDown={handleInputKeyDown}
                   onChange={handleInputChange}
                 />
@@ -239,6 +245,8 @@ const ChatWidget = ({ className = null }) => {
 
 ChatWidget.propTypes = {
   className: PropTypes.string,
+  abortControllerSignal: PropTypes.object,
+  abortStream: PropTypes.func,
 };
 
 export default ChatWidget;

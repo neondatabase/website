@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { flushSync } from 'react-dom';
 
-const useDocsAIChatStream = (isMounted) => {
+const useDocsAIChatStream = ({ isMounted, signal }) => {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,11 +18,11 @@ const useDocsAIChatStream = (isMounted) => {
           body: JSON.stringify({
             message: messages[messages.length - 1],
           }),
+          signal,
         });
 
         if (response.ok) {
           const reader = response.body.getReader();
-
           while (isMounted) {
             const { done, value } = await reader.read();
             if (done) break;
@@ -34,26 +35,31 @@ const useDocsAIChatStream = (isMounted) => {
             } catch (e) {
               parsedChunk = chunk;
             }
-
+            console.log({ parsedChunk });
             // Update the messages state with the received data
-            setMessages((prevMessages) => {
-              const lastMsg = prevMessages[prevMessages.length - 1];
-              if (lastMsg.role === 'assistant') {
+            flushSync(() => {
+              setMessages((prevMessages) => {
+                // this prevents leak if user has
+                // bailed out early
+                if (!prevMessages.length) return prevMessages;
+                const { role, content } = prevMessages[prevMessages.length - 1];
+                if (role === 'assistant') {
+                  return [
+                    ...prevMessages.slice(0, -1),
+                    {
+                      role: 'assistant',
+                      content: content.concat(parsedChunk),
+                    },
+                  ];
+                }
                 return [
-                  ...prevMessages.slice(0, -1),
+                  ...prevMessages,
                   {
                     role: 'assistant',
-                    content: (lastMsg.content += parsedChunk),
+                    content: parsedChunk,
                   },
                 ];
-              }
-              return [
-                ...prevMessages,
-                {
-                  role: 'assistant',
-                  content: parsedChunk,
-                },
-              ];
+              });
             });
           }
         } else {
@@ -61,16 +67,18 @@ const useDocsAIChatStream = (isMounted) => {
         }
       } catch (error) {
         console.error(error);
+        if (error.name === 'AbortError') return;
         setError(error?.message || error || 'Something went wrong. Please try again!');
       } finally {
         setIsLoading(false);
       }
     };
+
     if (messages.length && messages[messages.length - 1].role === 'user') {
       setMessages((prevMessages) => [...prevMessages, { role: 'assistant', content: '' }]);
       fetchData();
     }
-  }, [messages, isMounted]);
+  }, [messages, isMounted, signal]);
 
   return { messages, setMessages, error, setError, isLoading };
 };

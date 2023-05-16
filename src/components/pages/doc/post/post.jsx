@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import DocFooter from 'components/pages/doc/doc-footer';
@@ -47,7 +47,14 @@ const Post = ({
   fileOriginPath,
   tableOfContents,
 }) => {
+  const [controller, setController] = useState(() => new AbortController());
   const contentRef = useRef(null);
+
+  const handleAbortSignal = () => {
+    controller.abort();
+    // reset so that fetch function is unblocked
+    setController(new AbortController());
+  };
 
   return (
     <>
@@ -86,6 +93,8 @@ const Post = ({
           {enableTableOfContents && <TableOfContents items={tableOfContents} />}
           <ChatWidget
             className={clsx({ 'mt-32': enableTableOfContents && tableOfContents?.length > 0 })}
+            abortControllerSignal={controller.signal}
+            abortStream={handleAbortSignal}
           />
         </nav>
       </div>
