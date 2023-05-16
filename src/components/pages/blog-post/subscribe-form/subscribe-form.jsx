@@ -94,7 +94,7 @@ const SubscribeForm = () => {
         <form className="relative w-full max-w-[518px] xl:max-w-[456px]" onSubmit={handleSubmit}>
           <div className="relative z-20">
             <input
-              className="h-14 w-full appearance-none rounded-[50px] border border-green bg-black-new pl-7 pr-36 placeholder:text-white/60"
+              className="h-14 w-full appearance-none rounded-[50px] border border-green bg-black-new pl-7 pr-36 placeholder:text-white/60 focus:outline-none"
               type="email"
               name="email"
               placeholder="Your email address..."
