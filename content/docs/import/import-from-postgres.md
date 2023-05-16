@@ -11,10 +11,11 @@ This topic describes how to import an existing PostgreSQL database to Neon.
 - [Using pg_dump with pg_restore]
 - [Importing data from another Neon project]
 
-
 ## Using pg_dump with psql
 
-PostgreSQL provides several import methods. This topic shows how to use the `pg_dump` utility with connection strings and `psql`.
+This topic shows how to use the `pg_dump` utility with `psql` to dump data from an existing PostgreSQL instance and import it into Neon.
+
+This example uses the following command:
 
 ```bash
 pg_dump <connection-string> | psql <connection-string>
