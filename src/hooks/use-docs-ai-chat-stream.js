@@ -6,9 +6,8 @@ const useDocsAIChatStream = (isMounted) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const response = await fetch('/api/open-ai', {
           method: 'POST',
@@ -63,10 +62,12 @@ const useDocsAIChatStream = (isMounted) => {
       } catch (error) {
         console.error(error);
         setError(error?.message || error || 'Something went wrong. Please try again!');
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
     if (messages.length && messages[messages.length - 1].role === 'user') {
+      setMessages((prevMessages) => [...prevMessages, { role: 'assistant', content: '' }]);
       fetchData();
     }
   }, [messages, isMounted]);

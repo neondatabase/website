@@ -4,7 +4,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import useControlKey from 'hooks/use-control-key';
 import useDocsAIChatStream from 'hooks/use-docs-ai-chat-stream';
@@ -77,11 +77,18 @@ const ChatWidget = ({ className = null }) => {
     setMessages([{ role: 'user', content: e.target.textContent }]);
   };
 
-  const handleSubmit = async (e) => {
-    e?.preventDefault();
-    setMessages((prevMessages) => prevMessages.concat({ role: 'user', content: inputText }));
-    setInputText('');
-  };
+  const handleSubmit = useCallback(
+    async (e) => {
+      e?.preventDefault();
+      // do not let user submit another
+      // query while the previous one is getting processed
+      if (!isLoading) {
+        setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
+        setInputText('');
+      }
+    },
+    [isLoading, inputText, setMessages]
+  );
 
   const handleInputKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -91,6 +98,7 @@ const ChatWidget = ({ className = null }) => {
 
   const handleOpenChange = (isOpen) => {
     if (!isOpen) {
+      // reset the state completely
       setMessages([]);
       setError(null);
     }
@@ -98,6 +106,7 @@ const ChatWidget = ({ className = null }) => {
   };
 
   useEffect(() => {
+    // make sure chat is always scrolled to the bottom
     messagesEndRef?.current?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
@@ -150,16 +159,8 @@ const ChatWidget = ({ className = null }) => {
                     variants={animationVariants}
                   >
                     {messages.map((message, index) => (
-                      <Message message={message} key={index} />
+                      <Message {...message} key={index} />
                     ))}
-                    {isLoading && (
-                      <div className="flex items-center px-5 py-2.5">
-                        <span className="mr-3 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary-8/10 dark:bg-primary-1/10">
-                          <ExampleIcon className="text-secondary-8 dark:text-primary-1" />
-                        </span>
-                        <span className="h-4 w-1 animate-pulse bg-gray-new-50" />
-                      </div>
-                    )}
                     <div ref={messagesEndRef} />
                   </m.div>
                 ) : (
@@ -209,12 +210,14 @@ const ChatWidget = ({ className = null }) => {
                   onKeyDown={handleInputKeyDown}
                   onChange={handleInputChange}
                 />
-                <button
-                  className="absolute bottom-[30px] right-[30px] h-5 w-5 opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
-                  type="submit"
-                >
-                  <SendIcon className="text-gray-new-20 dark:text-gray-new-90" />
-                </button>
+                {!isLoading && (
+                  <button
+                    className="absolute bottom-[30px] right-[30px] h-5 w-5 opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
+                    type="submit"
+                  >
+                    <SendIcon className="text-gray-new-20 dark:text-gray-new-90" />
+                  </button>
+                )}
               </form>
             )}
 
