@@ -1,6 +1,8 @@
 @layer components {
   .prose-blog {
     @apply max-w-none leading-snug text-gray-new-90 lg:leading-tight;
+    @apply prose-headings:font-medium prose-headings:tracking-tighter;
+    @apply prose-h2:text-[36px] prose-h2:leading-tight sm:prose-h2:text-[32px] sm:prose-h2:leading-dense;
 
     a:not(.anchor) {
       @apply font-normal text-green no-underline transition-colors duration-200 ease-in-out sm:break-words;
@@ -104,13 +106,46 @@
       }
     }
 
-    blockquote {
-      @apply border-primary-1 font-normal not-italic;
+    .wp-block-quote {
+      @apply border-l-[3px] border-yellow pl-4 font-normal not-italic;
 
       p {
+        @apply my-0 text-lg;
+
         &::before,
         &::after {
           @apply hidden;
+        }
+      }
+
+      cite {
+        @apply mt-3.5 inline-flex font-normal not-italic leading-none tracking-[-0.02em] text-gray-new-70;
+
+        em {
+          @apply not-italic;
+        }
+      }
+    }
+
+    .wp-block-pullquote {
+      blockquote {
+        @apply relative border-l-[3px] border-green pl-9 before:absolute before:top-0 before:h-8 before:w-8 before:bg-[url('/images/blockquote.svg')] before:bg-[length:32px_32px] before:bg-no-repeat;
+      }
+
+      p {
+        @apply my-0 pt-11 text-2xl font-normal not-italic leading-snug;
+
+        &::before,
+        &::after {
+          @apply hidden;
+        }
+      }
+
+      cite {
+        @apply mt-3.5 inline-flex font-normal not-italic leading-none tracking-[-0.02em] text-gray-new-70;
+
+        em {
+          @apply not-italic;
         }
       }
     }

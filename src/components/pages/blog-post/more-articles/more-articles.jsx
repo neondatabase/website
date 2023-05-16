@@ -24,7 +24,10 @@ const MoreArticles = ({ className = null, posts }) => (
             <Link className="flex" to={`${LINKS.blog}${slug}`}>
               <span className="h-[196px] w-[380px] rounded-md bg-gray-new-80" />
             </Link>
-            <Link className="mt-4" to={`${LINKS.blog}${category.slug}`}>
+            <Link
+              className="mt-4 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green"
+              to={`${LINKS.blog}${category.slug}`}
+            >
               {category.name}
             </Link>
             <Link className="mt-2" to={`${LINKS.blog}${slug}`}>
