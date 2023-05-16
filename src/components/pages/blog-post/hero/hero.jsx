@@ -1,51 +1,38 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
-import BlogPostAuthors from 'components/shared/blog-post-author';
+import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 
-const Hero = ({ title, description, authors, date, readingTime, className = null }) => (
-  <>
-    <div className={clsx('safe-paddings', className)}>
-      <span className="t-base mb-3 hidden items-center leading-none text-gray-2 lg:flex">
-        <span>{date}</span>
-        <span className="relative ml-3 pl-4 before:absolute before:top-1/2 before:left-0 before:inline-flex before:h-1 before:w-1 before:-translate-y-1/2 before:rounded-full before:bg-gray-5">
-          {readingTime} min read
-        </span>
-      </span>
-      <h1 className="t-5xl font-medium leading-dense tracking-tighter">{title}</h1>
+const Hero = ({ title, description, date, category, className = null }) => (
+  <div className={className}>
+    <div className="flex items-center">
+      <Link
+        className="mr-3 rounded-[40px] bg-green/10 px-3.5 py-2 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-green"
+        to={`${LINKS.blog}${category.slug}`}
+      >
+        {category.name}
+      </Link>
+      <time
+        className="text-[13px] uppercase leading-none tracking-[0.02em] text-gray-new-80"
+        dateTime={date}
+      >
+        {date}
+      </time>
     </div>
-    <div className={clsx('safe-paddings', className)}>
-      <p className="t-2xl mt-6 text-gray-new-70 xl:mt-5 md:!text-lg">{description}</p>
-      <div className="mt-8 flex items-center justify-between border-b border-b-gray-7 pb-8 2xl:mt-7 2xl:pb-7 xl:mt-6 xl:pb-6 lg:hidden">
-        <div className="flex items-center space-x-8">
-          <BlogPostAuthors authors={authors} isBlogPost />
-        </div>
-        <span className="t-base flex flex-col items-end space-y-1.5 text-right leading-none text-gray-2">
-          <span>{date}</span>
-          <span>{readingTime} min read</span>
-        </span>
-      </div>
-    </div>
-  </>
+    <h1 className="t-5xl mt-3 font-medium leading-dense tracking-tighter">{title}</h1>
+    <p className="t-2xl mt-3 leading-snug text-gray-new-70 md:!text-lg">{description}</p>
+  </div>
 );
 
 Hero.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  authors: PropTypes.arrayOf(
-    PropTypes.shape({
-      author: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        postAuthor: PropTypes.shape({
-          image: PropTypes.shape({
-            mediaItemUrl: PropTypes.string.isRequired,
-          }).isRequired,
-        }),
-      }),
-    })
-  ).isRequired,
+
   date: PropTypes.string.isRequired,
-  readingTime: PropTypes.number.isRequired,
+  category: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+  }).isRequired,
   className: PropTypes.string,
 };
 

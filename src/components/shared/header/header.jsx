@@ -178,7 +178,7 @@ const Header = forwardRef(
 );
 
 Header.propTypes = {
-  theme: PropTypes.oneOf(['white', 'black', 'pricing']).isRequired,
+  theme: PropTypes.oneOf(['white', 'black', 'pricing', 'gray-8']).isRequired,
   withBottomBorder: PropTypes.bool,
   isMobileMenuOpen: PropTypes.bool,
   onBurgerClick: PropTypes.func.isRequired,

@@ -65,6 +65,8 @@ module.exports = {
         98: '#FAFAFA',
       },
       yellow: '#f0f075',
+      green: '#00e599',
+      blue: '#ade0eb',
       code: {
         'green-1': '#078345',
         'green-2': '#47D18C',
@@ -166,5 +168,9 @@ module.exports = {
       }),
     },
   },
-  plugins: [require('tailwindcss-safe-area'), require('@tailwindcss/typography')],
+  plugins: [
+    require('tailwindcss-safe-area'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/line-clamp'),
+  ],
 };

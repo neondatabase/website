@@ -11,17 +11,23 @@ import CopyIcon from './images/copy.inline.svg';
 
 const DEFAULT_LANGUAGE = 'bash';
 
-const CodeBlock = ({ className = null, children, showLineNumbers = false, ...otherProps }) => {
+const CodeBlock = ({
+  className = null,
+  language = null,
+  children,
+  showLineNumbers = false,
+  ...otherProps
+}) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const match = /language-(\w+)/.exec(className || '');
-  const language = match ? match[1] : DEFAULT_LANGUAGE;
+  const snippetLanguage = (match ? match[1] : language) || DEFAULT_LANGUAGE;
   const code = children?.trim();
 
   return (
     <div className={clsx('group relative', className)} {...otherProps}>
       <SyntaxHighlighter
-        language={language}
+        language={snippetLanguage}
         useInlineStyles={false}
         showLineNumbers={showLineNumbers}
         className="no-scrollbars"
@@ -42,6 +48,7 @@ const CodeBlock = ({ className = null, children, showLineNumbers = false, ...oth
 
 CodeBlock.propTypes = {
   className: PropTypes.string,
+  language: PropTypes.string,
   children: PropTypes.node.isRequired,
   showLineNumbers: PropTypes.bool,
 };

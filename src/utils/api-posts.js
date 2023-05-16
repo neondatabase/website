@@ -22,6 +22,12 @@ const getAllWpPosts = async () => {
     query AllPosts($first: Int!) {
       posts(first: $first) {
         nodes {
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
           slug
           title(format: RENDERED)
           date
@@ -58,6 +64,12 @@ const getWpPostBySlug = async (slug) => {
   const postBySlugQuery = gql`
     query PostBySlug($id: ID!) {
       post(id: $id, idType: URI) {
+        categories {
+          nodes {
+            name
+            slug
+          }
+        }
         slug
         date
         title(format: RENDERED)
@@ -83,11 +95,48 @@ const getWpPostBySlug = async (slug) => {
         }
         ...wpPostSeo
       }
+
+      posts(first: 4) {
+        nodes {
+          slug
+          title(format: RENDERED)
+          date
+          readingTime
+          pageBlogPost {
+            description
+            authors {
+              author {
+                ... on PostAuthor {
+                  title
+                  postAuthor {
+                    role
+                    url
+                    image {
+                      altText
+                      mediaItemUrl
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
     ${POST_SEO_FRAGMENT}
   `;
 
-  return graphQLClient.request(postBySlugQuery, { id: slug });
+  const data = await graphQLClient.request(postBySlugQuery, { id: slug });
+
+  const sortedPosts = data?.posts?.nodes
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .filter((post) => post.slug !== slug)
+    .slice(0, 3);
+
+  return {
+    post: data?.post,
+    relatedPosts: sortedPosts,
+  };
 };
 
 // Query that executes when user requests a preview on a CMS,
@@ -106,6 +155,12 @@ const getWpPreviewPostData = async (id, status) => {
     query = gql`
       query PostById($id: ID!) {
         post(id: $id, idType: DATABASE_ID) {
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
           slug
           date
           title(format: RENDERED)
@@ -145,6 +200,12 @@ const getWpPreviewPostData = async (id, status) => {
           revisions(first: 1, where: { orderby: { field: MODIFIED, order: DESC } }) {
             edges {
               post: node {
+                categories {
+                  nodes {
+                    name
+                    slug
+                  }
+                }
                 slug
                 date
                 title(format: RENDERED)

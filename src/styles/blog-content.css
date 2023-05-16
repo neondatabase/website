@@ -3,7 +3,11 @@
     @apply max-w-none text-gray-new-90;
 
     a:not(.anchor) {
-      @apply border-b-2 border-b-primary-1 no-underline transition-colors duration-200 ease-in-out hover:text-primary-1 sm:break-words;
+      @apply font-normal text-green no-underline transition-colors duration-200 ease-in-out sm:break-words;
+
+      code {
+        @apply text-green;
+      }
     }
 
     ul,
@@ -77,7 +81,7 @@
     :not(pre) > code {
       white-space: break-spaces !important;
 
-      @apply !max-w-full !break-words !rounded-sm bg-yellow/10 !px-1.5 !py-0.5 !font-mono !font-normal !text-yellow;
+      @apply !max-w-full !break-words !rounded-sm bg-yellow/10 !px-1.5 !py-0.5 !font-mono !font-normal text-yellow;
 
       &::before,
       &::after {

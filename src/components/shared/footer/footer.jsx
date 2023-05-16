@@ -87,7 +87,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
 Footer.propTypes = {
   isDocPage: PropTypes.bool,
   withTopBorder: PropTypes.bool,
-  theme: PropTypes.oneOf(['white', 'black', 'pricing']),
+  theme: PropTypes.oneOf(['white', 'black', 'pricing', 'gray-8']),
 };
 
 export default Footer;
