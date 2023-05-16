@@ -1,6 +1,6 @@
 @layer components {
   .prose-blog {
-    @apply max-w-none text-gray-new-90;
+    @apply max-w-none leading-snug text-gray-new-90 lg:leading-tight;
 
     a:not(.anchor) {
       @apply font-normal text-green no-underline transition-colors duration-200 ease-in-out sm:break-words;
@@ -59,11 +59,11 @@
       @apply w-full border-hidden md:min-w-[500px];
 
       th {
-        @apply border border-gray-6 bg-secondary-6 bg-opacity-30 p-3.5 md:px-2;
+        @apply border border-white border-opacity-[0.06] p-3.5 md:px-2;
       }
 
       td {
-        @apply border border-gray-6 p-3.5 md:px-2;
+        @apply border border-white border-opacity-[0.06] p-3.5 md:px-2;
       }
     }
 

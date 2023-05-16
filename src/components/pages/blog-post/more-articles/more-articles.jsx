@@ -11,7 +11,7 @@ const MoreArticles = ({ className = null, posts }) => (
       <span className="">More from Neon</span>
       <span className="ml-2 h-px grow bg-gray-new-20" />
     </h2>
-    <ul className="mt-6 grid grid-cols-3 gap-x-10">
+    <ul className="mt-6 grid grid-cols-3 gap-x-10 xl:gap-x-6">
       {posts.map(({ title, slug, date, categories, pageBlogPost: { authors } }) => {
         const category = categories.nodes[0];
         const author = authors[0]?.author;

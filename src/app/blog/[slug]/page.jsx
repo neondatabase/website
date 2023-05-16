@@ -53,9 +53,9 @@ const BlogPage = async ({ params }) => {
       isHeaderSticky
     >
       <div className="safe-paddings bg-gray-new-8">
-        <article className="mx-auto grid max-w-[1472px] grid-cols-12 gap-y-20 gap-x-10 pt-20 pb-40 xl:max-w-[936px] xl:pt-16 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6">
+        <article className="mx-auto grid max-w-[1472px] grid-cols-12 gap-y-20 gap-x-10 pt-20 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-16 xl:pb-32 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6">
           <Hero
-            className="col-start-4 col-end-10 md:col-span-full"
+            className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 md:col-span-full"
             title={title}
             date={formattedDate}
             category={categories.nodes[0]}
@@ -63,17 +63,17 @@ const BlogPage = async ({ params }) => {
           />
 
           <Content
-            className="prose-invert col-start-4 col-end-10 md:col-span-full sm:mt-4"
+            className="prose-invert col-start-4 col-end-10 row-start-2 xl:col-start-1 xl:col-end-9 md:col-span-full sm:mt-4"
             html={contentWithLazyBlocks}
           />
           <Aside
-            className="col-span-3 col-end-13 row-start-2"
+            className="col-span-3 col-end-13 row-start-2 xl:col-span-4"
             title={title}
             slug={shareUrl}
             authors={pageBlogPost.authors}
             posts={relatedPosts}
           />
-          <MoreArticles className="col-span-10 col-start-2" posts={relatedPosts} />
+          <MoreArticles className="col-span-10 col-start-2 xl:col-span-full" posts={relatedPosts} />
         </article>
 
         {/* <SocialShareBar className="hidden md:block" slug={shareUrl} title={title} /> */}

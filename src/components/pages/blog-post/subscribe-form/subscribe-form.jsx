@@ -81,8 +81,8 @@ const SubscribeForm = () => {
     }
   };
   return (
-    <section className="subscribe-form safe-paddings pt-[118px] pb-[125px]">
-      <div className="mx-auto flex max-w-[1166px] items-center justify-between">
+    <section className="subscribe-form safe-paddings overflow-hidden pt-[118px] pb-[125px]">
+      <div className="mx-auto flex max-w-[1166px] items-center justify-between 2xl:px-10 lg:px-8 md:px-4">
         <div>
           <h2 className="t-4xl leading-none tracking-tighter">
             Subscribe to <mark className="bg-transparent text-green">Neon’s News</mark>
@@ -91,7 +91,7 @@ const SubscribeForm = () => {
             Get insider access to Neon's latest news and events
           </p>
         </div>
-        <form className="relative w-full max-w-[518px]" onSubmit={handleSubmit}>
+        <form className="relative w-full max-w-[518px] xl:max-w-[456px]" onSubmit={handleSubmit}>
           <div className="relative z-20">
             <input
               className="h-14 w-full appearance-none rounded-[50px] border border-green bg-black-new pl-7 pr-36 placeholder:text-white/60"
