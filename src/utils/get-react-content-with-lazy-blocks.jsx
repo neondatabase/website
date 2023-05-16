@@ -67,8 +67,8 @@ const sharedComponents = {
     return (
       <Image
         src={urlWithoutSize}
-        width={props.width || 800}
-        height={props.height || 500}
+        width={props.width || 975}
+        height={props.height || 512}
         quality={100}
         alt={props.alt || 'Post image'}
       />

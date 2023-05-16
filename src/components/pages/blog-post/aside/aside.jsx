@@ -8,11 +8,11 @@ import LINKS from 'constants/links';
 import SocialShare from '../social-share';
 
 const Aside = ({ className, title, slug, authors, posts }) => (
-  <aside className={clsx('aside ml-auto max-w-[252px]', className)}>
-    <h3 className="text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue">
+  <aside className={clsx('aside ml-auto max-w-[252px] lg:ml-0 lg:max-w-full', className)}>
+    <h3 className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue lg:hidden">
       Posted by
     </h3>
-    <div className="mt-5 flex flex-col space-y-4">
+    <div className="flex flex-col space-y-4">
       {authors.map(({ author }) => (
         <div key={author.title}>
           <div className="flex items-center space-x-2.5">
@@ -33,10 +33,10 @@ const Aside = ({ className, title, slug, authors, posts }) => (
         </div>
       ))}
     </div>
-    <h3 className="mt-16 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue">
+    <h3 className="mt-16 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue lg:hidden">
       Related articles
     </h3>
-    <ul className="mt-5 flex flex-col space-y-6">
+    <ul className="mt-5 flex flex-col space-y-6 lg:hidden">
       {posts.map(({ title, slug, pageBlogPost: { authors } }) => (
         <li key={slug}>
           <Link className="flex items-center space-x-3" to={`${LINKS.blog}${slug}`}>
@@ -51,7 +51,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
         </li>
       ))}
     </ul>
-    <SocialShare className="mt-16" title={title} slug={slug} withTopBorder />
+    <SocialShare className="mt-16 lg:hidden" title={title} slug={slug} withTopBorder />
   </aside>
 );
 

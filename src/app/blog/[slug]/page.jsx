@@ -7,6 +7,7 @@ import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 // import SocialShareBar from 'components/pages/blog-post/social-share-bar';
 import MoreArticles from 'components/pages/blog-post/more-articles';
+import SocialShare from 'components/pages/blog-post/social-share';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import CodeBlock from 'components/shared/code-block';
 import Layout from 'components/shared/layout';
@@ -53,9 +54,9 @@ const BlogPage = async ({ params }) => {
       isHeaderSticky
     >
       <div className="safe-paddings bg-gray-new-8">
-        <article className="mx-auto grid max-w-[1472px] grid-cols-12 gap-y-20 gap-x-10 pt-20 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-16 xl:pb-32 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6">
+        <article className="mx-auto grid max-w-[1472px] grid-cols-12 gap-y-20 gap-x-10 pt-20 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-16 xl:pb-32 lg:max-w-none lg:gap-y-0 lg:px-6 lg:pb-28 lg:pt-14 md:gap-x-0 md:px-4 md:pt-6">
           <Hero
-            className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 md:col-span-full"
+            className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
             title={title}
             date={formattedDate}
             category={categories.nodes[0]}
@@ -63,20 +64,23 @@ const BlogPage = async ({ params }) => {
           />
 
           <Content
-            className="prose-invert col-start-4 col-end-10 row-start-2 xl:col-start-1 xl:col-end-9 md:col-span-full sm:mt-4"
+            className="prose-invert col-start-4 col-end-10 row-start-2 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3 lg:mt-14 md:mt-12"
             html={contentWithLazyBlocks}
           />
           <Aside
-            className="col-span-3 col-end-13 row-start-2 xl:col-span-4"
+            className="col-span-3 col-end-13 row-start-2 xl:col-span-4 lg:col-span-full lg:mt-5"
             title={title}
             slug={shareUrl}
             authors={pageBlogPost.authors}
             posts={relatedPosts}
           />
-          <MoreArticles className="col-span-10 col-start-2 xl:col-span-full" posts={relatedPosts} />
-        </article>
+          <SocialShare className="hidden lg:mt-14 lg:flex md:mt-12" title={title} slug={shareUrl} />
 
-        {/* <SocialShareBar className="hidden md:block" slug={shareUrl} title={title} /> */}
+          <MoreArticles
+            className="col-span-10 col-start-2 xl:col-span-full lg:mt-16 md:mt-14"
+            posts={relatedPosts}
+          />
+        </article>
       </div>
       <SubscribeForm />
       {isPreviewMode && (

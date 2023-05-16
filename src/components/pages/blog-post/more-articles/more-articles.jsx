@@ -11,7 +11,7 @@ const MoreArticles = ({ className = null, posts }) => (
       <span className="">More from Neon</span>
       <span className="ml-2 h-px grow bg-gray-new-20" />
     </h2>
-    <ul className="mt-6 grid grid-cols-3 gap-x-10 xl:gap-x-6">
+    <ul className="mt-6 grid grid-cols-3 gap-x-10 xl:gap-x-6 md:grid-cols-1 md:gap-y-[22px]">
       {posts.map(({ title, slug, date, categories, pageBlogPost: { authors } }) => {
         const category = categories.nodes[0];
         const author = authors[0]?.author;
@@ -22,7 +22,14 @@ const MoreArticles = ({ className = null, posts }) => (
         return (
           <li className="flex flex-col" key={slug}>
             <Link className="flex" to={`${LINKS.blog}${slug}`}>
-              <span className="h-[196px] w-[380px] rounded-md bg-gray-new-80" />
+              <img
+                className="w-full rounded-md bg-gray-new-60"
+                src={`data:image/svg+xml;charset=utf-8,%3Csvg width='${380}' height='${196}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+                alt=""
+                width={380}
+                height={196}
+                aria-hidden
+              />
             </Link>
             <Link
               className="mt-4 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green"
@@ -33,22 +40,25 @@ const MoreArticles = ({ className = null, posts }) => (
             <Link className="mt-2" to={`${LINKS.blog}${slug}`}>
               <h3 className="text-lg font-medium leading-tight tracking-[-0.02em]">{title}</h3>
               <div className="mt-2.5 flex items-center">
-                <div className="flex items-center">
-                  <Image
-                    className="rounded-full"
-                    src={author.postAuthor?.image?.mediaItemUrl}
-                    alt={author?.title}
-                    width={28}
-                    height={28}
-                  />
-                  <span className="ml-2 text-sm text-gray-new-90">{author?.title}</span>
+                <Image
+                  className="rounded-full"
+                  src={author.postAuthor?.image?.mediaItemUrl}
+                  alt={author?.title}
+                  width={28}
+                  height={28}
+                />
+                <div className="ml-2 flex items-center lg:flex-col lg:items-start">
+                  <span className="text-sm tracking-[-0.02em] text-gray-new-90">
+                    {author?.title}
+                  </span>
+
+                  <span
+                    className="relative block pl-5 text-[13px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-2.5 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30 lg:mt-1 lg:pl-0 lg:before:hidden"
+                    dateTime={date}
+                  >
+                    {formattedDate}
+                  </span>
                 </div>
-                <span
-                  className="relative block pl-5 text-[13px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-2.5 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30"
-                  dateTime={date}
-                >
-                  {formattedDate}
-                </span>
               </div>
             </Link>
           </li>

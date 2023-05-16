@@ -25,15 +25,19 @@ const links = [
 
 const SocialShare = ({ className = null, slug, title, withTopBorder = false }) => (
   <div
-    className={clsx('safe-paddings flex justify-between', className, {
-      'border-t border-white border-opacity-[0.06] pt-6': withTopBorder,
-    })}
+    className={clsx(
+      'safe-paddings flex items-center justify-between lg:justify-start lg:space-x-4',
+      className,
+      {
+        'border-t border-white border-opacity-[0.06] pt-6': withTopBorder,
+      }
+    )}
   >
     <span className="leading-none text-gray-new-80">Share:</span>
-    <div className="flex space-x-5">
+    <div className="flex space-x-5 lg:space-x-4">
       {links.map(({ icon: Icon, tag: Tag }, index) => (
         <Tag url={slug} title={title} key={index}>
-          <Icon className="h-4 w-4" />
+          <Icon className="h-4 w-4 lg:h-6 lg:w-6" />
         </Tag>
       ))}
     </div>
