@@ -4,9 +4,10 @@ import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import useControlKey from 'hooks/use-control-key';
+import useDocsAIChatStream from 'hooks/use-docs-ai-chat-stream';
 
 import AIIcon from './images/ai.inline.svg';
 import AttentionIcon from './images/attention.inline.svg';
@@ -51,22 +52,22 @@ const handleKeyDown = (cb) => (e) => {
 
 const ChatWidget = ({ className = null }) => {
   // state
+  const [isMounted, setIsMounted] = useState(true);
   const [inputText, setInputText] = useState('');
-  const [messages, setMessages] = useState([]);
-  const [error, setError] = useState('');
   // aux flags
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   // aux ref
   const messagesEndRef = useRef(null);
 
   const [commandKey] = useControlKey();
+  const { messages, setMessages, isLoading, error, setError } = useDocsAIChatStream(isMounted);
 
   // attach event listeners
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown(setIsOpen));
     return () => {
       window.removeEventListener('keydown', handleKeyDown(setIsOpen));
+      setIsMounted(false);
     };
   }, []);
 
@@ -82,96 +83,6 @@ const ChatWidget = ({ className = null }) => {
     setInputText('');
   };
 
-  const fetchCompletionStream = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch('/api/open-ai', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: messages[messages.length - 1],
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log({ data });
-        setMessages((prevMessages) => prevMessages.concat({ role: 'assistant', content: data }));
-        // Process the response data here
-        // const msg = JSON.parse(data)?.completion?.choices?.[0]?.message;
-        // if (msg) {
-        //   setMessages([...messages, { role: msg.role, content: msg.content }]);
-        // }
-      } else {
-        // Handle non-OK response status
-        throw new Error('Something went wrong. Please, reopen and try again!');
-      }
-    } catch (error) {
-      // Handle network errors or exceptions
-      console.error('Error:', error);
-      setError(error?.message ?? error);
-    }
-    setIsLoading(false);
-  }, [messages]);
-
-  // @TODO: handle onde the endpoint is determined
-  // const _fetchCompletionStream = useCallback(async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     const response = await fetch('/api/open-ai', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         messages: [...messages, { content: inputText, role: 'user' }],
-  //       }),
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error(response.statusText);
-  //     }
-
-  //     console.log('on client', response.completion);
-
-  //     const data = response.body;
-  //     if (!data) {
-  //       return;
-  //     }
-
-  //     const reader = data.getReader();
-  //     console.log({ reader });
-  //     const decoder = new TextDecoder();
-  //     let done = false;
-
-  //     let completion = '';
-  //     const msg = Array.from(messages);
-  //     while (!done) {
-  //       const { value, done: doneReading } = await reader.read();
-  //       console.log({ value, doneReading });
-  //       done = doneReading;
-  //       const chunkValue = decoder.decode(value);
-  //       console.log({ chunkValue });
-
-  //       completion += chunkValue;
-  //       setMessages([
-  //         ...msg,
-  //         {
-  //           role: 'assistant',
-  //           content: completion,
-  //           sender: false,
-  //         },
-  //       ]);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-
-  //   setIsLoading(false);
-  // }, [inputText, messages]);
-
   const handleInputKeyDown = (e) => {
     if (e.key === 'Enter') {
       handleSubmit(e);
@@ -181,20 +92,17 @@ const ChatWidget = ({ className = null }) => {
   const handleOpenChange = (isOpen) => {
     if (!isOpen) {
       setMessages([]);
-      setError('');
+      setError(null);
     }
     setIsOpen(isOpen);
   };
 
   useEffect(() => {
-    if (messages[messages.length - 1]?.role === 'user') {
-      fetchCompletionStream();
-    }
     messagesEndRef?.current?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
-  }, [fetchCompletionStream, messages]);
+  }, [messages]);
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={handleOpenChange}>
