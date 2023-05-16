@@ -5,7 +5,14 @@ redirectFrom:
   - /docs/how-to-guides/import-an-existing-database
 ---
 
-This topic describes how to import an existing PostgreSQL database to Neon. The instructions can also be used to migrate a database from one Neon project to another. For example, you can use the instructions to migrate a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15.
+This topic describes how to import an existing PostgreSQL database to Neon.
+
+- [Using pg_dump with psql]
+- [Using pg_dump with pg_restore]
+- [Importing data from another Neon project]
+
+
+## Using pg_dump with psql
 
 PostgreSQL provides several import methods. This topic shows how to use the `pg_dump` utility with connection strings and `psql`.
 
@@ -50,6 +57,12 @@ pg_dump postgres://myneonrole:a1B2c3D4e5F6@ep-dawn-union-749234.us-east-2.aws.ne
 ```
 
 If you have multiple databases to import, each database must be imported separately.
+
+## Using pg_dump with pg_restore
+
+## Importing data from another Neon project
+
+This section describes how to import a database from one Neon project to another. For example, you can use the instructions to migrate a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15, or from a Neon project created in one region to another.
 
 ## Data import notes
 
