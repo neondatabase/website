@@ -13,9 +13,9 @@ This topic describes how to import an existing PostgreSQL database to Neon.
 
 ## Use pg_dump with psql
 
-This section describes how to use the `pg_dump` utility with `psql` to dump data from an existing PostgreSQL database and import it into your Neon database.
+This section describes how to use the `pg_dump` utility to dump data from an existing PostgreSQL database and import it into Neon using `psql`.
 
-This example uses the following command, which you can from a terminal or command window where you have access to the `pg_dump` and `psql` utilities.
+The example below uses the following command, which you can run from a terminal or command window where you have access to the `pg_dump` and `psql` utilities.
 
 ```bash
 pg_dump <connection-string> | psql <connection-string>
@@ -29,7 +29,7 @@ A PostgreSQL connection string has the following format:
 postgres://<user>:<password>@<hostname>:<port>/<dbname>
 ```
 
-You can obtain the connection string for your Neon database from the Neon **Dashboard**, under **Connection Details**. It will look something like this:
+You must supply the connection string for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The connection string will look something like this:
 
 ```bash
 postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
@@ -40,10 +40,10 @@ where:
 - `<user>` is the PostgreSQL role.
 - `<password>` is the role's password.
 - `ep-polished-water-579720.us-east-2.aws.neon.tech` is the hostname of the Neon PostgreSQL instance. Your hostname will differ.
-- `5432` is the port number of the PostgreSQL instance. Neon uses the default PostgreSQL port number, `5432`.
-- `neondb` is the name of the default Neon database. You can import data into this database or create your own database. For instructions, see [Create a database](../docs/manage/databases#create-a-database).
+- `5432` is the port number of the PostgreSQL instance. Neon uses this default PostgreSQL port number.
+- `neondb` is the name of the default Neon database. You can use this database or create your own. For instructions, see [Create a database](../docs/manage/databases#create-a-database).
 
-After you add the connection strings from your existing PostgreSQL database and your Neon database, your command will appear similar to the following:
+After you input the connection strings into the command, it will appear similar to the following:
 
 ```bash
 pg_dump postgres://<user>:<password>@<hostname>:5432/<dbname> | psql postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/<dbname>
@@ -55,11 +55,11 @@ If you have multiple databases to import, each database must be imported separat
 
 ## Use pg_dump with pg_restore
 
-This section describes how to use the `pg_dump` utility with `pg_restore` to dump data from an existing PostgreSQL database and import it into your Neon database.
+This section describes how to use the `pg_dump` utility to dump data from an existing PostgreSQL database and import it into your Neon database using `pg_restore` .
 
 1. Start by retrieving the connection details for the existing PostgreSQL database and your Neon database.
 
-  You can obtain the connection string for your Neon database from the Neon **Dashboard**, under **Connection Details**. It will look something like this:
+  You must supply the connection details for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The connection string will look something like this:
 
   ```bash
   postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
@@ -68,18 +68,22 @@ This section describes how to use the `pg_dump` utility with `pg_restore` to dum
 2. Dump the database from your existing PostgreSQL instance. You can use a `pg_dump` command similar to the following:
 
   ```bash
-  pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.sql --format=p
+  pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v
   ```
 
-The `pg_dump` command provides a number of options that you can use to modify or customize your database dump. For example,
+The `-Fc` option sends the output a custom-format archive suitable for input into `pg_restore`. The `-Z 6` option specifies a compression level of 6 (the default). The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump.
+
+The `pg_dump` command provides many other options you can use to modify your database dump. To learn more, refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation.
 
 3. Load the database dump into Neon using `pg_restore`. For example:
 
   ```bash
-  pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc -j 2 employees.sql.gz -c -v
+  pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc -j 4 employees.sql.gz -c -v
   ```
 
-  As with `pg_dump`, the `pg_restore` command provides a number of options that you can use to modify or customize your database dump. For example,
+  The `-Fc` option sends the output a custom-format archive suitable for input into `pg_restore`. The `-j 4` option specifies the number of concurrent jobs (sessions). The `-c` option tell the restore operation to run `clean`, meaning that it will drop database objects before recreating them. The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump.
+
+As with `pg_dump`, the `pg_restore` command provides many other options you can use to modify your database import. For example, the `--single-transaction` option forces the operation to run as a single transaction to ensure that either all the commands complete successfully, or no changes are applied. This option is not used above because it is not compatible with the `-j` option. To learn about other options, refer to the [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
 
 ## Import a database from another Neon project
 
