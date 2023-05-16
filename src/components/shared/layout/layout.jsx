@@ -106,8 +106,8 @@ const Layout = ({
 
 Layout.propTypes = {
   className: PropTypes.string,
-  headerTheme: PropTypes.oneOf(['white', 'black', 'pricing', 'gray-8']).isRequired,
-  footerTheme: PropTypes.oneOf(['white', 'black', 'pricing', 'gray-8']),
+  headerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
+  footerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']),
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
   isSignIn: PropTypes.bool,

@@ -39,7 +39,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
     <ul className="mt-5 flex flex-col space-y-6">
       {posts.map(({ title, slug, pageBlogPost: { authors } }) => (
         <li key={slug}>
-          <Link className="mt-5 flex items-center space-x-3" to={`${LINKS.blog}${slug}`}>
+          <Link className="flex items-center space-x-3" to={`${LINKS.blog}${slug}`}>
             <div className="tracking-[-0.02em]">
               <span className="font-medium leading-tight line-clamp-2">{title}</span>
               <span className="mt-1.5 text-sm leading-none text-gray-new-70">

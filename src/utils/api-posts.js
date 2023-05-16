@@ -98,6 +98,12 @@ const getWpPostBySlug = async (slug) => {
 
       posts(first: 4) {
         nodes {
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
           slug
           title(format: RENDERED)
           date

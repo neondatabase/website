@@ -13,6 +13,7 @@ const DEFAULT_LANGUAGE = 'bash';
 
 const CodeBlock = ({
   className = null,
+  theme = 'dark',
   language = null,
   children,
   showLineNumbers = false,
@@ -35,12 +36,21 @@ const CodeBlock = ({
         {code}
       </SyntaxHighlighter>
       <button
-        className="invisible absolute right-2 top-2 rounded border border-gray-6 bg-white p-1.5 text-gray-2 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-gray-7 group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-black dark:text-gray-8 lg:visible lg:opacity-100"
+        className={clsx(
+          'invisible absolute right-2 top-2 rounded border p-1.5 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-black dark:text-gray-8 lg:visible lg:opacity-100',
+          theme === 'dark'
+            ? 'border-transparent bg-gray-new-15 text-white'
+            : 'border-gray-6 bg-white text-gray-2 hover:bg-gray-7'
+        )}
         type="button"
         disabled={isCopied}
         onClick={() => handleCopy(code)}
       >
-        {isCopied ? <CheckIcon className="h-4 w-4" /> : <CopyIcon />}
+        {isCopied ? (
+          <CheckIcon className="h-4 w-4 text-current" />
+        ) : (
+          <CopyIcon className="text-current" />
+        )}
       </button>
     </div>
   );
@@ -48,6 +58,7 @@ const CodeBlock = ({
 
 CodeBlock.propTypes = {
   className: PropTypes.string,
+  theme: PropTypes.oneOf(['light', 'dark']),
   language: PropTypes.string,
   children: PropTypes.node.isRequired,
   showLineNumbers: PropTypes.bool,

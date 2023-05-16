@@ -40,18 +40,18 @@ const Header = forwardRef(
     },
     ref
   ) => {
-    const isThemeBlack = theme === 'black' || theme === 'pricing' || theme === 'gray-8';
+    const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
 
     return (
       <header
         className={clsx(
           'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-black lg:relative lg:h-14',
-          theme === 'gray-8' && 'bg-gray-new-8',
-          theme === 'black' && 'lg:bg-black',
-          theme === 'pricing' && 'lg:bg-black-new',
-          theme === 'white' && 'bg-white',
           isSticky && 'sticky top-0 z-50 md:relative',
-          withBottomBorder && 'border-b border-gray-7 dark:border-gray-2'
+          withBottomBorder && 'border-b border-gray-7 dark:border-gray-2',
+          { 'bg-gray-new-8': theme === 'gray-8' },
+          { 'lg:bg-black': theme === 'black' },
+          { 'lg:bg-black-new': theme === 'black-new' },
+          { 'bg-white': theme === 'white' }
         )}
         ref={ref}
       >
@@ -127,7 +127,7 @@ const Header = forwardRef(
             <Button
               className={clsx(
                 'relative py-[11px] pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden',
-                theme === 'pricing' && '!bg-black-new'
+                theme === 'black-new' && '!bg-black-new'
               )}
               to={LINKS.github}
               size="xs"
@@ -178,7 +178,7 @@ const Header = forwardRef(
 );
 
 Header.propTypes = {
-  theme: PropTypes.oneOf(['white', 'black', 'pricing', 'gray-8']).isRequired,
+  theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
   withBottomBorder: PropTypes.bool,
   isMobileMenuOpen: PropTypes.bool,
   onBurgerClick: PropTypes.func.isRequired,

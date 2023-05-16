@@ -6,6 +6,8 @@ import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 // import SocialShareBar from 'components/pages/blog-post/social-share-bar';
+import MoreArticles from 'components/pages/blog-post/more-articles';
+import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import CodeBlock from 'components/shared/code-block';
 import Layout from 'components/shared/layout';
 import { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData } from 'utils/api-posts';
@@ -43,8 +45,14 @@ const BlogPage = async ({ params }) => {
   );
 
   return (
-    <Layout headerTheme="gray-8" footerTheme="gray-8" footerWithTopBorder isHeaderSticky>
-      <div className="safe-paddings bg-gray-new-8 text-white">
+    <Layout
+      className="bg-black-new text-white"
+      headerTheme="gray-8"
+      footerTheme="black-new"
+      footerWithTopBorder
+      isHeaderSticky
+    >
+      <div className="safe-paddings bg-gray-new-8">
         <article className="mx-auto grid max-w-[1472px] grid-cols-12 gap-y-20 gap-x-10 pt-20 pb-40 xl:max-w-[936px] xl:pt-16 lg:max-w-none lg:px-6 lg:pt-12 md:gap-x-0 md:px-4 md:pt-6">
           <Hero
             className="col-start-4 col-end-10 md:col-span-full"
@@ -65,18 +73,20 @@ const BlogPage = async ({ params }) => {
             authors={pageBlogPost.authors}
             posts={relatedPosts}
           />
+          <MoreArticles className="col-span-10 col-start-2" posts={relatedPosts} />
         </article>
 
         {/* <SocialShareBar className="hidden md:block" slug={shareUrl} title={title} /> */}
-        {isPreviewMode && (
-          <a
-            href={`/api/exit-preview?slug=${previewData.slug}&pageType=blog`}
-            className="t-base fixed left-5 bottom-5 inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-primary-1 px-[26px] py-[11px] text-center font-bold !leading-none text-black outline-none transition-colors duration-200 hover:bg-[#00e5bf]"
-          >
-            Preview Mode
-          </a>
-        )}
       </div>
+      <SubscribeForm />
+      {isPreviewMode && (
+        <a
+          href={`/api/exit-preview?slug=${previewData.slug}&pageType=blog`}
+          className="t-base fixed left-5 bottom-5 inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-primary-1 px-[26px] py-[11px] text-center font-bold !leading-none text-black outline-none transition-colors duration-200 hover:bg-[#00e5bf]"
+        >
+          Preview Mode
+        </a>
+      )}
     </Layout>
   );
 };
