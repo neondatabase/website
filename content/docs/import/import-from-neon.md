@@ -9,7 +9,7 @@ This section describes how to import a database from another Neon project using 
 - Import a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15.
 
 <Admonition type="note">
-The Neon Free Tier has a limit of one project per user. If you need to move your data to a new Neon project, dump your database first, delete your Neon project, create a new Neon project with the desired region or PostgreSQL version, and import your data into the new project. For the dump and restore procedure, refer to [pg_dump with pg_restore](../import/import-from-postgres#pg_dump-with-pg_restore).
+The Neon Free Tier has a limit of one project per user, which means a Free Tier user cannot have two projects simultaneously. To move you data to new Neon project while on the Free Tier, dump your database first, delete your existing Neon project, create a new Neon project with the desired region or PostgreSQL version, and import your data into the new project. For the dump and restore procedure, refer to [pg_dump with pg_restore](../import/import-from-postgres#pg_dump-with-pg_restore).
 </Admonition>
 
 To import your data from another Neon project:
@@ -26,14 +26,14 @@ To import your data from another Neon project:
     postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
     ```
 
-4. Prepare your import command. It will look something like this:
+4. Prepare your import command. It will look similar to this one:
 
     ```bash
     pg_dump postgres://<user>:<password>@ep-dawn-union-749234.us-east-2.aws.neon.tech/<dbname> | psql postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
     ```
 
 5. Run the import command from your terminal or command window.
-6. If you no longer require the old project, you can remove it. See [Delete a project](../manage/projects#delete-a-project).
+6. If you no longer require the old project, you can remove it. See [Delete a project](../manage/projects#delete-a-project) for instructions.
 
 ## Need help?
 
