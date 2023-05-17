@@ -17,16 +17,18 @@ const CodeBlock = ({
   language = null,
   children,
   showLineNumbers = false,
+  shouldWrap = false,
   ...otherProps
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const match = /language-(\w+)/.exec(className || '');
   const snippetLanguage = (match ? match[1] : language) || DEFAULT_LANGUAGE;
-  const code = children?.trim();
+  const code =
+    typeof children === 'string' ? children?.trim() : children.props?.children.props.children;
 
   return (
-    <div className={clsx('group relative', className)} {...otherProps}>
+    <div className={clsx('group relative', { 'code-wrap': shouldWrap }, className)} {...otherProps}>
       <SyntaxHighlighter
         language={snippetLanguage}
         useInlineStyles={false}
@@ -62,6 +64,7 @@ CodeBlock.propTypes = {
   language: PropTypes.string,
   children: PropTypes.node.isRequired,
   showLineNumbers: PropTypes.bool,
+  shouldWrap: PropTypes.bool,
 };
 
 export default CodeBlock;

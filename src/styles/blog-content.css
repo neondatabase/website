@@ -79,13 +79,19 @@
     }
 
     :not(pre) > code {
-      white-space: break-spaces !important;
-
-      @apply !max-w-full !break-words !rounded-sm bg-yellow/10 !px-1.5 !py-0.5 !font-mono !font-normal text-yellow;
+      @apply !rounded-sm bg-yellow/10 !px-1.5 !py-0.5 !font-mono !font-normal text-yellow;
 
       &::before,
       &::after {
         @apply hidden;
+      }
+    }
+
+    .code-wrap {
+      code {
+        white-space: break-spaces !important;
+
+        @apply !max-w-full !break-words;
       }
     }
 
