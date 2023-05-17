@@ -46,6 +46,10 @@ jobs:
 
 ### Input variables
 
+- `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Settings** page.
+- `parent_branch_id`: The ID of the parent branch, typically the `main` branch of your project. You can find this value in the Neon Console. Select Branches from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
+- `branch_name`: The branch name is automatically set by the create branch action.
+
 ### Outputs
 
 ```yaml
@@ -57,6 +61,9 @@ outputs:
     description: "Project Id"
     value: ${{ steps.output-project-id.outputs.project_id }}
 ```
+
+- `branch_id`: The ID of the newly created branch.
+- `project_id`: The ID of the parent branch.
 
 ## Delete branch action
 
@@ -89,4 +96,13 @@ jobs:
 
 ### Input variables
 
+- project_id: The ID of your Neon project. You can find this value in the Neon Console, on the **Settings** page.
+- branch_id: The ID of the branch you want to delete. Select Branches from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
+
 ### Outputs
+
+This Action has no outputs.
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
