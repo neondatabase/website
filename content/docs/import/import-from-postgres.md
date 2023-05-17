@@ -48,7 +48,7 @@ postgres://<user>:<password>@<hostname>:<port>/<dbname>
 You must supply the connection string for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The connection string will look something like this:
 
 ```bash
-postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
 ```
 
 where:
@@ -62,7 +62,7 @@ where:
 After you input the connection strings into your command, it will appear similar to the following:
 
 ```bash
-pg_dump postgres://<user>:<password>@<hostname>:5432/<dbname> | psql postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/<dbname>
+pg_dump postgres://<user>:<password>@<hostname>:5432/<dbname> | psql postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
 ```
 
 Run the command in your terminal or command window to import your data.

@@ -3,7 +3,13 @@ title: Import data from another Neon project
 enableTableOfContents: true
 ---
 
-This section describes how to import a database from another Neon project. Use these instructions to:
+This section describes how to import a database from another Neon project using `pg_dump` and `psql`. 
+
+<Admonition type="note">
+For large or complex data sets, you may want to consider using [pg_dump with pg_retore](../import/import-from-postgres.md) for the additional options provided by the `pg_restore` utility.
+</Admonition>
+
+Use these instructions to:
 
 - Import a database from a Neon project created in one region to a project created in another region.
 - Import a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15.
@@ -23,18 +29,17 @@ To import your data from another Neon project:
     You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Your connection strings will look something like this:
 
     ```bash
-    postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/<dbname>
+    postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
     ```
 
 4. Prepare your import command. It will look something like this:
 
     ```bash
-    pg_dump postgres://myneonrole:a1B2c3D4e5F6@ep-dawn-union-749234.us-east-2.aws.neon.tech:5432/<dbname> | psql postgres://myneonrole:a1B2c3D4e5F6@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/<dbname>
+    pg_dump postgres://<user>:<password>@ep-dawn-union-749234.us-east-2.aws.neon.tech/<dbname> | psql postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
     ```
 
 5. Run the import command from your terminal or command window.
 6. If you no longer require the old project, you can remove it. See [Delete a project](../manage/projects#delete-a-project).
-
 
 ## Need help?
 
