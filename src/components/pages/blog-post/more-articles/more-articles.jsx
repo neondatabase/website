@@ -6,11 +6,12 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
 const MoreArticles = ({ className = null, posts }) => (
-  <section className={clsx('more-articles', className)}>
+  <section className={clsx('more-articles flex flex-col', className)}>
     <h2 className="right-0 flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue">
       <span className="">More from Neon</span>
       <span className="ml-2 h-px grow bg-gray-new-20" />
     </h2>
+
     <ul className="mt-6 grid grid-cols-3 gap-x-10 xl:gap-x-6 md:grid-cols-1 md:gap-y-[22px]">
       {posts.map(({ title, slug, date, categories, pageBlogPost: { authors } }) => {
         const category = categories.nodes[0];
@@ -65,6 +66,14 @@ const MoreArticles = ({ className = null, posts }) => (
         );
       })}
     </ul>
+    <Link
+      className="ml-auto -mt-1 inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em]"
+      theme="blue"
+      to={LINKS.blog}
+      withArrow
+    >
+      All News
+    </Link>
   </section>
 );
 
