@@ -76,6 +76,10 @@ const getWpPostBySlug = async (slug) => {
         content(format: RENDERED)
         readingTime
         pageBlogPost {
+          largeCover {
+            altText
+            mediaItemUrl
+          }
           description
           authors {
             author {
@@ -96,7 +100,7 @@ const getWpPostBySlug = async (slug) => {
         ...wpPostSeo
       }
 
-      posts(first: 4) {
+      posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
         nodes {
           categories {
             nodes {
@@ -109,6 +113,14 @@ const getWpPostBySlug = async (slug) => {
           date
           readingTime
           pageBlogPost {
+            largeCover {
+              altText
+              mediaItemUrl
+            }
+            smallCover {
+              altText
+              mediaItemUrl
+            }
             description
             authors {
               author {
@@ -134,10 +146,7 @@ const getWpPostBySlug = async (slug) => {
 
   const data = await graphQLClient.request(postBySlugQuery, { id: slug });
 
-  const sortedPosts = data?.posts?.nodes
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .filter((post) => post.slug !== slug)
-    .slice(0, 3);
+  const sortedPosts = data?.posts?.nodes.filter((post) => post.slug !== slug).slice(0, 3);
 
   return {
     post: data?.post,
@@ -173,6 +182,10 @@ const getWpPreviewPostData = async (id, status) => {
           content(format: RENDERED)
           readingTime
           pageBlogPost {
+            largeCover {
+              altText
+              mediaItemUrl
+            }
             description
             authors {
               author {
@@ -192,10 +205,61 @@ const getWpPreviewPostData = async (id, status) => {
           }
           ...wpPostSeo
         }
+
+        posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
+          nodes {
+            categories {
+              nodes {
+                name
+                slug
+              }
+            }
+            slug
+            title(format: RENDERED)
+            date
+            readingTime
+            pageBlogPost {
+              largeCover {
+                altText
+                mediaItemUrl
+              }
+              smallCover {
+                altText
+                mediaItemUrl
+              }
+              description
+              authors {
+                author {
+                  ... on PostAuthor {
+                    title
+                    postAuthor {
+                      role
+                      url
+                      image {
+                        altText
+                        mediaItemUrl
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
       ${POST_SEO_FRAGMENT}
     `;
-    return graphQLClientAdmin(authToken).request(query, { id });
+
+    const data = await graphQLClientAdmin(authToken).request(query, { id });
+
+    const sortedPosts = data?.posts?.nodes
+      .filter((post) => post.slug !== data?.post?.slug)
+      .slice(0, 3);
+
+    return {
+      post: data?.post,
+      relatedPosts: sortedPosts,
+    };
   }
 
   if (isRevision) {
@@ -218,6 +282,9 @@ const getWpPreviewPostData = async (id, status) => {
                 content(format: RENDERED)
                 readingTime
                 pageBlogPost {
+                  largeCover {
+                    mediaItemUrl
+                  }
                   description
                   authors {
                     author {
@@ -239,6 +306,46 @@ const getWpPreviewPostData = async (id, status) => {
             }
           }
         }
+
+        posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
+          nodes {
+            categories {
+              nodes {
+                name
+                slug
+              }
+            }
+            slug
+            title(format: RENDERED)
+            date
+            readingTime
+            pageBlogPost {
+              largeCover {
+                altText
+                mediaItemUrl
+              }
+              smallCover {
+                mediaItemUrl
+              }
+              description
+              authors {
+                author {
+                  ... on PostAuthor {
+                    title
+                    postAuthor {
+                      role
+                      url
+                      image {
+                        altText
+                        mediaItemUrl
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
       ${POST_SEO_FRAGMENT}
     `;
@@ -246,7 +353,15 @@ const getWpPreviewPostData = async (id, status) => {
       id,
     });
     // TODO: Pass seo data to head component
-    return revisionPostData?.post?.revisions?.edges[0];
+
+    const sortedPosts = revisionPostData?.posts?.nodes
+      .filter((post) => post.slug !== revisionPostData?.post?.revisions?.edges[0].slug)
+      .slice(0, 3);
+
+    return {
+      post: revisionPostData?.post?.revisions?.edges[0],
+      relatedPosts: sortedPosts,
+    };
   }
 };
 

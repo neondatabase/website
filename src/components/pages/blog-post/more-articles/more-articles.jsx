@@ -13,7 +13,7 @@ const MoreArticles = ({ className = null, posts }) => (
     </h2>
 
     <ul className="mt-6 grid grid-cols-3 gap-x-10 xl:gap-x-6 md:grid-cols-1 md:gap-y-[22px]">
-      {posts.map(({ title, slug, date, categories, pageBlogPost: { authors } }) => {
+      {posts.map(({ title, slug, date, categories, pageBlogPost: { authors, largeCover } }) => {
         const category = categories.nodes[0];
         const author = authors[0]?.author;
         const formattedDate = new Date(date).toLocaleDateString(
@@ -23,14 +23,24 @@ const MoreArticles = ({ className = null, posts }) => (
         return (
           <li className="flex flex-col" key={slug}>
             <Link className="flex" to={`${LINKS.blog}${slug}`}>
-              <img
-                className="w-full rounded-md bg-gray-new-60"
-                src={`data:image/svg+xml;charset=utf-8,%3Csvg width='${380}' height='${196}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
-                alt=""
-                width={380}
-                height={196}
-                aria-hidden
-              />
+              {largeCover?.mediaItemUrl ? (
+                <Image
+                  className="w-full rounded-md"
+                  src={largeCover?.mediaItemUrl}
+                  alt={largeCover?.altText || title}
+                  width={380}
+                  height={196}
+                />
+              ) : (
+                <img
+                  className="w-full rounded-md bg-gray-new-30"
+                  src={`data:image/svg+xml;charset=utf-8,%3Csvg width='${380}' height='${196}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+                  alt=""
+                  width={380}
+                  height={196}
+                  aria-hidden
+                />
+              )}
             </Link>
             <Link
               className="mt-4 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green"

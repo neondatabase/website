@@ -37,7 +37,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
       Related articles
     </h3>
     <ul className="mt-5 flex flex-col space-y-6 lg:hidden">
-      {posts.map(({ title, slug, pageBlogPost: { authors } }) => (
+      {posts.map(({ title, slug, pageBlogPost: { authors, smallCover } }) => (
         <li key={slug}>
           <Link className="flex items-center space-x-3" to={`${LINKS.blog}${slug}`}>
             <div className="tracking-[-0.02em]">
@@ -46,7 +46,17 @@ const Aside = ({ className, title, slug, authors, posts }) => (
                 {authors[0]?.author?.title}
               </span>
             </div>
-            <span className="h-16 w-16 shrink-0 rounded-md bg-gray-new-30" />
+            {smallCover?.mediaItemUrl ? (
+              <Image
+                className="h-16 w-16 shrink-0 rounded-md"
+                src={smallCover?.mediaItemUrl}
+                width={64}
+                height={64}
+                alt={smallCover?.altText || title}
+              />
+            ) : (
+              <span className="h-16 w-16 shrink-0 rounded-md bg-gray-new-30" />
+            )}
           </Link>
         </li>
       ))}
