@@ -35,7 +35,6 @@ const useDocsAIChatStream = ({ isMounted, signal }) => {
             } catch (e) {
               parsedChunk = chunk;
             }
-            console.log({ parsedChunk });
             // Update the messages state with the received data
             flushSync(() => {
               setMessages((prevMessages) => {
