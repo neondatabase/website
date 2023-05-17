@@ -46,7 +46,7 @@
         counter-increment: custom-counter;
 
         &::before {
-          @apply -left-2 top-4 -translate-x-full md:top-3.5 md:-left-1;
+          @apply -left-2 top-[11px] -translate-x-full text-green md:top-3.5 md:-left-1;
           content: counter(custom-counter) '. ' !important;
         }
       }
