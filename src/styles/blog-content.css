@@ -13,7 +13,7 @@
 
     ul,
     ol {
-      @apply list-none pl-6;
+      @apply list-none;
 
       > li {
         @apply relative pl-0;
@@ -29,11 +29,11 @@
     }
 
     ul {
-      @apply md:pl-4;
+      @apply pl-3.5;
 
       > li {
         &::before {
-          @apply -left-6 top-4 h-2 w-2 rounded-full bg-primary-1 content-[''] md:top-3 md:-left-4 md:h-1.5 md:w-1.5;
+          @apply -left-3.5 top-3 h-1 w-1 rounded-[1px] bg-green content-[''];
         }
       }
     }
