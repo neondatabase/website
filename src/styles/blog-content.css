@@ -3,10 +3,9 @@
     @apply max-w-none leading-snug text-gray-new-90 lg:leading-tight;
     @apply prose-headings:font-medium prose-headings:tracking-tighter;
     @apply prose-h2:text-[36px] prose-h2:leading-tight sm:prose-h2:text-[32px] sm:prose-h2:leading-dense;
+    @apply prose-a:font-normal prose-a:text-green prose-a:no-underline prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out sm:prose-a:break-words;
 
-    a:not(.anchor) {
-      @apply font-normal text-green no-underline transition-colors duration-200 ease-in-out sm:break-words;
-
+    a {
       code {
         @apply text-green;
       }
@@ -53,8 +52,8 @@
       }
     }
 
-    .table-wrapper {
-      @apply md:overflow-x-auto;
+    .wp-block-table {
+      @apply overflow-x-auto md:-mx-4 md:px-4;
     }
 
     table {
@@ -74,9 +73,8 @@
 
       code {
         text-shadow: unset !important;
-        white-space: break-spaces !important;
 
-        @apply highlighted-code !max-w-full !break-words !font-mono !text-base !text-white;
+        @apply highlighted-code overflow-x-auto !font-mono !text-sm leading-normal !text-white md:min-w-[686px];
       }
     }
 

@@ -112,7 +112,7 @@ const SubscribeForm = () => {
               Subscribe
             </Button>
           </div>
-          <LinesIllustration className="z-10 w-full" spread={4} color="#00E599" size="sm" />
+          <LinesIllustration className="z-10 w-full" spread="4" color="#00E599" size="sm" />
         </form>
       </div>
     </section>
