@@ -33,7 +33,7 @@
 
       > li {
         &::before {
-          @apply -left-3.5 top-3 h-1 w-1 rounded-[1px] bg-green content-[''];
+          @apply -left-3.5 top-3 h-1 w-1 rounded-[1px] bg-current content-[''];
         }
       }
     }
@@ -46,7 +46,7 @@
         counter-increment: custom-counter;
 
         &::before {
-          @apply -left-2 top-[12px] -translate-x-full text-green md:top-3.5 md:-left-1;
+          @apply -left-2 top-[12px] -translate-x-full text-current md:top-3.5 md:-left-1;
           content: counter(custom-counter) '. ' !important;
         }
       }
