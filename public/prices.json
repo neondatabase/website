@@ -1,0 +1,35 @@
+{
+  "name": "Pro plan v2023-05-01",
+  "regions": {
+    "aws-us-west-2": {
+      "Compute time, Hour": 0.102,
+      "Data storage, GB-Hour": 0.000164,
+      "Data transfer, GB": 0.09,
+      "Written data, GB": 0.096
+    },
+    "aws-us-east-2": {
+      "Compute time, Hour": 0.102,
+      "Data storage, GB-Hour": 0.000164,
+      "Data transfer, GB": 0.09,
+      "Written data, GB": 0.096
+    },
+    "aws-ap-southeast-1": {
+      "Compute time, Hour": 0.121,
+      "Data storage, GB-Hour": 0.00018,
+      "Data transfer, GB": 0.09,
+      "Written data, GB": 0.096
+    },
+    "aws-eu-central-1": {
+      "Compute time, Hour": 0.118,
+      "Data storage, GB-Hour": 0.00018,
+      "Data transfer, GB": 0.09,
+      "Written data, GB": 0.096
+    },
+    "aws-us-east-1": {
+      "Compute time, Hour": 0.102,
+      "Data storage, GB-Hour": 0.000164,
+      "Data transfer, GB": 0.09,
+      "Written data, GB": 0.096
+    }
+  }
+}
