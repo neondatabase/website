@@ -12,9 +12,11 @@ This section describes how to import a database from another Neon project. Use t
 The Neon Free Tier has a limit of one project per user. If you need to move your data to a new Neon project, dump your database first, delete your Neon project, create a new Neon project with the desired region or PostgreSQL version, and import your data into the new project. For the dump and restore procedure, refer to [pg_dump with pg_restore](../import/import-from-postgres#pg_dump-with-pg_restore).
 </Admonition>
 
+To import your data from another Neon project:
+
 1. Create a new project in the desired region or PostgreSQL version. See [Create a project](../manage/projects#create-a-project) for instructions.
 
-2. Create a database with the desired name in your new Neon project. See [Create a database](../manage/databases#create-a-database).
+2. Create a database with the desired name in your new Neon project. See [Create a database](../manage/databases#create-a-database) for instructions.
 
 3. Retrieve the connection strings for the new and existing Neon databases.
 
@@ -24,13 +26,15 @@ The Neon Free Tier has a limit of one project per user. If you need to move your
     postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/<dbname>
     ```
 
-4. Prepare your dump and import command. It will look something like this:
+4. Prepare your import command. It will look something like this:
 
     ```bash
     pg_dump postgres://myneonrole:a1B2c3D4e5F6@ep-dawn-union-749234.us-east-2.aws.neon.tech:5432/<dbname> | psql postgres://myneonrole:a1B2c3D4e5F6@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/<dbname>
     ```
 
-5. Run the dump and import command from your terminal or command window.
+5. Run the import command from your terminal or command window.
+6. If you no longer require the old project, you can remove it. See [Delete a project](../manage/projects#delete-a-project).
+
 
 ## Need help?
 
