@@ -1,27 +1,44 @@
 ---
 title: Import data from PostgreSQL
+enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
 ---
 
-This topic describes how to import an existing PostgreSQL database to Neon.
+This topic describes how to import an existing PostgreSQL database to Neon. The following methods are described:
 
 - [Use pg_dump with psql](#use-pg_dump-with-psql)
 - [Use pg_dump with pg_restore](#use-pg_dump-with-pg_restore)
-- [Import a database from another Neon project](#import-a-database-from-another-neon-project)
+
+## Which import method should you use?
+
+The main determinant is the format of your dump file. The `psql` utility is used for plain SQL dumps, and `pg_restore` is used for PostgreSQL custom format dumps.
+
+If you prefer working with human-readable SQL scripts that can be inspected or edited using a text editor, the [pg_dump with psql](#use-pg_dump-with-psql) method may be your preferred option.
+
+If you are importing a large or complex dataset, you might choose the [pg_dump with pg_restore](#use-pg_dump-with-pg_restore) method, which provides the following advantages:
+
+- It may be faster, particularly for large databases.
+- It supports parallel restoration of data.
+- It allows for greater flexibility during the restore process.
+- It can restore all data types, including blobs and large objects.
+
+Ultimately, you should familiarize yourself with capabilities of the `pg_dump`, `psql`, and `pg_restore` utilities and use whatever import method best meets your requirements.
 
 ## Use pg_dump with psql
 
 This section describes how to use the `pg_dump` utility to dump data from an existing PostgreSQL database and import it into Neon using `psql`.
 
-The example below uses the following command, which you can run from a terminal or command window where you have access to the `pg_dump` and `psql` utilities.
+<Admonition type="note">
+If you have multiple databases to import, each database must be imported separately.
+</Admonition>
+
+The example below uses the following command, which you can run from a terminal or command window where you have access to the `pg_dump` and `psql` utilities. The first connection string is for your existing PostgreSQL database. The second is for your Neon database.
 
 ```bash
 pg_dump <connection-string> | psql <connection-string>
 ```
-
-The first connection string is for your existing PostgreSQL database. The second is for your Neon database.
 
 A PostgreSQL connection string has the following format:
 
@@ -43,15 +60,13 @@ where:
 - `5432` is the port number of the PostgreSQL instance. Neon uses this default PostgreSQL port number.
 - `neondb` is the name of the default Neon database. You can use this database or create your own. For instructions, see [Create a database](../docs/manage/databases#create-a-database).
 
-After you input the connection strings into the command, it will appear similar to the following:
+After you input the connection strings into your command, it will appear similar to the following:
 
 ```bash
 pg_dump postgres://<user>:<password>@<hostname>:5432/<dbname> | psql postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/<dbname>
 ```
 
-Run the command to import your data.
-
-If you have multiple databases to import, each database must be imported separately.
+Run the command in your terminal or command window to import your data.
 
 ## Use pg_dump with pg_restore
 
@@ -59,55 +74,62 @@ This section describes how to use the `pg_dump` utility to dump data from an exi
 
 1. Start by retrieving the connection details for the existing PostgreSQL database and your Neon database.
 
-  You must supply the connection details for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The connection string will look something like this:
+    You must supply the connection details for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The connection string will look something like this:
 
-  ```bash
-  postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
-  ```
+    ```bash
+    postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+    ```
 
 2. Dump the database from your existing PostgreSQL instance. You can use a `pg_dump` command similar to the following:
 
-  ```bash
-  pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v
-  ```
+    ```bash
+    pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v
+    ```
 
-The `-Fc` option sends the output a custom-format archive suitable for input into `pg_restore`. The `-Z 6` option specifies a compression level of 6 (the default). The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump.
+    The `-Fc` option sends the output to a custom-format archive suitable for input into `pg_restore`. The `-Z 6` option specifies a compression level of 6 (the default). The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump.
 
-The `pg_dump` command provides many other options you can use to modify your database dump. To learn more, refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation.
+    The `pg_dump` command provides many other options you can use to modify your database dump. To learn more, refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation.
 
 3. Load the database dump into Neon using `pg_restore`. For example:
 
-  ```bash
-  pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc -j 4 employees.sql.gz -c -v
-  ```
+      ```bash
+      pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc -j 4 dumpfile.bak.gz -c -v
+      ```
 
-  The `-Fc` option sends the output a custom-format archive suitable for input into `pg_restore`. The `-j 4` option specifies the number of concurrent jobs (sessions). The `-c` option tell the restore operation to run `clean`, meaning that it will drop database objects before recreating them. The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump.
+    The `-Fc` option sends the output a custom-format archive suitable for input into `pg_restore`. The `-j 4` option specifies the number of concurrent jobs (sessions). The `-c` option tells the restore operation to run `clean`, meaning that it will drop database objects before recreating them. The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the restire operation.
 
-As with `pg_dump`, the `pg_restore` command provides many other options you can use to modify your database import. For example, the `--single-transaction` option forces the operation to run as a single transaction to ensure that either all the commands complete successfully, or no changes are applied. This option is not used above because it is not compatible with the `-j` option. To learn about other options, refer to the [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
+    The `pg_restore` command provides several other options you can use to modify your database import. For example, the `--single-transaction` option forces the operation to run as a single transaction to ensure that either all the commands complete successfully, or no changes are applied. This option is not used above because it is not compatible with the `-j` option. To learn more, refer to the [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
 
-## Import a database from another Neon project
+## Import data from another Neon project
 
-This section describes how to import a database from another Neon project. For example, you can use these instructions to move a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15, or from a Neon project created in one region to a project in created in a different region.
+This section describes how to import a database from another Neon project. You can use these instructions to:
+
+- Move a database from a Neon project created in one region to a project in created in another region.
+- Move a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15
 
 <Admonition type="note">
-The Neon Free Tier provides a single Neon project. If you need to move your data to a new Neon project created in a different region or with a different PostgreSQL version, dump your database first, delete your Neon project, create a new Neon project with the desired region or PostgreSQL version, and import your data into the new project. For the dump and restore procedure, refer to [Use pg_dump with pg_restore](#use-pg_dump-with-pg_restore).
+The Neon Free Tier has a limit of one project per user. If you need to move your data to a new Neon project, dump your database first, delete your Neon project, create a new Neon project with the desired region or PostgreSQL version, and import your data into the new project. For the dump and restore procedure, refer to [Use pg_dump with pg_restore](#use-pg_dump-with-pg_restore).
 </Admonition>
 
-1. Start by retrieving the connection details for your Neon databases.
+1. Create a new project with desired region or PostgreSQL version. See [Create a project](../manage/projects#create-a-project) for instructions.
 
-  You can obtain the connection string for your Neon databases from the Neon **Dashboard**, under **Connection Details**. The connection strings will look something like this:
+2. Create a database with the desired name in your new Neon project. See [Create a database](../manage/databases#create-a-database).
+
+3. Retrieve the connection strings for the new and existing Neon databases.
+
+  You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Your connection strings will look something like this:
 
   ```bash
   postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/<dbname>
   ```
 
-2. Prepare your dump and import command. It will look something like this:
+4. Prepare your dump and import command. It will look something like this:
 
 ```bash
 pg_dump postgres://myneonrole:a1B2c3D4e5F6@ep-dawn-union-749234.us-east-2.aws.neon.tech:5432/<dbname> | psql postgres://myneonrole:a1B2c3D4e5F6@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/<dbname>
 ```
 
-3. Run the dump and import command.
+5. Run the dump and import command.
 
 ## Data import notes
 
