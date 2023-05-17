@@ -3,13 +3,7 @@ title: Import data from another Neon project
 enableTableOfContents: true
 ---
 
-This section describes how to import a database from another Neon project using `pg_dump` and `psql`. 
-
-<Admonition type="note">
-For large or complex data sets, you may want to consider using [pg_dump with pg_retore](../import/import-from-postgres.md) for the additional options provided by the `pg_restore` utility.
-</Admonition>
-
-Use these instructions to:
+This section describes how to import a database from another Neon project using `pg_dump` and `psql`. Use these instructions to:
 
 - Import a database from a Neon project created in one region to a project created in another region.
 - Import a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15.
