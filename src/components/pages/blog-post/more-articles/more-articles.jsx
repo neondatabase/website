@@ -5,6 +5,12 @@ import PropTypes from 'prop-types';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
+const categoriesColor = {
+  company: 'text-green',
+  engineering: 'text-yellow',
+  uncategorized: 'text-green',
+};
+
 const MoreArticles = ({ className = null, posts }) => (
   <section className={clsx('more-articles flex flex-col', className)}>
     <h2 className="right-0 flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue">
@@ -44,7 +50,10 @@ const MoreArticles = ({ className = null, posts }) => (
                 )}
               </Link>
               <Link
-                className="mt-4 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green"
+                className={clsx(
+                  'mt-4 text-xs font-semibold uppercase leading-none tracking-[0.02em]',
+                  categoriesColor[category.slug]
+                )}
                 to={`${LINKS.blog}${category.slug}`}
               >
                 {category.name}
