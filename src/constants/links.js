@@ -21,4 +21,5 @@ export default {
   branching: '/branching/',
   contactSales: '/contact-sales/',
   pricing: '/pricing/',
+  support: '/docs/introduction/support',
 };
