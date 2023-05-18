@@ -22,7 +22,7 @@ const CTA = ({ title, description, buttonText, buttonUrl }) => (
         </p>
       </div>
       <Button
-        className="!text-sm !font-semibold sm:mt-5 xs:w-full"
+        className="!text-base !font-semibold sm:mt-5 xs:w-full"
         theme="blue"
         size="xs"
         data-label="cta"

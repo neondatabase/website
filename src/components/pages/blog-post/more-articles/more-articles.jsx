@@ -12,17 +12,17 @@ const MoreArticles = ({ className = null, posts }) => (
       <span className="ml-2 h-px grow bg-gray-new-20" />
     </h2>
 
-    <ul className="mt-6 grid grid-cols-3 gap-x-10 xl:gap-x-6 md:grid-cols-1 md:gap-y-[22px]">
+    <ul className="mt-6 grid grid-cols-3 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1 md:gap-y-6">
       {posts.map(({ title, slug, date, categories, pageBlogPost: { authors, largeCover } }) => {
         const category = categories.nodes[0];
         const author = authors[0]?.author;
         const formattedDate = new Date(date).toLocaleDateString(
           {},
-          { timeZone: 'UTC', month: 'long', day: '2-digit', year: 'numeric' }
+          { timeZone: 'UTC', month: 'short', day: '2-digit', year: 'numeric' }
         );
         return (
-          <li className="flex flex-col" key={slug}>
-            <article>
+          <li key={slug}>
+            <article className="flex flex-col">
               <Link className="flex" to={`${LINKS.blog}${slug}`}>
                 {largeCover?.mediaItemUrl ? (
                   <Image
@@ -61,13 +61,13 @@ const MoreArticles = ({ className = null, posts }) => (
                     width={28}
                     height={28}
                   />
-                  <div className="ml-2 flex items-center lg:flex-col lg:items-start">
-                    <span className="text-sm tracking-[-0.02em] text-gray-new-90">
+                  <div className="ml-2 flex items-center lg:flex-col lg:items-start md:flex-row md:items-center">
+                    <span className="text-sm leading-none tracking-[-0.02em] text-gray-new-90">
                       {author?.title}
                     </span>
 
                     <span
-                      className="relative block pl-5 text-[13px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-2.5 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30 lg:mt-1 lg:pl-0 lg:before:hidden"
+                      className="relative block pl-5 text-[13px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-2.5 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30 lg:mt-1 lg:pl-0 lg:before:hidden md:mt-0 md:pl-5 md:before:inline-block"
                       dateTime={date}
                     >
                       {formattedDate}
@@ -81,7 +81,7 @@ const MoreArticles = ({ className = null, posts }) => (
       })}
     </ul>
     <Link
-      className="ml-auto -mt-1 inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em]"
+      className="ml-auto -mt-1 inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] xl:mt-0"
       theme="blue"
       to={LINKS.blog}
       withArrow

@@ -15,7 +15,7 @@ const Content = ({ html, title, cover, className = null }) => (
         priority
       />
     )}
-    <div className="prose-blog prose prose-lg md:prose-base">
+    <div className="prose-blog prose prose-lg">
       {html}
       {/* TODO: remove this CTA */}
       <CTA

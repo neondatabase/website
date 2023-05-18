@@ -95,18 +95,18 @@ const SubscribeForm = () => {
   };
 
   return (
-    <section className="subscribe-form safe-paddings overflow-hidden pt-[118px] pb-[125px] xl:pt-[104px] xl:pb-[123px] lg:pt-20 lg:pb-28">
-      <div className="mx-auto flex max-w-[1166px] items-center justify-between 2xl:px-10 lg:flex-col lg:px-8 md:px-4">
+    <section className="subscribe-form safe-paddings overflow-hidden pt-[118px] pb-[125px] xl:pt-[104px] xl:pb-[123px] lg:pt-20 lg:pb-28 md:pt-16 md:pb-24">
+      <div className="mx-auto flex max-w-[1166px] items-center justify-between pr-12 2xl:px-10 2xl:pr-0 lg:flex-col lg:px-8 md:px-4">
         <div className="relative z-20 lg:text-center">
           <h2 className="text-4xl leading-none tracking-tighter xl:text-[36px] sm:text-[32px]">
             Subscribe to <mark className="bg-transparent text-green">Neon’s News</mark>
           </h2>
-          <p className="mt-3.5 text-lg leading-tight tracking-[-0.02em] text-gray-new-80 lg:mt-2.5">
+          <p className="mt-3.5 text-lg leading-tight tracking-[-0.02em] text-gray-new-80 lg:mt-2.5 sm:mx-auto sm:max-w-[300px]">
             Get insider access to Neon's latest news and events
           </p>
         </div>
         <form
-          className="relative w-full max-w-[518px] xl:max-w-[456px] lg:mt-5"
+          className="relative w-full max-w-[518px] xl:max-w-[456px] lg:mt-5 md:mt-7"
           onSubmit={handleSubmit}
         >
           <div className="relative z-20">
@@ -128,7 +128,7 @@ const SubscribeForm = () => {
                 {(formState === STATES.DEFAULT || formState === STATES.ERROR) && (
                   <m.button
                     className={clsx(
-                      'absolute inset-y-2 right-2 h-10 rounded-[80px] py-3 px-7 font-bold leading-none text-black transition-colors duration-200',
+                      'absolute inset-y-2 right-2 h-10 rounded-[80px] py-3 px-7 font-bold leading-none text-black transition-colors duration-200 sm:py-3 sm:px-5',
                       formState === STATES.ERROR
                         ? 'bg-secondary-1/50'
                         : 'bg-green hover:bg-[#00FFAA]'
@@ -189,7 +189,7 @@ const SubscribeForm = () => {
             </LazyMotion>
 
             {formState === STATES.ERROR && errorMessage && (
-              <span className="absolute top-full left-7 mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1">
+              <span className="absolute top-full left-7 mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
                 {errorMessage}
               </span>
             )}

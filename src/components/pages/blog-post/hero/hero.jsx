@@ -7,7 +7,7 @@ const Hero = ({ title, description, date, category, className = null }) => (
   <div className={className}>
     <div className="flex items-center">
       <Link
-        className="mr-3 rounded-[40px] bg-green/10 px-3.5 py-2 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-green"
+        className="mr-3 rounded-[40px] bg-green/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green sm:text-[10px]"
         to={`${LINKS.blog}${category.slug}`}
       >
         {category.name}

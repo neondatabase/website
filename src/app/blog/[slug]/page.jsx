@@ -33,7 +33,7 @@ const BlogPage = async ({ params }) => {
   const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${LINKS.blog}${slug}`;
   const formattedDate = new Date(date).toLocaleDateString(
     {},
-    { timeZone: 'UTC', month: 'long', day: '2-digit', year: 'numeric' }
+    { timeZone: 'UTC', month: 'short', day: '2-digit', year: 'numeric' }
   );
 
   const contentWithLazyBlocks = getReactContentWithLazyBlocks(
@@ -54,7 +54,7 @@ const BlogPage = async ({ params }) => {
       isHeaderSticky
     >
       <div className="safe-paddings bg-gray-new-8">
-        <article className="mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pt-16 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-12 xl:pb-32 lg:max-w-none lg:px-6 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pt-8">
+        <article className="mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pt-16 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-12 xl:pb-32 lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
           <Hero
             className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
             title={title}
@@ -70,7 +70,7 @@ const BlogPage = async ({ params }) => {
             cover={pageBlogPost.largeCover}
           />
           <Aside
-            className="col-span-3 col-end-13 row-start-2 xl:col-span-4 lg:col-span-full lg:mt-5"
+            className="col-span-3 col-end-13 row-start-2 mt-10 xl:col-span-4 lg:col-span-full lg:mt-5"
             title={title}
             slug={shareUrl}
             authors={pageBlogPost.authors}
