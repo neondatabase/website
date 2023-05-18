@@ -5,12 +5,12 @@ import Aside from 'components/pages/blog-post/aside';
 import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
-// import SocialShareBar from 'components/pages/blog-post/social-share-bar';
 import MoreArticles from 'components/pages/blog-post/more-articles';
 import SocialShare from 'components/pages/blog-post/social-share';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import CodeBlock from 'components/shared/code-block';
 import Layout from 'components/shared/layout';
+import LINKS from 'constants/links';
 import { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData } from 'utils/api-posts';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
@@ -30,7 +30,7 @@ const BlogPage = async ({ params }) => {
   if (!post) return notFound();
 
   const { slug, title, content, pageBlogPost, date, categories } = post;
-  const shareUrl = `${process.env.DEFAULT_SITE_URL}/blog/${slug}`;
+  const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${LINKS.blog}${slug}`;
   const formattedDate = new Date(date).toLocaleDateString(
     {},
     { timeZone: 'UTC', month: 'long', day: '2-digit', year: 'numeric' }

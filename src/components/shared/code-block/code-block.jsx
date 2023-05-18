@@ -28,7 +28,10 @@ const CodeBlock = ({
     typeof children === 'string' ? children?.trim() : children.props?.children.props.children;
 
   return (
-    <div className={clsx('group relative', { 'code-wrap': shouldWrap }, className)} {...otherProps}>
+    <figure
+      className={clsx('group relative', { 'code-wrap': shouldWrap }, className)}
+      {...otherProps}
+    >
       <SyntaxHighlighter
         language={snippetLanguage}
         useInlineStyles={false}
@@ -54,7 +57,7 @@ const CodeBlock = ({
           <CopyIcon className="text-current" />
         )}
       </button>
-    </div>
+    </figure>
   );
 };
 

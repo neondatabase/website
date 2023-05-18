@@ -7,6 +7,7 @@
     @apply prose-h4:mt-6 prose-h4:mb-4 prose-h4:text-2xl;
     @apply prose-h5:mt-5 prose-h5:mb-4 prose-h5:text-xl;
     @apply prose-a:font-normal prose-a:text-green prose-a:no-underline prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out hover:prose-a:text-[#47FFC2] sm:prose-a:break-words;
+    @apply prose-figure:my-10 md:prose-figure:my-8;
 
     > * {
       &:first-child {
