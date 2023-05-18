@@ -21,7 +21,6 @@ label: 'Storage'
 
    For more information about this special connection option for PostgreSQL clients that do not support SNI, refer to our [connection workarounds](../docs/connect/connectivity-issues#workarounds) documentation.
 
-
 ### Bug fixes
 
 - Pageserver: Branch deletion status was not tracked in S3 storage, which could result in a deleted branch remaining accessible.
