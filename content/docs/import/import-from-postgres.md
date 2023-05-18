@@ -85,16 +85,20 @@ This section describes using the `pg_dump` utility to dump data from an existing
     ```
 
     The example above includes some optional arguments. The `-Fc` option sends the output to a custom-format archive suitable for input into `pg_restore`. The `-Z 6` option specifies a compression level of 6 (the default). The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump.
-
+    
     The `pg_dump` command provides many other options to modify your database dump. To learn  about the options used in the example above and others, refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation.
 
 3. Load the database dump into Neon using `pg_restore`. For example:
 
       ```bash
-      pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc -j 4 dumpfile.bak.gz -c -v
+      pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc --single-transaction dumpfile.bak.gz -c -v
       ```
 
-    The example above includes some optional arguments. The `-Fc` option sends the output a custom-format archive suitable for input into `pg_restore`. The `-j 4` option specifies the number of concurrent jobs (sessions). The `-c` option tells the restore operation to run `clean`, meaning that it drops database objects before recreating them. The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the restore operation.
+    The example above includes some optional arguments. The `-Fc` option sends the output a custom-format archive suitable for input into `pg_restore`. The `--single-transaction` option forces the operation to run as an atomic transaction, which ensures that no data is left behind when import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.) The `-c` option tells the restore operation to run `clean`, meaning that it drops database objects before recreating them. The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the restore operation.
+
+    <Admonition type="note">
+    `pg_restore` also supports a `-j` option option that specifies the number of concurrent jobs, which can make loads faster. This option is not used in the example above because multiple jobs cannot be used together with the `--single-transaction` option.
+    </Admonition>
 
     The `pg_restore` command provides other options to modify your database import.  To learn about the options used in the example above and others, refer to the [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
 
@@ -105,7 +109,6 @@ When importing a database, be aware of the following:
 - If you import a database from an archive using `pg_dump` that is not in plain-text format, you must use the `pg_restore` utility instead of `psql` to restore the database. The `psql` utility only supports plain SQL dumps.
 - Currently, Neon only supports database creation via the Neon Console, so you cannot use `pg_dumpall` or `pg_dump` with the `-C` option.
 - Because `pg_dump` dumps a single database, it does not include information about roles stored in the global `pg_authid` catalog. Also, Neon does not support creating roles using `psql`. You can only create roles using the Neon Console. If you do not create roles in Neon before importing a database that has roles, you will receive "role does not exist" errors during the import operation. You can ignore these errors if they occur. They do not prevent data from being imported.
-- `pg_restore` supports a `--single-transaction` option that forces the operation to run as an atomic transaction, ensuring that either all the commands complete successfully, or no changes are applied. This option is not used in the `pg_restore` example in the previous section because it is not compatible with the `-j` option that specifies the number of concurrent jobs. Consider using th `--single-transaction` option if you want to make sure that no data is left behind when import operation fails. Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.
 - Some PostgreSQL features that require access to the local file system are not supported by Neon. For example, tablespaces and large objects are not supported. Please take this into account when importing a database into to Neon. When importing from a plain-text `.sql` script, you can specify the `--no-tablespaces` option to exclude commands that select tablespaces. The `--no-tablespaces` option is ignored when creating an archive (non-text) output file using `pg_dump`. For custom-format archive files, you can specify the `--no-tablespaces` option when you call `pg_restore`. To exclude large objects from your dump, use the `--no-blobs` option with `pg_dump`.
 - You can import individual tables from a custom-format database dump using the `-t <table_name>` option with `pg_restore`. Individual tables can also be imported from a CSV file. See [Import from CSV](../import/import-from-csv).
 
