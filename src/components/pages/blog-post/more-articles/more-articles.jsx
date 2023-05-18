@@ -8,7 +8,7 @@ import LINKS from 'constants/links';
 const categoriesColor = {
   company: 'text-green',
   engineering: 'text-yellow',
-  uncategorized: 'text-green',
+  community: 'text-blue',
 };
 
 const MoreArticles = ({ className = null, posts }) => (
@@ -52,7 +52,7 @@ const MoreArticles = ({ className = null, posts }) => (
               <Link
                 className={clsx(
                   'mt-4 text-xs font-semibold uppercase leading-none tracking-[0.02em]',
-                  categoriesColor[category.slug]
+                  categoriesColor[category.slug] || 'text-green'
                 )}
                 to={`${LINKS.blog}${category.slug}`}
               >

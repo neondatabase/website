@@ -1,13 +1,23 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
+const categoriesColor = {
+  company: 'text-green bg-green/10',
+  engineering: 'text-yellow bg-yellow/10',
+  community: 'text-blue bg-blue/10',
+};
+
 const Hero = ({ title, description, date, category, className = null }) => (
   <div className={className}>
     <div className="flex items-center">
       <Link
-        className="mr-3 rounded-[40px] bg-green/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green sm:text-[10px]"
+        className={clsx(
+          'mr-3 rounded-[40px] px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] sm:text-[10px]',
+          categoriesColor[category.slug] || 'bg-green/10 text-green'
+        )}
         to={`${LINKS.blog}${category.slug}`}
       >
         {category.name}
