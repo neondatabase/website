@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import Button from 'components/shared/button';
 
 const CTA = ({ title, description, buttonText, buttonUrl }) => (
-  <div className="not-prose relative my-10 after:absolute after:-inset-px after:z-10 after:rounded-md after:bg-[radial-gradient(circle,rgba(173,224,235,0.6)_0%,rgba(12,13,13,0.5)_120%)] after:p-px md:my-8">
-    <div className="relative z-30 flex items-center justify-between overflow-hidden rounded-md bg-black-new py-6 pl-7 pr-8 sm:flex-col sm:px-6">
+  <div className="not-prose relative my-10 after:absolute after:-inset-px after:rounded-md after:bg-[radial-gradient(circle,rgba(173,224,235,0.6)_0%,rgba(12,13,13,0.5)_120%)] after:p-px md:my-8">
+    <div className="relative z-10 flex items-center justify-between overflow-hidden rounded-md bg-black-new py-6 pl-7 pr-8 sm:flex-col sm:px-6">
       <img
-        className="absolute right-0 z-20 h-full w-auto object-cover"
+        className="absolute right-0 -z-10 h-full w-auto object-cover"
         src="/images/background-cta.svg"
         alt=""
         width={457}

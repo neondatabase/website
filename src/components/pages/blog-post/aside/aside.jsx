@@ -39,24 +39,28 @@ const Aside = ({ className, title, slug, authors, posts }) => (
     <ul className="mt-5 flex flex-col space-y-6 lg:hidden">
       {posts.map(({ title, slug, pageBlogPost: { authors, smallCover } }) => (
         <li key={slug}>
-          <Link className="flex items-center space-x-3" to={`${LINKS.blog}${slug}`}>
-            <div className="tracking-[-0.02em]">
-              <span className="font-medium leading-tight line-clamp-2">{title}</span>
-              <span className="mt-1.5 text-sm leading-none text-gray-new-70">
-                {authors[0]?.author?.title}
-              </span>
-            </div>
-            {smallCover?.mediaItemUrl ? (
-              <Image
-                className="h-16 w-16 shrink-0 rounded-md"
-                src={smallCover?.mediaItemUrl}
-                width={64}
-                height={64}
-                alt={smallCover?.altText || title}
-              />
-            ) : (
-              <span className="h-16 w-16 shrink-0 rounded-md bg-gray-new-30" />
-            )}
+          <Link className="group" to={`${LINKS.blog}${slug}`}>
+            <article className="flex items-center space-x-3">
+              <div className="tracking-[-0.02em]">
+                <h1 className="font-medium leading-tight transition-colors duration-200 line-clamp-2 group-hover:text-green">
+                  {title}
+                </h1>
+                <span className="mt-1.5 text-sm leading-none text-gray-new-70">
+                  {authors[0]?.author?.title}
+                </span>
+              </div>
+              {smallCover?.mediaItemUrl ? (
+                <Image
+                  className="h-16 w-16 shrink-0 rounded-md"
+                  src={smallCover?.mediaItemUrl}
+                  width={64}
+                  height={64}
+                  alt={smallCover?.altText || title}
+                />
+              ) : (
+                <span className="h-16 w-16 shrink-0 rounded-md bg-gray-new-30" />
+              )}
+            </article>
           </Link>
         </li>
       ))}
