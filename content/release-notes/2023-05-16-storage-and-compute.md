@@ -22,4 +22,4 @@ label: 'Storage'
 ### Bug fixes
 
 - Pageserver: Branch deletion status was not tracked in S3 storage, which could result in a deleted branch remaining accessible.
-- Pageserver: Addressed intermittent  `failed to flush page requests` errors by adjusting Pageserver timeout settings.
+- Pageserver: Addressed intermittent `failed to flush page requests` errors by adjusting Pageserver timeout settings.
