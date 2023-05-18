@@ -9,7 +9,6 @@ label: 'Storage'
   
    As a workaround, Neon provides a special connection option that allows clients to specify the compute endpoint they are connecting to. The connection option was previously named `project`. This option name is now deprecated but remains supported for backward compatibility. The new name for the connection option is `endpoint`, which is used as shown in the following example:
 
-   ````md
    <CodeBlock shouldWrap>
 
    ```txt
@@ -17,7 +16,6 @@ label: 'Storage'
    ```
 
    </CodeBlock>
-   ````
 
    For more information about this special connection option for PostgreSQL clients that do not support SNI, refer to our [connection workarounds](../docs/connect/connectivity-issues#workarounds) documentation.
 
