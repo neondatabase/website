@@ -66,8 +66,8 @@ const SubscriptionForm = ({
       setErrorMessage('Please enter your email');
     } else if (!emailRegexp.test(email)) {
       setErrorMessage('Please enter a valid email');
-    } else if (submittedEmail.includes(email)) {
-      setErrorMessage('You have already submitted this email');
+      // } else if (submittedEmail.includes(email)) {
+      //   setErrorMessage('You have already submitted this email');
     } else {
       setSubmittedEmail([...submittedEmail, email]);
       setErrorMessage('');

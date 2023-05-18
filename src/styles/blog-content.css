@@ -5,9 +5,19 @@
     @apply prose-h2:mt-10 prose-h2:mb-5 prose-h2:text-[36px] prose-h2:leading-tight sm:prose-h2:text-[32px] sm:prose-h2:leading-dense;
     @apply prose-a:font-normal prose-a:text-green prose-a:no-underline prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out hover:prose-a:text-[#47FFC2] sm:prose-a:break-words;
 
+    > * {
+      &:first-child {
+        @apply mt-0;
+      }
+
+      &:last-child {
+        @apply mb-0;
+      }
+    }
+
     a {
-      code {
-        @apply text-green;
+      > code {
+        @apply !text-green transition-colors duration-200 hover:!text-[#47FFC2];
       }
     }
 
@@ -79,7 +89,7 @@
     }
 
     :not(pre) > code {
-      @apply !rounded-sm bg-yellow/10 !px-1.5 !py-0.5 !font-mono !font-normal text-yellow;
+      @apply !rounded-sm border border-white/20 bg-white bg-opacity-[0.06] !px-1.5 !py-0.5 !font-mono !font-normal text-white;
 
       &::before,
       &::after {

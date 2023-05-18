@@ -54,7 +54,7 @@ const BlogPage = async ({ params }) => {
       isHeaderSticky
     >
       <div className="safe-paddings bg-gray-new-8">
-        <article className="mx-auto grid max-w-[1472px] grid-cols-12 gap-y-20 gap-x-10 pt-20 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-16 xl:pb-32 lg:max-w-none lg:gap-y-0 lg:px-6 lg:pb-28 lg:pt-14 md:gap-x-0 md:px-4 md:pt-6">
+        <article className="mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pt-16 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-12 xl:pb-32 lg:max-w-none lg:px-6 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pt-8">
           <Hero
             className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
             title={title}
@@ -64,7 +64,7 @@ const BlogPage = async ({ params }) => {
           />
 
           <Content
-            className="prose-invert col-start-4 col-end-10 row-start-2 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3 lg:mt-14 md:mt-12"
+            className="prose-invert col-start-4 col-end-10 row-start-2 mt-10 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3"
             html={contentWithLazyBlocks}
             title={title}
             cover={pageBlogPost.largeCover}
@@ -79,7 +79,7 @@ const BlogPage = async ({ params }) => {
           <SocialShare className="hidden lg:mt-14 lg:flex md:mt-12" title={title} slug={shareUrl} />
 
           <MoreArticles
-            className="col-span-10 col-start-2 xl:col-span-full lg:mt-16 md:mt-14"
+            className="col-span-10 col-start-2 mt-16 xl:col-span-full xl:mt-14 lg:mt-12 md:mt-11"
             posts={relatedPosts}
           />
         </article>
