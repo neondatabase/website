@@ -47,7 +47,7 @@ const BlogPageLayout = ({ children }) => (
     <div className="mt-32">
       <Container className="grid grid-cols-12 gap-x-10" size="lg">
         <aside className="col-span-2">
-          <nav className="sticky top-32">
+          <nav className="sticky top-16">
             <span className="h-9">Search posts...</span>
             <ul className="mt-8">
               {categories.map(({ name, slug }, index) => (

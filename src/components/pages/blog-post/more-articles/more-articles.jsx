@@ -3,14 +3,9 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
+import { CATEGORY_COLORS } from 'constants/blog';
 import LINKS from 'constants/links';
 import getFormattedDate from 'utils/get-formatted-date';
-
-const categoriesColor = {
-  company: 'text-green-45',
-  engineering: 'text-yellow-70',
-  community: 'text-brown-70',
-};
 
 const MoreArticles = ({ className = null, posts }) => (
   <section className={clsx('more-articles flex flex-col', className)}>
@@ -50,7 +45,7 @@ const MoreArticles = ({ className = null, posts }) => (
               <Link
                 className={clsx(
                   'mt-4 text-xs font-semibold uppercase leading-none tracking-[0.02em]',
-                  categoriesColor[category.slug] || 'text-green-45'
+                  CATEGORY_COLORS[category.slug] || 'text-green-45'
                 )}
                 to={`${LINKS.blog}${category.slug}`}
               >

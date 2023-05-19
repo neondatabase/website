@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import BlogPostCard, { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
 
-const FeaturedPosts = ({ posts }) => {
+const FeaturedPostsList = ({ posts }) => {
   const primaryPost = posts[0];
   const secondaryPosts = posts.slice(1, 5);
 
@@ -26,7 +26,7 @@ const FeaturedPosts = ({ posts }) => {
   );
 };
 
-FeaturedPosts.propTypes = {
+FeaturedPostsList.propTypes = {
   posts: PropTypes.arrayOf(
     PropTypes.shape({
       ...BlogPostCardPropTypes,
@@ -34,4 +34,4 @@ FeaturedPosts.propTypes = {
   ),
 };
 
-export default FeaturedPosts;
+export default FeaturedPostsList;

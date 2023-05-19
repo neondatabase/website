@@ -3,14 +3,9 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
+import { CATEGORY_COLORS } from 'constants/blog';
 import LINKS from 'constants/links';
 import getFormattedDate from 'utils/get-formatted-date';
-
-const categoriesColor = {
-  company: 'text-green-45',
-  engineering: 'text-yellow-70',
-  community: 'text-brown-70',
-};
 
 const BlogPostCard = ({
   className,
@@ -28,35 +23,39 @@ const BlogPostCard = ({
 
   return (
     <article className={clsx('flex flex-col', className)}>
-      <Link to={`${LINKS.blog}${slug}`}>
-        {largeCover?.mediaItemUrl ? (
-          <Image
-            className="w-full rounded-md"
-            src={largeCover?.mediaItemUrl}
-            alt={largeCover?.altText || title}
-            width={380}
-            height={196}
-          />
-        ) : (
-          <img
-            className="w-full rounded-md bg-gray-new-30"
-            src={`data:image/svg+xml;charset=utf-8,%3Csvg width='${716}' height='${370}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
-            alt=""
-            width={716}
-            height={370}
-            aria-hidden
-          />
-        )}
-      </Link>
-      <Link
-        className={clsx(
-          'mt-[18px] text-xs font-semibold uppercase leading-none tracking-[0.02em]',
-          categoriesColor[category?.slug] || 'text-green-45'
-        )}
-        to={`${LINKS.blog}${category?.slug}`}
-      >
-        {category?.name}
-      </Link>
+      {size !== 'sm' && (
+        <Link to={`${LINKS.blog}${slug}`}>
+          {largeCover?.mediaItemUrl ? (
+            <Image
+              className="w-full rounded-md"
+              src={largeCover?.mediaItemUrl}
+              alt={largeCover?.altText || title}
+              width={716}
+              height={370}
+            />
+          ) : (
+            <img
+              className="w-full rounded-md bg-gray-new-30"
+              src={`data:image/svg+xml;charset=utf-8,%3Csvg width='${716}' height='${370}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+              alt=""
+              width={716}
+              height={370}
+              aria-hidden
+            />
+          )}
+        </Link>
+      )}
+      {size !== 'sm' && (
+        <Link
+          className={clsx(
+            'mt-[18px] text-xs font-semibold uppercase leading-none tracking-[0.02em]',
+            CATEGORY_COLORS[category?.slug] || 'text-green-45'
+          )}
+          to={`${LINKS.blog}${category?.slug}`}
+        >
+          {category?.name}
+        </Link>
+      )}
       <Link className="group flex flex-col" to={`${LINKS.blog}${slug}`}>
         <h1
           className={clsx('font-medium transition-colors duration-200 group-hover:text-green-45', {
@@ -66,7 +65,12 @@ const BlogPostCard = ({
         >
           {title}
         </h1>
-        <div className="mt-2.5 flex items-center">
+        <div
+          className={clsx('flex items-center', {
+            'mt-3': size === 'lg',
+            'mt-1': size === 'md' || size === 'sm',
+          })}
+        >
           {size === 'lg' && (
             <Image
               className="mr-2 rounded-full"
@@ -129,6 +133,7 @@ BlogPostCard.propTypes = {
   className: PropTypes.string,
   size: PropTypes.oneOf(['lg', 'md']),
   ...BlogPostCardPropTypes,
+  withImage: PropTypes.bool,
 };
 
 export default BlogPostCard;
