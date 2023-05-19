@@ -47,9 +47,13 @@ postgres://<user>:<password>@<hostname>:<port>/<dbname>
 
 You must supply the connection string for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The connection string will look something like this:
 
+<CodeBlock shouldWrap>
+
 ```bash
 postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
 ```
+
+</CodeBlock>
 
 where:
 
@@ -58,11 +62,19 @@ where:
 - `ep-polished-water-579720.us-east-2.aws.neon.tech` is the hostname of the Neon PostgreSQL instance. Your hostname will differ.
 - `<dbname>` is the name of the database. You can use the default `neondb` database or create your own. For instructions, see [Create a database](../docs/manage/databases#create-a-database).
 
+<Admonition type="note">
+Neon uses the default PostgreSQL port, `5432`, so it does not need to be specified explicitly in the Neon connection string.
+</Admonition>
+
 After you input the connection strings into your command, it will appear similar to the following:
+
+<CodeBlock shouldWrap>
 
 ```bash
 pg_dump postgres://<user>:<password>@<hostname>:5432/<dbname> | psql postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
 ```
+
+</CodeBlock>
 
 Run the command in your terminal or command window to import your data.
 
@@ -74,15 +86,23 @@ This section describes using the `pg_dump` utility to dump data from an existing
 
     You must supply the connection string for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The Neon connection string will look something like this:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
     ```
 
+    </CodeBlock>
+
 2. Dump the database from your existing PostgreSQL instance. You can use a `pg_dump` command similar to the following:
+
+    <CodeBlock shouldWrap>
 
     ```bash
     pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v
     ```
+
+    </CodeBlock>
 
     The example above includes some optional arguments. The `-Fc` option sends the output to a custom-format archive suitable for input into `pg_restore`. The `-Z 6` option specifies a compression level of 6 (the default). The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump.
 
@@ -90,9 +110,13 @@ This section describes using the `pg_dump` utility to dump data from an existing
 
 3. Load the database dump into Neon using `pg_restore`. For example:
 
+      <CodeBlock shouldWrap>
+
       ```bash
       pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc --single-transaction dumpfile.bak.gz -c -v
       ```
+
+      </CodeBlock>
 
     The example above includes some optional arguments. The `-Fc` option sends the output a custom-format archive suitable for input into `pg_restore`. The `--single-transaction` option forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.) The `-c` option tells the restore operation to run `clean`, meaning that it drops database objects before recreating them. The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the restore operation.
 

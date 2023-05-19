@@ -22,15 +22,23 @@ To import your data from another Neon project:
 
     You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Your connection strings will look something like this:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
     ```
 
+    </CodeBlock>
+
 4. Prepare your import command. It will look similar to this one:
+
+    <CodeBlock shouldWrap>
 
     ```bash
     pg_dump postgres://<user>:<password>@ep-dawn-union-749234.us-east-2.aws.neon.tech/<dbname> | psql postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
     ```
+
+    </CodeBlock>
 
 5. Run the import command from your terminal or command window.
 6. If you no longer require the old project, you can remove it. See [Delete a project](../manage/projects#delete-a-project) for instructions.
