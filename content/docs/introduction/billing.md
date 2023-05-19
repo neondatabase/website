@@ -43,11 +43,13 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 
 ## Account billing page
 
-A Neon account subscribed to a paid plan has access to a **Billing** page in the Neon Console, where you can:
+A Neon account subscribed to a paid plan can perform the following actions on the **Billing** page in the Neon Console:
 
 - View your current billing total for the month-to-date, including a cost breakdown by [billing metric](#billing-and-usage-metrics).
 - Update your payment details
 - Download invoices
+
+Free Tier users can view [Free Tier](/docs/introduction/technical-preview-free-tier) limits on the **Billing** page and learn about the benefits of upgrading to the [Neon Pro plan](/docs/introduction/pro-plan).
 
 To access your **Billing** page:
 
