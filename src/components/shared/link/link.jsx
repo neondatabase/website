@@ -57,6 +57,14 @@ const Link = forwardRef(
         {withArrow && <ArrowRightIcon className={clsx('ml-2 shrink-0')} />}
       </>
     );
+    // TODO: remove this when we upgrade to latest version of Next.js
+    if (to.includes('#')) {
+      return (
+        <a className={className} href={to} ref={ref} {...props}>
+          {content}
+        </a>
+      );
+    }
 
     if (to.startsWith('/')) {
       return (

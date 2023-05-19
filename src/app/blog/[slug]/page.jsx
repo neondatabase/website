@@ -24,7 +24,7 @@ const BlogPage = async ({ params }) => {
   if (!post) return notFound();
 
   const { slug, title, content, pageBlogPost, date, readingTime } = post;
-  const shareUrl = `${process.env.DEFAULT_SITE_URL}/blog/${slug}`;
+  const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog/${slug}`;
   const formattedDate = new Date(date).toLocaleDateString(
     {},
     { timeZone: 'UTC', month: 'long', day: '2-digit', year: 'numeric' }

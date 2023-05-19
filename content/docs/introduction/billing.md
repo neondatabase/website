@@ -22,7 +22,7 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 |                          | Free Tier                         | Pro (usage-based)             | Custom - Enterprise or Platform Partnership (volume-based)|
 |:-------------------------|:----------------------------------|:-----------------|:--------------------------|
 |**Best for**              | Prototyping and personal projects       | Small to medium teams, setups with 1 to 3 active databases  | Medium to large teams, Database fleets, Resale |
-|**Projects**              | 1                                 | 20               | Unlimited                 |
+|**Projects**              | 1                                 | Unlimited*               | Unlimited                 |
 |**Branches**              | 10                                 | Unlimited               | Unlimited                 |
 |**Active time per month** | No limit on the [primary branch](../reference/glossary#primary-branch) compute. 100 hours for [non-primary branch](../reference/glossary#non-primary-branch) computes*                 | Unlimited        | Unlimited                 |
 |**Compute size**          | 1 shared vCPU with 1 GB RAM   | Up to 7 vCPUs, each with 4 GB RAM     | Custom           |
@@ -37,7 +37,7 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 
 **Notes:**
 
-- The Pro plan has default limits of 200 GB of storage and 20 simultaneously active computes. To increase these limits, reach out to our [Sales](https://neon.tech/contact-sales) team. The simultaneously active compute limit does affect the primary branch compute.
+- The Pro plan has default limits of 20 projects, 200 GB of storage, and 20 simultaneously active computes. To increase these limits, reach out to our [Sales](https://neon.tech/contact-sales) team. The simultaneously active compute limit does not affect the primary branch compute.
 - The Free Tier has an [Active time](../reference/glossary#active-time) limit of 100 hours per month for non-primary branch computes. _Active time_ on the primary branch compute is counted toward the 100 hour limit. See [Free Tier](../introduction/technical-preview-free-tier) for more information.
 - **There is no limit on Active time for the primary branch compute. This ensures that access to data on the primary branch is never interrupted.**
 
@@ -71,15 +71,13 @@ To cancel a Pro plan subscription:
 
 1. Navigate to the **Billing** page in the Neon Console.
 1. Click **Request subscription cancellation** at the bottom of the page.
-1. Enter your cancellation request into the **Unsubscribe** dialog and click **Send**.
+1. Follow the instructions and click **Request downgrade**.
 
-The request is sent to the Neon Support team, who will respond to you with a request confirmation.
+Cancelling your Pro plan subscription downgrades your account to the Free Tier.
 
-Canceling a subscription to the Pro plan downgrades your account to the Neon Free Tier. The Neon Support team will ask you to remove any projects or storage that exceed [Neon's Free Tier limits](../introduction/technical-preview-free-tier). The subscription cancellation goes into effect at the beginning of the next billing period (the start of the month following the cancellation request).
+You will be required to remove any projects, branches, or data that exceed [Free Tier limits](../introduction/technical-preview-free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade request).
 
-If usage is not reduced in accordance with Neon's Free tier limits, Neon suspends projects and branches other than those it determines to be the most active. After 60 days, Neon reserves the right to remove any project or storage that exceeds Neon's Free Tier limits.
-
-Cancellation of Enterprise, Platform Partnership, or other customized plans are handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
+For cancellation of Enterprise or Platform Partnership plans, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans are handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
 
 ## Billing and usage metrics explained
 
@@ -95,7 +93,7 @@ The _Active time_ metric is a usage metric rather than a billing metric. It is a
 
 ### Compute time
 
-The _Compute time_ billing metric measures the amount of computing capacity used within a given time period. Neon takes a measure of compute utilization every five seconds, which is averaged based on the observed computing capacity. Computing capacity is based on _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon [compute endpoint](../reference/glossary/#compute-endpoint) can have anywhere from .25 to 7 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an `Active` state. A defined period of inactivity places the compute endpoint and its CUs into an `Idle` state.
+The _Compute time_ billing metric measures the amount of computing capacity used within a given time period. Neon takes a measure of computing capacity at a defined interval and averages those values to calculate _Compute time_. The minium interval is 12 seconds. Computing capacity is based on _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon [compute endpoint](../reference/glossary/#compute-endpoint) can have anywhere from .25 to 7 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an `Active` state. A defined period of inactivity places the compute endpoint and its CUs into an `Idle` state.
 
 Factors that affect the amount of compute time include:
 

@@ -53,6 +53,7 @@ const components = {
   ),
   DefinitionList,
   Admonition,
+  CodeBlock,
   CodeTabs,
   IntroNavigation,
   TechnologyNavigation,

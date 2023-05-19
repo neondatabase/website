@@ -82,6 +82,14 @@
       }
     }
 
+    .code-wrap {
+      code {
+        white-space: break-spaces !important;
+
+        @apply !max-w-full !break-words;
+      }
+    }
+
     iframe,
     video {
       @apply mx-auto rounded-md;

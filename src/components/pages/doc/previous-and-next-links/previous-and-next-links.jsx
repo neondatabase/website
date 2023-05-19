@@ -6,11 +6,19 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 
 import ArrowIcon from './images/arrow.inline.svg';
 
+const getUrl = (slug) => {
+  if (slug.startsWith('http')) {
+    return slug;
+  }
+
+  return `${DOCS_BASE_PATH}${slug}`;
+};
+
 const PreviousAndNextLinks = ({ previousLink = null, nextLink = null }) => (
   <div className="mt-10 flex w-full space-x-10 sm:mt-7 sm:space-x-0">
     {previousLink && (
       <Link
-        to={`${DOCS_BASE_PATH}${previousLink.slug}`}
+        to={getUrl(previousLink.slug)}
         className="group mr-auto flex w-1/2 items-center justify-between rounded border border-gray-7 p-4 dark:border-gray-2 sm:hidden"
       >
         <ArrowIcon className="shrink-0 rotate-180 text-gray-5 transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1" />
@@ -24,7 +32,7 @@ const PreviousAndNextLinks = ({ previousLink = null, nextLink = null }) => (
     )}
     {nextLink && (
       <Link
-        to={`${DOCS_BASE_PATH}${nextLink.slug}`}
+        to={getUrl(nextLink.slug)}
         className="group ml-auto flex w-1/2 items-center justify-between rounded border border-gray-7 p-4 text-right dark:border-gray-2 sm:w-full sm:space-x-3"
       >
         <div className="flex flex-col items-start">
