@@ -48,7 +48,13 @@ Serverless functions typically require a large number of database connections. W
 
 To use a pooled connection from Prisma, adjust your Neon connection string by adding a `-pooler` suffix to the endpoint ID and appending the `?pgbouncer=true` flag to the connection string, as shown:
 
-`DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true`
+<CodeBlock shouldWrap>
+
+```text
+DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true`
+```
+
+</CodeBlock>
 
 The `-pooler` suffix tells Neon to use a pooled connection rather than a direct connection. The `?pgbouncer=true` flag requires that the connection uses PgBouncer.
 
@@ -73,7 +79,13 @@ A Neon compute has two main states: _Active_ and _Idle_. Active means that the c
 
 When you connect to an idle compute from Prisma, Neon automatically activates it. Activation typically happens within a few seconds but added latency can result in a connection timeout. To address this issue, your can adjust your Neon connection string by adding a `connect_timeout` parameter. This parameter defines the maximum number of seconds to wait for a new connection to be opened. The default value is 5 seconds. A higher setting should provide the time required to avoid connection timeout issues. For example:
 
-  `DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb?connect_timeout=10`
+<CodeBlock shouldWrap>
+
+```text
+DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb?connect_timeout=10`
+```
+
+</CodeBlock>
 
 <Admonition type="note">
 A `connect_timeout` setting of 0 means no timeout.
@@ -81,7 +93,13 @@ A `connect_timeout` setting of 0 means no timeout.
 
 Another possible cause of connection timeouts is [Prisma's connection pool](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/), which has a default timeout of 10 seconds. This is typically enough time for Neon, but if you are still experiencing connection timeouts, you can try increasing this limit (in addition to the `connect_timeout` setting described above) by setting the `pool_timeout` parameter to a higher value. For example:
 
-  `DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb?connect_timeout=15&pool_timeout=15`
+<CodeBlock shouldWrap>
+
+```text
+DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb?connect_timeout=15&pool_timeout=15`
+```
+
+</CodeBlock>
   
 For additional information about connecting from Prisma, refer to the following resources in the _Prisma documentation_:
 
