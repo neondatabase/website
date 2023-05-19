@@ -11,9 +11,13 @@ The following example uses the default `neondb` database, a table named `custome
 
 1. Connect to the `neondb` database using `psql`. For example:
 
+   <CodeBlock shouldWrap>
+
    ```bash
    psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
    ```
+
+   </CodeBlock>
 
    <Admonition type="note">
    For more information about connecting to Neon with `psql`, see [Connect with psql](../connect/query-with-psql-editor).

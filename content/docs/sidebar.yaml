@@ -142,6 +142,8 @@
       slug: import/import-from-heroku
     - title: Import from CSV
       slug: import/import-from-csv
+    - title: Import from a Neon project
+      slug: import/import-from-neon
 - title: Serverless driver
   slug: serverless/serverless-driver
 - title: Security
