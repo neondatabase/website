@@ -99,7 +99,7 @@ const SubscribeForm = () => {
       <div className="mx-auto flex max-w-[1166px] items-center justify-between pr-12 2xl:px-10 2xl:pr-0 lg:flex-col lg:px-8 md:px-4">
         <div className="relative z-20 lg:text-center">
           <h2 className="text-4xl leading-none tracking-tighter xl:text-[36px] sm:text-[32px]">
-            Subscribe to <mark className="bg-transparent text-green">Neon’s News</mark>
+            Subscribe to <mark className="bg-transparent text-green-45">Neon’s News</mark>
           </h2>
           <p className="mt-3.5 text-lg leading-tight tracking-[-0.02em] text-gray-new-80 lg:mt-2.5 sm:mx-auto sm:max-w-[300px]">
             Get insider access to Neon's latest news and events
@@ -113,8 +113,8 @@ const SubscribeForm = () => {
             <input
               className={clsx(
                 'remove-autocomplete-styles h-14 w-full appearance-none rounded-[50px] border bg-black-new pl-7 pr-36 text-white placeholder:text-white/60 focus:outline-none',
-                formState === STATES.ERROR ? 'border-secondary-1' : 'border-green',
-                formState === STATES.SUCCESS ? 'text-green' : 'text-white'
+                formState === STATES.ERROR ? 'border-secondary-1' : 'border-green-45',
+                formState === STATES.SUCCESS ? 'text-green-45' : 'text-white'
               )}
               type="email"
               name="email"
@@ -131,7 +131,7 @@ const SubscribeForm = () => {
                       'absolute inset-y-2 right-2 h-10 rounded-[80px] py-3 px-7 font-bold leading-none text-black transition-colors duration-200 sm:py-3 sm:px-5',
                       formState === STATES.ERROR
                         ? 'bg-secondary-1/50'
-                        : 'bg-green hover:bg-[#00FFAA]'
+                        : 'bg-green-45 hover:bg-[#00FFAA]'
                     )}
                     type="submit"
                     initial="initial"
@@ -176,7 +176,7 @@ const SubscribeForm = () => {
                 )}
                 {formState === STATES.SUCCESS && (
                   <m.div
-                    className="absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-green text-black"
+                    className="absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-green-45 text-black"
                     initial="initial"
                     animate="animate"
                     exit="exit"

@@ -8,7 +8,7 @@ const FeaturedPosts = ({ posts }) => {
 
   return (
     <section>
-      <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue">
+      <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue-80">
         <span>Featured</span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>

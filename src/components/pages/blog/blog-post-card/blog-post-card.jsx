@@ -6,9 +6,9 @@ import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 
 const categoriesColor = {
-  company: 'text-green',
-  engineering: 'text-yellow',
-  community: 'text-brown',
+  company: 'text-green-45',
+  engineering: 'text-yellow-70',
+  community: 'text-brown-70',
 };
 
 const BlogPostCard = ({
@@ -50,14 +50,14 @@ const BlogPostCard = ({
       <Link
         className={clsx(
           'mt-[18px] text-xs font-semibold uppercase leading-none tracking-[0.02em]',
-          categoriesColor[category?.slug] || 'text-green'
+          categoriesColor[category?.slug] || 'text-green-45'
         )}
         to={`${LINKS.blog}${category?.slug}`}
       >
         {category?.name}
       </Link>
       <h1
-        className={clsx('font-medium transition-colors duration-200 group-hover:text-green', {
+        className={clsx('font-medium transition-colors duration-200 group-hover:text-green-45', {
           'mt-2 text-3xl leading-dense tracking-tighter': size === 'lg',
           'mt-2 text-lg leading-tight tracking-[-0.02em]': size === 'md',
         })}

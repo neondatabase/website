@@ -9,7 +9,7 @@ import SocialShare from '../social-share';
 
 const Aside = ({ className, title, slug, authors, posts }) => (
   <aside className={clsx('aside ml-auto max-w-[252px] lg:ml-0 lg:max-w-full', className)}>
-    <h3 className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue lg:hidden">
+    <h3 className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue-80 lg:hidden">
       Posted by
     </h3>
     <div className="flex flex-col space-y-4">
@@ -34,7 +34,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
               alt={author.title || author.postAuthor?.image?.altText}
             />
             <div className="flex flex-col">
-              <span className="font-semibold leading-none tracking-[0.02em] transition-colors duration-200 group-hover:text-green">
+              <span className="font-semibold leading-none tracking-[0.02em] transition-colors duration-200 group-hover:text-green-45">
                 {author.title}
               </span>
               <span className="mt-0.5 text-sm leading-tight tracking-[-0.02em] text-gray-new-70">
@@ -45,7 +45,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
         );
       })}
     </div>
-    <h3 className="mt-16 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue lg:hidden">
+    <h3 className="mt-16 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue-80 lg:hidden">
       Related articles
     </h3>
     <ul className="mt-5 flex flex-col space-y-6 lg:hidden">
@@ -54,7 +54,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
           <Link className="group" to={`${LINKS.blog}${slug}`}>
             <article className="flex items-center space-x-3">
               <div className="tracking-[-0.02em]">
-                <h1 className="font-medium leading-tight transition-colors duration-200 line-clamp-2 group-hover:text-green">
+                <h1 className="font-medium leading-tight transition-colors duration-200 line-clamp-2 group-hover:text-green-45">
                   {title}
                 </h1>
                 <span className="mt-1.5 text-sm leading-none text-gray-new-70">
