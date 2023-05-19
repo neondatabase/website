@@ -32,6 +32,10 @@ const getAllWpPosts = async () => {
           title(format: RENDERED)
           date
           pageBlogPost {
+            largeCover {
+              altText
+              mediaItemUrl
+            }
             description
             authors {
               author {

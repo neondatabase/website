@@ -8,12 +8,12 @@ import LINKS from 'constants/links';
 const categoriesColor = {
   company: 'text-green',
   engineering: 'text-yellow',
-  community: 'text-blue',
+  community: 'text-brown',
 };
 
 const MoreArticles = ({ className = null, posts }) => (
   <section className={clsx('more-articles flex flex-col', className)}>
-    <h2 className="right-0 flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue">
+    <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue">
       <span className="">More from Neon</span>
       <span className="ml-2 h-px grow bg-gray-new-20" />
     </h2>
