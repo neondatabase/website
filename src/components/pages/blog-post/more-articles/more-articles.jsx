@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import getFormattedDate from 'utils/get-formatted-date';
 
 const categoriesColor = {
   company: 'text-green-45',
@@ -22,10 +23,7 @@ const MoreArticles = ({ className = null, posts }) => (
       {posts.map(({ title, slug, date, categories, pageBlogPost: { authors, largeCover } }) => {
         const category = categories.nodes[0];
         const author = authors[0]?.author;
-        const formattedDate = new Date(date).toLocaleDateString(
-          {},
-          { timeZone: 'UTC', month: 'short', day: '2-digit', year: 'numeric' }
-        );
+        const formattedDate = getFormattedDate(date);
         return (
           <li key={slug}>
             <article className="flex flex-col">

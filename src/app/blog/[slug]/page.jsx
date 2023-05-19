@@ -12,6 +12,7 @@ import CodeBlock from 'components/shared/code-block';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData } from 'utils/api-posts';
+import getFormattedDate from 'utils/get-formatted-date';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
 const BlogPage = async ({ params }) => {
@@ -31,10 +32,7 @@ const BlogPage = async ({ params }) => {
 
   const { slug, title, content, pageBlogPost, date, categories } = post;
   const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${LINKS.blog}${slug}`;
-  const formattedDate = new Date(date).toLocaleDateString(
-    {},
-    { timeZone: 'UTC', month: 'short', day: '2-digit', year: 'numeric' }
-  );
+  const formattedDate = getFormattedDate(date);
 
   const contentWithLazyBlocks = getReactContentWithLazyBlocks(
     content,
