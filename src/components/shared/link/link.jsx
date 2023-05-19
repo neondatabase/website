@@ -28,7 +28,7 @@ const styles = {
     'black-secondary-5': `${underlineCommonStyles} before:bg-secondary-5 hover:text-secondary-5`,
     'underline-primary-1':
       'text-primary-1 border-b-2 border-primary-1 transition-colors duration-200 hover:border-transparent',
-    blue: 'text-blue hover:text-[#C6EAF1]',
+    blue: 'text-blue-80 hover:text-[#C6EAF1]',
   },
 };
 

@@ -6,14 +6,14 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
 const categoriesColor = {
-  company: 'text-green',
-  engineering: 'text-yellow',
-  community: 'text-blue',
+  company: 'text-green-45',
+  engineering: 'text-yellow-70',
+  community: 'text-brown-70',
 };
 
 const MoreArticles = ({ className = null, posts }) => (
   <section className={clsx('more-articles flex flex-col', className)}>
-    <h2 className="right-0 flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue">
+    <h2 className="right-0 flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue-80">
       <span className="">More from Neon</span>
       <span className="ml-2 h-px grow bg-gray-new-20" />
     </h2>
@@ -52,14 +52,14 @@ const MoreArticles = ({ className = null, posts }) => (
               <Link
                 className={clsx(
                   'mt-4 text-xs font-semibold uppercase leading-none tracking-[0.02em]',
-                  categoriesColor[category.slug] || 'text-green'
+                  categoriesColor[category.slug] || 'text-green-45'
                 )}
                 to={`${LINKS.blog}${category.slug}`}
               >
                 {category.name}
               </Link>
               <Link className="group mt-2" to={`${LINKS.blog}${slug}`}>
-                <h1 className="text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-green">
+                <h1 className="text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-green-45">
                   {title}
                 </h1>
                 <div className="mt-2.5 flex items-center">
