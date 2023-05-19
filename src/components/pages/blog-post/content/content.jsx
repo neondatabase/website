@@ -7,7 +7,7 @@ const Content = ({ html, title, cover, className = null }) => (
   <div className={className}>
     {cover && (
       <Image
-        className="mb-10 md:mb-8"
+        className="mb-10 rounded-md md:mb-8"
         src={cover?.mediaItemUrl}
         width={716}
         height={375}
