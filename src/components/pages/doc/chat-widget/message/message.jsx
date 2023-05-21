@@ -10,20 +10,18 @@ import UserIcon from '../images/user.inline.svg';
 
 const Message = ({ role, content }) => {
   const [mdxSource, setMdxSource] = useState(null);
+
   const fetchMdx = async (currentContent) => {
     const serializedContent = await serializeMdx(currentContent);
     setMdxSource(serializedContent);
   };
+
   useEffect(() => {
     if (content) {
       fetchMdx(content);
     }
   }, [content]);
-  if (role === 'assistant') {
-    // @TODO: remove this, debug only
-    // eslint-disable-next-line no-console
-    console.log({ mdxSource, content });
-  }
+
   return (
     <div
       className={clsx(

@@ -65,6 +65,10 @@ const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) =>
     signal: abortControllerSignal,
   });
 
+  // @TODO: remove me
+  // eslint-disable-next-line no-console
+  console.log(messages);
+
   // attach event listeners
   useEffect(() => {
     setIsMounted(true);
