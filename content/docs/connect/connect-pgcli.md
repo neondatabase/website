@@ -11,7 +11,7 @@ The `pgcli` client is an interactive command-line interface for PostgreSQL that 
 
 For installation instructions, please refer to the `pgcli` [installation documentation](https://www.pgcli.com/install).
 
-## pgcli usage
+## Usage information
 
 To view `pgcli` usage information, run the following command:
 
