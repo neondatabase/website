@@ -10,13 +10,13 @@ import UserIcon from '../images/user.inline.svg';
 
 const Message = ({ role, content }) => {
   const [mdxSource, setMdxSource] = useState(null);
+  const fetchMdx = async (currentContent) => {
+    const serializedContent = await serializeMdx(currentContent);
+    setMdxSource(serializedContent);
+  };
   useEffect(() => {
-    const fetchMdx = async () => {
-      const serializedContent = await serializeMdx(content);
-      setMdxSource(serializedContent);
-    };
     if (content) {
-      fetchMdx();
+      fetchMdx(content);
     }
   }, [content]);
 

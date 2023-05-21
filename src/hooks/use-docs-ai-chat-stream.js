@@ -7,7 +7,7 @@ const useDocsAIChatStream = ({ isMounted, signal }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = useCallback(
-    async (currentMessages) => {
+    async (message) => {
       setIsLoading(true);
       try {
         const response = await fetch('/api/open-ai', {
@@ -16,7 +16,7 @@ const useDocsAIChatStream = ({ isMounted, signal }) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            message: currentMessages[currentMessages.length - 1],
+            message,
           }),
           signal,
         });
@@ -77,8 +77,8 @@ const useDocsAIChatStream = ({ isMounted, signal }) => {
 
   useEffect(() => {
     if (messages.length && messages[messages.length - 1].role === 'user') {
+      fetchData(messages[messages.length - 1]);
       setMessages((prevMessages) => [...prevMessages, { role: 'assistant', content: '' }]);
-      fetchData(messages);
     }
   }, [messages, fetchData]);
 
