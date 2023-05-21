@@ -21,11 +21,11 @@ pgcli --help
 
 ## Connect to Neon
 
-The easiest way to connect to Neon using the `pgcli` client is with a connection string. You can obtain a connection string from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
+The easiest way to connect to Neon using the `pgcli` client is with a connection string, which you can obtain  from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
-From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**. Your command will look something like this:
+From your terminal or command prompt, run the `pgcli` client with the connection string. Your command will look something like this:
 
 <CodeBlock shouldWrap>
 
@@ -37,7 +37,7 @@ pgcli postgres://<user>:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/<
 
 ## Run queries
 
-After establishing a connection, try the `pgcli` client by running the following queries. To test the `pgcli` [autocompletion](https://www.pgcli.com/completion) feature, be sure to type the `SELECT` query.
+After establishing a connection, try the `pgcli` client by running the following queries. To test the `pgcli` [autocompletion](https://www.pgcli.com/completion) feature, type the `SELECT` query.
 
 ```sql
 CREATE TABLE my_table AS SELECT now();
@@ -57,7 +57,7 @@ SELECT 1
 Time: 0.116s
 ```
 
-The `pgcli` [query history](https://www.pgcli.com/history) feature allows to you use **Up** and **Down** keys on your keyboard to navigate your query history.
+The `pgcli` [query history](https://www.pgcli.com/history) feature allows you to use the **Up** and **Down** keys on your keyboard to navigate your query history.
 
 The `pgcli` client also supports [named queries](https://www.pgcli.com/named_queries.md). To save a query, type:
 
