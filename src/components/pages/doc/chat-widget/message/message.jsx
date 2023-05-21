@@ -19,7 +19,11 @@ const Message = ({ role, content }) => {
       fetchMdx(content);
     }
   }, [content]);
-
+  if (role === 'assistant') {
+    // @TODO: remove this, debug only
+    // eslint-disable-next-line no-console
+    console.log({ mdxSource });
+  }
   return (
     <div
       className={clsx(
