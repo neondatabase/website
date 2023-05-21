@@ -24,6 +24,7 @@ const useDocsAIChatStream = ({ isMounted, signal }) => {
         const reader = response.body.getReader();
         while (isMounted) {
           const { done, value } = await reader.read();
+          console.log('after tl', { isMounted, done, value });
           if (done) break;
 
           // Process the received chunk value
