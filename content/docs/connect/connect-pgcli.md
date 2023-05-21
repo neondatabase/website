@@ -11,46 +11,15 @@ The `pgcli` client is an interactive command-line interface for PostgreSQL that 
 
 For installation instructions, please refer to the `pgcli` [installation documentation](https://www.pgcli.com/install).
 
-## pgcli usage information
+## pgcli usage
 
-To view pgcli usage information, run `pgcli --help`:
+To view `pgcli` usage information, run the following command:
 
 ```bash
-$ pgcli --help
-Usage: pgcli [OPTIONS] [DBNAME] [USERNAME]
-Options:
-
-  -h, --host TEXT            Host address of the postgres database.
-  -p, --port INTEGER         Port number at which the postgres instance is
-                             listening.
-  -U, --username TEXT        Username to connect to the postgres database.
-  -u, --user TEXT            Username to connect to the postgres database.
-  -W, --password             Force password prompt.
-  -w, --no-password          Never prompt for password.
-  --single-connection        Do not use a separate connection for completions.
-  -v, --version              Version of pgcli.
-  -d, --dbname TEXT          database name to connect to.
-  --pgclirc FILE             Location of pgclirc file.
-  -D, --dsn TEXT             Use DSN configured into the [alias_dsn] section
-                             of pgclirc file.
-  --list-dsn                 list of DSN configured into the [alias_dsn]
-                             section of pgclirc file.
-  --row-limit INTEGER        Set threshold for row limit prompt. Use 0 to
-                             disable prompt.
-  --less-chatty              Skip intro on startup and goodbye on exit.
-  --prompt TEXT              Prompt format (Default: "\u@\h:\d> ").
-  --prompt-dsn TEXT          Prompt format for connections using DSN aliases
-                             (Default: "\u@\h:\d> ").
-  -l, --list                 list available databases, then exit.
-  --auto-vertical-output     Automatically switch to vertical output mode if
-                             the result is wider than the terminal width.
-  --warn [all|moderate|off]  Warn before running a destructive query.
-  --ssh-tunnel TEXT          Open an SSH tunnel to the given address and
-                             connect to the database from it.
-  --help                     Show this message and exit.
+pgcli --help
 ```
 
-## Connecting to Neon with the pgcli client
+## Connect to Neon
 
 The easiest way to connect to Neon using the `pgcli` client is with a connection string. You can obtain a connection string from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
@@ -61,7 +30,7 @@ From your terminal or command prompt, run the `psql` client with the connection 
 <CodeBlock shouldWrap>
 
 ```bash
-$ pgcli postgres://<user>:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/<dbname>
+pgcli postgres://<user>:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/<dbname>
 ```
 
 </CodeBlock>
