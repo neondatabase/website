@@ -87,13 +87,13 @@ const CTA = () => {
       <Container className="z-20" size="md" ref={animationVisibilityRef}>
         <Heading id="cta-title" tag="h2" size="xl" theme="white" ref={titleRef}>
           <BlinkingText
-            text="Made for Developers"
+            text="Made for developers"
             parentElement={titleRef.current}
             shouldAnimationStart={isInView}
           />
         </Heading>
         <motion.p className="t-3xl mt-5 text-white 2xl:mt-4" variants={pVariants}>
-          Launch Serverless Postgres with a single command:
+          Launch serverless Postgres with a single command
         </motion.p>
         <motion.div
           id="cta-input"

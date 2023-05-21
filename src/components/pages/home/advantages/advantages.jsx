@@ -29,18 +29,18 @@ const Advantages = () => {
     {
       animationData: scalableAnimationData,
       title: 'Scalable',
-      description: `Compute scales dynamically to ensure that you are ready for peak hours.`,
+      description: `Compute scales dynamically to ensure you're ready for peak hours.`,
     },
     {
       animationData: costEfficientAnimationData,
-      title: 'Cost Efficient',
+      title: 'Cost efficient',
       description:
-        'Compute scales down to zero on usage, and cold storage offloads to S3 for cost efficiency.',
+        'Compute scales to zero and cold storage offloads to S3 for cost efficiency.',
     },
     {
       animationData: easyToUseAnimationData,
-      title: 'Easy to Use',
-      description: 'Fully managed serverless Postgres starts in seconds.',
+      title: 'Easy to use',
+      description: 'Create a fully managed serverless Postgres instance in seconds.',
     },
   ];
 

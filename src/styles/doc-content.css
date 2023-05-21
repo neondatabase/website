@@ -20,7 +20,7 @@
     }
 
     h2 {
-      @apply mt-10 mb-3;
+      @apply mb-3 mt-10;
     }
 
     p {
@@ -120,6 +120,14 @@
       &::before,
       &::after {
         @apply hidden;
+      }
+    }
+
+    .code-wrap {
+      code {
+        white-space: break-spaces !important;
+
+        @apply !max-w-full !break-words;
       }
     }
 

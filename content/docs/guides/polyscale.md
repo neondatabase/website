@@ -13,14 +13,14 @@ Follow the steps below to connect your Neon database to PolyScale.
 
 In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](/docs/guides/connection_details.png)
+![Connection details widget](/docs/connect/connection_details.png)
 
 The connection string includes the user name, password, hostname, and database name.
 
 Copy the hostname. In the example above, the hostname is this part of the connection string:
 
 ```text
- ep-restless-rice-862380.us-east-2.aws.neon.tech
+ ep-mute-rain-952417.us-east-2.aws.neon.tech
  ```
 
 Also, make note of the user, password, and database name. You will need those details when you configure a connection from your  application to PolyScale.

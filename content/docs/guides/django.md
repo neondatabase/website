@@ -54,7 +54,7 @@ where:
 Neon places computes into an `Idle` state and closes connections after 5 minutes of inactivity (see [Compute lifecycle](https://neon.tech/docs/introduction/compute-lifecycle/)). To avoid connection errors, you can set the Django [CONN_MAX_AGE](https://docs.djangoproject.com/en/4.1/ref/settings/#std-setting-CONN_MAX_AGE) setting to 0 to close database connections at the end of each request so that your application does not attempt to reuse connections that were closed by Neon. From Django 4.1, you can use a higher `CONN_MAX_AGE` setting in combination with the [CONN_HEALTH_CHECKS](https://docs.djangoproject.com/en/4.1/ref/settings/#conn-health-checks) setting to enable connection reuse while preventing errors that might occur due to closed connections. For more information about these configuration options, see [Connection management](https://docs.djangoproject.com/en/4.1/ref/databases#connection-management), in the _Django documentation_.
 </Admonition>
 
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
 
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings#databases), in the Django documentation.
 
@@ -65,7 +65,8 @@ Running Django tests is currently not supported. The Django test runner must be 
 ## Video course: Micro eCommerce with Django and Neon
 
 Watch Justin Mitchel's video course, _Micro eCommerce with Python, Django, Neon Serverless Postgres, Stripe, TailwindCSS and more_, to learn how to connect a Django application to Neon.
-[![Connection to Django](/images/neon-django.jpeg)](https://www.youtube.com/watch?v=qx9nshX9CQQ&t=1570s)
+
+<iframe width="796" height="447" src="https://www.youtube.com/embed/qx9nshX9CQQ?start=1569" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Need help?
 

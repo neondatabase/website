@@ -5,6 +5,7 @@ const { Feed } = require('feed');
 
 const { RELEASE_NOTES_BASE_PATH } = require('../constants/docs');
 const { getAllReleaseNotes, getPostBySlug, RELEASE_NOTES_DIR_PATH } = require('../utils/api-docs');
+const getReleaseNotesDateFromSlug = require('../utils/get-release-notes-date-from-slug');
 
 (async function () {
   dotenv.config({ path: '.env.local' });
@@ -25,15 +26,18 @@ const { getAllReleaseNotes, getPostBySlug, RELEASE_NOTES_DIR_PATH } = require('.
 
     releaseNotes.forEach((post) => {
       const { slug } = post;
+
       const { excerpt } = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
       const url = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${RELEASE_NOTES_BASE_PATH}${slug}`;
       const category = slug.slice(slug.lastIndexOf('-') + 1);
       const capitalisedCategory = category.charAt(0).toUpperCase() + category.slice(1);
 
+      const { datetime } = getReleaseNotesDateFromSlug(slug);
+
       feed.addItem({
         id: url,
         link: url,
-        date: new Date(post.slug),
+        date: new Date(datetime),
         title: `${capitalisedCategory} release`,
         description: excerpt,
       });

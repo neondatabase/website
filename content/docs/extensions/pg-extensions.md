@@ -29,6 +29,7 @@ Neon supports the PostgreSQL extensions shown in the following table. For extens
 | insert_username (spi)    | [1.0](https://www.postgresql.org/docs/current/contrib-spi.html) | [1.0](https://www.postgresql.org/docs/current/contrib-spi.html)  |                                                                                                                    |
 | intagg                   | [1.1](https://www.postgresql.org/docs/14/intagg.html)           | [1.1](https://www.postgresql.org/docs/15/intagg.html)            |                                                                                                                    |
 | intarray                 | [1.5](https://www.postgresql.org/docs/14/intarray.html)         | [1.5](https://www.postgresql.org/docs/15/intarray.html)          |                                                                                                                    |
+| ip4r                     | [2.4.1](https://github.com/RhodiumToad/ip4r)                    | [2.4.1](https://github.com/RhodiumToad/ip4r)                     |                                                                                                                    |
 | isn                      | [1.2](https://www.postgresql.org/docs/14/isn.html)              | [1.2](https://www.postgresql.org/docs/15/isn.html)               |                                                                                                                    |
 | lo                       | [1.1](https://www.postgresql.org/docs/14/lo.html)               | [1.1](https://www.postgresql.org/docs/15/lo.html)                |                                                                                                                    |
 | ltree                    | [1.2](https://www.postgresql.org/docs/14/ltree.html)            | [1.2](https://www.postgresql.org/docs/15/ltree.html)             |                                                                                                                    |
@@ -36,6 +37,7 @@ Neon supports the PostgreSQL extensions shown in the following table. For extens
 | pg_graphql               | [1.1.0](https://github.com/supabase/pg_graphql)                 | [1.1.0](https://github.com/supabase/pg_graphql)                  |                                                                                                                    |
 | pg_jsonschema            | [1.1.0](https://github.com/supabase/pg_jsonschema)              | [1.1.0](https://github.com/supabase/pg_jsonschema)               |                                                                                                                    |
 | pg_hashids               | [1.2.1](https://github.com/iCyberon/pg_hashids)                 | [1.2.1](https://github.com/iCyberon/pg_hashids)                  |                                                                                                                    |
+| pg_hint_plan               | [1.6](https://github.com/ossc-db/pg_hint_plan)                 | [1.6](https://github.com/ossc-db/pg_hint_plan)                  |                                                                                                                    |
 | pg_prewarm               | [1.2](https://www.postgresql.org/docs/14/pgprewarm.html)        | [1.2](https://www.postgresql.org/docs/15/pgprewarm.html)         |                                                                                                                    |
 | pg_stat_statements       | [1.10](https://www.postgresql.org/docs/14/pgstatstatements.html) | [1.10](https://www.postgresql.org/docs/15/pgstatstatements.html) |
 | pg_tiktoken              | [0.0.1](https://github.com/kelvich/pg_tiktoken)                 | [0.0.1](https://github.com/kelvich/pg_tiktoken)                  |                                                                                                                    |
@@ -79,7 +81,7 @@ Unless otherwise noted, supported extensions can be installed using [CREATE EXTE
 CREATE EXTENSION <extension_name>
 ```
 
-You can install extensions from the Neon SQL Editor or from a client such as `psql` that permits running SQL queries. For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
+You can install extensions from the Neon SQL Editor or from a client such as `psql` that permits running SQL queries. For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](../get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](../connect/query-with-psql-editor).
 
 ## Update an extension version
 
