@@ -22,7 +22,7 @@ const Message = ({ role, content }) => {
   if (role === 'assistant') {
     // @TODO: remove this, debug only
     // eslint-disable-next-line no-console
-    console.log({ mdxSource });
+    console.log({ mdxSource, content });
   }
   return (
     <div
