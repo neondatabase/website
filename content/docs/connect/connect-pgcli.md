@@ -35,9 +35,9 @@ pgcli postgres://<user>:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/<
 
 </CodeBlock>
 
-## Running queries
+## Run queries
 
-After establishing a connection, try the `pgcli` client by running the following queries. To try the `pgcli` [autocompletion](https://www.pgcli.com/completion) feature, type the `SELECT` query.
+After establishing a connection, try the `pgcli` client by running the following queries. To test the `pgcli` [autocompletion](https://www.pgcli.com/completion) feature, be sure to type the `SELECT` query.
 
 ```sql
 CREATE TABLE my_table AS SELECT now();
