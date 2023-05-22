@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/integrations/node
 ---
 
-This guide describes how to create a Neon project and connect to it from a Node.js application. You can find the below code sample on [GitHub](https://github.com/neondatabase/examples/tree/main/with-nodejs).
+This guide describes how to create a Neon project and connect to it from a Node.js application. You can find the code sample on [GitHub](https://github.com/neondatabase/examples/tree/main/with-nodejs).
 
 <Admonition type="note">
 The same configuration steps can be used for Express and Next.js applications.
@@ -63,8 +63,6 @@ DATABASE_URL=postgres://<users>:<password>@ep-snowy-unit-550577.us-east-2.aws.ne
 A special `endpoint` connection option is appended to the connection string above: `options=endpoint%3Dep-snowy-unit-550577`. This option is used with PostgreSQL clients and drivers such as `pg` that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. For more information, see [connection workarounds](https://neon.tech/docs/connect/connectivity-issues#a-pass-the-endpoint-id-as-an-option).
 </Admonition>
 
-You can find the connection string for your database above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
-
 <Admonition type="important">
 To ensure the security of your data, never expose your Neon credentials to the browser.
 </Admonition>
@@ -100,7 +98,7 @@ getPostgresVersion();
 ```
 
 <Admonition type="note">
-The `rejectUnauthorized` option is set to false because the server's SSL certificate is not being verified against a list of trusted certificates. In a production environment, it's better to verify the server's SSL certificate for security reasons. For that, you would need to provide the necessary CA certificate(s). T do that, you would define the `pool` configuration as follows:
+The `rejectUnauthorized` option is set to false because the server's SSL certificate is not being verified against a list of trusted certificates. In a production environment, it's better to verify the server's SSL certificate for security reasons. For that, you would need to provide the necessary CA certificate(s). The configuration to specify a CA certificate is as follows:
 
 ```js
 const { Pool } = require('pg');
