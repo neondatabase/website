@@ -10,7 +10,7 @@ import BlogPostCard, { BlogPostCardPropTypes } from '../blog-post-card/blog-post
 const PostsList = ({ title, posts, alignment = 'left' }) => {
   const lowerCaseTitle = title.toLocaleLowerCase();
   const primaryPost = posts[0];
-  const secondaryPosts = posts.slice(1, 4);
+  const secondaryPosts = posts.slice(1, 5);
   return (
     <section className="posts-list flex flex-col">
       <h2
@@ -31,18 +31,41 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
         />
         <div
           className={clsx(
-            'divide-y divide-gray-new-15',
-            alignment === 'left' ? 'col-span-4 col-start-7' : 'col-start-1 col-end-5 row-start-1'
+            alignment === 'left'
+              ? 'col-span-4 col-start-7'
+              : 'col-start-1 col-end-5 row-start-1 divide-y divide-gray-new-15'
           )}
         >
-          {secondaryPosts.map((post, index) => (
-            <BlogPostCard
-              className="py-[18px] first:pt-0 last:pb-0"
-              {...post}
-              size={index === 0 ? 'md' : 'sm'}
-              key={index}
-            />
-          ))}
+          {alignment === 'right' &&
+            secondaryPosts
+              .slice(0, 3)
+              .map((post, index) => (
+                <BlogPostCard
+                  className="py-[18px] first:pt-0 last:pb-0"
+                  {...post}
+                  size={index === 0 ? 'md' : 'sm'}
+                  key={index}
+                />
+              ))}
+          {alignment === 'left' && (
+            <>
+              <div className="grid grid-cols-2 gap-x-10 pb-[18px]">
+                {secondaryPosts.slice(0, 2).map((post, index) => (
+                  <BlogPostCard {...post} size="md" key={index} />
+                ))}
+              </div>
+              <div>
+                {secondaryPosts.slice(2, 5).map((post, index) => (
+                  <BlogPostCard
+                    className="border-t border-gray-new-15 py-[18px] last:pb-0"
+                    {...post}
+                    size="sm"
+                    key={index}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
       <Link

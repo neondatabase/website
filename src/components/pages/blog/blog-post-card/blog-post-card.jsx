@@ -131,9 +131,8 @@ export const BlogPostCardPropTypes = {
 
 BlogPostCard.propTypes = {
   className: PropTypes.string,
-  size: PropTypes.oneOf(['lg', 'md']),
+  size: PropTypes.oneOf(['lg', 'md', 'sm']),
   ...BlogPostCardPropTypes,
-  withImage: PropTypes.bool,
 };
 
 export default BlogPostCard;
