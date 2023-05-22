@@ -98,7 +98,7 @@ getPostgresVersion();
 ```
 
 <Admonition type="note">
-The `rejectUnauthorized` option is set to false because the server's SSL certificate is not being verified against a list of trusted certificates. In a production environment, it's better to verify the server's SSL certificate for security reasons. For that, you would need to provide the necessary CA certificate(s). The configuration to specify a CA certificate is as follows:
+The `rejectUnauthorized` option is set to false because the server's SSL certificate is not being verified against a list of trusted certificates. In a production environment, it's better to verify the server's SSL certificate for security reasons. For that, you would need to provide the necessary root certificate(s). The configuration to specify a root certificate is as follows:
 
 ```js
 const { Pool } = require('pg');
@@ -114,6 +114,7 @@ const pool = new Pool({
 });
 ```
 
+For certificate locations, see [Location of system root certificates](https://neon.tech/docs/connect/connect-securely).
 </Admonition>
 
 ## Run app.js
