@@ -27,7 +27,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
           className={clsx(
             alignment === 'left' ? 'col-span-6 col-start-1' : 'col-span-6 col-start-5'
           )}
-          {...primaryPost}
+          {...primaryPost.post}
         />
         <div
           className={clsx(
@@ -39,10 +39,10 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
           {alignment === 'right' &&
             secondaryPosts
               .slice(0, 3)
-              .map((post, index) => (
+              .map((secondaryPost, index) => (
                 <BlogPostCard
                   className="py-[18px] first:pt-0 last:pb-0"
-                  {...post}
+                  {...secondaryPost.post}
                   size={index === 0 ? 'md' : 'sm'}
                   key={index}
                 />
@@ -50,15 +50,15 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
           {alignment === 'left' && (
             <>
               <div className="grid grid-cols-2 gap-x-10 pb-[18px]">
-                {secondaryPosts.slice(0, 2).map((post, index) => (
-                  <BlogPostCard {...post} size="md" key={index} />
+                {secondaryPosts.slice(0, 2).map((secondaryPost, index) => (
+                  <BlogPostCard {...secondaryPost.post} size="md" key={index} />
                 ))}
               </div>
               <div>
-                {secondaryPosts.slice(2, 5).map((post, index) => (
+                {secondaryPosts.slice(2, 5).map((secondaryPost, index) => (
                   <BlogPostCard
                     className="border-t border-gray-new-15 py-[18px] last:pb-0"
-                    {...post}
+                    {...secondaryPost.post}
                     size="sm"
                     key={index}
                   />
@@ -86,7 +86,9 @@ PostsList.propTypes = {
   title: PropTypes.string.isRequired,
   posts: PropTypes.arrayOf(
     PropTypes.shape({
-      ...BlogPostCardPropTypes,
+      post: PropTypes.shape({
+        ...BlogPostCardPropTypes,
+      }),
     })
   ),
   alignment: PropTypes.oneOf(['left', 'right']),

@@ -17,6 +17,162 @@ const POST_SEO_FRAGMENT = gql`
   }
 `;
 
+const getWpBlogPage = async () => {
+  const blogPageQuery = gql`
+    query BlogPage {
+      page(idType: URI, id: "blog") {
+        template {
+          ... on Template_Blog {
+            templateName
+            pageBlog {
+              featuredPosts {
+                post {
+                  ... on Post {
+                    categories {
+                      nodes {
+                        name
+                        slug
+                      }
+                    }
+                    title(format: RENDERED)
+                    slug
+                    date
+                    pageBlogPost {
+                      largeCover {
+                        altText
+                        mediaItemUrl
+                      }
+                      authors {
+                        author {
+                          ... on PostAuthor {
+                            title
+                            postAuthor {
+                              role
+                              url
+                              image {
+                                altText
+                                mediaItemUrl
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              companyFeaturedPosts {
+                post {
+                  ... on Post {
+                    categories {
+                      nodes {
+                        name
+                        slug
+                      }
+                    }
+                    title(format: RENDERED)
+                    slug
+                    date
+                    pageBlogPost {
+                      largeCover {
+                        altText
+                        mediaItemUrl
+                      }
+                      authors {
+                        author {
+                          ... on PostAuthor {
+                            title
+                            postAuthor {
+                              role
+                              url
+                              image {
+                                altText
+                                mediaItemUrl
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              communityFeaturedPosts {
+                post {
+                  ... on Post {
+                    categories {
+                      nodes {
+                        name
+                        slug
+                      }
+                    }
+                    title(format: RENDERED)
+                    slug
+                    date
+                    pageBlogPost {
+                      largeCover {
+                        altText
+                        mediaItemUrl
+                      }
+                      authors {
+                        author {
+                          ... on PostAuthor {
+                            title
+                            postAuthor {
+                              role
+                              url
+                              image {
+                                altText
+                                mediaItemUrl
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              videos {
+                video {
+                  ... on Video {
+                    title(format: RENDERED)
+                    date
+                    videoPost {
+                      url
+                      coverImage {
+                        mediaItemUrl
+                        altText
+                      }
+                      author {
+                        ... on PostAuthor {
+                          id
+                          title(format: RENDERED)
+                          postAuthor {
+                            role
+                            url
+                            image {
+                              altText
+                              mediaItemUrl
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+  const data = await graphQLClient.request(blogPageQuery);
+
+  return data?.page?.template?.pageBlog;
+};
+
 const getAllWpPosts = async () => {
   const allPostsQuery = gql`
     query AllPosts($first: Int!) {
@@ -387,4 +543,4 @@ const getWpPreviewPost = async (id) => {
   return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
 };
 
-export { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData, getWpPreviewPost };
+export { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData, getWpPreviewPost, getWpBlogPage };

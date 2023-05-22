@@ -7,7 +7,7 @@ import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-fr
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 
 const ReleaseNotesList = ({ items }) => (
-  <section className="rounded-xl bg-black-new px-10 pt-7 pb-10">
+  <section className="release-notes-list rounded-xl bg-black-new px-10 pt-7 pb-10">
     <div className="flex items-center justify-between">
       <h2 className="text-2xl leading-none tracking-tighter">Release notes</h2>
       <Link
@@ -23,7 +23,8 @@ const ReleaseNotesList = ({ items }) => (
       {items.map(({ slug, content }, index) => {
         const { capitalisedCategory: category } = getReleaseNotesCategoryFromSlug(slug);
         const { datetime, label } = getReleaseNotesDateFromSlug(slug);
-        const title = getExcerpt(content, 50);
+        const title = getExcerpt(content, 60).replace("What's new - ", '');
+
         return (
           <li className="group" key={index}>
             <Link className="flex flex-col" to={`${LINKS.releaseNotes}/${slug}`}>

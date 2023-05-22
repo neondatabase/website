@@ -13,11 +13,11 @@ const FeaturedPostsList = ({ posts }) => {
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>
       <div className="mt-6 grid grid-cols-10 gap-x-10 xl:gap-x-6">
-        <BlogPostCard className="col-span-6" {...primaryPost} />
+        <BlogPostCard className="col-span-6" {...primaryPost.post} />
         <div className="col-span-4">
           <div className="grid grid-cols-2 gap-x-10 gap-y-11 xl:gap-x-6">
-            {secondaryPosts.map((post, index) => (
-              <BlogPostCard {...post} size="md" key={index} />
+            {secondaryPosts.map((secondaryPost, index) => (
+              <BlogPostCard {...secondaryPost.post} size="md" key={index} />
             ))}
           </div>
         </div>
@@ -29,7 +29,9 @@ const FeaturedPostsList = ({ posts }) => {
 FeaturedPostsList.propTypes = {
   posts: PropTypes.arrayOf(
     PropTypes.shape({
-      ...BlogPostCardPropTypes,
+      post: PropTypes.shape({
+        ...BlogPostCardPropTypes,
+      }),
     })
   ),
 };
