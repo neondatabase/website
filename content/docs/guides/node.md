@@ -58,7 +58,7 @@ DATABASE_URL=postgres://<users>:<password>@ep-snowy-unit-550577.us-east-2.aws.ne
 </CodeBlock>
 
 <Admonition type="note">
-A special `endpoint` connection option is appended to the connection string above: `options=endpoint%3Dep-snowy-unit-550577`. This option is used with PostgreSQL clients and drivers such as `pg` that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. For more information, see [connection workarounds](https://neon.tech/docs/connect/connectivity-issues#a-pass-the-endpoint-id-as-an-option).
+A special `endpoint` connection option is appended to the connection string above: `options=endpoint%3Dep-snowy-unit-550577`. This option is used with PostgreSQL clients and drivers such as `pg` that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. For more information, see [connection workarounds](../connect/connectivity-issues#a-pass-the-endpoint-id-as-an-option).
 </Admonition>
 
 <Admonition type="important">
@@ -112,7 +112,7 @@ const pool = new Pool({
 });
 ```
 
-For root certificate locations, see [Location of system root certificates](https://neon.tech/docs/connect/connect-securely).
+For root certificate locations, see [Location of system root certificates](../connect/connect-securely#location-of-system-root-certificates).
 </Admonition>
 
 ## Run app.js
