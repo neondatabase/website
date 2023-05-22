@@ -39,10 +39,10 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
           {alignment === 'right' &&
             secondaryPosts
               .slice(0, 3)
-              .map((secondaryPost, index) => (
+              .map(({ post }, index) => (
                 <BlogPostCard
                   className="py-[18px] first:pt-0 last:pb-0"
-                  {...secondaryPost.post}
+                  {...post}
                   size={index === 0 ? 'md' : 'sm'}
                   key={index}
                 />
@@ -50,15 +50,15 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
           {alignment === 'left' && (
             <>
               <div className="grid grid-cols-2 gap-x-10 pb-[18px]">
-                {secondaryPosts.slice(0, 2).map((secondaryPost, index) => (
-                  <BlogPostCard {...secondaryPost.post} size="md" key={index} />
+                {secondaryPosts.slice(0, 2).map(({ post }, index) => (
+                  <BlogPostCard {...post} size="md" key={index} />
                 ))}
               </div>
               <div>
-                {secondaryPosts.slice(2, 5).map((secondaryPost, index) => (
+                {secondaryPosts.slice(2, 5).map(({ post }, index) => (
                   <BlogPostCard
                     className="border-t border-gray-new-15 py-[18px] last:pb-0"
-                    {...secondaryPost.post}
+                    {...post}
                     size="sm"
                     key={index}
                   />

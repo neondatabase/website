@@ -16,7 +16,7 @@ const BlogPostCard = ({
   pageBlogPost: { authors, largeCover },
   size = 'lg',
 }) => {
-  const category = categories.nodes[0];
+  const category = categories?.nodes[0];
   const author = authors[0]?.author;
 
   const formattedDate = getFormattedDate(date);
@@ -45,7 +45,7 @@ const BlogPostCard = ({
           )}
         </Link>
       )}
-      {size !== 'sm' && (
+      {category && size !== 'sm' && (
         <Link
           className={clsx(
             'mt-[18px] text-xs font-semibold uppercase leading-none tracking-[0.02em]',
@@ -59,8 +59,11 @@ const BlogPostCard = ({
       <Link className="group flex flex-col" to={`${LINKS.blog}${slug}`}>
         <h1
           className={clsx('font-medium transition-colors duration-200 group-hover:text-green-45', {
-            'mt-2 text-3xl leading-dense tracking-tighter': size === 'lg',
-            'mt-2 text-lg leading-tight tracking-[-0.02em]': size === 'md',
+            'text-3xl leading-dense tracking-tighter': size === 'lg',
+            'text-lg leading-tight tracking-[-0.02em]': size === 'md' || size === 'sm',
+            'mt-2': !!category,
+            'mt-5': !category && size === 'lg',
+            'mt-3': !category && size === 'md',
           })}
         >
           {title}

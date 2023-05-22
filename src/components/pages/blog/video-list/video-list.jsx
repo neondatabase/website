@@ -5,7 +5,7 @@ import Link from 'components/shared/link';
 import getFormattedDate from 'utils/get-formatted-date';
 
 const VideoList = ({ videos }) => (
-  <section className="videos">
+  <section className="videos flex flex-col">
     <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-pink-90">
       <span>Video</span>
       <span className="ml-2 h-px grow bg-gray-new-20" />
@@ -75,6 +75,13 @@ const VideoList = ({ videos }) => (
         }
       )}
     </div>
+    <Link
+      className="ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] text-pink-90"
+      to="https://www.youtube.com/@neondatabase/videos"
+      withArrow
+    >
+      All videos
+    </Link>
   </section>
 );
 

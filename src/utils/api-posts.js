@@ -64,12 +64,6 @@ const getWpBlogPage = async () => {
               companyFeaturedPosts {
                 post {
                   ... on Post {
-                    categories {
-                      nodes {
-                        name
-                        slug
-                      }
-                    }
                     title(format: RENDERED)
                     slug
                     date
@@ -100,12 +94,6 @@ const getWpBlogPage = async () => {
               communityFeaturedPosts {
                 post {
                   ... on Post {
-                    categories {
-                      nodes {
-                        name
-                        slug
-                      }
-                    }
                     title(format: RENDERED)
                     slug
                     date
@@ -154,6 +142,36 @@ const getWpBlogPage = async () => {
                             image {
                               altText
                               mediaItemUrl
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              engineeringFeaturedPosts {
+                post {
+                  ... on Post {
+                    title(format: RENDERED)
+                    slug
+                    date
+                    pageBlogPost {
+                      largeCover {
+                        altText
+                        mediaItemUrl
+                      }
+                      authors {
+                        author {
+                          ... on PostAuthor {
+                            title
+                            postAuthor {
+                              role
+                              url
+                              image {
+                                altText
+                                mediaItemUrl
+                              }
                             }
                           }
                         }
