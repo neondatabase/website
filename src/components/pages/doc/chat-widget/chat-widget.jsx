@@ -175,7 +175,7 @@ const ChatWidget = ({ className = null, isChatWidgetOpen, setIsChatWidgetOpen })
         <Dialog.Content className="fixed left-1/2 top-1/2 z-50 mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2 lg:h-full lg:max-h-full lg:max-w-full">
           <div className="relative flex flex-col rounded-[10px] border border-gray-new-90 bg-gray-new-98 pt-4 data-[state=open]:animate-dialog-show data-[state=closed]:animate-dialog-hide dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-white dark:shadow-[4px_4px_10px_rgba(0,0,0,0.5)] lg:h-full lg:rounded-none">
             <Dialog.Title className="text-20 flex items-center space-x-5 px-5 leading-tight">
-              <h2>Ask Neon AI a question</h2>
+              <span>Ask Neon AI a question</span>
               <div className="flex items-center rounded-[24px] border border-gray-new-94 bg-[rgba(239,239,240,0.4)] py-1.5 px-3 text-gray-new-30 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80">
                 <ExperimentalIcon className="mr-1.5 h-3.5 w-3.5" />
                 <span className="text-sm leading-none">Experimental</span>
