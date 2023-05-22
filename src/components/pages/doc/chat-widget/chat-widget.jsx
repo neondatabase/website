@@ -9,10 +9,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import useControlKey from 'hooks/use-control-key';
 import useDocsAIChatStream from 'hooks/use-docs-ai-chat-stream';
 
-import AIIcon from './images/ai.inline.svg';
 import AttentionIcon from './images/attention.inline.svg';
 import CloseIcon from './images/close.inline.svg';
 import ExampleIcon from './images/example.inline.svg';
+import ExperimentalIcon from './images/experimental.inline.svg';
 import SendIcon from './images/send.inline.svg';
 import Message from './message';
 
@@ -50,7 +50,15 @@ const handleKeyDown = (cb) => (e) => {
   }
 };
 
-const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) => {
+const ChatWidget = ({ className = null, isChatWidgetOpen, setIsChatWidgetOpen }) => {
+  const [controller, setController] = useState(() => new AbortController());
+
+  const handleAbortSignal = () => {
+    controller.abort();
+    // reset so that fetch function is unblocked
+    setController(new AbortController());
+  };
+
   // state
   const isMountedRef = useRef(false);
   const [inputText, setInputText] = useState('');
@@ -62,7 +70,7 @@ const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) =>
   const [commandKey] = useControlKey();
   const { messages, setMessages, isLoading, error, setError } = useDocsAIChatStream({
     isMountedRef,
-    signal: abortControllerSignal,
+    signal: controller.signal,
   });
 
   // handlers
@@ -95,7 +103,7 @@ const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) =>
     if (!isOpen) {
       // reset the state completely
       isMountedRef.current = false;
-      abortStream();
+      handleAbortSignal();
       setError(null);
       setMessages([]);
     } else {
@@ -111,6 +119,12 @@ const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) =>
       window.removeEventListener('keydown', handleKeyDown(setIsOpen));
     };
   }, []);
+  // for mobile version
+  useEffect(() => {
+    if (!isOpen && setIsChatWidgetOpen) {
+      setIsChatWidgetOpen(false);
+    }
+  }, [isOpen, setIsChatWidgetOpen]);
 
   useEffect(() => {
     // make sure chat is always scrolled to the bottom
@@ -121,38 +135,51 @@ const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) =>
   }, [messages]);
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={handleOpenChange}>
+    <Dialog.Root open={isOpen || isChatWidgetOpen} onOpenChange={handleOpenChange}>
       <Dialog.Trigger asChild>
         <button
-          className={clsx('chat-widget flex flex-col text-sm focus:outline-none', className)}
+          className={clsx(
+            'chat-widget flex flex-col text-sm focus:outline-none xl:flex-row xl:items-center xl:space-x-1.5',
+            className
+          )}
           type="button"
           aria-label="Open Neon Docs AI"
+          onClick={() => setIsChatWidgetOpen && setIsChatWidgetOpen(true)}
         >
-          <span className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-gray-new-94 dark:bg-gray-new-8">
-            <AIIcon className="h-[26px] w-[26px] text-secondary-8 dark:text-primary-1" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[#00CC88] dark:bg-[rgba(0,229,153,0.1)] xl:h-6 xl:w-6 xl:shrink-0 xl:rounded">
+            <ExampleIcon className="h-[26px] w-[26px] text-white dark:text-green-45 xl:h-4 xl:w-4" />
           </span>
-          <div className="mt-2.5 flex min-h-[22px] w-full items-center justify-between">
-            <h3 className="font-semibold leading-none">Neon Docs AI</h3>
+          <div className="mt-2.5 flex min-h-[22px] w-full items-center justify-between xl:mt-0 lg:w-auto">
+            <h3 className="font-semibold leading-none xl:text-sm xl:font-normal xl:text-gray-3 dark:xl:text-gray-7">
+              <span className="lg:hidden">Neon Docs AI</span>
+              <span className="hidden lg:inline" aria-hidden>
+                Try Neon Docs AI instead
+              </span>
+            </h3>
             {commandKey && (
-              <span className="text-gray-20 dark:text-gray-90 rounded-sm bg-gray-new-94 px-1.5 py-1 leading-none dark:bg-gray-new-15">
+              <span className="text-gray-20 dark:text-gray-90 rounded-sm bg-gray-new-94 px-1.5 py-1 leading-none dark:bg-gray-new-15 xl:hidden">
                 {commandKey} + K
               </span>
             )}
           </div>
-          <p className="mt-1.5 text-left leading-tight text-gray-3 dark:text-gray-7">
+          <p className="mt-1.5 text-left leading-tight text-gray-3 dark:text-gray-7 xl:hidden">
             We brought ChatGPT straight to the docs
           </p>
-          <span className="mt-1.5 leading-tight text-secondary-8 dark:text-primary-1">
+          <span className="mt-1.5 leading-tight text-secondary-8 dark:text-primary-1 xl:hidden">
             Ask a question
           </span>
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-[rgba(12,13,13,0.2)] data-[state=closed]:animate-fade-out-overlay data-[state=open]:animate-fade-in-overlay dark:bg-black/80" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2">
-          <div className="relative flex flex-col rounded-[10px] border border-gray-new-90 bg-gray-new-98 pt-4 data-[state=open]:animate-dialog-show data-[state=closed]:animate-dialog-hide dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-white dark:shadow-[4px_4px_10px_rgba(0,0,0,0.5)]">
-            <Dialog.Title className="text-20 px-5 leading-tight">
-              Ask Neon AI a question
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2 lg:h-full lg:max-h-full lg:max-w-full">
+          <div className="relative flex flex-col rounded-[10px] border border-gray-new-90 bg-gray-new-98 pt-4 data-[state=open]:animate-dialog-show data-[state=closed]:animate-dialog-hide dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-white dark:shadow-[4px_4px_10px_rgba(0,0,0,0.5)] lg:h-full lg:rounded-none">
+            <Dialog.Title className="text-20 flex items-center space-x-5 px-5 leading-tight">
+              <h2>Ask Neon AI a question</h2>
+              <div className="flex items-center rounded-[24px] border border-gray-new-94 bg-[rgba(239,239,240,0.4)] py-1.5 px-3 text-gray-new-30 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80">
+                <ExperimentalIcon className="mr-1.5 h-3.5 w-3.5" />
+                <span className="text-sm leading-none">Experimental</span>
+              </div>
             </Dialog.Title>
 
             <LazyMotion features={domAnimation}>
@@ -188,7 +215,9 @@ const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) =>
                             type="button"
                             onClick={handleExampleClick}
                           >
-                            <ExampleIcon className="mr-3 h-4 w-4 text-secondary-8 dark:text-primary-1" />
+                            <span className="mr-3 flex h-7 w-7 items-center justify-center rounded-full bg-[rgba(0,204,136,0.1)]">
+                              <ExampleIcon className="h-4 w-4 text-primary-1" />
+                            </span>
                             <span>{title}</span>
                           </button>
                         </li>
@@ -208,7 +237,10 @@ const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) =>
                 </span>
               </div>
             ) : (
-              <form className="group relative mt-12 w-full px-5 pb-5" onSubmit={handleSubmit}>
+              <form
+                className="group relative mt-12 w-full px-5 pb-5 lg:mt-auto"
+                onSubmit={handleSubmit}
+              >
                 <input
                   className="peer w-full appearance-none rounded border border-gray-new-90 py-2 px-2.5 text-base leading-normal transition-colors duration-200 placeholder:text-gray-new-80 focus:outline-none dark:border-gray-new-20 dark:bg-black dark:placeholder:text-gray-new-30"
                   type="text"
@@ -249,6 +281,8 @@ ChatWidget.propTypes = {
   className: PropTypes.string,
   abortControllerSignal: PropTypes.object,
   abortStream: PropTypes.func,
+  isChatWidgetOpen: PropTypes.bool,
+  setIsChatWidgetOpen: PropTypes.func,
 };
 
 export default ChatWidget;

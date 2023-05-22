@@ -1,8 +1,5 @@
-'use client';
-
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useState, useRef } from 'react';
 
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import DocFooter from 'components/pages/doc/doc-footer';
@@ -46,61 +43,44 @@ const Post = ({
   currentSlug,
   fileOriginPath,
   tableOfContents,
-}) => {
-  const [controller, setController] = useState(() => new AbortController());
-  const contentRef = useRef(null);
-
-  const handleAbortSignal = () => {
-    controller.abort();
-    // reset so that fetch function is unblocked
-    setController(new AbortController());
-  };
-
-  return (
-    <>
-      <div
-        className={clsx(
-          '-mx-10 flex flex-col pb-20 pt-[110px] 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
-          isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
-        )}
-      >
-        {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
-        {isReleaseNotes ? (
-          <ReleaseNotes currentSlug={currentSlug} items={releaseNotes} />
-        ) : (
-          <article>
-            <h1 className="text-[36px] font-semibold leading-tight xl:text-3xl">{title}</h1>
-            {subtitle && (
-              <p className="my-2 text-xl leading-tight text-gray-new-50 dark:text-gray-new-80">
-                {subtitle}
-              </p>
-            )}
-            <Content className="mt-5" content={content} ref={contentRef} />
-          </article>
-        )}
-        <div className="mt-auto">
-          <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
-          <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
-        </div>
+}) => (
+  <>
+    <div
+      className={clsx(
+        '-mx-10 flex flex-col pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
+        isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
+      )}
+    >
+      {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
+      {isReleaseNotes ? (
+        <ReleaseNotes currentSlug={currentSlug} items={releaseNotes} />
+      ) : (
+        <article>
+          <h1 className="text-[36px] font-semibold leading-tight xl:text-3xl">{title}</h1>
+          {subtitle && (
+            <p className="my-2 text-xl leading-tight text-gray-4 dark:text-gray-6">{subtitle}</p>
+          )}
+          <Content className="mt-5" content={content} />
+        </article>
+      )}
+      <div className="mt-auto">
+        <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
+        <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
       </div>
+    </div>
 
-      <div
-        className={clsx(
-          'col-start-11 col-end-13 -ml-11 h-full pb-20 pt-[110px] 2xl:ml-0 xl:hidden'
-        )}
-      >
-        <nav className="no-scrollbars sticky top-10 bottom-10 max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
-          {enableTableOfContents && <TableOfContents items={tableOfContents} />}
-          <ChatWidget
-            className={clsx({ 'mt-32': enableTableOfContents && tableOfContents?.length > 0 })}
-            abortControllerSignal={controller.signal}
-            abortStream={handleAbortSignal}
-          />
-        </nav>
-      </div>
-    </>
-  );
-};
+    <div
+      className={clsx('col-start-11 col-end-13 -ml-11 h-full pb-20 pt-[110px] 2xl:ml-0 xl:hidden')}
+    >
+      <nav className="no-scrollbars sticky top-10 bottom-10 max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
+        {enableTableOfContents && <TableOfContents items={tableOfContents} />}
+        <ChatWidget
+          className={clsx({ 'mt-32': enableTableOfContents && tableOfContents?.length > 0 })}
+        />
+      </nav>
+    </div>
+  </>
+);
 
 Post.propTypes = {
   data: PropTypes.shape({
