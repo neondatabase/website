@@ -28,7 +28,7 @@ To create a Neon project:
 
 Upon creating a project, you are presented with a dialog that provides your connection details for the default `neondb` database, including your password.
 
-## Compute size configuration
+## Compute size configuration with Autoscaling
 
 Neon [paid plan](../introduction/billing#neon-plans) users can configure compute size settings when [creating a project](#create-a-project).
 
