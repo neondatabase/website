@@ -144,7 +144,7 @@ const ChatWidget = ({ className = null, isChatWidgetOpen, setIsChatWidgetOpen })
           )}
           type="button"
           aria-label="Open Neon Docs AI"
-          onClick={() => setIsChatWidgetOpen && setIsChatWidgetOpen(true)}
+          onClick={setIsChatWidgetOpen ? () => setIsChatWidgetOpen(true) : undefined}
         >
           <span className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[#00CC88] dark:bg-[rgba(0,229,153,0.1)] xl:h-6 xl:w-6 xl:shrink-0 xl:rounded">
             <ExampleIcon className="h-[26px] w-[26px] text-white dark:text-green-45 xl:h-4 xl:w-4" />
