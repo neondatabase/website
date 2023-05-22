@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 // import { flushSync } from 'react-dom';
 
-const useDocsAIChatStream = ({ isMounted, signal }) => {
+const decoder = new TextDecoder();
+
+const useDocsAIChatStream = ({ isMountedRef, signal }) => {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,27 +24,18 @@ const useDocsAIChatStream = ({ isMounted, signal }) => {
 
       if (response.ok) {
         const reader = response.body.getReader();
-        while (isMounted) {
+        console.log('before tl', { isMounted: isMountedRef?.current });
+        while (isMountedRef?.current) {
           const { done, value } = await reader.read();
-          console.log('after tl', { isMounted, done, value });
+          console.log('after tl', { isMounted: isMountedRef?.current, done, value });
           if (done) break;
 
           // Process the received chunk value
-          const chunk = new TextDecoder().decode(value);
-          let parsedChunk;
-          try {
-            parsedChunk = JSON.parse(chunk);
-          } catch (e) {
-            parsedChunk = chunk;
-          }
-          // eslint-disable-next-line no-console
-          console.log('in the loop', parsedChunk);
+          const chunk = decoder.decode(value);
+
           // Update the messages state with the received data
           // flushSync(() => {
           setMessages((prevMessages) => {
-            // eslint-disable-next-line no-console
-            console.log('inside updater', parsedChunk);
-
             // this prevents leak if user has
             // bailed out early
             if (!prevMessages.length) return prevMessages;
@@ -52,7 +45,7 @@ const useDocsAIChatStream = ({ isMounted, signal }) => {
                 ...prevMessages.slice(0, -1),
                 {
                   role: 'assistant',
-                  content: content.concat(parsedChunk),
+                  content: content.concat(chunk),
                 },
               ];
             }
@@ -60,7 +53,7 @@ const useDocsAIChatStream = ({ isMounted, signal }) => {
               ...prevMessages,
               {
                 role: 'assistant',
-                content: parsedChunk,
+                content: chunk,
               },
             ];
           });

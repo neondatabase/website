@@ -52,7 +52,7 @@ const handleKeyDown = (cb) => (e) => {
 
 const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) => {
   // state
-  const [isMounted, setIsMounted] = useState(false);
+  const isMountedRef = useRef(false);
   const [inputText, setInputText] = useState('');
   // aux flags
   const [isOpen, setIsOpen] = useState(false);
@@ -61,24 +61,12 @@ const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) =>
 
   const [commandKey] = useControlKey();
   const { messages, setMessages, isLoading, error, setError } = useDocsAIChatStream({
-    isMounted,
+    isMountedRef,
     signal: abortControllerSignal,
   });
+  console.log(isMountedRef);
 
-  // @TODO: remove me
-  // eslint-disable-next-line no-console
-  console.log(messages);
-
-  // attach event listeners
-  useEffect(() => {
-    setIsMounted(true);
-    window.addEventListener('keydown', handleKeyDown(setIsOpen));
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown(setIsOpen));
-      setIsMounted(false);
-    };
-  }, []);
-
+  // handlers
   const handleInputChange = (e) => setInputText(e.target.value);
 
   const handleExampleClick = (e) => {
@@ -107,12 +95,24 @@ const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) =>
   const handleOpenChange = (isOpen) => {
     if (!isOpen) {
       // reset the state completely
+      isMountedRef.current = false;
       abortStream();
       setError(null);
       setMessages([]);
+    } else {
+      isMountedRef.current = true;
     }
     setIsOpen(isOpen);
   };
+
+  // effects
+  useEffect(() => {
+    console.log({ isMountedRef });
+    window.addEventListener('keydown', handleKeyDown(setIsOpen));
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown(setIsOpen));
+    };
+  }, []);
 
   useEffect(() => {
     // make sure chat is always scrolled to the bottom
