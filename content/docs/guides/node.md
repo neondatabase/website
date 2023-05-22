@@ -23,9 +23,7 @@ To connect to Neon from a Node.js application:
 
 ## Create a Neon project
 
-If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
-
-To create a Neon project:
+If you do not have one already, create a Neon project.
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
@@ -49,7 +47,7 @@ To create a Neon project:
 
 ## Store your Neon credentials
 
-Store your Neon connection string in your `.env` file. You can find the connection string for your database  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
+Store your Neon connection string in your `.env` file. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
 
 <CodeBlock shouldWrap>
 
