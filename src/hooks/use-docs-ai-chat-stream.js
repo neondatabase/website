@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { flushSync } from 'react-dom';
 
 const decoder = new TextDecoder();
 
@@ -33,8 +32,6 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
           // Process the received chunk value
           const chunk = decoder.decode(value);
 
-          // Update the messages state with the received data
-          // flushSync(() => {
           setMessages((prevMessages) => {
             // this prevents leak if user has
             // bailed out early
@@ -57,7 +54,6 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
               },
             ];
           });
-          // });
         }
       } else {
         throw Error('Something went wrong. Please try again!');
@@ -70,8 +66,6 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
       setIsLoading(false);
     }
   };
-  //   [isMounted, signal]
-  // );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {

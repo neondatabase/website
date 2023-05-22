@@ -1,8 +1,11 @@
-export default async function handler(req, res) {
-  const { message } = req.body;
+export const config = {
+  runtime: 'edge',
+};
 
+export default async function handler(req) {
+  const { message } = await req.json();
   try {
-    const response = await fetch(process.env.AI_DOCS_CHAT_API_URL, {
+    const r = await fetch(process.env.AI_DOCS_CHAT_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -11,12 +14,31 @@ export default async function handler(req, res) {
         message,
       }),
     });
-    if (response.ok) {
-      response.body.pipe(res); // Pipe the response stream directly to the client
-    } else {
-      throw Error('Something went wrong. Please reopen and try again!');
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+
+    const reader = r.body.getReader();
+
+    const response = new ReadableStream({
+      async start(controller) {
+        while (true) {
+          const { done, value } = await reader.read();
+
+          // When no more data needs to be consumed, break the reading
+          if (done) {
+            break;
+          }
+
+          // Enqueue the next data chunk into our target stream
+          controller.enqueue(value);
+        }
+
+        // Close the stream
+        controller.close();
+        reader.releaseLock();
+      },
+    });
+
+    return new Response(response);
+  } catch {
+    return new Response(null, { status: 500 });
   }
 }
