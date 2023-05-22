@@ -5,6 +5,8 @@ import Link from 'components/shared/link/link';
 
 import { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
 
+import PlayIcon from './images/play.inline.svg';
+
 const appearances = [
   {
     title: 'Building Scalable Postgres with Serverless Database Platform Neon',
@@ -43,6 +45,12 @@ const AppearanceEngineering = ({ engineeringPosts }) => (
                 <h3 className="text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-green-45">
                   {title}
                 </h3>
+                <div className="mt-2 flex items-center">
+                  <PlayIcon className="mr-2 inline-block" />
+                  <span className="text-sm font-medium leading-tight tracking-[-0.02em] text-blue-80">
+                    Listen now
+                  </span>
+                </div>
               </div>
             </Link>
           </li>
