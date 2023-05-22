@@ -44,7 +44,7 @@ To create a Neon project:
 2. Add project dependencies using the following command:
 
    ```shell
-   npm install postgres dotenv
+   npm install pg dotenv
    ```
 
 ## Store your Neon credentials
@@ -78,17 +78,27 @@ To ensure the security of your data, never expose your Neon credentials to the b
 To connect to the database using the PostgreSQL client and your Neon credentials, add the following code to the `app.js` file:
 
 ```javascript
-const postgres = require('postgres');
+const { Pool } = require('pg');
 require('dotenv').config();
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
-const URL = `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?options=endpoint%3D${ENDPOINT_ID}`;
+const connectionString = `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?options=endpoint%3D${ENDPOINT_ID}`;
 
-const sql = postgres(URL, { ssl: 'require' });
+const pool = new Pool({
+  connectionString,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
 async function getPostgresVersion() {
-  const result = await sql`select version()`;
-  console.log(result);
+  const client = await pool.connect();
+  try {
+    const res = await client.query('SELECT version()');
+    console.log(res.rows[0]);
+  } finally {
+    client.release();
+  }
 }
 
 getPostgresVersion();
