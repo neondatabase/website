@@ -52,7 +52,7 @@ For more information connection pooling in Neon, see [Connection pooling](../con
 
 ## Edit a compute endpoint
 
-Neon paid plan users can edit a compute endpoint to change the [compute size](#compute-size-configuration) or [Auto-suspend](#auto-suspend-configuration) configuration.
+Neon paid plan users can edit a compute endpoint to change the [compute size](#compute-size-and-autoscaling-configuration) or [Auto-suspend](#auto-suspend-configuration) configuration.
 
 To edit a compute endpoint:
 
@@ -65,7 +65,7 @@ To edit a compute endpoint:
 Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](../connect/connection-pooling#enable-connection-pooling).
 </Admonition>
 
-### Compute size configuration
+### Compute size and Autoscaling configuration
 
 Neon [paid plan](../introduction/billing#neon-plans) users can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
 
