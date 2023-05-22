@@ -64,7 +64,6 @@ const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) =>
     isMountedRef,
     signal: abortControllerSignal,
   });
-  console.log(isMountedRef);
 
   // handlers
   const handleInputChange = (e) => setInputText(e.target.value);
@@ -107,7 +106,6 @@ const ChatWidget = ({ className = null, abortControllerSignal, abortStream }) =>
 
   // effects
   useEffect(() => {
-    console.log({ isMountedRef });
     window.addEventListener('keydown', handleKeyDown(setIsOpen));
     return () => {
       window.removeEventListener('keydown', handleKeyDown(setIsOpen));

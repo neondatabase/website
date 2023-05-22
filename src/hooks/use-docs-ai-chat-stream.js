@@ -7,6 +7,7 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  // @TODO: memoize back
   const fetchData = async () => {
     setIsLoading(true);
     try {
@@ -23,10 +24,8 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
 
       if (response.ok) {
         const reader = response.body.getReader();
-        console.log('before tl', { isMounted: isMountedRef?.current });
         while (isMountedRef?.current) {
           const { done, value } = await reader.read();
-          console.log('after tl', { isMounted: isMountedRef?.current, done, value });
           if (done) break;
 
           // Process the received chunk value
