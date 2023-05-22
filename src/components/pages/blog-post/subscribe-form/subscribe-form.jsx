@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import useCookie from 'react-use/lib/useCookie';
 import useLocation from 'react-use/lib/useLocation';
@@ -25,7 +26,7 @@ const appearAndExitAnimationVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const SubscribeForm = () => {
+const SubscribeForm = ({ className = null }) => {
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState(STATES.DEFAULT);
   const [submittedEmail, setSubmittedEmail] = useLocalStorage('submittedEmailNewsletterForm', []);
@@ -95,7 +96,7 @@ const SubscribeForm = () => {
   };
 
   return (
-    <section className="subscribe-form safe-paddings overflow-hidden pt-[118px] pb-[125px] xl:pt-[104px] xl:pb-[123px] lg:pt-20 lg:pb-28 md:pt-16 md:pb-24">
+    <section className={clsx('subscribe-form safe-paddings overflow-hidden', className)}>
       <div className="mx-auto flex max-w-[1166px] items-center justify-between pr-12 2xl:px-10 2xl:pr-0 lg:flex-col lg:px-8 md:px-4">
         <div className="relative z-20 lg:text-center">
           <h2 className="text-4xl leading-none tracking-tighter xl:text-[36px] sm:text-[32px]">
@@ -204,6 +205,10 @@ const SubscribeForm = () => {
       </div>
     </section>
   );
+};
+
+SubscribeForm.propTypes = {
+  className: PropTypes.string,
 };
 
 export default SubscribeForm;

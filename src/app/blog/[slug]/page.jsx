@@ -82,7 +82,7 @@ const BlogPage = async ({ params }) => {
           />
         </article>
       </div>
-      <SubscribeForm />
+      <SubscribeForm className="pt-[118px] pb-[125px] xl:pt-[104px] xl:pb-[123px] lg:pt-20 lg:pb-28 md:pt-16 md:pb-24" />
       {isPreviewMode && (
         <a
           href={`/api/exit-preview?slug=${previewData.slug}&pageType=blog`}

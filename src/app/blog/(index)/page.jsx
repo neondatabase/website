@@ -1,6 +1,7 @@
 import FeaturedPostsList from 'components/pages/blog/featured-posts-list';
 import PostsList from 'components/pages/blog/posts-list';
 import ReleaseNotesList from 'components/pages/blog/release-notes-list';
+import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import { getAllReleaseNotes } from 'utils/api-docs';
 import { getAllWpPosts } from 'utils/api-posts';
 
@@ -16,6 +17,7 @@ export default async function BlogPage() {
       <PostsList title="Community" posts={nodes} alignment="right" />
       <ReleaseNotesList items={featuredReleaseNotes} />
       <PostsList title="Company" posts={nodes} alignment="left" />
+      <SubscribeForm className="rounded-xl bg-black-new p-[70px]" />
     </div>
   );
 }
