@@ -60,7 +60,7 @@ npm install --save sequelize pg pg-hstore
 
 ## Create a new JavaScript file to test the connection
 
-1. In your project directory, create a new file (for example, `dbTest.js`) and open it in your favorite text editor.
+1. In your project directory, create a new file (for example, `dbTest.js`) and open it in your favorite editor.
 
     ```bash
     touch dbTest.js
@@ -122,13 +122,13 @@ npm install --save sequelize pg pg-hstore
     });
     ```
 
-    <Admonition type="note"> 
+    <Admonition type="note">
      Keep in mind that using `rejectUnauthorized: false` disables certificate verification, potentially leaving your connection susceptible to "man-in-the-middle" attacks. Use with caution.
     </Admonition>
 
-## Run the script to test the connection
+## Test the connection
 
-Save your file and exit the text editor. Then, run your script with Node.
+Save your file and exit the editor, and then run your script to test the connection.
 
 ```bash
 node dbTest.js
