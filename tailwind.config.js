@@ -76,6 +76,9 @@ module.exports = {
       brown: {
         70: '#F0B375',
       },
+      pink: {
+        90: '#FFCCE5',
+      },
       code: {
         'green-1': '#078345',
         'green-2': '#47D18C',

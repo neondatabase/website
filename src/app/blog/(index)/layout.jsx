@@ -1,5 +1,6 @@
 // import Link from 'next/link';
 
+import Communities from 'components/pages/blog/communities';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import Link from 'components/shared/link';
@@ -38,13 +39,14 @@ const categories = [
 // eslint-disable-next-line react/prop-types
 const BlogPageLayout = ({ children }) => (
   <Layout
-    className="bg-gray-new-8 text-white"
+    className="bg-black-new text-white"
     headerTheme="gray-8"
     footerTheme="black-new"
     headerWithBottomBorder
+    footerWithTopBorder
   >
     <h1 className="sr-only">Blog</h1>
-    <div className="mt-32">
+    <div className="bg-gray-new-8 pt-32 pb-40">
       <Container className="grid grid-cols-12 gap-x-10" size="lg">
         <aside className="col-span-2">
           <nav className="sticky top-16">
@@ -66,6 +68,7 @@ const BlogPageLayout = ({ children }) => (
         {children}
       </Container>
     </div>
+    <Communities />
   </Layout>
 );
 
