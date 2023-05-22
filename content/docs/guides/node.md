@@ -100,7 +100,22 @@ getPostgresVersion();
 ```
 
 <Admonition type="note">
-The `rejectUnauthorized` option is set to false because the server's SSL certificate is not being verified against a list of trusted certificates. In a production environment, it's better to verify the server's SSL certificate for security reasons. For that, you would need to provide the necessary CA certificate(s).
+The `rejectUnauthorized` option is set to false because the server's SSL certificate is not being verified against a list of trusted certificates. In a production environment, it's better to verify the server's SSL certificate for security reasons. For that, you would need to provide the necessary CA certificate(s). T do that, you would define the `pool` configuration as follows:
+
+```js
+const { Pool } = require('pg');
+const fs = require('fs');
+const connectionString = require('./databaseConfig');
+
+const pool = new Pool({
+  connectionString,
+  ssl: {
+    rejectUnauthorized: true,  // change this to true
+    ca: fs.readFileSync('/path/to/your/ca-certificate.crt').toString(),
+  },
+});
+```
+
 </Admonition>
 
 ## Run app.js
