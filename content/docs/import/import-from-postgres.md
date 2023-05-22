@@ -60,7 +60,7 @@ where:
 - `<user>` is the PostgreSQL role.
 - `<password>` is the role's password.
 - `ep-polished-water-579720.us-east-2.aws.neon.tech` is the hostname of the Neon PostgreSQL instance. Your hostname will differ.
-- `<dbname>` is the name of the database. You can use the default `neondb` database or create your own. For instructions, see [Create a database](../docs/manage/databases#create-a-database).
+- `<dbname>` is the name of the database. You can use the default `neondb` database or create your own. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 
 <Admonition type="note">
 Neon uses the default PostgreSQL port, `5432`, so it does not need to be specified explicitly in the Neon connection string.
@@ -84,47 +84,47 @@ This section describes using the `pg_dump` utility to dump data from an existing
 
 1. Start by retrieving the connection strings for the existing PostgreSQL database and your Neon database.
 
-    You must supply the connection string for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The Neon connection string will look something like this:
+   You must supply the connection string for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The Neon connection string will look something like this:
 
-    <CodeBlock shouldWrap>
+   <CodeBlock shouldWrap>
 
-    ```bash
-    postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
-    ```
+   ```bash
+   postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
+   ```
 
-    </CodeBlock>
+   </CodeBlock>
 
 2. Dump the database from your existing PostgreSQL instance. You can use a `pg_dump` command similar to the following:
 
-    <CodeBlock shouldWrap>
+   <CodeBlock shouldWrap>
 
-    ```bash
-    pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v
-    ```
+   ```bash
+   pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v
+   ```
 
-    </CodeBlock>
+   </CodeBlock>
 
-    The example above includes some optional arguments. The `-Fc` option sends the output to a custom-format archive suitable for input into `pg_restore`. The `-Z 6` option specifies a compression level of 6 (the default). The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump.
+   The example above includes some optional arguments. The `-Fc` option sends the output to a custom-format archive suitable for input into `pg_restore`. The `-Z 6` option specifies a compression level of 6 (the default). The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump.
 
-    The `pg_dump` command provides many other options to modify your database dump. To learn  more, refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation.
+   The `pg_dump` command provides many other options to modify your database dump. To learn more, refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation.
 
 3. Load the database dump into Neon using `pg_restore`. For example:
 
-      <CodeBlock shouldWrap>
+     <CodeBlock shouldWrap>
 
-      ```bash
-      pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc --single-transaction dumpfile.bak.gz -c -v
-      ```
+   ```bash
+   pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc --single-transaction dumpfile.bak.gz -c -v
+   ```
 
-      </CodeBlock>
+     </CodeBlock>
 
-    The example above includes some optional arguments. The `-Fc` option sends the output a custom-format archive suitable for input into `pg_restore`. The `--single-transaction` option forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.) The `-c` option tells the restore operation to run `clean`, meaning that it drops database objects before recreating them. The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the restore operation.
+   The example above includes some optional arguments. The `-Fc` option sends the output a custom-format archive suitable for input into `pg_restore`. The `--single-transaction` option forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.) The `-c` option tells the restore operation to run `clean`, meaning that it drops database objects before recreating them. The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the restore operation.
 
-    <Admonition type="note">
-    `pg_restore` also supports a `-j` option that specifies the number of concurrent jobs, which can make imports faster. This option is not used in the example above because multiple jobs cannot be used together with the `--single-transaction` option.
-    </Admonition>
+   <Admonition type="note">
+   `pg_restore` also supports a `-j` option that specifies the number of concurrent jobs, which can make imports faster. This option is not used in the example above because multiple jobs cannot be used together with the `--single-transaction` option.
+   </Admonition>
 
-    The `pg_restore` command provides other options to modify your database import.  To learn more, refer to the [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
+   The `pg_restore` command provides other options to modify your database import. To learn more, refer to the [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
 
 ## Data import notes
 
