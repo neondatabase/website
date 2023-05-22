@@ -49,25 +49,21 @@ To create a Neon project:
 
 ## Store your Neon credentials
 
-Store your Neon credentials in your `.env` file.
+Store your Neon connection string in your `.env` file. You can find the connection string for your database  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
+
+<CodeBlock shouldWrap>
 
 ```shell
-PGHOST='<hostname>:<port>'
-PGDATABASE='<dbname>'
-PGUSER='<username>'
-PGPASSWORD='<password>'
-ENDPOINT_ID='<endpoint_id>'
+DATABASE_URL=postgres://<users>:<password>@ep-snowy-unit-550577.us-east-2.aws.neon.tech/neondb?options=endpoint%3Dep-snowy-unit-550577
 ```
 
-where:
+</CodeBlock>
 
-- `<hostname>` the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
-- `<dbname>` is the name of the database. The default Neon database is `neondb`
-- `<user>` is the database user.
-- `<password>` is the database user's password.
-- `<endpoint_id>` is the ID of the compute endpoint that you are connecting to. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396`. If a pooled `<hostname>` such as `ep-tight-salad-272396-pooler.us-east-2.aws.neon.tech` was used for `PGHOST`, be sure to include the `-pooler` suffix in the `<endpoint_id>`:  `ep-tight-salad-272396-pooler`.
+<Admonition type="note">
+A special `endpoint` connection option is appended to the connection string above: `options=endpoint%3Dep-snowy-unit-550577`. This option is used with PostgreSQL clients and drivers such as `pg` that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. For more information, see [connection workarounds](https://neon.tech/docs/connect/connectivity-issues#a-pass-the-endpoint-id-as-an-option).
+</Admonition>
 
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
+You can find the connection string for your database above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
 
 <Admonition type="important">
 To ensure the security of your data, never expose your Neon credentials to the browser.
@@ -81,11 +77,10 @@ To connect to the database using the PostgreSQL client and your Neon credentials
 const { Pool } = require('pg');
 require('dotenv').config();
 
-const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
-const connectionString = `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?options=endpoint%3D${ENDPOINT_ID}`;
+const { DATABASE_URL } = process.env;
 
 const pool = new Pool({
-  connectionString,
+  connectionString: DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
@@ -103,6 +98,10 @@ async function getPostgresVersion() {
 
 getPostgresVersion();
 ```
+
+<Admonition type="note">
+The `rejectUnauthorized` option is set to false because the server's SSL certificate is not being verified against a list of trusted certificates. In a production environment, it's better to verify the server's SSL certificate for security reasons. For that, you would need to provide the necessary CA certificate(s).
+</Admonition>
 
 ## Run app.js
 
