@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 [Sequelize](https://sequelize.org/) is a promise-based Node.js Object-Relational Mapping (ORM) library for SQL databases such as PostgreSQL. It provides a high-level abstraction for working with SQL databases and allows developers to interact with databases using JavaScript or TypeScript instead of writing SQL queries. It supports various features like transactions, relations, read replication, and more.
 
-This guide provides a simple example showing how to set up Sequelize and connect to a Neon database. For more information about using Sequelize, please refer to the [Sequelize documentation](https://sequelize.org/docs/v6/).
+This guide provides a simple example showing how to connect from Sequelize to a Neon database. For more information about using Sequelize, please refer to the [Sequelize documentation](https://sequelize.org/docs/v6/).
 
 ## Prerequisites
 
@@ -70,16 +70,21 @@ npm install --save sequelize pg pg-hstore
 2. In the `dbTest.js` file, add the following code. Replace the connection string with your own Neon connection string.
 
     <Admonition type="note">
-    Neon requires a secure SSL connection. The `require: true` option tells Sequelize to connect over SSL.
+    The `require: true` option tells Sequelize to connect over SSL. The `ca: rootCert` setting provides the path to a system root certificate file. For root certificate locations, see [Location of system root certificates](https://neon.tech/docs/connect/connect-securely#location-of-system-root-certificates).
     </Admonition>
 
     ```js
     const { Sequelize } = require('sequelize');
+    const fs = require('fs');
 
-    const sequelize = new Sequelize('postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb', {
+    // Read the certificate file (use the correct path for your certificate file)
+    const rootCert = fs.readFileSync('/etc/ssl/certs/ca-certificates.crt');
+
+    const sequelize = new Sequelize('postgres://<user>:<password>@ep-snowy-unit-123456.us-east-2.aws.neon.tech/neondb', {
     dialectOptions: {
         ssl: {
-        require: true
+        require: true,
+        ca: rootCert, // Use the root certificate
         }
     }
     });
@@ -101,6 +106,25 @@ npm install --save sequelize pg pg-hstore
         console.error('Unable to connect to the database:', err);
     });
     ```
+
+     If you are working in a development environment or do not require certificate verification for some other reason, you can use this connection configuration in place of the one defined above:
+
+     ```js
+    const { Sequelize } = require('sequelize');
+
+    const sequelize = new Sequelize('postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb', {
+    dialectOptions: {
+        ssl: {
+        require: true,
+        rejectUnauthorized: false, 
+        }
+    }
+    });
+    ```
+
+    <Admonition type="note"> 
+     Keep in mind that using `rejectUnauthorized: false` disables certificate verification, potentially leaving your connection susceptible to "man-in-the-middle" attacks. Use with caution.
+    </Admonition>
 
 ## Run the script to test the connection
 
