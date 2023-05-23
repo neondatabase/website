@@ -41,17 +41,17 @@ If you do not have one already, create a Neon project.
 
 2. Add project dependencies using one of the following commands:
 
-  If you are using the `pg` client:
+    If you are using the `node-postgres` client:
 
-   ```shell
-   npm install pg dotenv
-   ```
+    ```shell
+    npm install pg dotenv
+    ```
 
-  If you are using the `Postgres.js` client:
+    If you are using the `Postgres.js` client:
 
-   ```shell
-   npm install postgres dotenv
-   ```
+    ```shell
+    npm install postgres dotenv
+    ```
 
 ## Store your Neon credentials
 
