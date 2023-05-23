@@ -14,7 +14,7 @@ const VideoList = ({ videos }) => (
       {videos.map(
         (
           {
-            video: {
+            post: {
               title,
               date,
               videoPost: { url, coverImage, author },

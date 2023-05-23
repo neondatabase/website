@@ -28,11 +28,19 @@ const ReleaseNotesList = ({ items }) => (
         return (
           <li className="group" key={index}>
             <Link className="flex flex-col" to={`${LINKS.releaseNotes}/${slug}`}>
-              <span className="text-xs font-medium uppercase leading-none tracking-wider text-blue-80">
+              <span className="text-xs font-medium uppercase leading-none tracking-wider text-blue-80 line-clamp-1">
                 {category}
               </span>
               <div className="relative mt-4 after:absolute after:top-1/2 after:left-0 after:h-px after:w-[calc(100%+50px)] after:-translate-y-1/2 after:bg-blue-80 group-last:after:w-full">
                 <span className="relative z-10 flex h-2.5 w-2.5 rounded-full border-[1.4px] border-blue-80 bg-black-new" />
+                <img
+                  className="absolute top-1/2 -right-1 hidden -translate-y-1/2 group-last:block"
+                  src="/images/pages/blog/chevron.svg"
+                  width={9}
+                  height={12}
+                  alt=""
+                  aria-hidden
+                />
               </div>
               <h3 className="mt-4 text-lg font-medium leading-tight tracking-[-0.02em]">{title}</h3>
               <time

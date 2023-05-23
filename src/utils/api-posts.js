@@ -122,7 +122,7 @@ const getWpBlogPage = async () => {
                 }
               }
               videos {
-                video {
+                post {
                   ... on Video {
                     title(format: RENDERED)
                     date
@@ -145,6 +145,20 @@ const getWpBlogPage = async () => {
                             }
                           }
                         }
+                      }
+                    }
+                  }
+                }
+              }
+              appearances {
+                post {
+                  ... on Appearance {
+                    title(format: RENDERED)
+                    appearancePost {
+                      url
+                      coverImage {
+                        mediaItemUrl
+                        altText
                       }
                     }
                   }

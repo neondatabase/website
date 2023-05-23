@@ -15,6 +15,7 @@ export default async function BlogPage() {
     companyFeaturedPosts,
     communityFeaturedPosts,
     videos,
+    appearances,
     engineeringFeaturedPosts,
   } = await getWpBlogPage();
 
@@ -26,7 +27,10 @@ export default async function BlogPage() {
       <PostsList title="Company" posts={companyFeaturedPosts} alignment="left" />
       <SubscribeForm className="rounded-xl bg-black-new p-[70px]" />
       <VideoList videos={videos} />
-      <AppearanceEngineering engineeringPosts={engineeringFeaturedPosts} />
+      <AppearanceEngineering
+        appearancesPosts={appearances}
+        engineeringPosts={engineeringFeaturedPosts}
+      />
     </div>
   );
 }

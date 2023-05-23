@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import BlogPostCard from 'components/pages/blog/blog-post-card';
@@ -7,22 +8,7 @@ import { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
 
 import PlayIcon from './images/play.inline.svg';
 
-const appearances = [
-  {
-    title: 'Building Scalable Postgres with Serverless Database Platform Neon',
-    url: '/',
-  },
-  {
-    title: 'Taking Postgres serverless with Nikita Shamgunov from Neon',
-    url: '/',
-  },
-  {
-    title: 'Nikita Shamgunov, CEO of Neon, on Providing the Fabric That Runs the Internet',
-    url: '/',
-  },
-];
-
-const AppearanceEngineering = ({ engineeringPosts }) => (
+const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
   <section className="appearance-engineering grid grid-cols-10 gap-x-10">
     <div className="col-span-4">
       <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue-80">
@@ -30,31 +16,52 @@ const AppearanceEngineering = ({ engineeringPosts }) => (
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>
       <ul>
-        {appearances.map(({ title, url }, index) => (
-          <li key={index} className="mt-6">
-            <Link className="group flex items-center space-x-4" to={url}>
-              <img
-                className="h-28 w-28 rounded-md bg-gray-new-30"
-                src={`data:image/svg+xml;charset=utf-8,%3Csvg width='${112}' height='${112}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
-                alt=""
-                width={112}
-                height={112}
-                aria-hidden
-              />
-              <div>
-                <h3 className="text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-green-45">
-                  {title}
-                </h3>
-                <div className="mt-2 flex items-center">
-                  <PlayIcon className="mr-2 inline-block" />
-                  <span className="text-sm font-medium leading-tight tracking-[-0.02em] text-blue-80">
-                    Listen now
-                  </span>
+        {appearancesPosts.map(
+          (
+            {
+              post: {
+                title,
+                appearancePost: { url, coverImage },
+              },
+            },
+            index
+          ) => (
+            <li key={index} className="mt-6">
+              <Link className="group flex items-center space-x-4" to={url}>
+                {coverImage ? (
+                  <Image
+                    className="rounded-md"
+                    src={coverImage?.mediaItemUrl}
+                    alt={coverImage?.altText || title}
+                    width={112}
+                    height={112}
+                  />
+                ) : (
+                  <img
+                    className="h-28 w-28 rounded-md bg-gray-new-30"
+                    src={`data:image/svg+xml;charset=utf-8,%3Csvg width='${112}' height='${112}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+                    alt=""
+                    width={112}
+                    height={112}
+                    aria-hidden
+                  />
+                )}
+
+                <div>
+                  <h3 className="text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-green-45">
+                    {title}
+                  </h3>
+                  <div className="mt-2 flex items-center">
+                    <PlayIcon className="mr-2 inline-block" />
+                    <span className="text-sm font-medium leading-tight tracking-[-0.02em] text-blue-80">
+                      Listen now
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          </li>
-        ))}
+              </Link>
+            </li>
+          )
+        )}
       </ul>
     </div>
     <div className="col-span-6">
@@ -87,6 +94,20 @@ const AppearanceEngineering = ({ engineeringPosts }) => (
 );
 
 AppearanceEngineering.propTypes = {
+  appearancesPosts: PropTypes.arrayOf(
+    PropTypes.shape({
+      post: PropTypes.shape({
+        title: PropTypes.string,
+        appearancePost: PropTypes.shape({
+          url: PropTypes.string,
+          coverImage: PropTypes.shape({
+            mediaItemUrl: PropTypes.string,
+            altText: PropTypes.string,
+          }),
+        }),
+      }),
+    })
+  ),
   engineeringPosts: PropTypes.arrayOf(
     PropTypes.shape({
       post: PropTypes.shape({
