@@ -95,26 +95,6 @@ async function getPostgresVersion() {
 getPostgresVersion();
 ```
 
-<Admonition type="note">
-The `rejectUnauthorized` option is set to false because the server's SSL certificate is not being verified against a list of trusted certificates. In a production environment, it's better to verify the server's SSL certificate for security reasons. For that, you would need to provide the necessary root certificate(s). The configuration to specify a root certificate is shown below, which you can use in place of the configuration in the example above.
-
-```js
-const { Pool } = require('pg');
-require('dotenv').config();
-const fs = require('fs');
-
-const pool = new Pool({
-  connectionString: DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: true,
-    ca: fs.readFileSync('/path/to/your/root.cert.pem').toString(),
-  },
-});
-```
-
-For root certificate locations, see [Location of system root certificates](../connect/connect-securely#location-of-system-root-certificates).
-</Admonition>
-
 ## Run app.js
 
 Run `node app.js` to view the result.
