@@ -1,6 +1,6 @@
 ---
 title: Create your first project
-subtitle: Create a Neon project in seconds with just a few clicks 
+subtitle: Create a Neon project in seconds with just a few clicks
 ---
 
 To create your first project:
@@ -10,7 +10,7 @@ To create your first project:
 
 ![Create a project](/docs/get-started-with-neon/create_project.png)
 
-3. On the **Project Creation** dialog, specify a name, a PostgreSQL version, and a region. If you are a [Pro plan](../introduction/pro-plan) user, you can also specify compute size settings (not shown below). Neon supports larger compute sizes and Autoscaling (beta). For more information about these options, see [Compute size configuration](../manage/endpoints#compute-size-configuration).
+3. On the **Project Creation** dialog, specify a name, a PostgreSQL version, and a region. If you are a [Pro plan](../introduction/pro-plan) user, you can also specify compute size settings (not shown below). Neon supports larger compute sizes and Autoscaling (beta). For more information about these options, see [Compute size and Autoscaling configuration](../manage/endpoints#compute-size-and-autoscaling-configuration).
 
 ![Select project options](/docs/get-started-with-neon/select_project_options.png)
 

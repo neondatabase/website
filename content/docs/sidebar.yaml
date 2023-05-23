@@ -50,6 +50,8 @@
       slug: connect/passwordless-connect
     - title: Connect with psql
       slug: connect/query-with-psql-editor
+    - title: Connect with pgcli
+      slug: connect/connect-pgcli
     - title: Connect from old clients
       slug: connect/connectivity-issues
     - title: Connect securely
@@ -142,6 +144,8 @@
       slug: import/import-from-heroku
     - title: Import from CSV
       slug: import/import-from-csv
+    - title: Import from a Neon project
+      slug: import/import-from-neon
 - title: Serverless driver
   slug: serverless/serverless-driver
 - title: Security
