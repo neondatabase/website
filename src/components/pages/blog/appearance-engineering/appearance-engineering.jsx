@@ -63,8 +63,15 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
           )
         )}
       </ul>
+      <Link
+        className="mt-8 inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] text-blue-80"
+        to="/blog/category/appearances"
+        withArrow
+      >
+        All podcasts
+      </Link>
     </div>
-    <div className="col-span-6">
+    <div className="col-span-6 flex flex-col">
       <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-[#B8ADEB]">
         <span>Engineering</span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
@@ -89,6 +96,13 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
           ))}
         </div>
       </div>
+      <Link
+        className="mt-4 ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] text-[#B8ADEB]"
+        to="/blog/category/engineering"
+        withArrow
+      >
+        All engineering articles
+      </Link>
     </div>
   </section>
 );

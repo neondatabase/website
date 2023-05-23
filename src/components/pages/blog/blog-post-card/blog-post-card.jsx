@@ -13,11 +13,11 @@ const BlogPostCard = ({
   slug,
   date,
   categories,
-  pageBlogPost: { authors, largeCover },
+  pageBlogPost: { authors, largeCover, author },
   size = 'lg',
 }) => {
   const category = categories?.nodes[0];
-  const author = authors[0]?.author;
+  const postAuthor = authors?.[0]?.author || author;
 
   const formattedDate = getFormattedDate(date);
 
@@ -77,15 +77,15 @@ const BlogPostCard = ({
           {size === 'lg' && (
             <Image
               className="mr-2 rounded-full"
-              src={author.postAuthor?.image?.mediaItemUrl}
-              alt={author?.title}
+              src={postAuthor.postAuthor?.image?.mediaItemUrl}
+              alt={postAuthor?.title}
               width={28}
               height={28}
             />
           )}
           <div className="flex items-center lg:flex-col lg:items-start md:flex-row md:items-center">
             <span className="truncate text-sm leading-tight tracking-[-0.02em] text-gray-new-90">
-              {author?.title}
+              {postAuthor?.title}
             </span>
 
             <span

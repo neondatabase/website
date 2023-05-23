@@ -20,7 +20,7 @@ export default async function BlogPage() {
   } = await getWpBlogPage();
 
   return (
-    <div className="col-span-8 col-start-3 -mx-[30px] grid gap-y-20">
+    <>
       <FeaturedPostsList posts={featuredPosts} />
       <PostsList title="Community" posts={communityFeaturedPosts} alignment="right" />
       <ReleaseNotesList items={featuredReleaseNotes} />
@@ -31,7 +31,7 @@ export default async function BlogPage() {
         appearancesPosts={appearances}
         engineeringPosts={engineeringFeaturedPosts}
       />
-    </div>
+    </>
   );
 }
 

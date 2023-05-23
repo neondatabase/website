@@ -17,6 +17,64 @@ const POST_SEO_FRAGMENT = gql`
   }
 `;
 
+const getAllWpBlogCategories = async () => {
+  const categoriesQuery = gql`
+    query Categories {
+      categories {
+        nodes {
+          name
+          slug
+        }
+      }
+    }
+  `;
+  const data = await graphQLClient.request(categoriesQuery);
+  return data?.categories?.nodes;
+};
+
+const getWpPostsByCategorySlug = async (slug) => {
+  const postsQuery = gql`
+    query Query($categoryName: String!) {
+      posts(where: { categoryName: $categoryName }) {
+        nodes {
+          title(format: RENDERED)
+          slug
+          date
+          pageBlogPost {
+            largeCover {
+              altText
+              mediaItemUrl
+            }
+            authors {
+              author {
+                ... on PostAuthor {
+                  title
+                  postAuthor {
+                    role
+                    url
+                    image {
+                      altText
+                      mediaItemUrl
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
+
+  const data = await graphQLClient.request(postsQuery, {
+    categoryName,
+  });
+
+  return data?.posts?.nodes;
+};
+
 const getWpBlogPage = async () => {
   const blogPageQuery = gql`
     query BlogPage {
@@ -126,15 +184,14 @@ const getWpBlogPage = async () => {
                   ... on Video {
                     title(format: RENDERED)
                     date
-                    videoPost {
+                    pageBlogPost: videoPost {
                       url
-                      coverImage {
+                      largeCover: coverImage {
                         mediaItemUrl
                         altText
                       }
                       author {
                         ... on PostAuthor {
-                          id
                           title(format: RENDERED)
                           postAuthor {
                             role
@@ -575,4 +632,12 @@ const getWpPreviewPost = async (id) => {
   return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
 };
 
-export { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData, getWpPreviewPost, getWpBlogPage };
+export {
+  getAllWpPosts,
+  getWpPostBySlug,
+  getWpPreviewPostData,
+  getWpPreviewPost,
+  getWpBlogPage,
+  getAllWpBlogCategories,
+  getWpPostsByCategorySlug,
+};

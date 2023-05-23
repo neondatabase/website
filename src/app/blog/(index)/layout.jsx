@@ -1,7 +1,7 @@
+import BlogNavLink from 'components/pages/blog/blog-nav-link';
 import Communities from 'components/pages/blog/communities';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
-import Link from 'components/shared/link';
 
 const categories = [
   {
@@ -48,24 +48,16 @@ const BlogPageLayout = ({ children }) => (
       <Container className="grid grid-cols-12 gap-x-10" size="lg">
         <aside className="col-span-2">
           <nav className="sticky top-16">
-            <ul>
-              {categories.map(({ name, slug }, index) => {
-                const url = slug === 'all' ? '/blog' : `/blog/category/${slug}`;
-                return (
-                  <li className="py-1.5 first:pt-0 last:pb-0" key={index}>
-                    <Link
-                      className="py-[7px] text-xs font-semibold uppercase leading-none tracking-[0.02em]"
-                      to={url}
-                    >
-                      {name}
-                    </Link>
-                  </li>
-                );
-              })}
+            <ul className="flex flex-col">
+              {categories.map(({ name, slug }, index) => (
+                <li className="py-1.5 first:pt-0 last:pb-0" key={index}>
+                  <BlogNavLink name={name} slug={slug} />
+                </li>
+              ))}
             </ul>
           </nav>
         </aside>
-        {children}
+        <div className="col-span-8 col-start-3 -mx-[30px] grid gap-y-20">{children}</div>
       </Container>
     </div>
     <Communities />
