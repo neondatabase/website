@@ -20,7 +20,7 @@ The source code for this action is available on [GitHub](https://github.com/neon
 
 ### Prerequisites
 
-- To use this action, you require an Neon API key. For instructions, see [Create an API key](../manage/api-keys#create-an-api-key).
+- To use this action, you require a Neon API key. For instructions, see [Create an API key](../manage/api-keys#create-an-api-key).
 - Add your Neon API key to your GitHub Secrets. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left side bar. Click **Actions** > **New Repository Secret**. Name the secret `NEON_API_KEY`, paste your API key in the **Secret** field, and click **Add Secret**.
 
 ### Example
@@ -34,7 +34,7 @@ jobs:
   create-branch:
     runs-on: ubuntu-latest
     steps:
-      - uses: neondatabase/create-branch-action@main
+      - uses: neondatabase/create-branch-action@beta
         with:
           project_id: rapid-haze-373089
           parent_branch_id: br-long-forest-224191
@@ -49,7 +49,7 @@ jobs:
 
 - `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Settings** page.
 - `parent_branch_id`: The ID of the parent branch, typically the `main` branch of your project. You can find this value in the Neon Console. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
-- `branch_name`: The branch name is automatically set by the create branch action.
+- `branch_name`: This is an optional parameter. If unspecified, the branch name will default to the same value as the `branch_id` of the newly created branch, which is a generated value that starts with a `br-` prefix.
 
 ### Outputs
 
@@ -76,7 +76,7 @@ The source code for this action is available on [GitHub](https://github.com/neon
 
 ### Prerequisites
 
-- To use this action, you require an Neon API key. For instructions, see [Create an API key](../manage/api-keys#create-an-api-key).
+- To use this action, you require a Neon API key. For instructions, see [Create an API key](../manage/api-keys#create-an-api-key).
 - Add your Neon API key to your GitHub Secrets. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left side bar. Click **Actions** > **New Repository Secret**. Name the secret `NEON_API_KEY`, paste your API key in the **Secret** field, and click **Add Secret**.
 
 ### Example
