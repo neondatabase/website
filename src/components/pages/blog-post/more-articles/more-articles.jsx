@@ -8,8 +8,8 @@ import getFormattedDate from 'utils/get-formatted-date';
 
 const categoriesColor = {
   company: 'text-green-45',
-  engineering: 'text-yellow-70',
-  community: 'text-brown-70',
+  engineering: 'text-purple-70',
+  community: 'text-yellow-70',
 };
 
 const MoreArticles = ({ className = null, posts }) => (
