@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/integrations/node
 ---
 
-This guide describes how to create a Neon project and connect to it from a Node.js application. You can find the code sample on [GitHub](https://github.com/neondatabase/examples/tree/main/with-nodejs).
+This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) client or [Postgres.js](https://www.npmjs.com/package/postgres) client, whichever you prefer.
 
 <Admonition type="note">
 The same configuration steps can be used for Express and Next.js applications.
@@ -39,7 +39,15 @@ If you do not have one already, create a Neon project.
    npm init -y
    ```
 
-2. Add project dependencies using the following command:
+2. Add project dependencies using one of the following commands:
+
+  If you are using the `pg` client:
+
+   ```shell
+   npm install pg dotenv
+   ```
+
+  If you are using the `node-postgres` client:
 
    ```shell
    npm install pg dotenv
@@ -58,7 +66,7 @@ DATABASE_URL=postgres://<users>:<password>@ep-snowy-unit-550577.us-east-2.aws.ne
 </CodeBlock>
 
 <Admonition type="note">
-A special `endpoint` connection option is appended to the connection string above: `options=endpoint%3Dep-snowy-unit-550577`. This option is used with PostgreSQL clients and drivers such as `pg` that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. For more information, see [connection workarounds](../connect/connectivity-issues#a-pass-the-endpoint-id-as-an-option).
+A special `endpoint` connection option is appended to the connection string above: `options=endpoint%3Dep-snowy-unit-550577`. This option is used with PostgreSQL clients such as `pg` and `node-postgres` that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. For more information, see [connection workarounds](../connect/connectivity-issues#a-pass-the-endpoint-id-as-an-option).
 </Admonition>
 
 <Admonition type="important">
@@ -67,7 +75,9 @@ To ensure the security of your data, never expose your Neon credentials to the b
 
 ## Configure the app.js file
 
-To connect to the database using the PostgreSQL client and your Neon credentials, add the following code to the `app.js` file:
+Configure your `app.js` file to connect to your Neon database using either the `pg` client or the `node-postgres` client:
+
+### Use the `pg` client
 
 ```javascript
 const { Pool } = require('pg');
@@ -90,6 +100,24 @@ async function getPostgresVersion() {
   } finally {
     client.release();
   }
+}
+
+getPostgresVersion();
+```
+
+### Use the node-postgres client
+
+```js
+const postgres = require('postgres');
+require('dotenv').config();
+
+const { DATABASE_URL } = process.env;
+
+const sql = postgres(DATABASE_URL, { ssl: 'require' });
+
+async function getPostgresVersion() {
+  const result = await sql`select version()`;
+  console.log(result);
 }
 
 getPostgresVersion();
