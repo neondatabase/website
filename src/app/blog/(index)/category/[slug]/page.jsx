@@ -9,7 +9,12 @@ export default async function BlogCategoryPage({ params: { slug } }) {
       <h1 className="sr-only">{slug}</h1>
       <div className="grid grid-cols-3 gap-x-10 gap-y-16">
         {posts.map((post, index) => (
-          <BlogPostCard {...post} size="md" key={index} />
+          <BlogPostCard
+            className={index === 0 && 'col-span-full'}
+            {...post}
+            size={index === 0 ? 'xl' : 'md'}
+            key={index}
+          />
         ))}
       </div>
     </>

@@ -35,7 +35,7 @@ const getAllWpBlogCategories = async () => {
 const getWpPostsByCategorySlug = async (slug) => {
   const postsQuery = gql`
     query Query($categoryName: String!) {
-      posts(where: { categoryName: $categoryName }) {
+      posts(where: { categoryName: $categoryName, orderby: { field: DATE, order: DESC } }) {
         nodes {
           title(format: RENDERED)
           slug

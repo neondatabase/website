@@ -17,20 +17,8 @@ const categories = [
     slug: 'company',
   },
   {
-    name: 'Release notes',
-    slug: 'release-notes',
-  },
-  {
     name: 'Community',
     slug: 'community',
-  },
-  {
-    name: 'Video',
-    slug: 'video',
-  },
-  {
-    name: 'Appearances',
-    slug: 'appearances',
   },
 ];
 
