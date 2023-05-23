@@ -47,10 +47,10 @@ If you do not have one already, create a Neon project.
    npm install pg dotenv
    ```
 
-  If you are using the `node-postgres` client:
+  If you are using the `Postgres.js` client:
 
    ```shell
-   npm install pg dotenv
+   npm install postgres dotenv
    ```
 
 ## Store your Neon credentials
