@@ -12,7 +12,7 @@ Neon provides the following GitHub Actions for working with database branches, w
 
 ## Create branch action
 
-This GitHub Action to create new branches in your Neon project.
+This GitHub Action creates a new branch in your Neon project.
 
 <Admonition type="info">
 The source code for this action is available on [GitHub](https://github.com/neondatabase/create-branch-action). You can also find this action on the [GitHub Action marketplace](https://github.com/marketplace/actions/neon-create-delete-branch).
@@ -48,7 +48,7 @@ jobs:
 ### Input variables
 
 - `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Settings** page.
-- `parent_branch_id`: The ID of the parent branch, typically the `main` branch of your project. You can find this value in the Neon Console. Select Branches from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
+- `parent_branch_id`: The ID of the parent branch, typically the `main` branch of your project. You can find this value in the Neon Console. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
 - `branch_name`: The branch name is automatically set by the create branch action.
 
 ### Outputs
@@ -99,7 +99,7 @@ jobs:
 ### Input variables
 
 - `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Settings** page.
-- `branch_id`: The ID of the branch you want to delete. Select Branches from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
+- `branch_id`: The ID of the branch you want to delete. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
 
 ### Outputs
 
