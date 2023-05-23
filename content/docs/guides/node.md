@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/integrations/node
 ---
 
-This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) client or [Postgres.js](https://www.npmjs.com/package/postgres) client, whichever you prefer.
+This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) client or [Postgres.js](https://www.npmjs.com/package/postgres) client, whichever client you prefer.
 
 <Admonition type="note">
 The same configuration steps can be used for Express and Next.js applications.
@@ -77,7 +77,7 @@ To ensure the security of your data, never expose your Neon credentials to the b
 
 Configure your `app.js` file to connect to your Neon database using either the `pg` client or the `node-postgres` client:
 
-### Use the `pg` client
+### Use the node-postgres client
 
 ```javascript
 const { Pool } = require('pg');
@@ -105,7 +105,7 @@ async function getPostgresVersion() {
 getPostgresVersion();
 ```
 
-### Use the node-postgres client
+### Use the Postgres.js client
 
 ```js
 const postgres = require('postgres');
