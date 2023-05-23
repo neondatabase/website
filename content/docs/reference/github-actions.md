@@ -71,7 +71,7 @@ outputs:
 This GitHub Action deletes a branch from your Neon project.
 
 <Admonition type="info">
-The source code for this action is available on [GitHub](https://github.com/neondatabase/delete-branch-action). You can also find this action on the [GitHub Action marketplace](https://github.com/marketplace/actions/neon-create-create-branch).
+The source code for this action is available on [GitHub](https://github.com/neondatabase/delete-branch-action). You can also find this action on the [GitHub Action marketplace](https://github.com/marketplace/actions/neon-database-delete-branch).
 </Admonition>
 
 ### Prerequisites
