@@ -65,16 +65,19 @@ module.exports = {
         98: '#FAFAFA',
       },
       yellow: {
-        70: '#f0f075',
+        70: '#F0F075',
       },
       green: {
-        45: '#00e599',
+        45: '#00E599',
       },
       blue: {
-        80: '#ade0eb',
+        80: '#ADE0EB',
       },
       brown: {
         70: '#F0B375',
+      },
+      purple: {
+        70: '#B8ADEB',
       },
       code: {
         'green-1': '#078345',

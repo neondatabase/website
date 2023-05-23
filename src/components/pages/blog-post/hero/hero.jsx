@@ -6,8 +6,8 @@ import LINKS from 'constants/links';
 
 const categoriesColor = {
   company: 'text-green-45 bg-green-45/10',
-  engineering: 'text-yellow-70 bg-yellow-70/10',
-  community: 'text-brown-70 bg-brown-70/10',
+  community: 'text-yellow-70 bg-yellow-70/10',
+  engineering: 'text-purple-70 bg-purple-70/10',
 };
 
 const Hero = ({ title, description, date, category, className = null }) => (
