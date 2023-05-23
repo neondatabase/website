@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Configure, InstantSearch } from 'react-instantsearch-dom';
 
-import ChatWidget from 'components/pages/doc/chat-widget';
+import { ChatWidgetTrigger } from 'components/pages/doc/chat-widget';
 import Input from 'components/shared/search/input';
 import Results from 'components/shared/search/results';
 import useAlgoliaSearch from 'hooks/use-algolia-search';
@@ -13,7 +13,6 @@ const indices = [
 ];
 
 const SearchModal = ({ isOpen, closeModal }) => {
-  const [isChatWidgetOpen, setIsChatWidgetOpen] = useState(false);
   const { query, setQuery, setFocus, hasFocus, searchClient } = useAlgoliaSearch();
   const shouldShowResult = !!query?.length && hasFocus;
   const inputRef = useRef(null);
@@ -27,7 +26,7 @@ const SearchModal = ({ isOpen, closeModal }) => {
   return (
     <div
       className={clsx(
-        isOpen && !isChatWidgetOpen ? 'block' : 'hidden',
+        isOpen ? 'block' : 'hidden',
         'fixed inset-0 z-[100] flex flex-col bg-gray-9 dark:bg-gray-1'
       )}
     >
@@ -64,11 +63,7 @@ const SearchModal = ({ isOpen, closeModal }) => {
         )}
       </InstantSearch>
       <div className="mt-auto w-full px-4 py-2.5">
-        <ChatWidget
-          className="relative z-10 w-full justify-center rounded bg-gray-8 p-2.5 dark:border dark:border-gray-new-30 dark:bg-transparent"
-          isChatWidgetOpen={isChatWidgetOpen}
-          setIsChatWidgetOpen={setIsChatWidgetOpen}
-        />
+        <ChatWidgetTrigger className="relative w-full justify-center rounded bg-gray-8 p-2.5 dark:border dark:border-gray-new-30 dark:bg-transparent" />
       </div>
     </div>
   );

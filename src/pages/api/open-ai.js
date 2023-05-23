@@ -38,7 +38,8 @@ export default async function handler(req) {
     });
 
     return new Response(response);
-  } catch {
-    return new Response(null, { status: 500 });
+  } catch (e) {
+    console.error(e);
+    return new Response('Something went wrong', { status: 500 });
   }
 }

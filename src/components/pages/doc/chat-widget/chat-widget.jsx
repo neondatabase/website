@@ -4,8 +4,10 @@ import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 
+import { ChatContext } from 'app/chat-provider';
+import useAbortController from 'hooks/use-abort-controller';
 import useControlKey from 'hooks/use-control-key';
 import useDocsAIChatStream from 'hooks/use-docs-ai-chat-stream';
 
@@ -50,27 +52,19 @@ const handleKeyDown = (cb) => (e) => {
   }
 };
 
-const ChatWidget = ({ className = null, isChatWidgetOpen, setIsChatWidgetOpen }) => {
-  const [controller, setController] = useState(() => new AbortController());
-
-  const handleAbortSignal = () => {
-    controller.abort();
-    // reset so that fetch function is unblocked
-    setController(new AbortController());
-  };
-
+const ChatWidget = () => {
   // state
-  const isMountedRef = useRef(false);
   const [inputText, setInputText] = useState('');
-  // aux flags
-  const [isOpen, setIsOpen] = useState(false);
-  // aux ref
+  // context
+  const { isOpen, setIsOpen } = useContext(ChatContext);
+  // aux refs
   const messagesEndRef = useRef(null);
-
-  const [commandKey] = useControlKey();
+  const isMountedRef = useRef(false);
+  // hooks
+  const { getSignal, resetAbortController } = useAbortController();
   const { messages, setMessages, isLoading, error, setError } = useDocsAIChatStream({
     isMountedRef,
-    signal: controller.signal,
+    signal: getSignal(),
   });
 
   // handlers
@@ -79,6 +73,15 @@ const ChatWidget = ({ className = null, isChatWidgetOpen, setIsChatWidgetOpen })
   const handleExampleClick = (e) => {
     setMessages([{ role: 'user', content: e.target.textContent }]);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      isMountedRef.current = true;
+    } else {
+      isMountedRef.current = false;
+    }
+    return () => (isMountedRef.current = false);
+  }, [isOpen]);
 
   const handleSubmit = useCallback(
     async (e) => {
@@ -99,17 +102,16 @@ const ChatWidget = ({ className = null, isChatWidgetOpen, setIsChatWidgetOpen })
     }
   };
 
-  const handleOpenChange = (isOpen) => {
-    if (!isOpen) {
-      // reset the state completely
-      isMountedRef.current = false;
-      handleAbortSignal();
-      setError(null);
-      setMessages([]);
-    } else {
-      isMountedRef.current = true;
-    }
-    setIsOpen(isOpen);
+  // @NOTE:
+  // fires only once on close!
+  // to fire twice we need to add trigger
+  // section to Dialog again
+  const handleOpenChange = () => {
+    // reset the state completely
+    resetAbortController();
+    setError(null);
+    setMessages([]);
+    setIsOpen(false);
   };
 
   // effects
@@ -118,13 +120,7 @@ const ChatWidget = ({ className = null, isChatWidgetOpen, setIsChatWidgetOpen })
     return () => {
       window.removeEventListener('keydown', handleKeyDown(setIsOpen));
     };
-  }, []);
-  // for mobile version
-  useEffect(() => {
-    if (!isOpen && setIsChatWidgetOpen) {
-      setIsChatWidgetOpen(false);
-    }
-  }, [isOpen, setIsChatWidgetOpen]);
+  }, [setIsOpen]);
 
   useEffect(() => {
     // make sure chat is always scrolled to the bottom
@@ -135,44 +131,10 @@ const ChatWidget = ({ className = null, isChatWidgetOpen, setIsChatWidgetOpen })
   }, [messages]);
 
   return (
-    <Dialog.Root open={isOpen || isChatWidgetOpen} onOpenChange={handleOpenChange}>
-      <Dialog.Trigger asChild>
-        <button
-          className={clsx(
-            'chat-widget flex flex-col text-sm focus:outline-none xl:flex-row xl:items-center xl:space-x-1.5',
-            className
-          )}
-          type="button"
-          aria-label="Open Neon Docs AI"
-          onClick={setIsChatWidgetOpen ? () => setIsChatWidgetOpen(true) : undefined}
-        >
-          <span className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[#00CC88] dark:bg-[rgba(0,229,153,0.1)] xl:h-6 xl:w-6 xl:shrink-0 xl:rounded">
-            <ExampleIcon className="h-[26px] w-[26px] text-white dark:text-green-45 xl:h-4 xl:w-4" />
-          </span>
-          <div className="mt-2.5 flex min-h-[22px] w-full items-center justify-between xl:mt-0 lg:w-auto">
-            <h3 className="font-semibold leading-none xl:text-sm xl:font-normal xl:text-gray-3 dark:xl:text-gray-7">
-              <span className="lg:hidden">Neon Docs AI</span>
-              <span className="hidden lg:inline" aria-hidden>
-                Try Neon Docs AI instead
-              </span>
-            </h3>
-            {commandKey && (
-              <span className="text-gray-20 dark:text-gray-90 rounded-sm bg-gray-new-94 px-1.5 py-1 leading-none dark:bg-gray-new-15 xl:hidden">
-                {commandKey} + K
-              </span>
-            )}
-          </div>
-          <p className="mt-1.5 text-left leading-tight text-gray-3 dark:text-gray-7 xl:hidden">
-            We brought ChatGPT straight to the docs
-          </p>
-          <span className="mt-1.5 leading-tight text-secondary-8 dark:text-primary-1 xl:hidden">
-            Ask a question
-          </span>
-        </button>
-      </Dialog.Trigger>
+    <Dialog.Root open={isOpen} onOpenChange={handleOpenChange}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-[rgba(12,13,13,0.2)] data-[state=closed]:animate-fade-out-overlay data-[state=open]:animate-fade-in-overlay dark:bg-black/80" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2 lg:h-full lg:max-h-full lg:max-w-full">
+        <Dialog.Overlay className="fixed inset-0 z-[150] bg-[rgba(12,13,13,0.2)] data-[state=closed]:animate-fade-out-overlay data-[state=open]:animate-fade-in-overlay dark:bg-black/80" />
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-[150] mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2 lg:h-full lg:max-h-full lg:max-w-full">
           <div className="relative flex flex-col rounded-[10px] border border-gray-new-90 bg-gray-new-98 pt-4 data-[state=open]:animate-dialog-show data-[state=closed]:animate-dialog-hide dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-white dark:shadow-[4px_4px_10px_rgba(0,0,0,0.5)] lg:h-full lg:rounded-none">
             <Dialog.Title className="text-20 flex items-center space-x-5 px-5 leading-tight">
               <span>Ask Neon AI a question</span>
@@ -186,7 +148,7 @@ const ChatWidget = ({ className = null, isChatWidgetOpen, setIsChatWidgetOpen })
               <AnimatePresence initial={false} mode="wait">
                 {messages.length ? (
                   <m.div
-                    className="mt-6 flex max-h-[400px] flex-col overflow-y-auto"
+                    className="mt-6 flex max-h-[calc(100vh_-_62px)] flex-col overflow-y-auto"
                     initial="initial"
                     animate="animate"
                     exit="exit"
@@ -285,4 +247,50 @@ ChatWidget.propTypes = {
   setIsChatWidgetOpen: PropTypes.func,
 };
 
+// eslint-disable-next-line react/prop-types
+const ChatWidgetTrigger = ({ className }) => {
+  const { setIsOpen } = useContext(ChatContext);
+  const [commandKey] = useControlKey();
+
+  const onClickHandler = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <button
+      className={clsx(
+        'chat-widget flex flex-col text-sm focus:outline-none xl:flex-row xl:items-center xl:space-x-1.5',
+        className
+      )}
+      type="button"
+      aria-label="Open Neon Docs AI"
+      onClick={onClickHandler}
+    >
+      <span className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[#00CC88] dark:bg-[rgba(0,229,153,0.1)] xl:h-6 xl:w-6 xl:shrink-0 xl:rounded">
+        <ExampleIcon className="h-[26px] w-[26px] text-white dark:text-green-45 xl:h-4 xl:w-4" />
+      </span>
+      <div className="mt-2.5 flex min-h-[22px] w-full items-center justify-between xl:mt-0 lg:w-auto">
+        <h3 className="font-semibold leading-none xl:text-sm xl:font-normal xl:text-gray-3 dark:xl:text-gray-7">
+          <span className="lg:hidden">Neon Docs AI</span>
+          <span className="hidden lg:inline" aria-hidden>
+            Try Neon Docs AI instead
+          </span>
+        </h3>
+        {commandKey && (
+          <span className="text-gray-20 dark:text-gray-90 rounded-sm bg-gray-new-94 px-1.5 py-1 leading-none dark:bg-gray-new-15 xl:hidden">
+            {commandKey} + K
+          </span>
+        )}
+      </div>
+      <p className="mt-1.5 text-left leading-tight text-gray-3 dark:text-gray-7 xl:hidden">
+        We brought ChatGPT straight to the docs
+      </p>
+      <span className="mt-1.5 leading-tight text-secondary-8 dark:text-primary-1 xl:hidden">
+        Ask a question
+      </span>
+    </button>
+  );
+};
+
 export default ChatWidget;
+export { ChatWidgetTrigger };
