@@ -40,7 +40,7 @@ const Communities = () => (
   <section className="pt-20 pb-[104px]">
     <Container className="flex flex-col items-center" size="mdDoc">
       <h2 className="text-4xl leading-none tracking-tight">Connect with Neon’s communities</h2>
-      <ul className="mt-14 grid w-full grid-cols-3 gap-x-10">
+      <ul className="mt-14 grid w-full grid-cols-3 gap-x-10 xl:gap-x-6 lg:gap-x-4">
         {items.map(({ name, description, icon: Icon, background, className, url }, index) => {
           const isExternal = url.startsWith('http');
           return (

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
-import { CATEGORY_COLORS } from 'constants/blog';
+import { CATEGORY_COLORS, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 
 import BlogPostCard, { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
 
@@ -22,18 +22,20 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
         <span>{title}</span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>
-      <div className="mt-6 grid grid-cols-10 gap-x-10">
+      <div className="mt-6 grid grid-cols-10 gap-x-10 2xl:gap-x-6 lg:gap-x-4">
         <BlogPostCard
           className={clsx(
-            alignment === 'left' ? 'col-span-6 col-start-1' : 'col-span-6 col-start-5'
+            alignment === 'left'
+              ? 'col-span-6 col-start-1 xl:col-span-5'
+              : 'col-span-6 col-start-5 xl:col-span-5 xl:col-start-6'
           )}
           {...primaryPost.post}
         />
         <div
           className={clsx(
             alignment === 'left'
-              ? 'col-span-4 col-start-7'
-              : 'col-start-1 col-end-5 row-start-1 divide-y divide-gray-new-15'
+              ? 'col-span-4 col-start-7 xl:col-span-5 xl:col-start-6'
+              : 'col-start-1 col-end-5 row-start-1 divide-y divide-gray-new-15 xl:col-end-6'
           )}
         >
           {alignment === 'right' &&
@@ -49,7 +51,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
               ))}
           {alignment === 'left' && (
             <>
-              <div className="grid grid-cols-2 gap-x-10 pb-[18px]">
+              <div className="grid grid-cols-2 gap-x-10 pb-[18px] 2xl:gap-x-6 lg:gap-x-4">
                 {secondaryPosts.slice(0, 2).map(({ post }, index) => (
                   <BlogPostCard {...post} size="md" key={index} />
                 ))}
@@ -73,7 +75,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
           'ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em]',
           CATEGORY_COLORS[lowerCaseTitle]
         )}
-        to={`/blog/category/${lowerCaseTitle}`}
+        to={`${BLOG_CATEGORY_BASE_PATH}${lowerCaseTitle}`}
         withArrow
       >
         All {lowerCaseTitle} articles

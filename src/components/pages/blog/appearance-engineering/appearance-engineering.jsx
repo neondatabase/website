@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 import BlogPostCard from 'components/pages/blog/blog-post-card';
 import Link from 'components/shared/link/link';
+import { BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 
 import { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
 
 import PlayIcon from './images/play.inline.svg';
 
 const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
-  <section className="appearance-engineering grid grid-cols-10 gap-x-10">
+  <section className="appearance-engineering grid grid-cols-10 gap-x-10 2xl:gap-x-6 lg:gap-x-4">
     <div className="col-span-4">
       <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue-80">
         <span>Appearances</span>
@@ -65,7 +66,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
       </ul>
       <Link
         className="mt-8 inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] text-blue-80"
-        to="/blog/category/appearances"
+        to={`${BLOG_CATEGORY_BASE_PATH}appearances`}
         withArrow
       >
         All podcasts
@@ -76,7 +77,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
         <span>Engineering</span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>
-      <div className="mt-6 grid grid-cols-6 gap-x-10">
+      <div className="mt-6 grid grid-cols-6 gap-x-10 2xl:gap-x-6 lg:gap-x-4">
         <div className="col-span-4">
           {engineeringPosts.slice(0, 1).map(({ post }, index) => (
             <BlogPostCard className="pb-[18px]" {...post} size="md" key={index} />
@@ -98,7 +99,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
       </div>
       <Link
         className="mt-4 ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] text-[#B8ADEB]"
-        to="/blog/category/engineering"
+        to={`${BLOG_CATEGORY_BASE_PATH}engineering`}
         withArrow
       >
         All engineering articles

@@ -24,7 +24,11 @@ const BlogPostCard = ({
 
   return (
     <article
-      className={clsx('flex', className, size === 'xl' ? 'flex-row space-x-14' : 'flex-col')}
+      className={clsx(
+        'flex',
+        className,
+        size === 'xl' ? 'flex-row space-x-14 xl:space-x-6' : 'flex-col'
+      )}
     >
       {size !== 'sm' && (
         <Link
@@ -75,11 +79,11 @@ const BlogPostCard = ({
             className={clsx(
               'font-medium transition-colors duration-200 group-hover:text-green-45',
               {
-                'text-4xl leading-dense tracking-tighter': size === 'xl',
+                'text-4xl leading-dense tracking-tighter xl:text-3xl': size === 'xl',
                 'text-3xl leading-dense tracking-tighter': size === 'lg',
                 'text-lg leading-tight tracking-[-0.02em]': size === 'md' || size === 'sm',
                 'mt-2': !!category,
-                'mt-5': !category && (size === 'lg' || size === 'xl'),
+                'mt-5': !category && size === 'lg',
                 'mt-3': !category && size === 'md',
               }
             )}
@@ -101,13 +105,13 @@ const BlogPostCard = ({
                 height={28}
               />
             )}
-            <div className="flex items-center lg:flex-col lg:items-start md:flex-row md:items-center">
+            <div className="flex items-center xl:flex-col xl:items-start md:flex-row md:items-center">
               <span className="truncate text-sm leading-tight tracking-[-0.02em] text-gray-new-90">
                 {postAuthor?.title}
               </span>
 
               <span
-                className="relative block shrink-0 pl-5 text-[13px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-2.5 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30 lg:mt-1 lg:pl-0 lg:before:hidden md:mt-0 md:pl-5 md:before:inline-block"
+                className="relative block shrink-0 pl-5 text-[13px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-2.5 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30 xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-5 md:before:inline-block"
                 dateTime={date}
               >
                 {formattedDate}

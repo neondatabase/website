@@ -32,20 +32,22 @@ const BlogPageLayout = ({ children }) => (
     footerWithTopBorder
   >
     <h1 className="sr-only">Blog</h1>
-    <div className="bg-gray-new-8 pt-32 pb-40">
-      <Container className="grid grid-cols-12 gap-x-10" size="lg">
-        <aside className="col-span-2">
+    <div className="bg-gray-new-8 pt-32 pb-40 lg:pt-0">
+      <Container className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4" size="lg">
+        <aside className="col-span-2 lg:col-span-full">
           <nav className="sticky top-16">
-            <ul className="flex flex-col">
+            <ul className="flex flex-col lg:flex-row lg:gap-x-7 lg:py-3.5">
               {categories.map(({ name, slug }, index) => (
-                <li className="py-1.5 first:pt-0 last:pb-0" key={index}>
+                <li className="py-1.5 first:pt-0 last:pb-0 lg:py-0" key={index}>
                   <BlogNavLink name={name} slug={slug} />
                 </li>
               ))}
             </ul>
           </nav>
         </aside>
-        <div className="col-span-8 col-start-3 -mx-[30px] grid gap-y-20">{children}</div>
+        <div className="relative col-span-10 col-start-3 grid max-w-[1220px] gap-y-20 before:absolute before:-top-px before:left-1/2 before:hidden before:h-px before:w-screen before:-translate-x-1/2 before:bg-gray-new-20 lg:col-span-full lg:pt-10 lg:before:block">
+          {children}
+        </div>
       </Container>
     </div>
     <Communities />
