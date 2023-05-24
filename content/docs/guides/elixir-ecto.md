@@ -40,9 +40,9 @@ You can obtain the connection string for the database from the **Connection Deta
 postgres://<user>:<password>@ep-billowing-sun-767748.us-west-2.aws.neon.tech/friends
 ```
 
-You will need the connection string details later in the setup.
-
 </CodeBlock>
+
+You will need the connection string details later in the setup.
 
 ## Create an Elixir project
 
