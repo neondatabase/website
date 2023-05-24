@@ -7,19 +7,13 @@ const FeaturedPostsList = ({ posts }) => {
   const secondaryPosts = posts.slice(1, 5);
 
   return (
-    <section>
-      <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue-80">
-        <span>Featured</span>
-        <span className="ml-2 h-px grow bg-gray-new-20" />
-      </h2>
-      <div className="mt-6 grid grid-cols-10 gap-x-10 2xl:gap-x-6 lg:gap-x-4">
-        <BlogPostCard className="col-span-6 xl:col-span-5" {...primaryPost.post} />
-        <div className="col-span-4 xl:col-span-5">
-          <div className="grid grid-cols-2 gap-x-10 gap-y-11 2xl:gap-x-6 lg:gap-x-4">
-            {secondaryPosts.map(({ post }, index) => (
-              <BlogPostCard {...post} size="sm" key={index} />
-            ))}
-          </div>
+    <section className="grid grid-cols-10 gap-x-10 2xl:gap-x-6 lg:gap-x-4">
+      <BlogPostCard className="col-span-6 xl:col-span-5" {...primaryPost.post} />
+      <div className="col-span-4 xl:col-span-5">
+        <div className="grid grid-cols-2 gap-x-10 gap-y-11 2xl:gap-x-6 lg:gap-x-4">
+          {secondaryPosts.map(({ post }, index) => (
+            <BlogPostCard {...post} size="sm" key={index} />
+          ))}
         </div>
       </div>
     </section>
