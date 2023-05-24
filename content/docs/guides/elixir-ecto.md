@@ -5,7 +5,9 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-This guide describes how to connect from an Elixir application with Ecto. The instructions follow the steps outlined in the [Ecto Getting Started](https://hexdocs.pm/ecto/getting-started.html#content) guide, modified to demonstrate how to connect to Neon.
+This guide describes how to connect from an Elixir application with Ecto, which is a database wrapper and query generator for Elixir. Ecto provides as API and abstractions for talking to databases, enabling Elixir developers to query any database using similar constructs.
+
+The instructions in this guide follow the steps outlined in the [Ecto Getting Started](https://hexdocs.pm/ecto/getting-started.html#content) guide, modified to demonstrate how to connect to a Neon Serverless PostgreSQL database.
 
 To connect to Neon from Elixir with Ecto:
 
