@@ -68,10 +68,14 @@ For more information about PgBouncer and pooled connection strings, see [Enable 
 
 A connection timeout that occurs when connecting from Prisma to Neon causes an error similar to the following:
 
+<CodeBlock shouldWrap>
+
 ```text
 Error: P1001: Can't reach database server at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`
 Please make sure your database server is running at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`.
 ```
+
+</CodeBlock>
 
 This error most likely means that the Prisma query engine timed out before the Neon compute was activated.
 
