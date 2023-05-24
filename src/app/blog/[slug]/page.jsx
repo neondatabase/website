@@ -52,7 +52,7 @@ const BlogPage = async ({ params }) => {
       isHeaderSticky
     >
       <div className="safe-paddings bg-gray-new-8">
-        <article className="mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pt-16 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-12 xl:pb-32 lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
+        <article className="dark mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pt-16 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-12 xl:pb-32 lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
           <Hero
             className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
             title={title}
@@ -62,7 +62,7 @@ const BlogPage = async ({ params }) => {
           />
 
           <Content
-            className="prose-blog dark prose-lg col-start-4 col-end-10 row-start-2 mt-10 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3"
+            className="prose-blog prose prose-lg col-start-4 col-end-10 row-start-2 mt-10 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3"
             html={contentWithLazyBlocks}
           />
           <Aside
