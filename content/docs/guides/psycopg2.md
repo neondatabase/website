@@ -60,7 +60,7 @@ Your connection string will look something like this:
 <CodeBlock shouldWrap>
 
 ```shell
-DATABASE_URL=postgres://<users>:<password>@ep-snowy-unit-550577.us-east-2.aws.neon.tech/neondb
+DATABASE_URL=postgres://<user>:<password>@ep-snowy-unit-550577.us-east-2.aws.neon.tech/neondb
 ```
 
 </CodeBlock>
@@ -104,7 +104,7 @@ print('PostgreSQL version:', version)
 
 ## Test your connection
 
-Run `neon-connect.py` script to test your connection.
+Run the `neon-connect.py` script to test your connection.
 
 ```shell
 python3 neon-connect.py
@@ -112,10 +112,14 @@ python3 neon-connect.py
 
 If the connection is successful, the script returns information similar to the following:
 
+<CodeBlock shouldWrap>
+
 ```bash
 Current time: 2023-05-24 08:53:10.403140+00:00
 PostgreSQL version: PostgreSQL 15.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
+
+</CodeBlock>
 
 ## Need help?
 
