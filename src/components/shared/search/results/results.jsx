@@ -9,10 +9,10 @@ import {
   Highlight,
   Snippet,
 } from 'react-instantsearch-dom';
-import { useWindowSize } from 'react-use';
 import aa from 'search-insights';
 
 import Link from 'components/shared/link';
+import useWindowSize from 'hooks/use-window-size';
 
 import AlgoliaLogo from './images/algolia-logo.inline.svg';
 import ChevronBottomIcon from './images/chevron-bottom.inline.svg';

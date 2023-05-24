@@ -1,4 +1,5 @@
 import BlogPostCard from 'components/pages/blog/blog-post-card';
+import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import { getAllWpBlogCategories, getWpPostsByCategorySlug } from 'utils/api-posts';
 
 export default async function BlogCategoryPage({ params: { slug } }) {
@@ -17,6 +18,10 @@ export default async function BlogCategoryPage({ params: { slug } }) {
           />
         ))}
       </div>
+      <SubscribeForm
+        className="-mx-4 rounded-xl bg-black-new p-[70px] 2xl:px-10 2xl:pb-16 2xl:pt-10 md:px-8"
+        size="md"
+      />
     </>
   );
 }

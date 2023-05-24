@@ -37,10 +37,12 @@ const items = [
 ];
 
 const Communities = () => (
-  <section className="pt-20 pb-[104px]">
+  <section className="pb-[104px] pt-20 xl:pb-[88px] xl:pt-16 lg:pb-20 lg:pt-14 md:py-12">
     <Container className="flex flex-col items-center" size="mdDoc">
-      <h2 className="text-4xl leading-none tracking-tight">Connect with Neon’s communities</h2>
-      <ul className="mt-14 grid w-full grid-cols-3 gap-x-10 xl:gap-x-6 lg:gap-x-4">
+      <h2 className="text-4xl leading-none tracking-tight xl:text-[32px] lg:text-[28px] md:text-center md:text-2xl">
+        Connect with Neon’s communities
+      </h2>
+      <ul className="mt-14 grid w-full grid-cols-3 gap-x-10 gap-y-4 xl:mt-10 xl:gap-x-6 lg:mt-9 lg:gap-x-4 md:mt-7 md:grid-cols-1">
         {items.map(({ name, description, icon: Icon, background, className, url }, index) => {
           const isExternal = url.startsWith('http');
           return (
@@ -52,7 +54,7 @@ const Communities = () => (
               key={index}
             >
               <a
-                className="relative z-10 flex h-full items-center justify-between overflow-hidden rounded-md bg-black-new py-6 px-7"
+                className="relative z-10 flex h-full items-center justify-between overflow-hidden rounded-md bg-black-new px-7 py-6 xl:flex-col xl:items-start xl:justify-normal xl:p-5 lg:p-4 md:flex-row md:items-center md:justify-between md:py-5"
                 to={url}
                 target={isExternal ? '_blank' : undefined}
                 rel={isExternal ? 'noopener noreferrer' : undefined}
@@ -65,16 +67,16 @@ const Communities = () => (
                   height={92}
                   aria-hidden
                 />
-                <div>
+                <div className="xl:order-1 xl:mt-2 md:order-none">
                   <h3
-                    className="text-2xl font-medium leading-none tracking-tighter [&_mark]:bg-transparent"
+                    className="text-2xl font-medium leading-none tracking-tighter xl:text-xl lg:text-lg [&_mark]:bg-transparent"
                     dangerouslySetInnerHTML={{ __html: name }}
                   />
-                  <p className="mt-2.5 text-sm leading-none tracking-[-0.02em] text-gray-new-70">
+                  <p className="mt-2.5 text-sm leading-none tracking-[-0.02em] text-gray-new-70 xl:leading-tight">
                     {description}
                   </p>
                 </div>
-                <Icon className="h-14 w-14" />
+                <Icon className="h-14 w-14 xl:h-12 xl:w-12 lg:h-11 lg:w-11" />
               </a>
             </li>
           );

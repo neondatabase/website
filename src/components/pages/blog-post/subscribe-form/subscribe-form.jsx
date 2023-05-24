@@ -26,7 +26,7 @@ const appearAndExitAnimationVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const SubscribeForm = ({ className = null }) => {
+const SubscribeForm = ({ className = null, size = 'lg' }) => {
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState(STATES.DEFAULT);
   const [submittedEmail, setSubmittedEmail] = useLocalStorage('submittedEmailNewsletterForm', []);
@@ -97,9 +97,14 @@ const SubscribeForm = ({ className = null }) => {
 
   return (
     <section className={clsx('subscribe-form safe-paddings overflow-hidden', className)}>
-      <div className="mx-auto flex max-w-[1166px] items-center justify-between pr-12 2xl:px-10 2xl:pr-0 lg:flex-col lg:px-8 md:px-4">
+      <div
+        className={clsx('mx-auto flex max-w-[1166px] items-center justify-between lg:flex-col', {
+          'pr-12 2xl:px-10 2xl:pr-0 lg:px-8 md:px-4': size === 'lg',
+          '2xl:flex-col': size === 'md',
+        })}
+      >
         <div className="relative z-20 lg:text-center">
-          <h2 className="text-4xl leading-none tracking-tighter xl:text-[36px] sm:text-[32px]">
+          <h2 className="text-4xl leading-none tracking-tighter xl:text-[36px] sm:text-[32px] xs:text-3xl">
             Subscribe to <mark className="bg-transparent text-green-45">Neon’s News</mark>
           </h2>
           <p className="mt-3.5 text-lg leading-tight tracking-[-0.02em] text-gray-new-80 lg:mt-2.5 sm:mx-auto sm:max-w-[300px]">
@@ -107,7 +112,9 @@ const SubscribeForm = ({ className = null }) => {
           </p>
         </div>
         <form
-          className="relative w-full max-w-[518px] xl:max-w-[456px] lg:mt-5 md:mt-7"
+          className={clsx('relative w-full max-w-[518px] xl:max-w-[456px] lg:mt-5 md:mt-7', {
+            '2xl:mt-5': size === 'md',
+          })}
           onSubmit={handleSubmit}
         >
           <div className="relative z-20">
@@ -129,7 +136,7 @@ const SubscribeForm = ({ className = null }) => {
                 {(formState === STATES.DEFAULT || formState === STATES.ERROR) && (
                   <m.button
                     className={clsx(
-                      'absolute inset-y-2 right-2 h-10 rounded-[80px] py-3 px-7 font-bold leading-none text-black transition-colors duration-200 sm:py-3 sm:px-5',
+                      'absolute inset-y-2 right-2 h-10 rounded-[80px] px-7 py-3 font-bold leading-none text-black transition-colors duration-200 sm:px-5 sm:py-3',
                       formState === STATES.ERROR
                         ? 'bg-secondary-1/50'
                         : 'bg-green-45 hover:bg-[#00FFAA]'
@@ -146,7 +153,7 @@ const SubscribeForm = ({ className = null }) => {
                 {formState === STATES.LOADING && (
                   <m.div
                     className={clsx(
-                      'absolute top-1/2 right-2 flex -translate-y-1/2 items-center justify-center rounded-full'
+                      'absolute right-2 top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full'
                     )}
                     initial="initial"
                     animate="animate"
@@ -156,7 +163,7 @@ const SubscribeForm = ({ className = null }) => {
                   >
                     <div className="h-10 w-10 rounded-full border-4 border-gray-new-20" />
                     <svg
-                      className="absolute top-1/2 left-1/2 h-10 w-10"
+                      className="absolute left-1/2 top-1/2 h-10 w-10"
                       width="58"
                       height="58"
                       viewBox="0 0 58 58"
@@ -177,7 +184,7 @@ const SubscribeForm = ({ className = null }) => {
                 )}
                 {formState === STATES.SUCCESS && (
                   <m.div
-                    className="absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-green-45 text-black"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-green-45 text-black"
                     initial="initial"
                     animate="animate"
                     exit="exit"
@@ -190,7 +197,7 @@ const SubscribeForm = ({ className = null }) => {
             </LazyMotion>
 
             {formState === STATES.ERROR && errorMessage && (
-              <span className="absolute top-full left-7 mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
+              <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
                 {errorMessage}
               </span>
             )}
@@ -209,6 +216,7 @@ const SubscribeForm = ({ className = null }) => {
 
 SubscribeForm.propTypes = {
   className: PropTypes.string,
+  size: PropTypes.oneOf(['lg', 'md']),
 };
 
 export default SubscribeForm;

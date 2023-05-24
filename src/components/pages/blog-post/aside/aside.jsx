@@ -70,7 +70,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
                 <Image
                   className="h-16 w-[104px] shrink-0 rounded-md"
                   src={largeCover?.mediaItemUrl}
-                  width={64}
+                  width={104}
                   height={64}
                   alt={largeCover?.altText || title}
                 />

@@ -25,7 +25,10 @@ export default async function BlogPage() {
       <PostsList title="Community" posts={communityFeaturedPosts} alignment="right" />
       <ReleaseNotesList items={featuredReleaseNotes} />
       <PostsList title="Company" posts={companyFeaturedPosts} alignment="left" />
-      <SubscribeForm className="rounded-xl bg-black-new p-[70px]" />
+      <SubscribeForm
+        className="-mx-4 rounded-xl bg-black-new p-[70px] 2xl:px-10 2xl:pb-16 2xl:pt-10 md:px-8"
+        size="md"
+      />
       <VideoList videos={videos} />
       <AppearanceEngineering
         appearancesPosts={appearances}
