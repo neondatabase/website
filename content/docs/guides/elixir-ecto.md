@@ -5,11 +5,18 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-This guide describes how to connect from an Elixir application with Ecto, which is a database wrapper and query generator for Elixir. Ecto provides as API and abstractions for talking to databases, enabling Elixir developers to query any database using similar constructs.
+This guide describes how to connect from an Elixir application with Ecto, which is a database wrapper and query generator for Elixir. Ecto provides as API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
 
-The instructions in this guide follow the steps outlined in the [Ecto Getting Started](https://hexdocs.pm/ecto/getting-started.html#content) guide, modified to demonstrate how to connect to a Neon Serverless PostgreSQL database.
+The instructions in this guide follow the steps outlined in the [Ecto Getting Started](https://hexdocs.pm/ecto/getting-started.html#content) guide, modified to demonstrate connecting to a Neon Serverless PostgreSQL database.
 
 To connect to Neon from Elixir with Ecto:
+
+1. [Create a database in Neon and copy the connection string](#create-a-database-in-neon-and-copy-the-connection-string)
+2. [Create an Elixir project](#create-an-elixir-project)
+3. [Add Ecto and Postgrex to the application](#add-ecto-and-postgrex-to-the-application)
+4. [Configure Ecto](#configure-ecto)
+5. [Create a migration to add a table](#create-a-migration-to-add-a-table)
+6. [Next steps](#next-steps)
 
 ## Create a database in Neon and copy the connection string
 
@@ -171,7 +178,7 @@ You can use the **Tables** feature in in the Neon Console to view the table that
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Tables** from the sidebar. 
+1. Select **Tables** from the sidebar.
 1. Select the Branch, Database (`friends`), and the schema (`public`, unless you created a different schema). You should see the `people` table created by the migration and a `schema_migration` table that was created by the migration.
 
 ## Next steps
