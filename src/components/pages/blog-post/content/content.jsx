@@ -1,9 +1,10 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import CTA from '../cta';
 
 const Content = ({ html, className = null }) => (
-  <div className={className}>
+  <div className={clsx('prose-blog prose prose-lg', className)}>
     {html}
     {/* TODO: remove this CTA */}
     <CTA
