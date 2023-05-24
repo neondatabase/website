@@ -110,7 +110,7 @@ Run `neon-connect.py` script to test your connection.
 python3 neon-connect.py
 ```
 
-If the connection is successful, the script should return information similar to the following:
+If the connection is successful, the script returns information similar to the following:
 
 ```bash
 Current time: 2023-05-24 08:53:10.403140+00:00
