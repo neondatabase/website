@@ -9,7 +9,7 @@ import YoutubeIcon from './images/youtube.inline.svg';
 const items = [
   {
     name: 'Neon on <mark class="text-blue-80">Twitter</mark>',
-    description: 'Get top-notch product insights and updates',
+    description: 'Follow us for real-time updates',
     icon: TwitterIcon,
     background: '/images/pages/blog/bg-blue.svg',
     className:
@@ -18,7 +18,7 @@ const items = [
   },
   {
     name: 'Stay ahead with <mark class="text-yellow-70">RSS</mark>',
-    description: 'Exceptional product insights',
+    description: 'Subscribe for the latest news',
     icon: RssIcon,
     background: '/images/pages/blog/bg-yellow.svg',
     className:
@@ -27,7 +27,7 @@ const items = [
   },
   {
     name: 'Neon on <mark class="text-pink-90">YouTube</mark>',
-    description: 'Exceptional product insights',
+    description: 'Explore our video tutorials',
     icon: YoutubeIcon,
     background: '/images/pages/blog/bg-pink.svg',
     className:
