@@ -13,6 +13,8 @@ import useLocalStorage from 'hooks/use-local-storage';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
 
+import SendIcon from './images/send.inline.svg';
+
 const STATES = {
   DEFAULT: 'default',
   SUCCESS: 'success',
@@ -120,7 +122,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
           <div className="relative z-20">
             <input
               className={clsx(
-                'remove-autocomplete-styles h-14 w-full appearance-none rounded-[50px] border bg-black-new pl-7 pr-36 text-white placeholder:text-white/60 focus:outline-none',
+                'remove-autocomplete-styles h-14 w-full appearance-none rounded-[50px] border bg-black-new pl-7 pr-36 text-white placeholder:text-white/60 focus:outline-none md:pr-32',
                 formState === STATES.ERROR ? 'border-secondary-1' : 'border-green-45',
                 formState === STATES.SUCCESS ? 'text-green-45' : 'text-white'
               )}
@@ -136,7 +138,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
                 {(formState === STATES.DEFAULT || formState === STATES.ERROR) && (
                   <m.button
                     className={clsx(
-                      'absolute inset-y-2 right-2 h-10 rounded-[80px] px-7 py-3 font-bold leading-none text-black transition-colors duration-200 sm:px-5 sm:py-3',
+                      'absolute inset-y-2 right-2 h-10 rounded-[80px] px-7 py-3 font-bold leading-none text-black transition-colors duration-200 sm:px-5 sm:py-3 xs:flex xs:h-10 xs:w-10 xs:items-center xs:justify-center xs:px-0',
                       formState === STATES.ERROR
                         ? 'bg-secondary-1/50'
                         : 'bg-green-45 hover:bg-[#00FFAA]'
@@ -147,7 +149,8 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
                     exit="exit"
                     variants={appearAndExitAnimationVariants}
                   >
-                    Subscribe
+                    <span className="xs:hidden">Subscribe</span>
+                    <SendIcon className="hidden h-6 w-6 xs:block" />
                   </m.button>
                 )}
                 {formState === STATES.LOADING && (

@@ -8,7 +8,7 @@ export default async function BlogCategoryPage({ params: { slug } }) {
   return (
     <>
       <h1 className="sr-only">{slug}</h1>
-      <div className="grid grid-cols-3 gap-x-10 gap-y-16 xl:gap-x-6 lg:gap-x-4">
+      <div className="grid grid-cols-3 gap-x-10 gap-y-16 2xl:gap-y-12 xl:gap-x-6 xl:gap-y-9 lg:gap-x-4 md:grid-cols-2 md:gap-y-5 sm:grid-cols-1">
         {posts.map((post, index) => (
           <BlogPostCard
             className={index === 0 && 'col-span-full'}
@@ -19,7 +19,7 @@ export default async function BlogCategoryPage({ params: { slug } }) {
         ))}
       </div>
       <SubscribeForm
-        className="-mx-4 rounded-xl bg-black-new p-[70px] 2xl:px-10 2xl:pb-16 2xl:pt-10 md:px-8"
+        className="rounded-xl bg-black-new p-[70px] 2xl:px-10 2xl:pb-16 2xl:pt-10 md:px-9 sm:px-4"
         size="md"
       />
     </>

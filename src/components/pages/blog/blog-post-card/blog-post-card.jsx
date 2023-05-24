@@ -27,12 +27,16 @@ const BlogPostCard = ({
       className={clsx(
         'flex',
         className,
-        size === 'xl' ? 'flex-row space-x-14 xl:space-x-6' : 'flex-col'
+        size === 'xl'
+          ? 'flex-row space-x-14 xl:space-x-6 md:flex-col md:space-x-0 md:space-y-4'
+          : 'flex-col'
       )}
     >
       {size !== 'xs' && (
         <Link
-          className="w-full max-w-[716px] shrink-0"
+          className={clsx('w-full max-w-[716px] shrink-0', {
+            '2xl:max-w-[600px] xl:max-w-[50%] md:max-w-full': size === 'xl',
+          })}
           to={link}
           target={url ? '_blank' : undefined}
           rel={url ? 'noopener noreferrer' : undefined}
@@ -79,7 +83,7 @@ const BlogPostCard = ({
             className={clsx(
               'font-medium transition-colors duration-200 group-hover:text-green-45',
               {
-                'text-4xl leading-dense tracking-tighter xl:text-3xl': size === 'xl',
+                'text-4xl leading-dense tracking-tighter xl:text-3xl md:text-2xl': size === 'xl',
                 'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base': size === 'lg',
                 'text-lg leading-tight tracking-[-0.02em] lg:text-base':
                   size === 'md' || size === 'sm' || size === 'xs',
