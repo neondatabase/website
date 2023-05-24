@@ -19,7 +19,7 @@ const CATEGORY_BG_COLORS = {
   community: 'bg-yellow-70/10',
 };
 
-export {
+module.exports = {
   BLOG_BASE_PATH,
   BLOG_POSTS_PER_PAGE,
   CATEGORY_COLORS,

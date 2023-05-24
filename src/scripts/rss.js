@@ -1,30 +1,43 @@
 const fs = require('fs');
 
-const dotenv = require('dotenv');
+require('dotenv').config({ path: '.env.local' });
+
 const { Feed } = require('feed');
 
+const { BLOG_BASE_PATH } = require('../constants/blog');
 const { RELEASE_NOTES_BASE_PATH } = require('../constants/docs');
 const { getAllReleaseNotes, getPostBySlug, RELEASE_NOTES_DIR_PATH } = require('../utils/api-docs');
+const { getAllWpPosts } = require('../utils/api-posts');
 const getReleaseNotesDateFromSlug = require('../utils/get-release-notes-date-from-slug');
 
+const releaseNotesFeed = new Feed({
+  language: 'en',
+  title: `Release notes — Neon Docs`,
+  description: 'The latest product updates from Neon',
+  id: RELEASE_NOTES_BASE_PATH,
+  link: process.env.NEXT_PUBLIC_DEFAULT_SITE_URL,
+  feedLinks: {
+    rss2: `${RELEASE_NOTES_BASE_PATH}rss.xml`,
+  },
+});
+
+const blogFeed = new Feed({
+  language: 'en',
+  title: `Blog — Neon Docs`,
+  description: 'The latest product updates from Neon',
+  id: BLOG_BASE_PATH,
+  link: process.env.NEXT_PUBLIC_DEFAULT_SITE_URL,
+  feedLinks: {
+    rss2: `${BLOG_BASE_PATH}rss.xml`,
+  },
+});
+
 (async function () {
-  dotenv.config({ path: '.env.local' });
-
   try {
-    const releaseNotes = await getAllReleaseNotes();
+    const allReleaseNotes = await getAllReleaseNotes();
+    const allBlogPosts = await getAllWpPosts();
 
-    const feed = new Feed({
-      language: 'en',
-      title: `Release notes — Neon Docs`,
-      description: 'The latest product updates from Neon',
-      id: RELEASE_NOTES_BASE_PATH,
-      link: process.env.NEXT_PUBLIC_DEFAULT_SITE_URL,
-      feedLinks: {
-        rss2: `${RELEASE_NOTES_BASE_PATH}rss.xml`,
-      },
-    });
-
-    releaseNotes.forEach((post) => {
+    allReleaseNotes.forEach((post) => {
       const { slug } = post;
 
       const { excerpt } = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
@@ -34,7 +47,7 @@ const getReleaseNotesDateFromSlug = require('../utils/get-release-notes-date-fro
 
       const { datetime } = getReleaseNotesDateFromSlug(slug);
 
-      feed.addItem({
+      releaseNotesFeed.addItem({
         id: url,
         link: url,
         date: new Date(datetime),
@@ -43,11 +56,27 @@ const getReleaseNotesDateFromSlug = require('../utils/get-release-notes-date-fro
       });
     });
 
+    allBlogPosts.forEach((post) => {
+      const { slug, excerpt, date, title } = post;
+      const url = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${BLOG_BASE_PATH}${slug}`;
+
+      blogFeed.addItem({
+        id: url,
+        link: url,
+        date: new Date(date),
+        title,
+        description: excerpt,
+      });
+    });
+
     // we use this to make sure the directory exists
     fs.mkdirSync(`./public/${RELEASE_NOTES_BASE_PATH}`, { recursive: true });
-    fs.writeFileSync(`./public/${RELEASE_NOTES_BASE_PATH}rss.xml`, feed.rss2());
+    fs.writeFileSync(`./public/${RELEASE_NOTES_BASE_PATH}rss.xml`, releaseNotesFeed.rss2());
 
-    console.log(`Successfully generated RSS feed! `);
+    fs.mkdirSync(`./public/${BLOG_BASE_PATH}`, { recursive: true });
+    fs.writeFileSync(`./public/${BLOG_BASE_PATH}rss.xml`, blogFeed.rss2());
+
+    console.log(`Successfully generated RSS feed!`);
   } catch (err) {
     console.error(err);
   }

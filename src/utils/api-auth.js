@@ -1,4 +1,4 @@
-import { gql, graphQLClient } from 'lib/graphQLClient';
+const { gql, graphQLClient } = require('../lib/graphQLClient');
 
 const getAuthToken = async () => {
   const authQuery = gql`
@@ -12,4 +12,4 @@ const getAuthToken = async () => {
   return graphQLClient.request(authQuery, { refreshToken: process.env.WP_GRAPHQL_AUTH_TOKEN });
 };
 
-export default getAuthToken;
+module.exports = getAuthToken;

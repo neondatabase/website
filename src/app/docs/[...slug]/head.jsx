@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import SEO from 'components/shared/seo';
+import { BLOG_BASE_PATH } from 'constants/blog';
 import { RELEASE_NOTES_BASE_PATH } from 'constants/docs';
 import SEO_DATA from 'constants/seo-data';
 import { DOCS_DIR_PATH, getPostBySlug } from 'utils/api-docs';
@@ -19,12 +20,20 @@ const Head = ({ params }) => {
     <>
       <SEO {...SEO_DATA.doc({ title, description: excerpt })} ogImage={ogImage} />
       {isReleaseNotes && (
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          title="Release Notes RSS feed"
-          href={`${RELEASE_NOTES_BASE_PATH}rss.xml`}
-        />
+        <>
+          <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="Release Notes RSS feed"
+            href={`${RELEASE_NOTES_BASE_PATH}rss.xml`}
+          />
+          <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="Blog RSS feed"
+            href={`${BLOG_BASE_PATH}rss.xml`}
+          />
+        </>
       )}
     </>
   );

@@ -1,20 +1,25 @@
-import { GraphQLClient } from 'graphql-request';
-
-export { gql } from 'graphql-request';
+const { GraphQLClient } = require('graphql-request');
+const { gql } = require('graphql-request');
 
 const requestHeaders = {
-  Authorization: `Basic ${btoa(
+  Authorization: `Basic ${Buffer.from(
     `${process.env.WP_HTACCESS_USERNAME}:${process.env.WP_HTACCESS_PASSWORD}`
-  )}`,
+  ).toString('base64')}`,
 };
 
-export const graphQLClient = new GraphQLClient(process.env.WP_GRAPHQL_URL, {
+const graphQLClient = new GraphQLClient(process.env.WP_GRAPHQL_URL, {
   headers: requestHeaders,
 });
 
-export const graphQLClientAdmin = (authToken) =>
+const graphQLClientAdmin = (authToken) =>
   new GraphQLClient(process.env.WP_GRAPHQL_URL, {
     headers: {
       Authorization: `Bearer ${authToken}`,
     },
   });
+
+module.exports = {
+  gql,
+  graphQLClient,
+  graphQLClientAdmin,
+};

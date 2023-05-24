@@ -1,7 +1,7 @@
-import { BLOG_POSTS_PER_PAGE } from 'constants/blog';
-import { gql, graphQLClient, graphQLClientAdmin } from 'lib/graphQLClient';
+const { BLOG_POSTS_PER_PAGE } = require('../constants/blog');
+const { gql, graphQLClient, graphQLClientAdmin } = require('../lib/graphQLClient');
 
-import getAuthToken from './api-auth';
+const getAuthToken = require('./api-auth');
 
 const POST_SEO_FRAGMENT = gql`
   fragment wpPostSeo on Post {
@@ -273,6 +273,7 @@ const getAllWpPosts = async () => {
               slug
             }
           }
+          excerpt
           slug
           title(format: RENDERED)
           date
@@ -621,7 +622,7 @@ const getWpPreviewPost = async (id) => {
   return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
 };
 
-export {
+module.exports = {
   getAllWpPosts,
   getWpPostBySlug,
   getWpPreviewPostData,
