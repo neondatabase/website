@@ -62,7 +62,7 @@ const BlogPage = async ({ params }) => {
           />
 
           <Content
-            className="prose-invert col-start-4 col-end-10 row-start-2 mt-10 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3"
+            className="prose-blog dark col-start-4 col-end-10 row-start-2 mt-10 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3"
             html={contentWithLazyBlocks}
             title={title}
             cover={pageBlogPost.largeCover}
