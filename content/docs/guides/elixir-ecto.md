@@ -192,7 +192,7 @@ You can use the **Tables** feature in the Neon Console to view the table that wa
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
 1. Select **Tables** from the sidebar.
-1. Select the Branch, Database (`friends`), and the schema (`public`). You should see the `people` table created by the migration along with a `schema_migration` table created by the migration.
+1. Select the Branch, Database (`friends`), and the schema (`public`). You should see the `people` table along with a `schema_migration` table that was created by the migration.
 
 ## Next steps
 
