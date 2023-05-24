@@ -9,7 +9,7 @@ Each PostgreSQL connection creates a new process in the operating system, which 
 
 <Admonition type="note">
 Connection pooling is not yet supported with our [Autoscaling](../introduction/autoscaling) feature, which is currently in Beta. If you expect a large number of concurrent connections, we recommend using a **Fixed size** compute (the default), which supports connection pooling. For compute configuration instructions, see [Compute size and Autoscaling configuration](../manage/endpoints#compute-size-and-autoscaling-configuration).
-</Adminition>
+</Admonition>
 
 ## Connection pooling
 
