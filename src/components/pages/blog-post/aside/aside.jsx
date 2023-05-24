@@ -34,7 +34,12 @@ const Aside = ({ className, title, slug, authors, posts }) => (
               alt={author.title || author.postAuthor?.image?.altText}
             />
             <div className="flex flex-col">
-              <span className="font-semibold leading-none tracking-[0.02em] transition-colors duration-200 group-hover:text-green-45">
+              <span
+                className={clsx(
+                  'font-semibold leading-none tracking-[0.02em] transition-colors duration-200',
+                  { 'group-hover:text-green-45': author.postAuthor?.url }
+                )}
+              >
                 {author.title}
               </span>
               <span className="mt-0.5 text-sm leading-tight tracking-[-0.02em] text-gray-new-70">
