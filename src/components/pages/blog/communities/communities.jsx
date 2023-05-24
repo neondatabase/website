@@ -52,7 +52,7 @@ const Communities = () => (
               key={index}
             >
               <a
-                className="relative z-10 flex items-center justify-between overflow-hidden rounded-md bg-black-new py-6 px-7"
+                className="relative z-10 flex h-full items-center justify-between overflow-hidden rounded-md bg-black-new py-6 px-7"
                 to={url}
                 target={isExternal ? '_blank' : undefined}
                 rel={isExternal ? 'noopener noreferrer' : undefined}

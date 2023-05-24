@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
-import { CATEGORY_COLORS, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
+import { CATEGORY_COLORS, CATEGORY_HOVER_COLORS, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 
 import BlogPostCard, { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
 
@@ -45,7 +45,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
                 <BlogPostCard
                   className="py-[18px] first:pt-0 last:pb-0"
                   {...post}
-                  size={index === 0 ? 'md' : 'sm'}
+                  size={index === 0 ? 'md' : 'xs'}
                   key={index}
                 />
               ))}
@@ -61,7 +61,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
                   <BlogPostCard
                     className="border-t border-gray-new-15 py-[18px] last:pb-0"
                     {...post}
-                    size="sm"
+                    size="xs"
                     key={index}
                   />
                 ))}
@@ -73,7 +73,8 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
       <Link
         className={clsx(
           'ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em]',
-          CATEGORY_COLORS[lowerCaseTitle]
+          CATEGORY_COLORS[lowerCaseTitle],
+          CATEGORY_HOVER_COLORS[lowerCaseTitle]
         )}
         to={`${BLOG_CATEGORY_BASE_PATH}${lowerCaseTitle}`}
         withArrow

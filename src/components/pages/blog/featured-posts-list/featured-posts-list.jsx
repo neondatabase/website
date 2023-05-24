@@ -17,7 +17,7 @@ const FeaturedPostsList = ({ posts }) => {
         <div className="col-span-4 xl:col-span-5">
           <div className="grid grid-cols-2 gap-x-10 gap-y-11 2xl:gap-x-6 lg:gap-x-4">
             {secondaryPosts.map(({ post }, index) => (
-              <BlogPostCard {...post} size="md" key={index} />
+              <BlogPostCard {...post} size="sm" key={index} />
             ))}
           </div>
         </div>
