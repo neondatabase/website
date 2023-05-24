@@ -1,6 +1,6 @@
 ---
-title: Connect a Python application to Neon using pycopg2
-subtitle: Set up a Neon project in seconds and connect from a Python application using pycopg2
+title: Connect a Python application to Neon using Pyscopg
+subtitle: Set up a Neon project in seconds and connect from a Python application using Pyscopg
 enableTableOfContents: true
 ---
 
