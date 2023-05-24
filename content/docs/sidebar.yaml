@@ -82,6 +82,8 @@
   items:
     - title: AWS Lambda
       slug: guides/aws-lambda
+    - title: Elixir
+      slug: guides/elixir-ecto
     - title: Django
       slug: guides/django
     - title: Go
