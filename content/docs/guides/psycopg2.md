@@ -1,15 +1,12 @@
 ---
-title: Connect from Python application to Neon using pycopg2
-subtitle: Set up a Neon project in seconds and connect from a Node.js application
+title: Connect a Python application to Neon using pycopg2
+subtitle: Set up a Neon project in seconds and connect from a Python application using pycopg2
 enableTableOfContents: true
-redirectFrom:
-  - /docs/quickstart/node
-  - /docs/integrations/node
 ---
 
-This guide describes how to create a Neon project and connect to it from a simple Python application that uses `psycopg2`.
+This guide describes how to create a Neon project and connect to it from a simple Python application using [Psycopg (psycopg2)](https://pypi.org/project/psycopg2/), a popular PostgreSQL database adapter for the Python programming language. The application connects to Neon and retrieves the current time and PostgreSQL version.
 
-To connect to Neon from a Python application using `psycopg2`:
+To connect:
 
 1. [Create a Neon Project](#create-a-neon-project)
 2. [Create a Python project](#create-a-python-project)
@@ -25,6 +22,8 @@ If you do not have one already, create a Neon project.
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
 
+The project is created with a default `neondb` database, which you will connect to.
+
 ## Create a Python project
 
 1. Create a project directory and change to the newly created directory.
@@ -34,27 +33,27 @@ If you do not have one already, create a Neon project.
    cd neon-python-example
    ```
 
-2. Set up a Python virtual environment in this directory. This will help isolate your project's Python environment (including installed packages) from the rest of your system.
+2. Set up a Python virtual environment in this directory. The virtual environment isolates your project's Python environment (including installed packages) from the rest of your system.
 
    ```bash
    python3 -m venv env
    ```
 
-3. Activate the virtual environment. When the virtual environment is activated, Python will use this environment's version of Python and any installed packages.
+3. Activate the virtual environment. When the virtual environment is activated, Python uses the environment's version of Python and any installed packages.
 
    ```bash
    source env/bin/activate
    ```
 
-4. Install `psycopg2` and `python-dotenv`. You can install them using `pip`:
+4. Install `psycopg2` and `python-dotenv` in your project's root directory. You can install them using `pip`:
 
-```bash
-pip install psycopg2-binary python-dotenv
-```
+    ```bash
+    pip install psycopg2-binary python-dotenv
+    ```
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project's root directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
+Add a `.env` file to your project's root directory and add your Neon connection string to it. You will find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
 
 Your connection string will look something like this:
 
@@ -66,13 +65,9 @@ DATABASE_URL=postgres://<users>:<password>@ep-snowy-unit-550577.us-east-2.aws.ne
 
 </CodeBlock>
 
-<Admonition type="important">
-To ensure the security of your data, never expose your Neon credentials to the browser.
-</Admonition>
-
 ## Configure your python script
 
-Add a `neon-connect.py` file to your project directory and add the following code snippet to connect to your Neon database using the `psycopg2` client. The script connects to your Neon database and retrives the current time and PostgreSQL version.
+Add a `neon-connect.py` file to your project's root directory and add the following code. The script connects to your Neon database and retrieves the current time and PostgreSQL version.
 
 ```python
 import os
@@ -113,6 +108,13 @@ Run `neon-connect.py` script to test your connection.
 
 ```shell
 python3 neon-connect.py
+```
+
+If the connection is successful, the script should return information similar to the following:
+
+```bash
+Current time: 2023-05-24 08:53:10.403140+00:00
+PostgreSQL version: PostgreSQL 15.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
 
 ## Need help?
