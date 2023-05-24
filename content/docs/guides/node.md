@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/integrations/node
 ---
 
-This guide describes how to create a Neon project and connect to it from a Node.js application. You can find the below code sample on [GitHub](https://github.com/neondatabase/examples/tree/main/with-nodejs).
+This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
 
 <Admonition type="note">
 The same configuration steps can be used for Express and Next.js applications.
@@ -23,9 +23,7 @@ To connect to Neon from a Node.js application:
 
 ## Create a Neon project
 
-If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
-
-To create a Neon project:
+If you do not have one already, create a Neon project.
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
@@ -41,7 +39,15 @@ To create a Neon project:
    npm init -y
    ```
 
-2. Add project dependencies using the following command:
+2. Add project dependencies using one of the following commands:
+
+   If you are using the `node-postgres` client:
+
+   ```shell
+   npm install pg dotenv
+   ```
+
+   If you are using the `Postgres.js` client:
 
    ```shell
    npm install postgres dotenv
@@ -49,25 +55,19 @@ To create a Neon project:
 
 ## Store your Neon credentials
 
-Store your Neon credentials in your `.env` file.
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
+
+<CodeBlock shouldWrap>
 
 ```shell
-PGHOST='<hostname>:<port>'
-PGDATABASE='<dbname>'
-PGUSER='<username>'
-PGPASSWORD='<password>'
-ENDPOINT_ID='<endpoint_id>'
+DATABASE_URL=postgres://<users>:<password>@ep-snowy-unit-550577.us-east-2.aws.neon.tech/neondb?options=endpoint%3Dep-snowy-unit-550577
 ```
 
-where:
+</CodeBlock>
 
-- `<hostname>` the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
-- `<dbname>` is the name of the database. The default Neon database is `neondb`
-- `<user>` is the database user.
-- `<password>` is the database user's password.
-- `<endpoint_id>` is the ID of the compute endpoint that you are connecting to. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396`. If a pooled `<hostname>` such as `ep-tight-salad-272396-pooler.us-east-2.aws.neon.tech` was used for `PGHOST`, be sure to include the `-pooler` suffix in the `<endpoint_id>`: `ep-tight-salad-272396-pooler`.
-
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
+<Admonition type="note">
+A special `endpoint` connection option is appended to the connection string above: `options=endpoint%3Dep-snowy-unit-550577`. This option is used with PostgreSQL clients such as `node-postgres` and `Postgres.js` that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. For more information, see [connection workarounds](../connect/connectivity-issues#a-pass-the-endpoint-id-as-an-option).
+</Admonition>
 
 <Admonition type="important">
 To ensure the security of your data, never expose your Neon credentials to the browser.
@@ -75,16 +75,45 @@ To ensure the security of your data, never expose your Neon credentials to the b
 
 ## Configure the app.js file
 
-To connect to the database using the PostgreSQL client and your Neon credentials, add the following code to the `app.js` file:
+Add an `app.js` file to your project directory and add **one** of the following code snippets to connect to your Neon database using the `pg` client or the `node-postgres` client:
+
+### Use the node-postgres client
 
 ```javascript
+const { Pool } = require('pg');
+require('dotenv').config();
+
+const { DATABASE_URL } = process.env;
+
+const pool = new Pool({
+  connectionString: DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+async function getPostgresVersion() {
+  const client = await pool.connect();
+  try {
+    const res = await client.query('SELECT version()');
+    console.log(res.rows[0]);
+  } finally {
+    client.release();
+  }
+}
+
+getPostgresVersion();
+```
+
+### Use the Postgres.js client
+
+```js
 const postgres = require('postgres');
 require('dotenv').config();
 
-const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
-const URL = `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?options=endpoint%3D${ENDPOINT_ID}`;
+const { DATABASE_URL } = process.env;
 
-const sql = postgres(URL, { ssl: 'require' });
+const sql = postgres(DATABASE_URL, { ssl: 'require' });
 
 async function getPostgresVersion() {
   const result = await sql`select version()`;
