@@ -56,7 +56,7 @@ const ReleaseNotesList = ({ items }) => {
         {releaseNotes.map(({ slug, content }, index) => {
           const { capitalisedCategory: category } = getReleaseNotesCategoryFromSlug(slug);
           const { datetime, label } = getReleaseNotesDateFromSlug(slug);
-          const title = getExcerpt(content, 60).replace("What's new - ", '');
+          const title = getExcerpt(content, 200).replace("What's new - ", '');
 
           return (
             <li
@@ -87,7 +87,7 @@ const ReleaseNotesList = ({ items }) => {
                     aria-hidden
                   />
                 </div>
-                <h3 className="mt-4 text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover/link:text-green-45 md:mt-1.5 md:text-base">
+                <h3 className="mt-4 text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 line-clamp-4 group-hover/link:text-green-45 xl:line-clamp-3 md:mt-1.5 md:text-base md:line-clamp-2">
                   {title}
                 </h3>
                 <time
