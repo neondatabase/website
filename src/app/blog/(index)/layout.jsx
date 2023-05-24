@@ -20,20 +20,6 @@ const categories = [
     name: 'Community',
     slug: 'community',
   },
-  {
-    name: 'Release notes',
-    slug: '/docs/release-notes',
-    isExternal: true,
-  },
-  {
-    name: 'Video',
-    slug: 'https://www.youtube.com/@neondatabase/videos',
-    isExternal: true,
-  },
-  {
-    name: 'Appearances',
-    slug: 'appearances',
-  },
 ];
 
 // eslint-disable-next-line react/prop-types
@@ -51,9 +37,9 @@ const BlogPageLayout = ({ children }) => (
         <aside className="col-span-2 lg:col-span-full">
           <nav className="sticky top-16">
             <ul className="flex flex-col lg:flex-row lg:gap-x-7 lg:py-3.5">
-              {categories.map(({ name, slug, isExternal }, index) => (
+              {categories.map(({ name, slug }, index) => (
                 <li className="py-1.5 first:pt-0 last:pb-0 lg:py-0" key={index}>
-                  <BlogNavLink name={name} slug={slug} isExternal={isExternal} />
+                  <BlogNavLink name={name} slug={slug} />
                 </li>
               ))}
             </ul>
