@@ -17,7 +17,7 @@ const VideoList = ({ videos }) => (
       ))}
     </div>
     <Link
-      className="ml-auto mt-4 inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] text-pink-90"
+      className="ml-auto mt-4 inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] text-pink-90 transition-colors duration-200 hover:text-[#FFE0F0]"
       to="https://www.youtube.com/@neondatabase/videos"
       withArrow
     >

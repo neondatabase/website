@@ -43,15 +43,15 @@ const BlogPostCard = ({
               src={largeCover?.mediaItemUrl}
               alt={largeCover?.altText || title}
               width={716}
-              height={370}
+              height={403}
             />
           ) : (
             <img
               className="w-full rounded-md bg-gray-new-30"
-              src={`data:image/svg+xml;charset=utf-8,%3Csvg width='${716}' height='${370}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+              src={`data:image/svg+xml;charset=utf-8,%3Csvg width='${716}' height='${403}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
               alt=""
               width={716}
-              height={370}
+              height={403}
               aria-hidden
             />
           )}

@@ -28,7 +28,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
             index
           ) => (
             <li key={index} className="mt-6">
-              <Link className="group flex items-center space-x-4" to={url}>
+              <Link className="group group flex items-center space-x-4" to={url}>
                 {coverImage ? (
                   <Image
                     className="rounded-md"
@@ -54,7 +54,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
                   </h3>
                   <div className="mt-2 flex items-center">
                     <PlayIcon className="mr-2 inline-block" />
-                    <span className="text-sm font-medium leading-tight tracking-[-0.02em] text-blue-80">
+                    <span className="text-sm font-medium leading-tight tracking-[-0.02em] text-blue-80 transition-colors duration-200 group-hover:text-[#C2E8F0]">
                       Listen now
                     </span>
                   </div>
@@ -65,7 +65,8 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
         )}
       </ul>
       <Link
-        className="mt-8 inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] text-blue-80"
+        className="mt-8 inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em]"
+        theme="blue"
         to={`${BLOG_CATEGORY_BASE_PATH}appearances`}
         withArrow
       >
@@ -86,7 +87,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
             <BlogPostCard
               className="border-t border-gray-new-15 pt-[18px]"
               {...post}
-              size="sm"
+              size="xs"
               key={index}
             />
           ))}
@@ -98,7 +99,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
         </div>
       </div>
       <Link
-        className="mt-4 ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] text-[#B8ADEB]"
+        className="mt-4 ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] text-[#B8ADEB] transition-colors duration-200 hover:text-[#CAC2F0]"
         to={`${BLOG_CATEGORY_BASE_PATH}engineering`}
         withArrow
       >

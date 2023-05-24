@@ -27,7 +27,7 @@ const ReleaseNotesList = ({ items }) => (
 
         return (
           <li className="group" key={index}>
-            <Link className="flex flex-col" to={`${LINKS.releaseNotes}/${slug}`}>
+            <Link className="group/link flex flex-col" to={`${LINKS.releaseNotes}/${slug}`}>
               <span className="text-xs font-medium uppercase leading-none tracking-wider text-blue-80 line-clamp-1">
                 {category}
               </span>
@@ -42,7 +42,9 @@ const ReleaseNotesList = ({ items }) => (
                   aria-hidden
                 />
               </div>
-              <h3 className="mt-4 text-lg font-medium leading-tight tracking-[-0.02em]">{title}</h3>
+              <h3 className="mt-4 text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover/link:text-green-45">
+                {title}
+              </h3>
               <time
                 className="mt-2 text-sm leading-none tracking-[-0.02em] text-gray-new-80"
                 dateTime={datetime}

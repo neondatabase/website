@@ -72,7 +72,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
       </div>
       <Link
         className={clsx(
-          'ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em]',
+          'ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] transition-colors duration-200',
           CATEGORY_COLORS[lowerCaseTitle],
           CATEGORY_HOVER_COLORS[lowerCaseTitle]
         )}
