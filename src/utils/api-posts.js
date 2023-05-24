@@ -366,10 +366,6 @@ const getWpPostBySlug = async (slug) => {
               altText
               mediaItemUrl
             }
-            smallCover {
-              altText
-              mediaItemUrl
-            }
             description
             authors {
               author {
@@ -472,10 +468,6 @@ const getWpPreviewPostData = async (id, status) => {
                 altText
                 mediaItemUrl
               }
-              smallCover {
-                altText
-                mediaItemUrl
-              }
               description
               authors {
                 author {
@@ -571,9 +563,6 @@ const getWpPreviewPostData = async (id, status) => {
             pageBlogPost {
               largeCover {
                 altText
-                mediaItemUrl
-              }
-              smallCover {
                 mediaItemUrl
               }
               description

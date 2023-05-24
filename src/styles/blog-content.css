@@ -90,7 +90,7 @@
     }
 
     :not(pre) > code {
-      @apply !rounded-sm border border-white/20 bg-white bg-opacity-[0.06] !px-1.5 !py-0.5 !font-mono text-base !font-normal text-white;
+      @apply !rounded border border-[#494B50] bg-[#242628] !px-1 !py-0.5 !font-mono text-base !font-normal leading-none text-white;
 
       &::before,
       &::after {

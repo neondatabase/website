@@ -8,7 +8,7 @@ import LINKS from 'constants/links';
 import SocialShare from '../social-share';
 
 const Aside = ({ className, title, slug, authors, posts }) => (
-  <aside className={clsx('aside ml-auto max-w-[252px] lg:ml-0 lg:max-w-full', className)}>
+  <aside className={clsx('aside ml-auto max-w-[298px] lg:ml-0 lg:max-w-full', className)}>
     <h3 className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue-80 lg:hidden">
       Posted by
     </h3>
@@ -54,28 +54,28 @@ const Aside = ({ className, title, slug, authors, posts }) => (
       Related articles
     </h3>
     <ul className="mt-5 flex flex-col space-y-6 lg:hidden">
-      {posts.map(({ title, slug, pageBlogPost: { authors, smallCover } }) => (
+      {posts.map(({ title, slug, pageBlogPost: { authors, largeCover } }) => (
         <li key={slug}>
           <Link className="group" to={`${LINKS.blog}${slug}`}>
             <article className="flex items-center space-x-3">
-              <div className="tracking-[-0.02em]">
-                <h1 className="font-medium leading-tight transition-colors duration-200 line-clamp-2 group-hover:text-green-45">
+              <div>
+                <h1 className="font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 line-clamp-2 group-hover:text-green-45">
                   {title}
                 </h1>
-                <span className="mt-1.5 text-sm leading-none text-gray-new-70">
+                <span className="mt-1.5 text-sm leading-none tracking-[-0.02em] text-gray-new-70">
                   {authors[0]?.author?.title}
                 </span>
               </div>
-              {smallCover?.mediaItemUrl ? (
+              {largeCover?.mediaItemUrl ? (
                 <Image
-                  className="h-16 w-16 shrink-0 rounded-md"
-                  src={smallCover?.mediaItemUrl}
+                  className="h-16 w-[104px] shrink-0 rounded-md"
+                  src={largeCover?.mediaItemUrl}
                   width={64}
                   height={64}
-                  alt={smallCover?.altText || title}
+                  alt={largeCover?.altText || title}
                 />
               ) : (
-                <span className="h-16 w-16 shrink-0 rounded-md bg-gray-new-30" />
+                <span className="h-16 w-[104px] shrink-0 rounded-md bg-gray-new-30" />
               )}
             </article>
           </Link>
