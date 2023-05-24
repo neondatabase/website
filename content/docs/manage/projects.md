@@ -23,12 +23,12 @@ To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
-3. Specify a name, a PostgreSQL version, and a region. If you are a Neon [paid plan](../introduction/billing#neon-plans) user, you can also specify compute size settings. Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size configuration](#compute-size-configuration).
+3. Specify a name, a PostgreSQL version, and a region. If you are a Neon [paid plan](../introduction/billing#neon-plans) user, you can also specify compute size settings. Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size and Autoscaling configuration](../manage/endpoints#compute-size-and-autoscaling-configuration).
 4. Click **Create Project**.
 
 Upon creating a project, you are presented with a dialog that provides your connection details for the default `neondb` database, including your password.
 
-## Compute size configuration
+## Compute size configuration with Autoscaling
 
 Neon [paid plan](../introduction/billing#neon-plans) users can configure compute size settings when [creating a project](#create-a-project).
 

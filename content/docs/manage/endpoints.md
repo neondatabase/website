@@ -52,7 +52,7 @@ For more information connection pooling in Neon, see [Connection pooling](../con
 
 ## Edit a compute endpoint
 
-Neon paid plan users can edit a compute endpoint to change the [compute size](#compute-size-configuration) or [Auto-suspend](#auto-suspend-configuration) configuration.
+Neon paid plan users can edit a compute endpoint to change the [compute size](#compute-size-and-autoscaling-configuration) or [Auto-suspend](#auto-suspend-configuration) configuration.
 
 To edit a compute endpoint:
 
@@ -65,7 +65,7 @@ To edit a compute endpoint:
 Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](../connect/connection-pooling#enable-connection-pooling).
 </Admonition>
 
-### Compute size configuration
+### Compute size and Autoscaling configuration
 
 Neon [paid plan](../introduction/billing#neon-plans) users can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
 
@@ -77,7 +77,7 @@ Neon supports two compute size configuration options:
 - **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. _Autoscaling_ currently supports a range of 1/4 CU to 7 CU. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](../introduction/autoscaling).
 
 <Admonition type="note">
-Switching between **Fixed Size** and **Autoscaling** is not yet supported.
+[Connection pooling](../connect/connection-pooling) is not yet supported with Autoscaling <b><sup>Beta</sup></b>. To use connection pooling, use a **Fixed size** compute.
 </Admonition>
 
 ### Auto-suspend configuration
