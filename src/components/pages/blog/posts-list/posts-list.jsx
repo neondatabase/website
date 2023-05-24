@@ -1,8 +1,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
-import Link from 'components/shared/link/link';
-import { CATEGORY_COLORS, CATEGORY_HOVER_COLORS, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
+import { CATEGORY_COLORS } from 'constants/blog';
 
 import BlogPostCard, { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
 
@@ -70,17 +69,6 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
           )}
         </div>
       </div>
-      <Link
-        className={clsx(
-          'ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] transition-colors duration-200',
-          CATEGORY_COLORS[lowerCaseTitle],
-          CATEGORY_HOVER_COLORS[lowerCaseTitle]
-        )}
-        to={`${BLOG_CATEGORY_BASE_PATH}${lowerCaseTitle}`}
-        withArrow
-      >
-        All {lowerCaseTitle} articles
-      </Link>
     </section>
   );
 };

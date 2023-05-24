@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import BlogPostCard from 'components/pages/blog/blog-post-card';
 import Link from 'components/shared/link/link';
-import { BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 
 import { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
 
@@ -64,14 +63,6 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
           )
         )}
       </ul>
-      <Link
-        className="mt-8 inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em]"
-        theme="blue"
-        to={`${BLOG_CATEGORY_BASE_PATH}appearances`}
-        withArrow
-      >
-        All podcasts
-      </Link>
     </div>
     <div className="col-span-6 flex flex-col">
       <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-[#B8ADEB]">
@@ -98,13 +89,6 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
           ))}
         </div>
       </div>
-      <Link
-        className="mt-4 ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] text-[#B8ADEB] transition-colors duration-200 hover:text-[#CAC2F0]"
-        to={`${BLOG_CATEGORY_BASE_PATH}engineering`}
-        withArrow
-      >
-        All engineering articles
-      </Link>
     </div>
   </section>
 );

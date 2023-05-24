@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 
-import Link from 'components/shared/link';
-
 import BlogPostCard from '../blog-post-card';
 import { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
 
@@ -16,13 +14,6 @@ const VideoList = ({ videos }) => (
         <BlogPostCard {...post} key={index} size="md" />
       ))}
     </div>
-    <Link
-      className="ml-auto mt-4 inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] text-pink-90 transition-colors duration-200 hover:text-[#FFE0F0]"
-      to="https://www.youtube.com/@neondatabase/videos"
-      withArrow
-    >
-      All videos
-    </Link>
   </section>
 );
 
