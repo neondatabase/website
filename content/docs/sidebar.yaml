@@ -108,6 +108,8 @@
           slug: guides/prisma
         - title: Use Prisma Migrate With Neon
           slug: guides/prisma-migrate
+    - title: Python
+      slug: guides/python
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy
