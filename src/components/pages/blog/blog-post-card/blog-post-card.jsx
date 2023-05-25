@@ -116,7 +116,7 @@ const BlogPostCard = ({
                 'xl:flex-col xl:items-start md:flex-row md:items-center': size === 'sm',
               })}
             >
-              <span className="truncate text-sm leading-tight tracking-[-0.02em] text-gray-new-90">
+              <span className="truncate text-sm leading-tight tracking-[-0.02em] text-gray-new-80">
                 {postAuthor?.title}
               </span>
 
@@ -173,7 +173,7 @@ export const BlogPostCardPropTypes = {
 
 BlogPostCard.propTypes = {
   className: PropTypes.string,
-  size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm']),
+  size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm', 'xs']),
   ...BlogPostCardPropTypes,
 };
 

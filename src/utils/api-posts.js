@@ -34,8 +34,11 @@ const getAllWpBlogCategories = async () => {
 
 const getWpPostsByCategorySlug = async (slug) => {
   const postsQuery = gql`
-    query Query($categoryName: String!) {
-      posts(where: { categoryName: $categoryName, orderby: { field: DATE, order: DESC } }) {
+    query Query($categoryName: String!, $first: Int!) {
+      posts(
+        first: $first
+        where: { categoryName: $categoryName, orderby: { field: DATE, order: DESC } }
+      ) {
         nodes {
           title(format: RENDERED)
           slug
@@ -69,6 +72,7 @@ const getWpPostsByCategorySlug = async (slug) => {
   const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
 
   const data = await graphQLClient.request(postsQuery, {
+    first: BLOG_POSTS_PER_PAGE,
     categoryName,
   });
 
