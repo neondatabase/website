@@ -76,7 +76,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
           ))}
           {engineeringPosts.slice(1, 3).map(({ post }, index) => (
             <BlogPostCard
-              className="border-t border-gray-new-15 pt-[18px] lg:border-t-0 lg:pt-2.5"
+              className="border-t border-gray-new-15 py-[18px] last:pb-0 lg:border-t-0 lg:py-2.5"
               {...post}
               size="xs"
               key={index}
