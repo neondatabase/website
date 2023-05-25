@@ -11,7 +11,7 @@ const ReleaseNotesList = ({ items }) => (
     <div className="flex items-center justify-between">
       <h2 className="text-2xl leading-none tracking-tighter md:text-xl">Release notes</h2>
       <Link
-        className="flex items-center leading-none md:hidden"
+        className="flex items-center text-sm leading-none md:hidden"
         theme="blue"
         to={LINKS.releaseNotes}
         withArrow
