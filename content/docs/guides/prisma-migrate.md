@@ -33,9 +33,13 @@ To configure a shadow database:
 
 1. Add a `SHADOW_DATABASE_URL` environment variable to your `.env` file and set it to the database connection string that you copied in the previous step. The following example uses a shadow database named `shadow_db`. Use the database name that you gave to your shadow database.
 
+   <CodeBlock shouldWrap>
+
    ```text
    SHADOW_DATABASE_URL="postgres://daniel:<password>@ep-restless-rice-862380.us-east-2.aws.neon.tech:5432/shadow_db"
    ```
+
+   </CodeBlock>
 
 ## Prisma Migrate with PgBouncer
 
@@ -73,8 +77,12 @@ Your `SHADOW_DATABASE_URL` variable can continue to use the same direct database
 
 When you are finished updating your `.env` file, your variable settings should appear similar to the following:
 
+<CodeBlock shouldWrap>
+
 ```text
 DATABASE_URL="postgres://daniel:<password>@ep-restless-rice-862380-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true"
 SHADOW_DATABASE_URL="postgres://daniel:<password>@ep-restless-rice-862380.us-east-2.aws.neon.tech:5432/shadow_db"
 DIRECT_URL="postgres://daniel:<password>@ep-restless-rice-862380.us-east-2.aws.neon.tech:5432/neondb"
 ```
+
+</CodeBlock>
