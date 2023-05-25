@@ -2,7 +2,7 @@
 import Rss from 'rss';
 
 import { RELEASE_NOTES_BASE_PATH } from 'constants/docs';
-import { getAllReleaseNotes } from 'utils/api-docs';
+import { RELEASE_NOTES_DIR_PATH, getAllReleaseNotes, getPostBySlug } from 'utils/api-docs';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
@@ -22,7 +22,7 @@ export async function GET() {
   allReleaseNotes.forEach((post) => {
     const { slug } = post;
     // TODO: Add excerpt to release notes
-    // const { excerpt } = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
+    const { excerpt } = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
     const url = `${SITE_URL}${RELEASE_NOTES_BASE_PATH}${slug}`;
     const category = slug.slice(slug.lastIndexOf('-') + 1);
     const capitalisedCategory = category.charAt(0).toUpperCase() + category.slice(1);
@@ -36,7 +36,7 @@ export async function GET() {
       guid: url,
       date: new Date(datetime),
       categories: [category],
-      // description: excerpt',
+      description: excerpt,
     });
   });
 

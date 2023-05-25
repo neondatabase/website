@@ -1,7 +1,7 @@
-const { BLOG_POSTS_PER_PAGE } = require('../constants/blog');
-const { gql, graphQLClient, graphQLClientAdmin } = require('../lib/graphQLClient');
+import { BLOG_POSTS_PER_PAGE } from 'constants/blog';
+import { gql, graphQLClient, graphQLClientAdmin } from 'lib/graphQLClient';
 
-const getAuthToken = require('./api-auth');
+import getAuthToken from './api-auth';
 
 const POST_SEO_FRAGMENT = gql`
   fragment wpPostSeo on Post {
@@ -626,7 +626,7 @@ const getWpPreviewPost = async (id) => {
   return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
 };
 
-module.exports = {
+export {
   getAllWpPosts,
   getWpPostBySlug,
   getWpPreviewPostData,

@@ -11,7 +11,7 @@ const VideoList = ({ videos }) => (
     </h2>
     <div className="mt-6 grid grid-cols-3 gap-x-10 2xl:gap-x-6 lg:gap-x-4 md:grid-cols-1 md:gap-y-5">
       {videos.map(({ post }, index) => (
-        <BlogPostCard {...post} key={index} size="md" />
+        <BlogPostCard {...post} key={index} size="md" withAuthorPhoto />
       ))}
     </div>
   </section>
