@@ -83,7 +83,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
             />
           ))}
         </div>
-        <div className="col-span-2 grid gap-y-7 xl:col-span-3 xl:ml-12 lt:ml-0 md:col-span-full md:grid md:grid-cols-2 md:gap-x-4 xs:grid-cols-1 xs:gap-y-5">
+        <div className="col-span-2 flex flex-col gap-y-7 xl:col-span-3 xl:ml-12 lt:ml-0 md:col-span-full md:grid md:grid-cols-2 md:gap-x-4 xs:grid-cols-1 xs:gap-y-5">
           {engineeringPosts.slice(3, 5).map(({ post }, index) => (
             <BlogPostCard {...post} size="sm" key={index} />
           ))}
