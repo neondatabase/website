@@ -108,7 +108,7 @@ const BlogPostCard = ({
             className={clsx('flex items-center', {
               'mt-3': size === 'lg' || size === 'xl' || withAuthorPhoto,
               'md:mt-2.5': withAuthorPhoto,
-              'mt-1.5 xl:mt-2':
+              'mt-1 xl:mt-2 lg:mt-1':
                 (size === 'md' || size === 'sm' || size === 'xs') && !withAuthorPhoto,
             })}
           >
@@ -123,13 +123,14 @@ const BlogPostCard = ({
             )}
             <div
               className={clsx('flex items-center', {
-                'xl:flex-col xl:items-start lt:flex-row lt:items-center': size === 'sm',
+                'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start':
+                  size === 'sm',
                 'xl:flex-col xl:items-start md:flex-row md:items-center': withAuthorPhoto,
               })}
             >
               <span
                 className={clsx(
-                  'truncate leading-tight tracking-[-0.02em] text-gray-new-80 xl:leading-none',
+                  'leading-none tracking-[-0.02em] text-gray-new-80',
                   size === 'lg' ? 'lg:text-14 text-[15px]' : 'text-sm lg:text-[13px]'
                 )}
               >
@@ -147,11 +148,11 @@ const BlogPostCard = ({
 
               <span
                 className={clsx(
-                  'relative block shrink-0 pl-5 text-[13px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-[9px] before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
+                  'relative block shrink-0 pl-[11px] text-[13px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-[4px] before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30 lg:text-xs',
                   {
-                    'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-5 lt:before:inline-block':
+                    'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden':
                       size === 'sm',
-                    'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-5 md:before:inline-block':
+                    'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-[11px] md:before:inline-block':
                       withAuthorPhoto,
                   }
                 )}
