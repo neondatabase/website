@@ -102,7 +102,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
       <div
         className={clsx('mx-auto flex max-w-[1166px] items-center justify-between lg:flex-col', {
           'pr-12 2xl:px-10 2xl:pr-0 lg:px-8 md:px-4': size === 'lg',
-          '2xl:flex-col': size === 'md',
+          'xl:flex-col lt:flex-row': size === 'md',
         })}
       >
         <div className="relative z-20 lg:text-center">
@@ -115,7 +115,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
         </div>
         <form
           className={clsx('relative w-full max-w-[518px] xl:max-w-[456px] lg:mt-5 md:mt-7', {
-            '2xl:mt-5': size === 'md',
+            '2xl:max-w-[470px] xl:mt-5 lt:mt-0 lg:mt-5': size === 'md',
           })}
           onSubmit={handleSubmit}
         >
