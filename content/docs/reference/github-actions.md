@@ -5,10 +5,12 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Neon provides the following GitHub Actions for working with database branches, which you can add to your CI workflows:
+Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:
 
 - [Create branch action](#create-branch-action)
 - [Delete Branch action](#delete-branch-action)
+
+For an example project that uses GitHub Actions to create and delete Neon branches, see [A database for every preview environment using Neon, GitHub Actions, and Vercel](https://neon.tech/blog/branching-with-preview-environments).
 
 ## Create branch action
 
