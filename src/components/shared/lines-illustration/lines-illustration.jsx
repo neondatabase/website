@@ -10,7 +10,7 @@ const spreadStyles = {
   1: 'mt-[4%] h-[130px] w-[105%]',
   2: '-mt-[2%] h-[130px] w-[110%]',
   3: 'mt-[2%] h-[130px] w-[103%]',
-  4: 'mt-0 h-[130px] w-[108%]',
+  4: 'mt-0 h-[130px] w-[100%]',
 };
 
 const LinesIllustration = ({ className: additionalClassName, color, spread }) => {
