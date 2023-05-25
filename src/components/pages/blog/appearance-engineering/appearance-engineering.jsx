@@ -26,7 +26,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
             },
             index
           ) => (
-            <li key={index} className="mt-6">
+            <li key={index} className="mt-6 lg:mt-5">
               <Link className="group group flex items-center space-x-4" to={url}>
                 {coverImage ? (
                   <Image
@@ -69,14 +69,14 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
         <span>Engineering</span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>
-      <div className="mt-6 grid grid-cols-6 gap-x-10 2xl:gap-x-6 lt:col-span-4 lt:grid-cols-7 lg:gap-x-4 md:gap-y-5">
+      <div className="mt-6 grid grid-cols-6 gap-x-10 2xl:gap-x-6 lt:col-span-4 lt:grid-cols-7 lg:mt-5 lg:gap-x-4 md:gap-y-5">
         <div className="col-span-4 xl:col-span-3 xl:-mr-12 lt:col-span-4 lt:mr-0 md:col-span-full">
           {engineeringPosts.slice(0, 1).map(({ post }, index) => (
-            <BlogPostCard className="pb-[18px]" {...post} size="md" key={index} />
+            <BlogPostCard className="pb-[18px] lg:pb-2.5" {...post} size="md" key={index} />
           ))}
           {engineeringPosts.slice(1, 3).map(({ post }, index) => (
             <BlogPostCard
-              className="border-t border-gray-new-15 pt-[18px]"
+              className="border-t border-gray-new-15 pt-[18px] lg:border-t-0 lg:pt-2.5"
               {...post}
               size="xs"
               key={index}

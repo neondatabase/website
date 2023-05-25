@@ -19,7 +19,7 @@ const ReleaseNotesList = ({ items }) => (
         All release notes
       </Link>
     </div>
-    <ul className="mt-6 grid grid-cols-4 gap-x-[50px] border-t border-gray-new-20/60 pt-8 xl:grid-cols-3 lg:grid-cols-2 lg:pt-6 md:mt-5 md:grid-cols-1 md:gap-y-7">
+    <ul className="mt-6 grid grid-cols-4 gap-x-[50px] border-t border-gray-new-20/60 pt-8 xl:grid-cols-3 lg:mt-6 lg:grid-cols-2 md:mt-5 md:grid-cols-1 md:gap-y-7 md:pt-6">
       {items.map(({ slug, content }, index) => {
         const { capitalisedCategory: category } = getReleaseNotesCategoryFromSlug(slug);
         const { datetime, label } = getReleaseNotesDateFromSlug(slug);

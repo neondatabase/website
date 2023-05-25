@@ -115,7 +115,8 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
         </div>
         <form
           className={clsx('relative w-full max-w-[518px] xl:max-w-[456px] lg:mt-5 md:mt-7', {
-            '2xl:max-w-[470px] xl:mt-5 lt:mt-0 lt:max-w-[416px] lg:mt-5': size === 'md',
+            '2xl:max-w-[470px] xl:mt-5 lt:mt-0 lt:max-w-[416px] lg:mt-5 lg:max-w-[464px]':
+              size === 'md',
           })}
           onSubmit={handleSubmit}
         >
