@@ -66,7 +66,7 @@ const BlogPostCard = ({
         {category && size !== 'xs' && (
           <Link
             className={clsx(
-              'mt-[18px] text-xs font-semibold uppercase leading-none tracking-[0.02em]',
+              'mt-3 text-xs font-semibold uppercase leading-none tracking-[0.02em]',
               CATEGORY_COLORS[category?.slug] || 'text-green-45'
             )}
             to={`${LINKS.blog}${category?.slug}`}
