@@ -15,6 +15,7 @@ const BlogPostCard = ({
   categories,
   pageBlogPost: { url, authors, largeCover, author },
   size = 'lg',
+  withAuthorPhoto = false,
 }) => {
   const category = categories?.nodes[0];
   const postAuthor = authors?.[0]?.author || author;
@@ -93,9 +94,8 @@ const BlogPostCard = ({
               {
                 'text-4xl leading-dense tracking-tighter xl:text-3xl md:text-2xl': size === 'xl',
                 'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base': size === 'lg',
-                'text-lg leading-tight tracking-[-0.02em] line-clamp-2 lg:text-base': size === 'md',
-                'text-lg leading-tight tracking-[-0.02em] line-clamp-2 xl:text-base':
-                  size === 'sm' || size === 'xs',
+                'text-lg leading-tight tracking-[-0.02em] line-clamp-2 lg:text-base':
+                  size === 'md' || size === 'sm' || size === 'xs',
                 'mt-2': !!category,
                 'mt-5': !category && size === 'lg',
                 'mt-3': !category && (size === 'md' || size === 'sm'),
@@ -106,11 +106,13 @@ const BlogPostCard = ({
           </h1>
           <div
             className={clsx('flex items-center', {
-              'mt-3': size === 'lg' || size === 'xl',
-              'mt-1.5': size === 'md' || size === 'sm' || size === 'xs',
+              'mt-3': size === 'lg' || size === 'xl' || withAuthorPhoto,
+              'md:mt-2.5': withAuthorPhoto,
+              'mt-1.5 xl:mt-2':
+                (size === 'md' || size === 'sm' || size === 'xs') && !withAuthorPhoto,
             })}
           >
-            {(size === 'lg' || size === 'xl') && (
+            {(size === 'lg' || size === 'xl' || withAuthorPhoto) && (
               <Image
                 className="mr-2 rounded-full"
                 src={postAuthor.postAuthor?.image?.mediaItemUrl}
@@ -121,18 +123,21 @@ const BlogPostCard = ({
             )}
             <div
               className={clsx('flex items-center', {
-                'xl:flex-col xl:items-start md:flex-row md:items-center': size === 'sm',
+                'xl:flex-col xl:items-start lt:flex-row lt:items-center': size === 'sm',
+                'xl:flex-col xl:items-start md:flex-row md:items-center': withAuthorPhoto,
               })}
             >
               <span
                 className={clsx(
-                  'truncate leading-tight tracking-[-0.02em] text-gray-new-80',
+                  'truncate leading-tight tracking-[-0.02em] text-gray-new-80 xl:leading-none',
                   size === 'lg' ? 'lg:text-14 text-[15px]' : 'text-sm lg:text-[13px]'
                 )}
               >
                 {size === 'sm' ? (
                   <>
-                    <span className="xl:hidden">{authorName}</span>
+                    <span className="xl:hidden" aria-hidden>
+                      {authorName}
+                    </span>
                     <span className="hidden xl:block">{postAuthor?.title}</span>
                   </>
                 ) : (
@@ -142,10 +147,12 @@ const BlogPostCard = ({
 
               <span
                 className={clsx(
-                  'relative block shrink-0 pl-5 text-[13px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-2.5 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
+                  'relative block shrink-0 pl-5 text-[13px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-[9px] before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
                   {
-                    'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-5 md:before:inline-block':
+                    'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-5 lt:before:inline-block':
                       size === 'sm',
+                    'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-5 md:before:inline-block':
+                      withAuthorPhoto,
                   }
                 )}
                 dateTime={date}

@@ -9,8 +9,8 @@ import { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
 import PlayIcon from './images/play.inline.svg';
 
 const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
-  <section className="appearance-engineering grid grid-cols-3 gap-x-10 2xl:gap-x-6 lg:gap-x-4 md:gap-y-10">
-    <div className="col-span-1 md:col-span-full">
+  <section className="appearance-engineering grid grid-cols-10 gap-x-10 2xl:gap-x-6 lt:grid-cols-12 lg:gap-x-4 md:gap-y-10">
+    <div className="col-span-4 xl:mr-4 lt:col-span-5 lt:mr-0 md:col-span-full">
       <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue-80">
         <span>Appearances</span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
@@ -64,17 +64,17 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
         )}
       </ul>
     </div>
-    <div className="col-span-2 flex flex-col md:col-span-full">
+    <div className="col-span-6 flex flex-col xl:-ml-4 lt:col-span-7 lt:ml-0 md:col-span-full">
       <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-[#B8ADEB]">
         <span>Engineering</span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>
-      <div className="mt-6 grid grid-cols-5 gap-x-10 2xl:gap-x-6 lg:gap-x-4 md:gap-y-5">
-        <div className="col-span-3 md:col-span-full">
+      <div className="mt-6 grid grid-cols-6 gap-x-10 2xl:gap-x-6 lt:col-span-4 lt:grid-cols-7 lg:gap-x-4 md:gap-y-5">
+        <div className="col-span-4 xl:col-span-3 xl:-mr-12 lt:col-span-4 lt:mr-0 md:col-span-full">
           {engineeringPosts.slice(0, 1).map(({ post }, index) => (
             <BlogPostCard className="pb-[18px]" {...post} size="md" key={index} />
           ))}
-          {engineeringPosts.slice(1, 2).map(({ post }, index) => (
+          {engineeringPosts.slice(1, 3).map(({ post }, index) => (
             <BlogPostCard
               className="border-t border-gray-new-15 pt-[18px]"
               {...post}
@@ -83,8 +83,8 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
             />
           ))}
         </div>
-        <div className="col-span-2 grid gap-y-7 md:col-span-full md:grid md:grid-cols-2 md:gap-x-4 xs:grid-cols-1 xs:gap-y-5">
-          {engineeringPosts.slice(2, 4).map(({ post }, index) => (
+        <div className="col-span-2 grid gap-y-7 xl:col-span-3 xl:ml-12 lt:ml-0 md:col-span-full md:grid md:grid-cols-2 md:gap-x-4 xs:grid-cols-1 xs:gap-y-5">
+          {engineeringPosts.slice(3, 5).map(({ post }, index) => (
             <BlogPostCard {...post} size="sm" key={index} />
           ))}
         </div>

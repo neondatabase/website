@@ -27,7 +27,7 @@ export default async function BlogPage() {
       <PostsList title="Company" posts={companyFeaturedPosts} alignment="left" />
       <VideoList videos={videos} />
       <SubscribeForm
-        className="-mx-10 rounded-xl bg-black-new p-[70px] pr-28 2xl:mx-0 2xl:px-10 2xl:pb-16 2xl:pt-10 xl:-mx-4 md:px-8"
+        className="mt:pt-7 -mx-10 rounded-xl bg-black-new p-[70px] pr-28 2xl:mx-0 2xl:px-10 2xl:pb-16 2xl:pt-10 lt:px-11 lt:py-[70px] lt:pt-10 lg:pb-16 md:px-8 md:pb-12"
         size="md"
       />
       <AppearanceEngineering
