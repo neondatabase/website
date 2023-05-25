@@ -64,7 +64,7 @@ const MoreArticles = ({ className = null, posts }) => (
                     height={28}
                   />
                   <div className="ml-2 flex items-center lg:flex-col lg:items-start md:flex-row md:items-center">
-                    <span className="text-sm leading-none tracking-[-0.02em] text-gray-new-90">
+                    <span className="text-sm leading-none tracking-[-0.02em] text-gray-new-80">
                       {author?.title}
                     </span>
 
@@ -83,7 +83,7 @@ const MoreArticles = ({ className = null, posts }) => (
       })}
     </ul>
     <Link
-      className="ml-auto -mt-1 inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] xl:mt-0"
+      className="-mt-1 ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] xl:mt-0"
       theme="blue"
       to={LINKS.blog}
       withArrow

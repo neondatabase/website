@@ -99,7 +99,7 @@ const BlogPostCard = ({
           <div
             className={clsx('flex items-center', {
               'mt-3': size === 'lg' || size === 'xl',
-              'mt-1': size === 'md' || size === 'sm' || size === 'xs',
+              'mt-2': size === 'md' || size === 'sm' || size === 'xs',
             })}
           >
             {(size === 'lg' || size === 'xl') && (
@@ -116,7 +116,7 @@ const BlogPostCard = ({
                 'xl:flex-col xl:items-start md:flex-row md:items-center': size === 'sm',
               })}
             >
-              <span className="truncate text-sm leading-tight tracking-[-0.02em] text-gray-new-80">
+              <span className="truncate text-sm leading-none tracking-[-0.02em] text-gray-new-80">
                 {postAuthor?.title}
               </span>
 

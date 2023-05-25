@@ -62,7 +62,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
                 <h1 className="font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 line-clamp-2 group-hover:text-green-45">
                   {title}
                 </h1>
-                <span className="mt-1.5 text-sm leading-none tracking-[-0.02em] text-gray-new-70">
+                <span className="mt-1.5 text-sm leading-none tracking-[-0.02em] text-gray-new-80">
                   {authors[0]?.author?.title}
                 </span>
               </div>
