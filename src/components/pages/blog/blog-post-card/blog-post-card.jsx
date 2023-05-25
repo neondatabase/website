@@ -135,7 +135,9 @@ const BlogPostCard = ({
               >
                 {size === 'sm' ? (
                   <>
-                    <span className="xl:hidden">{authorName}</span>
+                    <span className="xl:hidden" aria-hidden>
+                      {authorName}
+                    </span>
                     <span className="hidden xl:block">{postAuthor?.title}</span>
                   </>
                 ) : (
