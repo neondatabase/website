@@ -16,6 +16,7 @@ const BlogPostCard = ({
   pageBlogPost: { url, authors, largeCover, author },
   size = 'lg',
   withAuthorPhoto = false,
+  isPriority = false,
 }) => {
   const category = categories?.nodes[0];
   const postAuthor = authors?.[0]?.author || author;
@@ -56,6 +57,7 @@ const BlogPostCard = ({
               width={716}
               height={403}
               quality="95"
+              priority={isPriority}
             />
           ) : (
             <Image
@@ -64,6 +66,7 @@ const BlogPostCard = ({
               alt=""
               width={716}
               height={403}
+              priority={isPriority}
               aria-hidden
             />
           )}
