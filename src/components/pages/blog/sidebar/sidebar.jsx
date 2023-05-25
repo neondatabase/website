@@ -1,10 +1,8 @@
 import BlogNavLink from 'components/pages/blog/blog-nav-link';
 import LINKS from 'constants/links';
 
-import DiscourseIcon from './images/discources.inline.svg';
 import GitHubIcon from './images/github.inline.svg';
 import LinkedInIcon from './images/linkedin.inline.svg';
-import RSSIcon from './images/rss.inline.svg';
 import TwitterIcon from './images/twitter.inline.svg';
 import YouTubeIcon from './images/youtube.inline.svg';
 
@@ -44,19 +42,9 @@ const socialLinks = [
     icon: GitHubIcon,
   },
   {
-    name: 'Discourse',
-    url: LINKS.discourse,
-    icon: DiscourseIcon,
-  },
-  {
     name: 'YouTube',
     url: LINKS.youtube,
     icon: YouTubeIcon,
-  },
-  {
-    name: 'RSS',
-    url: `${LINKS.blog}rss.xml`,
-    icon: RSSIcon,
   },
 ];
 
