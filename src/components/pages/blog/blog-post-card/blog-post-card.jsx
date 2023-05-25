@@ -93,8 +93,9 @@ const BlogPostCard = ({
               {
                 'text-4xl leading-dense tracking-tighter xl:text-3xl md:text-2xl': size === 'xl',
                 'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base': size === 'lg',
-                'text-lg leading-tight tracking-[-0.02em] lg:text-base':
-                  size === 'md' || size === 'sm' || size === 'xs',
+                'text-lg leading-tight tracking-[-0.02em] line-clamp-2 lg:text-base': size === 'md',
+                'text-lg leading-tight tracking-[-0.02em] line-clamp-2 xl:text-base':
+                  size === 'sm' || size === 'xs',
                 'mt-2': !!category,
                 'mt-5': !category && size === 'lg',
                 'mt-3': !category && (size === 'md' || size === 'sm'),
@@ -126,7 +127,7 @@ const BlogPostCard = ({
               <span
                 className={clsx(
                   'leading-none tracking-[-0.02em] text-gray-new-80',
-                  size === 'lg' ? 'text-[15px]' : 'text-sm'
+                  size === 'lg' ? 'lg:text-14 text-[15px]' : 'text-sm lg:text-[13px]'
                 )}
               >
                 {size === 'sm' ? (
