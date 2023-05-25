@@ -19,6 +19,12 @@ const BlogPostCard = ({
   const category = categories?.nodes[0];
   const postAuthor = authors?.[0]?.author || author;
 
+  // get the short version of the author's name, e.g. "John Doe" => "John D."
+  const authorName = postAuthor?.title
+    ?.split(' ')
+    .map((name, index) => (index === 1 ? `${name[0]}.` : name))
+    .join(' ');
+
   const formattedDate = getFormattedDate(date);
   const link = url || `${LINKS.blog}${slug}`;
 
@@ -116,8 +122,15 @@ const BlogPostCard = ({
                 'xl:flex-col xl:items-start md:flex-row md:items-center': size === 'sm',
               })}
             >
-              <span className="truncate text-sm leading-none tracking-[-0.02em] text-gray-new-80">
-                {postAuthor?.title}
+              <span className="text-sm leading-none tracking-[-0.02em] text-gray-new-80">
+                {size === 'sm' ? (
+                  <>
+                    <span className="xl:hidden">{authorName}</span>
+                    <span className="hidden xl:block">{postAuthor?.title}</span>
+                  </>
+                ) : (
+                  postAuthor?.title
+                )}
               </span>
 
               <span
