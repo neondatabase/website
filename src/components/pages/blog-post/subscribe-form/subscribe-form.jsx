@@ -122,7 +122,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
           <div className="relative z-20">
             <input
               className={clsx(
-                'remove-autocomplete-styles h-14 w-full appearance-none rounded-[50px] border bg-black-new pl-7 pr-36 text-white placeholder:text-white/60 focus:outline-none md:pr-32',
+                'remove-autocomplete-styles h-14 w-full appearance-none rounded-[50px] border bg-black-new pl-7 pr-36 text-white placeholder:text-white/60 focus:outline-none md:pr-32 xs:pr-7',
                 formState === STATES.ERROR ? 'border-secondary-1' : 'border-green-45',
                 formState === STATES.SUCCESS ? 'text-green-45' : 'text-white'
               )}
