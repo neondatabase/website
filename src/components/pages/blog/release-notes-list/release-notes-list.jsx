@@ -7,7 +7,7 @@ import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-fr
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 
 const ReleaseNotesList = ({ items }) => (
-  <section className="release-notes-list rounded-xl bg-black-new px-10 pb-10 pt-7 xl:px-8 xl:py-6 md:px-6">
+  <section className="release-notes-list -mx-10 rounded-xl bg-black-new px-10 pb-10 pt-7 2xl:mx-0 xl:px-8 xl:py-6 md:px-6">
     <div className="flex items-center justify-between">
       <h2 className="text-2xl leading-none tracking-tighter md:text-xl">Release notes</h2>
       <Link
@@ -54,7 +54,7 @@ const ReleaseNotesList = ({ items }) => (
                   aria-hidden
                 />
               </div>
-              <h3 className="mt-4 text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 line-clamp-4 group-hover/link:text-green-45 xl:line-clamp-3 md:mt-1.5 md:text-base md:line-clamp-2">
+              <h3 className="mt-4 max-w-[260px] text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 line-clamp-4 group-hover/link:text-green-45 xl:line-clamp-3 md:mt-1.5 md:max-w-none md:text-base md:line-clamp-2">
                 {title}
               </h3>
               <time

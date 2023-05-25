@@ -9,7 +9,7 @@ import BlogPostCard, { BlogPostCardPropTypes } from '../blog-post-card/blog-post
 const PostsList = ({ title, posts, alignment = 'left' }) => {
   const lowerCaseTitle = title.toLocaleLowerCase();
   const primaryPost = posts[0];
-  const secondaryPosts = posts.slice(1, 5);
+  const secondaryPosts = posts.slice(1, 6);
   return (
     <section className="posts-list flex flex-col">
       <h2
@@ -58,7 +58,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
                 ))}
               </div>
               <div>
-                {secondaryPosts.slice(2, 5).map(({ post }, index) => (
+                {secondaryPosts.slice(2, 6).map(({ post }, index) => (
                   <BlogPostCard
                     className="border-t border-gray-new-15 py-[18px] last:pb-0"
                     {...post}
