@@ -50,7 +50,7 @@ const socialLinks = [
 
 const Sidebar = () => (
   <aside className="col-span-2 lt:col-span-full">
-    <div className="sticky top-10 flex h-[90vh] min-h-[300px] flex-col gap-y-10">
+    <div className="sticky top-10 flex h-[90vh] min-h-[300px] flex-col gap-y-10 lt:h-auto lt:min-h-fit">
       <nav className="no-scrollbars md:-mx-4 md:max-w-5xl md:overflow-auto md:px-4">
         <ul className=" flex flex-col lt:flex-row lt:gap-x-7 lt:py-3.5 md:after:shrink-0 md:after:grow-0 md:after:basis-px md:after:content-['']">
           {categories.map(({ name, slug }, index) => (
