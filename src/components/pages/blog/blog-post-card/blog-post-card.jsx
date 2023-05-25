@@ -72,8 +72,9 @@ const BlogPostCard = ({
         {category && size !== 'xs' && (
           <Link
             className={clsx(
-              'mt-3 text-xs font-semibold uppercase leading-none tracking-[0.02em]',
-              CATEGORY_COLORS[category?.slug] || 'text-green-45'
+              'text-xs font-semibold uppercase leading-none tracking-[0.02em]',
+              CATEGORY_COLORS[category?.slug] || 'text-green-45',
+              size === 'lg' ? 'mt-[18px]' : 'mt-3'
             )}
             to={`${LINKS.blog}${category?.slug}`}
           >
@@ -122,7 +123,12 @@ const BlogPostCard = ({
                 'xl:flex-col xl:items-start md:flex-row md:items-center': size === 'sm',
               })}
             >
-              <span className="text-sm leading-none tracking-[-0.02em] text-gray-new-80">
+              <span
+                className={clsx(
+                  'leading-none tracking-[-0.02em] text-gray-new-80',
+                  size === 'lg' ? 'text-[15px]' : 'text-sm'
+                )}
+              >
                 {size === 'sm' ? (
                   <>
                     <span className="xl:hidden">{authorName}</span>
