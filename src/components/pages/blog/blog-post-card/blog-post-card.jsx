@@ -42,14 +42,14 @@ const BlogPostCard = ({
           rel={url ? 'noopener noreferrer' : undefined}
         >
           {largeCover?.mediaItemUrl ? (
-            <Image
-              className="w-full rounded-md"
-              src={largeCover?.mediaItemUrl}
-              alt={largeCover?.altText || title}
-              width={716}
-              height={403}
-              quality="95"
-            />
+            <div className="relative aspect-video overflow-hidden rounded-md">
+              <Image
+                className="absolute left-0 top-0 min-h-full min-w-full object-cover"
+                src={largeCover?.mediaItemUrl}
+                alt={largeCover?.altText || title}
+                fill
+              />
+            </div>
           ) : (
             <Image
               className="w-full rounded-md"
