@@ -75,7 +75,7 @@ const BlogPostCard = ({
             className={clsx(
               'text-xs font-semibold uppercase leading-none tracking-[0.02em]',
               CATEGORY_COLORS[category?.slug] || 'text-green-45',
-              size === 'lg' ? 'mt-[18px]' : 'mt-3'
+              size === 'lg' ? 'mt-[18px] md:mt-4' : 'mt-3'
             )}
             to={`${LINKS.blog}${category?.slug}`}
           >
@@ -96,8 +96,8 @@ const BlogPostCard = ({
                 'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base': size === 'lg',
                 'text-lg leading-tight tracking-[-0.02em] line-clamp-2 lg:text-base':
                   size === 'md' || size === 'sm' || size === 'xs',
-                'mt-2': !!category,
-                'mt-5': !category && size === 'lg',
+                'mt-2 md:mt-1.5': !!category,
+                'mt-5 md:mt-4': !category && size === 'lg',
                 'mt-3': !category && (size === 'md' || size === 'sm'),
               }
             )}
@@ -106,7 +106,7 @@ const BlogPostCard = ({
           </h1>
           <div
             className={clsx('flex items-center', {
-              'mt-3': size === 'lg' || size === 'xl' || withAuthorPhoto,
+              'mt-3 md:mt-2.5': size === 'lg' || size === 'xl' || withAuthorPhoto,
               'md:mt-2.5': withAuthorPhoto,
               'mt-1 xl:mt-2 lg:mt-1':
                 (size === 'md' || size === 'sm' || size === 'xs') && !withAuthorPhoto,
@@ -114,7 +114,7 @@ const BlogPostCard = ({
           >
             {(size === 'lg' || size === 'xl' || withAuthorPhoto) && (
               <Image
-                className="mr-2 rounded-full"
+                className="mr-2 rounded-full md:h-6 md:w-6"
                 src={postAuthor.postAuthor?.image?.mediaItemUrl}
                 alt={postAuthor?.title}
                 width={28}
