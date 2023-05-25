@@ -48,11 +48,12 @@ const BlogPostCard = ({
               alt={largeCover?.altText || title}
               width={716}
               height={403}
+              quality="95"
             />
           ) : (
-            <img
-              className="w-full rounded-md bg-gray-new-30"
-              src={`data:image/svg+xml;charset=utf-8,%3Csvg width='${716}' height='${403}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+            <Image
+              className="w-full rounded-md"
+              src="/images/placeholder.jpg"
               alt=""
               width={716}
               height={403}
