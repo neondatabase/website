@@ -26,7 +26,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
             },
             index
           ) => (
-            <li key={index} className="mt-6 lg:mt-5">
+            <li key={index} className="mt-6 lg:mt-5 md:mt-6 md:first:mt-5">
               <Link className="group group flex items-center space-x-4" to={url}>
                 {coverImage ? (
                   <Image

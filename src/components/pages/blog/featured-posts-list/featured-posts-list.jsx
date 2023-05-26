@@ -14,7 +14,7 @@ const FeaturedPostsList = ({ posts }) => {
         isPriority
       />
       <div className="col-span-4 xl:col-span-5 md:col-span-full">
-        <div className="grid grid-cols-2 gap-x-10 gap-y-11 2xl:gap-x-6 xl:gap-y-8 lg:gap-x-4 lg:gap-y-5 xs:grid-cols-1">
+        <div className="grid grid-cols-2 gap-x-10 gap-y-11 2xl:gap-x-6 xl:gap-y-8 lg:gap-x-4 lg:gap-y-6 xs:grid-cols-1">
           {secondaryPosts.map(({ post }, index) => (
             <BlogPostCard {...post} size="sm" key={index} />
           ))}
