@@ -74,53 +74,50 @@ To ensure the security of your data, never expose your Neon credentials to the b
 
 ## Configure the app.js file
 
-Add an `app.js` file to your project directory and add **one** of the following code snippets to connect to your Neon database using the `pg` client or the `node-postgres` client:
+Add an `app.js` file to your project directory and add the following code snippet to connect to your Neon database:
+  
+<CodeTabs labels={["node-postgres", "postgres.js"]}>
+  ```javascript
+  const { Pool } = require('pg');
+  require('dotenv').config();
 
-### Use the node-postgres client
+  const { DATABASE_URL } = process.env;
 
-```javascript
-const { Pool } = require('pg');
-require('dotenv').config();
+  const pool = new Pool({
+    connectionString: DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  });
 
-const { DATABASE_URL } = process.env;
-
-const pool = new Pool({
-  connectionString: DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
-
-async function getPostgresVersion() {
-  const client = await pool.connect();
-  try {
-    const res = await client.query('SELECT version()');
-    console.log(res.rows[0]);
-  } finally {
-    client.release();
+  async function getPostgresVersion() {
+    const client = await pool.connect();
+    try {
+      const res = await client.query('SELECT version()');
+      console.log(res.rows[0]);
+    } finally {
+      client.release();
+    }
   }
-}
 
-getPostgresVersion();
-```
+  getPostgresVersion();
+  ```
+  ```js
+  const postgres = require('postgres');
+  require('dotenv').config();
 
-### Use the Postgres.js client
+  const { DATABASE_URL } = process.env;
 
-```js
-const postgres = require('postgres');
-require('dotenv').config();
+  const sql = postgres(DATABASE_URL, { ssl: 'require' });
 
-const { DATABASE_URL } = process.env;
+  async function getPostgresVersion() {
+    const result = await sql`select version()`;
+    console.log(result);
+  }
 
-const sql = postgres(DATABASE_URL, { ssl: 'require' });
-
-async function getPostgresVersion() {
-  const result = await sql`select version()`;
-  console.log(result);
-}
-
-getPostgresVersion();
-```
+  getPostgresVersion();
+  ```
+</CodeTabs>
 
 ## Run app.js
 
