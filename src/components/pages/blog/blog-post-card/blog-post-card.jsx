@@ -42,16 +42,19 @@ const BlogPostCard = ({
     >
       {size !== 'xs' && (
         <Link
-          className={clsx('w-full max-w-[716px] shrink-0 md:max-w-none', {
-            '2xl:max-w-[600px] xl:max-w-[50%] md:max-w-full': size === 'xl',
-          })}
+          className={clsx(
+            'group w-full max-w-[716px] shrink-0 overflow-hidden rounded-md md:max-w-none',
+            {
+              '2xl:max-w-[600px] xl:max-w-[50%] md:max-w-full': size === 'xl',
+            }
+          )}
           to={link}
           target={url ? '_blank' : undefined}
           rel={url ? 'noopener noreferrer' : undefined}
         >
           {largeCover?.mediaItemUrl ? (
             <Image
-              className="w-full rounded-md"
+              className="w-full rounded-md transition-transform duration-200 group-hover:scale-110"
               src={largeCover?.mediaItemUrl}
               alt={largeCover?.altText || title}
               width={716}
