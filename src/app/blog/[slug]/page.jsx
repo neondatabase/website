@@ -102,3 +102,5 @@ export async function generateStaticParams() {
 }
 
 export default BlogPage;
+
+export const revalidate = 60;

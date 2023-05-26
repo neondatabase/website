@@ -33,3 +33,5 @@ export async function generateStaticParams() {
     slug: category.slug,
   }));
 }
+
+export const revalidate = 300;
