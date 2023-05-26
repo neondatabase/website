@@ -11,12 +11,13 @@ export default async function BlogCategoryPage({ params: { slug } }) {
       <div className="grid grid-cols-3 gap-x-10 gap-y-16 2xl:gap-y-12 xl:gap-x-6 xl:gap-y-9 lg:gap-x-4 md:grid-cols-2 md:gap-y-5 sm:grid-cols-1">
         {posts.map((post, index) => (
           <BlogPostCard
-            className={index === 0 && 'col-span-full'}
+            className={index === 0 ? 'col-span-full' : ''}
             {...post}
             size={index === 0 ? 'xl' : 'md'}
             key={index}
             withAuthorPhoto={index !== 0}
             isPriority={index === 0}
+            S
           />
         ))}
       </div>
