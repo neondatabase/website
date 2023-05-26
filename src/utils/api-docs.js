@@ -85,19 +85,22 @@ const getDocPreviousAndNextLinks = (slug, flatSidebar) => {
 
 const getAllReleaseNotes = async () => {
   const slugs = await getPostSlugs(RELEASE_NOTES_DIR_PATH);
-
+  console.log('Release notes slugs', slugs);
   return slugs
     .reverse()
     .map((slug) => {
-      if (!getPostBySlug(slug, RELEASE_NOTES_DIR_PATH)) return;
-      const post = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
+      console.log('Release note slug', slug);
+      console.log(`Release note source:${RELEASE_NOTES_DIR_PATH}${slug}`);
+      console.log('Get Release note Content', getPostBySlug(slug, RELEASE_NOTES_DIR_PATH));
+      // When you call getPostBySlug and pass the function slug and pathname, the function has the wrong path with an extra slash
+      // fs.readFileSync(`${pathname}/${slug}.md`) => content/release-notes//2022-06-08-console
+      const slugWithoutFirstSlash = slug.slice(1);
+      if (!getPostBySlug(slugWithoutFirstSlash, RELEASE_NOTES_DIR_PATH)) return;
+      const post = getPostBySlug(slugWithoutFirstSlash, RELEASE_NOTES_DIR_PATH);
 
-      const {
-        data: { isDraft },
-        content,
-      } = post;
+      const { data, content } = post;
 
-      return { slug: slug.replace('/', ''), isDraft, content };
+      return { slug: slug.replace('/', ''), isDraft: data?.isDraft, content };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
