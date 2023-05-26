@@ -103,7 +103,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
         'subscribe-form safe-paddings overflow-hidden',
 
         {
-          '"pt-[118px] md:pb-24" pb-[125px] xl:pb-[123px] xl:pt-[104px] lg:pb-28 lg:pt-20 md:pt-16':
+          'pb-[125px] pt-[118px] xl:pb-[123px] xl:pt-[104px] lg:pb-28 lg:pt-20 md:pb-24 md:pt-16':
             size === 'lg',
           'mt:pt-7 -mx-10 rounded-xl bg-black-new p-[70px] pr-28 2xl:mx-0 2xl:px-10 xl:py-14 lt:px-11 lg:pb-16 md:px-5 md:pb-12 md:pt-7':
             size === 'md',
