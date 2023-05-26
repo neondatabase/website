@@ -41,18 +41,17 @@ If you do not have one already, create a Neon project.
 
 2. Add project dependencies using one of the following commands:
 
-    If you are using the `node-postgres` client:
+    <CodeTabs labels={["node-postgres", "postgres.js"]}>
+      ```shell
+      npm install pg dotenv
+      ```
 
-    ```shell
-    npm install pg dotenv
-    ```
-
-    If you are using the `Postgres.js` client:
-
-    ```shell
-    npm install postgres dotenv
-    ```
-
+      ```shell
+      npm install postgres dotenv
+      ```
+    </CodeTabs>
+    
+    
 ## Store your Neon credentials
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
