@@ -21,7 +21,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
         <span>{title}</span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>
-      <div className="mt-6 grid grid-cols-10 gap-x-10 gap-y-5 2xl:gap-x-6 lt:grid-cols-12 lg:mt-5 lg:gap-x-4 md:gap-y-7">
+      <div className="mt-6 grid grid-cols-10 gap-x-10 gap-y-5 2xl:gap-x-6 lt:grid-cols-12 lg:mt-5 md:gap-y-10">
         <BlogPostCard
           className={clsx(
             alignment === 'left'
@@ -52,7 +52,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
               ))}
           {alignment === 'left' && (
             <>
-              <div className="grid grid-cols-2 gap-x-10 pb-[18px] 2xl:gap-x-6 lg:gap-x-4 lg:pb-5 xs:grid-cols-1 xs:gap-y-5">
+              <div className="grid grid-cols-2 gap-x-10 pb-[18px] 2xl:gap-x-6 lg:pb-5 xs:grid-cols-1 xs:gap-y-10">
                 {secondaryPosts.slice(0, 2).map(({ post }, index) => (
                   <BlogPostCard {...post} size="sm" key={index} />
                 ))}

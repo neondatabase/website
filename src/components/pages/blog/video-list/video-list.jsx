@@ -9,7 +9,7 @@ const VideoList = ({ videos }) => (
       <span>Video</span>
       <span className="ml-2 h-px grow bg-gray-new-20" />
     </h2>
-    <div className="mt-6 grid grid-cols-3 gap-x-10 2xl:gap-x-6 lg:mt-5 lg:gap-x-4 md:grid-cols-1 md:gap-y-5">
+    <div className="mt-6 grid grid-cols-3 gap-x-10 2xl:gap-x-6 lg:mt-5 md:grid-cols-1 md:gap-y-10">
       {videos.map(({ post }, index) => (
         <BlogPostCard {...post} key={index} size="md" withAuthorPhoto />
       ))}

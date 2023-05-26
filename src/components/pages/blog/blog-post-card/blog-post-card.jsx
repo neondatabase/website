@@ -3,7 +3,7 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
-import { CATEGORY_COLORS } from 'constants/blog';
+import { CATEGORY_COLORS, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import LINKS from 'constants/links';
 import getFormattedDate from 'utils/get-formatted-date';
 
@@ -42,7 +42,7 @@ const BlogPostCard = ({
     >
       {size !== 'xs' && (
         <Link
-          className={clsx('w-full max-w-[716px] shrink-0', {
+          className={clsx('w-full max-w-[716px] shrink-0 md:max-w-none', {
             '2xl:max-w-[600px] xl:max-w-[50%] md:max-w-full': size === 'xl',
           })}
           to={link}
@@ -80,7 +80,7 @@ const BlogPostCard = ({
               CATEGORY_COLORS[category?.slug] || 'text-green-45',
               size === 'lg' ? 'mt-[18px] md:mt-4' : 'mt-3'
             )}
-            to={`${LINKS.blog}${category?.slug}`}
+            to={`${BLOG_CATEGORY_BASE_PATH}${category?.slug}`}
           >
             {category?.name}
           </Link>
@@ -116,18 +116,20 @@ const BlogPostCard = ({
                 (size === 'md' || size === 'sm' || size === 'xs') && !withAuthorPhoto,
             })}
           >
-            {(size === 'lg' || size === 'xl' || withAuthorPhoto) && (
-              <Image
-                className="mr-2 rounded-full md:h-6 md:w-6"
-                src={postAuthor.postAuthor?.image?.mediaItemUrl}
-                alt={postAuthor?.title}
-                width={28}
-                height={28}
-              />
-            )}
+            <Image
+              className={clsx(
+                'rounded-full md:h-6 md:w-6 xs:mr-2 xs:block',
+                size === 'lg' || size === 'xl' || withAuthorPhoto ? 'mr-2 block' : 'hidden'
+              )}
+              src={postAuthor.postAuthor?.image?.mediaItemUrl}
+              alt={postAuthor?.title}
+              width={28}
+              height={28}
+            />
+
             <div
               className={clsx('flex items-center', {
-                'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start':
+                'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start xs:flex-row xs:items-center':
                   size === 'sm',
                 'xl:flex-col xl:items-start md:flex-row md:items-center': withAuthorPhoto,
               })}
@@ -135,7 +137,7 @@ const BlogPostCard = ({
               <span
                 className={clsx(
                   'leading-none tracking-[-0.02em] text-gray-new-80',
-                  size === 'lg' ? 'text-[15px] lg:text-sm' : 'text-sm lg:text-[13px]'
+                  size === 'lg' ? 'text-[15px] lg:text-sm xs:text-[13px]' : 'text-sm lg:text-[13px]'
                 )}
               >
                 {size === 'sm' ? (
@@ -150,14 +152,14 @@ const BlogPostCard = ({
                 )}
               </span>
 
-              <span
+              <time
                 className={clsx(
                   'relative block shrink-0 pl-[11px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-[4px] before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
                   size === 'lg'
-                    ? 'text-[15px] lg:text-sm'
+                    ? 'text-[15px] lg:text-sm xs:text-xs'
                     : 'text-[13px] lg:text-xs lg:leading-none',
                   {
-                    'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden':
+                    'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden xs:mt-0 xs:pl-[11px] xs:before:inline-block':
                       size === 'sm',
                     'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-[11px] md:before:inline-block':
                       withAuthorPhoto,
@@ -166,7 +168,7 @@ const BlogPostCard = ({
                 dateTime={date}
               >
                 {formattedDate}
-              </span>
+              </time>
             </div>
           </div>
         </Link>

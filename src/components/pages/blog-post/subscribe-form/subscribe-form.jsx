@@ -98,11 +98,22 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
   };
 
   return (
-    <section className={clsx('subscribe-form safe-paddings overflow-hidden', className)}>
+    <section
+      className={clsx(
+        'subscribe-form safe-paddings overflow-hidden',
+
+        {
+          '"pt-[118px] md:pb-24" pb-[125px] xl:pb-[123px] xl:pt-[104px] lg:pb-28 lg:pt-20 md:pt-16':
+            size === 'lg',
+          'mt:pt-7 -mx-10 rounded-xl bg-black-new p-[70px] pr-28 2xl:mx-0 2xl:px-10 xl:py-14 lt:px-11 lg:pb-16 md:px-5 md:pb-12 md:pt-7':
+            size === 'md',
+        },
+        className
+      )}
+    >
       <div
         className={clsx('mx-auto flex max-w-[1166px] items-center justify-between lg:flex-col', {
           'pr-12 2xl:px-10 2xl:pr-0 lg:px-8 md:px-4': size === 'lg',
-          'xl:flex-col lt:flex-row': size === 'md',
         })}
       >
         <div className="relative z-20 lg:text-center">
@@ -114,8 +125,9 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
           </p>
         </div>
         <form
-          className={clsx('relative w-full max-w-[518px] xl:max-w-[456px] lg:mt-5 md:mt-7', {
-            '2xl:max-w-[470px] xl:mt-5 lt:mt-0 lt:max-w-[416px] lg:max-w-[464px] sm:mt-6':
+          className={clsx('relative w-full max-w-[518px] lg:mt-5 md:mt-7', {
+            'xl:max-w-[456px]': size === 'lg',
+            '2xl:max-w-[400px] xl:max-w-[350px] lt:mt-0 lt:max-w-[416px] lg:max-w-[464px] sm:mt-6':
               size === 'md',
           })}
           method="POST"

@@ -7,14 +7,14 @@ const FeaturedPostsList = ({ posts }) => {
   const secondaryPosts = posts.slice(1, 5);
 
   return (
-    <section className="grid grid-cols-10 gap-x-10 2xl:gap-x-6 lg:gap-x-4 md:gap-y-5">
+    <section className="grid grid-cols-10 gap-x-10 2xl:gap-x-6 md:gap-y-10">
       <BlogPostCard
         className="col-span-6 xl:col-span-5 md:col-span-full"
         {...primaryPost.post}
         isPriority
       />
       <div className="col-span-4 xl:col-span-5 md:col-span-full">
-        <div className="grid grid-cols-2 gap-x-10 gap-y-11 2xl:gap-x-6 xl:gap-y-8 lg:gap-x-4 lg:gap-y-6 xs:grid-cols-1">
+        <div className="grid grid-cols-2 gap-x-10 gap-y-11 2xl:gap-x-6 xl:gap-y-8 md:gap-y-10 xs:grid-cols-1">
           {secondaryPosts.map(({ post }, index) => (
             <BlogPostCard {...post} size="sm" key={index} />
           ))}

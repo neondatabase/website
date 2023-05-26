@@ -4,7 +4,7 @@ import SEO_DATA from 'constants/seo-data';
 
 const Head = () => (
   <>
-    <SEO {...SEO_DATA.blog} />{' '}
+    <SEO {...SEO_DATA.blog} />
     <link
       rel="alternate"
       type="application/rss+xml"
