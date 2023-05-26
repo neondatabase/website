@@ -76,7 +76,7 @@ const BlogPostCard = ({
         {category && size !== 'xs' && (
           <Link
             className={clsx(
-              'text-xs font-semibold uppercase leading-none tracking-[0.02em]',
+              'text-xs font-semibold uppercase leading-none tracking-[0.02em] lg:text-[11px]',
               CATEGORY_COLORS[category?.slug] || 'text-green-45',
               size === 'lg' ? 'mt-[18px] md:mt-4' : 'mt-3'
             )}
@@ -111,7 +111,7 @@ const BlogPostCard = ({
             className={clsx('flex items-center', {
               'mt-3 md:mt-2.5': size === 'lg' || size === 'xl' || withAuthorPhoto,
               'md:mt-2.5': withAuthorPhoto,
-              'mt-1 xl:mt-2 lg:mt-1':
+              'mt-2 lg:mt-1.5':
                 (size === 'md' || size === 'sm' || size === 'xs') && !withAuthorPhoto,
             })}
           >
@@ -134,7 +134,7 @@ const BlogPostCard = ({
               <span
                 className={clsx(
                   'leading-none tracking-[-0.02em] text-gray-new-80',
-                  size === 'lg' ? 'lg:text-14 text-[15px]' : 'text-sm lg:text-[13px]'
+                  size === 'lg' ? 'text-[15px] lg:text-sm' : 'text-sm lg:text-[13px]'
                 )}
               >
                 {size === 'sm' ? (
@@ -151,7 +151,10 @@ const BlogPostCard = ({
 
               <span
                 className={clsx(
-                  'relative block shrink-0 pl-[11px] text-[13px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-[4px] before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30 lg:text-xs',
+                  'relative block shrink-0 pl-[11px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-[4px] before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
+                  size === 'lg'
+                    ? 'text-[15px] lg:text-sm'
+                    : 'text-[13px] lg:text-xs lg:leading-none',
                   {
                     'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden':
                       size === 'sm',

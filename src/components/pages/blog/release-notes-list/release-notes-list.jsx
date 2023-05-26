@@ -69,7 +69,7 @@ const ReleaseNotesList = ({ items }) => (
       })}
     </ul>
     <Link
-      className="hidden items-center leading-none md:mt-7 md:flex"
+      className="hidden items-center text-sm leading-none md:mt-7 md:flex"
       theme="blue"
       to={LINKS.releaseNotes}
       withArrow
