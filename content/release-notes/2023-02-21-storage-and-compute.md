@@ -11,7 +11,3 @@
   ```sql
   ALTER EXTENSION postgis_topology UPDATE TO '3.3.2';
   ```
-
-- Pageserver: Corrected the storage size metrics calculation to ensure that only active branches are counted.
-- Proxy: Enabled `OpenTelemetry` tracing to capture all incoming requests. This change enables Neon to perform an end-to-end trace when a new
-connection is established.
