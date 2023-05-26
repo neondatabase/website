@@ -41,18 +41,17 @@ If you do not have one already, create a Neon project.
 
 2. Add project dependencies using one of the following commands:
 
-    If you are using the `node-postgres` client:
+    <CodeTabs labels={["node-postgres", "postgres.js"]}>
+      ```shell
+      npm install pg dotenv
+      ```
 
-    ```shell
-    npm install pg dotenv
-    ```
-
-    If you are using the `Postgres.js` client:
-
-    ```shell
-    npm install postgres dotenv
-    ```
-
+      ```shell
+      npm install postgres dotenv
+      ```
+    </CodeTabs>
+    
+    
 ## Store your Neon credentials
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
@@ -75,53 +74,50 @@ To ensure the security of your data, never expose your Neon credentials to the b
 
 ## Configure the app.js file
 
-Add an `app.js` file to your project directory and add **one** of the following code snippets to connect to your Neon database using the `pg` client or the `node-postgres` client:
+Add an `app.js` file to your project directory and add the following code snippet to connect to your Neon database:
+  
+<CodeTabs labels={["node-postgres", "postgres.js"]}>
+  ```javascript
+  const { Pool } = require('pg');
+  require('dotenv').config();
 
-### Use the node-postgres client
+  const { DATABASE_URL } = process.env;
 
-```javascript
-const { Pool } = require('pg');
-require('dotenv').config();
+  const pool = new Pool({
+    connectionString: DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  });
 
-const { DATABASE_URL } = process.env;
-
-const pool = new Pool({
-  connectionString: DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
-
-async function getPostgresVersion() {
-  const client = await pool.connect();
-  try {
-    const res = await client.query('SELECT version()');
-    console.log(res.rows[0]);
-  } finally {
-    client.release();
+  async function getPostgresVersion() {
+    const client = await pool.connect();
+    try {
+      const res = await client.query('SELECT version()');
+      console.log(res.rows[0]);
+    } finally {
+      client.release();
+    }
   }
-}
 
-getPostgresVersion();
-```
+  getPostgresVersion();
+  ```
+  ```js
+  const postgres = require('postgres');
+  require('dotenv').config();
 
-### Use the Postgres.js client
+  const { DATABASE_URL } = process.env;
 
-```js
-const postgres = require('postgres');
-require('dotenv').config();
+  const sql = postgres(DATABASE_URL, { ssl: 'require' });
 
-const { DATABASE_URL } = process.env;
+  async function getPostgresVersion() {
+    const result = await sql`select version()`;
+    console.log(result);
+  }
 
-const sql = postgres(DATABASE_URL, { ssl: 'require' });
-
-async function getPostgresVersion() {
-  const result = await sql`select version()`;
-  console.log(result);
-}
-
-getPostgresVersion();
-```
+  getPostgresVersion();
+  ```
+</CodeTabs>
 
 ## Run app.js
 
