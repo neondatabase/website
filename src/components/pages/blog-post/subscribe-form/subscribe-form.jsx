@@ -171,7 +171,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
                 {formState === STATES.LOADING && (
                   <m.div
                     className={clsx(
-                      'absolute right-2 top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full'
+                      'absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-green-45'
                     )}
                     initial="initial"
                     animate="animate"
@@ -179,9 +179,8 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
                     variants={appearAndExitAnimationVariants}
                     aria-hidden
                   >
-                    <div className="h-10 w-10 rounded-full border-4 border-gray-new-20" />
                     <svg
-                      className="absolute left-1/2 top-1/2 h-10 w-10"
+                      className="absolute left-1/2 top-1/2 h-[22px] w-[22px]"
                       width="58"
                       height="58"
                       viewBox="0 0 58 58"
@@ -192,7 +191,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
                       <m.path
                         d="M3 29C3 43.3594 14.6406 55 29 55C43.3594 55 55 43.3594 55 29C55 14.6406 43.3594 3 29 3C14.6406 3 3 14.6406 3 29Z"
                         strokeLinecap="round"
-                        stroke="#00e699"
+                        stroke="#0c0d0d"
                         strokeWidth="6"
                         initial={{ pathLength: 0 }}
                         animate={{ pathLength: 1, transition: { duration: 2, delay: 0.2 } }}
