@@ -56,7 +56,7 @@ const BlogPostCard = ({
               alt={largeCover?.altText || title}
               width={716}
               height={403}
-              quality="95"
+              quality="85"
               priority={isPriority}
             />
           ) : (
