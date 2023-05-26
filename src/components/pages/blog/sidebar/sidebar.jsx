@@ -52,9 +52,9 @@ const Sidebar = () => (
   <aside className="col-span-2 pb-10 lt:col-span-full lt:pb-0">
     <div className="sticky bottom-10 top-10 flex h-[calc(100vh-80px)] min-h-[300px] flex-col gap-y-10 lt:h-auto lt:min-h-fit">
       <nav className="no-scrollbars md:-mx-4 md:max-w-5xl md:overflow-auto md:px-4">
-        <ul className=" flex flex-col lt:flex-row lt:gap-x-7 lt:py-3.5 md:after:shrink-0 md:after:grow-0 md:after:basis-px md:after:content-['']">
+        <ul className="flex flex-col lt:flex-row lt:gap-x-7 lt:pt-8 md:after:shrink-0 md:after:grow-0 md:after:basis-px md:after:content-['']">
           {categories.map(({ name, slug }, index) => (
-            <li className="py-1.5 first:pt-0 last:pb-0 lt:py-0" key={index}>
+            <li className="flex py-1.5 first:pt-0 last:pb-0 lt:py-0" key={index}>
               <BlogNavLink name={name} slug={slug} />
             </li>
           ))}

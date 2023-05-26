@@ -16,6 +16,7 @@ const BlogPostCard = ({
   pageBlogPost: { url, authors, largeCover, author },
   size = 'lg',
   withAuthorPhoto = false,
+  withImageHover = true,
   isPriority = false,
 }) => {
   const category = categories?.nodes[0];
@@ -54,7 +55,9 @@ const BlogPostCard = ({
         >
           {largeCover?.mediaItemUrl ? (
             <Image
-              className="w-full rounded-md transition-transform duration-200 group-hover:scale-110"
+              className={clsx('w-full rounded-md transition-transform duration-200', {
+                'group-hover:scale-110': withImageHover,
+              })}
               src={largeCover?.mediaItemUrl}
               alt={largeCover?.altText || title}
               width={716}
@@ -64,7 +67,9 @@ const BlogPostCard = ({
             />
           ) : (
             <Image
-              className="w-full rounded-md"
+              className={clsx('w-full rounded-md transition-transform duration-200', {
+                'group-hover:scale-110': withImageHover,
+              })}
               src="/images/placeholder.jpg"
               alt=""
               width={716}
