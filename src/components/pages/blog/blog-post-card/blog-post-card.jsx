@@ -101,7 +101,8 @@ const BlogPostCard = ({
                   size === 'md' || size === 'sm' || size === 'xs',
                 'mt-2 md:mt-1.5': !!category,
                 'mt-5 md:mt-4': !category && size === 'lg',
-                'mt-3': !category && (size === 'md' || size === 'sm'),
+                'mt-4': !category && size === 'md',
+                'mt-3': !category && size === 'sm',
               }
             )}
           >

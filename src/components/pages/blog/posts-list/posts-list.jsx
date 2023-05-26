@@ -35,7 +35,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
           className={clsx(
             alignment === 'left'
               ? 'col-span-4 col-start-7 xl:col-span-5 xl:col-start-6 lt:col-span-6 lt:col-start-7'
-              : 'col-start-1 col-end-5 row-start-1 divide-y divide-gray-new-15 xl:col-end-6 lt:col-end-6 lg:col-end-7 lg:divide-y-0 sm:order-1 sm:row-start-2',
+              : 'col-start-1 col-end-5 row-start-1 divide-y divide-gray-new-15 xl:col-end-6 lt:col-end-6 lg:col-end-7 sm:order-1 sm:row-start-2',
             'sm:col-span-full'
           )}
         >
@@ -44,7 +44,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
               .slice(0, 3)
               .map(({ post }, index) => (
                 <BlogPostCard
-                  className="py-[18px] first:pt-0 last:pb-0 md:py-3"
+                  className="py-[18px] first:pt-0 last:pb-0 md:py-4"
                   {...post}
                   size={index === 0 ? 'md' : 'xs'}
                   key={index}
