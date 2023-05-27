@@ -6,10 +6,18 @@ import VideoList from 'components/pages/blog/video-list';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import { getWpBlogPage } from 'utils/api-posts';
 
+async function getReleaseNotesData() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/api/release-notes`);
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
+
 export default async function BlogPage() {
-  const releaseNotes = await fetch(
-    `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/api/release-notes`
-  ).then((res) => res.json());
+  const releaseNotes = await getReleaseNotesData();
   const featuredReleaseNotes = releaseNotes.slice(0, 4);
   const {
     featuredPosts,
