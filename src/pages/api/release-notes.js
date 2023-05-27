@@ -5,7 +5,6 @@ import matter from 'gray-matter';
 
 import { RELEASE_NOTES_DIR_PATH } from 'constants/docs';
 import { getPostSlugs } from 'utils/api-docs';
-import getExcerpt from 'utils/get-excerpt';
 
 // TODO: move this function to utils/api-docs
 const getPostBySlug = async (slug, pathname) => {
@@ -13,8 +12,8 @@ const getPostBySlug = async (slug, pathname) => {
     const pathDirectory = path.join(process.cwd(), `${pathname}/${slug}.md`);
     const source = await fs.readFile(pathDirectory, 'utf8');
     const { data, content } = matter(source);
-    const excerpt = getExcerpt(content, 200);
-    return { data, content, excerpt };
+
+    return { data, content };
   } catch (e) {
     console.error(`Error reading file ${pathname}/${slug}.md: `, e);
     return null;
