@@ -4,11 +4,12 @@ import PostsList from 'components/pages/blog/posts-list';
 import ReleaseNotesList from 'components/pages/blog/release-notes-list';
 import VideoList from 'components/pages/blog/video-list';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
-import { getAllReleaseNotes } from 'utils/api-docs';
 import { getWpBlogPage } from 'utils/api-posts';
 
 export default async function BlogPage() {
-  const releaseNotes = await getAllReleaseNotes();
+  const releaseNotes = await fetch(
+    `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/api/release-notes`
+  ).then((res) => res.json());
   const featuredReleaseNotes = releaseNotes.slice(0, 4);
   const {
     featuredPosts,

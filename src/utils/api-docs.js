@@ -5,10 +5,11 @@ const { glob } = require('glob');
 const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 
+const { RELEASE_NOTES_DIR_PATH } = require('../constants/docs');
+
 const getExcerpt = require('./get-excerpt');
 
 const DOCS_DIR_PATH = 'content/docs';
-const RELEASE_NOTES_DIR_PATH = `content/release-notes`;
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
