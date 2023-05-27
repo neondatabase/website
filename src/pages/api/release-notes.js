@@ -3,16 +3,18 @@ import path from 'path';
 
 import matter from 'gray-matter';
 
+import { RELEASE_NOTES_DIR_PATH } from 'constants/docs';
 import { getPostSlugs } from 'utils/api-docs';
+import getExcerpt from 'utils/get-excerpt';
 
-const RELEASE_NOTES_DIR_PATH = `content/release-notes`;
-
+// TODO: move this function to utils/api-docs
 const getPostBySlug = async (slug, pathname) => {
   try {
     const pathDirectory = path.join(process.cwd(), `${pathname}/${slug}.md`);
     const source = await fs.readFile(pathDirectory, 'utf8');
     const { data, content } = matter(source);
-    return { data, content };
+    const excerpt = getExcerpt(content, 200);
+    return { data, content, excerpt };
   } catch (e) {
     console.error(`Error reading file ${pathname}/${slug}.md: `, e);
     return null;
@@ -20,27 +22,30 @@ const getPostBySlug = async (slug, pathname) => {
 };
 
 export default async function handler(req, res) {
-  const slugs = await getPostSlugs(RELEASE_NOTES_DIR_PATH);
-  console.log(`Got slugs: `, slugs);
+  try {
+    const slugs = (await getPostSlugs(RELEASE_NOTES_DIR_PATH)).map((slug) => slug.replace('/', ''));
 
-  const releaseNotes = await Promise.all(
-    slugs.reverse().map(async (slug) => {
-      const post = await getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
-      if (!post) return null;
-      const { data, content } = post;
-      return { slug: slug.replace(/\//g, ''), isDraft: data?.isDraft, content };
-    })
-  );
+    const releaseNotesPromises = slugs.reverse().map(async (slug) => {
+      try {
+        const post = await getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
+        const { data, content } = post;
+        if (process.env.NODE_ENV === 'production') {
+          if (data?.isDraft) {
+            return null;
+          }
+        }
+        return { slug, isDraft: data?.isDraft, content };
+      } catch (error) {
+        console.error(`Error fetching post by slug: ${slug}`, error);
+        return null;
+      }
+    });
 
-  const filteredReleaseNotes = releaseNotes.filter(
-    (item) => item && (process.env.NODE_ENV !== 'production' || !item.isDraft)
-  );
+    const releaseNotes = (await Promise.all(releaseNotesPromises)).filter((item) => item !== null);
 
-  console.log(`Got release notes: `, filteredReleaseNotes);
-
-  if (filteredReleaseNotes.includes(null)) {
-    return res.status(500).json({ message: 'An error occurred while fetching release notes' });
+    res.status(200).json(releaseNotes);
+  } catch (error) {
+    console.error('Error in API handler: ', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-
-  res.status(200).json(filteredReleaseNotes);
 }
