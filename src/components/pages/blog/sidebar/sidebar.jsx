@@ -50,7 +50,7 @@ const socialLinks = [
 
 const Sidebar = () => (
   <aside className="col-span-2 pb-10 lt:col-span-full lt:pb-0">
-    <div className="relative flex h-full flex-col justify-between gap-y-10 lt:h-auto lt:min-h-fit">
+    <div className="relative flex h-full flex-col gap-y-10 lt:h-auto lt:min-h-fit">
       <div className="relative flex-1">
         <nav className="no-scrollbars sticky top-10 md:-mx-4 md:max-w-5xl md:overflow-auto md:px-4">
           <ul className="flex flex-col lt:flex-row lt:gap-x-7 lt:pt-8 md:after:shrink-0 md:after:grow-0 md:after:basis-px md:after:content-['']">
