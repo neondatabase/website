@@ -13,6 +13,7 @@ const Author = ({ author, isBlogPost = false }) => (
       src={author.postAuthor?.image?.mediaItemUrl}
       width={40}
       height={40}
+      quality={85}
       alt={author.title}
     />
     <span className="ml-3 flex flex-col text-lg leading-none transition-colors duration-200 group-hover:text-primary-1 group-active:text-primary-1">

@@ -83,7 +83,7 @@ const BlogPostCard = ({
               alt={largeCover?.altText || title}
               width={imageWidth || imageSizes[size].width}
               height={imageHeight || imageSizes[size].height}
-              quality="85"
+              quality={85}
               priority={isPriority}
               sizes="(max-width: 767px) 100vw"
             />
@@ -154,6 +154,7 @@ const BlogPostCard = ({
               )}
               src={postAuthor.postAuthor?.image?.mediaItemUrl}
               alt={postAuthor?.title}
+              quality={85}
               width={28}
               height={28}
             />
