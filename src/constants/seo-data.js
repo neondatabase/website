@@ -53,6 +53,7 @@ export default {
   category: ({ title, description }) => ({
     title: `${title} Blog Posts — Neon`,
     description,
+    imagePath: '/images/social-previews/blog.jpg',
   }),
 };
 
