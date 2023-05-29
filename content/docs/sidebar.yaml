@@ -82,6 +82,8 @@
   items:
     - title: AWS Lambda
       slug: guides/aws-lambda
+    - title: Elixir
+      slug: guides/elixir-ecto
     - title: Django
       slug: guides/django
     - title: Go
@@ -108,6 +110,8 @@
           slug: guides/prisma
         - title: Use Prisma Migrate With Neon
           slug: guides/prisma-migrate
+    - title: Python
+      slug: guides/python
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy
