@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import { CATEGORY_BG_COLORS, CATEGORY_COLORS, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
+import { BLOG_CATEGORY_BASE_PATH, CATEGORY_BG_COLORS, CATEGORY_COLORS } from 'constants/blog';
 
 const Hero = ({ title, description, date, category, className = null }) => (
   <div className={className}>
@@ -24,7 +24,7 @@ const Hero = ({ title, description, date, category, className = null }) => (
         {date}
       </time>
     </div>
-    <h1 className="mt-3 text-5xl font-medium leading-dense tracking-tighter xl:text-[44px] md:text-4xl">
+    <h1 className="mt-3 text-5xl font-medium leading-dense tracking-tighter xl:text-[44px] md:text-4xl sm:text-[32px] sm:tracking-[0.02em] xs:text-3xl">
       {title}
     </h1>
     <p className="mt-3 text-2xl leading-snug text-gray-new-90 xl:text-xl md:text-lg">
