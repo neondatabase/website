@@ -47,7 +47,7 @@ const Header = forwardRef(
         className={clsx(
           'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-black lg:relative lg:h-14',
           isSticky && 'sticky top-0 z-50 md:relative',
-          withBottomBorder && !theme === 'gray-8' && 'border-b border-gray-7 dark:border-gray-2',
+          withBottomBorder && theme !== 'gray-8' && 'border-b border-gray-7 dark:border-gray-2',
           withBottomBorder && theme === 'gray-8' && 'border-b border-gray-new-20',
           { 'bg-gray-new-8': theme === 'gray-8' },
           { 'lg:bg-black': theme === 'black' },
@@ -127,11 +127,11 @@ const Header = forwardRef(
           <div className="flex space-x-5 lg:hidden">
             <Button
               className={clsx(
-                'relative !py-[11px] pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden',
+                'relative pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden',
                 theme === 'black-new' && '!bg-black-new'
               )}
               to={LINKS.github}
-              size="xs"
+              size="new-md"
               theme={isThemeBlack ? 'tertiary' : 'quaternary'}
               rel="noopener noreferrer"
               target="_blank"
@@ -145,12 +145,12 @@ const Header = forwardRef(
               <span>Star us</span>
             </Button>
             {isSignIn && (
-              <Button className="!py-[11px]" to={LINKS.dashboard} size="xs" theme="primary">
+              <Button to={LINKS.dashboard} size="new-md" theme="primary">
                 Sign in
               </Button>
             )}
             {!isSignIn && (
-              <Button className="!py-[11px]" to={LINKS.signup} size="xs" theme="primary">
+              <Button to={LINKS.signup} size="new-md" theme="primary">
                 Sign up
               </Button>
             )}
