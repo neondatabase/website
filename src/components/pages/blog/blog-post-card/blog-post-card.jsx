@@ -3,9 +3,28 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
-import { CATEGORY_COLORS, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
+import { BLOG_CATEGORY_BASE_PATH, CATEGORY_COLORS } from 'constants/blog';
 import LINKS from 'constants/links';
 import getFormattedDate from 'utils/get-formatted-date';
+
+const imageSizes = {
+  xl: {
+    width: 716,
+    height: 403,
+  },
+  lg: {
+    width: 716,
+    height: 403,
+  },
+  md: {
+    width: 464,
+    height: 260,
+  },
+  sm: {
+    width: 212,
+    height: 119,
+  },
+};
 
 const BlogPostCard = ({
   className,
@@ -18,6 +37,8 @@ const BlogPostCard = ({
   withAuthorPhoto = false,
   withImageHover = true,
   isPriority = false,
+  imageWidth = null,
+  imageHeight = null,
 }) => {
   const category = categories?.nodes[0];
   const postAuthor = authors?.[0]?.author || author;
@@ -60,8 +81,8 @@ const BlogPostCard = ({
               })}
               src={largeCover?.mediaItemUrl}
               alt={largeCover?.altText || title}
-              width={716}
-              height={403}
+              width={imageWidth || imageSizes[size].width}
+              height={imageHeight || imageSizes[size].height}
               quality="85"
               priority={isPriority}
             />
@@ -72,8 +93,8 @@ const BlogPostCard = ({
               })}
               src="/images/placeholder.jpg"
               alt=""
-              width={716}
-              height={403}
+              width={imageWidth || imageSizes[size].width}
+              height={imageHeight || imageSizes[size].height}
               priority={isPriority}
               aria-hidden
             />
@@ -188,6 +209,8 @@ const BlogPostCard = ({
 export const BlogPostCardPropTypes = {
   title: PropTypes.string,
   date: PropTypes.string,
+  imageWidth: PropTypes.number,
+  imageHeight: PropTypes.number,
   categories: PropTypes.shape({
     nodes: PropTypes.arrayOf(
       PropTypes.shape({
