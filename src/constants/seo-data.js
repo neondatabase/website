@@ -14,6 +14,9 @@ export default {
   },
   blog: {
     title: 'Our Blog — Neon',
+    description:
+      'Learn about Neon and how it can help you build better with Serverless Postgres by reading our blog posts.',
+    imagePath: '/images/social-previews/blog.jpg',
   },
   blogPost: ({ title, description }) => ({
     title,
