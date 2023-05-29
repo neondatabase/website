@@ -59,7 +59,7 @@ conn = psycopg2.connect(
     host='ep-wild-haze-482989.us-east-2.aws.neon.tech',
     port='5432',
     sslmode='verify-full',
-    sslrootcert='/path/to/your/root/certificate'
+    sslrootcert='/path/to/your/root.crt'
 )
 ```
 
@@ -111,7 +111,7 @@ The location of the root store varies by operating system or distribution. Here 
 
   Windows does not provide a file containing the CA roots that can be used by your driver. However, many popular programming languages used on Windows like C#, Java, or Go do not require the CA root path to be specified and will use the Windows internal system roots by default.
 
-  However, if you are using a language that requires specifying the CA root path, such as C or PHP, you can obtain a bundle of root certificates from the Mozilla CA Certificate program provided by the Curl project. You can download the bundle at https://curl.se/docs/caextract.html. After downloading the file, you will need to configure your driver to point to the bundle.
+  However, if you are using a language that requires specifying the CA root path, such as C or PHP, you can obtain a bundle of root certificates from the Mozilla CA Certificate program provided by the Curl project. You can download the bundle at [https://curl.se/docs/caextract.html](https://curl.se/docs/caextract.html). After downloading the file, you will need to configure your driver to point to the bundle.
 
 The system root certificate locations listed above may differ depending on the version, distribution, and configuration of your operating system. If you do not find the root certificates in these locations, refer to your operating system documentation.
 
