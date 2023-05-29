@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import CanonicalUrl from 'components/shared/seo/canonical-url';
+
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'localhost:3000';
 
 const defaultTitle = 'Neon — Serverless, Fault-Tolerant, Branchable Postgres';
@@ -29,6 +31,7 @@ const SEO = ({
         content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
       />
       <title>{title}</title>
+      <CanonicalUrl />
       <meta name="description" content={description} key="desc" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />

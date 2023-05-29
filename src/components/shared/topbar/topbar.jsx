@@ -11,11 +11,11 @@ const TopBar = () => (
     <span className="mr-4 truncate border-r border-black border-opacity-20 py-1 pr-4 text-sm font-semibold">
       Announcing autoscaling in feature-preview!
     </span>
-    <span className="inline-flex items-center text-sm font-bold xs:hidden">
+    <span className="inline-flex items-center text-sm font-bold sm:hidden">
       <span>Learn More</span>
       <ArrowRightIcon className="ml-1" />
     </span>
-    <ArrowRightIcon className="ml-2 hidden xs:flex" />
+    <ArrowRightIcon className="ml-2 hidden sm:flex" />
   </Link>
 );
 

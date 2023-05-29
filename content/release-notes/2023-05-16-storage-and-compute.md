@@ -16,4 +16,5 @@ label: 'Storage'
 
    </CodeBlock>
 
+
   For more information about this special connection option for PostgreSQL clients that do not support SNI, refer to our [connection workarounds](/docs/connect/connectivity-issues#workarounds) documentation.

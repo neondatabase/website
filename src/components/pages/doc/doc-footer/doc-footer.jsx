@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { useSessionStorage } from 'react-use';
+import useSessionStorage from 'react-use/lib/useSessionStorage';
 
 import Link from 'components/shared/link';
 import GitHubIcon from 'icons/github.inline.svg';

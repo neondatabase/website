@@ -457,7 +457,7 @@ const Calculator = () => {
             >
               {estimatedPrice >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </AnimatedButton>
-            <ul className="my-7 flex w-full flex-grow flex-col space-y-3.5 text-lg leading-none tracking-tight text-pricing-black lg:mt-2.5 md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2 sm:max-h-20 sm:flex-wrap sm:gap-y-6 sm:gap-x-2 sm:space-y-0">
+            <ul className="my-7 flex w-full flex-grow flex-col space-y-3.5 text-lg leading-none tracking-tight text-black-new lg:mt-2.5 md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2 sm:max-h-20 sm:flex-wrap sm:gap-y-6 sm:gap-x-2 sm:space-y-0">
               <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:w-1/2 sm:pl-0">
                 <CheckIcon
                   className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"

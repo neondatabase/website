@@ -49,9 +49,9 @@ The following example uses the default `neondb` database, a table named `custome
 
 4. From your `psql` prompt, load the data from the `customer.csv` file using the `\copy` option.
 
-    ```bash
-    \copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
-    ```
+   ```bash
+   \copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
+   ```
 
    If the command runs successfully, it returns the number of records copied to the database:
 

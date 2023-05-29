@@ -10,7 +10,7 @@ import MENUS from 'constants/menus.js';
 import ThemeSelect from './theme-select';
 
 const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) => {
-  const isDarkTheme = theme === 'black' || theme === 'pricing';
+  const isDarkTheme = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
 
   return (
     <footer
@@ -18,12 +18,9 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
         'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-black dark:text-white',
         !isDarkTheme && withTopBorder && 'border-t border-gray-7 dark:border-gray-2',
         isDarkTheme && withTopBorder && 'border-t border-gray-2',
-        // eslint-disable-next-line no-nested-ternary
-        isDarkTheme
-          ? theme === 'pricing'
-            ? 'border-gray-new-15 bg-pricing-black text-white'
-            : 'bg-black text-white'
-          : 'bg-white text-black'
+        { 'border-gray-new-15 bg-black-new text-white': theme === 'black-new' },
+        { 'bg-black text-white': theme === 'black' },
+        { 'bg-white text-black': theme === 'white' }
       )}
     >
       <Container className="flex justify-between py-10 xl:py-8" size="lg">
@@ -37,7 +34,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
           </div>
           <div
             className={clsx(
-              { 'tracking-tight text-gray-new-80': theme === 'pricing' },
+              { 'tracking-tight text-gray-new-80': theme === 'black-new' || theme === 'gray-8' },
               'space-y-[18px] leading-none'
             )}
           >
@@ -50,7 +47,10 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
             <div className={clsx('flex flex-col xl:w-full')} key={index}>
               <h3
                 className={clsx(
-                  { 'text-[13px] font-semibold text-gray-new-60': theme === 'pricing' },
+                  {
+                    'text-[13px] font-semibold text-gray-new-60':
+                      theme === 'black-new' || theme === 'gray-8',
+                  },
                   'relative text-sm font-bold uppercase leading-none tracking-wider'
                 )}
               >
@@ -68,7 +68,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                         target={isExternalUrl ? '_blank' : null}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
                       >
-                        {Icon && theme === 'pricing' && <Icon width={16} aria-hidden />}
+                        {Icon && theme === 'black-new' && <Icon width={16} aria-hidden />}
                         {text}
                       </Link>
                     </li>
@@ -86,7 +86,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
 Footer.propTypes = {
   isDocPage: PropTypes.bool,
   withTopBorder: PropTypes.bool,
-  theme: PropTypes.oneOf(['white', 'black', 'pricing']),
+  theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']),
 };
 
 export default Footer;
