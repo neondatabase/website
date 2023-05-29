@@ -15,7 +15,7 @@ const items = [
     className:
       'after:bg-[radial-gradient(circle,rgba(173,224,235,0.6)_0%,rgba(12,13,13,0.5)_110%)]',
     url: 'https://twitter.com/neondatabase/',
-    hoverColor: 'hover:outline-blue-80/60',
+    hoverColor: 'hover:after:border-blue-80/60',
   },
   {
     name: 'Stay ahead with <mark class="text-yellow-70">RSS</mark>',
@@ -25,7 +25,7 @@ const items = [
     className:
       'after:bg-[radial-gradient(circle,rgba(240,240,117,0.6)_0%,rgba(12,13,13,0.5)_110%)]',
     url: '/blog/rss.xml',
-    hoverColor: 'hover:outline-yellow-70/60',
+    hoverColor: 'hover:after:border-yellow-70/60',
   },
   {
     name: 'Neon on <mark class="text-pink-90">YouTube</mark>',
@@ -35,7 +35,7 @@ const items = [
     className:
       'after:bg-[radial-gradient(circle,rgba(255,204,229,0.6)_0%,rgba(12,13,13,0.5)_110%)]',
     url: 'https://www.youtube.com/channel/UCoMzQTJSIr7-RU1QbomQI2w',
-    hoverColor: 'hover:outline-pink-90/60',
+    hoverColor: 'hover:after:border-pink-90/60',
   },
 ];
 
@@ -50,40 +50,41 @@ const Communities = () => (
           ({ name, description, icon: Icon, background, className, url, hoverColor }, index) => {
             const isExternal = url.startsWith('http');
             return (
-              <li
-                className={clsx(
-                  'relative rounded-md after:absolute after:-inset-px after:rounded-md after:p-px after:transition-opacity after:duration-200 after:hover:opacity-0',
-                  className
-                )}
-                key={index}
-              >
+              <li key={index}>
                 <a
                   className={clsx(
-                    'relative z-10 flex h-full items-center justify-between overflow-hidden rounded-md bg-black-new px-7 py-6 outline outline-1 outline-transparent transition-[outline-color] duration-200 xl:flex-col xl:items-start xl:justify-normal xl:p-5 lg:p-4 md:flex-row md:items-center md:justify-between md:py-5',
-                    hoverColor
+                    'relative flex w-full rounded-md after:absolute after:-inset-px after:rounded-md after:border after:border-transparent after:p-px after:transition-colors after:duration-200',
+                    hoverColor,
+                    className
                   )}
                   href={url}
                   target={isExternal ? '_blank' : undefined}
                   rel={isExternal ? 'noopener noreferrer' : undefined}
                 >
-                  <img
-                    className="absolute right-0 -z-10 h-full w-auto object-cover"
-                    src={background}
-                    alt=""
-                    width={457}
-                    height={92}
-                    aria-hidden
-                  />
-                  <div className="xl:order-1 xl:mt-2 md:order-none">
-                    <h3
-                      className="text-2xl font-medium leading-none tracking-tighter xl:text-xl lg:text-lg [&_mark]:bg-transparent"
-                      dangerouslySetInnerHTML={{ __html: name }}
+                  <div
+                    className={clsx(
+                      'relative z-10 flex h-full w-full items-center justify-between overflow-hidden rounded-md bg-black-new px-7 py-6 xl:flex-col xl:items-start xl:justify-normal xl:p-5 lg:p-4 md:flex-row md:items-center md:justify-between md:py-5'
+                    )}
+                  >
+                    <img
+                      className="absolute right-0 -z-10 h-full w-auto object-cover"
+                      src={background}
+                      alt=""
+                      width={457}
+                      height={92}
+                      aria-hidden
                     />
-                    <p className="mt-2.5 text-sm leading-none tracking-[-0.02em] text-gray-new-70 xl:leading-tight">
-                      {description}
-                    </p>
+                    <div className="xl:order-1 xl:mt-2 md:order-none">
+                      <h3
+                        className="text-2xl font-medium leading-none tracking-tighter xl:text-xl lg:text-lg [&_mark]:bg-transparent"
+                        dangerouslySetInnerHTML={{ __html: name }}
+                      />
+                      <p className="mt-2.5 text-sm leading-none tracking-[-0.02em] text-gray-new-70 xl:leading-tight">
+                        {description}
+                      </p>
+                    </div>
+                    <Icon className="h-14 w-14 xl:h-12 xl:w-12 lg:h-11 lg:w-11" />
                   </div>
-                  <Icon className="h-14 w-14 xl:h-12 xl:w-12 lg:h-11 lg:w-11" />
                 </a>
               </li>
             );
