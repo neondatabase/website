@@ -17,7 +17,7 @@ const VideoList = ({ videos }) => (
           size="md"
           withImageHover={false}
           imageWidth={380}
-          imageHeight={213}
+          imageHeight={196}
           withAuthorPhoto
         />
       ))}
