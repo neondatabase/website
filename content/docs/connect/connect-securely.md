@@ -33,7 +33,11 @@ The required configuration for your connection depends on the client you are usi
 
 ## Connect from the psql client
 
-To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable to the location of your operating system's root certificates:
+To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable to the location of your operating system's root certificates. You can set this environment variable in your shell, typically bash or similar, using the export command. For example, if your root certificate is at `/path/to/root.crt`, you would set the variable like so:
+
+```bash
+export PGSSLROOTCERT="/path/to/root.crt"
+```
 
 Refer to [Location of system root certificates](#location-of-system-root-certificates) below to find the path to system root certificates for your operating system.
 
@@ -45,7 +49,9 @@ However, if the client application uses a non-standard PostgreSQL client, SSL/TL
 
 ### Location of system root certificates
 
-The location of root certificates varies depending on the operating system or distribution you are using. You should only configure a path to a CA root store if your client or driver  requires it. Here are some locations where you might find the required root certificates on popular operating systems:
+Neon uses public root certificates issued by [Let’s Encrypt](https://letsencrypt.org/). These certificates are usually available in a root store on your operating system. A root store is a collection of pre-downloaded root certificates from various Certificate Authorities (CAs). These are highly trusted CAs, and their certificates are typically shipped with operating systems and some applications.
+
+The location of the root store varies by operating system or distribution. Here are some locations where you might find the required root certificates on popular operating systems:
 
 - Debian, Ubuntu, Gentoo, etc.
 
