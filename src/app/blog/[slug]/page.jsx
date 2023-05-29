@@ -52,7 +52,7 @@ const BlogPage = async ({ params }) => {
       isHeaderSticky
     >
       <div className="safe-paddings bg-gray-new-8">
-        <article className="dark mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pt-16 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-12 xl:pb-32 lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
+        <article className="dark mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pb-40 pt-16 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
           <Hero
             className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
             title={title}
@@ -84,7 +84,7 @@ const BlogPage = async ({ params }) => {
       {isPreviewMode && (
         <a
           href={`/api/exit-preview?slug=${previewData.slug}&pageType=blog`}
-          className="t-base fixed left-5 bottom-5 inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-primary-1 px-[26px] py-[11px] text-center font-bold !leading-none text-black outline-none transition-colors duration-200 hover:bg-[#00e5bf]"
+          className="t-base fixed bottom-5 left-5 inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-primary-1 px-[26px] py-[11px] text-center font-bold !leading-none text-black outline-none transition-colors duration-200 hover:bg-[#00e5bf]"
         >
           Preview Mode
         </a>
@@ -102,3 +102,5 @@ export async function generateStaticParams() {
 }
 
 export default BlogPage;
+
+export const revalidate = 60;

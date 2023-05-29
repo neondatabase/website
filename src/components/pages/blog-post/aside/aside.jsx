@@ -51,7 +51,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
       })}
     </div>
     <h3 className="mt-16 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue-80 lg:hidden">
-      Related articles
+      More articles
     </h3>
     <ul className="mt-5 flex flex-col space-y-6 lg:hidden">
       {posts.map(({ title, slug, pageBlogPost: { authors, largeCover } }) => (
@@ -62,7 +62,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
                 <h1 className="font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 line-clamp-2 group-hover:text-green-45">
                   {title}
                 </h1>
-                <span className="mt-1.5 text-sm leading-none tracking-[-0.02em] text-gray-new-70">
+                <span className="mt-1.5 text-sm leading-none tracking-[-0.02em] text-gray-new-80">
                   {authors[0]?.author?.title}
                 </span>
               </div>

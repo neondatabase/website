@@ -9,6 +9,7 @@ module.exports = {
       '3xl': { max: '1920px' },
       '2xl': { max: '1599px' },
       xl: { max: '1279px' },
+      lt: { max: '1127px' },
       lg: { max: '1023px' },
       md: { max: '767px' },
       sm: { max: '639px' },
@@ -75,6 +76,9 @@ module.exports = {
       },
       brown: {
         70: '#F0B375',
+      },
+      pink: {
+        90: '#FFCCE5',
       },
       purple: {
         70: '#B8ADEB',

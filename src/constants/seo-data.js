@@ -50,4 +50,21 @@ export default {
       'Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible usage and volume-based plans.',
     imagePath: '/images/social-previews/pricing.jpg',
   },
+  category: ({ title, description }) => ({
+    title: `${title} Blog Posts — Neon`,
+    description,
+  }),
+};
+
+export const getBlogCategoryDescription = (category) => {
+  switch (category) {
+    case 'company':
+      return 'Stay updated on the latest Neon company new and partnership announcements. Explore our blog posts for valuable insights and stay ahead in the world of serverless Postgres.';
+    case 'engineering':
+      return 'Dive into the technical depths of Neon serverless Postgres. Optimize performance, scalability, and reliability. Explore our cutting-edge approach.';
+    case 'community':
+      return 'Join the vibrant serverless Postgres community. Engage in discussions, tutorials, and success stories. Connect with developers and industry experts.';
+    default:
+      return 'Learn about Neon and how it can help you build better with Serverless Postgres by reading our blog posts.';
+  }
 };

@@ -1,19 +1,8 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
-import CTA from '../cta';
-
 const Content = ({ html, className = null }) => (
-  <div className={clsx('prose-blog prose prose-lg', className)}>
-    {html}
-    {/* TODO: remove this CTA */}
-    <CTA
-      title="Want to improve your workflow?"
-      description="Create a database branch using Vercel"
-      buttonText="Sign up"
-      buttonUrl="/signup"
-    />
-  </div>
+  <div className={clsx('prose-blog prose prose-lg', className)}>{html}</div>
 );
 
 Content.propTypes = {

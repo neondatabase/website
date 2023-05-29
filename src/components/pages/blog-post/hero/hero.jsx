@@ -2,13 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import LINKS from 'constants/links';
-
-const categoriesColor = {
-  company: 'text-green-45 bg-green-45/10',
-  community: 'text-yellow-70 bg-yellow-70/10',
-  engineering: 'text-purple-70 bg-purple-70/10',
-};
+import { CATEGORY_BG_COLORS, CATEGORY_COLORS, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 
 const Hero = ({ title, description, date, category, className = null }) => (
   <div className={className}>
@@ -16,9 +10,10 @@ const Hero = ({ title, description, date, category, className = null }) => (
       <Link
         className={clsx(
           'mr-3 rounded-[40px] px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] sm:text-[10px]',
-          categoriesColor[category.slug] || 'bg-green-45/10 text-green-45'
+          CATEGORY_COLORS[category.slug] || 'text-green-45',
+          CATEGORY_BG_COLORS[category.slug] || 'bg-green-45/10'
         )}
-        to={`${LINKS.blog}${category.slug}`}
+        to={`${BLOG_CATEGORY_BASE_PATH}${category.slug}`}
       >
         {category.name}
       </Link>
