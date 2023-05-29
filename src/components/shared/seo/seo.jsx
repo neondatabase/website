@@ -1,3 +1,6 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'localhost:3000';
@@ -20,6 +23,8 @@ const SEO = ({
   imagePath = defaultImagePath,
 }) => {
   const currentImagePath = imagePath.startsWith('http') ? imagePath : SITE_URL + imagePath;
+  const pathname = usePathname();
+  const canonicalUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL + pathname;
 
   return (
     <>
@@ -29,10 +34,12 @@ const SEO = ({
         content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
       />
       <title>{title}</title>
+      <link rel="canonical" href={canonicalUrl} />
       <meta name="description" content={description} key="desc" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={currentImagePath} />
+      <meta property="og:url" content={currentImagePath} />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta name="twitter:card" content="summary_large_image" />
