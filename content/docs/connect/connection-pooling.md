@@ -5,7 +5,13 @@ redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
 ---
 
-Each PostgreSQL connection creates a new process in the operating system, which consumes resources. For this reason, PostgreSQL limits the number of open connections. Neon permits 100 simultaneous PostgreSQL connections, by default, with a `max_connections=100` setting, which is the typical default for this parameter. A small number of those connections are reserved for administrative purposes. A connection limit of 100 may not be sufficient for some applications. To increase the number of connections that Neon supports, you can enable connection pooling.
+Each PostgreSQL connection creates a new process in the operating system, which consumes resources. PostgreSQL limits the number of open connections for this reason. In Neon, the size of your compute determines the `max_connections` limit. The formula used to calculate `max_connections` is `RAM in bytes / 9531392 bytes`. For a Free Tier compute, which has 1 GB of RAM, this works out to approximately 100 connections. Larger computes offered with the Neon Pro plan have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports 1351 connections. You can check the `max_connections` limit for your compute by running `SHOW max_connections;` from the Neon SQL Editor or from a client connected to Neon.
+
+<Admonition type="note">
+When [Autoscaling](../introduction/autoscaling) is enabled, `max_connections` is calculated based on the minimum compute size that you configured.
+</Admonition>
+
+A small number of connections are reserved for administrative purposes. The `max_connections` limit may not be sufficient for some applications. To increase the number of connections that Neon supports, you can use connection pooling.
 
 <Admonition type="note">
 Connection pooling is not yet supported with [Autoscaling](../introduction/autoscaling) <b><sup>Beta</sup></b>. If you expect a large number of concurrent connections, we recommend using a **Fixed size** compute (the default), which supports connection pooling. For compute configuration instructions, see [Compute size and Autoscaling configuration](../manage/endpoints#compute-size-and-autoscaling-configuration).
@@ -45,9 +51,13 @@ Neon uses PgBouncer in _transaction mode_, which does not support PostgreSQL fea
 
 Some clients and applications may require connection pooling. For example, using Prisma Client with PgBouncer from a serverless function requires connection pooling. To ensure that a pooled connection is used, use a pooled connection string (described in the section above) and add the `?pgbouncer=true` flag to the connection string, as shown in the following example:
 
+<CodeBlock shouldWrap>
+
 ```text
 postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true
 ```
+
+</CodeBlock>
 
 Prisma Migrate, however, requires a direct connection to the database, and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in any environment that enables PgBouncer for connection pooling results in the following error:
 
@@ -72,10 +82,14 @@ This feature is available from Prisma version [4.10.0](https://github.com/prisma
 
 Next, update your `.env` file with both the `DATABASE_URL` and `DIRECT_URL` variables settings. As shown in the following example, set `DATABASE_URL` to the pooled connection string for your Neon database, and set `DIRECT_URL` to the non-pooled connection string.
 
+<CodeBlock shouldWrap>
+
 ```text
 DATABASE_URL="postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true"
 DIRECT_URL="postgres://casey:<password>@ep-square-sea-260584.us-east-2.aws.neon.tech:5432/neondb"
 ```
+
+</CodeBlock>
 
 For more information about using Prisma in a PgBouncer-enabled environment, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 
