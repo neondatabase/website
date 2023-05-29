@@ -85,6 +85,7 @@ const BlogPostCard = ({
               height={imageHeight || imageSizes[size].height}
               quality="85"
               priority={isPriority}
+              sizes="(max-width: 767px) 100vw"
             />
           ) : (
             <Image
@@ -96,6 +97,7 @@ const BlogPostCard = ({
               width={imageWidth || imageSizes[size].width}
               height={imageHeight || imageSizes[size].height}
               priority={isPriority}
+              sizes="(max-width: 767px) 100vw"
               aria-hidden
             />
           )}
