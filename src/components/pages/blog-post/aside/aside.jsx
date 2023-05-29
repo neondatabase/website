@@ -51,7 +51,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
       })}
     </div>
     <h3 className="mt-16 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue-80 lg:hidden">
-      Related articles
+      More articles
     </h3>
     <ul className="mt-5 flex flex-col space-y-6 lg:hidden">
       {posts.map(({ title, slug, pageBlogPost: { authors, largeCover } }) => (
