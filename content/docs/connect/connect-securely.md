@@ -40,16 +40,30 @@ The required configuration for your connection depends on the client you are usi
 To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable to the location of your operating system's root certificates. You can set this environment variable in your shell, typically bash or similar, using the export command. For example, if your root certificate is at `/path/to/root.crt`, you would set the variable like so:
 
 ```bash
-export PGSSLROOTCERT="/path/to/root.crt"
+export PGSSLROOTCERT="/path/to/your/root/certificate"
 ```
 
 Refer to [Location of system root certificates](#location-of-system-root-certificates) below to find the path to system root certificates for your operating system.
 
 ## Connect from other clients
 
-If the client application uses a popular PostgreSQL client library, such as `psycopg2` for Python or JDBC for Java, the library typically provides built-in support for SSL/TLS encryption and verification, allowing you to specify an `sslmode` setting in the connection parameters.
+If the client application uses a popular PostgreSQL client library, such as `psycopg2` for Python or JDBC for Java, the library typically provides built-in support for SSL/TLS encryption and verification, allowing you to configure an `sslmode` setting in the connection parameters. For example:
 
-However, if the client application uses a non-standard PostgreSQL client, SSL/TLS may not be enabled by default. In this case, you must manually configure the client to use SSL/TLS and specify the `sslmode` setting. Refer to the client or the client's driver documentation for how to configure the path to your operating system's root certificates.
+```python
+import psycopg2
+
+conn = psycopg2.connect(
+    dbname='your_database',
+    user='your_username',
+    password='your_password',
+    host='your_host',
+    port='your_port',
+    sslmode='verify-full',
+    sslrootcert='/path/to/your/root/certificate'
+)
+```
+
+However, if your client application uses a non-standard PostgreSQL client, SSL/TLS may not be enabled by default. In this case, you must manually configure the client to use SSL/TLS and specify an `sslmode` configuration. Refer to the client or the client's driver documentation for how to configure the path to your operating system's root certificates.
 
 ### Location of system root certificates
 
