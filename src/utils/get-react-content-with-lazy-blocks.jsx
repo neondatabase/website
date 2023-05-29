@@ -72,6 +72,7 @@ const sharedComponents = {
         quality={100}
         alt={props.alt || 'Post image'}
         priority={props.isPriority || false}
+        sizes="(max-width: 767px) 100vw"
       />
     );
   },
