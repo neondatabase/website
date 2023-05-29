@@ -1,6 +1,6 @@
 ---
 title: Create your first project
-subtitle: Create a Neon project in seconds with just a few clicks 
+subtitle: Create a Neon project in seconds with just a few clicks
 ---
 
 To create your first project:

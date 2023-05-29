@@ -40,16 +40,19 @@ const Header = forwardRef(
     },
     ref
   ) => {
-    const isThemeBlack = theme === 'black' || theme === 'pricing';
+    const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
 
     return (
       <header
         className={clsx(
           'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-black lg:relative lg:h-14',
-          // eslint-disable-next-line no-nested-ternary
-          isThemeBlack ? (theme === 'pricing' ? 'lg:bg-pricing-black' : 'lg:bg-black') : 'bg-white',
           isSticky && 'sticky top-0 z-50 md:relative',
-          withBottomBorder && 'border-b border-gray-7 dark:border-gray-2'
+          withBottomBorder && theme !== 'gray-8' && 'border-b border-gray-7 dark:border-gray-2',
+          withBottomBorder && theme === 'gray-8' && 'border-b border-gray-new-20',
+          { 'bg-gray-new-8': theme === 'gray-8' },
+          { 'lg:bg-black': theme === 'black' },
+          { 'lg:bg-black-new': theme === 'black-new' },
+          { 'bg-white': theme === 'white' }
         )}
         ref={ref}
       >
@@ -123,12 +126,9 @@ const Header = forwardRef(
 
           <div className="flex space-x-5 lg:hidden">
             <Button
-              className={clsx(
-                'relative py-[11px] pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden',
-                theme === 'pricing' && '!bg-pricing-black'
-              )}
+              className="relative pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden"
               to={LINKS.github}
-              size="xs"
+              size="new-md"
               theme={isThemeBlack ? 'tertiary' : 'quaternary'}
               rel="noopener noreferrer"
               target="_blank"
@@ -142,17 +142,17 @@ const Header = forwardRef(
               <span>Star us</span>
             </Button>
             {isSignIn && (
-              <Button className="py-[11px]" to={LINKS.dashboard} size="xs" theme="primary">
+              <Button to={LINKS.dashboard} size="new-md" theme="primary">
                 Sign in
               </Button>
             )}
             {!isSignIn && (
-              <Button className="py-[11px]" to={LINKS.signup} size="xs" theme="primary">
+              <Button to={LINKS.signup} size="new-md" theme="primary">
                 Sign up
               </Button>
             )}
           </div>
-          <div className=" hidden items-center lg:flex">
+          <div className="hidden items-center lg:flex">
             {isDocPage && (
               <button
                 className="mr-5 flex h-5 w-5 items-center"
@@ -176,7 +176,7 @@ const Header = forwardRef(
 );
 
 Header.propTypes = {
-  theme: PropTypes.oneOf(['white', 'black', 'pricing']).isRequired,
+  theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
   withBottomBorder: PropTypes.bool,
   isMobileMenuOpen: PropTypes.bool,
   onBurgerClick: PropTypes.func.isRequired,

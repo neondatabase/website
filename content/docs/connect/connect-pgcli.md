@@ -21,7 +21,7 @@ pgcli --help
 
 ## Connect to Neon
 
-The easiest way to connect to Neon using the `pgcli` client is with a connection string, which you can obtain  from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
+The easiest way to connect to Neon using the `pgcli` client is with a connection string, which you can obtain from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
