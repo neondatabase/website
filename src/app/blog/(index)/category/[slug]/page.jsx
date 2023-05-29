@@ -17,7 +17,6 @@ export default async function BlogCategoryPage({ params: { slug } }) {
             key={index}
             withAuthorPhoto={index !== 0}
             isPriority={index === 0}
-            S
           />
         ))}
       </div>
