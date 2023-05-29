@@ -2,8 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import { CATEGORY_BG_COLORS, CATEGORY_COLORS } from 'constants/blog';
-import LINKS from 'constants/links';
+import { CATEGORY_BG_COLORS, CATEGORY_COLORS, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 
 const Hero = ({ title, description, date, category, className = null }) => (
   <div className={className}>
@@ -14,7 +13,7 @@ const Hero = ({ title, description, date, category, className = null }) => (
           CATEGORY_COLORS[category.slug] || 'text-green-45',
           CATEGORY_BG_COLORS[category.slug] || 'bg-green-45/10'
         )}
-        to={`${LINKS.blog}${category.slug}`}
+        to={`${BLOG_CATEGORY_BASE_PATH}${category.slug}`}
       >
         {category.name}
       </Link>
