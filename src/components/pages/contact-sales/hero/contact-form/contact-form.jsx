@@ -31,7 +31,7 @@ const ContactForm = ({ formState, setFormState }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log(errors);
+
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
   const [formError, setFormError] = useState('');
