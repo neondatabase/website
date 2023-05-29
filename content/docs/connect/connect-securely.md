@@ -15,9 +15,13 @@ However, there are different levels of protection when using SSL/TLS encryption,
 
 When connecting to Neon or any PostgreSQL database, the `sslmode` parameter setting determines the security of the connection. You can append the `sslmode` parameter to your Neon connection string as shown:
 
+<CodeBlock shouldWrap>
+
 ```text
 postgres://sally:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?sslmode=verify-full
 ```
+
+</CodeBlock>
 
 Neon supports the following `sslmode` settings, in order of least to most secure.
 
