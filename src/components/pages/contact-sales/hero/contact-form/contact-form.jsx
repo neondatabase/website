@@ -23,8 +23,6 @@ const schema = yup
   })
   .required();
 
-console.log(schema);
-
 const ContactForm = ({ formState, setFormState }) => {
   const {
     register,
@@ -33,6 +31,7 @@ const ContactForm = ({ formState, setFormState }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  console.log(errors);
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
   const [formError, setFormError] = useState('');

@@ -1,5 +1,6 @@
-import CanonicalUrl from 'components/shared/seo/canonical';
 import PropTypes from 'prop-types';
+
+import CanonicalUrl from 'components/shared/seo/canonical-url';
 
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'localhost:3000';
 
