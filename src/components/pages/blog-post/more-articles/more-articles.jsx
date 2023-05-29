@@ -2,8 +2,6 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import BlogPostCard from 'components/pages/blog/blog-post-card';
-import Link from 'components/shared/link';
-import LINKS from 'constants/links';
 
 const MoreArticles = ({ className = null, posts }) => (
   <section className={clsx('more-articles flex flex-col', className)}>
@@ -19,14 +17,6 @@ const MoreArticles = ({ className = null, posts }) => (
         </li>
       ))}
     </ul>
-    <Link
-      className="-mt-1 ml-auto inline-flex items-center text-sm font-medium leading-none tracking-[-0.02em] xl:mt-0"
-      theme="blue"
-      to={LINKS.blog}
-      withArrow
-    >
-      All News
-    </Link>
   </section>
 );
 

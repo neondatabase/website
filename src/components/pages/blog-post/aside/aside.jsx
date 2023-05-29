@@ -72,7 +72,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
                   src={largeCover?.mediaItemUrl}
                   width={208}
                   height={128}
-                  quality="95"
+                  quality={85}
                   alt={largeCover?.altText || title}
                 />
               ) : (
