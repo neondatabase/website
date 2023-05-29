@@ -18,7 +18,7 @@ When connecting to Neon or any PostgreSQL database, the `sslmode` parameter sett
 <CodeBlock shouldWrap>
 
 ```text
-postgres://sally:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?sslmode=verify-full
+postgres://<user>:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?sslmode=verify-full
 ```
 
 </CodeBlock>
@@ -40,7 +40,7 @@ The required configuration for your connection depends on the client you are usi
 To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable to the location of your operating system's root certificates. You can set this environment variable in your shell, typically bash or similar, using the export command. For example, if your root certificate is at `/path/to/root.crt`, you would set the variable like so:
 
 ```bash
-export PGSSLROOTCERT="/path/to/your/root/certificate"
+export PGSSLROOTCERT="/path/to/your/root.crt"
 ```
 
 Refer to [Location of system root certificates](#location-of-system-root-certificates) below to find the path to system root certificates for your operating system.
@@ -53,11 +53,11 @@ If the client application uses a popular PostgreSQL client library, such as `psy
 import psycopg2
 
 conn = psycopg2.connect(
-    dbname='your_database',
-    user='your_username',
-    password='your_password',
-    host='your_host',
-    port='your_port',
+    dbname='<dbname>',
+    user='<username>',
+    password='<password>',
+    host='ep-wild-haze-482989.us-east-2.aws.neon.tech',
+    port='5432',
     sslmode='verify-full',
     sslrootcert='/path/to/your/root/certificate'
 )
