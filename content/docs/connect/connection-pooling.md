@@ -8,7 +8,7 @@ redirectFrom:
 Each PostgreSQL connection creates a new process in the operating system, which consumes resources. PostgreSQL limits the number of open connections for this reason. In Neon, the size of your compute determines the `max_connections` limit. The formula used to calculate `max_connections` is `RAM in bytes / 9531392 bytes`. For a Free Tier compute, which has 1 GB of RAM, this works out to approximately 100 connections. Larger computes offered with the Neon Pro plan have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports 1351 connections. You can check the `max_connections` limit for your compute by running `SHOW max_connections;` from the Neon SQL Editor or from a client connected to Neon.
 
 <Admonition type="note">
-When [Autoscaling](../introduction/autoscaling) is enabled, `max_connections` is calculated based on the minimum compute size that you configured.
+When [Autoscaling](../introduction/autoscaling) is enabled, `max_connections` is calculated based on the minimum compute size you selected in your Autoscaling configuration.
 </Admonition>
 
 A small number of connections are reserved for administrative purposes. The `max_connections` limit may not be sufficient for some applications. To increase the number of connections that Neon supports, you can use connection pooling.
