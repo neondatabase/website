@@ -127,7 +127,7 @@ const Header = forwardRef(
           <div className="flex space-x-5 lg:hidden">
             <Button
               className={clsx(
-                'relative py-[11px] pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden',
+                'relative !py-[11px] pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden',
                 theme === 'black-new' && '!bg-black-new'
               )}
               to={LINKS.github}
@@ -145,17 +145,17 @@ const Header = forwardRef(
               <span>Star us</span>
             </Button>
             {isSignIn && (
-              <Button className="py-[11px]" to={LINKS.dashboard} size="xs" theme="primary">
+              <Button className="!py-[11px]" to={LINKS.dashboard} size="xs" theme="primary">
                 Sign in
               </Button>
             )}
             {!isSignIn && (
-              <Button className="py-[11px]" to={LINKS.signup} size="xs" theme="primary">
+              <Button className="!py-[11px]" to={LINKS.signup} size="xs" theme="primary">
                 Sign up
               </Button>
             )}
           </div>
-          <div className=" hidden items-center lg:flex">
+          <div className="hidden items-center lg:flex">
             {isDocPage && (
               <button
                 className="mr-5 flex h-5 w-5 items-center"
