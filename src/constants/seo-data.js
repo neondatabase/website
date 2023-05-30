@@ -16,6 +16,13 @@ export default {
     imagePath: '/images/social-previews/careers.jpg',
     pathname: LINKS.careers,
   },
+  blog: {
+    title: 'Our Blog — Neon',
+    description:
+      'Learn about Neon and how it can help you build better with Serverless Postgres by reading our blog posts.',
+    imagePath: '/images/social-previews/blog.jpg',
+    pathname: LINKS.blog,
+  },
   404: {
     title: 'Page Not Found — Neon',
   },
