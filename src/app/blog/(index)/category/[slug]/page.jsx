@@ -14,11 +14,11 @@ export default async function BlogCategoryPage({ params: { slug } }) {
             className={index === 0 ? 'col-span-full' : ''}
             {...post}
             size={index === 0 ? 'xl' : 'md'}
-            key={index}
+            key={post.slug}
             withAuthorPhoto={index !== 0}
             isPriority={index === 0}
             imageWidth={index === 0 ? 716 : 380}
-            imageHeight={index === 0 ? 403 : 213}
+            imageHeight={index === 0 ? 403 : 196}
           />
         ))}
       </div>

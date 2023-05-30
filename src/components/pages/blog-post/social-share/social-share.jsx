@@ -4,9 +4,9 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { LinkedinShareButton, TwitterShareButton, FacebookShareButton } from 'react-share';
 
-import FacebookIcon from './images/facebook.inline.svg';
-import LinkedinIcon from './images/linkedin.inline.svg';
-import TwitterIcon from './images/twitter.inline.svg';
+import FacebookIcon from 'icons/facebook-sm.inline.svg';
+import LinkedinIcon from 'icons/linkedin-sm.inline.svg';
+import TwitterIcon from 'icons/twitter-sm.inline.svg';
 
 const links = [
   {
