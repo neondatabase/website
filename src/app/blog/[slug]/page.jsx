@@ -32,7 +32,7 @@ const BlogPage = async ({ params }) => {
   if (!post) return notFound();
 
   const { slug, title, content, pageBlogPost, date, categories } = post;
-  const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${LINKS.blog}${slug}`;
+  const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${LINKS.blog}/${slug}`;
   const formattedDate = getFormattedDate(date);
 
   const contentWithLazyBlocks = getReactContentWithLazyBlocks(
@@ -117,7 +117,7 @@ export async function generateMetadata({ params }) {
     description: opengraphDescription || metaDesc,
     keywords: metaKeywords,
     robotsNoindex: metaRobotsNoindex,
-    pathname: `${LINKS.blog}${slug}`,
+    pathname: `${LINKS.blog}/${slug}`,
     imagePath: twitterImage?.mediaItemUrl,
   });
 }
