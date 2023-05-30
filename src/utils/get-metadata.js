@@ -22,6 +22,7 @@ export default function getMetadata({
   const metaDescription = description || DEFAULT_DESCRIPTION;
 
   const siteName = 'Neon';
+  const robots = robotsNoindex === 'noindex' ? { index: false } : null;
 
   return {
     title: metaTitle,
@@ -34,9 +35,7 @@ export default function getMetadata({
     },
     manifest: `${SITE_URL}/manifest.json`,
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
-    robots: {
-      index: robotsNoindex ? robotsNoindex === 'index' : true,
-    },
+    robots,
     icons: {
       icon: '/favicon/favicon.png',
       apple: [
