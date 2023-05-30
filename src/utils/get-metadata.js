@@ -1,30 +1,41 @@
+import SEO_DATA from 'constants/seo-data';
+
 const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
+const DEFAULT_TITLE = SEO_DATA.index.title;
+const DEFAULT_DESCRIPTION = SEO_DATA.index.description;
 
 export default function getMetadata({
   title,
   description,
   keywords,
   robotsNoindex,
+  rssPathname = null,
   pathname,
   imagePath = DEFAULT_IMAGE_PATH,
 }) {
   const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
   const canonicalUrl = SITE_URL + pathname;
   const imageUrl = imagePath?.startsWith('http') ? imagePath : SITE_URL + imagePath;
-  const currentImageUrl = imagePath ? imageUrl : `${SITE_URL}${DEFAULT_IMAGE_PATH}`;
+
+  const metaImageUrl = imagePath ? imageUrl : `${SITE_URL}${DEFAULT_IMAGE_PATH}`;
+  const metaTitle = title || DEFAULT_TITLE;
+  const metaDescription = description || DEFAULT_DESCRIPTION;
 
   const siteName = 'Neon';
 
   return {
-    title,
-    description,
+    title: metaTitle,
+    description: metaDescription,
     alternates: {
       canonical: canonicalUrl,
+      types: {
+        'application/rss+xml': rssPathname ? `${SITE_URL}${rssPathname}` : null,
+      },
     },
     manifest: `${SITE_URL}/manifest.json`,
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots: {
-      index: robotsNoindex === 'index',
+      index: robotsNoindex ? robotsNoindex === 'index' : true,
     },
     icons: {
       icon: '/favicon/favicon.png',
@@ -41,23 +52,23 @@ export default function getMetadata({
       ],
     },
     openGraph: {
-      title,
-      description,
+      title: metaTitle,
+      description: metaDescription,
       url: canonicalUrl,
       siteName,
       images: [
         {
-          url: currentImageUrl,
+          url: metaImageUrl,
           alt: siteName,
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title,
-      description,
+      title: metaTitle,
+      description: metaDescription,
       images: {
-        url: currentImageUrl,
+        url: metaImageUrl,
         alt: siteName,
       },
     },

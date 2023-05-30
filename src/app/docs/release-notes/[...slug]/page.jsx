@@ -8,6 +8,7 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import { RELEASE_NOTES_BASE_PATH, RELEASE_NOTES_SLUG_REGEX } from 'constants/docs';
 import { getAllReleaseNotes, getPostBySlug, RELEASE_NOTES_DIR_PATH } from 'utils/api-docs';
+import getMetadata from 'utils/get-metadata';
 import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 import serializeMdx from 'utils/serialize-mdx';
@@ -21,6 +22,24 @@ export async function generateStaticParams() {
     return {
       slug: slugsArray,
     };
+  });
+}
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+
+  let label = '';
+  const currentSlug = slug.join('/');
+  const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
+
+  if (isReleaseNotePage) {
+    const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
+    label = capitalisedCategory;
+  }
+
+  return getMetadata({
+    title: `${isReleaseNotePage ? `${label} release` : 'Release notes'} - Neon`,
+    pathname: `${RELEASE_NOTES_BASE_PATH}${currentSlug}`,
   });
 }
 

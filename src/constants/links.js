@@ -22,4 +22,5 @@ export default {
   contactSales: '/contact-sales/',
   pricing: '/pricing/',
   support: '/docs/introduction/support',
+  developerDays1: '/developer-days-1/',
 };

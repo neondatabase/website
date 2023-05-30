@@ -13,6 +13,7 @@ import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData } from 'utils/api-posts';
 import getFormattedDate from 'utils/get-formatted-date';
+import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
 const BlogPage = async ({ params }) => {
@@ -92,6 +93,34 @@ const BlogPage = async ({ params }) => {
     </Layout>
   );
 };
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  const { post } = await getWpPostBySlug(slug);
+
+  if (!post) return notFound();
+
+  const {
+    seo: {
+      title,
+      metaDesc,
+      metaKeywords,
+      metaRobotsNoindex,
+      opengraphTitle,
+      opengraphDescription,
+      twitterImage,
+    },
+  } = post;
+
+  return getMetadata({
+    title: opengraphTitle || title,
+    description: opengraphDescription || metaDesc,
+    keywords: metaKeywords,
+    robotsNoindex: metaRobotsNoindex,
+    pathname: `${LINKS.blog}${slug}`,
+    imagePath: twitterImage?.mediaItemUrl,
+  });
+}
 
 export async function generateStaticParams() {
   const posts = await getAllWpPosts();
