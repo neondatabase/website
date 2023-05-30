@@ -15,9 +15,13 @@ However, there are different levels of protection when using SSL/TLS encryption,
 
 When connecting to Neon or any PostgreSQL database, the `sslmode` parameter setting determines the security of the connection. You can append the `sslmode` parameter to your Neon connection string as shown:
 
+<CodeBlock shouldWrap>
+
 ```text
-postgres://sally:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?sslmode=verify-full
+postgres://<user>:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?sslmode=verify-full
 ```
+
+</CodeBlock>
 
 Neon supports the following `sslmode` settings, in order of least to most secure.
 
@@ -33,19 +37,39 @@ The required configuration for your connection depends on the client you are usi
 
 ## Connect from the psql client
 
-To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable to the location of your operating system's root certificates:
+To connect from the `psql` command-line client with `sslmode=verify-full`, provide the path to your system root certificates by setting the `PGSSLROOTCERT` variable to the location of your operating system's root certificates. You can set this environment variable in your shell, typically bash or similar, using the export command. For example, if your root certificate is at `/path/to/root.crt`, you would set the variable like so:
+
+```bash
+export PGSSLROOTCERT="/path/to/your/root.crt"
+```
 
 Refer to [Location of system root certificates](#location-of-system-root-certificates) below to find the path to system root certificates for your operating system.
 
 ## Connect from other clients
 
-If the client application uses a popular PostgreSQL client library, such as `psycopg2` for Python or JDBC for Java, the library typically provides built-in support for SSL/TLS encryption and verification, allowing you to specify an `sslmode` setting in the connection parameters.
+If the client application uses a popular PostgreSQL client library, such as `psycopg2` for Python or JDBC for Java, the library typically provides built-in support for SSL/TLS encryption and verification, allowing you to configure an `sslmode` setting in the connection parameters. For example:
 
-However, if the client application uses a non-standard PostgreSQL client, SSL/TLS may not be enabled by default. In this case, you must manually configure the client to use SSL/TLS and specify the `sslmode` setting. Refer to the client or the client's driver documentation for how to configure the path to your operating system's root certificates.
+```python
+import psycopg2
+
+conn = psycopg2.connect(
+    dbname='<dbname>',
+    user='<username>',
+    password='<password>',
+    host='ep-wild-haze-482989.us-east-2.aws.neon.tech',
+    port='5432',
+    sslmode='verify-full',
+    sslrootcert='/path/to/your/root.crt'
+)
+```
+
+However, if your client application uses a non-standard PostgreSQL client, SSL/TLS may not be enabled by default. In this case, you must manually configure the client to use SSL/TLS and specify an `sslmode` configuration. Refer to the client or the client's driver documentation for how to configure the path to your operating system's root certificates.
 
 ### Location of system root certificates
 
-The location of root certificates varies depending on the operating system or distribution you are using. You should only configure a path to a CA root store if your client or driver  requires it. Here are some locations where you might find the required root certificates on popular operating systems:
+Neon uses public root certificates issued by [Let’s Encrypt](https://letsencrypt.org/). These certificates are usually available in a root store on your operating system. A root store is a collection of pre-downloaded root certificates from various Certificate Authorities (CAs). These are highly trusted CAs, and their certificates are typically shipped with operating systems and some applications.
+
+The location of the root store varies by operating system or distribution. Here are some locations where you might find the required root certificates on popular operating systems:
 
 - Debian, Ubuntu, Gentoo, etc.
 
@@ -87,7 +111,7 @@ The location of root certificates varies depending on the operating system or di
 
   Windows does not provide a file containing the CA roots that can be used by your driver. However, many popular programming languages used on Windows like C#, Java, or Go do not require the CA root path to be specified and will use the Windows internal system roots by default.
 
-  However, if you are using a language that requires specifying the CA root path, such as C or PHP, you can obtain a bundle of root certificates from the Mozilla CA Certificate program provided by the Curl project. You can download the bundle at https://curl.se/docs/caextract.html. After downloading the file, you will need to configure your driver to point to the bundle.
+  However, if you are using a language that requires specifying the CA root path, such as C or PHP, you can obtain a bundle of root certificates from the Mozilla CA Certificate program provided by the Curl project. You can download the bundle at [https://curl.se/docs/caextract.html](https://curl.se/docs/caextract.html). After downloading the file, you will need to configure your driver to point to the bundle.
 
 The system root certificate locations listed above may differ depending on the version, distribution, and configuration of your operating system. If you do not find the root certificates in these locations, refer to your operating system documentation.
 
