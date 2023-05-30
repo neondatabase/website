@@ -1,13 +1,25 @@
 @layer base {
   body {
-    @apply relative min-w-[320px] font-sans text-black antialiased;
+    @apply relative min-w-[320px] !overflow-x-hidden font-sans text-black antialiased;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number'] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield !important;
   }
 }
 
 @layer components {
   .label-secondary-2 {
     @apply rounded-[40px] bg-secondary-2 py-2 px-4 text-xs font-bold uppercase leading-none text-black;
+  }
+
+  .slider-track + span,
+  .slider-track > span {
+    transition: all 0.3s ease-out;
   }
 }
 
@@ -17,4 +29,18 @@
       @apply border-b border-transparent text-primary-1 transition-[border-color] duration-200 hover:border-primary-1;
     }
   }
+}
+
+@keyframes lineAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-150px);
+  }
+}
+
+.button-line-animation {
+  animation: lineAnimation 5s linear infinite;
+  animation-timing-function: steps(75);
 }

@@ -9,11 +9,11 @@ Neon is protocol and application-compatible with PostgreSQL. However, when using
 
 ## PostgreSQL versions
 
-Neon cloud service is currently compatible with PostgreSQL 14 and PostgreSQL 15. You can select the PostgreSQL version you want to use when creating a Neon project. PostgreSQL 15 selected by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects).
+Neon cloud service is currently compatible with PostgreSQL 14 and PostgreSQL 15. You can select the PostgreSQL version you want to use when creating a Neon project. PostgreSQL 15 is selected, by default. For information about creating a Neon project, See [Manage projects](../manage/projects).
 
 ## Permissions and extension support
 
-Neon cloud service does not currently provide roles with access permissions other than those granted to standard database owners in PostgreSQL. Therefore, Neon roles cannot access replication methods, create additional roles from a PostgreSQL connection, or install PostgreSQL extensions other than those permitted by Neon. For information about the PostgreSQL extensions that Neon supports, see [PostgreSQL Extensions](/docs/reference/pg-extensions).
+The Neon cloud service does not currently provide roles with access permissions other than those granted to standard database owners in PostgreSQL. Therefore, Neon roles cannot access replication methods, create additional roles from a PostgreSQL connection, or install PostgreSQL extensions other than those permitted by Neon. For information about the PostgreSQL extensions that Neon supports, see [PostgreSQL Extensions](../extensions/pg-extensions).
 
 <a id="default-parameters/"></a>
 
@@ -24,17 +24,17 @@ The following table lists Neon PostgreSQL parameter settings that may differ fro
 | Parameter       | Value   | Note                                                                              |
 | --------------- | ------- | --------------------------------------------------------------------------------- |
 | fsync           | off     | Neon syncs data to the Neon Storage Engine to store your data safely and reliably |
-| max_connections |         | The value depends on compute size. Set to 100 for the Technical Preview.          |
+| max_connections |         | The value depends on compute size. Set to 100 for Neon.          |
 | shared_buffers  |         | The value depends on compute size                                                 |
 | wal_level       | replica | Logical replication is currently not supported                                    |
 
 <Admonition type="note">
-You can enable connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling]../connect/connection-pooling).
 </Admonition>
 
 ## Unlogged tables
 
-Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restart (including when compute becomes idle). This is unlike a standalone PostgreSQL installation, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local storage size.
+Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restarts (including when a Neon compute instance is placed into an `Idle` state after a period of inactivity). This is unlike a standalone PostgreSQL installation, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local storage size.
 
 ## Spill and index build handling
 
@@ -50,7 +50,7 @@ The Neon cloud service automatically closes idle connections after a period of i
 
 ## Statistics collection
 
-Statistics collected by the PostgreSQL [cumulative statistics system](https://www.postgresql.org/docs/14/monitoring-stats.html) are currently not saved when the Neon compute node is suspended due to inactivity or restarted. For information about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/).
+Statistics collected by the PostgreSQL [cumulative statistics system](https://www.postgresql.org/docs/14/monitoring-stats.html) are currently not saved when the Neon compute node is placed into an `Idle` state due to inactivity or restarted. For information about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/).
 
 ## Need help?
 

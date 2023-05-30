@@ -31,11 +31,6 @@ const items = [
       'Discounts are applied for longer duration contracts as well as bulk consumption purchases.',
   },
   {
-    question: 'Are there any setup fees or additional charges?',
-    answer:
-      'No. There are no hidden setup fees or extra charges. For usage-based plans, Neon charges on the four metrics described on our <a href="/docs/introduction/billing">Billing</a> page: Compute time, Project storage, Written Data, and Data Transfer.',
-  },
-  {
     question: 'Are there any limits or restrictions on usage?',
     answer:
       'Neon places implements limits to protect against unintended usage. For example, a usage-based plan may offer unlimited projects, compute, and storage, but Neon places safety limits on those resources to protect your account and prevent abuse. For more information, see <a href="/docs/introduction/billing">Billing</a>.',
@@ -48,7 +43,7 @@ const items = [
   {
     question: 'How secure is the payment process?',
     answer:
-      'Neon payment processing is powered by <a href="https://stripe.com/" target="_blank" rel="noreferrer noopener">Stripe</a>, which is a a certified PCI Service Provider Level 1. For more information, refer to <a href="https://stripe.com/docs/security" target="_blank" rel="noreferrer noopener">Security at Stripe</a>.',
+      'Neon payment processing is powered by <a href="https://stripe.com/" target="_blank" rel="noreferrer noopener">Stripe</a>, which is a certified PCI Service Provider Level 1. For more information, refer to <a href="https://stripe.com/docs/security" target="_blank" rel="noreferrer noopener">Security at Stripe</a>.',
   },
   {
     question: 'Where should I direct pricing-related questions?',
@@ -58,16 +53,12 @@ const items = [
 ];
 
 const Faq = () => (
-  <section className="faq safe-paddings my-40 2xl:my-32 xl:my-28 lg:my-24 md:my-20">
-    <Container className="grid-gap-x grid grid-cols-12" size="mdDoc">
-      <Heading
-        className="col-span-4 !leading-dense xl:col-start-2 xl:col-end-12 lg:col-span-full lg:text-5xl md:text-[36px]"
-        tag="h2"
-        size="lg"
-      >
+  <section className="faq safe-paddings bg-gray-new-8 py-40 2xl:py-32 xl:py-28 lg:py-20 md:py-16">
+    <Container className="max-w-[968px]" size="mdDoc">
+      <Heading className="text-center" tag="h2" size="2sm">
         Frequently Asked Questions
       </Heading>
-      <ul className="col-start-6 col-end-13 pt-2.5 2xl:col-start-5 xl:col-start-2 xl:col-end-12 xl:pt-3.5 lg:col-span-full">
+      <ul className="mt-12 xl:mx-auto xl:mt-10 xl:max-w-3xl lg:mt-7 md:mt-6">
         {items.map((item, index) => (
           <Item {...item} key={index} index={index} />
         ))}

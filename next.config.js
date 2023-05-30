@@ -7,6 +7,7 @@ module.exports = {
     appDir: true,
   },
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -61,6 +62,11 @@ module.exports = {
       {
         source: '/driver',
         destination: '/docs/serverless/serverless-driver',
+        permanent: false,
+      },
+      {
+        source: '/blog/postgres-autoscaling',
+        destination: '/blog/scaling-serverless-postgres',
         permanent: false,
       },
       ...docsRedirects,

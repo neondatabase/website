@@ -4,11 +4,11 @@ import clsx from 'clsx';
 import { motion, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
-import { useWindowSize } from 'react-use';
 
 import Item from 'components/pages/doc/sidebar/item';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
+import useWindowSize from 'hooks/use-window-size';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 const ANIMATION_DURATION = 0.2;
@@ -83,7 +83,7 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
 
       <motion.ul
         className={clsx(
-          'fixed inset-x-0 top-[146px] bottom-0 z-20 overflow-y-scroll bg-white pl-8 pr-[29px] pt-2 pb-4 dark:bg-gray-1 md:pl-4 md:pr-[13px]'
+          'fixed inset-x-0 bottom-0 top-[146px] z-20 overflow-y-scroll bg-white pb-4 pl-8 pr-[29px] pt-2 dark:bg-gray-1 md:pl-4 md:pr-[13px]'
         )}
         initial="from"
         animate={controls}

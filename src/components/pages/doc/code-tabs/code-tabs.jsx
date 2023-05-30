@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 
 import CodeBlock from 'components/shared/code-block';
 
-const CodeTabs = ({ children = null, labels = [] }) => {
+const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
@@ -39,7 +39,11 @@ const CodeTabs = ({ children = null, labels = [] }) => {
         const { children, className } = child.props?.children.props ?? {};
 
         return (
-          <CodeBlock key={index} className={clsx(className, 'code-tab')} showLineNumbers>
+          <CodeBlock
+            key={index}
+            className={clsx(className, { 'code-wrap': shouldWrap }, 'code-tab')}
+            showLineNumbers
+          >
             {children}
           </CodeBlock>
         );
@@ -50,6 +54,7 @@ const CodeTabs = ({ children = null, labels = [] }) => {
 
 CodeTabs.propTypes = {
   children: PropTypes.node,
+  shouldWrap: PropTypes.bool,
   labels: PropTypes.arrayOf(PropTypes.string),
 };
 

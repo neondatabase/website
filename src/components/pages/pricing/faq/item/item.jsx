@@ -1,10 +1,13 @@
 'use client';
 
+import clsx from 'clsx';
 import { LazyMotion, m, domAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Link from 'components/shared/link/link';
+
+import ArrowIcon from '../svg/arrow.inline.svg';
 
 const variantsAnimation = {
   open: {
@@ -20,22 +23,30 @@ const variantsAnimation = {
 };
 
 const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
-  const [isOpen, setIsOpen] = useState(index === 0);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
   };
 
   return (
-    <li className="border-b border-gray-2 py-6 xl:py-5 lg:py-4">
+    <li className="border-b border-gray-new-20 py-3.5">
       <button
-        className="w-full text-left"
+        className="flex w-full items-start gap-4 text-left"
         type="button"
         aria-expanded={isOpen}
         aria-controls={index}
         onClick={handleOpen}
       >
-        <h3 className="text-2xl font-bold leading-tight lg:text-xl">{question}</h3>
+        <ArrowIcon
+          className={clsx('shrink-0 text-pricing-primary-1 transition duration-200', {
+            'rotate-90 fill-pricing-primary-1 !text-black-new': isOpen,
+          })}
+          aria-hidden
+        />
+        <h3 className="text-[22px] font-medium leading-tight tracking-tight xl:text-xl md:text-lg">
+          {question}
+        </h3>
       </button>
       <LazyMotion features={domAnimation}>
         <m.div
@@ -48,12 +59,15 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
           }}
         >
           <p
-            className="with-link-primary pt-5 text-xl xl:pt-[18px] xl:text-lg lg:pt-3.5 md:pt-3"
+            className={clsx(
+              'with-link-primary pl-[42px] pr-24 pt-2.5 text-base font-light leading-tight text-gray-new-94 xl:pr-12 lg:pr-0',
+              linkText && linkUrl ? 'pb-0' : 'pb-2.5'
+            )}
             dangerouslySetInnerHTML={{ __html: answer }}
           />
           {linkText && linkUrl && (
             <Link
-              className="mt-5 border-b-[3px] border-primary-1 pb-1.5 !text-lg font-semibold leading-none xl:mt-4 lg:mt-3 lg:!text-base md:mt-2.5"
+              className="my-2.5 ml-[42px] border-b border-pricing-primary-3 pb-1.5 !text-base font-normal leading-none !text-pricing-primary-1 hover:!border-pricing-primary-1 lg:mt-4 lg:!text-base"
               size="sm"
               theme="white"
               to={linkUrl}

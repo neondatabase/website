@@ -10,7 +10,7 @@ The steps that follow describe how to sign up for Neon, create a Neon project, a
 
 If you do not have a Neon account, navigate to the [Neon sign-in page](https://console.neon.tech/sign_in) and create one using your GitHub or Google account.
 
-When you sign up, you are automatically enrolled in Neon's [Free Tier](/docs/introduction/technical-preview-free-tier). If you require larger compute and storage limits, Neon also offers paid plans. For more information, see [Neon plans](/docs/introduction/billing#neon-plans).
+When you sign up, you are automatically enrolled in Neon's [Free Tier](../introduction/technical-preview-free-tier). If you require larger compute and storage limits, Neon also offers paid plans. For more information, see [Neon plans](../introduction/billing#neon-plans).
 
 ![Neon sign-in page](/docs/tutorial/neon_signin.png)
 
@@ -20,8 +20,7 @@ After you sign in:
 
 1. Click **Create a project**.
 2. Enter a name for your project or let Neon generate one for you.
-3. Select a PostgreSQL version and a region.
-4. Click **Create project**.
+3. Specify your project settings and click **Create Project**.
 
 ![Neon create project](/docs/tutorial/neon_create_project.png)
 
@@ -37,13 +36,13 @@ If you navigate to the **Branches** page in the Neon Console, you can watch how 
 The **Branches** widget on the Neon **Dashboard** also shows the state of your compute endpoints.
 </Admonition>
 
-To learn more about Neon's serverless architecture, refer to the [Neon architecture](https://neon.tech/docs/introduction/architecture-overview/) documentation.
+To learn more about Neon's serverless architecture, refer to the [Neon architecture](../introduction/architecture-overview/) documentation.
 
 ## Create a table
 
 This tutorial uses a table called `elements`, which contains data from the [periodic table](https://en.wikipedia.org/wiki/Periodic_table). The example is based on the [Neon with Next.js and Prisma application](https://github.com/neondatabase/examples/tree/main/with-nextjs-prisma), which you can find in our [examples repo](https://github.com/neondatabase/examples) on GitHub.
 
-In the following steps, you will use the Neon **SQL Editor** to create the `elements` table. The **SQL Editor** allows you to query your databases directly from the Neon Console. For more information about this feature, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+In the following steps, you will use the Neon **SQL Editor** to create the `elements` table. The **SQL Editor** allows you to query your databases directly from the Neon Console. For more information about this feature, see [Query with Neon's SQL Editor](../get-started-with-neon/query-with-neon-sql-editor).
 
 To create the `elements` table:
 

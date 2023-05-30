@@ -72,7 +72,7 @@ Now that you know when the data loss occurred, you can restore your data to a po
 ![Branches page](/docs/tutorial/branches_page.png)
 1. Click **New Branch** to open the branch creation dialog.
 1. Enter a name for the branch.
-1. Select the parent branch. The data loss occurred on your project's [primary branch](/docs/reference/glossary/#primary-branch) (`main`), so select that branch as the parent.
+1. Select the parent branch. The data loss occurred on your project's [primary branch](../reference/glossary/#primary-branch) (`main`), so select that branch as the parent.
 1. Select the **Time** option to create a branch with data up to a specific date and time. You determined that the data loss occurred on March 20, 2023 at 8:58am, so you set it to 8:57am, just before you ran the `DELETE` query.
 ![Create a point in time branch](/docs/tutorial/create_branch_time.png)
 1. Click **Create Branch** to create your branch. You should see a dialog similar to the following with the connection details for your new branch.
@@ -94,7 +94,7 @@ You should see the data as it existed before you ran the problematic `DELETE` qu
 
 What have you seen in this example?
 
-To recover the data, you can use Neon's branching feature to create a branch with data from a past point in time. Neon keeps a 7-day history by default to enable point-in-time recovery.
+To recover the data, you can use Neon's branching feature to create a branch with data from a past point in time. Neon keeps a 7-day history, by default, to enable point-in-time recovery.
 
 Neon also supports creating branches from **Head** (the most up-to-date state of the database) or from an **LSN** (Log Sequence Number), which is a unique identifier assigned to each transaction in the database.
 

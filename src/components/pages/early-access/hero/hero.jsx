@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { useCookie, useLocation } from 'react-use';
+import useCookie from 'react-use/lib/useCookie';
+import useLocation from 'react-use/lib/useLocation';
 
 import Button from 'components/shared/button';
 import Link from 'components/shared/link';
@@ -151,7 +152,7 @@ const Hero = () => {
               <AnimatePresence>
                 {errorMessage && (
                   <motion.span
-                    className="absolute left-0 -bottom-1 w-full translate-y-full text-[12px] font-semibold text-[#FF4C79]"
+                    className="absolute -bottom-1 left-0 w-full translate-y-full text-[12px] font-semibold text-[#FF4C79]"
                     initial="initial"
                     animate="animate"
                     exit="exit"
@@ -179,7 +180,7 @@ const Hero = () => {
                 </span>
                 <span
                   className={clsx(
-                    'absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transition-opacity duration-200',
+                    'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200',
                     formState !== 'success' && 'opacity-0'
                   )}
                 >
@@ -188,7 +189,7 @@ const Hero = () => {
                 {formState === 'loading' && (
                   <AnimatePresence>
                     <motion.svg
-                      className="absolute top-1/2 left-1/2 h-[28px] w-[28px]"
+                      className="absolute left-1/2 top-1/2 h-[28px] w-[28px]"
                       width="58"
                       height="58"
                       viewBox="0 0 58 58"

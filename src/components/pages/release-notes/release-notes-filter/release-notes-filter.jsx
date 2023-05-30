@@ -8,30 +8,26 @@ import ConsoleIcon from 'icons/console-icon.inline.svg';
 import DocsIcon from 'icons/docs-icon.inline.svg';
 import DriversIcon from 'icons/gear-icon.inline.svg';
 import StorageIcon from 'icons/storage-icon.inline.svg';
+import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
 
 export const RELEASE_NOTES_CATEGORIES = [
   {
-    tag: 'Storage',
     icon: StorageIcon,
-    slug: 'storage',
+    slug: 'storage-and-compute',
   },
   {
-    tag: 'Console',
     icon: ConsoleIcon,
     slug: 'console',
   },
   {
-    tag: 'Docs',
     icon: DocsIcon,
     slug: 'docs',
   },
   {
-    tag: 'Drivers',
     icon: DriversIcon,
     slug: 'drivers',
   },
   {
-    tag: 'Plans',
     icon: PlansIcon,
     slug: 'plans',
   },
@@ -57,8 +53,9 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
           </span>
         </Link>
       </li>
-      {RELEASE_NOTES_CATEGORIES.map(({ tag, slug, icon: Icon }, index) => {
-        const isCategoryActive = currentSlug === tag.charAt(0).toLowerCase() + tag.slice(1);
+      {RELEASE_NOTES_CATEGORIES.map(({ slug, icon: Icon }, index) => {
+        const isCategoryActive = currentSlug === slug;
+        const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(slug);
 
         return (
           <li key={index}>
@@ -77,13 +74,13 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
               >
                 <Icon
                   className={clsx(
-                    'mr-1 h-4 w-4 transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1',
+                    'mr-1 h-4 transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1',
                     isCategoryActive
                       ? 'text-secondary-8 dark:text-primary-1'
                       : 'text-gray-6 dark:text-gray-4'
                   )}
                 />
-                <span>{tag}</span>
+                <span>{capitalisedCategory}</span>
               </span>
             </Link>
           </li>

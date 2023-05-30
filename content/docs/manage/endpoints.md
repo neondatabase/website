@@ -4,9 +4,9 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-A single read-write compute endpoint is created for your project's [primary branch](/docs/reference/glossary#primary-branch) (`main`) by default.
+A single read-write compute endpoint is created for your project's [primary branch](../reference/glossary#primary-branch), by default.
 
-To connect to a database that resides in a branch, you must connect via a compute endpoint that is associated with the branch. The following diagram shows the project's primary branch (`main`) and a child branch, both of which have an associated compute endpoint. Applications and clients connect to a branch via a compute endpoint.
+To connect to a database that resides in a branch, you must connect via a compute endpoint associated with the branch. The following diagram shows the project's primary branch (`main`) and a child branch, both of which have an associated compute endpoint.
 
 ```text
 Project
@@ -19,9 +19,7 @@ Project
                             |---- database (mydb)
 ```
 
-You can assign a compute endpoint to the branch you want to connect to or remove an compute endpoint from a branch by deleting it.
-
-Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The Neon [Free Tier](/docs/introduction/technical-preview-free-tier) allows up to 1vCPU and 4GB of RAM per compute endpoint.
+Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The Neon [Free Tier](../introduction/technical-preview-free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint.
 
 ## View a compute endpoint
 
@@ -29,10 +27,15 @@ A compute endpoint is associated with a branch. To view a compute endpoint, sele
 
 Compute endpoint details shown on the branch page include:
 
-- **Host**: The compute endpoint name.
+- **Host**: The compute endpoint hostname.
 - **Region**: The region where the compute endpoint resides.
 - **Type**: The type of compute endpoint. Currently, only `read_write` compute endpoints are supported.
-- **State**: The compute endpoint state (`Active`, `Idle`, or `Stopped`).
+- **Compute size**: The size of the compute endpoint. Neon [Pro plan](../introduction/billing#neon-plans) users can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint.
+- **Compute size (min)**: The minimum compute size for the compute endpoint. This column appears when the [Autoscaling](../introduction/autoscaling) feature is enabled, which is only available to Neon Pro plan users.
+- **Compute size (max)**: The maximum compute size for the compute endpoint. This column appears when the Autoscaling feature is enabled, which is only available to Neon Pro plan users.
+- **Auto-suspend delay**: The number of seconds of inactivity after which a compute endpoint is automatically suspended. The default is 300 seconds (5 minutes). For more information, see [Auto-suspend configuration](#auto-suspend-configuration).
+- **Last active**: The date and time the compute was last active.
+- **Status**: The compute endpoint status (`Active`, `Idle`, or `Stopped`).
 
 ## Create a compute endpoint
 
@@ -45,22 +48,46 @@ To create an endpoint:
 1. Click **Add new compute endpoint**.
 1. On the **Create compute endpoint** dialog, choose whether to enable connection pooling and click **Create**.
 
-For more information connection pooling in Neon, see [Connection pooling](/docs/connect/connection-pooling).
+For more information connection pooling in Neon, see [Connection pooling](../connect/connection-pooling).
 
 ## Edit a compute endpoint
 
-You can edit a compute endpoint to change the branch or the connection pooling setting.
-
-<Admonition type="note">
-Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](https://neon.tech/docs/connect/connection-pooling#enable-connection-pooling).
-</Admonition>
+Neon paid plan users can edit a compute endpoint to change the [compute size](#compute-size-and-autoscaling-configuration) or [Auto-suspend](#auto-suspend-configuration) configuration.
 
 To edit a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. Click the compute endpoint kebab menu, and select **Edit**.
-1. Select a new branch or change the connection pooling setting and click **Save**. If you are selecting a new branch, the branch must not have an associated compute endpoint.
+1. Specify your changes and click **Save**.
+
+<Admonition type="note">
+Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](../connect/connection-pooling#enable-connection-pooling).
+</Admonition>
+
+### Compute size and Autoscaling configuration
+
+Neon [paid plan](../introduction/billing#neon-plans) users can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
+
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
+
+Neon supports two compute size configuration options:
+
+- **Fixed Size:** This option allows you to select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
+- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. _Autoscaling_ currently supports a range of 1/4 CU to 7 CU. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](../introduction/autoscaling).
+
+<Admonition type="note">
+[Connection pooling](../connect/connection-pooling) is not yet supported with Autoscaling <b><sup>Beta</sup></b>. To use connection pooling, use a **Fixed size** compute.
+</Admonition>
+
+### Auto-suspend configuration
+
+Neon's _Auto-suspend_ feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable _Auto-suspend_ completely to maintain an "always-active" compute endpoint. An "always-active" configuration eliminates the few seconds of latency required to reactivate a compute endpoint but is likely to increase your compute time usage.
+
+The maximum **Auto-suspend delay** setting is 604800 seconds (7 days), and the following settings have a special meaning:
+
+- `0` means use the default setting (5 minutes / 300 seconds).
+- `-1` means never suspend the compute endpoint.
 
 ## Delete a compute endpoint
 
@@ -78,24 +105,24 @@ To delete a compute endpoint:
 Compute endpoint actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). The following examples demonstrate how to create, view, update, and delete compute endpoints using the Neon API. For other compute endpoint API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a compute endpoint with the API
 
 The following Neon API method creates a compute endpoint.
 
 ```text
-POST /endpoints
+POST /projects/{project_id}/endpoints
 ```
 
-The API method appears as follows when specified in a cURL command. The branch that you specify cannot have an existing compute endpoint. A compute endpoint must be associated with a branch, and a branch can have only one compute endpoint. Neon currently supports read-write compute endpoints only.
+The API method appears as follows when specified in a cURL command. The branch you specify cannot have an existing compute endpoint. A compute endpoint must be associated with a branch, and a branch can have only one compute endpoint. Neon currently supports read-write compute endpoints only.
 
 ```bash
 curl -X 'POST' \
@@ -110,10 +137,6 @@ curl -X 'POST' \
   }
 }'
 ```
-
-<Admonition type="note">
-You can enable connection pooling for a compute endpoint by adding the `"pooler_enabled": "true"` attribute to the request body. For more information about connection pooling support in Neon, see [Connection pooling](/docs/connect/connection-pooling).
-</Admonition>
 
 Response:
 

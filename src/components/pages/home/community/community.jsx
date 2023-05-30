@@ -55,8 +55,8 @@ const items = [
       'https://twitter.com/rauchg/status/1537075535230009344?s=20&t=K4nY3t3BfN1WrPOcunSKFw',
     text: (
       <>
-        With @Neondatabase , *truly* serverless PostgreSQL is finally here.You can spin up a db and
-        connect to it in less than 3 seconds.This changes the game.
+        With @Neondatabase , *truly* serverless PostgreSQL is finally here. You can spin up a db and
+        connect to it in less than 3 seconds. This changes the game.
       </>
     ),
   },
@@ -129,7 +129,7 @@ const Community = () => (
         {HEADER}
       </Heading>
       <p className="t-xl mx-auto mt-5 text-center 2xl:mt-4 xl:mt-3.5">
-        Learn what the experts love about Neon.
+        Learn what the experts love about Neon
       </p>
       <ul className="mt-8 flex justify-center space-x-5">
         {links.map(({ icon: Icon, to }, index) => (

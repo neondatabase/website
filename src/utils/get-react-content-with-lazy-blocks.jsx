@@ -67,10 +67,12 @@ const sharedComponents = {
     return (
       <Image
         src={urlWithoutSize}
-        width={props.width || 800}
-        height={props.height || 500}
-        quality={100}
+        width={props.width || 975}
+        height={props.height || 512}
+        quality={85}
         alt={props.alt || 'Post image'}
+        priority={props.isPriority || false}
+        sizes="(max-width: 767px) 100vw"
       />
     );
   },
@@ -81,7 +83,7 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
   // The library does parsing on client side differently from server side
   // it results in having a need of passing htmlparser2 to adjust behavior
   // according to the client side behavior
-
+  let isFirstImage = true;
   const components = {
     ...sharedComponents,
     ...pageComponents,
@@ -106,6 +108,16 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
 
           const Component = components[element.name];
           if (!Component) return <></>;
+
+          if (
+            domNode.attribs?.class?.includes('wp-block-image') &&
+            domNode.children[0].name === 'img'
+          ) {
+            const isPriority = isFirstImage;
+            isFirstImage = false;
+            const props = transformProps(attributesToProps({ ...element.attribs, isPriority }));
+            return <Component {...props} />;
+          }
 
           const props = transformProps(attributesToProps(element.attribs));
 

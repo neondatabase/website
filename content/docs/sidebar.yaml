@@ -9,14 +9,20 @@
       slug: introduction/compute-lifecycle
     - title: Branching
       slug: introduction/branching
+    - title: Autoscaling
+      slug: introduction/autoscaling
     - title: Neon roadmap
       slug: introduction/roadmap
-    - title: Technical Preview Free Tier
+    - title: Free Tier
       slug: introduction/technical-preview-free-tier
-    - title: Regions
-      slug: introduction/regions
+    - title: Pro plan
+      slug: introduction/pro-plan
     - title: Billing
       slug: introduction/billing
+    - title: Support
+      slug: introduction/support
+    - title: Regions
+      slug: introduction/regions
 - title: Get started
   items:
     - title: Sign up
@@ -40,12 +46,16 @@
       slug: connect/connect-from-any-app
     - title: Connect a GUI or IDE
       slug: connect/connect-postgres-gui
-    - title: Passwordless connect
+    - title: Passwordless auth
       slug: connect/passwordless-connect
     - title: Connect with psql
       slug: connect/query-with-psql-editor
+    - title: Connect with pgcli
+      slug: connect/connect-pgcli
     - title: Connect from old clients
       slug: connect/connectivity-issues
+    - title: Connect securely
+      slug: connect/connect-securely
     - title: Connection pooling
       slug: connect/connection-pooling
 - title: Manage
@@ -72,10 +82,14 @@
   items:
     - title: AWS Lambda
       slug: guides/aws-lambda
+    - title: Elixir
+      slug: guides/elixir-ecto
     - title: Django
       slug: guides/django
     - title: Go
       slug: guides/go
+    - title: Grafbase
+      slug: guides/grafbase
     - title: Hasura
       slug: guides/hasura
     - title: Java
@@ -88,14 +102,16 @@
       slug: guides/nextjs
     - title: Node.js
       slug: guides/node
-    - title: Polyscale
+    - title: PolyScale
       slug: guides/polyscale
     - title: Prisma
       items:
         - title: Connect from Prisma
           slug: guides/prisma
-        - title: Use Prisma With Neon
-          slug: guides/prisma-guide
+        - title: Use Prisma Migrate With Neon
+          slug: guides/prisma-migrate
+    - title: Python
+      slug: guides/python
     - title: Rust
       slug: guides/rust
     - title: SQLAlchemy
@@ -104,12 +120,26 @@
       slug: guides/stepzen
     - title: Symfony
       slug: guides/symfony
+    - title: WunderGraph
+      slug: guides/wundergraph
     - title: Vercel
       items:
-        - title: Connect with the Neon Vercel integration
+        - title: Overview
+          slug: guides/vercel-overview
+        - title: Vercel Postgres
+          slug: guides/vercel-postgres
+        - title: The Neon Vercel Integration
           slug: guides/vercel
         - title: Connect manually
           slug: guides/vercel-manual
+- title: Extensions
+  items:
+    - title: Supported extensions
+      slug: extensions/pg-extensions
+    - title: pg_tiktoken
+      slug: extensions/pg_tiktoken
+    - title: pgvector
+      slug: extensions/pgvector
 - title: Import data
   items:
     - title: Import from PostgreSQL
@@ -118,25 +148,21 @@
       slug: import/import-from-heroku
     - title: Import from CSV
       slug: import/import-from-csv
+    - title: Import from a Neon project
+      slug: import/import-from-neon
 - title: Serverless driver
   slug: serverless/serverless-driver
 - title: Security
-  items:
-    - title: Security
-      slug: security/security
-    - title: Secure connections
-      slug: security/secure-connections
+  slug: security/security-overview
 - title: Reference
   items:
-    - title: API
-      slug: reference/api-reference
+    - title: Neon API
+      slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
     - title: SDKs
       slug: reference/sdk
     - title: Glossary
       slug: reference/glossary
     - title: PostgreSQL Compatibility
       slug: reference/compatibility
-    - title: PostgreSQL Extensions
-      slug: reference/pg-extensions
 - title: Release notes
   slug: release-notes

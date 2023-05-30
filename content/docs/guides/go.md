@@ -20,9 +20,7 @@ To create a Neon project:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Specify a name, a PostgreSQL version, a region, and click **Create Project**.
-
-For additional information about creating projects, see [Set up a project](/docs/get-started-with-neon/setting-up-a-project).
+3. Specify your project settings and click **Create Project**.
 
 ## Configure Go application connection settings
 
@@ -40,7 +38,6 @@ package main
 import (
     "database/sql"
     "fmt"
-    "log"
 
     _ "github.com/lib/pq"
 )
@@ -49,23 +46,15 @@ func main() {
     connStr := "user=<user> password=<password> dbname=neondb host=<hostname>"
     db, err := sql.Open("postgres", connStr)
     if err != nil {
-        log.Fatal(err)
+        panic(err)
     }
     defer db.Close()
-
-    rows, err := db.Query("select version()")
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer rows.Close()
-
+    
     var version string
-    for rows.Next() {
-        err := rows.Scan(&version)
-        if err != nil {
-            log.Fatal(err)
-        }
+    if err := db.QueryRow("select version()").Scan(&version); err != nil {
+        panic(err)
     }
+
     fmt.Printf("version=%s\n", version)
 }
 ```
@@ -73,11 +62,11 @@ func main() {
 where:
 
 - `<user>` is the database user.
-- `<password>` is the database user's password, which is provided to you when you create a project.
+- `<password>` is the database user's password.
 - `<dbname>` is the name of the database. The default Neon database is `neondb`.
 - `<hostname>` is the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 
-You can find all of the connection details listed above, except for your password,  in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/roles#reset-a-password).
+You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
 
 ## Need help?
 

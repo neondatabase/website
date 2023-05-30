@@ -6,14 +6,14 @@ redirectFrom:
   - /docs/manage/users
 ---
 
-In Neon, roles are PostgreSQL roles. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in a project's primary branch. Each project also has a `web_access` PostgreSQL role, which is a system-managed role used by the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and for [passwordless connections](/docs/connect/passwordless-connect). You cannot delete or modify this role.
+In Neon, roles are PostgreSQL roles. You can think of a role as a database user. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in a project's primary branch.
 
 Additional roles can be created in a project's primary branch or child branches. There is no limit to the number of roles you can create.
 
-Roles belong to a branch. If you create a child branch, roles from the parent branch are duplicated in the child branch. For example, if role `sally` exists in the parent branch, role `sally` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, that role is not duplicated the child branch.
+Roles belong to a branch. If you create a child branch, roles from the parent branch are duplicated in the child branch. For example, if role `sally` exists in the parent branch, role `sally` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
 <Admonition type="note">
-You can only create database roles in the Neon Console or using the [Neon API](https://neon.tech/api-reference). Creating database roles directly in PostgreSQL is not yet supported.
+You can only create database roles in the Neon Console or using the [Neon API](https://neon.tech/api-reference). Creating database roles in PostgreSQL, using a `psql` client for example, is not yet supported.
 </Admonition>
 
 ## Create a role
@@ -23,13 +23,14 @@ To create a role:
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
 3. Select **Roles**.
-4. Select **New Role**.
-5. In the role creation dialog, select the branch where you want to create the role and specify a role name. The length of the role name is limited to 63 bytes.
-6. Click **Create**.
+4. Select the branch where you want to create the role.
+4. Click **New Role**.
+5. In the role creation dialog, specify a role name. The length of the role name is limited to 63 bytes.
+6. Click **Create**. The role is created and you are provided with the password for the role.
 
 ## Delete a role
 
-You cannot delete a role that owns a database.
+Deleting a role is a permanent action that cannot be undone, and you cannot delete a role that owns a database. The database must be deleted before you can deleting the role that owns the database.
 
 To delete a role:
 
@@ -49,8 +50,7 @@ To reset a role's password:
 3. Select **Roles**.
 4. Select a branch to view roles in the branch.
 5. Select **Reset password**.
-6. On the confirmation dialog, click **Sure, reset**.
-7. A reset password dialog is displayed. Copy your password or save the `.env` file to a secure location. After you close the reset password dialog, you will no longer be able to access the newly created password.
+6. On the confirmation dialog, click **Sure, reset**. A reset password dialog is displayed with your new password.
 
 ## Manage roles with the Neon API
 
@@ -59,14 +59,14 @@ Role actions performed in the Neon Console can also be performed using Neon API 
 In Neon, roles belong to branches, which means that when you create a role, it is created in a branch. Role-related requests are therefore performed using branch API methods.
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all user-configurable request body attributes that are available to you. To view all  attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a role with the API
 

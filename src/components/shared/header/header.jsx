@@ -40,15 +40,19 @@ const Header = forwardRef(
     },
     ref
   ) => {
-    const isThemeBlack = theme === 'black';
+    const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
 
     return (
       <header
         className={clsx(
-          'safe-paddings absolute top-0 left-0 right-0 z-40 w-full dark:bg-black lg:relative lg:h-14',
-          isThemeBlack ? 'lg:bg-black' : 'bg-white',
+          'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-black lg:relative lg:h-14',
           isSticky && 'sticky top-0 z-50 md:relative',
-          withBottomBorder && 'border-b border-gray-7 dark:border-gray-2'
+          withBottomBorder && theme !== 'gray-8' && 'border-b border-gray-7 dark:border-gray-2',
+          withBottomBorder && theme === 'gray-8' && 'border-b border-gray-new-20',
+          { 'bg-gray-new-8': theme === 'gray-8' },
+          { 'lg:bg-black': theme === 'black' },
+          { 'lg:bg-black-new': theme === 'black-new' },
+          { 'bg-white': theme === 'white' }
         )}
         ref={ref}
       >
@@ -58,7 +62,7 @@ const Header = forwardRef(
             <Logo isThemeBlack={isThemeBlack} />
           </Link>
 
-          <nav className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <ul className="flex space-x-12 3xl:space-x-10 2xl:space-x-8 lg:hidden">
               {MENUS.header.map(({ to, text, items }, index) => {
                 const Tag = to ? Link : 'button';
@@ -68,7 +72,7 @@ const Header = forwardRef(
                       className={clsx(
                         'whitespace-pre',
                         items?.length > 0 &&
-                          'relative pr-3.5 leading-none transition-colors duration-200 before:absolute before:top-[7px] before:right-0 before:h-0 before:w-0 before:border-4 before:border-transparent before:transition-[border-color] before:duration-200 hover:text-primary-2 group-hover:before:border-t-primary-2 dark:before:border-black',
+                          'relative pr-3.5 leading-none transition-colors duration-200 before:absolute before:right-0 before:top-[7px] before:h-0 before:w-0 before:border-4 before:border-transparent before:transition-[border-color] before:duration-200 hover:text-primary-2 group-hover:before:border-t-primary-2 dark:before:border-black',
                         items?.length > 0 && isThemeBlack
                           ? 'before:border-t-white'
                           : 'before:border-t-black dark:before:border-t-white',
@@ -122,33 +126,33 @@ const Header = forwardRef(
 
           <div className="flex space-x-5 lg:hidden">
             <Button
-              className="relative py-[11px] pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden"
+              className="relative pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden"
               to={LINKS.github}
-              size="xs"
+              size="new-md"
               theme={isThemeBlack ? 'tertiary' : 'quaternary'}
               rel="noopener noreferrer"
               target="_blank"
             >
               <Github
                 className={clsx(
-                  'absolute top-1/2 left-1.5 -translate-y-1/2 dark:text-white',
+                  'absolute left-1.5 top-1/2 -translate-y-1/2 dark:text-white',
                   isThemeBlack ? 'text-white' : 'text-black'
                 )}
               />
-              <span>Star Us</span>
+              <span>Star us</span>
             </Button>
             {isSignIn && (
-              <Button className="py-[11px]" to={LINKS.dashboard} size="xs" theme="primary">
-                Sign In
+              <Button to={LINKS.dashboard} size="new-md" theme="primary">
+                Sign in
               </Button>
             )}
             {!isSignIn && (
-              <Button className="py-[11px]" to={LINKS.signup} size="xs" theme="primary">
+              <Button to={LINKS.signup} size="new-md" theme="primary">
                 Sign up
               </Button>
             )}
           </div>
-          <div className=" hidden items-center lg:flex">
+          <div className="hidden items-center lg:flex">
             {isDocPage && (
               <button
                 className="mr-5 flex h-5 w-5 items-center"
@@ -172,7 +176,7 @@ const Header = forwardRef(
 );
 
 Header.propTypes = {
-  theme: PropTypes.oneOf(['white', 'black']).isRequired,
+  theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
   withBottomBorder: PropTypes.bool,
   isMobileMenuOpen: PropTypes.bool,
   onBurgerClick: PropTypes.func.isRequired,

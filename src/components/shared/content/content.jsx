@@ -29,7 +29,7 @@ const components = {
   undefined: (props) => <Fragment {...props} />,
   code: (props) => {
     if (props?.className?.startsWith('language-')) {
-      return <CodeBlock {...props} />;
+      return <CodeBlock theme="light" {...props} />;
     }
     return <code {...props} />;
   },
@@ -53,6 +53,7 @@ const components = {
   ),
   DefinitionList,
   Admonition,
+  CodeBlock,
   CodeTabs,
   IntroNavigation,
   TechnologyNavigation,

@@ -22,18 +22,18 @@ const Storage = () => {
       <Container className="flex items-center justify-between lg:flex-col lg:items-start" size="md">
         <div className="mr-[110px] max-w-[600px] 3xl:mr-[86px] 3xl:max-w-[504px] 2xl:mr-[72px] 2xl:max-w-[416px] xl:mr-0 xl:max-w-[400px] lg:max-w-none">
           <Heading className="max-w-[370px] lg:max-w-none" tag="h2" size="xl" theme="black">
-            Bottomless Storage
+            Bottomless storage
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
             We designed our storage from the ground up as a fault tolerant scale-out system built
             for the cloud. It integrates with cloud object stores such as S3 to offload cold data
             for cost optimization. Our storage architecture ensures high availability, scale out,
-            and unlimited capacity that we call &quot;bottomless&quot;.
+            and unlimited capacity that we call &quot;bottomless storage&quot;.
           </p>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            Our storage implements a "copy-on-write" technique to deliver online checkpointing,
-            branching, and point in time restore. This eliminates expensive "size of data" backup
-            and restore operations required for traditional database as a service systems.
+            Neon storage uses the "copy-on-write" technique to deliver data branching, online checkpointing,
+            and point-in-time restore. This eliminates expensive full-data backup
+            and restore operations required with traditional database-as-a-service systems.
           </p>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
             Our storage technology is open source and written in Rust.

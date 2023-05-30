@@ -49,7 +49,7 @@ const Subscribe = () => (
 
       <div className="max-w-[710px] 3xl:max-w-[590px] 2xl:max-w-[488px] xl:max-w-[456px] lg:max-w-none">
         <Heading className="lg:text-center" tag="h2" size="xl" theme="black">
-          Subscribe to&nbsp;Newsletter
+          Subscribe to our&nbsp;Newsletter
         </Heading>
 
         <SubscriptionForm

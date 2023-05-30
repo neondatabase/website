@@ -5,7 +5,17 @@ redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
 ---
 
-Each PostgreSQL connection creates a new process in the operating system, which consumes resources. For this reason, PostgreSQL limits the number of open connections. Neon permits 100 simultaneous PostgreSQL connections by default with a `max_connections=100` setting, which is the typical default for this parameter. A small number of those connections are reserved for administrative purposes. A connection limit of 100 may not be sufficient for some applications. To increase the number of connections that Neon supports, you can enable connection pooling.
+Each PostgreSQL connection creates a new process in the operating system, which consumes resources. PostgreSQL limits the number of open connections for this reason. In Neon, the size of your compute determines the `max_connections` limit. The formula used to calculate `max_connections` is `RAM in bytes / 9531392 bytes`. For a Free Tier compute, which has 1 GB of RAM, this works out to approximately 100 connections. Larger computes offered with the Neon Pro plan have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports 1351 connections. You can check the `max_connections` limit for your compute by running `SHOW max_connections;` from the Neon SQL Editor or from a client connected to Neon.
+
+<Admonition type="note">
+When [Autoscaling](../introduction/autoscaling) is enabled, `max_connections` is calculated based on the minimum compute size you selected in your Autoscaling configuration.
+</Admonition>
+
+A small number of connections are reserved for administrative purposes. The `max_connections` limit may not be sufficient for some applications. To increase the number of connections that Neon supports, you can use connection pooling.
+
+<Admonition type="note">
+Connection pooling is not yet supported with [Autoscaling](../introduction/autoscaling) <b><sup>Beta</sup></b>. If you expect a large number of concurrent connections, we recommend using a **Fixed size** compute (the default), which supports connection pooling. For compute configuration instructions, see [Compute size and Autoscaling configuration](../manage/endpoints#compute-size-and-autoscaling-configuration).
+</Admonition>
 
 ## Connection pooling
 
@@ -25,29 +35,29 @@ Add the `-pooler` suffix to the endpoint ID, as shown:
 postgres://sally:<password>@ep-throbbing-boat-918849-pooler.us-east-2.aws.neon.tech/neondb
 ```
 
-Enabling the **Pooler** option in the **Connection Details** widget on the Neon **Dashboard** adds the `-pooler` suffix to the connection string, which you can copy:
+The **Connection Details** widget on the Neon **Dashboard** provides **Pooled connection** and **Direct connection** tabs, allowing you to copy a connection string with or without the `-pooler` option.
 
-![Enable pooler option](/docs/connect/enable_pooler.png)
-
-To connect to the same database directly with a non-pooled connection, use the same connection string without the `-pooler` suffix:
-
-```text
-postgres://sally:<password>@ep-throbbing-boat-918849.us-east-2.aws.neon.tech/neondb
-```
+![Connection Details pooled connection string](/docs/connect/connection_details_pooled.png)
 
 <Admonition type="note">
-The previous method of enabling connection pooling for a compute endpoint is deprecated. When using a pooling-enabled connection, as described above, ensure that connection pooling is not enabled for the compute endpoint. To disable pooling for a compute endpoint, refer to the instructions in [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+The previous method of enabling connection pooling for a compute endpoint is deprecated. When using a pooling-enabled connection, as described above, ensure that connection pooling is not enabled for the compute endpoint. To disable pooling for a compute endpoint, refer to the instructions in [Edit a compute endpoint](../manage/endpoints#edit-a-compute-endpoint).
 </Admonition>
 
 ## Connection pooling notes and limitations
 
+Connection pooling is not yet supported with [Autoscaling](../introduction/autoscaling) <b><sup>Beta</sup></b>. To use connection pooling, use a **Fixed size** compute (the default). For compute configuration instructions, see [Compute size and Autoscaling configuration](../manage/endpoints#compute-size-and-autoscaling-configuration).
+
 Neon uses PgBouncer in _transaction mode_, which does not support PostgreSQL features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
-Some clients and applications may require connection pooling. For example, using Prisma Client with PgBouncer from a serverless function requires connection pooling. To ensure that connection pooling is enabled for clients and applications that require it, you can add the `?pgbouncer=true` flag to your Neon connection string, as shown in the following example:
+Some clients and applications may require connection pooling. For example, using Prisma Client with PgBouncer from a serverless function requires connection pooling. To ensure that a pooled connection is used, use a pooled connection string (described in the section above) and add the `?pgbouncer=true` flag to the connection string, as shown in the following example:
+
+<CodeBlock shouldWrap>
 
 ```text
 postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true
 ```
+
+</CodeBlock>
 
 Prisma Migrate, however, requires a direct connection to the database, and currently does not support connection pooling with PgBouncer. Attempting to run Prisma Migrate commands in any environment that enables PgBouncer for connection pooling results in the following error:
 
@@ -56,28 +66,13 @@ Error: undefined: Database error
 Error querying the database: db error: ERROR: prepared statement "s0" already exists
 ```
 
-When updating your database schema using Prisma Migrate, you need to use a non-pooled connection URL. You can configure the non-pooled connection string by using the `directUrl` property in the datasource block.
+To use Prisma Migrate, you need to provide a non-pooled connection string for your Neon database. You can configure Prisma Migrate to use a non-pooled connection string by adding the `directUrl` property to the datasource block in your `schema.prisma` file. For example:
 
-Update your .env file with the following changes:
-
-1. Rename the `DATABASE_URL` environment variable to `DIRECT_URL`
-1. Create a `DATABASE_URL` environment variable and paste in the new connection string from the dashboard as its value
-1. Append the `?pgbouncer=true` flag to the `DATABASE_URL` variable
-
-Your .env file should resemble the following:
-
-```
-DATABASE_URL="postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true"
-DIRECT_URL="postgres://casey:<password>@ep-square-sea-260584.us-east-2.aws.neon.tech:5432/neondb"
-```
-
-Update your Prisma schema by setting the `directUrl` in the datasource block:
-
-```
+```text
 datasource db {
-  provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  directURL         = env("DIRECT_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 ```
 
@@ -85,11 +80,18 @@ datasource db {
 This feature is available from Prisma version [4.10.0](https://github.com/prisma/prisma/releases/tag/4.10.0) and higher.
 </Admonition>
 
-You may encounter this error with other applications that require a direct connection to PostgreSQL or applications that are not compatible with PgBouncer in `transaction mode`. To address this issue, Neon supports both pooled and non-pooled connections to the same database. For more information, see [Enable connection pooling](#enable-connection-pooling).
+Next, update your `.env` file with both the `DATABASE_URL` and `DIRECT_URL` variables settings. As shown in the following example, set `DATABASE_URL` to the pooled connection string for your Neon database, and set `DIRECT_URL` to the non-pooled connection string.
+
+<CodeBlock shouldWrap>
+
+```text
+DATABASE_URL="postgres://casey:<password>@ep-square-sea-260584-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true"
+DIRECT_URL="postgres://casey:<password>@ep-square-sea-260584.us-east-2.aws.neon.tech:5432/neondb"
+```
+
+</CodeBlock>
 
 For more information about using Prisma in a PgBouncer-enabled environment, refer to the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
-
-PostgreSQL features such as prepared statements and [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html) are not supported with connection pooling in _transaction mode_. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section, in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
 ## Need help?
 
