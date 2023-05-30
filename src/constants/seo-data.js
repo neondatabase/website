@@ -9,10 +9,14 @@ export default {
   },
   contactSales: {
     title: 'Contact Sales — Neon',
+    description:
+      'Interested in increasing your free tier limits or learning about pricing? Contact our sales team.',
     pathname: LINKS.contactSales,
   },
   careers: {
     title: 'Careers — Neon',
+    description:
+      'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
     imagePath: '/images/social-previews/careers.jpg',
     pathname: LINKS.careers,
   },
