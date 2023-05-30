@@ -2,7 +2,7 @@
 
 import ReactDOM from 'react-dom/client';
 
-export const PreloadResources = () => {
+const PreloadResources = () => {
   const head = ReactDOM.createRoot(document.head);
 
   // TODO: use preload instead of render once it's supported by React https://github.com/facebook/react/pull/26237
@@ -17,3 +17,5 @@ export const PreloadResources = () => {
   );
   return null;
 };
+
+export default PreloadResources;
