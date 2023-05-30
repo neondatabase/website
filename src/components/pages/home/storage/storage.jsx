@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -31,9 +33,9 @@ const Storage = () => {
             and unlimited capacity that we call &quot;bottomless storage&quot;.
           </p>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            Neon storage uses the "copy-on-write" technique to deliver data branching, online checkpointing,
-            and point-in-time restore. This eliminates expensive full-data backup
-            and restore operations required with traditional database-as-a-service systems.
+            Neon storage uses the "copy-on-write" technique to deliver data branching, online
+            checkpointing, and point-in-time restore. This eliminates expensive full-data backup and
+            restore operations required with traditional database-as-a-service systems.
           </p>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
             Our storage technology is open source and written in Rust.

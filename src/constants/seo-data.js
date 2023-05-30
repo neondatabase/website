@@ -1,13 +1,16 @@
 export default {
+  index: {
+    title: 'Neon — Serverless, Fault-Tolerant, Branchable Postgres',
+    description:
+      'Postgres made for developers. Easy to Use, Scalable, Cost efficient solution for your next project.',
+    pathname: '',
+  },
   contactSales: {
     title: 'Contact Sales — Neon',
   },
   careers: {
     title: 'Careers — Neon',
     imagePath: '/images/social-previews/careers.jpg',
-  },
-  aboutUs: {
-    title: 'About Us — Neon',
   },
   earlyAccess: {
     title: 'Get Early Access — Neon',
