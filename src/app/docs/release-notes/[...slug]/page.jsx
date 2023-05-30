@@ -60,6 +60,7 @@ const ReleaseNotePage = async ({ currentSlug }) => {
       <Hero
         className="flex justify-center pt-40 dark:bg-black dark:text-white lg:pt-16 md:mb-10 md:py-10 sm:mb-7 sm:py-7"
         withContainer
+        isReleaseNotePost
       />
       <div className="pb-28 dark:bg-black lg:pb-20 md:pb-16">
         <Container size="xs" className="relative flex pb-10">
@@ -72,7 +73,7 @@ const ReleaseNotePage = async ({ currentSlug }) => {
             </time>
             <Heading
               className="!text-[36px] !leading-normal md:!text-3xl"
-              tag="h3"
+              tag="h1"
               size="sm"
               theme="black"
             >
