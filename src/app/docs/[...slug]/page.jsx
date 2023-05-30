@@ -45,7 +45,7 @@ export async function generateMetadata({ params }) {
 
   return getMetadata({
     title: `${title} - Neon Docs`,
-    description: excerpt,
+    description: isReleaseNotes ? 'The latest product updates from Neon' : excerpt,
     imagePath: ogImage,
     pathname: `${LINKS.docs}${currentSlug}`,
     rssPathname: isReleaseNotes ? `${LINKS.docs}release-notes/rss.xml` : null,
