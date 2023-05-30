@@ -21,7 +21,8 @@ const SEO = ({
   description = defaultDescription,
   imagePath = defaultImagePath,
 }) => {
-  const currentImagePath = imagePath.startsWith('http') ? imagePath : SITE_URL + imagePath;
+  const currentImagePath = imagePath?.startsWith('http') ? imagePath : SITE_URL + imagePath;
+  const postImagePath = imagePath ? currentImagePath : SITE_URL + defaultImagePath;
 
   return (
     <>
@@ -35,7 +36,7 @@ const SEO = ({
       <meta name="description" content={description} key="desc" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={currentImagePath} />
+      <meta property="og:image" content={postImagePath} />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta name="twitter:card" content="summary_large_image" />
