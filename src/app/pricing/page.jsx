@@ -8,7 +8,7 @@ import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
-import PreloadResources from './preload-resources';
+import { PreloadResources } from './preload-resources';
 
 export const metadata = getMetadata(SEO_DATA.pricing);
 
