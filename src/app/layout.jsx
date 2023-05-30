@@ -1,13 +1,14 @@
 import Script from 'next/script';
 
 import 'styles/globals.css';
+import { ibm_plex_mono, ibm_plex_sans } from './fonts';
 import ThemeProvider from './provider';
 
 export const preferredRegion = 'edge';
 
 // eslint-disable-next-line react/prop-types
 const RootLayout = ({ children }) => (
-  <html lang="en">
+  <html lang="en" className={`${ibm_plex_sans.variable} ${ibm_plex_mono.variable}`}>
     <head>
       {process.env.NODE_ENV === 'production' && (
         <Script id="google-tag-manager" strategy="afterInteractive">

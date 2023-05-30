@@ -25,6 +25,7 @@ export default function getMetadata({
   const robots = robotsNoindex === 'noindex' ? { index: false } : null;
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: metaTitle,
     description: metaDescription,
     alternates: {
