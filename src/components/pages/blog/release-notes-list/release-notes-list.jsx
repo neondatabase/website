@@ -39,7 +39,7 @@ const ReleaseNotesList = ({ items }) => (
               alt=""
               aria-hidden
             />
-            <Link className="group/link flex flex-col" to={`${LINKS.releaseNotes}/${slug}`}>
+            <Link className="group/link flex flex-col" to={`${LINKS.releaseNotes}${slug}`}>
               <span className="text-xs font-medium uppercase leading-none tracking-wider text-blue-80 line-clamp-1">
                 {category}
               </span>
