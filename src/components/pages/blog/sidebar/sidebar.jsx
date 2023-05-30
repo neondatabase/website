@@ -1,10 +1,9 @@
 import BlogNavLink from 'components/pages/blog/blog-nav-link';
 import LINKS from 'constants/links';
-
-import GitHubIcon from './images/github.inline.svg';
-import LinkedInIcon from './images/linkedin.inline.svg';
-import TwitterIcon from './images/twitter.inline.svg';
-import YouTubeIcon from './images/youtube.inline.svg';
+import GitHubIcon from 'icons/github-sm.inline.svg';
+import LinkedInIcon from 'icons/linkedin-sm.inline.svg';
+import TwitterIcon from 'icons/twitter-sm.inline.svg';
+import YouTubeIcon from 'icons/youtube-sm.inline.svg';
 
 const categories = [
   {
