@@ -73,9 +73,9 @@ To cancel a Pro plan subscription:
 
 1. Navigate to the **Billing** page in the Neon Console.
 1. Click **Request subscription cancellation** at the bottom of the page.
-1. Follow the instructions and click **Request downgrade**.
+1. Follow the instructions on the **Request Downgrade** modal, and click **Downgrade**.
 
-Cancelling your Pro plan subscription downgrades your account to the Free Tier.
+Cancelling your Pro plan subscription downgrades your account to our Free Tier, which has lower usage limits that could affect the performance of your applications. To compare plan limits, see [Neon plans](../docs/introduction/billing#neon-plans).
 
 You will be required to remove any projects, branches, or data that exceed [Free Tier limits](../introduction/technical-preview-free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade request).
 
