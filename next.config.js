@@ -69,6 +69,16 @@ module.exports = {
         destination: '/blog/scaling-serverless-postgres',
         permanent: false,
       },
+      {
+        source: '/api-reference',
+        destination: 'https://api-docs.neon.tech/',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/v2',
+        destination: 'https://api-docs.neon.tech/v2',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },
