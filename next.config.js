@@ -18,7 +18,7 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/fonts/*',
+        source: '/fonts/:slug*',
         headers: [
           {
             key: 'Cache-Control',
