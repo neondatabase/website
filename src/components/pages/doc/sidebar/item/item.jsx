@@ -40,6 +40,7 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
         type={slug ? undefined : 'button'}
         to={slug ? externalSlug || docSlug : undefined}
         target={externalSlug ? '_blank' : '_self'}
+        prefetch={slug ? false : undefined}
         onClick={handleClick}
       >
         <span className="leading-snug">{title}</span>

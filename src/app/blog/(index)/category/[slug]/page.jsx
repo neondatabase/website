@@ -1,9 +1,15 @@
+import { notFound } from 'next/navigation';
+
 import BlogPostCard from 'components/pages/blog/blog-post-card';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
+import { getBlogCategoryDescription } from 'constants/seo-data';
 import { getAllWpBlogCategories, getWpPostsByCategorySlug } from 'utils/api-posts';
+import getMetadata from 'utils/get-metadata';
 
 export default async function BlogCategoryPage({ params: { slug } }) {
   const posts = await getWpPostsByCategorySlug(slug);
+
+  if (!posts) return notFound();
 
   return (
     <>
@@ -25,6 +31,20 @@ export default async function BlogCategoryPage({ params: { slug } }) {
       <SubscribeForm size="md" />
     </>
   );
+}
+
+export async function generateMetadata({ params }) {
+  const categories = await getAllWpBlogCategories();
+  const category = categories.find((cat) => cat.slug === params.slug);
+
+  if (!category) return notFound();
+
+  return getMetadata({
+    title: `${category.name} Blog - Neon`,
+    description: getBlogCategoryDescription(params.slug),
+    pathname: `/blog/category/${params.slug}`,
+    imagePath: '/images/social-previews/blog.jpg',
+  });
 }
 
 export async function generateStaticParams() {

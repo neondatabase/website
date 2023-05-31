@@ -225,7 +225,7 @@ const Metrics = () => {
             <Link
               className="!border-b !border-pricing-primary-3 font-normal duration-500 hover:!border-pricing-primary-1"
               theme="underline-primary-1"
-              to={`${LINKS.docs}introduction/billing`}
+              to={`${LINKS.docs}/introduction/billing`}
             >
               billing documentation
             </Link>{' '}
@@ -238,7 +238,7 @@ const Metrics = () => {
         >
           <div className="relative col-span-7 col-start-1 h-full xl:col-span-6 lg:-ml-8 md:col-span-full md:hidden">
             <div className="sticky top-0 h-screen min-h-[1020px]">
-              <div className="absolute flex h-full w-full items-center justify-center pl-20 pr-24 xl:pr-10 xl:pl-0">
+              <div className="absolute flex h-full w-full items-center justify-center pl-20 pr-24 xl:pl-0 xl:pr-10">
                 <RiveComponent width={590} height={830} aria-hidden />
               </div>
             </div>

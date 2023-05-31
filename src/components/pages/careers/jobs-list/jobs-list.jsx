@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 
 import Container from 'components/shared/container';
@@ -37,7 +39,7 @@ const JobsList = () => {
     <section className="safe-paddings pt-64 3xl:pt-60 2xl:pt-52 xl:pt-48 lg:pt-40 md:pt-32">
       <Container size="xs">
         <h2 className="t-5xl font-bold leading-tight">Job Openings</h2>
-        <ul className="mt-14 mb-16 space-y-16 lg:mb-12 lg:mt-10 lg:space-y-12 md:mb-8 md:mt-6 md:space-y-8">
+        <ul className="mb-16 mt-14 space-y-16 lg:mb-12 lg:mt-10 lg:space-y-12 md:mb-8 md:mt-6 md:space-y-8">
           {items.map(({ name, items }, index) => (
             <li key={index}>
               <h3 className="t-3xl font-bold leading-none">{name}</h3>
@@ -56,7 +58,7 @@ const JobsList = () => {
                       <span className="t-xl font-semibold leading-snug transition-colors duration-200 group-hover:text-primary-2">
                         {name}
                       </span>
-                      <span className="t-base ml-4 rounded-full bg-secondary-2 py-2 px-4 font-semibold leading-snug md:ml-2 md:px-2.5">
+                      <span className="t-base ml-4 rounded-full bg-secondary-2 px-4 py-2 font-semibold leading-snug md:ml-2 md:px-2.5">
                         {location}
                       </span>
                     </Link>
