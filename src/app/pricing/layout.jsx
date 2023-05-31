@@ -10,7 +10,7 @@ const PricingLayout = ({ children }) => (
         media="(min-width: 1024px)"
       />
     </head>
-    {children}
+    <body>{children}</body>
   </>
 );
 
