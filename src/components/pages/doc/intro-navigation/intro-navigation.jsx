@@ -22,9 +22,9 @@ const renderIcon = (text) => {
       return <Filter className={classNames} />;
     case 'Branching':
       return <SplitBranch className={classNames} />;
-    case 'PostgreSQL extensions':
+    case 'Extensions':
       return <Puzzle className={classNames} />;
-    case 'Neon API Reference':
+    case 'Neon API':
       return <Plug className={classNames} />;
     default:
       return null;
@@ -32,7 +32,7 @@ const renderIcon = (text) => {
 };
 
 const IntroNavigation = ({ children = null }) => (
-  <ul className="not-prose !my-10 flex flex-col gap-5 !p-0">
+  <ul className="not-prose !my-10 grid grid-cols-3 gap-5 !p-0  xl:grid-cols-2 lg:grid-cols-1">
     {React.Children.map(children, (child, index) => {
       const { children, href, title } = child.props?.children.props ?? {};
 
@@ -41,7 +41,7 @@ const IntroNavigation = ({ children = null }) => (
           <NextLink
             key={index}
             href={href}
-            className="group block rounded-[10px] !border-none bg-gray-9 pl-[61px] pt-6 pr-6 pb-2 !transition-colors !duration-200 hover:bg-gray-8 dark:bg-gray-1 dark:hover:bg-gray-2 sm:p-6 sm:pb-2"
+            className="group block rounded-[10px] !border-none bg-gray-9 pb-2 pl-[61px] pr-6 pt-6 !transition-colors !duration-200 hover:bg-gray-8 dark:bg-gray-1 dark:hover:bg-gray-2 3xl:min-h-[152px] 2xl:min-h-[145px] xl:min-h-min sm:p-6 sm:pb-2"
           >
             <div className="relative flex content-center gap-[18px]">
               {renderIcon(children)}
