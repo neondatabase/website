@@ -59,7 +59,6 @@ export default function getMetadata({
       images: [
         {
           url: metaImageUrl,
-          alt: siteName,
         },
       ],
     },
@@ -69,7 +68,6 @@ export default function getMetadata({
       description: metaDescription,
       images: {
         url: metaImageUrl,
-        alt: siteName,
       },
     },
   };
