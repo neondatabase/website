@@ -8,27 +8,22 @@ import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
-// import { PreloadResources } from './preload-resources';
-
 export const metadata = getMetadata(SEO_DATA.pricing);
 
 const PricingPage = () => (
-  <>
-    {/* <PreloadResources /> */}
-    <Layout
-      className="bg-black-new text-white"
-      headerTheme="black-new"
-      footerTheme="black-new"
-      footerWithTopBorder
-    >
-      <Hero />
-      <Metrics />
-      <Estimates />
-      <Calculator />
-      <Faq />
-      <CTA />
-    </Layout>
-  </>
+  <Layout
+    className="bg-black-new text-white"
+    headerTheme="black-new"
+    footerTheme="black-new"
+    footerWithTopBorder
+  >
+    <Hero />
+    <Metrics />
+    <Estimates />
+    <Calculator />
+    <Faq />
+    <CTA />
+  </Layout>
 );
 
 export default PricingPage;
