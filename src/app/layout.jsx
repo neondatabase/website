@@ -1,14 +1,19 @@
 import Script from 'next/script';
 
 import 'styles/globals.css';
-import { ibm_plex_mono, ibm_plex_sans } from './fonts';
 import ThemeProvider from './provider';
+
+const fontsBasePath = '/fonts';
+const fontsPaths = [
+  '/ibm-plex-sans/ibm-plex-sans-bold.woff2',
+  '/ibm-plex-sans/ibm-plex-sans-regular.woff2',
+];
 
 export const preferredRegion = 'edge';
 
 // eslint-disable-next-line react/prop-types
 const RootLayout = ({ children }) => (
-  <html lang="en" className={`${ibm_plex_sans.variable} ${ibm_plex_mono.variable}`}>
+  <html lang="en">
     <head>
       {process.env.NODE_ENV === 'production' && (
         <Script id="google-tag-manager" strategy="afterInteractive">
@@ -17,6 +22,16 @@ const RootLayout = ({ children }) => (
       `}
         </Script>
       )}
+      {fontsPaths.map((fontPath, index) => (
+        <link
+          rel="preload"
+          href={`${fontsBasePath}${fontPath}`}
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+          key={index}
+        />
+      ))}
     </head>
     <body>
       {process.env.NODE_ENV === 'production' && (
