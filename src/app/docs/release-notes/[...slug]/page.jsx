@@ -8,6 +8,8 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import { RELEASE_NOTES_BASE_PATH, RELEASE_NOTES_SLUG_REGEX } from 'constants/docs';
 import { getAllReleaseNotes, getPostBySlug, RELEASE_NOTES_DIR_PATH } from 'utils/api-docs';
+import getExcerpt from 'utils/get-excerpt';
+import getMetadata from 'utils/get-metadata';
 import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 import serializeMdx from 'utils/serialize-mdx';
@@ -24,6 +26,32 @@ export async function generateStaticParams() {
   });
 }
 
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+
+  let label = '';
+  let description = '';
+  const currentSlug = slug.join('/');
+  const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
+
+  const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
+  label = `${capitalisedCategory} release`;
+  description = `The latest ${capitalisedCategory} updates from Neon`;
+
+  if (isReleaseNotePage) {
+    const { label: date } = getReleaseNotesDateFromSlug(currentSlug);
+    const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
+    label = `${capitalisedCategory} release ${date}`;
+    description = getExcerpt(content, 160);
+  }
+
+  return getMetadata({
+    title: `${label} - Neon`,
+    description,
+    pathname: `${RELEASE_NOTES_BASE_PATH}${currentSlug}`,
+  });
+}
+
 const ReleaseNotePage = async ({ currentSlug }) => {
   const { datetime, label } = getReleaseNotesDateFromSlug(currentSlug);
   const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
@@ -35,6 +63,7 @@ const ReleaseNotePage = async ({ currentSlug }) => {
       <Hero
         className="flex justify-center pt-40 dark:bg-black dark:text-white lg:pt-16 md:mb-10 md:py-10 sm:mb-7 sm:py-7"
         withContainer
+        isReleaseNotePost
       />
       <div className="pb-28 dark:bg-black lg:pb-20 md:pb-16">
         <Container size="xs" className="relative flex pb-10">
@@ -47,7 +76,7 @@ const ReleaseNotePage = async ({ currentSlug }) => {
             </time>
             <Heading
               className="!text-[36px] !leading-normal md:!text-3xl"
-              tag="h3"
+              tag="h1"
               size="sm"
               theme="black"
             >

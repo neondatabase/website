@@ -1,37 +1,32 @@
+import LINKS from './links';
+
 export default {
+  index: {
+    title: 'Neon — Serverless, Fault-Tolerant, Branchable Postgres',
+    description:
+      'Postgres made for developers. Easy to Use, Scalable, Cost efficient solution for your next project.',
+    pathname: '',
+  },
   contactSales: {
     title: 'Contact Sales — Neon',
+    description:
+      'Interested in increasing your free tier limits or learning about pricing? Contact our sales team.',
+    pathname: LINKS.contactSales,
   },
   careers: {
     title: 'Careers — Neon',
+    description:
+      'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
     imagePath: '/images/social-previews/careers.jpg',
-  },
-  aboutUs: {
-    title: 'About Us — Neon',
-  },
-  earlyAccess: {
-    title: 'Get Early Access — Neon',
+    pathname: LINKS.careers,
   },
   blog: {
     title: 'Our Blog — Neon',
     description:
       'Learn about Neon and how it can help you build better with Serverless Postgres by reading our blog posts.',
     imagePath: '/images/social-previews/blog.jpg',
+    pathname: LINKS.blog,
   },
-  blogPost: ({ title, description }) => ({
-    title,
-    description,
-  }),
-  static: ({ title }) => ({
-    title,
-  }),
-  doc: ({ title, description }) => ({
-    title: `${title} — Neon Docs`,
-    description,
-  }),
-  releaseNotePost: ({ title }) => ({
-    title: `${title} — Neon`,
-  }),
   404: {
     title: 'Page Not Found — Neon',
   },
@@ -40,24 +35,22 @@ export default {
     description:
       'Join us virtually on December 6th, 7th, and 8th to learn about Neon and how to build better with Serverless Postgres.',
     imagePath: '/images/social-previews/developer-days-1.jpg',
+    pathname: LINKS.developerDays1,
   },
   branching: {
     title: 'Instant branching for Postgres — Neon',
     description:
       'Neon allows you to instantly branch your data the same way that you branch your code.',
     imagePath: '/images/social-previews/branching.jpg',
+    pathname: LINKS.branching,
   },
   pricing: {
     title: 'Pricing — Neon',
     description:
       'Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible usage and volume-based plans.',
     imagePath: '/images/social-previews/pricing.jpg',
+    pathname: LINKS.pricing,
   },
-  category: ({ title, description }) => ({
-    title: `${title} Blog Posts — Neon`,
-    description,
-    imagePath: '/images/social-previews/blog.jpg',
-  }),
 };
 
 export const getBlogCategoryDescription = (category) => {

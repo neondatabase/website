@@ -4,7 +4,10 @@ import PostsList from 'components/pages/blog/posts-list';
 import ReleaseNotesList from 'components/pages/blog/release-notes-list';
 import VideoList from 'components/pages/blog/video-list';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
+import { BLOG_BASE_PATH } from 'constants/blog';
+import SEO_DATA from 'constants/seo-data';
 import { getWpBlogPage } from 'utils/api-posts';
+import getMetadata from 'utils/get-metadata';
 
 async function getReleaseNotesData() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/api/release-notes`);
@@ -15,6 +18,8 @@ async function getReleaseNotesData() {
 
   return res.json();
 }
+
+export const metadata = getMetadata({ ...SEO_DATA.blog, rssPathname: `${BLOG_BASE_PATH}rss.xml` });
 
 export default async function BlogPage() {
   const releaseNotes = await getReleaseNotesData();

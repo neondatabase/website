@@ -15,6 +15,19 @@ module.exports = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: '/:all*(woff2)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     const docPosts = await getAllPosts();
     const docsRedirects = docPosts.reduce((acc, post) => {
@@ -68,6 +81,16 @@ module.exports = {
         source: '/blog/postgres-autoscaling',
         destination: '/blog/scaling-serverless-postgres',
         permanent: false,
+      },
+      {
+        source: '/api-reference',
+        destination: 'https://api-docs.neon.tech/',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/v2',
+        destination: 'https://api-docs.neon.tech/v2',
+        permanent: true,
       },
       ...docsRedirects,
     ];

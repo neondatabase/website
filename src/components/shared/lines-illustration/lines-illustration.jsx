@@ -91,7 +91,7 @@ const LinesIllustration = ({ className: additionalClassName, color, spread }) =>
 LinesIllustration.propTypes = {
   className: PropTypes.string,
   color: PropTypes.string,
-  spread: PropTypes.oneOf(Object.keys(spreadStyles)),
+  spread: PropTypes.oneOf([1, 2, 3, 4]),
 };
 
 export default LinesIllustration;
