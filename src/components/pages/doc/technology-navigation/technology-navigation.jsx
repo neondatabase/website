@@ -17,7 +17,7 @@ const TechnologyNavigation = ({ children = null }) => {
 
   return (
     <>
-      <ul className="not-prose !mt-9 !mb-2 grid grid-cols-12 gap-5 !p-0">
+      <ul className="not-prose !mb-2 !mt-9 grid grid-cols-12 gap-5 !p-0">
         {React.Children.map(children, (child, index) => {
           const {
             children: {
@@ -37,20 +37,22 @@ const TechnologyNavigation = ({ children = null }) => {
               <NextLink
                 key={index}
                 href={href}
-                className="block h-full rounded-[10px] border !border-gray-7 p-6 !transition-colors !duration-200 hover:bg-gray-9 dark:hover:bg-gray-1"
+                className="flex h-full flex-col justify-between rounded-[10px] border !border-gray-7 p-6 !transition-colors !duration-200 hover:bg-gray-9 dark:hover:bg-gray-1 xl:p-5"
               >
-                <div className="h-12">
-                  <img
-                    className="w-auto shrink-0 dark:invert"
-                    src={src}
-                    width={80}
-                    alt={alt + ' logo'}
-                    loading={index > 3 ? 'lazy' : 'eager'}
-                  />
+                <div>
+                  <div className="h-12">
+                    <img
+                      className="w-auto shrink-0 dark:invert"
+                      src={src}
+                      width={80}
+                      alt={`${alt} logo`}
+                      loading={index > 3 ? 'lazy' : 'eager'}
+                    />
+                  </div>
+                  <h4 className="text-xl font-semibold text-black dark:text-white">{alt}</h4>
+                  <p className="mt-2 text-sm text-gray-4 dark:text-gray-7">{title}</p>
                 </div>
-                <h4 className="text-xl font-semibold text-black dark:text-white">{alt}</h4>
-                <p className="mt-2 text-sm text-gray-4 dark:text-gray-7">{title}</p>
-                <span className="inline-flex items-center text-base font-medium">
+                <span className="mt-auto inline-flex items-center text-base font-medium 2xl:text-sm lg:text-base sm:text-sm">
                   <span>Learn More</span>
                   <ArrowRightIcon className="ml-1" />
                 </span>
