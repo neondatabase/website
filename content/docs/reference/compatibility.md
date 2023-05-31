@@ -54,9 +54,7 @@ Statistics collected by the PostgreSQL [cumulative statistics system](https://ww
 
 ## Database encoding
 
-Neon does not currently support changing the database encoding. This feature will become available when we add support for creating databases using SQL, which is on our roadmap. Currently, database creation is supported only in the Neon Console. See [Manage databases](/docs/manage/databases).
-
-This is something we are actively working on, and it should be available sometime in June.
+Neon does not currently support changing the database encoding. This feature will become available when we add support for creating databases using SQL, which is on our roadmap. Currently, creating a database is supported only in the Neon Console. See [Manage databases](/docs/manage/databases).
 
 ## Need help?
 
