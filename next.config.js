@@ -15,6 +15,19 @@ module.exports = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: '/:all*(woff2)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     const docPosts = await getAllPosts();
     const docsRedirects = docPosts.reduce((acc, post) => {
