@@ -49,6 +49,7 @@ export async function generateMetadata({ params }) {
     imagePath: ogImage,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isReleaseNotes ? `${LINKS.releaseNotes}/rss.xml` : null,
+    type: 'article',
   });
 }
 

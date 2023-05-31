@@ -110,7 +110,11 @@ export async function generateMetadata({ params }) {
       opengraphDescription,
       twitterImage,
     },
+    date,
+    pageBlogPost,
   } = post;
+
+  const authors = pageBlogPost.authors.map(({ author }) => author?.title);
 
   return getMetadata({
     title: opengraphTitle || title,
@@ -119,6 +123,9 @@ export async function generateMetadata({ params }) {
     robotsNoindex: metaRobotsNoindex,
     pathname: `${LINKS.blog}/${slug}`,
     imagePath: twitterImage?.mediaItemUrl,
+    type: 'article',
+    publishedTime: date,
+    authors,
   });
 }
 

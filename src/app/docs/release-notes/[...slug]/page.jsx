@@ -49,6 +49,7 @@ export async function generateMetadata({ params }) {
     title: `${label} - Neon`,
     description,
     pathname: `${RELEASE_NOTES_BASE_PATH}${currentSlug}`,
+    type: 'article',
   });
 }
 
@@ -62,6 +63,7 @@ const ReleaseNotePage = async ({ currentSlug }) => {
     <>
       <Hero
         className="flex justify-center pt-40 dark:bg-black dark:text-white lg:pt-16 md:mb-10 md:py-10 sm:mb-7 sm:py-7"
+        date={label}
         withContainer
         isReleaseNotePost
       />

@@ -11,6 +11,9 @@ export default function getMetadata({
   robotsNoindex,
   rssPathname = null,
   pathname,
+  type = 'website',
+  publishedTime = null,
+  authors = [],
   imagePath = DEFAULT_IMAGE_PATH,
 }) {
   const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
@@ -61,6 +64,9 @@ export default function getMetadata({
           url: metaImageUrl,
         },
       ],
+      type,
+      publishedTime,
+      authors,
     },
     twitter: {
       card: 'summary_large_image',
