@@ -32,7 +32,7 @@ const renderIcon = (text) => {
 };
 
 const IntroNavigation = ({ children = null }) => (
-  <ul className="not-prose !my-10 grid grid-cols-3 gap-4 !p-0 md:grid-cols-2 sm:grid-cols-1">
+  <ul className="not-prose !my-10 grid grid-cols-2 gap-4 !p-0 sm:grid-cols-1">
     {React.Children.map(children, (child, index) => {
       const { children, href, title } = child.props?.children.props ?? {};
 
@@ -49,7 +49,7 @@ const IntroNavigation = ({ children = null }) => (
                 {children}
               </h4>
             </div>
-            <p className="!mb-0 !mt-2 text-sm leading-normal text-gray-4 dark:text-gray-7">
+            <p className="!mb-0 !mt-2 ml-[30px] text-sm leading-normal text-gray-4 dark:text-gray-7">
               {title}
             </p>
           </NextLink>
