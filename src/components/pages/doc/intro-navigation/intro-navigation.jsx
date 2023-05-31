@@ -10,7 +10,7 @@ import SplitBranch from 'icons/split-branch.inline.svg';
 import UploadFile from 'icons/upload-file.inline.svg';
 
 const classNames =
-  'sm:static sm:transform-none absolute -translate-x-[38px] !transition-colors !duration-200 text-black dark:text-white group-hover:text-secondary-8 dark:group-hover:text-[#00E599]';
+  'w-5 h-5 shrink-0 !transition-colors !duration-200 text-black dark:text-white group-hover:text-secondary-8 dark:group-hover:text-[#00E599]';
 
 const renderIcon = (text) => {
   switch (text) {
@@ -32,22 +32,26 @@ const renderIcon = (text) => {
 };
 
 const IntroNavigation = ({ children = null }) => (
-  <ul className="not-prose !my-10 flex flex-col gap-5 !p-0">
+  <ul className="not-prose !my-10 grid grid-cols-3 gap-4 !p-0 md:grid-cols-2 sm:grid-cols-1">
     {React.Children.map(children, (child, index) => {
       const { children, href, title } = child.props?.children.props ?? {};
 
       return (
-        <li className="!m-0 before:hidden">
+        <li className="!m-0 flex before:hidden">
           <NextLink
             key={index}
             href={href}
-            className="group block rounded-[10px] !border-none bg-gray-9 pl-[61px] pt-6 pr-6 pb-2 !transition-colors !duration-200 hover:bg-gray-8 dark:bg-gray-1 dark:hover:bg-gray-2 sm:p-6 sm:pb-2"
+            className="group block grow basis-1/3 rounded-[10px] !border-none bg-gray-9 p-3.5 !transition-colors !duration-200 hover:bg-gray-8 dark:bg-gray-1 dark:hover:bg-gray-2 sm:p-3"
           >
-            <div className="relative flex content-center gap-[18px]">
+            <div className="relative flex content-center gap-x-2.5">
               {renderIcon(children)}
-              <h4 className="text-xl font-semibold text-black dark:text-white">{children}</h4>
+              <h4 className="text-base font-semibold leading-tight text-black dark:text-white">
+                {children}
+              </h4>
             </div>
-            <p className="mt-2 text-sm text-gray-4 dark:text-gray-7">{title}</p>
+            <p className="!mb-0 !mt-2 text-sm leading-normal text-gray-4 dark:text-gray-7">
+              {title}
+            </p>
           </NextLink>
         </li>
       );
