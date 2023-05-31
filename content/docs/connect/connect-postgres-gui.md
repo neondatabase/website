@@ -65,6 +65,7 @@ Connections from the following GUI applications and IDEs have been tested with N
 - [dbForge](https://www.devart.com/dbforge/)
 - [DbVisualizer](https://www.dbvis.com/)
 - [DronaHQ hosted cloud version](https://www.dronahq.com/) (requires selecting **Connect using SSL** when creating a connector)
+- [Forest Admin](https://www.forestadmin.com/) (your database requires at least one table)
 - [ILLA Cloud](https://www.illacloud.com/)
 - [Luna Modeler](https://www.datensen.com/data-modeling/luna-modeler-for-relational-databases.html) (requires enabling the SSL/TLS option)
 - [Metabase](https://www.metabase.com/)
