@@ -59,8 +59,27 @@ const ReleaseNotePage = async ({ currentSlug }) => {
   const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
   const mdxSource = await serializeMdx(content);
 
+  const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: `${capitalisedCategory} release ${label}`,
+    datePublished: datetime,
+    author: {
+      '@type': 'Organization',
+      name: 'Neon',
+    },
+  };
+
   return (
     <>
+      {isReleaseNotePage && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
       <Hero
         className="flex justify-center pt-40 dark:bg-black dark:text-white lg:pt-16 md:mb-10 md:py-10 sm:mb-7 sm:py-7"
         date={label}
