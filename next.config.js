@@ -18,7 +18,7 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/:all*(woff2)',
+        source: '/fonts/*',
         headers: [
           {
             key: 'Cache-Control',
