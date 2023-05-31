@@ -46,9 +46,7 @@ To create an endpoint:
 1. In the Neon Console, select **Branches**.
 1. Select a branch that does not have an endpoint
 1. Click **Add new compute endpoint**.
-1. On the **Create compute endpoint** dialog, choose whether to enable connection pooling and click **Create**.
-
-For more information connection pooling in Neon, see [Connection pooling](../connect/connection-pooling).
+1. On the **Create compute endpoint** dialog, specify your settings and click **Create**.
 
 ## Edit a compute endpoint
 
