@@ -34,16 +34,17 @@ export async function generateMetadata({ params }) {
   const currentSlug = slug.join('/');
   const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
 
-  if (isReleaseNotePage) {
-    const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
-    label = capitalisedCategory;
+  const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
+  label = capitalisedCategory;
+  description = `The latest ${capitalisedCategory} updates from Neon`;
 
+  if (isReleaseNotePage) {
     const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
     description = getExcerpt(content, 160);
   }
 
   return getMetadata({
-    title: `${isReleaseNotePage ? `${label} release` : 'Release notes'} - Neon`,
+    title: `${label} release - Neon`,
     description,
     pathname: `${RELEASE_NOTES_BASE_PATH}${currentSlug}`,
   });
