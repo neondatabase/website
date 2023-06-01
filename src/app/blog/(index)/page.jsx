@@ -35,6 +35,7 @@ export default async function BlogPage() {
 
   return (
     <>
+      <h1 className="sr-only">Blog</h1>
       <FeaturedPostsList posts={featuredPosts} />
       <PostsList title="Community" posts={communityFeaturedPosts} alignment="right" />
       <ReleaseNotesList items={featuredReleaseNotes} />
