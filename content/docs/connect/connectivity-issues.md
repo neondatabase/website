@@ -49,7 +49,7 @@ You would use this one:
 postgres://<user>:<password>@ep-mute-recipe-239816.us-east-2.aws.neon.tech/main?options=endpoint%3Dep-mute-recipe-239816
 ```
 
-<CodeBlock>
+</CodeBlock>
 
 The `endpoint` option is expected to work if your application or library permits it to be set. But not all of them do, especially in the case of GUI applications.
 
