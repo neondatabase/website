@@ -12,7 +12,7 @@ export default async function BlogCategoryPage({ params: { slug } }) {
   const posts = await getWpPostsByCategorySlug(slug);
   const category = categories.find((cat) => cat.slug === slug);
 
-  if (!posts) return notFound();
+  if (!!posts.length || !category) return notFound();
 
   return (
     <>
@@ -38,9 +38,9 @@ export default async function BlogCategoryPage({ params: { slug } }) {
 
 export async function generateMetadata({ params }) {
   const categories = await getAllWpBlogCategories();
-  if (!categories) return notFound();
   const category = categories.find((cat) => cat.slug === params.slug);
 
+  if (!category) return notFound();
   return getMetadata({
     title: `${category.name} Blog - Neon`,
     description: getBlogCategoryDescription(params.slug),
@@ -51,11 +51,8 @@ export async function generateMetadata({ params }) {
 
 export async function generateStaticParams() {
   const categories = await getAllWpBlogCategories();
-  if (!categories) return notFound();
 
-  const filteredCategories = categories.filter((category) => category.slug !== 'uncategorized');
-
-  return filteredCategories.map((category) => ({
+  return categories.map((category) => ({
     slug: category.slug,
   }));
 }
