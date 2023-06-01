@@ -6,9 +6,13 @@ isDraft: true
 
 With serverless architectures and auto-scaling systems such as Neon, a common challenge that arises is "cold starts". For Neon, a cold start refers to the situation where a compute instance is started in response to a request after being in an idle state. Cold starts can result in longer response times and connection failures or timeouts due to the few seconds required to restart an idle compute.
 
-One of Neon's core features is 'scale to zero', which is designed to minimize your costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. Currently, restarting a compute from an idle state takes approximately 4 seconds.
+One of Neon's core features is 'scale to zero', which is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. Currently, restarting a compute from an idle state takes approximately 4 seconds. 
 
-Neon is working to reduce the cold start times, but in the interim, the following section describes strategies that you can implement to minimize the impact of cold starts on your applications.
+<Admonition type="note">
+It's also important to remember that services that you integrate with Neon may have their own cold start challenges, compounding connection time issues. This topic does not address cold start times of other vendors, but if your connection to Neon involves other services, be sure to consider cold start times for those services as well.
+</Admonition>
+
+Neon is working to reduce cold start times, but in the interim, the following section describes strategies that you can implement to minimize the impact of cold starts on your applications.
 
 ## Strategies for handling cold starts
 
