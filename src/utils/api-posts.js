@@ -326,6 +326,8 @@ const getWpPostBySlug = async (slug) => {
         }
         slug
         date
+        dateGmt
+        modifiedGmt
         title(format: RENDERED)
         content(format: RENDERED)
         readingTime
@@ -428,6 +430,8 @@ const getWpPreviewPostData = async (id, status) => {
           }
           slug
           date
+          dateGmt
+          modifiedGmt
           title(format: RENDERED)
           content(format: RENDERED)
           readingTime

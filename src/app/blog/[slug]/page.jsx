@@ -31,7 +31,7 @@ const BlogPage = async ({ params }) => {
   const { post, relatedPosts } = postResult;
   if (!post) return notFound();
 
-  const { slug, title, content, pageBlogPost, date, categories, seo } = post;
+  const { slug, title, content, pageBlogPost, date, dateGmt, modifiedGmt, categories, seo } = post;
   const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${LINKS.blog}/${slug}`;
   const formattedDate = getFormattedDate(date);
 
@@ -49,7 +49,8 @@ const BlogPage = async ({ params }) => {
     '@type': 'Article',
     headline: title,
     image: [seo?.twitterImage?.mediaItemUrl],
-    datePublished: date,
+    datePublished: dateGmt,
+    dateModified: modifiedGmt,
     author: {
       '@type': 'Person',
       name: pageBlogPost?.authors?.[0].author.title,
