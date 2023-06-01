@@ -51,6 +51,7 @@ const BlogPage = async ({ params }) => {
     image: [seo?.twitterImage?.mediaItemUrl],
     datePublished: dateGmt,
     dateModified: modifiedGmt,
+    description: pageBlogPost?.description,
     author: {
       '@type': 'Person',
       name: pageBlogPost?.authors?.[0].author.title,
