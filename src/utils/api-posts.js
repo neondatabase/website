@@ -29,7 +29,11 @@ const getAllWpBlogCategories = async () => {
     }
   `;
   const data = await graphQLClient.request(categoriesQuery);
-  return data?.categories?.nodes;
+  const filteredCategories = data?.categories?.nodes.filter(
+    (category) => category.slug !== 'uncategorized'
+  );
+
+  return filteredCategories;
 };
 
 const getWpPostsByCategorySlug = async (slug) => {
