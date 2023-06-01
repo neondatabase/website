@@ -12,7 +12,7 @@ export default async function BlogCategoryPage({ params: { slug } }) {
   const posts = await getWpPostsByCategorySlug(slug);
   const category = categories.find((cat) => cat.slug === slug);
 
-  if (!!posts.length || !category) return notFound();
+  if (!posts || !category) return notFound();
 
   return (
     <>
