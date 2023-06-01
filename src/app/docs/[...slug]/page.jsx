@@ -49,6 +49,7 @@ export async function generateMetadata({ params }) {
     imagePath: ogImage,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isReleaseNotes ? `${LINKS.releaseNotes}/rss.xml` : null,
+    type: 'article',
   });
 }
 
@@ -80,17 +81,33 @@ export default async function DocPost({ params }) {
   const { data, content } = getPostBySlug(currentSlug, DOCS_DIR_PATH);
   const mdxSource = await serializeMdx(content);
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: data.title,
+    author: {
+      '@type': 'Organization',
+      name: 'Neon',
+    },
+  };
+
   return (
-    <Post
-      content={mdxSource}
-      data={data}
-      breadcrumbs={breadcrumbs}
-      navigationLinks={navigationLinks}
-      isReleaseNotes={isReleaseNotesIndex}
-      releaseNotesActiveLabel="all"
-      currentSlug={currentSlug}
-      fileOriginPath={fileOriginPath}
-      releaseNotes={releaseNotesWithMdxSource}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Post
+        content={mdxSource}
+        data={data}
+        breadcrumbs={breadcrumbs}
+        navigationLinks={navigationLinks}
+        isReleaseNotes={isReleaseNotesIndex}
+        releaseNotesActiveLabel="all"
+        currentSlug={currentSlug}
+        fileOriginPath={fileOriginPath}
+        releaseNotes={releaseNotesWithMdxSource}
+      />
+    </>
   );
 }

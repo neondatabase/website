@@ -31,7 +31,7 @@ const BlogPage = async ({ params }) => {
   const { post, relatedPosts } = postResult;
   if (!post) return notFound();
 
-  const { slug, title, content, pageBlogPost, date, categories } = post;
+  const { slug, title, content, pageBlogPost, date, dateGmt, modifiedGmt, categories, seo } = post;
   const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${LINKS.blog}/${slug}`;
   const formattedDate = getFormattedDate(date);
 
@@ -44,6 +44,20 @@ const BlogPage = async ({ params }) => {
     true
   );
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    image: [seo?.twitterImage?.mediaItemUrl],
+    datePublished: dateGmt,
+    dateModified: modifiedGmt,
+    description: pageBlogPost?.description,
+    author: {
+      '@type': 'Person',
+      name: pageBlogPost?.authors?.[0].author.title,
+    },
+  };
+
   return (
     <Layout
       className="bg-black-new text-white"
@@ -52,6 +66,10 @@ const BlogPage = async ({ params }) => {
       footerWithTopBorder
       isHeaderSticky
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="safe-paddings bg-gray-new-8">
         <article className="dark mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pb-40 pt-16 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
           <Hero
@@ -110,7 +128,11 @@ export async function generateMetadata({ params }) {
       opengraphDescription,
       twitterImage,
     },
+    date,
+    pageBlogPost,
   } = post;
+
+  const authors = pageBlogPost.authors.map(({ author }) => author?.title);
 
   return getMetadata({
     title: opengraphTitle || title,
@@ -119,6 +141,9 @@ export async function generateMetadata({ params }) {
     robotsNoindex: metaRobotsNoindex,
     pathname: `${LINKS.blog}/${slug}`,
     imagePath: twitterImage?.mediaItemUrl,
+    type: 'article',
+    publishedTime: date,
+    authors,
   });
 }
 
