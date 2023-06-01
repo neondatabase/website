@@ -33,15 +33,23 @@ The special connection option was previously named `project`. The `project` opti
 
 For example, instead of the following connection string:
 
+<CodeBlock shouldWrap>
+
 ```txt
 postgres://<user>:<password>@ep-mute-recipe-239816.us-east-2.aws.neon.tech/main
 ```
 
+</CodeBlock>
+
 You would use this one:
+
+<CodeBlock shouldWrap>
 
 ```txt
 postgres://<user>:<password>@ep-mute-recipe-239816.us-east-2.aws.neon.tech/main?options=endpoint%3Dep-mute-recipe-239816
 ```
+
+<CodeBlock>
 
 The `endpoint` option is expected to work if your application or library permits it to be set. But not all of them do, especially in the case of GUI applications.
 

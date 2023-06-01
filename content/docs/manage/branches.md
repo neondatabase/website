@@ -109,11 +109,15 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
 ![Connection details widget](/docs/connect/connection_details.png)
 3. Copy the connection string. A connection string includes your role name, the compute endpoint hostname, and database name.
-5. Connect with `psql` as shown below.
+4. Connect with `psql` as shown below.
+
+  <CodeBlock shouldWrap>
 
   ```bash
   psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
   ```
+
+  </CodeBlock>
 
 <Admonition type="tip">
 A compute endpoint hostname starts with an `ep-` prefix. You can also find a compute endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).

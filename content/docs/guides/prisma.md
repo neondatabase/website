@@ -36,7 +36,13 @@ To establish a basic connection from Prisma to Neon, perform the following steps
 
 3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. Your setting will appear similar to the following:
 
-   `DATABASE_URL="postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb"`
+   <CodeBlock shouldWrap>
+
+   ```text
+   DATABASE_URL="postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb"
+   ```
+
+   </CodeBlock>
 
 <Admonition type="important">
 If you are using Prisma Client from a serverless function, see [Connect from serverless functions](#connect-from-serverless-functions). To adjust your connection string to avoid connection timeouts issues, see [Connection timeouts](#connection-timeouts).

@@ -88,9 +88,13 @@ datasource db {
 
 Then, go to the Project dashboard in Neon and generate a connection string in the `Connection Details` widget. You can add this connection string in `.env`:
 
+<CodeBlock shouldWrap>
+
 ```shell
-DATABASE_URL=postgres://user:pass@project-name-123.cloud.neon.tech/main
+DATABASE_URL=postgres://user:pass@project-name-123.cloud.neon.tech/neondb
 ```
+
+</CodeBlock>
 
 #### Using Neon for development with Prisma
 
@@ -190,7 +194,7 @@ USERNAME = "<your-username>"
 ACCESS_TOKEN = "<your-access-token>"
 PORT = "5432"
 HOST = "<your project name>.cloud.neon.tech"
-DBNAME = "main"
+DBNAME = "neondb"
 
 conn = psycopg2.connect(
  host=HOST,
@@ -288,7 +292,7 @@ For example, if you configure your Symfony project with `.env` file, then DATABA
 
 ```shell
 # cat .env | grep DATABASE_URL
-DATABASE_URL="postgresql://<user>:<token>@<project_id>.cloud.neon.tech:5432/main?charset=utf8"
+DATABASE_URL="postgresql://<user>:<token>@<project_id>.cloud.neon.tech:5432/neondb?charset=utf8"
 ```
 
 Make sure that you are using `<user>%40neon` as username. This is url encoded value for `<user>`. You can find `<user>` string in the upper right corner of the UI.
@@ -302,7 +306,7 @@ The JDBC API is a Java API for relational databases. PostgreSQL has a well-suppo
 To get a JDBC connection URL, replace placeholders with your credentials in the following template:
 
 ```java
-jdbc:postgresql://<project>.cloud.neon.tech/main?user=<user>&password=<token>
+jdbc:postgresql://<project>.cloud.neon.tech/neondb?user=<user>&password=<token>
 ```
 
 For more information about JDBC, refer to the standard JDBC API documentation and [PostgreSQL JDBC Driver documentation](https://jdbc.postgresql.org/documentation/head/index.html).
@@ -314,7 +318,7 @@ Spring relies on JDBC and PostgreSQL driver to connect to PostgreSQL databases. 
 The only configuration required for connection is a datasource URL. It is specified in the `application.properties` file in the following format:
 
 ```java
-spring.datasource.url=jdbc:postgresql://<project>.cloud.neon.tech/main?user=<user>&password=<token>
+spring.datasource.url=jdbc:postgresql://<project>.cloud.neon.tech/neondb?user=<user>&password=<token>
 ```
 
 ### Using from Go
@@ -333,7 +337,7 @@ import (
 )
 
 func main() {
-    connStr := "user=<user> password=<token> dbname=main host=<project>.cloud.neon.tech"
+    connStr := "user=<user> password=<token> dbname=neondb host=<project>.cloud.neon.tech"
     db, err := sql.Open("postgres", connStr)
     if err != nil {
         log.Fatal(err)
