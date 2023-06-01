@@ -28,11 +28,11 @@ Given the potential impact on application responsiveness, it's important to have
 
 The [Neon Pro plan](/docs/introduction/pro-plan) allows you to configure the period before the system scales down to zero, providing you with control over the balance between performance and cost. The configuration setting is called **Auto-suspend delay**, and it is set to 300 seconds (5 minutes) by default. You can either disable Auto-suspend entirely or increase the setting up to a maximum of 7 days. This strategy eliminates or reduces cold starts, respectively, but increases compute time, which means higher compute costs. For configuration instructions, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
-Consider combining this strategy Autoscaling (available with the [Neon Pro plan](/docs/introduction/pro-plan)), which allows you to run a compute with minimal resources and scale up on demand. For example, with Autoscaling, you can configure a minimum compute size to reduce costs when your compute is active during off-peak times. In the image shown below, the **Auto-suspend delay** is set to 3600 seconds (1 hour) and Autoscaling is configured with the 1/4 minimum compute size to keep costs low during off-peak hours.
+Consider combining this strategy Autoscaling (available with the [Neon Pro plan](/docs/introduction/pro-plan)), which allows you to run a compute with minimal resources and scale up on demand. For example, with Autoscaling, you can configure a minimum compute size to reduce costs when your compute is active during off-peak times. In the image shown below, the **Auto-suspend delay** is set to 3600 seconds (1 hour) so that your compute only suspends after an hour of inactivity, and Autoscaling is configured with the 1/4 minimum compute size to keep costs low during periods periods of inactivity or light usage.
 
-![Cold start compute size configuration](/docs/connect/cold-start-compute-configuration.png)
+![Cold start Auto-suspend and Autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
-For information about what an "always-on" minimum compute might cost you, please refer to our [Billing](/docs/introduction/billing) documentation or to the pricing calculator on our [Pricing](https://neon.tech/pricing) page.
+For information about what an "always-on" minimum compute size might cost you, please refer to our [Billing](/docs/introduction/billing) documentation or to the pricing calculator on our [Pricing](https://neon.tech/pricing) page.
 
 For Autoscaling configuration instructions, see [Compute size and Autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
