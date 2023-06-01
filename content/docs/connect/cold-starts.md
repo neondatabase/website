@@ -9,7 +9,7 @@ With serverless architectures and auto-scaling systems such as Neon, a common ch
 One of Neon's core features is 'scale to zero', which is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. Currently, restarting a compute from an idle state takes approximately 4 seconds. 
 
 <Admonition type="note">
-It's also important to remember that services that you integrate with Neon may have their own cold start challenges, compounding connection time issues. This topic does not address cold start times of other vendors, but if your application connects to Neon via other services, be sure to consider cold start times for those services as well.
+It's also important to remember that services you integrate with Neon may have their own cold starts, compounding connection time issues. This topic does not address cold starts of other vendors, but if your application connects to Neon via other services, do not forget to consider cold start times for those services as well.
 </Admonition>
 
 Neon is working to reduce cold start times, but in the interim, the following section describes strategies that you can implement to minimize the impact of cold starts on your applications.
