@@ -19,20 +19,20 @@ Neon is working to reduce cold start times, but in the interim, the following se
 Given the potential impact on application responsiveness, it's important to have strategies in place for managing cold starts. Here are some methods you can implement:
 
 - [Adjust your Auto-suspend (scale to zero) configuration](#adjust-your-auto-suspend-scale-to-zero-configuration)
-- [Increase your connection timeout setting](#increase-your-connection-timeout-setting)
+- [Increase your connection timeout](#increase-your-connection-timeout)
 - [Build connection timeout handling into your application](#build-connection-timeout-handling-into-your-application)
 - [Automate compute startup via a scheduled connection](#automate-compute-startup-via-a-scheduled-connection)
 - [Use application-level caching](#use-application-level-caching)
 
 ### Adjust your Auto-suspend (scale to zero) configuration
 
-The [Neon Pro plan](/docs/introduction/pro-plan) allows you to configure the period before the system scales down to zero, providing you with control over your balance between performance and cost. The configuration setting is called **Auto-suspend delay**, and it is set to 300 seconds (5 minutes) by default. You can either disable Auto-suspend entirely or increase the setting up to a maximum of 7 days. This strategy eliminates cold starts but increases compute time, which may translate to higher compute costs. For instructions, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+The [Neon Pro plan](/docs/introduction/pro-plan) allows you to configure the period before the system scales down to zero, providing you with control over the balance between performance and cost. The configuration setting is called **Auto-suspend delay**, and it is set to 300 seconds (5 minutes) by default. You can either disable Auto-suspend entirely or increase the setting up to a maximum of 7 days. This strategy eliminates or reduces cold starts but increases compute time, which may translate to higher compute costs. For instructions, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
-Consider combining this strategy Autoscaling (available with the [Neon Pro plan](/docs/introduction/pro-plan)), which allows you to run a compute with minimal resources and scale up on demand. For example, with Autoscaling you can configure a minimum compute size of 1/4 vCPU to minimize costs when your compute is active during off-peak times. To configure Autoscaling, see [Compute size and Autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+Consider combining this strategy Autoscaling (available with the [Neon Pro plan](/docs/introduction/pro-plan)), which allows you to run a compute with minimal resources and scale up on demand. For example, with Autoscaling, you can configure a minimum compute size to minimize costs when your compute is active during off-peak times. To configure Autoscaling, see [Compute size and Autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
-### Increase your connection timeout setting
+### Increase your connection timeout
 
-By configuring longer connection timeout durations, your application has more time to handle a cold start, minimizing connection failures. However, this could result in users waiting longer for their requests to be processed.
+By configuring longer connection timeout durations, your application has more time to handle a cold start, minimizing connection failures.
 
 Connection timeout settings are typically configured in your application or the database client library you're using, and the specific way to do it depends on the language and framework you're using.
 
@@ -144,9 +144,11 @@ The example above is a simplification. In a production application, you might wa
 
 ### Automate compute startup via a scheduled connection
 
-If your database usage follows predictable patterns, consider scheduling compute instances to start just before peak usage periods. This can be achieved using various tools, such as Cron Jobs in Unix-based systems, as in the following example:
+If your database usage follows predictable patterns, consider scheduling compute instances to start just before peak usage periods to avoid timeouts or failures on the initial connection. This can be achieved using various tools, such as Cron Jobs in Unix-based systems, as in the following example:
 
-1. Create a shell script called `db_connect.sh` that connects to your database. Here's an example in which we use the `psql` command line tool to connect to the database. Replace `<connection_string>` with your actual Neon connection string:
+1. Create a shell script called `db_connect.sh` that connects to your database. Here's an example in which we use the `psql` command line tool to connect to the database. Replace `<connection_string>` with your Neon connection string:
+
+    <CodeBlock shouldWrap>
 
     ```bash
     #!/bin/sh
@@ -154,6 +156,8 @@ If your database usage follows predictable patterns, consider scheduling compute
 
     psql "postgres://<user>@ep-snowy-unit-123456.us-east-2.aws.neon.tech/neondb" -c 'SELECT 1'
     ```
+
+    </CodeBlock>
 
 2. After creating the script, make sure it's executable by running the following command:
 
