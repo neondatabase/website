@@ -1,28 +1,30 @@
 ---
-title: Manage cold starts
+title: Optimize initial connections
 enableTableOfContents: true
 isDraft: true
 ---
 
-With serverless architectures and auto-scaling systems such as Neon, a common challenge that arises is "cold starts". For Neon, a cold start refers to the situation where a compute instance is started in response to a request after being in an idle state. Cold starts can result in longer response times and connection failures or timeouts due to the few seconds required to restart an idle compute.
+Neon's Auto-suspend feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A unique characteristic of this feature is the concept of a "connection warmup". During this process, also referred to as a "cold start", a compute instance transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state takes approximately 4 seconds.
 
-One of Neon's core features is 'scale to zero', which is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity.
+This topic describes how to check the status of a compute to determine if it is active or idle, how to explicitly activate a compute, and strategies for managing connection warmups.
+
+## Check the status of a compute
 
 You can check the current status of a compute on the **Branches** page in the Neon Console. A compute will report either an **Active** or **Idle** status.
 
 ![Compute endpoint active idle status](/docs/connect/compute_endpoint_status.png)
 
-You can wake a compute by connecting to it from a client such as `psql`, by running a query on the associated branch from the Neon SQL Editor, or using the Neon [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API.
+## Activate an idle compute
 
-Currently, restarting a compute from an idle state takes approximately 4 seconds. Neon is working to reduce the cold start time, but in the interim, the following section describes strategies that you can implement to minimize the impact of cold starts on your applications.
+Options for activating an idle compute include connecting to it from a client, running a query on the associated branch from the Neon SQL Editor, or using the Neon [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API.
 
 <Admonition type="note">
 It's also important to remember that services you integrate with Neon may have their own cold starts, compounding connection time issues. This topic does not address cold starts of other vendors, but if your application connects to Neon via other services, do not forget to consider cold start times for those services as well.
 </Admonition>
 
-## Strategies for handling cold starts
+## Strategies for managing connection warmups
 
-Given the potential impact on application responsiveness, it's important to have strategies in place for managing cold starts. Here are some methods you can implement:
+Given the potential impact on application responsiveness, it's important to have strategies in place for managing the connection warmup period  &mdash; when a compute transitions from an idle to and active state. Here are some methods you can implement:
 
 - [Adjust your Auto-suspend (scale to zero) configuration](#adjust-your-auto-suspend-scale-to-zero-configuration)
 - [Increase your connection timeout](#increase-your-connection-timeout)
@@ -195,4 +197,4 @@ Implement a caching system like [Redis](https://redis.io/) or [PolyScale](https:
 
 ## Conclusion
 
-Cold starts can be a challenge in a system that balances cost-effectiveness with performance. However, with the right strategies, you can significantly reduce their impact and ensure your application delivers a consistently high level of performance. The best solution often involves a combination of these strategies, so experiment and find the perfect balance for your specific use case.
+With the right strategies, you can optimize your system to handle connection warmups, ensuring your application delivers a consistently high level of performance. The best solution often involves a combination of the strategies outlined above, so experiment and find the right configuration for your specific use case.
