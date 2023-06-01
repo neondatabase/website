@@ -49,8 +49,9 @@ export async function generateMetadata({ params }) {
 
 export async function generateStaticParams() {
   const categories = await getAllWpBlogCategories();
+  const filteredCategories = categories.filter((category) => category.slug !== 'uncategorized');
 
-  return categories.map((category) => ({
+  return filteredCategories.map((category) => ({
     slug: category.slug,
   }));
 }
