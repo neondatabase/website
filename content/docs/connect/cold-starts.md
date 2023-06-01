@@ -6,13 +6,19 @@ isDraft: true
 
 With serverless architectures and auto-scaling systems such as Neon, a common challenge that arises is "cold starts". For Neon, a cold start refers to the situation where a compute instance is started in response to a request after being in an idle state. Cold starts can result in longer response times and connection failures or timeouts due to the few seconds required to restart an idle compute.
 
-One of Neon's core features is 'scale to zero', which is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. Currently, restarting a compute from an idle state takes approximately 4 seconds. 
+One of Neon's core features is 'scale to zero', which is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity.
+
+You can check the current status of a compute on the **Branches** page in the Neon Console. A compute will report either an **Active** or **Idle** status.
+
+![Compute endpoint active idle status](/docs/connect/compute_endpoint_status.png)
+
+You can wake a compute by connecting to it from a client such as `psql`, by running a query on the associated branch from the Neon SQL Editor, or using the Neon [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API.
+
+Currently, restarting a compute from an idle state takes approximately 4 seconds. Neon is working to reduce the cold start time, but in the interim, the following section describes strategies that you can implement to minimize the impact of cold starts on your applications.
 
 <Admonition type="note">
 It's also important to remember that services you integrate with Neon may have their own cold starts, compounding connection time issues. This topic does not address cold starts of other vendors, but if your application connects to Neon via other services, do not forget to consider cold start times for those services as well.
 </Admonition>
-
-Neon is working to reduce cold start times, but in the interim, the following section describes strategies that you can implement to minimize the impact of cold starts on your applications.
 
 ## Strategies for handling cold starts
 
@@ -32,7 +38,7 @@ Consider combining this strategy Autoscaling (available with the [Neon Pro plan]
 
 ![Cold start Auto-suspend and Autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
-For information about what an "always-on" minimum compute size might cost you, please refer to our [Billing](/docs/introduction/billing) documentation or the pricing calculator on our [Pricing](https://neon.tech/pricing) page.
+For information about what an "always-on" minimum compute size might cost per month, please refer to our [Billing](/docs/introduction/billing) documentation or the pricing calculator on our [Pricing](https://neon.tech/pricing) page.
 
 For Autoscaling configuration instructions, see [Compute size and Autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
