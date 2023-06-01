@@ -73,13 +73,9 @@ properties.setProperty("connectTimeout", "10");
 Connection conn = DriverManager.getConnection(dbUrl, properties);
 ```
 
-<CodeBlock shouldWrap>
-
 ```prisma
-DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb?connect_timeout=20`
+DATABASE_URL=postgres://<user>:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb?connect_timeout=20`
 ```
-
-</CodeBlock>
 
 </CodeTabs>
 
