@@ -56,9 +56,9 @@ Here are examples of how to increase connection timeout settings in a few common
 const { Pool } = require('pg')
 
 const pool = new Pool({
-connectionString: process.env.DATABASE_URL,
-connectionTimeoutMillis: 10000, // connection timeout in milliseconds
-idleTimeoutMillis: 10000 // idle timeout in milliseconds
+    connectionString: process.env.DATABASE_URL,
+    connectionTimeoutMillis: 10000, // connection timeout in milliseconds
+    idleTimeoutMillis: 10000 // idle timeout in milliseconds
 })
 ```
 
