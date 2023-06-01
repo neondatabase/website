@@ -38,54 +38,48 @@ Connection timeout settings are typically configured in your application or the 
 
 Here are examples of how to increase connection timeout settings in a few common programming languages and frameworks:
 
-- Node.js (using pg)
+<CodeTabs labels={["Node.js", "Python", "Java", "Prisma" ]}>
 
-    ```js
-    const { Pool } = require('pg')
+```js
+const { Pool } = require('pg')
 
-    const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    connectionTimeoutMillis: 10000, // connection timeout in milliseconds
-    idleTimeoutMillis: 10000 // idle timeout in milliseconds
-    })
-    ```
+const pool = new Pool({
+connectionString: process.env.DATABASE_URL,
+connectionTimeoutMillis: 10000, // connection timeout in milliseconds
+idleTimeoutMillis: 10000 // idle timeout in milliseconds
+})
+```
 
-    The `connectionTimeoutMillis` sets the maximum time (in milliseconds) to wait for a connection to be established before giving up and throwing an error.
+```python
+import psycopg2
+from psycopg2 import connect
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+import os
 
-- Python
+DATABASE_URL = os.environ['DATABASE_URL']
 
-    ```python
-    import psycopg2
-    from psycopg2 import connect
-    from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-    import os
+conn = psycopg2.connect(DATABASE_URL, connect_timeout=10)
+```
 
-    DATABASE_URL = os.environ['DATABASE_URL']
+```java
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.Properties;
 
-    conn = psycopg2.connect(DATABASE_URL, connect_timeout=10)
-    ```
+String dbUrl = System.getenv("DATABASE_URL");
+Properties properties = new Properties();
+properties.setProperty("connectTimeout", "10");
 
-    The `connect_timeout` parameter sets the maximum time (in seconds) to wait for a connection to be established before giving up and throwing an error.
+Connection conn = DriverManager.getConnection(dbUrl, properties);
+```
 
-- Java (using JDBC)
+```prisma
+DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb?connect_timeout=20`
+```
 
-    ```java
-    import java.sql.Connection;
-    import java.sql.DriverManager;
-    import java.util.Properties;
+</CodeTabs>
 
-    String dbUrl = System.getenv("DATABASE_URL");
-    Properties properties = new Properties();
-    properties.setProperty("connectTimeout", "10");
-
-    Connection conn = DriverManager.getConnection(dbUrl, properties);
-    ```
-
-    The `connectTimeout` parameter sets the maximum time (in seconds) to wait for a connection to be established before giving up and throwing an error.
-
-- Prisma
-
-  For addressing connection timeouts when connecting to Neon from Prisma, see [Connection timeouts](../guides/prisma#connection-timeouts) in our Prisma documentation.
+For more information about timeouts when connecting from Prisma, see [Connection timeouts](../guides/prisma#connection-timeouts) in our Prisma documentation.
 
 Remember that increasing the connection timeout might impact the responsiveness of your application, as users could end up waiting longer for their requests to be processed. Always test and monitor your application's performance when making changes like these.
 
