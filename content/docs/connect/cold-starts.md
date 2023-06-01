@@ -34,7 +34,7 @@ Given the potential impact on application responsiveness, it's important to have
 
 ### Adjust your Auto-suspend (scale to zero) configuration
 
-The [Neon Pro plan](/docs/introduction/pro-plan) allows you to configure the period before the system scales down to zero, providing you with control over the balance between performance and cost. The configuration setting is called **Auto-suspend delay**, and it is set to 300 seconds (5 minutes) by default. You can either disable Auto-suspend entirely or increase the setting up to a maximum of 7 days. This strategy eliminates or reduces cold starts, respectively, but increases compute time, which means higher compute costs. For configuration instructions, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+The [Neon Pro plan](/docs/introduction/pro-plan) allows you to configure the period before the system scales down to zero, providing you with control over the balance between performance and cost. The configuration setting is called **Auto-suspend delay**, and it is set to 300 seconds (5 minutes) by default. You can either disable Auto-suspend entirely or increase the setting up to a maximum of 7 days. This strategy eliminates or reduces connection warmup times, respectively, but increases compute usage, which means higher compute costs. For configuration instructions, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
 Consider combining this strategy Autoscaling (available with the [Neon Pro plan](/docs/introduction/pro-plan)), which allows you to run a compute with minimal resources and scale up on demand. For example, with Autoscaling, you can configure a minimum compute size to reduce costs when your compute is active during off-peak times. In the image shown below, the **Auto-suspend delay** is set to 3600 seconds (1 hour) so that your compute only suspends after an hour of inactivity, and Autoscaling is configured with the 1/4 minimum compute size to keep costs low during periods periods of inactivity or light usage.
 
@@ -46,7 +46,7 @@ For Autoscaling configuration instructions, see [Compute size and Autoscaling co
 
 ### Increase your connection timeout
 
-By configuring longer connection timeout durations, your application has more time to handle a cold start, minimizing connection failures.
+By configuring longer connection timeout durations, your application has more time to accommodate the few seconds it takes to active an idle compute.
 
 Connection timeout settings are typically configured in your application or the database client library you're using, and the specific way to do it depends on the language and framework you're using.
 
@@ -144,7 +144,7 @@ async function connectWithRetry() {
 connectWithRetry();
 ```
 
-In the example above, the `operation.attempt` function executes the connection logic. If the connection fails (i.e., `client.connect()` throws an error), the error is passed to `operation.retry(err)`. If there are retries left, the retry function schedules another attempt with an exponentially increasing delay. Otherwise, the error is logged to the console.
+In this example, the `operation.attempt` function executes the connection logic. If the connection fails (i.e., `client.connect()` throws an error), the error is passed to `operation.retry(err)`. If there are retries left, the retry function schedules another attempt with an exponentially increasing delay. Otherwise, the error is logged to the console.
 
 <Admonition type="note">
 The example above is a simplification. In a production application, you might want to be more sophisticated, e.g., by initially trying to reconnect quickly in case the problem was a transient network issue, then fall back to slower retries if the problem persists. This could be achieved by using the `factor` option in the `retry` library, or by implementing your own backoff logic.
@@ -152,7 +152,7 @@ The example above is a simplification. In a production application, you might wa
 
 ### Automate compute startup via a scheduled connection
 
-If your database usage follows predictable patterns, consider scheduling compute instances to start just before peak usage periods to avoid timeouts or failures on the initial connection. This can be achieved using various tools, such as Cron Jobs in Unix-based systems. The following example shows how to set up a Cron job that connects to your Neon database via `psql`, but you can also achieve the same result by running the Neon [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API.
+If your database usage follows predictable patterns, consider scheduling your compute to start just before peak usage periods to avoid timeouts or failures on an initial connection. This can be achieved using various tools, such as Cron Jobs in Unix-based systems. The following example shows how to set up a Cron job that connects to your Neon database via `psql`, but you can also achieve the same result by running the Neon [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API.
 
 1. Create a shell script called `db_connect.sh` that connects to your database. Here's an example in which we use the `psql` command line tool to connect to the database. Replace `<connection_string>` with your Neon connection string:
 
