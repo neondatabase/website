@@ -150,7 +150,7 @@ The example above is a simplification. In a production application, you might wa
 
 ### Automate compute startup via a scheduled connection
 
-If your database usage follows predictable patterns, consider scheduling compute instances to start just before peak usage periods to avoid timeouts or failures on the initial connection. This can be achieved using various tools, such as Cron Jobs in Unix-based systems, as in the following example:
+If your database usage follows predictable patterns, consider scheduling compute instances to start just before peak usage periods to avoid timeouts or failures on the initial connection. This can be achieved using various tools, such as Cron Jobs in Unix-based systems. The following example shows how to set up a Cron job that connects to your Neon database via `psql`, but you can also achieve the same result by running the Neon [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API.
 
 1. Create a shell script called `db_connect.sh` that connects to your database. Here's an example in which we use the `psql` command line tool to connect to the database. Replace `<connection_string>` with your Neon connection string:
 
