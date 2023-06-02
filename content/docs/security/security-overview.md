@@ -13,7 +13,7 @@ Neon has successfully completed a SOC2 Type 1 audit. SOC2 (Service Organization 
 
 This audit report focuses on five trust service criteria: security, availability, processing integrity, confidentiality, and privacy. Our successful completion of this audit signifies that our design of systems and procedures, as of a specific date, meet these stringent criteria.
 
-Please note that while the term "SOC2 Certified" is commonly used, it's not accurate and we refrain from using it. The AICPA explicitly advises against using this term. A SOC2 report is an attestation of the effectiveness of controls, not a certification.
+Please note that while the term "SOC2 Certified" is commonly used, it is not accurate and we refrain from using it. The AICPA explicitly advises against using this term. A SOC2 report is an attestation of the effectiveness of controls, not a certification.
 
 Our SOC2 Type 1 report underscores our ongoing commitment to safeguarding our customers' data and maintaining a high level of security. We will continue to invest in regular audits and adhere to industry best practices to ensure the security, integrity, and privacy of the data you entrust us with.
 
