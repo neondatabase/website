@@ -34,7 +34,7 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
         className={clsx(
           'group flex w-full items-start justify-between py-2 text-left text-sm text-gray-3 transition-colors duration-200 hover:text-black dark:text-gray-7 dark:hover:text-white',
           {
-            'font-semibold !text-black dark:!text-white': currentSlug === slug,
+            'font-medium !text-black dark:!text-white': currentSlug === slug,
           }
         )}
         type={slug ? undefined : 'button'}

@@ -10,14 +10,8 @@
   }
   .prose-doc {
     @apply max-w-none leading-normal text-black dark:text-white;
-
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      @apply leading-tight;
-    }
+    @apply prose-headings:leading-tight;
+    @apply prose-a:border-b prose-a:border-transparent prose-a:font-normal prose-a:text-secondary-8 prose-a:no-underline prose-a:transition-[border-color] prose-a:duration-200 prose-a:ease-in-out hover:prose-a:border-secondary-8 dark:prose-a:text-primary-1 dark:hover:prose-a:border-primary-1 prose-a:sm:break-words;
 
     h2 {
       @apply mb-3 mt-10;
@@ -25,10 +19,6 @@
 
     p {
       @apply my-3 leading-normal;
-    }
-
-    a:not(.anchor) {
-      @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color] duration-200 ease-in-out hover:border-secondary-8 dark:text-primary-1 dark:hover:border-primary-1 sm:break-words;
     }
 
     ul,
