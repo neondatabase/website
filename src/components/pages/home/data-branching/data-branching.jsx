@@ -39,9 +39,8 @@ const DataBranching = () => {
             className="mt-6 inline-block text-2xl font-semibold before:-bottom-1 before:h-1 2xl:text-xl xl:text-lg"
             to="/branching/"
             theme="black-primary-1"
-            aria-label="Read more about data branching"
           >
-            Read more
+            Read more<span className="sr-only"> about data branching</span>
           </Link>
         </div>
       </Container>
