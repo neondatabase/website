@@ -8,15 +8,14 @@ redirectFrom:
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users.
 
-## SOC2 Certification
-Neon has achieved SOC2 Type 1 certification, demonstrating our commitment to maintaining the highest standards of security and data protection. The SOC2 (Service Organization Control 2) certification is a recognized auditing standard developed by the American Institute of Certified Public Accountants (AICPA).
+## SOC2
+At Neon, we're proud to announce that we've successfully undergone a SOC2 Type 1 audit. SOC2 (Service Organization Control 2) Type 1 report is an attestation by an independent auditing entity, acknowledging that an organization has processes and systems in place that comply with the principles of the American Institute of Certified Public Accountants (AICPA).
 
-This certification validates that our system is designed effectively to maintain the security, availability, processing integrity, confidentiality, and privacy of customer data. An independent third-party has audited our controls and certified that we meet these rigorous standards.
+This audit report focuses on five trust service criteria: security, availability, processing integrity, confidentiality, and privacy. Our successful completion of this audit signifies that our design of systems and procedures, as of a specific date, meet these stringent criteria.
 
-We conduct these audits to assure our customers that we prioritize their data's security and are committed to transparency in our internal operations. This certification not only emphasizes our dedication to security best practices, but also assures you that we're consistently taking the necessary steps to protect your data.
+Please note that while the term "SOC2 Certified" is commonly used, it's not accurate and we refrain from using it. The AICPA explicitly advises against using this term. A SOC2 report is an attestation of the effectiveness of controls, not a certification.
 
-Neon believes that robust security and data protection is crucial for maintaining the trust of our users and clients. We will continue to invest in advanced security certifications, to assure that we are in compliance with globally-recognized standards and best practices.
-
+Our SOC2 Type 1 report underscores our ongoing commitment to safeguarding our customers' data and maintaining a high level of security. We will continue to invest in regular audits and adhere to industry best practices to ensure the security, integrity, and privacy of the data you entrust us with.
 
 ## Security reporting
 
