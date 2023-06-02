@@ -49,15 +49,23 @@ PGPORT='5432'
 
 Variable:
 
+<CodeBlock shouldWrap>
+
 ```text
 DATABASE_URL="postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech:5432/neondb"
 ```
 
+</CodeBlock>
+
 Command-line:
+
+<CodeBlock shouldWrap>
 
 ```bash
 psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
 ```
+
+</CodeBlock>
 
 <Admonition type="note">
 Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](../connect/connect-securely).

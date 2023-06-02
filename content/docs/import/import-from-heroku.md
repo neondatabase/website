@@ -26,9 +26,13 @@ To migrate your data from Heroku to Neon:
 
     The example connection string used the instructions that follow is:
 
-    ```sh
+    <CodeBlock shouldWrap>
+
+    ```text
     postgres://jsmith:Wij8mIDXoQ8H@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
     ```
+
+    </CodeBlock>
 
 ## Retrieve your Heroku app name and database name
 

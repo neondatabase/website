@@ -88,9 +88,13 @@ A method of creating a pool of connections and caching those connections for reu
 
 A string containing details for connecting to a Neon database. The details include a user name (role), compute endpoint hostname, and database name; for example:
 
+<CodeBlock shouldWrap>
+
 ```terminal
 postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
 ```
+
+</CodeBlock>
 
 The compute endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
 

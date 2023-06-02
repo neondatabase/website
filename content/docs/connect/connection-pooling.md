@@ -31,9 +31,13 @@ Enabling connection pooling in Neon requires adding a `-pooler` suffix to the co
 
 Add the `-pooler` suffix to the endpoint ID, as shown:
 
+<CodeBlock shouldWrap>
+
 ```text
 postgres://sally:<password>@ep-throbbing-boat-918849-pooler.us-east-2.aws.neon.tech/neondb
 ```
+
+</CodeBlock>
 
 The **Connection Details** widget on the Neon **Dashboard** provides **Pooled connection** and **Direct connection** tabs, allowing you to copy a connection string with or without the `-pooler` option.
 
