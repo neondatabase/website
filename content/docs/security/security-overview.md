@@ -8,6 +8,16 @@ redirectFrom:
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users.
 
+## SOC2 Certification
+Neon has achieved SOC2 Type 1 certification, demonstrating our commitment to maintaining the highest standards of security and data protection. The SOC2 (Service Organization Control 2) certification is a recognized auditing standard developed by the American Institute of Certified Public Accountants (AICPA).
+
+This certification validates that our system is designed effectively to maintain the security, availability, processing integrity, confidentiality, and privacy of customer data. An independent third-party has audited our controls and certified that we meet these rigorous standards.
+
+We conduct these audits to assure our customers that we prioritize their data's security and are committed to transparency in our internal operations. This certification not only emphasizes our dedication to security best practices, but also assures you that we're consistently taking the necessary steps to protect your data.
+
+Neon believes that robust security and data protection is crucial for maintaining the trust of our users and clients. We will continue to invest in advanced security certifications, to assure that we are in compliance with globally-recognized standards and best practices.
+
+
 ## Security reporting
 
 Neon is currently in Technical Preview, and vulnerabilities may be present. We have established a security reporting procedure to address security issues quickly. We recommend using Neon only with public or non-sensitive data at this time.
@@ -44,9 +54,3 @@ If you identify a security vulnerability, please proceed as follows under the pr
 ## Secure data centers
 
 Neon’s infrastructure is hosted and managed within Amazon’s secure data centers backed by [AWS Cloud Security](https://aws.amazon.com/security/). Amazon continually manages risk and undergoes recurring assessments to ensure compliance with industry standards. For information about AWS data center compliance programs, refer to [AWS Compliance Programs](https://aws.amazon.com/compliance/programs/).
-
-## Neon's security roadmap for 2023
-
-Neon is undergoing internal reviews to achieve SOC2 Type 2 certification.
-
-We will share more information about Neon's security plans on GitHub soon.
