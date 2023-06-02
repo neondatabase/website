@@ -15,7 +15,7 @@ This audit report focuses on five trust service criteria: security, availability
 
 Please note that while the term "SOC2 Certified" is commonly used, it is not accurate and we refrain from using it. The AICPA explicitly advises against using this term. A SOC2 report is an attestation of the effectiveness of controls, not a certification.
 
-Our SOC2 Type 1 report underscores our ongoing commitment to safeguarding our customers' data and maintaining a high level of security. We will continue to invest in regular audits and adhere to industry best practices to ensure the security, integrity, and privacy of the data you entrust us with.
+Our SOC2 Type 1 report underscores our ongoing commitment to safeguarding customer data and maintaining a high level of security. We will continue to invest in regular audits and adhere to industry best practices to ensure the security, integrity, and privacy of the data you entrust us with.
 
 ## Security reporting
 
