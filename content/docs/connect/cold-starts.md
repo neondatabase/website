@@ -19,7 +19,7 @@ You can check the current status of a compute on the **Branches** page in the Ne
 Options for activating an idle compute include connecting to it from a client, running a query on the associated branch from the Neon SQL Editor, or using the Neon [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API.
 
 <Admonition type="note">
-It's also important to remember that services you integrate with Neon may have their own cold starts, compounding connection time issues. This topic does not address cold starts of other vendors, but if your application connects to Neon via other services, do not forget to consider cold start times for those services as well.
+It's also important to remember that services you integrate with Neon may have their own connection warmup periods, adding to your connection latency. This topic does not address latencies for other vendors, but if your application connects to Neon via other services, do not forget to consider connection warmup times for those services as well.
 </Admonition>
 
 ## Strategies for managing connection warmups
@@ -29,7 +29,6 @@ Given the potential impact on application responsiveness, it's important to have
 - [Adjust your Auto-suspend (scale to zero) configuration](#adjust-your-auto-suspend-scale-to-zero-configuration)
 - [Increase your connection timeout](#increase-your-connection-timeout)
 - [Build connection timeout handling into your application](#build-connection-timeout-handling-into-your-application)
-- [Automate compute startup via a scheduled connection](#automate-compute-startup-via-a-scheduled-connection)
 - [Use application-level caching](#use-application-level-caching)
 
 ### Adjust your Auto-suspend (scale to zero) configuration
@@ -38,7 +37,7 @@ The [Neon Pro plan](/docs/introduction/pro-plan) allows you to configure the per
 
 Consider combining this strategy Autoscaling (available with the [Neon Pro plan](/docs/introduction/pro-plan)), which allows you to run a compute with minimal resources and scale up on demand. For example, with Autoscaling, you can configure a minimum compute size to reduce costs when your compute is active during off-peak times. In the image shown below, the **Auto-suspend delay** is set to 3600 seconds (1 hour) so that your compute only suspends after an hour of inactivity, and Autoscaling is configured with the 1/4 minimum compute size to keep costs low during periods periods of inactivity or light usage.
 
-![Cold start Auto-suspend and Autoscaling configuration](/docs/connect/cold_start_compute_config.png)
+![Connection warmup Auto-suspend and Autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
 For information about what an "always-on" minimum compute size might cost per month, please refer to our [Billing](/docs/introduction/billing) documentation or the pricing calculator on our [Pricing](https://neon.tech/pricing) page.
 
@@ -150,50 +149,9 @@ In this example, the `operation.attempt` function executes the connection logic.
 The example above is a simplification. In a production application, you might want to be more sophisticated, e.g., by initially trying to reconnect quickly in case the problem was a transient network issue, then fall back to slower retries if the problem persists. This could be achieved by using the `factor` option in the `retry` library, or by implementing your own backoff logic.
 </Admonition>
 
-### Automate compute startup via a scheduled connection
-
-If your database usage follows predictable patterns, consider scheduling your compute to start just before peak usage periods to avoid timeouts or failures on an initial connection. This can be achieved using various tools, such as Cron Jobs in Unix-based systems. The following example shows how to set up a Cron job that connects to your Neon database via `psql`, but you can also achieve the same result by running the Neon [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API.
-
-1. Create a shell script called `db_connect.sh` that connects to your database. Here's an example in which we use the `psql` command line tool to connect to the database. Replace `<connection_string>` with your Neon connection string:
-
-    <CodeBlock shouldWrap>
-
-    ```bash
-    #!/bin/sh
-    export PGPASSWORD='<password>'
-
-    psql "postgres://<user>@ep-snowy-unit-123456.us-east-2.aws.neon.tech/neondb" -c 'SELECT 1'
-    ```
-
-    </CodeBlock>
-
-2. After creating the script, make sure it's executable by running the following command:
-
-    ```bash
-    chmod +x db_connect.sh
-    ```
-
-3. Then, you can schedule the script using a Cron job. Open your crontab file with this command:
-
-    ```bash
-    crontab -e
-    ```
-
-4. Then add the following line to your crontab file to schedule the script to run at 7AM daily, for example:
-
-    ```text
-    0 7 * * * /path/to/your/script/db_connect.sh
-    ```
-
-<Admonition type="note">
-This is a simple example and may need to be adapted to fit your specific needs. Also, please consider using a more secure method of handling your database credentials, such as a secrets manager.
-</Admonition>
-
-If you do not have access to a Unix-base system, there are other tools and services you can use to schedule tasks, such as [AWS Lambda functions with CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/RunLambdaSchedule.html), [Google Cloud Scheduler](https://cloud.google.com/scheduler), or [Task Scheduler](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-task-scheduler) if you are using Windows.
-
 ### Use application-level caching
 
-Implement a caching system like [Redis](https://redis.io/) or [PolyScale](https://www.polyscale.ai/) to keep frequently accessed data readily available. This reduces the load on your database and helps avoid the latency associated with cold starts.
+Implement a caching system like [Redis](https://redis.io/) or [PolyScale](https://www.polyscale.ai/) to keep frequently accessed data readily available. This reduces the load on your database and helps avoid the latency associated with connection warmups.
 
 ## Conclusion
 
