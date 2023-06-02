@@ -40,7 +40,7 @@ const DataBranching = () => {
             to="/branching/"
             theme="black-primary-1"
           >
-            Read more
+            Read more<span className="sr-only"> about data branching</span>
           </Link>
         </div>
       </Container>
