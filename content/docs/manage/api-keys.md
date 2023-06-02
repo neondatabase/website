@@ -36,10 +36,6 @@ To revoke an API key:
 
 ## Make an API call
 
-<Admonition type="important">
-[Neon API v1](https://neon.tech/api-reference) is deprecated. Please migrate your applications to [Neon API v2](https://api-docs.neon.tech/reference/getting-started-with-neon-api). The base URL for Neon API v2 is `https://console.neon.tech/api/v2/`.
-</Admonition>
-
 The following `cURL` example uses the `/projects` endpoint to retrieve projects that belong to your Neon account.
 
 ```bash
