@@ -59,7 +59,7 @@
     - title: Connection pooling
       slug: connect/connection-pooling
     - title: Connection time optimization
-      slug: connect/connection-times
+      slug: connect/connection-time-optimization
 - title: Manage
   items:
     - title: Overview
