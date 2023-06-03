@@ -58,8 +58,8 @@
       slug: connect/connect-securely
     - title: Connection pooling
       slug: connect/connection-pooling
-    - title: Manage cold starts
-      slug: connect/cold-starts
+    - title: Connection time optimization
+      slug: connect/connection-times
 - title: Manage
   items:
     - title: Overview

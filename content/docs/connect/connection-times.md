@@ -1,10 +1,14 @@
 ---
-title: Optimize initial connections
+title: Connection time optimization
 enableTableOfContents: true
 isDraft: true
 ---
 
-Neon's Auto-suspend feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A unique characteristic of this feature is the concept of a "connection warmup". During this process, also referred to as a "cold start", a compute instance transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state takes approximately 4 seconds.
+Neon's Auto-suspend feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A unique characteristic of this feature is the concept of a "connection warmup". During this process, also referred to as a "cold start", a compute instance transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state takes 3 to 4 seconds.
+
+<Admonition type="note">
+It's important to remember that services you integrate with Neon may have their own connection warmup periods, which can add to connection latencies. This topic does not address latencies of other vendors, but if your application connects to Neon via another service, do not forget to consider connection warmup times for those services as well.
+</Admonition>
 
 This topic describes how to check the status of a compute to determine if it is active or idle, how to explicitly activate a compute, and strategies for managing connection warmups.
 
@@ -14,13 +18,17 @@ You can check the current status of a compute on the **Branches** page in the Ne
 
 ![Compute endpoint active idle status](/docs/connect/compute_endpoint_status.png)
 
-## Activate an idle compute
+User actions that activate an idle compute include [connecting from a client such as psql](../connect/query-with-psql-editor), running a query on the associated branch from the [Neon SQL Editor](../get-started-with-neon/query-with-neon-sql-editor), or accessing the compute via the Neon API.
 
-Options for activating an idle compute include connecting to it from a client, running a query on the associated branch from the Neon SQL Editor, or using the Neon [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API.
-
-<Admonition type="note">
-It's also important to remember that services you integrate with Neon may have their own connection warmup periods, adding to your connection latency. This topic does not address latencies for other vendors, but if your application connects to Neon via other services, do not forget to consider connection warmup times for those services as well.
+<Admonition type="info">
+The Neon API includes [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) and [Suspend endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) APIs for the specific purpose of activating and suspending a compute.
 </Admonition>
+
+You can try any of these methods and watch the status of your compute as it changes from an **Active** or **Idle** state. By default, a compute is suspended after 300 seconds (5 minutes) of inactivity. [Neon Pro plan](../introduction/pro-plan) users can configure this delay period, which is described later in this topic.
+
+After a period of time in the **Idle** state, Neon occasionally activates your compute to check for data availability. The time between checks gradually increases if the compute does not receive any client connections.
+
+You can view compute state transitions in the Branches widget on the Neon Dashboard.
 
 ## Strategies for managing connection warmups
 
@@ -33,9 +41,9 @@ Given the potential impact on application responsiveness, it's important to have
 
 ### Adjust your Auto-suspend (scale to zero) configuration
 
-The [Neon Pro plan](/docs/introduction/pro-plan) allows you to configure the period before the system scales down to zero, providing you with control over the balance between performance and cost. The configuration setting is called **Auto-suspend delay**, and it is set to 300 seconds (5 minutes) by default. You can either disable Auto-suspend entirely or increase the setting up to a maximum of 7 days. This strategy eliminates or reduces connection warmup times, respectively, but increases compute usage, which means higher compute costs. For configuration instructions, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+The [Neon Pro plan](/docs/introduction/pro-plan) allows you to configure the period before the system scales down to zero, providing you with control over the balance between performance and cost. The configuration setting is called **Auto-suspend delay**, and it is set to 300 seconds (5 minutes) by default. You can either disable Auto-suspend entirely or increase the setting up to a maximum of 7 days. This strategy eliminates or reduces connection warmup times, respectively, but increases compute usage. For configuration instructions, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
-Consider combining this strategy Autoscaling (available with the [Neon Pro plan](/docs/introduction/pro-plan)), which allows you to run a compute with minimal resources and scale up on demand. For example, with Autoscaling, you can configure a minimum compute size to reduce costs when your compute is active during off-peak times. In the image shown below, the **Auto-suspend delay** is set to 3600 seconds (1 hour) so that your compute only suspends after an hour of inactivity, and Autoscaling is configured with the 1/4 minimum compute size to keep costs low during periods periods of inactivity or light usage.
+Consider combining this strategy Autoscaling (available with the [Neon Pro plan](/docs/introduction/pro-plan)), which allows you to run a compute with minimal resources and scale up on demand. For example, with Autoscaling, you can configure a minimum compute size to reduce costs when your compute is active during off-peak times. In the image shown below, the **Auto-suspend delay** is set to 3600 seconds (1 hour) so that your compute only suspends after an hour of inactivity, and Autoscaling is configured with the 1/4 minimum compute size to keep costs low during periods of inactivity or light usage.
 
 ![Connection warmup Auto-suspend and Autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
@@ -151,7 +159,7 @@ The example above is a simplification. In a production application, you might wa
 
 ### Use application-level caching
 
-Implement a caching system like [Redis](https://redis.io/) or [PolyScale](https://www.polyscale.ai/) to keep frequently accessed data readily available. This reduces the load on your database and helps avoid the latency associated with connection warmups.
+Implement a caching system like [Redis](https://redis.io/) or [PolyScale](https://www.polyscale.ai/) to store frequently accessed data, which can be rapidly served to users. This approach aids in reducing latencies by avoiding compute wakeups, but only if the data requested is available in the cache. Challenges with this strategy include cache invalidation due to frequently changing data, and cache misses when a query requests uncached data. This strategy cannot avoid compute wakeups entirely, but you may be able to combine it with other strategies to reduce occurrences of latency overall.
 
 ## Conclusion
 

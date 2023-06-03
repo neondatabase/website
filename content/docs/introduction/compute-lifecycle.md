@@ -5,13 +5,13 @@ redirectFrom:
   - /docs/conceptual-guides/compute-lifecycle
 ---
 
-A compute node in Neon is a stateless PostgresSQL process due to the separation of storage and compute. It has two main states: `Active` and `Idle`.
+A compute node in Neon is a stateless PostgreSQL process due to the separation of storage and compute. It has two main states: `Active` and `Idle`.
 
 Active means that PostgreSQL is currently running. If there are no active queries for 5 minutes, by default, the activity monitor gracefully places the compute node into the `Idle` state to save energy and resources. Neon [Pro plan](../introduction/pro-plan) users can configure the period of inactivity after which a compute is placed into an `Idle` state by modifying the **Auto-suspend delay** setting. To learn more about this feature, see [Edit a compute endpoint](../manage/endpoints#edit-a-compute-endpoint).
 
 The activity monitor is conservative. It treats "idle in transaction" connections as active to avoid breaking application logic that relies on long-lasting transactions. However, the activity monitor closes idle connections after the defined period of "complete" inactivity.
 
-When you connect to an idle compute, Neon automatically activates it. Activation typically happens within a few seconds, meaning that the first connection has a higher latency than subsequent connections. Also, the PostgresSQL shared memory buffers are cold after waking up from the `Idle` state, which means that your usual queries may take longer, initially.
+When you connect to an idle compute, Neon automatically activates it. Activation typically happens within a few seconds, meaning that the first connection has a higher latency than subsequent connections. Also, the PostgreSQL shared memory buffers are cold after waking up from the `Idle` state, which means that your usual queries may take longer, initially.
 
 After a period of time in the `Idle` state, Neon occasionally activates your compute to check for data availability. The time between checks gradually increases if the compute does not receive any client connections.
 
