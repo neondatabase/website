@@ -94,8 +94,8 @@ Follow these steps to complete the configuration:
     hostname: "ep-billowing-sun-767748.us-west-2.aws.neon.tech",
     ssl: true,
     ssl_opts: [
-    server_name_indication: 'ep-billowing-sun-767748.us-west-2.aws.neon.tech',
-    verify: :verify_none
+      server_name_indication: String.to_charlist('ep-billowing-sun-767748.us-west-2.aws.neon.tech'),
+      verify: :verify_none
     ]
     ```
 
