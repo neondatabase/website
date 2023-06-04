@@ -10,7 +10,7 @@ import SplitBranch from 'icons/split-branch.inline.svg';
 import UploadFile from 'icons/upload-file.inline.svg';
 
 const classNames =
-  'w-5 h-5 shrink-0 !transition-colors !duration-200 text-black dark:text-white group-hover:text-secondary-8 dark:group-hover:text-[#00E599]';
+  'w-5 h-5 shrink-0 transition-colors duration-200 text-secondary-8 dark:text-green-45';
 
 const renderIcon = (text) => {
   switch (text) {
@@ -39,17 +39,17 @@ const IntroNavigation = ({ children = null }) => (
       return (
         <li className="!m-0 flex before:hidden">
           <NextLink
+            className="relative block grow basis-1/3 rounded-[10px] border border-gray-new-94 p-3.5 transition-colors duration-200 before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA_0%,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200 hover:border-gray-new-80 hover:before:opacity-100 dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8)_0%,rgba(36,38,40,0)_100%)] dark:hover:border-gray-new-30 sm:p-3"
             key={index}
             href={href}
-            className="group block grow basis-1/3 rounded-[10px] !border-none bg-gray-9 p-3.5 !transition-colors !duration-200 hover:bg-gray-8 dark:bg-gray-1 dark:hover:bg-gray-2 sm:p-3"
           >
-            <div className="relative flex content-center gap-x-2.5">
+            <div className="relative z-10 flex content-center gap-x-2.5">
               {renderIcon(children)}
               <h4 className="text-base font-semibold leading-tight text-black dark:text-white">
                 {children}
               </h4>
             </div>
-            <p className="!mb-0 !mt-2 ml-[30px] text-sm leading-normal text-gray-4 dark:text-gray-7">
+            <p className="relative z-10 !mb-0 !mt-2 ml-[30px] text-sm leading-normal text-gray-4 dark:text-gray-7">
               {title}
             </p>
           </NextLink>
