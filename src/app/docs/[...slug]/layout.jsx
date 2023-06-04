@@ -16,7 +16,7 @@ const DocsLayout = async ({ children, params }) => {
       burgerWithoutBorder
       isDocPage
     >
-      <div className="safe-paddings flex flex-1 flex-col dark:bg-black dark:text-white lg:block">
+      <div className="safe-paddings flex flex-1 flex-col dark:bg-gray-new-8 dark:text-white lg:block">
         <MobileNav className="hidden lg:block" sidebar={sidebar} currentSlug={currentSlug} />
 
         <Container

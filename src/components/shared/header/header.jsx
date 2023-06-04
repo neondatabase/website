@@ -45,9 +45,11 @@ const Header = forwardRef(
     return (
       <header
         className={clsx(
-          'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-black lg:relative lg:h-14',
+          'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-gray-new-8 lg:relative lg:h-14',
           isSticky && 'sticky top-0 z-50 md:relative',
-          withBottomBorder && theme !== 'gray-8' && 'border-b border-gray-7 dark:border-gray-2',
+          withBottomBorder &&
+            theme !== 'gray-8' &&
+            'border-b border-gray-7 dark:border-gray-new-20',
           withBottomBorder && theme === 'gray-8' && 'border-b border-gray-new-20',
           { 'bg-gray-new-8': theme === 'gray-8' },
           { 'lg:bg-black': theme === 'black' },
