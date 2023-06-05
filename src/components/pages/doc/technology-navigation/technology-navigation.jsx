@@ -48,7 +48,7 @@ const TechnologyNavigation = ({ children = null }) => {
                     loading={index > 3 ? 'lazy' : 'eager'}
                   />
 
-                  <h4 className="mt-4 text-xl font-semibold leading-tight text-black dark:text-white">
+                  <h4 className="mt-4 text-xl font-semibold leading-tight text-black-new dark:text-white">
                     {alt}
                   </h4>
                   <p className="mb-2.5 mt-2.5 text-sm text-gray-new-50 dark:text-gray-new-80">
@@ -65,14 +65,14 @@ const TechnologyNavigation = ({ children = null }) => {
         })}
       </ul>
       <button
-        className="mx-auto flex items-center rounded-full bg-gray-9 px-5 py-2 text-sm font-medium text-black transition-colors duration-200 hover:bg-gray-8 dark:bg-gray-1 dark:text-white dark:hover:bg-gray-2"
+        className="mx-auto flex items-center rounded-full bg-gray-new-98 px-5 py-2 text-sm font-medium text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:bg-gray-new-15 dark:text-white dark:hover:bg-gray-2"
         type="button"
         onClick={handleClick}
       >
         <span>{isOpen ? 'Hide' : 'Show more'}</span>
         <ChevronRight
           className={clsx(
-            'ml-2 block shrink-0 text-black transition-[transform,color] duration-200 dark:text-white',
+            'ml-2 block shrink-0 text-black-new transition-[transform,color] duration-200 dark:text-white',
             isOpen ? '-rotate-90' : 'rotate-90'
           )}
         />

@@ -50,7 +50,7 @@ const Post = ({
     <>
       <div
         className={clsx(
-          '-mx-10 flex flex-col pt-[110px] pb-20 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
+          '-mx-10 flex flex-col pb-20 pt-[110px] 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
           isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
         )}
       >
@@ -61,7 +61,9 @@ const Post = ({
           <article>
             <h1 className="text-[36px] font-semibold leading-tight xl:text-3xl">{title}</h1>
             {subtitle && (
-              <p className="my-2 text-xl leading-tight text-gray-4 dark:text-gray-6">{subtitle}</p>
+              <p className="my-2 text-xl leading-tight text-gray-new-50 dark:text-gray-new-80">
+                {subtitle}
+              </p>
             )}
             <Content className="mt-5" content={content} ref={contentRef} />
           </article>
