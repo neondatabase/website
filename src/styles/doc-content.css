@@ -91,7 +91,7 @@
     }
 
     pre {
-      @apply my-5 !bg-gray-new-98 dark:!bg-gray-new-15;
+      @apply my-5 !bg-gray-new-98 dark:!bg-gray-new-10;
 
       code {
         text-shadow: unset;
@@ -101,7 +101,7 @@
     }
 
     :not(pre) > code {
-      @apply !rounded-sm bg-gray-new-94 !px-1.5 !py-0.5 !font-mono !font-normal !text-black-new dark:bg-gray-new-20 dark:!text-white;
+      @apply !rounded-sm bg-gray-new-94 !px-1.5 !py-0.5 !font-mono !font-normal !text-black-new dark:bg-gray-new-15 dark:!text-white;
 
       &::before,
       &::after {
