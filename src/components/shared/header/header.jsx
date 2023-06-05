@@ -128,7 +128,7 @@ const Header = forwardRef(
 
           <div className="flex space-x-5 lg:hidden">
             <Button
-              className="relative pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden"
+              className="relative pl-11 dark:border-white dark:bg-gray-new-8 dark:text-white dark:hover:border-primary-2 xl:hidden"
               to={LINKS.github}
               size="new-md"
               theme={isThemeBlack ? 'tertiary' : 'quaternary'}
