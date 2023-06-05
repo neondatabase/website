@@ -13,14 +13,16 @@ The following details are typically required when configuring a connection:
 - hostname
 - port
 - database name
-- role name
+- role (user)
 - password
 
 You can gather these details from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
+<Admonition type="note">
 Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
+</Admonition>
 
 The connection string includes the role, password, hostname, and database name.
 
@@ -36,13 +38,9 @@ postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
 
 Neon uses the default PostgreSQL port, `5432`.
 
-<Admonition type="note">
-Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](../connect/connect-securely).
-</Admonition>
-
 ## Connect to the database
 
-In the GUI application or IDE, enter the connection details into the appropriate fields and connect. Some applications permit specifying a connection string while others require entering connection details into separate fields. In the pgAdmin example below, connection details are entered into separate fields and clicking **Save** establishes the database connection.
+In the GUI application or IDE, enter the connection details into the appropriate fields and connect. Some applications permit specifying a connection string while others require entering connection details into separate fields. In the pgAdmin example below, connection details are entered into separate fields, and clicking **Save** establishes the database connection.
 
 ![Register - Server](/docs/connect/pgadmin4.png)
 
@@ -70,7 +68,7 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [dbForge](https://www.devart.com/dbforge/) | |
 | [DbVisualizer](https://www.dbvis.com/) | |
 | [DronaHQ hosted cloud version](https://www.dronahq.com/) | Requires selecting **Connect using SSL** when creating a connector |
-| [Forest Admin](https://www.forestadmin.com/) | Your database requires at least one table |
+| [Forest Admin](https://www.forestadmin.com/) | The database requires at least one table |
 | [Grafana](https://grafana.com/docs/grafana/latest/datasources/postgres/)| Requires `sslmode=verify-full`. See [SNI workaround C](../connect/connectivity-issues#c-set-verify-full-for-golang-based-clients). |
 | [ILLA Cloud](https://www.illacloud.com/) | |
 | [Luna Modeler](https://www.datensen.com/data-modeling/luna-modeler-for-relational-databases.html) | Requires enabling the SSL/TLS option |
