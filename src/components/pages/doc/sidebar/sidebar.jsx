@@ -11,14 +11,14 @@ import Item from './item';
 
 const links = [
   {
-    icon: CalendarIcon,
-    title: 'Release notes',
-    slug: LINKS.releaseNotes,
-  },
-  {
     icon: TransactionsIcon,
     title: 'API Reference',
     slug: LINKS.apiReference,
+  },
+  {
+    icon: CalendarIcon,
+    title: 'Release notes',
+    slug: LINKS.releaseNotes,
   },
 ];
 
