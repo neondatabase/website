@@ -35,7 +35,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
           <div
             className={clsx(
               { 'tracking-tight text-gray-new-80': theme === 'black-new' || theme === 'gray-8' },
-              'space-y-[18px] leading-none'
+              'space-y-[18px] leading-none dark:text-gray-new-80'
             )}
           >
             <p>Made in SF and the World</p>
@@ -51,7 +51,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                     'text-[13px] font-semibold text-gray-new-60':
                       theme === 'black-new' || theme === 'gray-8',
                   },
-                  'relative text-sm font-bold uppercase leading-none tracking-wider'
+                  'relative text-sm font-bold uppercase leading-none tracking-wider dark:text-gray-new-60'
                 )}
               >
                 {heading}

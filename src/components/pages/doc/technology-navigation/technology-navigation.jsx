@@ -48,9 +48,9 @@ const TechnologyNavigation = ({ children = null }) => {
                     loading={index > 3 ? 'lazy' : 'eager'}
                   />
 
-                  <h4 className="mt-4 text-xl font-semibold leading-tight text-black-new dark:text-white">
+                  <h3 className="mt-4 text-xl font-semibold leading-tight text-black-new dark:text-white">
                     {alt}
-                  </h4>
+                  </h3>
                   <p className="mb-2.5 mt-2.5 text-sm text-gray-new-50 dark:text-gray-new-80">
                     {title}
                   </p>

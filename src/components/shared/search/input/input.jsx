@@ -25,7 +25,6 @@ const Input = connectSearchBox(
         )}
       />
       <input
-        id="search-input"
         className={clsx(
           'search-input w-full appearance-none bg-white text-black placeholder-gray-new-50 outline-none search-cancel:m-0 search-cancel:h-4 search-cancel:w-4 search-cancel:cursor-pointer search-cancel:appearance-none search-cancel:bg-[url("/images/close-light.svg")] search-cancel:bg-center search-cancel:bg-no-repeat dark:bg-gray-new-8 dark:text-white dark:placeholder-gray-new-80 search-cancel:dark:bg-[url("/images/close-dark.svg")]',
           isNotFoundPage

@@ -44,9 +44,9 @@ const IntroNavigation = ({ children = null }) => (
           >
             {renderIcon(children)}
             <div className="relative z-10 flex flex-col gap-x-2.5">
-              <h4 className="text-lg font-semibold leading-tight text-black-new dark:text-white">
+              <h3 className="text-lg font-semibold leading-tight text-black-new dark:text-white">
                 {children}
-              </h4>
+              </h3>
               <p className="mt-2.5 text-sm leading-normal text-gray-new-50 dark:text-gray-new-80">
                 {title}
               </p>

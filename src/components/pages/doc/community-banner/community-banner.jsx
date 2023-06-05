@@ -6,9 +6,9 @@ import LINKS from 'constants/links';
 const CommunityBanner = ({ children = null }) => (
   <section className="my-10 flex items-center rounded-[10px] border border-gray-new-90 bg-community-light p-6 dark:border-gray-new-20 dark:bg-community-dark">
     <div>
-      <h4 className="my-2 text-xl font-semibold leading-tight text-black-new dark:text-white">
+      <h2 className="my-2 text-xl font-semibold leading-tight text-black-new dark:text-white">
         {children}
-      </h4>
+      </h2>
       <Button
         className="mt-3 px-5 py-2.5 !text-sm !font-bold !text-black-new hover:bg-[#00e5bf]"
         to={LINKS.discourse}
