@@ -1,11 +1,9 @@
 @import 'tailwindcss/components';
 @layer components {
-  .search-input {
-    &::-webkit-search-cancel-button {
-      @apply h-3 w-3 cursor-pointer appearance-none bg-black dark:bg-white;
-      -webkit-mask-image: url('/images/close.svg');
-      mask-image: url('/images/close.svg');
-      mask-size: 100%;
-    }
+  .search-input::-webkit-search-cancel-button {
+    @apply h-4 w-4 cursor-pointer bg-gray-new-8 dark:bg-gray-new-90;
+    -webkit-mask-image: url('/images/close.svg');
+    mask-image: url('/images/close.svg');
+    mask-size: 100%;
   }
 }

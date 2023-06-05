@@ -87,7 +87,7 @@ const Hits = connectHits(({ hits, showAll, isNotFoundPage, isMobileSearch }) =>
   hits?.length ? (
     <ul
       className={clsx(
-        'mt-4 divide-y dark:divide-gray-new-40',
+        'mt-4 divide-y dark:divide-gray-new-30',
         isMobileSearch ? 'divide-gray-new-90 ' : 'divide-gray-new-98 px-2.5'
       )}
     >
@@ -102,7 +102,7 @@ const Hits = connectHits(({ hits, showAll, isNotFoundPage, isMobileSearch }) =>
 
 const resultsClassNames = {
   default:
-    'absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden rounded-b border-t-0 rounded-b border border-gray-new-70 dark:border-gray-new-50',
+    'absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden rounded-b border-t-0 rounded-b border border-gray-new-70 dark:border-gray-new-30',
   mobile: 'flex flex-col h-[calc(100%-58px)]', // 58px is the height of the search input
   notFound:
     'rounded-b-[29px] border-2 border-gray-new-20 absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden',
@@ -134,7 +134,7 @@ const Results = ({ indices, type = 'default' }) => {
   }, [height]);
 
   return (
-    <div className={clsx('bg-gray-new-90 dark:bg-gray-new-15', resultsClassNames[type])}>
+    <div className={clsx('bg-gray-new-90 dark:bg-gray-new-10', resultsClassNames[type])}>
       <div
         className={clsx(
           'overflow-x-hidden overflow-y-scroll bg-white py-2.5 dark:bg-gray-new-8 dark:text-white',
@@ -158,7 +158,7 @@ const Results = ({ indices, type = 'default' }) => {
       </div>
       <div
         className={clsx(
-          'flex justify-between bg-gray-new-98 p-2.5 dark:bg-gray-new-15',
+          'flex justify-between bg-gray-new-98 p-2.5 dark:bg-gray-new-10',
           searchFooterClassNames[type]
         )}
       >
