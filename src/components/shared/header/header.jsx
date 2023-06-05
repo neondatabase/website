@@ -49,7 +49,7 @@ const Header = forwardRef(
           isSticky && 'sticky top-0 z-50 md:relative',
           withBottomBorder &&
             theme !== 'gray-8' &&
-            'border-b border-gray-7 dark:border-gray-new-20',
+            'border-b border-gray-new-90 dark:border-gray-new-20',
           withBottomBorder && theme === 'gray-8' && 'border-b border-gray-new-20',
           { 'bg-gray-new-8': theme === 'gray-8' },
           { 'lg:bg-black': theme === 'black' },

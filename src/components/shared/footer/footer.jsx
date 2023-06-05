@@ -16,7 +16,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
     <footer
       className={clsx(
         'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-gray-new-8 dark:text-white',
-        !isDarkTheme && withTopBorder && 'border-t border-gray-7 dark:border-gray-new-20',
+        !isDarkTheme && withTopBorder && 'border-t border-gray-new-90 dark:border-gray-new-20',
         isDarkTheme && withTopBorder && 'border-t border-gray-2',
         { 'border-gray-new-15 bg-black-new text-white': theme === 'black-new' },
         { 'bg-black text-white': theme === 'black' },
