@@ -54,6 +54,8 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
     setContainerHeight(`${height - 146}px`);
   }, [height]);
 
+  console.log(wrapperRef?.current?.offsetTop);
+
   useEffect(() => {
     if (isOpen) {
       controls.start('to');
@@ -64,7 +66,7 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
   return (
     <nav
       className={clsx(
-        'safe-paddings relative border-b border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-1',
+        'safe-paddings relative border-b border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-15',
         className
       )}
       ref={wrapperRef}
@@ -83,12 +85,12 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
 
       <motion.ul
         className={clsx(
-          'fixed inset-x-0 bottom-0 top-[146px] z-20 overflow-y-scroll bg-white pb-4 pl-8 pr-[29px] pt-2 dark:bg-gray-new-15 md:pl-4 md:pr-[13px]'
+          'absolute inset-x-0 top-full z-20 overflow-y-scroll bg-white pb-4 pl-8 pr-[29px] pt-2 dark:bg-gray-new-15 md:pl-4 md:pr-[13px]'
         )}
         initial="from"
         animate={controls}
         variants={variants}
-        style={{ maxHeight: containerHeight }}
+        style={{ height: containerHeight }}
       >
         {sidebar.map((item, index) => (
           <Item {...item} currentSlug={currentSlug} key={index} />
