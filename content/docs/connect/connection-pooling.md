@@ -21,7 +21,7 @@ When [Autoscaling](../introduction/autoscaling) is enabled, `max_connections` is
 
 ## Connection pooling
 
-Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations,  running many instances of an application, or applications with serverless functions. With regular PostgreSQL, new connections are rejected when reaching the `max_connections` limit. To overcome this limitation, Neon supports connection pooling using [PgBouncer](https://www.pgbouncer.org/), which allows Neon to support up to 10000 concurrent connections.
+Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations,  running many instances of an application, or applications with serverless functions. With regular PostgreSQL, new connections are rejected when reaching the `max_connections` limit. To overcome this limitation, Neon supports connection pooling using [PgBouncer](https://www.pgbouncer.org/), which allows Neon to support up to 10,000 concurrent connections.
 
 <Admonition type="note">
 Connection pooling is not yet supported with [Autoscaling](../introduction/autoscaling) <b><sup>Beta</sup></b>. For more information, see [Connection pooling notes and limitations](#connection-pooling-notes-and-limitations).
