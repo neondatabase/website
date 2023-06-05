@@ -17,19 +17,11 @@ In Neon, the size of your compute determines the `max_connections` setting. The 
 SHOW max_connections;
 ```
 
-<Admonition type="note">
-When [Autoscaling](../introduction/autoscaling) is enabled, `max_connections` is calculated based on the minimum compute size you selected in your Autoscaling configuration.
-</Admonition>
-
- Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the Free Tier, support connection pooling.
+Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the Free Tier, support connection pooling.
 
 ## Connection pooling
 
 Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations,  running many instances of an application, or applications with serverless functions. With regular PostgreSQL, new connections are rejected when reaching the `max_connections` limit. To overcome this limitation, Neon supports connection pooling using [PgBouncer](https://www.pgbouncer.org/), which allows Neon to support up to 10,000 concurrent connections.
-
-<Admonition type="note">
-Connection pooling is not yet supported with [Autoscaling](../introduction/autoscaling) <b><sup>Beta</sup></b>. For more information, see [Connection pooling notes and limitations](#connection-pooling-notes-and-limitations).
-</Admonition>
 
 PgBouncer is an open-source connection pooler for PostgreSQL. When an application needs to connect to a database, PgBouncer provides a connection from the pool. Connections in the pool are routed to a smaller number of actual PostgreSQL connections. When a connection is no longer required, it is returned to the pool and is available to be used again. Maintaining a pool of available connections improves performance by reducing the number of connections that need to be created and torn down to service incoming requests. Connection pooling also helps avoid rejected connections. When all connections in the pool are being used, PgBouncer queues a new request until a connection from the pool becomes available.
 
@@ -59,8 +51,7 @@ The previous method of enabling connection pooling for a compute endpoint is dep
 
 ## Connection pooling notes and limitations
 
-- Connection pooling is not yet supported with [Autoscaling](../introduction/autoscaling) <b><sup>Beta</sup></b>. If you expect a large number of concurrent connections, we recommend using a **Fixed size** compute (the default), which supports connection pooling. For compute configuration instructions, see [Compute size and Autoscaling configuration](../manage/endpoints#compute-size-and-autoscaling-configuration).
-- Neon uses PgBouncer in _transaction mode_, which does not support PostgreSQL features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
+Neon uses PgBouncer in _transaction mode_, which does not support PostgreSQL features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
 ## Need help?
 
