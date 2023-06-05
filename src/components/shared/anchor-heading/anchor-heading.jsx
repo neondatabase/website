@@ -22,7 +22,7 @@ const AnchorHeading =
           aria-hidden
         >
           <HashIcon
-            className={clsx(Tag === 'h2' && 'w-3.5', Tag === 'h3' && 'w-3', 'text-primary-2')}
+            className={clsx(Tag === 'h2' && 'w-3.5', Tag === 'h3' && 'w-3', 'text-green-45')}
           />
         </a>
         {children}
