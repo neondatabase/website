@@ -54,8 +54,6 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
     setContainerHeight(`${height - 146}px`);
   }, [height]);
 
-  console.log(wrapperRef?.current?.offsetTop);
-
   useEffect(() => {
     if (isOpen) {
       controls.start('to');
