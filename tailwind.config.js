@@ -185,5 +185,11 @@ module.exports = {
       }),
     },
   },
-  plugins: [require('tailwindcss-safe-area'), require('@tailwindcss/typography')],
+  plugins: [
+    require('tailwindcss-safe-area'),
+    require('@tailwindcss/typography'),
+    require('tailwindcss/plugin')(({ addVariant }) => {
+      addVariant('search-cancel', '&::-webkit-search-cancel-button');
+    }),
+  ],
 };
