@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
 import LINKS from 'constants/links';
-import DiscourseWhiteIcon from 'icons/discourse-logo-white.inline.svg';
-import DiscourseIcon from 'icons/discourse-logo.inline.svg';
 
 const CommunityBanner = ({ children = null }) => (
   <section className="my-10 flex items-center rounded-[10px] border border-gray-new-90 bg-community-light p-6 dark:border-gray-new-20 dark:bg-community-dark">
@@ -20,8 +18,21 @@ const CommunityBanner = ({ children = null }) => (
         Join Community
       </Button>
     </div>
-    <DiscourseIcon className="ml-auto mr-4 dark:hidden sm:hidden" aria-hidden />
-    <DiscourseWhiteIcon className="ml-auto mr-4 hidden dark:block dark:sm:hidden" aria-hidden />
+    <img
+      className="ml-auto mr-4 dark:hidden sm:hidden"
+      src="/images/pages/docs/discourse-logo.svg"
+      width={208}
+      height={56}
+      alt="Discourse logo"
+    />
+    <img
+      className="ml-auto mr-4 hidden dark:block dark:sm:hidden"
+      src="/images/pages/docs/discourse-logo-white.svg"
+      width={208}
+      height={56}
+      alt=""
+      aria-hidden
+    />
   </section>
 );
 
