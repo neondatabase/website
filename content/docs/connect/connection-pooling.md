@@ -14,7 +14,7 @@ When [Autoscaling](../introduction/autoscaling) is enabled, `max_connections` is
 A small number of connections are reserved for administrative purposes. The `max_connections` limit may not be sufficient for some applications. To increase the number of connections that Neon supports, you can use connection pooling.
 
 <Admonition type="note">
-Connection pooling is not yet supported with [Autoscaling](../introduction/autoscaling) <b><sup>Beta</sup></b>. If you expect a large number of concurrent connections, we recommend using a **Fixed size** compute (the default), which supports connection pooling. For compute configuration instructions, see [Compute size and Autoscaling configuration](../manage/endpoints#compute-size-and-autoscaling-configuration).
+Connection pooling is supported with [Autoscaling](../introduction/autoscaling) <b><sup>Beta</sup></b>. If you expect a large number of concurrent connections, we recommend using a **Fixed size** compute (the default), which supports connection pooling. For compute configuration instructions, see [Compute size and Autoscaling configuration](../manage/endpoints#compute-size-and-autoscaling-configuration).
 </Admonition>
 
 ## Connection pooling
