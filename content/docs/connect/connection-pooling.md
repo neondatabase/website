@@ -5,6 +5,10 @@ redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
 ---
 
+Neon supports connection pooling using PgBouncer, enabling up to 10,000 concurrent connections. This topic describes Neon's default connection limits, how connection pooling works, and how you can enable connection pooling for your applications.
+
+## Default connection limits
+
 Each PostgreSQL connection creates a new process in the operating system, which consumes resources. PostgreSQL limits the number of open connections for this reason. The PostgreSQL connection limit is defined by the `max_connections` parameter.
 
 In Neon, the size of your compute determines the `max_connections` setting. The formula used to calculate `max_connections` is `RAM in bytes / 9531392 bytes`. For a Free Tier compute, which has 1 GB of RAM, this works out to approximately 100 connections. Larger computes offered with the Neon Pro plan have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
@@ -17,7 +21,7 @@ SHOW max_connections;
 When [Autoscaling](../introduction/autoscaling) is enabled, `max_connections` is calculated based on the minimum compute size you selected in your Autoscaling configuration.
 </Admonition>
 
- Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications. To increase the number of connections that Neon supports, you can use _connection pooling_. Neon supports connection pooling with all plans, including the Free Tier.
+ Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the Free Tier, support connection pooling.
 
 ## Connection pooling
 
