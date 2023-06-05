@@ -162,7 +162,7 @@ A custom volume-based paid plan offered by Neon. See [Neon plans](../introductio
 
 ### Free Tier
 
-A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Free Tier](../reference/technical-preview-free-tier/).
+A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Free Tier](../introduction/technical-preview-free-tier).
 
 ### Kubernetes
 
@@ -344,7 +344,7 @@ A preview period during which users can try Neon.
 
 ### Token
 
-An encrypted access token that enables you to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Manage API keys](../get-started-with-neon/using-api-keys/).
+An encrypted access token that enables you to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Manage API keys](../manage/api-keys).
 
 ### tmpfs
 
