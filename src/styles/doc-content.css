@@ -10,7 +10,7 @@
   }
   .prose-doc {
     @apply max-w-none leading-normal text-black-new dark:text-gray-new-90;
-    @apply prose-headings:leading-tight prose-headings:text-black-new prose-p:my-3 prose-p:leading-normal;
+    @apply prose-headings:leading-tight prose-headings:text-black-new prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white;
     @apply prose-a:border-b prose-a:border-transparent prose-a:font-normal prose-a:text-secondary-8 prose-a:no-underline prose-a:transition-[border-color] prose-a:duration-200 prose-a:ease-in-out hover:prose-a:border-secondary-8 dark:prose-a:text-primary-1 dark:hover:prose-a:border-primary-1 prose-a:sm:break-words;
 
     h2 {
