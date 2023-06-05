@@ -50,25 +50,18 @@ If you are using Prisma Client from a serverless function, see [Connect from ser
 
 ## Connect from serverless functions
 
-Serverless functions typically require a large number of database connections. When connecting from Prisma Client to Neon from a serverless function, you should use a pooled connection string. Neon uses the PgBouncer connection pooler, which maintains a pool of connections to the database, allowing Neon to support a large number of concurrent connections.
-
-To use a pooled connection from Prisma, adjust your Neon connection string by adding a `-pooler` suffix to the endpoint ID and appending the `?pgbouncer=true` flag to the connection string, as shown:
+Serverless functions typically require a large number of database connections. When connecting from Prisma Client to Neon from a serverless function, use a pooled connection string with a `?pgbouncer=true` flag, as shown:
 
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true`
+DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true
 ```
 
 </CodeBlock>
 
-The `-pooler` suffix tells Neon to use a pooled connection rather than a direct connection. The `?pgbouncer=true` flag requires that the connection uses PgBouncer.
-
-<Admonition type="info">
-The **Connection Details** widget on the Neon **Dashboard** provides a **Pooled connection** tab with a pooled connection string that you can copy and paste.
-</Admonition>
-
-For more information about PgBouncer and pooled connection strings, see [Enable connection pooling](../connect/connection-pooling#enable-connection-pooling). For related information in the _Prisma documentation_, refer to [Add pgbouncer to the connection URL](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
+- The pooled connection string has a `-pooler` suffix appended to the endpoint ID, which tells Neon to use a pooled connection rather than a direct connection. The **Connection Details** widget on the Neon **Dashboard** provides a **Pooled connection** tab with a pooled connection string that you can copy and paste.
+- Neon uses the PgBouncer connection pooler. Prisma requires the `?pgbouncer=true` flag when using Prisma Client with PgBouncer, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 
 ## Connection timeouts
 
