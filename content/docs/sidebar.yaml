@@ -114,6 +114,8 @@
       slug: guides/python
     - title: Rust
       slug: guides/rust
+    - title: Sequelize
+      slug: guides/sequelize
     - title: SQLAlchemy
       slug: guides/sqlalchemy
     - title: StepZen
