@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 const decoder = new TextDecoder();
 
 const useDocsAIChatStream = ({ isMountedRef, signal }) => {
+  const [inputText, setInputText] = useState('');
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -56,8 +57,32 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
           });
         }
       } else if (response.status === 429) {
-        setError('Sorry, your query has been rate limited');
         setShouldTryAgain(true);
+
+        // check if the last message is from assistant
+        // if so, replace it with the error message
+        setMessages((prevMessages) => {
+          if (!prevMessages.length) return prevMessages;
+          const { role } = prevMessages[prevMessages.length - 1];
+          if (role === 'assistant') {
+            return [
+              ...prevMessages.slice(0, -1),
+              {
+                role: 'assistant',
+                content: 'Sorry, your query has been rate limited',
+              },
+            ];
+          }
+          return [
+            ...prevMessages,
+            {
+              role: 'assistant',
+              content: 'Sorry, your query has been rate limited',
+            },
+          ];
+        });
+        // set input text to the last message, that user sent
+        setInputText(messages[messages.length - 1].content);
       } else {
         throw Error('Something went wrong. Please try again!');
       }
@@ -79,6 +104,8 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
   });
 
   return {
+    inputText,
+    setInputText,
     messages,
     setMessages,
     error,

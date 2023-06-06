@@ -4,7 +4,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef } from 'react';
 
 import { ChatContext } from 'app/chat-provider';
 import Button from 'components/shared/button/button';
@@ -54,8 +54,6 @@ const handleKeyDown = (cb) => (e) => {
 };
 
 const ChatWidget = () => {
-  // state
-  const [inputText, setInputText] = useState('');
   // context
   const { isOpen, setIsOpen } = useContext(ChatContext);
   // aux refs
@@ -63,23 +61,26 @@ const ChatWidget = () => {
   const isMountedRef = useRef(false);
   // hooks
   const { getSignal, resetAbortController } = useAbortController();
-  const { messages, setMessages, isLoading, error, setError, shouldTryAgain, setShouldTryAgain } =
-    useDocsAIChatStream({
-      isMountedRef,
-      signal: getSignal(),
-    });
+  const {
+    inputText,
+    setInputText,
+    messages,
+    setMessages,
+    isLoading,
+    error,
+    setError,
+    shouldTryAgain,
+    setShouldTryAgain,
+  } = useDocsAIChatStream({
+    isMountedRef,
+    signal: getSignal(),
+  });
 
   // handlers
   const handleInputChange = (e) => setInputText(e.target.value);
 
   const handleExampleClick = (e) => {
     setMessages([{ role: 'user', content: e.target.textContent }]);
-  };
-
-  const handleTryAgainClick = () => {
-    setShouldTryAgain(false);
-    setError(null);
-    setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
   };
 
   useEffect(() => {
@@ -96,12 +97,16 @@ const ChatWidget = () => {
       e?.preventDefault();
       // do not let user submit another
       // query while the previous one is getting processed
-      if (!isLoading && inputText) {
+      if (!isLoading) {
         setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
         setInputText('');
       }
+
+      if (shouldTryAgain) {
+        setShouldTryAgain(false);
+      }
     },
-    [isLoading, inputText, setMessages]
+    [isLoading, shouldTryAgain, setMessages, setInputText, inputText, setShouldTryAgain]
   );
 
   const handleInputKeyDown = (e) => {
@@ -143,7 +148,7 @@ const ChatWidget = () => {
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-[150] bg-[rgba(12,13,13,0.2)] data-[state=closed]:animate-fade-out-overlay data-[state=open]:animate-fade-in-overlay dark:bg-black/80" />
         <Dialog.Content className="fixed left-1/2 top-1/2 z-[150] mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2 lg:h-full lg:max-h-full lg:max-w-full">
-          <div className="relative flex h-full max-h-[85vh] flex-col rounded-[10px] border border-gray-new-90 bg-gray-new-98 pt-4 data-[state=closed]:animate-dialog-hide data-[state=open]:animate-dialog-show dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-white dark:shadow-[4px_4px_10px_rgba(0,0,0,0.5)] lg:h-full lg:rounded-none">
+          <div className="relative flex h-full max-h-[85vh] flex-col rounded-[10px] border border-gray-new-90 bg-gray-new-98 pt-4 data-[state=closed]:animate-dialog-hide data-[state=open]:animate-dialog-show dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-white dark:shadow-[4px_4px_10px_rgba(0,0,0,0.5)] lg:h-full lg:max-h-screen lg:rounded-none">
             <Dialog.Title className="text-20 flex items-center space-x-5 px-5 leading-tight">
               <span>Ask Neon AI a question</span>
               <div className="flex items-center rounded-[24px] border border-gray-new-94 bg-[rgba(239,239,240,0.4)] px-3 py-1.5 text-gray-new-30 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80">
@@ -206,17 +211,6 @@ const ChatWidget = () => {
                 <span>
                   <span className="text-secondary-1">Attention:</span> {error}
                 </span>
-                {shouldTryAgain && (
-                  <Button
-                    className="ml-auto"
-                    type="button"
-                    theme="primary"
-                    size="xxs"
-                    onClick={handleTryAgainClick}
-                  >
-                    Try again
-                  </Button>
-                )}
               </div>
             ) : (
               <form className="group relative w-full px-5 pb-5 lg:mt-auto" onSubmit={handleSubmit}>
@@ -229,14 +223,24 @@ const ChatWidget = () => {
                   onKeyDown={handleInputKeyDown}
                   onChange={handleInputChange}
                 />
-                {!isLoading && (
-                  <button
-                    className="absolute bottom-[30px] right-[30px] h-5 w-5 opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
-                    type="submit"
-                  >
-                    <SendIcon className="text-gray-new-20 dark:text-gray-new-90" />
-                  </button>
-                )}
+                {!isLoading &&
+                  (!shouldTryAgain ? (
+                    <button
+                      className="absolute bottom-[30px] right-[30px] h-5 w-5 opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
+                      type="submit"
+                    >
+                      <SendIcon className="text-gray-new-20 dark:text-gray-new-90" />
+                    </button>
+                  ) : (
+                    <Button
+                      className="absolute right-7 top-[9px]"
+                      size="xxs"
+                      theme="primary"
+                      type="submit"
+                    >
+                      Try again
+                    </Button>
+                  ))}
               </form>
             )}
 
