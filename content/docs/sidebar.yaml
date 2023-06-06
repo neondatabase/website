@@ -86,11 +86,11 @@
           slug: guides/elixir-ecto
         - title: Go
           slug: guides/go
-	      - title: Java
+        - title: Java
           slug: guides/java
-	      - title: Python
+        - title: Python
           slug: guides/python
-	      - title: Rust
+        - title: Rust
           slug: guides/rust
     - title: Frameworks
       items:
