@@ -126,6 +126,8 @@ const ChatWidget = () => {
     setError(null);
     setMessages([]);
     setIsOpen(false);
+    setInputText('');
+    setShouldTryAgain(false);
   };
 
   // effects
