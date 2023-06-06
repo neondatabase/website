@@ -17,6 +17,7 @@ import CloseIcon from './images/close.inline.svg';
 import ExampleIcon from './images/example.inline.svg';
 import ExperimentalIcon from './images/experimental.inline.svg';
 import SendIcon from './images/send.inline.svg';
+import SparksIcon from './images/sparks.inline.svg';
 import Message from './message';
 
 const items = [
@@ -269,7 +270,7 @@ ChatWidget.propTypes = {
 };
 
 // eslint-disable-next-line react/prop-types
-const ChatWidgetTrigger = ({ className }) => {
+const ChatWidgetTrigger = ({ className, isSidebar }) => {
   const { setIsOpen } = useContext(ChatContext);
   const [commandKey] = useControlKey();
 
@@ -280,33 +281,64 @@ const ChatWidgetTrigger = ({ className }) => {
   return (
     <button
       className={clsx(
-        'chat-widget flex flex-col text-sm focus:outline-none xl:flex-row xl:items-center xl:space-x-1.5',
+        'chat-widget group flex text-sm focus:outline-none',
+        isSidebar
+          ? 'items-center space-x-3'
+          : 'flex-col xl:flex-row xl:items-center xl:space-x-1.5',
         className
       )}
       type="button"
       aria-label="Open Neon Docs AI"
       onClick={onClickHandler}
     >
-      <span className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[#00CC88] dark:bg-[rgba(0,229,153,0.1)] xl:h-6 xl:w-6 xl:shrink-0 xl:rounded">
-        <ExampleIcon className="h-[26px] w-[26px] text-white dark:text-green-45 xl:h-4 xl:w-4" />
-      </span>
-      <div className="mt-2.5 flex min-h-[22px] w-full items-center justify-between xl:mt-0 lg:w-auto">
-        <h3 className="font-semibold leading-none xl:text-sm xl:font-normal xl:text-gray-3 dark:xl:text-gray-7">
+      {isSidebar ? (
+        <span className="relative flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
+          <SparksIcon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
+        </span>
+      ) : (
+        <span className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[#00CC88] dark:bg-[rgba(0,229,153,0.1)] xl:h-6 xl:w-6 xl:shrink-0 xl:rounded">
+          <ExampleIcon className="h-[26px] w-[26px] text-white dark:text-green-45 xl:h-4 xl:w-4" />
+        </span>
+      )}
+      <div
+        className={clsx('flex min-h-[22px] w-full items-center justify-between xl:mt-0 lg:w-auto', {
+          'mt-2.5': !isSidebar,
+        })}
+      >
+        <h3
+          className={clsx(
+            'leading-none xl:text-sm',
+            isSidebar
+              ? 'text-sm font-medium transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45'
+              : 'font-semibold'
+          )}
+        >
           <span className="lg:hidden">Neon Docs AI</span>
-          <span className="hidden lg:inline" aria-hidden>
+          <span
+            className={clsx('hidden text-gray-new-20 dark:text-gray-new-90 lg:inline')}
+            aria-hidden
+          >
             Try Neon Docs AI instead
           </span>
         </h3>
-        {commandKey && (
+        {commandKey && !isSidebar && (
           <span className="text-gray-20 dark:text-gray-90 rounded-sm bg-gray-new-94 px-1.5 py-1 leading-none dark:bg-gray-new-15 xl:hidden">
             {commandKey} + K
           </span>
         )}
       </div>
-      <p className="mt-1.5 text-left leading-tight text-gray-3 dark:text-gray-7 xl:hidden">
+      <p
+        className={clsx('mt-1.5 text-left leading-tight text-gray-3 dark:text-gray-7 xl:hidden', {
+          hidden: isSidebar,
+        })}
+      >
         We brought ChatGPT straight to the docs
       </p>
-      <span className="mt-1.5 leading-tight text-secondary-8 dark:text-primary-1 xl:hidden">
+      <span
+        className={clsx('mt-1.5 leading-tight text-secondary-8 dark:text-primary-1 xl:hidden', {
+          hidden: isSidebar,
+        })}
+      >
         Ask a question
       </span>
     </button>

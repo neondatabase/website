@@ -49,9 +49,9 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
 
   useClickOutside([wrapperRef], onOutsideClick);
 
-  // 146px is the height of top banner + header + button Documentation menu
+  // 145px is the height of top banner + header + button Documentation menu
   useEffect(() => {
-    setContainerHeight(`${height - 146}px`);
+    setContainerHeight(`${height - 145}px`);
   }, [height]);
 
   useEffect(() => {

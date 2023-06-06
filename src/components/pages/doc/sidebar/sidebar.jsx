@@ -27,8 +27,8 @@ const links = [
 const Sidebar = ({ className = null, sidebar, currentSlug }) => (
   <aside className={className}>
     <Search className="z-30" />
-    <ChatWidgetTrigger className="relative z-20 hidden xl:mt-6 xl:flex" />
-    <nav className="relative z-20 mt-5 xl:mt-6">
+    <nav className="relative z-20 mt-8">
+      <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
       <ul>
         {links.map(({ icon: Icon, title, slug }, index) => (
           <li className="py-[7px] first:pt-0 last:pb-0" key={index}>

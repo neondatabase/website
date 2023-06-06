@@ -34,6 +34,12 @@ const SearchModal = ({ isOpen, closeModal }) => {
         searchClient={searchClient}
         indexName={indices[0].name}
         onSearchStateChange={({ query }) => setQuery(query)}
+      />
+      <div
+        className={clsx(
+          isOpen ? 'block' : 'hidden',
+          'fixed inset-0 z-[100] flex flex-col bg-gray-new-98 dark:bg-gray-new-10'
+        )}
       >
         <Configure clickAnalytics />
 
@@ -61,9 +67,9 @@ const SearchModal = ({ isOpen, closeModal }) => {
             No recent searches
           </span>
         )}
-      </InstantSearch>
-      <div className="mt-auto w-full px-4 py-2.5">
-        <ChatWidgetTrigger className="relative w-full justify-center rounded bg-gray-8 p-2.5 dark:border dark:border-gray-new-30 dark:bg-transparent" />
+        <div className="mt-auto w-full px-4 py-2.5">
+          <ChatWidgetTrigger className="relative w-full justify-center rounded bg-gray-8 p-2.5 dark:border dark:border-gray-new-30 dark:bg-transparent" />
+        </div>
       </div>
     </div>
   );
