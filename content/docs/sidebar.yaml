@@ -80,58 +80,74 @@
       slug: manage/operations
 - title: Guides
   items:
-    - title: AWS Lambda
-      slug: guides/aws-lambda
-    - title: Elixir
-      slug: guides/elixir-ecto
-    - title: Django
-      slug: guides/django
-    - title: Go
-      slug: guides/go
-    - title: Grafbase
-      slug: guides/grafbase
-    - title: Hasura
-      slug: guides/hasura
-    - title: Java
-      slug: guides/java
-    - title: Koyeb
-      slug: guides/koyeb
-    - title: Laravel
-      slug: guides/laravel
-    - title: Next.js
-      slug: guides/nextjs
-    - title: Node.js
-      slug: guides/node
-    - title: PolyScale
-      slug: guides/polyscale
-    - title: Prisma
+    - title: Languages
       items:
-        - title: Connect from Prisma
-          slug: guides/prisma
-        - title: Use Prisma Migrate With Neon
-          slug: guides/prisma-migrate
-    - title: Python
-      slug: guides/python
-    - title: Rust
-      slug: guides/rust
-    - title: SQLAlchemy
-      slug: guides/sqlalchemy
-    - title: StepZen
-      slug: guides/stepzen
-    - title: Symfony
-      slug: guides/symfony
-    - title: WunderGraph
-      slug: guides/wundergraph
-    - title: Vercel
+        - title: Elixir
+          slug: slug: guides/elixir-ecto
+        - title: Go
+          slug: slug: guides/go
+	      - title: Java
+          slug: slug: guides/java
+	      - title: Python
+          slug: slug: guides/python
+	      - title: Rust
+          slug: slug: guides/rust
+    - title: Frameworks
       items:
-        - title: Overview
-          slug: guides/vercel-overview
-        - title: Vercel Postgres
-          slug: guides/vercel-postgres
-        - title: The Neon Vercel Integration
-          slug: guides/vercel
-        - title: Connect manually
-          slug: guides/vercel-manual
+        - title: Django
+          slug: slug: guides/django
+        - title: Laravel
+          slug: guides/laravel
+        - title: Next.js
+          slug: guides/nextjs
+        - title: Node.js
+          slug: guides/node
+        - title: Symfony
+          slug: guides/symfony
+    - title: Deployment platforms
+      items:
+        - title: Koyeb
+          slug: guides/koyeb
+        - title: Vercel
+          items:
+            - title: Overview
+              slug: guides/vercel-overview
+            - title: Vercel Postgres
+              slug: guides/vercel-postgres
+            - title: The Neon Vercel Integration
+              slug: guides/vercel
+            - title: Connect manually
+              slug: guides/vercel-manual
+    - title: Query builders
+      items:
+        - title: SQL Alchemy
+          slug: guides/sqlalchemy
+    - title: ORMs
+      items:
+        - title: Prisma
+          items:
+            - title: Connect from Prisma
+              slug: guides/prisma
+            - title: Use Prisma Migrate With Neon
+              slug: guides/prisma-migrate
+    - title: GraphQL
+      items:
+        - title: Grafbase
+          slug: guides/grafbase
+        - title: Hasura
+          slug: guides/hasura
+        - title: StepZen
+          slug: guides/stepzen
+        - title: WunderGraph
+          slug: guides/wundergraph
+    - title: Caching
+      items:
+        - title: PolyScale
+          slug: guides/polyscale
+    - title: Serverless
+      items:
+        - title: AWS Lambda
+          slug: guides/aws-lambda
 - title: Extensions
   items:
     - title: Supported extensions
