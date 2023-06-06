@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 import { ChatContext } from 'app/chat-provider';
+import Button from 'components/shared/button/button';
 import useAbortController from 'hooks/use-abort-controller';
 import useControlKey from 'hooks/use-control-key';
 import useDocsAIChatStream from 'hooks/use-docs-ai-chat-stream';
@@ -62,16 +63,23 @@ const ChatWidget = () => {
   const isMountedRef = useRef(false);
   // hooks
   const { getSignal, resetAbortController } = useAbortController();
-  const { messages, setMessages, isLoading, error, setError } = useDocsAIChatStream({
-    isMountedRef,
-    signal: getSignal(),
-  });
+  const { messages, setMessages, isLoading, error, setError, shouldTryAgain, setShouldTryAgain } =
+    useDocsAIChatStream({
+      isMountedRef,
+      signal: getSignal(),
+    });
 
   // handlers
   const handleInputChange = (e) => setInputText(e.target.value);
 
   const handleExampleClick = (e) => {
     setMessages([{ role: 'user', content: e.target.textContent }]);
+  };
+
+  const handleTryAgainClick = () => {
+    setShouldTryAgain(false);
+    setError(null);
+    setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
   };
 
   useEffect(() => {
@@ -88,7 +96,7 @@ const ChatWidget = () => {
       e?.preventDefault();
       // do not let user submit another
       // query while the previous one is getting processed
-      if (!isLoading) {
+      if (!isLoading && inputText) {
         setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
         setInputText('');
       }
@@ -135,10 +143,10 @@ const ChatWidget = () => {
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-[150] bg-[rgba(12,13,13,0.2)] data-[state=closed]:animate-fade-out-overlay data-[state=open]:animate-fade-in-overlay dark:bg-black/80" />
         <Dialog.Content className="fixed left-1/2 top-1/2 z-[150] mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2 lg:h-full lg:max-h-full lg:max-w-full">
-          <div className="relative flex flex-col rounded-[10px] border border-gray-new-90 bg-gray-new-98 pt-4 data-[state=open]:animate-dialog-show data-[state=closed]:animate-dialog-hide dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-white dark:shadow-[4px_4px_10px_rgba(0,0,0,0.5)] lg:h-full lg:rounded-none">
+          <div className="relative flex h-full max-h-[85vh] flex-col rounded-[10px] border border-gray-new-90 bg-gray-new-98 pt-4 data-[state=closed]:animate-dialog-hide data-[state=open]:animate-dialog-show dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-white dark:shadow-[4px_4px_10px_rgba(0,0,0,0.5)] lg:h-full lg:rounded-none">
             <Dialog.Title className="text-20 flex items-center space-x-5 px-5 leading-tight">
               <span>Ask Neon AI a question</span>
-              <div className="flex items-center rounded-[24px] border border-gray-new-94 bg-[rgba(239,239,240,0.4)] py-1.5 px-3 text-gray-new-30 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80">
+              <div className="flex items-center rounded-[24px] border border-gray-new-94 bg-[rgba(239,239,240,0.4)] px-3 py-1.5 text-gray-new-30 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80">
                 <ExperimentalIcon className="mr-1.5 h-3.5 w-3.5" />
                 <span className="text-sm leading-none">Experimental</span>
               </div>
@@ -148,7 +156,7 @@ const ChatWidget = () => {
               <AnimatePresence initial={false} mode="wait">
                 {messages.length ? (
                   <m.div
-                    className="mt-6 flex max-h-[calc(100vh_-_62px)] flex-col overflow-y-auto"
+                    className="mt-6 flex h-full max-h-[calc(100vh_-_62px)] flex-col overflow-y-auto pb-12"
                     initial="initial"
                     animate="animate"
                     exit="exit"
@@ -161,6 +169,7 @@ const ChatWidget = () => {
                   </m.div>
                 ) : (
                   <m.div
+                    className="pb-12"
                     initial="initial"
                     animate="animate"
                     exit="exit"
@@ -173,7 +182,7 @@ const ChatWidget = () => {
                       {items.map((title, index) => (
                         <li className="flex" key={index}>
                           <button
-                            className="flex w-full items-center justify-start rounded py-2 px-2.5 transition-colors duration-200 hover:bg-[rgba(36,38,40,0.06)] focus:bg-[rgba(36,38,40,0.06)] focus:outline-none dark:hover:bg-gray-new-15/60 dark:focus:bg-gray-new-15/60"
+                            className="flex w-full items-center justify-start rounded px-2.5 py-2 transition-colors duration-200 hover:bg-[rgba(36,38,40,0.06)] focus:bg-[rgba(36,38,40,0.06)] focus:outline-none dark:hover:bg-gray-new-15/60 dark:focus:bg-gray-new-15/60"
                             type="button"
                             onClick={handleExampleClick}
                           >
@@ -190,21 +199,29 @@ const ChatWidget = () => {
               </AnimatePresence>
             </LazyMotion>
             {error ? (
-              <div className="flex px-5 pt-2.5 pb-5">
+              <div className="flex items-center px-5 pb-5 pt-2.5">
                 <span className="mr-3 flex h-7 w-7 items-center justify-center rounded-full bg-secondary-1/10">
                   <AttentionIcon className="h-auto w-3.5" />
                 </span>
                 <span>
                   <span className="text-secondary-1">Attention:</span> {error}
                 </span>
+                {shouldTryAgain && (
+                  <Button
+                    className="ml-auto"
+                    type="button"
+                    theme="primary"
+                    size="xxs"
+                    onClick={handleTryAgainClick}
+                  >
+                    Try again
+                  </Button>
+                )}
               </div>
             ) : (
-              <form
-                className="group relative mt-12 w-full px-5 pb-5 lg:mt-auto"
-                onSubmit={handleSubmit}
-              >
+              <form className="group relative w-full px-5 pb-5 lg:mt-auto" onSubmit={handleSubmit}>
                 <input
-                  className="peer w-full appearance-none rounded border border-gray-new-90 py-2 px-2.5 text-base leading-normal transition-colors duration-200 placeholder:text-gray-new-80 focus:outline-none dark:border-gray-new-20 dark:bg-black dark:placeholder:text-gray-new-30"
+                  className="peer w-full appearance-none rounded border border-gray-new-90 px-2.5 py-2 text-base leading-normal transition-colors duration-200 placeholder:text-gray-new-80 focus:outline-none dark:border-gray-new-20 dark:bg-black dark:placeholder:text-gray-new-30"
                   type="text"
                   placeholder="How can I help you?"
                   value={inputText}
@@ -225,7 +242,7 @@ const ChatWidget = () => {
 
             <Dialog.Close asChild>
               <button
-                className="absolute top-4 right-5 flex h-6 w-6 items-center justify-center"
+                className="absolute right-5 top-4 flex h-6 w-6 items-center justify-center"
                 aria-label="Close"
                 type="button"
               >

@@ -6,6 +6,7 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [shouldTryAgain, setShouldTryAgain] = useState(false);
 
   // @TODO: memoize back
   const fetchData = async () => {
@@ -17,7 +18,7 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: messages[messages.length - 1],
+          query: messages[messages.length - 1].content,
         }),
         signal,
       });
@@ -54,6 +55,9 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
             ];
           });
         }
+      } else if (response.status === 429) {
+        setError('Sorry, your query has been rate limited');
+        setShouldTryAgain(true);
       } else {
         throw Error('Something went wrong. Please try again!');
       }
@@ -74,7 +78,15 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
     }
   });
 
-  return { messages, setMessages, error, setError, isLoading };
+  return {
+    messages,
+    setMessages,
+    error,
+    setError,
+    isLoading,
+    shouldTryAgain,
+    setShouldTryAgain,
+  };
 };
 
 export default useDocsAIChatStream;

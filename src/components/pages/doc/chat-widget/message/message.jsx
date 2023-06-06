@@ -42,12 +42,9 @@ const Message = ({ role, content }) => {
         {role === 'user' ? <UserIcon /> : <ExampleIcon />}
       </span>
       {mdxSource ? (
-        <Content
-          className="prose-chat prose pt-0.5 dark:prose-invert xs:prose-code:break-words"
-          content={mdxSource}
-        />
+        <Content className="prose-chat grow pt-0.5 xs:prose-code:break-words" content={mdxSource} />
       ) : (
-        <div className="flex h-7 items-center">
+        <div className="flex h-7 grow items-center">
           <span className="h-4 w-1 animate-pulse bg-gray-new-50" />
         </div>
       )}
