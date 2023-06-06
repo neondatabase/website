@@ -36,7 +36,7 @@ const Message = ({ role, content }) => {
           'mr-3 flex h-7 w-7 shrink-0 items-center justify-center rounded-full',
           role === 'user'
             ? 'bg-gray-new-90 text-gray-new-50 dark:bg-gray-new-15 dark:text-gray-new-60'
-            : 'bg-secondary-8/10 text-secondary-8 dark:bg-primary-1/10 dark:text-primary-1'
+            : 'bg-primary-1/10 text-green-45'
         )}
       >
         {role === 'user' ? <UserIcon /> : <ExampleIcon />}
