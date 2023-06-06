@@ -83,19 +83,19 @@
     - title: Languages
       items:
         - title: Elixir
-          slug: slug: guides/elixir-ecto
+          slug: guides/elixir-ecto
         - title: Go
-          slug: slug: guides/go
+          slug: guides/go
 	      - title: Java
-          slug: slug: guides/java
+          slug: guides/java
 	      - title: Python
-          slug: slug: guides/python
+          slug: guides/python
 	      - title: Rust
-          slug: slug: guides/rust
+          slug: guides/rust
     - title: Frameworks
       items:
         - title: Django
-          slug: slug: guides/django
+          slug: guides/django
         - title: Laravel
           slug: guides/laravel
         - title: Next.js
