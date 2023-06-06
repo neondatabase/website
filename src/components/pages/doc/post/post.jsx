@@ -36,7 +36,7 @@ ReleaseNotes.propTypes = {
 };
 
 const Post = ({
-  data: { title, subtitle, enableTableOfContents },
+  data: { title, subtitle, enableTableOfContents = false },
   content,
   breadcrumbs,
   navigationLinks: { previousLink, nextLink },

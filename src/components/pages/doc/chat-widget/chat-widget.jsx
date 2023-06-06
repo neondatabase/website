@@ -97,7 +97,7 @@ const ChatWidget = () => {
       e?.preventDefault();
       // do not let user submit another
       // query while the previous one is getting processed
-      if (!isLoading) {
+      if (!isLoading && inputText) {
         setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
         setInputText('');
       }
@@ -261,7 +261,7 @@ const ChatWidget = () => {
 };
 
 ChatWidget.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   abortControllerSignal: PropTypes.object,
   abortStream: PropTypes.func,
   isChatWidgetOpen: PropTypes.bool,
