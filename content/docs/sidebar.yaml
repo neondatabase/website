@@ -58,9 +58,9 @@
       slug: connect/connection-pooling
     - title: Connection issues
       items:
-          title: Connection errors
+        - title: Connection errors
           slug: connect/connectivity-issues
-          title: Latency and timeouts
+        - title: Latency and timeouts
           slug: connect/connection-latency
 - title: Manage
   items:
