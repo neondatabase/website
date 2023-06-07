@@ -1,19 +1,24 @@
 ---
 title: Connection errors
+subtitle: Learn how to resolve commonly encountered connection errors
 enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
 ---
 
-This topic describes some commonly encountered connection errors and how to address them.
+This topic describes commonly encountered connection errors and how to resolve them.
 
-## ERROR: The endpoint ID is not specified
+## Error: The endpoint ID is not specified
 
 With older clients and some native PostgreSQL clients, you may receive the following error:
+
+<CodeBlock shouldWrap>
 
 ```txt
 ERROR: The endpoint ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
 ```
+
+</CodeBlock>
 
 This happens if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
 
@@ -104,19 +109,27 @@ Native client libraries:
 | PostgresNIO       | Swift       | &check;                                                                                                                                                     |
 | postgresql-client | TypeScript  | &check;                                                                                                                                                     |
 
-## ERROR: password authentication failed for user
+## Error: password authentication failed for user
 
 The following error is often the result of an incorrectly defined connection string or connection details.
+
+<CodeBlock shouldWrap>
 
 ```text
 ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require`)
 ```
 
+</CodeBlock>
+
 Your Neon connection string can be obtained from the **Connection Details** widget on the Neon Dashboard. It appears similar to this:
+
+<CodeBlock shouldWrap>
 
 ```text
 postgres://daniel:f98wh99w398h@ep-white-morning-123456.us-east-2.aws.neon.tech/neondb
 ```
+
+</CodeBlock>
 
 For clients or applications that require specifying connection details individually, the values in the connection string correspond to the following:
 
