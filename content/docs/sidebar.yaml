@@ -3,6 +3,8 @@
   items:
     - title: What is Neon?
       slug: introduction/about
+    - title: Neon roadmap
+      slug: introduction/roadmap
     - title: Neon architecture
       slug: introduction/architecture-overview
     - title: Compute lifecycle
@@ -11,8 +13,8 @@
       slug: introduction/branching
     - title: Autoscaling
       slug: introduction/autoscaling
-    - title: Neon roadmap
-      slug: introduction/roadmap
+    - title: Regions
+      slug: introduction/regions
     - title: Free Tier
       slug: introduction/technical-preview-free-tier
     - title: Pro plan
@@ -21,8 +23,6 @@
       slug: introduction/billing
     - title: Support
       slug: introduction/support
-    - title: Regions
-      slug: introduction/regions
 - title: Get started
   items:
     - title: Sign up
@@ -44,7 +44,7 @@
   items:
     - title: Connect from any application
       slug: connect/connect-from-any-app
-    - title: Connect a GUI or IDE
+    - title: Connect a GUI application
       slug: connect/connect-postgres-gui
     - title: Passwordless auth
       slug: connect/passwordless-connect
@@ -72,7 +72,7 @@
       slug: manage/projects
     - title: Branches
       slug: manage/branches
-    - title: Compute endpoints
+    - title: Computes
       slug: manage/endpoints
     - title: Roles
       slug: manage/roles
@@ -84,58 +84,76 @@
       slug: manage/operations
 - title: Guides
   items:
-    - title: AWS Lambda
-      slug: guides/aws-lambda
-    - title: Elixir
-      slug: guides/elixir-ecto
-    - title: Django
-      slug: guides/django
-    - title: Go
-      slug: guides/go
-    - title: Grafbase
-      slug: guides/grafbase
-    - title: Hasura
-      slug: guides/hasura
-    - title: Java
-      slug: guides/java
-    - title: Koyeb
-      slug: guides/koyeb
-    - title: Laravel
-      slug: guides/laravel
-    - title: Next.js
-      slug: guides/nextjs
-    - title: Node.js
-      slug: guides/node
-    - title: PolyScale
-      slug: guides/polyscale
-    - title: Prisma
+    - title: Languages
       items:
-        - title: Connect from Prisma
-          slug: guides/prisma
-        - title: Use Prisma Migrate With Neon
-          slug: guides/prisma-migrate
-    - title: Python
-      slug: guides/python
-    - title: Rust
-      slug: guides/rust
-    - title: SQLAlchemy
-      slug: guides/sqlalchemy
-    - title: StepZen
-      slug: guides/stepzen
-    - title: Symfony
-      slug: guides/symfony
-    - title: WunderGraph
-      slug: guides/wundergraph
-    - title: Vercel
+        - title: Elixir
+          slug: guides/elixir-ecto
+        - title: Go
+          slug: guides/go
+        - title: Java
+          slug: guides/java
+        - title: PHP
+          items:
+            - title: Laravel
+              slug: guides/laravel
+            - title: Symfony
+              slug: guides/symfony
+        - title: Python
+          items:
+            - title: Django
+              slug: guides/django
+            - title: Psycopg 
+              slug: guides/python
+            - title: SQL Alchemy
+              slug: guides/sqlalchemy
+        - title: Rust
+          slug: guides/rust
+        - title: Javascript
+          items:
+            - title: Next.js
+              slug: guides/nextjs
+            - title: Node.js
+              slug: guides/node
+            - title: Prisma
+              items:
+                - title: Connect from Prisma
+                  slug: guides/prisma
+                - title: Use Prisma Migrate With Neon
+                  slug: guides/prisma-migrate
+    - title: Backend-as-a-service
       items:
-        - title: Overview
-          slug: guides/vercel-overview
-        - title: Vercel Postgres
-          slug: guides/vercel-postgres
-        - title: The Neon Vercel Integration
-          slug: guides/vercel
-        - title: Connect manually
-          slug: guides/vercel-manual
+        - title: Grafbase
+          slug: guides/grafbase
+        - title: Hasura
+          slug: guides/hasura
+        - title: StepZen
+          slug: guides/stepzen
+        - title: WunderGraph
+          slug: guides/wundergraph
+    - title: Serverless
+      items:
+        - title: Neon serverless driver
+          slug: serverless/serverless-driver
+        - title: AWS Lambda
+          slug: guides/aws-lambda
+    - title: Caching
+      items:
+        - title: PolyScale
+          slug: guides/polyscale
+    - title: Deployment platforms
+      items:
+        - title: Koyeb
+          slug: guides/koyeb
+        - title: Vercel
+          items:
+            - title: Overview
+              slug: guides/vercel-overview
+            - title: Vercel Postgres
+              slug: guides/vercel-postgres
+            - title: Neon Vercel Integration
+              slug: guides/vercel
+            - title: Connect manually
+              slug: guides/vercel-manual
 - title: Extensions
   items:
     - title: Supported extensions
@@ -154,8 +172,6 @@
       slug: import/import-from-csv
     - title: Import from a Neon project
       slug: import/import-from-neon
-- title: Serverless driver
-  slug: serverless/serverless-driver
 - title: Security
   slug: security/security-overview
 - title: Reference

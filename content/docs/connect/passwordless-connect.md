@@ -1,5 +1,6 @@
 ---
 title: Passwordless auth
+subtitle: Learn how to connect to Neon without a password
 enableTableOfContents: true
 ---
 

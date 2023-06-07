@@ -1,5 +1,6 @@
 ---
 title: Connect from any application
+subtitle: Learn how to connect to Neon from any application
 enableTableOfContents: true
 ---
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch. The primary branch in a Neon project is created with a default database named `neondb`.
