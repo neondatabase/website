@@ -4,6 +4,8 @@ import 'styles/globals.css';
 
 import TopBar from 'components/shared/topbar';
 
+import ThemeProvider from './provider';
+
 const fontsBasePath = '/fonts';
 const fontsPaths = [
   '/ibm-plex-sans/ibm-plex-sans-bold.woff2',
@@ -42,8 +44,10 @@ const RootLayout = ({ children }) => (
           }}
         />
       )}
-      <TopBar />
-      {children}
+      <ThemeProvider>
+        <TopBar />
+        {children}
+      </ThemeProvider>
     </body>
   </html>
 );
