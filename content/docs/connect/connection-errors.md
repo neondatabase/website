@@ -4,6 +4,7 @@ subtitle: Learn how to resolve connection errors
 enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
+  - /docs/connect/connectivity-issues
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered in this topic include:

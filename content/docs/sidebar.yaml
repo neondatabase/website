@@ -59,7 +59,7 @@
     - title: Connection issues
       items:
         - title: Connection errors
-          slug: connect/connectivity-issues
+          slug: connect/connection-errors
         - title: Latency and timeouts
           slug: connect/connection-latency
 - title: Manage

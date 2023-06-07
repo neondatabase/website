@@ -69,7 +69,7 @@ module.exports = {
       // Proxy has an error message, that suggests to read `https://neon.tech/sni` for more details.
       {
         source: '/sni',
-        destination: '/docs/how-to-guides/connectivity-issues',
+        destination: '/docs/connect/connection-errors',
         permanent: true,
       },
       {
