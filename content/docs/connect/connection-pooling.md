@@ -1,5 +1,6 @@
 ---
 title: Connection pooling
+subtitle: Learn how to enable connection pooling in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
