@@ -80,40 +80,42 @@
       slug: manage/operations
 - title: Guides
   items:
-    - title: Elixir
-      slug: guides/elixir-ecto
-    - title: Go
-      slug: guides/go
-    - title: Java
-      slug: guides/java
-    - title: PHP
+    - title: Languages
       items:
-        - title: Laravel
-          slug: guides/laravel
-        - title: Symfony
-          slug: guides/symfony
-    - title: Python
-      items:
-        - title: Django
-          slug: guides/django
-        - title: Psycopg 
-          slug: guides/python
-        - title: SQL Alchemy
-          slug: guides/sqlalchemy
-    - title: Rust
-      slug: guides/rust
-    - title: Javascript/Typescript
-      items:
-        - title: Next.js
-          slug: guides/nextjs
-        - title: Node.js
-          slug: guides/node
-        - title: Prisma
+        - title: Elixir
+          slug: guides/elixir-ecto
+        - title: Go
+          slug: guides/go
+        - title: Java
+          slug: guides/java
+        - title: PHP
           items:
-            - title: Connect from Prisma
-              slug: guides/prisma
-            - title: Use Prisma Migrate With Neon
-              slug: guides/prisma-migrate
+            - title: Laravel
+              slug: guides/laravel
+            - title: Symfony
+              slug: guides/symfony
+        - title: Python
+          items:
+            - title: Django
+              slug: guides/django
+            - title: Psycopg 
+              slug: guides/python
+            - title: SQL Alchemy
+              slug: guides/sqlalchemy
+        - title: Rust
+          slug: guides/rust
+        - title: Javascript
+          items:
+            - title: Next.js
+              slug: guides/nextjs
+            - title: Node.js
+              slug: guides/node
+            - title: Prisma
+              items:
+                - title: Connect from Prisma
+                  slug: guides/prisma
+                - title: Use Prisma Migrate With Neon
+                  slug: guides/prisma-migrate
     - title: Backend-as-a-service
       items:
         - title: Grafbase
