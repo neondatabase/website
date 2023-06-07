@@ -35,23 +35,11 @@ If a library or application upgrade does not help, there are several workarounds
 
 ### A. Pass the endpoint ID as an option
 
-We support a special connection option named `endpoint`, which you can set to identify the compute endpoint you are connecting to. Specifically, you can pass `options=endpoint%3Dep-mute-recipe-239816` as a parameter in the connection string. The `%3D` is a URL-encoded `=`.
+We support a special connection option named `endpoint`, which you can set to identify the compute endpoint you are connecting to. Specifically, you can pass `options=endpoint%3Dep-mute-recipe-239816` as a parameter in the connection string, as shown in the example below. The `%3D` is a URL-encoded `=`.
 
 <Admonition type="note">
 The special connection option was previously named `project`. The `project` option is deprecated but remains supported for backward compatibility.
 </Admonition>
-
-For example, instead of the following connection string:
-
-<CodeBlock shouldWrap>
-
-```txt
-postgres://<user>:<password>@ep-mute-recipe-239816.us-east-2.aws.neon.tech/main
-```
-
-</CodeBlock>
-
-You would use this one:
 
 <CodeBlock shouldWrap>
 
@@ -61,7 +49,7 @@ postgres://<user>:<password>@ep-mute-recipe-239816.us-east-2.aws.neon.tech/main?
 
 </CodeBlock>
 
-The `endpoint` option works if your application or library permits it to be set. But not all of them do, especially in the case of GUI applications.
+The `endpoint` option works if your application or library permits it to be set. Not all of them do, especially in the case of GUI applications.
 
 ### B. Use libpq key=value syntax in the database field
 
@@ -117,9 +105,9 @@ The following error is often the result of an incorrectly defined connection str
 ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require`)
 ```
 
-Check to see that your connection is defined correctly, following the instructions below. If that is not the issue, see the instructions regarding SNI outlined in the preceding section: [Error: The endpoint ID is not specified](#error-the-endpoint-id-is-not-specified).
-
 </CodeBlock>
+
+Check to see that your connection is defined correctly, following the instructions below. If that is not the issue, see the instructions regarding SNI outlined in the preceding section: [Error: The endpoint ID is not specified](#error-the-endpoint-id-is-not-specified).
 
 Your Neon connection string can be obtained from the **Connection Details** widget on the Neon Dashboard. It appears similar to this:
 
