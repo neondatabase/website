@@ -6,7 +6,10 @@ redirectFrom:
   - /docs/how-to-guides/connectivity-issues
 ---
 
-This topic describes commonly encountered connection errors and how to resolve them.
+This topic describes commonly encountered connection errors and how to resolve them. The connection errors addressed in this topic include:
+
+- [Error: The endpoint ID is not specified](#error-the-endpoint-id-is-not-specified)
+- [Error: password authentication failed for user](#error-password-authentication-failed-for-user)
 
 ## Error: The endpoint ID is not specified
 
@@ -20,7 +23,7 @@ ERROR: The endpoint ID is not specified. Either upgrade the PostgreSQL client li
 
 </CodeBlock>
 
-This happens if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
+This error occurs if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
 
 Neon uses compute endpoint IDs (the first part of the domain name) to route incoming connections. However, the PostgreSQL wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
 
