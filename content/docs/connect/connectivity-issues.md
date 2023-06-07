@@ -1,15 +1,17 @@
 ---
 title: Connection errors
-subtitle: Learn how to resolve commonly encountered connection errors
+subtitle: Learn how to resolve common connection errors
 enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
 ---
 
-This topic describes commonly encountered connection errors and how to resolve them. The connection errors addressed in this topic include:
+This topic describes common connection errors and how to resolve them. The errors addressed in this topic include:
 
-- [Error: The endpoint ID is not specified](#error-the-endpoint-id-is-not-specified)
-- [Error: password authentication failed for user](#error-password-authentication-failed-for-user)
+- [The endpoint ID is not specified](#the-endpoint-id-is-not-specified)
+- [Password authentication failed for user](#password-authentication-failed-for-user)
+- [Can't reach database server](#cant-reach-database-server)
+- [Error undefined: Database error](#error-undefined-database-error)
 
 ## Error: The endpoint ID is not specified
 
@@ -85,42 +87,37 @@ This approach is the least secure of the recommended workarounds. It causes the 
 
 ### Libraries
 
-Clients from the [list of drivers](https://wiki.postgresql.org/wiki/List_of_drivers) on the PostgreSQL community wiki that use your system's `libpq` library should work if the version is >= 14.
+Clients from the [list of drivers](https://wiki.postgresql.org/wiki/List_of_drivers) on the PostgreSQL community wiki that use your system's `libpq` library should work if your `libpq` version is >= 14.
 
-Native client libraries:
+The following drivers have been tested for SNI support:
 
-| Driver            | Language    | Supports SNI                                                                                                                                                |
-| ----------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| npgsql            | C#          | &check;                                                                                                                                                     |
-| Postmodern        | Common Lisp |                                                                                                                                                             |
-| crystal-pg        | Crystal     |                                                                                                                                                             |
-| Postgrex          | Elixir      | &check; ([configure ssl_opts with server_name_indication](https://hexdocs.pm/postgrex/Postgrex.html#start_link/1-ssl-client-authentication))                |
-| epgsql            | Erlang      |                                                                                                                                                             |
-| pgo               | Erlang      |                                                                                                                                                             |
-| github.com/lib/pq | Go          | &#x2717; (SNI support is in review)                                                                                                                         |
-| pgx               | Go          | &#x2717; (SNI support is merged, not released yet)                                                                                                          |
-| go-pg             | Go          |  &check; (requires `verify-full` mode)                                                                                                                          |
-| JDBC              | Java        | &check;                                                                                                                                                     |
-| R2DBC             | Java        |                                                                                                                                                             |
-| node-postgres     | JavaScript  | &check; when `ssl: {'sslmode': 'require'}` option passed                                                                                                    |
-| postgres.js       | JavaScript  | &check; when `ssl: 'require'` option passed                                                                                                                 |
-| pgmoon            | Lua         |                                                                                                                                                             |
-| asyncpg           | Python      | &check;                                                                                                                                                     |
-| pg8000            | Python      | &check; (requires [scramp >= v1.4.3](https://pypi.org/project/scramp/), which is included in [pg8000 v1.29.3](https://pypi.org/project/pg8000/) and higher) |
-| rust-postgres     | Rust        |                                                                                                                                                             |
-| PostgresClientKit | Swift       | &#x2717;                                                                                                                                                    |
-| PostgresNIO       | Swift       | &check;                                                                                                                                                     |
-| postgresql-client | TypeScript  | &check;                                                                                                                                                     |
+| Driver            | Language    | SNI Support | Notes                                                                                                                                             |
+| ----------------- | ----------- | -------------|-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| npgsql            | C#          | &check;      |                                                                                                                                                   |
+| Postgrex          | Elixir      | &check;      | [Requires ssl_opts with server_name_indication](https://neon.tech/docs/guides/elixir-ecto#configure-ecto)                                         |
+| github.com/lib/pq | Go          | &check;      | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22                                                                       |
+| pgx               | Go          | &#x2717;     |SNI support merged with v5.0.0-beta.3 yet                                                                                                            |
+| go-pg             | Go          | &check;      | requires `verify-full` mode                                                                                                                       |
+| JDBC              | Java        | &check;      |                                                                                                                                                   |
+| node-postgres     | JavaScript  | &check;      | Requires the `ssl: {'sslmode': 'require'}` option                                                                                                 |
+| postgres.js       | JavaScript  | &check;      | Requires the `ssl: 'require'` option                                                                                                              |
+| asyncpg           | Python      | &check;      |                                                                                                                                                   |
+| pg8000            | Python      | &check;      | Requires [scramp >= v1.4.3](https://pypi.org/project/scramp/), which is included in [pg8000 v1.29.3](https://pypi.org/project/pg8000/) and higher |
+| PostgresClientKit | Swift       | &#x2717;     |                                                                                                                                                   |
+| PostgresNIO       | Swift       | &check;      |                                                                                                                                                   |
+| postgresql-client | TypeScript  | &check;      |                                                                                                                                                   |
 
-## Error: password authentication failed for user
+## Password authentication failed for user
 
-The following error is often the result of an incorrectly defined connection string or connection details.
+The following error is often the result of an incorrectly defined connection string or connection details, or the driver you are using does not support Server Name Indication (SNI).
 
 <CodeBlock shouldWrap>
 
 ```text
 ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require`)
 ```
+
+Check to see that your connection is defined correctly, following the instructions below. If that is not the issue, see the instructions regarding SNI outlined in the preceding section: [Error: The endpoint ID is not specified](#error-the-endpoint-id-is-not-specified).
 
 </CodeBlock>
 
@@ -141,6 +138,35 @@ For clients or applications that require specifying connection details individua
 - Hostname: `ep-white-morning-123456.us-east-2.aws.neon.tech`
 - Port number: `5432` (Neon uses default PostgreSQL port, `5432`, and is therefore not included in the connection string)
 - Database name: `neondb` (The `neondb` is the default database created with each Neon project. You database name may differ.)
+
+## Can't reach database server
+
+<CodeBlock shouldWrap>
+
+This error is sometimes encountered when using Prisma with Neon.
+
+```text
+Error: P1001: Can't reach database server at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`
+Please make sure your database server is running at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`.
+```
+
+</CodeBlock>
+
+A compute node in Neon has two main states: **Active** and **Idle**. Active means that PostgreSQL is currently running. If there are no active queries for 5 minutes, the activity monitor gracefully places the compute node into an idle state to save energy and resources.
+
+When you connect to an idle compute, Neon automatically activates it. Activation typically happens within a few seconds. If the error above is reported, it most likely means that the Prisma query engine timed out before your Neon compute was activated. For dealing with this connection timeout scenario, refer to the [connection timeout](../guides/prisma#connection-timeouts) instructions in our Prisma documentation.
+
+## Error undefined: Database error
+
+This error is sometimes encountered when using Prisma Migrate with Neon.
+
+```text
+Error undefined: Database error
+Error querying the database: db error: ERROR: prepared statement
+"s0" already exists
+```
+
+Prisma Migrate requires a direct connection to the database. It does not support a pooled connection with PgBouncer, which is the connection pooler used by Neon. Attempting to run Prisma Migrate commands, such as prisma migrate dev, with a pooled connection causes this error. To resolve this issue, please refer to our [Prisma Migrate with PgBouncer](../guides/prisma-migrate#prisma-migrate-with-pgbouncer) instructions.
 
 ## Need help?
 
