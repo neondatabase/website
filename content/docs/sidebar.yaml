@@ -80,30 +80,58 @@
       slug: manage/operations
 - title: Guides
   items:
-    - title: Languages
+    - title: Elixir
+      slug: guides/elixir-ecto
+    - title: Go
+      slug: guides/go
+    - title: Java
+      slug: guides/java
+    - title: PHP
       items:
-        - title: Elixir
-          slug: guides/elixir-ecto
-        - title: Go
-          slug: guides/go
-        - title: Java
-          slug: guides/java
-        - title: Python
-          slug: guides/python
-        - title: Rust
-          slug: guides/rust
-    - title: Frameworks
+        - title: Laravel
+          slug: guides/laravel
+        - title: Symfony
+          slug: guides/symfony
+    - title: Python
       items:
         - title: Django
           slug: guides/django
-        - title: Laravel
-          slug: guides/laravel
+        - title: Psycopg 
+          slug: guides/python
+        - title: SQL Alchemy
+          slug: guides/sqlalchemy
+    - title: Rust
+      slug: guides/rust
+    - title: Javascript/Typescript
+      items:
         - title: Next.js
           slug: guides/nextjs
         - title: Node.js
           slug: guides/node
-        - title: Symfony
-          slug: guides/symfony
+        - title: Prisma
+          items:
+            - title: Connect from Prisma
+              slug: guides/prisma
+            - title: Use Prisma Migrate With Neon
+              slug: guides/prisma-migrate
+    - title: Backend-as-a-service
+      items:
+        - title: Grafbase
+          slug: guides/grafbase
+        - title: Hasura
+          slug: guides/hasura
+        - title: StepZen
+          slug: guides/stepzen
+        - title: WunderGraph
+          slug: guides/wundergraph
+    - title: Serverless
+      items:
+        - title: AWS Lambda
+          slug: guides/aws-lambda
+    - title: Caching
+      items:
+        - title: PolyScale
+          slug: guides/polyscale
     - title: Deployment platforms
       items:
         - title: Koyeb
@@ -118,36 +146,6 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
-    - title: Query builders
-      items:
-        - title: SQL Alchemy
-          slug: guides/sqlalchemy
-    - title: ORMs
-      items:
-        - title: Prisma
-          items:
-            - title: Connect from Prisma
-              slug: guides/prisma
-            - title: Use Prisma Migrate With Neon
-              slug: guides/prisma-migrate
-    - title: GraphQL
-      items:
-        - title: Grafbase
-          slug: guides/grafbase
-        - title: Hasura
-          slug: guides/hasura
-        - title: StepZen
-          slug: guides/stepzen
-        - title: WunderGraph
-          slug: guides/wundergraph
-    - title: Caching
-      items:
-        - title: PolyScale
-          slug: guides/polyscale
-    - title: Serverless
-      items:
-        - title: AWS Lambda
-          slug: guides/aws-lambda
 - title: Extensions
   items:
     - title: Supported extensions
