@@ -104,7 +104,7 @@ Native client libraries:
 | PostgresNIO       | Swift       | &check;                                                                                                                                                     |
 | postgresql-client | TypeScript  | &check;                                                                                                                                                     |
 
-## ERROR: password authentication failed for user '<user_name>'
+## ERROR: password authentication failed for user
 
 The following error is often the result of an incorrectly defined connection string or connection details.
 
