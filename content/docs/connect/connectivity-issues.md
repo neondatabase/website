@@ -141,9 +141,9 @@ For clients or applications that require specifying connection details individua
 
 ## Can't reach database server
 
-<CodeBlock shouldWrap>
-
 This error is sometimes encountered when using Prisma with Neon.
+
+<CodeBlock shouldWrap>
 
 ```text
 Error: P1001: Can't reach database server at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`
