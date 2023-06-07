@@ -1,12 +1,12 @@
 ---
 title: Connection errors
-subtitle: Learn how to resolve common connection errors
+subtitle: Learn how to resolve connection errors
 enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
 ---
 
-This topic describes common connection errors and how to resolve them. The errors addressed in this topic include:
+This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered in this topic include:
 
 - [The endpoint ID is not specified](#the-endpoint-id-is-not-specified)
 - [Password authentication failed for user](#password-authentication-failed-for-user)
@@ -15,7 +15,7 @@ This topic describes common connection errors and how to resolve them. The error
 
 ## The endpoint ID is not specified
 
-With older clients and some native PostgreSQL clients, you may receive the following error:
+With older clients and some native PostgreSQL clients, you may receive the following error when attempting to connect to Neon:
 
 <CodeBlock shouldWrap>
 
@@ -27,33 +27,33 @@ ERROR: The endpoint ID is not specified. Either upgrade the PostgreSQL client li
 
 This error occurs if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
 
-Neon uses compute endpoint IDs (the first part of the domain name) to route incoming connections. However, the PostgreSQL wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
+Neon uses compute endpoint IDs (the first part of a Neon domain name) to route incoming connections. However, the PostgreSQL wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
 
-SNI support was added to the `libpq` (the official PostgreSQL client library) in version 14, released in September 2021. Clients that use your system's `libpq` library should work if the version is >= 14. On Linux and macOS, you can check your `libpq` version by running `pg_config --version`. On Windows, check the `libpq.dll` version in your PostgreSQL installation's `bin` directory. Right click, select **Properties** > **Details**.  
+SNI support was added to the `libpq` (the official PostgreSQL client library) in version 14, which was released in September 2021. Clients that use your system's `libpq` library should work if you `libpq` version is >= 14. On Linux and macOS, you can check your `libpq` version by running `pg_config --version`. On Windows, check the `libpq.dll` version in your PostgreSQL installation's `bin` directory. Right click on the file, select **Properties** > **Details**.  
 
-If a library or application upgrade does not help, there are several workarounds for providing the required domain name information when connecting to Neon. The workarounds are described below.
+If a library or application upgrade does not help, there are several workarounds, described below, for providing the required domain name information when connecting to Neon.
 
 ### A. Pass the endpoint ID as an option
 
-We support a special connection option named `endpoint`, which you can set to identify the compute endpoint you are connecting to. Specifically, you can pass `options=endpoint%3Dep-mute-recipe-239816` as a parameter in the connection string, as shown in the example below. The `%3D` is a URL-encoded `=`.
-
-<Admonition type="note">
-The special connection option was previously named `project`. The `project` option is deprecated but remains supported for backward compatibility.
-</Admonition>
+Neon supports a connection option named `endpoint`, which you can use to identify the compute endpoint you are connecting to. Specifically, you can add `options=endpoint%3Dep-mute-recipe-123456` as a parameter to your connection string, as shown in the example below. The `%3D` is a URL-encoded `=` sign.
 
 <CodeBlock shouldWrap>
 
 ```txt
-postgres://<user>:<password>@ep-mute-recipe-239816.us-east-2.aws.neon.tech/main?options=endpoint%3Dep-mute-recipe-239816
+postgres://<user>:<password>@ep-mute-recipe-123456.us-east-2.aws.neon.tech/main?options=endpoint%3Dep-mute-recipe-123456
 ```
 
 </CodeBlock>
+
+<Admonition type="note">
+The `endpoint` connection option was previously named `project`. The `project` option is deprecated but remains supported for backward compatibility.
+</Admonition>
 
 The `endpoint` option works if your application or library permits it to be set. Not all of them do, especially in the case of GUI applications.
 
 ### B. Use libpq key=value syntax in the database field
 
-If your application or client is based on `libpq` but you cannot upgrade the library, such as when the library is compiled inside of a an application, you can take advantage of the fact that `libpq` permits adding options to the database name. So, in addition to the database name, you can specify the `endpoint` option, as shown. Replace `<endpoint_id>` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-mute-recipe-239816`.
+If your application or client is based on `libpq` but you cannot upgrade the library, such as when the library is compiled inside of a an application, you can take advantage of the fact that `libpq` permits adding options to the database name. So, in addition to the database name, you can specify the `endpoint` option, as shown below. Replace `<endpoint_id>` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-mute-recipe-123456`.
 
 ```txt
 dbname=neondb options=endpoint=<endpoint_id>
@@ -65,7 +65,7 @@ If your application or service uses golang PostgreSQL clients like `pgx` and `li
 
 ### D. Specify the endpoint ID in the password field
 
-As a last resort, you can try specifying the endpoint ID in the password field. So, instead of specifying only your password, you provide string consisting of the `endpoint` option and the password, as shown. Replace `<endpoint_id>` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-mute-recipe-239816`.
+As a last resort, you can try specifying the endpoint ID in the password field. So, instead of specifying only your password, you provide a string consisting of the `endpoint` option and the password, as shown. Replace `<endpoint_id>` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-mute-recipe-123456`.
 
 ```txt
 endpoint=<endpoint_id>;<password>
@@ -75,9 +75,9 @@ This approach is the least secure of the recommended workarounds. It causes the 
 
 ### Libraries
 
-Clients from the [list of drivers](https://wiki.postgresql.org/wiki/List_of_drivers) on the PostgreSQL community wiki that use your system's `libpq` library should work if your `libpq` version is >= 14.
+Clients on the [list of drivers](https://wiki.postgresql.org/wiki/List_of_drivers) on the PostgreSQL community wiki that use your system's `libpq` library should work if your `libpq` version is >= 14.
 
-The following drivers have been tested for SNI support:
+Neon has tested the following drivers for SNI support:
 
 | Driver            | Language    | SNI Support | Notes                                                                                                                                             |
 | ----------------- | ----------- | -------------|-------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -97,7 +97,7 @@ The following drivers have been tested for SNI support:
 
 ## Password authentication failed for user
 
-The following error is often the result of an incorrectly defined connection string or connection details, or the driver you are using does not support Server Name Indication (SNI).
+The following error is often the result of an incorrectly defined connection information, or the driver you are using does not support Server Name Indication (SNI).
 
 <CodeBlock shouldWrap>
 
@@ -107,9 +107,7 @@ ERROR:  password authentication failed for user '<user_name>' connection to serv
 
 </CodeBlock>
 
-Check to see that your connection is defined correctly, following the instructions below. If that is not the issue, see the instructions regarding SNI outlined in the preceding section: [Error: The endpoint ID is not specified](#error-the-endpoint-id-is-not-specified).
-
-Your Neon connection string can be obtained from the **Connection Details** widget on the Neon Dashboard. It appears similar to this:
+Check your connection to see if it is defined correctly. Your Neon connection string can be obtained from the **Connection Details** widget on the Neon **Dashboard**. It appears similar to this:
 
 <CodeBlock shouldWrap>
 
@@ -119,17 +117,19 @@ postgres://daniel:f98wh99w398h@ep-white-morning-123456.us-east-2.aws.neon.tech/n
 
 </CodeBlock>
 
-For clients or applications that require specifying connection details individually, the values in the connection string correspond to the following:
+For clients or applications that require specifying connection parameters such as user, password, and hostname separately, the values in a Neon connection string correspond to the following:
 
-- User: `daniel`
-- Password: `f74wh99w398H`
-- Hostname: `ep-white-morning-123456.us-east-2.aws.neon.tech`
-- Port number: `5432` (Neon uses default PostgreSQL port, `5432`, and is therefore not included in the connection string)
-- Database name: `neondb` (The `neondb` is the default database created with each Neon project. You database name may differ.)
+- **User**: `daniel`
+- **Password**: `f74wh99w398H`
+- **Hostname**: `ep-white-morning-123456.us-east-2.aws.neon.tech`
+- **Port number**: `5432` (Neon uses default PostgreSQL port, `5432`, and is therefore not included in the connection string)
+- **Database name**: `neondb` (`neondb` is the default database created with each Neon project. Your database name may differ.)
+
+If you find that your connection string is defined correctly, see the instructions regarding SNI support outlined in the preceding section: [The endpoint ID is not specified](#the-endpoint-id-is-not-specified).
 
 ## Can't reach database server
 
-This error is sometimes encountered when using Prisma with Neon.
+This error is sometimes encountered when using Prisma Client with Neon.
 
 <CodeBlock shouldWrap>
 
@@ -154,7 +154,7 @@ Error querying the database: db error: ERROR: prepared statement
 "s0" already exists
 ```
 
-Prisma Migrate requires a direct connection to the database. It does not support a pooled connection with PgBouncer, which is the connection pooler used by Neon. Attempting to run Prisma Migrate commands, such as prisma migrate dev, with a pooled connection causes this error. To resolve this issue, please refer to our [Prisma Migrate with PgBouncer](../guides/prisma-migrate#prisma-migrate-with-pgbouncer) instructions.
+Prisma Migrate requires a direct connection to the database. It does not support a pooled connection with PgBouncer, which is the connection pooler used by Neon. Attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes this error. To resolve this issue, please refer to our [Prisma Migrate with PgBouncer](../guides/prisma-migrate#prisma-migrate-with-pgbouncer) instructions.
 
 ## Need help?
 
