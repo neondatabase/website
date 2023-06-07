@@ -2,7 +2,7 @@
 title: Introduction to Neon
 ---
 
-Neon is a fully managed serverless PostgreSQL. Neon separates storage and compute to offer modern developer features such as serverless, branching, bottomless storage, and more.
+Neon is open-source serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
 
 ## New to Neon?
 
