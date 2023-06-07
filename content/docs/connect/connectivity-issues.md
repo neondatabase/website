@@ -13,7 +13,7 @@ This topic describes common connection errors and how to resolve them. The error
 - [Can't reach database server](#cant-reach-database-server)
 - [Error undefined: Database error](#error-undefined-database-error)
 
-## Error: The endpoint ID is not specified
+## The endpoint ID is not specified
 
 With older clients and some native PostgreSQL clients, you may receive the following error:
 
