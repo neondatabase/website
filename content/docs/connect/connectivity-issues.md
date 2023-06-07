@@ -77,17 +77,6 @@ endpoint=ep-mute-recipe-239816;<password>
 
 This approach is the least secure of all the recommended workarounds. It causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password) on the fly. The connection is still TLS-encrypted, so the amount of security is the same as with `https` websites. However, we intend deprecate this option when most libraries and applications provide SNI support.
 
-## Applications
-
-| Application                                                                        | SNI support        | Comment                                                                                                                                                  |
-| ---------------------------------------------------------------------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [TablePlus](https://tableplus.com)                                                 | &check;            | SNI support on macOS since build 436, and on Windows since build 202. No SNI support on Linux currently. For older versions, Workaround B is applicable. |
-| [Postico](https://eggerapps.at/postico/)                                           | &check;            | SNI support since v1.5.21. For older versions, Workaround B is applicable.                                                                               |
-| [PopSQL](https://popsql.com/)                                                      | &#x2717;           | No SNI support. Workaround D helps.                                                                                                                      |
-| [Grafana pg source](https://grafana.com/docs/grafana/latest/datasources/postgres/) | &check; / &#x2717; | Workaround C. SNI works if `sslmode=verify-full` as with other golang libraries                                                                          |
-| [PgAdmin 4](https://www.pgadmin.org/)                                              | &check;            |                                                                                                                                                          |
-| [DataGrip](https://www.jetbrains.com/datagrip/)                                    | &check;            |                                                                                                                                                          |
-
 ## Libraries
 
 `libpq`-based clients from this list are expected to work with the system `libpq`, version >= 14: [https://wiki.postgresql.org/wiki/List_of_drivers](https://wiki.postgresql.org/wiki/List_of_drivers)

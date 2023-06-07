@@ -15,8 +15,8 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
   return (
     <footer
       className={clsx(
-        'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-black dark:text-white',
-        !isDarkTheme && withTopBorder && 'border-t border-gray-7 dark:border-gray-2',
+        'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-gray-new-8 dark:text-white',
+        !isDarkTheme && withTopBorder && 'border-t border-gray-new-90 dark:border-gray-new-20',
         isDarkTheme && withTopBorder && 'border-t border-gray-2',
         { 'border-gray-new-15 bg-black-new text-white': theme === 'black-new' },
         { 'bg-black text-white': theme === 'black' },
@@ -35,7 +35,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
           <div
             className={clsx(
               { 'tracking-tight text-gray-new-80': theme === 'black-new' || theme === 'gray-8' },
-              'space-y-[18px] leading-none'
+              'space-y-[18px] leading-none dark:text-gray-new-80'
             )}
           >
             <p>Made in SF and the World</p>
@@ -51,7 +51,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                     'text-[13px] font-semibold text-gray-new-60':
                       theme === 'black-new' || theme === 'gray-8',
                   },
-                  'relative text-sm font-bold uppercase leading-none tracking-wider'
+                  'relative text-sm font-bold uppercase leading-none tracking-wider dark:text-gray-new-60'
                 )}
               >
                 {heading}
@@ -68,7 +68,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                         target={isExternalUrl ? '_blank' : null}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
                       >
-                        {Icon && theme === 'black-new' && <Icon width={16} aria-hidden />}
+                        {Icon && <Icon width={16} aria-hidden />}
                         {text}
                       </Link>
                     </li>
