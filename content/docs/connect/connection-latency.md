@@ -17,7 +17,7 @@ This topic describes how to check the status of a compute to determine if it is 
 
 You can check the current status of a compute on the **Branches** page in the Neon Console. A compute will report either an **Active** or **Idle** status.
 
-![Compute endpoint active idle status](/docs/connect/compute_endpoint_status.png)
+![Compute endpoint status](/docs/connect/compute_endpoint_status.png)
 
 You can also view compute state transitions in the **Branches** widget on the Neon **Dashboard**.
 
