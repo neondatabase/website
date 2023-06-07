@@ -1,5 +1,6 @@
 ---
 title: Connect with psql
+subtitle: Learn how to connect to Neon using psql
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/postgres

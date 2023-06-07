@@ -11,7 +11,7 @@ A project is the top-level object in the [Neon object hierarchy](../manage/overv
 A Neon project is created with the following resources, by default:
 
 - A primary branch called `main`. You can create child branches from the primary branch or from a previously created branch. For more information, see [Manage branches](../manage/branches).
-- A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage compute endpoints](../manage/endpoints).
+- A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage computes](../manage/endpoints).
 - A default database, called `neondb`, which resides in the project's primary branch.
 - A default PostgreSQL role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
 

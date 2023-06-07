@@ -3,6 +3,8 @@
   items:
     - title: What is Neon?
       slug: introduction/about
+    - title: Neon roadmap
+      slug: introduction/roadmap
     - title: Neon architecture
       slug: introduction/architecture-overview
     - title: Compute lifecycle
@@ -11,8 +13,8 @@
       slug: introduction/branching
     - title: Autoscaling
       slug: introduction/autoscaling
-    - title: Neon roadmap
-      slug: introduction/roadmap
+    - title: Regions
+      slug: introduction/regions
     - title: Free Tier
       slug: introduction/technical-preview-free-tier
     - title: Pro plan
@@ -21,8 +23,6 @@
       slug: introduction/billing
     - title: Support
       slug: introduction/support
-    - title: Regions
-      slug: introduction/regions
 - title: Get started
   items:
     - title: Sign up
@@ -44,7 +44,7 @@
   items:
     - title: Connect from any application
       slug: connect/connect-from-any-app
-    - title: Connect a GUI or IDE
+    - title: Connect a GUI application
       slug: connect/connect-postgres-gui
     - title: Passwordless auth
       slug: connect/passwordless-connect
@@ -68,7 +68,7 @@
       slug: manage/projects
     - title: Branches
       slug: manage/branches
-    - title: Compute endpoints
+    - title: Computes
       slug: manage/endpoints
     - title: Roles
       slug: manage/roles
@@ -128,6 +128,8 @@
           slug: guides/wundergraph
     - title: Serverless
       items:
+        - title: Neon serverless driver
+          slug: serverless/serverless-driver
         - title: AWS Lambda
           slug: guides/aws-lambda
     - title: Caching
@@ -144,7 +146,7 @@
               slug: guides/vercel-overview
             - title: Vercel Postgres
               slug: guides/vercel-postgres
-            - title: The Neon Vercel Integration
+            - title: Neon Vercel Integration
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
@@ -166,8 +168,6 @@
       slug: import/import-from-csv
     - title: Import from a Neon project
       slug: import/import-from-neon
-- title: Serverless driver
-  slug: serverless/serverless-driver
 - title: Security
   slug: security/security-overview
 - title: Reference

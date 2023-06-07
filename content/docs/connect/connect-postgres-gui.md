@@ -1,5 +1,6 @@
 ---
-title: Connect a GUI or IDE
+title: Connect a GUI application
+subtitle: Learn how to connect a GUI application to Neon
 enableTableOfContents: true
 ---
 
