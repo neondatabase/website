@@ -52,12 +52,16 @@
       slug: connect/query-with-psql-editor
     - title: Connect with pgcli
       slug: connect/connect-pgcli
-    - title: Connect from old clients
-      slug: connect/connectivity-issues
     - title: Connect securely
       slug: connect/connect-securely
     - title: Connection pooling
       slug: connect/connection-pooling
+    - title: Connection issues
+      items:
+        - title: Connection errors
+          slug: connect/connection-errors
+        - title: Latency and timeouts
+          slug: connect/connection-latency
 - title: Manage
   items:
     - title: Overview
