@@ -5,7 +5,7 @@ enableTableOfContents: true
 
 Neon paid plans bill for usage based on the following metrics:
 
-- **Active time**: The number of active compute hours per month for all computes in a Neon project.
+- **Active time**: The number of compute hours per month for all computes in a Neon project.
 - **Compute time**: The amount of computing capacity used within a specified time period.
 - **Project storage**: The size of the data and history stored for your project.
 - **Written data**: The amount of data written from compute to storage.
@@ -19,19 +19,19 @@ The **Project storage**, **Written data**, and **Data transfer** billing metrics
 
 ## Active time
 
-The _Active time_ metric is a usage metric rather than a billing metric. It is a factor of the _Compute time_ <u>billing</u> metric. It tracks the number of active compute hours per month for all computes in a Neon project. The hours that a compute is in an `Idle` state due to [auto-suspension](../reference/glossary#auto-suspend-compute) are not counted as _Active time_. The **Neon Free Tier** limits non-primary branch computes to 100 hours of _Active time_ per month, but there is no _Active time_ limit on the primary branch compute. For more information, see [Free Tier](../introduction/technical-preview-free-tier).
+_Active time_ tracks the number of compute hours per month for all computes in a Neon project. The hours that a compute is in an `Idle` state due to [auto-suspension](../reference/glossary#auto-suspend-compute) are not counted as _Active time_.
 
 ## Compute time
 
-The _Compute time_ billing metric measures the amount of computing capacity used within a given time period. Neon takes a measure of computing capacity at a defined interval and averages those values to calculate _Compute time_. The minium interval is 12 seconds. Computing capacity is based on _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon [compute endpoint](../reference/glossary/#compute-endpoint) can have anywhere from .25 to 7 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an `Active` state. A defined period of inactivity places the compute endpoint and its CUs into an `Idle` state.
+_Compute time_ is compute capacity multiplied by _Active time_ hours. Neon measures compute capacity at a defined interval and averages those values to calculate _Compute time_. The minimum interval is 12 seconds. Compute capacity is based on _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon [compute](../reference/glossary/#compute-endpoint) can have anywhere from .25 to 7 CUs. A connection from a client or application activates a compute and its CUs. Activity on the connection keeps the compute and its CUs in an `Active` state. A defined period of inactivity places the compute and its CUs into an `Idle` state.
 
 Factors that affect the amount of compute time include:
 
-- The number of active compute endpoints
-- The number of CUs per compute endpoint
-- Neon's _Auto-suspend compute_ feature, which suspends a compute endpoint (and its CUs) after a period of inactivity. The default is five minutes.
+- The number of active computes
+- The number of CUs per computes
+- Neon's _Auto-suspend compute_ feature, which suspends a compute after a period of inactivity. The default is five minutes.
 - Neon's _Configurable auto-suspend compute_ feature, which allows you to configure or disable the timeout period for the _Auto-suspend compute_ feature.
-- Neon's _Autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute endpoint. The number of active CUs scale up and down based on workload.
+- Neon's _Autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute. The number of active CUs scale up and down based on workload.
 
 <Admonition type="note">
 Neon uses a small amount of compute time, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
@@ -65,14 +65,14 @@ To estimate your own monthly compute cost:
 
 1. Determine the compute size that you require, in Compute Units (CUs). Neon supports compute size between .25 CUs and 7 CUs. One CU has 1 vCPU and 4GB of RAM.
 1. Determine the amount of compute hours (_Active time_) per month for your database.
-1. Determine the _Compute-hour_ rate for your region. The [billing rates](#billing-rates) table shows _Compute-hour_ prices for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU). Multiply that rate by 4 to get the cost per hour for a full compute.
-1. Input the values into this _Compute time_ cost-calculation formula:
+1. Determine the _Compute-hour_ rate for your region. The [billing rates](#billing-rates) table shows _Compute-hour_ prices for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU). Multiply that rate by 4 to get per hour cost for a full compute.
+1. Input the values into this _Compute time_ cost formula:
 
    ```text
    cost = compute size * compute hours * (cost per hour for 1/4 compute * 4)
    ```
 
-   For example, this is the calculation for a compute size of 1, active for 730 hours (the full month), at a compute time price per hour of $0.0255 * 4:
+   For example, this is the calculation for a 1 CU compute, 730 compute hours of active time, and a compute time per hour price of $0.0255 * 4:
 
    ```text
    1 * 730 * (0.0255 * 4) = 74.46
