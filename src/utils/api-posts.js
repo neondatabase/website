@@ -606,11 +606,11 @@ const getWpPreviewPostData = async (id, status) => {
     // TODO: Pass seo data to head component
 
     const sortedPosts = revisionPostData?.posts?.nodes
-      .filter((post) => post.slug !== revisionPostData?.post?.revisions?.edges[0].slug)
+      .filter((post) => post.slug !== revisionPostData?.post?.revisions?.edges[0].post.slug)
       .slice(0, 3);
 
     return {
-      post: revisionPostData?.post?.revisions?.edges[0],
+      post: revisionPostData?.post?.revisions?.edges[0].post,
       relatedPosts: sortedPosts,
     };
   }

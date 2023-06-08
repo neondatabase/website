@@ -79,6 +79,10 @@ const sharedComponents = {
 };
 
 export default function getReactContentWithLazyBlocks(content, pageComponents, includeBaseTags) {
+  if (content === null || content === undefined) {
+    return null;
+  }
+
   // https://github.com/remarkablemark/html-react-parser#htmlparser2
   // The library does parsing on client side differently from server side
   // it results in having a need of passing htmlparser2 to adjust behavior
