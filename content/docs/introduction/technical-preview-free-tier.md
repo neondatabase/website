@@ -1,5 +1,6 @@
 ---
 title: Neon Free Tier
+subtitle: Learn about Neon's generous Free Tier
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/technical-preview-free-tier
@@ -16,7 +17,7 @@ The Neon Free Tier is intended for personal projects, prototyping, or evaluation
 - 100 hours of _Active time_ per month (total) for non-primary branch computes. The _Active time_ on your primary branch compute is counted toward the 100 hour limit. If you reach the 100 hour limit for the current month, non-primary branch computes are suspended until the limit resets at the beginning of the next month. Your primary branch compute is unaffected. You can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**.
 - A point-in-time restore window of 7 days of _reasonable usage_.
 
-For higher limits and access to advanced features like _Autoscaling_, _Unlimited storage_, and _Project sharing_, upgrade to our **Pro** plan. For more information, see [Neon Plans](../introduction/billing#neon-plans), or select **Upgrade to Pro** in the [Neon Console](https://console.neon.tech/).
+For higher limits and access to advanced features like _Autoscaling_, _Unlimited storage_, and _Project sharing_, upgrade to our **Pro** plan. For more information, see [Neon Pro Plan](../introduction/billing#pro-plan), or select **Upgrade to Pro** in the [Neon Console](https://console.neon.tech/).
 
 <Admonition type="note">
 Neon reserves the right to adjust Free Tier limits, and to discontinue or limit compute usage in exceptional cases where misuse is identified, in order to protect the integrity of our platform and ensure a positive experience for all users.

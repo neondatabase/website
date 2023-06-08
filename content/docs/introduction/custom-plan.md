@@ -1,6 +1,6 @@
 ---
 title: Neon Custom plan
-subtitle: Learn about Neon's Custom plan
+subtitle: Learn about customizing a Neon plan to meet your specific requirements
 enableTableOfContents: true
 isDraft: false
 ---

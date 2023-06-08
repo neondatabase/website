@@ -1,5 +1,5 @@
 ---
-title: The Neon Pro plan
+title: Neon Pro plan
 subtitle: Learn about the advantages of upgrading to the Neon Pro plan
 enableTableOfContents: true
 isDraft: false
