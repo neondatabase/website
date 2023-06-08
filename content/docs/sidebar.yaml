@@ -21,6 +21,9 @@
       slug: introduction/pro-plan
     - title: Billing
       slug: introduction/billing
+      items:       
+        - title: Manage billing
+          slug: introduction/manage-billing
     - title: Support
       slug: introduction/support
 - title: Get started
