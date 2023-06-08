@@ -9,7 +9,7 @@ Neon offers a _Custom_ plan option, which is a volume-based plan for medium and 
 
 Our _Custom_ plan can be tailored to your specific requirements with:
 
-- Custom contracts
+- A custom contract
 - Volume-based discounts
 - Prepaid or integrated billing
 - Access to all Neon features available with the [Neon Pro plan](/docs/introduction/pro-plan)
