@@ -17,10 +17,12 @@
       slug: introduction/regions
     - title: Plans
       items:
-        - title: Free Tier
+        - title: Free
           slug: introduction/technical-preview-free-tier
-        - title: Pro plan
+        - title: Pro
           slug: introduction/pro-plan
+        - title: Custom
+          slug: introduction/custom-plan
     - title: Billing
       slug: introduction/billing
     - title: Support
