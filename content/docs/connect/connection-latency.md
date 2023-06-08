@@ -51,7 +51,7 @@ For Autoscaling configuration instructions, see [Compute size and Autoscaling co
 
 ### Place your application and database in the same region
 
-A key strategy for reducing connection latency is ensuring that your application and database are hosted in the same region, or as close as possible, geographically. For the regions supported by Neon, see [Regions](../introduction/regions). For information about moving your database to a different regions, see [Import data from another Neon project](../import/import-from-neon).
+A key strategy for reducing connection latency is ensuring that your application and database are hosted in the same region, or as close as possible, geographically. For the regions supported by Neon, see [Regions](../introduction/regions). For information about moving your database to a different region, see [Import data from another Neon project](../import/import-from-neon).
 
 ### Increase your connection timeout
 
@@ -108,44 +108,46 @@ Remember that increasing the connection timeout might impact the responsiveness 
 
 ### Build connection timeout handling into your application
 
-You can enhance your application to better handle connection timeouts. This might involve using retries with exponential backoff. This Typescript example connects to the database using the `pg` library and uses the `node-retry` library to handle connection retries with an exponential backoff. The general logic can be easily translated into other languages.
+You can prepare your application to handle connection timeouts when latency is unavoidable. This might involve using retries with exponential backoff. This Javascript example connects to the database using the `pg` library and uses the `node-retry` library to handle connection retries with an exponential backoff. The general logic can be easily translated into other languages.
 
-```typescript
+```javascript
 require('dotenv').config();
-const { Client } = require('pg');
-const retry = require('retry');
+var Client = require('pg').Client;
+var retry = require('retry');
 
 // Connection string from .env file
-const connectionString = process.env.DATABASE_URL;
+var connectionString = process.env.DATABASE_URL;
 
-async function connectWithRetry() {
-  const operation = retry.operation({
+function connectWithRetry() {
+  var operation = retry.operation({
     retries: 5,               // number of retries before giving up
     minTimeout: 4000,         // minimum time between retries in milliseconds
     randomize: true,          // adds randomness to timeouts to prevent retries from overwhelming the server
   });
 
-  operation.attempt(async (currentAttempt) => {
-    const client = new Client({ connectionString });
+  operation.attempt(function (currentAttempt) {
+    var client = new Client({ connectionString });
 
-    try {
-      await client.connect();
-      console.log('Connected to the database');
-      
-      // Perform your operations with the client
-      // For example, let's run a simple SELECT query
-      const res = await client.query('SELECT NOW()');
-      console.log(res.rows[0]);
-      
-      await client.end();
-    } catch (err) {
-      if (operation.retry(err)) {
-        console.warn(`Failed to connect on attempt ${currentAttempt}, retrying...`);
-        return;
-      }
-
-      console.error('Failed to connect to the database after multiple attempts:', err);
-    }
+    client.connect()
+      .then(function() {
+        console.log('Connected to the database');
+        
+        // Perform your operations with the client
+        // For example, let's run a simple SELECT query
+        return client.query('SELECT NOW()');
+      })
+      .then(function(res) {
+        console.log(res.rows[0]);
+        
+        return client.end();
+      })
+      .catch(function(err) {
+        if (operation.retry(err)) {
+          console.warn(`Failed to connect on attempt ${currentAttempt}, retrying...`);
+        } else {
+          console.error('Failed to connect to the database after multiple attempts:', err);
+        }
+      });
   });
 }
 
@@ -153,16 +155,16 @@ async function connectWithRetry() {
 connectWithRetry();
 ```
 
-In the example above, the `operation.attempt` function executes the connection logic. If the connection fails (i.e., `client.connect()` throws an error), the error is passed to `operation.retry(err)`. If there are retries left, the retry function schedules another attempt with an exponentially increasing delay. Otherwise, the error is logged to the console.
+In the example above, the `operation.attempt` function initiates the connection logic. If the connection fails (i.e., `client.connect()` returns a rejected Promise), the error is passed to `operation.retry`(err). If there are retries left, the retry function schedules another attempt with a delay based on the parameters defined in the `retry.operation`. The delay between retries is controlled by the `minTimeout` and `randomize` options.
 
-<Admonition type="note">
-The connection retry example is a simplification. In a production application, you might want to be more sophisticated, e.g., by initially trying to reconnect quickly in case the problem was a transient network issue, then fall back to slower retries if the problem persists. 
-</Admonition>
+The randomize option adds a degree of randomness to the delay to prevent a large number of retries from potentially overwhelming the server. The `minTimeout` option defines the minimum time between retries in milliseconds.
+
+However, this example is a simplification. In a production application, you might want to use a more sophisticated strategy. For example, you could initially attempt to reconnect quickly in the event of a transient network issue, then fall back to slower retries if the problem persists.
 
 ### Use application-level caching
 
-Implement a caching system like [Redis](https://redis.io/) or [PolyScale](https://www.polyscale.ai/) to store frequently accessed data, which can be rapidly served to users. This approach reduces latencies by avoiding cold starts, but only if the data requested is available in the cache. Challenges with this strategy include cache invalidation due to frequently changing data, and cache misses when queries request uncached data. This strategy will not avoid cold starts entirely, but you may be able to combine it with other strategies to improve responsiveness overall.
+Implement a caching system like [Redis](https://redis.io/) or [PolyScale](https://www.polyscale.ai/) to store frequently accessed data, which can be rapidly served to users. This approach can help reduce occurrences of latency, but only if the data requested is available in the cache. Challenges with this strategy include cache invalidation due to frequently changing data, and cache misses when queries request uncached data. This strategy will not avoid latency entirely, but you may be able to combine it with other strategies to improve application responsiveness overall.
 
 ## Conclusion
 
-With the right strategies, you can optimize your system to handle connection latencies and timeouts, ensuring your application delivers a consistently high level of performance. The best solution often involves a combination of the strategies outlined above, so experiment and find the right configuration for your specific use case.
+With the right strategies, you can optimize your system to handle connection latencies and timeouts, ensuring your application delivers a consistently high level of performance. The best solution often involves a combination of strategies, so experiment and find the right configuration for your specific use case.
