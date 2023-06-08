@@ -3,7 +3,7 @@ title: Billing metrics
 enableTableOfContents: true
 ---
 
-Neon bills for usage based on the following metrics:
+Neon paid plans bill for usage based on the following metrics:
 
 - **Active time**: The number of active compute hours per month for all computes in a Neon project.
 - **Compute time**: The amount of computing capacity used within a specified time period.
@@ -11,21 +11,17 @@ Neon bills for usage based on the following metrics:
 - **Written data**: The amount of data written from compute to storage.
 - **Data transfer**: The amount of data transferred out of Neon.
 
-See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) for a detailed description of each metric and how Neon calculates costs.
-
-## Billing and usage metrics explained
-
-This section provides a detailed explanation of Neon's billing and usage metrics and how they are calculated. Billing in Neon is account-based. For the billing rate for each metric, see [Billing rates](#billing-rates).
+The following sections provide a detailed explanation of each metric and the billing rate for each metrics. Billing in Neon is account-based.
 
 <Admonition type="note">
 The **Project storage**, **Written data**, and **Data transfer** billing metrics are calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 </Admonition>
 
-### Active time
+## Active time
 
 The _Active time_ metric is a usage metric rather than a billing metric. It is a factor of the _Compute time_ <u>billing</u> metric. It tracks the number of active compute hours per month for all computes in a Neon project. The hours that a compute is in an `Idle` state due to [auto-suspension](../reference/glossary#auto-suspend-compute) are not counted as _Active time_. The **Neon Free Tier** limits non-primary branch computes to 100 hours of _Active time_ per month, but there is no _Active time_ limit on the primary branch compute. For more information, see [Free Tier](../introduction/technical-preview-free-tier).
 
-### Compute time
+## Compute time
 
 The _Compute time_ billing metric measures the amount of computing capacity used within a given time period. Neon takes a measure of computing capacity at a defined interval and averages those values to calculate _Compute time_. The minium interval is 12 seconds. Computing capacity is based on _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon [compute endpoint](../reference/glossary/#compute-endpoint) can have anywhere from .25 to 7 CUs. A connection from a client or application activates a compute endpoint and its CUs. Activity on the connection keeps the compute endpoint and its CUs in an `Active` state. A defined period of inactivity places the compute endpoint and its CUs into an `Idle` state.
 
@@ -47,7 +43,7 @@ The cost calculation for _Compute time_ is as follows:
 compute units * active time (hours) * price per hour
 ```
 
-#### Monthly compute time cost estimates
+### Monthly compute time cost estimates
 
 For an idea of compute time cost per month based on compute size and usage, refer to the following table:
 
@@ -76,7 +72,7 @@ To estimate your own compute time monthly cost:
    1 CU * 730 hrs * $0.10200 = $74.46
    ```
 
-### Project storage
+## Project storage
 
 The _Project storage_ billing metric measures the amount of data and history stored in your Neon projects. Project storage includes:
 
@@ -100,7 +96,7 @@ The cost calculation for _Project storage_ is as follows:
 project storage (GiB) * (seconds stored / 3600) * price per hour
 ```
 
-### Written data
+## Written data
 
 The _Written data_ billing metric measures the amount of data changes written from compute to storage to ensure the durability of your data.
 
@@ -110,7 +106,7 @@ The cost calculation for _Written data_ is as follows:
 written data (GiB) * price per GiB
 ```
 
-### Data transfer
+## Data transfer
 
 The _Data transfer_ billing metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the egress cost set by the cloud provider. Contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
 
@@ -150,7 +146,3 @@ data transfer (GiB) * price per GiB
 | AWS            | Asia Pacific (Singapore) | Data transfer   | $0.09000  | GiB            |
 
 \*The _Compute-hour_ price is for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU), the smallest CU size offered by Neon. A <sup>1</sup>&frasl;<sub>4</sub> CU has .25 vCPU and 1 GB of RAM. Neon currently supports computes with up to 7 CU (7 vCPU and 28 GB of RAM).
-
-## Support
-
-Support channels for the Neon Free Tier, Pro, and Custom plans are outlined on our [Support](../introduction/support) page.

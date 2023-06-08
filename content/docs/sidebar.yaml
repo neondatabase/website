@@ -21,7 +21,7 @@
       slug: introduction/pro-plan
     - title: Billing
       items:
-        - title: Metrics
+        - title: Billing metrics
           slug: introduction/billing
         - title: Manage billing
           slug: introduction/manage-billing
