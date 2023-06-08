@@ -31,15 +31,11 @@ You can try any of these methods and watch the status of your compute as it chan
 
 Given the potential impact on application responsiveness, it's important to have strategies in place for managing connection latencies and timeouts. Here are some methods you can implement:
 
-- [Place your application and database in the same region](#place-your-application-and-database-in-the-same-region)
 - [Adjust your Auto-suspend (scale to zero) configuration](#adjust-your-auto-suspend-scale-to-zero-configuration)
+- [Place your application and database in the same region](#place-your-application-and-database-in-the-same-region)
 - [Increase your connection timeout](#increase-your-connection-timeout)
 - [Build connection timeout handling into your application](#build-connection-timeout-handling-into-your-application)
 - [Use application-level caching](#use-application-level-caching)
-
-### Place your application and database in the same region
-
-A key strategy for reducing connection latency is ensuring that your application and database are hosted in the same region, or as close as possible, geographically. For the regions supported by Neon, see [Regions](../introduction/regions). For information about moving your database to a different regions, see [Import data from another Neon project](../import/import-from-neon).
 
 ### Adjust your Auto-suspend (scale to zero) configuration
 
@@ -52,6 +48,10 @@ Consider combining this strategy with Neon's _Autoscaling_ feature (available wi
 For information about what an "always-on" minimum compute size might cost per month, please refer to our [Billing](/docs/introduction/billing) documentation or the pricing calculator on our [Pricing](https://neon.tech/pricing) page.
 
 For Autoscaling configuration instructions, see [Compute size and Autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+
+### Place your application and database in the same region
+
+A key strategy for reducing connection latency is ensuring that your application and database are hosted in the same region, or as close as possible, geographically. For the regions supported by Neon, see [Regions](../introduction/regions). For information about moving your database to a different regions, see [Import data from another Neon project](../import/import-from-neon).
 
 ### Increase your connection timeout
 
