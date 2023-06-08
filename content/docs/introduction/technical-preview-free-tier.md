@@ -1,5 +1,5 @@
 ---
-title: Free Tier
+title: Neon Free Tier
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/technical-preview-free-tier
