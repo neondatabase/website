@@ -88,18 +88,18 @@ Follow these steps to complete the configuration:
 
     ```elixir
     config :friends, Friends.Repo,
-    database: "friends",
-    username: "<user>",
-    password: "<password>",
-    hostname: "ep-billowing-sun-767748.us-west-2.aws.neon.tech",
-    ssl: true,
-    ssl_opts: [
-    server_name_indication: 'ep-billowing-sun-767748.us-west-2.aws.neon.tech',
-    verify: :verify_none
-    ]
+      database: "friends",
+      username: "<user>",
+      password: "<password>",
+      hostname: "ep-billowing-sun-767748.us-west-2.aws.neon.tech",
+      ssl: true,
+      ssl_opts: [
+        server_name_indication: 'ep-billowing-sun-767748.us-west-2.aws.neon.tech',
+        verify: :verify_none
+      ]
     ```
 
-    The `ssl: true` and `ssl_opts` settings are required to connect to Neon. Neon uses domain names provided via the Server Name Indication (SNI) extension of the TLS protocol to route incoming connections. Enabling `ssl` and setting `ssl_opts` with the `server_name_indication` option set to your Neon hostname ensures that this information is passed to Neon when making a connection. The `verify: :verify_none` setting tells Ecto to ignore SSL certificate verification when connecting to your database, but keep in mind that it is better to use SSL with proper certificate verification. That [ssl_opts configuration](https://hexdocs.pm/postgrex/Postgrex.html#start_link/1-ssl-client-authentication) is as follows:
+    The `ssl: true` and `ssl_opts` settings are required to connect to Neon. Neon uses domain names provided via the Server Name Indication (SNI) extension of the TLS protocol to route incoming connections. Enabling `ssl` and setting `ssl_opts` with the `server_name_indication` option set to your Neon hostname ensures that this information is passed to Neon when making a connection. The `verify: :verify_none` setting tells Ecto to ignore SSL certificate verification when connecting to your database, but keep in mind that it is better to use SSL with proper certificate verification. That `ssl_opts` configuration is as follows:
 
     ```elixir
     ssl_opts: [
