@@ -37,10 +37,10 @@ Factors that affect the amount of compute time include:
 Neon uses a small amount of compute time, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
 </Admonition>
 
-The cost calculation for _Compute time_ is as follows:
+The cost calculation for _Compute time_ is:
 
 ```text
-compute units * active time (hours) * price per hour
+cost = compute size * compute hours * cost per hour
 ```
 
 ### Monthly compute time cost estimates
@@ -57,19 +57,25 @@ For an idea of compute time cost per month based on compute size and usage, refe
 The prices shown in the table are based on US East (Ohio) _Compute time_ rates.
 </Admonition>
 
-- Public-facing applications are likely to be active for all hours in a month (730 hrs/mth).
-- Internal applications with consistent usage are likely to be active during working hours (173 hrs/mth).
-- Internal applications with moderate usage are likely to be active during half of working hours (87 hrs/mth).
+- Public-facing applications are estimated to be active for all hours in a month (730 hrs/mth).
+- Internal applications with consistent usage are estimated to be active during working hours (173 hrs/mth).
+- Internal applications with moderate usage are estimated to be active during half of working hours (87 hrs/mth).
 
-To estimate your own compute time monthly cost:
+To estimate your own monthly compute cost:
 
 1. Determine the compute size that you require, in Compute Units (CUs). Neon supports compute size between .25 CUs and 7 CUs. One CU has 1 vCPU and 4GB of RAM.
-1. Determine the amount of _Active time_ per month for your database, in hours.
-1. Determine the rate (price per hour) for compute time in your region. See [Billing rates](#billing-rates).
-1. Input the values into the _Compute time_ cost-calculation formula shown above. For example:
+1. Determine the amount of compute hours (_Active time_) per month for your database.
+1. Determine the _Compute-hour_ rate for your region. The [billing rates](#billing-rates) table shows _Compute-hour_ prices for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU). Multiply that rate by 4 to get the cost per hour for a full compute.
+1. Input the values into this _Compute time_ cost-calculation formula:
 
    ```text
-   1 CU * 730 hrs * $0.10200 = $74.46
+   monthly compute cost = compute size * compute hours per month * (cost per hour for 1/4 compute * 4)
+   ```
+
+   For example, this is the calculation for 1 compute unit, active for 730 hours (the full month), at a compute time price per hour of $0.0255 * 4 (or $0.102):
+
+   ```text
+   1 * 730 * (0.0255 * 4) = 74.46
    ```
 
 ## Project storage
