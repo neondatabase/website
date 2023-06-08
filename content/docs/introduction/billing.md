@@ -69,10 +69,10 @@ To estimate your own monthly compute cost:
 1. Input the values into this _Compute time_ cost-calculation formula:
 
    ```text
-   monthly compute cost = compute size * compute hours per month * (cost per hour for 1/4 compute * 4)
+   cost = compute size * compute hours * (cost per hour for 1/4 compute * 4)
    ```
 
-   For example, this is the calculation for 1 compute unit, active for 730 hours (the full month), at a compute time price per hour of $0.0255 * 4 (or $0.102):
+   For example, this is the calculation for a compute size of 1, active for 730 hours (the full month), at a compute time price per hour of $0.0255 * 4:
 
    ```text
    1 * 730 * (0.0255 * 4) = 74.46
