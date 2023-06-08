@@ -3,7 +3,7 @@ export const config = {
 };
 
 export default async function handler(req) {
-  const { query } = await req.json();
+  const { messages } = await req.json();
   try {
     const r = await fetch(process.env.AI_DOCS_CHAT_API_URL, {
       method: 'POST',
@@ -11,7 +11,7 @@ export default async function handler(req) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        query,
+        messages,
       }),
     });
 

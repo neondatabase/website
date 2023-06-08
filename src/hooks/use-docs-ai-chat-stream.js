@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const decoder = new TextDecoder();
 
@@ -8,6 +8,8 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [shouldTryAgain, setShouldTryAgain] = useState(false);
+
+  console.log(messages);
 
   // @TODO: memoize back
   const fetchData = async () => {
@@ -19,7 +21,7 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          query: messages[messages.length - 1].content,
+          messages,
         }),
         signal,
       });
@@ -81,7 +83,7 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
             },
           ];
         });
-        // set input text to the last message, that user sent
+        // set input text to the last message that user sent
         setInputText(messages[messages.length - 1].content);
       } else {
         throw Error('Something went wrong. Please try again!');

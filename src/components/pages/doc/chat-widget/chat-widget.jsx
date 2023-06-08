@@ -16,6 +16,7 @@ import AttentionIcon from './images/attention.inline.svg';
 import CloseIcon from './images/close.inline.svg';
 import ExampleIcon from './images/example.inline.svg';
 import ExperimentalIcon from './images/experimental.inline.svg';
+import ReloadIcon from './images/reload.inline.svg';
 import SendIcon from './images/send.inline.svg';
 import SparksIcon from './images/sparks.inline.svg';
 import Message from './message';
@@ -236,12 +237,12 @@ const ChatWidget = () => {
                     </button>
                   ) : (
                     <Button
-                      className="absolute right-7 top-[9px]"
+                      className="absolute -top-8 left-1/2 flex -translate-x-1/2 items-center justify-center gap-x-1.5 border border-gray-new-94 bg-gray-new-94/40 font-normal normal-case text-gray-new-30 hover:bg-gray-new-94/80 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80 dark:hover:bg-gray-new-15/80"
                       size="xxs"
-                      theme="primary"
                       type="submit"
                     >
-                      Try again
+                      <ReloadIcon className="h-3 w-3 shrink-0" />
+                      <span>Try again</span>
                     </Button>
                   ))}
               </form>
