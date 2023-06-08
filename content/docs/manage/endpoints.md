@@ -1,5 +1,5 @@
 ---
-title: Manage compute endpoints
+title: Manage computes
 enableTableOfContents: true
 isDraft: false
 ---
@@ -75,10 +75,6 @@ Neon supports two compute size configuration options:
 
 - **Fixed Size:** This option allows you to select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
 - **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. _Autoscaling_ currently supports a range of 1/4 CU to 7 CU. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](../introduction/autoscaling).
-
-<Admonition type="note">
-[Connection pooling](../connect/connection-pooling) is not yet supported with Autoscaling <b><sup>Beta</sup></b>. To use connection pooling, use a **Fixed size** compute.
-</Admonition>
 
 ### Auto-suspend configuration
 

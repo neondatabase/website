@@ -62,9 +62,9 @@ const Sidebar = () => (
         </nav>
       </div>
       <div className="sticky bottom-10 lt:hidden">
-        <h2 className="text-xs font-semibold uppercase leading-none tracking-[0.02em] text-gray-new-70">
+        <span className="text-xs font-semibold uppercase leading-none tracking-[0.02em] text-gray-new-70">
           Follow us
-        </h2>
+        </span>
         <ul className="mt-4 flex flex-wrap gap-4">
           {socialLinks.map(({ name, url, icon: Icon }, index) => (
             <li className="flex items-center" key={index}>

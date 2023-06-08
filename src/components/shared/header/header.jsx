@@ -45,9 +45,11 @@ const Header = forwardRef(
     return (
       <header
         className={clsx(
-          'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-black lg:relative lg:h-14',
+          'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-gray-new-8 lg:relative lg:h-14',
           isSticky && 'sticky top-0 z-50 md:relative',
-          withBottomBorder && theme !== 'gray-8' && 'border-b border-gray-7 dark:border-gray-2',
+          withBottomBorder &&
+            theme !== 'gray-8' &&
+            'border-b border-gray-new-90 dark:border-gray-new-20',
           withBottomBorder && theme === 'gray-8' && 'border-b border-gray-new-20',
           { 'bg-gray-new-8': theme === 'gray-8' },
           { 'lg:bg-black': theme === 'black' },
@@ -72,7 +74,7 @@ const Header = forwardRef(
                       className={clsx(
                         'whitespace-pre',
                         items?.length > 0 &&
-                          'relative pr-3.5 leading-none transition-colors duration-200 before:absolute before:right-0 before:top-[7px] before:h-0 before:w-0 before:border-4 before:border-transparent before:transition-[border-color] before:duration-200 hover:text-primary-2 group-hover:before:border-t-primary-2 dark:before:border-black',
+                          'relative pr-3.5 leading-none transition-colors duration-200 before:absolute before:right-0 before:top-[7px] before:h-0 before:w-0 before:border-4 before:border-transparent before:transition-[border-color] before:duration-200 hover:text-primary-2 group-hover:before:border-t-primary-2 dark:before:border-transparent',
                         items?.length > 0 && isThemeBlack
                           ? 'before:border-t-white'
                           : 'before:border-t-black dark:before:border-t-white',
@@ -126,7 +128,7 @@ const Header = forwardRef(
 
           <div className="flex space-x-5 lg:hidden">
             <Button
-              className="relative pl-11 dark:border-white dark:bg-black dark:text-white dark:hover:border-primary-2 xl:hidden"
+              className="relative pl-11 dark:border-white dark:bg-gray-new-8 dark:text-white dark:hover:border-primary-2 xl:hidden"
               to={LINKS.github}
               size="new-md"
               theme={isThemeBlack ? 'tertiary' : 'quaternary'}

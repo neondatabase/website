@@ -78,7 +78,7 @@ A service that provides virtualized computing resources (CPU, memory, and storag
 
 ### Compute endpoint
 
-A Neon compute instance. Neon creates a single read-write compute endpoint for the project's primary branch. You can choose whether or not to create a compute endpoint when creating child branches. The compute endpoint hostname is required to connect to a Neon database from a client or application. A compute endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. A compute endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. A compute endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](../connect/connect-from-any-app). For more information about compute endpoints, see [Manage compute endpoints](../manage/endpoints/).
+A Neon compute instance. Neon creates a single read-write compute endpoint for the project's primary branch. You can choose whether or not to create a compute endpoint when creating child branches. The compute endpoint hostname is required to connect to a Neon database from a client or application. A compute endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. A compute endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. A compute endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](../connect/connect-from-any-app). For more information about compute endpoints, see [Manage computes](../manage/endpoints/).
 
 ### Connection pooling
 
@@ -88,9 +88,13 @@ A method of creating a pool of connections and caching those connections for reu
 
 A string containing details for connecting to a Neon database. The details include a user name (role), compute endpoint hostname, and database name; for example:
 
+<CodeBlock shouldWrap>
+
 ```terminal
 postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
 ```
+
+</CodeBlock>
 
 The compute endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
 
@@ -158,7 +162,7 @@ A custom volume-based paid plan offered by Neon. See [Neon plans](../introductio
 
 ### Free Tier
 
-A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Free Tier](../reference/technical-preview-free-tier/).
+A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Free Tier](../introduction/technical-preview-free-tier).
 
 ### Kubernetes
 
@@ -340,7 +344,7 @@ A preview period during which users can try Neon.
 
 ### Token
 
-An encrypted access token that enables you to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Manage API keys](../get-started-with-neon/using-api-keys/).
+An encrypted access token that enables you to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Manage API keys](../manage/api-keys).
 
 ### tmpfs
 

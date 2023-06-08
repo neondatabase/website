@@ -1,6 +1,9 @@
 import Script from 'next/script';
 
 import 'styles/globals.css';
+
+import TopBar from 'components/shared/topbar';
+
 import ThemeProvider from './provider';
 
 const fontsBasePath = '/fonts';
@@ -41,7 +44,10 @@ const RootLayout = ({ children }) => (
           }}
         />
       )}
-      <ThemeProvider>{children}</ThemeProvider>
+      <ThemeProvider>
+        <TopBar />
+        {children}
+      </ThemeProvider>
     </body>
   </html>
 );

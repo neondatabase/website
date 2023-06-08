@@ -13,7 +13,7 @@ Additional roles can be created in a project's primary branch or child branches.
 Roles belong to a branch. If you create a child branch, roles from the parent branch are duplicated in the child branch. For example, if role `sally` exists in the parent branch, role `sally` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
 <Admonition type="note">
-You can only create database roles in the Neon Console or using the [Neon API](https://neon.tech/api-reference). Creating database roles in PostgreSQL, using a `psql` client for example, is not yet supported.
+You can only create database roles in the Neon Console or using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Creating database roles in PostgreSQL, using a `psql` client for example, is not yet supported.
 </Admonition>
 
 ## Create a role

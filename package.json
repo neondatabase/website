@@ -68,7 +68,6 @@
     "rss": "^1.2.2",
     "search-insights": "^2.2.3",
     "slugify": "^1.6.5",
-    "swagger-ui": "^4.15.5",
     "tailwindcss-safe-area": "^0.2.2",
     "yup": "^0.32.11"
   },

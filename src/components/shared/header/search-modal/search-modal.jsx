@@ -33,20 +33,20 @@ const SearchModal = ({ isOpen, closeModal }) => {
       <div
         className={clsx(
           isOpen ? 'block' : 'hidden',
-          'fixed inset-0 z-[100] bg-gray-9 dark:bg-gray-1'
+          'fixed inset-0 z-[100] bg-gray-new-98 dark:bg-gray-new-15'
         )}
       >
-        <div className="flex items-center space-x-4 border-b border-gray-7 bg-white px-4 py-2.5 dark:border-gray-3 dark:bg-gray-1">
+        <div className="flex items-center space-x-4 border-b border-gray-new-70 bg-white px-4 py-2.5 dark:border-gray-new-40 dark:bg-gray-new-10">
           <Input
             className="grow"
-            innerClassName="border active:border-secondary-8 dark:active:border-primary-1 hover:border-secondary-8 dark:hover:border-primary-1"
+            innerClassName="border active:border-secondary-8 dark:active:border-green-45 hover:border-secondary-8 dark:hover:border-green-45"
             hasFocus={hasFocus}
             inputRef={inputRef}
             isMobileSearch
             onFocus={() => setFocus(true)}
           />
           <button
-            className="shrink text-sm font-semibold leading-tight text-secondary-8 dark:text-primary-1"
+            className="shrink text-sm font-semibold leading-tight text-secondary-8 dark:text-green-45"
             type="button"
             onClick={closeModal}
           >
@@ -56,7 +56,7 @@ const SearchModal = ({ isOpen, closeModal }) => {
         {shouldShowResult ? (
           <Results indices={indices} type="mobile" />
         ) : (
-          <span className="mt-3.5 block text-center text-xs leading-none text-gray-3">
+          <span className="mt-3.5 block text-center text-xs leading-none text-gray-new-40">
             No recent searches
           </span>
         )}

@@ -21,14 +21,17 @@ const links = [
   {
     icon: TwitterIcon,
     to: LINKS.twitter,
+    name: 'Twitter',
   },
   {
     icon: DiscourseIcon,
     to: LINKS.discourse,
+    name: 'Discourse',
   },
   {
     icon: GithubIcon,
     to: LINKS.github,
+    name: 'GitHub',
   },
 ];
 
@@ -132,18 +135,19 @@ const Community = () => (
         Learn what the experts love about Neon
       </p>
       <ul className="mt-8 flex justify-center space-x-5">
-        {links.map(({ icon: Icon, to }, index) => (
+        {links.map(({ icon: Icon, to, name }, index) => (
           <li className="relative" key={index}>
             <span
               className="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5"
               aria-hidden
             />
             <Link
-              className="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:translate-y-1 hover:-translate-x-1"
+              className="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:-translate-x-1 hover:translate-y-1"
               to={to}
               target="_blank"
             >
               <Icon className="h-6" />
+              <span className="sr-only">{name}</span>
             </Link>
           </li>
         ))}
@@ -159,11 +163,12 @@ const Community = () => (
                 <Image className="rounded-full" src={photo} alt={name} width={64} height={64} />
               </div>
               <div className="ml-5 flex w-full flex-col justify-evenly">
-                <h4 className="font-semibold leading-none">{name}</h4>
+                <h3 className="font-semibold leading-none">{name}</h3>
                 <div className="flex justify-between">
                   <p className="font-normal leading-none">@{twitterAccount}</p>
                   <Link className="my-auto w-6" to={twitterUrl} target="_blank">
                     <TwitterIcon className="text-secondary-7" />
+                    <span className="sr-only">Twitter</span>
                   </Link>
                 </div>
               </div>
