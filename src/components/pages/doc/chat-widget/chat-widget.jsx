@@ -23,7 +23,7 @@ import Message from './message';
 
 const items = [
   'What’s Neon?',
-  'How to sign up for Neon?',
+  'How do I sign up for Neon?',
   'How to create a project?',
   'How to get started with the Neon API?',
 ];
@@ -335,7 +335,7 @@ const ChatWidgetTrigger = ({ className, isSidebar }) => {
           hidden: isSidebar,
         })}
       >
-        We brought ChatGPT straight to the docs
+        We brought ChatGPT to the docs
       </p>
       <span
         className={clsx('mt-1.5 leading-tight text-secondary-8 dark:text-primary-1 xl:hidden', {
