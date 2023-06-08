@@ -9,48 +9,59 @@ import SocialShare from '../social-share';
 
 const Aside = ({ className, title, slug, authors, posts }) => (
   <aside className={clsx('aside ml-auto max-w-[298px] lg:ml-0 lg:max-w-full', className)}>
-    <h3 className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue-80 lg:hidden">
-      Posted by
-    </h3>
-    <div className="flex flex-col space-y-4">
-      {authors.map(({ author }) => {
-        const Tag = author.postAuthor?.url ? Link : 'div';
-        const isExternal =
-          author.postAuthor?.url?.startsWith('http') ||
-          !author.postAuthor?.url?.includes(process.env.NEXT_PUBLIC_DEFAULT_SITE_URL);
-        return (
-          <Tag
-            className="group flex items-center space-x-2.5"
-            to={author.postAuthor?.url}
-            key={author.title}
-            target={isExternal ? '_blank' : undefined}
-            rel={isExternal ? 'noopener noreferrer' : undefined}
-          >
-            <Image
-              className="h-10 w-10 shrink-0 rounded-full"
-              src={author.postAuthor?.image?.mediaItemUrl}
-              width={40}
-              height={40}
-              alt={author.title || author.postAuthor?.image?.altText}
-            />
-            <div className="flex flex-col">
-              <span
-                className={clsx(
-                  'font-semibold leading-none tracking-[0.02em] transition-colors duration-200',
-                  { 'group-hover:text-green-45': author.postAuthor?.url }
-                )}
+    {Array.isArray(authors) && authors.length > 0 && (
+      <>
+        <h3 className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue-80 lg:hidden">
+          Posted by
+        </h3>
+        <div className="flex flex-col space-y-4">
+          {authors.map(({ author }) => {
+            const Tag = author.postAuthor?.url ? Link : 'div';
+            const isExternal =
+              author.postAuthor?.url?.startsWith('http') ||
+              !author.postAuthor?.url?.includes(process.env.NEXT_PUBLIC_DEFAULT_SITE_URL);
+            return (
+              <Tag
+                className="group flex items-center space-x-2.5"
+                to={author.postAuthor?.url}
+                key={author.title}
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
               >
-                {author.title}
-              </span>
-              <span className="mt-0.5 text-sm leading-tight tracking-[-0.02em] text-gray-new-70">
-                {author.postAuthor?.role}
-              </span>
-            </div>
-          </Tag>
-        );
-      })}
-    </div>
-    <h3 className="mt-16 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue-80 lg:hidden">
+                <Image
+                  className="h-10 w-10 shrink-0 rounded-full"
+                  src={author.postAuthor?.image?.mediaItemUrl}
+                  width={40}
+                  height={40}
+                  alt={author.title || author.postAuthor?.image?.altText}
+                />
+                <div className="flex flex-col">
+                  <span
+                    className={clsx(
+                      'font-semibold leading-none tracking-[0.02em] transition-colors duration-200',
+                      { 'group-hover:text-green-45': author.postAuthor?.url }
+                    )}
+                  >
+                    {author.title}
+                  </span>
+                  <span className="mt-0.5 text-sm leading-tight tracking-[-0.02em] text-gray-new-70">
+                    {author.postAuthor?.role}
+                  </span>
+                </div>
+              </Tag>
+            );
+          })}
+        </div>
+      </>
+    )}
+    <h3
+      className={clsx(
+        'text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue-80 lg:hidden',
+        {
+          'mt-16': Array.isArray(authors) && authors.length > 0,
+        }
+      )}
+    >
       More articles
     </h3>
     <ul className="mt-5 flex flex-col space-y-6 lg:hidden">
