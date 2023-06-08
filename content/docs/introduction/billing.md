@@ -41,46 +41,6 @@ See [Billing and usage metrics explained](#billing-and-usage-metrics-explained) 
 - The Free Tier has an [Active time](../reference/glossary#active-time) limit of 100 hours per month for non-primary branch computes. _Active time_ on the primary branch compute is counted toward the 100 hour limit. See [Free Tier](../introduction/technical-preview-free-tier) for more information.
 - **There is no limit on Active time for the primary branch compute. This ensures that access to data on the primary branch is never interrupted.**
 
-## Account billing page
-
-A Neon account subscribed to a paid plan can perform the following actions on the **Billing** page in the Neon Console:
-
-- View your current billing total for the month-to-date, including a cost breakdown by [billing metric](#billing-and-usage-metrics).
-- Update your payment details
-- Download invoices
-
-Free Tier users can view [Free Tier](/docs/introduction/technical-preview-free-tier) limits on the **Billing** page and learn about the benefits of upgrading to the [Neon Pro plan](/docs/introduction/pro-plan).
-
-To access your **Billing** page:
-
-1. Navigate to the Neon Console.
-1. Select **Billing** from the sidebar.
-
-## Neon invoices
-
-A Neon invoice includes an **Amount due** for the billing period and a cost breakdown by [billing metric](#billing-and-usage-metrics).
-
-### Download invoices
-
-You can download invoices from the **Billing** page.
-
-1. Navigate to the **Billing** page in the Neon Console.
-1. Under **Latest invoices**, locate the invoice you want to download and click the PDF download icon.
-
-## Cancel a subscription
-
-To cancel a Pro plan subscription:
-
-1. Navigate to the **Billing** page in the Neon Console.
-1. Click **Request subscription cancellation** at the bottom of the page.
-1. Follow the instructions on the **Request Downgrade** modal, and click **Downgrade**.
-
-Cancelling your Pro plan subscription downgrades your account to our Free Tier, which has lower usage limits that could affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/billing#neon-plans).
-
-You will be required to remove any projects, branches, or data that exceed [Free Tier limits](/docs/introduction/technical-preview-free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade request).
-
-For cancellation of Enterprise or Platform Partnership plans, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans are handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
-
 ## Billing and usage metrics explained
 
 This section provides a detailed explanation of Neon's billing and usage metrics and how they are calculated. Billing in Neon is account-based. For the billing rate for each metric, see [Billing rates](#billing-rates).
@@ -219,19 +179,46 @@ data transfer (GiB) * price per GiB
 
 \*The _Compute-hour_ price is for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU), the smallest CU size offered by Neon. A <sup>1</sup>&frasl;<sub>4</sub> CU has .25 vCPU and 1 GB of RAM. Neon currently supports computes with up to 7 CU (7 vCPU and 28 GB of RAM).
 
+## Manage billing
+
+A Neon account subscribed to a paid plan can manage and monitor billing from the **Billing** page in the Neon Console. 
+
+- View your current billing total for the month-to-date, including a cost breakdown by [billing metric](#billing-and-usage-metrics).
+- Update your payment details
+- Download invoices
+
+Free Tier users can view [Free Tier](/docs/introduction/technical-preview-free-tier) limits on the **Billing** page and learn about the benefits of upgrading to the [Neon Pro plan](/docs/introduction/pro-plan).
+
+To access your **Billing** page:
+
+1. Navigate to the Neon Console.
+1. Select **Billing** from the sidebar.
+
+### Invoices
+
+A Neon invoice includes an **Amount due** for the billing period and a cost breakdown by [billing metric](#billing-and-usage-metrics).
+
+### Download invoices
+
+You can download invoices from the **Billing** page.
+
+1. Navigate to the **Billing** page in the Neon Console.
+1. Under **Latest invoices**, locate the invoice you want to download and click the PDF download icon.
+
+## Cancel a subscription
+
+To cancel a Pro plan subscription:
+
+1. Navigate to the **Billing** page in the Neon Console.
+1. Click **Request subscription cancellation** at the bottom of the page.
+1. Follow the instructions on the **Request Downgrade** modal, and click **Downgrade**.
+
+Cancelling your Pro plan subscription downgrades your account to our Free Tier, which has lower usage limits that could affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/billing#neon-plans).
+
+You will be required to remove any projects, branches, or data that exceed [Free Tier limits](/docs/introduction/technical-preview-free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade request).
+
+For cancellation of Enterprise or Platform Partnership plans, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans are handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
+
 ## Support
 
-Support channels for the Neon Free Tier and paid plans are outlined below.
-
-| Support channels                                     | Free Tier |   Pro   | Custom  |
-| :--------------------------------------------------- | :-------: | :-----: | :-----: |
-| [Neon Community Forum](https://community.neon.tech/) |  &check;  | &check; | &check; |
-| Ability to submit support tickets                    |  &check;  | &check; | &check; |
-| Video chat                                           |     -     | &check; | &check; |
-| Resale customer support                              |     -     |    -    | &check; |
-
-<Admonition type="note">
-Pro plan users that submit support tickets through Neon's console can expect an initial response time of 2 business days, from 6am to 6pm Pacific Standard Time (UTC -8), Monday through Friday, excluding public holidays in the United States.
-
-Free Tier users are not guaranteed a specific response time. For custom solutions, please contact [Sales](https://neon.tech/contact-sales).  
-</Admonition>
+TBD
