@@ -20,7 +20,7 @@ import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blo
   NOTE:
   This page is only needed to show previews for the drafts.
   Its code is identical to the blog post page, except for the data fetching.
-  If you need to change something here, сhange it firs in the blog post page
+  If you need to change something here, сhange it first in the blog post page
   and then copy the changes here.
 */
 /*
