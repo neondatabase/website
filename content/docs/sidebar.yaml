@@ -20,8 +20,9 @@
     - title: Pro plan
       slug: introduction/pro-plan
     - title: Billing
-      slug: introduction/billing
       items:
+        - title: Metrics
+          slug: introduction/billing
         - title: Manage billing
           slug: introduction/manage-billing
     - title: Support
