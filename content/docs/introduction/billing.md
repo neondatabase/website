@@ -173,16 +173,16 @@ Data transfer (GiB) * price per GiB
 
 ## Pricing calculators
 
-Neon provide two calculators you can use to estimate monthly costs based on the billing metrics described above.
+Neon provides two pricing calculators you can use to estimate monthly costs based on the billing metrics described above.
 
-### Website pricing page calculator
+### Pricing page calculator
 
-The Neon website [Pricing](https://neon.tech/pricing) page provides a calculator where you can estimate monthly costs based on the usage amounts that you provide.
+The Neon website [Pricing](https://neon.tech/pricing) page provides a calculator that allows you to estimate monthly costs based on the usage amounts that you provide.
 
 ![Pricing page calculator](/docs/introduction/pricing_page_calculator.png)
 
-### Neon Console billing page calculator
+### Billing page calculator
 
-The **Billing** page in the Neon Console provides a calculator that estimates costs based on usage amounts for an existing Free Tier project. To access the calculator, select **Billing** from the sidebar in the Neon Console, and select **Estimate costs**. This calculator shows you how much it would cost on a monthly basis, based on current usage, to upgrade to the [Pro plan](../introduction/pro-plan), proving you with access to features only available to Pro plan users.  
+The **Billing** page in the Neon Console provides a calculator that estimates costs based on usage amounts for an existing Free Tier project. To access the calculator, select **Billing** from the sidebar in the Neon Console, and select **Estimate costs**. This calculator showshow much it would cost on a monthly basis, based on your current usage, to upgrade to the [Pro plan](../introduction/pro-plan).  
 
 ![Billing page calculator](/docs/introduction/billing_page_calculator.png)

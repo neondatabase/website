@@ -10,7 +10,7 @@ A Neon account subscribed to a paid plan can manage billing from the **Billing**
 - View and download invoices
 - Cancel a subscription
 
-Free Tier users can view [Free Tier](/docs/introduction/technical-preview-free-tier) usage limits on the **Billing** page and learn about [Neon Pro plan](/docs/introduction/pro-plan) benefits.
+Free Tier users can view [Free Tier](/docs/introduction/technical-preview-free-tier) usage limits on the **Billing** page,  learn about [Neon Pro plan](/docs/introduction/pro-plan) features, and estimate how much it would cost to upgrade to the Pro plan based on current usage.
 
 ## View the billing page
 
