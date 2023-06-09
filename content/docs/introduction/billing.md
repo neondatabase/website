@@ -96,6 +96,10 @@ To estimate your own monthly _Compute time_ cost:
    0.25 * 730 * (0.0255 * 4) = $18.62
    ```
 
+<Admonition type="tip">
+Neon also provides calculators to help you with cost estimates. See [Pricing calculators](#pricing-calculators).
+</Admonition>
+
 ## Project storage
 
 _Project storage_ measures the amount of data and history stored in your Neon projects. Project storage includes:
