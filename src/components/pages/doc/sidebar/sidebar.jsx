@@ -8,6 +8,7 @@ import LINKS from 'constants/links';
 import CalendarIcon from './images/calendar.inline.svg';
 import TransactionsIcon from './images/transactions.inline.svg';
 import Item from './item';
+import { itemPropTypes } from './item/item';
 
 const links = [
   {
@@ -49,32 +50,17 @@ const Sidebar = ({ className = null, sidebar, currentSlug }) => (
   </aside>
 );
 
+export const sidebarPropTypes = PropTypes.arrayOf(
+  PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    slug: PropTypes.string,
+    items: PropTypes.arrayOf(itemPropTypes),
+  })
+).isRequired;
+
 Sidebar.propTypes = {
   className: PropTypes.string,
-  sidebar: PropTypes.arrayOf(
-    PropTypes.exact({
-      title: PropTypes.string.isRequired,
-      slug: PropTypes.string,
-      items: PropTypes.arrayOf(
-        PropTypes.exact({
-          title: PropTypes.string.isRequired,
-          slug: PropTypes.string,
-          items: PropTypes.arrayOf(
-            PropTypes.exact({
-              title: PropTypes.string.isRequired,
-              slug: PropTypes.string,
-              items: PropTypes.arrayOf(
-                PropTypes.exact({
-                  title: PropTypes.string,
-                  slug: PropTypes.string,
-                })
-              ),
-            })
-          ),
-        })
-      ),
-    })
-  ).isRequired,
+  sidebar: sidebarPropTypes,
   currentSlug: PropTypes.string.isRequired,
 };
 

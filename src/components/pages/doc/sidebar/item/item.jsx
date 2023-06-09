@@ -72,28 +72,17 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
   );
 };
 
+export const itemPropTypes = PropTypes.exact({
+  title: PropTypes.string.isRequired,
+  slug: PropTypes.string,
+  items: PropTypes.arrayOf(PropTypes.any),
+});
+
 Item.propTypes = {
   title: PropTypes.string.isRequired,
   isStandalone: PropTypes.bool,
   slug: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.exact({
-      title: PropTypes.string.isRequired,
-      slug: PropTypes.string,
-      items: PropTypes.arrayOf(
-        PropTypes.exact({
-          title: PropTypes.string,
-          slug: PropTypes.string,
-          items: PropTypes.arrayOf(
-            PropTypes.exact({
-              title: PropTypes.string,
-              slug: PropTypes.string,
-            })
-          ),
-        })
-      ),
-    })
-  ),
+  items: PropTypes.arrayOf(itemPropTypes),
   currentSlug: PropTypes.string.isRequired,
 };
 
