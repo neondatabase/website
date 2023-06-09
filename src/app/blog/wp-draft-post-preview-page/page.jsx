@@ -29,6 +29,11 @@ import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blo
 */
 const BlogDraft = async ({ searchParams }) => {
   const { isEnabled: isDraftModeEnabled } = draftMode();
+
+  if (!isDraftModeEnabled) {
+    return notFound();
+  }
+
   const { post, relatedPosts } = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
 
   if (!post) {
