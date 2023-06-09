@@ -140,8 +140,6 @@
   }
 
   .prose-chat {
-    @apply max-w-[656px] lg:max-w-full;
-
     > * {
       &:first-child {
         @apply mt-0;

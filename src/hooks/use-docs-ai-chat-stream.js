@@ -9,8 +9,6 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [shouldTryAgain, setShouldTryAgain] = useState(false);
 
-  console.log(messages);
-
   // @TODO: memoize back
   const fetchData = async () => {
     setIsLoading(true);
