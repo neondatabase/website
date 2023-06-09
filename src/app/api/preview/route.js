@@ -24,14 +24,12 @@ export async function GET(request) {
 
   draftMode().enable();
 
-  if (permalink && postStatus === 'publish') {
-    redirect(`/blog/${permalink}`);
-  } else {
-    const redirectSearchParams = new URLSearchParams({
-      id,
-      status: postStatus,
-    });
+  const redirectSearchParams = new URLSearchParams({
+    id,
+    status: postStatus,
+  });
 
-    redirect(`/blog/wp-draft-post-preview-page?${redirectSearchParams.toString()}`);
-  }
+  const slug = permalink && postStatus === 'publish' ? permalink : 'wp-draft-post-preview-page';
+
+  redirect(`/blog/${slug}?${redirectSearchParams.toString()}`);
 }

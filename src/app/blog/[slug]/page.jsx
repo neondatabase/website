@@ -12,14 +12,23 @@ import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import CodeBlock from 'components/shared/code-block';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
-import { getAllWpPosts, getWpPostBySlug } from 'utils/api-posts';
+import { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData } from 'utils/api-posts';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
-const BlogPage = async ({ params }) => {
+const BlogPage = async ({ params, searchParams }) => {
   const { isEnabled: isDraftModeEnabled } = draftMode();
-  const { post, relatedPosts } = await getWpPostBySlug(params?.slug);
+
+  let postResult;
+
+  if (isDraftModeEnabled) {
+    postResult = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
+  } else {
+    postResult = await getWpPostBySlug(params?.slug);
+  }
+
+  const { post, relatedPosts } = postResult;
 
   if (!post) {
     return notFound();
