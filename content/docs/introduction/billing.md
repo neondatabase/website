@@ -23,35 +23,51 @@ _Active time_ tracks the number of compute hours per month for all computes in a
 
 ## Compute time
 
-_Compute time_ is compute capacity multiplied by _Active time_ hours. Neon measures compute capacity at a defined interval and averages those values to calculate _Compute time_. The minimum interval is 12 seconds. Compute capacity is based on _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon [compute](../reference/glossary/#compute-endpoint) can have anywhere from .25 to 7 CUs. A connection from a client or application activates a compute and its CUs. Activity on the connection keeps the compute and its CUs in an `Active` state. A defined period of inactivity places the compute and its CUs into an `Idle` state.
+_Compute time_ is compute size multiplied by _Active time_ hours. Neon measures compute size at regular intervals and averages those values to calculate _Compute time_.
 
-Factors that affect the amount of compute time include:
+Compute size is measure in _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
+
+| Compute Units | vCPU | RAM    |
+|:--------------|:-----|:-------|
+| .25           | .25  | 1 GB   |
+| .5            | .5   | 2 GB   |
+| 1             | 1    | 4 GB   |
+| 2             | 2    | 8 GB   |
+| 3             | 3    | 12 GB  |
+| 4             | 4    | 16 GB  |
+| 5             | 5    | 20 GB  |
+| 6             | 6    | 24 GB  |
+| 7             | 7    | 28 GB  |
+
+A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A period of inactivity places the compute into an `Idle` state.
+
+Factors that affect _Compute time_ include:
 
 - The number of active computes
-- The number of CUs per computes
-- Neon's _Auto-suspend compute_ feature, which suspends a compute after a period of inactivity. The default is five minutes.
-- Neon's _Configurable auto-suspend compute_ feature, which allows you to configure or disable the timeout period for the _Auto-suspend compute_ feature.
+- The number of CUs per compute
+- Neon's _Auto-suspend_ feature, which suspends a compute after a period of inactivity. The default is five minutes.
+- Neon's _Configurable auto-suspend_ feature, which allows you to configure or disable the _Auto-suspend_ feature.
 - Neon's _Autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute. The number of active CUs scale up and down based on workload.
 
 <Admonition type="note">
-Neon uses a small amount of compute time, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
+Neon uses a small amount of _Compute time_, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
 </Admonition>
 
-The cost calculation for _Compute time_ is:
+The _Compute time_ cost calculation is as follows:
 
 ```text
-cost = compute size * compute hours * cost per hour
+Compute time cost = Compute Units * Active time * price per hour
 ```
 
 ### Monthly compute time cost estimates
 
-For an idea of compute time cost per month based on compute size and usage, refer to the following table:
+For an idea of _Compute time_ cost per month based on compute size and usage, refer to the following table:
 
-| Compute size (CU) | 730 hrs/mth (all hours) | 173 hrs/mth (working hours) | 87 hrs/mth (half of working hours) |
-| :---------------- | :---------------------- | :-------------------------- | :--------------------------------- |
-| 0.25 CU           | $18.62                  | $4.41                       | $2.22                              |
-| 0.5 CU            | $37.23                  | $8.82                       | $4.44                              |
-| 1 CU              | $74.46                  | $17.65                      | $8.87                              |
+| Compute Units (CU) | 730 hrs/mth (all hours) | 173 hrs/mth (working hours) | 87 hrs/mth (half of working hours) |
+| :----------------- | :---------------------- | :-------------------------- | :--------------------------------- |
+| 0.25               | $18.62                  | $4.41                       | $2.22                              |
+| 0.5                | $37.23                  | $8.82                       | $4.44                              |
+| 1                  | $74.46                  | $17.65                      | $8.87                              |
 
 <Admonition type="note">
 The prices shown in the table are based on US East (Ohio) _Compute time_ rates.
@@ -61,18 +77,20 @@ The prices shown in the table are based on US East (Ohio) _Compute time_ rates.
 - Internal applications with consistent usage are estimated to be active during working hours (173 hrs/mth).
 - Internal applications with moderate usage are estimated to be active during half of working hours (87 hrs/mth).
 
-To estimate your own monthly compute cost:
+### Estimate your cost
 
-1. Determine the compute size that you require, in Compute Units (CUs). Neon supports compute size between .25 CUs and 7 CUs. One CU has 1 vCPU and 4GB of RAM.
-1. Determine the amount of compute hours (_Active time_) per month for your database.
-1. Determine the _Compute-hour_ rate for your region. The [billing rates](#billing-rates) table shows _Compute-hour_ prices for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU). Multiply that rate by 4 to get per hour cost for a full compute.
-1. Input the values into this _Compute time_ cost formula:
+To estimate your own monthly _Compute time_ cost:
+
+1. Determine the compute size that you require, in Compute Units (CUs).
+1. Estimate the amount of _Active time_ per month for your compute(s).
+1. Find the _Compute-hour_ rate for your region. The [billing rates](#billing-rates) table shows _Compute-hour_ prices for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU). (The formula below multiplies that rate by 4 to get per hour cost for a full compute.)
+1. Input the values into the _Compute time_ cost formula:
 
    ```text
-   cost = compute size * compute hours * (cost per hour for 1/4 compute * 4)
+   Compute time cost = Compute Units * Active time * (Cost per hour for 1/4 compute * 4)
    ```
 
-   For example, this is the calculation for a 1 CU compute, 730 compute hours of active time, and a compute time per hour price of $0.0255 * 4:
+   For example, this is the calculation for 1 CU, 730 hours, and a _Compute time_ rate of $0.0255:
 
    ```text
    1 * 730 * (0.0255 * 4) = 74.46
@@ -80,7 +98,7 @@ To estimate your own monthly compute cost:
 
 ## Project storage
 
-The _Project storage_ billing metric measures the amount of data and history stored in your Neon projects. Project storage includes:
+_Project storage_ measures the amount of data and history stored in your Neon projects. Project storage includes:
 
 - **Current data size**
 
@@ -90,36 +108,36 @@ The _Project storage_ billing metric measures the amount of data and history sto
 
   Neon retains a history to support _point-in-time restore_ and _database branching_.
 
-  - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon stores a 7-day history in the form of WAL records for a Neon project. WAL records that fall out of the 7-day window are evicted from storage and no longer counted toward project storage.
+  - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon stores a 7-day history in the form of WAL records for a Neon project. WAL records that fall out of the 7-day window are evicted from storage and no longer count toward project storage.
   - A _database branch_ is a virtual snapshot of your data (including _history_) at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
-    When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's virtual snapshot still exists in the parent branch's _history_, which means that it shares this data in common with the parent branch. A branch only begins adding to storage when data changes are introduced or when the branch's virtual snapshot falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data and allow the branch to age out of the parent branch's _history_.
+    When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's virtual snapshot still exists in the parent branch's _history_, which means that it shares this data in common with the parent branch. A branch begins adding to storage when data changes are introduced or when the branch's virtual snapshot falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data or allow the branch to age out of the parent branch's _history_.
 
-    Database branches can also share a _history_. For example, two branches created from the same parent at or around the same time share a _history_, which avoids additional storage. The same is true for a branch created from another branch. Wherever possible, Neon minimizes storage through shared history. Additionally, to keep storage to a minimum, Neon takes a new branch snapshot if the amount of data changes grow to the point that a new snapshot would consume less storage than retained WAL records.
+    Database branches can also share a _history_. For example, two branches created from the same parent at or around the same time share a _history_, which avoids additional storage. The same is true for a branch created from another branch. Wherever possible, Neon minimizes storage through shared history. Additionally, to keep storage to a minimum, Neon takes a new branch snapshot if the amount of data changes grow to the point that a new snapshot consumes less storage than retained WAL records.
 
 The cost calculation for _Project storage_ is as follows:
 
 ```text
-project storage (GiB) * (seconds stored / 3600) * price per hour
+Project storage (GiB) * (seconds stored / 3600) * price per hour
 ```
 
 ## Written data
 
-The _Written data_ billing metric measures the amount of data changes written from compute to storage to ensure the durability of your data.
+_Written data_ measures the amount of data changes written from compute to storage to ensure the durability of your data.
 
 The cost calculation for _Written data_ is as follows:
 
 ```text
-written data (GiB) * price per GiB
+Written data (GiB) * price per GiB
 ```
 
 ## Data transfer
 
-The _Data transfer_ billing metric counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the egress cost set by the cloud provider. Contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
+_Data transfer_ counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the egress cost set by the cloud provider. Contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
 
 The cost calculation for _Data transfer_ is as follows:
 
 ```text
-data transfer (GiB) * price per GiB
+Data transfer (GiB) * price per GiB
 ```
 
 ## Billing rates
