@@ -8,7 +8,7 @@ redirectFrom:
 
 Neon is currently in Technical Preview. For information about how the Technical Preview fits within Neon's release plans, refer to the [Neon roadmap](../reference/roadmap).
 
-The Neon Free Tier is intended for personal projects, prototyping, or evaluation. It includes the following:
+The Neon Free Tier is intended for personal projects, prototyping, or evaluating Neon's core features. It includes the following:
 
 - One Neon project with up to 10 branches.
 - 3 GB of storage per branch.
