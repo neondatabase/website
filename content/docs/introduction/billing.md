@@ -11,7 +11,7 @@ Neon paid plans bill for usage based on the following metrics:
 - **Written data**: The amount of data written from compute to storage.
 - **Data transfer**: The amount of data transferred out of Neon.
 
-The following sections provide a detailed explanation of each metric and the billing rate for each metrics. Billing in Neon is account-based.
+The following sections provide a detailed explanation of each metric and billing rates. Billing in Neon is account-based.
 
 <Admonition type="note">
 The **Project storage**, **Written data**, and **Data transfer** billing metrics are calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
@@ -59,7 +59,7 @@ The _Compute time_ cost calculation is as follows:
 Compute time cost = Compute Units * Active time * price per hour
 ```
 
-### Monthly compute time cost estimates
+### Compute time cost estimates
 
 For an idea of _Compute time_ cost per month based on compute size and usage, refer to the following table:
 
@@ -77,7 +77,7 @@ The prices shown in the table are based on US East (Ohio) _Compute time_ rates.
 - Internal applications with consistent usage are estimated to be active during working hours (173 hrs/mth).
 - Internal applications with moderate usage are estimated to be active during half of working hours (87 hrs/mth).
 
-### Estimate your cost
+### Estimate your compute time cost
 
 To estimate your own monthly _Compute time_ cost:
 
@@ -90,10 +90,10 @@ To estimate your own monthly _Compute time_ cost:
    Compute time cost = Compute Units * Active time * (Cost per hour for 1/4 compute * 4)
    ```
 
-   For example, this is the calculation for 1 CU, 730 hours, and a _Compute time_ rate of $0.0255:
+   For example, this is the calculation for .25 CU, 730 hours, and a _Compute time_ rate of $0.0255:
 
    ```text
-   1 * 730 * (0.0255 * 4) = 74.46
+   0.25 * 730 * (0.0255 * 4) = $18.62
    ```
 
 ## Project storage
@@ -169,4 +169,20 @@ Data transfer (GiB) * price per GiB
 | AWS            | Asia Pacific (Singapore) | Written data    | $0.09600  | GiB            |
 | AWS            | Asia Pacific (Singapore) | Data transfer   | $0.09000  | GiB            |
 
-\*The _Compute-hour_ price is for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU), the smallest CU size offered by Neon. A <sup>1</sup>&frasl;<sub>4</sub> CU has .25 vCPU and 1 GB of RAM. Neon currently supports computes with up to 7 CU (7 vCPU and 28 GB of RAM).
+\*The _Compute-hour_ price is for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU), the smallest CU size offered by Neon. A <sup>1</sup>&frasl;<sub>4</sub> CU has .25 vCPU and 1 GB of RAM. Neon currently supports computes with up to 7 CU (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
+
+## Pricing calculators
+
+Neon provide two calculators you can use to estimate monthly costs based on the billing metrics described above.
+
+### Website pricing page calculator
+
+The Neon website [Pricing](https://neon.tech/pricing) page provides a calculator where you can estimate monthly costs based on the usage amounts that you provide.
+
+![Pricing page calculator](/docs/introduction/pricing_page_calculator.png)
+
+### Neon Console billing page calculator
+
+The **Billing** page in the Neon Console provides a calculator that estimates costs based on usage amounts for an existing Free Tier project. To access the calculator, select **Billing** from the sidebar in the Neon Console, and select **Estimate costs**. This calculator shows you how much it would cost on a monthly basis, based on current usage, to upgrade to the [Pro plan](../introduction/pro-plan), proving you with access to features only available to Pro plan users.  
+
+![Billing page calculator](/docs/introduction/billing_page_calculator.png)
