@@ -170,9 +170,24 @@ Commands:
 
 For creating and managing Neon operations.
 
+`usage: neonctl operations <cmd> [args]`
+
+Commands:
+
+- neonctl operations list  List operations
+
 ### neonctl connection-string
 
-For creating and managing Neon operations.
+For creating and managing Neon connection strings.
+
+`usage: neonctl connection-string [args]`
+
+Required arguments:
+
+- `--project.id`     Project ID
+- `--endpoint.id`    Endpoint ID
+- `--role.name`      Role name
+- `--database.name`  Database name
 
 ## Options
 
