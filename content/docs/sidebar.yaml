@@ -17,6 +17,8 @@
       slug: introduction/regions
     - title: Plans
       items:
+        - title: Overview
+          slug: introduction/plans
         - title: Free
           slug: introduction/technical-preview-free-tier
         - title: Pro
