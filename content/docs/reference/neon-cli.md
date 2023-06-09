@@ -104,21 +104,67 @@ For creating and managing roles.
 
 For creating and managing Neon projects.
 
+usage: `neonctl projects <cmd> [args]`
+
+Commands:
+
+- neonctl projects list    List projects
+- neonctl projects create  Create a project
+- neonctl projects update  Update a project
+- neonctl projects delete  Delete a project
+- neonctl projects get     Get a project
+
 ### neonctl branches
 
+usage: `neonctl branches <cmd> [args]`
+
 For creating and managing Neon branches.
+
+Commands:
+
+- neonctl branches list    List branches
+- neonctl branches create  Create a branch
+- neonctl branches update  Update a branch
+- neonctl branches delete  Delete a branch
+- neonctl branches get     Get a branch
 
 ### neonctl endpoints
 
 For creating and managing Neon projects.
 
+`usage: neonctl endpoints <cmd> [args]`
+
+Commands:
+
+- neonctl endpoints list    List endpoints
+- neonctl endpoints create  Create an endpoint
+- neonctl endpoints update  Update an endpoint
+- neonctl endpoints delete  Delete an endpoint
+- neonctl endpoints get     Get an endpoint
+
 ### neonctl databases
 
 For creating and managing Neon databases.
 
+`usage: neonctl databases <cmd> [args]`
+
+Commands:
+  
+- neonctl databases list    List databases
+- neonctl databases create  Create a database
+- neonctl databases delete  Delete a database
+
 ### neonctl roles
 
 For creating and managing Neon roles.
+
+`usage: neonctl roles <cmd> [args]`
+
+Commands:
+
+- neonctl roles list    List roles
+- neonctl roles create  Create a role
+- neonctl roles delete  Delete a role
 
 ### neonctl operations
 
