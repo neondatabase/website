@@ -41,7 +41,7 @@ Neon supports a connection option named `endpoint`, which you can use to identif
 <CodeBlock shouldWrap>
 
 ```txt
-postgres://<user>:<password>@ep-mute-recipe-123456.us-east-2.aws.neon.tech/main?options=endpoint%3Dep-mute-recipe-123456
+postgres://<user>:<password>@ep-mute-recipe-123456.us-east-2.aws.neon.tech/neondb?options=endpoint%3Dep-mute-recipe-123456
 ```
 
 </CodeBlock>

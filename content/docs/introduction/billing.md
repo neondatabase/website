@@ -190,3 +190,4 @@ The Neon website [Pricing](https://neon.tech/pricing) page provides a calculator
 The **Billing** page in the Neon Console provides a calculator that estimates costs based on usage amounts for an existing Free Tier project. To access the calculator, select **Billing** from the sidebar in the Neon Console, and select **Estimate costs**. This calculator showshow much it would cost on a monthly basis, based on your current usage, to upgrade to the [Pro plan](../introduction/pro-plan).  
 
 ![Billing page calculator](/docs/introduction/billing_page_calculator.png)
+
