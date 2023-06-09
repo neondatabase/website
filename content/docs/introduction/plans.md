@@ -5,11 +5,11 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-Neon offers the following plans: **Free Tier**, **Pro**, and **Custom**. The Pro plan is _usage-based_, ensuring you never over-provision and only pay for what you use. **Custom**** plans are volume-based, offering potential discounts. The table below provide an overview of the plans offered by Neon. For more information a about a particular plan, refer to the individual plan pages:
+Neon offers the following plans: **Free Tier**, **Pro**, and **Custom**. The Pro plan is _usage-based_, ensuring you never over-provision and only pay for what you use. **Custom** plans are volume-based, offering potential discounts. The table below provides an overview of the plans offered by Neon. For more information a about a particular plan, refer to the individual plan pages:
 
-- [Free Tier](../introduction/technical-preview-free-tier.md)
-- [Pro plan](../introduction/pro-plan.md)
-- [Custom plan](../introduction/custom-plan.md)
+- [Free Tier](../technical-preview-free-tier.md)
+- [Pro plan](../pro-plan.md)
+- [Custom plan](../custom-plan.md)
 
 For information about how Neon bills for paid plans, refer to [Billing metrics](../introduction/billing.md).
 
@@ -39,4 +39,4 @@ For information about how Neon bills for paid plans, refer to [Billing metrics](
 
 ## Support
 
-Support channels for the Neon Free Tier, Pro, and Custom plans are outlined on our [Support](../introduction/support) page.
+Support channels for the Free Tier, Pro, and Custom plans are outlined on our [Support](../introduction/support) page.

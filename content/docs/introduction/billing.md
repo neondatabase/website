@@ -25,7 +25,7 @@ _Active time_ tracks the number of compute hours per month for all computes in a
 
 _Compute time_ is compute size multiplied by _Active time_ hours. Neon measures compute size at regular intervals and averages those values to calculate _Compute time_.
 
-Compute size is measure in _Compute Units (CU)_. A CU in Neon is 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
+Compute size is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
 
 | Compute Units | vCPU | RAM    |
 |:--------------|:-----|:-------|
