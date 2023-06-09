@@ -12,27 +12,31 @@ Neon offers several methods for working with your projects. Utilizing the Neon C
 The `neonctl` command can be called from command line. Without any arguments, it displays command usage and help:
 
 ```bash
+neonctl --help
 usage: neonctl <cmd> [args]
 
 Commands:
-
-  neonctl auth      Authenticate user
-  neonctl me        Get user info
-  neonctl roles     Manage roles
-  neonctl projects  Manage projects
+  neonctl auth               Authenticate
+  neonctl projects           Manage projects
+  neonctl me                 Show current user
+  neonctl branches           Manage branches
+  neonctl endpoints          Manage endpoints
+  neonctl databases          Manage databases
+  neonctl roles              Manage roles
+  neonctl operations         Manage operations
+  neonctl connection-string  Get connection string                 [aliases: cs]
 
 Options:
-
-  --version     Show version number                                    [boolean]
-  --help        Show help                                              [boolean]
-  --output      Set output format
+      --version     Show version number                                [boolean]
+      --help        Show help                                          [boolean]
+  -o, --output      Set output format
                   [string] [choices: "json", "yaml", "table"] [default: "table"]
-  --api-host    The API host              [default: "https://console.neon.tech"]
-  --config-dir  Path to config directory
-                            [string] [default: "/home/<username>/.config/.neonctl"]
-  --oauth-host  URL to Neon OAUTH host     [default: "https://oauth2.neon.tech"]
-  --client-id   OAuth client id                    [string] [default: "neonctl"]
-  --token       Auth token                                [string] [default: ""]
+      --api-host    The API host   [default: "https://console.neon.tech/api/v2"]
+      --config-dir  Path to config directory
+                             [string] [default: "/home/dtprice/.config/neonctl"]
+      --oauth-host  URL to Neon OAUTH host [default: "https://oauth2.neon.tech"]
+      --client-id   OAuth client id                [string] [default: "neonctl"]
+      --api-key     API key                               [string] [default: ""]
 ```
 
 ## Install the Neon CLI
@@ -99,6 +103,30 @@ For creating and managing roles.
 ### neonctl projects
 
 For creating and managing Neon projects.
+
+### neonctl branches
+
+For creating and managing Neon branches.
+
+### neonctl endpoints
+
+For creating and managing Neon projects.
+
+### neonctl databases
+
+For creating and managing Neon databases.
+
+### neonctl roles
+
+For creating and managing Neon roles.
+
+### neonctl operations
+
+For creating and managing Neon operations.
+
+### neonctl connection-string
+
+For creating and managing Neon operations.
 
 ## Options
 
