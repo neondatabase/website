@@ -14,6 +14,7 @@ import useWindowSize from 'hooks/use-window-size';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 import { ChatWidgetTrigger } from '../chat-widget';
+import { sidebarPropTypes } from '../sidebar/sidebar';
 
 const ANIMATION_DURATION = 0.2;
 
@@ -121,37 +122,7 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
 
 MobileNav.propTypes = {
   className: PropTypes.string,
-  sidebar: PropTypes.arrayOf(
-    PropTypes.exact({
-      title: PropTypes.string.isRequired,
-      isStandalone: PropTypes.bool,
-      slug: PropTypes.string,
-      items: PropTypes.arrayOf(
-        PropTypes.exact({
-          title: PropTypes.string.isRequired,
-          slug: PropTypes.string,
-          items: PropTypes.arrayOf(
-            PropTypes.exact({
-              title: PropTypes.string.isRequired,
-              slug: PropTypes.string,
-              items: PropTypes.arrayOf(
-                PropTypes.exact({
-                  title: PropTypes.string,
-                  slug: PropTypes.string,
-                  items: PropTypes.arrayOf(
-                    PropTypes.exact({
-                      title: PropTypes.string,
-                      slug: PropTypes.string,
-                    })
-                  ),
-                })
-              ),
-            })
-          ),
-        })
-      ),
-    })
-  ).isRequired,
+  sidebar: sidebarPropTypes,
   currentSlug: PropTypes.string.isRequired,
 };
 

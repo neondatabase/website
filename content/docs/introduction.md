@@ -36,29 +36,29 @@ Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about
 
 <TechnologyNavigation>
 
-[![Vercel](/images/technology-logos/vercel-logo.svg 'Integrate Neon with Vercel')](/docs/guides/vercel-overview)
+<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel-overview" title="Integrate Neon with Vercel" />
 
-[![Prisma](/images/technology-logos/prisma-logo.svg 'Connect from Prisma to Neon')](/docs/guides/prisma)
+<img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
 
-[![Django](/images/technology-logos/django-logo.svg 'Connect a Django application to Neon')](/docs/guides/django)
+<img src="/images/technology-logos/django-logo.svg" width="29" height="36" alt="Django" href="/docs/guides/django" title="Connect a Django application to Neon" />
 
-[![Go](/images/technology-logos/go-logo.svg 'Connect a Go application to Neon')](/docs/guides/go)
+<img src="/images/technology-logos/go-logo.svg" width="80" height="36" alt="Go" href="/docs/guides/go" title="Connect a Go application to Neon" />
 
-[![Hasura](/images/technology-logos/hasura-logo.svg 'Connect from Hasura Cloud to Neon')](/docs/guides/hasura)
+<img src="/images/technology-logos/hasura-logo.svg" width="35" height="36" alt="Hasura" href="/docs/guides/hasura" title="Connect from Hasura Cloud to Neon" />
 
-[![Java](/images/technology-logos/java-logo.svg 'Connect a Java application to Neon')](/docs/guides/java)
+<img src="/images/technology-logos/java-logo.svg" width="27" height="36" alt="Java" href="/docs/guides/java" title="Connect a Java application to Neon" />
 
-[![Laravel](/images/technology-logos/laravel-logo.svg 'Connect a Laravel application to Neon')](/docs/guides/laravel)
+<img src="/images/technology-logos/laravel-logo.svg" width="35" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect a Laravel application to Neon" />
 
-[![Next.js](/images/technology-logos/nextjs-logo.svg 'Connect a Next.js application to Neon')](/docs/guides/vercel)
+<img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/vercel" title="Connect a Next.js application to Neon" />
 
-[![Node.js](/images/technology-logos/nodejs-logo.svg 'Connect a Node.js application to Neon')](/docs/guides/node)
+<img src="/images/technology-logos/nodejs-logo.svg" width="33" height="36" alt="Node.js" href="/docs/guides/node" title="Connect a Node.js application to Neon" />
 
-[![Rust](/images/technology-logos/rust-logo.svg 'Connect a Rust application to Neon')](/docs/guides/rust)
+<img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
 
-[![SQLAlchemy](/images/technology-logos/sqlalchemy-logo.svg 'Connect an SQLAlchemy application to Neon')](/docs/guides/sqlalchemy)
+<img src="/images/technology-logos/sqlalchemy-logo.svg" width="102" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect an SQLAlchemy application to Neon" />
 
-[![Symfony](/images/technology-logos/symfony-logo.svg 'Connect from Symfony with Doctrine to Neon')](/docs/guides/symfony)
+<img src="/images/technology-logos/symfony-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Symfony with Doctrine to Neon" />
 
 </TechnologyNavigation>
 
