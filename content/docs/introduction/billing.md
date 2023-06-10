@@ -19,7 +19,7 @@ The **Project storage**, **Written data**, and **Data transfer** billing metrics
 
 ## Active time
 
-_Active time_ tracks the number of compute hours per month for all computes in a Neon project. The hours that a compute is in an `Idle` state due to [auto-suspension](../reference/glossary#auto-suspend-compute) are not counted as _Active time_. _Active time_ is not billed for directly. It is a factor of the _Compute time_ metric.
+_Active time_ tracks the number of compute hours per month for all computes in a Neon project. The hours that a compute is in an `Idle` state due to [auto-suspension](../reference/glossary#auto-suspend-compute) are not counted as _Active time_. _Active time_ is not a billed metric. It is a factor of the _Compute time_ metric.
 
 ## Compute time
 
@@ -39,14 +39,14 @@ Compute size is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of 
 | 6             | 6    | 24 GB  |
 | 7             | 7    | 28 GB  |
 
-A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity places the compute into an `Idle` state.
+A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an `Idle` state.
 
 Factors that affect _Compute time_ include:
 
 - The number of active computes
 - The size of each compute
-- The _Auto-suspend_ feature, which suspends a compute after a period of inactivity. The default is five minutes. Neon [Pro plan](../introduction/pro-plan) users can configure the suspension threshold or disable _Auto-suspend_ entirely.
-- The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Computing capacity scales up and down between these boundaries based on workload.
+- The _Auto-suspend_ feature, which suspends a compute after five minutes of inactivity.Neon [Pro plan](../introduction/pro-plan) users can increase or decrease the suspension timeout or disable _Auto-suspend_ entirely.
+- The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Computing capacity automatically scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
 Neon uses a small amount of _Compute time_, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
@@ -74,7 +74,7 @@ The prices in the table are based on US East (Ohio) _Compute time_ rates.
 
 - Public-facing applications are estimated to be active for all hours in a month (730 hrs/mth).
 - Internal applications with consistent usage are estimated to be active during working hours (173 hrs/mth).
-- Internal applications with moderate usage are estimated to be active during half of working hours (87 hrs/mth).
+- Internal applications with moderate usage are estimated to be active half of working hours (87 hrs/mth).
 
 ### Estimate your compute time cost
 
@@ -96,7 +96,7 @@ To estimate your own monthly _Compute time_ cost:
    ```
 
 <Admonition type="tip">
-Neon also provides calculators to help you with cost estimates. See [Pricing calculators](#pricing-calculators).
+Neon also provides calculators to help with cost estimates. See [Pricing calculators](#pricing-calculators).
 </Admonition>
 
 ## Project storage
