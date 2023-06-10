@@ -5,9 +5,9 @@ enableTableOfContents: true
 
 Neon paid plans bill for usage based on the following metrics:
 
-- **Active time**: The number of compute hours per month for all computes in a Neon project.
-- **Compute time**: The amount of computing capacity used within a specified time period.
-- **Project storage**: The size of the data and history stored for your project.
+- **Active time**: The number of active compute hours per month.
+- **Compute time**: Compute size multiplied by _Active time_ hours.
+- **Project storage**: The size of the data and history stored in your project.
 - **Written data**: The amount of data written from compute to storage.
 - **Data transfer**: The amount of data transferred out of Neon.
 
@@ -23,7 +23,7 @@ _Active time_ tracks the number of compute hours per month for all computes in a
 
 ## Compute time
 
-_Compute time_ is compute size multiplied by _Active time_ hours. Neon measures compute size at regular intervals and averages those values to calculate _Compute time_.
+_Compute time_ is compute size multiplied by _Active time_ hours. Neon measures the size of each compute at regular intervals and averages those values to calculate _Compute time_.
 
 Compute size is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
 
@@ -39,15 +39,14 @@ Compute size is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of 
 | 6             | 6    | 24 GB  |
 | 7             | 7    | 28 GB  |
 
-A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A period of inactivity places the compute into an `Idle` state.
+A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity places the compute into an `Idle` state.
 
 Factors that affect _Compute time_ include:
 
 - The number of active computes
-- The number of CUs per compute
-- Neon's _Auto-suspend_ feature, which suspends a compute after a period of inactivity. The default is five minutes.
-- Neon's _Configurable auto-suspend_ feature, which allows you to configure or disable the _Auto-suspend_ feature.
-- Neon's _Autoscaling_ feature, which allows you to set a minimum and maximum number of CUs for each compute. The number of active CUs scale up and down based on workload.
+- The size of each compute
+- The _Auto-suspend_ feature, which suspends a compute after a period of inactivity. The default is five minutes. Neon [Pro plan](../introduction/pro-plan) users can configure the suspension threshold or disable _Auto-suspend_ entirely.
+- The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Computing capacity scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
 Neon uses a small amount of _Compute time_, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
