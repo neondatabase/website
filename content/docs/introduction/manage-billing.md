@@ -10,7 +10,7 @@ A Neon account subscribed to a paid plan can manage billing from the **Billing**
 - View and download invoices
 - Cancel a subscription
 
-For Free Tier accounts, the **Billing** page in the Neon Console allows users to view [Free Tier](/docs/introduction/technical-preview-free-tier) usage limits, learn about [Neon Pro plan](../pro-plan) features, and estimate the cost to upgrade to the Pro plan based on current usage (see [Billing page calculator](../billing#billing-page-calculator)).
+For Free Tier accounts, the **Billing** page in the Neon Console allows users to view [Free Tier](../introduction/technical-preview-free-tier) usage limits, learn about [Neon Pro plan](../introduction/pro-plan) features, and estimate the cost to upgrade to the Pro plan based on current usage.
 
 ## View the billing page
 
@@ -28,7 +28,7 @@ To update your payment method:
 
 ## Invoices
 
-A Neon invoice includes an **Amount due** for the billing period and a cost breakdown by [billing metric](../billing).
+A Neon invoice includes an **Amount due** for the billing period and a cost breakdown by [billing metric](../introduction/billing).
 
 ### Download invoices
 
@@ -45,7 +45,7 @@ To cancel a Pro plan subscription:
 1. Click **Request subscription cancellation** at the bottom of the page.
 1. Follow the instructions on the **Request Downgrade** modal, and click **Downgrade**.
 
-Canceling your Pro plan subscription downgrades your account to our Free Tier, which has lower usage limits that could affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
+Canceling your Pro plan subscription downgrades your account to our Free Tier, which has lower usage limits that could affect the performance of your applications. To compare plan limits, see [Neon plans](../introduction/plans#neon-plans).
 
 You will be required to remove any projects, branches, or data that exceed [Free Tier limits](/docs/introduction/technical-preview-free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade request).
 

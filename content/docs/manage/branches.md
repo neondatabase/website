@@ -22,14 +22,14 @@ When working with branches, it is important to remove old and unused branches. B
 Each Neon project has a primary branch called `main`, by default. In the Neon Console, your primary branch is identified by a `PRIMARY` tag. You can designate any branch as the primary branch for your project or rename the primary branch, but you cannot delete a primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
 
 - For [Free Tier](../introduction/technical-preview-free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
-- For [Pro plan](../introduction/billing#neon-plans) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes.
+- For [Pro plan](../introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes.
 
 ## Non-primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
 - For [Free Tier](../introduction/technical-preview-free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Free Tier  _compute active time_ limit of 100 hours per month.
-- For [Pro plan](../introduction/billing#neon-plans) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
+- For [Pro plan](../introduction/pro-plan) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Create a branch
 
@@ -71,7 +71,7 @@ Branch details shown on the branch page include:
 - **Date**: The date the parent branch was created.
 - **Time**: The time the parent branch was created.
 
-For information more information about **Active Time**, **Compute Time**, **Written Data**, and **Data Transfer** usage metrics, refer to the [Billing] section.
+For more information about **Active Time**, **Compute Time**, **Written Data**, and **Data Transfer** usage metrics, refer to our [Billing](../introduction/billing) page.
 
 The branch details page also includes details about the compute endpoint associated with the branch. For more information, see [View a compute endpoint](../manage/endpoints#view-a-compute-endpoint).
 

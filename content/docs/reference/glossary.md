@@ -158,7 +158,7 @@ A Neon Control Plane operation that deletes stored data when a Neon project is d
 
 ### Enterprise plan
 
-A custom volume-based paid plan offered by Neon. See [Neon plans](../introduction/billing#neon-plans).
+A custom volume-based paid plan offered by Neon. See [Neon plans](../introduction/plans).
 
 ### Free Tier
 
@@ -230,7 +230,7 @@ An 8KB unit of data, which is the smallest unit that PostgreSQL uses for storing
 
 ### Paid plan
 
- A paid Neon service tier. See [Neon plans](../introduction/billing#neon-plans).
+ A paid Neon service tier. See [Neon plans](../introduction/plans).
 
 ### Pageserver
 
@@ -244,7 +244,7 @@ The ability to authenticate without providing a password. Neon’s [Passwordless
 
 ### Platform Partnership plan
 
-A custom volume-based paid plan offered by Neon that includes support for resale. See [Neon plans](../introduction/billing#neon-plans).
+A custom volume-based paid plan offered by Neon that includes support for resale. See [Neon plans](../introduction/plans).
 
 ### Point-in-time restore
 
@@ -268,7 +268,7 @@ Each Neon project is created with a primary branch called `main`, but you can de
 
 ### Pro plan
 
-A usage-based paid plan offered by Neon. See [Neon plans](../introduction/billing#neon-plans).
+A usage-based paid plan offered by Neon. See [Neon plans](../introduction/plans).
 
 ### Project
 
@@ -304,7 +304,7 @@ The geographic location where Neon project resource are located. Neon supports c
 
 ### Resale
 
-Selling the Neon service as part of another service offering. Neon's Platform Partnership plan offers resale of the Neon service as an option. See [Neon plans](../introduction/billing#neon-plans) for more information.
+Selling the Neon service as part of another service offering. Neon's Platform Partnership plan offers resale of the Neon service as an option. See [Neon plans](../introduction/plans) for more information.
 
 ### Safekeeper
 
