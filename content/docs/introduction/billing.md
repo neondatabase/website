@@ -19,7 +19,7 @@ The **Project storage**, **Written data**, and **Data transfer** billing metrics
 
 ## Active time
 
-_Active time_ tracks the number of compute hours per month for all computes in a Neon project. The hours that a compute is in an `Idle` state due to [auto-suspension](../reference/glossary#auto-suspend-compute) are not counted as _Active time_.
+_Active time_ tracks the number of compute hours per month for all computes in a Neon project. The hours that a compute is in an `Idle` state due to [auto-suspension](../reference/glossary#auto-suspend-compute) are not counted as _Active time_. _Active time_ is not billed for directly. It is a factor of the _Compute time_ metric.
 
 ## Compute time
 
@@ -70,7 +70,7 @@ For an idea of _Compute time_ cost per month based on compute size and usage, re
 | 1                  | $74.46                  | $17.65                      | $8.87                              |
 
 <Admonition type="note">
-The prices shown in the table are based on US East (Ohio) _Compute time_ rates.
+The prices in the table are based on US East (Ohio) _Compute time_ rates.
 </Admonition>
 
 - Public-facing applications are estimated to be active for all hours in a month (730 hrs/mth).
@@ -81,7 +81,7 @@ The prices shown in the table are based on US East (Ohio) _Compute time_ rates.
 
 To estimate your own monthly _Compute time_ cost:
 
-1. Determine the compute size that you require, in Compute Units (CUs).
+1. Determine the compute size you require, in Compute Units (CUs).
 1. Estimate the amount of _Active time_ per month for your compute(s).
 1. Find the _Compute-hour_ rate for your region. The [billing rates](#billing-rates) table shows _Compute-hour_ prices for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU). (The formula below multiplies that rate by 4 to get per hour cost for a full compute.)
 1. Input the values into the _Compute time_ cost formula:
@@ -116,7 +116,7 @@ _Project storage_ measures the amount of data and history stored in your Neon pr
   - A _database branch_ is a virtual snapshot of your data (including _history_) at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
     When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's virtual snapshot still exists in the parent branch's _history_, which means that it shares this data in common with the parent branch. A branch begins adding to storage when data changes are introduced or when the branch's virtual snapshot falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data or allow the branch to age out of the parent branch's _history_.
 
-    Database branches can also share a _history_. For example, two branches created from the same parent at or around the same time share a _history_, which avoids additional storage. The same is true for a branch created from another branch. Wherever possible, Neon minimizes storage through shared history. Additionally, to keep storage to a minimum, Neon takes a new branch snapshot if the amount of data changes grow to the point that a new snapshot consumes less storage than retained WAL records.
+    Database branches can also share a _history_. For example, two branches created from the same parent at or around the same time share a _history_, which avoids additional storage. The same is true for a branch created from another branch. Wherever possible, Neon minimizes storage through shared history. Additionally, to keep storage to a minimum, Neon takes a new branch snapshot if the amount of data changes grows to the point that a new snapshot consumes less storage than retained WAL records.
 
 The cost calculation for _Project storage_ is as follows:
 
@@ -134,6 +134,8 @@ The cost calculation for _Written data_ is as follows:
 Written data (GiB) * price per GiB
 ```
 
+_Written data_ together with _Data transfer_ typically account for about 5% of your monthly cost.
+
 ## Data transfer
 
 _Data transfer_ counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the egress cost set by the cloud provider. Contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
@@ -143,6 +145,8 @@ The cost calculation for _Data transfer_ is as follows:
 ```text
 Data transfer (GiB) * price per GiB
 ```
+
+_Written data_ together with _Data transfer_ typically account for about 5% of your monthly cost.
 
 ## Billing rates
 
@@ -173,7 +177,7 @@ Data transfer (GiB) * price per GiB
 | AWS            | Asia Pacific (Singapore) | Written data    | $0.09600  | GiB            |
 | AWS            | Asia Pacific (Singapore) | Data transfer   | $0.09000  | GiB            |
 
-\*The _Compute-hour_ price is for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU), the smallest CU size offered by Neon. A <sup>1</sup>&frasl;<sub>4</sub> CU has .25 vCPU and 1 GB of RAM. Neon currently supports computes with up to 7 CU (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
+\*The _Compute-hour_ price is for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU), the smallest CU size offered by Neon. A <sup>1</sup>&frasl;<sub>4</sub> CU has .25 vCPU and 1 GB of RAM. Neon  supports computes with up to 7 CU (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
 
 ## Pricing calculators
 
@@ -181,12 +185,12 @@ Neon provides pricing tools you can use to estimate monthly costs based on the b
 
 ### Pricing calculator
 
-The Neon website [Pricing](https://neon.tech/pricing) page provides a calculator that allows you to estimate monthly costs based on the usage amounts that you provide.
+The Neon website [Pricing](https://neon.tech/pricing) page provides a calculator that allows you to estimate monthly costs based on usage amounts that you provide.
 
 ![Pricing page calculator](/docs/introduction/pricing_page_calculator.png)
 
 ### Pro Plan Cost Estimator
 
-The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimation** tool, which estimates [Pro plan](/docs/introduction/pro-plan) costs based on your current project usage. It can help answer the question, "What would be my monthly cost to date if I upgraded to the Pro plan?" To use this tool, navigate to the **Billing** page from the sidebar of the Neon Console and select **Estimate costs**.
+The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimation** tool, which estimates [Pro plan](/docs/introduction/pro-plan) costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console and select **Estimate costs**.
 
 ![Pro Plan Cost Estimation tool](/docs/introduction/billing_page_calculator.png)
