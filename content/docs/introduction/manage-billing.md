@@ -5,7 +5,7 @@ enableTableOfContents: true
 
 A Neon account subscribed to a paid plan can manage billing from the **Billing** page in the Neon Console. On the **Billing** page, you can:
 
-- View charges for the current month. The total cost to date and a breakdown by [billing metric](../billing/billing-and-usage-metrics) are provided.
+- View charges for the current month. The total cost to date and a breakdown by [billing metric](../introduction/billing) are provided.
 - Update your payment method
 - View and download invoices
 - Cancel a subscription

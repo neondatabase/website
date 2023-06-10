@@ -9,11 +9,11 @@ redirectFrom:
 
 Neon offers the following plans: **Free Tier**, **Pro**, and **Custom**. The Pro plan is _usage-based_, ensuring you never over-provision and only pay for what you use. **Custom** plans are volume-based, offering potential discounts. The table below provides an overview of plans offered by Neon. For more information about a particular plan, refer to the individual plan pages:
 
-- [Free Tier](../technical-preview-free-tier.md)
-- [Pro plan](../pro-plan.md)
-- [Custom plan](../custom-plan.md)
+- [Free Tier](../introduction/technical-preview-free-tier.md)
+- [Pro plan](../introduction/pro-plan.md)
+- [Custom plan](../introduction/custom-plan.md)
 
-For information about how Neon bills for paid plans, see [Billing metrics](../introduction/billing.md).
+For information about how Neon bills for paid plans, please refer to our [Billing metrics](../introduction/billing) page.
 
 ## Neon plans
 
@@ -36,7 +36,7 @@ For information about how Neon bills for paid plans, see [Billing metrics](../in
 **Notes:**
 
 - The Pro plan has default limits of 20 projects, 200 GB of storage, and 20 simultaneously active computes. To increase these limits, reach out to our [Sales](https://neon.tech/contact-sales) team. The simultaneously active compute limit does not affect the primary branch compute.
-- The Free Tier has an [Active time](../reference/glossary#active-time) limit of 100 hours per month for non-primary branch computes. _Active time_ on the primary branch compute is counted toward the 100-hour limit. See [Free Tier](../introduction/technical-preview-free-tier) for more information.
+- The Free Tier has an [Active time](../reference/glossary#active-time) limit of 100 hours per month for non-primary branch computes. _Active time_ on the primary branch compute is counted toward the 100-hour limit. For more information, see [Neon Free Tier](../introduction/technical-preview-free-tier).
 - **There is no limit on Active time for the primary branch compute, which ensures that access to data on the primary branch is never interrupted.**
 
 ## Support

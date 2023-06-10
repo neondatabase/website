@@ -1,6 +1,6 @@
 ---
 title: Neon Free Tier
-subtitle: Learn about Neon's generous Free Tier
+subtitle: Learn about Neon's Free Tier
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/technical-preview-free-tier

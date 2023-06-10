@@ -5,7 +5,9 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-The Neon **Pro** plan is intended for users and teams who have completed their evaluation of Neon on the Free Tier and are ready to transition projects and prototypes to a production-level plan with higher limits and advanced features. Because the Neon Pro plan is usage-based, you never have to worry about over-provisioning. You only pay for what you use. Transitioning to the Pro plan has been designed to be as smooth and hassle-free as possible. However, we understand that the Pro plan might not be for everyone &mdash; so if it turns out to be more than you need, reverting to the Free Tier is a simple process. There are no fixed contracts or obligations.
+The Neon **Pro** plan is intended for users and teams who have completed their evaluation of Neon on the Free Tier and are ready to transition projects and prototypes to a production-level plan with higher limits and advanced features.
+
+Because the Neon Pro plan is usage-based, you never have to worry about over-provisioning. You only pay for what you use. Transitioning to the Pro plan has been designed to be as smooth and hassle-free as possible. However, we understand that the Pro plan might not be for everyone &mdash; so if it turns out to be more than you need, reverting to the Free Tier is a simple process. There are no fixed contracts or obligations.
 
 ## What comes with the Pro plan?
 
@@ -32,7 +34,7 @@ In addition to the [community forum](https://community.neon.tech/) and the abili
 
 ## How does billing work?
 
-The Pro plan bills for usage monthly. Please refer to our [Billing](../introduction/billing) page for information about our billing metrics and prices. For a calculator to estimate monthly costs, see the [Pricing](https://neon.tech/pricing) page on our website. If you still have questions or need help estimating cost, please do not hesitate to reach out to our [Sales](https://neon.tech/contact-sales) team. We're ready to help.
+The Pro plan bills for usage monthly. Please refer to our [Billing metrics](../introduction/billing) page for information about billing metrics and prices. For a calculator to estimate monthly costs, see the [Pricing](https://neon.tech/pricing) page on our website. If you still have questions or need help estimating cost, please do not hesitate to reach out to our [Sales](https://neon.tech/contact-sales) team. We're ready to help.
 
 ## How do I upgrade to Pro?
 
