@@ -3,6 +3,8 @@ title: Neon plans
 subtitle: Learn about the different plans offered by Neon
 enableTableOfContents: true
 isDraft: false
+redirectFrom:
+  - /docs/introduction/billing#neon-plans
 ---
 
 Neon offers the following plans: **Free Tier**, **Pro**, and **Custom**. The Pro plan is _usage-based_, ensuring you never over-provision and only pay for what you use. **Custom** plans are volume-based, offering potential discounts. The table below provides an overview of plans offered by Neon. For more information about a particular plan, refer to the individual plan pages:
