@@ -74,8 +74,6 @@ Having a knowledge base distinct from our documentation would contradict our 'do
 
 All Neon documentation is created employing Markdown.
 
-The documentation website leverages Neon Kramdown, a variant of the Kramdown engine, to transform pages from Markdown to HTML. Our linters limit the application of Kramdown features; hence, regular Markdown should be utilized, adhering to the guidelines in the linked style manual. Kramdown-specific markup (for instance, {:.class}) is not permitted.
-
 ### HTML in Markdown
 
 Although hard-coded HTML is valid, it is generally discouraged. HTML usage is permitted in situations where:
