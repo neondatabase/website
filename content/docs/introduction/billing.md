@@ -3,7 +3,7 @@ title: Billing metrics
 enableTableOfContents: true
 ---
 
-Neon paid plans bill for usage based on the following metrics:
+Neon [paid plans](../introduction/plans#neon-plans) bill for usage based on the following metrics:
 
 - **Active time**: The number of active compute hours per month.
 - **Compute time**: Compute size multiplied by _Active time_ hours.
