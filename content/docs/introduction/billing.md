@@ -5,16 +5,18 @@ enableTableOfContents: true
 
 Neon [paid plans](../introduction/plans#neon-plans) bill for usage based on the following metrics:
 
-- **Active time**: The total amount of time, measured in hours, that your computes have been active within a given billing period.
-- **Compute time**: The computing capacity used within a given billing period, measured in Compute Unit (CU) hours.
-- **Project storage**: The total volume of data and history stored in your Neon project, measured in gibibyte hours (GiB-hours).
-- **Written data**: The total volume of data written from compute to storage within a given billing period, measured in gibibytes (GiBs)
-- **Data transfer**: The total volume of data transferred out of Neon (known as "egress") during a given billing period, measured in (GiBs)
+- **Active time**: The amount of time that your computes have been active.
+- **Compute time**: The amount of computing capacity used per hour.
+- **Project storage**: The volume of data and history stored in your Neon project.
+- **Written data**: The volume of data written from compute to storage.
+- **Data transfer**: The volume of data transferred out of Neon.
 
-The following sections provide a detailed explanation of each metric and billing rates. Billing in Neon is account-based.
+The following sections provide a detailed explanation of each metric and the billing rates. Billing in Neon is account-based.
 
 <Admonition type="note">
-The **Project storage**, **Written data**, and **Data transfer** billing metrics are calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
+_Compute time_ os typically The largest contributor to cost. _Written data_ together with _Data transfer_ usually account for only about 5% of your monthly bill.
+
+The **Project storage**, **Written data**, and **Data transfer** metrics are calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 </Admonition>
 
 ## Active time
@@ -23,7 +25,7 @@ _Active time_ is the total amount of time, measured in hours, that your computes
 
 ## Compute time
 
-_Compute time_ is a measure of computing capacity used within a given billing period, measured in Compute Unit (CU) hours. It is calculated by multiplying the compute size (in Compute Units, where each CU represents a certain amount of processing power) by _Active_time_ hours. Neon measures computing capacity at regular intervals and averages those values to calculate _Compute time_.
+_Compute time_ is a measure of computing capacity used within a given billing period, measured in Compute Unit (CU) hours. It is calculated by multiplying the computing capacity by _Active_time_ hours. Neon measures computing capacity at regular intervals and averages those values to calculate _Compute time_.
 
 Computing capacity is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
 
@@ -45,7 +47,7 @@ Factors that affect _Compute time_ include:
 
 - The number of active computes
 - The size of each compute
-- The _Auto-suspend_ feature, which suspends a compute after five minutes of inactivity.Neon [Pro plan](../introduction/pro-plan) users can increase or decrease the suspension timeout or disable _Auto-suspend_ entirely.
+- The _Auto-suspend_ feature, which suspends a compute after five minutes of inactivity. Neon [Pro plan](../introduction/pro-plan) users can configure the `Auto-suspend` timeout timeout or disable _Auto-suspend_ entirely.
 - The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Computing capacity automatically scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
@@ -69,12 +71,12 @@ For an idea of _Compute time_ cost per month based on compute size and usage, re
 | 1                  | $74.46                  | $17.65                      | $8.87                              |
 
 <Admonition type="note">
-The prices in the table are based on US East (Ohio) _Compute time_ rates.
+The prices in the table above are based on US East (Ohio) _Compute time_ rates.
 </Admonition>
 
-- Public-facing applications are estimated to be active for all hours in a month (730 hrs/mth).
-- Internal applications with consistent usage are estimated to be active during working hours (173 hrs/mth).
-- Internal applications with moderate usage are estimated to be active half of working hours (87 hrs/mth).
+- Public-facing applications are assumed to be active for all hours in a month (730 hrs/mth).
+- Internal applications with consistent usage are assumed to be active during working hours (173 hrs/mth).
+- Internal applications with moderate usage are assumed to be active half of working hours (87 hrs/mth).
 
 ### Estimate your compute time cost
 
@@ -82,7 +84,7 @@ To estimate your own monthly _Compute time_ cost:
 
 1. Determine the compute size you require, in Compute Units (CUs).
 1. Estimate the amount of _Active time_ per month for your compute(s).
-1. Find the _Compute-hour_ rate for your region. The [billing rates](#billing-rates) table shows _Compute-hour_ prices for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU). (The formula below multiplies that rate by 4 to get per hour cost for a full compute.)
+1. Find the _Compute-hour_ rate for your region. The [billing rates](#billing-rates) table shows _Compute-hour_ prices for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU). The formula below multiplies that rate by 4 to get per hour cost for a full compute.
 1. Input the values into the _Compute time_ cost formula:
 
    ```text
@@ -101,7 +103,7 @@ Neon also provides calculators to help with cost estimates. See [Pricing calcula
 
 ## Project storage
 
-_Project storage_ is the total volume of data and history stored in your Neon project, measured in gibibyte hours (GiB-hours). It includes both the current data size and the history of data changes over time. Project storage includes:
+_Project storage_ is the total volume of data and history stored in your Neon project, measured in gibibyte hours (GiB-hours). It includes the following:
 
 - **Current data size**
 
@@ -109,10 +111,10 @@ _Project storage_ is the total volume of data and history stored in your Neon pr
 
 - **History**
 
-  Neon retains a history to support _point-in-time restore_ and _database branching_.
+  Neon retains a history if data changes to support _point-in-time restore_ and _database branching_.
 
   - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon stores a 7-day history in the form of WAL records for a Neon project. WAL records that fall out of the 7-day window are evicted from storage and no longer count toward project storage.
-  - A _database branch_ is a virtual snapshot of your data (including _history_) at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
+  - A _database branch_ is a virtual snapshot of your data at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
     When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's virtual snapshot still exists in the parent branch's _history_, which means that it shares this data in common with the parent branch. A branch begins adding to storage when data changes are introduced or when the branch's virtual snapshot falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data or allow the branch to age out of the parent branch's _history_.
 
     Database branches can also share a _history_. For example, two branches created from the same parent at or around the same time share a _history_, which avoids additional storage. The same is true for a branch created from another branch. Wherever possible, Neon minimizes storage through shared history. Additionally, to keep storage to a minimum, Neon takes a new branch snapshot if the amount of data changes grows to the point that a new snapshot consumes less storage than retained WAL records.
@@ -125,17 +127,13 @@ Project storage (GiB) * (seconds stored / 3600) * price per hour
 
 ## Written data
 
-_written data_ measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiBs). Writing data from compute to storage ensures the durability and integrity of your data, as it reflects the data changes made by your computes.
-
-_Written data_ measures the amount of data changes written from compute to storage to ensure the durability of your data.
+_Written data_ measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiBs). Writing data from compute to storage ensures the durability and integrity of your data, as it reflects the data changes made by your computes.
 
 The cost calculation for _Written data_ is as follows:
 
 ```text
 Written data (GiB) * price per GiB
 ```
-
-_Written data_ together with _Data transfer_ typically account for about 5% of your monthly cost.
 
 ## Data transfer
 
@@ -146,8 +144,6 @@ The cost calculation for _Data transfer_ is as follows:
 ```text
 Data transfer (GiB) * price per GiB
 ```
-
-_Written data_ together with _Data transfer_ typically account for about 5% of your monthly cost.
 
 ## Billing rates
 
@@ -186,12 +182,12 @@ Neon provides pricing tools you can use to estimate monthly costs based on the b
 
 ### Pricing calculator
 
-The Neon website [Pricing](https://neon.tech/pricing) page provides a calculator that allows you to estimate monthly costs based on usage amounts that you provide.
+The [Pricing](https://neon.tech/pricing) page on the Neon website provides a calculator that allows you to estimate monthly costs based on usage amounts that you provide.
 
 ![Pricing page calculator](/docs/introduction/pricing_page_calculator.png)
 
 ### Pro Plan Cost Estimator
 
-The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimation** tool, which estimates [Pro plan](/docs/introduction/pro-plan) costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console and select **Estimate costs**.
+The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimation** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Estimate costs**.
 
 ![Pro Plan Cost Estimation tool](/docs/introduction/billing_page_calculator.png)

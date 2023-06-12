@@ -5,12 +5,12 @@ enableTableOfContents: true
 
 A Neon account subscribed to a paid plan can manage billing from the **Billing** page in the Neon Console. On the **Billing** page, you can:
 
-- View charges for the current month. The total cost to date and a breakdown by [billing metric](../introduction/billing) are provided.
+- View charges for the current month.
 - Update your payment method
 - View and download invoices
 - Cancel a subscription
 
-For Free Tier accounts, the **Billing** page in the Neon Console allows users to view [Free Tier](../introduction/technical-preview-free-tier) usage limits, learn about [Neon Pro plan](../introduction/pro-plan) features, and estimate the cost to upgrade to the Pro plan based on current usage.
+For Free Tier accounts, the **Billing** page allows users to view [Free Tier](../introduction/technical-preview-free-tier) usage limits, learn about [Neon Pro plan](../introduction/pro-plan) features, and estimate monthly Pro plan cost based on your current usage.
 
 ## View the billing page
 
