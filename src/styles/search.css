@@ -1,5 +1,5 @@
 .DocSearch-Button {
-  @apply flex shrink-0 grow basis-[230px] items-center overflow-x-auto rounded border border-gray-new-90 bg-white bg-[url('/images/search-light.svg')] bg-[left_0.625rem_center] bg-no-repeat p-[9px] pl-9 text-left leading-none text-gray-new-70 outline-none hover:cursor-pointer hover:shadow-none dark:border-gray-new-30 dark:bg-black-new dark:bg-[url('/images/search-dark.svg')] dark:text-gray-new-50;
+  @apply flex shrink-0 grow basis-[230px] items-center overflow-x-auto rounded border border-gray-new-90 bg-white bg-[url('/images/search-light.svg')] bg-[left_0.625rem_center] bg-no-repeat p-[9px] pl-9 text-left leading-none text-gray-new-70 outline-none transition-colors duration-200 hover:cursor-pointer hover:border-gray-new-70 hover:shadow-none dark:border-gray-new-30 dark:bg-black-new dark:bg-[url('/images/search-dark.svg')] dark:text-gray-new-50 dark:hover:border-gray-new-50;
 
   @media (max-width: 768px) {
     margin: 0;
