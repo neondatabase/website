@@ -1,20 +1,5 @@
 .DocSearch-Button {
-  display: flex;
-  align-items: center;
-  flex: 1 0 230px;
-  padding: 0 15px;
-  background-color: transparent;
-  text-align: left;
-  overflow-x: auto;
-  font-weight: 500;
-  outline: none;
-  border-radius: 0;
-  appearance: none;
-
-  &:hover {
-    cursor: pointer;
-    box-shadow: none;
-  }
+  @apply flex shrink-0 grow basis-[230px] items-center overflow-x-auto rounded border border-gray-new-90 bg-white bg-[url('/images/search-light.svg')] bg-[left_0.625rem_center] bg-no-repeat p-[9px] pl-9 text-left leading-none text-gray-new-70 outline-none hover:cursor-pointer hover:shadow-none dark:border-gray-new-30 dark:bg-black-new dark:bg-[url('/images/search-dark.svg')] dark:text-gray-new-50;
 
   @media (max-width: 768px) {
     margin: 0;
@@ -30,7 +15,7 @@
   }
 
   .DocSearch-Button-Placeholder {
-    font-weight: 400;
+    @apple font-normal text-sm;
 
     @media (max-width: 768px) {
       display: block;
@@ -38,24 +23,15 @@
   }
 
   .DocSearch-Button-Keys {
-    display: flex;
-    gap: 5px;
-    margin-left: auto;
+    @apply ml-auto flex gap-x-3.5;
 
     .DocSearch-Button-Key {
-      position: relative;
-      top: 0;
-      width: 20px;
-      height: 20px;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid #e6e6e6;
-      border-radius: 3px;
-      box-shadow: none;
-      color: inherit;
+      @apply relative top-0 m-0 flex h-4 w-4 items-center justify-center rounded-sm border border-gray-new-70 p-[3px] text-xs text-gray-new-70 shadow-none dark:border-gray-new-50 dark:text-gray-new-50;
+
+      &:not(:last-child)::after {
+        @apply absolute top-1/2 left-[calc(100%+4px)] -translate-y-1/2;
+        content: '+';
+      }
     }
 
     @media (max-width: 768px) {
