@@ -12,7 +12,7 @@ See [Token](#token).
 
 ### Active time
 
-The number of active compute hours per month for all computes in a Neon project. The hours that a compute is in an `Idle` state due to [auto-suspension](#auto-suspend-compute) are not counted as _Active time_. For [Free Tier](../introduction/technical-preview-free-tier) users, there is no limit on _Active time_ for the [primary branch](#primary-branch) compute. [Non-primary branch](#non-primary-branch) computes are limited to 100 hours of _Active time_ per month. _Active time_ on the primary branch compute is counted toward the 100 hour limit. You can monitor _Active time_ for the computes in your Neon project on the **Usage** widget on the Neon **Dashboard**.
+The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). For [Free Tier](../introduction/technical-preview-free-tier) users, there is no limit on _Active time_ for the [primary branch](#primary-branch) compute. [Non-primary branch](#non-primary-branch) computes are limited to 100 hours of _Active time_ per month. _Active time_ on the primary branch compute is counted toward the 100 hour limit. You can monitor _Active time_ for the computes in your Neon project on the **Usage** widget on the Neon **Dashboard**.
 
 ### Activity Monitor
 
@@ -102,11 +102,15 @@ Connection strings for a Neon databases can be obtained from the **Connection De
 
 ### Compute size
 
-The number of Compute Units (CU) assigned to a Neon compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. A Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of the compute endpoint.
+The number of Compute Units (CU) assigned to a Neon compute. One CU is defined as having 1 vCPU with 4 GBs of RAM. A Neon compute can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of the compute.
+
+### Compute Unit (CU)
+
+A unit that measures the processing power of a Neon compute. A Neon compute can have anywhere from .25 CUs to 7 CUs.
 
 ### Compute time
 
-A billing metric that measures the amount of computing capacity used within a specified time period. See [Compute time](../introduction/billing#comput-time).
+A billing metric that measures the amount of computing capacity used within a given billing period. See [Compute time](../introduction/billing#comput-time).
 
 ### Console
 
@@ -134,7 +138,7 @@ A method of storing inactive data that converts plaintext data into a coded form
 
 ### Data transfer
 
-A billing metric that measures the amount of data transferred out of Neon (egress). See [Data transfer](../introduction/billing#data-transfer).
+A billing metric that measures the total volume of data transferred out of Neon (known as "egress") during a given billing period. See [Data transfer](../introduction/billing#data-transfer).
 
 ### Database
 
@@ -156,9 +160,13 @@ Resources including compute and storage dedicated to a single Neon account.
 
 A Neon Control Plane operation that deletes stored data when a Neon project is deleted. See [Operations](../manage/operations) for more information.
 
+### Egress
+
+The data transferred out of the Neon service to an external destination.
+
 ### Enterprise plan
 
-A custom volume-based paid plan offered by Neon. See [Neon plans](../introduction/billing#neon-plans).
+A custom volume-based paid plan offered by Neon. See [Neon plans](../introduction/plans).
 
 ### Free Tier
 
@@ -230,7 +238,7 @@ An 8KB unit of data, which is the smallest unit that PostgreSQL uses for storing
 
 ### Paid plan
 
- A paid Neon service tier. See [Neon plans](../introduction/billing#neon-plans).
+ A paid Neon service tier. See [Neon plans](../introduction/plans).
 
 ### Pageserver
 
@@ -244,7 +252,7 @@ The ability to authenticate without providing a password. Neon’s [Passwordless
 
 ### Platform Partnership plan
 
-A custom volume-based paid plan offered by Neon that includes support for resale. See [Neon plans](../introduction/billing#neon-plans).
+A custom volume-based paid plan offered by Neon that includes support for resale. See [Neon plans](../introduction/plans).
 
 ### Point-in-time restore
 
@@ -268,7 +276,7 @@ Each Neon project is created with a primary branch called `main`, but you can de
 
 ### Pro plan
 
-A usage-based paid plan offered by Neon. See [Neon plans](../introduction/billing#neon-plans).
+A usage-based paid plan offered by Neon. See [Neon plans](../introduction/plans).
 
 ### Project
 
@@ -280,7 +288,7 @@ A feature that allows you to share Neon projects with other Neon users. See [Sha
 
 ### Project storage
 
-The amount of data stored in your Neon project. Also, a billing metric that measures the data and history, in GiB-hours, stored in your Neon project. See [Project storage](../introduction/billing#project-storage).
+The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Project storage](../introduction/billing#project-storage).
 
 ### Proxy
 
@@ -304,7 +312,7 @@ The geographic location where Neon project resource are located. Neon supports c
 
 ### Resale
 
-Selling the Neon service as part of another service offering. Neon's Platform Partnership plan offers resale of the Neon service as an option. See [Neon plans](../introduction/billing#neon-plans) for more information.
+Selling the Neon service as part of another service offering. Neon's Platform Partnership plan offers resale of the Neon service as an option. See [Neon plans](../introduction/plans) for more information.
 
 ### Safekeeper
 
@@ -380,4 +388,4 @@ A standard mechanism that ensures the durability of your data. Neon relies on WA
 
 ### Written data
 
-A billing metric that measures the amount of data changes that Neon writes from compute to storage to ensure the durability of your data. See [Written data](../introduction/billing#written-data).
+A billing metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiBs). Writing data from compute to storage ensures the durability and integrity of your data. See [Written data](../introduction/billing#written-data).
