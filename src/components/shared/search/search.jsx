@@ -3,7 +3,7 @@
 import { DocSearch } from '@docsearch/react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 const Search = ({ className = null }) => {
   const ref = useRef(null);
@@ -14,7 +14,19 @@ const Search = ({ className = null }) => {
         appId="RAPNCKAFQF"
         apiKey="a975b8d2e7c08607b212bf690f8eb40a"
         indexName="neon"
-        placeholder="Search"
+        placeholder="Search..."
+        hitComponent={({ hit, children }) => (
+          <a
+            className={clsx({
+              'DocSearch-Hit--Result': hit._snippetResult,
+            })}
+            href={hit.url}
+          >
+            {children}
+            {console.log(hit)}
+          </a>
+        )}
+        insights
       />
     </div>
   );

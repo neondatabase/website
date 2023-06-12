@@ -36,31 +36,23 @@
 }
 
 .DocSearch-Container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  min-width: 320px;
-  height: 100vh;
-  z-index: 200;
-  background-color: rgba(94, 100, 112, 0.7);
+  @apply fixed top-0 left-0 z-[200] h-screen w-screen min-w-[320px] bg-[rgba(12,13,13,0.2)] dark:bg-[rgba(12,13,13,0.8)];
 
   .DocSearch-Modal {
-    @apply bg-white;
-    border-radius: 6px;
-    box-shadow: inset 1px 1px 0 0 hsla(0, 0%, 100%, 0.5), 0 3px 8px 0 #555a64;
+    @apply rounded-[10px] border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-8;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
     flex-direction: column;
     margin: 60px auto auto;
-    max-width: 540px;
+    max-width: 564px;
     position: relative;
   }
 
   .DocSearch-SearchBar {
-    @apply flex border-b border-gray-new-90 px-2 py-2;
+    @apply flex border-b border-gray-new-90 px-2 py-2 dark:border-gray-new-20;
   }
 
   .DocSearch-Footer {
-    @apply relative z-[300] flex h-11 w-full shrink-0 select-none flex-row-reverse items-center justify-between rounded-b-lg border-t border-gray-new-90 bg-none py-0 px-3 shadow-none;
+    @apply relative z-[300] flex h-11 w-full shrink-0 select-none flex-row-reverse items-center justify-between rounded-b-lg border-t border-gray-new-90 bg-none py-0 px-3 shadow-none dark:border-gray-new-20;
 
     .DocSearch-Commands {
       @apply flex items-center space-x-3;
@@ -70,7 +62,7 @@
       }
 
       .DocSearch-Commands-Key {
-        @apply mr-1 rounded-[20px] border-none bg-gray-new-94 px-[3px] py-px text-gray-new-50;
+        @apply mr-1 rounded-[20px] border-none bg-gray-new-94 px-[3px] py-px text-gray-new-50 dark:bg-gray-new-20 dark:text-gray-new-60;
       }
 
       .DocSearch-Label {
@@ -96,7 +88,7 @@
 
   .DocSearch-MagnifierLabel,
   .DocSearch-Reset {
-    @apply text-sm leading-none text-gray-new-60;
+    @apply text-sm leading-none text-gray-new-60 dark:text-gray-new-50;
 
     svg {
       height: 24px;
@@ -110,7 +102,7 @@
   }
 
   .DocSearch-Input {
-    @apply h-full w-4/5 grow appearance-none border-none bg-transparent p-0 pl-2 text-base font-normal leading-none text-black-new outline-none;
+    @apply h-full w-4/5 grow appearance-none border-none bg-transparent p-0 pl-2 text-base font-normal leading-none text-black-new outline-none dark:text-white dark:placeholder:text-gray-new-50;
 
     &::-webkit-search-decoration,
     &::-webkit-search-cancel-button,
@@ -129,21 +121,56 @@
   .DocSearch-ErrorScreen,
   .DocSearch-NoResults,
   .DocSearch-StartScreen {
-    @apply mx-auto my-0 w-4/5 px-0 py-12 text-center text-lg;
+    @apply mx-auto my-0 px-5 py-12 text-lg;
   }
 
   .DocSearch-Screen-Icon {
-    svg {
-      @apply mx-auto;
+    @apply hidden;
+  }
+
+  .DocSearch-Title {
+    @apply text-center leading-none text-gray-new-70 dark:text-gray-new-50;
+
+    strong {
+      @apply font-normal text-black-new dark:text-gray-new-90;
     }
   }
 
   .DocSearch-NoResults-Prefill-List {
-    @apply mt-6;
+    @apply mt-12;
+
+    ul {
+      @apply mt-4 space-y-2.5;
+    }
+
+    .DocSearch-Help {
+      @apply text-sm font-semibold leading-none text-gray-new-30 dark:text-gray-new-90;
+    }
+
+    .DocSearch-Prefill {
+      @apply relative w-full rounded border border-gray-new-94 py-[15px] px-3 text-left text-sm font-medium leading-none text-black-new transition-colors duration-200 hover:bg-gray-new-98 dark:border-gray-new-20 dark:text-white dark:hover:bg-gray-new-15;
+
+      &:hover {
+        &::after {
+          @apply opacity-100;
+        }
+      }
+
+      &::after {
+        @apply absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 bg-secondary-8 opacity-0 transition-opacity duration-200 content-[''] dark:bg-green-45;
+        -webkit-mask-image: url('/images/chevron.svg');
+        mask-image: url('/images/chevron.svg');
+        mask-size: 6px 12px;
+        mask-repeat: no-repeat;
+        mask-position: center;
+      }
+    }
   }
 
-  .DocSearch-Help {
-    @apply text-lg leading-none text-gray-new-70;
+  .DocSearch-StartScreen {
+    .DocSearch-Help {
+      @apply text-center text-lg leading-none text-gray-new-30 dark:text-gray-new-50;
+    }
   }
 
   .DocSearch-Logo a {
@@ -151,7 +178,12 @@
   }
 
   .DocSearch-Logo svg {
-    margin-left: 8px;
+    @apply ml-2;
+
+    path,
+    rect {
+      @apply dark:fill-white;
+    }
   }
 
   .DocSearch-Label {
@@ -162,7 +194,7 @@
     @apply p-5;
 
     .DocSearch-Hit-source {
-      @apply text-sm font-semibold leading-none text-gray-new-30;
+      @apply text-sm font-semibold leading-none text-gray-new-30 dark:text-gray-new-90;
     }
 
     > ul {
@@ -172,21 +204,44 @@
     .DocSearch-Hit {
       @apply border-none;
 
-      &[aria-selected='true'] {
-        a {
-          @apply bg-gray-new-98;
+      a {
+        @apply flex rounded border border-gray-new-94 px-3 py-4 text-black-new transition-colors duration-200 hover:bg-gray-new-98 dark:border-gray-new-20 dark:text-white dark:hover:bg-gray-new-15;
 
+        &:hover {
           .DocSearch-Hit-action::after {
             @apply opacity-100;
           }
         }
       }
 
-      a {
-        @apply flex rounded border border-gray-new-94 px-3 py-4 transition-colors duration-200 hover:bg-gray-new-98;
+      &.DocSearch-Hit--Child {
+        .DocSearch-Hit--Result {
+          @apply ml-5;
+        }
+      }
 
-        &:hover {
-          .DocSearch-Hit-action::after {
+      .DocSearch-Hit--Result {
+        .DocSearch-Hit-action {
+          @apply h-4 w-4 bg-secondary-8 opacity-0 transition-opacity duration-200 dark:bg-green-45;
+          -webkit-mask-image: url('/images/chevron.svg');
+          mask-image: url('/images/chevron.svg');
+          mask-size: 6px 12px;
+          mask-repeat: no-repeat;
+          mask-position: center;
+
+          .DocSearch-Hit-Select-Icon {
+            @apply hidden;
+          }
+        }
+      }
+
+      &[aria-selected='true'] {
+        a {
+          @apply bg-gray-new-98 dark:bg-gray-new-15;
+        }
+
+        .DocSearch-Hit--Result {
+          .DocSearch-Hit-action {
             @apply opacity-100;
           }
         }
@@ -196,11 +251,11 @@
         @apply flex w-full items-start space-x-3;
 
         .DocSearch-Hit-content-wrapper {
-          @apply !mr-2 flex flex-col space-y-1.5;
+          @apply !mr-2 flex grow flex-col space-y-1.5;
         }
 
         .DocSearch-Hit-icon {
-          @apply !ml-0 mt-0.5 text-gray-new-70;
+          @apply !ml-0 text-gray-new-70 dark:text-gray-new-60;
 
           svg {
             @apply h-4 w-4;
@@ -208,14 +263,14 @@
         }
 
         .DocSearch-Hit-Tree {
-          @apply mr-2 h-auto w-4 text-gray-new-70;
+          @apply hidden;
         }
 
         .DocSearch-Hit-title {
           @apply text-sm font-medium leading-tight;
 
           mark {
-            @apply bg-transparent text-secondary-8;
+            @apply bg-transparent text-secondary-8 dark:text-green-45;
           }
         }
 
@@ -223,24 +278,22 @@
           @apply text-xs leading-none text-black-new;
 
           mark {
-            @apply bg-transparent text-secondary-8;
+            @apply bg-transparent text-secondary-8 dark:text-green-45;
           }
         }
 
         .DocSearch-Hit-action {
-          @apply relative !ml-auto mt-0.5 h-4 w-4;
+          @apply text-gray-new-70 dark:text-gray-new-60;
 
-          &::after {
-            @apply absolute top-1/2 right-0 h-full w-full -translate-y-1/2 bg-secondary-8 opacity-0 transition-opacity duration-200 content-[''];
-            -webkit-mask-image: url('/images/chevron.svg');
-            mask-image: url('/images/chevron.svg');
-            mask-size: 6px 12px;
-            mask-repeat: no-repeat;
-            mask-position: center;
-          }
-
-          svg {
-            @apply hidden;
+          .DocSearch-Hit-action-button {
+            svg {
+              @apply h-4 w-4 transition-colors duration-200;
+            }
+            &:hover {
+              svg {
+                @apply text-secondary-8 dark:text-green-45;
+              }
+            }
           }
         }
       }
