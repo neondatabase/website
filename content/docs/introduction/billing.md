@@ -5,11 +5,11 @@ enableTableOfContents: true
 
 Neon [paid plans](../introduction/plans#neon-plans) bill for usage based on the following metrics:
 
-- **Active time**: The number of active compute hours per month.
-- **Compute time**: Compute size multiplied by _Active time_ hours.
-- **Project storage**: The size of the data and history stored in your project.
-- **Written data**: The amount of data written from compute to storage.
-- **Data transfer**: The amount of data transferred out of Neon.
+- **Active time**: The total amount of time, measured in hours, that your computes have been active within a given billing period.
+- **Compute time**: The computing capacity used within a given billing period, measured in Compute Unit (CU) hours.
+- **Project storage**: The total volume of data and history stored in your Neon project, measured in gibibyte hours (GiB-hours).
+- **Written data**: The total volume of data written from compute to storage within a given billing period, measured in gibibytes (GiBs)
+- **Data transfer**: The total volume of data transferred out of Neon (known as "egress") during a given billing period, measured in (GiBs)
 
 The following sections provide a detailed explanation of each metric and billing rates. Billing in Neon is account-based.
 
@@ -19,13 +19,13 @@ The **Project storage**, **Written data**, and **Data transfer** billing metrics
 
 ## Active time
 
-_Active time_ tracks the number of compute hours per month for all computes in a Neon project. The hours that a compute is in an `Idle` state due to [auto-suspension](../reference/glossary#auto-suspend-compute) are not counted as _Active time_. _Active time_ is not a billed metric. It is a factor of the _Compute time_ metric.
+_Active time_ is the total amount of time, measured in hours, that your computes have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an Idle state due to [auto-suspension](../reference/glossary#auto-suspend-compute) (scale-to-zero). _Active time_ is not a billed metric. It is a factor of the _Compute time_ metric.
 
 ## Compute time
 
-_Compute time_ is compute size multiplied by _Active time_ hours. Neon measures the size of each compute at regular intervals and averages those values to calculate _Compute time_.
+_Compute time_ is a measure of computing capacity used within a given billing period, measured in Compute Unit (CU) hours. It is calculated by multiplying the compute size (in Compute Units, where each CU represents a certain amount of processing power) by _Active_time_ hours. Neon measures computing capacity at regular intervals and averages those values to calculate _Compute time_.
 
-Compute size is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
+Computing capacity is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
 
 | Compute Units | vCPU | RAM    |
 |:--------------|:-----|:-------|
@@ -101,7 +101,7 @@ Neon also provides calculators to help with cost estimates. See [Pricing calcula
 
 ## Project storage
 
-_Project storage_ measures the amount of data and history stored in your Neon projects. Project storage includes:
+_Project storage_ is the total volume of data and history stored in your Neon project, measured in gibibyte hours (GiB-hours). It includes both the current data size and the history of data changes over time. Project storage includes:
 
 - **Current data size**
 
@@ -125,6 +125,8 @@ Project storage (GiB) * (seconds stored / 3600) * price per hour
 
 ## Written data
 
+_written data_ measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiBs). Writing data from compute to storage ensures the durability and integrity of your data, as it reflects the data changes made by your computes.
+
 _Written data_ measures the amount of data changes written from compute to storage to ensure the durability of your data.
 
 The cost calculation for _Written data_ is as follows:
@@ -137,7 +139,7 @@ _Written data_ together with _Data transfer_ typically account for about 5% of y
 
 ## Data transfer
 
-_Data transfer_ counts the amount of data transferred out of Neon (egress). Neon charges for each GiB of data transfer at the egress cost set by the cloud provider. Contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
+_Data transfer_ measures the total volume of data transferred out of Neon (known as "egress") during a given billing period, measured in gigibytes (GiBs). It includes data sent from your Neon project to external destinations. If your data transfer is high, contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
 
 The cost calculation for _Data transfer_ is as follows:
 
