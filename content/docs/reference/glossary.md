@@ -12,7 +12,7 @@ See [Token](#token).
 
 ### Active time
 
-The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an Idle state due to [auto-suspension](#auto-suspend-compute). For [Free Tier](../introduction/technical-preview-free-tier) users, there is no limit on _Active time_ for the [primary branch](#primary-branch) compute. [Non-primary branch](#non-primary-branch) computes are limited to 100 hours of _Active time_ per month. _Active time_ on the primary branch compute is counted toward the 100 hour limit. You can monitor _Active time_ for the computes in your Neon project on the **Usage** widget on the Neon **Dashboard**.
+The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). For [Free Tier](../introduction/technical-preview-free-tier) users, there is no limit on _Active time_ for the [primary branch](#primary-branch) compute. [Non-primary branch](#non-primary-branch) computes are limited to 100 hours of _Active time_ per month. _Active time_ on the primary branch compute is counted toward the 100 hour limit. You can monitor _Active time_ for the computes in your Neon project on the **Usage** widget on the Neon **Dashboard**.
 
 ### Activity Monitor
 
@@ -102,11 +102,11 @@ Connection strings for a Neon databases can be obtained from the **Connection De
 
 ### Compute size
 
-The number of Compute Units (CU) assigned to a Neon compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. A Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of the compute endpoint.
+The number of Compute Units (CU) assigned to a Neon compute. One CU is defined as having 1 vCPU with 4 GBs of RAM. A Neon compute can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of the compute.
 
 ### Compute Unit (CU)
 
-A unit that measures the processing power of a Neon compute instance. In Neon, one Compute Unit is defined as having 1 vCPU and 4 GB of RAM. Neon offers computes with computing resources ranging from .25 CUs to 7 CUs.
+A unit that measures the processing power of a Neon compute. A Neon compute can have anywhere from .25 CUs to 7 CUs.
 
 ### Compute time
 

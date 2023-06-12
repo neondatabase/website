@@ -68,8 +68,8 @@ Branch details shown on the branch page include:
 - **Written Data**: The total volume of data written from your branch compute to storage within the current billing period, measured in gibibytes (GiBs).
 - **Data Transfer**: The total volume of data transferred out of Neon (known as "egress") within the current billing period, measured in (GiBs).
 - **Parent Branch**: The branch from which this branch was created (only visible for child branches).
-- **Date**: The date the parent branch was created (only visible for child branches created with the **Time** option).
-- **Time**: The time the parent branch was created (only visible for child branches created with the **Time** option).
+- **Date**: The date the parent branch was created (only displayed for branches created with the **Time** option).
+- **Time**: The time the parent branch was created (only displayed for branches created with the **Time** option).
 
 For more information about **Active Time**, **Compute Time**, **Written Data**, and **Data Transfer** usage metrics, refer to our [Billing](../introduction/billing) page.
 
