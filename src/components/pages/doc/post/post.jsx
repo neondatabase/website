@@ -54,7 +54,7 @@ const Post = ({
           isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
         )}
       >
-        {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
+        {breadcrumbs?.length > 0 && <Breadcrumbs breadcrumbs={breadcrumbs} />}
         {isReleaseNotes ? (
           <ReleaseNotes currentSlug={currentSlug} items={releaseNotes} />
         ) : (
