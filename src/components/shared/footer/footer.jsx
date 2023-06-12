@@ -9,8 +9,31 @@ import MENUS from 'constants/menus.js';
 
 import ThemeSelect from './theme-select';
 
-const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) => {
+const fetchStatus = async () => {
+  const res = await fetch('https://neonstatus.com/summary.json');
+  const data = await res.json();
+  return data;
+};
+
+const statusBadge = {
+  UP: {
+    color: 'bg-primary-1',
+    text: 'All systems operational',
+  },
+  HASISSUES: {
+    color: 'bg-red-500',
+    text: 'Experiencing issues',
+  },
+  UNDERMAINTENANCE: {
+    color: 'green', // TODO: update color
+    text: 'Active maintenance',
+  },
+};
+
+const Footer = async ({ isDocPage = false, withTopBorder = false, theme = 'white' }) => {
   const isDarkTheme = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
+
+  const status = await fetchStatus();
 
   return (
     <footer
@@ -32,6 +55,23 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
             </Link>
             {isDocPage && <ThemeSelect className="mt-10 xl:mt-11 md:mt-0" />}
           </div>
+          {/* TODO: update styles */}
+          {status && status.page && status.page.status && status.page.status !== 'operational' && (
+            <a
+              href="https://neonstatus.com/"
+              className={clsx('group my-10 flex items-center font-medium ')}
+            >
+              <span
+                className={clsx(
+                  'mr-2 h-3.5 w-3.5 rounded-full',
+                  statusBadge[status.page.status].color
+                )}
+              />
+              <span className="-mb-px max-w-[180px] truncate group-hover:underline">
+                {statusBadge[status.page.status].text}
+              </span>
+            </a>
+          )}
           <div
             className={clsx(
               { 'tracking-tight text-gray-new-80': theme === 'black-new' || theme === 'gray-8' },
