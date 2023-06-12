@@ -156,7 +156,7 @@ const Calculator = () => {
                   <span>Compute size</span>
                   <Tooltip
                     id="compute"
-                    content="Compute size is measured in Compute Units (CU). In Neon, a CU has 1 vCPU and 4 GB of RAM. The number of CUs defines the processing power of your Neon compute."
+                    content="Compute size is measured in Compute Units (CUs). One CU has 1 vCPU and 4 GB of RAM. The number of CUs determines processing power."
                   />
                 </h4>
                 <Slider.Root
@@ -309,7 +309,7 @@ const Calculator = () => {
                 Data transfer and Written data
                 <Tooltip
                   id="data"
-                  content="Written data is the amount of data written from compute to storage. Data transfer is the amount of data transferred out of Neon."
+                  content="Written data is the volume of data written from compute to storage. Data transfer is the volume of data transferred out of Neon."
                 />
               </h3>
               <LazyMotion features={domAnimation}>
