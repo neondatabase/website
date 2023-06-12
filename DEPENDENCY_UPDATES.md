@@ -104,11 +104,3 @@ Add information if you're having trouble updating any dependencies, this could b
 Space for a free-form description of the problem
 
 </details>
-
-### [next.js](https://github.com/vercel/next.js)
-
-- **Issue found on:** 25 May, 2023
-- **Problematic version:** `^13.3.2`
-- **Last stable version:** `13.2.4`
-
-In order to upgrade to a newer version of this dependency, changes will need to be made to the application's logic due to changes in the Next.js framework. The current implementation uses [Preview Mode](https://nextjs.org/docs/pages/building-your-application/configuring/preview-mode), which has been deprecated and is no longer supported in the latest versions. Therefore, before upgrading this dependency, you should transition to the new [Draft Mode](https://nextjs.org/docs/pages/building-your-application/configuring/draft-mode)

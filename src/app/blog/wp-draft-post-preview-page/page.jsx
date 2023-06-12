@@ -12,23 +12,29 @@ import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import CodeBlock from 'components/shared/code-block';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
-import { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData } from 'utils/api-posts';
+import { getWpPreviewPostData } from 'utils/api-posts';
 import getFormattedDate from 'utils/get-formatted-date';
-import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
-const BlogPage = async ({ params, searchParams }) => {
+/*
+  NOTE:
+  This page is only needed to show previews for the drafts.
+  Its code is identical to the blog post page, except for the data fetching.
+  If you need to change something here, сhange it first in the blog post page
+  and then copy the changes here.
+*/
+/*
+  WARNING:
+  You can't have a post in Wordpress with the "wp-draft-post-preview-page" slug. Please be careful.
+*/
+const BlogDraft = async ({ searchParams }) => {
   const { isEnabled: isDraftModeEnabled } = draftMode();
 
-  let postResult;
-
-  if (isDraftModeEnabled) {
-    postResult = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
-  } else {
-    postResult = await getWpPostBySlug(params?.slug);
+  if (!isDraftModeEnabled) {
+    return notFound();
   }
 
-  const { post, relatedPosts } = postResult;
+  const { post, relatedPosts } = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
 
   if (!post) {
     return notFound();
@@ -108,49 +114,4 @@ const BlogPage = async ({ params, searchParams }) => {
   );
 };
 
-export async function generateMetadata({ params }) {
-  const { slug } = params;
-  const { post } = await getWpPostBySlug(slug);
-
-  if (!post) return notFound();
-
-  const {
-    seo: {
-      title,
-      metaDesc,
-      metaKeywords,
-      metaRobotsNoindex,
-      opengraphTitle,
-      opengraphDescription,
-      twitterImage,
-    },
-    date,
-    pageBlogPost,
-  } = post;
-
-  const authors = pageBlogPost.authors.map(({ author }) => author?.title);
-
-  return getMetadata({
-    title: opengraphTitle || title,
-    description: opengraphDescription || metaDesc,
-    keywords: metaKeywords,
-    robotsNoindex: metaRobotsNoindex,
-    pathname: `${LINKS.blog}/${slug}`,
-    imagePath: twitterImage?.mediaItemUrl,
-    type: 'article',
-    publishedTime: date,
-    authors,
-  });
-}
-
-export async function generateStaticParams() {
-  const posts = await getAllWpPosts();
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
-export default BlogPage;
-
-export const revalidate = 60;
+export default BlogDraft;

@@ -94,7 +94,7 @@ DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon
 A `connect_timeout` setting of 0 means no timeout.
 </Admonition>
 
-Another possible cause of connection timeouts is [Prisma's connection pool](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/), which has a default timeout of 10 seconds. This is typically enough time for Neon, but if you are still experiencing connection timeouts, you can try increasing this limit (in addition to the `connect_timeout` setting described above) by setting the `pool_timeout` parameter to a higher value. For example:
+Another possible cause of connection timeouts is [Prisma's connection pool](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/), which has a default timeout of 10 seconds. This is typically enough time for your Neon compute to activate, but if you are still experiencing connection timeouts, you can try increasing both the `connect_timeout` limit described above and the `pool_timeout` parameter (for Prisma) to a higher value. For example:
 
 <CodeBlock shouldWrap>
 
@@ -103,7 +103,22 @@ DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon
 ```
 
 </CodeBlock>
-  
+
+<Admonition type="info">
+If you are working with a large Prisma schema, Prisma recently introduced a new preview feature that expresses queries using `JSON` instead of GraphQL. The JSON implementation uses less CPU and memory, which can help reduce latencies when connecting from Prisma.
+
+To try the new protocol, enable the `jsonProtocol` Preview feature in your Prisma schema:
+
+```text
+generator client {
+  provider        = "prisma-client-js"  
+  previewFeatures = ["jsonProtocol"]
+}
+```
+
+You can read more about this feature here: [Preview feature feedback](https://github.com/prisma/prisma/issues/18095).
+</Admonition>
+
 For additional information about connecting from Prisma, refer to the following resources in the _Prisma documentation_:
 
 - [Connection management](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management)

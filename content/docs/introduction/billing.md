@@ -221,17 +221,4 @@ data transfer (GiB) * price per GiB
 
 ## Support
 
-Support channels for the Neon Free Tier and paid plans are outlined below.
-
-| Support channels                                     | Free Tier |   Pro   | Custom  |
-| :--------------------------------------------------- | :-------: | :-----: | :-----: |
-| [Neon Community Forum](https://community.neon.tech/) |  &check;  | &check; | &check; |
-| Ability to submit support tickets                    |  &check;  | &check; | &check; |
-| Video chat                                           |     -     | &check; | &check; |
-| Resale customer support                              |     -     |    -    | &check; |
-
-<Admonition type="note">
-Pro plan users that submit support tickets through Neon's console can expect an initial response time of 2 business days, from 6am to 6pm Pacific Standard Time (UTC -8), Monday through Friday, excluding public holidays in the United States.
-
-Free Tier users are not guaranteed a specific response time. For custom solutions, please contact [Sales](https://neon.tech/contact-sales).  
-</Admonition>
+Support channels for the Neon Free Tier, Pro, and Custom plans are outlined on our [Support](../introduction/support) page.
