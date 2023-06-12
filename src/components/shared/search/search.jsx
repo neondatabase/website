@@ -23,7 +23,6 @@ const Search = ({ className = null }) => {
             href={hit.url}
           >
             {children}
-            {console.log(hit)}
           </a>
         )}
         insights
