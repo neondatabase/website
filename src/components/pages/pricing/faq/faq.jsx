@@ -23,7 +23,7 @@ const items = [
   },
   {
     question: 'When will I be billed?',
-    answer: `Neon bills for the past month's usage at the beginning of each month. For more information, see <a href="/docs/introduction/-manage-billing">Manage billing</a>.`,
+    answer: `Neon bills for the past month's usage at the beginning of each month. For more information, see <a href="/docs/introduction/manage-billing">Manage billing</a>.`,
   },
   {
     question: 'Is there a discount for annual subscriptions?',
