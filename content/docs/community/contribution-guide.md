@@ -6,13 +6,13 @@ enableTableOfContents: true
 
 This page offers guidelines on how to contribute to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in enhancing the Neon documentation.
 
-## Why Should You Contribute?
+## Why should you contribute?
 
 Open-source projects and their documentation are always evolving. Contributing to documentation is a great way for beginners to get started in open-source, and for experienced developers to explain complex topics while sharing their knowledge with the community.
 
 By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or you've noticed that a certain topic is missing, your contributions are always welcome and very much appreciated.
 
-## How to Contribute
+## How to contribute
 
 The content for the documentation is located in the [Neon website repository](https://github.com/neondatabase/website), in the `doc/content/` directory. To make a contribution, you have two options: you can either edit the files directly on GitHub, or you can clone the repo and edit the files on your local machine. If you prefer the former option, which is great for edits and small updates, there is an **Edit this page** link at the bottom of each Neon documentation page.
 
@@ -36,14 +36,14 @@ At Neon, we use VSCode for writing documentation. VSCode includes a built-in mar
 
 To use this feature, open the command palette (⌘ + ⇧ + P on Mac or Ctrl + Shift + P on Windows) and search for `Markdown: Open Preview` or `Markdown: Open Preview to the Side`. This will open a preview window where you can see your changes in formatted markdown.
 
-### VSCode Extensions
+### VSCode extensions
 
 For an enhanced experience while working with markdown files in VSCode, we recommend the following extensions:
 
 - [Grammarly](https://marketplace.visualstudio.com/items?itemName=znck.grammarly): This extension helps with grammar and spell checking.
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): This extension automatically formats markdown files when you save them, ensuring consistent style and formatting.
 
-## Contribution Review Process
+## Contribution review process
 
 After you've submitted your contribution, the Neon documentation team will review your changes, provide feedback, and merge the pull request when it's ready.
 
@@ -73,10 +73,6 @@ The Neon documentation file structure reflects the navigation that you see on th
 ## Documentation table of contents
 
 This section describes how to modify the documentation left-hand table of contents, also referred to as the "sidebar". Adding, removing, or moving a page to the documentation requires modifying the sidebar. The sidebar is managed in a `yaml` file conveniently named `siderbar.yaml`, which is found in at the root of the `/docs` directory.
-
-## Sidebar
-
-Sidebar data is stored in the [sidebar.yaml](./sidebar.yaml) file.
 
 ### How to add a new category
 
@@ -142,7 +138,7 @@ To add a new page to the root level, add `slug` in the same level with `title`.
 
 ```
 
-In order to add new page under a category, add a new item to `items` array with keys `title` and `slug` under specific category or subcategory:
+In order to add new page under a category, add a new item to the `items` array with keys `title` and `slug` under the category or subcategory:
 
 For example:
 
@@ -168,7 +164,7 @@ For example:
 - `title` in the sidebar may differ from `title` in Markdown file.
 - `slug` should always match page's slug.
 
-### How to add a single page to doc sidebar
+### How to add a single page
 
 To add a single page to the docs sidebar, add the `title` with a slug, without an `items` entry. For example:
 
@@ -224,7 +220,7 @@ redirectFrom:
 ---
 ```
 
-### Heading levels
+## Heading levels
 
 Page headings the frontmatter. This heading is translated into an h1 element when the page is converted to HTML.
 
@@ -233,7 +229,7 @@ Page headings the frontmatter. This heading is translated into an h1 element whe
 - Do not skip a level, e.g., do not go from ## to ####.
 - Ensure there's a blank line before and after the topic title.
 
-### Common markup
+## Common markup
 
 - Link markup: `[link](/)`
 - Italics markup: `*italic*`
