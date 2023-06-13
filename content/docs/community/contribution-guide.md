@@ -45,9 +45,9 @@ For an enhanced experience while working with markdown files in VSCode, we recom
 
 ## Contribution review process
 
-After you've submitted your contribution, the Neon documentation team will review your changes, provide feedback, and merge the pull request when it's ready.
+After you have submitted your contribution, the Neon documentation team will review your changes, provide feedback, and merge the pull request when it is ready.
 
-Don't hesitate to reach out if you have any questions or need further assistance in the comments of your PR. We appreciate your contribution to the Neon docs and your participation in our community!
+Do not hesitate to reach out if you have any questions or need further assistance. We appreciate your contribution and your participation in our community.
 
 ## Documentation file structure
 
@@ -67,7 +67,7 @@ The Neon documentation file structure reflects the navigation that you see on th
        └── tutorial
 ```
 
-- Every Markdown file in the `/docs` folder becomes a docs page unless it is defined with an `isDraft: true` property in the page frontmatter. 
+- Every Markdown file in the `/docs` folder becomes a documentation page unless it is defined with an `isDraft: true` property in the page frontmatter.
 - Folder and file names should use kebab-case.
 
 ## Documentation table of contents
@@ -248,7 +248,7 @@ SELECT * FROM elements ORDER BY id;
 
 Supported languages include those found [here](https://prismjs.com/index.html#supported-languages).
 
-To display code with options, wrap your code with `<CodeBlock></CodeBlock>` component.
+To display code with options, you can wrap your code with `<CodeBlock></CodeBlock>` component.
 
 Currently, `<CodeBlock>` accepts the following options:
 
@@ -358,7 +358,7 @@ Diagrams are a great tool for clarifying complex ideas. Neon uses Figma for the 
 
 If you're interested in updating or adding a diagram, please open a GitHub issue with your suggestions. Please include a draft, if possible. A tool like [tldraw](https://www.tldraw.com/) can be used to create a draft.
 
-Diagrams and images reside in the `public/docs` directory in the Neon website repository. You can add a diagram or image to an `.md` file by specifying a relative path beginning with a slash `/`.
+Diagrams and images reside in the `/public/docs` directory in the Neon website repository. You can add a diagram or image to an `.md` file by specifying a relative path beginning with a slash `/`.
 
 Example file structure:
 
@@ -366,7 +366,7 @@ Example file structure:
 ├── public
 │ ├── docs
 │   ├── introduction
-│     ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
+│     ├── neon_architecture_2.png // put images in a public directory with the same name
 ├── content
 │ ├── docs
 │   ├── introduction
@@ -381,7 +381,7 @@ For example, to add an image to a file, add an entry that looks like this:
 
 ## Style Guide
 
-This section outlines the stylistic elements that we try to adhere to in the Neon documentation.
+This section outlines the stylistic elements that we do our best to adhere to in the Neon documentation.
 
 ### Language
 
