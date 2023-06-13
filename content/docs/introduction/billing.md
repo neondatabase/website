@@ -14,7 +14,7 @@ Neon [paid plans](../introduction/plans#neon-plans) bill for usage based on the 
 The following sections provide a detailed explanation of each metric and the billing rates. Billing in Neon is account-based.
 
 <Admonition type="note">
-_Compute time_ os typically The largest contributor to cost. _Written data_ together with _Data transfer_ usually account for only about 5% of your monthly bill.
+_Compute time_ is typically The largest contributor to cost. _Written data_ together with _Data transfer_ usually account for only about 5% of your monthly bill.
 
 The **Project storage**, **Written data**, and **Data transfer** metrics are calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 </Admonition>
