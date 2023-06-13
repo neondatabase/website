@@ -1,6 +1,6 @@
 .DocSearch-Button {
   @apply flex max-w-full shrink-0 grow basis-[230px] items-center overflow-x-auto rounded border border-gray-new-90 bg-white bg-[url('/images/search-light.svg')] bg-[left_0.625rem_center] bg-no-repeat p-[7px] pl-9 text-left leading-none text-gray-new-70 outline-none transition-colors duration-200 hover:cursor-pointer hover:border-gray-new-70 hover:shadow-none dark:border-gray-new-30 dark:bg-black-new dark:bg-[url('/images/search-dark.svg')] dark:text-gray-new-50 dark:hover:border-gray-new-50 md:m-0;
-  @apply lg:items-start lg:border-none lg:bg-[top] lg:p-0;
+  @apply lg:mr-6 lg:h-5 lg:w-5 lg:items-start lg:border-none lg:bg-[top] lg:p-0;
 
   .DocSearch-Search-Icon {
     @apply hidden;
@@ -11,7 +11,7 @@
   }
 
   .DocSearch-Button-Keys {
-    @apply ml-auto flex h-5 min-w-[33px] items-center justify-center gap-x-1 rounded-sm border border-gray-new-80 bg-gray-new-98 py-1 text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-10 dark:text-gray-new-80 lg:h-5 lg:w-10 lg:border-none lg:bg-transparent;
+    @apply ml-auto flex h-5 min-w-[33px] items-center justify-center gap-x-1 rounded-sm border border-gray-new-80 bg-gray-new-98 py-1 text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-10 dark:text-gray-new-80 lg:border-none lg:bg-transparent dark:lg:bg-transparent;
 
     .DocSearch-Button-Key {
       @apply relative top-0 m-0 flex items-center justify-center text-[10px] font-medium leading-none shadow-none first:text-xs first:font-semibold first:leading-none lg:hidden;
