@@ -76,7 +76,6 @@ const ChatWidget = () => {
     shouldTryAgain,
     setShouldTryAgain,
     isAnswerGenerating,
-    setStopGenerating,
   } = useDocsAIChatStream({
     isMountedRef,
     signal: getSignal(),
@@ -137,7 +136,7 @@ const ChatWidget = () => {
   };
 
   const stopGeneratingAnswers = () => {
-    setStopGenerating(true);
+    resetAbortController();
   };
 
   // effects

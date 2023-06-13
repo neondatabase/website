@@ -8,12 +8,12 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [shouldTryAgain, setShouldTryAgain] = useState(false);
-  const [stopGenerating, setStopGenerating] = useState(false);
+
   const [isAnswerGenerating, setIsAnswerGenerating] = useState(false);
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
-    setIsAnswerGenerating(true);
+
     try {
       const response = await fetch('/api/open-ai', {
         method: 'POST',
@@ -27,11 +27,11 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
       });
 
       if (response.ok) {
+        setIsAnswerGenerating(true);
         const reader = response.body.getReader();
-
-        while (isMountedRef?.current && !stopGenerating) {
+        while (isMountedRef?.current) {
           const { done, value } = await reader.read();
-          if (done || stopGenerating) break;
+          if (done) break;
 
           const chunk = decoder.decode(value);
 
@@ -94,10 +94,10 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
       setError(error?.message || error || 'Something went wrong. Please try again!');
     } finally {
       setIsLoading(false);
-      setStopGenerating(false);
+
       setIsAnswerGenerating(false);
     }
-  }, [isMountedRef, messages, signal, stopGenerating]);
+  }, [isMountedRef, messages, signal]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -105,7 +105,7 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
       fetchData();
       setMessages((prevMessages) => [...prevMessages, { role: 'assistant', content: '' }]);
     }
-  }, [fetchData, messages, stopGenerating]);
+  });
 
   return {
     inputText,
@@ -118,7 +118,6 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
     shouldTryAgain,
     setShouldTryAgain,
     isAnswerGenerating,
-    setStopGenerating,
   };
 };
 
