@@ -166,3 +166,9 @@
       slug: reference/compatibility
 - title: Release notes
   slug: release-notes
+- title: Community
+  items:
+    - title: Community forum
+      slug: https://community.neon.tech/
+    - title: Contribution guide
+      slug: community/contribution-guide
