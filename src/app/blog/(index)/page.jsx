@@ -10,7 +10,7 @@ import { getWpBlogPage } from 'utils/api-posts';
 import getMetadata from 'utils/get-metadata';
 
 async function getReleaseNotesData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/api/release-notes`);
+  const res = await fetch(process.env.NEXT_PUBLIC_RELEASE_NOTES_API_URL);
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');

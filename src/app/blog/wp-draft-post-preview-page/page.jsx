@@ -12,8 +12,10 @@ import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import CodeBlock from 'components/shared/code-block';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
+import SEO_DATA from 'constants/seo-data';
 import { getWpPreviewPostData } from 'utils/api-posts';
 import getFormattedDate from 'utils/get-formatted-date';
+import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
 /*
@@ -113,5 +115,18 @@ const BlogDraft = async ({ searchParams }) => {
     </Layout>
   );
 };
+
+export async function generateMetadata() {
+  const { title, description, imagePath } = SEO_DATA.blog;
+
+  return getMetadata({
+    title,
+    description,
+    keywords: '',
+    robotsNoindex: 'noindex',
+    pathname: `${LINKS.blog}/wp-draft-post-preview-page`,
+    imagePath,
+  });
+}
 
 export default BlogDraft;
