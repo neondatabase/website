@@ -8,7 +8,6 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [shouldTryAgain, setShouldTryAgain] = useState(false);
-
   const [isAnswerGenerating, setIsAnswerGenerating] = useState(false);
 
   const fetchData = useCallback(async () => {
@@ -94,7 +93,6 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
       setError(error?.message || error || 'Something went wrong. Please try again!');
     } finally {
       setIsLoading(false);
-
       setIsAnswerGenerating(false);
     }
   }, [isMountedRef, messages, signal]);
