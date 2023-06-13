@@ -28,7 +28,7 @@ const DocsLayout = async ({ children, params }) => {
             size="mdDoc"
           >
             <Sidebar
-              className="relative col-start-1 col-end-4 max-w-[254px] bg-gray-9 pb-20 pt-[111px] before:absolute before:top-0 before:-right-5 before:z-10 before:h-full before:w-screen before:bg-gray-9 dark:bg-gray-1 dark:before:bg-gray-1 lg:hidden"
+              className="relative col-start-1 col-end-4 max-w-[254px] bg-gray-9 pb-20 pt-[111px] before:absolute before:-right-5 before:top-0 before:z-10 before:h-full before:w-screen before:bg-gray-9 dark:bg-gray-1 dark:before:bg-gray-1 lg:hidden"
               sidebar={sidebar}
               currentSlug={currentSlug}
             />

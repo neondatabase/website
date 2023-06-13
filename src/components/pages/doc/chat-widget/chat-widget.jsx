@@ -232,7 +232,7 @@ const ChatWidget = () => {
                 {!isLoading &&
                   (!shouldTryAgain ? (
                     <button
-                      className="absolute top-[11px] right-[30px] h-5 w-5 opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
+                      className="absolute right-[30px] top-[11px] h-5 w-5 opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
                       type="submit"
                     >
                       <SendIcon className="text-gray-new-20 dark:text-gray-new-90" />
