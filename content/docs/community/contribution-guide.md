@@ -4,8 +4,6 @@ subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
 ---
 
-Welcome to the _Neon Documentation Contribution Guide_.
-
 This page offers guidelines on how to contribute to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in enhancing the Neon documentation.
 
 ## Why Should You Contribute?
@@ -18,7 +16,7 @@ By contributing to the Neon docs, you're helping us create a stronger learning r
 
 The content for the documentation is located in the [Neon website repository](https://github.com/neondatabase/website), in the `doc/content/` directory. To make a contribution, you have two options: you can either edit the files directly on GitHub, or you can clone the repo and edit the files on your local machine. If you prefer the former option, which is great for edits and small updates, there is an **Edit this page** link at the bottom of each Neon documentation page.
 
-![GitHub edit this page link](/docs/community/edit_this_page)
+![GitHub edit this page link](/docs/community/edit_this_page.png)
 
 Clicking the link takes you to the Markdown file in GitHub, where you can click the Edit this page icon to make a change. When you are finished editing, commit your changes and create a pull request.
 
@@ -323,7 +321,7 @@ class GFG {
 <details>
 <summary>Examples</summary>
 
-![Code tabs example](code-tabs-example.jpg)
+![Code tabs example](/docs/community/code-tabs-example.jpg)
 
 </details>
 
@@ -354,7 +352,7 @@ You may also specify an optional title with the `title` property.
 <details>
 <summary>Examples</summary>
 
-![Admonition example](admonition-example.jpg)
+![Admonition example](/docs/community/admonition-example.jpg)
 
 </details>
 
