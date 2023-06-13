@@ -103,7 +103,7 @@ To add a new subcategory, add a new item to `items` array with keys `title` and 
 
 For example:
 
-```diff
+```diff yaml
  - title: Category 1
    items:
      - title: Page 1
@@ -172,7 +172,7 @@ For example:
 
 ### How to add a single page to doc sidebar
 
-To add a single page <https://example.com/changelog> to the docs sidebar, add the `title` with a slug, without an `items` entry.
+To add a single page to the docs sidebar, add the `title` with a slug, without an `items` entry. For example:
 
 ```diff yaml
 +- title: Release notes
