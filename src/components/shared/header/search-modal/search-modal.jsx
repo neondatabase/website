@@ -24,17 +24,11 @@ const SearchModal = ({ isOpen, closeModal }) => {
   }, [isOpen]);
 
   return (
-    <div
-      className={clsx(
-        isOpen ? 'block' : 'hidden',
-        'fixed inset-0 z-[100] flex flex-col bg-gray-9 dark:bg-gray-1'
-      )}
+    <InstantSearch
+      searchClient={searchClient}
+      indexName={indices[0].name}
+      onSearchStateChange={({ query }) => setQuery(query)}
     >
-      <InstantSearch
-        searchClient={searchClient}
-        indexName={indices[0].name}
-        onSearchStateChange={({ query }) => setQuery(query)}
-      />
       <div
         className={clsx(
           isOpen ? 'block' : 'hidden',
@@ -71,7 +65,7 @@ const SearchModal = ({ isOpen, closeModal }) => {
           <ChatWidgetTrigger className="relative w-full justify-center rounded bg-gray-8 p-2.5 dark:border dark:border-gray-new-30 dark:bg-transparent" />
         </div>
       </div>
-    </div>
+    </InstantSearch>
   );
 };
 

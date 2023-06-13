@@ -202,7 +202,6 @@ export default {
       to: LINKS.discourse,
     },
   ],
-
   docSidebar: [
     {
       icon: TransactionsIcon,
