@@ -53,7 +53,7 @@ Don't hesitate to reach out if you have any questions or need further assistance
 
 ## Documentation file structure
 
-The Neon documentation file structure reflects the navigation that you see on the website. However, the order of the directories in the repository, under `/content/docs/` are alphabetical.
+The Neon documentation file structure reflects the navigation that you see on the website. However, the order of the directories in the repository, under `/content/docs/`, are alphabetical.
 
 ```text
 ├── content
@@ -69,9 +69,131 @@ The Neon documentation file structure reflects the navigation that you see on th
        └── tutorial
 ```
 
-## Markdown front matter
+- Every Markdown file in the `/docs` folder becomes a docs page unless it is defined with an `isDraft: true` property in the page frontmatter. 
+- Folder and file names should use kebab-case.
 
-Each Neon documentation Markdown file includes front matter section at the beginning of the file, distinguished by three dashes. For example:
+## Documentation table of contents
+
+This section describes how to modify the documentation left-hand table of contents, also referred to as the "sidebar". Adding, removing, or moving a page to the documentation requires modifying the sidebar. The sidebar is managed in a `yaml` file conveniently named `siderbar.yaml`, which is found in at the root of the `/docs` directory.
+
+## Sidebar
+
+Sidebar data is stored in the [sidebar.yaml](./sidebar.yaml) file.
+
+### How to add a new category
+
+In order to add a new category to the sidebar, add a new item to the top level array with keys `title` and `items`.
+
+For example:
+
+```diff
+ - title: Category 1
+   items:
+     - title: Page 1
+       slug: page-1
++- title: Category 2
++  items:
++    - title: Page 2
++      slug: page-2
+```
+
+### How to add a new subcategory
+
+To add a new subcategory, add a new item to `items` array with keys `title` and `items` under specific category.
+
+For example:
+
+```diff
+ - title: Category 1
+   items:
+     - title: Page 1
+       slug: page-1
+ - title: Category 2
+   items:
+     - title: Page 2
+       slug: page-2
++    - title: Subcategory 1
++      items:
++        - title: Page 3
++          slug: page-3
+```
+
+### How to add a new page
+
+To add a new page to the root level, add `slug` in the same level with `title`.
+
+```diff yaml
+ - title: Root page 1
+   items:
+     - title: Page 1
+       slug: page-1
+ - title: Root page 2
+   items:
+     - title: Page 2
+       slug: page-2
++ - title: Root page 1
++   slug: root-page-1
++   items:
++     - title: Page 1
++       slug: page-1
++ - title: Root page 2
++   slug: root-page-2
++   items:
++     - title: Page 2
++       slug: page-2
+
+```
+
+In order to add new page under a category, add a new item to `items` array with keys `title` and `slug` under specific category or subcategory:
+
+For example:
+
+```diff yaml
+ - title: Category 1
+   items:
+     - title: Page 1
+       slug: page-1
+ - title: Category 2
+   items:
+     - title: Page 2
+       slug: page-2
+    - title: Subcategory 1
+      items:
+        - title: Page 3
+          slug: page-3
++       - title: Page 4
++         slug: page-4
++   - title: Page 5
++     slug: page-5
+```
+
+- `title` in the sidebar may differ from `title` in Markdown file.
+- `slug` should always match page's slug.
+
+### How to add a single page to doc sidebar
+
+To add a single page <https://example.com/changelog> to the docs sidebar, add the `title` with a slug, without an `items` entry.
+
+```diff yaml
++- title: Release notes
++  slug: release-notes
+ - title: Category 1
+   items:
+     - title: Page 1
+       slug: page-1
+ - title: Category 2
+   items:
+     - title: Page 2
+       slug: page-2
+    - title: Subcategory 1
+      items:
+        - title: Page 3
+          slug: page-3
+```
+
+## Markdown frontmatter
+
+Each Neon documentation Markdown file includes frontmatter section at the beginning of the file containing file metadata. The frontmatter section is distinguished by three dashes. For example:
 
 ```yaml
 ---
@@ -104,10 +226,25 @@ redirectFrom:
 ---
 ```
 
+### Heading levels
+
+Page headings the frontmatter. This heading is translated into an h1 element when the page is converted to HTML.
+
+- For each subsequent section, the heading level should be increased. In other words, add an additional # character before the topic title.
+- Try to avoid heading levels beyond H5 (###).
+- Do not skip a level, e.g., do not go from ## to ####.
+- Ensure there's a blank line before and after the topic title.
+
+### Common markup
+
+- Link markup: `[link](/)`
+- Italics markup: `*italic*`
+- Bold markup: `**strong**` - but that doesn't make sense, by default terms appearance is already bold
+- monospace: `baktick`
+
 ## Code blocks
 
-To insert a code block into your Markdown file, specify three backticks (```) on the lines before and after the code.
-Specify the language identifier to enable code highlighting, as in this example:
+To insert a code block into your Markdown file, specify three backticks (```) on the lines before and after the code. Specify the language identifier to enable code highlighting, as in this example:
 
 ````md
 ```sql
@@ -135,6 +272,60 @@ DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon
 
 </CodeBlock>
 ````
+
+## Code Tabs
+
+To display code tabs, enclose all pieces of code withing `<CodeTabs></CodeTabs>`, and specify  code tabs labels in order, as shown in the following example:
+
+````md
+<CodeTabs labels={["Shell", "C++", "C#", "Java"]}>
+
+```bash
+#!/bin/bash
+STR="Hello World!"
+echo $STR
+```
+
+```c++
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World";
+    return 0;
+}
+```
+
+```csharp
+namespace HelloWorld
+{
+    class Hello {
+        static void Main(string[] args)
+        {
+            System.Console.WriteLine("Hello World");
+        }
+    }
+}
+```
+
+```java
+import java.io.*;
+
+class GFG {
+    public static void main (String[] args) {
+       System.out.println("Hello World");
+    }
+}
+```
+
+</CodeTabs>
+````
+
+<details>
+<summary>Examples</summary>
+
+![Code tabs example](code-tabs-example.jpg)
+
+</details>
 
 ## Admonitions
 
@@ -166,3 +357,68 @@ You may also specify an optional title with the `title` property.
 ![Admonition example](admonition-example.jpg)
 
 </details>
+
+## Diagrams and images
+
+Diagrams are a great tool for clarifying complex ideas. Neon uses Figma for the creation of diagrams.
+
+If you're interested in updating or adding a diagram, please open a GitHub issue with your suggestions. Please include a draft, if possible. A tool like [tldraw](https://www.tldraw.com/) can be used to create a draft.
+
+Diagrams and images reside in the `public/docs` directory in the Neon website repository. You can add a diagram or image to an `.md` file by specifying a relative path beginning with a slash `/`.
+
+Example file structure:
+
+```md
+├── public
+│ ├── docs
+│   ├── introduction
+│     ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
+├── content
+│ ├── docs
+│   ├── introduction
+│     ├── architecture-overview.md
+```
+
+For example, to add an image to a file, add an entry that looks like this:
+
+```md
+![Neon architecture diagram](/docs/introduction/neon_architecture_3.png)
+```
+
+## Style Guide
+
+This section outlines the stylistic elements that we try to adhere to in the Neon documentation.
+
+### Language
+
+The language used in Neon's documentation should be clear and easily understood.
+
+- Avoid unnecessary verbiage.
+- Ensure clarity and brevity, staying focused on the topic's objective.
+- Use US English and adhere to US grammar rules.
+
+We do not use emojis or exclamation marks in the Neon documentation.
+
+### Link instead of repeating text
+
+We strive to avoid repeating information from other topics. Instead, we link to the original source of information and explain why it is important.
+
+### Capitalization
+
+The general rule is that we use lowercase wherever possible.
+
+For topic titles, we use sentence-style capitalization. For example: "Create your first project"
+
+Generally, product names should align with the official names of the products, protocols, etc., maintaining exact capitalization.
+
+### Commands, parameters, values, filenames
+
+Commands, parameters, values, filenames, and error messages should be enclosed in backticks. For example:
+
+"Execute 'git clone' to clone a Git repository..."
+
+'git clone' is a command, which needs to be in lowercase, whereas Git is the product and should have a capital G.
+
+## Questions?
+
+If you have questions or run into any issues, please reach out to us on the [Neon Community forum](https://community.neon.tech/).
