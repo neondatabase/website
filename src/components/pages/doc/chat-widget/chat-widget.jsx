@@ -236,10 +236,17 @@ const ChatWidget = () => {
                   onKeyDown={handleInputKeyDown}
                   onChange={handleInputChange}
                 />
+                <div className="mt-2.5 flex flex-col space-y-1 text-center text-xs font-light leading-dense">
+                  <span>Neon Docs AI has a cap of 1 message every 5 seconds.</span>
+                  <span>
+                    Neon Docs AI may produce inaccurate information. Evaluate answers carefully
+                    before implementing.
+                  </span>
+                </div>
                 {!isLoading &&
                   (!shouldTryAgain ? (
                     <button
-                      className="absolute bottom-[30px] right-[30px] h-5 w-5 opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
+                      className="absolute top-[11px] right-[30px] h-5 w-5 opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
                       type="submit"
                     >
                       <SendIcon className="text-gray-new-20 dark:text-gray-new-90" />
