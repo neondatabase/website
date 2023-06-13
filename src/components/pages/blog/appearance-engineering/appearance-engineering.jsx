@@ -48,7 +48,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
                 )}
 
                 <div>
-                  <h3 className="text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 line-clamp-2 group-hover:text-green-45 lg:text-base">
+                  <h3 className="line-clamp-2 text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-green-45 lg:text-base">
                     {title}
                   </h3>
                   <div className="mt-2 flex items-center">

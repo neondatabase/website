@@ -36,7 +36,7 @@ If you have multiple databases to import, each database must be imported separat
 The example below uses the following command, which you can run from a terminal or command window where you have access to the `pg_dump` and `psql` utilities. The first connection string is for your existing PostgreSQL database. The second is for your Neon database.
 
 ```bash
-pg_dump <connection-string> | psql <connection-string>
+pg_dump <old-connection-string> | psql <neon-connection-string>
 ```
 
 A PostgreSQL connection string has the following format:

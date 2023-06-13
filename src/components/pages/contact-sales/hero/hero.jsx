@@ -30,7 +30,7 @@ const Hero = () => {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section className="relative grow overflow-hidden bg-black pt-44 pb-40 text-white 2xl:pt-[136px] 2xl:pb-36 lg:pt-9 lg:pb-28 md:pb-24">
+      <section className="relative grow overflow-hidden bg-black pb-40 pt-44 text-white 2xl:pb-36 2xl:pt-[136px] lg:pb-28 lg:pt-9 md:pb-24">
         <AnimatePresence>
           <m.div
             className="mx-auto min-h-[653px] max-w-[1216px] text-center xl:max-w-[936px] lg:max-w-none lg:px-8 md:min-h-[500px] md:px-4"
@@ -52,7 +52,7 @@ const Hero = () => {
               <div
                 className={clsx(
                   'relative w-full max-w-[696px] shrink-0 rounded-[20px] shadow-[0_0_70px_30px_rgb(0_230_153/30%)] 2xl:max-w-[535px] lg:max-w-none sm:shadow-none',
-                  'after:pointer-events-none after:absolute after:-inset-40 after:rounded-[22px] after:opacity-10 after:[filter:url("#noiseFilter")] after:[-webkit-mask-size:100%_100%] after:[-webkit-mask-repeat:no-repeat] after:[-webkit-mask-position:center_center] after:[mask-image:url("/images/mask-lg.svg")] xl:after:hidden'
+                  'after:pointer-events-none after:absolute after:-inset-40 after:rounded-[22px] after:opacity-10 after:[-webkit-mask-position:center_center] after:[-webkit-mask-repeat:no-repeat] after:[-webkit-mask-size:100%_100%] after:[filter:url("#noiseFilter")] after:[mask-image:url("/images/mask-lg.svg")] xl:after:hidden'
                 )}
               >
                 <ContactForm formState={formState} setFormState={setFormState} />
@@ -60,11 +60,11 @@ const Hero = () => {
               <div
                 className={clsx(
                   'relative my-9 flex-1 rounded-[20px] font-mono text-black shadow-[0_0_70px_30px_rgb(240_240_117/30%)] lg:my-0 sm:shadow-none',
-                  'after:pointer-events-none after:absolute after:-inset-40 after:rounded-[22px] after:opacity-10 after:[filter:url("#noiseFilter")] after:[-webkit-mask-size:100%_100%] after:[-webkit-mask-repeat:no-repeat] after:[-webkit-mask-position:center_center] after:[mask-image:url("/images/mask-md.svg")] xl:after:hidden'
+                  'after:pointer-events-none after:absolute after:-inset-40 after:rounded-[22px] after:opacity-10 after:[-webkit-mask-position:center_center] after:[-webkit-mask-repeat:no-repeat] after:[-webkit-mask-size:100%_100%] after:[filter:url("#noiseFilter")] after:[mask-image:url("/images/mask-md.svg")] xl:after:hidden'
                 )}
               >
                 <div className="relative z-10 flex h-full w-full flex-col overflow-hidden rounded-r-[20px] bg-secondary-2 pt-10 lg:flex-row lg:rounded-[20px] lg:pt-0 md:flex-col md:items-center">
-                  <div className="px-11 lg:order-1 lg:self-center lg:pl-[18px] lg:pr-8 lg:text-left md:order-none md:px-8 md:pr-4 md:pl-4 md:pt-5 md:text-center">
+                  <div className="px-11 lg:order-1 lg:self-center lg:pl-[18px] lg:pr-8 lg:text-left md:order-none md:px-8 md:pl-4 md:pr-4 md:pt-5 md:text-center">
                     <h2
                       className="text-[56px] font-bold leading-none 2xl:text-5xl lg:text-[36px]"
                       style={{

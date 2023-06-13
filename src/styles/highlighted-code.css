@@ -13,17 +13,6 @@
       @apply text-black dark:text-white;
     }
 
-    .token.builtin,
-    .token.function,
-    .token.string,
-    .token.char,
-    .token.selector,
-    .token.tag.attr-value,
-    .token.atrule,
-    .token.inserted {
-      @apply text-code-green-1 dark:text-code-green-2;
-    }
-
     .token.boolean,
     .token.number,
     .token.symbol,
@@ -35,6 +24,21 @@
       @apply text-code-red-1 dark:text-code-red-2;
     }
 
+    .token.builtin,
+    .token.function,
+    .token.string,
+    .token.char,
+    .token.selector,
+    .token.tag.attr-value,
+    .token.atrule,
+    .token.inserted {
+      @apply text-code-green-1 dark:text-code-green-2;
+    }
+
+    .token.punctuation {
+      @apply !text-code-gray-2;
+    }
+
     .token.regex,
     .token.important {
       @apply text-code-orange-1 dark:text-code-orange-2;
@@ -43,10 +47,6 @@
     .token.operator,
     .token.entity {
       @apply text-code-brown-1 dark:text-code-brown-2;
-    }
-
-    .token.punctuation {
-      @apply text-code-gray-2;
     }
 
     .token.comment,

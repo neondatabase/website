@@ -6,12 +6,16 @@ import Hero from 'components/pages/developer-days/hero';
 import Partners from 'components/pages/developer-days/partners';
 // import Register from 'components/pages/developer-days/register';
 import Layout from 'components/shared/layout';
+import SEO_DATA from 'constants/seo-data';
+import getMetadata from 'utils/get-metadata';
+
+export const metadata = getMetadata(SEO_DATA.developerDays1);
 
 const DeveloperDays1Page = () => (
   <Layout headerTheme="black" footerTheme="black" footerWithTopBorder>
     <div className="relative overflow-hidden bg-black text-white">
       <Image
-        className="absolute top-0 left-1/2 h-auto w-[1440px] -translate-x-1/2 xl:hidden"
+        className="absolute left-1/2 top-0 h-auto w-[1440px] -translate-x-1/2 xl:hidden"
         src="/images/pages/developer-days/background.svg"
         width={1440}
         height={4815}
@@ -19,7 +23,7 @@ const DeveloperDays1Page = () => (
         aria-hidden
       />
       <Image
-        className="absolute top-0 left-1/2 hidden h-auto w-full -translate-x-1/2 px-[70px] xl:block lg:hidden"
+        className="absolute left-1/2 top-0 hidden h-auto w-full -translate-x-1/2 px-[70px] xl:block lg:hidden"
         src="/images/pages/developer-days/background-xl.svg"
         width={884}
         height={3780}
@@ -27,7 +31,7 @@ const DeveloperDays1Page = () => (
         aria-hidden
       />
       <Image
-        className="absolute top-0 left-1/2 hidden h-auto w-full -translate-x-1/2 px-11 lg:block xs:hidden"
+        className="absolute left-1/2 top-0 hidden h-auto w-full -translate-x-1/2 px-11 lg:block xs:hidden"
         src="/images/pages/developer-days/background-lg.svg"
         width={680}
         height={3196}
@@ -35,7 +39,7 @@ const DeveloperDays1Page = () => (
         aria-hidden
       />
       <Image
-        className="absolute top-0 left-1/2 hidden h-auto w-full -translate-x-1/2 px-9 xs:block"
+        className="absolute left-1/2 top-0 hidden h-auto w-full -translate-x-1/2 px-9 xs:block"
         src="/images/pages/developer-days/background-md.svg"
         width={340}
         height={3330}

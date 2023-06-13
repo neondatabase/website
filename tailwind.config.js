@@ -52,6 +52,7 @@ module.exports = {
       },
       'gray-new': {
         8: '#131415',
+        10: '#18191B',
         15: '#242628',
         20: '#303236',
         30: '#494B50',
@@ -187,6 +188,8 @@ module.exports = {
   plugins: [
     require('tailwindcss-safe-area'),
     require('@tailwindcss/typography'),
-    require('@tailwindcss/line-clamp'),
+    require('tailwindcss/plugin')(({ addVariant }) => {
+      addVariant('search-cancel', '&::-webkit-search-cancel-button');
+    }),
   ],
 };

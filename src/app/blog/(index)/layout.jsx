@@ -12,7 +12,6 @@ const BlogPageLayout = ({ children }) => (
     headerWithBottomBorder
     footerWithTopBorder
   >
-    <h1 className="sr-only">Blog</h1>
     <div className="bg-gray-new-8 pt-32 xl:pt-[108px] lt:pt-[68px] lg:pt-0">
       <Container className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lt:gap-x-4" size="lg">
         <Sidebar />

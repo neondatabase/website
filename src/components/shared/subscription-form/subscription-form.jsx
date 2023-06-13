@@ -1,22 +1,18 @@
-"use client";
+'use client';
 
-import clsx from "clsx";
-import { motion, AnimatePresence } from "framer-motion";
-import PropTypes from "prop-types";
-import { useState } from "react";
-import useCookie from "react-use/lib/useCookie";
-import useLocation from "react-use/lib/useLocation";
+import clsx from 'clsx';
+import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
+import useCookie from 'react-use/lib/useCookie';
+import useLocation from 'react-use/lib/useLocation';
 
-import Button from "components/shared/button";
-import useLocalStorage from "hooks/use-local-storage";
-import CheckIcon from "icons/subscription-form-check.inline.svg";
-import ErrorIcon from "icons/subscription-form-error.inline.svg";
-import SendIcon from "icons/subscription-form-send.inline.svg";
-import {
-  doNowOrAfterSomeTime,
-  emailRegexp,
-  sendHubspotFormData,
-} from "utils/forms";
+import Button from 'components/shared/button';
+import useLocalStorage from 'hooks/use-local-storage';
+import CheckIcon from 'icons/subscription-form-check.inline.svg';
+import ErrorIcon from 'icons/subscription-form-error.inline.svg';
+import SendIcon from 'icons/subscription-form-send.inline.svg';
+import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
 
 const appearAndExitAnimationVariants = {
   initial: { opacity: 0 },
@@ -25,43 +21,39 @@ const appearAndExitAnimationVariants = {
 };
 const sizeClassNames = {
   sm: {
-    form: "before:-bottom-2 before:-left-2",
-    input: "max-w-[552px] h-[72px] text-lg pl-5 border-[3px]",
-    button: "!text-lg !px-8 !py-[19px] right-2 md:!p-0",
-    loading: "right-2",
-    success: "right-2",
-    stateIcon: "w-14 h-14",
+    form: 'before:-bottom-2 before:-left-2',
+    input: 'max-w-[552px] h-[72px] text-lg pl-5 border-[3px]',
+    button: '!text-lg !px-8 !py-[19px] right-2 md:!p-0',
+    loading: 'right-2',
+    success: 'right-2',
+    stateIcon: 'w-14 h-14',
   },
   md: {
-    form: "before:-bottom-3.5 before:-left-3.5 2xl:before:-bottom-2.5 2xl:before:-left-2.5",
+    form: 'before:-bottom-3.5 before:-left-3.5 2xl:before:-bottom-2.5 2xl:before:-left-2.5',
     input:
-      "h-24 max-w-[696px] 3xl:max-w-[585px] 2xl:h-20 2xl:pr-[187px] xl:h-[72px] xl:pr-[164px] t-2xl pl-7 border-4",
-    button: "right-3 2xl:right-2.5 xl:right-2",
+      'h-24 max-w-[696px] 3xl:max-w-[585px] 2xl:h-20 2xl:pr-[187px] xl:h-[72px] xl:pr-[164px] t-2xl pl-7 border-4',
+    button: 'right-3 2xl:right-2.5 xl:right-2',
     loading:
-      "right-3 h-[72px] w-[72px] 2xl:right-2.5 2xl:h-[60px] 2xl:w-[60px] xl:right-2 xl:h-[56px] xl:w-[56px]",
-    success: "right-3 2xl:right-2.5 xl:right-2",
-    stateIcon: "2xl:w-[60px] xl:w-[56px]",
+      'right-3 h-[72px] w-[72px] 2xl:right-2.5 2xl:h-[60px] 2xl:w-[60px] xl:right-2 xl:h-[56px] xl:w-[56px]',
+    success: 'right-3 2xl:right-2.5 xl:right-2',
+    stateIcon: '2xl:w-[60px] xl:w-[56px]',
   },
 };
 const SubscriptionForm = ({
   className = null,
   formId,
-  successText = "Thank you for subscribing!",
-  submitButtonText = "Subscribe",
-  size = "md",
+  successText = 'Thank you for subscribing!',
+  submitButtonText = 'Subscribe',
+  size = 'md',
   localStorageKey,
 }) => {
-  const [email, setEmail] = useState("");
-  const [formState, setFormState] = useState("default");
-  const [submittedEmail, setSubmittedEmail] = useLocalStorage(
-    localStorageKey,
-    []
-  );
-  const [errorMessage, setErrorMessage] = useState("");
-  const [hubspotutk] = useCookie("hubspotutk");
+  const [email, setEmail] = useState('');
+  const [formState, setFormState] = useState('default');
+  const [submittedEmail, setSubmittedEmail] = useLocalStorage(localStorageKey, []);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
-  const handleInputChange = (event) =>
-    setEmail(event.currentTarget.value.trim());
+  const handleInputChange = (event) => setEmail(event.currentTarget.value.trim());
 
   const context = {
     hutk: hubspotutk,
@@ -72,15 +64,15 @@ const SubscriptionForm = ({
     event.preventDefault();
 
     if (!email) {
-      setErrorMessage("Please enter your email");
+      setErrorMessage('Please enter your email');
     } else if (!emailRegexp.test(email)) {
-      setErrorMessage("Please enter a valid email");
+      setErrorMessage('Please enter a valid email');
     } else if (submittedEmail.includes(email)) {
-      setErrorMessage("You have already submitted this email");
+      setErrorMessage('You have already submitted this email');
     } else {
       setSubmittedEmail([...submittedEmail, email]);
-      setErrorMessage("");
-      setFormState("loading");
+      setErrorMessage('');
+      setFormState('loading');
 
       const loadingAnimationStartedTime = Date.now();
 
@@ -89,7 +81,7 @@ const SubscriptionForm = ({
         context,
         values: [
           {
-            name: "email",
+            name: 'email',
             value: email,
           },
         ],
@@ -97,29 +89,25 @@ const SubscriptionForm = ({
         .then((response) => {
           if (response.ok) {
             doNowOrAfterSomeTime(() => {
-              setFormState("success");
+              setFormState('success');
               setEmail(successText);
 
               setTimeout(() => {
-                setFormState("default");
-                setEmail("");
+                setFormState('default');
+                setEmail('');
               }, 2000);
             }, loadingAnimationStartedTime);
           } else {
             doNowOrAfterSomeTime(() => {
-              setFormState("error");
-              setErrorMessage(
-                "Something went wrong. Please reload the page and try again"
-              );
+              setFormState('error');
+              setErrorMessage('Something went wrong. Please reload the page and try again');
             }, loadingAnimationStartedTime);
           }
         })
         .catch(() => {
           doNowOrAfterSomeTime(() => {
-            setFormState("error");
-            setErrorMessage(
-              "Something went wrong. Please reload the page and try again"
-            );
+            setFormState('error');
+            setErrorMessage('Something went wrong. Please reload the page and try again');
           }, loadingAnimationStartedTime);
         });
     }
@@ -128,7 +116,7 @@ const SubscriptionForm = ({
   return (
     <form
       className={clsx(
-        "relative ml-[14px] before:absolute before:h-full before:w-full before:rounded-full before:bg-secondary-2 2xl:ml-2.5 xl:ml-2 xl:before:-bottom-2 xl:before:-left-2 lg:mx-auto lg:max-w-[584px] md:before:w-[calc(100%+8px)]",
+        'relative ml-[14px] before:absolute before:h-full before:w-full before:rounded-full before:bg-secondary-2 2xl:ml-2.5 xl:ml-2 xl:before:-bottom-2 xl:before:-left-2 lg:mx-auto lg:max-w-[584px] md:before:w-[calc(100%+8px)]',
         className,
         sizeClassNames[size].form
       )}
@@ -138,8 +126,8 @@ const SubscriptionForm = ({
       {/* Input */}
       <input
         className={clsx(
-          "remove-autocomplete-styles relative block w-full rounded-full border-black bg-white pr-[218px] font-semibold leading-none text-black placeholder-black outline-none transition-colors duration-200 lg:w-full lg:pl-5 md:pr-20",
-          errorMessage && "border-secondary-1",
+          'remove-autocomplete-styles relative block w-full rounded-full border-black bg-white pr-[218px] font-semibold leading-none text-black placeholder-black outline-none transition-colors duration-200 lg:w-full lg:pl-5 md:pr-20',
+          errorMessage && 'border-secondary-1',
           sizeClassNames[size].input
         )}
         name="email"
@@ -147,7 +135,7 @@ const SubscriptionForm = ({
         placeholder="Your email..."
         autoComplete="email"
         value={email}
-        readOnly={formState !== "default"}
+        readOnly={formState !== 'default'}
         onChange={handleInputChange}
       />
 
@@ -168,7 +156,7 @@ const SubscriptionForm = ({
 
       {/* Button */}
       <AnimatePresence>
-        {formState === "default" && (
+        {formState === 'default' && (
           <motion.div
             initial="initial"
             animate="animate"
@@ -177,13 +165,13 @@ const SubscriptionForm = ({
           >
             <Button
               className={clsx(
-                "absolute top-1/2 -translate-y-1/2 md:h-14 md:w-14 md:rounded-full md:p-0",
+                'absolute top-1/2 -translate-y-1/2 md:h-14 md:w-14 md:rounded-full md:p-0',
                 sizeClassNames[size].button
               )}
               size="sm"
               type="submit"
               theme="primary"
-              disabled={formState !== "default"}
+              disabled={formState !== 'default'}
             >
               <span className="md:sr-only">{submitButtonText}</span>
               <SendIcon className="hidden md:ml-1.5 md:block" aria-hidden />
@@ -194,10 +182,10 @@ const SubscriptionForm = ({
 
       {/* Loading state */}
       <AnimatePresence>
-        {formState === "loading" && (
+        {formState === 'loading' && (
           <motion.div
             className={clsx(
-              "absolute top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-black",
+              'absolute top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-black',
               sizeClassNames[size].loading
             )}
             initial="initial"
@@ -215,7 +203,7 @@ const SubscriptionForm = ({
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               style={{
-                transform: "scale(1, -1) rotate(-90deg) translate(-50%, -50%)",
+                transform: 'scale(1, -1) rotate(-90deg) translate(-50%, -50%)',
               }}
             >
               <motion.path
@@ -236,22 +224,19 @@ const SubscriptionForm = ({
 
       {/* Success state */}
       <AnimatePresence>
-        {(formState === "success" || formState === "error") && (
+        {(formState === 'success' || formState === 'error') && (
           <motion.div
-            className={clsx(
-              "absolute top-1/2 -translate-y-1/2",
-              sizeClassNames[size].success
-            )}
+            className={clsx('absolute top-1/2 -translate-y-1/2', sizeClassNames[size].success)}
             initial="initial"
             animate="animate"
             exit="exit"
             variants={appearAndExitAnimationVariants}
             aria-hidden
           >
-            {formState === "success" && (
+            {formState === 'success' && (
               <CheckIcon className={clsx(sizeClassNames[size].stateIcon)} />
             )}
-            {formState === "error" && (
+            {formState === 'error' && (
               <ErrorIcon className={clsx(sizeClassNames[size].stateIcon)} />
             )}
           </motion.div>
@@ -266,7 +251,7 @@ SubscriptionForm.propTypes = {
   formId: PropTypes.string.isRequired,
   successText: PropTypes.string,
   submitButtonText: PropTypes.string,
-  size: PropTypes.oneOf(["sm", "md"]),
+  size: PropTypes.oneOf(['sm', 'md']),
   localStorageKey: PropTypes.string.isRequired,
 };
 

@@ -19,11 +19,11 @@ const PreviousAndNextLinks = ({ previousLink = null, nextLink = null }) => (
     {previousLink && (
       <Link
         to={getUrl(previousLink.slug)}
-        className="group mr-auto flex w-1/2 items-center justify-between rounded border border-gray-7 p-4 dark:border-gray-2 sm:hidden"
+        className="group mr-auto flex w-1/2 items-center justify-between rounded border border-gray-new-90 p-4 dark:border-gray-new-20 sm:hidden"
       >
-        <ArrowIcon className="shrink-0 rotate-180 text-gray-5 transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1" />
+        <ArrowIcon className="shrink-0 rotate-180 text-gray-new-70 transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1" />
         <div className="flex flex-col items-end">
-          <span className="text-sm font-normal text-gray-3 dark:text-gray-7">Previous</span>
+          <span className="text-sm font-normal text-gray-new-40 dark:text-gray-7">Previous</span>
           <span className="text-right font-semibold transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1">
             {previousLink.title}
           </span>
@@ -33,15 +33,15 @@ const PreviousAndNextLinks = ({ previousLink = null, nextLink = null }) => (
     {nextLink && (
       <Link
         to={getUrl(nextLink.slug)}
-        className="group ml-auto flex w-1/2 items-center justify-between rounded border border-gray-7 p-4 text-right dark:border-gray-2 sm:w-full sm:space-x-3"
+        className="group ml-auto flex w-1/2 items-center justify-between rounded border border-gray-new-90 p-4 text-right dark:border-gray-new-20 sm:w-full sm:space-x-3"
       >
         <div className="flex flex-col items-start">
-          <span className="text-sm font-normal text-gray-3 dark:text-gray-7">Next</span>
+          <span className="text-sm font-normal text-gray-new-40 dark:text-gray-7">Next</span>
           <span className="text-left font-semibold transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1">
             {nextLink.title}
           </span>
         </div>
-        <ArrowIcon className="shrink-0 text-gray-5 transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1 sm:block" />
+        <ArrowIcon className="shrink-0 text-gray-new-70 transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1 sm:block" />
       </Link>
     )}
   </div>

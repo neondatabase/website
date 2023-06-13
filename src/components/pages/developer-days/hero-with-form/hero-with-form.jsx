@@ -9,7 +9,7 @@ import backgroundLines from './images/bg-lines.svg';
 import Line from './images/white-line.inline.svg';
 
 const HeroWithForm = () => (
-  <div className="relative flex h-[calc(100vh-44px)] max-h-[1080px] min-h-[765px] flex-col overflow-hidden bg-black pt-[214px] pb-20 text-white lg:min-h-0 lg:pt-[20%] sm:h-auto sm:grow sm:pt-16">
+  <div className="relative flex h-[calc(100vh-44px)] max-h-[1080px] min-h-[765px] flex-col overflow-hidden bg-black pb-20 pt-[214px] text-white lg:min-h-0 lg:pt-[20%] sm:h-auto sm:grow sm:pt-16">
     <Container className="relative h-full w-full" size="md">
       <img
         className="absolute -top-10 left-1/2 max-w-[1240px] -translate-x-1/2"
@@ -37,7 +37,7 @@ const HeroWithForm = () => (
           Register for event updates.
         </p>
         <div className="relative">
-          <Line className="absolute top-[calc(100%-30px)] right-16 2xl:top-[calc(100%-10px)] lg:hidden" />
+          <Line className="absolute right-16 top-[calc(100%-30px)] 2xl:top-[calc(100%-10px)] lg:hidden" />
           <SubscriptionForm
             className="mt-8"
             successText="Thanks for registering!"

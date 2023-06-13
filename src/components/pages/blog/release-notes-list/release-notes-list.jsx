@@ -39,8 +39,8 @@ const ReleaseNotesList = ({ items }) => (
               alt=""
               aria-hidden
             />
-            <Link className="group/link flex flex-col" to={`${LINKS.releaseNotes}${slug}`}>
-              <span className="text-xs font-medium uppercase leading-none tracking-wider text-blue-80 line-clamp-1">
+            <Link className="group/link flex flex-col" to={`${LINKS.releaseNotes}/${slug}`}>
+              <span className="line-clamp-1 text-xs font-medium uppercase leading-none tracking-wider text-blue-80">
                 {category}
               </span>
               <div className="relative mt-4 after:absolute after:left-0 after:top-1/2 after:h-px after:w-[calc(100%+50px)] after:-translate-y-1/2 after:bg-blue-80 group-last:after:w-full xl:last:hidden xl:group-[:nth-last-child(2)]:after:w-full lg:group-[:nth-last-child(3)]:after:w-full md:mt-0 md:hidden md:after:hidden">
@@ -54,7 +54,7 @@ const ReleaseNotesList = ({ items }) => (
                   aria-hidden
                 />
               </div>
-              <h3 className="mt-4 max-w-[260px] text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 line-clamp-4 group-hover/link:text-green-45 xl:line-clamp-3 md:mt-1.5 md:max-w-none md:text-base md:line-clamp-2">
+              <h3 className="mt-4 line-clamp-4 max-w-[260px] text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover/link:text-green-45 xl:line-clamp-3 md:mt-1.5 md:line-clamp-2 md:max-w-none md:text-base">
                 {title}
               </h3>
               <time
