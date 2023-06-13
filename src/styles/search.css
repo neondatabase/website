@@ -1,5 +1,5 @@
 .DocSearch-Button {
-  @apply flex max-w-full shrink-0 grow basis-[230px] items-center overflow-x-auto rounded border border-gray-new-90 bg-white bg-[url('/images/search-light.svg')] bg-[left_0.625rem_center] bg-no-repeat p-[9px] pl-9 text-left leading-none text-gray-new-70 outline-none transition-colors duration-200 hover:cursor-pointer hover:border-gray-new-70 hover:shadow-none dark:border-gray-new-30 dark:bg-black-new dark:bg-[url('/images/search-dark.svg')] dark:text-gray-new-50 dark:hover:border-gray-new-50 md:m-0;
+  @apply flex max-w-full shrink-0 grow basis-[230px] items-center overflow-x-auto rounded border border-gray-new-90 bg-white bg-[url('/images/search-light.svg')] bg-[left_0.625rem_center] bg-no-repeat p-[7px] pl-9 text-left leading-none text-gray-new-70 outline-none transition-colors duration-200 hover:cursor-pointer hover:border-gray-new-70 hover:shadow-none dark:border-gray-new-30 dark:bg-black-new dark:bg-[url('/images/search-dark.svg')] dark:text-gray-new-50 dark:hover:border-gray-new-50 md:m-0;
   @apply lg:items-start lg:border-none lg:bg-[top] lg:p-0;
 
   .DocSearch-Search-Icon {
@@ -11,22 +11,24 @@
   }
 
   .DocSearch-Button-Keys {
-    @apply ml-auto flex h-5 gap-x-1 rounded-sm border border-gray-new-80 bg-gray-new-98 px-1.5 py-1 text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-10 dark:text-gray-new-80 lg:h-5 lg:w-10;
+    @apply ml-auto flex h-5 min-w-[33px] items-center justify-center gap-x-1 rounded-sm border border-gray-new-80 bg-gray-new-98 py-1 text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-10 dark:text-gray-new-80 lg:h-5 lg:w-10 lg:border-none lg:bg-transparent;
 
     .DocSearch-Button-Key {
-      @apply relative top-0 m-0 flex items-center justify-center text-[10px] shadow-none first:text-[13px] lg:hidden;
+      @apply relative top-0 m-0 flex items-center justify-center text-[10px] font-medium leading-none shadow-none first:text-[13px] first:font-semibold lg:hidden;
+
+      svg {
+        @apply h-3.5 text-gray-new-30 dark:text-gray-new-80;
+      }
     }
   }
 }
 
 .DocSearch-Container {
-  @apply fixed top-0 left-0 z-[200] h-screen w-screen min-w-[320px] bg-[rgba(12,13,13,0.2)] dark:bg-[rgba(12,13,13,0.8)];
+  @apply fixed top-0 left-0 z-[200] h-screen w-screen min-w-[320px] bg-[rgba(12,13,13,0.2)] dark:bg-[rgba(12,13,13,0.8)] lg:p-4;
 
   .DocSearch-Modal {
-    @apply relative flex-col rounded-[10px] border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-8;
+    @apply relative mx-auto mt-40 mb-auto max-w-[564px] flex-col rounded-[10px] border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-8;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
-    margin: 60px auto auto;
-    max-width: 564px;
   }
 
   .DocSearch-SearchBar {
@@ -34,10 +36,10 @@
   }
 
   .DocSearch-Footer {
-    @apply relative z-[300] flex h-11 w-full shrink-0 select-none flex-row-reverse items-center justify-between rounded-b-lg border-t border-gray-new-90 bg-none py-0 px-3 shadow-none dark:border-gray-new-20;
+    @apply relative z-[300] flex h-11 w-full shrink-0 select-none flex-row-reverse items-center justify-between rounded-b-lg border-t border-gray-new-90 bg-none py-0 px-5 shadow-none dark:border-gray-new-20 md:px-4;
 
     .DocSearch-Commands {
-      @apply flex items-center space-x-3;
+      @apply flex items-center space-x-3 lg:hidden;
 
       li {
         @apply flex items-center;
@@ -58,7 +60,7 @@
   }
 
   .DocSearch-Form {
-    @apply relative m-0 flex h-10 w-full items-center rounded py-0 pl-3 pr-2 shadow-none;
+    @apply relative m-0 flex h-10 w-full items-center rounded py-0 pl-3 pr-2 shadow-none md:pl-2 md:pr-1;
   }
 
   .DocSearch-MagnifierLabel {
@@ -172,7 +174,7 @@
   }
 
   .DocSearch-Hits {
-    @apply p-5;
+    @apply p-5 md:px-4;
 
     .DocSearch-Hit-source {
       @apply text-sm font-semibold leading-none text-gray-new-30 dark:text-gray-new-90;
