@@ -49,12 +49,6 @@ const animationVariants = {
   },
 };
 
-const handleKeyDown = (cb) => (e) => {
-  if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
-    cb(true);
-  }
-};
-
 const ChatWidget = () => {
   // context
   const { isOpen, setIsOpen } = useContext(ChatContext);
@@ -138,14 +132,6 @@ const ChatWidget = () => {
   const stopGeneratingAnswers = () => {
     resetAbortController();
   };
-
-  // effects
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown(setIsOpen));
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown(setIsOpen));
-    };
-  }, [setIsOpen]);
 
   useEffect(() => {
     // make sure chat is always scrolled to the bottom
