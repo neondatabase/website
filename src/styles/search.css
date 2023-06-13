@@ -199,7 +199,23 @@
 
       &.DocSearch-Hit--Child {
         .DocSearch-Hit--Result {
-          @apply ml-5;
+          @apply relative ml-5;
+
+          &::before {
+            @apply absolute top-1/2 -left-3.5 h-[calc(100%+25px)] w-px -translate-y-1/2 bg-gray-new-94 content-[''] dark:bg-gray-new-20;
+          }
+
+          &.DocSearch-Hit--FirstChild {
+            &::before {
+              @apply top-0 h-full translate-y-0;
+            }
+          }
+
+          &.DocSearch-Hit--LastChild {
+            &::before {
+              @apply bottom-0 top-auto h-full translate-y-0;
+            }
+          }
         }
       }
 
@@ -258,7 +274,7 @@
         }
 
         .DocSearch-Hit-path {
-          @apply text-xs leading-none text-black-new;
+          @apply text-xs leading-none text-black-new dark:text-white;
 
           mark {
             @apply bg-transparent text-secondary-8 dark:text-green-45;
