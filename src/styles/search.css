@@ -11,14 +11,10 @@
   }
 
   .DocSearch-Button-Keys {
-    @apply ml-auto flex gap-x-3.5 lg:h-5 lg:w-10;
+    @apply ml-auto flex h-5 gap-x-1 rounded-sm border border-gray-new-80 bg-gray-new-98 px-1.5 py-1 text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-10 dark:text-gray-new-80 lg:h-5 lg:w-10;
 
     .DocSearch-Button-Key {
-      @apply relative top-0 m-0 flex h-4 w-4 items-center justify-center rounded-sm border border-gray-new-70 text-xs text-gray-new-70 shadow-none dark:border-gray-new-50 dark:text-gray-new-50 lg:hidden;
-
-      &:not(:last-child)::after {
-        @apply absolute top-1/2 left-[calc(100%+4px)] -translate-y-1/2 content-['+'] md:hidden;
-      }
+      @apply relative top-0 m-0 flex items-center justify-center text-[10px] shadow-none first:text-[13px] lg:hidden;
     }
   }
 }
