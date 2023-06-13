@@ -96,7 +96,7 @@ const Hero = () => {
           </Button>
         </div>
         <div
-          className="!absolute top-[-165px] -right-1 w-[820px] 3xl:top-[-122px] 3xl:right-[-17px] 3xl:w-[677px] 2xl:top-[-102px] 2xl:right-[-14px] 2xl:w-[564px] xl:top-[-88px] xl:right-[-132px] xl:w-[492px] lg:!relative lg:top-0 lg:right-0 lg:-mr-2.5 lg:mt-10 lg:w-[451px] sm:mt-8 sm:w-[391px] xs:w-[294px]"
+          className="!absolute -right-1 top-[-165px] w-[820px] 3xl:right-[-17px] 3xl:top-[-122px] 3xl:w-[677px] 2xl:right-[-14px] 2xl:top-[-102px] 2xl:w-[564px] xl:right-[-132px] xl:top-[-88px] xl:w-[492px] lg:!relative lg:right-0 lg:top-0 lg:-mr-2.5 lg:mt-10 lg:w-[451px] sm:mt-8 sm:w-[391px] xs:w-[294px]"
           ref={animationVisibilityRef}
           aria-hidden
         >
@@ -106,45 +106,45 @@ const Hero = () => {
             aria-hidden
           />
 
-          <div className="absolute top-0 right-0 z-10 w-full" ref={animationRef} />
-          <div className="absolute top-1/2 left-1/2 h-[888px] w-[888px] translate-x-[-51%] translate-y-[-51.6%] rounded-full border-2 border-gray-1 3xl:h-[716px] 3xl:w-[716px] 2xl:h-[600px] 2xl:w-[600px] xl:h-[520px] xl:w-[520px] lg:h-[480px] lg:w-[480px] sm:h-[420px] sm:w-[420px] xs:hidden" />
-          <div className="absolute top-1/2 left-1/2 h-[1000px] w-[1000px] translate-x-[-51%] translate-y-[-51.6%] rounded-full border-2 border-gray-1 3xl:h-[796px] 3xl:w-[796px] 2xl:h-[670px] 2xl:w-[670px] xl:h-[590px] xl:w-[590px] lg:h-[540px] lg:w-[540px] sm:h-[470px] sm:w-[470px] xs:hidden" />
-          <div className="absolute top-1/2 left-1/2 h-[1160px] w-[1160px] translate-x-[-51%] translate-y-[-51.6%] rounded-full border-2 border-gray-1 3xl:h-[924px] 3xl:w-[924px]  2xl:h-[780px] 2xl:w-[780px] xl:h-[700px] xl:w-[700px] lg:h-[630px] lg:w-[630px] sm:h-[520px] sm:w-[520px] xs:hidden" />
+          <div className="absolute right-0 top-0 z-10 w-full" ref={animationRef} />
+          <div className="absolute left-1/2 top-1/2 h-[888px] w-[888px] translate-x-[-51%] translate-y-[-51.6%] rounded-full border-2 border-gray-1 3xl:h-[716px] 3xl:w-[716px] 2xl:h-[600px] 2xl:w-[600px] xl:h-[520px] xl:w-[520px] lg:h-[480px] lg:w-[480px] sm:h-[420px] sm:w-[420px] xs:hidden" />
+          <div className="absolute left-1/2 top-1/2 h-[1000px] w-[1000px] translate-x-[-51%] translate-y-[-51.6%] rounded-full border-2 border-gray-1 3xl:h-[796px] 3xl:w-[796px] 2xl:h-[670px] 2xl:w-[670px] xl:h-[590px] xl:w-[590px] lg:h-[540px] lg:w-[540px] sm:h-[470px] sm:w-[470px] xs:hidden" />
+          <div className="absolute left-1/2 top-1/2 h-[1160px] w-[1160px] translate-x-[-51%] translate-y-[-51.6%] rounded-full border-2 border-gray-1 3xl:h-[924px] 3xl:w-[924px]  2xl:h-[780px] 2xl:w-[780px] xl:h-[700px] xl:w-[700px] lg:h-[630px] lg:w-[630px] sm:h-[520px] sm:w-[520px] xs:hidden" />
 
-          <div className="absolute top-[-54px] left-[383px] h-6 w-6 3xl:top-[-37px] 3xl:left-[310px] 2xl:top-[-42px] 2xl:left-[126px] xl:hidden">
-            <div className="absolute top-0 left-0 h-6 w-12 rounded-l-full bg-black" />
+          <div className="absolute left-[383px] top-[-54px] h-6 w-6 3xl:left-[310px] 3xl:top-[-37px] 2xl:left-[126px] 2xl:top-[-42px] xl:hidden">
+            <div className="absolute left-0 top-0 h-6 w-12 rounded-l-full bg-black" />
             <div
               className="circle circle-with-text circle-with-text-right !translate-x-0 !translate-y-0"
               data-text="Cloudflare Workers"
             />
           </div>
 
-          <div className="absolute top-[89px] right-[81px] h-6 w-6 3xl:top-[67px] 3xl:right-[81px] 2xl:top-[2px] 2xl:right-[68px] xl:hidden lg:top-[1px] lg:right-[47px] lg:block sm:hidden">
-            <div className="absolute top-0 left-0 h-6 w-12 rounded-l-full bg-black" />
+          <div className="absolute right-[81px] top-[89px] h-6 w-6 3xl:right-[81px] 3xl:top-[67px] 2xl:right-[68px] 2xl:top-[2px] xl:hidden lg:right-[47px] lg:top-[1px] lg:block sm:hidden">
+            <div className="absolute left-0 top-0 h-6 w-12 rounded-l-full bg-black" />
             <div
               className="circle circle-with-text circle-with-text-right !translate-x-0 !translate-y-0"
               data-text="Hasura Cloud"
             />
           </div>
 
-          <div className="absolute top-[185px] left-[-5px] h-6 w-6 3xl:top-[152px] 3xl:left-[4px] 2xl:top-[128px] 2xl:left-[-3px] xl:top-[54px] xl:left-[-9px] lg:top-[97px] lg:left-[-3px] sm:hidden">
-            <div className="absolute top-0 right-0 h-6 w-12 rounded-r-full bg-black" />
+          <div className="absolute left-[-5px] top-[185px] h-6 w-6 3xl:left-[4px] 3xl:top-[152px] 2xl:left-[-3px] 2xl:top-[128px] xl:left-[-9px] xl:top-[54px] lg:left-[-3px] lg:top-[97px] sm:hidden">
+            <div className="absolute right-0 top-0 h-6 w-12 rounded-r-full bg-black" />
             <div
               className="circle circle-with-text circle-with-text-left !translate-x-0 !translate-y-0"
               data-text="Vercel"
             />
           </div>
 
-          <div className="absolute top-auto bottom-[61px] left-[41px] h-6 w-6 3xl:left-[39px] 2xl:bottom-[51px] 2xl:left-[25px] xl:bottom-[44px] xl:left-[15px] lg:bottom-[36px] lg:left-[17px] sm:hidden">
-            <div className="absolute top-0 right-0 h-6 w-12 rounded-r-full bg-black" />
+          <div className="absolute bottom-[61px] left-[41px] top-auto h-6 w-6 3xl:left-[39px] 2xl:bottom-[51px] 2xl:left-[25px] xl:bottom-[44px] xl:left-[15px] lg:bottom-[36px] lg:left-[17px] sm:hidden">
+            <div className="absolute right-0 top-0 h-6 w-12 rounded-r-full bg-black" />
             <div
               className="circle circle-with-text circle-with-text-left !translate-x-0 !translate-y-0"
               data-text="Netlify"
             />
           </div>
 
-          <div className="absolute top-auto bottom-[-48px] right-[233px] h-6 w-6 3xl:bottom-[-28px] 3xl:right-[190px] 2xl:bottom-[-29px] 2xl:right-[162px] xl:hidden lg:right-[131px] lg:block sm:hidden">
-            <div className="absolute top-0 left-0 h-6 w-12 rounded-l-full bg-black" />
+          <div className="absolute bottom-[-48px] right-[233px] top-auto h-6 w-6 3xl:bottom-[-28px] 3xl:right-[190px] 2xl:bottom-[-29px] 2xl:right-[162px] xl:hidden lg:right-[131px] lg:block sm:hidden">
+            <div className="absolute left-0 top-0 h-6 w-12 rounded-l-full bg-black" />
             <div
               className="circle circle-with-text circle-with-text-right !translate-x-0 !translate-y-0"
               data-text="Amazon Lambda"

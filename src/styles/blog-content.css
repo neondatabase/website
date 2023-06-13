@@ -2,7 +2,7 @@
   .prose-blog {
     @apply max-w-none leading-normal text-gray-new-90 prose-p:my-4 prose-p:text-gray-new-90 prose-strong:text-gray-new-90 prose-ol:my-5 prose-ul:my-5 prose-li:my-4;
     @apply prose-headings:font-medium prose-headings:leading-tight prose-headings:tracking-tighter prose-headings:text-white;
-    @apply prose-h2:mt-10 prose-h2:mb-5 prose-h2:text-[36px] prose-h3:mt-7 prose-h3:mb-4 prose-h3:text-[28px] prose-h4:mt-6 prose-h4:mb-4 prose-h4:text-2xl prose-h5:mt-5 prose-h5:mb-4 prose-h5:text-xl md:prose-h2:text-[32px] sm:prose-h2:text-[26px];
+    @apply prose-h2:mb-5 prose-h2:mt-10 prose-h2:text-[36px] prose-h3:mb-4 prose-h3:mt-7 prose-h3:text-[28px] prose-h4:mb-4 prose-h4:mt-6 prose-h4:text-2xl prose-h5:mb-4 prose-h5:mt-5 prose-h5:text-xl md:prose-h2:text-[32px] sm:prose-h2:text-[26px];
     @apply prose-a:font-normal prose-a:text-green-45 prose-a:no-underline prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out hover:prose-a:text-[#47FFC2] sm:prose-a:break-words;
     @apply prose-figure:my-10 prose-img:my-10 md:prose-figure:my-8 md:prose-img:my-8;
 
@@ -57,7 +57,7 @@
         counter-increment: custom-counter;
 
         &::before {
-          @apply -left-2 top-[12px] -translate-x-full text-current md:top-3.5 md:-left-1;
+          @apply -left-2 top-[12px] -translate-x-full text-current md:-left-1 md:top-3.5;
           content: counter(custom-counter) '. ' !important;
         }
       }
@@ -116,7 +116,7 @@
         @apply relative h-0 overflow-hidden pb-[56.25%];
 
         iframe {
-          @apply absolute top-0 left-0 h-full w-full;
+          @apply absolute left-0 top-0 h-full w-full;
         }
       }
     }

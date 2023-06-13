@@ -9,13 +9,13 @@ const Aside = ({ slug, isReleaseDateExist = false }) => {
   const { category, capitalisedCategory } = getReleaseNotesCategoryFromSlug(slug);
 
   return (
-    <aside className="absolute left-0 top-0.5 z-10 flex min-w-[8rem] max-w-fit flex-col items-end gap-3 rounded-md xl:sticky xl:top-10 xl:mt-0 xl:mr-9 xl:max-h-24 sm:static sm:max-h-max sm:flex-row sm:items-center">
+    <aside className="absolute left-0 top-0.5 z-10 flex min-w-[8rem] max-w-fit flex-col items-end gap-3 rounded-md xl:sticky xl:top-10 xl:mr-9 xl:mt-0 xl:max-h-24 sm:static sm:max-h-max sm:flex-row sm:items-center">
       {!isReleaseDateExist && (
         <time className="whitespace-nowrap text-xl font-semibold leading-none" dateTime={datetime}>
           {label}
         </time>
       )}
-      <span className="flex items-center rounded-full border border-secondary-8 py-1 px-3 text-xs font-medium leading-snug text-secondary-8 dark:border-primary-1 dark:text-primary-1 sm:mt-0">
+      <span className="flex items-center rounded-full border border-secondary-8 px-3 py-1 text-xs font-medium leading-snug text-secondary-8 dark:border-primary-1 dark:text-primary-1 sm:mt-0">
         {RELEASE_NOTES_CATEGORIES.map(
           ({ slug, icon: Icon }, index) => slug === category && <Icon className="h-4" key={index} />
         )}
