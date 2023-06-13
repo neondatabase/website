@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useRef } from 'react';
 
+import debounce from 'utils/debounce';
+
 import Link from '../link/link';
 
 const INDEX_NAME = 'neon';
@@ -21,6 +23,10 @@ const Search = ({ className = null }) => {
         apiKey={API_KEY}
         indexName={INDEX_NAME}
         placeholder="Search..."
+        transformSearchClient={(searchClient) => ({
+          ...searchClient,
+          search: debounce(searchClient.search, 500),
+        })}
         hitComponent={({ hit, children }) => (
           <Link
             className={clsx({
@@ -32,7 +38,6 @@ const Search = ({ className = null }) => {
             })}
             to={hit.url}
           >
-            {console.log(hit)}
             {children}
           </Link>
         )}
