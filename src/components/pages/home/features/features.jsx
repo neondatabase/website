@@ -158,7 +158,8 @@ const Features = () => {
           />
         </Heading>
         <p className="t-3xl mx-auto mt-5 max-w-[940px] text-center text-white 2xl:mt-4 2xl:max-w-[800px] xl:mt-3.5 xl:max-w-[610px] lg:max-w-[580px]">
-          Neon provides true cloud native features that are essential for modern application development.
+          Neon provides true cloud native features that are essential for modern application
+          development.
         </p>
         <ul className="grid-gap-x mt-[92px] grid grid-cols-12 gap-y-[92px] 2xl:mt-[76px] 2xl:gap-y-[76px] xl:mt-16 xl:gap-y-16 md:grid-cols-1">
           {items.map(({ animationVisibilityRef, animationRef, title, description, tag }, index) => (

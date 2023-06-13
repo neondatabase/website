@@ -1,4 +1,6 @@
-.cache
+.cache/
+.next/
 package.json
 package-lock.json
-public
+public/
+content/

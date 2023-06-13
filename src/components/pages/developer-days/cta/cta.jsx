@@ -8,7 +8,7 @@ import StraightLineSvg from 'images/pages/developer-days/straight-line.inline.sv
 import LineSvg from './images/line.inline.svg';
 
 const CTA = () => (
-  <section className="safe-paddings cta sm:pt[190px] bg-black pt-[568px] pb-[366px] text-white xl:pb-[258px] xl:pt-[408px] lg:pb-[226px] md:pt-[364px] md:pb-36 sm:pt-[190px] sm:pb-24">
+  <section className="safe-paddings cta sm:pt[190px] bg-black pb-[366px] pt-[568px] text-white xl:pb-[258px] xl:pt-[408px] lg:pb-[226px] md:pb-36 md:pt-[364px] sm:pb-24 sm:pt-[190px]">
     <Container className="relative flex flex-col items-center" size="md">
       <LineSvg className="absolute bottom-[calc(100%+2rem)] left-1/2 h-auto w-[392px] -translate-x-[calc(50%-11.3rem)] xl:hidden" />
       <StraightLineSvg className="absolute bottom-[calc(100%+1rem)] left-1/2 hidden h-auto w-8 -translate-x-1/2 xl:block lg:w-[30px] md:w-7 sm:w-3.5" />

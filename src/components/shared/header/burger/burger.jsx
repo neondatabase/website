@@ -7,7 +7,7 @@ const ANIMATION_DURATION = 0.2;
 
 const Burger = ({ className = null, isToggled = null, onClick = null }) => (
   <motion.button
-    className={clsx('relative -mt-1 -mr-1 flex h-8 w-7 shrink rounded-full', className)}
+    className={clsx('relative -mr-1 -mt-1 flex h-8 w-7 shrink rounded-full', className)}
     type="button"
     animate={isToggled ? 'toggled' : 'initial'}
     aria-label={isToggled ? 'Close menu' : 'Open menu'}
@@ -42,7 +42,7 @@ const Burger = ({ className = null, isToggled = null, onClick = null }) => (
       }}
     />
     <motion.span
-      className="absolute left-1.5 bottom-2.5 block h-0.5 w-4 rounded-full bg-current"
+      className="absolute bottom-2.5 left-1.5 block h-0.5 w-4 rounded-full bg-current"
       variants={{
         initial: {
           bottom: 10,

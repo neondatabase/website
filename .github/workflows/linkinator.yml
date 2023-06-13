@@ -2,13 +2,13 @@ name: Linkinator
 
 on:
   schedule:
-    - cron:  '0 0 * * 1'
+    - cron: '0 0 * * 1'
 
 env:
   GATSBY_DEFAULT_SITE_URL: https://neon.tech
 jobs:
   linkinator:
-    name: "Checks broken links"
+    name: 'Checks broken links'
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -23,5 +23,5 @@ jobs:
           linksToSkip: >-
             linkedin.com,
             googleapis.com
-          verbosity: "ERROR"
+          verbosity: 'ERROR'
           markdown: false
