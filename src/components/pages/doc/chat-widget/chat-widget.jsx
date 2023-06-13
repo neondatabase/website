@@ -9,7 +9,6 @@ import { useCallback, useContext, useEffect, useRef } from 'react';
 import { ChatContext } from 'app/chat-provider';
 import Button from 'components/shared/button/button';
 import useAbortController from 'hooks/use-abort-controller';
-import useControlKey from 'hooks/use-control-key';
 import useDocsAIChatStream from 'hooks/use-docs-ai-chat-stream';
 
 import AttentionIcon from './images/attention.inline.svg';
@@ -19,6 +18,7 @@ import ExperimentalIcon from './images/experimental.inline.svg';
 import ReloadIcon from './images/reload.inline.svg';
 import SendIcon from './images/send.inline.svg';
 import SparksIcon from './images/sparks.inline.svg';
+import StopIcon from './images/stop.inline.svg';
 import Message from './message';
 
 const items = [
@@ -61,8 +61,10 @@ const ChatWidget = () => {
   // aux refs
   const messagesEndRef = useRef(null);
   const isMountedRef = useRef(false);
+  const inputRef = useRef(null);
   // hooks
   const { getSignal, resetAbortController } = useAbortController();
+
   const {
     inputText,
     setInputText,
@@ -73,6 +75,8 @@ const ChatWidget = () => {
     setError,
     shouldTryAgain,
     setShouldTryAgain,
+    isAnswerGenerating,
+    setStopGenerating,
   } = useDocsAIChatStream({
     isMountedRef,
     signal: getSignal(),
@@ -82,7 +86,8 @@ const ChatWidget = () => {
   const handleInputChange = (e) => setInputText(e.target.value);
 
   const handleExampleClick = (e) => {
-    setMessages([{ role: 'user', content: e.target.textContent }]);
+    setInputText(e.target.textContent);
+    inputRef.current.focus();
   };
 
   useEffect(() => {
@@ -108,7 +113,7 @@ const ChatWidget = () => {
         setShouldTryAgain(false);
       }
     },
-    [isLoading, shouldTryAgain, setMessages, setInputText, inputText, setShouldTryAgain]
+    [inputText, isLoading, setInputText, setMessages, setShouldTryAgain, shouldTryAgain]
   );
 
   const handleInputKeyDown = (e) => {
@@ -129,6 +134,10 @@ const ChatWidget = () => {
     setIsOpen(false);
     setInputText('');
     setShouldTryAgain(false);
+  };
+
+  const stopGeneratingAnswers = () => {
+    setStopGenerating(true);
   };
 
   // effects
@@ -223,6 +232,7 @@ const ChatWidget = () => {
                   type="text"
                   placeholder="How can I help you?"
                   value={inputText}
+                  ref={inputRef}
                   autoFocus
                   onKeyDown={handleInputKeyDown}
                   onChange={handleInputChange}
@@ -245,6 +255,17 @@ const ChatWidget = () => {
                       <span>Try again</span>
                     </Button>
                   ))}
+                {isAnswerGenerating && (
+                  <Button
+                    className="absolute -top-8 left-1/2 flex -translate-x-1/2 items-center justify-center gap-x-1.5 border border-gray-new-94 bg-gray-new-94/40 font-normal normal-case text-gray-new-30 hover:bg-gray-new-94/80 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80 dark:hover:bg-gray-new-15/80"
+                    size="xxs"
+                    type="submit"
+                    onClick={stopGeneratingAnswers}
+                  >
+                    <StopIcon className="h-3 w-3 shrink-0" />
+                    <span>Stop generating</span>
+                  </Button>
+                )}
               </form>
             )}
 
@@ -275,7 +296,6 @@ ChatWidget.propTypes = {
 // eslint-disable-next-line react/prop-types
 const ChatWidgetTrigger = ({ className, isSidebar }) => {
   const { setIsOpen } = useContext(ChatContext);
-  const [commandKey] = useControlKey();
 
   const onClickHandler = () => {
     setIsOpen(true);
@@ -316,34 +336,23 @@ const ChatWidgetTrigger = ({ className, isSidebar }) => {
               : 'font-semibold'
           )}
         >
-          <span className="lg:hidden">Neon Docs AI</span>
           <span
-            className={clsx('hidden text-gray-new-20 dark:text-gray-new-90 lg:inline')}
+            className={clsx({
+              'lg:hidden': !isSidebar,
+            })}
+          >
+            Neon Docs AI
+          </span>
+          <span
+            className={clsx('hidden text-gray-new-20 dark:text-gray-new-90 ', {
+              'lg:inline': !isSidebar,
+            })}
             aria-hidden
           >
             Try Neon Docs AI instead
           </span>
         </h3>
-        {commandKey && !isSidebar && (
-          <span className="text-gray-20 dark:text-gray-90 rounded-sm bg-gray-new-94 px-1.5 py-1 leading-none dark:bg-gray-new-15 xl:hidden">
-            {commandKey} + K
-          </span>
-        )}
       </div>
-      <p
-        className={clsx('mt-1.5 text-left leading-tight text-gray-3 dark:text-gray-7 xl:hidden', {
-          hidden: isSidebar,
-        })}
-      >
-        We brought ChatGPT to the docs
-      </p>
-      <span
-        className={clsx('mt-1.5 leading-tight text-secondary-8 dark:text-primary-1 xl:hidden', {
-          hidden: isSidebar,
-        })}
-      >
-        Ask a question
-      </span>
     </button>
   );
 };

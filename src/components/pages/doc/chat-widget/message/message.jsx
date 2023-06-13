@@ -48,7 +48,7 @@ const Message = ({ role, content }) => {
         />
       ) : (
         <div className="flex h-7 grow items-center">
-          <span className="h-4 w-1 animate-pulse bg-gray-new-50" />
+          <span className="h-4 w-1 animate-loading bg-gray-new-50" />
         </div>
       )}
     </div>
