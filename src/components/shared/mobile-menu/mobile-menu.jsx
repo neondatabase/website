@@ -57,7 +57,7 @@ const MobileMenu = ({ isOpen = false, headerRef, onOutsideClick }) => {
 
   return (
     <motion.nav
-      className="absolute right-8 left-8 top-16 z-[-1] hidden rounded-2xl bg-white px-5 pt-1 pb-7 lg:block md:right-4 md:left-4"
+      className="absolute left-8 right-8 top-16 z-[-1] hidden rounded-2xl bg-white px-5 pb-7 pt-1 lg:block md:left-4 md:right-4"
       initial="from"
       animate={controls}
       variants={variants}

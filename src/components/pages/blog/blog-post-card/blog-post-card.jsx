@@ -50,7 +50,7 @@ const BlogPostCard = ({
     .join(' ');
 
   const formattedDate = getFormattedDate(date);
-  const link = url || `${LINKS.blog}${slug}`;
+  const link = url || `${LINKS.blog}/${slug}`;
 
   return (
     <article
@@ -128,7 +128,7 @@ const BlogPostCard = ({
               {
                 'text-4xl leading-dense tracking-tighter xl:text-3xl md:text-2xl': size === 'xl',
                 'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base': size === 'lg',
-                'text-lg leading-tight tracking-[-0.02em] line-clamp-2 lg:text-base':
+                'line-clamp-2 text-lg leading-tight tracking-[-0.02em] lg:text-base':
                   size === 'md' || size === 'sm' || size === 'xs',
                 'mt-2 md:mt-1.5': !!category,
                 'mt-5 md:mt-4': !category && size === 'lg',

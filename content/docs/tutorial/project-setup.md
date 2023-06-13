@@ -10,7 +10,7 @@ The steps that follow describe how to sign up for Neon, create a Neon project, a
 
 If you do not have a Neon account, navigate to the [Neon sign-in page](https://console.neon.tech/sign_in) and create one using your GitHub or Google account.
 
-When you sign up, you are automatically enrolled in Neon's [Free Tier](../introduction/technical-preview-free-tier). If you require larger compute and storage limits, Neon also offers paid plans. For more information, see [Neon plans](../introduction/billing#neon-plans).
+When you sign up, you are automatically enrolled in Neon's [Free Tier](../introduction/technical-preview-free-tier). If you require larger compute and storage limits, Neon also offers paid plans. For more information, see [Neon plans](../introduction/plans).
 
 ![Neon sign-in page](/docs/tutorial/neon_signin.png)
 

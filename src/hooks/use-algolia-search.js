@@ -8,7 +8,8 @@ const useAlgoliaSearch = () => {
     process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
     process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY
   );
-  const searchClient = useMemo(() => ({
+  const searchClient = useMemo(
+    () => ({
       ...algoliaClient,
       search(requests) {
         if (requests.every(({ params }) => !params.query)) {
@@ -29,7 +30,9 @@ const useAlgoliaSearch = () => {
 
         return algoliaClient.search(requests);
       },
-    }), [algoliaClient]);
+    }),
+    [algoliaClient]
+  );
 
   return {
     searchClient,

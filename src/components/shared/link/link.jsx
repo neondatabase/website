@@ -41,6 +41,7 @@ const Link = forwardRef(
       to = null,
       withArrow = false,
       children,
+      prefetch = undefined,
       ...props
     },
     ref
@@ -69,7 +70,7 @@ const Link = forwardRef(
 
     if (to.startsWith('/')) {
       return (
-        <NextLink className={className} href={to} ref={ref} {...props}>
+        <NextLink className={className} href={to} ref={ref} prefetch={prefetch} {...props}>
           {content}
         </NextLink>
       );
@@ -90,6 +91,7 @@ Link.propTypes = {
   theme: PropTypes.oneOf(Object.keys(styles.theme)),
   children: PropTypes.node.isRequired,
   withArrow: PropTypes.bool,
+  prefetch: PropTypes.bool,
 };
 
 export default Link;

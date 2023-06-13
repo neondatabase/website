@@ -32,10 +32,10 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
     <li className="flex flex-col">
       <Tag
         className={clsx(
-          'group flex w-full items-start justify-between py-2 text-left text-sm text-gray-3 transition-colors duration-200 hover:text-black dark:text-gray-7 dark:hover:text-white',
-          {
-            'font-semibold !text-black dark:!text-white': currentSlug === slug,
-          }
+          'group flex w-full items-start justify-between py-2 text-left text-sm transition-colors duration-200',
+          currentSlug === slug
+            ? 'font-medium text-black-new dark:text-white'
+            : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white'
         )}
         type={slug ? undefined : 'button'}
         to={slug ? externalSlug || docSlug : undefined}
@@ -45,10 +45,11 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
         <span className="leading-snug">{title}</span>
         <ChevronRight
           className={clsx(
-            'mx-2 mt-[5px] shrink-0 text-gray-5 transition-[transform,color] duration-200 group-hover:text-black dark:group-hover:text-white',
-            {
-              '!text-black dark:!text-white': currentSlug === slug,
-            },
+            'mx-2 mt-[5px] shrink-0 transition-[transform,color] duration-200',
+            currentSlug === slug
+              ? 'text-black-new dark:text-white'
+              : 'text-gray-new-40 group-hover:text-black-new dark:text-gray-new-90 dark:group-hover:text-white',
+
             items?.length ? 'block' : 'hidden',
             isOpen ? 'rotate-90' : 'rotate-0'
           )}
@@ -57,7 +58,7 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
       {!!items?.length && (
         <ul
           className={clsx(
-            'relative pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-6 dark:before:bg-gray-2',
+            'relative pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-new-90 dark:before:bg-gray-new-20',
             !isOpen && 'sr-only h-0'
           )}
         >

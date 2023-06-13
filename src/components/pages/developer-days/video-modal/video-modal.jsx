@@ -26,7 +26,7 @@ const VideoModal = ({ isOpenModal, setIsOpenModal, title, description, videoId }
         ref={contentRef}
       >
         <button
-          className="absolute top-[84px] -right-9 md:-top-9 md:right-0"
+          className="absolute -right-9 top-[84px] md:-top-9 md:right-0"
           type="button"
           onClick={() => setIsOpenModal(false)}
         >
@@ -48,7 +48,7 @@ const VideoModal = ({ isOpenModal, setIsOpenModal, title, description, videoId }
           </div>
           <figure className="relative h-0 overflow-hidden pb-[56.25%]">
             <iframe
-              className="absolute top-0 left-0 h-full w-full rounded-2xl"
+              className="absolute left-0 top-0 h-full w-full rounded-2xl"
               width="1161"
               height="653"
               src={`https://www.youtube.com/embed/${videoId}${isOpenModal ? '?autoplay=1' : ''}`}

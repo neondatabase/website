@@ -171,7 +171,6 @@ As you explore the capabilities of the `pg_tiktoken extension`, we encourage you
 
 - [Open AI tiktoken source code on GitHub](https://github.com/openai/tiktoken)
 - [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
-- [Announcing pg_tiktoken: A Postgres Extension for Fast BPE Tokenization](https://neon.tech/blog/announcing-pg_tiktoken-a-postgres-extension-for-fast-bpe-tokenization)
 
 ## Need help?
 
