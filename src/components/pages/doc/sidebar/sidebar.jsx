@@ -7,22 +7,7 @@ import MENUS from 'constants/menus';
 
 import { ChatWidgetTrigger } from '../chat-widget';
 
-import CalendarIcon from './images/calendar.inline.svg';
-import TransactionsIcon from './images/transactions.inline.svg';
 import Item from './item';
-
-const links = [
-  {
-    icon: TransactionsIcon,
-    title: 'API Reference',
-    slug: LINKS.apiReference,
-  },
-  {
-    icon: CalendarIcon,
-    title: 'Release notes',
-    slug: LINKS.releaseNotes,
-  },
-];
 
 const Sidebar = ({ className = null, sidebar, currentSlug }) => (
   <aside className={className}>
