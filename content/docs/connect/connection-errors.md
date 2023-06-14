@@ -11,6 +11,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 
 - [The endpoint ID is not specified](#the-endpoint-id-is-not-specified)
 - [Password authentication failed for user](#password-authentication-failed-for-user)
+- [Couldn't connect to compute node](#couldnt-connect-to-compute-node)
 - [Can't reach database server](#cant-reach-database-server)
 - [Error undefined: Database error](#error-undefined-database-error)
 
@@ -131,6 +132,19 @@ For clients or applications that require specifying connection parameters such a
 - **Database name**: `neondb` (`neondb` is the default database created with each Neon project. Your database name may differ.)
 
 If you find that your connection string is defined correctly, see the instructions regarding SNI support outlined in the preceding section: [The endpoint ID is not specified](#the-endpoint-id-is-not-specified).
+
+## Couldn't connect to compute node
+
+This error arises when the Neon proxy, which accepts and handles connections from clients that use the PostgreSQL protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [Auto-suspension](../reference/glossary#auto-suspend-compute) (scale to zero). Currently, the transition from an idle state to an active takes a few seconds, excluding any external factors that might increase connection latency.
+
+Consider these recommended steps:
+
+- Visit the [Neon status page](https://neonstatus.com/) to ensure there are no ongoing issues.
+- Pause for a short period to allow your compute to restart, then try reconnecting.
+- Try [connecting with psql](https://neon.tech/docs/connect/query-with-psql-editor) to see if a connection can be established.
+- Review the strategies in [Connection latency and timeouts](https://neon.tech/docs/connect/connection-latency) for avoiding connection issues due to compute startup time.
+
+If the connection issue persists, please reach out to [Support](https://neon.tech/docs/introduction/support).
 
 ## Can't reach database server
 
