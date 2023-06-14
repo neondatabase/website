@@ -42,7 +42,7 @@ const Features = () => (
         {items.map(({ className, icon: Icon, text }, index) => (
           <div
             className={clsx(
-              'col-span-4 flex flex-col items-center rounded-[18px] px-8 pt-[72px] pb-[74px] 2xl:py-16 xl:py-11 xl:px-6 lg:py-9 md:col-start-2 md:col-end-12 md:py-12 sm:col-span-full sm:py-7',
+              'col-span-4 flex flex-col items-center rounded-[18px] px-8 pb-[74px] pt-[72px] 2xl:py-16 xl:px-6 xl:py-11 lg:py-9 md:col-start-2 md:col-end-12 md:py-12 sm:col-span-full sm:py-7',
               className
             )}
             key={index}

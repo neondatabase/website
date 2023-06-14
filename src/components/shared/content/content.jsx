@@ -13,6 +13,7 @@ import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import IntroNavigation from 'components/pages/doc/intro-navigation';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
+import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
@@ -29,7 +30,7 @@ const components = {
   undefined: (props) => <Fragment {...props} />,
   code: (props) => {
     if (props?.className?.startsWith('language-')) {
-      return <CodeBlock {...props} />;
+      return <CodeBlock theme="light" {...props} />;
     }
     return <code {...props} />;
   },
@@ -51,8 +52,10 @@ const components = {
       style={{ width: '100%', height: '100%' }}
     />
   ),
+  YoutubeIframe,
   DefinitionList,
   Admonition,
+  CodeBlock,
   CodeTabs,
   IntroNavigation,
   TechnologyNavigation,

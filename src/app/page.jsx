@@ -1,53 +1,27 @@
-'use client';
-
-import { useInView } from 'react-intersection-observer';
-
-import Advantages from 'components/pages/home/advantages';
 import Community from 'components/pages/home/community';
-import CTA from 'components/pages/home/cta';
 import DataBranching from 'components/pages/home/data-branching';
-import Features from 'components/pages/home/features';
-import Hero from 'components/pages/home/hero';
-import Lines1 from 'components/pages/home/lines-1';
-import Lines2 from 'components/pages/home/lines-2';
-import SaaS from 'components/pages/home/saas';
+import FirstSection from 'components/pages/home/first-section';
 import Scalability from 'components/pages/home/scalability';
+import SecondSection from 'components/pages/home/second-section';
 import Storage from 'components/pages/home/storage';
 import Layout from 'components/shared/layout';
 import Subscribe from 'components/shared/subscribe';
+import SEO_DATA from 'constants/seo-data';
+import getMetadata from 'utils/get-metadata';
 
-const Home = () => {
-  const [firstSectionWithLinesRef, isFirstSectionWithLinesInView] = useInView({
-    rootMargin: '100px 0px',
-    triggerOnce: true,
-  });
+export const metadata = getMetadata(SEO_DATA.index);
 
-  const [secondSectionWithLinesRef, isSecondSectionWithLinesInView] = useInView({
-    rootMargin: '100px 0px',
-    triggerOnce: true,
-  });
-
-  return (
-    <Layout headerTheme="black" isSignIn footerWithTopBorder withOverflowHidden>
-      <div className="relative overflow-hidden" ref={firstSectionWithLinesRef}>
-        {isFirstSectionWithLinesInView && <Lines1 />}
-        <Hero />
-        <CTA />
-        <Advantages />
-      </div>
-      <Community />
-      <Scalability />
-      <Storage />
-      <DataBranching />
-      <div className="relative overflow-hidden" ref={secondSectionWithLinesRef}>
-        <Features />
-        <SaaS />
-        {isSecondSectionWithLinesInView && <Lines2 />}
-      </div>
-      <Subscribe />
-    </Layout>
-  );
-};
+const Home = () => (
+  <Layout headerTheme="black" isSignIn footerWithTopBorder withOverflowHidden>
+    <FirstSection />
+    <Community />
+    <Scalability />
+    <Storage />
+    <DataBranching />
+    <SecondSection />
+    <Subscribe />
+  </Layout>
+);
 
 export default Home;
 

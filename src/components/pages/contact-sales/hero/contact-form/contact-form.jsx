@@ -2,13 +2,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useCookie, useLocation } from 'react-use';
+import useCookie from 'react-use/lib/useCookie';
+import useLocation from 'react-use/lib/useLocation';
 import * as yup from 'yup';
 
 import Button from 'components/shared/button';
 import Field from 'components/shared/field';
 import Link from 'components/shared/link';
-import { HUBSPOT_CONTACT_SALES_FORM_ID, FORM_STATES } from 'constants/forms';
+import { FORM_STATES, HUBSPOT_CONTACT_SALES_FORM_ID } from 'constants/forms';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 const schema = yup
@@ -30,6 +31,7 @@ const ContactForm = ({ formState, setFormState }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
   const [formError, setFormError] = useState('');

@@ -18,18 +18,22 @@ const links = [
   {
     icon: TwitterIcon,
     to: LINKS.twitter,
+    name: 'Twitter',
   },
   {
     icon: LinkedinIcon,
     to: LINKS.linkedin,
+    name: 'LinkedIn',
   },
   // {
   //   icon: DiscordIcon,
   //   to: LINKS.discord,
+  //   name: 'Discord',
   // },
   {
     icon: GithubIcon,
     to: LINKS.github,
+    name: 'GitHub',
   },
 ];
 
@@ -61,18 +65,19 @@ const Subscribe = () => (
         <div className="mt-[94px] flex items-center space-x-[38px] 2xl:mt-[74px] 2xl:space-x-8 xl:mt-16 xl:space-x-7 lg:mt-12 lg:flex-col lg:space-x-0">
           <span className="t-3xl font-bold !leading-none">Join us:</span>
           <ul className="flex space-x-[26px] 2xl:space-x-5 xl:space-x-[18px] lg:mt-3.5">
-            {links.map(({ icon: Icon, to }, index) => (
+            {links.map(({ icon: Icon, to, name }, index) => (
               <li className="relative" key={index}>
                 <span
                   className="absolute -bottom-1.5 -left-1.5 h-full w-full rounded-full bg-secondary-5 xl:-bottom-1 xl:-left-1"
                   aria-hidden
                 />
                 <Link
-                  className="relative flex h-[72px] w-[72px] items-center justify-center rounded-full border-4 border-black bg-white transition-transform duration-200 hover:translate-y-1.5 hover:-translate-x-1.5 2xl:h-16 2xl:w-16 xl:h-14 xl:w-14 xl:hover:translate-y-1 xl:hover:-translate-x-1"
+                  className="relative flex h-[72px] w-[72px] items-center justify-center rounded-full border-4 border-black bg-white transition-transform duration-200 hover:-translate-x-1.5 hover:translate-y-1.5 2xl:h-16 2xl:w-16 xl:h-14 xl:w-14 xl:hover:-translate-x-1 xl:hover:translate-y-1"
                   to={to}
                   target="_blank"
                 >
                   <Icon className="h-8 xl:h-7" />
+                  <span className="sr-only">{name}</span>
                 </Link>
               </li>
             ))}

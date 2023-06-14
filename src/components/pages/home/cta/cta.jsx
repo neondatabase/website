@@ -106,7 +106,7 @@ const CTA = () => {
             variants={inputPanelVariants}
             aria-hidden
           />
-          <div className="relative flex items-center justify-between rounded-full border-4 border-black bg-white p-2 pl-9 2xl:p-1.5 2xl:pl-7 xl:p-1 xl:pl-6 md:justify-center md:py-[22px] md:px-0">
+          <div className="relative flex items-center justify-between rounded-full border-4 border-black bg-white p-2 pl-9 2xl:p-1.5 2xl:pl-7 xl:p-1 xl:pl-6 md:justify-center md:px-0 md:py-[22px]">
             <span className="t-3xl whitespace-nowrap font-mono font-bold !leading-none">
               $ psql -h pg.neon.tech
             </span>
@@ -119,7 +119,7 @@ const CTA = () => {
               <span className={clsx({ 'opacity-0': isCopied })}>Copy</span>
               <span
                 className={clsx(
-                  'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0',
+                  'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0',
                   { 'opacity-100': isCopied }
                 )}
               >

@@ -34,8 +34,7 @@ const Advantages = () => {
     {
       animationData: costEfficientAnimationData,
       title: 'Cost efficient',
-      description:
-        'Compute scales to zero and cold storage offloads to S3 for cost efficiency.',
+      description: 'Compute scales to zero and cold storage offloads to S3 for cost efficiency.',
     },
     {
       animationData: easyToUseAnimationData,
@@ -48,7 +47,7 @@ const Advantages = () => {
     <section
       id="advantages"
       // className="safe-paddings bg-black py-80 3xl:py-72 2xl:py-64 xl:py-52 lg:py-40 md:py-24"
-      className="safe-paddings bg-black pt-36 pb-72 3xl:pt-32 3xl:pb-64 2xl:pt-28 2xl:pb-52 xl:pt-40 xl:pb-40 lg:pt-36 lg:pb-36 md:pt-24 md:pb-24"
+      className="safe-paddings bg-black pb-72 pt-36 3xl:pb-64 3xl:pt-32 2xl:pb-52 2xl:pt-28 xl:pb-40 xl:pt-40 lg:pb-36 lg:pt-36 md:pb-24 md:pt-24"
       ref={sectionRef}
     >
       <Container className="z-20" size="md">

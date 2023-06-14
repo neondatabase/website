@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { useSessionStorage } from 'react-use';
+import useSessionStorage from 'react-use/lib/useSessionStorage';
 
 import Link from 'components/shared/link';
 import GitHubIcon from 'icons/github.inline.svg';
@@ -25,7 +25,7 @@ const DocFooter = ({ fileOriginPath, slug }) => {
   };
 
   return (
-    <div className="mt-10 flex items-center justify-between border-t border-gray-7 pt-5 dark:border-gray-2 sm:flex-col sm:space-y-4">
+    <div className="mt-10 flex items-center justify-between border-t border-gray-new-90 pt-5 dark:border-gray-new-20 sm:flex-col sm:space-y-4">
       <Link
         className="group inline-flex items-center space-x-2.5 text-sm leading-none"
         to={fileOriginPath}
@@ -48,7 +48,7 @@ const DocFooter = ({ fileOriginPath, slug }) => {
           <span className="text-sm leading-tight">Was this page helpful?</span>
           <div className="flex space-x-3">
             <button
-              className="group flex items-center space-x-1 rounded border border-gray-7 px-2.5 py-1.5 text-xs leading-none dark:border-gray-2 dark:text-gray-7"
+              className="group flex items-center space-x-1 rounded border border-gray-new-90 px-2.5 py-1.5 text-xs leading-none dark:border-gray-new-20 dark:text-gray-7"
               type="button"
               onClick={() => handleFeedbackClick(true, slug)}
             >
@@ -56,7 +56,7 @@ const DocFooter = ({ fileOriginPath, slug }) => {
               <span>Yes</span>
             </button>
             <button
-              className="group flex items-center space-x-1 rounded border border-gray-7 px-2.5 py-1.5 text-xs leading-none dark:border-gray-2 dark:text-gray-7"
+              className="group flex items-center space-x-1 rounded border border-gray-new-90 px-2.5 py-1.5 text-xs leading-none dark:border-gray-new-20 dark:text-gray-7"
               type="button"
               onClick={() => handleFeedbackClick(false, slug)}
             >

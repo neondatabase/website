@@ -48,7 +48,7 @@ Branching is so easy and cost-effective that you can create a branch for each de
 
 ### Preview deployments
 
-With Neon's branching capabilities, you can create a branch for each preview deployment. You can automate branch creation for every pull request using the Neon API or, if you use Vercel, you can use the Neon Vercel Integration, which automates this task for you. For more information, see [Connect with the Neon Vercel integration](../guides/vercel).
+With Neon's branching capabilities, you can create a branch for each preview deployment. You can automate branch creation for every pull request using the Neon API or, if you use Vercel, you can use the Neon Vercel Integration, which automates this task for you. For more information, see [Connect with the Neon Vercel Integration](../guides/vercel).
 
 ### Testing
 

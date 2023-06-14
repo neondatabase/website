@@ -22,14 +22,14 @@ When working with branches, it is important to remove old and unused branches. B
 Each Neon project has a primary branch called `main`, by default. In the Neon Console, your primary branch is identified by a `PRIMARY` tag. You can designate any branch as the primary branch for your project or rename the primary branch, but you cannot delete a primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
 
 - For [Free Tier](../introduction/technical-preview-free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
-- For [Pro plan](../introduction/billing#neon-plans) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes.
+- For [Pro plan](../introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes.
 
 ## Non-primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
 - For [Free Tier](../introduction/technical-preview-free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Free Tier  _compute active time_ limit of 100 hours per month.
-- For [Pro plan](../introduction/billing#neon-plans) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
+- For [Pro plan](../introduction/pro-plan) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Create a branch
 
@@ -63,15 +63,15 @@ Branch details shown on the branch page include:
 - **ID**: The branch ID. Branch IDs have a `br-` prefix.
 - **Created**: The date and time the branch was created.
 - **Current Data Size**: The current data size of the branch.
-- **Active Time**: The amount of wall-clock time the branch's compute endpoint has been active during the current billing period.
-- **Compute Time**: The amount of Compute Unit (CU) hours spent by the branch's compute endpoint in the current billing period.
-- **Written Data**: The amount of data changes written from the branch's compute endpoint to storage in the current billing period.
-- **Data Transfer**: The amount of data transferred out of the branch (egress) in the current billing period.
-- **Parent Branch**: The branch from which this branch was created.
-- **Date**: The date the parent branch was created.
-- **Time**: The time the parent branch was created.
+- **Active Time**: The total amount of time that your branch compute has been active within the current billing period, measured in hours.
+- **Compute Time**: The computing capacity used by the branch within the current billing period, measured in Compute Unit (CU) hours.
+- **Written Data**: The total volume of data written from your branch compute to storage within the current billing period, measured in gibibytes (GiBs).
+- **Data Transfer**: The total volume of data transferred out of Neon (known as "egress") within the current billing period, measured in (GiBs).
+- **Parent Branch**: The branch from which this branch was created (only visible for child branches).
+- **Date**: The date the parent branch was created (only displayed for branches created with the **Time** option).
+- **Time**: The time the parent branch was created (only displayed for branches created with the **Time** option).
 
-For information more information about **Active Time**, **Compute Time**, **Written Data**, and **Data Transfer** usage metrics, refer to the [Billing] section.
+For more information about **Active Time**, **Compute Time**, **Written Data**, and **Data Transfer** usage metrics, refer to our [Billing](../introduction/billing) page.
 
 The branch details page also includes details about the compute endpoint associated with the branch. For more information, see [View a compute endpoint](../manage/endpoints#view-a-compute-endpoint).
 
@@ -109,11 +109,15 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
 ![Connection details widget](/docs/connect/connection_details.png)
 3. Copy the connection string. A connection string includes your role name, the compute endpoint hostname, and database name.
-5. Connect with `psql` as shown below.
+4. Connect with `psql` as shown below.
+
+  <CodeBlock shouldWrap>
 
   ```bash
   psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
   ```
+
+  </CodeBlock>
 
 <Admonition type="tip">
 A compute endpoint hostname starts with an `ep-` prefix. You can also find a compute endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).

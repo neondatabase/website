@@ -2,7 +2,7 @@
 title: Introduction to Neon
 ---
 
-Neon is a fully managed serverless PostgreSQL. Neon separates storage and compute to offer modern developer features such as serverless, branching, bottomless storage, and more.
+Neon is open-source serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
 
 ## New to Neon?
 
@@ -18,17 +18,17 @@ Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about
 
 <IntroNavigation>
 
-[Connect](/docs/connect/connect-from-any-app "Learn to connect to a Neon database from any application")
+[Connect](/docs/connect/connect-from-any-app 'Learn how to connect to a Neon database from any application')
 
-[Import data](/docs/import/import-from-postgres "Import your own data or sample data that you can use to explore Neon")
+[Import data](/docs/import/import-from-postgres 'Import your own data or sample data that you can use to explore Neon')
 
-[Manage](/docs/manage/overview "Learn how to manage Neon projects, branches, compute resources, databases, and roles")
+[Manage](/docs/manage/overview 'Learn how to manage Neon projects, branches, compute resources, databases, and roles')
 
-[Branching](/docs/introduction/branching "Learn about branching and how you can use it to optimize development workflows")
+[Branching](/docs/introduction/branching 'Learn about branching and how you can use it to optimize development workflows')
 
-[PostgreSQL extensions](/docs/extensions/pg-extensions "Install supported PostgreSQL extensions")
+[PostgreSQL extensions](/docs/extensions/pg-extensions 'Level up your PostgreSQL database with our extension installation guide')
 
-[Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api "Manage Neon programmatically using the Neon API")
+[Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api 'Manage Neon programmatically using the Neon API')
 
 </IntroNavigation>
 
@@ -36,29 +36,29 @@ Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about
 
 <TechnologyNavigation>
 
-[![Vercel](/images/technology-logos/vercel-logo.svg "Integrate Neon with Vercel")](/docs/guides/vercel-overview)
+[![Vercel](/images/technology-logos/vercel-logo.svg 'Integrate Neon with Vercel')](/docs/guides/vercel-overview)
 
-[![Prisma](/images/technology-logos/prisma-logo.svg "Connect from Prisma to Neon")](/docs/guides/prisma)
+[![Prisma](/images/technology-logos/prisma-logo.svg 'Connect from Prisma to Neon')](/docs/guides/prisma)
 
-[![Django](/images/technology-logos/django-logo.svg "Connect a Django application to Neon")](/docs/guides/django)
+[![Django](/images/technology-logos/django-logo.svg 'Connect a Django application to Neon')](/docs/guides/django)
 
-[![Go](/images/technology-logos/go-logo.svg "Connect a Go application to Neon")](/docs/guides/go)
+[![Go](/images/technology-logos/go-logo.svg 'Connect a Go application to Neon')](/docs/guides/go)
 
-[![Hasura](/images/technology-logos/hasura-logo.svg "Connect from Hasura Cloud to Neon")](/docs/guides/hasura)
+[![Hasura](/images/technology-logos/hasura-logo.svg 'Connect from Hasura Cloud to Neon')](/docs/guides/hasura)
 
-[![Java](/images/technology-logos/java-logo.svg "Connect a Java application to Neon")](/docs/guides/java)
+[![Java](/images/technology-logos/java-logo.svg 'Connect a Java application to Neon')](/docs/guides/java)
 
-[![Laravel](/images/technology-logos/laravel-logo.svg "Connect a Laravel application to Neon")](/docs/guides/laravel)
+[![Laravel](/images/technology-logos/laravel-logo.svg 'Connect a Laravel application to Neon')](/docs/guides/laravel)
 
-[![Next.js](/images/technology-logos/nextjs-logo.svg "Connect a Next.js application to Neon")](/docs/guides/vercel)
+[![Next.js](/images/technology-logos/nextjs-logo.svg 'Connect a Next.js application to Neon')](/docs/guides/vercel)
 
-[![Node.js](/images/technology-logos/nodejs-logo.svg "Connect a Node.js application to Neon")](/docs/guides/node)
+[![Node.js](/images/technology-logos/nodejs-logo.svg 'Connect a Node.js application to Neon')](/docs/guides/node)
 
-[![Rust](/images/technology-logos/rust-logo.svg "Connect a Rust application to Neon")](/docs/guides/rust)
+[![Rust](/images/technology-logos/rust-logo.svg 'Connect a Rust application to Neon')](/docs/guides/rust)
 
-[![SQLAlchemy](/images/technology-logos/sqlalchemy-logo.svg "Connect an SQLAlchemy application to Neon")](/docs/guides/sqlalchemy)
+[![SQLAlchemy](/images/technology-logos/sqlalchemy-logo.svg 'Connect an SQLAlchemy application to Neon')](/docs/guides/sqlalchemy)
 
-[![Symfony](/images/technology-logos/symfony-logo.svg "Connect from Symfony with Doctrine to Neon")](/docs/guides/symfony)
+[![Symfony](/images/technology-logos/symfony-logo.svg 'Connect from Symfony with Doctrine to Neon')](/docs/guides/symfony)
 
 </TechnologyNavigation>
 

@@ -7,12 +7,36 @@ module.exports = {
     appDir: true,
   },
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: '**',
       },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/fonts/:slug*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/:all*(svg|jpg|png)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, must-revalidate',
+          },
+        ],
+      },
+    ];
   },
   async redirects() {
     const docPosts = await getAllPosts();
@@ -45,7 +69,7 @@ module.exports = {
       // Proxy has an error message, that suggests to read `https://neon.tech/sni` for more details.
       {
         source: '/sni',
-        destination: '/docs/how-to-guides/connectivity-issues',
+        destination: '/docs/connect/connection-errors',
         permanent: true,
       },
       {
@@ -67,6 +91,16 @@ module.exports = {
         source: '/blog/postgres-autoscaling',
         destination: '/blog/scaling-serverless-postgres',
         permanent: false,
+      },
+      {
+        source: '/api-reference',
+        destination: 'https://api-docs.neon.tech/',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/v2',
+        destination: 'https://api-docs.neon.tech/v2',
+        permanent: true,
       },
       ...docsRedirects,
     ];

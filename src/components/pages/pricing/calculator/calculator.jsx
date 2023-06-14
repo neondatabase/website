@@ -114,12 +114,12 @@ const Calculator = () => {
     [writtenDataValue]
   );
 
-  const totalCost = useMemo(
-    () => computeTimeCost + storageCost + writtenAndTransferDataCost,
-    [computeTimeCost, storageCost, writtenAndTransferDataCost]
-  );
+  const totalCost = useMemo(() => computeTimeCost + storageCost, [computeTimeCost, storageCost]);
 
-  const estimatedPrice = `$${totalCost.toFixed(2)}`;
+  const estimatedPrice = useMemo(
+    () => (totalCost + writtenAndTransferDataCost).toFixed(2),
+    [totalCost, writtenAndTransferDataCost]
+  );
 
   useEffect(
     () =>
@@ -130,7 +130,10 @@ const Calculator = () => {
   );
 
   return (
-    <section className="safe-paddings mb-40 mt-[17.25rem] xl:mt-40 xl:mb-36 lg:mt-32 lg:mb-16 md:my-20">
+    <section
+      id="calc"
+      className="safe-paddings mb-40 mt-[17.25rem] xl:mb-36 xl:mt-40 lg:mb-16 lg:mt-32 md:my-20"
+    >
       <Container size="mdDoc">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <Heading
@@ -153,7 +156,7 @@ const Calculator = () => {
                   <span>Compute size</span>
                   <Tooltip
                     id="compute"
-                    content="Compute size is measured in Compute Units (CU). In Neon, a CU has 1 vCPU and 4 GB of RAM. The number of CUs defines the processing power of your Neon compute."
+                    content="Compute size is measured in Compute Units (CUs). One CU has 1 vCPU and 4 GB of RAM. The number of CUs determines processing power."
                   />
                 </h4>
                 <Slider.Root
@@ -177,7 +180,7 @@ const Calculator = () => {
                   </Slider.Track>
                   <LazyMotion features={domAnimation}>
                     <Slider.Thumb
-                      className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
+                      className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:left-1/2 before:top-1/2 before:h-6 before:w-6 before:-translate-x-1/2 before:-translate-y-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
                       onPointerEnter={() => computeSizeControls.start('click')}
                       onPointerLeave={() => computeSizeControls.start('from')}
                     >
@@ -219,7 +222,7 @@ const Calculator = () => {
                   </Slider.Track>
                   <LazyMotion features={domAnimation}>
                     <Slider.Thumb
-                      className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
+                      className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:left-1/2 before:top-1/2 before:h-6 before:w-6 before:-translate-x-1/2 before:-translate-y-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
                       onPointerEnter={() => activeTimeControls.start('click')}
                       onPointerLeave={() => activeTimeControls.start('from')}
                     >
@@ -237,7 +240,7 @@ const Calculator = () => {
                   <span className="text-gray-new-70">per day</span>
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-gray-new-20 pt-5 text-gray-new-94 ">
+              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-gray-new-20 pt-5 text-gray-new-94 xs:grid-cols-1 xs:justify-items-start xs:gap-y-2">
                 <p className="whitespace-nowrap text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
                   <span className="text-pricing-primary-1">${computeTimeCost.toFixed(2)} </span>
@@ -270,7 +273,7 @@ const Calculator = () => {
                   </Slider.Track>
                   <LazyMotion features={domAnimation}>
                     <Slider.Thumb
-                      className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-6 before:w-6 before:-translate-y-1/2 before:-translate-x-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
+                      className="flex cursor-pointer items-center justify-center rounded-full before:absolute before:left-1/2 before:top-1/2 before:h-6 before:w-6 before:-translate-x-1/2 before:-translate-y-1/2 focus:outline-none focus-visible:ring focus-visible:ring-pricing-primary-4 focus-visible:ring-opacity-75"
                       onPointerEnter={() => projectStorageControls.start('click')}
                       onPointerLeave={() => projectStorageControls.start('from')}
                     >
@@ -287,7 +290,7 @@ const Calculator = () => {
                   {storageValue} GiB
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-gray-new-20 pt-5 text-gray-new-94">
+              <div className="mt-5 grid grid-cols-2 border-t border-dashed border-gray-new-20 pt-5 text-gray-new-94 xs:grid-cols-1 xs:justify-items-start xs:gap-y-2">
                 <p className="whitespace-nowrap text-sm font-medium leading-none">
                   <span className="uppercase">Subtotal: </span>
                   <span className="text-pricing-primary-1">${storageCost.toFixed(2)} </span>
@@ -306,7 +309,7 @@ const Calculator = () => {
                 Data transfer and Written data
                 <Tooltip
                   id="data"
-                  content="Written data is the amount of data written from compute to storage. Data transfer is the amount of data transferred out of Neon."
+                  content="Written data is the volume of data written from compute to storage. Data transfer is the volume of data transferred out of Neon."
                 />
               </h3>
               <LazyMotion features={domAnimation}>
@@ -428,8 +431,8 @@ const Calculator = () => {
           <div
             className="relative z-10 col-start-2 row-span-3 row-start-1 flex flex-col self-start rounded-[10px] border border-[var(--accentColor)] px-6 pb-5 pt-6 transition-colors duration-200 lg:px-5 md:col-start-1 md:row-span-1 md:grid md:grid-cols-2 md:gap-x-32 sm:grid-cols-1 sm:gap-x-0"
             style={{
-              '--accentColor': totalCost >= CUSTOM_THRESHOLD ? '#f0f075' : '#00e599',
-              '--hoverColor': totalCost >= CUSTOM_THRESHOLD ? '#f5f5a3' : '#00ffaa',
+              '--accentColor': estimatedPrice >= CUSTOM_THRESHOLD ? '#f0f075' : '#00e599',
+              '--hoverColor': estimatedPrice >= CUSTOM_THRESHOLD ? '#f5f5a3' : '#00ffaa',
             }}
           >
             <h3 className="text-lg font-medium leading-none tracking-tight text-white md:col-start-2 sm:col-start-1">
@@ -437,13 +440,13 @@ const Calculator = () => {
             </h3>
             <p className="mt-6 flex items-end gap-x-2 leading-none text-white lg:mt-4 md:col-start-2 sm:col-start-1 sm:mt-6">
               <span className="text-[56px] font-light tracking-[-0.06em] text-[var(--accentColor)] transition-colors duration-200 lg:text-[40px] sm:text-[44px]">
-                {estimatedPrice}
+                ${estimatedPrice}
               </span>
               <span className="mb-1 block text-xl tracking-normal">/mo</span>
             </p>
             <AnimatedButton
               className="my-6 w-full max-w-[260px] !bg-[var(--accentColor)] !py-[17px] !text-lg font-medium hover:!bg-[var(--hoverColor)] lg:my-5 md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1 sm:my-8"
-              to={totalCost >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
+              to={estimatedPrice >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               theme="primary"
               size="sm"
               animationSize="sm"
@@ -452,10 +455,10 @@ const Calculator = () => {
               spread={1}
               isAnimated
             >
-              {totalCost >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
+              {estimatedPrice >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </AnimatedButton>
-            <ul className="my-7 flex w-full flex-grow flex-col space-y-3.5 text-lg leading-none tracking-tight text-pricing-black lg:mt-2.5 md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2 sm:max-h-20 sm:flex-wrap sm:gap-y-6 sm:gap-x-2 sm:space-y-0">
-              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:w-1/2 sm:pl-0">
+            <ul className="my-7 flex w-full flex-grow flex-col space-y-3.5 text-lg leading-none tracking-tight text-black-new lg:mt-2.5 md:col-span-1 md:row-span-3 md:row-start-1 md:my-0 md:self-start sm:row-span-1 sm:my-2 sm:max-h-20 sm:flex-wrap sm:gap-x-2 sm:gap-y-6 sm:space-y-0 xs:max-h-max">
+              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:w-1/2 sm:pl-0 xs:w-auto">
                 <CheckIcon
                   className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
                   aria-hidden
@@ -463,7 +466,7 @@ const Calculator = () => {
                 <span className="mr-1">{computeUnits}</span>
                 <span>compute units</span>
               </li>
-              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:w-1/2 sm:pl-0">
+              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:w-1/2 sm:pl-0 xs:w-auto">
                 <CheckIcon
                   className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
                   aria-hidden
@@ -471,7 +474,7 @@ const Calculator = () => {
                 <span className="mr-1">{storageValue} GiB</span>
                 <span>storage</span>
               </li>
-              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:w-1/2 sm:pl-0">
+              <li className="relative flex items-center text-base leading-tight tracking-tight text-white after:absolute after:-bottom-4 after:left-0 after:h-[1px] after:w-full after:bg-black after:opacity-[0.05] md:pl-0 sm:w-1/2 sm:pl-0 xs:w-auto">
                 <CheckIcon
                   className="mr-2 w-4 text-[var(--accentColor)] transition-colors duration-200"
                   aria-hidden

@@ -203,11 +203,12 @@ const Hero = () => {
                     </ul>
                   </div>
                 </Link>
+
                 <motion.span
                   className={clsx(
-                    'pointer-events-none absolute top-0 left-0 z-20 h-full w-full rounded-[10px] border border-transparent transition-colors duration-300 md:border-[var(--accentColor)] md:!opacity-100',
+                    'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border transition-colors duration-300 md:border-[var(--accentColor)] md:!opacity-100',
                     isLoad !== true && '!opacity-100',
-                    activeItemIndex === index && 'border-[var(--accentColor)]'
+                    activeItemIndex === index ? 'border-[var(--accentColor)]' : 'border-transparent'
                   )}
                   initial="from"
                   exit="exit"

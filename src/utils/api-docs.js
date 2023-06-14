@@ -5,10 +5,11 @@ const { glob } = require('glob');
 const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 
+const { RELEASE_NOTES_DIR_PATH } = require('../constants/docs');
+
 const getExcerpt = require('./get-excerpt');
 
 const DOCS_DIR_PATH = 'content/docs';
-const RELEASE_NOTES_DIR_PATH = `content/release-notes`;
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
@@ -91,13 +92,9 @@ const getAllReleaseNotes = async () => {
     .map((slug) => {
       if (!getPostBySlug(slug, RELEASE_NOTES_DIR_PATH)) return;
       const post = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
+      const { data, content } = post;
 
-      const {
-        data: { isDraft },
-        content,
-      } = post;
-
-      return { slug: slug.replace('/', ''), isDraft, content };
+      return { slug: slug.replace('/', ''), isDraft: data?.isDraft, content };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };

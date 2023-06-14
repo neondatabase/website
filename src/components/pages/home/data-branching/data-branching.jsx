@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -16,7 +18,7 @@ const DataBranching = () => {
 
   return (
     <section
-      className="safe-paddings mt-[270px] mb-48 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20"
+      className="safe-paddings mb-48 mt-[270px] 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20"
       ref={wrapperRef}
     >
       <Container className="z-10" size="md">
@@ -26,8 +28,8 @@ const DataBranching = () => {
           </Heading>
           <p className="t-xl mt-8 3xl:max-w-[504px] 2xl:mt-7 2xl:max-w-[416px] xl:mt-6 lg:max-w-none">
             Neon allows you to instantly branch your Postgres database to support modern development
-            workflows. You can create branches for test environments and for every deployment
-            in your CI/CD pipeline.
+            workflows. You can create branches for test environments and for every deployment in
+            your CI/CD pipeline.
           </p>
 
           <p className="t-xl mt-8 3xl:max-w-[504px] 2xl:mt-7 2xl:max-w-[416px] xl:mt-6 lg:max-w-none">
@@ -38,7 +40,7 @@ const DataBranching = () => {
             to="/branching/"
             theme="black-primary-1"
           >
-            Read more
+            Read more<span className="sr-only"> about data branching</span>
           </Link>
         </div>
       </Container>

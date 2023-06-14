@@ -103,6 +103,10 @@ export default {
         //   to: LINKS.postgresDocs,
         // },
         {
+          text: 'Support',
+          to: LINKS.support,
+        },
+        {
           text: 'Security',
           to: LINKS.security,
         },

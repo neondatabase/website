@@ -43,7 +43,7 @@ const Hero = () => {
   return (
     <section className="safe-paddings relative bg-black pt-[182px] text-white xl:pt-[136px] lg:pt-[76px] md:pt-16 sm:pt-12">
       <img
-        className="absolute top-0 left-1/2 w-full max-w-[1920px] -translate-x-1/2 blur-[80px] lg:hidden"
+        className="absolute left-1/2 top-0 w-full max-w-[1920px] -translate-x-1/2 blur-[80px] lg:hidden"
         src={bgShapeSvg}
         width={1920}
         height={760}
@@ -59,7 +59,7 @@ const Hero = () => {
         </Heading>
         <p className="mt-3 text-center text-base xl:mt-2.5 md:mt-2">{description}</p>
         <div className="relative mt-14 xl:mt-12 xl:w-full lg:mt-9 md:mt-6">
-          <StickerIcon className="absolute top-[-198px] right-[-154px] h-[300px] w-[300px] xl:hidden" />
+          <StickerIcon className="absolute right-[-154px] top-[-198px] h-[300px] w-[300px] xl:hidden" />
           <div className="absolute -inset-x-16 top-16 md:w-[150%]">
             <Image
               className="rounded-[200px] opacity-30 blur-[70px] md:h-[132px]"

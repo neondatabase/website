@@ -22,9 +22,13 @@ This guide steps you through how to connect from Prisma to Neon, how to use Pris
 
 The project is created and you are presented with a dialog that provides connection details. Copy the connection string, which looks similar to the following:
 
+<CodeBlock shouldWrap>
+
 ```text
 postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/neondb
 ```
+
+</CodeBlock>
 
 <Admonition type="info">
 A Neon project is created with a default PostgreSQL role named for your account, and a default database named `neondb`. This guide uses the `neondb` database as the primary database.
@@ -42,9 +46,13 @@ For cloud-hosted databases like Neon, you must create the shadow database manual
 
 The connection string for this database should be the same as the connection string for your `neondb` database except for the database name:
 
+<CodeBlock shouldWrap>
+
 ```text
 postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/shadow
 ```
+
+</CodeBlock>
 
 ## Set up your Prisma project
 
@@ -94,10 +102,14 @@ In this step, you will update your project's `.env` file with the connection str
 
 When you are finished, your `.env` file should have entries similar to the following:
 
+<CodeBlock shouldWrap>
+
 ```text
 DATABASE_URL=postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/neondb?connect_timeout=10
 SHADOW_DATABASE_URL=postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/shadow?connect_timeout=10
 ```
+
+</CodeBlock>
 
 <Admonition type="note">
 A `?connect_timeout=10` parameter is added to the connection strings above to avoid database connection timeouts. The default `connect_timeout` setting is 5 seconds, which is usually enough time for a database connection to be established. However, network latency combined with the short amount of time required to start an idle Neon compute instance can sometimes result in a connection failure. Setting `connect_timeout=10` helps avoid this issue.

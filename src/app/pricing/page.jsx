@@ -5,12 +5,16 @@ import Faq from 'components/pages/pricing/faq';
 import Hero from 'components/pages/pricing/hero';
 import Metrics from 'components/pages/pricing/metrics';
 import Layout from 'components/shared/layout';
+import SEO_DATA from 'constants/seo-data';
+import getMetadata from 'utils/get-metadata';
+
+export const metadata = getMetadata(SEO_DATA.pricing);
 
 const PricingPage = () => (
   <Layout
-    className="bg-pricing-black text-white"
-    headerTheme="pricing"
-    footerTheme="pricing"
+    className="bg-black-new text-white"
+    headerTheme="black-new"
+    footerTheme="black-new"
     footerWithTopBorder
   >
     <Hero />

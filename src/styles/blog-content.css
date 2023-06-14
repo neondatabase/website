@@ -1,14 +1,30 @@
 @layer components {
   .prose-blog {
-    @apply max-w-none text-black;
+    @apply max-w-none leading-normal text-gray-new-90 prose-p:my-4 prose-p:text-gray-new-90 prose-strong:text-gray-new-90 prose-ol:my-5 prose-ul:my-5 prose-li:my-4;
+    @apply prose-headings:font-medium prose-headings:leading-tight prose-headings:tracking-tighter prose-headings:text-white;
+    @apply prose-h2:mb-5 prose-h2:mt-10 prose-h2:text-[36px] prose-h3:mb-4 prose-h3:mt-7 prose-h3:text-[28px] prose-h4:mb-4 prose-h4:mt-6 prose-h4:text-2xl prose-h5:mb-4 prose-h5:mt-5 prose-h5:text-xl md:prose-h2:text-[32px] sm:prose-h2:text-[26px];
+    @apply prose-a:font-normal prose-a:text-green-45 prose-a:no-underline prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out hover:prose-a:text-[#47FFC2] sm:prose-a:break-words;
+    @apply prose-figure:my-10 prose-img:my-10 md:prose-figure:my-8 md:prose-img:my-8;
 
-    a:not(.anchor) {
-      @apply border-b-2 border-b-primary-1 no-underline transition-colors duration-200 ease-in-out hover:text-primary-1 sm:break-words;
+    > * {
+      &:first-child {
+        @apply mt-0;
+      }
+
+      &:last-child {
+        @apply mb-0;
+      }
+    }
+
+    a {
+      > code {
+        @apply !text-green-45 transition-colors duration-200 hover:!text-[#47FFC2];
+      }
     }
 
     ul,
     ol {
-      @apply list-none pl-6;
+      @apply list-none;
 
       > li {
         @apply relative pl-0;
@@ -24,11 +40,11 @@
     }
 
     ul {
-      @apply md:pl-4;
+      @apply pl-3.5;
 
       > li {
         &::before {
-          @apply -left-6 top-4 h-2 w-2 rounded-full bg-primary-1 content-[''] md:top-3 md:-left-4 md:h-1.5 md:w-1.5;
+          @apply -left-3.5 top-3 h-1 w-1 rounded-[1px] bg-current content-[''];
         }
       }
     }
@@ -41,44 +57,52 @@
         counter-increment: custom-counter;
 
         &::before {
-          @apply -left-2 top-4 -translate-x-full md:top-3.5 md:-left-1;
+          @apply -left-2 top-[12px] -translate-x-full text-current md:-left-1 md:top-3.5;
           content: counter(custom-counter) '. ' !important;
         }
       }
     }
 
-    .table-wrapper {
-      @apply md:overflow-x-auto;
+    .wp-block-table {
+      @apply overflow-x-auto md:-mx-4 md:px-4;
     }
 
     table {
       @apply w-full border-hidden md:min-w-[500px];
 
       th {
-        @apply border border-gray-6 bg-secondary-6 bg-opacity-30 p-3.5 md:px-2;
+        @apply border border-white border-opacity-[0.06] p-3.5 md:px-2;
       }
 
       td {
-        @apply border border-gray-6 p-3.5 md:px-2;
+        @apply border border-white border-opacity-[0.06] p-3.5 md:px-2;
       }
     }
 
     pre {
-      @apply !border !border-[#E5E5E5] !bg-[#FBFBFB];
+      @apply !bg-black-new;
 
       code {
-        text-shadow: unset;
+        text-shadow: unset !important;
 
-        @apply highlighted-code !font-mono !text-base !text-black;
+        @apply highlighted-code overflow-x-auto !font-mono !text-sm leading-normal !text-white md:min-w-[686px];
       }
     }
 
     :not(pre) > code {
-      @apply !rounded-sm !border !border-[#E5E5E5] bg-[#FBFBFB] !px-1.5 !py-0.5 !font-mono !font-normal !text-black;
+      @apply !rounded border border-[#494B50] bg-[#242628] !px-1 !py-0.5 !font-mono text-base !font-normal leading-none text-white;
 
       &::before,
       &::after {
         @apply hidden;
+      }
+    }
+
+    .code-wrap {
+      code {
+        white-space: break-spaces !important;
+
+        @apply !max-w-full !break-words;
       }
     }
 
@@ -92,18 +116,51 @@
         @apply relative h-0 overflow-hidden pb-[56.25%];
 
         iframe {
-          @apply absolute top-0 left-0 h-full w-full;
+          @apply absolute left-0 top-0 h-full w-full;
         }
       }
     }
 
-    blockquote {
-      @apply border-primary-1 font-normal not-italic;
+    .wp-block-quote {
+      @apply border-l-[3px] border-yellow-70 pl-4 font-normal not-italic;
 
       p {
+        @apply my-0 text-lg;
+
         &::before,
         &::after {
           @apply hidden;
+        }
+      }
+
+      cite {
+        @apply mt-3.5 inline-flex font-normal not-italic leading-none tracking-[-0.02em] text-gray-new-70;
+
+        em {
+          @apply not-italic;
+        }
+      }
+    }
+
+    .wp-block-pullquote {
+      blockquote {
+        @apply relative border-l-[3px] border-green-45 pl-9 before:absolute before:top-0 before:h-8 before:w-8 before:bg-[url('/images/blockquote.svg')] before:bg-[length:32px_32px] before:bg-no-repeat;
+      }
+
+      p {
+        @apply my-0 pt-11 text-2xl font-normal not-italic leading-snug;
+
+        &::before,
+        &::after {
+          @apply hidden;
+        }
+      }
+
+      cite {
+        @apply mt-3.5 inline-flex font-normal not-italic leading-none tracking-[-0.02em] text-gray-new-70;
+
+        em {
+          @apply not-italic;
         }
       }
     }

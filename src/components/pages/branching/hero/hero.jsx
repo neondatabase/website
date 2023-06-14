@@ -12,7 +12,7 @@ import illustration from './images/illustration.png';
 const Hero = () => (
   <section className="hero safe-paddings overflow-hidden bg-black pt-[158px] text-white xl:pt-[136px] lg:pt-9 sm:pt-6">
     <Container
-      className="flex w-full items-end justify-between space-x-14 border-b border-dashed border-gray-2 lg:flex-col lg:items-center lg:space-y-14 lg:space-x-0"
+      className="flex w-full items-end justify-between space-x-14 border-b border-dashed border-gray-2 lg:flex-col lg:items-center lg:space-x-0 lg:space-y-14"
       size="sm"
     >
       <div className="max-w-[605px] shrink-0 pb-[88px] xl:max-w-[376px] xl:pb-[60px] lg:pb-0 lg:text-center">
@@ -25,9 +25,9 @@ const Hero = () => (
         <p className="mt-7 text-xl xl:text-base">
           Neon allows you to instantly branch your data the same way that you branch your code.
         </p>
-        <div className="mt-9 space-x-10 xl:space-x-8 xs:flex xs:flex-col xs:items-center xs:space-y-6 xs:space-x-0">
+        <div className="mt-9 space-x-10 xl:space-x-8 xs:flex xs:flex-col xs:items-center xs:space-x-0 xs:space-y-6">
           <Button
-            className="py-6 px-9 !text-lg xl:!text-base lg:py-5 lg:px-8"
+            className="px-9 py-6 !text-lg xl:!text-base lg:px-8 lg:py-5"
             theme="primary"
             size="sm"
             to={LINKS.signup}

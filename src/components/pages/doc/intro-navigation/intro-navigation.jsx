@@ -2,52 +2,55 @@ import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import AudioJack from 'icons/audio-jack.inline.svg';
-import Filter from 'icons/filter-organization.inline.svg';
-import Plug from 'icons/plug.inline.svg';
-import Puzzle from 'icons/puzzle.inline.svg';
-import SplitBranch from 'icons/split-branch.inline.svg';
-import UploadFile from 'icons/upload-file.inline.svg';
+import AppStore from './images/app-store.inline.svg';
+import AudioJack from './images/audio-jack.inline.svg';
+import Import from './images/import.inline.svg';
+import Ladder from './images/ladder.inline.svg';
+import SplitBranch from './images/split-branch.inline.svg';
+import Transactions from './images/transactions.inline.svg';
 
-const classNames =
-  'sm:static sm:transform-none absolute -translate-x-[38px] !transition-colors !duration-200 text-black dark:text-white group-hover:text-secondary-8 dark:group-hover:text-[#00E599]';
+const classNames = 'w-4 h-4 relative z-10 shrink-0 mt-0.5 text-secondary-8 dark:text-green-45';
 
 const renderIcon = (text) => {
   switch (text) {
     case 'Connect':
       return <AudioJack className={classNames} />;
     case 'Import data':
-      return <UploadFile className={classNames} />;
+      return <Import className={classNames} />;
     case 'Manage':
-      return <Filter className={classNames} />;
+      return <Ladder className={classNames} />;
     case 'Branching':
       return <SplitBranch className={classNames} />;
     case 'PostgreSQL extensions':
-      return <Puzzle className={classNames} />;
+      return <AppStore className={classNames} />;
     case 'Neon API Reference':
-      return <Plug className={classNames} />;
+      return <Transactions className={classNames} />;
     default:
       return null;
   }
 };
 
 const IntroNavigation = ({ children = null }) => (
-  <ul className="not-prose !my-10 flex flex-col gap-5 !p-0">
+  <ul className="not-prose !my-10 grid grid-cols-2 gap-4 !p-0 sm:grid-cols-1">
     {React.Children.map(children, (child, index) => {
       const { children, href, title } = child.props?.children.props ?? {};
 
       return (
-        <li className="!m-0 before:hidden">
+        <li className="!m-0 flex before:hidden">
           <NextLink
+            className="relative flex w-full items-start gap-x-3.5 rounded-[10px] border border-gray-new-94 px-6 py-5 transition-colors duration-200 before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA_0%,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200 hover:border-gray-new-80 hover:before:opacity-100 dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8)_0%,rgba(36,38,40,0)_100%)] dark:hover:border-gray-new-30 sm:p-3"
             key={index}
             href={href}
-            className="group block rounded-[10px] !border-none bg-gray-9 pl-[61px] pt-6 pr-6 pb-2 !transition-colors !duration-200 hover:bg-gray-8 dark:bg-gray-1 dark:hover:bg-gray-2 sm:p-6 sm:pb-2"
           >
-            <div className="relative flex content-center gap-[18px]">
-              {renderIcon(children)}
-              <h4 className="text-xl font-semibold text-black dark:text-white">{children}</h4>
+            {renderIcon(children)}
+            <div className="relative z-10 flex flex-col gap-x-2.5">
+              <h3 className="text-lg font-semibold leading-tight text-black-new dark:text-white">
+                {children}
+              </h3>
+              <p className="mt-2.5 text-sm leading-normal text-gray-new-50 dark:text-gray-new-80">
+                {title}
+              </p>
             </div>
-            <p className="mt-2 text-sm text-gray-4 dark:text-gray-7">{title}</p>
           </NextLink>
         </li>
       );
