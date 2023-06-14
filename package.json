@@ -10,7 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "dev:build": "next build",
-    "postbuild": "node ./src/scripts/rss.js && next-sitemap",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "format": "prettier --write .",
     "lint": "npm run lint:js && npm run lint:md",
