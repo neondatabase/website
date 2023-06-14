@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -10,7 +11,12 @@ import { ChatWidgetTrigger } from '../chat-widget';
 import Item from './item';
 
 const Sidebar = ({ className = null, sidebar, currentSlug }) => (
-  <aside className={className}>
+  <aside
+    className={clsx(
+      'relative col-start-1 col-end-4 max-w-[254px] pb-20 pt-[111px] before:absolute before:-right-5 before:top-0 before:z-10 before:h-full before:w-screen before:bg-gray-new-98 dark:before:bg-gray-new-10 lg:hidden',
+      className
+    )}
+  >
     <Search className="z-30" />
     <nav className="relative z-20 mt-8">
       <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
