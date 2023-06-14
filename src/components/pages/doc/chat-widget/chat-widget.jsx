@@ -199,10 +199,10 @@ const ChatWidget = () => {
                 {!isLoading &&
                   (!shouldTryAgain ? (
                     <button
-                      className="absolute right-[30px] top-[11px] h-5 w-5 opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
+                      className="absolute right-5 top-0 flex h-[42px] w-[42px] items-center justify-center opacity-0 transition-opacity duration-200 peer-focus:opacity-100"
                       type="submit"
                     >
-                      <SendIcon className="text-gray-new-20 dark:text-gray-new-90" />
+                      <SendIcon className="h-5 w-5 text-gray-new-20 dark:text-gray-new-90" />
                     </button>
                   ) : (
                     <Button
