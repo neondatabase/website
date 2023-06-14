@@ -7,7 +7,6 @@ import React, { useState, useRef } from 'react';
 import Footer from 'components/shared/footer';
 import Header from 'components/shared/header';
 import MobileMenu from 'components/shared/mobile-menu';
-import Topbar from 'components/shared/topbar';
 
 const Layout = ({
   className = null,
@@ -33,37 +32,34 @@ const Layout = ({
   };
 
   return (
-    <>
-      <Topbar />
-      {/* 44px is the height of the topbar */}
-      <div className="relative flex min-h-[calc(100vh-44px)] flex-col">
-        <Header
-          withBottomBorder={headerWithBottomBorder}
-          theme={headerTheme}
-          isMobileMenuOpen={isMobileMenuOpen}
-          ref={headerRef}
-          isSignIn={isSignIn}
-          isSticky={isHeaderSticky}
-          isDocPage={isDocPage}
-          onBurgerClick={handleHeaderBurgerClick}
-        />
-        <main
-          className={clsx(
-            withOverflowHidden && 'overflow-hidden',
-            'flex flex-1 flex-col dark:bg-black',
-            className
-          )}
-        >
-          {children}
-        </main>
-        <Footer isDocPage={isDocPage} theme={footerTheme} withTopBorder={footerWithTopBorder} />
-        <MobileMenu
-          isOpen={isMobileMenuOpen}
-          headerRef={headerRef}
-          onOutsideClick={handleMobileMenuOutsideClick}
-        />
-      </div>
-    </>
+    // 44px is the height of the topbar
+    <div className="relative flex min-h-[calc(100vh-44px)] flex-col">
+      <Header
+        withBottomBorder={headerWithBottomBorder}
+        theme={headerTheme}
+        isMobileMenuOpen={isMobileMenuOpen}
+        ref={headerRef}
+        isSignIn={isSignIn}
+        isSticky={isHeaderSticky}
+        isDocPage={isDocPage}
+        onBurgerClick={handleHeaderBurgerClick}
+      />
+      <main
+        className={clsx(
+          withOverflowHidden && 'overflow-hidden',
+          'flex flex-1 flex-col dark:bg-black',
+          className
+        )}
+      >
+        {children}
+      </main>
+      <Footer isDocPage={isDocPage} theme={footerTheme} withTopBorder={footerWithTopBorder} />
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        headerRef={headerRef}
+        onOutsideClick={handleMobileMenuOutsideClick}
+      />
+    </div>
   );
 };
 
