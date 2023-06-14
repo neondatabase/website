@@ -5,20 +5,10 @@ import React, { useEffect, useRef } from 'react';
 import Button from 'components/shared/button';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import MENUS from 'constants/menus.js';
+import MENUS from 'constants/menus';
 import useClickOutside from 'hooks/use-click-outside';
 
-// import DiscordIcon from './images/mobile-menu-discord.inline.svg';
-import DiscussionsIcon from './images/mobile-menu-discussions.inline.svg';
-import GithubIcon from './images/mobile-menu-github.inline.svg';
-
 const ANIMATION_DURATION = 0.2;
-
-const icons = {
-  // discord: DiscordIcon,
-  github: GithubIcon,
-  discussions: DiscussionsIcon,
-};
 
 const variants = {
   from: {
@@ -65,28 +55,24 @@ const MobileMenu = ({ isOpen = false, headerRef, onOutsideClick }) => {
       ref={ref}
     >
       <ul className="flex flex-col">
-        {MENUS.mobile.map(({ iconName, text, to, description }, index) => {
-          const Icon = icons[iconName];
-          return (
-            <li className="border-b border-b-gray-6" key={index}>
-              {Icon && description ? (
-                <Link className="flex items-center whitespace-nowrap py-4" to={to}>
-                  <Icon className="flex-shrink-0" aria-hidden />
-                  <span className="ml-3">
-                    <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
-                      {text}
-                    </span>
-                    <span className="mt-1.5 block leading-none text-black">{description}</span>
+        {MENUS.mobile.map(({ text, to, description }, index) => (
+          <li className="border-b border-b-gray-6" key={index}>
+            {description ? (
+              <Link className="flex items-center whitespace-nowrap py-4" to={to}>
+                <span className="ml-3">
+                  <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
+                    {text}
                   </span>
-                </Link>
-              ) : (
-                <Link className="!block py-4 text-lg" to={to}>
-                  {text}
-                </Link>
-              )}
-            </li>
-          );
-        })}
+                  <span className="mt-1.5 block leading-none text-black">{description}</span>
+                </span>
+              </Link>
+            ) : (
+              <Link className="!block py-4 text-lg" to={to}>
+                {text}
+              </Link>
+            )}
+          </li>
+        ))}
       </ul>
       <div className="mt-5 space-y-4">
         <Button
