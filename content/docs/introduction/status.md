@@ -1,5 +1,6 @@
 ---
 title: Neon status
+subtitle: Stay informed about the performance and availability of Neon
 enableTableOfContents: true
 ---
 
