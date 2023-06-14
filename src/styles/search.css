@@ -302,7 +302,7 @@
 
 .DocSearch-notFound {
   .DocSearch-Button {
-    @apply flex h-16 items-center rounded-[110px] border-2 bg-[length:20px_20px] bg-[left_1.5rem_center] px-6 pl-14 lg:border-2;
+    @apply flex h-16 max-w-[488px] items-center rounded-[110px] border-2 bg-[length:20px_20px] bg-[left_1.5rem_center] px-6 pl-14 lg:border-2;
   }
 
   .DocSearch-Button-Placeholder {
