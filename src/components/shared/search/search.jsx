@@ -34,6 +34,23 @@ const Search = ({ className = null }) => {
   useBodyClassObserver((isActive) => {
     document.body.style.overflow = isActive ? 'hidden' : 'auto';
   });
+  // @NOTE: this is a workaround to prevent scroll to the page bottom when closing search modal in Safari
+  // https://github.com/algolia/docsearch/issues/1260#issuecomment-1011939736
+  useEffect(() => {
+    let div = document.querySelector('.fixed[data-docsearch-fixed]');
+
+    if (!div) {
+      div = document.createElement('div');
+      div.classList.add('fixed');
+      div.setAttribute('data-docsearch-fixed', '');
+      div.innerHTML = '<input type="text">';
+      document.body.appendChild(div);
+    }
+
+    return () => {
+      document.body.removeChild(div);
+    };
+  }, []);
 
   return (
     <div className={clsx('relative flex items-center justify-between', className)}>
