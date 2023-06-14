@@ -14,5 +14,3 @@ The status page includes the status for:
 To view the Neon Status page, please click [here](https://neonstatus.com/).
 
 We strive to maintain the highest level of service availability and performance, but in the case of any interruptions or maintenance, you'll be able to find the information you need promptly and accurately. Please remember to bookmark the link for easy access in the future.
-
-Your understanding and trust in our service is paramount to us. As such, we promise to keep you updated with the most recent status of our service.
