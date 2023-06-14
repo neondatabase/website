@@ -226,15 +226,10 @@ const ChatWidget = () => {
                   </Button>
                 )}
                 {isStopped && (
-                  <Button
-                    className="absolute -top-8 left-1/2 flex w-[142px] -translate-x-1/2 items-center justify-center gap-x-1.5 border border-gray-new-94 bg-gray-new-94/40 font-normal normal-case text-gray-new-30 hover:bg-gray-new-94/80 hover:disabled:bg-gray-new-94/40 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80 dark:hover:bg-gray-new-15/80 dark:hover:disabled:bg-gray-new-15/40"
-                    size="xxs"
-                    type="submit"
-                    disabled
-                  >
+                  <span className="absolute -top-8 left-1/2 flex w-[142px] -translate-x-1/2 items-center justify-center gap-x-1.5 rounded-full border border-gray-new-94 bg-gray-new-94/40 py-1.5 text-xs font-normal normal-case leading-none text-gray-new-30 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80">
                     <CheckIcon className="h-3 w-3" />
                     <span>Stopped</span>
-                  </Button>
+                  </span>
                 )}
               </form>
             )}
