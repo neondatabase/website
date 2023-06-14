@@ -13,27 +13,7 @@ const INDEX_NAME = 'neon';
 const API_KEY = 'a975b8d2e7c08607b212bf690f8eb40a';
 const APP_ID = 'RAPNCKAFQF';
 
-function useBodyClassObserver(callback) {
-  useEffect(() => {
-    const body = document.querySelector('body');
-
-    const mutationCallback = (mutationsList) => {
-      const { classList } = mutationsList[0].target;
-      const isActive = classList.contains('DocSearch--active');
-      callback(isActive);
-    };
-
-    const observer = new MutationObserver(mutationCallback);
-    observer.observe(body, { attributes: true });
-
-    return () => observer.disconnect();
-  }, [callback]);
-}
-
 const Search = ({ className = null }) => {
-  useBodyClassObserver((isActive) => {
-    document.body.style.overflow = isActive ? 'hidden' : 'auto';
-  });
   // @NOTE: this is a workaround to prevent scroll to the page bottom when closing search modal in Safari
   // https://github.com/algolia/docsearch/issues/1260#issuecomment-1011939736
   useEffect(() => {
@@ -46,10 +26,6 @@ const Search = ({ className = null }) => {
       div.innerHTML = '<input type="text">';
       document.body.appendChild(div);
     }
-
-    return () => {
-      document.body.removeChild(div);
-    };
   }, []);
 
   return (
