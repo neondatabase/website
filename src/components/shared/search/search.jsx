@@ -5,9 +5,8 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
+import Link from 'components/shared/link';
 import debounce from 'utils/debounce';
-
-import Link from '../link/link';
 
 const INDEX_NAME = 'neon';
 const API_KEY = 'a975b8d2e7c08607b212bf690f8eb40a';
