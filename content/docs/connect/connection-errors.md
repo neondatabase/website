@@ -131,17 +131,16 @@ If you find that your connection string is defined correctly, see the instructio
 
 ## Couldn't connect to compute node
 
-This error arises when the Neon proxy, which routes connections to Neon, fails to establish a connection with your compute node. This issue sometimes results from repeated connection attempts during the compute node's restart phase after it has been idle due to [Auto-suspension](../reference/glossary#auto-suspend-compute) (scale to zero). Currently, the transition from an idle state to an active takes a few seconds, excluding any external factors that might increase connection latency.
+This error arises when the Neon proxy, which accepts and handles connections from clients that use the PostgreSQL protocol, fails to establish a connection with your compute node. This issue sometimes occurs due to repeated connection attempts during the compute node's restart phase after it has been idle due to [Auto-suspension](../reference/glossary#auto-suspend-compute) (scale to zero). Currently, the transition from an idle state to an active takes a few seconds, excluding any external factors that might increase connection latency.
 
 Consider these recommended steps:
 
-- Pause for a short period to allow the compute node to restart, then try reconnecting.
-- Verify the status of your compute node in the Neon Console to ensure it's active. For instructions, refer to [Check the status of a compute](../connect/connection-latency#check-the-status-of-a-compute).
-- Try [connecting with psql](https://neon.tech/docs/connect/query-with-psql-editor) to see if a connection can be established.
 - Visit the [Neon status page](https://neonstatus.com/) to ensure there are no ongoing issues.
+- Pause for a short period to allow the compute node to restart, then try reconnecting.
+- Try [connecting with psql](https://neon.tech/docs/connect/query-with-psql-editor) to see if a connection can be established.
 - Review the strategies in [Connection latency and timeouts](https://neon.tech/docs/connect/connection-latency) for avoiding connection issues due to compute startup time.
 
-If the connection issue continues, please reach out to [Support](https://neon.tech/docs/introduction/support).
+If the connection issue persists, please reach out to [Support](https://neon.tech/docs/introduction/support).
 
 ## Can't reach database server
 
