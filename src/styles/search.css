@@ -24,15 +24,19 @@
 }
 
 .DocSearch-Container {
-  @apply fixed top-0 left-0 z-[200] h-screen w-screen min-w-[320px] bg-[rgba(12,13,13,0.2)] dark:bg-[rgba(12,13,13,0.8)] lg:p-4;
+  @apply fixed top-0 left-0 z-[200] flex h-screen w-screen min-w-[320px] items-center justify-center bg-[rgba(12,13,13,0.2)] dark:bg-[rgba(12,13,13,0.8)] lg:p-4;
 
   .DocSearch-Modal {
-    @apply relative mx-auto mt-40 mb-auto max-w-[564px] flex-col rounded-[10px] border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-8;
+    @apply relative w-full max-w-[564px] rounded-[10px] border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-8;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
   }
 
   .DocSearch-SearchBar {
     @apply flex border-b border-gray-new-90 px-2 py-2 dark:border-gray-new-20;
+  }
+
+  .DocSearch-Dropdown {
+    @apply max-h-[calc(100vh-160px)] overflow-y-scroll;
   }
 
   .DocSearch-Footer {
