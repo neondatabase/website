@@ -1,7 +1,16 @@
 import Script from 'next/script';
 
 import 'styles/globals.css';
+
+import TopBar from 'components/shared/topbar';
+
 import ThemeProvider from './provider';
+
+const fontsBasePath = '/fonts';
+const fontsPaths = [
+  '/ibm-plex-sans/ibm-plex-sans-bold.woff2',
+  '/ibm-plex-sans/ibm-plex-sans-regular.woff2',
+];
 
 export const preferredRegion = 'edge';
 
@@ -16,6 +25,16 @@ const RootLayout = ({ children }) => (
       `}
         </Script>
       )}
+      {fontsPaths.map((fontPath, index) => (
+        <link
+          rel="preload"
+          href={`${fontsBasePath}${fontPath}`}
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+          key={index}
+        />
+      ))}
     </head>
     <body>
       {process.env.NODE_ENV === 'production' && (
@@ -25,7 +44,10 @@ const RootLayout = ({ children }) => (
           }}
         />
       )}
-      <ThemeProvider>{children}</ThemeProvider>
+      <ThemeProvider>
+        <TopBar />
+        {children}
+      </ThemeProvider>
     </body>
   </html>
 );

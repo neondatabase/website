@@ -147,6 +147,27 @@ To add a single page <https://example.com/changelog> to the docs sidebar, add th
 
 All available languages for code blocks can be found [here](https://prismjs.com/index.html#supported-languages).
 
+You can use fenced code blocks with three backticks (```) on the lines before and after the code block.
+
+To display code with options, wrap your code with `<CodeBlock></CodeBlock>` component.
+
+Right now `<CodeBlock>` accepts the following fields:
+
+- `showLineNumbers` - flag to show on the line numbers in the code block.
+- `shouldWrap` - flag to enable code wrapping in the code block.
+
+Example:
+
+````md
+<CodeBlock shouldWrap>
+
+```powershell
+powershell -Command "Start-Process -FilePath powershell -Verb RunAs -ArgumentList '-NoProfile','-InputFormat None','-ExecutionPolicy Bypass','-Command ""iex (iwr -UseBasicParsing https://cli.configu.com/install.ps1)""'"
+```
+
+</CodeBlock>
+````
+
 ## Code Tabs
 
 To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and write labels of code tabs in order:

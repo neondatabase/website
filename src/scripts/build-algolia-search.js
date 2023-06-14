@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const { getAllPosts, getAllReleaseNotes } = require('../utils/api-docs');
 const generateDocPagePath = require('../utils/generate-doc-page-path');
 const generateReleaseNotePath = require('../utils/generate-release-note-path');
+const getReleaseNotesCategoryFromSlug = require('../utils/get-release-notes-category-from-slug');
 
 const trimContent = (content) =>
   content
@@ -34,8 +35,7 @@ const transformPostsToSearchObjects = async (posts, releaseNotes) => {
 
   await releaseNotes.map(({ slug, content }) => {
     const slugDatePiece = slug.slice(0, 10);
-    const category = slug.slice(slug.lastIndexOf('-') + 1);
-    const capitalisedCategory = category.charAt(0).toUpperCase() + category.slice(1);
+    const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(slug);
     const chunks = chunk(trimContent(content), 300);
 
     return chunks.forEach((chunk, index) => {

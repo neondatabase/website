@@ -9,6 +9,7 @@ module.exports = {
       '3xl': { max: '1920px' },
       '2xl': { max: '1599px' },
       xl: { max: '1279px' },
+      lt: { max: '1127px' },
       lg: { max: '1023px' },
       md: { max: '767px' },
       sm: { max: '639px' },
@@ -18,7 +19,10 @@ module.exports = {
       inherit: 'inherit',
       current: 'currentColor',
       transparent: 'transparent',
-      black: '#1a1a1a',
+      black: {
+        DEFAULT: '#1a1a1a',
+        new: '#0c0d0d',
+      },
       white: '#ffffff',
       primary: {
         1: '#00e699',
@@ -48,6 +52,7 @@ module.exports = {
       },
       'gray-new': {
         8: '#131415',
+        10: '#18191B',
         15: '#242628',
         20: '#303236',
         30: '#494B50',
@@ -60,6 +65,24 @@ module.exports = {
         94: '#EFEFF0',
         95: '#F2F2F3',
         98: '#FAFAFA',
+      },
+      yellow: {
+        70: '#F0F075',
+      },
+      green: {
+        45: '#00E599',
+      },
+      blue: {
+        80: '#ADE0EB',
+      },
+      brown: {
+        70: '#F0B375',
+      },
+      pink: {
+        90: '#FFCCE5',
+      },
+      purple: {
+        70: '#B8ADEB',
       },
       code: {
         'green-1': '#078345',
@@ -162,5 +185,11 @@ module.exports = {
       }),
     },
   },
-  plugins: [require('tailwindcss-safe-area'), require('@tailwindcss/typography')],
+  plugins: [
+    require('tailwindcss-safe-area'),
+    require('@tailwindcss/typography'),
+    require('tailwindcss/plugin')(({ addVariant }) => {
+      addVariant('search-cancel', '&::-webkit-search-cancel-button');
+    }),
+  ],
 };

@@ -28,6 +28,7 @@ const styles = {
     'black-secondary-5': `${underlineCommonStyles} before:bg-secondary-5 hover:text-secondary-5`,
     'underline-primary-1':
       'text-primary-1 border-b-2 border-primary-1 transition-colors duration-200 hover:border-transparent',
+    blue: 'text-blue-80 transition-colors duration-200 hover:text-[#C6EAF1]',
   },
 };
 
@@ -40,6 +41,7 @@ const Link = forwardRef(
       to = null,
       withArrow = false,
       children,
+      prefetch = undefined,
       ...props
     },
     ref
@@ -57,10 +59,18 @@ const Link = forwardRef(
         {withArrow && <ArrowRightIcon className={clsx('ml-2 shrink-0')} />}
       </>
     );
+    // TODO: remove this when we upgrade to latest version of Next.js
+    if (to.includes('#')) {
+      return (
+        <a className={className} href={to} ref={ref} {...props}>
+          {content}
+        </a>
+      );
+    }
 
     if (to.startsWith('/')) {
       return (
-        <NextLink className={className} href={to} ref={ref} {...props}>
+        <NextLink className={className} href={to} ref={ref} prefetch={prefetch} {...props}>
           {content}
         </NextLink>
       );
@@ -81,6 +91,7 @@ Link.propTypes = {
   theme: PropTypes.oneOf(Object.keys(styles.theme)),
   children: PropTypes.node.isRequired,
   withArrow: PropTypes.bool,
+  prefetch: PropTypes.bool,
 };
 
 export default Link;

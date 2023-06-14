@@ -4,11 +4,11 @@ import clsx from 'clsx';
 import { motion, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
-import { useWindowSize } from 'react-use';
 
 import Item from 'components/pages/doc/sidebar/item';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
+import useWindowSize from 'hooks/use-window-size';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 const ANIMATION_DURATION = 0.2;
@@ -64,13 +64,13 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
   return (
     <nav
       className={clsx(
-        'safe-paddings relative border-b border-gray-7 bg-gray-9 dark:border-gray-2 dark:bg-gray-1',
+        'safe-paddings relative border-b border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8',
         className
       )}
       ref={wrapperRef}
     >
       <button
-        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-9 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-8 active:bg-gray-8 dark:bg-gray-1 dark:hover:bg-[rgba(64,64,64,0.6)] dark:active:bg-[rgba(64,64,64,0.6)] lg:px-8 md:px-4"
+        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-new-98 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-new-94 active:bg-gray-new-94 dark:bg-gray-new-15 lg:px-8 md:px-4"
         type="button"
         onClick={toggleMenu}
       >
@@ -83,12 +83,12 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
 
       <motion.ul
         className={clsx(
-          'fixed inset-x-0 top-[146px] bottom-0 z-20 overflow-y-scroll bg-white pl-8 pr-[29px] pt-2 pb-4 dark:bg-gray-1 md:pl-4 md:pr-[13px]'
+          'absolute inset-x-0 top-[calc(100%+1px)] z-20 overflow-y-scroll bg-white pb-4 pl-8 pr-[29px] pt-2 dark:bg-gray-new-10 md:pl-4 md:pr-[13px]'
         )}
         initial="from"
         animate={controls}
         variants={variants}
-        style={{ maxHeight: containerHeight }}
+        style={{ height: containerHeight }}
       >
         {sidebar.map((item, index) => (
           <Item {...item} currentSlug={currentSlug} key={index} />

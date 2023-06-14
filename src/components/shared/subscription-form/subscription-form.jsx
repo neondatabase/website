@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useCookie, useLocation } from 'react-use';
+import useCookie from 'react-use/lib/useCookie';
+import useLocation from 'react-use/lib/useLocation';
 
 import Button from 'components/shared/button';
 import useLocalStorage from 'hooks/use-local-storage';
@@ -142,7 +143,7 @@ const SubscriptionForm = ({
       <AnimatePresence>
         {errorMessage && (
           <motion.span
-            className="t-base absolute left-1/2 -bottom-5 w-full translate-y-full -translate-x-1/2 text-center font-semibold !leading-snug text-secondary-1 lg:-bottom-4"
+            className="t-base absolute -bottom-5 left-1/2 w-full -translate-x-1/2 translate-y-full text-center font-semibold !leading-snug text-secondary-1 lg:-bottom-4"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -195,13 +196,15 @@ const SubscriptionForm = ({
           >
             <div className="h-[58px] w-[58px] rounded-full border-[6px] border-gray-2 2xl:h-[48px] 2xl:w-[48px] xl:h-[42px] xl:w-[42px]" />
             <svg
-              className="absolute top-1/2 left-1/2 2xl:h-[48px] 2xl:w-[48px] xl:h-[42px] xl:w-[42px]"
+              className="absolute left-1/2 top-1/2 2xl:h-[48px] 2xl:w-[48px] xl:h-[42px] xl:w-[42px]"
               width="58"
               height="58"
               viewBox="0 0 58 58"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              style={{ transform: 'scale(1, -1) rotate(-90deg) translate(-50%, -50%)' }}
+              style={{
+                transform: 'scale(1, -1) rotate(-90deg) translate(-50%, -50%)',
+              }}
             >
               <motion.path
                 d="M3 29C3 43.3594 14.6406 55 29 55C43.3594 55 55 43.3594 55 29C55 14.6406 43.3594 3 29 3C14.6406 3 3 14.6406 3 29Z"
@@ -209,7 +212,10 @@ const SubscriptionForm = ({
                 stroke="#00e699"
                 strokeWidth="6"
                 initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1, transition: { duration: 2, delay: 0.2 } }}
+                animate={{
+                  pathLength: 1,
+                  transition: { duration: 2, delay: 0.2 },
+                }}
               />
             </svg>
           </motion.div>

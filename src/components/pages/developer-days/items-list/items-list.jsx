@@ -16,7 +16,7 @@ const ItemsList = ({
 }) => (
   <div
     className={clsx(
-      'absolute top-8 left-[38px] z-10 min-h-[520px] max-w-[330px] rounded-2xl px-5 pt-7 pb-8 lg:top-6 lg:left-6 lg:min-h-[442px] lg:max-w-[290px] lg:pb-7 lg:pt-6 md:static md:mx-auto md:-mt-2 md:min-h-0 md:max-w-none md:rounded-t-none',
+      'absolute left-[38px] top-8 z-10 min-h-[520px] max-w-[330px] rounded-2xl px-5 pb-8 pt-7 lg:left-6 lg:top-6 lg:min-h-[442px] lg:max-w-[290px] lg:pb-7 lg:pt-6 md:static md:mx-auto md:-mt-2 md:min-h-0 md:max-w-none md:rounded-t-none',
       className
     )}
   >

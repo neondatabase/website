@@ -9,10 +9,10 @@ import {
   Highlight,
   Snippet,
 } from 'react-instantsearch-dom';
-import { useWindowSize } from 'react-use';
 import aa from 'search-insights';
 
 import Link from 'components/shared/link';
+import useWindowSize from 'hooks/use-window-size';
 
 import AlgoliaLogo from './images/algolia-logo.inline.svg';
 import ChevronBottomIcon from './images/chevron-bottom.inline.svg';
@@ -87,8 +87,8 @@ const Hits = connectHits(({ hits, showAll, isNotFoundPage, isMobileSearch }) =>
   hits?.length ? (
     <ul
       className={clsx(
-        'mt-4 divide-y dark:divide-gray-3',
-        isMobileSearch ? 'divide-gray-7 ' : 'divide-gray-9 px-2.5'
+        'mt-4 divide-y dark:divide-gray-new-30',
+        isMobileSearch ? 'divide-gray-new-90 ' : 'divide-gray-new-98 px-2.5'
       )}
     >
       {hits.slice(0, showAll ? hits.length : 5).map((hit) => (
@@ -102,10 +102,10 @@ const Hits = connectHits(({ hits, showAll, isNotFoundPage, isMobileSearch }) =>
 
 const resultsClassNames = {
   default:
-    'absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden rounded-b border-t-0 rounded-b border border-gray-5 dark:border-gray-4',
+    'absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden rounded-b border-t-0 rounded-b border border-gray-new-70 dark:border-gray-new-30',
   mobile: 'flex flex-col h-[calc(100%-58px)]', // 58px is the height of the search input
   notFound:
-    'rounded-b-[29px] border-2 border-gray-2 absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden',
+    'rounded-b-[29px] border-2 border-gray-new-20 absolute left-0 right-0 bottom-0 z-10 translate-y-full overflow-hidden',
 };
 
 const containerClassNames = {
@@ -134,10 +134,10 @@ const Results = ({ indices, type = 'default' }) => {
   }, [height]);
 
   return (
-    <div className={clsx('bg-gray-7 dark:bg-gray-1', resultsClassNames[type])}>
+    <div className={clsx('bg-gray-new-90 dark:bg-gray-new-10', resultsClassNames[type])}>
       <div
         className={clsx(
-          'overflow-x-hidden overflow-y-scroll bg-white py-2.5 dark:bg-black dark:text-white',
+          'overflow-x-hidden overflow-y-scroll bg-white py-2.5 dark:bg-gray-new-8 dark:text-white',
           containerClassNames[type]
         )}
         style={{ maxHeight: isMobileSearch && containerHeight }}
@@ -158,14 +158,14 @@ const Results = ({ indices, type = 'default' }) => {
       </div>
       <div
         className={clsx(
-          'flex justify-between bg-gray-9 p-2.5 dark:bg-gray-1',
+          'flex justify-between bg-gray-new-98 p-2.5 dark:bg-gray-new-10',
           searchFooterClassNames[type]
         )}
       >
         {!allResultsShown && shouldShowAllResultsButton && (
           <button
             className={clsx(
-              'flex items-baseline space-x-1.5 text-xs text-secondary-8 transition-colors duration-200 dark:text-primary-1',
+              'flex items-baseline space-x-1.5 text-xs text-secondary-8 transition-colors duration-200 dark:text-green-45',
               isMobileSearch ? 'font-semibold leading-tight' : 'font-bold leading-none'
             )}
             type="button"
@@ -176,7 +176,7 @@ const Results = ({ indices, type = 'default' }) => {
           </button>
         )}
         <Link
-          className="ml-auto flex items-center space-x-2 text-xs text-gray-4 dark:text-gray-9"
+          className="ml-auto flex items-center space-x-2 text-xs text-gray-new-50 dark:text-gray-new-98"
           to="https://www.algolia.com/"
           target="_blank"
           rel="noopener noreferrer"

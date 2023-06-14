@@ -5,7 +5,7 @@ import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
 const Breadcrumbs = ({ breadcrumbs }) => (
-  <div className="mb-4 flex space-x-1 text-sm leading-none text-gray-4 dark:text-gray-6">
+  <div className="mb-4 flex space-x-1 text-sm leading-none text-gray-new-50 dark:text-gray-6">
     {breadcrumbs.map(({ title, slug }, index) => (
       <Fragment key={index}>
         {index !== 0 && <span>/</span>}

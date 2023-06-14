@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 const Content = ({ html, className = null }) => (
-  <div className={clsx('prose-blog prose prose-lg md:prose-base', className)}>{html}</div>
+  <div className={clsx('prose-blog prose prose-lg', className)}>{html}</div>
 );
 
 Content.propTypes = {
