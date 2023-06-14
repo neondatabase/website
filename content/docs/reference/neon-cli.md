@@ -9,7 +9,7 @@ Neon offers several methods for working with your projects. Utilizing the Neon C
 
 ## Synopsis
 
-The `neonctl` command can be called from command line. Without any arguments, it displays command usage and help:
+The `neonctl` command can be called from the command line. Without any arguments, it displays command usage and help:
 
 ```bash
 neonctl --help
@@ -57,7 +57,7 @@ This topic describes how to install the `neonctl` command-line interface tool an
    npm -v
    ```
 
-If you need to install either `Node.js` or `npm`, refer to instructions for your operating system, which you can find online.
+If you need to install either `Node.js` or `npm`, refer to the instructions for your operating system, which you can find online.
 
 ### Install
 
@@ -75,7 +75,7 @@ To authenticate to Neon, run the following command:
 neonctl auth
 ```
 
-The command launches a browser window where you can authorize the Neon CLI to access your Neon account. After granting permission, your credentials are saved locally to a credentials file.
+The command launches a browser window where you can authorize the Neon CLI to access your Neon account. After granting permission, your credentials are saved locally to a configuration file.
 
 ## Commands
 
