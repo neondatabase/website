@@ -2,7 +2,6 @@
 
 import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
-import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 
@@ -28,27 +27,6 @@ const items = [
   'How to create a project?',
   'How to get started with the Neon API?',
 ];
-
-const animationVariants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.2,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: 20,
-    transition: {
-      duration: 0.2,
-    },
-  },
-};
 
 const ChatWidget = () => {
   // context
@@ -160,52 +138,36 @@ const ChatWidget = () => {
               </div>
             </Dialog.Title>
 
-            <LazyMotion features={domAnimation}>
-              <AnimatePresence initial={false} mode="wait">
-                {messages.length ? (
-                  <m.div
-                    className="mt-6 flex h-full max-h-[calc(100vh_-_62px)] flex-col overflow-y-auto pb-12"
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={animationVariants}
-                  >
-                    {messages.map((message, index) => (
-                      <Message {...message} key={index} />
-                    ))}
-                    <div ref={messagesEndRef} />
-                  </m.div>
-                ) : (
-                  <m.div
-                    className="pb-12"
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={animationVariants}
-                  >
-                    <Dialog.Description className="mt-7 px-5 leading-none text-gray-new-60 dark:text-gray-new-50">
-                      Examples
-                    </Dialog.Description>
-                    <ul className="mt-3 px-2.5">
-                      {items.map((title, index) => (
-                        <li className="flex" key={index}>
-                          <button
-                            className="flex w-full items-center justify-start rounded px-2.5 py-2 transition-colors duration-200 hover:bg-[rgba(36,38,40,0.06)] focus:bg-[rgba(36,38,40,0.06)] focus:outline-none dark:hover:bg-gray-new-15/60 dark:focus:bg-gray-new-15/60"
-                            type="button"
-                            onClick={handleExampleClick}
-                          >
-                            <span className="mr-3 flex h-7 w-7 items-center justify-center rounded-full bg-[rgba(0,204,136,0.1)]">
-                              <ExampleIcon className="h-4 w-4 text-primary-1" />
-                            </span>
-                            <span>{title}</span>
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </m.div>
-                )}
-              </AnimatePresence>
-            </LazyMotion>
+            {messages.length > 0 ? (
+              <div className="mt-6 flex h-full max-h-[calc(100vh_-_62px)] flex-col overflow-y-auto pb-12">
+                {messages.map((message, index) => (
+                  <Message {...message} key={index} />
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
+            ) : (
+              <div className="pb-12">
+                <Dialog.Description className="mt-7 px-5 leading-none text-gray-new-60 dark:text-gray-new-50">
+                  Examples
+                </Dialog.Description>
+                <ul className="mt-3 px-2.5">
+                  {items.map((title, index) => (
+                    <li className="flex" key={index}>
+                      <button
+                        className="flex w-full items-center justify-start rounded px-2.5 py-2 transition-colors duration-200 hover:bg-[rgba(36,38,40,0.06)] focus:bg-[rgba(36,38,40,0.06)] focus:outline-none dark:hover:bg-gray-new-15/60 dark:focus:bg-gray-new-15/60"
+                        type="button"
+                        onClick={handleExampleClick}
+                      >
+                        <span className="mr-3 flex h-7 w-7 items-center justify-center rounded-full bg-[rgba(0,204,136,0.1)]">
+                          <ExampleIcon className="h-4 w-4 text-primary-1" />
+                        </span>
+                        <span>{title}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             {error ? (
               <div className="flex items-center px-5 pb-5 pt-2.5">
                 <span className="mr-3 flex h-7 w-7 items-center justify-center rounded-full bg-secondary-1/10">
