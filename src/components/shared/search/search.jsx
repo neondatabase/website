@@ -3,7 +3,7 @@
 import { DocSearch } from '@docsearch/react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useRef } from 'react';
+import { useEffect } from 'react';
 
 import debounce from 'utils/debounce';
 
@@ -13,11 +13,30 @@ const INDEX_NAME = 'neon';
 const API_KEY = 'a975b8d2e7c08607b212bf690f8eb40a';
 const APP_ID = 'RAPNCKAFQF';
 
+function useBodyClassObserver(callback) {
+  useEffect(() => {
+    const body = document.querySelector('body');
+
+    const mutationCallback = (mutationsList) => {
+      const { classList } = mutationsList[0].target;
+      const isActive = classList.contains('DocSearch--active');
+      callback(isActive);
+    };
+
+    const observer = new MutationObserver(mutationCallback);
+    observer.observe(body, { attributes: true });
+
+    return () => observer.disconnect();
+  }, [callback]);
+}
+
 const Search = ({ className = null }) => {
-  const ref = useRef(null);
+  useBodyClassObserver((isActive) => {
+    document.body.style.overflow = isActive ? 'hidden' : 'auto';
+  });
 
   return (
-    <div className={clsx('relative flex items-center justify-between', className)} ref={ref}>
+    <div className={clsx('relative flex items-center justify-between', className)}>
       <DocSearch
         appId={APP_ID}
         apiKey={API_KEY}
@@ -43,8 +62,7 @@ const Search = ({ className = null }) => {
         )}
         transformItems={(items) =>
           items.map((item, index) => {
-            // We transform the absolute URL into a relative URL to
-            // leverage Next's preloading.
+            // We transform the absolute URL into a relative URL to leverage next/link prefetch.
             const a = document.createElement('a');
             a.href = item.url;
 
