@@ -14,6 +14,10 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [Can't reach database server](#cant-reach-database-server)
 - [Error undefined: Database error](#error-undefined-database-error)
 
+<Admonition type="info">
+Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
+</Admonition>
+
 ## The endpoint ID is not specified
 
 With older clients and some native PostgreSQL clients, you may receive the following error when attempting to connect to Neon:

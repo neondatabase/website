@@ -33,6 +33,8 @@
           slug: introduction/manage-billing
     - title: Support
       slug: introduction/support
+    - title: Status
+      slug: introduction/status
 - title: Get started
   items:
     - title: Sign up
