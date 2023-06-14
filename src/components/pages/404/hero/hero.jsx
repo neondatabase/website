@@ -15,8 +15,7 @@ import illustration from './images/illustration.png';
 const CTA = ({ isDocsPage }) =>
   isDocsPage ? (
     <div className="flex w-full flex-col">
-      <Search className="my-8" />
-      <span className="h-px w-full bg-gray-6 dark:bg-gray-4" />
+      <Search className="DocSearch-notFound my-8" placeholder="Search for other pages" />
       <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
         Back to home
       </Link>
@@ -54,7 +53,7 @@ const Hero = () => {
   }, [pathname]);
 
   return (
-    <section className="grow pb-24 pt-16 dark:bg-black dark:text-white lg:pt-0 md:py-14 xs:pt-10">
+    <section className="grow pb-24 pt-16 dark:bg-gray-new-8 dark:text-white lg:pt-0 md:py-14 xs:pt-10">
       <Container className="grid grid-cols-12 items-start gap-x-8 md:gap-x-0 md:gap-y-4" size="md">
         <div className="col-start-2 col-end-6 flex flex-col pt-48 2xl:col-start-1 xl:pt-20 lg:pt-10 md:col-span-full md:pt-0">
           <h1 className="text-[58px] font-bold leading-none xl:text-5xl xl:leading-none md:text-4xl">

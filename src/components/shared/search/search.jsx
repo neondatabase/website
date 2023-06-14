@@ -30,7 +30,7 @@ function useBodyClassObserver(callback) {
   }, [callback]);
 }
 
-const Search = ({ className = null }) => {
+const Search = ({ className = null, placeholder = 'Search...' }) => {
   useBodyClassObserver((isActive) => {
     document.body.style.overflow = isActive ? 'hidden' : 'auto';
   });
@@ -41,7 +41,7 @@ const Search = ({ className = null }) => {
         appId={APP_ID}
         apiKey={API_KEY}
         indexName={INDEX_NAME}
-        placeholder="Search..."
+        placeholder={placeholder}
         transformSearchClient={(searchClient) => ({
           ...searchClient,
           search: debounce(searchClient.search, 500),
@@ -95,6 +95,7 @@ const Search = ({ className = null }) => {
 
 Search.propTypes = {
   className: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 export default Search;
