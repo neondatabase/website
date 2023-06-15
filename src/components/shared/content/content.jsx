@@ -29,8 +29,8 @@ const components = {
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
   code: (props) => {
-    if (props?.className?.startsWith('language-')) {
-      return <CodeBlock theme="light" {...props} />;
+    if (props?.className?.startsWith('language-') && props?.children) {
+      return <CodeBlock {...props} />;
     }
     return <code {...props} />;
   },
@@ -72,7 +72,7 @@ const Content = forwardRef(({ className = null, content, asHTML = false }, ref) 
       <div dangerouslySetInnerHTML={{ __html: content }} />
     ) : (
       <MDXRemote components={components} {...content} />
-    )}{' '}
+    )}
   </div>
 ));
 

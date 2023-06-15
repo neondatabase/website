@@ -87,6 +87,12 @@ Item.propTypes = {
             PropTypes.exact({
               title: PropTypes.string,
               slug: PropTypes.string,
+              items: PropTypes.arrayOf(
+                PropTypes.exact({
+                  title: PropTypes.string,
+                  slug: PropTypes.string,
+                })
+              ),
             })
           ),
         })

@@ -12,7 +12,7 @@ import Search from 'components/shared/search';
 
 import illustration from './images/illustration.png';
 
-const CTA = ({ isDocsPage }) =>
+const CTA = ({ isDocsPage = false }) =>
   isDocsPage ? (
     <div className="flex w-full flex-col">
       <Search className="my-8" isNotFoundPage />
@@ -28,10 +28,6 @@ const CTA = ({ isDocsPage }) =>
 
 CTA.propTypes = {
   isDocsPage: PropTypes.bool,
-};
-
-CTA.defaultProps = {
-  isDocsPage: false,
 };
 
 const Skeleton = () => (
