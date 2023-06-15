@@ -4,7 +4,7 @@
 
 .DocSearch-Button {
   @apply flex max-w-full shrink-0 grow basis-[230px] items-center overflow-x-auto rounded border border-gray-new-90 bg-white bg-[url('/images/search-light.svg')] bg-[left_0.625rem_center] bg-no-repeat p-[7px] pl-9 text-left leading-none text-gray-new-70 outline-none transition-colors duration-200 hover:cursor-pointer hover:border-gray-new-70 hover:shadow-none dark:border-gray-new-30 dark:bg-black-new dark:bg-[url('/images/search-dark.svg')] dark:text-gray-new-50 dark:hover:border-gray-new-50;
-  @apply lg:mr-6 lg:h-5 lg:w-5 lg:items-start lg:border-0 lg:bg-[top] lg:p-0 md:m-0;
+  @apply lg:mr-6 lg:h-5 lg:w-5 lg:items-start lg:border-0 lg:bg-transparent lg:bg-[top] lg:p-0 dark:lg:bg-transparent md:m-0;
 
   .DocSearch-Search-Icon {
     @apply hidden;
@@ -15,7 +15,7 @@
   }
 
   .DocSearch-Button-Keys {
-    @apply ml-auto flex h-5 min-w-[33px] items-center justify-center gap-x-1 rounded-sm border border-gray-new-80 bg-gray-new-98 py-1 text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-10 dark:text-gray-new-80 lg:border-none lg:bg-transparent dark:lg:bg-transparent;
+    @apply ml-auto flex h-5 min-w-[33px] items-center justify-center gap-x-1 rounded-sm border border-gray-new-80 bg-gray-new-98 py-1 text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-10 dark:text-gray-new-80 lg:hidden lg:border-none;
 
     .DocSearch-Button-Key {
       @apply relative top-0 m-0 flex items-center justify-center text-[10px] font-medium leading-none shadow-none first:text-xs first:font-semibold first:leading-none lg:hidden;
@@ -28,7 +28,7 @@
 }
 
 .DocSearch-Container {
-  @apply fixed top-0 left-0 z-[200] flex h-screen w-screen min-w-[320px] items-center justify-center bg-[rgba(12,13,13,0.2)] dark:bg-[rgba(12,13,13,0.8)] lg:p-4;
+  @apply fixed left-0 top-0 z-[200] flex h-screen w-screen min-w-[320px] items-center justify-center bg-[rgba(12,13,13,0.2)] dark:bg-[rgba(12,13,13,0.8)] lg:p-4;
 
   .DocSearch-Modal {
     @apply relative w-full max-w-[564px] rounded-[10px] border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-8;
@@ -44,7 +44,7 @@
   }
 
   .DocSearch-Footer {
-    @apply relative z-[300] flex h-11 w-full shrink-0 select-none flex-row-reverse items-center justify-between rounded-b-lg border-t border-gray-new-90 bg-none py-0 px-5 shadow-none dark:border-gray-new-20 md:px-4;
+    @apply relative z-[300] flex h-11 w-full shrink-0 select-none flex-row-reverse items-center justify-between rounded-b-lg border-t border-gray-new-90 bg-none px-5 py-0 shadow-none dark:border-gray-new-20 md:px-4;
 
     .DocSearch-Commands {
       @apply flex items-center space-x-3 lg:hidden;
@@ -139,7 +139,7 @@
     }
 
     .DocSearch-Prefill {
-      @apply relative w-full rounded border border-gray-new-94 py-[15px] px-3 text-left text-sm font-medium leading-none text-black-new transition-colors duration-200 hover:bg-gray-new-98 dark:border-gray-new-20 dark:text-white dark:hover:bg-gray-new-15;
+      @apply relative w-full rounded border border-gray-new-94 px-3 py-[15px] text-left text-sm font-medium leading-none text-black-new transition-colors duration-200 hover:bg-gray-new-98 dark:border-gray-new-20 dark:text-white dark:hover:bg-gray-new-15;
 
       &:hover {
         &::after {
@@ -148,7 +148,7 @@
       }
 
       &::after {
-        @apply absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 bg-secondary-8 opacity-0 transition-opacity duration-200 content-[''] dark:bg-green-45;
+        @apply absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 bg-secondary-8 opacity-0 transition-opacity duration-200 content-[''] dark:bg-green-45;
         -webkit-mask-image: url('/images/chevron.svg');
         mask-image: url('/images/chevron.svg');
         mask-size: 6px 12px;
@@ -210,7 +210,7 @@
           @apply relative ml-5;
 
           &::before {
-            @apply absolute top-1/2 -left-3.5 h-[calc(100%+25px)] w-px -translate-y-1/2 bg-gray-new-94 content-[''] dark:bg-gray-new-20;
+            @apply absolute -left-3.5 top-1/2 h-[calc(100%+25px)] w-px -translate-y-1/2 bg-gray-new-94 content-[''] dark:bg-gray-new-20;
           }
 
           &.DocSearch-Hit--FirstChild {
