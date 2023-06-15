@@ -9,7 +9,6 @@ import MENUS from 'constants/menus';
 import { ChatWidgetTrigger } from '../chat-widget';
 
 import Item from './item';
-import { itemPropTypes } from './item/item';
 
 const Sidebar = ({ className = null, sidebar, currentSlug }) => (
   <aside
@@ -48,7 +47,13 @@ export const sidebarPropTypes = PropTypes.arrayOf(
   PropTypes.shape({
     title: PropTypes.string.isRequired,
     slug: PropTypes.string,
-    items: PropTypes.arrayOf(itemPropTypes),
+    items: PropTypes.arrayOf(
+      PropTypes.exact({
+        title: PropTypes.string.isRequired,
+        slug: PropTypes.string,
+        items: PropTypes.arrayOf(PropTypes.any),
+      })
+    ),
   })
 ).isRequired;
 
