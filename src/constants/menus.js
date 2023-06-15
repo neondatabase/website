@@ -1,6 +1,8 @@
+import CalendarIcon from 'icons/calendar.inline.svg';
 import DiscourseIcon from 'icons/discourse.inline.svg';
 import GithubIcon from 'icons/github.inline.svg';
 import LinkedinIcon from 'icons/linkedin.inline.svg';
+import TransactionsIcon from 'icons/transactions.inline.svg';
 import TwitterIcon from 'icons/twitter.inline.svg';
 import YoutubeIcon from 'icons/youtube.inline.svg';
 
@@ -79,6 +81,10 @@ export default {
         {
           text: 'Pricing',
           to: LINKS.pricing,
+        },
+        {
+          text: 'Contact Sales',
+          to: LINKS.contactSales,
         },
 
         // {
@@ -198,6 +204,18 @@ export default {
     {
       text: 'Community',
       to: LINKS.discourse,
+    },
+  ],
+  docSidebar: [
+    {
+      icon: TransactionsIcon,
+      title: 'API Reference',
+      slug: LINKS.apiReference,
+    },
+    {
+      icon: CalendarIcon,
+      title: 'Release notes',
+      slug: LINKS.releaseNotes,
     },
   ],
 };

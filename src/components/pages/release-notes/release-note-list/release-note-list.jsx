@@ -9,12 +9,13 @@ import generateReleaseNotePath from 'utils/generate-release-note-path';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 
 const ReleaseNoteList = ({ items }) => (
-  <div className="relative before:absolute before:top-4 before:bottom-3 before:left-[179px] before:h-auto before:w-px before:bg-gray-7 dark:before:bg-gray-2 xl:before:hidden sm:space-y-16">
+  <div className="relative before:absolute before:bottom-3 before:left-[179px] before:top-4 before:h-auto before:w-px before:bg-gray-7 dark:before:bg-gray-2 xl:before:hidden sm:space-y-16">
     {items.map(({ slug, content }, index, array) => {
       const prevItem = array[index - 1];
       const { datetime } = getReleaseNotesDateFromSlug(slug);
       const isReleaseDateExist =
         prevItem && getReleaseNotesDateFromSlug(prevItem.slug).datetime === datetime;
+      const releaseNotesPath = generateReleaseNotePath(slug);
 
       return (
         <article
@@ -26,12 +27,12 @@ const ReleaseNoteList = ({ items }) => (
         >
           <Aside slug={slug} isReleaseDateExist={isReleaseDateExist} />
 
-          <div className="relative w-full pl-56 before:absolute before:top-3 before:left-[175px] before:h-[9px] before:w-[9px] before:rounded-full before:bg-primary-1 dark:before:bg-secondary-2 xl:max-w-[75%] xl:pl-0 xl:before:hidden sm:max-w-full">
+          <div className="relative w-full pl-56 before:absolute before:left-[175px] before:top-3 before:h-[9px] before:w-[9px] before:rounded-full before:bg-primary-1 dark:before:bg-secondary-2 xl:max-w-[75%] xl:pl-0 xl:before:hidden sm:max-w-full">
             <Content content={content} />
             <Link
               className="flex items-center font-medium text-secondary-8 hover:text-secondary-7 dark:text-primary-1"
               theme="black"
-              to={generateReleaseNotePath(slug)}
+              to={releaseNotesPath}
             >
               Release note page
               <ArrowIcon className="ml-2" aria-hidden />

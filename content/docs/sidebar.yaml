@@ -15,12 +15,22 @@
       slug: introduction/autoscaling
     - title: Regions
       slug: introduction/regions
-    - title: Free Tier
-      slug: introduction/technical-preview-free-tier
-    - title: Pro plan
-      slug: introduction/pro-plan
+    - title: Plans
+      items:
+        - title: Overview
+          slug: introduction/plans
+        - title: Free
+          slug: introduction/technical-preview-free-tier
+        - title: Pro
+          slug: introduction/pro-plan
+        - title: Custom
+          slug: introduction/custom-plan
     - title: Billing
-      slug: introduction/billing
+      items:
+        - title: Billing metrics
+          slug: introduction/billing
+        - title: Manage billing
+          slug: introduction/manage-billing
     - title: Support
       slug: introduction/support
 - title: Get started

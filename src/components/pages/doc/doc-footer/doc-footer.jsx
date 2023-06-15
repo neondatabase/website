@@ -1,6 +1,8 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import useSessionStorage from 'react-use/lib/useSessionStorage';
 
 import Link from 'components/shared/link';

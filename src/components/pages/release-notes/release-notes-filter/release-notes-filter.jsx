@@ -34,7 +34,7 @@ export const RELEASE_NOTES_CATEGORIES = [
 ];
 
 const ReleaseNotesFilter = ({ currentSlug }) => (
-  <section className="mt-4 mb-10 flex items-center sm:flex-col sm:items-start">
+  <section className="mb-10 mt-4 flex items-center sm:flex-col sm:items-start">
     <h3 className="shrink-0 self-start text-base font-semibold text-black dark:text-white ">
       Filter by category:
     </h3>
@@ -43,7 +43,7 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
         <Link className="group transition-none" theme="black" to={RELEASE_NOTES_BASE_PATH}>
           <span
             className={clsx(
-              'flex items-center rounded-full border py-1 px-3 text-xs font-medium leading-snug transition-colors duration-200 group-hover:border-secondary-8 group-hover:text-secondary-8 dark:group-hover:border-primary-1 dark:group-hover:text-primary-1 sm:mt-0',
+              'flex items-center rounded-full border px-3 py-1 text-xs font-medium leading-snug transition-colors duration-200 group-hover:border-secondary-8 group-hover:text-secondary-8 dark:group-hover:border-primary-1 dark:group-hover:text-primary-1 sm:mt-0',
               currentSlug === 'release-notes'
                 ? 'border-secondary-8 text-secondary-8 dark:border-primary-1 dark:text-primary-1'
                 : 'border-gray-6 dark:border-gray-4'
@@ -66,7 +66,7 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
             >
               <span
                 className={clsx(
-                  'flex items-center rounded-full border py-1 px-3 text-xs font-medium leading-snug transition-colors duration-200 group-hover:border-secondary-8 group-hover:text-secondary-8 dark:group-hover:border-primary-1 dark:group-hover:text-primary-1 sm:mt-0',
+                  'flex items-center rounded-full border px-3 py-1 text-xs font-medium leading-snug transition-colors duration-200 group-hover:border-secondary-8 group-hover:text-secondary-8 dark:group-hover:border-primary-1 dark:group-hover:text-primary-1 sm:mt-0',
                   isCategoryActive
                     ? 'border-secondary-8 text-secondary-8 dark:border-primary-1 dark:text-primary-1'
                     : 'border-gray-6 dark:border-gray-4'

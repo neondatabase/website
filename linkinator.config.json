@@ -1,10 +1,10 @@
 {
-    "recurse": true,
-    "retry": true,
-    "retryErrors": true,
-    "retryErrorsCount": 3,
-    "retryErrorsJitter": 5,
-    "skip": "linkedin.com|(.*(\\.js|\\.css|\\.woff2)$)",
-    "verbosity": "error",
-    "format": "json"
+  "recurse": true,
+  "retry": true,
+  "retryErrors": true,
+  "retryErrorsCount": 3,
+  "retryErrorsJitter": 5,
+  "skip": "linkedin.com|(.*(\\.js|\\.css|\\.woff2)$)",
+  "verbosity": "error",
+  "format": "json"
 }

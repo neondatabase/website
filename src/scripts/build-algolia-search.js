@@ -79,7 +79,7 @@ const transformPostsToSearchObjects = async (posts, releaseNotes) => {
     const algoliaResponse = await index.saveObjects(transformed);
 
     console.log(
-      `Successfully added ${algoliaResponse.objectIDs.length} records to Algolia search!}`
+      `Successfully added ${algoliaResponse.objectIDs.length} records to Algolia search!`
     );
   } catch (err) {
     console.error(err);

@@ -202,14 +202,14 @@ const Estimates = () => {
           </div>
           <div className="w-[38%] xl:w-[49%] xl:overflow-hidden lg:w-[55%] md:w-full">
             <ul
-              className="flex gap-8 py-2 xl:pt-3 xl:pb-1 lg:mx-auto lg:max-w-[584px] lg:pl-6 md:max-w-full md:px-0 xs:gap-4"
+              className="flex gap-8 py-2 xl:pb-1 xl:pt-3 lg:mx-auto lg:max-w-[584px] lg:pl-6 md:max-w-full md:px-0 xs:gap-4"
               ref={contentRef}
             >
               {items.map(({ type }, index) => (
                 <li key={index}>
                   <button
                     className={clsx(
-                      'relative flex items-center border-b pl-5 pb-2 text-sm font-medium uppercase leading-none tracking-wider text-white transition-colors duration-200',
+                      'relative flex items-center border-b pb-2 pl-5 text-sm font-medium uppercase leading-none tracking-wider text-white transition-colors duration-200',
                       type === selected && index === 0
                         ? '!border-pricing-primary-1 !text-pricing-primary-1'
                         : 'border-transparent',

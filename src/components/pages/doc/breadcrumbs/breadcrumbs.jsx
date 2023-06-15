@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';

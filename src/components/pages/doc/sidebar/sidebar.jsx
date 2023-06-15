@@ -1,34 +1,28 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Link from 'components/shared/link/link';
 import Search from 'components/shared/search';
-import LINKS from 'constants/links';
+import MENUS from 'constants/menus';
 
-import CalendarIcon from './images/calendar.inline.svg';
-import TransactionsIcon from './images/transactions.inline.svg';
+import { ChatWidgetTrigger } from '../chat-widget';
+
 import Item from './item';
 import { itemPropTypes } from './item/item';
 
-const links = [
-  {
-    icon: TransactionsIcon,
-    title: 'API Reference',
-    slug: LINKS.apiReference,
-  },
-  {
-    icon: CalendarIcon,
-    title: 'Release notes',
-    slug: LINKS.releaseNotes,
-  },
-];
-
 const Sidebar = ({ className = null, sidebar, currentSlug }) => (
-  <aside className={className}>
+  <aside
+    className={clsx(
+      'relative col-start-1 col-end-4 max-w-[254px] pb-20 pt-[111px] before:absolute before:-right-5 before:top-0 before:z-10 before:h-full before:w-screen before:bg-gray-new-98 dark:before:bg-gray-new-10 lg:hidden',
+      className
+    )}
+  >
     <Search className="z-30" />
     <nav className="relative z-20 mt-8">
+      <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
       <ul>
-        {links.map(({ icon: Icon, title, slug }, index) => (
+        {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
           <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
             <Link className="group flex items-center space-x-3" to={slug}>
               <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
