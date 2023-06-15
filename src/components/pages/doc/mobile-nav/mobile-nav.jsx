@@ -6,10 +6,14 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 
 import Item from 'components/pages/doc/sidebar/item';
+import Link from 'components/shared/link/link';
+import MENUS from 'constants/menus';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
 import useWindowSize from 'hooks/use-window-size';
 import ChevronRight from 'icons/chevron-right.inline.svg';
+
+import { ChatWidgetTrigger } from '../chat-widget';
 
 const ANIMATION_DURATION = 0.2;
 
@@ -49,9 +53,9 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
 
   useClickOutside([wrapperRef], onOutsideClick);
 
-  // 146px is the height of top banner + header + button Documentation menu
+  // 145px is the height of top banner + header + button Documentation menu
   useEffect(() => {
-    setContainerHeight(`${height - 146}px`);
+    setContainerHeight(`${height - 145}px`);
   }, [height]);
 
   useEffect(() => {
@@ -81,7 +85,7 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
         />
       </button>
 
-      <motion.ul
+      <motion.div
         className={clsx(
           'absolute inset-x-0 top-[calc(100%+1px)] z-20 overflow-y-scroll bg-white pb-4 pl-8 pr-[29px] pt-2 dark:bg-gray-new-10 md:pl-4 md:pr-[13px]'
         )}
@@ -90,10 +94,27 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
         variants={variants}
         style={{ height: containerHeight }}
       >
-        {sidebar.map((item, index) => (
-          <Item {...item} currentSlug={currentSlug} key={index} />
-        ))}
-      </motion.ul>
+        <ChatWidgetTrigger className="mb-3.5 mt-[18px] flex" isSidebar />
+        <ul>
+          {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
+            <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
+              <Link className="group flex items-center space-x-3" to={slug}>
+                <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
+                  <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
+                </span>
+                <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
+                  {title}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <ul className="mt-7">
+          {sidebar.map((item, index) => (
+            <Item {...item} currentSlug={currentSlug} key={index} />
+          ))}
+        </ul>
+      </motion.div>
     </nav>
   );
 };
@@ -117,6 +138,12 @@ MobileNav.propTypes = {
                 PropTypes.exact({
                   title: PropTypes.string,
                   slug: PropTypes.string,
+                  items: PropTypes.arrayOf(
+                    PropTypes.exact({
+                      title: PropTypes.string,
+                      slug: PropTypes.string,
+                    })
+                  ),
                 })
               ),
             })
