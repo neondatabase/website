@@ -8,10 +8,6 @@ import { useEffect } from 'react';
 import Link from 'components/shared/link';
 import debounce from 'utils/debounce';
 
-const INDEX_NAME = 'neon';
-const API_KEY = 'a975b8d2e7c08607b212bf690f8eb40a';
-const APP_ID = 'RAPNCKAFQF';
-
 const Search = ({ className = null }) => {
   // @NOTE: this is a workaround to prevent scroll to the page bottom when closing search modal in Safari
   // https://github.com/algolia/docsearch/issues/1260#issuecomment-1011939736
@@ -30,9 +26,9 @@ const Search = ({ className = null }) => {
   return (
     <div className={clsx('relative flex items-center justify-between', className)}>
       <DocSearch
-        appId={APP_ID}
-        apiKey={API_KEY}
-        indexName={INDEX_NAME}
+        appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}
+        apiKey={process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY}
+        indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
         placeholder="Search..."
         transformSearchClient={(searchClient) => ({
           ...searchClient,
