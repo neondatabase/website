@@ -75,7 +75,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                         target={isExternalUrl ? '_blank' : null}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
                       >
-                        {Icon && <Icon width={16} aria-hidden />}
+                        {Icon && <Icon width={16} height={16} aria-hidden />}
                         {text}
                       </Link>
                     </li>
