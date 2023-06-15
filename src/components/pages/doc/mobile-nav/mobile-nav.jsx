@@ -13,8 +13,8 @@ import useClickOutside from 'hooks/use-click-outside';
 import useWindowSize from 'hooks/use-window-size';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
-import { sidebarPropTypes } from '../sidebar/sidebar';
 import { ChatWidgetTrigger } from '../chat-widget';
+import { sidebarPropTypes } from '../sidebar/sidebar';
 
 const ANIMATION_DURATION = 0.2;
 
