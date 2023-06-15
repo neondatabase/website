@@ -80,6 +80,10 @@ export default {
           text: 'Pricing',
           to: LINKS.pricing,
         },
+        {
+          text: 'Contact Sales',
+          to: LINKS.contactSales,
+        },
 
         // {
         //   text: 'Release notes',

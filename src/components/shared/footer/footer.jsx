@@ -42,7 +42,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
           <div
             className={clsx(
               { 'tracking-tight text-gray-new-80': theme === 'black-new' || theme === 'gray-8' },
-              'space-y-[18px] text-sm leading-none dark:text-gray-new-80'
+              'space-y-[18px] text-sm leading-none dark:text-gray-new-80 lg:leading-tight'
             )}
           >
             <p>Made in SF and the World</p>
