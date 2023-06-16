@@ -348,7 +348,7 @@ A Neon Control Plane operation that suspends a compute endpoint after a period o
 
 ### Technical Preview
 
-A preview period during which users can try Neon.
+Neon is currently in Technical Preview, meaning that some intended core functionalities are still being developed or perfected. Please refer to the [Neon roadmap](../introduction/roadmap) for more information.
 
 ### Token
 
