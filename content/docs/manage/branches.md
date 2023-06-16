@@ -21,14 +21,14 @@ When working with branches, it is important to remove old and unused branches. B
 
 Each Neon project has a primary branch called `main`, by default. In the Neon Console, your primary branch is identified by a `PRIMARY` tag. You can designate any branch as the primary branch for your project or rename the primary branch, but you cannot delete a primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
 
-- For [Free Tier](../introduction/technical-preview-free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
+- For [Free Tier](../introduction/free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
 - For [Pro plan](../introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes.
 
 ## Non-primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
-- For [Free Tier](../introduction/technical-preview-free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Free Tier  _compute active time_ limit of 100 hours per month.
+- For [Free Tier](../introduction/free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Free Tier  _compute active time_ limit of 100 hours per month.
 - For [Pro plan](../introduction/pro-plan) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Create a branch
@@ -139,7 +139,7 @@ To delete a branch:
 
 ## Check the data size
 
-Tier limits define the amount of data you can store in a branch. Neon's [Free Tier](../introduction/technical-preview-free-tier) permits 3 GB per branch. When creating a new branch, the child branch includes the data from the parent branch. For example, if you have a branch with 1 GB of data, the child branch is created with the same 1 GB of data.
+Tier limits define the amount of data you can store in a branch. Neon's [Free Tier](../introduction/free-tier) permits 3 GB per branch. When creating a new branch, the child branch includes the data from the parent branch. For example, if you have a branch with 1 GB of data, the child branch is created with the same 1 GB of data.
 
 You can check the data size for a branch by viewing the `Database size` value on the branch details page (see [View branches](#view-branches)). Alternatively, you can run the following query from the Neon SQL Editor:
 

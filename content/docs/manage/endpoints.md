@@ -19,7 +19,7 @@ Project
                             |---- database (mydb)
 ```
 
-Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The Neon [Free Tier](../introduction/technical-preview-free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint.
+Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The Neon [Free Tier](../introduction/free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint.
 
 ## View a compute endpoint
 
