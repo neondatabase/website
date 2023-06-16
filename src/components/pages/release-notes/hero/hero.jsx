@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Container from 'components/shared/container';
 import { RELEASE_NOTES_BASE_PATH } from 'constants/docs';
