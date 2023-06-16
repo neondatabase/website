@@ -20,7 +20,7 @@
         - title: Overview
           slug: introduction/plans
         - title: Free
-          slug: introduction/technical-preview-free-tier
+          slug: introduction/free-tier
         - title: Pro
           slug: introduction/pro-plan
         - title: Custom
@@ -33,6 +33,8 @@
           slug: introduction/manage-billing
     - title: Support
       slug: introduction/support
+    - title: Status
+      slug: introduction/status
 - title: Get started
   items:
     - title: Sign up

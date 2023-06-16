@@ -8,6 +8,7 @@
       @apply mb-0;
     }
   }
+
   .prose-doc {
     @apply max-w-none leading-normal text-gray-new-8 prose-strong:text-gray-new-8 dark:text-gray-new-90 dark:prose-strong:text-gray-new-90;
     @apply prose-headings:leading-tight prose-headings:text-black-new prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white;
@@ -135,6 +136,26 @@
           @apply hidden;
         }
       }
+    }
+  }
+
+  .prose-chat {
+    > * {
+      &:first-child {
+        @apply mt-0;
+      }
+
+      &:last-child {
+        @apply mb-0;
+      }
+    }
+
+    pre {
+      @apply overflow-x-auto rounded-md !bg-gray-new-94/60 dark:!bg-gray-new-15;
+    }
+
+    :not(pre) > code {
+      @apply bg-gray-new-90 dark:bg-gray-new-15;
     }
   }
 }

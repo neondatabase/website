@@ -8,9 +8,9 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
+import Search from 'components/shared/search';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
-import SearchIcon from 'icons/search.inline.svg';
 
 import Burger from './burger';
 // import DiscordIcon from './images/header-discord.inline.svg';
@@ -36,7 +36,6 @@ const Header = forwardRef(
       isSticky = false,
       withBottomBorder = false,
       isDocPage = false,
-      onSearchClick = null,
     },
     ref
   ) => {
@@ -154,16 +153,8 @@ const Header = forwardRef(
               </Button>
             )}
           </div>
-          <div className="hidden items-center lg:flex">
-            {isDocPage && (
-              <button
-                className="mr-5 flex h-5 w-5 items-center"
-                type="button"
-                onClick={onSearchClick}
-              >
-                <SearchIcon className="mb-[5px] dark:text-white" />
-              </button>
-            )}
+          <div className=" hidden items-center lg:flex">
+            {isDocPage && <Search className="mobile-search" />}
 
             <Burger
               className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
@@ -185,7 +176,6 @@ Header.propTypes = {
   isSignIn: PropTypes.bool,
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
-  onSearchClick: PropTypes.func,
 };
 
 export default Header;
