@@ -33,7 +33,7 @@ Options:
                   [string] [choices: "json", "yaml", "table"] [default: "table"]
       --api-host    The API host   [default: "https://console.neon.tech/api/v2"]
       --config-dir  Path to config directory
-                             [string] [default: "/home/dtprice/.config/neonctl"]
+                             [string] [default: "/home/<user>/.config/neonctl"]
       --oauth-host  URL to Neon OAUTH host [default: "https://oauth2.neon.tech"]
       --client-id   OAuth client id                [string] [default: "neonctl"]
       --api-key     API key                               [string] [default: ""]
@@ -45,7 +45,7 @@ This topic describes how to install the `neonctl` command-line interface tool an
 
 ### Prerequisites
 
-- Node.js 14.0 or higher. To check if you already have Node.js, run the following command:
+- Node.js 16.0 or higher. To check if you already have Node.js, run the following command:
 
     ```shell
     node -v
