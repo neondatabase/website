@@ -111,8 +111,21 @@ module.exports = {
     config.module.rules.push(
       // Reapply the existing rule, but only for svg imports not ending in ".inline.svg"
       {
-        ...fileLoaderRule,
-        test: /(?<!inline)\.svg$/i,
+        test: /(?<!inline)\.svg$/,
+        use: [
+          {
+            loader: require.resolve('url-loader'),
+            options: {
+              limit: 512,
+              publicPath: '/_next/static/svgs',
+              outputPath: 'static/svgs',
+              fallback: require.resolve('file-loader'),
+            },
+          },
+          {
+            loader: require.resolve('svgo-loader'),
+          },
+        ],
       },
       // Convert all other *.svg imports to React components
       {
