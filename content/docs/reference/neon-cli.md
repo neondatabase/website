@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Neon offers several methods for working with your projects. Utilizing the Neon Command Line Interface (CLI), you can operate Neon directly from a terminal or via automation. The Neon CLI facilitates numerous functions, such as Neon authentication, project creation and management, role assignment, and more.
+Utilizing the Neon Command Line Interface (CLI), you can operate Neon directly from a terminal or via automation. The Neon CLI facilitates numerous functions, such as authentication, project creation and management, role assignment, and more.
 
 ## Synopsis
 
@@ -39,9 +39,9 @@ Options:
       --api-key     API key                               [string] [default: ""]
 ```
 
-## Install the Neon CLI
+## Installation
 
-This topic describes how to install the `neonctl` command-line interface tool and connect to Neon.
+This section describes how to install the `neonctl` command-line interface tool.
 
 ### Prerequisites
 
@@ -67,11 +67,80 @@ To download and install Neon CLI, run the following command:
 npm i -g neonctl
 ```
 
-### Connect
+## Connect
 
 To authenticate to Neon, run the following command:
 
-```shell
+```bash
+neonctl auth
+```
+
+The command launches a browser window where you can authorize the Neon CLI to access your Neon account.
+
+Alternatively, you can connect with a Neon API key using the `--api-key` option. For example:
+
+```bash
+neonctl <cmd> --api-key <token>
+```
+
+For information about obtaining an Neon API key token, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
+
+## Global options
+
+- `--version`
+
+  Shows the `neonctl` version number.
+
+  ```bash
+  $ neonctl --version
+  1.9.3
+  ```
+
+- `--help`
+
+  Shows the `neonctl` command-line help. See [Synopsis](#synopsis).
+
+- `--output`
+
+  Sets the output format. Supported options are `json`, `yaml`, and `table`. The default is `table`.
+
+  ```bash
+  neonctl me --output json
+  ```
+
+- `--api-host`
+
+  Specifies the Neon API host (the base URL for the Neon API) when running a CLI command. The default setting is `https://console.neon.tech/api/v2`. For more information, see [Neon API base URL](https://api-docs.neon.tech/reference/getting-started-with-neon-api#neon-api-base-url).
+
+  ```bash
+  neonctl projects list --api-host https://console.neon.tech/api/v2
+  ```
+
+- `--config-dir`
+
+  Sets the path to the `neonctl` configuration file. To view the default configuration directory containing you `credentials.json` file, run `neonctl --help`. The credentials file is created when you authenticate using the `neonctl auth` command. This option is only used if you have moved your `neonctl` configuration file to a location other than the default.
+
+- `--oauth-host`
+
+  Sets the URL of Neon OAuth host used to authenticate your neonctl client to Neon. The default is `https://oauth2.neon.tech`. You should need to configure this setting when using the `neonctl` CLI client.
+
+- `--client-id`
+
+  Sets the OAuth client id. For the `neonctl` CLI client, the client id is `neonctl`. You should need to configure this setting when using the `neonctl` CLI client.
+
+- `--api-key`
+
+  Specifies your Neon API key. You can specify an Neon API with your CLI command instead of authenticating using `neonctl auth`. For information about obtaining an Neon API key token, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
+
+- `--analytics`
+
+Enables analytics.
+
+## auth
+
+Authenticates the user or caller to Neon.
+
+```bash
 neonctl auth
 ```
 
@@ -81,13 +150,7 @@ The command launches a browser window where you can authorize the Neon CLI to ac
 /home/<home>/.config/neonctl/credentials.json
 ```
 
-## Commands
-
-### neonctl auth
-
-Authenticates the user or caller to Neon. See [Connect](#connect).
-
-### neonctl me
+## me
 
 Returns information about the authenticated user.
 
@@ -100,142 +163,219 @@ $> neonctl me
 └────────────────┴──────────────────────────┴────────────┴────────────────┘
 ```
 
-### neonctl roles
-
-For creating and managing roles.
-
-### neonctl projects
+## projects
 
 For creating and managing Neon projects.
 
-usage: `neonctl projects <cmd> [args]`
-
-Commands:
-
-- neonctl projects list    List projects
-- neonctl projects create  Create a project
-- neonctl projects update  Update a project
-- neonctl projects delete  Delete a project
-- neonctl projects get     Get a project
-
-### neonctl branches
-
-usage: `neonctl branches <cmd> [args]`
-
-For creating and managing Neon branches.
-
-Commands:
-
-- neonctl branches list    List branches
-- neonctl branches create  Create a branch
-- neonctl branches update  Update a branch
-- neonctl branches delete  Delete a branch
-- neonctl branches get     Get a branch
-
-### neonctl endpoints
-
-For creating and managing Neon projects.
-
-`usage: neonctl endpoints <cmd> [args]`
-
-Commands:
-
-- neonctl endpoints list    List endpoints
-- neonctl endpoints create  Create an endpoint
-- neonctl endpoints update  Update an endpoint
-- neonctl endpoints delete  Delete an endpoint
-- neonctl endpoints get     Get an endpoint
-
-### neonctl databases
-
-For creating and managing Neon databases.
-
-`usage: neonctl databases <cmd> [args]`
-
-Commands:
-  
-- neonctl databases list    List databases
-- neonctl databases create  Create a database
-- neonctl databases delete  Delete a database
-
-### neonctl roles
-
-For creating and managing Neon roles.
-
-`usage: neonctl roles <cmd> [args]`
-
-Commands:
-
-- neonctl roles list    List roles
-- neonctl roles create  Create a role
-- neonctl roles delete  Delete a role
-
-### neonctl operations
-
-For creating and managing Neon operations.
-
-`usage: neonctl operations <cmd> [args]`
-
-Commands:
-
-- neonctl operations list  List operations
-
-### neonctl connection-string
-
-For creating and managing Neon connection strings.
-
-`usage: neonctl connection-string [args]`
-
-Required arguments:
-
-- `--project.id`     Project ID
-- `--endpoint.id`    Endpoint ID
-- `--role.name`      Role name
-- `--database.name`  Database name
-
-## Options
-
-### --version
-
-Shows the `neonctl` version number.
+### Usage
 
 ```bash
-$ neonctl --version
-1.9.3
+neonctl projects <cmd> [args]
 ```
 
-### --help
-
-Shows the `neonctl` command-line help. See [Synopsis](#synopsis).
-
-### --output
-
-Sets the output format. Supported options are `json`, `yaml`, and `table`. The default is `table`.
+### Commands
 
 ```bash
-neonctl me --output json
+  neonctl projects list
+  neonctl projects create
+  neonctl projects update
+  neonctl projects delete
+  neonctl projects get
 ```
 
-### --api-host
+### projects list
 
-Specifies the Neon API host (the base URL for the Neon API) when running a CLI command. The default setting is `https://console.neon.tech/api/v2`. For more information, see [Neon API base URL](https://api-docs.neon.tech/reference/getting-started-with-neon-api#neon-api-base-url).
+List projects
 
 ```bash
-$ neonctl projects list --api-host https://console.neon.tech/api/v2
+neonctl projects list
+┌────────────────────────┬────────────────────────┬───────────────┬──────────────────────┐
+│ Id                     │ Name                   │ Region Id     │ Created At           │
+├────────────────────────┼────────────────────────┼───────────────┼──────────────────────┤
+│ late-rain-471577       │ late-rain-471577       │ aws-us-west-2 │ 2023-05-17T17:26:07Z │
+├────────────────────────┼────────────────────────┼───────────────┼──────────────────────┤
+│ tight-wave-371442      │ tight-wave-371442      │ aws-us-east-2 │ 2023-05-15T12:33:39Z │
+├────────────────────────┼────────────────────────┼───────────────┼──────────────────────┤
+│ lingering-brook-802958 │ lingering-brook-802958 │ aws-us-east-2 │ 2023-05-11T12:25:22Z │
+└────────────────────────┴────────────────────────┴───────────────┴──────────────────────┘
 ```
 
-### --config-dir
+### projects create
 
-Sets the path to the `neonctl` configuration file. To view your default configuration directory containing you `credentials.json` file, run `neonctl --help`. The credentials file is created when you authenticate using the `neonctl auth` command.
+Create a project
 
-### --oauth-host
+#### Options
 
-Sets the URL of Neon OAuth host used to authenticate your neonctl client to Neon. The default is `https://oauth2.neon.tech`.
+| Option                                | Description                                                                                               | Type    | Default                               |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------- |
+| --version                             | Show version number                                                                                       | boolean |                                       |
+| --help                                | Show help                                                                                                 | boolean |                                       |
+| -o, --output                          | Set output format                                                                                         | string  | "table"                               |
+| --api-host                            | The API host                                                                                              |         | "https://console.neon.tech/api/v2"    |
+| --config-dir                          | Path to config directory                                                                                  | string  | "/home/dtprice/.config/neonctl"       |
+| --oauth-host                          | URL to Neon OAuth host                                                                                    |         | "https://oauth2.neon.tech"            |
+| --client-id                           | OAuth client id                                                                                           | string  | "neonctl"                             |
+| --api-key                             | API key                                                                                                   | string  | ""                                    |
+| --analytics                           | Enable analytics                                                                                          | boolean | true                                  |
+| --project.settings.quota.active_time_seconds | The total amount of wall-clock time allowed to be spent by project's compute endpoints               | number  |                                       |
+| --project.settings.quota.compute_time_seconds | The total amount of CPU seconds allowed to be spent by project's compute endpoints                   | number  |                                       |
+| --project.settings.quota.written_data_bytes | Total amount of data written to all project's branches                                                | number  |                                       |
+| --project.settings.quota.data_transfer_bytes | Total amount of data transferred from all project's branches using proxy                              | number  |                                       |
+| --project.settings.quota.logical_size_bytes | Limit on the logical size of every project's branch                                                    | number  |                                       |
+| --project.name                        | The project name                                                                                          | string  |                                       |
+| --project.branch.name                 | The branch name. If not specified, the default branch name will be used                                   | string  |                                       |
+| --project.branch.role_name            | The role name. If not specified, the default role name will be used                                       | string  |                                       |
+| --project.branch.database_name        | The database name. If not specified, the default database name will be used                               | string  |                                       |
+| --project.provisioner                 | The Neon compute provisioner                                                                              | string  |                                       |
+| --project.region_id                   | The region identifier. See [the documentation](https://neon.tech/docs/introduction/regions) for the list of supported regions | string  |                                       |
+| --project.pg_version                  | The major PostgreSQL version number. Currently supported version are `14` and `15`                        | number  |                                       |
+| --project.store_passwords             | Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization | boolean |                                       |
+| --project.history_retention_seconds   | The number of seconds to retain PITR backup history for this project. Defaults to 7 days                  |         |                                       |
 
-### --client-id
+### update
 
-Sets the OAuth client id. For the `neonctl` CLI client, the client is `neonctl`.
+Update a project
 
-### --api-key
+### delete
 
-Specifies your Neon API key, required to authenticate Neon API requests. For information about obtaining an Neon API key, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
+Delete a project
+
+### get
+
+Get a project
+
+## branches
+
+For creating and managing branches in a Neon project.
+
+### Usage
+
+```bash
+neonctl branches <cmd> [args]
+```
+
+### Commands
+
+```bash
+neonctl branches list
+neonctl branches create
+neonctl branches update
+neonctl branches delete
+neonctl branches get
+```
+
+### list
+
+List branches
+
+### create
+
+Create a branch
+
+### update
+
+### delete
+
+### get
+
+## endpoints
+
+For creating and managing endpoints in a Neon project.
+
+### Usage
+
+```bash
+neonctl endpoints <cmd> [args]
+```
+
+### Commands
+
+```bash
+neonctl endpoints list
+neonctl endpoints create
+neonctl endpoints update
+neonctl endpoints delete
+neonctl endpoints get
+```
+
+### list
+
+### create
+
+### update
+
+### delete
+
+### get
+
+## databases
+
+For creating and managing databases in a Neon project.
+
+### Usage
+
+```bash
+neonctl databases <cmd> [args]
+```
+
+### Commands
+
+```bash
+neonctl databases list
+neonctl databases create
+neonctl databases update
+neonctl databases delete
+neonctl databases get
+```
+
+### list
+
+### create
+
+### delete
+
+## roles
+
+For creating and managing roles in a Neon project.
+
+### Usage
+
+```bash
+neonctl roles <cmd> [args]
+```
+
+### Commands
+
+```bash
+  neonctl roles list
+  neonctl roles create
+  neonctl roles update
+  neonctl roles delete
+  neonctl roles get
+```
+
+### list
+
+### create
+
+### delete
+
+## operations
+
+For viewing operations in a Neon project.
+
+### Usage
+
+```bash
+neonctl operations <cmd> [args]
+```
+
+### Commands
+
+```bash
+  neonctl operations list
+```
+
+### operations list
+
+## connection-string
