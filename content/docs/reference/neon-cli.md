@@ -75,7 +75,11 @@ To authenticate to Neon, run the following command:
 neonctl auth
 ```
 
-The command launches a browser window where you can authorize the Neon CLI to access your Neon account. After granting permission, your credentials are saved locally to a configuration file.
+The command launches a browser window where you can authorize the Neon CLI to access your Neon account. After granting permission, your credentials are saved locally to a configuration file named `credentials.json`.
+
+```text
+/home/<home>/.config/neonctl/credentials.json
+```
 
 ## Commands
 
@@ -191,34 +195,47 @@ Required arguments:
 
 ## Options
 
-### version
+### --version
 
-Shows the neonctl version number
+Shows the `neonctl` version number.
 
-### help
+```bash
+$ neonctl --version
+1.9.3
+```
 
-Shows the neonctl command-line help
+### --help
 
-### output
+Shows the `neonctl` command-line help. See [Synopsis](#synopsis).
 
-Sets the output format.
+### --output
 
-### api-host
+Sets the output format. Supported options are `json`, `yaml`, and `table`. The default is `table`.
 
-Shows the API host
+```bash
+neonctl me --output json
+```
 
-### config-dir
+### --api-host
 
-Sets the path to the `neonctl` configuration directory
+Specifies the Neon API host (the base URL for the Neon API) when running a CLI command. The default setting is `https://console.neon.tech/api/v2`. For more information, see [Neon API base URL](https://api-docs.neon.tech/reference/getting-started-with-neon-api#neon-api-base-url).
 
-### oauth-host
+```bash
+$ neonctl projects list --api-host https://console.neon.tech/api/v2
+```
 
-Sets the URL of Neon OAuth host
+### --config-dir
 
-### client-id
+Sets the path to the `neonctl` configuration file. To view your default configuration directory containing you `credentials.json` file, run `neonctl --help`. The credentials file is created when you authenticate using the `neonctl auth` command.
 
-Sets the OAuth client id
+### --oauth-host
 
-### token
+Sets the URL of Neon OAuth host used to authenticate your neonctl client to Neon. The default is `https://oauth2.neon.tech`.
 
-Sets the OAuth token
+### --client-id
+
+Sets the OAuth client id. For the `neonctl` CLI client, the client is `neonctl`.
+
+### --api-key
+
+Specifies your Neon API key, required to authenticate Neon API requests. For information about obtaining an Neon API key, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
