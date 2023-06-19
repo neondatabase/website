@@ -572,9 +572,60 @@ neonctl databases get
 
 ### databases list
 
+List the databases in the specified branch.
+
+```bash
+```
+
+#### Options
+
+| Option        | Description | Type   | Default  |
+| ------------- | ----------- | ------ | -------- |
+| --project.id  | Project ID  | string | Required |
+| --branch.id   | Branch ID   | string | Required |
+
 ### databases create
 
+Create a database in the specified branch.
+
+```bash
+neonctl databases create --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 --database.name mynewdb --database.owner_name daniel
+┌─────────┬────────────┬──────────────────────┐
+│ Name    │ Owner Name │ Created At           │
+├─────────┼────────────┼──────────────────────┤
+│ mynewdb │ daniel     │ 2023-06-19T23:45:45Z │
+└─────────┴────────────┴──────────────────────┘
+```
+
+#### Options
+
+| Option               | Description                          | Type   | Default  |
+| -------------------- | ------------------------------------ | ------ | -------- |
+| --project.id         | Project ID                           | string | Required |
+| --branch.id          | Branch ID                            | string | Required |
+| --database.name      | The name of the database             | string | Required |
+| --database.owner_name| The name of the role that owns the database | string | Required |
+
 ### databases delete
+
+Delete the specified database.
+
+```bash
+neonctl databases delete --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 --database.name mynewdb
+┌─────────┬────────────┬──────────────────────┐
+│ Name    │ Owner Name │ Created At           │
+├─────────┼────────────┼──────────────────────┤
+│ mynewdb │ daniel     │ 2023-06-19T23:45:45Z │
+└─────────┴────────────┴──────────────────────┘
+```
+
+#### Options
+
+| Option           | Description  | Type   | Default  |
+| ---------------- | ------------ | ------ | -------- |
+| --project.id     | Project ID   | string | Required |
+| --branch.id      | Branch ID    | string | Required |
+| --database.name  | Database name| string | Required |
 
 ## roles
 
