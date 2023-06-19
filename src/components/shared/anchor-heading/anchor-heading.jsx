@@ -10,7 +10,7 @@ const AnchorHeading =
   ({ children }) => {
     const id =
       typeof children === 'string'
-        ? slugify(children, { strict: true }).toLocaleLowerCase()
+        ? slugify(children, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g })
         : undefined;
 
     return (

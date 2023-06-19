@@ -15,6 +15,7 @@ const ReleaseNoteList = ({ items }) => (
       const { datetime } = getReleaseNotesDateFromSlug(slug);
       const isReleaseDateExist =
         prevItem && getReleaseNotesDateFromSlug(prevItem.slug).datetime === datetime;
+      const releaseNotesPath = generateReleaseNotePath(slug);
 
       return (
         <article
@@ -31,7 +32,7 @@ const ReleaseNoteList = ({ items }) => (
             <Link
               className="flex items-center font-medium text-secondary-8 hover:text-secondary-7 dark:text-primary-1"
               theme="black"
-              to={generateReleaseNotePath(slug)}
+              to={releaseNotesPath}
             >
               Release note page
               <ArrowIcon className="ml-2" aria-hidden />

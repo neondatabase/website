@@ -12,7 +12,7 @@ See [Token](#token).
 
 ### Active time
 
-The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). For [Free Tier](../introduction/technical-preview-free-tier) users, there is no limit on _Active time_ for the [primary branch](#primary-branch) compute. [Non-primary branch](#non-primary-branch) computes are limited to 100 hours of _Active time_ per month. _Active time_ on the primary branch compute is counted toward the 100 hour limit. You can monitor _Active time_ for the computes in your Neon project on the **Usage** widget on the Neon **Dashboard**.
+The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). For [Free Tier](../introduction/free-tier) users, there is no limit on _Active time_ for the [primary branch](#primary-branch) compute. [Non-primary branch](#non-primary-branch) computes are limited to 100 hours of _Active time_ per month. _Active time_ on the primary branch compute is counted toward the 100 hour limit. You can monitor _Active time_ for the computes in your Neon project on the **Usage** widget on the Neon **Dashboard**.
 
 ### Activity Monitor
 
@@ -170,7 +170,7 @@ A custom volume-based paid plan offered by Neon. See [Neon plans](../introductio
 
 ### Free Tier
 
-A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Free Tier](../introduction/technical-preview-free-tier).
+A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Free Tier](../introduction/free-tier).
 
 ### Kubernetes
 
@@ -348,7 +348,7 @@ A Neon Control Plane operation that suspends a compute endpoint after a period o
 
 ### Technical Preview
 
-A preview period during which users can try Neon.
+Neon is currently in Technical Preview, meaning that some intended core functionalities are still being developed or perfected. Please refer to the [Neon roadmap](../introduction/roadmap) for more information.
 
 ### Token
 
