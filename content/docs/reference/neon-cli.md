@@ -7,6 +7,34 @@ isDraft: true
 
 Utilizing the Neon Command Line Interface (CLI), you can operate Neon directly from a terminal or via automation. The Neon CLI facilitates numerous functions, such as authentication, project creation and management, role assignment, and more.
 
+## Installation
+
+This section describes how to install the `neonctl` command-line interface tool.
+
+### Prerequisites
+
+- Node.js 16.0 or higher. To check if you already have Node.js, run the following command:
+
+    ```shell
+    node -v
+    ```
+
+- The `npm` package manager.  To check if you already have `npm`, run the following command:
+
+   ```shell
+   npm -v
+   ```
+
+If you need to install either `Node.js` or `npm`, refer to the instructions for your operating system, which you can find online.
+
+### Install
+
+To download and install Neon CLI, run the following command:
+
+```shell
+npm i -g neonctl
+```
+
 ## Synopsis
 
 The `neonctl` command can be called from the command line. Without any arguments, it displays command usage and help:
@@ -37,34 +65,6 @@ Options:
       --oauth-host  URL to Neon OAUTH host [default: "https://oauth2.neon.tech"]
       --client-id   OAuth client id                [string] [default: "neonctl"]
       --api-key     API key                               [string] [default: ""]
-```
-
-## Installation
-
-This section describes how to install the `neonctl` command-line interface tool.
-
-### Prerequisites
-
-- Node.js 16.0 or higher. To check if you already have Node.js, run the following command:
-
-    ```shell
-    node -v
-    ```
-
-- The `npm` package manager.  To check if you already have `npm`, run the following command:
-
-   ```shell
-   npm -v
-   ```
-
-If you need to install either `Node.js` or `npm`, refer to the instructions for your operating system, which you can find online.
-
-### Install
-
-To download and install Neon CLI, run the following command:
-
-```shell
-npm i -g neonctl
 ```
 
 ## Connect
@@ -167,13 +167,13 @@ $> neonctl me
 
 For creating and managing Neon projects.
 
-### Usage
+Usage:
 
 ```bash
 neonctl projects <cmd> [args]
 ```
 
-### Commands
+Commands:
 
 ```bash
   neonctl projects list
@@ -234,7 +234,7 @@ neonctl projects create
 | --project.store_passwords             | Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization | boolean |                                       |
 | --project.history_retention_seconds   | The number of seconds to retain PITR backup history for this project. Defaults to 7 days                  |         |                                       |
 
-### update
+### projects update
 
 Update a project
 
@@ -267,7 +267,7 @@ neonctl projects update --project.id silent-dawn-084646 --project.name mynewproj
 | --project.store_passwords                        | Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization | boolean |                                       |
 | --project.history_retention_seconds              | The number of seconds to retain PITR backup history for this project. Defaults to 7 days                  | number  |                                       |
 
-### delete
+### projects delete
 
 Delete a project. The deleted project is displayed as output. You can verify that the project was deleted by running `neonctl projects list`.
 
@@ -286,9 +286,9 @@ neonctl projects delete --project.id silent-dawn-084646
 | ------------ | ------------- | ------ | -------- |
 | --project.id | Project ID    | string | Required |
 
-### get
+### projects get
 
-Get a project.
+Get project details.
 
 ```bash
 neonctl projects get --project.id spring-sky-578180
@@ -309,13 +309,13 @@ neonctl projects get --project.id spring-sky-578180
 
 For creating and managing branches in a Neon project.
 
-### Usage
+Usage:
 
 ```bash
 neonctl branches <cmd> [args]
 ```
 
-### Commands
+Commands:
 
 ```bash
 neonctl branches list
@@ -325,19 +325,113 @@ neonctl branches delete
 neonctl branches get
 ```
 
-### list
+### branches list
 
-List branches
+List the branches that belong to a Neon project.
 
-### create
+```bash
+neonctl branches list --project.id spring-sky-578180
+branch
+┌───────────────────────┬──────┬──────────────────────┐
+│ Id                    │ Name │ Created At           │
+├───────────────────────┼──────┼──────────────────────┤
+│ br-autumn-dust-190886 │ main │ 2023-06-19T18:27:19Z │
+└───────────────────────┴──────┴──────────────────────┘
+```
 
-Create a branch
+#### Options
 
-### update
+| Option       | Description   | Type   | Default  |
+| ------------ | ------------- | ------ | -------- |
+| --project.id | Project ID    | string | Required |
 
-### delete
+### branches create
 
-### get
+Create a branch in a Neon project.
+
+```bash
+neonctl branches create --project.id spring-sky-578180
+branch
+┌─────────────────────────┬─────────────────────────┬──────────────────────┐
+│ Id                      │ Name                    │ Created At           │
+├─────────────────────────┼─────────────────────────┼──────────────────────┤
+│ br-withered-king-763176 │ br-withered-king-763176 │ 2023-06-19T22:35:25Z │
+└─────────────────────────┴─────────────────────────┴──────────────────────┘
+```
+
+#### Options
+
+| Option                                    | Description                                                                               | Type    | Default                               |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------- | ------- | ------------------------------------- |
+| --project.id                              | Project ID                                                                                | string  | Required                              |
+| --branch.parent_id                        | The `branch_id` of the parent branch                                                      | string  |                                       |
+| --branch.name                             | The branch name                                                                           | string  |                                       |
+| --branch.parent_lsn                       | A Log Sequence Number (LSN) on the parent branch. The branch will be created with data from this LSN | string  |                                       |
+| --branch.parent_timestamp                 | A timestamp identifying a point in time on the parent branch. The branch will be created with data starting from this point in time | string  |                                       |
+| --endpoint.type                           | The compute endpoint type. Either `read_write` or `read_only`. The `read_only` compute endpoint type is not yet supported | string  | "read_only", "read_write"             |
+| --endpoint.provisioner                    | The Neon compute provisioner                                                              | string  | "k8s-pod", "k8s-neonvm", "docker"     |
+| --endpoint.suspend_timeout_seconds        | Duration of inactivity in seconds after which endpoint will be automatically suspended. Value `0` means use global default, `-1` means never suspend. Maximum value is 1 week in seconds | number  |                                       |
+
+### branches update
+
+Update a branch in a Neon project. Only the branch name can be modified.
+
+```bash
+neonctl branches update --project.id spring-sky-578180 --branch.id br-withered-king-763176 --branch.name mynewbranch
+┌─────────────────────────┬─────────────┬──────────────────────┐
+│ Id                      │ Name        │ Created At           │
+├─────────────────────────┼─────────────┼──────────────────────┤
+│ br-withered-king-763176 │ mynewbranch │ 2023-06-19T22:35:25Z │
+└─────────────────────────┴─────────────┴──────────────────────┘
+```
+
+#### Options
+
+| Option        | Description | Type   | Default  |
+| ------------- | ----------- | ------ | -------- |
+| --project.id  | Project ID  | string | Required |
+| --branch.name |             | string |          |
+| --branch.id   | Branch ID   | string | Required |
+
+### branches delete
+
+Delete a branch from a Neon project.
+
+```bash
+neonctl branches delete --project.id spring-sky-578180 --branch.id br-withered-king-763176
+┌─────────────────────────┬─────────────┬──────────────────────┐
+│ Id                      │ Name        │ Created At           │
+├─────────────────────────┼─────────────┼──────────────────────┤
+│ br-withered-king-763176 │ mynewbranch │ 2023-06-19T22:35:25Z │
+└─────────────────────────┴─────────────┴──────────────────────┘
+```
+
+#### Options
+
+| Option        | Description | Type   | Default  |
+| ------------- | ----------- | ------ | -------- |
+| --project.id  | Project ID  | string | Required |
+| --branch.id   | Branch ID   | string | Required |
+
+### branches get
+
+Get branch details.
+
+```bash
+neonctl branches get --project.id spring-sky-578180 --branch.id br-sweet-sun-522796 
+┌─────────────────────┬─────────────────────┬──────────────────────┐
+│ Id                  │ Name                │ Created At           │
+├─────────────────────┼─────────────────────┼──────────────────────┤
+│ br-sweet-sun-522796 │ br-sweet-sun-522796 │ 2023-06-19T22:35:20Z │
+└─────────────────────┴─────────────────────┴──────────────────────┘
+```
+
+#### Options
+
+| Option        | Description | Type   | Default  |
+| ------------- | ----------- | ------ | -------- |
+| --project.id  | Project ID  | string | Required |
+| --branch.id   | Branch ID   | string | Required |
 
 ## endpoints
 
@@ -359,27 +453,114 @@ neonctl endpoints delete
 neonctl endpoints get
 ```
 
-### list
+### endpoints list
 
-### create
+#### Options
 
-### update
+| Option        | Description | Type   | Default  |
+| ------------- | ----------- | ------ | -------- |
+| --project.id  | Project ID  | string | Required |
+| --branch.id   | Branch ID   | string | Required |
 
-### delete
+### endpoints create
 
-### get
+```bash
+neonctl endpoints create --project.id spring-sky-578180 --endpoint.branch_id br-sweet-sun-522796 --endpoint.type read_write
+┌───────────────────────┬──────────────────────┬─────────────────────┬────────────┬───────────────┐
+│ Id                    │ Created At           │ Branch Id           │ Type       │ Current State │
+├───────────────────────┼──────────────────────┼─────────────────────┼────────────┼───────────────┤
+│ ep-tight-paper-779179 │ 2023-06-19T23:04:27Z │ br-sweet-sun-522796 │ read_write │ init          │
+└───────────────────────┴──────────────────────┴─────────────────────┴────────────┴───────────────┘
+```
+
+#### Options
+
+| Option                                     | Description                                                                                                                           | Type    | Default                                |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | ------- | -------------------------------------- |
+| --project.id                               | Project ID                                                                                                                            | string  | Required                               |
+| --endpoint.branch_id                       | The ID of the branch the compute endpoint will be associated with                                                                     | string  | Required                               |
+| --endpoint.region_id                       | The region where the compute endpoint will be created. Only the project's `region_id` is permitted                                    | string  |                                        |
+| --endpoint.type                            | The compute endpoint type. Either `read_write` or `read_only`. The `read_only` compute endpoint type is not yet supported             | string  | "read_only", "read_write"  Required     |
+| --endpoint.provisioner                     | The Neon compute provisioner                                                                                                          | string  | "k8s-pod", "k8s-neonvm", "docker"      |
+| --endpoint.pooler_enabled                  | Whether to enable connection pooling for the compute endpoint                                                                         | boolean |                                        |
+| --endpoint.pooler_mode                     | The connection pooler mode. Neon supports PgBouncer in `transaction` mode only                                                        | string  | "transaction"                          |
+| --endpoint.disabled                        | Whether to restrict connections to the compute endpoint                                                                               | boolean |                                        |
+| --endpoint.passwordless_access             | NOT YET IMPLEMENTED. Whether to permit passwordless access to the compute endpoint                                                    | boolean |                                        |
+| --endpoint.suspend_timeout_seconds         | Duration of inactivity in seconds after which endpoint will be automatically suspended. Value `0` means use global default, `-1` means never suspend. Maximum value is 1 week in seconds | number  |                                        |
+
+### endpoints update
+
+Update an endpoint in a Neon project.
+
+```bash
+neonctl endpoints update --project.id spring-sky-578180 --endpoint.id ep-tight-paper-779179 --endpoint.suspend_timeout_seconds 600
+```
+
+#### Options
+
+| Option                                     | Description                                                                                                                           | Type    | Default                                |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | ------- | -------------------------------------- |
+| --project.id                               | Project ID                                                                                                                            | string  | Required                               |
+| --endpoint.id                              | Endpoint ID                                                                                                                           | string  | Required                               |
+| --endpoint.branch_id                       | The destination branch ID. The destination branch must not have an existing read-write endpoint                                       | string  |                                        |
+| --endpoint.provisioner                     | The Neon compute provisioner                                                                                                          | string  | "k8s-pod", "k8s-neonvm", "docker"      |
+| --endpoint.pooler_enabled                  | Whether to enable connection pooling for the compute endpoint                                                                         | boolean |                                        |
+| --endpoint.pooler_mode                     | The connection pooler mode. Neon supports PgBouncer in `transaction` mode only                                                        | string  | "transaction"                          |
+| --endpoint.disabled                        | Whether to restrict connections to the compute endpoint                                                                               | boolean |                                        |
+| --endpoint.passwordless_access             | NOT YET IMPLEMENTED. Whether to permit passwordless access to the compute endpoint                                                    | boolean |                                        |
+| --endpoint.suspend_timeout_seconds         | Duration of inactivity in seconds after which endpoint will be automatically suspended. Value `0` means use global default, `-1` means never suspend. Maximum value is 1 week in seconds | number  |                                        |
+
+### endpoints delete
+
+Delete an end point from a Neon project.
+
+```bash
+neonctl endpoints delete --project.id spring-sky-578180 --endpoint.id ep-tight-paper-779179
+┌───────────────────────┬──────────────────────┬─────────────────────┬────────────┬───────────────┐
+│ Id                    │ Created At           │ Branch Id           │ Type       │ Current State │
+├───────────────────────┼──────────────────────┼─────────────────────┼────────────┼───────────────┤
+│ ep-tight-paper-779179 │ 2023-06-19T23:04:27Z │ br-sweet-sun-522796 │ read_write │ idle          │
+└───────────────────────┴──────────────────────┴─────────────────────┴────────────┴───────────────┘
+```
+
+#### Options
+
+| Option       | Description  | Type   | Default  |
+| ------------ | ------------ | ------ | -------- |
+| --project.id | Project ID   | string | Required |
+| --endpoint.id| Endpoint ID  | string | Required |
+
+### endpoints get
+
+Get endpoint details.
+
+```bash
+neonctl endpoints get --project.id spring-sky-578180 --endpoint.id ep-tight-paper-779179
+┌───────────────────────┬──────────────────────┬─────────────────────┬────────────┬───────────────┐
+│ Id                    │ Created At           │ Branch Id           │ Type       │ Current State │
+├───────────────────────┼──────────────────────┼─────────────────────┼────────────┼───────────────┤
+│ ep-tight-paper-779179 │ 2023-06-19T23:04:27Z │ br-sweet-sun-522796 │ read_write │ idle          │
+└───────────────────────┴──────────────────────┴─────────────────────┴────────────┴───────────────┘
+```
+
+#### Options
+
+| Option       | Description  | Type   | Default  |
+| ------------ | ------------ | ------ | -------- |
+| --project.id | Project ID   | string | Required |
+| --endpoint.id| Endpoint ID  | string | Required |
 
 ## databases
 
 For creating and managing databases in a Neon project.
 
-### Usage
+Usage:
 
 ```bash
 neonctl databases <cmd> [args]
 ```
 
-### Commands
+Commands:
 
 ```bash
 neonctl databases list
@@ -389,11 +570,11 @@ neonctl databases delete
 neonctl databases get
 ```
 
-### list
+### databases list
 
-### create
+### databases create
 
-### delete
+### databases delete
 
 ## roles
 
@@ -415,11 +596,11 @@ neonctl roles <cmd> [args]
   neonctl roles get
 ```
 
-### list
+### roles list
 
-### create
+### roles create
 
-### delete
+### roles delete
 
 ## operations
 
