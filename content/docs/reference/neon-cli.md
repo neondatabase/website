@@ -185,7 +185,7 @@ neonctl projects <cmd> [args]
 
 ### projects list
 
-List projects
+List projects that belong to your account.
 
 ```bash
 neonctl projects list
@@ -202,21 +202,23 @@ neonctl projects list
 
 ### projects create
 
-Create a project
+Create a project. You are prompted for a project name, which is optional. Press the Enter key to have a project name generated for you.
+
+```bash
+neonctl projects create
+? Project name (optional) 
+
+┌────────────────────┬────────────────────┬───────────────┬──────────────────────┐
+│ Id                 │ Name               │ Region Id     │ Created At           │
+├────────────────────┼────────────────────┼───────────────┼──────────────────────┤
+│ silent-dawn-084646 │ silent-dawn-084646 │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
+└────────────────────┴────────────────────┴───────────────┴──────────────────────┘
+```
 
 #### Options
 
 | Option                                | Description                                                                                               | Type    | Default                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------- |
-| --version                             | Show version number                                                                                       | boolean |                                       |
-| --help                                | Show help                                                                                                 | boolean |                                       |
-| -o, --output                          | Set output format                                                                                         | string  | "table"                               |
-| --api-host                            | The API host                                                                                              |         | "https://console.neon.tech/api/v2"    |
-| --config-dir                          | Path to config directory                                                                                  | string  | "/home/dtprice/.config/neonctl"       |
-| --oauth-host                          | URL to Neon OAuth host                                                                                    |         | "https://oauth2.neon.tech"            |
-| --client-id                           | OAuth client id                                                                                           | string  | "neonctl"                             |
-| --api-key                             | API key                                                                                                   | string  | ""                                    |
-| --analytics                           | Enable analytics                                                                                          | boolean | true                                  |
 | --project.settings.quota.active_time_seconds | The total amount of wall-clock time allowed to be spent by project's compute endpoints               | number  |                                       |
 | --project.settings.quota.compute_time_seconds | The total amount of CPU seconds allowed to be spent by project's compute endpoints                   | number  |                                       |
 | --project.settings.quota.written_data_bytes | Total amount of data written to all project's branches                                                | number  |                                       |
@@ -236,13 +238,72 @@ Create a project
 
 Update a project
 
+```bash
+neonctl projects update --project.id silent-dawn-084646 --project.name mynewproject
+┌────────────────────┬──────────────┬───────────────┬──────────────────────┐
+│ Id                 │ Name         │ Region Id     │ Created At           │
+├────────────────────┼──────────────┼───────────────┼──────────────────────┤
+│ silent-dawn-084646 │ mynewproject │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
+└────────────────────┴──────────────┴───────────────┴──────────────────────┘
+```
+
+#### Options
+
+| Option                                           | Description                                                                                               | Type    | Default                               |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------- |
+| --project.id                                     | Project ID                                                                                                | string  | Required                              |
+| --project.settings.quota.active_time_seconds     | The total amount of wall-clock time allowed to be spent by project's compute endpoints                   | number  |                                       |
+| --project.settings.quota.compute_time_seconds    | The total amount of CPU seconds allowed to be spent by project's compute endpoints                       | number  |                                       |
+| --project.settings.quota.written_data_bytes      | Total amount of data written to all project's branches                                                    | number  |                                       |
+| --project.settings.quota.data_transfer_bytes     | Total amount of data transferred from all project's branches using proxy                                  | number  |                                       |
+| --project.settings.quota.logical_size_bytes      | Limit on the logical size of every project's branch                                                       | number  |                                       |
+| --project.name                                   | The project name                                                                                          | string  |                                       |
+| --project.branch.name                            | The branch name. If not specified, the default branch name will be used                                   | string  |                                       |
+| --project.branch.role_name                       | The role name. If not specified, the default role name will be used                                       | string  |                                       |
+| --project.branch.database_name                   | The database name. If not specified, the default database name will be used                               | string  |                                       |
+| --project.provisioner                            | The Neon compute provisioner                                                                              | string  |                                       |
+| --project.region_id                              | The region identifier. See [the documentation](https://neon.tech/docs/introduction/regions) for the list of supported regions | string  |                                       |
+| --project.pg_version                             | The major PostgreSQL version number. Currently supported version are `14` and `15`                        | number  |                                       |
+| --project.store_passwords                        | Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization | boolean |                                       |
+| --project.history_retention_seconds              | The number of seconds to retain PITR backup history for this project. Defaults to 7 days                  | number  |                                       |
+
 ### delete
 
-Delete a project
+Delete a project. The deleted project is displayed as output. You can verify that the project was deleted by running `neonctl projects list`.
+
+```bash
+neonctl projects delete --project.id silent-dawn-084646
+┌────────────────────┬──────────────┬───────────────┬──────────────────────┐
+│ Id                 │ Name         │ Region Id     │ Created At           │
+├────────────────────┼──────────────┼───────────────┼──────────────────────┤
+│ silent-dawn-084646 │ mynewproject │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
+└────────────────────┴──────────────┴───────────────┴──────────────────────┘
+```
+
+#### Options
+
+| Option       | Description   | Type   | Default  |
+| ------------ | ------------- | ------ | -------- |
+| --project.id | Project ID    | string | Required |
 
 ### get
 
-Get a project
+Get a project.
+
+```bash
+neonctl projects get --project.id spring-sky-578180
+┌───────────────────┬───────────────────┬───────────────┬──────────────────────┐
+│ Id                │ Name              │ Region Id     │ Created At           │
+├───────────────────┼───────────────────┼───────────────┼──────────────────────┤
+│ spring-sky-578180 │ spring-sky-578180 │ aws-us-east-2 │ 2023-06-19T18:27:19Z │
+└───────────────────┴───────────────────┴───────────────┴──────────────────────┘
+```
+
+#### Options
+
+| Option       | Description   | Type   | Default  |
+| ------------ | ------------- | ------ | -------- |
+| --project.id | Project ID    | string | Required |
 
 ## branches
 
