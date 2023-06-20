@@ -637,13 +637,13 @@ neonctl databases delete --project.id spring-sky-578180 --branch.id br-autumn-du
 
 For creating and managing roles in a Neon project.
 
-### Usage
+Usage:
 
 ```bash
 neonctl roles <cmd> [args]
 ```
 
-### Commands
+Commands:
 
 ```bash
   neonctl roles list
