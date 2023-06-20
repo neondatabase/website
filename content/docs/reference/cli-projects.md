@@ -1,5 +1,5 @@
 ---
-title: Neon CLI commands - `projects`
+title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage your Neon project directly from your terminal
 enableTableOfContents: true
 isDraft: true
@@ -7,11 +7,11 @@ isDraft: true
 
 ## Get started
 
-Make sure that you [install the Neon CLI](../neon-cli/get-started) first. Once you have done that, you can manage your Neon projects from the command line.
+Ensure that you have [installed the Neon CLI](../reference/neon-cli/get-started). Once you have done that, you can use the `projects` command to manage Neon projects from the command line.
 
 ## The `projects` command
 
-The `projects` command allows you to list, create, update, delete, and get Neon projects.
+The `projects` command allows you to list, create, update, delete, and retrieve information about Neon projects.
 
 ### Usage
 
@@ -31,7 +31,7 @@ neonctl projects <sub-command> [options]
 
 ### list
 
-This command allows you to list projects that belong to your Neon account.
+This sub-command allows you to list projects that belong to your Neon account.
 
 #### Usage
 
@@ -41,7 +41,7 @@ neonctl projects list [options]
 
 #### Options
 
-Only [global options](../neon-cli/global-options) apply.
+Only [global options](../reference/neon-cli/global-options) apply.
 
 #### Example
 
@@ -60,7 +60,7 @@ neonctl projects list
 
 ### create
 
-This command allows you to create a project. The [Neon Free Tier](../introduction/free-tier) supports creating a single project. The [Neon Pro plan](../introduction/pro-plan) allows creating multiple projects.
+This sub-command allows you to create a Neon project. The [Neon Free Tier](../introduction/free-tier) supports creating a single project. The [Neon Pro plan](../introduction/pro-plan) allows creating multiple projects.
 
 You are prompted for a project name, which is optional. Press the **Enter** key to have a project name generated for you.
 
@@ -72,7 +72,7 @@ neonctl projects create [options]
 
 #### Options
 
-In addition to Neon CLI [global options](../neon-cli/global-options), the `create` command supports the following options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` sub-command supports the these options:
 
 | Option                                | Description                                                                                               | Type    | Required                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
@@ -96,7 +96,6 @@ In addition to Neon CLI [global options](../neon-cli/global-options), the `creat
 ```bash
 neonctl projects create
 ? Project name (optional) 
-
 ┌────────────────────┬────────────────────┬───────────────┬──────────────────────┐
 │ Id                 │ Name               │ Region Id     │ Created At           │
 ├────────────────────┼────────────────────┼───────────────┼──────────────────────┤
@@ -106,7 +105,7 @@ neonctl projects create
 
 ### update
 
-This command allows you to update a Neon project.
+This sub-command allows you to update a Neon project.
 
 #### Usage
 
@@ -116,7 +115,7 @@ neonctl projects update [options]
 
 #### Options
 
-In addition to Neon CLI [global options](../neon-cli/global-options), the `update` command supports the following options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` sub-command supports these options:
 
 | Option                                           | Description                                                                                               | Type    | Required                               |
 | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
@@ -149,13 +148,15 @@ neonctl projects update --project.id silent-dawn-084646 --project.name mynewproj
 
 ### delete
 
-This command allows you to delete a project.
+This sub-command allows you to delete a Neon project.
 
 ```bash
 neonctl projects delete [options]
 ```
 
 #### Options
+
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` sub-command supports this option:
 
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |
@@ -172,11 +173,11 @@ neonctl projects delete --project.id silent-dawn-084646
 └────────────────────┴──────────────┴───────────────┴──────────────────────┘
 ```
 
-The deleted project is displayed as output. You can verify that the project was deleted by running `neonctl projects list`.
+Information about the deleted project is displayed as output. You can verify that the project was deleted by running `neonctl projects list`.
 
 ### get
 
-This command allows you to retrieve details about a Neon project.
+This sub-command allows you to retrieve details about a Neon project.
 
 #### Usage
 
@@ -185,6 +186,8 @@ neonctl projects get [options]
 ```
 
 #### Options
+
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `get` sub-command supports the this option:
 
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |

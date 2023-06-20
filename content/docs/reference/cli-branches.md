@@ -1,5 +1,5 @@
 ---
-title: Neon CLI commands - branches
+title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage your Neon project directly from your terminal
 enableTableOfContents: true
 isDraft: true
@@ -7,7 +7,7 @@ isDraft: true
 
 ## Get started
 
-Make sure that you [install the Neon CLI](../neon-cli/get-started) first. Once you have done that, you can manage your Neon projects from the command line.
+Ensure that you have [installed the Neon CLI](../neon-cli/get-started). Once you have done that, you can use the `branches` command manage branches from the command line.
 
 ## The `branches` command
 

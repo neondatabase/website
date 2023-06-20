@@ -69,7 +69,6 @@ For information about obtaining an Neon API key token, see [Authentication](http
 | [operations](../cli-operations)                         | `list`, `create`, `update`, `delete`, `get` | Manage operations         |
 | [connection-string](../cli-connection-string)           | `list`, `create`, `update`, `delete`, `get` | Get connection string     |
 
-
 ## Global options
 
 - `--version`

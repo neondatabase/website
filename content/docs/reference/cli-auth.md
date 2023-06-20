@@ -1,5 +1,5 @@
 ---
-title: Neon CLI commands - auth
+title: Neon CLI commands — auth
 subtitle: Use the Neon CLI to manage your Neon project directly from your terminal
 enableTableOfContents: true
 isDraft: true
@@ -7,7 +7,7 @@ isDraft: true
 
 ## Get started
 
-Make sure that you [install the Neon CLI](../neon-cli/get-started) first. Once you have done that, you can manage your Neon projects from the command line.
+Ensure that you have [installed the Neon CLI](../neon-cli/get-started). Once you have done that, you can use the `auth` command to connect to Neon.
 
 ## The `auth` command
 
@@ -31,7 +31,7 @@ None.
 
 ### Options
 
-Only [global options](../neon-cli/global-options) apply.
+Only [global options](../reference/neon-cli/global-options) apply.
 
 ## Need help?
 
