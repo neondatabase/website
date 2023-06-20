@@ -5,7 +5,9 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-## Getting started
+## Get started
+
+Make sure that you [install the Neon CLI](../neon-cli/get-started) first. Once you have done that, you can manage your Neon projects from the command line.
 
 ## The `roles` command
 

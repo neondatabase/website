@@ -7,11 +7,13 @@ isDraft: true
 
 Utilizing the Neon Command Line Interface (CLI), you can operate Neon directly from a terminal or via automation. The Neon CLI facilitates numerous functions, such as authentication, project creation and management, role assignment, and more.
 
-## Installation
+## Get started
 
-This section describes how to install the `neonctl` command-line interface tool.
+This section describes how to install the Neon CLI, `neonctl`.
 
 ### Prerequisites
+
+Before installing, ensure that you have met the following prerequisites:
 
 - Node.js 16.0 or higher. To check if you already have Node.js, run the following command:
 
@@ -29,45 +31,13 @@ If you need to install either `Node.js` or `npm`, refer to the instructions for 
 
 ### Install
 
-To download and install Neon CLI, run the following command:
+To install Neon CLI, run the following command:
 
 ```shell
 npm i -g neonctl
 ```
 
-## Synopsis
-
-The `neonctl` command can be called from the command line. Without any arguments, it displays command usage and help:
-
-```bash
-neonctl --help
-usage: neonctl <cmd> [args]
-
-Commands:
-  neonctl auth               Authenticate
-  neonctl projects           Manage projects
-  neonctl me                 Show current user
-  neonctl branches           Manage branches
-  neonctl endpoints          Manage endpoints
-  neonctl databases          Manage databases
-  neonctl roles              Manage roles
-  neonctl operations         Manage operations
-  neonctl connection-string  Get connection string                 [aliases: cs]
-
-Options:
-      --version     Show version number                                [boolean]
-      --help        Show help                                          [boolean]
-  -o, --output      Set output format
-                  [string] [choices: "json", "yaml", "table"] [default: "table"]
-      --api-host    The API host   [default: "https://console.neon.tech/api/v2"]
-      --config-dir  Path to config directory
-                             [string] [default: "/home/<user>/.config/neonctl"]
-      --oauth-host  URL to Neon OAUTH host [default: "https://oauth2.neon.tech"]
-      --client-id   OAuth client id                [string] [default: "neonctl"]
-      --api-key     API key                               [string] [default: ""]
-```
-
-## Connect
+### Connect
 
 To authenticate to Neon, run the following command:
 
@@ -84,6 +54,20 @@ neonctl <cmd> --api-key <token>
 ```
 
 For information about obtaining an Neon API key token, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
+
+## Commands
+
+| Command                                                 | Subcommands                            | Required options                  | Description               |
+|---------------------------------------------------------|----------------------------------------|-----------------------------------|---------------------------|
+| [auth](../cli-auth)                                     |  | `--project.id`, `--branch.id`     | Authenticate              |
+| [projects](../cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Manage projects           |
+| [me](../cli-me)                                         |  | `--project.id`, `--branch.id`     | Show current user         |
+| [branches](../cli-branches)                             | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Manage branches           |
+| [endpoints](../cli-endpoints)                           | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Manage endpoints          |
+| [databases](../cli-databases)                           | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Manage databases          |
+| [roles](../cli-roles)                                   | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Manage roles              |
+| [operations](../cli-operations)                         | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Manage operations         |
+| [connection-string](../cli-connection-string)           | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Get connection string     |
 
 ## Global options
 
@@ -134,33 +118,36 @@ For information about obtaining an Neon API key token, see [Authentication](http
 
 - `--analytics`
 
-Enables analytics.
+  Enables analytics.
 
-## auth
-
-Authenticates the user or caller to Neon.
+The `neonctl` command can be called from the command line. Without any arguments, it displays command usage and help:
 
 ```bash
-neonctl auth
-```
+neonctl --help
+usage: neonctl <cmd> [args]
 
-The command launches a browser window where you can authorize the Neon CLI to access your Neon account. After granting permission, your credentials are saved locally to a configuration file named `credentials.json`.
+Commands:
+  neonctl auth               Authenticate
+  neonctl projects           Manage projects
+  neonctl me                 Show current user
+  neonctl branches           Manage branches
+  neonctl endpoints          Manage endpoints
+  neonctl databases          Manage databases
+  neonctl roles              Manage roles
+  neonctl operations         Manage operations
+  neonctl connection-string  Get connection string                 [aliases: cs]
 
-```text
-/home/<home>/.config/neonctl/credentials.json
-```
-
-## me
-
-Returns information about the authenticated user.
-
-```bash
-$> neonctl me
-┌────────────────┬──────────────────────────┬────────────┬────────────────┐
-│ Login          │ Email                    │ Name       │ Projects Limit │
-├────────────────┼──────────────────────────┼────────────┼────────────────┤
-│ user1          │ user1@example.com        │ User1      │ 1              │
-└────────────────┴──────────────────────────┴────────────┴────────────────┘
+Options:
+      --version     Show version number                                [boolean]
+      --help        Show help                                          [boolean]
+  -o, --output      Set output format
+                  [string] [choices: "json", "yaml", "table"] [default: "table"]
+      --api-host    The API host   [default: "https://console.neon.tech/api/v2"]
+      --config-dir  Path to config directory
+                             [string] [default: "/home/<user>/.config/neonctl"]
+      --oauth-host  URL to Neon OAUTH host [default: "https://oauth2.neon.tech"]
+      --client-id   OAuth client id                [string] [default: "neonctl"]
+      --api-key     API key                               [string] [default: ""]
 ```
 
 ## projects
