@@ -43,8 +43,6 @@ neonctl endpoints list [options]
 
 In addition to the Neon CLI [global options](../neon-cli/global-options), the `list` sub-command supports these options:
 
-#### Options
-
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
 | --project.id  | Project ID  | string | &check; |

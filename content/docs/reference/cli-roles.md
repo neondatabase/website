@@ -11,12 +11,23 @@ Ensure that you have [installed the Neon CLI](../neon-cli/get-started). Once you
 
 ## The `roles` command
 
+The `roles` command allows you to list, create, update, delete, and retrieve information about roles in a Neon project.
+
 ### Usage
 
 ```bash
+neonctl databases <command> [options]
 ```
 
 ### Commands
+
+| Sub-command  | Description      |
+|---------|------------------|
+| [list](#list)    | List roles    |
+| [create](#create)  | Create a role |
+| [update](#update)  | Update a role |
+| [delete](#delete)  | Delete a role |
+| [get](#get)     | Get a role    |
 
 ### Options
 
