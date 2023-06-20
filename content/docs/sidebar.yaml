@@ -189,7 +189,27 @@
 - title: Reference
   items:
     - title: Neon CLI
-      slug: reference/neon-cli
+      items:
+        - title: Getting started
+          slug: reference/neon-cli
+        - title: auth
+          slug: reference/auth
+        - title: projects
+          slug: reference/projects
+        - title: me
+          slug: reference/me
+        - title: branches
+          slug: reference/branches
+        - title: endpoints
+          slug: reference/endpoints
+        - title: databases
+          slug: reference/databases
+        - title: roles
+          slug: reference/roles
+        - title: operations
+          slug: reference/operations
+        - title: connection-string
+          slug: reference/connection-string
     - title: SDKs
       slug: reference/sdk
     - title: Glossary

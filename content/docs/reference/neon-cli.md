@@ -1,6 +1,6 @@
 ---
 title: Neon CLI
-subtitle: Use the Neon CLI to manage Neon projects from the command line
+subtitle: Use the Neon CLI to manage your Neon project directly from your terminal
 enableTableOfContents: true
 isDraft: true
 ---
