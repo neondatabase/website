@@ -72,7 +72,7 @@ neonctl projects create [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` sub-command supports the these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` sub-command supports these options:
 
 | Option                                | Description                                                                                               | Type    | Required                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |

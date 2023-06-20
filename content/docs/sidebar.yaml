@@ -190,7 +190,7 @@
   items:
     - title: Neon CLI
       items:
-        - title: Getting started
+        - title: Get started
           slug: reference/neon-cli
         - title: auth
           slug: reference/cli-auth
