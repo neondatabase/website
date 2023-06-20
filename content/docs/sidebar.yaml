@@ -193,23 +193,23 @@
         - title: Getting started
           slug: reference/neon-cli
         - title: auth
-          slug: reference/auth
+          slug: reference/cli-auth
         - title: projects
-          slug: reference/projects
+          slug: reference/cli-projects
         - title: me
-          slug: reference/me
+          slug: reference/cli-me
         - title: branches
-          slug: reference/branches
+          slug: reference/cli-branches
         - title: endpoints
-          slug: reference/endpoints
+          slug: reference/cli-endpoints
         - title: databases
-          slug: reference/databases
+          slug: reference/cli-databases
         - title: roles
-          slug: reference/roles
+          slug: reference/cli-roles
         - title: operations
-          slug: reference/operations
+          slug: reference/cli-operations
         - title: connection-string
-          slug: reference/connection-string
+          slug: reference/cli-connection-string
     - title: SDKs
       slug: reference/sdk
     - title: Glossary
