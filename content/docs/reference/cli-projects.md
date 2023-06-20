@@ -74,8 +74,8 @@ neonctl projects create [options]
 
 In addition to Neon CLI [global options](../neon-cli/global-options), the `create` command supports the following options:
 
-| Option                                | Description                                                                                               | Type    | Default                               |
-| ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------- |
+| Option                                | Description                                                                                               | Type    | Required                               |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
 | --project.settings.quota.active_time_seconds | The total amount of wall-clock time allowed to be spent by project's compute endpoints               | number  |                                       |
 | --project.settings.quota.compute_time_seconds | The total amount of CPU seconds allowed to be spent by project's compute endpoints                   | number  |                                       |
 | --project.settings.quota.written_data_bytes | Total amount of data written to all project's branches                                                | number  |                                       |
@@ -118,9 +118,9 @@ neonctl projects update [options]
 
 In addition to Neon CLI [global options](../neon-cli/global-options), the `update` command supports the following options:
 
-| Option                                           | Description                                                                                               | Type    | Default                               |
-| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------- |
-| --project.id                                     | Project ID                                                                                                | string  | Required                              |
+| Option                                           | Description                                                                                               | Type    | Required                               |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
+| --project.id                                     | Project ID                                                                                                | string  | &check;                              |
 | --project.settings.quota.active_time_seconds     | The total amount of wall-clock time allowed to be spent by project's compute endpoints                   | number  |                                       |
 | --project.settings.quota.compute_time_seconds    | The total amount of CPU seconds allowed to be spent by project's compute endpoints                       | number  |                                       |
 | --project.settings.quota.written_data_bytes      | Total amount of data written to all project's branches                                                    | number  |                                       |
@@ -149,7 +149,7 @@ neonctl projects update --project.id silent-dawn-084646 --project.name mynewproj
 
 ### delete
 
-This command allows you to delete a project. 
+This command allows you to delete a project.
 
 ```bash
 neonctl projects delete [options]
@@ -157,9 +157,9 @@ neonctl projects delete [options]
 
 #### Options
 
-| Option       | Description   | Type   | Default  |
-| ------------ | ------------- | ------ | -------- |
-| --project.id | Project ID    | string | Required |
+| Option       | Description   | Type   | Required  |
+| ------------ | ------------- | ------ | :------: |
+| --project.id | Project ID    | string | &check; |
 
 #### Example
 
@@ -186,9 +186,9 @@ neonctl projects get [options]
 
 #### Options
 
-| Option       | Description   | Type   | Default  |
-| ------------ | ------------- | ------ | -------- |
-| --project.id | Project ID    | string | Required |
+| Option       | Description   | Type   | Required  |
+| ------------ | ------------- | ------ | :------: |
+| --project.id | Project ID    | string | &check; |
 
 #### Example
 

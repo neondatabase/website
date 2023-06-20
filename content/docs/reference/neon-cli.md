@@ -57,17 +57,18 @@ For information about obtaining an Neon API key token, see [Authentication](http
 
 ## Commands
 
-| Command                                                 | Subcommands                            | Required options                  | Description               |
-|---------------------------------------------------------|----------------------------------------|-----------------------------------|---------------------------|
-| [auth](../cli-auth)                                     |  | `--project.id`, `--branch.id`     | Authenticate              |
-| [projects](../cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Manage projects           |
-| [me](../cli-me)                                         |  | `--project.id`, `--branch.id`     | Show current user         |
-| [branches](../cli-branches)                             | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Manage branches           |
-| [endpoints](../cli-endpoints)                           | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Manage endpoints          |
-| [databases](../cli-databases)                           | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Manage databases          |
-| [roles](../cli-roles)                                   | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Manage roles              |
-| [operations](../cli-operations)                         | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Manage operations         |
-| [connection-string](../cli-connection-string)           | `list`, `create`, `update`, `delete`, `get` | `--project.id`, `--branch.id`     | Get connection string     |
+| Command                                                 | Subcommands                            | Description               |
+|---------------------------------------------------------|----------------------------------------|---------------------------|
+| [auth](../cli-auth)                                     |                                        | Authenticate              |
+| [projects](../cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | Manage projects           |
+| [me](../cli-me)                                         |                                        | Show current user         |
+| [branches](../cli-branches)                             | `list`, `create`, `update`, `delete`, `get` | Manage branches           |
+| [endpoints](../cli-endpoints)                           | `list`, `create`, `update`, `delete`, `get` | Manage endpoints          |
+| [databases](../cli-databases)                           | `list`, `create`, `update`, `delete`, `get` | Manage databases          |
+| [roles](../cli-roles)                                   | `list`, `create`, `update`, `delete`, `get` | Manage roles              |
+| [operations](../cli-operations)                         | `list`, `create`, `update`, `delete`, `get` | Manage operations         |
+| [connection-string](../cli-connection-string)           | `list`, `create`, `update`, `delete`, `get` | Get connection string     |
+
 
 ## Global options
 
