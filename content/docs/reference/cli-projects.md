@@ -1,5 +1,5 @@
 ---
-title: Neon CLI commands - projects
+title: Neon CLI commands - `projects`
 subtitle: Use the Neon CLI to manage your Neon project directly from your terminal
 enableTableOfContents: true
 isDraft: true
@@ -31,7 +31,7 @@ neonctl projects <sub-command> [options]
 
 ### list
 
-This command allows you to list projects that belong to your account.
+This command allows you to list projects that belong to your Neon account.
 
 #### Usage
 
@@ -60,20 +60,19 @@ neonctl projects list
 
 ### create
 
-Create a project. You are prompted for a project name, which is optional. Press the **Enter** key to have a project name generated for you.
+This command allows you to create a project. The [Neon Free Tier](../introduction/free-tier) supports creating a single project. The [Neon Pro plan](../introduction/pro-plan) allows creating multiple projects.
+
+You are prompted for a project name, which is optional. Press the **Enter** key to have a project name generated for you.
+
+#### Usage
 
 ```bash
-neonctl projects create
-? Project name (optional) 
-
-┌────────────────────┬────────────────────┬───────────────┬──────────────────────┐
-│ Id                 │ Name               │ Region Id     │ Created At           │
-├────────────────────┼────────────────────┼───────────────┼──────────────────────┤
-│ silent-dawn-084646 │ silent-dawn-084646 │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
-└────────────────────┴────────────────────┴───────────────┴──────────────────────┘
+neonctl projects create [options]
 ```
 
 #### Options
+
+In addition to Neon CLI [global options](../neon-cli/global-options), the `create` command supports the following options:
 
 | Option                                | Description                                                                                               | Type    | Default                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------- |
@@ -94,20 +93,30 @@ neonctl projects create
 
 #### Example
 
+```bash
+neonctl projects create
+? Project name (optional) 
+
+┌────────────────────┬────────────────────┬───────────────┬──────────────────────┐
+│ Id                 │ Name               │ Region Id     │ Created At           │
+├────────────────────┼────────────────────┼───────────────┼──────────────────────┤
+│ silent-dawn-084646 │ silent-dawn-084646 │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
+└────────────────────┴────────────────────┴───────────────┴──────────────────────┘
+```
+
 ### update
 
-Update a project.
+This command allows you to update a Neon project.
+
+#### Usage
 
 ```bash
-neonctl projects update --project.id silent-dawn-084646 --project.name mynewproject
-┌────────────────────┬──────────────┬───────────────┬──────────────────────┐
-│ Id                 │ Name         │ Region Id     │ Created At           │
-├────────────────────┼──────────────┼───────────────┼──────────────────────┤
-│ silent-dawn-084646 │ mynewproject │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
-└────────────────────┴──────────────┴───────────────┴──────────────────────┘
+neonctl projects update [options]
 ```
 
 #### Options
+
+In addition to Neon CLI [global options](../neon-cli/global-options), the `update` command supports the following options:
 
 | Option                                           | Description                                                                                               | Type    | Default                               |
 | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------- |
@@ -129,9 +138,30 @@ neonctl projects update --project.id silent-dawn-084646 --project.name mynewproj
 
 #### Example
 
+```bash
+neonctl projects update --project.id silent-dawn-084646 --project.name mynewproject
+┌────────────────────┬──────────────┬───────────────┬──────────────────────┐
+│ Id                 │ Name         │ Region Id     │ Created At           │
+├────────────────────┼──────────────┼───────────────┼──────────────────────┤
+│ silent-dawn-084646 │ mynewproject │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
+└────────────────────┴──────────────┴───────────────┴──────────────────────┘
+```
+
 ### delete
 
-Delete a project. The deleted project is displayed as output. You can verify that the project was deleted by running `neonctl projects list`.
+This command allows you to delete a project. 
+
+```bash
+neonctl projects delete [options]
+```
+
+#### Options
+
+| Option       | Description   | Type   | Default  |
+| ------------ | ------------- | ------ | -------- |
+| --project.id | Project ID    | string | Required |
+
+#### Example
 
 ```bash
 neonctl projects delete --project.id silent-dawn-084646
@@ -142,23 +172,16 @@ neonctl projects delete --project.id silent-dawn-084646
 └────────────────────┴──────────────┴───────────────┴──────────────────────┘
 ```
 
-#### Options
-
-| Option       | Description   | Type   | Default  |
-| ------------ | ------------- | ------ | -------- |
-| --project.id | Project ID    | string | Required |
-
-#### Example
+The deleted project is displayed as output. You can verify that the project was deleted by running `neonctl projects list`.
 
 ### get
 
+This command allows you to retrieve details about a Neon project.
+
+#### Usage
+
 ```bash
-neonctl projects get --project.id spring-sky-578180
-┌───────────────────┬───────────────────┬───────────────┬──────────────────────┐
-│ Id                │ Name              │ Region Id     │ Created At           │
-├───────────────────┼───────────────────┼───────────────┼──────────────────────┤
-│ spring-sky-578180 │ spring-sky-578180 │ aws-us-east-2 │ 2023-06-19T18:27:19Z │
-└───────────────────┴───────────────────┴───────────────┴──────────────────────┘
+neonctl projects get [options]
 ```
 
 #### Options
@@ -168,6 +191,15 @@ neonctl projects get --project.id spring-sky-578180
 | --project.id | Project ID    | string | Required |
 
 #### Example
+
+```bash
+neonctl projects get --project.id spring-sky-578180
+┌───────────────────┬───────────────────┬───────────────┬──────────────────────┐
+│ Id                │ Name              │ Region Id     │ Created At           │
+├───────────────────┼───────────────────┼───────────────┼──────────────────────┤
+│ spring-sky-578180 │ spring-sky-578180 │ aws-us-east-2 │ 2023-06-19T18:27:19Z │
+└───────────────────┴───────────────────┴───────────────┴──────────────────────┘
+```
 
 ## Need help?
 
