@@ -649,21 +649,71 @@ neonctl roles <cmd> [args]
 
 ### roles list
 
+```bash
+neonctl roles list --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 
+┌────────┬──────────────────────┐
+│ Name   │ Created At           │
+├────────┼──────────────────────┤
+│ daniel │ 2023-06-19T18:27:19Z │
+└────────┴──────────────────────┘
+```
+
+#### Options
+
+| Option        | Description | Type   | Default  |
+| ------------- | ----------- | ------ | -------- |
+| --project.id  | Project ID  | string | Required |
+| --branch.id   | Branch ID   | string | Required |
+
 ### roles create
 
+```bash
+neonctl roles create --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 --role.name sally
+┌───────┬──────────────────────┐
+│ Name  │ Created At           │
+├───────┼──────────────────────┤
+│ sally │ 2023-06-20T00:43:17Z │
+└───────┴──────────────────────┘
+```
+
+#### Options
+
+| Option       | Description                                    | Type   | Default  |
+| ------------ | ---------------------------------------------- | ------ | -------- |
+| --project.id | Project ID                                     | string | Required |
+| --branch.id  | Branch ID                                      | string | Required |
+| --role.name  | The role name. Cannot exceed 63 bytes in length| string | Required |
+
 ### roles delete
+
+```bash
+neonctl roles delete --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 --role.name sally
+┌───────┬──────────────────────┐
+│ Name  │ Created At           │
+├───────┼──────────────────────┤
+│ sally │ 2023-06-20T00:43:17Z │
+└───────┴──────────────────────┘
+```
+
+#### Options
+
+| Option       | Description                                    | Type   | Default  |
+| ------------ | ---------------------------------------------- | ------ | -------- |
+| --project.id | Project ID                                     | string | Required |
+| --branch.id  | Branch ID                                      | string | Required |
+| --role.name  | The role name. Cannot exceed 63 bytes in length| string | Required |
 
 ## operations
 
 For viewing operations in a Neon project.
 
-### Usage
+Usage:
 
 ```bash
 neonctl operations <cmd> [args]
 ```
 
-### Commands
+Commands:
 
 ```bash
   neonctl operations list
@@ -671,4 +721,42 @@ neonctl operations <cmd> [args]
 
 ### operations list
 
-## connection-string
+List project operations.
+
+```bash
+neonctl operations list --project.id spring-sky-578180 
+
+┌──────────────────────────────────────┬────────────────────┬──────────┬──────────────────────┐
+│ Id                                   │ Action             │ Status   │ Created At           │
+├──────────────────────────────────────┼────────────────────┼──────────┼──────────────────────┤
+│ fce8642e-259e-4662-bdce-518880aee723 │ apply_config       │ finished │ 2023-06-20T00:45:19Z │
+├──────────────────────────────────────┼────────────────────┼──────────┼──────────────────────┤
+│ dc1dfb0c-b854-474b-be20-2ea1d2172563 │ apply_config       │ finished │ 2023-06-20T00:43:17Z │
+├──────────────────────────────────────┼────────────────────┼──────────┼──────────────────────┤
+│ 7a83e300-cf5f-4c1a-b9b5-569b6d6feab9 │ suspend_compute    │ finished │ 2023-06-19T23:50:56Z │
+└──────────────────────────────────────┴────────────────────┴──────────┴──────────────────────┘
+```
+
+#### Options
+
+| Option       | Description | Type   | Default  |
+| ------------ | ----------- | ------ | -------- |
+| --project.id | Project ID  | string | Required |
+
+### connection-string
+
+Create a connection string for connecting to Neon. The connection string includes the password forthe specified user.
+
+```bash
+neonctl connection-string --project.id spring-sky-578180 --endpoint.id ep-still-haze-361517 --role.name daniel --database.name neondb
+postgres://daniel:<password>@ep-still-haze-361517.us-east-2.aws.neon.tech/neondb
+```
+
+#### Options
+
+| Option        | Description  | Type   | Default  |
+| ------------- | ------------ | ------ | -------- |
+| --project.id  | Project ID   | string | Required |
+| --endpoint.id | Endpoint ID  | string | Required |
+| --role.name   | Role name    | string | Required |
+| --database.name| Database name| string | Required |
