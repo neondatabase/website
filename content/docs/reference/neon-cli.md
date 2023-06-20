@@ -575,6 +575,12 @@ neonctl databases get
 List the databases in the specified branch.
 
 ```bash
+neonctl databases list --project.id spring-sky-578180 --branch.id br-autumn-dust-190886
+┌────────┬────────────┬──────────────────────┐
+│ Name   │ Owner Name │ Created At           │
+├────────┼────────────┼──────────────────────┤
+│ neondb │ daniel     │ 2023-06-19T18:27:19Z │
+└────────┴────────────┴──────────────────────┘
 ```
 
 #### Options
@@ -725,7 +731,6 @@ List project operations.
 
 ```bash
 neonctl operations list --project.id spring-sky-578180 
-
 ┌──────────────────────────────────────┬────────────────────┬──────────┬──────────────────────┐
 │ Id                                   │ Action             │ Status   │ Created At           │
 ├──────────────────────────────────────┼────────────────────┼──────────┼──────────────────────┤
