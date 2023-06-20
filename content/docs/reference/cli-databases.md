@@ -13,7 +13,7 @@ Ensure that you have [installed the Neon CLI](../neon-cli/get-started). Once you
 
 ### Usage
 
-The `databases` command allows you to list, create, update, delete, and retrieve information about compute databases in a Neon project.
+The `databases` command allows you to list, create, and delete databases in a Neon project.
 
 ### Sub-commands
 
