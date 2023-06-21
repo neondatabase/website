@@ -189,9 +189,8 @@
 - title: Reference
   items:
     - title: Neon CLI
+      slug: reference/neon-cli
       items:
-        - title: Get started
-          slug: reference/neon-cli
         - title: auth
           slug: reference/cli-auth
         - title: projects
