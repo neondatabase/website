@@ -5,9 +5,9 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-## Get started
+## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli/get-started). Once you have done that, you can use the `connection-string` command to create connection strings from the command line.
+Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli). Once installed, you can manage your Neon projects directly from the command line.
 
 ## The `connection-string` command
 

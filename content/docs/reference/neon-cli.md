@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Utilizing the Neon Command Line Interface (CLI), you can operate Neon directly from a terminal or via automation. The Neon CLI supports numerous functions, such as authentication, management of Neon projects, branches, compute endpoints, databases, roles, and more.
+With the Neon Command Line Interface (CLI), you can manage Neon directly from a terminal or via automation. The Neon CLI supports numerous operations, such as authentication, management of Neon projects, branches, compute endpoints, databases, roles, and more.
 
 The Neon CLI command name is `neonctl`. The GitHub repository for the Neon CLI is found [here](https://github.com/neondatabase/neonctl).
 
@@ -29,7 +29,7 @@ Before installing, ensure that you have met the following prerequisites:
    npm -v
    ```
 
-  If you need to install either `Node.js` or `npm`, refer to the instructions for your operating system, which you can find online.
+  If you need to install either `Node.js` or `npm`, refer to the instructions for your operating system.
 
 ### Install
 
@@ -53,10 +53,10 @@ neonctl auth
 
 The command launches a browser window where you can authorize the Neon CLI to access your Neon account.
 
-Alternatively, you can authenticate a connection with a Neon API key using the `--api-key` option when executing a command. For example:
+Alternatively, you can authenticate a connection with a Neon API key using the `--api-key` option when running a command. For example:
 
 ```bash
-neonctl <command> --api-key <neon_api_key>
+neonctl projects list --api-key <neon_api_key>
 ```
 
 For information about obtaining an Neon API key, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.

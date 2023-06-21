@@ -5,13 +5,13 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-## Get started
+## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli/get-started). Once you have done that, you can use the `me` command to retrieve information about the current user from the command line.
+Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli). Once installed, you can manage your Neon projects directly from the command line.
 
 ## The `me` command
 
-This command Returns information about the current Neon CLI user account.
+This command retrieves information about the current Neon CLI user account.
 
 ### Usage
 
