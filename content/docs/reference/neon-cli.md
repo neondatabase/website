@@ -5,11 +5,13 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Utilizing the Neon Command Line Interface (CLI), you can operate Neon directly from a terminal or via automation. The Neon CLI facilitates numerous functions, such as authentication, project creation and management, role assignment, and more.
+Utilizing the Neon Command Line Interface (CLI), you can operate Neon directly from a terminal or via automation. The Neon CLI supports numerous functions, such as authentication, management of Neon projects, branches, compute endpoints, databases, roles, and more.
 
-## Get started
+The Neon CLI command name is `neonctl`. The GitHub repository for the Neon CLI is found [here](https://github.com/neondatabase/neonctl).
 
-This section describes how to install the Neon CLI, `neonctl`.
+## Install the Neon CLI
+
+This section describes how to install the Neon CLI.
 
 ### Prerequisites
 
@@ -27,19 +29,23 @@ Before installing, ensure that you have met the following prerequisites:
    npm -v
    ```
 
-If you need to install either `Node.js` or `npm`, refer to the instructions for your operating system, which you can find online.
+  If you need to install either `Node.js` or `npm`, refer to the instructions for your operating system, which you can find online.
 
 ### Install
 
-To install Neon CLI, run the following command:
+To install, run the following command:
 
 ```shell
 npm i -g neonctl
 ```
 
-### Connect
+### Upgrade
 
-To authenticate to Neon, run the following command:
+To upgrade to the latest version of the Neon CLI, simply run the `npm i -g neonctl` command again.
+
+## Connect
+
+Run the following command to authenticate a connection to Neon:
 
 ```bash
 neonctl auth
@@ -47,13 +53,13 @@ neonctl auth
 
 The command launches a browser window where you can authorize the Neon CLI to access your Neon account.
 
-Alternatively, you can connect with a Neon API key using the `--api-key` option. For example:
+Alternatively, you can authenticate a connection with a Neon API key using the `--api-key` option when executing a command. For example:
 
 ```bash
-neonctl <cmd> --api-key <token>
+neonctl <command> --api-key <neon_api_key>
 ```
 
-For information about obtaining an Neon API key token, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
+For information about obtaining an Neon API key, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
 
 ## Commands
 
@@ -71,51 +77,80 @@ For information about obtaining an Neon API key token, see [Authentication](http
 
 ## Global options
 
-- `--version`
+Global options are supported for use with any Neon CLI command.
+
+| Option      | Description                         | Type   | Default                           |
+| :---------  | :---------------------------------- | :----- | :-------------------------------- |
+| [--version](#version)   | Show version number                 | boolean| -                                 |
+| [--help](#help)      | Show help                           | boolean| -                                 |
+| [-o, --output](#output)| Set output format                   | string | table                           |
+|             | Possible choices: "json", "yaml", "table" | |                                  |
+| [--api-host](#api-host)  | The API host                        | -      | https://console.neon.tech/api/v2|
+| [--config-dir](#config-dir)| Path to config directory            | string | /home/<user>/.config/neonctl   |
+| [--oauth-host](#oauth-host)| URL to Neon OAuth host              | -      | https://oauth2.neon.tech        |
+| [--client-id](#client-id) | OAuth client id                     | string | neonctl                         |
+| [--api-key](#api-key)   | API key                             | string | ""                                |
+| [--analytics](#analytics) | Enable analytics                    | boolean| true                              |
+
+### --version
 
   Shows the `neonctl` version number.
 
   ```bash
   $ neonctl --version
-  1.9.3
+  1.9.4
   ```
 
-- `--help`
+### --help
 
-  Shows the `neonctl` command-line help. See [Synopsis](#synopsis).
-
-- `--output`
-
-  Sets the output format. Supported options are `json`, `yaml`, and `table`. The default is `table`.
+  Shows the `neonctl` command-line help. You can view help for `neonctl` or a `neonctl` command.
 
   ```bash
-  neonctl me --output json
+  neonctl --help
   ```
 
-- `--api-host`
-
-  Specifies the Neon API host (the base URL for the Neon API) when running a CLI command. The default setting is `https://console.neon.tech/api/v2`. For more information, see [Neon API base URL](https://api-docs.neon.tech/reference/getting-started-with-neon-api#neon-api-base-url).
+  To view the options supported by a particular command:
 
   ```bash
-  neonctl projects list --api-host https://console.neon.tech/api/v2
+  neonctl <command> --help
   ```
 
-- `--config-dir`
+### --output
 
-  Specifies the path to the `neonctl` configuration file. To view the default configuration directory containing you `credentials.json` file, run `neonctl --help`. The credentials file is created when you authenticate using the `neonctl auth` command. This option is only used if you have moved your `neonctl` configuration file to a location other than the default.
+Sets the output format. Supported options are `json`, `yaml`, and `table`. The default is `table`. Table output may limited to a certain number of columns. The `json` and `yaml` show all output.
 
-- `--oauth-host`
+```bash
+neonctl me --output json
+```
 
-  Specifies the URL of Neon OAuth host used to authenticate your neonctl client to Neon. The default is `https://oauth2.neon.tech`. You should need to configure this setting when using the `neonctl` CLI client.
+### --api-host
 
-- `--client-id`
+Specifies the Neon API host (the base URL for the Neon API) when running a CLI command. The default setting is `https://console.neon.tech/api/v2`, which is the base URL for Neon's public API. Generally, you should not have to specify a different value unless directed to do so by Neon. For more information, see [Neon API base URL](https://api-docs.neon.tech/reference/getting-started-with-neon-api#neon-api-base-url).
 
-  Specifies the OAuth client id. For the `neonctl` CLI client, the client id is `neonctl`. You should need to configure this setting when using the `neonctl` CLI client.
+```bash
+neonctl projects list --api-host https://console.neon.tech/api/v2
+```
 
-- `--api-key`
+### --config-dir
 
-  Specifies your Neon API key. You can specify an Neon API with your CLI command instead of authenticating using `neonctl auth`. For information about obtaining an Neon API key token, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
+Specifies the path to the `neonctl` configuration file. To view the default configuration directory containing you `credentials.json` file, run `neonctl --help`. The credentials file is created when you authenticate using the `neonctl auth` command. This option is only necessary if you move your `neonctl` configuration file to a location other than the default.
 
-- `--analytics`
+### --oauth-host
 
-  Enables analytics.
+Specifies the URL of Neon OAuth host used to authenticate your neonctl client to Neon. The default is `https://oauth2.neon.tech`. You should need to configure this setting when using the `neonctl` CLI client.
+
+### --client-id
+
+Specifies the OAuth `client-id`. For the the Neon CLI client, the `client-id` is `neonctl`. You do not need to configure this setting when using the Neon CLI client.
+
+### --api-key
+
+Specifies your Neon API key. You can authenticate using a Neon API key when running a Neon CLI command instead of using `neonctl auth`. For information about obtaining an Neon API key token, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
+
+```bash
+neonctl <command> --api-key <token>
+```
+
+### --analytics
+
+Enables analytics.
