@@ -7,7 +7,7 @@ isDraft: true
 
 ## Get started
 
-Ensure that you have [installed the Neon CLI](../neon-cli/get-started). Once you have done that, you can use the `branches` command manage branches from the command line.
+Ensure that you have [installed the Neon CLI](../reference/neon-cli/get-started). Once you have done that, you can use the `branches` command manage branches from the command line.
 
 ## The `branches` command
 
@@ -145,8 +145,8 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `d
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
-| --project.id  | Project ID  | string | Required |
-| --branch.id   | Branch ID   | string | Required |
+| --project.id  | Project ID  | string | &check; |
+| --branch.id   | Branch ID   | string | &check; |
 
 #### Example
 

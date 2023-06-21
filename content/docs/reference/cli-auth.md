@@ -7,7 +7,7 @@ isDraft: true
 
 ## Get started
 
-Ensure that you have [installed the Neon CLI](../neon-cli/get-started). Once you have done that, you can use the `auth` command to connect to Neon.
+Ensure that you have [installed the Neon CLI](../reference/neon-cli/get-started). Once you have done that, you can use the `auth` command to connect to Neon.
 
 ## The `auth` command
 
@@ -24,10 +24,6 @@ The command launches a browser window where you can authorize the Neon CLI to ac
 ```text
 /home/<home>/.config/neonctl/credentials.json
 ```
-
-### Commands
-
-None.
 
 ### Options
 
