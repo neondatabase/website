@@ -16,18 +16,18 @@ The `operations` command allows you to list operations for a Neon project.
 ### Usage
 
 ```bash
-neonctl operations <sub-command> [options]
+neonctl operations <subcommand> [options]
 ```
 
-### Sub-commands
+### Subcommands
 
-| Sub-command  | Description      |
+| Subcommand  | Description      |
 |---------|------------------|
 | [list](#list)    | List databases    |
 
 ### list
 
-This sub-command allows you to list operations.
+This subcommand allows you to list operations.
 
 #### Usage
 
@@ -37,7 +37,7 @@ neonctl operations list [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `list` sub-command supports this option:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `list` subcommand supports this option:
 
 #### Options
 

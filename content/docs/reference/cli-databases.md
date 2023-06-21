@@ -15,9 +15,9 @@ Ensure that you have [installed the Neon CLI](../reference/neon-cli#install-the-
 
 The `databases` command allows you to list, create, and delete databases in a Neon project.
 
-### Sub-commands
+### Subcommands
 
-| Sub-command  | Description      |
+| Subcommand  | Description      |
 |---------|------------------|
 | [list](#list)    | List databases    |
 | [create](#create)  | Create a database |
@@ -25,7 +25,7 @@ The `databases` command allows you to list, create, and delete databases in a Ne
 
 ### list
 
-This sub-command allows you to list databases.
+This subcommand allows you to list databases.
 
 #### Usage
 
@@ -35,7 +35,7 @@ neonctl databases list [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `list` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `list` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
@@ -59,7 +59,7 @@ neonctl databases list --project.id spring-sky-578180 --branch.id br-autumn-dust
 
 ### create
 
-This sub-command allows you to create a database.
+This subcommand allows you to create a database.
 
 #### Usage
 
@@ -69,7 +69,7 @@ neonctl databases create [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` subcommand supports these options:
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
@@ -95,7 +95,7 @@ neonctl databases create --project.id spring-sky-578180 --branch.id br-autumn-du
 
 ### delete
 
-This sub-command allows you to delete a database.
+This subcommand allows you to delete a database.
 
 #### Usage
 
@@ -105,7 +105,7 @@ neonctl databases delete [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` subcommand supports these options:
 
 | Option           | Description  | Type   | Required  |
 | ---------------- | ------------ | ------ | :------: |

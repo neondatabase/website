@@ -16,12 +16,12 @@ The `endpoints` command allows you to list, create, update, delete, and retrieve
 ### Usage
 
 ```bash
-neonctl endpoints <sub-command> [options]
+neonctl endpoints <subcommand> [options]
 ```
 
-### Sub-commands
+### Subcommands
 
-| Sub-command  | Description      |
+| Subcommand  | Description      |
 |---------|------------------|
 | [list](#list)    | List endpoints    |
 | [create](#create)  | Create an endpoint |
@@ -31,7 +31,7 @@ neonctl endpoints <sub-command> [options]
 
 ### list
 
-This sub-command allows you to list endpoints in a Neon project.
+This subcommand allows you to list endpoints in a Neon project.
 
 #### Usage
 
@@ -41,7 +41,7 @@ neonctl endpoints list [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `list` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `list` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
@@ -61,7 +61,7 @@ neonctl endpoints list --project.id spring-sky-578180 --branch.id br-autumn-dust
 
 ### create
 
-This sub-command allows you to create endpoints in a Neon project.
+This subcommand allows you to create endpoints in a Neon project.
 
 #### Usage
 
@@ -71,7 +71,7 @@ neonctl endpoints create [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` subcommand supports these options:
 
 | Option                                     | Description                                                                                                                           | Type    | Required                               |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------------------------------------: |
@@ -99,7 +99,7 @@ neonctl endpoints create --project.id spring-sky-578180 --endpoint.branch_id br-
 
 ### update
 
-This sub-command allows you to update endpoints in a Neon project.
+This subcommand allows you to update endpoints in a Neon project.
 
 #### Usage
 
@@ -109,7 +109,7 @@ neonctl endpoints update [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` subcommand supports these options:
 
 #### Options
 
@@ -137,7 +137,7 @@ neonctl endpoints update --project.id spring-sky-578180 --endpoint.id ep-tight-p
 
 ### delete
 
-This sub-command allows you to delete endpoints in a Neon project.
+This subcommand allows you to delete endpoints in a Neon project.
 
 #### Usage
 
@@ -147,7 +147,7 @@ neonctl endpoints delete [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` subcommand supports these options:
 
 | Option       | Description  | Type   | Required  |
 | ------------ | ------------ | ------ | -------- |
@@ -167,7 +167,7 @@ neonctl endpoints delete --project.id spring-sky-578180 --endpoint.id ep-tight-p
 
 ### get
 
-This sub-command allows you to retrieve information about a compute endpoint.
+This subcommand allows you to retrieve information about a compute endpoint.
 
 #### Usage
 
@@ -177,7 +177,7 @@ neonctl endpoints get [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `get` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `get` subcommand supports these options:
 
 | Option       | Description  | Type   | Required  |
 | ------------ | ------------ | ------ | -------- |

@@ -16,12 +16,12 @@ The `projects` command allows you to list, create, update, delete, and retrieve 
 ### Usage
 
 ```bash
-neonctl projects <sub-command> [options]
+neonctl projects <subcommand> [options]
 ```
 
-### Sub-commands
+### Subcommands
 
-| Sub-command  | Description      |
+| Subcommand  | Description      |
 |---------|------------------|
 | [list](#list)    | List projects    |
 | [create](#create)  | Create a project |
@@ -31,7 +31,7 @@ neonctl projects <sub-command> [options]
 
 ### list
 
-This sub-command allows you to list projects that belong to your Neon account.
+This subcommand allows you to list projects that belong to your Neon account.
 
 #### Usage
 
@@ -60,7 +60,7 @@ neonctl projects list
 
 ### create
 
-This sub-command allows you to create a Neon project. The [Neon Free Tier](../introduction/free-tier) supports creating a single project. The [Neon Pro plan](../introduction/pro-plan) allows creating multiple projects.
+This subcommand allows you to create a Neon project. The [Neon Free Tier](../introduction/free-tier) supports creating a single project. The [Neon Pro plan](../introduction/pro-plan) allows creating multiple projects.
 
 You are prompted for a project name, which is optional. Press the **Enter** key to have a project name generated for you.
 
@@ -72,7 +72,7 @@ neonctl projects create [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` subcommand supports these options:
 
 | Option                                | Description                                                                                               | Type    | Required                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
@@ -105,7 +105,7 @@ neonctl projects create
 
 ### update
 
-This sub-command allows you to update a Neon project.
+This subcommand allows you to update a Neon project.
 
 #### Usage
 
@@ -115,7 +115,7 @@ neonctl projects update [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` subcommand supports these options:
 
 | Option                                | Description                                                                                               | Type    | Required                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
@@ -148,7 +148,7 @@ neonctl projects update --project.id silent-dawn-084646 --project.name mynewproj
 
 ### delete
 
-This sub-command allows you to delete a Neon project.
+This subcommand allows you to delete a Neon project.
 
 ```bash
 neonctl projects delete [options]
@@ -156,7 +156,7 @@ neonctl projects delete [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` sub-command supports this option:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` subcommand supports this option:
 
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |
@@ -177,7 +177,7 @@ Information about the deleted project is displayed. You can verify that the proj
 
 ### get
 
-This sub-command allows you to retrieve details about a Neon project.
+This subcommand allows you to retrieve details about a Neon project.
 
 #### Usage
 
@@ -187,7 +187,7 @@ neonctl projects get [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `get` sub-command supports the this option:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `get` subcommand supports the this option:
 
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |

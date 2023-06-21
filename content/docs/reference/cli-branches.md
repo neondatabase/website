@@ -16,12 +16,12 @@ The `branches` command allows you to list, create, update, delete, and retrieve 
 ### Usage
 
 ```bash
-neonctl branches <sub-command> [options]
+neonctl branches <subcommand> [options]
 ```
 
-### Sub-commands
+### Subcommands
 
-| Sub-command  | Description      |
+| Subcommand  | Description      |
 |---------|------------------|
 | [list](#list)    | List branches    |
 | [create](#create)  | Create a branch |
@@ -31,7 +31,7 @@ neonctl branches <sub-command> [options]
 
 ### list
 
-This sub-command allows you to list branches in a Neon project.
+This subcommand allows you to list branches in a Neon project.
 
 #### Usage
 
@@ -41,7 +41,7 @@ neonctl branches list [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `list` sub-command supports this option:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `list` subcommand supports this option:
 
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |
@@ -60,7 +60,7 @@ neonctl branches list --project.id spring-sky-578180
 
 ### create
 
-This sub-command allows you to create a branch in a Neon project.
+This subcommand allows you to create a branch in a Neon project.
 
 #### Usage
 
@@ -70,7 +70,7 @@ neonctl branches create [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` subcommand supports these options:
 
 | Option                                    | Description                                                                               | Type    | Required                               |
 | ----------------------------------------- | ----------------------------------------------------------------------------------------- | ------- | :------: |
@@ -96,7 +96,7 @@ neonctl branches create --project.id spring-sky-578180
 
 ### update
 
-This sub-command allows you to update a branch in a Neon project.
+This subcommand allows you to update a branch in a Neon project.
 
 #### Usage
 
@@ -106,7 +106,7 @@ neonctl branches update [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
@@ -127,7 +127,7 @@ neonctl branches update --project.id spring-sky-578180 --branch.id br-withered-k
 
 ### delete
 
-This sub-command allows you to delete a branch in a Neon project.
+This subcommand allows you to delete a branch in a Neon project.
 
 #### Usage
 
@@ -137,7 +137,7 @@ neonctl branches delete [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
@@ -161,7 +161,7 @@ neonctl branches delete --project.id spring-sky-578180 --branch.id br-withered-k
 
 ### get
 
-This sub-command allows you to retrieve details about a branch.
+This subcommand allows you to retrieve details about a branch.
 
 #### Usage
 
@@ -171,7 +171,7 @@ neonctl branches get [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `get` sub-command supports this option:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `get` subcommand supports this option:
 
 #### Options
 

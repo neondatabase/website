@@ -16,12 +16,12 @@ The `roles` command allows you to list, create, and delete roles in a Neon proje
 ### Usage
 
 ```bash
-neonctl roles <sub-command> [options]
+neonctl roles <subcommand> [options]
 ```
 
-### Sub-commands
+### Subcommands
 
-| Sub-command  | Description      |
+| Subcommand  | Description      |
 |---------|------------------|
 | [list](#list)    | List roles    |
 | [create](#create)  | Create a role |
@@ -29,7 +29,7 @@ neonctl roles <sub-command> [options]
 
 ### list
 
-This sub-command allows you to list roles.
+This subcommand allows you to list roles.
 
 #### Usage
 
@@ -39,7 +39,7 @@ neonctl roles list [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `list` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `list` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
@@ -63,7 +63,7 @@ neonctl roles list --project.id spring-sky-578180 --branch.id br-autumn-dust-190
 
 ### create
 
-This sub-command allows you to create a database.
+This subcommand allows you to create a database.
 
 #### Usage
 
@@ -73,7 +73,7 @@ neonctl roles create [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` subcommand supports these options:
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
@@ -98,7 +98,7 @@ neonctl roles create --project.id spring-sky-578180 --branch.id br-autumn-dust-1
 
 ### delete
 
-This sub-command allows you to delete a database.
+This subcommand allows you to delete a database.
 
 #### Usage
 
@@ -108,7 +108,7 @@ neonctl roles delete [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` sub-command supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` subcommand supports these options:
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
