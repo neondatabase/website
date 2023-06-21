@@ -86,7 +86,7 @@ Global options are supported for use with any Neon CLI command.
 | [-o, --output](#output)| Set output format                   | string | table                           |
 |             | Possible choices: "json", "yaml", "table" | |                                  |
 | [--api-host](#api-host)  | The API host                        | -      | https://console.neon.tech/api/v2|
-| [--config-dir](#config-dir)| Path to config directory            | string | /home/<user>/.config/neonctl   |
+| [--config-dir](#config-dir)| Path to config directory            | string | `/home/<user>/.config/neonctl`   |
 | [--oauth-host](#oauth-host)| URL to Neon OAuth host              | -      | https://oauth2.neon.tech        |
 | [--client-id](#client-id) | OAuth client id                     | string | neonctl                         |
 | [--api-key](#api-key)   | API key                             | string | ""                                |
