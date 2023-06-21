@@ -1,13 +1,13 @@
 ---
 title: Neon CLI commands — databases
-subtitle: Use the Neon CLI to manage your Neon project directly from your terminal
+subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
 enableTableOfContents: true
 isDraft: true
 ---
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli). Once installed, you can manage your Neon projects directly from the command line.
+Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli).
 
 ## The `databases` command
 
@@ -44,6 +44,8 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `l
 
 #### Example
 
+<CodeBlock shouldWrap>
+
 ```bash
 neonctl databases list --project.id spring-sky-578180 --branch.id br-autumn-dust-190886
 ┌────────┬────────────┬──────────────────────┐
@@ -52,6 +54,8 @@ neonctl databases list --project.id spring-sky-578180 --branch.id br-autumn-dust
 │ neondb │ daniel     │ 2023-06-19T18:27:19Z │
 └────────┴────────────┴──────────────────────┘
 ```
+
+</CodeBlock>
 
 ### create
 
@@ -76,6 +80,8 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 
 #### Example
 
+<CodeBlock shouldWrap>
+
 ```bash
 neonctl databases create --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 --database.name mynewdb --database.owner_name daniel
 ┌─────────┬────────────┬──────────────────────┐
@@ -84,6 +90,8 @@ neonctl databases create --project.id spring-sky-578180 --branch.id br-autumn-du
 │ mynewdb │ daniel     │ 2023-06-19T23:45:45Z │
 └─────────┴────────────┴──────────────────────┘
 ```
+
+</CodeBlock>
 
 ### delete
 
@@ -107,6 +115,8 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `d
 
 #### Example
 
+<CodeBlock shouldWrap>
+
 ```bash
 neonctl databases delete --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 --database.name mynewdb
 ┌─────────┬────────────┬──────────────────────┐
@@ -115,6 +125,8 @@ neonctl databases delete --project.id spring-sky-578180 --branch.id br-autumn-du
 │ mynewdb │ daniel     │ 2023-06-19T23:45:45Z │
 └─────────┴────────────┴──────────────────────┘
 ```
+
+</CodeBlock>
 
 ## Need help?
 

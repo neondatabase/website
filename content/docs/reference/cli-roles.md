@@ -1,13 +1,13 @@
 ---
 title: Neon CLI commands — roles
-subtitle: Use the Neon CLI to manage your Neon project directly from your terminal
+subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
 enableTableOfContents: true
 isDraft: true
 ---
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli). Once installed, you can manage your Neon projects directly from the command line.
+Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli).
 
 ## The `roles` command
 
@@ -48,6 +48,8 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `l
 
 #### Example
 
+<CodeBlock shouldWrap>
+
 ```bash
 neonctl roles list --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 
 ┌────────┬──────────────────────┐
@@ -56,6 +58,8 @@ neonctl roles list --project.id spring-sky-578180 --branch.id br-autumn-dust-190
 │ daniel │ 2023-06-19T18:27:19Z │
 └────────┴──────────────────────┘
 ```
+
+</CodeBlock>
 
 ### create
 
@@ -79,6 +83,8 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 
 #### Example
 
+<CodeBlock shouldWrap>
+
 ```bash
 neonctl roles create --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 --role.name sally
 ┌───────┬──────────────────────┐
@@ -87,6 +93,8 @@ neonctl roles create --project.id spring-sky-578180 --branch.id br-autumn-dust-1
 │ sally │ 2023-06-20T00:43:17Z │
 └───────┴──────────────────────┘
 ```
+
+</CodeBlock>
 
 ### delete
 
@@ -110,6 +118,8 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `d
 
 #### Example
 
+<CodeBlock shouldWrap>
+
 ```bash
 neonctl roles delete --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 --role.name sally
 ┌───────┬──────────────────────┐
@@ -118,6 +128,8 @@ neonctl roles delete --project.id spring-sky-578180 --branch.id br-autumn-dust-1
 │ sally │ 2023-06-20T00:43:17Z │
 └───────┴──────────────────────┘
 ```
+
+</CodeBlock>
 
 ## Need help?
 

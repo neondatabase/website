@@ -125,7 +125,7 @@ neonctl me --output json
 
 ### --api-host
 
-Specifies the Neon API host. The default setting is `https://console.neon.tech/api/v2`, which is the [base URL](https://api-docs.neon.tech/reference/getting-started-with-neon-api#neon-api-base-url) for Neon's public API. Generally, you do not have to specify this option unless directed to do so by Neon.
+Sets the Neon API host. The default setting is `https://console.neon.tech/api/v2`, which is the [base URL](https://api-docs.neon.tech/reference/getting-started-with-neon-api#neon-api-base-url) for Neon's public API. Generally, you do not have to specify this option unless directed to do so by Neon.
 
 ```bash
 neonctl projects list --api-host https://console.neon.tech/api/v2

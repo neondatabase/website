@@ -1,17 +1,17 @@
 ---
 title: Neon CLI commands — me
-subtitle: Use the Neon CLI to manage your Neon project directly from your terminal
+subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
 enableTableOfContents: true
 isDraft: true
 ---
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli). Once installed, you can manage your Neon projects directly from the command line.
+Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli).
 
 ## The `me` command
 
-This command retrieves information about the current Neon CLI user account.
+This command retrieves information about the current Neon CLI user.
 
 ### Usage
 

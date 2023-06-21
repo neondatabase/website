@@ -1,13 +1,13 @@
 ---
 title: Neon CLI commands — projects
-subtitle: Use the Neon CLI to manage your Neon project directly from your terminal
+subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
 enableTableOfContents: true
 isDraft: true
 ---
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli). Once installed, you can manage your Neon projects directly from the command line..
+Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli).
 
 ## The `projects` command
 
@@ -76,20 +76,20 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 
 | Option                                | Description                                                                                               | Type    | Required                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
-| --project.settings.quota.active_time_seconds | The total amount of wall-clock time allowed to be spent by project's compute endpoints               | number  |                                       |
+| --project.settings.quota.active_time_seconds | The total amount of time allowed to be spent by project's compute endpoints               | number  |                                       |
 | --project.settings.quota.compute_time_seconds | The total amount of CPU seconds allowed to be spent by project's compute endpoints                   | number  |                                       |
 | --project.settings.quota.written_data_bytes | Total amount of data written to all project's branches                                                | number  |                                       |
 | --project.settings.quota.data_transfer_bytes | Total amount of data transferred from all project's branches using proxy                              | number  |                                       |
 | --project.settings.quota.logical_size_bytes | Limit on the logical size of every project's branch                                                    | number  |                                       |
-| --project.name                        | The project name                                                                                          | string  |                                       |
-| --project.branch.name                 | The branch name. If not specified, the default branch name will be used                                   | string  |                                       |
-| --project.branch.role_name            | The role name. If not specified, the default role name will be used                                       | string  |                                       |
-| --project.branch.database_name        | The database name. If not specified, the default database name will be used                               | string  |                                       |
-| --project.provisioner                 | The Neon compute provisioner                                                                              | string  |                                       |
-| --project.region_id                   | The region identifier. See [the documentation](https://neon.tech/docs/introduction/regions) for the list of supported regions | string  |                                       |
-| --project.pg_version                  | The major PostgreSQL version number. Currently supported version are `14` and `15`                        | number  |                                       |
-| --project.store_passwords             | Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization | boolean |                                       |
-| --project.history_retention_seconds   | The number of seconds to retain PITR backup history for this project. Defaults to 7 days                  |         |                                       |
+| --project.name                        | The project name. If not specified, one is generated for you.                                                                                          | string  |                                       |
+| --project.branch.name                 | The branch name. If not specified, the the branch id is used.                                   | string  |                                       |
+| --project.branch.role_name            | The role name. If not specified, the default role name will be used.                                      | string  |                                       |
+| --project.branch.database_name        | The database name. If not specified, the default database name will be used.                               | string  |                                       |
+| --project.provisioner                 | The Neon compute provisioner. `k8s-pod` or `k8s-neonvm`. The latter is required for _Autoscaling_.                                                                              | string  |                                       |
+| --project.region_id                   | The region identifier. See [the documentation](https://neon.tech/docs/introduction/regions) for the list of supported regions. | string  |                                       |
+| --project.pg_version                  | The major PostgreSQL version number. Currently supported version are `14` and `15`. The deafult is 15.                        | number  |                                       |
+| --project.store_passwords             | Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization. The default is `true`. | boolean |                                       |
+| --project.history_retention_seconds   | The number of seconds to retain PITR backup history for this project. The default is 604800 seconds (7 days).                  |  number       |                                       |
 
 #### Example
 
@@ -117,23 +117,23 @@ neonctl projects update [options]
 
 In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` sub-command supports these options:
 
-| Option                                           | Description                                                                                               | Type    | Required                               |
-| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
-| --project.id                                     | Project ID                                                                                                | string  | &check;                              |
-| --project.settings.quota.active_time_seconds     | The total amount of wall-clock time allowed to be spent by project's compute endpoints                   | number  |                                       |
-| --project.settings.quota.compute_time_seconds    | The total amount of CPU seconds allowed to be spent by project's compute endpoints                       | number  |                                       |
-| --project.settings.quota.written_data_bytes      | Total amount of data written to all project's branches                                                    | number  |                                       |
-| --project.settings.quota.data_transfer_bytes     | Total amount of data transferred from all project's branches using proxy                                  | number  |                                       |
-| --project.settings.quota.logical_size_bytes      | Limit on the logical size of every project's branch                                                       | number  |                                       |
-| --project.name                                   | The project name                                                                                          | string  |                                       |
-| --project.branch.name                            | The branch name. If not specified, the default branch name will be used                                   | string  |                                       |
-| --project.branch.role_name                       | The role name. If not specified, the default role name will be used                                       | string  |                                       |
-| --project.branch.database_name                   | The database name. If not specified, the default database name will be used                               | string  |                                       |
-| --project.provisioner                            | The Neon compute provisioner                                                                              | string  |                                       |
-| --project.region_id                              | The region identifier. See [the documentation](https://neon.tech/docs/introduction/regions) for the list of supported regions | string  |                                       |
-| --project.pg_version                             | The major PostgreSQL version number. Currently supported version are `14` and `15`                        | number  |                                       |
-| --project.store_passwords                        | Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization | boolean |                                       |
-| --project.history_retention_seconds              | The number of seconds to retain PITR backup history for this project. Defaults to 7 days                  | number  |                                       |
+| Option                                | Description                                                                                               | Type    | Required                               |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
+| --project.id                          | Project ID                                                                                                | number  | &check;                                      |
+| --project.settings.quota.active_time_seconds | The total amount of time allowed to be spent by project's compute endpoints               | number  |                                       |
+| --project.settings.quota.compute_time_seconds | The total amount of CPU seconds allowed to be spent by project's compute endpoints                   | number  |                                       |
+| --project.settings.quota.written_data_bytes | Total amount of data written to all project's branches                                                | number  |                                       |
+| --project.settings.quota.data_transfer_bytes | Total amount of data transferred from all project's branches using proxy                              | number  |                                       |
+| --project.settings.quota.logical_size_bytes | Limit on the logical size of every project's branch                                                    | number  |                                       |
+| --project.name                        | The project name. If not specified, one is generated for you.                                                                                          | string  |                                       |
+| --project.branch.name                 | The branch name. If not specified, the the branch id is used.                                   | string  |                                       |
+| --project.branch.role_name            | The role name. If not specified, the default role name will be used.                                      | string  |                                       |
+| --project.branch.database_name        | The database name. If not specified, the default database name will be used.                               | string  |                                       |
+| --project.provisioner                 | The Neon compute provisioner. `k8s-pod` or `k8s-neonvm`. The latter is required for _Autoscaling_.                                                                              | string  |                                       |
+| --project.region_id                   | The region identifier. See [the documentation](https://neon.tech/docs/introduction/regions) for the list of supported regions. | string  |                                       |
+| --project.pg_version                  | The major PostgreSQL version number. Currently supported version are `14` and `15`. The deafult is 15.                        | number  |                                       |
+| --project.store_passwords             | Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization. The default is `true`. | boolean |                                       |
+| --project.history_retention_seconds   | The number of seconds to retain PITR backup history for this project. The default is 604800 seconds (7 days).                  |  number       |                                       |
 
 #### Example
 
@@ -173,7 +173,7 @@ neonctl projects delete --project.id silent-dawn-084646
 └────────────────────┴──────────────┴───────────────┴──────────────────────┘
 ```
 
-Information about the deleted project is displayed as output. You can verify that the project was deleted by running `neonctl projects list`.
+Information about the deleted project is displayed. You can verify that the project was deleted by running `neonctl projects list`.
 
 ### get
 

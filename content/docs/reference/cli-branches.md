@@ -1,13 +1,13 @@
 ---
 title: Neon CLI commands — branches
-subtitle: Use the Neon CLI to manage your Neon project directly from your terminal
+subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
 enableTableOfContents: true
 isDraft: true
 ---
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli). Once installed, you can manage your Neon projects directly from the command line.
+Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli).
 
 ## The `branches` command
 
@@ -77,11 +77,11 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 | --project.id                              | Project ID                                                                                | string  | &check;                              |
 | --branch.parent_id                        | The `branch_id` of the parent branch                                                      | string  |                                       |
 | --branch.name                             | The branch name                                                                           | string  |                                       |
-| --branch.parent_lsn                       | A Log Sequence Number (LSN) on the parent branch. The branch will be created with data from this LSN | string  |                                       |
-| --branch.parent_timestamp                 | A timestamp identifying a point in time on the parent branch. The branch will be created with data starting from this point in time. | string  |                                       |
+| --branch.parent_lsn                       | A Log Sequence Number (LSN) on the parent branch. The branch will be created with data from this LSN. The expected format is the same as a value returned by `SELECT pg_current_wal_flush_lsn()`. | string  |                                       |
+| --branch.parent_timestamp                 | A timestamp identifying a point in time on the parent branch. The branch will be created with data starting from this point in time. The expected format is `MM/DD/YYYY hh:mm:ss a`; for example: `06/13/2023 12:00:00 am` | string  |                                       |
 | --endpoint.type                           | The compute endpoint type. Either `read_write` or `read_only`. The `read_only` compute endpoint type is not yet supported. The default value is `read_write`. | string  |              |
 | --endpoint.provisioner                    | The Neon compute provisioner. Supported values are `k8s-pod` and `k8s-neonvm`. The later is required to use _Autoscaling_.                                                               | string  |      |
-| --endpoint.suspend_timeout_seconds        | Duration of inactivity in seconds after which endpoint will be automatically suspended. Value `0` means use global default, `-1` means never suspend. Maximum value is 1 week in seconds. | number  |                                       |
+| --endpoint.suspend_timeout_seconds        | Duration of inactivity in seconds after which endpoint will be automatically suspended. Value `0` means use global default, `-1` means never suspend. The maximum value is 604800 seconds (1 week).
 
 #### Example
 
@@ -107,8 +107,6 @@ neonctl branches update [options]
 #### Options
 
 In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` sub-command supports these options:
-
-#### Options
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
@@ -139,9 +137,7 @@ neonctl branches delete [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` sub-command supports this option:
-
-#### Options
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` sub-command supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
@@ -149,6 +145,8 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `d
 | --branch.id   | Branch ID   | string | &check; |
 
 #### Example
+
+<CodeBlock shouldWrap>
 
 ```bash
 neonctl branches delete --project.id spring-sky-578180 --branch.id br-withered-king-763176
@@ -158,6 +156,8 @@ neonctl branches delete --project.id spring-sky-578180 --branch.id br-withered-k
 │ br-withered-king-763176 │ mynewbranch │ 2023-06-19T22:35:25Z │
 └─────────────────────────┴─────────────┴──────────────────────┘
 ```
+
+</CodeBlock>
 
 ### get
 
@@ -182,6 +182,8 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `g
 
 #### Example
 
+<CodeBlock shouldWrap>
+
 ```bash
 neonctl branches get --project.id spring-sky-578180 --branch.id br-sweet-sun-522796 
 ┌─────────────────────┬─────────────────────┬──────────────────────┐
@@ -190,6 +192,8 @@ neonctl branches get --project.id spring-sky-578180 --branch.id br-sweet-sun-522
 │ br-sweet-sun-522796 │ br-sweet-sun-522796 │ 2023-06-19T22:35:20Z │
 └─────────────────────┴─────────────────────┴──────────────────────┘
 ```
+
+</CodeBlock>
 
 ## Need help?
 

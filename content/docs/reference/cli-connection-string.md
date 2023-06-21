@@ -1,17 +1,17 @@
 ---
 title: Neon CLI commands — connection-string
-subtitle: Use the Neon CLI to manage your Neon project directly from your terminal
+subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
 enableTableOfContents: true
 isDraft: true
 ---
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli). Once installed, you can manage your Neon projects directly from the command line.
+Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli).
 
 ## The `connection-string` command
 
-This command creates a connection string for connecting to Neon. The connection string includes the password for the specified role.
+This command constructs a PostgreSQL connection string for connecting to a database in your Neon project. The connection string includes the password for the specified role.
 
 ### Usage
 
@@ -32,10 +32,15 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the th
 
 ### Example
 
+<CodeBlock shouldWrap>
+
 ```bash
 neonctl connection-string --project.id spring-sky-578180 --endpoint.id ep-still-haze-361517 --role.name daniel --database.name neondb
+
 postgres://daniel:<password>@ep-still-haze-361517.us-east-2.aws.neon.tech/neondb
 ```
+
+</CodeBlock>
 
 ## Need help?
 

@@ -1,13 +1,13 @@
 ---
 title: Neon CLI commands — endpoints
-subtitle: Use the Neon CLI to manage your Neon project directly from your terminal
+subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
 enableTableOfContents: true
 isDraft: true
 ---
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli). Once installed, you can manage your Neon projects directly from the command line.
+Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli).
 
 ## The `endpoints` command
 
@@ -77,14 +77,14 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------------------------------------: |
 | --project.id                               | Project ID                                                                                                                            | string  | &check;                              |
 | --endpoint.branch_id                       | The ID of the branch the compute endpoint will be associated with                                                                     | string  | &check;                                |
-| --endpoint.region_id                       | The region where the compute endpoint will be created. Only the project's `region_id` is permitted                                    | string  |                                        |
+| --endpoint.region_id                       | The region where the compute endpoint will be created. Only the project's `region_id` is permitted.                                    | string  |                                        |
 | --endpoint.type                            | The compute endpoint type. Either `read_write` or `read_only`. The `read_only` compute endpoint type is not yet supported.             | string | &check;      |
 | --endpoint.provisioner                     | The Neon compute provisioner. `k8s-pod` or `k8s-neonvm`. The latter is required for _Autoscaling_.                                                                     | string  |       |
 | --endpoint.pooler_enabled                  | Whether to enable connection pooling for the compute endpoint                                                                         | boolean |                                        |
 | --endpoint.pooler_mode                     | The connection pooler mode. Neon supports PgBouncer in `transaction` mode only                                                        | string  |                           |
 | --endpoint.disabled                        | Whether to restrict connections to the compute endpoint                                                                               | boolean |                                        |
-| --endpoint.passwordless_access             | NOT YET IMPLEMENTED. Whether to permit passwordless access to the compute endpoint                                                    | boolean |                                        |
-| --endpoint.suspend_timeout_seconds         | Duration of inactivity in seconds after which endpoint will be automatically suspended. Value `0` means use global default, `-1` means never suspend. Maximum value is 1 week in seconds | number  |                                        |
+| --endpoint.passwordless_access             | NOT YET IMPLEMENTED. Whether to permit passwordless access to the compute endpoint.                                                    | boolean |                                        |
+| --endpoint.suspend_timeout_seconds         | Duration of inactivity in seconds after which endpoint will be automatically suspended. Value `0` means use global default. `-1` means never suspend. The default is `300` seconds (5 minutes). The maximum is `604800` seconds (7 days). | number  |                                        |
 
 #### Example
 
@@ -120,16 +120,20 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `u
 | --endpoint.branch_id                       | The destination branch ID. The destination branch must not have an existing read-write endpoint                                       | string  |                                        |
 | --endpoint.provisioner                     | The Neon compute provisioner. `k8s-pod` or `k8s-neonvm`. The latter is required for _Autoscaling_.                                                                                                          | string  |       |
 | --endpoint.pooler_enabled                  | Whether to enable connection pooling for the compute endpoint                                                                         | boolean |                                        |
-| --endpoint.pooler_mode                     | The connection pooler mode. Neon supports PgBouncer in `transaction` mode only                                                        | string  |                           |
+| --endpoint.pooler_mode                     | The connection pooler mode. Neon supports PgBouncer in `transaction` mode only.                                                        | string  |                           |
 | --endpoint.disabled                        | Whether to restrict connections to the compute endpoint                                                                               | boolean |                                        |
-| --endpoint.passwordless_access             | NOT YET IMPLEMENTED. Whether to permit passwordless access to the compute endpoint                                                    | boolean |                                        |
-| --endpoint.suspend_timeout_seconds         | Duration of inactivity in seconds after which endpoint will be automatically suspended. Value `0` means use global default, `-1` means never suspend. Maximum value is 1 week in seconds | number  |                                        |
+| --endpoint.passwordless_access             | NOT YET IMPLEMENTED. Whether to permit passwordless access to the compute endpoint.                                                    | boolean |                                        |
+| --endpoint.suspend_timeout_seconds         | Duration of inactivity in seconds after which endpoint will be automatically suspended. Value `0` means use global default. `-1` means never suspend. The default is `300` seconds (5 minutes). The maximum is `604800` seconds (7 days). | number  |                                        |
 
 #### Example
+
+<CodeBlock shouldWrap>
 
 ```bash
 neonctl endpoints update --project.id spring-sky-578180 --endpoint.id ep-tight-paper-779179 --endpoint.suspend_timeout_seconds 600
 ```
+
+</CodeBlock>
 
 ### delete
 
