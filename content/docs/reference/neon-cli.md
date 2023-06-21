@@ -63,7 +63,7 @@ For information about obtaining an Neon API key, see [Authentication](https://ap
 
 ## Commands
 
-| Command                                                 | Subcommands                            | Description               |
+| Command                                                 | Sub-commands                            | Description               |
 |---------------------------------------------------------|----------------------------------------|---------------------------|
 | [auth](../reference/cli-auth)                                     |                                        | Authenticate              |
 | [projects](../reference/cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | Manage projects           |

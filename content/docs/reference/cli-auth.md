@@ -7,7 +7,7 @@ isDraft: true
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli/install-the-neon-cli).
+Ensure that you have [installed the Neon CLI](../reference/neon-cli#install-the-neon-cli).
 
 ## The `auth` command
 
