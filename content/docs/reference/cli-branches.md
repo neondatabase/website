@@ -19,8 +19,6 @@ The `branches` command allows you to list, create, update, delete, and retrieve 
 neonctl branches <subcommand> [options]
 ```
 
-### Subcommands
-
 | Subcommand  | Description      |
 |---------|------------------|
 | [list](#list)    | List branches    |

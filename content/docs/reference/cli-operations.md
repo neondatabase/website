@@ -19,8 +19,6 @@ The `operations` command allows you to list operations for a Neon project.
 neonctl operations <subcommand> [options]
 ```
 
-### Subcommands
-
 | Subcommand  | Description      |
 |---------|------------------|
 | [list](#list)    | List databases    |

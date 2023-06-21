@@ -19,8 +19,6 @@ The `roles` command allows you to list, create, and delete roles in a Neon proje
 neonctl roles <subcommand> [options]
 ```
 
-### Subcommands
-
 | Subcommand  | Description      |
 |---------|------------------|
 | [list](#list)    | List roles    |

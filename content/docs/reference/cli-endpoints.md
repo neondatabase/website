@@ -19,8 +19,6 @@ The `endpoints` command allows you to list, create, update, delete, and retrieve
 neonctl endpoints <subcommand> [options]
 ```
 
-### Subcommands
-
 | Subcommand  | Description      |
 |---------|------------------|
 | [list](#list)    | List endpoints    |

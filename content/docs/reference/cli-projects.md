@@ -19,8 +19,6 @@ The `projects` command allows you to list, create, update, delete, and retrieve 
 neonctl projects <subcommand> [options]
 ```
 
-### Subcommands
-
 | Subcommand  | Description      |
 |---------|------------------|
 | [list](#list)    | List projects    |
