@@ -100,6 +100,7 @@
           slug: guides/elixir-ecto
         - title: Go
           slug: guides/go
+          ariaLabel: Connect a Go application to Neon
         - title: Java
           slug: guides/java
         - title: PHP

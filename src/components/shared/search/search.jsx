@@ -18,7 +18,7 @@ const Search = ({ className = null }) => {
       div = document.createElement('div');
       div.classList.add('fixed');
       div.setAttribute('data-docsearch-fixed', '');
-      div.innerHTML = '<input type="text" aria-label="">';
+      div.innerHTML = '<input type="text" aria-label="hidden">';
       document.body.appendChild(div);
     }
   }, []);
