@@ -193,10 +193,10 @@
       items:
         - title: auth
           slug: reference/cli-auth
-        - title: projects
-          slug: reference/cli-projects
         - title: me
           slug: reference/cli-me
+        - title: projects
+          slug: reference/cli-projects
         - title: branches
           slug: reference/cli-branches
         - title: endpoints

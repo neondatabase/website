@@ -141,7 +141,7 @@ neonctl projects list --config-dir /home/dtprice/.config/neonctl
 
 ### --oauth-host
 
-Specifies the URL of Neon OAuth host used to authenticate your neonctl client to Neon. The default is `https://oauth2.neon.tech`. You should need to configure this setting when using the `neonctl` CLI client.
+Specifies the URL of Neon OAuth host used to authenticate your `neonctl` client to Neon. The default is `https://oauth2.neon.tech`. You should not need to configure this setting.
 
 ### --client-id
 
@@ -157,4 +157,4 @@ neonctl <command> --api-key <neon_api_key>
 
 ### --analytics
 
-Enables analytics.
+Analytics are enabled by default. To disable analytics, specify `--no-analytics` or `--analytics false`.

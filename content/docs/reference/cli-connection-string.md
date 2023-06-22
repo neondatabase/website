@@ -29,6 +29,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the th
 | --endpoint.id | Endpoint ID  | string | &check; |
 | --role.name   | Role name    | string | &check; |
 | --database.name| Database name| string | &check; |
+| --pooled | Use a pooled connection. The default is `false`. |boolean||
 
 ### Example
 
