@@ -13,7 +13,14 @@ const isActiveItem = (items, currentSlug) =>
     ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
   );
 
-const Item = ({ title, slug = null, isStandalone = null, items = null, currentSlug }) => {
+const Item = ({
+  title,
+  slug = null,
+  ariaLabel = null,
+  isStandalone = null,
+  items = null,
+  currentSlug,
+}) => {
   const [isOpen, setIsOpen] = useState(slug === currentSlug);
 
   if (!isOpen && isActiveItem(items, currentSlug)) {
@@ -40,6 +47,7 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
         type={slug ? undefined : 'button'}
         to={slug ? externalSlug || docSlug : undefined}
         target={externalSlug ? '_blank' : '_self'}
+        aria-label={ariaLabel}
         onClick={handleClick}
       >
         <span className="leading-snug">{title}</span>
@@ -75,10 +83,12 @@ Item.propTypes = {
   title: PropTypes.string.isRequired,
   isStandalone: PropTypes.bool,
   slug: PropTypes.string,
+  ariaLabel: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.exact({
       title: PropTypes.string.isRequired,
       slug: PropTypes.string,
+      ariaLabel: PropTypes.string,
       items: PropTypes.arrayOf(PropTypes.any),
     })
   ),
