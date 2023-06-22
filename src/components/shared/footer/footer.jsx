@@ -52,7 +52,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
         <div className="flex space-x-[123px] xl:space-x-8 md:hidden">
           {MENUS.footer.map(({ heading, links }, index) => (
             <div className={clsx('flex flex-col xl:w-full')} key={index}>
-              <h3
+              <span
                 className={clsx(
                   {
                     'text-[13px] font-semibold text-gray-new-60':
@@ -62,7 +62,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                 )}
               >
                 {heading}
-              </h3>
+              </span>
               <ul className="mt-6 flex grow flex-col space-y-[18px]">
                 {links.map(({ to, text, icon: Icon }, index) => {
                   const isExternalUrl = to.startsWith('http');
