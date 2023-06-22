@@ -2,12 +2,13 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import { useRef, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
+import MobileMenu from 'components/shared/mobile-menu';
 import Search from 'components/shared/search';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
@@ -26,22 +27,28 @@ const icons = {
   aboutUs: AboutUsIcon,
 };
 
-const Header = forwardRef(
-  (
-    {
-      theme,
-      isMobileMenuOpen = false,
-      onBurgerClick,
-      isSignIn = false,
-      isSticky = false,
-      withBottomBorder = false,
-      isDocPage = false,
-    },
-    ref
-  ) => {
-    const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
+const Header = ({
+  theme,
 
-    return (
+  isSignIn = false,
+  isSticky = false,
+  withBottomBorder = false,
+  isDocPage = false,
+}) => {
+  const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
+  const headerRef = useRef(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuOutsideClick = () => {
+    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+  };
+
+  const handleBurgerClick = () => {
+    setIsMobileMenuOpen((isMobileMenuOpen) => !isMobileMenuOpen);
+  };
+
+  return (
+    <>
       <header
         className={clsx(
           'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-gray-new-8 lg:relative lg:h-14',
@@ -55,7 +62,7 @@ const Header = forwardRef(
           { 'lg:bg-black-new': theme === 'black-new' },
           { 'bg-white': theme === 'white' }
         )}
-        ref={ref}
+        ref={headerRef}
       >
         <Container className="flex items-center justify-between py-3.5" size="lg">
           <Link to="/">
@@ -159,20 +166,23 @@ const Header = forwardRef(
             <Burger
               className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
               isToggled={isMobileMenuOpen}
-              onClick={onBurgerClick}
+              onClick={handleBurgerClick}
             />
           </div>
         </Container>
       </header>
-    );
-  }
-);
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        headerRef={headerRef}
+        onOutsideClick={handleMobileMenuOutsideClick}
+      />
+    </>
+  );
+};
 
 Header.propTypes = {
   theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
   withBottomBorder: PropTypes.bool,
-  isMobileMenuOpen: PropTypes.bool,
-  onBurgerClick: PropTypes.func.isRequired,
   isSignIn: PropTypes.bool,
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
