@@ -47,10 +47,12 @@ const Item = ({
         type={slug ? undefined : 'button'}
         to={slug ? externalSlug || docSlug : undefined}
         target={externalSlug ? '_blank' : '_self'}
-        aria-label={ariaLabel}
         onClick={handleClick}
       >
-        <span className="leading-snug">{title}</span>
+        {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
+        <span className="leading-snug" aria-hidden={!!ariaLabel}>
+          {title}
+        </span>
         <ChevronRight
           className={clsx(
             'mx-2 mt-[5px] shrink-0 transition-[transform,color] duration-200',
