@@ -70,6 +70,7 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [DronaHQ hosted cloud version](https://www.dronahq.com/) | Requires selecting **Connect using SSL** when creating a connector |
 | [Forest Admin](https://www.forestadmin.com/) | The database requires at least one table |
 | [Grafana](https://grafana.com/docs/grafana/latest/datasources/postgres/)| Requires `sslmode=verify-full`. See [SNI workaround C](../connect/connection-errors#c-set-verify-full-for-golang-based-clients). |
+| [Google Looker Studio](https://lookerstudio.google.com/) | Requires **Enable SSL** and uploading the [ISRG Root X1 .pem file](https://letsencrypt.org/certificates/) from Let's Encrypt |
 | [ILLA Cloud](https://www.illacloud.com/) | |
 | [Luna Modeler](https://www.datensen.com/data-modeling/luna-modeler-for-relational-databases.html) | Requires enabling the SSL/TLS option |
 | [Metabase](https://www.metabase.com/) | |
