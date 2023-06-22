@@ -136,7 +136,7 @@ neonctl projects list --api-host https://console.neon.tech/api/v2
 Specifies the path to the `neonctl` configuration file. To view the default configuration directory containing you `credentials.json` file, run `neonctl --help`. The credentials file is created when you authenticate using the `neonctl auth` command. This option is only necessary if you move your `neonctl` configuration file to a location other than the default.
 
 ```bash
-neonctl projects list --config-directory /home/dtprice/.config/neonctl
+neonctl projects list --config-dir /home/dtprice/.config/neonctl
 ```
 
 ### --oauth-host
