@@ -49,7 +49,10 @@ const Item = ({
         aria-label={ariaLabel}
         onClick={handleClick}
       >
-        <span className="leading-snug">{title}</span>
+        {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
+        <span className="leading-snug" aria-hidden={!!ariaLabel}>
+          {title}
+        </span>
         <span
           className={clsx(
             'block h-4 w-4 transition-[transform,background-color] duration-200',
