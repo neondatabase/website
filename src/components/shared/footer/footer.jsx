@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
