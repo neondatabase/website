@@ -46,7 +46,6 @@ const components = {
   img: (props) => (
     <Image
       {...props}
-      loading="lazy"
       width={796}
       height={447}
       style={{ width: '100%', height: '100%' }}
