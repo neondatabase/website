@@ -90,7 +90,7 @@ Global options are supported with any Neon CLI command.
 | [--oauth-host](#oauth-host)| URL for the Neon OAuth host              | -      | https://oauth2.neon.tech        |
 | [--client-id](#client-id) | OAuth client id                     | string | neonctl                         |
 | [--api-key](#api-key)   | Neon API key                             | string | ""                                |
-| [--analytics](#analytics) | Enable analytics                    | boolean| true                              |
+| [--analytics](#analytics) | Manage analytics                    | boolean| true                              |
 
 ### --version
 
@@ -98,7 +98,7 @@ Global options are supported with any Neon CLI command.
 
   ```bash
   $ neonctl --version
-  1.9.4
+  1.11.1
   ```
 
 ### --help
