@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useInView } from 'react-intersection-observer';
