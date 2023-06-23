@@ -52,8 +52,8 @@ export const sidebarPropTypes = PropTypes.arrayOf(
       PropTypes.exact({
         title: PropTypes.string.isRequired,
         slug: PropTypes.string,
-        ariaLabel: PropTypes.string,
         items: PropTypes.arrayOf(PropTypes.any),
+        ariaLabel: PropTypes.string,
       })
     ),
   })
