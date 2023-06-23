@@ -12,7 +12,14 @@ const isActiveItem = (items, currentSlug) =>
     ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
   );
 
-const Item = ({ title, slug = null, isStandalone = null, items = null, currentSlug }) => {
+const Item = ({
+  title,
+  slug = null,
+  ariaLabel = null,
+  isStandalone = null,
+  items = null,
+  currentSlug,
+}) => {
   const [isOpen, setIsOpen] = useState(slug === currentSlug);
 
   if (!isOpen && isActiveItem(items, currentSlug)) {
@@ -41,7 +48,10 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
         target={externalSlug ? '_blank' : '_self'}
         onClick={handleClick}
       >
-        <span className="leading-snug">{title}</span>
+        {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
+        <span className="leading-snug" aria-hidden={!!ariaLabel}>
+          {title}
+        </span>
         <span
           className={clsx(
             'arrow-mask block h-4 w-4 transition-[transform,background-color] duration-200',
@@ -69,17 +79,19 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
   );
 };
 
-export const itemPropTypes = PropTypes.exact({
-  title: PropTypes.string.isRequired,
-  slug: PropTypes.string,
-  items: PropTypes.arrayOf(PropTypes.any),
-});
-
 Item.propTypes = {
   title: PropTypes.string.isRequired,
   isStandalone: PropTypes.bool,
   slug: PropTypes.string,
-  items: PropTypes.arrayOf(itemPropTypes),
+  ariaLabel: PropTypes.string,
+  items: PropTypes.arrayOf(
+    PropTypes.exact({
+      title: PropTypes.string.isRequired,
+      slug: PropTypes.string,
+      items: PropTypes.arrayOf(PropTypes.any),
+      ariaLabel: PropTypes.string,
+    })
+  ),
   currentSlug: PropTypes.string.isRequired,
 };
 
