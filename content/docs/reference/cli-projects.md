@@ -185,7 +185,7 @@ neonctl projects get [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `get` subcommand supports the this option:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `get` subcommand supports this option:
 
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |
