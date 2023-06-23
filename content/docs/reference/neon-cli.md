@@ -88,7 +88,7 @@ Global options are supported with any Neon CLI command.
 | [--api-key](#api-key)   | Neon API key                             | string | ""                                |
 | [--analytics](#analytics) | Manage analytics                    | boolean| true                              |
 
-- <div id="version">`--version`
+- <a id="version"></a>`--version`
 
   Shows the Neon CLI version number.
 
@@ -97,7 +97,7 @@ Global options are supported with any Neon CLI command.
   1.11.1
   ```
 
-- <div id="help">``--help`
+- `--help`
 
   Shows the `neonctl` command-line help. You can view help for `neonctl` or a `neonctl` command.
 
@@ -111,7 +111,7 @@ Global options are supported with any Neon CLI command.
   neonctl <command> --help
   ```
 
-- <div id="output">`--output`
+- `--output`
 
   Sets the output format. Supported options are `json`, `yaml`, and `table`. The default is `table`. Table output may limited to a certain number of columns. The `json` and `yaml` output formats show all output.
 
@@ -119,7 +119,7 @@ Global options are supported with any Neon CLI command.
   neonctl me --output json
   ```
 
-- <div id="configdir">``--config-dir`
+- `--config-dir`
 
   Specifies the path to the `neonctl` configuration file. To view the default configuration directory containing you `credentials.json` file, run `neonctl --help`. The credentials file is created when you authenticate using the `neonctl auth` command. This option is only necessary if you move your `neonctl` configuration file to a location other than the default.
 
@@ -127,7 +127,7 @@ Global options are supported with any Neon CLI command.
   neonctl projects list --config-dir /home/dtprice/.config/neonctl
   ```
 
-- <div id="apikey">`--api-key`
+- `--api-key`
 
   Specifies your Neon API key. You can authenticate using a Neon API key when running a Neon CLI command instead of using `neonctl auth`. For information about obtaining an Neon API key, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
 
@@ -135,6 +135,6 @@ Global options are supported with any Neon CLI command.
 neonctl <command> --api-key <neon_api_key>
 ```
 
-- <div id="analytics">`--analytics`
+- `--analytics`
 
   Analytics are enabled by default. To disable analytics, specify `--no-analytics` or `--analytics false`.
