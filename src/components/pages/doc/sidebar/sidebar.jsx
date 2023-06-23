@@ -9,6 +9,7 @@ import MENUS from 'constants/menus';
 import { ChatWidgetTrigger } from '../chat-widget';
 
 import Item from './item';
+import { itemPropTypes } from './item/item';
 
 const Sidebar = ({ className = null, sidebar, currentSlug }) => (
   <aside
@@ -43,32 +44,17 @@ const Sidebar = ({ className = null, sidebar, currentSlug }) => (
   </aside>
 );
 
+export const sidebarPropTypes = PropTypes.arrayOf(
+  PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    slug: PropTypes.string,
+    items: PropTypes.arrayOf(itemPropTypes),
+  })
+).isRequired;
+
 Sidebar.propTypes = {
   className: PropTypes.string,
-  sidebar: PropTypes.arrayOf(
-    PropTypes.exact({
-      title: PropTypes.string.isRequired,
-      slug: PropTypes.string,
-      items: PropTypes.arrayOf(
-        PropTypes.exact({
-          title: PropTypes.string.isRequired,
-          slug: PropTypes.string,
-          items: PropTypes.arrayOf(
-            PropTypes.exact({
-              title: PropTypes.string.isRequired,
-              slug: PropTypes.string,
-              items: PropTypes.arrayOf(
-                PropTypes.exact({
-                  title: PropTypes.string,
-                  slug: PropTypes.string,
-                })
-              ),
-            })
-          ),
-        })
-      ),
-    })
-  ).isRequired,
+  sidebar: sidebarPropTypes,
   currentSlug: PropTypes.string.isRequired,
 };
 
