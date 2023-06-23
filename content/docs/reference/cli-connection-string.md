@@ -9,7 +9,7 @@ isDraft: true
 
 Ensure that you have [installed the Neon CLI](../reference/neon-cli#install-the-neon-cli).
 
-## The `connection-string` command
+## The `connection string` command
 
 This command constructs a PostgreSQL connection string for connecting to a database in your Neon project. The connection string includes the password for the specified role.
 
