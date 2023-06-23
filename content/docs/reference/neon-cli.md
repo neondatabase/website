@@ -137,4 +137,4 @@ neonctl <command> --api-key <neon_api_key>
 
 - <a id="analytics"></a>`--analytics`
 
-  Analytics are enabled by default. To disable analytics, specify `--no-analytics` or `--analytics false`.
+  Analytics are enabled by default. Neon collects data about the CLI commands and options that are used to aid in providing support and understanding common usage patterns. Neon does not collect user-defined data such as project IDs or command payloads. To disable collection of analytics, specify `--no-analytics` or `--analytics false`.
