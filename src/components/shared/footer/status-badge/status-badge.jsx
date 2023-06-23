@@ -63,6 +63,6 @@ const StatusBadge = ({ isDocPage = false }) => {
   );
 };
 
-StatusBadge.propTypes = { isDocPage: PropTypes.bool, inView: PropTypes.bool };
+StatusBadge.propTypes = { isDocPage: PropTypes.bool };
 
 export default StatusBadge;
