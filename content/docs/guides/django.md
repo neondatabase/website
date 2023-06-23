@@ -62,6 +62,22 @@ For additional information about Django project settings, see [Django Settings: 
 Running Django tests is currently not supported. The Django test runner must be able to create a database for tests, which is not yet supported by Neon.
 </Admonition>
 
+## Connection issues
+
+Django uses the `psycopg2` driver as the default adapter for PostgreSQL. If you have an older version of that driver, you may encounter a `Endpoint ID is not specified` error when connecting to Neon. This error occurs if the client library used by your driver does not support the Server Name Indication (SNI) mechanism in TLS, which Neon uses to route incoming connections. The `psycopg2` driver uses the `libpq` client library, which supports SNI as of v14. You can check your `psycopg2` and `libpq` versions by starting a Django shell in your Django project and running the following commands:
+
+```bash
+# Start a Django shell
+python3 manage.py shell
+
+# Check versions
+import psycopg2
+print("psycopg2 version:", psycopg2.__version__)
+print("libpq version:", psycopg2._psycopg.libpq_version())
+```
+
+The version number for `libpq` is presented in a different format, for example, version 14.1 will be shown as 140001. If your `libpq` version is less than version 14, you can either upgrade your `psycopg2` driver to get a newer `libpq` version or use one of the workarounds described in our [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified) documentation. Upgrading your `psycopg2` driver may introduce compatibility issues with your Django or Python version, so you should test your application thoroughly.
+
 ## Video course: Micro eCommerce with Django and Neon
 
 Watch Justin Mitchel's video course, _Micro eCommerce with Python, Django, Neon Serverless Postgres, Stripe, TailwindCSS and more_, to learn how to connect a Django application to Neon.
