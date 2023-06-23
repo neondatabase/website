@@ -1,8 +1,5 @@
-'use client';
-
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
 import StatusBadge from 'components/shared/footer/status-badge';
@@ -14,11 +11,8 @@ import MENUS from 'constants/menus.js';
 const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) => {
   const isDarkTheme = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
 
-  const [ref, inView] = useInView({ triggerOnce: true });
-
   return (
     <footer
-      ref={ref}
       className={clsx(
         'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-gray-new-8 dark:text-white',
         !isDarkTheme && withTopBorder && 'border-t border-gray-new-90 dark:border-gray-new-20',
@@ -36,7 +30,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                 <span className="sr-only">Neon</span>
                 <Logo className="w-auto sm:h-6" isThemeBlack={isDarkTheme} />
               </Link>
-              <StatusBadge isDocPage={isDocPage} inView={inView} />
+              <StatusBadge isDocPage={isDocPage} />
             </div>
             {isDocPage && <ThemeSelect className="mt-7 xl:mt-6 md:mt-0" />}
           </div>

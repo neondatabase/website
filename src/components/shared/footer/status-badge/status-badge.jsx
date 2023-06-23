@@ -1,6 +1,8 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Link from 'components/shared/link';
 
@@ -19,26 +21,24 @@ const statusData = {
   },
 };
 
-const StatusBadge = ({ isDocPage = false, inView = false }) => {
+const fetchStatus = async () => {
+  const res = await fetch('https://neonstatus.com/summary.json');
+  const data = await res.json();
+  return data.page.status;
+};
+
+const StatusBadge = ({ isDocPage = false }) => {
   const [currentStatus, setCurrentStatus] = useState(null);
 
-  const fetchStatus = async () => {
-    const res = await fetch('https://neonstatus.com/summary.json');
-    const data = await res.json();
-    return data.page.status;
-  };
-
   useEffect(() => {
-    if (inView) {
-      fetchStatus()
-        .then((status) => {
-          setCurrentStatus(status);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [inView]);
+    fetchStatus()
+      .then((status) => {
+        setCurrentStatus(status);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <Link
