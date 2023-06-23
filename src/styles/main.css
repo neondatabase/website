@@ -44,3 +44,13 @@
   animation: lineAnimation 5s linear infinite;
   animation-timing-function: steps(75);
 }
+
+/* Used in a /src/components/pages/doc/sidebar/item/item.jsx  */
+/* Allows changing color of and svg without inserting inline svg */
+
+.arrow-mask {
+  -webkit-mask-image: url('/images/chevron-right.svg');
+  -webkit-mask-size: 6px 10px;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center center;
+}

@@ -44,19 +44,13 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
         <span className="leading-snug">{title}</span>
         <span
           className={clsx(
-            'block h-4 w-4 transition-[transform,background-color] duration-200',
+            'arrow-mask block h-4 w-4 transition-[transform,background-color] duration-200',
             currentSlug === slug
               ? 'bg-black-new dark:bg-white'
               : 'bg-gray-new-40 group-hover:bg-black-new dark:bg-gray-new-90 dark:group-hover:bg-white',
             items?.length ? 'block' : 'hidden',
             isOpen ? 'rotate-90' : 'rotate-0'
           )}
-          style={{
-            WebkitMaskImage: "url('/images/chevron-right.svg')",
-            WebkitMaskSize: '6px 10px',
-            WebkitMaskRepeat: 'no-repeat',
-            WebkitMaskPosition: 'center',
-          }}
         />
       </Tag>
       {!!items?.length && (
