@@ -5,11 +5,11 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-The `hnsw` extension enables the use of [Hierarchical Navigable Small World (HNSW) graphs](https://arxiv.org/abs/1603.09320) for vector similarity search in PostgreSQL. HNSW graphs are a type of proximity graph known for their superior performance in terms of speed and recall.
+The `hnsw` extension enables the use of [Hierarchical Navigable Small World (HNSW) proximity graphs](https://arxiv.org/abs/1603.09320) for vector similarity search in PostgreSQL. HNSW is a graph-based approach to indexing high-dimensional data. It constructs a hierarchy of graphs, where each layer is a subset of the previous one. During search, it navigates through the graphs to quickly find the nearest neighbors. HNSW graphs are known for their superior performance in terms of speed and recall.
 
-The extension is based on the [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw.git) implementation of HSNW, the code for the current state-of-the-art billion-scale nearest neighbor search system presented in [Revisiting the Inverted Indices for Billion-Scale Approximate Nearest Neighbors](https://openaccess.thecvf.com/content_ECCV_2018/html/Dmitry_Baranchuk_Revisiting_the_Inverted_ECCV_2018_paper.html).
+The `hnsw` extension is based on the [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw.git) implementation of HSNW, the code for the current state-of-the-art billion-scale nearest neighbor search system presented in the article [Revisiting the Inverted Indices for Billion-Scale Approximate Nearest Neighbors](https://openaccess.thecvf.com/content_ECCV_2018/html/Dmitry_Baranchuk_Revisiting_the_Inverted_ECCV_2018_paper.html).
 
-An HNSW index is held in memory (built on demand) and its maxial size is limited by the `maxelements` index parameter. Another required parameter is `dims`, the number of dimensions (if not specified in the column type definition). An optional parameter, `ef`, specifies the number of neighbors that are considered during index construction and search. This parameter corresponds to the `efConstruction` and `efSearch` parameters described in the article referenced above.
+An HNSW index is held in memory (built on demand). Its maxial size is limited by the `maxelements` index parameter. Another required parameter is `dims`, the number of dimensions (if not specified in the column type definition). An optional parameter, `ef`, specifies the number of neighbors that are considered during index construction and search. This parameter corresponds to the `efConstruction` and `efSearch` parameters described in the article referenced above.
 
 ## Enable the hnsw extension
 
