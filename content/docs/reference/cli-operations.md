@@ -21,7 +21,7 @@ neonctl operations <subcommand> [options]
 
 | Subcommand  | Description      |
 |---------|------------------|
-| [list](#list)    | List databases    |
+| [list](#list)    | List operations    |
 
 ### list
 
