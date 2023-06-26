@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-With the Neon CLI, you can manage Neon directly from a terminal. The Neon CLI supports numerous operations, such as authentication and management of Neon projects, branches, compute endpoints, databases, roles, and more.
+With the Neon CLI, you can manage Neon directly from your terminal. The Neon CLI supports numerous operations, such as authentication and management of Neon projects, branches, compute endpoints, databases, roles, and more.
 
 The Neon CLI command name is `neonctl`. The GitHub repository for the Neon CLI is found [here](https://github.com/neondatabase/neonctl).
 
@@ -51,7 +51,7 @@ Run the following command to authenticate a connection to Neon:
 neonctl auth
 ```
 
-The `auth` command launches a browser window where you can authorize the Neon CLI to access your Neon account.
+The `auth` command launches a browser window where you can authorize the Neon CLI to access your Neon account. Running a Neon CLI command without authenticating with [neonctl auth](/docs/reference/cli-auth) automatically launches the browser authentication process.
 
 Alternatively, you can authenticate a connection with a Neon API key using the `--api-key` option when running a Neon CLI command. For example, an API key is used with the following `neonctl projects list` command:
 

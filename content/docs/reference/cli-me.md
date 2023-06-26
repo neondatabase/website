@@ -7,7 +7,8 @@ isDraft: true
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli#install-the-neon-cli).
+- Ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+- If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 ## The `me` command
 
@@ -21,7 +22,7 @@ neonctl me
 
 ### Options
 
-Only [global options](../reference/neon-cli/global-options) apply.
+Only [global options](/docs/reference/neon-cli/global-options) apply.
 
 ### Example
 

@@ -7,7 +7,7 @@ isDraft: true
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli#install-the-neon-cli).
+Ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
 
 ## The `auth` command
 
@@ -27,7 +27,7 @@ The command launches a browser window where you can authorize the Neon CLI to ac
 
 ### Options
 
-Only [global options](../reference/neon-cli/global-options) apply.
+Only [global options](/docs/reference/neon-cli/global-options) apply.
 
 ## Need help?
 

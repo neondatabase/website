@@ -7,7 +7,8 @@ isDraft: true
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](../reference/neon-cli#install-the-neon-cli).
+- Ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+- If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 ## The `branches` command
 
@@ -39,7 +40,7 @@ neonctl branches list [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `list` subcommand supports this option:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-options), the `list` subcommand supports this option:
 
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |
