@@ -138,7 +138,7 @@ AnimatedButton.propTypes = {
   animationSize: PropTypes.oneOf(['xs', 'sm']),
   animationColor: PropTypes.string,
   isAnimated: PropTypes.bool,
-  spread: PropTypes.oneOf([1, 2, 3]),
+  spread: PropTypes.oneOf([1, 2, 3, 4, 5]),
 };
 
 export default AnimatedButton;
