@@ -96,6 +96,14 @@
       slug: manage/operations
 - title: Guides
   items:
+    - title: Branching
+      items:
+        - title: Data analysis and reporting
+          slug: guides/branching-analytics
+        - title: Data recovery
+          slug: guides/branching-data-recovery
+        - title: Automating branch creation and deletion
+          slug: guides/branching-automation
     - title: Languages
       items:
         - title: Elixir
