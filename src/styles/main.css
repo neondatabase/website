@@ -21,6 +21,22 @@
   .slider-track > span {
     transition: all 0.3s ease-out;
   }
+
+  /* used in components/partners/integration/api/code-tabs/code-tabs.jsx */
+  .code-block {
+    pre {
+      @apply overflow-x-auto;
+
+      code {
+        text-shadow: unset;
+        @apply highlighted-code !font-mono text-sm !text-white ![text-shadow:unset];
+      }
+    }
+
+    .comment.linenumber {
+      @apply -mr-5;
+    }
+  }
 }
 
 @layer utilities {
