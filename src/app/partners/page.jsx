@@ -1,5 +1,6 @@
 import Benefits from 'components/pages/partners/benefits';
 import Hero from 'components/pages/partners/hero';
+import Testimonial from 'components/pages/partners/testimonial';
 import Layout from 'components/shared/layout';
 
 const PartnersPage = () => (
@@ -11,6 +12,7 @@ const PartnersPage = () => (
   >
     <Hero />
     <Benefits />
+    <Testimonial />
   </Layout>
 );
 
