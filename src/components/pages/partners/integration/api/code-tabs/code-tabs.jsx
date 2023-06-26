@@ -7,15 +7,15 @@ import { useState } from 'react';
 
 import CodeBlock from 'components/shared/code-block/code-block';
 
-import bashIcon from '../../images/bash.svg';
-import javascriptIcon from '../../images/javascript.svg';
-import phpIcon from '../../images/php.svg';
-import rubyIcon from '../../images/ruby.svg';
+import BashIcon from '../../images/bash.inline.svg';
+import JavascriptIcon from '../../images/javascript.inline.svg';
+import PHPIcon from '../../images/php.inline.svg';
+import RubyIcon from '../../images/ruby.inline.svg';
 
 const codeSnippets = [
   {
     name: 'cURL',
-    icon: bashIcon,
+    icon: BashIcon,
     language: 'bash',
     code: `    curl --location --request POST 'https://console.neon.tech/api/v2/projects/project_id/branches' \\
     --header 'accept: application/json' \\
@@ -35,7 +35,7 @@ const codeSnippets = [
   },
   {
     name: 'Node',
-    icon: javascriptIcon,
+    icon: JavascriptIcon,
     language: 'javascript',
     code: `    const axios = require('axios');
 
@@ -55,7 +55,7 @@ const codeSnippets = [
   },
   {
     name: 'Ruby',
-    icon: rubyIcon,
+    icon: RubyIcon,
     language: 'ruby',
     code: `    require 'uri'
     require 'net/http'
@@ -75,7 +75,7 @@ const codeSnippets = [
   },
   {
     name: 'PHP',
-    icon: phpIcon,
+    icon: PHPIcon,
     language: 'php',
     code: `    <?php
 
@@ -100,24 +100,19 @@ const CodeTabs = ({ className = null }) => {
   return (
     <div className={clsx(className, 'rounded-[10px] border border-gray-new-15 bg-gray-new-8')}>
       <div className="border-b border-gray-new-15">
-        {codeSnippets.map(({ name, icon, language }, index) => (
+        {codeSnippets.map(({ name, icon: Icon, language }, index) => (
           <button
             className={clsx(
-              'relative px-[18px] py-3 text-gray-new-60 after:absolute after:left-0 after:top-full after:-mt-px after:h-0.5 after:w-full after:transition-colors after:duration-200',
-              language === activeLanguage ? 'after:bg-green-45' : 'after:bg-transparent'
+              'relative px-[18px] py-3 transition-colors duration-200 after:absolute after:left-0 after:top-full after:-mt-px after:h-0.5 after:w-full after:transition-colors after:duration-200 hover:text-white',
+              language === activeLanguage
+                ? 'text-white after:bg-green-45'
+                : 'text-gray-new-60 after:bg-transparent'
             )}
             type="button"
             key={index}
             onClick={() => setActiveLanguage(language)}
           >
-            <img
-              className="mr-2.5 inline-block"
-              src={icon}
-              alt=""
-              width={24}
-              height={24}
-              loading="lazy"
-            />
+            <Icon className="mr-2.5 inline-block h-6 w-6" />
             {name}
           </button>
         ))}
@@ -133,7 +128,6 @@ const CodeTabs = ({ className = null }) => {
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.2 }}
                   >
                     <CodeBlock
