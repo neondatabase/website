@@ -1,3 +1,4 @@
+import Benefits from 'components/pages/partners/benefits';
 import Hero from 'components/pages/partners/hero';
 import Layout from 'components/shared/layout';
 
@@ -9,6 +10,7 @@ const PartnersPage = () => (
     footerWithTopBorder
   >
     <Hero />
+    <Benefits />
   </Layout>
 );
 
