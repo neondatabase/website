@@ -33,11 +33,11 @@ The key idea behind HNSW is that by starting the search at the top layer and mov
 
 The "distance" between nodes is determined by some measure of similarity, which depends on the specific application. For example, in a recommendation system, the distance might be based on how similar two users' preferences are.
 
-## Use the hnsw extension
+## Using the hnsw extension
 
 This section describes how to use the `hnsw` extension in Neon using a simplistic example to demonstrate the required statements, syntax, and options.
 
-### Enable the hnsw extension
+### Enable the extension
 
 You can enable the `hnsw` extension in Neon by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
 
@@ -69,7 +69,7 @@ VALUES
 (3, '{7.7, 8.8, 9.9}');
 ```
 
-### Crate the HNSW index
+### Create the HNSW index
 
 Use a `CREATE INDEX` statement similar to the following to add an `hnsw` index on your vector colum.
 
