@@ -1,11 +1,11 @@
 ---
-title: Branching — Automating branch creation and deletion
+title: Branching — Integrate branching into your development workflows
 subtitle: Learn how you can automatically create and delete database branches in Neon
 enableTableOfContents: true
 isDraft: true
 ---
 
-Neon supports automation of branch creation and deletion, which allows you to build database branching into your development workflows. 
+Neon supports automation branch creation and deletion, allowing you to build database branching into your development workflows.
 
 ## Create and delete branches using the Neon API
 
