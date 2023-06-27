@@ -1,7 +1,9 @@
 'use client';
 
+import { Combobox } from '@headlessui/react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 import Button from 'components/shared/button/button';
 import Link from 'components/shared/link/link';
@@ -9,6 +11,7 @@ import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
 
 import AddIcon from '../images/add.inline.svg';
+import ChevronIcon from '../images/chevron.inline.svg';
 import infoSvg from '../images/info.svg';
 
 const Field = ({
@@ -61,21 +64,59 @@ Field.propTypes = {
   tooltipContent: PropTypes.string,
 };
 
+const integrationTypeOptions = [
+  { id: 'oauth', name: 'OAuth' },
+  { id: 'api', name: 'API' },
+];
+
+const IntegrationTypeSelect = () => {
+  const [selected, setSelected] = useState(integrationTypeOptions[0]);
+  const [query, setQuery] = useState('');
+
+  const filteredItems =
+    query === ''
+      ? integrationTypeOptions
+      : integrationTypeOptions.filter((item) =>
+          item.name.toLowerCase().includes(query.toLowerCase())
+        );
+
+  return (
+    <Combobox className="relative" value={selected} as="div" onChange={setSelected}>
+      <div className="relative mt-3">
+        <Combobox.Input
+          className="h-10 w-full appearance-none rounded bg-white bg-opacity-[0.04] px-4 placeholder:text-gray-new-40 focus:outline-none"
+          displayValue={(selected) => selected.name}
+          onChange={(event) => {
+            setQuery(event.target.value);
+          }}
+        />
+        <Combobox.Button className="absolute right-0 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center">
+          <ChevronIcon className="h-4 w-4" />
+        </Combobox.Button>
+      </div>
+
+      <Combobox.Options className="absolute top-full mt-1.5 flex w-full flex-col gap-y-3 rounded border border-gray-new-15 bg-[#1c1d1e] p-4">
+        {filteredItems.map((item) => (
+          <Combobox.Option
+            className="cursor-pointer text-sm leading-none transition-colors duration-200 hover:text-green-45 ui-active:text-green-45"
+            key={item.id}
+            value={item}
+          >
+            {item.name}
+          </Combobox.Option>
+        ))}
+      </Combobox.Options>
+    </Combobox>
+  );
+};
+
 const Form = ({ className }) => (
   <form
     className={clsx(className, 'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 py-11')}
   >
     <div className="flex flex-col">
       <label htmlFor="integrationType">What type of integration do you need? *</label>
-      <select
-        className="mt-3 h-10 appearance-none rounded bg-white bg-opacity-[0.04] px-4 focus:outline-none"
-        name="integrationType"
-        id="integrationType"
-        defaultValue="oauth"
-      >
-        <option name="oauth">OAuth</option>
-        <option name="api">API</option>
-      </select>
+      <IntegrationTypeSelect />
     </div>
     <div className="grid grid-cols-2 gap-5">
       <Field label="First Name *" name="firstName" placeholder="Marques" />

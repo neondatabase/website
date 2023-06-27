@@ -240,6 +240,7 @@ module.exports = {
   plugins: [
     require('tailwindcss-safe-area'),
     require('@tailwindcss/typography'),
+    require('@headlessui/tailwindcss'),
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
     }),
