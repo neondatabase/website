@@ -7,6 +7,8 @@ isDraft: true
 
 The `hnsw` extension enables the use of [Hierarchical Navigable Small World (HNSW) proximity graphs](https://arxiv.org/abs/1603.09320) for vector similarity search in PostgreSQL. HNSW is a graph-based approach to indexing high-dimensional data. It constructs a hierarchy of graphs, where each layer is a subset of the previous one. During a search, it navigates through the graphs to quickly find the nearest neighbors. HNSW graphs are known for their superior performance in terms of speed and recall.
 
+<CodeBlock shouldWrap>
+
 ```text
 Hierarchical Navigable Small World (HNSW) is a method used for similarity search in multi-dimensional data. It's a type of algorithm that helps computers find similar items in a dataset, which is a common task in many applications, such as recommendation systems, image recognition, and natural language processing.
 
@@ -14,6 +16,8 @@ The HNSW algorithm is based on the small-world network concept, which is a type 
 
 The HNSW algorithm is particularly notable for its ability to handle large-scale datasets. It's designed to be memory-efficient and fast, even when dealing with billions of data points. This makes it a powerful tool for many modern applications that need to process large amounts of data in real time.
 ```
+
+</CodeBlock>
 
 ## HNSW construction
 
