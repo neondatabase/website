@@ -42,7 +42,7 @@ const Field = ({
     </label>
     <Tag
       className={clsx(
-        'mt-3 appearance-none rounded bg-white bg-opacity-[0.04] px-4 placeholder:text-gray-new-40 focus:outline-none',
+        'mt-3 appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15',
         Tag === 'textarea' ? 'py-3' : 'h-10'
       )}
       id={name}
@@ -163,7 +163,7 @@ const Form = ({ className }) => (
         <Tooltip anchorSelect="#callback-urls-tooltip" />
       </legend>
       <input
-        className="mt-3 h-10 appearance-none rounded bg-white bg-opacity-[0.04] px-4 placeholder:text-gray-new-40 focus:outline-none"
+        className="mt-3 h-10 appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15"
         id="callbackUrl"
         name="callbackUrl"
         data-label="callbackUrl"
