@@ -42,7 +42,7 @@ const Field = ({
     </label>
     <Tag
       className={clsx(
-        'mt-3 appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15',
+        'remove-autocomplete-styles-apply-form mt-3 appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15',
         Tag === 'textarea' ? 'py-3' : 'h-10'
       )}
       id={name}
