@@ -139,7 +139,7 @@ Ultimately, your choice between the `pg_vector` with an IVFFlat or HNSW depends 
 - Memory Constraints (pgvector): If you are working under strict memory constraints, you may opt for the IVFFlat index as it typically consumes less memory than HNSW. However, be mindful that this might come at the cost of search speed and accuracy.
 - Search Speed (HNSW): If your primary concern is the speed at which you can retrieve nearest neighbors, especially in high-dimensional spaces, the HNSW extension is likely the better choice due to its graph-based approach.
 - Accuracy and Recall (HNSW): If achieving high accuracy and recall is critical for your application, HNSW may be the better option. Its graph-based approach generally yields higher recall levels compared to IVFFlat.
-- Distance Metrics (pgvector): Both pgvector and HNSW support L2 distance metric. Additionally, pgvector supports inner product, and cosine distance.
+- Distance Metrics (pgvector): Both `pgvector` and `hnsw` support L2 distance metric (`<->`). Additionally, `pgvector` supports inner product (`<#>`) and cosine distance (`<=>`).
 
 ## hnsw extension GitHub repository
 
