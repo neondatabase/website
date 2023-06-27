@@ -69,22 +69,27 @@ const integrationTypeOptions = [
   { id: 'api', name: 'API' },
 ];
 
-const IntegrationTypeSelect = () => {
-  const [selected, setSelected] = useState(integrationTypeOptions[0]);
+const applicationScopeOptions = [
+  { id: '100', name: '100' },
+  { id: '200', name: '200' },
+];
+
+const Select = ({ label, options }) => {
+  const [selected, setSelected] = useState(options[0]);
   const [query, setQuery] = useState('');
 
   const filteredItems =
     query === ''
-      ? integrationTypeOptions
-      : integrationTypeOptions.filter((item) =>
-          item.name.toLowerCase().includes(query.toLowerCase())
-        );
+      ? options
+      : options.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
 
   return (
     <Combobox className="relative" value={selected} as="div" onChange={setSelected}>
+      <Combobox.Label>{label}</Combobox.Label>
+
       <div className="relative mt-3">
         <Combobox.Input
-          className="h-10 w-full appearance-none rounded bg-white bg-opacity-[0.04] px-4 placeholder:text-gray-new-40 focus:outline-none"
+          className="h-10 w-full appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15"
           displayValue={(selected) => selected.name}
           onChange={(event) => {
             setQuery(event.target.value);
@@ -110,14 +115,26 @@ const IntegrationTypeSelect = () => {
   );
 };
 
+Select.propTypes = {
+  label: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
+
 const Form = ({ className }) => (
   <form
     className={clsx(className, 'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 py-11')}
   >
-    <div className="flex flex-col">
-      <label htmlFor="integrationType">What type of integration do you need? *</label>
-      <IntegrationTypeSelect />
-    </div>
+    <Select
+      label="What type of integration do you need? *"
+      id="integration"
+      options={integrationTypeOptions}
+    />
+
     <div className="grid grid-cols-2 gap-5">
       <Field label="First Name *" name="firstName" placeholder="Marques" />
       <Field label="Last Name *" name="lastName" placeholder="Hansen" />
@@ -200,6 +217,11 @@ const Form = ({ className }) => (
         </label>
       </div>
     </fieldset>
+    <Select
+      label="What application scope would you need?"
+      id="applicationScope"
+      options={applicationScopeOptions}
+    />
     <Field
       label="Link to logo"
       name="linkToLogo"
