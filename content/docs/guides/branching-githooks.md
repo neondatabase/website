@@ -5,7 +5,6 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-
 In this topic we walk through creating a Githook script that automates the creation of Neon branches every time a new Git branch is created. This is possible because Neon provides an API to manage your projects, branches, and most other operations supported by the Neon Console. You can learn more about the Neon API [here](https://neon-console-docs-link.com).
 
 We’ll start with a simple Githook example and incrementally build up to our final solution. You can find the repository along with the instructions on [GitHub](https://github-link.com).

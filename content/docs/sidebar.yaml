@@ -98,12 +98,24 @@
   items:
     - title: Branching
       items:
+        - title: Workflow integration
+          slug: guides/branching-integration
+          items: 
+            - title: Branch with the Neon API
+              slug: guides/branching-neon-api
+            - title: Branch with the Neon CLI
+              slug: guides/branching-neon-cli
+            - title: Branch with GitHub Actions
+              slug: guides/branching-github-actions
+            - title: Branch with Githooks
+              slug: guides/branching-githooks
+        - title: Automating branch creation and deletion
+          slug: guides/branching-automation
         - title: Data analysis and reporting
           slug: guides/branching-analytics
         - title: Data recovery
           slug: guides/branching-data-recovery
-        - title: Automating branch creation and deletion
-          slug: guides/branching-automation
+
     - title: Languages
       items:
         - title: Elixir

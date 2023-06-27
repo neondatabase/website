@@ -11,6 +11,10 @@ Neon supports automation branch creation and deletion, allowing you to build dat
 
 TBD
 
+## Create and delete branches with the Neon CLI
+
+TBD
+
 ## Create and delete branches with GitHub Actions
 
 TBD
@@ -18,9 +22,3 @@ TBD
 ## Create an delete branches with Githooks
 
 TBD
-
-## Create and delete branches with the Neon CLI
-
-TBD
-
-## Create a delete branches with the Neon-Vercel integration
