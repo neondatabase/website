@@ -1,3 +1,4 @@
+import Apply from 'components/pages/partners/apply';
 import Benefits from 'components/pages/partners/benefits';
 import Hero from 'components/pages/partners/hero';
 import Integration from 'components/pages/partners/integration';
@@ -15,6 +16,7 @@ const PartnersPage = () => (
     <Benefits />
     <Testimonial />
     <Integration />
+    <Apply />
   </Layout>
 );
 

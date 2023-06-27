@@ -24,4 +24,6 @@ export default {
   support: '/docs/introduction/support',
   developerDays1: '/developer-days-1',
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
+  termsOfService: '/terms-of-service',
+  privacyPolicy: '/privacy-policy',
 };
