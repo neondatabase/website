@@ -20,18 +20,6 @@ Creating a branch does not increase load on the parent branch or affect it in an
 
 Each Neon project is created with a [primary branch](../reference/glossary#primary-branch) called `main`. The first branch that you create is branched from the project's primary branch. Subsequent branches can be branched from the primary branch or from a previously created branch.
 
-## Branch compute endpoints
-
-When creating a new branch, you have the option to create a compute endpoint for the branch.
-
-A compute endpoint allows you to connect to the branch from a client or application and is read-write.
-
-Your Neon project's primary branch has a compute endpoint, by default.
-
-To connect to a database in a branch from a client or application, you must connect to the branch's compute endpoint. For more information connecting to a branch, see [Connect to a branch](../manage/branches#connect-to-a-branch).
-
-If a branch does not have a compute endpoint, you can add one. See [Create a compute endpoint](../manage/endpoints#create-a-compute-endpoint).
-
 ## Branching workflows
 
 You can use Neon's branching feature in variety development workflows, a few of which are discussed below.
@@ -45,8 +33,6 @@ Create a branch of your production database that developers are free to play wit
 Branching is so easy and cost-effective that you can create a branch for each developer. For example, you can create branches from a primary development branch to assign tasks to be worked on in parallel.
 
 ![branch for each developer](/docs/introduction/branching_each_dev.png)
-
-### Preview deployments
 
 With Neon's branching capabilities, you can create a branch for each preview deployment. You can automate branch creation for every pull request using the Neon API or, if you use Vercel, you can use the Neon Vercel Integration, which automates this task for you. For more information, see [Connect with the Neon Vercel Integration](../guides/vercel).
 
@@ -77,16 +63,6 @@ For another data recovery example using Neon's branching feature, refer to [Time
 You can run costly, long-running queries on an isolated branch of your production data, each with its own compute resources. With automation scripts, you can create and dispose of branches on a defined schedule to ensure that queries always run on an up-to-date copy of your production data.
 
 ![analytics branches](/docs/introduction/branching_analytics.png)
-
-### Machine Learning
-
-You can create point-in-time branches to ensure repeatability when training machine learning models.
-
-![ML branches](/docs/introduction/branching_ml.png)
-
-### Backups
-
-You can use branching to implement a data backup strategy. For example, you can create backup branches named for the time they were created for convenient point-in-time restore.
 
 ## Get started with branching
 
