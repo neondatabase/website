@@ -14,10 +14,10 @@ HNSW is a graph-based approach to indexing multi-dimensional data. It constructs
 Neon's `hnsw` extension is based on the [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw.git) implementation of the HSNW algorithm, presented in the article [Revisiting the Inverted Indices for Billion-Scale Approximate Nearest Neighbors](https://openaccess.thecvf.com/content_ECCV_2018/html/Dmitry_Baranchuk_Revisiting_the_Inverted_ECCV_2018_paper.html).
 
 <Admonition type="note">
-The `pg_vector` extension, also supported by Neon, is another option for vector similarity search. For information on which index to choose, refer to the [Comparing pgvector and hnsw](#comparing-hnsw-to-pg_vector) section.
+The `pg_vector` extension, also supported by Neon, is another option for vector similarity search. For information on which index to choose, refer to the [Comparing the hnsw extension to pg_vector](#comparing-the-hnsw-extension-to-pg_vector) section.
 </Admonition>
 
-## How HNSW Search works
+## How HNSW search works
 
 The search process begins at the topmost layer of the HNSW graph. The starting point is usually a node that has been pre-selected as a good general starting point for searches.
 
@@ -89,7 +89,7 @@ The following additional index parameters are supported by the `hnsw` extension:
 - `efConstruction`: Defines the number of neighbors considered during index construction. A high `efConstruction` value creates a higher quality graph and offers more accurate search results, but it also means the index building process takes longer. (e.g., `efsearch=16`)
 - `efsearch`: Defines the number of neighbors that are considered during index search. A high value produces more accurate search results but at the cost of increased search time. This value should be equal or larger than k (the number of nearest neighbors you want your search to return). (e.g., `efsearch=64`)
 
-## Query the index data
+## Query the indexed data
 
 To query the `vectors` table for nearest neighbors, you can use a query similar to this example:
 
@@ -106,7 +106,7 @@ where:
 
 In summary, the query retrieves the IDs of the two records in the vectors table whose value is closest to `[1.1, 2.2, 3.3]` according to Euclidean distance."
 
-## Tune the HNSW algorithm
+## Tuning the HNSW algorithm
 
 The `m`, `efSearch`, and `efConstruction` are parameters control the behavior of the HNSW algorithm.
 
