@@ -1,9 +1,13 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button/button';
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
+
+import AddIcon from '../images/add.inline.svg';
 
 const Field = ({
   className = null,
@@ -16,7 +20,10 @@ const Field = ({
   <div className={clsx('flex flex-col', className)}>
     <label htmlFor="firstName">{label}</label>
     <Tag
-      className="mt-3 appearance-none rounded bg-white bg-opacity-[0.04] px-4 py-3 placeholder:text-gray-new-40 focus:outline-none"
+      className={clsx(
+        'mt-3 appearance-none rounded bg-white bg-opacity-[0.04] px-4 placeholder:text-gray-new-40 focus:outline-none',
+        Tag === 'textarea' ? 'py-3' : 'h-10'
+      )}
       id={name}
       name={name}
       type={Tag === 'textarea' ? undefined : type}
@@ -41,7 +48,7 @@ const Form = ({ className }) => (
     <div className="flex flex-col">
       <label htmlFor="integrationType">What type of integration do you need? *</label>
       <select
-        className="mt-3 appearance-none rounded bg-white bg-opacity-[0.04] px-4 py-3 focus:outline-none"
+        className="mt-3 h-10 appearance-none rounded bg-white bg-opacity-[0.04] px-4 focus:outline-none"
         name="integrationType"
         id="integrationType"
       >
@@ -58,7 +65,64 @@ const Form = ({ className }) => (
       <Field label="Company Name *" name="companyName" placeholder="Acme" />
     </div>
     <Field label="App Name" name="appName" />
-    <Field label="Callback URLs" name="callbackUrls" />
+
+    <div className="flex flex-col">
+      <label htmlFor="firstName">Callback URLs</label>
+      <input
+        className="mt-3 h-10 appearance-none rounded bg-white bg-opacity-[0.04] px-4 placeholder:text-gray-new-40 focus:outline-none"
+        id="callbackUrl"
+        name="callbackUrl"
+        data-label="callbackUrl"
+        type="text"
+      />
+      <button
+        className="mt-3 flex items-center gap-x-2 text-green-45"
+        type="button"
+        onClick={() => {
+          const callbackUrls = document.querySelectorAll('[data-label="callbackUrl"]');
+          const callbackUrlsCount = callbackUrls.length;
+
+          const lastCallbackUrl = callbackUrls[callbackUrlsCount - 1];
+          const newCallbackUrl = lastCallbackUrl.cloneNode(true);
+          const newCallbackUrlNumber = callbackUrlsCount + 1;
+          newCallbackUrl.id = `callbackUrl${newCallbackUrlNumber}`;
+          newCallbackUrl.name = `callbackUrl${newCallbackUrlNumber}`;
+          newCallbackUrl.value = '';
+
+          // add new callback url after the last one
+          lastCallbackUrl.after(newCallbackUrl);
+        }}
+      >
+        <AddIcon />
+        Add another URL
+      </button>
+    </div>
+    <fieldset>
+      <legend>Will you be making API calls from a backend?</legend>
+      <div className="mt-3 flex items-center gap-x-8">
+        <label className="flex items-center gap-x-[9px]" htmlFor="apiCallsYes">
+          <input
+            className="h-2 w-2 appearance-none rounded-full bg-transparent outline outline-offset-2 outline-gray-new-40 checked:bg-primary-1"
+            type="radio"
+            name="apiCalls"
+            id="apiCallsYes"
+            value="yes"
+          />
+          Yes
+        </label>
+
+        <label className="flex items-center gap-x-[9px]" htmlFor="apiCallsNo">
+          <input
+            className="h-2 w-2 appearance-none rounded-full bg-transparent outline outline-offset-2 outline-gray-new-40 checked:bg-primary-1"
+            type="radio"
+            name="apiCalls"
+            id="apiCallsNo"
+            value="no"
+          />
+          No
+        </label>
+      </div>
+    </fieldset>
     <Field label="Link to logo" name="linkToLogo" />
     <Field
       label="Additional details"
