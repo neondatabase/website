@@ -11,15 +11,15 @@ HNSW is a graph-based approach to indexing multi-dimensional data. It constructs
 
 ![HNSW graph](/docs/extensions/hnsw_graph.png)
 
-Neon's `hnsw` extension is based on the [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw.git) implementation of HSNW, the code for the current state-of-the-art billion-scale nearest neighbor search system presented in the article [Revisiting the Inverted Indices for Billion-Scale Approximate Nearest Neighbors](https://openaccess.thecvf.com/content_ECCV_2018/html/Dmitry_Baranchuk_Revisiting_the_Inverted_ECCV_2018_paper.html).
+Neon's `hnsw` extension is based on the [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw.git) implementation of the HSNW algorithm, presented in the article [Revisiting the Inverted Indices for Billion-Scale Approximate Nearest Neighbors](https://openaccess.thecvf.com/content_ECCV_2018/html/Dmitry_Baranchuk_Revisiting_the_Inverted_ECCV_2018_paper.html).
 
 <Admonition type="note">
-The `pg_vector` extension, which supports IVFFlat indexing and is also supported by Neon, is another option for vector similarity search. For more information on which index to choose, refer to the [Comparing pgvector and hnsw](tbd) section.
+The `pg_vector` extension, also supported by Neon, is another option for vector similarity search. For information on which index to choose, refer to the [Comparing pgvector and hnsw](#comparing-hnsw-to-pg_vector) section.
 </Admonition>
 
 ## How HNSW Search works
 
-Search process begins at the topmost layer of the HNSW graph. The starting point is usually a node that has been pre-selected as a good general starting point for searches.
+The search process begins at the topmost layer of the HNSW graph. The starting point is usually a node that has been pre-selected as a good general starting point for searches.
 
 From the starting node, the algorithm navigates to the nearest neighbor in the same layer that is closer to the query point. This step is repeated until there are no more neighbors that are closer to the query point.
 
@@ -33,7 +33,11 @@ The key idea behind HNSW is that by starting the search at the top layer and mov
 
 The "distance" between nodes is determined by some measure of similarity, which depends on the specific application. For example, in a recommendation system, the distance might be based on how similar two users' preferences are.
 
-## Enable the hnsw extension
+## Use the hnsw extension
+
+This section describes how to use the `hnsw` extension in Neon using a simplistic example to demonstrate the required statements, syntax, and options.
+
+### Enable the hnsw extension
 
 You can enable the `hnsw` extension in Neon by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
 
@@ -43,7 +47,7 @@ CREATE EXTENSION hnsw;
 
 For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
-## Create a table for vector data
+### Create a table for vector data
 
 To create a table for storing vectors, issue a create table statement similar to the following:
 
@@ -53,7 +57,7 @@ CREATE TABLE vectors(id INTEGER, vec REAL[]);
 
 This statement generates a table named `vectors` with an `vec` column for storing vector data. Your table and vector column names may differ.
 
-## Insert data
+### Insert data
 
 Execute an `INSERT` statement similar to the following to store your vector data. For demonstration purposes, the statement shown below stores vectors with 3 dimensions. By comparison, OpenAI's `text-embedding-ada-002` model supports 1536 dimensions for each piece of text. For more information, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the OpenAI documentation.
 
@@ -65,7 +69,7 @@ VALUES
 (3, '{7.7, 8.8, 9.9}');
 ```
 
-## Indexing vectors using hnsw
+### Crate the HNSW index
 
 Use a `CREATE INDEX` statement similar to the following to add an `hnsw` index on your vector colum.
 
@@ -85,9 +89,7 @@ The following additional index parameters are supported by the `hnsw` extension:
 - `efConstruction`: Defines the number of neighbors considered during index construction. A high `efConstruction` value creates a higher quality graph and offers more accurate search results, but it also means the index building process takes longer. (e.g., `efsearch=16`)
 - `efsearch`: Defines the number of neighbors that are considered during index search. A high value produces more accurate search results but at the cost of increased search time. This value should be equal or larger than k (the number of nearest neighbors you want your search to return). (e.g., `efsearch=64`)
 
-
-
-## Querying
+## Query the index data
 
 To query the `vectors` table for nearest neighbors, you can use a query similar to this example:
 
@@ -104,7 +106,7 @@ where:
 
 In summary, the query retrieves the IDs of the two records in the vectors table whose value is closest to `[1.1, 2.2, 3.3]` according to Euclidean distance."
 
-## Tuning the HNSW algorithm
+## Tune the HNSW algorithm
 
 The `m`, `efSearch`, and `efConstruction` are parameters control the behavior of the HNSW algorithm.
 
@@ -114,9 +116,9 @@ The `m`, `efSearch`, and `efConstruction` are parameters control the behavior of
 
 These parameters allow you to tune the HNSW algorithm according to your specific needs. For example, if you need to prioritize speed over accuracy, you might choose lower values for `m` and `efSearch`. On the other hand, if you need to prioritize accuracy over speed, you might choose higher values.
 
-## Comparing hnsw to pg_vector
+## Comparing the hnsw extension to pg_vector
 
-When determining which index to use, pg_vector or HSNW, it's helpful to compare based on sepcific criteria, such as:
+When determining which index to use, `pg_vector` with an IVFFlat or HNSW, it's helpful to compare the two based on specific criteria:
 
 - Search speed
 - Accuracy
@@ -132,13 +134,13 @@ When determining which index to use, pg_vector or HSNW, it's helpful to compare 
 | Index Construction Speed | Index building process is relatively fast. The data points are assigned to the nearest centroid, and inverted lists are constructed. | Index construction involves building multiple layers of graphs, which can be computationally intensive, especially if you choose high values for the parameter ef_construction. |
 | Distance Metrics  | Typically used for L2 distances, but pgvector supports inner product and cosine distance as well. | Only uses L2 distance metrics at the moment. |
 
-Ultimately, your choice between the HNSW and pgvector with IVFFlat index depends on your specific use case and requirements:
+Ultimately, your choice between the `pg_vector` with an IVFFlat or HNSW depends on your use case and requirements:
 
 - Memory Constraints (pgvector): If you are working under strict memory constraints, you may opt for the IVFFlat index as it typically consumes less memory than HNSW. However, be mindful that this might come at the cost of search speed and accuracy.
 - Search Speed (HNSW): If your primary concern is the speed at which you can retrieve nearest neighbors, especially in high-dimensional spaces, the HNSW extension is likely the better choice due to its graph-based approach.
 - Accuracy and Recall (HNSW): If achieving high accuracy and recall is critical for your application, HNSW may be the better option. Its graph-based approach generally yields higher recall levels compared to IVFFlat.
 - Distance Metrics (pgvector): Both pgvector and HNSW support L2 distance metric. Additionally, pgvector supports inner product, and cosine distance.
 
-## hnsw Extension GitHub repository
+## hnsw extension GitHub repository
 
-The GitHub repository for the `hnsw` extension can be found [here](https://github.com/knizhnik/hnsw).
+The GitHub repository for Neon's `hnsw` extension can be found [here](https://github.com/knizhnik/hnsw).
