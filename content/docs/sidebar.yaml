@@ -109,8 +109,6 @@
               slug: guides/branching-github-actions
             - title: Branch with Githooks
               slug: guides/branching-githooks
-        - title: Automating branch creation and deletion
-          slug: guides/branching-automation
         - title: Data analysis and reporting
           slug: guides/branching-analytics
         - title: Data recovery
