@@ -6,11 +6,12 @@ import { Tooltip as ReactTooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 
 const Tooltip = ({
-  id,
+  id = null,
   arrowColor = '#161928',
   place = 'right',
   className = null,
   offset = 10,
+  anchorSelect = null,
 }) => {
   const [isTooltipVisible, setTooltipVisibility] = useState(false);
 
@@ -28,6 +29,7 @@ const Tooltip = ({
         type="dark"
         className={className}
         offset={offset}
+        anchorSelect={anchorSelect}
         multiline
       />
     );
@@ -36,11 +38,12 @@ const Tooltip = ({
 };
 
 Tooltip.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   arrowColor: PropTypes.string,
   place: PropTypes.string,
   className: PropTypes.string,
   offset: PropTypes.shape({}),
+  anchorSelect: PropTypes.string,
 };
 
 export default Tooltip;

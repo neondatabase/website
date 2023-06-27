@@ -5,9 +5,11 @@ import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button/button';
 import Link from 'components/shared/link/link';
+import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
 
 import AddIcon from '../images/add.inline.svg';
+import infoSvg from '../images/info.svg';
 
 const Field = ({
   className = null,
@@ -16,9 +18,25 @@ const Field = ({
   type = 'text',
   placeholder,
   tag: Tag = 'input',
+  tooltipId = null,
+  tooltipContent = null,
 }) => (
   <div className={clsx('flex flex-col', className)}>
-    <label htmlFor="firstName">{label}</label>
+    <label className="flex items-center" htmlFor="firstName">
+      {label}
+      {tooltipId && tooltipContent && (
+        <>
+          <a
+            className="ml-1.5 flex items-center"
+            id={tooltipId}
+            data-tooltip-content={tooltipContent}
+          >
+            <img src={infoSvg} width={14} height={14} alt="" loading="lazy" aria-hidden />
+          </a>
+          <Tooltip anchorSelect={`#${tooltipId}`} />
+        </>
+      )}
+    </label>
     <Tag
       className={clsx(
         'mt-3 appearance-none rounded bg-white bg-opacity-[0.04] px-4 placeholder:text-gray-new-40 focus:outline-none',
@@ -39,6 +57,8 @@ Field.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   tag: PropTypes.string,
+  tooltipId: PropTypes.string,
+  tooltipContent: PropTypes.string,
 };
 
 const Form = ({ className }) => (
@@ -51,9 +71,10 @@ const Form = ({ className }) => (
         className="mt-3 h-10 appearance-none rounded bg-white bg-opacity-[0.04] px-4 focus:outline-none"
         name="integrationType"
         id="integrationType"
+        defaultValue="oauth"
       >
-        <option selected>OAuth</option>
-        <option>API</option>
+        <option name="oauth">OAuth</option>
+        <option name="api">API</option>
       </select>
     </div>
     <div className="grid grid-cols-2 gap-5">
@@ -64,10 +85,25 @@ const Form = ({ className }) => (
       <Field label="Email *" name="email" type="email" placeholder="info@acme.com" />
       <Field label="Company Name *" name="companyName" placeholder="Acme" />
     </div>
-    <Field label="App Name" name="appName" />
+    <Field
+      label="App Name"
+      name="appName"
+      tooltipId="app-name-tooltip"
+      tooltipContent="This is a tooltip!"
+    />
 
-    <div className="flex flex-col">
-      <label htmlFor="firstName">Callback URLs</label>
+    <fieldset className="flex flex-col">
+      <legend className="items-centers flex" htmlFor="firstName">
+        Callback URLs {/* TODO: add tooltip */}
+        <a
+          className="ml-1.5 flex items-center"
+          id="callback-urls-tooltip"
+          data-tooltip-content="This is a tooltip!"
+        >
+          <img src={infoSvg} width={14} height={14} alt="" loading="lazy" aria-hidden />
+        </a>
+        <Tooltip anchorSelect="#callback-urls-tooltip" />
+      </legend>
       <input
         className="mt-3 h-10 appearance-none rounded bg-white bg-opacity-[0.04] px-4 placeholder:text-gray-new-40 focus:outline-none"
         id="callbackUrl"
@@ -96,7 +132,7 @@ const Form = ({ className }) => (
         <AddIcon />
         Add another URL
       </button>
-    </div>
+    </fieldset>
     <fieldset>
       <legend>Will you be making API calls from a backend?</legend>
       <div className="mt-3 flex items-center gap-x-8">
@@ -123,7 +159,12 @@ const Form = ({ className }) => (
         </label>
       </div>
     </fieldset>
-    <Field label="Link to logo" name="linkToLogo" />
+    <Field
+      label="Link to logo"
+      name="linkToLogo"
+      tooltipId="link-to-logo-tooltip"
+      tooltipContent="This is a tooltip!"
+    />
     <Field
       label="Additional details"
       name="additionalDetails"
