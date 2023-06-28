@@ -171,6 +171,8 @@
   items:
     - title: Supported extensions
       slug: extensions/pg-extensions
+    - title: hnsw
+      slug: extensions/hnsw
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
     - title: pgvector
