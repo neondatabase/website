@@ -51,6 +51,11 @@ export default {
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },
+  partners: {
+    title: 'Unlock additional revenue stream by partnering with Neon — Neon',
+    description: 'Bring familiar, reliable and scalable Postgres experience to your customers.',
+    pathname: LINKS.partners,
+  },
 };
 
 export const getBlogCategoryDescription = (category) => {

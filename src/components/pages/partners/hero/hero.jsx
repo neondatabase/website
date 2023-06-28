@@ -1,17 +1,19 @@
+import Image from 'next/image';
+
 import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container/container';
 
-import logoPattern from './images/logo-pattern.svg';
+import logoPattern from './images/logo-pattern.png';
 
 const Hero = () => (
   <section className="hero safe-paddings relative overflow-hidden pb-52 pt-[300px]">
-    <img
+    <Image
       className="absolute left-1/2 top-0 h-[478px] w-[1920px] -translate-x-1/2 object-cover"
       src={logoPattern}
       width={1920}
       height={827}
       alt=""
-      loading="eager"
+      priority
       aria-hidden
     />
     <Container className="relative z-10 flex flex-col items-center text-center" size="lg">
