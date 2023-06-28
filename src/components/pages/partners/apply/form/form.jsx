@@ -15,6 +15,8 @@ import AddIcon from '../images/add.inline.svg';
 import Field from './field';
 import Select from './select';
 
+const CALLBACK_URLS_LIMIT = 3;
+
 const integrationTypeOptions = [
   { id: 'oauth', name: 'OAuth' },
   { id: 'api', name: 'API' },
@@ -51,8 +53,31 @@ const Form = ({ className }) => {
 
   const [applicationScopes, setApplicationScopes] = useState([]);
 
+  const [shouldAddCallbackUrl, setShouldAddCallbackUrl] = useState(true);
+
   const filteredIntegrationItems = useFilteredItems(integrationTypeOptions, integrationQuery);
   const filteredProjectNumberItems = useFilteredItems(projectNumberOptions, projectNumberQuery);
+
+  const handleAddingCallbackUrl = () => {
+    const callbackUrls = document.querySelectorAll('[data-label="callbackUrl"]');
+    const callbackUrlsCount = callbackUrls.length;
+
+    if (callbackUrlsCount < CALLBACK_URLS_LIMIT) {
+      const lastCallbackUrl = callbackUrls[callbackUrlsCount - 1];
+      const newCallbackUrl = lastCallbackUrl.cloneNode(true);
+      const newCallbackUrlNumber = callbackUrlsCount + 1;
+      newCallbackUrl.id = `callbackUrl${newCallbackUrlNumber}`;
+      newCallbackUrl.name = `callbackUrl${newCallbackUrlNumber}`;
+      newCallbackUrl.value = '';
+
+      // add new callback url after the last one
+      lastCallbackUrl.after(newCallbackUrl);
+    }
+
+    if (callbackUrlsCount === CALLBACK_URLS_LIMIT - 1) {
+      setShouldAddCallbackUrl(false);
+    }
+  };
 
   return (
     <form
@@ -103,22 +128,12 @@ const Form = ({ className }) => {
               type="text"
             />
             <button
-              className="mt-3 flex items-center gap-x-2 text-green-45"
+              className={clsx(
+                'mt-3 flex items-center gap-x-2',
+                shouldAddCallbackUrl ? 'text-green-45' : 'cursor-not-allowed text-gray-new-40'
+              )}
               type="button"
-              onClick={() => {
-                const callbackUrls = document.querySelectorAll('[data-label="callbackUrl"]');
-                const callbackUrlsCount = callbackUrls.length;
-
-                const lastCallbackUrl = callbackUrls[callbackUrlsCount - 1];
-                const newCallbackUrl = lastCallbackUrl.cloneNode(true);
-                const newCallbackUrlNumber = callbackUrlsCount + 1;
-                newCallbackUrl.id = `callbackUrl${newCallbackUrlNumber}`;
-                newCallbackUrl.name = `callbackUrl${newCallbackUrlNumber}`;
-                newCallbackUrl.value = '';
-
-                // add new callback url after the last one
-                lastCallbackUrl.after(newCallbackUrl);
-              }}
+              onClick={handleAddingCallbackUrl}
             >
               <AddIcon />
               Add another URL
