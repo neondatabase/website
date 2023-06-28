@@ -20,6 +20,7 @@ import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 import AddIcon from '../images/add.inline.svg';
 
 import Field from './field';
+import MultiSelect from './multi-select';
 import Select from './select';
 
 const CALLBACK_URLS_LIMIT = 3;
@@ -29,27 +30,11 @@ const integrationTypeOptions = [
   { id: 'api', name: 'API' },
 ];
 
-// const applicationScopeOptions = [
-//   { id: 'create', name: 'Create projects' },
-//   { id: 'read', name: 'Read projects' },
-//   { id: 'modify', name: 'Modify projects' },
-//   { id: 'delete', name: 'Delete projects' },
-// ];
-
-// const projectNumberOptions = [
-//   { id: '1000', name: '1000 projects' },
-//   { id: '5000', name: '5000 projects' },
-//   { id: '5000+', name: '5000+ projects' },
-// ];
-
-// const useFilteredItems = (items, query) =>
-//   useMemo(
-//     () =>
-//       query === ''
-//         ? items
-//         : items.filter((item) => item.name.toLowerCase().includes(query.toLowerCase())),
-//     [items, query]
-//   );
+const projectNumberOptions = [
+  { id: '1000', name: '1000 projects' },
+  { id: '5000', name: '5000 projects' },
+  { id: '5000+', name: '5000+ projects' },
+];
 
 const CallbackURLs = ({ register }) => {
   const [shouldAddCallbackUrl, setShouldAddCallbackUrl] = useState(true);
@@ -68,19 +53,22 @@ const CallbackURLs = ({ register }) => {
         </a>
         <Tooltip anchorSelect="#callback-urls-tooltip" />
       </legend>
-      {Array.from({ length: CALLBACK_URLS_LIMIT }).map((_, index) => (
-        <input
-          className={clsx(
-            'mt-3 h-10 appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15',
-            index > visibleInputIndex && 'hidden'
-          )}
-          id={`callback_url_${index}`}
-          name={`callback_url${index > 0 ? `_${index + 1}` : ''}`}
-          type="text"
-          {...register(`callback_url${index > 0 ? `_${index + 1}` : ''}`)}
-          key={index}
-        />
-      ))}
+      {Array.from({ length: CALLBACK_URLS_LIMIT }).map((_, index) => {
+        const name = `callback_url${index > 0 ? `_${index + 1}` : ''}`;
+        return (
+          <input
+            className={clsx(
+              'mt-3 h-10 appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15',
+              index > visibleInputIndex && 'hidden'
+            )}
+            id={`callback_url_${index}`}
+            name={name}
+            type="text"
+            {...register(name)}
+            key={index}
+          />
+        );
+      })}
       <button
         className={clsx(
           'mt-3 flex items-center gap-x-2',
@@ -119,19 +107,24 @@ const schema = yup
   .required();
 
 const Form = ({ className }) => {
+  const [integrationType, setIntegrationType] = useState(integrationTypeOptions[0]);
   const [, setFormState] = useState(FORM_STATES.DEFAULT);
   const {
     register,
     handleSubmit,
+    setValue,
     control,
-    watch,
-    formState: { errors },
+    formState: {
+      // errors
+    },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      application_scope: [],
+      integration_type: integrationTypeOptions[0],
+      are_api_calls_from_backend: 'No',
+    },
   });
-
-  const integrationType1 = watch('integration_type');
-  console.log({ integrationType1 });
 
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
@@ -142,28 +135,15 @@ const Form = ({ className }) => {
     pageUri: href,
   };
 
-  console.log(errors, 'errors');
-
-  const onSubmit = async (data, e) => {
+  const onSubmit = async (formData, e) => {
     e.preventDefault();
-    const {
-      integration_type,
-      firstname,
-      lastname,
-      email,
-      company,
-      app_name,
-      callback_url,
-      callback_url_2,
-      callback_url_3,
-      application_scope,
-      are_api_calls_from_backend,
-      link_to_logo,
-      number_of_projects,
-      message,
-    } = data;
 
+    const data = { ...formData };
     console.log(data);
+    data.application_scope = data.application_scope?.map(({ id }) => id).join(';');
+    data.integration_type = data.integration_type.name;
+
+    const dataToSend = Object.entries(data).map(([name, value]) => ({ name, value }));
 
     const loadingAnimationStartedTime = Date.now();
 
@@ -174,64 +154,7 @@ const Form = ({ className }) => {
       const response = await sendHubspotFormData({
         formId: HUBSPOT_PARTNERS_FORM_ID,
         context,
-        values: [
-          {
-            name: 'integration_type',
-            value: integration_type.id,
-          },
-          {
-            name: 'firstname',
-            value: firstname,
-          },
-          {
-            name: 'lastname',
-            value: lastname,
-          },
-          {
-            name: 'email',
-            value: email,
-          },
-          {
-            name: 'company',
-            value: company,
-          },
-          {
-            name: 'app_name',
-            value: app_name,
-          },
-          {
-            name: 'callback_url',
-            value: callback_url,
-          },
-          {
-            name: 'callback_url_2',
-            value: callback_url_2,
-          },
-          {
-            name: 'callback_url_3',
-            value: callback_url_3,
-          },
-          {
-            name: 'application_scope',
-            value: application_scope,
-          },
-          {
-            name: 'are_api_calls_from_backend',
-            value: are_api_calls_from_backend,
-          },
-          {
-            name: 'link_to_logo',
-            value: link_to_logo,
-          },
-          {
-            name: 'number_of_projects',
-            value: number_of_projects,
-          },
-          {
-            name: 'message',
-            value: message,
-          },
-        ],
+        values: dataToSend,
       });
 
       if (response.ok) {
@@ -252,18 +175,6 @@ const Form = ({ className }) => {
     }
   };
 
-  const [integrationType, setIntegrationType] = useState(integrationTypeOptions[0]);
-  // const [integrationQuery, setIntegrationQuery] = useState('');
-
-  // const [projectNumber, setProjectNumber] = useState(projectNumberOptions[0]);
-  // const [projectNumberQuery, setProjectNumberQuery] = useState('');
-
-  // const [applicationScopes, setApplicationScopes] = useState([]);
-
-  // const filteredIntegrationItems = useFilteredItems(integrationTypeOptions, integrationQuery);
-  // const filteredProjectNumberItems = useFilteredItems(projectNumberOptions, projectNumberQuery);
-
-  console.log(integrationType);
   return (
     <form
       className={clsx(className, 'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 py-11')}
@@ -275,9 +186,7 @@ const Form = ({ className }) => {
         label="What type of integration do you need? *"
         selected={integrationType}
         setSelected={setIntegrationType}
-        // setQuery={setIntegrationQuery}
         items={integrationTypeOptions}
-        // defaultValue={integrationTypeOptions[0]}
         name="integration_type"
       />
 
@@ -337,15 +246,8 @@ const Form = ({ className }) => {
               </label>
             </div>
           </fieldset>
-          {/* <Select
-            label="What application scope would you need?"
-            items={applicationScopeOptions}
-            selected={applicationScopes}
-            setSelected={setApplicationScopes}
-            name="application_scope"
-            register={register}
-            multiple
-          /> */}
+
+          <MultiSelect control={control} setValue={setValue} />
 
           <Field
             label="Link to logo"
@@ -357,17 +259,14 @@ const Form = ({ className }) => {
         </>
       )}
 
-      {/* {integrationType.id === 'api' &&
+      {integrationType.id === 'api' && (
         <Select
           label="Number of projects you need"
-          selected={projectNumber}
-          setSelected={setProjectNumber}
-          setQuery={setProjectNumberQuery}
-          items={filteredProjectNumberItems}
+          control={control}
+          items={projectNumberOptions}
           name="number_of_projects"
-          {...register('number_of_projects')}
-        /> 
-        } */}
+        />
+      )}
 
       <Field
         label="Additional details"

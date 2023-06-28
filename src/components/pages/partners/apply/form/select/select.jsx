@@ -10,9 +10,8 @@ import Button from 'components/shared/button/button';
 const Select = ({
   name,
   label,
-  selected,
-  setSelected,
-  setQuery,
+  selected = null,
+  setSelected = null,
   items,
   multiple = false,
   multipleRef = null,
@@ -27,10 +26,12 @@ const Select = ({
         className="relative"
         as="div"
         multiple={multiple}
-        value={value}
+        value={selected || value}
         onChange={(e) => {
           onChange(e);
-          setSelected(e);
+          if (typeof setSelected === 'function') {
+            setSelected(e);
+          }
         }}
       >
         <Combobox.Label>{label}</Combobox.Label>
