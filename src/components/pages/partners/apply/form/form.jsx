@@ -27,21 +27,32 @@ const applicationScopeOptions = [
   { id: 'delete', name: 'Delete projects' },
 ];
 
+const projectNumberOptions = [
+  { id: '1000', name: '1000 projects' },
+  { id: '5000', name: '5000 projects' },
+  { id: '5000+', name: '5000+ projects' },
+];
+
+const useFilteredItems = (items, query) =>
+  useMemo(
+    () =>
+      query === ''
+        ? items
+        : items.filter((item) => item.name.toLowerCase().includes(query.toLowerCase())),
+    [items, query]
+  );
+
 const Form = ({ className }) => {
   const [integrationType, setIntegrationType] = useState(integrationTypeOptions[0]);
   const [integrationQuery, setIntegrationQuery] = useState('');
 
+  const [projectNumber, setProjectNumber] = useState(projectNumberOptions[0]);
+  const [projectNumberQuery, setProjectNumberQuery] = useState('');
+
   const [applicationScopes, setApplicationScopes] = useState([]);
 
-  const filteredIntegrationItems = useMemo(
-    () =>
-      integrationQuery === ''
-        ? integrationTypeOptions
-        : integrationTypeOptions.filter((item) =>
-            item.name.toLowerCase().includes(integrationQuery.toLowerCase())
-          ),
-    [integrationQuery]
-  );
+  const filteredIntegrationItems = useFilteredItems(integrationTypeOptions, integrationQuery);
+  const filteredProjectNumberItems = useFilteredItems(projectNumberOptions, projectNumberQuery);
 
   return (
     <form
@@ -156,6 +167,16 @@ const Form = ({ className }) => {
           />
         </>
       )}
+      {integrationType.id === 'api' && (
+        <Select
+          label="Number of projects you need"
+          selected={projectNumber}
+          setSelected={setProjectNumber}
+          setQuery={setProjectNumberQuery}
+          items={filteredProjectNumberItems}
+        />
+      )}
+
       <Field
         label="Additional details"
         name="additionalDetails"
