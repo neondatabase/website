@@ -139,7 +139,7 @@ const Form = ({ className }) => {
     e.preventDefault();
 
     const data = { ...formData };
-    console.log(data);
+
     data.application_scope = data.application_scope?.map(({ id }) => id).join(';');
     data.integration_type = data.integration_type.name;
 
