@@ -73,7 +73,12 @@ const Select = ({ label, selected, setSelected, setQuery, items, multiple = fals
       <Combobox.Options className="absolute top-full mt-1.5 flex w-full flex-col gap-y-3 rounded border border-gray-new-15 bg-[#1c1d1e] p-4">
         {items.map((item) => (
           <Combobox.Option
-            className="cursor-pointer text-sm leading-none transition-colors duration-200 hover:text-green-45 ui-active:text-green-45"
+            className={clsx(
+              'cursor-pointer text-sm leading-none transition-colors duration-200 hover:text-green-45 ui-active:text-green-45',
+              {
+                'ui-selected:text-gray-new-70': multiple,
+              }
+            )}
             key={item.id}
             value={item}
             disabled={multiple ? selected.includes(item) : false}
