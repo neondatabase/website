@@ -43,32 +43,25 @@ const Sidebar = ({ className = null, sidebar, currentSlug }) => (
   </aside>
 );
 
+export const sidebarPropTypes = PropTypes.arrayOf(
+  PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    slug: PropTypes.string,
+    ariaLabel: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.exact({
+        title: PropTypes.string.isRequired,
+        slug: PropTypes.string,
+        items: PropTypes.arrayOf(PropTypes.any),
+        ariaLabel: PropTypes.string,
+      })
+    ),
+  })
+).isRequired;
+
 Sidebar.propTypes = {
   className: PropTypes.string,
-  sidebar: PropTypes.arrayOf(
-    PropTypes.exact({
-      title: PropTypes.string.isRequired,
-      slug: PropTypes.string,
-      items: PropTypes.arrayOf(
-        PropTypes.exact({
-          title: PropTypes.string.isRequired,
-          slug: PropTypes.string,
-          items: PropTypes.arrayOf(
-            PropTypes.exact({
-              title: PropTypes.string.isRequired,
-              slug: PropTypes.string,
-              items: PropTypes.arrayOf(
-                PropTypes.exact({
-                  title: PropTypes.string,
-                  slug: PropTypes.string,
-                })
-              ),
-            })
-          ),
-        })
-      ),
-    })
-  ).isRequired,
+  sidebar: sidebarPropTypes,
   currentSlug: PropTypes.string.isRequired,
 };
 

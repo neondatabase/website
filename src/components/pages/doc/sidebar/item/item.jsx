@@ -6,14 +6,20 @@ import React, { useState } from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 
 const isActiveItem = (items, currentSlug) =>
   items?.some(
     ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
   );
 
-const Item = ({ title, slug = null, isStandalone = null, items = null, currentSlug }) => {
+const Item = ({
+  title,
+  slug = null,
+  ariaLabel = null,
+  isStandalone = null,
+  items = null,
+  currentSlug,
+}) => {
   const [isOpen, setIsOpen] = useState(slug === currentSlug);
 
   if (!isOpen && isActiveItem(items, currentSlug)) {
@@ -42,14 +48,16 @@ const Item = ({ title, slug = null, isStandalone = null, items = null, currentSl
         target={externalSlug ? '_blank' : '_self'}
         onClick={handleClick}
       >
-        <span className="leading-snug">{title}</span>
-        <ChevronRight
+        {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
+        <span className="leading-snug" aria-hidden={!!ariaLabel}>
+          {title}
+        </span>
+        <span
           className={clsx(
-            'mx-2 mt-[5px] shrink-0 transition-[transform,color] duration-200',
+            'arrow-mask block h-4 w-4 transition-[transform,background-color] duration-200',
             currentSlug === slug
-              ? 'text-black-new dark:text-white'
-              : 'text-gray-new-40 group-hover:text-black-new dark:text-gray-new-90 dark:group-hover:text-white',
-
+              ? 'bg-black-new dark:bg-white'
+              : 'bg-gray-new-40 group-hover:bg-black-new dark:bg-gray-new-90 dark:group-hover:bg-white',
             items?.length ? 'block' : 'hidden',
             isOpen ? 'rotate-90' : 'rotate-0'
           )}
@@ -75,28 +83,13 @@ Item.propTypes = {
   title: PropTypes.string.isRequired,
   isStandalone: PropTypes.bool,
   slug: PropTypes.string,
+  ariaLabel: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.exact({
       title: PropTypes.string.isRequired,
       slug: PropTypes.string,
-      items: PropTypes.arrayOf(
-        PropTypes.exact({
-          title: PropTypes.string,
-          slug: PropTypes.string,
-          items: PropTypes.arrayOf(
-            PropTypes.exact({
-              title: PropTypes.string,
-              slug: PropTypes.string,
-              items: PropTypes.arrayOf(
-                PropTypes.exact({
-                  title: PropTypes.string,
-                  slug: PropTypes.string,
-                })
-              ),
-            })
-          ),
-        })
-      ),
+      items: PropTypes.arrayOf(PropTypes.any),
+      ariaLabel: PropTypes.string,
     })
   ),
   currentSlug: PropTypes.string.isRequired,

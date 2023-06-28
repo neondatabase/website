@@ -58,7 +58,9 @@ const Post = ({
         <article>
           <h1 className="text-[36px] font-semibold leading-tight xl:text-3xl">{title}</h1>
           {subtitle && (
-            <p className="my-2 text-xl leading-tight text-gray-4 dark:text-gray-6">{subtitle}</p>
+            <p className="my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80">
+              {subtitle}
+            </p>
           )}
           <Content className="mt-5" content={content} />
         </article>
