@@ -72,6 +72,6 @@
 }
 
 .logos {
-  mask-image: linear-gradient(90deg, transparent, #d9d9d9 12%, #d9d9d9 88%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #d9d9d9 12%, #d9d9d9 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #0c0d0d 40%, #0c0d0d 60%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #0c0d0d 40%, #0c0d0d 60%, transparent);
 }
