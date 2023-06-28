@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-The `hnsw` extension (currently in _Beta_) enables the use of the [Hierarchical Navigable Small World (HNSW)](https://arxiv.org/abs/1603.09320) algorithm for vector similarity search in PostgreSQL.
+The `hnsw` extension (currently in _Beta_) enables using the [Hierarchical Navigable Small World (HNSW)](https://arxiv.org/abs/1603.09320) algorithm for vector similarity search in PostgreSQL.
 
 
 
@@ -21,7 +21,7 @@ The `pg_vector` extension, also supported by Neon, is another option for vector 
 
 ## How HNSW search works
 
-The search process begins at the topmost layer of the HNSW graph. From the starting node, the algorithm navigates to the nearest neighbor in the same layer. This step is repeated until it can no longer find neighbors that are more similar to the query vector.
+The search process begins at the topmost layer of the HNSW graph. From the starting node, the algorithm navigates to the nearest neighbor in the same layer. This step repeats until it can no longer find neighbors more similar to the query vector.
 
 Using the found node as an entry point, the algorithm then moves down to the next layer in the graph and repeats the process of navigating to the "nearest neighbor". The process of navigating to the nearest neighbor and moving down a layer is repeated until the algorithm reaches the bottom layer.
 
@@ -31,19 +31,19 @@ The key idea behind HNSW is that by starting the search at the top layer and mov
 
 ## Using the hnsw extension
 
-This section describes how to use the `hnsw` extension in Neon using a simple example demonstrating the required statements, syntax, and options.
+This section describes how to use the `hnsw` extension in Neon using a simple example that demonstrates the required statements, syntax, and options.
 
 ### Enable the extension
 
-You can enable the `hnsw` extension in Neon by running the following `CREATE EXTENSION` statement in the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor).
+Enable the `hnsw` extension in Neon by running the following `CREATE EXTENSION` statement in the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor).
 
 ```sql
 CREATE EXTENSION hnsw;
 ```
 
-### Create a table for vector data
+### Create a table for your vector data
 
-Vectors can be stored in a table similar to the following:
+To store your vector data, create a table similar to the following:
 
 ```sql
 CREATE TABLE vectors(id INTEGER, vec REAL[]);
@@ -53,7 +53,7 @@ This statement generates a table named `vectors` with a `vec` column for storing
 
 ### Insert data
 
-To insert vector data, you would use an `INSERT` statement similar to the following.
+To insert vector data, use an `INSERT` statement similar to the following:
 
 ```sql
 INSERT INTO vectors(id, vec) 
@@ -63,19 +63,19 @@ VALUES
 (3, '{7.7, 8.8, 9.9}');
 ```
 
-The example above stores vectors with 3 dimensions. In a real-world example, the number of dimensions would be much larger. For example, OpenAI's `text-embedding-ada-002` model supports 1536 dimensions for each piece of text. For more information, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
+The statement above stores vectors with 3 dimensions. In a real-world example, the number of dimensions would be much larger. For example, OpenAI's `text-embedding-ada-002` model supports 1536 dimensions for each piece of text.
 
 ### Create the HNSW index
 
-Use a `CREATE INDEX` statement similar to the following to create an `hnsw` index on your vector colum:
+To create the HNSW index on your vector column, use a `CREATE INDEX` statement similar to the following:
 
 ```sql
 CREATE INDEX ON vectors USING hnsw(vec) WITH (maxelements=3, dims=3, m=3);
 ```
 
-The following HNSW index options are used in the statement above:
+The HNSW index options used in the statement above include:
 
-- `maxelements`: Defines the maximum number of elements indexed. This is a required parameter. The example has a value of `3`. A real-world example might have a much large value, such as `1000000`. An "element" refers to a data point (a vector) in the dataset, each represented as a node in the an HNSW graph. Typically, you would set this option to a value able to accommodate the number of rows in your in your dataset.
+- `maxelements`: Defines the maximum number of elements indexed. This is a required parameter. The example shown above has a value of `3`. A real-world example would have a much large value, such as `1000000`. An "element" refers to a data point (a vector) in the dataset, each represented as a node in the HNSW graph. Typically, you would set this option to a value able to accommodate the number of rows in your in your dataset.
 - `dims`: Defines the number of dimensions in your vector data.  This is a required parameter. A small value is used in the example above. If you are storing data generated using OpenAI's `text-embedding-ada-002` model, which supports 1536 dimensions, you would define a value of `1536`, for example.
 - `m`: Defines the maximum number of bi-directional links (also referred to as "edges") created for each node during graph construction.
 
@@ -88,7 +88,7 @@ For information about how you can configure these options to influence the HNSW 
 
 ## Query the indexed data
 
-To query the `vectors` table for nearest neighbors, you can use a query similar to this:
+To query the `vectors` table for nearest neighbors, use a query similar to this:
 
 ```sql
 SELECT id FROM vectors ORDER BY vec <-> array[1.1, 2.2, 3.3] LIMIT 2;
@@ -105,27 +105,27 @@ In summary, the query retrieves the IDs of the two records from the `vectors` ta
 
 ## Tuning the HNSW algorithm
 
-The `m`, `efConstruction`, and `efSearch` options described above allow you to tune the HNSW algorithm when creating an index:
+The `m`, `efConstruction`, and `efSearch` options allow you to tune the HNSW algorithm when creating an index:
 
 - `m`: Defines the maximum number of bi-directional links (also referred to as "edges") created for each node during graph construction. A higher value increases accuracy (recall) but also increases the size of the index in memory and index construction time.
 - `efContsruction`: Defines the number of nearest neighbors considered during index construction. The default value is `32`. This setting influences the trade-off between index quality and construction speed. A high `efConstruction` value creates a higher quality graph, enabling more accurate search results, but a higher value also means that index construction takes longer.
-- `efSearch`: Defines the number of nearest neighbors considered during index search. The default value is `32`.  This setting influences the trade-off between query accuracy (recall) and speed. A higher `efSearch` value increases accuracy at the cost of speed. This value should be equal or larger than k (the number of nearest neighbors you want your search to return).
+- `efSearch`: Defines the number of nearest neighbors considered during index search. The default value is `32`.  This setting influences the trade-off between query accuracy (recall) and speed. A higher `efSearch` value increases accuracy at the cost of speed. This value should be equal to or larger than k (the number of nearest neighbors you want your search to return).
 
-If you want to prioritize for search speed over accuracy, you would use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over speed, you would use higher value for `m` and `efSearch`, and also use a higher `efContsruction` value to support more accurate search results.
+In summary, to prioritize for search speed over accuracy, you would use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over speed, you would use higher value for `m` and `efSearch`. At the cost of index build time, you can also use a higher `efContsruction` value to enable more accurate search results.
 
 <Admonition type="info">
-A benchmark performed by Neon using the _GIST-960 Euclidean dataset_, which provides a training set of 1 million vectors of 960 dimensions, and a test set of 100, used the following index option values:
+Benchmarks performed by Neon using the _GIST-960 Euclidean dataset_, which provides a training set of 1 million vectors of 960 dimensions, were run with different index option values:
 
-- `m`: 32, 64, 128
-- `efConstruction`: 64, 128, 256
-- `efSearch`: 32, 64, 128, 256, 512
+- `m`: 32, 64, and 128
+- `efConstruction`: 64, 128, and 256
+- `efSearch`: 32, 64, 128, 256, and 512
 
-For more information about the benchmark, see [Introducing the HNSW Index for vector search in Postgres](tbd).
+Consider experimenting with some different settings to find the combination that works best for your application. For more information about the benchmark, see [Introducing the HNSW Index for vector search in Postgres](tbd).
 </Admonition>
 
 ## Comparing the hnsw extension to pg_vector
 
-When determining which index to use, `pg_vector` with an IVFFlat or HNSW, it's helpful to compare the two based on specific criteria:
+When determining which index to use, `pg_vector` with an IVFFlat or HNSW, it's helpful to compare based on specific criteria, such as:
 
 - Search speed
 - Accuracy
@@ -135,15 +135,15 @@ When determining which index to use, `pg_vector` with an IVFFlat or HNSW, it's h
 
 |                   | `pgvector` with IVFFlat    | HNSW     |
 |-------------------|------------|----------|
-| Search Speed      | Fast but search speed depends on the number of clusters examined. More clusters mean higher accuracy but slower search times. | Typically faster than IVFFlat, especially in high-dimensional spaces, thanks to its graph-based nature. |
+| Search Speed      | Fast, but search speed depends on the number of clusters examined. More clusters mean higher accuracy but slower search times. | Typically faster than IVFFlat, especially in high-dimensional spaces, thanks to its graph-based nature. |
 | Accuracy          | Can achieve high accuracy but at the cost of examining more clusters and  longer search times. | Generally achieves higher accuracy for the same memory footprint compared to IVFFlat. |
 | Memory Usage      | Uses less memory since it only stores the centroids of clusters and the lists of vectors within these clusters. | Uses more memory because it maintains a graph structure with multiple layers. |
 | Index Construction Speed | Index building process is relatively fast. The data points are assigned to the nearest centroid, and inverted lists are constructed. | Index construction involves building multiple layers of graphs, which can be computationally intensive, especially if you choose high values for the parameter ef_construction. |
 | Distance Metrics  | Typically used for L2 distances, but pgvector also supports inner product and cosine distance. | Currently supports L2 distance metrics. |
 
-Ultimately, the choice between the `pg_vector` with an IVFFlat or HNSW depends on your use case and requirements:
+Ultimately, the choice between the `pg_vector` with IVFFlat or HNSW depends on your use case and requirements. Here are few additional points to consider when making your choice:
 
-- Memory constraints: If you are working under strict memory constraints, you may opt for the IVFFlat index as it typically consumes less memory than HNSW. However, be mindful that this might come at the cost of search speed and accuracy.
+- Memory constraints: If you are working under strict memory constraints, you may opt for the IVFFlat index, as it typically consumes less memory than HNSW. However, be mindful that this might come at the cost of search speed and accuracy.
 - Search speed: If your primary concern is the speed at which you can retrieve nearest neighbors, especially in high-dimensional spaces, the HNSW extension is likely the better choice due to its graph-based approach.
 - Accuracy and recall: If achieving high accuracy and recall is critical for your application, HNSW may be the better option. Its graph-based approach generally yields better recall compared to IVFFlat.
 - Distance metrics: Both `pgvector` and `hnsw` support L2 distance metric (`<->`). Additionally, `pgvector` supports inner product (`<#>`) and cosine distance (`<=>`).
