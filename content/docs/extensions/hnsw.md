@@ -14,7 +14,7 @@ HNSW is a graph-based approach to indexing multi-dimensional data. It constructs
 Neon's `hnsw` extension is based on the [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw.git) implementation of the HSNW algorithm, presented in the article [Revisiting the Inverted Indices for Billion-Scale Approximate Nearest Neighbors](https://openaccess.thecvf.com/content_ECCV_2018/html/Dmitry_Baranchuk_Revisiting_the_Inverted_ECCV_2018_paper.html).
 
 <Admonition type="note">
-The `pg_vector` extension, also supported by Neon, is another option for vector similarity search. For information on which index to choose, refer to the [Comparing the hnsw extension to pg_vector](#comparing-the-hnsw-extension-to-pg_vector) section.
+The `pg_vector` extension, also supported by Neon, is another option for vector similarity search. For information on which index to choose, refer to [Comparing the hnsw extension to pg_vector](#comparing-the-hnsw-extension-to-pg_vector).
 </Admonition>
 
 ## How HNSW search works
