@@ -106,13 +106,13 @@ In summary, the query retrieves the IDs of the two records from the `vectors` ta
 
 ## Tuning the HNSW algorithm
 
-The `m`, `efSearch`, and `efConstruction` are parameters control the behavior of the HNSW algorithm.
+The following options allow you to tune the HNSW algorithm for speed and accuracy, according to your requirements.
 
-- `m`: Defines the maximum number of bi-directional links (also referred to as "edges") created for each node in the graph during graph construction. A higher value increases recall but also the memory consumption and construction time.
-- `efSearch`: Defines the size of the dynamic list used during the search phase. The setting  influences the trade-off between query speed and accuracy (recall). A higher `efSearch` value  increases the accuracy but also query time.
-- `efConstruction`: This is the size of the dynamic list used during the construction phase. It influences the trade-off between the index quality and the construction speed. A higher value of efConstruction will improve the quality of the index but also increase the construction time. . A high `efConstruction` value creates a higher quality graph and offers more accurate search results, but it also means the index building process takes longer. (e.g., `efsearch=16`)
+- `m`: Defines the maximum number of bi-directional links (also referred to as "edges") created for each node during graph construction. A higher value increases accuracy (recall) but also increases the size of the index in memory and index construction time.
+- `efSearch`: Defines the size of the dynamic list used during search. This setting influences the trade-off between query accuracy (recall) and speed. A higher `efSearch` value increases accuracy at the cost of speed.
+- `efConstruction`: Defines the size of the dynamic list used during graph construction. This setting influences the trade-off between index quality and construction speed. A higher value  improves index quality at the cost of construction time. A high `efConstruction` value creates a higher quality graph and offers more accurate search results, but it means index construction takes longer. (e.g., `efsearch=16`)
 
-These parameters allow you to tune the HNSW algorithm according to your specific needs. For example, if you need to prioritize speed over accuracy, you might choose lower values for `m` and `efSearch`. On the other hand, if you need to prioritize accuracy over speed, you might choose higher values. A high value produces more accurate search results but at the cost of increased search time. This value should be equal or larger than k (the number of nearest neighbors you want your search to return). (e.g., `efsearch=64`)
+For example, if you need to prioritize speed over accuracy, you would lower values for `m` and `efSearch`. On the other hand, if you need to prioritize accuracy over speed, you might choose higher values. A high value produces more accurate search results but at the cost of increased search time. This value should be equal or larger than k (the number of nearest neighbors you want your search to return). (e.g., `efsearch=64`)
 
 ## Comparing the hnsw extension to pg_vector
 
@@ -124,9 +124,9 @@ When determining which index to use, `pg_vector` with an IVFFlat or HNSW, it's h
 - Index construction speed
 - Distance metrics
 
-|                   | IVFFlat    | HNSW     |
+|                   | `pgvector` with IVFFlat    | HNSW     |
 |-------------------|------------|----------|
-| Search Speed      | Fast, but the search speed depends on the number of clusters examined. More clusters mean higher accuracy but slower search times. | Typically faster than IVFFlat, especially in high-dimensional spaces, thanks to its graph-based nature. |
+| Search Speed      | Fast but search speed depends on the number of clusters examined. More clusters mean higher accuracy but slower search times. | Typically faster than IVFFlat, especially in high-dimensional spaces, thanks to its graph-based nature. |
 | Accuracy          | Can achieve high accuracy but at the cost of examining more clusters and hence longer search times. | Generally achieves higher accuracy for the same memory footprint compared to IVFFlat. |
 | Memory Usage      | It uses relatively less memory since it only stores the centroids of clusters and the lists of vectors within these clusters. | Generally uses more memory because it maintains a graph structure with multiple layers. |
 | Index Construction Speed | Index building process is relatively fast. The data points are assigned to the nearest centroid, and inverted lists are constructed. | Index construction involves building multiple layers of graphs, which can be computationally intensive, especially if you choose high values for the parameter ef_construction. |
