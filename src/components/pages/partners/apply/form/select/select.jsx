@@ -5,7 +5,7 @@ import { Controller } from 'react-hook-form';
 
 import ChevronIcon from 'components/pages/partners/apply/images/chevron.inline.svg';
 
-const Select = ({ name, label, selected = null, setSelected = null, items, control }) => (
+const Select = ({ name, label, selected = null, setSelected = null, options, control }) => (
   <Controller
     control={control}
     name={name}
@@ -37,7 +37,7 @@ const Select = ({ name, label, selected = null, setSelected = null, items, contr
           </Combobox.Button>
         </div>
         <Combobox.Options className="absolute top-full z-10 mt-1.5 flex w-full flex-col gap-y-3 rounded border border-gray-new-15 bg-[#1c1d1e] p-4">
-          {items.map((item) => (
+          {options.map((item) => (
             <Combobox.Option
               className="cursor-pointer text-sm leading-none transition-colors duration-200 hover:text-green-45 ui-active:text-green-45"
               key={item.id}
@@ -72,7 +72,7 @@ Select.propTypes = {
     ),
   ]),
   setSelected: PropTypes.func,
-  items: PropTypes.arrayOf(
+  options: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,

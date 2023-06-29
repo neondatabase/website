@@ -188,7 +188,7 @@ const Form = ({ className }) => {
         label="What type of integration do you need? *"
         selected={integrationType}
         setSelected={setIntegrationType}
-        items={integrationTypeOptions}
+        options={integrationTypeOptions}
         name="integration_type"
       />
 
@@ -279,7 +279,7 @@ const Form = ({ className }) => {
         <Select
           label="Number of projects you need"
           control={control}
-          items={projectNumberOptions}
+          options={projectNumberOptions}
           name="number_of_projects"
         />
       )}
