@@ -15,7 +15,7 @@ const Testimonial = ({ className = null, ariaHidden = false }) => (
         Neon a no-brainer.”
       </p>
     </blockquote>
-    <figcaption className="mt-6 flex flex-col text-lg leading-tight tracking-[-0.02em] xl:text-base lg:mt-5">
+    <figcaption className="mt-6 flex flex-col text-lg leading-tight tracking-[-0.02em] xl:text-base lg:mt-5 md:mt-4">
       Lincoln Bergeson{' '}
       <cite className="mt-1.5 not-italic text-gray-new-60">Infrastructure Engineer at Replit</cite>
     </figcaption>
@@ -28,17 +28,17 @@ Testimonial.propTypes = {
 };
 
 const Apply = () => (
-  <section className="apply-form safe-paddings mb-40 mt-[200px] xl:mb-[120px] xl:mt-36 lg:mb-24 lg:mt-28">
+  <section className="apply-form safe-paddings mb-40 mt-[200px] xl:mb-[120px] xl:mt-36 lg:mb-24 lg:mt-28 md:my-20">
     <Container className="grid-gap-x grid grid-cols-12" size="lg">
       <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 xl:col-span-full xl:col-start-1 xl:grid-cols-12">
         <div className="col-span-5 lg:col-span-full lg:text-center">
           <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none text-green-45 lg:px-2.5 lg:text-[10px]">
             Apply now
           </span>
-          <h2 className="mt-2 text-[56px] font-medium leading-none tracking-tighter xl:text-[44px] lg:text-4xl">
+          <h2 className="mt-2 text-[56px] font-medium leading-none tracking-tighter xl:text-[44px] lg:text-4xl md:text-3xl">
             Become a Partner
           </h2>
-          <p className="lg:flat-breaks mt-4 text-lg font-light leading-snug xl:text-base">
+          <p className="lg:flat-breaks sm:flat-none mt-4 text-lg font-light leading-snug xl:text-base md:mt-2.5">
             Not sure about the right partnership option?
             <br />
             <Link theme="green" to={LINKS.contactSales}>
@@ -49,8 +49,8 @@ const Apply = () => (
 
           <Testimonial className="lg:hidden" />
         </div>
-        <Form className="col-span-5 xl:col-span-7 lg:col-span-full lg:mt-8" />
-        <Testimonial className="col-span-full hidden lg:mt-7 lg:block" ariaHidden />
+        <Form className="col-span-5 xl:col-span-7 lg:col-span-full lg:mt-8 md:mt-6" />
+        <Testimonial className="col-span-full hidden lg:mt-7 lg:block md:mt-6" ariaHidden />
       </div>
     </Container>
   </section>

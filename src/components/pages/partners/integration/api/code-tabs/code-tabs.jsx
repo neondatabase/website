@@ -104,19 +104,19 @@ const CodeTabs = ({ className = null }) => {
             className={clsx(
               'relative px-[18px] py-3 transition-colors duration-200 after:absolute after:left-0 after:top-full after:-mt-px after:h-0.5 after:w-full after:transition-colors after:duration-200 hover:text-white lg:flex-1',
               language === activeLanguage
-                ? 'text-white after:bg-green-45'
+                ? 'text-white after:bg-green-45 md:after:bg-transparent'
                 : 'text-gray-new-60 after:bg-transparent'
             )}
             type="button"
             key={index}
             onClick={() => setActiveLanguage(language)}
           >
-            <Icon className="mr-2.5 inline-block h-6 w-6" />
-            {name}
+            <Icon className="mr-2.5 inline-block h-6 w-6 md:mr-0 md:h-8 md:w-8" />
+            <span className="md:hidden">{name}</span>
           </button>
         ))}
       </div>
-      <div className="min-h-[384px] pb-7 pl-[18px] pt-[18px] lg:pb-6 lg:pl-3.5 lg:pt-3.5">
+      <div className="min-h-[384px] pb-7 pl-[18px] pt-[18px] lg:pb-6 lg:pl-3.5 lg:pt-3.5 md:py-4 md:pl-4">
         <LazyMotion features={domAnimation}>
           <AnimatePresence initial={false} mode="wait">
             {codeSnippets.map(
@@ -134,7 +134,7 @@ const CodeTabs = ({ className = null }) => {
                       language={language}
                       code={code}
                       showLineNumbers
-                     />
+                    />
                   </m.figure>
                 )
             )}

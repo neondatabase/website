@@ -64,7 +64,7 @@ const Benefits = () => (
                 <h3 className="text-[22px] font-medium leading-tight tracking-[-0.02em] xl:text-xl md:text-lg">
                   {title}
                 </h3>
-                <p className="md:text-2 mt-2 font-light leading-snug text-gray-new-70 xl:mt-[11px]">
+                <p className="md:text-2 mt-2 font-light leading-snug text-gray-new-70 xl:mt-[11px] md:mt-2">
                   {description}
                 </p>
               </div>

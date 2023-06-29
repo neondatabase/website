@@ -116,7 +116,7 @@ const Form = ({ className }) => {
     <form
       className={clsx(
         className,
-        'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 py-11 leading-none xl:px-7 xl:py-8'
+        'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 py-11 leading-none xl:px-7 xl:py-8 md:px-5 md:py-6'
       )}
       method="POST"
       onSubmit={handleSubmit(onSubmit)}
@@ -130,7 +130,7 @@ const Form = ({ className }) => {
         name="integration_type"
       />
 
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-1">
         <Field
           label="First Name *"
           name="firstname"
@@ -146,7 +146,7 @@ const Form = ({ className }) => {
           error={errors.lastname?.message}
         />
       </div>
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-1">
         <Field
           label="Email *"
           type="email"
@@ -234,9 +234,9 @@ const Form = ({ className }) => {
         name="message"
         {...register('message')}
       />
-      <div className="relative flex flex-col gap-y-6 lg:mt-3 lg:flex-row lg:items-center lg:gap-x-5">
+      <div className="relative flex flex-col gap-y-6 lg:mt-3 lg:flex-row lg:items-center lg:gap-x-5 md:mt-2 md:flex-col md:items-stretch md:gap-y-4">
         <Button
-          className="mt-3 h-[52px] py-[17px] text-lg font-medium leading-none tracking-[-0.02em] lg:order-1 lg:ml-auto lg:mt-0 lg:basis-[316px]"
+          className="mt-3 h-[52px] py-[17px] text-lg font-medium leading-none tracking-[-0.02em] lg:order-1 lg:ml-auto lg:mt-0 lg:basis-[316px] md:order-none md:ml-0 md:w-full md:basis-full"
           theme="primary"
           type="submit"
         >
@@ -264,7 +264,7 @@ const Form = ({ className }) => {
           .
         </p>
         {formError && (
-          <span className="absolute left-1/2 top-[calc(100%+1rem)] w-full -translate-x-1/2 text-sm leading-none text-secondary-1">
+          <span className="absolute left-1/2 top-[calc(100%+1rem)] w-full -translate-x-1/2 text-sm leading-none text-secondary-1 xl:static xl:translate-x-0 lg:absolute lg:top-[calc(100%+0.25rem)] lg:-translate-x-1/2 md:static md:translate-x-0">
             {formError}
           </span>
         )}

@@ -44,6 +44,7 @@
     @screen sm {
       --logos-sprite-width: 1911px;
       --logos-glow-size: 144px;
+      --logos-glow-gradient-opacity: 10%;
     }
 
     @apply relative overflow-hidden;
