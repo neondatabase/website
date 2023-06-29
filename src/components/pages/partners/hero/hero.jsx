@@ -8,11 +8,10 @@ import logoPattern from './images/logo-pattern.png';
 const Hero = () => (
   <section className="hero safe-paddings relative overflow-hidden pb-52 pt-[349px] xl:pb-[166px] xl:pt-[328px]">
     <Image
-      className="absolute left-1/2 top-12 h-auto w-[1920px] max-w-none -translate-x-1/2 object-cover xl:top-4"
+      className="absolute left-1/2 top-0 h-auto w-[1920px] max-w-none -translate-x-1/2 object-cover xl:top-[-18px]"
       src={logoPattern}
-      width={1920}
-      height={827}
       alt=""
+      quality={85}
       priority
       aria-hidden
     />

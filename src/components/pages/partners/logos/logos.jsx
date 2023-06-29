@@ -1,9 +1,9 @@
-import React from 'react';
+import Container from 'components/shared/container/container';
 
 const Logos = () => (
-  <div className="logos">
+  <Container className="logos w-full" size="lg">
     <div className="logos-front" />
     <div className="logos-back" />
-  </div>
+  </Container>
 );
 export default Logos;
