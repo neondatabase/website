@@ -6,9 +6,9 @@ import Container from 'components/shared/container/container';
 import logoPattern from './images/logo-pattern.png';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative overflow-hidden pb-52 pt-[349px] xl:pb-[166px] xl:pt-[328px] lg:pb-[134px] lg:pt-52">
+  <section className="hero safe-paddings relative overflow-hidden pb-52 pt-[349px] xl:pb-[166px] xl:pt-[328px] lg:pb-[134px] lg:pt-52 md:pb-[94px] md:pt-[135px]">
     <Image
-      className="absolute left-1/2 top-0 h-auto w-[1920px] max-w-none -translate-x-1/2 object-cover xl:top-[-18px] lg:top-[-68px] lg:w-[1460px]"
+      className="absolute left-1/2 top-0 h-auto w-[1920px] max-w-none -translate-x-1/2 object-cover xl:top-[-18px] lg:top-[-68px] lg:w-[1460px] md:top-[-76px] md:w-[1200px]"
       src={logoPattern}
       alt=""
       quality={85}
@@ -16,16 +16,16 @@ const Hero = () => (
       aria-hidden
     />
     <Container className="relative z-10 flex flex-col items-center text-center" size="lg">
-      <h1 className="mx-auto max-w-[968px] text-[72px] font-medium leading-none tracking-tighter xl:text-[56px] lg:text-[52px]">
+      <h1 className="mx-auto max-w-[968px] text-[72px] font-medium leading-none tracking-tighter xl:text-[56px] lg:text-[52px] md:text-4xl">
         Unlock <mark className="bg-transparent text-green-45">additional revenue</mark> stream by
         partnering with Neon
       </h1>
-      <p className="mt-5 text-xl font-light lg:mt-4 lg:text-lg">
+      <p className="mt-5 text-xl font-light lg:mt-4 lg:text-lg md:text-base">
         Bring familiar, reliable and scalable Postgres experience to your customers.
       </p>
       {/* TODO: add link become a partner */}
       <AnimatedButton
-        className="relative mt-8 px-[34px] py-[17px] text-lg font-semibold tracking-[-0.02em] lg:mt-9"
+        className="relative mt-8 px-[34px] py-[17px] text-lg font-semibold tracking-[-0.02em] lg:mt-9 md:mt-7"
         theme="primary"
         spread={5}
         //  to="/"
