@@ -5,7 +5,7 @@ import LINKS from 'constants/links';
 import Form from './form';
 
 const Apply = () => (
-  <section className="apply-form safe-paddings mb-10 mt-[200px] xl:mb-[120px] xl:mt-36">
+  <section className="apply-form safe-paddings mb-40 mt-[200px] xl:mb-[120px] xl:mt-36">
     <Container className="grid-gap-x grid grid-cols-12" size="lg">
       <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 xl:col-span-full xl:col-start-1 xl:grid-cols-12">
         <div className="col-span-5">
