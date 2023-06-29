@@ -21,8 +21,8 @@
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
-      box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.04) inset;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: 0 0 0 1000px #1c1d1e inset;
+      border: 1px solid #1c1d1e;
       transition: background-color 600000s 0s, color 600000s 0s;
     }
   }

@@ -59,6 +59,7 @@ const Form = ({ className }) => {
       application_scope: [],
       integration_type: integrationTypeOptions[0],
       are_api_calls_from_backend: 'No',
+      number_of_projects: '',
     },
   });
 
