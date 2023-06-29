@@ -18,6 +18,7 @@ import LINKS from 'constants/links';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 import AddIcon from '../images/add.inline.svg';
+import LoadingIcon from '../images/loading.inline.svg';
 
 import Field from './field';
 import MultiSelect from './multi-select';
@@ -108,15 +109,13 @@ const schema = yup
 
 const Form = ({ className }) => {
   const [integrationType, setIntegrationType] = useState(integrationTypeOptions[0]);
-  const [, setFormState] = useState(FORM_STATES.DEFAULT);
+  const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
   const {
     register,
     handleSubmit,
     setValue,
     control,
-    formState: {
-      // errors
-    },
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -128,7 +127,7 @@ const Form = ({ className }) => {
 
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
-  const [, setFormError] = useState('');
+  const [formError, setFormError] = useState('');
 
   const context = {
     hutk: hubspotutk,
@@ -196,8 +195,15 @@ const Form = ({ className }) => {
           name="firstname"
           placeholder="Marques"
           {...register('firstname')}
+          error={errors.firstname?.message}
         />
-        <Field label="Last Name *" name="lastname" placeholder="Hansen" {...register('lastname')} />
+        <Field
+          label="Last Name *"
+          name="lastname"
+          placeholder="Hansen"
+          {...register('lastname')}
+          error={errors.lastname?.message}
+        />
       </div>
       <div className="grid grid-cols-2 gap-5">
         <Field
@@ -206,8 +212,15 @@ const Form = ({ className }) => {
           name="email"
           placeholder="info@acme.com"
           {...register('email')}
+          error={errors.email?.message}
         />
-        <Field label="Company Name *" name="company" placeholder="Acme" {...register('company')} />
+        <Field
+          label="Company Name *"
+          name="company"
+          placeholder="Acme"
+          {...register('company')}
+          error={errors.company?.message}
+        />
       </div>
       {integrationType.id === 'oauth' && (
         <>
@@ -275,30 +288,41 @@ const Form = ({ className }) => {
         name="message"
         {...register('message')}
       />
-      <Button
-        className="mt-3 h-[52px] py-[17px] text-lg font-medium leading-none tracking-[-0.02em]"
-        theme="primary"
-        type="submit"
-      >
-        Apply now
-      </Button>
-      <p className="text-[15px] font-light leading-snug">
-        By submitting you agree to the{' '}
-        <Link
-          className="text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors duration-200 hover:decoration-transparent"
-          to={LINKS.termsOfService}
+      <div className="relative flex flex-col gap-y-6">
+        <Button
+          className="mt-3 h-[52px] py-[17px] text-lg font-medium leading-none tracking-[-0.02em]"
+          theme="primary"
+          type="submit"
         >
-          Terms Service
-        </Link>{' '}
-        and acknowledge the{' '}
-        <Link
-          className="inline-block text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors hover:decoration-transparent"
-          to={LINKS.privacyPolicy}
-        >
-          Privacy Policy
-        </Link>
-        .
-      </p>
+          {formState === FORM_STATES.LOADING && (
+            <LoadingIcon className="h-8 w-8 animate-spin text-black-new" />
+          )}
+          {formState === FORM_STATES.DEFAULT && 'Apply now'}
+          {formState === FORM_STATES.SUCCESS && 'Applied!'}
+        </Button>
+        <p className="text-[15px] font-light leading-snug">
+          By submitting you agree to the{' '}
+          <Link
+            className="text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors duration-200 hover:decoration-transparent"
+            to={LINKS.termsOfService}
+          >
+            Terms Service
+          </Link>{' '}
+          and acknowledge the{' '}
+          <Link
+            className="inline-block text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors hover:decoration-transparent"
+            to={LINKS.privacyPolicy}
+          >
+            Privacy Policy
+          </Link>
+          .
+        </p>
+        {formError && (
+          <span className="absolute left-1/2 top-[calc(100%+1rem)] w-full -translate-x-1/2 text-sm leading-none text-secondary-1">
+            {formError}
+          </span>
+        )}
+      </div>
     </form>
   );
 };
