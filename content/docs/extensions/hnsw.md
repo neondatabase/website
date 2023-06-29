@@ -112,13 +112,13 @@ The `m`, `efConstruction`, and `efSearch` options allow you to tune the HNSW alg
 In summary, to prioritize for search speed over accuracy, you would use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over search speed, you would use higher value for `m` and `efSearch`. At the cost of index build time, you can also use a higher `efConstruction` value to enable more accurate search results.
 
 <Admonition type="info">
-For an idea of how to set the index option values, consider the benchmarks performed by Neon using the _GIST-960 Euclidean dataset_, which provides a training set of 1 million vectors of 960 dimensions. The benchmarks were run with this series of index option values:
+For an idea of how to set the index option values, consider the benchmark performed by Neon using the _GIST-960 Euclidean dataset_, which provides a training set of 1 million vectors of 960 dimensions. The benchmark was run with this series of index option values:
 
 - `m`: 32, 64, and 128
 - `efConstruction`: 64, 128, and 256
 - `efSearch`: 32, 64, 128, 256, and 512
 
-To learn more about the benchmark, see [Introducing the HNSW Index for vector search in Postgres](tbd). Try experimenting with different settings to find the combination that works best for your particular application.
+To learn more about the benchmark, see [Introducing the HNSW Index for vector search in Postgres](https://neon.tech/blog). Try experimenting with different settings to find the ones that work best for your particular application.
 </Admonition>
 
 ## Comparing HNSW to pgvector
