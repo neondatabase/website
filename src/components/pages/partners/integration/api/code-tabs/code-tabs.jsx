@@ -5,12 +5,11 @@ import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
+import BashIcon from 'components/pages/partners/integration/images/bash.inline.svg';
+import JavascriptIcon from 'components/pages/partners/integration/images/javascript.inline.svg';
+import PHPIcon from 'components/pages/partners/integration/images/php.inline.svg';
+import RubyIcon from 'components/pages/partners/integration/images/ruby.inline.svg';
 import CodeBlock from 'components/shared/code-block/code-block';
-
-import BashIcon from '../../images/bash.inline.svg';
-import JavascriptIcon from '../../images/javascript.inline.svg';
-import PHPIcon from '../../images/php.inline.svg';
-import RubyIcon from '../../images/ruby.inline.svg';
 
 const codeSnippets = [
   {

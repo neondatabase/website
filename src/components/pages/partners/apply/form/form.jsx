@@ -109,6 +109,7 @@ const schema = yup
 
 const Form = ({ className }) => {
   const [integrationType, setIntegrationType] = useState(integrationTypeOptions[0]);
+  const [projectNumber, setProjectNumber] = useState(projectNumberOptions[0]);
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
   const {
     register,
@@ -279,8 +280,11 @@ const Form = ({ className }) => {
         <Select
           label="Number of projects you need"
           control={control}
+          selected={projectNumber}
+          setSelected={setProjectNumber}
           options={projectNumberOptions}
           name="number_of_projects"
+          placeholder="Select an option"
         />
       )}
 
@@ -300,7 +304,7 @@ const Form = ({ className }) => {
           {formState === FORM_STATES.LOADING && (
             <LoadingIcon className="h-8 w-8 animate-spin text-black-new" />
           )}
-          {formState === FORM_STATES.DEFAULT && 'Apply now'}
+          {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && 'Apply now'}
           {formState === FORM_STATES.SUCCESS && 'Applied!'}
         </Button>
         <p className="text-[15px] font-light leading-snug">

@@ -31,7 +31,7 @@ const MultiSelect = ({ control, setValue }) => {
           <ul className="flex flex-wrap gap-x-2 gap-y-1">
             {applicationScopes.map((item) => (
               <li
-                className="flex items-center gap-x-1 rounded-[20px] bg-green-45 py-[5px] pl-2.5 pr-[7px] font-medium leading-none text-black-new"
+                className="relative z-10 flex items-center gap-x-1 rounded-[20px] bg-green-45 py-[5px] pl-2.5 pr-[7px] font-medium leading-none text-black-new"
                 key={item.id}
               >
                 <span className="text-sm leading-none">{item.name}</span>
@@ -54,12 +54,7 @@ const MultiSelect = ({ control, setValue }) => {
           className={clsx('pointer-events-none absolute inset-0 opacity-0 focus:outline-none')}
           disabled
         />
-        <Combobox.Button
-          className={clsx(
-            'absolute right-0 top-1/2 flex h-full -translate-y-1/2 items-center justify-end pr-4',
-            applicationScopes?.length ? 'w-10' : 'w-full'
-          )}
-        >
+        <Combobox.Button className="absolute right-0 top-1/2 flex h-full w-full -translate-y-1/2 items-center justify-end pr-4">
           <ChevronIcon className="h-4 w-4" />
         </Combobox.Button>
       </div>
