@@ -70,8 +70,8 @@ Select.propTypes = {
         name: PropTypes.string.isRequired,
       })
     ),
-  ]).isRequired,
-  setSelected: PropTypes.func.isRequired,
+  ]),
+  setSelected: PropTypes.func,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
