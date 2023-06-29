@@ -11,6 +11,9 @@ export default function getMetadata({
   robotsNoindex,
   rssPathname = null,
   pathname,
+  type = 'website',
+  publishedTime = null,
+  authors = [],
   imagePath = DEFAULT_IMAGE_PATH,
 }) {
   const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
@@ -37,6 +40,7 @@ export default function getMetadata({
     manifest: `${SITE_URL}/manifest.json`,
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots,
+    themeColor: '#00e699',
     icons: {
       icon: '/favicon/favicon.png',
       apple: [
@@ -61,6 +65,9 @@ export default function getMetadata({
           url: metaImageUrl,
         },
       ],
+      type,
+      publishedTime,
+      authors,
     },
     twitter: {
       card: 'summary_large_image',

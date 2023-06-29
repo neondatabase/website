@@ -52,6 +52,7 @@ module.exports = {
       },
       'gray-new': {
         8: '#131415',
+        10: '#18191B',
         15: '#242628',
         20: '#303236',
         30: '#494B50',
@@ -166,9 +167,61 @@ module.exports = {
               '-1px -1px 0 transparent, 1px -1px 0 transparent, -1px 1px 0 transparent, 1px 1px 0 transparent',
           },
         },
+        loading: {
+          '0%': {
+            opacity: 1,
+          },
+          '50%': {
+            opacity: 0.5,
+          },
+          '100%': {
+            opacity: 1,
+          },
+        },
+        fadeInOverlay: {
+          '0%': {
+            opacity: 0,
+          },
+          '100%': {
+            opacity: 1,
+          },
+        },
+        fadeOutOverlay: {
+          '0%': {
+            opacity: 1,
+          },
+          '100%': {
+            opacity: 0,
+          },
+        },
+        dialogShow: {
+          '0%': {
+            opacity: 0,
+            transform: 'translateY(-2%) scale(.96)',
+          },
+          '100%': {
+            opacity: 1,
+            transform: 'translateY(0) scale(1)',
+          },
+        },
+        dialogHide: {
+          '0%': {
+            opacity: 1,
+            transform: 'translateY(0) scale(1)',
+          },
+          '100%': {
+            opacity: 0,
+            transform: 'translateY(-2%) scale(.96)',
+          },
+        },
       }),
       animation: {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        'fade-in-overlay': 'fadeInOverlay 0.2s',
+        'fade-out-overlay': 'fadeOutOverlay 0.2s',
+        'dialog-show': 'dialogShow 0.3s cubic-bezier(.16,1,.3,1)',
+        'dialog-hide': 'dialogHide 0.3s cubic-bezier(.16,1,.3,1)',
+        loading: 'loading 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       typography: () => ({
         DEFAULT: {
@@ -184,5 +237,11 @@ module.exports = {
       }),
     },
   },
-  plugins: [require('tailwindcss-safe-area'), require('@tailwindcss/typography')],
+  plugins: [
+    require('tailwindcss-safe-area'),
+    require('@tailwindcss/typography'),
+    require('tailwindcss/plugin')(({ addVariant }) => {
+      addVariant('search-cancel', '&::-webkit-search-cancel-button');
+    }),
+  ],
 };

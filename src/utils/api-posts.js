@@ -29,7 +29,11 @@ const getAllWpBlogCategories = async () => {
     }
   `;
   const data = await graphQLClient.request(categoriesQuery);
-  return data?.categories?.nodes;
+  const filteredCategories = data?.categories?.nodes.filter(
+    (category) => category.slug !== 'uncategorized'
+  );
+
+  return filteredCategories;
 };
 
 const getWpPostsByCategorySlug = async (slug) => {
@@ -326,6 +330,8 @@ const getWpPostBySlug = async (slug) => {
         }
         slug
         date
+        dateGmt
+        modifiedGmt
         title(format: RENDERED)
         content(format: RENDERED)
         readingTime
@@ -428,6 +434,8 @@ const getWpPreviewPostData = async (id, status) => {
           }
           slug
           date
+          dateGmt
+          modifiedGmt
           title(format: RENDERED)
           content(format: RENDERED)
           readingTime
@@ -598,11 +606,11 @@ const getWpPreviewPostData = async (id, status) => {
     // TODO: Pass seo data to head component
 
     const sortedPosts = revisionPostData?.posts?.nodes
-      .filter((post) => post.slug !== revisionPostData?.post?.revisions?.edges[0].slug)
+      .filter((post) => post.slug !== revisionPostData?.post?.revisions?.edges[0].post.slug)
       .slice(0, 3);
 
     return {
-      post: revisionPostData?.post?.revisions?.edges[0],
+      post: revisionPostData?.post?.revisions?.edges[0].post,
       relatedPosts: sortedPosts,
     };
   }

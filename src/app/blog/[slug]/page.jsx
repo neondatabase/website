@@ -1,4 +1,4 @@
-import { previewData as getPreviewData } from 'next/headers';
+import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 import Aside from 'components/pages/blog-post/aside';
@@ -6,6 +6,7 @@ import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
+import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import CodeBlock from 'components/shared/code-block';
@@ -16,22 +17,24 @@ import getFormattedDate from 'utils/get-formatted-date';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
-const BlogPage = async ({ params }) => {
-  const previewData = getPreviewData();
-  const isPreviewMode = !!previewData;
+const BlogPage = async ({ params, searchParams }) => {
+  const { isEnabled: isDraftModeEnabled } = draftMode();
 
   let postResult;
 
-  if (isPreviewMode) {
-    postResult = await getWpPreviewPostData(previewData.id, previewData.status);
+  if (isDraftModeEnabled) {
+    postResult = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
   } else {
     postResult = await getWpPostBySlug(params?.slug);
   }
 
   const { post, relatedPosts } = postResult;
-  if (!post) return notFound();
 
-  const { slug, title, content, pageBlogPost, date, categories } = post;
+  if (!post) {
+    return notFound();
+  }
+
+  const { slug, title, content, pageBlogPost, date, dateGmt, modifiedGmt, categories, seo } = post;
   const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${LINKS.blog}/${slug}`;
   const formattedDate = getFormattedDate(date);
 
@@ -44,6 +47,20 @@ const BlogPage = async ({ params }) => {
     true
   );
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    image: [seo?.twitterImage?.mediaItemUrl],
+    datePublished: dateGmt,
+    dateModified: modifiedGmt,
+    description: pageBlogPost?.description,
+    author: {
+      '@type': 'Person',
+      name: pageBlogPost?.authors?.[0].author.title,
+    },
+  };
+
   return (
     <Layout
       className="bg-black-new text-white"
@@ -52,6 +69,10 @@ const BlogPage = async ({ params }) => {
       footerWithTopBorder
       isHeaderSticky
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="safe-paddings bg-gray-new-8">
         <article className="dark mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pb-40 pt-16 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
           <Hero
@@ -82,14 +103,7 @@ const BlogPage = async ({ params }) => {
         </article>
       </div>
       <SubscribeForm />
-      {isPreviewMode && (
-        <a
-          href={`/api/exit-preview?slug=${previewData.slug}&pageType=blog`}
-          className="t-base fixed bottom-5 left-5 inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-primary-1 px-[26px] py-[11px] text-center font-bold !leading-none text-black outline-none transition-colors duration-200 hover:bg-[#00e5bf]"
-        >
-          Preview Mode
-        </a>
-      )}
+      {isDraftModeEnabled && <PreviewWarning />}
     </Layout>
   );
 };
@@ -110,7 +124,11 @@ export async function generateMetadata({ params }) {
       opengraphDescription,
       twitterImage,
     },
+    date,
+    pageBlogPost,
   } = post;
+
+  const authors = pageBlogPost.authors.map(({ author }) => author?.title);
 
   return getMetadata({
     title: opengraphTitle || title,
@@ -119,6 +137,9 @@ export async function generateMetadata({ params }) {
     robotsNoindex: metaRobotsNoindex,
     pathname: `${LINKS.blog}/${slug}`,
     imagePath: twitterImage?.mediaItemUrl,
+    type: 'article',
+    publishedTime: date,
+    authors,
   });
 }
 

@@ -119,13 +119,13 @@ const Workflows = () => {
       >
         <div className="relative col-start-2 col-end-5 flex justify-between xl:col-start-1 md:hidden">
           {isWrapperInView && (
-            <div className="absolute left-0 -top-20 h-[calc(100%+80px)] w-[609px] 2xl:w-[592px] xl:-top-[60px] xl:w-[456px] lg:-top-[47px] lg:w-[358px]">
+            <div className="absolute -top-20 left-0 h-[calc(100%+80px)] w-[609px] 2xl:w-[592px] xl:-top-[60px] xl:w-[456px] lg:-top-[47px] lg:w-[358px]">
               <RiveComponent width={609} height={3561} />
             </div>
           )}
         </div>
         <div
-          className="relative z-10 col-start-6 col-end-12 flex min-h-[3482px] flex-col pt-32 pb-[245px] 3xl:pt-28 2xl:col-start-7 2xl:col-end-13 2xl:min-h-[3383px] xl:col-start-6 xl:min-h-[2608px] xl:pt-20 xl:pb-[195px] lg:min-h-[2046px] lg:pt-10 lg:pb-[88px] md:col-span-full md:min-h-0 md:max-w-none md:pt-16 md:pb-0"
+          className="relative z-10 col-start-6 col-end-12 flex min-h-[3482px] flex-col pb-[245px] pt-32 3xl:pt-28 2xl:col-start-7 2xl:col-end-13 2xl:min-h-[3383px] xl:col-start-6 xl:min-h-[2608px] xl:pb-[195px] xl:pt-20 lg:min-h-[2046px] lg:pb-[88px] lg:pt-10 md:col-span-full md:min-h-0 md:max-w-none md:pb-0 md:pt-16"
           ref={setContainerRef}
         >
           <Heading className="t-5xl font-bold leading-tight" tag="h2">

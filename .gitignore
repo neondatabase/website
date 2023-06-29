@@ -62,10 +62,9 @@ typings/
 .next/
 
 # ignore local sitemap
+public/sitemap.xml
 public/sitemap-0.xml
-
-sitemap.xml
-sitemap-0.xml
+public/robots.txt
 
 # Mac files
 .DS_Store
@@ -77,6 +76,5 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 
-.vscode/snipsnap.code-snippets
-
 .idea/
+.vscode/

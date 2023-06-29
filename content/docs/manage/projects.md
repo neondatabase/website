@@ -11,26 +11,26 @@ A project is the top-level object in the [Neon object hierarchy](../manage/overv
 A Neon project is created with the following resources, by default:
 
 - A primary branch called `main`. You can create child branches from the primary branch or from a previously created branch. For more information, see [Manage branches](../manage/branches).
-- A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage compute endpoints](../manage/endpoints).
+- A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage computes](../manage/endpoints).
 - A default database, called `neondb`, which resides in the project's primary branch.
 - A default PostgreSQL role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
 
 ## Create a project
 
-Neon Free Tier users can create a single project. Support for multiple projects is available to Neon [paid plan](../introduction/billing#neon-plans) users.
+Neon Free Tier users can create a single project. Support for multiple projects is available to Neon [Pro plan](../introduction/pro-plan) users.
 
 To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
-3. Specify a name, a PostgreSQL version, and a region. If you are a Neon [paid plan](../introduction/billing#neon-plans) user, you can also specify compute size settings. Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size and Autoscaling configuration](../manage/endpoints#compute-size-and-autoscaling-configuration).
+3. Specify a name, a PostgreSQL version, and a region. If you are a Neon [Pro plan](../introduction/pro-plan) user, you can also specify compute size settings. Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size and Autoscaling configuration](../manage/endpoints#compute-size-and-autoscaling-configuration). Project names are limited to 64 characters.
 4. Click **Create Project**.
 
 Upon creating a project, you are presented with a dialog that provides your connection details for the default `neondb` database, including your password.
 
 ## Compute size configuration with Autoscaling
 
-Neon [paid plan](../introduction/billing#neon-plans) users can configure compute size settings when [creating a project](#create-a-project).
+Neon [Pro plan](../introduction/pro-plan) users can configure compute size settings when [creating a project](#create-a-project).
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
 
@@ -99,7 +99,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a project with the API
 
-The following Neon API method creates a project. The [Neon Free Tier](../introduction/technical-preview-free-tier) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
+The following Neon API method creates a project. The [Neon Free Tier](../introduction/free-tier) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
 
 ```text
 POST /projects

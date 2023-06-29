@@ -1,8 +1,5 @@
-import DiscourseIcon from 'icons/discourse.inline.svg';
-import GithubIcon from 'icons/github.inline.svg';
-import LinkedinIcon from 'icons/linkedin.inline.svg';
-import TwitterIcon from 'icons/twitter.inline.svg';
-import YoutubeIcon from 'icons/youtube.inline.svg';
+import CalendarIcon from 'icons/calendar.inline.svg';
+import TransactionsIcon from 'icons/transactions.inline.svg';
 
 import LINKS from './links';
 
@@ -80,6 +77,10 @@ export default {
           text: 'Pricing',
           to: LINKS.pricing,
         },
+        {
+          text: 'Contact Sales',
+          to: LINKS.contactSales,
+        },
 
         // {
         //   text: 'Release notes',
@@ -118,12 +119,12 @@ export default {
         {
           text: 'Twitter',
           to: LINKS.twitter,
-          icon: TwitterIcon,
+          icon: 'twitter-icon',
         },
         {
           text: 'LinkedIn',
           to: LINKS.linkedin,
-          icon: LinkedinIcon,
+          icon: 'linkedin-icon',
         },
         // {
         //   text: 'Discord',
@@ -132,17 +133,17 @@ export default {
         {
           text: 'GitHub',
           to: LINKS.github,
-          icon: GithubIcon,
+          icon: 'github-icon',
         },
         {
           text: 'Discourse',
           to: LINKS.discourse,
-          icon: DiscourseIcon,
+          icon: 'discourse-icon',
         },
         {
           text: 'YouTube',
           to: LINKS.youtube,
-          icon: YoutubeIcon,
+          icon: 'youtube-icon',
         },
       ],
     },
@@ -198,6 +199,18 @@ export default {
     {
       text: 'Community',
       to: LINKS.discourse,
+    },
+  ],
+  docSidebar: [
+    {
+      icon: TransactionsIcon,
+      title: 'API Reference',
+      slug: LINKS.apiReference,
+    },
+    {
+      icon: CalendarIcon,
+      title: 'Release notes',
+      slug: LINKS.releaseNotes,
     },
   ],
 };

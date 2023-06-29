@@ -36,7 +36,13 @@ To establish a basic connection from Prisma to Neon, perform the following steps
 
 3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. Your setting will appear similar to the following:
 
-   `DATABASE_URL="postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb"`
+   <CodeBlock shouldWrap>
+
+   ```text
+   DATABASE_URL="postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb"
+   ```
+
+   </CodeBlock>
 
 <Admonition type="important">
 If you are using Prisma Client from a serverless function, see [Connect from serverless functions](#connect-from-serverless-functions). To adjust your connection string to avoid connection timeouts issues, see [Connection timeouts](#connection-timeouts).
@@ -44,25 +50,18 @@ If you are using Prisma Client from a serverless function, see [Connect from ser
 
 ## Connect from serverless functions
 
-Serverless functions typically require a large number of database connections. When connecting from Prisma Client to Neon from a serverless function, you should use a pooled connection string. Neon uses the PgBouncer connection pooler, which maintains a pool of connections to the database, allowing Neon to support a large number of concurrent connections.
-
-To use a pooled connection from Prisma, adjust your Neon connection string by adding a `-pooler` suffix to the endpoint ID and appending the `?pgbouncer=true` flag to the connection string, as shown:
+Serverless functions typically require a large number of database connections. When connecting from Prisma Client to Neon from a serverless function, use a pooled connection string with a `?pgbouncer=true` flag, as shown:
 
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true`
+DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true
 ```
 
 </CodeBlock>
 
-The `-pooler` suffix tells Neon to use a pooled connection rather than a direct connection. The `?pgbouncer=true` flag requires that the connection uses PgBouncer.
-
-<Admonition type="info">
-The **Connection Details** widget on the Neon **Dashboard** provides a **Pooled connection** tab with a pooled connection string that you can copy and paste.
-</Admonition>
-
-For more information about PgBouncer and pooled connection strings, see [Enable connection pooling](../connect/connection-pooling#enable-connection-pooling). For related information in the _Prisma documentation_, refer to [Add pgbouncer to the connection URL](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
+- The pooled connection string has a `-pooler` suffix appended to the endpoint ID, which tells Neon to use a pooled connection rather than a direct connection. The **Connection Details** widget on the Neon **Dashboard** provides a **Pooled connection** tab with a pooled connection string that you can copy and paste.
+- Neon uses the PgBouncer connection pooler. Prisma requires the `?pgbouncer=true` flag when using Prisma Client with PgBouncer, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 
 ## Connection timeouts
 
@@ -95,7 +94,7 @@ DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon
 A `connect_timeout` setting of 0 means no timeout.
 </Admonition>
 
-Another possible cause of connection timeouts is [Prisma's connection pool](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/), which has a default timeout of 10 seconds. This is typically enough time for Neon, but if you are still experiencing connection timeouts, you can try increasing this limit (in addition to the `connect_timeout` setting described above) by setting the `pool_timeout` parameter to a higher value. For example:
+Another possible cause of connection timeouts is [Prisma's connection pool](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/), which has a default timeout of 10 seconds. This is typically enough time for your Neon compute to activate, but if you are still experiencing connection timeouts, you can try increasing both the `connect_timeout` limit described above and the `pool_timeout` parameter (for Prisma) to a higher value. For example:
 
 <CodeBlock shouldWrap>
 
@@ -104,7 +103,22 @@ DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon
 ```
 
 </CodeBlock>
-  
+
+<Admonition type="info">
+If you are working with a large Prisma schema, Prisma recently introduced a new preview feature that expresses queries using `JSON` instead of GraphQL. The JSON implementation uses less CPU and memory, which can help reduce latencies when connecting from Prisma.
+
+To try the new protocol, enable the `jsonProtocol` Preview feature in your Prisma schema:
+
+```text
+generator client {
+  provider        = "prisma-client-js"  
+  previewFeatures = ["jsonProtocol"]
+}
+```
+
+You can read more about this feature here: [Preview feature feedback](https://github.com/prisma/prisma/issues/18095).
+</Admonition>
+
 For additional information about connecting from Prisma, refer to the following resources in the _Prisma documentation_:
 
 - [Connection management](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management)

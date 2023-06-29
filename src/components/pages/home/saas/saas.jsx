@@ -38,9 +38,9 @@ const SaaS = () => {
             className="t-2xl mt-5 max-w-[600px] text-white 2xl:mt-4 2xl:max-w-[488px] xl:max-w-[400px] lg:max-w-none"
           >
             SaaS companies use Neon to maximize engineering velocity and minimize costs. Our
-            serverless architecture reduces compute and storage expenses.
-            Specifically, Neon's autoscaling capabilities prevent over-provisioning 
-            and paying for under-utilized instances.
+            serverless architecture reduces compute and storage expenses. Specifically, Neon's
+            autoscaling capabilities prevent over-provisioning and paying for under-utilized
+            instances.
           </p>
           <Button
             id="saas-button"

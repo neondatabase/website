@@ -47,7 +47,7 @@ const CTA = () => {
             form below to get in touch with our Sales team
           </p>
           <AnimatedButton
-            className="mt-8 inline-flex !py-5 !px-14 !text-lg tracking-tight hover:bg-[#00FFAA] xl:!px-11 xl:!py-[17px] lg:mt-6 md:mx-auto md:flex md:w-48"
+            className="mt-8 inline-flex !px-14 !py-5 !text-lg tracking-tight hover:bg-[#00FFAA] xl:!px-11 xl:!py-[17px] lg:mt-6 md:mx-auto md:flex md:w-48"
             theme="primary"
             to={links.contactSales}
             size="sm"
@@ -74,7 +74,7 @@ const CTA = () => {
           <div ref={setRiveRef}>
             {isContentInView ? (
               <RiveComponent
-                className="absolute top-[184px] left-1/2 h-[140px] w-[89px] -translate-x-1/2 2xl:top-[142px] 2xl:h-[140px] 2xl:w-[74px] xl:top-[124px] xl:h-[78px] xl:w-[58px] lg:hidden"
+                className="absolute left-1/2 top-[184px] h-[140px] w-[89px] -translate-x-1/2 2xl:top-[142px] 2xl:h-[140px] 2xl:w-[74px] xl:top-[124px] xl:h-[78px] xl:w-[58px] lg:hidden"
                 width={74}
                 height={140}
                 aria-hidden

@@ -5,17 +5,15 @@ import React, { useEffect, useRef } from 'react';
 import Button from 'components/shared/button';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import MENUS from 'constants/menus.js';
+import MENUS from 'constants/menus';
 import useClickOutside from 'hooks/use-click-outside';
 
-// import DiscordIcon from './images/mobile-menu-discord.inline.svg';
 import DiscussionsIcon from './images/mobile-menu-discussions.inline.svg';
 import GithubIcon from './images/mobile-menu-github.inline.svg';
 
 const ANIMATION_DURATION = 0.2;
 
 const icons = {
-  // discord: DiscordIcon,
   github: GithubIcon,
   discussions: DiscussionsIcon,
 };
@@ -57,7 +55,7 @@ const MobileMenu = ({ isOpen = false, headerRef, onOutsideClick }) => {
 
   return (
     <motion.nav
-      className="absolute right-8 left-8 top-16 z-[-1] hidden rounded-2xl bg-white px-5 pt-1 pb-7 lg:block md:right-4 md:left-4"
+      className="absolute left-8 right-8 top-16 z-[-1] hidden rounded-2xl bg-white px-5 pb-7 pt-1 lg:block md:left-4 md:right-4"
       initial="from"
       animate={controls}
       variants={variants}

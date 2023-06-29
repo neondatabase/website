@@ -1,5 +1,6 @@
 ---
 title: Connect from any application
+subtitle: Learn how to connect to Neon from any application
 enableTableOfContents: true
 ---
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch. The primary branch in a Neon project is created with a default database named `neondb`.
@@ -49,15 +50,23 @@ PGPORT='5432'
 
 Variable:
 
+<CodeBlock shouldWrap>
+
 ```text
 DATABASE_URL="postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech:5432/neondb"
 ```
 
+</CodeBlock>
+
 Command-line:
+
+<CodeBlock shouldWrap>
 
 ```bash
 psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
 ```
+
+</CodeBlock>
 
 <Admonition type="note">
 Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](../connect/connect-securely).
@@ -81,7 +90,7 @@ Our *Guides* documentation also provides connection examples.
 
 ## Connection notes
 
-- Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](../reference/glossary#sni) support and require a workaround. For more information, see [Connect from old clients](../connect/connectivity-issues).
+- Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](../reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](../connect/connection-errors).
 - Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For an example, see [Connect a GUI or IDE](../connect/connect-postgres-gui#connect-to-the-database).
 
 ## Need help?
