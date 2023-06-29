@@ -33,7 +33,7 @@ const Api = () => (
       <h3 className="text-4xl font-medium leading-tight tracking-tighter xl:text-[32px] lg:text-center lg:text-[28px] md:text-[22px]">
         API
       </h3>
-      <p className="mt-5 text-lg font-light leading-snug xl:mt-4 xl:text-base lg:mx-auto lg:max-w-[584px] lg:text-center md:mt-2.5">
+      <p className="mt-5 max-w-[590px] text-lg font-light leading-snug xl:mt-4 xl:text-base lg:mx-auto lg:max-w-[584px] lg:text-center md:mt-2.5">
         Manage Projects, branches, databases, and more. Easily integrate Neon in your Product and
         offer it to your users.
       </p>
