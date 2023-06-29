@@ -36,7 +36,7 @@ const Select = ({ name, label, selected = null, setSelected = null, items, contr
             <ChevronIcon className="h-4 w-4" />
           </Combobox.Button>
         </div>
-        <Combobox.Options className="absolute top-full mt-1.5 flex w-full flex-col gap-y-3 rounded border border-gray-new-15 bg-[#1c1d1e] p-4">
+        <Combobox.Options className="absolute top-full z-10 mt-1.5 flex w-full flex-col gap-y-3 rounded border border-gray-new-15 bg-[#1c1d1e] p-4">
           {items.map((item) => (
             <Combobox.Option
               className="cursor-pointer text-sm leading-none transition-colors duration-200 hover:text-green-45 ui-active:text-green-45"
