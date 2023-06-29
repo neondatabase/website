@@ -1,37 +1,41 @@
 ---
 title: Read replicas
+subtitle: Learn about Neon's unique read replica feature
 enableTableOfContents: true
 isDraft: true
 ---
 
-A read replica is a copy of your data that resides on a read-only compute instance. Neon uses the native replication mechanisms of PostgreSQL to keep read replicas up to date with the latest changes.
+In Neon, read replicas are implemented as independent read-only compute instances that can perform read operations on the same data accessed by your read-write computes — a capability enabled by Neon's unique architecture that separates compute and storage. As your read-write compute instances introduce changes, read-replica computes are able to access those changes in real-time.
 
-Read replicas are a Neon [Pro plan](/docs/introduction/pro-plan) feature. Read replicas are not available with the [Neon Free Tier](/docs/introduction/technical-preview-free-tier).
+![Read-only compute instances](/docs/introduction/read-replicas.png)
 
-You can only create read replicas in the same region as your Neon project. Support for creating read replicas in a different region will be added in a future release.
+Unlike traditional read-replica implementations, Neon's read replicas do not require replicating data across database instances. Instead, they provide simultaneous, direct access to the same data, resulting in efficient use of storage, immediate data consistency, and no data latency.
 
-The read replica feature offers several advantages. With read replicas, you can:
+Read replicas are a Neon [Pro plan](/docs/introduction/pro-plan) feature. This feature is not available with the [Neon Free Tier](/docs/introduction/technical-preview-free-tier).
 
-- Add dedicated compute resources to achieve higher read throughput.
-- Direct analytical workloads to a read replica with its own compute resources to  avoid impacting the performance of your application workload
-- Provide read-only database access to specific users or applications
-- Configure right-sized compute resources for different users and applications
+## Neon read replica advantages
 
-## Creating a read replica
+Advantages of Neon's read replica feature include:
 
-A read replica is created when you add a read-only compute endpoint to a database branch, which you can do in just a few clicks.
+- Efficient use of storage: All instances access shared data. A read replica in Neon requires no additional storage.
+- Immediate data consistency: In typical replication setups, maintaining data consistency across all replicas, especially under write-intensive workloads, can pose a challenge, and delays in propagating changes to replicas can lead to data inconsistencies. Neon read replicas offer immediate data consistency, with all compute instances (read and write) accessing a single, definitive source of data.
+- Streamlined scaling: As no data replication is required, read replicas can be created instantly in Neon, enabling easy and rapid scaling, and read replica compute can be dispose of just as quickly.
+- No data latency: Traditional replication can result in data latency, due to the time taken to propagate changes from a primary database instance to its replicas, which could lead to stale data being accessed from the replicas. Neon read replicas avoid this issue by having all data read from the same source.
+- Cost-effectiveness: By eliminating data replication, Neon's read replica implementation avoids costs associated with data transfer and storage. Neon's read-replica compute instances also benefit from the same features as our read-write computes, including autoscaling and scale-to-zero.
 
-To create a read-only compute endpoint:
+## Use cases
 
-1. In the Neon Console, select **Branches**.
-1. Select the branch where your database resides.
-1. Click **Add new compute endpoint**.
-1. On the **Create compute endpoint** dialog, select the **Read-only** option.
+Potential use cases for Neon's read replicas include:
 
-Your read replica is created with the read-only endpoint.
+- Distributing read requests to one or more read replicas to achieve higher throughput.
+- Directing business reporting or analytical workloads to a read replica with its own compute resources to avoid impacting the performance of your read-write application workload.
+- Providing read-only data access to specific users or applications who do not require write access.
+- Configuring right-sized compute resources for different users and applications.
 
-## Connecting to a read replica
+<Admonition type="note">
+Currently, you can only provision read replicas in the same region as your Neon project. Support for creating read replicas in a different region will be added in a future release.
+</Admonition>
 
-Connecting to a read replica requires connecting to the read-only compute endpoint. You can access the connection string from the **Connection Details** widget on the Neon **Dashboard**.
+## Get started with Neon read replicas
 
-Users and applications that connect to the read-only compute endpoint are connecting to a read replica.
+To get started with Neon read replicas, refer to our read replicas guide.
