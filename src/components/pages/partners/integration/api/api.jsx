@@ -1,5 +1,5 @@
 import CardItemsList from '../card-items-list';
-import bookIcon from '../images/book.svg';
+import fileIcon from '../images/file.svg';
 import transactionsIcon from '../images/transactions.svg';
 import videoIcon from '../images/video.svg';
 
@@ -7,17 +7,18 @@ import CodeTabs from './code-tabs';
 
 const items = [
   {
-    icon: transactionsIcon,
-    title: 'API reference',
+    icon: fileIcon,
+    title: 'Docs',
     description: 'Learn more about Neon API',
-    url: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
+    url: '/docs/reference/api-reference',
   },
   {
-    icon: bookIcon,
-    title: 'Blog post',
-    description: 'Neon is powering Vercel Postgres',
-    url: '/blog/neon-postgres-on-vercel',
+    icon: transactionsIcon,
+    title: 'API reference',
+    description: 'Check out Neon API examples',
+    url: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   },
+
   {
     icon: videoIcon,
     title: 'Video',
