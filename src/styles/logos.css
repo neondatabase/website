@@ -1,0 +1,62 @@
+@layer components {
+  @keyframes ticker-front {
+    0% {
+      mask-position: 0 bottom;
+    }
+
+    100% {
+      mask-position: calc(var(--logos-sprite-width) * -1) bottom;
+    }
+  }
+
+  @keyframes ticker-back {
+    0% {
+      background-position: 0 bottom;
+    }
+
+    100% {
+      background-position: calc(var(--logos-sprite-width) * -1) bottom;
+    }
+  }
+
+  .logos {
+    --logos-sprite-width: 3032px;
+    --logos-sprite-height: 48px;
+    --logos-animation-duration: 50s;
+    --logos-glow-size: 504px;
+    --logos-glow-visual-compensation: 50px; /* Increase to enhance the glow, decrease to reduce */
+
+    @apply relative overflow-hidden;
+
+    height: var(--logos-sprite-height);
+  }
+
+  .logos-front {
+    @apply absolute bottom-0 left-0 z-20 w-full bg-transparent;
+
+    height: calc(var(--logos-glow-size) - 50px);
+
+    background-image: radial-gradient(
+      var(--logos-glow-size) at top,
+      theme('colors.green.45') 0%,
+      transparent 100%
+    );
+    mask-image: url('/images/partners-logos.svg');
+    mask-repeat: repeat-x;
+    mask-position: 0 bottom;
+    mask-size: var(--logos-sprite-width) var(--logos-sprite-height);
+
+    animation: ticker-front var(--logos-animation-duration) linear infinite;
+  }
+
+  .logos-back {
+    @apply absolute bottom-0 left-0 z-10 h-full w-full before:absolute before:bottom-0 before:left-0 before:top-0 before:w-[100px] before:bg-gradient-to-r before:from-black-new before:to-transparent after:absolute after:bottom-0 after:right-0 after:top-0 after:w-[100px] after:bg-gradient-to-l after:from-black-new after:to-transparent;
+
+    background-image: url('/images/partners-logos.svg');
+    background-repeat: repeat-x;
+    background-position: 0 bottom;
+    background-size: var(--logos-sprite-width) var(--logos-sprite-height);
+
+    animation: ticker-back var(--logos-animation-duration) linear infinite;
+  }
+}

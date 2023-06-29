@@ -214,14 +214,6 @@ module.exports = {
             transform: 'translateY(-2%) scale(.96)',
           },
         },
-        logos: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-100%)' },
-        },
-        'logos-hidden': {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(0%)' },
-        },
       }),
       animation: {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -230,8 +222,6 @@ module.exports = {
         'dialog-show': 'dialogShow 0.3s cubic-bezier(.16,1,.3,1)',
         'dialog-hide': 'dialogHide 0.3s cubic-bezier(.16,1,.3,1)',
         loading: 'loading 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        logos: 'logos 35s linear infinite',
-        'logos-hidden': 'logos-hidden 35s linear infinite',
       },
       typography: () => ({
         DEFAULT: {

@@ -70,8 +70,3 @@
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center center;
 }
-
-.logos {
-  mask-image: linear-gradient(90deg, transparent, #0c0d0d 40%, #0c0d0d 60%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #0c0d0d 40%, #0c0d0d 60%, transparent);
-}
