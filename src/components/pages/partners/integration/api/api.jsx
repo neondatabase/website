@@ -28,7 +28,7 @@ const items = [
 ];
 
 const Api = () => (
-  <div className="oauth grid-gap-x mt-[120px] grid grid-cols-10 items-center">
+  <div className="oauth grid-gap-x mt-40 grid grid-cols-10 items-center">
     <div className="order-1 col-span-5">
       <h3 className="text-4xl font-medium leading-tight tracking-tighter">API</h3>
       <p className="mt-5 text-lg font-light leading-snug">

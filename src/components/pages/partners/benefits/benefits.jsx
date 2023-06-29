@@ -33,12 +33,14 @@ const items = [
 const Benefits = () => (
   <section className="benefits safe-paddings mt-40">
     <Container className="grid-gap-x grid grid-cols-12" size="lg">
-      <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 rounded-[10px] bg-gray-new-8 px-14 pb-14 pt-[50px]">
-        <div className="col-span-4 col-start-1">
+      <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 gap-y-2 rounded-[10px] bg-gray-new-8 px-14 pb-14 pt-[50px]">
+        <div className="col-span-full">
           <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none text-green-45">
             Benefits
           </span>
-          <h2 className="mt-2 max-w-[322px] text-[56px] font-medium leading-none tracking-tighter">
+        </div>
+        <div className="col-span-4 col-start-1">
+          <h2 className="max-w-[322px] text-[56px] font-medium leading-none tracking-tighter">
             Why become a partner?
           </h2>
           <p className="mt-5 max-w-[362px] text-lg font-light leading-snug">
@@ -46,7 +48,7 @@ const Benefits = () => (
             Serverless Postgress in the Cloud easy to integrate, manage, and grow.
           </p>
         </div>
-        <ul className="col-start-5 col-end-11 grid max-w-[640px] grid-cols-2 gap-x-14 gap-y-12 pl-5">
+        <ul className="col-start-5 col-end-11 mt-2 grid max-w-[640px] grid-cols-2 gap-x-16 gap-y-12 pl-2.5">
           {items.map(({ icon, title, description }, index) => (
             <li className="flex items-start gap-x-3.5" key={index}>
               <img

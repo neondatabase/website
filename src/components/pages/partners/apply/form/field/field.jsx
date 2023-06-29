@@ -22,7 +22,7 @@ const Field = forwardRef(
     ref
   ) => (
     <div className={clsx('relative flex flex-col', className)}>
-      <label className="flex items-center" htmlFor="firstName">
+      <label className="flex items-center leading-none" htmlFor="firstName">
         {label}
         {tooltipId && tooltipContent && (
           <>
@@ -40,7 +40,7 @@ const Field = forwardRef(
       <Tag
         className={clsx(
           'remove-autocomplete-styles-apply-form mt-3 appearance-none rounded border bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 focus:outline-none',
-          Tag === 'textarea' ? 'py-3' : 'h-10',
+          Tag === 'textarea' ? 'min-h-[64px] py-3' : 'h-10',
           error
             ? 'border-secondary-1'
             : 'border-transparent hover:border-gray-new-15 focus:border-gray-new-15 active:border-gray-new-15'

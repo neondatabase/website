@@ -31,7 +31,7 @@ const Apply = () => (
                 provisioning made Neon a no-brainer.”
               </p>
             </blockquote>
-            <figcaption className="mt-6 flex flex-col leading-tight tracking-[-0.02em]">
+            <figcaption className="mt-6 flex flex-col text-lg leading-tight tracking-[-0.02em]">
               Lincoln Bergeson{' '}
               <cite className="mt-1.5 not-italic text-gray-new-60">
                 Infrastructure Engineer at Replit

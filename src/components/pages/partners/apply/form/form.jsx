@@ -72,7 +72,7 @@ const CallbackURLs = ({ register }) => {
       })}
       <button
         className={clsx(
-          'mt-3 flex items-center gap-x-2',
+          'mb-1 mt-3 flex items-center gap-x-2',
           shouldAddCallbackUrl ? 'text-green-45' : 'cursor-not-allowed text-gray-new-40'
         )}
         type="button"
@@ -176,7 +176,10 @@ const Form = ({ className }) => {
 
   return (
     <form
-      className={clsx(className, 'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 py-11')}
+      className={clsx(
+        className,
+        'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 py-11 leading-none'
+      )}
       method="POST"
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -233,7 +236,7 @@ const Form = ({ className }) => {
           <CallbackURLs register={register} />
           <fieldset>
             <legend>Will you be making API calls from a backend?</legend>
-            <div className="mt-3 flex items-center gap-x-8">
+            <div className="mt-5 flex items-center gap-x-8">
               <label className="flex items-center gap-x-[9px]" htmlFor="apiCallsYes">
                 <input
                   className="h-2 w-2 appearance-none rounded-full bg-transparent outline outline-1 outline-offset-2 outline-gray-new-40 checked:bg-primary-1"

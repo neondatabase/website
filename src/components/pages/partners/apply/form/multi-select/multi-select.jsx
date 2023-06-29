@@ -19,7 +19,7 @@ const MultiSelect = ({ control, setValue }) => {
   const [applicationScopes, setApplicationScopes] = useState([]);
   return (
     <Combobox
-      className="relative"
+      className="relative mt-1"
       as="div"
       value={applicationScopes}
       multiple

@@ -21,7 +21,7 @@ const Select = ({ name, label, selected = null, setSelected = null, items, contr
           }
         }}
       >
-        <Combobox.Label>{label}</Combobox.Label>
+        <Combobox.Label className="leading-none">{label}</Combobox.Label>
         <div className="relative mt-3">
           <Combobox.Input
             className="h-10 w-full appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 caret-transparent transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15"
