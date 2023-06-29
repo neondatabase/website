@@ -1,5 +1,5 @@
 import CardItemsList from '../card-items-list';
-import fileIcon from '../images/file.svg';
+import bookIcon from '../images/book.svg';
 import transactionsIcon from '../images/transactions.svg';
 import videoIcon from '../images/video.svg';
 
@@ -7,22 +7,22 @@ import CodeTabs from './code-tabs';
 
 const items = [
   {
-    icon: fileIcon,
-    title: 'Docs',
-    description: 'Read more about Neon API',
-    url: '/',
-  },
-  {
     icon: transactionsIcon,
     title: 'API reference',
-    description: 'Check Neon API examples',
-    url: '/',
+    description: 'Learn more about Neon API',
+    url: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
+  },
+  {
+    icon: bookIcon,
+    title: 'Blog post',
+    description: 'Neon is powering Vercel Postgres',
+    url: '/blog/neon-postgres-on-vercel',
   },
   {
     icon: videoIcon,
     title: 'Video',
     description: 'Replit integration via the API',
-    url: '/',
+    url: 'https://www.youtube.com/watch?v=aufotqDSmmE',
   },
 ];
 
@@ -31,8 +31,8 @@ const Api = () => (
     <div className="order-1 col-span-5">
       <h3 className="text-4xl font-medium leading-tight tracking-tighter">API</h3>
       <p className="mt-5 text-lg font-light leading-snug">
-        The Neon API allows you to manage Neon programmatically. With the Neon API, you can create
-        and manage all objects in your Neon account.
+        Manage Projects, branches, databases, and more. Easily integrate Neon in your Product and
+        offer it to your users.
       </p>
       <CardItemsList items={items} />
     </div>

@@ -8,13 +8,13 @@ const Integration = () => (
     <Container className="grid-gap-x grid grid-cols-12" size="lg">
       <div className="col-span-10 col-start-2 flex flex-col items-center">
         <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none text-green-45">
-          Integration
+          Integrate
         </span>
         <h2 className="mt-2 text-[56px] font-medium leading-none tracking-tighter">
-          Try integration quickly
+          Pick the integration that suits your needs
         </h2>
         <p className="mt-4 text-lg font-light leading-snug">
-          Learn more about the smooth integration process we have built for our partners.
+          Neon offers two ways to seamlessly integrate it into your product.
         </p>
         <Oauth />
         <Api />

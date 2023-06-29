@@ -7,19 +7,19 @@ const items = [
   {
     icon: fileIcon,
     title: 'Docs',
-    description: 'Read more about OAuth integration',
+    description: 'Learn more about OAuth integration',
     url: '/',
   },
   {
     icon: appStoreIcon,
     title: 'Example app',
-    description: 'Check Neon OAuth examples',
+    description: 'See an example OAuth app',
     url: '/',
   },
   {
     icon: bookIcon,
     title: 'Blog post',
-    description: 'Read more about Neon OAuth',
+    description: 'Learn more about Neon OAuth',
     url: '/',
   },
 ];

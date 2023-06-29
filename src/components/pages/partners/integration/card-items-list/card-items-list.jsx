@@ -9,6 +9,8 @@ const CardItemsList = ({ items }) => (
         <Link
           className="flex min-h-[195px] flex-col rounded-[10px] border border-gray-new-15 p-5 transition-colors duration-200 hover:border-green-45"
           to={url}
+          target={url.startsWith('http') ? '_blank' : '_self'}
+          rel={url.startsWith('http') ? 'noopener noreferrer' : ''}
         >
           <img
             className="h-8 w-8"
