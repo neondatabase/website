@@ -6,9 +6,9 @@ import Container from 'components/shared/container/container';
 import logoPattern from './images/logo-pattern.png';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative overflow-hidden pb-52 pt-[349px]">
+  <section className="hero safe-paddings relative overflow-hidden pb-52 pt-[349px] xl:pb-[166px] xl:pt-[328px]">
     <Image
-      className="absolute left-1/2 top-12 h-[478px] w-[1920px] -translate-x-1/2 object-cover"
+      className="absolute left-1/2 top-12 h-auto w-[1920px] max-w-none -translate-x-1/2 object-cover xl:top-4"
       src={logoPattern}
       width={1920}
       height={827}
@@ -17,7 +17,7 @@ const Hero = () => (
       aria-hidden
     />
     <Container className="relative z-10 flex flex-col items-center text-center" size="lg">
-      <h1 className="mx-auto max-w-[968px] text-[72px] font-medium leading-none tracking-tighter">
+      <h1 className="mx-auto max-w-[968px] text-[72px] font-medium leading-none tracking-tighter xl:text-[56px]">
         Unlock <mark className="bg-transparent text-green-45">additional revenue</mark> stream by
         partnering with Neon
       </h1>

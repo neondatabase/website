@@ -132,8 +132,8 @@ const CodeTabs = ({ className = null }) => {
                     <CodeBlock
                       className="code-block text-[15px]"
                       language={language}
+                      isTrimmed={false}
                       showLineNumbers
-                      isTrimmed
                     >
                       {code}
                     </CodeBlock>

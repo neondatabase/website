@@ -116,7 +116,7 @@ const Form = ({ className }) => {
     <form
       className={clsx(
         className,
-        'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 py-11 leading-none'
+        'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 py-11 leading-none xl:px-7 xl:py-8'
       )}
       method="POST"
       onSubmit={handleSubmit(onSubmit)}

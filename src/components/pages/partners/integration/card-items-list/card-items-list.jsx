@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import Link from 'components/shared/link/link';
 
 const CardItemsList = ({ items }) => (
-  <ul className="mt-10 grid max-w-[545px] grid-cols-3 gap-x-5">
+  <ul className="mt-10 grid max-w-[545px] grid-cols-3 gap-x-5 xl:mt-8">
     {items.map(({ icon, title, description, url }, index) => (
       <li key={index}>
         <Link
-          className="flex min-h-[195px] flex-col rounded-[10px] border border-gray-new-15 p-5 transition-colors duration-200 hover:border-green-45"
+          className="flex h-full min-h-[195px] flex-col rounded-[10px] border border-gray-new-15 p-5 transition-colors duration-200 hover:border-green-45 xl:min-h-[165px] xl:p-3"
           to={url}
           target={url.startsWith('http') ? '_blank' : '_self'}
           rel={url.startsWith('http') ? 'noopener noreferrer' : ''}
@@ -21,7 +21,9 @@ const CardItemsList = ({ items }) => (
             height={32}
             aria-hidden
           />
-          <h4 className="mt-auto text-xl leading-tight tracking-[-0.02em]">{title}</h4>
+          <h4 className="mt-[52px] text-xl leading-tight tracking-[-0.02em] xl:mt-10 xl:text-lg">
+            {title}
+          </h4>
           <p className="mt-1 text-[15px] font-light leading-snug text-gray-new-70">{description}</p>
         </Link>
       </li>

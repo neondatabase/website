@@ -18,7 +18,7 @@ const CodeBlock = ({
   children,
   showLineNumbers = false,
   shouldWrap = false,
-  isTrimmed = false,
+  isTrimmed = true,
   ...otherProps
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);

@@ -28,10 +28,10 @@ const items = [
 ];
 
 const Api = () => (
-  <div className="oauth grid-gap-x mt-40 grid grid-cols-10 items-center">
+  <div className="oauth grid-gap-x mt-40 grid grid-cols-10 items-center xl:mt-[120px]">
     <div className="order-1 col-span-5">
-      <h3 className="text-4xl font-medium leading-tight tracking-tighter">API</h3>
-      <p className="mt-5 text-lg font-light leading-snug">
+      <h3 className="text-4xl font-medium leading-tight tracking-tighter xl:text-[32px]">API</h3>
+      <p className="mt-5 text-lg font-light leading-snug xl:mt-4 xl:text-base">
         Manage Projects, branches, databases, and more. Easily integrate Neon in your Product and
         offer it to your users.
       </p>

@@ -3,10 +3,10 @@ import Container from 'components/shared/container/container';
 import quoteIcon from './images/quote.svg';
 
 const Testimonial = () => (
-  <figure className="testimonial safe-paddings mt-[200px]">
+  <figure className="testimonial safe-paddings mt-[200px] xl:mt-[120px]">
     <Container className="flex flex-col items-center text-center" size="xs">
       <img
-        className="h-20 w-20"
+        className="h-20 h-[72px] w-20 xl:w-[72px]"
         src={quoteIcon}
         width={80}
         height={80}
@@ -15,7 +15,7 @@ const Testimonial = () => (
         aria-hidden
       />
       <blockquote className="mt-5">
-        <p className="max-w-[842px] text-2xl font-light tracking-tighter">
+        <p className="max-w-[842px] text-2xl font-light tracking-tighter xl:max-w-[776px]">
           By partnering with Neon, Vercel’s frontend platform is now the end-to-end serverless
           solution for building on the Web, from Next.js all the way to SQL.
         </p>
