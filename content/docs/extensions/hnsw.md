@@ -1,17 +1,17 @@
 ---
-title: The hnsw extension
+title: The HNSW extension
 subtitle: Use Hierarchical Navigable Small World (HNSW) vector similarity search in PostgreSQL 
 enableTableOfContents: true
 isDraft: true
 ---
 
-The `hnsw` extension (currently in _Beta_) enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
+The HNSW extension enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
 
 HNSW is a graph-based approach to indexing multi-dimensional data. It constructs a multi-layered graph, where each layer is a subset of the previous one. During a search, the algorithm navigates through the graph from the top layer to the lowest layer to quickly find the nearest neighbor. An HNSW graph is known for its superior performance in terms of speed and accuracy.
 
 ![HNSW graph](/docs/extensions/hnsw_graph.webp)
 
-Neon's `hnsw` extension is based on the [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw.git) implementation of the HSNW algorithm, presented in the article [Revisiting the Inverted Indices for Billion-Scale Approximate Nearest Neighbors](https://openaccess.thecvf.com/content_ECCV_2018/html/Dmitry_Baranchuk_Revisiting_the_Inverted_ECCV_2018_paper.html).
+Neon's HNSW extension is based on the [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw.git) implementation of the HSNW algorithm, presented in the article [Revisiting the Inverted Indices for Billion-Scale Approximate Nearest Neighbors](https://openaccess.thecvf.com/content_ECCV_2018/html/Dmitry_Baranchuk_Revisiting_the_Inverted_ECCV_2018_paper.html).
 
 <Admonition type="note">
 Neon also supports `pgvector` for vector similarity search. For information on which index to choose, refer to [Comparing HNSW to pgvector](#comparing-hnsw-to-pgvector).
@@ -27,13 +27,13 @@ In the bottom layer, the algorithm continues navigating to the nearest neighbor 
 
 The key idea behind HNSW is that by starting the search at the top layer and moving down through each layer, the algorithm can quickly navigate to the area of the graph that contains the node that is most similar to the query vector. This makes the search process much faster than if it had to search through every node in the graph.
 
-## Using the hnsw extension
+## Using the HNSW extension
 
-This section describes how to use the `hnsw` extension in Neon with a simple example that demonstrates the required statements, syntax, and options.
+This section describes how to use the HNSW extension in Neon with a simple example that demonstrates the required statements, syntax, and options.
 
 ### Enable the extension
 
-Enable the `hnsw` extension in Neon by running the following `CREATE EXTENSION` statement in the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor).
+Enable the HNSW extension in Neon by running the following `CREATE EXTENSION` statement in the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor).
 
 ```sql
 CREATE EXTENSION hnsw;
@@ -146,9 +146,9 @@ Ultimately, the choice between the `pgvector` with IVFFlat or HNSW depends on yo
 - Accuracy and recall: If achieving high accuracy and recall is critical for your application, HNSW may be the better option. Its graph-based approach generally yields better recall compared to IVFFlat.
 - Distance metrics: Both `pgvector` and HNSW support the L2 distance metric (`<->`). Additionally, `pgvector` supports inner product (`<#>`) and cosine distance (`<=>`).
 
-## hnsw extension GitHub repository
+## HNSW extension GitHub repository
 
-The GitHub repository for Neon's `hnsw` extension can be found [here](https://github.com/knizhnik/hnsw).
+The GitHub repository for Neon's HNSW extension can be found [here](https://github.com/knizhnik/hnsw).
 
 ## Further reading
 
