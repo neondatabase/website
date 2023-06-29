@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-The `hnsw` extension (currently in _Beta_) enables using the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
+The `hnsw` extension (currently in _Beta_) enables enable the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
 
 HNSW is a graph-based approach to indexing multi-dimensional data. It constructs a multi-layered graph, where each layer is a subset of the previous one. During a search, the algorithm navigates through the graph from the top layer to the lowest layer to quickly find the nearest neighbor. An HNSW graph is known for its superior performance in terms of speed and accuracy.
 
@@ -106,10 +106,10 @@ In summary, the query retrieves the IDs of the two records from the `vectors` ta
 The `m`, `efConstruction`, and `efSearch` options allow you to tune the HNSW algorithm when creating an index:
 
 - `m`: Defines the maximum number of bi-directional links (also referred to as "edges") created for each node during graph construction. A higher value increases accuracy (recall) but also increases the size of the index in memory and index construction time.
-- `efContsruction`: Defines the number of nearest neighbors considered during index construction. The default value is `32`. This setting influences the trade-off between index quality and construction speed. A high `efConstruction` value creates a higher quality graph, enabling more accurate search results, but a higher value also means that index construction takes longer.
+- `efConstruction`: Defines the number of nearest neighbors considered during index construction. The default value is `32`. This setting influences the trade-off between index quality and construction speed. A high `efConstruction` value creates a higher quality graph, enabling more accurate search results, but a higher value also means that index construction takes longer.
 - `efSearch`: Defines the number of nearest neighbors considered during index search. The default value is `32`.  This setting influences the trade-off between query accuracy (recall) and speed. A higher `efSearch` value increases accuracy at the cost of speed. This value should be equal to or larger than `k`, which is the number of nearest neighbors you want your search to return.
 
-In summary, to prioritize for search speed over accuracy, you would use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over search speed, you would use higher value for `m` and `efSearch`. At the cost of index build time, you can also use a higher `efContsruction` value to enable more accurate search results.
+In summary, to prioritize for search speed over accuracy, you would use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over search speed, you would use higher value for `m` and `efSearch`. At the cost of index build time, you can also use a higher `efConstruction` value to enable more accurate search results.
 
 <Admonition type="info">
 For an idea of how to set the index option values, consider the benchmarks performed by Neon using the _GIST-960 Euclidean dataset_, which provides a training set of 1 million vectors of 960 dimensions. The benchmarks were run with this series of index option values:
