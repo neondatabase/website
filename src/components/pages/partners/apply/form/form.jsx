@@ -234,9 +234,9 @@ const Form = ({ className }) => {
         name="message"
         {...register('message')}
       />
-      <div className="relative flex flex-col gap-y-6">
+      <div className="relative flex flex-col gap-y-6 lg:mt-3 lg:flex-row lg:items-center lg:gap-x-5">
         <Button
-          className="mt-3 h-[52px] py-[17px] text-lg font-medium leading-none tracking-[-0.02em]"
+          className="mt-3 h-[52px] py-[17px] text-lg font-medium leading-none tracking-[-0.02em] lg:order-1 lg:ml-auto lg:mt-0 lg:basis-[316px]"
           theme="primary"
           type="submit"
         >
@@ -246,7 +246,7 @@ const Form = ({ className }) => {
           {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && 'Apply now'}
           {formState === FORM_STATES.SUCCESS && 'Applied!'}
         </Button>
-        <p className="text-[15px] font-light leading-snug">
+        <p className="text-[15px] font-light leading-snug lg:max-w-[450px] lg:flex-1">
           By submitting you agree to the{' '}
           <Link
             className="text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors duration-200 hover:decoration-transparent"

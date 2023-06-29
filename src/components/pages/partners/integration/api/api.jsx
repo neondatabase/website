@@ -28,16 +28,19 @@ const items = [
 ];
 
 const Api = () => (
-  <div className="oauth grid-gap-x mt-40 grid grid-cols-10 items-center xl:mt-[120px]">
-    <div className="order-1 col-span-5">
-      <h3 className="text-4xl font-medium leading-tight tracking-tighter xl:text-[32px]">API</h3>
-      <p className="mt-5 text-lg font-light leading-snug xl:mt-4 xl:text-base">
+  <div className="oauth grid-gap-x mt-40 grid grid-cols-10 items-center xl:mt-[120px] lg:mt-24 lg:gap-y-7">
+    <div className="order-1 col-span-5 lg:order-none lg:col-span-full">
+      <h3 className="text-4xl font-medium leading-tight tracking-tighter xl:text-[32px] lg:text-center lg:text-[28px]">
+        API
+      </h3>
+      <p className="mt-5 text-lg font-light leading-snug xl:mt-4 xl:text-base lg:mx-auto lg:max-w-[584px] lg:text-center">
         Manage Projects, branches, databases, and more. Easily integrate Neon in your Product and
         offer it to your users.
       </p>
-      <CardItemsList items={items} />
+      <CardItemsList className="lg:hidden" items={items} />
     </div>
-    <CodeTabs className="col-span-5" />
+    <CodeTabs className="col-span-5 lg:col-span-full" />
+    <CardItemsList className="col-span-full hidden lg:grid" items={items} ariaHidden />
   </div>
 );
 

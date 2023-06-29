@@ -31,24 +31,24 @@ const items = [
 ];
 
 const Benefits = () => (
-  <section className="benefits safe-paddings mt-40 xl:mt-[120px]">
+  <section className="benefits safe-paddings mt-40 xl:mt-[120px] lg:mt-24">
     <Container className="grid-gap-x grid grid-cols-12" size="lg">
-      <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 gap-y-2 rounded-[10px] bg-gray-new-8 p-14 xl:col-span-full xl:col-start-1 xl:px-8 xl:py-10">
+      <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 gap-y-2 rounded-[10px] bg-gray-new-8 p-14 xl:col-span-full xl:col-start-1 xl:px-8 xl:py-10 lg:px-7 lg:py-8 md:px-5 md:py-6">
         <div className="col-span-full">
-          <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none text-green-45">
+          <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none text-green-45 lg:px-2.5 lg:text-[10px]">
             Benefits
           </span>
         </div>
-        <div className="col-span-4 col-start-1 xl:max-w-[300px]">
-          <h2 className="max-w-[322px] text-[56px] font-medium leading-none tracking-tighter xl:max-w-[270px] xl:text-[44px]">
+        <div className="col-span-4 col-start-1 xl:max-w-[300px] lg:col-span-full lg:max-w-none">
+          <h2 className="max-w-[322px] text-[56px] font-medium leading-none tracking-tighter xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl">
             Why become a partner?
           </h2>
-          <p className="mt-5 max-w-[362px] text-lg font-light leading-snug xl:text-base">
+          <p className="mt-5 max-w-[362px] text-lg font-light leading-snug xl:text-base lg:mt-4 lg:max-w-none">
             At Neon, we love our partners and believe that partners are vital to our mission to make
             Serverless Postgress in the Cloud easy to integrate, manage, and grow.
           </p>
         </div>
-        <ul className="col-start-5 col-end-11 mt-2 grid max-w-[640px] grid-cols-2 gap-x-16 gap-y-12 pl-2.5 xl:-ml-5 xl:mt-0 xl:gap-x-4 xl:gap-y-10 xl:pl-0">
+        <ul className="col-start-5 col-end-11 mt-2 grid max-w-[640px] grid-cols-2 gap-x-16 gap-y-12 pl-2.5 xl:-ml-5 xl:mt-0 xl:gap-x-4 xl:gap-y-10 xl:pl-0 lg:col-span-full lg:ml-0 lg:mt-8 lg:gap-x-6 lg:gap-y-8">
           {items.map(({ icon, title, description }, index) => (
             <li className="flex items-start gap-x-3.5" key={index}>
               <img

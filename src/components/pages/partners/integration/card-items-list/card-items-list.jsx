@@ -1,13 +1,20 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
 
-const CardItemsList = ({ items }) => (
-  <ul className="mt-10 grid max-w-[545px] grid-cols-3 gap-x-5 xl:mt-8">
+const CardItemsList = ({ className = null, items, ariaHidden = false }) => (
+  <ul
+    className={clsx(
+      'mt-10 grid max-w-[545px] grid-cols-3 gap-x-5 xl:mt-8 lg:mt-0 lg:max-w-none',
+      className
+    )}
+    aria-hidden={ariaHidden}
+  >
     {items.map(({ icon, title, description, url }, index) => (
       <li key={index}>
         <Link
-          className="flex h-full min-h-[195px] flex-col rounded-[10px] border border-gray-new-15 p-5 transition-colors duration-200 hover:border-green-45 xl:min-h-[165px] xl:p-3"
+          className="flex h-full min-h-[195px] flex-col rounded-[10px] border border-gray-new-15 p-5 transition-colors duration-200 hover:border-green-45 xl:min-h-[165px] xl:p-3 lg:min-h-max lg:p-4"
           to={url}
           target={url.startsWith('http') ? '_blank' : '_self'}
           rel={url.startsWith('http') ? 'noopener noreferrer' : ''}
@@ -32,6 +39,7 @@ const CardItemsList = ({ items }) => (
 );
 
 CardItemsList.propTypes = {
+  className: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       icon: PropTypes.string.isRequired,
@@ -40,6 +48,7 @@ CardItemsList.propTypes = {
       url: PropTypes.string.isRequired,
     })
   ).isRequired,
+  ariaHidden: PropTypes.bool,
 };
 
 export default CardItemsList;

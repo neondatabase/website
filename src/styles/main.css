@@ -88,6 +88,22 @@
       @apply border-b border-transparent text-primary-1 transition-[border-color] duration-200 hover:border-primary-1;
     }
   }
+
+  .flat-none br {
+    content: none;
+  }
+
+  .flat-none br::after {
+    content: none;
+  }
+
+  .flat-breaks br {
+    content: '';
+  }
+
+  .flat-breaks br::after {
+    content: ' ';
+  }
 }
 
 @keyframes lineAnimation {

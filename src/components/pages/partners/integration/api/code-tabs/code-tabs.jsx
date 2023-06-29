@@ -98,11 +98,11 @@ const CodeTabs = ({ className = null }) => {
 
   return (
     <div className={clsx(className, 'rounded-[10px] border border-gray-new-15 bg-gray-new-8')}>
-      <div className="border-b border-gray-new-15">
+      <div className="border-b border-gray-new-15 lg:flex">
         {codeSnippets.map(({ name, icon: Icon, language }, index) => (
           <button
             className={clsx(
-              'relative px-[18px] py-3 transition-colors duration-200 after:absolute after:left-0 after:top-full after:-mt-px after:h-0.5 after:w-full after:transition-colors after:duration-200 hover:text-white',
+              'relative px-[18px] py-3 transition-colors duration-200 after:absolute after:left-0 after:top-full after:-mt-px after:h-0.5 after:w-full after:transition-colors after:duration-200 hover:text-white lg:flex-1',
               language === activeLanguage
                 ? 'text-white after:bg-green-45'
                 : 'text-gray-new-60 after:bg-transparent'
@@ -116,7 +116,7 @@ const CodeTabs = ({ className = null }) => {
           </button>
         ))}
       </div>
-      <div className="min-h-[384px] pb-7 pl-[18px] pt-[18px]">
+      <div className="min-h-[384px] pb-7 pl-[18px] pt-[18px] lg:pb-6 lg:pl-3.5 lg:pt-3.5">
         <LazyMotion features={domAnimation}>
           <AnimatePresence initial={false} mode="wait">
             {codeSnippets.map(
@@ -132,11 +132,9 @@ const CodeTabs = ({ className = null }) => {
                     <CodeBlock
                       className="code-block text-[15px]"
                       language={language}
-                      isTrimmed={false}
+                      code={code}
                       showLineNumbers
-                    >
-                      {code}
-                    </CodeBlock>
+                     />
                   </m.figure>
                 )
             )}
