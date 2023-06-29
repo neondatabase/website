@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-The `hnsw` extension (currently in _Beta_) enables enable the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
+The `hnsw` extension (currently in _Beta_) enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
 
 HNSW is a graph-based approach to indexing multi-dimensional data. It constructs a multi-layered graph, where each layer is a subset of the previous one. During a search, the algorithm navigates through the graph from the top layer to the lowest layer to quickly find the nearest neighbor. An HNSW graph is known for its superior performance in terms of speed and accuracy.
 
