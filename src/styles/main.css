@@ -37,6 +37,48 @@
       @apply -mr-5;
     }
   }
+  .mask-styles {
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center center;
+  }
+
+  .footer-icon-size {
+    -webkit-mask-size: 16px 16px;
+  }
+
+  /* Used in a /src/components/pages/doc/sidebar/item/item.jsx  */
+  /* Allows changing color of and svg without inserting inline svg */
+  .arrow-mask {
+    -webkit-mask-image: url('/images/chevron-right.svg');
+    -webkit-mask-size: 6px 10px;
+    @apply mask-styles;
+  }
+
+  /* Used in a /src/components/shared/footer/footer.jsx  */
+  .github-icon {
+    -webkit-mask-image: url('/images/footer/github.svg');
+    @apply mask-styles footer-icon-size;
+  }
+
+  .discourse-icon {
+    -webkit-mask-image: url('/images/footer/discourse.svg');
+    @apply mask-styles footer-icon-size;
+  }
+
+  .linkedin-icon {
+    -webkit-mask-image: url('/images/footer/linkedin.svg');
+    @apply mask-styles footer-icon-size;
+  }
+
+  .twitter-icon {
+    -webkit-mask-image: url('/images/footer/twitter.svg');
+    @apply mask-styles footer-icon-size;
+  }
+
+  .youtube-icon {
+    -webkit-mask-image: url('/images/footer/youtube.svg');
+    @apply mask-styles footer-icon-size;
+  }
 }
 
 @layer utilities {

@@ -50,6 +50,7 @@ const CodeBlock = ({
             : 'border-gray-6 bg-white text-gray-2 hover:bg-gray-7'
         )}
         type="button"
+        aria-label={isCopied ? 'Copied' : 'Copy'}
         disabled={isCopied}
         onClick={() => handleCopy(content)}
       >
