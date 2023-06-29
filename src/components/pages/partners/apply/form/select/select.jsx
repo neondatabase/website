@@ -1,5 +1,4 @@
 import { Combobox } from '@headlessui/react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 
@@ -35,11 +34,7 @@ const Select = ({
             placeholder={placeholder}
             disabled
           />
-          <Combobox.Button
-            className={clsx(
-              'absolute right-0 top-1/2 flex h-full w-full -translate-y-1/2 items-center justify-end pr-4'
-            )}
-          >
+          <Combobox.Button className="absolute right-0 top-1/2 flex h-full w-full -translate-y-1/2 items-center justify-end pr-4">
             <ChevronIcon className="h-4 w-4" />
           </Combobox.Button>
         </div>

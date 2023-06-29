@@ -9,22 +9,18 @@ import useCookie from 'react-use/lib/useCookie';
 import useLocation from 'react-use/lib/useLocation';
 import * as yup from 'yup';
 
-import infoSvg from 'components/pages/partners/apply/images/info.svg';
 import Button from 'components/shared/button/button';
 import Link from 'components/shared/link/link';
-import Tooltip from 'components/shared/tooltip';
 import { FORM_STATES, HUBSPOT_PARTNERS_FORM_ID } from 'constants/forms';
 import LINKS from 'constants/links';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
-import AddIcon from '../images/add.inline.svg';
 import LoadingIcon from '../images/loading.inline.svg';
 
+import CallbackUrlFields from './callback-url-fields';
 import Field from './field';
 import MultiSelect from './multi-select';
 import Select from './select';
-
-const CALLBACK_URLS_LIMIT = 3;
 
 const integrationTypeOptions = [
   { id: 'oauth', name: 'OAuth' },
@@ -36,66 +32,6 @@ const projectNumberOptions = [
   { id: '5000', name: '5000 projects' },
   { id: '5000+', name: '5000+ projects' },
 ];
-
-const CallbackURLs = ({ register }) => {
-  const [shouldAddCallbackUrl, setShouldAddCallbackUrl] = useState(true);
-  const [visibleInputIndex, setVisibleInputIndex] = useState(0);
-
-  return (
-    <fieldset className="flex flex-col">
-      <legend className="items-centers flex" htmlFor="firstName">
-        Callback URLs {/* TODO: add tooltip */}
-        <a
-          className="ml-1.5 flex items-center"
-          id="callback-urls-tooltip"
-          data-tooltip-content="This is a tooltip!"
-        >
-          <img src={infoSvg} width={14} height={14} alt="" loading="lazy" aria-hidden />
-        </a>
-        <Tooltip anchorSelect="#callback-urls-tooltip" />
-      </legend>
-      {Array.from({ length: CALLBACK_URLS_LIMIT }).map((_, index) => {
-        const name = `callback_url${index > 0 ? `_${index + 1}` : ''}`;
-        return (
-          <input
-            className={clsx(
-              'mt-3 h-10 appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15',
-              index > visibleInputIndex && 'hidden'
-            )}
-            id={`callback_url_${index}`}
-            name={name}
-            type="text"
-            {...register(name)}
-            key={index}
-          />
-        );
-      })}
-      <button
-        className={clsx(
-          'mb-1 mt-3 flex items-center gap-x-2',
-          shouldAddCallbackUrl ? 'text-green-45' : 'cursor-not-allowed text-gray-new-40'
-        )}
-        type="button"
-        onClick={() => {
-          if (visibleInputIndex < CALLBACK_URLS_LIMIT - 1) {
-            setVisibleInputIndex((prevIndex) => prevIndex + 1);
-
-            if (visibleInputIndex === CALLBACK_URLS_LIMIT - 2) {
-              setShouldAddCallbackUrl(false);
-            }
-          }
-        }}
-      >
-        <AddIcon />
-        Add another URL
-      </button>
-    </fieldset>
-  );
-};
-
-CallbackURLs.propTypes = {
-  register: PropTypes.func.isRequired,
-};
 
 const schema = yup
   .object({
@@ -234,7 +170,9 @@ const Form = ({ className }) => {
             tooltipContent="This is a tooltip!"
             {...register('app_name')}
           />
-          <CallbackURLs register={register} />
+
+          <CallbackUrlFields register={register} />
+
           <fieldset>
             <legend>Will you be making API calls from a backend?</legend>
             <div className="ml-1 mt-5 flex items-center gap-x-8">
