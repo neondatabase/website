@@ -134,6 +134,7 @@ const CodeTabs = ({ className = null }) => {
                       language={language}
                       code={code}
                       showLineNumbers
+                      isTrimmed
                     />
                   </m.figure>
                 )

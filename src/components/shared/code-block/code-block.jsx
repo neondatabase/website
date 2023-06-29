@@ -18,16 +18,15 @@ const CodeBlock = ({
   children,
   showLineNumbers = false,
   shouldWrap = false,
-  code = null,
+  isTrimmed = false,
   ...otherProps
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const match = /language-(\w+)/.exec(className || '');
   const snippetLanguage = (match ? match[1] : language) || DEFAULT_LANGUAGE;
-  const text =
-    typeof children === 'string' ? children?.trim() : children?.props?.children.props.children;
-  const content = code || text;
+  const content = isTrimmed ? children?.trim() : children;
+  const code = typeof children === 'string' ? content : children?.props?.children.props.children;
 
   return (
     <figure
@@ -40,7 +39,7 @@ const CodeBlock = ({
         showLineNumbers={showLineNumbers}
         className="no-scrollbars"
       >
-        {content}
+        {code}
       </SyntaxHighlighter>
       <button
         className={clsx(
@@ -71,7 +70,7 @@ CodeBlock.propTypes = {
   children: PropTypes.node,
   showLineNumbers: PropTypes.bool,
   shouldWrap: PropTypes.bool,
-  code: PropTypes.string,
+  isTrimmed: PropTypes.bool,
 };
 
 export default CodeBlock;
