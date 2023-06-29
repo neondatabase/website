@@ -38,7 +38,7 @@
 
     background-image: radial-gradient(
       var(--logos-glow-size) at top,
-      theme('colors.green.45') 0%,
+      theme('colors.green.45') 65%,
       transparent 100%
     );
     mask-image: url('/images/partners-logos.svg');
