@@ -79,6 +79,7 @@ const Form = ({ className }) => {
 
     data.application_scope = data.application_scope?.map(({ id }) => id).join(';');
     data.integration_type = data.integration_type.name;
+    data.number_of_projects = data.number_of_projects.name;
 
     const dataToSend = Object.entries(data).map(([name, value]) => ({ name, value }));
 
