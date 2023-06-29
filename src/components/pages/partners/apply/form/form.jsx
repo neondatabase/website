@@ -236,7 +236,7 @@ const Form = ({ className }) => {
           <CallbackURLs register={register} />
           <fieldset>
             <legend>Will you be making API calls from a backend?</legend>
-            <div className="mt-5 flex items-center gap-x-8">
+            <div className="ml-1 mt-5 flex items-center gap-x-8">
               <label className="flex items-center gap-x-[9px]" htmlFor="apiCallsYes">
                 <input
                   className="h-2 w-2 appearance-none rounded-full bg-transparent outline outline-1 outline-offset-2 outline-gray-new-40 checked:bg-primary-1"
