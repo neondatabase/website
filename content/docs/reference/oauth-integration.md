@@ -55,7 +55,7 @@ After the user is redirected to the authorization URL, they are presented with N
 
 ### 2. Authorization code is returned to your callback URL
 
-After your user successfully completes the authorization flow, they will be redirected to the callback URL with the following query parameters appended to the URL:
+After successfully completing the authorization flow, they user is redirected to the callback URL with the following query parameters appended to the URL:
 
 - `code`: an authorization code that will be exchanged for an access token
 - `scope`: the scopes that the user authorized your application to access
