@@ -22,8 +22,8 @@ const items = [
   {
     icon: bookIcon,
     title: 'Blog post',
-    description: 'Learn more about Neon OAuth',
-    url: '/',
+    description: 'See the integration in action',
+    url: '/blog/api-cf-drizzle-neon',
   },
 ];
 
