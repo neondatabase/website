@@ -203,17 +203,16 @@ const Form = ({ className }) => {
               </label>
             </div>
           </fieldset>
-          <div className="grid items-center gap-5 lg:grid-cols-2 sm:grid-cols-1">
-            <MultiSelect control={control} setValue={setValue} />
 
-            <Field
-              label="Link to logo"
-              tooltipId="link-to-logo-tooltip"
-              tooltipContent="Please paste a link to your company logo here"
-              name="link_to_logo"
-              {...register('link_to_logo')}
-            />
-          </div>
+          <MultiSelect control={control} setValue={setValue} />
+
+          <Field
+            label="Link to logo"
+            tooltipId="link-to-logo-tooltip"
+            tooltipContent="Please paste a link to your company logo here"
+            name="link_to_logo"
+            {...register('link_to_logo')}
+          />
         </>
       )}
 
