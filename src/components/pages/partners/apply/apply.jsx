@@ -8,7 +8,7 @@ import LINKS from 'constants/links';
 import Form from './form';
 
 const Testimonial = ({ className = null, ariaHidden = false }) => (
-  <figure className={clsx('mt-40 max-w-[464px] xl:mt-[120px]', className)} aria-hidden={ariaHidden}>
+  <figure className={clsx('mt-16 max-w-[464px] xl:mt-12', className)} aria-hidden={ariaHidden}>
     <blockquote>
       <p className="border-l border-gray-new-60 pl-3.5 text-2xl font-light tracking-tighter xl:text-xl">
         “The combination of flexible resource limits and nearly instant database provisioning made

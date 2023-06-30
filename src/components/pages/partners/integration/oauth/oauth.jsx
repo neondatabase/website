@@ -11,7 +11,7 @@ const items = [
     icon: fileIcon,
     title: 'Docs',
     description: 'Learn more about OAuth integration',
-    url: '/',
+    url: '/docs/reference/oauth-integration',
   },
   {
     icon: appStoreIcon,
