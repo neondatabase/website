@@ -18,16 +18,17 @@ const CodeBlock = ({
   children,
   showLineNumbers = false,
   shouldWrap = false,
-  code = null,
+  isTrimmed = true,
   ...otherProps
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const match = /language-(\w+)/.exec(className || '');
   const snippetLanguage = (match ? match[1] : language) || DEFAULT_LANGUAGE;
-  const text =
-    typeof children === 'string' ? children?.trim() : children?.props?.children.props.children;
-  const content = code || text;
+
+  const code = typeof children === 'string' ? children : children?.props?.children.props.children;
+
+  const content = isTrimmed ? code?.trim() : code;
 
   return (
     <figure
@@ -71,7 +72,7 @@ CodeBlock.propTypes = {
   children: PropTypes.node,
   showLineNumbers: PropTypes.bool,
   shouldWrap: PropTypes.bool,
-  code: PropTypes.string,
+  isTrimmed: PropTypes.bool,
 };
 
 export default CodeBlock;

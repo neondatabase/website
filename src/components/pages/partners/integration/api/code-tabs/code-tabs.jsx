@@ -132,9 +132,11 @@ const CodeTabs = ({ className = null }) => {
                     <CodeBlock
                       className="code-block text-[15px]"
                       language={language}
-                      code={code}
+                      isTrimmed={false}
                       showLineNumbers
-                    />
+                    >
+                      {code}
+                    </CodeBlock>
                   </m.figure>
                 )
             )}
