@@ -22,12 +22,12 @@ const Tooltip = ({
   if (isTooltipVisible) {
     return (
       <ReactTooltip
+        className={className}
         arrowColor={arrowColor}
         id={id}
         place={place}
         effect="solid"
         type="dark"
-        className={className}
         offset={offset}
         anchorSelect={anchorSelect}
         multiline

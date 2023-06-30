@@ -16,13 +16,17 @@ const CallbackUrlFields = ({ register }) => {
       <legend className="items-centers flex" htmlFor="firstName">
         Callback URLs
         <a
-          className="ml-1.5 flex items-center"
-          id="callback-urls-tooltip"
-          data-tooltip-content="May be plural, the port to use for your application"
+          className="relative ml-1.5 flex items-center after:absolute after:-inset-2"
+          data-tooltip-id="callback-urls-tooltip"
+          data-tooltip-html="May be plural, the port to use<br/>for your application"
         >
           <img src={infoSvg} width={14} height={14} alt="" loading="lazy" aria-hidden />
         </a>
-        <Tooltip anchorSelect="#callback-urls-tooltip" />
+        <Tooltip
+          className="flat-breaks sm:flat-none"
+          id="callback-urls-tooltip"
+          place="top-start"
+        />
       </legend>
       {Array.from({ length: CALLBACK_URLS_LIMIT }).map((_, index) => {
         const name = `callback_url${index > 0 ? `_${index + 1}` : ''}`;
@@ -42,7 +46,7 @@ const CallbackUrlFields = ({ register }) => {
       })}
       <button
         className={clsx(
-          'mb-1 mt-3 flex items-center gap-x-2',
+          'mb-1 mt-3 inline-flex items-center gap-x-2',
           shouldAddCallbackUrl ? 'text-green-45' : 'cursor-not-allowed text-gray-new-40'
         )}
         type="button"

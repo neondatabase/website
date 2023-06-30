@@ -27,13 +27,13 @@ const Field = forwardRef(
         {tooltipId && tooltipContent && (
           <>
             <a
-              className="ml-1.5 flex items-center"
-              id={tooltipId}
-              data-tooltip-content={tooltipContent}
+              className="relative ml-1.5 flex items-center after:absolute after:-inset-2"
+              data-tooltip-id={tooltipId}
+              data-tooltip-html={tooltipContent}
             >
               <img src={infoSvg} width={14} height={14} alt="" loading="lazy" aria-hidden />
             </a>
-            <Tooltip anchorSelect={`#${tooltipId}`} />
+            <Tooltip className="flat-breaks sm:flat-none" id={tooltipId} place="top-start" />
           </>
         )}
       </label>

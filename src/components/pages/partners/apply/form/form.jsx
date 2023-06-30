@@ -169,7 +169,7 @@ const Form = ({ className }) => {
           <Field
             label="App Name"
             tooltipId="app-name-tooltip"
-            tooltipContent="Your app name to be shown on the consent page"
+            tooltipContent="Your app name to be shown on<br/> the consent page"
             {...register('app_name')}
           />
 
@@ -209,7 +209,7 @@ const Form = ({ className }) => {
           <Field
             label="Link to logo"
             tooltipId="link-to-logo-tooltip"
-            tooltipContent="Please paste a link to your company logo here"
+            tooltipContent="Please paste a link to<br/> your company logo here"
             name="link_to_logo"
             {...register('link_to_logo')}
           />
