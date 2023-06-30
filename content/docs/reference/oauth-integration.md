@@ -27,14 +27,15 @@ Here is a high-level overview of how Neon's OAuth implementation works:
 ![OAuth flow diagram](/docs/oauth/flow.png)
 
 1. The user initiates the OAuth flow in your application by clicking a button or link.
-2. An authorization URL is generated, and the user is redirected to Neon’s OAuth consent screen, where they  authorize your application and grant the necessary permissions.
+2. An authorization URL is generated, and the user is redirected to Neon’s OAuth consent screen, where they authorize your application and grant the necessary permissions.
 3. Finally, your application receives an access token to manage Neon resources on the user’s behalf.
 
-## About the Neon OAuth API
+## About the Neon OAuth server
 
 The Neon OAuth server implements the OpenID Connect protocol and supports [OpenID Connect Discovery specification](https://openid.net/specs/openid-connect-discovery-1_0.html). The server metadata is published at the following well-known URL: [https://oauth2.neon.tech/.well-known/openid-configuration](https://oauth2.neon.tech/.well-known/openid-configuration).
 
 Here is an example response:
+
 ```json
 {
   "issuer": "https://oauth2.neon.tech/",
