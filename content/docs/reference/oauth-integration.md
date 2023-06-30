@@ -40,7 +40,7 @@ To initiate the OAuth flow, you need to generate an authorization URL. You can d
 - `redirect_uri`: the full URL that Neon should redirect users to after authorizing your application. The URL should match at least one of the callback URLs you provided when applying to become a partner.
 - `scope`: This is a space-separated list of scopes that you want to request access to. For example: `urn:neoncloud:projects:create urn:neoncloud:projects:read urn:neoncloud:projects:update urn:neoncloud:projects:delete`
 - `response_type`: This should be set to `code` to indicate that you are using the [Authorization Code grant type]().
-- `code_challenge`: This is a random string that will be used to verify the integrity of the authorization code.
+- `code_challenge`: This is a random string that is used to verify the integrity of the authorization code.
 - `state`: This is a random string that will be returned to your callback URL. You can use this parameter to verify that the request came from your application and not from a third party.
 
 Here is an example of what the authorization URL might look like:
