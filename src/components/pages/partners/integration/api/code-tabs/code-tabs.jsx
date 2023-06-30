@@ -13,25 +13,6 @@ import CodeBlock from 'components/shared/code-block/code-block';
 
 const codeSnippets = [
   {
-    name: 'cURL',
-    icon: BashIcon,
-    language: 'bash',
-    code: `    curl --request POST
-    --url https://console.neon.tech/api/v2/projects/project_id/branches
-    --header 'accept: application/json'
-    --header 'content-type: application/json'`,
-  },
-  {
-    name: 'Node',
-    icon: JavascriptIcon,
-    language: 'javascript',
-    code: `    const sdk = require('api')('@neon-tech/v2.0#end53sbljigaqpv');
-
-    sdk.createProjectBranch({project_id: 'project_id'})
-      .then(({ data }) => console.log(data))
-      .catch(err => console.error(err));`,
-  },
-  {
     name: 'Ruby',
     icon: RubyIcon,
     language: 'ruby',
@@ -68,6 +49,25 @@ const codeSnippets = [
     ]);
     
     echo $response->getBody();`,
+  },
+  {
+    name: 'Node',
+    icon: JavascriptIcon,
+    language: 'javascript',
+    code: `    const sdk = require('api')('@neon-tech/v2.0#end53sbljigaqpv');
+
+    sdk.createProjectBranch({project_id: 'project_id'})
+      .then(({ data }) => console.log(data))
+      .catch(err => console.error(err));`,
+  },
+  {
+    name: 'cURL',
+    icon: BashIcon,
+    language: 'bash',
+    code: `    curl --request POST
+    --url https://console.neon.tech/api/v2/projects/project_id/branches
+    --header 'accept: application/json'
+    --header 'content-type: application/json'`,
   },
 ];
 
