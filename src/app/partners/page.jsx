@@ -13,6 +13,7 @@ export const metadata = getMetadata(SEO_DATA.partners);
 const PartnersPage = () => (
   <Layout
     className="bg-black-new text-white"
+    headerClassName="lg:!absolute lg:!bg-transparent"
     headerTheme="black-new"
     footerTheme="black-new"
     footerWithTopBorder

@@ -25,7 +25,7 @@ const items = [
 ];
 
 const Oauth = () => (
-  <div className="oauth mt-[120px] grid grid-cols-10 items-center gap-x-10 xl:mt-24 xl:gap-x-6 lg:mt-8 lg:gap-y-7 md:mt-6 md:gap-y-6">
+  <div className="oauth mt-[120px] grid w-full grid-cols-10 items-center gap-x-10 xl:mt-24 xl:gap-x-6 lg:mt-8 lg:gap-y-7 md:mt-6 md:gap-y-6">
     <div className="col-span-5 lg:col-span-full">
       <h3 className="text-4xl font-medium leading-tight tracking-tighter xl:text-[32px] lg:text-center lg:text-[28px] md:text-[22px]">
         OAuth
