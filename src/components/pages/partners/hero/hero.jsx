@@ -17,7 +17,7 @@ const Hero = () => (
     />
     <Container className="relative z-10 flex flex-col items-center text-center" size="lg">
       <div className="absolute left-1/2 top-0 -z-10 h-[270px] w-3/4 -translate-x-1/2 rounded-[1000px] bg-black-new blur-[30px] lg:w-full" />
-      <h1 className="mx-auto max-w-[968px] text-[72px] font-medium leading-none tracking-tighter xl:text-[56px] lg:max-w-[700px] lg:text-[52px] md:text-4xl">
+      <h1 className="mx-auto max-w-[968px] text-[72px] font-medium leading-none tracking-tighter 2xl:text-6xl xl:text-[56px] lg:max-w-[700px] lg:text-[52px] md:text-4xl">
         Unlock <mark className="bg-transparent text-green-45">new revenue</mark> stream
         by&nbsp;partnering with Neon
       </h1>

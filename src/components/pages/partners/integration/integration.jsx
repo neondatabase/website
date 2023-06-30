@@ -4,7 +4,7 @@ import Api from './api';
 import Oauth from './oauth';
 
 const Integration = () => (
-  <section className="integration safe-paddings mt-[200px] xl:mt-36 lg:mt-28 md:mt-20">
+  <section className="integration safe-paddings mt-[200px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20">
     <Container className="grid-gap-x grid grid-cols-12" size="lg">
       <div className="col-span-10 col-start-2 flex flex-col items-center xl:col-span-full xl:col-start-1">
         <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none text-green-45 lg:px-2.5 lg:text-[10px]">
