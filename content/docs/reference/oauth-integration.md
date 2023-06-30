@@ -34,7 +34,7 @@ Here is a more detailed breakdown of the steps involved in the OAuth flow:
 
 ### 1. Initiating the OAuth flow
 
-To initiate the OAuth flow, you will need to generate an authorization URL. To do that you can redirect your users to `https://oauth2.neon.tech/oauth2/auth` while passing the following query parameters:
+To initiate the OAuth flow, you need to generate an authorization URL. You can do that by directing your users to `https://oauth2.neon.tech/oauth2/auth` while passing the following query parameters:
 
 - `client_id`: your OAuth application's ID.
 - `redirect_uri`: the full URL that Neon should redirect users to after authorizing your application. The URL should match at least one of the callback URLs you provided when applying to become a partner.
