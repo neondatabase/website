@@ -8,7 +8,7 @@ You can integrate your application with Neon by leveraging our secure OAuth inte
 
 To set up the integration and create a Neon OAuth application, you can apply on our [Partners page](https://neon.tech/partner). You will need to provide us with the following information:
 
-1. Details about your application (name, what it does, link to its website)
+1. Details about your application, such as its name, what it does, and a link to the website.
 2. Callback URL(s): URLs used to redirect users after completing the authorization flow. For example `https://yourapplication.com/api/oauth/callback`, `http://localhost:3000/api/oauth/callback`
 3. Scopes: scopes let you specify exactly what type of access you need. Right now, we provide access to the following scopes:
    - Create Projects
