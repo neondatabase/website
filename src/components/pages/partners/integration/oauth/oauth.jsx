@@ -25,14 +25,14 @@ const items = [
 ];
 
 const Oauth = () => (
-  <div className="oauth grid-gap-x mt-[120px] grid grid-cols-10 items-center xl:mt-24 lg:mt-8 lg:gap-y-7 md:mt-6 md:gap-y-6">
+  <div className="oauth mt-[120px] grid grid-cols-10 items-center gap-x-10 xl:mt-24 xl:gap-x-6 lg:mt-8 lg:gap-y-7 md:mt-6 md:gap-y-6">
     <div className="col-span-5 lg:col-span-full">
       <h3 className="text-4xl font-medium leading-tight tracking-tighter xl:text-[32px] lg:text-center lg:text-[28px] md:text-[22px]">
         OAuth
       </h3>
       <p className="mt-5 max-w-[590px] text-lg font-light leading-snug xl:mt-4 xl:text-base lg:mx-auto lg:max-w-[584px] lg:text-center md:mt-2.5">
         The Neon API allows you to manage Neon programmatically. With the Neon API, you can create
-        and manage all objects in your Neon account.
+        and manage all objects in your&nbsp;Neon account.
       </p>
       <CardItemsList className="lg:hidden" items={items} />
     </div>

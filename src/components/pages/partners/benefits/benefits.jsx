@@ -48,7 +48,7 @@ const Benefits = () => (
             Serverless Postgress in the Cloud easy to integrate, manage, and grow.
           </p>
         </div>
-        <ul className="col-start-5 col-end-11 mt-2 grid max-w-[640px] grid-cols-2 gap-x-16 gap-y-12 pl-2.5 xl:-ml-5 xl:mt-0 xl:gap-x-4 xl:gap-y-10 xl:pl-0 lg:col-span-full lg:ml-0 lg:mt-8 lg:gap-x-6 lg:gap-y-8 md:mt-5 md:grid-cols-1 md:gap-y-6">
+        <ul className="col-start-5 col-end-11 mt-2 grid max-w-[640px] grid-cols-2 gap-x-16 gap-y-12 pl-2.5 xl:-ml-5 xl:mt-0 xl:gap-x-8 xl:gap-y-10 xl:pl-0 lg:col-span-full lg:ml-0 lg:mt-8 lg:gap-x-6 lg:gap-y-8 md:mt-5 md:grid-cols-1 md:gap-y-6">
           {items.map(({ icon, title, description }, index) => (
             <li className="flex items-start gap-x-3.5 md:gap-x-2" key={index}>
               <img

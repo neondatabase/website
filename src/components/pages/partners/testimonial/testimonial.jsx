@@ -3,10 +3,10 @@ import Container from 'components/shared/container/container';
 import quoteIcon from './images/quote.svg';
 
 const Testimonial = () => (
-  <figure className="testimonial safe-paddings mt-[200px] xl:mt-[120px] md:mt-20">
+  <figure className="testimonial safe-paddings mt-[200px] xl:mt-36 lg:mt-28 md:mt-20">
     <Container className="flex flex-col items-center text-center" size="xs">
       <img
-        className="h-20 h-[72px] w-20 xl:w-[72px] lg:h-16 lg:w-16 md:h-12 md:w-12"
+        className="h-20 w-20 xl:h-[72px] xl:w-[72px] lg:h-16 lg:w-16 md:h-12 md:w-12"
         src={quoteIcon}
         width={80}
         height={80}
