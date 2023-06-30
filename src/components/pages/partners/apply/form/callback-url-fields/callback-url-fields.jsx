@@ -13,7 +13,7 @@ const CallbackUrlFields = ({ register }) => {
 
   return (
     <fieldset className="flex flex-col">
-      <div className="flex items-center" htmlFor="firstName">
+      <div className="flex items-center">
         <span>Callback URLs</span>
         <a
           className="relative ml-1.5 flex items-center after:absolute after:-inset-2"

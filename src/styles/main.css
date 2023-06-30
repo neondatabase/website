@@ -80,6 +80,12 @@
     -webkit-mask-image: url('/images/footer/youtube.svg');
     @apply mask-styles footer-icon-size;
   }
+
+  .multi-checkbox {
+    input[type='checkbox'] {
+      @apply border-green-45 bg-green-45 bg-[url(/images/check.svg)];
+    }
+  }
 }
 
 @layer utilities {

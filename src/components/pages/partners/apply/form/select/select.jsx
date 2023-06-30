@@ -32,7 +32,7 @@ const Select = ({
             className="h-10 w-full appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 caret-transparent transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15"
             displayValue={() => value?.name}
             placeholder={placeholder}
-            disabled
+            readOnly
           />
           <Combobox.Button className="absolute right-0 top-1/2 flex h-full w-full -translate-y-1/2 items-center justify-end pr-4">
             <ChevronIcon className="h-4 w-4" />

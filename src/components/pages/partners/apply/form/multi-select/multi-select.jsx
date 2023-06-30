@@ -1,5 +1,4 @@
 import { Combobox } from '@headlessui/react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Controller } from 'react-hook-form';
@@ -17,6 +16,7 @@ const applicationScopeOptions = [
 
 const MultiSelect = ({ control, setValue }) => {
   const [applicationScopes, setApplicationScopes] = useState([]);
+
   return (
     <Combobox
       className="relative mt-1"
@@ -51,8 +51,8 @@ const MultiSelect = ({ control, setValue }) => {
           </ul>
         )}
         <Combobox.Input
-          className={clsx('pointer-events-none absolute inset-0 opacity-0 focus:outline-none')}
-          disabled
+          className="pointer-events-none absolute inset-0 opacity-0 focus:outline-none"
+          readOnly
         />
         <Combobox.Button className="absolute right-0 top-1/2 flex h-full w-full -translate-y-1/2 items-center justify-end pr-4">
           <ChevronIcon className="h-4 w-4" />
@@ -61,7 +61,7 @@ const MultiSelect = ({ control, setValue }) => {
       <Combobox.Options className="absolute top-full z-10 mt-1.5 flex w-full flex-col gap-y-3 rounded border border-gray-new-15 bg-[#1c1d1e] p-4">
         {applicationScopeOptions.map((item) => (
           <Combobox.Option
-            className="cursor-pointer text-sm leading-none transition-colors duration-200 hover:text-green-45 ui-active:text-green-45"
+            className="ui-selected:multi-checkbox cursor-pointer text-sm leading-none transition-colors duration-200 hover:text-green-45 ui-active:text-green-45"
             key={item.id}
             value={item}
           >
@@ -77,7 +77,6 @@ const MultiSelect = ({ control, setValue }) => {
                     className="h-3.5 w-3.5 appearance-none rounded-sm border border-gray-new-40 bg-[length:10px_10px] bg-center bg-no-repeat transition-colors duration-200 checked:border-green-45 checked:bg-green-45 checked:bg-[url(/images/check.svg)] focus:outline-none"
                     type="checkbox"
                     defaultChecked={applicationScopes?.some((i) => i.id === item?.id)}
-                    checked={applicationScopes?.some((i) => i.id === item?.id)}
                     id={`option-${item.id}`}
                     onChange={(e) => {
                       onChange(e);
