@@ -74,6 +74,10 @@ export default {
           to: LINKS.careers,
         },
         {
+          text: 'Partners',
+          to: LINKS.partners,
+        },
+        {
           text: 'Pricing',
           to: LINKS.pricing,
         },

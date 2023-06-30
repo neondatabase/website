@@ -29,6 +29,7 @@ const icons = {
 const Header = forwardRef(
   (
     {
+      className = null,
       theme,
       isMobileMenuOpen = false,
       onBurgerClick,
@@ -45,6 +46,7 @@ const Header = forwardRef(
       <header
         className={clsx(
           'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-gray-new-8 lg:relative lg:h-14',
+          className,
           isSticky && 'sticky top-0 z-50 md:relative',
           withBottomBorder &&
             theme !== 'gray-8' &&
@@ -169,6 +171,7 @@ const Header = forwardRef(
 );
 
 Header.propTypes = {
+  className: PropTypes.string,
   theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
   withBottomBorder: PropTypes.bool,
   isMobileMenuOpen: PropTypes.bool,

@@ -22,6 +22,22 @@
     transition: all 0.3s ease-out;
   }
 
+  /* used in components/partners/integration/api/code-tabs/code-tabs.jsx */
+  .code-block {
+    pre {
+      @apply overflow-x-auto;
+
+      code {
+        text-shadow: unset;
+        @apply highlighted-code !font-mono text-sm !text-white ![text-shadow:unset];
+      }
+    }
+
+    .comment.linenumber {
+      @apply -mr-5;
+    }
+  }
+
   .mask-styles {
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: center center;
@@ -71,6 +87,22 @@
     a {
       @apply border-b border-transparent text-primary-1 transition-[border-color] duration-200 hover:border-primary-1;
     }
+  }
+
+  .flat-none br {
+    content: none;
+  }
+
+  .flat-none br::after {
+    content: none;
+  }
+
+  .flat-breaks br {
+    content: '';
+  }
+
+  .flat-breaks br::after {
+    content: ' ';
   }
 }
 
