@@ -50,6 +50,7 @@ const Form = ({ className }) => {
   const {
     register,
     handleSubmit,
+    reset,
     setValue,
     control,
     formState: { errors },
@@ -99,6 +100,9 @@ const Form = ({ className }) => {
         doNowOrAfterSomeTime(() => {
           setFormState(FORM_STATES.SUCCESS);
           setFormError('');
+          setTimeout(() => {
+            setFormState(FORM_STATES.DEFAULT);
+          }, 2000);
         }, loadingAnimationStartedTime);
       } else {
         throw new Error('Something went wrong. Please reload the page and try again.');
@@ -110,6 +114,8 @@ const Form = ({ className }) => {
           setFormError(error?.message ?? error);
         }, 2000);
       }
+    } finally {
+      reset();
     }
   };
 

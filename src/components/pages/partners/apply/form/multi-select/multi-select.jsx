@@ -63,7 +63,6 @@ const MultiSelect = ({ control, setValue }) => {
           <Combobox.Option
             className="cursor-pointer text-sm leading-none transition-colors duration-200 hover:text-green-45 ui-active:text-green-45"
             key={item.id}
-            as="fieldset"
             value={item}
           >
             <label
@@ -73,12 +72,12 @@ const MultiSelect = ({ control, setValue }) => {
               <Controller
                 control={control}
                 name="application_scope"
-                render={({ field: { onChange, value } }) => (
+                render={({ field: { onChange } }) => (
                   <input
                     className="h-3.5 w-3.5 appearance-none rounded-sm border border-gray-new-40 bg-[length:10px_10px] bg-center bg-no-repeat transition-colors duration-200 checked:border-green-45 checked:bg-green-45 checked:bg-[url(/images/check.svg)] focus:outline-none"
                     type="checkbox"
-                    value={value}
                     defaultChecked={applicationScopes?.some((i) => i.id === item?.id)}
+                    checked={applicationScopes?.some((i) => i.id === item?.id)}
                     id={`option-${item.id}`}
                     onChange={(e) => {
                       onChange(e);
