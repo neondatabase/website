@@ -22,7 +22,7 @@ After your application has been reviewed, we will get in touch with you and prov
 
 ## How the OAuth integration works
 
-Here is a high-level overview of how Neon's OAuth implementatio works
+Here is a high-level overview of how Neon's OAuth implementation works:
 
 ![OAuth flow diagram](/docs/oauth/flow.png)
 
