@@ -28,7 +28,10 @@ Testimonial.propTypes = {
 };
 
 const Apply = () => (
-  <section className="apply-form safe-paddings mb-40 mt-[200px] xl:mb-[120px] xl:mt-36 lg:mb-24 lg:mt-28 md:my-20">
+  <section
+    id="partners-apply"
+    className="apply-form safe-paddings pb-40 pt-[200px] xl:pb-[120px] xl:pt-36 lg:pb-24 lg:pt-28 md:py-20"
+  >
     <Container className="grid-gap-x grid grid-cols-12" size="lg">
       <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 xl:col-span-full xl:col-start-1 xl:grid-cols-12">
         <div className="col-span-5 lg:col-span-full lg:text-center">

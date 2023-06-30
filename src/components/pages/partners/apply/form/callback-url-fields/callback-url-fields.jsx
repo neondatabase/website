@@ -14,11 +14,11 @@ const CallbackUrlFields = ({ register }) => {
   return (
     <fieldset className="flex flex-col">
       <legend className="items-centers flex" htmlFor="firstName">
-        Callback URLs {/* TODO: add tooltip */}
+        Callback URLs
         <a
           className="ml-1.5 flex items-center"
           id="callback-urls-tooltip"
-          data-tooltip-content="This is a tooltip!"
+          data-tooltip-content="May be plural, the port to use for your application"
         >
           <img src={infoSvg} width={14} height={14} alt="" loading="lazy" aria-hidden />
         </a>
