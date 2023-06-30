@@ -79,7 +79,7 @@ const Form = ({ className }) => {
 
     data.application_scope = data.application_scope?.map(({ id }) => id).join(';');
     data.integration_type = data.integration_type.name;
-    data.number_of_projects = data.number_of_projects.name;
+    data.number_of_projects = data.number_of_projects.name || '';
 
     const dataToSend = Object.entries(data).map(([name, value]) => ({ name, value }));
 
@@ -238,9 +238,10 @@ const Form = ({ className }) => {
       />
       <div className="relative flex flex-col gap-y-6 lg:mt-3 lg:flex-row lg:items-center lg:gap-x-5 md:mt-2 md:flex-col md:items-stretch md:gap-y-4">
         <Button
-          className="mt-3 h-[52px] py-[17px] text-lg font-medium leading-none tracking-[-0.02em] lg:order-1 lg:ml-auto lg:mt-0 lg:basis-[316px] md:order-none md:ml-0 md:w-full md:basis-full"
+          className="mt-3 h-[52px] py-[17px] text-lg font-medium leading-none tracking-[-0.02em] disabled:hover:bg-primary-1 lg:order-1 lg:ml-auto lg:mt-0 lg:basis-[316px] md:order-none md:ml-0 md:w-full md:basis-full"
           theme="primary"
           type="submit"
+          disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
         >
           {formState === FORM_STATES.LOADING && (
             <LoadingIcon className="h-8 w-8 animate-spin text-black-new" />
