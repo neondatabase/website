@@ -49,7 +49,7 @@ Here is an example of what the authorization URL might look like:
 https://oauth2.neon.tech/oauth2/auth?client_id=neon-experimental&scope=openid%20offline%20offline_access%20urn%3Aneoncloud%3Aprojects%3Acreate%20urn%3Aneoncloud%3Aprojects%3Aread%20urn%3Aneoncloud%3Aprojects%3Aupdate%20urn%3Aneoncloud%3Aprojects%3Adelete&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fneon&grant_type=authorization_code&state=H58y-rSTebc3QmNbRjNTX9dL73-IyoU2T_WNievO9as&code_challenge=99XcbwOFU6iEsvXr77Xxwsk9I0GL4c4c4Q8yPIVrF_0&code_challenge_method=S256
 ```
 
-After the user is redirected to the authorization URL, they will be presented with Neon's consent screen, which will be pre-populated with the scopes you requested. The user will be able to review the scopes and authorize your application to connect their Neon account.
+After the user is redirected to the authorization URL, they are presented with Neon's consent screen, which is pre-populated with the scopes you requested. From the consent screen, the user is able to review the scopes and authorize your application to connect their Neon account.
 
 ![Neon OAuth consent screen](/docs/oauth/consent.png)
 
