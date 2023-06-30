@@ -30,7 +30,60 @@ Here is a high-level overview of how Neon's OAuth implementation works:
 2. An authorization URL is generated, and the user is redirected to Neon’s OAuth consent screen, where they  authorize your application and grant the necessary permissions.
 3. Finally, your application receives an access token to manage Neon resources on the user’s behalf.
 
-Here is a more detailed breakdown of the steps involved in the OAuth flow:
+## About the Neon OAuth API
+
+The Neon OAuth server implements the OpenID Connect protocol and supports [OpenID Connect Discovery specification](https://openid.net/specs/openid-connect-discovery-1_0.html). The server metadata is published at the following well-known URL: [https://oauth2.neon.tech/.well-known/openid-configuration](https://oauth2.neon.tech/.well-known/openid-configuration).
+
+Here is an example response:
+```json
+{
+  "issuer": "https://oauth2.neon.tech/",
+  "authorization_endpoint": "https://oauth2.neon.tech/oauth2/auth",
+  "token_endpoint": "https://oauth2.neon.tech/oauth2/token",
+  "jwks_uri": "https://oauth2.neon.tech/.well-known/jwks.json",
+  "subject_types_supported": ["public"],
+  "response_types_supported": [
+    "code",
+    "code id_token",
+    "id_token",
+    "token id_token",
+    "token",
+    "token id_token code"
+  ],
+  "claims_supported": ["sub"],
+  "grant_types_supported": [
+    "authorization_code",
+    "implicit",
+    "client_credentials",
+    "refresh_token"
+  ],
+  "response_modes_supported": ["query", "fragment"],
+  "userinfo_endpoint": "https://oauth2.neon.tech/userinfo",
+  "scopes_supported": ["offline_access", "offline", "openid"],
+  "token_endpoint_auth_methods_supported": [
+    "client_secret_post",
+    "client_secret_basic",
+    "private_key_jwt",
+    "none"
+  ],
+  "userinfo_signing_alg_values_supported": ["none", "RS256"],
+  "id_token_signing_alg_values_supported": ["RS256"],
+  "request_parameter_supported": true,
+  "request_uri_parameter_supported": true,
+  "require_request_uri_registration": true,
+  "claims_parameter_supported": false,
+  "revocation_endpoint": "https://oauth2.neon.tech/oauth2/revoke",
+  "backchannel_logout_supported": true,
+  "backchannel_logout_session_supported": true,
+  "frontchannel_logout_supported": true,
+  "frontchannel_logout_session_supported": true,
+  "end_session_endpoint": "https://oauth2.neon.tech/oauth2/sessions/logout",
+  "request_object_signing_alg_values_supported": ["RS256", "none"],
+  "code_challenge_methods_supported": ["plain", "S256"]
+}
+```
+
+Depending on the OpenID client you’re using, you might not need to explicitly interact with the API endpoints listed below.
 
 ### 1. Initiating the OAuth flow
 
@@ -73,8 +126,8 @@ You can now exchange the authorization code returned from the previous step for 
 
 The response object includes an `access_token` value, required for making requests to the Neon API on your users' behalf. This value must be supplied in the Authorization header of the HTTP request when sending requests to the Neon API.
 
-## Example apps
+## Example applications
 
 You can check out the following example applications that leverage the Neon OAuth integration:
 
-- Visualizing Neon Postgres branches: [demo](https://neon-experimental.vercel.app), code([http//github.com/neondatabase/neon-](https://github.com/neondatabase/neon-branches-visualizer))
+- Visualizing Neon Postgres branches: [demo](https://neon-experimental.vercel.app), [code](https://github.com/neondatabase/neon-branches-visualizer)
