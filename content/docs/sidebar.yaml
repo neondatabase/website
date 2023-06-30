@@ -167,6 +167,8 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
+    - title: OAuth
+      slug: guides/oauth-integration
 - title: Extensions
   items:
     - title: Supported extensions
