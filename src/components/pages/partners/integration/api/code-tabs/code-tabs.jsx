@@ -16,41 +16,20 @@ const codeSnippets = [
     name: 'cURL',
     icon: BashIcon,
     language: 'bash',
-    code: `    curl --location --request POST 'https://console.neon.tech/api/v2/projects/project_id/branches' \\
-    --header 'accept: application/json' \\
-    --header 'content-type: application/json' \\
-    --data-raw '{
-        "name": "master",
-        "branch_type": "production",
-        "branch_id": "master",
-        "branch_secret": "branch_secret",
-        "branch_token": "branch_token",
-        "branch_url": "https://branch_url.com",
-        "branch_key": "branch_key",
-        "branch_secret": "branch_secret",
-        "branch_token": "branch_token",
-    }'
-    `,
+    code: `    curl --request POST
+    --url https://console.neon.tech/api/v2/projects/project_id/branches
+    --header 'accept: application/json'
+    --header 'content-type: application/json'`,
   },
   {
     name: 'Node',
     icon: JavascriptIcon,
     language: 'javascript',
-    code: `    const axios = require('axios');
+    code: `    const sdk = require('api')('@neon-tech/v2.0#end53sbljigaqpv');
 
-    const config = {
-      method: 'post',
-      url: 'https://console.neon.tech/api/v2/projects/project_id/branches',
-      headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json'
-      },
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })`,
+    sdk.createProjectBranch({project_id: 'project_id'})
+      .then(({ data }) => console.log(data))
+      .catch(err => console.error(err));`,
   },
   {
     name: 'Ruby',
@@ -77,19 +56,18 @@ const codeSnippets = [
     icon: PHPIcon,
     language: 'php',
     code: `    <?php
-
-    $curl = curl_init();
-
-    curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://console.neon.tech/api/v2/projects/project_id/branches',
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => '',
-      CURLOPT_MAXREDIRS => 10,
-      CURLOPT_FOLLOWLOCATION => true,
-      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => 'POST',
-    ));
-    ?>`,
+    require_once('vendor/autoload.php');
+    
+    $client = new \GuzzleHttp\Client();
+    
+    $response = $client->request('POST', 'https://console.neon.tech/api/v2/projects/project_id/branches', [
+      'headers' => [
+        'accept' => 'application/json',
+        'content-type' => 'application/json',
+      ],
+    ]);
+    
+    echo $response->getBody();`,
   },
 ];
 
