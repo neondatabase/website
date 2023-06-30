@@ -13,12 +13,12 @@ const CallbackUrlFields = ({ register }) => {
 
   return (
     <fieldset className="flex flex-col">
-      <legend className="items-centers flex" htmlFor="firstName">
+      <div className="flex items-center" htmlFor="firstName">
         <span>Callback URLs</span>
         <a
           className="relative ml-1.5 flex items-center after:absolute after:-inset-2"
           data-tooltip-id="callback-urls-tooltip"
-          data-tooltip-html="May be plural, the port to use<br/>for your application"
+          data-tooltip-html="May be plural, the port to use<br/> for your application"
         >
           <img src={infoSvg} width={14} height={14} alt="" loading="lazy" aria-hidden />
         </a>
@@ -27,7 +27,7 @@ const CallbackUrlFields = ({ register }) => {
           id="callback-urls-tooltip"
           place="top-start"
         />
-      </legend>
+      </div>
       {Array.from({ length: CALLBACK_URLS_LIMIT }).map((_, index) => {
         const name = `callback_url${index > 0 ? `_${index + 1}` : ''}`;
         return (
