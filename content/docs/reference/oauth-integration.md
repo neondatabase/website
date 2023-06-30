@@ -66,10 +66,10 @@ After your user successfully completes the authorization flow, they will be redi
 You can now exchange the authorization code returned from the previous step for an access token. To do that, you will need to send a `POST` request to `https://oauth2.neon.tech/oauth2/token` with the following parameters:
 
 - `client_id`
+- `redirect_uri`
 - `client_secret`: your OAuth application's secret
-- `grant_type`: This should be set to `authorization_code` to indicate that you are using the [Authorization Code grant type]().
+- `grant_type`: This should be set to `authorization_code` to indicate that you are using the [Authorization Code grant type](https://oauth.net/2/grant-types/authorization-code/).
 - `code`: the authorization code returned from the previous step
-- `redirect_uri`: the full URL that Neon should redirect users to after authorizing your app. This URL should match at least one of the callback URLs you provided in your application.
 
 The response object will contain an `access_token` field value to send API calls on behalf of your users. You do that by passing it in the `Authorization` header of the HTTP request when sending requests to Neon's API.
 
