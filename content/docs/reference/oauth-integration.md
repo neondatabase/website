@@ -75,6 +75,6 @@ The response object will contain an `access_token` field value to send API calls
 
 ## Example apps
 
-You can check out the following example apps that leverage the Neon OAuth integration:
+You can check out the following example applications that leverage the Neon OAuth integration:
 
 - Visualizing Neon Postgres branches: [demo](https://neon-experimental.vercel.app), code([http//github.com/neondatabase/neon-](https://github.com/neondatabase/neon-branches-visualizer))
