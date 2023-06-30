@@ -255,7 +255,7 @@ const Form = ({ className }) => {
           {formState === FORM_STATES.SUCCESS && 'Applied!'}
         </Button>
         <p className="text-[15px] font-light leading-snug lg:max-w-[450px] lg:flex-1">
-          By submitting you agree to the{' '}
+          By submitting, you agree to the{' '}
           <Link
             className="text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors duration-200 hover:decoration-transparent"
             to={LINKS.termsOfService}

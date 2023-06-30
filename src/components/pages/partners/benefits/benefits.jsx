@@ -10,13 +10,13 @@ const items = [
     icon: currencyIcon,
     title: 'Bring in new revenue',
     description:
-      'Get paid for providing your clients with the best solutions based on their needs.',
+      'Earn revenue by tailoring solutions according to your client\'s requirements.',
   },
   {
     icon: priorityLowIcon,
     title: 'Reduce costs',
     description:
-      'Get Serverless Postgres at your demand without the costs of managing it yourself.',
+      'Access Serverless Postgres on demand without the costs of managing it yourself.',
   },
   {
     icon: userIcon,
@@ -26,7 +26,7 @@ const items = [
   {
     icon: screenIcon,
     title: 'Scale easily',
-    description: 'Grow your user base without friction and effortlessly add new solutions.',
+    description: 'Grow your user base without friction and easily integrate new solutions.',
   },
 ];
 
@@ -44,8 +44,8 @@ const Benefits = () => (
             Why become a partner?
           </h2>
           <p className="mt-5 max-w-[362px] text-lg font-light leading-snug xl:text-base lg:mt-4 lg:max-w-none md:mt-2.5">
-            At Neon, we love our partners and believe that partners are vital to our mission to make
-            Serverless Postgress in the Cloud easy to integrate, manage, and grow.
+            At Neon, we deeply value our partners, holding firm in our belief that they are vital to our mission of making
+            Serverless Postgres easy to integrate, manage, and grow.
           </p>
         </div>
         <ul className="col-start-5 col-end-11 mt-2 grid max-w-[640px] grid-cols-2 gap-x-16 gap-y-12 pl-2.5 xl:-ml-5 xl:mt-0 xl:gap-x-8 xl:gap-y-10 xl:pl-0 lg:col-span-full lg:ml-0 lg:mt-8 lg:gap-x-6 lg:gap-y-8 md:mt-5 md:grid-cols-1 md:gap-y-6">
