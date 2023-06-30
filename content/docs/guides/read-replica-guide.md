@@ -1,19 +1,43 @@
 ---
-title: Create and manage Neon read replicas 
+title: Working with Neon read replicas 
 subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
 ---
 
-Neon includes read replicas as part of its offering for Pro plan users. This guide will lead you through the process of creating a read replica in Neon that can be used for your read-only workloads. The general methodology of using read replicas to segregate read-only work from your production database operations can be applied to a variety of uses cases such as offloading analytics work, distributing read requests to one or more read replicas to achieve higher throughput, providing read-only data access to specific users or applications who do not require write access, or configuring right-sized compute resources for different users and applications.
+Read replicas are supported with the Neon Pro plan. This guide will lead you through the process of creating a read replica in Neon that can be used for your read-only workloads. The general methodology of using read replicas to segregate read-only work from your production database operations can be applied to a variety of uses cases such as:
+
+- Offloading analytics or reporting queries
+- Distributing read requests to to achieve higher throughput
+- Providing read-only data access to specific users or applications who do not need to modify data
+- Configuring right-sized read-only compute resources for different users and applications
+
+Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can follow these steps to create one or more read replicas, depending on your requirements. You can create as many read-replicas as you need for any branch in your Neon project, and you can configure each with the required cVCPU and memory. You also have the option of configuring autoscaling and auto-suspend for a read replica, in the same way that you can configure those resources for your read-write compute instances.
+
+Neon also supports managing read replicas programmatically, which is covered toward the end of the guide.
 
 ## Prerequisites
 
-- A Pro plan account. The read replica feature is a Neon Pro plan feature
-- A Neon project
+- A Pro plan account. The read replica feature is a Neon Pro plan feature.
+- A Neon project.
 
 ## Create a read replica
 
+A read replica is created by adding read-only compute endpoint to a branch. This can be any branch in your Neon project. To create a read-only compute instance:
+
+1. In the Neon Console, select **Branches**.
+1. Select the branch where your database resides.
+1. Click **Add compute**.
+1. On the **Create compute endpoint** dialog, select the **Read-only** as the **Compute type**.
+1. Specify the compute size options for your read-only compute. You can set a fixed size (the default) or enable autoscaling and specify your minimum and maximum compute size boundaries. additionally, you can configure the autosuspend delay period, which is the amount of idle time after which your compute is transitioned to an idle state. This value is set to 300 seconds (5 minutes) by default.
+1. When you have finished making your selections, click **Create**.
+
+In a few moments, your read-only compute is provisioned. This is your read replica.
+
 ## Connect to the read replica
+
+Connecting to a read replica requires connecting to the read-only compute endpoint. You can access the connection string from the **Connection Details** widget on the Neon **Dashboard**.
+
+Users and applications that connect to the read-only compute endpoint are connecting to a read replica.
 
 ## Viewing your read replicas
 

@@ -30,6 +30,6 @@ Advantages of Neon's read replica feature include the following:
 4. **Reduced data latency**: All data is read from the same source, significantly reducing common data latency issues seen with traditional replication.
 5. **Cost effectiveness**: By eliminating data replication, costs associated with data transfer and storage are avoided. Read replicas in Neon also benefit from Neon's autoscaling and scale-to-zero features, which enable you to manage compute costs.
 
-## Getting started with read replicas
+## Get started with read replicas
 
 The first step to leveraging Neon's read replica feature is to sign up for Neon's [Pro plan](/docs/introduction/pro-plan). Once subscribed, you will be able create and configure read replicas. To get started, refer to our [Working with read replics](/docs/guides/read-replica-guide) guide.
