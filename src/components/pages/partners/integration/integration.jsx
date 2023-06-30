@@ -11,10 +11,10 @@ const Integration = () => (
           Integrate
         </span>
         <h2 className="mt-2 max-w-[700px] text-center text-[56px] font-medium leading-none tracking-tighter xl:max-w-[600px] xl:text-[44px] lg:max-w-[450px] lg:text-4xl md:max-w-[400px] md:text-3xl">
-          Pick the integration that suits your needs
+          Choose the integration that fits your requirements
         </h2>
         <p className="mt-4 text-center text-lg font-light leading-snug xl:text-base md:mt-2.5">
-          Neon offers two ways to seamlessly integrate it into your product.
+          Neon provides two methods for seamless integration with your product.
         </p>
         <Oauth />
         <Api />
