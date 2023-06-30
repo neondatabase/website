@@ -71,7 +71,7 @@ You can now exchange the authorization code returned from the previous step for 
 - `grant_type`: set this to `authorization_code` to indicate that you are using the [Authorization Code grant type](https://oauth.net/2/grant-types/authorization-code/)
 - `code`: the authorization code returned from the previous step
 
-The response object will contain an `access_token` field value to send API calls on behalf of your users. You do that by passing it in the `Authorization` header of the HTTP request when sending requests to Neon's API.
+The response object includes an `access_token` value, required for making requests to the Neon API on your users' behalf. This value must be supplied in the Authorization header of the HTTP request when sending requests to the Neon API.
 
 ## Example apps
 
