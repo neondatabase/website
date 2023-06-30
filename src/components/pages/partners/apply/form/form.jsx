@@ -186,7 +186,7 @@ const Form = ({ className }) => {
             <div className="ml-1 mt-5 flex items-center gap-x-8">
               <label className="flex items-center gap-x-[9px]" htmlFor="apiCallsYes">
                 <input
-                  className="h-2 w-2 appearance-none rounded-full bg-transparent outline outline-1 outline-offset-2 outline-gray-new-40 checked:bg-primary-1"
+                  className="relative h-2 w-2 appearance-none rounded-full bg-transparent after:absolute after:left-1/2 after:top-1/2 after:block after:h-3 after:w-3 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:border after:border-gray-new-40 checked:bg-primary-1"
                   type="radio"
                   name="are_api_calls_from_backend"
                   id="apiCallsYes"
@@ -198,7 +198,7 @@ const Form = ({ className }) => {
 
               <label className="flex items-center gap-x-[9px]" htmlFor="apiCallsNo">
                 <input
-                  className="h-2 w-2 appearance-none rounded-full bg-transparent outline outline-1 outline-offset-2 outline-gray-new-40 checked:bg-primary-1"
+                  className="relative h-2 w-2 appearance-none rounded-full bg-transparent after:absolute after:left-1/2 after:top-1/2 after:block after:h-3 after:w-3 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:border after:border-gray-new-40 checked:bg-primary-1"
                   type="radio"
                   name="are_api_calls_from_backend"
                   id="apiCallsNo"
