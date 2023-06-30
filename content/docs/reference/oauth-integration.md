@@ -26,7 +26,7 @@ Here is a high-level overview of how Neon's OAuth implementation works:
 
 ![OAuth flow diagram](/docs/oauth/flow.png)
 
-1. The user initiates the OAuth flow in the third-party application by clicking a button or link.
+1. The user initiates the OAuth flow in your application by clicking a button or link.
 2. An authorization URL is generated, and the user is redirected to Neon’s OAuth consent screen, where they can authorize the third-party application and grant the necessary permissions.
 3. Finally, the third-party application receives an access token to manage Neon resources on the user’s behalf.
 
