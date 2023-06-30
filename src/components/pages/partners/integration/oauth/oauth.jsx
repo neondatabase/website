@@ -1,7 +1,10 @@
+import Image from 'next/image';
+
 import CardItemsList from '../card-items-list';
 import appStoreIcon from '../images/app-store.svg';
 import bookIcon from '../images/book.svg';
 import fileIcon from '../images/file.svg';
+import image from '../images/oauth.jpg';
 
 const items = [
   {
@@ -36,7 +39,9 @@ const Oauth = () => (
       </p>
       <CardItemsList className="lg:hidden" items={items} />
     </div>
-    <div className="col-span-5 h-[395px] rounded-[10px] bg-gray-new-8 xl:h-[305px] lg:col-span-full lg:h-[471px] md:h-[255px]" />
+    <div className="col-span-5 lg:col-span-full">
+      <Image className="rounded-[10px]" src={image} alt="Authorize Hasura Cloud" />
+    </div>
     <CardItemsList className="col-span-full hidden lg:grid" items={items} ariaHidden />
   </div>
 );
