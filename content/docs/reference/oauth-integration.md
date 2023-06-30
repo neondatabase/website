@@ -63,7 +63,7 @@ After successfully completing the authorization flow, they user is redirected to
 
 ### 3. Exchanging the authorization code for an access token
 
-You can now exchange the authorization code returned from the previous step for an access token. To do that, you will need to send a `POST` request to `https://oauth2.neon.tech/oauth2/token` with the following parameters:
+You can now exchange the authorization code returned from the previous step for an access token. To do that, you need to send a `POST` request to `https://oauth2.neon.tech/oauth2/token` with the following parameters:
 
 - `client_id`
 - `redirect_uri`
