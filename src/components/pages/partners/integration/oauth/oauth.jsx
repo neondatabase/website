@@ -40,7 +40,7 @@ const Oauth = () => (
       <CardItemsList className="lg:hidden" items={items} />
     </div>
     <div className="col-span-5 lg:col-span-full">
-      <Image className="rounded-[10px]" src={image} alt="Authorize Hasura Cloud" />
+      <Image className="rounded-[10px]" src={image} quality={85} alt="Authorize Hasura Cloud" />
     </div>
     <CardItemsList className="col-span-full hidden lg:grid" items={items} ariaHidden />
   </div>
