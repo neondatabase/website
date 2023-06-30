@@ -15,7 +15,7 @@ To set up the integration and create a Neon OAuth application, you can apply on 
    - Read Projects
    - Modify Projects
    - Delete Projects
-4. Whether or not you will be making API calls from a backend
+4. Whether or not you will make API calls from a backend.
 5. Logo: an image to be displayed on Neon's OAuth consent dialog when users authorize your app to access their Neon account.
 
 After your application is reviewed, we will get in touch with you and provide you with two credentials: a client ID and a client secret. These credentials are sensitive and should be stored securely.
