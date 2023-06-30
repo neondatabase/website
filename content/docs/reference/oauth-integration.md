@@ -10,7 +10,7 @@ To set up the integration and create a Neon OAuth application, you can apply on 
 
 1. Details about your application, such as its name, what it does, and a link to the website.
 2. Callback URL(s): URLs used to redirect users after completing the authorization flow. For example `https://yourapplication.com/api/oauth/callback`, `http://localhost:3000/api/oauth/callback`
-3. Scopes: scopes let you specify exactly what type of access you need. Right now, we provide access to the following scopes:
+3. Scopes: scopes let you specify the type of access you require. Currently, we provide access to the following scopes:
    - Create Projects
    - Read Projects
    - Modify Projects
