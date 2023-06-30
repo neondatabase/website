@@ -14,7 +14,7 @@ const items = [
     icon: appStoreIcon,
     title: 'Example app',
     description: 'See an example OAuth app',
-    url: '/',
+    url: 'https://neon-experimental.vercel.app/',
   },
   {
     icon: bookIcon,
