@@ -17,9 +17,9 @@ For more information about shadow databases, refer to [About the shadow database
 
 To configure a shadow database:
 
-1. Create another database in your Neon project and copy the connection string. Refer to [Create a database](../manage/databases#create-a-database) for instructions. You can name the shadow database whatever you like.
+1. Create another database in your Neon project and copy the connection string. Refer to [Create a database](/docs/manage/databases#create-a-database) for instructions. You can name the shadow database whatever you like.
 
-    For information about obtaining a connection string, see [Connect from any application](../connect/connect-from-any-app/).
+    For information about obtaining a connection string, see [Connect from any application](/docs/connect/connect-from-any-app/).
 
 1. Add the `shadowDatabaseUrl` setting to your `prisma/schema.prisma` file to identify the shadow database URL:
 
@@ -51,7 +51,7 @@ Error querying the database: db error: ERROR: prepared statement
 "s0" already exists
 ```
 
-To avoid this issue, ensure that you are using a direct connection to the database for Prisma Migrate. Neon supports both pooled and direct connections to the same database. See [Enable connection pooling](../connect/connection-pooling#enable-connection-pooling) for more information.
+To avoid this issue, ensure that you are using a direct connection to the database for Prisma Migrate. Neon supports both pooled and direct connections to the same database. See [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling) for more information.
 
 You can configure Prisma Migrate to use a direct connection while allowing applications to use Prisma Client with a pooled connection by adding a `directUrl` property to the datasource block in your `schema.prisma` file. For example:
 

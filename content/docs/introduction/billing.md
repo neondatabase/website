@@ -3,7 +3,7 @@ title: Billing metrics
 enableTableOfContents: true
 ---
 
-Neon [paid plans](../introduction/plans#neon-plans) bill for usage based on the following metrics:
+Neon [paid plans](/docs/introduction/plans#neon-plans) bill for usage based on the following metrics:
 
 - **Active time**: The amount of time that your computes have been active.
 - **Compute time**: The amount of computing capacity used per hour.
@@ -21,7 +21,7 @@ The **Project storage**, **Written data**, and **Data transfer** metrics are cal
 
 ## Active time
 
-_Active time_ is the total amount of time, measured in hours, that your computes have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an Idle state due to [auto-suspension](../reference/glossary#auto-suspend-compute) (scale-to-zero). _Active time_ is not a billed metric. It is a factor of the _Compute time_ metric.
+_Active time_ is the total amount of time, measured in hours, that your computes have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an Idle state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale-to-zero). _Active time_ is not a billed metric. It is a factor of the _Compute time_ metric.
 
 ## Compute time
 
@@ -47,7 +47,7 @@ Factors that affect _Compute time_ include:
 
 - The number of active computes
 - The size of each compute
-- The _Auto-suspend_ feature, which suspends a compute after five minutes of inactivity. Neon [Pro plan](../introduction/pro-plan) users can configure the `Auto-suspend` timeout timeout or disable _Auto-suspend_ entirely.
+- The _Auto-suspend_ feature, which suspends a compute after five minutes of inactivity. Neon [Pro plan](/docs/introduction/pro-plan) users can configure the `Auto-suspend` timeout timeout or disable _Auto-suspend_ entirely.
 - The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Computing capacity automatically scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
