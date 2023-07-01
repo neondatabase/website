@@ -10,6 +10,7 @@ import MobileMenu from 'components/shared/mobile-menu';
 
 const Layout = ({
   className = null,
+  headerClassName = null,
   headerTheme,
   footerTheme = 'white',
   withOverflowHidden = false,
@@ -35,6 +36,7 @@ const Layout = ({
     // 44px is the height of the topbar
     <div className="relative flex min-h-[calc(100vh-44px)] flex-col">
       <Header
+        className={headerClassName}
         withBottomBorder={headerWithBottomBorder}
         theme={headerTheme}
         isMobileMenuOpen={isMobileMenuOpen}
@@ -65,6 +67,7 @@ const Layout = ({
 
 Layout.propTypes = {
   className: PropTypes.string,
+  headerClassName: PropTypes.string,
   headerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
   footerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']),
   withOverflowHidden: PropTypes.bool,

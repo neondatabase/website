@@ -170,7 +170,7 @@ const ContactForm = ({ formState, setFormState }) => {
           {formState === FORM_STATES.SUCCESS ? 'Sent!' : 'Send message'}
         </Button>
         <p className="ml-7 text-left leading-tight md:ml-0">
-          By submitting you agree to{' '}
+          By submitting, you agree to{' '}
           <Link
             className="pb-1 !text-base 2xl:!text-base md:!inline"
             to="/privacy-policy"
