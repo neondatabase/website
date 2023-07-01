@@ -96,6 +96,8 @@
       slug: manage/operations
 - title: Guides
   items:
+    - title: Read replicas
+      slug: guides/read-replica-guide
     - title: Languages
       items:
         - title: Elixir
