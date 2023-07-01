@@ -8,7 +8,7 @@ redirectFrom:
 
 The Neon **Limited Preview** started in February, 2022, and was made available to a small number of select users and friends.
 
-On June 15th, 2022, the Neon team announced the [Technical Preview](#technical-preview), making Neon available to a wider audience. Thousands of users were able to try Neon's [Free Tier](../introduction/free-tier).
+On June 15th, 2022, the Neon team announced the [Technical Preview](#technical-preview), making Neon available to a wider audience. Thousands of users were able to try Neon's [Free Tier](/docs/introduction/free-tier).
 
 On December 6th, 2022, Neon released its branching feature and dropped the invite gate, welcoming everyone to try Neon's Free Tier.
 

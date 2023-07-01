@@ -30,7 +30,7 @@ You can enable the `pgvector` extension by running the following `CREATE EXTENSI
 CREATE EXTENSION vector;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](../get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](../connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Create a table to store vectors
 
