@@ -9,7 +9,7 @@ Neon read replicas are independent read-only compute instances designed to perfo
 
 ![Read-only compute instances](/docs/introduction/read_replicas.png)
 
-In data replication terms, Neon's read replica feature is considered asynchronous. As updates are made by your read-write computes, data is made available to Neon Pageservers via a Write-Ahead Log (WAL) stream. Discounting other factors, any read lag you experience on a read replica is likely attributable to high-intensity write activity on your read-write computes. Otherwise, Neon's read replicas offer near-instant data consistency for read replicas residing in the same region as your database. Cross-region read replicas are currently not supported but you can expect that feature to be available in a future release.
+In data replication terms, Neon's read replica feature is considered asynchronous. As updates are made by your read-write computes, data is made available to Neon Pageservers via a Write-Ahead Log (WAL) stream. Discounting other factors, any read lag you experience on a read replica is likely attributable to high-intensity write activity on your read-write computes. Otherwise, Neon's read replicas offer near-instant data consistency for read replicas residing in the same region as your database. Cross-region read replicas are currently not supported but you can expect that feature in a future release.
 
 ## Use cases
 
