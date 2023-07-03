@@ -73,7 +73,7 @@ For more information about querying vectors, refer to the [pgvector README](http
 
 Using an index on the vector column can improve query performance with a minor cost in recall.
 
-You can add an index for each distance function you want to use. For example, the following query adds an index to the `embedding` column for the L2 distance distance function:
+You can add an index for each distance function you want to use. For example, the following query adds an index to the `embedding` column for the L2 distance function:
 
 ```sql
 CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
