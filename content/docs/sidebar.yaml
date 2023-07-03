@@ -199,8 +199,6 @@
           slug: reference/cli-projects
         - title: branches
           slug: reference/cli-branches
-        - title: endpoints
-          slug: reference/cli-endpoints
         - title: databases
           slug: reference/cli-databases
         - title: roles

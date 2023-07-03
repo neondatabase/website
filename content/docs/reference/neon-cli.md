@@ -69,7 +69,6 @@ For information about obtaining an Neon API key, see [Authentication](https://ap
 | [projects](../reference/cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | Manage projects           |
 | [me](../reference/cli-me)                                         |                                        | Show current user         |
 | [branches](../reference/cli-branches)                             | `list`, `create`, `update`, `delete`, `get` | Manage branches           |
-| [endpoints](../reference/cli-endpoints)                           | `list`, `create`, `update`, `delete`, `get` | Manage endpoints          |
 | [databases](../reference/cli-databases)                           | `list`, `create`, `delete`             | Manage databases          |
 | [roles](../reference/cli-roles)                                   | `list`, `create`,  `delete`            | Manage roles              |
 | [operations](../reference/cli-operations)                         | `list`                                 | Manage operations         |
