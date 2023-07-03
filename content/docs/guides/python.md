@@ -53,7 +53,7 @@ The project is created with a default `neondb` database, which you will connect 
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project's root directory and add your Neon connection string to it. You will find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
+Add a `.env` file to your project's root directory and add your Neon connection string to it. You will find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 Your connection string will look something like this:
 

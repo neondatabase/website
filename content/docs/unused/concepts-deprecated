@@ -11,7 +11,7 @@ A Neon user is identified by their email address.
 
 A user registers and authenticates in Neon Web UI with their GitHub or Google account. More authentication methods are coming soon.
 
-Once authenticated, a user can create and access [Projects](#project) and [query Project data](../get-started-with-neon/tutorials#query-via-ui). You can also manage [Postgres Users](#postgres-users) and [Databases](#postgres-databases) in each Project.
+Once authenticated, a user can create and access [Projects](#project) and [query Project data](/docs/get-started-with-neon/tutorials#query-via-ui). You can also manage [Postgres Users](#postgres-users) and [Databases](#postgres-databases) in each Project.
 
 ### Using API keys
 
@@ -104,13 +104,13 @@ Neon has limits on the amount of modification history stored for the [Technical 
 
 During the Technical Preview, Neon only supports modification to session level configuration parameters. Parameters are reset when the session is terminated (e.g. when compute is suspended).
 
-See [Default Parameters](../compatibility#default-parameters).
+See [Default Parameters](/docs/compatibility#default-parameters).
 
 See [https://www.postgresql.org/docs/14/runtime-config.html](https://www.postgresql.org/docs/14/runtime-config.html) for details.
 
 ## Technical Preview Free Tier
 
-Neon cloud service is available for free during the [Limited and the Technical Preview](../roadmap).
+Neon cloud service is available for free during the [Limited and the Technical Preview](/docs/roadmap).
 
 Technical Preview Free Tier users can only create three Projects in Neon. Projects created under Technical Preview Free Tier are subject to additional limits:
 
@@ -118,7 +118,7 @@ Technical Preview Free Tier users can only create three Projects in Neon. Projec
 - PITR time window is limited to 7 days of _reasonable usage_;
 - Compute node can use up to 1vCPU/256 MB.
 
-_Note: Technical Preview Free Tier limits are subject to change over the course of [Technical Preview](../roadmap)._
+_Note: Technical Preview Free Tier limits are subject to change over the course of [Technical Preview](/docs/roadmap)._
 
 ## Branches (coming soon)
 

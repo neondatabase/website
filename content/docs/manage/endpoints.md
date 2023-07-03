@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-A single read-write compute endpoint is created for your project's [primary branch](../reference/glossary#primary-branch), by default.
+A single read-write compute endpoint is created for your project's [primary branch](/docs/reference/glossary#primary-branch), by default.
 
 To connect to a database that resides in a branch, you must connect via a compute endpoint associated with the branch. The following diagram shows the project's primary branch (`main`) and a child branch, both of which have an associated compute endpoint.
 
@@ -19,7 +19,7 @@ Project
                             |---- database (mydb)
 ```
 
-Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The Neon [Free Tier](../introduction/free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint.
+Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The Neon [Free Tier](/docs/introduction/free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint.
 
 ## View a compute endpoint
 
@@ -30,8 +30,8 @@ Compute endpoint details shown on the branch page include:
 - **Host**: The compute endpoint hostname.
 - **Region**: The region where the compute endpoint resides.
 - **Type**: The type of compute endpoint. Currently, only `read_write` compute endpoints are supported.
-- **Compute size**: The size of the compute endpoint. Neon [Pro plan](../introduction/pro-plan) users can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint.
-- **Compute size (min)**: The minimum compute size for the compute endpoint. This column appears when the [Autoscaling](../introduction/autoscaling) feature is enabled, which is only available to Neon Pro plan users.
+- **Compute size**: The size of the compute endpoint. Neon [Pro plan](/docs/introduction/pro-plan) users can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint.
+- **Compute size (min)**: The minimum compute size for the compute endpoint. This column appears when the [Autoscaling](/docs/introduction/autoscaling) feature is enabled, which is only available to Neon Pro plan users.
 - **Compute size (max)**: The maximum compute size for the compute endpoint. This column appears when the Autoscaling feature is enabled, which is only available to Neon Pro plan users.
 - **Auto-suspend delay**: The number of seconds of inactivity after which a compute endpoint is automatically suspended. The default is 300 seconds (5 minutes). For more information, see [Auto-suspend configuration](#auto-suspend-configuration).
 - **Last active**: The date and time the compute was last active.
@@ -60,19 +60,19 @@ To edit a compute endpoint:
 1. Specify your changes and click **Save**.
 
 <Admonition type="note">
-Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](../connect/connection-pooling#enable-connection-pooling).
+Enabling connection pooling for a compute endpoint is deprecated. You can enable connection pooling for individual connections instead. For more information, see [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling).
 </Admonition>
 
 ### Compute size and Autoscaling configuration
 
-Neon [Pro plan](../introduction/pro-plan) users can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
+Neon [Pro plan](/docs/introduction/pro-plan) users can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
 
 Neon supports two compute size configuration options:
 
 - **Fixed Size:** This option allows you to select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. _Autoscaling_ currently supports a range of 1/4 CU to 7 CU. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](../introduction/autoscaling).
+- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. _Autoscaling_ currently supports a range of 1/4 CU to 7 CU. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 ### Auto-suspend configuration
 
@@ -106,7 +106,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a compute endpoint with the API
 

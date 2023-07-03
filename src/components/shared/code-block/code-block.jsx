@@ -18,14 +18,17 @@ const CodeBlock = ({
   children,
   showLineNumbers = false,
   shouldWrap = false,
+  isTrimmed = true,
   ...otherProps
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const match = /language-(\w+)/.exec(className || '');
   const snippetLanguage = (match ? match[1] : language) || DEFAULT_LANGUAGE;
-  const code =
-    typeof children === 'string' ? children?.trim() : children.props?.children.props.children;
+
+  const code = typeof children === 'string' ? children : children?.props?.children.props.children;
+
+  const content = isTrimmed ? code?.trim() : code;
 
   return (
     <figure
@@ -38,7 +41,7 @@ const CodeBlock = ({
         showLineNumbers={showLineNumbers}
         className="no-scrollbars"
       >
-        {code}
+        {content}
       </SyntaxHighlighter>
       <button
         className={clsx(
@@ -50,7 +53,7 @@ const CodeBlock = ({
         type="button"
         aria-label={isCopied ? 'Copied' : 'Copy'}
         disabled={isCopied}
-        onClick={() => handleCopy(code)}
+        onClick={() => handleCopy(content)}
       >
         {isCopied ? (
           <CheckIcon className="h-4 w-4 text-current" />
@@ -66,9 +69,10 @@ CodeBlock.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.oneOf(['light', 'dark']),
   language: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   showLineNumbers: PropTypes.bool,
   shouldWrap: PropTypes.bool,
+  isTrimmed: PropTypes.bool,
 };
 
 export default CodeBlock;

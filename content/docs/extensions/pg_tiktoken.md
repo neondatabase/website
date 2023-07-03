@@ -29,7 +29,7 @@ You can install the `pg_tiktoken` extension by running the following `CREATE EXT
 CREATE EXTENSION pg_tiktoken
 ```
 
-For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](../get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](../connect/query-with-psql-editor).
+For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Use the tiktoken_encode function
 
