@@ -54,7 +54,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
 where:
 
 - role: `daniel`
-- password:<pasword>
+- password:`<pasword>`
 - hostname: `ep-mute-rain-952417.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
