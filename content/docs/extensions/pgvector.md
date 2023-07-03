@@ -94,9 +94,9 @@ or
 ALTER DATABASE <dbname> SET maintenance_work_mem TO '200MB';
 ```
 
+Always consider your compute instance's memory resources when adjusting this parameter, as setting it too high could lead to out-of-memory situations.
+
 </Admonition>
-
-
 
 ## Resources
 
