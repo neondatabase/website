@@ -225,15 +225,22 @@ const Form = ({ className }) => {
       )}
 
       {integrationType.id === 'api' && (
-        <Select
-          label="Number of projects you need"
-          control={control}
-          selected={projectNumber}
-          setSelected={setProjectNumber}
-          options={projectNumberOptions}
-          name="number_of_projects"
-          placeholder="Select an option"
-        />
+        <div className="flex flex-col gap-y-2">
+          <Select
+            label="Number of projects you need"
+            control={control}
+            selected={projectNumber}
+            setSelected={setProjectNumber}
+            options={projectNumberOptions}
+            name="number_of_projects"
+            placeholder="Select an option"
+          />
+          {projectNumber.id === '5000+' && (
+            <span className="text-sm leading-none text-green-45">
+              We offer discounts for large number of projects
+            </span>
+          )}
+        </div>
       )}
 
       <Field
