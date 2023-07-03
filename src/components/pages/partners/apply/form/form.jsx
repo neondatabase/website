@@ -137,7 +137,7 @@ const Form = ({ className }) => {
         name="integration_type"
       />
 
-      <div className="grid grid-cols-2 gap-5 sm:grid-cols-1">
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-1 sm:gap-6">
         <Field
           label="First Name *"
           name="firstname"
@@ -181,7 +181,7 @@ const Form = ({ className }) => {
 
           <CallbackUrlFields register={register} />
 
-          <fieldset className="mt-3 xl:mt-1 lg:mt-0">
+          <fieldset className="mt-3 xl:mt-1 lg:mt-0 md:-mt-1">
             <legend className="text-sm leading-none text-gray-new-70 xs:leading-tight">
               Will you be making API calls from a backend?
             </legend>
@@ -250,7 +250,7 @@ const Form = ({ className }) => {
         name="message"
         {...register('message')}
       />
-      <div className="relative flex flex-col gap-y-6 lg:mt-3 lg:flex-row lg:items-center lg:gap-x-5 md:mt-2 md:flex-col md:items-stretch md:gap-y-4">
+      <div className="relative flex flex-col gap-y-6 lg:mt-3 lg:flex-row lg:items-center lg:gap-x-5 md:mt-0 md:flex-col md:items-stretch md:gap-y-4">
         <Button
           className="mt-4 h-12 py-[15px] text-lg font-medium leading-none tracking-[-0.02em] disabled:hover:bg-primary-1 xl:mt-2 lg:order-1 lg:ml-auto lg:mt-0 lg:basis-[316px] md:order-none md:ml-0 md:w-full md:basis-full"
           theme="primary"
@@ -263,7 +263,7 @@ const Form = ({ className }) => {
           {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && 'Apply now'}
           {formState === FORM_STATES.SUCCESS && 'Applied!'}
         </Button>
-        <p className="-mt-3 text-[15px] font-light leading-tight lg:max-w-[450px] lg:flex-1">
+        <p className="-mt-3 text-[15px] font-light leading-tight lg:max-w-[450px] lg:flex-1 md:mt-0">
           By submitting, you agree to the{' '}
           <Link
             className="leading-tight text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors duration-200 hover:decoration-transparent"

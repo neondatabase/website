@@ -10,10 +10,10 @@ const Integration = () => (
         <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green-45">
           Integrate
         </span>
-        <h2 className="mt-3 max-w-[700px] text-center text-[52px] font-medium leading-none tracking-tighter xl:max-w-[600px] xl:text-[44px] lg:max-w-[450px] lg:text-4xl md:max-w-[400px] md:text-3xl">
+        <h2 className="mt-3 max-w-[700px] text-center text-[52px] font-medium leading-none tracking-tighter xl:max-w-[600px] xl:text-[44px] lg:max-w-[450px] lg:text-4xl md:max-w-[400px] md:text-[32px]">
           Choose the integration that fits your requirements
         </h2>
-        <p className="xl:text-bases mt-3 text-center text-lg font-light leading-snug md:mt-2.5">
+        <p className="xl:text-bases mt-3 text-center text-lg font-light leading-snug xl:text-base">
           Neon provides two methods for seamless integration with your product.
         </p>
         <Oauth />

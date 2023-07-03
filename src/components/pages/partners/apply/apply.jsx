@@ -32,7 +32,7 @@ Testimonial.propTypes = {
 const Apply = () => (
   <section
     id="partners-apply"
-    className="apply-form safe-paddings pb-40 pt-[240px] xl:pb-[120px] xl:pt-40 lg:pb-24 lg:pt-32 md:py-20"
+    className="apply-form safe-paddings pb-40 pt-[240px] xl:pb-[120px] xl:pt-40 lg:pb-24 lg:pt-32 md:pb-20 md:pt-[90px]"
   >
     <Container className="grid-gap-x grid grid-cols-12" size="lg">
       <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 xl:col-span-full xl:col-start-1 xl:grid-cols-12">
@@ -40,10 +40,10 @@ const Apply = () => (
           <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green-45">
             Apply now
           </span>
-          <h2 className="mt-3 text-[52px] font-medium leading-none tracking-[-0.02em] xl:text-[44px] lg:text-4xl md:text-3xl">
+          <h2 className="mt-3 text-[52px] font-medium leading-none tracking-[-0.02em] xl:text-[44px] lg:text-4xl md:text-[32px]">
             Become a Partner
           </h2>
-          <p className="md:flat-breaks sm:flat-none mt-3 text-lg font-light leading-snug xl:text-base md:mt-2.5">
+          <p className="md:flat-breaks sm:flat-none mt-3 text-lg font-light leading-snug xl:text-base">
             Not sure about the right partnership option?
             <br />
             <Link theme="green" to={LINKS.contactSales}>
@@ -55,7 +55,7 @@ const Apply = () => (
           <Testimonial className="lg:hidden" />
         </div>
         <Form className="col-span-5 xl:col-span-7 lg:col-span-full lg:mt-10 md:mt-6" />
-        <Testimonial className="col-span-full hidden lg:mt-10 lg:block md:mt-6" ariaHidden />
+        <Testimonial className="col-span-full hidden lg:mt-10 lg:block md:mt-8" ariaHidden />
       </div>
     </Container>
   </section>

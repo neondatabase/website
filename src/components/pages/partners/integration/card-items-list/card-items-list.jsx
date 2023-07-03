@@ -6,7 +6,7 @@ import Link from 'components/shared/link/link';
 const CardItemsList = ({ className = null, items, ariaHidden = false }) => (
   <ul
     className={clsx(
-      'mt-8 grid max-w-[550px] grid-cols-3 gap-x-[34px] xl:gap-x-4 lg:mt-0 lg:max-w-none md:grid-cols-1 md:gap-y-4',
+      'mt-8 grid max-w-[550px] grid-cols-3 gap-x-[34px] xl:gap-x-4 lg:mt-0 lg:max-w-none md:grid-cols-1 md:gap-y-2.5',
       className
     )}
     aria-hidden={ariaHidden}
