@@ -73,13 +73,36 @@ For more information about querying vectors, refer to the [pgvector README](http
 
 Using an index on the vector column can improve query performance with a minor cost in recall.
 
-You can add an index for each distance function you want to use. For example, the following query adds an index to the `embedding` column for the L2 distance distance function:
+You can add an index for each distance function you want to use. For example, the following query adds an index to the `embedding` column for the L2 distance function:
 
 ```sql
 CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
 ```
 
 For additional indexing guidance and examples, see [Indexing](https://github.com/pgvector/pgvector/tree/8bf360ed84bfdeba9caa19e9f193fd9ad8dd9e73#indexing), in the _pgvector README_.
+
+<Admonition type="note">
+If you encounter an error similar to the following while attempting to create an index, you can increase the `maintenance_work_mem` setting to the required amount of memory using a `SET` or `ALTER DATABASE` statement.
+
+```text
+ERROR: memory required is 202 MB, maintenance_work_mem is 67 MB
+```
+
+The default `maintenance_work_mem` setting depends on your [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). The `SET` statement changes the value for the current session. `ALTER DATABASE` updates the session default.
+
+```sql
+SET maintenance_work_mem TO '205MB';
+```
+
+or
+
+```sql
+ALTER DATABASE <dbname> SET maintenance_work_mem TO '205MB';
+```
+
+Always consider your compute instance's memory resources when adjusting this parameter, as setting it too high could lead to out-of-memory situations or unexpected behavior.
+
+</Admonition>
 
 ## Resources
 
