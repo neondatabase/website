@@ -12,7 +12,7 @@ const CallbackUrlFields = ({ register }) => {
   const [visibleInputIndex, setVisibleInputIndex] = useState(0);
 
   return (
-    <fieldset className="flex flex-col border-b border-gray-new-15 pb-9 xl:pb-7">
+    <fieldset className="flex flex-col border-b border-gray-new-15 pb-9 xl:pb-7 lg:pb-6">
       <div className="flex items-center">
         <span className="text-sm leading-none text-gray-new-70">Callback URLs</span>
         <a

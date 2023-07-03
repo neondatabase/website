@@ -12,7 +12,7 @@ const Testimonial = () => (
         aria-hidden
       />
       <blockquote className="mt-6 lg:mt-4">
-        <p className="max-w-[796px] text-[28px] font-light leading-snug tracking-tighter xl:max-w-[706px] xl:text-2xl md:text-xl">
+        <p className="max-w-[796px] text-[28px] font-light leading-snug tracking-tighter xl:max-w-[706px] xl:text-2xl lg:max-w-[584px] lg:text-xl">
           By partnering with Neon, Vercel’s frontend platform is now the end&#8209;to&#8209;end
           serverless solution for building on the Web, from Next.js all&nbsp;the way to SQL.
         </p>

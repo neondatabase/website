@@ -29,7 +29,7 @@ const items = [
 
 const Api = () => (
   <div className="api mt-[104px] grid w-full grid-cols-10 items-center gap-x-10 xl:mt-24 xl:gap-x-6 lg:mt-20 lg:gap-y-7 md:mt-14 md:gap-y-6">
-    <div className="order-1 col-span-5 justify-self-end lg:order-none lg:col-span-full">
+    <div className="order-1 col-span-5 justify-self-end lg:order-none lg:col-span-full lg:justify-self-center">
       <h3 className="text-4xl font-medium leading-tight tracking-tighter xl:text-[32px] lg:text-center lg:text-[28px] md:text-[22px]">
         API
       </h3>
@@ -37,10 +37,9 @@ const Api = () => (
         Manage Projects, branches, databases, and more. Easily integrate Neon in your Product and
         offer it to your users.
       </p>
-      <CardItemsList className="lg:hidden" items={items} />
+      <CardItemsList className="lg:col-span-full lg:mt-8" items={items} />
     </div>
     <CodeTabs className="col-span-5 lg:col-span-full" />
-    <CardItemsList className="col-span-full hidden lg:grid" items={items} ariaHidden />
   </div>
 );
 

@@ -28,7 +28,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false }) => (
             height={32}
             aria-hidden
           />
-          <div className="mt-[38px] xl:mt-8 md:mt-0">
+          <div className="mt-[38px] xl:mt-8 lg:mt-7 md:mt-0">
             <h4 className="text-xl leading-tight tracking-[-0.02em] xl:text-lg">{title}</h4>
             <p className="mt-1.5 text-[15px] font-light leading-tight text-gray-new-70 md:mt-2.5">
               {description}
