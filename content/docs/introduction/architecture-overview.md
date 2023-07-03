@@ -14,10 +14,10 @@ A Neon compute runs PostgreSQL, and storage is a multi-tenant key-value store fo
 Neon storage consists of three main components: Safekeepers, Pageservers, and cloud object storage.
 
 Safekeepers are responsible for durability of recent updates.
-PostgreSQL streams [Write-Ahead Log (WAL)](../reference/glossary#wal) to the Safekeepers, and the Safekeepers store the WAL durably until it has been processed by the Pageservers and uploaded to cloud storage.
+PostgreSQL streams [Write-Ahead Log (WAL)](/docs/reference/glossary#wal) to the Safekeepers, and the Safekeepers store the WAL durably until it has been processed by the Pageservers and uploaded to cloud storage.
 
-Pageservers are responsible for serving read requests. To do that, Pageservers process the incoming WAL stream into a custom storage format that makes all [page](../reference/glossary#page) versions easily accessible. Pageservers also upload data to cloud object storage, and download the data on demand.
+Pageservers are responsible for serving read requests. To do that, Pageservers process the incoming WAL stream into a custom storage format that makes all [page](/docs/reference/glossary#page) versions easily accessible. Pageservers also upload data to cloud object storage, and download the data on demand.
 
-Neon uses cloud object storage such as S3 for long-term data storage. Stored data is [encrypted at rest](../reference/glossary#data-at-rest-encryption).
+Neon uses cloud object storage such as S3 for long-term data storage. Stored data is [encrypted at rest](/docs/reference/glossary#data-at-rest-encryption).
 
 Safekeepers can be thought of as an ultra reliable write buffer that holds the latest data until it is processed and uploaded to cloud storage. Safekeepers implement the Paxos protocol for reliability. Pageservers also function as a read cache for cloud storage, providing fast random access to data pages.

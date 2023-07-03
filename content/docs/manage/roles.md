@@ -66,7 +66,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a role with the API
 

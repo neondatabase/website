@@ -9,14 +9,14 @@ This section describes how to import a database from another Neon project using 
 - Import a database from a Neon project created with PostgreSQL 14 to a Neon project created with PostgreSQL 15.
 
 <Admonition type="note">
-The Neon Free Tier has a limit of one project per user, which means a Free Tier user cannot have two projects simultaneously. To move you data to new Neon project while on the Free Tier, dump your database first, delete your existing Neon project, create a new Neon project with the desired region or PostgreSQL version, and import your data into the new project. For the dump and restore procedure, refer to [pg_dump with pg_restore](../import/import-from-postgres#pg_dump-with-pg_restore).
+The Neon Free Tier has a limit of one project per user, which means a Free Tier user cannot have two projects simultaneously. To move you data to new Neon project while on the Free Tier, dump your database first, delete your existing Neon project, create a new Neon project with the desired region or PostgreSQL version, and import your data into the new project. For the dump and restore procedure, refer to [pg_dump with pg_restore](/docs/import/import-from-postgres#pg_dump-with-pg_restore).
 </Admonition>
 
 To import your data from another Neon project:
 
-1. Create a new project in the desired region or PostgreSQL version. See [Create a project](../manage/projects#create-a-project) for instructions.
+1. Create a new project in the desired region or PostgreSQL version. See [Create a project](/docs/manage/projects#create-a-project) for instructions.
 
-2. Create a database with the desired name in your new Neon project. See [Create a database](../manage/databases#create-a-database) for instructions.
+2. Create a database with the desired name in your new Neon project. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 
 3. Retrieve the connection strings for the new and existing Neon databases.
 
@@ -41,7 +41,7 @@ To import your data from another Neon project:
    </CodeBlock>
 
 5. Run the import command from your terminal or command window.
-6. If you no longer require the old project, you can remove it. See [Delete a project](../manage/projects#delete-a-project) for instructions.
+6. If you no longer require the old project, you can remove it. See [Delete a project](/docs/manage/projects#delete-a-project) for instructions.
 
 ## Need help?
 

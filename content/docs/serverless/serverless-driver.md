@@ -26,7 +26,7 @@ This example shows how to create a minimal Vercel Edge Function that uses the Ne
 
 To complete these steps, you require:
 
-- A [Neon project](../get-started-with-neon/setting-up-a-project).
+- A [Neon project](/docs/get-started-with-neon/setting-up-a-project).
 - A [Vercel account](https://vercel.com/).
 
 To get started:
@@ -73,7 +73,7 @@ To get started:
 
     Press `a` to select all Vercel environments, then [Return].
 
-    For more information about obtaining a Neon connection string, see [Connect from any application](../connect/connect-from-any-app).
+    For more information about obtaining a Neon connection string, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 1. Install the Neon serverless driver package.
 
@@ -115,7 +115,7 @@ This example shows how to create a minimal Cloudflare Worker that uses the Neon 
 
 To complete these steps, you require:
 
-- A [Neon project](../get-started-with-neon/setting-up-a-project).
+- A [Neon project](/docs/get-started-with-neon/setting-up-a-project).
 - A [Cloudflare account](https://dash.cloudflare.com/).
 
 To get started:
@@ -150,7 +150,7 @@ To get started:
     postgres://<user>:<password>@<hostname>.neon.tech/<dbname> 
     ```
 
-    For information about obtaining a Neon connection string, see [Connect from any application](../connect/connect-from-any-app).
+    For information about obtaining a Neon connection string, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 1. Add code for the Worker by replacing the generated contents in `src/index.ts` with the following code:
 

@@ -43,7 +43,7 @@ where:
 - `<user>` is the database user.
 - `<password>` is the database user's password.
 
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](../connect/connect-from-any-app).
+You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Connect from Spring Data
 
