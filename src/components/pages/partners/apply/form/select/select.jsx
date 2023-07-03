@@ -26,8 +26,8 @@ const Select = ({
           setSelected(e);
         }}
       >
-        <Combobox.Label className="leading-none">{label}</Combobox.Label>
-        <div className="relative mt-3">
+        <Combobox.Label className="text-sm leading-none text-gray-new-70">{label}</Combobox.Label>
+        <div className="relative mt-2">
           <Combobox.Input
             className="h-10 w-full appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 caret-transparent transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15"
             displayValue={() => value?.name}

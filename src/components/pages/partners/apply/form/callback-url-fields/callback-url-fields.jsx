@@ -12,9 +12,9 @@ const CallbackUrlFields = ({ register }) => {
   const [visibleInputIndex, setVisibleInputIndex] = useState(0);
 
   return (
-    <fieldset className="flex flex-col">
+    <fieldset className="flex flex-col border-b border-gray-new-15 pb-9">
       <div className="flex items-center">
-        <span>Callback URLs</span>
+        <span className="text-sm leading-none text-gray-new-70">Callback URLs</span>
         <a
           className="relative ml-1.5 flex items-center after:absolute after:-inset-2"
           data-tooltip-id="callback-urls-tooltip"
@@ -33,7 +33,7 @@ const CallbackUrlFields = ({ register }) => {
         return (
           <input
             className={clsx(
-              'mt-3 h-10 appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15',
+              'mt-2 h-10 appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15',
               index > visibleInputIndex && 'hidden'
             )}
             id={`callback_url_${index}`}
@@ -46,7 +46,7 @@ const CallbackUrlFields = ({ register }) => {
       })}
       <button
         className={clsx(
-          'mb-1 mt-3 inline-flex items-center gap-x-2',
+          'mb-1 mt-2 inline-flex items-center gap-x-2',
           shouldAddCallbackUrl ? 'text-green-45' : 'cursor-not-allowed text-gray-new-40'
         )}
         type="button"
@@ -60,8 +60,8 @@ const CallbackUrlFields = ({ register }) => {
           }
         }}
       >
-        <AddIcon />
-        Add another URL
+        <AddIcon className="h-3.5 w-3.5" />
+        <span className="text-sm leading-none">Add another URL</span>
       </button>
     </fieldset>
   );
