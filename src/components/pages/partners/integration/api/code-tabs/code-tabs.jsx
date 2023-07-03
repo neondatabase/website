@@ -94,7 +94,7 @@ const CodeTabs = ({ className = null }) => {
           </button>
         ))}
       </div>
-      <div className="min-h-[414px] pb-7 pl-[18px] pt-[18px] lg:pb-6 lg:pl-3.5 lg:pt-3.5 md:py-4 md:pl-4">
+      <div className="min-h-[414px] pb-7 pl-[18px] pt-[18px] xl:min-h-[378px] lg:pb-6 lg:pl-3.5 lg:pt-3.5 md:py-4 md:pl-4">
         <LazyMotion features={domAnimation}>
           <AnimatePresence initial={false} mode="wait">
             {codeSnippets.map(

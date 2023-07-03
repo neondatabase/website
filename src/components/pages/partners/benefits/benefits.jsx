@@ -29,22 +29,22 @@ const items = [
 ];
 
 const Benefits = () => (
-  <section className="benefits safe-paddings mt-[136px] xl:mt-[120px] lg:mt-24 md:mt-20">
+  <section className="benefits safe-paddings mt-[136px] xl:mt-[104px] lg:mt-24 md:mt-20">
     <Container className="grid-gap-x grid grid-cols-12" size="lg">
-      <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 rounded-[10px] bg-gray-new-8 p-12 xl:col-span-full xl:col-start-1 xl:px-8 xl:py-10 lg:px-7 lg:py-8 md:px-5 md:py-6">
-        <div className="col-span-4 col-start-1 xl:max-w-[300px] lg:col-span-full lg:max-w-none">
+      <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 rounded-2xl bg-gray-new-8 p-12 xl:col-span-full xl:col-start-1 xl:items-center xl:px-8 xl:py-10 lg:px-7 lg:py-9 md:px-5 md:py-8">
+        <div className="col-span-4 col-start-1 xl:max-w-[300px] xl:justify-self-start lg:col-span-full lg:max-w-none">
           <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none text-green-45 lg:px-2.5 lg:text-[10px]">
             Benefits
           </span>
           <h2 className="mt-3 max-w-[322px] text-[52px] font-medium leading-none tracking-[-0.02em] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-3xl">
             Why become a partner?
           </h2>
-          <p className="mt-4 max-w-[362px] text-lg font-light leading-snug xl:text-base lg:mt-4 lg:max-w-none md:mt-2.5">
+          <p className="mt-4 max-w-[362px] text-lg font-light leading-snug xl:max-w-[280px] xl:text-base lg:mt-4 lg:max-w-none md:mt-2.5">
             At Neon, we deeply value our partners, holding firm in our belief that they are vital to
             our mission of making Serverless Postgres easy to integrate, manage, and grow.
           </p>
         </div>
-        <ul className="col-start-5 col-end-11 -ml-1.5 mt-2 grid max-w-[640px] grid-cols-2 gap-x-[90px] gap-y-11 xl:-ml-5 xl:mt-0 xl:gap-x-8 xl:gap-y-10 xl:pl-0 lg:col-span-full lg:ml-0 lg:mt-8 lg:gap-x-6 lg:gap-y-8 md:mt-5 md:grid-cols-1 md:gap-y-6">
+        <ul className="col-start-5 col-end-11 -ml-1.5 mt-2 grid max-w-[640px] grid-cols-2 gap-x-[90px] gap-y-11 xl:-ml-5 xl:mt-0 xl:gap-x-10 xl:pl-0 lg:col-span-full lg:ml-0 lg:mt-8 lg:gap-x-6 lg:gap-y-8 md:mt-5 md:grid-cols-1 md:gap-y-6">
           {items.map(({ icon, title, description }, index) => (
             <li className="flex items-start gap-x-3.5 md:gap-x-2" key={index}>
               <img

@@ -123,7 +123,7 @@ const Form = ({ className }) => {
     <form
       className={clsx(
         className,
-        'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 pb-11 pt-9 leading-none xl:px-7 xl:py-8 md:px-5 md:py-6'
+        'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 pb-11 pt-9 leading-none xl:px-6 xl:pb-9 md:px-5 md:py-6'
       )}
       method="POST"
       onSubmit={handleSubmit(onSubmit)}
@@ -181,7 +181,7 @@ const Form = ({ className }) => {
 
           <CallbackUrlFields register={register} />
 
-          <fieldset className="mt-3">
+          <fieldset className="mt-3 xl:mt-1">
             <legend className="text-sm leading-none text-gray-new-70 xs:leading-tight">
               Will you be making API calls from a backend?
             </legend>
@@ -252,7 +252,7 @@ const Form = ({ className }) => {
       />
       <div className="relative flex flex-col gap-y-6 lg:mt-3 lg:flex-row lg:items-center lg:gap-x-5 md:mt-2 md:flex-col md:items-stretch md:gap-y-4">
         <Button
-          className="mt-4 h-12 py-[15px] text-lg font-medium leading-none tracking-[-0.02em] disabled:hover:bg-primary-1 lg:order-1 lg:ml-auto lg:mt-0 lg:basis-[316px] md:order-none md:ml-0 md:w-full md:basis-full"
+          className="mt-4 h-12 py-[15px] text-lg font-medium leading-none tracking-[-0.02em] disabled:hover:bg-primary-1 xl:mt-2 lg:order-1 lg:ml-auto lg:basis-[316px] md:order-none md:ml-0 md:w-full md:basis-full"
           theme="primary"
           type="submit"
           disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}

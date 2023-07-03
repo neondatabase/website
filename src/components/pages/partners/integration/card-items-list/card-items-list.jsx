@@ -6,7 +6,7 @@ import Link from 'components/shared/link/link';
 const CardItemsList = ({ className = null, items, ariaHidden = false }) => (
   <ul
     className={clsx(
-      'mt-8 grid max-w-[550px] grid-cols-3 gap-x-[34px] xl:mt-7 xl:gap-x-4 lg:mt-0 lg:max-w-none md:grid-cols-1 md:gap-y-4',
+      'mt-8 grid max-w-[550px] grid-cols-3 gap-x-[34px] xl:gap-x-4 lg:mt-0 lg:max-w-none md:grid-cols-1 md:gap-y-4',
       className
     )}
     aria-hidden={ariaHidden}
@@ -14,7 +14,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false }) => (
     {items.map(({ icon, title, description, url }, index) => (
       <li key={index}>
         <Link
-          className="flex h-full min-h-[176px] flex-col rounded-[10px] border border-gray-new-15 px-4 pb-4 pt-5 transition-colors duration-200 hover:border-green-45 xl:min-h-[165px] xl:p-2.5 lg:min-h-max lg:p-4 md:flex-row md:gap-x-3"
+          className="flex h-full min-h-[176px] flex-col rounded-[10px] border border-gray-new-15 px-4 pb-4 pt-5 transition-colors duration-200 hover:border-green-45 xl:min-h-[165px] xl:p-3.5 lg:min-h-max lg:p-4 md:flex-row md:gap-x-3"
           to={url}
           target={url.startsWith('http') ? '_blank' : '_self'}
           rel={url.startsWith('http') ? 'noopener noreferrer' : ''}

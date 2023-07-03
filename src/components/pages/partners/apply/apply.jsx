@@ -8,14 +8,14 @@ import LINKS from 'constants/links';
 import Form from './form';
 
 const Testimonial = ({ className = null, ariaHidden = false }) => (
-  <figure className={clsx('mt-16 max-w-[464px] xl:mt-12', className)} aria-hidden={ariaHidden}>
+  <figure className={clsx('mt-16 max-w-[464px]', className)} aria-hidden={ariaHidden}>
     <blockquote>
       <p className="border-l border-green-45 pl-[18px] text-2xl font-light leading-snug tracking-tighter xl:text-xl">
         The combination of flexible resource limits and nearly instant database provisioning made
         Neon a no-brainer.
       </p>
     </blockquote>
-    <figcaption className="mt-4 text-base leading-tight tracking-[-0.02em] xl:text-sm lg:mt-5 md:mt-4">
+    <figcaption className="mt-4 text-base leading-tight tracking-[-0.02em] lg:mt-5 md:mt-4">
       Lincoln Bergeson –{' '}
       <cite className="inline font-light not-italic text-gray-new-60">
         Infrastructure Engineer at Replit
@@ -32,7 +32,7 @@ Testimonial.propTypes = {
 const Apply = () => (
   <section
     id="partners-apply"
-    className="apply-form safe-paddings pb-40 pt-[240px] xl:pb-[120px] xl:pt-36 lg:pb-24 lg:pt-28 md:py-20"
+    className="apply-form safe-paddings pb-40 pt-[240px] xl:pb-[120px] xl:pt-40 lg:pb-24 lg:pt-28 md:py-20"
   >
     <Container className="grid-gap-x grid grid-cols-12" size="lg">
       <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 xl:col-span-full xl:col-start-1 xl:grid-cols-12">
