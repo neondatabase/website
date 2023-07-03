@@ -79,6 +79,21 @@ You can add an index for each distance function you want to use. For example, th
 CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
 ```
 
+<Admonition type="note">
+If you encounter `not enough memory` error while attempting to create an index, you can increase the `maintenance_work_mem` setting for the session to the required amount of memory using a `SET` or `ALTER DATABASE` statement. The default is setting is 64MB.
+
+```sql
+SET maintenance_work_mem TO '200MB';
+```
+
+or
+
+```sql
+ALTER DATABASE <dbname> SET maintenance_work_mem TO '200MB';
+```
+
+</Admonition>
+
 For additional indexing guidance and examples, see [Indexing](https://github.com/pgvector/pgvector/tree/8bf360ed84bfdeba9caa19e9f193fd9ad8dd9e73#indexing), in the _pgvector README_.
 
 ## Resources
