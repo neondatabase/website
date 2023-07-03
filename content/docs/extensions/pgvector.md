@@ -80,7 +80,7 @@ CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)
 ```
 
 <Admonition type="note">
-If you encounter `not enough memory` error while attempting to create an index, you can increase the `maintenance_work_mem` setting for the session to the required amount of memory using a `SET` or `ALTER DATABASE` statement. The default is setting is 64MB.
+If you encounter `not enough memory` error while attempting to create an index, you can increase the `maintenance_work_mem` setting to the required amount of memory using a `SET` or `ALTER DATABASE` statement. The default `maintenance_work_mem` setting is 64MB. The `SET` statement changes the value for the current session. `ALTER DATABASE` updates the session default.
 
 ```sql
 SET maintenance_work_mem TO '200MB';
