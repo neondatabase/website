@@ -4,14 +4,14 @@ subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
 ---
 
-Read replicas are supported with the Neon Pro plan. This guide will lead you through the process of creating read replicas. The general methodology of using read replicas to segregate read-only work from your production database operations can be applied to a variety of uses cases such as:
+Read replicas are supported with the [Neon Pro plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating read replicas. The general methodology of using read replicas to segregate read-only work from your production database operations can be applied to a variety of uses cases such as:
 
 - Offloading analytics or reporting queries
 - Distributing read requests to to achieve higher throughput
 - Providing read-only data access to specific users or applications who do not need to modify data
 - Configuring right-sized read-only compute resources for different users and applications
 
-Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can follow the steps below to create one or more read replicas, depending on your requirements. You can create as many read-replicas as you need for any branch in your Neon project, and you can configure each with the required vCPU and memory. You also have the option of configuring autoscaling and auto-suspend for your read replicas, in the same way that you configure those resources for read-write compute instances.
+Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can follow the steps below to create one or more read replicas. You can create as many read-replicas as you need for any branch in your Neon project, and you can configure each with the required vCPU and memory. You also have the option of configuring autoscaling and auto-suspend for your read replicas, in the same way that you configure those resources for read-write compute instances.
 
 Neon also supports managing read replicas programmatically, which is covered toward the end of the guide.
 
