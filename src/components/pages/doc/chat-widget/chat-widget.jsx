@@ -9,6 +9,7 @@ import { ChatContext } from 'app/chat-provider';
 import Button from 'components/shared/button/button';
 import useAbortController from 'hooks/use-abort-controller';
 import useDocsAIChatStream from 'hooks/use-docs-ai-chat-stream';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 import AttentionIcon from './images/attention.inline.svg';
 import CheckIcon from './images/check.inline.svg';
@@ -61,6 +62,9 @@ const ChatWidget = () => {
   const handleExampleClick = (e) => {
     setInputText(e.target.textContent);
     inputRef.current.focus();
+    sendGtagEvent('chat_widget_example_click', {
+      example: e.target.textContent,
+    });
   };
 
   useEffect(() => {
@@ -81,6 +85,9 @@ const ChatWidget = () => {
       if (!isLoading && inputText) {
         setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
         setInputText('');
+        sendGtagEvent('chat_widget_submit', {
+          query: inputText,
+        });
       }
 
       if (shouldTryAgain) {
@@ -114,6 +121,10 @@ const ChatWidget = () => {
   const stopGeneratingAnswers = () => {
     resetAbortController();
     setIsStopped(true);
+    const lastMessage = messages.findLast((message) => message.role === 'user');
+    sendGtagEvent('chat_widget_stop_generating_answer', {
+      query: lastMessage?.content,
+    });
   };
 
   useEffect(() => {
@@ -264,6 +275,7 @@ const ChatWidgetTrigger = ({ className, isSidebar }) => {
 
   const onClickHandler = () => {
     setIsOpen(true);
+    sendGtagEvent('chat_widget_open');
   };
 
   return (
