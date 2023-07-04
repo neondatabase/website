@@ -4,16 +4,16 @@ subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
 ---
 
-Read replicas are supported with the [Neon Pro plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating and managing read replicas. 
+Read replicas are supported with the [Neon Pro plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating and managing read replicas.
 
-The general methodology of using read replicas to segregate read-only work from your production database operations can be applied to a variety of uses cases such as:
+The general methodology of using read replicas to segregate read-only work from your production database operations can be applied to a variety of uses cases, such as:
 
 - Offloading analytics or reporting queries
-- Distributing read requests to to achieve higher throughput
+- Distributing read requests to achieve higher throughput
 - Providing read-only data access to specific users or applications who do not need to modify data
 - Configuring right-sized read-only compute resources for different users and applications
 
-Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read-replicas for any branch in your Neon project, and you can configure the vCPU and memory allocated to each. Neon's Autoscaling and Auto-suspend features are also supported with read replicas, providing you with control over how read replicas use compute resources.
+Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and can configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Auto-suspend_ features are also supported with read replicas, providing you with control over compute usage.
 
 Neon also supports managing read replicas programmatically using the Neon API, which is covered toward the end of this guide.
 
@@ -24,7 +24,7 @@ Neon also supports managing read replicas programmatically using the Neon API, w
 
 ## Create a read replica
 
-Creating a read replica is a simple process that involves adding a read-only compute endpoint to a branch. You can add a read-only compute endpoint to any branch in your Neon project following these steps:
+Creating a read replica is a simple process that involves adding a read-only compute endpoint to a branch. You can add a read-only compute endpoint to any branch in your Neon project by following these steps:
 
 1. In the Neon Console, select **Branches**.
 1. Select the branch where your database resides.
@@ -36,11 +36,11 @@ Creating a read replica is a simple process that involves adding a read-only com
   </Admonition>
 1. When you have finished making your selections, click **Create**.
 
-In a few moments, your read-only compute is provisioned. This is your read replica. The next section describes how to connect to your read replica.
+In a few moments, your read-only compute is provisioned. This is your read replica. The following section describes how to connect to your read replica.
 
 ## Connect to a read replica
 
-Connecting to a read replica is the same as connecting to any branch, except you are connecting via a read-only compute endpoint instead of a read-write compute endpoint. The following steps describe how to connect to your read replica with connection details obtained from the Neon Console.
+Connecting to a read replica is the same as connecting to any branch, except you connect via a read-only compute endpoint instead of a read-write compute endpoint. The following steps describe how to connect to your read replica with connection details obtained from the Neon Console.
 
 1. In the Neon Console, select a project.
 1. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
@@ -73,7 +73,7 @@ When using this connection string, you are connected to your read replica. No wr
 
 ## Viewing read replicas
 
-To view the read replicas for a branch, select **Branches** in the Neon Console, and select a branch. The read-only compute endpoints are your read replicas. Under the **Compute endpoint** heading, your read-only compute endpoints are identified by the **Type** field. They have a `R/O` value instead of `R/W`.
+To view the read replicas for a branch, select **Branches** in the Neon Console, and select a branch. The read-only compute endpoints are your read replicas. Under the **Compute endpoint** heading, the **Type** field identifies your read-only compute endpoints. They have a `R/O` value instead of `R/W`.
 
 ## Edit a read replica
 
@@ -100,10 +100,10 @@ To delete a read replica:
 
 ## Manage read replicas using the Neon API
 
-The following examples demonstrate how to create and delete a read-only compute endpoints using the Neon API. The Neon API also supports get, list, edit, start, and suspend API methods. For information about those methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The following examples demonstrate creating and deleting read-only compute endpoints using the Neon API. The Neon API also supports get, list, edit, start, and suspend API methods. For information about those methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow only show some of the user-configurable request body attributes that are available to you. To view all attributes, refer to the method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 </Admonition>
 
 ### Prerequisites
