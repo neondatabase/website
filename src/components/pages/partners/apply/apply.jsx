@@ -15,11 +15,9 @@ const Testimonial = ({ className = null, ariaHidden = false }) => (
         Neon a no-brainer.
       </p>
     </blockquote>
-    <figcaption className="mt-4 text-base leading-tight tracking-[-0.02em] lg:mt-5 md:mt-4">
+    <figcaption className="mt-4 text-base font-light leading-tight tracking-[-0.02em] lg:mt-5 md:mt-4">
       Lincoln Bergeson –{' '}
-      <cite className="inline font-light not-italic text-gray-new-60">
-        Infrastructure Engineer at Replit
-      </cite>
+      <cite className="inline not-italic text-gray-new-60">Infrastructure Engineer at Replit</cite>
     </figcaption>
   </figure>
 );
@@ -46,7 +44,10 @@ const Apply = () => (
           <p className="md:flat-breaks sm:flat-none mt-3 text-lg font-light leading-snug xl:text-base">
             Not sure about the right partnership option?
             <br />
-            <Link theme="green" to={LINKS.contactSales}>
+            <Link
+              className="inline-block leading-tight text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[6px] transition-colors hover:decoration-transparent"
+              to={LINKS.contactSales}
+            >
               Contact us
             </Link>{' '}
             if you have questions.

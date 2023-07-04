@@ -36,7 +36,7 @@ const Field = forwardRef(
             >
               <img src={infoSvg} width={14} height={14} alt="" loading="lazy" aria-hidden />
             </a>
-            <Tooltip className="flat-breaks sm:flat-none" id={tooltipId} place="top-start" />
+            <Tooltip className="flat-breaks sm:flat-none z-20" id={tooltipId} place="top-start" />
           </>
         )}
       </label>

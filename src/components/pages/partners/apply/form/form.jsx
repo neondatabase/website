@@ -186,7 +186,10 @@ const Form = ({ className }) => {
               Will you be making API calls from a backend?
             </legend>
             <div className="ml-1 mt-4 flex items-center gap-x-8">
-              <label className="flex items-center gap-x-[9px]" htmlFor="apiCallsYes">
+              <label
+                className="flex items-center gap-x-[9px] font-light text-gray-new-94"
+                htmlFor="apiCallsYes"
+              >
                 <input
                   className="relative h-2 w-2 appearance-none rounded-full bg-transparent after:absolute after:left-1/2 after:top-1/2 after:block after:h-3.5 after:w-3.5 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:border after:border-gray-new-40 checked:bg-primary-1"
                   type="radio"
@@ -198,7 +201,10 @@ const Form = ({ className }) => {
                 Yes
               </label>
 
-              <label className="flex items-center gap-x-[9px]" htmlFor="apiCallsNo">
+              <label
+                className="flex items-center gap-x-[9px] font-light text-gray-new-94"
+                htmlFor="apiCallsNo"
+              >
                 <input
                   className="relative h-2 w-2 appearance-none rounded-full bg-transparent after:absolute after:left-1/2 after:top-1/2 after:block after:h-3.5 after:w-3.5 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:border after:border-gray-new-40 checked:bg-primary-1"
                   type="radio"

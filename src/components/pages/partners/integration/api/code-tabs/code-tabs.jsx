@@ -80,7 +80,7 @@ const CodeTabs = ({ className = null }) => {
         {codeSnippets.map(({ name, icon: Icon, language }, index) => (
           <button
             className={clsx(
-              'relative px-[18px] py-3 transition-colors duration-200 after:absolute after:left-0 after:top-full after:-mt-px after:h-0.5 after:w-full after:transition-colors after:duration-200 hover:text-white lg:flex-1',
+              'relative px-3.5 py-3 transition-colors duration-200 after:absolute after:left-0 after:top-full after:-mt-px after:h-0.5 after:w-full after:transition-colors after:duration-200 hover:text-white lg:flex-1',
               language === activeLanguage
                 ? 'text-white after:bg-green-45 md:after:bg-transparent'
                 : 'text-gray-new-60 after:bg-transparent'
@@ -89,7 +89,7 @@ const CodeTabs = ({ className = null }) => {
             key={index}
             onClick={() => setActiveLanguage(language)}
           >
-            <Icon className="mr-2.5 inline-block h-6 w-6 md:mr-0 md:h-8 md:w-8" />
+            <Icon className="mr-2 inline-block h-6 w-6 md:mr-0 md:h-8 md:w-8" />
             <span className="md:hidden">{name}</span>
           </button>
         ))}
