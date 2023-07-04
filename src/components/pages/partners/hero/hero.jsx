@@ -17,9 +17,8 @@ const Hero = () => (
     />
     <Container className="relative z-10 flex flex-col items-center text-center" size="mdDoc">
       <div className="absolute left-1/2 top-0 -z-10 h-[270px] w-3/4 -translate-x-1/2 rounded-[1000px] bg-black-new blur-[30px] lg:w-full" />
-      <h1 className="md:flat-breaks mx-auto max-w-[968px] text-6xl font-medium leading-none tracking-[-0.02em] xl:text-[56px] lg:max-w-[700px] lg:text-5xl md:text-4xl">
-        Unlock new revenue streams <br />
-        by partnering with Neon
+      <h1 className="mx-auto max-w-[820px] text-6xl font-medium leading-none tracking-[-0.02em] xl:max-w-[720px] xl:text-[56px] lg:max-w-[650px] lg:text-5xl md:text-4xl">
+        Unlock new revenue streams by partnering with Neon
       </h1>
       <p className="mt-5 text-xl font-light leading-snug xl:text-lg lg:mt-4 md:mt-2.5 md:text-base">
         Bring a familiar, reliable, and scalable Postgres experience to your customers.
