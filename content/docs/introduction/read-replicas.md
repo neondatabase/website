@@ -9,7 +9,7 @@ Neon read replicas are independent read-only compute instances designed to perfo
 
 ![Read-only compute instances](/docs/introduction/read_replicas.png)
 
-In data replication terms, Neon's read replica feature is considered asynchronous. As updates are made by your read-write computes, the latest changes are made available to Neon Pageservers via a Write-Ahead Log (WAL) stream. Neon's read replicas offer near-instant data consistency for read replicas residing in the same region as your database. Cross-region read replicas are currently not supported. You can expect that feature in a future release.
+In data replication terms, Neon's read replica feature is considered asynchronous. As updates are made by your read-write computes, the latest changes are first persisted by Safekeepers via Paxos concensus algorithm and then made available to Neon Pageservers via a Write-Ahead Log (WAL) stream. Neon supports creating read replicas in the same region as your database. Cross-region read replicas are currently not supported. You can expect that feature in a future release.
 
 You can instantly create one or more read replicas for any branch in your Neon project and configure the amount of vCPU and memory allocated to each. Read replicas also support Neon's Autoscaling and Auto-suspend features, providing you with control over the compute resources used by your read replicas.
 
@@ -26,11 +26,10 @@ Neon's read replicas have a number of potential applications:
 
 Advantages of Neon's read replica feature include the following:
 
-1. **Efficient storage**: With read-only compute instances reading from the same source as your read-write computes, no additional storage is required to create a read replica. Data is neither duplicated nor replicated.
+1. **No additional storage required**: With read-only compute instances reading from the same source as your read-write computes, no additional storage is required to create a read replica. Data is neither duplicated nor replicated, which means there is zero additional storage cost when adding a read replica.
 2. **Data consistency**: Read-write and read-only compute instances read data from a single source, ensuring the highest degree of data consistency.
-3. **Scalability**: Without no data replication required, you can create read replicas almost instantly, providing fast and seamless scalability.
-4. **Reduced data latency**: All data is read from the same source, avoiding common data latency issues seen with traditional replication.
-5. **Cost effectiveness**: By eliminating data replication, costs associated with data transfer and storage are avoided. Neon read replicas also benefit from Neon's _Autoscaling_ and _Auto-suspend_ features, which enable you to manage compute usage.
+3. **Scalability**: With no data replication required, you can create read replicas almost instantly, providing fast and seamless scalability.
+4. **Cost effectiveness**: By removing the need for additional storage and avoiding data replication, costs associated with storage and data transfer due to replication are avoided. Your primary cost is compute, and Neon read replicas benefit from Neon's _Autoscaling_ and _Auto-suspend_ features, which help you manage compute usage.
 
 ## Get started with read replicas
 
