@@ -63,7 +63,7 @@ const ChatWidget = () => {
     setInputText(e.target.textContent);
     inputRef.current.focus();
     sendGtagEvent('chat_widget_example_click', {
-      query: e.target.textContent,
+      value: e.target.textContent,
     });
   };
 
@@ -86,7 +86,7 @@ const ChatWidget = () => {
         setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
         setInputText('');
         sendGtagEvent('chat_widget_submit', {
-          query: inputText,
+          value: inputText,
         });
       }
 
@@ -123,7 +123,7 @@ const ChatWidget = () => {
     setIsStopped(true);
     const lastMessage = messages.findLast((message) => message.role === 'user');
     sendGtagEvent('chat_widget_stop_generating_answer', {
-      query: lastMessage?.content,
+      value: lastMessage?.content,
     });
   };
 
