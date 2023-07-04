@@ -100,21 +100,19 @@ To delete a read replica:
 
 ## Manage read replicas using the Neon API
 
-The following examples demonstrate how to create and delete a read-only compute endpoints using the Neon API. The Neon API also supports get, list, edit, start, and suspend API methods for compute endpoints. For information about those methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The following examples demonstrate how to create and delete a read-only compute endpoints using the Neon API. The Neon API also supports get, list, edit, start, and suspend API methods. For information about those methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 </Admonition>
-
-The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key. You must replace this value with an actual API key when making a Neon API request.
 
-### Create a read-only compute endpoint with the API
+### Create a read replica with the API
 
-The following Neon API method creates a read-only compute endpoint.
+In Neon, a read replica is implemented as a read-only compute endpoint. The following Neon API method creates a read-only compute endpoint.
 
 ```text
 POST /projects/{project_id}/endpoints
@@ -138,9 +136,9 @@ curl -X 'POST' \
 
 For information about obtaining the required `project_id` and `branch_id` parameters, refer to [Create an endpoint](https://api-docs.neon.tech/reference/createprojectendpoint), in the _Neon API reference_.
 
-### Delete a read-only compute endpoint with the API
+### Delete a read replica with the API
 
-The following Neon API method deletes the specified compute endpoint. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectendpoint).
+n Neon, a read replica is implemented as a read-only compute endpoint. The following Neon API method deletes the specified compute endpoint. Compute endpoints are identified by their `branch_id` and `endpoint_id`, regardless of whether they are read-write or read-only. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectendpoint).
 
 ```text
 DELETE /projects/{project_id}/endpoints/{endpoint_id}
