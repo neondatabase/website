@@ -14,7 +14,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false }) => (
     {items.map(({ icon, title, description, url }, index) => (
       <li key={index}>
         <Link
-          className="flex h-full min-h-[176px] flex-col rounded-[10px] border border-gray-new-15 px-4 pb-4 pt-5 transition-colors duration-200 hover:border-green-45 xl:min-h-[165px] xl:p-3.5 lg:min-h-max lg:p-4 md:flex-row md:gap-x-3"
+          className="flex h-full min-h-[176px] flex-col rounded-[10px] border border-gray-new-15 px-5 pb-4 pt-5 transition-colors duration-200 hover:border-green-45 xl:min-h-[165px] xl:p-3.5 lg:min-h-max lg:p-4 md:flex-row md:gap-x-3"
           to={url}
           target={url.startsWith('http') ? '_blank' : '_self'}
           rel={url.startsWith('http') ? 'noopener noreferrer' : ''}

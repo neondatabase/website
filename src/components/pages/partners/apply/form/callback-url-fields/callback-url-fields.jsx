@@ -5,27 +5,31 @@ import { useState } from 'react';
 import AddIcon from 'components/pages/partners/apply/images/add.inline.svg';
 import infoSvg from 'components/pages/partners/apply/images/info.svg';
 import Tooltip from 'components/shared/tooltip';
+import useWindowSize from 'hooks/use-window-size';
 
 const CALLBACK_URLS_LIMIT = 3;
+const MOBILE_WIDTH = 360;
+
 const CallbackUrlFields = ({ register }) => {
   const [shouldAddCallbackUrl, setShouldAddCallbackUrl] = useState(true);
   const [visibleInputIndex, setVisibleInputIndex] = useState(0);
+  const { width } = useWindowSize();
 
   return (
     <fieldset className="flex flex-col border-b border-gray-new-15 pb-9 xl:pb-7 lg:pb-6 md:pb-5">
       <div className="flex items-center">
         <span className="text-sm leading-none text-gray-new-70">Callback URLs</span>
-        <a
+        <span
           className="relative ml-1.5 flex items-center after:absolute after:-inset-2"
           data-tooltip-id="callback-urls-tooltip"
           data-tooltip-html="May be plural, the port to use<br/> for your application"
         >
           <img src={infoSvg} width={14} height={14} alt="" loading="lazy" aria-hidden />
-        </a>
+        </span>
         <Tooltip
-          className="flat-breaks sm:flat-none"
+          className="flat-breaks sm:flat-none !text-xs !leading-none"
           id="callback-urls-tooltip"
-          place="top-start"
+          place={width > MOBILE_WIDTH ? 'right' : 'top-start'}
         />
       </div>
       {Array.from({ length: CALLBACK_URLS_LIMIT }).map((_, index) => {

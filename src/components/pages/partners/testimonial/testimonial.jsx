@@ -17,8 +17,9 @@ const Testimonial = () => (
           serverless solution for building on the Web, from Next.js all&nbsp;the way to SQL.
         </p>
       </blockquote>
-      <figcaption className="mt-5 text-lg leading-tight tracking-[-0.02em] text-gray-new-70 xl:text-base lg:mt-4 md:mt-2.5">
-        Guillermo Rauch <cite className="not-italic text-gray-new-50">– CEO of Vercel</cite>
+      <figcaption className="mt-5 text-lg leading-tight tracking-[-0.02em] text-white xl:text-base lg:mt-4 md:mt-2.5">
+        Guillermo Rauch{' '}
+        <cite className="font-light not-italic text-gray-new-70">– CEO of Vercel</cite>
       </figcaption>
     </Container>
   </figure>
