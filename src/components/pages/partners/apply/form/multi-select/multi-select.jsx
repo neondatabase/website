@@ -19,14 +19,16 @@ const MultiSelect = ({ control, setValue }) => {
 
   return (
     <Combobox
-      className="relative mt-1"
+      className="relative"
       as="div"
       value={applicationScopes}
       multiple
       onChange={setApplicationScopes}
     >
-      <Combobox.Label>What application scope would you need?</Combobox.Label>
-      <div className="relative mt-3 flex min-h-[40px] w-full appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 py-[7px] caret-transparent transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15">
+      <Combobox.Label className="text-sm leading-none text-gray-new-70">
+        What application scope would you need?
+      </Combobox.Label>
+      <div className="relative mt-2 flex min-h-[40px] w-full appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 py-[7px] caret-transparent transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15">
         {applicationScopes?.length > 0 && (
           <ul className="flex flex-wrap gap-x-2 gap-y-1">
             {applicationScopes.map((item) => (

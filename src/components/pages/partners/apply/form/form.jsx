@@ -123,7 +123,7 @@ const Form = ({ className }) => {
     <form
       className={clsx(
         className,
-        'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 py-11 leading-none xl:px-7 xl:py-8 md:px-5 md:py-6'
+        'flex flex-col gap-y-6 rounded-[10px] bg-gray-new-8 px-9 pb-11 pt-9 leading-none xl:px-6 xl:pb-9 md:px-5 md:py-6'
       )}
       method="POST"
       onSubmit={handleSubmit(onSubmit)}
@@ -137,7 +137,7 @@ const Form = ({ className }) => {
         name="integration_type"
       />
 
-      <div className="grid grid-cols-2 gap-5 sm:grid-cols-1">
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-1 sm:gap-6">
         <Field
           label="First Name *"
           name="firstname"
@@ -181,14 +181,17 @@ const Form = ({ className }) => {
 
           <CallbackUrlFields register={register} />
 
-          <fieldset>
-            <legend className="xs:leading-tight">
+          <fieldset className="mt-3 xl:mt-1 lg:mt-0 md:-mt-1">
+            <legend className="text-sm leading-none text-gray-new-70 xs:leading-tight">
               Will you be making API calls from a backend?
             </legend>
-            <div className="ml-1 mt-5 flex items-center gap-x-8">
-              <label className="flex items-center gap-x-[9px]" htmlFor="apiCallsYes">
+            <div className="ml-1 mt-4 flex items-center gap-x-8">
+              <label
+                className="flex items-center gap-x-[9px] font-light text-gray-new-94"
+                htmlFor="apiCallsYes"
+              >
                 <input
-                  className="relative h-2 w-2 appearance-none rounded-full bg-transparent after:absolute after:left-1/2 after:top-1/2 after:block after:h-3 after:w-3 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:border after:border-gray-new-40 checked:bg-primary-1"
+                  className="relative h-2 w-2 appearance-none rounded-full bg-transparent after:absolute after:left-1/2 after:top-1/2 after:block after:h-3.5 after:w-3.5 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:border after:border-gray-new-40 checked:bg-primary-1"
                   type="radio"
                   name="are_api_calls_from_backend"
                   id="apiCallsYes"
@@ -198,9 +201,12 @@ const Form = ({ className }) => {
                 Yes
               </label>
 
-              <label className="flex items-center gap-x-[9px]" htmlFor="apiCallsNo">
+              <label
+                className="flex items-center gap-x-[9px] font-light text-gray-new-94"
+                htmlFor="apiCallsNo"
+              >
                 <input
-                  className="relative h-2 w-2 appearance-none rounded-full bg-transparent after:absolute after:left-1/2 after:top-1/2 after:block after:h-3 after:w-3 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:border after:border-gray-new-40 checked:bg-primary-1"
+                  className="relative h-2 w-2 appearance-none rounded-full bg-transparent after:absolute after:left-1/2 after:top-1/2 after:block after:h-3.5 after:w-3.5 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:border after:border-gray-new-40 checked:bg-primary-1"
                   type="radio"
                   name="are_api_calls_from_backend"
                   id="apiCallsNo"
@@ -225,15 +231,22 @@ const Form = ({ className }) => {
       )}
 
       {integrationType.id === 'api' && (
-        <Select
-          label="Number of projects you need"
-          control={control}
-          selected={projectNumber}
-          setSelected={setProjectNumber}
-          options={projectNumberOptions}
-          name="number_of_projects"
-          placeholder="Select an option"
-        />
+        <div className="flex flex-col gap-y-2">
+          <Select
+            label="Number of projects you need"
+            control={control}
+            selected={projectNumber}
+            setSelected={setProjectNumber}
+            options={projectNumberOptions}
+            name="number_of_projects"
+            placeholder="Select an option"
+          />
+          {projectNumber.id === '5000+' && (
+            <span className="text-sm leading-none text-green-45">
+              We offer discounts for large number of projects
+            </span>
+          )}
+        </div>
       )}
 
       <Field
@@ -243,9 +256,9 @@ const Form = ({ className }) => {
         name="message"
         {...register('message')}
       />
-      <div className="relative flex flex-col gap-y-6 lg:mt-3 lg:flex-row lg:items-center lg:gap-x-5 md:mt-2 md:flex-col md:items-stretch md:gap-y-4">
+      <div className="relative flex flex-col gap-y-6 lg:mt-3 lg:flex-row lg:items-center lg:gap-x-5 md:mt-0 md:flex-col md:items-stretch md:gap-y-4">
         <Button
-          className="mt-3 h-[52px] py-[17px] text-lg font-medium leading-none tracking-[-0.02em] disabled:hover:bg-primary-1 lg:order-1 lg:ml-auto lg:mt-0 lg:basis-[316px] md:order-none md:ml-0 md:w-full md:basis-full"
+          className="mt-4 h-12 py-[15px] text-lg font-medium leading-none tracking-[-0.02em] disabled:hover:bg-primary-1 xl:mt-2 lg:order-1 lg:ml-auto lg:mt-0 lg:basis-[316px] md:order-none md:ml-0 md:w-full md:basis-full"
           theme="primary"
           type="submit"
           disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
@@ -256,17 +269,17 @@ const Form = ({ className }) => {
           {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && 'Apply now'}
           {formState === FORM_STATES.SUCCESS && 'Applied!'}
         </Button>
-        <p className="text-[15px] font-light leading-snug lg:max-w-[450px] lg:flex-1">
+        <p className="-mt-3 text-[15px] font-light leading-tight lg:max-w-[450px] lg:flex-1 md:mt-0">
           By submitting, you agree to the{' '}
           <Link
-            className="text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors duration-200 hover:decoration-transparent"
+            className="leading-tight text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors duration-200 hover:decoration-transparent"
             to={LINKS.termsOfService}
           >
-            Terms Service
+            Terms of Service
           </Link>{' '}
           and acknowledge the{' '}
           <Link
-            className="inline-block text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors hover:decoration-transparent"
+            className="inline-block leading-tight text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors hover:decoration-transparent"
             to={LINKS.privacyPolicy}
           >
             Privacy Policy

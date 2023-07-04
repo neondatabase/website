@@ -24,13 +24,13 @@
     --logos-sprite-height: 48px;
     --logos-animation-duration: 50s;
     --logos-glow-size: 504px;
-    --logos-glow-visual-compensation: 120px; /* Increase to enhance the glow, decrease to reduce */
+    --logos-glow-visual-compensation: 200px; /* Increase to enhance the glow, decrease to reduce */
 
     @screen xl {
       --logos-sprite-width: 2768px;
       --logos-animation-duration: 40s;
       --logos-glow-size: 336px;
-      --logos-glow-visual-compensation: 100px;
+      --logos-glow-visual-compensation: 150px;
     }
 
     @screen lg {
@@ -38,14 +38,14 @@
       --logos-sprite-height: 36px;
       --logos-animation-duration: 30s;
       --logos-glow-size: 240px;
-      --logos-glow-visual-compensation: 80px;
+      --logos-glow-visual-compensation: 100px;
     }
 
     @screen sm {
       --logos-sprite-width: 1911px;
 
       --logos-glows-size: 180px;
-      --logos-glow-visual-compensation: 30px;
+      --logos-glow-visual-compensation: 50px;
     }
 
     @apply relative overflow-hidden;
