@@ -46,6 +46,7 @@ const CallbackUrlFields = ({ register }) => {
               type="text"
               {...register(name)}
               key={index}
+              aria-label={`Callback URL ${index + 1}`}
             />
           );
         })}
