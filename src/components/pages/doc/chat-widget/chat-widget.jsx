@@ -63,7 +63,7 @@ const ChatWidget = () => {
     setInputText(e.target.textContent);
     inputRef.current.focus();
     sendGtagEvent('chat_widget_example_click', {
-      example: e.target.textContent,
+      query: e.target.textContent,
     });
   };
 
