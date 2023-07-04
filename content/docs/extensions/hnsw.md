@@ -44,17 +44,17 @@ CREATE EXTENSION hnsw;
 To store your vector data, create a table similar to the following:
 
 ```sql
-CREATE TABLE vectors(id INTEGER, vec REAL[]);
+CREATE TABLE documents(id INTEGER, embedding REAL[]);
 ```
 
-This statement generates a table named `vectors` with a `vec` column for storing vector data. (Your table and vector column names may differ.)
+This statement generates a table named `documents` with a `embedding` column for storing vector data. (Your table and vector column names may differ.)
 
 ### Insert data
 
 To insert vector data, use an `INSERT` statement similar to the following:
 
 ```sql
-INSERT INTO vectors(id, vec) 
+INSERT INTO documents(id, embedding) 
 VALUES 
 (1, '{1.1, 2.2, 3.3}'),
 (2, '{4.4, 5.5, 6.6}'),
@@ -68,7 +68,7 @@ The statement above stores vectors with 3 dimensions. In a real-world example, t
 To create the HNSW index on your vector column, use a `CREATE INDEX` statement similar to the following:
 
 ```sql
-CREATE INDEX ON vectors USING hnsw(vec) WITH (maxelements=3, dims=3, m=3);
+CREATE INDEX ON documents USING hnsw(embedding) WITH (maxelements=3, dims=3, m=3);
 ```
 
 The HNSW index options used in the statement above include:
@@ -86,20 +86,20 @@ For information about how you can configure these options to influence the HNSW 
 
 ## Query the indexed data
 
-To query the indexed data in the `vectors` table for nearest neighbors, use a query similar to this:
+To query the indexed data in the `documents` table for nearest neighbors, use a query similar to this:
 
 ```sql
-SELECT id FROM vectors ORDER BY vec <-> array[1.1, 2.2, 3.3] LIMIT 2;
+SELECT id FROM documents ORDER BY embedding <-> array[1.1, 2.2, 3.3] LIMIT 2;
 ```
 
 where:
 
-- `SELECT id FROM vectors` selects the `id` field from all records in the `vectors` table.
+- `SELECT id FROM documents` selects the `id` field from all records in the `documents` table.
 - `<->`: This is the PostgreSQL "distance between" operator. It calculates the Euclidean distance (L2) between the query vector and each row of the dataset.
 - `ORDER BY` sorts the selected records in ascending order based on the calculated distances. In other words, records with values closer to the `[1.1, 2.2, 3.3]` query vector will be returned first.
 - `LIMIT 2` limits the result set to the first two records after sorting.
 
-In summary, the query retrieves the IDs of the two records from the `vectors` table whose value is closest to the `[1.1, 2.2, 3.3]` query vector according to Euclidean distance."
+In summary, the query retrieves the IDs of the two records from the `documents` table whose value is closest to the `[1.1, 2.2, 3.3]` query vector according to Euclidean distance."
 
 ## Tuning the HNSW algorithm
 
@@ -137,7 +137,7 @@ When determining which index to use, `pgvector` with an IVFFlat index or HNSW, i
 | Accuracy          | Can achieve high accuracy but at the cost of examining more clusters and  longer search times. | Generally achieves higher accuracy for the same memory footprint compared to IVFFlat. |
 | Memory Usage      | Uses less memory since it only stores the centroids of clusters and the lists of vectors within these clusters. | Uses more memory because it maintains a graph structure with multiple layers. |
 | Index Construction Speed | Index building process is relatively fast. The data points are assigned to the nearest centroid, and inverted lists are constructed. | Index construction involves building multiple layers of graphs, which can be computationally intensive, especially if you choose high values for the parameter `ef_construction`. |
-| Distance Metrics  | Typically used for L2 distances, but pgvector also supports inner product and cosine distance. | Currently supports L2 distance metrics. |
+| Distance Metrics  | Typically used for L2 distances, but `pgvector` also supports inner product and cosine distance. | Currently supports L2 distance metrics. |
 
 Ultimately, the choice between the `pgvector` with IVFFlat or HNSW depends on your use case and requirements. Here are few additional points to consider when making your choice:
 
