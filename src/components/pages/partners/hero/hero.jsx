@@ -15,7 +15,7 @@ const Hero = () => (
       priority
       aria-hidden
     />
-    <Container className="relative z-10 flex flex-col items-center text-center" size="lg">
+    <Container className="relative z-10 flex flex-col items-center text-center" size="mdDoc">
       <div className="absolute left-1/2 top-0 -z-10 h-[270px] w-3/4 -translate-x-1/2 rounded-[1000px] bg-black-new blur-[30px] lg:w-full" />
       <h1 className="md:flat-breaks mx-auto max-w-[968px] text-6xl font-medium leading-none tracking-[-0.02em] xl:text-[56px] lg:max-w-[700px] lg:text-5xl md:text-4xl">
         Unlock <mark className="bg-transparent text-green-45">new revenue</mark> streams <br />
