@@ -9,7 +9,7 @@ The HNSW extension enables the use of the Hierarchical Navigable Small World (HN
 
 HNSW is a graph-based approach to indexing multi-dimensional data. It constructs a multi-layered graph, where each layer is a subset of the previous one. During a search, the algorithm navigates through the graph from the top layer to the lowest layer to quickly find the nearest neighbor. An HNSW graph is known for its superior performance in terms of speed and accuracy.
 
-![HNSW graph](/docs/extensions/hnsw_graph.webp)
+![HNSW graph](/docs/extensions/hnsw_graph.png)
 
 Neon's HNSW extension is based on the [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw.git) implementation of the HSNW algorithm, presented in the article [Revisiting the Inverted Indices for Billion-Scale Approximate Nearest Neighbors](https://openaccess.thecvf.com/content_ECCV_2018/html/Dmitry_Baranchuk_Revisiting_the_Inverted_ECCV_2018_paper.html).
 
