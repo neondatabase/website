@@ -32,22 +32,24 @@ const CallbackUrlFields = ({ register }) => {
           place={width > MOBILE_WIDTH ? 'right' : 'top-start'}
         />
       </div>
-      {Array.from({ length: CALLBACK_URLS_LIMIT }).map((_, index) => {
-        const name = `callback_url${index > 0 ? `_${index + 1}` : ''}`;
-        return (
-          <input
-            className={clsx(
-              'mt-2 h-10 appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15',
-              index > visibleInputIndex && 'hidden'
-            )}
-            id={`callback_url_${index}`}
-            name={name}
-            type="text"
-            {...register(name)}
-            key={index}
-          />
-        );
-      })}
+      <div className="mt-2 flex flex-col gap-y-4">
+        {Array.from({ length: CALLBACK_URLS_LIMIT }).map((_, index) => {
+          const name = `callback_url${index > 0 ? `_${index + 1}` : ''}`;
+          return (
+            <input
+              className={clsx(
+                'h-10 appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15',
+                index > visibleInputIndex && 'hidden'
+              )}
+              id={`callback_url_${index}`}
+              name={name}
+              type="text"
+              {...register(name)}
+              key={index}
+            />
+          );
+        })}
+      </div>
       <button
         className={clsx(
           'mb-1 mt-2 inline-flex items-center gap-x-2',

@@ -34,7 +34,7 @@
     }
 
     .comment.linenumber {
-      @apply -mr-5;
+      @apply -mr-8;
     }
   }
 

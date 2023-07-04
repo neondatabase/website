@@ -10,14 +10,16 @@ import Form from './form';
 const Testimonial = ({ className = null, ariaHidden = false }) => (
   <figure className={clsx('mt-16 max-w-[464px]', className)} aria-hidden={ariaHidden}>
     <blockquote>
-      <p className="border-l border-green-45 pl-[18px] text-2xl font-light leading-snug tracking-tighter xl:text-xl">
+      <p className="border-l border-green-45 pl-[18px] text-2xl font-normal leading-snug tracking-tighter xl:text-xl">
         The combination of flexible resource limits and nearly instant database provisioning made
         Neon a no-brainer.
       </p>
     </blockquote>
-    <figcaption className="mt-4 text-base font-light leading-tight tracking-[-0.02em] lg:mt-5 md:mt-4">
+    <figcaption className="mt-4 text-base leading-tight tracking-[-0.02em] lg:mt-5 md:mt-4">
       Lincoln Bergeson –{' '}
-      <cite className="inline not-italic text-gray-new-60">Infrastructure Engineer at Replit</cite>
+      <cite className="inline font-light not-italic text-gray-new-70">
+        Infrastructure Engineer at Replit
+      </cite>
     </figcaption>
   </figure>
 );

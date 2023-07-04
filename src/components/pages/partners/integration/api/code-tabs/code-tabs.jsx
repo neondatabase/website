@@ -100,7 +100,7 @@ const CodeTabs = ({ className = null }) => {
             {codeSnippets.map(
               ({ language, code }, index) =>
                 language === activeLanguage && (
-                  <m.figure
+                  <m.div
                     className="dark"
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
@@ -115,7 +115,7 @@ const CodeTabs = ({ className = null }) => {
                     >
                       {code}
                     </CodeBlock>
-                  </m.figure>
+                  </m.div>
                 )
             )}
           </AnimatePresence>

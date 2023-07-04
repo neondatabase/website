@@ -11,7 +11,7 @@ const Hero = () => (
       className="pointer-events-none absolute left-1/2 top-[68px] h-auto w-[1472px] max-w-none -translate-x-1/2 object-cover xl:top-[74px] xl:w-[1040px] lg:top-7 lg:w-[1024px] md:top-1 md:w-[1040px]"
       src={logoPattern}
       alt=""
-      quality={85}
+      quality={90}
       priority
       aria-hidden
     />
