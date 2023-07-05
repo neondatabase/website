@@ -1,109 +1,46 @@
 @layer components {
-  @keyframes ticker-front {
-    0% {
-      mask-position: 0 bottom;
+  @keyframes infinityScroll {
+    from {
+      transform: translateX(0);
     }
 
-    100% {
-      mask-position: calc(var(--logos-sprite-width) * -1) bottom;
-    }
-  }
-
-  @keyframes ticker-back {
-    0% {
-      background-position: 0 bottom;
-    }
-
-    100% {
-      background-position: calc(var(--logos-sprite-width) * -1) bottom;
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
     }
   }
 
   .logos {
-    --logos-sprite-width: 3032px;
-    --logos-sprite-height: 48px;
-    --logos-animation-duration: 50s;
-    --logos-glow-size: 504px;
-    --logos-glow-visual-compensation: 200px; /* Increase to enhance the glow, decrease to reduce */
+    --gap: theme(spacing.24);
 
-    @screen xl {
-      --logos-sprite-width: 2768px;
-      --logos-animation-duration: 40s;
-      --logos-glow-size: 336px;
-      --logos-glow-visual-compensation: 150px;
+    @screen 2xl {
+      --gap: theme(spacing.20);
     }
 
-    @screen lg {
-      --logos-sprite-width: 2000px;
-      --logos-sprite-height: 36px;
-      --logos-animation-duration: 30s;
-      --logos-glow-size: 240px;
-      --logos-glow-visual-compensation: 100px;
+    @screen md {
+      --gap: theme(spacing.14);
     }
 
-    @screen sm {
-      --logos-sprite-width: 1911px;
+    @apply flex w-full overflow-hidden;
 
-      --logos-glows-size: 180px;
-      --logos-glow-visual-compensation: 50px;
-    }
-
-    @apply relative overflow-hidden;
-
-    height: var(--logos-sprite-height);
+    gap: var(--gap);
   }
 
-  .logos-front {
-    @apply absolute bottom-0 left-0 z-20 w-full bg-transparent;
+  .logos-content {
+    @apply flex will-change-transform;
 
-    height: calc(var(--logos-glow-size) - var(--logos-glow-visual-compensation));
-    transform: translateZ(0); /* Fix for Safari */
+    gap: var(--gap);
+    animation: infinityScroll 60s linear infinite;
+  }
 
-    background-image: radial-gradient(
-      var(--logos-glow-size) at top,
-      theme('colors.green.45') 0%,
-      transparent 100%
-    );
-    mask-image: url('/images/pages/partners/logos.svg');
-    mask-repeat: repeat-x;
-    mask-position: 0 bottom;
-    mask-size: var(--logos-sprite-width) var(--logos-sprite-height);
+  .logos-central-mask {
+    mask-image: radial-gradient(350px at 50% -200px, black 25%, transparent 100%);
 
-    animation: ticker-front var(--logos-animation-duration) linear infinite;
-
-    @screen xl {
-      mask-image: url('/images/pages/partners/logos-xl.svg');
-    }
-
-    @screen lg {
-      mask-image: url('/images/pages/partners/logos-lg.svg');
-    }
-
-    @screen sm {
-      mask-image: url('/images/pages/partners/logos-sm.svg');
+    @screen md {
+      mask-image: radial-gradient(200px at 50% -100px, black 25%, transparent 100%);
     }
   }
 
-  .logos-back {
-    @apply absolute bottom-0 left-0 z-10 h-full w-full before:absolute before:bottom-0 before:left-0 before:top-0 before:w-[100px] before:bg-gradient-to-r before:from-black-new before:to-transparent after:absolute after:bottom-0 after:right-0 after:top-0 after:w-[100px] after:bg-gradient-to-l after:from-black-new after:to-transparent;
-    transform: translateZ(0); /* Fix for Safari */
-    background-image: url('/images/pages/partners/logos.svg');
-    background-repeat: repeat-x;
-    background-position: 0 bottom;
-    background-size: var(--logos-sprite-width) var(--logos-sprite-height);
-
-    animation: ticker-back var(--logos-animation-duration) linear infinite;
-
-    @screen xl {
-      background-image: url('/images/pages/partners/logos-xl.svg');
-    }
-
-    @screen lg {
-      background-image: url('/images/pages/partners/logos-lg.svg');
-    }
-
-    @screen sm {
-      background-image: url('/images/pages/partners/logos-sm.svg');
-    }
+  .logos-sides-fade {
+    @apply relative before:absolute before:bottom-0 before:left-0 before:top-0 before:z-10 before:w-[100px] before:bg-gradient-to-r before:from-black-new before:to-transparent after:absolute after:bottom-0 after:right-0 after:top-0 after:z-10 after:w-[100px] after:bg-gradient-to-l after:from-black-new after:to-transparent;
   }
 }
