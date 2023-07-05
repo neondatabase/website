@@ -18,7 +18,7 @@ The Neon Serverless driver supports querying over HTTP and Websockets. Querying 
 const [post] = await sql`SELECT * FROM posts WHERE id = ${postId}`;
 ```
 
-If you are working with sessions and transactions, as in the exmaple below, or requre full `node-postgres` compatibility to enable query libraries like [Kysely](https://kysely.dev/) or [Zapatos](https://jawj.github.io/zapatos/), use Websockets.
+If you are working with sessions and transactions, as in the example below, or require full `node-postgres` compatibility to enable query libraries like [Kysely](https://kysely.dev/) or [Zapatos](https://jawj.github.io/zapatos/), use Websockets.
 
 ```js
 try {
