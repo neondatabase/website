@@ -24,9 +24,9 @@ neonctl branches <subcommand> [options]
 |---------|------------------|
 | [list](#list)    | List branches    |
 | [create](#create)  | Create a branch |
-| [update](#update)  | Update a branch |
-| [delete](#delete)  | Delete a branch |
-| [get](#get)     | Get a branch    |
+| [update <id|name>](#update)   | Update a branch |
+| [delete <id|name>](#delete)  | Delete a branch |
+| [get <id|name>](#get)     | Get a branch    |
 
 ### list
 
@@ -100,7 +100,7 @@ This subcommand allows you to update a branch in a Neon project.
 #### Usage
 
 ```bash
-neonctl branches update [options]
+neonctl branches update <id|name> [options]
 ```
 
 #### Options
@@ -110,13 +110,12 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `u
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
 | --project.id  | Project ID  | string | &check; |
-| --branch.name |             | string |         |
-| --branch.id   | Branch ID   | string | &check; |
+| --branch.name | branch name | string | &check; |
 
 #### Example
 
 ```bash
-neonctl branches update --project.id spring-sky-578180 --branch.id br-withered-king-763176 --branch.name mynewbranch
+neonctl branches update br-withered-king-763176 --project.id spring-sky-578180 --branch.name mynewbranch
 ┌─────────────────────────┬─────────────┬──────────────────────┐
 │ Id                      │ Name        │ Created At           │
 ├─────────────────────────┼─────────────┼──────────────────────┤
@@ -131,7 +130,7 @@ This subcommand allows you to delete a branch in a Neon project.
 #### Usage
 
 ```bash
-neonctl branches delete [options]
+neonctl branches delete <id|name> [options]
 ```
 
 #### Options
@@ -148,7 +147,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `d
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl branches delete --project.id spring-sky-578180 --branch.id br-withered-king-763176
+neonctl branches delete br-withered-king-763176 --project.id spring-sky-578180 
 ┌─────────────────────────┬─────────────┬──────────────────────┐
 │ Id                      │ Name        │ Created At           │
 ├─────────────────────────┼─────────────┼──────────────────────┤
@@ -165,7 +164,7 @@ This subcommand allows you to retrieve details about a branch.
 #### Usage
 
 ```bash
-neonctl branches get [options]
+neonctl branches get <id|name> [options]
 ```
 
 #### Options
@@ -184,7 +183,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `g
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl branches get --project.id spring-sky-578180 --branch.id br-sweet-sun-522796 
+neonctl branches get br-sweet-sun-522796 --project.id spring-sky-578180 
 ┌─────────────────────┬─────────────────────┬──────────────────────┐
 │ Id                  │ Name                │ Created At           │
 ├─────────────────────┼─────────────────────┼──────────────────────┤
