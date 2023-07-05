@@ -21,15 +21,15 @@ When working with branches, it is important to remove old and unused branches. B
 
 Each Neon project has a primary branch called `main`, by default. In the Neon Console, your primary branch is identified by a `PRIMARY` tag. You can designate any branch as the primary branch for your project or rename the primary branch, but you cannot delete a primary branch. Your primary branch has these advantages:
 
-- For [Free Tier](/docs/introduction/free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
-- For [Pro plan](/docs/introduction/pro-plan) users, default limits prevent more than 20 simultaneously active compute endpoints. If you exceed 20 simultaneously active computes, the compute endpoint associated with the primary branch remains available, ensuring uninterrupted access to data on your primary branch.
+- For Free Tier users, the compute endpoint associated with the primary branch remains accessible if you exceed the Free Tier _Active time_ limit of 100 hours per month. This ensures that access to data on your primary branch is never interrupted. For more information about Free Tier limits, see [Free Tier](/docs/introduction/free-tier).
+- Pro plan users can create as many computes as needed, but there is a default limit of 20 simultaneously active computes to prevent unintended usage. If you require more than 20 computes, you can contact [Sales](https://neon.tech/contact-sales) to have the limit increased. If you exceed the default limit of 20 simultaneously active computes, only non-primary branch computes are placed into a suspended state to stay within the 20 simultaneously-active compute limit. The compute endpoint associated with your primary branch always remains available, ensuring uninterrupted access to data on your primary branch. For more information about plan limits, see [Neon plans](/docs/introduction/plans).
 
 ## Non-primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
-- For [Free Tier](/docs/introduction/free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Free Tier  _compute active time_ limit of 100 hours per month.
-- For [Pro plan](/docs/introduction/pro-plan) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
+- For Free Tier users, compute endpoints associated with non-primary branches are subject to suspension if you exceed the Free Tier _Active time_ limit of 100 hours per month. For more information about Free Tier limits, see [Free Tier](/docs/introduction/free-tier).
+- For [Pro plan](/docs/introduction/pro-plan) users, default limits prevent more than 20 simultaneously active compute endpoints to prevent unintended usage. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Create a branch
 
