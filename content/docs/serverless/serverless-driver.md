@@ -56,7 +56,7 @@ DATABASE_URL=postgres://<user>:<password>@ep-icy-sun-148107.us-east-2.aws.neon.t
 
 ## How to use the driver
 
-You can use the driver in the same way you would use `node-postgres`. Where you normally import `pg`, import `@neondatabase/serverless` instead. The following sections show how to use the driver over HTTP and Websockets.
+You can use the driver in the same way you would use `node-postgres`. Where you usually import `pg`, import `@neondatabase/serverless` instead. The following sections show how to use the driver over HTTP and Websockets.
 
 ## Use the driver over HTTP
 
@@ -125,7 +125,7 @@ When using these constructors, there are two key points you need to know:
 - In Node.js and some other environments, there's no built-in WebSocket support. In these cases, you must supply a WebSocket constructor function.
 - In serverless environments such as Vercel Edge Functions or Cloudflare Workers, WebSocket connections cannot outlive a single request. That means `Pool` or `Client` objects must be connected, used, and closed within a single request handler. Don't create these objects outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them.
 
-These points are demonstrated in the examples below.
+These points are demonstrated in the following examples.
 
 ### Node.js with `Pool.connect()`
 
