@@ -29,7 +29,7 @@ Before installing, ensure that you have met the following prerequisites:
    npm -v
    ```
 
-  If you need to install either `Node.js` or `npm`, refer to the instructions for your operating system.
+  If you need to install  `Node.js` or `npm`, refer to instructions on the [official nodejs page](https://nodejs.org) or you can use [Node version manager](https://github.com/nvm-sh/nvm).
 
 ### Install
 
