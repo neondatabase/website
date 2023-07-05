@@ -37,6 +37,7 @@ const Header = forwardRef(
       isSticky = false,
       withBottomBorder = false,
       isDocPage = false,
+      isBlogPage = false,
     },
     ref
   ) => {
@@ -156,7 +157,18 @@ const Header = forwardRef(
             )}
           </div>
           <div className=" hidden items-center lg:flex">
-            {isDocPage && <Search className="mobile-search" />}
+            {isDocPage && (
+              <Search
+                className="mobile-search"
+                indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
+              />
+            )}
+            {isBlogPage && (
+              <Search
+                className="mobile-search"
+                indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
+              />
+            )}
 
             <Burger
               className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
@@ -179,6 +191,7 @@ Header.propTypes = {
   isSignIn: PropTypes.bool,
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
+  isBlogPage: PropTypes.bool,
 };
 
 export default Header;
