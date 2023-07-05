@@ -36,7 +36,7 @@ This section describes how to use the `pg_embedding` extension in Neon with a si
 Enable the `pg_embedding` extension in Neon by running the following `CREATE EXTENSION` statement in the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor).
 
 ```sql
-CREATE EXTENSION pg_embedding;
+CREATE EXTENSION embedding;
 ```
 
 ### Create a table for your vector data
@@ -148,7 +148,7 @@ Ultimately, the choice between the `pgvector` with IVFFlat or `pg_embedding` wit
 
 ## pg_embedding extension GitHub repository
 
-The GitHub repository for Neon's `pg_embedding` extension can be found [here](tbd).
+The GitHub repository for Neon's `pg_embedding` extension can be found [here](https://github.com/neondatabase/pg_embedding).
 
 ## Further reading
 
