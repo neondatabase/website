@@ -4,9 +4,9 @@ enableTableOfContents: true
 subtitle: Learn how to Connect to Neon from Vercel Edge Functions and Cloudflare Workers
 ---
 
-The [Neon serverless driver](https://github.com/neondatabase/serverless) (currently in Beta) allows you to query data from [Vercel Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions), [Cloudflare Workers](https://workers.cloudflare.com/), and other environments that support WebSockets but not TCP sockets.
+The [Neon serverless driver](https://github.com/neondatabase/serverless) is a POstgreSQL driver for JavaScript and TypeScript allows you to query data from [Vercel Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions), [Cloudflare Workers](https://workers.cloudflare.com/), and other environments using HTTP or WebSockets in place of TCP. If you are using TypeScript, the driver includes types. No additional installation is required.
 
-The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package that you may already be familiar with, offering the same API.
+The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package that you may already be familiar with. It supports the same API.
 
 ## Install the Neon serverless driver
 
