@@ -12,6 +12,7 @@ export default function getMetadata({
   robotsNoindex,
   rssPathname = null,
   pathname,
+  category = null,
   type = 'website',
   publishedTime = null,
   authors = [],
@@ -70,6 +71,7 @@ export default function getMetadata({
       publishedTime,
       authors,
     },
+    category,
     twitter: {
       card: 'summary_large_image',
     },
