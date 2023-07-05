@@ -54,7 +54,7 @@ const Sidebar = () => (
       <div className="relative flex-1">
         <nav className="no-scrollbars sticky top-10 md:-mx-4 md:max-w-5xl md:overflow-auto md:px-4">
           <Search
-            className="z-30 max-w-[170px]"
+            className="dark z-30 max-w-[170px]"
             indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
             isBlog
           />
