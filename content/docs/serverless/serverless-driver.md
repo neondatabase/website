@@ -46,9 +46,9 @@ npm install @neondatabase/serverless
 
 The driver includes TypeScript types (the equivalent of `@types/pg`). No additional installation is required.
 
-## Connect to your Neon database
+## Configure your Neon database connection
 
-You can obtain a connection string for your database from Connection Details widget on the Neon Dashboard and set it as an environment variable, in your project's .env file, for example. Your Neon connection string will look something like this:
+You can obtain a connection string for your database from **Connection Details** widget on the Neon **Dashboard** and set it as an environment variable in your project's `.env` file, for example. Your Neon connection string will look something like this:
 
 ```shell
 DATABASE_URL=postgres://<user>:<password>@ep-icy-sun-148107.us-east-2.aws.neon.tech/<dbname>
