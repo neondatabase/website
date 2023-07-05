@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import Link from 'components/shared/link';
 import debounce from 'utils/debounce';
 
-const Search = ({ className = null }) => {
+const Search = ({ className = null, indexName, isBlog = false }) => {
   // @NOTE: this is a workaround to prevent scroll to the page bottom when closing search modal in Safari
   // https://github.com/algolia/docsearch/issues/1260#issuecomment-1011939736
   useEffect(() => {
@@ -23,12 +23,22 @@ const Search = ({ className = null }) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (isBlog) {
+      document.body.classList.add('dark');
+    }
+
+    return () => {
+      document.body.classList.remove('dark');
+    };
+  }, [isBlog]);
+
   return (
     <div className={clsx('relative flex items-center justify-between', className)}>
       <DocSearch
         appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}
         apiKey={process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY}
-        indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
+        indexName={indexName}
         placeholder="Search..."
         transformSearchClient={(searchClient) => ({
           ...searchClient,
@@ -83,6 +93,8 @@ const Search = ({ className = null }) => {
 
 Search.propTypes = {
   className: PropTypes.string,
+  indexName: PropTypes.string.isRequired,
+  isBlog: PropTypes.bool,
 };
 
 export default Search;

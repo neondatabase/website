@@ -1,4 +1,5 @@
 import BlogNavLink from 'components/pages/blog/blog-nav-link';
+import Search from 'components/shared/search';
 import LINKS from 'constants/links';
 import GitHubIcon from 'icons/github-sm.inline.svg';
 import LinkedInIcon from 'icons/linkedin-sm.inline.svg';
@@ -52,7 +53,12 @@ const Sidebar = () => (
     <div className="relative flex h-full flex-col gap-y-10 lt:h-auto lt:min-h-fit">
       <div className="relative flex-1">
         <nav className="no-scrollbars sticky top-10 md:-mx-4 md:max-w-5xl md:overflow-auto md:px-4">
-          <ul className="flex flex-col lt:flex-row lt:gap-x-7 lt:pt-8 md:after:shrink-0 md:after:grow-0 md:after:basis-px md:after:content-['']">
+          <Search
+            className="z-30 max-w-[170px]"
+            indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
+            isBlog
+          />
+          <ul className="mt-8 flex flex-col lt:flex-row lt:gap-x-7 lt:pt-8 md:after:shrink-0 md:after:grow-0 md:after:basis-px md:after:content-['']">
             {categories.map(({ name, slug }, index) => (
               <li className="flex py-1.5 first:pt-0 last:pb-0 lt:py-0" key={index}>
                 <BlogNavLink name={name} slug={slug} />
