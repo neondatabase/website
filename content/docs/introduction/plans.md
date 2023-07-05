@@ -37,8 +37,7 @@ For information about how Neon bills for paid plans, please refer to our [Billin
 **Notes:**
 
 - The Pro plan has default limits of 20 projects, 200 GB of storage, and 20 simultaneously active computes. To increase these limits, reach out to our [Sales](https://neon.tech/contact-sales) team. The simultaneously active compute limit does not affect the primary branch compute.
-- The Free Tier has an [Active time](/docs/reference/glossary#active-time) limit of 100 hours per month for non-primary branch computes. _Active time_ on the primary branch compute is counted toward the 100-hour limit. For more information, see [Neon Free Tier](/docs/introduction/free-tier).
-- **There is no limit on Active time for the primary branch compute, which ensures that access to data on the primary branch is never interrupted.**
+- The Free Tier provides 100 hours of monthly [Active time](/docs/reference/glossary#active-time) for all compute branches. Upon reaching this limit, your non-primary computes are subject to suspension until the start of the next month. **Your primary branch compute remains available** if you exceed this limit, ensuring uninterrupted access to data on your primary branch. For more information, see [Neon Free Tier](/docs/introduction/free-tier).
 
 ## Support
 
