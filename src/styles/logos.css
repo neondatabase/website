@@ -34,6 +34,10 @@
 
   .logos-central-mask {
     mask-image: radial-gradient(350px at 50% -200px, black 25%, transparent 100%);
+
+    @screen md {
+      mask-image: radial-gradient(200px at 50% -100px, black 25%, transparent 100%);
+    }
   }
 
   .logos-sides-fade {
