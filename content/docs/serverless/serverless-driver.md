@@ -10,19 +10,15 @@ The driver is a drop-in replacement for [node-postgres](https://node-postgres.co
 
 The driver's low-latency capability is due to message pipelining and other optimizations. You can read about those optimizations [here](https://neon.tech/blog/quicker-serverless-postgres).
 
-## Install the Neon serverless driver
+## HTTP or Websockets?
 
-As a drop-in replacement for [node-postgres](https://node-postgres.com/), you simply install the Neon serverless driver where you would otherwise install `pg`. The driver includes TypeScript types (the equivalent of `@types/pg`).
+The Neon Serverless driver supports querying over HTTP and Websockets. Querying over HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is fast, but supports sending one query at a time. If you are using single-shot queries, such as the one shown below, with no sessions or transactions, consider using HTTP for faster responses.
 
-```bash
-npm install @neondatabase/serverless
+```js
+const [post] = await sql`SELECT * FROM posts WHERE id = ${postId}`;
 ```
 
-## Should you use the driver over HTTP or Websockets?
-
-As mentioned above, the driver supports querying over HTTP and Websockets. Querying over HTTP (over a [fetch]()https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API request) is fast, but only supports sending one query at a time. If you are using single-shot queries, such as `SELECT * FROM posts WHERE id = ${postId}`, with no sessions or transactions, consider using HTTP.
-
-If you are working with sessions and transactions, as in the example below, use Websockets.
+If you are working with sessions and transactions, or requre full `node-postgres` compatibility to enable query libraries like [Kysely](https://kysely.dev/) or [Zapatos](https://jawj.github.io/zapatos/), use Websockets.
 
 ```js
 try {
@@ -40,7 +36,15 @@ try {
 }
 ```
 
-Websockets also ensures `node-postgres` compatibility, which enables query libraries like [Kysely](https://kysely.dev/) or [Zapatos](https://jawj.github.io/zapatos/).
+## Install the Neon serverless driver
+
+You can install the driver with your preferred JavaScript package manager. For example:
+
+```shell
+npm install @neondatabase/serverless
+```
+
+The driver includes TypeScript types (the equivalent of `@types/pg`).
 
 ## How to use the driver
 
@@ -145,7 +149,7 @@ try {
 await pool.end();
 ```
 
-Other WebSocket libraries are available. For example, you could replace ws in the above example with `undici`:
+Other WebSocket libraries are available. For example, you could replace `ws` in the above example with `undici`:
 
 ```js
 import { WebSocket } from 'undici';
@@ -240,7 +244,7 @@ Neon provides an example application to help you get started with the Neon serve
 There are different implementations of the application to choose from:
 
 - [neondatabase/neon-vercel-rawsql](https://github.com/neondatabase/neon-vercel-rawsql) demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions.
-- [https://github.com/neondatabase/neon-vercel-http] demonstrates Neon's serverless driver over HTTP on Vercel Edge Functions.
+- [neondatabase/neon-vercel-http](https://github.com/neondatabase/neon-vercel-http) demonstrates Neon's serverless driver over HTTP on Vercel Edge Functions.
 - [neondatabase/serverless-cfworker-demo](https://github.com/neondatabase/serverless-cfworker-demo) demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance. There is an accompanying blog post for this example. See [Edge-compatible Serverless Driver for Postgres](https://neon.tech/blog/serverless-driver-for-postgres).
 - [neondatabase/neon-vercel-kysely](https://github.com/neondatabase/neon-vercel-kysely) demonstrates using [kysely](https://github.com/koskimas/kysely) and [kysely-codegen](https://github.com/RobinBlomberg/kysely-codegen) with Neon's serverless driver on Vercel Edge Functions. Kysely is a type-safe and autocompletion-friendly typescript SQL query builder. `kysely-codegen` generates Kysely type definitions from your database.
 - [neondatabase/neon-vercel-zapatos](https://github.com/neondatabase/neon-vercel-zapatos) demonstrates using [Zapatos](https://jawj.github.io/zapatos/) with Neon's serverless driver on Vercel Edge Functions. Zapatos offers zero-abstraction Postgres for TypeScript.
