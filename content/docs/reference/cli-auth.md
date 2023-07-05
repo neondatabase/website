@@ -19,11 +19,13 @@ Authenticates the user or caller to Neon.
 neonctl auth
 ```
 
-The command launches a browser window where you can authorize the Neon CLI to access your Neon account. After granting permission, your credentials are saved locally to a configuration file named `credentials.json`.
+The command launches a browser window where you can authorize the Neon CLI to access your Neon account. After you grant permissions to the Neon CLI, your credentials are saved locally to a configuration file named `credentials.json`, enabling you manage your account's projects from the command line.
 
 ```text
 /home/<home>/.config/neonctl/credentials.json
 ```
+
+An alternative to authenticating using `neon auth` is to provide an API key when running a CLI command. You can do this using the global `--api-key` option. See [Global options](/docs/reference/neon-cli#global-options) for instructions.
 
 ### Options
 

@@ -207,6 +207,8 @@
           slug: reference/cli-operations
         - title: connection-string
           slug: reference/cli-connection-string
+        - title: cli-completion
+          slug: reference/cli-connection-string
     - title: SDKs
       slug: reference/sdk
     - title: Glossary
