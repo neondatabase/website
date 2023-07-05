@@ -156,7 +156,7 @@ const Header = forwardRef(
               </Button>
             )}
           </div>
-          <div className="hidden items-center lg:flex md:gap-x-3">
+          <div className="hidden items-center lg:flex lg:gap-x-3 md:gap-x-5">
             {isDocPage && (
               <Search
                 className="mobile-search"
@@ -167,6 +167,7 @@ const Header = forwardRef(
               <Search
                 className="mobile-search"
                 indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
+                isBlog
               />
             )}
 
