@@ -155,7 +155,6 @@ The GitHub repository for Neon's `pg_embedding` extension can be found [here](tb
 To further your understanding of HNSW, the following resources are recommended:
 
 - [Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs, Yu. A. Malkov, D. A. Yashunin](https://arxiv.org/ftp/arxiv/papers/1603/1603.09320.pdf)
-- [A Comparative Study on Hierarchical Navigable Small World Graphs](https://www.arxiv-vanity.com/papers/1904.02077/)
 - [Similarity Search, Part 4: Hierarchical Navigable Small World (HNSW)](https://towardsdatascience.com/similarity-search-part-4-hierarchical-navigable-small-world-hnsw-2aad4fe87d37)
 - [IVFPQ + HNSW for Billion-scale Similarity Search](https://towardsdatascience.com/ivfpq-hnsw-for-billion-scale-similarity-search-89ff2f89d90e)
 
