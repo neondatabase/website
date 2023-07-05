@@ -59,6 +59,10 @@ Alternatively, you can authenticate a connection with a Neon API key using the `
 neonctl projects list --api-key <neon_api_key>
 ```
 
+## Configure autocompletion
+
+The Neon CLI support autocompletion, which you can configure in a few easy steps. See [Neon CLI commands — completion](/docs/reference/cli-completion) for instructions.
+
 For information about obtaining an Neon API key, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
 
 ## Commands
@@ -73,6 +77,7 @@ For information about obtaining an Neon API key, see [Authentication](https://ap
 | [roles](../reference/cli-roles)                                   | `list`, `create`,  `delete`            | Manage roles              |
 | [operations](../reference/cli-operations)                         | `list`                                 | Manage operations         |
 | [connection-string](../reference/cli-connection-string)           |                                        | Get connection string     |
+| [completion](../reference/completion)           |                                        | Generate a completion script     |
 
 ## Global options
 
