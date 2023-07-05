@@ -156,7 +156,7 @@ const Header = forwardRef(
               </Button>
             )}
           </div>
-          <div className=" hidden items-center lg:flex">
+          <div className="hidden items-center lg:flex md:gap-x-3">
             {isDocPage && (
               <Search
                 className="mobile-search"
