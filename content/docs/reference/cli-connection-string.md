@@ -26,20 +26,32 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 
 | Option        | Description  | Type   | Required  |
 | ------------- | ------------ | ------ | :------: |
-| --project.id  | Project ID   | string | &check; |
-| --role.name   | Role name    | string | &check; |
-| --database.name| Database name| string | &check; |
+| --project.id  | Project ID   | string |  Only if your Neon account has more than one project |
+| --role.name   | Role name    | string |  |
+| --database.name| Database name| string | |
 | --pooled | Use a pooled connection. The default is `false`. |boolean||
 | --prisma | Use connection string for Prisma setup. The default is `false`. |boolean||
 
-### Example
+### Examples
+
+- Generate a basic connection string for the current project, branch, and database:
 
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl connection-string --project.id spring-sky-578180 --role.name daniel --database.name neondb
-
+neonctl connection-string
 postgres://daniel:<password>@ep-still-haze-361517.us-east-2.aws.neon.tech/neondb
+```
+
+</CodeBlock>
+
+- Generate a pooled connection string for the current project, branch, and database with the `--pooled` option:
+
+<CodeBlock shouldWrap>
+
+```bash
+neonctl connection-string
+postgres://daniel:<password>@ep-still-haze-361517-pooler.us-east-2.aws.neon.tech/neondb
 ```
 
 </CodeBlock>

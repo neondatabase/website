@@ -42,15 +42,17 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
-| --project.id  | Project ID  | string | &check; |
-| --branch.id   | Branch ID   | string | &check; |
+| --project.id  | Project ID  | string | Only if your Neon account has more than one project |
+| --branch.id   | Branch ID   | string | |
+
+If a branch ID or name is not provided, the command lists roles for the primary branch of the specified project.
 
 #### Example
 
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl roles list --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 
+neonctl roles list 
 ┌────────┬──────────────────────┐
 │ Name   │ Created At           │
 ├────────┼──────────────────────┤
@@ -76,16 +78,18 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
-| --project.id         | Project ID                           | string | &check; |
-| --branch.id          | Branch ID                            | string | &check; |
+| --project.id         | Project ID                           | string | Only if your Neon account has more than one project |
+| --branch.id          | Branch ID                            | string | |
 | --role.name      | The role name. Cannot exceed 63 bytes in length.  | string | &check; |
+
+If a branch ID or name is not provided, the command creates a database in the primary branch of the specified project.
 
 #### Example
 
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl roles create --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 --role.name sally
+neonctl roles create --role.name sally
 ┌───────┬──────────────────────┐
 │ Name  │ Created At           │
 ├───────┼──────────────────────┤
@@ -102,7 +106,7 @@ This subcommand allows you to delete a database.
 #### Usage
 
 ```bash
-neonctl roles delete [options]
+neonctl roles delete <role> [options]
 ```
 
 #### Options
@@ -111,16 +115,17 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `d
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
-| --project.id         | Project ID                           | string | &check; |
-| --branch.id          | Branch ID                            | string | &check; |
-| --role.name      | The role name. Cannot exceed 63 bytes in length.  | string | &check; |
+| --project.id         | Project ID                           | string | Only if your Neon account has more than one project |
+| --branch.id          | Branch ID                            | string | |
+
+If a branch ID or name is not provided, the command assumes the role to be deleted resides in the primary branch of the project.
 
 #### Example
 
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl roles delete --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 --role.name sally
+neonctl roles delete sally
 ┌───────┬──────────────────────┐
 │ Name  │ Created At           │
 ├───────┼──────────────────────┤

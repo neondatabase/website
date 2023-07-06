@@ -71,6 +71,8 @@ neonctl projects create [options]
 
 #### Options
 
+There are no required options for creating a Neon project.
+
 In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` subcommand supports these options:
 
 | Option                                | Description                                                                                               | Type    | Required                               |
@@ -101,6 +103,8 @@ neonctl projects create
 │ silent-dawn-084646 │ silent-dawn-084646 │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
 └────────────────────┴────────────────────┴───────────────┴──────────────────────┘
 ```
+
+Specifying a project name is optional when running `neonctl projects create`. If you do not specify one, the project ID is used as the project name.
 
 ### update
 
@@ -138,11 +142,11 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `u
 #### Example
 
 ```bash
-neonctl projects update silent-dawn-084646 --project.name mynewproject
+neonctl projects update silent-dawn-084646 --project.name myproject
 ┌────────────────────┬──────────────┬───────────────┬──────────────────────┐
 │ Id                 │ Name         │ Region Id     │ Created At           │
 ├────────────────────┼──────────────┼───────────────┼──────────────────────┤
-│ silent-dawn-084646 │ mynewproject │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
+│ silent-dawn-084646 │ myproject    │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
 └────────────────────┴──────────────┴───────────────┴──────────────────────┘
 ```
 
@@ -167,7 +171,7 @@ neonctl projects delete silent-dawn-084646
 ┌────────────────────┬──────────────┬───────────────┬──────────────────────┐
 │ Id                 │ Name         │ Region Id     │ Created At           │
 ├────────────────────┼──────────────┼───────────────┼──────────────────────┤
-│ silent-dawn-084646 │ mynewproject │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
+│ silent-dawn-084646 │ myproject    │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
 └────────────────────┴──────────────┴───────────────┴──────────────────────┘
 ```
 

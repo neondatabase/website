@@ -38,7 +38,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
-| --project.id  | Project ID  | string | &check; |
+| --project.id  | Project ID  | string | Only if your Neon account has more than one project |
 | --branch   | Branch ID or name   | string |  |
 
 If a branch ID or name is not provided, the command lists databases for the primary branch of the specified project.
@@ -48,7 +48,7 @@ If a branch ID or name is not provided, the command lists databases for the prim
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl databases list --project.id spring-sky-578180 --branch br-autumn-dust-190886
+neonctl databases list --branch br-autumn-dust-190886
 ┌────────┬────────────┬──────────────────────┐
 │ Name   │ Owner Name │ Created At           │
 ├────────┼────────────┼──────────────────────┤
@@ -74,7 +74,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
-| --project.id         | Project ID                           | string | &check; |
+| --project.id         | Project ID                           | string | Only if your Neon account has more than one project |
 | --branch             | Branch ID or name                    | string | |
 | --database.name      | The name of the database             | string | &check; |
 | --database.owner_name| The name of the role that owns the database | string | &check; |
@@ -86,11 +86,11 @@ If a branch ID or name is not provided, the command creates a database in the pr
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl databases create --project.id spring-sky-578180 --branch br-autumn-dust-190886 --database.name mynewdb --database.owner_name daniel
+neonctl databases create --database.name mynewdb --database.owner_name john
 ┌─────────┬────────────┬──────────────────────┐
 │ Name    │ Owner Name │ Created At           │
 ├─────────┼────────────┼──────────────────────┤
-│ mynewdb │ daniel     │ 2023-06-19T23:45:45Z │
+│ mynewdb │ john       │ 2023-06-19T23:45:45Z │
 └─────────┴────────────┴──────────────────────┘
 ```
 
@@ -114,21 +114,21 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `d
 
 | Option           | Description  | Type   | Required  |
 | ---------------- | ------------ | ------ | :------: |
-| --project.id     | Project ID   | string | &check; |
+| --project.id     | Project ID   | string | Only if your Neon account has more than one project |
 | --branch         | Branch ID or name    | string | |
 
-If a branch ID or name is not provided, the command assumes the database to be deleted resides in the primary branch of the specified project.
+If a branch ID or name is not provided, the command assumes the database to be deleted resides in the primary branch of the project.
 
 #### Example
 
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl databases delete --project.id spring-sky-578180 --branch.id br-autumn-dust-190886 --database.name mynewdb
+neonctl databases delete mydb
 ┌─────────┬────────────┬──────────────────────┐
 │ Name    │ Owner Name │ Created At           │
 ├─────────┼────────────┼──────────────────────┤
-│ mynewdb │ daniel     │ 2023-06-19T23:45:45Z │
+│ mydb    │ daniel     │ 2023-06-19T23:45:45Z │
 └─────────┴────────────┴──────────────────────┘
 ```
 

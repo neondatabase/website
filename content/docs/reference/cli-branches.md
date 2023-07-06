@@ -44,12 +44,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |
-| --project.id | Project ID    | string | &check; |
+| --project.id | Project ID    | string | Only if your Neon account has more than one project |
 
 #### Example
 
 ```bash
-neonctl branches list --project.id spring-sky-578180
+neonctl branches list
 ┌───────────────────────┬──────┬──────────────────────┐
 │ Id                    │ Name │ Created At           │
 ├───────────────────────┼──────┼──────────────────────┤
@@ -73,7 +73,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 
 | Option                                    | Description                                                                               | Type    | Required                               |
 | ----------------------------------------- | ----------------------------------------------------------------------------------------- | ------- | :------: |
-| --project.id                              | Project ID                                                                                | string  | &check;                              |
+| --project.id                              | Project ID                                                                                | string  | Only if your Neon account has more than one project                              |
 | --branch.parent_id                        | The `branch_id` of the parent branch                                                      | string  |                                       |
 | --branch.name                             | The branch name                                                                           | string  |                                       |
 | --branch.parent_lsn                       | A Log Sequence Number (LSN) on the parent branch. The branch will be created with data from this LSN. The expected format is the same as a value returned by `SELECT pg_current_wal_flush_lsn()`. | string  |                                       |
@@ -85,7 +85,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 #### Example
 
 ```bash
-neonctl branches create --project.id spring-sky-578180
+neonctl branches create
 ┌─────────────────────────┬─────────────────────────┬──────────────────────┐
 │ Id                      │ Name                    │ Created At           │
 ├─────────────────────────┼─────────────────────────┼──────────────────────┤
@@ -103,23 +103,25 @@ This subcommand allows you to update a branch in a Neon project.
 neonctl branches update <id|name> [options]
 ```
 
+`<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
+
 #### Options
 
 In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
-| --project.id  | Project ID  | string | &check; |
+| --project.id  | Project ID  | string | Only if your Neon account has more than one project |
 | --branch.name | branch name | string | &check; |
 
 #### Example
 
 ```bash
-neonctl branches update br-withered-king-763176 --project.id spring-sky-578180 --branch.name mynewbranch
+neonctl branches update br-withered-king-763176 --branch.name mybranch
 ┌─────────────────────────┬─────────────┬──────────────────────┐
 │ Id                      │ Name        │ Created At           │
 ├─────────────────────────┼─────────────┼──────────────────────┤
-│ br-withered-king-763176 │ mynewbranch │ 2023-06-19T22:35:25Z │
+│ br-withered-king-763176 │ mybranch    │ 2023-06-19T22:35:25Z │
 └─────────────────────────┴─────────────┴──────────────────────┘
 ```
 
@@ -133,25 +135,27 @@ This subcommand allows you to delete a branch in a Neon project.
 neonctl branches delete <id|name> [options]
 ```
 
+`<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
+
 #### Options
 
 In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
-| --project.id  | Project ID  | string | &check; |
+| --project.id  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Example
 
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl branches delete br-withered-king-763176 --project.id spring-sky-578180 
-┌─────────────────────────┬─────────────┬──────────────────────┐
-│ Id                      │ Name        │ Created At           │
-├─────────────────────────┼─────────────┼──────────────────────┤
-│ br-withered-king-763176 │ mynewbranch │ 2023-06-19T22:35:25Z │
-└─────────────────────────┴─────────────┴──────────────────────┘
+neonctl branches delete br-wispy-voice-602467
+┌───────────────────────┬───────────────────────┬──────────────────────┬──────────────────────┐
+│ Id                    │ Name                  │ Created At           │ Updated At           │
+├───────────────────────┼───────────────────────┼──────────────────────┼──────────────────────┤
+│ br-wispy-voice-602467 │ br-wispy-voice-602467 │ 2023-07-06T13:27:08Z │ 2023-07-06T13:32:16Z │
+└───────────────────────┴───────────────────────┴──────────────────────┴──────────────────────┘
 ```
 
 </CodeBlock>
@@ -174,19 +178,19 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `g
 
 | Option        | Description | Type   | Required |
 | ------------- | ----------- | ------ | :------: |
-| --project.id  | Project ID  | string | &check; |
+| --project.id  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Example
 
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl branches get br-sweet-sun-522796 --project.id spring-sky-578180 
-┌─────────────────────┬─────────────────────┬──────────────────────┐
-│ Id                  │ Name                │ Created At           │
-├─────────────────────┼─────────────────────┼──────────────────────┤
-│ br-sweet-sun-522796 │ br-sweet-sun-522796 │ 2023-06-19T22:35:20Z │
-└─────────────────────┴─────────────────────┴──────────────────────┘
+neonctl branches get main
+┌────────────────────────┬──────┬──────────────────────┬──────────────────────┐
+│ Id                     │ Name │ Created At           │ Updated At           │
+├────────────────────────┼──────┼──────────────────────┼──────────────────────┤
+│ br-small-meadow-878874 │ main │ 2023-07-06T13:15:12Z │ 2023-07-06T13:32:37Z │
+└────────────────────────┴──────┴──────────────────────┴──────────────────────┘
 ```
 
 </CodeBlock>
