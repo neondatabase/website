@@ -10,7 +10,7 @@ const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
-    <div className="my-5 max-w-full overflow-hidden rounded-md bg-gray-new-98 dark:bg-gray-1">
+    <figure className="my-5 max-w-full overflow-hidden rounded-md bg-gray-new-98 dark:bg-gray-1">
       <div className="no-scrollbars bg-grey-15 relative flex w-full flex-nowrap overflow-auto after:absolute after:bottom-0 after:h-px after:w-full after:bg-gray-new-90 dark:after:bg-gray-2">
         {labels.map((label, index) => (
           <div
@@ -36,19 +36,22 @@ const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
           return null;
         }
 
-        const { children, className } = child.props?.children.props ?? {};
+        const { highlight } = child.props ?? {};
+
+        const { children, className } =
+          child.props?.children.props?.children.props || child.props?.children.props || {};
 
         return (
           <CodeBlock
-            key={index}
             className={clsx(className, { 'code-wrap': shouldWrap }, 'code-tab')}
+            highlight={highlight || ''}
             showLineNumbers
           >
             {children}
           </CodeBlock>
         );
       })}
-    </div>
+    </figure>
   );
 };
 

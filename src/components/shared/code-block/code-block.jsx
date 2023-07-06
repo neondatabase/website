@@ -36,6 +36,7 @@ const CodeBlock = ({
   shouldWrap = false,
   isTrimmed = true,
   highlight = '',
+  as: Tag = 'div',
   ...otherProps
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
@@ -50,10 +51,7 @@ const CodeBlock = ({
   const highlightedLines = parseHighlightRanges(highlight);
 
   return (
-    <figure
-      className={clsx('group relative', { 'code-wrap': shouldWrap }, className)}
-      {...otherProps}
-    >
+    <Tag className={clsx('group relative', { 'code-wrap': shouldWrap }, className)} {...otherProps}>
       <SyntaxHighlighter
         language={snippetLanguage}
         useInlineStyles={false}
@@ -84,7 +82,7 @@ const CodeBlock = ({
           <CopyIcon className="text-current" />
         )}
       </button>
-    </figure>
+    </Tag>
   );
 };
 
@@ -97,6 +95,7 @@ CodeBlock.propTypes = {
   shouldWrap: PropTypes.bool,
   isTrimmed: PropTypes.bool,
   highlight: PropTypes.string,
+  as: PropTypes.oneOf(['figure', 'pre']),
 };
 
 export default CodeBlock;
