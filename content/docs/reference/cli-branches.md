@@ -46,16 +46,45 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 | ------------ | ------------- | ------ | :------: |
 | --project.id | Project ID    | string | Only if your Neon account has more than one project |
 
-#### Example
+#### Examples
 
-```bash
-neonctl branches list
-┌───────────────────────┬──────┬──────────────────────┐
-│ Id                    │ Name │ Created At           │
-├───────────────────────┼──────┼──────────────────────┤
-│ br-autumn-dust-190886 │ main │ 2023-06-19T18:27:19Z │
-└───────────────────────┴──────┴──────────────────────┘
-```
+- List branches with the default Neon CLI output format, which is `table`. The information provided with the `table` output format is limited compared to other formats, such as `json`.
+
+    ```bash
+    neonctl branches list
+
+    ┌────────────────────────┬──────────┬──────────────────────┬──────────────────────┐
+    │ Id                     │ Name     │ Created At           │ Updated At           │
+    ├────────────────────────┼──────────┼──────────────────────┼──────────────────────┤
+    │ br-small-meadow-878874 │ main     │ 2023-07-06T13:15:12Z │ 2023-07-06T14:26:32Z │
+    ├────────────────────────┼──────────┼──────────────────────┼──────────────────────┤
+    │ br-round-queen-335380  │ mybranch │ 2023-07-06T14:45:50Z │ 2023-07-06T14:45:50Z │
+    └────────────────────────┴──────────┴──────────────────────┴──────────────────────┘
+    ```
+
+- List branches with the `json` output format. This format provides more information than the default `table` output format.
+
+    ```bash
+    neonctl branches list --output json
+    [
+    {
+        "id": "br-small-meadow-878874",
+        "project_id": "throbbing-base-279912",
+        "name": "main",
+        "current_state": "ready",
+        "logical_size": 36749312,
+        "creation_source": "neonctl",
+        "primary": true,
+        "cpu_used_sec": 156,
+        "compute_time_seconds": 156,
+        "active_time_seconds": 624,
+        "written_data_bytes": 57632,
+        "data_transfer_bytes": 0,
+        "created_at": "2023-07-06T13:15:12Z",
+        "updated_at": "2023-07-06T14:26:32Z"
+    }
+    ]
+    ```
 
 ### create
 
@@ -79,19 +108,32 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 | --branch.parent_lsn                       | A Log Sequence Number (LSN) on the parent branch. The branch will be created with data from this LSN. The expected format is the same as a value returned by `SELECT pg_current_wal_flush_lsn()`. | string  |                                       |
 | --branch.parent_timestamp                 | A timestamp identifying a point in time on the parent branch. The branch will be created with data starting from this point in time. The expected format is `MM/DD/YYYY hh:mm:ss a`; for example: `06/13/2023 12:00:00 am` | string  |                                       |
 | --endpoint.type                           | The compute endpoint type. Either `read_write` or `read_only`. The `read_only` compute endpoint type is not yet supported. The default value is `read_write`. | string  |              |
-| --endpoint.provisioner                    | The Neon compute provisioner. Supported values are `k8s-pod` and `k8s-neonvm`. The later is required to use _Autoscaling_.                                                               | string  |      |
+| --endpoint.provisioner                    | The Neon compute provisioner. Supported values are `k8s-pod` and `k8s-neonvm`. The `k8s-neonvm` provisioner is required to use _Autoscaling_.                                                               | string  |      |
 | --endpoint.suspend_timeout_seconds        | Duration of inactivity in seconds after which endpoint will be automatically suspended. Value `0` means use global default, `-1` means never suspend. The maximum value is 604800 seconds (1 week).
 
-#### Example
+#### Examples
 
-```bash
-neonctl branches create
-┌─────────────────────────┬─────────────────────────┬──────────────────────┐
-│ Id                      │ Name                    │ Created At           │
-├─────────────────────────┼─────────────────────────┼──────────────────────┤
-│ br-withered-king-763176 │ br-withered-king-763176 │ 2023-06-19T22:35:25Z │
-└─────────────────────────┴─────────────────────────┴──────────────────────┘
-```
+- Create a branch:
+
+    ```bash
+    neonctl branches create
+    ┌─────────────────────────┬─────────────────────────┬──────────────────────┐
+    │ Id                      │ Name                    │ Created At           │
+    ├─────────────────────────┼─────────────────────────┼──────────────────────┤
+    │ br-withered-king-763176 │ br-withered-king-763176 │ 2023-06-19T22:35:25Z │
+    └─────────────────────────┴─────────────────────────┴──────────────────────┘
+    ```
+
+- Create a branch with a user-defined name:
+
+    ```bash
+    neonctl branches create --branch.name mybranch
+    ┌───────────────────────┬──────────┬──────────────────────┬──────────────────────┐
+    │ Id                    │ Name     │ Created At           │ Updated At           │
+    ├───────────────────────┼──────────┼──────────────────────┼──────────────────────┤
+    │ br-round-queen-335380 │ mybranch │ 2023-07-06T14:45:50Z │ 2023-07-06T14:45:50Z │
+    └───────────────────────┴──────────┴──────────────────────┴──────────────────────┘
+    ```
 
 ### update
 
