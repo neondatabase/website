@@ -6,13 +6,13 @@ subtitle: Learn how to Connect to Neon from Serverless and Edge environments ove
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency PostgreSQL driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP.
 
-The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package that you may already be familiar with.
+The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package you may already be familiar with.
 
 The driver's low-latency capability is due to message pipelining and other optimizations. You can read about those optimizations [here](https://neon.tech/blog/quicker-serverless-postgres).
 
 ## HTTP or Websockets?
 
-The Neon Serverless driver supports querying over HTTP and Websockets. Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is fast but only supports sending one query at a time. If you are using single-shot queries, such as the one shown below, with no sessions or transactions, consider using HTTP for faster responses.
+The Neon Serverless driver supports querying over HTTP and Websockets. Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is fast but only supports sending one query at a time. If you will use single-shot queries, such as the one shown below, with no sessions or transactions, consider using HTTP for faster responses.
 
 ```js
 const [post] = await sql`SELECT * FROM posts WHERE id = ${postId}`;
@@ -48,7 +48,7 @@ The driver includes TypeScript types (the equivalent of `@types/pg`). No additio
 
 ## Configure your Neon database connection
 
-You can obtain a connection string for your database from **Connection Details** widget on the Neon **Dashboard** and set it as an environment variable in your project's `.env` file, for example. Your Neon connection string will look something like this:
+You can obtain a connection string for your database from **Connection Details** widget on the Neon **Dashboard** and set it as an environment variable. Your Neon connection string will look something like this:
 
 ```shell
 DATABASE_URL=postgres://<user>:<password>@ep-icy-sun-148107.us-east-2.aws.neon.tech/<dbname>
@@ -103,7 +103,7 @@ You can turn this example into a complete API endpoint deployed on Vercel Edge F
     };
     ```
 
-2. Deploy the Vercel Edge function using the following commands:
+2. Deploy the Vercel Edge Function using the following commands:
 
     ```shell
     npm install -g vercel  # install vercel CLI
@@ -206,7 +206,7 @@ export const config = {
 ```
 
 <Admonition type="note">
-The pooling capabilities of `Pool` are not used in this example. But it's slightly briefer than using `Client` and, because `Pool.query` is designed for one-shot queries, we may in the future automatically route these queries over HTTPS for lower latency.
+The pooling capabilities of `Pool` are not used in this example. But it's slightly briefer than using `Client` and, because `Pool.query` is designed for one-shot queries, we may, in the future, automatically route these queries over HTTPS for lower latency.
 </Admonition>
 
 ### Vercel Edge Function with `Client`
