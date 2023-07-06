@@ -155,6 +155,7 @@ Right now `<CodeBlock>` accepts the following fields:
 
 - `showLineNumbers` - flag to show on the line numbers in the code block.
 - `shouldWrap` - flag to enable code wrapping in the code block.
+- `highlight` - the string to enable highlighting single lines, multiple lines, and ranges of code lines
 
 Example:
 
@@ -163,6 +164,54 @@ Example:
 
 ```powershell
 powershell -Command "Start-Process -FilePath powershell -Verb RunAs -ArgumentList '-NoProfile','-InputFormat None','-ExecutionPolicy Bypass','-Command ""iex (iwr -UseBasicParsing https://cli.configu.com/install.ps1)""'"
+```
+
+</CodeBlock>
+````
+
+Single line
+
+````md
+<CodeBlock highlight="1">
+
+```c++
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World";
+    return 0;
+}
+```
+
+Multiple lines
+
+````md
+<CodeBlock highlight="1,2,5">
+
+```c++
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World";
+    return 0;
+}
+```
+
+</CodeBlock>
+````
+
+Range of code lines
+
+````md
+<CodeBlock highlight="1-3,5">
+
+```c++
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World";
+    return 0;
+}
 ```
 
 </CodeBlock>
