@@ -4,7 +4,7 @@ import CardItemsList from '../card-items-list';
 import appStoreIcon from '../images/app-store.svg';
 import bookIcon from '../images/book.svg';
 import fileIcon from '../images/file.svg';
-import image from '../images/oauth.jpg';
+import image from '../images/oauth.png';
 
 const items = [
   {
@@ -40,7 +40,7 @@ const Oauth = () => (
       <CardItemsList className="lg:col-span-full lg:mt-8" items={items} />
     </div>
     <div className="col-span-5 lg:col-span-full">
-      <Image className="rounded-2xl" src={image} quality={85} alt="Authorize Hasura Cloud" />
+      <Image className="rounded-2xl" src={image} quality={90} alt="Authorize Hasura Cloud" />
     </div>
   </div>
 );
