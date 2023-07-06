@@ -158,14 +158,14 @@ const Form = ({ className }) => {
           label="Email *"
           type="email"
           name="email"
-          placeholder="info@acme.com"
+          placeholder="info@example.com"
           {...register('email')}
           error={errors.email?.message}
         />
         <Field
           label="Company Name *"
           name="company"
-          placeholder="Acme"
+          placeholder="Example, Inc."
           {...register('company')}
           error={errors.company?.message}
         />
