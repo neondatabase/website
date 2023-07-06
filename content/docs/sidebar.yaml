@@ -211,7 +211,7 @@
         - title: connection-string
           slug: reference/cli-connection-string
         - title: cli-completion
-          slug: reference/cli-connection-string
+          slug: reference/cli-completion
     - title: SDKs
       slug: reference/sdk
     - title: Glossary
