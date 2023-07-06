@@ -2,12 +2,19 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import CodeBlock from 'components/shared/code-block';
 
 const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [highlighted, setHighlighted] = useState('');
+
+  useEffect(() => {
+    const { highlight } = children[currentIndex].props ?? {};
+
+    setHighlighted(highlight || '');
+  }, [children, currentIndex]);
 
   return (
     <figure className="my-5 max-w-full overflow-hidden rounded-md bg-gray-new-98 dark:bg-gray-1">
@@ -36,15 +43,13 @@ const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
           return null;
         }
 
-        const { highlight } = child.props ?? {};
-
         const { children, className } =
           child.props?.children.props?.children.props || child.props?.children.props || {};
 
         return (
           <CodeBlock
             className={clsx(className, { 'code-wrap': shouldWrap }, 'code-tab')}
-            highlight={highlight || ''}
+            highlight={highlighted || ''}
             showLineNumbers
           >
             {children}

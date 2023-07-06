@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
@@ -39,6 +40,8 @@ const CodeBlock = ({
   as: Tag = 'div',
   ...otherProps
 }) => {
+  const { resolvedTheme: theme } = useTheme();
+
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const match = /language-(\w+)/.exec(className || '');
@@ -58,12 +61,21 @@ const CodeBlock = ({
         showLineNumbers={showLineNumbers || highlight !== ''}
         className="no-scrollbars"
         lineProps={(lineNumber) => ({
-          class: clsx(
-            'relative block -mx-4 pl-4 py-[2px] pr-4',
-            highlightedLines.includes(lineNumber)
-              ? 'dark:bg-green-45 bg-opacity-[0.08] dark:bg-opacity-[0.08] after:absolute after:w-[3px] after:h-full after:top-0 after:left-0 after:bg-secondary-8 dark:after:bg-green-45 bg-secondary-8'
-              : ''
-          ),
+          style: {
+            display: 'flex',
+            position: 'relative',
+            padding: '1.5px 16px',
+            marginLeft: '-1rem',
+            marginRight: '-1rem',
+            backgroundColor:
+              highlightedLines.includes(lineNumber) &&
+              (theme === 'dark' ? 'rgba(0, 229, 153, 0.08)' : 'rgba(0, 85, 255, 0.08)'),
+            boxShadow:
+              highlightedLines.includes(lineNumber) &&
+              (theme === 'dark'
+                ? 'inset 3px 0px 0px 0px #00E599'
+                : 'inset 3px 0px 0px 0px #0055ff'),
+          },
         })}
         wrapLines={highlight !== ''}
       >
