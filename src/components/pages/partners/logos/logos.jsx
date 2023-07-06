@@ -6,6 +6,8 @@ import Container from 'components/shared/container/container';
 import AirplaneLogo from './images/airplane.inline.svg';
 import BunnyshellLogo from './images/bunnyshell.inline.svg';
 import CloudflareLogo from './images/cloudflare.inline.svg';
+import DynaboardLogo from './images/dynaboard.inline.svg';
+import Fl0Logo from './images/fl0.inline.svg';
 import HasuraLogo from './images/hasura.inline.svg';
 import IllaLogo from './images/illa.inline.svg';
 import OctolisLogo from './images/octolis.inline.svg';
@@ -27,6 +29,8 @@ const logos = [
   WundergraphLogo,
   FabricIoLogo,
   SnapletLogo,
+  Fl0Logo,
+  DynaboardLogo,
 ];
 
 const LogosWall = ({ className, fill }) => (
