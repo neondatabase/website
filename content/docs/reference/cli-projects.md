@@ -112,13 +112,14 @@ This subcommand allows you to update a Neon project.
 neonctl projects update <id> [options]
 ```
 
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon console.
+
 #### Options
 
 In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` subcommand supports these options:
 
 | Option                                | Description                                                                                               | Type    | Required                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
-| --project.id                          | Project ID                                                                                                | number  | &check;                                      |
 | --project.settings.quota.active_time_seconds | The total amount of time allowed to be spent by project's compute endpoints               | number  |                                       |
 | --project.settings.quota.compute_time_seconds | The total amount of CPU seconds allowed to be spent by project's compute endpoints                   | number  |                                       |
 | --project.settings.quota.written_data_bytes | Total amount of data written to all project's branches                                                | number  |                                       |
@@ -137,7 +138,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `u
 #### Example
 
 ```bash
-neonctl projects update --project.id silent-dawn-084646 --project.name mynewproject
+neonctl projects update silent-dawn-084646 --project.name mynewproject
 ┌────────────────────┬──────────────┬───────────────┬──────────────────────┐
 │ Id                 │ Name         │ Region Id     │ Created At           │
 ├────────────────────┼──────────────┼───────────────┼──────────────────────┤
@@ -153,18 +154,16 @@ This subcommand allows you to delete a Neon project.
 neonctl projects delete <id> [options]
 ```
 
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon console.
+
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` subcommand supports this option:
-
-| Option       | Description   | Type   | Required  |
-| ------------ | ------------- | ------ | :------: |
-| --project.id | Project ID    | string | &check; |
+Only [global options](/docs/reference/neon-cli/global-options) apply.
 
 #### Example
 
 ```bash
-neonctl projects delete --project.id silent-dawn-084646
+neonctl projects delete silent-dawn-084646
 ┌────────────────────┬──────────────┬───────────────┬──────────────────────┐
 │ Id                 │ Name         │ Region Id     │ Created At           │
 ├────────────────────┼──────────────┼───────────────┼──────────────────────┤
@@ -184,18 +183,16 @@ This subcommand allows you to retrieve details about a Neon project.
 neonctl projects get <id> [options]
 ```
 
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon console.
+
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `get` subcommand supports this option:
-
-| Option       | Description   | Type   | Required  |
-| ------------ | ------------- | ------ | :------: |
-| --project.id | Project ID    | string | &check; |
+Only [global options](/docs/reference/neon-cli/global-options) apply.
 
 #### Example
 
 ```bash
-neonctl projects get --project.id spring-sky-578180
+neonctl projects get spring-sky-578180
 ┌───────────────────┬───────────────────┬───────────────┬──────────────────────┐
 │ Id                │ Name              │ Region Id     │ Created At           │
 ├───────────────────┼───────────────────┼───────────────┼──────────────────────┤
