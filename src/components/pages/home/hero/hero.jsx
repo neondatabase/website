@@ -68,6 +68,7 @@ const Hero = () => {
       <Container
         className="z-20 flex items-center justify-between lg:flex-col lg:justify-center"
         size="md"
+        id="container"
       >
         <div className="relative z-20 max-w-[860px] 3xl:max-w-[750px] 2xl:max-w-[610px] xl:max-w-[535px] lg:text-center">
           <Heading

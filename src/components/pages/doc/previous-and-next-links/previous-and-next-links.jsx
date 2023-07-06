@@ -55,11 +55,13 @@ PreviousAndNextLinks.propTypes = {
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     path: PropTypes.arrayOf(PropTypes.number).isRequired,
+    ariaLabel: PropTypes.string,
   }),
   nextLink: PropTypes.exact({
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     path: PropTypes.arrayOf(PropTypes.number).isRequired,
+    ariaLabel: PropTypes.string,
   }),
 };
 

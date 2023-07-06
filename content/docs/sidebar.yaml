@@ -102,6 +102,7 @@
           slug: guides/elixir-ecto
         - title: Go
           slug: guides/go
+          ariaLabel: Connect a Go application to Neon
         - title: Java
           slug: guides/java
         - title: PHP
@@ -166,6 +167,8 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
+    - title: OAuth
+      slug: guides/oauth-integration
 - title: Extensions
   items:
     - title: Supported extensions

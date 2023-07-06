@@ -10,14 +10,14 @@ Neon separates storage and compute and offers modern developer features such as 
 
 ## Serverless
 
-Neon automatically and transparently scales up compute on demand, in response to application workload. Neon also scales down to zero on inactivity. Since Neon is serverless, it only charges for what you use and can deliver up to a 10x reduction in cost. To learn more, see [Autoscaling](../introduction/autoscaling), and [Auto-suspend configuration](../manage/endpoints#auto-suspend-configuration).
+Neon automatically and transparently scales up compute on demand, in response to application workload. Neon also scales down to zero on inactivity. Since Neon is serverless, it only charges for what you use and can deliver up to a 10x reduction in cost. To learn more, see [Autoscaling](/docs/introduction/autoscaling), and [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
 
 ## Built for developer productivity
 
 Neon allows you to create a branch of your PostgreSQL database. It's easy to create branches for development, test, and staging environments.
 
 Branching is instant and has close to zero overhead, as it is implemented using the "copy-on-write" technique in Neon storage.
-In fact, branches are so cheap that you can create a branch for every code deployment in your CI/CD pipeline. To learn more about our branching feature, see [Branching](../introduction/branching).
+In fact, branches are so cheap that you can create a branch for every code deployment in your CI/CD pipeline. To learn more about our branching feature, see [Branching](/docs/introduction/branching).
 
 ## Fully managed
 
@@ -34,8 +34,8 @@ Neon storage is designed with cloud costs in mind and uses a multi-tier architec
 
 ## Open source
 
-You can find [neondatabase](https://github.com/neondatabase/neon) on GitHub. We develop in public under the Apache 2.0 license. For an overview of Neon's architecture, refer to Neon's [architecture documentation](../introduction/architecture-overview).
+You can find [neondatabase](https://github.com/neondatabase/neon) on GitHub. We develop in public under the Apache 2.0 license. For an overview of Neon's architecture, refer to Neon's [architecture documentation](/docs/introduction/architecture-overview).
 
 ## Compatibility
 
-Neon compute is the latest version of PostgreSQL. It is 100% compatible with any application that uses the official release of PostgreSQL. Currently, we support [PostgreSQL 14](https://www.postgresql.org/docs/14/release-14.html) and [PostgreSQL 15](https://www.postgresql.org/docs/15/release-15.html), with PostgreSQL 15 being the default. For details refer to the [PostgreSQL compatibility](../reference/compatibility) page.
+Neon compute is the latest version of PostgreSQL. It is 100% compatible with any application that uses the official release of PostgreSQL. Currently, we support [PostgreSQL 14](https://www.postgresql.org/docs/14/release-14.html) and [PostgreSQL 15](https://www.postgresql.org/docs/15/release-15.html), with PostgreSQL 15 being the default. For details refer to the [PostgreSQL compatibility](/docs/reference/compatibility) page.

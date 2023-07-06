@@ -1,3 +1,4 @@
+import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 
 const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
@@ -11,6 +12,7 @@ export default function getMetadata({
   robotsNoindex,
   rssPathname = null,
   pathname,
+  category = null,
   type = 'website',
   publishedTime = null,
   authors = [],
@@ -40,7 +42,7 @@ export default function getMetadata({
     manifest: `${SITE_URL}/manifest.json`,
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots,
-    themeColor: '#00e699',
+    themeColor: pathname.startsWith(LINKS.pricing) ? '#0c0d0d' : '#00e699',
     icons: {
       icon: '/favicon/favicon.png',
       apple: [
@@ -69,6 +71,7 @@ export default function getMetadata({
       publishedTime,
       authors,
     },
+    category,
     twitter: {
       card: 'summary_large_image',
     },

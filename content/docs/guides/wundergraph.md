@@ -20,7 +20,7 @@ This guide is also available in video format: [Neon with WunderGraph video guide
 ## Prerequisites
 
 - A [WunderGraph Cloud](https://cloud.wundergraph.com/) account
-- A Neon project. See [Create a Neon project](../manage/projects#create-a-project).
+- A Neon project. See [Create a Neon project](/docs/manage/projects#create-a-project).
 
 ## Installation
 

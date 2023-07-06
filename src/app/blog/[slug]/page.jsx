@@ -126,6 +126,7 @@ export async function generateMetadata({ params }) {
     },
     date,
     pageBlogPost,
+    categories,
   } = post;
 
   const authors = pageBlogPost.authors.map(({ author }) => author?.title);
@@ -139,6 +140,7 @@ export async function generateMetadata({ params }) {
     imagePath: twitterImage?.mediaItemUrl,
     type: 'article',
     publishedTime: date,
+    category: categories.nodes[0]?.name,
     authors,
   });
 }

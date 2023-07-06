@@ -33,7 +33,7 @@ const AnimatedButton = ({
   animationClassName = null,
   animationColor = '#00E599',
   animationSize = 'xs',
-  size,
+  size = null,
   theme,
   spread,
   children,
@@ -131,14 +131,14 @@ const AnimatedButton = ({
 AnimatedButton.propTypes = {
   className: PropTypes.string,
   to: PropTypes.string,
-  size: PropTypes.oneOf(Object.keys(styles.size)).isRequired,
+  size: PropTypes.oneOf(Object.keys(styles.size)),
   theme: PropTypes.oneOf(Object.keys(styles.theme)).isRequired,
   children: PropTypes.node.isRequired,
   animationClassName: PropTypes.string,
   animationSize: PropTypes.oneOf(['xs', 'sm']),
   animationColor: PropTypes.string,
   isAnimated: PropTypes.bool,
-  spread: PropTypes.oneOf([1, 2, 3]),
+  spread: PropTypes.oneOf([1, 2, 3, 4, 5]),
 };
 
 export default AnimatedButton;

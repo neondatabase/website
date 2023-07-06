@@ -1,5 +1,8 @@
 @layer components {
   .admonition-text {
+    a {
+      @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color] duration-200 ease-in-out hover:border-secondary-8 dark:text-primary-1 dark:hover:border-primary-1 sm:break-words;
+    }
     p:first-child {
       @apply mt-0;
     }

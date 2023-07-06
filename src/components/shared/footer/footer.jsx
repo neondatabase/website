@@ -64,18 +64,28 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                 {heading}
               </h3>
               <ul className="mt-6 flex grow flex-col space-y-[18px]">
-                {links.map(({ to, text, icon: Icon }, index) => {
+                {links.map(({ to, text, icon }, index) => {
                   const isExternalUrl = to.startsWith('http');
                   return (
                     <li className="flex" key={index}>
                       <Link
-                        className="relative flex items-center gap-2 whitespace-nowrap leading-none"
+                        className="group relative flex items-center gap-2 whitespace-nowrap leading-none"
                         to={to}
                         theme={isDarkTheme ? 'white' : 'black'}
                         target={isExternalUrl ? '_blank' : null}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
                       >
-                        {Icon && <Icon width={16} height={16} aria-hidden />}
+                        {icon && (
+                          <span
+                            className={clsx(
+                              icon,
+                              'inline-block h-4 w-4 transition-colors duration-200',
+                              isDarkTheme
+                                ? 'bg-white group-hover:bg-primary-2'
+                                : 'bg-black group-hover:bg-primary-2 dark:bg-white dark:group-hover:bg-primary-2'
+                            )}
+                          />
+                        )}
                         {text}
                       </Link>
                     </li>

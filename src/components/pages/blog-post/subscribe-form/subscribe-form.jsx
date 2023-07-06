@@ -162,6 +162,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
                     initial="initial"
                     animate="animate"
                     exit="exit"
+                    aria-label="Subscribe"
                     variants={appearAndExitAnimationVariants}
                   >
                     <span className="xs:hidden">Subscribe</span>
