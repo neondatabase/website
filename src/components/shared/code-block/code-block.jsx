@@ -63,7 +63,6 @@ const CodeBlock = ({
         showLineNumbers={showLineNumbers || highlight !== ''}
         className="no-scrollbars"
         lineProps={(lineNumber) => ({
-          // class: `relative block -mx-4 pl-4 py-[5px] pr-4 ${highlightedLines.includes(lineNumber) ? 'dark:bg-green-45 bg-opacity-[0.08] dark:bg-opacity-[0.08] after:absolute after:w-[3px] after:h-full after:top-0 after:left-0 after:bg-secondary-8 dark:after:bg-green-45 bg-secondary-8' : ''}`,
           class: clsx(
             'relative block -mx-4 pl-4 py-[2px] pr-4',
             highlightedLines.includes(lineNumber)
