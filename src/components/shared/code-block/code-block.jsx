@@ -3,7 +3,6 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vsDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 
@@ -59,7 +58,6 @@ const CodeBlock = ({
       <SyntaxHighlighter
         language={snippetLanguage}
         useInlineStyles={false}
-        style={vsDark}
         showLineNumbers={showLineNumbers || highlight !== ''}
         className="no-scrollbars"
         lineProps={(lineNumber) => ({
