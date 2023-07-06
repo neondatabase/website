@@ -8,23 +8,26 @@ import userIcon from './images/user.svg';
 const items = [
   {
     icon: currencyIcon,
-    title: 'Bring in new revenue',
-    description: "Earn revenue by tailoring solutions according to your client's requirements.",
+    title: 'Boost your revenue',
+    description:
+      'Offer Serverless Postgres to your customers by reselling Neon. We offer volume discounts.',
   },
   {
     icon: priorityLowIcon,
     title: 'Reduce costs',
-    description: 'Access Serverless Postgres on demand without the costs of managing it yourself.',
+    description:
+      'Neon scales to zero when not in use and never overprovisions, making it cost-effective.',
   },
   {
     icon: userIcon,
     title: 'Meet customer demand',
-    description: 'Supply your customers with Serverless Postgres in the Cloud.',
+    description:
+      'Providing your customers with a fully-managed Postgres solution has never been easier.',
   },
   {
     icon: screenIcon,
-    title: 'Scale easily',
-    description: 'Grow your user base without friction and easily integrate new solutions.',
+    title: 'Scale effortlessly',
+    description: 'Host fleets of databases that scale automatically to handle demanding workloads.',
   },
 ];
 
@@ -40,8 +43,8 @@ const Benefits = () => (
             Why become a partner?
           </h2>
           <p className="mt-4 max-w-[362px] text-lg font-light leading-snug xl:max-w-[280px] xl:text-base lg:max-w-none md:mt-2.5">
-            At Neon, we deeply value our partners, holding firm in our belief that they are vital to
-            our mission of making Serverless Postgres easy to integrate, manage, and grow.
+            At Neon, we deeply value our partners and believe they are vital to our mission of
+            making Serverless Postgres the go-to choice for developers everywhere.
           </p>
         </div>
         <ul className="col-start-5 col-end-11 -ml-1.5 mt-2 grid max-w-[640px] grid-cols-2 gap-x-[90px] gap-y-11 xl:-ml-5 xl:mt-0 xl:max-w-none xl:gap-x-10 xl:pl-0 lg:col-span-full lg:ml-0 lg:mt-10 lg:gap-y-10 md:mt-[30px] md:grid-cols-1 md:gap-y-[30px]">
