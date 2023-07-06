@@ -1,24 +1,24 @@
 ---
 title: Neon serverless driver
 enableTableOfContents: true
-subtitle: Learn how to Connect to Neon from Serverless and Edge environments over HTTP or Websockets
+subtitle: Learn how to connect to Neon from serverless and edge environments over HTTP or WebSockets
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency PostgreSQL driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP.
 
 The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package you may already be familiar with.
 
-The driver's low-latency capability is due to message pipelining and other optimizations. You can read about those optimizations [here](https://neon.tech/blog/quicker-serverless-postgres).
+The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
 
-## HTTP or Websockets?
+## HTTP or WebSockets?
 
-The Neon Serverless driver supports querying over HTTP and Websockets. Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is fast but only supports sending one query at a time. If you will use single-shot queries, such as the one shown below, with no sessions or transactions, consider using HTTP for faster responses.
+The Neon serverless driver supports querying over HTTP and WebSockets. Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is fast but only supports sending one query at a time. If you use single-shot queries, such as the one shown below, with no sessions or transactions, consider using HTTP for faster responses.
 
 ```js
 const [post] = await sql`SELECT * FROM posts WHERE id = ${postId}`;
 ```
 
-If you are working with sessions and transactions, as in the example below, or require full `node-postgres` compatibility to enable query libraries like [Kysely](https://kysely.dev/) or [Zapatos](https://jawj.github.io/zapatos/), use Websockets.
+If you are working with sessions and transactions, as in the example below, or require full `node-postgres` compatibility to enable query libraries like [Kysely](https://kysely.dev/) or [Zapatos](https://jawj.github.io/zapatos/), use WebSockets.
 
 ```js
 try {
@@ -48,19 +48,19 @@ The driver includes TypeScript types (the equivalent of `@types/pg`). No additio
 
 ## Configure your Neon database connection
 
-You can obtain a connection string for your database from **Connection Details** widget on the Neon **Dashboard** and set it as an environment variable. Your Neon connection string will look something like this:
+You can obtain a connection string for your database from the **Connection Details** widget on the Neon **Dashboard** and set it as an environment variable. Your Neon connection string will look something like this:
 
 ```shell
-DATABASE_URL=postgres://<user>:<password>@ep-icy-sun-148107.us-east-2.aws.neon.tech/<dbname>
+DATABASE_URL=postgres://<user>:<password>@<endpoint>.<region>.aws.neon.tech/<dbname>
 ```
 
 ## How to use the driver
 
-You can use the driver in the same way you would use `node-postgres`. Where you usually import `pg`, import `@neondatabase/serverless` instead. The following sections show how to use the driver over HTTP and Websockets.
+You can use the driver in the same way you would use `node-postgres`. Where you usually import `pg`, import `@neondatabase/serverless` instead. The following sections show how to use the driver over HTTP and WebSockets.
 
 ## Use the driver over HTTP
 
-To use the Neon Serverless driver over HTTP, you must use the driver's `neon` function. For example:
+To use the Neon serverless driver over HTTP, you must use the driver's `neon` function. For example:
 
 ```js
 import { neon } from '@neondatabase/serverless';
@@ -114,11 +114,11 @@ You can turn this example into a complete API endpoint deployed on Vercel Edge F
 
 ### Additional configuration options
 
-The `neon(...)` function has configuration options for customizing the return format of the query function. See [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration), in the driver's GitHub repository, for information about those options.
+The `neon(...)` function has configuration options for customizing the return format of the query function. See [options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration) in the driver's GitHub repository for information about those options.
 
-## Use the driver over Websockets
+## Use the driver over WebSockets
 
-To use the Neon Serverless driver over Websockets, use either the `Pool` or `Client` constructor. These constructors provide session and transaction support, as well as `node-postgres` compatibility. The full API guide for the `Pool` and `Client` constructors can be found in the [node-postgres](https://node-postgres.com/) documentation.
+To use the Neon serverless driver over WebSockets, use either the `Pool` or `Client` constructor. These constructors provide session and transaction support, as well as `node-postgres` compatibility. The full API guide for the `Pool` and `Client` constructors can be found in the [node-postgres](https://node-postgres.com/) documentation.
 
 When using these constructors, there are two key points you need to know:
 
@@ -170,7 +170,7 @@ neonConfig.webSocketConstructor = WebSocket;
 
 ### Vercel Edge Function with `Pool.query()`
 
-You can rewrite the example above as a Vercel Edge Function using `Pool`, as follows:
+You can rewrite the earlier example above as a Vercel Edge Function using `Pool`, as follows:
 
 ```js
 import { Pool } from '@neondatabase/serverless';
@@ -249,7 +249,7 @@ export const config = {
 
 ### Configuration options for `Pool` and `Client`
 
-There are additional configuration options that apply to `Pool` and `Client`. See [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration), in the driver's GitHub repository, for information.
+There are additional configuration options that apply to `Pool` and `Client`. See [options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration) in the driver's GitHub repository for more information.
 
 ## More examples
 
