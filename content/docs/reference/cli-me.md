@@ -12,7 +12,7 @@ isDraft: true
 
 ## The `me` command
 
-This command retrieves information about the current Neon CLI user.
+This command shows information about the current Neon CLI user.
 
 ### Usage
 
@@ -31,7 +31,7 @@ neonctl me
 ┌────────────────┬──────────────────────────┬────────────┬────────────────┐
 │ Login          │ Email                    │ Name       │ Projects Limit │
 ├────────────────┼──────────────────────────┼────────────┼────────────────┤
-│ user1          │ user1@example.com        │ User1      │ 1              │
+│ jack           │ jack@example.com         │ Jack King  │ 1              │
 └────────────────┴──────────────────────────┴────────────┴────────────────┘
 ```
 

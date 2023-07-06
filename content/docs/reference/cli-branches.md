@@ -24,9 +24,9 @@ neonctl branches <subcommand> [options]
 |---------|------------------|
 | [list](#list)    | List branches    |
 | [create](#create)  | Create a branch |
-| [update <id|name>](#update)   | Update a branch |
-| [delete <id|name>](#delete)  | Delete a branch |
-| [get <id|name>](#get)     | Get a branch    |
+| [update](#update)   | Update a branch |
+| [delete>](#delete)  | Delete a branch |
+| [get>](#get)     | Get a branch    |
 
 ### list
 
@@ -140,7 +140,6 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `d
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
 | --project.id  | Project ID  | string | &check; |
-| --branch.id   | Branch ID   | string | &check; |
 
 #### Example
 
@@ -176,7 +175,6 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `g
 | Option        | Description | Type   | Required |
 | ------------- | ----------- | ------ | :------: |
 | --project.id  | Project ID  | string | &check; |
-| --branch.id   | Branch ID   | string | &check; |
 
 #### Example
 

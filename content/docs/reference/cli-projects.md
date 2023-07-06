@@ -81,7 +81,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 | --project.settings.quota.data_transfer_bytes | Total amount of data transferred from all project's branches using proxy                              | number  |                                       |
 | --project.settings.quota.logical_size_bytes | Limit on the logical size of every project's branch                                                    | number  |                                       |
 | --project.name                        | The project name. If not specified, one is generated for you.                                                                                          | string  |                                       |
-| --project.branch.name                 | The branch name. If not specified, the the branch id is used.                                   | string  |                                       |
+| --project.branch.name                 | The branch name. If not specified, the branch id is used.                                   | string  |                                       |
 | --project.branch.role_name            | The role name. If not specified, the default role name will be used.                                      | string  |                                       |
 | --project.branch.database_name        | The database name. If not specified, the default database name will be used.                               | string  |                                       |
 | --project.provisioner                 | The Neon compute provisioner. `k8s-pod` or `k8s-neonvm`. The latter is required for _Autoscaling_.                                                                              | string  |                                       |
@@ -109,7 +109,7 @@ This subcommand allows you to update a Neon project.
 #### Usage
 
 ```bash
-neonctl projects update [options]
+neonctl projects update <id> [options]
 ```
 
 #### Options
@@ -125,7 +125,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `u
 | --project.settings.quota.data_transfer_bytes | Total amount of data transferred from all project's branches using proxy                              | number  |                                       |
 | --project.settings.quota.logical_size_bytes | Limit on the logical size of every project's branch                                                    | number  |                                       |
 | --project.name                        | The project name. If not specified, one is generated for you.                                                                                          | string  |                                       |
-| --project.branch.name                 | The branch name. If not specified, the the branch id is used.                                   | string  |                                       |
+| --project.branch.name                 | The branch name. If not specified, the branch id is used.                                   | string  |                                       |
 | --project.branch.role_name            | The role name. If not specified, the default role name will be used.                                      | string  |                                       |
 | --project.branch.database_name        | The database name. If not specified, the default database name will be used.                               | string  |                                       |
 | --project.provisioner                 | The Neon compute provisioner. `k8s-pod` or `k8s-neonvm`. The latter is required for _Autoscaling_.                                                                              | string  |                                       |
@@ -150,7 +150,7 @@ neonctl projects update --project.id silent-dawn-084646 --project.name mynewproj
 This subcommand allows you to delete a Neon project.
 
 ```bash
-neonctl projects delete [options]
+neonctl projects delete <id> [options]
 ```
 
 #### Options
@@ -181,7 +181,7 @@ This subcommand allows you to retrieve details about a Neon project.
 #### Usage
 
 ```bash
-neonctl projects get [options]
+neonctl projects get <id> [options]
 ```
 
 #### Options

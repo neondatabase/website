@@ -27,17 +27,17 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 | Option        | Description  | Type   | Required  |
 | ------------- | ------------ | ------ | :------: |
 | --project.id  | Project ID   | string | &check; |
-| --endpoint.id | Endpoint ID  | string | &check; |
 | --role.name   | Role name    | string | &check; |
 | --database.name| Database name| string | &check; |
 | --pooled | Use a pooled connection. The default is `false`. |boolean||
+| --prisma | Use connection string for Prisma setup. The default is `false`. |boolean||
 
 ### Example
 
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl connection-string --project.id spring-sky-578180 --endpoint.id ep-still-haze-361517 --role.name daniel --database.name neondb
+neonctl connection-string --project.id spring-sky-578180 --role.name daniel --database.name neondb
 
 postgres://daniel:<password>@ep-still-haze-361517.us-east-2.aws.neon.tech/neondb
 ```
