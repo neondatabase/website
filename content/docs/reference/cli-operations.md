@@ -47,7 +47,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 #### Example
 
 ```bash
-neonctl operations list --project.id spring-sky-578180 
+neonctl operations list 
 ┌──────────────────────────────────────┬────────────────────┬──────────┬──────────────────────┐
 │ Id                                   │ Action             │ Status   │ Created At           │
 ├──────────────────────────────────────┼────────────────────┼──────────┼──────────────────────┤

@@ -75,10 +75,6 @@ or on OSX:
 source ~/.bash_profile
 ```
 
-### Options
-
-Only [global options](/docs/reference/neon-cli/global-options) apply.
-
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

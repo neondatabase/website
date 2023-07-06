@@ -27,8 +27,8 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 | Option        | Description  | Type   | Required  |
 | ------------- | ------------ | ------ | :------: |
 | --project.id  | Project ID   | string |  Only if your Neon account has more than one project |
-| --role.name   | Role name    | string |  |
-| --database.name| Database name| string | |
+| --role.name   | Role name    | string | Only if your branch has more than one role |
+| --database.name| Database name| string | Only if your branch has more than one database |
 | --pooled | Use a pooled connection. The default is `false`. |boolean||
 | --prisma | Use connection string for Prisma setup. The default is `false`. |boolean||
 
@@ -36,25 +36,36 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 
 - Generate a basic connection string for the current project, branch, and database:
 
-<CodeBlock shouldWrap>
+    <CodeBlock shouldWrap>
 
-```bash
-neonctl connection-string
-postgres://daniel:<password>@ep-still-haze-361517.us-east-2.aws.neon.tech/neondb
-```
+    ```bash
+    neonctl connection-string
+    postgres://daniel:<password>@ep-still-haze-361517.us-east-2.aws.neon.tech/neondb
+    ```
 
-</CodeBlock>
+    </CodeBlock>
 
 - Generate a pooled connection string for the current project, branch, and database with the `--pooled` option:
 
-<CodeBlock shouldWrap>
+    <CodeBlock shouldWrap>
 
-```bash
-neonctl connection-string
-postgres://daniel:<password>@ep-still-haze-361517-pooler.us-east-2.aws.neon.tech/neondb
-```
+    ```bash
+    neonctl connection-string
+    postgres://daniel:<password>@ep-still-haze-361517-pooler.us-east-2.aws.neon.tech/neondb
+    ```
 
-</CodeBlock>
+    </CodeBlock>
+
+- Generate a connection string for use with Prisma for the current project, branch, and database with the `--prisma` option, which adds `connect_timeout` option to the connection string to ensure that connections from Prisma do not timeout.
+
+    <CodeBlock shouldWrap>
+
+    ```bash
+    neonctl connection-string --prisma
+    postgres://daniel:<password>@ep-green-thunder-758819.us-east-2.aws.neon.tech/neondb?connect_timeout=30
+    ```
+
+    </CodeBlock>
 
 ## Need help?
 
