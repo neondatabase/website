@@ -58,7 +58,7 @@ To delete a database:
 1. For the database you want to delete, click the delete icon.
 1. In the confirmation dialog, click **Delete**.
 
-## Manage databases using SQL
+## Manage databases with SQL
 
 You can create and manage databases in Neon using SQL in the same way that you would with any stand-alone PostgreSQL instance.
 
