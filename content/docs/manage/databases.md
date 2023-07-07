@@ -14,16 +14,15 @@ Databases belong to branch. If you create a child branch, databases from the par
 
 Neon supports creating and managing databases from the following interfaces:
 
-- The Neon console
-- SQL (from a client or the using the Neon SQL Editor)
-- Neon CLI
-- Neon API
+- [Neon console](#manage-databases-in-the-neon-console)
+- [SQL](#manage-databases-using-sql) (from a client or the using the Neon SQL Editor)
+- [Neon API](#manage-databases-with-the-neon-api)
 
 ## Manage databases in the Neon console
 
-This section describes how to create, view, and delete databases in the Neon Console. 
+This section describes how to create, view, and delete databases in the Neon Console.
 
-The role that creates a database is automatically made the owner of that database. Also, the `neon_superuser` role is granted all permissions on the database (`GRANT ALL PRIVILEGES ON DATABASE dbname TO neon_superuser;`). For more information about this role, see [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role).
+The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon consoles. For information about this role, see [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role).
 
 ### Create a database
 
@@ -69,9 +68,9 @@ To create a database, you can issue a `CREATE DATABASE` statement from a client 
 CREATE DATABASE testdb;
 ```
 
-Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. Some PostgreSQL features that require access to the local file system are not supported by Neon, and tablespaces are one of them.
+Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. Some PostgreSQL features that require access to the local file system are not supported by Neon, and tablespaces is one of those features.
 
-The role that creates a database is automatically made the owner of that database and has all of the typical PostgreSQL privileges on that database, including the ability to `DROP` the database, to `CONNECT` to the database, and to create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
+The role that creates a database is automatically made the owner of that database and has all of the typical PostgreSQL privileges on that database, including the ability to `DROP` the database, to `CONNECT` to the database, and to create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html). [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role) is not automatically granted access on databases created using SQL.
 
 For an example of creating a database with SQL and granting access to it, refer to the [Manage databases access with SQL guide](/docs/guides/manage-database-access).
 
@@ -95,7 +94,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdatabase).
 
-The role specified by `owner_name` is the owner of that database. Also, the `neon_superuser` role is granted all permissions on the database (`GRANT ALL PRIVILEGES ON DATABASE dbname TO neon_superuser;`). For more information about this role, see [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role).
+The role specified by `owner_name` is the owner of that database. The `neon_superuser` role is also granted all privileges on databases created with the Neon API. For information about this role, see [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role).
 
 ```text
 POST /projects/{project_id}/branches/{branch_id}/databases
