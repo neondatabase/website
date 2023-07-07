@@ -12,11 +12,31 @@ Additional roles can be created in a project's primary branch or child branches.
 
 Roles belong to a branch. If you create a child branch, roles from the parent branch are duplicated in the child branch. For example, if role `sally` exists in the parent branch, role `sally` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
-<Admonition type="note">
-You can only create database roles in the Neon Console or using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Creating database roles in PostgreSQL, using a `psql` client for example, is not yet supported.
-</Admonition>
+Neon supports creating and managing roles from the following interfaces:
 
-## Create a role
+- The Neon console
+- SQL (from a client or the using the Neon SQL Editor)
+- Neon CLI
+- Neon API
+
+## The neon_superuser role
+
+All roles created in the Neon console or using the Neon CLI or API are grant membership in the `neon_superuser` role. The `neon_superuser` role has these privileges in Neon:
+
+- **Create and drop roles**: A `neon_superuser` can create, alter, and drop databases and roles.
+- **Load extensions**: Only a `neon_superuser` can install PostgreSQL extensions in Neon.
+- **Configuration settings changes**: A `neon_superuser` can modify server configuration parameters, including those marked as superuser-only.
+- **Grant membership in the `neon_superuser` role**: `GRANT neon_superuser TO target_role;`
+
+Roles created using SQL are not granted membership in the `neon_superuser` role. 
+
+## Manage roles in the Neon console
+
+This section describes how to create, view, and delete databases in the Neon Console.
+
+All roles created in the Neon console are grant membership in the `neon_superuser` role.
+
+### Create a role
 
 To create a role:
 
@@ -28,7 +48,7 @@ To create a role:
 5. In the role creation dialog, specify a role name. The length of the role name is limited to 63 bytes.
 6. Click **Create**. The role is created and you are provided with the password for the role.
 
-## Delete a role
+### Delete a role
 
 Deleting a role is a permanent action that cannot be undone, and you cannot delete a role that owns a database. The database must be deleted before you can deleting the role that owns the database.
 
@@ -41,7 +61,7 @@ To delete a role:
 5. Click the delete icon for the role you want to delete.
 6. On the delete role dialog, click **Delete**.
 
-## Reset a password
+### Reset a password
 
 To reset a role's password:
 
