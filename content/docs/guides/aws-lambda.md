@@ -150,7 +150,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
 
     module.exports.getAllUsers = async () => {
      if (!client) {
-       var client = new Client(process.env.DATABASE_URL);
+       client = new Client(process.env.DATABASE_URL);
        await client.connect();
      }
 
