@@ -26,11 +26,11 @@ Neon's read replicas have a number of potential applications:
 
 Advantages of Neon's read replica feature include the following:
 
-1. **Efficient storage**: With read-only compute instances reading from the same source as your read-write computes, no additional storage is required to create a read replica. Data is neither duplicated nor replicated, which means there is zero additional storage cost when adding a read replica. You can create as many read replicas as you need without any additional storage cost.
+1. **Efficient storage**: With read-only compute instances reading from the same source as your read-write computes, no additional storage is required to create a read replica. Data is neither duplicated nor replicated, which means there is zero additional storage cost when adding read replicas.
 2. **Data consistency**: Read-write and read-only compute instances read data from a single source, ensuring a high degree of data consistency.
-3. **Scalability**: With no data replication required, you can create read replicas almost instantly, providing fast and seamless scalability. You can scale read replica compute resources in Noen the same way that you can scale read-write compute resources.
-4. **Cost effectiveness**: By removing the need for additional storage and avoiding data replication, costs associated with storage and data transfer due to replication are avoided. Your primary cost is compute and traffic. Neon's read replicas also benefit from Neon's _Autoscaling_ and _Auto-suspend_ features, which enable efficient management of compute resources.
-5. **Instant availability**. With Neon's architecture that separate storage and compute, you can allow your read-replicas to scale to zero when not in use without introducing lag. When the read replica starts up again, it is instantly up to date with your read-write primary. You do not have to wait until the read replica receives updates.
+3. **Scalability**: With no data replication required, you can create read replicas almost instantly, providing fast and seamless scalability. You can scale read replica compute resources the same way you scale read-write compute resources.
+4. **Cost effectiveness**: By removing the need for additional storage and data replication, costs associated with storage and data transfer are avoided. Your primary cost is compute and traffic. Neon's read replicas also benefit from Neon's _Autoscaling_ and _Auto-suspend_ features, which enable efficient management of compute resources.
+5. **Instant availability**. With an architecture that separate storage and compute, you can allow read-replicas to scale to zero when not in use without introducing lag. When the read replica starts up, it is instantly up to date with your read-write primary. You do not have to wait for a read replica to receive updates.
 
 ## Get started with read replicas
 
