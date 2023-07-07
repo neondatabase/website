@@ -107,12 +107,11 @@ const getTableOfContents = (content) => {
 
   const toc = [];
 
-  arr.forEach(async (item) => {
+  arr.forEach((item) => {
     const [depth, title] = parseMDXHeading(item);
-    // remove : from the end of the title
-    const titleWithoutColon = title.replace(/[:]$/, '');
+
     // replace mdx inline code with html inline code
-    const titleWithInlineCode = titleWithoutColon.replace(/`([^`]+)`/g, '<code>$1</code>');
+    const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
 
     if (title && depth && depth <= 2) {
       toc.push({
