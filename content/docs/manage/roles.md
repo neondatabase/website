@@ -48,7 +48,7 @@ In addition, the `neon_superuser` role can:
 
   We recommend that you only grant membership in `neon_superuser` to users who need to perform administrative tasks, such as database administrators or system administrators.
 
- In summary, the `neon_superuser` can create databases, create roles, add extensions, grant `neon_superuser` privileges, and has all the privileges of `pg_read_all_data` and `pg_write_all_data`, but cannot log in to the PostgreSQL server itself. You can think of these roles as database administrator roles. If you are interested in roles for which you can manage database access at a more granular level, Neon supports creating and managing roles via SQL, just as you would with any stand-alone PostgreSQL instance. For more ifnormation see, [Manage roles with SQL](#manage-roles-with-sql).
+ In summary, the `neon_superuser` can create databases, create roles, add extensions, grant `neon_superuser` privileges, and has all the privileges of `pg_read_all_data` and `pg_write_all_data`, but cannot log in to the PostgreSQL server itself. You can think of these roles as database administrator roles. If you are interested in roles for which you can manage database access at a more granular level, Neon supports creating and managing roles via SQL, just as you would with any stand-alone PostgreSQL instance. For more information see, [Manage roles with SQL](#manage-roles-with-sql).
 
 ## Manage roles in the Neon console
 
@@ -115,6 +115,8 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
     - Common words or phrases
     - Any words found in a dictionary
   - Avoid Character Repetition: To maximize randomness, do not use the same character more than twice consecutively.
+
+  Example Password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
 
   These guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
 
