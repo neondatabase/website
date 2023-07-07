@@ -63,8 +63,6 @@ Here are examples of how to increase connection timeout settings in a few common
 
 <CodeTabs labels={["Node.js", "Python", "Java", "Prisma" ]}>
 
-<CodeBlock highlight="2-4">
-
 ```js
 const { Pool } = require('pg')
 
@@ -74,8 +72,6 @@ const pool = new Pool({
     idleTimeoutMillis: 10000 // idle timeout in milliseconds
 })
 ```
-
-</CodeBlock>
 
 ```python
 import psycopg2

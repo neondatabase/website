@@ -155,7 +155,7 @@ Right now `<CodeBlock>` accepts the following fields:
 
 - `showLineNumbers` - flag to show on the line numbers in the code block.
 - `shouldWrap` - flag to enable code wrapping in the code block.
-- `highlight` - the string to enable highlighting single lines, multiple lines, and ranges of code lines
+- `highlight` - string to enable highlighting single lines, multiple lines, and ranges of code lines. Note that it also activates the `showLineNumbers` feature.
 
 Example:
 
@@ -224,11 +224,15 @@ To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and w
 ````md
 <CodeTabs labels={["Shell", "C++", "C#", "Java"]}>
 
+<CodeBlock highlight="2-4">
+
 ```bash
 #!/bin/bash
 STR="Hello World!"
 echo $STR
 ```
+
+</CodeBlock>
 
 ```c++
 #include <iostream>
