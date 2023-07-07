@@ -65,6 +65,8 @@ The statement above stores vectors with 3 dimensions. In a real-world example, t
 
 ### Create an HNSW index
 
+HNSW indexes are created in memory.
+
 To create the HNSW index on your vector column, use a `CREATE INDEX` statement similar to the following:
 
 ```sql
