@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import TOCIcon from './images/toc.inline.svg';
 
 const linkClassName =
-  'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white';
+  'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white [&_code]:rounded-sm [&_code]:leading-none [&_code]:py-px [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:font-mono [&_code]:font-normal dark:[&_code]:bg-gray-new-15';
 
 const TableOfContents = ({ items }) => {
   const handleAnchorClick = (e, anchor) => {
@@ -44,19 +44,17 @@ const TableOfContents = ({ items }) => {
                 <a
                   className={linkClassName}
                   href={linkHref}
+                  dangerouslySetInnerHTML={{ __html: item.title }}
                   onClick={(e) => handleAnchorClick(e, linkHref)}
-                >
-                  {item.title}
-                </a>
+                />
               )}
               {item.level === 3 && (
                 <a
                   className={clsx(linkClassName, 'ml-3')}
                   href={linkHref}
+                  dangerouslySetInnerHTML={{ __html: item.title }}
                   onClick={(e) => handleAnchorClick(e, linkHref)}
-                >
-                  {item.title}
-                </a>
+                />
               )}
             </li>
           );

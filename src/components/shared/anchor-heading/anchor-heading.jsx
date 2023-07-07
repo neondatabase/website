@@ -13,7 +13,7 @@ const AnchorHeading =
         : undefined;
 
     return (
-      <Tag id={id} className="not-prose group relative flex w-fit">
+      <Tag id={id} className="not-prose group relative w-fit">
         <a
           className="anchor absolute -right-16 top-1/2 flex h-full -translate-x-full -translate-y-[calc(50%-0.15rem)] items-center justify-center px-2.5 no-underline opacity-0 transition-opacity duration-200 hover:opacity-100 group-hover:opacity-100 sm:hidden"
           href={`#${id}`}
