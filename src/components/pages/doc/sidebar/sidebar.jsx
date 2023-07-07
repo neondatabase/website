@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Link from 'components/shared/link/link';
 import Search from 'components/shared/search';

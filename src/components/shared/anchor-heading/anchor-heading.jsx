@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import React from 'react';
 import slugify from 'slugify';
 
 import HashIcon from './images/hash.inline.svg';
