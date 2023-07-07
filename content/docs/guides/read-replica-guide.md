@@ -11,11 +11,13 @@ The general methodology of using read replicas to segregate read-only work from 
 - Offloading analytics or reporting queries
 - Distributing read requests to achieve higher throughput
 - Providing read-only data access to specific users or applications who do not need to modify data
-- Configuring right-sized read-only compute resources for different users and applications
+- Configuring different CPU and memory resources for each read replica for different users and applications
 
-Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and can configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Auto-suspend_ features are also supported with read replicas, providing you with control over compute usage.
+Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and can configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Auto-suspend_ features are also supported, providing you with control over compute usage.
 
-Neon also supports managing read replicas programmatically using the Neon API, which is covered toward the end of this guide.
+<Admonition type="note">
+Neon supports managing read replicas programmatically using the Neon API, which is covered toward the end of this guide.
+</Admonition>
 
 ## Prerequisites
 
@@ -24,29 +26,30 @@ Neon also supports managing read replicas programmatically using the Neon API, w
 
 ## Create a read replica
 
-Creating a read replica is a simple process that involves adding a read-only compute endpoint to a branch. You can add a read-only compute endpoint to any branch in your Neon project by following these steps:
+Creating a read replica involves adding a read-only compute endpoint to a branch. You can add a read-only compute endpoint to any branch in your Neon project by following these steps:
 
 1. In the Neon Console, select **Branches**.
 1. Select the branch where your database resides.
 1. Click **Add compute**.
-1. On the **Create compute endpoint** dialog, select **Read-only** as the **Compute type**.
-1. Specify the compute size options for your read-only compute endpoint. You can configure a **Fixed size** compute with a specific amount of vCPU and RAM (the default) or enable **Autoscaling** and configure a minimum and maximum compute size. Additionally, you can configure the **Auto-suspend delay** period, which is the amount of idle time after which your compute is transitioned to an idle state. The default setting is 300 seconds (5 minutes).
+1. On the **Create Compute Endpoint** dialog, select **Read-only** as the **Compute type**.
+1. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable **Autoscaling** and configure a minimum and maximum compute size. You can configure the **Auto-suspend delay** period, which is the amount of idle time after which your read-only compute is transitioned to an idle state. The default setting is 300 seconds (5 minutes). You can set this value up to 604800 seconds (7 days).
   <Admonition type="note">
-  Your compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
+  The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
   </Admonition>
 1. When you have finished making your selections, click **Create**.
 
-In a few moments, your read-only compute is provisioned. This is your read replica. The following section describes how to connect to your read replica.
+In a few moments, your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page. This is your read replica. The following section describes how to connect to your read replica.
 
 ## Connect to a read replica
 
 Connecting to a read replica is the same as connecting to any branch, except you connect via a read-only compute endpoint instead of a read-write compute endpoint. The following steps describe how to connect to your read replica with connection details obtained from the Neon Console.
 
-1. In the Neon Console, select a project.
-1. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
+1. On the Neon **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
 ![Connection details widget](/docs/connect/connection_details.png)
-1. Under **Compute**, select a read-only endpoint for the branch. If there are none, see [Create a read replica](#create-a-read-replica).
-1. Select a connection string or a code example from the drop-down menu. The connection string or code example contains your role name, password, hostname, and database name. A basic connection string appears similar to the following:
+1. Under **Compute**, select a **Read-only** compute endpoint. If there are none, see [Create a read replica](#create-a-read-replica).
+1. Select a connection string or a code example from the drop-down menu and copy it. This is the information you need to connect to the read replica from you client or application.
+
+The example contains your role name, password, hostname, and database name. A **psql** connection string appears similar to the following:
 
   <CodeBlock shouldWrap>
 
@@ -56,6 +59,8 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
   </CodeBlock>
 
+If you expect a high number of connections, select **Enable pooling** to add the `-pooler` flag to the connection string or example.
+
 The information in your connection string corresponds to the following connection details:
 
 - role: `daniel`
@@ -63,38 +68,31 @@ The information in your connection string corresponds to the following connectio
 - hostname: `ep-mute-rain-952417.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
-If you require a port number to configure your client or application connection, Neon uses the default PostgreSQL port number, `5432`.
-
-<Admonition type="tip">
-A compute endpoint hostname, whether read-only or read-write, starts with an `ep-` prefix.
-</Admonition>
-
-When using this connection string, you are connected to your read replica. No write operations are permitted on this connection.
+When you use this connection string or code example, you are connecting to the read replica. No write operations are permitted on this connection.
 
 ## Viewing read replicas
 
-To view the read replicas for a branch, select **Branches** in the Neon Console, and select a branch. The read-only compute endpoints are your read replicas. Under the **Compute endpoint** heading, the **Type** field identifies your read-only compute endpoints. They have a `R/O` value instead of `R/W`.
+To view read replicas for a branch, select **Branches** in the Neon Console, and select a branch. Under the **Computes** heading, the **Type** field identifies your read-only compute endpoints. Read replicas have a `R/O` value instead of `R/W`.
 
 ## Edit a read replica
 
-You can edit your read replica to change the [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) or [Auto-suspend](/docs/manage/endpoints#auto-suspend-configuration) configuration.
+You can edit your read replica to change the [Compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) or [Auto-suspend](/docs/manage/endpoints#auto-suspend-configuration) configuration.
 
 To edit a read-only compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Identify the read-only compute endpoint you want to modify, click the compute endpoint kebab menu, and select **Edit**.
-1. Specify your compute size or Auto-suspend changes and click **Save**.
+1. Under **Computes**, identify the read-only compute endpoint you want to modify, click the compute endpoint kebab menu, and select **Edit**.
+1. Specify your **Compute size** or **Auto-suspend delay** changes and click **Save**.
 
 ## Delete a read replica
 
-Deleting a read replica is a permanent action, but you can easily create a new read replica if you need one again in the future.
-
+Deleting a read replica is a permanent action, but you can quickly create a new read replica if you need it again. 
 To delete a read replica:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Find the read-only compute endpoint you want to delete.
+1. Under **Computes**, find the read-only compute endpoint you want to delete. Read replicas have a `R/O` type.
 1. Click the compute endpoint kebab menu, and select **Delete**.
 1. On the confirmation dialog, click **Delete**.
 
