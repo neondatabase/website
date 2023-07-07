@@ -57,7 +57,7 @@
     }
 
     .react-syntax-highlighter-line-number.linenumber {
-      @apply !min-w-[2.25em] text-gray-5;
+      @apply !min-w-[2.25em] !text-left text-gray-5;
     }
   }
 }

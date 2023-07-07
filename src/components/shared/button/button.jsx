@@ -25,7 +25,7 @@ const styles = {
 const Button = ({
   className: additionalClassName = null,
   to = null,
-  size,
+  size = null,
   theme = null,
   children,
   ...otherProps
@@ -44,7 +44,7 @@ const Button = ({
 Button.propTypes = {
   className: PropTypes.string,
   to: PropTypes.string,
-  size: PropTypes.oneOf(Object.keys(styles.size)).isRequired,
+  size: PropTypes.oneOf(Object.keys(styles.size)),
   theme: PropTypes.oneOf(Object.keys(styles.theme)),
   children: PropTypes.node.isRequired,
 };

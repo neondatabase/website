@@ -7,12 +7,12 @@ enableTableOfContents: true
 This guide describes how to manually connect a Vercel project to a Neon database.
 
 <Admonition type="note">
-For other Vercel integration options, refer to the [Neon and Vercel integration overview](../guides/vercel-overview).
+For other Vercel integration options, refer to the [Neon and Vercel integration overview](/docs/guides/vercel-overview).
 </Admonition>
 
 ## Prerequisites
 
-- A Neon project. If you do not have one, see [Create your first project](../get-started-with-neon/setting-up-a-project).
+- A Neon project. If you do not have one, see [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
 - A [Vercel account](https://vercel.com).
 - A project deployed to Vercel. If you do not have one, see [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project), in the _Vercel documentation_.
 

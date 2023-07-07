@@ -10,11 +10,11 @@ redirectFrom:
 
 Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide explains how to connect Prisma to Neon, establish connections when using Prisma Client in serverless functions, and resolve [connection timeout](#connection-timeouts) issues.
 
-To configure Prisma Migrate with Neon, see [Use Prisma Migrate with Neon](../guides/prisma-migrate).
+To configure Prisma Migrate with Neon, see [Use Prisma Migrate with Neon](/docs/guides/prisma-migrate).
 
 ## Prerequisites
 
-- A Neon project. See [Create a project](../manage/projects#create-a-project).
+- A Neon project. See [Create a project](/docs/manage/projects#create-a-project).
 - A Prisma project. See [Set up Prisma](https://www.prisma.io/docs/getting-started/setup-prisma), in the _Prisma documentation_.
 
 ## Connect to Neon from Prisma

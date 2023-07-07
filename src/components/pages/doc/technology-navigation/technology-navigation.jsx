@@ -19,12 +19,12 @@ const TechnologyNavigation = ({ children = null }) => {
     <>
       <ul className="not-prose !mb-2 !mt-9 grid grid-cols-12 gap-5 !p-0 xs:grid-cols-1">
         {React.Children.map(children, (child, index) => {
-          const {
-            children: {
-              props: { alt, src, title },
-            },
-            href,
-          } = child.props?.children.props ?? {};
+          if (!child) {
+            return null;
+          }
+
+          const { href, src, alt, title, width, height } = child.props;
+
           const isHiddenItem = index > 3 && !isOpen;
 
           return (
@@ -43,7 +43,8 @@ const TechnologyNavigation = ({ children = null }) => {
                   <img
                     className="h-9 w-auto shrink-0 dark:invert"
                     src={src}
-                    height={36}
+                    width={width}
+                    height={height}
                     alt={`${alt} logo`}
                     loading={index > 3 ? 'lazy' : 'eager'}
                   />

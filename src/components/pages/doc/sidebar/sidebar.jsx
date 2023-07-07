@@ -17,7 +17,7 @@ const Sidebar = ({ className = null, sidebar, currentSlug }) => (
       className
     )}
   >
-    <Search className="z-30" />
+    <Search className="z-30" indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME} />
     <nav className="relative z-20 mt-8">
       <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
       <ul>
@@ -43,32 +43,25 @@ const Sidebar = ({ className = null, sidebar, currentSlug }) => (
   </aside>
 );
 
+export const sidebarPropTypes = PropTypes.arrayOf(
+  PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    slug: PropTypes.string,
+    ariaLabel: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.exact({
+        title: PropTypes.string.isRequired,
+        slug: PropTypes.string,
+        items: PropTypes.arrayOf(PropTypes.any),
+        ariaLabel: PropTypes.string,
+      })
+    ),
+  })
+).isRequired;
+
 Sidebar.propTypes = {
   className: PropTypes.string,
-  sidebar: PropTypes.arrayOf(
-    PropTypes.exact({
-      title: PropTypes.string.isRequired,
-      slug: PropTypes.string,
-      items: PropTypes.arrayOf(
-        PropTypes.exact({
-          title: PropTypes.string.isRequired,
-          slug: PropTypes.string,
-          items: PropTypes.arrayOf(
-            PropTypes.exact({
-              title: PropTypes.string.isRequired,
-              slug: PropTypes.string,
-              items: PropTypes.arrayOf(
-                PropTypes.exact({
-                  title: PropTypes.string,
-                  slug: PropTypes.string,
-                })
-              ),
-            })
-          ),
-        })
-      ),
-    })
-  ).isRequired,
+  sidebar: sidebarPropTypes,
   currentSlug: PropTypes.string.isRequired,
 };
 

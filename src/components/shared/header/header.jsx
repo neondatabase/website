@@ -28,15 +28,17 @@ const icons = {
 };
 
 const Header = ({
+  className = null,
   theme,
-
   isSignIn = false,
   isSticky = false,
   withBottomBorder = false,
   isDocPage = false,
+  isBlogPage = false,
 }) => {
   const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
   const headerRef = useRef(null);
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleMobileMenuOutsideClick = () => {
@@ -52,6 +54,7 @@ const Header = ({
       <header
         className={clsx(
           'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-gray-new-8 lg:relative lg:h-14',
+          className,
           isSticky && 'sticky top-0 z-50 md:relative',
           withBottomBorder &&
             theme !== 'gray-8' &&
@@ -160,8 +163,20 @@ const Header = ({
               </Button>
             )}
           </div>
-          <div className=" hidden items-center lg:flex">
-            {isDocPage && <Search className="mobile-search" />}
+          <div className="hidden items-center lg:flex lg:gap-x-3 md:gap-x-5">
+            {isDocPage && (
+              <Search
+                className="mobile-search"
+                indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
+              />
+            )}
+            {isBlogPage && (
+              <Search
+                className="mobile-search"
+                indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
+                isBlog
+              />
+            )}
 
             <Burger
               className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
@@ -181,11 +196,13 @@ const Header = ({
 };
 
 Header.propTypes = {
+  className: PropTypes.string,
   theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
   withBottomBorder: PropTypes.bool,
   isSignIn: PropTypes.bool,
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
+  isBlogPage: PropTypes.bool,
 };
 
 export default Header;
