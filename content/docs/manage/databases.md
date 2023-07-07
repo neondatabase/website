@@ -12,7 +12,20 @@ All databases in Neon are created with a `public` schema. SQL objects are create
 
 Databases belong to branch. If you create a child branch, databases from the parent branch are copied to the child branch. For example, if database `mydb` exists in the parent branch, it will be copied to the child branch. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If a database was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
-## Create a database
+Neon supports creating and managing databases from the following interfaces:
+
+- The Neon console
+- SQL (from a client or the using the Neon SQL Editor)
+- Neon CLI
+- Neon API
+
+## Manage databases in the console
+
+This section describes how to create, view, and delete databases in the Neon Console. 
+
+The role that creates a database is automatically made the owner of that database. Also, the `neon_superuser` role is granted all permissions on the database (`GRANT ALL PRIVILEGES ON DATABASE dbname TO neon_superuser;`). For more information about this role, see [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role).
+
+### Create a database
 
 To create a database:
 
@@ -24,7 +37,7 @@ To create a database:
 1. Enter a database name, and select a database owner.
 1. Click **Create**.
 
-## View databases
+### View databases
 
 To view databases:
 
@@ -33,7 +46,7 @@ To view databases:
 1. Select **Databases**
 1. Select a branch to view the databases in the branch.
 
-## Delete a database
+### Delete a database
 
 Deleting a database is a permanent action. All database objects belonging to the database such as schemas, tables, and roles are also deleted.
 
@@ -45,6 +58,24 @@ To delete a database:
 1. Select a branch to view the databases in the branch.
 1. For the database you want to delete, click the delete icon.
 1. In the confirmation dialog, click **Delete**.
+
+## Manage databases using SQL
+
+You can create and manage databases in Neon using SQL in the same way that you would with any PostgreSQL instance. You can issue `CREATE DATABASE` statements from clients such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+
+```sql
+CREATE DATABASE testdb;
+```
+
+Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. Some PostgreSQL features that require access to the local file system are not supported by Neon, and tablespaces are one of them.
+
+The role that creates a database is automatically made the owner of that database and has all of the typical PostgreSQL privileges on that database, including the ability to `DROP` the database, to `CONNECT` to the database, and to create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
+
+For information about access privileges you can grant on database objects, see [GRANT](https://www.postgresql.org/docs/current/sql-grant.html).
+
+<Admonition type="note">
+When creating a database in Neon using SQL, only the role that created the database has privileges on it. The [neon_superuser role](/docs/manage/roles/the-neon_superuser-role) does not have privileges on databases created using SQL.
+</Admonition>
 
 ## Manage databases with the Neon API
 
@@ -65,6 +96,8 @@ A Neon API request requires an API key. For information about obtaining an API k
 ### Create a database with the API
 
 The following Neon API method creates a database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdatabase).
+
+The role specified by `owner_name` is the owner of that database. Also, the `neon_superuser` role is granted all permissions on the database (`GRANT ALL PRIVILEGES ON DATABASE dbname TO neon_superuser;`). For more information about this role, see [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role).
 
 ```text
 POST /projects/{project_id}/branches/{branch_id}/databases
