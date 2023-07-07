@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';

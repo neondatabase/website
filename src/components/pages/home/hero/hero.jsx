@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import BlinkingText from 'components/shared/blinking-text';

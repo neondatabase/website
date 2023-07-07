@@ -51,6 +51,7 @@ const Form = ({ className }) => {
     register,
     handleSubmit,
     reset,
+    watch,
     setValue,
     control,
     formState: { errors },
@@ -63,6 +64,8 @@ const Form = ({ className }) => {
       number_of_projects: '',
     },
   });
+
+  const applicationScopes = watch('application_scope');
 
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
@@ -218,7 +221,7 @@ const Form = ({ className }) => {
             </div>
           </fieldset>
 
-          <MultiSelect control={control} setValue={setValue} />
+          <MultiSelect control={control} setValue={setValue} selectedValues={applicationScopes} />
 
           <Field
             label="Link to logo"

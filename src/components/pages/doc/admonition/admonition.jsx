@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 const titleClassNames = {
   note: 'text-[#4C97FF]',
