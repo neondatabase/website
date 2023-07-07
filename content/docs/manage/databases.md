@@ -60,19 +60,19 @@ To delete a database:
 
 ## Manage databases with SQL
 
-You can create and manage databases in Neon using SQL in the same way that you would with any stand-alone PostgreSQL instance.
+You can create and manage databases in Neon with SQL, as you can with any stand-alone PostgreSQL instance.
 
-To create a database, you can issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For example:
+To create a database with SQL, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For example:
 
 ```sql
 CREATE DATABASE testdb;
 ```
 
-Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. Some PostgreSQL features that require access to the local file system are not supported by Neon, and tablespaces is one of those features.
+Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. This parameter requires access to the local file system, which is not supported.
 
-The role that creates a database is automatically made the owner of that database and has all of the typical PostgreSQL privileges on that database, including the ability to `DROP` the database, to `CONNECT` to the database, and to create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html). [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role) is not automatically granted access on databases created using SQL.
+The role that creates a database is automatically made the owner of the database and has all of the expected PostgreSQL privileges on the database, including the ability to `DROP` the database, `CONNECT` to the database, and create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html). [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role) is not automatically granted access on databases created with SQL.
 
-For an example of creating a database with SQL and granting access to it, refer to the [Manage databases access with SQL guide](/docs/guides/manage-database-access).
+For an example of creating a database with SQL, refer to the [Manage databases access with SQL guide](/docs/guides/manage-database-access).
 
 ## Manage databases with the Neon API
 
