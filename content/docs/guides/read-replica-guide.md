@@ -45,7 +45,6 @@ In a few moments, your read-only compute is provisioned and appears in the **Com
 Connecting to a read replica is the same as connecting to any branch, except you connect via a read-only compute endpoint instead of a read-write compute endpoint. The following steps describe how to connect to your read replica with connection details obtained from the Neon Console.
 
 1. On the Neon **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
-![Connection details widget](/docs/connect/connection_details.png)
 1. Under **Compute**, select a **Read-only** compute endpoint. If there are none, see [Create a read replica](#create-a-read-replica).
 1. Select a connection string or a code example from the drop-down menu and copy it. This is the information you need to connect to the read replica from you client or application.
 
