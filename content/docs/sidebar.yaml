@@ -98,8 +98,8 @@
   items:
     - title: Neon features
       items: 
-        title: Manage database access with SQL
-        slug: guides/manage-database-access
+        - title: Manage database access with SQL
+          slug: guides/manage-database-access
     - title: Languages
       items:
         - title: Elixir
