@@ -94,7 +94,7 @@ To reset a role's password:
 
 ## Manage roles with SQL
 
-You can create and manage roles in Neon using SQL in the same way that you would with any stand-alone PostgreSQL instance. Roles created using SQL do not have the same privileges as roles created using the Neon Console, CLI, or API. Roles created from those interfaces are automatically granted membership in the [neon_superuser]() role, which gives these roles a number of adminsitrator-level capabilties in Neon. Roles created using SQL are 
+You can create and manage roles in Neon using SQL in the same way that you would with any stand-alone PostgreSQL instance. Roles created using SQL do not have the same privileges as roles created using the Neon Console, CLI, or API. Roles created from those interfaces are automatically granted membership in the [neon_superuser](#the-neon_superuser-role) role, which gives these roles  administrator-level capabilities in Neon. Roles created using SQL are only granted prvileges associated with any newly created POstgreSQL role.
 
 To create a role, you can issue a `CREATE ROLE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For example:
 
@@ -102,8 +102,8 @@ To create a role, you can issue a `CREATE ROLE` statement from a client such as 
 CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 ```
 
-- `WITH LOGIN` means that the role will have login privilege, which is required for the role to be able to log in to your Neon PostgreSQL instance.
-- Passwords must be created with sufficient complexity to meet a minimum entropy threshold of 60 bits. This requirement is crucial to maintain a high level of security. To achieve the necessary entropy, you can follow these password composition rules:
+- `WITH LOGIN` means that the role will have login privilege, which is required for the role to be able to log in to your Neon PostgreSQL instance. If the role is only used as a 'group' role for privilege management, the `LOGIN` privilege does not have to be specified.
+- A password is required and is validated. Passwords must be created with sufficient complexity to meet a minimum entropy threshold of 60 bits. This requirement is crucial to maintain a high level of security. To achieve the necessary entropy, you can follow these password composition rules:
   - Length: The password should consist of at least 12 characters.
   - Character Diversity: To enhance complexity, passwords should include a variety of character types, specifically:
     - Lowercase letters (a-z)
@@ -119,6 +119,8 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
   Example Password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
 
   These guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
+
+  For examples of creating roles with SQL, refer to the [Manage databases access with SQL guide](/docs/guides/manage-database-access).
 
 ## Manage roles with the Neon API
 

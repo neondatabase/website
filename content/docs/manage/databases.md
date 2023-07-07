@@ -73,6 +73,8 @@ Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org
 
 The role that creates a database is automatically made the owner of that database and has all of the typical PostgreSQL privileges on that database, including the ability to `DROP` the database, to `CONNECT` to the database, and to create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
 
+For an example of creating a database with SQL and granting access to it, refer to the [Manage databases access with SQL guide](/docs/guides/manage-database-access).
+
 ## Manage databases with the Neon API
 
 Database actions performed in the Neon Console can also be also performed using the Neon API. The following examples demonstrate how to create, view, update, and delete databases using the Neon API. For other database-related methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
