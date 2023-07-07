@@ -19,7 +19,7 @@ Neon supports creating and managing databases from the following interfaces:
 - Neon CLI
 - Neon API
 
-## Manage databases in the console
+## Manage databases in the Neon console
 
 This section describes how to create, view, and delete databases in the Neon Console. 
 
@@ -61,7 +61,9 @@ To delete a database:
 
 ## Manage databases using SQL
 
-You can create and manage databases in Neon using SQL in the same way that you would with any PostgreSQL instance. You can issue `CREATE DATABASE` statements from clients such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+You can create and manage databases in Neon using SQL in the same way that you would with any stand-alone PostgreSQL instance.
+
+To create a database, you can issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For example:
 
 ```sql
 CREATE DATABASE testdb;
@@ -70,12 +72,6 @@ CREATE DATABASE testdb;
 Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. Some PostgreSQL features that require access to the local file system are not supported by Neon, and tablespaces are one of them.
 
 The role that creates a database is automatically made the owner of that database and has all of the typical PostgreSQL privileges on that database, including the ability to `DROP` the database, to `CONNECT` to the database, and to create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
-
-For information about access privileges you can grant on database objects, see [GRANT](https://www.postgresql.org/docs/current/sql-grant.html).
-
-<Admonition type="note">
-When creating a database in Neon using SQL, only the role that created the database has privileges on it. The [neon_superuser role](/docs/manage/roles/the-neon_superuser-role) does not have privileges on databases created using SQL.
-</Admonition>
 
 ## Manage databases with the Neon API
 
