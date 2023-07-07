@@ -14,14 +14,14 @@ Language models process text in units called tokens. A token can be as short as 
 
 For example, consider the sentence "Neon is serverless Postgres." It can be divided into seven tokens: ["Ne", "on", "is", "server", "less", "Post", "gres"].
 
-## pg_tiktoken functions
+## `pg_tiktoken` functions
 
 The `pg_tiktoken` offers two functions:
 
 - `tiktoken_encode`: Accepts text inputs and returns tokenized output, allowing you to seamlessly tokenize your text data.
 - `tiktoken_count`: Counts the number of tokens in a given text. This feature helps you adhere to text length limits, such as those set by OpenAI's language models.
 
-## Install the pg_tiktoken extension
+## Install the `pg_tiktoken` extension
 
 You can install the `pg_tiktoken` extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
 
@@ -31,7 +31,7 @@ CREATE EXTENSION pg_tiktoken
 
 For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
-## Use the tiktoken_encode function
+## Use the `tiktoken_encode` function
 
 The `tiktoken_encode` function tokenizes text input and returns a tokenized output. The function accepts encoding names and OpenAI model names as the first argument and the text you want to tokenize as the second argument, as shown:
 
@@ -46,7 +46,7 @@ tiktoken_encode
 
 The function tokenizes text using the [Byte Pair Encoding (BPE)](https://en.wikipedia.org/wiki/Byte_pair_encoding) algorithm.
 
-## Use the tiktoken_count function
+## Use the `tiktoken_count` function
 
 The `tiktoken_count` function counts the number of tokens in a text. The function accepts encoding names and OpenAI model names as the first argument and text as the second argument, as shown:
 
@@ -76,7 +76,7 @@ The following models are supported:
 | p50k_edit          | Use for edit models like text-davinci-edit-001, code-davinci-edit-001 |
 | r50k_base (or gpt2)| GPT-3 models like davinci                         |
 
-## Integrate pg_tiktoken with ChatGPT models
+## Integrate `pg_tiktoken` with ChatGPT models
 
 The `pg_tiktoken` extension allows you to store chat message history in a PostgreSQL database and retrieve messages that comply with OpenAI's model limitations.
 
