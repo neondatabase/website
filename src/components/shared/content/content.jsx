@@ -30,7 +30,7 @@ const getComponents = (withoutAnchorHeading) => ({
   undefined: (props) => <Fragment {...props} />,
   code: (props) => {
     if (props?.className?.startsWith('language-') && props?.children) {
-      return <CodeBlock {...props} />;
+      return <CodeBlock as="figure" {...props} />;
     }
     return <code {...props} />;
   },
