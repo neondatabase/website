@@ -27,18 +27,20 @@ const fetchStatus = async () => {
   return data.page.status;
 };
 
-const StatusBadge = ({ isDocPage = false }) => {
+const StatusBadge = ({ isDocPage = false, inView = false }) => {
   const [currentStatus, setCurrentStatus] = useState(null);
 
   useEffect(() => {
-    fetchStatus()
-      .then((status) => {
-        setCurrentStatus(status);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+    if (inView) {
+      fetchStatus()
+        .then((status) => {
+          setCurrentStatus(status);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [inView]);
 
   return (
     <Link
@@ -63,6 +65,6 @@ const StatusBadge = ({ isDocPage = false }) => {
   );
 };
 
-StatusBadge.propTypes = { isDocPage: PropTypes.bool };
+StatusBadge.propTypes = { isDocPage: PropTypes.bool, inView: PropTypes.bool };
 
 export default StatusBadge;
