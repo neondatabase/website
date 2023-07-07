@@ -20,6 +20,7 @@ const Layout = ({
   headerWithBottomBorder = false,
   footerWithTopBorder = false,
   isDocPage = false,
+  isBlogPage = false,
 }) => {
   const headerRef = useRef(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -44,6 +45,7 @@ const Layout = ({
         isSignIn={isSignIn}
         isSticky={isHeaderSticky}
         isDocPage={isDocPage}
+        isBlogPage={isBlogPage}
         onBurgerClick={handleHeaderBurgerClick}
       />
       <main
@@ -77,6 +79,7 @@ Layout.propTypes = {
   headerWithBottomBorder: PropTypes.bool,
   footerWithTopBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
+  isBlogPage: PropTypes.bool,
 };
 
 export default Layout;

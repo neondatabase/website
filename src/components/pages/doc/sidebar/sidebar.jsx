@@ -17,7 +17,7 @@ const Sidebar = ({ className = null, sidebar, currentSlug }) => (
       className
     )}
   >
-    <Search className="z-30" />
+    <Search className="z-30" indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME} />
     <nav className="relative z-20 mt-8">
       <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
       <ul>
