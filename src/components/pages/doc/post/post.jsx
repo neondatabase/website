@@ -1,5 +1,3 @@
-'use client';
-
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
@@ -51,14 +49,16 @@ const Post = ({
         isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
       )}
     >
-      {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
+      {breadcrumbs.length > 0 && <Breadcrumbs breadcrumbs={breadcrumbs} />}
       {isReleaseNotes ? (
         <ReleaseNotes currentSlug={currentSlug} items={releaseNotes} />
       ) : (
         <article>
           <h1 className="text-[36px] font-semibold leading-tight xl:text-3xl">{title}</h1>
           {subtitle && (
-            <p className="my-2 text-xl leading-tight text-gray-4 dark:text-gray-6">{subtitle}</p>
+            <p className="my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80">
+              {subtitle}
+            </p>
           )}
           <Content className="mt-5" content={content} />
         </article>

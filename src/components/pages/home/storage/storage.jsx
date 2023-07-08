@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';

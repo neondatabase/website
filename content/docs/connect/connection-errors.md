@@ -135,7 +135,7 @@ If you find that your connection string is defined correctly, see the instructio
 
 ## Couldn't connect to compute node
 
-This error arises when the Neon proxy, which accepts and handles connections from clients that use the PostgreSQL protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [Auto-suspension](../reference/glossary#auto-suspend-compute) (scale to zero). Currently, the transition from an idle state to an active one takes a few seconds.
+This error arises when the Neon proxy, which accepts and handles connections from clients that use the PostgreSQL protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [Auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale to zero). Currently, the transition from an idle state to an active one takes a few seconds.
 
 Consider these recommended steps:
 
@@ -161,7 +161,7 @@ Please make sure your database server is running at `ep-white-thunder-826300.us-
 
 A compute node in Neon has two main states: **Active** and **Idle**. Active means that PostgreSQL is currently running. If there are no active queries for 5 minutes, the activity monitor gracefully places the compute node into an idle state to save energy and resources.
 
-When you connect to an idle compute, Neon automatically activates it. Activation typically happens within a few seconds. If the error above is reported, it most likely means that the Prisma query engine timed out before your Neon compute was activated. For dealing with this connection timeout scenario, refer to the [connection timeout](../guides/prisma#connection-timeouts) instructions in our Prisma documentation. Our [connection latency and timeout](../connect/connection-latency) documentation may also be useful in addressing this issue.
+When you connect to an idle compute, Neon automatically activates it. Activation typically happens within a few seconds. If the error above is reported, it most likely means that the Prisma query engine timed out before your Neon compute was activated. For dealing with this connection timeout scenario, refer to the [connection timeout](/docs/guides/prisma#connection-timeouts) instructions in our Prisma documentation. Our [connection latency and timeout](/docs/connect/connection-latency) documentation may also be useful in addressing this issue.
 
 ## Error undefined: Database error
 
@@ -173,7 +173,7 @@ Error querying the database: db error: ERROR: prepared statement
 "s0" already exists
 ```
 
-Prisma Migrate requires a direct connection to the database. It does not support a pooled connection with PgBouncer, which is the connection pooler used by Neon. Attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes this error. To resolve this issue, please refer to our [Prisma Migrate with PgBouncer](../guides/prisma-migrate#prisma-migrate-with-pgbouncer) instructions.
+Prisma Migrate requires a direct connection to the database. It does not support a pooled connection with PgBouncer, which is the connection pooler used by Neon. Attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes this error. To resolve this issue, please refer to our [Prisma Migrate with PgBouncer](/docs/guides/prisma-migrate#prisma-migrate-with-pgbouncer) instructions.
 
 ## Need help?
 

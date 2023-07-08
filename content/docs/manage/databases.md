@@ -4,9 +4,9 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](../manage/overview), a database exists within a branch of a project. There is no limit on the number of databases you can create.
+A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is no limit on the number of databases you can create.
 
-A Neon project's primary branch is created with a default database called `neondb`, which is owned by your project's default role (see [Manage roles](../manage/roles) for more information). You can create your own databases in a project's primary branch or in a child branch.
+A Neon project's primary branch is created with a default database called `neondb`, which is owned by your project's default role (see [Manage roles](/docs/manage/roles) for more information). You can create your own databases in a project's primary branch or in a child branch.
 
 All databases in Neon are created with a `public` schema. SQL objects are created in the `public` schema, by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
 
@@ -60,7 +60,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a database with the API
 

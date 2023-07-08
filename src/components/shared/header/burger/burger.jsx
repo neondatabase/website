@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 const ANIMATION_DURATION = 0.2;
 
