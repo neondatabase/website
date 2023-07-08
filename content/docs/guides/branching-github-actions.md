@@ -17,7 +17,7 @@ For an example project that uses GitHub Actions to create and delete Neon branch
 This GitHub Action creates a new branch in your Neon project.
 
 <Admonition type="info">
-The source code for this action is available on [GitHub](https://github.com/neondatabase/create-branch-action). You can also find this action on the [GitHub Action marketplace](https://github.com/marketplace/actions/neon-create-delete-branch).
+The source code for this action is available on [GitHub](https://github.com/neondatabase/create-branch-action).
 </Admonition>
 
 ### Prerequisites
@@ -30,13 +30,13 @@ The source code for this action is available on [GitHub](https://github.com/neon
 The following example creates a branch from the `main` branch in your Neon project when a pull request is opened. The new branch is named `from_action_reusable`.
 
 ```yaml
-name: Create Neon Branch with GitHub Actions
+name: Create Neon Branch with GitHub Actions Demo
 run-name: Create a Neon Branch 🚀
 jobs:
   create-branch:
     runs-on: ubuntu-latest
     steps:
-      - uses: neondatabase/create-branch-action@beta
+      - uses: neondatabase/create-branch-action@main
         with:
           project_id: rapid-haze-373089
           parent_branch_id: br-long-forest-224191
@@ -52,6 +52,7 @@ jobs:
 - `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Settings** page.
 - `parent_branch_id`: The ID of the parent branch, typically the `main` branch of your project. You can find this value in the Neon Console. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
 - `branch_name`: This is an optional parameter. If unspecified, the branch name will default to the same value as the `branch_id` of the newly created branch, which is a generated value that starts with a `br-` prefix.
+- `api_key`: An API key created in your Neon account. For instructions, see [Create an API key](../manage/api-keys#create-an-api-key).
 
 ### Outputs
 
@@ -73,7 +74,7 @@ outputs:
 This GitHub Action deletes a branch from your Neon project.
 
 <Admonition type="info">
-The source code for this action is available on [GitHub](https://github.com/neondatabase/delete-branch-action). You can also find this action on the [GitHub Action marketplace](https://github.com/marketplace/actions/neon-database-delete-branch).
+The source code for this action is available on [GitHub](https://github.com/neondatabase/delete-branch-action).
 </Admonition>
 
 ### Prerequisites
@@ -86,7 +87,7 @@ The source code for this action is available on [GitHub](https://github.com/neon
 The following example deletes a branch with the `br-long-forest-224191` branch ID from a Neon project with the project ID `rapid-haze-373089` when a pull request is merged.
 
 ```yaml
-name: Delete Neon Branch with GitHub Actions
+name: Delete Neon Branch with GitHub Actions Demo
 run-name: Delete a Neon Branch 🚀
 on: [push]
 jobs:
@@ -102,6 +103,7 @@ jobs:
 
 - `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Settings** page.
 - `branch_id`: The ID of the branch you want to delete. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
+- `api_key`: An API key created in your Neon account. For instructions, see [Create an API key](../manage/api-keys#create-an-api-key).
 
 ### Outputs
 
