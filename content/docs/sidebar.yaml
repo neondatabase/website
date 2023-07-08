@@ -98,7 +98,7 @@
   items:
     - title: Neon features
       items: 
-        - title: Manage database access with SQL
+        - title: Manage roles and database access with SQL
           slug: guides/manage-database-access
     - title: Languages
       items:
