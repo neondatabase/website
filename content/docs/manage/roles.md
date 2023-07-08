@@ -49,15 +49,13 @@ In addition, the `neon_superuser` role can:
   GRANT neon_superuser TO <role_name>;
   ```
 
-  We recommend that you only grant membership in `neon_superuser` to users who need to perform administrative tasks, such as database administrators or system administrators.
+  We recommend that you only grant membership in `neon_superuser` to users who need to perform administration tasks in the Neon console.
 
- In summary, the `neon_superuser` can create databases, create roles, add extensions, grant `neon_superuser` privileges, and has all the privileges of `pg_read_all_data` and `pg_write_all_data`, but cannot log in to the PostgreSQL server itself. You can think of these roles as database administrator roles. If you are interested in roles for which you can manage database access at a more granular level, Neon supports creating and managing roles via SQL, just as you would with any stand-alone PostgreSQL instance. For more information see, [Manage roles with SQL](#manage-roles-with-sql).
+ In summary, the `neon_superuser` can create databases, create roles, add extensions, grant `neon_superuser` privileges, and has all the privileges of `pg_read_all_data` and `pg_write_all_data`, but cannot log in to the PostgreSQL server itself. It is intended for Neon console users. For all other users, you can create roles and manage database object access with SQL. See [Manage roles with SQL](#manage-roles-with-sql).
 
 ## Manage roles in the Neon console
 
-This section describes how to create, view, and delete databases in the Neon Console.
-
-All roles created in the Neon console are grant membership in the [neon_superuser](#the-neon_superuser-role) role.
+This section describes how to create, view, and delete role in the Neon Console. All roles created in the Neon console are grant membership in the [neon_superuser](#the-neon_superuser-role) role, which is intended for users of the Neon console.
 
 ### Create a role
 
@@ -97,15 +95,17 @@ To reset a role's password:
 
 ## Manage roles with SQL
 
-You can create and manage roles in Neon using SQL in the same way that you would with any stand-alone PostgreSQL instance. Roles created using SQL do not have the same privileges as roles created using the Neon Console, CLI, or API. Roles created from those interfaces are automatically granted membership in the [neon_superuser](#the-neon_superuser-role) role, which gives these roles  administrator-level capabilities in Neon. Roles created using SQL are only granted prvileges associated with any newly created PostgreSQL role.
+You can create and manage roles in Neon using SQL in the same way you would in any stand-alone PostgreSQL instance.
 
-To create a role, you can issue a `CREATE ROLE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For example:
+Roles created using SQL do not have the same privileges as roles created using the Neon Console, CLI, or API. Roles created from those interfaces are automatically granted membership in the [neon_superuser](#the-neon_superuser-role) role, which gives these roles administrator-level capabilities in Neon. Roles created using SQL are only granted privileges associated with newly created  roles in stand-alone PostgreSQL.
+
+To create a role, issue a `CREATE ROLE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 ```sql
 CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 ```
 
-- `WITH LOGIN` means that the role will have login privilege, which is required for the role to log in to your Neon PostgreSQL instance. If the role is used as a 'group' role for privilege management, the `LOGIN` privilege is not necessary.
+- `WITH LOGIN` means that the role will have a login privilege, which is required for the role to log in to your Neon PostgreSQL instance. If the role is used as a 'group' role for privilege management, the `LOGIN` privilege is not necessary.
 - A password is required and is validated when you create the role. Passwords must be created with sufficient complexity to meet a minimum entropy of 60 bits. To achieve the necessary entropy, you can follow these password composition guidelines:
   - **Length**: The password should consist of at least 12 characters.
   - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
@@ -121,9 +121,9 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 
   Example Password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
 
-  These guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
+  The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
 
-  For examples of creating roles with SQL, refer to the [Manage databases access with SQL guide](/docs/guides/manage-database-access).
+  For role creation and access management examples, refer to the [Manage databases access with SQL](/docs/guides/manage-database-access) guide.
 
 ## Manage roles with the Neon API
 
