@@ -21,6 +21,15 @@ Neon also supports `pgvector` for vector similarity search. For information on w
 
 This section describes how to use the `pg_embedding` extension in Neon with a simple example that demonstrates the required statements, syntax, and options.
 
+### Usage summary
+
+```sql
+CREATE EXTENSION embedding;
+CREATE TABLE documents(id integer PRIMARY KEY, embedding real[]);
+CREATE INDEX ON documents USING hnsw(embedding) WITH (maxelements=1000000, dims=100, m=32);
+SELECT id FROM documents ORDER BY emebedding <-> ARRAY[1.0, 2.0,...] LIMIT 100;
+```
+
 ### Enable the extension
 
 Enable the `pg_embedding` extension in Neon by running the following `CREATE EXTENSION` statement in the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor).
@@ -46,31 +55,26 @@ To insert vector data, use an `INSERT` statement similar to the following:
 ```sql
 INSERT INTO documents(id, embedding) 
 VALUES 
-(1, '{1.1, 2.2, 3.3}'),
-(2, '{4.4, 5.5, 6.6}'),
-(3, '{7.7, 8.8, 9.9}');
+(1, '{1.1, 2.2, 3.3,...}'),
+(2, '{4.4, 5.5, 6.6,...}'),
+(3, '{7.7, 8.8, 9.9,...}');
 ```
-
-The statement above stores vectors with 3 dimensions. In a real-world example, the number of dimensions would be much larger. For example, OpenAI's `text-embedding-ada-002` model supports 1536 dimensions for each piece of text.
 
 ### Create an HNSW index
 
-HNSW indexes are created in memory.
+HNSW indexes are created in memory and built on demand.
 
 To create the HNSW index on your vector column, use a `CREATE INDEX` statement similar to the following:
 
 ```sql
-CREATE INDEX ON documents USING hnsw(embedding) WITH (maxelements=3, dims=3, m=3);
+CREATE INDEX ON documents USING hnsw(embedding) WITH (maxelements=1000000, dims=100, m=32);
 ```
 
-The HNSW index options used in the statement above include:
+### HNSW index options
 
-- `maxelements`: Defines the maximum number of elements indexed. This is a required parameter. The example shown above has a value of `3`. A real-world example would have a much large value, such as `1000000`. An "element" refers to a data point (a vector) in the dataset, which is represented as a node in the HNSW graph. Typically, you would set this option to a value able to accommodate the number of rows in your in your dataset.
-- `dims`: Defines the number of dimensions in your vector data.  This is a required parameter. A small value is used in the example above. If you are storing data generated using OpenAI's `text-embedding-ada-002` model, which supports 1536 dimensions, you would define a value of `1536`, for example.
-- `m`: Defines the maximum number of bi-directional links (also referred to as "edges") created for each node during graph construction.
-
-The following additional index options are supported:
-
+- `maxelements`: Defines the maximum number of elements indexed. This is a required parameter.
+- `dims`: Defines the number of dimensions in your vector data.  This is a required parameter.
+- `m`: Defines the maximum number of links (also referred to as "edges") created for each node during graph construction.
 - `efConstruction`: Defines the number of nearest neighbors considered during index construction. The default value is `32`.
 - `efsearch`: Defines the number of nearest neighbors considered during index search. The default value is `32`.
 
@@ -81,17 +85,17 @@ For information about how you can configure these options to influence the HNSW 
 To query the indexed data in the `documents` table for nearest neighbors, use a query similar to this:
 
 ```sql
-SELECT id FROM documents ORDER BY embedding <-> array[1.1, 2.2, 3.3] LIMIT 2;
+SELECT id FROM documents ORDER BY embedding <-> array[1.1, 2.2, 3.3,...] LIMIT 100;
 ```
 
 where:
 
 - `SELECT id FROM documents` selects the `id` field from all records in the `documents` table.
 - `<->`: This is the PostgreSQL "distance between" operator. It calculates the Euclidean distance (L2) between the query vector and each row of the dataset.
-- `ORDER BY` sorts the selected records in ascending order based on the calculated distances. In other words, records with values closer to the `[1.1, 2.2, 3.3]` query vector will be returned first.
-- `LIMIT 2` limits the result set to the first two records after sorting.
+- `ORDER BY` sorts the selected records in ascending order based on the calculated distances. In other words, records with values closer to the `[1.1, 2.2, 3.3,...]` query vector will be returned first.
+- `LIMIT 100` limits the result set to the first 100 records after sorting.
 
-In summary, the query retrieves the IDs of the two records from the `documents` table whose value is closest to the `[1.1, 2.2, 3.3]` query vector according to Euclidean distance."
+In summary, the query retrieves the IDs of the first 100 records from the `documents` table whose value is closest to the `[1.1, 2.2, 3.3,...]` query vector according to Euclidean distance."
 
 ## How HNSW search works
 
@@ -107,11 +111,11 @@ The key idea behind HNSW is that by starting the search at the top layer and mov
 
 The `m`, `efConstruction`, and `efSearch` options allow you to tune the HNSW algorithm when creating an index:
 
-- `m`: Defines the maximum number of links (also referred to as "edges") created for each node during graph construction. A higher value increases accuracy (recall) but also increases the size of the index in memory and index construction time.
-- `efConstruction`: Defines the number of nearest neighbors considered during index construction. The default value is `32`. This setting influences the trade-off between index quality and construction speed. A high `efConstruction` value creates a higher quality graph, enabling more accurate search results, but a higher value also means that index construction takes longer.
-- `efSearch`: Defines the number of nearest neighbors considered during index search. The default value is `32`.  This setting influences the trade-off between query accuracy (recall) and speed. A higher `efSearch` value increases accuracy at the cost of speed. This value should be equal to or larger than `k`, which is the number of nearest neighbors you want your search to return.
+- `m`: A higher value increases accuracy (recall) but also increases the size of the index in memory and index construction time.
+- `efConstruction`: This setting influences the trade-off between index quality and construction speed. A high `efConstruction` value creates a higher quality graph, enabling more accurate search results, but a higher value also means that index construction takes longer.
+- `efSearch`: This setting influences the trade-off between query accuracy (recall) and speed. A higher `efSearch` value increases accuracy at the cost of speed. This value should be equal to or larger than `k`, which is the number of nearest neighbors you want your search to return.
 
-In summary, to prioritize for search speed over accuracy, you would use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over search speed, you would use higher value for `m` and `efSearch`. At the cost of index build time, you can also use a higher `efConstruction` value to enable more accurate search results.
+In summary, to prioritize for search speed over accuracy, use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over search speed, use higher value for `m` and `efSearch`. At the cost of index build time, you can also use a higher `efConstruction` value to enable more accurate search results.
 
 <Admonition type="info">
 For an idea of how to configure index option values, consider the benchmark performed by Neon using the _GIST-960 Euclidean dataset_, which provides a training set of 1 million vectors of 960 dimensions. The benchmark was run with this series of index option values:
@@ -125,7 +129,7 @@ To learn more about the benchmark, see [Introducing the HNSW Index for vector se
 
 ## Comparing pgvector and pg_embedding
 
-When determining which index to use, `pgvector` with an IVFFlat or `pg_embedding wih an HNSW index, it's helpful to compare the two indexes based on specific criteria, such as:
+When determining which index to use, `pgvector` with an IVFFlat or `pg_embedding` wih an HNSW index, it's helpful to compare the two indexes based on specific criteria, such as:
 
 - Search speed
 - Accuracy
