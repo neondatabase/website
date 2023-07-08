@@ -17,16 +17,6 @@ Neon's `pg_embedding` extension is based on the [ivf-hnsw](https://github.com/db
 Neon also supports `pgvector` for vector similarity search. For information on which index to choose, refer to [Comparing pgvector and pg_embedding](#comparing-hnsw-to-pgvector).
 </Admonition>
 
-## How HNSW search works
-
-The search process begins at the topmost layer of the HNSW graph. From the starting node, the algorithm navigates to the nearest neighbor in the same layer. The algorithm repeats this step until it can no longer find neighbors more similar to the query vector.
-
-Using the found node as an entry point, the algorithm moves down to the next layer in the graph and repeats the process of navigating to the nearest neighbor. The process of navigating to the nearest neighbor and moving down a layer is repeated until the algorithm reaches the bottom layer.
-
-In the bottom layer, the algorithm continues navigating to the nearest neighbor until it can't find any nodes that are more similar to the query vector. The current node is then returned as the most similar node to the query vector.
-
-The key idea behind HNSW is that by starting the search at the top layer and moving down through each layer, the algorithm can quickly navigate to the area of the graph that contains the node that is most similar to the query vector. This makes the search process much faster than if it had to search through every node in the graph.
-
 ## Using the pg_embedding extension
 
 This section describes how to use the `pg_embedding` extension in Neon with a simple example that demonstrates the required statements, syntax, and options.
@@ -122,6 +112,16 @@ For an idea of how to configure index option values, consider the benchmark perf
 
 To learn more about the benchmark, see [Introducing the HNSW Index for vector search in Postgres](https://neon.tech/blog). Try experimenting with different settings to find the ones that work best for your particular application.
 </Admonition>
+
+## How HNSW search works
+
+The search process begins at the topmost layer of the HNSW graph. From the starting node, the algorithm navigates to the nearest neighbor in the same layer. The algorithm repeats this step until it can no longer find neighbors more similar to the query vector.
+
+Using the found node as an entry point, the algorithm moves down to the next layer in the graph and repeats the process of navigating to the nearest neighbor. The process of navigating to the nearest neighbor and moving down a layer is repeated until the algorithm reaches the bottom layer.
+
+In the bottom layer, the algorithm continues navigating to the nearest neighbor until it can't find any nodes that are more similar to the query vector. The current node is then returned as the most similar node to the query vector.
+
+The key idea behind HNSW is that by starting the search at the top layer and moving down through each layer, the algorithm can quickly navigate to the area of the graph that contains the node that is most similar to the query vector. This makes the search process much faster than if it had to search through every node in the graph.
 
 ## Comparing pgvector and pg_embedding
 
