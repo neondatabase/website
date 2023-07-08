@@ -71,7 +71,7 @@ To begin, assume you're creating a new database that will be used by several dev
         - Common words or phrases
         - Any words found in a dictionary
       - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.
-      Example Password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
+      Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
     </Admonition>
 
 4. Grant all users with the `dev_users` role all privileges on the database:

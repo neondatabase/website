@@ -96,17 +96,16 @@ To reset a role's password:
 ## Manage roles with SQL
 
 You can create and manage roles in Neon using SQL in the same way you would in any stand-alone PostgreSQL instance.
+Roles created using SQL have the same privileges as roles created in stand-alone PostgreSQL. They do not have the same privileges as roles created using using the Neon Console or API. Roles created from those interfaces are automatically granted membership in the [neon_superuser](#the-neon_superuser-role) role, which gives grants administrator-level privileges in Neon.
 
-Roles created using SQL do not have the same privileges as roles created using the Neon Console, CLI, or API. Roles created from those interfaces are automatically granted membership in the [neon_superuser](#the-neon_superuser-role) role, which gives these roles administrator-level capabilities in Neon. Roles created using SQL are only granted privileges associated with newly created  roles in stand-alone PostgreSQL.
-
-To create a role, issue a `CREATE ROLE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+To create a role with SQL, issue a `CREATE ROLE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 ```sql
 CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 ```
 
-- `WITH LOGIN` means that the role will have a login privilege, which is required for the role to log in to your Neon PostgreSQL instance. If the role is used as a 'group' role for privilege management, the `LOGIN` privilege is not necessary.
-- A password is required and is validated when you create the role. Passwords must be created with sufficient complexity to meet a minimum entropy of 60 bits. To achieve the necessary entropy, you can follow these password composition guidelines:
+- `WITH LOGIN` means that the role will have a login privilege, required for the role to log in to your Neon PostgreSQL instance. If the role is used as a 'group' role for privilege management, this privilege is not necessary.
+- A password is required and validated when you create a role with SQL. Passwords must be created with sufficient complexity to meet a minimum entropy of 60 bits. To achieve the necessary entropy, you can follow these password composition guidelines:
   - **Length**: The password should consist of at least 12 characters.
   - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
     - Lowercase letters (a-z)
@@ -119,7 +118,7 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
     - Any words found in a dictionary
   - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.
 
-  Example Password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
+  Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
 
   The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
 

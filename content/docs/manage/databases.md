@@ -68,9 +68,7 @@ CREATE DATABASE testdb;
 
 Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. This parameter requires access to the local file system, which is not permitted on Neon.
 
-The role that creates a database is the owner of the database. This role has the typical default PostgreSQL privileges on the database, including the ability to `DROP` the database, `CONNECT` to the database, and create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html). 
-
-The [neon_superuser role](/docs/manage/roles/the-neon_superuser-role) is not granted access on databases created with SQL, as it is for databases created with the Neon console or API.
+The role that creates a database is the owner of the database. This role has the typical default PostgreSQL privileges on the database, including the ability to `DROP` the database, `CONNECT` to the database, and create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
 
 For a database creation example, refer to the [Manage database access with SQL](/docs/guides/manage-database-access) guide.
 
