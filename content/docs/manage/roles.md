@@ -122,7 +122,7 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 
   The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
 
-  For role creation and access management examples, refer to the [Manage databases access with SQL](/docs/guides/manage-database-access) guide.
+  For role creation and access management examples, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
 
 ## Manage roles with the Neon API
 

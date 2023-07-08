@@ -1,5 +1,5 @@
 ---
-title: Manage database access with SQL
+title: Manage roles and database access with SQL
 subtitle: Learn how to create roles and manage database access in Neon with SQL
 enableTableOfContents: true
 ---
@@ -28,7 +28,7 @@ Neon supports creating and managing PostgreSQL roles with SQL. Roles created wit
 
 Using SQL, you can define database roles with only the privileges you choose to grant. The following instructions show you how.
 
-## Create roles with SQL and grant privileges
+## Create roles and grant database privileges
 
 To begin, assume you're creating a new database that will be used by several developers, all requiring read-write access.
 
