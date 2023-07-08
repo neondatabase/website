@@ -14,13 +14,13 @@ Additional roles can be created in a project's primary branch or child branches.
 
 Roles belong to a branch. If you create a child branch, roles from the parent branch are duplicated in the child branch. For example, if role `sally` exists in the parent branch, role `sally` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
-Roles created in the Neon console and Neon API are granted membership in the [neon_superuser](#the-neon_superuser-role) role.
-
 Neon supports creating and managing roles from the following interfaces:
 
 - [Neon console](#manage-roles-in-the-neon-console)
-- [SQL](#manage-roles-in-the-neon-console) (from a client or the using the Neon SQL Editor)
+- [SQL](#manage-roles-in-the-neon-console)
 - [Neon API](#manage-roles-with-the-neon-api)
+
+Roles created in the Neon console and Neon API are granted membership in the [neon_superuser](#the-neon_superuser-role) role.
 
 ## The neon_superuser role
 

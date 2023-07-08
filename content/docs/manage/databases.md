@@ -15,7 +15,7 @@ Databases belong to branch. If you create a child branch, databases from the par
 Neon supports creating and managing databases from the following interfaces:
 
 - [Neon console](#manage-databases-in-the-neon-console)
-- [SQL](#manage-databases-with-sql) (from a client or the using the Neon SQL Editor)
+- [SQL](#manage-databases-with-sql)
 - [Neon API](#manage-databases-with-the-neon-api)
 
 ## Manage databases in the Neon console
