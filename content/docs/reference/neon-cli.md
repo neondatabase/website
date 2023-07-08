@@ -98,7 +98,7 @@ Global options are supported with any Neon CLI command.
 
   ```bash
   $ neonctl --version
-  1.11.1
+  1.14.0
   ```
 
 - <a id="help"></a>`--help`
@@ -135,9 +135,9 @@ Global options are supported with any Neon CLI command.
 
   Specifies your Neon API key. You can authenticate using a Neon API key when running a Neon CLI command instead of using `neonctl auth`. For information about obtaining an Neon API key, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
 
-```bash
-neonctl <command> --api-key <neon_api_key>
-```
+  ```bash
+  neonctl <command> --api-key <neon_api_key>
+  ```
 
 - <a id="analytics"></a>`--analytics`
 
