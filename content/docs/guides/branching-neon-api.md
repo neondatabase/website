@@ -5,8 +5,6 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-## Branching with the Neon API
-
 Branch actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="note">
@@ -27,14 +25,14 @@ The following Neon API method creates a branch. To view the API documentation fo
 POST /projects/{project_id}/branches 
 ```
 
-The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without a compute endpoint. The `branch` attribute specifies the parent branch.
+The API method appears as follows when specified in a cURL command:
 
 <Admonition type="note">
 This method does not require a request body. Without a request body, the method creates a branch from the project's primary branch, and a compute endpoint is not created.
 </Admonition>
 
 ```curl
-curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
+curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches' \
   -H 'Accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' \
   -H 'Content-Type: application/json' \
@@ -50,8 +48,10 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
 }' | jq
 ```
 
-- The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
-- The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's primary branch or a previously created branch.
+- The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API. It is a generated value that looks something like this: `autumn-disk-484331`.
+- The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. Neon supports `read_write` and `read_only` endpoint types. A branch can be created with or without a compute endpoint. You can specify `read_only` to create a read replica.
+- The `branch` attribute specifies the parent branch.
+- The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `parent_id` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's primary branch or a non-primary branch.
 
 The response includes information about the branch, the branch's compute endpoint, and the `create_branch` and `start_compute` operations that were initiated.
 
