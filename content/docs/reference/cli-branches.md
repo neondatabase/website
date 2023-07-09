@@ -120,8 +120,8 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 | `--project-id` | Project ID    | string | Only if your Neon account has more than one project |
 | `--name`    | The branch name                                                | string  |             |
 | `--parent`  | Parent branch name or id or timestamp or LSN. Defaults to the primary branch | string  |             |
-| `--endpoint`| Create a branch with or without an endpoint. By default, the branch is created with a read-write endpoint. The default value is true. To create a branch without an endpoint, use --no-endpoint | boolean |    |
-| `--readonly`| Create a read-only branch (a branch with a read-only compute endpoint, also referred to in Neon as a read replica.)                                     | boolean |             |
+| `--endpoint`| Create a branch with or without an endpoint. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without an endpoint, use `--no-endpoint` | boolean |    |
+| `--readonly`| Create a read-only branch (a branch with a read-only compute endpoint is also referred to as a read replica)                                     | boolean |             |
 
 
 #### Examples
@@ -129,23 +129,46 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 - Create a branch:
 
 ```bash
-neonctl branches create
-┌─────────────────────────┬─────────────────────────┬──────────────────────┐
-│ Id                      │ Name                    │ Created At           │
-├─────────────────────────┼─────────────────────────┼──────────────────────┤
-│ br-withered-king-763176 │ br-withered-king-763176 │ 2023-06-19T22:35:25Z │
-└─────────────────────────┴─────────────────────────┴──────────────────────┘
+neonctl branches createbranch
+┌───────────────────────────┬───────────────────────────┬──────────────────────┬──────────────────────┐
+│ Id                        │ Name                      │ Created At           │ Updated At           │
+├───────────────────────────┼───────────────────────────┼──────────────────────┼──────────────────────┤
+│ br-tight-waterfall-174832 │ br-tight-waterfall-174832 │ 2023-07-09T20:42:18Z │ 2023-07-09T20:42:18Z │
+└───────────────────────────┴───────────────────────────┴──────────────────────┴──────────────────────┘
+
+endpoints
+
+┌─────────────────────┬──────────────────────┐
+│ Id                  │ Created At           │
+├─────────────────────┼──────────────────────┤
+│ ep-cold-star-253608 │ 2023-07-09T20:42:18Z │
+└─────────────────────┴──────────────────────┘
+
+connection_uris
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│ Connection Uri                                                                    │
+├───────────────────────────────────────────────────────────────────────────────────┤
+│ postgres://daniel:<password>@ep-cold-star-253608.us-east-2.aws.neon.tech/neondb   │
+└───────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 - Create a branch with a user-defined name:
 
 ```bash
-neonctl branches create --branch.name mybranch
-┌───────────────────────┬──────────┬──────────────────────┬──────────────────────┐
-│ Id                    │ Name     │ Created At           │ Updated At           │
-├───────────────────────┼──────────┼──────────────────────┼──────────────────────┤
-│ br-round-queen-335380 │ mybranch │ 2023-07-06T14:45:50Z │ 2023-07-06T14:45:50Z │
-└───────────────────────┴──────────┴──────────────────────┴──────────────────────┘
+neonctl branches create --name mybranch
+```
+
+- Create a branch with a read-only compute endpoint (a read replica)
+
+```bash
+neonctl branches create --name my_read_replica_branch --readonly
+```
+
+- Create a branch from a parent branch other than your `main` branch
+
+```bash
+neonctl branches create --name my_child_branch --parent mybranch
 ```
 
 ### rename
@@ -155,29 +178,28 @@ This subcommand allows you to update a branch in a Neon project.
 #### Usage
 
 ```bash
-neonctl branches update <id|name> [options]
+neonctl branches rename <id|name> <new-name> [options]
 ```
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` subcommand supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `updaterename` subcommand supports this option:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
-| --project.id  | Project ID  | string | Only if your Neon account has more than one project |
-| --branch.name | branch name | string | &check; |
+| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Example
 
 ```bash
-neonctl branches update br-withered-king-763176 --branch.name mybranch
-┌─────────────────────────┬─────────────┬──────────────────────┐
-│ Id                      │ Name        │ Created At           │
-├─────────────────────────┼─────────────┼──────────────────────┤
-│ br-withered-king-763176 │ mybranch    │ 2023-06-19T22:35:25Z │
-└─────────────────────────┴─────────────┴──────────────────────┘
+neonctl branches rename mybranch teambranch
+┌───────────────────────┬────────────┬──────────────────────┬──────────────────────┐
+│ Id                    │ Name       │ Created At           │ Updated At           │
+├───────────────────────┼────────────┼──────────────────────┼──────────────────────┤
+│ br-rough-sound-590393 │ teambranch │ 2023-07-09T20:46:58Z │ 2023-07-09T21:02:27Z │
+└───────────────────────┴────────────┴──────────────────────┴──────────────────────┘
 ```
 
 ### delete
@@ -198,17 +220,17 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `d
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
-| --project.id  | Project ID  | string | Only if your Neon account has more than one project |
+| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Example
 
 ```bash
-neonctl branches delete br-wispy-voice-602467
-┌───────────────────────┬───────────────────────┬──────────────────────┬──────────────────────┐
-│ Id                    │ Name                  │ Created At           │ Updated At           │
-├───────────────────────┼───────────────────────┼──────────────────────┼──────────────────────┤
-│ br-wispy-voice-602467 │ br-wispy-voice-602467 │ 2023-07-06T13:27:08Z │ 2023-07-06T13:32:16Z │
-└───────────────────────┴───────────────────────┴──────────────────────┴──────────────────────┘
+neonctl branches delete br-rough-sky-158193
+┌─────────────────────┬─────────────────┬──────────────────────┬──────────────────────┐
+│ Id                  │ Name            │ Created At           │ Updated At           │
+├─────────────────────┼─────────────────┼──────────────────────┼──────────────────────┤
+│ br-rough-sky-158193 │ my_child_branch │ 2023-07-09T20:57:39Z │ 2023-07-09T21:06:41Z │
+└─────────────────────┴─────────────────┴──────────────────────┴──────────────────────┘
 ```
 
 ### get
@@ -229,7 +251,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `g
 
 | Option        | Description | Type   | Required |
 | ------------- | ----------- | ------ | :------: |
-| --project.id  | Project ID  | string | Only if your Neon account has more than one project |
+| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Example
 
