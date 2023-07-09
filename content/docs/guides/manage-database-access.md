@@ -52,7 +52,7 @@ To begin, assume you're creating a new database that will be used by several dev
     The role that creates a database is automatically the owner of the database.
     </Admonition>
 
-3. Create a 'group' role for database users. This role will be used to manage database user privileges. Neon requires a password when creating any role with SQL.
+3. Create a shared role for database users. This role will be used to manage database user privileges. Neon requires a password when creating any role with SQL.
 
     ```sql
     CREATE ROLE dev_users PASSWORD `password`;
