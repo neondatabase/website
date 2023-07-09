@@ -5,27 +5,29 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-In this topic we walk through creating a Githook script that automates the creation of Neon branches every time a new Git branch is created. This is possible because Neon provides an API to manage your projects, branches, and most other operations supported by the Neon Console. You can learn more about the Neon API [here](https://neon-console-docs-link.com).
+This guide leads you through creating a Githook script that automates the creation of Neon branches every time a new Git branch is created. This is possible because Neon provides an API to manage your projects, branches, and most other operations supported by the Neon Console. You can learn more about the Neon API [here](https://neon-console-docs-link.com).
 
-We’ll start with a simple Githook example and incrementally build up to our final solution. You can find the repository along with the instructions on [GitHub](https://github-link.com).
+We’ll start with a simple Githook example and incrementally build up to thr final solution. You can find the repository along with the instructions on [GitHub](https://github-link.com).
 
 ## What are Neon branches?
 
-Similarly to Git branches, Neon branches are isolated copies of your database that are helpful for experimenting with new features without compromising your database. You can instantly create Neon branches using the Neon console or the API. Learn more about database branching in the [docs](https://docs-link.com).
+Similarly to Git branches, Neon branches are isolated copies of your database that are helpful for experimenting with new features without compromising your database. You can instantly create Neon branches using the Neon console, API, or CLI.
 
 ## What are Githooks?
 
-Githooks are custom scripts that run on certain events in the Git lifecycle. You can use them to customize Git’s internal behavior and trigger customizable actions at key points in your development workflow. In our case, we’ll use a post-checkout hook, which runs after the git checkout command.
+Githooks are custom scripts that run on certain events in the Git lifecycle. You can use them to customize Git’s internal behavior and trigger customizable actions at key points in your development workflow. This guides shows how to configure a post-checkout hook, which runs after the `git checkout` command.
 
 ## The challenges of local development
 
-Traditionally, local development with Postgres can be somewhat cumbersome. You either need to have Postgres installed on your local machine or use Docker, both of which can be resource-intensive and may slow down your computer. In addition, setting up and maintaining your local Postgres database to mirror your production environment requires writing and managing seed scripts. This means you spend significant time managing your database setup rather than focusing on coding.
+Traditionally, local development with PostgreSQL can be somewhat cumbersome. You either need to have PostgreSQL installed on your local machine or use Docker, both of which can be resource-intensive and may slow down your computer. In addition, setting up and maintaining a local database to mirror your production environment requires writing and managing seed scripts. This means you spend significant time managing your database setup rather than focusing on coding.
 
-Having a separate Neon branch for each of your Git branches can improve your local development experience. With this setup, you don’t need to worry about managing a local Postgres instance or creating seed scripts. You also avoid the risk of inconsistencies between your local and production database schemas, as your Neon branches are exact copies of your main database. The Githook we describe in this article automates the process of creating these Neon branches, saving you even more time and effort.
+Having a separate Neon branch for each of your Git branches can improve your local development experience. With this setup, you don’t need to worry about managing a local PostgreSQL instance or creating seed scripts. You also avoid the risk of inconsistencies between your local and production database schemas, as your Neon branches are exact copies of your main database. The Githook described in this guide automates the process of creating Neon branches, saving you time and effort.
 
-## Starting simple: the basic Githook
+## Create a basic Githook
 
-Let’s start by creating a simple Git post-checkout hook that prints a message after a git checkout operation. Githooks should be placed in the .git/hooks directory of your Git repository. Let’s create a new project folder and the post-checkout file:
+Start by creating a simple Git post-checkout hook that prints a message after a git checkout operation. Githooks should be placed in the ``.git/hooks` directory of your Git repository. 
+
+Create a new project folder and the post-checkout file:
 
 ```shell
 mkdir neon-githook
@@ -41,7 +43,7 @@ In the post-checkout file, add the following code:
 echo "You just checked out a git branch!"
 ```
 
-To make this hook run, we have to make the script executable:
+To make the Githook run, you need to make the script executable:
 
 ```shell
 chmod +x .git/hooks/post-checkout
@@ -51,7 +53,7 @@ Now, every time you run git checkout, you’ll see the message: “You just chec
 
 ## Checking if a Git branch is new
 
-Next, we’ll modify the script to create a Neon branch whenever a new Git branch is created.
+In this step, you will modify the script to create a Neon branch whenever a new Git branch is created.
 
 First, we need to determine if we just checked out a new Git branch or an existing one. The git checkout command passes three arguments to the post-checkout hook:
 
