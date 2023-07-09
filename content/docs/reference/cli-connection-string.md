@@ -14,13 +14,15 @@ For information about connecting to Neon, see [Connect from any application](/do
 
 ## The `connection string` command
 
-This command constructs a PostgreSQL connection string for connecting to a database in your Neon project. The connection string includes the password for the specified role.
+This command constructs a PostgreSQL connection string for connecting to a database in your Neon project. You can construct a connection string for any database in any branch in any of your Neon projects. The connection string includes the password for the specified role.
 
 ### Usage
 
 ```bash
-neonctl connection-string [options]
+neonctl connection-string [branch] [options]
 ```
+
+`branch` specifies the branch name or id. If a branch name or ID is ommited, the primary branch is used.
 
 ### Options
 
@@ -28,11 +30,11 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 
 | Option        | Description  | Type   | Required  |
 | ------------- | ------------ | ------ | :------: |
-| --project.id  | Project ID   | string |  Only if your Neon account has more than one project |
-| --role.name   | Role name    | string | Only if your branch has more than one role |
-| --database.name| Database name| string | Only if your branch has more than one database |
-| --pooled | Use a pooled connection. The default is `false`. |boolean||
-| --prisma | Use connection string for Prisma setup. The default is `false`. |boolean||
+| --project-id  | Project ID   | string |  Only if your Neon account has more than one project |
+| --role-name   | Role name    | string | Only if your branch has more than one role |
+| --database-name| Database name| string | Only if your branch has more than one database |
+| --pooled | Cconstruct a pooled connection. The default is `false`. |boolean||
+| --prisma | Construct a connection string for use with Prisma. The default is `false`. |boolean||
 
 ### Examples
 
@@ -41,24 +43,24 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
     <CodeBlock shouldWrap>
 
     ```bash
-    neonctl connection-string
+    neonctl connection-string mybranch
     postgres://daniel:<password>@ep-still-haze-361517.us-east-2.aws.neon.tech/neondb
     ```
 
     </CodeBlock>
 
-- Generate a pooled connection string for the current project, branch, and database with the `--pooled` option:
+- Generate a pooled connection string for the current project, branch, and database with the `--pooled` option. This option adds a `-pooler` flag to the host name which enables connection pooling for clients that use this connection string.
 
     <CodeBlock shouldWrap>
 
     ```bash
-    neonctl connection-string
+    neonctl connection-string --pooled
     postgres://daniel:<password>@ep-still-haze-361517-pooler.us-east-2.aws.neon.tech/neondb
     ```
 
     </CodeBlock>
 
-- Generate a connection string for use with Prisma for the current project, branch, and database with the `--prisma` option, which adds `connect_timeout` option to the connection string to ensure that connections from Prisma do not timeout.
+- Generate a connection string for use with Prisma for the current project, branch, and database. The `--prisma` options adds `connect_timeout=30` option to the connection string to ensure that connections from Prisma Client do not timeout.
 
     <CodeBlock shouldWrap>
 
