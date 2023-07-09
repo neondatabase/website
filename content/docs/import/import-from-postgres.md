@@ -110,21 +110,158 @@ This section describes using the `pg_dump` utility to dump data from an existing
 
 3. Load the database dump into Neon using `pg_restore`. For example:
 
-     <CodeBlock shouldWrap>
+    <CodeBlock shouldWrap>
 
-   ```bash
-   pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc --single-transaction dumpfile.bak -v
-   ```
+    ```bash
+    pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc --single-transaction dumpfile.bak -v
+    ```
 
-     </CodeBlock>
+    </CodeBlock>
 
-   The example above includes some optional arguments. The `-Fc` option specifies the format of the archive. In this case, `-Fc` indicates a custom-format archive file. The `--single-transaction` option forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.) The `-v` option runs `pg_restore` in verbose mode, allowing you to monitor what happens during the restore operation.
+    <Admonition type="note">
+    The database specified in the command above must exist in Neon. If it does not, create it first. See [/docs/manage/databases#create-a-database].
+    </Admonition>
 
-   <Admonition type="note">
-   `pg_restore` also supports a `-j` option that specifies the number of concurrent jobs, which can make imports faster. This option is not used in the example above because multiple jobs cannot be used together with the `--single-transaction` option.
-   </Admonition>
+    The example above includes some optional arguments. The `-Fc` option specifies the format of the archive. In this case, `-Fc` indicates a custom-format archive file. The `--single-transaction` option forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.) The `-v` option runs `pg_restore` in verbose mode, allowing you to monitor what happens during the restore operation.
 
-   The `pg_restore` command provides other options to modify your database import. To learn more, refer to the [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
+    <Admonition type="note">
+    `pg_restore` also supports a `-j` option that specifies the number of concurrent jobs, which can make imports faster. This option is not used in the example above because multiple jobs cannot be used together with the `--single-transaction` option.
+    </Admonition>
+
+    The `pg_restore` command provides other options to modify your database import. To learn more, refer to the [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
+
+## pg_dump and pg_restore example
+
+The following example shows how data from a `chinook` database was dumped and and restored to a `chinook2` database in Neon using the commands described in the previous section:
+
+<CodeBlock shouldWrap>
+
+```bash
+pg_dump "postgres://daniel:7eT0ZcFIMkHn@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook" --file=dumpfile.bak -Fc -Z 6 -v
+
+pg_dump: last built-in OID is 16383
+pg_dump: reading extensions
+pg_dump: identifying extension members
+pg_dump: reading schemas
+pg_dump: reading user-defined tables
+pg_dump: reading user-defined functions
+pg_dump: reading user-defined types
+pg_dump: reading procedural languages
+pg_dump: reading user-defined aggregate functions
+pg_dump: reading user-defined operators
+pg_dump: reading user-defined access methods
+pg_dump: reading user-defined operator classes
+pg_dump: reading user-defined operator families
+pg_dump: reading user-defined text search parsers
+pg_dump: reading user-defined text search templates
+pg_dump: reading user-defined text search dictionaries
+pg_dump: reading user-defined text search configurations
+pg_dump: reading user-defined foreign-data wrappers
+pg_dump: reading user-defined foreign servers
+pg_dump: reading default privileges
+pg_dump: reading user-defined collations
+pg_dump: reading user-defined conversions
+pg_dump: reading type casts
+pg_dump: reading transforms
+pg_dump: reading table inheritance information
+pg_dump: reading event triggers
+pg_dump: finding extension tables
+pg_dump: finding inheritance relationships
+pg_dump: reading column info for interesting tables
+pg_dump: flagging inherited columns in subtables
+pg_dump: reading indexes
+pg_dump: flagging indexes in partitioned tables
+pg_dump: reading extended statistics
+pg_dump: reading constraints
+pg_dump: reading triggers
+pg_dump: reading rewrite rules
+pg_dump: reading policies
+pg_dump: reading row-level security policies
+pg_dump: reading publications
+pg_dump: reading publication membership of tables
+pg_dump: reading publication membership of schemas
+pg_dump: reading subscriptions
+pg_dump: reading large objects
+pg_dump: reading dependency data
+pg_dump: saving encoding = UTF8
+pg_dump: saving standard_conforming_strings = on
+pg_dump: saving search_path = 
+pg_dump: saving database definition
+pg_dump: dumping contents of table "public.Album"
+pg_dump: dumping contents of table "public.Artist"
+pg_dump: dumping contents of table "public.Customer"
+pg_dump: dumping contents of table "public.Employee"
+pg_dump: dumping contents of table "public.Genre"
+pg_dump: dumping contents of table "public.Invoice"
+pg_dump: dumping contents of table "public.InvoiceLine"
+pg_dump: dumping contents of table "public.MediaType"
+pg_dump: dumping contents of table "public.Playlist"
+pg_dump: dumping contents of table "public.PlaylistTrack"
+pg_dump: dumping contents of table "public.Track"
+
+~/mydump$ ls
+dumpfile.bak
+
+~/mydump$ pg_restore -d postgres://daniel:7eT0ZcFIMkHn@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook2 -Fc --single-transaction dumpfile.bak -v
+
+pg_restore: connecting to database for restore
+pg_restore: creating TABLE "public.Album"
+pg_restore: creating TABLE "public.Artist"
+pg_restore: creating TABLE "public.Customer"
+pg_restore: creating TABLE "public.Employee"
+pg_restore: creating TABLE "public.Genre"
+pg_restore: creating TABLE "public.Invoice"
+pg_restore: creating TABLE "public.InvoiceLine"
+pg_restore: creating TABLE "public.MediaType"
+pg_restore: creating TABLE "public.Playlist"
+pg_restore: creating TABLE "public.PlaylistTrack"
+pg_restore: creating TABLE "public.Track"
+pg_restore: processing data for table "public.Album"
+pg_restore: processing data for table "public.Artist"
+pg_restore: processing data for table "public.Customer"
+pg_restore: processing data for table "public.Employee"
+pg_restore: processing data for table "public.Genre"
+pg_restore: processing data for table "public.Invoice"
+pg_restore: processing data for table "public.InvoiceLine"
+pg_restore: processing data for table "public.MediaType"
+pg_restore: processing data for table "public.Playlist"
+pg_restore: processing data for table "public.PlaylistTrack"
+pg_restore: processing data for table "public.Track"
+pg_restore: creating CONSTRAINT "public.Album PK_Album"
+pg_restore: creating CONSTRAINT "public.Artist PK_Artist"
+pg_restore: creating CONSTRAINT "public.Customer PK_Customer"
+pg_restore: creating CONSTRAINT "public.Employee PK_Employee"
+pg_restore: creating CONSTRAINT "public.Genre PK_Genre"
+pg_restore: creating CONSTRAINT "public.Invoice PK_Invoice"
+pg_restore: creating CONSTRAINT "public.InvoiceLine PK_InvoiceLine"
+pg_restore: creating CONSTRAINT "public.MediaType PK_MediaType"
+pg_restore: creating CONSTRAINT "public.Playlist PK_Playlist"
+pg_restore: creating CONSTRAINT "public.PlaylistTrack PK_PlaylistTrack"
+pg_restore: creating CONSTRAINT "public.Track PK_Track"
+pg_restore: creating INDEX "public.IFK_AlbumArtistId"
+pg_restore: creating INDEX "public.IFK_CustomerSupportRepId"
+pg_restore: creating INDEX "public.IFK_EmployeeReportsTo"
+pg_restore: creating INDEX "public.IFK_InvoiceCustomerId"
+pg_restore: creating INDEX "public.IFK_InvoiceLineInvoiceId"
+pg_restore: creating INDEX "public.IFK_InvoiceLineTrackId"
+pg_restore: creating INDEX "public.IFK_PlaylistTrackTrackId"
+pg_restore: creating INDEX "public.IFK_TrackAlbumId"
+pg_restore: creating INDEX "public.IFK_TrackGenreId"
+pg_restore: creating INDEX "public.IFK_TrackMediaTypeId"
+pg_restore: creating FK CONSTRAINT "public.Album FK_AlbumArtistId"
+pg_restore: creating FK CONSTRAINT "public.Customer FK_CustomerSupportRepId"
+pg_restore: creating FK CONSTRAINT "public.Employee FK_EmployeeReportsTo"
+pg_restore: creating FK CONSTRAINT "public.Invoice FK_InvoiceCustomerId"
+pg_restore: creating FK CONSTRAINT "public.InvoiceLine FK_InvoiceLineInvoiceId"
+pg_restore: creating FK CONSTRAINT "public.InvoiceLine FK_InvoiceLineTrackId"
+pg_restore: creating FK CONSTRAINT "public.PlaylistTrack FK_PlaylistTrackPlaylistId"
+pg_restore: creating FK CONSTRAINT "public.PlaylistTrack FK_PlaylistTrackTrackId"
+pg_restore: creating FK CONSTRAINT "public.Track FK_TrackAlbumId"
+pg_restore: creating FK CONSTRAINT "public.Track FK_TrackGenreId"
+pg_restore: creating FK CONSTRAINT "public.Track FK_TrackMediaTypeId"
+```
+
+</CodeBlock>
 
 ## Data import notes
 
