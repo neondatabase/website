@@ -42,10 +42,10 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
-| --project.id  | Project ID  | string | Only if your Neon account has more than one project |
-| --branch.id   | Branch ID   | string | |
+| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
+| --branch   | Branch ID   | string | |
 
-If a branch ID or name is not provided, the command lists roles for the primary branch of the specified project.
+If a branch ID or name is not provided, the command lists roles for the primary branch of the project.
 
 #### Example
 
@@ -64,7 +64,7 @@ neonctl roles list
 
 ### create
 
-This subcommand allows you to create a database.
+This subcommand allows you to create a role.
 
 #### Usage
 
@@ -78,18 +78,18 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
-| --project.id         | Project ID                           | string | Only if your Neon account has more than one project |
-| --branch.id          | Branch ID                            | string | |
-| --role.name      | The role name. Cannot exceed 63 bytes in length.  | string | &check; |
+| --project-id         | Project ID                           | string | Only if your Neon account has more than one project |
+| --branch          | Branch ID                            | string | |
+| --name      | The role name. Cannot exceed 63 bytes in length.  | string | &check; |
 
-If a branch ID or name is not provided, the command creates a database in the primary branch of the specified project.
+If a branch ID or name is not provided, the command creates a database in the primary branch of the project.
 
 #### Example
 
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl roles create --role.name sally
+neonctl roles create --name sally
 ┌───────┬──────────────────────┐
 │ Name  │ Created At           │
 ├───────┼──────────────────────┤
@@ -101,7 +101,7 @@ neonctl roles create --role.name sally
 
 ### delete
 
-This subcommand allows you to delete a database.
+This subcommand allows you to delete a role.
 
 #### Usage
 
@@ -115,10 +115,10 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `d
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
-| --project.id         | Project ID                           | string | Only if your Neon account has more than one project |
-| --branch.id          | Branch ID                            | string | |
+| --project-id         | Project ID                           | string | Only if your Neon account has more than one project |
+| --branch          | Branch ID                            | string | |
 
-If a branch ID or name is not provided, the command assumes the role to be deleted resides in the primary branch of the project.
+If a branch ID or name is not provided, the command assumes the role Sresides in the primary branch of the project.
 
 #### Example
 
