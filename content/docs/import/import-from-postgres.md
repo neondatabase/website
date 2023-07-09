@@ -132,7 +132,7 @@ This section describes using the `pg_dump` utility to dump data from an existing
 
 ## pg_dump and pg_restore example
 
-The following example shows how data from a `chinook` database was dumped and and restored to a `chinook2` database in Neon using the commands described in the previous section:
+The following example shows how data from a `chinook` database was dumped and restored to a `chinook2` database in Neon using the commands described in the previous section:
 
 <CodeBlock shouldWrap>
 
