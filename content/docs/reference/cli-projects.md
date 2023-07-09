@@ -77,34 +77,26 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 
 | Option                                | Description                                                                                               | Type    | Required                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
-| --project.settings.quota.active_time_seconds | The total amount of time allowed to be spent by project's compute endpoints               | number  |                                       |
-| --project.settings.quota.compute_time_seconds | The total amount of CPU seconds allowed to be spent by project's compute endpoints                   | number  |                                       |
-| --project.settings.quota.written_data_bytes | Total amount of data written to all project's branches                                                | number  |                                       |
-| --project.settings.quota.data_transfer_bytes | Total amount of data transferred from all project's branches using proxy                              | number  |                                       |
-| --project.settings.quota.logical_size_bytes | Limit on the logical size of every project's branch                                                    | number  |                                       |
-| --project.name                        | The project name. If not specified, one is generated for you.                                                                                          | string  |                                       |
-| --project.branch.name                 | The branch name. If not specified, the branch id is used.                                   | string  |                                       |
-| --project.branch.role_name            | The role name. If not specified, the default role name will be used.                                      | string  |                                       |
-| --project.branch.database_name        | The database name. If not specified, the default database name will be used.                               | string  |                                       |
-| --project.provisioner                 | The Neon compute provisioner. `k8s-pod` or `k8s-neonvm`. The `k8s-neonvm` provisioner is required to use _Autoscaling_.                                                                              | string  |                                       |
-| --project.region_id                   | The region identifier. See [the documentation](https://neon.tech/docs/introduction/regions) for the list of supported regions. | string  |                                       |
-| --project.pg_version                  | The major PostgreSQL version number. Currently supported version are `14` and `15`. The default is 15.                        | number  |                                       |
-| --project.store_passwords             | Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization. The default is `true`. | boolean |                                       |
-| --project.history_retention_seconds   | The number of seconds to retain PITR backup history for this project. The default is 604800 seconds (7 days).                  |  number       |                                       |
+| `--name` | The project name. The project ID is used if a name is not specified.               | string  |                                       |
+| `--region-id` | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`. Defaults to `aws-us-east-2` if not specified. | string number  |                                       |
+
 
 #### Example
 
 ```bash
-neonctl projects create
-? Project name (optional) 
-┌────────────────────┬────────────────────┬───────────────┬──────────────────────┐
-│ Id                 │ Name               │ Region Id     │ Created At           │
-├────────────────────┼────────────────────┼───────────────┼──────────────────────┤
-│ silent-dawn-084646 │ silent-dawn-084646 │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
-└────────────────────┴────────────────────┴───────────────┴──────────────────────┘
-```
+neonctl projects create --name mynewproject --region-id aws-us-west-2
+┌───────────────────┬──────────────┬───────────────┬──────────────────────┐
+│ Id                │ Name         │ Region Id     │ Created At           │
+├───────────────────┼──────────────┼───────────────┼──────────────────────┤
+│ muddy-wood-859533 │ mynewproject │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
+└───────────────────┴──────────────┴───────────────┴──────────────────────┘
 
-Specifying a project name is optional when running `neonctl projects create`. If you do not specify one, the project ID is used as the project name.
+┌──────────────────────────────────────────────────────────────────────────────────────┐
+│ Connection Uri                                                                       │
+├──────────────────────────────────────────────────────────────────────────────────────┤
+│ postgres://daniel:<password>@ep-bitter-field-476253.us-west-2.aws.neon.tech/neondb   │
+└──────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### update
 
@@ -120,34 +112,21 @@ The `id` is the project ID, which you can obtain by listing your projects or fro
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` subcommand supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` subcommand supports this option:
 
 | Option                                | Description                                                                                               | Type    | Required                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
-| --project.settings.quota.active_time_seconds | The total amount of time allowed to be spent by project's compute endpoints               | number  |                                       |
-| --project.settings.quota.compute_time_seconds | The total amount of CPU seconds allowed to be spent by project's compute endpoints                   | number  |                                       |
-| --project.settings.quota.written_data_bytes | Total amount of data written to all project's branches                                                | number  |                                       |
-| --project.settings.quota.data_transfer_bytes | Total amount of data transferred from all project's branches using proxy                              | number  |                                       |
-| --project.settings.quota.logical_size_bytes | Limit on the logical size of every project's branch                                                    | number  |                                       |
-| --project.name                        | The project name. If not specified, one is generated for you.                                                                                          | string  |                                       |
-| --project.branch.name                 | The branch name. If not specified, the branch id is used.                                   | string  |                                       |
-| --project.branch.role_name            | The role name. If not specified, the default role name will be used.                                      | string  |                                       |
-| --project.branch.database_name        | The database name. If not specified, the default database name will be used.                               | string  |                                       |
-| --project.provisioner                 | The Neon compute provisioner. `k8s-pod` or `k8s-neonvm`. The latter is required for _Autoscaling_.                                                                              | string  |                                       |
-| --project.region_id                   | The region identifier. See [the documentation](https://neon.tech/docs/introduction/regions) for the list of supported regions. | string  |                                       |
-| --project.pg_version                  | The major PostgreSQL version number. Currently supported version are `14` and `15`. The deafult is 15.                        | number  |                                       |
-| --project.store_passwords             | Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization. The default is `true`. | boolean |                                       |
-| --project.history_retention_seconds   | The number of seconds to retain PITR backup history for this project. The default is 604800 seconds (7 days).                  |  number       |                                       |
+| `--name` | The project name. The value cannot be empty.               | string  |             &check;                          |
 
 #### Example
 
 ```bash
-neonctl projects update silent-dawn-084646 --project.name myproject
-┌────────────────────┬──────────────┬───────────────┬──────────────────────┐
-│ Id                 │ Name         │ Region Id     │ Created At           │
-├────────────────────┼──────────────┼───────────────┼──────────────────────┤
-│ silent-dawn-084646 │ myproject    │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
-└────────────────────┴──────────────┴───────────────┴──────────────────────┘
+neonctl projects update muddy-wood-859533 --name dev_project_1
+┌───────────────────┬───────────────┬───────────────┬──────────────────────┐
+│ Id                │ Name          │ Region Id     │ Created At           │
+├───────────────────┼───────────────┼───────────────┼──────────────────────┤
+│ muddy-wood-859533 │ dev_project_1 │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
+└───────────────────┴───────────────┴───────────────┴──────────────────────┘
 ```
 
 ### delete
@@ -167,12 +146,12 @@ Only [global options](/docs/reference/neon-cli/global-options) apply.
 #### Example
 
 ```bash
-neonctl projects delete silent-dawn-084646
-┌────────────────────┬──────────────┬───────────────┬──────────────────────┐
-│ Id                 │ Name         │ Region Id     │ Created At           │
-├────────────────────┼──────────────┼───────────────┼──────────────────────┤
-│ silent-dawn-084646 │ myproject    │ aws-us-east-2 │ 2023-06-19T18:27:57Z │
-└────────────────────┴──────────────┴───────────────┴──────────────────────┘
+neonctl projects delete muddy-wood-859533
+┌───────────────────┬───────────────┬───────────────┬──────────────────────┐
+│ Id                │ Name          │ Region Id     │ Created At           │
+├───────────────────┼───────────────┼───────────────┼──────────────────────┤
+│ muddy-wood-859533 │ dev_project_1 │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
+└───────────────────┴───────────────┴───────────────┴──────────────────────┘
 ```
 
 Information about the deleted project is displayed. You can verify that the project was deleted by running `neonctl projects list`.
@@ -196,12 +175,12 @@ Only [global options](/docs/reference/neon-cli/global-options) apply.
 #### Example
 
 ```bash
-neonctl projects get spring-sky-578180
-┌───────────────────┬───────────────────┬───────────────┬──────────────────────┐
-│ Id                │ Name              │ Region Id     │ Created At           │
-├───────────────────┼───────────────────┼───────────────┼──────────────────────┤
-│ spring-sky-578180 │ spring-sky-578180 │ aws-us-east-2 │ 2023-06-19T18:27:19Z │
-└───────────────────┴───────────────────┴───────────────┴──────────────────────┘
+neonctl projects get muddy-wood-859533
+┌───────────────────┬───────────────┬───────────────┬──────────────────────┐
+│ Id                │ Name          │ Region Id     │ Created At           │
+├───────────────────┼───────────────┼───────────────┼──────────────────────┤
+│ muddy-wood-859533 │ dev_project_1 │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
+└───────────────────┴───────────────┴───────────────┴──────────────────────┘
 ```
 
 ## Need help?
