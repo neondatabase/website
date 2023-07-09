@@ -1,6 +1,6 @@
 ---
 title: Automate branching with the Neon API
-subtitle: Learn how you can automatically create and delete database branches with the Neon API
+subtitle: Learn how you can automatically create and delete branches with the Neon API
 enableTableOfContents: true
 isDraft: true
 ---
@@ -22,7 +22,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranch).
 
 ```text
-POST /projects/{project_id}/branches 
+POST /projects/{project_id}/branches
 ```
 
 The API method appears as follows when specified in a cURL command:

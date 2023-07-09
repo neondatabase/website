@@ -1,6 +1,6 @@
 ---
 title: Automate branching with the Neon CLI
-subtitle: Learn how you can automatically create and delete database branches with the Neon CLI
+subtitle: Learn how you can automatically create and delete branches with the Neon CLI
 enableTableOfContents: true
 isDraft: true
 ---
@@ -13,9 +13,9 @@ Branch actions performed in the Neon Console can also be performed using the Neo
 
 Before you can run CLI commands, you must be authenticated. ALternative, you can supply an API key usign the `--api-key` option when running a CLI command.
 
-### Create a branch with the API
+### Create a branch with the CLI
 
-The following Neon API method creates a branch. To view the CLI documentation for this method, refer to the [Neon CLI reference](tbd).
+The following Neon CLI command creates a branch. To view the CLI documentation for this method, refer to the [Neon CLI reference](/docs/reference/neon-cli).
 
 ```bash
 neonctl branches create [options] 
@@ -26,7 +26,7 @@ neonctl branches create [options]
 The following Neon CLI command lists branches for the specified project. To view the CLI documentation for this method, refer to the [Neon CLI reference](tbd).
 
 ```bash
-neonctl branches liste [options] 
+neonctl branches list [options] 
 ```
 
 ### Delete a branch with the CLI
