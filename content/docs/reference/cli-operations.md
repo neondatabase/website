@@ -10,6 +10,8 @@ isDraft: true
 - Ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
 - If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
+For information about operations in Neon, see [Operations](/docs/manage/operations).
+
 ## The `operations` command
 
 The `operations` command allows you to list operations for a Neon project.
@@ -42,7 +44,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 
 | Option       | Description | Type   | Required  |
 | ------------ | ----------- | ------ | :------: |
-| --project.id | Project ID  | string |  Only if your Neon account has more than one project |
+| --project-id | Project ID  | string |  Only if your Neon account has more than one project |
 
 #### Example
 

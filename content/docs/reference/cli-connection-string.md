@@ -10,6 +10,8 @@ isDraft: true
 - Ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
 - If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
+For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
+
 ## The `connection string` command
 
 This command constructs a PostgreSQL connection string for connecting to a database in your Neon project. The connection string includes the password for the specified role.
