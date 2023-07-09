@@ -8,7 +8,7 @@ This guide shows how to manage database access in Neon using SQL. This guide wil
 
 ## Understanding roles in Neon
 
-Before you begin, it's important to understand how roles work in Neon. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in your project's primary branch. For example, if I sign up for Neon with a John Smith Google account, the the project is created with a default role named `john`.
+Before you begin, it's important to understand how roles work in Neon. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in your project's primary branch. For example, if you sign up for Neon with a John Smith Google account, the the project is created with a default role named `john`.
 
 Your default Neon role is automatically granted membership in a `neon_superuser` role, which provides the user with the privileges and predefined PostgreSQL role memberships shown in this `CREATE ROLE` statement:
 
