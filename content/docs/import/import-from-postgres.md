@@ -137,7 +137,7 @@ The following example shows how data from a `chinook` database was dumped and an
 <CodeBlock shouldWrap>
 
 ```bash
-pg_dump "postgres://daniel:7eT0ZcFIMkHn@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook" --file=dumpfile.bak -Fc -Z 6 -v
+pg_dump "postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook" --file=dumpfile.bak -Fc -Z 6 -v
 
 pg_dump: last built-in OID is 16383
 pg_dump: reading extensions
@@ -202,7 +202,7 @@ pg_dump: dumping contents of table "public.Track"
 ~/mydump$ ls
 dumpfile.bak
 
-~/mydump$ pg_restore -d postgres://daniel:7eT0ZcFIMkHn@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook2 -Fc --single-transaction dumpfile.bak -v
+~/mydump$ pg_restore -d postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook2 -Fc --single-transaction dumpfile.bak -v
 
 pg_restore: connecting to database for restore
 pg_restore: creating TABLE "public.Album"
