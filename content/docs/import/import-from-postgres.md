@@ -137,7 +137,8 @@ The following example shows how data from a `chinook` database was dumped and re
 <CodeBlock shouldWrap>
 
 ```bash
-pg_dump "postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook" --file=dumpfile.bak -Fc -Z 6 -v
+~$ cd mydump
+~/mydump$ pg_dump "postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook" --file=dumpfile.bak -Fc -Z 6 -v
 
 pg_dump: last built-in OID is 16383
 pg_dump: reading extensions
