@@ -22,7 +22,7 @@ neonctl completion
 The command outputs the completion script with installation instructions, similar to the following:
 
 ```text
-##-begin-neonctl-completions-###
+###-begin-neonctl-completions-###
 #
 # yargs command completion script
 #
@@ -45,13 +45,14 @@ _neonctl_yargs_completions()
     if [ ${#COMPREPLY[@]} -eq 0 ]; then
       COMPREPLY=()
     fi
+
     return 0
 }
 complete -o bashdefault -o default -F _neonctl_yargs_completions neonctl
 ###-end-neonctl-completions-###
 ```
 
-Install this script as instructed in the completion script header by running:
+Install this script as instructed in the script header by running:
 
 ```bash
 neonctl completion >> ~/.bashrc
