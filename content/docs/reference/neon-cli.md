@@ -85,37 +85,14 @@ Global options are supported with any Neon CLI command.
 
 | Option      | Description                         | Type   | Default                           |
 | :---------  | :---------------------------------- | :----- | :-------------------------------- |
-| [--version](#version)   | Show the Neon CLI version number                 | boolean| -                                 |
-| [--help](#help)      | Show the Neon CLI help                           | boolean| -                                 |
 | [-o, --output](#output)| Set the Neon CLI output format (`json`, `yaml`, or `table`)                 | string | table                           |
 | [--config-dir](#config-dir)| Path to the Neon CLI configuration directory            | string | `/home/<user>/.config/neonctl`   |
 | [--api-key](#api-key)   | Neon API key                             | string | ""                                |
 | [--analytics](#analytics) | Manage analytics                    | boolean| true                              |
+| [-v, --version](#version)   | Show the Neon CLI version number                 | boolean| -                                 |
+| [-h, --help](#help)      | Show the Neon CLI help                           | boolean| -                                 |
 
-- <a id="version"></a>`--version`
-
-  Shows the Neon CLI version number.
-
-  ```bash
-  $ neonctl --version
-  1.14.0
-  ```
-
-- <a id="help"></a>`--help`
-
-  Shows the `neonctl` command-line help. You can view help for `neonctl` or a `neonctl` command.
-
-  ```bash
-  neonctl --help
-  ```
-
-  To view the options supported by a particular command:
-
-  ```bash
-  neonctl <command> --help
-  ```
-
-- <a id="output"></a>`--output`
+- <a id="output"></a>`-o, --output`
 
   Sets the output format. Supported options are `json`, `yaml`, and `table`. The default is `table`. Table output may limited to a certain number of columns. The `json` and `yaml` output formats show all output.
 
@@ -142,3 +119,44 @@ Global options are supported with any Neon CLI command.
 - <a id="analytics"></a>`--analytics`
 
   Analytics are enabled by default to gather information about the CLI commands and options that are used by our customers. This data collection assists in offering support, and allows for a better understanding of typical usage patterns so that we can improve user experience. Neon does not collect user-defined data, such as project IDs or command payloads. To opt-out of analytics data collection, specify `--no-analytics` or `--analytics false`.
+
+- <a id="version"></a>`-v, --version`
+
+  Shows the Neon CLI version number.
+
+  ```bash
+  $ neonctl --version
+  1.15.0
+  ```
+
+- <a id="help"></a>`-h, --help`
+
+  Shows the `neonctl` command-line help. You can view help for `neonctl`, a `neonctl` command, or `neonctl` subcommand
+
+  ```bash
+  neonctl --help
+  ```
+
+  To view the options supported by a particular command:
+
+  ```bash
+  neonctl <command> --help
+  ```
+
+  For example:
+
+  ```bash
+  neonctl branches --help
+  ```
+
+  To view the options supported by a particular subcommand:
+
+  ```bash
+  neonctl <command> <subcommand> --help
+  ```
+
+  For example:
+
+  ```bash
+  neonctl branches create --help
+  ```
