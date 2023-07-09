@@ -24,7 +24,7 @@ neonctl branches <subcommand> [options]
 |---------|------------------|
 | [list](#list)    | List branches    |
 | [create](#create)  | Create a branch |
-| [update](#update)   | Update a branch |
+| [rename](#rename)   | Rename a branch |
 | [delete>](#delete)  | Delete a branch |
 | [get>](#get)     | Get a branch    |
 
@@ -44,14 +44,14 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |
-| --project.id | Project ID    | string | Only if your Neon account has more than one project |
+| `--project-id` | Project ID    | string | Only if your Neon account has more than one project |
 
 #### Examples
 
 - List branches with the default Neon CLI output format, which is `table`. The information provided with the `table` output format is limited compared to other formats, such as `json`.
 
     ```bash
-    neonctl branches list
+    neonctl branches list --project-id solitary-leaf-288182
     ┌────────────────────────┬──────────┬──────────────────────┬──────────────────────┐
     │ Id                     │ Name     │ Created At           │ Updated At           │
     ├────────────────────────┼──────────┼──────────────────────┼──────────────────────┤
@@ -64,25 +64,41 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 - List branches with the `json` output format. This format provides more information than the default `table` output format.
 
     ```bash
-    neonctl branches list --output json
+    neonctl branches list --project-id solitary-leaf-288182 --output json
     [
     {
-        "id": "br-small-meadow-878874",
-        "project_id": "throbbing-base-279912",
+        "id": "br-wild-boat-648259",
+        "project_id": "solitary-leaf-288182",
         "name": "main",
         "current_state": "ready",
-        "logical_size": 36749312,
-        "creation_source": "neonctl",
+        "logical_size": 29515776,
+        "creation_source": "console",
         "primary": true,
-        "cpu_used_sec": 156,
-        "compute_time_seconds": 156,
-        "active_time_seconds": 624,
-        "written_data_bytes": 57632,
+        "cpu_used_sec": 78,
+        "compute_time_seconds": 78,
+        "active_time_seconds": 312,
+        "written_data_bytes": 107816,
         "data_transfer_bytes": 0,
-        "created_at": "2023-07-06T13:15:12Z",
-        "updated_at": "2023-07-06T14:26:32Z"
+        "created_at": "2023-07-09T17:01:34Z",
+        "updated_at": "2023-07-09T17:15:13Z"
+    },
+    {
+        "id": "br-shy-cake-201321",
+        "project_id": "solitary-leaf-288182",
+        "parent_id": "br-wild-boat-648259",
+        "parent_lsn": "0/1E88838",
+        "name": "mybranch",
+        "current_state": "ready",
+        "creation_source": "console",
+        "primary": false,
+        "cpu_used_sec": 0,
+        "compute_time_seconds": 0,
+        "active_time_seconds": 0,
+        "written_data_bytes": 0,
+        "data_transfer_bytes": 0,
+        "created_at": "2023-07-09T17:37:10Z",
+        "updated_at": "2023-07-09T17:37:10Z"
     }
-    ]
     ```
 
 ### create
@@ -99,16 +115,14 @@ neonctl branches create [options]
 
 In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` subcommand supports these options:
 
-| Option                                    | Description                                                                               | Type    | Required                               |
-| ----------------------------------------- | ----------------------------------------------------------------------------------------- | ------- | :------: |
-| --project.id                              | Project ID                                                                                | string  | Only if your Neon account has more than one project                              |
-| --branch.parent_id                        | The `branch_id` of the parent branch                                                      | string  |                                       |
-| --branch.name                             | The branch name                                                                           | string  |                                       |
-| --branch.parent_lsn                       | A Log Sequence Number (LSN) on the parent branch. The branch will be created with data from this LSN. The expected format is the same as a value returned by `SELECT pg_current_wal_flush_lsn()`. | string  |                                       |
-| --branch.parent_timestamp                 | A timestamp identifying a point in time on the parent branch. The branch will be created with data starting from this point in time. The expected format is `MM/DD/YYYY hh:mm:ss a`; for example: `06/13/2023 12:00:00 am` | string  |                                       |
-| --endpoint.type                           | The compute endpoint type. Either `read_write` or `read_only`. The `read_only` compute endpoint type is not yet supported. The default value is `read_write`. | string  |              |
-| --endpoint.provisioner                    | The Neon compute provisioner. Supported values are `k8s-pod` and `k8s-neonvm`. The `k8s-neonvm` provisioner is required to use _Autoscaling_.                                                               | string  |      |
-| --endpoint.suspend_timeout_seconds        | Duration of inactivity in seconds after which endpoint will be automatically suspended. Value `0` means use global default, `-1` means never suspend. The maximum value is 604800 seconds (1 week).
+| Option    | Description                                                    | Type    |   Required  |
+| :-------- | :------------------------------------------------------------- | :------ | :---------: |
+| `--project-id` | Project ID    | string | Only if your Neon account has more than one project |
+| `--name`    | The branch name                                                | string  |             |
+| `--parent`  | Parent branch name or id or timestamp or LSN. Defaults to the primary branch | string  |             |
+| `--endpoint`| Create a branch with or without an endpoint. By default, the branch is created with a read-write endpoint. The default value is true. To create a branch without an endpoint, use --no-endpoint | boolean |    |
+| `--readonly`| Create a read-only branch (a branch with a read-only compute endpoint, also referred to in Neon as a read replica.)                                     | boolean |             |
+
 
 #### Examples
 
@@ -134,7 +148,7 @@ neonctl branches create --branch.name mybranch
 └───────────────────────┴──────────┴──────────────────────┴──────────────────────┘
 ```
 
-### update
+### rename
 
 This subcommand allows you to update a branch in a Neon project.
 
