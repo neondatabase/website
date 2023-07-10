@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-With the Neon CLI, you can manage Neon directly from your terminal. The Neon CLI supports numerous operations, such as authentication and management of Neon projects, branches, compute endpoints, databases, roles, and more.
+The Neon CLI supports numerous operations, such as authentication and management of Neon projects, branches, compute endpoints, databases, roles, and more.
 
 The Neon CLI command name is `neonctl`. The GitHub repository for the Neon CLI is found [here](https://github.com/neondatabase/neonctl).
 
@@ -41,7 +41,7 @@ npm i -g neonctl
 
 ### Upgrade
 
-To upgrade to the latest version of the Neon CLI, simply run the `npm i -g neonctl` command again.
+To upgrade to the latest version of the Neon CLI, run the `npm i -g neonctl` command again.
 
 ## Connect
 
@@ -94,7 +94,7 @@ Global options are supported with any Neon CLI command.
 
 - <a id="output"></a>`-o, --output`
 
-  Sets the output format. Supported options are `json`, `yaml`, and `table`. The default is `table`. Table output may limited to a certain number of columns. The `json` and `yaml` output formats show all output.
+  Sets the output format. Supported options are `json`, `yaml`, and `table`. The default is `table`. Table output may limited. The `json` and `yaml` output formats show all data.
 
   ```bash
   neonctl me --output json
@@ -131,32 +131,12 @@ Global options are supported with any Neon CLI command.
 
 - <a id="help"></a>`-h, --help`
 
-  Shows the `neonctl` command-line help. You can view help for `neonctl`, a `neonctl` command, or `neonctl` subcommand
+  Shows the `neonctl` command-line help. You can view help for `neonctl`, a `neonctl` command, or a `neonctl` subcommand, as shown in the following examples:
 
   ```bash
   neonctl --help
-  ```
-
-  To view the options supported by a particular command:
-
-  ```bash
-  neonctl <command> --help
-  ```
-
-  For example:
-
-  ```bash
+ 
   neonctl branches --help
-  ```
-
-  To view the options supported by a particular subcommand:
-
-  ```bash
-  neonctl <command> <subcommand> --help
-  ```
-
-  For example:
-
-  ```bash
+  
   neonctl branches create --help
   ```
