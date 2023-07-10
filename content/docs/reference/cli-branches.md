@@ -120,8 +120,8 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 | `--project-id` | Project ID    | string | Only if your Neon account has more than one project |
 | `--name`    | The branch name                                                | string  |             |
 | `--parent`  | Parent branch name or id or timestamp or LSN. Defaults to the primary branch | string  |             |
-| `--endpoint`| Create a branch with or without an endpoint. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without an endpoint, use `--no-endpoint` | boolean |    |
-| `--readonly`| Create a read-only branch (a branch with a read-only compute endpoint is also referred to as a read replica)                                     | boolean |             |
+| `--compute`| Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute` | boolean |    |
+| `--type`| Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a read replica)                                     | string |             |
 
 
 #### Examples
