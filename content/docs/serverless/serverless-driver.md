@@ -38,12 +38,13 @@ To use the Neon serverless driver, you must use the driver's `neon` function. Yo
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.DATABASE_URL!);
-const post = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
+const {rows: [post]} = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
 // `post` is now [{ id: 12, title: 'My post', ... }] (or undefined)
 ```
 
 ```typescript
 import { drizzle } from 'drizzle-orm/neon-http;
+import { eq } from 'drizzle-orm';
 import { neon } from '@neondatabase/serverless;
 import { posts } from './schema';
 
@@ -51,7 +52,7 @@ export default async () => {
   const postId = 12;
   const sql = neon(process.env.DATABASE_URL!);
   const db = drizzle(sql);
-  const onePost = await db.select().from(posts).where(eq(posts.id, postId));
+  const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
   return new Response(JSON.stringify({ post: onePost }));
 }
 ```
@@ -60,7 +61,7 @@ import { neon } from '@neondatabase/serverless';
 
 export default async (req: Request) => {
   const sql = neon(process.env.DATABASE_URL!);
-  const post = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+  const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
   return new Response(JSON.stringify(post));
 }
 
@@ -77,7 +78,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const sql = neon(process.env.DATABASE_URL!);
-  const post = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+  const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
  
   return res.status(500).send(post);
 }
@@ -106,11 +107,12 @@ You can use the driver in the same way you would use `node-postgres` with `Pool`
 import { Pool } from '@neondatabase/serverless';
 
 const pool = new Pool({connectionString: process.env.DATABASE_URL});
-const post = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
+const {rows: [post]}= await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
 ```
 
 ```typescript
 import { drizzle } from 'drizzle-orm/neon-serverless;
+import { eq } from 'drizzle-orm';
 import { Pool } from '@neondatabase/serverless;
 import { posts } from './schema';
 
@@ -118,7 +120,7 @@ export default async () => {
   const postId = 12;
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
   const db = drizzle(pool);
-  const onePost = await db.select().from(posts).where(eq(posts.id, postId));
+  const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
   return new Response(JSON.stringify({ post: onePost }));
 }
 ```
@@ -129,7 +131,7 @@ export default async (req: Request, ctx: any) => {
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
   await pool.connect();
 
-  const post = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
   ctx.waitUntil(pool.end());
 
   return new Response(JSON.stringify(post), { 
@@ -150,7 +152,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
-  const post = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
  
   return res.status(500).send(post);
 }
