@@ -95,12 +95,12 @@
     }
 
     pre {
-      @apply my-5 !bg-gray-new-98 dark:!bg-gray-new-10;
+      @apply my-5 !bg-gray-new-98 px-0 dark:!bg-gray-new-10;
 
-      code {
+      > code {
         text-shadow: unset;
 
-        @apply highlighted-code !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset];
+        @apply highlighted-code inline-block px-4 !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset] md:min-w-[686px];
       }
     }
 

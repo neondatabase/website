@@ -80,12 +80,12 @@
     }
 
     pre {
-      @apply !bg-black-new;
+      @apply !bg-black-new px-0;
 
-      code {
+      > code {
         text-shadow: unset !important;
 
-        @apply highlighted-code overflow-x-auto !font-mono !text-sm leading-normal !text-white md:min-w-[686px];
+        @apply highlighted-code inline-block overflow-x-auto px-6 !font-mono !text-sm leading-normal !text-white md:min-w-[686px];
       }
     }
 
