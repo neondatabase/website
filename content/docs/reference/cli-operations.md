@@ -40,8 +40,6 @@ neonctl operations list [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-options), the `list` subcommand supports this option:
 
-#### Options
-
 | Option       | Description | Type   | Required  |
 | ------------ | ----------- | ------ | :------: |
 | --project-id | Project ID  | string |  Only if your Neon account has more than one project |

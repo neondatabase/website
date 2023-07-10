@@ -25,8 +25,8 @@ neonctl branches <subcommand> [options]
 | [list](#list)    | List branches    |
 | [create](#create)  | Create a branch |
 | [rename](#rename)   | Rename a branch |
-| [delete>](#delete)  | Delete a branch |
-| [get>](#get)     | Get a branch    |
+| [delete](#delete)  | Delete a branch |
+| [get](#get)     | Get a branch    |
 
 ### list
 
@@ -48,7 +48,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 
 #### Examples
 
-- List branches with the default Neon CLI output format, which is `table`. The information provided with the `table` output format is limited compared to other formats, such as `json`.
+- List branches with the default `table` output format. The information provided with this output format is limited compared to other formats, such as `json`.
 
     ```bash
     neonctl branches list --project-id solitary-leaf-288182
@@ -99,6 +99,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
         "created_at": "2023-07-09T17:37:10Z",
         "updated_at": "2023-07-09T17:37:10Z"
     }
+    ]
     ```
 
 ### create
@@ -119,9 +120,9 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 | :-------- | :------------------------------------------------------------- | :------ | :---------: |
 | `--project-id` | Project ID    | string | Only if your Neon account has more than one project |
 | `--name`    | The branch name                                                | string  |             |
-| `--parent`  | Parent branch name or id or timestamp or LSN. Defaults to the primary branch | string  |             |
+| `--parent`  | Parent branch name, id, timestamp, or LSN. Defaults to the primary branch | string  |             |
 | `--compute`| Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute` | boolean |    |
-| `--type`| Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a read replica)                                     | string |             |
+| `--type`| Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a read replica.                                     | string |             |
 
 
 #### Examples

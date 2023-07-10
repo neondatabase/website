@@ -73,8 +73,6 @@ neonctl projects create [options]
 
 #### Options
 
-There are no required options for creating a Neon project.
-
 In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` subcommand supports these options:
 
 | Option                                | Description                                                                                               | Type    | Required                               |
