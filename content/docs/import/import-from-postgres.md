@@ -113,7 +113,7 @@ This section describes using the `pg_dump` utility to dump data from an existing
     <CodeBlock shouldWrap>
 
     ```bash
-    pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc --single-transaction dumpfile.bak -v
+    pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc --single-transaction -c --if-exists dumpfile.bak -v
     ```
 
     </CodeBlock>
@@ -122,7 +122,7 @@ This section describes using the `pg_dump` utility to dump data from an existing
     The database specified in the command above must exist in Neon. If it does not, create it first. See [/docs/manage/databases#create-a-database].
     </Admonition>
 
-    The example above includes some optional arguments. The `-Fc` option specifies the format of the archive. In this case, `-Fc` indicates a custom-format archive file. The `--single-transaction` option forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.) The `-v` option runs `pg_restore` in verbose mode, allowing you to monitor what happens during the restore operation.
+    The example above includes some optional arguments. The `-Fc` option specifies the format of the archive. In this case, `-Fc` indicates a custom-format archive file. The `--single-transaction` option forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.) The `-c --if-exists` options drop database objects before creating them, if they already exist. The `-v` option runs `pg_restore` in verbose mode, allowing you to monitor what happens during the restore operation.
 
     <Admonition type="note">
     `pg_restore` also supports a `-j` option that specifies the number of concurrent jobs, which can make imports faster. This option is not used in the example above because multiple jobs cannot be used together with the `--single-transaction` option.
@@ -203,7 +203,7 @@ pg_dump: dumping contents of table "public.Track"
 ~/mydump$ ls
 dumpfile.bak
 
-~/mydump$ pg_restore -d postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook2 -Fc --single-transaction dumpfile.bak -v
+~/mydump$ pg_restore -d postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook2 -Fc --single-transaction -c --if-exists dumpfile.bak -v
 
 pg_restore: connecting to database for restore
 pg_restore: creating TABLE "public.Album"
