@@ -4,7 +4,7 @@ subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
 ---
 
-Read replicas are supported with the [Neon Pro plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating and managing read replicas in Neon.
+[Read replicas](/docs/introduction/read-replicas) are supported with the [Neon Pro plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating and managing read replicas in Neon.
 
 The general methodology of using read replicas to segregate read-only work from your production database operations can be applied to a variety of uses cases, such as:
 
