@@ -205,7 +205,52 @@ dumpfile.bak
 
 ~/mydump$ pg_restore -d postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook2 -Fc --single-transaction -c --if-exists dumpfile.bak -v
 
+pg_restore -d postgres://daniel:RsBDNYQo4r8t@ep-mute-fire-194396.eu-central-1.aws.neon.tech/chinook2 -Fc --single-transaction -c --if-exists dumpfile.bak -v
+
 pg_restore: connecting to database for restore
+pg_restore: dropping FK CONSTRAINT Track FK_TrackMediaTypeId
+pg_restore: dropping FK CONSTRAINT Track FK_TrackGenreId
+pg_restore: dropping FK CONSTRAINT Track FK_TrackAlbumId
+pg_restore: dropping FK CONSTRAINT PlaylistTrack FK_PlaylistTrackTrackId
+pg_restore: dropping FK CONSTRAINT PlaylistTrack FK_PlaylistTrackPlaylistId
+pg_restore: dropping FK CONSTRAINT InvoiceLine FK_InvoiceLineTrackId
+pg_restore: dropping FK CONSTRAINT InvoiceLine FK_InvoiceLineInvoiceId
+pg_restore: dropping FK CONSTRAINT Invoice FK_InvoiceCustomerId
+pg_restore: dropping FK CONSTRAINT Employee FK_EmployeeReportsTo
+pg_restore: dropping FK CONSTRAINT Customer FK_CustomerSupportRepId
+pg_restore: dropping FK CONSTRAINT Album FK_AlbumArtistId
+pg_restore: dropping INDEX IFK_TrackMediaTypeId
+pg_restore: dropping INDEX IFK_TrackGenreId
+pg_restore: dropping INDEX IFK_TrackAlbumId
+pg_restore: dropping INDEX IFK_PlaylistTrackTrackId
+pg_restore: dropping INDEX IFK_InvoiceLineTrackId
+pg_restore: dropping INDEX IFK_InvoiceLineInvoiceId
+pg_restore: dropping INDEX IFK_InvoiceCustomerId
+pg_restore: dropping INDEX IFK_EmployeeReportsTo
+pg_restore: dropping INDEX IFK_CustomerSupportRepId
+pg_restore: dropping INDEX IFK_AlbumArtistId
+pg_restore: dropping CONSTRAINT Track PK_Track
+pg_restore: dropping CONSTRAINT PlaylistTrack PK_PlaylistTrack
+pg_restore: dropping CONSTRAINT Playlist PK_Playlist
+pg_restore: dropping CONSTRAINT MediaType PK_MediaType
+pg_restore: dropping CONSTRAINT InvoiceLine PK_InvoiceLine
+pg_restore: dropping CONSTRAINT Invoice PK_Invoice
+pg_restore: dropping CONSTRAINT Genre PK_Genre
+pg_restore: dropping CONSTRAINT Employee PK_Employee
+pg_restore: dropping CONSTRAINT Customer PK_Customer
+pg_restore: dropping CONSTRAINT Artist PK_Artist
+pg_restore: dropping CONSTRAINT Album PK_Album
+pg_restore: dropping TABLE Track
+pg_restore: dropping TABLE PlaylistTrack
+pg_restore: dropping TABLE Playlist
+pg_restore: dropping TABLE MediaType
+pg_restore: dropping TABLE InvoiceLine
+pg_restore: dropping TABLE Invoice
+pg_restore: dropping TABLE Genre
+pg_restore: dropping TABLE Employee
+pg_restore: dropping TABLE Customer
+pg_restore: dropping TABLE Artist
+pg_restore: dropping TABLE Album
 pg_restore: creating TABLE "public.Album"
 pg_restore: creating TABLE "public.Artist"
 pg_restore: creating TABLE "public.Customer"
