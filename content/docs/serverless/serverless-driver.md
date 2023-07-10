@@ -43,9 +43,9 @@ const {rows: [post]} = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
 ```
 
 ```typescript
-import { drizzle } from 'drizzle-orm/neon-http;
+import { drizzle } from 'drizzle-orm/neon-http';
 import { eq } from 'drizzle-orm';
-import { neon } from '@neondatabase/serverless;
+import { neon } from '@neondatabase/serverless';
 import { posts } from './schema';
 
 export default async () => {
@@ -71,6 +71,7 @@ export const config = {
 ```
 
 ```ts
+import { neon } from '@neondatabase/serverless';
 import type { NextApiRequest, NextApiResponse } from 'next';
  
 export default async function handler(
@@ -111,9 +112,9 @@ const {rows: [post]}= await pool.query('SELECT * FROM posts WHERE id =$1', [post
 ```
 
 ```typescript
-import { drizzle } from 'drizzle-orm/neon-serverless;
+import { drizzle } from 'drizzle-orm/neon-serverless';
 import { eq } from 'drizzle-orm';
-import { Pool } from '@neondatabase/serverless;
+import { Pool } from '@neondatabase/serverless';
 import { posts } from './schema';
 
 export default async () => {
@@ -141,10 +142,10 @@ export default async (req: Request, ctx: any) => {
 
 export const config = {
   runtime: 'edge',
-  regions: ['iad1'],  // specify the region nearest your Neon DB
 };
 ```
 ```ts
+import { Pool } from '@neondatabase/serverless';
 import type { NextApiRequest, NextApiResponse } from 'next';
  
 export default async function handler(
