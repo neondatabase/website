@@ -10,32 +10,6 @@ The driver is a drop-in replacement for [node-postgres](https://node-postgres.co
 
 The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
 
-## HTTP or WebSockets?
-
-The Neon serverless driver supports querying over HTTP and WebSockets. Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is fast but only supports sending one query at a time. If you use single-shot queries, such as the one shown below, with no sessions or transactions, consider using HTTP for faster responses.
-
-```js
-const [post] = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-```
-
-If you are working with sessions and transactions, as in the example below, or require full `node-postgres` compatibility to enable query libraries like [Kysely](https://kysely.dev/) or [Zapatos](https://jawj.github.io/zapatos/), use WebSockets.
-
-```js
-try {
-  await client.query('BEGIN');
-  const { rows: [{ id: postId }] } = await client.query('INSERT INTO posts (title) VALUES ($1) RETURNING id', ['Welcome']);
-  await client.query('INSERT INTO photos (post_id, url) VALUES ($1, $2)', [postId, 's3.bucket/photo/url']);
-  await client.query('COMMIT');
-
-} catch (err) {
-  await client.query('ROLLBACK');
-  throw err;
-
-} finally {
-  client.release();
-}
-```
-
 ## Install the Neon serverless driver
 
 You can install the driver with your preferred JavaScript package manager. For example:
@@ -56,196 +30,131 @@ DATABASE_URL=postgres://<user>:<password>@<endpoint>.<region>.aws.neon.tech/<dbn
 
 ## How to use the driver
 
-You can use the driver in the same way you would use `node-postgres`. Where you usually import `pg`, import `@neondatabase/serverless` instead. The following sections show how to use the driver over HTTP and WebSockets.
+To use the Neon serverless driver, you must use the driver's `neon` function. You can use raw SQL queries or [Drizzle-ORM](https://orm.drizzle.team/docs/installation-and-db-connection/postgresql/neon) for type safety. For example: -->
 
-## Use the driver over HTTP
+<CodeTabs labels={["Node.js", "Vercel Edge Function", "Drizzle-ORM"]}>
 
-To use the Neon serverless driver over HTTP, you must use the driver's `neon` function. For example:
+```javascript
+import { neon } from '@neondatabase/serverless';
 
+const sql = neon(process.env.DATABASE_URL!);
+const post = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
+// `post` is now [{ id: 12, title: 'My post', ... }] (or undefined)
+```
 ```js
 import { neon } from '@neondatabase/serverless';
-const sql = neon(process.env.DATABASE_URL);
 
-const [post] = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-// `post` is now { id: 12, title: 'My post', ... } (or undefined)
+export default async (req: Request, ctx: any) => {
+  const sql = neon(process.env.DATABASE_URL!);
+  const post = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+  return new Response(JSON.stringify(post));
+}
+
+export const config = {
+  runtime: 'edge',
+};
 ```
 
-<Admonition type="note">
-Interpolating `${postId}` in the example above is [safe from SQL injection](https://neon.tech/blog/sql-template-tags).
-</Admonition>
+```typescript
+import { drizzle } from 'drizzle-orm/neon-http;
+import { neon } from '@neondatabase/serverless;
+import { posts } from './schema';
 
-You can turn this example into a complete API endpoint deployed on Vercel Edge Functions at https://myapp.vercel.dev/api/post?postId=123 by following these steps:
+export default async () => {
+  const postId = 12;
+  const sql = neon(process.env.DATABASE_URL!);
+  const db = drizzle(sql);
+  const onePost = await db.select().from(posts).where(eq(posts.id, postId));
+  return new Response(JSON.stringify({ post: onePost }));
+}
+```
 
-1. Create a new file, `api/post.ts`, and add the following code:
+</CodeTabs>
 
-    ```js
-    import { neon } from '@neondatabase/serverless';
-    const sql = neon(process.env.DATABASE_URL);
+### Use experimental caching
 
-    export default async (req: Request, ctx: any) => {
-    // get and validate the `postId` query parameter
-    const postId = parseInt(new URL(req.url).searchParams.get('postId'), 10);
-    if (isNaN(postId)) return new Response('Bad request', { status: 400 });
+Connection caching allows Neon proxy to find the compute node attached to your database quicker. Connection caching is experimental and on opt-in only. You can try it by setting `fetchConnectionCache` to true in the `neonConfig` object.
 
-    // query and validate the post
-    const [post] = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-    if (!post) return new Response('Not found', { status: 404 });
+```ts
+import { neon, neonConfig } from '@neondatabase/serverless';
 
-    // return the post as JSON
-    return new Response(JSON.stringify(post), { 
-        headers: { 'content-type': 'application/json' }
-    });
-    }
+neonConfig.fetchConnectionCache = true; // Opt-in to experimental connection caching
+const sql = neon(process.env.DATABASE_URL!);
+```
 
-    export const config = {
-    runtime: 'edge',
-    regions: ['iad1'],  // specify the region nearest your Neon DB
-    };
-    ```
+## Using node-postgres Pool or Client
 
-2. Deploy the Vercel Edge Function using the following commands:
+You can use the driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
 
-    ```shell
-    npm install -g vercel  # install vercel CLI
-    npx vercel env add DATABASE_URL  # paste Neon connection string, select all environments
-    npx vercel dev  # check working locally, then ...
-    npx vercel deploy
-    ```
+<CodeTabs labels={["Node.js", "Vercel Edge Function","Drizzle-ORM"]}>
+
+```javascript
+import { Pool } from '@neondatabase/serverless';
+
+const pool = await pool({connectionString: process.env.DATABASE_URL});
+const post = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
+```
+
+```js
+import { Client } from '@neondatabase/serverless';
+
+export default async (req: Request, ctx: any) => {
+  const client = new Client(process.env.DATABASE_URL);
+  await client.connect();
+
+  const post = await client.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  ctx.waitUntil(client.end());
+
+  return new Response(JSON.stringify(post), { 
+    headers: { 'content-type': 'application/json' }
+  });
+}
+
+export const config = {
+  runtime: 'edge',
+  regions: ['iad1'],  // specify the region nearest your Neon DB
+};
+```
+
+```typescript
+import { drizzle } from 'drizzle-orm/neon-serverless;
+import { Pool } from '@neondatabase/serverless;
+import { posts } from './schema';
+
+export default async () => {
+  const postId = 12;
+  const pool = await pool({connectionString: process.env.DATABASE_URL});
+  const db = drizzle(pool);
+  const onePost = await db.select().from(posts).where(eq(posts.id, postId));
+  return new Response(JSON.stringify({ post: onePost }));
+}
+```
+
+</CodeTabs>
+
+## When should you use Pool and neon
+
+### Use the driver with neon
+
+The Neon serverless driver supports querying over HTTP with `neon` function and WebSockets using `Pool` or `Client`. Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single-shot queries such as the one shown below: 
+
+```js
+const post = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
+```
+
+If you use single-shot queries with no sessions or transactions, consider using HTTP for faster responses.
 
 ### Additional configuration options
 
 The `neon(...)` function has configuration options for customizing the return format of the query function. See [options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration) in the driver's GitHub repository for information about those options.
 
-## Use the driver over WebSockets
+### Use the driver with Pool or Client
 
 To use the Neon serverless driver over WebSockets, use either the `Pool` or `Client` constructor. These constructors provide session and transaction support, as well as `node-postgres` compatibility. The full API guide for the `Pool` and `Client` constructors can be found in the [node-postgres](https://node-postgres.com/) documentation.
 
-When using these constructors, there are two key points you need to know:
-
-- In Node.js and some other environments, there's no built-in WebSocket support. In these cases, you must supply a WebSocket constructor function.
-- In serverless environments such as Vercel Edge Functions or Cloudflare Workers, WebSocket connections cannot outlive a single request. That means `Pool` or `Client` objects must be connected, used, and closed within a single request handler. Don't create these objects outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them.
-
-These points are demonstrated in the following examples.
-
-### Node.js with `Pool.connect()`
-
-In Node.js, it takes two lines to configure WebSocket support. For example:
-
-```js
-import { Pool, neonConfig } from '@neondatabase/serverless';
-
-import ws from 'ws';
-neonConfig.webSocketConstructor = ws;  // <-- this is the key part
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-pool.on('error', err => console.error(err));
-// ...
-
-const client = await pool.connect();
-
-try {
-  await client.query('BEGIN');
-  const { rows: [{ id: postId }] } = await client.query('INSERT INTO posts (title) VALUES ($1) RETURNING id', ['Welcome']);
-  await client.query('INSERT INTO photos (post_id, url) VALUES ($1, $2)', [postId, 's3.bucket/photo/url']);
-  await client.query('COMMIT');
-
-} catch (err) {
-  await client.query('ROLLBACK');
-  throw err;
-
-} finally {
-  client.release();
-}
-
-// ...
-await pool.end();
-```
-
-Other WebSocket libraries are available. For example, you could replace `ws` in the above example with `undici`:
-
-```js
-import { WebSocket } from 'undici';
-neonConfig.webSocketConstructor = WebSocket; 
-```
-
-### Vercel Edge Function with `Pool.query()`
-
-You can rewrite the earlier example above as a Vercel Edge Function using `Pool`, as follows:
-
-```js
-import { Pool } from '@neondatabase/serverless';
-
-// *don't* create a `Pool` or `Client` here, outside the request handler
-
-export default async (req: Request, ctx: any) => {
-  // create a `Pool` inside the request handler
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-
-  // get and validate the `postId` query parameter
-  const postId = parseInt(new URL(req.url).searchParams.get('postId'), 10);
-  if (isNaN(postId)) return new Response('Bad request', { status: 400 });
-
-  // query and validate the post
-  const [post] = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
-  if (!post) return new Response('Not found', { status: 404 });
-
-  // end the `Pool` inside the same request handler 
-  // (unlike `await`, `ctx.waitUntil` won't hold up the response)
-  ctx.waitUntil(pool.end());
-
-  // return the post as JSON
-  return new Response(JSON.stringify(post), { 
-    headers: { 'content-type': 'application/json' }
-  });
-}
-
-export const config = {
-  runtime: 'edge',
-  regions: ['iad1'],  // specify the region nearest your Neon DB
-};
-```
-
-<Admonition type="note">
-The pooling capabilities of `Pool` are not used in this example. But it's slightly briefer than using `Client` and, because `Pool.query` is designed for one-shot queries, we may, in the future, automatically route these queries over HTTPS for lower latency.
-</Admonition>
-
-### Vercel Edge Function with `Client`
-
-Using `Client` instead, the Vercel Edge Function example looks like this:
-
-```js
-import { Client } from '@neondatabase/serverless';
-
-// don't create a `Pool` or `Client` here, outside the request handler
-
-export default async (req: Request, ctx: any) => {
-  // create a `Client` inside the request handler
-  const client = new Client(process.env.DATABASE_URL);
-  await client.connect();
-
-  // get and validate the `postId` query parameter
-  const postId = parseInt(new URL(req.url).searchParams.get('postId'), 10);
-  if (isNaN(postId)) return new Response('Bad request', { status: 400 });
-
-  // query and validate the post
-  const [post] = await client.query('SELECT * FROM posts WHERE id = $1', [postId]);
-  if (!post) return new Response('Not found', { status: 404 });
-
-  // end the `Client` inside the same request handler 
-  // (unlike `await`, `ctx.waitUntil` won't hold up the response)
-  ctx.waitUntil(client.end());
-
-  // return the post as JSON
-  return new Response(JSON.stringify(post), { 
-    headers: { 'content-type': 'application/json' }
-  });
-}
-
-export const config = {
-  runtime: 'edge',
-  regions: ['iad1'],  // specify the region nearest your Neon DB
-};
-```
+You should use the driver with `Pool` or `Client` in the following scenarios:
+- You already use `node-postgres` in your code base and would like to migrate to using `@neondatabase/serverless`.
+- Your backend service executed several queries per connection.
 
 ### Configuration options for `Pool` and `Client`
 
