@@ -205,8 +205,6 @@ dumpfile.bak
 
 ~/mydump$ pg_restore -d postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook2 -Fc --single-transaction -c --if-exists dumpfile.bak -v
 
-pg_restore -d postgres://daniel:RsBDNYQo4r8t@ep-mute-fire-194396.eu-central-1.aws.neon.tech/chinook2 -Fc --single-transaction -c --if-exists dumpfile.bak -v
-
 pg_restore: connecting to database for restore
 pg_restore: dropping FK CONSTRAINT Track FK_TrackMediaTypeId
 pg_restore: dropping FK CONSTRAINT Track FK_TrackGenreId
