@@ -7,6 +7,8 @@ isDraft: true
 
 Neon read replicas are independent read-only compute instances designed to perform read operations on the same data as your read-write computes. The Neon read replica implementation does not replicate data across database instances. Instead, all read requests are directed to a single source — a capability made possible by Neon's architecture, which separates storage and compute. The following diagram shows how read-write and read-only compute instances send read requests to the same Neon [Pageserver](/docs/refernce/glossary#pageserver).
 
+![Read-only compute instances](/docs/introduction/read_replicas.png)
+
 In data replication terms, Neon's read replica feature is considered asynchronous. As updates are made by your read-write computes, the latest changes are first persisted by Safekeepers via Paxos concensus algorithm and then made available to Neon Pageservers via a Write-Ahead Log (WAL) stream. Neon supports creating read replicas in the same region as your database. Cross-region read replicas are currently not supported. You can expect that feature in a future release.
 
 You can instantly create one or more read replicas for any branch in your Neon project and configure the amount of vCPU and memory allocated to each. Read replicas also support Neon's Autoscaling and Auto-suspend features, providing you with control over the compute resources used by your read replicas.
