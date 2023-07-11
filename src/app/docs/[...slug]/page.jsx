@@ -40,14 +40,14 @@ export async function generateMetadata({ params }) {
   if (!post) return notFound();
 
   const {
-    data: { title, ogImage },
+    data: { title },
     excerpt,
   } = post;
 
   return getMetadata({
     title: `${title} - Neon Docs`,
     description: isReleaseNotes ? 'The latest product updates from Neon' : excerpt,
-    imagePath: ogImage,
+    imagePath: 'https://neon-next-git-og-image-neondatabase.vercel.app/api/docs-og',
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isReleaseNotes ? `${LINKS.releaseNotes}/rss.xml` : null,
     type: 'article',
