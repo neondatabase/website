@@ -254,7 +254,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `u
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
 | --project-id  | Project ID  | string | Only if your Neon account has more than one project |
-| `--type`| Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a read replica. A branch can have a single read-write compute endpoint, but multiple read-only compute endpoints are permitted.                                     | string |             |
+| `--type`| Type of compute to add. Choices are `read_only` (the default) or `read_write`. A branch with a read-only compute endpoint is also referred to as a read replica. A branch can have a single read-write and multiple read-only compute endpoints.                                     | string |             |
 
 #### Example
 
