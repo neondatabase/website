@@ -26,7 +26,7 @@ neonctl branches <subcommand> [options]
 | [create](#create)  | Create a branch |
 | [rename](#rename)   | Rename a branch |
 | [set-primary](#set-primary)   | Rename a branch |
-| [add-compute](#add-compute)   | Rename a branch |
+| [add-compute](#add-compute)   | Add replica to a branch |
 | [delete](#delete)  | Delete a branch |
 | [get](#get)     | Get a branch    |
 
