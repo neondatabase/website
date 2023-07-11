@@ -80,12 +80,20 @@
     }
 
     pre {
-      @apply !bg-black-new px-0;
+      @apply !bg-black-new;
+
+      &.highlight {
+        @apply px-0;
+
+        > code {
+          @apply inline-block w-full px-6 !leading-relaxed;
+        }
+      }
 
       > code {
         text-shadow: unset !important;
 
-        @apply highlighted-code inline-block w-full overflow-x-auto px-6 !font-mono !text-sm !leading-[1.725] !text-white md:min-w-[686px];
+        @apply highlighted-code overflow-x-auto !font-mono !text-sm !text-white md:min-w-[686px];
       }
     }
 

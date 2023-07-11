@@ -95,12 +95,20 @@
     }
 
     pre {
-      @apply my-5 !bg-gray-new-98 px-0 dark:!bg-gray-new-10;
+      @apply my-5 !bg-gray-new-98 dark:!bg-gray-new-10;
+
+      &.highlight {
+        @apply px-0;
+
+        > code {
+          @apply inline-block w-full px-4 !leading-relaxed;
+        }
+      }
 
       > code {
         text-shadow: unset;
 
-        @apply highlighted-code inline-block w-full px-4 !font-mono text-sm !leading-[1.725] !text-black-new dark:!text-white dark:![text-shadow:unset] md:min-w-[686px];
+        @apply highlighted-code !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset] md:min-w-[686px];
       }
     }
 

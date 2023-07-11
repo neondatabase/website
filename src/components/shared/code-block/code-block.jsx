@@ -60,7 +60,7 @@ const CodeBlock = ({
         language={snippetLanguage}
         useInlineStyles={false}
         showLineNumbers={showLineNumbers || highlight !== ''}
-        className="no-scrollbars"
+        className={clsx('no-scrollbars', { highlight: highlight !== '' })}
         lineProps={(lineNumber) => ({
           style: {
             display: 'flex',
