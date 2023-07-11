@@ -17,7 +17,7 @@ You can instantly create one or more read replicas for any branch in your Neon p
 
 Neon's read replicas have a number of potential applications:
 
-- **Throughput enhancement**: By distributing read requests among multiple read replicas, you can achieve higher throughput for both read-write and read-only workloads.
+- **Increase throughput**: By distributing read requests among multiple read replicas, you can achieve higher throughput for both read-write and read-only workloads.
 - **Workload offloading**: Assign reporting or analytical workloads to a read replica to prevent any impact on the performance of read-write application workloads.
 - **Access control**: Provide read-only data access to certain users or applications that do not need write access.
 - **Resource customization**: Configure different CPU and memory resources for each read replica to cater to the specific needs of different users and applications.
