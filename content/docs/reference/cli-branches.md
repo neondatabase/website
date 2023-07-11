@@ -124,7 +124,6 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 | `--compute`| Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute` | boolean |    |
 | `--type`| Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a read replica.                                     | string |             |
 
-
 #### Examples
 
 - Create a branch:
