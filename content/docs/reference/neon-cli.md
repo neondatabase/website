@@ -72,7 +72,7 @@ The Neon CLI supports autocompletion, which you can configure in a few easy step
 | [auth](../reference/cli-auth)                                     |                                        | Authenticate              |
 | [projects](../reference/cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | Manage projects           |
 | [me](../reference/cli-me)                                         |                                        | Show current user         |
-| [branches](../reference/cli-branches)                             | `list`, `create`, `update`, `delete`, `get` | Manage branches           |
+| [branches](../reference/cli-branches)                             | `list`, `create`, `rename`, `add-compute`, `set-primary`, `delete`, `get` | Manage branches           |
 | [databases](../reference/cli-databases)                           | `list`, `create`, `delete`             | Manage databases          |
 | [roles](../reference/cli-roles)                                   | `list`, `create`,  `delete`            | Manage roles              |
 | [operations](../reference/cli-operations)                         | `list`                                 | Manage operations         |
