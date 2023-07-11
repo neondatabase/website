@@ -130,7 +130,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 - Create a branch:
 
 ```bash
-neonctl branches createbranch
+neonctl branches create
 ┌───────────────────────────┬───────────────────────────┬──────────────────────┬──────────────────────┐
 │ Id                        │ Name                      │ Created At           │ Updated At           │
 ├───────────────────────────┼───────────────────────────┼──────────────────────┼──────────────────────┤
