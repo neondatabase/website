@@ -100,7 +100,7 @@
       > code {
         text-shadow: unset;
 
-        @apply highlighted-code inline-block px-4 !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset] md:min-w-[686px];
+        @apply highlighted-code inline-block w-full px-4 !font-mono text-sm !leading-[1.725] !text-black-new dark:!text-white dark:![text-shadow:unset] md:min-w-[686px];
       }
     }
 
