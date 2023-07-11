@@ -33,7 +33,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 | --project-id  | Project ID   | string |  Only if your Neon account has more than one project |
 | --role-name   | Role name    | string | Only if your branch has more than one role |
 | --database-name| Database name| string | Only if your branch has more than one database |
-| --pooled | Cconstruct a pooled connection. The default is `false`. |boolean||
+| --pooled | Construct a pooled connection. The default is `false`. |boolean||
 | --prisma | Construct a connection string for use with Prisma. The default is `false`. |boolean||
 
 ### Examples
