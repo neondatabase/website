@@ -96,6 +96,10 @@
       slug: manage/operations
 - title: Guides
   items:
+    - title: Neon features
+      items:
+        - title: Read replicas
+          slug: guides/read-replica-guide
     - title: Languages
       items:
         - title: Elixir
