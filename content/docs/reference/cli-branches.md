@@ -164,7 +164,7 @@ neonctl branches create --name mybranch
 - Create a branch with a read-only compute endpoint (a read replica)
 
 ```bash
-neonctl branches create --name my_read_replica_branch --readonly
+neonctl branches create --name my_read_replica_branch --type read_only
 ```
 
 - Create a branch from a parent branch other than your `main` branch
