@@ -4,7 +4,7 @@ subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
 ---
 
-[Read replicas](/docs/introduction/read-replicas) are supported with the [Neon Pro plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating and managing read replicas in Neon.
+[Read replicas](/docs/introduction/read-replicas) are supported with the [Neon Pro plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating and managing read replicas.
 
 The general methodology of using read replicas to segregate read-only work from your production database operations can be applied to a variety of uses cases, such as:
 
@@ -21,7 +21,7 @@ Neon supports managing read replicas programmatically using the Neon API. See [M
 
 ## Prerequisites
 
-- A [Pro plan](/docs/introductin/pro-plan) account. The read replica feature is a Neon Pro plan feature.
+- A [Pro plan](/docs/introductin/pro-plan) account.
 - A [Neon project](/docs/manage/projects#create-a-project).
 
 ## Create a read replica
@@ -65,9 +65,9 @@ Connecting to a read replica is the same as connecting to any branch, except you
     - role: `daniel`
     - password:`<pasword>`
     - hostname: `ep-mute-rain-952417.us-east-2.aws.neon.tech`
-    - database name: `neondb`
+    - database name: `neondb`. This ihe default Neon database. Your database name may differ.
 
-    When you use this connection string, you are connecting to the read replica. No write operations are permitted on this connection.
+    When you use a read-only connection string, you are connecting to a read replica. No write operations are permitted on this connection.
 
 ## Viewing read replicas
 
