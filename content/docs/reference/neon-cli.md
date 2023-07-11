@@ -94,7 +94,7 @@ Global options are supported with any Neon CLI command.
 
 - <a id="output"></a>`-o, --output`
 
-  Sets the output format. Supported options are `json`, `yaml`, and `table`. The default is `table`. Table output may limited. The `json` and `yaml` output formats show all data.
+  Sets the output format. Supported options are `json`, `yaml`, and `table`. The default is `table`. Table output may be limited. The `json` and `yaml` output formats show all data.
 
   ```bash
   neonctl me --output json
