@@ -11,7 +11,7 @@ Ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-t
 
 ## The `completion` command
 
-This command generates a completion script specifically designed for the `neonctl` command-line interface (CLI). The completion script, when installed, helps you  type `neonctl` commands faster and more accurately. It does this by presenting the possible commands and options when you press the tab key after typing or partially typing a command or option.
+This command generates a completion script specifically designed for the `neonctl` command-line interface (CLI). The completion script, when installed, helps you type `neonctl` commands faster and more accurately. It does this by presenting the possible commands and options when you press the tab key after typing or partially typing a command or option.
 
 ### Usage
 
