@@ -15,6 +15,10 @@ Neon supports creating read replicas in the same region as your database. Cross-
 
 You can instantly create one or more read replicas for any branch in your Neon project and configure the amount of vCPU and memory allocated to each. Read replicas also support Neon's Autoscaling and Auto-suspend features, providing you with control over the compute resources used by your read replicas.
 
+<video autoPlay playsInline muted loop width="800" height="600">
+  <source type="video/mp4" src="/docs/introduction/read_replicas_demo.mp4"/>
+</video>
+
 ## Use cases
 
 Neon's read replicas have a number of potential applications:
