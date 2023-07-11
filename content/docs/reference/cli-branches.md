@@ -12,7 +12,7 @@ isDraft: true
 
 ## The `branches` command
 
-The `branches` command allows you to list, create, update, delete, and retrieve information about branches in your Neon project.
+The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the primary primary branch and adding a compute endpoint to a branch. You can create a read replica by adding a read-only compute endpoint to a branch.
 
 ### Usage
 
@@ -25,6 +25,8 @@ neonctl branches <subcommand> [options]
 | [list](#list)    | List branches    |
 | [create](#create)  | Create a branch |
 | [rename](#rename)   | Rename a branch |
+| [set-primary](#set-primary)   | Rename a branch |
+| [add-compute](#add-compute)   | Rename a branch |
 | [delete](#delete)  | Delete a branch |
 | [get](#get)     | Get a branch    |
 
@@ -200,6 +202,69 @@ neonctl branches rename mybranch teambranch
 ├───────────────────────┼────────────┼──────────────────────┼──────────────────────┤
 │ br-rough-sound-590393 │ teambranch │ 2023-07-09T20:46:58Z │ 2023-07-09T21:02:27Z │
 └───────────────────────┴────────────┴──────────────────────┴──────────────────────┘
+```
+
+### set-primary
+
+This subcommand allows you to set a branch as the primary branch in your Neon project.
+
+#### Usage
+
+```bash
+neonctl branches set-primary <id|name> [options]
+```
+
+`<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
+
+#### Options
+
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `updaterename` subcommand supports this option:
+
+| Option        | Description | Type   | Required  |
+| ------------- | ----------- | ------ | :-----: |
+| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
+
+#### Example
+
+```bash
+neonctl branches set-primary mybranch
+┌────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                 │ Name     │ Primary │ Created At           │ Updated At           │
+├────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-odd-frog-703504 │ mybranch │ true    │ 2023-07-11T12:22:12Z │ 2023-07-11T12:22:59Z │
+└────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
+```
+
+### add-compute
+
+This subcommand allows you to add a compute endpoint to an existing branch in your Neon project.
+
+#### Usage
+
+```bash
+neonctl branches add-compute <id|name>
+```
+
+`<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
+
+#### Options
+
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `updaterename` subcommand supports this option:
+
+| Option        | Description | Type   | Required  |
+| ------------- | ----------- | ------ | :-----: |
+| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
+| `--type`| Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a read replica. A branch can have a single read-write compute endpoint, but multiple read-only compute endpoints are permitted.                                     | string |             |
+
+#### Example
+
+```bash
+neonctl branches add-compute mybranch --type read_only 
+┌─────────────────────┬──────────────────────────────────────────────────┐
+│ Id                  │ Host                                             │
+├─────────────────────┼──────────────────────────────────────────────────┤
+│ ep-rough-lab-865061 │ ep-rough-lab-865061.ap-southeast-1.aws.neon.tech │
+└─────────────────────┴──────────────────────────────────────────────────┘
 ```
 
 ### delete
