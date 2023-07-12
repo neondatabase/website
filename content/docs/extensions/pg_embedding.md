@@ -72,6 +72,10 @@ In summary, the query retrieves the ID of the record from the `documents` table 
 
 ### Create an HNSW index
 
+<Admonition type="important">
+The amount of compute memory available with the Neon Free Tier supports indexing up 50K rows (with metadata) and embeddings with up to 1536 dimensions. Larger data sizes require compute instances with more memory, available with the [Neon Pro plan](https://console.neon.tech/app/billing). The Neon Pro plan includes an Autoscaling feature, but this feature does not account for the memory used by an HNSW index. You must therefore select a fixed size compute when selecting a larger compute size. For instructions, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+</Admonition>
+
 To optimize search behavior, you can add an HNSW index. To create the HNSW index on your vector column, use a `CREATE INDEX` statement similar to the following:
 
 ```sql
