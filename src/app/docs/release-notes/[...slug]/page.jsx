@@ -81,12 +81,12 @@ const ReleaseNotePage = async ({ currentSlug }) => {
         />
       )}
       <Hero
-        className="flex justify-center pt-40 dark:bg-gray-new-8 dark:text-white lg:pt-16 md:mb-10 md:py-10 sm:mb-7 sm:py-7"
+        className="flex justify-center pt-40 dark:bg-gray-new-8 dark:text-white lg:pt-16 md:py-10 sm:py-7"
         date={label}
         withContainer
         isReleaseNotePost
       />
-      <div className="pb-28 dark:bg-gray-new-8 lg:pb-20 md:pb-16">
+      <div className="grow pb-28 dark:bg-gray-new-8 lg:pb-20 md:pb-16">
         <Container size="xs" className="relative flex pb-10">
           <article className="relative flex flex-col items-start">
             <time
