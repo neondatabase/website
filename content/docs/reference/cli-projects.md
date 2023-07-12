@@ -80,7 +80,6 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 | `--name` | The project name. The project ID is used if a name is not specified.               | string  |                                       |
 | `--region-id` | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`. Defaults to `aws-us-east-2` if not specified. | string number  |                                       |
 
-
 #### Example
 
 ```bash

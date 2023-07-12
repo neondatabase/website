@@ -12,7 +12,7 @@ isDraft: true
 
 ## The `branches` command
 
-The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the primary primary branch and adding a compute endpoint to a branch. You can create a read replica by adding a read-only compute endpoint to a branch.
+The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the primary branch and adding a compute endpoint to a branch. You can create a [read replica](/docs/introduction/read-replicas) by adding a read-only compute endpoint.
 
 ### Usage
 
@@ -124,7 +124,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 | `--name`    | The branch name                                                | string  |             |
 | `--parent`  | Parent branch name, id, timestamp, or LSN. Defaults to the primary branch | string  |             |
 | `--compute`| Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute` | boolean |    |
-| `--type`| Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a read replica.                                     | string |             |
+| `--type`| Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas).                                     | string |             |
 
 #### Examples
 
@@ -132,27 +132,17 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 
 ```bash
 neonctl branches create
-┌───────────────────────────┬───────────────────────────┬──────────────────────┬──────────────────────┐
-│ Id                        │ Name                      │ Created At           │ Updated At           │
-├───────────────────────────┼───────────────────────────┼──────────────────────┼──────────────────────┤
-│ br-tight-waterfall-174832 │ br-tight-waterfall-174832 │ 2023-07-09T20:42:18Z │ 2023-07-09T20:42:18Z │
-└───────────────────────────┴───────────────────────────┴──────────────────────┴──────────────────────┘
-
+┌─────────────────────┬─────────────────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                  │ Name                │ Primary │ Created At           │ Updated At           │
+├─────────────────────┼─────────────────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-round-sun-825586 │ br-round-sun-825586 │ false   │ 2023-07-12T05:25:39Z │ 2023-07-12T05:25:39Z │
+└─────────────────────┴─────────────────────┴─────────┴──────────────────────┴──────────────────────┘
 endpoints
-
-┌─────────────────────┬──────────────────────┐
-│ Id                  │ Created At           │
-├─────────────────────┼──────────────────────┤
-│ ep-cold-star-253608 │ 2023-07-09T20:42:18Z │
-└─────────────────────┴──────────────────────┘
-
-connection_uris
-
-┌───────────────────────────────────────────────────────────────────────────────────┐
-│ Connection Uri                                                                    │
-├───────────────────────────────────────────────────────────────────────────────────┤
-│ postgres://daniel:<password>@ep-cold-star-253608.us-east-2.aws.neon.tech/neondb   │
-└───────────────────────────────────────────────────────────────────────────────────┘
+┌────────────────────────┬──────────────────────┐
+│ Id                     │ Created At           │
+├────────────────────────┼──────────────────────┤
+│ ep-empty-shadow-588175 │ 2023-07-12T05:25:39Z │
+└────────────────────────┴──────────────────────┘
 ```
 
 - Create a branch with a user-defined name:
@@ -161,7 +151,7 @@ connection_uris
 neonctl branches create --name mybranch
 ```
 
-- Create a branch with a read-only compute endpoint (a read replica)
+- Create a branch with a read-only compute endpoint (a [read replica](/docs/introduction/read-replicas))
 
 ```bash
 neonctl branches create --name my_read_replica_branch --type read_only
@@ -187,7 +177,7 @@ neonctl branches rename <id|name> <new-name> [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `updaterename` subcommand supports this option:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `rename` subcommand supports this option:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
@@ -249,12 +239,12 @@ neonctl branches add-compute <id|name>
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `updaterename` subcommand supports this option:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `updaterename` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
-| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
-| `--type`| Type of compute to add. Choices are `read_only` (the default) or `read_write`. A branch with a read-only compute endpoint is also referred to as a read replica. A branch can have a single read-write and multiple read-only compute endpoints.                                     | string |             |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
+| `--type`| Type of compute to add. Choices are `read_only` (the default) or `read_write`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas). A branch can have a single read-write and multiple read-only compute endpoints.                                     | string |             |
 
 #### Example
 
@@ -281,7 +271,7 @@ neonctl branches delete <id|name> [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` subcommand supports these options:
+In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` subcommand supports this option:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
@@ -318,9 +308,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `g
 | ------------- | ----------- | ------ | :------: |
 | --project-id  | Project ID  | string | Only if your Neon account has more than one project |
 
-#### Example
-
-<CodeBlock shouldWrap>
+#### Examples
 
 ```bash
 neonctl branches get main
@@ -331,7 +319,26 @@ neonctl branches get main
 └────────────────────────┴──────┴──────────────────────┴──────────────────────┘
 ```
 
-</CodeBlock>
+A `get` example with the `--output` format option set to `json`:
+
+```bash
+neonctl branches get main --output json
+{
+  "id": "br-lingering-bread-896475",
+  "project_id": "noisy-rain-039137",
+  "name": "main",
+  "current_state": "ready",
+  "logical_size": 29769728,
+  "creation_source": "console",
+  "primary": false,
+  "cpu_used_sec": 522,
+  "compute_time_seconds": 522,
+  "active_time_seconds": 2088,
+  "written_data_bytes": 174433,
+  "data_transfer_bytes": 20715,
+  "created_at": "2023-06-28T10:17:28Z",
+  "updated_at": "2023-07-11T12:22:59Z"
+```
 
 ## Need help?
 

@@ -49,9 +49,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-opt
 
 If a branch ID or name is not provided, the command lists roles for the primary branch of the project.
 
-#### Example
-
-<CodeBlock shouldWrap>
+#### Examples
 
 ```bash
 neonctl roles list 
@@ -62,7 +60,19 @@ neonctl roles list
 └────────┴──────────────────────┘
 ```
 
-</CodeBlock>
+List roles with the `--output` format set to `json`:
+
+```bash
+neonctl roles list --output json
+[
+  {
+    "branch_id": "br-odd-frog-703504",
+    "name": "daniel",
+    "protected": false,
+    "created_at": "2023-06-28T10:17:28Z",
+    "updated_at": "2023-06-28T10:17:28Z"
+  }
+```
 
 ### create
 
@@ -84,7 +94,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `c
 | --branch          | Branch ID                            | string | |
 | --name      | The role name. Cannot exceed 63 bytes in length.  | string | &check; |
 
-If a branch ID or name is not provided, the command creates a database in the primary branch of the project.
+If a branch ID or name is not provided, the command creates a role in the primary branch of the project.
 
 #### Example
 
@@ -120,7 +130,7 @@ In addition to the Neon CLI [global options](../neon-cli/global-options), the `d
 | --project-id         | Project ID                           | string | Only if your Neon account has more than one project |
 | --branch          | Branch ID                            | string | |
 
-If a branch ID or name is not provided, the command assumes the role Sresides in the primary branch of the project.
+If a branch ID or name is not provided, the command assumes the role resides in the primary branch of the project.
 
 #### Example
 
