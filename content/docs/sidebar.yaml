@@ -179,6 +179,8 @@
   items:
     - title: Supported extensions
       slug: extensions/pg-extensions
+    - title: pg_embedding
+      slug: extensions/pg_embedding
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
     - title: pgvector
