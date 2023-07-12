@@ -17,11 +17,13 @@ const background = fetch(new URL('./assets/background.png', import.meta.url)).th
 );
 
 const GET = async (request) => {
-  const fontDataMedium = await fontMedium;
-  const fontDataNormal = await fontNormal;
+  const [fontDataMedium, fontDataNormal, logoData, backgroundData] = await Promise.all([
+    fontMedium,
+    fontNormal,
+    logo,
+    background,
+  ]);
 
-  const logoData = await logo;
-  const backgroundData = await background;
   try {
     const { searchParams } = new URL(request.url);
 
