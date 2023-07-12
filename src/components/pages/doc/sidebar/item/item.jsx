@@ -16,15 +16,7 @@ const isActiveItem = (children, currentSlug) => {
   );
 };
 
-const Item = ({
-  title,
-  slug = null,
-  ariaLabel = null,
-  isStandalone = false,
-  items = null,
-  closeMenu = null,
-  isParentOpen = true,
-}) => {
+const Item = ({ title, slug = null, ariaLabel = null, isStandalone = false, items = null }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(`${links.docs}/`, '');
 
@@ -36,9 +28,6 @@ const Item = ({
   }
 
   const handleClick = () => {
-    if (closeMenu && slug) {
-      closeMenu();
-    }
     setIsOpen((prev) => !prev);
   };
 
@@ -47,7 +36,7 @@ const Item = ({
   const Tag = slug ? Link : 'button';
 
   return (
-    <li className={clsx('flex flex-col', !isParentOpen && 'hidden')}>
+    <li className={clsx('flex flex-col')}>
       <Tag
         className={clsx(
           'group flex w-full items-start justify-between py-2 text-left text-sm transition-colors duration-200',
@@ -83,7 +72,7 @@ const Item = ({
           )}
         >
           {items.map((item, index) => (
-            <Item {...item} key={index} closeMenu={closeMenu} isParentOpen={isOpen || false} />
+            <Item {...item} key={index} />
           ))}
         </ul>
       )}
@@ -104,8 +93,6 @@ Item.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
-  closeMenu: PropTypes.func,
-  isParentOpen: PropTypes.bool,
 };
 
 export default Item;
