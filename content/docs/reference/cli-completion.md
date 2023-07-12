@@ -11,7 +11,7 @@ Ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-t
 
 ## The `completion` command
 
-This command generates a completion script specifically designed for the `neonctl` command-line interface (CLI). The completion script, when installed, helps you type `neonctl` commands faster and more accurately. It does this by presenting the possible commands and options when you press the tab key after typing or partially typing a command or option.
+This command generates a completion script for the `neonctl` command-line interface (CLI). The completion script, when installed, helps you type `neonctl` commands faster and more accurately. It does this by presenting the possible commands and options when you press the tab key after typing or partially typing a command or option.
 
 ### Usage
 
@@ -19,7 +19,7 @@ This command generates a completion script specifically designed for the `neonct
 neonctl completion
 ```
 
-The command outputs the completion script with installation instructions, similar to the following:
+The command outputs the following completion script with installation instructions:S
 
 ```text
 ###-begin-neonctl-completions-###
@@ -64,7 +64,7 @@ or on OSX:
 neonctl completion >> ~/.bash_profile
 ```
 
-Remember, changes made to the `~/.bashrc` or `~/.bash_profile` won't affect existing shell sessions - only new ones. You need to either source the file in the existing session or start a new shell session after addign the script to your `~/.bashrc` `~/.bash_profile`. To source the file, run:
+Remember, changes made to `~/.bashrc` or `~/.bash_profile` won't affect existing shell sessions — only new ones. You need to either source the file in the existing session or start a new shell session after adding the script to `~/.bashrc` or `~/.bash_profile`. To source the file, run:
 
 ```bash
 source ~/.bashrc
