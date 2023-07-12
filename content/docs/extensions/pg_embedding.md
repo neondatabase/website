@@ -14,7 +14,7 @@ Neon also supports `pgvector` for vector similarity search. For information on w
 
 ## Using the pg_embedding extension
 
-This section describes how to use the `pg_embedding` extension in Neon with a simple example that demonstrates the required statements, syntax, and options.
+This section describes using the `pg_embedding` extension in Neon with a simple example demonstrating the required statements, syntax, and options.
 
 ### Usage summary
 
@@ -23,7 +23,7 @@ The statements in this usage summary are described in further detail in the sect
 ```sql
 CREATE EXTENSION embedding;
 CREATE TABLE documents(id integer PRIMARY KEY, embedding real[]);
-SELECT id FROM documents ORDER BY emebedding <-> ARRAY[1.1, 2.2, 3.3] LIMIT 1;
+SELECT id FROM documents ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3] LIMIT 1;
 ```
 
 ### Enable the extension
@@ -42,7 +42,7 @@ To store your vector data, create a table similar to the following:
 CREATE TABLE documents(id INTEGER, embedding REAL[]);
 ```
 
-This statement generates a table named `documents` with a `embedding` column for storing vector data. Your table and vector column names may differ.
+This statement generates a table named `documents` with an `embedding` column for storing vector data. Your table and vector column names may differ.
 
 ### Insert data
 
@@ -55,7 +55,7 @@ VALUES (1, '{1.1, 2.2, 3.3}'),(2, '{4.4, 5.5, 6.6}');
 
 ## Query the nearest neighbors by L2 distance
 
-To query tthe nearest neighbors by L2 distance, use a query similar to this:
+To query the nearest neighbors by L2 distance, use a query similar to this:
 
 ```sql
 SELECT id FROM documents ORDER BY embedding <-> array[1.1, 2.2, 3.3] LIMIT 1;
@@ -66,7 +66,7 @@ where:
 - `SELECT id FROM documents` selects the `id` field from all records in the `documents` table.
 - `<->`: This is a "distance between" operator. It calculates the Euclidean distance (L2) between the query vector and each row of the dataset.
 - `ORDER BY` sorts the selected records in ascending order based on the calculated distances. In other words, records with values closer to the `[1.1, 2.2, 3.3]` query vector will be returned first.
-- `LIMIT 1` limits the result set to the first 100 records after sorting.
+- `LIMIT 1` limits the result set to one record after sorting.
 
 In summary, the query retrieves the ID of the record from the `documents` table whose value is closest to the `[1.1, 2.2, 3.3]` query vector according to Euclidean distance.
 
@@ -90,8 +90,6 @@ HNSW indexes are created in memory and built on demand. If your compute suspends
 - `efConstruction`: Defines the number of nearest neighbors considered during index construction. The default value is `32`.
 - `efsearch`: Defines the number of nearest neighbors considered during index search. The default value is `32`.
 
-For information about how to configure these options, refer to [Tuning the HNSW algorithm](#tuning-the-hnsw-algorithm).
-
 ## Tuning the HNSW algorithm
 
 The `m`, `efConstruction`, and `efSearch` options allow you to tune the HNSW algorithm when creating an index:
@@ -100,7 +98,7 @@ The `m`, `efConstruction`, and `efSearch` options allow you to tune the HNSW alg
 - `efConstruction`: This option influences the trade-off between index quality and construction speed. A high `efConstruction` value creates a higher quality graph, enabling more accurate search results, but a higher value also means that index construction takes longer.
 - `efSearch`: This option influences the trade-off between query accuracy (recall) and speed. A higher `efSearch` value increases accuracy at the cost of speed. This value should be equal to or larger than `k`, which is the number of nearest neighbors you want your search to return.
 
-In summary, to prioritize for search speed over accuracy, use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over search speed, use higher value for `m` and `efSearch`. At the cost of index build time, you can also use a higher `efConstruction` value to enable more accurate search results.
+In summary, to prioritize search speed over accuracy, use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `efSearch`. At the cost of index build time, you can also use a higher `efConstruction` value to enable more accurate search results.
 
 <Admonition type="info">
 For an idea of how to configure index option values, consider the benchmark performed by Neon using the _GIST-960 Euclidean dataset_, which provides a training set of 1 million vectors of 960 dimensions. The benchmark was run with this series of index option values:
@@ -128,7 +126,7 @@ The key idea behind HNSW is that by starting the search at the top layer and mov
 
 ## Comparing pgvector and pg_embedding
 
-When determining which index to use, `pgvector` with an IVFFlat index or `pg_embedding` wih an HNSW, it's helpful to compare the two indexes based on specific criteria, such as:
+When determining which index to use, `pgvector` with an IVFFlat index or `pg_embedding` with an HNSW, it's helpful to compare the two indexes based on specific criteria, such as:
 
 - Search speed
 - Accuracy
@@ -144,7 +142,7 @@ When determining which index to use, `pgvector` with an IVFFlat index or `pg_emb
 | Index Construction Speed | Index building process is relatively fast. The data points are assigned to the nearest centroid, and inverted lists are constructed. | Index construction involves building multiple layers of graphs, which can be computationally intensive, especially if you choose high values for the parameter `ef_construction`. |
 | Distance Metrics  | Typically used for L2 distances, but `pgvector` also supports inner product and cosine distance. | Currently supports L2 distance. |
 
-Ultimately, the choice between the `pgvector` with IVFFlat or `pg_embedding` with HNSW depends on your use case and requirements. Here are few additional points to consider when making your choice:
+Ultimately, the choice between the `pgvector` with IVFFlat or `pg_embedding` with HNSW depends on your use case and requirements. Here are a few additional points to consider when making your choice:
 
 - **Memory constraints**: If you are working under strict memory constraints, you may opt for the IVFFlat index, as it typically consumes less memory than an HNSW index. However, be mindful that this might come at the cost of search speed and accuracy.
 - **Search speed**: If your primary concern is the speed at which you can retrieve nearest neighbors, especially in high-dimensional spaces, an HNSW index is likely the better choice due to its graph-based approach.
