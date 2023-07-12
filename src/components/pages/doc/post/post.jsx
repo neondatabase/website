@@ -63,10 +63,9 @@ const Post = ({
           <Content className="mt-5" content={content} />
         </article>
       )}
-      <div className="mt-auto">
-        <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
-        <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
-      </div>
+
+      <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
+      <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
     </div>
 
     <div className={clsx('col-start-11 col-end-13 -ml-11 h-full 2xl:ml-0 xl:hidden')}>
