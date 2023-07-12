@@ -77,7 +77,7 @@ The Neon CLI supports autocompletion, which you can configure in a few easy step
 | [roles](../reference/cli-roles)                                   | `list`, `create`,  `delete`            | Manage roles              |
 | [operations](../reference/cli-operations)                         | `list`                                 | Manage operations         |
 | [connection-string](../reference/cli-connection-string)           |                                        | Get connection string     |
-| [completion](../reference/completion)           |                                        | Generate a completion script     |
+| [completion](../reference/cli-completion)           |                                        | Generate a completion script     |
 
 ## Global options
 
