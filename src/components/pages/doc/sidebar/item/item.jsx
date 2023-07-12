@@ -9,12 +9,10 @@ import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import links from 'constants/links';
 
-const isActiveItem = (children, currentSlug) => {
-  if (!children) return false;
-  return children.some(
-    (item) => item.slug === currentSlug || isActiveItem(item.items, currentSlug)
+const isActiveItem = (items, currentSlug) =>
+  items?.some(
+    ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
   );
-};
 
 const Item = ({ title, slug = null, ariaLabel = null, isStandalone = false, items = null }) => {
   const pathname = usePathname();
@@ -36,7 +34,7 @@ const Item = ({ title, slug = null, ariaLabel = null, isStandalone = false, item
   const Tag = slug ? Link : 'button';
 
   return (
-    <li className={clsx('flex flex-col')}>
+    <li className="flex flex-col">
       <Tag
         className={clsx(
           'group flex w-full items-start justify-between py-2 text-left text-sm transition-colors duration-200',
@@ -93,6 +91,7 @@ Item.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
+  isParentOpen: PropTypes.bool,
 };
 
 export default Item;

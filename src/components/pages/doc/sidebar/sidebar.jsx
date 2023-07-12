@@ -16,9 +16,10 @@ const Sidebar = ({ className = null, sidebar }) => (
       className
     )}
   >
-    <div className="sticky top-10 z-30 h-[calc(100vh-40px)]">
+    {/* 154px - total height amount of topbar and padding top: 44px+110px */}
+    <div className="sticky top-10 z-30 h-[calc(100vh-154px)]">
       <Search className="z-30" indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME} />
-      <nav className="no-scrollbars relative z-20 max-h-[calc(100vh-80px)] overflow-y-scroll py-8">
+      <nav className="no-scrollbars relative z-20 max-h-[calc(100vh-140px)] overflow-y-scroll py-8">
         <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
         <ul>
           {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
