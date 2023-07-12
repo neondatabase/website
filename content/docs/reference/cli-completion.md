@@ -19,7 +19,7 @@ This command generates a completion script for the `neonctl` command-line interf
 neonctl completion
 ```
 
-The command outputs the following completion script with installation instructions:S
+The command outputs the following completion script with installation instructions:
 
 ```text
 ###-begin-neonctl-completions-###
