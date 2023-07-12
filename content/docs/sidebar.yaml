@@ -210,7 +210,7 @@
           slug: reference/cli-operations
         - title: connection-string
           slug: reference/cli-connection-string
-        - title: cli-completion
+        - title: completion
           slug: reference/cli-completion
     - title: SDKs
       slug: reference/sdk
