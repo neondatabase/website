@@ -54,7 +54,7 @@ Run the following command to connect to Neon via web authentication:
 neonctl auth
 ```
 
-The `auth` command launches a browser window where you can authorize the Neon CLI to access your Neon account. Running a Neon CLI command without authenticating with [neonctl auth](/docs/reference/cli-auth) automatically launches the web authentication process.
+The [neonctl auth](/docs/reference/cli-auth) command launches a browser window where you can authorize the Neon CLI to access your Neon account. If you have not authenticated previously, running a Neon CLI command automatically launches the web authentication process unless you have specified an API key in your command.
 
 ### Connect with an API key
 
