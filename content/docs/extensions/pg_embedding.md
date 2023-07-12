@@ -7,14 +7,14 @@ isDraft: true
 
 The `pg_embedding` extension enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
 
-HNSW is a graph-based approach to indexing multi-dimensional data. It constructs a multi-layered graph, where each layer is a subset of the previous one. During a search, the algorithm navigates through the graph from the top layer to the lowest layer to quickly find the nearest neighbor. An HNSW graph is known for its superior performance in terms of speed and accuracy.
+HNSW is a graph-based approach to indexing multi-dimensional data. It constructs a multi-layered graph, where each layer is a subset of the previous one. During a search, the algorithm navigates through the graph from the top layer to the bottom to quickly find the nearest neighbor. An HNSW graph is known for its superior performance in terms of speed and accuracy.
 
 ![HNSW graph](/docs/extensions/hnsw_graph.png)
 
 Neon's `pg_embedding` extension is based on the [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw.git) implementation of the HSNW algorithm, presented in the article [Revisiting the Inverted Indices for Billion-Scale Approximate Nearest Neighbors](https://openaccess.thecvf.com/content_ECCV_2018/html/Dmitry_Baranchuk_Revisiting_the_Inverted_ECCV_2018_paper.html).
 
 <Admonition type="note">
-Neon also supports `pgvector` for vector similarity search. For information on which index to choose, refer to [Comparing pgvector and pg_embedding](#comparing-hnsw-to-pgvector).
+Neon also supports `pgvector` for vector similarity search. For information on which index to choose, refer to [Comparing pgvector and pg_embedding](#comparing-pgvector-and-pgembedding).
 </Admonition>
 
 ## Using the pg_embedding extension
@@ -23,11 +23,13 @@ This section describes how to use the `pg_embedding` extension in Neon with a si
 
 ### Usage summary
 
+The statements in this usage summary are described in further detail in the sections that follow.
+
 ```sql
 CREATE EXTENSION embedding;
 CREATE TABLE documents(id integer PRIMARY KEY, embedding real[]);
 CREATE INDEX ON documents USING hnsw(embedding) WITH (maxelements=1000000, dims=100, m=32);
-SELECT id FROM documents ORDER BY emebedding <-> ARRAY[1.0, 2.0,...] LIMIT 100;
+SELECT id FROM documents ORDER BY emebedding <-> ARRAY[1.1, 2.2, 3.3,...] LIMIT 100;
 ```
 
 ### Enable the extension
@@ -129,7 +131,7 @@ To learn more about the benchmark, see [Introducing the HNSW Index for vector se
 
 ## Comparing pgvector and pg_embedding
 
-When determining which index to use, `pgvector` with an IVFFlat or `pg_embedding` wih an HNSW index, it's helpful to compare the two indexes based on specific criteria, such as:
+When determining which index to use, `pgvector` with an IVFFlat index or `pg_embedding` wih an HNSW, it's helpful to compare the two indexes based on specific criteria, such as:
 
 - Search speed
 - Accuracy
