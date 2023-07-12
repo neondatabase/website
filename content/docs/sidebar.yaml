@@ -13,6 +13,8 @@
       slug: introduction/branching
     - title: Autoscaling
       slug: introduction/autoscaling
+    - title: Read replicas
+      slug: introduction/read-replicas
     - title: Regions
       slug: introduction/regions
     - title: Plans
