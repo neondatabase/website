@@ -44,15 +44,21 @@ To upgrade to the latest version of the Neon CLI, run the `npm i -g neonctl` com
 
 ## Connect
 
-Run the following command to authenticate a connection to Neon:
+The Neon CLI supports connecting via web authentication or with an API key.
+
+### Connect via web authentication
+
+Run the following command to connection to Neon via web authentication:
 
 ```bash
 neonctl auth
 ```
 
-The `auth` command launches a browser window where you can authorize the Neon CLI to access your Neon account. Running a Neon CLI command without authenticating with [neonctl auth](/docs/reference/cli-auth) automatically launches the browser authentication process.
+The `auth` command launches a browser window where you can authorize the Neon CLI to access your Neon account. Running a Neon CLI command without authenticating with [neonctl auth](/docs/reference/cli-auth) automatically launches the web authentication process.
 
-Alternatively, you can authenticate a connection with a Neon API key using the `--api-key` option when running a Neon CLI command. For example, an API key is used with the following `neonctl projects list` command:
+### Connect with an API key
+
+To connect with a Neon API key, specify the `--api-key` option when running a Neon CLI command. For example, the following `neonctl projects list` command connects to Neon using the `--api-key` option:
 
 ```bash
 neonctl projects list --api-key <neon_api_key>
