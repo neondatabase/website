@@ -2,7 +2,6 @@
 title: Neon CLI commands — me
 subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
 enableTableOfContents: true
-isDraft: true
 ---
 
 ## Before you begin
