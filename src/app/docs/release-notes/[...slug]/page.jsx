@@ -41,7 +41,7 @@ export async function generateMetadata({ params }) {
   if (isReleaseNotePage) {
     const { label: date } = getReleaseNotesDateFromSlug(currentSlug);
     const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
-    label = `${capitalisedCategory} release ${date}`;
+    label = `${capitalisedCategory} release, ${date}`;
     description = getExcerpt(content, 160);
   }
 
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }) {
     title: `${label} - Neon`,
     description,
     pathname: `${RELEASE_NOTES_BASE_PATH}${currentSlug}`,
-    imagePath: `https://neon-next-git-og-image-neondatabase.vercel.app/api/docs-og?title=${label}`,
+    imagePath: `https://neon-next-git-og-image-neondatabase.vercel.app/api/og-image?title=${label}`,
     type: 'article',
   });
 }
