@@ -195,6 +195,27 @@
   slug: security/security-overview
 - title: Reference
   items:
+    - title: Neon CLI
+      slug: reference/neon-cli
+      items:
+        - title: auth
+          slug: reference/cli-auth
+        - title: me
+          slug: reference/cli-me
+        - title: projects
+          slug: reference/cli-projects
+        - title: branches
+          slug: reference/cli-branches
+        - title: databases
+          slug: reference/cli-databases
+        - title: roles
+          slug: reference/cli-roles
+        - title: operations
+          slug: reference/cli-operations
+        - title: connection-string
+          slug: reference/cli-connection-string
+        - title: completion
+          slug: reference/cli-completion
     - title: SDKs
       slug: reference/sdk
     - title: Glossary
