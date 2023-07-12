@@ -2,7 +2,6 @@
 title: Neon CLI
 subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
 enableTableOfContents: true
-isDraft: true
 ---
 
 The Neon CLI supports numerous operations, such as authentication and management of Neon projects, branches, compute endpoints, databases, roles, and more.
