@@ -48,7 +48,7 @@ The Neon CLI supports connecting via web authentication or with an API key.
 
 ### Connect via web authentication
 
-Run the following command to connection to Neon via web authentication:
+Run the following command to connect to Neon via web authentication:
 
 ```bash
 neonctl auth
