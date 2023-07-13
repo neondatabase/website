@@ -27,7 +27,7 @@ Neon supports creating and managing roles from the following interfaces:
 
 ## The neon_superuser role
 
-All roles created in the Neon console or Neon API, including the default role created with a Neon project, are granted membership in the `neon_superuser` role. Users cannot login as `neon_superuser`, but they inherit the privileges assigned to this role. The privileges and predefined role memberships granted to `neon_superuser` are shown in this `CREATE ROLE` statement:
+Roles created in the Neon console, CLI, or API, including the default role created with a Neon project, are granted membership in the `neon_superuser` role. Users cannot login as `neon_superuser`, but they inherit the privileges assigned to this role. The privileges and predefined role memberships granted to `neon_superuser` are shown in this `CREATE ROLE` statement:
 
 <CodeBlock shouldWrap>
 
@@ -54,11 +54,11 @@ In addition, the `neon_superuser` role is able to:
 
   We recommend that you only grant membership in `neon_superuser` to users who need to perform administration tasks in the Neon console.
 
- In summary, the `neon_superuser` can create databases, create roles, add extensions, grant `neon_superuser` privileges, and has all the privileges of `pg_read_all_data` and `pg_write_all_data`, but cannot log in to the PostgreSQL server itself. It is intended for administrators of Neon. For all other users, you can create roles and manage database object access with SQL. See [Manage roles with SQL](#manage-roles-with-sql).
+ You can think of roles with `neon_superuser` privileges as administrators. For all other users, you can create roles and manage database object access privileges with SQL. See [Manage roles with SQL](#manage-roles-with-sql).
 
 ## Manage roles in the Neon console
 
-This section describes how to create, view, and delete role in the Neon Console. All roles created in the Neon console are grant membership in the [neon_superuser](#the-neon_superuser-role) role, which is intended for users of the Neon console.
+This section describes how to create, view, and delete role in the Neon Console. All roles created in the Neon console are granted membership in the [neon_superuser](#the-neon_superuser-role) role, which is intended for users of the Neon console.
 
 ### Create a role
 
@@ -98,13 +98,13 @@ To reset a role's password:
 
 ## Manage roles with the Neon CLI
 
-The Neon CLI supports creating and deleting roles. For instructions, see [Neon CLI commands — roles](/docs/reference/cli-roles). Roles created with the Neon CLI are grant membership in the [neon_superuser](#the-neon_superuser-role) role.
+The Neon CLI supports creating and deleting roles. For instructions, see [Neon CLI commands — roles](/docs/reference/cli-roles). Roles created with the Neon CLI are granted membership in the [neon_superuser](#the-neon_superuser-role) role.
 
 ## Manage roles with the Neon API
 
 Role actions performed in the Neon Console can also be performed using Neon API role methods. The following examples demonstrate how to create, view, reset passwords for, and delete roles using the Neon API. For other role-related methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
-Roles created with the Neon API are grant membership in the [neon_superuser](#the-neon_superuser-role) role.
+Roles created with the Neon API are granted membership in the [neon_superuser](#the-neon_superuser-role) role.
 
 In Neon, roles belong to branches, which means that when you create a role, it is created in a branch. Role-related requests are therefore performed using branch API methods.
 
