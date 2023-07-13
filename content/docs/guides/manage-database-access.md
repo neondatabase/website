@@ -4,13 +4,13 @@ subtitle: Learn how to create roles and manage database access in Neon with SQL
 enableTableOfContents: true
 ---
 
-This guide shows how to manage database access in Neon using SQL. This guide will lead you through connecting to Neon with an administrative role, creating a database, creating a new role for privilege management, and granting privileges to that role. It will then show how to create roles for database users and grant those users role membership that will allow them to use the new database.
+This guide shows how to manage database access in Neon using SQL. This guide will lead you through connecting to Neon with an administrator role, creating a database, creating a role for privilege management, and granting privileges to that role. It will then show how to create roles for database users and grant role membership to those users that will allow them to use the new database.
 
 ## Understanding roles in Neon
 
 Before you begin, it's important to understand how roles work in Neon. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in your project's primary branch. For example, if you sign up for Neon with a John Smith Google account, the project is created with a default role named `john`.
 
-Your default Neon role is automatically granted membership in a `neon_superuser` role, which provides the user with the privileges and predefined PostgreSQL role memberships shown in this `CREATE ROLE` statement:
+Your default Neon role is automatically granted membership in a `neon_superuser` role, which provides the user with the privileges and predefined role memberships shown in this `CREATE ROLE` statement:
 
 <CodeBlock shouldWrap>
 
@@ -20,7 +20,7 @@ CREATE ROLE neon_superuser CREATEDB CREATEROLE NOLOGIN IN ROLE pg_read_all_data,
 
 </CodeBlock>
 
-You can think of this role as a Neon administrator role. A user with membership in the `neon_superuser` role can create databases, create roles, add extensions, grant `neon_superuser` privileges, and has all the privileges of `pg_read_all_data` and `pg_write_all_data`. You can find more information about this role [here](/docs/reference/manage/roles#the-neon-super-user).
+You can think of this role as a Neon administrator role. A user with membership in the `neon_superuser` role can create databases, create roles, add extensions, grant `neon_superuser` privileges, and has all the privileges of `pg_read_all_data` and `pg_write_all_data`. For more information about this role, see [The neon_superuser role](/docs/reference/manage/roles#the-neon-super-user).
 
 Any user created in the Neon console or using the Neon API is automatically granted membership in the `neon_superuser` role. But what do you do if you need to create roles with different or limited privileges? After all, not every database user should be an administrator in Neon.
 
@@ -42,7 +42,7 @@ To begin, assume you're creating a new database that will be used by several dev
 
     </CodeBlock>
 
-2. Create a new database. Call it `app_db`. Neon supports creating databases with the Neon console, the Neon API, and SQL. Here, we use SQL.
+2. Create a new database. Call it `app_db`. Neon supports creating databases with the Neon console, CLI, API, and SQL. Here, we use SQL.
 
     ```sql
     CREATE DATABASE app_db;

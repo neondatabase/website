@@ -347,8 +347,7 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 ```
 
 - `WITH LOGIN` means that the role will have a login privilege, required for the role to log in to your Neon PostgreSQL instance. If the role is used only for privilege management, the `WITH LOGIN` privilege is unnecessary.
-- A password is required.
-- Passwords must have a minimum entropy of 60 bits.
+- A password is required and must have a minimum entropy of 60 bits.
 
     <Admonition type="info">  
     To create a password with 60 bits of entropy, you can follow these password composition guidelines:
