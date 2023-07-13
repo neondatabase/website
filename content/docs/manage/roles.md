@@ -338,8 +338,7 @@ Response:
 
 ## Manage roles with SQL
 
-You can create and manage roles in Neon using SQL in the same way you would in any stand-alone PostgreSQL instance.
-Roles created using SQL have the same privileges as roles created in stand-alone PostgreSQL. These roles are not granted membership in the [neon_superuser](#the-neon_superuser-role) role like roles created with the the Neon Console, CLI, or API. You must grant these roles the privileges you want them to have.
+Roles created with SQL have the same privileges as newly created roles in a stand-alone PostgreSQL installation. These roles are not granted membership in the [neon_superuser](#the-neon_superuser-role) role like roles created with the Neon Console, CLI, or API. You must grant these roles the privileges you want them to have.
 
 To create a role with SQL, issue a `CREATE ROLE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
@@ -347,11 +346,11 @@ To create a role with SQL, issue a `CREATE ROLE` statement from a client such as
 CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 ```
 
-- `WITH LOGIN` means that the role will have a login privilege, required for the role to log in to your Neon PostgreSQL instance. If the role is used only for privilege management, the `WITH LOGIN` privilege may not be necessary.
-- A password is required and validated when you create a role with SQL. 
-- Passwords must have a minimum entropy of 60 bits. 
+- `WITH LOGIN` means that the role will have a login privilege, required for the role to log in to your Neon PostgreSQL instance. If the role is used only for privilege management, the `WITH LOGIN` privilege is unnecessary.
+- A password is required.
+- Passwords must have a minimum entropy of 60 bits.
 
-    <Admonition type="tip">  
+    <Admonition type="info">  
     To create a password with 60 bits of entropy, you can follow these password composition guidelines:
       - **Length**: The password should consist of at least 12 characters.
       - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
