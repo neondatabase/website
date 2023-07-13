@@ -24,7 +24,7 @@ Each Neon project is created with a [primary branch](/docs/reference/glossary#pr
 
 When creating a new branch, you have the option to create a compute endpoint for the branch.
 
-A compute endpoint allows you to connect to the branch from a client or application and is read-write.
+A compute endpoint allows you to connect to the branch from a client or application. Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints.
 
 Your Neon project's primary branch has a compute endpoint, by default.
 
