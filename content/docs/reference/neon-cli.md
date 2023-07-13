@@ -64,13 +64,13 @@ To connect with a Neon API key, you can specify the `--api-key` option when runn
 neonctl projects list --api-key <neon_api_key>
 ```
 
-For information about obtaining an Neon API key, see [Create an API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
-
 To avoid including the `--api-key` option with each CLI command, you can export your API key to the `NEON_API_KEY` environment variable.
 
 ```bash
 export NEON_API_KEY=<neon_api_key>
 ```
+
+For information about obtaining an Neon API key, see [Create an API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
 
 ## Configure autocompletion
 
@@ -134,13 +134,13 @@ Global options are supported with any Neon CLI command.
   ```
   
   <Admonition type="info">
-The authentication flow for the Neon CLI follows this order:
+  The authentication flow for the Neon CLI follows this order:
 
-- If the `--api-key` option is provided, it is used for authentication.
-- If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable setting is used.
-- If there is no `--api-key` option or `NEON_API_KEY` environment variable setting, the CLI looks for the `credentials.json` file created by the `neonctl auth` command.
-- If the credentials file is not found, the Neon CLI initiates the `neonctl auth` web authentication process.
-</Admonition>
+  - If the `--api-key` option is provided, it is used for authentication.
+  - If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable setting is used.
+  - If there is no `--api-key` option or `NEON_API_KEY` environment variable setting, the CLI looks for the `credentials.json` file created by the `neonctl auth` command.
+  - If the credentials file is not found, the Neon CLI initiates the `neonctl auth` web authentication process.
+  </Admonition>
   
 - <a id="analytics"></a>`--analytics`
 
