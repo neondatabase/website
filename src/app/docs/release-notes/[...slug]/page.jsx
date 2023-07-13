@@ -52,7 +52,7 @@ export async function generateMetadata({ params }) {
     title: `${label} - Neon`,
     description,
     pathname: `${RELEASE_NOTES_BASE_PATH}${currentSlug}`,
-    imagePath: `https://neon-next-git-og-image-neondatabase.vercel.app/api/og-image?title=${ogTitle}?date=${releaseDate}`,
+    imagePath: `https://neon-next-git-og-image-neondatabase.vercel.app/api/og-image?title=${ogTitle}&date=${releaseDate}`,
     type: 'article',
   });
 }
