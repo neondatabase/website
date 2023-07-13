@@ -8,15 +8,15 @@ redirectFrom:
 
 In Neon, roles are PostgreSQL roles. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in your Neon project's primary branch.
 
-Your default role and roles created in the Neon console, API, and CLI are granted membership in the [neon_superuser](#the-neon_superuser-role) role. Roles created with SQL are only granted basic privileges, as they would be in a stand-alone PostgreSQL installation.
+Your default role and roles created in the Neon console, API, and CLI are granted membership in the [neon_superuser](#the-neon_superuser-role) role. Roles created with SQL are only granted basic privileges, as you would see in a stand-alone PostgreSQL installation.
 
 <Admonition type="note">
-Neon is a managed PostgreSQL service, so you cannot access the host operating system, and you can't connect using the PostgreSQL `superuser` account like you can with a stand-alone PostgreSQL installation.
+Neon is a managed PostgreSQL service, so you cannot access the host operating system, and you can't connect using the PostgreSQL `superuser` account like you can in a stand-alone PostgreSQL installation.
 </Admonition>
 
 You can create roles in a project's primary branch or child branches. There is no limit to the number of roles you can create.
 
-Roles belong to a branch. If you create a child branch, roles from the parent branch are duplicated in the child branch. For example, if role `sally` exists in the parent branch, role `sally` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, it is not duplicated in the child branch.
+In Neon, roles belong to a branch, which could be your main branch or a child branch. When you create a child branch, roles in the parent branch are duplicated in the child branch. For example, if role `sally` exists in the parent branch, role `sally` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
 Neon supports creating and managing roles from the following interfaces:
 
