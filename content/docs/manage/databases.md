@@ -303,7 +303,7 @@ Response:
 
 ## Manage databases with SQL
 
-You can create and manage databases in Neon with SQL, as you can with any stand-alone PostgreSQL instance. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+You can create and manage databases in Neon with SQL, as you can with any stand-alone PostgreSQL installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 ```sql
 CREATE DATABASE testdb;
