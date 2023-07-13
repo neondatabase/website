@@ -6,21 +6,24 @@ redirectFrom:
   - /docs/manage/users
 ---
 
-In Neon, roles are PostgreSQL roles. A role can define a user or group. Roles can own database objects, assign privileges, and have various attributes like login rights or access permissions.
+In Neon, roles are PostgreSQL roles. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in your Neon project's primary branch.
 
-Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in a project's primary branch.
+Your default role and roles created in the Neon console, Neon API, and Neon CLI are granted membership in the [neon_superuser](#the-neon_superuser-role) role. You can think of these roles as Neon administrators. Roles created with SQL are not granted [neon_superuser](#the-neon_superuser-role) membership. Roles created with SQL are only assigned the basic privileges assigned to any newly created users in a standalone PostgreSQL installation.
 
-Additional roles can be created in a project's primary branch or child branches. There is no limit to the number of roles you can create.
+<Admonition type="note">
+Neon is a managed PostgreSQL service, so you cannot access the host operating system, and you can't connect using the PostgreSQL `superuser` account like you can with a stand-alone PostgreSQL installation.
+</Admonition>
+
+You can create roles in a project's primary branch or child branches. There is no limit to the number of roles you can create.
 
 Roles belong to a branch. If you create a child branch, roles from the parent branch are duplicated in the child branch. For example, if role `sally` exists in the parent branch, role `sally` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
 Neon supports creating and managing roles from the following interfaces:
 
 - [Neon console](#manage-roles-in-the-neon-console)
-- [SQL](#manage-roles-in-the-neon-console)
+- [Neon CLI](#manage-roles-with-the-neon-cli)
 - [Neon API](#manage-roles-with-the-neon-api)
-
-Roles created in the Neon console and Neon API are granted membership in the [neon_superuser](#the-neon_superuser-role) role.
+- [SQL](#manage-roles-in-the-neon-console)
 
 ## The neon_superuser role
 
@@ -129,11 +132,15 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 
 For role creation and access management examples, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
 
+## Manage roles with the Neon CLI
+
+The Neon CLI supports creating and deleting roles. For instructions, see [Neon CLI commands — roles](/docs/reference/cli-roles). Roles created with the Neon CLI are grant membership in the [neon_superuser](#the-neon_superuser-role) role.
+
 ## Manage roles with the Neon API
 
 Role actions performed in the Neon Console can also be performed using Neon API role methods. The following examples demonstrate how to create, view, reset passwords for, and delete roles using the Neon API. For other role-related methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
-All roles created with the Neon API are grant membership in the [neon_superuser](#the-neon_superuser-role) role.
+Roles created with the Neon API are grant membership in the [neon_superuser](#the-neon_superuser-role) role.
 
 In Neon, roles belong to branches, which means that when you create a role, it is created in a branch. Role-related requests are therefore performed using branch API methods.
 
