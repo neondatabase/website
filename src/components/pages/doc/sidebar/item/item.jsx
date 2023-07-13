@@ -1,33 +1,32 @@
 'use client';
 
 import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import links from 'constants/links';
 
 const isActiveItem = (items, currentSlug) =>
   items?.some(
     ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
   );
 
-const Item = ({
-  title,
-  slug = null,
-  ariaLabel = null,
-  isStandalone = null,
-  items = null,
-  currentSlug,
-}) => {
-  const [isOpen, setIsOpen] = useState(slug === currentSlug);
+const Item = ({ title, slug = null, ariaLabel = null, isStandalone = false, items = null }) => {
+  const pathname = usePathname();
+  const currentSlug = pathname.replace(`${links.docs}/`, '');
+
+  const hasActiveChild = isActiveItem(items, currentSlug);
+  const [isOpen, setIsOpen] = useState(() => slug === currentSlug || hasActiveChild);
 
   if (!isOpen && isActiveItem(items, currentSlug)) {
     setIsOpen(true);
   }
 
   const handleClick = () => {
-    setIsOpen((isOpen) => !isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   const externalSlug = slug && slug.startsWith('http') ? slug : null;
@@ -71,7 +70,7 @@ const Item = ({
           )}
         >
           {items.map((item, index) => (
-            <Item {...item} currentSlug={currentSlug} key={index} />
+            <Item {...item} key={index} />
           ))}
         </ul>
       )}
@@ -92,7 +91,7 @@ Item.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
-  currentSlug: PropTypes.string.isRequired,
+  isParentOpen: PropTypes.bool,
 };
 
 export default Item;

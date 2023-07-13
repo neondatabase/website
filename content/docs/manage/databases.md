@@ -10,9 +10,22 @@ A Neon project's primary branch is created with a default database called `neond
 
 All databases in Neon are created with a `public` schema. SQL objects are created in the `public` schema, by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
 
-Databases belong to branch. If you create a child branch, databases from the parent branch are copied to the child branch. For example, if database `mydb` exists in the parent branch, it will be copied to the child branch. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If a database was created in the parent branch after that point in time, it is not duplicated in the child branch.
+Databases belong to a branch. If you create a child branch, databases from the parent branch are copied to the child branch. For example, if database `mydb` exists in the parent branch, it will be copied to the child branch. The only time this does not occur is when you create a branch that includes data up to a particular point in time. If a database was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
-## Create a database
+Neon supports creating and managing databases from the following interfaces:
+
+- [Neon console](#manage-databases-in-the-neon-console)
+- [Neon CLI](#manage-databases-with-the-neon-cli)
+- [Neon API](#manage-databases-with-the-neon-api)
+- [SQL](#manage-databases-with-sql)
+
+## Manage databases in the Neon console
+
+This section describes how to create, view, and delete databases in the Neon Console.
+
+The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon consoles. For information about this role, see [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role).
+
+### Create a database
 
 To create a database:
 
@@ -24,7 +37,7 @@ To create a database:
 1. Enter a database name, and select a database owner.
 1. Click **Create**.
 
-## View databases
+### View databases
 
 To view databases:
 
@@ -33,7 +46,7 @@ To view databases:
 1. Select **Databases**
 1. Select a branch to view the databases in the branch.
 
-## Delete a database
+### Delete a database
 
 Deleting a database is a permanent action. All database objects belonging to the database such as schemas, tables, and roles are also deleted.
 
@@ -45,6 +58,10 @@ To delete a database:
 1. Select a branch to view the databases in the branch.
 1. For the database you want to delete, click the delete icon.
 1. In the confirmation dialog, click **Delete**.
+
+## Manage databases with the Neon CLI
+
+The Neon CLI supports creating and deleting databases. For instructions, see [Neon CLI commands — databases](/docs/reference/cli-databases).
 
 ## Manage databases with the Neon API
 
@@ -65,6 +82,8 @@ A Neon API request requires an API key. For information about obtaining an API k
 ### Create a database with the API
 
 The following Neon API method creates a database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdatabase).
+
+The role specified by `owner_name` is the owner of that database. The `neon_superuser` role is also granted all privileges on databases created with the Neon API. For information about this role, see [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role).
 
 ```text
 POST /projects/{project_id}/branches/{branch_id}/databases
@@ -281,6 +300,20 @@ Response:
   ]
 }
 ```
+
+## Manage databases with SQL
+
+You can create and manage databases in Neon with SQL, as you can with any stand-alone PostgreSQL installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+
+```sql
+CREATE DATABASE testdb;
+```
+
+Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. This parameter requires access to the local file system, which is not permitted on Neon.
+
+The role that creates a database is the owner of the database. This role has the typical default PostgreSQL privileges on the database, including the ability to `DROP` the database, `CONNECT` to the database, and create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
+
+For a database creation example, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
 
 ## Need help?
 

@@ -92,7 +92,7 @@ Global options are supported with any Neon CLI command.
 | :---------  | :---------------------------------- | :----- | :-------------------------------- |
 | [-o, --output](#output)| Set the Neon CLI output format (`json`, `yaml`, or `table`)                 | string | table                           |
 | [--config-dir](#config-dir)| Path to the Neon CLI configuration directory            | string | `/home/<user>/.config/neonctl`   |
-| [--api-key](#api-key)   | Neon API key                             | string | ""                                |
+| [--api-key](#api-key)   | Neon API key                             | string | NEON_API_KEY environment variable                                |
 | [--analytics](#analytics) | Manage analytics                    | boolean| true                              |
 | [-v, --version](#version)   | Show the Neon CLI version number                 | boolean| -                                 |
 | [-h, --help](#help)      | Show the Neon CLI help                           | boolean| -                                 |
