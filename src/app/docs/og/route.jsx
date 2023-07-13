@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/server';
 
 export const runtime = 'edge';
-export const preferredRegion = 'iad1';
+export const preferredRegion = 'auto';
 
 export async function GET(request) {
   const fontMedium = fetch(
