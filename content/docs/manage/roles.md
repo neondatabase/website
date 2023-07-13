@@ -104,25 +104,30 @@ To create a role with SQL, issue a `CREATE ROLE` statement from a client such as
 CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 ```
 
-- `WITH LOGIN` means that the role will have a login privilege, required for the role to log in to your Neon PostgreSQL instance. If the role is used as a 'group' role for privilege management, this privilege is not necessary.
-- A password is required and validated when you create a role with SQL. Passwords must be created with sufficient complexity to meet a minimum entropy of 60 bits. To achieve the necessary entropy, you can follow these password composition guidelines:
-  - **Length**: The password should consist of at least 12 characters.
-  - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
-    - Lowercase letters (a-z)
-    - Uppercase letters (A-Z)
-    - Numbers (0-9)
-    - Special symbols (e.g., !@#$%^&*)
-  - **Avoid predictability**: To maintain a high level of unpredictability, do not use:
-    - Sequential patterns (such as '1234', 'abcd', 'qwerty')
-    - Common words or phrases
-    - Any words found in a dictionary
-  - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.
+- `WITH LOGIN` means that the role will have a login privilege, required for the role to log in to your Neon PostgreSQL instance. If the role is used only for privilege management, the `WITH LOGIN` privilege may not be necessary.
+- A password is required and validated when you create a role with SQL. 
+- Passwords must have a minimum entropy of 60 bits. 
 
-  Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
+    <Admonition type="tip">  
+    To create a password with 60 bits of entropy, you can follow these password composition guidelines:
+      - **Length**: The password should consist of at least 12 characters.
+      - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
+        - Lowercase letters (a-z)
+        - Uppercase letters (A-Z)
+        - Numbers (0-9)
+        - Special symbols (e.g., !@#$%^&*)
+      - **Avoid predictability**: To maintain a high level of unpredictability, do not use:
+        - Sequential patterns (such as '1234', 'abcd', 'qwerty')
+        - Common words or phrases
+        - Any words found in a dictionary
+      - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.
 
-  The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
+    Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
 
-  For role creation and access management examples, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
+    The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
+    </Admonition>
+
+For role creation and access management examples, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
 
 ## Manage roles with the Neon API
 
