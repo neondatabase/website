@@ -10,13 +10,14 @@ A Neon project's primary branch is created with a default database called `neond
 
 All databases in Neon are created with a `public` schema. SQL objects are created in the `public` schema, by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
 
-Databases belong to branch. If you create a child branch, databases from the parent branch are copied to the child branch. For example, if database `mydb` exists in the parent branch, it will be copied to the child branch. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If a database was created in the parent branch after that point in time, it is not duplicated in the child branch.
+Databases belong to a branch. If you create a child branch, databases from the parent branch are copied to the child branch. For example, if database `mydb` exists in the parent branch, it will be copied to the child branch. The only time this does not occur is when you create a branch that includes data up to a particular point in time. If a database was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
 Neon supports creating and managing databases from the following interfaces:
 
 - [Neon console](#manage-databases-in-the-neon-console)
-- [SQL](#manage-databases-with-sql)
+- [Neon CLI](#manage-databases-with-the-neon-cli)
 - [Neon API](#manage-databases-with-the-neon-api)
+- [SQL](#manage-databases-with-sql)
 
 ## Manage databases in the Neon console
 
@@ -58,19 +59,9 @@ To delete a database:
 1. For the database you want to delete, click the delete icon.
 1. In the confirmation dialog, click **Delete**.
 
-## Manage databases with SQL
+## Manage databases with the Neon CLI
 
-You can create and manage databases in Neon with SQL, as you can with any stand-alone PostgreSQL instance. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
-
-```sql
-CREATE DATABASE testdb;
-```
-
-Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. This parameter requires access to the local file system, which is not permitted on Neon.
-
-The role that creates a database is the owner of the database. This role has the typical default PostgreSQL privileges on the database, including the ability to `DROP` the database, `CONNECT` to the database, and create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
-
-For a database creation example, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
+The Neon CLI supports creating and deleting databases. For instructions, see [Neon CLI commands — databases](/docs/reference/cli-databases).
 
 ## Manage databases with the Neon API
 
@@ -309,6 +300,20 @@ Response:
   ]
 }
 ```
+
+## Manage databases with SQL
+
+You can create and manage databases in Neon with SQL, as you can with any stand-alone PostgreSQL instance. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+
+```sql
+CREATE DATABASE testdb;
+```
+
+Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. This parameter requires access to the local file system, which is not permitted on Neon.
+
+The role that creates a database is the owner of the database. This role has the typical default PostgreSQL privileges on the database, including the ability to `DROP` the database, `CONNECT` to the database, and create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
+
+For a database creation example, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
 
 ## Need help?
 
