@@ -102,7 +102,6 @@
       items: 
         - title: Manage roles and database access with SQL
           slug: guides/manage-database-access
-      items:
         - title: Read replicas
           slug: guides/read-replica-guide
     - title: Languages
