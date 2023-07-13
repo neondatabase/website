@@ -30,16 +30,19 @@ export async function generateMetadata({ params }) {
   const { slug } = params;
 
   let label = '';
+  let releaseDate = '';
   let description = '';
   const currentSlug = slug.join('/');
   const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
 
   const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
+  const ogTitle = `${capitalisedCategory} release`;
   label = `${capitalisedCategory} release`;
   description = `The latest ${capitalisedCategory} updates from Neon`;
 
   if (isReleaseNotePage) {
     const { label: date } = getReleaseNotesDateFromSlug(currentSlug);
+    releaseDate = date;
     const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
     label = `${capitalisedCategory} release, ${date}`;
     description = getExcerpt(content, 160);
@@ -49,7 +52,7 @@ export async function generateMetadata({ params }) {
     title: `${label} - Neon`,
     description,
     pathname: `${RELEASE_NOTES_BASE_PATH}${currentSlug}`,
-    imagePath: `https://neon-next-git-og-image-neondatabase.vercel.app/api/og-image?title=${label}`,
+    imagePath: `https://neon-next-git-og-image-neondatabase.vercel.app/api/og-image?title=${ogTitle}?date=${releaseDate}`,
     type: 'article',
   });
 }

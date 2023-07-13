@@ -28,14 +28,19 @@ const GET = async (request) => {
     const { searchParams } = new URL(request.url);
 
     const hasTitle = searchParams.has('title');
+    const hasDate = searchParams.has('date');
     const title = hasTitle
       ? searchParams.get('title')?.slice(0, 100)
       : 'Serverless, Fault-Tolerant, Branchable Postgres';
+
+    const date = hasDate ? searchParams.get('date') : null;
 
     return new ImageResponse(
       (
         <div
           style={{
+            fontFamily: '"IBM Plex Sans"',
+            fontStyle: 'normal',
             position: 'relative',
             backgroundColor: '#0A0B0D',
             backgroundSize: '150px 150px',
@@ -60,17 +65,31 @@ const GET = async (request) => {
               marginTop: 'auto',
             }}
           >
+            {date && (
+              <div
+                style={{
+                  fontSize: 22,
+                  lineHeight: 1,
+                  padding: '6px 24px 10px',
+                  fontWeight: 500,
+                  borderRadius: 40,
+                  backgroundColor: '#F0F075',
+                  alignSelf: 'flex-start',
+                }}
+              >
+                {date}
+              </div>
+            )}
             <div
               style={{
                 fontSize: 100,
-                fontStyle: 'normal',
-                fontFamily: '"IBM Plex Sans"',
                 fontWeight: 500,
                 color: 'white',
-                lineHeight: 1.125,
+                lineHeight: 1,
                 letterSpacing: '-0.04em',
                 whiteSpace: 'pre-wrap',
                 maxWidth: '90%',
+                marginTop: 10,
               }}
             >
               {title}
@@ -78,8 +97,6 @@ const GET = async (request) => {
             <div
               style={{
                 fontSize: 30,
-                fontFamily: '"IBM Plex Sans"',
-                fontStyle: 'normal',
                 lineHeight: 1.25,
                 marginTop: 28,
                 letterSpacing: '-0.04em',
