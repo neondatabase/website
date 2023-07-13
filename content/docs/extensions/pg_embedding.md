@@ -83,7 +83,7 @@ CREATE INDEX ON documents USING hnsw(embedding) WITH (maxelements=1000, dims=3, 
 ```
 
 <Admonition type="note">
-HNSW indexes are created in memory and built on demand. If your compute suspends, expect the index to be rebuilt when the index is accessed again. The [Neon Pro](/docs/introduction/pro-plan) plan enables configuration of Neon's [Auto-suspension](/docs/manage/endpoints#auto-suspend-configuration) feature. By default, Neon suspends computes after 300 seconds (5 minutes) of inactivity.
+HNSW indexes are created in memory. If your compute suspends, expect the index to be rebuilt on compute startup. By default, Neon suspends computes after 300 seconds (5 minutes) of inactivity. The [Neon Pro](/docs/introduction/pro-plan) plan enables configuring or disabling Neon's [Auto-suspension](/docs/manage/endpoints#auto-suspend-configuration) feature.
 </Admonition>
 
 ### HNSW index options
@@ -102,7 +102,7 @@ The `m`, `efConstruction`, and `efSearch` options allow you to tune the HNSW alg
 - `efConstruction`: This option influences the trade-off between index quality and construction speed. A high `efConstruction` value creates a higher quality graph, enabling more accurate search results, but a higher value also means that index construction takes longer.
 - `efSearch`: This option influences the trade-off between query accuracy (recall) and speed. A higher `efSearch` value increases accuracy at the cost of speed. This value should be equal to or larger than `k`, which is the number of nearest neighbors you want your search to return.
 
-In summary, to prioritize search speed over accuracy, use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `efSearch`. At the cost of index build time, you can also use a higher `efConstruction` value to enable more accurate search results.
+In summary, to prioritize search speed over accuracy, use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `efSearch`. A higher `efConstruction` value enables more accurate search results at the cost of index build time, which is also affected by the `maxelements` setting.
 
 <Admonition type="info">
 For an idea of how to configure index option values, consider the benchmark performed by Neon using the _GIST-960 Euclidean dataset_, which provides a training set of 1 million vectors of 960 dimensions. The benchmark was run with this series of index option values:
