@@ -108,6 +108,9 @@ export async function GET(request) {
             weight: 400,
           },
         ],
+        headers: {
+          'Cache-Control': 'public, max-age=86400',
+        },
       }
     );
   } catch (e) {

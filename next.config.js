@@ -27,15 +27,6 @@ module.exports = {
         ],
       },
       {
-        source: '/docs/og',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 's-maxage=1, stale-while-revalidate=59',
-          },
-        ],
-      },
-      {
         source: '/:all*(svg|jpg|png)',
         locale: false,
         headers: [
