@@ -8,7 +8,7 @@ redirectFrom:
 
 In Neon, roles are PostgreSQL roles. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in your Neon project's primary branch.
 
-Your default role and roles created in the Neon console, Neon API, and Neon CLI are granted membership in the [neon_superuser](#the-neon_superuser-role) role. You can think of these roles as Neon administrators. Roles created with SQL are not granted [neon_superuser](#the-neon_superuser-role) membership. Roles created with SQL are only assigned the basic privileges assigned to any newly created user in a stand-alone PostgreSQL installation.
+Your default role and roles created in the Neon console, Neon API, and Neon CLI are granted membership in the [neon_superuser](#the-neon_superuser-role) role. Roles created with SQL are only granted the basic privileges assigned to any newly created user in a stand-alone PostgreSQL installation.
 
 <Admonition type="note">
 Neon is a managed PostgreSQL service, so you cannot access the host operating system, and you can't connect using the PostgreSQL `superuser` account like you can with a stand-alone PostgreSQL installation.
@@ -58,7 +58,7 @@ In addition, the `neon_superuser` role is able to:
 
 ## Manage roles in the Neon console
 
-This section describes how to create, view, and delete role in the Neon Console. All roles created in the Neon console are granted membership in the [neon_superuser](#the-neon_superuser-role) role, which is intended for users of the Neon console.
+This section describes how to create, view, and delete roles in the Neon Console. All roles created in the Neon console are granted membership in the [neon_superuser](#the-neon_superuser-role) role, which is intended for users of the Neon console.
 
 ### Create a role
 
