@@ -2,12 +2,16 @@ import { ImageResponse } from 'next/server';
 
 export const runtime = 'edge';
 
-const fetchData = (url) => fetch(new URL(url, import.meta.url)).then((res) => res.arrayBuffer());
-
-const fontMedium = fetchData('./assets/ibm-plex-sans-medium.ttf');
-const fontNormal = fetchData('./assets/ibm-plex-sans-regular.ttf');
-const logo = fetchData('./assets/logo.png');
-const background = fetchData('./assets/background.png');
+const fontMedium = fetch(new URL('./assets/ibm-plex-sans-medium.ttf', import.meta.url)).then(
+  (res) => res.arrayBuffer()
+);
+const fontNormal = fetch(new URL('./assets/ibm-plex-sans-regular.ttf', import.meta.url)).then(
+  (res) => res.arrayBuffer()
+);
+const logo = fetch(new URL('./assets/logo.png', import.meta.url)).then((res) => res.arrayBuffer());
+const background = fetch(new URL('./assets/background.png', import.meta.url)).then((res) =>
+  res.arrayBuffer()
+);
 
 export async function GET(request) {
   const [fontDataMedium, fontDataNormal, logoData, backgroundData] = await Promise.all([
