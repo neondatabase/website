@@ -23,7 +23,7 @@ Neon supports creating and managing roles from the following interfaces:
 - [Neon console](#manage-roles-in-the-neon-console)
 - [Neon CLI](#manage-roles-with-the-neon-cli)
 - [Neon API](#manage-roles-with-the-neon-api)
-- [SQL](#manage-roles-in-the-neon-console)
+- [SQL](#manage-roles-with-sql)
 
 ## The neon_superuser role
 
