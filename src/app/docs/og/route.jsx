@@ -109,7 +109,7 @@ export async function GET(request) {
           },
         ],
         headers: {
-          'Cache-Control': 'public, max-age=86400',
+          'x-vercel-cache': 'REVALIDATED',
         },
       }
     );
