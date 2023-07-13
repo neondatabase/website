@@ -27,7 +27,7 @@ module.exports = {
         ],
       },
       {
-        source: '/docs/og?*',
+        source: '/docs/og',
         headers: [
           {
             key: 'Cache-Control',
