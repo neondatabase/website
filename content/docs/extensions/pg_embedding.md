@@ -111,7 +111,7 @@ For an idea of how to configure index option values, consider the benchmark perf
 - `efConstruction`: 64, 128, and 256
 - `efSearch`: 32, 64, 128, 256, and 512
 
-To learn more about the benchmark, see [Introducing the HNSW Index for vector search in Postgres](https://neon-hwp.dreamhosters.com/pg-embedding-extension-for-vector-search/). Try experimenting with different settings to find the ones that work best for your particular application.
+To learn more about the benchmark, see [Introducing pg_embedding extension for vector search in Postgres and LangChain](https://neon.tech/blog/pg-embedding-extension-for-vector-search). Try experimenting with different settings to find the ones that work best for your particular application.
 </Admonition>
 
 ## How HNSW search works
