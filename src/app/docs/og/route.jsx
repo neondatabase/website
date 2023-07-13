@@ -28,9 +28,9 @@ export async function GET(request) {
     const { searchParams } = request.nextUrl;
 
     const hasTitle = searchParams.has('title');
-    const title = hasTitle
-      ? searchParams.get('title')?.slice(0, 100)
-      : 'Serverless, Fault-Tolerant, Branchable Postgres';
+    const title = searchParams.get('title');
+    const ogTitle =
+      hasTitle && title.length < 100 ? title : 'Serverless, Fault-Tolerant, Branchable Postgres';
 
     return new ImageResponse(
       (
@@ -74,7 +74,7 @@ export async function GET(request) {
                 marginTop: 10,
               }}
             >
-              {title}
+              {ogTitle}
             </div>
             <div
               style={{
