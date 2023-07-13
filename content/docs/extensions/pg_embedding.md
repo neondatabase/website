@@ -72,19 +72,21 @@ In summary, the query retrieves the ID of the record from the `documents` table 
 
 ### Create an HNSW index
 
-<Admonition type="important">
-The amount of compute memory available with the Neon Free Tier supports indexing up 50K rows (with metadata) and embeddings of up to 1536 dimensions. Indexing larger data sizes requires compute instances with more memory, which are available only with the [Neon Pro plan](https://console.neon.tech/app/billing). The Pro plan includes an [Autoscaling](/docs/introduction/autoscaling) feature, but this feature does not account for the memory used by an HNSW index. Autoscaling is therefore not recommended for use with HNSW indexes. Use a fixed size compute size instead. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
-</Admonition>
+#### Indexing considerations
+
+Before creating an HNSW index, please be aware of the following:
+
+- HNSW indexes are created in memory. If your compute suspends, expect the index to be rebuilt the next time it is accessed. By default, Neon suspends computes after 300 seconds (5 minutes) of inactivity. The [Neon Pro](/docs/introduction/pro-plan) plan enables configuring or disabling Neon's [Auto-suspension](/docs/manage/endpoints#auto-suspend-configuration) feature.
+- The amount of compute memory available with the Neon Free Tier supports indexing up 50K rows (with metadata) and embeddings of up to 1536 dimensions. Indexing larger data sizes requires compute instances with more memory. The [Neon Pro plan](https://console.neon.tech/app/billing) offers compute sizes with up to 28 GB RAM.
+- Neon's [Autoscaling](/docs/introduction/autoscaling) feature, available with the Pro plan, does not account for the memory used by an HNSW index. Autoscaling is therefore not recommended for use with HNSW indexes. Use a fixed sized compute instead. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+
+#### Creating an index
 
 To optimize search behavior, you can add an HNSW index. To create the HNSW index on your vector column, use a `CREATE INDEX` statement similar to the following:
 
 ```sql
 CREATE INDEX ON documents USING hnsw(embedding) WITH (maxelements=1000, dims=3, m=8);
 ```
-
-<Admonition type="note">
-HNSW indexes are created in memory. If your compute suspends, expect the index to be rebuilt on compute startup. By default, Neon suspends computes after 300 seconds (5 minutes) of inactivity. The [Neon Pro](/docs/introduction/pro-plan) plan enables configuring or disabling Neon's [Auto-suspension](/docs/manage/endpoints#auto-suspend-configuration) feature.
-</Admonition>
 
 ### HNSW index options
 
@@ -94,7 +96,7 @@ HNSW indexes are created in memory. If your compute suspends, expect the index t
 - `efConstruction`: Defines the number of nearest neighbors considered during index construction. The default value is `32`.
 - `efsearch`: Defines the number of nearest neighbors considered during index search. The default value is `32`.
 
-## Tuning the HNSW algorithm
+### Tuning the HNSW algorithm
 
 The `m`, `efConstruction`, and `efSearch` options allow you to tune the HNSW algorithm when creating an index:
 
@@ -142,8 +144,8 @@ When determining which index to use, `pgvector` with an IVFFlat index or `pg_emb
 |-------------------|------------|----------|
 | Search Speed      | Fast, but search speed depends on the number of clusters examined. More clusters mean higher accuracy but slower search times. | Typically faster than IVFFlat, especially in high-dimensional spaces, thanks to its graph-based nature. |
 | Accuracy          | Can achieve high accuracy but at the cost of examining more clusters and  longer search times. | Generally achieves higher accuracy for the same memory footprint compared to IVFFlat. |
-| Memory Usage      | Uses less memory since it only stores the centroids of clusters and the lists of vectors within these clusters. | Uses more memory because it maintains a graph structure with multiple layers. |
-| Index Construction Speed | Index building process is relatively fast. The data points are assigned to the nearest centroid, and inverted lists are constructed. | Index construction involves building multiple layers of graphs, which can be computationally intensive, especially if you choose high values for the parameter `ef_construction`. |
+| Memory Usage      | Uses less memory since it only stores the centroids of clusters and the lists of vectors within these clusters. | HNSW indexes are built in memory. They require more memory than IVFFlat because they build a graph structure with multiple layers. |
+| Index Construction Speed | Index building process is relatively fast. The data points are assigned to the nearest centroid, and inverted lists are constructed. | Index construction involves building multiple layers of graphs, which can be computationally intensive, especially for a high `ef_construction` value. In Neon, if a compute suspends, an HNSW index is rebuilt on the next access. |
 | Distance Metrics  | Typically used for L2 distances, but `pgvector` also supports inner product and cosine distance. | Currently supports L2 distance. |
 
 Ultimately, the choice between the `pgvector` with IVFFlat or `pg_embedding` with HNSW depends on your use case and requirements. Here are a few additional points to consider when making your choice:
