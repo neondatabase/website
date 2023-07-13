@@ -28,12 +28,9 @@ const GET = async (request) => {
     const { searchParams } = new URL(request.url);
 
     const hasTitle = searchParams.has('title');
-    const hasDate = searchParams.has('date');
     const title = hasTitle
       ? searchParams.get('title')?.slice(0, 100)
       : 'Serverless, Fault-Tolerant, Branchable Postgres';
-
-    const date = hasDate ? searchParams.get('date') : null;
 
     return new ImageResponse(
       (
@@ -65,21 +62,6 @@ const GET = async (request) => {
               marginTop: 'auto',
             }}
           >
-            {date && (
-              <div
-                style={{
-                  fontSize: 22,
-                  lineHeight: 1,
-                  padding: '6px 24px 10px',
-                  fontWeight: 500,
-                  borderRadius: 40,
-                  backgroundColor: '#F0F075',
-                  alignSelf: 'flex-start',
-                }}
-              >
-                {date}
-              </div>
-            )}
             <div
               style={{
                 fontSize: 100,
