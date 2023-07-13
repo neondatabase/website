@@ -13,6 +13,8 @@
       slug: introduction/branching
     - title: Autoscaling
       slug: introduction/autoscaling
+    - title: Read replicas
+      slug: introduction/read-replicas
     - title: Regions
       slug: introduction/regions
     - title: Plans
@@ -100,6 +102,9 @@
       items: 
         - title: Manage roles and database access with SQL
           slug: guides/manage-database-access
+      items:
+        - title: Read replicas
+          slug: guides/read-replica-guide
     - title: Languages
       items:
         - title: Elixir
@@ -177,6 +182,8 @@
   items:
     - title: Supported extensions
       slug: extensions/pg-extensions
+    - title: pg_embedding
+      slug: extensions/pg_embedding
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
     - title: pgvector
@@ -195,6 +202,27 @@
   slug: security/security-overview
 - title: Reference
   items:
+    - title: Neon CLI
+      slug: reference/neon-cli
+      items:
+        - title: auth
+          slug: reference/cli-auth
+        - title: me
+          slug: reference/cli-me
+        - title: projects
+          slug: reference/cli-projects
+        - title: branches
+          slug: reference/cli-branches
+        - title: databases
+          slug: reference/cli-databases
+        - title: roles
+          slug: reference/cli-roles
+        - title: operations
+          slug: reference/cli-operations
+        - title: connection-string
+          slug: reference/cli-connection-string
+        - title: completion
+          slug: reference/cli-completion
     - title: SDKs
       slug: reference/sdk
     - title: Glossary

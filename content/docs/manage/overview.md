@@ -51,7 +51,7 @@ Data resides in a branch. Each Neon project is created with a primary branch cal
 
 ## Compute endpoint
 
-A compute endpoint is a compute resource associated with a branch. A read-write compute endpoint is created for a project's primary branch, by default. You can choose whether or not to create a compute endpoint when creating a branch. To connect to a database that resides in a branch, you must connect via a compute endpoint that is associated with the branch. Tier limits define the resources (vCPUs and RAM) available to a compute endpoint. For more information, see [Manage computes](/docs/manage/endpoints).
+A compute endpoint is a compute resource associated with a branch. A read-write compute endpoint is created for a project's primary branch, by default. Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints. You can choose whether or not to create a compute endpoint when creating a branch. To connect to a database that resides in a branch, you must connect via a compute endpoint that is associated with the branch. Tier limits define the resources (vCPUs and RAM) available to a compute endpoint. For more information, see [Manage computes](/docs/manage/endpoints).
 
 ## Roles
 
