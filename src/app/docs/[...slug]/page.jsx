@@ -44,10 +44,15 @@ export async function generateMetadata({ params }) {
     excerpt,
   } = post;
 
+  const vercelUrl =
+    process.env.VERCEL_ENV === 'preview'
+      ? process.env.VERCEL_BRANCH_URL
+      : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+
   return getMetadata({
     title: `${title} - Neon Docs`,
     description: isReleaseNotes ? 'The latest product updates from Neon' : excerpt,
-    imagePath: `https://neon-next-git-og-image-neondatabase.vercel.app/api/og-image?title=${title}`,
+    imagePath: `${vercelUrl}/docs/og-image?title=${title}`,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isReleaseNotes ? `${LINKS.releaseNotes}/rss.xml` : null,
     type: 'article',
