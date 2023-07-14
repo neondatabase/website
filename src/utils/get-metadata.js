@@ -1,7 +1,6 @@
 import LINKS from 'constants/links';
-import SEO_DATA from 'constants/seo-data';
+import SEO_DATA, { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 
-const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
 const DEFAULT_TITLE = SEO_DATA.index.title;
 const DEFAULT_DESCRIPTION = SEO_DATA.index.description;
 

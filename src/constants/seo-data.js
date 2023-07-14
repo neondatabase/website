@@ -1,5 +1,7 @@
 import LINKS from './links';
 
+export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
+
 export default {
   index: {
     title: 'Neon — Serverless, Fault-Tolerant, Branchable Postgres',
