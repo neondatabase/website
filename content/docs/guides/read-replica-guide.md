@@ -21,7 +21,7 @@ Neon supports managing read replicas programmatically using the Neon API. See [M
 
 ## Prerequisites
 
-- A [Pro plan](/docs/introductin/pro-plan) account.
+- A [Pro plan](/docs/introduction/pro-plan) account.
 - A [Neon project](/docs/manage/projects#create-a-project).
 
 ## Create a read replica

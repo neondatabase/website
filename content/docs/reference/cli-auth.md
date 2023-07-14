@@ -37,7 +37,7 @@ The authentication flow for the Neon CLI follows this order:
 
 ### Options
 
-Only [global options](/docs/reference/neon-cli/global-options) apply.
+Only [global options](/docs/reference/neon-cli#global-options) apply.
 
 ## Need help?
 

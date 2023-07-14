@@ -41,7 +41,7 @@ neonctl branches list [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-options), the `list` subcommand supports this option:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `list` subcommand supports this option:
 
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |
@@ -115,7 +115,7 @@ neonctl branches create [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` subcommand supports these options:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `create` subcommand supports these options:
 
 | Option    | Description                                                    | Type    |   Required  |
 | :-------- | :------------------------------------------------------------- | :------ | :---------: |
@@ -176,7 +176,7 @@ neonctl branches rename <id|name> <new-name> [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `rename` subcommand supports this option:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `rename` subcommand supports this option:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
@@ -207,7 +207,7 @@ neonctl branches set-primary <id|name> [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `updaterename` subcommand supports this option:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `updaterename` subcommand supports this option:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
@@ -238,7 +238,7 @@ neonctl branches add-compute <id|name>
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `updaterename` subcommand supports these options:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `updaterename` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
@@ -270,7 +270,7 @@ neonctl branches delete <id|name> [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` subcommand supports this option:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `delete` subcommand supports this option:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
@@ -299,7 +299,7 @@ neonctl branches get <id|name> [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `get` subcommand supports this option:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `get` subcommand supports this option:
 
 #### Options
 

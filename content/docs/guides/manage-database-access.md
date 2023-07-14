@@ -20,7 +20,7 @@ CREATE ROLE neon_superuser CREATEDB CREATEROLE NOLOGIN IN ROLE pg_read_all_data,
 
 </CodeBlock>
 
-You can think of this role as a Neon administrator role. A user with membership in the `neon_superuser` role can create databases, create roles, add extensions, grant `neon_superuser` privileges, and has all the privileges of `pg_read_all_data` and `pg_write_all_data`. For more information about this role, see [The neon_superuser role](/docs/reference/manage/roles#the-neon-super-user).
+You can think of this role as a Neon administrator role. A user with membership in the `neon_superuser` role can create databases, create roles, add extensions, grant `neon_superuser` privileges, and has all the privileges of `pg_read_all_data` and `pg_write_all_data`. For more information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
 Any user created in the Neon console or using the Neon API is automatically granted membership in the `neon_superuser` role. But what do you do if you need to create roles with different or limited privileges? After all, not every database user should be an administrator in Neon.
 

@@ -41,7 +41,7 @@ neonctl projects list [options]
 
 #### Options
 
-Only [global options](/docs/reference/neon-cli/global-options) apply.
+Only [global options](/docs/reference/neon-cli#global-options) apply.
 
 #### Example
 
@@ -72,7 +72,7 @@ neonctl projects create [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` subcommand supports these options:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `create` subcommand supports these options:
 
 | Option                                | Description                                                                                               | Type    | Required                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
@@ -110,7 +110,7 @@ The `id` is the project ID, which you can obtain by listing your projects or fro
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `update` subcommand supports this option:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `update` subcommand supports this option:
 
 | Option                                | Description                                                                                               | Type    | Required                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
@@ -139,7 +139,7 @@ The `id` is the project ID, which you can obtain by listing your projects or fro
 
 #### Options
 
-Only [global options](/docs/reference/neon-cli/global-options) apply.
+Only [global options](/docs/reference/neon-cli#global-options) apply.
 
 #### Example
 
@@ -168,7 +168,7 @@ The `id` is the project ID, which you can obtain by listing your projects or fro
 
 #### Options
 
-Only [global options](/docs/reference/neon-cli/global-options) apply.
+Only [global options](/docs/reference/neon-cli#global-options) apply.
 
 #### Example
 
