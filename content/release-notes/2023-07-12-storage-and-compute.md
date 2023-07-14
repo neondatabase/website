@@ -4,6 +4,8 @@ label: 'Storage'
 
 ### What's new
 
+**Faster vector similarity search in PostgreSQL**
+
 Neon is pleased to announce the release of our new [pg_embedding](https://neon.tech/docs/extensions/pg_embedding#pgembedding-extension-github-repository) extension, which enables use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL and [Langchain](https://python.langchain.com/docs/modules/data_connection/vectorstores/integrations/pgembedding).
 
 The `pg_embedding` extension increases speed by up to 20x for 99% accuracy for approximate nearest neighbor search compared to `pgvector`.
