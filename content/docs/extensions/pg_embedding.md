@@ -72,18 +72,18 @@ In summary, the query retrieves the ID of the record from the `documents` table 
 
 ### Create an HNSW index
 
-<Admonition type="important">
-The amount of compute memory available with the Neon Free Tier supports indexing up 50K rows (with metadata) and embeddings of up to 1536 dimensions. Indexing larger data sizes requires compute instances with more memory, which are available only with the [Neon Pro plan](https://console.neon.tech/app/billing). The Pro plan includes an [Autoscaling](/docs/introduction/autoscaling) feature, but this feature does not account for the memory used by an HNSW index. Autoscaling is therefore not recommended for use with HNSW indexes. Use a fixed size compute size instead. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
-</Admonition>
-
 To optimize search behavior, you can add an HNSW index. To create the HNSW index on your vector column, use a `CREATE INDEX` statement similar to the following:
 
 ```sql
 CREATE INDEX ON documents USING hnsw(embedding) WITH (maxelements=1000, dims=3, m=8);
 ```
 
-<Admonition type="note">
-HNSW indexes are created in memory and built on demand. If your compute suspends, expect the index to be rebuilt when the index is accessed again. The [Neon Pro](/docs/introduction/pro-plan) plan enables configuration of Neon's [Auto-suspension](/docs/manage/endpoints#auto-suspend-configuration) feature. By default, Neon suspends computes after 300 seconds (5 minutes) of inactivity.
+<Admonition type="info">
+When creating and HNSW index, please be aware of the following:
+
+- HNSW indexes are created in memory. If your compute suspends, expect the index to be rebuilt the next time it is accessed. By default, Neon suspends computes after 300 seconds (5 minutes) of inactivity. The [Neon Pro](/docs/introduction/pro-plan) plan enables configuring or disabling Neon's [Auto-suspension](/docs/manage/endpoints#auto-suspend-configuration) feature.
+- The amount of compute memory available with the Neon Free Tier supports indexing up 50K rows (with metadata) and embeddings of up to 1536 dimensions. Indexing larger data sizes requires compute instances with more memory. The [Neon Pro plan](https://console.neon.tech/app/billing) offers compute sizes with up to 28 GB RAM.
+- Neon's [Autoscaling](/docs/introduction/autoscaling) feature, available with the Pro plan, does not account for the memory used by an HNSW index. Autoscaling is therefore not recommended for use with HNSW indexes. Use a fixed sized compute instead. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 </Admonition>
 
 ### HNSW index options
@@ -94,7 +94,7 @@ HNSW indexes are created in memory and built on demand. If your compute suspends
 - `efConstruction`: Defines the number of nearest neighbors considered during index construction. The default value is `32`.
 - `efsearch`: Defines the number of nearest neighbors considered during index search. The default value is `32`.
 
-## Tuning the HNSW algorithm
+### Tuning the HNSW algorithm
 
 The `m`, `efConstruction`, and `efSearch` options allow you to tune the HNSW algorithm when creating an index:
 
@@ -102,7 +102,7 @@ The `m`, `efConstruction`, and `efSearch` options allow you to tune the HNSW alg
 - `efConstruction`: This option influences the trade-off between index quality and construction speed. A high `efConstruction` value creates a higher quality graph, enabling more accurate search results, but a higher value also means that index construction takes longer.
 - `efSearch`: This option influences the trade-off between query accuracy (recall) and speed. A higher `efSearch` value increases accuracy at the cost of speed. This value should be equal to or larger than `k`, which is the number of nearest neighbors you want your search to return.
 
-In summary, to prioritize search speed over accuracy, use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `efSearch`. At the cost of index build time, you can also use a higher `efConstruction` value to enable more accurate search results.
+In summary, to prioritize search speed over accuracy, use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `efSearch`. A higher `efConstruction` value enables more accurate search results at the cost of index build time, which is also affected by the `maxelements` setting.
 
 <Admonition type="info">
 For an idea of how to configure index option values, consider the benchmark performed by Neon using the _GIST-960 Euclidean dataset_, which provides a training set of 1 million vectors of 960 dimensions. The benchmark was run with this series of index option values:
@@ -111,7 +111,7 @@ For an idea of how to configure index option values, consider the benchmark perf
 - `efConstruction`: 64, 128, and 256
 - `efSearch`: 32, 64, 128, 256, and 512
 
-To learn more about the benchmark, see [Introducing the HNSW Index for vector search in Postgres](https://neon-hwp.dreamhosters.com/pg-embedding-extension-for-vector-search/). Try experimenting with different settings to find the ones that work best for your particular application.
+To learn more about the benchmark, see [Introducing pg_embedding extension for vector search in Postgres and LangChain](https://neon.tech/blog/pg-embedding-extension-for-vector-search). Try experimenting with different settings to find the ones that work best for your particular application.
 </Admonition>
 
 ## How HNSW search works
@@ -142,8 +142,8 @@ When determining which index to use, `pgvector` with an IVFFlat index or `pg_emb
 |-------------------|------------|----------|
 | Search Speed      | Fast, but search speed depends on the number of clusters examined. More clusters mean higher accuracy but slower search times. | Typically faster than IVFFlat, especially in high-dimensional spaces, thanks to its graph-based nature. |
 | Accuracy          | Can achieve high accuracy but at the cost of examining more clusters and  longer search times. | Generally achieves higher accuracy for the same memory footprint compared to IVFFlat. |
-| Memory Usage      | Uses less memory since it only stores the centroids of clusters and the lists of vectors within these clusters. | Uses more memory because it maintains a graph structure with multiple layers. |
-| Index Construction Speed | Index building process is relatively fast. The data points are assigned to the nearest centroid, and inverted lists are constructed. | Index construction involves building multiple layers of graphs, which can be computationally intensive, especially if you choose high values for the parameter `ef_construction`. |
+| Memory Usage      | Uses less memory since it only stores the centroids of clusters and the lists of vectors within these clusters. | HNSW indexes are built in memory. They require more memory than IVFFlat because they build a graph structure with multiple layers. |
+| Index Construction Speed | Index building process is relatively fast. The data points are assigned to the nearest centroid, and inverted lists are constructed. | Index construction involves building multiple layers of graphs, which can be computationally intensive, especially for a high `ef_construction` value. In Neon, if a compute suspends, an HNSW index is rebuilt on the next access. |
 | Distance Metrics  | Typically used for L2 distances, but `pgvector` also supports inner product and cosine distance. | Currently supports L2 distance. |
 
 Ultimately, the choice between the `pgvector` with IVFFlat or `pg_embedding` with HNSW depends on your use case and requirements. Here are a few additional points to consider when making your choice:
