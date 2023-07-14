@@ -78,8 +78,8 @@ const Form = ({ className }) => {
 
   const onSubmit = async (formData, e) => {
     e.preventDefault();
-
-    const data = { ...formData };
+    const { message, ...rest } = formData;
+    const data = { ...rest, 'TICKET.content': message };
 
     data.application_scope = data.application_scope?.map(({ id }) => id).join(';');
     data.integration_type = data.integration_type.name;
