@@ -14,7 +14,14 @@ const isActiveItem = (items, currentSlug) =>
     ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
   );
 
-const Item = ({ title, slug = null, ariaLabel = null, isStandalone = false, items = null }) => {
+const Item = ({
+  title,
+  slug = null,
+  ariaLabel = null,
+  isStandalone = false,
+  items = null,
+  closeMenu = null,
+}) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(`${links.docs}/`, '');
 
@@ -26,6 +33,9 @@ const Item = ({ title, slug = null, ariaLabel = null, isStandalone = false, item
   }
 
   const handleClick = () => {
+    if (closeMenu && slug) {
+      closeMenu();
+    }
     setIsOpen((prev) => !prev);
   };
 
@@ -70,7 +80,7 @@ const Item = ({ title, slug = null, ariaLabel = null, isStandalone = false, item
           )}
         >
           {items.map((item, index) => (
-            <Item {...item} key={index} />
+            <Item {...item} key={index} closeMenu={closeMenu} />
           ))}
         </ul>
       )}
@@ -91,7 +101,7 @@ Item.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
-  isParentOpen: PropTypes.bool,
+  closeMenu: PropTypes.func,
 };
 
 export default Item;

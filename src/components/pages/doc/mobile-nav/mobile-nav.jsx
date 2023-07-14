@@ -112,7 +112,7 @@ const MobileNav = ({ className = null, sidebar }) => {
         </ul>
         <ul className="mt-7">
           {sidebar.map((item, index) => (
-            <Item {...item} key={index} />
+            <Item {...item} key={index} closeMenu={toggleMenu} />
           ))}
         </ul>
       </motion.div>

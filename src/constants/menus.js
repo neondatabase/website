@@ -1,4 +1,5 @@
 import CalendarIcon from 'icons/calendar.inline.svg';
+import ConsoleIcon from 'icons/console.inline.svg';
 import TransactionsIcon from 'icons/transactions.inline.svg';
 
 import LINKS from './links';
@@ -210,6 +211,11 @@ export default {
       icon: TransactionsIcon,
       title: 'API Reference',
       slug: LINKS.apiReference,
+    },
+    {
+      icon: ConsoleIcon,
+      title: 'CLI Reference',
+      slug: LINKS.cliReference,
     },
     {
       icon: CalendarIcon,

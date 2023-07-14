@@ -99,7 +99,9 @@
 - title: Guides
   items:
     - title: Neon features
-      items:
+      items: 
+        - title: Manage roles and databases with SQL
+          slug: guides/manage-database-access
         - title: Read replicas
           slug: guides/read-replica-guide
     - title: Languages

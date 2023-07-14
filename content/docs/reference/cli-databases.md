@@ -35,7 +35,7 @@ neonctl databases list [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-options), the `list` subcommand supports these options:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `list` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
@@ -71,7 +71,7 @@ neonctl databases create [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `create` subcommand supports these options:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `create` subcommand supports these options:
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
@@ -113,7 +113,7 @@ neonctl databases delete <database> [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](../neon-cli/global-options), the `delete` subcommand supports these options:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `delete` subcommand supports these options:
 
 | Option           | Description  | Type   | Required  |
 | ---------------- | ------------ | ------ | :------: |
