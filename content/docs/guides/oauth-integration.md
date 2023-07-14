@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 You can integrate your application with Neon by leveraging our secure OAuth integration. The integration enables your application to interact with users' Neon accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to users' personal login credentials and is conducted with their  approval, ensuring data privacy and security.
 
-To set up the integration and create a Neon OAuth application, you can apply on our [Partners page](https://neon.tech/partner). You will need to provide us with the following information:
+To set up the integration and create a Neon OAuth application, you can apply on our [Partners page](https://neon.tech/partners). You will need to provide us with the following information:
 
 1. Details about your application, such as its name, what it does, and a link to the website.
 2. Callback URL(s): URLs used to redirect users after completing the authorization flow. For example `https://yourapplication.com/api/oauth/callback`, `http://localhost:3000/api/oauth/callback`
