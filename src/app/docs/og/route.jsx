@@ -32,10 +32,11 @@ export async function GET(request) {
 
     const hasTitle = searchParams.has('title');
     const title = searchParams.get('title');
+
     const ogTitle =
       hasTitle && title.length < MAX_TITLE_LENGTH
-        ? title
-        : 'Serverless, Fault-Tolerant, Branchable Postgres Neon pgm';
+        ? Buffer.from(title, 'base64').toString('utf-8')
+        : 'Serverless, Fault-Tolerant, Branchable Postgres Neon';
 
     return new ImageResponse(
       (
@@ -113,9 +114,6 @@ export async function GET(request) {
             weight: 400,
           },
         ],
-        headers: {
-          'x-vercel-cache': 'REVALIDATED',
-        },
       }
     );
   } catch (e) {

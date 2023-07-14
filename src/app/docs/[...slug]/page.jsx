@@ -49,10 +49,12 @@ export async function generateMetadata({ params }) {
       ? `https://${process.env.VERCEL_BRANCH_URL}`
       : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
+  const encodedTitle = Buffer.from(title).toString('base64');
+
   return getMetadata({
     title: `${title} - Neon Docs`,
     description: isReleaseNotes ? 'The latest product updates from Neon' : excerpt,
-    imagePath: `${vercelUrl}/docs/og?title=${title}`,
+    imagePath: `${vercelUrl}/docs/og?title=${encodedTitle}`,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isReleaseNotes ? `${LINKS.releaseNotes}/rss.xml` : null,
     type: 'article',
