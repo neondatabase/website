@@ -3,6 +3,9 @@ import { ImageResponse } from 'next/server';
 export const runtime = 'edge';
 export const preferredRegion = 'auto';
 
+// @NOTE: the maximum length of the title to look fine on the og image
+const MAX_TITLE_LENGTH = 52;
+
 export async function GET(request) {
   const fontMedium = fetch(
     new URL('../../../../public/fonts/ibm-plex-sans/ibm-plex-sans-medium.ttf', import.meta.url)
@@ -30,7 +33,9 @@ export async function GET(request) {
     const hasTitle = searchParams.has('title');
     const title = searchParams.get('title');
     const ogTitle =
-      hasTitle && title.length < 100 ? title : 'Serverless, Fault-Tolerant, Branchable Postgres';
+      hasTitle && title.length < MAX_TITLE_LENGTH
+        ? title
+        : 'Serverless, Fault-Tolerant, Branchable Postgres Neon pgm';
 
     return new ImageResponse(
       (
