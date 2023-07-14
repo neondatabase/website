@@ -44,21 +44,33 @@ To upgrade to the latest version of the Neon CLI, run the `npm i -g neonctl` com
 
 ## Connect
 
-Run the following command to authenticate a connection to Neon:
+The Neon CLI supports connecting via web authentication or with an API key.
+
+### Connect via web authentication
+
+Run the following command to connect to Neon via web authentication:
 
 ```bash
 neonctl auth
 ```
 
-The `auth` command launches a browser window where you can authorize the Neon CLI to access your Neon account. Running a Neon CLI command without authenticating with [neonctl auth](/docs/reference/cli-auth) automatically launches the browser authentication process.
+The [neonctl auth](/docs/reference/cli-auth) command launches a browser window where you can authorize the Neon CLI to access your Neon account. If you have not authenticated previously, running a Neon CLI command automatically launches the web authentication process unless you have specified an API key.
 
-Alternatively, you can authenticate a connection with a Neon API key using the `--api-key` option when running a Neon CLI command. For example, an API key is used with the following `neonctl projects list` command:
+### Connect with an API key
+
+To connect with a Neon API key, you can specify the `--api-key` option when running a Neon CLI command. For example, the following `neonctl projects list` command connects to Neon using the `--api-key` option:
 
 ```bash
 neonctl projects list --api-key <neon_api_key>
 ```
 
-For information about obtaining an Neon API key, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
+To avoid including the `--api-key` option with each CLI command, you can export your API key to the `NEON_API_KEY` environment variable.
+
+```bash
+export NEON_API_KEY=<neon_api_key>
+```
+
+For information about obtaining an Neon API key, see [Create an API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
 
 ## Configure autocompletion
 
@@ -86,7 +98,7 @@ Global options are supported with any Neon CLI command.
 | :---------  | :---------------------------------- | :----- | :-------------------------------- |
 | [-o, --output](#output)| Set the Neon CLI output format (`json`, `yaml`, or `table`)                 | string | table                           |
 | [--config-dir](#config-dir)| Path to the Neon CLI configuration directory            | string | `/home/<user>/.config/neonctl`   |
-| [--api-key](#api-key)   | Neon API key                             | string | NEON_API_KEY environment variable                                |
+| [--api-key](#api-key)   | Neon API key                             | string | `NEON_API_KEY` environment variable                                |
 | [--analytics](#analytics) | Manage analytics                    | boolean| true                              |
 | [-v, --version](#version)   | Show the Neon CLI version number                 | boolean| -                                 |
 | [-h, --help](#help)      | Show the Neon CLI help                           | boolean| -                                 |
@@ -109,12 +121,27 @@ Global options are supported with any Neon CLI command.
 
 - <a id="api-key"></a>`--api-key`
 
-  Specifies your Neon API key. You can authenticate using a Neon API key when running a Neon CLI command instead of using `neonctl auth`. For information about obtaining an Neon API key, see [Authentication](https://api-docs.neon.tech/reference/authentication), in the _Neon API Reference_.
+  Specifies your Neon API key. You can authenticate using a Neon API key when running a Neon CLI command instead of using `neonctl auth`. For information about obtaining an Neon API key, see [Create an API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
 
   ```bash
   neonctl <command> --api-key <neon_api_key>
   ```
 
+  To avoid including the `--api-key` option with each CLI command, you can export your API key to the `NEON_API_KEY` environment variable.
+
+  ```bash
+  export NEON_API_KEY=<neon_api_key>
+  ```
+  
+  <Admonition type="info">
+  The authentication flow for the Neon CLI follows this order:
+
+  - If the `--api-key` option is provided, it is used for authentication.
+  - If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable setting is used.
+  - If there is no `--api-key` option or `NEON_API_KEY` environment variable setting, the CLI looks for the `credentials.json` file created by the `neonctl auth` command.
+  - If the credentials file is not found, the Neon CLI initiates the `neonctl auth` web authentication process.
+  </Admonition>
+  
 - <a id="analytics"></a>`--analytics`
 
   Analytics are enabled by default to gather information about the CLI commands and options that are used by our customers. This data collection assists in offering support, and allows for a better understanding of typical usage patterns so that we can improve user experience. Neon does not collect user-defined data, such as project IDs or command payloads. To opt-out of analytics data collection, specify `--no-analytics` or `--analytics false`.
