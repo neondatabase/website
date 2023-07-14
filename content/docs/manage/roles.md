@@ -202,24 +202,17 @@ Response:
   "roles": [
     {
       "branch_id": "br-blue-tooth-671580",
-      "name": "casey",
+      "name": "daniel",
       "protected": false,
-      "created_at": "2023-01-04T18:38:23Z",
-      "updated_at": "2023-01-04T18:38:23Z"
-    },
-    {
-      "branch_id": "br-blue-tooth-671580",
-      "name": "web_access",
-      "protected": true,
-      "created_at": "2023-01-04T18:38:23Z",
-      "updated_at": "2023-01-04T18:38:23Z"
+      "created_at": "2023-07-09T17:01:34Z",
+      "updated_at": "2023-07-09T17:01:34Z"
     },
     {
       "branch_id": "br-blue-tooth-671580",
       "name": "sally",
       "protected": false,
-      "created_at": "2023-01-04T20:35:48Z",
-      "updated_at": "2023-01-04T20:35:48Z"
+      "created_at": "2023-07-13T06:42:55Z",
+      "updated_at": "2023-07-13T14:48:29Z"
     }
   ]
 }
