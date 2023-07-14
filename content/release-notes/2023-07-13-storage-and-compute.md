@@ -10,7 +10,7 @@ label: 'Storage'
 
     With this change, you can grant and revoke privileges for PostgreSQL roles as you would in a stand-alone PostgreSQL installation.
 
-    Additionally, roles created in the Neon Console, CLI, and API are now automatically granted membership in a `neon_superuser` role, which defines the privileges required to perform tasks in Neon such as creating databases, roles, and extensions. To learn more, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
+    Additionally, roles created in the Neon Console, CLI, and API are now automatically granted membership in a `neon_superuser` role. This role defines the privileges required to perform tasks in Neon such as creating databases, roles, and extensions. To learn more, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
 - **Improved experience for Prisma Migrate users**
 
