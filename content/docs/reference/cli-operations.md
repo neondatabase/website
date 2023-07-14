@@ -37,7 +37,7 @@ neonctl operations list [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](/docs/reference/neon-cli/global-options), the `list` subcommand supports this option:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `list` subcommand supports this option:
 
 | Option       | Description | Type   | Required  |
 | ------------ | ----------- | ------ | :------: |

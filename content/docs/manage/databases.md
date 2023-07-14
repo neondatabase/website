@@ -23,7 +23,7 @@ Neon supports creating and managing databases from the following interfaces:
 
 This section describes how to create, view, and delete databases in the Neon Console.
 
-The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon consoles. For information about this role, see [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role).
+The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon consoles. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
 ### Create a database
 
@@ -83,7 +83,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdatabase).
 
-The role specified by `owner_name` is the owner of that database. The `neon_superuser` role is also granted all privileges on databases created with the Neon API. For information about this role, see [The neon_superuser role](/docs/manage/roles/the-neon_superuser-role).
+The role specified by `owner_name` is the owner of that database. The `neon_superuser` role is also granted all privileges on databases created with the Neon API. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
 ```text
 POST /projects/{project_id}/branches/{branch_id}/databases
