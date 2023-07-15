@@ -51,16 +51,16 @@ const Hero = () => {
             <div className="mx-auto mt-16 flex 2xl:mt-12 2xl:max-w-5xl lg:mt-9 lg:max-w-[583px] lg:flex-col lg:space-y-9 md:mt-6 md:space-y-6">
               <div
                 className={clsx(
-                  'relative w-full max-w-[696px] shrink-0 rounded-[20px] shadow-[0_0_70px_30px_rgb(0_230_153/30%)] 2xl:max-w-[535px] lg:max-w-none sm:shadow-none',
-                  'after:pointer-events-none after:absolute after:-inset-40 after:rounded-[22px] after:opacity-10 after:[-webkit-mask-position:center_center] after:[-webkit-mask-repeat:no-repeat] after:[-webkit-mask-size:100%_100%] after:[filter:url("#noiseFilter")] after:[mask-image:url("/images/mask-lg.svg")] xl:after:hidden'
+                  'relative w-full max-w-[696px] shrink-0 rounded-[20px] shadow-[0_0_60px_30px_rgb(0_230_153/30%)] 2xl:max-w-[535px] lg:max-w-none sm:shadow-none'
+                  // 'after:pointer-events-none after:absolute after:-inset-40 after:rounded-[22px] after:opacity-10 after:[-webkit-mask-position:center_center] after:[-webkit-mask-repeat:no-repeat] after:[-webkit-mask-size:100%_100%] after:[filter:url("#noiseFilter")] after:[mask-image:url("/images/mask-lg.svg")] xl:after:hidden'
                 )}
               >
                 <ContactForm formState={formState} setFormState={setFormState} />
               </div>
               <div
                 className={clsx(
-                  'relative my-9 flex-1 rounded-[20px] font-mono text-black shadow-[0_0_70px_30px_rgb(240_240_117/30%)] lg:my-0 sm:shadow-none',
-                  'after:pointer-events-none after:absolute after:-inset-40 after:rounded-[22px] after:opacity-10 after:[-webkit-mask-position:center_center] after:[-webkit-mask-repeat:no-repeat] after:[-webkit-mask-size:100%_100%] after:[filter:url("#noiseFilter")] after:[mask-image:url("/images/mask-md.svg")] xl:after:hidden'
+                  'relative my-9 flex-1 rounded-[20px] font-mono text-black shadow-[0_0_60px_30px_rgb(240_240_117/30%)] lg:my-0 sm:shadow-none'
+                  // 'after:pointer-events-none after:absolute after:-inset-40 after:rounded-[22px] after:opacity-10 after:[-webkit-mask-position:center_center] after:[-webkit-mask-repeat:no-repeat] after:[-webkit-mask-size:100%_100%] after:[filter:url("#noiseFilter")] after:[mask-image:url("/images/mask-md.svg")] xl:after:hidden'
                 )}
               >
                 <div className="relative z-10 flex h-full w-full flex-col overflow-hidden rounded-r-[20px] bg-secondary-2 pt-10 lg:flex-row lg:rounded-[20px] lg:pt-0 md:flex-col md:items-center">

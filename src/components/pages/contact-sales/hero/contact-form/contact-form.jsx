@@ -162,7 +162,6 @@ const ContactForm = ({ formState, setFormState }) => {
         <Button
           className="w-[194px] shrink-0 !px-9 !py-6 !text-lg md:order-1 md:mt-6 md:w-full"
           type="submit"
-          loading={formState === FORM_STATES.LOADING}
           theme="primary"
           size="xs"
           disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}

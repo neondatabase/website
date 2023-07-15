@@ -38,6 +38,7 @@ const CodeBlock = ({
   isTrimmed = true,
   highlight = '',
   as: Tag = 'div',
+  isBlogPost = false,
   ...otherProps
 }) => {
   const { resolvedTheme: theme } = useTheme();
@@ -59,20 +60,22 @@ const CodeBlock = ({
         language={snippetLanguage}
         useInlineStyles={false}
         showLineNumbers={showLineNumbers || highlight !== ''}
-        className="no-scrollbars"
+        className={clsx('no-scrollbars', { highlight: highlight !== '' })}
         lineProps={(lineNumber) => ({
           style: {
             display: 'flex',
             position: 'relative',
-            padding: '1.5px 16px',
-            marginLeft: '-1rem',
-            marginRight: '-1rem',
+            padding: isBlogPost ? '1.5px 24px' : '1.5px 16px',
+            marginLeft: isBlogPost ? '-1.5rem' : '-1rem',
+            marginRight: isBlogPost ? '-1.5rem' : '-1rem',
             backgroundColor:
               highlightedLines.includes(lineNumber) &&
-              (theme === 'dark' ? 'rgba(0, 229, 153, 0.08)' : 'rgba(0, 85, 255, 0.08)'),
+              (theme === 'dark' || isBlogPost
+                ? 'rgba(0, 229, 153, 0.08)'
+                : 'rgba(0, 85, 255, 0.08)'),
             boxShadow:
               highlightedLines.includes(lineNumber) &&
-              (theme === 'dark'
+              (theme === 'dark' || isBlogPost
                 ? 'inset 3px 0px 0px 0px #00E599'
                 : 'inset 3px 0px 0px 0px #0055ff'),
           },
@@ -108,6 +111,7 @@ CodeBlock.propTypes = {
   isTrimmed: PropTypes.bool,
   highlight: PropTypes.string,
   as: PropTypes.oneOf(['figure', 'pre']),
+  isBlogPost: PropTypes.bool,
 };
 
 export default CodeBlock;

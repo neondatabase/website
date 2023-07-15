@@ -27,4 +27,5 @@ export default {
   termsOfService: '/terms-of-service',
   privacyPolicy: '/privacy-policy',
   partners: '/partners',
+  cliReference: '/docs/reference/neon-cli',
 };
