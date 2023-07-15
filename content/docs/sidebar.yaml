@@ -104,7 +104,21 @@
           slug: guides/manage-database-access
         - title: Read replicas
           slug: guides/read-replica-guide
-    - title: Languages
+        - title: Branching
+          items: 
+            -title: Data analysis and reporting
+            -slug: guides/branching-analytics
+            -title: Data recovery
+            -slug: guides/branching-data-recovery
+            -title: Branching with the CLI
+            -slug: guides/branching-data-recovery
+            -title: Branching with the API
+            -slug: guides/branching-data-recovery
+            -title: Automation with GitHub Actions
+            -slug: guides/branching-github-actions
+            -title: Automation with Githooks
+            -slug: guides/branching-githooks
+      - title: Languages
       items:
         - title: Elixir
           slug: guides/elixir-ecto

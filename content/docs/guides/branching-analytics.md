@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Neon's database branching feature allows you to duplicate your database schema and data at a specific point in time, and then perform operations on this copy without impacting the main, or "production" database. You can run data-intensive analytics queries on this branch, thereby avoiding any disruption or performance issues on your main database branch.
+Neon's database branching feature allows you to duplicate your database schema and data at a specific point in time, and then perform operations on this copy without impacting your database. You can run data-intensive analytics queries on this branch, avoiding disruption or performance issues on your production branch.
 
 This guide walks you through creating a branch of your production database, running a data analysis query, and deleting the branch when you are finished.
 
