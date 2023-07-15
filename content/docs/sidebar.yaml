@@ -111,9 +111,9 @@
             -title: Data recovery
             -slug: guides/branching-data-recovery
             -title: Branching with the CLI
-            -slug: guides/branching-data-recovery
+            -slug: guides/branching-neon-cli
             -title: Branching with the API
-            -slug: guides/branching-data-recovery
+            -slug: guides/branching-neon-api
             -title: Automation with GitHub Actions
             -slug: guides/branching-github-actions
             -title: Automation with Githooks
