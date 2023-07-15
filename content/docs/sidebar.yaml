@@ -107,17 +107,17 @@
         - title: Branching
           items: 
             -title: Data analysis and reporting
-            -slug: guides/branching-analytics
+             slug: guides/branching-analytics
             -title: Data recovery
-            -slug: guides/branching-data-recovery
+             slug: guides/branching-data-recovery
             -title: Branching with the CLI
-            -slug: guides/branching-neon-cli
+             slug: guides/branching-neon-cli
             -title: Branching with the API
-            -slug: guides/branching-neon-api
+             slug: guides/branching-neon-api
             -title: Automation with GitHub Actions
-            -slug: guides/branching-github-actions
+             slug: guides/branching-github-actions
             -title: Automation with Githooks
-            -slug: guides/branching-githooks
+             slug: guides/branching-githooks
       - title: Languages
       items:
         - title: Elixir
