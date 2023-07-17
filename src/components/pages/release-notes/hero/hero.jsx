@@ -25,7 +25,7 @@ const Hero = ({ className = null, withContainer = false, isReleaseNotePost }) =>
           <p>{DESCRIPTION}</p>
           {!withContainer && (
             <a
-              className="ml-3 flex items-center text-secondary-8 transition-colors duration-200 hover:text-secondary-7 dark:text-primary-1 dark:hover:text-primary-2"
+              className="ml-3 flex items-center text-secondary-8 transition-colors duration-200 hover:text-secondary-7 dark:text-primary-1 dark:hover:text-primary-2 md:ml-0"
               href={`${RELEASE_NOTES_BASE_PATH}rss.xml`}
             >
               <RSSLogo className="mr-1.5" />
