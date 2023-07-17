@@ -42,8 +42,8 @@ const ChatWidget = () => {
   const { getSignal, resetAbortController } = useAbortController();
 
   const {
-    inputText,
-    setInputText,
+    selectedValue,
+    setSelectedValue,
     messages,
     setMessages,
     isLoading,
@@ -58,7 +58,7 @@ const ChatWidget = () => {
   });
 
   const handleExampleClick = (e) => {
-    setInputText(e.target.textContent);
+    setSelectedValue(e.target.textContent);
     sendGtagEvent('chat_widget_example_click', {
       value: e.target.textContent,
     });
@@ -77,25 +77,26 @@ const ChatWidget = () => {
     async (e) => {
       e?.preventDefault();
       setIsStopped(false);
-      // do not let user submit another
-      // query while the previous one is getting processed
       const inputText = getValueRef.current();
 
+      // do not let user submit another
+      // query while the previous one is getting processed
       if (!isLoading && inputText) {
         setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
-        setInputText('');
         sendGtagEvent('chat_widget_submit', {
           value: inputText,
         });
+        setSelectedValue('');
       }
 
       if (shouldTryAgain) {
         setShouldTryAgain(false);
       }
     },
-    [isLoading, setMessages, setShouldTryAgain, shouldTryAgain, setInputText]
+    [isLoading, setSelectedValue, setMessages, setShouldTryAgain, shouldTryAgain]
   );
 
+  console.log('ChatWidget.jsx: 202: messages: ', selectedValue);
   // @NOTE:
   // fires only once on close!
   // to fire twice we need to add trigger
@@ -183,7 +184,7 @@ const ChatWidget = () => {
             ) : (
               <form className="group relative w-full px-5 pb-5 lg:mt-auto" onSubmit={handleSubmit}>
                 <ChatInput
-                  externalValue={inputText}
+                  externalValue={selectedValue}
                   valueGetter={(fn) => {
                     getValueRef.current = fn;
                   }}

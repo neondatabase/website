@@ -17,6 +17,7 @@ const ChatInput = ({ externalValue = null, onSubmit, valueGetter }) => {
   const handleInputKeyDown = (e) => {
     if (e.key === 'Enter') {
       onSubmit(e);
+      setValue('');
     }
   };
 
