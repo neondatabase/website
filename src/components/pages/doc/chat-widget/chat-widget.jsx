@@ -11,6 +11,7 @@ import useAbortController from 'hooks/use-abort-controller';
 import useDocsAIChatStream from 'hooks/use-docs-ai-chat-stream';
 import sendGtagEvent from 'utils/send-gtag-event';
 
+import ChatInput from './chat-input';
 import AttentionIcon from './images/attention.inline.svg';
 import CheckIcon from './images/check.inline.svg';
 import CloseIcon from './images/close.inline.svg';
@@ -35,7 +36,7 @@ const ChatWidget = () => {
   // aux refs
   const messagesEndRef = useRef(null);
   const isMountedRef = useRef(false);
-  const inputRef = useRef(null);
+  const getValueRef = useRef(null);
   // hooks
   const [isStopped, setIsStopped] = useState(false);
   const { getSignal, resetAbortController } = useAbortController();
@@ -56,12 +57,8 @@ const ChatWidget = () => {
     signal: getSignal(),
   });
 
-  // handlers
-  const handleInputChange = (e) => setInputText(e.target.value);
-
   const handleExampleClick = (e) => {
     setInputText(e.target.textContent);
-    inputRef.current.focus();
     sendGtagEvent('chat_widget_example_click', {
       value: e.target.textContent,
     });
@@ -82,6 +79,8 @@ const ChatWidget = () => {
       setIsStopped(false);
       // do not let user submit another
       // query while the previous one is getting processed
+      const inputText = getValueRef.current();
+
       if (!isLoading && inputText) {
         setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
         setInputText('');
@@ -94,14 +93,8 @@ const ChatWidget = () => {
         setShouldTryAgain(false);
       }
     },
-    [inputText, isLoading, setInputText, setMessages, setShouldTryAgain, shouldTryAgain]
+    [isLoading, setMessages, setShouldTryAgain, shouldTryAgain, setInputText]
   );
-
-  const handleInputKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      handleSubmit(e);
-    }
-  };
 
   // @NOTE:
   // fires only once on close!
@@ -113,7 +106,6 @@ const ChatWidget = () => {
     setError(null);
     setMessages([]);
     setIsOpen(false);
-    setInputText('');
     setShouldTryAgain(false);
     setIsStopped(false);
   };
@@ -190,15 +182,12 @@ const ChatWidget = () => {
               </div>
             ) : (
               <form className="group relative w-full px-5 pb-5 lg:mt-auto" onSubmit={handleSubmit}>
-                <input
-                  className="peer w-full appearance-none rounded border border-gray-new-90 px-2.5 py-2 text-base leading-normal transition-colors duration-200 placeholder:text-gray-new-80 focus:outline-none dark:border-gray-new-20 dark:bg-black dark:placeholder:text-gray-new-30"
-                  type="text"
-                  placeholder="How can I help you?"
-                  value={inputText}
-                  ref={inputRef}
-                  autoFocus
-                  onKeyDown={handleInputKeyDown}
-                  onChange={handleInputChange}
+                <ChatInput
+                  externalValue={inputText}
+                  valueGetter={(fn) => {
+                    getValueRef.current = fn;
+                  }}
+                  onSubmit={handleSubmit}
                 />
                 <div className="mt-2.5 flex flex-col space-y-1 text-center text-xs font-light leading-dense text-gray-new-30 dark:text-gray-new-80">
                   <span>Neon Docs AI has a cap of 1 message every 5 seconds.</span>
