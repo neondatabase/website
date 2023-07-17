@@ -96,7 +96,6 @@ const ChatWidget = () => {
     [isLoading, setSelectedValue, setMessages, setShouldTryAgain, shouldTryAgain]
   );
 
-  console.log('ChatWidget.jsx: 202: messages: ', selectedValue);
   // @NOTE:
   // fires only once on close!
   // to fire twice we need to add trigger
