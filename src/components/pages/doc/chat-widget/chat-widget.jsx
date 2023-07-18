@@ -36,7 +36,7 @@ const ChatWidget = () => {
   // aux refs
   const messagesEndRef = useRef(null);
   const isMountedRef = useRef(false);
-  const getValueRef = useRef(null);
+  const inputRef = useRef(null);
   // hooks
   const [isStopped, setIsStopped] = useState(false);
   const { getSignal, resetAbortController } = useAbortController();
@@ -77,7 +77,7 @@ const ChatWidget = () => {
     async (e) => {
       e?.preventDefault();
       setIsStopped(false);
-      const inputText = getValueRef.current();
+      const inputText = inputRef.current.value;
 
       // do not let user submit another
       // query while the previous one is getting processed
@@ -183,10 +183,8 @@ const ChatWidget = () => {
             ) : (
               <form className="group relative w-full px-5 pb-5 lg:mt-auto" onSubmit={handleSubmit}>
                 <ChatInput
-                  externalValue={selectedValue}
-                  valueGetter={(fn) => {
-                    getValueRef.current = fn;
-                  }}
+                  defaultValue={selectedValue}
+                  inputRef={inputRef}
                   onSubmit={handleSubmit}
                 />
                 <div className="mt-2.5 flex flex-col space-y-1 text-center text-xs font-light leading-dense text-gray-new-30 dark:text-gray-new-80">

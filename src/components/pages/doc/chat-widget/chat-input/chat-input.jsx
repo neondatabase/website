@@ -1,18 +1,13 @@
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const ChatInput = ({ externalValue = null, onSubmit, valueGetter }) => {
+const ChatInput = ({ defaultValue = null, onSubmit, inputRef }) => {
   const [value, setValue] = useState('');
-  const inputRef = useRef(null);
 
   useEffect(() => {
-    setValue(externalValue);
+    setValue(defaultValue);
     inputRef.current.focus();
-  }, [externalValue]);
-
-  useEffect(() => {
-    valueGetter(() => inputRef.current.value);
-  }, [valueGetter]);
+  }, [defaultValue, inputRef]);
 
   const handleInputKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -36,9 +31,9 @@ const ChatInput = ({ externalValue = null, onSubmit, valueGetter }) => {
 };
 
 ChatInput.propTypes = {
-  externalValue: PropTypes.string,
+  defaultValue: PropTypes.string,
   onSubmit: PropTypes.func,
-  valueGetter: PropTypes.func,
+  inputRef: PropTypes.object,
 };
 
 export default ChatInput;
