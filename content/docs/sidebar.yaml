@@ -118,7 +118,7 @@
               slug: guides/branching-github-actions
             - title: Automation with Githooks
               slug: guides/branching-githooks
-      - title: Languages
+    - title: Languages
       items:
         - title: Elixir
           slug: guides/elixir-ecto
