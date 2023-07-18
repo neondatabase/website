@@ -25,6 +25,10 @@ To update your payment method:
 
 1. Navigate to the **Billing** page in the Neon Console.
 2. Select the **Payment method** menu and click **Edit**.
+3. A link verification code is sent automatically via SMS to the phone number associated with your account. Alternatively, you can have the code sent to the email address associated with your account. Enter the provided code.
+4. Update your payment method and click **Save card**.
+
+If you are unable to access the link verification code required to update your payment method, please contact [support@neon.tech](mailto:support@neon.tech).
 
 ## Invoices
 
