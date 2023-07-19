@@ -94,7 +94,7 @@ To set a branch as the primary branch:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. Click **Set as primary**.
+4. On the branch page, click the **More** drop-down menu and select **Set as primary**.
 5. In the **Set as primary** confirmation dialog, click **Set as Primary** to confirm your selection.
 
 ## Connect to a branch
