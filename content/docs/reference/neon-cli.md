@@ -38,6 +38,12 @@ To install the Neon CLI, run the following command:
 npm i -g neonctl
 ```
 
+Homebrew is also supported:
+
+```bash
+brew install neonctl
+```
+
 ### Upgrade
 
 To upgrade to the latest version of the Neon CLI, run the `npm i -g neonctl` command again.
