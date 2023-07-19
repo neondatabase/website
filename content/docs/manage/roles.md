@@ -335,19 +335,21 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 
     <Admonition type="info">  
     To create a password with 60 bits of entropy, you can follow these password composition guidelines:
-      - **Length**: The password should consist of at least 12 characters.
-      - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
-        - Lowercase letters (a-z)
-        - Uppercase letters (A-Z)
-        - Numbers (0-9)
-        - Special symbols (e.g., !@#$%^&*)
-      - **Avoid predictability**: To maintain a high level of unpredictability, do not use:
-        - Sequential patterns (such as '1234', 'abcd', 'qwerty')
-        - Common words or phrases
-        - Any words found in a dictionary
+    - **Length**: The password should consist of at least 12 characters.
+    - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
+      - Lowercase letters (a-z)
+      - Uppercase letters (A-Z)
+      - Numbers (0-9)
+      - Special symbols (e.g., !@#$%^&*)
+    - **Avoid predictability**: To maintain a high level of unpredictability, do not use:
+      - Sequential patterns (such as '1234', 'abcd', 'qwerty')
+      - Common words or phrases
+      - Any words found in a dictionary
       - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.
 
     Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
+
+    Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
 
     The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
     </Admonition>
