@@ -43,7 +43,7 @@ CREATE ROLE neon_superuser CREATEDB CREATEROLE NOLOGIN IN ROLE pg_read_all_data,
 - `pg_read_all_data role`: A predefined role in PostgreSQL that provides the ability to select from all tables and views.
 - `pg_write_all_data`: A predefined role in PostgreSQL that provides the ability to insert, update, and delete in all tables and use all sequences in a database.
 
-In addition, the `neon_superuser` role is able to add [PostgreSQL extensions](/docs/extensions/pg_extensions) that are available for use with Neon.
+In addition, the `neon_superuser` role is able to add [PostgreSQL extensions](/docs/extensions/pg-extensions) that are available for use with Neon.
 
 You can think of roles with `neon_superuser` privileges as administrators. For all other users, you can create roles and manage database object access privileges with SQL. See [Manage roles with SQL](#manage-roles-with-sql).
 
