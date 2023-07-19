@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+Before running the `completion` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
 
 ## The `completion` command
 
