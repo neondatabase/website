@@ -38,19 +38,19 @@ When you enable Autoscaling for a compute endpoint, you define a minimum and max
 
 ![Edit compute endpoint dialog showing an Autoscaling configuration](/docs/extensions/edit_compute_endpoint.png)
 
-For _Autoscaling_ configuration instructions, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
-
 As your workload changes, computing capacity scales dynamically between the minimum and maximum settings defined in your _Autoscaling_ configuration. To retrieve the number of allocated vCPUs at any point in time, you can run the following query:
 
 ```sql
 SELECT num_cpus();
 ```
 
+For _Autoscaling_ configuration instructions, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+
 ## Limitations
 
 The following limitations apply:
 
-- The `num_cpus()` function does not return fractional vCPU sizes. If the current number of allocated vCPUs is .25 or .5, the `num_cpus()` function returns `1`.
+- The `num_cpus()` function does not return fractional vCPU sizes. If the current number of allocated vCPUs is `.25` or `.5`, the `num_cpus()` function returns `1`.
 - The `num_cpus()` function only works on compute endpoints that have the _Autoscaling_ feature enabled. Running the function on a fixed size compute endpoint does not return a correct value.
 
 ## Use `neon_utils` with `pgbench` to monitor Autoscaling
@@ -113,7 +113,7 @@ The following instructions demonstrate how to use the `num_cpus()` function with
     CREATE EXTENSION IF NOT EXISTS neon_utils;
     ```
 
-4. Call the `num_cpus` function to retrieve the current number of allocated vCPUs.
+4. Call the `num_cpus()` function to retrieve the current number of allocated vCPUs.
 
     ```sql
     ​​neondb=> SELECT num_cpus();
