@@ -82,7 +82,7 @@ Neon permits renaming a branch, including your project's primary branch. To rena
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. Click **Rename**.
+4. On the branch page, click the **More** drop-down menu and select **Rename**.
 5. Specify a new name for the branch and click **Save**.
 
 ## Set a branch as primary
@@ -134,7 +134,7 @@ To delete a branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Select a branch from the table.
-3. Click **Delete**.
+4. On the branch page, click the **More** drop-down menu and select **Delete**.
 4. On the confirmation dialog, click **Delete**.
 
 ## Check the data size
