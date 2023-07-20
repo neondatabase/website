@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Container from 'components/shared/container';
 import SubscriptionForm from 'components/shared/subscription-form';
 import { HUBSPOT_NEWSLETTERS_FORM_ID } from 'constants/forms';

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
 import LINKS from 'constants/links';
+import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import {
   DOCS_DIR_PATH,
   getAllPosts,
@@ -16,6 +17,9 @@ import {
 } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
 import serializeMdx from 'utils/serialize-mdx';
+
+// @NOTE: the maximum length of the title to look fine on the og image
+const MAX_TITLE_LENGTH = 52;
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -40,14 +44,24 @@ export async function generateMetadata({ params }) {
   if (!post) return notFound();
 
   const {
-    data: { title, ogImage },
+    data: { title },
     excerpt,
   } = post;
+
+  const vercelUrl =
+    process.env.VERCEL_ENV === 'preview'
+      ? `https://${process.env.VERCEL_BRANCH_URL}`
+      : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+
+  const encodedTitle = Buffer.from(title).toString('base64');
 
   return getMetadata({
     title: `${title} - Neon Docs`,
     description: isReleaseNotes ? 'The latest product updates from Neon' : excerpt,
-    imagePath: ogImage,
+    imagePath:
+      title.length < MAX_TITLE_LENGTH
+        ? `${vercelUrl}/docs/og?title=${encodedTitle}`
+        : DEFAULT_IMAGE_PATH,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isReleaseNotes ? `${LINKS.releaseNotes}/rss.xml` : null,
     type: 'article',

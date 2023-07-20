@@ -2,6 +2,7 @@ import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 import Aside from 'components/pages/blog-post/aside';
+import CodeTabs from 'components/pages/blog-post/code-tabs';
 import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
@@ -42,6 +43,7 @@ const BlogPage = async ({ params, searchParams }) => {
     content,
     {
       blogpostcode: CodeBlock,
+      blogpostcodetabs: CodeTabs,
       blogpostcta: CTA,
     },
     true
@@ -126,6 +128,7 @@ export async function generateMetadata({ params }) {
     },
     date,
     pageBlogPost,
+    categories,
   } = post;
 
   const authors = pageBlogPost.authors.map(({ author }) => author?.title);
@@ -139,6 +142,7 @@ export async function generateMetadata({ params }) {
     imagePath: twitterImage?.mediaItemUrl,
     type: 'article',
     publishedTime: date,
+    category: categories.nodes[0]?.name,
     authors,
   });
 }

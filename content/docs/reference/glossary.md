@@ -12,7 +12,7 @@ See [Token](#token).
 
 ### Active time
 
-The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). For [Free Tier](../introduction/free-tier) users, there is no limit on _Active time_ for the [primary branch](#primary-branch) compute. [Non-primary branch](#non-primary-branch) computes are limited to 100 hours of _Active time_ per month. _Active time_ on the primary branch compute is counted toward the 100 hour limit. You can monitor _Active time_ for the computes in your Neon project on the **Usage** widget on the Neon **Dashboard**.
+The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). For [Free Tier](/docs/introduction/free-tier) users, there is no limit on _Active time_ for the [primary branch](#primary-branch) compute. [Non-primary branch](#non-primary-branch) computes are limited to 100 hours of _Active time_ per month. _Active time_ on the primary branch compute is counted toward the 100 hour limit. You can monitor _Active time_ for the computes in your Neon project on the **Usage** widget on the Neon **Dashboard**.
 
 ### Activity Monitor
 
@@ -24,15 +24,15 @@ See [Neon API](#neon-api).
 
 ### API Key
 
-A unique identifier used to authenticate a user or a calling program to an API. An API key is required to authenticate to the Neon API. For more information, see [Manage API keys](../manage/api-keys).
+A unique identifier used to authenticate a user or a calling program to an API. An API key is required to authenticate to the Neon API. For more information, see [Manage API keys](/docs/manage/api-keys).
 
 ### apply_config
 
-A Neon Control Plane operation that applies a new configuration to a Neon object or resource. For example, creating, deleting, or updating PostgreSQL users and databases initiates this operation. See [Operations](../manage/operations) for more information.
+A Neon Control Plane operation that applies a new configuration to a Neon object or resource. For example, creating, deleting, or updating PostgreSQL users and databases initiates this operation. See [Operations](/docs/manage/operations) for more information.
 
 ### Auto-suspend compute
 
-A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Neon Pro plan users can configure the _Auto-suspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable Auto-suspend completely to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](../manage/endpoints#edit-a-compute-endpoint).
+A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Neon Pro plan users can configure the _Auto-suspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable Auto-suspend completely to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
 ### autoscaler-agent
 
@@ -40,7 +40,7 @@ A control mechanism in the Neon autoscaling system that collects metrics from VM
 
 ### Autoscaling
 
-A feature that automatically adjusts the allocation of vCPU and RAM for compute endpoints within specified minimum and maximum compute size boundaries, optimizing for performance and cost-efficiency. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](../introduction/autoscaling).
+A feature that automatically adjusts the allocation of vCPU and RAM for compute endpoints within specified minimum and maximum compute size boundaries, optimizing for performance and cost-efficiency. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 ### Availability Checker
 
@@ -54,7 +54,7 @@ A mechanism that manages the lag between the Pageserver and compute node or the 
 
 ### Branch
 
-A [copy-on-write](#copy-on-write) clone of a Neon project's primary branch or previously created child branch. A branch can be created from the current or past state of the parent branch. A branch created from the current state of the parent branch includes the databases and roles that existed in the parent branch at the time of branch creation. A branch created from a past state of the parent branch includes the databases and roles that existed in the past state. The data in a branch can be modified independently from its originating data. See [Branching](../introduction/branching). Connecting to a database in a branch requires connecting via the branch's compute endpoint. For more information, see [Connect to a branch](../manage/branches#connect-to-a-branch).
+A [copy-on-write](#copy-on-write) clone of a Neon project's primary branch or previously created child branch. A branch can be created from the current or past state of the parent branch. A branch created from the current state of the parent branch includes the databases and roles that existed in the parent branch at the time of branch creation. A branch created from a past state of the parent branch includes the databases and roles that existed in the past state. The data in a branch can be modified independently from its originating data. See [Branching](/docs/introduction/branching). Connecting to a database in a branch requires connecting via the branch's compute endpoint. For more information, see [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
 
 ### Branching
 
@@ -62,7 +62,7 @@ A Neon feature that allows you to create a copy-on-write clone (a "branch") of y
 
 ### check_availability
 
-A Neon Control Plane operation that checks the availability of data in a branch and that a compute endpoint can start on a branch. Branches without a compute endpoint are not checked. This operation, performed by the availability checker, is a periodic load generated by the Control Plane. See [Operations](../manage/operations) for more information.
+A Neon Control Plane operation that checks the availability of data in a branch and that a compute endpoint can start on a branch. Branches without a compute endpoint are not checked. This operation, performed by the availability checker, is a periodic load generated by the Control Plane. See [Operations](/docs/manage/operations) for more information.
 
 ### CI/CD
 
@@ -78,11 +78,11 @@ A service that provides virtualized computing resources (CPU, memory, and storag
 
 ### Compute endpoint
 
-A Neon compute instance. Neon creates a single read-write compute endpoint for the project's primary branch. You can choose whether or not to create a compute endpoint when creating child branches. The compute endpoint hostname is required to connect to a Neon database from a client or application. A compute endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. A compute endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. A compute endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](../connect/connect-from-any-app). For more information about compute endpoints, see [Manage computes](../manage/endpoints/).
+A Neon compute instance. Neon creates a single read-write compute endpoint for the project's primary branch. Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints. You can choose whether or not to create a compute endpoint when creating child branches. The compute endpoint hostname is required to connect to a Neon database from a client or application. A compute endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. A compute endpoint hostname starts with an `ep-` prefix, as in this example: `ep-polished-water-579720.us-east-2.aws.neon.tech`. A compute endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app). For more information about compute endpoints, see [Manage computes](/docs/manage/endpoints/).
 
 ### Connection pooling
 
-A method of creating a pool of connections and caching those connections for reuse. Neon supports `PgBouncer` in `transaction mode` for connection pooling. For more information, see [Connection pooling](../connect/connection-pooling).
+A method of creating a pool of connections and caching those connections for reuse. Neon supports `PgBouncer` in `transaction mode` for connection pooling. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
 ### Connection string
 
@@ -98,7 +98,7 @@ postgres://casey@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
 
 The compute endpoint hostname includes an `endpoint_id` (`ep-polished-water-579720`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
 
-Connection strings for a Neon databases can be obtained from the **Connection Details** widget on the Neon **Dashboard**. For information about connecting to Neon, see [Connect from any application](../connect/connect-from-any-app).
+Connection strings for a Neon databases can be obtained from the **Connection Details** widget on the Neon **Dashboard**. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ### Compute size
 
@@ -110,7 +110,7 @@ A unit that measures the processing power of a Neon compute. A Neon compute can 
 
 ### Compute time
 
-A billing metric that measures the amount of computing capacity used within a given billing period. See [Compute time](../introduction/billing#comput-time).
+A billing metric that measures the amount of computing capacity used within a given billing period. See [Compute time](/docs/introduction/billing#comput-time).
 
 ### Console
 
@@ -126,11 +126,11 @@ A technique used to copy data efficiently. Neon uses the copy-on-write technique
 
 ### create_branch
 
-A Neon Control Plane operation that creates a branch in a Neon project. For related information, see Manage branches. See [Operations](../manage/operations) for more information.
+A Neon Control Plane operation that creates a branch in a Neon project. For related information, see Manage branches. See [Operations](/docs/manage/operations) for more information.
 
 ### create_timeline
 
-A Neon Control Plane operation that creates a project with a primary branch. See [Operations](../manage/operations) for more information.
+A Neon Control Plane operation that creates a project with a primary branch. See [Operations](/docs/manage/operations) for more information.
 
 ### Data-at-rest encryption
 
@@ -138,7 +138,7 @@ A method of storing inactive data that converts plaintext data into a coded form
 
 ### Data transfer
 
-A billing metric that measures the total volume of data transferred out of Neon (known as "egress") during a given billing period. See [Data transfer](../introduction/billing#data-transfer).
+A billing metric that measures the total volume of data transferred out of Neon (known as "egress") during a given billing period. See [Data transfer](/docs/introduction/billing#data-transfer).
 
 ### Database
 
@@ -158,7 +158,7 @@ Resources including compute and storage dedicated to a single Neon account.
 
 ### delete_tenant
 
-A Neon Control Plane operation that deletes stored data when a Neon project is deleted. See [Operations](../manage/operations) for more information.
+A Neon Control Plane operation that deletes stored data when a Neon project is deleted. See [Operations](/docs/manage/operations) for more information.
 
 ### Egress
 
@@ -166,11 +166,11 @@ The data transferred out of the Neon service to an external destination.
 
 ### Enterprise plan
 
-A custom volume-based paid plan offered by Neon. See [Neon plans](../introduction/plans).
+A custom volume-based paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
 
 ### Free Tier
 
-A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Free Tier](../introduction/free-tier).
+A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Free Tier](/docs/introduction/free-tier).
 
 ### Kubernetes
 
@@ -210,7 +210,7 @@ Least Recently Used policy, an algorithm for cache replacement that evicts the l
 
 ### Neon
 
-A fully managed serverless PostgreSQL. Neon separates storage and compute to offer modern developer features such as branching, autoscaling, and bottomless storage. For more information, see [What is Neon?](../introduction/about/).
+A fully managed serverless PostgreSQL. Neon separates storage and compute to offer modern developer features such as branching, autoscaling, and bottomless storage. For more information, see [What is Neon?](/docs/introduction/about/).
 
 ### Neon API
 
@@ -230,7 +230,7 @@ A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes clus
 
 ### Non-primary branch
 
-Any branch not designated as the [primary branch](#primary-branch) is considered a non-primary branch. For more information, see [Non-primary branch](../manage/branches#non-primary-branch).
+Any branch not designated as the [primary branch](#primary-branch) is considered a non-primary branch. For more information, see [Non-primary branch](/docs/manage/branches#non-primary-branch).
 
 ### Page
 
@@ -238,7 +238,7 @@ An 8KB unit of data, which is the smallest unit that PostgreSQL uses for storing
 
 ### Paid plan
 
- A paid Neon service tier. See [Neon plans](../introduction/plans).
+ A paid Neon service tier. See [Neon plans](/docs/introduction/plans).
 
 ### Pageserver
 
@@ -252,11 +252,11 @@ The ability to authenticate without providing a password. Neon’s [Passwordless
 
 ### Platform Partnership plan
 
-A custom volume-based paid plan offered by Neon that includes support for resale. See [Neon plans](../introduction/plans).
+A custom volume-based paid plan offered by Neon that includes support for resale. See [Neon plans](/docs/introduction/plans).
 
 ### Point-in-time restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a data history in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. See [Create a branch](../manage/branches#create-a-branch) for more information. Neon retains 7-day history, by default.
+Restoration of data to a state that existed at an earlier time. Neon retains a data history in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. See [Create a branch](/docs/manage/branches#create-a-branch) for more information. Neon retains 7-day history, by default.
 
 ### PostgreSQL
 
@@ -272,11 +272,11 @@ In PostgreSQL, a role with the `LOGIN` attribute is considered the same as a _da
 
 ### Primary branch
 
-Each Neon project is created with a primary branch called `main`, but you can designate any branch as your project's primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch. For more information, see [Primary branch](../manage/branches#primary-branch).
+Each Neon project is created with a primary branch called `main`, but you can designate any branch as your project's primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
 
 ### Pro plan
 
-A usage-based paid plan offered by Neon. See [Neon plans](../introduction/plans).
+A usage-based paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
 
 ### Project
 
@@ -284,11 +284,11 @@ A collection of branches, databases, roles, and other project resources and sett
 
 ### Project sharing
 
-A feature that allows you to share Neon projects with other Neon users. See [Share a project](../manage/projects#share-a-project) for more information.
+A feature that allows you to share Neon projects with other Neon users. See [Share a project](/docs/manage/projects#share-a-project) for more information.
 
 ### Project storage
 
-The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Project storage](../introduction/billing#project-storage).
+The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Project storage](/docs/introduction/billing#project-storage).
 
 ### Proxy
 
@@ -296,7 +296,7 @@ A Neon component that functions as a multitenant service that accepts and handle
 
 ### Passwordless auth
 
-A Neon feature that allows you to connect to a Neon project with a single `psql` command. See [Passwordless auth](../connect/passwordless-connect).
+A Neon feature that allows you to connect to a Neon project with a single `psql` command. See [Passwordless auth](/docs/connect/passwordless-connect).
 
 ### QEMU
 
@@ -308,11 +308,11 @@ Random Access Memory, a type of computer memory used to store data that is being
 
 ### Region
 
-The geographic location where Neon project resource are located. Neon supports creating projects in several Amazon Web Services (AWS) regions. For information about regions supported by Neon, see [Regions](../introduction/regions).
+The geographic location where Neon project resource are located. Neon supports creating projects in several Amazon Web Services (AWS) regions. For information about regions supported by Neon, see [Regions](/docs/introduction/regions).
 
 ### Resale
 
-Selling the Neon service as part of another service offering. Neon's Platform Partnership plan offers resale of the Neon service as an option. See [Neon plans](../introduction/plans) for more information.
+Selling the Neon service as part of another service offering. Neon's Platform Partnership plan offers resale of the Neon service as an option. See [Neon plans](/docs/introduction/plans) for more information.
 
 ### Safekeeper
 
@@ -336,7 +336,7 @@ A feature of the Neon Console that enables running queries on a Neon database. T
 
 ### start_compute
 
-A Neon Control Plane operation that starts a compute endpoint when there is an event or action that requires compute resources. For example, connecting to a suspended compute endpoint initiates this operation. See [Operations](../manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](../introduction/compute-lifecycle).
+A Neon Control Plane operation that starts a compute endpoint when there is an event or action that requires compute resources. For example, connecting to a suspended compute endpoint initiates this operation. See [Operations](/docs/manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](/docs/introduction/compute-lifecycle).
 
 ### Storage
 
@@ -344,15 +344,15 @@ Where data is recorded and stored. Neon storage consists of Pageservers, which s
 
 ### suspend_compute
 
-A Neon Control Plane operation that suspends a compute endpoint after a period of inactivity. See [Operations](../manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](../introduction/compute-lifecycle).
+A Neon Control Plane operation that suspends a compute endpoint after a period of inactivity. See [Operations](/docs/manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](/docs/introduction/compute-lifecycle).
 
 ### Technical Preview
 
-Neon is currently in Technical Preview, meaning that some intended core functionalities are still being developed or perfected. Please refer to the [Neon roadmap](../introduction/roadmap) for more information.
+Neon is currently in Technical Preview, meaning that some intended core functionalities are still being developed or perfected. Please refer to the [Neon roadmap](/docs/introduction/roadmap) for more information.
 
 ### Token
 
-An encrypted access token that enables you to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Manage API keys](../manage/api-keys).
+An encrypted access token that enables you to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Manage API keys](/docs/manage/api-keys).
 
 ### tmpfs
 
@@ -388,4 +388,4 @@ A standard mechanism that ensures the durability of your data. Neon relies on WA
 
 ### Written data
 
-A billing metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiBs). Writing data from compute to storage ensures the durability and integrity of your data. See [Written data](../introduction/billing#written-data).
+A billing metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiBs). Writing data from compute to storage ensures the durability and integrity of your data. See [Written data](/docs/introduction/billing#written-data).

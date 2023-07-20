@@ -109,9 +109,13 @@ const getTableOfContents = (content) => {
 
   arr.forEach((item) => {
     const [depth, title] = parseMDXHeading(item);
+
+    // replace mdx inline code with html inline code
+    const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
+
     if (title && depth && depth <= 2) {
       toc.push({
-        title: title.replace(/[^a-zA-Z\s]/g, ''),
+        title: titleWithInlineCode,
         id: slugify(title, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
         level: depth + 1,
       });

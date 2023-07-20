@@ -1,196 +1,204 @@
 ---
 title: Neon serverless driver
 enableTableOfContents: true
-subtitle: Learn how to Connect to Neon from Vercel Edge Functions and Cloudflare Workers
+subtitle: Learn how to connect to Neon from serverless and edge environments over HTTP or WebSockets
 ---
 
-The [Neon serverless driver](https://github.com/neondatabase/serverless) (currently in Beta) allows you to query data from [Vercel Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions), [Cloudflare Workers](https://workers.cloudflare.com/), and other environments that support WebSockets but not TCP sockets.
+The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency PostgreSQL driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP.
 
-The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package that you may already be familiar with, offering the same API.
+The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package you may already be familiar with.
+
+The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
 
 ## Install the Neon serverless driver
 
-As a drop-in replacement for [node-postgres](https://node-postgres.com/), you simply install the Neon serverless driver where you would otherwise install `pg`. The driver includes TypeScript types (the equivalent of `@types/pg`).
+You can install the driver with your preferred JavaScript package manager. For example:
 
-```bash
+```shell
 npm install @neondatabase/serverless
 ```
 
-## How to use it
+The driver includes TypeScript types (the equivalent of `@types/pg`). No additional installation is required.
 
-You can use the driver in the same way you would use `node-postgres`. Where you normally import `pg`, simply import `@neondatabase/serverless` instead. The following examples show how to use the Neon Serverless driver with [Vercel Edge Functions](#neon-serverless-driver-with-vercel-edge-functions) and [Cloudfare Workers](#neon-serverless-driver-with-cloudflare).
+## Configure your Neon database connection
 
-### Neon serverless driver with Vercel Edge Functions
+You can obtain a connection string for your database from the **Connection Details** widget on the Neon **Dashboard** and set it as an environment variable. Your Neon connection string will look something like this:
 
-This example shows how to create a minimal Vercel Edge Function that uses the Neon serverless driver to ask PostgreSQL for the current time. For more information about Vercel Edge Functions, see Vercel's [Edge Functions Overview](https://vercel.com/docs/concepts/functions/edge-functions).
+```shell
+DATABASE_URL=postgres://<user>:<password>@<endpoint>.<region>.aws.neon.tech/<dbname>
+```
 
-To complete these steps, you require:
+## How to use the driver
 
-- A [Neon project](../get-started-with-neon/setting-up-a-project).
-- A [Vercel account](https://vercel.com/).
+To use the Neon serverless driver, you must use the driver's `neon` function. You can use raw SQL queries or [Drizzle-ORM](https://orm.drizzle.team/docs/installation-and-db-connection/postgresql/neon) for type safety. For example: -->
 
-To get started:
+<CodeTabs labels={["Node.js",  "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
-1. Ensure that you have the latest version (>= v28.9) of the Vercel CLI. To check your version, use `vercel --version`. To install or update the Vercel CLI globally, use:
+```javascript
+import { neon } from '@neondatabase/serverless';
 
-    ```bash
-    npm install -g vercel@latest
-    ```
+const sql = neon(process.env.DATABASE_URL!);
+const {rows: [post]} = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
+// `post` is now [{ id: 12, title: 'My post', ... }] (or undefined)
+```
 
-1. Create a Next.js project.
+```typescript
+import { drizzle } from 'drizzle-orm/neon-http';
+import { eq } from 'drizzle-orm';
+import { neon } from '@neondatabase/serverless';
+import { posts } from './schema';
 
-    ```bash
-    npx create-next-app@latest neon-ef-demo --typescript
-    ```
+export default async () => {
+  const postId = 12;
+  const sql = neon(process.env.DATABASE_URL!);
+  const db = drizzle(sql);
+  const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
+  return new Response(JSON.stringify({ post: onePost }));
+}
+```
+```js
+import { neon } from '@neondatabase/serverless';
 
-    Accept all defaults by pressing [Return].
+export default async (req: Request) => {
+  const sql = neon(process.env.DATABASE_URL!);
+  const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+  return new Response(JSON.stringify(post));
+}
 
-1. Enter the new directory.
+export const config = {
+  runtime: 'edge',
+};
+```
 
-    ```bash
-    cd neon-ef-demo
-    ```
+```ts
+import { neon } from '@neondatabase/serverless';
+import type { NextApiRequest, NextApiResponse } from 'next';
+ 
+export default async function handler(
+  request: NextApiRequest,
+  res: NextApiResponse,
+) {
+  const sql = neon(process.env.DATABASE_URL!);
+  const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+ 
+  return res.status(500).send(post);
+}
+```
 
-1. Link your new project to your Vercel account.
+</CodeTabs>
 
-    ```bash
-    vercel link
-    ```
+### Use experimental caching
 
-    Again, accept all defaults by pressing [Return].
+Connection caching allows Neon proxy to find the compute node attached to your database quicker. Connection caching is experimental and on opt-in only. You can try it by setting `fetchConnectionCache` to true in the `neonConfig` object.
 
-1. Set your PostgreSQL credentials on Vercel.
+```ts
+import { neon, neonConfig } from '@neondatabase/serverless';
 
-    ```bash
-    vercel env add DATABASE_URL
-    ```
+neonConfig.fetchConnectionCache = true; // Opt-in to experimental connection caching
+const sql = neon(process.env.DATABASE_URL!);
+```
 
-    Paste in your Neon connection string, which you can find on the Neon **Dashboard**. It will look something like this:
+## Using node-postgres Pool or Client
 
-    ```text
-    postgres://<user>:<password>@<hostname>.neon.tech/<dbname>
-    ```
+You can use the driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
 
-    Press `a` to select all Vercel environments, then [Return].
+<CodeTabs labels={["Node.js","Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
-    For more information about obtaining a Neon connection string, see [Connect from any application](../connect/connect-from-any-app).
+```javascript
+import { Pool } from '@neondatabase/serverless';
 
-1. Install the Neon serverless driver package.
+const pool = new Pool({connectionString: process.env.DATABASE_URL});
+const {rows: [post]}= await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
+```
 
-    ```bash
-    npm install @neondatabase/serverless
-    ```
+```typescript
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import { eq } from 'drizzle-orm';
+import { Pool } from '@neondatabase/serverless';
+import { posts } from './schema';
 
-1. Replace the code in `/pages/api/hello.ts` with the code for your function:
+export default async () => {
+  const postId = 12;
+  const pool = new Pool({connectionString: process.env.DATABASE_URL});
+  const db = drizzle(pool);
+  const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
+  return new Response(JSON.stringify({ post: onePost }));
+}
+```
+```js
+import { Pool } from '@neondatabase/serverless';
 
-    ```js
-    import { Pool } from '@neondatabase/serverless';
-    import type { NextRequest, NextFetchEvent } from 'next/server';
-    
-    export const config = { runtime: 'edge' };
-    
-    export default async (req: NextRequest, event: NextFetchEvent) => {
-      const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-      const { rows: [{ now }] } = await pool.query('SELECT now()');
-      event.waitUntil(pool.end());  // doesn't hold up the response
-      return new Response(`The time is ${now}`);
-    }
-    ```
+export default async (req: Request, ctx: any) => {
+  const pool = new Pool({connectionString: process.env.DATABASE_URL});
+  await pool.connect();
 
-1. Deploy your function.
+  const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  ctx.waitUntil(pool.end());
 
-    ```bash
-    vercel deploy
-    ```
+  return new Response(JSON.stringify(post), { 
+    headers: { 'content-type': 'application/json' }
+  });
+}
 
-    Follow the prompts to deploy your function and once done, open the `Production` link. Add `/api/hello` to the URL to see the result of your Edge Function. You should see a text response similar to:
+export const config = {
+  runtime: 'edge',
+};
+```
+```ts
+import { Pool } from '@neondatabase/serverless';
+import type { NextApiRequest, NextApiResponse } from 'next';
+ 
+export default async function handler(
+  request: NextApiRequest,
+  res: NextApiResponse,
+) {
+  const pool = new Pool({connectionString: process.env.DATABASE_URL});
+  const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+ 
+  return res.status(500).send(post);
+}
+```
 
-    ```text
-    The time is Thu Mar 16 2023 18:23:59 GMT+0000 (Coordinated Universal Time)
-    ```
+</CodeTabs>
 
-### Neon serverless driver with Cloudflare
+## When should you use Pool and neon
 
-This example shows how to create a minimal Cloudflare Worker that uses the Neon serverless driver to ask PostgreSQL for the current time.
+### Use the driver with neon
 
-To complete these steps, you require:
+The Neon serverless driver supports querying over HTTP with the `neon` function and WebSockets using `Pool` or `Client`. Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single-shot queries such as the one shown below: 
 
-- A [Neon project](../get-started-with-neon/setting-up-a-project).
-- A [Cloudflare account](https://dash.cloudflare.com/).
+```js
+const post = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
+```
 
-To get started:
+If you use single-shot queries with no sessions or transactions, consider using HTTP for faster responses.
 
-1. Create a Worker by running the following command. Accept the defaults.
+### Additional configuration options
 
-    ```bash
-    npx wrangler init neon-cf-demo
-    ```
+The `neon(...)` function has configuration options for customizing the return format of the query function. See [options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration) in the driver's GitHub repository for information about those options.
 
-1. Enter the new directory.
+### Use the driver with Pool or Client
 
-    ```bash
-    cd neon-cf-demo
-    ```
+To use the Neon serverless driver over WebSockets, use either the `Pool` or `Client` constructor. These constructors provide session and transaction support, as well as `node-postgres` compatibility. The full API guide for the `Pool` and `Client` constructors can be found in the [node-postgres](https://node-postgres.com/) documentation.
 
-1. Install the Neon serverless driver package.
+You should use the driver with `Pool` or `Client` in the following scenarios:
+- You already use `node-postgres` in your code base and would like to migrate to using `@neondatabase/serverless`.
+- Your backend service executes several queries per connection.
 
-    ```bash
-    npm install @neondatabase/serverless
-    ```
+### Configuration options for `Pool` and `Client`
 
-1. Set your PostgreSQL credentials by running the following command and providing the connection string for your Neon database when prompted.
+There are additional configuration options that apply to `Pool` and `Client`. See [options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration) in the driver's GitHub repository for more information.
 
-    ```bash
-    npx wrangler secret put DATABASE_URL
-    ```
+## More examples
 
-    You can find the connection string for your database on the Neon **Dashboard**. It will look something like this:
-
-    ```text
-    postgres://<user>:<password>@<hostname>.neon.tech/<dbname> 
-    ```
-
-    For information about obtaining a Neon connection string, see [Connect from any application](../connect/connect-from-any-app).
-
-1. Add code for the Worker by replacing the generated contents in `src/index.ts` with the following code:
-
-    ```js
-    import { Pool } from '@neondatabase/serverless';
-    interface Env { DATABASE_URL: string; }
-
-    export default {
-      async fetch(request: Request, env: Env, ctx: ExecutionContext) {
-        const pool = new Pool({ connectionString: env.DATABASE_URL });
-        const { rows: [{ now }] } = await pool.query('SELECT now()');
-        ctx.waitUntil(pool.end());  // this doesn’t hold up the response
-        return new Response(`The time is ${now}`);
-      }
-    }
-    ```
-
-1. Type `npx wrangler publish` to deploy the Worker around the globe.
-
-    Go to the Worker URL, and you should see a text response similar to:
-
-    ```text
-    The time is Thu Mar 16 2023 18:23:59 GMT+0000 (Coordinated Universal Time)
-    ```
-
-    If the Worker has not been run in a while, you may experience a few seconds of latency, as both Cloudflare and Neon will perform cold starts. Subsequent refreshes are quicker.
-
-<Admonition type="note">
-Brief queries such as the one used in this example can generally be run on Cloudflare’s free plan. Queries with larger result sets may exceed the 10ms CPU time available to Workers on the free plan. In that case, you will see a Cloudflare error page, and you will need to upgrade your Cloudflare service to avoid this issue.
-</Admonition>
-
-## Example application
-
-Neon provides an example application to help you get started with the Neon serverless driver on Vercel Edge Functions or Cloudflare Workers. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
+Neon provides an example application to help you get started with the Neon serverless driver. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
 
 ![UNESCO World Heritage sites app](/docs/relnotes/unesco_sites.png)
 
 There are different implementations of the application to choose from:
 
-- [neondatabase/neon-vercel-rawsql](https://github.com/neondatabase/neon-vercel-rawsql) demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions.
-- [neondatabase/neon-vercel-zapatos](https://github.com/neondatabase/neon-vercel-zapatos) demonstrates using [Zapatos](https://jawj.github.io/zapatos/) with Neon's serverless driver on Vercel Edge Functions. Zapatos offers zero-abstraction Postgres for TypeScript.
-- [neondatabase/neon-vercel-kysely](https://github.com/neondatabase/neon-vercel-kysely) demonstrates using [kysely](https://github.com/koskimas/kysely) and [kysely-codegen](https://github.com/RobinBlomberg/kysely-codegen) with Neon's serverless driver on Vercel Edge Functions. Kysely is a type-safe and autocompletion-friendly typescript SQL query builder. `kysely-codegen` generates Kysely type definitions from your database.
-- [neondatabase/serverless-cfworker-demo](https://github.com/neondatabase/serverless-cfworker-demo) demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance. There is an accompanying blog post for this example. See [Edge-compatible Serverless Driver for Postgres](https://neon.tech/blog/serverless-driver-for-postgres).
+- [Raw SQL + Vercel Edge Functions](https://github.com/neondatabase/neon-vercel-rawsql): Demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions.
+- [Raw SQL via https + Vercel Edge Functions](https://github.com/neondatabase/neon-vercel-http): Demonstrates Neon's serverless driver over HTTP on Vercel Edge Functions.
+- [Raw SQL + Cloudflare Workers](https://github.com/neondatabase/serverless-cfworker-demo): Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance. There is an accompanying blog post for this example. See [Edge-compatible Serverless Driver for Postgres](https://neon.tech/blog/serverless-driver-for-postgres).
+- [Kysely + Vercel Edge Functions](https://github.com/neondatabase/neon-vercel-kysely): Demonstrates using [kysely](https://github.com/koskimas/kysely) and [kysely-codegen](https://github.com/RobinBlomberg/kysely-codegen) with Neon's serverless driver on Vercel Edge Functions. Kysely is a type-safe and autocompletion-friendly typescript SQL query builder. `kysely-codegen` generates Kysely type definitions from your database.
+- [Zapatos + Vercel Edge Functions](https://github.com/neondatabase/neon-vercel-zapatos): Demonstrates using [Zapatos](https://jawj.github.io/zapatos/) with Neon's serverless driver on Vercel Edge Functions. Zapatos offers zero-abstraction Postgres for TypeScript.

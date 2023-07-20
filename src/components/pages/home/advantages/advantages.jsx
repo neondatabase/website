@@ -1,7 +1,7 @@
 // import { motion } from 'framer-motion';
 // import { StaticImage } from 'gatsby-plugin-image';
 // import React, { useRef } from 'react';
-import React from 'react';
+
 import { useInView } from 'react-intersection-observer';
 
 // import BlinkingText from 'components/shared/blinking-text';

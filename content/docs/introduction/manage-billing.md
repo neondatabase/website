@@ -10,7 +10,7 @@ A Neon account subscribed to a paid plan can manage billing from the **Billing**
 - View and download invoices
 - Cancel a subscription
 
-For Free Tier accounts, the **Billing** page allows users to view [Free Tier](../introduction/free-tier) usage limits, learn about [Neon Pro plan](../introduction/pro-plan) features, and estimate monthly Pro plan cost based on your current usage.
+For Free Tier accounts, the **Billing** page allows users to view [Free Tier](/docs/introduction/free-tier) usage limits, learn about [Neon Pro plan](/docs/introduction/pro-plan) features, and estimate monthly Pro plan cost based on your current usage.
 
 ## View the billing page
 
@@ -25,10 +25,14 @@ To update your payment method:
 
 1. Navigate to the **Billing** page in the Neon Console.
 2. Select the **Payment method** menu and click **Edit**.
+3. A link verification code is sent automatically via SMS to the phone number associated with your account. Alternatively, you can have the code sent to the email address associated with your account. Enter the provided code.
+4. Update your payment method and click **Save card**.
+
+If you are unable to access the link verification code required to update your payment method, please contact [support@neon.tech](mailto:support@neon.tech).
 
 ## Invoices
 
-A Neon invoice includes an **Amount due** for the billing period and a cost breakdown by [billing metric](../introduction/billing).
+A Neon invoice includes an **Amount due** for the billing period and a cost breakdown by [billing metric](/docs/introduction/billing).
 
 ### Download invoices
 
@@ -45,7 +49,7 @@ To cancel a Pro plan subscription:
 1. Click **Request subscription cancellation** at the bottom of the page.
 1. Follow the instructions on the **Request Downgrade** modal, and click **Downgrade**.
 
-Canceling your Pro plan subscription downgrades your account to our Free Tier, which has lower usage limits that could affect the performance of your applications. To compare plan limits, see [Neon plans](../introduction/plans#neon-plans).
+Canceling your Pro plan subscription downgrades your account to our Free Tier, which has lower usage limits that could affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
 
 You will be required to remove any projects, branches, or data that exceed [Free Tier limits](/docs/introduction/free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade request).
 
