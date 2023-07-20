@@ -1,6 +1,6 @@
 ---
 title: The neon_utils extension
-subtitle: Use the neon_utils extension to check the size of an Neon compute endpoint
+subtitle: Monitor how Neon's Autoscaling feature allocates compute resources
 enableTableOfContents: true
 ---
 
