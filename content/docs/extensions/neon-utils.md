@@ -59,7 +59,7 @@ The following instructions demonstrate how to use the `num_cpus()` function with
 
 ### Prerequisites
 
-- Ensure that _Autoscaling_ is enabled for your compute endpoint. For instructions, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). The following example uses a minimum setting of 1 Compute Unit (CU) and a maximum of 8.
+- Ensure that _Autoscaling_ is enabled for your compute endpoint. For instructions, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). The following example uses a minimum setting of 1 Compute Unit (CU) and a maximum of 7.
 - The [pgbench](https://www.postgresql.org/docs/current/pgbench.html) utility
 
 ### Run the test
@@ -71,7 +71,13 @@ The following instructions demonstrate how to use the `num_cpus()` function with
     SELECT txid_current();
     ```
 
-2. Run a `pgbench` test with your `test.sql` file, specifying the connection string for your Neon database. You can obtain a connection string from the **Connection Details** widget on the Neon **Dashboard**. Your connection string will similar to the one below:
+2. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string from the **Connection Details** widget on the Neon **Dashboard**. Your connection string will similar to the one below:
+
+    ```bash
+    pgbench -i postgres://sally:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+    ```
+
+3. Run a `pgbench` test with your `test.sql` file, specifying the same connection string:
 
     <CodeBlock shouldWrap>
 
@@ -81,17 +87,20 @@ The following instructions demonstrate how to use the `num_cpus()` function with
 
     </CodeBlock>
 
-    The test will produce output similar to the following:
+    The test produces output similar to the following:
 
-    ```bash
-    progress: 40.0 s, 8.0 tps, lat 1832.261 ms stddev 27.660
-    progress: 41.0 s, 2.0 tps, lat 1823.852 ms stddev 16.804
-    progress: 42.0 s, 6.0 tps, lat 1858.655 ms stddev 32.797
-    progress: 43.0 s, 5.0 tps, lat 1806.463 ms stddev 32.330
-    progress: 44.0 s, 3.0 tps, lat 1853.339 ms stddev 15.384
-    progress: 45.0 s, 6.0 tps, lat 1813.598 ms stddev 52.211
-    progress: 46.0 s, 2.0 tps, lat 1859.142 ms stddev 13.280
-    progress: 47.0 s, 8.0 tps, lat 1869.698 ms stddev 50.031
+    ```bashpgbench (14.8 (Ubuntu 14.8-0ubuntu0.22.04.1), server 15.3)
+    starting vacuum...end.
+    progress: 2.7 s, 0.0 tps, lat 0.000 ms stddev 0.000
+    progress: 3.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
+    progress: 4.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
+    progress: 5.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
+    progress: 6.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
+    progress: 7.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
+    progress: 8.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
+    progress: 9.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
+    progress: 10.0 s, 8.0 tps, lat 7055.317 ms stddev 9.528
+    ...
     ```
 
 3. Install the `neon_utils` extension:
@@ -106,7 +115,7 @@ The following instructions demonstrate how to use the `num_cpus()` function with
     ​​neondb=> SELECT num_cpus();
     num_cpus
     ----------
-            8
+            7
     (1 row)
     ```
 
