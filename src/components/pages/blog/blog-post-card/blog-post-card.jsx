@@ -122,7 +122,7 @@ const BlogPostCard = ({
           target={url ? '_blank' : undefined}
           rel={url ? 'noopener noreferrer' : undefined}
         >
-          <h1
+          <h2
             className={clsx(
               'font-medium transition-colors duration-200 group-hover:text-green-45',
               {
@@ -138,7 +138,7 @@ const BlogPostCard = ({
             )}
           >
             {title}
-          </h1>
+          </h2>
           <div
             className={clsx('flex items-center', {
               'mt-3 md:mt-2.5': size === 'lg' || size === 'xl' || withAuthorPhoto,
