@@ -69,6 +69,10 @@ Neon supports two compute size configuration options:
 - **Fixed Size:** This option allows you to select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
 - **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. _Autoscaling_ currently supports a range of 1/4 CU to 7 CU. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
+<Admonition type="info">
+The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
+</Admonition>
+
 ### Auto-suspend configuration
 
 Neon's _Auto-suspend_ feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable _Auto-suspend_ completely to maintain an "always-active" compute endpoint. An "always-active" configuration eliminates the few seconds of latency required to reactivate a compute endpoint but is likely to increase your compute time usage.
