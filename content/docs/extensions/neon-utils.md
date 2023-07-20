@@ -73,9 +73,13 @@ The following instructions demonstrate how to use the `num_cpus()` function with
 
 2. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string from the **Connection Details** widget on the Neon **Dashboard**. Your connection string will similar to the one below:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     pgbench -i postgres://sally:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
     ```
+
+    </CodeBlock>
 
 3. Run a `pgbench` test with your `test.sql` file, specifying the same connection string:
 
