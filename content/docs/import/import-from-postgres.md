@@ -99,13 +99,18 @@ This section describes using the `pg_dump` utility to dump data from an existing
    <CodeBlock shouldWrap>
 
    ```bash
-   pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v
+   pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v --no-owner --no-acl
    ```
 
    </CodeBlock>
 
-   The example above includes some optional arguments. The `-Fc` option sends the output to a custom-format archive suitable for input into `pg_restore`. The `-Z 6` option specifies a compression level of 6 (the default). The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump.
+   The example above includes these optional arguments:
 
+   - `-Fc`: Sends the output to a custom-format archive suitable for input into `pg_restore`.
+   - `-Z 6`: Specifies a compression level of 6 (the default).
+   - `-v`: runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump.
+   - `--no-owner` and `--no-acl`: Prevent dumping commands that set ownership and access privileges (grant/revoke commands) of database objects to match the source database. For more information, see [Ownership and privilege considerations](#ownership-and-privilege-considerations).
+  
    The `pg_dump` command provides many other options to modify your database dump. To learn more, refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation.
 
 3. Load the database dump into Neon using `pg_restore`. For example:
@@ -122,7 +127,11 @@ This section describes using the `pg_dump` utility to dump data from an existing
     The database specified in the command above must exist in Neon. If it does not, create it first. See [/docs/manage/databases#create-a-database].
     </Admonition>
 
-    The example above includes some optional arguments. The `-Fc` option specifies the format of the archive. In this case, `-Fc` indicates a custom-format archive file. The `--single-transaction` option forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.) The `-c --if-exists` options drop database objects before creating them, if they already exist. The `-v` option runs `pg_restore` in verbose mode, allowing you to monitor what happens during the restore operation.
+    The example above includes these optional arguments:
+    - `-Fc`: Specifies the format of the archive. In this case, `-Fc` indicates a custom-format archive file.
+    - `--single-transaction`: forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.)
+    - `-c --if-exists` Drop database objects before creating them, if they already exist.
+    - `-v` runs `pg_restore` in verbose mode, allowing you to monitor what happens during the restore operation.
 
     <Admonition type="note">
     `pg_restore` also supports a `-j` option that specifies the number of concurrent jobs, which can make imports faster. This option is not used in the example above because multiple jobs cannot be used together with the `--single-transaction` option.
@@ -132,7 +141,7 @@ This section describes using the `pg_dump` utility to dump data from an existing
 
 ## pg_dump and pg_restore example
 
-The following example shows how data from a `chinook` database was dumped and restored to a `chinook2` database in Neon using the commands described in the previous section.
+The following example shows how data from a `chinook` database was dumped and restored to a `chinook2` database in Neon using the commands described in the previous section. Command output, which is set to verbose by the `-v` option, is abbreviated.
 
 <CodeBlock shouldWrap>
 
@@ -144,61 +153,7 @@ pg_dump: last built-in OID is 16383
 pg_dump: reading extensions
 pg_dump: identifying extension members
 pg_dump: reading schemas
-pg_dump: reading user-defined tables
-pg_dump: reading user-defined functions
-pg_dump: reading user-defined types
-pg_dump: reading procedural languages
-pg_dump: reading user-defined aggregate functions
-pg_dump: reading user-defined operators
-pg_dump: reading user-defined access methods
-pg_dump: reading user-defined operator classes
-pg_dump: reading user-defined operator families
-pg_dump: reading user-defined text search parsers
-pg_dump: reading user-defined text search templates
-pg_dump: reading user-defined text search dictionaries
-pg_dump: reading user-defined text search configurations
-pg_dump: reading user-defined foreign-data wrappers
-pg_dump: reading user-defined foreign servers
-pg_dump: reading default privileges
-pg_dump: reading user-defined collations
-pg_dump: reading user-defined conversions
-pg_dump: reading type casts
-pg_dump: reading transforms
-pg_dump: reading table inheritance information
-pg_dump: reading event triggers
-pg_dump: finding extension tables
-pg_dump: finding inheritance relationships
-pg_dump: reading column info for interesting tables
-pg_dump: flagging inherited columns in subtables
-pg_dump: reading indexes
-pg_dump: flagging indexes in partitioned tables
-pg_dump: reading extended statistics
-pg_dump: reading constraints
-pg_dump: reading triggers
-pg_dump: reading rewrite rules
-pg_dump: reading policies
-pg_dump: reading row-level security policies
-pg_dump: reading publications
-pg_dump: reading publication membership of tables
-pg_dump: reading publication membership of schemas
-pg_dump: reading subscriptions
-pg_dump: reading large objects
-pg_dump: reading dependency data
-pg_dump: saving encoding = UTF8
-pg_dump: saving standard_conforming_strings = on
-pg_dump: saving search_path = 
-pg_dump: saving database definition
-pg_dump: dumping contents of table "public.Album"
-pg_dump: dumping contents of table "public.Artist"
-pg_dump: dumping contents of table "public.Customer"
-pg_dump: dumping contents of table "public.Employee"
-pg_dump: dumping contents of table "public.Genre"
-pg_dump: dumping contents of table "public.Invoice"
-pg_dump: dumping contents of table "public.InvoiceLine"
-pg_dump: dumping contents of table "public.MediaType"
-pg_dump: dumping contents of table "public.Playlist"
-pg_dump: dumping contents of table "public.PlaylistTrack"
-pg_dump: dumping contents of table "public.Track"
+...
 
 ~/mydump$ ls
 dumpfile.bak
@@ -209,103 +164,38 @@ pg_restore: connecting to database for restore
 pg_restore: dropping FK CONSTRAINT Track FK_TrackMediaTypeId
 pg_restore: dropping FK CONSTRAINT Track FK_TrackGenreId
 pg_restore: dropping FK CONSTRAINT Track FK_TrackAlbumId
-pg_restore: dropping FK CONSTRAINT PlaylistTrack FK_PlaylistTrackTrackId
-pg_restore: dropping FK CONSTRAINT PlaylistTrack FK_PlaylistTrackPlaylistId
-pg_restore: dropping FK CONSTRAINT InvoiceLine FK_InvoiceLineTrackId
-pg_restore: dropping FK CONSTRAINT InvoiceLine FK_InvoiceLineInvoiceId
-pg_restore: dropping FK CONSTRAINT Invoice FK_InvoiceCustomerId
-pg_restore: dropping FK CONSTRAINT Employee FK_EmployeeReportsTo
-pg_restore: dropping FK CONSTRAINT Customer FK_CustomerSupportRepId
-pg_restore: dropping FK CONSTRAINT Album FK_AlbumArtistId
-pg_restore: dropping INDEX IFK_TrackMediaTypeId
-pg_restore: dropping INDEX IFK_TrackGenreId
-pg_restore: dropping INDEX IFK_TrackAlbumId
-pg_restore: dropping INDEX IFK_PlaylistTrackTrackId
-pg_restore: dropping INDEX IFK_InvoiceLineTrackId
-pg_restore: dropping INDEX IFK_InvoiceLineInvoiceId
-pg_restore: dropping INDEX IFK_InvoiceCustomerId
-pg_restore: dropping INDEX IFK_EmployeeReportsTo
-pg_restore: dropping INDEX IFK_CustomerSupportRepId
-pg_restore: dropping INDEX IFK_AlbumArtistId
-pg_restore: dropping CONSTRAINT Track PK_Track
-pg_restore: dropping CONSTRAINT PlaylistTrack PK_PlaylistTrack
-pg_restore: dropping CONSTRAINT Playlist PK_Playlist
-pg_restore: dropping CONSTRAINT MediaType PK_MediaType
-pg_restore: dropping CONSTRAINT InvoiceLine PK_InvoiceLine
-pg_restore: dropping CONSTRAINT Invoice PK_Invoice
-pg_restore: dropping CONSTRAINT Genre PK_Genre
-pg_restore: dropping CONSTRAINT Employee PK_Employee
-pg_restore: dropping CONSTRAINT Customer PK_Customer
-pg_restore: dropping CONSTRAINT Artist PK_Artist
-pg_restore: dropping CONSTRAINT Album PK_Album
-pg_restore: dropping TABLE Track
-pg_restore: dropping TABLE PlaylistTrack
-pg_restore: dropping TABLE Playlist
-pg_restore: dropping TABLE MediaType
-pg_restore: dropping TABLE InvoiceLine
-pg_restore: dropping TABLE Invoice
-pg_restore: dropping TABLE Genre
-pg_restore: dropping TABLE Employee
-pg_restore: dropping TABLE Customer
-pg_restore: dropping TABLE Artist
-pg_restore: dropping TABLE Album
-pg_restore: creating TABLE "public.Album"
-pg_restore: creating TABLE "public.Artist"
-pg_restore: creating TABLE "public.Customer"
-pg_restore: creating TABLE "public.Employee"
-pg_restore: creating TABLE "public.Genre"
-pg_restore: creating TABLE "public.Invoice"
-pg_restore: creating TABLE "public.InvoiceLine"
-pg_restore: creating TABLE "public.MediaType"
-pg_restore: creating TABLE "public.Playlist"
-pg_restore: creating TABLE "public.PlaylistTrack"
-pg_restore: creating TABLE "public.Track"
-pg_restore: processing data for table "public.Album"
-pg_restore: processing data for table "public.Artist"
-pg_restore: processing data for table "public.Customer"
-pg_restore: processing data for table "public.Employee"
-pg_restore: processing data for table "public.Genre"
-pg_restore: processing data for table "public.Invoice"
-pg_restore: processing data for table "public.InvoiceLine"
-pg_restore: processing data for table "public.MediaType"
-pg_restore: processing data for table "public.Playlist"
-pg_restore: processing data for table "public.PlaylistTrack"
-pg_restore: processing data for table "public.Track"
-pg_restore: creating CONSTRAINT "public.Album PK_Album"
-pg_restore: creating CONSTRAINT "public.Artist PK_Artist"
-pg_restore: creating CONSTRAINT "public.Customer PK_Customer"
-pg_restore: creating CONSTRAINT "public.Employee PK_Employee"
-pg_restore: creating CONSTRAINT "public.Genre PK_Genre"
-pg_restore: creating CONSTRAINT "public.Invoice PK_Invoice"
-pg_restore: creating CONSTRAINT "public.InvoiceLine PK_InvoiceLine"
-pg_restore: creating CONSTRAINT "public.MediaType PK_MediaType"
-pg_restore: creating CONSTRAINT "public.Playlist PK_Playlist"
-pg_restore: creating CONSTRAINT "public.PlaylistTrack PK_PlaylistTrack"
-pg_restore: creating CONSTRAINT "public.Track PK_Track"
-pg_restore: creating INDEX "public.IFK_AlbumArtistId"
-pg_restore: creating INDEX "public.IFK_CustomerSupportRepId"
-pg_restore: creating INDEX "public.IFK_EmployeeReportsTo"
-pg_restore: creating INDEX "public.IFK_InvoiceCustomerId"
-pg_restore: creating INDEX "public.IFK_InvoiceLineInvoiceId"
-pg_restore: creating INDEX "public.IFK_InvoiceLineTrackId"
-pg_restore: creating INDEX "public.IFK_PlaylistTrackTrackId"
-pg_restore: creating INDEX "public.IFK_TrackAlbumId"
-pg_restore: creating INDEX "public.IFK_TrackGenreId"
-pg_restore: creating INDEX "public.IFK_TrackMediaTypeId"
-pg_restore: creating FK CONSTRAINT "public.Album FK_AlbumArtistId"
-pg_restore: creating FK CONSTRAINT "public.Customer FK_CustomerSupportRepId"
-pg_restore: creating FK CONSTRAINT "public.Employee FK_EmployeeReportsTo"
-pg_restore: creating FK CONSTRAINT "public.Invoice FK_InvoiceCustomerId"
-pg_restore: creating FK CONSTRAINT "public.InvoiceLine FK_InvoiceLineInvoiceId"
-pg_restore: creating FK CONSTRAINT "public.InvoiceLine FK_InvoiceLineTrackId"
-pg_restore: creating FK CONSTRAINT "public.PlaylistTrack FK_PlaylistTrackPlaylistId"
-pg_restore: creating FK CONSTRAINT "public.PlaylistTrack FK_PlaylistTrackTrackId"
-pg_restore: creating FK CONSTRAINT "public.Track FK_TrackAlbumId"
-pg_restore: creating FK CONSTRAINT "public.Track FK_TrackGenreId"
-pg_restore: creating FK CONSTRAINT "public.Track FK_TrackMediaTypeId"
+...
 ```
 
 </CodeBlock>
+
+## Ownership and privilege considerations
+
+If you have assigned database object ownership and privileges to various roles in your source database, you will encounter non-fatal errors when restoring data to a target database in Neon.
+
+User roles created in the Neon console, including the default role created with your Neon project, are automatically granted membership in the [neon_superuser](/docs/manage/roles#neon_superuser) group. This role can create roles and databases, and select, insert, update, or delete data from all databases in your Neon project. However, the `neon_superuser` is not a PostgreSQL `superuser`. It cannot run `ALTER OWNER` statements to set ownership of created database objects. As a result, if you have granted ownership of database objects to roles in your source database, your dump file will contain `ALTER OWNER` statements, and those statements will fail when you restore your data into a target Neon database. Additionally, any statements in your dump file that grant or revoke access privileges to roles that do not exist in Neon will also fail.
+
+<Admonition type="note">
+Regardless of `ALTER OWNER` or `GRANT` statement errors, a restore operation still succeeds because ownership and permissions are not necessary for the data itself to be restored. Your restore operation will still create tables, import data, and create other objects as the user that's running the process, and will only fail (i.e., report errors) on the specific commands it doesn't have permission for.
+</Admonition>
+
+To avoid these errors, you can do either of the following:
+
+- Exclude database object ownership and privilege assignments from your dump using the `--no-owner` and `--no-acl` options with `pg_dump` or `pg_restore` (and reestablish ownership and permissions afterward).
+- Ensure that the role the restores data into your Neon database owns all database objects and that any roles referenced by grant and revoke statements in your dump file are created in Neon prior to restoring data. The easiest way to proceed with this option is to:
+
+  - Identify all non-system roles role using a query similar to the following
+
+     ```sql
+     postgres=# SELECT rolname 
+     FROM pg_roles 
+     WHERE rolname NOT LIKE 'pg_%';
+     ```
+
+  - Create the roles in Neon
+  - Run your pg_dump or pg_restore command with `--no-owner`
+
+The [pg_dump with pg_restore](#pg_dump-and-pg_restore-example) above uses the `--no-owner` and `--no-acl` options to exclude ownership and privilege assignment statements from the dump file. If you prefer to preserve privilege assignment,
 
 ## Data import notes
 
