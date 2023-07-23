@@ -179,7 +179,7 @@ User roles created in the Neon console, including the default role created with 
 Regardless of `ALTER OWNER` or `GRANT` statement errors, a restore operation still succeeds because ownership and permissions are not necessary for the data itself to be restored. Your restore operation will still create tables, import data, and create other objects as the user that's running the process, and will only fail (i.e., report errors) on the specific commands it doesn't have permission for.
 </Admonition>
 
-To avoid these errors, you can do either of the following:
+If you prefer to avoid these these errors, you can do either of the following:
 
 - Exclude database object ownership and privilege assignments from your dump using the `--no-owner` and `--no-acl` options with `pg_dump` or `pg_restore` (and reestablish ownership and permissions afterward).
 - Ensure that the role the restores data into your Neon database owns all database objects and that any roles referenced by grant and revoke statements in your dump file are created in Neon prior to restoring data. The easiest way to proceed with this option is to:
