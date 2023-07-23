@@ -171,20 +171,21 @@ pg_restore: dropping FK CONSTRAINT Track FK_TrackAlbumId
 
 ## Ownership and privilege considerations
 
-If you have assigned database object ownership and privileges to various roles in your source database, you may encounter non-fatal errors when restoring data to a target database in Neon as the restore operation attempts to execute `ALTER OWNER` and privilege assignment statements.
+If you have assigned database object ownership and privileges in your source database, you may encounter non-fatal errors when restoring data to a target database in Neon as the restore operation attempts to execute `ALTER OWNER` and `GRANT/REVOKE` statements.
 
-Roles created in the Neon console, including the default role created with your Neon project, are automatically granted membership in the [neon_superuser](/docs/manage/roles#neon_superuser) group. This role can create roles and databases, and select, insert, update, or delete data from all databases in your Neon project. However, the `neon_superuser` is not a PostgreSQL `superuser`. It cannot run `ALTER OWNER` statements to set ownership of database objects. As a result, if you granted ownership of database objects to roles in your source database, your dump file will contain `ALTER OWNER` statements, and those statements will cause errors when you restore data to your target Neon database. Additionally, any statements in your dump file that grant or revoke access privileges to roles that do not exist in Neon will also produce errors.
+Roles created in the Neon console, including the default role created with your Neon project, are automatically granted membership in the [neon_superuser](/docs/manage/roles#neon_superuser) group. This role can create roles and databases, and select, insert, update, or delete data from all databases in your Neon project. However, the `neon_superuser` is not a PostgreSQL `superuser`. It cannot run `ALTER OWNER` statements to set ownership of database objects. As a result, if you granted ownership of database objects in your source database, your dump file will contain `ALTER OWNER` statements, and those statements will cause errors when you restore data to your target database in Neon. Additionally, any statements in your dump file that grant or revoke access privileges to roles that do not exist in Neon will also produce errors.
 
 <Admonition type="note">
-Regardless of `ALTER OWNER` or `GRANT/REVOKE` statement errors, a restore operation still succeeds because ownership and permissions are not necessary for the data itself to be restored. Your restore operation to a target database in Neon will still create tables, import data, and create other objects as the Neon user that's running the process, and will report errors on the specific commands it doesn't have permission for.
+Regardless of `ALTER OWNER` or `GRANT/REVOKE` statement errors, a restore operation still succeeds because ownership and permissions are not necessary for the data itself to be restored. Your restore operation to a target database in Neon will still create tables, import data, and create other objects as the Neon user that's running the process, and report errors on the specific commands it doesn't have permission for.
 </Admonition>
 
-To avoid these errors, you can one of the following methods:
+To avoid these errors, you can use one of the following options:
 
-- Exclude database object ownership and privilege assignments from your dump using the `--no-owner` and `--no-acl` options with `pg_dump` or `pg_restore`. This is the easiest and quickest method, but if you want to preserve ownership and permissions that were defined on your source database, you will have to create the users in Neon and reestablish ownership and permissions afterward by running the required SQL statements. The [pg_dump with pg_restore](#pg_dump-with-pg_restore) example above uses the `--no-owner` and `--no-acl` options to exclude ownership and privilege assignment statements from the dump file.
-- Ensure that the Neon role running the restore operation owns all database objects and that roles referenced by `GRANT/REVOKE` statements in your dump file are created in Neon prior to restoring data. This method preserves privilege assignments but not ownership. The easiest way to proceed with this option is to:
+- _Option 1_: Exclude database object ownership and privilege assignment statements from your dump using the `--no-owner` and `--no-acl` options with `pg_dump`. This is the quickest method, but if you want to reestablish ownership and permissions that were defined on your source database, you will have to create the users in Neon and reestablish ownership and permissions afterward by running the required SQL statements. The [pg_dump with pg_restore](#pg_dump-with-pg_restore) example above uses the `--no-owner` and `--no-acl` options to exclude ownership and privilege assignment statements from the dump file.
+- _Option 2_: Ensure that the Neon role running the restore operation owns all database objects, and that roles referenced by `GRANT/REVOKE` statements in your dump file are created in Neon prior to restoring data. This method preserves privileges on database objects but not ownership. To use this method:
 
-  - Identify all non-system roles roles on the source database using a query similar to the following:
+  1. Run `pg_dump` with `--no-owner` option. This removes any ownership assignments from your dump file.
+  2. Identify all non-system roles roles on the source database using a query similar to the following:
 
      ```sql
      postgres=# SELECT rolname 
@@ -192,8 +193,12 @@ To avoid these errors, you can one of the following methods:
      WHERE rolname NOT LIKE 'pg_%';
      ```
 
-  - Create the roles in Neon before you perform the restore operation. See [Manage roles](/docs/manage/roles) for instructions.
-  - Run your `pg_dump` or `pg_restore` command with `--no-owner` option. This removes any ownership assignments, making the Neon user that runs the restore operation owner of all database objects.
+  3. Create the roles in Neon before you perform the restore operation. See [Manage roles](/docs/manage/roles) for instructions.
+  4. Restore your data to the target database in Neon.
+
+<Admonition type="note">
+A Neon role does not have the `ADMIN OPTION` privilege and cannot grant it on any role, which means granting or revoking another role to or from other roles is not supported. These types of `GRANT` and `REVOKE` statements will still result in errors during a restore operation.
+</Admonition>
 
 ## Data import notes
 
