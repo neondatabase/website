@@ -313,8 +313,6 @@ Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org
 
 The role that creates a database is the owner of the database. This role has the typical default PostgreSQL privileges on the database, including the ability to `DROP` the database, `CONNECT` to the database, and create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
 
-For a database creation example, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
-
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
