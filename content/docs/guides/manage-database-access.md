@@ -60,21 +60,21 @@ To begin, assume you're creating a new database that will be used by several dev
 
     <Admonition type="important">  
     Your password must have 60 bits of entropy. To achieve this, you can follow these password composition guidelines:
-      - **Length**: The password should consist of at least 12 characters.
-      - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
-        - Lowercase letters (a-z)
-        - Uppercase letters (A-Z)
-        - Numbers (0-9)
-        - Special symbols (e.g., !@#$%^&*)
-      - **Avoid predictability**: To maintain a high level of unpredictability, do not use:
-        - Sequential patterns (such as '1234', 'abcd', 'qwerty')
-        - Common words or phrases
-        - Any words found in a dictionary
-      - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.
+    - **Length**: The password should consist of at least 12 characters.
+    - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
+      - Lowercase letters (a-z)
+      - Uppercase letters (A-Z)
+      - Numbers (0-9)
+      - Special symbols (e.g., !@#$%^&*)
+    - **Avoid predictability**: To maintain a high level of unpredictability, do not use:
+      - Sequential patterns (such as '1234', 'abcd', 'qwerty')
+      - Common words or phrases
+      - Any words found in a dictionary
+    - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.
 
-      Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
+    Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
 
-      Hashed passwords are not supported.
+    Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
     </Admonition>
 
 4. Grant the `dev_users` role all privileges on the database:

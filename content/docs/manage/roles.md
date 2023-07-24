@@ -43,7 +43,7 @@ CREATE ROLE neon_superuser CREATEDB CREATEROLE NOLOGIN IN ROLE pg_read_all_data,
 - `pg_read_all_data role`: A predefined role in PostgreSQL that provides the ability to select from all tables and views.
 - `pg_write_all_data`: A predefined role in PostgreSQL that provides the ability to insert, update, and delete in all tables and use all sequences in a database.
 
-In addition, the `neon_superuser` role is able to add [PostgreSQL extensions](/docs/extensions/pg_extensions) that are available for use with Neon.
+In addition, the `neon_superuser` role is able to add [PostgreSQL extensions](/docs/extensions/pg-extensions) that are available for use with Neon.
 
 You can think of roles with `neon_superuser` privileges as administrators. For all other users, you can create roles and manage database object access privileges with SQL. See [Manage roles with SQL](#manage-roles-with-sql).
 
@@ -193,24 +193,17 @@ Response:
   "roles": [
     {
       "branch_id": "br-blue-tooth-671580",
-      "name": "casey",
+      "name": "daniel",
       "protected": false,
-      "created_at": "2023-01-04T18:38:23Z",
-      "updated_at": "2023-01-04T18:38:23Z"
-    },
-    {
-      "branch_id": "br-blue-tooth-671580",
-      "name": "web_access",
-      "protected": true,
-      "created_at": "2023-01-04T18:38:23Z",
-      "updated_at": "2023-01-04T18:38:23Z"
+      "created_at": "2023-07-09T17:01:34Z",
+      "updated_at": "2023-07-09T17:01:34Z"
     },
     {
       "branch_id": "br-blue-tooth-671580",
       "name": "sally",
       "protected": false,
-      "created_at": "2023-01-04T20:35:48Z",
-      "updated_at": "2023-01-04T20:35:48Z"
+      "created_at": "2023-07-13T06:42:55Z",
+      "updated_at": "2023-07-13T14:48:29Z"
     }
   ]
 }
@@ -342,19 +335,21 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 
     <Admonition type="info">  
     To create a password with 60 bits of entropy, you can follow these password composition guidelines:
-      - **Length**: The password should consist of at least 12 characters.
-      - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
-        - Lowercase letters (a-z)
-        - Uppercase letters (A-Z)
-        - Numbers (0-9)
-        - Special symbols (e.g., !@#$%^&*)
-      - **Avoid predictability**: To maintain a high level of unpredictability, do not use:
-        - Sequential patterns (such as '1234', 'abcd', 'qwerty')
-        - Common words or phrases
-        - Any words found in a dictionary
+    - **Length**: The password should consist of at least 12 characters.
+    - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
+      - Lowercase letters (a-z)
+      - Uppercase letters (A-Z)
+      - Numbers (0-9)
+      - Special symbols (e.g., !@#$%^&*)
+    - **Avoid predictability**: To maintain a high level of unpredictability, do not use:
+      - Sequential patterns (such as '1234', 'abcd', 'qwerty')
+      - Common words or phrases
+      - Any words found in a dictionary
       - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.
 
     Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
+
+    Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
 
     The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
     </Admonition>

@@ -19,7 +19,7 @@ Our SOC2 Type 1 report underscores our ongoing commitment to safeguarding custom
 
 ## Security reporting
 
-Neon is currently in Technical Preview, and vulnerabilities may be present. We have established a security reporting procedure to address security issues quickly. We recommend using Neon only with public or non-sensitive data at this time.
+Neon is currently in Technical Preview. We have established a security reporting procedure to address security issues quickly.
 
 <Admonition type="important">
 If you have a security concern or believe you have found a vulnerability in any part of our infrastructure, please contact us at [security@neon.tech](mailto:security@neon.tech). If you need to share sensitive information, we can provide you with a security contact number through [Signal](https://signal.org/).

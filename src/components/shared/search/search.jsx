@@ -135,7 +135,6 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
                   };
                 })
               }
-              hitC
               insights
               onClose={onClose}
             />
