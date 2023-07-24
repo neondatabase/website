@@ -45,7 +45,9 @@ CREATE ROLE neon_superuser CREATEDB CREATEROLE NOLOGIN IN ROLE pg_read_all_data,
 
 In addition, the `neon_superuser` role is able to add [PostgreSQL extensions](/docs/extensions/pg-extensions) that are available for use with Neon.
 
-You can think of roles with `neon_superuser` privileges as administrators. For all other users, you can create roles and manage database object access privileges with SQL. See [Manage roles with SQL](#manage-roles-with-sql).
+You can think of roles with `neon_superuser` privileges as administrators. For all other users, you can create roles and manage database object privileges with SQL. See [Manage roles with SQL](#manage-roles-with-sql).
+
+Roes in Neon are not permitted to grant or revoke membership in other roles.
 
 ## Manage roles in the Neon console
 
