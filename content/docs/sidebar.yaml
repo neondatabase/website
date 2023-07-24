@@ -116,8 +116,6 @@
               slug: guides/branching-neon-api
             - title: Automation with GitHub Actions
               slug: guides/branching-github-actions
-            - title: Automation with Githooks
-              slug: guides/branching-githooks
     - title: Languages
       items:
         - title: Elixir
