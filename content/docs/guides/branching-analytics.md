@@ -5,42 +5,63 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Neon's database branching feature allows you to duplicate your database schema and data at a specific point in time, and then perform operations on this copy without impacting your database. You can run data-intensive analytics queries on this branch, avoiding disruption or performance issues on your production branch.
+Neon's database branching feature allows you to instantly create a database branch for running data analysis and reporting queries, thereby avoiding any disruption or performance degradation on your production database.
 
-This guide walks you through creating a branch of your production database, running a data analysis query, and deleting the branch when you are finished.
+As an example, suppose you have a sales table on your production system. The table and data might look something like this:
 
-## Create a branch
+```sql
+CREATE TABLE sales (
+    id SERIAL PRIMARY KEY,
+    product_id INT NOT NULL,
+    sale_amount DECIMAL(10,2) NOT NULL,
+    sale_date DATE NOT NULL
+);
 
-To create a branch:
+INSERT INTO sales (product_id, sale_amount, sale_date) VALUES
+(1, 20.50, '2022-07-24'),
+(2, 35.99, '2022-08-24'),
+(1, 20.50, '2022-09-24'),
+(3, 15.00, '2023-01-24'),
+(1, 20.50, '2023-04-24');
+```
 
-1. In the Neon Console, select a project.
+You want to find the total sale amount for each product in the past year but due to the large number of products and sales, you know it's a costly query that could disrupt normal operations.
+
+This guide walks you through creating a branch of your production database where you can run a data-intensive query without affecting your production system.
+
+## Create a branch of your production database
+
+Creating a branch is a near-instant operation. Neon's database branching feature uses a copy-on-write technique, which means there is no copying of data when creating a branch.
+
+To create a branch of your production data:
+
+1. In the Neon Console, select your project.
 2. Select **Branches**.
 3. Click **New Branch** to open the branch creation dialog.
 ![Create branch dialog](/docs/manage/create_branch.png)
-4. Enter a name for the branch.
-5. Select a parent branch. You can branch from your Neon project's [primary branch](/docs/manage/branches#primary-branch) or a [non-primary branch](/docs/manage/branches#non-primary-branch).
-6. Select one of the following branching options:
-    - **Head**: Creates a branch with data up to the current point in time (the default).
-    - **Time**: Creates a branch with data up to the specified date and time.
-    - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](/docs/reference/glossary#lsn).
-7. Select whether or not to create a compute endpoint, which is required to connect to the branch. If you are unsure, you can add a compute endpoint later.
+4. Enter a name for the branch. You might call it `sales_query`, for example.
+5. Select the branch that contains your production database.
+6. Select the **Head** option to create a branch with the latest data.
+7. Leave the **Create compute endpoint** option selected. A compute endpoint is required to connect to the new branch.
 8. Click **Create Branch** to create your branch.
 
 You are directed to the **Branches** page where you are shown the details for your new branch.
 
 ## Connect to your branch
 
-Connecting to a database in a branch requires connecting via a compute endpoint associated with the branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
+Connecting to your newly created branch requires connecting via the branch's compute endpoint. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="tip">
 You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../get-started-with-neon/query-with-neon-sql-editor).
 </Admonition>
 
-1. In the Neon Console, select a project.
-2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
+To connect:
+
+1. In the Neon Console, select your project.
+2. On the project **Dashboard**, under **Connection Details**, select the branch you created, the database, and the role you want to connect with.
 ![Connection details widget](/docs/connect/connection_details.png)
 3. Copy the connection string. A connection string includes your role name, the compute endpoint hostname, and database name.
-4. Connect with `psql` as shown below.
+4. Connect with `psql`. Your connection string will look something like this:
 
   <CodeBlock shouldWrap>
 
@@ -52,7 +73,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 
 ## Run your analytics query
 
-As an example, suppose you have a sales table with the columns `product_id`, `sale_date`, and `sale_amount`. You want to find the total sale amount for each product in the past year. This could be an expensive query if you have a large number of sales. Here's how you could write the query:
+An analytics query on your `sales` table might look something like this:
 
 ```sql
 SELECT product_id, SUM(sale_amount) as total_sales
@@ -61,20 +82,18 @@ WHERE sale_date >= (CURRENT_DATE - INTERVAL '1 year')
 GROUP BY product_id;
 ```
 
-This will sum the sale_amount for each product_id where the sale_date is within the past year, grouped by the product_id.
+Depending on the amount of sales, this query could impact performance on your production database. The branch you created is isolated from your production database and has a its own vCPU and RAM. Running this query on the branch will not impact your production system.
 
 ## Delete the branch
 
-If you're done with the analytics query and don't need the branch database anymore, you can delete to avoid taking up additional storage space:
+When you're done with the analytics query and don't need the branch anymore, you can delete it to avoid taking up storage space:
 
 1. In the Neon Console, select your project.
 2. Select **Branches**.
-3. Select your branch from the table.
+3. Select the branch from the table.
 3. Click **Delete**.
 4. On the confirmation dialog, click **Delete**.
 
-Tip: It is a good practice to remove branches when you are finished with them. A branch starts taking up storage space when you make changes to data in the branch or when the branch falls out of your project's point-in-time restore (PITR) window.
-
-## Automating branch creation and deletion
-
-This guide showed how to create and delete branches using the Neon Console. Neon supports different methods of automating branch creation and deletion. See [Automating branch creation and deletion](/docs/guides/analytics).
+<Admonition type="tip">
+It is a good practice to remove branches when you are finished with them. A branch starts taking up storage space when you make changes to data in the branch or when the branch falls out of your project's point-in-time restore (PITR) window, which is 7 days by default. When a branch falls out of the PITR window, it not longer shares data with the parent branch.
+</Admonition>
