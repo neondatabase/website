@@ -11,9 +11,19 @@ Neon is protocol and application-compatible with PostgreSQL. However, when using
 
 Neon cloud service is currently compatible with PostgreSQL 14 and PostgreSQL 15. You can select the PostgreSQL version you want to use when creating a Neon project. PostgreSQL 15 is selected, by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects).
 
-## Permissions and extension support
+## Extension support
 
-The Neon cloud service does not currently provide roles with access permissions other than those granted to standard database owners in PostgreSQL. Therefore, Neon roles cannot access replication methods, create additional roles from a PostgreSQL connection, or install PostgreSQL extensions other than those permitted by Neon. For information about the PostgreSQL extensions that Neon supports, see [PostgreSQL Extensions](/docs/extensions/pg-extensions).
+ Neon supports numerous PostgreSQL extensions, and we regularly add support for more. For a list of supported extensions, see [PostgreSQL Extensions](/docs/extensions/pg-extensions). To request support for additional extensions, please contact us at [support@neon.tech](mailto:support@neon.tech) or post your request to the [Neon community forum](https://community.neon.tech/).
+
+## Roles and permissions
+
+Neon is a managed PostgreSQL service, so you cannot access the host operating system, and you can't connect using the PostgreSQL `superuser` account like you can in a stand-alone PostgreSQL installation.
+
+Roles created in the Neon console, CLI, or API, including the default role created with a Neon project, are granted membership in the `neon_superuser` role. For information about the privileges associated with this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
+
+Roles created in Neon with SQL syntax, from a command-line tool like `psql` or the [Neon SQL Editor](/docs/connect/query-with-psql-editor), have the same privileges as newly created roles in a stand-alone PostgreSQL installation. These roles are not granted membership in the `neon_superuser` role. You must grant these roles the privileges you want them to have. For more information, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+
+Neon roles cannot access replication methods, install PostgreSQL extensions other than those permitted by Neon, or grant membership in other roles.
 
 <a id="default-parameters/"></a>
 
