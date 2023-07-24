@@ -22,7 +22,7 @@ The source code for this action is available on [GitHub](https://github.com/neon
 
 ### Prerequisites
 
-- To use this action, you require a Neon API key. For instructions, see [Create an API key](../manage/api-keys#create-an-api-key).
+- To use this action, you require a Neon API key. For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 - Add your Neon API key to your GitHub Secrets. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left side bar. Click **Actions** > **New Repository Secret**. Name the secret `NEON_API_KEY`, paste your API key in the **Secret** field, and click **Add Secret**.
 
 ### Example
@@ -33,18 +33,16 @@ The following example creates a branch from the `main` branch in your Neon proje
 name: Create Neon Branch with GitHub Actions Demo
 run-name: Create a Neon Branch 🚀
 jobs:
-  create-branch:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: neondatabase/create-branch-action@main
-        with:
-          project_id: rapid-haze-373089
-          parent_branch_id: br-long-forest-224191
-          branch_name: from_action_reusable
-          api_key: ${{ secrets.NEON_API_KEY }}
-        id: create-branch
-      - run: echo project_id ${{ steps.create-branch.outputs.project_id}}
-      - run: echo branch_id ${{ steps.create-branch.outputs.branch_id}}
+  Create-Neon-Branch:
+    uses: neondatabase/create-branch-action@v4
+    with:
+      project_id: rapid-haze-373089
+      parent_id: br-long-forest-224191
+      branch_name: from_action_reusable
+      api_key: {{ secrets.NEON_API_KEY }}
+    id: create-branch
+  - run: echo project_id ${{ steps.create-branch.outputs.project_id}}
+  - run: echo branch_id ${{ steps.create-branch.outputs.branch_id}}
 ```
 
 ### Input variables
@@ -52,7 +50,7 @@ jobs:
 - `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Settings** page.
 - `parent_branch_id`: The ID of the parent branch, typically the `main` branch of your project. You can find this value in the Neon Console. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
 - `branch_name`: This is an optional parameter. If unspecified, the branch name will default to the same value as the `branch_id` of the newly created branch, which is a generated value that starts with a `br-` prefix.
-- `api_key`: An API key created in your Neon account. For instructions, see [Create an API key](../manage/api-keys#create-an-api-key).
+- `api_key`: An API key created in your Neon account. For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 ### Outputs
 
@@ -79,7 +77,7 @@ The source code for this action is available on [GitHub](https://github.com/neon
 
 ### Prerequisites
 
-- To use this action, you require a Neon API key. For instructions, see [Create an API key](../manage/api-keys#create-an-api-key).
+- To use this action, you require a Neon API key. For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 - Add your Neon API key to your GitHub Secrets. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left side bar. Click **Actions** > **New Repository Secret**. Name the secret `NEON_API_KEY`, paste your API key in the **Secret** field, and click **Add Secret**.
 
 ### Example
@@ -92,7 +90,7 @@ run-name: Delete a Neon Branch 🚀
 on: [push]
 jobs:
   delete-neon-branch:
-    uses: neondatabase/delete-branch-action.yml@beta
+    uses: neondatabase/delete-branch-action@v3
     with:
       project_id: rapid-haze-373089
       branch_id: br-long-forest-224191
@@ -103,7 +101,7 @@ jobs:
 
 - `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Settings** page.
 - `branch_id`: The ID of the branch you want to delete. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
-- `api_key`: An API key created in your Neon account. For instructions, see [Create an API key](../manage/api-keys#create-an-api-key).
+- `api_key`: An API key created in your Neon account. For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 ### Outputs
 
