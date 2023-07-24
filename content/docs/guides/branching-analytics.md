@@ -1,6 +1,6 @@
 ---
 title: Branching — Data analysis and reporting
-subtitle: Learn how to create database branches for data-intensive analytics queries
+subtitle: Learn how to use database branches for running data-intensive analytics queries
 enableTableOfContents: true
 isDraft: true
 ---

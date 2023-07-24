@@ -1,6 +1,6 @@
 ---
 title: Automate branching with the Neon API
-subtitle: Learn how you can automatically create and delete branches with the Neon API
+subtitle: Learn how you can create and delete branches with the Neon API
 enableTableOfContents: true
 isDraft: true
 ---

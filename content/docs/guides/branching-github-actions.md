@@ -1,6 +1,6 @@
 ---
 title: Automate branching with GitHub Actions
-subtitle: Learn how you can automatically create and delete database branches in Neon using GitHub Actions
+subtitle: Learn how you can create and delete branches with GitHub Actions
 enableTableOfContents: true
 isDraft: true
 ---
