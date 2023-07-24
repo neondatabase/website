@@ -2,7 +2,6 @@
 title: Branching with the Neon CLI
 subtitle: Learn how you can create and delete branches with the Neon CLI
 enableTableOfContents: true
-isDraft: true
 ---
 
 Branch actions performed in the Neon Console can also be performed using the Neon CLI. The following examples demonstrate how to create, view, and delete branches using the Neon CLI. For other branch-related CLI commands, refer to the [Neon CLI commands — branches](/docs/reference/cli-branches).
