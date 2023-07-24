@@ -55,11 +55,11 @@ const BlogPostCard = ({
   return (
     <article
       className={clsx(
-        'flex',
+        `blog-post-card-${size}`,
         className,
         size === 'xl'
-          ? 'flex-row space-x-14 xl:space-x-6 md:flex-col md:space-x-0 md:space-y-4'
-          : 'flex-col'
+          ? 'grid grid-cols-10 gap-x-10 space-x-3 2xl:gap-x-6 xl:space-x-0 md:flex md:flex-col md:gap-y-10 md:space-x-0 md:space-y-4'
+          : 'flex flex-col'
       )}
     >
       {size !== 'xs' && (
@@ -67,7 +67,7 @@ const BlogPostCard = ({
           className={clsx(
             'group w-full max-w-[716px] shrink-0 overflow-hidden rounded-md md:max-w-none',
             {
-              '2xl:max-w-[600px] xl:max-w-[50%] md:max-w-full': size === 'xl',
+              'col-span-6 md:max-w-full': size === 'xl',
             }
           )}
           to={link}
@@ -103,7 +103,11 @@ const BlogPostCard = ({
           )}
         </Link>
       )}
-      <div className="flex flex-col">
+      <div
+        className={clsx('flex flex-col', {
+          'col-span-4': size === 'xl',
+        })}
+      >
         {category && size !== 'xs' && (
           <Link
             className={clsx(
