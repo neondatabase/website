@@ -72,6 +72,28 @@ neonctl branches delete br-rough-sky-158193
 └───────────────────────┴───────────────────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
 
+## Branching automation
+
+The Neon CLI enables easy automation of branching operations for integration into into your workflows or toolchains.
+
+The Neon CLI provides the `--api-key` option to enable authentication at the command line. For information about obtaining an API key for your Neon project, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+
+To use the API key, store it in an environment variable on your system. This prevents the key from being hardcoded into your automation scripts or exposed in some other way. For example, you can add the following line to your shell's profile file (`.bashrc` or `.bash_profile` for bash shell):
+
+```bash
+export NEON_API_KEY=<neon_api_key>
+```
+
+After exporting your key, source the profile file (source `~/.bashrc` or source `~/.bash_profile`), or start a new terminal session.
+
+In your scripts or commands, you can reference the environment variable like so:
+
+```bash
+neonctl branches create --api-key $NEON_API_KEY
+```
+
+This usage ensures that the API key is kept secure, while still providing an efficient method of authenticating your CLI commands. Remember, your API key should be handled with the same level of security as your other credentials.
+
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
