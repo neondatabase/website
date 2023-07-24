@@ -5,40 +5,43 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Branch actions performed in the Neon Console can also be performed using the Neon CLI. The following examples demonstrate how to create, view, and delete branches using the Neon CLI. For other branch-related CLI commands, refer to the [Neon CLI reference](/docs/reference/neon-cli).
+Branch actions performed in the Neon Console can also be performed using the Neon CLI. The following examples demonstrate how to create, view, and delete branches using the Neon CLI. For other branch-related CLI commands, refer to the [Neon CLI commands — branches](/docs/reference/cli-branches).
 
 ### Prerequisites
 
-- The Neon CLI is installed. See [Install the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli) for instructions.
-Before you can run CLI commands, you must be authenticated. Alternatively, you can supply an API key using the `--api-key` option when running a CLI command.
+- The Neon CLI. See [Install the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli) for instructions.
+- To run CLI commands, you must either authenticate or supply an API key using the `--api-key` option. See [Connect with the Neon CLI](/docs/reference/neon-cli#connect).
 
 ### Create a branch with the CLI
 
 The following Neon CLI command creates a branch. To view the CLI documentation for this method, refer to the [Neon CLI reference](/docs/reference/cli-branches).
+The command response includes the brach ID, the compute endpoint ID, and and the connection URI, which you can use to connect to the branch.
+
+<Admonition type="tip">
+You add the `--name` option to a `neonctl branches create` command to specify your own branch name. For example, `neonctl branches create --name mybranch`. Also, for any Neon CLI command, command, you can specify `--output json` to change the command output from the default table format to JSON format.
+</Admonition>
 
 ```bash
 neonctl branches create
-┌───────────────────────────┬───────────────────────────┬──────────────────────┬──────────────────────┐
-│ Id                        │ Name                      │ Created At           │ Updated At           │
-├───────────────────────────┼───────────────────────────┼──────────────────────┼──────────────────────┤
-│ br-tight-waterfall-174832 │ br-tight-waterfall-174832 │ 2023-07-09T20:42:18Z │ 2023-07-09T20:42:18Z │
-└───────────────────────────┴───────────────────────────┴──────────────────────┴──────────────────────┘
 
+branch
+┌───────────────────────┬───────────────────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                    │ Name                  │ Primary │ Created At           │ Updated At           │
+├───────────────────────┼───────────────────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-lucky-mud-08878834 │ br-lucky-mud-08878834 │ false   │ 2023-07-24T20:22:42Z │ 2023-07-24T20:22:42Z │
+└───────────────────────┴───────────────────────┴─────────┴──────────────────────┴──────────────────────┘
 endpoints
-
-┌─────────────────────┬──────────────────────┐
-│ Id                  │ Created At           │
-├─────────────────────┼──────────────────────┤
-│ ep-cold-star-253608 │ 2023-07-09T20:42:18Z │
-└─────────────────────┴──────────────────────┘
-
+┌────────────────────────┬──────────────────────┐
+│ Id                     │ Created At           │
+├────────────────────────┼──────────────────────┤
+│ ep-mute-voice-52609794 │ 2023-07-24T20:22:42Z │
+└────────────────────────┴──────────────────────┘
 connection_uris
-
-┌───────────────────────────────────────────────────────────────────────────────────┐
-│ Connection Uri                                                                    │
-├───────────────────────────────────────────────────────────────────────────────────┤
-│ postgres://daniel:<password>@ep-cold-star-253608.us-east-2.aws.neon.tech/neondb   │
-└───────────────────────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────────────────────────┐
+│ Connection Uri                                                                        │
+├───────────────────────────────────────────────────────────────────────────────────────┤
+│ postgres://daniel:<password>@ep-mute-voice-52609794.us-east-2.aws.neon.tech/neondb    │
+└───────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### List branches with the CLI
@@ -46,14 +49,14 @@ connection_uris
 The following Neon CLI command lists branches for the specified project. To view the CLI documentation for this method, refer to the [Neon CLI reference](/docs/reference/cli-branches).
 
 ```bash
-neonctl branches list --project-id solitary-leaf-288182
-┌────────────────────────┬──────────┬──────────────────────┬──────────────────────┐
-│ Id                     │ Name     │ Created At           │ Updated At           │
-├────────────────────────┼──────────┼──────────────────────┼──────────────────────┤
-│ br-small-meadow-878874 │ main     │ 2023-07-06T13:15:12Z │ 2023-07-06T14:26:32Z │
-├────────────────────────┼──────────┼──────────────────────┼──────────────────────┤
-│ br-round-queen-335380  │ mybranch │ 2023-07-06T14:45:50Z │ 2023-07-06T14:45:50Z │
-└────────────────────────┴──────────┴──────────────────────┴──────────────────────┘
+neonctl branches list
+┌────────────────────────────┬───────────────────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                         │ Name                  │ Primary │ Created At           │ Updated At           │
+├────────────────────────────┼───────────────────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-lucky-mud-08878834      │ br-lucky-mud-08878834 │ false   │ 2023-07-24T20:22:42Z │ 2023-07-24T20:38:34Z │
+├────────────────────────────┼───────────────────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-wandering-king-30669552 │ main                  │ true    │ 2023-07-24T15:31:03Z │ 2023-07-24T16:13:48Z │
+└────────────────────────────┴───────────────────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
 
 ### Delete a branch with the CLI
@@ -62,14 +65,12 @@ The following Neon CLI command deletes the specified branch. To view the CLI doc
 
 ```bash
 neonctl branches delete br-rough-sky-158193
-┌─────────────────────┬─────────────────┬──────────────────────┬──────────────────────┐
-│ Id                  │ Name            │ Created At           │ Updated At           │
-├─────────────────────┼─────────────────┼──────────────────────┼──────────────────────┤
-│ br-rough-sky-158193 │ my_child_branch │ 2023-07-09T20:57:39Z │ 2023-07-09T21:06:41Z │
-└─────────────────────┴─────────────────┴──────────────────────┴──────────────────────┘
+┌───────────────────────┬───────────────────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                    │ Name                  │ Primary │ Created At           │ Updated At           │
+├───────────────────────┼───────────────────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-lucky-mud-08878834 │ br-lucky-mud-08878834 │ false   │ 2023-07-24T20:22:42Z │ 2023-07-24T20:44:51Z │
+└───────────────────────┴───────────────────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
-
-You can verify that a branch is deleted by listing the branches for your project. See [List branches](tbd). The deleted branch should no longer be listed.
 
 ## Need help?
 
