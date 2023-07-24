@@ -43,11 +43,9 @@ To create a branch of your production data:
 5. Select the branch that contains your production database.
 6. Select the **Head** option to create a branch with the latest data.
 7. Leave the **Create compute endpoint** option selected. A compute endpoint is required to connect to the new branch.
-8. Click **Create Branch** to create your branch.
+8. Click **Create a branch** to create your branch.
 
-You are directed to the **Branches** page where you are shown the details for your new branch.
-
-## Connect to your branch
+## Connect to your new branch
 
 Connecting to your newly created branch requires connecting via the branch's compute endpoint. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
@@ -58,9 +56,9 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 To connect:
 
 1. In the Neon Console, select your project.
-2. On the project **Dashboard**, under **Connection Details**, select the branch you created, the database, and the role you want to connect with.
+2. On the project **Dashboard**, under **Connection Details**, select the `sales-query` branch you, the database, and the role you want to connect with.
 ![Connection details widget](/docs/connect/connection_details.png)
-3. Copy the connection string. A connection string includes your role name, the compute endpoint hostname, and database name.
+3. Copy the connection string. A connection string includes your role name, password, the compute endpoint hostname, and database name.
 4. Connect with `psql`. Your connection string will look something like this:
 
   <CodeBlock shouldWrap>
@@ -71,7 +69,7 @@ To connect:
 
   </CodeBlock>
 
-## Run your analytics query
+## Run the analytics query on your branch
 
 An analytics query on your `sales` table might look something like this:
 
@@ -82,16 +80,16 @@ WHERE sale_date >= (CURRENT_DATE - INTERVAL '1 year')
 GROUP BY product_id;
 ```
 
-Depending on the amount of sales, this query could impact performance on your production database. The branch you created is isolated from your production database and has a its own vCPU and RAM. Running this query on the branch will not impact your production system.
+Depending on the number of products and sales, this query would likely impact performance if run on your production database. Since you are running the query on your production branch, which is isolated from your production database and has a its own vCPU and RAM, it will have no effect on your production system.
 
 ## Delete the branch
 
-When you're done with the analytics query and don't need the branch anymore, you can delete it to avoid taking up storage space:
+When you're done running queries and don't need the branch anymore, you can delete it to avoid taking up storage space:
 
 1. In the Neon Console, select your project.
 2. Select **Branches**.
-3. Select the branch from the table.
-3. Click **Delete**.
+3. Select the `sales_query` branch from the table.
+3. From the **More** menu, select **Delete**.
 4. On the confirmation dialog, click **Delete**.
 
 <Admonition type="tip">
