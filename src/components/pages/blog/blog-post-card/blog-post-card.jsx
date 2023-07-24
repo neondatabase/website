@@ -58,7 +58,7 @@ const BlogPostCard = ({
         `blog-post-card-${size}`,
         className,
         size === 'xl'
-          ? 'grid grid-cols-10 gap-x-10 space-x-3 2xl:gap-x-6 xl:space-x-0 md:flex md:flex-col md:gap-y-10 md:space-x-0 md:space-y-4'
+          ? 'grid grid-cols-10 gap-x-10 space-x-3 2xl:gap-x-6 xl:space-x-0 md:flex md:flex-col md:gap-y-4'
           : 'flex flex-col'
       )}
     >
