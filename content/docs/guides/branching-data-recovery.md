@@ -19,7 +19,7 @@ To create a point-in-time branch:
 1. Enter a name for the branch. You can call it `recovery_branch`, for example.
 1. For the **Parent branch**, select the branch where the data loss occurred.
 1. Select the **Time** option to create a branch with data up to a specific date and time. For example, if the data loss occurred on July 11, 2023 at 10:01am, set the time to July 11, 2023, at 10:00am, just before the faulty query was run.
-![Data recovery create branch dialog](/docs/guides/data_recodver_create_branch.png).
+![Data recovery create branch dialog](/docs/guides/data_recodver_create_branch.png)
 1. Leave the **Create compute endpoint** option selected. A compute endpoint is required to connect to the new branch.
 <Admonition type="note">
 Pro plan users can configure the amount of vCPU and RAM for a compute endpoint to define the amount of processing power for the branch. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
