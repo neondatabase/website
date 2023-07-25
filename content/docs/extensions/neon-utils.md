@@ -20,19 +20,7 @@ For information about using the Neon **SQL Editor**, see [Query with Neon's SQL 
 
 ## Use the `num_cpus()` function
 
-In Neon, computing capacity is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
-
-| Compute Units | vCPU | RAM    |
-|:--------------|:-----|:-------|
-| .25           | .25  | 1 GB   |
-| .5            | .5   | 2 GB   |
-| 1             | 1    | 4 GB   |
-| 2             | 2    | 8 GB   |
-| 3             | 3    | 12 GB  |
-| 4             | 4    | 16 GB  |
-| 5             | 5    | 20 GB  |
-| 6             | 6    | 24 GB  |
-| 7             | 7    | 28 GB  |
+In Neon, computing capacity is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GBs is always 4 times the number of CUs. A Neon compute can have anywhere from .25 to 7 CUs.
 
 When you enable Autoscaling for a compute endpoint, you define a minimum and maximum compute size, as shown below:
 
@@ -53,9 +41,9 @@ The following limitations apply:
 - The `num_cpus()` function does not return fractional vCPU sizes. If the current number of allocated vCPUs is `.25` or `.5`, the `num_cpus()` function returns `1`.
 - The `num_cpus()` function only works on compute endpoints that have the _Autoscaling_ feature enabled. Running the function on a fixed size compute endpoint does not return a correct value.
 
-## Use `neon_utils` with `pgbench` to monitor Autoscaling
+## Observing Autoscaling with `neon_utils` and `pgbench`
 
-The following instructions demonstrate how to use the `num_cpus()` function with `pgbench` to observe how Neon's Autoscaling feature responds to workload.
+The following instructions demonstrate how you can use the `num_cpus()` function with `pgbench` to observe how Neon's Autoscaling feature responds to workload.
 
 ### Prerequisites
 
@@ -64,14 +52,20 @@ The following instructions demonstrate how to use the `num_cpus()` function with
 
 ### Run the test
 
-1. Create a `test.sql` file with the following queries:
+1. Install the `neon_utils` extension:
+
+    ```sql
+    CREATE EXTENSION IF NOT EXISTS neon_utils;
+    ```
+
+2. Create a `test.sql` file with the following queries:
 
     ```sql
     SELECT LOG(factorial(25000)) / LOG(factorial(10000));
     SELECT txid_current();
     ```
 
-2. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string from the **Connection Details** widget on the Neon **Dashboard**. Your connection string will similar to the one below:
+3. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string from the **Connection Details** widget on the Neon **Dashboard**. Your connection string will similar to the one below:
 
     <CodeBlock shouldWrap>
 
@@ -81,7 +75,7 @@ The following instructions demonstrate how to use the `num_cpus()` function with
 
     </CodeBlock>
 
-3. Run a `pgbench` test with your `test.sql` file, specifying the same connection string:
+4. Run a `pgbench` test with your `test.sql` file, specifying the same connection string:
 
     <CodeBlock shouldWrap>
 
@@ -105,12 +99,6 @@ The following instructions demonstrate how to use the `num_cpus()` function with
     progress: 9.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
     progress: 10.0 s, 8.0 tps, lat 7055.317 ms stddev 9.528
     ...
-    ```
-
-3. Install the `neon_utils` extension:
-
-    ```sql
-    CREATE EXTENSION IF NOT EXISTS neon_utils;
     ```
 
 4. Call the `num_cpus()` function to retrieve the current number of allocated vCPUs.
