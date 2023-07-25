@@ -1,16 +1,16 @@
 ---
 title: Branching — Point-in-time recovery (PITR)
-subtitle: Learn how to recover your database to previous state using Neon's branching feature
+subtitle: Recover your data to previous state using Neon's branching feature
 enableTableOfContents: true
 ---
 
-A Neon project has a default 7-day data retention window, which enables creating a branch that reflects the state of your data at a past point in time. This capability can be used to recover lost data, which is a form of Point-in-time recovery (PITR).
+A Neon project has a default 7-day data retention window, which enables creating a branch that reflects the state of your data at a past time. You can use this capability to recover lost data, which is a form of Point-in-time recovery (PITR).
 
-This guide provides an example showing how to recover your data to point in time before a data loss occurred using Neon's branching feature.
+This guide provides an example of how to recover your data to point in time before a data loss occurred using Neon's branching feature.
 
-## Create a database branch at the desired point in time
+## Create a point-in-time branch
 
-Suppose that you have a table named `orders` that was accidentally deleted by a faulty query. If you know the time the faulty query was run or when the data loss was first reported, you can create a point-in-time branch with the data as it existed before the data loss occurred.
+Suppose that you have a table named `orders` that was accidentally deleted by a faulty query. If you know the time you ran the faulty query or when the data loss was first discovered, you can create a point-in-time branch with the data as it existed before the data loss occurred.
 
 To create a point-in-time branch:
 
@@ -18,7 +18,7 @@ To create a point-in-time branch:
 1. Click **Create branch** to open the branch creation dialog.
 1. Enter a name for the branch. You can call it `recovery_branch`, for example.
 1. For the **Parent branch**, select the branch where the data loss occurred.
-1. Select the **Time** option to create a branch with data up to a specific date and time. For example, if you determined that the data loss occurred on July 11, 2023 at 10:01am, set the time to 10:00am, just before the faulty query was run.
+1. Select the **Time** option to create a branch with data up to a specific date and time. For example, if the data loss occurred on July 11, 2023 at 10:01am, set the time to July 11, 2023, at 10:00am, just before the faulty query was run.
 ![Data recovery create branch dialog](/docs/guides/data_recodver_create_branch.png).
 1. Leave the **Create compute endpoint** option selected. A compute endpoint is required to connect to the new branch.
 <Admonition type="note">
@@ -60,17 +60,17 @@ SELECT * FROM orders LIMIT 10;
 
 ## Change your primary branch
 
-You now have a production branch with lost data and recovery branch with the data in the desired state. You could dump data from the recovery branch and load it into the production branch using dump and restore utilities like `pg_dump` and `pg_restore`, or you can make the recovery branch your new primary branch.
+You now have a production branch with lost data and a recovery branch with the data in the desired state. You could dump data from the recovery branch and load it into the production branch using dump and restore utilities like `pg_dump` and `pg_restore`, or you can make the recovery branch your new primary branch.
 
 To make the recovery branch your new primary:
 
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
-3. Select a branch from the table to view details about the branch.
-4. On the branch details page. select **Set as Primary**.
+3. Select your recovery branch from the table.
+4. On the branch details page, select **Set as Primary**.
 
 <Admonition type="note">
-If your previous primary branch was your project's root branch (the initial branch created with your project), it cannot be deleted. Deleting a root branch is not yet supported. In the meantime, you can rename your root branch (perhaps adding an `OLD`` prefix to its name) and remove data from it to ensure that it's not used accidentally or consuming storage space.
+If your previous primary branch was your project's root branch (the initial branch created with your project), it cannot be deleted. Deleting a root branch is not yet supported. In the meantime, you can rename a root branch (perhaps adding an `OLD` or `DO_NOT_USE` prefix to its name) and remove data from it to ensure that it's not used accidentally or consuming storage space.
 </Admonition>
 
 ## Update your connections
