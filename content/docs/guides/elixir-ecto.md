@@ -209,6 +209,11 @@ You can use the **Tables** feature in the Neon Console to view the table that wa
 
 The [Ecto Getting Started Guide](https://hexdocs.pm/ecto/getting-started.html#content) provides additional steps that you can follow to create a schema, insert data, and run queries. See [Creating the schema](https://hexdocs.pm/ecto/getting-started.html#creating-the-schema ) in the _Ecto Getting Started Guide_ to pick up where the steps in this guide leave off.
 
+## Usage notes
+
+- Suppose you have `PGHOST` environment variable on your system set to something other than your Neon hostname. In that case, this hostname will be used instead of the Neon `hostname` defined in your Ecto Repo configuration when running `mix ecto` commands. To avoid this issue, you can either set the `PGHOST` environment variable to your Neon hostname or specify `PGHOST=""` when running `mix ecto` commands; for example: `PGHOST="" mix ecto.migrate`.
+- By default, Neon's _Auto-suspend_ feature scales computes to zero after 300 seconds (5 minutes) of inactivity, which can result in a `connection not available` error when running `mix ecto` commands. Typically, a Neon compute takes a few seconds to transition from `Idle` to `Active`. Wait a few seconds and try running the command again. Alternatively, consider the strategies outlined in [Connection latency and timeouts](/docs/connect/connection-latency) to manage connection issues resulting from compute suspension.
+
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

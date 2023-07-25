@@ -1,6 +1,6 @@
-import SEO_DATA from 'constants/seo-data';
+import LINKS from 'constants/links';
+import SEO_DATA, { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 
-const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
 const DEFAULT_TITLE = SEO_DATA.index.title;
 const DEFAULT_DESCRIPTION = SEO_DATA.index.description;
 
@@ -11,6 +11,7 @@ export default function getMetadata({
   robotsNoindex,
   rssPathname = null,
   pathname,
+  category = null,
   type = 'website',
   publishedTime = null,
   authors = [],
@@ -40,7 +41,7 @@ export default function getMetadata({
     manifest: `${SITE_URL}/manifest.json`,
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots,
-    themeColor: '#00e699',
+    themeColor: [LINKS.pricing, LINKS.partners].includes(pathname) ? '#0c0d0d' : '#00e699',
     icons: {
       icon: '/favicon/favicon.png',
       apple: [
@@ -69,6 +70,7 @@ export default function getMetadata({
       publishedTime,
       authors,
     },
+    category,
     twitter: {
       card: 'summary_large_image',
     },

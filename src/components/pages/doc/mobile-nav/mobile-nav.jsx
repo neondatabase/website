@@ -14,6 +14,7 @@ import useWindowSize from 'hooks/use-window-size';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 import { ChatWidgetTrigger } from '../chat-widget';
+import { sidebarPropTypes } from '../sidebar/sidebar';
 
 const ANIMATION_DURATION = 0.2;
 
@@ -38,7 +39,7 @@ const variants = {
   },
 };
 
-const MobileNav = ({ className = null, sidebar, currentSlug }) => {
+const MobileNav = ({ className = null, sidebar }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [containerHeight, setContainerHeight] = useState(null);
   const { height } = useWindowSize();
@@ -111,7 +112,7 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
         </ul>
         <ul className="mt-7">
           {sidebar.map((item, index) => (
-            <Item {...item} currentSlug={currentSlug} key={index} />
+            <Item {...item} key={index} closeMenu={toggleMenu} />
           ))}
         </ul>
       </motion.div>
@@ -121,38 +122,7 @@ const MobileNav = ({ className = null, sidebar, currentSlug }) => {
 
 MobileNav.propTypes = {
   className: PropTypes.string,
-  sidebar: PropTypes.arrayOf(
-    PropTypes.exact({
-      title: PropTypes.string.isRequired,
-      isStandalone: PropTypes.bool,
-      slug: PropTypes.string,
-      items: PropTypes.arrayOf(
-        PropTypes.exact({
-          title: PropTypes.string.isRequired,
-          slug: PropTypes.string,
-          items: PropTypes.arrayOf(
-            PropTypes.exact({
-              title: PropTypes.string.isRequired,
-              slug: PropTypes.string,
-              items: PropTypes.arrayOf(
-                PropTypes.exact({
-                  title: PropTypes.string,
-                  slug: PropTypes.string,
-                  items: PropTypes.arrayOf(
-                    PropTypes.exact({
-                      title: PropTypes.string,
-                      slug: PropTypes.string,
-                    })
-                  ),
-                })
-              ),
-            })
-          ),
-        })
-      ),
-    })
-  ).isRequired,
-  currentSlug: PropTypes.string.isRequired,
+  sidebar: sidebarPropTypes,
 };
 
 export default MobileNav;

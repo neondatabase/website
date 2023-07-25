@@ -80,40 +80,42 @@ const ReleaseNotePage = async ({ currentSlug }) => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
-      <Hero
-        className="flex justify-center pt-40 dark:bg-black dark:text-white lg:pt-16 md:mb-10 md:py-10 sm:mb-7 sm:py-7"
-        date={label}
-        withContainer
-        isReleaseNotePost
-      />
-      <div className="pb-28 dark:bg-black lg:pb-20 md:pb-16">
-        <Container size="xs" className="relative flex pb-10">
-          <article className="relative flex flex-col items-start">
-            <time
-              className="mt-3 whitespace-nowrap text-gray-2 dark:text-gray-5"
-              dateTime={datetime}
-            >
-              {label}
-            </time>
-            <Heading
-              className="!text-[36px] !leading-normal md:!text-3xl"
-              tag="h1"
-              size="sm"
-              theme="black"
-            >
-              {capitalisedCategory} release
-            </Heading>
-            <Content className="mt-8 prose-h3:text-xl" content={mdxSource} />
-            <Link
-              className="mt-10 font-semibold lg:mt-8"
-              to={RELEASE_NOTES_BASE_PATH}
-              size="sm"
-              theme="black-primary-1"
-            >
-              Back to all notes
-            </Link>
-          </article>
-        </Container>
+      <div className="col-span-7 -mx-10 flex flex-col 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
+        <Hero
+          className="flex justify-center dark:bg-gray-new-8 dark:text-white lg:pt-16 md:py-10 sm:py-7"
+          date={label}
+          withContainer
+          isReleaseNotePost
+        />
+        <div className="grow pb-28 dark:bg-gray-new-8 lg:pb-20 md:pb-16">
+          <Container size="xs" className="relative flex pb-10">
+            <article className="relative flex max-w-full flex-col items-start">
+              <time
+                className="mt-3 whitespace-nowrap text-gray-new-20 dark:text-gray-new-70"
+                dateTime={datetime}
+              >
+                {label}
+              </time>
+              <Heading
+                className="!text-[36px] !leading-normal md:!text-3xl"
+                tag="h1"
+                size="sm"
+                theme="black"
+              >
+                {capitalisedCategory} release
+              </Heading>
+              <Content className="mt-8 max-w-full prose-h3:text-xl" content={mdxSource} />
+              <Link
+                className="mt-10 font-semibold lg:mt-8"
+                to={RELEASE_NOTES_BASE_PATH}
+                size="sm"
+                theme="black-primary-1"
+              >
+                Back to all notes
+              </Link>
+            </article>
+          </Container>
+        </div>
       </div>
     </>
   );

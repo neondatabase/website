@@ -18,9 +18,9 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
 
-const components = {
-  h2: AnchorHeading('h2'),
-  h3: AnchorHeading('h3'),
+const getComponents = (withoutAnchorHeading) => ({
+  h2: withoutAnchorHeading ? 'h2' : AnchorHeading('h2'),
+  h3: withoutAnchorHeading ? 'h3' : AnchorHeading('h3'),
   table: (props) => (
     <div className="table-wrapper">
       <table {...props} />
@@ -30,7 +30,7 @@ const components = {
   undefined: (props) => <Fragment {...props} />,
   code: (props) => {
     if (props?.className?.startsWith('language-') && props?.children) {
-      return <CodeBlock {...props} />;
+      return <CodeBlock as="figure" {...props} />;
     }
     return <code {...props} />;
   },
@@ -60,10 +60,10 @@ const components = {
   IntroNavigation,
   TechnologyNavigation,
   CommunityBanner,
-};
+});
 
 // eslint-disable-next-line no-return-assign
-const Content = forwardRef(({ className = null, content, asHTML = false }, ref) => (
+const Content = forwardRef(({ className = null, content, asHTML = false, withoutAnchorHeading = false }, ref) => (
   <div
     className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}
     ref={ref}
@@ -71,7 +71,7 @@ const Content = forwardRef(({ className = null, content, asHTML = false }, ref) 
     {asHTML ? (
       <div dangerouslySetInnerHTML={{ __html: content }} />
     ) : (
-      <MDXRemote components={components} {...content} />
+      <MDXRemote components={getComponents(withoutAnchorHeading)} {...content} />
     )}
   </div>
 ));
@@ -80,6 +80,7 @@ Content.propTypes = {
   className: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   asHTML: PropTypes.bool,
+  withoutAnchorHeading: PropTypes.bool,
 };
 
 export default Content;

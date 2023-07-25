@@ -1,5 +1,8 @@
 @layer components {
   .admonition-text {
+    a {
+      @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color] duration-200 ease-in-out hover:border-secondary-8 dark:text-primary-1 dark:hover:border-primary-1 sm:break-words;
+    }
     p:first-child {
       @apply mt-0;
     }
@@ -94,10 +97,18 @@
     pre {
       @apply my-5 !bg-gray-new-98 dark:!bg-gray-new-10;
 
-      code {
+      &.highlight {
+        @apply px-0;
+
+        > code {
+          @apply inline-block w-full px-4 !leading-relaxed;
+        }
+      }
+
+      > code {
         text-shadow: unset;
 
-        @apply highlighted-code !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset];
+        @apply highlighted-code !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset] md:min-w-[686px];
       }
     }
 

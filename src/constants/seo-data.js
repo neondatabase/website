@@ -1,5 +1,7 @@
 import LINKS from './links';
 
+export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
+
 export default {
   index: {
     title: 'Neon — Serverless, Fault-Tolerant, Branchable Postgres',
@@ -50,6 +52,12 @@ export default {
       'Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible usage and volume-based plans.',
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
+  },
+  partners: {
+    title: 'Accelerate your business with Neon partnership — Neon',
+    description: 'Bring familiar, reliable and scalable Postgres experience to your customers.',
+    imagePath: '/images/social-previews/partners.jpg',
+    pathname: LINKS.partners,
   },
 };
 

@@ -17,7 +17,7 @@ Let's look at how to create branches using the Neon Console and the Neon API.
 
 ## Create a branch using the Neon Console
 
-1. Log in to Neon and create a project in the [Neon Console](https://console.neon.tech). For information about creating a Neon project, see [Setting up a project](../../get-started-with-neon/setting-up-a-project).
+1. Log in to Neon and create a project in the [Neon Console](https://console.neon.tech). For information about creating a Neon project, see [Setting up a project](/docs/../get-started-with-neon/setting-up-a-project).
 2. Add data to your project using the Neon SQL Editor, `psql`, or some other PostgreSQL client.
 3. Click **Create branch** on the **Dashboard** tab in the Neon Console to create a branch.
 
@@ -25,7 +25,7 @@ Alternatively, you can also use the Neon API to create a branch, as described be
 
 ## Create a branch using the API
 
-Using the Neon API requires an API key. For information about how to obtain an API key for your Project, refer to [Using API keys](../..//get-started-with-neon/using-api-keys/).
+Using the Neon API requires an API key. For information about how to obtain an API key for your Project, refer to [Using API keys](/docs/..//get-started-with-neon/using-api-keys/).
 
 To create a branch, use the following API method:
 
@@ -55,4 +55,4 @@ All data in the parent project when you create the branch will be available in t
 
 Future changes to the data in the parent and the branch are independent, so you can make changes to the branch without affecting the parent project.
 
-To learn more about Neon's branching feature, see [Branching](../../conceptual-guides/branching).
+To learn more about Neon's branching feature, see [Branching](/docs/../conceptual-guides/branching).

@@ -40,7 +40,7 @@
   }
 
   .DocSearch-Dropdown {
-    @apply max-h-[calc(100vh-160px)] overflow-y-scroll;
+    @apply h-[calc(100vh-160px)] max-h-[450px] overflow-y-scroll;
   }
 
   .DocSearch-Footer {

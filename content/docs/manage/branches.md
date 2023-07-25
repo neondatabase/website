@@ -9,7 +9,7 @@ redirectFrom:
 Data resides in a branch. Each Neon project is created with a [primary branch](#primary-branch) called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
 
 A child branch is a copy-on-write clone of the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
-For more information about branches and how you can use them in your development workflows, see [Branching](../introduction/branching).
+For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
 
 You can create and manage branches using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). This topic covers both methods.
 
@@ -21,15 +21,15 @@ When working with branches, it is important to remove old and unused branches. B
 
 Each Neon project has a primary branch called `main`, by default. In the Neon Console, your primary branch is identified by a `PRIMARY` tag. You can designate any branch as the primary branch for your project or rename the primary branch, but you cannot delete a primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
 
-- For [Free Tier](../introduction/free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
-- For [Pro plan](../introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes.
+- For [Free Tier](/docs/introduction/free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
+- For [Pro plan](/docs/introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes.
 
 ## Non-primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
-- For [Free Tier](../introduction/free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Free Tier  _compute active time_ limit of 100 hours per month.
-- For [Pro plan](../introduction/pro-plan) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
+- For [Free Tier](/docs/introduction/free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Free Tier  _compute active time_ limit of 100 hours per month.
+- For [Pro plan](/docs/introduction/pro-plan) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Create a branch
 
@@ -44,7 +44,7 @@ To create a branch:
 6. Select one of the following branching options:
     - **Head**: Creates a branch with data up to the current point in time (the default).
     - **Time**: Creates a branch with data up to the specified date and time.
-    - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](../reference/glossary#lsn).
+    - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](/docs/reference/glossary#lsn).
 7. Select whether or not to create a compute endpoint, which is required to connect to the branch. If you are unsure, you can add a compute endpoint later.
 8. Click **Create Branch** to create your branch.
 
@@ -71,9 +71,9 @@ Branch details shown on the branch page include:
 - **Date**: The date the parent branch was created (only displayed for branches created with the **Time** option).
 - **Time**: The time the parent branch was created (only displayed for branches created with the **Time** option).
 
-For more information about **Active Time**, **Compute Time**, **Written Data**, and **Data Transfer** usage metrics, refer to our [Billing](../introduction/billing) page.
+For more information about **Active Time**, **Compute Time**, **Written Data**, and **Data Transfer** usage metrics, refer to our [Billing](/docs/introduction/billing) page.
 
-The branch details page also includes details about the compute endpoint associated with the branch. For more information, see [View a compute endpoint](../manage/endpoints#view-a-compute-endpoint).
+The branch details page also includes details about the compute endpoint associated with the branch. For more information, see [View a compute endpoint](/docs/manage/endpoints#view-a-compute-endpoint).
 
 ## Rename a branch
 
@@ -82,7 +82,7 @@ Neon permits renaming a branch, including your project's primary branch. To rena
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. Click **Rename**.
+4. On the branch page, click the **More** drop-down menu and select **Rename**.
 5. Specify a new name for the branch and click **Save**.
 
 ## Set a branch as primary
@@ -94,7 +94,7 @@ To set a branch as the primary branch:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. Click **Set as primary**.
+4. On the branch page, click the **More** drop-down menu and select **Set as primary**.
 5. In the **Set as primary** confirmation dialog, click **Set as Primary** to confirm your selection.
 
 ## Connect to a branch
@@ -102,7 +102,7 @@ To set a branch as the primary branch:
 Connecting to a database in a branch requires connecting via a compute endpoint associated with the branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="tip">
-You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../get-started-with-neon/query-with-neon-sql-editor).
+You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 </Admonition>
 
 1. In the Neon Console, select a project.
@@ -123,7 +123,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 A compute endpoint hostname starts with an `ep-` prefix. You can also find a compute endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
 </Admonition>
 
-If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the _Guides_ section in the documentation provide connection examples for various languages and frameworks. For more information about connecting, see [Connect from any application](../connect/connect-from-any-app).
+If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the _Guides_ section in the documentation provide connection examples for various languages and frameworks. For more information about connecting, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Delete a branch
 
@@ -134,12 +134,12 @@ To delete a branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Select a branch from the table.
-3. Click **Delete**.
+4. On the branch page, click the **More** drop-down menu and select **Delete**.
 4. On the confirmation dialog, click **Delete**.
 
 ## Check the data size
 
-Tier limits define the amount of data you can store in a branch. Neon's [Free Tier](../introduction/free-tier) permits 3 GB per branch. When creating a new branch, the child branch includes the data from the parent branch. For example, if you have a branch with 1 GB of data, the child branch is created with the same 1 GB of data.
+Tier limits define the amount of data you can store in a branch. Neon's [Free Tier](/docs/introduction/free-tier) permits 3 GB per branch. When creating a new branch, the child branch includes the data from the parent branch. For example, if you have a branch with 1 GB of data, the child branch is created with the same 1 GB of data.
 
 You can check the data size for a branch by viewing the `Database size` value on the branch details page (see [View branches](#view-branches)). Alternatively, you can run the following query from the Neon SQL Editor:
 
@@ -164,7 +164,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../manage/api-keys#create-an-api-key). In the examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a branch with the API
 

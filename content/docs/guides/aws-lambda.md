@@ -14,7 +14,7 @@ This guide describes how to set up a Neon database and connect to it from an AWS
 
 ## Prerequisites
 
-- A Neon account. If you do not have one, see [Sign up](../get-started-with-neon/signing-up/) for instructions.
+- A Neon account. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up/) for instructions.
 - An AWS account. You can create a free AWS account at [AWS Free Tier](https://aws.amazon.com/free/). An [IAM User and Access Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) are required to programmatically interact with your AWS account. You must provide these credentials when deploying the Serverless Framework project.
 - A Service Framework account. You can sign up at [Serverless Framework](https://www.serverless.com/).
 
