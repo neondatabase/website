@@ -52,7 +52,7 @@ Pro plan users can configure the amount of vCPU and RAM for a compute endpoint t
 
 To run queries on your new branch, you will need to connect to it. Connecting to a branch requires connecting via the branch's compute endpoint. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
-<Admonition type="tip">
+<Admonition type="note">
 You can also run queries on a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 </Admonition>
 
@@ -61,7 +61,7 @@ To connect to your branch:
 1. In the Neon Console, select your project.
 2. On the project **Dashboard**, under **Connection Details**, select the `sales_query` branch, the database, and the role you want to connect with.
 ![Connection details widget](/docs/guides/data_analysis_connection_details.png)
-3. Copy the connection string. A connection string includes your role name, password, the compute endpoint hostname, and database name.
+3. Copy the connection string. A connection string includes your role name, password, compute endpoint hostname, and database name.
 4. Connect with `psql`. Your connection string will look something like this:
 
    <CodeBlock shouldWrap>
