@@ -7,9 +7,7 @@ enableTableOfContents: true
 Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:
 
 - [Create branch action](#create-branch-action)
-- [Delete Branch action](#delete-branch-action)
-
-For an example project that uses GitHub Actions to create and delete Neon branches, see [A database for every preview environment using Neon, GitHub Actions, and Vercel](https://neon.tech/blog/branching-with-preview-environments).
+- [Delete branch action](#delete-branch-action)
 
 ## Create branch action
 
@@ -21,12 +19,16 @@ The source code for this action is available on [GitHub](https://github.com/neon
 
 ### Prerequisites
 
-- To use this action, you require a Neon API key. For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- Add your Neon API key to your GitHub Secrets. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left sidebar. Click **Actions** > **New Repository Secret**. Name the secret `NEON_API_KEY`, paste your API key in the **Secret** field, and click **Add Secret**.
+- Using the action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+- Add your Neon API key to your GitHub Secrets:
+    1. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left sidebar.
+    2. Click **Actions** > **New Repository Secret**.
+    3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
+    4. Click **Add Secret**.
 
 ### Example
 
-The following example creates a branch from the `main` branch in your Neon project when a pull request is opened. The new branch is named `from_action_reusable`.
+The following example creates a branch from the `main` branch in your Neon project when a pull request is opened.
 
 ```yaml
 name: Create Neon Branch with GitHub Actions Demo
@@ -76,8 +78,12 @@ The source code for this action is available on [GitHub](https://github.com/neon
 
 ### Prerequisites
 
-- To use this action, you require a Neon API key. For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- Add your Neon API key to your GitHub Secrets. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left side bar. Click **Actions** > **New Repository Secret**. Name the secret `NEON_API_KEY`, paste your API key in the **Secret** field, and click **Add Secret**.
+- Using the action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+- Add your Neon API key to your GitHub Secrets:
+    1. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left sidebar.
+    2. Click **Actions** > **New Repository Secret**.
+    3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
+    4. Click **Add Secret**.
 
 ### Example
 
