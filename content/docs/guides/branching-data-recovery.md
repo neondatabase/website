@@ -17,7 +17,7 @@ To create a point-in-time branch:
 1. Navigate to the **Branches** page in the Neon Console.
 1. Click **Create branch** to open the branch creation dialog.
 1. Enter a name for the branch. You can call it `recovery_branch`, for example.
-    ![Data recovery create branch dialog](/docs/guides/data_recodver_create_branch.png)
+    ![Data recovery create branch dialog](/docs/guides/data_recovery_create_branch.png)
 1. For the **Parent branch**, select the branch where the data loss occurred.
 1. Select the **Time** option to create a branch with data up to a specific date and time. For example, if the data loss occurred on July 11, 2023 at 10:01am, set the time to July 11, 2023, at 10:00am, just before the faulty query was run.
 1. Leave the **Create compute endpoint** option selected. A compute endpoint is required to connect to the new branch.
