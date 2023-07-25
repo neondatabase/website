@@ -1,8 +1,7 @@
 ---
 title: Branching — Point-in-time recovery (PITR)
-subtitle: Learn how to recover your database to previous state using Neon's database branching feature
+subtitle: Learn how to recover your database to previous state using Neon's branching feature
 enableTableOfContents: true
-isDraft: true
 ---
 
 A Neon project has a default 7-day data retention window, which enables creating a branch that reflects the state of your data at a past point in time. This capability can be used to recover lost data, which is a form of Point-in-time recovery (PITR).

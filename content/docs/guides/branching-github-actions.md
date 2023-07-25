@@ -2,7 +2,6 @@
 title: Automate branching with GitHub Actions
 subtitle: Learn how you can create and delete branches with GitHub Actions
 enableTableOfContents: true
-isDraft: true
 ---
 
 Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:

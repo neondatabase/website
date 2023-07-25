@@ -114,7 +114,7 @@
               slug: guides/branching-neon-cli
             - title: Branching with the API
               slug: guides/branching-neon-api
-            - title: Automation with GitHub Actions
+            - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
     - title: Languages
       items:
