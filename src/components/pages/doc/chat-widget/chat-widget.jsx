@@ -87,13 +87,14 @@ const ChatWidget = () => {
           value: inputText,
         });
         setSelectedValue('');
+        inputRef.current.value = '';
       }
 
       if (shouldTryAgain) {
         setShouldTryAgain(false);
       }
     },
-    [isLoading, setSelectedValue, setMessages, setShouldTryAgain, shouldTryAgain]
+    [isLoading, shouldTryAgain, setMessages, setSelectedValue, setShouldTryAgain]
   );
 
   // @NOTE:
