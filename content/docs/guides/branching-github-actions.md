@@ -1,6 +1,6 @@
 ---
 title: Automate branching with GitHub Actions
-subtitle: Learn how to create and delete branches with GitHub Actions
+subtitle: Create and delete branches with GitHub Actions
 enableTableOfContents: true
 ---
 
