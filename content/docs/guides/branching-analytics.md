@@ -37,7 +37,7 @@ To create a branch of your production data:
 1. In the Neon Console, select your project.
 2. Select **Branches**.
 3. Click **Create branch** to open the branch creation dialog.
-![Create branch dialog](/docs/manage/data_analysis_create_branch.png)
+![Create branch dialog](/docs/guides/data_analysis_create_branch.png)
 4. Enter a name for the branch. You can call it `sales_query`, for example.
 5. For the **Parent branch**, select the branch that contains your production database.
 6. Select the **Head** option to create a branch with the latest data.
@@ -52,14 +52,14 @@ Pro plan users can configure the amount of vCPU and RAM for a compute endpoint t
 To run queries on your new branch, you will need to connect to it. Connecting to a branch requires connecting via the branch's compute endpoint. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="tip">
-You can also run queries on a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](../get-started-with-neon/query-with-neon-sql-editor).
+You can also run queries on a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 </Admonition>
 
 To connect to your branch:
 
 1. In the Neon Console, select your project.
 2. On the project **Dashboard**, under **Connection Details**, select the `sales_query` branch you, the database, and the role you want to connect with.
-![Connection details widget](/docs/connect/data_analysis_connection_details.png)
+![Connection details widget](/docs/guides/data_analysis_connection_details.png)
 3. Copy the connection string. A connection string includes your role name, password, the compute endpoint hostname, and database name.
 4. Connect with `psql`. Your connection string will look something like this:
 
