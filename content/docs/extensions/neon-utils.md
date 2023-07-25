@@ -41,7 +41,7 @@ The following limitations apply:
 - The `num_cpus()` function does not return fractional vCPU sizes. If the current number of allocated vCPUs is `.25` or `.5`, the `num_cpus()` function returns `1`.
 - The `num_cpus()` function only works on compute endpoints that have the _Autoscaling_ feature enabled. Running the function on a fixed size compute endpoint does not return a correct value.
 
-## Observing Autoscaling with `neon_utils` and `pgbench`
+## Observe Autoscaling with `neon_utils` and `pgbench`
 
 The following instructions demonstrate how you can use the `num_cpus()` function with `pgbench` to observe how Neon's Autoscaling feature responds to workload.
 
