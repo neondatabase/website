@@ -1,6 +1,6 @@
 ---
 title: Automate branching with GitHub Actions
-subtitle: Learn how you can create and delete branches with GitHub Actions
+subtitle: Learn how to create and delete branches with GitHub Actions
 enableTableOfContents: true
 ---
 
@@ -22,7 +22,7 @@ The source code for this action is available on [GitHub](https://github.com/neon
 ### Prerequisites
 
 - To use this action, you require a Neon API key. For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- Add your Neon API key to your GitHub Secrets. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left side bar. Click **Actions** > **New Repository Secret**. Name the secret `NEON_API_KEY`, paste your API key in the **Secret** field, and click **Add Secret**.
+- Add your Neon API key to your GitHub Secrets. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left sidebar. Click **Actions** > **New Repository Secret**. Name the secret `NEON_API_KEY`, paste your API key in the **Secret** field, and click **Add Secret**.
 
 ### Example
 
