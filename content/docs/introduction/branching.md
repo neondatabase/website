@@ -12,9 +12,9 @@ Neon allows you to instantly branch your data in the same way that you branch yo
 
 ## What is a branch?
 
-A branch is a copy-on-write clone of your data. You can create a branch from a current or past state. For example, you can create a branch that includes all data up to the current point in time or an earlier point in time.
+A branch is a copy-on-write clone of your data. You can create a branch from a current or past state. For example, you can create a branch that includes all data up to the current time or an earlier time.
 
-A branch is isolated from its originating data, so you are free to play around with it, modify it, or delete it when it's no longer needed. Changes to a branch are independent. A branch and its parent share the same history but diverge at the point of branch creation. Writes to a branch are saved as a delta.
+A branch is isolated from its originating data, so you are free to play around with it, modify it, or delete it when it's no longer needed. Changes to a branch are independent. A branch and its parent can share the same history (within the defined [point-in-time restore](/docs/reference/glossary#point-in-time-restore) window) but diverge at the point of branch creation. Writes to a branch are saved as a delta.
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means you can create a branch at any time without impacting the performance of your production system.
 
@@ -42,13 +42,16 @@ Create a branch of your production database that developers are free to play wit
 
 ![development environment branch](/docs/introduction/branching_dev_env.png)
 
-Branching is so easy and cost-effective that you can create a branch for each developer. For example, you can create branches from a primary development branch to assign tasks to be worked on in parallel.
+For branch creation instructions, see [Create a branch](/docs/manage/branches#create-a-branch).
 
-![branch for each developer](/docs/introduction/branching_each_dev.png)
+With Neon's branching capabilities, you can create a branch for preview deployments or automate branch creation for every pull request using the Neon CLI or API. If you use Vercel, you can use the Neon Vercel Integration, which automates this task for you.
 
-### Preview deployments
+Refer to the following guides for instructions:
 
-With Neon's branching capabilities, you can create a branch for each preview deployment. You can automate branch creation for every pull request using the Neon API or, if you use Vercel, you can use the Neon Vercel Integration, which automates this task for you. For more information, see [Connect with the Neon Vercel Integration](/docs/guides/vercel).
+- [Branching with the Neon CLI](/docs/guides/branching-neon-cli)
+- [Branching with the Neon API](/docs/guides/branching-neon-api)
+- [Branching with GitHub Actions](/docs/guides/branching-github-actions)
+- [Connect with the Neon Vercel Integration](/docs/guides/vercel)
 
 ### Testing
 
@@ -58,17 +61,13 @@ Branching enables testers to use the most recent production data. Testers can cr
 
 For a simple example showing how you can use a branch to test queries, refer to [Test queries with branching](/docs/tutorial/test-queries), in the _Neon tutorial_.
 
-Another testing scenario enabled by branching is tracking down corruption or data quality issues. For example, you can create and dispose of multiple point-in-time branches to determine when a corruption or data quality issue first appeared.
-
-![data quality issue branch](/docs/introduction/branching_issue.png)
-
 ### Data recovery
 
 If you lose data due to an unintended deletion or some other event, you can create a branch with data as it existed before the event occurred, allowing you to recover the lost data.
 
 ![data recovery branch](/docs/introduction/branching_data_loss.png)
 
-For a simple example showing how you can use a branch to recover lost data, refer to [Recover lost data with branching](/docs/tutorial/data-recovery), in the _Neon tutorial_.
+Refer to the following guide for instructions: [Branching — Point-in-time recovery (PITR)](/docs/guides/branching-data-recovery).
 
 For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to recover to the last known good.
 
@@ -78,6 +77,4 @@ You can run costly, long-running queries on an isolated branch of your productio
 
 ![analytics branches](/docs/introduction/branching_analytics.png)
 
-## Get started with branching
-
-To start using branches, refer to the instructions in [Manage branches](/docs/manage/branches).
+Refer to the following guide for instructions: [Branching — Point-in-time recovery (PITR)](/docs/guides/branching-analytics).
