@@ -1,21 +1,21 @@
 ---
 title: Automate branching with the Neon API
-subtitle: Learn how you can create and delete branches with the Neon API
+subtitle: Learn how to create and delete branches with the Neon API
 enableTableOfContents: true
 isDraft: true
 ---
 
-Branch actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+Branch actions in the Neon Console can also be performed using the Neon API. The following examples demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to the method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may only show some of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to the method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../manage/api-keys#create-an-api-key). In the examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../manage/api-keys#create-an-api-key). In the examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a branch with the API
 
