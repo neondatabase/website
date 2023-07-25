@@ -65,7 +65,7 @@ If you lose data due to an unintended deletion or some other event, you can crea
 
 ![data recovery branch](/docs/introduction/branching_data_loss.png)
 
-Refer to the following guide for instructions: [Branching — Point-in-time recovery (PITR)](/docs/guides/branching-data-recovery).
+Refer to the following guide for instructions: [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
 
 For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to recover data to the last known good.
 

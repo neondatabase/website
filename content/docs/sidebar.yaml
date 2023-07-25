@@ -108,8 +108,8 @@
           items: 
             - title: Data analysis and reporting
               slug: guides/branching-analytics
-            - title: Point-in-time recovery
-              slug: guides/branching-data-recovery
+            - title: Point-in-time restore
+              slug: guides/branching-pitr
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
             - title: Branching with the API
