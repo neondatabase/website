@@ -67,7 +67,7 @@ const BlogPostCard = ({
           className={clsx(
             'group w-full max-w-[716px] shrink-0 overflow-hidden rounded-md md:max-w-none',
             {
-              'col-span-6 md:max-w-full': size === 'xl',
+              'col-span-6 xl:col-span-5 md:max-w-full': size === 'xl',
             }
           )}
           to={link}
@@ -105,7 +105,7 @@ const BlogPostCard = ({
       )}
       <div
         className={clsx('flex flex-col', {
-          'col-span-4': size === 'xl',
+          'col-span-4 xl:col-span-5': size === 'xl',
         })}
       >
         {category && size !== 'xs' && (
