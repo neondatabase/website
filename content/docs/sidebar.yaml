@@ -181,6 +181,8 @@
   items:
     - title: Supported extensions
       slug: extensions/pg-extensions
+    - title: neon_utils
+      slug: extensions/neon-utils
     - title: pg_embedding
       slug: extensions/pg_embedding
     - title: pg_tiktoken
