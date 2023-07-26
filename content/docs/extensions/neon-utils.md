@@ -47,8 +47,8 @@ The following instructions demonstrate how you can use the `num_cpus()` function
 
 ### Prerequisites
 
-- Ensure that _Autoscaling_ is enabled for your compute endpoint. For instructions, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). The following example uses a minimum setting of 1 Compute Unit (CU) and a maximum of 7.
-- The [pgbench](https://www.postgresql.org/docs/current/pgbench.html) utility
+- Ensure that _Autoscaling_ is enabled for your compute endpoint. For instructions, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). The following example uses a minimum setting of 0.25 Compute Units (CU) and a maximum of 4.
+- The [pgbench](https://www.postgresql.org/docs/current/pgbench.html) utility.
 
 ### Run the test
 
@@ -61,7 +61,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
 2. Create a `test.sql` file with the following queries:
 
     ```sql
-    SELECT LOG(factorial(25000)) / LOG(factorial(10000));
+    SELECT LOG(factorial(5000)) / LOG(factorial(2500));
     SELECT txid_current();
     ```
 
@@ -75,29 +75,54 @@ The following instructions demonstrate how you can use the `num_cpus()` function
 
     </CodeBlock>
 
-4. Run a `pgbench` test with your `test.sql` file, specifying the same connection string:
+4. Run a `pgbench` test with your `test.sql` file, specifying your connection string:
 
     <CodeBlock shouldWrap>
 
     ```bash
-    pgbench -f test.sql -c 8 -T 10000 -P 1 postgres://sally:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+    pgbench -f test.sql -c 15 -T 1000 -P 1 postgres://sally:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
     ```
 
     </CodeBlock>
 
-    The test produces output similar to the following:
+    The test produces output similar to the following on a compute endpoint set to scale from 0.25 to 4 CUs.
 
-    ```bashpgbench (14.8 (Ubuntu 14.8-0ubuntu0.22.04.1), server 15.3)
+    ```bash
+    pgbench (15.3)
     starting vacuum...end.
-    progress: 2.7 s, 0.0 tps, lat 0.000 ms stddev 0.000
-    progress: 3.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
-    progress: 4.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
-    progress: 5.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
-    progress: 6.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
-    progress: 7.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
-    progress: 8.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
-    progress: 9.0 s, 0.0 tps, lat 0.000 ms stddev 0.000
-    progress: 10.0 s, 8.0 tps, lat 7055.317 ms stddev 9.528
+    progress: 8.4 s, 0.0 tps, lat 0.000 ms stddev 0.000, 0 failed
+    progress: 9.0 s, 0.0 tps, lat 0.000 ms stddev 0.000, 0 failed
+    progress: 10.0 s, 4.0 tps, lat 1246.290 ms stddev 3.253, 0 failed
+    progress: 11.0 s, 6.0 tps, lat 1892.455 ms stddev 446.686, 0 failed
+    progress: 12.0 s, 9.0 tps, lat 2091.352 ms stddev 1068.303, 0 failed
+    progress: 13.0 s, 5.0 tps, lat 1881.682 ms stddev 700.852, 0 failed
+    progress: 14.0 s, 6.0 tps, lat 2660.009 ms stddev 1404.672, 0 failed
+    progress: 15.0 s, 9.0 tps, lat 2354.776 ms stddev 1248.686, 0 failed
+    progress: 16.0 s, 8.0 tps, lat 1770.870 ms stddev 776.465, 0 failed
+    progress: 17.0 s, 7.0 tps, lat 1800.686 ms stddev 611.749, 0 failed
+    progress: 18.0 s, 18.0 tps, lat 1681.841 ms stddev 1187.918, 0 failed
+    progress: 19.0 s, 29.0 tps, lat 561.201 ms stddev 139.565, 0 failed
+    progress: 20.0 s, 27.0 tps, lat 507.782 ms stddev 153.889, 0 failed
+    progress: 21.0 s, 30.0 tps, lat 493.312 ms stddev 121.688, 0 failed
+    progress: 22.0 s, 32.0 tps, lat 513.444 ms stddev 185.033, 0 failed
+    progress: 23.0 s, 32.0 tps, lat 503.135 ms stddev 199.435, 0 failed
+    progress: 24.0 s, 28.0 tps, lat 492.913 ms stddev 124.019, 0 failed
+    progress: 25.0 s, 43.0 tps, lat 366.719 ms stddev 123.547, 0 failed
+    progress: 26.0 s, 49.0 tps, lat 334.276 ms stddev 79.043, 0 failed
+    progress: 27.0 s, 40.0 tps, lat 354.922 ms stddev 83.560, 0 failed
+    progress: 28.0 s, 31.0 tps, lat 400.645 ms stddev 29.236, 0 failed
+    progress: 29.0 s, 48.0 tps, lat 373.522 ms stddev 64.446, 0 failed
+    progress: 30.0 s, 44.0 tps, lat 333.343 ms stddev 86.497, 0 failed
+    progress: 31.0 s, 44.0 tps, lat 326.754 ms stddev 82.990, 0 failed
+    progress: 32.0 s, 44.0 tps, lat 329.317 ms stddev 76.728, 0 failed
+    progress: 33.0 s, 53.0 tps, lat 321.572 ms stddev 76.427, 0 failed
+    progress: 34.0 s, 57.0 tps, lat 254.500 ms stddev 33.013, 0 failed
+    progress: 35.0 s, 60.0 tps, lat 251.035 ms stddev 37.574, 0 failed
+    progress: 36.0 s, 58.0 tps, lat 256.846 ms stddev 36.390, 0 failed
+    progress: 37.0 s, 60.0 tps, lat 249.165 ms stddev 36.764, 0 failed
+    progress: 38.0 s, 57.0 tps, lat 263.885 ms stddev 31.351, 0 failed
+    progress: 39.0 s, 56.0 tps, lat 262.529 ms stddev 43.900, 0 failed
+    progress: 40.0 s, 58.0 tps, lat 259.052 ms stddev 39.737, 0 failed
     ...
     ```
 
@@ -107,7 +132,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     ​​neondb=> SELECT num_cpus();
     num_cpus
     ----------
-            7
+            4
     (1 row)
     ```
 
