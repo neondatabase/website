@@ -68,11 +68,3 @@ If you lose data due to an unintended deletion or some other event, you can crea
 Refer to the following guide for instructions: [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
 
 For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to recover data to the last known good.
-
-### Analytics
-
-You can run costly, long-running queries on an isolated branch of your production data, each with its own compute resources. With automation scripts, you can create and dispose of branches on a defined schedule to ensure that queries always run on an up-to-date copy of your production data.
-
-![analytics branches](/docs/introduction/branching_analytics.png)
-
-Refer to the following guide for instructions: [Branching — Data analysis and reporting](/docs/guides/branching-analytics).

@@ -106,8 +106,6 @@
           slug: guides/read-replica-guide
         - title: Branching
           items: 
-            - title: Data analysis and reporting
-              slug: guides/branching-analytics
             - title: Point-in-time restore
               slug: guides/branching-pitr
             - title: Branching with the CLI
