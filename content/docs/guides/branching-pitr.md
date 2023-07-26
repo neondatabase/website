@@ -23,6 +23,15 @@ To create a point-in-time branch:
 1. Leave the **Create compute endpoint** option selected. A compute endpoint is required to connect to the new branch.
 1. Click **Create Branch** to create your point-in-time branch.
 
+<Admonition type="tip">
+You can also create point-in-time branches using the [Neon CLI](/docs/reference/neon-cli). For example, you can perform the same action described above with the following CLI command:
+
+```bash
+neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
+```
+
+</Admonition>
+
 ## Connect to your branch
 
 Connecting to your newly created branch requires connecting via the branch's compute endpoint. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
