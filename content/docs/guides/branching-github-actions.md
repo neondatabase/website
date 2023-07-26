@@ -98,7 +98,7 @@ jobs:
     uses: neondatabase/delete-branch-action@v3
     with:
       project_id: rapid-haze-373089
-      branch_id: br-long-forest-224191
+      branch: br-long-forest-224191
       api_key: {{ secrets.NEON_API_KEY }}
 ```
 
