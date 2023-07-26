@@ -105,7 +105,7 @@ jobs:
 ### Input variables
 
 - `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Settings** page.
-- `branch_id`: The ID of the branch you want to delete. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
+- `branch:` The ID of the branch you want to delete. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
 - `api_key`: An API key created in your Neon account. For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 ### Outputs
