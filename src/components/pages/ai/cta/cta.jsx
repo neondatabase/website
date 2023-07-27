@@ -7,7 +7,7 @@ import Link from 'components/shared/link';
 
 const CTA = () => (
   <section className="safe-paddings mt-[200px] bg-black-new">
-    <Container size="mdDoc" className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lt:gap-x-4">
+    <Container size="medium" className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lt:gap-x-4">
       <div className="z-10 col-span-4 col-start-2 mt-12 flex flex-col">
         <Heading tag="h2" size="2sm">
           Try pg_embedding now with Neon
