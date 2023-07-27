@@ -83,7 +83,7 @@ export NEON_API_KEY=<neon_api_key>
 
 After exporting your key, source the profile file (source `~/.bashrc` or source `~/.bash_profile`), or start a new terminal session.
 
-Once you have set the `NEON_API_KEY` variable, you do not need to specify the variable name explicitly when using a Neon CLI command. A Neon CLI command looks for a `NEON_API_KEY` variable setting by default.
+You do not need to specify the variable name explicitly when using a Neon CLI command. A Neon CLI command looks for a `NEON_API_KEY` variable setting by default.
 
 This API key configuration ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Remember, you should handle your API key with the same level of security as your other credentials.
 
