@@ -130,6 +130,7 @@ module.exports = {
       },
       letterSpacing: {
         tighter: '-0.04em',
+        'extra-tight': '-0.02em',
         wider: '0.04em',
       },
       boxShadow: {

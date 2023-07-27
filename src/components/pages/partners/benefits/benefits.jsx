@@ -33,7 +33,7 @@ const items = [
 
 const Benefits = () => (
   <section className="benefits safe-paddings mt-[136px] xl:mt-[104px] lg:mt-20 md:mt-16">
-    <Container className="grid-gap-x grid grid-cols-12" size="mdDoc">
+    <Container className="grid-gap-x grid grid-cols-12" size="medium">
       <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 rounded-2xl bg-gray-new-8 p-12 xl:col-span-full xl:col-start-1 xl:items-center xl:px-8 xl:py-10 lg:px-7 lg:py-9 md:px-5 md:py-8">
         <div className="col-span-4 col-start-1 xl:max-w-[300px] xl:justify-self-start lg:col-span-full lg:max-w-none">
           <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green-45">

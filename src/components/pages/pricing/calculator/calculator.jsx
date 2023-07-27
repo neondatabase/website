@@ -134,7 +134,7 @@ const Calculator = () => {
       id="calc"
       className="safe-paddings mb-40 mt-[17.25rem] xl:mb-36 xl:mt-40 lg:mb-16 lg:mt-32 md:my-20"
     >
-      <Container size="mdDoc">
+      <Container size="medium">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <Heading
             className="text-center xl:mx-auto xl:max-w-2xl lg:inline"
