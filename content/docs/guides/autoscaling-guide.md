@@ -35,7 +35,7 @@ To edit a compute endpoint:
 
 A project is a top-level object in the Neon object hierarchy. You can think of it as a container for all other objects, including branches and compute endpoints.
 
-Enabling Autoscaling when you create a project allows you to set _Autoscaling_ default settings for all compute endpoints created in your project. Of course, you can adjust _Autoscaling_ settings for individual compute endpoints later on, but if you would like to set a default configuration, you can do so at project creation time. Configuring _Autoscaling_ defaults saves you from having to configure these settings for individual compute endpoints later on, assuming you want a standard _Autoscaling_ configuration for all compute endpoints in your project.
+Enabling Autoscaling when you create a project allows you to set _Autoscaling_ default settings for all compute endpoints created in your project. You can adjust _Autoscaling_ settings for individual compute endpoints afterward, but setting a desired defaults when creating a project will save you from having to configure these settings for each compute later on.
 
 To configure Autoscaling default settings at project creation time:
 
