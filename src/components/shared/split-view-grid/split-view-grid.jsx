@@ -1,46 +1,25 @@
-import Container from 'components/shared/container/container';
+import PropTypes from 'prop-types';
+
+import Container from 'components/shared/container';
 import GradientLabel from 'components/shared/gradient-label';
 
-import compatibilityIcon from './images/compatibility.svg';
-import scalabilityIcon from './images/scalability.svg';
-import searchIcon from './images/search.svg';
-import updateIcon from './images/update.svg';
-
-const items = [
-  {
-    icon: updateIcon,
-    title: 'Reliable, fast updates',
-    description: 'pg_embedding is open-source and maintained by a team of Postgres Hackers at Neon',
-  },
-  {
-    icon: scalabilityIcon,
-    title: 'Amazing scalability',
-    description: 'Grow your vector stores without a drop in search performance',
-  },
-  {
-    icon: searchIcon,
-    title: 'Blazingly fast search',
-    description: 'pg_embedding uses HNSW index, optimized faster vector search',
-  },
-  {
-    icon: compatibilityIcon,
-    title: 'High compatibility',
-    description: 'Easily switch to pg_embedding in your Postgres and LangChain projects',
-  },
-];
-
-const Benefits = () => (
+const SplitViewGrid = ({ label, title, description, items, isGradientLabel = false }) => (
   <section className="benefits safe-paddings mt-52 xl:mt-[104px] lg:mt-20 md:mt-16">
     <Container className="grid-gap-x grid grid-cols-12" size="medium">
       <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 rounded-2xl bg-gray-new-8 p-12 xl:col-span-full xl:col-start-1 xl:items-center xl:px-8 xl:py-10 lg:px-7 lg:py-9 md:px-5 md:py-8">
         <div className="col-span-4 col-start-1 flex flex-col items-start xl:max-w-[300px] xl:justify-self-start lg:col-span-full lg:max-w-none">
-          <GradientLabel>Benefits</GradientLabel>
+          {isGradientLabel ? (
+            <GradientLabel>{label}</GradientLabel>
+          ) : (
+            <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green-45">
+              {label}
+            </span>
+          )}
           <h2 className="mt-3 max-w-[322px] text-[52px] font-medium leading-none tracking-[-0.02em] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]">
-            Vector search with Neon
+            {title}
           </h2>
           <p className="mt-4 max-w-[362px] text-lg font-light leading-snug xl:max-w-[280px] xl:text-base lg:max-w-none md:mt-2.5">
-            Use the power of HNSW index to unlock new levels of efficiency in high-dimensional
-            similarity search in Postgres
+            {description}
           </p>
         </div>
         <ul className="col-start-5 col-end-11 -ml-1.5 mt-2 grid max-w-[640px] grid-cols-2 gap-x-[90px] gap-y-11 xl:-ml-5 xl:mt-0 xl:max-w-none xl:gap-x-10 xl:pl-0 lg:col-span-full lg:ml-0 lg:mt-10 lg:gap-y-10 md:mt-[30px] md:grid-cols-1 md:gap-y-[30px]">
@@ -71,4 +50,18 @@ const Benefits = () => (
   </section>
 );
 
-export default Benefits;
+SplitViewGrid.propTypes = {
+  label: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      icon: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  isGradientLabel: PropTypes.bool,
+};
+
+export default SplitViewGrid;
