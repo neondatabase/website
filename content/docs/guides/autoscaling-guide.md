@@ -1,5 +1,5 @@
 ---
-title: Enabling Autoscaling in Neon
+title: Enable Autoscaling in Neon
 subtitle: Learn how to enable Neon's Autoscaling feature to automatically scale compute resources on demand
 enableTableOfContents: true
 ---
@@ -12,9 +12,9 @@ Autoscaling can be enabled when you create a project or afterward by editing an 
 
 ## Enable Autoscaling when creating a project
 
-Neon Pro plan users can create multiple Neon projects. A project is the top-level object in the Neon object hierarchy. You can think of it as a container for all other objects, including branches and compute endpoints.
+A project is the top-level object in the Neon object hierarchy. You can think of it as a container for all other objects, including branches and compute endpoints.
 
-Enabling Autoscaling when you create a project allows you to set Autoscaling default settings for all compute endpoints created in your project. Of course, you can adjust _Autoscaling_ settings for individual compute endpoints later on, but if you would like to set a default configuration, you can do so when you first create the project. Setting _Autoscaling_ defaults at project creation time will save you from having to configure compute endpoints individually later on.
+Enabling Autoscaling when you create a project allows you to set _Autoscaling_ default settings for all compute endpoints created in your project. Of course, you can adjust _Autoscaling_ settings for individual compute endpoints later on, but if you would like to set a default configuration, you can do at project creation time. Configuring _Autoscaling_ defaults will save you from having to configure these settings for for individual compute endpoints later on, assuming you want a standard _Autoscaling_ configuration for all compute endpoints in your project.
 
 To configure Autoscaling default settings at project creation time:
 
@@ -23,7 +23,7 @@ To configure Autoscaling default settings at project creation time:
 3. Specify a name, a PostgreSQL version, and a region.
 4. Under **Compute size**, select the **Autoscaling** option.
 5. Using the slider, specify a minimum and maximum compute size.
-    ![Autoscaling](autoscaling_project_creation.png)
+    ![Autoscaling](/docs/guides/autoscaling_project_creation.png)
 
     Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. _Autoscaling_ currently supports a range of 1/4 (.25) to 7 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs has 8 GB of RAM, and so on. The amount of RAM in GBs is always 4 times the number of vCPUs.
 
@@ -31,21 +31,21 @@ To configure Autoscaling default settings at project creation time:
     You can also specify a default **Auto-suspend delay** setting at project creation time. The **Auto-suspend delay** setting defines the number of seconds of inactivity after a compute endpoint is automatically suspended. This feature is also referred to as "scale to zero". The setting specified at project creation time becomes the default setting for newly created compute endpoints.
     </Admonition>
 
-6. Click **Create Project**. Your initial compute endpoint is created with the specified settings ands all compute endpoints created in the future, when creating a branch or adding a compute endpoint to a branch, are created with these default settings.
+6. Click **Create Project**. Your initial compute endpoint is created with the specified settings. All compute endpoints created in the future, when creating a branch or adding a compute endpoint to a branch, are created with these default settings.
 
 ## Enable Autoscaling by editing a compute endpoint
 
-Neon [Neon Pro plan](/docs/introduction/pro-plan) can edit an individual compute endpoint to change the compute configuration, which includes Autoscaling settings.
+Neon [Neon Pro plan](/docs/introduction/pro-plan) user can edit an individual compute endpoint to alter the compute configuration, which includes _Autoscaling_.
 
 To edit a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. Click the compute endpoint kebab menu, and select **Edit**.
-![Edit compute endpoint menu](/docs/guide/autoscaling_edit.png)
+![Edit compute endpoint menu](/docs/guides/autoscaling_edit.png)
 1. Under **Compute size**, select the **Autoscaling** option.
 1. Using the slider, specify a minimum and maximum compute size.
-    ![Autoscaling](autoscaling_edit_settings.png)
+    ![Autoscaling edits settings](/docs/guides/autoscaling_edit_settings.png)
 
     Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. _Autoscaling_ currently supports a range of 1/4 (.25) to 7 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs has 8 GB of RAM, and so on. The amount of RAM in GBs is always 4 times the number of vCPUs.
 
@@ -54,6 +54,6 @@ To edit a compute endpoint:
     </Admonition>
 1. Click **Save**.
 
-## Observing Autoscaling
+## Monitor Autoscaling
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
