@@ -10,18 +10,22 @@ import GradientLabel from 'components/shared/gradient-label';
 import Link from 'components/shared/link/link';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
+// TODO: update text to relevant one
 const items = [
   {
     title: 'Create extension',
     code: `    CREATE EXTENSION embedding CREATE TABLE items(embedding real[]);`,
+    text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
   {
     title: 'Similarity search',
     code: `    SELECT id FROM items ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3];`,
+    text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
   {
     title: 'Migration from pgvector',
     code: `    SELECT vector::real[] AS converted_vector FROM vector_items`,
+    text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
 ];
 
@@ -37,40 +41,41 @@ const Integration = () => {
         <p className="mt-3 text-lg font-light leading-snug">
           Neon offers two ways to seamlessly integrate it into your product.
         </p>
-        <div className="mt-11 w-full max-w-[716px]">
-          <div className="flex">
-            {items.map(({ title }, index) => (
-              <button
-                className={clsx(
-                  'relative flex items-start rounded-t-md border px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 last:grow',
-                  index === activeTab
-                    ? 'border-x-gray-new-15 border-b-transparent border-t-gray-new-15 text-green-45'
-                    : 'border-x-transparent border-b-gray-new-15 border-t-transparent text-white'
-                )}
-                type="button"
-                key={index}
-                onClick={() => setActiveTab(index)}
-              >
-                <span
+        <LazyMotion features={domAnimation}>
+          <div className="mt-11 w-full max-w-[716px]">
+            <div className="flex">
+              {items.map(({ title }, index) => (
+                <button
                   className={clsx(
-                    'absolute -top-px left-0 h-px w-full bg-[linear-gradient(270deg,rgba(0,229,153,0.00)_6.54%,#00E599_47.88%,rgba(0,229,153,0.00)93.46%)] transition-opacity duration-200',
-                    index === activeTab ? 'opacity-60' : 'opacity-0'
+                    'relative flex items-start rounded-t-md border px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 last:grow',
+                    index === activeTab
+                      ? 'border-x-gray-new-15 border-b-transparent border-t-gray-new-15 text-green-45'
+                      : 'border-x-transparent border-b-gray-new-15 border-t-transparent text-white'
                   )}
-                />
-                <span className="relative">
+                  type="button"
+                  key={index}
+                  onClick={() => setActiveTab(index)}
+                >
                   <span
                     className={clsx(
-                      'absolute h-full w-full rounded-3xl blur-[10px] transition-colors duration-200',
-                      index === activeTab ? 'bg-green-45/30' : 'bg-transparent'
+                      'absolute -top-px left-0 h-px w-full bg-[linear-gradient(270deg,rgba(0,229,153,0.00)_6.54%,#00E599_47.88%,rgba(0,229,153,0.00)93.46%)] transition-opacity duration-200',
+                      index === activeTab ? 'opacity-60' : 'opacity-0'
                     )}
                   />
-                  {title}
-                </span>
-              </button>
-            ))}
-          </div>
-          <div className="rounded-b-md border-x border-b border-gray-new-15 pb-6 pl-5 pr-3 pt-6 lg:pb-6 lg:pl-3.5 lg:pt-3.5 md:py-4 md:pl-4">
-            <LazyMotion features={domAnimation}>
+                  <span className="relative">
+                    <span
+                      className={clsx(
+                        'absolute h-full w-full rounded-3xl blur-[10px] transition-colors duration-200',
+                        index === activeTab ? 'bg-green-45/30' : 'bg-transparent'
+                      )}
+                    />
+                    {title}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            <div className="rounded-b-md border-x border-b border-gray-new-15 pb-6 pl-5 pr-3 pt-6 lg:pb-6 lg:pl-3.5 lg:pt-3.5 md:py-4 md:pl-4">
               <AnimatePresence initial={false} mode="wait">
                 {items.map(
                   ({ code }, index) =>
@@ -95,17 +100,34 @@ const Integration = () => {
                     )
                 )}
               </AnimatePresence>
-            </LazyMotion>
+            </div>
+            {/* TODO: add link to "Learn more" button */}
+            <AnimatePresence initial={false} mode="wait">
+              {items.map(
+                ({ text }, index) =>
+                  index === activeTab && (
+                    <m.p
+                      className="mt-3 pl-5 text-[15px] font-light leading-none tracking-extra-tight text-gray-new-40"
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {text}{' '}
+                      <Link
+                        className="inline-flex items-center tracking-extra-tight"
+                        theme="green"
+                        to="#"
+                      >
+                        Learn more
+                        <ArrowIcon className="ml-1" />
+                      </Link>
+                    </m.p>
+                  )
+              )}
+            </AnimatePresence>
           </div>
-          {/* TODO: add link to "Learn more" button */}
-          <p className="mt-3 pl-5 text-[15px] font-light leading-none tracking-extra-tight text-gray-new-40">
-            Easily switch to pg_embedding in your Postgres and LangChain projects.{' '}
-            <Link className="inline-flex items-center tracking-extra-tight" theme="green" to="#">
-              Learn more
-              <ArrowIcon className="ml-1" />
-            </Link>
-          </p>
-        </div>
+        </LazyMotion>
       </Container>
     </section>
   );
