@@ -8,10 +8,11 @@ const Hero = () => (
       size="medium"
     >
       <div className="absolute left-1/2 top-0 -z-10 h-[270px] w-3/4 -translate-x-1/2 rounded-[1000px] bg-black-new blur-[30px] lg:w-full" />
-      <h1 className="text-6xl font-medium leading-none tracking-extra-tight">
-        Get ready for the <span className="text-green-45">rise of AI</span>
+      <h1 className="max-w-[967px] text-6xl font-medium leading-none tracking-extra-tight">
+        Build your next <span className="text-green-45">AI and LLM</span> application on top of
+        Postgres
       </h1>
-      <p className="mt-5 max-w-[716px] text-[21px] font-light tracking-extra-tight">
+      <p className="mt-5 max-w-[716px] text-[21px] font-light leading-snug tracking-extra-tight">
         Introducing pg_embedding for AI vector search a faster alternative
         <br /> to pgvector that scales to millions of rows
       </p>
