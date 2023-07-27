@@ -218,6 +218,8 @@
     - title: Neon CLI
       slug: reference/neon-cli
       items:
+        - title: Install and connect
+          slug: reference/cli-install
         - title: auth
           slug: reference/cli-auth
         - title: me
