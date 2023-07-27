@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import Container from 'components/shared/container/container';
+import GradientLabel from 'components/shared/gradient-label';
 
 import githubBg from './images/github-bg.png';
 import github from './images/github.svg';
@@ -11,11 +12,7 @@ const Stats = () => (
   <section className="stats safe-paddings mt-40">
     <Container className="grid grid-cols-12" size="medium">
       <div className="col-span-full flex flex-col items-center">
-        <span className="relative before:absolute before:inset-0 before:z-10 before:rounded-[40px] before:bg-black-new after:absolute after:-inset-px after:rounded-[40px] after:bg-[linear-gradient(180deg,rgba(0,229,153,0.2)20%,rgba(0,229,153,0.6)100%)]">
-          <span className="relative z-20 block rounded-[40px] bg-[linear-gradient(180deg,rgba(0,229,153,0.00)0%,rgba(0,229,153,0.10)100%)] px-[13px] py-1.5 text-sm font-medium leading-none tracking-extra-tight text-green-45">
-            Fast and Accurate
-          </span>
-        </span>
+        <GradientLabel>Fast and Accurate</GradientLabel>
         <h2 className="mt-5 max-w-[708px] text-center text-5xl font-medium leading-none">
           Scale your AI apps to millions of rows with Neon
         </h2>
