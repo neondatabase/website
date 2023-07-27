@@ -2,6 +2,7 @@
 title: AI integration
 subtitle: Build AI applications with Neon serverless Postgres as your vector database
 enableTableOfContents: true
+isDraft: true
 ---
 
 Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs) such as OpenAI.
