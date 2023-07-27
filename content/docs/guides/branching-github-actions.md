@@ -28,7 +28,7 @@ The source code for this action is available on [GitHub](https://github.com/neon
 
 ### Example
 
-The following example creates a branch from the `main` branch in your Neon project when a pull request is opened.
+The following example creates a branch from the `main` branch in your Neon project 
 
 ```yaml
 name: Create Neon Branch with GitHub Actions Demo
