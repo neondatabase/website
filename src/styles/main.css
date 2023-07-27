@@ -110,6 +110,12 @@
   .flat-breaks br::after {
     content: ' ';
   }
+
+  .text-bg-clipped {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 @keyframes lineAnimation {

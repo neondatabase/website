@@ -1,3 +1,5 @@
+import Hero from 'components/pages/ai/hero';
+import Stats from 'components/pages/ai/stats';
 import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
@@ -11,7 +13,8 @@ const AIPage = () => (
     footerTheme="black-new"
     footerWithTopBorder
   >
-    tbd
+    <Hero />
+    <Stats />
   </Layout>
 );
 

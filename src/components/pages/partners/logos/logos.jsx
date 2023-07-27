@@ -58,7 +58,7 @@ LogosWall.propTypes = {
 };
 
 const Logos = () => (
-  <Container size="mdDoc" className="w-full">
+  <Container size="medium" className="w-full">
     <div className="-mb-12 select-none 2xl:-mb-10 md:-mb-8">
       <LogosWall className="logos-sides-fade" />
       <LogosWall

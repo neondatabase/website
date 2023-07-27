@@ -216,7 +216,7 @@ const Metrics = () => {
   return (
     <section className="safe-paddings mt-60 xl:mt-40 lg:mt-28 md:mt-20" ref={sectionRef}>
       <div className="relative flex flex-col">
-        <Container className="flex flex-col items-center" size="mdDoc">
+        <Container className="flex flex-col items-center" size="medium">
           <Heading className="text-center" badge="Metrics" tag="h2" size="2sm">
             Neon charges on <span className="text-pricing-primary-1">4 metrics</span>
           </Heading>
