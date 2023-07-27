@@ -7,22 +7,21 @@ import { useState } from 'react';
 import CodeBlock from 'components/shared/code-block/code-block';
 import Container from 'components/shared/container/container';
 import GradientLabel from 'components/shared/gradient-label';
+import Link from 'components/shared/link/link';
+import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
 const items = [
   {
     title: 'Create extension',
-    code: `    CREATE EXTENSION embedding;
-    CREATE TABLE items(embedding real[]);`,
+    code: `    CREATE EXTENSION embedding CREATE TABLE items(embedding real[]);`,
   },
   {
     title: 'Similarity search',
-    code: `    SELECT * FROM items
-    ORDER BY embedding <-> '{1, 2, 3}'::real[];`,
+    code: `    SELECT id FROM items ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3];`,
   },
   {
     title: 'Migration from pgvector',
-    code: `    ALTER TABLE items
-    ALTER COLUMN embedding`,
+    code: `    SELECT vector::real[] AS converted_vector FROM vector_items`,
   },
 ];
 
@@ -38,15 +37,15 @@ const Integration = () => {
         <p className="mt-3 text-lg font-light leading-snug">
           Neon offers two ways to seamlessly integrate it into your product.
         </p>
-        <div className="mt-11 max-w-[716px]">
-          <div>
+        <div className="mt-11 w-full max-w-[716px]">
+          <div className="flex">
             {items.map(({ title }, index) => (
               <button
                 className={clsx(
-                  'relative rounded-t-md px-5 py-4 text-xs font-medium uppercase leading-none tracking-extra-tight transition-colors duration-200 before:transition-colors before:duration-200',
+                  'relative flex items-start rounded-t-md px-5 py-4 text-xs font-medium uppercase leading-none tracking-extra-tight transition-colors duration-200 last:grow',
                   index === activeTab
-                    ? 'border-x border-t border-gray-new-15/60 text-green-45 before:absolute before:inset-x-4 before:inset-y-4 before:rounded-3xl before:bg-green-45/30 before:blur-[10px]'
-                    : 'border-b border-gray-new-15/60 text-white'
+                    ? 'border-x border-t border-gray-new-15 text-green-45'
+                    : 'border-b border-gray-new-15 text-white'
                 )}
                 type="button"
                 key={index}
@@ -58,12 +57,19 @@ const Integration = () => {
                     index === activeTab ? 'opacity-60' : 'opacity-0'
                   )}
                 />
-
-                {title}
+                <span className="relative">
+                  <span
+                    className={clsx(
+                      'absolute h-full w-full rounded-3xl blur-[10px] transition-colors duration-200',
+                      index === activeTab ? 'bg-green-45/30' : 'bg-transparent'
+                    )}
+                  />
+                  {title}
+                </span>
               </button>
             ))}
           </div>
-          <div className="border-x border-b border-gray-new-15/60 pb-7 pl-[18px] pt-[18px] lg:pb-6 lg:pl-3.5 lg:pt-3.5 md:py-4 md:pl-4">
+          <div className="rounded-b-md border-x border-b border-gray-new-15 pb-6 pl-5 pr-3 pt-6 lg:pb-6 lg:pl-3.5 lg:pt-3.5 md:py-4 md:pl-4">
             <LazyMotion features={domAnimation}>
               <AnimatePresence initial={false} mode="wait">
                 {items.map(
@@ -78,6 +84,7 @@ const Integration = () => {
                       >
                         <CodeBlock
                           className="code-block text-[15px]"
+                          copyButtonClassName="!top-0"
                           language="sql"
                           isTrimmed={false}
                           showLineNumbers
@@ -90,6 +97,14 @@ const Integration = () => {
               </AnimatePresence>
             </LazyMotion>
           </div>
+          {/* TODO: add link to "Learn more" button */}
+          <p className="mt-3 text-[15px] font-light leading-none tracking-extra-tight text-gray-new-40">
+            Easily switch to pg_embedding in your Postgres and LangChain projects.{' '}
+            <Link className="inline-flex items-center tracking-extra-tight" theme="green" to="#">
+              Learn more
+              <ArrowIcon className="ml-1" />
+            </Link>
+          </p>
         </div>
       </Container>
     </section>
