@@ -106,6 +106,16 @@
           slug: guides/manage-database-access
         - title: Read replicas
           slug: guides/read-replica-guide
+        - title: Branching
+          items: 
+            - title: Point-in-time restore
+              slug: guides/branching-pitr
+            - title: Branching with the CLI
+              slug: guides/branching-neon-cli
+            - title: Branching with the API
+              slug: guides/branching-neon-api
+            - title: Branching with GitHub Actions
+              slug: guides/branching-github-actions
     - title: Languages
       items:
         - title: Elixir

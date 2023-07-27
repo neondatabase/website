@@ -94,7 +94,7 @@ You should see the data as it existed before you ran the problematic `DELETE` qu
 
 What have you seen in this example?
 
-To recover the data, you can use Neon's branching feature to create a branch with data from a past point in time. Neon keeps a 7-day history, by default, to enable point-in-time recovery.
+To recover the data, you can use Neon's branching feature to create a branch with data from a past point in time. Neon keeps a 7-day history, by default, to enable point-in-time restore.
 
 Neon also supports creating branches from **Head** (the most up-to-date state of the database) or from an **LSN** (Log Sequence Number), which is a unique identifier assigned to each transaction in the database.
 
