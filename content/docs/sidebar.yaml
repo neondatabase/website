@@ -178,13 +178,8 @@
     - title: OAuth
       slug: guides/oauth-integration
 - title: AI integration
-  items:
     - title: Introduction
-      items:
-        - title: Vector embeddings
-          slug: ai/vector-embeddings
-        - title: Vector search
-          slug: ai/vector-search
+      slug: ai/ai-intro
     - title: Vector search in PostgreSQL
       items:
         - title: Choosing a vector search extension
