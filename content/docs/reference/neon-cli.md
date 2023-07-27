@@ -6,6 +6,8 @@ enableTableOfContents: true
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the CLI.
 
+For installation instructions, see [Neon CLI — Install and connect](/docs/reference/cli-install).
+
 ## Synopsis
 
 ```bash
