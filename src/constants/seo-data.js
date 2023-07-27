@@ -59,6 +59,14 @@ export default {
     imagePath: '/images/social-previews/partners.jpg',
     pathname: LINKS.partners,
   },
+  ai: {
+    // TODO: add real title and description
+    title: 'AI — Neon',
+    description:
+      'Introducing pg_embedding for AI vector search: a faster alternative to pgvector that scales to millions of rows.',
+    // imagePath: '/images/social-previews/pricing.jpg',
+    pathname: LINKS.ai,
+  },
 };
 
 export const getBlogCategoryDescription = (category) => {
