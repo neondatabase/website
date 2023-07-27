@@ -153,6 +153,8 @@
                   slug: guides/prisma-migrate
     - title: Backend-as-a-service
       items:
+        - title: Exograph
+          slug: guides/exograph
         - title: Grafbase
           slug: guides/grafbase
         - title: Hasura
