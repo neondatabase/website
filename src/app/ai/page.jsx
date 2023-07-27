@@ -1,3 +1,4 @@
+import Benefits from 'components/pages/ai/benefits';
 import CTA from 'components/pages/ai/cta';
 import Hero from 'components/pages/ai/hero';
 import Integration from 'components/pages/ai/integration';
@@ -19,6 +20,7 @@ const AIPage = () => (
     <Hero />
     <Stats />
     <Integration />
+    <Benefits />
     <Testimonials />
     <CTA />
   </Layout>

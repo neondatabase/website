@@ -53,7 +53,7 @@ const Integration = () => {
               >
                 <span
                   className={clsx(
-                    'absolute left-0 top-0 h-px w-full bg-[linear-gradient(270deg,rgba(0,229,153,0.00)_6.54%,#00E599_47.88%,rgba(0,229,153,0.00)93.46%)] transition-opacity duration-200',
+                    'absolute -top-px left-0 h-px w-full bg-[linear-gradient(270deg,rgba(0,229,153,0.00)_6.54%,#00E599_47.88%,rgba(0,229,153,0.00)93.46%)] transition-opacity duration-200',
                     index === activeTab ? 'opacity-60' : 'opacity-0'
                   )}
                 />
