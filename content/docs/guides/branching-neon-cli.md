@@ -73,7 +73,7 @@ neonctl branches delete br-rough-sky-158193
 
 ## Branching automation with the Neon CLI
 
-The Neon CLI enables easy automation of branching operations for integration into your workflows or toolchains. To facilitate authentication to Neon when running a CLI command, the Neon CLI provides an `--api-key` option that you can specify at the command line. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+The Neon CLI enables easy automation of branching operations for integration into your workflows or toolchains. To facilitate authentication to Neon when running a CLI command, the Neon CLI allows you to use an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 To use an API key, you can store it in an environment variable on your system. This prevents the key from being hardcoded into your automation scripts or exposed in another way. For example, you can add the following line to your shell's profile file (`.bashrc` or `.bash_profile` for bash shell):
 
@@ -83,13 +83,9 @@ export NEON_API_KEY=<neon_api_key>
 
 After exporting your key, source the profile file (source `~/.bashrc` or source `~/.bash_profile`), or start a new terminal session.
 
-In your scripts or automation tooling, you can reference the environment variable like so:
+Once you have set the `NEON_API_KEY` variable, you do not need to specify the variable name explicitly when using a Neon CLI command. A Neon CLI command looks for a `NEON_API_KEY` variable setting by default.
 
-```bash
-neonctl branches create --api-key $NEON_API_KEY
-```
-
-This usage ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Remember, you should handle your API key with the same level of security as your other credentials.
+This API key configuration ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Remember, you should handle your API key with the same level of security as your other credentials.
 
 ## Need help?
 
