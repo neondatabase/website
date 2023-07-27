@@ -27,10 +27,9 @@ Global options:
   -o, --output      Set output format
                   [string] [choices: "json", "yaml", "table"] [default: "table"]
       --config-dir  Path to config directory
-                             [string] [default: "/home/dtprice/.config/neonctl"]
+                             [string] [default: "/home/<user>/.config/neonctl"]
       --api-key     API key
-  [string] [default: "klorf5hfe2dwt7i7rmzg2ot0cw56zi85654z9wdy7w5rms4irljppvm35l
-                                                                        kfloo5"]
+  [string] [default: ""]
       --analytics   Manage analytics. Example: --no-analytics, --analytics false
                                                        [boolean] [default: true]
   -v, --version     Show version number                                [boolean]
