@@ -100,6 +100,8 @@
   items:
     - title: Neon features
       items: 
+        - title: Enabling Autoscaling
+          slug: guides/autoscaling-guide
         - title: Manage roles and databases with SQL
           slug: guides/manage-database-access
         - title: Read replicas
