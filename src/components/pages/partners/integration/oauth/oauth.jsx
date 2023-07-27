@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import CardItemsList from '../card-items-list';
+import CardItemsList from '../../../../shared/card-items-list';
 import appStoreIcon from '../images/app-store.svg';
 import bookIcon from '../images/book.svg';
 import fileIcon from '../images/file.svg';
@@ -37,7 +37,10 @@ const Oauth = () => (
         The Neon API allows you to manage Neon programmatically. With the Neon API, you can create
         and manage all objects in your&nbsp;Neon account.
       </p>
-      <CardItemsList className="lg:col-span-full lg:mt-8" items={items} />
+      <CardItemsList
+        className="mt-8 max-w-[550px] gap-x-6 lg:col-span-full lg:max-w-none"
+        items={items}
+      />
     </div>
     <div className="col-span-5 lg:col-span-full">
       <Image className="rounded-2xl" src={image} quality={90} alt="Authorize Hasura Cloud" />

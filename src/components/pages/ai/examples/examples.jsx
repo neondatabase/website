@@ -1,10 +1,9 @@
 import React from 'react';
 
+import CardItemsList from 'components/shared/card-items-list';
 import Container from 'components/shared/container';
 import GradientLabel from 'components/shared/gradient-label';
 import Heading from 'components/shared/heading';
-import Link from 'components/shared/link';
-import ArrowRightIcon from 'icons/arrow-right-thin.inline.svg';
 
 import chatbotIcon from './images/chatbot.svg';
 import imageSearchIcon from './images/image-search.svg';
@@ -43,38 +42,7 @@ const Examples = () => (
         <p className="mt-3 text-lg font-light leading-snug">
           See the example apps using Neon for LLMs and AI applications
         </p>
-        <ul className="mt-14 flex items-stretch gap-x-7">
-          {exampleApps.map(({ icon, title, description, url }, index) => (
-            <li className="flex grow basis-1/3" key={index}>
-              <Link
-                className="group flex flex-col rounded-[10px] border border-gray-new-15 px-5 pb-4 pt-5 transition-colors duration-200 hover:border-green-45 xl:min-h-[165px] xl:p-3.5 lg:min-h-max lg:p-4 md:flex-row md:gap-x-3"
-                to={url}
-                target={url.startsWith('http') ? '_blank' : '_self'}
-                rel={url.startsWith('http') ? 'noopener noreferrer' : ''}
-              >
-                <img
-                  className="h-8 w-8 md:h-7 md:w-7"
-                  loading="lazy"
-                  src={icon}
-                  alt=""
-                  width={32}
-                  height={32}
-                  aria-hidden
-                />
-                <div className="mt-[38px] xl:mt-8 lg:mt-7 md:mt-0">
-                  <h4 className="text-xl leading-tight tracking-[-0.02em] xl:text-lg">{title}</h4>
-                  <p className="mb-9 mt-1.5 text-[15px] font-light leading-tight text-gray-new-70 md:mt-2.5">
-                    {description}
-                  </p>
-                  <div className="mt-auto inline-flex items-center text-green-45 transition-colors duration-200 group-hover:text-primary-2">
-                    <span className="text-[15px]">View example</span>
-                    <ArrowRightIcon className="ml-2 shrink-0" />
-                  </div>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <CardItemsList className="mt-14 gap-x-7" items={exampleApps} size="lg" />
       </div>
     </Container>
   </section>

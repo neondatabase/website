@@ -1,4 +1,4 @@
-import CardItemsList from '../card-items-list';
+import CardItemsList from '../../../../shared/card-items-list';
 import fileIcon from '../images/file.svg';
 import transactionsIcon from '../images/transactions.svg';
 import videoIcon from '../images/video.svg';
@@ -37,7 +37,10 @@ const Api = () => (
         Manage Projects, branches, databases, and more. Easily integrate Neon in your Product and
         offer it to your users.
       </p>
-      <CardItemsList className="lg:col-span-full lg:mt-8" items={items} />
+      <CardItemsList
+        className="mt-8 max-w-[550px] gap-x-6 lg:col-span-full lg:max-w-none"
+        items={items}
+      />
     </div>
     <CodeTabs className="col-span-5 lg:col-span-full" />
   </div>
