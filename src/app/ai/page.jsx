@@ -1,6 +1,7 @@
 import CTA from 'components/pages/ai/cta';
 import Hero from 'components/pages/ai/hero';
 import Stats from 'components/pages/ai/stats';
+import Testimonials from 'components/pages/ai/testimonials';
 import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
@@ -16,6 +17,7 @@ const AIPage = () => (
   >
     <Hero />
     <Stats />
+    <Testimonials />
     <CTA />
   </Layout>
 );
