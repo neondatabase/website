@@ -1,3 +1,4 @@
+import CTA from 'components/pages/ai/cta';
 import Hero from 'components/pages/ai/hero';
 import Stats from 'components/pages/ai/stats';
 import Layout from 'components/shared/layout';
@@ -15,6 +16,7 @@ const AIPage = () => (
   >
     <Hero />
     <Stats />
+    <CTA />
   </Layout>
 );
 
