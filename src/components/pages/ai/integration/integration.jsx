@@ -42,7 +42,7 @@ const Integration = () => {
             {items.map(({ title }, index) => (
               <button
                 className={clsx(
-                  'relative flex items-start rounded-t-md border px-5 py-4 text-xs font-medium uppercase leading-none tracking-extra-tight transition-colors duration-200 last:grow',
+                  'relative flex items-start rounded-t-md border px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 last:grow',
                   index === activeTab
                     ? 'border-x-gray-new-15 border-b-transparent border-t-gray-new-15 text-green-45'
                     : 'border-x-transparent border-b-gray-new-15 border-t-transparent text-white'
@@ -98,7 +98,7 @@ const Integration = () => {
             </LazyMotion>
           </div>
           {/* TODO: add link to "Learn more" button */}
-          <p className="mt-3 text-[15px] font-light leading-none tracking-extra-tight text-gray-new-40">
+          <p className="mt-3 pl-5 text-[15px] font-light leading-none tracking-extra-tight text-gray-new-40">
             Easily switch to pg_embedding in your Postgres and LangChain projects.{' '}
             <Link className="inline-flex items-center tracking-extra-tight" theme="green" to="#">
               Learn more

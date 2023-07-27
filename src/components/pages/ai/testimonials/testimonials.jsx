@@ -73,7 +73,7 @@ const Testimonials = () => {
             {sliderItems.map((item, index) =>
               index === activeSliderItemIndex ? (
                 <m.div
-                  className="mt-12 flex items-center space-x-[18px] lg:mt-10 md:mt-8"
+                  className="flex items-center space-x-[18px] lg:mt-10 md:mt-8"
                   key={index}
                   {...sliderItemsAnimationProps}
                 >

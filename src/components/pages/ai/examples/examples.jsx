@@ -19,7 +19,7 @@ const exampleApps = [
   },
   {
     icon: imageSearchIcon,
-    title: 'Image Search',
+    title: 'Image search',
     description: 'Combine semantic and full-text search with powerful SQL filtering.',
     url: 'https://neon-experimental.vercel.app/',
   },
@@ -32,11 +32,14 @@ const exampleApps = [
 ];
 
 const Examples = () => (
-  <section className="safe-paddings mt-[200px] bg-black-new">
+  <section className="safe-paddings mt-40 bg-black-new">
     <Container size="medium" className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lt:gap-x-4">
-      <div className="col-span-10 col-start-2 mt-12 flex flex-col items-center">
+      <div className="col-span-10 col-start-2 flex flex-col items-center">
         <GradientLabel>Integrate</GradientLabel>
-        <Heading tag="h2" className="mt-3 text-[52px] font-medium leading-none tracking-tighter">
+        <Heading
+          tag="h2"
+          className="mt-3 text-[52px] font-medium leading-none tracking-extra-tight"
+        >
           What can you build with Neon?
         </Heading>
         <p className="mt-3 text-lg font-light leading-snug">
