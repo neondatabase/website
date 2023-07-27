@@ -54,6 +54,7 @@ const AIPage = () => (
       description="Use the power of HNSW index to unlock new levels of efficiency in high-dimensional
             similarity search in Postgres"
       items={items}
+      isGradientLabel
     />
     <Examples />
     <Testimonials />
