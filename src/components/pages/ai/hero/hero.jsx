@@ -31,7 +31,7 @@ const Hero = () => (
       </AnimatedButton>
     </Container>
 
-    <div className="absolute left-0 top-0 h-full min-h-[1207px] w-full">
+    <div className="absolute left-0 top-0 z-10 h-full min-h-[1207px] w-full xl:min-h-[1000px] lg:min-h-[800px] md:min-h-[600px] ">
       <div className="absolute bottom-0 left-0 h-full w-full">
         <Spline scene="/animations/pages/ai/scene.splinecode" />
       </div>

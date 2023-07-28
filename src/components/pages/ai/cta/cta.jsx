@@ -18,7 +18,7 @@ const CTA = () => (
           Try pg_embedding
           <br /> now with Neon
         </Heading>
-        <p className="mt-3 text-lg font-light leading-snug xl:text-base">
+        <p className="mt-3 text-lg font-light leading-snug xl:text-base md:mx-auto md:max-w-md">
           Interested in increasing your free tier limits or learning about pricing? Complete the
           form below to get in touch
         </p>
