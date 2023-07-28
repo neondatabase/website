@@ -79,7 +79,7 @@ CREATE INDEX ON documents USING hnsw(embedding) WITH (maxelements=1000, dims=3, 
 ```
 
 <Admonition type="info">
-When creating and HNSW index, please be aware of the following:
+When creating an HNSW index, please be aware of the following:
 
 - HNSW indexes are created in memory. If your compute suspends, expect the index to be rebuilt the next time it is accessed. By default, Neon suspends computes after 300 seconds (5 minutes) of inactivity. The [Neon Pro](/docs/introduction/pro-plan) plan enables configuring or disabling Neon's [Auto-suspension](/docs/manage/endpoints#auto-suspend-configuration) feature.
 - The amount of compute memory available with the Neon Free Tier supports indexing up 50K rows (with metadata) and embeddings of up to 1536 dimensions. Indexing larger data sizes requires compute instances with more memory. The [Neon Pro plan](https://console.neon.tech/app/billing) offers compute sizes with up to 28 GB RAM.
