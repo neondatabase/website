@@ -12,7 +12,7 @@ import sendGtagEvent from 'utils/send-gtag-event';
 const TopBar = () => {
   const pathname = usePathname();
 
-  const isTopBarHidden = [LINKS.pricing, LINKS.partners].includes(pathname);
+  const isTopBarHidden = [LINKS.pricing, LINKS.partners, LINKS.ai].includes(pathname);
 
   return isTopBarHidden ? null : (
     <Link

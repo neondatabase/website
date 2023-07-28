@@ -32,7 +32,7 @@ const items = [
 const Integration = () => {
   const [activeTab, setActiveTab] = useState(0);
   return (
-    <section className="integration safe-paddings mt-48 xl:mt-[124px]">
+    <section className="integration safe-paddings mt-48 xl:mt-[124px] lg:mt-28">
       <Container className="flex flex-col items-center" size="medium">
         <GradientLabel>Getting Started</GradientLabel>
         <h2 className="mt-5 text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
