@@ -131,4 +131,4 @@ Global options are supported with any Neon CLI command.
 
 ## GitHub
 
-  The GitHub repository for the Neon CLI is found [here](https://github.com/neondatabase/neonctl).
+The GitHub repository for the Neon CLI is found [here](https://github.com/neondatabase/neonctl).
