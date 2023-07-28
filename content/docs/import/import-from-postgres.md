@@ -99,7 +99,7 @@ This section describes using the `pg_dump` utility to dump data from an existing
    <CodeBlock shouldWrap>
 
    ```bash
-   pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v --no-owner --no-acl
+   pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v
    ```
 
    </CodeBlock>
