@@ -44,14 +44,16 @@ const Hero = () => {
         </AnimatedButton>
       </Container>
 
-      <div className="absolute left-0 top-0 h-[1207px] w-full xl:h-[1100px] lg:h-[900px] md:h-[810px] xs:h-[940px]">
+      <div
+        className={clsx(
+          'absolute left-0 top-0 h-[1207px] w-full opacity-0 transition-opacity duration-500 xl:h-[1100px] lg:h-[900px] md:h-[810px] xs:h-[940px]',
+          {
+            'opacity-100': isAnimationLoaded,
+          }
+        )}
+      >
         <Spline
-          className={clsx(
-            'absolute bottom-0 left-0 h-full w-full opacity-0 transition-all duration-500',
-            {
-              'opacity-100': isAnimationLoaded,
-            }
-          )}
+          className="absolute bottom-0 left-0 h-full w-full md:pointer-events-none"
           scene="/animations/pages/ai/scene.splinecode"
           onLoad={() => setIsAnimationLoaded(true)}
         />
