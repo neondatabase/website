@@ -124,7 +124,7 @@ This section describes using the `pg_dump` utility to dump data from an existing
     </CodeBlock>
 
     <Admonition type="note">
-    The database specified in the command above must exist in Neon. If it does not, create it first. See [/docs/manage/databases#create-a-database].
+    The database specified in the command above must exist in Neon. If it does not, create it first. See [Manage databases](/docs/manage/databases#create-a-database).
     </Admonition>
 
     The example above includes these optional arguments:

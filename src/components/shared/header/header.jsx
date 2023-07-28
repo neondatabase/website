@@ -12,6 +12,7 @@ import MobileMenu from 'components/shared/mobile-menu';
 import Search from 'components/shared/search';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 import Burger from './burger';
 // import DiscordIcon from './images/header-discord.inline.svg';
@@ -143,6 +144,7 @@ const Header = ({
               theme={isThemeBlack ? 'tertiary' : 'quaternary'}
               rel="noopener noreferrer"
               target="_blank"
+              onClick={() => sendGtagEvent('click_star_us_button')}
             >
               <Github
                 className={clsx(
