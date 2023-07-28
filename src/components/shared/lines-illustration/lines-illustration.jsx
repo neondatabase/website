@@ -73,18 +73,8 @@ const LinesIllustration = ({ className: additionalClassName, color, spread }) =>
           </linearGradient>
         </defs>
       </svg>
-      <svg width="100%" height="150" fill="none" className="absolute top-0">
-        <defs>
-          <pattern id="linePattern" patternUnits="userSpaceOnUse" width="200" height="2">
-            <line x1="0" y1="0" x2="300" y2="0" stroke="#0C0D0D" strokeWidth="1" />
-            <line x1="0" y1="2" x2="300" y2="2" stroke="#0C0D0D" strokeWidth="1" />
-          </pattern>
-        </defs>
-        <g className="button-line-animation">
-          <rect width="100%" height="150" y="-1" fill="url(#linePattern)" />
-          <rect width="100%" height="150" y="150" fill="url(#linePattern)" />
-        </g>
-      </svg>
+
+      <span className="button-lines-pattern absolute left-0 top-0 h-[150px] w-full" />
     </motion.span>
   );
 };
