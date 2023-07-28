@@ -23,6 +23,7 @@ The statements in this usage summary are described in further detail in the sect
 ```sql
 CREATE EXTENSION embedding;
 CREATE TABLE documents(id integer PRIMARY KEY, embedding real[]);
+INSERT INTO documents(id, embedding) VALUES (1, '{1.1, 2.2, 3.3}'),(2, '{4.4, 5.5, 6.6}');
 SELECT id FROM documents ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3] LIMIT 1;
 ```
 
@@ -49,8 +50,7 @@ This statement generates a table named `documents` with an `embedding` column fo
 To insert vector data, use an `INSERT` statement similar to the following:
 
 ```sql
-INSERT INTO documents(id, embedding) 
-VALUES (1, '{1.1, 2.2, 3.3}'),(2, '{4.4, 5.5, 6.6}');
+INSERT INTO documents(id, embedding) VALUES (1, '{1.1, 2.2, 3.3}'),(2, '{4.4, 5.5, 6.6}');
 ```
 
 ## Query the nearest neighbors by L2 distance
@@ -74,39 +74,39 @@ In summary, the query retrieves the ID of the record from the `documents` table 
 
 To optimize search behavior, you can add an HNSW index. To create the HNSW index on your vector column, use a `CREATE INDEX` statement similar to the following:
 
+<CodeBlock shouldWrap>
+
 ```sql
-CREATE INDEX ON documents USING hnsw(embedding) WITH (maxelements=1000, dims=3, m=8);
+CREATE INDEX ON documents USING hnsw(embedding) WITH (maxelements=1000, dims=3, m=8, efconstruction=8, efsearch=8);
 ```
+
+</CodeBlock>
 
 <Admonition type="info">
 When creating and HNSW index, please be aware of the following:
 
 - HNSW indexes are created in memory. If your compute suspends, expect the index to be rebuilt the next time it is accessed. By default, Neon suspends computes after 300 seconds (5 minutes) of inactivity. The [Neon Pro](/docs/introduction/pro-plan) plan enables configuring or disabling Neon's [Auto-suspension](/docs/manage/endpoints#auto-suspend-configuration) feature.
-- The amount of compute memory available with the Neon Free Tier supports indexing up 50K rows (with metadata) and embeddings of up to 1536 dimensions. Indexing larger data sizes requires compute instances with more memory. The [Neon Pro plan](https://console.neon.tech/app/billing) offers compute sizes with up to 28 GB RAM.
+- The amount of compute memory available with the Neon Free Tier supports indexing up 50K rows (with metadata) and embeddings of up to 1536 dimensions. Indexing larger data sizes requires compute instances with more memory. The [Neon Pro plan](https://console.neon.tech/app/billing) offers compute sizes with up to 28 GB of RAM.
 - Neon's [Autoscaling](/docs/introduction/autoscaling) feature, available with the Pro plan, does not account for the memory used by an HNSW index. Autoscaling is therefore not recommended for use with HNSW indexes. Use a fixed sized compute instead. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 </Admonition>
 
-### HNSW index options
+### Tuning the HNSW algorithm
+
+The following options allow you to tune the HNSW algorithm when creating an index:
 
 - `maxelements`: Defines the maximum number of elements indexed. This is a required parameter.
 - `dims`: Defines the number of dimensions in your vector data.  This is a required parameter.
-- `m`: Defines the maximum number of links (also referred to as "edges") created for each node during graph construction.
-- `efConstruction`: Defines the number of nearest neighbors considered during index construction. The default value is `32`.
-- `efsearch`: Defines the number of nearest neighbors considered during index search. The default value is `32`.
-
-### Tuning the HNSW algorithm
-
-The `m`, `efConstruction`, and `efSearch` options allow you to tune the HNSW algorithm when creating an index:
-
-- `m`: This option defines the maximum number of links or "edges" created for each node during graph construction. A higher value increases accuracy (recall) but also increases the size of the index in memory and index construction time.
-- `efConstruction`: This option influences the trade-off between index quality and construction speed. A high `efConstruction` value creates a higher quality graph, enabling more accurate search results, but a higher value also means that index construction takes longer.
-- `efSearch`: This option influences the trade-off between query accuracy (recall) and speed. A higher `efSearch` value increases accuracy at the cost of speed. This value should be equal to or larger than `k`, which is the number of nearest neighbors you want your search to return.
+- `m`: Defines the maximum number of links or "edges" created for each node during graph construction. A higher value increases accuracy (recall) but also increases the size of the index in memory and index construction time.
+- `efConstruction`: Influences the trade-off between index quality and construction speed. A high `efConstruction` value creates a higher quality graph, enabling more accurate search results, but a higher value also means that index construction takes longer.
+- `efSearch`: Influences the trade-off between query accuracy (recall) and speed. A higher `efSearch` value increases accuracy at the cost of speed. This value should be equal to or larger than `k`, which is the number of nearest neighbors you want your search to return (defined by the `LIMIT` clause in your `SELECT` query).
 
 In summary, to prioritize search speed over accuracy, use lower values for `m` and `efSearch`. Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `efSearch`. A higher `efConstruction` value enables more accurate search results at the cost of index build time, which is also affected by the `maxelements` setting.
 
 <Admonition type="info">
 For an idea of how to configure index option values, consider the benchmark performed by Neon using the _GIST-960 Euclidean dataset_, which provides a training set of 1 million vectors of 960 dimensions. The benchmark was run with this series of index option values:
 
+- `maxelements`: 1000000
+- `dims`: 960
 - `m`: 32, 64, and 128
 - `efConstruction`: 64, 128, and 256
 - `efSearch`: 32, 64, 128, 256, and 512
