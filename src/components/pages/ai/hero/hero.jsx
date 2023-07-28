@@ -1,6 +1,7 @@
 'use client';
 
 import Spline from '@splinetool/react-spline';
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 
 import AnimatedButton from 'components/shared/animated-button';
@@ -43,9 +44,14 @@ const Hero = () => {
         </AnimatedButton>
       </Container>
 
-      <div className="absolute left-0 top-0 h-[1207px] w-full xl:h-[1000px] lg:h-[800px] md:h-[600px]">
+      <div className="absolute left-0 top-0 h-[1207px] w-full xl:h-[1100px] lg:h-[900px] md:h-[810px] xs:h-[940px]">
         <Spline
-          className="absolute bottom-0 left-0 h-full w-full"
+          className={clsx(
+            'absolute bottom-0 left-0 h-full w-full opacity-0 transition-all duration-500',
+            {
+              'opacity-100': isAnimationLoaded,
+            }
+          )}
           scene="/animations/pages/ai/scene.splinecode"
           onLoad={() => setIsAnimationLoaded(true)}
         />
