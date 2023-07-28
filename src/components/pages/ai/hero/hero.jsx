@@ -1,8 +1,12 @@
+'use client';
+
+import Spline from '@splinetool/react-spline';
+
 import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container/container';
 
 const Hero = () => (
-  <section className="hero safe-paddings pt-36 xl:pt-[120px]">
+  <section className="hero safe-paddings relative min-h-screen pb-[200px] pt-36 xl:pt-[120px]">
     <Container
       className="container relative z-10 flex flex-col items-center text-center"
       size="medium"
@@ -27,6 +31,10 @@ const Hero = () => (
         Get Started
       </AnimatedButton>
     </Container>
+
+    <div className="absolute left-0 top-0 h-full w-full">
+      <Spline scene="https://prod.spline.design/vtmiMklTV3ogMLgp/scene.splinecode" />
+    </div>
   </section>
 );
 
