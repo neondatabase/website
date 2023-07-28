@@ -32,21 +32,22 @@ const exampleApps = [
 ];
 
 const Examples = () => (
-  <section className="safe-paddings mt-40 bg-black-new xl:mt-[120px]">
+  <section className="safe-paddings mt-40 bg-black-new xl:mt-[120px] md:mt-20">
     <Container size="medium" className="grid grid-cols-12 gap-x-10 xl:gap-x-6 md:gap-x-4">
       <div className="col-span-10 col-start-2 flex flex-col items-center xl:col-span-full xl:col-start-1">
         <GradientLabel>Integrate</GradientLabel>
         <Heading
+          className="flat-breaks sm:flat-none mt-3 text-center text-[52px] font-medium leading-none tracking-extra-tight xl:mt-4 xl:text-[44px] lg:text-4xl md:mt-3 md:max-w-xs md:text-[32px]"
           tag="h2"
-          className="mt-3 text-[52px] font-medium leading-none tracking-extra-tight xl:mt-4 xl:text-[44px] lg:text-4xl md:text-[32px]"
         >
-          What can you build with Neon?
+          What can you
+          <br /> build with Neon?
         </Heading>
-        <p className="mt-3 text-lg font-light leading-snug xl:text-base">
+        <p className="mt-3 text-center text-lg font-light leading-snug xl:text-base md:max-w-xs">
           See the example apps using Neon for LLMs and AI applications
         </p>
         <CardItemsList
-          className="mt-14 gap-x-7 xl:mt-10 xl:gap-x-6"
+          className="mt-14 gap-x-7 xl:mt-10 xl:gap-x-6 md:mt-8 md:gap-y-4"
           items={exampleApps}
           size="lg"
         />

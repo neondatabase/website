@@ -24,11 +24,10 @@ const Hero = () => {
         className="container relative z-10 flex flex-col items-center text-center"
         size="medium"
       >
-        <h1 className="z-10 max-w-[967px] text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl">
-          Powering next gen AI apps
-          <br /> with Postgres
+        <h1 className="md:flat-breaks max-w-[967px] text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:max-w-[550px] md:text-4xl">
+          Powering next gen <br /> AI apps with Postgres
         </h1>
-        <p className="z-10 mt-5 max-w-[716px] text-[21px] font-light leading-snug tracking-extra-tight xl:text-lg lg:mt-4">
+        <p className="md:flat-breaks mt-5 max-w-[716px] text-[21px] font-light leading-snug tracking-extra-tight xl:text-lg lg:mt-4 md:mt-2.5 md:max-w-[500px]">
           Build and scale transformative LLM application with Postgres
           <br /> using pgvector and pg_embedding
         </p>
@@ -44,7 +43,7 @@ const Hero = () => {
         </AnimatedButton>
       </Container>
 
-      <div className="absolute left-0 top-0 h-[1207px] w-full">
+      <div className="absolute left-0 top-0 h-[1207px] w-full xl:h-[1000px] lg:h-[800px] md:h-[600px]">
         <Spline
           className="absolute bottom-0 left-0 h-full w-full"
           scene="/animations/pages/ai/scene.splinecode"

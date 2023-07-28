@@ -15,11 +15,11 @@ const sliderItems = [
     authorName: 'Harrison Chase',
     authorTitle: 'Co-Founder and CEO, LangChainAI',
   },
-  // {
-  //   text: 'What if PGVector was on steroids ?! <a href="https://twitter.com/raoufdevrel" target="_blank">@raoufdevrel</a> from <a href="https://twitter.com/neondatabase" target="_blank">@neondatabase</a> just did that with pg_embedding and made it available through <a href="https://twitter.com/LangChainAI" target="_blank">@LangChainAI</a>. I&apos;ll definitely give it a try on <a href="https://twitter.com/quivr_brain" target="_blank">@quivr_brain</a> and our 10GB of vectors that use PGVector',
-  //   authorName: 'Stan Girard',
-  //   authorTitle: 'Founder, Quivr',
-  // },
+  {
+    text: 'What if PGVector was on steroids ?! <a href="https://twitter.com/raoufdevrel" target="_blank">@raoufdevrel</a> from <a href="https://twitter.com/neondatabase" target="_blank">@neondatabase</a> just did that with pg_embedding and made it available through <a href="https://twitter.com/LangChainAI" target="_blank">@LangChainAI</a>. I&apos;ll definitely give it a try on <a href="https://twitter.com/quivr_brain" target="_blank">@quivr_brain</a> and our 10GB of vectors that use PGVector',
+    authorName: 'Stan Girard',
+    authorTitle: 'Founder, Quivr',
+  },
   {
     text: '<a href="https://twitter.com/postgresql" target="_blank">@PostgreSQL</a> is popular database choice. Excited to share a new extension from <a href="https://twitter.com/neondatabase" target="_blank">@neondatabase</a> to help you use it for embeddings as well (with HNSW)!',
     authorName: 'Harrison Chase',
@@ -66,7 +66,10 @@ const Testimonials = () => {
   }, [activeSliderItemIndex, isSliderInView]);
 
   return (
-    <section className="testimonial safe-paddings mt-40 xl:mt-[120px] lg:mt-28" ref={sliderRef}>
+    <section
+      className="testimonial safe-paddings mt-40 xl:mt-[120px] lg:mt-28 md:mt-20"
+      ref={sliderRef}
+    >
       <Container className="flex flex-col items-center text-center" size="xs">
         <LazyMotion features={domAnimation}>
           <AnimatePresence initial={false} mode="wait">
@@ -83,7 +86,7 @@ const Testimonials = () => {
             )}
           </AnimatePresence>
         </LazyMotion>
-        <div className="mt-7 flex items-center justify-between xl:mt-5 lg:mt-4 md:flex-col md:items-center">
+        <div className="mt-7 flex items-center justify-between xl:mt-5 lg:mt-4 md:mt-3 md:flex-col md:items-center">
           <ul className="flex space-x-2.5">
             {sliderItems.map((_, index) => (
               <li key={index}>
