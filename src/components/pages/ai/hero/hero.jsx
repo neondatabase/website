@@ -13,8 +13,7 @@ const Hero = () => (
     >
       <div className="absolute left-1/2 top-0 -z-10 h-[270px] w-3/4 -translate-x-1/2 rounded-[1000px] bg-black-new blur-[30px] lg:w-full" />
       <h1 className="md:flat-breaks max-w-[967px] text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:max-w-[550px] md:text-4xl">
-        Powering next gen AI apps
-        <br /> with Postgres
+        Powering next gen <br /> AI apps with Postgres
       </h1>
       <p className="md:flat-breaks mt-5 max-w-[716px] text-[21px] font-light leading-snug tracking-extra-tight xl:text-lg lg:mt-4 md:mt-2.5 md:max-w-[500px]">
         Build and scale transformative LLM application with Postgres
