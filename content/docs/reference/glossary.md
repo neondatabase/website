@@ -12,7 +12,7 @@ See [Token](#token).
 
 ### Active time
 
-The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). For [Free Tier](/docs/introduction/free-tier) users, there is no limit on _Active time_ for the [primary branch](#primary-branch) compute. [Non-primary branch](#non-primary-branch) computes are limited to 100 hours of _Active time_ per month. _Active time_ on the primary branch compute is counted toward the 100 hour limit. You can monitor _Active time_ for the computes in your Neon project on the **Usage** widget on the Neon **Dashboard**.
+The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). The [Free Tier](/docs/introduction/free-tier) has an [Active time](/docs/reference/glossary#active-time) limit of 100 hours per month, but that limit only affects non-primary branch compute usage. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. The primary branch compute always remains available regardless of the limit, ensuring that access to data on the primary branch is never interrupted. Free Tier users can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**. The _Active time_ limit resets at the beginning of each month.
 
 ### Activity Monitor
 
