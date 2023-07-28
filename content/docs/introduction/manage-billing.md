@@ -41,16 +41,16 @@ To download an invoice:
 1. Navigate to the **Billing** page in the Neon Console.
 1. Under **Latest invoices**, locate the invoice you want to download and click the PDF download icon.
 
-## Cancel a subscription
+## Downgrade your plan
 
-To cancel a Pro plan subscription:
+To downgrade from the Pro plan Free Tier:
 
 1. Navigate to the **Billing** page in the Neon Console.
-1. Click **Request subscription cancellation** at the bottom of the page.
+1. Click **Downgrade** at the bottom of the page.
 1. Follow the instructions on the **Request Downgrade** modal, and click **Downgrade**.
 
-Canceling your Pro plan subscription downgrades your account to our Free Tier, which has lower usage limits that could affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
+Downgrading from the Pro plan downgrades your account to the Neon Free Tier, which has lower usage limits that could affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
 
 You will be required to remove any projects, branches, or data that exceed [Free Tier limits](/docs/introduction/free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade request).
 
-For cancellation of Enterprise or Platform Partnership plans, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans is handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
+For downgrading from Enterprise or Platform Partnership plans, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans is handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
