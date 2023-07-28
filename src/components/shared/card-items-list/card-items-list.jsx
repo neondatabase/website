@@ -16,7 +16,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
           <Link
             className={clsx(
               'group flex h-full min-h-[176px] flex-col rounded-[10px] border border-gray-new-15 transition-colors duration-200 hover:border-green-45 xl:min-h-[165px] lg:min-h-max md:flex-row md:gap-x-3',
-              isLarge ? 'p-5 xl:pb-4' : 'px-5 pb-4 pt-5 xl:p-3.5 lg:p-4'
+              isLarge ? 'p-5 xl:pb-4 lg:p-4' : 'px-5 pb-4 pt-5 xl:p-3.5 lg:p-4'
             )}
             to={url}
             target={url.startsWith('http') ? '_blank' : '_self'}
@@ -43,7 +43,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
               <p
                 className={clsx(
                   'mt-1.5 text-[15px] font-light leading-tight text-gray-new-70 md:mt-2.5',
-                  { 'mb-8': isLarge }
+                  { 'mb-8 lg:mb-5 lg:mt-1.5': isLarge }
                 )}
               >
                 {description}
