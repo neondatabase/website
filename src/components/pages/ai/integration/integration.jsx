@@ -32,22 +32,22 @@ const items = [
 const Integration = () => {
   const [activeTab, setActiveTab] = useState(0);
   return (
-    <section className="integration safe-paddings mt-48">
+    <section className="integration safe-paddings mt-48 xl:mt-[124px]">
       <Container className="flex flex-col items-center" size="medium">
         <GradientLabel>Getting Started</GradientLabel>
-        <h2 className="mt-5 text-5xl font-medium leading-none tracking-extra-tight">
+        <h2 className="mt-5 text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
           Simple to use, easy to scale
         </h2>
-        <p className="mt-3 text-lg font-light leading-snug">
+        <p className="mt-3 text-lg font-light leading-snug xl:text-base">
           Neon offers two ways to seamlessly integrate it into your product.
         </p>
         <LazyMotion features={domAnimation}>
-          <div className="mt-11 w-full max-w-[716px]">
+          <div className="mt-11 w-full max-w-[716px] xl:mt-10">
             <div className="flex">
               {items.map(({ title }, index) => (
                 <button
                   className={clsx(
-                    'relative flex items-start rounded-t-md border px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 last:grow',
+                    'relative flex items-start rounded-t-md border px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 last:grow xl:py-[14px]',
                     index === activeTab
                       ? 'border-x-gray-new-15 border-b-transparent border-t-gray-new-15 text-green-45'
                       : 'border-x-transparent border-b-gray-new-15 border-t-transparent text-white'
@@ -75,7 +75,7 @@ const Integration = () => {
               ))}
             </div>
 
-            <div className="rounded-b-md border-x border-b border-gray-new-15 pb-6 pl-5 pr-3 pt-6 lg:pb-6 lg:pl-3.5 lg:pt-3.5 md:py-4 md:pl-4">
+            <div className="rounded-b-md border-x border-b border-gray-new-15 pb-6 pl-5 pr-3 pt-6">
               <AnimatePresence initial={false} mode="wait">
                 {items.map(
                   ({ code }, index) =>

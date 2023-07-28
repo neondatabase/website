@@ -66,7 +66,7 @@ const Testimonials = () => {
   }, [activeSliderItemIndex, isSliderInView]);
 
   return (
-    <section className="testimonial safe-paddings mt-40" ref={sliderRef}>
+    <section className="testimonial safe-paddings mt-40 xl:mt-[120px]" ref={sliderRef}>
       <Container className="flex flex-col items-center text-center" size="xs">
         <LazyMotion features={domAnimation}>
           <AnimatePresence initial={false} mode="wait">
@@ -83,7 +83,7 @@ const Testimonials = () => {
             )}
           </AnimatePresence>
         </LazyMotion>
-        <div className="mt-12 flex items-center justify-between xl:mt-10 lg:mt-8 md:mt-6 md:flex-col md:items-center sm:mt-5">
+        <div className="mt-7 flex items-center justify-between xl:mt-5 md:flex-col md:items-center">
           <ul className="flex space-x-2.5">
             {sliderItems.map((_, index) => (
               <li key={index}>

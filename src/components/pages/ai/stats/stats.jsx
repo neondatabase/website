@@ -13,7 +13,7 @@ const Stats = () => (
     <Container className="grid grid-cols-12" size="medium">
       <div className="col-span-full flex flex-col items-center">
         <GradientLabel>Fast and Accurate</GradientLabel>
-        <h2 className="mt-5 max-w-[690px] text-center text-5xl font-medium leading-none tracking-extra-tight xl:mt-4 xl:max-w-[610px] xl:text-[44px]">
+        <h2 className="mt-5 max-w-[690px] text-center text-5xl font-medium leading-none tracking-extra-tight xl:mt-4 xl:max-w-[610px] xl:text-[44px] lg:text-4xl md:text-[32px]">
           Scale your AI apps to millions of rows with Neon
         </h2>
       </div>

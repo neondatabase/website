@@ -1,13 +1,21 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import GradientLabel from 'components/shared/gradient-label';
 
-const SplitViewGrid = ({ label, title, description, items, isGradientLabel = false }) => (
-  <section className="benefits safe-paddings mt-52 xl:mt-[104px] lg:mt-20 md:mt-16">
+const SplitViewGrid = ({
+  className = null,
+  label,
+  title,
+  description,
+  items,
+  isGradientLabel = false,
+}) => (
+  <section className={clsx('benefits safe-paddings', className)}>
     <Container className="grid-gap-x grid grid-cols-12" size="medium">
-      <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 rounded-2xl bg-gray-new-8 p-12 xl:col-span-full xl:col-start-1 xl:items-center xl:px-8 xl:py-10 lg:px-7 lg:py-9 md:px-5 md:py-8">
-        <div className="col-span-4 col-start-1 flex flex-col items-start xl:max-w-[300px] xl:justify-self-start lg:col-span-full lg:max-w-none">
+      <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 rounded-2xl bg-gray-new-8 p-12 xl:col-span-full xl:col-start-1 xl:items-center xl:p-8 lg:px-7 lg:py-9 md:px-5 md:py-8">
+        <div className="col-span-4 col-start-1 flex flex-col items-start xl:max-w-[300px] xl:self-start xl:justify-self-start lg:col-span-full lg:max-w-none">
           {isGradientLabel ? (
             <GradientLabel>{label}</GradientLabel>
           ) : (
@@ -22,7 +30,7 @@ const SplitViewGrid = ({ label, title, description, items, isGradientLabel = fal
             {description}
           </p>
         </div>
-        <ul className="col-start-5 col-end-11 -ml-1.5 mt-2 grid max-w-[640px] grid-cols-2 gap-x-[90px] gap-y-11 xl:-ml-5 xl:mt-0 xl:max-w-none xl:gap-x-10 xl:pl-0 lg:col-span-full lg:ml-0 lg:mt-10 lg:gap-y-10 md:mt-[30px] md:grid-cols-1 md:gap-y-[30px]">
+        <ul className="col-start-5 col-end-11 -ml-1.5 mt-2 grid max-w-[640px] grid-cols-2 gap-x-[90px] gap-y-11 xl:-ml-5 xl:mt-1.5 xl:max-w-none xl:gap-x-10 xl:pl-0 lg:col-span-full lg:ml-0 lg:mt-10 lg:gap-y-10 md:mt-[30px] md:grid-cols-1 md:gap-y-[30px]">
           {items.map(({ icon, title, description }, index) => (
             <li className="flex items-start gap-x-3.5 md:gap-x-3" key={index}>
               <img
@@ -38,9 +46,7 @@ const SplitViewGrid = ({ label, title, description, items, isGradientLabel = fal
                 <h3 className="text-[22px] font-medium leading-tight tracking-[-0.02em] xl:text-xl md:text-lg">
                   {title}
                 </h3>
-                <p className="md:text-2 mt-2 font-light leading-snug text-gray-new-70 xl:mt-[11px]">
-                  {description}
-                </p>
+                <p className="mt-2 font-light leading-snug text-gray-new-70">{description}</p>
               </div>
             </li>
           ))}
@@ -51,6 +57,7 @@ const SplitViewGrid = ({ label, title, description, items, isGradientLabel = fal
 );
 
 SplitViewGrid.propTypes = {
+  className: PropTypes.string,
   label: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

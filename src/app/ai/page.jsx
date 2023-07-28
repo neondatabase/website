@@ -49,6 +49,7 @@ const AIPage = () => (
     <Stats />
     <Integration />
     <SplitViewGrid
+      className="mt-52 xl:mt-36 lg:mt-[124px] md:mt-[88px]"
       label="Benefits"
       title="Vector search with Neon"
       description="Use the power of HNSW index to unlock new levels of efficiency in high-dimensional

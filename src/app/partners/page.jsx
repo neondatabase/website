@@ -51,6 +51,7 @@ const PartnersPage = () => (
     <Hero />
     <Logos />
     <SplitViewGrid
+      className="mt-[136px] xl:mt-[104px] lg:mt-20 md:mt-16"
       label="Benefits"
       title="Why become a partner?"
       description="At Neon, we deeply value our partners and believe they are vital to our mission of
