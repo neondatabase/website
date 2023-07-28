@@ -1,10 +1,10 @@
 ---
 title: Neon CLI
-subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
+subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
 ---
 
-The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the CLI.
+The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the Neon CLI.
 
 For installation instructions, see [Neon CLI — Install and connect](/docs/reference/cli-install).
 
