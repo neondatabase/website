@@ -77,7 +77,7 @@ Global options are supported with any Neon CLI command.
   Specifies the path to the `neonctl` configuration directory. To view the default configuration directory containing you `credentials.json` file, run `neonctl --help`. The credentials file is created when you authenticate using the `neonctl auth` command. This option is only necessary if you move your `neonctl` configuration file to a location other than the default.
 
   ```bash
-  neonctl projects list --config-dir /home/dtprice/.config/neonctl
+  neonctl projects list --config-dir /home/<user>/.config/neonctl
   ```
 
 - <a id="api-key"></a>`--api-key`
