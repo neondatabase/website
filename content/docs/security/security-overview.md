@@ -17,6 +17,10 @@ Please note that while the term "SOC2 Certified" is commonly used, it is not acc
 
 Our SOC2 Type 1 report underscores our ongoing commitment to safeguarding customer data and maintaining a high level of security. We will continue to invest in regular audits and adhere to industry best practices to ensure the security, integrity, and privacy of the data you entrust us with.
 
+<Admonition type="important">
+If you would like to review our SOC2 report or would like to discuss another security concern, please contact us at [security@neon.tech](mailto:security@neon.tech). 
+</Admonition>
+
 ## Security reporting
 
 Neon is currently in Technical Preview. We have established a security reporting procedure to address security issues quickly.
