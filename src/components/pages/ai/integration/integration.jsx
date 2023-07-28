@@ -14,17 +14,21 @@ import ArrowIcon from 'icons/arrow-sm.inline.svg';
 const items = [
   {
     title: 'Create extension',
-    code: `    CREATE EXTENSION embedding CREATE TABLE items(embedding real[]);`,
+    code: `    CREATE EXTENSION embedding;
+    CREATE TABLE items(embedding real[]);`,
     text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
   {
     title: 'Similarity search',
-    code: `    SELECT id FROM items ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3];`,
+    code: `    SELECT id
+    FROM items
+    ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3];`,
     text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
   {
     title: 'Migration from pgvector',
-    code: `    SELECT vector::real[] AS converted_vector FROM vector_items`,
+    code: `    SELECT vector::real[] AS converted_vector
+    FROM vector_items;`,
     text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
 ];
@@ -32,17 +36,18 @@ const items = [
 const Integration = () => {
   const [activeTab, setActiveTab] = useState(0);
   return (
-    <section className="integration safe-paddings mt-48 xl:mt-[124px] lg:mt-28">
+    <section className="integration safe-paddings mt-48 xl:mt-[124px] lg:mt-28 md:mt-20">
       <Container className="flex flex-col items-center" size="medium">
         <GradientLabel>Getting Started</GradientLabel>
-        <h2 className="mt-5 text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
-          Simple to use, easy to scale
+        <h2 className="flat-breaks sm:flat-none mt-5 text-center text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:mt-3 md:text-[32px]">
+          Simple to use,
+          <br /> easy to scale
         </h2>
-        <p className="mt-3 text-lg font-light leading-snug xl:text-base">
+        <p className="mt-3 text-center text-lg font-light leading-snug xl:text-base md:max-w-xs">
           Neon offers two ways to seamlessly integrate it into your product.
         </p>
         <LazyMotion features={domAnimation}>
-          <div className="mt-11 w-full max-w-[716px] xl:mt-10">
+          <div className="mt-11 w-full max-w-[716px] xl:mt-10 sm:hidden" aria-hidden>
             <div className="flex">
               {items.map(({ title }, index) => (
                 <button
@@ -128,6 +133,39 @@ const Integration = () => {
             </AnimatePresence>
           </div>
         </LazyMotion>
+        <div className="hidden w-full sm:mt-8 sm:flex sm:flex-col sm:space-y-7">
+          {items.map(({ title, code, text }, index) => (
+            <div key={index}>
+              <div className="flex flex-col rounded-md border border-gray-new-15">
+                <span className="px-4 py-3 text-xs font-medium uppercase leading-none tracking-wider">
+                  {title}
+                </span>
+                <div className="dark border-t border-gray-new-15 py-3 pl-4 pr-2">
+                  <CodeBlock
+                    className="code-block text-[15px] sm:text-[13px]"
+                    copyButtonClassName="!-top-2"
+                    language="sql"
+                    isTrimmed={false}
+                    showLineNumbers
+                  >
+                    {code}
+                  </CodeBlock>
+                </div>
+              </div>
+              <p className="mt-2 text-sm font-light leading-dense tracking-extra-tight text-gray-new-40">
+                {text}{' '}
+                <Link
+                  className="inline-flex items-center tracking-extra-tight"
+                  theme="green"
+                  to="#"
+                >
+                  Learn more
+                  <ArrowIcon className="ml-1" />
+                </Link>
+              </p>
+            </div>
+          ))}
+        </div>
       </Container>
     </section>
   );
