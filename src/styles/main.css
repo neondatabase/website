@@ -133,7 +133,7 @@
 }
 
 .button-lines-pattern {
-  mask-image: url('/button-lines-pattern-mask.png');
+  mask-image: url('/images/button-lines-pattern-mask.svg');
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -146,13 +146,6 @@
   );
 
   &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background: #078345;
     animation: lineAnimation 5s linear infinite;
     animation-timing-function: steps(75);
   }

@@ -73,8 +73,8 @@ const LinesIllustration = ({ className: additionalClassName, color, spread }) =>
           </linearGradient>
         </defs>
       </svg>
-
-      <span className="button-lines-pattern absolute left-0 top-0 h-[150px] w-full" />
+      {/* FIXME: we must take into account other animation colors for an example look at the /pricing page */}
+      <span className="button-lines-pattern absolute left-0 top-0 h-[150px] w-full before:absolute before:bottom-0 before:left-0 before:h-px before:w-full before:bg-[#00E599]" />
     </motion.span>
   );
 };
