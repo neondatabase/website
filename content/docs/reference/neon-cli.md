@@ -29,9 +29,8 @@ Global options:
   -o, --output      Set output format
                   [string] [choices: "json", "yaml", "table"] [default: "table"]
       --config-dir  Path to config directory
-                             [string] [default: "/home/<user>/.config/neonctl"]
-      --api-key     API key
-  [string] [default: ""]
+                             [string] [default: ""]
+      --api-key     API key  [string] [default: ""]
       --analytics   Manage analytics. Example: --no-analytics, --analytics false
                                                        [boolean] [default: true]
   -v, --version     Show version number                                [boolean]
