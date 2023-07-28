@@ -33,7 +33,7 @@ const Hero = () => (
     </Container>
 
     <div className="absolute left-0 top-0 h-full w-full">
-      <Spline scene="https://prod.spline.design/vtmiMklTV3ogMLgp/scene.splinecode" />
+      <Spline scene="/animations/pages/ai/scene.splinecode" />
     </div>
   </section>
 );
