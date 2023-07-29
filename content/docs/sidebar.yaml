@@ -100,10 +100,6 @@
   items:
     - title: Neon features
       items: 
-        - title: Manage roles and databases with SQL
-          slug: guides/manage-database-access
-        - title: Read replicas
-          slug: guides/read-replica-guide
         - title: Branching
           items: 
             - title: Point-in-time restore
@@ -114,6 +110,13 @@
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
+        - title: Project sharing
+          slug: guides/project-sharing-guide
+        - title: Read replicas
+          slug: guides/read-replica-guide
+        - title: Manage roles and databases with SQL
+          slug: guides/manage-database-access
+
     - title: Languages
       items:
         - title: Elixir
