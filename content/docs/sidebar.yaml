@@ -102,10 +102,6 @@
       items: 
         - title: Autoscaling
           slug: guides/autoscaling-guide
-        - title: Manage roles and databases with SQL
-          slug: guides/manage-database-access
-        - title: Read replicas
-          slug: guides/read-replica-guide
         - title: Branching
           items: 
             - title: Point-in-time restore
@@ -116,6 +112,12 @@
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
+        - title: Project sharing
+          slug: guides/project-sharing-guide
+        - title: Read replicas
+          slug: guides/read-replica-guide
+        - title: Manage roles and databases with SQL
+          slug: guides/manage-database-access
     - title: Languages
       items:
         - title: Elixir
@@ -155,6 +157,8 @@
                   slug: guides/prisma-migrate
     - title: Backend-as-a-service
       items:
+        - title: Exograph
+          slug: guides/exograph
         - title: Grafbase
           slug: guides/grafbase
         - title: Hasura
@@ -218,6 +222,8 @@
     - title: Neon CLI
       slug: reference/neon-cli
       items:
+        - title: Install and connect
+          slug: reference/cli-install
         - title: auth
           slug: reference/cli-auth
         - title: me
