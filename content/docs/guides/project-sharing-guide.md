@@ -33,4 +33,8 @@ The Neon account associated with that email address is granted full access to th
 
 ![Project shared with me](/docs/guides/shared_with_me.png)
 
+An email is also sent to the email address informing the user that a project has been shared with them. The email includes an **Open project** link the user can click on to log in to Neon. Once logged in, the user is directed to the **Dashboard** for the shared project in the Neon Console.
+
+## Shared project billing
+
 The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
