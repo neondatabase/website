@@ -8,7 +8,7 @@ Neon's Autoscaling feature dynamically adjusts the amount of compute resources a
 
 _Autoscaling_ is a [Neon Pro plan](/docs/introduction/pro-plan) feature. Pro plan users can enable Autoscaling for any compute endpoint in a Neon project. _Autoscaling_ is supported with both read-write and read-only compute endpoints. Read-only compute endpoints enable Neon's [Read replica](/docs/introduction/read-replicas) feature.
 
-Autoscaling can be enabled when you create a project or afterward by editing an individual compute endpoint.
+You can enable _Autoscaling_ in an existing project by editing a compute endpoint. You can also enable it when you first create a project in Neon, which also sets the _Autoscaling_ defaults for your project. Both methods are described below.
 
 ## Enable Autoscaling for a compute endpoint
 
@@ -24,10 +24,10 @@ To edit a compute endpoint:
 1. Using the slider, specify a minimum and maximum compute size.
     ![Autoscaling edit settings](/docs/guides/autoscaling_edit_settings.png)
 
-    Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. _Autoscaling_ currently supports a range of 1/4 (.25) to 7 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GBs is always 4 times the number of vCPUs.
+    Neon scales the compute size up and down within the specified range to meet workload demand. _Autoscaling_ currently supports a range of 1/4 (.25) to 7 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GBs is always 4 times the number of vCPUs.
 
     <Admonition type="note">
-    You can also configure the **Auto-suspend delay** setting for your compute endpoint at the same time. The **Auto-suspend delay** setting defines the number of seconds of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".
+    You can configure the **Auto-suspend delay** setting for your compute endpoint at the same time. The **Auto-suspend delay** setting defines the number of seconds of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".
     </Admonition>
 1. Click **Save**.
 
@@ -35,7 +35,7 @@ To edit a compute endpoint:
 
 A project is a top-level object in the Neon object hierarchy. You can think of it as a container for all other objects, including branches and compute endpoints.
 
-Enabling Autoscaling when you create a project allows you to set _Autoscaling_ default settings for all compute endpoints created in your project. You can adjust _Autoscaling_ settings for individual compute endpoints afterward, but setting a desired defaults when creating a project will save you from having to configure these settings for each compute later on.
+Enabling Autoscaling when you create a project allows you to set _Autoscaling_ default settings for all compute endpoints created in your project. You can adjust _Autoscaling_ settings for individual compute endpoints afterward, but setting desired defaults when creating a project will save you from having to configure these settings for each compute later on.
 
 To configure Autoscaling default settings at project creation time:
 
