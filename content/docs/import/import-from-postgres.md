@@ -27,7 +27,7 @@ Before you begin, it is recommended that you familiarize yourself with the capab
 
 ## pg_dump with psql
 
-This section describes using the `pg_dump` utility to dump data from an existing PostgreSQL database and import it into Neon using `psql`.
+This section describes using the `pg_dump` utility to dump data from an existing PostgreSQL database in plain SQL format and import it into Neon using `psql`.
 
 <Admonition type="note">
 If you have multiple databases to import, each database must be imported separately.
@@ -80,7 +80,7 @@ Run the command in your terminal or command window to import your data.
 
 ## pg_dump with pg_restore
 
-This section describes using the `pg_dump` utility to dump data from an existing PostgreSQL database and import it into your Neon database using `pg_restore` .
+This section describes using the `pg_dump` utility to dump data from an existing PostgreSQL database in a PostgreSQL custom format and import it into your Neon database using `pg_restore` .
 
 1. Start by retrieving the connection strings for the existing PostgreSQL database and your Neon database.
 
@@ -99,7 +99,7 @@ This section describes using the `pg_dump` utility to dump data from an existing
    <CodeBlock shouldWrap>
 
    ```bash
-   pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v
+   pg_dump "postgres://<user>:<password>@<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v
    ```
 
    </CodeBlock>
@@ -117,7 +117,7 @@ This section describes using the `pg_dump` utility to dump data from an existing
     <CodeBlock shouldWrap>
 
     ```bash
-    pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc -c --if-exists dumpfile.bak -v
+    pg_restore -d postgres://<user>:<password>@<hostname>/<dbname> -Fc -c --if-exists --no-owner --no-acl dumpfile.bak -v
     ```
 
     </CodeBlock>
@@ -133,9 +133,7 @@ This section describes using the `pg_dump` utility to dump data from an existing
     - `-v` runs `pg_restore` in verbose mode, allowing you to monitor what happens during the restore operation.
 
     <Admonition type="note">
-    Other options you might consider using include:
-    - `-j`: specifies the number of concurrent jobs, which can make imports faster.
-    - `--single-transaction`: forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.). This option cannot be be used in conjunction with the the `-j` option.
+    Another option you might consider using is `--single-transaction`. This option forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.
     </Admonition>
 
     The `pg_restore` command provides other options to modify your database import. To learn more, refer to the [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
@@ -159,7 +157,7 @@ pg_dump: reading schemas
 ~/mydump$ ls
 dumpfile.bak
 
-~/mydump$ pg_restore -d postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook2 -Fc -c --if-exists dumpfile.bak -v
+~/mydump$ pg_restore -d postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook2 -Fc -c --if-exists --no-owner --no-acl dumpfile.bak -v
 
 pg_restore: connecting to database for restore
 pg_restore: dropping FK CONSTRAINT Track FK_TrackMediaTypeId
@@ -172,7 +170,7 @@ pg_restore: dropping FK CONSTRAINT Track FK_TrackAlbumId
 
 ## Ownership and privilege considerations
 
-Roles created in the Neon console, including the default role created with your Neon project, are automatically granted membership in the [neon_superuser](/docs/manage/roles#neon_superuser) group. This role can create roles and databases, and select, insert, update, or delete data from all databases in your Neon project. However, the `neon_superuser` is not a PostgreSQL `superuser`. It cannot run `ALTER OWNER` statements to set ownership of database objects. As a result, if you granted ownership of database objects in your source database, your dump file will contain `ALTER OWNER` statements, and those statements will cause non-fatal errors when you restore data to your target database in Neon. Additionally, any statements in your dump file that grant or revoke access privileges to roles that do not exist in Neon will also produce non-fatal errors.
+Roles created in the Neon console, including the default role created with your Neon project, are automatically granted membership in the [neon_superuser](/docs/manage/roles#neon_superuser) group. This role can create roles and databases, and select, insert, update, or delete data from all databases in your Neon project. However, the `neon_superuser` is not a PostgreSQL `superuser`. It cannot run `ALTER OWNER` statements to set ownership of database objects. As a result, if you granted ownership of database objects in your source database, your dump file will contain `ALTER OWNER` statements, and those statements will cause non-fatal errors when you restore data to your target database in Neon if steps are not taken to avoid such errors. Additionally, any statements in your dump file that grant or revoke access privileges to roles that do not exist in Neon will also produce non-fatal errors.
 
 <Admonition type="note">
 Regardless of `ALTER OWNER` or `GRANT/REVOKE` statement errors, a restore operation still succeeds because ownership and permissions are not necessary for the data itself to be restored. The restore operation to a target database in Neon, will still create tables, import data, and create other objects.
@@ -192,7 +190,15 @@ To avoid these non-fatal errors, you can take one of the following approaches:
      ```
 
   2. Create the roles in Neon before you perform the restore operation. See [Manage roles](/docs/manage/roles) for instructions.
-  4. Specify the `--no-owner` option in your `pg_restore` command when restore data to the target database in Neon.
+  4. Specify the `--no-owner` option in your `pg_restore` command when restore data to the target database in Neon. For example:
+
+      <CodeBlock shouldWrap>
+
+      ```bash
+      pg_restore -d postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook2 -Fc -c --if-exists --no-owner  dumpfile.bak -v
+      ```
+
+      </CodeBlock>
 
 ## Data import notes
 
@@ -200,7 +206,6 @@ When importing a database, be aware of the following:
 
 - The `psql` utility only supports plain SQL dumps. If you import a database from an archive that is not in plain-text format, you must use the `pg_restore` utility instead of `psql`.
 - `pg_dumpall` and `pg_dump` with the `-C` option are not supported.
-- Because `pg_dump` dumps a single database, it does not include information about roles stored in the global `pg_authid` catalog. If you do not create roles in Neon before importing a database that has roles, you will receive "role does not exist" errors during the import operation. You can ignore these errors if they occur. They do not prevent data from being imported.
 - Some PostgreSQL features that require access to the local file system are not supported by Neon. For example, tablespaces and large objects are not supported. Please take this into account when importing a database into to Neon. When importing from a plain-text `.sql` script, you can specify the `--no-tablespaces` option to exclude commands that select tablespaces. The `--no-tablespaces` option is ignored when creating an archive (non-text) output file using `pg_dump`. For custom-format archive files, you can specify the `--no-tablespaces` option when you call `pg_restore`. To exclude large objects from your dump, use the `--no-blobs` option with `pg_dump`.
 - You can import individual tables from a custom-format database dump using the `-t <table_name>` option with `pg_restore`. Individual tables can also be imported from a CSV file. See [Import from CSV](/docs/import/import-from-csv).
 
