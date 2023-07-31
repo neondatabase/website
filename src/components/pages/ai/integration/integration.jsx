@@ -65,17 +65,18 @@ const Integration = () => {
                 >
                   <span
                     className={clsx(
-                      'absolute -top-px left-0 h-px w-full bg-[linear-gradient(270deg,rgba(0,229,153,0.00)_6.54%,#00E599_47.88%,rgba(0,229,153,0.00)93.46%)] transition-opacity duration-200',
-                      index === activeTab ? 'opacity-60' : 'opacity-0'
-                    )}
-                  />
-                  <span
-                    className={clsx(
                       'absolute -bottom-0.5 left-0 h-px w-full bg-black-new transition-opacity duration-200',
                       index === activeTab ? 'opacity-100' : 'opacity-0'
                     )}
                   />
+
                   <span className="relative">
+                    <span
+                      className={clsx(
+                        'absolute -top-[17px] left-0 h-px w-full bg-[linear-gradient(270deg,rgba(0,229,153,0.00)_6.54%,#00E599_47.88%,rgba(0,229,153,0.00)93.46%)] transition-opacity duration-200',
+                        index === activeTab ? 'opacity-60' : 'opacity-0'
+                      )}
+                    />
                     <span
                       className={clsx(
                         'absolute h-full w-full rounded-3xl blur-[10px] transition-colors duration-200',
