@@ -80,7 +80,7 @@ const Integration = () => {
               ))}
             </div>
 
-            <div className="rounded-b-md border-x border-b border-gray-new-15 pb-6 pl-5 pr-3 pt-6">
+            <div className="min-h-[117px] rounded-b-md border-x border-b border-gray-new-15 pb-6 pl-5 pr-3 pt-6">
               <AnimatePresence initial={false} mode="wait">
                 {items.map(
                   ({ code }, index) =>
