@@ -45,6 +45,7 @@ const Hero = () => {
           height={330}
           alt=""
           aria-hidden
+          priority
         />
       ) : (
         <div className="absolute left-0 top-0 h-[1207px] w-full">
