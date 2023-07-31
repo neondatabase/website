@@ -123,7 +123,7 @@
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-150px);
+    transform: translateY(-115px);
   }
 }
 
@@ -134,7 +134,7 @@
 
 .button-lines-pattern {
   mask-image: url('/images/button-lines-pattern-mask.svg');
-  mask-size: 100% 100%;
+  mask-size: cover;
   mask-repeat: no-repeat;
   mask-position: center;
   background: repeating-linear-gradient(
