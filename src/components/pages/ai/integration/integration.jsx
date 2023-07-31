@@ -15,7 +15,8 @@ const items = [
   {
     title: 'Create extension',
     code: `    CREATE EXTENSION embedding;
-    CREATE TABLE items(embedding real[]);`,
+    CREATE TABLE items(embedding real[]);
+    `,
     text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
   {
@@ -28,7 +29,8 @@ const items = [
   {
     title: 'Migration from pgvector',
     code: `    SELECT vector::real[] AS converted_vector
-    FROM vector_items;`,
+    FROM vector_items;
+    `,
     text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
 ];
@@ -38,13 +40,13 @@ const Integration = () => {
   return (
     <section className="integration safe-paddings mt-48 xl:mt-[124px] lg:mt-28 md:mt-20">
       <Container className="flex flex-col items-center" size="medium">
-        <GradientLabel>Getting Started</GradientLabel>
+        <GradientLabel>Get Started</GradientLabel>
         <h2 className="flat-breaks sm:flat-none mt-5 text-center text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:mt-3 md:text-[32px]">
           Simple to use,
           <br /> easy to scale
         </h2>
         <p className="mt-3 text-center text-lg font-light leading-snug xl:text-base md:max-w-xs">
-          Neon offers two ways to seamlessly integrate it into your product.
+          Store vector embeddings and perform similarity search.
         </p>
         <LazyMotion features={domAnimation}>
           <div className="mt-11 w-full max-w-[716px] xl:mt-10 sm:hidden" aria-hidden>
@@ -52,10 +54,10 @@ const Integration = () => {
               {items.map(({ title }, index) => (
                 <button
                   className={clsx(
-                    'relative flex items-start rounded-t-md border px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 last:grow xl:py-[14px]',
+                    'relative flex items-start rounded-t-md border bg-black-new px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 last:grow xl:py-[14px]',
                     index === activeTab
                       ? 'border-x-gray-new-15 border-b-transparent border-t-gray-new-15 text-green-45'
-                      : 'border-x-transparent border-b-gray-new-15 border-t-transparent text-white'
+                      : 'border-x-transparent border-b-transparent border-t-transparent text-white'
                   )}
                   type="button"
                   key={index}
@@ -63,11 +65,18 @@ const Integration = () => {
                 >
                   <span
                     className={clsx(
-                      'absolute -top-px left-0 h-px w-full bg-[linear-gradient(270deg,rgba(0,229,153,0.00)_6.54%,#00E599_47.88%,rgba(0,229,153,0.00)93.46%)] transition-opacity duration-200',
-                      index === activeTab ? 'opacity-60' : 'opacity-0'
+                      'absolute -bottom-0.5 left-0 h-px w-full bg-black-new transition-opacity duration-200',
+                      index === activeTab ? 'opacity-100' : 'opacity-0'
                     )}
                   />
+
                   <span className="relative">
+                    <span
+                      className={clsx(
+                        'absolute -top-[17px] left-0 h-px w-full bg-[linear-gradient(270deg,rgba(0,229,153,0.00)_6.54%,#00E599_47.88%,rgba(0,229,153,0.00)93.46%)] transition-opacity duration-200',
+                        index === activeTab ? 'opacity-60' : 'opacity-0'
+                      )}
+                    />
                     <span
                       className={clsx(
                         'absolute h-full w-full rounded-3xl blur-[10px] transition-colors duration-200',
@@ -80,7 +89,16 @@ const Integration = () => {
               ))}
             </div>
 
-            <div className="min-h-[117px] rounded-b-md border-x border-b border-gray-new-15 pb-6 pl-5 pr-3 pt-6">
+            <div
+              className={clsx(
+                'min-h-[117px] rounded-b-md border border-gray-new-15 pb-6 pl-5 pr-3 pt-6',
+                {
+                  'rounded-r-md': activeTab === 0,
+                  'rounded-l-md': activeTab === items.length - 1,
+                  'rounded-md': activeTab !== 0 && activeTab !== items.length - 1,
+                }
+              )}
+            >
               <AnimatePresence initial={false} mode="wait">
                 {items.map(
                   ({ code }, index) =>
@@ -112,7 +130,7 @@ const Integration = () => {
                 ({ text }, index) =>
                   index === activeTab && (
                     <m.p
-                      className="mt-3 pl-5 text-[15px] font-light leading-none tracking-extra-tight text-gray-new-40"
+                      className="mt-3 pl-5 text-[15px] font-light leading-none tracking-extra-tight text-gray-new-60"
                       key={index}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -152,7 +170,7 @@ const Integration = () => {
                   </CodeBlock>
                 </div>
               </div>
-              <p className="mt-2 text-sm font-light leading-dense tracking-extra-tight text-gray-new-40">
+              <p className="mt-2 text-sm font-light leading-dense tracking-extra-tight text-gray-new-60">
                 {text}{' '}
                 <Link
                   className="inline-flex items-center tracking-extra-tight"

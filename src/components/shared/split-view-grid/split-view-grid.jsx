@@ -14,8 +14,8 @@ const SplitViewGrid = ({
 }) => (
   <section className={clsx('benefits safe-paddings', className)}>
     <Container className="grid-gap-x grid grid-cols-12" size="medium">
-      <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 rounded-2xl bg-gray-new-8 p-12 xl:col-span-full xl:col-start-1 xl:items-center xl:p-8 lg:px-7 lg:py-9 md:px-6 md:py-8 sm:pr-3.5">
-        <div className="col-span-4 col-start-1 flex flex-col items-start xl:max-w-[300px] xl:self-start xl:justify-self-start lg:col-span-full lg:max-w-none">
+      <div className="col-span-10 col-start-2 grid grid-cols-10 gap-x-10 rounded-2xl bg-gray-new-8 py-12 xl:col-span-full xl:col-start-1 xl:grid-cols-12 xl:items-center xl:gap-x-6 xl:py-8 lg:gap-x-4 lg:pb-10 lg:pt-9 md:py-8">
+        <div className="col-span-4 col-start-1 flex flex-col items-start pl-12 xl:max-w-[300px] xl:self-start xl:justify-self-start xl:pl-8 lg:col-span-full lg:max-w-none lg:pl-7 md:pl-6">
           {isGradientLabel ? (
             <GradientLabel>{label}</GradientLabel>
           ) : (
@@ -26,13 +26,16 @@ const SplitViewGrid = ({
           <h2 className="mt-3 max-w-[322px] text-[52px] font-medium leading-none tracking-[-0.02em] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]">
             {title}
           </h2>
-          <p className="mt-4 max-w-[362px] text-lg font-light leading-snug xl:max-w-[280px] xl:text-base lg:max-w-none md:mt-2.5 sm:pr-1.5">
+          <p className="mt-4 max-w-[362px] text-lg font-light leading-snug xl:max-w-[280px] xl:text-base lg:max-w-[648px] md:mt-2.5 sm:max-w-none sm:pr-1.5">
             {description}
           </p>
         </div>
-        <ul className="col-start-5 col-end-11 -ml-1.5 mt-2 grid max-w-[640px] grid-cols-2 gap-x-[90px] gap-y-11 xl:-ml-5 xl:mt-1.5 xl:max-w-none xl:gap-x-10 xl:pl-0 lg:col-span-full lg:ml-0 lg:mt-10 lg:gap-y-10 md:mt-[30px] md:grid-cols-1 md:gap-y-[30px]">
+        <ul className="col-start-5 col-end-11 mt-2 grid grid-cols-2 gap-x-10 gap-y-11 xl:col-start-6 xl:col-end-13 xl:-ml-8 xl:mt-1.5 xl:max-w-none xl:gap-x-1 lg:col-span-full lg:ml-0 lg:mt-10 lg:gap-x-10 lg:gap-y-10 lg:px-7 md:mt-[30px] md:grid-cols-1 md:gap-y-[30px] md:px-6">
           {items.map(({ icon, title, description }, index) => (
-            <li className="flex items-start gap-x-3.5 md:gap-x-3" key={index}>
+            <li
+              className="flex max-w-[290px] items-start gap-x-3.5 even:pr-4 xl:max-w-[248px] lg:max-w-[304px] lg:even:pr-0 md:gap-x-3"
+              key={index}
+            >
               <img
                 className="mt-0.5 shrink-0"
                 src={icon}
