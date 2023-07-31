@@ -2,6 +2,8 @@
 
 import Spline from '@splinetool/react-spline';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
 import AnimatedButton from 'components/shared/animated-button';
@@ -11,6 +13,18 @@ const MOBILE_WIDTH = 768;
 
 const Hero = () => {
   const { width } = useWindowSize();
+  const [spline, setSpline] = useState(null);
+  const [animationVisibilityRef, isInView] = useInView();
+
+  useEffect(() => {
+    if (!spline) return;
+
+    if (isInView) {
+      spline.play();
+    } else {
+      spline.stop();
+    }
+  }, [isInView, spline]);
 
   return (
     <section className="hero safe-paddings relative pb-[390px] pt-36 xl:pt-[120px] lg:pt-11 md:pb-0 md:pt-8">
@@ -48,10 +62,11 @@ const Hero = () => {
           priority
         />
       ) : (
-        <div className="absolute left-0 top-0 h-[1207px] w-full">
+        <div className="absolute left-0 top-0 h-[1207px] w-full" ref={animationVisibilityRef}>
           <Spline
             className="absolute bottom-0 left-0 h-full w-full xl:bottom-[7%] lg:bottom-[15%]"
             scene="/animations/pages/ai/scene.splinecode"
+            onLoad={(spline) => setSpline(spline)}
           />
         </div>
       )}
