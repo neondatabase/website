@@ -15,15 +15,6 @@ const spreadStyles = {
   6: 'mt-[1%] h-[120px] w-[110%]',
 };
 
-const highlightLineStyles = {
-  1: 'h-[150px]',
-  2: 'h-[150px]',
-  3: 'h-[150px]',
-  4: 'h-[130px]',
-  5: 'h-[130px]',
-  6: 'h-[120px]',
-};
-
 const LinesIllustration = ({
   className: additionalClassName,
   color,
@@ -89,14 +80,9 @@ const LinesIllustration = ({
         </defs>
       </svg>
       {isLineAnimated && (
-        <span
-          className={clsx(
-            'button-lines-pattern absolute left-0 top-0 w-full',
-            highlightLineStyles[spread]
-          )}
-        >
+        <span className="button-lines-pattern absolute left-0 top-0 h-[150px] w-full">
           <span
-            className="absolute bottom-0 left-0 h-px w-full"
+            className="absolute bottom-0 left-0 h-px w-full opacity-60"
             style={{
               backgroundColor: color,
             }}
