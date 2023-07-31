@@ -54,7 +54,7 @@ const Integration = () => {
               {items.map(({ title }, index) => (
                 <button
                   className={clsx(
-                    'relative flex items-start rounded-t-md border bg-black-new px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 last:grow xl:py-[14px]',
+                    'relative flex items-start rounded-t-md border bg-black-new px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 last:grow hover:text-green-45 xl:py-[14px]',
                     index === activeTab
                       ? 'border-x-gray-new-15 border-b-transparent border-t-gray-new-15 text-green-45'
                       : 'border-x-transparent border-b-transparent border-t-transparent text-white'

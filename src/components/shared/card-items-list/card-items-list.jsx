@@ -1,11 +1,46 @@
+'use client';
+
 import clsx from 'clsx';
+import { LazyMotion, domAnimation, useAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { useEffect, useMemo, useState } from 'react';
 
 import Link from 'components/shared/link/link';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
 const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md' }) => {
   const isLarge = size === 'lg';
+  const [isLoad, setIsLoad] = useState(false);
+  const [hoverCount, setHoverCount] = useState(0);
+  const [activeItemIndex, setActiveItemIndex] = useState(1);
+  const controls = useAnimation();
+
+  const borderLightVariants = useMemo(
+    () => ({
+      from: {
+        opacity: 0,
+      },
+      to: {
+        opacity: hoverCount === 0 ? [0, 1, 0.5, 1, 0.75, 1] : [0, 0.4, 0.2, 1, 0.5, 1],
+        transition: {
+          ease: 'easeInOut',
+          duration: hoverCount === 0 ? 0.5 : 1,
+        },
+      },
+      exit: {
+        opacity: 0,
+      },
+    }),
+    [hoverCount]
+  );
+
+  useEffect(() => {
+    controls.start('to');
+  }, [controls]);
+
+  useEffect(() => {
+    setIsLoad(true);
+  }, []);
   return (
     <ul
       className={clsx(
@@ -16,10 +51,10 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
       aria-hidden={ariaHidden}
     >
       {items.map(({ icon, title, description, url }, index) => (
-        <li key={index}>
+        <li className="relative" key={index}>
           <Link
             className={clsx(
-              'group flex h-full min-h-[176px] flex-col rounded-[10px] border border-gray-new-15 transition-colors duration-200 hover:border-green-45 xl:min-h-[165px] lg:min-h-max md:flex-row md:gap-x-3',
+              'group flex h-full min-h-[176px] flex-col rounded-[10px] border border-gray-new-15 xl:min-h-[165px] lg:min-h-max md:flex-row md:gap-x-3',
               isLarge
                 ? 'p-5 xl:pb-4 lg:p-4 lg:pb-5 md:pb-5 sm:flex-col sm:space-y-3'
                 : 'px-5 pb-4 pt-5 xl:p-3.5 lg:p-4'
@@ -27,6 +62,11 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
             to={url}
             target={url.startsWith('http') ? '_blank' : '_self'}
             rel={url.startsWith('http') ? 'noopener noreferrer' : ''}
+            onPointerEnter={() => {
+              setActiveItemIndex(index);
+              setHoverCount((prev) => (prev === 1 ? 0 : prev + 1));
+              controls.start('to');
+            }}
           >
             <img
               className={clsx('h-8 w-8', isLarge ? '' : 'md:h-7 md:w-7')}
@@ -70,6 +110,20 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
               )}
             </div>
           </Link>
+          <LazyMotion features={domAnimation}>
+            <m.span
+              className={clsx(
+                'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border transition-colors duration-300 md:border-green-45 md:!opacity-100',
+                isLoad !== true && '!opacity-100',
+                activeItemIndex === index ? 'border-green-45' : 'border-transparent'
+              )}
+              initial="from"
+              exit="exit"
+              variants={borderLightVariants}
+              animate={controls}
+              aria-hidden
+            />
+          </LazyMotion>
         </li>
       ))}
     </ul>

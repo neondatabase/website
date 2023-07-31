@@ -71,6 +71,8 @@ const Hero = () => {
   const [activeItemIndex, setActiveItemIndex] = useState(1);
   const controls = useAnimation();
 
+  console.log(hoverCount);
+
   const borderLightVariants = useMemo(
     () => ({
       from: {
