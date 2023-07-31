@@ -44,10 +44,10 @@ const ScaleCard = ({ className, ...props }) => (
     <Image className="absolute inset-0 rounded-xl" src={scaleBg} width={287} height={257} alt="" />
     <div className="relative z-10 flex flex-col items-center justify-center">
       <span className="text-2xl leading-none xl:text-lg lg:text-base">Scales to</span>
-      <span className="text-[112px] font-semibold leading-none tracking-[-0.08em] text-green-45 xl:text-7xl lg:mt-1.5 lg:text-[60px] sm:text-[68px]">
+      <span className="mt-2 text-[112px] font-semibold leading-none tracking-[-0.08em] text-green-45 xl:text-7xl lg:mt-1.5 lg:text-[60px] sm:text-[68px]">
         1M+
       </span>
-      <span className="text-[32px] leading-none tracking-extra-tight text-green-45 xl:text-2xl lg:mt-0.5 lg:text-xl sm:mt-1">
+      <span className="mt-1 text-[32px] leading-none tracking-extra-tight text-green-45 xl:text-2xl lg:mt-0.5 lg:text-xl sm:mt-1">
         rows
       </span>
     </div>
@@ -58,7 +58,7 @@ const ScaleCard = ({ className, ...props }) => (
 const IVFCard = ({ className, ...props }) => (
   <div
     className={clsx(
-      'flex flex-col items-center rounded-2xl bg-[linear-gradient(225deg,#9FD_6.87%,#6FC_24.88%,#00E599_85.59%)] pb-10 pt-8 text-black-new xl:pb-[30px] xl:pt-6 lg:pb-[26px] lg:pt-[22px] sm:pb-11 sm:pt-10',
+      'flex flex-col items-center rounded-2xl bg-[linear-gradient(225deg,#9FD_6.87%,#6FC_24.88%,#00E599_85.59%)] pb-[43px] pt-8 text-black-new xl:pb-[30px] xl:pt-6 lg:pb-[26px] lg:pt-[22px] sm:pb-11 sm:pt-10',
       className
     )}
     {...props}
@@ -95,7 +95,7 @@ const Stats = () => (
     <Container className="relative z-20 grid grid-cols-12" size="medium">
       <div className="col-span-full flex flex-col items-center">
         <GradientLabel>Fast and Accurate</GradientLabel>
-        <h2 className="mt-5 max-w-[690px] text-center text-5xl font-medium leading-none tracking-extra-tight xl:mt-4 xl:max-w-[610px] xl:text-[44px] lg:max-w-[550px] lg:text-4xl sm:text-[32px]">
+        <h2 className="mt-5 max-w-[660px] text-center text-5xl font-medium leading-none tracking-extra-tight xl:mt-4 xl:max-w-[610px] xl:text-[44px] lg:max-w-[550px] lg:text-4xl sm:text-[32px]">
           Scale your AI apps to millions of rows with Neon
         </h2>
       </div>
@@ -114,19 +114,19 @@ const Stats = () => (
               <p className="text-[13px] uppercase leading-none tracking-wider text-gray-new-50 xl:text-xs lg:text-[10px] sm:text-[11px]">
                 Query execution time (ms) at 99% recall
               </p>
-              <div className="mt-5 flex items-center space-x-2.5 xl:mt-3 sm:mt-5">
-                <span className="inline-block h-8 w-[17.5%] rounded bg-[linear-gradient(90deg,rgba(0,229,153,0.20)0%,#00E599_67.45%,#4DFFC4_93.23%)] xl:h-7 sm:h-8" />
+              <div className="mt-5 flex items-center space-x-2.5 xl:mt-4 sm:mt-5">
+                <span className="inline-block h-8 w-[18%] rounded bg-[linear-gradient(90deg,rgba(0,229,153,0.20)0%,#00E599_67.45%,#4DFFC4_93.23%)] xl:h-7 sm:h-8" />
                 <span className="text-[13px] leading-none text-gray-new-90 xl:text-xs lg:text-[10px]">
                   1.9s
                 </span>
               </div>
               <div className="mt-5 flex items-center space-x-2.5 xl:mt-3 lg:mt-2.5 sm:mt-4">
-                <span className="inline-block h-8 w-[93%] rounded bg-[linear-gradient(90deg,rgba(255,255,255,0.20)0%,#FFF_100%)] opacity-60 xl:h-7 sm:h-8" />
+                <span className="inline-block h-8 w-[93.5%] rounded bg-[linear-gradient(90deg,rgba(255,255,255,0.20)0%,#FFF_100%)] opacity-60 xl:h-7 sm:h-8" />
                 <span className="text-[13px] leading-none text-gray-new-90 xl:text-xs  lg:text-[10px]">
                   10s
                 </span>
               </div>
-              <div className="mt-6 flex items-center space-x-5 xl:mt-4 xl:text-sm lg:mt-2 lg:space-x-4 lg:text-xs sm:mt-5 sm:space-x-5 sm:text-[13px]">
+              <div className="mt-6 flex items-center space-x-5 text-sm xl:mt-4 lg:mt-2 lg:space-x-4 lg:text-xs sm:mt-5 sm:space-x-5 sm:text-[13px]">
                 <span className="flex items-center space-x-1.5 leading-none">
                   <span className="inline-block h-2 w-2 rounded-full bg-green-45 lg:h-1.5 lg:w-1.5" />
                   <span>HNSW</span>
@@ -147,7 +147,7 @@ const Stats = () => (
             </p>
           </div>
         </div>
-        <div className="grid grid-rows-2 gap-y-7 xl:col-span-3 xl:grid-rows-[auto,1fr] xl:gap-y-6 lg:gap-y-4 sm:col-span-full sm:grid-cols-2 sm:gap-x-4 sm:gap-y-0">
+        <div className="grid grid-rows-[auto,1fr] gap-y-7 xl:col-span-3 xl:gap-y-6 lg:gap-y-4 sm:col-span-full sm:grid-cols-2 sm:gap-x-4 sm:gap-y-0">
           <IVFCard className="sm:hidden" />
           <ScaleCard className="hidden sm:block" aria-hidden />
           <HNSWCard />

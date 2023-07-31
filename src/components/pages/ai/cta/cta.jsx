@@ -8,12 +8,12 @@ import Link from 'components/shared/link';
 import illustration from './images/cta-elephant.jpg';
 
 const CTA = () => (
-  <section className="safe-paddings mt-[200px] overflow-hidden bg-black-new 2xl:mt-40 xl:mt-[125px] lg:mt-16">
+  <section className="safe-paddings mt-[180px] overflow-hidden bg-black-new 2xl:mt-40 xl:mt-[125px] lg:mt-16">
     <Container
       size="medium"
       className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
     >
-      <div className="flat-breaks sm:flat-none relative z-10 col-span-4 col-start-2 flex flex-col pb-[164px] pt-12 2xl:col-span-5 2xl:col-start-2 2xl:pb-36 xl:pb-[78px] xl:pt-20 lg:col-span-6 lg:pb-[54px] md:col-span-full md:text-center">
+      <div className="flat-breaks sm:flat-none relative z-10 col-span-4 col-start-2 flex flex-col pb-[164px] pt-16 2xl:col-span-5 2xl:col-start-2 2xl:pb-36 xl:pb-[78px] xl:pt-20 lg:col-span-6 lg:pb-[54px] md:col-span-full md:text-center">
         <Heading tag="h2" size="2sm">
           Try pg_embedding
           <br /> now with Neon

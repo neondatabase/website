@@ -32,7 +32,7 @@ const exampleApps = [
 ];
 
 const Examples = () => (
-  <section className="safe-paddings mt-40 bg-black-new xl:mt-[120px] md:mt-20">
+  <section className="safe-paddings mt-40 bg-black-new xl:mt-[120px] lg:mt-28 md:mt-20">
     <Container size="medium" className="grid grid-cols-12 gap-x-10 xl:gap-x-6 md:gap-x-4">
       <div className="col-span-10 col-start-2 flex flex-col items-center xl:col-span-full xl:col-start-1">
         <GradientLabel>Integrate</GradientLabel>
@@ -47,7 +47,7 @@ const Examples = () => (
           See the example apps using Neon for LLMs and AI applications
         </p>
         <CardItemsList
-          className="mt-14 gap-x-7 xl:mt-10 xl:gap-x-6 md:mt-8 md:gap-y-4"
+          className="mt-14 gap-x-7 xl:mt-10 xl:gap-x-6 lg:gap-x-4 md:mt-8 md:gap-y-4"
           items={exampleApps}
           size="lg"
         />
