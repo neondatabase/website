@@ -100,6 +100,8 @@
   items:
     - title: Neon features
       items: 
+        - title: Autoscaling
+          slug: guides/autoscaling-guide
         - title: Branching
           items: 
             - title: Point-in-time restore
@@ -116,7 +118,6 @@
           slug: guides/read-replica-guide
         - title: Manage roles and databases with SQL
           slug: guides/manage-database-access
-
     - title: Languages
       items:
         - title: Elixir

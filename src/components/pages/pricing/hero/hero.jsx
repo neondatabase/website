@@ -39,7 +39,7 @@ const items = [
       { title: 'Unlimited projects & branches' },
       { title: 'Project sharing' },
       { title: 'Configurable compute size' },
-      { title: 'Autoscaling', label: 'beta' },
+      { title: 'Autoscaling' },
     ],
     button: {
       url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
