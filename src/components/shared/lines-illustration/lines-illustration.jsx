@@ -80,11 +80,7 @@ const LinesIllustration = ({
         </defs>
       </svg>
       {isLineAnimated && (
-        <span
-          className={clsx(
-            'button-lines-pattern absolute left-1/2 top-0 flex h-full w-[120%] -translate-x-1/2 justify-center'
-          )}
-        >
+        <span className="button-lines-pattern absolute left-1/2 top-0 flex h-full w-[120%] -translate-x-1/2 justify-center">
           <span
             className="absolute bottom-0 left-auto h-px w-full opacity-60"
             style={{
