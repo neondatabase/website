@@ -145,7 +145,7 @@
     transparent 2px
   );
 
-  &::before {
+  > span {
     animation: lineAnimation 5s linear infinite;
     animation-timing-function: steps(75);
   }

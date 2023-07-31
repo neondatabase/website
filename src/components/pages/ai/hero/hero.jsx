@@ -21,7 +21,7 @@ const Hero = () => (
       <AnimatedButton
         className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-8 md:mt-6"
         theme="primary"
-        spread={5}
+        spread={6}
         // TODO: add link to "Get Started" button
         to="#"
         isAnimated

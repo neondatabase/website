@@ -225,6 +225,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
             spread={4}
             color={formState === STATES.ERROR ? '#FF4C79' : '#00E599'}
             size="sm"
+            isLineAnimated={false}
           />
         </form>
       </div>

@@ -12,9 +12,24 @@ const spreadStyles = {
   3: 'mt-[2%] h-[130px] w-[103%]',
   4: 'mt-0 h-[130px] w-[100%]',
   5: 'mt-0 h-[123px] w-[103%]',
+  6: 'mt-[1%] h-[120px] w-[110%]',
 };
 
-const LinesIllustration = ({ className: additionalClassName, color, spread }) => {
+const highlightLineStyles = {
+  1: 'h-[150px]',
+  2: 'h-[150px]',
+  3: 'h-[150px]',
+  4: 'h-[130px]',
+  5: 'h-[130px]',
+  6: 'h-[120px]',
+};
+
+const LinesIllustration = ({
+  className: additionalClassName,
+  color,
+  spread,
+  isLineAnimated = true,
+}) => {
   const id = useId();
 
   return (
@@ -73,8 +88,21 @@ const LinesIllustration = ({ className: additionalClassName, color, spread }) =>
           </linearGradient>
         </defs>
       </svg>
-      {/* FIXME: we must take into account other animation colors for an example look at the /pricing page */}
-      <span className="button-lines-pattern absolute left-0 top-0 h-[150px] w-full before:absolute before:bottom-0 before:left-0 before:h-px before:w-full before:bg-[#00E599]" />
+      {isLineAnimated && (
+        <span
+          className={clsx(
+            'button-lines-pattern absolute left-0 top-0 w-full',
+            highlightLineStyles[spread]
+          )}
+        >
+          <span
+            className="absolute bottom-0 left-0 h-px w-full"
+            style={{
+              backgroundColor: color,
+            }}
+          />
+        </span>
+      )}
     </motion.span>
   );
 };
@@ -82,7 +110,8 @@ const LinesIllustration = ({ className: additionalClassName, color, spread }) =>
 LinesIllustration.propTypes = {
   className: PropTypes.string,
   color: PropTypes.string,
-  spread: PropTypes.oneOf([1, 2, 3, 4, 5]),
+  spread: PropTypes.oneOf(Object.keys(spreadStyles).map(Number)),
+  isLineAnimated: PropTypes.bool,
 };
 
 export default LinesIllustration;
