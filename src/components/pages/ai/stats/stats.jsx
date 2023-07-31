@@ -4,10 +4,10 @@ import Image from 'next/image';
 import Container from 'components/shared/container/container';
 import GradientLabel from 'components/shared/gradient-label';
 
-import githubBg from './images/github-bg.png';
+import githubBg from './images/github-bg.jpg';
 import github from './images/github.svg';
-import hnswBg from './images/hnsw-bg.png';
-import scaleBg from './images/scale-bg.png';
+import hnswBg from './images/hnsw-bg.jpg';
+import scaleBg from './images/scale-bg.jpg';
 
 const GitHubCard = () => (
   <div className="relative flex flex-col items-center overflow-hidden rounded-xl bg-gray-new-8 pb-[30px] pt-5 xl:pb-5 xl:pt-4 lg:py-6 sm:pb-8 sm:pt-7">
@@ -17,6 +17,7 @@ const GitHubCard = () => (
       width={287}
       height={202}
       alt=""
+      unoptimized
     />
     <img
       className="relative z-10 xl:h-[92px] xl:w-[92px] lg:h-16 lg:w-16 sm:h-[92px] sm:w-[92px]"
@@ -83,6 +84,7 @@ const HNSWCard = () => (
       width={287}
       height={236}
       alt=""
+      unoptimized
     />
     <span className="text-bg-clipped relative z-10 max-w-[127px] bg-[linear-gradient(180deg,#FFF_28.26%,#BFBFBF_100%)] text-center text-[44px] font-medium leading-[1.05] tracking-extra-tight xl:max-w-[93px] xl:text-[32px] lg:text-2xl sm:text-[28px]">
       Uses HNSW
