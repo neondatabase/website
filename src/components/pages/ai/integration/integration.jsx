@@ -40,13 +40,13 @@ const Integration = () => {
   return (
     <section className="integration safe-paddings mt-48 xl:mt-[124px] lg:mt-28 md:mt-20">
       <Container className="flex flex-col items-center" size="medium">
-        <GradientLabel>Getting Started</GradientLabel>
+        <GradientLabel>Get Started</GradientLabel>
         <h2 className="flat-breaks sm:flat-none mt-5 text-center text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:mt-3 md:text-[32px]">
           Simple to use,
           <br /> easy to scale
         </h2>
         <p className="mt-3 text-center text-lg font-light leading-snug xl:text-base md:max-w-xs">
-          Neon offers two ways to seamlessly integrate it into your product.
+          Store vector embeddings and perform similarity search.
         </p>
         <LazyMotion features={domAnimation}>
           <div className="mt-11 w-full max-w-[716px] xl:mt-10 sm:hidden" aria-hidden>
