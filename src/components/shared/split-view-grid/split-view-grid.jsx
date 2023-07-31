@@ -30,7 +30,7 @@ const SplitViewGrid = ({
             {description}
           </p>
         </div>
-        <ul className="col-start-5 col-end-11 mt-2 grid grid-cols-2 gap-x-10 gap-y-11 xl:col-start-6 xl:col-end-13 xl:-ml-8 xl:mt-1.5 xl:max-w-none xl:gap-x-1 lg:col-span-full lg:ml-0 lg:mt-10 lg:gap-x-10 lg:gap-y-10 lg:px-7 md:mt-[30px] md:grid-cols-1 md:gap-y-[30px] md:px-6">
+        <ul className="col-start-5 col-end-11 mt-2 grid grid-cols-2 gap-x-10 gap-y-11 xl:col-start-6 xl:col-end-13 xl:-ml-8 xl:mt-1.5 xl:max-w-none xl:gap-x-1 lg:col-span-full lg:ml-0 lg:mt-10 lg:gap-x-10 lg:gap-y-10 lg:px-7 md:mt-[30px] md:grid-cols-1 md:gap-y-7 md:px-6">
           {items.map(({ icon, title, description }, index) => (
             <li
               className="flex max-w-[290px] items-start gap-x-3.5 even:pr-4 xl:max-w-[248px] lg:max-w-[304px] lg:even:pr-0 md:gap-x-3"
@@ -46,7 +46,7 @@ const SplitViewGrid = ({
                 aria-hidden
               />
               <div className="flex flex-col">
-                <h3 className="text-[22px] font-medium leading-tight tracking-[-0.02em] xl:text-xl md:text-lg">
+                <h3 className="text-[22px] font-medium leading-tight tracking-[-0.02em] xl:text-xl">
                   {title}
                 </h3>
                 <p className="mt-2 font-light leading-snug text-gray-new-70">{description}</p>

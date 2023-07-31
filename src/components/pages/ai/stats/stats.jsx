@@ -116,7 +116,7 @@ const Stats = () => (
               <p className="text-[13px] uppercase leading-none tracking-wider text-gray-new-50 xl:text-xs lg:text-[10px] sm:text-[11px]">
                 Query execution time (ms) at 99% recall
               </p>
-              <div className="mt-5 flex items-center space-x-2.5 xl:mt-4 sm:mt-5">
+              <div className="mt-5 flex items-center space-x-2.5 xl:mt-4 lg:mt-3 sm:mt-5">
                 <span className="inline-block h-8 w-[18%] rounded bg-[linear-gradient(90deg,rgba(0,229,153,0.20)0%,#00E599_67.45%,#4DFFC4_93.23%)] xl:h-7 sm:h-8" />
                 <span className="text-[13px] leading-none text-gray-new-90 xl:text-xs lg:text-[10px]">
                   1.9s
