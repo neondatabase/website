@@ -15,12 +15,7 @@ const spreadStyles = {
   6: 'mt-[1%] h-[120px] w-[110%]',
 };
 
-const LinesIllustration = ({
-  className: additionalClassName,
-  color,
-  spread,
-  isLineAnimated = true,
-}) => {
+const LinesIllustration = ({ className: additionalClassName, color, spread }) => {
   const id = useId();
 
   return (
@@ -79,16 +74,15 @@ const LinesIllustration = ({
           </linearGradient>
         </defs>
       </svg>
-      {isLineAnimated && (
-        <span className="button-lines-pattern absolute left-1/2 top-0 flex h-full w-[120%] -translate-x-1/2 justify-center">
-          <span
-            className="absolute bottom-0 left-auto h-px w-full opacity-60"
-            style={{
-              background: `radial-gradient(50% 50.00% at 50% 50.00%, ${color} 0%, rgba(255, 0, 0, 0.00) 100%)`,
-            }}
-          />
-        </span>
-      )}
+
+      <span className="button-lines-pattern absolute left-1/2 top-0 flex h-full w-[120%] -translate-x-1/2 justify-center">
+        <span
+          className="absolute bottom-0 left-auto h-px w-full opacity-60"
+          style={{
+            background: `radial-gradient(50% 50.00% at 50% 50.00%, ${color} 0%, rgba(255, 0, 0, 0.00) 100%)`,
+          }}
+        />
+      </span>
     </motion.span>
   );
 };
@@ -97,7 +91,6 @@ LinesIllustration.propTypes = {
   className: PropTypes.string,
   color: PropTypes.string,
   spread: PropTypes.oneOf(Object.keys(spreadStyles).map(Number)),
-  isLineAnimated: PropTypes.bool,
 };
 
 export default LinesIllustration;
