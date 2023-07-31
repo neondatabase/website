@@ -12,7 +12,7 @@ const SliderItem = ({ text, authorName, authorTitle }) => (
     />
     <blockquote className="mt-6 lg:mt-4">
       <p
-        className="with-link-primary max-w-[796px] text-[28px] font-light leading-snug tracking-tighter lg:max-w-[584px] lg:text-2xl md:text-[23px] md:leading-tight"
+        className="with-link-primary min-h-[154px] max-w-[796px] text-[28px] font-light leading-snug tracking-tighter lg:max-w-[584px] lg:text-2xl md:text-[23px] md:leading-tight"
         dangerouslySetInnerHTML={{ __html: text }}
       />
     </blockquote>
