@@ -37,6 +37,7 @@ const AnimatedButton = ({
   theme,
   spread,
   children,
+  spreadClassName = null,
   ...otherProps
 }) => {
   const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
@@ -119,6 +120,7 @@ const AnimatedButton = ({
         color={animationColor}
         size={animationSize}
         spread={spread}
+        spreadClassName={spreadClassName}
       />
     </Tag>
   ) : (
@@ -139,6 +141,7 @@ AnimatedButton.propTypes = {
   animationColor: PropTypes.string,
   isAnimated: PropTypes.bool,
   spread: PropTypes.oneOf([1, 2, 3, 4, 5]),
+  spreadClassName: PropTypes.string,
 };
 
 export default AnimatedButton;

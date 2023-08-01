@@ -56,7 +56,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
             className={clsx(
               'group flex h-full min-h-[176px] flex-col rounded-[10px] border border-gray-new-15 xl:min-h-[165px] lg:min-h-max md:flex-row md:gap-x-3',
               isLarge
-                ? 'p-5 xl:pb-4 lg:p-4 lg:pb-5 md:pb-5 sm:flex-col sm:space-y-3'
+                ? 'p-5 xl:pb-4 lg:p-4 lg:pb-5 md:flex-col md:p-5 md:pb-6 sm:space-y-3'
                 : 'px-5 pb-4 pt-5 xl:p-3.5 lg:p-4'
             )}
             to={url}
@@ -84,18 +84,18 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
                 'flex h-full flex-col'
               )}
             >
-              <h4
+              <h3
                 className={clsx(
                   'text-xl leading-tight tracking-[-0.02em]',
                   isLarge ? '' : 'xl:text-lg'
                 )}
               >
                 {title}
-              </h4>
+              </h3>
               <p
                 className={clsx(
                   'mt-1.5 text-[15px] font-light leading-tight text-gray-new-70',
-                  isLarge ? 'mb-9 lg:mb-6 lg:mt-1.5 md:mb-3 md:mt-1' : 'md:mt-2.5'
+                  isLarge ? 'mb-9 lg:mb-6 lg:mt-1.5 md:mb-3.5 md:mt-1' : 'md:mt-2.5'
                 )}
               >
                 {description}
@@ -113,8 +113,8 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
           <LazyMotion features={domAnimation}>
             <m.span
               className={clsx(
-                'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border transition-colors duration-300 md:border-green-45 md:!opacity-100',
-                isLoad !== true && '!opacity-100',
+                'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border transition-colors duration-300 md:border-transparent md:opacity-100',
+                isLoad !== true && 'opacity-100',
                 activeItemIndex === index ? 'border-green-45' : 'border-transparent'
               )}
               initial="from"

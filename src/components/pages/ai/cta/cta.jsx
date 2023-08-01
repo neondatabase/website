@@ -26,6 +26,7 @@ const CTA = () => (
         <div className="mt-9 flex items-center gap-x-8 xl:mt-7 lg:gap-x-4 md:justify-center sm:mt-6 sm:flex-col sm:gap-y-5">
           <AnimatedButton
             className="inline-flex px-14 py-5 text-lg tracking-extra-tight hover:bg-[#00FFAA] xl:px-10 xl:py-[17px] lg:px-9 lg:text-base sm:px-14 sm:text-lg"
+            spreadClassName="sm:h-[105px]"
             theme="primary"
             to={LINKS.contactSales}
             animationSize="sm"

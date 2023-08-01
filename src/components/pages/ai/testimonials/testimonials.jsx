@@ -1,8 +1,8 @@
 'use client';
 
 import clsx from 'clsx';
-import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import SliderItem from 'components/pages/ai/testimonials/slider-item';
@@ -11,17 +11,17 @@ import Container from 'components/shared/container/container';
 // TODO: add links to original tweets?
 const sliderItems = [
   {
-    text: 'What if PGVector was on steroids ?! <a href="https://twitter.com/raoufdevrel" target="_blank">@raoufdevrel</a> from <a href="https://twitter.com/neondatabase" target="_blank">@neondatabase</a> just did that with pg_embedding and made it available through <a href="https://twitter.com/LangChainAI" target="_blank">@LangChainAI</a>. I&apos;ll definitely give it a try on <a href="https://twitter.com/quivr_brain" target="_blank">@quivr_brain</a> and our 10GB of vectors that use PGVector',
+    text: 'What if PGVector was on steroids ?! <a href="https://twitter.com/raoufdevrel" target="_blank" rel="noreferrer noopener">@raoufdevrel</a> from <a href="https://twitter.com/neondatabase" target="_blank" rel="noreferrer noopener">@neondatabase</a> just did that with pg_embedding and made it available through <a href="https://twitter.com/LangChainAI" target="_blank" rel="noreferrer noopener">@LangChainAI</a>. I&apos;ll definitely give it a try on <a href="https://twitter.com/quivr_brain" target="_blank" rel="noreferrer noopener">@quivr_brain</a> and our 10GB of vectors that use PGVector',
     authorName: 'Stan Girard',
     authorTitle: 'Founder, Quivr',
   },
   {
-    text: '<a href="https://twitter.com/postgresql" target="_blank">@PostgreSQL</a> is popular database choice. Excited to share a new extension from <a href="https://twitter.com/neondatabase" target="_blank">@neondatabase</a> to help you use it for embeddings as well (with HNSW)!',
+    text: '<a href="https://twitter.com/postgresql" target="_blank" rel="noreferrer noopener">@PostgreSQL</a> is popular database choice. Excited to share a new extension from <a href="https://twitter.com/neondatabase" target="_blank" rel="noreferrer noopener">@neondatabase</a> to help you use it for embeddings as well (with HNSW)!',
     authorName: 'Harrison Chase',
     authorTitle: 'Co-Founder and CEO, LangChainAI',
   },
   {
-    text: '<a href="https://twitter.com/postgresql" target="_blank">@PostgreSQL</a> is popular database choice. Excited to share a new extension from <a href="https://twitter.com/neondatabase" target="_blank">@neondatabase</a> to help you use it for embeddings as well (with HNSW)!',
+    text: '<a href="https://twitter.com/postgresql" target="_blank" rel="noreferrer noopener">@PostgreSQL</a> is popular database choice. Excited to share a new extension from <a href="https://twitter.com/neondatabase" target="_blank" rel="noreferrer noopener">@neondatabase</a> to help you use it for embeddings as well (with HNSW)!',
     authorName: 'Harrison Chase',
     authorTitle: 'Co-Founder and CEO, LangChainAI',
   },
@@ -30,10 +30,10 @@ const sliderItems = [
 const SLIDER_DURATION_IN_MS = 5000;
 
 const sliderItemsAnimationProps = {
-  initial: {
+  initial: (direction) => ({
     opacity: 0,
-    translateX: 20,
-  },
+    translateX: direction === 'right' ? 20 : -20,
+  }),
   animate: {
     opacity: 1,
     translateX: 0,
@@ -48,6 +48,7 @@ const sliderItemsAnimationProps = {
 const Testimonials = () => {
   const [sliderRef, isSliderInView] = useInView();
   const [activeSliderItemIndex, setActiveSliderItemIndex] = useState(0);
+  const [direction, setDirection] = useState('right');
 
   useEffect(() => {
     let timeout = null;
@@ -57,6 +58,7 @@ const Testimonials = () => {
         setActiveSliderItemIndex(
           (activeSliderItemIndex) => (activeSliderItemIndex + 1) % sliderItems.length
         );
+        setDirection('right');
       }, SLIDER_DURATION_IN_MS);
     } else {
       clearTimeout(timeout);
@@ -71,21 +73,35 @@ const Testimonials = () => {
       ref={sliderRef}
     >
       <Container className="flex flex-col items-center text-center" size="xs">
-        <LazyMotion features={domAnimation}>
-          <AnimatePresence initial={false} mode="wait">
-            {sliderItems.map((item, index) =>
-              index === activeSliderItemIndex ? (
-                <m.div
-                  className="flex items-center space-x-[18px]"
-                  key={index}
-                  {...sliderItemsAnimationProps}
-                >
-                  <SliderItem {...item} />
-                </m.div>
-              ) : null
-            )}
-          </AnimatePresence>
-        </LazyMotion>
+        <AnimatePresence initial={false} mode="wait">
+          {sliderItems.map((item, index) =>
+            index === activeSliderItemIndex ? (
+              <motion.div
+                className="flex items-center space-x-[18px]"
+                key={index}
+                custom={direction}
+                {...sliderItemsAnimationProps}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={1}
+                onDragEnd={(event, info) => {
+                  if (info.offset.x > 0) {
+                    setActiveSliderItemIndex(
+                      (itemIndex) => (itemIndex + sliderItems.length - 1) % sliderItems.length
+                    );
+                    setDirection('left');
+                  } else {
+                    setActiveSliderItemIndex((itemIndex) => (itemIndex + 1) % sliderItems.length);
+                    setDirection('right');
+                  }
+                }}
+              >
+                <SliderItem {...item} />
+              </motion.div>
+            ) : null
+          )}
+        </AnimatePresence>
+
         <div className="mt-7 flex items-center justify-between xl:mt-5 lg:mt-4 md:mt-3 md:flex-col md:items-center">
           <ul className="flex space-x-2.5">
             {sliderItems.map((_, index) => (
