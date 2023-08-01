@@ -21,9 +21,9 @@ If you are currently using `pgvector` and want to try `pg_embedding`, refer to [
 
 `pgvector` is an open-source extension that enables storing vector embeddings and exact and approximate nearest neighbor search in Postgres. It supports `ivfflat` indexes. To get started, see [The pgvector extension](/docs/extensions/pgvector).
 
-## Example applications
+## Example AI applications
 
-Check out the following AI application examples to start building your AI application with PostgreSQL as your vector database.
+Check out the following AI application examples to start building your AI application with Neon.
 
 - [Semantic search app](https://github.com/neondatabase/ai-sematic-search)
   
@@ -37,3 +37,10 @@ Check out the following AI application examples to start building your AI applic
 
   This example application demonstrates how to use word embeddings and PostgreSQL with `pgvector` to build a chatbot. The chatbot is implemented using Vercel Edge Functions and the `@neondatabase/serverless` driver. It relies on OpenAI's GPT-3 API to generate responses. Read the accompanying blog post: [Building an AI-powered ChatBot using Vercel, OpenAI, and Postgres](https://neon.tech/blog/building-an-ai-powered-chatbot-using-vercel-openai-and-postgres).
 
+- [Vercel Postgres pgvector Starter](https://vercel.com/templates/next.js/postgres-pgvector)
+
+  A Next.js template that uses Vercel Postgres (powered by Neon) as the database, Prisma as the ORM with `pgvector` to enable vector similarity search, and OpenAI's `text-embedding-ada-002` model for embeddings.
+
+- [Web-based AI SQL Playground](https://github.com/neondatabase/postgres-ai-playground)
+
+  This application demonstrates how to build an SQL playground for Postgres where you can use AI to generate queries using natural language. Read the accompanying blog post: [Web-based AI SQL Playground and connecting to Postgres from the browser](https://neon.tech/blog/postgres-ai-playground). You can tryf the app here: [Postgres AI Playground](https://postgres-ai-playground.vercel.app/).
