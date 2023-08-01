@@ -14,7 +14,12 @@ const spreadStyles = {
   5: 'mt-0 h-[123px] w-[103%]',
 };
 
-const LinesIllustration = ({ className: additionalClassName, color, spread }) => {
+const LinesIllustration = ({
+  className: additionalClassName,
+  color,
+  spread,
+  spreadClassName = null,
+}) => {
   const id = useId();
 
   return (
@@ -29,7 +34,7 @@ const LinesIllustration = ({ className: additionalClassName, color, spread }) =>
         aria-hidden
       >
         <svg
-          className={clsx('ml-[50%] -translate-x-1/2', spreadStyles[spread])}
+          className={clsx('ml-[50%] -translate-x-1/2', spreadStyles[spread], spreadClassName)}
           width="300"
           height="150"
           viewBox="0 0 300 150"
@@ -95,6 +100,7 @@ LinesIllustration.propTypes = {
   className: PropTypes.string,
   color: PropTypes.string,
   spread: PropTypes.oneOf(Object.keys(spreadStyles).map(Number)),
+  spreadClassName: PropTypes.string,
 };
 
 export default LinesIllustration;
