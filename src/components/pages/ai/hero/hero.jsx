@@ -36,7 +36,7 @@ const Hero = () => {
           Powering next gen
           <br /> AI apps with Postgres
         </h1>
-        <p className="mt-5 max-w-[550px] text-[21px] font-light leading-snug tracking-extra-tight xl:max-w-[500px] xl:text-lg lg:mt-4 md:mt-2.5 sm:max-w-[450px]">
+        <p className="mt-5 max-w-[550px] text-xl font-light leading-snug tracking-extra-tight xl:max-w-[500px] xl:text-lg lg:mt-4 md:mt-2.5 sm:max-w-[450px]">
           Build and scale transformative LLM application with Postgres using pgvector and
           pg_embedding
         </p>
