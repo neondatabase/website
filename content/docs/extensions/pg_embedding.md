@@ -4,7 +4,11 @@ subtitle: Use Neon's pg_embedding extension with Hierarchical Navigable Small Wo
 enableTableOfContents: true
 ---
 
-TThe `pg_embedding` extension enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
+The `pg_embedding` extension enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
+
+<Admonition type="important">
+The `pg_embedding` extension version in Neon was updated on August 2, 2023, to add support for on-disk index creation and additional distance metrics. If you installed `pg_embedding` before this date, please upgrade to the new version. See [Upgrade to pg_embedding with on-disk indexes]() for instructions.
+</Admonition>
 
 This extension is based on [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw) implementation of HNSW
 the code for the current state-of-the-art billion-scale nearest neighbor search system<sup>[[1]](#references)</sup>.
@@ -177,6 +181,58 @@ Ultimately, the choice between the `pgvector` with IVFFlat or `pg_embedding` wit
 ## pg_embedding extension GitHub repository
 
 The GitHub repository for the Neon `pg_embedding` extension can be found [here](https://github.com/neondatabase/pg_embedding).
+
+## Upgrade to pg_embedding with on-disk indexes
+
+The `pg_embedding` extension version in Neon was updated on August 2, 2023, to add support for on-disk index creation and additional distance metrics. If you installed `pg_embedding` before this date, please upgrade to the new version following the instructions below.
+
+Previously, an HNSW indexes were created in memory. Also, in addition to Euclidean (L2) distance, the new version of `pg_embedding` supports Cosine and Manhattan distance metrics.
+
+Upgrading to the new version of `pg_embedding` requires dropping the extension with existing HNSW indexes, releasing memory held by HNSW indexes, reinstalling the `pg_embedding` extension, and re-creating your HNSW indexes.
+
+1. Drop the extension and existing HNSW indexes:
+
+    ```sql
+    DROP EXTENSION embedding CASCADE;
+    ```
+
+2. Restart your compute to release the memory held by your in-memory HNSW indexes. You can do this by running the following suspend and start compute API commands. The command requires your project_id and compute endpoint_id. You can obtain these details from the Neon Console. You can find your project ID on the **Settings** page. A generated project_id looks something like this: `late-math-90765381`. You can find your compute `endpoint_id` on the Bzranches page. An endpoint_id has an `ep` prefix and looks something like this: `ep-cold-bird-55112793`.
+
+    Suspend:
+
+    ```curl
+    curl --request POST \
+        --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id>/suspend \
+        --header 'accept: application/json'
+    ```
+
+    Start:
+
+    ```curl
+    curl --request POST \
+        --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id>/start \
+        --header 'accept: application/json'
+    ```
+
+3. Reinstall the `pg_embedding extension:
+
+    ```sql
+    CREATE EXTENSION embedding;
+    ```
+
+    You can verify that you have the new version of ther pg_embedding extension install by running the following query. The version should be 0.3.1 or higher.
+
+    ```sql
+    SELECT extversion from pg_extension WHERE extname LIKE 'embedding';
+    ```
+
+4. Recreate your HNSW indexes. The following syntax creates an HNSW index for Euclidean (L2) distance searches.
+
+    ```sql
+    CREATE INDEX ON documents USING disk_hnsw(embedding) WITH (dims=3, m=3);
+    ```
+
+Please note that index creation syntax has canged from `USING hnsw` to `USING disk_hnsw`. Also, the `maxelements` parameter is no longer required or supported. For information about creating index for Cosine and Manhattan distance metrics, see [Create an HNSW index](/docs/extensions/pg_embedding).
 
 ## Further reading
 
