@@ -177,54 +177,22 @@
               slug: guides/vercel-manual
     - title: OAuth
       slug: guides/oauth-integration
-- title: AI integration
+- title: AI & embeddings
   items:
     - title: Introduction
       slug: ai/ai-intro
-    - title: Vector search in PostgreSQL
-      items:
-        - title: Choosing a vector search extension
-          slug: ai/choose-search-extension
-        - title: Vector search with pg-embedding
-          slug: ai/vector-search-with-pg-embedding
-        - title: Vector search with pg-vector
-          slug: ai/vector-search-with-pg-vector
-        - title: Migrating from pg-vector to pg-embedding
-          slug: ai/migrating-from-pg-vector-to-pg-embedding
-    - title: Examples
-      items:
-        - title: Building a ChatGPT plugin
-          slug: ai/building-a-chatgpt-plugin
-        - title: Building an AI chatbot
-          slug: ai/building-an-ai-chatbot
-        - title: Building a Web-based AI SQL Playground
-          slug: ai/building-a-web-based-ai-sql-playground
-    - title: AI models
-      items:
-        - title: OpenAI
-          slug: ai/openai
-        - title: Llama 2
-          slug: ai/llama-2
-    - title: AI tools
-      items:
-        - title: LangChain
-          slug: ai/langchain
-        - title: Hugging Face
-          slug: ai/hugging-face
-        - title: Google Colab
-          slug: ai/google-colab
-        - title: LiamaIndex
-          slug: ai/liama-index
+    - title: Vector search with pg-embedding
+      slug: extensions/pg_embedding
+    - title: Vector search with pg-vector
+      slug: extensions/pgvector
+    - title: Migrating from pg-vector to pg-embedding
+      slug: ai/migrating-from-pg-vector-to-pg-embedding
 - title: Extensions
   items:
     - title: Supported extensions
       slug: extensions/pg-extensions
-    - title: pg_embedding
-      slug: extensions/pg_embedding
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
-    - title: pgvector
-      slug: extensions/pgvector
 - title: Import data
   items:
     - title: Import from PostgreSQL
