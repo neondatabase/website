@@ -37,7 +37,7 @@ const Examples = () => (
   <section className="safe-paddings mt-40 bg-black-new xl:mt-[120px] lg:mt-28 md:mt-20">
     <Container size="medium" className="grid grid-cols-12 gap-x-10 xl:gap-x-6 md:gap-x-4">
       <div className="col-span-10 col-start-2 flex flex-col items-center xl:col-span-full xl:col-start-1">
-        <GradientLabel>Example apps</GradientLabel>
+        <GradientLabel>Example Apps</GradientLabel>
         <Heading
           className="flat-breaks md:flat-none mt-3 text-center text-[52px] font-medium leading-none tracking-extra-tight xl:mt-4 xl:text-[44px] lg:text-4xl md:mt-3 md:max-w-xs md:text-[32px]"
           tag="h2"

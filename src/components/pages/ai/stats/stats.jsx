@@ -12,7 +12,7 @@ import scaleBg from './images/scale-bg.jpg';
 const GitHubCard = () => (
   <div className="relative flex flex-col items-center overflow-hidden rounded-xl bg-gray-new-8 pb-[30px] pt-5 xl:pb-5 xl:pt-4 lg:py-6 sm:pb-8 sm:pt-7">
     <Image
-      className="absolute left-1/2 top-1/2 h-full w-auto -translate-x-1/2 -translate-y-1/2 rounded-xl sm:w-full sm:object-cover"
+      className="absolute inset-0 h-full w-full rounded-xl object-cover"
       src={githubBg}
       width={287}
       height={202}
