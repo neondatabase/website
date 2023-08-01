@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
-import AnimatedButton from 'components/shared/animated-button';
+import Button from 'components/shared/button/button';
 import Container from 'components/shared/container/container';
 
 const MOBILE_WIDTH = 768;
@@ -32,44 +32,52 @@ const Hero = () => {
         className="container relative z-10 flex flex-col items-center text-center"
         size="medium"
       >
-        <h1 className="md:flat-breaks max-w-[967px] text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:max-w-[550px] md:text-4xl">
-          Powering next gen <br /> AI apps with Postgres
+        <h1 className="xs:flat-breaks text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl">
+          Powering next gen
+          <br /> AI apps with Postgres
         </h1>
-        <p className="md:flat-breaks mt-5 max-w-[716px] text-[21px] font-light leading-snug tracking-extra-tight xl:text-lg lg:mt-4 md:mt-2.5 md:max-w-[500px]">
-          Build and scale transformative LLM application with Postgres
-          <br /> using pgvector and pg_embedding
+        <p className="mt-5 max-w-[550px] text-[21px] font-light leading-snug tracking-extra-tight xl:max-w-[500px] xl:text-lg lg:mt-4 md:mt-2.5 sm:max-w-[450px]">
+          Build and scale transformative LLM application with Postgres using pgvector and
+          pg_embedding
         </p>
-        <AnimatedButton
+        <Button
           className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-8 md:mt-6"
           theme="primary"
-          spread={6}
           // TODO: add link to "Get Started" button
           to="#"
-          isAnimated
         >
           Get Started
-        </AnimatedButton>
+        </Button>
       </Container>
-
-      {width < MOBILE_WIDTH ? (
-        <Image
-          className="mx-auto mt-8"
-          src="/images/pages/ai/hero-sphere-md.png"
+      <div className="md:relative">
+        <img
+          className="mx-auto mt-8 hidden md:block"
+          src={`data:image/svg+xml;charset=utf-8,%3Csvg width='310' height='330' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+          alt=""
           width={310}
           height={330}
-          alt=""
           aria-hidden
-          priority
         />
-      ) : (
-        <div className="absolute left-0 top-0 h-[1207px] w-full" ref={animationVisibilityRef}>
-          <Spline
-            className="absolute bottom-9 left-0 h-full w-full xl:bottom-[7%] lg:bottom-[15%]"
-            scene="/animations/pages/ai/scene.splinecode"
-            onLoad={(spline) => setSpline(spline)}
+        {width < MOBILE_WIDTH ? (
+          <Image
+            className="absolute left-1/2 top-0 hidden -translate-x-1/2 md:block"
+            src="/images/pages/ai/hero-sphere-md.png"
+            width={310}
+            height={330}
+            alt=""
+            aria-hidden
+            priority
           />
-        </div>
-      )}
+        ) : (
+          <div className="absolute left-0 top-0 h-[1207px] w-full" ref={animationVisibilityRef}>
+            <Spline
+              className="absolute bottom-9 left-0 h-full w-full xl:bottom-[7%] lg:bottom-[15%]"
+              scene="/animations/pages/ai/scene.splinecode"
+              onLoad={(spline) => setSpline(spline)}
+            />
+          </div>
+        )}
+      </div>
     </section>
   );
 };

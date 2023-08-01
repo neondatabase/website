@@ -131,22 +131,3 @@
   animation: lineAnimation 5s linear infinite;
   animation-timing-function: steps(75);
 }
-
-.button-lines-pattern {
-  mask-image: url('/images/button-lines-pattern-mask.svg');
-  mask-size: cover;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  background: repeating-linear-gradient(
-    0deg,
-    #0c0d0d,
-    #0c0d0d 1px,
-    transparent 1px,
-    transparent 2px
-  );
-
-  > span {
-    animation: lineAnimation 5s linear infinite;
-    animation-timing-function: steps(75);
-  }
-}
