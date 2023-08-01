@@ -1,6 +1,7 @@
 'use client';
 
 import Spline from '@splinetool/react-spline';
+import clsx from 'clsx';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -8,12 +9,15 @@ import useWindowSize from 'react-use/lib/useWindowSize';
 
 import Button from 'components/shared/button/button';
 import Container from 'components/shared/container/container';
+import useIsTouchDevice from 'hooks/use-is-touch-device';
 
 const MOBILE_WIDTH = 768;
 
 const Hero = () => {
   const [isClient, setIsClient] = useState(false);
+  const isTouch = useIsTouchDevice();
   const { width } = useWindowSize();
+
   const [spline, setSpline] = useState(null);
   const [animationVisibilityRef, isInView] = useInView();
   const [isAnimationStarted, setIsAnimationStarted] = useState(false);
@@ -50,7 +54,12 @@ const Hero = () => {
     isClient && width >= MOBILE_WIDTH ? (
       <div className="absolute left-0 top-0 h-[1207px] w-full" ref={animationVisibilityRef}>
         <Spline
-          className="absolute bottom-9 left-0 h-full w-full xl:bottom-[9.5%] lg:bottom-[19%] [@media(max-width:1024px)]:pointer-events-none"
+          className={clsx(
+            'absolute bottom-9 left-0 h-full w-full xl:bottom-[9.5%] lg:bottom-[19%]',
+            {
+              'pointer-events-none': isTouch,
+            }
+          )}
           scene="/animations/pages/ai/scene.splinecode"
           onLoad={(spline) => setSpline(spline)}
         />
