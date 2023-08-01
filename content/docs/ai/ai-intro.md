@@ -13,11 +13,13 @@ By enabling Postgres as a vector database, you can keep your data where it is. T
 
 ## pg_embedding
 
-`pg_embedding` is an open-source extension that enables storing vector embeddings and graph-based exact and approximate nearest neighbor search in Postgres using the Hierarchical Navigable Small World (HNSW) algorithm. It supports HNSW indexes, which unlock new levels of efficiency in high-dimensional similarity search compared in `ivfflat` indexes, enabling you to scale your AI applications to millions of rows.
+`pg_embedding` is an open-source extension that enables storing vector embeddings and graph-based exact and approximate nearest neighbor search in Postgres using the Hierarchical Navigable Small World (HNSW) algorithm. It supports HNSW indexes, which unlock new levels of efficiency in high-dimensional similarity search compared in `ivfflat` indexes, enabling you to scale your AI applications to millions of rows. To get started, see [The pg_embedding extension](/docs/extensions/pg_embedding).
+
+If you are currently using `pgvector` and want to try `pg_embedding`, refer to [Migrating to `pg_embedding`](tbd).
 
 ## pgvector
 
-`pgvector` is an open-source extension that enables storing vector embeddings and exact and approximate nearest neighbor search in Postgres. It supports `ivfflat` indexes.
+`pgvector` is an open-source extension that enables storing vector embeddings and exact and approximate nearest neighbor search in Postgres. It supports `ivfflat` indexes. To get started, see [The pgvector extension](/docs/extensions/pgvector).
 
 ## Example applications
 
