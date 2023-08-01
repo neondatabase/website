@@ -15,16 +15,29 @@ const Hero = () => {
   const { width } = useWindowSize();
   const [spline, setSpline] = useState(null);
   const [animationVisibilityRef, isInView] = useInView();
+  const [isAnimationStarted, setIsAnimationStarted] = useState(false);
 
   useEffect(() => {
     if (!spline) return;
+
+    // launching events that start playing the intro animation
+    if (!isAnimationStarted || spline.time < 10000) {
+      const { keyUp } = spline.getSplineEvents();
+
+      Object.keys(keyUp).forEach((key) => {
+        spline.emitEvent('keyUp', key);
+      });
+
+      setIsAnimationStarted(true);
+      return;
+    }
 
     if (isInView) {
       spline.play();
     } else {
       spline.stop();
     }
-  }, [isInView, spline]);
+  }, [isInView, spline, isAnimationStarted]);
 
   return (
     <section className="hero safe-paddings relative pb-[390px] pt-36 xl:pt-[120px] lg:pt-11 md:pb-0 md:pt-8">
@@ -65,7 +78,7 @@ const Hero = () => {
         <div className="absolute left-0 top-0 h-[1207px] w-full" ref={animationVisibilityRef}>
           <Spline
             className="absolute bottom-9 left-0 h-full w-full xl:bottom-[7%] lg:bottom-[15%]"
-            scene="/animations/pages/ai/scene.splinecode"
+            scene="https://prod.spline.design/OWzWlwZVhT5bXdnn/scene.splinecode"
             onLoad={(spline) => setSpline(spline)}
           />
         </div>
