@@ -12,7 +12,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
   const isLarge = size === 'lg';
   const [isLoad, setIsLoad] = useState(false);
   const [hoverCount, setHoverCount] = useState(0);
-  const [activeItemIndex, setActiveItemIndex] = useState(1);
+  const [activeItemIndex, setActiveItemIndex] = useState(null);
   const controls = useAnimation();
 
   const borderLightVariants = useMemo(
@@ -66,6 +66,11 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
               setActiveItemIndex(index);
               setHoverCount((prev) => (prev === 1 ? 0 : prev + 1));
               controls.start('to');
+            }}
+            onPointerLeave={() => {
+              setActiveItemIndex(null);
+              setHoverCount(0);
+              controls.start('exit');
             }}
           >
             <img
