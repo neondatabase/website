@@ -161,7 +161,6 @@ const Integration = () => {
                 <div className="dark border-t border-gray-new-15 py-3 pl-4 pr-2">
                   <CodeBlock
                     className="code-block text-[15px] sm:text-[13px]"
-                    copyButtonClassName="!-top-2"
                     language="sql"
                     isTrimmed={false}
                     showLineNumbers

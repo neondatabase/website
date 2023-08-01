@@ -33,7 +33,7 @@ const SplitViewGrid = ({
         <ul className="col-start-5 col-end-11 mt-2 grid grid-cols-2 gap-x-10 gap-y-11 xl:col-start-6 xl:col-end-13 xl:-ml-8 xl:mt-1.5 xl:max-w-none xl:gap-x-1 lg:col-span-full lg:ml-0 lg:mt-10 lg:gap-x-10 lg:gap-y-10 lg:px-7 md:mt-[30px] md:grid-cols-1 md:gap-y-7 md:px-6">
           {items.map(({ icon, title, description }, index) => (
             <li
-              className="flex max-w-[290px] items-start gap-x-3.5 even:pr-4 xl:max-w-[248px] lg:max-w-[304px] lg:even:pr-0 md:gap-x-3"
+              className="flex max-w-[290px] items-start gap-x-3.5 even:pr-4 xl:max-w-[248px] lg:max-w-[304px] lg:even:pr-0 md:max-w-none md:gap-x-3"
               key={index}
             >
               <img
