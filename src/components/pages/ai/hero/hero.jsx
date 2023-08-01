@@ -50,7 +50,7 @@ const Hero = () => {
     isClient && width >= MOBILE_WIDTH ? (
       <div className="absolute left-0 top-0 h-[1207px] w-full" ref={animationVisibilityRef}>
         <Spline
-          className="absolute bottom-9 left-0 h-full w-full xl:bottom-[9.5%] lg:bottom-[19%] md:pointer-events-none"
+          className="absolute bottom-9 left-0 h-full w-full xl:bottom-[9.5%] lg:bottom-[19%] [@media(max-width:1023px)]:pointer-events-none"
           scene="/animations/pages/ai/scene.splinecode"
           onLoad={(spline) => setSpline(spline)}
         />
