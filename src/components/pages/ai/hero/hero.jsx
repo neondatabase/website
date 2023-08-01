@@ -85,7 +85,7 @@ const Hero = () => {
         ) : (
           <div className="absolute left-0 top-0 h-[1207px] w-full" ref={animationVisibilityRef}>
             <Spline
-              className="absolute bottom-9 left-0 h-full w-full xl:bottom-[9.5%] lg:bottom-[19%]"
+              className="absolute bottom-9 left-0 h-full w-full xl:bottom-[9.5%] lg:pointer-events-none lg:bottom-[19%]"
               scene="/animations/pages/ai/scene.splinecode"
               onLoad={(spline) => setSpline(spline)}
             />
