@@ -144,7 +144,7 @@ When determining which index to use, `pgvector` with an IVFFlat index or `pg_emb
 | Accuracy          | Can achieve high accuracy but at the cost of examining more clusters and  longer search times. | Generally achieves higher accuracy for the same memory footprint compared to IVFFlat. |
 | Memory Usage      | Uses less memory since it only stores the centroids of clusters and the lists of vectors within these clusters. | HNSW indexes are built in memory. They require more memory than IVFFlat because they build a graph structure with multiple layers. |
 | Index Construction Speed | Index building process is relatively fast. The data points are assigned to the nearest centroid, and inverted lists are constructed. | Index construction involves building multiple layers of graphs, which can be computationally intensive, especially for a high `ef_construction` value. In Neon, if a compute suspends, an HNSW index is rebuilt on the next access. |
-| Distance Metrics  | Typically used for L2 distances, but `pgvector` also supports inner product and cosine distance. | Currently supports L2 distance. |
+| Distance Metrics  | Typically used for L2 distances, but `pgvector` also supports inner product and cosine distance. | Currently supports L2, Cosine, and Manhattan distance metrics. |
 
 Ultimately, the choice between the `pgvector` with IVFFlat or `pg_embedding` with HNSW depends on your use case and requirements. Here are a few additional points to consider when making your choice:
 
