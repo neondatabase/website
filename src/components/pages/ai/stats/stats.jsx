@@ -43,7 +43,7 @@ const ScaleCard = ({ className, ...props }) => (
     {...props}
   >
     <Image
-      className="absolute inset-0 rounded-xl object-cover sm:h-full sm:w-full"
+      className="absolute inset-0 h-full w-full rounded-xl object-cover"
       src={scaleBg}
       width={287}
       height={257}
