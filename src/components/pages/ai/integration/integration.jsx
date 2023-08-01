@@ -95,7 +95,7 @@ const Integration = () => {
                 {
                   'rounded-r-md': activeTab === 0,
                   'rounded-l-md': activeTab === items.length - 1,
-                  'rounded-md': activeTab !== 0 && activeTab !== items.length - 1,
+                  'rounded-md': activeTab !== 0,
                 }
               )}
             >

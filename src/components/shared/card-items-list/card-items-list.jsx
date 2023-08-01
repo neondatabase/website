@@ -113,8 +113,8 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
           <LazyMotion features={domAnimation}>
             <m.span
               className={clsx(
-                'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border transition-colors duration-300 md:border-green-45 md:!opacity-100',
-                isLoad !== true && '!opacity-100',
+                'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border transition-colors duration-300 md:border-transparent md:opacity-100',
+                isLoad !== true && 'opacity-100',
                 activeItemIndex === index ? 'border-green-45' : 'border-transparent'
               )}
               initial="from"
