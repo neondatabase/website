@@ -20,11 +20,6 @@ const sliderItems = [
     authorName: 'Harrison Chase',
     authorTitle: 'Co-Founder and CEO, LangChainAI',
   },
-  {
-    text: '<a href="https://twitter.com/postgresql" target="_blank" rel="noreferrer noopener">@PostgreSQL</a> is popular database choice. Excited to share a new extension from <a href="https://twitter.com/neondatabase" target="_blank" rel="noreferrer noopener">@neondatabase</a> to help you use it for embeddings as well (with HNSW)!',
-    authorName: 'Harrison Chase',
-    authorTitle: 'Co-Founder and CEO, LangChainAI',
-  },
 ];
 
 const SLIDER_DURATION_IN_MS = 5000;
