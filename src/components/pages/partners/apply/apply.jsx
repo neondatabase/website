@@ -47,8 +47,9 @@ const Apply = () => (
             Not sure about the right partnership option?
             <br />
             <Link
-              className="inline-block leading-tight text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[6px] transition-colors hover:decoration-transparent"
+              className="inline-block leading-tight decoration-1 underline-offset-[6px]"
               to={LINKS.contactSales}
+              theme="green-underlined"
             >
               Contact us
             </Link>{' '}

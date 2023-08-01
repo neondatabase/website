@@ -29,7 +29,9 @@ const styles = {
     'underline-primary-1':
       'text-primary-1 border-b-2 border-primary-1 transition-colors duration-200 hover:border-transparent',
     blue: 'text-blue-80 transition-colors duration-200 hover:text-[#C6EAF1]',
-    green: 'text-green-45 transition-colors duration-200 hover:text-primary-2',
+    green: 'text-green-45 transition-colors duration-200 hover:text-[#00FFAA]',
+    'green-underlined':
+      'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
   },
 };
 

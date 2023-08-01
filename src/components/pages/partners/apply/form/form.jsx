@@ -275,15 +275,17 @@ const Form = ({ className }) => {
         <p className="-mt-3 text-[15px] font-light leading-tight lg:max-w-[450px] lg:flex-1 md:mt-0">
           By submitting, you agree to the{' '}
           <Link
-            className="leading-tight text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors duration-200 hover:decoration-transparent"
+            className="leading-tight decoration-1 underline-offset-[3px]"
             to={LINKS.termsOfService}
+            theme="green-underlined"
           >
             Terms of Service
           </Link>{' '}
           and acknowledge the{' '}
           <Link
-            className="inline-block leading-tight text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors hover:decoration-transparent"
+            className="inline-block leading-tight decoration-1 underline-offset-[3px]"
             to={LINKS.privacyPolicy}
+            theme="green-underlined"
           >
             Privacy Policy
           </Link>

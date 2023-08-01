@@ -37,9 +37,11 @@ const CTA = () => (
             Contact Sales
           </AnimatedButton>
           <Link
-            className="tracking-extra-tight underline decoration-green-45/40 underline-offset-[5px] hover:decoration-transparent"
-            theme="green"
+            className="tracking-extra-tight underline-offset-[5px]"
+            theme="green-underlined"
             to="https://github.com/neondatabase/pg_embedding"
+            target="_blank"
+            rel="noopener noreferrer"
             size="sm"
           >
             Learn more on GitHub
