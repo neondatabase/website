@@ -51,7 +51,7 @@ const Hero = () => {
       </Container>
       <div className="md:relative">
         <img
-          className="mx-auto mt-8 hidden md:block"
+          className="mx-auto -mt-3 hidden md:block"
           src={`data:image/svg+xml;charset=utf-8,%3Csvg width='310' height='330' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
           alt=""
           width={310}
@@ -71,7 +71,7 @@ const Hero = () => {
         ) : (
           <div className="absolute left-0 top-0 h-[1207px] w-full" ref={animationVisibilityRef}>
             <Spline
-              className="absolute bottom-9 left-0 h-full w-full xl:bottom-[7%] lg:bottom-[15%]"
+              className="absolute bottom-9 left-0 h-full w-full xl:bottom-[9.5%] lg:bottom-[19%]"
               scene="/animations/pages/ai/scene.splinecode"
               onLoad={(spline) => setSpline(spline)}
             />

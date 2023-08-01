@@ -42,7 +42,13 @@ const ScaleCard = ({ className, ...props }) => (
     )}
     {...props}
   >
-    <Image className="absolute inset-0 rounded-xl" src={scaleBg} width={287} height={257} alt="" />
+    <Image
+      className="absolute inset-0 rounded-xl object-cover sm:h-full sm:w-full"
+      src={scaleBg}
+      width={287}
+      height={257}
+      alt=""
+    />
     <div className="relative z-10 flex flex-col items-center justify-center">
       <span className="text-2xl leading-none xl:text-lg lg:text-base">Scales to</span>
       <span className="mt-2 text-[112px] font-semibold leading-none tracking-[-0.08em] text-green-45 xl:text-7xl lg:mt-1.5 lg:text-[60px] sm:text-[68px]">
@@ -93,7 +99,7 @@ const HNSWCard = () => (
 );
 
 const Stats = () => (
-  <section className="stats safe-paddings mt-40 xl:mt-[102px] lg:mt-[90px] md:mt-[74px]">
+  <section className="stats safe-paddings mt-40 xl:mt-[102px] lg:mt-[90px] md:mt-4">
     <Container className="relative z-20 grid grid-cols-12" size="medium">
       <div className="col-span-full flex flex-col items-center">
         <GradientLabel>Fast and Accurate</GradientLabel>
