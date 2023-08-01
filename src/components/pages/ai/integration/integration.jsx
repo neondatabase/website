@@ -43,7 +43,7 @@ const Integration = () => {
         <GradientLabel>Get Started</GradientLabel>
         <h2 className="flat-breaks sm:flat-none mt-5 text-center text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:mt-3 md:text-[32px]">
           Simple to use,
-          <br /> easy to scale
+          <br /> scales automatically
         </h2>
         <p className="mt-3 text-center text-lg font-light leading-snug xl:text-base md:max-w-xs">
           Store vector embeddings and perform similarity search.
