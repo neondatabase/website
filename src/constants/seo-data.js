@@ -64,7 +64,7 @@ export default {
     title: 'AI — Neon',
     description:
       'Introducing pg_embedding for AI vector search: a faster alternative to pgvector that scales to millions of rows.',
-    // imagePath: '/images/social-previews/pricing.jpg',
+    imagePath: '/images/social-previews/ai.jpg',
     pathname: LINKS.ai,
   },
 };
