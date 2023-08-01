@@ -13,31 +13,24 @@ import ArrowIcon from 'icons/arrow-sm.inline.svg';
 // TODO: update text to relevant one
 const items = [
   {
-    title: 'pg_embedding',
-    code: `    CREATE EXTENSION embedding;
-    CREATE TABLE documents(id integer PRIMARY KEY, embedding real[]);
-    `,
-    text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
-  },
-  {
     title: 'pgvector',
     code: `    CREATE EXTENSION vector;
     CREATE TABLE documents(id integer PRIMARY KEY, embedding VECTOR(3));
-    `,
+    SELECT id FROM items ORDER BY embedding <-> '[1.1,2.2,3.3]';`,
     text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
   {
-    title: 'Vector similarity search',
-    code: `    SELECT id
-    FROM items
-    ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3];`,
+    title: 'pg_embedding',
+    code: `    CREATE EXTENSION embedding;
+    CREATE TABLE documents(id integer PRIMARY KEY, embedding real[]);
+    SELECT id FROM documents ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3];`,
     text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
   {
     title: 'Compatible vector types',
-    code: `    SELECT vector::real[] AS converted_vector
-    FROM vector_items;
-    `,
+    code: `    SELECT vector::real[] 
+    AS converted_vector
+    FROM vector_items;`,
     text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
 ];
