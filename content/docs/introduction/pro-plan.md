@@ -20,6 +20,10 @@ Upgrading to the Neon Pro plan gives you higher limits, advanced features, and a
 - **Unlimited branches:** With the Pro plan, there is no limit on branches. You can create as many branches as required to support your CI/CD pipeline. You can instantly and cost-effectively create a database branch for every preview deployment, client, or developer.
 - **Unlimited databases:** There is no limit on PostgreSQL databases in any Neon plan. You can create as many databases as you need.
 
+<Admonition type="note">
+The Pro plan has default limits of 20 projects, 200 GB of storage, and 20 simultaneously active computes to protect against unintended usage. To increase these limits, reach out to our Sales team. The simultaneously active compute limit does not affect the primary branch compute, which always remains available. If you reach the simultaneously active compute limit, you may see `Console request failed` errors.
+</Admonition>
+
 ### Advanced features
 
 The Neon Pro plan comes with the following advanced features, and we plan to add more.
