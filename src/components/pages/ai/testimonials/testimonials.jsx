@@ -48,7 +48,7 @@ const sliderItemsAnimationProps = {
 const Testimonials = () => {
   const [sliderRef, isSliderInView] = useInView();
   const [activeSliderItemIndex, setActiveSliderItemIndex] = useState(0);
-  const [direction, setDirection] = useState(null);
+  const [direction, setDirection] = useState('right');
 
   useEffect(() => {
     let timeout = null;
