@@ -21,7 +21,7 @@ Upgrading to the Neon Pro plan gives you higher limits, advanced features, and a
 - **Unlimited databases:** There is no limit on PostgreSQL databases in any Neon plan. You can create as many databases as you need.
 
 <Admonition type="note">
-The Pro plan has default limits of 20 projects, 200 GB of storage, and 20 simultaneously active computes to protect against unintended usage. To increase these limits, reach out to [support@neon.tech](mailto:support@neon.tech). The simultaneously active compute limit does not affect the primary branch compute, which always remains available. If you encounter `Console request failed` errors, this may indicate that you have reached the active compute limit.
+The Pro plan has default limit of 20 simultaneously active computes to protect against unintended usage. To increase this limit, reach out to [support@neon.tech](mailto:support@neon.tech). The simultaneously active compute limit does not affect the primary branch compute, which always remains available. If you encounter `Console request failed` errors, this may indicate that you have reached the active compute limit.
 </Admonition>
 
 ### Advanced features
