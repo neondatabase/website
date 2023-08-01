@@ -142,9 +142,8 @@ const Stats = () => (
           </div>
           <div className="grow rounded-xl bg-gray-new-8 px-7 pb-7 pt-6 xl:px-6 xl:pb-5 xl:pt-4 lg:p-5 lg:pb-6 sm:pb-5">
             <p className="text-[26px] font-light leading-snug tracking-extra-tight xl:max-w-[390px] xl:text-lg lg:text-base sm:max-w-none sm:text-lg">
-              The new pg_embedding extension brings{' '}
-              <mark className="bg-transparent text-green-45">20x the speed</mark> for{' '}
-              <mark className="bg-transparent text-green-45">99% accuracy</mark> to graph-based
+              HNSW index brings <mark className="bg-transparent text-green-45">20x the speed</mark>{' '}
+              for <mark className="bg-transparent text-green-45">99% accuracy</mark> to graph-based
               approximate nearest neighbor search in your Postgres databases.
             </p>
           </div>
