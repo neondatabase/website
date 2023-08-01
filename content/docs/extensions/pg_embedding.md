@@ -184,9 +184,9 @@ The GitHub repository for the Neon `pg_embedding` extension can be found [here](
 
 ## Upgrade to pg_embedding with on-disk indexes
 
-The `pg_embedding` extension version in Neon was updated on August 2, 2023, to add support for on-disk index creation and additional distance metrics. If you installed `pg_embedding` before this date, please upgrade to the new version following the instructions below.
+The `pg_embedding` extension version in Neon was updated on August 2, 2023 to add support for on-disk index creation and additional distance metrics. If you installed `pg_embedding` before this date, please upgrade to the new version following the instructions below.
 
-Previously, an HNSW indexes were created in memory. Also, in addition to Euclidean (L2) distance, the new version of `pg_embedding` supports Cosine and Manhattan distance metrics.
+Previously, HNSW indexes were created in memory and would be recreated on first access after a compute restart. Also, in addition to Euclidean (L2) distance, the new version of `pg_embedding` supports Cosine and Manhattan distance metrics.
 
 Upgrading to the new version of `pg_embedding` requires dropping the extension with existing HNSW indexes, releasing memory held by HNSW indexes, reinstalling the `pg_embedding` extension, and re-creating your HNSW indexes.
 
@@ -196,7 +196,7 @@ Upgrading to the new version of `pg_embedding` requires dropping the extension w
     DROP EXTENSION embedding CASCADE;
     ```
 
-2. Restart your compute to release the memory held by your in-memory HNSW indexes. You can do this by running the following suspend and start compute API commands. The command requires your project_id and compute endpoint_id. You can obtain these details from the Neon Console. You can find your project ID on the **Settings** page. A generated project_id looks something like this: `late-math-90765381`. You can find your compute `endpoint_id` on the Bzranches page. An endpoint_id has an `ep` prefix and looks something like this: `ep-cold-bird-55112793`.
+2. Restart your compute to release the memory held by your in-memory HNSW indexes. You can do this by running the following suspend and start compute API commands. The command requires your `project_id` and compute `endpoint_id`. You can obtain these details from the Neon Console. You can find your project ID on the **Settings** page. A generated project_id looks something like this: `late-math-90765381`. You can find your compute `endpoint_id` on the **Branches** page. An `endpoint_id` has an `ep` prefix and looks something like this: `ep-cold-bird-55112793`.
 
     Suspend:
 
@@ -220,7 +220,7 @@ Upgrading to the new version of `pg_embedding` requires dropping the extension w
     CREATE EXTENSION embedding;
     ```
 
-    You can verify that you have the new version of ther pg_embedding extension install by running the following query. The version should be 0.3.1 or higher.
+    You can verify that you have the new version of the `pg_embedding` extension installed by running the following query. The version should be 0.3.1 or higher.
 
     ```sql
     SELECT extversion from pg_extension WHERE extname LIKE 'embedding';
@@ -232,7 +232,7 @@ Upgrading to the new version of `pg_embedding` requires dropping the extension w
     CREATE INDEX ON documents USING disk_hnsw(embedding) WITH (dims=3, m=3);
     ```
 
-Please note that index creation syntax has canged from `USING hnsw` to `USING disk_hnsw`. Also, the `maxelements` parameter is no longer required or supported. For information about creating index for Cosine and Manhattan distance metrics, see [Create an HNSW index](/docs/extensions/pg_embedding).
+Please note that index creation syntax has changed from `USING hnsw` to `USING disk_hnsw`. Also, the `maxelements` parameter is no longer required or supported. For information about creating indexes for Cosine and Manhattan distance metrics, see [Create an HNSW index](/docs/extensions/pg_embedding).
 
 ## Further reading
 
