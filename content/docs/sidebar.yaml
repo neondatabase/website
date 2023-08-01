@@ -185,8 +185,6 @@
       slug: extensions/pg_embedding
     - title: Vector search with pg-vector
       slug: extensions/pgvector
-    - title: Migrating from pg-vector to pg-embedding
-      slug: ai/migrating-from-pg-vector-to-pg-embedding
 - title: Extensions
   items:
     - title: Supported extensions

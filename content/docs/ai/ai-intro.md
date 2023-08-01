@@ -1,5 +1,5 @@
 ---
-title: AI integration
+title: AI & embeddings
 subtitle: Build AI applications with Neon serverless Postgres as your vector database
 enableTableOfContents: true
 isDraft: true
@@ -9,13 +9,13 @@ Vector databases enable efficient storage and retrieval of vector data, which is
 
 Neon supports the `pg_embedding` and `pgvector` open-source extensions, either of which all allow you to enable Postgres as a vector database for storing and querying vector embeddings.
 
-By enabling Postgres as a vector database, you can keep your data where it is. There's no need for data migration or a separate vector storage solution.
+By enabling Postgres as a vector database, you can keep your data where it is, in an open source database that you know and trust. There's no need for data migration or a proprietary vector database solution.
 
 ## pg_embedding
 
 `pg_embedding` is an open-source extension that enables storing vector embeddings and graph-based exact and approximate nearest neighbor search in Postgres using the Hierarchical Navigable Small World (HNSW) algorithm. It supports HNSW indexes, which unlock new levels of efficiency in high-dimensional similarity search compared in `ivfflat` indexes, enabling you to scale your AI applications to millions of rows. To get started, see [The pg_embedding extension](/docs/extensions/pg_embedding).
 
-If you are currently using `pgvector` and want to try `pg_embedding`, refer to [Migrating to `pg_embedding`](tbd).
+If you are currently using `pgvector` and want to try `pg_embedding`, refer to [Migrating to pg_embedding](tbd).
 
 ## pgvector
 
