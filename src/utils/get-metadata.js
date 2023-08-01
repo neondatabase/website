@@ -41,7 +41,9 @@ export default function getMetadata({
     manifest: `${SITE_URL}/manifest.json`,
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots,
-    themeColor: [LINKS.pricing, LINKS.partners].includes(pathname) ? '#0c0d0d' : '#00e699',
+    themeColor: [LINKS.pricing, LINKS.partners, LINKS.ai].includes(pathname)
+      ? '#0c0d0d'
+      : '#00e699',
     icons: {
       icon: '/favicon/favicon.png',
       apple: [
