@@ -12,10 +12,15 @@ import Container from 'components/shared/container/container';
 const MOBILE_WIDTH = 768;
 
 const Hero = () => {
+  const [isClient, setIsClient] = useState(false);
   const { width } = useWindowSize();
   const [spline, setSpline] = useState(null);
   const [animationVisibilityRef, isInView] = useInView();
   const [isAnimationStarted, setIsAnimationStarted] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (!spline) return;
@@ -38,6 +43,29 @@ const Hero = () => {
       spline.stop();
     }
   }, [isInView, spline, isAnimationStarted]);
+
+  // During server-side rendering, isClient will be false, so the <Image> component will always be rendered
+  // After hydration, isClient will be true, so the correct component will be rendered based on the window width
+  const ImageOrSplineAnimation =
+    isClient && width >= MOBILE_WIDTH ? (
+      <div className="absolute left-0 top-0 h-[1207px] w-full" ref={animationVisibilityRef}>
+        <Spline
+          className="absolute bottom-9 left-0 h-full w-full xl:bottom-[9.5%] lg:bottom-[19%] md:pointer-events-none"
+          scene="/animations/pages/ai/scene.splinecode"
+          onLoad={(spline) => setSpline(spline)}
+        />
+      </div>
+    ) : (
+      <Image
+        className="absolute left-1/2 top-0 hidden -translate-x-1/2 md:block"
+        src="/images/pages/ai/hero-sphere-mobile.png"
+        width={340}
+        height={357}
+        alt=""
+        aria-hidden
+        priority
+      />
+    );
 
   return (
     <section className="hero safe-paddings relative pb-[390px] pt-36 xl:pt-[120px] lg:pt-11 md:pb-0 md:pt-8">
@@ -72,25 +100,7 @@ const Hero = () => {
           height={357}
           aria-hidden
         />
-        {width < MOBILE_WIDTH ? (
-          <Image
-            className="absolute left-1/2 top-0 hidden -translate-x-1/2 md:block"
-            src="/images/pages/ai/hero-sphere-mobile.png"
-            width={340}
-            height={357}
-            alt=""
-            aria-hidden
-            priority
-          />
-        ) : (
-          <div className="absolute left-0 top-0 h-[1207px] w-full" ref={animationVisibilityRef}>
-            <Spline
-              className="absolute bottom-9 left-0 h-full w-full xl:bottom-[9.5%] lg:pointer-events-none lg:bottom-[19%]"
-              scene="/animations/pages/ai/scene.splinecode"
-              onLoad={(spline) => setSpline(spline)}
-            />
-          </div>
-        )}
+        {ImageOrSplineAnimation}
       </div>
     </section>
   );
