@@ -51,19 +51,19 @@ const Hero = () => {
       </Container>
       <div className="md:relative">
         <img
-          className="mx-auto -mt-3 hidden md:block"
-          src={`data:image/svg+xml;charset=utf-8,%3Csvg width='310' height='330' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+          className="mx-auto hidden md:-mt-6 md:block"
+          src={`data:image/svg+xml;charset=utf-8,%3Csvg width='340' height='357' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
           alt=""
-          width={310}
-          height={330}
+          width={340}
+          height={357}
           aria-hidden
         />
         {width < MOBILE_WIDTH ? (
           <Image
             className="absolute left-1/2 top-0 hidden -translate-x-1/2 md:block"
-            src="/images/pages/ai/hero-sphere-md.png"
-            width={310}
-            height={330}
+            src="/images/pages/ai/hero-sphere-mobile.png"
+            width={340}
+            height={357}
             alt=""
             aria-hidden
             priority

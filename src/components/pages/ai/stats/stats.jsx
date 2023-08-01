@@ -99,11 +99,11 @@ const HNSWCard = () => (
 );
 
 const Stats = () => (
-  <section className="stats safe-paddings mt-40 xl:mt-[102px] lg:mt-[90px] md:mt-4">
+  <section className="stats safe-paddings mt-40 xl:mt-[102px] lg:mt-[90px] md:mt-1">
     <Container className="relative z-20 grid grid-cols-12" size="medium">
       <div className="col-span-full flex flex-col items-center">
         <GradientLabel>Fast and Accurate</GradientLabel>
-        <h2 className="mt-5 max-w-[660px] text-center text-5xl font-medium leading-none tracking-extra-tight xl:mt-4 xl:max-w-[610px] xl:text-[44px] lg:max-w-[550px] lg:text-4xl md:max-w-[440px] sm:text-[32px]">
+        <h2 className="mt-5 max-w-[660px] text-center text-5xl font-medium leading-none tracking-extra-tight xl:mt-4 xl:max-w-[610px] xl:text-[44px] lg:max-w-[550px] lg:text-4xl sm:max-w-[440px] sm:text-[32px]">
           Scale your AI apps to millions of rows with Neon
         </h2>
       </div>
@@ -119,7 +119,7 @@ const Stats = () => (
               Explore the lates release of pg_embedding
             </h3>
             <div className="border-t border-dashed border-gray-new-15 pb-7 pt-6 xl:py-4 lg:pb-4 lg:pt-3 sm:pb-6 sm:pt-5">
-              <p className="text-[13px] uppercase leading-none tracking-wider text-gray-new-50 xl:text-xs lg:text-[10px] sm:text-[11px]">
+              <p className="text-[13px] uppercase leading-none tracking-wider text-gray-new-60 xl:text-xs lg:text-[10px] sm:text-[11px]">
                 Query execution time (ms) at 99% recall
               </p>
               <div className="mt-5 flex items-center space-x-2.5 xl:mt-4 lg:mt-3 sm:mt-5">
