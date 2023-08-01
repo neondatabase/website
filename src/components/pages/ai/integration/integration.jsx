@@ -13,21 +13,28 @@ import ArrowIcon from 'icons/arrow-sm.inline.svg';
 // TODO: update text to relevant one
 const items = [
   {
-    title: 'Create extension',
+    title: 'pg_embedding',
     code: `    CREATE EXTENSION embedding;
-    CREATE TABLE items(embedding real[]);
+    CREATE TABLE documents(id integer PRIMARY KEY, embedding real[]);
     `,
     text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
   {
-    title: 'Similarity search',
+    title: 'pgvector',
+    code: `    CREATE EXTENSION vector;
+    CREATE TABLE documents(id integer PRIMARY KEY, embedding VECTOR(3));
+    `,
+    text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
+  },
+  {
+    title: 'Vector similarity search',
     code: `    SELECT id
     FROM items
     ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3];`,
     text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
   },
   {
-    title: 'Migration from pgvector',
+    title: 'Compatible vector types',
     code: `    SELECT vector::real[] AS converted_vector
     FROM vector_items;
     `,
@@ -54,7 +61,7 @@ const Integration = () => {
               {items.map(({ title }, index) => (
                 <button
                   className={clsx(
-                    'relative flex items-start rounded-t-md border bg-black-new px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 last:grow hover:text-green-45 xl:py-[14px]',
+                    'relative flex items-start rounded-t-md border bg-black-new px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 hover:text-green-45 xl:py-[14px]',
                     index === activeTab
                       ? 'border-x-gray-new-15 border-b-transparent border-t-gray-new-15 text-green-45'
                       : 'border-x-transparent border-b-transparent border-t-transparent text-white'
