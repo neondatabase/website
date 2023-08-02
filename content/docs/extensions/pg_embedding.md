@@ -194,6 +194,60 @@ Upgrading to the new version of `pg_embedding` requires dropping the extension w
 
 STEPS TBD
 
+## Migrate from pgvector to pg_embedding
+
+The `pgvector` extension stores vector embeddings in a `VECTOR` column type:
+
+```sql
+CREATE TABLE items (id BIGSERIAL PRIMARY KEY, embedding VECTOR(3));
+```
+
+The `pg_embedding` extension stores vector embeddings as an array of `real[]` numbers:
+
+```sql
+CREATE TABLE documents(id BIGSERIAL PRIMARY KEY, embedding real[]);
+```
+
+The the `VECTOR` type used with `pgvector` is compatible with the `real[]` type used with `pg_embedding`. This allows you to modify vector search queries to interpret (typecast) `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
+
+```sql
+SELECT id, embedding FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;
+```
+
+To make the query work with `pg_embedding`, you have to typecast the `embedding` column to `real[]` (`embedding::real[]`) and defined the search vector as an array: `ARRAY[3,1,2]`:
+
+```sql
+SELECT id, embedding::real[] FROM items ORDER BY embedding::real[] <-> ARRAY[3,1,2] LIMIT 1;
+```
+
+Alternatively, you can alter the `embedding` column type. Depending on the size of your data, this could be expensive and disruptive operation.
+
+Given a table defined for `pgvector`, such as this one:
+
+```sql
+CREATE TABLE items (id BIGSERIAL PRIMARY KEY, embedding VECTOR(3));
+```
+
+You can alter the table as follows to change the column type:
+
+```sql
+ALTER TABLE items
+ALTER COLUMN embedding
+TYPE real[]
+USING (embedding::real[]);
+```
+
+This could also be done by adding a new `real[]` type column to your existing table, copy the data from the `VECTOR` columns to the new column, dropping the old `VECTOR` type column, and renaming the new column to replace the old column:
+
+```sql
+ALTER TABLE items ADD COLUMN embedding_real real[]; // Add column
+UPDATE items SET embedding_real = embedding::real[]; // Copy data
+ALTER TABLE items DROP COLUMN embedding; // Drop the old column
+ALTER TABLE items RENAME COLUMN embedding_real TO embedding; // Rename the new column
+```
+
+If you decide to alter your table to change the column type from `VECTOR` to `real[]`, you will still have to update your application queries to use the required [pg_embedding query syntax](#query) and [create an HNSW index](#create-an-hnsw-index) if you are indexing your data. If moving away from `pgvector`, you can also drop any `pgvector` indexes that were defined.
+
 ## Further reading
 
 To further your understanding of HNSW, the following resources are recommended:
