@@ -133,7 +133,7 @@ const Integration = () => {
                 ({ title, text }, index) =>
                   index === activeTab && (
                     <m.p
-                      className="mt-3 pl-5 text-[15px] font-light leading-none tracking-extra-tight text-gray-new-60"
+                      className="mt-3 h-[15px] pl-5 text-[15px] font-light leading-none tracking-extra-tight text-gray-new-60"
                       key={index}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
