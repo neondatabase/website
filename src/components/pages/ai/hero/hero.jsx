@@ -87,7 +87,7 @@ const Hero = () => {
           <br /> AI apps with Postgres
         </h1>
         <p className="mt-5 max-w-[550px] text-xl font-light leading-snug tracking-extra-tight xl:max-w-[500px] xl:text-lg lg:mt-4 md:mt-2.5 sm:max-w-[450px]">
-          Build and scale transformative LLM application with Postgres vector indexes and search
+          Build and scale transformative LLM applications with Postgres vector indexes and search
         </p>
         <Button
           className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-8 md:mt-6"
