@@ -71,6 +71,7 @@ const Hero = () => {
         width={340}
         height={357}
         alt=""
+        sizes="(max-width: 768px) 340px, 100vw"
         aria-hidden
         priority
       />
