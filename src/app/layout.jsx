@@ -2,9 +2,7 @@ import 'styles/globals.css';
 
 import Script from 'next/script';
 
-import PreloadLinks from 'components/shared/preload-links';
 import TopBar from 'components/shared/topbar';
-import LINKS from 'constants/links';
 
 import ThemeProvider from './provider';
 
@@ -12,14 +10,6 @@ const fontsBasePath = '/fonts';
 const fontsPaths = [
   '/ibm-plex-sans/ibm-plex-sans-bold.woff2',
   '/ibm-plex-sans/ibm-plex-sans-regular.woff2',
-];
-
-const aiPagePreloadLinks = [
-  {
-    href: '/animations/pages/ai/scene.splinecode',
-    as: 'fetch',
-    crossOrigin: 'anonymous',
-  },
 ];
 
 export const preferredRegion = 'edge';
@@ -45,7 +35,6 @@ const RootLayout = ({ children }) => (
           key={index}
         />
       ))}
-      <PreloadLinks links={aiPagePreloadLinks} activePath={LINKS.ai} />
     </head>
     <body>
       {process.env.NODE_ENV === 'production' && (
