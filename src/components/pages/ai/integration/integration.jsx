@@ -17,21 +17,24 @@ const items = [
     code: `    CREATE EXTENSION vector;
     CREATE TABLE documents(id integer PRIMARY KEY, embedding VECTOR(3));
     SELECT id FROM items ORDER BY embedding <-> '[1.1,2.2,3.3]';`,
-    text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
+    text: 'Use the pgvector for vector similarity search and storing embeddings with Neon.',
+    linkUrl: '/docs/extensions/pgvector',
   },
   {
     title: 'pg_embedding',
     code: `    CREATE EXTENSION embedding;
     CREATE TABLE documents(id integer PRIMARY KEY, embedding real[]);
     SELECT id FROM documents ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3];`,
-    text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
+    text: 'Perform fast and scalable nearest neighbor search with Neon&apos;s pg_embedding.',
+    linkUrl: '/docs/extensions/pg_embedding',
   },
   {
     title: 'Compatible vector types',
     code: `    SELECT vector::real[] 
     AS converted_vector
     FROM vector_items;`,
-    text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
+    text: 'Create compatible types to store vector data in Neon Serverless Postgres.',
+    linkUrl: '/docs/extensions/pg_embedding#insert-data',
   },
 ];
 
@@ -46,7 +49,7 @@ const Integration = () => {
           <br /> scales automatically
         </h2>
         <p className="mt-3 text-center text-lg font-light leading-snug xl:text-base md:max-w-xs">
-          Store vector embeddings and perform similarity search.
+          Store vector embeddings and perform similarity search
         </p>
         <LazyMotion features={domAnimation}>
           <div className="mt-11 w-full max-w-[716px] xl:mt-10 sm:hidden" aria-hidden>
@@ -136,7 +139,7 @@ const Integration = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      {text}{' '}
+                      <span dangerouslySetInnerHTML={{ __html: text }} />{' '}
                       <Link
                         className="inline-flex items-baseline tracking-extra-tight"
                         theme="green"
@@ -152,7 +155,7 @@ const Integration = () => {
           </div>
         </LazyMotion>
         <div className="hidden w-full sm:mt-8 sm:flex sm:flex-col sm:space-y-7">
-          {items.map(({ title, code, text }, index) => (
+          {items.map(({ title, code, text, linkUrl }, index) => (
             <div key={index}>
               <div className="flex flex-col rounded-md border border-gray-new-15">
                 <span className="px-4 py-3 text-xs font-medium uppercase leading-none tracking-wider">
@@ -174,7 +177,7 @@ const Integration = () => {
                 <Link
                   className="inline-flex items-baseline tracking-extra-tight"
                   theme="green"
-                  to="#"
+                  to={linkUrl}
                 >
                   Learn more
                   <ArrowIcon className="ml-1" />
