@@ -36,7 +36,7 @@ If you have multiple databases to import, each database must be imported separat
 The example below uses the following command, which you can run from a terminal or command window where you have access to the `pg_dump` and `psql` utilities. The first connection string is for your existing PostgreSQL database. The second is for your Neon database.
 
 ```bash
-pg_dump <old-connection-string> | psql <neon-connection-string>
+pg_dump <old-connection-string> --no-owner --no-acl | psql <neon-connection-string>
 ```
 
 A PostgreSQL connection string has the following format:
@@ -71,10 +71,12 @@ After you input the connection strings into your command, it will appear similar
 <CodeBlock shouldWrap>
 
 ```bash
-pg_dump postgres://<user>:<password>@<hostname>:5432/<dbname> | psql postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
+pg_dump postgres://<user>:<password>@<hostname>:5432/<dbname> --no-owner --no-acl | psql postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
 ```
 
 </CodeBlock>
+
+The `--no-owner` and `--no-acl` options prevent restoration of ownership and access privileges statements for database objects, which will cause non-fatal errors during the import operation if the user importing data is not the user that owns the database objects and users assigned database object privileges do not exist in Neon. For more information, see [Ownership and privilege considerations](#ownership-and-privilege-considerations).
 
 Run the command in your terminal or command window to import your data.
 
