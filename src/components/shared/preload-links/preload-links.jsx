@@ -4,6 +4,8 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import LINKS from 'constants/links';
+
 const PreloadLinks = ({ links, activePath }) => {
   const pathname = usePathname();
 
@@ -24,7 +26,7 @@ PreloadLinks.propTypes = {
       type: PropTypes.string,
     })
   ).isRequired,
-  activePath: PropTypes.string.isRequired,
+  activePath: PropTypes.objectOf(Object.values(LINKS)).isRequired,
 };
 
 export default PreloadLinks;
