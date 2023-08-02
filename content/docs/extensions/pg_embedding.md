@@ -184,16 +184,6 @@ Ultimately, the choice between the `pgvector` with IVFFlat or `pg_embedding` wit
 
 The GitHub repository for the Neon `pg_embedding` extension can be found [here](https://github.com/neondatabase/pg_embedding).
 
-## Upgrade to pg_embedding with on-disk indexes
-
-The `pg_embedding` extension version in Neon was updated on August 2, 2023 to add support for on-disk index creation and additional distance metrics. If you installed `pg_embedding` before this date, please upgrade to the new version following the instructions below.
-
-Previously, HNSW indexes were created in memory and would be recreated on first access after a compute restart. Also, in addition to Euclidean (L2) distance, the new version of `pg_embedding` supports Cosine and Manhattan distance metrics.
-
-Upgrading to the new version of `pg_embedding` requires dropping the extension with existing HNSW indexes, releasing memory held by HNSW indexes, reinstalling the `pg_embedding` extension, and re-creating your HNSW indexes.
-
-STEPS TBD
-
 ## Migrate from pgvector to pg_embedding
 
 The `pgvector` extension stores vector embeddings in a `VECTOR` column type:
