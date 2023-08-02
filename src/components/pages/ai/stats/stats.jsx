@@ -17,7 +17,8 @@ const GitHubCard = () => (
       width={287}
       height={202}
       alt=""
-      unoptimized
+      sizes="(max-width: 768px) 50vw, 100vw"
+      quality={95}
     />
     <img
       className="relative z-10 xl:h-[92px] xl:w-[92px] lg:h-16 lg:w-16 sm:h-[92px] sm:w-[92px]"
@@ -90,7 +91,8 @@ const HNSWCard = () => (
       width={287}
       height={236}
       alt=""
-      unoptimized
+      sizes="(max-width: 768px) 50vw, 100vw"
+      quality={95}
     />
     <span className="text-bg-clipped relative z-10 max-w-[127px] bg-[linear-gradient(180deg,#FFF_28.26%,#BFBFBF_100%)] text-center text-[44px] font-medium leading-[1.05] tracking-extra-tight xl:max-w-[93px] xl:text-[32px] lg:text-2xl sm:text-[28px]">
       Uses HNSW

@@ -23,8 +23,7 @@ const CTA = () => (
           Build your next AI app now with Neon
         </Heading>
         <p className="mt-3 text-lg font-light leading-snug xl:text-base lg:max-w-lg md:mx-auto md:max-w-md">
-          Neon allows us to offer you flexible usage and volume-based plans. Contact our Sales team
-          to learn more.
+          Neon offers flexible usage and volume-based plans. Contact our Sales team to learn more.
         </p>
         <div className="mt-9 flex items-center gap-x-8 xl:mt-7 lg:gap-x-4 md:justify-center sm:mt-6 sm:flex-col sm:gap-y-5">
           <AnimatedButton
