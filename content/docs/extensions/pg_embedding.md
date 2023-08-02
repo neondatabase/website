@@ -132,9 +132,11 @@ In summary, to prioritize search speed over accuracy, use lower values for `m` a
 For an idea of how to configure index option values, consider the benchmark performed by Neon using the _GIST-960 Euclidean dataset_, which provides a training set of 1 million vectors of 960 dimensions. The benchmark was run with this series of index option values:
 
 - `dims`: 960
-- `m`: 32, 64, and 128
+- `m`: 32, 64, and 128.
 - `efConstruction`: 64, 128, and 256
 - `efSearch`: 32, 64, 128, 256, and 512
+
+For a million rows of data, we recommend an `m` setting between 48 and 64. As mentioned [above](#tuning-the-hnsw-algorithm), `efSearch` should be equal to or larger than the number of nearest neighbors you want your search to return.
 
 To learn more about the benchmark, see [Introducing pg_embedding extension for vector search in Postgres and LangChain](https://neon.tech/blog/pg-embedding-extension-for-vector-search). Try experimenting with different settings to find the ones that work best for your particular application.
 </Admonition>
@@ -190,49 +192,7 @@ Previously, HNSW indexes were created in memory and would be recreated on first 
 
 Upgrading to the new version of `pg_embedding` requires dropping the extension with existing HNSW indexes, releasing memory held by HNSW indexes, reinstalling the `pg_embedding` extension, and re-creating your HNSW indexes.
 
-1. Drop the extension and existing HNSW indexes:
-
-    ```sql
-    DROP EXTENSION embedding CASCADE;
-    ```
-
-2. Restart your compute to release the memory held by your in-memory HNSW indexes. You can do this by running the following suspend and start compute API commands. The command requires your `project_id` and compute `endpoint_id`. You can obtain these details from the Neon Console. You can find your project ID on the **Settings** page. A generated project_id looks something like this: `late-math-90765381`. You can find your compute `endpoint_id` on the **Branches** page. An `endpoint_id` has an `ep` prefix and looks something like this: `ep-cold-bird-55112793`.
-
-    Suspend:
-
-    ```curl
-    curl --request POST \
-        --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id>/suspend \
-        --header 'accept: application/json'
-    ```
-
-    Start:
-
-    ```curl
-    curl --request POST \
-        --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id>/start \
-        --header 'accept: application/json'
-    ```
-
-3. Reinstall the `pg_embedding extension:
-
-    ```sql
-    CREATE EXTENSION embedding;
-    ```
-
-    You can verify that you have the new version of the `pg_embedding` extension installed by running the following query. The version should be 0.3.1 or higher.
-
-    ```sql
-    SELECT extversion from pg_extension WHERE extname LIKE 'embedding';
-    ```
-
-4. Recreate your HNSW indexes. The following syntax creates an HNSW index for Euclidean (L2) distance searches.
-
-    ```sql
-    CREATE INDEX ON documents USING disk_hnsw(embedding) WITH (dims=3, m=3);
-    ```
-
-Please note that index creation syntax has changed from `USING hnsw` to `USING disk_hnsw`. Also, the `maxelements` parameter is no longer required or supported. For information about creating indexes for Cosine and Manhattan distance metrics, see [Create an HNSW index](/docs/extensions/pg_embedding).
+STEPS TBD
 
 ## Further reading
 
