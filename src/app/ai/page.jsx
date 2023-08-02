@@ -18,22 +18,24 @@ export const metadata = getMetadata(SEO_DATA.ai);
 const items = [
   {
     icon: updateIcon,
-    title: 'Reliable, fast updates',
-    description: 'pg_embedding is open-source and maintained by a team of Postgres Hackers at Neon',
+    title: 'Reliable & actively maintained',
+    description:
+      'pg_embedding is open-source and actively maintained by a team of Postgres committers at Neon',
   },
   {
     icon: scalabilityIcon,
     title: 'Amazing scalability',
-    description: 'Grow your vector stores without a drop in search performance',
+    description: 'Grow your vector stores without impacting search performance',
   },
   {
     icon: searchIcon,
     title: 'Blazingly fast search',
-    description: 'pg_embedding uses HNSW index, optimized faster vector search',
+    description:
+      'pg_embedding supports HNSW indexes for fast and scalable vector similarity search',
   },
   {
     icon: compatibilityIcon,
-    title: 'High compatibility',
+    title: 'Highly compatible',
     description: 'Easily switch to pg_embedding in your Postgres and LangChain projects',
   },
 ];
@@ -52,8 +54,7 @@ const AIPage = () => (
       className="mt-52 xl:mt-36 lg:mt-[124px] md:mt-[88px]"
       label="Benefits"
       title="Vector search with Neon"
-      description="Use the power of HNSW index to unlock new levels of efficiency in high-dimensional
-            similarity search in Postgres"
+      description="Use the power of HNSW indexes to unlock new levels of efficiency in high-dimensional vector similarity search in Postgres"
       items={items}
       isGradientLabel
     />

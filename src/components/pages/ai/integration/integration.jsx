@@ -17,7 +17,7 @@ const items = [
     code: `    CREATE EXTENSION vector;
     CREATE TABLE documents(id integer PRIMARY KEY, embedding VECTOR(3));
     SELECT id FROM items ORDER BY embedding <-> '[1.1,2.2,3.3]';`,
-    text: 'Use the pgvector for vector similarity search and storing embeddings with Neon.',
+    text: 'Store embeddings and perform vector similarity search in Postgres with pgvector.',
     linkUrl: '/docs/extensions/pgvector',
   },
   {
@@ -25,7 +25,7 @@ const items = [
     code: `    CREATE EXTENSION embedding;
     CREATE TABLE documents(id integer PRIMARY KEY, embedding real[]);
     SELECT id FROM documents ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3];`,
-    text: 'Perform fast and scalable nearest neighbor search with Neon&apos;s pg_embedding.',
+    text: 'Store embeddings and perform graph-based vector similarity search in Postgres with pg_embedding.',
     linkUrl: '/docs/extensions/pg_embedding',
   },
   {
@@ -130,7 +130,7 @@ const Integration = () => {
             {/* TODO: add link to "Learn more" button */}
             <AnimatePresence initial={false} mode="wait">
               {items.map(
-                ({ text }, index) =>
+                ({ title, text }, index) =>
                   index === activeTab && (
                     <m.p
                       className="mt-3 pl-5 text-[15px] font-light leading-none tracking-extra-tight text-gray-new-60"
@@ -147,6 +147,7 @@ const Integration = () => {
                       >
                         Learn more
                         <ArrowIcon className="ml-1" />
+                        <span className="sr-only">about {title}</span>
                       </Link>
                     </m.p>
                   )
@@ -181,6 +182,7 @@ const Integration = () => {
                 >
                   Learn more
                   <ArrowIcon className="ml-1" />
+                  <span className="sr-only">about {title}</span>
                 </Link>
               </p>
             </div>
