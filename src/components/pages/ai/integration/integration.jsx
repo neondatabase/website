@@ -57,7 +57,7 @@ const Integration = () => {
               {items.map(({ title }, index) => (
                 <button
                   className={clsx(
-                    'relative flex items-start rounded-t-md border bg-black-new px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 hover:text-green-45 xl:py-[14px]',
+                    'relative flex items-start rounded-t-md border bg-black-new px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 hover:text-green-45 xl:py-3.5',
                     index === activeTab
                       ? 'border-x-gray-new-15 border-b-transparent border-t-gray-new-15 text-green-45'
                       : 'border-x-transparent border-b-transparent border-t-transparent text-white'
@@ -76,7 +76,7 @@ const Integration = () => {
                   <span className="relative">
                     <span
                       className={clsx(
-                        'absolute -top-[17px] left-0 h-px w-full bg-[linear-gradient(270deg,rgba(0,229,153,0.00)_6.54%,#00E599_47.88%,rgba(0,229,153,0.00)93.46%)] transition-opacity duration-200',
+                        'absolute -top-[17px] left-0 h-px w-full bg-[linear-gradient(270deg,rgba(0,229,153,0.00)_6.54%,#00E599_47.88%,rgba(0,229,153,0.00)93.46%)] transition-opacity duration-200 xl:-top-[15px]',
                         index === activeTab ? 'opacity-60' : 'opacity-0'
                       )}
                     />
@@ -114,7 +114,7 @@ const Integration = () => {
                         transition={{ duration: 0.2 }}
                       >
                         <CodeBlock
-                          className="code-block text-[15px]"
+                          className="code-block text-[15px] [&_.comment.linenumber]:!-mr-11"
                           copyButtonClassName="!top-0"
                           language="sql"
                           isTrimmed={false}
@@ -139,7 +139,7 @@ const Integration = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <span dangerouslySetInnerHTML={{ __html: text }} />{' '}
+                      <span className="mr-1.5" dangerouslySetInnerHTML={{ __html: text }} />
                       <Link
                         className="inline-flex items-baseline tracking-extra-tight"
                         theme="green"
@@ -163,7 +163,7 @@ const Integration = () => {
                 </span>
                 <div className="dark border-t border-gray-new-15 py-3 pl-4 pr-2">
                   <CodeBlock
-                    className="code-block text-[15px] sm:text-[13px]"
+                    className="code-block text-[15px] sm:text-[13px] [&_.comment.linenumber]:!-mr-10"
                     language="sql"
                     isTrimmed={false}
                     showLineNumbers
@@ -173,7 +173,7 @@ const Integration = () => {
                 </div>
               </div>
               <p className="mt-2 text-sm font-light leading-dense tracking-extra-tight text-gray-new-60">
-                {text}{' '}
+                <span className="mr-1.5" dangerouslySetInnerHTML={{ __html: text }} />
                 <Link
                   className="inline-flex items-baseline tracking-extra-tight"
                   theme="green"

@@ -5,7 +5,7 @@ import TwitterIcon from './images/twitter.inline.svg';
 const SliderItem = ({ text, authorName, authorTitle }) => (
   <figure className="flex min-h-[292px] flex-col items-center lg:min-h-[248px] md:min-h-[215px] sm:min-h-[297px] xs:min-h-[326px]">
     <TwitterIcon
-      className="h-[72px] w-[72px] xl:h-16 xl:w-16 md:h-12 md:w-12"
+      className="h-[72px] w-[72px] xl:h-16 xl:w-16 md:h-[52px] md:w-[52px]"
       width={72}
       height={72}
       aria-hidden

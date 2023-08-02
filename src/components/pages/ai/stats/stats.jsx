@@ -51,7 +51,7 @@ const ScaleCard = ({ className, ...props }) => (
     />
     <div className="relative z-10 flex flex-col items-center justify-center">
       <span className="text-2xl leading-none xl:text-lg lg:text-base">Scales to</span>
-      <span className="mt-2 text-[96px] font-medium leading-none tracking-[-0.05em] text-green-45 xl:text-7xl lg:mt-1.5 lg:text-[60px] md:text-[52px] sm:text-6xl xs:text-5xl">
+      <span className="mt-2 text-[96px] font-medium leading-none tracking-[-0.05em] text-green-45 xl:text-[72px] lg:mt-1.5 lg:text-[56px] md:text-[52px] sm:text-6xl xs:text-5xl">
         10M+
       </span>
       <span className="mt-1 text-[32px] leading-none tracking-extra-tight text-green-45 xl:text-2xl lg:mt-0.5 lg:text-xl sm:mt-1">

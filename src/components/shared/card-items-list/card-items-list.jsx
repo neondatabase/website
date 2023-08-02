@@ -74,7 +74,9 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
             }}
           >
             <img
-              className={clsx('h-8 w-8', isLarge ? '' : 'md:h-7 md:w-7')}
+              className={clsx('h-8 w-8', {
+                'md:h-7 md:w-7': !isLarge,
+              })}
               loading="lazy"
               src={icon}
               alt=""
@@ -90,10 +92,9 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
               )}
             >
               <h3
-                className={clsx(
-                  'text-xl leading-tight tracking-[-0.02em]',
-                  isLarge ? '' : 'xl:text-lg'
-                )}
+                className={clsx('text-xl leading-tight tracking-[-0.02em]', {
+                  'xl:text-lg': !isLarge,
+                })}
               >
                 {title}
               </h3>
@@ -110,7 +111,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
                   <span className="text-[15px] leading-none tracking-extra-tight">
                     View example
                   </span>
-                  <ArrowIcon className="ml-2 shrink-0" />
+                  <ArrowIcon className="ml-1 shrink-0" />
                 </div>
               )}
             </div>
