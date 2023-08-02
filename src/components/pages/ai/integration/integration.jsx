@@ -25,7 +25,7 @@ const items = [
     code: `    CREATE EXTENSION embedding;
     CREATE TABLE documents(id integer PRIMARY KEY, embedding real[]);
     SELECT id FROM documents ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3];`,
-    text: 'Store embeddings and perform graph-based vector similarity search in Postgres with pg_embedding.',
+    text: 'Store embeddings and perform graph-based vector similarity search with pg_embedding.',
     linkUrl: '/docs/extensions/pg_embedding',
   },
   {

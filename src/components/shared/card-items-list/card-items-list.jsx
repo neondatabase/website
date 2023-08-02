@@ -86,8 +86,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
             />
             <div
               className={clsx(
-                isLarge ? 'mt-5 lg:mt-4' : 'mt-[38px] xl:mt-8 lg:mt-7',
-                'md:mt-0',
+                isLarge ? 'mt-5 lg:mt-4' : 'mt-[38px] xl:mt-8 lg:mt-7 md:mt-0',
                 'flex h-full flex-col'
               )}
             >
