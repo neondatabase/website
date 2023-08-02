@@ -77,7 +77,7 @@ const IVFCard = ({ className, ...props }) => (
       <span className="text-[80px] font-bold xl:text-[60px] lg:text-4xl sm:text-[44px]">x</span>
     </span>
     <span className="mt-2 text-xl font-medium leading-none tracking-extra-tight xl:text-lg lg:mt-1 lg:text-sm sm:mt-2.5">
-      Faster than ivf-flat
+      Faster than IVFFlat
     </span>
   </div>
 );
@@ -116,22 +116,22 @@ const Stats = () => (
         <div className="flex flex-col gap-y-7 xl:col-span-6 xl:gap-y-6 lg:gap-y-4 sm:col-span-full">
           <div className="rounded-xl bg-gray-new-8 px-6 lg:px-4 sm:px-5">
             <h3 className="text-20 pb-5 pt-4 text-xl leading-none tracking-extra-tight xl:pb-4 xl:text-lg lg:py-3 lg:text-sm sm:pb-[18px] sm:pt-4 sm:text-base">
-              Explore the lates release of pg_embedding
+              Speed up your queries with HNSW
             </h3>
             <div className="border-t border-dashed border-gray-new-15 pb-7 pt-6 xl:py-4 lg:pb-4 lg:pt-3 sm:pb-6 sm:pt-5">
               <p className="text-[13px] uppercase leading-none tracking-wider text-gray-new-60 xl:text-xs lg:text-[10px] sm:text-[11px]">
                 Query execution time (ms) at 99% recall
               </p>
               <div className="mt-5 flex items-center space-x-2.5 xl:mt-4 lg:mt-3 sm:mt-5">
-                <span className="inline-block h-8 w-[18%] rounded bg-[linear-gradient(90deg,rgba(0,229,153,0.20)0%,#00E599_67.45%,#4DFFC4_93.23%)] xl:h-7 sm:h-8" />
+                <span className="inline-block h-8 w-[5%] rounded bg-[linear-gradient(90deg,rgba(0,229,153,0.20)0%,#00E599_67.45%,#4DFFC4_93.23%)] xl:h-7 sm:h-8" />
                 <span className="text-[13px] leading-none text-gray-new-90 xl:text-xs lg:text-[10px]">
-                  1.9s
+                  13.2s
                 </span>
               </div>
               <div className="mt-5 flex items-center space-x-2.5 xl:mt-3 lg:mt-2.5 sm:mt-4">
                 <span className="inline-block h-8 w-[93.5%] rounded bg-[linear-gradient(90deg,rgba(255,255,255,0.20)0%,#FFF_100%)] opacity-60 xl:h-7 sm:h-8" />
                 <span className="text-[13px] leading-none text-gray-new-90 xl:text-xs  lg:text-[10px]">
-                  10s
+                  262.3s
                 </span>
               </div>
               <div className="mt-6 flex items-center space-x-5 text-sm xl:mt-4 lg:mt-2 lg:space-x-4 lg:text-xs sm:mt-5 sm:space-x-5 sm:text-[13px]">
@@ -141,7 +141,7 @@ const Stats = () => (
                 </span>
                 <span className="flex items-center space-x-1.5 leading-none">
                   <span className="inline-block h-2 w-2 rounded-full bg-white/60 lg:h-1.5 lg:w-1.5" />
-                  <span>ivf-flat</span>
+                  <span>IVFFlat</span>
                 </span>
               </div>
             </div>
