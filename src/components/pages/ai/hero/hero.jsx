@@ -84,12 +84,8 @@ const Hero = () => {
         size="medium"
       >
         <h1 className="xs:flat-breaks text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl">
-          Powering{' '}
-          <span className="text-green-45">
-            next gen
-            <br /> AI apps
-          </span>{' '}
-          with Postgres
+          Powering next gen
+          <br /> AI apps with Postgres
         </h1>
         <p className="mt-5 max-w-[550px] text-xl font-light leading-snug tracking-extra-tight xl:max-w-[500px] xl:text-lg lg:mt-4 md:mt-2.5 sm:max-w-[450px]">
           Build and scale transformative LLM applications with vector indexes and similarity search
