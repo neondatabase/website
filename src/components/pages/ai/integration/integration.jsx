@@ -33,7 +33,7 @@ const items = [
     code: `    SELECT vector::real[] 
     AS converted_vector
     FROM vector_items;`,
-    text: 'Create compatible types to store vector data in Neon Serverless Postgres.',
+    text: 'Compatible pgvector and pg_embedding vector types enable easy migration',
     linkUrl: '/docs/extensions/pg_embedding#insert-data',
   },
 ];
