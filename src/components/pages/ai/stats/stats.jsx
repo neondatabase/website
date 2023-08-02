@@ -51,8 +51,8 @@ const ScaleCard = ({ className, ...props }) => (
     />
     <div className="relative z-10 flex flex-col items-center justify-center">
       <span className="text-2xl leading-none xl:text-lg lg:text-base">Scales to</span>
-      <span className="mt-2 text-[112px] font-semibold leading-none tracking-[-0.08em] text-green-45 xl:text-7xl lg:mt-1.5 lg:text-[60px] sm:text-[68px]">
-        1M+
+      <span className="mt-2 text-[96px] font-semibold leading-none tracking-[-0.05em] text-green-45 xl:text-7xl lg:mt-1.5 lg:text-[60px] md:text-[52px] sm:text-6xl xs:text-5xl">
+        10M+
       </span>
       <span className="mt-1 text-[32px] leading-none tracking-extra-tight text-green-45 xl:text-2xl lg:mt-0.5 lg:text-xl sm:mt-1">
         rows
@@ -104,7 +104,7 @@ const Stats = () => (
       <div className="col-span-full flex flex-col items-center">
         <GradientLabel>Fast and Accurate</GradientLabel>
         <h2 className="mt-5 max-w-[660px] text-center text-5xl font-medium leading-none tracking-extra-tight xl:mt-4 xl:max-w-[610px] xl:text-[44px] lg:max-w-[550px] lg:text-4xl sm:max-w-[440px] sm:text-[32px]">
-          Scale your AI apps to millions of rows with Neon
+          Scale your AI apps to millions of users with Neon
         </h2>
       </div>
       <div className="xl:grid-col-12 col-span-10 col-start-2 mt-12 grid grid-cols-[23.5%_auto_23.5%] gap-x-7 xl:col-span-full xl:col-start-1 xl:mt-10 xl:grid-cols-12 xl:gap-x-6 lg:gap-4 sm:mt-8">
