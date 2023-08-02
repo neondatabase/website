@@ -15,7 +15,7 @@ const SplitViewGrid = ({
   <section className={clsx('benefits safe-paddings', className)}>
     <Container className="grid-gap-x grid grid-cols-12" size="medium">
       <div className="col-span-10 col-start-2 grid grid-cols-10 gap-x-10 rounded-2xl bg-gray-new-8 py-12 xl:col-span-full xl:col-start-1 xl:grid-cols-12 xl:items-center xl:gap-x-6 xl:py-8 lg:gap-x-4 lg:pb-10 lg:pt-9 md:py-8">
-        <div className="col-span-4 col-start-1 flex flex-col items-start pl-12 xl:max-w-[300px] xl:self-start xl:justify-self-start xl:pl-8 lg:col-span-full lg:max-w-none lg:pl-7 md:pl-6">
+        <div className="col-span-4 col-start-1 flex flex-col items-start pl-12 xl:max-w-[300px] xl:self-start xl:justify-self-start xl:pl-8 lg:col-span-full lg:max-w-none lg:px-7 md:pl-6 md:pr-3.5">
           {isGradientLabel ? (
             <GradientLabel>{label}</GradientLabel>
           ) : (

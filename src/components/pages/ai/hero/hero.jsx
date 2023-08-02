@@ -3,7 +3,7 @@
 import Spline from '@splinetool/react-spline';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
@@ -83,12 +83,15 @@ const Hero = () => {
         size="medium"
       >
         <h1 className="xs:flat-breaks text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl">
-          Powering next gen
-          <br /> AI apps with Postgres
+          Powering{' '}
+          <span className="text-green-45">
+            next gen
+            <br /> AI apps
+          </span>{' '}
+          with Postgres
         </h1>
         <p className="mt-5 max-w-[550px] text-xl font-light leading-snug tracking-extra-tight xl:max-w-[500px] xl:text-lg lg:mt-4 md:mt-2.5 sm:max-w-[450px]">
-          Build and scale transformative LLM application with Postgres using pgvector and
-          pg_embedding
+          Build and scale transformative LLM applications with Postgres vector indexes and search
         </p>
         <Button
           className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-8 md:mt-6"

@@ -51,8 +51,8 @@ const ScaleCard = ({ className, ...props }) => (
     />
     <div className="relative z-10 flex flex-col items-center justify-center">
       <span className="text-2xl leading-none xl:text-lg lg:text-base">Scales to</span>
-      <span className="mt-2 text-[112px] font-semibold leading-none tracking-[-0.08em] text-green-45 xl:text-7xl lg:mt-1.5 lg:text-[60px] sm:text-[68px]">
-        1M+
+      <span className="mt-2 text-[96px] font-medium leading-none tracking-[-0.05em] text-green-45 xl:text-[72px] lg:mt-1.5 lg:text-[56px] md:text-[52px] sm:text-6xl xs:text-5xl">
+        10M+
       </span>
       <span className="mt-1 text-[32px] leading-none tracking-extra-tight text-green-45 xl:text-2xl lg:mt-0.5 lg:text-xl sm:mt-1">
         rows
@@ -77,7 +77,7 @@ const IVFCard = ({ className, ...props }) => (
       <span className="text-[80px] font-bold xl:text-[60px] lg:text-4xl sm:text-[44px]">x</span>
     </span>
     <span className="mt-2 text-xl font-medium leading-none tracking-extra-tight xl:text-lg lg:mt-1 lg:text-sm sm:mt-2.5">
-      Faster than ivf-flat
+      Faster than IVFFlat
     </span>
   </div>
 );
@@ -85,7 +85,7 @@ const IVFCard = ({ className, ...props }) => (
 const HNSWCard = () => (
   <div className="relative flex items-center justify-center overflow-hidden rounded-2xl bg-gray-new-8">
     <Image
-      className="absolute left-1/2 top-1/2 h-auto w-full -translate-x-1/2 -translate-y-1/2 rounded-2xl lg:h-full lg:w-auto lg:max-w-none sm:w-full sm:object-cover"
+      className="absolute inset-0 h-full w-full rounded-2xl object-cover"
       src={hnswBg}
       width={287}
       height={236}
@@ -104,7 +104,7 @@ const Stats = () => (
       <div className="col-span-full flex flex-col items-center">
         <GradientLabel>Fast and Accurate</GradientLabel>
         <h2 className="mt-5 max-w-[660px] text-center text-5xl font-medium leading-none tracking-extra-tight xl:mt-4 xl:max-w-[610px] xl:text-[44px] lg:max-w-[550px] lg:text-4xl sm:max-w-[440px] sm:text-[32px]">
-          Scale your AI apps to millions of rows with Neon
+          Scale your AI apps to millions of users with Neon
         </h2>
       </div>
       <div className="xl:grid-col-12 col-span-10 col-start-2 mt-12 grid grid-cols-[23.5%_auto_23.5%] gap-x-7 xl:col-span-full xl:col-start-1 xl:mt-10 xl:grid-cols-12 xl:gap-x-6 lg:gap-4 sm:mt-8">
@@ -116,22 +116,22 @@ const Stats = () => (
         <div className="flex flex-col gap-y-7 xl:col-span-6 xl:gap-y-6 lg:gap-y-4 sm:col-span-full">
           <div className="rounded-xl bg-gray-new-8 px-6 lg:px-4 sm:px-5">
             <h3 className="text-20 pb-5 pt-4 text-xl leading-none tracking-extra-tight xl:pb-4 xl:text-lg lg:py-3 lg:text-sm sm:pb-[18px] sm:pt-4 sm:text-base">
-              Explore the lates release of pg_embedding
+              Speed up your queries with HNSW
             </h3>
             <div className="border-t border-dashed border-gray-new-15 pb-7 pt-6 xl:py-4 lg:pb-4 lg:pt-3 sm:pb-6 sm:pt-5">
               <p className="text-[13px] uppercase leading-none tracking-wider text-gray-new-60 xl:text-xs lg:text-[10px] sm:text-[11px]">
                 Query execution time (ms) at 99% recall
               </p>
               <div className="mt-5 flex items-center space-x-2.5 xl:mt-4 lg:mt-3 sm:mt-5">
-                <span className="inline-block h-8 w-[18%] rounded bg-[linear-gradient(90deg,rgba(0,229,153,0.20)0%,#00E599_67.45%,#4DFFC4_93.23%)] xl:h-7 sm:h-8" />
+                <span className="inline-block h-8 w-[5%] rounded bg-[linear-gradient(90deg,rgba(0,229,153,0.20)0%,#00E599_67.45%,#4DFFC4_93.23%)] xl:h-7 sm:h-8" />
                 <span className="text-[13px] leading-none text-gray-new-90 xl:text-xs lg:text-[10px]">
-                  1.9s
+                  13.2s
                 </span>
               </div>
               <div className="mt-5 flex items-center space-x-2.5 xl:mt-3 lg:mt-2.5 sm:mt-4">
                 <span className="inline-block h-8 w-[93.5%] rounded bg-[linear-gradient(90deg,rgba(255,255,255,0.20)0%,#FFF_100%)] opacity-60 xl:h-7 sm:h-8" />
                 <span className="text-[13px] leading-none text-gray-new-90 xl:text-xs  lg:text-[10px]">
-                  10s
+                  262.3s
                 </span>
               </div>
               <div className="mt-6 flex items-center space-x-5 text-sm xl:mt-4 lg:mt-2 lg:space-x-4 lg:text-xs sm:mt-5 sm:space-x-5 sm:text-[13px]">
@@ -141,16 +141,16 @@ const Stats = () => (
                 </span>
                 <span className="flex items-center space-x-1.5 leading-none">
                   <span className="inline-block h-2 w-2 rounded-full bg-white/60 lg:h-1.5 lg:w-1.5" />
-                  <span>ivf-flat</span>
+                  <span>IVFFlat</span>
                 </span>
               </div>
             </div>
           </div>
           <div className="grow rounded-xl bg-gray-new-8 px-7 pb-7 pt-6 xl:px-6 xl:pb-5 xl:pt-4 lg:p-5 lg:pb-6 sm:pb-5">
             <p className="text-[26px] font-light leading-snug tracking-extra-tight xl:max-w-[390px] xl:text-lg lg:text-base sm:max-w-none sm:text-lg">
-              HNSW index brings <mark className="bg-transparent text-green-45">20x the speed</mark>{' '}
+              HNSW indexes bring <mark className="bg-transparent text-green-45">20x the speed</mark>{' '}
               for <mark className="bg-transparent text-green-45">99% accuracy</mark> to graph-based
-              approximate nearest neighbor search in your Postgres databases.
+              approximate nearest neighbor search in your Postgres database.
             </p>
           </div>
         </div>

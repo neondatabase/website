@@ -17,21 +17,24 @@ const items = [
     code: `    CREATE EXTENSION vector;
     CREATE TABLE documents(id integer PRIMARY KEY, embedding VECTOR(3));
     SELECT id FROM items ORDER BY embedding <-> '[1.1,2.2,3.3]';`,
-    text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
+    text: 'Use the pgvector for vector similarity search and storing embeddings with Neon.',
+    linkUrl: '/docs/extensions/pgvector',
   },
   {
     title: 'pg_embedding',
     code: `    CREATE EXTENSION embedding;
     CREATE TABLE documents(id integer PRIMARY KEY, embedding real[]);
     SELECT id FROM documents ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3];`,
-    text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
+    text: 'Perform fast and scalable nearest neighbor search with Neon&apos;s pg_embedding.',
+    linkUrl: '/docs/extensions/pg_embedding',
   },
   {
     title: 'Compatible vector types',
     code: `    SELECT vector::real[] 
     AS converted_vector
     FROM vector_items;`,
-    text: 'Easily switch to pg_embedding in your Postgres and LangChain projects.',
+    text: 'Create compatible types to store vector data in Neon Serverless Postgres.',
+    linkUrl: '/docs/extensions/pg_embedding#insert-data',
   },
 ];
 
@@ -46,7 +49,7 @@ const Integration = () => {
           <br /> scales automatically
         </h2>
         <p className="mt-3 text-center text-lg font-light leading-snug xl:text-base md:max-w-xs">
-          Store vector embeddings and perform similarity search.
+          Store vector embeddings and perform similarity search
         </p>
         <LazyMotion features={domAnimation}>
           <div className="mt-11 w-full max-w-[716px] xl:mt-10 sm:hidden" aria-hidden>
@@ -54,7 +57,7 @@ const Integration = () => {
               {items.map(({ title }, index) => (
                 <button
                   className={clsx(
-                    'relative flex items-start rounded-t-md border bg-black-new px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 hover:text-green-45 xl:py-[14px]',
+                    'relative flex items-start rounded-t-md border bg-black-new px-5 py-4 text-xs font-medium uppercase leading-none tracking-wider transition-colors duration-200 hover:text-green-45 xl:py-3.5',
                     index === activeTab
                       ? 'border-x-gray-new-15 border-b-transparent border-t-gray-new-15 text-green-45'
                       : 'border-x-transparent border-b-transparent border-t-transparent text-white'
@@ -73,7 +76,7 @@ const Integration = () => {
                   <span className="relative">
                     <span
                       className={clsx(
-                        'absolute -top-[17px] left-0 h-px w-full bg-[linear-gradient(270deg,rgba(0,229,153,0.00)_6.54%,#00E599_47.88%,rgba(0,229,153,0.00)93.46%)] transition-opacity duration-200',
+                        'absolute -top-[17px] left-0 h-px w-full bg-[linear-gradient(270deg,rgba(0,229,153,0.00)_6.54%,#00E599_47.88%,rgba(0,229,153,0.00)93.46%)] transition-opacity duration-200 xl:-top-[15px]',
                         index === activeTab ? 'opacity-60' : 'opacity-0'
                       )}
                     />
@@ -111,7 +114,7 @@ const Integration = () => {
                         transition={{ duration: 0.2 }}
                       >
                         <CodeBlock
-                          className="code-block text-[15px]"
+                          className="code-block text-[15px] [&_.comment.linenumber]:!-mr-11"
                           copyButtonClassName="!top-0"
                           language="sql"
                           isTrimmed={false}
@@ -136,9 +139,9 @@ const Integration = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      {text}{' '}
+                      <span className="mr-1.5" dangerouslySetInnerHTML={{ __html: text }} />
                       <Link
-                        className="inline-flex items-center tracking-extra-tight"
+                        className="inline-flex items-baseline tracking-extra-tight"
                         theme="green"
                         to="#"
                       >
@@ -152,7 +155,7 @@ const Integration = () => {
           </div>
         </LazyMotion>
         <div className="hidden w-full sm:mt-8 sm:flex sm:flex-col sm:space-y-7">
-          {items.map(({ title, code, text }, index) => (
+          {items.map(({ title, code, text, linkUrl }, index) => (
             <div key={index}>
               <div className="flex flex-col rounded-md border border-gray-new-15">
                 <span className="px-4 py-3 text-xs font-medium uppercase leading-none tracking-wider">
@@ -160,7 +163,7 @@ const Integration = () => {
                 </span>
                 <div className="dark border-t border-gray-new-15 py-3 pl-4 pr-2">
                   <CodeBlock
-                    className="code-block text-[15px] sm:text-[13px]"
+                    className="code-block text-[15px] sm:text-[13px] [&_.comment.linenumber]:!-mr-10"
                     language="sql"
                     isTrimmed={false}
                     showLineNumbers
@@ -170,11 +173,11 @@ const Integration = () => {
                 </div>
               </div>
               <p className="mt-2 text-sm font-light leading-dense tracking-extra-tight text-gray-new-60">
-                {text}{' '}
+                <span className="mr-1.5" dangerouslySetInnerHTML={{ __html: text }} />
                 <Link
-                  className="inline-flex items-center tracking-extra-tight"
+                  className="inline-flex items-baseline tracking-extra-tight"
                   theme="green"
-                  to="#"
+                  to={linkUrl}
                 >
                   Learn more
                   <ArrowIcon className="ml-1" />

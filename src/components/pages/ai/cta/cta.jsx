@@ -14,12 +14,15 @@ const CTA = () => (
       size="medium"
       className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
     >
-      <div className="flat-breaks md:flat-none relative z-10 col-span-4 col-start-2 flex flex-col pb-[164px] pt-16 2xl:col-span-5 2xl:col-start-2 2xl:pb-36 xl:pb-[78px] xl:pt-20 lg:col-span-6 lg:pb-[54px] md:col-span-full md:text-center">
-        <Heading tag="h2" size="2sm">
-          Build your next AI app
-          <br /> now with Neon
+      <div className="relative z-10 col-span-4 col-start-2 flex flex-col pb-[164px] pt-16 2xl:col-span-5 2xl:col-start-2 2xl:pb-36 xl:pb-[78px] xl:pt-20 lg:col-span-6 lg:pb-[54px] md:col-span-full md:text-center">
+        <Heading
+          className="max-w-[500px] xl:max-w-[400px] lg:max-w-[350px] md:mx-auto"
+          tag="h2"
+          size="2sm"
+        >
+          Build your next AI app now with Neon
         </Heading>
-        <p className="mt-3 text-lg font-light leading-snug xl:text-base md:mx-auto md:max-w-md">
+        <p className="mt-3 text-lg font-light leading-snug xl:text-base lg:max-w-lg md:mx-auto md:max-w-md">
           Neon allows us to offer you flexible usage and volume-based plans. Contact our Sales team
           to learn more.
         </p>
@@ -48,7 +51,7 @@ const CTA = () => (
           </Link>
         </div>
       </div>
-      <div className="relative col-span-7 col-start-6 2xl:col-span-6 2xl:col-start-7 md:col-span-full md:flex md:justify-center">
+      <div className="relative col-span-7 col-start-6 2xl:col-span-6 2xl:col-start-7 md:z-20 md:col-span-full md:flex md:justify-center">
         <Image
           className="absolute bottom-0 left-0 w-[842px] max-w-none 2xl:w-[750px] xl:-left-20 xl:w-[652px] lg:-left-28 lg:w-[553px] md:static md:w-[591px]"
           src={illustration}
