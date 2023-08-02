@@ -106,7 +106,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
                 {description}
               </p>
               {isLarge && (
-                <div className="mt-auto inline-flex items-center text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
+                <div className="mt-auto inline-flex items-baseline text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
                   <span className="text-[15px] leading-none tracking-extra-tight">
                     View example
                   </span>

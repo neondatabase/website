@@ -64,7 +64,7 @@ const Testimonials = () => {
 
   return (
     <section
-      className="testimonial safe-paddings mt-40 xl:mt-[120px] lg:mt-28 md:mt-20"
+      className="testimonial safe-paddings mt-40 overflow-hidden xl:mt-[120px] lg:mt-28 md:mt-20"
       ref={sliderRef}
     >
       <Container className="flex flex-col items-center text-center" size="xs">
@@ -98,18 +98,22 @@ const Testimonials = () => {
         </AnimatePresence>
 
         <div className="mt-7 flex items-center justify-between xl:mt-5 lg:mt-4 md:mt-3 md:flex-col md:items-center">
-          <ul className="flex space-x-2.5">
+          <ul className="flex">
             {sliderItems.map((_, index) => (
               <li key={index}>
                 <button
-                  className={clsx(
-                    'h-2 w-2 rounded-full transition-colors duration-100',
-                    activeSliderItemIndex === index ? 'bg-green-45' : 'bg-gray-new-20'
-                  )}
+                  className="px-[5px] py-2"
                   type="button"
                   aria-label={`Go to testimonial ${index + 1}`}
                   onClick={() => setActiveSliderItemIndex(index)}
-                />
+                >
+                  <span
+                    className={clsx(
+                      'block h-2 w-2 rounded-full transition-colors duration-100',
+                      activeSliderItemIndex === index ? 'bg-green-45' : 'bg-gray-new-20'
+                    )}
+                  />
+                </button>
               </li>
             ))}
           </ul>

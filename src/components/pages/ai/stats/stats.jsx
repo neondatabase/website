@@ -85,7 +85,7 @@ const IVFCard = ({ className, ...props }) => (
 const HNSWCard = () => (
   <div className="relative flex items-center justify-center overflow-hidden rounded-2xl bg-gray-new-8">
     <Image
-      className="absolute left-1/2 top-1/2 h-auto w-full -translate-x-1/2 -translate-y-1/2 rounded-2xl lg:h-full lg:w-auto lg:max-w-none sm:w-full sm:object-cover"
+      className="absolute inset-0 h-full w-full rounded-2xl object-cover"
       src={hnswBg}
       width={287}
       height={236}

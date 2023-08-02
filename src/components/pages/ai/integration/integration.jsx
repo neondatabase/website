@@ -138,7 +138,7 @@ const Integration = () => {
                     >
                       {text}{' '}
                       <Link
-                        className="inline-flex items-center tracking-extra-tight"
+                        className="inline-flex items-baseline tracking-extra-tight"
                         theme="green"
                         to="#"
                       >
@@ -172,7 +172,7 @@ const Integration = () => {
               <p className="mt-2 text-sm font-light leading-dense tracking-extra-tight text-gray-new-60">
                 {text}{' '}
                 <Link
-                  className="inline-flex items-center tracking-extra-tight"
+                  className="inline-flex items-baseline tracking-extra-tight"
                   theme="green"
                   to="#"
                 >
