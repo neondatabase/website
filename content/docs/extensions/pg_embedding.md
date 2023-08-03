@@ -1,13 +1,13 @@
 ---
 title: The pg_embedding extension
-subtitle: Use Neon's pg_embedding extension with Hierarchical Navigable Small World (HNSW) for graph-based approximate nearest neighbor search in PostgreSQL 
+subtitle: Use Neon's pg_embedding extension with Hierarchical Navigable Small World (HNSW) for graph-based vector similarity search in PostgreSQL 
 enableTableOfContents: true
 ---
 
 The `pg_embedding` extension enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
 
 <Admonition type="important">
-The `pg_embedding` extension was updated on August 3, 2023 to add support for on-disk index creation and additional distance metrics. If you installed `pg_embedding` before this date and want to update to the new version, please see [Upgrade to pg_embedding with on-disk indexes](#upgrade-to-pg_embedding-with-on-disk-indexes) for instructions.
+The `pg_embedding` extension was updated on August 3, 2023 to add support for on-disk index creation and additional distance metrics. If you installed `pg_embedding` before this date and want to update to the new version, please see [Upgrade to pg_embedding with on-disk indexes](#upgrade-to-pg_embedding-for-on-disk-indexes) for instructions.
 </Admonition>
 
 This extension is based on [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw) implementation of HNSW
@@ -19,11 +19,11 @@ Neon also supports `pgvector` for vector similarity search. For information on w
 
 ## Using the pg_embedding extension
 
-This section describes how to use the `pg_embedding` extension in Neon with a simple example that demonstrates the required statements, syntax, and options.
+This section describes how to use the `pg_embedding` extension in Neon with simple examples that demonstrates the required statements, syntax, and options.
 
 ### Usage summary
 
-The statements in this usage summary are described in further detail in the sections that follow.
+The statements in this summary are described in further detail in the sections that follow.
 
 ```sql
 CREATE EXTENSION embedding;
@@ -34,7 +34,7 @@ SELECT id FROM documents ORDER BY embedding <-> ARRAY[3,3,3] LIMIT 1;
 
 ### Enable the extension
 
-To enable the `pg_embedding` extension, run the following `CREATE EXTENSION` statement in the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor).
+To enable the `pg_embedding` extension, run the following `CREATE EXTENSION` statement in the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor):
 
 ```sql
 CREATE EXTENSION embedding;
@@ -45,20 +45,24 @@ CREATE EXTENSION embedding;
 To store your vector data, create a table similar to the following:
 
 ```sql
-CREATE TABLE documents(id INTEGER, embedding REAL[]);
+CREATE TABLE documents(id INTEGER, embedding real[]);
 ```
 
-This statement generates a table named `documents` with an `embedding` column for storing vector data. Your table and vector column names may differ.
+This statement generates a table named `documents` with a `real[]` type column for storing vector data. Your table and vector column names may differ.
 
 ### Insert data
 
 To insert vector data, use an `INSERT` statement similar to the following:
 
+<CodeBlock shouldWrap>
+
 ```sql
 INSERT INTO documents(id, embedding) VALUES (1, '{0,1,2}'), (2, '{1,2,3}'),  (3, '{1,1,1}');
 ```
 
-## Query
+</CodeBlock>
+
+## Similarity search
 
 The `pg_embedding` extension supports Euclidean (L2), Cosine, and Manhattan distance metrics.
 
@@ -85,13 +89,13 @@ where:
 - `SELECT id FROM documents` selects the `id` field from all records in the `documents` table.
 - `ORDER BY` sorts the selected records in ascending order based on the calculated distances. In other words, records with values closer to the `[1.1, 2.2, 3.3]` query vector according to the distance metric will be returned first.
 - `<->`, `<=>`, and `<~>` operators define the distance metric, which calculates the distance between the query vector and each row of the dataset.
-- `LIMIT 1` limits the result set to one record after sorting.
+- `LIMIT 1` limits the result set to one record after sorting. You can adjust this value as required.
 
 In summary, the query retrieves the ID of the record from the `documents` table whose value is closest to the `[3,3,3]` query vector according to the specified distance metric.
 
 ### Create an HNSW index
 
-To optimize search behavior, you can add an HNSW index. To create the HNSW index on your vector column, use a `CREATE INDEX` statement as shown in the following examples. The `pg_embedding` extension supports indexes for use with Euclidean, Cosine, and Manhattan distance metrics.
+To optimize search behavior, you can add an HNSW index. To create the HNSW index on your vector column, use a `CREATE INDEX` statement as shown in the following examples. The `pg_embedding` extension supports indexes for use with Euclidean, Cosine, and Manhattan distance metrics. You must ensure that your search query syntax matches the index that you define. You will notice in the query examples below that each distance metric has a specific operator (`<->`, `<=>`, and `<~>`).
 
 Euclidean (L2) distance index:
 
@@ -136,7 +140,7 @@ For an idea of how to configure index option values, consider the benchmark perf
 - `efConstruction`: 64, 128, and 256
 - `efSearch`: 32, 64, 128, 256, and 512
 
-For a million rows of data, we recommend an `m` setting between 48 and 64. As mentioned [above](#tuning-the-hnsw-algorithm), `efSearch` should be equal to or larger than the number of nearest neighbors you want your search to return.
+For a million rows of data, we recommend an `m` setting between 48 and 64, and as mentioned [above](#tuning-the-hnsw-algorithm), `efSearch` should be equal to or larger than the number of nearest neighbors you want your search to return.
 
 To learn more about the benchmark, see [Introducing pg_embedding extension for vector search in Postgres and LangChain](https://neon.tech/blog/pg-embedding-extension-for-vector-search). Try experimenting with different settings to find the ones that work best for your particular application.
 </Admonition>
@@ -169,7 +173,7 @@ When determining which index to use, `pgvector` with an IVFFlat index or `pg_emb
 |-------------------|------------|----------|
 | Search Speed      | Fast, but search speed depends on the number of clusters examined. More clusters mean higher accuracy but slower search times. | Typically faster than IVFFlat, especially in high-dimensional spaces, thanks to its graph-based nature. |
 | Accuracy          | Can achieve high accuracy but at the cost of examining more clusters and  longer search times. | Generally achieves higher accuracy for the same memory footprint compared to IVFFlat. |
-| Memory Usage      | Uses less memory since it only stores the centroids of clusters and the lists of vectors within these clusters. | They require more memory than IVFFlat because they build a graph structure with multiple layers. |
+| Memory Usage      | Uses less memory since it only stores the centroids of clusters and the lists of vectors within these clusters. | Require more memory than IVFFlat because they build a graph structure with multiple layers. |
 | Index Construction Speed | Index building process is relatively fast. The data points are assigned to the nearest centroid, and inverted lists are constructed. | Index construction involves building multiple layers of graphs, which can be computationally intensive, especially for a high `ef_construction` value. |
 | Distance Metrics  | Typically used for L2 distances, but `pgvector` also supports inner product and cosine distance. | Supports L2, Cosine, and Manhattan distance metrics. |
 
@@ -178,7 +182,7 @@ Ultimately, the choice between the `pgvector` with IVFFlat or `pg_embedding` wit
 - **Memory constraints**: If you are working under strict memory constraints, you may opt for the IVFFlat index, as it typically consumes less memory than an HNSW index. However, be mindful that this might come at the cost of search speed and accuracy.
 - **Search speed**: If your primary concern is the speed at which you can retrieve nearest neighbors, especially in high-dimensional spaces, an HNSW index is likely the better choice due to its graph-based approach.
 - **Accuracy and recall**: If achieving high accuracy and recall is critical for your application, an HNSW index may be the better option. Its graph-based approach generally yields better recall compared to IVFFlat.
-- **Distance metrics**: `pgvector` supports the L2 distance metric (`<->`), inner product (`<#>`), and cosine distance (`<=>`). The `pg_embedding` extension supports L2, Cosine, and Manhattan distance metrics.
+- **Distance metrics**: `pgvector` supports the L2 (`<->`), inner product (`<#>`), and cosine (`<=>`). The `pg_embedding` extension supports L2 (`<->`), cosine (`<=>`), and Manhattan (`<~>`).
 
 ## Migrate from pgvector to pg_embedding
 
@@ -196,7 +200,7 @@ CREATE TABLE items (id BIGSERIAL PRIMARY KEY, embedding VECTOR(3));
 CREATE TABLE documents(id BIGSERIAL PRIMARY KEY, embedding real[]);
 ```
 
-With that in mind, the first step in the migration process is to install the `pg_embedding` extension:
+The first step in the migration process is to install the `pg_embedding` extension:
 
 ```sql
 CREATE EXTENSION embedding;
@@ -208,13 +212,13 @@ Once the `pg_embedding` extension is installed, you can use the same vector embe
 SELECT id, embedding FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;
 ```
 
-To make that query work with `pg_embedding`, you must cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array: `ARRAY[3,1,2]`:
+To make the query work with `pg_embedding`, you must cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array: `ARRAY[3,1,2]`:
 
 ```sql
 SELECT id, embedding::real[] FROM items ORDER BY embedding::real[] <-> ARRAY[3,1,2] LIMIT 1;
 ```
 
-Alternatively, if you want to avoid typecasting in your queries, you can alter your table to change the embedding column type from `VECTOR` to `real[]`. This approach may be time and resource intensive, depending on the size of your dataset.
+Alternatively, if you want to avoid typecasting, you can alter your table to change the embedding column type from `VECTOR` to `real[]`. This operation may be time and resource intensive, depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
 
 Given a table defined for `pgvector`, such as this one:
 
@@ -240,9 +244,9 @@ ALTER TABLE items DROP COLUMN embedding; // Drop the old column
 ALTER TABLE items RENAME COLUMN embedding_real TO embedding; // Rename the new column
 ```
 
-If you choose to alter your table to change the column type from `VECTOR` to `real[]` instead of typecasting, you still have to [create an HNSW index](#create-an-hnsw-index) (if you are indexing your data) and update your application queries to use the required [pg_embedding query syntax](#query).
+If you choose to change the column type from `VECTOR` to `real[]` instead of typecasting, you still have to [create an HNSW index](#create-an-hnsw-index) (if you are indexing your data) and update your application queries to use the required [pg_embedding query syntax](#similarity-search) for the defined index.
 
-## Upgrade to pg_embedding with on-disk indexes
+## Upgrade to pg_embedding for on-disk indexes
 
 The `pg_embedding` extension version in Neon was updated on August 3, 2023 to add support for on-disk HNSW indexes and additional distance metrics. If you installed `pg_embedding` before this date, you can upgrade to the new version (0.3.5 and higher) following the instructions below.
 
