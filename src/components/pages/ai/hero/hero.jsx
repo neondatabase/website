@@ -9,6 +9,7 @@ import useWindowSize from 'react-use/lib/useWindowSize';
 
 import Button from 'components/shared/button/button';
 import Container from 'components/shared/container/container';
+import LINKS from 'constants/links';
 import useIsTouchDevice from 'hooks/use-is-touch-device';
 
 const MOBILE_WIDTH = 768;
@@ -94,8 +95,7 @@ const Hero = () => {
         <Button
           className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-8 md:mt-6"
           theme="primary"
-          // TODO: add link to "Get Started" button
-          to="#"
+          to={LINKS.signup}
         >
           Get Started
         </Button>
