@@ -248,7 +248,7 @@ If you choose to change the column type from `VECTOR` to `real[]` instead of typ
 
 ## Upgrade to pg_embedding for on-disk indexes
 
-The `pg_embedding` extension version in Neon was updated on August 3, 2023 to add support for on-disk HNSW indexes and additional distance metrics. If you installed `pg_embedding` before this date, you can upgrade to the new version (0.3.5 and higher) following the instructions below.
+The `pg_embedding` extension version in Neon was updated on August 3, 2023 to add support for on-disk HNSW indexes and additional distance metrics. If you installed `pg_embedding` before this date, you can upgrade to the new version (0.3.5 or higher) following the instructions below.
 
 The previous `pg_embedding` version (0.1.0 and earlier) creates HNSW indexes in memory, which means that indexes are recreated on the first index access after a compute restart. Also, this version only supports Euclidean (2) distance. The new `pg_embedding` version adds support for Cosine and Manhattan distance metrics.
 
@@ -256,7 +256,7 @@ Upgrading to the new version of `pg_embedding` requires dropping the existing `p
 
 To upgrade:
 
-1. Drop the existing extension (0.1.0 or earlier):
+1. Drop the existing extension and indexes (version 0.1.0 or earlier):
 
     ```sql
     DROP EXTENSION embedding CASCADE;
@@ -268,9 +268,9 @@ To upgrade:
     SELECT * FROM pg_available_extension WHERE name = 'embedding';
     ```
 
-    If the **default_version** is not 0.3.5 or higher, restart your compute instance. Pro users can do so by temporarily setting your **Auto-suspend** setting to a low value like 2 seconds, allowing the compute to restart, and then setting **Auto-suspend** back to its normal value. For instructions, refer to the _Auto-suspend_ configuration details in [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+    If the **default_version** is not 0.3.5 or higher, restart your compute instance. Pro users can do so by temporarily setting the **Auto-suspend** setting to a low value like 2 seconds, allowing the compute to restart, and then setting **Auto-suspend** back to its normal value. For instructions, refer to the _Auto-suspend_ configuration details in [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
-3. Install the new version of the extension.
+3. Install the new version of the extension (version 0.3.5 or higher).
 
     ```sql
     CREATE EXTENSION embedding;
