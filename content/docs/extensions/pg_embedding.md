@@ -266,6 +266,10 @@ To upgrade:
 
     ```sql
     SELECT * FROM pg_available_extensions WHERE name = 'embedding';
+
+    name      | default_version | installed_version |  comment   
+    ----------+-----------------+-------------------+------------
+    embedding | 0.3.5           |                   | hnsw index
     ```
 
     If the **default_version** is not 0.3.5 or higher, restart your compute instance. Pro users can do so by temporarily setting the **Auto-suspend** setting to a low value like 2 seconds, allowing the compute to restart, and then setting **Auto-suspend** back to its normal value. For instructions, refer to the _Auto-suspend_ configuration details in [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
@@ -276,7 +280,7 @@ To upgrade:
     CREATE EXTENSION embedding;
     ```
 
-4. You should not be able to recreate your HNSW index, which will be created on disk. For example:
+4. You should now be able to recreate your HNSW index, which will be created on disk. For example:
 
     ```sql
     CREATE INDEX ON documents USING hnsw(embedding) WITH (dims=3, m=3);
