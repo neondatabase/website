@@ -43,6 +43,10 @@ connection_uris
 └───────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+<Admonition type="tip">
+If you need to extract a `connection_uri` programmatically, the Neon CLI provides a `neonctl connection-string` command you can use. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+</Admonition>
+
 ## List branches with the CLI
 
 The following Neon CLI command lists branches in your Neon project. If your Neon account has more than one project, you will be required to specify a project ID using the `--project-id` option. To view the CLI documentation for this method, refer to the [Neon CLI reference](https://neon.tech/docs/reference/cli-branches#list).
@@ -86,6 +90,11 @@ After exporting your key, source the profile file (source `~/.bashrc` or source 
 You do not need to specify the variable name explicitly when using a Neon CLI command. A Neon CLI command looks for a `NEON_API_KEY` variable setting by default.
 
 This API key configuration ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Remember, you should handle your API key with the same level of security as your other credentials.
+
+Additionally, when integrating the CLI into your toolchains, you may prefer a different output format than the default `table` format. The Neon CLI supports both `json` and `yaml` output formats. For example, if you prefer output in `json` format, add `--output json` to your Neon CLI command.
+
+If you need to extract a `connection_uri` programmatically, the Neon CLI provides a `neonctl connection string` command you can use. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+</Admonition>
 
 ## Need help?
 
