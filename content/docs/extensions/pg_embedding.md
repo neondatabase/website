@@ -276,10 +276,10 @@ To upgrade:
     CREATE EXTENSION embedding;
     ```
 
-6. Verify that the **installed_version** of the extension is now 0.3.5 or higher.
+4. You should not be able to recreate your HNSW index, which will be created on disk. For example:
 
     ```sql
-    SELECT * FROM pg_available_extension WHERE name = 'embedding';
+    CREATE INDEX ON documents USING hnsw(embedding) WITH (dims=3, m=3);
     ```
 
 ## pg_embedding extension GitHub repository
