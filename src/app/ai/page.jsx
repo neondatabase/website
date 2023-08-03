@@ -47,7 +47,12 @@ const AIPage = () => (
     footerTheme="black-new"
     footerWithTopBorder
   >
-    <link rel="preload" href="/animations/pages/ai/scene.splinecode" as="fetch" />
+    <link
+      rel="preload"
+      href="/animations/pages/ai/scene.splinecode"
+      as="fetch"
+      crossOrigin="anonymous"
+    />
     <Hero />
     <Stats />
     <Integration />
