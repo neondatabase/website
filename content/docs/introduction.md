@@ -30,6 +30,10 @@ Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about
 
 <a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" title="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
 
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" title="Collaborate on open-source projects" icon="github">Headless vector search</a>
+
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" title="Collaborate on open-source projects" icon="github">Open AI completions</a>
+
 </DetailIconCards>
 
 ## Guides
