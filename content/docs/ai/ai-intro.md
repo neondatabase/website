@@ -2,7 +2,6 @@
 title: AI & embeddings
 subtitle: Build AI applications with Neon serverless Postgres as your vector database
 enableTableOfContents: true
-isDraft: true
 ---
 
 Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs) such as OpenAI.
@@ -19,7 +18,7 @@ Neon supports the following extensions for enabling PostgreSQL as your vector da
 
 `pg_embedding` is an open-source extension that enables storing vector embeddings and graph-based vector similarity search in Postgres using the Hierarchical Navigable Small World (HNSW) algorithm. It supports HNSW indexes, which unlock new levels of efficiency in high-dimensional similarity search, enabling you to scale your AI applications to millions of rows. To get started, see [The pg_embedding extension](/docs/extensions/pg_embedding).
 
-If you are currently using `pgvector` and want to try `pg_embedding`, refer to [Migrating to pg_embedding](/docs/extensions/pg_embedding#migrate-from-pgvector-to-pgembedding).
+If you are currently using `pgvector` and want to try `pg_embedding`, refer to [Migrate from pgvector to pg_embedding](/docs/extensions/pg_embedding#migrate-from-pgvector-to-pgembedding).
 
 ### pgvector
 
@@ -27,11 +26,11 @@ If you are currently using `pgvector` and want to try `pg_embedding`, refer to [
 
 ## Example applications
 
-Check out the following AI application examples to start building your AI application with Neon.
+Check out the following AI application examples built with Neon.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/yc-idea-matcher" description="Build an AI-powered semantic search application" icon="github">Semantic search app</a>
-<a href="https://github.com/neondatabase/ask-neon" description="Build an AI-powered chatbot" icon="github">Chatbot app</a>
+<a href="https://github.com/neondatabase/yc-idea-matcher" description="Build an AI-powered semantic search application with pg_embedding" icon="github">Semantic search app</a>
+<a href="https://github.com/neondatabase/ask-neon" description="Build an AI-powered chatbot with pgvector" icon="github">Chatbot app</a>
 <a href="https://vercel.com/templates/next.js/postgres-pgvector" description="Enable vector similarity search with Vercel Postgres" icon="github">Vercel Postgres pgvector Starter</a>
 <a href="https://github.com/neondatabase/postgres-ai-playground" description="Build an AI-enabled SQL playground for natural language queries" icon="github">Web-based AI SQL Playground</a>
 </DetailIconCards>
