@@ -29,7 +29,9 @@ If you are currently using `pgvector` and want to try `pg_embedding`, refer to [
 
 Check out the following AI application examples to start building your AI application with Neon.
 
-- [Build an AI-powered semantic search application](https://github.com/neondatabase/yc-idea-matcher)
-- [Build aan AI-powered chatbot](https://github.com/neondatabase/ask-neon)
-- [Vercel Postgres pgvector Starter](https://vercel.com/templates/next.js/postgres-pgvector)
-- [Build an AI-enabled SQL playground for natural language queries](https://github.com/neondatabase/postgres-ai-playground)
+<DetailIconCards>
+<a href="https://github.com/neondatabase/yc-idea-matcher" description="Build an AI-powered semantic search application" icon="github">Semantic search app</a>
+<a href="https://github.com/neondatabase/ask-neon" description="Build an AI-powered chatbot" icon="github">Chatbot app</a>
+<a href="https://vercel.com/templates/next.js/postgres-pgvector" description="Enable vector similarity search with Vercel Postgres" icon="github">Vercel Postgres pgvector Starter</a>
+<a href="https://github.com/neondatabase/postgres-ai-playground" description="Build an AI-enabled SQL playground for natural language queries" icon="github">Web-based AI SQL Playground</a>
+</DetailIconCards>
