@@ -180,37 +180,41 @@ Ultimately, the choice between the `pgvector` with IVFFlat or `pg_embedding` wit
 - **Accuracy and recall**: If achieving high accuracy and recall is critical for your application, an HNSW index may be the better option. Its graph-based approach generally yields better recall compared to IVFFlat.
 - **Distance metrics**: `pgvector` supports the L2 distance metric (`<->`), inner product (`<#>`), and cosine distance (`<=>`). The `pg_embedding` extension supports L2, Cosine, and Manhattan distance metrics.
 
-## pg_embedding extension GitHub repository
-
-The GitHub repository for the Neon `pg_embedding` extension can be found [here](https://github.com/neondatabase/pg_embedding).
-
 ## Migrate from pgvector to pg_embedding
 
-The `pgvector` extension stores vector embeddings in a `VECTOR` column type:
+Before you begin, it is important to understand that the `pgvector` extension stores vector embeddings in a `VECTOR` column type, whereas the `pg_embedding` extension stores vector embeddings as an array of `real[]` numbers, as demonstrated in the following `CREATE TABLE` statements:
+
+`pg_vector`:
 
 ```sql
 CREATE TABLE items (id BIGSERIAL PRIMARY KEY, embedding VECTOR(3));
 ```
 
-The `pg_embedding` extension stores vector embeddings as an array of `real[]` numbers:
+`pg_embedding`:
 
 ```sql
 CREATE TABLE documents(id BIGSERIAL PRIMARY KEY, embedding real[]);
 ```
 
-The the `VECTOR` type used with `pgvector` is compatible with the `real[]` type used with `pg_embedding`. This allows you to modify vector search queries to interpret (typecast) `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
+With that in mind, the first step in the migration process is to install the `pg_embedding` extension:
+
+```sql
+CREATE EXTENSION embedding;
+```
+
+Once the `pg_embedding` extension is installed, you can use the same vector embedding table used with `pgvector`. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is that you modify vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
 
 ```sql
 SELECT id, embedding FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;
 ```
 
-To make the query work with `pg_embedding`, you have to typecast the `embedding` column to `real[]` (`embedding::real[]`) and defined the search vector as an array: `ARRAY[3,1,2]`:
+To make that query work with `pg_embedding`, you must cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array: `ARRAY[3,1,2]`:
 
 ```sql
 SELECT id, embedding::real[] FROM items ORDER BY embedding::real[] <-> ARRAY[3,1,2] LIMIT 1;
 ```
 
-Alternatively, you can alter the `embedding` column type. Depending on the size of your data, this could be expensive and disruptive operation.
+Alternatively, if you want to avoid typecasting in your queries, you can alter your table to change the embedding column type from `VECTOR` to `real[]`. This approach may be time and resource intensive, depending on the size of your dataset.
 
 Given a table defined for `pgvector`, such as this one:
 
@@ -227,7 +231,7 @@ TYPE real[]
 USING (embedding::real[]);
 ```
 
-This could also be done by adding a new `real[]` type column to your existing table, copy the data from the `VECTOR` columns to the new column, dropping the old `VECTOR` type column, and renaming the new column to replace the old column:
+You can also change the column type by adding a new `real[]` type column to your table, copying the data from the `VECTOR` column to the new column, dropping the old `VECTOR` column, and renaming the new column:
 
 ```sql
 ALTER TABLE items ADD COLUMN embedding_real real[]; // Add column
@@ -236,7 +240,11 @@ ALTER TABLE items DROP COLUMN embedding; // Drop the old column
 ALTER TABLE items RENAME COLUMN embedding_real TO embedding; // Rename the new column
 ```
 
-If you decide to alter your table to change the column type from `VECTOR` to `real[]`, you will still have to update your application queries to use the required [pg_embedding query syntax](#query) and [create an HNSW index](#create-an-hnsw-index) if you are indexing your data. If moving away from `pgvector`, you can also drop any `pgvector` indexes that were defined.
+If you choose to alter your table to change the column type from `VECTOR` to `real[]` instead of typecasting, you still have to [create an HNSW index](#create-an-hnsw-index) (if you are indexing your data) and update your application queries to use the required [pg_embedding query syntax](#query).
+
+## pg_embedding extension GitHub repository
+
+The GitHub repository for the Neon `pg_embedding` extension can be found [here](https://github.com/neondatabase/pg_embedding).
 
 ## Further reading
 
