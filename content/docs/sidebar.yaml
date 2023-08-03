@@ -193,18 +193,22 @@
               slug: guides/vercel-manual
     - title: OAuth
       slug: guides/oauth-integration
+- title: AI & embeddings
+  items:
+    - title: Introduction
+      slug: ai/ai-intro
+    - title: Vector search with pg_embedding
+      slug: extensions/pg_embedding
+    - title: Vector search with pgvector
+      slug: extensions/pgvector
 - title: Extensions
   items:
     - title: Supported extensions
       slug: extensions/pg-extensions
     - title: neon_utils
       slug: extensions/neon-utils
-    - title: pg_embedding
-      slug: extensions/pg_embedding
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
-    - title: pgvector
-      slug: extensions/pgvector
 - title: Import data
   items:
     - title: Import from PostgreSQL
