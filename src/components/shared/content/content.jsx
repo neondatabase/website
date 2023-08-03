@@ -11,7 +11,7 @@ import Admonition from 'components/pages/doc/admonition';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
-import IntroNavigation from 'components/pages/doc/intro-navigation';
+import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import AnchorHeading from 'components/shared/anchor-heading';
@@ -57,24 +57,26 @@ const getComponents = (withoutAnchorHeading) => ({
   Admonition,
   CodeBlock,
   CodeTabs,
-  IntroNavigation,
+  DetailIconCards,
   TechnologyNavigation,
   CommunityBanner,
 });
 
 // eslint-disable-next-line no-return-assign
-const Content = forwardRef(({ className = null, content, asHTML = false, withoutAnchorHeading = false }, ref) => (
-  <div
-    className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}
-    ref={ref}
-  >
-    {asHTML ? (
-      <div dangerouslySetInnerHTML={{ __html: content }} />
-    ) : (
-      <MDXRemote components={getComponents(withoutAnchorHeading)} {...content} />
-    )}
-  </div>
-));
+const Content = forwardRef(
+  ({ className = null, content, asHTML = false, withoutAnchorHeading = false }, ref) => (
+    <div
+      className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}
+      ref={ref}
+    >
+      {asHTML ? (
+        <div dangerouslySetInnerHTML={{ __html: content }} />
+      ) : (
+        <MDXRemote components={getComponents(withoutAnchorHeading)} {...content} />
+      )}
+    </div>
+  )
+);
 
 Content.propTypes = {
   className: PropTypes.string,
