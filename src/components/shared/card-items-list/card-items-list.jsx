@@ -50,14 +50,15 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
       )}
       aria-hidden={ariaHidden}
     >
-      {items.map(({ icon, title, description, url }, index) => (
+      {items.map(({ icon, title, description, url, isDisabled }, index) => (
         <li className="relative" key={index}>
           <Link
             className={clsx(
               'group flex h-full min-h-[176px] flex-col rounded-[10px] border border-gray-new-15 xl:min-h-[165px] lg:min-h-max md:flex-row md:gap-x-3',
               isLarge
                 ? 'p-5 xl:pb-4 lg:p-4 lg:pb-5 md:flex-col md:p-5 md:pb-6 sm:space-y-3'
-                : 'px-5 pb-4 pt-5 xl:p-3.5 lg:p-4'
+                : 'px-5 pb-4 pt-5 xl:p-3.5 lg:p-4',
+              { 'pointer-events-none': isDisabled }
             )}
             to={url}
             target={url.startsWith('http') ? '_blank' : '_self'}
@@ -105,12 +106,17 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
               >
                 {description}
               </p>
-              {isLarge && (
+              {isLarge && !isDisabled && (
                 <div className="mt-auto inline-flex items-baseline text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
                   <span className="text-[15px] leading-none tracking-extra-tight">
                     View example
                   </span>
                   <ArrowIcon className="ml-1 shrink-0" />
+                </div>
+              )}
+              {isLarge && isDisabled && (
+                <div className="mt-auto self-start text-[15px] leading-none tracking-extra-tight text-gray-new-60">
+                  Coming soon
                 </div>
               )}
             </div>

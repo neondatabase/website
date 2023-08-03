@@ -19,17 +19,18 @@ const exampleApps = [
     url: 'https://github.com/neondatabase/ask-neon',
   },
   {
-    icon: imageSearchIcon,
-    title: 'Image search',
-    description: 'Retrieve similar images based on user queries.',
-    url: 'https://github.com/neondatabase/ai-image-search',
-  },
-  {
     icon: semanticSearchIcon,
     title: 'Semantic search',
     description:
       'Build next-level search experiences for your users where you understand the true meaning of their queries.',
-    url: 'https://github.com/neondatabase/ai-sematic-search',
+    url: 'https://github.com/neondatabase/yc-idea-matcher',
+  },
+  {
+    icon: imageSearchIcon,
+    title: 'Image search',
+    description: 'Retrieve similar images based on user queries.',
+    url: '',
+    isDisabled: true,
   },
 ];
 
