@@ -364,19 +364,13 @@ Another term for smoke test
 
 `DetailIconCards` is a custom MDX component that displays data in a card format. Each card contains icon, title, href and description. This layout is especially useful for presenting grouped information in a visually pleasing and easy-to-understand way.
 
-The available icons, that can be used in the card: `audio-jack`, `import`, `ladder`, `split-branch`, `app-store`, `transactions`, `github`.
-
 ```md
 
 <DetailIconCards>
 
-<a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a Neon database from any application" icon="audio-jack">Connect</a>
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
 
-<a href="/docs/import/import-from-postgres" description="Import your own data or sample data that you can use to explore Neon" icon="import">Import data</a>
-
-<a href="/docs/manage/overview" description="Learn how to manage Neon projects, branches, compute resources, databases, and roles" icon="ladder">Manage</a>
-
-<a href="/docs/introduction/branching" description="Learn about branching and how you can use it to optimize development workflows" icon="split-branch">Branching</a>
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
 
 </DetailIconCards>
 
