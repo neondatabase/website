@@ -130,10 +130,9 @@ const Integration = () => {
                 )}
               </AnimatePresence>
             </div>
-            {/* TODO: add link to "Learn more" button */}
             <AnimatePresence initial={false} mode="wait">
               {items.map(
-                ({ title, text }, index) =>
+                ({ title, text, linkUrl }, index) =>
                   index === activeTab && (
                     <m.p
                       className="mt-3 h-[15px] pl-5 text-[15px] font-light leading-none tracking-extra-tight text-gray-new-60"
@@ -146,7 +145,7 @@ const Integration = () => {
                       <Link
                         className="inline-flex items-baseline tracking-extra-tight"
                         theme="green"
-                        to="#"
+                        to={linkUrl}
                       >
                         Learn more
                         <ArrowIcon className="ml-1" />
