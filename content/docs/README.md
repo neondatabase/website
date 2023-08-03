@@ -360,6 +360,22 @@ Another term for smoke test
 {/* other content here */}
 ```
 
+### Detail Icon Cards
+
+`DetailIconCards` is a custom MDX component that displays data in a card format. Each card contains icon, title, href and description. This layout is especially useful for presenting grouped information in a visually pleasing and easy-to-understand way.
+
+```md
+
+<DetailIconCards>
+
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
+
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
+
+</DetailIconCards>
+
+```
+
 ### Acceptable markup for term
 
 - `*italic*`

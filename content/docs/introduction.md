@@ -16,21 +16,21 @@ Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about
 
 ## Neon Documentation
 
-<IntroNavigation>
+<DetailIconCards>
 
-[Connect](/docs/connect/connect-from-any-app 'Learn how to connect to a Neon database from any application')
+<a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a Neon database from any application" icon="audio-jack">Connect</a>
 
-[Import data](/docs/import/import-from-postgres 'Import your own data or sample data that you can use to explore Neon')
+<a href="/docs/import/import-from-postgres" description="Import your own data or sample data that you can use to explore Neon" icon="import">Import data</a>
 
-[Manage](/docs/manage/overview 'Learn how to manage Neon projects, branches, compute resources, databases, and roles')
+<a href="/docs/manage/overview" description="Learn how to manage Neon projects, branches, compute resources, databases, and roles" icon="ladder">Manage</a>
 
-[Branching](/docs/introduction/branching 'Learn about branching and how you can use it to optimize development workflows')
+<a href="/docs/introduction/branching" description="Learn about branching and how you can use it to optimize development workflows" icon="split-branch">Branching</a>
 
-[PostgreSQL extensions](/docs/extensions/pg-extensions 'Level up your PostgreSQL database with our extension installation guide')
+<a href="/docs/extensions/pg-extensions" description="Level up your PostgreSQL database with our extension installation guide" icon="app-store">PostgreSQL extensions</a>
 
-[Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api 'Manage Neon programmatically using the Neon API')
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
 
-</IntroNavigation>
+</DetailIconCards>
 
 ## Guides
 
