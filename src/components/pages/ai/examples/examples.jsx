@@ -9,7 +9,6 @@ import chatbotIcon from './images/chatbot.svg';
 import imageSearchIcon from './images/image-search.svg';
 import semanticSearchIcon from './images/semantic-search.svg';
 
-// TODO: add app links and real descriptions
 const exampleApps = [
   {
     icon: chatbotIcon,

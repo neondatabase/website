@@ -60,7 +60,6 @@ export default {
     pathname: LINKS.partners,
   },
   ai: {
-    // TODO: add real title and description
     title: 'Powering next gen AI apps with Postgres — Neon',
     description:
       'Scale your transformative LLM applications to millions of users with vector indexes and similarity search in Neon.',
