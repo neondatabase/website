@@ -364,6 +364,8 @@ Another term for smoke test
 
 `DetailIconCards` is a custom MDX component that displays data in a card format. Each card contains icon, title, href and description. This layout is especially useful for presenting grouped information in a visually pleasing and easy-to-understand way.
 
+The available icons, that can be used in the card: `audio-jack`, `import`, `ladder`, `split-branch`, `app-store`, `transactions`, `github`.
+
 ```md
 
 <DetailIconCards>
