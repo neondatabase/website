@@ -100,10 +100,24 @@
   items:
     - title: Neon features
       items: 
-        - title: Manage roles and databases with SQL
-          slug: guides/manage-database-access
+        - title: Autoscaling
+          slug: guides/autoscaling-guide
+        - title: Branching
+          items: 
+            - title: Point-in-time restore
+              slug: guides/branching-pitr
+            - title: Branching with the CLI
+              slug: guides/branching-neon-cli
+            - title: Branching with the API
+              slug: guides/branching-neon-api
+            - title: Branching with GitHub Actions
+              slug: guides/branching-github-actions
+        - title: Project sharing
+          slug: guides/project-sharing-guide
         - title: Read replicas
           slug: guides/read-replica-guide
+        - title: Manage roles and databases with SQL
+          slug: guides/manage-database-access
     - title: Languages
       items:
         - title: Elixir
@@ -143,6 +157,8 @@
                   slug: guides/prisma-migrate
     - title: Backend-as-a-service
       items:
+        - title: Exograph
+          slug: guides/exograph
         - title: Grafbase
           slug: guides/grafbase
         - title: Hasura
@@ -189,6 +205,10 @@
   items:
     - title: Supported extensions
       slug: extensions/pg-extensions
+    - title: neon_utils
+      slug: extensions/neon-utils
+    - title: pg_embedding
+      slug: extensions/pg_embedding
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
 - title: Import data
@@ -208,6 +228,8 @@
     - title: Neon CLI
       slug: reference/neon-cli
       items:
+        - title: Install and connect
+          slug: reference/cli-install
         - title: auth
           slug: reference/cli-auth
         - title: me

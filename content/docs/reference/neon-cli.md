@@ -1,88 +1,49 @@
 ---
 title: Neon CLI
-subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
+subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
 ---
 
-The Neon CLI supports numerous operations, such as authentication and management of Neon projects, branches, compute endpoints, databases, roles, and more.
+The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the Neon CLI.
 
-The Neon CLI command name is `neonctl`. The GitHub repository for the Neon CLI is found [here](https://github.com/neondatabase/neonctl).
+For installation instructions, see [Neon CLI — Install and connect](/docs/reference/cli-install).
 
-## Install the Neon CLI
-
-This section describes how to install the Neon CLI.
-
-### Prerequisites
-
-Before installing, ensure that you have met the following prerequisites:
-
-- Node.js 16.0 or higher. To check if you already have Node.js, run the following command:
-
-    ```shell
-    node -v
-    ```
-
-- The `npm` package manager.  To check if you already have `npm`, run the following command:
-
-   ```shell
-   npm -v
-   ```
-
-  If you need to install  `Node.js` or `npm`, refer to instructions on the [official nodejs page](https://nodejs.org) or use the [Node version manager](https://github.com/nvm-sh/nvm).
-
-### Install
-
-To install the Neon CLI, run the following command:
-
-```shell
-npm i -g neonctl
-```
-
-### Upgrade
-
-To upgrade to the latest version of the Neon CLI, run the `npm i -g neonctl` command again.
-
-## Connect
-
-The Neon CLI supports connecting via web authentication or with an API key.
-
-### Connect via web authentication
-
-Run the following command to connect to Neon via web authentication:
+## Synopsis
 
 ```bash
-neonctl auth
+neonctl --help
+usage: neonctl <command> [options]
+
+Commands:
+  neonctl auth                        Authenticate              [aliases: login]
+  neonctl me                          Show current user
+  neonctl projects                    Manage projects         [aliases: project]
+  neonctl branches                    Manage branches          [aliases: branch]
+  neonctl databases                   Manage databases   [aliases: database, db]
+  neonctl roles                       Manage roles               [aliases: role]
+  neonctl operations                  Manage operations     [aliases: operation]
+  neonctl connection-string [branch]  Get connection string        [aliases: cs]
+  neonctl completion                  generate completion script
+
+Global options:
+  -o, --output      Set output format
+                  [string] [choices: "json", "yaml", "table"] [default: "table"]
+      --config-dir  Path to config directory
+                             [string] [default: ""]
+      --api-key     API key  [string] [default: ""]
+      --analytics   Manage analytics. Example: --no-analytics, --analytics false
+                                                       [boolean] [default: true]
+  -v, --version     Show version number                                [boolean]
+  -h, --help        Show help                                          [boolean]
 ```
-
-The [neonctl auth](/docs/reference/cli-auth) command launches a browser window where you can authorize the Neon CLI to access your Neon account. If you have not authenticated previously, running a Neon CLI command automatically launches the web authentication process unless you have specified an API key.
-
-### Connect with an API key
-
-To connect with a Neon API key, you can specify the `--api-key` option when running a Neon CLI command. For example, the following `neonctl projects list` command connects to Neon using the `--api-key` option:
-
-```bash
-neonctl projects list --api-key <neon_api_key>
-```
-
-To avoid including the `--api-key` option with each CLI command, you can export your API key to the `NEON_API_KEY` environment variable.
-
-```bash
-export NEON_API_KEY=<neon_api_key>
-```
-
-For information about obtaining an Neon API key, see [Create an API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
-
-## Configure autocompletion
-
-The Neon CLI supports autocompletion, which you can configure in a few easy steps. See [Neon CLI commands — completion](/docs/reference/cli-completion) for instructions.
 
 ## Commands
 
 | Command                                                 | Subcommands                            | Description               |
 |---------------------------------------------------------|----------------------------------------|---------------------------|
 | [auth](../reference/cli-auth)                                     |                                        | Authenticate              |
-| [projects](../reference/cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | Manage projects           |
 | [me](../reference/cli-me)                                         |                                        | Show current user         |
+| [projects](../reference/cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | Manage projects           |
 | [branches](../reference/cli-branches)                             | `list`, `create`, `rename`, `add-compute`, `set-primary`, `delete`, `get` | Manage branches           |
 | [databases](../reference/cli-databases)                           | `list`, `create`, `delete`             | Manage databases          |
 | [roles](../reference/cli-roles)                                   | `list`, `create`,  `delete`            | Manage roles              |
@@ -116,7 +77,7 @@ Global options are supported with any Neon CLI command.
   Specifies the path to the `neonctl` configuration directory. To view the default configuration directory containing you `credentials.json` file, run `neonctl --help`. The credentials file is created when you authenticate using the `neonctl auth` command. This option is only necessary if you move your `neonctl` configuration file to a location other than the default.
 
   ```bash
-  neonctl projects list --config-dir /home/dtprice/.config/neonctl
+  neonctl projects list --config-dir /home/<user>/.config/neonctl
   ```
 
 - <a id="api-key"></a>`--api-key`
@@ -166,3 +127,7 @@ Global options are supported with any Neon CLI command.
   
   neonctl branches create --help
   ```
+
+## GitHub
+
+The GitHub repository for the Neon CLI is found [here](https://github.com/neondatabase/neonctl).

@@ -23,7 +23,9 @@ const ReleaseNotesList = ({ items }) => (
       {items.map(({ slug, content }, index) => {
         const { capitalisedCategory: category } = getReleaseNotesCategoryFromSlug(slug);
         const { datetime, label } = getReleaseNotesDateFromSlug(slug);
-        const title = getExcerpt(content, 200).replace("What's new - ", '');
+        const regex = /What's new\s?(-\s)?/i;
+
+        const title = getExcerpt(content, 200).replace(regex, '');
 
         return (
           <li

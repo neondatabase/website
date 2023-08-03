@@ -119,7 +119,7 @@ This section describes using the `pg_dump` utility to dump data from an existing
     </CodeBlock>
 
     <Admonition type="note">
-    The database specified in the command above must exist in Neon. If it does not, create it first. See [/docs/manage/databases#create-a-database].
+    The database specified in the command above must exist in Neon. If it does not, create it first. See [Manage databases](/docs/manage/databases#create-a-database).
     </Admonition>
 
     The example above includes some optional arguments. The `-Fc` option specifies the format of the archive. In this case, `-Fc` indicates a custom-format archive file. The `--single-transaction` option forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.) The `-c --if-exists` options drop database objects before creating them, if they already exist. The `-v` option runs `pg_restore` in verbose mode, allowing you to monitor what happens during the restore operation.

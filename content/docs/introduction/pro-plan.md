@@ -44,4 +44,4 @@ You can click on **Upgrade to Pro** in the Neon Console or click [here](https://
 
 ## How do I downgrade?
 
-If you find that the Pro plan isn't for you, you can downgrade in just a few clicks. Follow the steps described in [Cancel a subscription](/docs/introduction/manage-billing#cancel-a-subscription).
+If you find that the Pro plan isn't for you, you can downgrade in just a few clicks. Follow the steps described in [Downgrade your plan](/docs/introduction/manage-billing#downgrade-your-plan).
