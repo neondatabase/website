@@ -15,26 +15,29 @@ const items = [
   {
     title: 'pgvector',
     code: `    CREATE EXTENSION vector;
-    CREATE TABLE documents(id integer PRIMARY KEY, embedding VECTOR(3));
-    SELECT id FROM items ORDER BY embedding <-> '[1.1,2.2,3.3]';`,
+    CREATE TABLE items (id BIGSERIAL PRIMARY KEY, embedding VECTOR(3));
+    INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]');
+    SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;`,
     text: 'Store embeddings and perform vector similarity search in Postgres with pgvector.',
     linkUrl: '/docs/extensions/pgvector',
   },
   {
     title: 'pg_embedding',
     code: `    CREATE EXTENSION embedding;
-    CREATE TABLE documents(id integer PRIMARY KEY, embedding real[]);
-    SELECT id FROM documents ORDER BY embedding <-> ARRAY[1.1, 2.2, 3.3];`,
+    CREATE TABLE documents(id BIGSERIAL PRIMARY KEY, embedding real[]);
+    INSERT INTO documents(embedding) VALUES ('{1,2,3}'),('{4,5,6}');
+    SELECT * FROM documents ORDER BY embedding <-> ARRAY[3,2,1] LIMIT 1;`,
     text: 'Store embeddings and perform graph-based vector similarity search with pg_embedding.',
     linkUrl: '/docs/extensions/pg_embedding',
   },
   {
     title: 'Compatible vector types',
-    code: `    SELECT vector::real[] 
-    AS converted_vector
-    FROM vector_items;`,
-    text: 'Compatible pgvector and pg_embedding vector types enable easy migration',
-    linkUrl: '/docs/extensions/pg_embedding#insert-data',
+    code: `    SELECT embedding::real[] 
+    AS converted_vectors
+    FROM items;
+    `,
+    text: 'Compatible vector types make application migration easy.',
+    linkUrl: '/docs/extensions/pg_embedding#migrate-from-pgvector-to-pgembedding',
   },
 ];
 
