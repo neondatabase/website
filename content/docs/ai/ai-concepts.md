@@ -5,11 +5,11 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Vector embeddings are an essential component in building AI applications. Ths topic describes what vector embeddings are and how they are used in building AI applications.
+Vector embeddings are an essential component in building AI applications. Ths topic describes what vector embeddings are and how they are used to build AI and LLM applications.
 
 ## What are embeddings?
 
-When dealing with unstructured data, such as text, images, or audio, a common objective is to transform it into a more structured format that is easier to analyze and retrieve. This transformation can often be achieved through the use of 'embeddings', which are essentially vectors containing floating-point numbers that represent the data. For instance, a sentence like "The astronaut explores space" might be represented by the followign vector embedding: [0.3, 0.8, -0.9].
+When dealing with unstructured data, such as text, images, or audio, a common objective is to transform it into a more structured format that is easier to analyze and retrieve. This transformation can often be achieved through the use of 'embeddings', which are essentially vectors containing floating-point numbers that represent the data. For instance, a sentence like "The astronaut explores space" might be represented by the following vector embedding: [0.3, 0.8, -0.9].
 
 A key advantage of embeddings is that they allow us to measure similarity between different text strings. By calculating the distance between two vectors, we can assess their relatedness - the smaller the distance, the greater the similarity, and vice versa. This quality is particularly useful as it enables embeddings to capture the underlying meaning of the text.
 

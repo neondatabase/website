@@ -197,6 +197,8 @@
   items:
     - title: Introduction
       slug: ai/ai-intro
+    - title: AI concepts
+      slug: ai/ai-concepts
     - title: Vector search with pg-embedding
       slug: extensions/pg_embedding
     - title: Vector search with pgvector

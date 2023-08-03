@@ -31,9 +31,7 @@ Check out the following AI application examples to start building your AI applic
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/ai-sematic-search" description="Build an AI-powered semantic search application" icon="github">Semantic search app</a>
-
-<a href="https://github.com/neondatabase/ai-image-search" description="Build an image search application" icon="github">Image search app</a>
+<a href="https://github.com/neondatabase/yc-idea-matcher" description="Build an AI-powered semantic search application" icon="github">Semantic search app</a>
 
 <a href="https://github.com/neondatabase/ask-neon" description="Build aan AI-powered chatbot" icon="github">Chatbot app</a>
 
