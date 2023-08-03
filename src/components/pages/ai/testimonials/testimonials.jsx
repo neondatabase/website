@@ -8,6 +8,8 @@ import { useInView } from 'react-intersection-observer';
 import SliderItem from 'components/pages/ai/testimonials/slider-item';
 import Container from 'components/shared/container/container';
 
+import TwitterIcon from './images/twitter.inline.svg';
+
 // TODO: add links to original tweets?
 const sliderItems = [
   {
@@ -68,6 +70,12 @@ const Testimonials = () => {
       ref={sliderRef}
     >
       <Container className="flex flex-col items-center text-center" size="xs">
+        <TwitterIcon
+          className="h-[72px] w-[72px] xl:h-16 xl:w-16 md:h-[52px] md:w-[52px]"
+          width={72}
+          height={72}
+          aria-hidden
+        />
         <AnimatePresence initial={false} mode="wait">
           {sliderItems.map((item, index) =>
             index === activeSliderItemIndex ? (
