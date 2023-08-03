@@ -26,7 +26,7 @@ If you are currently using `pgvector` and want to try `pg_embedding`, refer to [
 
 ## Example applications
 
-Check out the following AI application examples to start building your AI application with Neon.
+Check out the following AI application examples built with Neon.
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/yc-idea-matcher" description="Build an AI-powered semantic search application with pg_embedding" icon="github">Semantic search app</a>
