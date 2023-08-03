@@ -6,6 +6,10 @@ enableTableOfContents: true
 
 The `pg_embedding` extension enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
 
+<Admonition type="important">
+The `pg_embedding` extension was updated on August 3, 2023 to add support for on-disk index creation and additional distance metrics. If you installed `pg_embedding` before this date and wnat to update to the new version, please see [Upgrade to pg_embedding with on-disk indexes](#upgrade-to-pg_embedding-with-on-disk-indexes) for instructions.
+</Admonition>
+
 This extension is based on [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw) implementation of HNSW
 the code for the current state-of-the-art billion-scale nearest neighbor search system<sup>[[1]](#references)</sup>.
 
@@ -237,6 +241,42 @@ ALTER TABLE items RENAME COLUMN embedding_real TO embedding; // Rename the new c
 ```
 
 If you choose to alter your table to change the column type from `VECTOR` to `real[]` instead of typecasting, you still have to [create an HNSW index](#create-an-hnsw-index) (if you are indexing your data) and update your application queries to use the required [pg_embedding query syntax](#query).
+
+## Upgrade to pg_embedding with on-disk indexes
+
+The `pg_embedding` extension version in Neon was updated on August 3, 2023 to add support for on-disk HNSW indexes and additional distance metrics. If you installed `pg_embedding` before this date, you can upgrade to the new version (0.3.5 and higher) following the instructions below.
+
+The previous `pg_embedding` version (0.1.0 and earlier) creates HNSW indexes in memory, which means that indexes are recreated on the first index access after a compute restart. Also, this version only supports Euclidean (2) distance. The new `pg_embedding` version adds support for Cosine and Manhattan distance metrics.
+
+Upgrading to the new version of `pg_embedding` requires dropping the existing `pg_embedding` extension and installing the new version. If your compute has not restarted recently, you may be required to restart it to make the new extension version available for installation.
+
+To upgrade:
+
+1. Drop the existing extension (0.1.0 or earlier):
+
+    ```sql
+    DROP EXTENSION embedding CASCADE;
+    ```
+
+2. Ensure that the new version of the extension is available for installation. The **default_version** should be 0.3.5 or higher.
+
+    ```sql
+    SELECT * FROM pg_available_extension WHERE name = 'embedding';
+    ```
+
+    If the **default_version** is not 0.3.5 or higher, restart your compute instance. Pro users can do so by temporarily setting your **Auto-suspend** setting to a low value like 2 seconds, allowing the compute to restart, and then setting **Auto-suspend** back to its normal value. For instructions, refer to the _Auto-suspend_ configuration details in [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+
+3. Install the new version of the extension.
+
+    ```sql
+    CREATE EXTENSION embedding;
+    ```
+
+6. Verify that the **installed_version** of the extension is now 0.3.5 or higher.
+
+    ```sql
+    SELECT * FROM pg_available_extension WHERE name = 'embedding';
+    ```
 
 ## pg_embedding extension GitHub repository
 
