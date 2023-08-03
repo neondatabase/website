@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { LazyMotion, domAnimation, useAnimation, m } from 'framer-motion';
+import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 

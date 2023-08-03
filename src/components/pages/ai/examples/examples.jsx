@@ -16,20 +16,20 @@ const exampleApps = [
     title: 'Chatbot',
     description:
       'Give LLM-based chatbots long-term memory and provide relevant context from your data.',
-    url: '/docs/guides/oauth-integration',
+    url: 'https://github.com/neondatabase/ask-neon',
   },
   {
     icon: imageSearchIcon,
     title: 'Image search',
     description: 'Retrieve similar images based on user queries.',
-    url: 'https://neon-experimental.vercel.app/',
+    url: 'https://github.com/neondatabase/ai-image-search',
   },
   {
     icon: semanticSearchIcon,
     title: 'Semantic search',
     description:
       'Build next-level search experiences for your users where you understand the true meaning of their queries.',
-    url: '/blog/api-cf-drizzle-neon',
+    url: 'https://github.com/neondatabase/ai-sematic-search',
   },
 ];
 

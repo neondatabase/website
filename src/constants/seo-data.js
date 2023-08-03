@@ -61,9 +61,9 @@ export default {
   },
   ai: {
     // TODO: add real title and description
-    title: 'AI — Neon',
+    title: 'Powering next gen AI apps with Postgres — Neon',
     description:
-      'Introducing pg_embedding for AI vector search: a faster alternative to pgvector that scales to millions of rows.',
+      'Scale your transformative LLM applications to millions of users with vector indexes and similarity search in Neon.',
     imagePath: '/images/social-previews/ai.jpg',
     pathname: LINKS.ai,
   },
