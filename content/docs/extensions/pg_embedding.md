@@ -265,7 +265,7 @@ To upgrade:
 2. Ensure that the new version of the extension is available for installation. The **default_version** should be 0.3.5 or higher.
 
     ```sql
-    SELECT * FROM pg_available_extension WHERE name = 'embedding';
+    SELECT * FROM pg_available_extensions WHERE name = 'embedding';
     ```
 
     If the **default_version** is not 0.3.5 or higher, restart your compute instance. Pro users can do so by temporarily setting the **Auto-suspend** setting to a low value like 2 seconds, allowing the compute to restart, and then setting **Auto-suspend** back to its normal value. For instructions, refer to the _Auto-suspend_ configuration details in [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
