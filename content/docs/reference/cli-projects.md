@@ -99,7 +99,7 @@ neonctl projects create --name mynewproject --region-id aws-us-west-2
 ```
 
 <Admonition type="tip">
-If you need to extract a `connection_uri` programmatically, the Neon CLI provides a `neonctl connection-string` command you can use. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+The Neon CLI provides a `neonctl connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
 </Admonition>
 
 -- Create a project with the `--output` format of the command set to `json`. This output format returns all of the project response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
