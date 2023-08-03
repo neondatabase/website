@@ -100,7 +100,7 @@ const Hero = () => {
 
   return (
     <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-[40px]">
-      <Container className="flex flex-col items-center" size="mdDoc">
+      <Container className="flex flex-col items-center" size="medium">
         <Heading
           className="inline-flex flex-col text-center font-medium !leading-none tracking-tighter md:text-4xl"
           tag="h1"

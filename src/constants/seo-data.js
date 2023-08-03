@@ -59,6 +59,13 @@ export default {
     imagePath: '/images/social-previews/partners.jpg',
     pathname: LINKS.partners,
   },
+  ai: {
+    title: 'Powering next gen AI apps with Postgres — Neon',
+    description:
+      'Scale your transformative LLM applications to millions of users with vector indexes and similarity search in Neon.',
+    imagePath: '/images/social-previews/ai.jpg',
+    pathname: LINKS.ai,
+  },
 };
 
 export const getBlogCategoryDescription = (category) => {

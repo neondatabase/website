@@ -97,6 +97,10 @@ export default {
       heading: 'Resources',
       links: [
         {
+          text: 'Vector Search',
+          to: LINKS.ai,
+        },
+        {
           text: 'Docs',
           to: LINKS.docs,
         },

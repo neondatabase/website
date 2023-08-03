@@ -28,4 +28,5 @@ export default {
   privacyPolicy: '/privacy-policy',
   partners: '/partners',
   cliReference: '/docs/reference/neon-cli',
+  ai: '/ai',
 };

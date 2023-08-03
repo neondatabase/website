@@ -1,6 +1,6 @@
-import Script from 'next/script';
-
 import 'styles/globals.css';
+
+import Script from 'next/script';
 
 import TopBar from 'components/shared/topbar';
 
