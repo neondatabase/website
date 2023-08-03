@@ -199,7 +199,7 @@
       slug: ai/ai-intro
     - title: AI concepts
       slug: ai/ai-concepts
-    - title: Vector search with pg-embedding
+    - title: Vector search with pg_embedding
       slug: extensions/pg_embedding
     - title: Vector search with pgvector
       slug: extensions/pgvector
