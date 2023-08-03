@@ -199,7 +199,7 @@
       slug: ai/ai-intro
     - title: Vector search with pg-embedding
       slug: extensions/pg_embedding
-    - title: Vector search with pg-vector
+    - title: Vector search with pgvector
       slug: extensions/pgvector
 - title: Extensions
   items:
@@ -207,8 +207,6 @@
       slug: extensions/pg-extensions
     - title: neon_utils
       slug: extensions/neon-utils
-    - title: pg_embedding
-      slug: extensions/pg_embedding
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
 - title: Import data
