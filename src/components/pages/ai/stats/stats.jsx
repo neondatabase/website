@@ -152,7 +152,7 @@ const Stats = () => (
             <p className="text-[26px] font-light leading-snug tracking-extra-tight xl:max-w-[390px] xl:text-lg lg:text-base sm:max-w-none sm:text-lg">
               HNSW indexes bring <mark className="bg-transparent text-green-45">20x the speed</mark>{' '}
               for <mark className="bg-transparent text-green-45">99% accuracy</mark> to graph-based
-              approximate nearest neighbor search in your Postgres databaseп.
+              approximate nearest neighbor search in your Postgres database.
             </p>
           </div>
         </div>
