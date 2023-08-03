@@ -17,7 +17,7 @@ Neon supports the following extensions for enabling PostgreSQL as your vector da
 
 ### pg_embedding
 
-`pg_embedding` is an open-source extension that enables storing vector embeddings and graph-based vector similarity search in Postgres using the Hierarchical Navigable Small World (HNSW) algorithm. It supports HNSW indexes, which unlock new levels of efficiency in high-dimensional similarity search compared in `ivfflat` indexes, enabling you to scale your AI applications to millions of rows. To get started, see [The pg_embedding extension](/docs/extensions/pg_embedding).
+`pg_embedding` is an open-source extension that enables storing vector embeddings and graph-based vector similarity search in Postgres using the Hierarchical Navigable Small World (HNSW) algorithm. It supports HNSW indexes, which unlock new levels of efficiency in high-dimensional similarity search, enabling you to scale your AI applications to millions of rows. To get started, see [The pg_embedding extension](/docs/extensions/pg_embedding).
 
 If you are currently using `pgvector` and want to try `pg_embedding`, refer to [Migrating to pg_embedding](/docs/extensions/pg_embedding#migrate-from-pgvector-to-pgembedding).
 
