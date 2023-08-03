@@ -7,7 +7,7 @@ enableTableOfContents: true
 The `pg_embedding` extension enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
 
 <Admonition type="important">
-The `pg_embedding` extension was updated on August 3, 2023 to add support for on-disk index creation and additional distance metrics. If you installed `pg_embedding` before this date and wnat to update to the new version, please see [Upgrade to pg_embedding with on-disk indexes](#upgrade-to-pg_embedding-with-on-disk-indexes) for instructions.
+The `pg_embedding` extension was updated on August 3, 2023 to add support for on-disk index creation and additional distance metrics. If you installed `pg_embedding` before this date and want to update to the new version, please see [Upgrade to pg_embedding with on-disk indexes](#upgrade-to-pg_embedding-with-on-disk-indexes) for instructions.
 </Admonition>
 
 This extension is based on [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw) implementation of HNSW
