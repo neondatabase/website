@@ -19,7 +19,7 @@ Neon also supports `pgvector` for vector similarity search. For information on w
 
 ## Using the pg_embedding extension
 
-This section describes how to use the `pg_embedding` extension in Neon with simple examples that demonstrates the required statements, syntax, and options.
+This section describes how to use the `pg_embedding` extension in Neon with simple examples demonstrating the required statements, syntax, and options.
 
 ### Usage summary
 
@@ -64,7 +64,7 @@ INSERT INTO documents(id, embedding) VALUES (1, '{0,1,2}'), (2, '{1,2,3}'),  (3,
 
 ## Similarity search
 
-The `pg_embedding` extension supports Euclidean (L2), Cosine, and Manhattan distance metrics.
+The `pg_embedding` extension supports Euclidean (L2), cosine, and Manhattan distance metrics.
 
 Euclidean (L2) distance:
 
@@ -95,7 +95,7 @@ In summary, the query retrieves the ID of the record from the `documents` table 
 
 ### Create an HNSW index
 
-To optimize search behavior, you can add an HNSW index. To create the HNSW index on your vector column, use a `CREATE INDEX` statement as shown in the following examples. The `pg_embedding` extension supports indexes for use with Euclidean, Cosine, and Manhattan distance metrics. You must ensure that your search query syntax matches the index that you define. You will notice in the query examples below that each distance metric has a specific operator (`<->`, `<=>`, and `<~>`).
+To optimize search behavior, you can add an HNSW index. To create the HNSW index on your vector column, use a `CREATE INDEX` statement as shown in the following examples. The `pg_embedding` extension supports indexes for use with Euclidean, cosine, and Manhattan distance metrics. You must ensure that your search query syntax matches the index that you define. You will notice in the query examples below that each distance metric has a specific operator (`<->`, `<=>`, and `<~>`).
 
 Euclidean (L2) distance index:
 
@@ -206,7 +206,7 @@ The first step in the migration process is to install the `pg_embedding` extensi
 CREATE EXTENSION embedding;
 ```
 
-Once the `pg_embedding` extension is installed, you can use the same vector embedding table used with `pgvector`. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is that you modify vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
+Once the `pg_embedding` extension is installed, you can use the same vector embedding table used with `pgvector`. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is to modify vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
 
 ```sql
 SELECT id, embedding FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;
@@ -218,7 +218,7 @@ To make the query work with `pg_embedding`, you must cast the `embedding` column
 SELECT id, embedding::real[] FROM items ORDER BY embedding::real[] <-> array[3,1,2] LIMIT 1;
 ```
 
-Alternatively, if you want to avoid typecasting, you can alter your table to change the embedding column type from `VECTOR` to `real[]`. This operation may be time and resource intensive, depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
+Alternatively, to avoid typecasting, you can alter your table to change the embedding column type from `VECTOR` to `real[]`. This operation may be time and resource intensive, depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
 
 Given a table defined for `pgvector`, such as this one:
 
@@ -250,7 +250,7 @@ If you choose to change the column type from `VECTOR` to `real[]` instead of typ
 
 The `pg_embedding` extension version in Neon was updated on August 3, 2023 to add support for on-disk HNSW indexes and additional distance metrics. If you installed `pg_embedding` before this date, you can upgrade to the new version (0.3.5 or higher) following the instructions below.
 
-The previous `pg_embedding` version (0.1.0 and earlier) creates HNSW indexes in memory, which means that indexes are recreated on the first index access after a compute restart. Also, this version only supports Euclidean (2) distance. The new `pg_embedding` version adds support for Cosine and Manhattan distance metrics.
+The previous `pg_embedding` version (0.1.0 and earlier) creates HNSW indexes in memory, which means that indexes are recreated on the first index access after a compute restart. Also, this version only supports Euclidean (2) distance. The new `pg_embedding` version adds support for cosine and Manhattan distance metrics.
 
 Upgrading to the new version of `pg_embedding` requires dropping the existing `pg_embedding` extension and installing the new version. If your compute has not restarted recently, you may be required to restart it to make the new extension version available for installation.
 
@@ -272,7 +272,7 @@ To upgrade:
     embedding | 0.3.5           |                   | hnsw index
     ```
 
-    If the **default_version** is not 0.3.5 or higher, restart your compute instance. Pro users can do so by temporarily setting the **Auto-suspend** setting to a low value like 2 seconds, allowing the compute to restart, and then setting **Auto-suspend** back to its normal value. For instructions, refer to the _Auto-suspend_ configuration details in [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+    If the **default_version** is not 0.3.5 or higher, restart your compute instance. Pro users can do so by temporarily setting the **Auto-suspend** setting to a low value, like 2 seconds, allowing the compute to restart, and then setting **Auto-suspend** back to its normal value. For instructions, refer to the _Auto-suspend_ configuration details in [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
 3. Install the new version of the extension (version 0.3.5 or higher).
 
