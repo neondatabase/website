@@ -212,10 +212,10 @@ Once the `pg_embedding` extension is installed, you can use the same vector embe
 SELECT id, embedding FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;
 ```
 
-To make the query work with `pg_embedding`, you must cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array: `ARRAY[3,1,2]`:
+To make the query work with `pg_embedding`, you must cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array: `array[3,1,2]`:
 
 ```sql
-SELECT id, embedding::real[] FROM items ORDER BY embedding::real[] <-> ARRAY[3,1,2] LIMIT 1;
+SELECT id, embedding::real[] FROM items ORDER BY embedding::real[] <-> array[3,1,2] LIMIT 1;
 ```
 
 Alternatively, if you want to avoid typecasting, you can alter your table to change the embedding column type from `VECTOR` to `real[]`. This operation may be time and resource intensive, depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
