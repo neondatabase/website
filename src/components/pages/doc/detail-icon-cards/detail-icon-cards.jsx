@@ -24,7 +24,7 @@ const icons = {
 const DetailIconCards = ({ children = null }) => (
   <ul className="not-prose !my-10 grid grid-cols-2 gap-4 !p-0 sm:grid-cols-1">
     {React.Children.map(children, (child, index) => {
-      const { children, href, title, icon } = child.props ?? {};
+      const { children, href, description, icon } = child.props ?? {};
       const Icon = icons[icon];
 
       return (
@@ -39,7 +39,7 @@ const DetailIconCards = ({ children = null }) => (
                 {children}
               </h3>
               <p className="mt-2.5 text-sm leading-normal text-gray-new-50 dark:text-gray-new-80">
-                {title}
+                {description}
               </p>
             </div>
           </Link>

@@ -18,21 +18,21 @@ Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about
 
 <DetailIconCards>
 
-<a href="/docs/connect/connect-from-any-app" title="Learn how to connect to a Neon database from any application" icon="audio-jack">Connect</a>
+<a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a Neon database from any application" icon="audio-jack">Connect</a>
 
-<a href="/docs/import/import-from-postgres" title="Import your own data or sample data that you can use to explore Neon" icon="import">Import data</a>
+<a href="/docs/import/import-from-postgres" description="Import your own data or sample data that you can use to explore Neon" icon="import">Import data</a>
 
-<a href="/docs/manage/overview" title="Learn how to manage Neon projects, branches, compute resources, databases, and roles" icon="ladder">Manage</a>
+<a href="/docs/manage/overview" description="Learn how to manage Neon projects, branches, compute resources, databases, and roles" icon="ladder">Manage</a>
 
-<a href="/docs/introduction/branching" title="Learn about branching and how you can use it to optimize development workflows" icon="split-branch">Branching</a>
+<a href="/docs/introduction/branching" description="Learn about branching and how you can use it to optimize development workflows" icon="split-branch">Branching</a>
 
-<a href="/docs/extensions/pg-extensions" title="Level up your PostgreSQL database with our extension installation guide" icon="app-store">PostgreSQL extensions</a>
+<a href="/docs/extensions/pg-extensions" description="Level up your PostgreSQL database with our extension installation guide" icon="app-store">PostgreSQL extensions</a>
 
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" title="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
 
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" title="Collaborate on open-source projects" icon="github">Headless vector search</a>
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
 
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" title="Collaborate on open-source projects" icon="github">Open AI completions</a>
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
 
 </DetailIconCards>
 
