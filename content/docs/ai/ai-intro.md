@@ -29,22 +29,16 @@ If you are currently using `pgvector` and want to try `pg_embedding`, refer to [
 
 Check out the following AI application examples to start building your AI application with Neon.
 
-- [Semantic search app](https://github.com/neondatabase/ai-sematic-search)
-  
-  Demonstrates how to build an AI-powered semantic search application with PostgreSQL and `pg_embedding`. Read the accompanying blog post: [Building an AI-powered Semantic Search App with Vercel, OpenAI, and Postgres with pg_embedding](tbd).
+<DetailIconCards>
 
-- [Image search app](https://github.com/neondatabase/ai-image-search)
+<a href="https://github.com/neondatabase/ai-sematic-search" description="Build an AI-powered semantic search application" icon="github">Semantic search app</a>
 
-  Demonstrates how to build an image search application using PostgreSQL and `pg_embedding`. Read the accompanying blog post: [Building an AI-powered Image Search App with Vercel, OpenAI, and Postgres with pg_embedding](tbd).
+<a href="https://github.com/neondatabase/ai-image-search" description="Build an image search application" icon="github">Image search app</a>
 
-- [Chatbot app](https://github.com/neondatabase/ask-neon)
+<a href="https://github.com/neondatabase/ask-neon" description="Build aan AI-powered chatbot" icon="github">Chatbot app</a>
 
-  Demonstrates how to use word embeddings and PostgreSQL with `pgvector` to build a chatbot. The chatbot is implemented using Vercel Edge Functions and the `@neondatabase/serverless` driver. It relies on OpenAI's GPT-3 API to generate responses. Read the accompanying blog post: [Building an AI-powered ChatBot using Vercel, OpenAI, and Postgres](https://neon.tech/blog/building-an-ai-powered-chatbot-using-vercel-openai-and-postgres).
+<a href="https://vercel.com/templates/next.js/postgres-pgvector" description="Collaborate on open-source projects" icon="github">Vercel Postgres pgvector Starter</a>
 
-- [Vercel Postgres pgvector Starter](https://vercel.com/templates/next.js/postgres-pgvector)
+<a href="https://github.com/neondatabase/postgres-ai-playground" description="Build an AI-enabled SQL playground for natural language queries" icon="github">Web-based AI SQL Playground</a>
 
-  Provides a Next.js template that uses Vercel Postgres (powered by Neon) as the database, Prisma as the ORM with `pgvector` to enable vector similarity search, and OpenAI's `text-embedding-ada-002` model for embeddings.
-
-- [Web-based AI SQL Playground](https://github.com/neondatabase/postgres-ai-playground)
-
-  Demonstrates how to build an SQL playground for Postgres where you can use AI to generate queries using natural language. Read the accompanying blog post: [Web-based AI SQL Playground and connecting to Postgres from the browser](https://neon.tech/blog/postgres-ai-playground). To try the application, see [Postgres AI Playground](https://postgres-ai-playground.vercel.app/).
+</DetailIconCards>
