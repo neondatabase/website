@@ -1,22 +1,16 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 const EmbedTweet = (props) => {
   const { children, ...rest } = props;
-  const ref = useRef();
 
   useEffect(() => {
-    if (ref.current?.querySelector('.twitter-tweet-rendered')) return;
     window.twttr?.widgets.load();
   }, []);
 
-  return (
-    <figure {...rest} ref={ref}>
-      {children}
-    </figure>
-  );
+  return <figure {...rest}>{children}</figure>;
 };
 
 EmbedTweet.propTypes = {
