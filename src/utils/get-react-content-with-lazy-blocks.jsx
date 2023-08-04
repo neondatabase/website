@@ -3,6 +3,7 @@ import parse, { attributesToProps } from 'html-react-parser';
 import isBoolean from 'lodash.isboolean';
 import isEmpty from 'lodash.isempty';
 import Image from 'next/image';
+import { Tweet } from 'react-tweet';
 
 import AnchorHeading from '../components/shared/anchor-heading';
 
@@ -78,6 +79,8 @@ const sharedComponents = {
   },
 };
 
+// write the recursive function to find the first element with type === 'tag'
+
 export default function getReactContentWithLazyBlocks(content, pageComponents, includeBaseTags) {
   if (content === null || content === undefined) {
     return null;
@@ -126,6 +129,17 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
           const props = transformProps(attributesToProps(element.attribs));
 
           return <Component {...props} />;
+        }
+
+        if (domNode.attribs?.class?.includes('wp-block-embed-twitter')) {
+          const arr = domNode.children[0].children;
+
+          const element = arr.find((item) => item.type === 'tag');
+          const { href } = element.children.find((item) => item.name === 'a').attribs;
+
+          const id = href.split('/')[5].split('?')[0];
+
+          return <Tweet id={id} />;
         }
 
         if (!includeBaseTags) return <></>;
