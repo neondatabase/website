@@ -129,6 +129,10 @@
       }
     }
 
+    .twitter-tweet.twitter-tweet-rendered {
+      @apply mx-auto;
+    }
+
     .wp-block-quote {
       @apply border-l-[3px] border-yellow-70 pl-4 font-normal not-italic;
 
