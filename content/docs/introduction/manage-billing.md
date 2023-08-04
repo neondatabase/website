@@ -30,6 +30,10 @@ To update your payment method:
 
 If you are unable to access the link verification code required to update your payment method, please contact [support@neon.tech](mailto:support@neon.tech).
 
+### Missed payments
+
+If an auto-debit payment transaction fails, Neon sends a request to update your payment method. There is a grace period for missed payments followed by a delinquency period. Late fees and payment policies are described in Neon’s [Terms of Service](https://neon.tech/terms-of-service).
+
 ## Invoices
 
 A Neon invoice includes an **Amount due** for the billing period and a cost breakdown by [billing metric](/docs/introduction/billing).
@@ -49,7 +53,7 @@ To downgrade from the Pro plan Free Tier:
 1. Click **Downgrade** at the bottom of the page.
 1. Follow the instructions on the **Request Downgrade** modal, and click **Downgrade**.
 
-Downgrading from the Pro plan downgrades your account to the Neon Free Tier, which has lower usage limits that could affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
+Downgrading from the Pro plan transitions your account to the Neon Free Tier, which has lower usage limits that may affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
 
 You will be required to remove any projects, branches, or data that exceed [Free Tier limits](/docs/introduction/free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade request).
 
