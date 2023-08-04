@@ -9,9 +9,9 @@ Embeddings are an essential component in building AI applications. Ths topic des
 
 ## What are embeddings?
 
-When working with unstructured data, such as text, images, or audio, a common objective is to transform it into a more structured format that is easier to analyze and retrieve. This transformation can often be achieved through the use of 'embeddings', which are vectors containing an array of floating-point numbers that represent the features or dimensions of the data. For illustrative purposes, you can imagine a sentence like "The cow jumped over the moon" being represented by the following embedding: [0.5, 0.3, 0.1].
+When working with unstructured data, a common objective is to transform it into a more structured format that is easier to analyze and retrieve. This transformation can be achieved through the use of 'embeddings', which are vectors containing an array of floating-point numbers that represent the features or dimensions of the data. For example, a sentence like "The cow jumped over the moon" could  represented by an embedding that looks like this: [0.5, 0.3, 0.1].
 
-A key advantage of embeddings is that they allow us to measure similarity between different text strings. By calculating the distance between two embeddings, we can assess their relatedness - the smaller the distance, the greater the similarity, and vice versa. This quality is particularly useful as it enables embeddings to capture the underlying meaning of the text.
+The advantage of embeddings is that they allow us to measure similarity between different pieces of text. By calculating the distance between two embeddings, we can assess their relatedness - the smaller the distance, the greater the similarity, and vice versa. This quality is particularly useful as it enables embeddings to capture the underlying meaning of the text.
 
 Take the following three sentences, for example:
 
@@ -23,24 +23,36 @@ The goal is to determine which two sentences are the most similar, by following 
 
 1. Generate embeddings for each sentence. For illustrative purposes, assume these values represent actual embeddings:
 
-- Embedding for sentence 1 → [0.5, 0.3, 0.1]
-- Embedding for sentence 2 → [0.6, 0.29, 0.12]
-- Embedding for sentence 3 → [0.1, -0.2, 0.4]
+    - Embedding for sentence 1 → [0.5, 0.3, 0.1]
+    - Embedding for sentence 2 → [0.6, 0.29, 0.12]
+    - Embedding for sentence 3 → [0.1, -0.2, 0.4]
 
 2. Compute the distance between all pairs of embeddings (1 & 2, 2 & 3, and 1 & 3).
 
 3. Identifying the pair of embeddings with the shortest distance between them.
 
-When we apply this process to our sentences, it is likely that sentences 1 and 2, both of which involve bounding cattle, would emerge as the most related according to our calculations.
+When we apply this process to our sentences, it is likely that sentences 1 and 2, both of which involve bounding cattle, would emerge as the most related according to a distance calculation.
 
 ## Vector similarity search
 
 The method of transforming data into embeddings and computing similarities between one or more items is referred to as vector search or similarity search. This process has a wide range of applications, including but not limited to:
 
-- **Information Retrieval:** By representing user queries as vectors, we can perform more accurate searches based on the meaning behind the queries, allowing us to retrieve more relevant information.
-- **Natural Language Processing:** Embeddings capture the essence of the text, making them excellent tools for tasks such as text classification and sentiment analysis.
-- **Recommendation Systems:** Using vector similarity, we can recommend items that are similar to a given item, whether they be movies, products, books, or otherwise. This technique allows us to create more personalized and relevant recommendations.
-- **Anomaly Detection:** By determining the similarity between items within a dataset, we can identify outliers or anomalies—items that don't quite fit the pattern. This can be crucial in many fields, from cybersecurity to quality control.
+- **Information retrieval:** By representing user queries as vectors, we can perform more accurate searches based on the meaning behind the queries, allowing us to retrieve more relevant information.
+- **Natural language processing:** Embeddings capture the essence of the text, making them excellent tools for tasks such as text classification and sentiment analysis.
+- **Recommendation systems:** Using vector similarity, we can recommend items that are similar to a given item, whether they be movies, products, books, or otherwise. This technique allows us to create more personalized and relevant recommendations.
+- **Anomaly detection:** By determining the similarity between items within a dataset, we can identify outliers or anomalies—items that don't quite fit the pattern. This can be crucial in many fields, from cybersecurity to quality control.
+
+### Distance metrics
+
+As described above, vector similarity search computes similarities (the distance) between data points. Calculating how 'far apart' data points are helps us understand the relationship between them. Distance can be computed in different ways using different metrics. Some popular distance metrics include:
+
+- Euclidean (L2): Often referred to as the "ordinary" distance you'd measure with a ruler, this is calculated as the square root of the sum of the squared differences between corresponding elements of the two vectors.
+- Manhattan (L1): Also known as "taxicab" or "city block" distance, this measures the sum of absolute differences between corresponding elements of the vectors.
+- Cosine: This calculates the cosine of the angle between two vectors, effectively measuring the orientation rather than the magnitude.
+
+Different distance metrics can be more appropriate for different tasks, depending on the nature of the data and the specific relationships you're interested in. For instance, cosine similarity is often used in text analysis.
+
+The [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) extension, which enable PostgreSQL as a vector database, support different distance metrics including those described above.
 
 ## Generating embeddings
 
@@ -92,15 +104,15 @@ To learn more about about OpenAI's embeddings, see [Embeddings](https://platform
 
 ## Storing vector embeddings in PostgreSQL
 
-Neon supports the [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) PostgreSQL extensions, which enable the storage and retrieval of vector embeddings directly within your Postgres database. When building AI and LLM applications, installing either of these extensions eliminate the need for an external vector store, streamlining your architecture and reducing system complexity.
+Neon supports the [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) PostgreSQL extensions, which enable storing and retrieving vector embeddings directly within your Postgres database. When building AI and LLM applications, installing either of these extensions eliminate the need to build out your architecture to include a separate vector store.
 
-After installing an extension, you can create a table to store your vector embeddings. For example, if you installed the `pg_embedding` extension, you might define the following table for your vector embeddings:
+After installing an extension, you can create a table to store your embeddings. For example, if you install the `pg_embedding` extension, you might define a table similar to the following to store your embeddings:
 
 ```sql
 CREATE TABLE documents(id BIGSERIAL PRIMARY KEY, embedding REAL[1536]);
 ```
 
-To add vector embedding to the table, you would insert the data as shown:
+To add embeddings to the table, you would insert the data as shown:
 
 ```sql
 INSERT INTO documents(embedding) VALUES (ARRAY[
