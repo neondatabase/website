@@ -79,8 +79,6 @@ const sharedComponents = {
   },
 };
 
-// write the recursive function to find the first element with type === 'tag'
-
 export default function getReactContentWithLazyBlocks(content, pageComponents, includeBaseTags) {
   if (content === null || content === undefined) {
     return null;
@@ -127,6 +125,12 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
           }
 
           const props = transformProps(attributesToProps(element.attribs));
+
+          if (element.name === 'blogposttweet') {
+            const { id } = element.attribs;
+
+            return <Component id={id} />;
+          }
 
           return <Component {...props} />;
         }
