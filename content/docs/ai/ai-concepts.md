@@ -126,7 +126,7 @@ INSERT INTO documents(embedding) VALUES (ARRAY[
 
 ## Building AI apps with embeddings
 
-The concepts described above provide an introduction to the basic building blocks, but they help can help you better understand the general process of building an AI app:
+The concepts described above provide an introduction to the basic building blocks used to develop an AI application with embeddings. You can see how they fit into a general overall process:
 
 1. Generate embeddings from your data
 2. Store the embeddings in your database
