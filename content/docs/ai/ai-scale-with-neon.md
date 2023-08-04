@@ -2,7 +2,6 @@
 title: Scale your AI applications with Neon
 subtitle: Learn about how you can scale your AI and LLM applications with Neon
 enableTableOfContents: true
-isDraft: true
 ---
 
 Neon offers the following features enabling you to build scalable AI and LLM applications that meet workload demand while managing costs.

@@ -2,7 +2,6 @@
 title: AI Concepts
 subtitle: Learn about embeddings and how they are used to build AI and LLM applications
 enableTableOfContents: true
-isDraft: true
 ---
 
 Embeddings are an essential component in building AI applications. Ths topic describes embeddings and how they are used in building AI and LLM applications.
