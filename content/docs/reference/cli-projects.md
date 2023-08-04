@@ -107,24 +107,23 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ```bash
     neonctl projects create --output json
     {
-    "0": {
+    "project": {
         "data_storage_bytes_hour": 0,
         "data_transfer_bytes": 0,
         "written_data_bytes": 0,
         "compute_time_seconds": 0,
         "active_time_seconds": 0,
         "cpu_used_sec": 0,
-        "id": "polished-shape-60485499",
+        "id": "long-wind-77910944",
         "platform_id": "aws",
         "region_id": "aws-us-east-2",
-        "name": "polished-shape-60485499",
+        "name": "long-wind-77910944",
         "provisioner": "k8s-pod",
         "default_endpoint_settings": {
         "autoscaling_limit_min_cu": 1,
         "autoscaling_limit_max_cu": 1,
         "suspend_timeout_seconds": 0
         },
-
         "pg_version": 15,
         "proxy_host": "us-east-2.aws.neon.tech",
         "branch_logical_size_limit": 204800,
@@ -132,21 +131,21 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
         "store_passwords": true,
         "creation_source": "neonctl",
         "history_retention_seconds": 604800,
-        "created_at": "2023-08-03T19:50:44Z",
-        "updated_at": "2023-08-03T19:50:44Z",
+        "created_at": "2023-08-04T16:16:45Z",
+        "updated_at": "2023-08-04T16:16:45Z",
         "consumption_period_start": "0001-01-01T00:00:00Z",
         "consumption_period_end": "0001-01-01T00:00:00Z",
         "owner_id": "e56ad68e-7f2f-4d74-928c-9ea25d7e9864"
     },
-    "1": [
+    "connection_uris": [
         {
-        "connection_uri": "postgres://<role>:daniel@ep-patient-rice-89630622.us-east-2.aws.neon.tech/neondb",
+        "connection_uri": "postgres://daniel:<password>@ep-bitter-heart-24388432.us-east-2.aws.neon.tech/neondb",
         "connection_parameters": {
             "database": "neondb",
             "password": "<password>",
             "role": "daniel",
-            "host": "ep-patient-rice-89630622.us-east-2.aws.neon.tech",
-            "pooler_host": "ep-patient-rice-89630622-pooler.us-east-2.aws.neon.tech"
+            "host": "ep-bitter-heart-24388432.us-east-2.aws.neon.tech",
+            "pooler_host": "ep-bitter-heart-24388432-pooler.us-east-2.aws.neon.tech"
         }
         }
     ]
