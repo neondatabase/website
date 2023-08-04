@@ -1,12 +1,8 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { Tweet } from 'react-tweet';
 
 const Content = ({ html, className = null }) => (
-  <>
-    <Tweet id="1674679862961885184" />
-    <div className={clsx('prose-blog prose prose-lg', className)}>{html}</div>
-  </>
+  <div className={clsx('prose-blog prose prose-lg', className)}>{html}</div>
 );
 
 Content.propTypes = {
