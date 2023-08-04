@@ -11,7 +11,6 @@ import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import CodeBlock from 'components/shared/code-block';
-import EmbedTweet from 'components/shared/embed-tweet';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData } from 'utils/api-posts';
@@ -46,7 +45,6 @@ const BlogPage = async ({ params, searchParams }) => {
       blogpostcode: CodeBlock,
       blogpostcodetabs: CodeTabs,
       blogpostcta: CTA,
-      blogposttweet: EmbedTweet,
     },
     true
   );

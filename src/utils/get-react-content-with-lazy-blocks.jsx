@@ -126,12 +126,6 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
 
           const props = transformProps(attributesToProps(element.attribs));
 
-          if (element.name === 'blogposttweet') {
-            const { id } = element.attribs;
-
-            return <Component id={id} />;
-          }
-
           return <Component {...props} />;
         }
 
@@ -143,7 +137,11 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
 
           const id = href.split('/')[5].split('?')[0];
 
-          return <Tweet id={id} />;
+          return (
+            <div className="not-prose">
+              <Tweet id={id} />
+            </div>
+          );
         }
 
         if (!includeBaseTags) return <></>;
