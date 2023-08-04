@@ -199,6 +199,8 @@
       slug: ai/ai-intro
     - title: AI concepts
       slug: ai/ai-concepts
+    - title: Scale with Neon
+      slug: ai/ai-scale-with-neon
     - title: pg_embedding
       slug: extensions/pg_embedding
     - title: pgvector
