@@ -133,7 +133,15 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
         if (domNode.attribs?.class?.includes('wp-block-embed-twitter')) {
           const props = transformProps(attributesToProps(domNode.attribs));
 
-          return <EmbedTweet {...props}>{domToReact(domNode?.children)}</EmbedTweet>;
+          const { children } = domNode.children[0];
+
+          children.forEach((child) => {
+            if (child.type === 'tag' && child.name === 'blockquote') {
+              child.attribs['data-theme'] = 'dark';
+            }
+          });
+
+          return <EmbedTweet {...props}>{domToReact(children)}</EmbedTweet>;
         }
 
         if (!includeBaseTags) return <></>;
