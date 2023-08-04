@@ -11,7 +11,7 @@ Embeddings are an essential component in building AI applications. Ths topic des
 
 When working with unstructured data, a common objective is to transform it into a more structured format that is easier to analyze and retrieve. This transformation can be achieved through the use of 'embeddings', which are vectors containing an array of floating-point numbers that represent the features or dimensions of the data. For example, a sentence like "The cow jumped over the moon" could be represented by an embedding that looks like this: [0.5, 0.3, 0.1].
 
-The advantage of embeddings is that they allow us to measure similarity between different pieces of text. By calculating the distance between two embeddings, we can assess their relatedness - the smaller the distance, the greater the similarity, and vice versa. This quality is particularly useful as it enables embeddings to capture the underlying meaning of the text.
+The advantage of embeddings is that they allow us to measure the similarity between different pieces of text. By calculating the distance between two embeddings, we can assess their relatedness - the smaller the distance, the greater the similarity, and vice versa. This quality is particularly useful as it enables embeddings to capture the underlying meaning of the text.
 
 Take the following three sentences, for example:
 
@@ -100,11 +100,11 @@ Upon successful execution, you'll receive a response similar to the following:
 }
 ```
 
-To learn more about about OpenAI's embeddings, see [Embeddings](https://platform.openai.com/docs/guides/embeddings).
+To learn more about OpenAI's embeddings, see [Embeddings](https://platform.openai.com/docs/guides/embeddings).
 
 ## Storing vector embeddings in PostgreSQL
 
-Neon supports the [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) PostgreSQL extensions, which enable storing and retrieving vector embeddings directly within your Postgres database. When building AI and LLM applications, installing either of these extensions eliminate the need to build out your architecture to include a separate vector store.
+Neon supports the [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) PostgreSQL extensions, which enable storing and retrieving vector embeddings directly within your Postgres database. When building AI and LLM applications, installing either of these extensions eliminates the need to build out your architecture to include a separate vector store.
 
 After installing an extension, you can create a table to store your embeddings. For example, if you install the `pg_embedding` extension, you might define a table similar to the following to store your embeddings:
 
@@ -126,7 +126,7 @@ INSERT INTO documents(embedding) VALUES (ARRAY[
 
 ## Building AI apps with embeddings
 
-The concepts described above provide an introduction to the basic building blocks used to develop an AI application with embeddings. You can see how they fit into a general overall process:
+The concepts described above provide an introduction to the basic building blocks for developing an AI application with embeddings. You can see how they fit with the general process, which involves these steps:
 
 1. Generate embeddings from your data
 2. Store the embeddings in your database
@@ -135,7 +135,7 @@ The concepts described above provide an introduction to the basic building block
 5. Perform a similarity search that compares the embedding generated for the provided input against the embeddings stored in your database
 6. Return the most similar data to the user
 
-For example applications built using this general process, see the following:
+For example applications built based on this general process, see the following:
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/yc-idea-matcher" description="Build an AI-powered semantic search application with pg_embedding" icon="github">Semantic search app</a>
