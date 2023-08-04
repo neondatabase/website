@@ -9,7 +9,7 @@ Embeddings are an essential component in building AI applications. Ths topic des
 
 ## What are embeddings?
 
-When working with unstructured data, a common objective is to transform it into a more structured format that is easier to analyze and retrieve. This transformation can be achieved through the use of 'embeddings', which are vectors containing an array of floating-point numbers that represent the features or dimensions of the data. For example, a sentence like "The cow jumped over the moon" could  represented by an embedding that looks like this: [0.5, 0.3, 0.1].
+When working with unstructured data, a common objective is to transform it into a more structured format that is easier to analyze and retrieve. This transformation can be achieved through the use of 'embeddings', which are vectors containing an array of floating-point numbers that represent the features or dimensions of the data. For example, a sentence like "The cow jumped over the moon" could be represented by an embedding that looks like this: [0.5, 0.3, 0.1].
 
 The advantage of embeddings is that they allow us to measure similarity between different pieces of text. By calculating the distance between two embeddings, we can assess their relatedness - the smaller the distance, the greater the similarity, and vice versa. This quality is particularly useful as it enables embeddings to capture the underlying meaning of the text.
 
@@ -19,7 +19,7 @@ Take the following three sentences, for example:
 - Sentence 2: "The bovine leapt above the celestial body."
 - Sentence 3: "I enjoy eating pancakes."
 
-The goal is to determine which two sentences are the most similar, by following these steps:
+You can determine the most similar sentences by following these steps:
 
 1. Generate embeddings for each sentence. For illustrative purposes, assume these values represent actual embeddings:
 
@@ -29,9 +29,9 @@ The goal is to determine which two sentences are the most similar, by following 
 
 2. Compute the distance between all pairs of embeddings (1 & 2, 2 & 3, and 1 & 3).
 
-3. Identifying the pair of embeddings with the shortest distance between them.
+3. Identify the pair of embeddings with the shortest distance between them.
 
-When we apply this process to our sentences, it is likely that sentences 1 and 2, both of which involve bounding cattle, would emerge as the most related according to a distance calculation.
+When we apply this process, it is likely that sentences 1 and 2, both of which involve bounding cattle, would emerge as the most related according to a distance calculation.
 
 ## Vector similarity search
 
@@ -44,19 +44,19 @@ The method of transforming data into embeddings and computing similarities betwe
 
 ### Distance metrics
 
-As described above, vector similarity search computes similarities (the distance) between data points. Calculating how 'far apart' data points are helps us understand the relationship between them. Distance can be computed in different ways using different metrics. Some popular distance metrics include:
+Vector similarity search computes similarities (the distance) between data points. Calculating how 'far apart' data points are helps us understand the relationship between them. Distance can be computed in different ways using different metrics. Some popular distance metrics include:
 
-- Euclidean (L2): Often referred to as the "ordinary" distance you'd measure with a ruler, this is calculated as the square root of the sum of the squared differences between corresponding elements of the two vectors.
-- Manhattan (L1): Also known as "taxicab" or "city block" distance, this measures the sum of absolute differences between corresponding elements of the vectors.
-- Cosine: This calculates the cosine of the angle between two vectors, effectively measuring the orientation rather than the magnitude.
+- Euclidean (L2): Often referred to as the "ordinary" distance you'd measure with a ruler.
+- Manhattan (L1): Also known as "taxicab" or "city block" distance.
+- Cosine: This calculates the cosine of the angle between two vectors.
 
 Different distance metrics can be more appropriate for different tasks, depending on the nature of the data and the specific relationships you're interested in. For instance, cosine similarity is often used in text analysis.
 
-The [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) extension, which enable PostgreSQL as a vector database, support different distance metrics including those described above.
+The [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) extensions, which enable PostgreSQL as a vector database, support different distance metrics, including those described above.
 
 ## Generating embeddings
 
-A common approach to generate embeddings is to use OpenAI’s Embeddings API. This API allows you to input a text string into an API endpoint, which then returns the corresponding embedding. The "The cow jumped over the moon" example above is a simple example with 3 dimensions. Most embedding models generate a much larger number of embeddings. OpenAI's `text-embedding-ada-002` model, for example, generates 1536 embeddings.
+A common approach to generate embeddings is to use OpenAI’s Embeddings API. This API allows you to input a text string into an API endpoint, which then returns the corresponding embedding. The "cow jumped over the moon" example above is a simplistic example with 3 dimensions. Most embedding models generate a much larger number of embeddings. OpenAI's `text-embedding-ada-002` model, for example, generates 1536 embeddings.
 
 Here's an example of how to use OpenAI's `text-embedding-ada-002` model to generate an embedding:
 
@@ -126,7 +126,7 @@ INSERT INTO documents(embedding) VALUES (ARRAY[
 
 ## Building AI apps with embeddings
 
-When building your AI application, you will generally follow this set of steps:
+The concepts described above provide an introduction to the basic building blocks, but they help can help you better understand the general process of building an AI app:
 
 1. Generate embeddings from your data
 2. Store the embeddings in your database
