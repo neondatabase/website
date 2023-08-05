@@ -180,7 +180,7 @@ Ultimately, the choice between the `pgvector` with IVFFlat or `pg_embedding` wit
 - **Memory constraints**: If you are working under strict memory constraints, you may opt for the IVFFlat index, as it typically consumes less memory than an HNSW index. However, be mindful that this might come at the cost of search speed and accuracy.
 - **Search speed**: If your primary concern is the speed at which you can retrieve nearest neighbors, especially in high-dimensional spaces, an HNSW index is likely the better choice due to its graph-based approach.
 - **Accuracy and recall**: If achieving high accuracy and recall is critical for your application, an HNSW index may be the better option. Its graph-based approach generally yields better recall compared to IVFFlat.
-- **Distance metrics**: `pgvector` supports the L2 (`<->`), inner product (`<#>`), and cosine (`<=>`). The `pg_embedding` extension supports L2 (`<->`), cosine (`<=>`), and Manhattan (`<~>`).
+- **Distance metrics**: `pgvector` supports L2 (`<->`), inner product (`<#>`), and cosine (`<=>`). The `pg_embedding` extension supports L2 (`<->`), cosine (`<=>`), and Manhattan (`<~>`).
 
 ## Migrate from pgvector to pg_embedding
 

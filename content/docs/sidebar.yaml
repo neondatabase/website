@@ -211,10 +211,8 @@
       slug: extensions/pgvector
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
-- title: Extensions
-  items:
-    - title: Postgres extensions
-      slug: extensions/pg-extensions
+- title: Postgres extensions
+  slug: extensions/pg-extensions
 - title: Import data
   items:
     - title: Import from Postgres
