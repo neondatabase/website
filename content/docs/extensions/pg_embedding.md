@@ -1,10 +1,10 @@
 ---
 title: The pg_embedding extension
-subtitle: Use Neon's pg_embedding extension with Hierarchical Navigable Small World (HNSW) for graph-based vector similarity search in PostgreSQL 
+subtitle: Use Neon's pg_embedding extension with Hierarchical Navigable Small World (HNSW) for graph-based vector similarity search in Postgres 
 enableTableOfContents: true
 ---
 
-The `pg_embedding` extension enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in PostgreSQL.
+The `pg_embedding` extension enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in Postgres.
 
 <Admonition type="note">
 The `pg_embedding` extension was updated on August 3, 2023 to add support for on-disk index creation and additional distance metrics. If you installed `pg_embedding` before this date and want to upgrade to the new version, please see [Upgrade to pg_embedding with on-disk indexes](#upgrade-to-pg_embedding-for-on-disk-indexes) for instructions.

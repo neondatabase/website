@@ -31,7 +31,7 @@ postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/ne
 </CodeBlock>
 
 <Admonition type="info">
-A Neon project is created with a default PostgreSQL role named for your account, and a default database named `neondb`. This guide uses the `neondb` database as the primary database.
+A Neon project is created with a default Postgres role named for your account, and a default database named `neondb`. This guide uses the `neondb` database as the primary database.
 </Admonition>
 
 ## Create a shadow database for Prisma Migrate
@@ -86,7 +86,7 @@ To complete these steps, you require Node.js v14.17.0 or higher. For more inform
    npm install prisma --save-dev
    ```
 
-1. Set up Prisma with the Prisma CLI `init` command. This creates a `prisma` directory with a Prisma schema file and configures PostgreSQL as your database.
+1. Set up Prisma with the Prisma CLI `init` command. This creates a `prisma` directory with a Prisma schema file and configures Postgres as your database.
 
    ```bash
    npx prisma init --datasource-provider postgresql
@@ -147,7 +147,7 @@ In this step, you will update the `datasource db` entry in your `schema.prisma` 
    ```
 
   <Admonition type="note">
-  Prisma [naming conventions](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#naming-conventions) recommend using PascalCase when defining models. However, be aware that the letter case in your Prisma schema is reflected in PostgreSQL identifier names. If an identifier name in PostgreSQL includes an upper case letter, you must quote the name when specifying it in a PostgreSQL query. For example, the `Elements` table has an upper case letter in its name. When querying this table in PostgreSQL, you must enclose `Elements` in quotes: `SELECT * FROM "Elements"`. Otherwise, the identifier name is changed to lowercase, and the query will not find the table.
+  Prisma [naming conventions](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#naming-conventions) recommend using PascalCase when defining models. However, be aware that the letter case in your Prisma schema is reflected in Postgres identifier names. If an identifier name in Postgres includes an upper case letter, you must quote the name when specifying it in a Postgres query. For example, the `Elements` table has an upper case letter in its name. When querying this table in Postgres, you must enclose `Elements` in quotes: `SELECT * FROM "Elements"`. Otherwise, the identifier name is changed to lowercase, and the query will not find the table.
 
 To name objects in your Prisma schema (and in the generated API) differently than how they are named in your database, Prisma provides a mapping mechanism that you can use. For example, to map a model named "Elements" to table named "elements", you can use the `@@map` API attribute in your Prisma schema.
 

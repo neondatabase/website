@@ -24,7 +24,7 @@ You can think of this role as a Neon administrator role. A user with membership 
 
 Any user created in the Neon console or using the Neon API is automatically granted membership in the `neon_superuser` role. But what do you do if you need to create roles with different or limited privileges? After all, not every database user should be an administrator in Neon.
 
-Neon supports creating and managing PostgreSQL roles with SQL. Roles created with SQL from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) start with the same basic privileges granted to newly created roles in stand-alone PostgreSQL. They are not granted membership in the `neon_superuser` role.
+Neon supports creating and managing Postgres roles with SQL. Roles created with SQL from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) start with the same basic privileges granted to newly created roles in stand-alone Postgres. They are not granted membership in the `neon_superuser` role.
 
 Using SQL, you can define database roles with only the privileges you choose to grant. The following instructions show you how.
 
@@ -108,4 +108,4 @@ To begin, assume you're creating a new database that will be used by several dev
     app_db=> 
     ```
 
-You may want to employ a more granular privilege scheme in your database access configuration, which you can do using a similar approach of creating 'group' roles and granting membership to those roles. For more information about granting privileges in PostgreSQL, please see the [GRANT](https://www.postgresql.org/docs/current/sql-grant.html) command in the _PostgreSQL documentation_.
+You may want to employ a more granular privilege scheme in your database access configuration, which you can do using a similar approach of creating 'group' roles and granting membership to those roles. For more information about granting privileges in Postgres, please see the [GRANT](https://www.postgresql.org/docs/current/sql-grant.html) command in the _PostgreSQL documentation_.

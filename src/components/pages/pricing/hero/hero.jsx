@@ -110,7 +110,7 @@ const Hero = () => {
           <span>Only pay for what you use.</span>
         </Heading>
         <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
-          Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible
+          Neon brings serverless architecture to Postgres, which allows us to offer you flexible
           usage and volume-based plans.
         </p>
         <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-12 md:mt-9">

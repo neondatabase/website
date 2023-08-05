@@ -1,23 +1,23 @@
 ---
 title: Use Neon with Koyeb
-subtitle: Learn how to connect a Neon PostgreSQL database to an application deployed with Koyeb
+subtitle: Learn how to connect a Neon Postgres database to an application deployed with Koyeb
 enableTableOfContents: true
 ---
 
 [Koyeb](https://www.koyeb.com/) is a developer-friendly, serverless platform designed to easily deploy reliable and scalable applications globally. Koyeb offers native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across their edge network with zero configuration.
 
-This guide describes how connect a Neon PostgreSQL database to an application deployed with Koyeb. To follow the instructions in this guide, you require:
+This guide describes how connect a Neon Postgres database to an application deployed with Koyeb. To follow the instructions in this guide, you require:
 
 - A [Koyeb account](https://app.koyeb.com/) to deploy the application. Alternatively, you can install the [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli) if you prefer to deploy the application from your terminal.
-- A Neon account to deploy the PostgreSQL database. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up).
+- A Neon account to deploy the Postgres database. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up).
 
-The example application connects to your Neon PostgreSQL database using [Prisma](https://www.prisma.io/) as an ORM. Prisma synchronizes the database schema with the Prisma schema included with the application and seeds the database.
+The example application connects to your Neon Postgres database using [Prisma](https://www.prisma.io/) as an ORM. Prisma synchronizes the database schema with the Prisma schema included with the application and seeds the database.
 
 ## Create a Neon project
 
 1. Navigate to the [Neon Console](https://console.neon.tech/).
 1. Select **Create a project**.
-1. Enter a name for the project (`neon-koyeb`, for example), and select a PostgreSQL version and region.
+1. Enter a name for the project (`neon-koyeb`, for example), and select a Postgres version and region.
 1. Click **Create project**.
 
 A dialog pops up with your Neon connection string, which appears similar to the following:
@@ -42,7 +42,7 @@ To deploy the application from the Koyeb [control panel](https://app.koyeb.com/)
 1. Keep `example-express-prisma` as the name and `main` as the branch.
 1. In **Build and deployment settings**, enable the **Override** setting and add the following **Build command**: `npm run postgres:init`
 1. Select the region closest to your Neon database.
-1. Under **Advanced** > **Environment variables**, add a `DATABASE_URL` environment variable to enable the application to connect to your Neon PostgreSQL database. Set the value to the Neon connection string provided to you when you created the Neon project.
+1. Under **Advanced** > **Environment variables**, add a `DATABASE_URL` environment variable to enable the application to connect to your Neon Postgres database. Set the value to the Neon connection string provided to you when you created the Neon project.
 1. Enter a name for your app. For example, `express-neon`
 1. Click **Deploy**.
 

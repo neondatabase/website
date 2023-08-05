@@ -8,7 +8,7 @@
 - Pageserver: Switched to the EdDSA algorithm for the storage JWT authentication tokens. The Neon Control Plane only supports EdDSA.
 - Added metrics that enable detection of data layer eviction thrashing (repetition of eviction and on-demand download of data layers).
 - Pageserver, Safekeeper: Revised `$NEON_AUTH_TOKEN` variable handling when connecting from a compute to Pageservers and Safekeepers.
-- Safekeeper: Added an internal metric to track bytes written or read in PostgreSQL connections to Safekeepers, which enables monitoring traffic between availability zones.
+- Safekeeper: Added an internal metric to track bytes written or read in Postgres connections to Safekeepers, which enables monitoring traffic between availability zones.
 - Proxy: All compute node connection errors are now logged.
 
 ### Bug Fixes

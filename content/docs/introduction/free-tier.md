@@ -13,7 +13,7 @@ The Neon Free Tier is intended for personal projects, prototyping, or evaluating
 
 - One Neon project with up to 10 branches.
 - 3 GB of storage per branch.
-- Unlimited PostgreSQL databases
+- Unlimited Postgres databases
 - A shared compute with 1 GB of RAM for each branch.
 - 100 hours of _Active time_ per month, affecting non-primary branch compute usage only. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. **Your primary branch compute always remains available regardless of the limit, ensuring that access to data on your primary branch is never interrupted.** You can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**.
 - A point-in-time restore window of 7 days of _reasonable usage_.

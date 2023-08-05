@@ -52,7 +52,7 @@ Vector similarity search computes similarities (the distance) between data point
 
 Different distance metrics can be more appropriate for different tasks, depending on the nature of the data and the specific relationships you're interested in. For instance, cosine similarity is often used in text analysis.
 
-The [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) extensions, which enable PostgreSQL as a vector database, support different distance metrics, including those described above.
+The [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) extensions, which enable Postgres as a vector database, support different distance metrics, including those described above.
 
 ## Generating embeddings
 
@@ -102,9 +102,9 @@ Upon successful execution, you'll receive a response similar to the following:
 
 To learn more about OpenAI's embeddings, see [Embeddings](https://platform.openai.com/docs/guides/embeddings).
 
-## Storing vector embeddings in PostgreSQL
+## Storing vector embeddings in Postgres
 
-Neon supports the [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) PostgreSQL extensions, which enable storing and retrieving vector embeddings directly within your Postgres database. When building AI and LLM applications, installing either of these extensions eliminates the need to build out your architecture to include a separate vector store.
+Neon supports the [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) Postgres extensions, which enable storing and retrieving vector embeddings directly within your Postgres database. When building AI and LLM applications, installing either of these extensions eliminates the need to build out your architecture to include a separate vector store.
 
 After installing an extension, you can create a table to store your embeddings. For example, if you install the `pg_embedding` extension, you might define a table similar to the following to store your embeddings:
 

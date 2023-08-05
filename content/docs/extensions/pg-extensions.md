@@ -5,11 +5,11 @@ redirectFrom:
   - /docs/reference/pg-extensions
 ---
 
-Neon supports the PostgreSQL extensions shown in the following table. For extension documentation, select the extension version.
+Neon supports the Postgres extensions shown in the following table. For extension documentation, select the extension version.
 
 <a id="default-extensions/"></a>
 
-| Extension                | Extension Version (PostgreSQL 14)                               | Extension Version (PostgreSQL 15)                                |Note                                                                                                                |
+| Extension                | Extension Version (Postgres 14)                               | Extension Version (Postgres 15)                                |Note                                                                                                                |
 | :------------------------| --------------------------------------------------------------: | ----------------------------------------------------------------:| :------------------------------------------------------------------------------------------------------------------|
 | address_standardizer     | [3.3.2](https://postgis.net/docs/Extras.html#Address_Standardizer)  | [3.3.2](https://postgis.net/docs/Extras.html#Address_Standardizer)  |                                                                                                             |
 | address_standardizer_data_us     | [3.3.2](https://postgis.net/docs/Extras.html#Address_Standardizer)        | [3.3.2](https://postgis.net/docs/Extras.html#Address_Standardizer) |                                                                                                |
@@ -57,7 +57,7 @@ Neon supports the PostgreSQL extensions shown in the following table. For extens
 | pgx_ulid                 | [0.1.0](https://github.com/pksunkara/pgx_ulid)                   | [0.1.0](https://github.com/pksunkara/pgx_ulid)                  | Install with `CREATE EXTENSION ulid;`                                                                                                                    |
 | plcoffee                 | [3.1.5](https://github.com/plv8/plv8/)                          | [3.1.5](https://github.com/plv8/plv8/)                           |                                                                                                                    |
 | plls                     | [3.1.5](https://github.com/plv8/plv8/)                          | [3.1.5](https://github.com/plv8/plv8/)                           |                                                                                                                    |  
-| plpgsql                  | [1.0](https://www.postgresql.org/docs/14/plpgsql.html)          | [1.0](https://www.postgresql.org/docs/15/plpgsql.html)           | Pre-installed with PostgreSQL.                                                                                     |
+| plpgsql                  | [1.0](https://www.postgresql.org/docs/14/plpgsql.html)          | [1.0](https://www.postgresql.org/docs/15/plpgsql.html)           | Pre-installed with Postgres.                                                                                     |
 | plpgsql_check            | [2.3](https://pgxn.org/dist/plpgsql_check/)                     | [2.3](https://pgxn.org/dist/plpgsql_check/)                      |                                                                                      |
 | plv8                     | [3.1.5](https://plv8.github.io/)                                | [3.1.5](https://plv8.github.io/)                                 |                                                                                                                    |
 | postgis                  | [3.3.2](https://postgis.net/)                                   | [3.3.2](https://postgis.net/)                                    |                                                                                                                    |

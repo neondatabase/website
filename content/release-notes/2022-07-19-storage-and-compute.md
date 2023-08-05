@@ -4,8 +4,8 @@
 - Safekeeper: Added support for downloading WAL from S3 storage on demand.
 - Safekeeper: Switched to [etcd](https://etcd.io/) subscriptions to keep Pageservers up to date with the Safekeeper status.
 - Safekeeper: Implemented JSON Web Token (JWT) authentication in the Safekeeper HTTP API.
-- Proxy: Added support for propagating SASL/SCRAM PostgreSQL authentication errors to clients.
-- Compute: Updated the PostgreSQL version to 14.4.
+- Proxy: Added support for propagating SASL/SCRAM Postgres authentication errors to clients.
+- Compute: Updated the Postgres version to 14.4.
 - Compute: Renamed the following custom configuration parameters:
   - `zenith.page_server_connstring` to `neon.pageserver_connstring`
   - `zenith.zenith_tenant` to `neon.tenant_id`
@@ -14,7 +14,7 @@
   - `wal_acceptors` to `safekeepers`
 - Control Plane: Renamed `zenith_admin` role to `cloud_admin`.
 - Pageserver: Implemented a page service `fullbackup` endpoint that works like basebackup but also sends relational files.
-- Pageserver: Added support for importing a base backup taken from a standalone PostgreSQL instance or another Pageserver using `psql` copy.
+- Pageserver: Added support for importing a base backup taken from a standalone Postgres instance or another Pageserver using `psql` copy.
 - Pageserver: Fixed the database size calculation to count Visibility Maps (VMs) and Free Space Maps (FSMs) in addition to the main fork of the relation.
 - Pageserver: Updated the timeline size reported when `DROP DATABASE` is executed.
 - Pageserver: Decreased the number of threads by running gc and compaction in a blocking tokio thread pool.

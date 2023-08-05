@@ -27,7 +27,7 @@ To learn more about the Neon read replica feature, see [Read replicas](/docs/int
 
 ## The Neon serverless driver
 
-Neon supports a low-latency serverless PostgreSQL driver for JavaScript and TypeScript applications that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP.
+Neon supports a low-latency serverless Postgres driver for JavaScript and TypeScript applications that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP.
 
 The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular `npm pg` package you may already be familiar with.
 

@@ -12,7 +12,7 @@ By enabling Postgres as a vector database, you can keep your data in the open so
 
 ## Vector extensions
 
-Neon supports the following extensions for enabling PostgreSQL as your vector database.
+Neon supports the following extensions for enabling Postgres as your vector database.
 
 ### pg_embedding
 

@@ -118,6 +118,10 @@
           slug: guides/read-replica-guide
         - title: Manage roles and databases with SQL
           slug: guides/manage-database-access
+        - title: Extensions
+          items:
+            - title: neon_utils
+              slug: extensions/neon-utils
     - title: Languages
       items:
         - title: Elixir
@@ -205,17 +209,15 @@
       slug: extensions/pg_embedding
     - title: pgvector
       slug: extensions/pgvector
-- title: Extensions
-  items:
-    - title: Supported extensions
-      slug: extensions/pg-extensions
-    - title: neon_utils
-      slug: extensions/neon-utils
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
+- title: Extensions
+  items:
+    - title: Postgres extensions
+      slug: extensions/pg-extensions
 - title: Import data
   items:
-    - title: Import from PostgreSQL
+    - title: Import from Postgres
       slug: import/import-from-postgres
     - title: Import from Heroku
       slug: import/import-from-heroku
@@ -254,5 +256,5 @@
       slug: reference/sdk
     - title: Glossary
       slug: reference/glossary
-    - title: PostgreSQL Compatibility
+    - title: Postgres Compatibility
       slug: reference/compatibility

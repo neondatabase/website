@@ -1,6 +1,6 @@
 ### What's new
 
-- Compute: Added support for the PostgreSQL `rum` and `pgTAP` extensions. For more information about PostgreSQL extensions supported by Neon, see [PostgreSQL extensions](/docs/extensions/pg-extensions/).
+- Compute: Added support for the Postgres `rum` and `pgTAP` extensions. For more information about Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions/).
 
 ### Bug Fixes
 
