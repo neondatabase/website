@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs) such as OpenAI.
 
-Neon supports the `pg_embedding` and `pgvector` open-source extensions, either of which all allow you to enable Postgres as a vector database for storing and querying vector embeddings.
+Neon supports the `pg_embedding` and `pgvector` open-source extensions, either of which allow you to enable Postgres as a vector database for storing and querying vector embeddings.
 
 By enabling Postgres as a vector database, you can keep your data in the open source database that you know and trust. There's no need for data migration or a proprietary vector storage solution.
 
