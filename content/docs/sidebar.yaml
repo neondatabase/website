@@ -6,15 +6,19 @@
     - title: Neon roadmap
       slug: introduction/roadmap
     - title: Neon architecture
-      slug: introduction/architecture-overview
-    - title: Compute lifecycle
-      slug: introduction/compute-lifecycle
-    - title: Branching
-      slug: introduction/branching
-    - title: Autoscaling
-      slug: introduction/autoscaling
-    - title: Read replicas
-      slug: introduction/read-replicas
+      items: 
+        - title: Overview
+          slug: introduction/architecture-overview
+        - title: Compute lifecycle
+          slug: introduction/compute-lifecycle
+    - title: Features
+      items:
+        - title: Branching
+          slug: introduction/branching
+        - title: Autoscaling
+          slug: introduction/autoscaling
+        - title: Read replicas
+          slug: introduction/read-replicas
     - title: Regions
       slug: introduction/regions
     - title: Plans
