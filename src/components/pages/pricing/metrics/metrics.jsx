@@ -214,7 +214,7 @@ const Metrics = () => {
   }, [pageHeight, scrollY]);
 
   return (
-    <section className="safe-paddings mt-[152px] xl:mt-40 lg:mt-28 md:mt-20" ref={sectionRef}>
+    <section className="safe-paddings mt-[200px] lg:mt-[152px] md:mt-28" ref={sectionRef}>
       <div className="relative flex flex-col">
         <Container className="flex flex-col items-center" size="medium">
           <Heading className="text-center" badge="Metrics" tag="h2" size="2sm">
