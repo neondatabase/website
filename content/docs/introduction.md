@@ -26,7 +26,7 @@ Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about
 
 <a href="/docs/introduction/branching" description="Learn about branching and how you can use it to optimize development workflows" icon="split-branch">Branching</a>
 
-<a href="/docs/extensions/pg-extensions" description="Level up your PostgreSQL database with our extension installation guide" icon="app-store">PostgreSQL extensions</a>
+<a href="/docs/extensions/pg-extensions" description="Level up your Postgres database with our extension installation guide" icon="app-store">Postgres extensions</a>
 
 <a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
 

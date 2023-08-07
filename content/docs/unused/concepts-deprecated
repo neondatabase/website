@@ -55,7 +55,7 @@ When a Project is created, a default database for storing data is created along 
 
 ## Limits
 
-Neon gives you no cost access to the PostgreSQL databases within the Technical Preview Free Tier limits.
+Neon gives you no cost access to the Postgres databases within the Technical Preview Free Tier limits.
 
 | Limit                                                 | Value  |
 | ----------------------------------------------------- | ------ |

@@ -41,7 +41,7 @@ To configure Autoscaling default settings at project creation time:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
-3. Specify a name, a PostgreSQL version, and a region.
+3. Specify a name, a Postgres version, and a region.
 4. Under **Compute size**, select the **Autoscaling** option.
 5. Using the slider, specify a minimum and maximum compute size.
     ![Autoscaling](/docs/guides/autoscaling_project_creation.png)

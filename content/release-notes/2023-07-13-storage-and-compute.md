@@ -8,7 +8,7 @@ label: 'Storage'
 
     Neon now supports database and role management via SQL. You can now manage databases and roles from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client, such as [psql](/docs/connect/query-with-psql-editor). Previously, databases and roles could only be managed in the Neon Console.
 
-    With this change, you can grant and revoke privileges for PostgreSQL roles as you would in a stand-alone PostgreSQL installation.
+    With this change, you can grant and revoke privileges for Postgres roles as you would in a stand-alone Postgres installation.
 
     Additionally, roles created in the Neon Console, CLI, and API are now automatically granted membership in a `neon_superuser` role. This role defines the privileges required to perform tasks in Neon such as creating databases, roles, and extensions. To learn more, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 

@@ -1,6 +1,6 @@
 ### What's new
 
-- Compute: Added support for the following PostgreSQL extensions:
+- Compute: Added support for the following Postgres extensions:
   - `pg_graphql`
   - `pg_jsonschema`
   - `pg_hashids`
@@ -12,6 +12,6 @@
     - `moddatetime`
     - `refint`
   
-  For more information about PostgreSQL extensions supported by Neon, see [PostgreSQL extensions](/docs/extensions/pg-extensions).
-- Compute: Updated supported PostgreSQL versions to [14.7](https://www.postgresql.org/docs/release/14.7/) and [15.2](https://www.postgresql.org/docs/release/15.2/), respectively.
+  For more information about Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
+- Compute: Updated supported Postgres versions to [14.7](https://www.postgresql.org/docs/release/14.7/) and [15.2](https://www.postgresql.org/docs/release/15.2/), respectively.
 - Pageserver: Optimized the log-structured merge-tree (LSM tree) implementation to reduce [write amplification](https://en.wikipedia.org/wiki/Write_amplification).

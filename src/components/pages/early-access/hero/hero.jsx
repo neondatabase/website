@@ -128,7 +128,7 @@ const Hero = () => {
             <img src={logoBlack} alt="Neon" />
           </Link>
           <h1 className="text-[28px] font-bold lg:mt-10 lg:text-center md:text-[26px]">
-            Get serverless, fault-tolerant, branchable Postgresql
+            Get serverless, fault-tolerant, branchable Postgres
           </h1>
           <p className="mt-2.5 lg:text-center">
             Start with free tier. Setup takes under 5 seconds.
