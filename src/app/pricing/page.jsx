@@ -19,7 +19,7 @@ const PricingPage = () => (
     footerWithTopBorder
   >
     <Hero />
-    <Logos className="my-[152px] 2xl:my-32 xl:my-28 lg:my-20 md:my-16" />
+    <Logos className="mt-[152px] xl:mt-40 lg:mt-28 md:mt-20" />
     <Metrics />
     <Estimates />
     <Calculator />
