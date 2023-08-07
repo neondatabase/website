@@ -49,7 +49,7 @@ const PartnersPage = () => (
     footerWithTopBorder
   >
     <Hero />
-    <Logos />
+    <Logos withGreenFade />
     <SplitViewGrid
       className="mt-[136px] xl:mt-[104px] lg:mt-20 md:mt-16"
       label="Benefits"

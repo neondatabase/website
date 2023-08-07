@@ -57,16 +57,23 @@ LogosWall.propTypes = {
   fill: PropTypes.string,
 };
 
-const Logos = () => (
-  <Container size="medium" className="w-full">
+const Logos = ({ className = '', withGreenFade = false }) => (
+  <Container size="medium" className={clsx('w-full', className)}>
     <div className="-mb-12 select-none 2xl:-mb-10 md:-mb-8">
       <LogosWall className="logos-sides-fade" />
-      <LogosWall
-        className="logos-central-mask -translate-y-12 2xl:-translate-y-10 md:-translate-y-8"
-        fill="fill-green-45"
-      />
+      {withGreenFade && (
+        <LogosWall
+          className="logos-central-mask -translate-y-12 2xl:-translate-y-10 md:-translate-y-8"
+          fill="fill-green-45"
+        />
+      )}
     </div>
   </Container>
 );
+
+Logos.propTypes = {
+  className: PropTypes.string,
+  withGreenFade: PropTypes.bool,
+};
 
 export default Logos;

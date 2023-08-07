@@ -1,3 +1,4 @@
+import Logos from 'components/pages/partners/logos';
 import Calculator from 'components/pages/pricing/calculator';
 import CTA from 'components/pages/pricing/cta';
 import Estimates from 'components/pages/pricing/estimates';
@@ -18,6 +19,7 @@ const PricingPage = () => (
     footerWithTopBorder
   >
     <Hero />
+    <Logos className="my-[152px] 2xl:my-32 xl:my-28 lg:my-20 md:my-16" />
     <Metrics />
     <Estimates />
     <Calculator />
