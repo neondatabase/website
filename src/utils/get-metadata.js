@@ -35,6 +35,12 @@ export default function getMetadata({
     metadataBase: new URL(SITE_URL),
     title: metaTitle,
     description: metaDescription,
+    viewport: {
+      width: 'device-width',
+      initialScale: 1,
+      maximumScale: 1,
+      viewportFit: 'cover',
+    },
     alternates: {
       canonical: canonicalUrl,
       types: {
