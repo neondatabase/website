@@ -2,8 +2,8 @@
   fill="url(#gradient)">
   <defs>
     <linearGradient id="gradient" gradientTransform="rotate(90)">
-      <stop offset="5%" stop-color="rgba(228, 229, 231, 0.7)" />
-      <stop offset="95%" stop-color="#E4E5E7" />
+      <stop offset="5%" stop-color="#E4E5E7" />
+      <stop offset="95%" stop-color="rgba(228, 229, 231, 0.7)" />
     </linearGradient>
   </defs>
   <g clip-path="url(#clip0_18361_7502)">
