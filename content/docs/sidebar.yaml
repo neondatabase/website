@@ -106,6 +106,8 @@
       items: 
         - title: Autoscaling
           slug: guides/autoscaling-guide
+        - title: Auto-suspend
+          slug: guides/auto-suspend-guide
         - title: Branching
           items: 
             - title: Point-in-time restore
