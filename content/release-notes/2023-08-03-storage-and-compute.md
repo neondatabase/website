@@ -4,7 +4,7 @@ label: 'Storage'
 
 ### What's new
 
-Neon's [pg_embedding](/docs/extensions/pg_embedding) extension, which enables storing vector embeddings and graph-based vector similarity search in Postgres using the Hierarchical Navigable Small World (HNSW) algorithm (HNSW), now persists HNSW indexes to disk. In the previous `pg_embedding` version (0.1.0 and earlier), indexes resided in memory.
+Neon's [pg_embedding](/docs/extensions/pg_embedding) extension, which enables graph-based vector similarity search in Postgres using the Hierarchical Navigable Small World (HNSW) algorithm (HNSW), now persists HNSW indexes to disk. In the previous `pg_embedding` version (0.1.0 and earlier), indexes resided in memory.
 
 Additionally, `pg_embedding` now supports cosine and Manhattan distance metrics.
 
