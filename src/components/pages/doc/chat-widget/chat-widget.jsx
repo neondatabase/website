@@ -213,7 +213,7 @@ const ChatWidget = () => {
                     <Button
                       className="absolute -top-8 left-1/2 flex -translate-x-1/2 items-center justify-center gap-x-1.5 border border-gray-new-94 bg-gray-new-94/40 font-normal normal-case text-gray-new-30 hover:bg-gray-new-94/80 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80 dark:hover:bg-gray-new-15/80"
                       size="xxs"
-                      type="submit"
+                      type="button"
                     >
                       <ReloadIcon className="h-3 w-3 shrink-0" />
                       <span>Try again</span>
@@ -223,7 +223,7 @@ const ChatWidget = () => {
                   <Button
                     className="absolute -top-8 left-1/2 flex -translate-x-1/2 items-center justify-center gap-x-1.5 border border-gray-new-94 bg-gray-new-94/40 font-normal normal-case text-gray-new-30 hover:bg-gray-new-94/80 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80 dark:hover:bg-gray-new-15/80"
                     size="xxs"
-                    type="submit"
+                    type="button"
                     onClick={stopGeneratingAnswers}
                   >
                     <StopIcon className="h-3 w-3 shrink-0" />
