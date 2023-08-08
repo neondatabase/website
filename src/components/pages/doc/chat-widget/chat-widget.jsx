@@ -36,6 +36,7 @@ const ChatWidget = () => {
   // aux refs
   const messagesEndRef = useRef(null);
   const isMountedRef = useRef(false);
+  const formRef = useRef(null);
   const inputRef = useRef(null);
   // hooks
   const [isStopped, setIsStopped] = useState(false);
@@ -182,11 +183,15 @@ const ChatWidget = () => {
                 </span>
               </div>
             ) : (
-              <form className="group relative w-full px-5 pb-5 lg:mt-auto" onSubmit={handleSubmit}>
+              <form
+                className="group relative w-full px-5 pb-5 lg:mt-auto"
+                ref={formRef}
+                onSubmit={handleSubmit}
+              >
                 <ChatInput
                   defaultValue={selectedValue}
-                  inputRef={inputRef}
-                  onSubmit={handleSubmit}
+                  ref={inputRef}
+                  onEnterPress={() => formRef.current.submit()}
                 />
                 <div className="mt-2.5 flex flex-col space-y-1 text-center text-xs font-light leading-dense text-gray-new-30 dark:text-gray-new-80">
                   <span>Neon Docs AI has a cap of 1 message every 5 seconds.</span>
