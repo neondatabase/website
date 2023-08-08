@@ -14,4 +14,4 @@ The "cold-start time" for Neon compute instances, which is the amount of time it
 - **Concurrency improvements**: Concurrency optimizations were applied to the compute startup process.
 - **Code path optimization**: Code paths frequently accessed during compute startup were optimized.
 
-Cold-start times are improved in all [supported regions](/docs/introduction/regions) but most noticeably in the `US East (Ohio) — aws-us-east-2` region, which hosts the Neon Control Plane. Startup times in this region are measured at 500ms or less. The Neon Control plane will be deployed regionally in future releases, bringing the same millesecond cold-start times to all supported regions.
+Cold-start times are faster in all [supported regions](/docs/introduction/regions) but most noticeably in the `US East (Ohio) — aws-us-east-2` region, which hosts the Neon Control Plane. Startup times in this region are measured at 500ms or less. The Neon Control plane will be deployed regionally in future releases, bringing the same millesecond startup times to all supported regions.
