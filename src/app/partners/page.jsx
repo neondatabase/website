@@ -40,6 +40,22 @@ const items = [
   },
 ];
 
+const logos = [
+  'bunnyshell',
+  'hasura',
+  'replit',
+  'vercel',
+  'illa',
+  'octolis',
+  'cloudflare',
+  'airplane',
+  'wundergraph',
+  'fabric-io',
+  'snaplet',
+  'fl0',
+  'dynaboard',
+];
+
 const PartnersPage = () => (
   <Layout
     className="bg-black-new text-white"
@@ -49,7 +65,7 @@ const PartnersPage = () => (
     footerWithTopBorder
   >
     <Hero />
-    <Logos withGreenFade />
+    <Logos logos={logos} withGreenFade />
     <SplitViewGrid
       className="mt-[136px] xl:mt-[104px] lg:mt-20 md:mt-16"
       label="Benefits"

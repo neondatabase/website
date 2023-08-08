@@ -11,6 +11,23 @@ import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.pricing);
 
+const logos = [
+  'bunnyshell',
+  'hasura',
+  'replit',
+  'vercel',
+  'illa',
+  'octolis',
+  'cloudflare',
+  'airplane',
+  'wundergraph',
+  'fabric-io',
+  'snaplet',
+  'fl0',
+  'dynaboard',
+  'profitflow',
+];
+
 const PricingPage = () => (
   <Layout
     className="bg-black-new text-white"
@@ -19,7 +36,7 @@ const PricingPage = () => (
     footerWithTopBorder
   >
     <Hero />
-    <Logos className="mt-[152px] xl:mt-40 lg:mt-28 md:mt-20" />
+    <Logos className="mt-[152px] xl:mt-40 lg:mt-28 md:mt-20" logos={logos} />
     <Metrics />
     <Estimates />
     <Calculator />
