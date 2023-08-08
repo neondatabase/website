@@ -11,7 +11,7 @@ A compute node in Neon is a stateless Postgres process due to the separation of 
 
 The _Auto-suspend_ feature is conservative. It treats an "idle-in-transaction" connection as active to avoid breaking application logic that involves long-running transactions. Only connections that are truly inactive are closed after the defined period of inactivity.
 
-When you connect to an idle compute, Neon automatically activates it. Activation can take anywhere from 500 ms to a few seconds, meaning that the first connection may have a higher latency than subsequent connections. Cold start times are fastest in the `US East (Ohio) — aws-us-east-2` region, which hosts the Neon Control Plane. The Neon Control plane will be deployed regionally in future Neon releases, bringing the same millesecond cold start times to all supported regions.
+When you connect to an idle compute, Neon automatically activates it. Activation can take anywhere from 500 ms to a few seconds, meaning that the first connection may have a higher latency than subsequent connections. Cold-start times are fastest in the `US East (Ohio) — aws-us-east-2` region, which hosts the Neon Control Plane. The Neon Control plane will be deployed regionally in future Neon releases, bringing the same millesecond cold-start times to all supported regions.
 
 Also, Postgres shared memory buffers are cold after a compute wakes up from the `Idle` state, which means that initial queries may take longer until the shared memory buffers are warmed.
 
