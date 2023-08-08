@@ -41,6 +41,7 @@ To configure the _Auto-suspend_ default setting at project creation time:
 1. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
 1. Specify a name, a Postgres version, and a region.
 1. Under **Compute size**, enter the desired **Auto-suspend delay** setting. The value is specified in seconds. The maximum setting is `604800` seconds (7 days). A value of `0` is equivalent to the global default value of `300` seconds (5 minutes). A value of `-1` disables the _Auto-suspend_ feature, which means that the compute does not suspend (it remains active at all times).
+![Auto-suspend delay settings](/docs/guides/autosuspend_delay.png)
 1. Click **Save**.
 1. Click **Create Project**. Your initial compute endpoint is created with the specified settings. All compute endpoints created in the future when creating a branch or adding a compute endpoint to a branch are created with the settings you specified.
 
