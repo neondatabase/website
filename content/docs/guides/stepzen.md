@@ -121,7 +121,7 @@ To deploy the schema to the StepZen cloud, run the following command:
 stepzen start
 ```
 
-Once the schema is deployed, you can explore the GraphQL API in the [StepZen dashboard](https://dashboard.stepzen.com/explorer).
+After the schema is deployed, you can explore the GraphQL API in the [StepZen dashboard](https://dashboard.stepzen.com/explorer).
 
 From the dashboard, you can view the GraphQL schema, try out queries and mutations, and generate code snippets for your favorite programming language.
 

@@ -20,7 +20,7 @@ To learn more about Neon's Autoscaling feature and how to enable it, refer to ou
 
 Neon supports regional read replicas, which are independent read-only compute instances designed to perform read operations on the same data as your read-write computes. Read replicas do not replicate data across database instances. Instead, read requests are directed to a single source. This architecture enables read replicas to be created instantly, and because data is read from a single source, there are additional storage costs.
 
-Since vector similarity search is a read-only workload, you can leverage read replicas to offload reads from your read-write compute instance to a dedicated read-only compute when deploying AI and LLM applications. Once you create a read replica, you can simply swap out your current Neon database connecting string for the read replica connection string, which makes deploying a read replica for your AI application very simple.
+Since vector similarity search is a read-only workload, you can leverage read replicas to offload reads from your read-write compute instance to a dedicated read-only compute when deploying AI and LLM applications. After you create a read replica, you can simply swap out your current Neon database connecting string for the read replica connection string, which makes deploying a read replica for your AI application very simple.
 
 To learn more about the Neon read replica feature, see [Read replicas](/docs/introduction/read-replicas) and refer to our [Working with Neon read replicas](/docs/guides/read-replica-guide) guide.
 

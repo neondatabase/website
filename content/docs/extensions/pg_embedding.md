@@ -204,7 +204,7 @@ The first step in the migration process is to install the `pg_embedding` extensi
 CREATE EXTENSION embedding;
 ```
 
-Once the `pg_embedding` extension is installed, you can use the same vector embedding table used with `pgvector`. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is to modify vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
+After the `pg_embedding` extension is installed, you can use the same vector embedding table used with `pgvector`. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is to modify vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
 
 ```sql
 SELECT id, embedding FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;

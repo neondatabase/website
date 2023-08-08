@@ -40,7 +40,7 @@ becomes idle.
 
 Now we can create the first table using the Hasura Console web
 interface. Let it be table 't' with a single column 'text' of a type
-'Text'. Once created, you can insert some rows into it, and finally
+'Text'. After the table is created, you can insert some rows into it, and finally
 navigate to the API section for endpoint creation. In the GraphQL tab,
 we can query our table with GraphQL, for example:
 

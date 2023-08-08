@@ -96,7 +96,7 @@ cd wundergraph
 code .
 ```
 
-3. Once the project is cloned, run the following commands in your project directory:
+3. After the project is cloned, run the following commands in your project directory:
 
    ```bash
    npm install && npm run dev
@@ -297,8 +297,8 @@ export default withWunderGraph(Home);
 2. Navigate to [http://localhost:3000](http://localhost:3000) when the application is finished building. If your application runs successfully, you should see the following:
    ![WunderGraph operations result](/docs/guides/wundergraph_operation_result.jpg)
 3. To take the setup one step further, commit the changes to your GitHub repository and merge them into your `main` branch.
-4. Once you merge the changes, navigate to `WunderGraph Cloud` and view out the **Deployments** tab. You should see that a deployment was triggered. Give the deployment a few seconds to finish.
-5. Once the deployment is ready, navigate to the **Operations** tab. You should see the new endpoint that you created and added to your application. Click it to see your data in real time.
+4. After you merge the changes, navigate to `WunderGraph Cloud` and view out the **Deployments** tab. You should see that a deployment was triggered. Give the deployment a few seconds to finish.
+5. When deployment is ready, navigate to the **Operations** tab. You should see the new endpoint that you created and added to your application. Click it to see your data in real time.
 
 ## Key takeaways
 
