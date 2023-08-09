@@ -109,8 +109,8 @@ To avoid changing connection details in your application, you can reassign the c
 Check out the GitHub repositories for these examples:
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/restore-neon-branch" description="Restore a Neon database to a previous state" icon="github">Restore a Neon database</a>
-<a href="https://github.com/kelvich/branching_demo_bisect" description="Use a bisect script and the Neon API to recover lost data" icon="github">Time travel demo</a>
+<a href="https://github.com/neondatabase/restore-neon-branch" description="A script to restore a Neon branch to a previous state while preserving the same endpoint" icon="github">Restore a Neon database</a>
+<a href="https://github.com/kelvich/branching_demo_bisect" description="Use a bisect script and the Neon API to recover lost data" icon="github">Neon branch bisect demo</a>
 </DetailIconCards>
 
 ## Need help?
