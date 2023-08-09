@@ -100,6 +100,8 @@
       slug: manage/integrations
     - title: Operations
       slug: manage/operations
+    - title: Backups
+      slug: manage/backups
 - title: Guides
   items:
     - title: Neon features
