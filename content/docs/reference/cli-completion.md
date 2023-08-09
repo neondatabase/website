@@ -1,12 +1,12 @@
 ---
 title: Neon CLI commands — completion
-subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
+subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
 ---
 
 ## Before you begin
 
-Ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+Before running the `completion` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
 
 ## The `completion` command
 

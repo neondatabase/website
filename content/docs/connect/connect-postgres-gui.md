@@ -4,7 +4,7 @@ subtitle: Learn how to connect a GUI application to Neon
 enableTableOfContents: true
 ---
 
-This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a PostgreSQL database also support connecting to Neon.
+This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.
 
 ## Gather your connection details
 
@@ -36,7 +36,7 @@ postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
 - hostname: `ep-mute-rain-952417.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
-Neon uses the default PostgreSQL port, `5432`.
+Neon uses the default Postgres port, `5432`.
 
 ## Connect to the database
 
@@ -44,7 +44,7 @@ In the GUI application or IDE, enter the connection details into the appropriate
 
 ![Register - Server](/docs/connect/pgadmin4.png)
 
-Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For example, the DBeaver client has a **URL** field, but connecting to Neon requires specifying the connection details as shown:
+Some Java-based tools that use the pgJDBC driver for connecting to Postgres, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For example, the DBeaver client has a **URL** field, but connecting to Neon requires specifying the connection details as shown:
 
 ![DBeaver connection](/docs/connect/dbeaver_connection.png)
 
@@ -53,7 +53,7 @@ Some Java-based tools that use the pgJDBC driver for connecting to PostgreSQL, s
 Connections from the GUI applications and IDEs in the table below have been tested with Neon.
 
 <Admonition type="note">
-Some applications require an Server Name Indication (SNI) workaround. Neon uses compute endpoint domain names to route incoming connections. However, the PostgreSQL wire protocol does not transfer the server domain name, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this. Not all application clients support SNI. In these cases, a workaround is required. For more information, see [Connection errors](/docs/connect/connection-errors).
+Some applications require an Server Name Indication (SNI) workaround. Neon uses compute endpoint domain names to route incoming connections. However, the Postgres wire protocol does not transfer the server domain name, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this. Not all application clients support SNI. In these cases, a workaround is required. For more information, see [Connection errors](/docs/connect/connection-errors).
 </Admonition>
 
 | Application or IDE | Notes |
@@ -89,7 +89,7 @@ Applications that use older client libraries or drivers that do not support Serv
 <CodeBlock shouldWrap>
 
 ```txt
-ERROR: The endpoint ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
+ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
 ```
 
 </CodeBlock>

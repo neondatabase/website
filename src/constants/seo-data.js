@@ -49,7 +49,7 @@ export default {
   pricing: {
     title: 'Pricing — Neon',
     description:
-      'Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible usage and volume-based plans.',
+      'Neon brings serverless architecture to Postgres, which allows us to offer you flexible usage and volume-based plans.',
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },
@@ -58,6 +58,13 @@ export default {
     description: 'Bring familiar, reliable and scalable Postgres experience to your customers.',
     imagePath: '/images/social-previews/partners.jpg',
     pathname: LINKS.partners,
+  },
+  ai: {
+    title: 'Powering next gen AI apps with Postgres — Neon',
+    description:
+      'Scale your transformative LLM applications to millions of users with vector indexes and similarity search in Neon.',
+    imagePath: '/images/social-previews/ai.jpg',
+    pathname: LINKS.ai,
   },
 };
 

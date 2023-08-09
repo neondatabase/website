@@ -1,12 +1,12 @@
 ---
 title: Neon CLI commands — roles
-subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
+subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
 ---
 
 ## Before you begin
 
-- Ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+- Before running the `roles` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
 - If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 For information about roles in Neon, see [Manage roles](/docs/manage/roles).

@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 ---
 
-The `pgcli` client is an interactive command-line interface for PostgreSQL that offers several advantages over the traditional `psql` client, including syntax highlighting, autocompletion, multi-line editing, and query history.
+The `pgcli` client is an interactive command-line interface for Postgres that offers several advantages over the traditional `psql` client, including syntax highlighting, autocompletion, multi-line editing, and query history.
 
 ## Installation
 

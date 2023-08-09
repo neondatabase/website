@@ -34,7 +34,7 @@ const Apply = () => (
     id="partners-apply"
     className="apply-form safe-paddings pb-40 pt-[240px] xl:pb-[120px] xl:pt-40 lg:pb-24 lg:pt-32 md:pb-20 md:pt-[90px]"
   >
-    <Container className="grid-gap-x grid grid-cols-12" size="mdDoc">
+    <Container className="grid-gap-x grid grid-cols-12" size="medium">
       <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 xl:col-span-full xl:col-start-1 xl:grid-cols-12">
         <div className="col-span-5 lg:col-span-full lg:text-center">
           <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green-45">
@@ -47,8 +47,9 @@ const Apply = () => (
             Not sure about the right partnership option?
             <br />
             <Link
-              className="inline-block leading-tight text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[6px] transition-colors hover:decoration-transparent"
+              className="inline-block leading-tight decoration-1 underline-offset-[6px]"
               to={LINKS.contactSales}
+              theme="green-underlined"
             >
               Contact us
             </Link>{' '}

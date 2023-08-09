@@ -13,7 +13,7 @@ A Neon project is created with the following resources, by default:
 - A primary branch called `main`. You can create child branches from the primary branch or from a previously created branch. For more information, see [Manage branches](/docs/manage/branches).
 - A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage computes](/docs/manage/endpoints).
 - A default database, called `neondb`, which resides in the project's primary branch.
-- A default PostgreSQL role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
+- A default Postgres role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
 
 ## Create a project
 
@@ -23,7 +23,11 @@ To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
-3. Specify a name, a PostgreSQL version, and a region. If you are a Neon [Pro plan](/docs/introduction/pro-plan) user, you can also specify compute size settings. Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). Project names are limited to 64 characters.
+3. Specify a name, a Postgres version, and a region. Project names are limited to 64 characters. If you are a Neon [Pro plan](/docs/introduction/pro-plan) user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
+
+    - Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+    - The **Auto-suspend delay** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
+  
 4. Click **Create Project**.
 
 Upon creating a project, you are presented with a dialog that provides your connection details for the default `neondb` database, including your password.

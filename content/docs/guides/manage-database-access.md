@@ -24,7 +24,7 @@ You can think of this role as a Neon administrator role. A user with membership 
 
 Any user created in the Neon console or using the Neon API is automatically granted membership in the `neon_superuser` role. But what do you do if you need to create roles with different or limited privileges? After all, not every database user should be an administrator in Neon.
 
-Neon supports creating and managing PostgreSQL roles with SQL. Roles created with SQL from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) start with the same basic privileges granted to newly created roles in stand-alone PostgreSQL. They are not granted membership in the `neon_superuser` role.
+Neon supports creating and managing Postgres roles with SQL. Roles created with SQL from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) start with the same basic privileges granted to newly created roles in stand-alone Postgres. They are not granted membership in the `neon_superuser` role.
 
 Using SQL, you can define database roles with only the privileges you choose to grant. The following instructions show you how.
 
@@ -60,21 +60,21 @@ To begin, assume you're creating a new database that will be used by several dev
 
     <Admonition type="important">  
     Your password must have 60 bits of entropy. To achieve this, you can follow these password composition guidelines:
-      - **Length**: The password should consist of at least 12 characters.
-      - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
-        - Lowercase letters (a-z)
-        - Uppercase letters (A-Z)
-        - Numbers (0-9)
-        - Special symbols (e.g., !@#$%^&*)
-      - **Avoid predictability**: To maintain a high level of unpredictability, do not use:
-        - Sequential patterns (such as '1234', 'abcd', 'qwerty')
-        - Common words or phrases
-        - Any words found in a dictionary
-      - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.
+    - **Length**: The password should consist of at least 12 characters.
+    - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
+      - Lowercase letters (a-z)
+      - Uppercase letters (A-Z)
+      - Numbers (0-9)
+      - Special symbols (e.g., !@#$%^&*)
+    - **Avoid predictability**: To maintain a high level of unpredictability, do not use:
+      - Sequential patterns (such as '1234', 'abcd', 'qwerty')
+      - Common words or phrases
+      - Any words found in a dictionary
+    - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.
 
-      Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
+    Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
 
-      Hashed passwords are not supported.
+    Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
     </Admonition>
 
 4. Grant the `dev_users` role all privileges on the database:
@@ -108,4 +108,4 @@ To begin, assume you're creating a new database that will be used by several dev
     app_db=> 
     ```
 
-You may want to employ a more granular privilege scheme in your database access configuration, which you can do using a similar approach of creating 'group' roles and granting membership to those roles. For more information about granting privileges in PostgreSQL, please see the [GRANT](https://www.postgresql.org/docs/current/sql-grant.html) command in the _PostgreSQL documentation_.
+You may want to employ a more granular privilege scheme in your database access configuration, which you can do using a similar approach of creating 'group' roles and granting membership to those roles. For more information about granting privileges in Postgres, please see the [GRANT](https://www.postgresql.org/docs/current/sql-grant.html) command in the _PostgreSQL documentation_.

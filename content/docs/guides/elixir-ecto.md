@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 This guide describes how to connect from an Elixir application with Ecto, which is a database wrapper and query generator for Elixir. Ecto provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
 
-The instructions in this guide follow the steps outlined in the [Ecto Getting Started](https://hexdocs.pm/ecto/getting-started.html#content) guide, modified to demonstrate connecting to a Neon Serverless PostgreSQL database. It is assumed that you have a working installation of [Elixir](https://elixir-lang.org/install.html).
+The instructions in this guide follow the steps outlined in the [Ecto Getting Started](https://hexdocs.pm/ecto/getting-started.html#content) guide, modified to demonstrate connecting to a Neon Serverless Postgres database. It is assumed that you have a working installation of [Elixir](https://elixir-lang.org/install.html).
 
 To connect to Neon from Elixir with Ecto:
 
@@ -66,7 +66,7 @@ The `--sup` option ensures that the application has a supervision tree, which is
     end
     ```
 
-    Ecto provides the common querying API. The Postgrex driver acts as a bridge between Ecto and PostgreSQL. Ecto interfaces with its own `Ecto.Adapters.Postgres` module, which communicates to Postgres through the Postgrex driver.
+    Ecto provides the common querying API. The Postgrex driver acts as a bridge between Ecto and Postgres. Ecto interfaces with its own `Ecto.Adapters.Postgres` module, which communicates to Postgres through the Postgrex driver.
 
 2. Install the Ecto and the Postgrex driver dependencies by running the following command in your application directory:
 

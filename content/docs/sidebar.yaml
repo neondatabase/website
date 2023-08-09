@@ -6,15 +6,19 @@
     - title: Neon roadmap
       slug: introduction/roadmap
     - title: Neon architecture
-      slug: introduction/architecture-overview
-    - title: Compute lifecycle
-      slug: introduction/compute-lifecycle
-    - title: Branching
-      slug: introduction/branching
-    - title: Autoscaling
-      slug: introduction/autoscaling
-    - title: Read replicas
-      slug: introduction/read-replicas
+      items: 
+        - title: Overview
+          slug: introduction/architecture-overview
+        - title: Compute lifecycle
+          slug: introduction/compute-lifecycle
+    - title: Features
+      items:
+        - title: Branching
+          slug: introduction/branching
+        - title: Autoscaling
+          slug: introduction/autoscaling
+        - title: Read replicas
+          slug: introduction/read-replicas
     - title: Regions
       slug: introduction/regions
     - title: Plans
@@ -100,10 +104,28 @@
   items:
     - title: Neon features
       items: 
-        - title: Manage roles and databases with SQL
-          slug: guides/manage-database-access
+        - title: Autoscaling
+          slug: guides/autoscaling-guide
+        - title: Branching
+          items: 
+            - title: Point-in-time restore
+              slug: guides/branching-pitr
+            - title: Branching with the CLI
+              slug: guides/branching-neon-cli
+            - title: Branching with the API
+              slug: guides/branching-neon-api
+            - title: Branching with GitHub Actions
+              slug: guides/branching-github-actions
+        - title: Project sharing
+          slug: guides/project-sharing-guide
         - title: Read replicas
           slug: guides/read-replica-guide
+        - title: Manage roles and databases with SQL
+          slug: guides/manage-database-access
+        - title: Extensions
+          items:
+            - title: neon_utils
+              slug: extensions/neon-utils
     - title: Languages
       items:
         - title: Elixir
@@ -143,6 +165,8 @@
                   slug: guides/prisma-migrate
     - title: Backend-as-a-service
       items:
+        - title: Exograph
+          slug: guides/exograph
         - title: Grafbase
           slug: guides/grafbase
         - title: Hasura
@@ -177,19 +201,25 @@
               slug: guides/vercel-manual
     - title: OAuth
       slug: guides/oauth-integration
-- title: Extensions
+- title: AI & embeddings
   items:
-    - title: Supported extensions
-      slug: extensions/pg-extensions
+    - title: Introduction
+      slug: ai/ai-intro
+    - title: AI concepts
+      slug: ai/ai-concepts
+    - title: Scale with Neon
+      slug: ai/ai-scale-with-neon
     - title: pg_embedding
       slug: extensions/pg_embedding
-    - title: pg_tiktoken
-      slug: extensions/pg_tiktoken
     - title: pgvector
       slug: extensions/pgvector
+    - title: pg_tiktoken
+      slug: extensions/pg_tiktoken
+- title: Postgres extensions
+  slug: extensions/pg-extensions
 - title: Import data
   items:
-    - title: Import from PostgreSQL
+    - title: Import from Postgres
       slug: import/import-from-postgres
     - title: Import from Heroku
       slug: import/import-from-heroku
@@ -204,6 +234,8 @@
     - title: Neon CLI
       slug: reference/neon-cli
       items:
+        - title: Install and connect
+          slug: reference/cli-install
         - title: auth
           slug: reference/cli-auth
         - title: me
@@ -226,5 +258,5 @@
       slug: reference/sdk
     - title: Glossary
       slug: reference/glossary
-    - title: PostgreSQL Compatibility
+    - title: Postgres Compatibility
       slug: reference/compatibility

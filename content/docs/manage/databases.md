@@ -303,15 +303,15 @@ Response:
 
 ## Manage databases with SQL
 
-You can create and manage databases in Neon with SQL, as you can with any stand-alone PostgreSQL installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+You can create and manage databases in Neon with SQL, as you can with any stand-alone Postgres installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 ```sql
 CREATE DATABASE testdb;
 ```
 
-Most standard [PostgreSQL CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. This parameter requires access to the local file system, which is not permitted on Neon.
+Most standard [Postgres CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. This parameter requires access to the local file system, which is not permitted on Neon.
 
-The role that creates a database is the owner of the database. This role has the typical default PostgreSQL privileges on the database, including the ability to `DROP` the database, `CONNECT` to the database, and create new `SCHEMAS` in it. For more information about database object privileges in PostgreSQL, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
+The role that creates a database is the owner of the database. This role has the typical default Postgres privileges on the database, including the ability to `DROP` the database, `CONNECT` to the database, and create new `SCHEMAS` in it. For more information about database object privileges in Postgres, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
 
 For a database creation example, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
 

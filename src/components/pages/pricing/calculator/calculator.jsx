@@ -1,7 +1,7 @@
 'use client';
 
 import * as Slider from '@radix-ui/react-slider';
-import { LazyMotion, domAnimation, m, AnimatePresence, useAnimation } from 'framer-motion';
+import { AnimatePresence, LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -9,7 +9,7 @@ import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import LINKS from 'constants/links';
-import ArrowRight from 'icons/arrow-right-thin.inline.svg';
+import ArrowRight from 'icons/arrow-sm.inline.svg';
 import CheckIcon from 'icons/check.inline.svg';
 import infoHoveredIcon from 'icons/tooltip-hovered.svg';
 import infoIcon from 'icons/tooltip.svg';
@@ -134,7 +134,7 @@ const Calculator = () => {
       id="calc"
       className="safe-paddings mb-40 mt-[17.25rem] xl:mb-36 xl:mt-40 lg:mb-16 lg:mt-32 md:my-20"
     >
-      <Container size="mdDoc">
+      <Container size="medium">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <Heading
             className="text-center xl:mx-auto xl:max-w-2xl lg:inline"

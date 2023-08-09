@@ -1,12 +1,12 @@
 ---
 title: Neon CLI commands — branches
-subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
+subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
 ---
 
 ## Before you begin
 
-- Ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+- Before running the `branches` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
 - If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 ## The `branches` command
@@ -129,20 +129,93 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 - Create a branch:
 
-```bash
-neonctl branches create
-┌─────────────────────┬─────────────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                  │ Name                │ Primary │ Created At           │ Updated At           │
-├─────────────────────┼─────────────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-round-sun-825586 │ br-round-sun-825586 │ false   │ 2023-07-12T05:25:39Z │ 2023-07-12T05:25:39Z │
-└─────────────────────┴─────────────────────┴─────────┴──────────────────────┴──────────────────────┘
-endpoints
-┌────────────────────────┬──────────────────────┐
-│ Id                     │ Created At           │
-├────────────────────────┼──────────────────────┤
-│ ep-empty-shadow-588175 │ 2023-07-12T05:25:39Z │
-└────────────────────────┴──────────────────────┘
-```
+    ```bash
+    neonctl branches create
+    ┌─────────────────────────┬─────────────────────────┬─────────┬──────────────────────┬──────────────────────┐
+    │ Id                      │ Name                    │ Primary │ Created At           │ Updated At           │
+    ├─────────────────────────┼─────────────────────────┼─────────┼──────────────────────┼──────────────────────┤
+    │ br-mute-sunset-67218628 │ br-mute-sunset-67218628 │ false   │ 2023-08-03T20:07:27Z │ 2023-08-03T20:07:27Z │
+    └─────────────────────────┴─────────────────────────┴─────────┴──────────────────────┴──────────────────────┘
+    endpoints
+    ┌───────────────────────────┬──────────────────────┐
+    │ Id                        │ Created At           │
+    ├───────────────────────────┼──────────────────────┤
+    │ ep-floral-violet-94096438 │ 2023-08-03T20:07:27Z │
+    └───────────────────────────┴──────────────────────┘
+    connection_uris
+    ┌──────────────────────────────────────────────────────────────────────────────────────────┐
+    │ Connection Uri                                                                           │
+    ├──────────────────────────────────────────────────────────────────────────────────────────┤
+    │ postgres://daniel:<password>@ep-floral-violet-94096438.us-east-2.aws.neon.tech/neondb    │
+    └──────────────────────────────────────────────────────────────────────────────────────────┘
+    ```
+
+    <Admonition type="tip">
+    The Neon CLI provides a `neonctl connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+    </Admonition>
+
+- Create a branch with the `--output` format of the command set to `json`. This output format returns all of the branch response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
+
+    ```bash
+    neonctl branches create --output json 
+    {
+    "branch": {
+        "id": "br-frosty-art-30264288",
+        "project_id": "polished-shape-60485499",
+        "parent_id": "br-polished-fire-02083731",
+        "parent_lsn": "0/1E887C8",
+        "name": "br-frosty-art-30264288",
+        "current_state": "init",
+        "pending_state": "ready",
+        "creation_source": "neonctl",
+        "primary": false,
+        "cpu_used_sec": 0,
+        "compute_time_seconds": 0,
+        "active_time_seconds": 0,
+        "written_data_bytes": 0,
+        "data_transfer_bytes": 0,
+        "created_at": "2023-08-03T20:12:24Z",
+        "updated_at": "2023-08-03T20:12:24Z"
+    },
+    "endpoints": [
+        {
+        "host": "ep-patient-sun-49170531.us-east-2.aws.neon.tech",
+        "id": "ep-patient-sun-49170531",
+        "project_id": "polished-shape-60485499",
+        "branch_id": "br-frosty-art-30264288",
+        "autoscaling_limit_min_cu": 1,
+        "autoscaling_limit_max_cu": 1,
+        "region_id": "aws-us-east-2",
+        "type": "read_write",
+        "current_state": "init",
+        "pending_state": "active",
+        "settings": {},
+        "pooler_enabled": false,
+        "pooler_mode": "transaction",
+        "disabled": false,
+        "passwordless_access": true,
+        "creation_source": "neonctl",
+        "created_at": "2023-08-03T20:12:24Z",
+        "updated_at": "2023-08-03T20:12:24Z",
+        "proxy_host": "us-east-2.aws.neon.tech",
+        "suspend_timeout_seconds": 0,
+        "provisioner": "k8s-pod"
+        }
+    ],
+    "connection_uris": [
+        {
+        "connection_uri": "postgres://daniel:<password>@ep-patient-sun-49170531.us-east-2.aws.neon.tech/neondb",
+        "connection_parameters": {
+            "database": "neondb",
+            "password": "<password>",
+            "role": "daniel",
+            "host": "ep-patient-sun-49170531.us-east-2.aws.neon.tech",
+            "pooler_host": "ep-patient-sun-49170531-pooler.us-east-2.aws.neon.tech"
+        }
+        }
+    ]
+    }
+    ```
 
 - Create a branch with a user-defined name:
 
