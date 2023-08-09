@@ -87,7 +87,7 @@ If your previous primary branch was your project's root branch (the initial bran
 
 To use your new primary branch with your applications, update your application connection details. To do so, replace your current connection details with the connection details for your new primary branch, which you retrieved earlier when connecting to your branch.
 
-Alternatively, if you do not want change connection details, you can move the compute endpoint from your old primary branch to the new  branch. See [Reassign your compute endpoint](#reassign-the-compute-endpoint) for instructions.
+Alternatively, if you do not want change connection details, you can move the compute endpoint from your old primary branch to the new  branch. See [Reassign the compute endpoint](#reassign-the-compute-endpoint) for instructions.
 
 ## Reassign the compute endpoint
 
