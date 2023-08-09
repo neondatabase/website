@@ -106,11 +106,11 @@ To avoid changing connection details in your application, you can reassign the c
 - [Using Neon branching for instant point-in-time restore](https://neon.tech/blog/point-in-time-recovery). The blog post describes point-in-time restore and provides a script for creating a recovery branch, reassigning a compute endpoint, and setting the new branch as the primary.
 - [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This blog post (with video) describes a data recovery example that uses Neon's branching feature, the Neon API, and a bisect script to recover lost data.
 
-Check out the GitHub repositories for the examples:
+Check out the GitHub repositories for these examples:
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/restore-neon-branch" description="A script to restore a Neon branch to a previous state while preserving the same endpoint" icon="github">Restore a Neon database</a>
-<a href="https://github.com/kelvich/branching_demo_bisect" description="Use a bisect script and the Neon API to recover lost data" icon="github">Neon branch bisect demo</a>
+<a href="https://github.com/kelvich/branching_demo_bisect" description="Use Neon branching, the Neon API, and a bisect script to recover lost data" icon="github">Neon branch bisect demo</a>
 </DetailIconCards>
 
 ## Need help?
