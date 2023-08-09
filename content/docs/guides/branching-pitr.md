@@ -30,6 +30,8 @@ You can also create point-in-time branches using the [Neon CLI](/docs/reference/
 neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
 ```
 
+The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
+
 </Admonition>
 
 ## Connect to your branch
@@ -85,4 +87,32 @@ If your previous primary branch was your project's root branch (the initial bran
 
 To use your new primary branch with your applications, update your application connection details. To do so, replace your current connection details with the connection details for your new primary branch, which you retrieved earlier when connecting to your branch.
 
-For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to create branches to recover your data to the last known good.
+Alternatively, if you do not want change connection details, you can move the compute endpoint from your old primary branch to the new  branch. See [Reassign your compute endpoint](#reassign-the-compute-endpoint) for instructions.
+
+## Reassign the compute endpoint
+
+To avoid changing connection details in your application, you can reassign the compute endpoint from your old primary branch to your new  branch. If you followed the steps above, you created a branch with a compute endpoint. In this case, you have to:
+
+1. **Remove the compute endpoint from the new branch.**
+
+   For instructions, see [Delete a compute endpoint](/docs/manage/endpoints#delete-a-compute-endpoint).
+
+2. **Move the compute endpoint from the old primary branch to the new branch.**
+
+   This action is currently only supported in the Neon API. See [Update a compute endpoint with the CLI](/docs/manage/endpoints#update-a-compute-endpoint-with-the-api) for instructions.
+
+## Examples
+
+- For a blog post that covers point-in-time restore (PITR), see [Using Neon branching for instant Point in time restore](https://neon.tech/blog/point-in-time-recovery). The blog post describes PITR and provides a script for creating a recovery branch, reassigning a compute endpoint, and setting the new branch as the primary branch.
+- For a data recovery example that uses Neon's branching feature, the Neon API, and a bisect script to recover lost data, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres).
+
+Check out the GitHub repositories for these examples:
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/restore-neon-branch" description="Restore a Neon database to a previous state" icon="github">Restore a Neon database</a>
+<a href="https://github.com/kelvich/branching_demo_bisect" description="Use a bisect script and the Neon API to recover lost data" icon="github">Time travel demo</a>
+</DetailIconCards>
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).

@@ -235,6 +235,14 @@ neonctl branches create --name my_read_replica_branch --type read_only
 neonctl branches create --name my_child_branch --parent mybranch
 ```
 
+- Create a point-in-time restore branch by specifying the `--parent` option with a timestamp:
+
+```bash
+neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
+```
+
+The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+
 ### rename
 
 This subcommand allows you to update a branch in a Neon project.
@@ -280,7 +288,7 @@ neonctl branches set-primary <id|name> [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `updaterename` subcommand supports this option:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `set-primary` subcommand supports this option:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
@@ -311,7 +319,7 @@ neonctl branches add-compute <id|name>
 
 #### Options
 
-In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `updaterename` subcommand supports these options:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `add-compute` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
