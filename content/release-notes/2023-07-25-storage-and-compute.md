@@ -6,7 +6,7 @@ label: 'Storage'
 
 **Faster cold starts in all regions**
 
-Neon's _Auto-suspend_ feature scales a compute instance to zero after a period of inactivity. A characteristic of this feature is a "cold start", which occurs when an idle compute transitions back to an active state to process requests. Recently, cold-start times have been improved through a variety of enhancements, outlined below:
+Neon's _Auto-suspend_ feature scales a compute instance to zero after a period of inactivity. A characteristic of this feature is a "cold start", which occurs when an idle compute is restarted to process requests. Recently, cold-start times have been improved through a variety of enhancements, outlined below:
 
 - **Compute pools**: Instead of starting computes from zero, requests for computes are now served from pools of pre-started compute instances.
 - **Compute configuration optimization**: Configuration changes at compute startup were eliminated where possible.
