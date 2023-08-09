@@ -15,7 +15,7 @@ You can share your Neon project with anyone. The only requirement is that the us
 
 ## Share your project
 
-Once a user has provided you with the email address associated with their Neon account, you can share your project with them.
+After a user has provided you with the email address associated with their Neon account, you can share your project with them.
 
 To share your project:
 
@@ -32,7 +32,7 @@ To share your project:
 
     ![Project shared with me](/docs/guides/shared_with_me.png)
 
-    An email is also sent to the email address informing the user that a project has been shared with them. The email includes an **Open project** link the user can click on to log in to Neon. Once logged in, the user is directed to the **Dashboard** for the shared project in the Neon Console.
+    An email is also sent to the email address informing the user that a project has been shared with them. The email includes an **Open project** link the user can click on to log in to Neon. After logging in, the user is directed to the **Dashboard** for the shared project in the Neon Console.
 
 ## Shared project billing
 

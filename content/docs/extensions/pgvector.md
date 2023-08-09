@@ -47,7 +47,7 @@ The command generates a table named `items` with an `embedding` column capable o
 
 ## Storing vectors and embeddings
 
-Once you have generated an embedding using a service like the OpenAI API, you can store the resulting vector in your database. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings:
+After you have generated an embedding using a service like the OpenAI API, you can store the resulting vector in your database. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings:
 
 ```sql
 INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]');

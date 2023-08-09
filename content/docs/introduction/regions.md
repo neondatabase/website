@@ -26,7 +26,7 @@ All branches and databases created in a Neon project are created in the region s
 ![Select region image](/docs/introduction/project_creation_regions.png)
 
 <Admonition type="note">
-Once you select a region for a Neon project, it cannot be changed for that project.
+After you select a region for a Neon project, it cannot be changed for that project.
 </Admonition>
 
 ## Move project data to a new region

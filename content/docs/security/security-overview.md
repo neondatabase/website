@@ -34,7 +34,7 @@ If you have a security concern or believe you have found a vulnerability in any 
 - We will respond to your report within three business days with an evaluation and expected resolution date.
 - We will handle your report with strict confidentiality and not share any personal details with third parties without your permission.
 - We will keep you informed of the progress towards resolving the problem.
-- Once the report has been resolved, we will credit the finding to you in our public `security.txt` document, unless you prefer to stay anonymous.
+- After the report has been resolved, we will credit the finding to you in our public `security.txt` document, unless you prefer to stay anonymous.
 - If we need to access proprietary information or personal data stored in Neon to investigate or respond to a security report, we shall act in good faith and in compliance with applicable confidentiality, personal data protection, and other obligations.
 
 We strive to resolve all problems quickly and publicize any discoveries after their resolution.
