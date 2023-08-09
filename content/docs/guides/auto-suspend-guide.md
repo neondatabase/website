@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature controls when a Neon compute instance transitions to an `Idle` state (scales to zero) due to inactivity. This guide demonstrates how to configure the _Auto-suspend_ setting in your Neon project.
 
-You can configure the _Auto-suspend_ setting in an existing project by editing a compute endpoint. You can also configure it when you first create a project in Neon, which also sets the _Auto-suspend_ default for the project. Both methods are described below.
+You can configure the _Auto-suspend_ setting in an existing project by editing a compute endpoint. You can also configure it when you first create a Neon project, which sets the _Auto-suspend_ default for the project. Both methods are described below.
 
 ## Configure Auto-suspend for a compute endpoint
 
@@ -30,7 +30,7 @@ To edit a compute endpoint:
 
 A project is a top-level object in the Neon object hierarchy. You can think of it as a container for all other objects, including branches and compute endpoints.
 
-Enabling _Auto-suspend_ when you create a project allows you to set the _Auto-suspend_ default setting for all compute endpoints created in your project. You can adjust _Auto-suspend_ setting for individual compute endpoints afterward, but setting desired default when creating a project will save you from having to configure this setting for each compute later on.
+Enabling _Auto-suspend_ when you create a project allows you to set the _Auto-suspend_ default setting for all compute endpoints created in your project. You can adjust _Auto-suspend_ setting for individual compute endpoints afterward, but setting a default when creating a project saves you from having to configure this setting for each compute later on.
 
 To configure the _Auto-suspend_ default setting at project creation time:
 
