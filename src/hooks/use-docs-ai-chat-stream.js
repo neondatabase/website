@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 const decoder = new TextDecoder();
 
 const useDocsAIChatStream = ({ isMountedRef, signal }) => {
-  const [inputText, setInputText] = useState('');
+  const [selectedValue, setSelectedValue] = useState('');
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -83,7 +83,7 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
           ];
         });
         // set input text to the last message that user sent
-        setInputText(messages[messages.length - 1].content);
+        setSelectedValue(messages[messages.length - 1].content);
       } else {
         throw Error('Something went wrong. Please try again!');
       }
@@ -106,8 +106,8 @@ const useDocsAIChatStream = ({ isMountedRef, signal }) => {
   });
 
   return {
-    inputText,
-    setInputText,
+    selectedValue,
+    setSelectedValue,
     messages,
     setMessages,
     error,

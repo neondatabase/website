@@ -11,6 +11,7 @@ import useAbortController from 'hooks/use-abort-controller';
 import useDocsAIChatStream from 'hooks/use-docs-ai-chat-stream';
 import sendGtagEvent from 'utils/send-gtag-event';
 
+import ChatInput from './chat-input';
 import AttentionIcon from './images/attention.inline.svg';
 import CheckIcon from './images/check.inline.svg';
 import CloseIcon from './images/close.inline.svg';
@@ -35,14 +36,14 @@ const ChatWidget = () => {
   // aux refs
   const messagesEndRef = useRef(null);
   const isMountedRef = useRef(false);
+  const formRef = useRef(null);
   const inputRef = useRef(null);
   // hooks
   const [isStopped, setIsStopped] = useState(false);
   const { getSignal, resetAbortController } = useAbortController();
 
   const {
-    inputText,
-    setInputText,
+    setSelectedValue,
     messages,
     setMessages,
     isLoading,
@@ -56,15 +57,13 @@ const ChatWidget = () => {
     signal: getSignal(),
   });
 
-  // handlers
-  const handleInputChange = (e) => setInputText(e.target.value);
-
   const handleExampleClick = (e) => {
-    setInputText(e.target.textContent);
-    inputRef.current.focus();
+    setSelectedValue(e.target.textContent);
     sendGtagEvent('chat_widget_example_click', {
       value: e.target.textContent,
     });
+    inputRef.current.value = e.target.textContent;
+    inputRef.current.focus();
   };
 
   useEffect(() => {
@@ -80,28 +79,25 @@ const ChatWidget = () => {
     async (e) => {
       e?.preventDefault();
       setIsStopped(false);
+      const inputText = inputRef.current.value;
+
       // do not let user submit another
       // query while the previous one is getting processed
       if (!isLoading && inputText) {
         setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
-        setInputText('');
         sendGtagEvent('chat_widget_submit', {
           value: inputText,
         });
+        setSelectedValue('');
+        inputRef.current.value = '';
       }
 
       if (shouldTryAgain) {
         setShouldTryAgain(false);
       }
     },
-    [inputText, isLoading, setInputText, setMessages, setShouldTryAgain, shouldTryAgain]
+    [isLoading, shouldTryAgain, setMessages, setSelectedValue, setShouldTryAgain]
   );
-
-  const handleInputKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      handleSubmit(e);
-    }
-  };
 
   // @NOTE:
   // fires only once on close!
@@ -113,7 +109,6 @@ const ChatWidget = () => {
     setError(null);
     setMessages([]);
     setIsOpen(false);
-    setInputText('');
     setShouldTryAgain(false);
     setIsStopped(false);
   };
@@ -189,17 +184,12 @@ const ChatWidget = () => {
                 </span>
               </div>
             ) : (
-              <form className="group relative w-full px-5 pb-5 lg:mt-auto" onSubmit={handleSubmit}>
-                <input
-                  className="peer w-full appearance-none rounded border border-gray-new-90 px-2.5 py-2 text-base leading-normal transition-colors duration-200 placeholder:text-gray-new-80 focus:outline-none dark:border-gray-new-20 dark:bg-black dark:placeholder:text-gray-new-30"
-                  type="text"
-                  placeholder="How can I help you?"
-                  value={inputText}
-                  ref={inputRef}
-                  autoFocus
-                  onKeyDown={handleInputKeyDown}
-                  onChange={handleInputChange}
-                />
+              <form
+                className="group relative w-full px-5 pb-5 lg:mt-auto"
+                ref={formRef}
+                onSubmit={handleSubmit}
+              >
+                <ChatInput ref={inputRef} onEnterPress={() => formRef.current.submit()} />
                 <div className="mt-2.5 flex flex-col space-y-1 text-center text-xs font-light leading-dense text-gray-new-30 dark:text-gray-new-80">
                   <span>Neon Docs AI has a cap of 1 message every 5 seconds.</span>
                   <span>
@@ -219,7 +209,7 @@ const ChatWidget = () => {
                     <Button
                       className="absolute -top-8 left-1/2 flex -translate-x-1/2 items-center justify-center gap-x-1.5 border border-gray-new-94 bg-gray-new-94/40 font-normal normal-case text-gray-new-30 hover:bg-gray-new-94/80 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80 dark:hover:bg-gray-new-15/80"
                       size="xxs"
-                      type="submit"
+                      type="button"
                     >
                       <ReloadIcon className="h-3 w-3 shrink-0" />
                       <span>Try again</span>
@@ -229,7 +219,7 @@ const ChatWidget = () => {
                   <Button
                     className="absolute -top-8 left-1/2 flex -translate-x-1/2 items-center justify-center gap-x-1.5 border border-gray-new-94 bg-gray-new-94/40 font-normal normal-case text-gray-new-30 hover:bg-gray-new-94/80 dark:border-gray-new-15 dark:bg-gray-new-15/40 dark:text-gray-new-80 dark:hover:bg-gray-new-15/80"
                     size="xxs"
-                    type="submit"
+                    type="button"
                     onClick={stopGeneratingAnswers}
                   >
                     <StopIcon className="h-3 w-3 shrink-0" />

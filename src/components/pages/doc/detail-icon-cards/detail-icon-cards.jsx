@@ -1,22 +1,22 @@
-import PropTypes from "prop-types";
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import Link from "components/shared/link/link";
+import Link from 'components/shared/link/link';
 
-import AppStore from "./images/app-store.inline.svg";
-import AudioJack from "./images/audio-jack.inline.svg";
-import Github from "./images/github.inline.svg";
-import Import from "./images/import.inline.svg";
-import Ladder from "./images/ladder.inline.svg";
-import SplitBranch from "./images/split-branch.inline.svg";
-import Transactions from "./images/transactions.inline.svg";
+import AppStore from './images/app-store.inline.svg';
+import AudioJack from './images/audio-jack.inline.svg';
+import Github from './images/github.inline.svg';
+import Import from './images/import.inline.svg';
+import Ladder from './images/ladder.inline.svg';
+import SplitBranch from './images/split-branch.inline.svg';
+import Transactions from './images/transactions.inline.svg';
 
 const icons = {
-  "audio-jack": AudioJack,
+  'audio-jack': AudioJack,
   import: Import,
   ladder: Ladder,
-  "split-branch": SplitBranch,
-  "app-store": AppStore,
+  'split-branch': SplitBranch,
+  'app-store': AppStore,
   transactions: Transactions,
   github: Github,
 };
