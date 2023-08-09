@@ -6,6 +6,8 @@ enableTableOfContents: true
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
 
+The examples show the default `table` output format. The Neon CLI also supports `json` and `yaml` output formats. For example, if you prefer output in `json`, add `--output json` to your Neon CLI command.
+
 ## Prerequisites
 
 - The Neon CLI. See [Install the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli) for instructions.
@@ -42,6 +44,10 @@ connection_uris
 │ postgres://daniel:<password>@ep-mute-voice-52609794.us-east-2.aws.neon.tech/neondb    │
 └───────────────────────────────────────────────────────────────────────────────────────┘
 ```
+
+<Admonition type="tip">
+The Neon CLI provides a `neonctl connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+</Admonition>
 
 ## List branches with the CLI
 

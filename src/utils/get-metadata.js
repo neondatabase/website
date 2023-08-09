@@ -17,7 +17,10 @@ export default function getMetadata({
   authors = [],
   imagePath = DEFAULT_IMAGE_PATH,
 }) {
-  const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+  const SITE_URL =
+    process.env.VERCEL_ENV === 'preview'
+      ? `https://${process.env.VERCEL_BRANCH_URL}`
+      : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
   const canonicalUrl = SITE_URL + pathname;
   const imageUrl = imagePath?.startsWith('http') ? imagePath : SITE_URL + imagePath;
 
@@ -32,6 +35,12 @@ export default function getMetadata({
     metadataBase: new URL(SITE_URL),
     title: metaTitle,
     description: metaDescription,
+    viewport: {
+      width: 'device-width',
+      initialScale: 1,
+      maximumScale: 1,
+      viewportFit: 'cover',
+    },
     alternates: {
       canonical: canonicalUrl,
       types: {
@@ -41,7 +50,9 @@ export default function getMetadata({
     manifest: `${SITE_URL}/manifest.json`,
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots,
-    themeColor: [LINKS.pricing, LINKS.partners].includes(pathname) ? '#0c0d0d' : '#00e699',
+    themeColor: [LINKS.pricing, LINKS.partners, LINKS.ai].includes(pathname)
+      ? '#0c0d0d'
+      : '#00e699',
     icons: {
       icon: '/favicon/favicon.png',
       apple: [

@@ -55,7 +55,7 @@ To edit a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Click the compute endpoint kebab menu, and select **Edit**.
+1. Click the kebab menu in the **Computes** table, and select **Edit**.
 1. Specify your changes and click **Save**.
 
 ### Compute size and Autoscaling configuration
@@ -102,7 +102,7 @@ To delete a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Click the compute endpoint kebab menu, and select **Delete**.
+1. Click the kebab menu in the **Computes** table, and select **Delete**.
 1. On the confirmation dialog, click **Delete**.
 
 ## Manage compute endpoints with the Neon API

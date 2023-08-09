@@ -9,7 +9,7 @@ _This guide was contributed by the Exograph team_
 
 [Exograph](https://exograph.dev) is a new approach to building GraphQL backends. With it, you can effortlessly create flexible, secure, high-performing GraphQL backends in minutes. Powered by a Rust-based runtime, Exograph ensures fast startup times, efficient execution, and minimal memory consumption. Exograph comes equipped with a comprehensive set of tools designed to support every stage of the development lifecycle: from initial development to deployment to ongoing maintenance.
 
-Exograph supports PostgreSQL for data persistence, which makes it a great fit to use with Neon.
+Exograph supports Postgres for data persistence, which makes it a great fit to use with Neon.
 
 ## Prerequisites
 

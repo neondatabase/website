@@ -7,13 +7,13 @@ redirectFrom:
   - /docs/security/secure-connections
 ---
 
-Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Neon rejects connections that do not use SSL/TLS, behaving in the same way as standalone PostgreSQL with only `hostssl` records in a `pg_hba.conf` configuration file.
+Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Neon rejects connections that do not use SSL/TLS, behaving in the same way as standalone Postgres with only `hostssl` records in a `pg_hba.conf` configuration file.
 
 However, there are different levels of protection when using SSL/TLS encryption, which you can configure by appending an `sslmode` parameter to your connection string.
 
 ## Connection modes
 
-When connecting to Neon or any PostgreSQL database, the `sslmode` parameter setting determines the security of the connection. You can append the `sslmode` parameter to your Neon connection string as shown:
+When connecting to Neon or any Postgres database, the `sslmode` parameter setting determines the security of the connection. You can append the `sslmode` parameter to your Neon connection string as shown:
 
 <CodeBlock shouldWrap>
 
@@ -47,7 +47,7 @@ Refer to [Location of system root certificates](#location-of-system-root-certifi
 
 ## Connect from other clients
 
-If the client application uses a popular PostgreSQL client library, such as `psycopg2` for Python or JDBC for Java, the library typically provides built-in support for SSL/TLS encryption and verification, allowing you to configure an `sslmode` setting in the connection parameters. For example:
+If the client application uses a popular Postgres client library, such as `psycopg2` for Python or JDBC for Java, the library typically provides built-in support for SSL/TLS encryption and verification, allowing you to configure an `sslmode` setting in the connection parameters. For example:
 
 ```python
 import psycopg2
@@ -63,7 +63,7 @@ conn = psycopg2.connect(
 )
 ```
 
-However, if your client application uses a non-standard PostgreSQL client, SSL/TLS may not be enabled by default. In this case, you must manually configure the client to use SSL/TLS and specify an `sslmode` configuration. Refer to the client or the client's driver documentation for how to configure the path to your operating system's root certificates.
+However, if your client application uses a non-standard Postgres client, SSL/TLS may not be enabled by default. In this case, you must manually configure the client to use SSL/TLS and specify an `sslmode` configuration. Refer to the client or the client's driver documentation for how to configure the path to your operating system's root certificates.
 
 ### Location of system root certificates
 

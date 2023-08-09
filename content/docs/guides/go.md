@@ -27,7 +27,7 @@ To create a Neon project:
 Connecting to Neon requires configuring connection settings in your Go project's `.go` file.
 
 <Admonition type="note">
-Neon is fully compatible with the `sql/db` package and common PostgreSQL drivers, such as `lib/pq` and `pgx`.
+Neon is fully compatible with the `sql/db` package and common Postgres drivers, such as `lib/pq` and `pgx`.
 </Admonition>
 
 Specify the connection settings in your `.go` file, as shown in the following example:

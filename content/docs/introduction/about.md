@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/cloud/about
 ---
 
-Neon is a fully managed serverless PostgreSQL with a generous free tier.
+Neon is a fully managed serverless Postgres with a generous free tier.
 Neon separates storage and compute and offers modern developer features such as serverless, branching, bottomless storage, and more. Neon is open source and written in Rust.
 
 ## Serverless
@@ -14,7 +14,7 @@ Neon automatically and transparently scales up compute on demand, in response to
 
 ## Built for developer productivity
 
-Neon allows you to create a branch of your PostgreSQL database. It's easy to create branches for development, test, and staging environments.
+Neon allows you to create a branch of your Postgres database. It's easy to create branches for development, test, and staging environments.
 
 Branching is instant and has close to zero overhead, as it is implemented using the "copy-on-write" technique in Neon storage.
 In fact, branches are so cheap that you can create a branch for every code deployment in your CI/CD pipeline. To learn more about our branching feature, see [Branching](/docs/introduction/branching).
@@ -38,4 +38,4 @@ You can find [neondatabase](https://github.com/neondatabase/neon) on GitHub. We 
 
 ## Compatibility
 
-Neon compute is the latest version of PostgreSQL. It is 100% compatible with any application that uses the official release of PostgreSQL. Currently, we support [PostgreSQL 14](https://www.postgresql.org/docs/14/release-14.html) and [PostgreSQL 15](https://www.postgresql.org/docs/15/release-15.html), with PostgreSQL 15 being the default. For details refer to the [PostgreSQL compatibility](/docs/reference/compatibility) page.
+Neon compute is the latest version of Postgres. It is 100% compatible with any application that uses the official release of Postgres. Currently, we support [Postgres 14](https://www.postgresql.org/docs/14/release-14.html) and [Postgres 15](https://www.postgresql.org/docs/15/release-15.html), with Postgres 15 being the default. For details refer to the [Postgres compatibility](/docs/reference/compatibility) page.

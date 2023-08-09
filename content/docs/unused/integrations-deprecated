@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/cloud/integrations-deprecated
 ---
 
-Neon supports the standard PostgreSQL wire protocol. You can use all the normal client utilities like ‘psql’ and ‘pg_dump’, and standard client libraries and drivers to connect.
+Neon supports the standard Postgres wire protocol. You can use all the normal client utilities like ‘psql’ and ‘pg_dump’, and standard client libraries and drivers to connect.
 
 There are two ways to authenticate:
 
@@ -40,7 +40,7 @@ becomes idle.
 
 Now we can create the first table using the Hasura Console web
 interface. Let it be table 't' with a single column 'text' of a type
-'Text'. Once created, you can insert some rows into it, and finally
+'Text'. After the table is created, you can insert some rows into it, and finally
 navigate to the API section for endpoint creation. In the GraphQL tab,
 we can query our table with GraphQL, for example:
 
@@ -121,7 +121,7 @@ SHADOW_DATABASE_URL="<connection string to the project2>"
 
 ### Using from Django
 
-Django is one of the most popular Python backend frameworks. Django has built-in support for PostgreSQL, so you only need to fill in the correct connection details. To use Neon with Django, you have create a Project on Neon and fill in the project connection settings in your settings.py in the same way as for a standalone Postgres server.
+Django is one of the most popular Python backend frameworks. Django has built-in support for Postgres, so you only need to fill in the correct connection details. To use Neon with Django, you have create a Project on Neon and fill in the project connection settings in your settings.py in the same way as for a standalone Postgres server.
 
 See the following example of specifying connection properties for Neon:
 
@@ -148,11 +148,11 @@ References:
 
 ### Using from SQLAlchemy
 
-SQLAlchemy is among the most popular ORMs in the Python universe. To use SQLAlchemy with a PostgreSQL database hosted on Neon, you only need to fill in the correct connection details.
+SQLAlchemy is among the most popular ORMs in the Python universe. To use SQLAlchemy with a Postgres database hosted on Neon, you only need to fill in the correct connection details.
 
 Prerequisites:
 
-Here we assume that you have already created a project on Neon, and have SQLAlchemy installed with a PostgreSQL driver (this example assumes psycopg2 - the default one for PostgreSQL in SQLAlchemy). For installation details see corresponding pages for [SQLAlchemy](https://docs.sqlalchemy.org/en/14/intro.html#installation) and [psycopg2](https://www.psycopg.org/docs/install.html).
+Here we assume that you have already created a project on Neon, and have SQLAlchemy installed with a Postgres driver (this example assumes psycopg2 - the default one for Postgres in SQLAlchemy). For installation details see corresponding pages for [SQLAlchemy](https://docs.sqlalchemy.org/en/14/intro.html#installation) and [psycopg2](https://www.psycopg.org/docs/install.html).
 
 SQLALchemy uses Engine abstraction to manage database connections and exposes a `create_engine` function as the primary endpoint for engine initialization. See the following example on how to create an SQLAlchemy engine pointing to the Neon Project.
 
@@ -301,7 +301,7 @@ Make sure that you are using `<user>%40neon` as username. This is url encoded va
 
 #### Connect with JDBC
 
-The JDBC API is a Java API for relational databases. PostgreSQL has a well-supported open-source JDBC driver, which can be used to access Neon. All popular Java frameworks use JDBC internally, so the only thing you need to do is use a correct connection URL.
+The JDBC API is a Java API for relational databases. Postgres has a well-supported open-source JDBC driver, which can be used to access Neon. All popular Java frameworks use JDBC internally, so the only thing you need to do is use a correct connection URL.
 
 To get a JDBC connection URL, replace placeholders with your credentials in the following template:
 
@@ -313,7 +313,7 @@ For more information about JDBC, refer to the standard JDBC API documentation an
 
 #### Using from Spring Data
 
-Spring relies on JDBC and PostgreSQL driver to connect to PostgreSQL databases. If you are starting your project with Spring Initializr, do not forget to add **PostgreSQL Driver** as a dependency. If you have an existing project, ensure driver dependency is installed.
+Spring relies on JDBC and Postgres driver to connect to Postgres databases. If you are starting your project with Spring Initializr, do not forget to add **PostgreSQL Driver** as a dependency. If you have an existing project, ensure driver dependency is installed.
 
 The only configuration required for connection is a datasource URL. It is specified in the `application.properties` file in the following format:
 

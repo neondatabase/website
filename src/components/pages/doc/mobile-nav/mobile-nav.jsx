@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { motion, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Item from 'components/pages/doc/sidebar/item';
 import Link from 'components/shared/link/link';
@@ -17,6 +17,7 @@ import { ChatWidgetTrigger } from '../chat-widget';
 import { sidebarPropTypes } from '../sidebar/sidebar';
 
 const ANIMATION_DURATION = 0.2;
+const MOBILE_NAV_HEIGHT = 44;
 
 const variants = {
   from: {
@@ -42,9 +43,13 @@ const variants = {
 const MobileNav = ({ className = null, sidebar }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [containerHeight, setContainerHeight] = useState(null);
+  const [buttonTop, setButtonTop] = useState(null);
+
   const { height } = useWindowSize();
   const wrapperRef = useRef(null);
+  const buttonRef = useRef(null);
   const controls = useAnimation();
+
   const toggleMenu = () => setIsOpen((isOpen) => !isOpen);
   useBodyLockScroll(isOpen);
 
@@ -54,10 +59,26 @@ const MobileNav = ({ className = null, sidebar }) => {
 
   useClickOutside([wrapperRef], onOutsideClick);
 
-  // 145px is the height of top banner + header + button Documentation menu
   useEffect(() => {
-    setContainerHeight(`${height - 145}px`);
-  }, [height]);
+    const onScroll = () => {
+      if (isOpen) {
+        setButtonTop(buttonRef.current.getBoundingClientRect().top);
+      }
+    };
+
+    window.addEventListener('scroll', onScroll);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setButtonTop(buttonRef.current.getBoundingClientRect().top);
+      setContainerHeight(height - buttonTop - MOBILE_NAV_HEIGHT);
+    }
+  }, [height, isOpen, buttonTop]);
 
   useEffect(() => {
     if (isOpen) {
@@ -77,6 +98,7 @@ const MobileNav = ({ className = null, sidebar }) => {
       <button
         className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-new-98 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-new-94 active:bg-gray-new-94 dark:bg-gray-new-15 lg:px-8 md:px-4"
         type="button"
+        ref={buttonRef}
         onClick={toggleMenu}
       >
         <span>Documentation menu</span>

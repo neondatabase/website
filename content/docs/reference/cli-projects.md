@@ -1,6 +1,6 @@
 ---
 title: Neon CLI commands — projects
-subtitle: Use the Neon CLI to manage Neon projects directly from your terminal
+subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
 ---
 
@@ -79,22 +79,78 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--name` | The project name. The project ID is used if a name is not specified.               | string  |                                       |
 | `--region-id` | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`. Defaults to `aws-us-east-2` if not specified. | string number  |                                       |
 
-#### Example
+#### Examples
 
-```bash
-neonctl projects create --name mynewproject --region-id aws-us-west-2
-┌───────────────────┬──────────────┬───────────────┬──────────────────────┐
-│ Id                │ Name         │ Region Id     │ Created At           │
-├───────────────────┼──────────────┼───────────────┼──────────────────────┤
-│ muddy-wood-859533 │ mynewproject │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
-└───────────────────┴──────────────┴───────────────┴──────────────────────┘
+- Create a project with a user-defined name in a specific region:
 
-┌──────────────────────────────────────────────────────────────────────────────────────┐
-│ Connection Uri                                                                       │
-├──────────────────────────────────────────────────────────────────────────────────────┤
-│ postgres://daniel:<password>@ep-bitter-field-476253.us-west-2.aws.neon.tech/neondb   │
-└──────────────────────────────────────────────────────────────────────────────────────┘
-```
+    ```bash
+    neonctl projects create --name mynewproject --region-id aws-us-west-2
+    ┌───────────────────┬──────────────┬───────────────┬──────────────────────┐
+    │ Id                │ Name         │ Region Id     │ Created At           │
+    ├───────────────────┼──────────────┼───────────────┼──────────────────────┤
+    │ muddy-wood-859533 │ mynewproject │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
+    └───────────────────┴──────────────┴───────────────┴──────────────────────┘
+
+    ┌──────────────────────────────────────────────────────────────────────────────────────┐
+    │ Connection Uri                                                                       │
+    ├──────────────────────────────────────────────────────────────────────────────────────┤
+    │ postgres://daniel:<password>@ep-bitter-field-476253.us-west-2.aws.neon.tech/neondb   │
+    └──────────────────────────────────────────────────────────────────────────────────────┘
+    ```
+
+    <Admonition type="tip">
+    The Neon CLI provides a `neonctl connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+    </Admonition>
+
+- Create a project with the `--output` format of the command set to `json`. This output format returns all of the project response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
+
+    ```bash
+    neonctl projects create --output json
+    {
+    "project": {
+        "data_storage_bytes_hour": 0,
+        "data_transfer_bytes": 0,
+        "written_data_bytes": 0,
+        "compute_time_seconds": 0,
+        "active_time_seconds": 0,
+        "cpu_used_sec": 0,
+        "id": "long-wind-77910944",
+        "platform_id": "aws",
+        "region_id": "aws-us-east-2",
+        "name": "long-wind-77910944",
+        "provisioner": "k8s-pod",
+        "default_endpoint_settings": {
+        "autoscaling_limit_min_cu": 1,
+        "autoscaling_limit_max_cu": 1,
+        "suspend_timeout_seconds": 0
+        },
+        "pg_version": 15,
+        "proxy_host": "us-east-2.aws.neon.tech",
+        "branch_logical_size_limit": 204800,
+        "branch_logical_size_limit_bytes": 214748364800,
+        "store_passwords": true,
+        "creation_source": "neonctl",
+        "history_retention_seconds": 604800,
+        "created_at": "2023-08-04T16:16:45Z",
+        "updated_at": "2023-08-04T16:16:45Z",
+        "consumption_period_start": "0001-01-01T00:00:00Z",
+        "consumption_period_end": "0001-01-01T00:00:00Z",
+        "owner_id": "e56ad68e-7f2f-4d74-928c-9ea25d7e9864"
+    },
+    "connection_uris": [
+        {
+        "connection_uri": "postgres://daniel:<password>@ep-bitter-heart-24388432.us-east-2.aws.neon.tech/neondb",
+        "connection_parameters": {
+            "database": "neondb",
+            "password": "<password>",
+            "role": "daniel",
+            "host": "ep-bitter-heart-24388432.us-east-2.aws.neon.tech",
+            "pooler_host": "ep-bitter-heart-24388432-pooler.us-east-2.aws.neon.tech"
+        }
+        }
+    ]
+    }
+    ```
 
 ### update
 

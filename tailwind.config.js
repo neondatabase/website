@@ -25,7 +25,7 @@ module.exports = {
       },
       white: '#ffffff',
       primary: {
-        1: '#00e699',
+        1: '#00E599',
         2: '#00cc88',
       },
       secondary: {
@@ -113,6 +113,7 @@ module.exports = {
         mono: ['IBM Plex Mono', 'IBM Plex Mono Fallback', ...defaultTheme.fontFamily.mono],
       },
       fontSize: {
+        xs: [defaultTheme.fontSize.xs[0]],
         sm: [defaultTheme.fontSize.sm[0]],
         base: [defaultTheme.fontSize.base[0]],
         lg: [defaultTheme.fontSize.lg[0]],
@@ -130,6 +131,7 @@ module.exports = {
       },
       letterSpacing: {
         tighter: '-0.04em',
+        'extra-tight': '-0.02em',
         wider: '0.04em',
       },
       boxShadow: {

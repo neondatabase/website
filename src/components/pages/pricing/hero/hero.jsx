@@ -39,7 +39,7 @@ const items = [
       { title: 'Unlimited projects & branches' },
       { title: 'Project sharing' },
       { title: 'Configurable compute size' },
-      { title: 'Autoscaling', label: 'beta' },
+      { title: 'Autoscaling' },
     ],
     button: {
       url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
@@ -100,7 +100,7 @@ const Hero = () => {
 
   return (
     <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-[40px]">
-      <Container className="flex flex-col items-center" size="mdDoc">
+      <Container className="flex flex-col items-center" size="medium">
         <Heading
           className="inline-flex flex-col text-center font-medium !leading-none tracking-tighter md:text-4xl"
           tag="h1"
@@ -110,7 +110,7 @@ const Hero = () => {
           <span>Only pay for what you use.</span>
         </Heading>
         <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
-          Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible
+          Neon brings serverless architecture to Postgres, which allows us to offer you flexible
           usage and volume-based plans.
         </p>
         <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-12 md:mt-9">

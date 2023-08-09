@@ -1,19 +1,19 @@
 ---
-title: Import data from PostgreSQL
+title: Import data from Postgres
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
 ---
 
-This topic describes how to import an existing PostgreSQL database to Neon. The following methods are described:
+This topic describes how to import an existing Postgres database to Neon. The following methods are described:
 
 - [pg_dump with psql](#pg_dump-with-psql)
 - [pg_dump with pg_restore](#pg_dump-with-pg_restore)
 
 ## Which import method should you use?
 
-The primary determinant is the format of your dump file. The `psql` utility can only be used with plain SQL dumps, while `pg_restore` can be used with plain SQL or PostgreSQL custom format dumps.
+The primary determinant is the format of your dump file. The `psql` utility can only be used with plain SQL dumps, while `pg_restore` can be used with plain SQL or Postgres custom format dumps.
 
 If you prefer working with human-readable SQL scripts that can be inspected or edited using a text editor, the [pg_dump with psql](#pg_dump-with-psql) method may be your preferred option.
 
@@ -33,19 +33,19 @@ This section describes using the `pg_dump` utility to dump data from an existing
 If you have multiple databases to import, each database must be imported separately.
 </Admonition>
 
-The example below uses the following command, which you can run from a terminal or command window where you have access to the `pg_dump` and `psql` utilities. The first connection string is for your existing PostgreSQL database. The second is for your Neon database.
+The example below uses the following command, which you can run from a terminal or command window where you have access to the `pg_dump` and `psql` utilities. The first connection string is for your existing Postgres database. The second is for your Neon database.
 
 ```bash
 pg_dump <old-connection-string> --no-owner --no-acl | psql <neon-connection-string>
 ```
 
-A PostgreSQL connection string has the following format:
+A Postgres connection string has the following format:
 
 ```bash
 postgres://<user>:<password>@<hostname>:<port>/<dbname>
 ```
 
-You must supply the connection string for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The connection string will look something like this:
+You must supply the connection string for your existing Postgres database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The connection string will look something like this:
 
 <CodeBlock shouldWrap>
 
@@ -57,13 +57,13 @@ postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<d
 
 where:
 
-- `<user>` is the PostgreSQL role.
+- `<user>` is the Postgres role.
 - `<password>` is the role's password.
-- `ep-polished-water-579720.us-east-2.aws.neon.tech` is the hostname of the Neon PostgreSQL instance. Your hostname will differ.
+- `ep-polished-water-579720.us-east-2.aws.neon.tech` is the hostname of the Neon Postgres instance. Your hostname will differ.
 - `<dbname>` is the name of the database. You can use the default `neondb` database or create your own. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 
 <Admonition type="note">
-Neon uses the default PostgreSQL port, `5432`, so it does not need to be specified explicitly in the Neon connection string.
+Neon uses the default Postgres port, `5432`, so it does not need to be specified explicitly in the Neon connection string.
 </Admonition>
 
 After you input the connection strings into your command, it will appear similar to the following:
@@ -84,9 +84,9 @@ Run the command in your terminal or command window to import your data.
 
 This section describes using the `pg_dump` utility to dump data from an existing PostgreSQL database in a PostgreSQL custom format and import it into your Neon database using `pg_restore` .
 
-1. Start by retrieving the connection strings for the existing PostgreSQL database and your Neon database.
+1. Start by retrieving the connection strings for the existing Postgres database and your Neon database.
 
-   You must supply the connection string for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The Neon connection string will look something like this:
+   You must supply the connection string for your existing Postgres database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The Neon connection string will look something like this:
 
    <CodeBlock shouldWrap>
 
@@ -96,7 +96,7 @@ This section describes using the `pg_dump` utility to dump data from an existing
 
    </CodeBlock>
 
-2. Dump the database from your existing PostgreSQL instance. You can use a `pg_dump` command similar to the following:
+2. Dump the database from your existing Postgres instance. You can use a `pg_dump` command similar to the following:
 
    <CodeBlock shouldWrap>
 
@@ -211,7 +211,7 @@ When importing a database, be aware of the following:
 - Some PostgreSQL features that require access to the local file system are not supported by Neon. For example, tablespaces and large objects are not supported. Please take this into account when importing a database into to Neon. When importing from a plain-text `.sql` script, you can specify the `--no-tablespaces` option to exclude commands that select tablespaces. The `--no-tablespaces` option is ignored when creating an archive (non-text) output file using `pg_dump`. For custom-format archive files, you can specify the `--no-tablespaces` option when you call `pg_restore`. To exclude large objects from your dump, use the `--no-blobs` option with `pg_dump`.
 - You can import individual tables from a custom-format database dump using the `-t <table_name>` option with `pg_restore`. Individual tables can also be imported from a CSV file. See [Import from CSV](/docs/import/import-from-csv).
 
-For information about the commands referred to in this topic, refer to the following topics in the PostgreSQL documentation:
+For information about the commands referred to in this topic, refer to the following topics in the Postgres documentation:
 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)

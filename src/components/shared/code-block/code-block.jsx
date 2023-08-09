@@ -31,6 +31,7 @@ function parseHighlightRanges(highlight) {
 
 const CodeBlock = ({
   className = null,
+  copyButtonClassName = null,
   language = null,
   children,
   showLineNumbers = false,
@@ -55,7 +56,10 @@ const CodeBlock = ({
   const highlightedLines = parseHighlightRanges(highlight);
 
   return (
-    <Tag className={clsx('group relative', { 'code-wrap': shouldWrap }, className)} {...otherProps}>
+    <Tag
+      className={clsx('code-block group relative', { 'code-wrap': shouldWrap }, className)}
+      {...otherProps}
+    >
       <SyntaxHighlighter
         language={snippetLanguage}
         useInlineStyles={false}
@@ -85,7 +89,10 @@ const CodeBlock = ({
         {content}
       </SyntaxHighlighter>
       <button
-        className="invisible absolute right-2 top-2 rounded border border-gray-6 bg-white p-1.5 text-gray-2 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-black dark:text-gray-8 lg:visible lg:opacity-100"
+        className={clsx(
+          'invisible absolute right-2 top-2 rounded border border-gray-6 bg-white p-1.5 text-gray-2 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-black dark:text-gray-8 lg:visible lg:opacity-100',
+          copyButtonClassName
+        )}
         type="button"
         aria-label={isCopied ? 'Copied' : 'Copy'}
         disabled={isCopied}
@@ -103,6 +110,7 @@ const CodeBlock = ({
 
 CodeBlock.propTypes = {
   className: PropTypes.string,
+  copyButtonClassName: PropTypes.string,
   theme: PropTypes.oneOf(['light', 'dark']),
   language: PropTypes.string,
   children: PropTypes.node,
