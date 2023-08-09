@@ -93,20 +93,20 @@ Alternatively, if you do not want change connection details, you can move the co
 
 To avoid changing connection details in your application, you can reassign the compute endpoint from your old primary branch to your new  branch. If you followed the steps above, you created a branch with a compute endpoint. In this case, you have to:
 
-1. **Remove the compute endpoint from the new branch.**
+1. **Remove the compute endpoint from the new branch**
 
    For instructions, see [Delete a compute endpoint](/docs/manage/endpoints#delete-a-compute-endpoint).
 
-2. **Move the compute endpoint from the old primary branch to the new branch.**
+2. **Move the compute endpoint from the old primary branch to the new branch**
 
    This action is currently only supported in the Neon API. See [Update a compute endpoint with the CLI](/docs/manage/endpoints#update-a-compute-endpoint-with-the-api) for instructions.
 
 ## Examples
 
-- For a blog post that covers point-in-time restore (PITR), see [Using Neon branching for instant Point in time restore](https://neon.tech/blog/point-in-time-recovery). The blog post describes PITR and provides a script for creating a recovery branch, reassigning a compute endpoint, and setting the new branch as the primary branch.
-- For a data recovery example that uses Neon's branching feature, the Neon API, and a bisect script to recover lost data, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres).
+- [Using Neon branching for instant point-in-time restore](https://neon.tech/blog/point-in-time-recovery). The blog post describes point-in-time restore and provides a script for creating a recovery branch, reassigning a compute endpoint, and setting the new branch as the primary.
+- [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This blog post (and video) describe a data recovery example that uses Neon's branching feature, the Neon API, and a bisect script to recover lost data.
 
-Check out the GitHub repositories for these examples:
+Check out the GitHub repositories for the examples:
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/restore-neon-branch" description="A script to restore a Neon branch to a previous state while preserving the same endpoint" icon="github">Restore a Neon database</a>
