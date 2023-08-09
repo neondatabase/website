@@ -43,7 +43,6 @@ const ChatWidget = () => {
   const { getSignal, resetAbortController } = useAbortController();
 
   const {
-    selectedValue,
     setSelectedValue,
     messages,
     setMessages,
@@ -63,6 +62,7 @@ const ChatWidget = () => {
     sendGtagEvent('chat_widget_example_click', {
       value: e.target.textContent,
     });
+    inputRef.current.value = e.target.textContent;
     inputRef.current.focus();
   };
 
@@ -189,11 +189,7 @@ const ChatWidget = () => {
                 ref={formRef}
                 onSubmit={handleSubmit}
               >
-                <ChatInput
-                  defaultValue={selectedValue}
-                  ref={inputRef}
-                  onEnterPress={() => formRef.current.submit()}
-                />
+                <ChatInput ref={inputRef} onEnterPress={() => formRef.current.submit()} />
                 <div className="mt-2.5 flex flex-col space-y-1 text-center text-xs font-light leading-dense text-gray-new-30 dark:text-gray-new-80">
                   <span>Neon Docs AI has a cap of 1 message every 5 seconds.</span>
                   <span>

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 
-const ChatInput = forwardRef(({ defaultValue = '', onEnterPress }, ref) => {
+const ChatInput = forwardRef(({ onEnterPress }, ref) => {
   const onInput = (evt) => {
     if (evt.key === 'Enter') {
       onEnterPress();
@@ -11,7 +11,6 @@ const ChatInput = forwardRef(({ defaultValue = '', onEnterPress }, ref) => {
   return (
     <input
       className="peer w-full appearance-none rounded border border-gray-new-90 px-2.5 py-2 text-base leading-normal transition-colors duration-200 placeholder:text-gray-new-80 focus:outline-none dark:border-gray-new-20 dark:bg-black dark:placeholder:text-gray-new-30"
-      defaultValue={defaultValue}
       ref={ref}
       type="text"
       placeholder="How can I help you?"
@@ -22,7 +21,6 @@ const ChatInput = forwardRef(({ defaultValue = '', onEnterPress }, ref) => {
 });
 
 ChatInput.propTypes = {
-  defaultValue: PropTypes.string,
   onEnterPress: PropTypes.func.isRequired,
 };
 
