@@ -13,10 +13,12 @@
           slug: introduction/compute-lifecycle
     - title: Features
       items:
-        - title: Branching
-          slug: introduction/branching
         - title: Autoscaling
           slug: introduction/autoscaling
+        - title: Auto-suspend
+          slug: introduction/auto-suspend
+        - title: Branching
+          slug: introduction/branching
         - title: Read replicas
           slug: introduction/read-replicas
     - title: Regions

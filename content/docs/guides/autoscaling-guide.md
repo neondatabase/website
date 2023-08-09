@@ -50,7 +50,7 @@ To configure Autoscaling default settings at project creation time:
     You can also specify a default **Auto-suspend delay** setting at project creation time. The **Auto-suspend delay** setting defines the number of seconds of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero". The setting specified at project creation time becomes the default setting for newly created compute endpoints.
     </Admonition>
 
-6. Click **Create Project**. Your initial compute endpoint is created with the specified settings. All compute endpoints created in the future when creating a branch or adding a compute endpoint to a branch are created with the settings you specified.
+6. Click **Create Project**. Your initial compute endpoint is created with the specified settings. All compute endpoints created in the future when creating a branch or adding a compute endpoint to a branch are created with this setting.
 
 ## Monitor Autoscaling
 
