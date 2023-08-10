@@ -123,7 +123,7 @@
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-115px);
+    transform: translateY(-150px);
   }
 }
 
