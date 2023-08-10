@@ -84,14 +84,14 @@ To estimate your own monthly _Compute time_ cost:
 
 1. Determine the compute size you require, in Compute Units (CUs).
 1. Estimate the amount of _Active time_ per month for your compute(s).
-1. Find the _Compute-hour_ rate for your region. The [billing rates](#billing-rates) table shows _Compute-hour_ prices by region.
+1. Find the _Compute-time_ price for your region. The [billing rates](#billing-rates) table shows _Compute-time_ prices by region.
 1. Input the values into the _Compute time_ cost formula:
 
    ```text
-   Compute time cost = Compute Units * Active time * Cost per hour
+   Compute time cost = Compute Units * Active time * Compute-time price
    ```
 
-   For example, this is the calculation for the smallest compute offered by Neon (.25 CUs), 730 hours, and a _Compute time_ rate of $0.102:
+   For example, this is the calculation for the smallest compute offered by Neon (.25 CUs), 730 hours, and a _Compute time_ price of $0.102:
 
    ```text
    .25 * 730 * 0.102 = $18.62
