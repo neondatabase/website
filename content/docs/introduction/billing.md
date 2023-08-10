@@ -174,7 +174,7 @@ Data transfer (GiB) * price per GiB
 | AWS            | Asia Pacific (Singapore) | Written data    | $0.09600  | GiB            |
 | AWS            | Asia Pacific (Singapore) | Data transfer   | $0.09000  | GiB            |
 
-\*The _Compute-hour_ price is for 1 Compute Unit (CU), which is 1 vCPU and 4 GB of RAM. The hourly price for Neon's smallest compute size (.25 CU), is $0.0255, which is $0.102/4. Neon supports compute sizes ranging from .25 CUs (.25 vCPU and 1 GB of RAM) to 7 CUs (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
+\* The _Compute-hour_ price is for a compute with 1 Compute Unit (CU), which is 1 vCPU and 4 GB of RAM. Neon's smallest compute size is .25 CU, which is 1/4 of the cost ($0.102/4 = $0.0255) per hour. Neon supports compute sizes ranging from .25 CU (.25 vCPU and 1 GB of RAM) to 7 CUs (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
 
 ## Pricing calculators
 
