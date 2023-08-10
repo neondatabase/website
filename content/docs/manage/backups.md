@@ -16,6 +16,8 @@ For information about creating a point-in-time restore branch, see [Branching â€
 
 You can backup a database using `pg_dump`, in the same way backups are created for a standalone Postgres instances.
 
+This method dumps a single database in a single branch of your Neon project. If you need to create backups for multiple databases in multiple branches, you must perform a dump operation for each database in each branch separately.
+
 To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Import from Postgres](/docs/import/import-from-postgres) guide.
 
 Please be aware the dumping data from Neon is considered "data transfer". For data transfer costs, please refer to our [Billing](/docs/introduction/billing) documentation.
