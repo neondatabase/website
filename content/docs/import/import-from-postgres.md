@@ -75,7 +75,7 @@ The example above includes these arguments:
 
 For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pg_dump-and-pg_restore-options).
 
-## pg_dump and pg_restore example
+## `pg_dump` and `pg_restore` example
 
 The following example shows how data from a `pagila` source database is dumped and restored to a `pagila` database in Neon using the commands described in the previous section. A database named `pagila` was created in Neon prior to running the restore operation.
 
@@ -93,7 +93,7 @@ mydumpfile.bak
 
 </CodeBlock>
 
-## Pipe pg_dump to pg_restore
+## Pipe `pg_dump` to `pg_restore`
 
 For small databases (< 1 GB), the standard output of `pg_dump` can be piped directly into a `pg_restore` command to minimize migration downtime:
 
@@ -139,16 +139,16 @@ pg_restore -v -O -d postgres://sally:<password>@ep-damp-cell-18160816.us-east-2.
 
 The Neon role performing the restore operation will become the owner of all database objects.
 
-## Advanced pg_dump and pg_restore options
+## Advanced `pg_dump` and `pg_restore` options
 
 The `pg_dump` and `pg_restore` commands provide numerous advanced options, some of which are described below. Full descriptions and more options are found in the PostgreSQL [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) and [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
 
-### pg_dump options
+### `pg_dump` options
 
 - `-Z`: Defines the compression level to use when using a compressible format. 0 means no compression, while 9 means maximum compression. In general, we recommend a setting of 1. A higher compression level slows the dump and restore process but also uses less disk space.
 - `--no-blobs`: Excludes large objects from your dump. See [Data migration notes](#data-migration-notes).
 
-### pg_restore options
+### `pg_restore` options
 
 - `-c --if-exists`: Drop database objects before creating them if they already exist. If you had a failed migration, you could use these options to drop objects created by the previous migration to avoid errors when retrying the migration.
 - `--single-transaction`: Forces the operation to run as an atomic transaction, which ensures that no data is left behind when a restore operation fails. Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.
