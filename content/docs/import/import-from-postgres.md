@@ -14,10 +14,10 @@ Repeat the `pg_dump` and `pg_restore` process for each database you want to migr
 
 - Neon supports PostgreSQL 14 and 15. We recommend that clients are version 14 and higher. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`
 - Retrieve the connection parameters or connection string for your source Postgres database. The instructions below use a [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), but you can use the connection format you prefer. If you are logged in to a local Postgres instance, you may only need to provide the database name. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for information about connection parameters.
-- Optionally, create a role in Neon to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. If you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
-- If you have assigned ownership of database objects to different roles in your source database, read [Database object ownership considerations](#database-object-ownership-considerations). You may want to add a `-O` option to your `pg_restore` command to avoid errors.
+- Optionally, create a role in Neon to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. For example, if you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
+- If you have assigned database object ownership to different roles in your source database, read [Database object ownership considerations](#database-object-ownership-considerations). You may want to add a `-O` option to your `pg_restore` command to avoid errors.
 - Create the target database in Neon. For example, if you are migrating a database named `pagila`, create a database named `pagila` in Neon. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
-- Retrieve the connection string for your database in Neon. You can find it on the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
+- Retrieve the connection string for your Neon database. You can find it on the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
 
    <CodeBlock shouldWrap>
 
@@ -77,7 +77,7 @@ For more command options, see [Advanced pg_dump and pg_restore options](#advance
 
 ## `pg_dump` and `pg_restore` example
 
-The following example shows how data from a `pagila` source database is dumped and restored to a `pagila` database in Neon using the commands described in the previous section. A database named `pagila` was created in Neon prior to running the restore operation.
+The following example shows how data from a `pagila` source database is dumped and restored to a `pagila` database in Neon using the commands described in the previous sections. A database named `pagila` was created in Neon prior to running the restore operation.
 
 <CodeBlock shouldWrap>
 
@@ -121,7 +121,7 @@ After migrating your data, update your applications to connect to your new datab
 
 ## Database object ownership considerations
 
-Roles created in the Neon console, including the default role created with your Neon project, are automatically granted membership in the [neon_superuser](/docs/manage/roles#neon_superuser) role. This role can create roles and databases, and it can select, insert, update, or delete data from all databases in your Neon project. However, the `neon_superuser` is not a PostgreSQL `superuser`. It cannot run `ALTER OWNER` statements to grant ownership of database objects. As a result, if you granted ownership of database objects in your source database to different roles, your dump file will contain `ALTER OWNER` statements, and those statements will cause non-fatal errors when you restore data to your Neon database if steps are not taken to avoid them.
+Roles created in the Neon console, including the default role created with your Neon project, are automatically granted membership in the [neon_superuser](/docs/manage/roles#neon_superuser) role. This role can create roles and databases, and it can select, insert, update, or delete data from all databases in your Neon project. However, the `neon_superuser` is not a PostgreSQL `superuser`. It cannot run `ALTER OWNER` statements to grant ownership of database objects. As a result, if you granted ownership of database objects in your source database to different roles, your dump file will contain `ALTER OWNER` statements, and those statements will cause non-fatal errors when you restore data to your Neon database.
 
 <Admonition type="note">
 Regardless of `ALTER OWNER` statement errors, a restore operation still succeeds because assigning ownership is not necessary for the data itself to be restored. The restore operation will still create tables, import data, and create other objects.
@@ -137,7 +137,7 @@ pg_restore -v -O -d postgres://sally:<password>@ep-damp-cell-18160816.us-east-2.
 
 </CodeBlock>
 
-The Neon role performing the restore operation will become the owner of all database objects.
+The Neon role performing the restore operation becomes the owner of all database objects.
 
 ## Advanced `pg_dump` and `pg_restore` options
 
@@ -157,7 +157,7 @@ The `pg_dump` and `pg_restore` commands provide numerous advanced options, some 
 
 ## Run a test migration
 
-It is recommended that you run a test migration before migrating your production database. Make sure you can successfully migrate your data to the new database and connect your applications to it. Before starting the actual migration, create a database dump and address any issues that show up. In Neon, you can very quickly create a test database, obtain the connection string, and delete the database when you are finished testing. See [Create a database](/docs/manage/databases#create-a-database).
+It is recommended that you run a test migration before migrating your production database. Make sure you can successfully migrate data to the new database and connect to it. Before starting the actual migration, create a database dump and address any issues that show up. In Neon, you can quickly create a test database, obtain the connection string, and delete the database when you are finished with it. See [Create a database](/docs/manage/databases#create-a-database).
 
 ## Other migration options
 
