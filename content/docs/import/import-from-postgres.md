@@ -6,15 +6,15 @@ redirectFrom:
   - /docs/how-to-guides/import-an-existing-database
 ---
 
-This topic describes how to migrate data from another Postgres database to Neon using the `pg_dump` and `pg_restore` command line utilities.
+This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore` command line utilities.
 
 Repeat the `pg_dump` and `pg_restore` process for each database you want to migrate.
 
 ## Before you begin
 
 - Neon supports PostgreSQL 14 and 15. We recommend that clients are version 14 and higher. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`
-- Retrieve the connection parameters or connection string for your source Postgres database. The instructions below use a [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), but you can use the connection format you prefer. If you are logged in to a locakl postgres instance, you may only need to provide the database name. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for information about connection parameters.
-- Optionally, create a role in Neon to perform the restore operation. The role that performs the restore operation becomes the owner of database objects that are restored. If you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
+- Retrieve the connection parameters or connection string for your source Postgres database. The instructions below use a [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), but you can use the connection format you prefer. If you are logged in to a local Postgres instance, you may only need to provide the database name. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for information about connection parameters.
+- Optionally, create a role in Neon to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. If you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
 - If you have assigned ownership of database objects to different roles in your source database, read [Database object ownership considerations](#database-object-ownership-considerations). You may want to add a `-O` option to your `pg_restore` command to avoid errors.
 - Create the target database in Neon. For example, if you are migrating a database named `pagila`, create a database named `pagila` in Neon. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 - Retrieve the connection string for your database in Neon. You can find it on the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
@@ -27,7 +27,7 @@ Repeat the `pg_dump` and `pg_restore` process for each database you want to migr
 
    </CodeBlock>
 
-- Consider running a test migration first to make sure your actual migration goes smoothly. See [Run a test migration](#run-a-test-migration).
+- Consider running a test migration first to ensure your actual migration goes smoothly. See [Run a test migration](#run-a-test-migration).
 - If your database is small (< 1 GB), you can pipe `pg_dump` output directly to `pg_restore` to save time. See [Pipe pg_dump to pg_restore](#pipe-pg_dump-to-pg_restore).
 
 ## Export data with `pg_dump`
@@ -77,7 +77,7 @@ For more command options, see [Advanced pg_dump and pg_restore options](#advance
 
 ## pg_dump and pg_restore example
 
-The following example shows how data from a `pagila` source database was dumped and restored to a `pagila` database in Neon using the commands described in the previous section. A database named `pagila` was created in Neon prior to running the restore operation.
+The following example shows how data from a `pagila` source database is dumped and restored to a `pagila` database in Neon using the commands described in the previous section. A database named `pagila` was created in Neon prior to running the restore operation.
 
 <CodeBlock shouldWrap>
 
@@ -117,11 +117,11 @@ When piping `pg_dump` output directly to `pg_restore`, the custom output format 
 
 ## Post-migration steps
 
-After migrating your data, update your applications to connect to your new database in Neon. You will need the database connection string that you used your `pg_restore` command. If you run into any problems, see [Connect from any application](/docs/connect/connect-from-any-app). After connecting your applications, test them thoroughly to ensure they function correctly with your new database.
+After migrating your data, update your applications to connect to your new database in Neon. You will need the database connection string that you used in your `pg_restore` command. If you run into any problems, see [Connect from any application](/docs/connect/connect-from-any-app). After connecting your applications, test them thoroughly to ensure they function correctly with your new database.
 
 ## Database object ownership considerations
 
-Roles created in the Neon console, including the default role created with your Neon project, are automatically granted membership in the [neon_superuser](/docs/manage/roles#neon_superuser) role. This role can create roles and databases, and select, insert, update, or delete data from all databases in your Neon project. However, the `neon_superuser` is not a PostgreSQL `superuser`. It cannot run `ALTER OWNER` statements to grant ownership of database objects. As a result, if you granted ownership of database objects in your source database to different roles, your dump file will contain `ALTER OWNER` statements, and those statements will cause non-fatal errors when you restore data to your Neon database if steps are not taken to avoid them.
+Roles created in the Neon console, including the default role created with your Neon project, are automatically granted membership in the [neon_superuser](/docs/manage/roles#neon_superuser) role. This role can create roles and databases, and it can select, insert, update, or delete data from all databases in your Neon project. However, the `neon_superuser` is not a PostgreSQL `superuser`. It cannot run `ALTER OWNER` statements to grant ownership of database objects. As a result, if you granted ownership of database objects in your source database to different roles, your dump file will contain `ALTER OWNER` statements, and those statements will cause non-fatal errors when you restore data to your Neon database if steps are not taken to avoid them.
 
 <Admonition type="note">
 Regardless of `ALTER OWNER` statement errors, a restore operation still succeeds because assigning ownership is not necessary for the data itself to be restored. The restore operation will still create tables, import data, and create other objects.
@@ -141,7 +141,7 @@ The Neon role performing the restore operation will become the owner of all data
 
 ## Advanced pg_dump and pg_restore options
 
-The `pg_dump` and `pg_restore` commands provide numerous advanced options, some of which are described below. You can find full descriptions and more options in the PostgreSQL [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) and [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
+The `pg_dump` and `pg_restore` commands provide numerous advanced options, some of which are described below. Full descriptions and more options are found in the PostgreSQL [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) and [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
 
 ### pg_dump options
 
@@ -150,7 +150,7 @@ The `pg_dump` and `pg_restore` commands provide numerous advanced options, some 
 
 ### pg_restore options
 
-- `-c --if-exists`: Drop database objects before creating them, if they already exist. If you had a failed migration, you can use these options to drop objects created by the previous migration to avoid errors when retrying the migration.
+- `-c --if-exists`: Drop database objects before creating them if they already exist. If you had a failed migration, you could use these options to drop objects created by the previous migration to avoid errors when retrying the migration.
 - `--single-transaction`: Forces the operation to run as an atomic transaction, which ensures that no data is left behind when a restore operation fails. Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.
 - `--no-tablespaces`: Do not output commands to select tablespaces. See [Data migration notes](#data-migration-notes).
 - `-t <table_name>`: Allows you to restore individual tables from a custom-format database dump. Individual tables can also be imported from a CSV file. See [Import from CSV](/docs/import/import-from-csv).
@@ -169,18 +169,18 @@ Some Postgres clients offer backup and restore capabilities. These include [pgAd
 
 ### Table-level data migration
 
-Table-level data migration, using CSV files for example, does not preserve database schemas, constraints, indexes, types, or other database features. You will have to create these separately. Table-level migration is simple but could result in significant downtime depending on the size of your data and the number of tables. For instructions, see [Import data from CSV](/docs/import/import-from-csv).
+Table-level data migration (using CSV files, for example) does not preserve database schemas, constraints, indexes, types, or other database features. You will have to create these separately. Table-level migration is simple but could result in significant downtime depending on the size of your data and the number of tables. For instructions, see [Import data from CSV](/docs/import/import-from-csv).
 
 ## Data migration notes
 
-- You can load data using the `psql` utility, but it only supports plain-text SQL dumps, which should only be considered for small datasets or specific use cases. To create a plain-text SQL dump with `pg_dump` utility, leave out the `-F` format option. Plain-text SQL is the default output format.
+- You can load data using the `psql` utility, but it only supports plain-text SQL dumps, which you should only consider for small datasets or specific use cases. To create a plain-text SQL dump with `pg_dump` utility, leave out the `-F` format option. Plain-text SQL is the default `pg_dump` output format.
 - `pg_dumpall` is not supported.
 - `pg_dump` with the `-C, --create` option is not supported.
-- Some PostgreSQL features, such as tablespaces and large objects, that require access to the local file system are not supported by Neon. To exclude selecting tablespaces, specify the `--no-tablespaces` option with `pg_restore`. To exclude large objects, specify the `--no-blobs` option with `pg_dump`.
+- Some PostgreSQL features, such as tablespaces and large objects, which require access to the local file system are not supported by Neon. To exclude selecting tablespaces, specify the `--no-tablespaces` option with `pg_restore`. To exclude large objects, specify the `--no-blobs` option with `pg_dump`.
 
 ## Reference
 
-For information about the commands referred to in this topic, refer to the following topics in the Postgres documentation:
+For information about the Postgres client utilities referred to in this topic, refer to the following topics in the Postgres documentation:
 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
