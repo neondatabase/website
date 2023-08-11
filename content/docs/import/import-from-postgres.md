@@ -106,14 +106,14 @@ For example:
 <CodeBlock shouldWrap>
 
 ```bash
-pg_dump -F c -v -d <source_database_connection_string> | pg_restore -v -d <neon-database-connection-string>
+pg_dump -Fc -v -d <source_database_connection_string> | pg_restore -v -d <neon-database-connection-string>
 ```
 
 </CodeBlock>
 
 Piping is not recommended for medium (> 1 GB) and large databases (> 5 GB), as it is susceptible to failures during lengthier migration operations.
 
-When piping `pg_dump` output directly to `pg_restore`, the custom output format (`-F c`) is most efficient. The directory format (`-F d`) format cannot be piped to `pg_restore`.
+When piping `pg_dump` output directly to `pg_restore`, the custom output format (`-Fc`) is most efficient. The directory format (`-Fd`) format cannot be piped to `pg_restore`.
 
 ## Post-migration steps
 
