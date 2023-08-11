@@ -141,6 +141,18 @@
           ariaLabel: Connect a Go application to Neon
         - title: Java
           slug: guides/java
+        - title: Javascript
+          items:
+            - title: Next.js
+              slug: guides/nextjs
+            - title: Node.js
+              slug: guides/node
+            - title: Prisma
+              items:
+                - title: Connect from Prisma
+                  slug: guides/prisma
+                - title: Use Prisma Migrate With Neon
+                  slug: guides/prisma-migrate
         - title: PHP
           items:
             - title: Laravel
@@ -157,18 +169,6 @@
               slug: guides/sqlalchemy
         - title: Rust
           slug: guides/rust
-        - title: Javascript
-          items:
-            - title: Next.js
-              slug: guides/nextjs
-            - title: Node.js
-              slug: guides/node
-            - title: Prisma
-              items:
-                - title: Connect from Prisma
-                  slug: guides/prisma
-                - title: Use Prisma Migrate With Neon
-                  slug: guides/prisma-migrate
     - title: Backend-as-a-service
       items:
         - title: Exograph
