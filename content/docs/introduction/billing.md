@@ -6,7 +6,7 @@ enableTableOfContents: true
 Neon [paid plans](/docs/introduction/plans#neon-plans) bill for usage based on the following metrics:
 
 - **Active time**: The amount of time that your computes have been active.
-- **Compute time**: The amount of computing capacity used per hour.
+- **Compute time**: The amount of compute resources used per hour.
 - **Project storage**: The volume of data and history stored in your Neon project.
 - **Written data**: The volume of data written from compute to storage.
 - **Data transfer**: The volume of data transferred out of Neon.
@@ -25,9 +25,9 @@ _Active time_ is the total amount of time, measured in hours, that your computes
 
 ## Compute time
 
-_Compute time_ is a measure of computing capacity used within a given billing period, measured in Compute Unit (CU) hours. It is calculated by multiplying the computing capacity by _Active_time_ hours. Neon measures computing capacity at regular intervals and averages those values to calculate _Compute time_.
+_Compute time_ is the the amount of compute resources used within a given billing period, measured in Compute Unit (CU) hours. It is calculated by multiplying  compute size by _Active_time_ hours. Neon measures compute size at regular intervals and averages those values to calculate _Compute time_.
 
-Computing capacity is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
+Compute size is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
 
 | Compute Units | vCPU | RAM    |
 |:--------------|:-----|:-------|
@@ -48,7 +48,7 @@ Factors that affect _Compute time_ include:
 - The number of active computes
 - The size of each compute
 - The _Auto-suspend_ feature, which suspends a compute after five minutes of inactivity. Neon [Pro plan](/docs/introduction/pro-plan) users can configure the `Auto-suspend` timeout timeout or disable _Auto-suspend_ entirely.
-- The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Computing capacity automatically scales up and down between these boundaries based on workload.
+- The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Compute size automatically scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
 Neon uses a small amount of _Compute time_, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
@@ -84,17 +84,17 @@ To estimate your own monthly _Compute time_ cost:
 
 1. Determine the compute size you require, in Compute Units (CUs).
 1. Estimate the amount of _Active time_ per month for your compute(s).
-1. Find the _Compute-hour_ rate for your region. The [billing rates](#billing-rates) table shows _Compute-hour_ prices for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU). The formula below multiplies that rate by 4 to get per hour cost for a full compute.
+1. Find the _Compute-time_ price for your region. The [billing rates](#billing-rates) table shows _Compute-time_ prices by region.
 1. Input the values into the _Compute time_ cost formula:
 
    ```text
-   Compute time cost = Compute Units * Active time * (Cost per hour for 1/4 compute * 4)
+   Compute time cost = Compute Units * Active time * Compute-time price
    ```
 
-   For example, this is the calculation for .25 CU, 730 hours, and a _Compute time_ rate of $0.0255:
+   For example, this is the calculation for the smallest compute offered by Neon (.25 CUs), 730 hours, and a _Compute time_ price of $0.102:
 
    ```text
-   0.25 * 730 * (0.0255 * 4) = $18.62
+   .25 * 730 * 0.102 = $18.62
    ```
 
 <Admonition type="tip">
@@ -149,32 +149,32 @@ Data transfer (GiB) * price per GiB
 
 | Cloud provider | Region                   | Billing metric  | Price     | Unit           |
 | :------------- | :----------------------- | :-------------- | :-------- | :------------- |
-| AWS            | US East (N. Virginia)    | Compute time    | $0.0255   | Compute-hour\* |
+| AWS            | US East (N. Virginia)    | Compute time    | $0.102    | Compute-hour\* |
 | AWS            | US East (N. Virginia)    | Project storage | $0.000164 | GiB-hour       |
 | AWS            | US East (N. Virginia)    | Written data    | $0.09600  | GiB            |
 | AWS            | US East (N. Virginia)    | Data transfer   | $0.09000  | GiB            |
 |                |                          |                 |           |                |
-| AWS            | US East (Ohio)           | Compute time    | $0.0255   | Compute-hour\* |
+| AWS            | US East (Ohio)           | Compute time    | $0.102    | Compute-hour\* |
 | AWS            | US East (Ohio)           | Project storage | $0.000164 | GiB-hour       |
 | AWS            | US East (Ohio)           | Written data    | $0.09600  | GiB            |
 | AWS            | US East (Ohio)           | Data transfer   | $0.09000  | GiB            |
 |                |                          |                 |           |                |
-| AWS            | US West (Oregon)         | Compute time    | $0.0255   | Compute-hour\* |
+| AWS            | US West (Oregon)         | Compute time    | $0.102    | Compute-hour\* |
 | AWS            | US West (Oregon)         | Project storage | $0.000164 | GiB-hour       |
 | AWS            | US West (Oregon)         | Written data    | $0.09600  | GiB            |
 | AWS            | US West (Oregon)         | Data transfer   | $0.09000  | GiB            |
 |                |                          |                 |           |                |
-| AWS            | Europe (Frankfurt)       | Compute time    | $0.0295   | Compute-hour\* |
+| AWS            | Europe (Frankfurt)       | Compute time    | $0.102    | Compute-hour\* |
 | AWS            | Europe (Frankfurt)       | Project storage | $0.00018  | GiB-hour       |
 | AWS            | Europe (Frankfurt)       | Written data    | $0.09600  | GiB            |
 | AWS            | Europe (Frankfurt)       | Data transfer   | $0.09000  | GiB            |
 |                |                          |                 |           |                |
-| AWS            | Asia Pacific (Singapore) | Compute time    | $0.03025  | Compute-hour\* |
+| AWS            | Asia Pacific (Singapore) | Compute time    | $0.102    | Compute-hour\* |
 | AWS            | Asia Pacific (Singapore) | Project storage | $0.00018  | GiB-hour       |
 | AWS            | Asia Pacific (Singapore) | Written data    | $0.09600  | GiB            |
 | AWS            | Asia Pacific (Singapore) | Data transfer   | $0.09000  | GiB            |
 
-\*The _Compute-hour_ price is for a <sup>1</sup>&frasl;<sub>4</sub> Compute Unit (CU), the smallest CU size offered by Neon. A <sup>1</sup>&frasl;<sub>4</sub> CU has .25 vCPU and 1 GB of RAM. Neon  supports computes with up to 7 CU (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
+\* A _Compute-hour_ is based on a compute size with 1 Compute Unit (CU), which is 1 vCPU and 4 GB of RAM. Neon's smallest compute size is .25 CU (.25 vCPU and 1GB of RAM), which would be billed at 1/4 of a _Compute-hour_ ($0.102/4 = $0.0255). Neon supports compute sizes ranging from .25 CU (.25 vCPU and 1 GB of RAM) to 7 CUs (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
 
 ## Pricing calculators
 

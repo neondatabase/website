@@ -19,32 +19,32 @@ const items = [
     image: '/images/pages/pricing/metrics-1-mobile.jpg',
     name: 'Compute time',
     priceFrom: 'From $0.0255 /hour',
-    details: 'Compute time is the amount of computing capacity used per hour.',
+    details: 'Compute time is the amount of compute resources used per hour.',
     prices: [
       {
         name: 'US East (N. Virginia)',
         price: '0.0255',
-        unit: 'Compute-hour',
+        unit: 'hour',
       },
       {
         name: 'US East (Ohio)',
         price: '0.0255',
-        unit: 'Compute-hour',
+        unit: 'hour',
       },
       {
         name: 'US West (Oregon)',
         price: '0.0255',
-        unit: 'Compute-hour',
+        unit: 'hour',
       },
       {
         name: 'Europe (Frankfurt)',
         price: '0.0295',
-        unit: 'Compute-hour',
+        unit: 'hour',
       },
       {
         name: 'Asia Pacific (Singapore)',
         price: '0.03025',
-        unit: 'Compute-hour',
+        unit: 'hour',
       },
     ],
   },
@@ -85,7 +85,7 @@ const items = [
     image: '/images/pages/pricing/metrics-2-mobile.jpg',
     name: 'Project storage',
     priceFrom: 'From $0.000164 /GiB-hour',
-    details: 'Project storage is the volume of data and history in your Neon projects.',
+    details: 'Project storage is the volume of data and history in your Neon project.',
     prices: [
       {
         name: 'US East (N. Virginia)',
