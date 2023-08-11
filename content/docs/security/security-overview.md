@@ -3,7 +3,7 @@ title: Security overview
 enableTableOfContents: true
 ---
 
-At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to internal our internal processes adheres to the highest security standards.
+At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
 
 ## Secure connections
 
