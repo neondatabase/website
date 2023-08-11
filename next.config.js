@@ -111,6 +111,11 @@ module.exports = {
         destination: 'https://api-docs.neon.tech/v2',
         permanent: true,
       },
+      {
+        source: '/ycmatcher',
+        destination: 'https://yc-idea-matcher.vercel.app/',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },
