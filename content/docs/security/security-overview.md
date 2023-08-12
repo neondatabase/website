@@ -28,3 +28,7 @@ Neon has successfully completed a SOC 2 Type 1 audit. For more information, see 
 ## Security reporting
 
 Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](https://neon.tech/security.txt) file.
+
+## Questions about our security measures?
+
+If you have any questions or concerns about our security protocols or would like a deeper dive into any aspect, our team is here to help. You can reach us at [security@neon.tech](mailto:security@neon.tech).
