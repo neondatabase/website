@@ -21,9 +21,9 @@ Data-at-rest encryption is a method of storing inactive data that converts plain
 
 Neon’s infrastructure is hosted and managed within Amazon’s secure data centers backed by [AWS Cloud Security](https://aws.amazon.com/security/). Amazon continually manages risk and undergoes recurring assessments to ensure compliance with industry standards. For information about AWS data center compliance programs, refer to [AWS Compliance Programs](https://aws.amazon.com/compliance/programs/).
 
-## SOC2 compliance
+## SOC 2 compliance
 
-Neon has successfully completed a SOC2 Type 1 audit. For more information, see [SOC2 compliance](soc2-compliance).
+Neon has successfully completed a SOC 2 Type 1 audit. For more information, see [SOC 2 compliance](soc2-compliance).
 
 ## Security reporting
 
