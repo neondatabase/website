@@ -31,4 +31,4 @@ Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for tra
 
 ## Questions about our security measures?
 
-If you have any questions or concerns about our security protocols or would like a deeper dive into any aspect, our team is here to help. You can reach us at [security@neon.tech](mailto:security@neon.tech).
+If you have any questions about our security protocols or would like a deeper dive into any aspect, our team is here to help. You can reach us at [security@neon.tech](mailto:security@neon.tech).
