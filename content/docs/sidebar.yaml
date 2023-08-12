@@ -125,7 +125,11 @@
         - title: Project sharing
           slug: guides/project-sharing-guide
         - title: Read replicas
-          slug: guides/read-replica-guide
+          items:
+            - title: Working with read replicas
+              slug: guides/read-replica-guide
+            - title: Data analysis and reporting
+              slug: guides/read-replica-data-analysis
         - title: Manage roles and databases with SQL
           slug: guides/manage-database-access
         - title: Extensions
