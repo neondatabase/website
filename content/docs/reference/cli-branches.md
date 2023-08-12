@@ -130,24 +130,18 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 - Create a branch:
 
     ```bash
-    neonctl branches create
-    ┌─────────────────────────┬─────────────────────────┬─────────┬──────────────────────┬──────────────────────┐
-    │ Id                      │ Name                    │ Primary │ Created At           │ Updated At           │
-    ├─────────────────────────┼─────────────────────────┼─────────┼──────────────────────┼──────────────────────┤
-    │ br-mute-sunset-67218628 │ br-mute-sunset-67218628 │ false   │ 2023-08-03T20:07:27Z │ 2023-08-03T20:07:27Z │
-    └─────────────────────────┴─────────────────────────┴─────────┴──────────────────────┴──────────────────────┘
+    neonctl branches createbranch
+    ┌──────────────────────────┬──────────────────────────┬─────────┬──────────────────────┬──────────────────────┐
+    │ Id                       │ Name                     │ Primary │ Created At           │ Updated At           │
+    ├──────────────────────────┼──────────────────────────┼─────────┼──────────────────────┼──────────────────────┤
+    │ br-winter-truth-91393786 │ br-winter-truth-91393786 │ false   │ 2023-08-12T11:23:43Z │ 2023-08-12T11:23:43Z │
+    └──────────────────────────┴──────────────────────────┴─────────┴──────────────────────┴──────────────────────┘
     endpoints
-    ┌───────────────────────────┬──────────────────────┐
-    │ Id                        │ Created At           │
-    ├───────────────────────────┼──────────────────────┤
-    │ ep-floral-violet-94096438 │ 2023-08-03T20:07:27Z │
-    └───────────────────────────┴──────────────────────┘
-    connection_uris
-    ┌──────────────────────────────────────────────────────────────────────────────────────────┐
-    │ Connection Uri                                                                           │
-    ├──────────────────────────────────────────────────────────────────────────────────────────┤
-    │ postgres://daniel:<password>@ep-floral-violet-94096438.us-east-2.aws.neon.tech/neondb    │
-    └──────────────────────────────────────────────────────────────────────────────────────────┘
+    ┌────────────────────────┬──────────────────────┐
+    │ Id                     │ Created At           │
+    ├────────────────────────┼──────────────────────┤
+    │ ep-black-tree-79914541 │ 2023-08-12T11:23:43Z │
+    └────────────────────────┴──────────────────────┘
     ```
 
     <Admonition type="tip">
@@ -159,61 +153,49 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ```bash
     neonctl branches create --output json 
     {
-    "branch": {
-        "id": "br-frosty-art-30264288",
-        "project_id": "polished-shape-60485499",
-        "parent_id": "br-polished-fire-02083731",
-        "parent_lsn": "0/1E887C8",
-        "name": "br-frosty-art-30264288",
-        "current_state": "init",
-        "pending_state": "ready",
-        "creation_source": "neonctl",
-        "primary": false,
-        "cpu_used_sec": 0,
-        "compute_time_seconds": 0,
-        "active_time_seconds": 0,
-        "written_data_bytes": 0,
-        "data_transfer_bytes": 0,
-        "created_at": "2023-08-03T20:12:24Z",
-        "updated_at": "2023-08-03T20:12:24Z"
-    },
-    "endpoints": [
-        {
-        "host": "ep-patient-sun-49170531.us-east-2.aws.neon.tech",
-        "id": "ep-patient-sun-49170531",
-        "project_id": "polished-shape-60485499",
-        "branch_id": "br-frosty-art-30264288",
-        "autoscaling_limit_min_cu": 1,
-        "autoscaling_limit_max_cu": 1,
-        "region_id": "aws-us-east-2",
-        "type": "read_write",
-        "current_state": "init",
-        "pending_state": "active",
-        "settings": {},
-        "pooler_enabled": false,
-        "pooler_mode": "transaction",
-        "disabled": false,
-        "passwordless_access": true,
-        "creation_source": "neonctl",
-        "created_at": "2023-08-03T20:12:24Z",
-        "updated_at": "2023-08-03T20:12:24Z",
-        "proxy_host": "us-east-2.aws.neon.tech",
-        "suspend_timeout_seconds": 0,
-        "provisioner": "k8s-pod"
-        }
-    ],
-    "connection_uris": [
-        {
-        "connection_uri": "postgres://daniel:<password>@ep-patient-sun-49170531.us-east-2.aws.neon.tech/neondb",
-        "connection_parameters": {
-            "database": "neondb",
-            "password": "<password>",
-            "role": "daniel",
-            "host": "ep-patient-sun-49170531.us-east-2.aws.neon.tech",
-            "pooler_host": "ep-patient-sun-49170531-pooler.us-east-2.aws.neon.tech"
-        }
-        }
-    ]
+        "branch": {
+            "id": "br-solitary-wildflower-52650372",
+            "project_id": "divine-mud-87681025",
+            "parent_id": "br-white-mud-84831725",
+            "parent_lsn": "0/FF89FB0",
+            "name": "br-solitary-wildflower-52650372",
+            "current_state": "init",
+            "pending_state": "ready",
+            "creation_source": "console",
+            "primary": false,
+            "cpu_used_sec": 0,
+            "compute_time_seconds": 0,
+            "active_time_seconds": 0,
+            "written_data_bytes": 0,
+            "data_transfer_bytes": 0,
+            "created_at": "2023-08-12T11:20:40Z",
+            "updated_at": "2023-08-12T11:20:40Z"
+        },
+        "endpoints": [
+            {
+            "host": "ep-round-butterfly-04490977.us-east-2.aws.neon.tech",
+            "id": "ep-round-butterfly-04490977",
+            "project_id": "divine-mud-87681025",
+            "branch_id": "br-solitary-wildflower-52650372",
+            "autoscaling_limit_min_cu": 0.25,
+            "autoscaling_limit_max_cu": 0.25,
+            "region_id": "aws-us-east-2",
+            "type": "read_write",
+            "current_state": "init",
+            "pending_state": "active",
+            "settings": {},
+            "pooler_enabled": false,
+            "pooler_mode": "transaction",
+            "disabled": false,
+            "passwordless_access": true,
+            "creation_source": "console",
+            "created_at": "2023-08-12T11:20:40Z",
+            "updated_at": "2023-08-12T11:20:40Z",
+            "proxy_host": "us-east-2.aws.neon.tech",
+            "suspend_timeout_seconds": 0,
+            "provisioner": "k8s-pod"
+            }
+        ]
     }
     ```
 
