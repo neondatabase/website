@@ -24,3 +24,7 @@ Neon’s infrastructure is hosted and managed within Amazon’s secure data cent
 ## SOC2 compliance
 
 Neon has successfully completed a SOC2 Type 1 audit. For more information, see [SOC2 compliance](soc2-compliance).
+
+## Security reporting
+
+We adhere to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page.
