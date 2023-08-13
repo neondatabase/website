@@ -1,10 +1,10 @@
 ---
-title: Introduction to Neon
+title: Neon documentation
 ---
 
 Neon is open-source serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
 
-## New to Neon?
+## Get started
 
 Refer to our _Get started_ documentation to get up and running with Neon in just a few minutes. You will learn how to:
 
@@ -12,9 +12,7 @@ Refer to our _Get started_ documentation to get up and running with Neon in just
 - [Create your first project](/docs/get-started-with-neon/setting-up-a-project)
 - [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
 
-Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about basic concepts and features of Neon, including database branching.
-
-## Neon Documentation
+## Documentation
 
 <DetailIconCards>
 
@@ -62,8 +60,8 @@ Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about
 
 </TechnologyNavigation>
 
-## Continue learning
+## Join the community
 
-If you have technical questions, reach out to Neon developers and community members in the official [Neon Discourse Community](https://community.neon.tech/).
+If you have technical questions, reach out to Neon community members and developers in the official [Neon Discourse Community](https://community.neon.tech/).
 
 <CommunityBanner>Welcome to the <br /> Neon Discourse Community!</CommunityBanner>
