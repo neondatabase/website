@@ -12,7 +12,7 @@ Refer to our _Get started_ documentation to get up and running with Neon in just
 - [Create your first project](/docs/get-started-with-neon/setting-up-a-project)
 - [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
 
-## Documentation
+## Explore the docs
 
 <DetailIconCards>
 
