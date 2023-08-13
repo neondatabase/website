@@ -17,7 +17,7 @@ Repeat the `pg_dump` and `pg_restore` process for each database you want to migr
 - Optionally, create a role in Neon to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. For example, if you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
 - If you have assigned database object ownership to different roles in your source database, read [Database object ownership considerations](#database-object-ownership-considerations). You may want to add a `-O` option to your `pg_restore` command to avoid errors.
 - Create the target database in Neon. For example, if you are migrating a database named `pagila`, create a database named `pagila` in Neon. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
-- Retrieve the connection string for your Neon database. You can find it on the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
+- Retrieve the connection string for your Neon database. You can find it in the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
 
    <CodeBlock shouldWrap>
 
@@ -30,7 +30,7 @@ Repeat the `pg_dump` and `pg_restore` process for each database you want to migr
 - Consider running a test migration first to ensure your actual migration goes smoothly. See [Run a test migration](#run-a-test-migration).
 - If your database is small (< 1 GB), you can pipe `pg_dump` output directly to `pg_restore` to save time. See [Pipe pg_dump to pg_restore](#pipe-pg_dump-to-pg_restore).
 
-## Export data with `pg_dump`
+## Export data with pg_dump
 
 Export your data from the source database with `pg_dump`:
 
@@ -51,7 +51,7 @@ The `pg_dump` command above includes these arguments:
 
 For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pg_dump-and-pg_restore-options).
 
-## Restore data to Neon with `pg_restore`
+## Restore data to Neon with pg_restore
 
 Restore your data to the target database in Neon with `pg_restore`.
 
@@ -75,7 +75,7 @@ The example above includes these arguments:
 
 For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pg_dump-and-pg_restore-options).
 
-## `pg_dump` and `pg_restore` example
+## pg_dump and pg_restore example
 
 The following example shows how data from a `pagila` source database is dumped and restored to a `pagila` database in Neon using the commands described in the previous sections. A database named `pagila` was created in Neon prior to running the restore operation.
 
@@ -93,7 +93,7 @@ mydumpfile.bak
 
 </CodeBlock>
 
-## Pipe `pg_dump` to `pg_restore`
+## Pipe pg_dump to pg_restore
 
 For small databases (< 1 GB), the standard output of `pg_dump` can be piped directly into a `pg_restore` command to minimize migration downtime:
 
@@ -139,11 +139,11 @@ pg_restore -v -O -d postgres://sally:<password>@ep-damp-cell-18160816.us-east-2.
 
 The Neon role performing the restore operation becomes the owner of all database objects.
 
-## Advanced `pg_dump` and `pg_restore` options
+## Advanced pg_dump and pg_restore options
 
 The `pg_dump` and `pg_restore` commands provide numerous advanced options, some of which are described below. Full descriptions and more options are found in the PostgreSQL [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) and [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
 
-### `pg_dump` options
+### pg_dump options
 
 - `-Z`: Defines the compression level to use when using a compressible format. 0 means no compression, while 9 means maximum compression. In general, we recommend a setting of 1. A higher compression level slows the dump and restore process but also uses less disk space.
 - `--lock-wait-timeout=20s`: Error out early in the dump process instead of waiting for an unknown amount of time if there is lock contention.
@@ -151,7 +151,7 @@ Do not wait forever to acquire shared table locks at the beginning of the dump. 
 - `-j <njobs>`: Consider this option for medium (>1 GB) and large databases (>5) to dump tables in parallel. Set `<njobs>` to the number of available CPUs. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for more information. In Neon, this option only make sense for Pro plan users who can configure computes with >1 vCPU.
 - `--no-blobs`: Excludes large objects from your dump. See [Data migration notes](#data-migration-notes).
 
-### `pg_restore` options
+### pg_restore options
 
 - `-c --if-exists`: Drop database objects before creating them if they already exist. If you had a failed migration, you could use these options to drop objects created by the previous migration to avoid errors when retrying the migration.
 - `-j <njobs>`: Consider this option for medium (>1 GB) and large databases (>5) to run the restore process in parallel. Set `<njobs>` to the number of available vCPUs. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for more information. In Neon, this option only make sense for Pro plan users who can configure computes with >1 vCPU. Cannot be used together with `--single-transaction`.
