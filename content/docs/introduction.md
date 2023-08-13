@@ -2,7 +2,7 @@
 title: Neon Serverless Postgres documentation
 ---
 
-Neon is serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
+Neon is Serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
 
 ## Get started
 
@@ -16,7 +16,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <DetailIconCards>
 
-<a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a  serverless Postgres database from any application" icon="audio-jack">Connect</a>
+<a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a  Serverless Postgres database from any application" icon="audio-jack">Connect</a>
 
 <a href="/docs/import/import-from-postgres" description="Load your data into a Postgres database hosted by Neon" icon="import">Import data</a>
 
