@@ -12,8 +12,6 @@ Refer to our _Get started_ documentation to get up and running with Neon in just
 - [Create your first project](/docs/get-started-with-neon/setting-up-a-project)
 - [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
 
-Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about basic concepts and features of Neon, including database branching.
-
 ## Neon Documentation
 
 <DetailIconCards>
