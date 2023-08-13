@@ -16,15 +16,15 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <DetailIconCards>
 
-<a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a Neon database from any application" icon="audio-jack">Connect</a>
+<a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a  serverless Postgres database from any application" icon="audio-jack">Connect</a>
 
 <a href="/docs/import/import-from-postgres" description="Load your data into a Postgres database hosted by Neon" icon="import">Import data</a>
 
 <a href="/docs/manage/overview" description="Learn how to manage Neon projects, branches, compute resources, databases, and roles" icon="ladder">Manage</a>
 
-<a href="/docs/introduction/branching" description="Learn about branching and how you can use it to optimize development workflows" icon="split-branch">Branching</a>
+<a href="/docs/introduction/branching" description="Learn to optimize development workflows with database branching" icon="split-branch">Branching</a>
 
-<a href="/docs/extensions/pg-extensions" description="Level up your Postgres database with our extension installation guide" icon="app-store">Postgres extensions</a>
+<a href="/docs/extensions/pg-extensions" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
 
 <a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
 
