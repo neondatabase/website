@@ -18,7 +18,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a Neon database from any application" icon="audio-jack">Connect</a>
 
-<a href="/docs/import/import-from-postgres" description="Import your own data or sample data that you can use to explore Neon" icon="import">Import data</a>
+<a href="/docs/import/import-from-postgres" description="Load your data into a Postgres database hosted by Neon" icon="import">Import data</a>
 
 <a href="/docs/manage/overview" description="Learn how to manage Neon projects, branches, compute resources, databases, and roles" icon="ladder">Manage</a>
 
