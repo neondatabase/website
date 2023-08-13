@@ -15,7 +15,7 @@ const CommunityBanner = ({ children = null }) => (
         size="xs"
         theme="primary"
       >
-        Join
+        Join now
       </Button>
     </div>
     <img
