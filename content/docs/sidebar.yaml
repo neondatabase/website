@@ -225,7 +225,13 @@
     - title: Import from a Neon project
       slug: import/import-from-neon
 - title: Security
-  slug: security/security-overview
+  items:
+    - title: Security overview
+      slug: security/security-overview
+    - title: Security reporting
+      slug: security/security-reporting
+    - title: SOC 2 compliance
+      slug: security/soc2-compliance
 - title: Reference
   items:
     - title: Neon CLI

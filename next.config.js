@@ -119,6 +119,14 @@ module.exports = {
       ...docsRedirects,
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api_spec/release/v2.json',
+        destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
+      },
+    ];
+  },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
 
