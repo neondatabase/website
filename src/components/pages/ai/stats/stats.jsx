@@ -127,13 +127,13 @@ const Stats = () => (
               <div className="mt-5 flex items-center space-x-2.5 xl:mt-4 lg:mt-3 sm:mt-5">
                 <span className="inline-block h-8 w-[5%] rounded bg-[linear-gradient(90deg,rgba(0,229,153,0.20)0%,#00E599_67.45%,#4DFFC4_93.23%)] xl:h-7 sm:h-8" />
                 <span className="text-[13px] leading-none text-gray-new-90 xl:text-xs lg:text-[10px]">
-                  13.2s
+                  13.2ms
                 </span>
               </div>
               <div className="mt-5 flex items-center space-x-2.5 xl:mt-3 lg:mt-2.5 sm:mt-4">
                 <span className="inline-block h-8 w-[93.5%] rounded bg-[linear-gradient(90deg,rgba(255,255,255,0.20)0%,#FFF_100%)] opacity-60 xl:h-7 sm:h-8" />
                 <span className="text-[13px] leading-none text-gray-new-90 xl:text-xs  lg:text-[10px]">
-                  262.3s
+                  262.3ms
                 </span>
               </div>
               <div className="mt-6 flex items-center space-x-5 text-sm xl:mt-4 lg:mt-2 lg:space-x-4 lg:text-xs sm:mt-5 sm:space-x-5 sm:text-[13px]">
