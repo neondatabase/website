@@ -1,5 +1,8 @@
 import CalendarIcon from 'icons/calendar.inline.svg';
 import ConsoleIcon from 'icons/console.inline.svg';
+import aboutUsIcon from 'icons/header-about-us.svg';
+import careersIcon from 'icons/header-careers.svg';
+import partnersIcon from 'icons/header-partners.svg';
 import TransactionsIcon from 'icons/transactions.inline.svg';
 
 import LINKS from './links';
@@ -18,19 +21,19 @@ export default {
       text: 'Company',
       items: [
         {
-          iconName: 'aboutUs',
+          icon: aboutUsIcon,
           text: 'About us',
           description: 'Meet the team',
           to: LINKS.aboutUs,
         },
         {
-          iconName: 'careers',
+          icon: careersIcon,
           text: 'Careers',
           description: 'Become a member',
           to: LINKS.careers,
         },
         {
-          iconName: 'partners',
+          icon: partnersIcon,
           text: 'Partners',
           description: 'Become a partner',
           to: LINKS.partners,
