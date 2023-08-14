@@ -107,6 +107,7 @@ const Header = ({
                                   width={44}
                                   height={44}
                                   className="h-11 w-11 shrink-0"
+                                  loading="lazy"
                                   aria-hidden
                                 />
                                 <span className="ml-3">
