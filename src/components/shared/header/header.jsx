@@ -20,12 +20,14 @@ import AboutUsIcon from './images/header-about-us.inline.svg';
 import CareersIcon from './images/header-careers.inline.svg';
 import DiscussionsIcon from './images/header-discussions.inline.svg';
 import Github from './images/header-github.inline.svg';
+import PartnersIcon from './images/header-partners.inline.svg';
 
 const icons = {
   // discord: DiscordIcon,
   discussions: DiscussionsIcon,
   careers: CareersIcon,
   aboutUs: AboutUsIcon,
+  partners: PartnersIcon,
 };
 
 const Header = ({

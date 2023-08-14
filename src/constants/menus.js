@@ -29,6 +29,12 @@ export default {
           description: 'Become a member',
           to: LINKS.careers,
         },
+        {
+          iconName: 'partners',
+          text: 'Partners',
+          description: 'Become a partner',
+          to: LINKS.partners,
+        },
       ],
     },
     {
@@ -36,22 +42,8 @@ export default {
       to: LINKS.blog,
     },
     {
-      text: 'Community',
-      to: LINKS.discourse,
-      // items: [
-      // {
-      //   iconName: 'discord',
-      //   text: 'Discord',
-      //   description: 'Join our community',
-      //   to: LINKS.discord,
-      // },
-      //   {
-      //     iconName: 'discussions',
-      //     text: 'Community',
-      //     description: 'Get help',
-      //     to: LINKS.discourse,
-      //   },
-      // ],
+      text: 'AI',
+      to: LINKS.ai,
     },
     {
       text: 'Pricing',
@@ -97,7 +89,7 @@ export default {
       heading: 'Resources',
       links: [
         {
-          text: 'Vector Search',
+          text: 'AI',
           to: LINKS.ai,
         },
         {
@@ -108,10 +100,6 @@ export default {
           text: 'Release notes',
           to: LINKS.releaseNotes,
         },
-        // {
-        //   text: 'PostgreSQL docs',
-        //   to: LINKS.postgresDocs,
-        // },
         {
           text: 'Support',
           to: LINKS.support,
@@ -195,6 +183,14 @@ export default {
       text: 'Pricing',
       to: LINKS.pricing,
     },
+    {
+      text: 'Partners',
+      to: LINKS.partners,
+    },
+    {
+      text: 'AI',
+      to: LINKS.ai,
+    },
     // {
     //   iconName: 'discord',
     //   text: 'Discord',
@@ -204,10 +200,6 @@ export default {
     {
       text: 'GitHub',
       to: LINKS.github,
-    },
-    {
-      text: 'Community',
-      to: LINKS.discourse,
     },
   ],
   docSidebar: [
