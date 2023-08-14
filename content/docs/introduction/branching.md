@@ -57,8 +57,6 @@ Testers can create branches for testing schema changes, validating new queries, 
 
 ![test environment branches](/docs/introduction/branching_test.png)
 
-For a simple example showing how you can use a branch to test queries, refer to [Test queries with branching](/docs/tutorial/test-queries), in the _Neon tutorial_.
-
 ### Data recovery
 
 If you lose data due to an unintended deletion or some other event, you can create a branch with data as it existed before the event occurred, allowing you to recover the lost data.

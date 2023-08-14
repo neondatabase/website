@@ -51,15 +51,6 @@
       slug: get-started-with-neon/setting-up-a-project
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
-- title: Tutorial
-  slug: tutorial/neon-tutorial
-  items:
-    - title: Set up a Neon project and add data
-      slug: tutorial/project-setup
-    - title: Recover lost data with branching
-      slug: tutorial/data-recovery
-    - title: Test queries with branching
-      slug: tutorial/test-queries
 - title: Connect
   items:
     - title: Connect from any application
