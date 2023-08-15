@@ -9,7 +9,7 @@ const Aside = ({ className = '', slug, isReleaseDateExist = false }) => {
   return (
     <aside
       className={clsx(
-        'flex flex-col items-end gap-3 rounded-md xl:sticky xl:top-10 xl:mr-9 xl:mt-0 xl:max-h-24 sm:static sm:max-h-max sm:flex-row sm:items-center',
+        'flex justify-end xl:sticky xl:top-10 xl:mt-0 xl:max-h-24 lg:static lg:max-h-max lg:justify-start',
         className
       )}
     >
