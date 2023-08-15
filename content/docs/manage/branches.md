@@ -114,7 +114,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
   <CodeBlock shouldWrap>
 
   ```bash
-  psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+  psql postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb
   ```
 
   </CodeBlock>
