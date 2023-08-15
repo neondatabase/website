@@ -51,15 +51,6 @@
       slug: get-started-with-neon/setting-up-a-project
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
-- title: Tutorial
-  slug: tutorial/neon-tutorial
-  items:
-    - title: Set up a Neon project and add data
-      slug: tutorial/project-setup
-    - title: Recover lost data with branching
-      slug: tutorial/data-recovery
-    - title: Test queries with branching
-      slug: tutorial/test-queries
 - title: Connect
   items:
     - title: Connect from any application
@@ -234,7 +225,13 @@
     - title: Import from a Neon project
       slug: import/import-from-neon
 - title: Security
-  slug: security/security-overview
+  items:
+    - title: Security overview
+      slug: security/security-overview
+    - title: Security reporting
+      slug: security/security-reporting
+    - title: SOC 2 compliance
+      slug: security/soc2-compliance
 - title: Reference
   items:
     - title: Neon CLI
