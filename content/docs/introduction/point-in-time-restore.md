@@ -4,11 +4,11 @@ subtitle: Restore your data to previous state
 enableTableOfContents: true
 ---
 
-Neon retains a history of changes, which allows you to create a branch that restores data to any time within the retention period. You can use this capability as a database [backup](/docs/manage/backups) strategy, to view the past state of your database, or to recover lost data.
+Neon retains a history of changes, which allows you to create a branch that restores data to any point within the retention period. You can use this capability as a database [backup](/docs/manage/backups) strategy, to view the past state of your database, or to recover lost data.
 
 ## History retention
 
-Neon retains a 7-day history by default. The history retention period is configurable. The supported range is 0 to 7 days for [Neon Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Neon Pro plan](/docs/introduction/pro-plan) users.
+Neon retains a 7-day history by default. The history retention period is configurable. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users.
 
 You can configure the **History retention** setting in the Neon Console, under **Settings** > **Storage**.
 ![History retention configuration](/docs/relnotes/history_retention.png)
