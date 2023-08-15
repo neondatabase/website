@@ -7,9 +7,9 @@ Neon does not yet provide support for configuring automated backups in the Neon 
 
 ## Built-in backups with Neon's point-in-time restore feature
 
-By default, Neon keeps a 7-day history allowing you to restore your data to a particular date and time or Log Sequence Number (LSN). For Neon [Free Tier](/docs/introduction/free-tier) users, the 7-day history period is fixed. [Neon Pro plan](/docs/introduction/pro-plan) users can configure Neon to retain up to a 30 days of history. With this backup option, no action or automation is required. A data history is always available. You can quickly restore your data to a past state by creating a database branch. This feature is referred to point-in-time restore (PITR).
+By default, Neon keeps a 7-day history allowing you to restore your data to a particular date and time or Log Sequence Number (LSN). For Neon [Free Tier](/docs/introduction/free-tier) users, the 7-day history period is fixed. [Neon Pro plan](/docs/introduction/pro-plan) users can configure Neon to retain up to a 30 days of history. With this backup option, no action or automation is required. You can quickly restore your data to a past state by creating a database branch. This feature is referred to [Point-in-time restore](/docs/introduction/point-in-time-restore).
 
-For information about creating a point-in-time restore branch, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+For information about creating a point-in-time restore branch, see [Branching — Point-in-time restore](/docs/guides/branching-pitr).
 
 ## pg_dump
 

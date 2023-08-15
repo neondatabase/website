@@ -1,12 +1,24 @@
 ---
-title: Branching — Point-in-time restore (PITR)
-subtitle: Recover your data to previous state using Neon's branching feature
+title: Branching — Point-in-time restore
+subtitle: Restore your data to previous state using Neon's branching feature
 enableTableOfContents: true
 ---
 
-A Neon project has a default 7-day data retention window, which enables creating a branch that reflects the state of your data at a past time. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
+Neon retains a 7-day history of changes for all branches by default, which allows you to create a branch that restores data to any point in time within the defined retention period. [Neon Pro plan](/docs/introduction/pro-plan) users can configure a Neon project to retain up to 30 days of history. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
 
-This guide provides an example of how to recover your data to point in time before a data loss occurred using Neon's branching feature.
+This guide shows how to configure the history retention window and how to recover your data to point in time before a data loss occurred using Neon's branching feature.
+
+## Configure the history retention window
+
+ The default history retention period is 7 days for all Neon users. [Neon Pro plan](/docs/introduction/pro-plan) users can configure the history retention period for a Neon project. The supported range is between 0 and 30 days. Please be aware that increasing the history retention period affects all branches in your Neon project and increases [project storage](/docs/introduction/billing#project-storage), as it retains data changes for a longer period of time.
+
+To configure the history retention period for a Neon project:
+
+1. Select a project in the Neon console (if you have more than one project).
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Storage**.
+4. Use the slider to select the history retention period.
+5. Click **Save**.
 
 ## Create a point-in-time branch
 
