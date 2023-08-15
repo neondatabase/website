@@ -117,8 +117,8 @@ This Action has no outputs.
 The following example applications use GitHub Actions to create and delete branches in Neon.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/neon_twitter" description="A simple micro-blogging application that uses GitHub Actions to create and delete a branch with each pull request" icon="github">Neon Twitter app</a>
-<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="A simple application showing how to create and delete branches with GitHub Actions for preview and production deployments on Vercel" icon="github">Elements app</a>
+<a href="https://github.com/neondatabase/neon_twitter" description="A micro-blogging application that uses GitHub Actions to create and delete a branch with each pull request" icon="github">Neon Twitter app</a>
+<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with deployments on Vercel" icon="github">Elements app</a>
 </DetailIconCards>
 
 ## Need help?
