@@ -19,7 +19,7 @@ const ReleaseNotes = ({
   <>
     <Hero />
     {/* <ReleaseNotesFilter currentSlug={currentSlug} /> */}
-    <ReleaseNoteList className="mt-6" items={items} />
+    <ReleaseNoteList className="mt-4" items={items} />
     {/* {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />} */}
   </>
 );
