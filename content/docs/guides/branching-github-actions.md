@@ -118,7 +118,7 @@ The following example applications use GitHub Actions to create and delete branc
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/neon_twitter" description="A micro-blogging application that uses GitHub Actions to create and delete a branch with each pull request" icon="github">Neon Twitter app</a>
-<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with deployments on Vercel" icon="github">Elements app</a>
+<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with preview deployments in Vercel" icon="github">Preview branches app</a>
 </DetailIconCards>
 
 ## Need help?
