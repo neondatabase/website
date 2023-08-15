@@ -1,4 +1,4 @@
-### What's new
+### Improvements and fixes
 
 - Safekeeper: Added support for backing up Write-Ahead Logs (WAL) to S3 storage for disaster recovery.
 - Safekeeper: Added support for downloading WAL from S3 storage on demand.
@@ -19,9 +19,6 @@
 - Pageserver: Updated the timeline size reported when `DROP DATABASE` is executed.
 - Pageserver: Decreased the number of threads by running gc and compaction in a blocking tokio thread pool.
 - Pageserver: Switched to per-tenant attach/detach. Download operations of all timelines for one tenant are now grouped together so that branches can be used safely with attach/detach.
-
-### Bug fixes
-
 - Compute: Enabled the use of the `CREATE EXTENSION` statement for users that are not database owners.
 - Safekeeper: Fixed the walreceiver connection selection mechanism:
   - Reconnecting to a Safekeeper immediately after it fails is now avoided by limiting candidates to those with the fewest connection attempts.

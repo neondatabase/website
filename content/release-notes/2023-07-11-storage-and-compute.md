@@ -1,10 +1,4 @@
----
-label: 'Storage'
----
-
-### What's new
-
-**Same-region replicas**
+### Same-region replicas
 
 Neon now supports same-region read replicas. Neon's read replicas are independent read-only compute instances designed to perform read operations on the same data as your read-write computes. You can instantly create one or more read replicas for any branch in your Neon project and configure the amount of vCP-U and memory allocated to each.
 

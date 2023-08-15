@@ -1,4 +1,4 @@
-### What's new
+### Improvements and fixes
 
 - Compute: Installed the `uuid-ossp` extension binaries, which provide functions for generating universally unique identifiers (UUIDs). `CREATE EXTENSION "uuid-ossp"` is now supported. For information about  extensions supported by Neon, see [Available Postgres extensions](/docs/extensions/pg-extensions).
 - Compute: Added logging for compute node initialization failure during the 'basebackup' stage.

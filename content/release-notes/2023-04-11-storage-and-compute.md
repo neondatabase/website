@@ -1,8 +1,4 @@
----
-label: 'Storage'
----
-
-### What's new
+### Improvements and fixes
 
 - Pageserver: Added `disk_size` and `instance_type` properties to the Pageserver API. This data is required to support assigning Neon projects to Pageservers based on Pageserver disk usage.
 - Proxy: Added error reporting for unusually low `proxy_io_bytes_per_client metric` values.

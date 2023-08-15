@@ -1,4 +1,4 @@
-### What's new
+### Improvements and fixes
 
 - Pageserver: Increased the default `compaction_period` setting to 20 seconds to reduce the frequency of polling that is performed to determine if compaction is required. The frequency of polling with the previous setting of 1 could result in excessive CPU consumption when there are numerous tenants and projects.
 - Pageserver: Added initial support for online tenant relocation.

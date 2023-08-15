@@ -1,4 +1,4 @@
-### What's new
+### Improvements and fixes
 
 - Compute: Added support for several Postgres extensions. Newly supported extensions include:
   - `bloom`

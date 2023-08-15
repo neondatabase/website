@@ -1,4 +1,4 @@
-### What's new
+### Improvements and fixes
 
 - Compute: Added support for Postgres 15.0 and its Postgres extensions.
 For information about supported extensions, see [Available Postgres extensions](/docs/extensions/pg-extensions).

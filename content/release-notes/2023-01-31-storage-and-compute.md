@@ -1,4 +1,4 @@
-### Features
+### Improvements and fixes
 
 - Compute: Added support for the Postgres `unit` extension. For more information about Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
 - Compute: Removed logic that updated roles each time a Neon compute instance was restarted. Roles were updated on each restart to address a password-related backward compatibility issue that is no longer relevant.

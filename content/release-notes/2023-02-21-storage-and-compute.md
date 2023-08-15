@@ -1,4 +1,4 @@
-### What's new
+### Improvements and fixes
 
 - Compute: Added support for the Postgres `xml2` and `pgjwt` extensions. For more information about Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
 - Compute: Updated the versions for the following Postgres extensions:

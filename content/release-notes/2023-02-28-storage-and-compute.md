@@ -1,4 +1,4 @@
-### What's new
+### Improvements and fixes
 
 - Compute: Added support for the following Postgres extensions:
   - `pg_graphql`

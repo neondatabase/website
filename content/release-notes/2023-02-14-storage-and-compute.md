@@ -1,4 +1,4 @@
-### What's new
+### Improvements and fixes
 
 - Compute: Added support for the Postgres `pgvector`, `plls` and `plcoffee` extensions. For more information about Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
 - Proxy: Significantly reduced network latencies for WebSocket and pooled connections by implementing caching mechanism for compute node connection information and enabling the `TCP_NODELAY` protocol option. The `TCP_NODELAY` option causes segments to be sent as soon as possible, even if there is only a small amount of data. For more information, refer to the [TCP protocol man page](https://linux.die.net/man/7/tcp).
