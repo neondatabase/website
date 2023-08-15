@@ -8,21 +8,24 @@ import TableOfContents from 'components/pages/doc/table-of-contents';
 import Hero from 'components/pages/release-notes/hero';
 // import Pagination from 'components/pages/release-notes/pagination';
 import ReleaseNoteList from 'components/pages/release-notes/release-note-list';
-import ReleaseNotesFilter from 'components/pages/release-notes/release-notes-filter';
+// import ReleaseNotesFilter from 'components/pages/release-notes/release-notes-filter';
 import Content from 'components/shared/content';
 
 // TODO: Add pagination for release notes
-const ReleaseNotes = ({ currentSlug, items }) => (
+const ReleaseNotes = ({
+  // currentSlug,
+  items,
+}) => (
   <>
     <Hero />
-    <ReleaseNotesFilter currentSlug={currentSlug} />
-    <ReleaseNoteList items={items} />
+    {/* <ReleaseNotesFilter currentSlug={currentSlug} /> */}
+    <ReleaseNoteList className="mt-6" items={items} />
     {/* {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />} */}
   </>
 );
 
 ReleaseNotes.propTypes = {
-  currentSlug: PropTypes.string,
+  // currentSlug: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string.isRequired,

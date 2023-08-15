@@ -7,12 +7,21 @@ import Content from 'components/shared/content';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import { RELEASE_NOTES_BASE_PATH, RELEASE_NOTES_SLUG_REGEX } from 'constants/docs';
+import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import { getAllReleaseNotes, getPostBySlug, RELEASE_NOTES_DIR_PATH } from 'utils/api-docs';
 import getExcerpt from 'utils/get-excerpt';
 import getMetadata from 'utils/get-metadata';
 import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 import serializeMdx from 'utils/serialize-mdx';
+
+// @NOTE: the maximum length of the title to look fine on the og image
+const MAX_TITLE_LENGTH = 52;
+
+const vercelUrl =
+  process.env.VERCEL_ENV === 'preview'
+    ? `https://${process.env.VERCEL_BRANCH_URL}`
+    : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 export async function generateStaticParams() {
   const releaseNotes = await getAllReleaseNotes();
@@ -41,14 +50,20 @@ export async function generateMetadata({ params }) {
   if (isReleaseNotePage) {
     const { label: date } = getReleaseNotesDateFromSlug(currentSlug);
     const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
-    label = `${capitalisedCategory} release ${date}`;
+    label = `${capitalisedCategory} release - ${date}`;
     description = getExcerpt(content, 160);
   }
+
+  const encodedLabel = Buffer.from(label).toString('base64');
 
   return getMetadata({
     title: `${label} - Neon`,
     description,
     pathname: `${RELEASE_NOTES_BASE_PATH}${currentSlug}`,
+    imagePath:
+      label.length < MAX_TITLE_LENGTH
+        ? `${vercelUrl}/docs/og?title=${encodedLabel}`
+        : DEFAULT_IMAGE_PATH,
     type: 'article',
   });
 }

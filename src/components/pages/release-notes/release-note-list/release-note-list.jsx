@@ -8,8 +8,8 @@ import ArrowIcon from 'icons/arrow-right.inline.svg';
 import generateReleaseNotePath from 'utils/generate-release-note-path';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 
-const ReleaseNoteList = ({ items }) => (
-  <div className="sm:space-y-16">
+const ReleaseNoteList = ({ className, items }) => (
+  <div className={clsx('sm:space-y-16', className)}>
     {items.map(({ slug, content }, index, array) => {
       const prevItem = array[index - 1];
       const { datetime } = getReleaseNotesDateFromSlug(slug);
@@ -51,6 +51,7 @@ const ReleaseNoteList = ({ items }) => (
 );
 
 ReleaseNoteList.propTypes = {
+  className: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string.isRequired,
