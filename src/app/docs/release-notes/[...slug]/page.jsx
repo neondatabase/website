@@ -43,14 +43,13 @@ export async function generateMetadata({ params }) {
   const currentSlug = slug.join('/');
   const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
 
-  const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
-  label = `${capitalisedCategory} release`;
-  description = `The latest ${capitalisedCategory} updates from Neon`;
+  label = 'Release notes';
+  description = `The latest product updates from Neon`;
 
   if (isReleaseNotePage) {
     const { label: date } = getReleaseNotesDateFromSlug(currentSlug);
     const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
-    label = `${capitalisedCategory} release - ${date}`;
+    label = `Release notes - ${date}`;
     description = getExcerpt(content, 160);
   }
 
@@ -70,7 +69,7 @@ export async function generateMetadata({ params }) {
 
 const ReleaseNotePage = async ({ currentSlug }) => {
   const { datetime, label } = getReleaseNotesDateFromSlug(currentSlug);
-  const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
+
   const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
   const mdxSource = await serializeMdx(content);
 
@@ -79,7 +78,7 @@ const ReleaseNotePage = async ({ currentSlug }) => {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `${capitalisedCategory} release ${label}`,
+    headline: `Release notes — ${label}`,
     datePublished: datetime,
     author: {
       '@type': 'Organization',
@@ -111,13 +110,8 @@ const ReleaseNotePage = async ({ currentSlug }) => {
               >
                 {label}
               </time>
-              <Heading
-                className="!text-[36px] !leading-normal md:!text-3xl"
-                tag="h1"
-                size="sm"
-                theme="black"
-              >
-                {capitalisedCategory} release
+              <Heading className="sr-only" tag="h1" size="sm" theme="black">
+                Release notes - {label}
               </Heading>
               <Content className="mt-8 max-w-full prose-h3:text-xl" content={mdxSource} />
               <Link
