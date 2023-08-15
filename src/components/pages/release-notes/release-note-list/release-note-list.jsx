@@ -31,7 +31,11 @@ const ReleaseNoteList = ({ className, items }) => (
               </time>
             </Link>
 
-            <Content className="mt-3 prose-h3:text-lg" content={content} withoutAnchorHeading />
+            <Content
+              className="mt-5 prose-h3:mt-[18px] prose-h3:text-lg"
+              content={content}
+              withoutAnchorHeading
+            />
           </div>
         </article>
       );
