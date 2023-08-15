@@ -60,7 +60,21 @@ To edit a Neon project:
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to edit.
 3. Select **Settings**.
-4. Make your change and click **Save**.
+4. Select **General**.
+5. Make your change and click **Save**.
+
+## Configure history retention
+
+Neon retains a 7-day history of changes for all branches by default, which allows you to create a branch that restores data to any point in time within the defined retention period. [Neon Pro plan](/docs/introduction/pro-plan) users can configure the history retention period for a Neon project. The supported range is between 0 and 30 days. Please be aware that increasing the history retention period affects all branches in your Neon project and increases [project storage](/docs/introduction/billing#project-storage), as it retains data changes for a longer period of time.
+
+To configure the history retention period for a project:
+
+1. Select a project in the Neon console (if you have more than one project).
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Storage**.
+    ![History retention configuration](/docs/relnotes/history_retention.png)
+4. Use the slider to select the history retention period.
+5. Click **Save**.
 
 ## Delete a project
 
@@ -71,8 +85,9 @@ To delete a project:
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to delete.
 3. Select **Settings**.
-4. Click **Delete project.**
-5. On the confirmation dialog, click **Delete**.
+4. Select **Delete**.
+5. Click **Delete project.**
+6. On the confirmation dialog, click **Delete**.
 
 ## Share a project
 
@@ -82,6 +97,7 @@ To share a project:
 
 1. In the Neon Console, select a project.
 1. Select **Settings**.
+1. Select **Sharing**.
 1. Under **Grant access to your project**, enter the email address of the account you want to share access with.
 1. Click **Grant access**.
 
