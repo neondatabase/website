@@ -65,11 +65,11 @@ To edit a Neon project:
 
 ## Configure history retention
 
-By default, Neon retains a 7-day history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point in time within the defined retention period. The supported range  is 0 to 7 days for [Neon Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Neon Pro plan](/docs/introduction/pro-plan) users. Please be aware that increasing the history retention period affects all branches in your Neon project and increases [project storage](/docs/introduction/billing#project-storage).
+By default, Neon retains a 7-day history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/billing#project-storage).
 
 To configure the history retention period for a project:
 
-1. Select a project in the Neon console (if you have more than one project).
+1. Select a project in the Neon console.
 2. On the Neon **Dashboard**, select **Settings**.
 3. Select **Storage**.
     ![History retention configuration](/docs/relnotes/history_retention.png)
