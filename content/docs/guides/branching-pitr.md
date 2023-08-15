@@ -17,6 +17,7 @@ To configure the history retention period for a Neon project:
 1. Select a project in the Neon console (if you have more than one project).
 2. On the Neon **Dashboard**, select **Settings**.
 3. Select **Storage**.
+    ![History retention configuration](/docs/relnotes/history_retention.png)
 4. Use the slider to select the history retention period.
 5. Click **Save**.
 

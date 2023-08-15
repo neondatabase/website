@@ -14,7 +14,7 @@ For more information about branches and how you can use them in your development
 You can create and manage branches using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). This topic covers both methods.
 
 <Admonition type="important">
-When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated. Neon retains a 7-day data history, by default. To keep data storage to a minimum, remove branches before they age out of this 7-day window.
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated. Neon retains a 7-day data history, by default. To keep data storage to a minimum, remove branches before they age out of the history retention window.
 </Admonition>
 
 ## Primary branch
