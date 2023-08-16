@@ -13,6 +13,8 @@ Additionally, `pg_embedding` now supports cosine and Manhattan distance metrics.
     SELECT id FROM documents ORDER BY embedding <=> array[3,3,3] LIMIT 1;
     ```
 
+    </CodeBlock>
+
 - Manhattan distance
 
     <CodeBlock shouldWrap>
