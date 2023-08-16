@@ -4,27 +4,25 @@ Neon's [pg_embedding](/docs/extensions/pg_embedding) extension, which enables gr
 
 Additionally, `pg_embedding` now supports cosine and Manhattan distance metrics.
 
-#### Cosine distance
+- Cosine distance
 
-<CodeBlock shouldWrap>
+    <CodeBlock shouldWrap>
 
-```sql
-CREATE INDEX ON documents USING hnsw(embedding ann_cos_ops) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
-SELECT id FROM documents ORDER BY embedding <=> array[3,3,3] LIMIT 1;
-```
+    ```sql
+    CREATE INDEX ON documents USING hnsw(embedding ann_cos_ops) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
+    SELECT id FROM documents ORDER BY embedding <=> array[3,3,3] LIMIT 1;
+    ```
 
-</CodeBlock>
+- Manhattan distance
 
-#### Manhattan distance
+    <CodeBlock shouldWrap>
 
-<CodeBlock shouldWrap>
+    ```sql
+    CREATE INDEX ON documents USING hnsw(embedding ann_manhattan_ops) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
+    SELECT id FROM documents ORDER BY embedding <~> array[3,3,3] LIMIT 1;
+    ```
 
-```sql
-CREATE INDEX ON documents USING hnsw(embedding ann_manhattan_ops) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
-SELECT id FROM documents ORDER BY embedding <~> array[3,3,3] LIMIT 1;
-```
-
-</CodeBlock>
+    </CodeBlock>
 
 If you have an existing `pg_embedding` installation and want to upgrade to the new version,  see [Upgrade to pg_embedding with on-disk indexes](/docs/extensions/pg_embedding#upgrade-to-pgembedding-for-on-disk-indexes) for instructions.
 
