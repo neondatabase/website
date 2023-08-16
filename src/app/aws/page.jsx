@@ -1,4 +1,5 @@
 import Hero from 'components/pages/aws/hero';
+import Cli from 'components/pages/aws/hero/cli';
 import Features from 'components/pages/aws/hero/features';
 import Layout from 'components/shared/layout';
 
@@ -11,6 +12,7 @@ const AWSPage = () => (
   >
     <Hero />
     <Features />
+    <Cli />
   </Layout>
 );
 
