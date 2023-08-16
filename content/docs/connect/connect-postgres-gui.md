@@ -27,13 +27,13 @@ Neon supports pooled and direct connections to the database. Use a pooled connec
 The connection string includes the role, password, hostname, and database name.
 
 ```text
-postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
-             ^                                   ^                         ^
-             |- <role>                           |- <hostname>             |- <database>
+postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb
+             ^                                 ^                             ^
+             |- <role>                         |- <hostname>                 |- <database>
 ```
 
 - role: `daniel`
-- hostname: `ep-mute-rain-952417.us-east-2.aws.neon.tech`
+- hostname: `ep-damp-cell-18160816.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
 Neon uses the default Postgres port, `5432`.

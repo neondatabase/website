@@ -19,7 +19,7 @@ const items = [
     image: '/images/pages/pricing/metrics-1-mobile.jpg',
     name: 'Compute time',
     priceFrom: 'From $0.0255 /hour',
-    details: 'Compute time is the amount of compute resources used per hour.',
+    details: 'Compute time is the amount of compute resources used per hour. See entry-level compute size prices below.',
     prices: [
       {
         name: 'US East (N. Virginia)',
