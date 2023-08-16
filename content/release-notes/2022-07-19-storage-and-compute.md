@@ -1,4 +1,4 @@
-### Improvements and fixes
+### Fixes & improvements
 
 - Compute: Enabled the use of the `CREATE EXTENSION` statement for users that are not database owners.
 - Compute: Updated the Postgres version to 14.4.

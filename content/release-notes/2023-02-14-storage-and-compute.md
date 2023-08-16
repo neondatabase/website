@@ -1,4 +1,4 @@
-### Improvements and fixes
+### Fixes & improvements
 
 - Compute: Added support for the Postgres `pgvector`, `plls` and `plcoffee` extensions. For more information about Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
 - Pageserver: Added an experimental feature that automatically evicts layer files from Pageservers to optimize local storage space usage. When enabled for a project, Pageservers periodically check the access timestamps of the project's layer files. If the most recent layer file access is further in the past than a configurable threshold, the Pageserver removes the layer file from local storage. The authoritative copy of the layer file remains in S3. A Pageserver can download a layer file from S3 on-demand if it is needed again, to reconstruct a page version for a client request, for example.

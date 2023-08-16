@@ -1,4 +1,4 @@
-### Improvements and fixes
+### Fixes & improvements
 
 - Pageserver: Improved the check for unexpected trailing data when importing a basebackup, which is tarball with files required to bootstrap a compute node.
 - Pageserver: Separated the management and `libpq` configuration, making it possible to enable authentication for only the management HTTP API or the Compute API.

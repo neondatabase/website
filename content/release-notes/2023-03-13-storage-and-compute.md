@@ -1,4 +1,4 @@
-### Improvements and fixes
+### Fixes & improvements
 
 - Autoscaling: Added support for scaling Neon's local file cache size when scaling a virtual machine.
 - Compute: Released a new `pg_tiktoken` Postgres extension, created by the Neon engineering team. The  extension is a wrapper for [OpenAI’s tokenizer](https://github.com/openai/tiktoken). It provides fast and efficient tokenization of data stored in a Postgres database.

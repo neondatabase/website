@@ -1,4 +1,4 @@
-### Improvements and fixes
+### Fixes & improvements
 
 - Compute: Added support for the Postgres `rum` and `pgTAP` extensions. For more information about Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions/).
 - Pageserver: A system metric that monitors physical data size overflowed when a garbage collection operation was performed on an evicted data layer.

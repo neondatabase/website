@@ -1,4 +1,4 @@
-### Improvements and fixes
+### Fixes & improvements
 
 - Compute: Added support for a future implementation of sequential scan prefetch, which improves I/O performance for operations such as table scans.
 - Compute: Moved the backpressure throttling algorithm to the Neon extension to minimize changes to the Neon Postgres core code, and added a `backpressure_throttling_time` function that returns the total time spent throttling since the system was started.

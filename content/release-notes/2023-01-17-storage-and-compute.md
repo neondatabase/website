@@ -13,7 +13,7 @@ Added support for several Postgres extensions. Newly supported extensions includ
   
 For more information about Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
 
-### Improvements and fixes
+### Fixes & improvements
 
 - Compute: Updated the list of Postgres client libraries and runtimes that Neon tests for connection support. The `pg8000` Python Postgres driver, version 1.29.3 and higher, now supports connecting to Neon.
 - Compute: Added statistics to `EXPLAIN` that show prefetch hits and misses for sequential scans.

@@ -2,7 +2,7 @@
 
 Added support for the Postgres `unit` extension. For more information about Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
 
-### Improvements and fixes
+### Fixes & improvements
 
 - Compute: Removed logic that updated roles each time a Neon compute instance was restarted. Roles were updated on each restart to address a password-related backward compatibility issue that is no longer relevant.
 - Pageserver: Reimplemented the layer map used to track the data layers in a branch. The layer map now uses an immutable binary search tree (BST) data structure, which improves data layer lookup performance over the previous R-tree implementation. The data required to reconstruct page versions is stored as data layers in Neon Pageservers.

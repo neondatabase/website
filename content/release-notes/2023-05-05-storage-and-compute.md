@@ -1,4 +1,4 @@
-### Improvements and fixes
+### Fixes & improvements
 
 - Pageserver: Added WAL receiver context information for `Timed out while waiting for WAL record` errors. The additional information is used for diagnostic purposes.
 - Safekeeper, Pageserver: Added Safekeeper and Pageserver metrics that count the number of received queries, broker messages, removed WAL segments, and connection switch events.

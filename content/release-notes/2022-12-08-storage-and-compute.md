@@ -1,4 +1,4 @@
-### Improvements and fixes
+### Fixes & improvements
 
 - Compute: Added support for sequential scan prefetch, which reduces round trips between Computes and Pageservers. Sequential scan prefetch allows fetching numerous pages at once instead of one by one, improving I/O performance for operations such as table scans.
 - Compute: Added support for the `pg_prewarm` Postgres extension, which utilizes the above-mentioned sequential scan prefetch feature. The `pg_prewarm` extension provides a convenient way to load data into the Postgres buffer cache after a cold start. For information about Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
