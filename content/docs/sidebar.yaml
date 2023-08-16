@@ -114,7 +114,7 @@
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
             - title: Branch refresh with the Neon API
-              slug: guides/branching-github-actions
+              slug: guides/branching-refresh
         - title: Project sharing
           slug: guides/project-sharing-guide
         - title: Read replicas
