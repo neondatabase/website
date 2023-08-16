@@ -56,10 +56,7 @@ const CodeBlock = ({
   const highlightedLines = parseHighlightRanges(highlight);
 
   return (
-    <Tag
-      className={clsx('code-block group relative', { 'code-wrap': shouldWrap }, className)}
-      {...otherProps}
-    >
+    <Tag className={clsx('group relative', { 'code-wrap': shouldWrap }, className)} {...otherProps}>
       <SyntaxHighlighter
         language={snippetLanguage}
         useInlineStyles={false}
