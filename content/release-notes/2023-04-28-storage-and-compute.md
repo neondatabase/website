@@ -1,6 +1,6 @@
 ### Support for the US East (N. Virginia) region
 
-- Compute: Added support for the `US East (N. Virginia) — aws-us-east-1` region. For more information about Neon's region support, see [Regions](/docs/introduction/regions).
+Added support for the `US East (N. Virginia) — aws-us-east-1` region. For more information about Neon's region support, see [Regions](/docs/introduction/regions).
 
 ### Postgres extension support
 
