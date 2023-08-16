@@ -1,5 +1,6 @@
 ### Improvements and fixes
 
+- Autoscaling: Added support for scaling Neon's local file cache size when scaling a virtual machine.
 - Compute: Released a new `pg_tiktoken` Postgres extension, created by the Neon engineering team. The  extension is a wrapper for [OpenAI’s tokenizer](https://github.com/openai/tiktoken). It provides fast and efficient tokenization of data stored in a Postgres database.
   The extension supports two functions:
 
@@ -10,4 +11,3 @@
 - Compute: Added support for the Postgres `prefix`, `hll` and `plpgsql_check` extensions. For more information about Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions/).
 - Compute, Pageserver, Safekeeper: Added support for RS384 and RS512 JWT tokens, used to securely transmit information as JSON objects.
 - Pageserver: Removed the block cursor cache, which provided little performance benefit and would hold page references that caused deadlocks.
-- Autoscaling: Added support for scaling Neon's local file cache size when scaling a virtual machine.

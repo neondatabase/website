@@ -4,8 +4,8 @@ Added support for the Postgres `postgis-sfcgal` extension. For more information 
 
 ### Improvements and fixes
 
-- Compute: Added support for [International Components for Unicode (ICU)](https://icu.unicode.org/), which permits defining collation objects that use ICU as the collation provider. For example:
+Compute: Added support for [International Components for Unicode (ICU)](https://icu.unicode.org/), which permits defining collation objects that use ICU as the collation provider. For example:
 
-    ```sql
-    CREATE COLLATION german (provider = icu, locale = 'de');
-    ```
+```sql
+CREATE COLLATION german (provider = icu, locale = 'de');
+```
