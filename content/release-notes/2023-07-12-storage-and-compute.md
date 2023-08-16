@@ -1,7 +1,7 @@
 ### Graph-based approximate nearest neighbor search in Postgres
 
 Neon is pleased to announce the release of our new [pg_embedding](https://neon.tech/docs/extensions/pg_embedding#pgembedding-extension-github-repository) extension, which enables using the Hierarchical Navigable Small World (HNSW) algorithm for graph-based approximate nearest neighbor search in Postgres and [LangChain](https://python.langchain.com/docs/modules/data_connection/vectorstores/integrations/pgembedding).
-![pg_embedding commands](/docs/pg_embedding.png)
+![pg_embedding commands](/docs/relnotes/pg_embedding.png)
 
 The `pg_embedding` extension increases speed by up to 20x for 99% accuracy for approximate nearest neighbor search compared to `pgvector`.
 
