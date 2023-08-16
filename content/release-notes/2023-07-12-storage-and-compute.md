@@ -9,4 +9,4 @@ Implementing `pg_embedding` in your application involves running a few simple SQ
 
 ### Improvements and fixes
 
-- Proxy: The wake-up logic for compute nodes was updated to reduce the number of errors returned to clients attempting to connect to Neon. Wake-up logic now supports quicker retries and will skip a connection attempt if failure is expected. Additionally, a 100ms sleep interval and IO error handling were introduced to manage scenarios in which compute nodes are not yet available as they wait for a Kubernetes DNS to be propagated.
+Proxy: The wake-up logic for compute nodes was updated to reduce the number of errors returned to clients attempting to connect to Neon. Wake-up logic now supports quicker retries and will skip a connection attempt if failure is expected. Additionally, a 100ms sleep interval and IO error handling were introduced to manage scenarios in which compute nodes are not yet available as they wait for a Kubernetes DNS to be propagated.
