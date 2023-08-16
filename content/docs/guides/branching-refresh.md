@@ -213,7 +213,7 @@ curl --request DELETE \
 
 ## Branch refresh script
 
-The following bash script performs the branch refresh described above.
+The following bash script performs the branch refresh described above. The script includes short sleeps between API calls to allow enough time for operations to complete. The sleeps could be replaced by API calls that poll for operation status (see [Poll operation status](/docs/manage/operations#poll-operation-status)).
 
 1. Create the script:
 
