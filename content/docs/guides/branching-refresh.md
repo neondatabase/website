@@ -1,69 +1,24 @@
 ---
-title: Branching — Refresh a branch
+title: Refresh a branch
 subtitle: Refresh a branch using the Neon API
 enableTableOfContents: true
 ---
 
-This guide describes how you can refresh a Neon branch using the Neon API.
+This guide describes how to refresh a Neon branch using the Neon API.
 
-When you create a branch in Neon, you get a copy-on-write clone that reflects the current state of the parent branch, but what do you do if your branch has become stale? For example, changes have been made to the parent branch that you would like reflected in your working branch, or your branch is about to age out of the point-in-time restore window (the history that is shared with the parent branch), which will result in additional storage consumption. Ideally, you want to refresh your branch but not the compute endpoint, whose connection details are already configured in your application or workflow.
+When you create a branch in Neon, you get a copy-on-write clone of your data that reflects the current state of the parent branch, but what can you do if your branch becomes stale? For example, changes are made to the parent branch that you would like reflected in your development branch, or your branch is about to age out of the point-in-time restore window (the history that is shared with the parent branch), which will take up additional storage. Ideally, you want to refresh your branch but not the compute endpoint, whose connection details are already configured in your application or workflow.
 
-Currently, there is not a single command to update a branch, but you can refresh a branch using a combination of Neon API calls. The procedure outline below does the following:
+Currently, there isn't a single command that refreshes branch, but you can do so using a combination of Neon API calls. The procedure outline below does the following:
 
-1. Gets the compute endpoint details for your current branch
-2. Creates a new up-to-date branch without a compute endpoint
-3. Moves the compute endpoint from your current branch to the new branch
-4. Deletes the old branch
+1. Creates a new up-to-date branch without a compute endpoint
+2. Moves the compute endpoint from your current branch to the new branch
+3. Deletes the old branch
 
 The API calls that perform these steps can be combined into a single script, which is provided at the end of the guide.
 
 <Admonition type="important">
 This method does not preserve or merge data or schema changes on your current branch to the new branch. This type of merge is not supported, although you can migrate schema changes from one branch to another manually or using a third part tool that supports migrations, but this is outside the scope of this guide.
 </Admonition>
-
-## Get the compute endpoint details for your current branch
-
-The [Get branch endpoints](https://api-docs.neon.tech/reference/getprojectendpoint) API request returns details about a branch;'s endpoints. Required parameters are the `project_id` and `branch_id`. The `id` of compute endpoint for your current branch is needed in order to move it to your new branch in a later step. An endpoint `id` has an `ep-` prefix. In the response body below, the endpoint_id is `ep-jolly-tooth-67553439`.
-
-```curl
-curl --request GET \
-     --url https://console.neon.tech/api/v2/projects/purple-bar-16090093/branches/br-blue-boat-85552220/endpoints \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
-```
-
-<details>
-<summary>Response body</summary>
-```json
-{
-  "endpoints": [
-    {
-      "host": "ep-jolly-tooth-67553439.ap-southeast-1.aws.neon.tech",
-      "id": "ep-jolly-tooth-67553439",
-      "project_id": "purple-bar-16090093",
-      "branch_id": "br-blue-boat-85552220",
-      "autoscaling_limit_min_cu": 0.25,
-      "autoscaling_limit_max_cu": 0.25,
-      "region_id": "aws-ap-southeast-1",
-      "type": "read_write",
-      "current_state": "idle",
-      "settings": {},
-      "pooler_enabled": false,
-      "pooler_mode": "transaction",
-      "disabled": false,
-      "passwordless_access": true,
-      "last_active": "2000-01-01T00:00:00Z",
-      "creation_source": "console",
-      "created_at": "2023-08-14T19:07:21Z",
-      "updated_at": "2023-08-15T16:54:52Z",
-      "proxy_host": "ap-southeast-1.aws.neon.tech",
-      "suspend_timeout_seconds": 300,
-      "provisioner": "k8s-pod"
-    }
-  ]
-}
-```
-</details>
 
 ## Create a new up-to-date branch without a compute endpoint
 
