@@ -1,7 +1,7 @@
 ### Database and role management via SQL
 
     Neon now supports database and role management via SQL. You can now manage databases and roles from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client, such as [psql](/docs/connect/query-with-psql-editor). Previously, databases and roles could only be managed in the Neon Console.
-    ![Create database via SQL](docs/relnotes/create_database_sql.png)
+    ![Create database via SQL](/docs/relnotes/create_database_sql.png)
 
     With this change, you can grant and revoke privileges for Postgres roles as you would in a stand-alone Postgres installation.
 
