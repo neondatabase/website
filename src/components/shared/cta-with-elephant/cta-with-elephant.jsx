@@ -31,7 +31,7 @@ const CTAWithElephant = ({
       size="medium"
       className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
     >
-      <div className="relative z-10 col-span-4 col-start-2 flex flex-col items-start pb-[164px] pt-16 2xl:col-span-5 2xl:col-start-2 2xl:pb-36 xl:pb-[78px] xl:pt-20 lg:col-span-6 lg:pb-[54px] md:col-span-full md:text-center">
+      <div className="relative z-10 col-span-4 col-start-2 flex flex-col items-start pb-[164px] pt-16 2xl:col-span-5 2xl:col-start-2 2xl:pb-36 xl:pb-[78px] xl:pt-20 lg:col-span-6 lg:pb-[54px] md:col-span-full md:items-center md:text-center">
         {label && (
           <GradientLabel className="mb-5" theme={labelTheme}>
             {label}
