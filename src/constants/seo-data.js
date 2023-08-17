@@ -66,11 +66,11 @@ export default {
     imagePath: '/images/social-previews/ai.jpg',
     pathname: LINKS.ai,
   },
-  aws: {
+  awsIsrael: {
     title: 'AWS Launches in Israel — Neon',
     description: 'Neon is delighted to support the 2023 launch of AWS in Israel.',
     imagePath: '/images/social-previews/aws-israel.jpg',
-    pathname: LINKS.aws,
+    pathname: LINKS.awsIsrael,
   },
 };
 

@@ -1,8 +1,8 @@
-import Cli from 'components/pages/aws/cli';
-import Features from 'components/pages/aws/features';
-import Hero from 'components/pages/aws/hero';
-import Partners from 'components/pages/aws/partners';
-import Regions from 'components/pages/aws/regions';
+import Cli from 'components/pages/aws-israel/cli';
+import Features from 'components/pages/aws-israel/features';
+import Hero from 'components/pages/aws-israel/hero';
+import Partners from 'components/pages/aws-israel/partners';
+import Regions from 'components/pages/aws-israel/regions';
 import CTAWithElephant from 'components/shared/cta-with-elephant';
 import Layout from 'components/shared/layout';
 import Testimonial from 'components/shared/testimonial';
@@ -10,7 +10,7 @@ import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
-export const metadata = getMetadata(SEO_DATA.aws);
+export const metadata = getMetadata(SEO_DATA.awsIsrael);
 
 const AWSPage = () => (
   <Layout
