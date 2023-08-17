@@ -2,6 +2,8 @@
 title: Branching — Point-in-time restore
 subtitle: Restore your data to previous state using Neon's branching feature
 enableTableOfContents: true
+redirectFrom:
+  - /docs/tutorial/data-recovery
 ---
 
 Neon retains a 7-day history of data changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined retention period. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
