@@ -1,6 +1,6 @@
 ---
 title: Refresh a branch
-subtitle: Learn how to refresh a Neon branch using the Neon API.
+subtitle: Learn how to refresh a Neon branch using the Neon API
 enableTableOfContents: true
 ---
 
