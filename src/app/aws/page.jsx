@@ -7,6 +7,10 @@ import CTAWithElephant from 'components/shared/cta-with-elephant';
 import Layout from 'components/shared/layout';
 import Testimonial from 'components/shared/testimonial';
 import LINKS from 'constants/links';
+import SEO_DATA from 'constants/seo-data';
+import getMetadata from 'utils/get-metadata';
+
+export const metadata = getMetadata(SEO_DATA.aws);
 
 const AWSPage = () => (
   <Layout
