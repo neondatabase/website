@@ -3,8 +3,10 @@ import Features from 'components/pages/aws/features';
 import Hero from 'components/pages/aws/hero';
 import Partners from 'components/pages/aws/partners';
 import Regions from 'components/pages/aws/regions';
+import CTAWithElephant from 'components/shared/cta-with-elephant';
 import Layout from 'components/shared/layout';
 import Testimonial from 'components/shared/testimonial';
+import LINKS from 'constants/links';
 
 const AWSPage = () => (
   <Layout
@@ -24,6 +26,18 @@ const AWSPage = () => (
       position="Infrastructure Engineer at Replit"
     />
     <Partners />
+    <CTAWithElephant
+      className="mt-40"
+      label="Coming soon"
+      labelTheme="gray"
+      title="Try out Neon in Israel region"
+      description="We are delighted to include the new Tel Aviv AWS region in the list of regions where Neon is available."
+      buttonText="Sign up"
+      buttonLink={LINKS.signup}
+      linkText="Learn more about AWS"
+      // @TODO: add link
+      linkUrl="/"
+    />
   </Layout>
 );
 
