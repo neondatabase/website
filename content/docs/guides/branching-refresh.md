@@ -4,9 +4,9 @@ subtitle: Learn how to refresh a Neon branch using the Neon API.
 enableTableOfContents: true
 ---
 
-When you create a branch in Neon, you get a copy-on-write clone of your data that reflects the current state of the parent branch, but what do you do if your branch becomes stale? For example, changes are made to the parent branch that you would like reflected in your development branch, or your branch has aged out of the point-in-time restore window (the history that is shared with the parent branch), using additional storage. Ideally, you want to refresh your branch but not the branch's compute endpoint, whose connection details are already configured in your application or toolchain.
+When you create a branch in Neon, you get a copy-on-write clone that reflects the current state of the parent branch, but what do you do if your branch becomes stale? For example, changes are made to the parent branch that you would like reflected in your development branch, or your branch has aged out of the point-in-time restore window (the history that is shared with the parent branch) and is now taking up storage space. Ideally, you want to refresh your branch but not the branch's compute endpoint, whose connection details are already configured in your application or toolchain.
 
-Currently, there isn't a single command that refreshes branch, but you can do so using a combination of Neon API calls. The procedure described below performs the following steps:
+Currently, there isn't a single command that refreshes a branch, but you can do so using a combination of Neon API calls. The procedure described below performs the following steps:
 
 1. Creates a new up-to-date branch without a compute endpoint
 2. Moves the compute endpoint from your current branch to the new branch
