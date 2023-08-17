@@ -4,7 +4,7 @@ subtitle: Learn how to refresh a Neon branch using the Neon API.
 enableTableOfContents: true
 ---
 
-When you create a branch in Neon, you get a copy-on-write clone that reflects the current state of the parent branch, but what do you do if your branch becomes stale? For example, changes are made to the parent branch that you would like reflected in your development branch, or your branch has aged out of the point-in-time restore window (the history that is shared with the parent branch) and is now taking up storage space. Ideally, you want to refresh your branch but not the branch's compute endpoint, whose connection details are already configured in your application or toolchain.
+When you create a branch in Neon, you get a copy-on-write clone that reflects the current state of the parent branch, but what do you do if your branch becomes stale? For example, changes are made to the parent branch that you would like reflected in your development branch, or your branch has aged out of the point-in-time restore window (the history shared with the parent branch) and is now taking up storage space. Ideally, you want to refresh your branch but not the branch's compute endpoint, whose connection details are already configured in your application or toolchain.
 
 Currently, there isn't a single command that refreshes a branch, but you can do so using a combination of Neon API calls. The procedure described below performs the following steps:
 
@@ -112,6 +112,8 @@ The response body includes the `id` of your new branch. You will need it in the 
 
 The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) API call moves the compute endpoint from your current branch to the new branch. Required parameters are the `project_id` and `endpoint_id` of your current branch, and the `branch_id` of your new branch. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
+<CodeBlock shouldWrap>
+
 ```curl
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/%20purple-bar-16090093/endpoints/ep-silent-sun-55413049 \
@@ -126,6 +128,8 @@ curl --request PATCH \
 }
 ' |jq
 ```
+
+</CodeBlock>
 
 <details>
 <summary>Response body</summary>
@@ -163,12 +167,16 @@ curl --request PATCH \
 
 The [Delete branch](https://api-docs.neon.tech/reference/deleteprojectbranch) API call deletes the old branch. Leaving the old branch in your project would use up storage space. Required parameters are the `project_id` and `branch_id`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
+<CodeBlock shouldWrap>
+
 ```curl
 curl --request DELETE \
      --url https://console.neon.tech/api/v2/projects/purple-bar-16090093/branches/br-solitary-cake-99808753 \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' |jq
 ```
+
+</CodeBlock>
 
 <details>
 <summary>Response body</summary>
@@ -275,15 +283,23 @@ The script includes 5 second sleeps between API calls to allow time for operatio
 
 3. Run the script, proving the required input variables, which include the `project_id` of your Neon project, the `branch_id` of the current branch, the `endpoint_id` of the compute endpoint, and your Neon API key.
 
+    <CodeBlock shouldWrap>
+
     ```bash
     ./refresh_neon_branch.sh <project_id> <old_branch_id> <endpoint_id> <NEON_API_KEY>
     ```
 
+    </CodeBlock>
+
     For example:
+
+    <CodeBlock shouldWrap>
 
     ```bash
     ./refresh_neon_branch.sh purple-bar-16090093 br-steep-dew-64219206 ep-green-limit-22926758 <NEON_API_KEY>
     ```
+
+    </CodeBlock>
 
 <details>
 <summary>Command response</summary>
