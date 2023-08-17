@@ -13,7 +13,7 @@ The `pg_embedding` extension was updated on August 3, 2023 to add support for on
 This extension is based on [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw) implementation of HNSW
 the code for the current state-of-the-art billion-scale nearest neighbor search system<sup>[[1]](https://github.com/neondatabase/pg_embedding#references)</sup>.
 
-Neon also supports `pgvector` for vector similarity search. For information on which index to choose, refer to [Comparing pgvector and pg_embedding](#comparing-pgvector-and-pg_embedding).
+Neon also supports `pgvector` for vector similarity search. For information on which index to choose, refer to [Comparing vector search extensions](#comparing-vector-search-extensions).
 
 ## Using the pg_embedding extension
 
@@ -157,7 +157,7 @@ In the bottom layer, the algorithm continues navigating to the nearest neighbor 
 
 The key idea behind HNSW is that by starting the search at the top layer and moving down through each layer, the algorithm can quickly navigate to the area of the graph that contains the node that is most similar to the query vector. This makes the search process much faster than if it had to search through every node in the graph.
 
-## Comparing pgvector and pg_embedding
+## Comparing vector search extensions
 
 When determining which index to use, `pgvector` with an IVFFlat index or `pg_embedding` with an HNSW, it is helpful to compare the two indexes based on specific criteria, such as:
 
