@@ -1,6 +1,7 @@
 import Cli from 'components/pages/aws/cli';
 import Features from 'components/pages/aws/features';
 import Hero from 'components/pages/aws/hero';
+import Partners from 'components/pages/aws/partners';
 import Regions from 'components/pages/aws/regions';
 import Layout from 'components/shared/layout';
 import Testimonial from 'components/shared/testimonial';
@@ -22,6 +23,7 @@ const AWSPage = () => (
       name="Lincoln Bergeson"
       position="Infrastructure Engineer at Replit"
     />
+    <Partners />
   </Layout>
 );
 
