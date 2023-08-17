@@ -3,8 +3,8 @@
 import { usePathname } from 'next/navigation';
 
 import Link from 'components/shared/link';
-import LINKS from 'constants/links';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
+import pagesWithNoTopbar from 'utils/pages-with-no-topbar';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 // TODO: If you want to change the background color of the topbar, please update the themeColor in function getMetadata (src/utils/get-metadata.js) as well
@@ -12,7 +12,7 @@ import sendGtagEvent from 'utils/send-gtag-event';
 const TopBar = () => {
   const pathname = usePathname();
 
-  const isTopBarHidden = [LINKS.pricing, LINKS.partners, LINKS.ai].includes(pathname);
+  const isTopBarHidden = pagesWithNoTopbar.includes(pathname);
 
   return isTopBarHidden ? null : (
     <Link

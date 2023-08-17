@@ -29,4 +29,5 @@ export default {
   partners: '/partners',
   cliReference: '/docs/reference/neon-cli',
   ai: '/ai',
+  aws: '/aws',
 };
