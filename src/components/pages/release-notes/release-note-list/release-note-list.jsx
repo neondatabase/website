@@ -35,6 +35,7 @@ const ReleaseNoteList = ({ className, items }) => (
               className="mt-5 prose-h3:mt-[18px] prose-h3:text-lg"
               content={content}
               withoutAnchorHeading
+              isReleaseNote
             />
           </div>
         </article>

@@ -94,7 +94,7 @@ const ReleaseNotePage = async ({ currentSlug }) => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
-      <div className="col-span-7 -mx-10 flex flex-col 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
+      <div className="col-span-6 -mx-10 flex flex-col 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
         <Hero
           className="flex justify-center dark:bg-gray-new-8 dark:text-white lg:pt-16 md:py-10 sm:py-7"
           date={label}
