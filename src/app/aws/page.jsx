@@ -1,6 +1,7 @@
+import Cli from 'components/pages/aws/cli';
+import Features from 'components/pages/aws/features';
 import Hero from 'components/pages/aws/hero';
-import Cli from 'components/pages/aws/hero/cli';
-import Features from 'components/pages/aws/hero/features';
+import Regions from 'components/pages/aws/regions';
 import Layout from 'components/shared/layout';
 
 const AWSPage = () => (
@@ -13,6 +14,7 @@ const AWSPage = () => (
     <Hero />
     <Features />
     <Cli />
+    <Regions />
   </Layout>
 );
 
