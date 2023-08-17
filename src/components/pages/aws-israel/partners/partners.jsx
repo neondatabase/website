@@ -74,13 +74,13 @@ const logos = [
 ];
 
 const Partners = () => (
-  <section className="partners safe-paddings mt-40">
+  <section className="partners safe-paddings mt-40 xl:mt-[120px] lg:mt-28 md:mt-20">
     <Container className="grid grid-cols-12 gap-x-10" size="medium">
-      <div className="col-span-10 col-start-2 grid grid-cols-[auto,362px] items-center gap-x-[94px] rounded-2xl bg-gray-new-8 p-12">
-        <div className="flex flex-wrap gap-x-[38px] gap-y-10">
+      <div className="col-span-10 col-start-2 grid grid-cols-[auto,362px] items-center gap-x-[94px] rounded-2xl bg-gray-new-8 p-12 2xl:gap-x-20 xl:col-span-full xl:col-start-1 lt:grid-cols-1 lt:gap-y-10">
+        <div className="flex flex-wrap gap-x-[38px] gap-y-10 2xl:gap-x-8 2xl:gap-y-9 lt:order-1">
           {logos.map(({ logo, alt, width }, index) => (
             <img
-              className="flex h-9 w-auto"
+              className="h-9 w-auto 2xl:h-7 xl:h-8"
               src={logo}
               alt={alt}
               loading="lazy"
@@ -90,18 +90,17 @@ const Partners = () => (
             />
           ))}
         </div>
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start lt:max-w-lg">
           <GradientLabel>Apply now</GradientLabel>
-          <h2 className="mt-3 text-[52px] font-medium leading-none tracking-extra-tight">
+          <h2 className="mt-3 text-[52px] font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
             Become a Partner
           </h2>
           <p className="mt-4 text-lg font-light leading-snug">
             Unlock new revenue streams by partnering with Neon.{' '}
             <Link
-              className="tracking-extra-tight underline-offset-[5px]"
+              className="inline-flex tracking-extra-tight underline-offset-[5px]"
               theme="green-underlined"
               to={LINKS.partners}
-              size="sm"
             >
               Learn more
             </Link>{' '}

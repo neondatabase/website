@@ -24,15 +24,15 @@ const AWSPage = () => (
     <Cli />
     <Regions />
     <Testimonial
-      className="mt-40"
+      className="mt-40 xl:mt-[120px] lg:mt-28 md:mt-20"
       quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer."
       name="Lincoln Bergeson"
       position="Infrastructure Engineer at Replit"
     />
     <Partners />
     <CTAWithElephant
-      className="mt-[136px]"
-      buttonClassName="px-[78px]"
+      className="mt-[136px] xl:mt-[104px] lg:mt-20 md:mt-16"
+      buttonClassName="px-[78px] xl:px-14"
       label="Coming soon"
       labelTheme="gray"
       title="Try out Neon<br/> in Israel region"

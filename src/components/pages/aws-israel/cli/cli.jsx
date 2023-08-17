@@ -9,10 +9,10 @@ const code = `  > neonctl connection-string <branch> --project-id=<your-project-
 `;
 
 const Cli = () => (
-  <section className="cli safe-paddings mt-48">
+  <section className="cli safe-paddings mt-48 xl:mt-[124px] lg:mt-28 md:mt-20">
     <Container className="dark flex flex-col items-center" size="medium">
       <GradientLabel>Neon CLI</GradientLabel>
-      <h2 className="mt-5 max-w-2xl text-center text-5xl font-medium leading-none tracking-extra-tight">
+      <h2 className="mt-5 max-w-2xl text-center text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:mt-3 md:text-[32px]">
         Neon reduces database complexity to a URL
       </h2>
       <p className="mt-3 text-center text-lg font-light leading-snug">
