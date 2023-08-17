@@ -19,6 +19,8 @@
           slug: introduction/auto-suspend
         - title: Branching
           slug: introduction/branching
+        - title: Point-in-time restore
+          slug: introduction/point-in-time-restore
         - title: Read replicas
           slug: introduction/read-replicas
     - title: Regions
@@ -105,7 +107,7 @@
           slug: guides/auto-suspend-guide
         - title: Branching
           items: 
-            - title: Point-in-time restore
+            - title: Branching — Point-in-time restore
               slug: guides/branching-pitr
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
