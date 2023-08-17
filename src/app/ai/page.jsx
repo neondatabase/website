@@ -69,6 +69,7 @@ const AIPage = () => (
     <Testimonials />
     <CTAWithElephant
       className="mt-[180px] 2xl:mt-40 xl:mt-[125px] lg:mt-16"
+      buttonClassName="px-14 xl:px-10 lg:px-9 sm:px-14"
       title="Build your next AI app now with Neon"
       description="Neon offers flexible usage and volume-based plans. Contact our Sales team to learn more."
       buttonText="Contact Sales"

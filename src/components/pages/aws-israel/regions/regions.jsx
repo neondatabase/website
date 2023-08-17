@@ -13,7 +13,7 @@ const Regions = () => (
         <h2 className="mt-5 text-5xl font-medium leading-none tracking-extra-tight">
           Database that is close to your users
         </h2>
-        <p className="mt-3 text-lg font-light leading-snug">
+        <p className="mt-3 max-w-[440px] text-lg font-light leading-snug">
           Neon supports multiple regions worldwide to create the fastest Postgres experience.
         </p>
       </div>

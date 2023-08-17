@@ -26,7 +26,7 @@ const Hero = () => (
         to={LINKS.signup}
         isAnimated
       >
-        Signup
+        Sign Up
       </AnimatedButton>
     </Container>
   </section>

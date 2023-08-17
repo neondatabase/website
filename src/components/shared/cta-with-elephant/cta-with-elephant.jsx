@@ -13,6 +13,7 @@ import illustration from './images/cta-elephant.jpg';
 
 const CTAWithElephant = ({
   className = '',
+  buttonClassName = '',
   label = null,
   labelTheme = 'green',
   title,
@@ -40,15 +41,17 @@ const CTAWithElephant = ({
           className="max-w-[500px] xl:max-w-[400px] lg:max-w-[350px] md:mx-auto"
           tag="h2"
           size="2sm"
-        >
-          {title}
-        </Heading>
+          dangerouslySetInnerHTML={{ __html: title }}
+        />
         <p className="mt-3 text-lg font-light leading-snug xl:text-base lg:max-w-lg md:mx-auto md:max-w-md">
           {description}
         </p>
         <div className="mt-9 flex items-center gap-x-8 xl:mt-7 lg:gap-x-4 md:justify-center sm:mt-6 sm:flex-col sm:gap-y-5">
           <AnimatedButton
-            className="inline-flex px-14 py-5 text-lg tracking-extra-tight hover:bg-[#00FFAA] xl:px-10 xl:py-[17px] lg:px-9 lg:text-base sm:px-14 sm:text-lg"
+            className={clsx(
+              'inline-flex py-5 text-lg tracking-extra-tight hover:bg-[#00FFAA] xl:py-[17px] lg:text-base sm:text-lg',
+              buttonClassName
+            )}
             spreadClassName="sm:h-[105px]"
             theme="primary"
             to={buttonUrl}
@@ -86,6 +89,7 @@ const CTAWithElephant = ({
 
 CTAWithElephant.propTypes = {
   className: PropTypes.string,
+  buttonClassName: PropTypes.string,
   label: PropTypes.string,
   labelTheme: PropTypes.oneOf(['green', 'gray']),
   title: PropTypes.string.isRequired,
