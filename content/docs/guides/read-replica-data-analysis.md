@@ -4,9 +4,9 @@ subtitle: Leverage read replicas for running data-intensive queries
 enableTableOfContents: true
 ---
 
-Neon's database read replica feature allow you to instantly create a dedicated read-only compute instance for running data-intensive analytics and reporting queries, thereby avoiding any disruption or performance degradation on your production database.
+With Neon's read replica feature, you can instantly create a dedicated read-only compute instance for running data-intensive analytics and reporting queries. This allows you to avoid disruption or performance degradation on your production database.
 
-A read replica reads data from the same source as you read-write compute instance. There's no data replication to wait for, so spinning up a read replica is a near-instant process.
+A read replica reads data from the same source as you read-write compute instance. There's no data replication, so spinning up a read replica is a near-instant process.
 
 As an example, suppose you have a sales table in your production database. The table and data might look something like this:
 
@@ -27,9 +27,9 @@ INSERT INTO sales (product_id, sale_amount, sale_date) VALUES
 ...
 ```
 
-You want to find the total sale amount for each product in the past year, but due to the large number of products and sales, you know it's a costly query that could impact normal operations on your production system.
+You want to find the total sale amount for each product in the past year, but due to the large number of products and sales, you know it's a costly query that could impact performance on your production system.
 
-This guide walks you through creating a read replica, which you can use to run the data-intensive query without affecting your production system.
+This guide walks you through creating a read replica, connecting to it, running your query, and optionally deleting the read replica when finished.
 
 ## Create a read replica
 
