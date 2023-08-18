@@ -39,7 +39,6 @@ export default function getMetadata({
     viewport: {
       width: 'device-width',
       initialScale: 1,
-      shrinkToFit: 'no',
       viewportFit: 'cover',
     },
     alternates: {
