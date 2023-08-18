@@ -1,4 +1,4 @@
-## Postgres version update
+### Postgres version update
 
 Support Postgres versions were updated to 14.9 and 15.4, respectively.
 
