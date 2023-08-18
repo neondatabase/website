@@ -1,6 +1,6 @@
 ### Postgres version update
 
-Support Postgres versions were updated to 14.9 and 15.4, respectively.
+Supported Postgres versions were updated to 14.9 and 15.4, respectively.
 
 ### BYPASSRLS added to the neon_superuser role
 
