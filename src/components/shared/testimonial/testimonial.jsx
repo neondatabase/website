@@ -6,8 +6,8 @@ import Container from 'components/shared/container/container';
 import QuoteIcon from './images/quote.inline.svg';
 
 const Testimonial = ({ className = '', quote, name, position }) => (
-  <figure className={clsx('testimonial safe-paddings', className)}>
-    <Container className="flex flex-col items-center text-center" size="xs">
+  <div className={clsx('testimonial safe-paddings', className)}>
+    <Container className="flex flex-col items-center text-center" size="xs" as="figure">
       <QuoteIcon
         className="h-[72px] w-[72px] xl:h-16 xl:w-16 md:h-12 md:w-12"
         width={72}
@@ -23,7 +23,7 @@ const Testimonial = ({ className = '', quote, name, position }) => (
         {name} <cite className="font-light not-italic text-gray-new-70">– {position}</cite>
       </figcaption>
     </Container>
-  </figure>
+  </div>
 );
 
 Testimonial.propTypes = {
