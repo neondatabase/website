@@ -40,8 +40,8 @@ const AWSPage = () => (
       buttonText="Sign up"
       buttonUrl={LINKS.signup}
       linkText="Learn more about AWS"
-      // @TODO: add link
-      linkUrl="/"
+      linkUrl="https://aws.amazon.com/local/israel/"
+      linkTarget="_blank"
     />
   </Layout>
 );
