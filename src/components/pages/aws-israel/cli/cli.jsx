@@ -18,7 +18,7 @@ const Cli = () => (
       <p className="mt-3 text-center text-lg font-light leading-snug xl:text-base md:max-w-xs">
         Postgres is available at your fingertips with advanced Neon CLI features.
       </p>
-      <div className="mt-11 w-full max-w-[716px] rounded-md border border-gray-new-15 px-5 py-[22px] lg:mt-8">
+      <div className="mt-11 w-full max-w-[716px] rounded-md border border-gray-new-15 px-5 py-6 lg:mt-8">
         <CodeBlock
           className="code-block text-[15px]"
           language="bash"
