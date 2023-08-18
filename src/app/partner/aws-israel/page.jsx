@@ -38,7 +38,7 @@ const AWSPage = () => (
       title="Try out Neon<br/> in Israel region"
       description="We are delighted to include the new Tel Aviv AWS region in the list of regions where Neon is available."
       buttonText="Sign up"
-      buttonLink={LINKS.signup}
+      buttonUrl={LINKS.signup}
       linkText="Learn more about AWS"
       // @TODO: add link
       linkUrl="/"
