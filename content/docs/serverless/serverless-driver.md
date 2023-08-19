@@ -6,7 +6,7 @@ subtitle: Learn how to connect to Neon from serverless and edge environments ove
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP.
 
-The driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package you may already be familiar with.
+You can use the driver as a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package you may already be familiar with. See [Using node-postgres Pool or Client](#using-node-postgres-pool-or-client).
 
 The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
 
@@ -30,7 +30,7 @@ DATABASE_URL=postgres://<user>:<password>@<endpoint>.<region>.aws.neon.tech/<dbn
 
 ## How to use the driver
 
-To use the Neon serverless driver, you must use the driver's `neon` function. You can use raw SQL queries or [Drizzle-ORM](https://orm.drizzle.team/docs/installation-and-db-connection/postgresql/neon) for type safety. For example: -->
+To use the Neon serverless driver over HTTP, you must use the driver's `neon` function. You can use raw SQL queries or [Drizzle-ORM](https://orm.drizzle.team/docs/installation-and-db-connection/postgresql/neon) for type safety.
 
 <CodeTabs labels={["Node.js",  "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
@@ -56,6 +56,7 @@ export default async () => {
   return new Response(JSON.stringify({ post: onePost }));
 }
 ```
+
 ```js
 import { neon } from '@neondatabase/serverless';
 
@@ -87,9 +88,9 @@ export default async function handler(
 
 </CodeTabs>
 
-### Use experimental caching
+### Use experimental connection caching
 
-Connection caching allows Neon proxy to find the compute node attached to your database quicker. Connection caching is experimental and on opt-in only. You can try it by setting `fetchConnectionCache` to true in the `neonConfig` object.
+Connection caching allows the Neon proxy to find the compute node attached to your database more quickly. Connection caching is experimental. You can enable it by setting `fetchConnectionCache` to `true` in the `neonConfig` object.
 
 ```ts
 import { neon, neonConfig } from '@neondatabase/serverless';
@@ -100,7 +101,7 @@ const sql = neon(process.env.DATABASE_URL!);
 
 ## Using node-postgres Pool or Client
 
-You can use the driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
+You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
 
 <CodeTabs labels={["Node.js","Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
@@ -125,6 +126,7 @@ export default async () => {
   return new Response(JSON.stringify({ post: onePost }));
 }
 ```
+
 ```js
 import { Pool } from '@neondatabase/serverless';
 
@@ -144,6 +146,7 @@ export const config = {
   runtime: 'edge',
 };
 ```
+
 ```ts
 import { Pool } from '@neondatabase/serverless';
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -161,44 +164,72 @@ export default async function handler(
 
 </CodeTabs>
 
-## When should you use Pool and neon
+## When to use the neon function vs Pool or Client
 
-### Use the driver with neon
+The Neon serverless driver supports the `neon` function for queries over HTTP, and `Pool` and `Client` constructors for querying over WebSockets.
 
-The Neon serverless driver supports querying over HTTP with the `neon` function and WebSockets using `Pool` or `Client`. Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single-shot queries such as the one shown below: 
+### The neon function
+
+Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single, non-interactive transactions. If you do not require sessions or transactions, consider using HTTP for faster response times.
+
+### neon function configuration options
+
+The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions` keys for customizing the return format of the query function. For usage information, see [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration).
+
+The `neon(...)` function also support issuing multiple queries at once in a single, non-interactive transaction using the `transaction()` function, which is exposed as a property on the query function. For example:
 
 ```js
-const post = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
+import { neon } from '@neondatabase/serverless';
+const sql = neon(process.env.DATABASE_URL);
+const showLatestN = 10;
+
+const [posts, tags] = await sql.transaction([
+  sql`SELECT * FROM posts ORDER BY posted_at DESC LIMIT ${showLatestN}`,
+  sql`SELECT * FROM tags`,
+]);
 ```
 
-If you use single-shot queries with no sessions or transactions, consider using HTTP for faster responses.
+The `transaction()` function supports the same return format keys as the ordinary query function — `arrayMode`, `fullResults`, and `fetchOptions` — plus three additional keys concerning transaction configuration:
 
-### Additional configuration options
+- `isolationMode`
 
-The `neon(...)` function has configuration options for customizing the return format of the query function. See [options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration) in the driver's GitHub repository for information about those options.
+  Selects a Postgres transaction isolation mode. If present, it must be one of: `ReadUncommitted`, `ReadCommitted`, `RepeatableRead` or `Serializable`.
 
-### Use the driver with Pool or Client
+- `readOnly`
+  
+  Ensures that a `READ ONLY` transaction is used to execute the queries passed.
 
-To use the Neon serverless driver over WebSockets, use either the `Pool` or `Client` constructor. These constructors provide session and transaction support, as well as `node-postgres` compatibility. The full API guide for the `Pool` and `Client` constructors can be found in the [node-postgres](https://node-postgres.com/) documentation.
+- `deferrable`
+
+  If true (and if `readOnly` is also true, and isolationMode is `Serializable`), this option ensures that a `DEFERRABLE` transaction is used to execute the queries passed.
+
+For more information, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
+
+### Pool or Client
+
+The `Pool` and `Client` constructors, which support querying over WebSockets, provide session and transaction support, as well as `node-postgres` compatibility. The API guide for the `Pool` and `Client` constructors can be found in the [node-postgres](https://node-postgres.com/) documentation.
 
 You should use the driver with `Pool` or `Client` in the following scenarios:
+
 - You already use `node-postgres` in your code base and would like to migrate to using `@neondatabase/serverless`.
-- Your backend service executes several queries per connection.
+- Your backend service uses sessions / interactive transactions with multiple queries per connection.
 
-### Configuration options for `Pool` and `Client`
+### Pool and Client configuration options
 
-There are additional configuration options that apply to `Pool` and `Client`. See [options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration) in the driver's GitHub repository for more information.
+For configuration options that apply to `Pool` and `Client`, see [options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration) in the driver's GitHub repository.
 
-## More examples
+## Example applications
 
 Neon provides an example application to help you get started with the Neon serverless driver. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
 
 ![UNESCO World Heritage sites app](/docs/relnotes/unesco_sites.png)
 
-There are different implementations of the application to choose from:
+There are different implementations of the application to choose from.
 
-- [Raw SQL + Vercel Edge Functions](https://github.com/neondatabase/neon-vercel-rawsql): Demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions.
-- [Raw SQL via https + Vercel Edge Functions](https://github.com/neondatabase/neon-vercel-http): Demonstrates Neon's serverless driver over HTTP on Vercel Edge Functions.
-- [Raw SQL + Cloudflare Workers](https://github.com/neondatabase/serverless-cfworker-demo): Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance. There is an accompanying blog post for this example. See [Edge-compatible Serverless Driver for Postgres](https://neon.tech/blog/serverless-driver-for-postgres).
-- [Kysely + Vercel Edge Functions](https://github.com/neondatabase/neon-vercel-kysely): Demonstrates using [kysely](https://github.com/koskimas/kysely) and [kysely-codegen](https://github.com/RobinBlomberg/kysely-codegen) with Neon's serverless driver on Vercel Edge Functions. Kysely is a type-safe and autocompletion-friendly typescript SQL query builder. `kysely-codegen` generates Kysely type definitions from your database.
-- [Zapatos + Vercel Edge Functions](https://github.com/neondatabase/neon-vercel-zapatos): Demonstrates using [Zapatos](https://jawj.github.io/zapatos/) with Neon's serverless driver on Vercel Edge Functions. Zapatos offers zero-abstraction Postgres for TypeScript.
+<DetailIconCards>
+<a href="https://github.com/neondatabase/neon-vercel-rawsql" description="Demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions" icon="github">Raw SQL + Vercel Edge Functions</a>
+<a href="https://github.com/neondatabase/neon-vercel-http" description="Demonstrates Neon's serverless driver over HTTP on Vercel Edge Functions" icon="github">Raw SQL via https + Vercel Edge Functions</a>
+<a href="https://github.com/neondatabase/serverless-cfworker-demo" description="Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance." icon="github">Raw SQL + Cloudflare Workers</a>
+<a href="https://github.com/neondatabase/neon-vercel-kysely" description="Demonstrates using kysely and kysely-codegen with Neon's serverless driver on Vercel Edge Functions" icon="github">Kysely + Vercel Edge Functions</a>
+<a href="https://github.com/neondatabase/neon-vercel-zapatos" description="Demonstrates using Zapatos with Neon's serverless driver on Vercel Edge Functions" icon="github">Zapatos + Vercel Edge Functions</a>
+</DetailIconCards>
