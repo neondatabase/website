@@ -94,7 +94,7 @@ The maximum response size for queries over HTTP is 10 MB as of version 0.6.0, in
 
 ### Use experimental connection caching
 
-Connection caching allows the Neon proxy to find the compute node attached to your database more quickly. Connection caching is experimental. You can enable it by setting `fetchConnectionCache` to `true` in the `neonConfig` object.
+Connection caching allows the Neon proxy to quickly find the compute node attached to your database. Connection caching is experimental. You can enable it by setting `fetchConnectionCache` to `true` in the `neonConfig` object.
 
 ```ts
 import { neon, neonConfig } from '@neondatabase/serverless';
@@ -180,7 +180,7 @@ Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/F
 
 The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions` keys for customizing the return format of the query function. For usage information, see [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration).
 
-The `neon(...)` function also support issuing multiple queries at once in a single, non-interactive transaction using the `transaction()` function, which is exposed as a property on the query function. For example:
+The `neon(...)` function also supports issuing multiple queries at once in a single, non-interactive transaction using the `transaction()` function, which is exposed as a property on the query function. For example:
 
 ```js
 import { neon } from '@neondatabase/serverless';
@@ -211,7 +211,7 @@ For more information, see [transaction(...) function](https://github.com/neondat
 
 ### Pool or Client
 
-The `Pool` and `Client` constructors, which support querying over WebSockets, provide session and transaction support, as well as `node-postgres` compatibility. The API guide for the `Pool` and `Client` constructors can be found in the [node-postgres](https://node-postgres.com/) documentation.
+The `Pool` and `Client` constructors, which support querying over WebSockets, provide session and transaction support, as well as `node-postgres` compatibility. You can find the API guide for the `Pool` and `Client` constructors in the [node-postgres](https://node-postgres.com/) documentation.
 
 You should use the driver with `Pool` or `Client` in the following scenarios:
 
@@ -222,7 +222,7 @@ You should use the driver with `Pool` or `Client` in the following scenarios:
 
 For configuration options that apply to `Pool` and `Client`, see [options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration) in the driver's GitHub repository.
 
-## Example applications
+## Example application
 
 Neon provides an example application to help you get started with the Neon serverless driver. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
 
