@@ -82,7 +82,7 @@ Neon uses the default Postgres port, `5432`.
 
 ## Connection examples
 
-The **Connection Details** widget on the **Neon Dashboard** also provides connection examples for different programming languages and application frameworks, constructed for the branch, database, and role that you select. Click **connection examples**  in the **Connection Details** widget to view or copy the examples.
+The **Connection Details** widget on the **Neon Dashboard** also provides connection examples for different programming languages and application frameworks, constructed for the branch, database, and role that you select.
 
 ![Language and framework connection examples](/docs/connect/code_connection_examples.png)
 
