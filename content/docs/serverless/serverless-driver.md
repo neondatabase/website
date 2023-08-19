@@ -86,6 +86,10 @@ export default async function handler(
 }
 ```
 
+<Admonition type="note">
+The maximum response size for queries over HTTP is 10 MB as of version 0.6.0, increased from the 1 MB maximum supported in earlier versions of the driver.
+</Admonition>
+
 </CodeTabs>
 
 ### Use experimental connection caching
