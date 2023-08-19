@@ -197,17 +197,17 @@ The `transaction()` function supports the same return format keys as the ordinar
 
 - `isolationMode`
 
-  Selects a Postgres transaction isolation mode. If present, it must be one of: `ReadUncommitted`, `ReadCommitted`, `RepeatableRead` or `Serializable`.
+  Must be one of `ReadUncommitted`, `ReadCommitted`, `RepeatableRead` or `Serializable`.
 
 - `readOnly`
   
-  Ensures that a `READ ONLY` transaction is used to execute the queries passed.
+  Ensures that a `READ ONLY` transaction is used to execute queries.
 
 - `deferrable`
 
-  If true (and if `readOnly` is also true, and isolationMode is `Serializable`), this option ensures that a `DEFERRABLE` transaction is used to execute the queries passed.
+  Ensures that a `DEFERRABLE` transaction is used to execute queries.
 
-For more information, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
+For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
 
 ### Pool or Client
 
