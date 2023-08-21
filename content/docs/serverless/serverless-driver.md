@@ -180,7 +180,7 @@ Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/F
 
 The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions` keys for customizing the return format of the query function. For usage information, see [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration).
 
-The `neon(...)` function also supports issuing multiple queries at once in a single, non-interactive transaction using the `transaction()` function, which is exposed as a property on the query function. For example:
+The `neon(...)` function also supports issuing multiple queries at once in a single, non-interactive transaction using the `transaction()` function, which is exposed as a property of the query function. For example:
 
 ```js
 import { neon } from '@neondatabase/serverless';
@@ -197,7 +197,7 @@ The `transaction()` function supports the same return format keys as the ordinar
 
 - `isolationMode`
 
-  Must be one of `ReadUncommitted`, `ReadCommitted`, `RepeatableRead` or `Serializable`.
+  Must be one of `ReadUncommitted`, `ReadCommitted`, `RepeatableRead`, or `Serializable`.
 
 - `readOnly`
   
