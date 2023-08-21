@@ -34,7 +34,6 @@
     "@splinetool/react-spline": "^2.2.6",
     "@splinetool/runtime": "^0.9.425",
     "@tailwindcss/typography": "github:tailwindcss/typography",
-    "chunk-text": "^2.0.1",
     "clsx": "^2.0.0",
     "copy-to-clipboard": "^3.3.3",
     "date-fns": "^2.30.0",
