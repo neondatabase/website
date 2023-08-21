@@ -39,7 +39,7 @@ CREATE ROLE neon_superuser CREATEDB CREATEROLE BYPASSRLS NOLOGIN IN ROLE pg_read
 
 - `CREATEDB`: Provides the ability to create databases.
 - `CREATEROLE`: Provides the ability to create new roles (which also means it can alter and drop roles).
-- `BYPASSRLS`: Provides the ability to bypass row-level security (RLS) policies. This attribute is only assigned to `neon_superuser` roles in projects created after the August 15, 2023 release.
+- `BYPASSRLS`: Provides the ability to bypass row-level security (RLS) policies. This attribute is only included in `neon_superuser` roles in projects created after this release.
 - `NOLOGIN`: The role cannot be used to log in to the Postgres server. Neon is a managed Postgres service, so you cannot access the host operating system.
 - `pg_read_all_data role`: A predefined role in Postgres that provides the ability to select from all tables and views.
 - `pg_write_all_data`: A predefined role in Postgres that provides the ability to insert, update, and delete in all tables and use all sequences in a database.
