@@ -10,6 +10,10 @@ You can use the driver as a drop-in replacement for [node-postgres](https://node
 
 The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
 
+<Admonition type="note">
+The maximum response size for queries is 10 MB as of version 0.6.0, increased from the 1 MB maximum supported in earlier versions of the driver.
+</Admonition>
+
 ## Install the Neon serverless driver
 
 You can install the driver with your preferred JavaScript package manager. For example:
@@ -85,10 +89,6 @@ export default async function handler(
   return res.status(500).send(post);
 }
 ```
-
-<Admonition type="note">
-The maximum response size for queries over HTTP is 10 MB as of version 0.6.0, increased from the 1 MB maximum supported in earlier versions of the driver.
-</Admonition>
 
 </CodeTabs>
 
