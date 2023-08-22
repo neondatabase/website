@@ -11,7 +11,7 @@ import Fl0Logo from './images/fl0.inline.svg';
 import HasuraLogo from './images/hasura.inline.svg';
 import IllaLogo from './images/illa.inline.svg';
 import OctolisLogo from './images/octolis.inline.svg';
-import ProfitFlowLogo from './images/profitflow.inline.svg';
+import OpusLogo from './images/opus.inline.svg';
 import ReplitLogo from './images/replit.inline.svg';
 import SnapletLogo from './images/snaplet.inline.svg';
 import FabricIoLogo from './images/the-fabric-io.inline.svg';
@@ -32,7 +32,7 @@ const allLogos = {
   snaplet: SnapletLogo,
   fl0: Fl0Logo,
   dynaboard: DynaboardLogo,
-  profitflow: ProfitFlowLogo,
+  opus: OpusLogo,
 };
 
 const LogosWall = ({ className, fill, logos }) => (
