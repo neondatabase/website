@@ -30,7 +30,7 @@ From your terminal or command prompt, run the `pgcli` client with the connection
 <CodeBlock shouldWrap>
 
 ```bash
-postgres://<user>:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/<dbname>
+postgres://<user>:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/<dbname>
 ```
 
 </CodeBlock>

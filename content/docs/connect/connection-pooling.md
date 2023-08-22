@@ -39,7 +39,7 @@ You can add the `-pooler` suffix to the endpoint ID in your connection string as
 <CodeBlock shouldWrap>
 
 ```text
-postgres://daniel:<password>@ep-damp-cell-18160816-pooler.us-east-2.aws.neon.tech/neondb
+postgres://daniel:<password>@ep-raspy-cherry-95040071-pooler.us-east-2.aws.neon.tech/neondb
 ```
 
 </CodeBlock>

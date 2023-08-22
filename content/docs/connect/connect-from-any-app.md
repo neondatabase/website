@@ -27,13 +27,13 @@ Neon supports pooled and direct connections to the database. Use a pooled connec
 A Neon connection string includes the role, the compute endpoint hostname, and the database name.
 
 ```text
-postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb
-             ^                                ^                              ^
-             |- <role>                        |- <hostname>                  |- <database>
+postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+             ^                                ^                                  ^
+             |- <role>                        |- <hostname>                      |- <database>
 ```
 
 <Admonition type="note">
-The hostname includes the ID of the compute endpoint, which has an `ep-` prefix: `ep-damp-cell-18160816`. For more information about Neon connection strings, see [Connection string](/docs/reference/glossary#connection-string).
+The hostname includes the ID of the compute endpoint, which has an `ep-` prefix: `ep-raspy-cherry-95040071`. For more information about Neon connection strings, see [Connection string](/docs/reference/glossary#connection-string).
 </Admonition>
 
 You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line, as shown:
@@ -41,7 +41,7 @@ You can use the details from the connection string or the connection string itse
 `.env` file:
 
 ```text
-PGHOST='ep-damp-cell-18160816.us-east-2.aws.neon.tech'
+PGHOST='ep-raspy-cherry-95040071.us-east-2.aws.neon.tech'
 PGDATABASE='neondb'
 PGUSER='daniel'
 PGPASSWORD='<password>'
@@ -53,7 +53,7 @@ Variable:
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL="postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb"
+DATABASE_URL="postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb"
 ```
 
 </CodeBlock>
@@ -63,7 +63,7 @@ Command-line:
 <CodeBlock shouldWrap>
 
 ```bash
-psql postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb
+psql postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
 ```
 
 </CodeBlock>
