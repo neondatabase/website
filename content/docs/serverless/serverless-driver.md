@@ -92,21 +92,6 @@ The maximum response size for queries over HTTP is 10 MB as of version 0.6.0, in
 
 </CodeTabs>
 
-<!--
-
-### Use experimental connection caching
-
-The experimental connection caching feature provides server-side connection pooling, so that a new connection doesn't have to be set up for each query coming in over HTTP. Connection caching is experimental. You can enable it by setting `fetchConnectionCache` to `true` in the `neonConfig` object.
-
-```ts
-import { neon, neonConfig } from '@neondatabase/serverless';
-
-neonConfig.fetchConnectionCache = true; // Opt-in to experimental connection caching
-const sql = neon(process.env.DATABASE_URL!);
-```
-
--->
-
 ## Using node-postgres Pool or Client
 
 You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
