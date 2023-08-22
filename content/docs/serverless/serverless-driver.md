@@ -92,9 +92,11 @@ The maximum response size for queries over HTTP is 10 MB as of version 0.6.0, in
 
 </CodeTabs>
 
+<!--
+
 ### Use experimental connection caching
 
-Connection caching allows the Neon proxy to quickly find the compute node attached to your database. Connection caching is experimental. You can enable it by setting `fetchConnectionCache` to `true` in the `neonConfig` object.
+The experimental connection caching feature provides server-side connection pooling, so that a new connection doesn't have to be set up for each query coming in over HTTP. Connection caching is experimental. You can enable it by setting `fetchConnectionCache` to `true` in the `neonConfig` object.
 
 ```ts
 import { neon, neonConfig } from '@neondatabase/serverless';
@@ -103,9 +105,15 @@ neonConfig.fetchConnectionCache = true; // Opt-in to experimental connection cac
 const sql = neon(process.env.DATABASE_URL!);
 ```
 
+-->
+
 ## Using node-postgres Pool or Client
 
 You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
+
+<Admonition type="note">
+The `Pool` and `Client` objects must be connected, used and closed within a single request handler. Don't create them outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them.
+</Admonition>
 
 <CodeTabs labels={["Node.js","Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
@@ -178,7 +186,7 @@ Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/F
 
 ### neon function configuration options
 
-The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions` keys for customizing the return format of the query function. For usage information, see [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration).
+The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions` keys for customizing the return format and other aspects of the query function. For usage information, see [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration).
 
 The `neon(...)` function also supports issuing multiple queries at once in a single, non-interactive transaction using the `transaction()` function, which is exposed as a property of the query function. For example:
 
@@ -193,7 +201,7 @@ const [posts, tags] = await sql.transaction([
 ]);
 ```
 
-The `transaction()` function supports the same return format keys as the ordinary query function — `arrayMode`, `fullResults`, and `fetchOptions` — plus three additional keys concerning transaction configuration:
+The `transaction()` function supports the same keys as the ordinary query function — `arrayMode`, `fullResults`, and `fetchOptions` — plus three additional keys concerning transaction configuration:
 
 - `isolationMode`
 
@@ -216,6 +224,7 @@ The `Pool` and `Client` constructors, which support querying over WebSockets, pr
 You should use the driver with `Pool` or `Client` in the following scenarios:
 
 - You already use `node-postgres` in your code base and would like to migrate to using `@neondatabase/serverless`.
+- You are writing a new code base but want to use a tool that sits on top of `node-postgres`.
 - Your backend service uses sessions / interactive transactions with multiple queries per connection.
 
 ### Pool and Client configuration options
