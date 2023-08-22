@@ -121,7 +121,8 @@ The `Pool` and `Client` objects must be connected, used and closed within a sing
 import { Pool } from '@neondatabase/serverless';
 
 const pool = new Pool({connectionString: process.env.DATABASE_URL});
-const {rows: [post]}= await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
+const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
+pool.end();
 ```
 
 ```typescript
@@ -135,8 +136,12 @@ export default async () => {
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
   const db = drizzle(pool);
   const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
+  
+  pool.end();
+  
   return new Response(JSON.stringify({ post: onePost }));
 }
+
 ```
 
 ```js
@@ -147,6 +152,7 @@ export default async (req: Request, ctx: any) => {
   await pool.connect();
 
   const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  
   ctx.waitUntil(pool.end());
 
   return new Response(JSON.stringify(post), { 
@@ -169,9 +175,12 @@ export default async function handler(
 ) {
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
   const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
- 
+  
+  pool.end();
+
   return res.status(500).send(post);
 }
+
 ```
 
 </CodeTabs>
