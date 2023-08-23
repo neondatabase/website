@@ -4,9 +4,10 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import DiscourseIcon from 'icons/discourse.inline.svg';
-import GithubIcon from 'icons/github.inline.svg';
-import TwitterIcon from 'icons/twitter.inline.svg';
+import discourseIcon from 'icons/discourse.svg';
+import githubIcon from 'icons/github.svg';
+import blueTwitterIcon from 'icons/twitter-blue.svg';
+import twitterIcon from 'icons/twitter.svg';
 
 import erikBernhardsson from './images/erik.jpg';
 import guillermoRauch from './images/guillermo-rauch.jpg';
@@ -19,17 +20,17 @@ const HEADER = 'Join the community';
 
 const links = [
   {
-    icon: TwitterIcon,
+    icon: twitterIcon,
     to: LINKS.twitter,
     name: 'Twitter',
   },
   {
-    icon: DiscourseIcon,
+    icon: discourseIcon,
     to: LINKS.discourse,
     name: 'Discourse',
   },
   {
-    icon: GithubIcon,
+    icon: githubIcon,
     to: LINKS.github,
     name: 'GitHub',
   },
@@ -135,7 +136,7 @@ const Community = () => (
         Learn what the experts love about Neon
       </p>
       <ul className="mt-8 flex justify-center space-x-5">
-        {links.map(({ icon: Icon, to, name }, index) => (
+        {links.map(({ icon, to, name }, index) => (
           <li className="relative" key={index}>
             <span
               className="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5"
@@ -146,7 +147,7 @@ const Community = () => (
               to={to}
               target="_blank"
             >
-              <Icon className="h-6" />
+              <img src={icon} width={24} height={24} alt={name} loading="lazy" />
               <span className="sr-only">{name}</span>
             </Link>
           </li>
@@ -167,7 +168,13 @@ const Community = () => (
                 <div className="flex justify-between">
                   <p className="font-normal leading-none">@{twitterAccount}</p>
                   <Link className="my-auto w-6" to={twitterUrl} target="_blank">
-                    <TwitterIcon className="text-secondary-7" />
+                    <img
+                      src={blueTwitterIcon}
+                      width={24}
+                      height={24}
+                      alt="Twitter"
+                      loading="lazy"
+                    />
                     <span className="sr-only">Twitter</span>
                   </Link>
                 </div>
