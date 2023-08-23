@@ -75,7 +75,7 @@ const Subscribe = () => (
                   to={to}
                   target="_blank"
                 >
-                  <img src={icon} width={32} height={32} alt={name} loading="lazy" />
+                  <img src={icon} width={32} height={32} alt="" loading="lazy" />
                   <span className="sr-only">{name}</span>
                 </Link>
               </li>
