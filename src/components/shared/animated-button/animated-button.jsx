@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useRef, useState, useMemo } from 'react';
 
@@ -49,7 +49,7 @@ const AnimatedButton = ({
     () => ({
       default: {
         opacity: 1,
-        backgroundColor: 'transparent',
+        backgroundColor: 'rgba(0, 0, 0, 0)',
         height: 10,
         width: 10,
         x: mouseXPosition,
@@ -103,17 +103,19 @@ const AnimatedButton = ({
       onMouseLeave={handleMouseLeave}
       {...otherProps}
     >
-      <motion.span
-        className="absolute left-0 top-0 rounded-full blur-xl"
-        variants={cursorBlurVariants}
-        animate={cursorAnimationVariant}
-        transition={{
-          type: 'spring',
-          stiffness: 500,
-          damping: 28,
-        }}
-        aria-hidden
-      />
+      <LazyMotion features={domAnimation}>
+        <m.span
+          className="absolute left-0 top-0 rounded-full blur-xl"
+          variants={cursorBlurVariants}
+          animate={cursorAnimationVariant}
+          transition={{
+            type: 'spring',
+            stiffness: 500,
+            damping: 28,
+          }}
+          aria-hidden
+        />
+      </LazyMotion>
       {children}
       <LinesIllustration
         className={animationClassName}
