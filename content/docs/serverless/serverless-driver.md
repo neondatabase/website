@@ -10,10 +10,6 @@ You can use the driver as a drop-in replacement for [node-postgres](https://node
 
 The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
 
-<Admonition type="note">
-The maximum response size for queries is 10 MB as of version 0.6.0, increased from the 1 MB maximum supported in earlier versions of the driver.
-</Admonition>
-
 ## Install the Neon serverless driver
 
 You can install the driver with your preferred JavaScript package manager. For example:
@@ -34,7 +30,7 @@ DATABASE_URL=postgres://<user>:<password>@<endpoint>.<region>.aws.neon.tech/<dbn
 
 ## How to use the driver
 
-To use the Neon serverless driver over HTTP, you must use the driver's `neon` function. You can use raw SQL queries or [Drizzle-ORM](https://orm.drizzle.team/docs/installation-and-db-connection/postgresql/neon) for type safety.
+To use the Neon serverless driver over HTTP, you must use the driver's `neon` function. You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/installation-and-db-connection/postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
 
 <CodeTabs labels={["Node.js",  "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
@@ -92,6 +88,10 @@ export default async function handler(
 
 </CodeTabs>
 
+<Admonition type="note">
+The maximum response size for queries over HTTP is 10 MB.
+</Admonition>
+
 ## Using node-postgres Pool or Client
 
 You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
@@ -122,7 +122,7 @@ export default async () => {
   const db = drizzle(pool);
   const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
   
-  pool.end();
+  ctx.waitUntil(pool.end())
   
   return new Response(JSON.stringify({ post: onePost }));
 }
@@ -161,7 +161,7 @@ export default async function handler(
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
   const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
   
-  pool.end();
+  await pool.end();
 
   return res.status(500).send(post);
 }
@@ -180,7 +180,7 @@ Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/F
 
 ### neon function configuration options
 
-The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions` keys for customizing the return format and other aspects of the query function. For usage information, see [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration).
+The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions` option keys for customizing the return format and other aspects of the query function. For usage information, see [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration).
 
 The `neon(...)` function also supports issuing multiple queries at once in a single, non-interactive transaction using the `transaction()` function, which is exposed as a property of the query function. For example:
 
@@ -195,7 +195,7 @@ const [posts, tags] = await sql.transaction([
 ]);
 ```
 
-The `transaction()` function supports the same keys as the ordinary query function — `arrayMode`, `fullResults`, and `fetchOptions` — plus three additional keys concerning transaction configuration:
+The `transaction()` function supports the same option keys as the ordinary query function — `arrayMode`, `fullResults`, and `fetchOptions` — plus three additional keys concerning transaction configuration:
 
 - `isolationMode`
 
@@ -203,11 +203,11 @@ The `transaction()` function supports the same keys as the ordinary query functi
 
 - `readOnly`
   
-  Ensures that a `READ ONLY` transaction is used to execute queries.
+  Ensures that a `READ ONLY` transaction is used to execute queries. This is a boolean function. The default value is `false`.
 
 - `deferrable`
 
-  Ensures that a `DEFERRABLE` transaction is used to execute queries.
+  Ensures that a `DEFERRABLE` transaction is used to execute queries. This is a boolean function. The default value is `false`.
 
 For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
 
@@ -218,7 +218,7 @@ The `Pool` and `Client` constructors, which support querying over WebSockets, pr
 You should use the driver with `Pool` or `Client` in the following scenarios:
 
 - You already use `node-postgres` in your code base and would like to migrate to using `@neondatabase/serverless`.
-- You are writing a new code base but want to use a tool that sits on top of `node-postgres`.
+- You are writing a new code base and want to use a package that expects a `node-postgres-compatible` driver.
 - Your backend service uses sessions / interactive transactions with multiple queries per connection.
 
 ### Pool and Client configuration options
