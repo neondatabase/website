@@ -168,7 +168,7 @@ const Community = () => (
                 <div className="flex justify-between">
                   <p className="font-normal leading-none">@{twitterAccount}</p>
                   <Link className="my-auto w-6" to={twitterUrl} target="_blank">
-                    <img src={blueTwitterIcon} width={24} height={24} alt="" loading="lazy" />
+                    <img src={blueTwitterIcon} width={22} height={18} alt="" loading="lazy" />
                     <span className="sr-only">Twitter</span>
                   </Link>
                 </div>
