@@ -24,7 +24,7 @@ export default async function handler(req, res) {
   try {
     const slugs = (await getPostSlugs(RELEASE_NOTES_DIR_PATH)).map((slug) => slug.replace('/', ''));
 
-    const releaseNotesPromises = slugs.reverse().map(async (slug) => {
+    const releaseNotesPromises = slugs.map(async (slug) => {
       try {
         const post = await getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
         const { data, content } = post;
