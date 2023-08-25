@@ -90,7 +90,7 @@ Our *Guides* documentation also provides connection examples.
 
 ## Network Protocol Support
 
-Neon currently supports **IPv4**. Support for other network protocols, including IPv6, is **not available** at this time. Please ensure you are using IPv4 when connecting to Neon.
+Neon currently supports **IPv4**. Support for other network protocols, including IPv6, is **not available** at this time.
 
 ## Connection notes
 
