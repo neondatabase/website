@@ -88,7 +88,7 @@ The **Connection Details** widget on the **Neon Dashboard** also provides connec
 
 Our *Guides* documentation also provides connection examples.
 
-## Network Protocol Support
+## Network protocol support
 
 Neon currently supports **IPv4**. Support for other network protocols, including IPv6, is **not available** at this time.
 
