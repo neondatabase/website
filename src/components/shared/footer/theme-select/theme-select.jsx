@@ -1,10 +1,10 @@
 'use client';
 
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import useOnClickOutside from 'hooks/use-click-outside';
 
@@ -89,30 +89,32 @@ const ThemeSelect = ({ className = null }) => {
         )}
         ref={dropdownRef}
       >
-        <motion.ul
-          className="w-full"
-          initial="hidden"
-          animate={showDropdown ? 'visible' : 'hidden'}
-          variants={dropdownVariants}
-        >
-          {themes
-            .filter((item) => item !== theme)
-            .map((item, index) => (
-              <motion.li key={item} variants={itemVariants}>
-                <button
-                  className={clsx(
-                    'flex w-full items-center py-[7px] pl-2.5 pr-3 transition-colors duration-200 hover:bg-gray-new-94 dark:hover:bg-gray-new-20',
-                    index === 0 && 'rounded-t'
-                  )}
-                  type="button"
-                  onClick={() => handleSelect(item)}
-                >
-                  <ActiveThemeIcon theme={item} />
-                  <span className="ml-2.5 capitalize">{item}</span>
-                </button>
-              </motion.li>
-            ))}
-        </motion.ul>
+        <LazyMotion features={domAnimation}>
+          <m.ul
+            className="w-full"
+            initial="hidden"
+            animate={showDropdown ? 'visible' : 'hidden'}
+            variants={dropdownVariants}
+          >
+            {themes
+              .filter((item) => item !== theme)
+              .map((item, index) => (
+                <m.li key={item} variants={itemVariants}>
+                  <button
+                    className={clsx(
+                      'flex w-full items-center py-[7px] pl-2.5 pr-3 transition-colors duration-200 hover:bg-gray-new-94 dark:hover:bg-gray-new-20',
+                      index === 0 && 'rounded-t'
+                    )}
+                    type="button"
+                    onClick={() => handleSelect(item)}
+                  >
+                    <ActiveThemeIcon theme={item} />
+                    <span className="ml-2.5 capitalize">{item}</span>
+                  </button>
+                </m.li>
+              ))}
+          </m.ul>
+        </LazyMotion>
         <button
           className="flex h-[30px] w-full items-center py-[7px] pl-2.5 pr-3"
           type="button"
