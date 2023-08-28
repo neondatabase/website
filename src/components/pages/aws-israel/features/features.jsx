@@ -10,25 +10,25 @@ const items = [
     icon: pricingIcon,
     title: 'Flexible pricing',
     description:
-      'Start with a generous free tier and only pay for what you use with flexible usage and volume-based plans',
+      'Start with our generous Free Tier and only pay for what you use when you upgrade to a flexible usage or volume-based plan',
   },
   {
     icon: branchingIcon,
     title: 'Instant branching',
     description:
-      'Make an instantaneous and cost-effective copy of any database at any point in its life cycle',
+      'Instantly and cost-effectively branch your data for development, testing, and point-in-time restore',
   },
   {
     icon: storageIcon,
     title: 'Bottomless storage',
     description:
-      'Benefit from copy-on-write technique that eliminates expensive full-data backup and restore operations',
+      'Neon\'s  architecture, which separates storage and compute, provides high availability, scale out, and unlimited storage capacity',
   },
   {
     icon: appsIcon,
     title: 'Tailored for AI apps',
     description:
-      'Build and scale transformative LLM applications with vector indexes and similarity search',
+      'Build and scale transformative LLM applications with vector storage and similarity search',
   },
 ];
 
@@ -42,7 +42,7 @@ const Features = () => (
             Making developers more productive in the cloud
           </h2>
           <p className="mt-4 text-lg font-light leading-snug xl:text-base md:mt-2.5 sm:max-w-none sm:pr-1.5">
-            Neon manages clusters, storage, and compute automatically
+            Neon manages databases, storage, and compute automatically
           </p>
         </div>
         <ul className="col-start-5 col-end-11 -ml-[50px] mt-2 grid grid-cols-2 gap-x-12 gap-y-11 2xl:ml-0 xl:col-start-6 xl:col-end-13 xl:-ml-8 xl:mt-1.5 xl:max-w-none xl:gap-x-10 lg:col-span-full lg:ml-0 lg:mt-10 lg:gap-x-10 lg:gap-y-10 md:mt-[30px] md:grid-cols-1 md:gap-y-7">

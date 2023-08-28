@@ -35,8 +35,8 @@ const AWSPage = () => (
       buttonClassName="px-[78px] xl:px-14"
       label="Coming soon"
       labelTheme="gray"
-      title="Try out Neon<br/> in Israel region"
-      description="We are delighted to include the new Tel Aviv AWS region in the list of regions where Neon is available."
+      title="Try Neon<br/> in the Israel region"
+      description="We are delighted to announce that Neon is now available in the new Israel (Tel Aviv) AWS region."
       buttonText="Sign up"
       buttonUrl={LINKS.signup}
       linkText="Learn more about AWS"
