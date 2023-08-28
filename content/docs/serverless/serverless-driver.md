@@ -28,7 +28,7 @@ You can obtain a connection string for your database from the **Connection Detai
 DATABASE_URL=postgres://<user>:<password>@<endpoint>.<region>.aws.neon.tech/<dbname>
 ```
 
-## How to use the driver
+## How to use the driver over HTTP
 
 To use the Neon serverless driver over HTTP, you must use the driver's `neon` function. You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/installation-and-db-connection/postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
 
@@ -91,6 +91,10 @@ export default async function handler(
 <Admonition type="note">
 The maximum response size for queries over HTTP is 10 MB.
 </Admonition>
+
+## Experimental connection caching
+
+Connection caching provides server-side connection pooling, so that a new connection does not  have to be set up for each query over HTTP. You can enable it by setting `fetchConnectionCache` to `true` in the `neonConfig` object.
 
 ## Using node-postgres Pool or Client
 
