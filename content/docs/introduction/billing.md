@@ -188,7 +188,7 @@ The [Pricing](https://neon.tech/pricing) page on the Neon website provides a cal
 
 ### Pro Plan Cost Estimator
 
-The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimation** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Estimate costs**.
+The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimation** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Open cost calculator**.
 
 The tool displays cost estimates only after following conditions are met:
 
