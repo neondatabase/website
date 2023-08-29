@@ -37,13 +37,13 @@ export default async function handler(req, res) {
     const releaseNotesPromises = slugs.map(async (slug) => {
       try {
         const post = await getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
-        const { data, content } = post;
+        const { data, title } = post;
         if (process.env.NODE_ENV === 'production') {
           if (data?.isDraft) {
             return null;
           }
         }
-        return { slug, isDraft: data?.isDraft, content };
+        return { slug, isDraft: data?.isDraft, title };
       } catch (error) {
         console.error(`Error fetching post by slug: ${slug}`, error);
         return null;
