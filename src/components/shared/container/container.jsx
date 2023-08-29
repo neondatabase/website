@@ -12,18 +12,28 @@ const styles = {
   },
 };
 
-const Container = forwardRef(({ className = null, size, children, ...otherProps }, ref) => (
-  <div
-    className={clsx('relative mx-auto lg:max-w-none lg:px-8 md:px-4', styles.size[size], className)}
-    {...otherProps}
-    ref={ref}
-  >
-    {children}
-  </div>
-));
+const Container = forwardRef(
+  ({ className = null, size, children, as = 'div', ...otherProps }, ref) => {
+    const Tag = as;
+    return (
+      <Tag
+        className={clsx(
+          'relative mx-auto lg:max-w-none lg:px-8 md:px-4',
+          styles.size[size],
+          className
+        )}
+        {...otherProps}
+        ref={ref}
+      >
+        {children}
+      </Tag>
+    );
+  }
+);
 
 Container.propTypes = {
   className: PropTypes.string,
+  as: PropTypes.string,
   size: PropTypes.oneOf(Object.keys(styles.size)).isRequired,
   children: PropTypes.node.isRequired,
 };

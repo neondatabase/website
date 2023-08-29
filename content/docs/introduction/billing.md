@@ -113,7 +113,7 @@ _Project storage_ is the total volume of data and history stored in your Neon pr
 
   Neon retains a history if data changes to support _point-in-time restore_ and _database branching_.
 
-  - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon stores a 7-day history in the form of WAL records for a Neon project. WAL records that fall out of the 7-day window are evicted from storage and no longer count toward project storage.
+  - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon retains a 7-day history in the form of WAL records for a Neon project, by default. You can configure the retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). WAL records that age out of the retention period are evicted from storage and no longer count toward project storage.
   - A _database branch_ is a virtual snapshot of your data at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
     When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's virtual snapshot still exists in the parent branch's _history_, which means that it shares this data in common with the parent branch. A branch begins adding to storage when data changes are introduced or when the branch's virtual snapshot falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data or allow the branch to age out of the parent branch's _history_.
 
@@ -164,17 +164,17 @@ Data transfer (GiB) * price per GiB
 | AWS            | US West (Oregon)         | Written data    | $0.09600  | GiB            |
 | AWS            | US West (Oregon)         | Data transfer   | $0.09000  | GiB            |
 |                |                          |                 |           |                |
-| AWS            | Europe (Frankfurt)       | Compute time    | $0.102    | Compute-hour\* |
+| AWS            | Europe (Frankfurt)       | Compute time    | $0.118    | Compute-hour\* |
 | AWS            | Europe (Frankfurt)       | Project storage | $0.00018  | GiB-hour       |
 | AWS            | Europe (Frankfurt)       | Written data    | $0.09600  | GiB            |
 | AWS            | Europe (Frankfurt)       | Data transfer   | $0.09000  | GiB            |
 |                |                          |                 |           |                |
-| AWS            | Asia Pacific (Singapore) | Compute time    | $0.102    | Compute-hour\* |
+| AWS            | Asia Pacific (Singapore) | Compute time    | $0.121    | Compute-hour\* |
 | AWS            | Asia Pacific (Singapore) | Project storage | $0.00018  | GiB-hour       |
 | AWS            | Asia Pacific (Singapore) | Written data    | $0.09600  | GiB            |
 | AWS            | Asia Pacific (Singapore) | Data transfer   | $0.09000  | GiB            |
 
-\* A _Compute-hour_ is based on a compute size with 1 Compute Unit (CU), which is 1 vCPU and 4 GB of RAM. Neon's smallest compute size is .25 CU (.25 vCPU and 1GB of RAM), which would be billed at 1/4 of a _Compute-hour_ ($0.102/4 = $0.0255). Neon supports compute sizes ranging from .25 CU (.25 vCPU and 1 GB of RAM) to 7 CUs (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
+\* A _Compute-hour_ is based on a compute size with 1 Compute Unit (CU), which is 1 vCPU and 4 GB of RAM. Neon's smallest compute size is .25 CU (.25 vCPU and 1GB of RAM), which would be billed at 1/4 of a _Compute-hour_. Neon supports compute sizes ranging from .25 CU (.25 vCPU and 1 GB of RAM) to 7 CUs (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
 
 ## Pricing calculators
 

@@ -1,4 +1,4 @@
-### What's new
+### Fixes & improvements
 
 - Compute: Fixed an issue that prevented creating a database when the specified database name included trailing spaces.
 - Pageserver: Fixed an `INSERT ... ON CONFLICT` handling issue for speculative Write-Ahead Log (WAL) record inserts. Under certain load conditions, records added with `INSERT ... ON CONFLICT` could be replayed incorrectly.

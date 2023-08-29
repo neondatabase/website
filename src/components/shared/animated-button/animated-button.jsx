@@ -109,18 +109,19 @@ const AnimatedButton = ({
       onMouseLeave={handleMouseLeave}
       {...otherProps}
     >
-      <m.span
-        className="absolute left-0 top-0 rounded-full blur-xl"
-        variants={cursorBlurVariants}
-        animate={cursorAnimationVariant}
-        transition={{
-          type: 'spring',
-          stiffness: 500,
-          damping: 28,
-        }}
-        aria-hidden
-      />
       <LazyMotion features={domAnimation}>
+        <m.span
+          className="absolute left-0 top-0 rounded-full blur-xl"
+          variants={cursorBlurVariants}
+          animate={cursorAnimationVariant}
+          transition={{
+            type: 'spring',
+            stiffness: 500,
+            damping: 28,
+          }}
+          aria-hidden
+        />
+
         <m.span className="-z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} aria-hidden>
           <span className="top" />
           <span className="bottom" />

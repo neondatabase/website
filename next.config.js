@@ -1,7 +1,11 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const { getAllPosts } = require('./src/utils/api-docs');
 const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
-module.exports = {
+const defaultConfig = {
   poweredByHeader: false,
   experimental: {
     appDir: true,
@@ -182,3 +186,5 @@ module.exports = {
     return config;
   },
 };
+
+module.exports = withBundleAnalyzer(defaultConfig);

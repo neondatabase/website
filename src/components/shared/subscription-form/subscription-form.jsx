@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence, LazyMotion, domAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import useCookie from 'react-use/lib/useCookie';
@@ -123,125 +123,127 @@ const SubscriptionForm = ({
       noValidate
       onSubmit={handleSubmit}
     >
-      {/* Input */}
-      <input
-        className={clsx(
-          'remove-autocomplete-styles relative block w-full rounded-full border-black bg-white pr-[218px] font-semibold leading-none text-black placeholder-black outline-none transition-colors duration-200 lg:w-full lg:pl-5 md:pr-20',
-          errorMessage && 'border-secondary-1',
-          sizeClassNames[size].input
-        )}
-        name="email"
-        type="email"
-        placeholder="Your email..."
-        autoComplete="email"
-        value={email}
-        readOnly={formState !== 'default'}
-        onChange={handleInputChange}
-      />
+      <LazyMotion features={domAnimation}>
+        {/* Input */}
+        <input
+          className={clsx(
+            'remove-autocomplete-styles relative block w-full rounded-full border-black bg-white pr-[218px] font-semibold leading-none text-black placeholder-black outline-none transition-colors duration-200 lg:w-full lg:pl-5 md:pr-20',
+            errorMessage && 'border-secondary-1',
+            sizeClassNames[size].input
+          )}
+          name="email"
+          type="email"
+          placeholder="Your email..."
+          autoComplete="email"
+          value={email}
+          readOnly={formState !== 'default'}
+          onChange={handleInputChange}
+        />
 
-      {/* Error message */}
-      <AnimatePresence>
-        {errorMessage && (
-          <motion.span
-            className="t-base absolute -bottom-5 left-1/2 w-full -translate-x-1/2 translate-y-full text-center font-semibold !leading-snug text-secondary-1 lg:-bottom-4"
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={appearAndExitAnimationVariants}
-          >
-            {errorMessage}
-          </motion.span>
-        )}
-      </AnimatePresence>
+        {/* Error message */}
+        <AnimatePresence>
+          {errorMessage && (
+            <m.span
+              className="t-base absolute -bottom-5 left-1/2 w-full -translate-x-1/2 translate-y-full text-center font-semibold !leading-snug text-secondary-1 lg:-bottom-4"
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={appearAndExitAnimationVariants}
+            >
+              {errorMessage}
+            </m.span>
+          )}
+        </AnimatePresence>
 
-      {/* Button */}
-      <AnimatePresence>
-        {formState === 'default' && (
-          <motion.div
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={appearAndExitAnimationVariants}
-          >
-            <Button
+        {/* Button */}
+        <AnimatePresence>
+          {formState === 'default' && (
+            <m.div
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={appearAndExitAnimationVariants}
+            >
+              <Button
+                className={clsx(
+                  'absolute top-1/2 -translate-y-1/2 md:h-14 md:w-14 md:rounded-full md:p-0',
+                  sizeClassNames[size].button
+                )}
+                size="sm"
+                type="submit"
+                theme="primary"
+                disabled={formState !== 'default'}
+              >
+                <span className="md:sr-only">{submitButtonText}</span>
+                <SendIcon className="hidden md:ml-1.5 md:block" aria-hidden />
+              </Button>
+            </m.div>
+          )}
+        </AnimatePresence>
+
+        {/* Loading state */}
+        <AnimatePresence>
+          {formState === 'loading' && (
+            <m.div
               className={clsx(
-                'absolute top-1/2 -translate-y-1/2 md:h-14 md:w-14 md:rounded-full md:p-0',
-                sizeClassNames[size].button
+                'absolute top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-black',
+                sizeClassNames[size].loading
               )}
-              size="sm"
-              type="submit"
-              theme="primary"
-              disabled={formState !== 'default'}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={appearAndExitAnimationVariants}
+              aria-hidden
             >
-              <span className="md:sr-only">{submitButtonText}</span>
-              <SendIcon className="hidden md:ml-1.5 md:block" aria-hidden />
-            </Button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Loading state */}
-      <AnimatePresence>
-        {formState === 'loading' && (
-          <motion.div
-            className={clsx(
-              'absolute top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-black',
-              sizeClassNames[size].loading
-            )}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={appearAndExitAnimationVariants}
-            aria-hidden
-          >
-            <div className="h-[58px] w-[58px] rounded-full border-[6px] border-gray-2 2xl:h-[48px] 2xl:w-[48px] xl:h-[42px] xl:w-[42px]" />
-            <svg
-              className="absolute left-1/2 top-1/2 2xl:h-[48px] 2xl:w-[48px] xl:h-[42px] xl:w-[42px]"
-              width="58"
-              height="58"
-              viewBox="0 0 58 58"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              style={{
-                transform: 'scale(1, -1) rotate(-90deg) translate(-50%, -50%)',
-              }}
-            >
-              <motion.path
-                d="M3 29C3 43.3594 14.6406 55 29 55C43.3594 55 55 43.3594 55 29C55 14.6406 43.3594 3 29 3C14.6406 3 3 14.6406 3 29Z"
-                strokeLinecap="round"
-                stroke="#00e699"
-                strokeWidth="6"
-                initial={{ pathLength: 0 }}
-                animate={{
-                  pathLength: 1,
-                  transition: { duration: 2, delay: 0.2 },
+              <div className="h-[58px] w-[58px] rounded-full border-[6px] border-gray-2 2xl:h-[48px] 2xl:w-[48px] xl:h-[42px] xl:w-[42px]" />
+              <svg
+                className="absolute left-1/2 top-1/2 2xl:h-[48px] 2xl:w-[48px] xl:h-[42px] xl:w-[42px]"
+                width="58"
+                height="58"
+                viewBox="0 0 58 58"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  transform: 'scale(1, -1) rotate(-90deg) translate(-50%, -50%)',
                 }}
-              />
-            </svg>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              >
+                <m.path
+                  d="M3 29C3 43.3594 14.6406 55 29 55C43.3594 55 55 43.3594 55 29C55 14.6406 43.3594 3 29 3C14.6406 3 3 14.6406 3 29Z"
+                  strokeLinecap="round"
+                  stroke="#00e699"
+                  strokeWidth="6"
+                  initial={{ pathLength: 0 }}
+                  animate={{
+                    pathLength: 1,
+                    transition: { duration: 2, delay: 0.2 },
+                  }}
+                />
+              </svg>
+            </m.div>
+          )}
+        </AnimatePresence>
 
-      {/* Success state */}
-      <AnimatePresence>
-        {(formState === 'success' || formState === 'error') && (
-          <motion.div
-            className={clsx('absolute top-1/2 -translate-y-1/2', sizeClassNames[size].success)}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={appearAndExitAnimationVariants}
-            aria-hidden
-          >
-            {formState === 'success' && (
-              <CheckIcon className={clsx(sizeClassNames[size].stateIcon)} />
-            )}
-            {formState === 'error' && (
-              <ErrorIcon className={clsx(sizeClassNames[size].stateIcon)} />
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+        {/* Success state */}
+        <AnimatePresence>
+          {(formState === 'success' || formState === 'error') && (
+            <m.div
+              className={clsx('absolute top-1/2 -translate-y-1/2', sizeClassNames[size].success)}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={appearAndExitAnimationVariants}
+              aria-hidden
+            >
+              {formState === 'success' && (
+                <CheckIcon className={clsx(sizeClassNames[size].stateIcon)} />
+              )}
+              {formState === 'error' && (
+                <ErrorIcon className={clsx(sizeClassNames[size].stateIcon)} />
+              )}
+            </m.div>
+          )}
+        </AnimatePresence>
+      </LazyMotion>
     </form>
   );
 };

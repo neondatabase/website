@@ -19,6 +19,8 @@
           slug: introduction/auto-suspend
         - title: Branching
           slug: introduction/branching
+        - title: Point-in-time restore
+          slug: introduction/point-in-time-restore
         - title: Read replicas
           slug: introduction/read-replicas
     - title: Regions
@@ -105,7 +107,7 @@
           slug: guides/auto-suspend-guide
         - title: Branching
           items: 
-            - title: Point-in-time restore
+            - title: Branching — Point-in-time restore
               slug: guides/branching-pitr
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
@@ -132,6 +134,18 @@
           ariaLabel: Connect a Go application to Neon
         - title: Java
           slug: guides/java
+        - title: Javascript
+          items:
+            - title: Next.js
+              slug: guides/nextjs
+            - title: Node.js
+              slug: guides/node
+            - title: Prisma
+              items:
+                - title: Connect from Prisma
+                  slug: guides/prisma
+                - title: Use Prisma Migrate With Neon
+                  slug: guides/prisma-migrate
         - title: PHP
           items:
             - title: Laravel
@@ -148,18 +162,6 @@
               slug: guides/sqlalchemy
         - title: Rust
           slug: guides/rust
-        - title: Javascript
-          items:
-            - title: Next.js
-              slug: guides/nextjs
-            - title: Node.js
-              slug: guides/node
-            - title: Prisma
-              items:
-                - title: Connect from Prisma
-                  slug: guides/prisma
-                - title: Use Prisma Migrate With Neon
-                  slug: guides/prisma-migrate
     - title: Backend-as-a-service
       items:
         - title: Exograph

@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { motion, useAnimation } from 'framer-motion';
+import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 
 import AnimatedButton from 'components/shared/animated-button';
@@ -202,19 +202,22 @@ const Hero = () => {
                     </ul>
                   </div>
                 </Link>
-
-                <motion.span
-                  className={clsx(
-                    'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border transition-colors duration-300 md:border-[var(--accentColor)] md:!opacity-100',
-                    isLoad !== true && '!opacity-100',
-                    activeItemIndex === index ? 'border-[var(--accentColor)]' : 'border-transparent'
-                  )}
-                  initial="from"
-                  exit="exit"
-                  variants={borderLightVariants}
-                  animate={controls}
-                  aria-hidden
-                />
+                <LazyMotion features={domAnimation}>
+                  <m.span
+                    className={clsx(
+                      'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border transition-colors duration-300 md:border-[var(--accentColor)] md:!opacity-100',
+                      isLoad !== true && '!opacity-100',
+                      activeItemIndex === index
+                        ? 'border-[var(--accentColor)]'
+                        : 'border-transparent'
+                    )}
+                    initial="from"
+                    exit="exit"
+                    variants={borderLightVariants}
+                    animate={controls}
+                    aria-hidden
+                  />
+                </LazyMotion>
               </li>
             ))}
           </ul>

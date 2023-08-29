@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import React, { useEffect } from 'react';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { useEffect } from 'react';
 
 import setPositionsForElements from './utils/setPositionsForElements';
 
@@ -37,48 +37,54 @@ const Lines1 = () => {
   }, []);
 
   return (
-    <motion.div className="lg:hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} aria-hidden>
-      {verticalLines.map((_, index) => (
-        <div id={`lines-1-vertical-line-${index + 1}`} className="vertical-line" key={index} />
-      ))}
+    <LazyMotion features={domAnimation}>
+      <m.div className="lg:hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} aria-hidden>
+        {verticalLines.map((_, index) => (
+          <div id={`lines-1-vertical-line-${index + 1}`} className="vertical-line" key={index} />
+        ))}
 
-      {horizontalLines.map((_, index) => (
-        <div id={`lines-1-horizontal-line-${index + 1}`} className="horizontal-line" key={index} />
-      ))}
+        {horizontalLines.map((_, index) => (
+          <div
+            id={`lines-1-horizontal-line-${index + 1}`}
+            className="horizontal-line"
+            key={index}
+          />
+        ))}
 
-      {shapes.map((side, index) => (
-        <div id={`lines-1-shape-${index + 1}`} className={`shape shape-${side}`} key={index} />
-      ))}
+        {shapes.map((side, index) => (
+          <div id={`lines-1-shape-${index + 1}`} className={`shape shape-${side}`} key={index} />
+        ))}
 
-      {circles.map((_, index) => (
-        <div id={`lines-1-circle-${index + 1}`} className="circle" key={index} />
-      ))}
+        {circles.map((_, index) => (
+          <div id={`lines-1-circle-${index + 1}`} className="circle" key={index} />
+        ))}
 
-      {circlesWithText.map((text, index) => (
-        <div
-          id={`lines-1-circle-with-text-${index + 1}`}
-          className="circle circle-with-text circle-with-text-right"
-          data-text={text}
-          key={index}
-        />
-      ))}
+        {circlesWithText.map((text, index) => (
+          <div
+            id={`lines-1-circle-with-text-${index + 1}`}
+            className="circle circle-with-text circle-with-text-right"
+            data-text={text}
+            key={index}
+          />
+        ))}
 
-      {dottedVerticalLines.map((_, index) => (
-        <div
-          id={`lines-1-dotted-vertical-line-${index + 1}`}
-          className="dotted-vertical-line"
-          key={index}
-        />
-      ))}
+        {dottedVerticalLines.map((_, index) => (
+          <div
+            id={`lines-1-dotted-vertical-line-${index + 1}`}
+            className="dotted-vertical-line"
+            key={index}
+          />
+        ))}
 
-      {dottedHorizontalLines.map((_, index) => (
-        <div
-          id={`lines-1-dotted-horizontal-line-${index + 1}`}
-          className="dotted-horizontal-line"
-          key={index}
-        />
-      ))}
-    </motion.div>
+        {dottedHorizontalLines.map((_, index) => (
+          <div
+            id={`lines-1-dotted-horizontal-line-${index + 1}`}
+            className="dotted-horizontal-line"
+            key={index}
+          />
+        ))}
+      </m.div>
+    </LazyMotion>
   );
 };
 

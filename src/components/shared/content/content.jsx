@@ -18,7 +18,7 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
 
-const getComponents = (withoutAnchorHeading) => ({
+const getComponents = (withoutAnchorHeading, isReleaseNote) => ({
   h2: withoutAnchorHeading ? 'h2' : AnchorHeading('h2'),
   h3: withoutAnchorHeading ? 'h3' : AnchorHeading('h3'),
   table: (props) => (
@@ -47,8 +47,8 @@ const getComponents = (withoutAnchorHeading) => ({
     <Image
       {...props}
       loading="lazy"
-      width={796}
-      height={447}
+      width={isReleaseNote ? 762 : 796}
+      height={isReleaseNote ? 428 : 447}
       style={{ width: '100%', height: '100%' }}
     />
   ),
@@ -64,7 +64,16 @@ const getComponents = (withoutAnchorHeading) => ({
 
 // eslint-disable-next-line no-return-assign
 const Content = forwardRef(
-  ({ className = null, content, asHTML = false, withoutAnchorHeading = false }, ref) => (
+  (
+    {
+      className = null,
+      content,
+      asHTML = false,
+      withoutAnchorHeading = false,
+      isReleaseNote = false,
+    },
+    ref
+  ) => (
     <div
       className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}
       ref={ref}
@@ -72,7 +81,7 @@ const Content = forwardRef(
       {asHTML ? (
         <div dangerouslySetInnerHTML={{ __html: content }} />
       ) : (
-        <MDXRemote components={getComponents(withoutAnchorHeading)} {...content} />
+        <MDXRemote components={getComponents(withoutAnchorHeading, isReleaseNote)} {...content} />
       )}
     </div>
   )
@@ -83,6 +92,7 @@ Content.propTypes = {
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   asHTML: PropTypes.bool,
   withoutAnchorHeading: PropTypes.bool,
+  isReleaseNote: PropTypes.bool,
 };
 
 export default Content;

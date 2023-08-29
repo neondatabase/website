@@ -2,6 +2,7 @@ import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 import Aside from 'components/pages/blog-post/aside';
+import CodeTabs from 'components/pages/blog-post/code-tabs';
 import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
@@ -50,6 +51,7 @@ const BlogDraft = async ({ searchParams }) => {
     content,
     {
       blogpostcode: CodeBlock,
+      blogpostcodetabs: CodeTabs,
       blogpostcta: CTA,
     },
     true

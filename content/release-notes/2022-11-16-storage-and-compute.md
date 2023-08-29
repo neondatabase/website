@@ -1,4 +1,4 @@
-### What's new
+### Fixes & improvements
 
 - Pageserver, Safekeeper, Compute, and Proxy: Reduced the size of Neon storage binaries by 50% by removing dependency debug symbols from the release build.
 - Pageserver: Moved the Write-Ahead Log (WAL) redo process code from Neon's `postgres` repository to the `neon` repository and created a separate `wal_redo` binary in order to reduce the amount of change in the `postgres` repository codebase.
