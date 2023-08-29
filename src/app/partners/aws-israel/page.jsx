@@ -33,8 +33,6 @@ const AWSPage = () => (
     <CTAWithElephant
       className="mt-[136px] xl:mt-[104px] lg:mt-20 md:mt-16"
       buttonClassName="px-[78px] xl:px-14"
-      label="Coming soon"
-      labelTheme="gray"
       title="Try Neon<br/> in the Israel region"
       description="We are delighted to announce that Neon is now available in the new Israel (Tel Aviv) AWS region."
       buttonText="Sign up"
