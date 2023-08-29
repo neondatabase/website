@@ -24,6 +24,8 @@ const styles = {
   },
 };
 
+const CURSOR_OFFSET = 13;
+
 const AnimatedButton = ({
   className: additionalClassName = null,
   to = null,
@@ -43,7 +45,7 @@ const AnimatedButton = ({
     () => ({
       default: {
         opacity: 1,
-        backgroundColor: 'transparent',
+        backgroundColor: 'rgba(0, 0, 0, 0)',
         height: 10,
         width: 10,
         x: mouseXPosition,
@@ -69,11 +71,11 @@ const AnimatedButton = ({
     const { left, top } = buttonRef.current.getBoundingClientRect();
 
     if (event.clientX !== null) {
-      setMouseXPosition(event.clientX - left - 13); // TODO: figure out what is this magic number
+      setMouseXPosition(event.clientX - left - CURSOR_OFFSET);
     }
 
     if (event.clientY !== null) {
-      setMouseYPosition(event.clientY - top - 13); // TODO: figure out what is this magic number
+      setMouseYPosition(event.clientY - top - CURSOR_OFFSET);
     }
   };
 
