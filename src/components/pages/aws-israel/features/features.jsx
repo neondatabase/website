@@ -10,7 +10,7 @@ const items = [
     icon: pricingIcon,
     title: 'Flexible pricing',
     description:
-      'Start with our generous Free Tier and only pay for what you use when you upgrade to a flexible usage or volume-based plan',
+      'Start with our Free Tier and only pay for what you use when you upgrade to a flexible usage or volume-based plan',
   },
   {
     icon: branchingIcon,
@@ -22,7 +22,7 @@ const items = [
     icon: storageIcon,
     title: 'Bottomless storage',
     description:
-      'Neon\'s  architecture, which separates storage and compute, provides high availability, scale out, and unlimited storage capacity',
+      'Neon\'s  architecture, which separates storage and compute, provides scale out and unlimited storage',
   },
   {
     icon: appsIcon,
