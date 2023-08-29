@@ -26,7 +26,6 @@ const Hero = () => (
       <AnimatedButton
         className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-[-0.02em] lg:mt-7 md:mt-6"
         theme="primary"
-        spread={5}
         to="#partners-apply"
         isAnimated
       >

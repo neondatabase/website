@@ -24,9 +24,6 @@ const styles = {
   },
 };
 
-// TODO:
-// remove props animationClassName, animationSize, spread, spreadClassName
-
 const AnimatedButton = ({
   className: additionalClassName = null,
   to = null,
