@@ -12,9 +12,7 @@ import Container from 'components/shared/container/container';
 import LINKS from 'constants/links';
 import useIsTouchDevice from 'hooks/use-is-touch-device';
 
-const Spline = dynamic(() => import('@splinetool/react-spline'), {
-  ssr: false,
-});
+const Spline = dynamic(() => import('@splinetool/react-spline'));
 
 const MOBILE_WIDTH = 768;
 
