@@ -95,12 +95,12 @@ DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.ne
 A `connect_timeout` setting of 0 means no timeout.
 </Admonition>
 
-Another possible cause of connection timeouts is [Prisma's connection pool](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/), which has a default timeout of 10 seconds. This is typically enough time for your Neon compute to activate, but if you are still experiencing connection timeouts, you can try increasing both the `connect_timeout` limit described above and the `pool_timeout` parameter (for Prisma) to a higher value. For example:
+Another possible cause of timeouts is [Prisma's connection pool](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/), which has a `pool_timeout` setting of 10 seconds. If you are still experiencing connection timeouts after setting a higher `connect_timeout` value, try increasing the `pool_timeout` parameter to a higher value or disabling it by setting it to 0. For example:
 
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb/neondb?connect_timeout=15&pool_timeout=15`
+DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb/neondb?connect_timeout=10&pool_timeout=0`
 ```
 
 </CodeBlock>

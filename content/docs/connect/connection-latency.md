@@ -99,14 +99,14 @@ Connection conn = DriverManager.getConnection(dbUrl, properties);
 ```
 
 ```prisma
-DATABASE_URL=postgres://<user>:<password>@<neon_hostname>/neondb?connect_timeout=20`
+DATABASE_URL=postgres://<user>:<password>@<neon_hostname>/neondb?connect_timeout=10&pool_timeout=0`
 ```
 
 </CodeTabs>
 
 For more information about timeouts when connecting from Prisma, see [Connection timeouts](/docs/guides/prisma#connection-timeouts) in our Prisma documentation.
 
-Remember that increasing the connection timeout might impact the responsiveness of your application, and users could end up waiting longer for their requests to be processed. Always test and monitor your application's performance when making changes like these.
+Remember that increasing connection timeout settings might impact the responsiveness of your application, and users could end up waiting longer for their requests to be processed. Always test and monitor your application's performance when making changes like these.
 
 ### Build connection timeout handling into your application
 
