@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
-import getExcerpt from 'utils/get-excerpt';
 import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 
@@ -20,12 +19,9 @@ const ReleaseNotesList = ({ items }) => (
       </Link>
     </div>
     <ul className="mt-6 grid grid-cols-4 gap-x-[50px] border-t border-gray-new-20/60 pt-8 xl:grid-cols-3 lg:mt-6 lg:grid-cols-2 md:mt-5 md:grid-cols-1 md:gap-y-7 md:pt-6">
-      {items.map(({ slug, content }, index) => {
+      {items.map(({ slug, title }, index) => {
         const { capitalisedCategory: category } = getReleaseNotesCategoryFromSlug(slug);
         const { datetime, label } = getReleaseNotesDateFromSlug(slug);
-        const regex = /What's new\s?(-\s)?/i;
-
-        const title = getExcerpt(content, 200).replace(regex, '');
 
         return (
           <li
