@@ -30,4 +30,5 @@ export default {
   cliReference: '/docs/reference/neon-cli',
   ai: '/ai',
   awsIsrael: '/partners/aws-israel',
+  thankYou: '/thank-you',
 };
