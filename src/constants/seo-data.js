@@ -75,7 +75,6 @@ export default {
   thankYou: {
     title: 'Thank you for subscribing — Neon',
     description: 'Thank you for subscribing to the Neon newsletter',
-    imagePath: '/images/social-previews/blog.jpg',
     pathname: LINKS.thankYou,
   },
 };
