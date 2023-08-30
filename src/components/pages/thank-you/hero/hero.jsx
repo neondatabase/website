@@ -1,81 +1,42 @@
-'use client';
-
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import Link from 'components/shared/link';
-import Search from 'components/shared/search';
 
 import illustration from './images/illustration.jpg';
 
-const CTA = ({ isDocsPage = false }) =>
-  isDocsPage ? (
-    <div className="flex w-full flex-col">
-      <Search className="DocSearch-notFound my-8" />
-      <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
-        Back to home
-      </Link>
-    </div>
-  ) : (
-    <Button className="mt-11 self-start lg:mt-8 sm:w-full" size="md" theme="primary" to="/">
-      Back to Home
-    </Button>
-  );
+const Hero = () => (
+  <section className="grow pb-24 pt-20 dark:bg-gray-new-8 dark:text-white lg:pt-0 md:py-14 xs:pt-10">
+    <Container
+      className="grid grid-cols-12 items-start gap-x-8 md:gap-x-0 md:gap-y-10 lg:items-center md:items-stretch"
+      size="md"
+    >
+      <div className="col-start-2 col-end-6 flex flex-col pt-48 2xl:col-start-1 xl:pt-20 lg:pt-0 md:col-span-full">
+        <h1 className="text-[58px] font-bold leading-none xl:text-5xl xl:leading-none md:text-4xl">
+          Thanks for subscribing!
+        </h1>
+        <p className="t-xl mt-7 lg:mt-8 max-w-md">
+          You&apos;ll receive our latest announcements and product updates in your inbox.
+        </p>
 
-CTA.propTypes = {
-  isDocsPage: PropTypes.bool,
-};
+        <Button className="mt-11 self-start lg:mt-8 sm:w-full" size="md" theme="primary" to="/">
+          Back to Home
+        </Button>
+      </div>
 
-const Skeleton = () => (
-  <div className="mt-6 flex w-full flex-col items-start justify-center space-y-4">
-    <span className="skeleton max-w-[410px]" />
-    <span className="skeleton max-w-[260px]" />
-    <span className="skeleton max-w-[410px]" />
-  </div>
+      <div className="col-start-6 col-end-12 2xl:col-end-13 md:col-span-full">
+        <Image
+          className="w-full md:mx-auto md:max-w-full"
+          width={864}
+          height={767}
+          src={illustration}
+          alt=""
+          quality={75}
+          priority
+        />
+      </div>
+    </Container>
+  </section>
 );
-
-const Hero = () => {
-  const pathname = usePathname();
-  const [isDocsPage, setIsDocsPage] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsDocsPage(pathname.includes('/docs/'));
-    setIsLoading(false);
-  }, [pathname]);
-
-  return (
-    <section className="grow pb-24 pt-16 dark:bg-gray-new-8 dark:text-white lg:pt-0 md:py-14 xs:pt-10">
-      <Container className="grid grid-cols-12 items-start gap-x-8 md:gap-x-0 md:gap-y-4" size="md">
-        <div className="col-start-2 col-end-6 flex flex-col pt-48 2xl:col-start-1 xl:pt-20 lg:pt-10 md:col-span-full md:pt-0">
-          <h1 className="text-[58px] font-bold leading-none xl:text-5xl xl:leading-none md:text-4xl">
-            Thanks for subscribing!
-          </h1>
-          <p className="t-xl mt-7 lg:mt-8">
-            You&apos;ll receive our latest announcements and product updates in your inbox. <br />
-          </p>
-
-          {isLoading ? <Skeleton /> : <CTA isDocsPage={isDocsPage} />}
-        </div>
-
-        <div className="col-start-6 col-end-12 2xl:col-end-13 md:col-span-full">
-          <Image
-            className="w-full md:mx-auto md:max-w-xl"
-            width={860}
-            height={862}
-            src={illustration}
-            alt="Illustration"
-            loading="eager"
-            quality={75}
-          />
-        </div>
-      </Container>
-    </section>
-  );
-};
 
 export default Hero;
