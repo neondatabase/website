@@ -17,7 +17,7 @@ import sendGtagEvent from 'utils/send-gtag-event';
 import Burger from './burger';
 import Github from './images/header-github.inline.svg';
 
-const Search = dynamic(() => import('components/shared/search'));
+const Search = dynamic(() => import('components/shared/search'), { ssr: false });
 
 const Header = ({
   className = null,

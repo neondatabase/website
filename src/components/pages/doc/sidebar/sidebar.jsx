@@ -1,13 +1,15 @@
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
-import Search from 'components/shared/search';
 import MENUS from 'constants/menus';
 
 import { ChatWidgetTrigger } from '../chat-widget';
 
 import Item from './item';
+
+const Search = dynamic(() => import('components/shared/search/search'));
 
 const Sidebar = ({ className = null, sidebar }) => (
   <aside

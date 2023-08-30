@@ -1,10 +1,13 @@
+import dynamic from 'next/dynamic';
+
 import ChatProvider from 'app/chat-provider';
-import ChatWidget from 'components/pages/doc/chat-widget';
 import MobileNav from 'components/pages/doc/mobile-nav';
 import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { getSidebar } from 'utils/api-docs';
+
+const ChatWidget = dynamic(() => import('components/pages/doc/chat-widget'));
 
 const DocsLayout = async ({ children }) => {
   const sidebar = await getSidebar();
