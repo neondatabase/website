@@ -25,7 +25,7 @@ const logos = [
   'snaplet',
   'fl0',
   'dynaboard',
-  'profitflow',
+  'opus',
 ];
 
 const PricingPage = () => (

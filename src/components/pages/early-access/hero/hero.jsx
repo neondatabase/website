@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import useCookie from 'react-use/lib/useCookie';
@@ -134,92 +134,98 @@ const Hero = () => {
             Start with free tier. Setup takes under 5 seconds.
           </p>
           <form className="mt-7 lg:mt-5" noValidate onSubmit={handleSubmit}>
-            <div className="relative">
-              <input
-                className={clsx(
-                  'remove-autocomplete-styles h-11 w-full appearance-none rounded border border-[#c7ccd1] px-3.5 transition-colors duration-200',
-                  errorMessage && 'border-[#FF4C79]'
-                )}
-                name="email"
-                type="email"
-                value={email}
-                placeholder="Enter your email"
-                autoComplete="email"
-                style={{ boxShadow: '0px 1px 2px rgba(23, 26, 28, 0.06)' }}
-                readOnly={formState !== 'default'}
-                onChange={handleInputChange}
-              />
-              <AnimatePresence>
-                {errorMessage && (
-                  <motion.span
-                    className="absolute -bottom-1 left-0 w-full translate-y-full text-[12px] font-semibold text-[#FF4C79]"
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={appearAndExitAnimationVariants}
-                  >
-                    {errorMessage}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </div>
-            <div className="mt-7 flex items-center justify-between lg:mt-6 lg:flex-col lg:items-center lg:justify-center lg:space-y-6">
-              <Button
-                className="relative"
-                size="xs"
-                theme="primary"
-                disabled={formState !== 'default'}
-              >
-                <span
+            <LazyMotion features={domAnimation}>
+              <div className="relative">
+                <input
                   className={clsx(
-                    'transition-opacity duration-200',
-                    (formState === 'loading' || formState === 'success') && 'opacity-0'
+                    'remove-autocomplete-styles h-11 w-full appearance-none rounded border border-[#c7ccd1] px-3.5 transition-colors duration-200',
+                    errorMessage && 'border-[#FF4C79]'
                   )}
-                >
-                  Request Early Access
-                </span>
-                <span
-                  className={clsx(
-                    'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200',
-                    formState !== 'success' && 'opacity-0'
-                  )}
-                >
-                  Success!
-                </span>
-                {formState === 'loading' && (
-                  <AnimatePresence>
-                    <motion.svg
-                      className="absolute left-1/2 top-1/2 h-[28px] w-[28px]"
-                      width="58"
-                      height="58"
-                      viewBox="0 0 58 58"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      style={{ transform: 'scale(1, -1) rotate(-90deg) translate(-50%, -50%)' }}
+                  name="email"
+                  type="email"
+                  value={email}
+                  placeholder="Enter your email"
+                  autoComplete="email"
+                  style={{ boxShadow: '0px 1px 2px rgba(23, 26, 28, 0.06)' }}
+                  readOnly={formState !== 'default'}
+                  onChange={handleInputChange}
+                />
+
+                <AnimatePresence>
+                  {errorMessage && (
+                    <m.span
+                      className="absolute -bottom-1 left-0 w-full translate-y-full text-[12px] font-semibold text-[#FF4C79]"
                       initial="initial"
                       animate="animate"
                       exit="exit"
                       variants={appearAndExitAnimationVariants}
                     >
-                      <motion.path
-                        d="M3 29C3 43.3594 14.6406 55 29 55C43.3594 55 55 43.3594 55 29C55 14.6406 43.3594 3 29 3C14.6406 3 3 14.6406 3 29Z"
-                        strokeLinecap="round"
-                        stroke="#1a1a1a"
-                        strokeWidth="6"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1, transition: { duration: 2, delay: 0.2 } }}
-                      />
-                    </motion.svg>
-                  </AnimatePresence>
-                )}
-              </Button>
-              <p className="text-[14px]">
-                Have an invite code?{' '}
-                <Link className="font-semibold text-[#0D80F2] hover:underline" to={LINKS.dashboard}>
-                  Log In
-                </Link>
-              </p>
-            </div>
+                      {errorMessage}
+                    </m.span>
+                  )}
+                </AnimatePresence>
+              </div>
+              <div className="mt-7 flex items-center justify-between lg:mt-6 lg:flex-col lg:items-center lg:justify-center lg:space-y-6">
+                <Button
+                  className="relative"
+                  size="xs"
+                  theme="primary"
+                  disabled={formState !== 'default'}
+                >
+                  <span
+                    className={clsx(
+                      'transition-opacity duration-200',
+                      (formState === 'loading' || formState === 'success') && 'opacity-0'
+                    )}
+                  >
+                    Request Early Access
+                  </span>
+                  <span
+                    className={clsx(
+                      'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200',
+                      formState !== 'success' && 'opacity-0'
+                    )}
+                  >
+                    Success!
+                  </span>
+                  {formState === 'loading' && (
+                    <AnimatePresence>
+                      <m.svg
+                        className="absolute left-1/2 top-1/2 h-[28px] w-[28px]"
+                        width="58"
+                        height="58"
+                        viewBox="0 0 58 58"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        style={{ transform: 'scale(1, -1) rotate(-90deg) translate(-50%, -50%)' }}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        variants={appearAndExitAnimationVariants}
+                      >
+                        <m.path
+                          d="M3 29C3 43.3594 14.6406 55 29 55C43.3594 55 55 43.3594 55 29C55 14.6406 43.3594 3 29 3C14.6406 3 3 14.6406 3 29Z"
+                          strokeLinecap="round"
+                          stroke="#1a1a1a"
+                          strokeWidth="6"
+                          initial={{ pathLength: 0 }}
+                          animate={{ pathLength: 1, transition: { duration: 2, delay: 0.2 } }}
+                        />
+                      </m.svg>
+                    </AnimatePresence>
+                  )}
+                </Button>
+                <p className="text-[14px]">
+                  Have an invite code?{' '}
+                  <Link
+                    className="font-semibold text-[#0D80F2] hover:underline"
+                    to={LINKS.dashboard}
+                  >
+                    Log In
+                  </Link>
+                </p>
+              </div>
+            </LazyMotion>
           </form>
         </div>
       </div>

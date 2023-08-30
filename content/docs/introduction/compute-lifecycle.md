@@ -23,6 +23,6 @@ You can check if a compute is `Active` or `Idle` and watch as a compute transiti
 
 Neon only supports modifying session-level configuration parameters. Parameters are reset when the session terminates, such as when the compute suspends due to inactivity.
 
-For information about Neon's Postgres server configuration, see [Neon Postgres parameter settings](/docs/reference/compatibility#neon-postgresql-parameter-settings).
+For information about Neon's Postgres server configuration, see [Neon Postgres parameter settings](/docs/reference/compatibility#neon-postgres-parameter-settings).
 
 For information about Postgres server configuration, see [Server Configuration](https://www.postgresql.org/docs/14/runtime-config.html), in the _PostgreSQL documentation_.
