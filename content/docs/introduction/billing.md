@@ -51,7 +51,7 @@ Factors that affect _Compute time_ include:
 - The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Compute size automatically scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
-Neon uses a small amount of _Compute time_, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
+Neon uses a small amount of _Compute time_, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data. See [Availability Checker](/docs/reference/glossary#availability-checker) for more information.
 </Admonition>
 
 The _Compute time_ cost calculation is as follows:
@@ -188,6 +188,8 @@ The [Pricing](https://neon.tech/pricing) page on the Neon website provides a cal
 
 ### Pro Plan Cost Estimator
 
-The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimation** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Estimate costs**.
+The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimator** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Open cost calculator**.
+
+The tool displays cost estimates only after a month of project usage.
 
 ![Pro Plan Cost Estimation tool](/docs/introduction/billing_page_calculator.png)
