@@ -27,7 +27,9 @@ const Hero = () => (
         className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-[-0.02em] lg:mt-7 md:mt-6"
         theme="primary"
         to="#partners-apply"
-        spread={3}
+        linesOffsetTop={22}
+        linesOffsetSide={22}
+        linesOffsetBottom={40}
         isAnimated
       >
         Become a partner

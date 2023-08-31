@@ -450,7 +450,9 @@ const Calculator = () => {
               theme="primary"
               size="sm"
               animationColor="var(--accentColor)"
-              spread={2}
+              linesOffsetTop={18}
+              linesOffsetSide={26}
+              linesOffsetBottom={55}
               isAnimated
             >
               {estimatedPrice >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
