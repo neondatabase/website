@@ -4,23 +4,7 @@ subtitle: Use the pgvector for vector similarity search in Postgres
 enableTableOfContents: true
 ---
 
-The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models. This topic covers the concepts of vector similarity and embeddings, explains how to enable the `pgvector` extension in Neon, and demonstrates how to create, store, and query vectors.
-
-## Vector similarity
-
-Vector similarity is a method used to measure how similar two items are by representing them as vectors, which are series of numbers. This approach can be applied to various types of data, such as words, images, or other elements. By using a mathematical model, each item is converted into a vector, and then these vectors are compared to determine their similarity. The closer the vectors are in terms of distance, the more alike the items.
-
-## Embeddings
-
-An embedding is a technique that transforms data, such as words, into vectors, enabling machine learning algorithms to efficiently process and analyze them. This transformation captures the relationships and similarities between data, allowing algorithms to identify patterns and make accurate predictions.
-
-A widely used example of embeddings is in natural language processing, where words are represented as vectors. For instance, consider the words "apple", "orange", and "car". By representing each word as a vector in a 2-dimensional space, you can visually observe their relationships:
-
-Apple: (1.2, 0.8)
-Orange: (1.1, 0.9)
-Car: (0.3, 1.5)
-
-In this space, the vectors for "apple" and "orange" are closer together than either is to "car", indicating that they are more similar to each other than to "car". This relationship is captured by vectors in a way that machine learning algorithms can easily understand and utilize for a variety of tasks.
+The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models. This topic describes how to enable the `pgvector` extension in Neon and how to create, store, and query vectors.
 
 ## Enable the pgvector extension
 

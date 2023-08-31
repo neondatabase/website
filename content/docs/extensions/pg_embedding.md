@@ -13,7 +13,7 @@ The `pg_embedding` extension was updated on August 3, 2023 to add support for on
 This extension is based on [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw) implementation of HNSW
 the code for the current state-of-the-art billion-scale nearest neighbor search system<sup>[[1]](https://github.com/neondatabase/pg_embedding#references)</sup>.
 
-Neon also supports `pgvector` for vector similarity search.
+Neon also supports `pgvector` for vector similarity search. See [The pgvector extension](/docs/extensions/pgvector).
 
 ## Using the pg_embedding extension
 
