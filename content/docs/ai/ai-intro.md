@@ -22,7 +22,7 @@ If you are currently using `pgvector` and want to try `pg_embedding`, refer to [
 
 ### pgvector
 
-`pgvector` is an open-source extension that enables storing vector embeddings and vector similarity search in Postgres. It supports `ivfflat` indexes. To get started, see [The pgvector extension](/docs/extensions/pgvector).
+`pgvector` is an open-source extension that enables storing vector embeddings and vector similarity search in Postgres. It supports ivfflat indexes and HNSW indexes (as of v0.5.0). To get started, see [The pgvector extension](/docs/extensions/pgvector).
 
 ## Example applications
 
