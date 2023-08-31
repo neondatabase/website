@@ -59,6 +59,7 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | Application or IDE | Notes |
 | ----------- | ----- |
 | [Appsmith](https://www.appsmith.com/) | |
+| [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/)| Use [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). Use a `$` character as a separator between the `endpoint` option and password. For example: `endpoint=<endpoint_id>$<password>`. Also, you must set **SSL mode** to `require`.
 | [Azure Data Studio](https://azure.microsoft.com/en-us/products/data-studio/) | Requires the [PostgreSQL extension](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/postgres-extension?view=sql-server-ver16) and [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) |
 | [Beekeeper Studio](https://www.beekeeperstudio.io/) | Requires the **Enable SSL** option |
 | [CLion](https://www.jetbrains.com/clion/) | |
@@ -74,7 +75,7 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [ILLA Cloud](https://www.illacloud.com/) | |
 | [Luna Modeler](https://www.datensen.com/data-modeling/luna-modeler-for-relational-databases.html) | Requires enabling the SSL/TLS option |
 | [Metabase](https://www.metabase.com/) | |
-| [PopSQL](https://popsql.com/) | No SNI support. Use  [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). |
+| [PopSQL](https://popsql.com/) | No SNI support. Use [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). |
 | [Postico](https://eggerapps.at/postico2/) | SNI support since v1.5.21. For older versions, use [SNI workaround B](/docs/connect/connection-errors#b-use-libpq-keyvalue-syntax-in-the-database-field). |
 | [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres) | |
 | [pgAdmin 4](https://www.pgadmin.org/) | |
