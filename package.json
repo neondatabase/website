@@ -33,7 +33,6 @@
     "@react-hook/window-scroll": "^1.3.0",
     "@rive-app/react-canvas": "^4.1.4",
     "@splinetool/react-spline": "^2.2.6",
-    "@splinetool/runtime": "^0.9.425",
     "@tailwindcss/typography": "github:tailwindcss/typography",
     "clsx": "^2.0.0",
     "copy-to-clipboard": "^3.3.3",
