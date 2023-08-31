@@ -26,6 +26,24 @@ const styles = {
 
 const CURSOR_OFFSET = 13;
 
+const spreads = {
+  1: {
+    '--top': '28px',
+    '--side': '34px',
+    '--bottom': '46px',
+  },
+  2: {
+    '--top': '18px',
+    '--side': '26px',
+    '--bottom': '55px',
+  },
+  3: {
+    '--top': '22px',
+    '--side': '22px',
+    '--bottom': '40px',
+  },
+};
+
 const AnimatedButton = ({
   className: additionalClassName = null,
   to = null,
@@ -34,6 +52,7 @@ const AnimatedButton = ({
   size = null,
   theme,
   children,
+  spread = 1,
   ...otherProps
 }) => {
   const [cursorAnimationVariant, setCursorAnimationVariant] = useState('default');
@@ -88,11 +107,10 @@ const AnimatedButton = ({
   };
 
   const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
+
   const cssProperties = {
     '--color': animationColor,
-    '--top': '28px',
-    '--side': '34px',
-    '--bottom': '46px',
+    ...spreads[spread],
   };
 
   const Tag = to ? Link : 'button';
@@ -144,6 +162,7 @@ AnimatedButton.propTypes = {
   children: PropTypes.node.isRequired,
   animationColor: PropTypes.string,
   isAnimated: PropTypes.bool,
+  spread: PropTypes.oneOf(Object.keys(spreads)),
 };
 
 export default AnimatedButton;

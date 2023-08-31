@@ -37,6 +37,7 @@ const Hero = () => (
         className="relative mt-9 px-[75px] py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-8 md:mt-6"
         theme="primary"
         to={LINKS.signup}
+        spread={3}
         isAnimated
       >
         Sign up
