@@ -85,7 +85,7 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
     <div className={clsx('relative flex items-center justify-between', className)}>
       <DocSearchButton
         ref={searchButtonRef}
-        aria-label="Use command Search + K or click to open search"
+        aria-label="Use command Search K or click to open search"
         onClick={onOpen}
       />
       {isOpen &&
