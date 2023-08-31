@@ -9,5 +9,5 @@ We are pleased to announce support for [pgvector v0.5.0](https://github.com/pgve
 If you already use `pgvector` with Neon, you can upgrade by running the following command:
 
 ```sql
-ALTER EXTENSION vector update to '0.5.0';
+ALTER EXTENSION vector UPDATE TO '0.5.0';
 ```
