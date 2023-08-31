@@ -83,7 +83,11 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
 
   return (
     <div className={clsx('relative flex items-center justify-between', className)}>
-      <DocSearchButton ref={searchButtonRef} aria-label="Search K" onClick={onOpen} />
+      <DocSearchButton
+        ref={searchButtonRef}
+        aria-label="Open search with command CTRL+K/Command+K"
+        onClick={onOpen}
+      />
       {isOpen &&
         createPortal(
           <div className={clsx({ dark: isBlog })}>
