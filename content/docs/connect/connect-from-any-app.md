@@ -88,6 +88,12 @@ The **Connection Details** widget on the **Neon Dashboard** also provides connec
 
 Our *Guides* documentation also provides connection examples.
 
+## Network protocol support
+
+Neon currently supports **IPv4**. Support for other network protocols, including IPv6, is **not available** at this time.
+
+Additionally, Neon provides a serverless driver that supports both WebSocket and HTTP connections. For further information, refer to our [Neon serverless driver](/docs/serverless/serverless-driver) documentation.
+
 ## Connection notes
 
 - Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](/docs/connect/connection-errors).

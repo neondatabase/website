@@ -72,6 +72,11 @@ export default {
     imagePath: '/images/social-previews/aws-israel.jpg',
     pathname: LINKS.awsIsrael,
   },
+  thankYou: {
+    title: 'Thank you for subscribing — Neon',
+    description: 'Thank you for subscribing to the Neon newsletter',
+    pathname: LINKS.thankYou,
+  },
 };
 
 export const getBlogCategoryDescription = (category) => {

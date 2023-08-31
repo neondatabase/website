@@ -13,7 +13,7 @@ The `pg_embedding` extension was updated on August 3, 2023 to add support for on
 This extension is based on [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw) implementation of HNSW
 the code for the current state-of-the-art billion-scale nearest neighbor search system<sup>[[1]](https://github.com/neondatabase/pg_embedding#references)</sup>.
 
-Neon also supports `pgvector` for vector similarity search. For information on which index to choose, refer to [Comparing vector search extensions](#comparing-vector-search-extensions).
+Neon also supports `pgvector` for vector similarity search. See [The pgvector extension](/docs/extensions/pgvector).
 
 ## Using the pg_embedding extension
 
@@ -156,31 +156,6 @@ Using the found node as an entry point, the algorithm moves down to the next lay
 In the bottom layer, the algorithm continues navigating to the nearest neighbor until it cannot find any nodes that are more similar to the query vector. The current node is then returned as the most similar node to the query vector.
 
 The key idea behind HNSW is that by starting the search at the top layer and moving down through each layer, the algorithm can quickly navigate to the area of the graph that contains the node that is most similar to the query vector. This makes the search process much faster than if it had to search through every node in the graph.
-
-## Comparing vector search extensions
-
-When determining which index to use, `pgvector` with an IVFFlat index or `pg_embedding` with an HNSW, it is helpful to compare the two indexes based on specific criteria, such as:
-
-- Search speed
-- Accuracy
-- Memory usage
-- Index construction speed
-- Distance metrics
-
-|                   | `pgvector` with IVFFlat    | `pg_embedding` with HNSW     |
-|-------------------|------------|----------|
-| Search Speed      | Fast, but search speed depends on the number of clusters examined. More clusters mean higher accuracy but slower search times. | Typically faster than IVFFlat, especially in high-dimensional spaces, thanks to its graph-based nature. |
-| Accuracy          | Can achieve high accuracy but at the cost of examining more clusters and  longer search times. | Generally achieves higher accuracy for the same memory footprint compared to IVFFlat. |
-| Memory Usage      | Uses less memory since it only stores the centroids of clusters and the lists of vectors within these clusters. | Require more memory than IVFFlat because they build a graph structure with multiple layers. |
-| Index Construction Speed | Index building process is relatively fast. The data points are assigned to the nearest centroid, and inverted lists are constructed. | Index construction involves building multiple layers of graphs, which can be computationally intensive, especially for a high `ef_construction` value. |
-| Distance Metrics  | Typically used for L2 distances, but `pgvector` also supports inner product and cosine distance. | Supports L2, Cosine, and Manhattan distance metrics. |
-
-Ultimately, the choice between the `pgvector` with IVFFlat or `pg_embedding` with HNSW depends on your use case and requirements. Here are a few additional points to consider when making your choice:
-
-- **Memory constraints**: If you are working under strict memory constraints, you may opt for the IVFFlat index, as it typically consumes less memory than an HNSW index. However, be mindful that this might come at the cost of search speed and accuracy.
-- **Search speed**: If your primary concern is the speed at which you can retrieve nearest neighbors, especially in high-dimensional spaces, an HNSW index is likely the better choice due to its graph-based approach.
-- **Accuracy and recall**: If achieving high accuracy and recall is critical for your application, an HNSW index may be the better option. Its graph-based approach generally yields better recall compared to IVFFlat.
-- **Distance metrics**: `pgvector` supports L2 (`<->`), inner product (`<#>`), and cosine (`<=>`). The `pg_embedding` extension supports L2 (`<->`), cosine (`<=>`), and Manhattan (`<~>`).
 
 ## Migrate from pgvector to pg_embedding
 
