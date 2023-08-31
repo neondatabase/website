@@ -8,7 +8,7 @@ import YouTubeIcon from 'icons/youtube-sm.inline.svg';
 
 const categories = [
   {
-    name: 'All posts',
+    name: 'Home',
     slug: 'all',
   },
   {
@@ -22,6 +22,10 @@ const categories = [
   {
     name: 'Community',
     slug: 'community',
+  },
+  {
+    name: 'All posts',
+    slug: 'all-posts',
   },
 ];
 
