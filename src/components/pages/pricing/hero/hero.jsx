@@ -13,8 +13,8 @@ import CheckIcon from 'icons/check.inline.svg';
 
 const items = [
   {
-    type: 'Free Tier',
-    price: 'Free',
+    type: 'Free',
+    price: 'Try Neon now',
     description:
       'Essential features to help you get started with Neon. Perfect for prototyping and personal projects.',
     features: [
@@ -124,9 +124,9 @@ const Hero = () => {
                 )}
                 style={{
                   '--accentColor':
-                    type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
+                    type === 'Free' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
                   '--hoverColor':
-                    type === 'Free Tier' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
+                    type === 'Free' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
                 }}
                 key={index}
                 onPointerEnter={() => {
