@@ -117,7 +117,7 @@ const defaultConfig = {
       },
       {
         source: '/ycmatcher',
-        destination: 'https://yc-idea-matcher.vercel.app/',
+        destination: 'https://yc-idea-matcher.vercel.app',
         permanent: true,
       },
       ...docsRedirects,
