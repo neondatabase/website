@@ -40,6 +40,7 @@ export async function generateMetadata({ params }) {
 
   let label = '';
   let description = '';
+  let socialPreviewTitle = '';
   const currentSlug = slug.join('/');
   const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
   const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
@@ -50,10 +51,11 @@ export async function generateMetadata({ params }) {
     const { label: date } = getReleaseNotesDateFromSlug(currentSlug);
     const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
     label = `${capitalisedCategory} release ${date}`;
+    socialPreviewTitle = `Release notes - ${date}`;
     description = getExcerpt(content, 160);
   }
 
-  const encodedLabel = Buffer.from(label).toString('base64');
+  const encodedLabel = Buffer.from(socialPreviewTitle ?? label).toString('base64');
 
   return getMetadata({
     title: `${label} - Neon`,
