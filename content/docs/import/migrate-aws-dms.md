@@ -3,14 +3,7 @@ title: Migrate with AWS Database Migration Service (DMS)
 enableTableOfContents: true
 ---
 
-<<<<<<< Updated upstream
-This guide outlines the steps for using the AWS Database Migration Service (DMS) to migrate data to Neon from another hosted database, which may be running on platforms like PostgreSQL, MySQL, Oracle, or Microsoft SQL Server.
-
-For an in-depth AWS DMS tutorial or additional information about particular migration steps, please refer to the [official documentation provided by AWS DMS](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html).
-
-If you encounter problems with AWS DMS that are not related to Neon as a data migration target, it is recommended to reach out to [AWS Customer Support](https://aws.amazon.com/contact-us/).
-=======
-This guide outlines the steps for using the AWS Database Migration Service (DMS) to migrate data to Neon from another hosted database, which may be running on platforms such sa PostgreSQL, MySQL, Oracle, or Microsoft SQL Server.
+This guide outlines the steps for using the AWS Database Migration Service (DMS) to migrate data to Neon from another hosted database, which may be running on platforms such as PostgreSQL, MySQL, Oracle, or Microsoft SQL Server.
 
 <Admonition type="note">
 For a complete list of data migration sources supported by AWS DMS, see [Source endpoints for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.Sources.html#CHAP_Introduction.Sources.DataMigration).
@@ -19,35 +12,39 @@ For a complete list of data migration sources supported by AWS DMS, see [Source 
 For an in-depth AWS DMS tutorial and additional information about particular migration steps, please refer to the [official documentation provided by AWS DMS](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html).
 
 If you encounter problems with AWS DMS that are not related to Neon as a data migration target, we recommend contacting [AWS Customer Support](https://aws.amazon.com/contact-us/).
->>>>>>> Stashed changes
 
 ## Before you begin
 
 Complete the following steps before you begin:
 
 - Create a [replication instance](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Creating.html) in AWS.
-<<<<<<< Updated upstream
-- Configure a [data migration source](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.html) in AWS. For supported data migration sources, see [Source endpoints for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.Sources.html#CHAP_Introduction.Sources.DataMigration).
-=======
 - Configure a [data migration source](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.html) in AWS.
->>>>>>> Stashed changes
 - If you have not done so already, set up a Neon project and a target database. See [Create a project](/docs/manage/projects#create-a-project), and [Create a database](/docs/manage/databases#delete-a-database) for instructions.
-- If you are migrating from PostgreSQL, MySQL, Oracle, or Microsoft SQL Server, use the Schema Conversion Tool to convert and export your schema.
+- If you are migrating from a database engine other than Postgres, use the [Schema Conversion Tool](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SCT.html) or [DMS Schema Conversion](https://docs.aws.amazon.com/dms/latest/userguide/getting-started.html) to convert and export your schema.
 
 ## Create a target endpoint for your Neon database
 
-1. In the AWS Console, open AWS DMS.
-2. Open Endpoints in the sidebar. A list of endpoints will display, if any exist.
-3. In the top-right portion of the window, click **Create endpoint**. A configuration page will open.
-4. In the Endpoint type section, select Target endpoint.
-5. Supply an Endpoint identifier to identify the new target endpoint.
-6. In the Target engine dropdown, select PostgreSQL.
-7. Under Access to endpoint database, select Provide access information manually.
-8. For information about where to find CockroachDB connection parameters, see Connect to a CockroachDB Cluster.
-8. Enter the Server name and Port of your CockroachDB cluster.
-9. Supply a User name, Password, and Database name for your Neon database. You can find those details in the **Connection Details** widget on the Neon **Dashboard**. For more infomration, see [Connect from any application](/docs/connect/connect-from-any-app).
-10. If needed, you can test the connection under Test endpoint connection (optional).
-11. To create the endpoint, select Create endpoint.
+1. In the AWS Console, select **Database Migration Service**.
+2. Select **Endpoints** from the sidebar.
+3. Click **Create endpoint**.
+4. Select **Target endpoint** as the **Endpoint type**.
+5. Provide an **Endpoint identifier** label to identify your new target endpoint. We'll call it `neon-target`.
+6. In the **Target engine** drop-down menu, select `PostgreSQL`.
+7. Under **Access to endpoint database**, select **Provide access information manually**.
+8. Supply a User name, Password, and Database name for your Neon database. You can find those details in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). Enter the values as shown:
+![Endpoint configuration dialog](/docs/import/endpoint-configuration.png).
+
+<Admonition type="important">
+To connection to Neon from AWS DMS, you must specify the password in the following format: `endpoint=<endpoint_id>;<password>`, which will look similar to this when defined:
+
+```text
+endpoint=ep-curly-term-54009904$abcd1234efgh5678
+```
+
+You can obtain the `endpoint_id` value and password from your connection string. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-curly-term-54009904`. For information about why this format is required for the password, see [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified). AWS DMS srequires the [Option D workaround](https://neon.tech/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) that is deribed on that page.
+</Admonition>
+
+11. Select **Create endpoint**.
 
 ## Create a database migration task
 
@@ -57,7 +54,7 @@ A database migration task defines what data is migrated from the source database
 2. In the top-right portion of the window, select Create task. A configuration page will open.
 Supply a Task identifier to identify the replication task.
 3. Select the Replication instance and Source database endpoint you created prior to starting this tutorial.
-4. For the Target database endpoint dropdown, select the CockroachDB endpoint created in the previous section.
+4. For the Target database endpoint dropdown, select the Neon database endpoint created in the previous section.
 5. Select the appropriate Migration type based on your needs.
 
 ### Task settings
