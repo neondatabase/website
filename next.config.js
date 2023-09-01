@@ -107,7 +107,7 @@ const defaultConfig = {
       },
       {
         source: '/api-reference',
-        destination: 'https://api-docs.neon.tech/',
+        destination: 'https://api-docs.neon.tech',
         permanent: true,
       },
       {
