@@ -104,7 +104,7 @@ const Partners = () => (
             >
               Learn more
             </Link>{' '}
-            about how to participate in the Partners program.
+            about participating in Neon's Partner program.
           </p>
         </div>
       </div>
