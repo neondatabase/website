@@ -39,7 +39,7 @@ To establish a basic connection from Prisma to Neon, perform the following steps
    <CodeBlock shouldWrap>
 
    ```text
-   DATABASE_URL="postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb"
+   DATABASE_URL="postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb"
    ```
 
    </CodeBlock>
@@ -55,7 +55,7 @@ Serverless functions typically require a large number of database connections. W
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true
+DATABASE_URL=postgres://daniel:<password>@ep-raspy-cherry-95040071-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true
 ```
 
 </CodeBlock>
@@ -86,7 +86,7 @@ When you connect to an idle compute from Prisma, Neon automatically activates it
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb?connect_timeout=10`
+DATABASE_URL=postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb?connect_timeout=10`
 ```
 
 </CodeBlock>
@@ -100,7 +100,7 @@ Another possible cause of connection timeouts is [Prisma's connection pool](http
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb/neondb?connect_timeout=15&pool_timeout=15`
+DATABASE_URL=postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb/neondb?connect_timeout=15&pool_timeout=15`
 ```
 
 </CodeBlock>

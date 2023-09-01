@@ -25,13 +25,13 @@ You can these details from the **Connection Details** widget on the **Neon Dashb
 The connection string includes the role name, hostname, and database name. For example:
 
 ```text
-postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb
+postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
              ^                                 ^                           ^
              |- <role>                         |- <hostname>               |- <database>
 ```
 
 - role name: `daniel`
-- hostname: `ep-damp-cell-18160816.us-east-2.aws.neon.tech`
+- hostname: `ep-raspy-cherry-95040071.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
 ## Configure project environment variables in Vercel
@@ -39,13 +39,13 @@ postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neond
 The environment variables required to connect your application to Neon depend on your application. Some applications use a `DATABASE_URL` environment variable with a database connection string:
 
 ```text
-DATABASE_URL="postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb"
+DATABASE_URL="postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb"
 ```
 
 Other applications may use `PG*` environment variables to define database connection details:
 
 ```text
-PGHOST=ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb
+PGHOST=ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
 PGUSER=daniel
 PGDATABASE=neondb
 PGPASSWORD=<password>
