@@ -151,7 +151,7 @@ const Hero = () => {
                     />
                     <AnimatedButton
                       className={clsx(
-                        'relative mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 md:mt-7 sm:max-w-none',
+                        'mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 md:mt-7 sm:max-w-none',
                         type === 'Pro'
                           ? 'lg:absolute lg:right-8 lg:top-0 lg:max-w-[210px] md:relative md:right-0 md:max-w-[304px]'
                           : 'lg:max-w-[304px]'
@@ -160,7 +160,6 @@ const Hero = () => {
                       animationColor="var(--accentColor)"
                       theme="primary"
                       size="sm"
-                      spread={2}
                     >
                       {button.text}
                     </AnimatedButton>
