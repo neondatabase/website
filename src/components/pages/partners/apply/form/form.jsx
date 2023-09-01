@@ -2,6 +2,7 @@
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -17,10 +18,18 @@ import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 import LoadingIcon from '../images/loading.inline.svg';
 
-import CallbackUrlFields from './callback-url-fields';
-import Field from './field';
-import MultiSelect from './multi-select';
-import Select from './select';
+const Select = dynamic(() => import('./select'), {
+  ssr: false,
+});
+const MultiSelect = dynamic(() => import('./multi-select'), {
+  ssr: false,
+});
+const CallbackUrlFields = dynamic(() => import('./callback-url-fields'), {
+  ssr: false,
+});
+const Field = dynamic(() => import('./field'), {
+  ssr: false,
+});
 
 const integrationTypeOptions = [
   { id: 'oauth', name: 'OAuth' },

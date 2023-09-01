@@ -47,6 +47,11 @@ const items = [
         price: '0.03025',
         unit: 'hour',
       },
+      {
+        name: 'Israel (Tel Aviv)',
+        price: '0.03025',
+        unit: 'hour',
+      },
     ],
   },
   {
@@ -77,6 +82,11 @@ const items = [
       },
       {
         name: 'Asia Pacific (Singapore)',
+        price: '0.09',
+        unit: 'GiB',
+      },
+      {
+        name: 'Israel (Tel Aviv)',
         price: '0.09',
         unit: 'GiB',
       },
@@ -113,6 +123,11 @@ const items = [
         price: '0.00018',
         unit: 'GiB-hour',
       },
+      {
+        name: 'Israel (Tel Aviv)',
+        price: '0.00022',
+        unit: 'GiB-hour',
+      },
     ],
   },
   {
@@ -143,6 +158,11 @@ const items = [
       },
       {
         name: 'Asia Pacific (Singapore)',
+        price: '0.096',
+        unit: 'GiB',
+      },
+      {
+        name: 'Israel (Tel Aviv)',
         price: '0.096',
         unit: 'GiB',
       },

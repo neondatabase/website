@@ -1,7 +1,7 @@
 'use client';
 
-import Spline from '@splinetool/react-spline';
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -11,6 +11,8 @@ import Button from 'components/shared/button/button';
 import Container from 'components/shared/container/container';
 import LINKS from 'constants/links';
 import useIsTouchDevice from 'hooks/use-is-touch-device';
+
+const Spline = dynamic(() => import('@splinetool/react-spline'));
 
 const MOBILE_WIDTH = 768;
 

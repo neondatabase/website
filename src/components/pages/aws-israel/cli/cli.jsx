@@ -2,9 +2,8 @@ import CodeBlock from 'components/shared/code-block/code-block';
 import Container from 'components/shared/container/container';
 import GradientLabel from 'components/shared/gradient-label';
 
-const code = `  > neonctl connection-string <branch> --project-id=<your-project-id>
+const code = `  > neonctl connection-string
 
-  Connection Uri
   postgres://<user>:<password>@epl-792025.us-east-2.aws.neon.tech/neondb
 `;
 

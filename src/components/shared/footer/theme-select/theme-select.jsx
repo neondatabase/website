@@ -118,7 +118,7 @@ const ThemeSelect = ({ className = null }) => {
         <button
           className="flex h-[30px] w-full items-center py-[7px] pl-2.5 pr-3"
           type="button"
-          aria-label="Select theme"
+          aria-label={`Switch theme. Current theme: ${theme}`}
           onClick={handleDropdown}
         >
           <ActiveThemeIcon theme={theme} />
