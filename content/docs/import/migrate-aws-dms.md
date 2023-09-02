@@ -3,15 +3,15 @@ title: Migrate with AWS Database Migration Service (DMS)
 enableTableOfContents: true
 ---
 
-This guide outlines the steps for using the AWS Database Migration Service (DMS) to migrate data to Neon from another hosted database, which may be running on platforms such as PostgreSQL, MySQL, Oracle, or Microsoft SQL Server.
+This guide outlines the steps for using the AWS Database Migration Service (DMS) to migrate data to Neon from another hosted database, which may be running on platforms such as PostgreSQL, MySQL, Oracle, Microsoft SQL Server, or other database migration sources supported by AWS DMS.
 
 <Admonition type="note">
-For a complete list of data migration sources supported by AWS DMS, see [Source endpoints for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.Sources.html#CHAP_Introduction.Sources.DataMigration).
+For a complete list of supported data migration sources, see [Source endpoints for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.Sources.html#CHAP_Introduction.Sources.DataMigration).
 </Admonition>
 
-For an in-depth AWS DMS tutorial and additional information about particular migration steps, please refer to the [official documentation provided by AWS DMS](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html).
+For an in-depth AWS DMS tutorial and more information about particular steps in the migration process, refer to the [official AWS DMS documentation](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html).
 
-If you encounter problems with AWS DMS that are not related to Neon as a data migration target, we recommend contacting [AWS Customer Support](https://aws.amazon.com/contact-us/).
+If you encounter problems with AWS DMS that are not related to Neon as a data migration target endpoint, please contact [AWS Customer Support](https://aws.amazon.com/contact-us/).
 
 ## Before you begin
 
@@ -20,7 +20,7 @@ Complete the following steps before you begin:
 - Create a [replication instance](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Creating.html) in AWS.
 - Configure a [data migration source](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.html) in AWS.
 - If you have not done so already, set up a Neon project and a target database. See [Create a project](/docs/manage/projects#create-a-project), and [Create a database](/docs/manage/databases#delete-a-database) for instructions.
-- If you are migrating from a database engine other than Postgres, use the [Schema Conversion Tool](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SCT.html) or [DMS Schema Conversion](https://docs.aws.amazon.com/dms/latest/userguide/getting-started.html) to convert and export your schema.
+- If you are migrating from a database engine other than Postgres, use the [Schema Conversion Tool](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SCT.html) or [DMS Schema Conversion](https://docs.aws.amazon.com/dms/latest/userguide/getting-started.html) to convert and export your schema first.
 
 ## Create a target endpoint for your Neon database
 
@@ -41,7 +41,7 @@ To connection to Neon from AWS DMS, you must specify the password in the followi
 endpoint=ep-curly-term-54009904$abcd1234efgh5678
 ```
 
-You can obtain the `endpoint_id` value and password from your connection string. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-curly-term-54009904`. For information about why this format is required for the password, see [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified). AWS DMS srequires the [Option D workaround](https://neon.tech/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) that is deribed on that page.
+You can obtain the `endpoint_id` value and password from your connection string. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-curly-term-54009904`. For information about why this format is required for the password, see [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified). AWS DMS srequires the [Option D workaround](https://neon.tech/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) that is described on that page.
 </Admonition>
 
 11. Select **Create endpoint**.
