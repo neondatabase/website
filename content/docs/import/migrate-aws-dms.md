@@ -32,7 +32,7 @@ Complete the following steps before you begin. For the AWS DMS, you may find it 
 6. In the **Target engine** drop-down menu, select `PostgreSQL`.
 7. Under **Access to endpoint database**, select **Provide access information manually**.
 8. Supply a User name, Password, and Database name for your Neon database. You can find those details in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). Enter the values as shown:
-![Endpoint configuration dialog](/docs/import/endpoint-configuration.png).
+![Endpoint configuration dialog](/docs/import/endpoint_configuration.png).
 
 <Admonition type="important">
 To connection to Neon from AWS DMS, you must specify the password in the following format: `endpoint=<endpoint_id>;<password>`, which will look similar to this when defined:
