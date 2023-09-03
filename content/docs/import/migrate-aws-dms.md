@@ -3,24 +3,24 @@ title: Migrate with AWS Database Migration Service (DMS)
 enableTableOfContents: true
 ---
 
-This guide outlines the steps for using the AWS Database Migration Service (DMS) to migrate data to Neon from another hosted database, which may be running on platforms such as PostgreSQL, MySQL, Oracle, Microsoft SQL Server, or other database migration sources supported by AWS DMS.
+This guide outlines the steps for using the AWS Database Migration Service (DMS) to migrate data to Neon from another hosted database such as PostgreSQL, MySQL, Oracle, Microsoft SQL Server, or some other database migration source supported by AWS DMS.
 
 <Admonition type="note">
-For a complete list of supported data migration sources, see [Source endpoints for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.Sources.html#CHAP_Introduction.Sources.DataMigration).
+For a complete list of data migration sources supported by AWS DMS, see [Source endpoints for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.Sources.html#CHAP_Introduction.Sources.DataMigration).
 </Admonition>
 
-For an in-depth AWS DMS tutorial and more information about particular steps in the migration process, refer to the [official AWS DMS documentation](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html).
+For additional information about particular steps in the migration process, refer to the [official AWS DMS documentation](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html). If you are not familiar with AWS DMS, we recommend the [Getting started with AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html) tutorial.
 
-If you encounter problems with AWS DMS that are not related to Neon as a data migration target endpoint, please contact [AWS Customer Support](https://aws.amazon.com/contact-us/).
+If you encounter problems with AWS DMS that are not related to defining Neon as a data migration target endpoint, please contact [AWS Customer Support](https://aws.amazon.com/contact-us/).
 
 ## Before you begin
 
-Complete the following steps before you begin:
+Complete the following steps before you begin. For the AWS DMS, you may find it help ful to refer to the [Getting started with AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html) tutorial as you work through these steps.
 
-- Create a [replication instance](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Creating.html) in AWS.
-- Configure a [data migration source](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.html) in AWS.
-- If you have not done so already, set up a Neon project and a target database. See [Create a project](/docs/manage/projects#create-a-project), and [Create a database](/docs/manage/databases#delete-a-database) for instructions.
-- If you are migrating from a database engine other than Postgres, use the [Schema Conversion Tool](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SCT.html) or [DMS Schema Conversion](https://docs.aws.amazon.com/dms/latest/userguide/getting-started.html) to convert and export your schema first.
+- Create a [replication instance](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Creating.html) in AWS DMS.
+- Configure a [data migration source](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.html) in AWS DMS.
+- If you have not done so already, set up a Neon project and a target database. See [Create a project](/docs/manage/projects#create-a-project), and [Create a database](/docs/manage/databases#delete-a-database) for instructions. Typically, you would create a database in Neon with the same name as the database you are migrating.
+- If you are migrating from a database engine other than Postgres, use the [Schema Conversion Tool](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SCT.html) or [DMS Schema Conversion](https://docs.aws.amazon.com/dms/latest/userguide/getting-started.html) to convert and export your schema from the source database to the target database. As outlined in the [Getting started with AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html) tutorial, you would perform this step before proceeding with the steps outlined below. If migrating from a Postgre database to Neon, schema conversion is not required.
 
 ## Create a target endpoint for your Neon database
 
