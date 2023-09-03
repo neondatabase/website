@@ -59,7 +59,7 @@ Complete the following steps before you begin. For the AWS DMS setup prerequisit
     - **Database name**: The name of your Neon database. In this example, we use a database named `neondb`
 
       When you finish entering the connection details, your target endpoint configuration should look similar to this:
-      ![Endpoint configuration dialog](/docs/import/endpoint_configuration.png).
+      ![Endpoint configuration dialog](/docs/import/endpoint_configuration.png)
 
 9. Under **Test endpoint connection (optional)**, click **Run test** to test the connection. Running the test creates the endpoint with the details and attempts to connect to it. If the connection fails, you can edit the endpoint definition and test the connection again. Ensuring the connection is successful here avoids errors later during the database migration.
 10. Select **Create endpoint**.
@@ -120,11 +120,15 @@ This section contains notes from our experience using AWS DMS to migrate data to
 - We populated the RDS PostgreSQL source database using the [AWS DMS sample Postgres database](https://github.com/aws-samples/aws-database-migration-samples/blob/master/PostgreSQL/sampledb/v1/README.md). To do this, we created an EC2 instance to connect to the database following these steps: [Create an Amazon EC2 Client](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.client).
 - The source database was populated using this `psql` command:
 
+  <CodeBlock shouldWrap>
+
   ```bash
   psql -h dms-postgresql.abc123def456hgi.us-east-2.rds.amazonaws.com -p 5432 -U postgres -d dms_sample -a -f ~/aws-database-migration-samples/PostgreSQL/sampledb/v1/postgresql.sql
   ```
 
-- To verify that data was loaded in the source database, we connected using the following `psql` command and issued the following query:
+  </CodeBlock>
+
+- To verify that data was loaded in the source database, we connected using the following `psql` command and ran a `SELECT` query:
 
     ```bash
     psql \
