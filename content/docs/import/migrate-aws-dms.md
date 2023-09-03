@@ -96,4 +96,14 @@ A database migration task defines what data is migrated from the source database
 ### Migration task startup configuration
 
 1. Under ***Migration task startup configuration**, select **Automatically on create**
-2. Click **Start migration task** at the bottom of the page. The data migration tasks is created first and the data migration operation is initiated immediately afterward.
+2. Click **Start migration task** at the bottom of the page. The data migration tasks is created and the data migration operation is initiated. You can monitor the progress of the operation on the AWS DMS **Database migrations tasks** page.
+![DMS database migration task status](/docs/import/dms_migration_status.png)
+
+## Verify the data migration in Neon
+
+To verify that the data was migrated to your Neon database:
+
+1. In the Neon Console, select your Neon project.
+2. Select Tables from the side bar.
+3. Select your Branch, Database, and Schema. In this example, we used the main (Primary branch) of the Neon project, the neondb database, and the schema imported was `dms_sample`.
+![Neon Tables view showing imported data](/docs/import/dms_neon_table_data.png).
