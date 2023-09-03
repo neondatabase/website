@@ -59,7 +59,7 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | Application or IDE | Notes |
 | ----------- | ----- |
 | [Appsmith](https://www.appsmith.com/) | |
-| [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/)| Use [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). Use a `$` character as a separator between the `endpoint` option and password. For example: `endpoint=<endpoint_id>$<password>`. Also, you must set **SSL mode** to `require`.
+| [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/)| Use [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). Use a `$` character as a separator between the `endpoint` option and password. For example: `endpoint=<endpoint_id>$<password>`. Also, you must set **Secure Socket Layer (SSL) mode** to `require`. See [Migrate with AWS DMS](/docs/import/migrate-aws-dms).
 | [Azure Data Studio](https://azure.microsoft.com/en-us/products/data-studio/) | Requires the [PostgreSQL extension](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/postgres-extension?view=sql-server-ver16) and [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) |
 | [Beekeeper Studio](https://www.beekeeperstudio.io/) | Requires the **Enable SSL** option |
 | [CLion](https://www.jetbrains.com/clion/) | |
