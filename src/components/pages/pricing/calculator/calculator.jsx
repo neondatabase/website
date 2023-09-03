@@ -449,10 +449,10 @@ const Calculator = () => {
               to={estimatedPrice >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
               theme="primary"
               size="sm"
-              animationSize="sm"
               animationColor="var(--accentColor)"
-              animationClassName="-top-3/4 w-[118%] sm:w-[110%]"
-              spread={1}
+              linesOffsetTop={18}
+              linesOffsetSide={26}
+              linesOffsetBottom={55}
               isAnimated
             >
               {estimatedPrice >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}

@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
-import Button from 'components/shared/button/button';
+import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container/container';
 import LINKS from 'constants/links';
 import useIsTouchDevice from 'hooks/use-is-touch-device';
@@ -94,13 +94,17 @@ const Hero = () => {
           Build and scale transformative LLM applications with vector indexes and similarity search
           in Postgres
         </p>
-        <Button
+        <AnimatedButton
           className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-8 md:mt-6"
           theme="primary"
           to={LINKS.signup}
+          linesOffsetTop={22}
+          linesOffsetSide={22}
+          linesOffsetBottom={40}
+          isAnimated
         >
           Get Started
-        </Button>
+        </AnimatedButton>
       </Container>
 
       <div className="md:relative">
