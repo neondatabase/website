@@ -108,7 +108,7 @@ This section contains notes from our experience using AWS DMS to migrate data to
 
 - When testing migration steps, the the [Getting started with AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html) tutorial was our primary reference. As recommended in the tutorial, we created a VPC and created all resources within the VPC.
 - We created all resources in the same region (`us-east-2a`)
-- We created an RDS PostgreSQL 15 database called `dms_sample` as the source database. The Neon target database was also Postgres 15, which is the default version for Neon.
+- We created an RDS PostgreSQL 15 database called `dms_sample` as the source database. The Neon target database was also Postgres 15.
 - We populated the RDS PostgreSQL source database using the [AWS DMS sample Postgres database](https://github.com/aws-samples/aws-database-migration-samples/blob/master/PostgreSQL/sampledb/v1/README.md). To do this, we created an EC2 instance to connect to the database following the steps in this topic: [Create an Amazon EC2 Client](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.client).
 - The source database was populated using this `psql` command:
 
