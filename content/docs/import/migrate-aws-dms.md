@@ -105,7 +105,7 @@ To verify that data was migrated to your Neon database:
 
 ## Migration notes
 
-This section contains notes from our experience using AWS DMS to migrate data to Neon.
+This section contains notes from our experience using AWS DMS to migrate data to Neon from an RDS Postgres database.
 
 - When testing migration steps, the the [Getting started with AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html) tutorial was our primary reference. As recommended in the tutorial, we created a VPC and created all resources within the VPC.
 - We created all resources in the same region (`us-east-2a`)
