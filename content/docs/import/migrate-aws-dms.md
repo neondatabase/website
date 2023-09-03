@@ -15,7 +15,7 @@ If you encounter problems with AWS DMS that are not related to defining Neon as 
 
 ## Before you begin
 
-Complete the following steps before you begin. For the AWS DMS, you may find it help ful to refer to the [Getting started with AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html) tutorial as you work through these steps.
+Complete the following steps before you begin. For the AWS DMS setup prerequisites, you may find it helpful to refer to the [Getting started with AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html) tutorial as you work through these steps.
 
 - Create a [replication instance](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Creating.html) in AWS DMS.
 - Configure a [data migration source](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.html) in AWS DMS.
@@ -28,65 +28,72 @@ Complete the following steps before you begin. For the AWS DMS, you may find it 
 2. Select **Endpoints** from the sidebar.
 3. Click **Create endpoint**.
 4. Select **Target endpoint** as the **Endpoint type**.
-5. Provide an **Endpoint identifier** label to identify your new target endpoint. We'll call it `neon-target`.
+5. Provide an **Endpoint identifier** label to identify your new target endpoint. In this example, we use `neon` as the identifier.
 6. In the **Target engine** drop-down menu, select `PostgreSQL`.
 7. Under **Access to endpoint database**, select **Provide access information manually**.
-8. Supply a User name, Password, and Database name for your Neon database. You can find those details in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). Enter the values as shown:
-![Endpoint configuration dialog](/docs/import/endpoint_configuration.png).
+8. Enter the information outlined below. You can obtain most of this information from your Neon connection string, which you can find in the **Connection Details** widget on the Neon **Dashboard**. Your Neon connection string will look something like this:
 
-<Admonition type="important">
-To connection to Neon from AWS DMS, you must specify the password in the following format: `endpoint=<endpoint_id>;<password>`, which will look similar to this when defined:
+    <CodeBlock shouldWrap>
 
-```text
-endpoint=ep-curly-term-54009904$abcd1234efgh5678
-```
+    ````text
+    postgres://daniel:<password>@ep-curly-term-54009904.us-east-2.aws.neon.tech/neondb
+    ````
 
-You can obtain the `endpoint_id` value and password from your connection string. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-curly-term-54009904`. For information about why this format is required for the password, see [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified). AWS DMS srequires the [Option D workaround](https://neon.tech/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) that is described on that page.
-</Admonition>
+    </CodeBlock>
 
-11. Select **Create endpoint**.
+    See [Connect from any application](/docs/connect/connect-from-any-app) for more information about connection strings.
+
+    - **Server name**: This is your Neon hostname, which is this portion of your connection string: `ep-curly-term-54009904.us-east-2.aws.neon.tech`
+    - **Port**: `5432`
+    - **User name**: This is the Neon user you will connect with. In this example, the user name is `daniel`.
+    - **Password**: To connection to Neon from AWS DMS, you must specify the password in the following format: `endpoint=<endpoint_id>$<password>`, which will look similar to this when defined:
+
+      ```text
+      endpoint=ep-curly-term-54009904$abcd1234efgh5678
+      ```
+
+      You can obtain the `endpoint_id` value and password from your Neon connection string. The `endpoint_id` has an `ep-` prefix and appears similar to this: `ep-curly-term-54009904`. For information about why this format is required for the password, see [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified). AWS DMS requires the [Option D workaround](https://neon.tech/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) that is described on that page.
+
+    - **Database name**: The name of your Neon database. In this example, we use a database named `neondb`
+
+      When you are finished entering the connection details, your target endpoint configuration should look something like this:
+      ![Endpoint configuration dialog](/docs/import/endpoint_configuration.png).
+
+9. Under **Test endpoint connection (optional)**, click **Run test** to test the connection. Running the test creates the endpoint with the details and attempts to connect to it. If the connection fails, you can edit the endpoint definition and test the connection again. Ensuring that the connection is successful here avoids errors later during the database migration.
+10. Select **Create endpoint**.
 
 ## Create a database migration task
 
 A database migration task defines what data is migrated from the source database to the target database.
 
-1. While in AWS DMS, select Database migration tasks in the sidebar. A list of database migration tasks will display, if any exist.
-2. In the top-right portion of the window, select Create task. A configuration page will open.
-Supply a Task identifier to identify the replication task.
-3. Select the Replication instance and Source database endpoint you created prior to starting this tutorial.
-4. For the Target database endpoint dropdown, select the Neon database endpoint created in the previous section.
-5. Select the appropriate Migration type based on your needs.
+1. In AWS DMS, select **Database migration tasks** from the sidebar.
+2. Select **Create task** to open a **Create database migration task** page.
+3. Enter a **Task identifier** to identify the replication task. In this example, we name the identifier `dms-task`.
+4. Select the **Replication instance** you created previously (see [Before you begin](#before-you-begin)).
+5. Select the **Source database endpoint** you created previously see [Before you begin](#before-you-begin)).
+5. Select the **Target database endpoint** that you created previously. In this example, the target database endpoint identifier is `neon`.  
+6. Select a **Migration type**. In this example, we use the default `Migrate existing data` type.
+![DMS database migration task configuration](/docs/import/dms_task_configuration.png)
 
 ### Task settings
 
-1. For the Editing mode radio button, keep Wizard selected.
-2. To preserve the schema you manually created, select Truncate or Do nothing for the Target table preparation mode.
-3. Optionally check Enable validation to compare the data in the source and target rows, and verify that the migration succeeded. You can view the results in the Table statistics for your migration task. 4. For more information about data validation, see the AWS documentation.
-Check the Enable CloudWatch logs option. We highly recommend this for troubleshooting potential migration issues.
-5. For the Target Load, select Detailed debug.
+1. For **Editing mode** radio button, select **Wizard**.
+2. For Target table preparation mode, select **Do nothing**. This option means that AWS DMS only creates tables at the target endpoint target if they do not exist.
+3. For **LOB column** settings, select **Don't include LOB columns**. Neon does not support LOB columns.
+4. Optionally, under **Validation**, check **Turn on** to compare the data after the load operation finishes to ensure that data was migrated accurately. For more information about validation, refer to the [AWS data validation documentation](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Validating.html). You can also check **Enable CloudWatch logs** and set **Target Load** to **Debug** or **Detailed debug** to log information during the migration process, which is useful for troubleshooting migration issues.
+![DMS database migration task settings](/docs/import/dms_task_settings.png)
 
 ### Table mappings
 
-When specifying a range of tables to migrate, the following aspects of the source and target database schema must match unless you use transformation rules:
+1. For **Editing mode**, select **Wizard**.
+2. Under **Selection rules**, click **Add new selection rule**.
+3. For **Schema**, select **Enter a schema**.
+4. For **Source name**, enter the name of your database schema. In this example, we use the `dms_sample` database, so we specified the `dms_sample` as the schema name. This schema will be created in your Neon database and database objects will be created in this schema.
+5. For the Source table name, leave the `%` wildcard character to load all tables in the schema.
+6. For **Action**, select **Include** to migrate the objects specified by the selection rule you defined above.
+![DMS database migration task table mappings](/docs/import/dms_task_table_mappings.png)
 
-- Column names must be identical.
-- Column types must be compatible.
-- Column nullability must be identical.
+### Migration task startup configuration
 
-1. For the Editing mode radio button, keep Wizard selected.
-2. Select Add new selection rule.
-3. In the Schema dropdown, select Enter a schema.
-4. Supply the appropriate Source name (schema name), Table name, and Action.
-
-Note:
-Use % as an example of a wildcard for all schemas in a PostgreSQL database. However, in MySQL, using % as a schema name imports all the databases, including the metadata/system ones, as MySQL treats schemas and databases as the same.
-
-## Verify the migration
-
-Data should now be moving from source to target. You can analyze the Table Statistics page for information about replication.
-
-1. In AWS DMS, open Database migration tasks in the sidebar.
-2. Select the task you created in Step 2.
-3. Select Table statistics below the Summary section.
-
-If your migration failed for some reason, you can check the checkbox next to the table(s) you wish to re-migrate and select Reload table data.
+1. Under ***Migration task startup configuration**, select **Automatically on create**
+2. Click **Start migration task** at the bottom of the page. The data migration tasks is created first and the data migration operation is initiated immediately afterward.

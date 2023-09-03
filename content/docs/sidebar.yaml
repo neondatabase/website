@@ -226,6 +226,8 @@
       slug: import/import-from-csv
     - title: Import from a Neon project
       slug: import/import-from-neon
+    - title: Migrate data with AWS DMS
+      slug: import/migrate-aws-dms
 - title: Security
   items:
     - title: Security overview
