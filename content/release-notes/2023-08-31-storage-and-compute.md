@@ -1,6 +1,6 @@
 ### Support for AWS Data Migration Service (DMS)
 
-Neon now supports data migration using the AWS Data Migration Service (DMS). Previously, a connection limitation prevented defining Neon as a target database endpoint. For data migration instructions, please refer to [Migrate with AWS Database Migration Service (DMS)](/docs/import/migrate-aws-dms).
+You can now migrate data to Neon using the AWS Data Migration Service (DMS). Previously, a connection limitation prevented defining Neon as a target database endpoint. For data migration instructions, please refer to [Migrate with AWS Database Migration Service (DMS)](/docs/import/migrate-aws-dms).
 
 ### Fixes & improvements
 
