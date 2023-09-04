@@ -23,12 +23,9 @@ const ReleaseNoteList = ({ className, items }) => (
               className="transition-colors duration-200 hover:text-secondary-8 dark:hover:text-green-45"
               to={releaseNotesPath}
             >
-              <time
-                className="whitespace-nowrap text-xl font-semibold leading-normal"
-                dateTime={datetime}
-              >
-                {label}
-              </time>
+              <h2 className="whitespace-nowrap text-xl font-semibold leading-normal">
+                <time dateTime={datetime}>{label}</time>
+              </h2>
             </Link>
 
             <Content

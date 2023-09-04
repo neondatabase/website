@@ -9,9 +9,9 @@ import RSSLogo from './images/rss.inline.svg';
 const TITLE = 'Release notes';
 const DESCRIPTION = 'The latest product updates from Neon';
 
-const Hero = ({ className = null, withContainer = false, isReleaseNotePost }) => {
+const Hero = ({ className = null, withContainer = false }) => {
   const Tag = withContainer ? Container : 'div';
-  const TitleTag = isReleaseNotePost ? 'span' : 'h1';
+
   return (
     <div className={className}>
       <Tag
@@ -20,7 +20,7 @@ const Hero = ({ className = null, withContainer = false, isReleaseNotePost }) =>
         })}
         size="sm"
       >
-        <TitleTag className="text-[36px] font-semibold xl:text-3xl">{TITLE}</TitleTag>
+        <span className="text-[36px] font-semibold xl:text-3xl">{TITLE}</span>
         <div className="flex items-center justify-between sm:flex-col sm:items-start sm:gap-y-4">
           <p>{DESCRIPTION}</p>
           {!withContainer && (
