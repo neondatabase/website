@@ -4,6 +4,7 @@ subtitle: Restore your data to previous state using Neon's branching feature
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
+  - /docs/guides/branching-data-recovery
 ---
 
 Neon retains a 7-day history of data changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined retention period. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
@@ -57,7 +58,7 @@ To connect to your branch:
    <CodeBlock shouldWrap>
 
    ```bash
-   psql postgres://daniel:<password>@ep-black-tree-62582846.us-east-2.aws.neon.tech/neondb
+   postgres://daniel:<password>@ep-curly-term-54009904.us-east-2.aws.neon.tech/neondb
    ```
 
    </CodeBlock>

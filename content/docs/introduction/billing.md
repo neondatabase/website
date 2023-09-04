@@ -51,7 +51,7 @@ Factors that affect _Compute time_ include:
 - The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Compute size automatically scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
-Neon uses a small amount of _Compute time_, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
+Neon uses a small amount of _Compute time_, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data. See [Availability Checker](/docs/reference/glossary#availability-checker) for more information.
 </Admonition>
 
 The _Compute time_ cost calculation is as follows:
@@ -173,6 +173,11 @@ Data transfer (GiB) * price per GiB
 | AWS            | Asia Pacific (Singapore) | Project storage | $0.00018  | GiB-hour       |
 | AWS            | Asia Pacific (Singapore) | Written data    | $0.09600  | GiB            |
 | AWS            | Asia Pacific (Singapore) | Data transfer   | $0.09000  | GiB            |
+|                |                          |                 |           |                |
+| AWS            | Israel (Tel Aviv)        | Compute time    | $0.121    | Compute-hour\* |
+| AWS            | Israel (Tel Aviv)        | Project storage | $0.00022  | GiB-hour       |
+| AWS            | Israel (Tel Aviv)        | Written data    | $0.09600  | GiB            |
+| AWS            | Israel (Tel Aviv)        | Data transfer   | $0.09000  | GiB            |
 
 \* A _Compute-hour_ is based on a compute size with 1 Compute Unit (CU), which is 1 vCPU and 4 GB of RAM. Neon's smallest compute size is .25 CU (.25 vCPU and 1GB of RAM), which would be billed at 1/4 of a _Compute-hour_. Neon supports compute sizes ranging from .25 CU (.25 vCPU and 1 GB of RAM) to 7 CUs (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
 
@@ -188,6 +193,8 @@ The [Pricing](https://neon.tech/pricing) page on the Neon website provides a cal
 
 ### Pro Plan Cost Estimator
 
-The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimation** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Estimate costs**.
+The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimator** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Open cost calculator**.
+
+The tool displays cost estimates only after a month of project usage.
 
 ![Pro Plan Cost Estimation tool](/docs/introduction/billing_page_calculator.png)

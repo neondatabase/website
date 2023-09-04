@@ -7,8 +7,6 @@ import { useRef, useState, useMemo } from 'react';
 
 import Link from 'components/shared/link';
 
-import LinesIllustration from '../lines-illustration';
-
 const styles = {
   base: 'inline-flex items-center justify-center font-bold !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
   size: {
@@ -26,25 +24,26 @@ const styles = {
   },
 };
 
+const CURSOR_OFFSET = 13;
+
 const AnimatedButton = ({
   className: additionalClassName = null,
   to = null,
   isAnimated = false,
-  animationClassName = null,
   animationColor = '#00E599',
-  animationSize = 'xs',
   size = null,
   theme,
-  spread,
   children,
-  spreadClassName = null,
+  linesOffsetTop = 28,
+  linesOffsetSide = 34,
+  linesOffsetBottom = 46,
   ...otherProps
 }) => {
-  const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
   const [cursorAnimationVariant, setCursorAnimationVariant] = useState('default');
   const [mouseXPosition, setMouseXPosition] = useState(0);
   const [mouseYPosition, setMouseYPosition] = useState(0);
   const buttonRef = useRef(null);
+
   const cursorBlurVariants = useMemo(
     () => ({
       default: {
@@ -75,11 +74,11 @@ const AnimatedButton = ({
     const { left, top } = buttonRef.current.getBoundingClientRect();
 
     if (event.clientX !== null) {
-      setMouseXPosition(event.clientX - left - 13);
+      setMouseXPosition(event.clientX - left - CURSOR_OFFSET);
     }
 
     if (event.clientY !== null) {
-      setMouseYPosition(event.clientY - top - 13);
+      setMouseYPosition(event.clientY - top - CURSOR_OFFSET);
     }
   };
 
@@ -91,11 +90,21 @@ const AnimatedButton = ({
     setCursorAnimationVariant('default');
   };
 
+  const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
+
+  const cssProperties = {
+    '--color': animationColor,
+    '--top': `${linesOffsetTop}px`,
+    '--side': `${linesOffsetSide}px`,
+    '--bottom': `${linesOffsetBottom}px`,
+  };
+
   const Tag = to ? Link : 'button';
 
   return isAnimated ? (
     <Tag
-      className={clsx('relative', className)}
+      className={clsx('animated-button', className)}
+      style={cssProperties}
       to={to}
       ref={buttonRef}
       onMouseMove={handleMouseMove}
@@ -115,18 +124,17 @@ const AnimatedButton = ({
           }}
           aria-hidden
         />
+
+        <m.span className="-z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} aria-hidden>
+          <span className="top" />
+          <span className="bottom" />
+          <span className="line" />
+        </m.span>
       </LazyMotion>
-      {children}
-      <LinesIllustration
-        className={animationClassName}
-        color={animationColor}
-        size={animationSize}
-        spread={spread}
-        spreadClassName={spreadClassName}
-      />
+      <span className="content">{children}</span>
     </Tag>
   ) : (
-    <Tag className={className} to={to} {...otherProps}>
+    <Tag className={className} style={cssProperties} to={to} {...otherProps}>
       {children}
     </Tag>
   );
@@ -138,12 +146,11 @@ AnimatedButton.propTypes = {
   size: PropTypes.oneOf(Object.keys(styles.size)),
   theme: PropTypes.oneOf(Object.keys(styles.theme)).isRequired,
   children: PropTypes.node.isRequired,
-  animationClassName: PropTypes.string,
-  animationSize: PropTypes.oneOf(['xs', 'sm']),
   animationColor: PropTypes.string,
   isAnimated: PropTypes.bool,
-  spread: PropTypes.oneOf([1, 2, 3, 4, 5]),
-  spreadClassName: PropTypes.string,
+  linesOffsetTop: PropTypes.number,
+  linesOffsetSide: PropTypes.number,
+  linesOffsetBottom: PropTypes.number,
 };
 
 export default AnimatedButton;

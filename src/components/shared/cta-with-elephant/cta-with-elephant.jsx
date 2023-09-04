@@ -52,12 +52,8 @@ const CTAWithElephant = ({
               'inline-flex py-5 text-lg tracking-extra-tight hover:bg-[#00FFAA] xl:py-[17px] lg:text-base sm:text-lg',
               buttonClassName
             )}
-            spreadClassName="sm:h-[105px]"
             theme="primary"
             to={buttonUrl}
-            animationSize="sm"
-            animationClassName="w-[126%]"
-            spread={3}
             isAnimated
           >
             {buttonText}

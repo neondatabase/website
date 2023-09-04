@@ -132,7 +132,7 @@ To avoid the non-fatal errors, you can ignore database object ownership statemen
 <CodeBlock shouldWrap>
 
 ```bash
-pg_restore -v -O -d postgres://sally:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/pagila mydumpfile.bak 
+pg_restore -v -O -d postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/pagila mydumpfile.bak 
 ```
 
 </CodeBlock>

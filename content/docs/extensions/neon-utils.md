@@ -70,7 +70,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     <CodeBlock shouldWrap>
 
     ```bash
-    pgbench -i postgres://sally:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb
+    pgbench -i postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
     ```
 
     </CodeBlock>
@@ -80,7 +80,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     <CodeBlock shouldWrap>
 
     ```bash
-    pgbench -f test.sql -c 15 -T 1000 -P 1 postgres://sally:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb
+    pgbench -f test.sql -c 15 -T 1000 -P 1 postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
     ```
 
     </CodeBlock>
