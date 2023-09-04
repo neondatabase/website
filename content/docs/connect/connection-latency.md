@@ -105,7 +105,7 @@ DATABASE_URL=postgres://<user>:<password>@<neon_hostname>/neondb?connect_timeout
 </CodeTabs>
 
 <Admonition type="note">
-If you are using Prisma Client, your timeout issue could be related to your Prisma connection pool configuration. The Prisma Client query engine instantiates its own connection pool when it opens a first connection to the database. If you encounter a `Timed out fetching a new connection from the connection pool` error, refer to [Prisma connection timeouts](/docs/guides/prisma#connection-timeouts) for information about configuring your Prisma connection pool size and pool timeout settings.
+If you are using Prisma Client, your timeout issue could be related to Prisma's connection pool configuration. The Prisma Client query engine instantiates its own connection pool when it opens a first connection to the database. If you encounter a `Timed out fetching a new connection from the connection pool` error, refer to [Prisma connection pool timeouts](/docs/guides/prisma#connection-pool-timeouts) for information about configuring your Prisma connection pool size and pool timeout settings.
 </Admonition>
 
 Remember that increasing connection timeout settings might impact the responsiveness of your application, and users could end up waiting longer for their requests to be processed. Always test and monitor your application's performance when making changes like these.
