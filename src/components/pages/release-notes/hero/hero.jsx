@@ -20,7 +20,7 @@ const Hero = ({ className = null, withContainer = false }) => {
         })}
         size="sm"
       >
-        <span className="text-[36px] font-semibold xl:text-3xl">{TITLE}</span>
+        <h1 className="text-[36px] font-semibold xl:text-3xl">{TITLE}</h1>
         <div className="flex items-center justify-between sm:flex-col sm:items-start sm:gap-y-4">
           <p>{DESCRIPTION}</p>
           {!withContainer && (

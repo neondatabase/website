@@ -103,8 +103,8 @@ const ReleaseNotePage = async ({ currentSlug }) => {
           withContainer
         />
         <div className="grow pb-28 dark:bg-gray-new-8 lg:pb-20 md:pb-16 flex">
-          <Container size="xs" className="relative flex pb-10">
-            <article className="relative flex max-w-full flex-col items-start">
+          <Container size="xs" className="relative flex pb-10 w-full">
+            <article className="relative flex max-w-full flex-col items-start w-full">
               <h2>
                 <time
                   className="mt-3 whitespace-nowrap text-gray-new-20 dark:text-gray-new-70"
@@ -113,7 +113,7 @@ const ReleaseNotePage = async ({ currentSlug }) => {
                   {label}
                 </time>
               </h2>
-              <Content className="mt-8 max-w-full prose-h3:text-xl" content={mdxSource} />
+              <Content className="mt-8 max-w-full prose-h3:text-xl w-full" content={mdxSource} />
               <Link
                 className="mt-10 font-semibold lg:mt-8"
                 to={RELEASE_NOTES_BASE_PATH}
