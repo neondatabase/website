@@ -95,7 +95,7 @@ DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.ne
 A `connect_timeout` setting of 0 means no timeout.
 </Admonition>
 
-### Connection pool timeouts
+## Connection pool timeouts
 
 Another possible cause of timeouts is [Prisma's connection pool](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/). The Prisma query engine manages a pool of connections. The pool is instantiated when a Prisma Client opens a first connection to the database. For an explanation of how this connection pool functions, read [How the connection pool works](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/connection-pool#how-the-connection-pool-works), in the _Prisma documentation_.
 
