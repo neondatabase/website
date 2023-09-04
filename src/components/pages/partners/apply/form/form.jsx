@@ -40,6 +40,7 @@ const schema = yup
     lastname: yup.string().required('This is a required field'),
     email: yup.string().email('Please enter a valid email').required('This is a required field'),
     company: yup.string().required('This is a required field'),
+    message: yup.string().required('This is a required field'),
   })
   .required();
 
@@ -78,6 +79,7 @@ const Form = ({ className }) => {
 
   const onSubmit = async (formData, e) => {
     e.preventDefault();
+    debugger;
     const { message, ...rest } = formData;
     const data = { ...rest, 'TICKET.content': message };
 
@@ -253,7 +255,7 @@ const Form = ({ className }) => {
       )}
 
       <Field
-        label="Additional details"
+        label="Additional details*"
         tag="textarea"
         placeholder="Message"
         name="message"
