@@ -9,7 +9,7 @@ import { getAllWpBlogCategories, getWpPostsByCategorySlug } from 'utils/api-post
 import getMetadata from 'utils/get-metadata';
 
 const generateBlogTitle = (category) => {
-  if (category.slug === 'all-posts') return 'All blog posts';
+  if (category.slug === 'all-posts') return 'All Blog Posts';
   return `${category.name} Blog`;
 };
 
