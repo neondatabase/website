@@ -99,14 +99,16 @@ Connection conn = DriverManager.getConnection(dbUrl, properties);
 ```
 
 ```prisma
-DATABASE_URL=postgres://<user>:<password>@<neon_hostname>/neondb?connect_timeout=20`
+DATABASE_URL=postgres://<user>:<password>@<neon_hostname>/neondb?connect_timeout=15&pool_timeout=15`
 ```
 
 </CodeTabs>
 
-For more information about timeouts when connecting from Prisma, see [Connection timeouts](/docs/guides/prisma#connection-timeouts) in our Prisma documentation.
+<Admonition type="note">
+If you are using Prisma Client, your timeout issue could be related to Prisma's connection pool configuration. The Prisma Client query engine instantiates its own connection pool when it opens a first connection to the database. If you encounter a `Timed out fetching a new connection from the connection pool` error, refer to [Prisma connection pool timeouts](/docs/guides/prisma#connection-pool-timeouts) for information about configuring your Prisma connection pool size and pool timeout settings.
+</Admonition>
 
-Remember that increasing the connection timeout might impact the responsiveness of your application, and users could end up waiting longer for their requests to be processed. Always test and monitor your application's performance when making changes like these.
+Remember that increasing connection timeout settings might impact the responsiveness of your application, and users could end up waiting longer for their requests to be processed. Always test and monitor your application's performance when making changes like these.
 
 ### Build connection timeout handling into your application
 
