@@ -123,7 +123,8 @@ DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.ne
 
 You can disable the pool timeouts by setting `pool_timeout=0`.
 
-<Admonition type="info">
+## JSON protocol for large Prisma schemas
+
 If you are working with a large Prisma schema, Prisma recently introduced a new preview feature that expresses queries using `JSON` instead of GraphQL. The JSON implementation uses less CPU and memory, which can help reduce latencies when connecting from Prisma.
 
 To try the new protocol, enable the `jsonProtocol` Preview feature in your Prisma schema:
@@ -136,7 +137,8 @@ generator client {
 ```
 
 You can read more about this feature here: [Preview feature feedback](https://github.com/prisma/prisma/issues/18095).
-</Admonition>
+
+## Learn more
 
 For additional information about connecting from Prisma, refer to the following resources in the _Prisma documentation_:
 
