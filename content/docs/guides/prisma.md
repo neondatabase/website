@@ -95,17 +95,31 @@ DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.ne
 A `connect_timeout` setting of 0 means no timeout.
 </Admonition>
 
-Another possible cause of timeouts is [Prisma's connection pool](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/). The Prisma  query engine manages a pool of database connections, which is created when Prisma Client opens the first connection to the database. Relational database connectors, such as those used to connect to Postgres, use Prisma's connection pool. For more information about Prisma connection pool, see [How the connection pool works](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/connection-pool#how-the-connection-pool-works), in the _Prisma_ documentation.
+Another possible cause of timeouts is [Prisma's connection pool](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/). The Prisma query engine manages a pool of connections. The pool is instantiated when a Prisma Client opens a first connection to the database. To understand how this pool works, read [How the connection pool works](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/connection-pool#how-the-connection-pool-works), in the _Prisma documentation_.
 
-The Prisma connection pool has a default `pool_timeout` setting of 10 seconds. If you are still experiencing connection timeouts after setting a higher `connect_timeout` value, try increasing the `pool_timeout` parameter to a higher value or disabling connection pool timeouts by setting `pool_timeout=0`. For example:
+The default size of the Prisma connection pool is determined by the following formula: `num_physical_cpus * 2 + 1`,  where `num_physical_cpus` represents the number of physical CPUs on the machine where your application runs. If your machine has four physical CPUs, your connection pool will contain nine connections (4 * 2 + 1 = 9). As mentioned in the [Prisma documentation](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/connection-pool#default-connection-pool-size), this formula is a good starting point, but the recommended connection limit also depends on your deployment paradigm — particularly if you are using serverless. You can specify the number of connections explicitly by setting the `connection_limit` parameter in your database connection URL. For example:
 
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb/neondb?connect_timeout=10&pool_timeout=0`
+DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb/neondb?connect_timeout=15&connection_limit=20`
 ```
 
 </CodeBlock>
+
+For configuration guidance, please refer to Prisma's [Recommended connection pool size guide](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#recommended-connection-pool-size).
+
+In addition to pool size, you can configure a `pool_timeout` setting for the Prisma connection pool. This setting defines the amount of time your Prisma Client's query engine has to process a query before throwing an exception and moving on to the next query in the queue. The default `pool_timeout` setting is 10 seconds. If you still experience timeouts after increasing `connection_limit` setting, you can try setting the `pool_timeout` parameter to a value larger than the default (10 seconds). For configuration guidance, please refer to [Increasing the pool timeout](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#increasing-the-pool-timeout), in the _Prisma documentation_.
+
+<CodeBlock shouldWrap>
+
+```text
+DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb/neondb?connect_timeout=15&connection_limit=20&pool_timeout=15`
+```
+
+</CodeBlock>
+
+You can disable the pool timeouts by setting `pool_timeout=0`.
 
 <Admonition type="info">
 If you are working with a large Prisma schema, Prisma recently introduced a new preview feature that expresses queries using `JSON` instead of GraphQL. The JSON implementation uses less CPU and memory, which can help reduce latencies when connecting from Prisma.
