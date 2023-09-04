@@ -104,7 +104,7 @@ The default size of the Prisma connection pool is determined by the following fo
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb/neondb?connect_timeout=15&connection_limit=20`
+DATABASE_URL=postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb/neondb?connect_timeout=15&connection_limit=20`
 ```
 
 </CodeBlock>
