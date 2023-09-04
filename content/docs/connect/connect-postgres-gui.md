@@ -59,6 +59,7 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | Application or IDE | Notes |
 | ----------- | ----- |
 | [Appsmith](https://www.appsmith.com/) | |
+| [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/)| Use [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). Use a `$` character as a separator between the `endpoint` option and password. For example: `endpoint=<endpoint_id>$<password>`. Also, you must set **Secure Socket Layer (SSL) mode** to `require`. See [Migrate with AWS DMS](/docs/import/migrate-aws-dms).
 | [Azure Data Studio](https://azure.microsoft.com/en-us/products/data-studio/) | Requires the [PostgreSQL extension](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/postgres-extension?view=sql-server-ver16) and [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) |
 | [Beekeeper Studio](https://www.beekeeperstudio.io/) | Requires the **Enable SSL** option |
 | [CLion](https://www.jetbrains.com/clion/) | |
@@ -70,11 +71,11 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [DronaHQ hosted cloud version](https://www.dronahq.com/) | Requires selecting **Connect using SSL** when creating a connector |
 | [Forest Admin](https://www.forestadmin.com/) | The database requires at least one table |
 | [Grafana](https://grafana.com/docs/grafana/latest/datasources/postgres/)| Requires `sslmode=verify-full`. See [SNI workaround C](/docs/connect/connection-errors#c-set-verify-full-for-golang-based-clients). |
-| [Google Looker Studio](https://lookerstudio.google.com/) | Requires **Enable SSL** and uploading the [ISRG Root X1](https://letsencrypt.org/certificates/) self-signed `pem` root certificate from Let's Encrypt |
+| [Google Looker Studio](https://lookerstudio.google.com/) | Requires **Enable SSL** and uploading the [ISRG Root X1](https://letsencrypt.org/certificates/) self-signed `pem` root certificate from Let's Encrypt. See [Connect to Looker Studio](https://community.neon.tech/t/connect-to-data-studio-looker-studio/299/3), in the _Neon Community_ forum. |
 | [ILLA Cloud](https://www.illacloud.com/) | |
 | [Luna Modeler](https://www.datensen.com/data-modeling/luna-modeler-for-relational-databases.html) | Requires enabling the SSL/TLS option |
 | [Metabase](https://www.metabase.com/) | |
-| [PopSQL](https://popsql.com/) | No SNI support. Use  [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). |
+| [PopSQL](https://popsql.com/) | No SNI support. Use [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). |
 | [Postico](https://eggerapps.at/postico2/) | SNI support since v1.5.21. For older versions, use [SNI workaround B](/docs/connect/connection-errors#b-use-libpq-keyvalue-syntax-in-the-database-field). |
 | [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres) | |
 | [pgAdmin 4](https://www.pgadmin.org/) | |
