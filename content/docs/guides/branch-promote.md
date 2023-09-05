@@ -1,21 +1,31 @@
 ---
-title: Refresh a branch
-subtitle: Learn how to refresh a Neon branch using the Neon API
+title: Promote a branch to primary
+subtitle: Learn how to promote a branch to the primary branch of your project without modifying your application configuration
 enableTableOfContents: true
 ---
 
-When you create a branch in Neon, you create a copy-on-write clone that reflects the current state of the parent branch, but what do you do if your branch becomes stale? For example, changes are made to the data or schema on the parent branch that you would like reflected in your development branch, or your branch has aged out of the point-in-time restore window (the history shared with the parent branch) and is now taking up storage space. Ideally, you want to refresh your branch but keep the same compute endpoint, whose connection details may already be configured in your application or toolchain.
+This procedure describes how to create a new branch and promote it to the primary branch of your Neon project using the Neon API.
 
-There isn't a single command that refreshes a branch, but you can do so using a combination of Neon API calls. The procedure described below refreshes a branch by performing the following steps:
+## What is a primary branch?
 
-1. [Creating a new up-to-date branch without a compute endpoint](#create-a-new-up-to-date-branch-without-a-compute-endpoint)
-2. [Moving the compute endpoint from your current branch to the new branch](#move-the-compute-endpoint-from-your-current-branch-to-the-new-branch)
+Each Neon project has a primary branch. In the Neon Console, your primary branch is identified on the **Branches** page by a `PRIMARY` tag. You can designate any branch as the primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
+
+- For [Free Tier](/docs/introduction/free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
+- For [Pro plan](/docs/introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes.
+
+For these reasons, it's recommended that you define the branch that holds your production data as your primary branch.
+
+## Why promote a branch to primary?
+
+A common usage scenario that involves promoting branch to primary is data recovery. For example, a data loss occurs on the current primary branch. To recover the lost data, you create a point-in-time branch with data that existed before the data loss occurred. To avoid modifying your application's database connection configuration, you move your current compute endpoint from the old branch to the new branch.
+
+The procedure described below creates a new branch and promotes it to the primary branch of your project by performing the following steps:
+
+1. [Creating a new point-in-time branch without a compute endpoint](#creating-a-new-point-in-time-branch-without-a-compute-endpoint)
+2. [Moving the compute endpoint from your current primary branch to the new branch](#move-the-compute-endpoint-from-your-current-branch-to-the-new-branch)
 3. [Deleting the old branch](#delete-the-old-branch)
 4. [Renaming the new branch to the name of the old branch](#rename-the-new-branch-to-the-name-of-the-old-branch)
-
-<Admonition type="important">
-The branch refresh procedure does not preserve data or schema changes on your current branch. Do not perform this procedure if you need to maintain changes made to your branch. The procedure is best suited to branches used in a read-only capacity.
-</Admonition>
+5. [Promoting the new branch to primary](#promoting-the-new-branch-to-primary)
 
 ## Prerequisites
 
@@ -26,20 +36,23 @@ The following information is required to perform the procedure:
 - The `branch_id` of the current branch. You can obtain a `branch_id` using the [List branches](https://api-docs.neon.tech/reference/listprojectbranches) method, or you can find it on the your project's **Branches** page in the Neon Console. An `branch_id` has a `br-` prefix.
 - The `endpoint_id` of the compute endpoint associated with the current branch. You can obtain an `endpoint_id` using the [List endpoints](https://api-docs.neon.tech/reference/listprojectendpoints) method, or you can find it on the **Branches** page in the Neon Console. An `endpoint_id` has an `ep-` prefix.
 
-## Create a new up-to-date branch without a compute endpoint
+## Creating a new point-in-time branch without a compute endpoint
 
-The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) request shown below creates a branch without a compute endpoint. The only required parameter is your Neon `project_id`. The `project_id` value used in the example below is `dark-cell-12604300`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
+The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) request shown below creates a point-in-time branch without a compute endpoint. Required parameters are your Neon `project_id`. To create a point-in-time branch, you must specify a `parent_timestamp` value in the branch object. The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+
+The `project_id` value used in the example below is `young-silence-08999984`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
 ```curl
 curl --request POST \
-     --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches \
+     --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'authorization: Bearer $NEON_API' \
      --header 'content-type: application/json' \
      --data '
 {
   "branch": {
-    "name": "dev_branch_2"
+    "parent_timestamp": "2023-09-02T10:00:00Z",
+    "name": "recovery_branch"
   }
 }
 '
@@ -52,11 +65,12 @@ The response body includes the `id` of your new branch. You will need this value
 ```json
 {
   "branch": {
-    "id": "br-falling-flower-15986510",
-    "project_id": "dark-cell-12604300",
-    "parent_id": "br-bold-grass-13759798",
-    "parent_lsn": "0/1EAB620",
-    "name": "dev_branch_2",
+    "id": "br-solitary-hat-85369851",
+    "project_id": "young-silence-08999984",
+    "parent_id": "br-twilight-field-06246553",
+    "parent_lsn": "0/1EC5378",
+    "parent_timestamp": "2023-09-02T10:00:00Z",
+    "name": "recovery_branch",
     "current_state": "init",
     "pending_state": "ready",
     "creation_source": "console",
@@ -66,40 +80,40 @@ The response body includes the `id` of your new branch. You will need this value
     "active_time_seconds": 0,
     "written_data_bytes": 0,
     "data_transfer_bytes": 0,
-    "created_at": "2023-09-05T17:02:37Z",
-    "updated_at": "2023-09-05T17:02:37Z"
+    "created_at": "2023-09-05T19:44:51Z",
+    "updated_at": "2023-09-05T19:44:51Z"
   },
   "endpoints": [],
   "operations": [
     {
-      "id": "d67c531b-1b00-44e0-b3d7-4bf306b030c0",
-      "project_id": "dark-cell-12604300",
-      "branch_id": "br-falling-flower-15986510",
+      "id": "192e9d28-1f82-4afc-8a2e-b8147ec0ff7b",
+      "project_id": "young-silence-08999984",
+      "branch_id": "br-solitary-hat-85369851",
       "action": "create_branch",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-09-05T17:02:37Z",
-      "updated_at": "2023-09-05T17:02:37Z",
+      "created_at": "2023-09-05T19:44:51Z",
+      "updated_at": "2023-09-05T19:44:51Z",
       "total_duration_ms": 0
     }
   ],
   "roles": [
     {
-      "branch_id": "br-falling-flower-15986510",
+      "branch_id": "br-solitary-hat-85369851",
       "name": "daniel",
       "protected": false,
-      "created_at": "2023-09-05T16:25:57Z",
-      "updated_at": "2023-09-05T16:25:57Z"
+      "created_at": "2023-08-29T10:26:27Z",
+      "updated_at": "2023-08-29T10:26:27Z"
     }
   ],
   "databases": [
     {
-      "id": 5840511,
-      "branch_id": "br-falling-flower-15986510",
+      "id": 5841198,
+      "branch_id": "br-solitary-hat-85369851",
       "name": "neondb",
       "owner_name": "daniel",
-      "created_at": "2023-09-05T16:25:57Z",
-      "updated_at": "2023-09-05T16:25:57Z"
+      "created_at": "2023-09-05T19:40:09Z",
+      "updated_at": "2023-09-05T19:40:09Z"
     }
   ]
 }
@@ -263,3 +277,5 @@ curl --request PATCH \
 }
 ```
 </details>
+
+## Promoting the new branch to primary
