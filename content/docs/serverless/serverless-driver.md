@@ -101,7 +101,7 @@ Connection caching provides server-side connection pooling, so that a new connec
 You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
 
 <Admonition type="note">
-The `Pool` and `Client` objects must be connected, used and closed within a single request handler. Don't create them outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them.
+The `Pool` and `Client` objects must be connected, used, and closed within a single request handler. Don't create the objects outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them.
 </Admonition>
 
 <CodeTabs labels={["Node.js","Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
@@ -169,7 +169,6 @@ export default async function handler(
 
   return res.status(500).send(post);
 }
-
 ```
 
 </CodeTabs>
@@ -219,7 +218,7 @@ For additional details, see [transaction(...) function](https://github.com/neond
 
 The `Pool` and `Client` constructors, which support querying over WebSockets, provide session and transaction support, as well as `node-postgres` compatibility. You can find the API guide for the `Pool` and `Client` constructors in the [node-postgres](https://node-postgres.com/) documentation.
 
-You should use the driver with `Pool` or `Client` in the following scenarios:
+Consider using the driver with `Pool` or `Client` in the following scenarios:
 
 - You already use `node-postgres` in your code base and would like to migrate to using `@neondatabase/serverless`.
 - You are writing a new code base and want to use a package that expects a `node-postgres-compatible` driver.
