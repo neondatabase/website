@@ -23,7 +23,7 @@ The procedure described below creates a new branch and promotes it to the primar
 2. [Moving the compute endpoint from your current primary branch to the new branch](#move-the-compute-endpoint-from-your-current-primary-branch-to-the-new-branch)
 3. [Renaming the old primary branch](#rename-the-old-primary-branch)
 4. [Renaming the new branch to the name of the old primary branch](#rename-the-new-branch-to-the-name-of-the-old-primary-branch)
-5. [Promoting the new branch to primary](#promoting-the-new-branch-to-primary)
+5. [Promoting the new branch to primary](#promote-the-new-branch-to-primary)
 
 ## Prerequisites
 
@@ -272,7 +272,7 @@ curl --request PATCH \
 ```
 </details>
 
-## Promoting the new branch to primary
+## Promote the new branch to primary
 
 The [Set primary branch](https://api-docs.neon.tech/reference/setprimaryprojectbranch) API request sets the new branch as the primary branch for the project.
 
