@@ -107,7 +107,7 @@ const defaultConfig = {
       },
       {
         source: '/api-reference',
-        destination: 'https://api-docs.neon.tech/',
+        destination: 'https://api-docs.neon.tech',
         permanent: true,
       },
       {
@@ -117,7 +117,7 @@ const defaultConfig = {
       },
       {
         source: '/ycmatcher',
-        destination: 'https://yc-idea-matcher.vercel.app/',
+        destination: 'https://yc-idea-matcher.vercel.app',
         permanent: true,
       },
       ...docsRedirects,
