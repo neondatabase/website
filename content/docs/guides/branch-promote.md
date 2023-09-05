@@ -128,17 +128,17 @@ The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint
 
 ```curl
 curl --request PATCH \
-     --url https://console.neon.tech/api/v2/projects/%20dark-cell-12604300/endpoints/ep-divine-violet-55990977 \
+     --url https://console.neon.tech/api/v2/projects/young-silence-08999984/endpoints/ep-curly-term-54009904 \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' \
      --header 'content-type: application/json' \
      --data '
 {
   "endpoint": {
-    "branch_id": "br-falling-flower-15986510"
+    "branch_id": "br-solitary-hat-85369851"
   }
 }
-' |jq
+'
 ```
 
 </CodeBlock>
@@ -148,10 +148,10 @@ curl --request PATCH \
 ```json
 {
   "endpoint": {
-    "host": "ep-divine-violet-55990977.us-east-2.aws.neon.tech",
-    "id": "ep-divine-violet-55990977",
-    "project_id": "dark-cell-12604300",
-    "branch_id": "br-falling-flower-15986510",
+    "host": "ep-curly-term-54009904.us-east-2.aws.neon.tech",
+    "id": "ep-curly-term-54009904",
+    "project_id": "young-silence-08999984",
+    "branch_id": "br-solitary-hat-85369851",
     "autoscaling_limit_min_cu": 0.25,
     "autoscaling_limit_max_cu": 0.25,
     "region_id": "aws-us-east-2",
@@ -162,89 +162,35 @@ curl --request PATCH \
     "pooler_mode": "transaction",
     "disabled": false,
     "passwordless_access": true,
-    "last_active": "2000-01-01T00:00:00Z",
+    "last_active": "2023-09-02T12:22:44Z",
     "creation_source": "console",
-    "created_at": "2023-09-05T16:53:14Z",
-    "updated_at": "2023-09-05T17:07:26Z",
+    "created_at": "2023-08-29T10:26:27Z",
+    "updated_at": "2023-09-05T20:29:09Z",
     "proxy_host": "us-east-2.aws.neon.tech",
     "suspend_timeout_seconds": 0,
-    "provisioner": "k8s-pod"
+    "provisioner": "k8s-neonvm"
   },
   "operations": []
 }
 ```
 </details>
 
-## Delete the old branch
+## Rename the old branch
 
-The [Delete branch](https://api-docs.neon.tech/reference/deleteprojectbranch) API request shown below deletes the old branch. The old branch will take up storage space, so it's recommended that you remove it. The required parameters are the `project_id` and `branch_id`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
-
-<CodeBlock shouldWrap>
-
-```curl
-curl --request DELETE \
-     --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches/br-wandering-forest-45768684 \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' |jq
-```
-
-</CodeBlock>
-
-<details>
-<summary>Response body</summary>
-```json
-{
-  "branch": {
-    "id": "br-wandering-forest-45768684",
-    "project_id": "dark-cell-12604300",
-    "parent_id": "br-bold-grass-13759798",
-    "parent_lsn": "0/1EAB620",
-    "name": "dev_branch_1",
-    "current_state": "ready",
-    "logical_size": 29679616,
-    "creation_source": "console",
-    "primary": false,
-    "cpu_used_sec": 0,
-    "compute_time_seconds": 0,
-    "active_time_seconds": 0,
-    "written_data_bytes": 0,
-    "data_transfer_bytes": 0,
-    "created_at": "2023-09-05T16:53:14Z",
-    "updated_at": "2023-09-05T17:09:19Z"
-  },
-  "operations": [
-    {
-      "id": "d5e39417-c35f-43df-b248-e2ee5c7f04e3",
-      "project_id": "dark-cell-12604300",
-      "branch_id": "br-wandering-forest-45768684",
-      "action": "delete_timeline",
-      "status": "running",
-      "failures_count": 0,
-      "created_at": "2023-09-05T17:09:19Z",
-      "updated_at": "2023-09-05T17:09:19Z",
-      "total_duration_ms": 0
-    }
-  ]
-}
-```
-</details>
-
-## Rename the new branch to the name of the old branch
-
-Optionally, you can rename the new branch to the name of the old branch. The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) API request shown below renames the new branch from `dev_branch_2` to `dev_branch_1`.
+The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) API request shown below renames the old primary branch. The required parameters are the `project_id` and `branch_id`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
 <CodeBlock shouldWrap>
 
 ```curl
 curl --request PATCH \
-     --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches/br-falling-flower-15986510 \
+     --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-twilight-field-06246553 \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' \
      --header 'content-type: application/json' \
      --data '
 {
   "branch": {
-    "name": "dev_branch_1"
+    "name": "old_main "
   }
 }
 '
@@ -257,12 +203,62 @@ curl --request PATCH \
 ```json
 {
   "branch": {
-    "id": "br-falling-flower-15986510",
-    "project_id": "dark-cell-12604300",
-    "parent_id": "br-bold-grass-13759798",
-    "parent_lsn": "0/1EAB620",
-    "name": "dev_branch_1",
+    "id": "br-twilight-field-06246553",
+    "project_id": "young-silence-08999984",
+    "name": "old_main",
     "current_state": "ready",
+    "logical_size": 29589504,
+    "creation_source": "console",
+    "primary": true,
+    "cpu_used_sec": 969,
+    "compute_time_seconds": 969,
+    "active_time_seconds": 3816,
+    "written_data_bytes": 4809458540,
+    "data_transfer_bytes": 412826,
+    "created_at": "2023-08-29T10:26:27Z",
+    "updated_at": "2023-09-05T20:32:50Z"
+  },
+  "operations": []
+}
+```
+</details>
+
+## Rename the new branch to the name of the old branch
+
+Optionally, you can rename the new branch to the name of the old branch. The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) API request shown below renames the new branch from `dev_branch_2` to `dev_branch_1`.
+
+<CodeBlock shouldWrap>
+
+```curl
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851 \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "branch": {
+    "name": "main"
+  }
+}
+'
+```
+
+</CodeBlock>
+
+<details>
+<summary>Response body</summary>
+```json
+{
+  "branch": {
+    "id": "br-solitary-hat-85369851",
+    "project_id": "young-silence-08999984",
+    "parent_id": "br-twilight-field-06246553",
+    "parent_lsn": "0/1EC5378",
+    "parent_timestamp": "2023-09-02T10:00:00Z",
+    "name": "main",
+    "current_state": "ready",
+    "logical_size": 29605888,
     "creation_source": "console",
     "primary": false,
     "cpu_used_sec": 0,
@@ -270,8 +266,8 @@ curl --request PATCH \
     "active_time_seconds": 0,
     "written_data_bytes": 0,
     "data_transfer_bytes": 0,
-    "created_at": "2023-09-05T17:02:37Z",
-    "updated_at": "2023-09-05T17:14:47Z"
+    "created_at": "2023-09-05T19:44:51Z",
+    "updated_at": "2023-09-05T20:34:42Z"
   },
   "operations": []
 }
@@ -279,3 +275,44 @@ curl --request PATCH \
 </details>
 
 ## Promoting the new branch to primary
+
+The [Set primary branch](https://api-docs.neon.tech/reference/setprimaryprojectbranch) API request sets the new branch as the primary branch fo the project.
+
+<CodeBlock shouldWrap>
+
+```curl
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851/set_as_primary \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+</CodeBlock>
+
+<details>
+<summary>Response body</summary>
+```json
+{
+  "branch": {
+    "id": "br-solitary-hat-85369851",
+    "project_id": "young-silence-08999984",
+    "parent_id": "br-twilight-field-06246553",
+    "parent_lsn": "0/1EC5378",
+    "parent_timestamp": "2023-09-02T10:00:00Z",
+    "name": "main",
+    "current_state": "ready",
+    "logical_size": 29605888,
+    "creation_source": "console",
+    "primary": true,
+    "cpu_used_sec": 0,
+    "compute_time_seconds": 0,
+    "active_time_seconds": 0,
+    "written_data_bytes": 0,
+    "data_transfer_bytes": 0,
+    "created_at": "2023-09-05T19:44:51Z",
+    "updated_at": "2023-09-05T20:37:08Z"
+  },
+  "operations": []
+}
+```
+</details>
