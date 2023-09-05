@@ -33,13 +33,13 @@ To get started with the `@neondatabase/api-client` library, follow these steps:
 
 4. Save your API key to a secure location that enables you to pass it to your code.
 
-5. Import the library.
+5. Import the library:
 
    ```typescript
    import { createApiClient } from '@neondatabase/api-client';
    ```
 
-6. Create an instance of the API client by calling the `createApiClient` function.
+6. Create an instance of the API client by calling the `createApiClient` function:
 
     ```typescript
     const apiClient = createApiClient({
@@ -59,7 +59,7 @@ To get started with the `@neondatabase/api-client` library, follow these steps:
 The following is a list of community-created SDKs for interacting with the Neon API.
 
 <Admonition type="note">
-Community SDKs are not maintained or officially supported by Neon. Some features may be out of sync, so use them at your own discretion. If you have any questions, please get in touch with the maintainers of these projects.
+Community SDKs are not maintained or officially supported by Neon. Some features may be out of date, so use these SDKs at your own discretion. If you have questions about these SDKs, please contact the the project maintainers.
 </Admonition>
 
 - [Node and Deno TypeScript SDK](https://github.com/paambaati/neon-js-sdk)
