@@ -207,11 +207,11 @@ The `transaction()` function supports the same option keys as the ordinary query
 
 - `readOnly`
   
-  Ensures that a `READ ONLY` transaction is used to execute queries. This is a boolean function. The default value is `false`.
+  Ensures that a `READ ONLY` transaction is used to execute queries. This is a boolean option. The default value is `false`.
 
 - `deferrable`
 
-  Ensures that a `DEFERRABLE` transaction is used to execute queries. This is a boolean function. The default value is `false`.
+  Ensures that a `DEFERRABLE` transaction is used to execute queries. This is a boolean option. The default value is `false`.
 
 For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
 
