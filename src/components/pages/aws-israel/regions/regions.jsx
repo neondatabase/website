@@ -14,7 +14,7 @@ const Regions = () => (
       <div className="col-span-4 col-start-2 flex flex-col items-start xl:col-span-5 xl:col-start-1 md:col-span-full md:items-center">
         <GradientLabel>Regions</GradientLabel>
         <h2 className="mt-5 text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:mt-3 md:text-center md:text-[32px] sm:max-w-xs">
-          Database that is close to your users
+          A database that is close to your users
         </h2>
         <p className="mt-3 max-w-[440px] text-lg font-light leading-snug xl:text-base md:max-w-xs md:text-center">
           Neon supports multiple regions worldwide to create the fastest Postgres experience.

@@ -57,6 +57,7 @@ To view the branches in a Neon project:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table to view details about the branch.
+![View branch details](/docs/manage/branch_details.png)
 
 Branch details shown on the branch page include:
 
@@ -114,7 +115,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
   <CodeBlock shouldWrap>
 
   ```bash
-  psql postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb
+  psql postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
   ```
 
   </CodeBlock>

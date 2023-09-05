@@ -27,7 +27,7 @@ From your terminal or command prompt, run the `psql` client with the connection 
 <CodeBlock shouldWrap>
 
 ```bash
-psql postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb
+psql postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
 ```
 
 </CodeBlock>
@@ -47,7 +47,7 @@ Neon uses the default Postgres port, `5432`. If you need to specify the port in 
 <CodeBlock shouldWrap>
 
 ```bash
-psql postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb
+psql postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
 ```
 
 </CodeBlock>

@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
 
@@ -9,13 +10,14 @@ import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
-import Search from 'components/shared/search';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import Burger from './burger';
 import Github from './images/header-github.inline.svg';
+
+const Search = dynamic(() => import('components/shared/search'), { ssr: false });
 
 const Header = ({
   className = null,

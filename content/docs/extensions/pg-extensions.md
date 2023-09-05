@@ -53,7 +53,7 @@ Neon supports the Postgres extensions shown in the following table. For extensio
 | pgrowlocks               | [1.2](https://www.postgresql.org/docs/14/pgrowlocks.html)       | [1.2](https://www.postgresql.org/docs/15/pgrowlocks.html)        |                                                                                                                    |
 | pgstattuple              | [1.5](https://www.postgresql.org/docs/14/pgstattuple.html)      | [1.5](https://www.postgresql.org/docs/15/pgstattuple.html)       |                                                                                                                    |
 | pgTAP                    | [1.2.1](https://pgtap.org/documentation.html)                   | [1.2.1](https://pgtap.org/documentation.html)       |                                                                                                                    |
-| pgvector                 | [0.4.4](https://github.com/pgvector/pgvector)                   | [0.4.4](https://github.com/pgvector/pgvector)                    | Install with `CREATE EXTENSION vector;`                                                                                                                    |
+| pgvector                 | [0.5.0](https://github.com/pgvector/pgvector)                   | [0.5.0](https://github.com/pgvector/pgvector)                    | Install with `CREATE EXTENSION vector;`                                                                                                                    |
 | pgx_ulid                 | [0.1.0](https://github.com/pksunkara/pgx_ulid)                   | [0.1.0](https://github.com/pksunkara/pgx_ulid)                  | Install with `CREATE EXTENSION ulid;`                                                                                                                    |
 | plcoffee                 | [3.1.5](https://github.com/plv8/plv8/)                          | [3.1.5](https://github.com/plv8/plv8/)                           |                                                                                                                    |
 | plls                     | [3.1.5](https://github.com/plv8/plv8/)                          | [3.1.5](https://github.com/plv8/plv8/)                           |                                                                                                                    |  
@@ -113,7 +113,19 @@ You can update an extension to the latest version using `ALTER EXTENSION <extens
 
 ## Request extension support
 
-To request support for additional extensions, please contact us at [support@neon.tech](mailto:support@neon.tech) or post your request to the [Neon community forum](https://community.neon.tech/).
+To request support for a Postgres extension, please contact us at [support@neon.tech](mailto:support@neon.tech) or post your request to the [Neon community forum](https://community.neon.tech/).
+
+### Custom-built extensions
+
+Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, send a request to [support@neon.tech](mailto:support@neon.tech). Please include the following information in your request:
+
+- A repository link or archive file containing the source code for your extension
+- A description of what the extension does, instructions for compiling it, and any prerequisites
+- Whether an NDA or licensing agreement is necessary for Neon to provide support for your extension
+
+Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access. Neon features such as Autoscaling and Auto-suspend may limit the types of extensions we can support.
+
+Depending on the nature of your extension, Neon may also request a liability waiver.
 
 ## Need help?
 

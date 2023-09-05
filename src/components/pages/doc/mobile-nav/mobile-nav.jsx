@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { motion, useAnimation } from 'framer-motion';
+import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
@@ -107,37 +107,38 @@ const MobileNav = ({ className = null, sidebar }) => {
           aria-hidden
         />
       </button>
-
-      <motion.div
-        className={clsx(
-          'absolute inset-x-0 top-[calc(100%+1px)] z-20 overflow-y-scroll bg-white pb-4 pl-8 pr-[29px] pt-2 dark:bg-gray-new-10 md:pl-4 md:pr-[13px]'
-        )}
-        initial="from"
-        animate={controls}
-        variants={variants}
-        style={{ height: containerHeight }}
-      >
-        <ChatWidgetTrigger className="mb-3.5 mt-[18px] flex" isSidebar />
-        <ul>
-          {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
-            <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
-              <Link className="group flex items-center space-x-3" to={slug}>
-                <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
-                  <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
-                </span>
-                <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
-                  {title}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <ul className="mt-7">
-          {sidebar.map((item, index) => (
-            <Item {...item} key={index} closeMenu={toggleMenu} />
-          ))}
-        </ul>
-      </motion.div>
+      <LazyMotion features={domAnimation}>
+        <m.div
+          className={clsx(
+            'absolute inset-x-0 top-[calc(100%+1px)] z-20 overflow-y-scroll bg-white pb-4 pl-8 pr-[29px] pt-2 dark:bg-gray-new-10 md:pl-4 md:pr-[13px]'
+          )}
+          initial="from"
+          animate={controls}
+          variants={variants}
+          style={{ height: containerHeight }}
+        >
+          <ChatWidgetTrigger className="mb-3.5 mt-[18px] flex" isSidebar />
+          <ul>
+            {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
+              <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
+                <Link className="group flex items-center space-x-3" to={slug}>
+                  <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
+                    <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
+                  </span>
+                  <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
+                    {title}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <ul className="mt-7">
+            {sidebar.map((item, index) => (
+              <Item {...item} key={index} closeMenu={toggleMenu} />
+            ))}
+          </ul>
+        </m.div>
+      </LazyMotion>
     </nav>
   );
 };

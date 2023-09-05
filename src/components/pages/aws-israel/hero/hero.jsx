@@ -36,8 +36,10 @@ const Hero = () => (
       <AnimatedButton
         className="relative mt-9 px-[75px] py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-8 md:mt-6"
         theme="primary"
-        spread={5}
         to={LINKS.signup}
+        linesOffsetTop={22}
+        linesOffsetSide={22}
+        linesOffsetBottom={40}
         isAnimated
       >
         Sign up
