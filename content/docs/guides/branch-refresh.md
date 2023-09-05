@@ -4,19 +4,18 @@ subtitle: Learn how to refresh a Neon branch using the Neon API
 enableTableOfContents: true
 ---
 
-When you create a branch in Neon, you get a copy-on-write clone that reflects the current state of the parent branch, but what do you do if your branch becomes stale? For example, changes are made to the data or schema on the parent branch that you would like reflected in your development branch, or your branch has aged out of the point-in-time restore window (the history shared with the parent branch) and is now taking up storage space. Ideally, you want to refresh your branch but keep the same compute endpoint, whose connection details may already be configured in your application or toolchain.
+When you create a branch in Neon, you create a copy-on-write clone that reflects the current state of the parent branch, but what do you do if your branch becomes stale? For example, changes are made to the data or schema on the parent branch that you would like reflected in your development branch, or your branch has aged out of the point-in-time restore window (the history shared with the parent branch) and is now taking up storage space. Ideally, you want to refresh your branch but keep the same compute endpoint, whose connection details may already be configured in your application or toolchain.
 
 There isn't a single command that refreshes a branch, but you can do so using a combination of Neon API calls. The procedure described below refreshes a branch by performing the following steps:
 
 1. [Creating a new up-to-date branch without a compute endpoint](#create-a-new-up-to-date-branch-without-a-compute-endpoint)
 2. [Moving the compute endpoint from your current branch to the new branch](#move-the-compute-endpoint-from-your-current-branch-to-the-new-branch)
 3. [Deleting the old branch](#delete-the-old-branch)
+4. [Renaming the new branch to the name of the old branch](#rename-the-new-branch)
 
 <Admonition type="important">
 The branch refresh procedure does not preserve data or schema changes on your current branch. Do not perform this procedure if you need to maintain changes made to your branch. The procedure is best suited to branches used in a read-only capacity.
 </Admonition>
-
-At the end of the guide, we provide [branch refresh script](#branch-refresh-script), showing how you can combine the branch refresh procedure into a single call.
 
 ## Prerequisites
 
@@ -33,10 +32,17 @@ The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) re
 
 ```curl
 curl --request POST \
-     --url https://console.neon.tech/api/v2/projects/purple-bar-16090093/branches \
+     --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' |jq
+     --header 'content-type: application/json' \
+     --data '
+{
+  "branch": {
+    "name": "dev_branch_2"
+  }
+}
+'
 ```
 
 The response body includes the `id` of your new branch. You will need this value (`br-summer-water-09767623`) to move the compute endpoint in the next step.
@@ -46,11 +52,11 @@ The response body includes the `id` of your new branch. You will need this value
 ```json
 {
   "branch": {
-    "id": "br-summer-water-09767623",
-    "project_id": "purple-bar-16090093",
-    "parent_id": "br-misty-disk-67154072",
-    "parent_lsn": "0/2832A78",
-    "name": "br-summer-water-09767623",
+    "id": "br-falling-flower-15986510",
+    "project_id": "dark-cell-12604300",
+    "parent_id": "br-bold-grass-13759798",
+    "parent_lsn": "0/1EAB620",
+    "name": "dev_branch_2",
     "current_state": "init",
     "pending_state": "ready",
     "creation_source": "console",
@@ -60,48 +66,40 @@ The response body includes the `id` of your new branch. You will need this value
     "active_time_seconds": 0,
     "written_data_bytes": 0,
     "data_transfer_bytes": 0,
-    "created_at": "2023-08-16T21:29:00Z",
-    "updated_at": "2023-08-16T21:29:00Z"
+    "created_at": "2023-09-05T17:02:37Z",
+    "updated_at": "2023-09-05T17:02:37Z"
   },
   "endpoints": [],
   "operations": [
     {
-      "id": "df94dcdc-95e0-4343-9a7d-b4ea46a041f1",
-      "project_id": "purple-bar-16090093",
-      "branch_id": "br-summer-water-09767623",
+      "id": "d67c531b-1b00-44e0-b3d7-4bf306b030c0",
+      "project_id": "dark-cell-12604300",
+      "branch_id": "br-falling-flower-15986510",
       "action": "create_branch",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-08-16T21:29:00Z",
-      "updated_at": "2023-08-16T21:29:00Z",
+      "created_at": "2023-09-05T17:02:37Z",
+      "updated_at": "2023-09-05T17:02:37Z",
       "total_duration_ms": 0
     }
   ],
   "roles": [
     {
-      "branch_id": "br-summer-water-09767623",
-      "name": "sally",
+      "branch_id": "br-falling-flower-15986510",
+      "name": "daniel",
       "protected": false,
-      "created_at": "2023-08-14T18:30:38Z",
-      "updated_at": "2023-08-14T18:30:38Z"
+      "created_at": "2023-09-05T16:25:57Z",
+      "updated_at": "2023-09-05T16:25:57Z"
     }
   ],
   "databases": [
     {
-      "id": 5381377,
-      "branch_id": "br-summer-water-09767623",
+      "id": 5840511,
+      "branch_id": "br-falling-flower-15986510",
       "name": "neondb",
-      "owner_name": "sally",
-      "created_at": "2023-08-14T18:30:38Z",
-      "updated_at": "2023-08-14T18:30:38Z"
-    },
-    {
-      "id": 5381378,
-      "branch_id": "br-summer-water-09767623",
-      "name": "testdb",
-      "owner_name": "sally",
-      "created_at": "2023-08-16T09:15:53Z",
-      "updated_at": "2023-08-16T09:15:53Z"
+      "owner_name": "daniel",
+      "created_at": "2023-09-05T16:25:57Z",
+      "updated_at": "2023-09-05T16:25:57Z"
     }
   ]
 }
@@ -116,14 +114,14 @@ The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint
 
 ```curl
 curl --request PATCH \
-     --url https://console.neon.tech/api/v2/projects/%20purple-bar-16090093/endpoints/ep-silent-sun-55413049 \
+     --url https://console.neon.tech/api/v2/projects/%20dark-cell-12604300/endpoints/ep-divine-violet-55990977 \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' \
      --header 'content-type: application/json' \
      --data '
 {
   "endpoint": {
-    "branch_id": "br-summer-water-09767623"
+    "branch_id": "br-falling-flower-15986510"
   }
 }
 ' |jq
@@ -136,13 +134,13 @@ curl --request PATCH \
 ```json
 {
   "endpoint": {
-    "host": "ep-silent-sun-55413049.ap-southeast-1.aws.neon.tech",
-    "id": "ep-silent-sun-55413049",
-    "project_id": "purple-bar-16090093",
-    "branch_id": "br-summer-water-09767623",
+    "host": "ep-divine-violet-55990977.us-east-2.aws.neon.tech",
+    "id": "ep-divine-violet-55990977",
+    "project_id": "dark-cell-12604300",
+    "branch_id": "br-falling-flower-15986510",
     "autoscaling_limit_min_cu": 0.25,
     "autoscaling_limit_max_cu": 0.25,
-    "region_id": "aws-ap-southeast-1",
+    "region_id": "aws-us-east-2",
     "type": "read_write",
     "current_state": "idle",
     "settings": {},
@@ -152,10 +150,10 @@ curl --request PATCH \
     "passwordless_access": true,
     "last_active": "2000-01-01T00:00:00Z",
     "creation_source": "console",
-    "created_at": "2023-08-16T21:24:31Z",
-    "updated_at": "2023-08-16T21:34:01Z",
-    "proxy_host": "ap-southeast-1.aws.neon.tech",
-    "suspend_timeout_seconds": 300,
+    "created_at": "2023-09-05T16:53:14Z",
+    "updated_at": "2023-09-05T17:07:26Z",
+    "proxy_host": "us-east-2.aws.neon.tech",
+    "suspend_timeout_seconds": 0,
     "provisioner": "k8s-pod"
   },
   "operations": []
@@ -171,7 +169,7 @@ The [Delete branch](https://api-docs.neon.tech/reference/deleteprojectbranch) AP
 
 ```curl
 curl --request DELETE \
-     --url https://console.neon.tech/api/v2/projects/purple-bar-16090093/branches/br-solitary-cake-99808753 \
+     --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches/br-wandering-forest-45768684 \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' |jq
 ```
@@ -183,13 +181,13 @@ curl --request DELETE \
 ```json
 {
   "branch": {
-    "id": "br-solitary-cake-99808753",
-    "project_id": "purple-bar-16090093",
-    "parent_id": "br-misty-disk-67154072",
-    "parent_lsn": "0/2832A78",
-    "name": "br-solitary-cake-99808753",
+    "id": "br-wandering-forest-45768684",
+    "project_id": "dark-cell-12604300",
+    "parent_id": "br-bold-grass-13759798",
+    "parent_lsn": "0/1EAB620",
+    "name": "dev_branch_1",
     "current_state": "ready",
-    "logical_size": 36831232,
+    "logical_size": 29679616,
     "creation_source": "console",
     "primary": false,
     "cpu_used_sec": 0,
@@ -197,19 +195,19 @@ curl --request DELETE \
     "active_time_seconds": 0,
     "written_data_bytes": 0,
     "data_transfer_bytes": 0,
-    "created_at": "2023-08-16T21:24:31Z",
-    "updated_at": "2023-08-16T21:35:39Z"
+    "created_at": "2023-09-05T16:53:14Z",
+    "updated_at": "2023-09-05T17:09:19Z"
   },
   "operations": [
     {
-      "id": "88177cb2-4a66-4a23-9ed3-840f4b2791f2",
-      "project_id": "purple-bar-16090093",
-      "branch_id": "br-solitary-cake-99808753",
+      "id": "d5e39417-c35f-43df-b248-e2ee5c7f04e3",
+      "project_id": "dark-cell-12604300",
+      "branch_id": "br-wandering-forest-45768684",
       "action": "delete_timeline",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-08-16T21:35:39Z",
-      "updated_at": "2023-08-16T21:35:39Z",
+      "created_at": "2023-09-05T17:09:19Z",
+      "updated_at": "2023-09-05T17:09:19Z",
       "total_duration_ms": 0
     }
   ]
@@ -217,168 +215,51 @@ curl --request DELETE \
 ```
 </details>
 
-## Branch refresh script
+## Rename the new branch to the name of the old branch
 
-The following bash script performs the branch refresh steps described above.
+Optionally, you can rename the new branch to the name of the old branch. The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) API request shown below renames the new branch from `dev_branch_2` to `dev_branch_1`.
 
-<Admonition type="note">
-The script includes 5 second sleeps between API calls to allow time for operations to complete. The sleeps could be replaced by API calls that poll for operation status. See [Poll operation status](/docs/manage/operations#poll-operation-status) for more information.
-</Admonition>
+<CodeBlock shouldWrap>
 
-To set up the script:
+```curl
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches/br-falling-flower-15986510 \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "branch": {
+    "name": "dev_branch_1"
+  }
+}
+'
+```
 
-1. Create a file named `refresh_neon_branch.sh` and add the following code:
-
-    ```bash
-    #!/bin/bash
-
-    # Check for the right number of arguments
-    if [ "$#" -ne 4 ]; then
-        echo "Usage: $0 <project_id> <old_branch_id> <endpoint_id> <NEON_API_KEY>"
-        exit 1
-    fi
-
-    PROJECT_ID=$1
-    OLD_BRANCH_ID=$2
-    ENDPOINT_ID=$3
-    NEON_API_KEY=$4
-
-    # Create a new up-to-date branch without specifying a name
-    NEW_BRANCH_ID=$(curl --request POST \
-        --url "https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches" \
-        --header 'accept: application/json' \
-        --header "authorization: Bearer $NEON_API_KEY" \
-        --header 'content-type: application/json' | jq -r '.branch.id')
-
-    echo "Created new branch with ID: $NEW_BRANCH_ID"
-
-    # Pause for 5 seconds to ensure the branch creation is complete
-    sleep 5
-
-    # Move the compute endpoint from the current branch to the new branch
-    curl --request PATCH \
-        --url "https://console.neon.tech/api/v2/projects/$PROJECT_ID/endpoints/$ENDPOINT_ID" \
-        --header 'accept: application/json' \
-        --header "authorization: Bearer $NEON_API_KEY" \
-        --header 'content-type: application/json' \
-        --data "{ \"endpoint\": { \"branch_id\": \"$NEW_BRANCH_ID\" } }" | jq
-
-    echo "Moved endpoint to new branch."
-
-    # Pause for 5 seconds to ensure the move compute endpoint operation is complete
-    sleep 5
-
-    # Delete the old branch
-    curl --request DELETE \
-        --url "https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches/$OLD_BRANCH_ID" \
-        --header 'accept: application/json' \
-        --header "authorization: Bearer $NEON_API_KEY" | jq
-
-    echo "Deleted old branch."
-    ```
-
-2. Make the script executable:
-
-    ```bash
-    chmod +x refresh_neon_branch.sh
-    ```
-
-3. Run the script, providing the required input variables, which include the `project_id` of your Neon project, the `branch_id` of the current branch, the `endpoint_id` of the compute endpoint, and your Neon API key.
-
-    <CodeBlock shouldWrap>
-
-    ```bash
-    ./refresh_neon_branch.sh <project_id> <old_branch_id> <endpoint_id> <NEON_API_KEY>
-    ```
-
-    </CodeBlock>
-
-    For example:
-
-    <CodeBlock shouldWrap>
-
-    ```bash
-    ./refresh_neon_branch.sh purple-bar-16090093 br-steep-dew-64219206 ep-green-limit-22926758 <NEON_API_KEY>
-    ```
-
-    </CodeBlock>
-
-    <Admonition type="note">
-    If you need to refresh the same branch again later, you only need to update the `branch_id` in the command above. The `project_id`, `endpoint_id`, and Neon API key remain the same.
-    </Admonition>
+</CodeBlock>
 
 <details>
-<summary>Command response</summary>
-    ```bash
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                    Dload  Upload   Total   Spent    Left  Speed
-    100  1272  100  1272    0     0   1334      0 --:--:-- --:--:-- --:--:--  1334
-    Created new branch with ID: br-delicate-salad-19388426
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                    Dload  Upload   Total   Spent    Left  Speed
-    100   744  100   683  100    61   2287    204 --:--:-- --:--:-- --:--:--  2488
-    {
-      "endpoint": {
-        "host": "ep-green-limit-22926758.ap-southeast-1.aws.neon.tech",
-        "id": "ep-green-limit-22926758",
-        "project_id": "purple-bar-16090093",
-        "branch_id": "br-delicate-salad-19388426",
-        "autoscaling_limit_min_cu": 0.25,
-        "autoscaling_limit_max_cu": 0.25,
-        "region_id": "aws-ap-southeast-1",
-        "type": "read_write",
-        "current_state": "idle",
-        "settings": {},
-        "pooler_enabled": false,
-        "pooler_mode": "transaction",
-        "disabled": false,
-        "passwordless_access": true,
-        "last_active": "2000-01-01T00:00:00Z",
-        "creation_source": "console",
-        "created_at": "2023-08-16T22:06:19Z",
-        "updated_at": "2023-08-16T22:16:58Z",
-        "proxy_host": "ap-southeast-1.aws.neon.tech",
-        "suspend_timeout_seconds": 300,
-        "provisioner": "k8s-pod"
-      },
-      "operations": []
-    }
-    Moved endpoint to new branch.
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                    Dload  Upload   Total   Spent    Left  Speed
-    100   713  100   713    0     0   2254      0 --:--:-- --:--:-- --:--:--  2256
-    {
-      "branch": {
-        "id": "br-steep-dew-64219206",
-        "project_id": "purple-bar-16090093",
-        "parent_id": "br-misty-disk-67154072",
-        "parent_lsn": "0/2832A78",
-        "name": "br-steep-dew-64219206",
-        "current_state": "ready",
-        "creation_source": "console",
-        "primary": false,
-        "cpu_used_sec": 0,
-        "compute_time_seconds": 0,
-        "active_time_seconds": 0,
-        "written_data_bytes": 0,
-        "data_transfer_bytes": 0,
-        "created_at": "2023-08-16T22:15:56Z",
-        "updated_at": "2023-08-16T22:17:03Z"
-      },
-      "operations": [
-        {
-          "id": "513af93b-b438-4706-99fb-4556dfa92da9",
-          "project_id": "purple-bar-16090093",
-          "branch_id": "br-steep-dew-64219206",
-          "action": "delete_timeline",
-          "status": "running",
-          "failures_count": 0,
-          "created_at": "2023-08-16T22:17:03Z",
-          "updated_at": "2023-08-16T22:17:03Z",
-          "total_duration_ms": 0
-        }
-      ]
-    }
-    Deleted old branch.
-    ```
+<summary>Response body</summary>
+```json
+{
+  "branch": {
+    "id": "br-falling-flower-15986510",
+    "project_id": "dark-cell-12604300",
+    "parent_id": "br-bold-grass-13759798",
+    "parent_lsn": "0/1EAB620",
+    "name": "dev_branch_1",
+    "current_state": "ready",
+    "creation_source": "console",
+    "primary": false,
+    "cpu_used_sec": 0,
+    "compute_time_seconds": 0,
+    "active_time_seconds": 0,
+    "written_data_bytes": 0,
+    "data_transfer_bytes": 0,
+    "created_at": "2023-09-05T17:02:37Z",
+    "updated_at": "2023-09-05T17:14:47Z"
+  },
+  "operations": []
+}
+```
 </details>
