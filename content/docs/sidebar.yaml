@@ -117,6 +117,8 @@
               slug: guides/branching-github-actions
             - title: Refresh a branch with the Neon API
               slug: guides/branch-refresh
+            - title: Promote a branch to primary with the Neon API
+              slug: guides/branch-promote
         - title: Project sharing
           slug: guides/project-sharing-guide
         - title: Read replicas
