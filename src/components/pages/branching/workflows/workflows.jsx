@@ -1,8 +1,8 @@
 'use client';
 
+import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import React, { useEffect, useRef, useState } from 'react';
 import { InView, useInView } from 'react-intersection-observer';
-import { Alignment, Fit, Layout, useRive } from 'rive-react';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';

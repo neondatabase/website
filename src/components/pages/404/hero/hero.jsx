@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
@@ -8,9 +9,10 @@ import { useEffect, useState } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
-import Search from 'components/shared/search';
 
 import illustration from './images/illustration.png';
+
+const Search = dynamic(() => import('components/shared/search'), { ssr: false });
 
 const CTA = ({ isDocsPage = false }) =>
   isDocsPage ? (

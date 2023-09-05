@@ -5,21 +5,7 @@ import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useId } from 'react';
 
-// TODO: rename once we get better understanding of all possible styles
-const spreadStyles = {
-  1: 'mt-[4%] h-[130px] w-[105%]',
-  2: '-mt-[2%] h-[130px] w-[110%]',
-  3: 'mt-[2%] h-[130px] w-[103%]',
-  4: 'mt-0 h-[130px] w-[100%]',
-  5: 'mt-0 h-[123px] w-[103%]',
-};
-
-const LinesIllustration = ({
-  className: additionalClassName,
-  color,
-  spread,
-  spreadClassName = null,
-}) => {
+const LinesIllustration = ({ className: additionalClassName, color }) => {
   const id = useId();
 
   return (
@@ -34,7 +20,7 @@ const LinesIllustration = ({
         aria-hidden
       >
         <svg
-          className={clsx('ml-[50%] -translate-x-1/2', spreadStyles[spread], spreadClassName)}
+          className="ml-[50%] -translate-x-1/2 mt-0 h-[130px] w-[100%]"
           width="300"
           height="150"
           viewBox="0 0 300 150"
@@ -99,8 +85,6 @@ const LinesIllustration = ({
 LinesIllustration.propTypes = {
   className: PropTypes.string,
   color: PropTypes.string,
-  spread: PropTypes.oneOf(Object.keys(spreadStyles).map(Number)),
-  spreadClassName: PropTypes.string,
 };
 
 export default LinesIllustration;

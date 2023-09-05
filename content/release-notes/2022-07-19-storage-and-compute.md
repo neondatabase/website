@@ -1,10 +1,6 @@
-### What's new
+### Fixes & improvements
 
-- Safekeeper: Added support for backing up Write-Ahead Logs (WAL) to S3 storage for disaster recovery.
-- Safekeeper: Added support for downloading WAL from S3 storage on demand.
-- Safekeeper: Switched to [etcd](https://etcd.io/) subscriptions to keep Pageservers up to date with the Safekeeper status.
-- Safekeeper: Implemented JSON Web Token (JWT) authentication in the Safekeeper HTTP API.
-- Proxy: Added support for propagating SASL/SCRAM Postgres authentication errors to clients.
+- Compute: Enabled the use of the `CREATE EXTENSION` statement for users that are not database owners.
 - Compute: Updated the Postgres version to 14.4.
 - Compute: Renamed the following custom configuration parameters:
   - `zenith.page_server_connstring` to `neon.pageserver_connstring`
@@ -19,10 +15,11 @@
 - Pageserver: Updated the timeline size reported when `DROP DATABASE` is executed.
 - Pageserver: Decreased the number of threads by running gc and compaction in a blocking tokio thread pool.
 - Pageserver: Switched to per-tenant attach/detach. Download operations of all timelines for one tenant are now grouped together so that branches can be used safely with attach/detach.
-
-### Bug fixes
-
-- Compute: Enabled the use of the `CREATE EXTENSION` statement for users that are not database owners.
+- Proxy: Added support for propagating SASL/SCRAM Postgres authentication errors to clients.
+- Safekeeper: Added support for backing up Write-Ahead Logs (WAL) to S3 storage for disaster recovery.
+- Safekeeper: Added support for downloading WAL from S3 storage on demand.
+- Safekeeper: Switched to [etcd](https://etcd.io/) subscriptions to keep Pageservers up to date with the Safekeeper status.
+- Safekeeper: Implemented JSON Web Token (JWT) authentication in the Safekeeper HTTP API.
 - Safekeeper: Fixed the walreceiver connection selection mechanism:
   - Reconnecting to a Safekeeper immediately after it fails is now avoided by limiting candidates to those with the fewest connection attempts.
   - Increased the `max_lsn_wal_lag` default setting to avoid constant reconnections during normal work.

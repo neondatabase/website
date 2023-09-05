@@ -2,9 +2,9 @@ import Apply from 'components/pages/partners/apply';
 import Hero from 'components/pages/partners/hero';
 import Integration from 'components/pages/partners/integration';
 import Logos from 'components/pages/partners/logos';
-import Testimonial from 'components/pages/partners/testimonial';
 import Layout from 'components/shared/layout';
 import SplitViewGrid from 'components/shared/split-view-grid';
+import Testimonial from 'components/shared/testimonial';
 import SEO_DATA from 'constants/seo-data';
 import currencyIcon from 'icons/partners/currency.svg';
 import priorityLowIcon from 'icons/partners/priority-low.svg';
@@ -74,7 +74,13 @@ const PartnersPage = () => (
             making Serverless Postgres the go-to choice for developers everywhere."
       items={items}
     />
-    <Testimonial />
+    <Testimonial
+      className="mt-[200px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
+      quote="By partnering with Neon, Vercel’s frontend platform is now the end&#8209;to&#8209;end
+          serverless solution for building on the Web, from Next.js all&nbsp;the way to SQL."
+      name="Guillermo Rauch"
+      position="CEO of Vercel"
+    />
     <Integration />
     <Apply />
   </Layout>

@@ -71,13 +71,23 @@ If your application or service uses golang Postgres clients like `pgx` and `lib/
 
 ### D. Specify the endpoint ID in the password field
 
-As a last resort, you can try specifying the endpoint ID in the password field. So, instead of specifying only your password, you provide a string consisting of the `endpoint` option and the password, as shown. Replace `<endpoint_id>` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-mute-recipe-123456`.
+Another supported workaround involves specifying the endpoint ID in the password field. So, instead of specifying only your password, you provide a string consisting of the `endpoint` option and your password, separated by a semicolon (`;`) or dollar sign character (`$`), as shown in the examples below. Replace `<endpoint_id>` with your compute's endpoint ID, which you can find in your Neon connection string. An `endpoint_id` looks similar to this: `ep-mute-recipe-123456`.
 
 ```txt
 endpoint=<endpoint_id>;<password>
 ```
 
-This approach is the least secure of the recommended workarounds. It causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites. We intend deprecate this option when most libraries and applications provide SNI support.
+or
+
+```txt
+endpoint=<endpoint_id>$<password>
+```
+
+<Admonition type="note">
+Using a dollar sign (`$`) character as a separator may be required if a semicolon (`;`) is not a permitted character in a password field. For example, the [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/) does not permit a semicolon character in the **Password** field when defining connection details for database endpoints.
+</Admonition>
+
+This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites. We intend deprecate this option when most libraries and applications provide SNI support.
 
 ### Libraries
 

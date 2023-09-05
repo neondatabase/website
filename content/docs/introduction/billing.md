@@ -51,7 +51,7 @@ Factors that affect _Compute time_ include:
 - The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Compute size automatically scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
-Neon uses a small amount of _Compute time_, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data.
+Neon uses a small amount of _Compute time_, included in your billed amount, to perform a periodic check to ensure that your computes can start and read and write data. See [Availability Checker](/docs/reference/glossary#availability-checker) for more information.
 </Admonition>
 
 The _Compute time_ cost calculation is as follows:
@@ -113,7 +113,7 @@ _Project storage_ is the total volume of data and history stored in your Neon pr
 
   Neon retains a history if data changes to support _point-in-time restore_ and _database branching_.
 
-  - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon stores a 7-day history in the form of WAL records for a Neon project. WAL records that fall out of the 7-day window are evicted from storage and no longer count toward project storage.
+  - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon retains a 7-day history in the form of WAL records for a Neon project, by default. You can configure the retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). WAL records that age out of the retention period are evicted from storage and no longer count toward project storage.
   - A _database branch_ is a virtual snapshot of your data at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
     When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's virtual snapshot still exists in the parent branch's _history_, which means that it shares this data in common with the parent branch. A branch begins adding to storage when data changes are introduced or when the branch's virtual snapshot falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data or allow the branch to age out of the parent branch's _history_.
 
@@ -173,6 +173,11 @@ Data transfer (GiB) * price per GiB
 | AWS            | Asia Pacific (Singapore) | Project storage | $0.00018  | GiB-hour       |
 | AWS            | Asia Pacific (Singapore) | Written data    | $0.09600  | GiB            |
 | AWS            | Asia Pacific (Singapore) | Data transfer   | $0.09000  | GiB            |
+|                |                          |                 |           |                |
+| AWS            | Israel (Tel Aviv)        | Compute time    | $0.121    | Compute-hour\* |
+| AWS            | Israel (Tel Aviv)        | Project storage | $0.00022  | GiB-hour       |
+| AWS            | Israel (Tel Aviv)        | Written data    | $0.09600  | GiB            |
+| AWS            | Israel (Tel Aviv)        | Data transfer   | $0.09000  | GiB            |
 
 \* A _Compute-hour_ is based on a compute size with 1 Compute Unit (CU), which is 1 vCPU and 4 GB of RAM. Neon's smallest compute size is .25 CU (.25 vCPU and 1GB of RAM), which would be billed at 1/4 of a _Compute-hour_. Neon supports compute sizes ranging from .25 CU (.25 vCPU and 1 GB of RAM) to 7 CUs (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
 
@@ -188,6 +193,8 @@ The [Pricing](https://neon.tech/pricing) page on the Neon website provides a cal
 
 ### Pro Plan Cost Estimator
 
-The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimation** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Estimate costs**.
+The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimator** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Open cost calculator**.
+
+The tool displays cost estimates only after a month of project usage.
 
 ![Pro Plan Cost Estimation tool](/docs/introduction/billing_page_calculator.png)

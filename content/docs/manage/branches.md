@@ -14,7 +14,7 @@ For more information about branches and how you can use them in your development
 You can create and manage branches using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). This topic covers both methods.
 
 <Admonition type="important">
-When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated. Neon retains a 7-day data history, by default. To keep data storage to a minimum, remove branches before they age out of this 7-day window.
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated. Neon retains a 7-day data history, by default. You can configure the retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). To keep data storage to a minimum, remove branches before they age out of the history retention window.
 </Admonition>
 
 ## Primary branch
@@ -57,6 +57,7 @@ To view the branches in a Neon project:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table to view details about the branch.
+![View branch details](/docs/manage/branch_details.png)
 
 Branch details shown on the branch page include:
 
@@ -114,7 +115,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
   <CodeBlock shouldWrap>
 
   ```bash
-  psql postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb
+  psql postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
   ```
 
   </CodeBlock>

@@ -90,7 +90,6 @@ const getAllReleaseNotes = async () => {
   const slugs = await getPostSlugs(RELEASE_NOTES_DIR_PATH);
 
   return slugs
-    .reverse()
     .map((slug) => {
       if (!getPostBySlug(slug, RELEASE_NOTES_DIR_PATH)) return;
       const post = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);

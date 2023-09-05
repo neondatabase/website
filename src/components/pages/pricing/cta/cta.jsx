@@ -51,9 +51,9 @@ const CTA = () => {
             theme="primary"
             to={links.contactSales}
             size="sm"
-            animationSize="sm"
-            animationClassName="w-[126%]"
-            spread={3}
+            linesOffsetTop={24}
+            linesOffsetSide={24}
+            linesOffsetBottom={50}
             isAnimated
           >
             Talk to sales

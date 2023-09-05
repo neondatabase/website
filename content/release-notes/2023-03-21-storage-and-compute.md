@@ -1,4 +1,4 @@
-### What's new
+### Fixes & improvements
 
 - Pageserver: Improved the check for unexpected trailing data when importing a basebackup, which is tarball with files required to bootstrap a compute node.
 - Pageserver: Separated the management and `libpq` configuration, making it possible to enable authentication for only the management HTTP API or the Compute API.
@@ -8,10 +8,7 @@
 - Pageserver: Switched to the EdDSA algorithm for the storage JWT authentication tokens. The Neon Control Plane only supports EdDSA.
 - Added metrics that enable detection of data layer eviction thrashing (repetition of eviction and on-demand download of data layers).
 - Pageserver, Safekeeper: Revised `$NEON_AUTH_TOKEN` variable handling when connecting from a compute to Pageservers and Safekeepers.
-- Safekeeper: Added an internal metric to track bytes written or read in Postgres connections to Safekeepers, which enables monitoring traffic between availability zones.
-- Proxy: All compute node connection errors are now logged.
-
-### Bug Fixes
-
 - Pageserver: Fixed an issue that resulted in old data layers not being garbage collected.
+- Proxy: All compute node connection errors are now logged.
 - Proxy: Fixed an issue that caused Websocket connections through the Proxy to become unresponsive.
+- Safekeeper: Added an internal metric to track bytes written or read in Postgres connections to Safekeepers, which enables monitoring traffic between availability zones.

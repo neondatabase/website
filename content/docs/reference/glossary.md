@@ -256,7 +256,7 @@ A custom volume-based paid plan offered by Neon that includes support for resale
 
 ### Point-in-time restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a data history in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. See [Create a branch](/docs/manage/branches#create-a-branch) for more information. Neon retains 7-day history, by default.
+Restoration of data to a state that existed at an earlier time. Neon retains a history in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. By default, Neon retains a 7-day history of data changes for all branches in a project. The supported range  is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. For more information about this feature, see [Branching — Point-in-time restore](https://neon.tech/docs/guides/branching-pitr).
 
 ### PostgreSQL
 

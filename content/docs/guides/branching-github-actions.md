@@ -112,6 +112,15 @@ jobs:
 
 This Action has no outputs.
 
+## Example applications
+
+The following example applications use GitHub Actions to create and delete branches in Neon.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/neon_twitter" description="A micro-blogging application that uses GitHub Actions to create and delete a branch with each pull request" icon="github">Neon Twitter app</a>
+<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with preview deployments in Vercel" icon="github">Preview branches app</a>
+</DetailIconCards>
+
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
