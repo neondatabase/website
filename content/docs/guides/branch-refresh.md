@@ -23,7 +23,7 @@ The following information is required to perform the procedure:
 
 - A Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 - The `project_id` for your Neon project. You can obtain a `project_id` using the [List projects](https://api-docs.neon.tech/reference/listprojects) method, or you can find it on your project's **Settings** page in the Neon Console.
-- The `branch_id` of the current branch. You can obtain a `branch_id` using the [List branches](https://api-docs.neon.tech/reference/listprojectbranches) method, or you can find it on the your project's **Branches** page in the Neon Console. An `branch_id` has a `br-` prefix.
+- The `branch_id` of the current branch. You can obtain a `branch_id` using the [List branches](https://api-docs.neon.tech/reference/listprojectbranches) method, or you can find it on your project's **Branches** page in the Neon Console. A `branch_id` has a `br-` prefix.
 - The `endpoint_id` of the compute endpoint associated with the current branch. You can obtain an `endpoint_id` using the [List endpoints](https://api-docs.neon.tech/reference/listprojectendpoints) method, or you can find it on the **Branches** page in the Neon Console. An `endpoint_id` has an `ep-` prefix.
 
 ## Create a new up-to-date branch without a compute endpoint
@@ -45,7 +45,7 @@ curl --request POST \
 '
 ```
 
-The response body includes the `id` of your new branch. You will need this value (`br-summer-water-09767623`) to move the compute endpoint in the next step.
+The response body includes the `id` of your new branch. You will need this value (`br-falling-flower-15986510`) to move the compute endpoint in the next step.
 
 <details>
 <summary>Response body</summary>
