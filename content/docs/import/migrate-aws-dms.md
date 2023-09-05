@@ -13,7 +13,7 @@ This guide uses the [AWS DMS sample Postgres database](https://github.com/aws-sa
 
 ## Before you begin
 
-Complete the following steps before you begin the steps outlined in this guide:
+Complete the following steps before you begin:
 
 - Create a [replication instance](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Creating.html) in AWS DMS.
 - Configure a [source database endpoint](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.html) in AWS DMS.
