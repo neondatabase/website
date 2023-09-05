@@ -123,7 +123,7 @@ Neon supports custom-built Postgres extensions for exclusive use with your Neon 
 - A description of what the extension does, instructions for compiling it, and any prerequisites
 - Whether an NDA or licensing agreement is necessary for Neon to provide support for your extension
 
-Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access required by your extension. Neon features such as Autoscaling and Auto-suspend may also limit the types of extensions we can support.
+Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access. Neon features such as Autoscaling and Auto-suspend may limit the types of extensions we can support.
 
 Depending on the nature of your extension, Neon may also request a liability waiver.
 
