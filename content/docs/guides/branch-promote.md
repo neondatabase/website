@@ -13,18 +13,16 @@ Each Neon project has a primary branch. In the Neon Console, your primary branch
 - For [Free Tier](/docs/introduction/free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
 - For [Pro plan](/docs/introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes.
 
-For these reasons, it's recommended that you define the branch that holds your production data as your primary branch.
-
 ## Why promote a branch to primary?
 
-A common usage scenario that involves promoting branch to primary is data recovery. For example, a data loss occurs on the current primary branch. To recover the lost data, you create a point-in-time branch with data that existed before the data loss occurred. To avoid modifying your application's database connection configuration, you move your current compute endpoint from the old branch to the new branch.
+A common usage scenario involving promoting branch to primary is data recovery. For example, a data loss occurs on the current primary branch. To recover the lost data, you create a point-in-time branch with data that existed before the data loss occurred. To avoid modifying your application's database connection configuration, you move the compute endpoint from the current primary branch to the new data recovery branch and than make that branch your primary.
 
 The procedure described below creates a new branch and promotes it to the primary branch of your project by performing the following steps:
 
 1. [Creating a new point-in-time branch without a compute endpoint](#creating-a-new-point-in-time-branch-without-a-compute-endpoint)
-2. [Moving the compute endpoint from your current primary branch to the new branch](#move-the-compute-endpoint-from-your-current-branch-to-the-new-branch)
-3. [Deleting the old branch](#delete-the-old-branch)
-4. [Renaming the new branch to the name of the old branch](#rename-the-new-branch-to-the-name-of-the-old-branch)
+2. [Moving the compute endpoint from your current primary branch to the new branch](#move-the-compute-endpoint-from-your-current-primary-branch-to-the-new-branch)
+3. [Renaming the old primary branch](#rename-the-old-primary-branch)
+4. [Renaming the new branch to the name of the old primary branch](#rename-the-new-branch-to-the-name-of-the-old-primary-branch)
 5. [Promoting the new branch to primary](#promoting-the-new-branch-to-primary)
 
 ## Prerequisites
@@ -38,9 +36,9 @@ The following information is required to perform the procedure:
 
 ## Creating a new point-in-time branch without a compute endpoint
 
-The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) request shown below creates a point-in-time branch without a compute endpoint. Required parameters are your Neon `project_id`. To create a point-in-time branch, you must specify a `parent_timestamp` value in the branch object. The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) request shown below creates a point-in-time branch without a compute endpoint. The `project_id` is a required parameter. To create a point-in-time branch, specify a `parent_timestamp` value in the `branch` object. The `parent_timestamp` value must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
 
-The `project_id` value used in the example below is `young-silence-08999984`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
+The `project_id` value used in the example below is `young-silence-08999984`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key. The branch is given the  name, `recovery_branch`. You will change this in a later step.
 
 ```curl
 curl --request POST \
@@ -120,9 +118,9 @@ The response body includes the `id` of your new branch. You will need this value
 ```
 </details>
 
-## Move the compute endpoint from your current branch to the new branch
+## Move the compute endpoint from your current primary branch to the new branch
 
-The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) API request shown below moves the compute endpoint from your current branch to the new branch. The required parameters are the `project_id` and `endpoint_id` of your current branch, and the `branch_id` of your new branch. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
+The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) API request shown below moves the compute endpoint from your current primary branch to the new branch. The required parameters are the `project_id` and `endpoint_id` of your current primary branch, and the `branch_id` of the new branch. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
 <CodeBlock shouldWrap>
 
@@ -175,9 +173,9 @@ curl --request PATCH \
 ```
 </details>
 
-## Rename the old branch
+## Rename the old primary branch
 
-The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) API request shown below renames the old primary branch. The required parameters are the `project_id` and `branch_id`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
+The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) API request shown below renames the old primary branch to `old_main`. You may want to delete this branch later to reduice storage usage, but for now, just rename it. The required parameters are the `project_id` and `branch_id`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
 <CodeBlock shouldWrap>
 
@@ -223,9 +221,9 @@ curl --request PATCH \
 ```
 </details>
 
-## Rename the new branch to the name of the old branch
+## Rename the new branch to the name of the old primary branch
 
-Optionally, you can rename the new branch to the name of the old branch. The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) API request shown below renames the new branch from `dev_branch_2` to `dev_branch_1`.
+Rename the new branch to the name of the old branch, which was `main`. The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) API request shown below renames the new branch from `recovery_branch` to `main`.
 
 <CodeBlock shouldWrap>
 
@@ -276,7 +274,7 @@ curl --request PATCH \
 
 ## Promoting the new branch to primary
 
-The [Set primary branch](https://api-docs.neon.tech/reference/setprimaryprojectbranch) API request sets the new branch as the primary branch fo the project.
+The [Set primary branch](https://api-docs.neon.tech/reference/setprimaryprojectbranch) API request sets the new branch as the primary branch for the project.
 
 <CodeBlock shouldWrap>
 
@@ -316,3 +314,5 @@ curl --request POST \
 }
 ```
 </details>
+
+You should now have a new primary branch, and no application configuration was required. Once you have validated the change, consider deleting your old primary branch to save storage space.
