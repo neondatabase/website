@@ -115,6 +115,18 @@ You can update an extension to the latest version using `ALTER EXTENSION <extens
 
 To request support for additional extensions, please contact us at [support@neon.tech](mailto:support@neon.tech) or post your request to the [Neon community forum](https://community.neon.tech/).
 
+## Custom-built extensions
+
+Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, send a request to [support@neon.tech](mailto:support@neon.tech). Please include the following information in your request:
+
+- A repository link or archive file containing the source code for your extension
+- A description of what the extension does, instructions for compiling it, and any prerequisites
+- Whether an NDA or licensing agreement is necessary for Neon to provide support for your extension
+
+Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access required by your extension. Neon features such as Autoscaling and Auto-suspend may also limit the types of extensions we can support.
+
+Depending on the nature of your extension, Neon may also request a liability waiver.
+
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
