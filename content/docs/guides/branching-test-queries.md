@@ -49,7 +49,7 @@ VALUES
 
 You can also create a test branch using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](/docs/manage/branches#create-a-branch-with-the-api).
 
-<CodeTabs labels={["CLI,  "API"]}>
+<CodeTabs labels={["CLI, "API"]}>
 
 ```bash
 neonctl branches create --project-id <project-id> --name my_test_branch
@@ -101,7 +101,7 @@ When you finish testing your query, you can delete the test branch:
 
 You can also delete a branch using the [Neon CLI](/docs/reference/cli-branches#delete) or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api).
 
-<CodeTabs labels={["CLI,  "API"]}>
+<CodeTabs labels={["CLI, "API"]}>
 
 ```bash
 neonctl branches delete my_test_branch
