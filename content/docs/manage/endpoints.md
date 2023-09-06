@@ -38,14 +38,14 @@ Compute endpoint details shown on the branch page include:
 
 ## Create a compute endpoint
 
-You can only create a compute endpoint for a branch that does not have one.
+You can only create a read-write compute endpoint for a branch that does not have one, but a branch can have multiple read-only compute endpoints (referred to as "read replicas"). [Read replicas](/docs/guides/read-replica-guide) are a [Neon Pro plan](/docs/introduction/pro-plan) feature.
 
 To create an endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch that does not have an endpoint
 1. Click **Add compute**.
-1. On the **Create compute endpoint** dialog, specify your settings and click **Create**. Selecting Read-only creates a [Read replica](/docs/introduction/read-replicas).
+1. On the **Create compute endpoint** dialog, specify your settings and click **Create**. Selecting **Read-only** creates a [Read replica](/docs/introduction/read-replicas).
 
 ## Edit a compute endpoint
 
