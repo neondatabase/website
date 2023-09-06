@@ -5,10 +5,11 @@ enableTableOfContents: true
 
 A Neon account subscribed to a paid plan can manage billing from the **Billing** page in the Neon Console. On the **Billing** page, you can:
 
-- View charges for the current month.
+- View charges for the current month
+- Update your billing email
 - Update your payment method
 - View and download invoices
-- Cancel a subscription
+- Downgrade your plan
 
 For Free Tier accounts, the **Billing** page allows users to view [Free Tier](/docs/introduction/free-tier) usage limits, learn about [Neon Pro plan](/docs/introduction/pro-plan) features, and estimate monthly Pro plan cost based on your current usage.
 
@@ -24,11 +25,23 @@ To access your **Billing** page:
 To update your payment method:
 
 1. Navigate to the **Billing** page in the Neon Console.
-2. Select the **Payment method** menu and click **Edit**.
-3. A link verification code is sent automatically via SMS to the phone number associated with your account. Alternatively, you can have the code sent to the email address associated with your account. Enter the provided code.
-4. Update your payment method and click **Save card**.
+2. Under **Payment method**, click **Edit**.
+3. Click **Select a saved payment method**.
+4. From the menu, select **Update card**.
+5. Update your payment method and click **Update**.
 
-If you are unable to access the link verification code required to update your payment method, please contact [support@neon.tech](mailto:support@neon.tech).
+If you are unable to update your payment method, please contact [support@neon.tech](mailto:support@neon.tech).
+
+## Add a new payment method
+
+To add a new payment method:
+
+1. Navigate to the **Billing** page in the Neon Console.
+2. Under **Payment method**, click **Edit**.
+3. Click **Add a new payment method**.
+4. Enter your card details and click **Save Card**.
+
+If you are unable to add a payment method, please contact [support@neon.tech](mailto:support@neon.tech).
 
 ### Missed payments
 
@@ -36,7 +49,7 @@ If an auto-debit payment transaction fails, Neon sends a request to update your 
 
 ## Invoices
 
-A Neon invoice includes an **Amount due** for the billing period and a cost breakdown by [billing metric](/docs/introduction/billing).
+A Neon invoice includes an **Amount due** for the billing period and a cost breakdown by project and [billing metric](/docs/introduction/billing).
 
 ### Download invoices
 
@@ -47,14 +60,14 @@ To download an invoice:
 
 ## Downgrade your plan
 
-To downgrade from the Pro plan Free Tier:
+To downgrade from the Pro plan to the Free Tier:
 
 1. Navigate to the **Billing** page in the Neon Console.
-1. Click **Downgrade** at the bottom of the page.
-1. Follow the instructions on the **Request Downgrade** modal, and click **Downgrade**.
+1. Click **Downgrade plan** at the bottom of the page.
+1. Follow the instructions on the **Downgrade** modal, and click **Downgrade**.
 
 Downgrading from the Pro plan transitions your account to the Neon Free Tier, which has lower usage limits that may affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
 
-You will be required to remove any projects, branches, or data that exceed [Free Tier limits](/docs/introduction/free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade request).
+You will be required to remove any projects, branches, or data that exceed [Free Tier limits](/docs/introduction/free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade).
 
-For downgrading from Enterprise or Platform Partnership plans, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans is handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
+To downgrade from Enterprise or Platform Partnership plans, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans is handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
