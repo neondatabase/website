@@ -282,7 +282,7 @@
         }
 
         .DocSearch-Hit-path {
-          @apply text-xs leading-none text-black-new dark:text-white;
+          @apply text-xs leading-dense text-black-new dark:text-white;
 
           mark {
             @apply bg-transparent text-secondary-8 dark:text-green-45;

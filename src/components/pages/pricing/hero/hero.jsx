@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { motion, useAnimation } from 'framer-motion';
+import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 
 import AnimatedButton from 'components/shared/animated-button';
@@ -13,8 +13,8 @@ import CheckIcon from 'icons/check.inline.svg';
 
 const items = [
   {
-    type: 'Free Tier',
-    price: 'Free',
+    type: 'Free',
+    price: 'Try Neon now',
     description:
       'Essential features to help you get started with Neon. Perfect for prototyping and personal projects.',
     features: [
@@ -22,7 +22,6 @@ const items = [
       { title: '10 branches' },
       { title: '3 GB of data per branch' },
       { title: 'A shared compute with 1 GB of RAM' },
-      { title: 'Auto-suspend compute' },
     ],
     button: {
       url: 'https://console.neon.tech/sign_in',
@@ -34,12 +33,13 @@ const items = [
     type: 'Pro',
     price: 'Starting at <span class="font-normal text-pricing-primary-1">$0.00</span>',
     description:
-      'A usage-based plan for small to medium teams. Unlimited resources with advanced configuration options. Share your projects with anyone. Only pay for what you use with no fixed contract.',
+      'A usage-based plan for small to medium teams. Unlimited resources with advanced configuration options.',
     features: [
-      { title: 'Unlimited projects & branches' },
-      { title: 'Project sharing' },
-      { title: 'Configurable compute size' },
+      { title: 'Unlimited projects & databases' },
+      { title: 'Unlimited branches' },
       { title: 'Autoscaling' },
+      { title: 'Configurable compute size' },
+      { title: 'Read replicas' },
     ],
     button: {
       url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
@@ -51,11 +51,12 @@ const items = [
     type: 'Custom',
     price: 'Contact us',
     description:
-      'Custom volume-based plans for medium to large teams, database fleets, and resale. Contact our Sales team to learn more.',
+      'Custom volume-based plans for medium to large teams, database fleets, and resale.',
     features: [
       { title: 'Custom contracts' },
       { title: 'Prepaid plans' },
       { title: 'Volume discounts' },
+      { title: 'Enterprise support' },
     ],
     button: {
       url: LINKS.contactSales,
@@ -123,9 +124,9 @@ const Hero = () => {
                 )}
                 style={{
                   '--accentColor':
-                    type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
+                    type === 'Free' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
                   '--hoverColor':
-                    type === 'Free Tier' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
+                    type === 'Free' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
                 }}
                 key={index}
                 onPointerEnter={() => {
@@ -141,7 +142,7 @@ const Hero = () => {
                   )}
                   to={button.url}
                 >
-                  <div className="mb-6 flex min-h-[330px] flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-7 xl:min-h-[348px] lg:min-h-max">
+                  <div className="mb-6 min-h-[280px] flex flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-7 lg:min-h-max">
                     <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
                       {type}
                     </span>
@@ -151,7 +152,7 @@ const Hero = () => {
                     />
                     <AnimatedButton
                       className={clsx(
-                        'relative mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 md:mt-7 sm:max-w-none',
+                        'mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 md:mt-7 sm:max-w-none',
                         type === 'Pro'
                           ? 'lg:absolute lg:right-8 lg:top-0 lg:max-w-[210px] md:relative md:right-0 md:max-w-[304px]'
                           : 'lg:max-w-[304px]'
@@ -160,7 +161,6 @@ const Hero = () => {
                       animationColor="var(--accentColor)"
                       theme="primary"
                       size="sm"
-                      spread={2}
                     >
                       {button.text}
                     </AnimatedButton>
@@ -203,19 +203,22 @@ const Hero = () => {
                     </ul>
                   </div>
                 </Link>
-
-                <motion.span
-                  className={clsx(
-                    'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border transition-colors duration-300 md:border-[var(--accentColor)] md:!opacity-100',
-                    isLoad !== true && '!opacity-100',
-                    activeItemIndex === index ? 'border-[var(--accentColor)]' : 'border-transparent'
-                  )}
-                  initial="from"
-                  exit="exit"
-                  variants={borderLightVariants}
-                  animate={controls}
-                  aria-hidden
-                />
+                <LazyMotion features={domAnimation}>
+                  <m.span
+                    className={clsx(
+                      'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border transition-colors duration-300 md:border-[var(--accentColor)] md:!opacity-100',
+                      isLoad !== true && '!opacity-100',
+                      activeItemIndex === index
+                        ? 'border-[var(--accentColor)]'
+                        : 'border-transparent'
+                    )}
+                    initial="from"
+                    exit="exit"
+                    variants={borderLightVariants}
+                    animate={controls}
+                    aria-hidden
+                  />
+                </LazyMotion>
               </li>
             ))}
           </ul>

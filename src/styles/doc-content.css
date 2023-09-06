@@ -95,7 +95,7 @@
     }
 
     pre {
-      @apply my-5 !bg-gray-new-98 dark:!bg-gray-new-10;
+      @apply my-5 overflow-x-auto !bg-gray-new-98 dark:!bg-gray-new-10;
 
       &.highlight {
         @apply px-0;

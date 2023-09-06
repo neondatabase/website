@@ -1,6 +1,6 @@
-import { motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import Button from 'components/shared/button';
 import Link from 'components/shared/link';
@@ -40,66 +40,71 @@ const variants = {
 };
 
 const MobileMenu = ({ isOpen = false, headerRef, onOutsideClick }) => {
-  const controls = useAnimation();
   const ref = useRef(null);
-
-  useEffect(() => {
-    if (isOpen) {
-      controls.start('to');
-    } else {
-      controls.start('from');
-    }
-  }, [isOpen, controls]);
 
   useClickOutside([ref, headerRef], onOutsideClick);
 
   return (
-    <motion.nav
-      className="absolute left-8 right-8 top-16 z-[-1] hidden rounded-2xl bg-white px-5 pb-7 pt-1 lg:block md:left-4 md:right-4"
-      initial="from"
-      animate={controls}
-      variants={variants}
-      style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
-      ref={ref}
-    >
-      <ul className="flex flex-col">
-        {MENUS.mobile.map(({ iconName, text, to, description }, index) => {
-          const Icon = icons[iconName];
-          return (
-            <li className="border-b border-b-gray-6" key={index}>
-              {Icon && description ? (
-                <Link className="flex items-center whitespace-nowrap py-4" to={to}>
-                  <Icon className="flex-shrink-0" aria-hidden />
-                  <span className="ml-3">
-                    <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
-                      {text}
-                    </span>
-                    <span className="mt-1.5 block leading-none text-black">{description}</span>
-                  </span>
-                </Link>
-              ) : (
-                <Link className="!block py-4 text-lg" to={to}>
-                  {text}
-                </Link>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-      <div className="mt-5 space-y-4">
-        <Button
-          className="!flex h-12 items-center justify-center"
-          to={LINKS.dashboard}
-          size="xs"
-          theme="quaternary"
-        >
-          Sign In
-        </Button>
-        <Button className="!flex h-12 items-center" to={LINKS.signup} size="xs" theme="primary">
-          Sign up
-        </Button>
-      </div>
-    </motion.nav>
+    <LazyMotion features={domAnimation}>
+      <AnimatePresence>
+        {isOpen && (
+          <m.nav
+            className="absolute left-8 right-8 top-16 z-[-1] hidden rounded-2xl bg-white px-5 pb-7 pt-1 lg:block md:left-4 md:right-4"
+            initial="from"
+            animate="to"
+            exit="from"
+            variants={variants}
+            style={{ boxShadow: '0px 10px 20px rgba(26, 26, 26, 0.4)' }}
+            ref={ref}
+          >
+            <ul className="flex flex-col">
+              {MENUS.mobile.map(({ iconName, text, to, description }, index) => {
+                const Icon = icons[iconName];
+                return (
+                  <li className="border-b border-b-gray-6" key={index}>
+                    {Icon && description ? (
+                      <Link className="flex items-center whitespace-nowrap py-4" to={to}>
+                        <Icon className="flex-shrink-0" aria-hidden />
+                        <span className="ml-3">
+                          <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
+                            {text}
+                          </span>
+                          <span className="mt-1.5 block leading-none text-black">
+                            {description}
+                          </span>
+                        </span>
+                      </Link>
+                    ) : (
+                      <Link className="!block py-4 text-lg" to={to}>
+                        {text}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="mt-5 space-y-4">
+              <Button
+                className="!flex h-12 items-center justify-center"
+                to={LINKS.dashboard}
+                size="xs"
+                theme="quaternary"
+              >
+                Sign In
+              </Button>
+              <Button
+                className="!flex h-12 items-center"
+                to={LINKS.signup}
+                size="xs"
+                theme="primary"
+              >
+                Sign up
+              </Button>
+            </div>
+          </m.nav>
+        )}
+      </AnimatePresence>
+    </LazyMotion>
   );
 };
 

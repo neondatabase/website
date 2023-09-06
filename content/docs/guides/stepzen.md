@@ -32,7 +32,7 @@ You can seed the database directly from the terminal by running the following `p
 <CodeBlock shouldWrap>
 
 ```bash
-psql postgres://daniel:*************@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb < init.sql
+psql postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb < init.sql
 ```
 
 </CodeBlock>
@@ -80,7 +80,7 @@ Specify your data source with the `stepzen import` CLI. Answer the setup questio
 stepzen import postgresql
 
 ? What would you like your endpoint to be called? api/with-neon
-? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-mute-rain-952417.us-east-2.aws.neon.tech:5432`)
+? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-raspy-cherry-95040071.us-east-2.aws.neon.tech:5432`)
 ? What is your database name? YOUR_NEON_DATABASE (e.g., `neondb`)
 ? What is the username? YOUR_NEON_USERNAME (e.g., `daniel`)
 ? What is the password? [hidden] YOUR_NEON_PASSWORD

@@ -22,7 +22,7 @@ For information about using the Neon **SQL Editor**, see [Query with Neon's SQL 
 
 In Neon, computing capacity is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GBs is always 4 times the number of CUs. A Neon compute can have anywhere from .25 to 7 CUs.
 
-When you enable Autoscaling for a compute endpoint, you define a minimum and maximum compute size, as shown below:
+When you enable _Autoscaling_ for a compute endpoint, you define a minimum and maximum compute size, as shown below:
 
 ![Edit compute endpoint dialog showing an Autoscaling configuration](/docs/extensions/edit_compute_endpoint.png)
 
@@ -70,7 +70,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     <CodeBlock shouldWrap>
 
     ```bash
-    pgbench -i postgres://sally:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+    pgbench -i postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
     ```
 
     </CodeBlock>
@@ -80,7 +80,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     <CodeBlock shouldWrap>
 
     ```bash
-    pgbench -f test.sql -c 15 -T 1000 -P 1 postgres://sally:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+    pgbench -f test.sql -c 15 -T 1000 -P 1 postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
     ```
 
     </CodeBlock>

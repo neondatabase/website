@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
 
@@ -9,24 +10,14 @@ import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
-import Search from 'components/shared/search';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import Burger from './burger';
-// import DiscordIcon from './images/header-discord.inline.svg';
-import AboutUsIcon from './images/header-about-us.inline.svg';
-import CareersIcon from './images/header-careers.inline.svg';
-import DiscussionsIcon from './images/header-discussions.inline.svg';
 import Github from './images/header-github.inline.svg';
 
-const icons = {
-  // discord: DiscordIcon,
-  discussions: DiscussionsIcon,
-  careers: CareersIcon,
-  aboutUs: AboutUsIcon,
-};
+const Search = dynamic(() => import('components/shared/search'), { ssr: false });
 
 const Header = ({
   className = null,
@@ -98,35 +89,40 @@ const Header = ({
                     {items?.length > 0 && (
                       <div className="group-hover:opacity-1 invisible absolute bottom-0 translate-y-full pt-4 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
                         <ul
-                          className=" rounded-2xl bg-white p-3.5"
+                          className="min-w-[240px] rounded-2xl bg-white p-3.5"
                           style={{ boxShadow: '0px 4px 10px rgba(26, 26, 26, 0.2)' }}
                         >
-                          {items.map(({ iconName, text, description, to }, index) => {
-                            const Icon = icons[iconName];
-                            return (
-                              <li
-                                className={clsx(
-                                  index !== 0 && 'mt-3.5 border-t border-t-gray-6 pt-3.5'
-                                )}
-                                key={index}
+                          {items.map(({ icon, text, description, to }, index) => (
+                            <li
+                              className={clsx(
+                                index !== 0 && 'mt-3.5 border-t border-t-gray-6 pt-3.5'
+                              )}
+                              key={index}
+                            >
+                              <Link
+                                className="flex items-center whitespace-nowrap hover:text-primary-2"
+                                to={to}
                               >
-                                <Link
-                                  className="flex items-center whitespace-nowrap hover:text-primary-2"
-                                  to={to}
-                                >
-                                  <Icon className="shrink-0" aria-hidden />
-                                  <span className="ml-3">
-                                    <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
-                                      {text}
-                                    </span>
-                                    <span className="mt-1.5 block leading-none text-black">
-                                      {description}
-                                    </span>
+                                <img
+                                  src={icon}
+                                  alt="text"
+                                  width={44}
+                                  height={44}
+                                  className="h-11 w-11 shrink-0"
+                                  loading="lazy"
+                                  aria-hidden
+                                />
+                                <span className="ml-3">
+                                  <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
+                                    {text}
                                   </span>
-                                </Link>
-                              </li>
-                            );
-                          })}
+                                  <span className="mt-1.5 block leading-none text-black">
+                                    {description}
+                                  </span>
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     )}

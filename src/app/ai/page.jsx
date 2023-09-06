@@ -1,11 +1,12 @@
-import CTA from 'components/pages/ai/cta';
 import Examples from 'components/pages/ai/examples';
 import Hero from 'components/pages/ai/hero';
 import Integration from 'components/pages/ai/integration';
 import Stats from 'components/pages/ai/stats';
 import Testimonials from 'components/pages/ai/testimonials';
+import CTAWithElephant from 'components/shared/cta-with-elephant';
 import Layout from 'components/shared/layout';
 import SplitViewGrid from 'components/shared/split-view-grid';
+import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import compatibilityIcon from 'icons/ai/compatibility.svg';
 import scalabilityIcon from 'icons/ai/scalability.svg';
@@ -66,7 +67,17 @@ const AIPage = () => (
     />
     <Examples />
     <Testimonials />
-    <CTA />
+    <CTAWithElephant
+      className="mt-[180px] 2xl:mt-40 xl:mt-[125px] lg:mt-16"
+      buttonClassName="px-14 xl:px-10 lg:px-9 sm:px-14"
+      title="Build your next AI app now with Neon"
+      description="Neon offers flexible usage and volume-based plans. Contact our Sales team to learn more."
+      buttonText="Contact Sales"
+      buttonUrl={LINKS.contactSales}
+      linkText="Learn more on GitHub"
+      linkUrl="https://github.com/neondatabase/pg_embedding"
+      linkTarget="_blank"
+    />
   </Layout>
 );
 

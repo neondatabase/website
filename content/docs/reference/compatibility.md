@@ -1,5 +1,5 @@
 ---
-title: Postgres Compatibility
+title: Postgres compatibility
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility

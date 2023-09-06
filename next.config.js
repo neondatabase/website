@@ -1,7 +1,11 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const { getAllPosts } = require('./src/utils/api-docs');
 const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
-module.exports = {
+const defaultConfig = {
   poweredByHeader: false,
   experimental: {
     appDir: true,
@@ -103,7 +107,7 @@ module.exports = {
       },
       {
         source: '/api-reference',
-        destination: 'https://api-docs.neon.tech/',
+        destination: 'https://api-docs.neon.tech',
         permanent: true,
       },
       {
@@ -113,10 +117,18 @@ module.exports = {
       },
       {
         source: '/ycmatcher',
-        destination: 'https://yc-idea-matcher.vercel.app/',
+        destination: 'https://yc-idea-matcher.vercel.app',
         permanent: true,
       },
       ...docsRedirects,
+    ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api_spec/release/v2.json',
+        destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
+      },
     ];
   },
   webpack(config) {
@@ -174,3 +186,5 @@ module.exports = {
     return config;
   },
 };
+
+module.exports = withBundleAnalyzer(defaultConfig);

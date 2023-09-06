@@ -1,14 +1,18 @@
 'use client';
 
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 
 import CheckIcon from './images/check.inline.svg';
 import CopyIcon from './images/copy.inline.svg';
+
+const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter/dist/cjs/prism'), {
+  ssr: false,
+});
 
 const DEFAULT_LANGUAGE = 'bash';
 
@@ -56,10 +60,7 @@ const CodeBlock = ({
   const highlightedLines = parseHighlightRanges(highlight);
 
   return (
-    <Tag
-      className={clsx('code-block group relative', { 'code-wrap': shouldWrap }, className)}
-      {...otherProps}
-    >
+    <Tag className={clsx('group relative', { 'code-wrap': shouldWrap }, className)} {...otherProps}>
       <SyntaxHighlighter
         language={snippetLanguage}
         useInlineStyles={false}

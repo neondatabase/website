@@ -3,14 +3,32 @@ import slugify from 'slugify';
 
 import HashIcon from './images/hash.inline.svg';
 
+const extractText = (children) => {
+  if (typeof children === 'string') {
+    return children;
+  }
+
+  if (Array.isArray(children)) {
+    const text = children.reduce((acc, child) => {
+      if (typeof child === 'string') {
+        return acc + child;
+      }
+      return acc + extractText(child.props.children);
+    }, '');
+    return text;
+  }
+
+  return '';
+};
+
 const AnchorHeading =
   (Tag) =>
   // eslint-disable-next-line react/prop-types
   ({ children }) => {
-    const id =
-      typeof children === 'string'
-        ? slugify(children, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g })
-        : undefined;
+    const id = slugify(extractText(children), { lower: true, remove: /[*+~.()'"!?:@]/g }).replace(
+      /_/g,
+      ''
+    );
 
     return (
       <Tag id={id} className="not-prose group relative w-fit">

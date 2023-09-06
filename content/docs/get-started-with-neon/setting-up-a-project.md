@@ -1,6 +1,9 @@
 ---
 title: Create your first project
 subtitle: Create a Neon project in seconds with just a few clicks
+redirectFrom:
+  - /docs/tutorial/project-setup
+  - /docs/tutorial/neon-tutorial
 ---
 
 To create your first project:
