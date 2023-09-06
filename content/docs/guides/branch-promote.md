@@ -335,4 +335,4 @@ curl --request POST \
 Promoting a branch to primary can also be performed using the Neon Console or CLI. See [Set a branch as primary](/docs/manage/branches#set-a-branch-as-primary) for Neon Console instructions. See [Neon CLI commands — branches](/docs/reference/cli-branches#set-primary) for CLI instructions.
 </Admonition>
 
-You should now have a new primary branch, and because you moved the compute endpoint from your old primary branch to the new one, you do not need to change the connection details in your applications. Once you have validated the change, consider deleting your old primary branch to save storage space. See [Delete a branch with the AP](/docs/manage/branches#delete-a-branch-with-the-api).
+You should now have a new primary branch, and because you moved the compute endpoint from your old primary branch to the new one, you do not need to change the connection details in your applications. Once you have validated the change, consider deleting your old primary branch to save storage space. See [Delete a branch with the API](/docs/manage/branches#delete-a-branch-with-the-api).
