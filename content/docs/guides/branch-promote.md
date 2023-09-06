@@ -4,7 +4,7 @@ subtitle: Learn how to promote a branch to the primary branch of your Neon proje
 enableTableOfContents: true
 ---
 
-This guide describes how to create a new branch and promote it to the primary branch of your Neon project using the Neon API.
+This guide describes how to create a new branch and promote it to the primary branch of your Neon project in the context of a data recovery scenario. It also describes how to move the compute endpoint from your existing primary branch to the new branch to avoid having to reconfigure your application's database connection details.
 
 ## What is a primary branch?
 
@@ -118,6 +118,10 @@ The response body includes the `id` of your new branch. You will need this value
 ```
 </details>
 
+<Admonition type="note">
+Creating a point-in-time branch can also be performed using the Neon Console or CLI. See [Create a point-in-time branch](/docs/guides/branching-pitr#create-a-point-in-time-branch) for Neon Console instructions. See [Neon CLI commands — branches](/docs/reference/cli-branches#create) for CLI instructions.
+</Admonition>
+
 ## Move the compute endpoint from your current primary branch to the new branch
 
 The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) API request shown below moves the compute endpoint from your current primary branch to the new branch. The required parameters are the `project_id` and `endpoint_id` of your current primary branch, and the `branch_id` of the new branch. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
@@ -173,6 +177,10 @@ curl --request PATCH \
 ```
 </details>
 
+<Admonition type="note">
+This procedure can only be performed using the Neon API. You can expect Neon Cole and CLI support to be added in a future release.
+</Admonition>
+
 ## Rename the old primary branch
 
 The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) API request shown below renames the old primary branch to `old_main`. You may want to delete this branch later to reduce storage usage, but just rename it for now. The required parameters are the `project_id` and `branch_id`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
@@ -220,6 +228,10 @@ curl --request PATCH \
 }
 ```
 </details>
+
+<Admonition type="note">
+Renaming a branch can also be performed using the Neon Console or CLI. See [Rename a branch](/docs/manage/branches#rename-a-branch) for Neon Console instructions. See [Neon CLI commands — branches](/docs/reference/cli-branches#rename) for CLI instructions.
+</Admonition>
 
 ## Rename the new branch to the name of the old primary branch
 
@@ -272,6 +284,10 @@ curl --request PATCH \
 ```
 </details>
 
+<Admonition type="note">
+Renaming a branch can also be performed using the Neon Console or CLI. See [Rename a branch](/docs/manage/branches#rename-a-branch) for Neon Console instructions. See [Neon CLI commands — branches](/docs/reference/cli-branches#rename) for CLI instructions.
+</Admonition>
+
 ## Promote the new branch to primary
 
 The [Set primary branch](https://api-docs.neon.tech/reference/setprimaryprojectbranch) API request sets the new branch as the primary branch for the project.
@@ -314,5 +330,9 @@ curl --request POST \
 }
 ```
 </details>
+
+<Admonition type="note">
+Promoting a branch to primary can also be performed using the Neon Console or CLI. See [Set a branch as primary](/docs/manage/branches#set-a-branch-as-primary) for Neon Console instructions. See [Neon CLI commands — branches](/docs/reference/cli-branches#set-primary) for CLI instructions.
+</Admonition>
 
 You should now have a new primary branch, and because you moved the compute endpoint from your old primary branch to the new one, you do not need to change the connection details in your applications. Once you have validated the change, consider deleting your old primary branch to save storage space. See [Delete a branch with the AP](/docs/manage/branches#delete-a-branch-with-the-api).
