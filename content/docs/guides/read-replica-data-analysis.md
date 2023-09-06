@@ -6,9 +6,9 @@ enableTableOfContents: true
 
 With Neon's read replica feature, you can instantly create a dedicated read-only compute instance for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
 
-A read replica reads data from the same source as you read-write compute instance. There's no data replication, so spinning up a read replica is a near-instant process. For more information about Neon's read replica architecture, see [Read replicas](/docs/introduction/read-replicas).
+A read replica reads data from the same source as your read-write compute instance. There's no data replication, so creating a read replica is a near-instant process. For more information about Neon's read replica architecture, see [Read replicas](/docs/introduction/read-replicas).
 
-Suppose you have a sales table in your production database. The table and data might look something like this:
+Suppose you have a `sales` table in your production database. The table and data might look something like this:
 
 ```sql
 CREATE TABLE sales (
@@ -43,7 +43,7 @@ Creating a read replica involves adding a read-only compute endpoint to a branch
     <Admonition type="note">
     The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
     </Admonition>
-6. When you are finished making your selections, click **Create**.
+6. When you finish making your selections, click **Create**.
 
 Your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page. This is your read replica. The following section describes how to connect to your read replica.
 
@@ -73,15 +73,19 @@ Connecting to a read replica is the same as connecting to any branch, except you
     - role: `daniel`
     - password:`<pasword>`
     - hostname: `ep-mute-rain-952417.us-east-2.aws.neon.tech`
-    - database name: `neondb`. This is the read-to-use database created with your project. Your database name may differ.
+    - database name: `neondb`. This is the ready-to-use database created with your Neon project. Your database name may differ.
 
-    When you use a read-only connection string, you are connecting to a read replica. No write operations are permitted on this connection.
+    When you connect to a read-only compute, no write operations are permitted on the connection.
 
 1. Connect to your application from a client such as `psql` or add the connection details to your application. For example, to connect using `psql`, issue the following command:
+
+    <CodeBlock shouldWrap>
 
     ```bash
     psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
     ```
+
+    </CodeBlock>
 
 ## Run the analytics query on the read replica
 
@@ -94,11 +98,11 @@ WHERE sale_date >= (CURRENT_DATE - INTERVAL '1 year')
 GROUP BY product_id;
 ```
 
-If you have a lot of products and sales, this query would likely impact performance on your production system, but running the query on your read replica, which has its own dedicated compute resources, causes no disruption.
+If you have a lot of products and sales, this query might impact performance on your production system, but running the query on your read replica, which has its own dedicated compute resources, causes no disruption.
 
 ## Delete the read replica
 
-When you are finished running analytics queries, you can delete the read replica if it's no longer required. Deleting a read replica is a permanent action, but you can quickly create a new read replica if you need one again.
+When you are finished running analytics queries, you can delete the read replica if it's no longer required. Deleting a read replica is a permanent action, but you can quickly create a new read replica when you need one.
 
 To delete a read replica:
 
