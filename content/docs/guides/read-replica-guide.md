@@ -36,19 +36,20 @@ Creating a read replica involves adding a read-only compute endpoint to a branch
     <Admonition type="note">
     The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
     </Admonition>
-6. When you have finished making your selections, click **Create**.
+6. When you finish making your selections, click **Create**.
 
-In a few moments, your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page. This is your read replica. The following section describes how to connect to your read replica.
+A read-only compute is provisioned and appears in the **Computes** section of the **Branches** page. This is your read replica. The following section describes how to connect to your read replica.
 
 ## Connect to a read replica
 
 Connecting to a read replica is the same as connecting to any branch, except you connect via a read-only compute endpoint instead of a read-write compute endpoint. The following steps describe how to connect to your read replica with connection details obtained from the Neon Console.
 
 1. On the Neon **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
-1. Under **Compute**, select a **Read-only** compute endpoint.
-1. Select a connection string or a code example from the drop-down menu and copy it. This is the information you need to connect to the read replica from you client or application.
+1. Under **Compute**, select the **RO-replica** compute endpoint.
+1. Select a **Database** and the **Role** you want to connect with.
+1. Copy the connection string. This is the information you need to connect to the read replica from you client or application.
 
-    A **psql** connection string appears similar to the following:
+    The connection string appears similar to the following:
 
     <CodeBlock shouldWrap>
 
@@ -58,20 +59,26 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
     </CodeBlock>
 
-    If you expect a high number of connections, select **Enable pooling** to add the `-pooler` flag to the connection string or example.
+    If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string.
 
     The information in your connection string corresponds to the following connection details:
 
     - role: `daniel`
     - password:`<pasword>`
     - hostname: `ep-mute-rain-952417.us-east-2.aws.neon.tech`
-    - database name: `neondb`. This ihe default Neon database. Your database name may differ.
+    - database name: `neondb`. This is the read-to-use database created with your project. Your database name may differ.
 
     When you use a read-only connection string, you are connecting to a read replica. No write operations are permitted on this connection.
 
+1. Connect to your application from a client such as `psql` or add the connection details to your application. For example, to connect using `psql`, issue the following command:
+
+    ```bash
+    psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+    ```
+
 ## Viewing read replicas
 
-To view read replicas for a branch, select **Branches** in the Neon Console, and select a branch. Under the **Computes** heading, the **Type** field identifies your read replicas. Read replicas have a `R/O` value instead of `R/W`.
+To view read replicas for a branch, select **Branches** in the Neon Console, and select a branch. Under the **Computes** heading, the **Type** field identifies your read replicas. Read replicas have a `RO replica` type.
 
 ## Edit a read replica
 
@@ -81,7 +88,7 @@ To edit a read-only compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Under **Computes**, identify the read-only compute endpoint you want to modify, click the compute endpoint kebab menu, and select **Edit**.
+1. Under **Computes**, identify the read-only compute endpoint you want to modify, click the compute endpoint menu on the right side of the table, and select **Edit**.
 1. Specify your **Compute size** or **Auto-suspend delay** changes and click **Save**.
 
 ## Delete a read replica
@@ -91,13 +98,13 @@ To delete a read replica:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Under **Computes**, find the read-only compute endpoint you want to delete. Read replicas have a `R/O` type.
-1. Click the compute endpoint kebab menu, and select **Delete**.
+1. Under **Computes**, find the read-only compute endpoint you want to delete. Read replicas have a `RO replica` type.
+1. Click the compute endpoint menu on the right side of the table, and select **Delete**.
 1. On the confirmation dialog, click **Delete**.
 
 ## Manage read replicas using the Neon API
 
-In Neon, a read replica is implemented as a read-only compute endpoint. The following examples demonstrate creating and deleting read-only compute endpoints using the Neon API. The Neon API also supports get, list, edit, start, and suspend API methods. For information about those methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+In Neon, a read replica is implemented as a read-only compute endpoint. The following examples demonstrate creating and deleting read-only compute endpoints using the Neon API.
 
 <Admonition type="note">
 The API examples that follow only show some of the user-configurable request body attributes that are available to you. To view all attributes, refer to the method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
@@ -115,7 +122,7 @@ The following Neon API method creates a read-only compute endpoint.
 POST /projects/{project_id}/endpoints
 ```
 
-The API method appears as follows when specified in a cURL command. A compute endpoint must be associated with a branch. A branch can only have a single read-write endpoint but can have multiple read-only compute endpoints. The `type` attribute in the following example specifies `read_only`, which creates a read-only compute endpoint:
+The API method appears as follows when specified in a cURL command. A compute endpoint must be associated with a branch. A branch can have only a single read-write endpoint but can have multiple read-only compute endpoints. The `type` attribute in the following example specifies `read_only`, which creates a read-only compute endpoint:
 
 ```bash
 curl -X 'POST' \

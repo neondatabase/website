@@ -4,11 +4,11 @@ subtitle: Leverage read replicas for running data-intensive queries
 enableTableOfContents: true
 ---
 
-With Neon's read replica feature, you can instantly create a dedicated read-only compute instance for running data-intensive analytics and reporting queries. This allows you to avoid disruption or performance degradation on your production database.
+With Neon's read replica feature, you can instantly create a dedicated read-only compute instance for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
 
-A read replica reads data from the same source as you read-write compute instance. There's no data replication, so spinning up a read replica is a near-instant process.
+A read replica reads data from the same source as you read-write compute instance. There's no data replication, so spinning up a read replica is a near-instant process. For more information about Neon's read replica architecture, see [Read replicas](/docs/introduction/read-replicas).
 
-As an example, suppose you have a sales table in your production database. The table and data might look something like this:
+Suppose you have a sales table in your production database. The table and data might look something like this:
 
 ```sql
 CREATE TABLE sales (
@@ -27,7 +27,7 @@ INSERT INTO sales (product_id, sale_amount, sale_date) VALUES
 ...
 ```
 
-You want to find the total sale amount for each product in the past year, but due to the large number of products and sales, you know it's a costly query that could impact performance on your production system.
+You want to find the total sale amount for each product in the past year, but due to the large number of products and sales in your database, you know it's a costly query that could impact performance on your production system.
 
 This guide walks you through creating a read replica, connecting to it, running your query, and optionally deleting the read replica when finished.
 
@@ -43,19 +43,20 @@ Creating a read replica involves adding a read-only compute endpoint to a branch
     <Admonition type="note">
     The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
     </Admonition>
-6. When you have finished making your selections, click **Create**.
+6. When you are finished making your selections, click **Create**.
 
-In a few moments, your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page. This is your read replica. The following section describes how to connect to your read replica.
+Your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page. This is your read replica. The following section describes how to connect to your read replica.
 
 ## Connect to the read replica
 
 Connecting to a read replica is the same as connecting to any branch, except you connect via a read-only compute endpoint instead of a read-write compute endpoint. The following steps describe how to connect to your read replica with connection details obtained from the Neon Console.
 
 1. On the Neon **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
-1. Under **Compute**, select a **Read-only** compute endpoint.
-1. Select a connection string or a code example from the drop-down menu and copy it. This is the information you need to connect to the read replica from you client or application.
+1. Under **Compute**, select the **RO-replica** compute endpoint.
+1. Select a **Database** and the **Role** you want to connect with.
+1. Copy the connection string. This is the information you need to connect to the read replica from you client or application.
 
-    A **psql** connection string appears similar to the following:
+    The connection string appears similar to the following:
 
     <CodeBlock shouldWrap>
 
@@ -65,16 +66,22 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
     </CodeBlock>
 
-    If you expect a high number of connections, select **Enable pooling** to add the `-pooler` flag to the connection string or example.
+    If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string.
 
     The information in your connection string corresponds to the following connection details:
 
     - role: `daniel`
     - password:`<pasword>`
     - hostname: `ep-mute-rain-952417.us-east-2.aws.neon.tech`
-    - database name: `neondb`. This ihe default Neon database. Your database name may differ.
+    - database name: `neondb`. This is the read-to-use database created with your project. Your database name may differ.
 
     When you use a read-only connection string, you are connecting to a read replica. No write operations are permitted on this connection.
+
+1. Connect to your application from a client such as `psql` or add the connection details to your application. For example, to connect using `psql`, issue the following command:
+
+    ```bash
+    psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+    ```
 
 ## Run the analytics query on the read replica
 
@@ -91,14 +98,12 @@ If you have a lot of products and sales, this query would likely impact performa
 
 ## Delete the read replica
 
-When you are finished running analytics queries, you can delete the read replica it if no longer required. Deleting a read replica is a permanent action, but you can quickly create a new read replica if you need one again.
+When you are finished running analytics queries, you can delete the read replica if it's no longer required. Deleting a read replica is a permanent action, but you can quickly create a new read replica if you need one again.
 
 To delete a read replica:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Under **Computes**, find the read-only compute endpoint you want to delete. Read replicas have a `R/O` type.
-1. Click the compute endpoint kebab menu, and select **Delete**.
+1. Under **Computes**, find the read-only compute endpoint you want to delete. Read replicas have a `RO replica` type.
+1. Click the compute endpoint menu on the right side of the table, and select **Delete**.
 1. On the confirmation dialog, click **Delete**.
-
-That's it. The read replica is deleted.
