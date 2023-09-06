@@ -11,7 +11,7 @@ There isn't a single command that refreshes a branch, but you can do so using a 
 1. [Creating a new up-to-date branch without a compute endpoint](#create-a-new-up-to-date-branch-without-a-compute-endpoint)
 2. [Moving the compute endpoint from your current branch to the new branch](#move-the-compute-endpoint-from-your-current-branch-to-the-new-branch)
 3. [Deleting the old branch](#delete-the-old-branch)
-4. [Renaming the new branch to the name of the old branch](#rename-the-new-branch)
+4. [Renaming the new branch to the name of the old branch](#rename-the-new-branch-to-the-name-of-the-old-branch)
 
 <Admonition type="important">
 The branch refresh procedure does not preserve data or schema changes on your current branch. Do not perform this procedure if you need to maintain changes made to your branch. The procedure is best suited to branches used in a read-only capacity.
@@ -23,12 +23,12 @@ The following information is required to perform the procedure:
 
 - A Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 - The `project_id` for your Neon project. You can obtain a `project_id` using the [List projects](https://api-docs.neon.tech/reference/listprojects) method, or you can find it on your project's **Settings** page in the Neon Console.
-- The `branch_id` of the current branch. You can obtain a `branch_id` using the [List branches](https://api-docs.neon.tech/reference/listprojectbranches) method, or you can find it on the your project's **Branches** page in the Neon Console. An `branch_id` has a `br-` prefix.
+- The `branch_id` of the current branch. You can obtain a `branch_id` using the [List branches](https://api-docs.neon.tech/reference/listprojectbranches) method, or you can find it on your project's **Branches** page in the Neon Console. A `branch_id` has a `br-` prefix.
 - The `endpoint_id` of the compute endpoint associated with the current branch. You can obtain an `endpoint_id` using the [List endpoints](https://api-docs.neon.tech/reference/listprojectendpoints) method, or you can find it on the **Branches** page in the Neon Console. An `endpoint_id` has an `ep-` prefix.
 
 ## Create a new up-to-date branch without a compute endpoint
 
-The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) request shown below creates a branch without a compute endpoint. The only required parameter is your Neon `project_id`. The `project_id` value used in the example below is `purple-bar-16090093`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
+The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) request shown below creates a branch without a compute endpoint. The only required parameter is your Neon `project_id`. The `project_id` value used in the example below is `dark-cell-12604300`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
 ```curl
 curl --request POST \
@@ -45,7 +45,7 @@ curl --request POST \
 '
 ```
 
-The response body includes the `id` of your new branch. You will need this value (`br-summer-water-09767623`) to move the compute endpoint in the next step.
+The response body includes the `id` of your new branch. You will need this value (`br-falling-flower-15986510`) to move the compute endpoint in the next step.
 
 <details>
 <summary>Response body</summary>
