@@ -102,6 +102,27 @@ To delete a read replica:
 1. Click the compute endpoint menu on the right side of the table, and select **Delete**.
 1. On the confirmation dialog, click **Delete**.
 
+## Manage read replicas using the Neon CLI
+
+In Neon, a read replica is implemented as a read-only compute endpoint. The following examples demonstrate creating and deleting read-only compute endpoints using the Neon CLI.
+
+### Prerequisites
+
+Install the Neon CLI. See [Neon CLI — Install and connect](/docs/reference/cli-install).
+
+### Create a read replica with the CLI
+
+```bash
+neonctl branches add-compute mybranch --type read_only
+┌─────────────────────┬──────────────────────────────────────────────────┐
+│ Id                  │ Host                                             │
+├─────────────────────┼──────────────────────────────────────────────────┤
+│ ep-rough-lab-865061 │ ep-rough-lab-865061.ap-southeast-1.aws.neon.tech │
+└─────────────────────┴──────────────────────────────────────────────────┘
+```
+
+If you have multiple Neon projects, you must also specify the `--project-id` option. For more information, see [the Neon CLI branches command](/docs/reference/cli-branches#add-compute).
+
 ## Manage read replicas using the Neon API
 
 In Neon, a read replica is implemented as a read-only compute endpoint. The following examples demonstrate creating and deleting read-only compute endpoints using the Neon API.
