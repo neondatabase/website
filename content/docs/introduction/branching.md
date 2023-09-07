@@ -57,6 +57,8 @@ Testers can create branches for testing schema changes, validating new queries, 
 
 ![test environment branches](/docs/introduction/branching_test.png)
 
+Refer to the following guide for instructions: [Branching — Testing queries](/docs/guides/branching-test-queries).
+
 ### Data recovery
 
 If you lose data due to an unintended deletion or some other event, you can create a branch with data as it existed before the event occurred, allowing you to recover the lost data.

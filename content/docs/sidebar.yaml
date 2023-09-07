@@ -109,6 +109,8 @@
           items: 
             - title: Branching — Point-in-time restore
               slug: guides/branching-pitr
+            - title: Branching — Testing queries
+              slug: guides/branching-test-queries
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
             - title: Branching with the API
