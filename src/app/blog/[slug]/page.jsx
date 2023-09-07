@@ -2,6 +2,7 @@ import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 import Aside from 'components/pages/blog-post/aside';
+import CodeTabs from 'components/pages/blog-post/code-tabs';
 import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
@@ -42,6 +43,7 @@ const BlogPage = async ({ params, searchParams }) => {
     content,
     {
       blogpostcode: CodeBlock,
+      blogpostcodetabs: CodeTabs,
       blogpostcta: CTA,
     },
     true
@@ -76,7 +78,7 @@ const BlogPage = async ({ params, searchParams }) => {
       <div className="safe-paddings bg-gray-new-8">
         <article className="dark mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pb-40 pt-16 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
           <Hero
-            className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
+            className="post-title col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
             title={title}
             date={formattedDate}
             category={categories.nodes[0]}
@@ -126,6 +128,7 @@ export async function generateMetadata({ params }) {
     },
     date,
     pageBlogPost,
+    categories,
   } = post;
 
   const authors = pageBlogPost.authors.map(({ author }) => author?.title);
@@ -139,6 +142,7 @@ export async function generateMetadata({ params }) {
     imagePath: twitterImage?.mediaItemUrl,
     type: 'article',
     publishedTime: date,
+    category: categories.nodes[0]?.name,
     authors,
   });
 }

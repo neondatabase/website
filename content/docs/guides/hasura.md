@@ -25,7 +25,7 @@ Use the following instructions to connect to a new Neon database. This connectio
 1. Click **Connect Neon Database**.
 1. When prompted to login or sign up for Neon, we recommend selecting **Continue with Hasura** for seamless authentication.
 
-After authenticating, a new Neon PostgreSQL database is created and connected to your Hasura project, and the Neon project connection string is associated with the `PG_DATABASE_URL` environment variable.
+After authenticating, a new Neon Postgres database is created and connected to your Hasura project, and the Neon project connection string is associated with the `PG_DATABASE_URL` environment variable.
 
 To start exploring Hasura's GraphQL API with data stored in Neon, see [Load a template in Hasura](#load-a-template-in-hasura-optional).
 
@@ -35,15 +35,15 @@ Use the following instructions to connect to an existing Neon database from Hasu
 
 ### Prerequisites
 
-- An existing Neon account. If you do not have one, see [Sign up](../get-started-with-neon/signing-up).
-- An existing Neon project. If you do not have a Neon project, see [Create your first project](../get-started-with-neon/setting-up-a-project).
+- An existing Neon account. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up).
+- An existing Neon project. If you do not have a Neon project, see [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
 - A connection string for a branch in Neon project that includes your password. For example:
 
   ```text
   postgres://<user>:<password>@<hostname>:5432/neondb
   ```
 
-  Your project's connection string can be found on the Neon **Dashboard**, under **Connection Details**. For more information, see [Connect from any application](../connect/connect-from-any-app).
+  Your project's connection string can be found on the Neon **Dashboard**, under **Connection Details**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ### Add Neon as a data source
 
@@ -75,7 +75,7 @@ To view the newly created tables from the Neon Console:
 
 ## Import existing data to Neon
 
-If you are migrating from Hasura with Heroku PostgreSQL to Neon, refer to the [Import data from Heroku](../import/import-from-heroku) guide for data import instructions. For general data import instructions, see [Import data from PostgreSQL](../import/import-from-postgres).
+If you are migrating from Hasura with Heroku Postgres to Neon, refer to the [Import data from Heroku](/docs/import/import-from-heroku) guide for data import instructions. For general data import instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
 
 ## Need help?
 

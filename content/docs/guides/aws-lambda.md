@@ -14,7 +14,7 @@ This guide describes how to set up a Neon database and connect to it from an AWS
 
 ## Prerequisites
 
-- A Neon account. If you do not have one, see [Sign up](../get-started-with-neon/signing-up/) for instructions.
+- A Neon account. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up/) for instructions.
 - An AWS account. You can create a free AWS account at [AWS Free Tier](https://aws.amazon.com/free/). An [IAM User and Access Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) are required to programmatically interact with your AWS account. You must provide these credentials when deploying the Serverless Framework project.
 - A Service Framework account. You can sign up at [Serverless Framework](https://www.serverless.com/).
 
@@ -172,7 +172,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
     Environment variables can also be added to a `.env` file and loaded automatically with the help of the [dotenv](https://www.npmjs.com/package/dotenv) package. For more information, see [Resolution of environment variables](https://www.serverless.com/framework/docs/environment-variables).
     </Admonition>
 
-    You can copy the connection string from **Connection Details** widget the Neon Console. Add the `DATABASE_URL` under `environment`, and add `sslmode=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells PostgreSQL to use SSL encryption and verify the server's certificate.
+    You can copy the connection string from **Connection Details** widget the Neon Console. Add the `DATABASE_URL` under `environment`, and add `sslmode=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells Postgres to use SSL encryption and verify the server's certificate.
   
     ```yaml
     provider:
@@ -273,4 +273,4 @@ You can find your `api-id` on the API Gateway dashboard:
 
 ## Conclusion
 
-In this guide, you have learned how to set up a PostgreSQL database using Neon and connect to it from an AWS Lambda function using Node.js as the runtime environment. You have also learned how to use Serverless Framework to create and deploy the Lambda function, and how to use the `pg` library to perform a basic database read operations.
+In this guide, you have learned how to set up a Postgres database using Neon and connect to it from an AWS Lambda function using Node.js as the runtime environment. You have also learned how to use Serverless Framework to create and deploy the Lambda function, and how to use the `pg` library to perform a basic database read operations.

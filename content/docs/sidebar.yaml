@@ -6,13 +6,23 @@
     - title: Neon roadmap
       slug: introduction/roadmap
     - title: Neon architecture
-      slug: introduction/architecture-overview
-    - title: Compute lifecycle
-      slug: introduction/compute-lifecycle
-    - title: Branching
-      slug: introduction/branching
-    - title: Autoscaling
-      slug: introduction/autoscaling
+      items: 
+        - title: Overview
+          slug: introduction/architecture-overview
+        - title: Compute lifecycle
+          slug: introduction/compute-lifecycle
+    - title: Features
+      items:
+        - title: Autoscaling
+          slug: introduction/autoscaling
+        - title: Auto-suspend
+          slug: introduction/auto-suspend
+        - title: Branching
+          slug: introduction/branching
+        - title: Point-in-time restore
+          slug: introduction/point-in-time-restore
+        - title: Read replicas
+          slug: introduction/read-replicas
     - title: Regions
       slug: introduction/regions
     - title: Plans
@@ -20,7 +30,7 @@
         - title: Overview
           slug: introduction/plans
         - title: Free
-          slug: introduction/technical-preview-free-tier
+          slug: introduction/free-tier
         - title: Pro
           slug: introduction/pro-plan
         - title: Custom
@@ -33,6 +43,8 @@
           slug: introduction/manage-billing
     - title: Support
       slug: introduction/support
+    - title: Status
+      slug: introduction/status
 - title: Get started
   items:
     - title: Sign up
@@ -41,15 +53,6 @@
       slug: get-started-with-neon/setting-up-a-project
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
-- title: Tutorial
-  slug: tutorial/neon-tutorial
-  items:
-    - title: Set up a Neon project and add data
-      slug: tutorial/project-setup
-    - title: Recover lost data with branching
-      slug: tutorial/data-recovery
-    - title: Test queries with branching
-      slug: tutorial/test-queries
 - title: Connect
   items:
     - title: Connect from any application
@@ -92,16 +95,67 @@
       slug: manage/integrations
     - title: Operations
       slug: manage/operations
+    - title: Backups
+      slug: manage/backups
 - title: Guides
   items:
+    - title: Neon features
+      items: 
+        - title: Autoscaling
+          slug: guides/autoscaling-guide
+        - title: Auto-suspend
+          slug: guides/auto-suspend-guide
+        - title: Branching
+          items: 
+            - title: Branching — Point-in-time restore
+              slug: guides/branching-pitr
+            - title: Branching — Testing queries
+              slug: guides/branching-test-queries
+            - title: Branching with the CLI
+              slug: guides/branching-neon-cli
+            - title: Branching with the API
+              slug: guides/branching-neon-api
+            - title: Branching with GitHub Actions
+              slug: guides/branching-github-actions
+            - title: Refresh a branch with the Neon API
+              slug: guides/branch-refresh
+            - title: Promote a branch to primary with the Neon API
+              slug: guides/branch-promote
+        - title: Project sharing
+          slug: guides/project-sharing-guide
+        - title: Read replicas
+          items:
+            - title: Working with read replicas
+              slug: guides/read-replica-guide
+            - title: Data analysis and reporting
+              slug: guides/read-replica-data-analysis
+        - title: Manage roles and databases with SQL
+          slug: guides/manage-database-access
+        - title: Extensions
+          items:
+            - title: neon_utils
+              slug: extensions/neon-utils
     - title: Languages
       items:
         - title: Elixir
           slug: guides/elixir-ecto
         - title: Go
           slug: guides/go
+          ariaLabel: Connect a Go application to Neon
         - title: Java
           slug: guides/java
+        - title: Javascript
+          items:
+            - title: Next.js
+              slug: guides/nextjs
+            - title: Node.js
+              slug: guides/node
+            - title: Prisma
+              items:
+                - title: Connect from Prisma
+                  slug: guides/prisma
+                - title: Use Prisma Migrate With Neon
+                  slug: guides/prisma-migrate
         - title: PHP
           items:
             - title: Laravel
@@ -118,20 +172,10 @@
               slug: guides/sqlalchemy
         - title: Rust
           slug: guides/rust
-        - title: Javascript
-          items:
-            - title: Next.js
-              slug: guides/nextjs
-            - title: Node.js
-              slug: guides/node
-            - title: Prisma
-              items:
-                - title: Connect from Prisma
-                  slug: guides/prisma
-                - title: Use Prisma Migrate With Neon
-                  slug: guides/prisma-migrate
     - title: Backend-as-a-service
       items:
+        - title: Exograph
+          slug: guides/exograph
         - title: Grafbase
           slug: guides/grafbase
         - title: Hasura
@@ -164,17 +208,27 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
-- title: Extensions
+    - title: OAuth
+      slug: guides/oauth-integration
+- title: AI & embeddings
   items:
-    - title: Supported extensions
-      slug: extensions/pg-extensions
-    - title: pg_tiktoken
-      slug: extensions/pg_tiktoken
+    - title: Introduction
+      slug: ai/ai-intro
+    - title: AI concepts
+      slug: ai/ai-concepts
+    - title: Scale with Neon
+      slug: ai/ai-scale-with-neon
+    - title: pg_embedding
+      slug: extensions/pg_embedding
     - title: pgvector
       slug: extensions/pgvector
+    - title: pg_tiktoken
+      slug: extensions/pg_tiktoken
+- title: Postgres extensions
+  slug: extensions/pg-extensions
 - title: Import data
   items:
-    - title: Import from PostgreSQL
+    - title: Import from Postgres
       slug: import/import-from-postgres
     - title: Import from Heroku
       slug: import/import-from-heroku
@@ -182,15 +236,46 @@
       slug: import/import-from-csv
     - title: Import from a Neon project
       slug: import/import-from-neon
+    - title: Migrate data with AWS DMS
+      slug: import/migrate-aws-dms
 - title: Security
-  slug: security/security-overview
+  items:
+    - title: Security overview
+      slug: security/security-overview
+    - title: Security reporting
+      slug: security/security-reporting
+    - title: SOC 2 compliance
+      slug: security/soc2-compliance
 - title: Reference
   items:
+    - title: Neon CLI
+      slug: reference/neon-cli
+      items:
+        - title: Install and connect
+          slug: reference/cli-install
+        - title: auth
+          slug: reference/cli-auth
+        - title: me
+          slug: reference/cli-me
+        - title: projects
+          slug: reference/cli-projects
+        - title: branches
+          slug: reference/cli-branches
+        - title: databases
+          slug: reference/cli-databases
+        - title: roles
+          slug: reference/cli-roles
+        - title: operations
+          slug: reference/cli-operations
+        - title: connection-string
+          slug: reference/cli-connection-string
+        - title: completion
+          slug: reference/cli-completion
     - title: SDKs
       slug: reference/sdk
     - title: Glossary
       slug: reference/glossary
-    - title: PostgreSQL Compatibility
+    - title: Postgres compatibility
       slug: reference/compatibility
 - title: Community
   items:

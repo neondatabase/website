@@ -1,69 +1,67 @@
 ---
-title: Introduction to Neon
+title: Neon documentation
 ---
 
-Neon is open-source serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
+Neon is Serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
 
-## New to Neon?
+## Get started
 
-Refer to our _Get started_ documentation to get up and running with Neon in just a few minutes. You will learn how to:
+Refer to our _Get started_ documentation to get up and running in just a few minutes. You will learn how to:
 
 - [Sign up](/docs/get-started-with-neon/signing-up)
 - [Create your first project](/docs/get-started-with-neon/setting-up-a-project)
 - [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
 
-Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about basic concepts and features of Neon, including database branching.
+## Explore the docs
 
-## Neon Documentation
+<DetailIconCards>
 
-<IntroNavigation>
+<a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a  Serverless Postgres database from any application" icon="audio-jack">Connect</a>
 
-[Connect](/docs/connect/connect-from-any-app 'Learn how to connect to a Neon database from any application')
+<a href="/docs/import/import-from-postgres" description="Load your data into a Postgres database hosted by Neon" icon="import">Import data</a>
 
-[Import data](/docs/import/import-from-postgres 'Import your own data or sample data that you can use to explore Neon')
+<a href="/docs/manage/overview" description="Learn how to manage Neon projects, branches, compute resources, databases, and roles" icon="ladder">Manage</a>
 
-[Manage](/docs/manage/overview 'Learn how to manage Neon projects, branches, compute resources, databases, and roles')
+<a href="/docs/introduction/branching" description="Learn to optimize development workflows with database branching" icon="split-branch">Branching</a>
 
-[Branching](/docs/introduction/branching 'Learn about branching and how you can use it to optimize development workflows')
+<a href="/docs/extensions/pg-extensions" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
 
-[PostgreSQL extensions](/docs/extensions/pg-extensions 'Level up your PostgreSQL database with our extension installation guide')
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
 
-[Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api 'Manage Neon programmatically using the Neon API')
-
-</IntroNavigation>
+</DetailIconCards>
 
 ## Guides
 
 <TechnologyNavigation>
 
-[![Vercel](/images/technology-logos/vercel-logo.svg 'Integrate Neon with Vercel')](/docs/guides/vercel-overview)
+<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel-overview" title="Integrate Neon with Vercel" />
 
-[![Prisma](/images/technology-logos/prisma-logo.svg 'Connect from Prisma to Neon')](/docs/guides/prisma)
+<img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
 
-[![Django](/images/technology-logos/django-logo.svg 'Connect a Django application to Neon')](/docs/guides/django)
+<img src="/images/technology-logos/django-logo.svg" width="29" height="36" alt="Django" href="/docs/guides/django" title="Connect a Django application to Neon" />
 
-[![Go](/images/technology-logos/go-logo.svg 'Connect a Go application to Neon')](/docs/guides/go)
+<img src="/images/technology-logos/go-logo.svg" width="80" height="36" alt="Go" href="/docs/guides/go" title="Connect a Go application to Neon" />
 
-[![Hasura](/images/technology-logos/hasura-logo.svg 'Connect from Hasura Cloud to Neon')](/docs/guides/hasura)
+<img src="/images/technology-logos/hasura-logo.svg" width="35" height="36" alt="Hasura" href="/docs/guides/hasura" title="Connect from Hasura Cloud to Neon" />
 
-[![Java](/images/technology-logos/java-logo.svg 'Connect a Java application to Neon')](/docs/guides/java)
+<img src="/images/technology-logos/java-logo.svg" width="27" height="36" alt="Java" href="/docs/guides/java" title="Connect a Java application to Neon" />
 
-[![Laravel](/images/technology-logos/laravel-logo.svg 'Connect a Laravel application to Neon')](/docs/guides/laravel)
+<img src="/images/technology-logos/laravel-logo.svg" width="35" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect a Laravel application to Neon" />
 
-[![Next.js](/images/technology-logos/nextjs-logo.svg 'Connect a Next.js application to Neon')](/docs/guides/vercel)
+<img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/vercel" title="Connect a Next.js application to Neon" />
 
-[![Node.js](/images/technology-logos/nodejs-logo.svg 'Connect a Node.js application to Neon')](/docs/guides/node)
+<img src="/images/technology-logos/nodejs-logo.svg" width="33" height="36" alt="Node.js" href="/docs/guides/node" title="Connect a Node.js application to Neon" />
 
-[![Rust](/images/technology-logos/rust-logo.svg 'Connect a Rust application to Neon')](/docs/guides/rust)
+<img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
 
-[![SQLAlchemy](/images/technology-logos/sqlalchemy-logo.svg 'Connect an SQLAlchemy application to Neon')](/docs/guides/sqlalchemy)
+<img src="/images/technology-logos/sqlalchemy-logo.svg" width="102" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect an SQLAlchemy application to Neon" />
 
-[![Symfony](/images/technology-logos/symfony-logo.svg 'Connect from Symfony with Doctrine to Neon')](/docs/guides/symfony)
+<img src="/images/technology-logos/symfony-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Symfony with Doctrine to Neon" />
 
 </TechnologyNavigation>
 
-## Continue learning
+## Join the community
 
-If you have technical questions, reach out to Neon developers and community members in the official [Neon Discourse Community](https://community.neon.tech/).
+If you have questions about Neon or Postgres, reach out to Neon community members and developers in the [Neon Discourse Community](https://community.neon.tech/).
 
 <CommunityBanner>Welcome to the <br /> Neon Discourse Community!</CommunityBanner>

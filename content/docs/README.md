@@ -155,6 +155,7 @@ Right now `<CodeBlock>` accepts the following fields:
 
 - `showLineNumbers` - flag to show on the line numbers in the code block.
 - `shouldWrap` - flag to enable code wrapping in the code block.
+- `highlight` - string to enable highlighting single lines, multiple lines, and ranges of code lines. Note that it also activates the `showLineNumbers` feature.
 
 Example:
 
@@ -168,6 +169,54 @@ powershell -Command "Start-Process -FilePath powershell -Verb RunAs -ArgumentLis
 </CodeBlock>
 ````
 
+Single line
+
+````md
+<CodeBlock highlight="1">
+
+```c++
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World";
+    return 0;
+}
+```
+
+Multiple lines
+
+````md
+<CodeBlock highlight="1,2,5">
+
+```c++
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World";
+    return 0;
+}
+```
+
+</CodeBlock>
+````
+
+Range of code lines
+
+````md
+<CodeBlock highlight="1-3,5">
+
+```c++
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World";
+    return 0;
+}
+```
+
+</CodeBlock>
+````
+
 ## Code Tabs
 
 To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and write labels of code tabs in order:
@@ -175,11 +224,15 @@ To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and w
 ````md
 <CodeTabs labels={["Shell", "C++", "C#", "Java"]}>
 
+<CodeBlock highlight="2-4">
+
 ```bash
 #!/bin/bash
 STR="Hello World!"
 echo $STR
 ```
+
+</CodeBlock>
 
 ```c++
 #include <iostream>
@@ -305,6 +358,22 @@ Another term for smoke test
 </DefinitionList>
 
 {/* other content here */}
+```
+
+### Detail Icon Cards
+
+`DetailIconCards` is a custom MDX component that displays data in a card format. Each card contains icon, title, href and description. This layout is especially useful for presenting grouped information in a visually pleasing and easy-to-understand way.
+
+```md
+
+<DetailIconCards>
+
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
+
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
+
+</DetailIconCards>
+
 ```
 
 ### Acceptable markup for term

@@ -25,7 +25,7 @@ module.exports = {
       },
       white: '#ffffff',
       primary: {
-        1: '#00e699',
+        1: '#00E599',
         2: '#00cc88',
       },
       secondary: {
@@ -113,6 +113,7 @@ module.exports = {
         mono: ['IBM Plex Mono', 'IBM Plex Mono Fallback', ...defaultTheme.fontFamily.mono],
       },
       fontSize: {
+        xs: [defaultTheme.fontSize.xs[0]],
         sm: [defaultTheme.fontSize.sm[0]],
         base: [defaultTheme.fontSize.base[0]],
         lg: [defaultTheme.fontSize.lg[0]],
@@ -130,6 +131,7 @@ module.exports = {
       },
       letterSpacing: {
         tighter: '-0.04em',
+        'extra-tight': '-0.02em',
         wider: '0.04em',
       },
       boxShadow: {
@@ -167,9 +169,61 @@ module.exports = {
               '-1px -1px 0 transparent, 1px -1px 0 transparent, -1px 1px 0 transparent, 1px 1px 0 transparent',
           },
         },
+        loading: {
+          '0%': {
+            opacity: 1,
+          },
+          '50%': {
+            opacity: 0.5,
+          },
+          '100%': {
+            opacity: 1,
+          },
+        },
+        fadeInOverlay: {
+          '0%': {
+            opacity: 0,
+          },
+          '100%': {
+            opacity: 1,
+          },
+        },
+        fadeOutOverlay: {
+          '0%': {
+            opacity: 1,
+          },
+          '100%': {
+            opacity: 0,
+          },
+        },
+        dialogShow: {
+          '0%': {
+            opacity: 0,
+            transform: 'translateY(-2%) scale(.96)',
+          },
+          '100%': {
+            opacity: 1,
+            transform: 'translateY(0) scale(1)',
+          },
+        },
+        dialogHide: {
+          '0%': {
+            opacity: 1,
+            transform: 'translateY(0) scale(1)',
+          },
+          '100%': {
+            opacity: 0,
+            transform: 'translateY(-2%) scale(.96)',
+          },
+        },
       }),
       animation: {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        'fade-in-overlay': 'fadeInOverlay 0.2s',
+        'fade-out-overlay': 'fadeOutOverlay 0.2s',
+        'dialog-show': 'dialogShow 0.3s cubic-bezier(.16,1,.3,1)',
+        'dialog-hide': 'dialogHide 0.3s cubic-bezier(.16,1,.3,1)',
+        loading: 'loading 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       typography: () => ({
         DEFAULT: {
@@ -188,6 +242,7 @@ module.exports = {
   plugins: [
     require('tailwindcss-safe-area'),
     require('@tailwindcss/typography'),
+    require('@headlessui/tailwindcss'),
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
     }),

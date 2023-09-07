@@ -1,8 +1,10 @@
 /* eslint-disable no-case-declarations */
-import parse, { attributesToProps } from 'html-react-parser';
+import parse, { attributesToProps, domToReact } from 'html-react-parser';
 import isBoolean from 'lodash.isboolean';
 import isEmpty from 'lodash.isempty';
 import Image from 'next/image';
+
+import EmbedTweet from 'components/shared/embed-tweet';
 
 import AnchorHeading from '../components/shared/anchor-heading';
 
@@ -126,6 +128,20 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
           const props = transformProps(attributesToProps(element.attribs));
 
           return <Component {...props} />;
+        }
+
+        if (domNode.attribs?.class?.includes('wp-block-embed-twitter')) {
+          const props = transformProps(attributesToProps(domNode.attribs));
+
+          const { children } = domNode.children[0];
+
+          children.forEach((child) => {
+            if (child.type === 'tag' && child.name === 'blockquote') {
+              child.attribs['data-theme'] = 'dark';
+            }
+          });
+
+          return <EmbedTweet {...props}>{domToReact(children)}</EmbedTweet>;
         }
 
         if (!includeBaseTags) return <></>;

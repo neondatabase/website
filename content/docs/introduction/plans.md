@@ -9,11 +9,11 @@ redirectFrom:
 
 Neon offers the following plans: **Free Tier**, **Pro**, and **Custom**. The Pro plan is _usage-based_, ensuring you never over-provision and only pay for what you use. **Custom** plans are volume-based, offering potential discounts. The table below provides an overview of plans offered by Neon. For more information about a particular plan, refer to the individual plan pages:
 
-- [Free Tier](../introduction/technical-preview-free-tier)
-- [Pro plan](../introduction/pro-plan)
-- [Custom plan](../introduction/custom-plan)
+- [Free Tier](/docs/introduction/free-tier)
+- [Pro plan](/docs/introduction/pro-plan)
+- [Custom plan](/docs/introduction/custom-plan)
 
-For information about how Neon bills for paid plans, please refer to our [Billing metrics](../introduction/billing) page.
+For information about how Neon bills for paid plans, please refer to our [Billing metrics](/docs/introduction/billing) page.
 
 ## Neon plans
 
@@ -23,7 +23,7 @@ For information about how Neon bills for paid plans, please refer to our [Billin
 | **Projects**                          | 1                                                                                                                                                                       | Unlimited\*                                                | Unlimited                                                       |
 | **Branches**                          | 10                                                                                                                                                                      | Unlimited                                                  | Unlimited                                                       |
 | **Databases**                          | Unlimited                                                                                                                                                                      | Unlimited                                                  | Unlimited                                                       |
-| **Active time per month**             | No limit on the [primary branch](../reference/glossary#primary-branch) compute. 100 hours for [non-primary branch](../reference/glossary#non-primary-branch) computes\* | Unlimited                                                  | Unlimited                                                       |
+| **Active time per month**             | 100 hours per month, affecting only [non-primary branch](/docs/reference/glossary#non-primary-branch) computes. **Your primary branch compute always remains available.** | Unlimited                                                  | Unlimited                                                       |
 | **Compute size**                      | 1 shared vCPU with 1 GB RAM                                                                                                                                             | Up to 7 vCPUs, each with 4 GB RAM                          | Custom                                                          |
 | **Storage**                           | 3 GB per branch                                                                                                                                                         | Unlimited\*                                                | Unlimited                                                       |
 | **Dedicated resources**               | -                                                                                                                                                                       | -                                                          | &check;                                                         |
@@ -31,15 +31,15 @@ For information about how Neon bills for paid plans, please refer to our [Billin
 | **Auto-suspend compute**              | &check;                                                                                                                                                                 | &check;                                                    | &check;                                                         |
 | **Configurable auto-suspend compute** | -                                                                                                                                                                       | &check;                                                    | &check;                                                         |
 | **Autoscaling**                       | -                                                                                                                                                                       | &check;                                                    | &check;                                                         |
+| **Read replicas**                       | -                                                                                                                                                                       | &check;                                                    | &check;                                                         |
 | **Payment**                           | Free                                                                                                                                                                    | Credit Card, Pay As You Go with monthly invoicing          | Prepaid, Custom Contract, Volume Discounts                      |
 | **Support**                           | Community, support tickets                                                                                                                                              | Community, support tickets, video chat                     | Community, support tickets, video chat, resale customer support |
 
 **Notes:**
 
-- The Pro plan has default limits of 20 projects, 200 GB of storage, and 20 simultaneously active computes. To increase these limits, reach out to our [Sales](https://neon.tech/contact-sales) team. The simultaneously active compute limit does not affect the primary branch compute.
-- The Free Tier has an [Active time](../reference/glossary#active-time) limit of 100 hours per month for non-primary branch computes. _Active time_ on the primary branch compute is counted toward the 100-hour limit. For more information, see [Neon Free Tier](../introduction/technical-preview-free-tier).
-- **There is no limit on Active time for the primary branch compute, which ensures that access to data on the primary branch is never interrupted.**
+- The Pro plan has default limits of 20 projects, 200 GB of storage, and 20 simultaneously active computes to protect against unintended usage. To increase these limits, reach out to [support@neon.tech](mailto:support@neon.tech). The simultaneously active compute limit does not affect the primary branch compute, which always remains available.
+- The Free Tier has an [Active time](/docs/reference/glossary#active-time) limit of 100 hours per month, but that limit only affects non-primary branch compute usage. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. **Your primary branch compute always remains available regardless of the limit, ensuring that access to data on your primary branch is never interrupted.** You can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**. The _Active time_ limit resets at the beginning of each month.
 
 ## Support
 
-Support channels for the Free Tier, Pro, and Custom plans are outlined on our [Support](../introduction/support) page.
+Support channels for the Free Tier, Pro, and Custom plans are outlined on our [Support](/docs/introduction/support) page.

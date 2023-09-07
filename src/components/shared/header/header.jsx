@@ -1,51 +1,52 @@
 'use client';
 
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import { useRef, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
+import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
-import SearchIcon from 'icons/search.inline.svg';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 import Burger from './burger';
-// import DiscordIcon from './images/header-discord.inline.svg';
-import AboutUsIcon from './images/header-about-us.inline.svg';
-import CareersIcon from './images/header-careers.inline.svg';
-import DiscussionsIcon from './images/header-discussions.inline.svg';
 import Github from './images/header-github.inline.svg';
 
-const icons = {
-  // discord: DiscordIcon,
-  discussions: DiscussionsIcon,
-  careers: CareersIcon,
-  aboutUs: AboutUsIcon,
-};
+const Search = dynamic(() => import('components/shared/search'), { ssr: false });
 
-const Header = forwardRef(
-  (
-    {
-      theme,
-      isMobileMenuOpen = false,
-      onBurgerClick,
-      isSignIn = false,
-      isSticky = false,
-      withBottomBorder = false,
-      isDocPage = false,
-      onSearchClick = null,
-    },
-    ref
-  ) => {
-    const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
+const Header = ({
+  className = null,
+  theme,
+  isSignIn = false,
+  isSticky = false,
+  withBottomBorder = false,
+  isDocPage = false,
+  isBlogPage = false,
+}) => {
+  const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
+  const headerRef = useRef(null);
 
-    return (
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuOutsideClick = () => {
+    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+  };
+
+  const handleBurgerClick = () => {
+    setIsMobileMenuOpen((isMobileMenuOpen) => !isMobileMenuOpen);
+  };
+
+  return (
+    <>
       <header
         className={clsx(
           'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-gray-new-8 lg:relative lg:h-14',
+          className,
           isSticky && 'sticky top-0 z-50 md:relative',
           withBottomBorder &&
             theme !== 'gray-8' &&
@@ -56,7 +57,7 @@ const Header = forwardRef(
           { 'lg:bg-black-new': theme === 'black-new' },
           { 'bg-white': theme === 'white' }
         )}
-        ref={ref}
+        ref={headerRef}
       >
         <Container className="flex items-center justify-between py-3.5" size="lg">
           <Link to="/">
@@ -88,35 +89,40 @@ const Header = forwardRef(
                     {items?.length > 0 && (
                       <div className="group-hover:opacity-1 invisible absolute bottom-0 translate-y-full pt-4 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
                         <ul
-                          className=" rounded-2xl bg-white p-3.5"
+                          className="min-w-[240px] rounded-2xl bg-white p-3.5"
                           style={{ boxShadow: '0px 4px 10px rgba(26, 26, 26, 0.2)' }}
                         >
-                          {items.map(({ iconName, text, description, to }, index) => {
-                            const Icon = icons[iconName];
-                            return (
-                              <li
-                                className={clsx(
-                                  index !== 0 && 'mt-3.5 border-t border-t-gray-6 pt-3.5'
-                                )}
-                                key={index}
+                          {items.map(({ icon, text, description, to }, index) => (
+                            <li
+                              className={clsx(
+                                index !== 0 && 'mt-3.5 border-t border-t-gray-6 pt-3.5'
+                              )}
+                              key={index}
+                            >
+                              <Link
+                                className="flex items-center whitespace-nowrap hover:text-primary-2"
+                                to={to}
                               >
-                                <Link
-                                  className="flex items-center whitespace-nowrap hover:text-primary-2"
-                                  to={to}
-                                >
-                                  <Icon className="shrink-0" aria-hidden />
-                                  <span className="ml-3">
-                                    <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
-                                      {text}
-                                    </span>
-                                    <span className="mt-1.5 block leading-none text-black">
-                                      {description}
-                                    </span>
+                                <img
+                                  src={icon}
+                                  alt="text"
+                                  width={44}
+                                  height={44}
+                                  className="h-11 w-11 shrink-0"
+                                  loading="lazy"
+                                  aria-hidden
+                                />
+                                <span className="ml-3">
+                                  <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
+                                    {text}
                                   </span>
-                                </Link>
-                              </li>
-                            );
-                          })}
+                                  <span className="mt-1.5 block leading-none text-black">
+                                    {description}
+                                  </span>
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     )}
@@ -134,6 +140,7 @@ const Header = forwardRef(
               theme={isThemeBlack ? 'tertiary' : 'quaternary'}
               rel="noopener noreferrer"
               target="_blank"
+              onClick={() => sendGtagEvent('click_star_us_button')}
             >
               <Github
                 className={clsx(
@@ -154,38 +161,46 @@ const Header = forwardRef(
               </Button>
             )}
           </div>
-          <div className="hidden items-center lg:flex">
+          <div className="hidden items-center lg:flex lg:gap-x-3 md:gap-x-5">
             {isDocPage && (
-              <button
-                className="mr-5 flex h-5 w-5 items-center"
-                type="button"
-                onClick={onSearchClick}
-              >
-                <SearchIcon className="mb-[5px] dark:text-white" />
-              </button>
+              <Search
+                className="mobile-search"
+                indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
+              />
+            )}
+            {isBlogPage && (
+              <Search
+                className="mobile-search"
+                indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
+                isBlog
+              />
             )}
 
             <Burger
               className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
               isToggled={isMobileMenuOpen}
-              onClick={onBurgerClick}
+              onClick={handleBurgerClick}
             />
           </div>
         </Container>
       </header>
-    );
-  }
-);
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        headerRef={headerRef}
+        onOutsideClick={handleMobileMenuOutsideClick}
+      />
+    </>
+  );
+};
 
 Header.propTypes = {
+  className: PropTypes.string,
   theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
   withBottomBorder: PropTypes.bool,
-  isMobileMenuOpen: PropTypes.bool,
-  onBurgerClick: PropTypes.func.isRequired,
   isSignIn: PropTypes.bool,
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
-  onSearchClick: PropTypes.func,
+  isBlogPage: PropTypes.bool,
 };
 
 export default Header;

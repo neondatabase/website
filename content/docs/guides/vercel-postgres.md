@@ -13,7 +13,7 @@ Vercel Postgres is currently available in [Beta](https://vercel.com/docs/concept
 
 With _Vercel Postgres_, creating, deleting, and managing a Postgres instance happens in the Vercel dashboard rather than the Neon Console or using the Neon API. Furthermore, you do not need a Neon account to use Vercel Postgres. Everything is managed from Vercel.
 
-Vercel Postgres is an alternative to using Neon directly through one of the other Vercel integration options described in the [Neon and Vercel integration overview](../guides/vercel-overview).
+Vercel Postgres is an alternative to using Neon directly through one of the other Vercel integration options described in the [Neon and Vercel integration overview](/docs/guides/vercel-overview).
 
 Use the following resources to get started with Vercel Postgres:
 

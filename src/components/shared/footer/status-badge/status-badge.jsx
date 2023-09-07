@@ -1,6 +1,8 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Link from 'components/shared/link';
 
@@ -19,14 +21,14 @@ const statusData = {
   },
 };
 
+const fetchStatus = async () => {
+  const res = await fetch('https://neonstatus.com/summary.json');
+  const data = await res.json();
+  return data.page.status;
+};
+
 const StatusBadge = ({ isDocPage = false, inView = false }) => {
   const [currentStatus, setCurrentStatus] = useState(null);
-
-  const fetchStatus = async () => {
-    const res = await fetch('https://neonstatus.com/summary.json');
-    const data = await res.json();
-    return data.page.status;
-  };
 
   useEffect(() => {
     if (inView) {
@@ -47,7 +49,7 @@ const StatusBadge = ({ isDocPage = false, inView = false }) => {
       rel="noopener noreferrer"
       className={clsx(
         'flex items-center justify-center gap-x-1.5',
-        isDocPage ? 'mt-12 lg:mt-10' : 'mt-[100px] lg:mt-20 md:mt-8'
+        isDocPage ? 'mt-12 lg:mt-10' : 'mt-[100px] lg:mt-16 md:mt-8'
       )}
     >
       <span

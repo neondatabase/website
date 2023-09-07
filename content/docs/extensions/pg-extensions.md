@@ -1,20 +1,20 @@
 ---
-title: Supported extensions
+title: Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
 ---
 
-Neon supports the PostgreSQL extensions shown in the following table. For extension documentation, select the extension version.
+Neon supports the Postgres extensions shown in the following table. For extension documentation, select the extension version.
 
 <a id="default-extensions/"></a>
 
-| Extension                | Extension Version (PostgreSQL 14)                               | Extension Version (PostgreSQL 15)                                |Note                                                                                                                |
+| Extension                | Extension Version (Postgres 14)                               | Extension Version (Postgres 15)                                |Note                                                                                                                |
 | :------------------------| --------------------------------------------------------------: | ----------------------------------------------------------------:| :------------------------------------------------------------------------------------------------------------------|
 | address_standardizer     | [3.3.2](https://postgis.net/docs/Extras.html#Address_Standardizer)  | [3.3.2](https://postgis.net/docs/Extras.html#Address_Standardizer)  |                                                                                                             |
 | address_standardizer_data_us     | [3.3.2](https://postgis.net/docs/Extras.html#Address_Standardizer)        | [3.3.2](https://postgis.net/docs/Extras.html#Address_Standardizer) |                                                                                                |
-| bloom                    | [1.0](https://www.postgresql.org/docs/14/bloom.html)            | [1.0](https://www.postgresql.org/docs/15/bloom.html)             |                                                                                                                    |
 | autoinc (spi)            | [1.0](https://www.postgresql.org/docs/current/contrib-spi.html) | [1.0](https://www.postgresql.org/docs/current/contrib-spi.html)  |                                                                                                                    |
+| bloom                    | [1.0](https://www.postgresql.org/docs/14/bloom.html)            | [1.0](https://www.postgresql.org/docs/15/bloom.html)             |                                                                                                                    |
 | btree_gin                | [1.3](https://www.postgresql.org/docs/14/btree-gin.html)        | [1.3](https://www.postgresql.org/docs/15/btree-gin.html)         |                                                                                                                    |
 | btree_gist               | [1.6](https://www.postgresql.org/docs/14/btree-gist.html)       | [1.7](https://www.postgresql.org/docs/15/btree-gist.html)        |                                                                                                                    |
 | citext                   | [1.6](https://www.postgresql.org/docs/14/citext.html)           | [1.6](https://www.postgresql.org/docs/15/citext.html)            |                                                                                                                    |
@@ -22,7 +22,8 @@ Neon supports the PostgreSQL extensions shown in the following table. For extens
 | dict_int                 | [1.0](https://www.postgresql.org/docs/14/dict-int.html)         | [1.0](https://www.postgresql.org/docs/15/dict-int.html)          |                                                                                                                    |
 | earthdistance            | [1.1](https://www.postgresql.org/docs/14/earthdistance.html)    | [1.1](https://www.postgresql.org/docs/15/earthdistance.html)     |                                                                                                                    |
 | fuzzystrmatch            | [1.1](https://www.postgresql.org/docs/14/fuzzystrmatch.html)    | [1.1](https://www.postgresql.org/docs/15/fuzzystrmatch.html)     |                                                                                                                    |
-| h3_pg                    | [4.1.2](https://github.com/zachasme/h3-pg/blob/main/docs/api.md)| [4.1.2](https://github.com/zachasme/h3-pg/blob/main/docs/api.md) |                                                                                                                    |
+| h3                       | [4.1.2](https://github.com/zachasme/h3-pg/blob/main/docs/api.md)| [4.1.2](https://github.com/zachasme/h3-pg/blob/main/docs/api.md) | Some components have been split out into the `h3_postgis` extension. Install both the `h3` and `h3_postgis` extensions.                                                                                                                   |
+| h3_postgis               | [4.1.2](https://github.com/zachasme/h3-pg/blob/main/docs/api.md)| [4.1.2](https://github.com/zachasme/h3-pg/blob/main/docs/api.md) | Install with `CREATE EXTENSION h3_postgis CASCADE;` (requires `postgis` and `postgis_raster`)                                                                 |
 | hll                      | [2.16](https://github.com/citusdata/postgresql-hll)             | [2.16](https://github.com/citusdata/postgresql-hll)              |                                                                                                                    |
 | hstore                   | [1.8](https://www.postgresql.org/docs/14/hstore.html)           | [1.8](https://www.postgresql.org/docs/15/hstore.html)            |                                                                                                                    |
 | hypopg                   | [1.3.1](https://hypopg.readthedocs.io/en/rel1_stable/)          | [1.3.1](https://hypopg.readthedocs.io/en/rel1_stable/)           |                                                                                                                    |
@@ -34,38 +35,44 @@ Neon supports the PostgreSQL extensions shown in the following table. For extens
 | lo                       | [1.1](https://www.postgresql.org/docs/14/lo.html)               | [1.1](https://www.postgresql.org/docs/15/lo.html)                |                                                                                                                    |
 | ltree                    | [1.2](https://www.postgresql.org/docs/14/ltree.html)            | [1.2](https://www.postgresql.org/docs/15/ltree.html)             |                                                                                                                    |
 | moddattime (spi)         | [1.0](https://www.postgresql.org/docs/current/contrib-spi.html) | [1.0](https://www.postgresql.org/docs/current/contrib-spi.html)  |                                                                                                                    |
+| neon_utils               | [1.0](/docs/extensions/neon-utils)                              | [1.0](/docs/extensions/neon-utils)                               |                                                                                                                    |
+| pg_embedding             | [0.1.0](https://github.com/neondatabase/pg_embedding)           | [0.1.0](https://github.com/neondatabase/pg_embedding)            | Install with `CREATE EXTENSION embedding;`                                                                         |
 | pg_graphql               | [1.1.0](https://github.com/supabase/pg_graphql)                 | [1.1.0](https://github.com/supabase/pg_graphql)                  |                                                                                                                    |
-| pg_jsonschema            | [1.1.0](https://github.com/supabase/pg_jsonschema)              | [1.1.0](https://github.com/supabase/pg_jsonschema)               |                                                                                                                    |
 | pg_hashids               | [1.2.1](https://github.com/iCyberon/pg_hashids)                 | [1.2.1](https://github.com/iCyberon/pg_hashids)                  |                                                                                                                    |
-| pg_hint_plan               | [1.6](https://github.com/ossc-db/pg_hint_plan)                 | [1.6](https://github.com/ossc-db/pg_hint_plan)                  |                                                                                                                    |
+| pg_hint_plan             | [1.6](https://github.com/ossc-db/pg_hint_plan)                  | [1.6](https://github.com/ossc-db/pg_hint_plan)                  |                                                                                                                    |
+| pg_jsonschema            | [1.1.0](https://github.com/supabase/pg_jsonschema)              | [1.1.0](https://github.com/supabase/pg_jsonschema)               |                                                                                                                    |
 | pg_prewarm               | [1.2](https://www.postgresql.org/docs/14/pgprewarm.html)        | [1.2](https://www.postgresql.org/docs/15/pgprewarm.html)         |                                                                                                                    |
+| pg_roaringbitmap         | [0.5](https://github.com/ChenHuajun/pg_roaringbitmap)           | [0.5](https://github.com/ChenHuajun/pg_roaringbitmap)         |                                                                                                                    | Install with `CREATE EXTENSION roaringbitmap;`
 | pg_stat_statements       | [1.10](https://www.postgresql.org/docs/14/pgstatstatements.html) | [1.10](https://www.postgresql.org/docs/15/pgstatstatements.html) |
 | pg_tiktoken              | [0.0.1](https://github.com/kelvich/pg_tiktoken)                 | [0.0.1](https://github.com/kelvich/pg_tiktoken)                  |                                                                                                                    |
 | pg_trgm                  | [1.6](https://www.postgresql.org/docs/14/pgtrgm.html)           | [1.6](https://www.postgresql.org/docs/15/pgtrgm.html)            |                                                                                                                    |
+| pg_uuidv7                | [1.0](https://github.com/fboulnois/pg_uuidv7)                   | [1.0](https://github.com/fboulnois/pg_uuidv7)                  |                                                                                                                    |
 | pgcrypto                 | [1.3](https://www.postgresql.org/docs/14/pgcrypto.html)         | [1.3](https://www.postgresql.org/docs/15/pgcrypto.html)          |                                                                                                                    |
 | pgjwt                    | [0.2.0](https://github.com/michelp/pgjwt)                       | [0.2.0](https://github.com/michelp/pgjwt)                        |                                                                                                                    |
 | pgrouting                | [3.1.4](https://docs.pgrouting.org/3.1/en/index.html)           | [3.1.4](https://docs.pgrouting.org/3.1/en/index.html)            | The PostGIS extension must be installed first.
 | pgrowlocks               | [1.2](https://www.postgresql.org/docs/14/pgrowlocks.html)       | [1.2](https://www.postgresql.org/docs/15/pgrowlocks.html)        |                                                                                                                    |
 | pgstattuple              | [1.5](https://www.postgresql.org/docs/14/pgstattuple.html)      | [1.5](https://www.postgresql.org/docs/15/pgstattuple.html)       |                                                                                                                    |
 | pgTAP                    | [1.2.1](https://pgtap.org/documentation.html)                   | [1.2.1](https://pgtap.org/documentation.html)       |                                                                                                                    |
-| pgvector                 | [0.4.0](https://github.com/pgvector/pgvector)                   | [0.4.0](https://github.com/pgvector/pgvector)                    | Install with `CREATE EXTENSION vector;`                                                                                                                    |
+| pgvector                 | [0.5.0](https://github.com/pgvector/pgvector)                   | [0.5.0](https://github.com/pgvector/pgvector)                    | Install with `CREATE EXTENSION vector;`                                                                                                                    |
+| pgx_ulid                 | [0.1.0](https://github.com/pksunkara/pgx_ulid)                   | [0.1.0](https://github.com/pksunkara/pgx_ulid)                  | Install with `CREATE EXTENSION ulid;`                                                                                                                    |
 | plcoffee                 | [3.1.5](https://github.com/plv8/plv8/)                          | [3.1.5](https://github.com/plv8/plv8/)                           |                                                                                                                    |
 | plls                     | [3.1.5](https://github.com/plv8/plv8/)                          | [3.1.5](https://github.com/plv8/plv8/)                           |                                                                                                                    |  
-| plpgsql                  | [1.0](https://www.postgresql.org/docs/14/plpgsql.html)          | [1.0](https://www.postgresql.org/docs/15/plpgsql.html)           | Pre-installed with PostgreSQL.                                                                                     |
+| plpgsql                  | [1.0](https://www.postgresql.org/docs/14/plpgsql.html)          | [1.0](https://www.postgresql.org/docs/15/plpgsql.html)           | Pre-installed with Postgres.                                                                                     |
 | plpgsql_check            | [2.3](https://pgxn.org/dist/plpgsql_check/)                     | [2.3](https://pgxn.org/dist/plpgsql_check/)                      |                                                                                      |
 | plv8                     | [3.1.5](https://plv8.github.io/)                                | [3.1.5](https://plv8.github.io/)                                 |                                                                                                                    |
 | postgis                  | [3.3.2](https://postgis.net/)                                   | [3.3.2](https://postgis.net/)                                    |                                                                                                                    |
 | postgis_raster           | [3.3.2](https://postgis.net/docs/RT_reference.html)             | [3.3.2](https://postgis.net/docs/RT_reference.html)              |                                                                                                                    |
+| postgis_sfcgal           | [1.3.10](https://oslandia.gitlab.io/SFCGAL/)                    | [1.3.10](https://oslandia.gitlab.io/SFCGAL/)                     |                                                                                                                    |
 | postgis_tiger_geocoder   | [3.3.2](https://postgis.net/docs/Extras.html#Tiger_Geocoder)    | [3.3.2](https://postgis.net/docs/Extras.html#Tiger_Geocoder)     | Cannot be installed using the Neon SQL Editor. Use your `psql` user credentials to install this extension.         |
 | postgis_topology         | [3.3.2](https://www.postgis.net/docs/Topology.html)             | [3.3.2](https://www.postgis.net/docs/Topology.html)              |                                                                                                                    |
-| postgis_sfcgal           | [1.3.10](https://oslandia.gitlab.io/SFCGAL/)                    | [1.3.10](https://oslandia.gitlab.io/SFCGAL/)                     |                                                                                                                    |
 | prefix                   | [1.2.0](https://github.com/dimitri/prefix)                      | [1.2.0](https://github.com/dimitri/prefix)                       |                                                                                                                    |
 | refint (spi)             | [1.0](https://www.postgresql.org/docs/current/contrib-spi.html) | [1.0](https://www.postgresql.org/docs/current/contrib-spi.html)  |                                                                                                                    |
+| rdkit                    | [4.3.0](https://github.com/rdkit/rdkit)                           | [4.3.0](https://github.com/rdkit/rdkit)  |                                                                                                                    |
 | rum                      | [9.6](https://postgrespro.com/docs/enterprise/9.6/rum)          | [9.6](https://postgrespro.com/docs/enterprise/9.6/rum)           |                                                                                                                    |
 | seg                      | [1.4](https://www.postgresql.org/docs/14/seg.html)              | [1.4](https://www.postgresql.org/docs/15/seg.html)               |                                                                                                                    |
 | tablefunc                | [1.0](https://www.postgresql.org/docs/14/tablefunc.html)        | [1.0](https://www.postgresql.org/docs/15/tablefunc.html)         |                                                                                                                    |
-| timescaledb              | [2.10.1](https://docs.timescale.com/about/latest/timescaledb-editions/)              | [2.10.1](https://docs.timescale.com/about/latest/timescaledb-editions/)               |  Only Apache-2 licensed features are supported. Compression is not supported.                                                                                                                 |
 | tcn                      | [1.0](https://www.postgresql.org/docs/14/tcn.html)              | [1.0](https://www.postgresql.org/docs/15/tcn.html)               |                                                                                                                    |
+| timescaledb              | [2.10.1](https://docs.timescale.com/about/latest/timescaledb-editions/)              | [2.10.1](https://docs.timescale.com/about/latest/timescaledb-editions/)               |  Only Apache-2 licensed features are supported. Compression is not supported.                                                                                                                 |
 | tsm_system_rows          | [1.0](https://www.postgresql.org/docs/14/tsm-system-rows.html)  | [1.0](https://www.postgresql.org/docs/15/tsm-system-rows.html)   |                                                                                                                    |
 | tsm_system_time          | [1.0](https://www.postgresql.org/docs/14/tsm-system-time.html)  | [1.0](https://www.postgresql.org/docs/15/tsm-system-time.html)   |                                                                                                                    |
 | unaccent                 | [1.1](https://www.postgresql.org/docs/14/unaccent.html)         | [1.1](https://www.postgresql.org/docs/15/unaccent.html)          |                                                                                                                    |
@@ -81,7 +88,7 @@ Unless otherwise noted, supported extensions can be installed using [CREATE EXTE
 CREATE EXTENSION <extension_name>
 ```
 
-You can install extensions from the Neon SQL Editor or from a client such as `psql` that permits running SQL queries. For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](../get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](../connect/query-with-psql-editor).
+You can install extensions from the Neon SQL Editor or from a client such as `psql` that permits running SQL queries. For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Update an extension version
 
@@ -106,7 +113,19 @@ You can update an extension to the latest version using `ALTER EXTENSION <extens
 
 ## Request extension support
 
-To request support for additional extensions, please contact us at [support@neon.tech](mailto:support@neon.tech) or post your request to the [Neon community forum](https://community.neon.tech/).
+To request support for a Postgres extension, please contact us at [support@neon.tech](mailto:support@neon.tech) or post your request to the [Neon community forum](https://community.neon.tech/).
+
+### Custom-built extensions
+
+Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, send a request to [support@neon.tech](mailto:support@neon.tech). Please include the following information in your request:
+
+- A repository link or archive file containing the source code for your extension
+- A description of what the extension does, instructions for compiling it, and any prerequisites
+- Whether an NDA or licensing agreement is necessary for Neon to provide support for your extension
+
+Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access. Neon features such as Autoscaling and Auto-suspend may limit the types of extensions we can support.
+
+Depending on the nature of your extension, Neon may also request a liability waiver.
 
 ## Need help?
 

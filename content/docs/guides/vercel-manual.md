@@ -7,12 +7,12 @@ enableTableOfContents: true
 This guide describes how to manually connect a Vercel project to a Neon database.
 
 <Admonition type="note">
-For other Vercel integration options, refer to the [Neon and Vercel integration overview](../guides/vercel-overview).
+For other Vercel integration options, refer to the [Neon and Vercel integration overview](/docs/guides/vercel-overview).
 </Admonition>
 
 ## Prerequisites
 
-- A Neon project. If you do not have one, see [Create your first project](../get-started-with-neon/setting-up-a-project).
+- A Neon project. If you do not have one, see [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
 - A [Vercel account](https://vercel.com).
 - A project deployed to Vercel. If you do not have one, see [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project), in the _Vercel documentation_.
 
@@ -25,13 +25,13 @@ You can these details from the **Connection Details** widget on the **Neon Dashb
 The connection string includes the role name, hostname, and database name. For example:
 
 ```text
-postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
-             ^                                   ^                         ^
-             |- <role>                           |- <hostname>             |- <database>
+postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+             ^                                 ^                           ^
+             |- <role>                         |- <hostname>               |- <database>
 ```
 
 - role name: `daniel`
-- hostname: `ep-mute-rain-952417.us-east-2.aws.neon.tech`
+- hostname: `ep-raspy-cherry-95040071.us-east-2.aws.neon.tech`
 - database name: `neondb`
 
 ## Configure project environment variables in Vercel
@@ -39,13 +39,13 @@ postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
 The environment variables required to connect your application to Neon depend on your application. Some applications use a `DATABASE_URL` environment variable with a database connection string:
 
 ```text
-DATABASE_URL="daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb"
+DATABASE_URL="postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb"
 ```
 
 Other applications may use `PG*` environment variables to define database connection details:
 
 ```text
-PGHOST=ep-mute-rain-952417.us-east-2.aws.neon.tech
+PGHOST=ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
 PGUSER=daniel
 PGDATABASE=neondb
 PGPASSWORD=<password>
@@ -53,7 +53,7 @@ PGPORT=5432
 ```
 
 <Admonition type="note">
-Neon uses the default PostgreSQL port, `5432`.
+Neon uses the default Postgres port, `5432`.
 </Admonition>
 
 To configure the environment variables required by your application:

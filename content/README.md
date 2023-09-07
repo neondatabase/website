@@ -33,7 +33,7 @@ This section provides instructions for how to import data into Neon. Currently, 
 
 ## Reference
 
-This section contains reference information such as the glossary, API reference, CLI reference, supported PostgreSQL extensions, and PostgreSQL compatibility information.
+This section contains reference information such as the glossary, API reference, CLI reference, supported Postgres extensions, and Postgres compatibility information.
 
 ## Security
 

@@ -68,7 +68,7 @@ To add the integration:
       ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
     1. Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
 
-        Once the settings are configured, you are presented with a **Success!** dialog.
+        After the settings are configured, you are presented with a **Success!** dialog.
         ![Vercel integration success](/docs/guides/vercel_success.png)
     1. Click **Done** to complete the installation.
 1. To view the results of the integration in Neon:
@@ -118,7 +118,7 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
      ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)
 
 <Admonition type="note">
-The Neon Free Tier allows you to create up to 10 branches. To avoid running out of branches for new preview deployments, remove old branches regularly. See [Manage branches](../manage/branches) for instructions.
+The Neon Free Tier allows you to create up to 10 branches. To avoid running out of branches for new preview deployments, remove old branches regularly. See [Manage branches](/docs/manage/branches) for instructions.
 </Admonition>
 
 ## Add the integration to another Vercel project

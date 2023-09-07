@@ -9,14 +9,14 @@ _This guide was contributed by Josep Vidal from Grafbase_
 
 Grafbase allows you to combine your data sources into a centralized GraphQL endpoint and deploy a serverless GraphQL backend.
 
-This guide describes how to create a GraphQL API using Grafbase and use Grafbase [Edge Resolvers](https://grafbase.com/docs/edge-gateway/resolvers) with the [Neon serverless driver](../serverless/serverless-driver) to interact with your Neon database at the edge.
+This guide describes how to create a GraphQL API using Grafbase and use Grafbase [Edge Resolvers](https://grafbase.com/docs/edge-gateway/resolvers) with the [Neon serverless driver](/docs/serverless/serverless-driver) to interact with your Neon database at the edge.
 
 The example project in this guide simulates a marketplace of products, where the product price is dynamically calculated based on data retrieved from your Neon database.
 
 ## Prerequisites
 
 - The [Grafbase CLI](https://grafbase.com/cli)
-- A Neon project. See [Create a Neon project](../manage/projects#create-a-project).
+- A Neon project. See [Create a Neon project](/docs/manage/projects#create-a-project).
 
 ## Create a backend with Grafbase
 

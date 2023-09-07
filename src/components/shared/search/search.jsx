@@ -1,48 +1,158 @@
 'use client';
 
+import { DocSearchButton, DocSearchModal, useDocSearchKeyboardEvents } from '@docsearch/react';
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
-import { InstantSearch, Configure } from 'react-instantsearch-dom';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
-import useAlgoliaSearch from 'hooks/use-algolia-search';
-import useClickOutside from 'hooks/use-click-outside';
+import Link from 'components/shared/link';
+import debounce from 'utils/debounce';
 
-import Input from './input';
-import Results from './results';
+const Hit = ({ hit, children }) => (
+  <Link
+    className={clsx({
+      'DocSearch-Hit--Result': hit.__is_result?.(),
+      'DocSearch-Hit--Parent': hit.__is_parent?.(),
+      'DocSearch-Hit--FirstChild': hit.__is_first?.(),
+      'DocSearch-Hit--LastChild': hit.__is_last?.(),
+      'DocSearch-Hit--Child': hit.__is_child?.(),
+    })}
+    to={hit.url}
+  >
+    {children}
+  </Link>
+);
 
-const indices = [
-  { name: process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME, title: 'Docs', hitComp: 'postPageHit' },
-];
+Hit.propTypes = {
+  hit: PropTypes.shape({
+    __is_result: PropTypes.func,
+    __is_parent: PropTypes.func,
+    __is_first: PropTypes.func,
+    __is_last: PropTypes.func,
+    __is_child: PropTypes.func,
+    url: PropTypes.string,
+  }).isRequired,
+  children: PropTypes.node.isRequired,
+};
 
-const Search = ({ className = null, isNotFoundPage = false }) => {
-  const ref = useRef(null);
-  const { query, setQuery, setFocus, hasFocus, searchClient } = useAlgoliaSearch();
+const Search = ({ className = null, indexName, isBlog = false }) => {
+  const router = useRouter();
+  const searchButtonRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [initialQuery, setInitialQuery] = useState(null);
 
-  useClickOutside([ref], () => setFocus(false));
+  const onOpen = useCallback(() => {
+    setIsOpen(true);
+  }, [setIsOpen]);
 
-  const shouldShowResult = !!query?.length && hasFocus;
+  const onClose = useCallback(() => {
+    setIsOpen(false);
+  }, [setIsOpen]);
+
+  const onInput = useCallback(
+    (event) => {
+      setIsOpen(true);
+      setInitialQuery(event.key);
+    },
+    [setIsOpen, setInitialQuery]
+  );
+
+  useDocSearchKeyboardEvents({
+    isOpen,
+    onOpen,
+    onClose,
+    onInput,
+    searchButtonRef,
+  });
+
+  // @NOTE: this is a workaround to prevent scroll to the page bottom when closing search modal in Safari
+  // https://github.com/algolia/docsearch/issues/1260#issuecomment-1011939736
+  useEffect(() => {
+    let div = document.querySelector('.fixed[data-docsearch-fixed]');
+
+    if (!div) {
+      div = document.createElement('div');
+      div.classList.add('fixed');
+      div.setAttribute('data-docsearch-fixed', '');
+      div.innerHTML = '<input type="text" aria-label="hidden">';
+      document.body.appendChild(div);
+    }
+  }, []);
 
   return (
-    <div className={clsx('relative', className)} ref={ref}>
-      <InstantSearch
-        searchClient={searchClient}
-        indexName={indices[0].name}
-        onSearchStateChange={({ query }) => setQuery(query)}
-      >
-        <Configure clickAnalytics />
-        <Input hasFocus={hasFocus} isNotFoundPage={isNotFoundPage} onFocus={() => setFocus(true)} />
-        {shouldShowResult && (
-          <Results indices={indices} type={isNotFoundPage ? 'notFound' : 'default'} />
+    <div className={clsx('relative flex items-center justify-between', className)}>
+      <DocSearchButton
+        ref={searchButtonRef}
+        aria-label="Open search with CTRL+K or Command+K"
+        onClick={onOpen}
+      />
+      {isOpen &&
+        createPortal(
+          <div className={clsx({ dark: isBlog })}>
+            <DocSearchModal
+              initialQuery={initialQuery}
+              initialScrollY={window.scrollY}
+              navigator={{
+                navigate({ itemUrl }) {
+                  setIsOpen(false);
+                  router.push(itemUrl);
+                },
+              }}
+              appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}
+              apiKey={process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY}
+              indexName={indexName}
+              placeholder="Search..."
+              transformSearchClient={(searchClient) => ({
+                ...searchClient,
+                search: debounce(searchClient.search, 500),
+              })}
+              hitComponent={Hit}
+              transformItems={(items) =>
+                items.map((item, index) => {
+                  // We transform the absolute URL into a relative URL to leverage next/link prefetch.
+                  const a = document.createElement('a');
+                  a.href = item.url;
+
+                  if (item.hierarchy?.lvl0) {
+                    item.hierarchy.lvl0 = item.hierarchy.lvl0.replace(/&amp;/g, '&');
+                  }
+
+                  if (item._highlightResult?.hierarchy?.lvl0?.value) {
+                    item._highlightResult.hierarchy.lvl0.value =
+                      item._highlightResult.hierarchy.lvl0.value.replace(/&amp;/g, '&');
+                  }
+
+                  return {
+                    ...item,
+                    url: `${a.pathname}${a.hash}`,
+                    __is_result: () => true,
+                    __is_parent: () => item.type === 'lvl1' && items.length > 1 && index === 0,
+                    __is_child: () =>
+                      item.type !== 'lvl1' &&
+                      items.length > 1 &&
+                      items[0].type === 'lvl1' &&
+                      index !== 0,
+                    __is_first: () => index === 1,
+                    __is_last: () => index === items.length - 1 && index !== 0,
+                  };
+                })
+              }
+              insights
+              onClose={onClose}
+            />
+          </div>,
+          document.body
         )}
-      </InstantSearch>
     </div>
   );
 };
 
 Search.propTypes = {
   className: PropTypes.string,
-  isNotFoundPage: PropTypes.bool,
+  indexName: PropTypes.string.isRequired,
+  isBlog: PropTypes.bool,
 };
 
 export default Search;

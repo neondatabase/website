@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 Neon's `psql` passwordless auth feature helps you quickly authenticate a connection to Neon without providing a password.
 
-The following instructions require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with PostgreSQL. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
+The following instructions require a working installation of [psql](https://www.postgresql.org/download/), an interactive terminal for working with Postgres. For information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
 
 To connect using Neon's `psql` passwordless auth feature:
 

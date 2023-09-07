@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 This guide describes how to connect from an Elixir application with Ecto, which is a database wrapper and query generator for Elixir. Ecto provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
 
-The instructions in this guide follow the steps outlined in the [Ecto Getting Started](https://hexdocs.pm/ecto/getting-started.html#content) guide, modified to demonstrate connecting to a Neon Serverless PostgreSQL database. It is assumed that you have a working installation of [Elixir](https://elixir-lang.org/install.html).
+The instructions in this guide follow the steps outlined in the [Ecto Getting Started](https://hexdocs.pm/ecto/getting-started.html#content) guide, modified to demonstrate connecting to a Neon Serverless Postgres database. It is assumed that you have a working installation of [Elixir](https://elixir-lang.org/install.html).
 
 To connect to Neon from Elixir with Ecto:
 
@@ -66,7 +66,7 @@ The `--sup` option ensures that the application has a supervision tree, which is
     end
     ```
 
-    Ecto provides the common querying API. The Postgrex driver acts as a bridge between Ecto and PostgreSQL. Ecto interfaces with its own `Ecto.Adapters.Postgres` module, which communicates to Postgres through the Postgrex driver.
+    Ecto provides the common querying API. The Postgrex driver acts as a bridge between Ecto and Postgres. Ecto interfaces with its own `Ecto.Adapters.Postgres` module, which communicates to Postgres through the Postgrex driver.
 
 2. Install the Ecto and the Postgrex driver dependencies by running the following command in your application directory:
 
@@ -208,6 +208,11 @@ You can use the **Tables** feature in the Neon Console to view the table that wa
 ## Next steps
 
 The [Ecto Getting Started Guide](https://hexdocs.pm/ecto/getting-started.html#content) provides additional steps that you can follow to create a schema, insert data, and run queries. See [Creating the schema](https://hexdocs.pm/ecto/getting-started.html#creating-the-schema ) in the _Ecto Getting Started Guide_ to pick up where the steps in this guide leave off.
+
+## Usage notes
+
+- Suppose you have `PGHOST` environment variable on your system set to something other than your Neon hostname. In that case, this hostname will be used instead of the Neon `hostname` defined in your Ecto Repo configuration when running `mix ecto` commands. To avoid this issue, you can either set the `PGHOST` environment variable to your Neon hostname or specify `PGHOST=""` when running `mix ecto` commands; for example: `PGHOST="" mix ecto.migrate`.
+- By default, Neon's _Auto-suspend_ feature scales computes to zero after 300 seconds (5 minutes) of inactivity, which can result in a `connection not available` error when running `mix ecto` commands. Typically, a Neon compute takes a few seconds to transition from `Idle` to `Active`. Wait a few seconds and try running the command again. Alternatively, consider the strategies outlined in [Connection latency and timeouts](/docs/connect/connection-latency) to manage connection issues resulting from compute suspension.
 
 ## Need help?
 

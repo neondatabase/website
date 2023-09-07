@@ -1,7 +1,11 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const { getAllPosts } = require('./src/utils/api-docs');
 const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
-module.exports = {
+const defaultConfig = {
   poweredByHeader: false,
   experimental: {
     appDir: true,
@@ -33,6 +37,15 @@ module.exports = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, must-revalidate',
+          },
+        ],
+      },
+      {
+        source: '/animations/:all*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
@@ -94,7 +107,7 @@ module.exports = {
       },
       {
         source: '/api-reference',
-        destination: 'https://api-docs.neon.tech/',
+        destination: 'https://api-docs.neon.tech',
         permanent: true,
       },
       {
@@ -102,54 +115,76 @@ module.exports = {
         destination: 'https://api-docs.neon.tech/v2',
         permanent: true,
       },
+      {
+        source: '/ycmatcher',
+        destination: 'https://yc-idea-matcher.vercel.app',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api_spec/release/v2.json',
+        destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
+      },
+    ];
+  },
   webpack(config) {
-    // https://github.com/vercel/next.js/issues/25950#issuecomment-863298702
-    const fileLoaderRule = config.module.rules.find((rule) => {
-      if (rule.test instanceof RegExp) {
-        return rule.test.test('.svg');
-      }
-      return null;
-    });
+    const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
 
-    fileLoaderRule.exclude = /\.svg$/;
-
-    config.module.rules.push({
-      test: /\.inline.svg$/,
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            svgo: true,
-            svgoConfig: {
-              plugins: [
-                {
-                  name: 'preset-default',
-                  params: {
-                    overrides: {
-                      removeViewBox: false,
-                    },
-                  },
-                },
-                'prefixIds',
-              ],
+    config.module.rules.push(
+      // Reapply the existing rule, but only for svg imports not ending in ".inline.svg"
+      {
+        test: /(?<!inline)\.svg$/,
+        use: [
+          {
+            loader: require.resolve('url-loader'),
+            options: {
+              limit: 512,
+              publicPath: '/_next/static/svgs',
+              outputPath: 'static/svgs',
+              fallback: require.resolve('file-loader'),
             },
           },
-        },
-      ],
-    });
-
-    config.module.rules.push({
-      test: /(?<!inline)\.svg$/,
-      type: 'asset/resource',
-      use: 'svgo-loader',
-      generator: {
-        filename: 'static/chunks/[path][name].[hash][ext]',
+          {
+            loader: require.resolve('svgo-loader'),
+          },
+        ],
       },
-    });
+      // Convert all other *.svg imports to React components
+      {
+        test: /\.inline.svg$/i,
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              svgo: true,
+              svgoConfig: {
+                plugins: [
+                  {
+                    name: 'preset-default',
+                    params: {
+                      overrides: {
+                        removeViewBox: false,
+                      },
+                    },
+                  },
+                  'prefixIds',
+                ],
+              },
+            },
+          },
+        ],
+      }
+    );
+
+    // Modify the file loader rule to ignore *.svg, since we have it handled now.
+    fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
   },
 };
+
+module.exports = withBundleAnalyzer(defaultConfig);

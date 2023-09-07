@@ -1,5 +1,7 @@
 import LINKS from './links';
 
+export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
+
 export default {
   index: {
     title: 'Neon — Serverless, Fault-Tolerant, Branchable Postgres',
@@ -47,9 +49,33 @@ export default {
   pricing: {
     title: 'Pricing — Neon',
     description:
-      'Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible usage and volume-based plans.',
+      'Neon brings serverless architecture to Postgres, which allows us to offer you flexible usage and volume-based plans.',
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
+  },
+  partners: {
+    title: 'Accelerate your business with Neon partnership — Neon',
+    description: 'Bring familiar, reliable and scalable Postgres experience to your customers.',
+    imagePath: '/images/social-previews/partners.jpg',
+    pathname: LINKS.partners,
+  },
+  ai: {
+    title: 'Powering next gen AI apps with Postgres — Neon',
+    description:
+      'Scale your transformative LLM applications to millions of users with vector indexes and similarity search in Neon.',
+    imagePath: '/images/social-previews/ai.jpg',
+    pathname: LINKS.ai,
+  },
+  awsIsrael: {
+    title: 'AWS Launches in Israel — Neon',
+    description: 'Neon is delighted to support the 2023 launch of AWS in Israel.',
+    imagePath: '/images/social-previews/aws-israel.jpg',
+    pathname: LINKS.awsIsrael,
+  },
+  thankYou: {
+    title: 'Thank you for subscribing — Neon',
+    description: 'Thank you for subscribing to the Neon newsletter',
+    pathname: LINKS.thankYou,
   },
 };
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 
@@ -21,7 +19,7 @@ const items = [
 ];
 
 const BranchData = () => (
-  <section className="branch-data safe-padding bg-black pb-32 pt-44 text-white 2xl:pb-28 2xl:pt-40 xl:pb-24 xl:pt-28 lg:pt-20 sm:pb-16">
+  <section className="branch-data safe-paddings bg-black pb-32 pt-44 text-white 2xl:pb-28 2xl:pt-40 xl:pb-24 xl:pt-28 lg:pt-20 sm:pb-16">
     <Container className="grid-gap-x grid grid-cols-10 items-start" size="sm">
       <Heading className="t-5xl col-span-3 font-bold leading-snug xl:col-span-full" tag="h2">
         Branch your data with single click or API call

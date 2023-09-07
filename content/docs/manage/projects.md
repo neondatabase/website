@@ -6,38 +6,42 @@ redirectFrom:
   - /docs/get-started-with-neon/projects
 ---
 
-A project is the top-level object in the [Neon object hierarchy](../manage/overview). Tier limits define how many projects you can create. Neon's Free Tier permits one project per Neon account.
+A project is the top-level object in the [Neon object hierarchy](/docs/manage/overview). Tier limits define how many projects you can create. Neon's Free Tier permits one project per Neon account.
 
 A Neon project is created with the following resources, by default:
 
-- A primary branch called `main`. You can create child branches from the primary branch or from a previously created branch. For more information, see [Manage branches](../manage/branches).
-- A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage computes](../manage/endpoints).
+- A primary branch called `main`. You can create child branches from the primary branch or from a previously created branch. For more information, see [Manage branches](/docs/manage/branches).
+- A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage computes](/docs/manage/endpoints).
 - A default database, called `neondb`, which resides in the project's primary branch.
-- A default PostgreSQL role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
+- A default Postgres role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
 
 ## Create a project
 
-Neon Free Tier users can create a single project. Support for multiple projects is available to Neon [Pro plan](../introduction/pro-plan) users.
+Neon Free Tier users can create a single project. Support for multiple projects is available to Neon [Pro plan](/docs/introduction/pro-plan) users.
 
 To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
-3. Specify a name, a PostgreSQL version, and a region. If you are a Neon [Pro plan](../introduction/pro-plan) user, you can also specify compute size settings. Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size and Autoscaling configuration](../manage/endpoints#compute-size-and-autoscaling-configuration).
+3. Specify a name, a Postgres version, and a region. Project names are limited to 64 characters. If you are a Neon [Pro plan](/docs/introduction/pro-plan) user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
+
+    - Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+    - The **Auto-suspend delay** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
+  
 4. Click **Create Project**.
 
 Upon creating a project, you are presented with a dialog that provides your connection details for the default `neondb` database, including your password.
 
 ## Compute size configuration with Autoscaling
 
-Neon [Pro plan](../introduction/pro-plan) users can configure compute size settings when [creating a project](#create-a-project).
+Neon [Pro plan](/docs/introduction/pro-plan) users can configure compute size settings when [creating a project](#create-a-project).
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
 
 Neon supports two compute size configuration options:
 
 - **Fixed Size:** This option allows you to select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, _Autoscaling_ supports a range of 1 to 7 CUs. The 1/4 CU and 1/2 CU settings, called _shared compute_, will be supported with _Autoscaling_ in a future release. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](../introduction/autoscaling).
+- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, _Autoscaling_ supports a range of 1 to 7 CUs. The 1/4 CU and 1/2 CU settings, called _shared compute_, will be supported with _Autoscaling_ in a future release. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 ## View projects
 
@@ -56,7 +60,21 @@ To edit a Neon project:
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to edit.
 3. Select **Settings**.
-4. Make your change and click **Save**.
+4. Select **General**.
+5. Make your change and click **Save**.
+
+## Configure history retention
+
+By default, Neon retains a 7-day history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/billing#project-storage).
+
+To configure the history retention period for a project:
+
+1. Select a project in the Neon console.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Storage**.
+    ![History retention configuration](/docs/relnotes/history_retention.png)
+4. Use the slider to select the history retention period.
+5. Click **Save**.
 
 ## Delete a project
 
@@ -67,21 +85,25 @@ To delete a project:
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to delete.
 3. Select **Settings**.
-4. Click **Delete project.**
-5. On the confirmation dialog, click **Delete**.
+4. Select **Delete**.
+5. Click **Delete project.**
+6. On the confirmation dialog, click **Delete**.
 
 ## Share a project
 
-Neon paid plan users can share a project with other Neon accounts.
+Project sharing is a Neon Pro plan feature that allows you to share your project with other Neon accounts.
 
 To share a project:
 
 1. In the Neon Console, select a project.
 1. Select **Settings**.
+1. Select **Sharing**.
 1. Under **Grant access to your project**, enter the email address of the account you want to share access with.
 1. Click **Grant access**.
 
-The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
+The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to rename or delete the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
+
+The costs associated with a shared project are charged to the Neon account that owns the project. To illustrate, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
 
 ## Manage projects with the Neon API
 
@@ -95,11 +117,11 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ### Create a project with the API
 
-The following Neon API method creates a project. The [Neon Free Tier](../introduction/technical-preview-free-tier) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
+The following Neon API method creates a project. The [Neon Free Tier](/docs/introduction/free-tier) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
 
 ```text
 POST /projects

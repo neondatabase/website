@@ -1,6 +1,7 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
@@ -12,12 +13,9 @@ import MENUS from 'constants/menus.js';
 
 const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) => {
   const isDarkTheme = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
-
   const [ref, inView] = useInView({ triggerOnce: true });
-
   return (
     <footer
-      ref={ref}
       className={clsx(
         'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-gray-new-8 dark:text-white',
         !isDarkTheme && withTopBorder && 'border-t border-gray-new-90 dark:border-gray-new-20',
@@ -26,6 +24,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
         { 'bg-black text-white': theme === 'black' },
         { 'bg-white text-black': theme === 'white' }
       )}
+      ref={ref}
     >
       <Container className="flex justify-between py-10 xl:py-8" size="lg">
         <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
@@ -42,7 +41,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
           <div
             className={clsx(
               { 'tracking-tight text-gray-new-80': theme === 'black-new' || theme === 'gray-8' },
-              'space-y-[18px] text-sm leading-none dark:text-gray-new-80'
+              'space-y-[18px] text-sm leading-none dark:text-gray-new-80 lg:leading-tight'
             )}
           >
             <p>Made in SF and the World</p>
@@ -52,7 +51,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
         <div className="flex space-x-[123px] xl:space-x-8 md:hidden">
           {MENUS.footer.map(({ heading, links }, index) => (
             <div className={clsx('flex flex-col xl:w-full')} key={index}>
-              <h3
+              <span
                 className={clsx(
                   {
                     'text-[13px] font-semibold text-gray-new-60':
@@ -62,20 +61,30 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                 )}
               >
                 {heading}
-              </h3>
+              </span>
               <ul className="mt-6 flex grow flex-col space-y-[18px]">
-                {links.map(({ to, text, icon: Icon }, index) => {
+                {links.map(({ to, text, icon }, index) => {
                   const isExternalUrl = to.startsWith('http');
                   return (
                     <li className="flex" key={index}>
                       <Link
-                        className="relative flex items-center gap-2 whitespace-nowrap leading-none"
+                        className="group relative flex items-center gap-2 whitespace-nowrap leading-none"
                         to={to}
                         theme={isDarkTheme ? 'white' : 'black'}
                         target={isExternalUrl ? '_blank' : null}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
                       >
-                        {Icon && <Icon width={16} aria-hidden />}
+                        {icon && (
+                          <span
+                            className={clsx(
+                              icon,
+                              'inline-block h-4 w-4 transition-colors duration-200',
+                              isDarkTheme
+                                ? 'bg-white group-hover:bg-primary-2'
+                                : 'bg-black group-hover:bg-primary-2 dark:bg-white dark:group-hover:bg-primary-2'
+                            )}
+                          />
+                        )}
                         {text}
                       </Link>
                     </li>

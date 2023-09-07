@@ -162,6 +162,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
                     initial="initial"
                     animate="animate"
                     exit="exit"
+                    aria-label="Subscribe"
                     variants={appearAndExitAnimationVariants}
                   >
                     <span className="xs:hidden">Subscribe</span>
@@ -221,7 +222,6 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
           </div>
           <LinesIllustration
             className="z-10 !w-[125%]"
-            spread={4}
             color={formState === STATES.ERROR ? '#FF4C79' : '#00E599'}
             size="sm"
           />
