@@ -31,7 +31,7 @@ Sign into [WunderGraph Cloud](https://cloud.wundergraph.com/) and follow these s
 3. Select the region closest to you.
 4. Click **Deploy**.
 
-The deployment will take one or two minutes.
+The deployment will take a few moments.
 
 ### Add sample data to Neon
 
@@ -294,8 +294,7 @@ export default withWunderGraph(Home);
 ## Run the application
 
 1. Run `npm run dev`.
-2. Navigate to [http://localhost:3000](http://localhost:3000) when the application is finished building. If your application runs successfully, you should see the following:
-   ![WunderGraph operations result](/docs/guides/wundergraph_operation_result.jpg)
+2. Navigate to [http://localhost:3000](http://localhost:3000) when the application is finished building. If your application runs successfully, you should see the result of your User's operation.
 3. To take the setup one step further, commit the changes to your GitHub repository and merge them into your `main` branch.
 4. After you merge the changes, navigate to `WunderGraph Cloud` and view out the **Deployments** tab. You should see that a deployment was triggered. Give the deployment a few seconds to finish.
 5. When deployment is ready, navigate to the **Operations** tab. You should see the new endpoint that you created and added to your application. Click it to see your data in real time.
