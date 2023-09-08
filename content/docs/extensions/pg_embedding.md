@@ -185,19 +185,19 @@ CREATE TABLE items (id BIGSERIAL PRIMARY KEY, embedding VECTOR(3));
 CREATE TABLE documents(id BIGSERIAL PRIMARY KEY, embedding real[]);
 ```
 
-The first step in the migration process is to install the `pg_embedding` extension:
+Now that you are aware of that difference, the first step in the migration process is to install the `pg_embedding` extension:
 
 ```sql
 CREATE EXTENSION embedding;
 ```
 
-After the `pg_embedding` extension is installed, you can use the same vector embedding table used with `pgvector`, without modification. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is that you modify your vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
+After installing the `pg_embedding` extension, you can use the same vector embedding table used with `pgvector`, without modification. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is that you modify your vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
 
 ```sql
 SELECT id, embedding FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;
 ```
 
-To make it work with `pg_embedding`, cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array: `array[3,1,2]`, as shown:
+To make it work with `pg_embedding`, cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array (`array[3,1,2]`):
 
 <CodeBlock shouldWrap>
 
@@ -207,7 +207,7 @@ SELECT id, embedding::real[] FROM items ORDER BY embedding::real[] <-> array[3,1
 
 </CodeBlock>
 
-To create an HNSW index on your existing vector embedding table, you must also cast the `embedding` column to `real[]`, as shown:
+To create an HNSW index on your existing table, you must also cast the `embedding` column to `real[]`, as shown:
 
 <CodeBlock shouldWrap>
 
@@ -217,7 +217,7 @@ CREATE INDEX ON items USING hnsw((embedding::real[])) WITH (dims=3, m=3, efconst
 
 </CodeBlock>
 
-Given that the `pgvector` and `pg_embedding` vector types are compatible, there's no need to modify an existing vector embedding table to migrate to `pg_embedding`. However, if you still want to change the embedding column type from `VECTOR` to `real[]`, instructions are provided below. The operation may be time and resource intensive depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
+Given that `pgvector` and `pg_embedding` vector types are compatible, there's no need to modify your existing vector embedding table to migrate to `pg_embedding`. However, if you still want to change the embedding column type from `VECTOR` to `real[]`, instructions are provided below. The operation may be time and resource intensive depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
 
 For a table defined for `pgvector`, such as this one:
 
@@ -234,7 +234,7 @@ TYPE real[]
 USING (embedding::real[]);
 ```
 
-Alternatively, you can also change the column type by adding a `real[]` type column to the table, copying the data from the `VECTOR` column to the new column, dropping the old `VECTOR` column, and renaming the new column:
+Alternatively, you can change the column type by adding a `real[]` type column to the table, copying the data from the `VECTOR` column to the new column, dropping the old `VECTOR` column, and renaming the new column:
 
 ```sql
 ALTER TABLE items ADD COLUMN embedding_real real[]; // Add column
