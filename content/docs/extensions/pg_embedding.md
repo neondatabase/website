@@ -171,7 +171,11 @@ The key idea behind HNSW is that by starting the search at the top layer and mov
 
 ## Migrate from pgvector to pg_embedding
 
-Before you begin, it is important to understand that the `pgvector` extension stores vector embeddings in a `VECTOR` column type, whereas the `pg_embedding` extension stores vector embeddings as an array of `real[]` numbers, as demonstrated in the following `CREATE TABLE` statements:
+This section describes how to migrate from `pgvector` to `pg_embedding`.
+
+### Vector type differences
+
+Before you begin the migration, it is important to understand how the extensions store vector embeddings. The `pgvector` extension stores vector embeddings in a `VECTOR` column type, whereas the `pg_embedding` extension stores vector embeddings as an array of `real[]` numbers, as demonstrated in the following `CREATE TABLE` statements:
 
 `pg_vector`:
 
@@ -185,19 +189,23 @@ CREATE TABLE items (id BIGSERIAL PRIMARY KEY, embedding VECTOR(3));
 CREATE TABLE documents(id BIGSERIAL PRIMARY KEY, embedding real[]);
 ```
 
-Now that you are aware of that difference, the first step in the migration process is to install the `pg_embedding` extension:
+The good news is that the `VECTOR` type from `pgvector` is compatible with the `real[]` type in `pg_embedding`. As a result, there's no need to modify your existing vector embedding table when migrating.
+
+### Perform the migration
+
+The first step is to install the `pg_embedding` extension:
 
 ```sql
 CREATE EXTENSION embedding;
 ```
 
-After installing the `pg_embedding` extension, you can use the same vector embedding table used with `pgvector`, without modification. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is that you modify your vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
+After installing, adapt your vector search queries to work with `pg_embedding`. For instance, if you have a `pgvector` query like this one:
 
 ```sql
 SELECT id, embedding FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;
 ```
 
-To make it work with `pg_embedding`, cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array (`array[3,1,2]`):
+You can make it work with `pg_embedding` by casting the `embedding` column to `real[]` (`embedding::real[]`) and defining the search vector as an array (`array[3,1,2]`):
 
 <CodeBlock shouldWrap>
 
@@ -207,7 +215,7 @@ SELECT id, embedding::real[] FROM items ORDER BY embedding::real[] <-> array[3,1
 
 </CodeBlock>
 
-To create an HNSW index on your existing table, you must also cast the `embedding` column to `real[]`, as shown:
+When creating an HNSW index on a table created for `pgvector`, you must also cast the `embedding` column to `real[]`, as shown:
 
 <CodeBlock shouldWrap>
 
@@ -217,7 +225,11 @@ CREATE INDEX ON items USING hnsw((embedding::real[])) WITH (dims=3, m=3, efconst
 
 </CodeBlock>
 
-Given that `pgvector` and `pg_embedding` vector types are compatible, there's no need to modify your existing vector embedding table to migrate to `pg_embedding`. However, if you still want to change the embedding column type from `VECTOR` to `real[]`, instructions are provided below. The operation may be time and resource intensive depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
+Please note that if you define an index for cosine or Manhattan distance, you must also modify your `SELECT` queries. See [Create an HNSW index](#create-a-table-for-your-vector-data) for details.
+
+### Optional column type change
+
+Given that `pgvector` and `pg_embedding` vector types are compatible, there's no need to modify your existing vector embedding table to migrate to `pg_embedding`. However, if you want to change the embedding column type from `VECTOR` to `real[]`, instructions are provided below. The operation may be time and resource intensive depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
 
 For a table defined for `pgvector`, such as this one:
 
