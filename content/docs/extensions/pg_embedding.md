@@ -93,31 +93,43 @@ In summary, the query retrieves the ID of the record from the `documents` table 
 
 ### Create an HNSW index
 
-To optimize search behavior, you can add an HNSW index. To create the HNSW index on your vector column, use a `CREATE INDEX` statement as shown in the following examples. The `pg_embedding` extension supports indexes for use with Euclidean, cosine, and Manhattan distance metrics. You must ensure that your search query syntax matches the index that you define. You will notice in the query examples below that each distance metric has a specific operator (`<->`, `<=>`, and `<~>`).
+To optimize search behavior, you can add an HNSW index. To create the HNSW index on your vector column, use a `CREATE INDEX` statement as shown in the following examples. The `pg_embedding` extension supports indexes for use with Euclidean, cosine, and Manhattan distance metrics. You must ensure that your search query syntax matches the index that you define. You will notice in the query examples below that each distance metric has a specific operator (`<->`, `<=>`, or `<~>`).
 
 Euclidean (L2) distance index:
 
+<CodeBlock shouldWrap>
+
 ```sql
 CREATE INDEX ON documents USING hnsw(embedding) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
-SET enable_seqscan = off;
+
 SELECT id FROM documents ORDER BY embedding <-> array[3,3,3] LIMIT 1;
 ```
 
+</CodeBlock>
+
 Cosine distance index:
+
+<CodeBlock shouldWrap>
 
 ```sql
 CREATE INDEX ON documents USING hnsw(embedding ann_cos_ops) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
-SET enable_seqscan = off;
+
 SELECT id FROM documents ORDER BY embedding <=> array[3,3,3] LIMIT 1;
 ```
 
+</CodeBlock>
+
 Manhattan distance index:
+
+<CodeBlock shouldWrap>
 
 ```sql
 CREATE INDEX ON documents USING hnsw(embedding ann_manhattan_ops) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
-SET enable_seqscan = off;
+
 SELECT id FROM documents ORDER BY embedding <~> array[3,3,3] LIMIT 1;
 ```
+
+</CodeBlock>
 
 ### Tuning the HNSW algorithm
 
@@ -179,27 +191,35 @@ The first step in the migration process is to install the `pg_embedding` extensi
 CREATE EXTENSION embedding;
 ```
 
-After the `pg_embedding` extension is installed, you can use the same vector embedding table used with `pgvector`, without modifying the table. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is to modify vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
+After the `pg_embedding` extension is installed, you can use the same vector embedding table used with `pgvector`, without modification. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is that you modify your vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
 
 ```sql
 SELECT id, embedding FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;
 ```
 
-To make the query work with `pg_embedding`, cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array: `array[3,1,2]`, as shown:
+To make it work with `pg_embedding`, cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array: `array[3,1,2]`, as shown:
+
+<CodeBlock shouldWrap>
 
 ```sql
 SELECT id, embedding::real[] FROM items ORDER BY embedding::real[] <-> array[3,1,2] LIMIT 1;
 ```
 
+</CodeBlock>
+
 To create an HNSW index on your existing vector embedding table, you must also cast the `embedding` column to `real[]`, as shown:
+
+<CodeBlock shouldWrap>
 
 ```sql
 CREATE INDEX ON items USING hnsw((embedding::real[])) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
 ```
 
-Given that `pgvector` and `pg_embedding` vector types are compatible, there's no need to modify an existing vector embedding table to migrate to `pg_embedding`, but if you still want to change the embedding column type from `VECTOR` to `real[]`, instructions are provided below. The operation may be time and resource intensive, depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
+</CodeBlock>
 
-Given a table defined for `pgvector`, such as this one:
+Given that the `pgvector` and `pg_embedding` vector types are compatible, there's no need to modify an existing vector embedding table to migrate to `pg_embedding`. However, if you still want to change the embedding column type from `VECTOR` to `real[]`, instructions are provided below. The operation may be time and resource intensive depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
+
+For a table defined for `pgvector`, such as this one:
 
 ```sql
 CREATE TABLE items (id BIGSERIAL PRIMARY KEY, embedding VECTOR(3));
@@ -214,7 +234,7 @@ TYPE real[]
 USING (embedding::real[]);
 ```
 
-You can also change the column type by adding a new `real[]` type column to your table, copying the data from the `VECTOR` column to the new column, dropping the old `VECTOR` column, and renaming the new column:
+Alternatively, you can also change the column type by adding a `real[]` type column to the table, copying the data from the `VECTOR` column to the new column, dropping the old `VECTOR` column, and renaming the new column:
 
 ```sql
 ALTER TABLE items ADD COLUMN embedding_real real[]; // Add column
@@ -259,9 +279,13 @@ To upgrade:
 
 4. You should now be able to recreate your HNSW index, which will be created on disk. For example:
 
+    <CodeBlock shouldWrap>
+
     ```sql
     CREATE INDEX ON documents USING hnsw(embedding) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
     ```
+
+    </CodeBlock>
 
 ## pg_embedding extension GitHub repository
 
