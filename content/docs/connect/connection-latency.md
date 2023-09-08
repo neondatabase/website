@@ -47,7 +47,7 @@ Consider combining this strategy with Neon's _Autoscaling_ feature (available wi
 
 ![Connection warmup Auto-suspend and Autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
-For information about what an "always-on" minimum compute size might cost per month, please refer to our [Billing](/docs/introduction/billing) documentation or the [pricing calculator](https://neon.tech/pricing#calc) on our [Pricing](https://neon.tech/pricing) page.
+To determine what an "always-on" compute would cost per month, please refer to our [Billing](/docs/introduction/billing) documentation or the [pricing calculator](https://neon.tech/pricing#calc) on our [Pricing](https://neon.tech/pricing) page.
 
 For Autoscaling configuration instructions, see [Compute size and Autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
