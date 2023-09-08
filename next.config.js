@@ -131,7 +131,7 @@ const defaultConfig = {
       },
       {
         source: '/ping-thing',
-        destination: 'https://ping-thing.vercel.app',
+        destination: 'https://ping-thing.vercel.app/ping-thing',
       },
     ];
   },
