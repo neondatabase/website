@@ -13,7 +13,7 @@ To create a Neon project and access it from a Next.js application:
 
 1. [Create a Neon project](#create-a-neon-project)
 2. [Create a Next.js project](#create-a-nextjs-project)
-3. [Add a PostgreSQL client to your app](#add-a-postgresql-client-to-your-app)
+3. [Add a Postgres client to your app](#add-a-postgresql-client-to-your-app)
 4. [Add your Neon connection details](#add-your-neon-connection-details)
 5. [Connect to the Neon database](#connect-to-the-neon-database)
 
@@ -29,7 +29,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 Create a Next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app/setup), in the Vercel documentation.
 
-## Add a PostgreSQL client to your app
+## Add a Postgres client to your app
 
 Add a PostgreSQL client to your app, such as `Postgres.js`. For instructions, refer to the [postgres.js Getting started](https://www.npmjs.com/package/postgres).
 
@@ -53,7 +53,7 @@ You can find all of the connection details listed above in the **Connection Deta
 
 ## Connect to the Neon database
 
-From your API handlers or server functions, connect to the Neon database with the PostgreSQL client and your Neon connection details. For example:
+From your API handlers or server functions, connect to the Neon database with the Postgres client and your Neon connection details. For example:
 
 ```javascript pages/api/hello_worlds.js
 import postgres from 'postgres';

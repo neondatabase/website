@@ -1,10 +1,13 @@
+import dynamic from 'next/dynamic';
+
 import BlogNavLink from 'components/pages/blog/blog-nav-link';
-import Search from 'components/shared/search';
 import LINKS from 'constants/links';
 import GitHubIcon from 'icons/github-sm.inline.svg';
 import LinkedInIcon from 'icons/linkedin-sm.inline.svg';
 import TwitterIcon from 'icons/twitter-sm.inline.svg';
 import YouTubeIcon from 'icons/youtube-sm.inline.svg';
+
+const Search = dynamic(() => import('components/shared/search/search'));
 
 const categories = [
   {

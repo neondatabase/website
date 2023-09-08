@@ -1,90 +1,23 @@
 ---
-title: Import data from PostgreSQL
+title: Import data from Postgres
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
 ---
 
-This topic describes how to import an existing PostgreSQL database to Neon. The following methods are described:
+This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore` command line utilities.
 
-- [pg_dump with psql](#pg_dump-with-psql)
-- [pg_dump with pg_restore](#pg_dump-with-pg_restore)
+Repeat the `pg_dump` and `pg_restore` process for each database you want to migrate.
 
-## Which import method should you use?
+## Before you begin
 
-The primary determinant is the format of your dump file. The `psql` utility can only be used with plain SQL dumps, while `pg_restore` can be used with plain SQL or PostgreSQL custom format dumps.
-
-If you prefer working with human-readable SQL scripts that can be inspected or edited using a text editor, the [pg_dump with psql](#pg_dump-with-psql) method may be your preferred option.
-
-If you are importing a large or complex dataset, you might choose the [pg_dump with pg_restore](#pg_dump-with-pg_restore) method. The `pg_restore` utility has these advantages:
-
-- It may be faster, particularly for large databases.
-- It supports parallel restoration of data.
-- It allows for greater flexibility during the restore process.
-
-Before you begin, it is recommended that you familiarize yourself with the capabilities of the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html), [psql](https://www.postgresql.org/docs/current/app-psql.html), and [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) utilities, and choose the import method that best meets your requirements.
-
-## pg_dump with psql
-
-This section describes using the `pg_dump` utility to dump data from an existing PostgreSQL database and import it into Neon using `psql`.
-
-<Admonition type="note">
-If you have multiple databases to import, each database must be imported separately.
-</Admonition>
-
-The example below uses the following command, which you can run from a terminal or command window where you have access to the `pg_dump` and `psql` utilities. The first connection string is for your existing PostgreSQL database. The second is for your Neon database.
-
-```bash
-pg_dump <old-connection-string> | psql <neon-connection-string>
-```
-
-A PostgreSQL connection string has the following format:
-
-```bash
-postgres://<user>:<password>@<hostname>:<port>/<dbname>
-```
-
-You must supply the connection string for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The connection string will look something like this:
-
-<CodeBlock shouldWrap>
-
-```bash
-postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
-```
-
-</CodeBlock>
-
-where:
-
-- `<user>` is the PostgreSQL role.
-- `<password>` is the role's password.
-- `ep-polished-water-579720.us-east-2.aws.neon.tech` is the hostname of the Neon PostgreSQL instance. Your hostname will differ.
-- `<dbname>` is the name of the database. You can use the default `neondb` database or create your own. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
-
-<Admonition type="note">
-Neon uses the default PostgreSQL port, `5432`, so it does not need to be specified explicitly in the Neon connection string.
-</Admonition>
-
-After you input the connection strings into your command, it will appear similar to the following:
-
-<CodeBlock shouldWrap>
-
-```bash
-pg_dump postgres://<user>:<password>@<hostname>:5432/<dbname> | psql postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
-```
-
-</CodeBlock>
-
-Run the command in your terminal or command window to import your data.
-
-## pg_dump with pg_restore
-
-This section describes using the `pg_dump` utility to dump data from an existing PostgreSQL database and import it into your Neon database using `pg_restore` .
-
-1. Start by retrieving the connection strings for the existing PostgreSQL database and your Neon database.
-
-   You must supply the connection string for your existing PostgreSQL database. You can obtain the connection string for your Neon database from the **Connection Details** widget on the Neon **Dashboard**. The Neon connection string will look something like this:
+- Neon supports PostgreSQL 14 and 15. We recommend that clients are version 14 and higher. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`
+- Retrieve the connection parameters or connection string for your source Postgres database. The instructions below use a [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), but you can use the connection format you prefer. If you are logged in to a local Postgres instance, you may only need to provide the database name. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for information about connection parameters.
+- Optionally, create a role in Neon to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. For example, if you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
+- If you have assigned database object ownership to different roles in your source database, read [Database object ownership considerations](#database-object-ownership-considerations). You may want to add a `-O` option to your `pg_restore` command to avoid errors.
+- Create the target database in Neon. For example, if you are migrating a database named `pagila`, create a database named `pagila` in Neon. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
+- Retrieve the connection string for your Neon database. You can find it in the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
 
    <CodeBlock shouldWrap>
 
@@ -94,230 +27,164 @@ This section describes using the `pg_dump` utility to dump data from an existing
 
    </CodeBlock>
 
-2. Dump the database from your existing PostgreSQL instance. You can use a `pg_dump` command similar to the following:
+- Consider running a test migration first to ensure your actual migration goes smoothly. See [Run a test migration](#run-a-test-migration).
+- If your database is small (< 1 GB), you can pipe `pg_dump` output directly to `pg_restore` to save time. See [Pipe pg_dump to pg_restore](#pipe-pg_dump-to-pg_restore).
 
-   <CodeBlock shouldWrap>
+## Export data with pg_dump
 
-   ```bash
-   pg_dump "postgres://<user>:<hostname>:<port>/<dbname>" --file=dumpfile.bak -Fc -Z 6 -v
-   ```
+Export your data from the source database with `pg_dump`:
 
-   </CodeBlock>
+<CodeBlock shouldWrap>
 
-   The example above includes some optional arguments. The `-Fc` option sends the output to a custom-format archive suitable for input into `pg_restore`. The `-Z 6` option specifies a compression level of 6 (the default). The `-v` option runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump.
+```bash
+pg_dump -Fc -v -d <source_database_connection_string> -f <dump_file_name> 
+```
 
-   The `pg_dump` command provides many other options to modify your database dump. To learn more, refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation.
+</CodeBlock>
 
-3. Load the database dump into Neon using `pg_restore`. For example:
+The `pg_dump` command above includes these arguments:
 
-    <CodeBlock shouldWrap>
+- `-Fc`: Sends the output to a custom-format archive suitable for input into `pg_restore`.
+- `-v`: Runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump operation.
+- `-d`: Specifies the source database name or [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
+- `-f`: The dump file name. It can be any name you choose (`mydumpfile.bak`, for example).
 
-    ```bash
-    pg_restore -d postgres://[user]:[password]@[hostname]/<dbname> -Fc --single-transaction -c --if-exists dumpfile.bak -v
-    ```
+For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pg_dump-and-pg_restore-options).
 
-    </CodeBlock>
+## Restore data to Neon with pg_restore
 
-    <Admonition type="note">
-    The database specified in the command above must exist in Neon. If it does not, create it first. See [/docs/manage/databases#create-a-database].
-    </Admonition>
+Restore your data to the target database in Neon with `pg_restore`.
 
-    The example above includes some optional arguments. The `-Fc` option specifies the format of the archive. In this case, `-Fc` indicates a custom-format archive file. The `--single-transaction` option forces the operation to run as an atomic transaction, which ensures that no data is left behind when an import operation fails. (Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.) The `-c --if-exists` options drop database objects before creating them, if they already exist. The `-v` option runs `pg_restore` in verbose mode, allowing you to monitor what happens during the restore operation.
+<Admonition type="note">
+If you assigned database object ownership to different roles in your source database, consider adding the `-O` option to your `pg_restore` command to avoid errors. See [Database object ownership considerations](#database-object-ownership-considerations).
+</Admonition>
 
-    <Admonition type="note">
-    `pg_restore` also supports a `-j` option that specifies the number of concurrent jobs, which can make imports faster. This option is not used in the example above because multiple jobs cannot be used together with the `--single-transaction` option.
-    </Admonition>
+<CodeBlock shouldWrap>
 
-    The `pg_restore` command provides other options to modify your database import. To learn more, refer to the [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
+```bash
+pg_restore -v -d <neon_database_connection_string> <dump_file_name>
+```
+
+</CodeBlock>
+
+The example above includes these arguments:
+
+- `-v`: Runs `pg_restore` in verbose mode, allowing you to monitor what happens during the restore operation.
+- `-d`: Specifies the Neon database to connect to. The value is a Neon database connection string. See [Before you begin](#before-you-begin).
+- `<dump_file_name>` is the name of the dump file you created with `pg_dump`.
+
+For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pg_dump-and-pg_restore-options).
 
 ## pg_dump and pg_restore example
 
-The following example shows how data from a `chinook` database was dumped and restored to a `chinook2` database in Neon using the commands described in the previous section.
+The following example shows how data from a `pagila` source database is dumped and restored to a `pagila` database in Neon using the commands described in the previous sections. A database named `pagila` was created in Neon prior to running the restore operation.
 
 <CodeBlock shouldWrap>
 
 ```bash
 ~$ cd mydump
-~/mydump$ pg_dump "postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook" --file=dumpfile.bak -Fc -Z 6 -v
-
-pg_dump: last built-in OID is 16383
-pg_dump: reading extensions
-pg_dump: identifying extension members
-pg_dump: reading schemas
-pg_dump: reading user-defined tables
-pg_dump: reading user-defined functions
-pg_dump: reading user-defined types
-pg_dump: reading procedural languages
-pg_dump: reading user-defined aggregate functions
-pg_dump: reading user-defined operators
-pg_dump: reading user-defined access methods
-pg_dump: reading user-defined operator classes
-pg_dump: reading user-defined operator families
-pg_dump: reading user-defined text search parsers
-pg_dump: reading user-defined text search templates
-pg_dump: reading user-defined text search dictionaries
-pg_dump: reading user-defined text search configurations
-pg_dump: reading user-defined foreign-data wrappers
-pg_dump: reading user-defined foreign servers
-pg_dump: reading default privileges
-pg_dump: reading user-defined collations
-pg_dump: reading user-defined conversions
-pg_dump: reading type casts
-pg_dump: reading transforms
-pg_dump: reading table inheritance information
-pg_dump: reading event triggers
-pg_dump: finding extension tables
-pg_dump: finding inheritance relationships
-pg_dump: reading column info for interesting tables
-pg_dump: flagging inherited columns in subtables
-pg_dump: reading indexes
-pg_dump: flagging indexes in partitioned tables
-pg_dump: reading extended statistics
-pg_dump: reading constraints
-pg_dump: reading triggers
-pg_dump: reading rewrite rules
-pg_dump: reading policies
-pg_dump: reading row-level security policies
-pg_dump: reading publications
-pg_dump: reading publication membership of tables
-pg_dump: reading publication membership of schemas
-pg_dump: reading subscriptions
-pg_dump: reading large objects
-pg_dump: reading dependency data
-pg_dump: saving encoding = UTF8
-pg_dump: saving standard_conforming_strings = on
-pg_dump: saving search_path = 
-pg_dump: saving database definition
-pg_dump: dumping contents of table "public.Album"
-pg_dump: dumping contents of table "public.Artist"
-pg_dump: dumping contents of table "public.Customer"
-pg_dump: dumping contents of table "public.Employee"
-pg_dump: dumping contents of table "public.Genre"
-pg_dump: dumping contents of table "public.Invoice"
-pg_dump: dumping contents of table "public.InvoiceLine"
-pg_dump: dumping contents of table "public.MediaType"
-pg_dump: dumping contents of table "public.Playlist"
-pg_dump: dumping contents of table "public.PlaylistTrack"
-pg_dump: dumping contents of table "public.Track"
+~/mydump$ pg_dump -Fc -v -d postgres://sally:<password>@<hostname>:<port>/pagila -f mydumpfile.bak 
 
 ~/mydump$ ls
-dumpfile.bak
+mydumpfile.bak
 
-~/mydump$ pg_restore -d postgres://daniel:<password>@ep-tiny-silence-654537.us-east-2.aws.neon.tech/chinook2 -Fc --single-transaction -c --if-exists dumpfile.bak -v
-
-pg_restore: connecting to database for restore
-pg_restore: dropping FK CONSTRAINT Track FK_TrackMediaTypeId
-pg_restore: dropping FK CONSTRAINT Track FK_TrackGenreId
-pg_restore: dropping FK CONSTRAINT Track FK_TrackAlbumId
-pg_restore: dropping FK CONSTRAINT PlaylistTrack FK_PlaylistTrackTrackId
-pg_restore: dropping FK CONSTRAINT PlaylistTrack FK_PlaylistTrackPlaylistId
-pg_restore: dropping FK CONSTRAINT InvoiceLine FK_InvoiceLineTrackId
-pg_restore: dropping FK CONSTRAINT InvoiceLine FK_InvoiceLineInvoiceId
-pg_restore: dropping FK CONSTRAINT Invoice FK_InvoiceCustomerId
-pg_restore: dropping FK CONSTRAINT Employee FK_EmployeeReportsTo
-pg_restore: dropping FK CONSTRAINT Customer FK_CustomerSupportRepId
-pg_restore: dropping FK CONSTRAINT Album FK_AlbumArtistId
-pg_restore: dropping INDEX IFK_TrackMediaTypeId
-pg_restore: dropping INDEX IFK_TrackGenreId
-pg_restore: dropping INDEX IFK_TrackAlbumId
-pg_restore: dropping INDEX IFK_PlaylistTrackTrackId
-pg_restore: dropping INDEX IFK_InvoiceLineTrackId
-pg_restore: dropping INDEX IFK_InvoiceLineInvoiceId
-pg_restore: dropping INDEX IFK_InvoiceCustomerId
-pg_restore: dropping INDEX IFK_EmployeeReportsTo
-pg_restore: dropping INDEX IFK_CustomerSupportRepId
-pg_restore: dropping INDEX IFK_AlbumArtistId
-pg_restore: dropping CONSTRAINT Track PK_Track
-pg_restore: dropping CONSTRAINT PlaylistTrack PK_PlaylistTrack
-pg_restore: dropping CONSTRAINT Playlist PK_Playlist
-pg_restore: dropping CONSTRAINT MediaType PK_MediaType
-pg_restore: dropping CONSTRAINT InvoiceLine PK_InvoiceLine
-pg_restore: dropping CONSTRAINT Invoice PK_Invoice
-pg_restore: dropping CONSTRAINT Genre PK_Genre
-pg_restore: dropping CONSTRAINT Employee PK_Employee
-pg_restore: dropping CONSTRAINT Customer PK_Customer
-pg_restore: dropping CONSTRAINT Artist PK_Artist
-pg_restore: dropping CONSTRAINT Album PK_Album
-pg_restore: dropping TABLE Track
-pg_restore: dropping TABLE PlaylistTrack
-pg_restore: dropping TABLE Playlist
-pg_restore: dropping TABLE MediaType
-pg_restore: dropping TABLE InvoiceLine
-pg_restore: dropping TABLE Invoice
-pg_restore: dropping TABLE Genre
-pg_restore: dropping TABLE Employee
-pg_restore: dropping TABLE Customer
-pg_restore: dropping TABLE Artist
-pg_restore: dropping TABLE Album
-pg_restore: creating TABLE "public.Album"
-pg_restore: creating TABLE "public.Artist"
-pg_restore: creating TABLE "public.Customer"
-pg_restore: creating TABLE "public.Employee"
-pg_restore: creating TABLE "public.Genre"
-pg_restore: creating TABLE "public.Invoice"
-pg_restore: creating TABLE "public.InvoiceLine"
-pg_restore: creating TABLE "public.MediaType"
-pg_restore: creating TABLE "public.Playlist"
-pg_restore: creating TABLE "public.PlaylistTrack"
-pg_restore: creating TABLE "public.Track"
-pg_restore: processing data for table "public.Album"
-pg_restore: processing data for table "public.Artist"
-pg_restore: processing data for table "public.Customer"
-pg_restore: processing data for table "public.Employee"
-pg_restore: processing data for table "public.Genre"
-pg_restore: processing data for table "public.Invoice"
-pg_restore: processing data for table "public.InvoiceLine"
-pg_restore: processing data for table "public.MediaType"
-pg_restore: processing data for table "public.Playlist"
-pg_restore: processing data for table "public.PlaylistTrack"
-pg_restore: processing data for table "public.Track"
-pg_restore: creating CONSTRAINT "public.Album PK_Album"
-pg_restore: creating CONSTRAINT "public.Artist PK_Artist"
-pg_restore: creating CONSTRAINT "public.Customer PK_Customer"
-pg_restore: creating CONSTRAINT "public.Employee PK_Employee"
-pg_restore: creating CONSTRAINT "public.Genre PK_Genre"
-pg_restore: creating CONSTRAINT "public.Invoice PK_Invoice"
-pg_restore: creating CONSTRAINT "public.InvoiceLine PK_InvoiceLine"
-pg_restore: creating CONSTRAINT "public.MediaType PK_MediaType"
-pg_restore: creating CONSTRAINT "public.Playlist PK_Playlist"
-pg_restore: creating CONSTRAINT "public.PlaylistTrack PK_PlaylistTrack"
-pg_restore: creating CONSTRAINT "public.Track PK_Track"
-pg_restore: creating INDEX "public.IFK_AlbumArtistId"
-pg_restore: creating INDEX "public.IFK_CustomerSupportRepId"
-pg_restore: creating INDEX "public.IFK_EmployeeReportsTo"
-pg_restore: creating INDEX "public.IFK_InvoiceCustomerId"
-pg_restore: creating INDEX "public.IFK_InvoiceLineInvoiceId"
-pg_restore: creating INDEX "public.IFK_InvoiceLineTrackId"
-pg_restore: creating INDEX "public.IFK_PlaylistTrackTrackId"
-pg_restore: creating INDEX "public.IFK_TrackAlbumId"
-pg_restore: creating INDEX "public.IFK_TrackGenreId"
-pg_restore: creating INDEX "public.IFK_TrackMediaTypeId"
-pg_restore: creating FK CONSTRAINT "public.Album FK_AlbumArtistId"
-pg_restore: creating FK CONSTRAINT "public.Customer FK_CustomerSupportRepId"
-pg_restore: creating FK CONSTRAINT "public.Employee FK_EmployeeReportsTo"
-pg_restore: creating FK CONSTRAINT "public.Invoice FK_InvoiceCustomerId"
-pg_restore: creating FK CONSTRAINT "public.InvoiceLine FK_InvoiceLineInvoiceId"
-pg_restore: creating FK CONSTRAINT "public.InvoiceLine FK_InvoiceLineTrackId"
-pg_restore: creating FK CONSTRAINT "public.PlaylistTrack FK_PlaylistTrackPlaylistId"
-pg_restore: creating FK CONSTRAINT "public.PlaylistTrack FK_PlaylistTrackTrackId"
-pg_restore: creating FK CONSTRAINT "public.Track FK_TrackAlbumId"
-pg_restore: creating FK CONSTRAINT "public.Track FK_TrackGenreId"
-pg_restore: creating FK CONSTRAINT "public.Track FK_TrackMediaTypeId"
+~/mydump$ pg_restore -v -d postgres://sally:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/pagila mydumpfile.bak
 ```
 
 </CodeBlock>
 
-## Data import notes
+## Pipe pg_dump to pg_restore
 
-When importing a database, be aware of the following:
+For small databases (< 1 GB), the standard output of `pg_dump` can be piped directly into a `pg_restore` command to minimize migration downtime:
 
-- If you import a database from an archive using `pg_dump` that is not in plain-text format, you must use the `pg_restore` utility instead of `psql` to restore the database. The `psql` utility only supports plain SQL dumps.
-- Currently, Neon only supports database creation via the Neon Console, so you cannot use `pg_dumpall` or `pg_dump` with the `-C` option.
-- Because `pg_dump` dumps a single database, it does not include information about roles stored in the global `pg_authid` catalog. Also, Neon does not support creating roles using `psql`. You can only create roles using the Neon Console. If you do not create roles in Neon before importing a database that has roles, you will receive "role does not exist" errors during the import operation. You can ignore these errors if they occur. They do not prevent data from being imported.
-- Some PostgreSQL features that require access to the local file system are not supported by Neon. For example, tablespaces and large objects are not supported. Please take this into account when importing a database into to Neon. When importing from a plain-text `.sql` script, you can specify the `--no-tablespaces` option to exclude commands that select tablespaces. The `--no-tablespaces` option is ignored when creating an archive (non-text) output file using `pg_dump`. For custom-format archive files, you can specify the `--no-tablespaces` option when you call `pg_restore`. To exclude large objects from your dump, use the `--no-blobs` option with `pg_dump`.
-- You can import individual tables from a custom-format database dump using the `-t <table_name>` option with `pg_restore`. Individual tables can also be imported from a CSV file. See [Import from CSV](/docs/import/import-from-csv).
+```bash
+pg_dump [args] | pg_restore [args]
+```
 
-For information about the commands referred to in this topic, refer to the following topics in the PostgreSQL documentation:
+For example:
+
+<CodeBlock shouldWrap>
+
+```bash
+pg_dump -Fc -v -d <source_database_connection_string> | pg_restore -v -d <neon-database-connection-string>
+```
+
+</CodeBlock>
+
+Piping is not recommended for medium (> 1 GB) and large databases (> 5 GB), as it is susceptible to failures during lengthier migration operations.
+
+When piping `pg_dump` output directly to `pg_restore`, the custom output format (`-Fc`) is most efficient. The directory format (`-Fd`) format cannot be piped to `pg_restore`.
+
+## Post-migration steps
+
+After migrating your data, update your applications to connect to your new database in Neon. You will need the database connection string that you used in your `pg_restore` command. If you run into any problems, see [Connect from any application](/docs/connect/connect-from-any-app). After connecting your applications, test them thoroughly to ensure they function correctly with your new database.
+
+## Database object ownership considerations
+
+Roles created in the Neon console, including the default role created with your Neon project, are automatically granted membership in the [neon_superuser](/docs/manage/roles#neon_superuser) role. This role can create roles and databases, and it can select, insert, update, or delete data from all databases in your Neon project. However, the `neon_superuser` is not a PostgreSQL `superuser`. It cannot run `ALTER OWNER` statements to grant ownership of database objects. As a result, if you granted ownership of database objects in your source database to different roles, your dump file will contain `ALTER OWNER` statements, and those statements will cause non-fatal errors when you restore data to your Neon database.
+
+<Admonition type="note">
+Regardless of `ALTER OWNER` statement errors, a restore operation still succeeds because assigning ownership is not necessary for the data itself to be restored. The restore operation will still create tables, import data, and create other objects.
+</Admonition>
+
+To avoid the non-fatal errors, you can ignore database object ownership statements when restoring data by specifying the `-O, --no-owner` option in your `pg_restore` command:
+
+<CodeBlock shouldWrap>
+
+```bash
+pg_restore -v -O -d postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/pagila mydumpfile.bak 
+```
+
+</CodeBlock>
+
+The Neon role performing the restore operation becomes the owner of all database objects.
+
+## Advanced pg_dump and pg_restore options
+
+The `pg_dump` and `pg_restore` commands provide numerous advanced options, some of which are described below. Full descriptions and more options are found in the PostgreSQL [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) and [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) documentation.
+
+### pg_dump options
+
+- `-Z`: Defines the compression level to use when using a compressible format. 0 means no compression, while 9 means maximum compression. In general, we recommend a setting of 1. A higher compression level slows the dump and restore process but also uses less disk space.
+- `--lock-wait-timeout=20s`: Error out early in the dump process instead of waiting for an unknown amount of time if there is lock contention.
+Do not wait forever to acquire shared table locks at the beginning of the dump. Instead fail if unable to lock a table within the specified timeout.`
+- `-j <njobs>`: Consider this option for medium (>1 GB) and large databases (>5) to dump tables in parallel. Set `<njobs>` to the number of available CPUs. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for more information. In Neon, this option only make sense for Pro plan users who can configure computes with >1 vCPU.
+- `--no-blobs`: Excludes large objects from your dump. See [Data migration notes](#data-migration-notes).
+
+### pg_restore options
+
+- `-c --if-exists`: Drop database objects before creating them if they already exist. If you had a failed migration, you could use these options to drop objects created by the previous migration to avoid errors when retrying the migration.
+- `-j <njobs>`: Consider this option for medium (>1 GB) and large databases (>5) to run the restore process in parallel. Set `<njobs>` to the number of available vCPUs. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for more information. In Neon, this option only make sense for Pro plan users who can configure computes with >1 vCPU. Cannot be used together with `--single-transaction`.
+- `--single-transaction`: Forces the operation to run as an atomic transaction, which ensures that no data is left behind when a restore operation fails. Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.
+- `--no-tablespaces`: Do not output commands to select tablespaces. See [Data migration notes](#data-migration-notes).
+- `-t <table_name>`: Allows you to restore individual tables from a custom-format database dump. Individual tables can also be imported from a CSV file. See [Import from CSV](/docs/import/import-from-csv).
+
+## Run a test migration
+
+It is recommended that you run a test migration before migrating your production database. Make sure you can successfully migrate data to the new database and connect to it. Before starting the actual migration, create a database dump and address any issues that show up. In Neon, you can quickly create a test database, obtain the connection string, and delete the database when you are finished with it. See [Create a database](/docs/manage/databases#create-a-database).
+
+## Other migration options
+
+This section discusses migration options other than `pg_dump` and `pg_restore`.
+
+### Postgres GUI clients
+
+Some Postgres clients offer backup and restore capabilities. These include [pgAdmin](https://www.pgadmin.org/docs/pgadmin4/latest/backup_and_restore.html) and [phppgadmin](https://github.com/phppgadmin/phppgadmin/releases), among others. We have not tested migrations using these clients, but if you are uncomfortable using command-line utilities, they may provide an alternative.
+
+### Table-level data migration
+
+Table-level data migration (using CSV files, for example) does not preserve database schemas, constraints, indexes, types, or other database features. You will have to create these separately. Table-level migration is simple but could result in significant downtime depending on the size of your data and the number of tables. For instructions, see [Import data from CSV](/docs/import/import-from-csv).
+
+## Data migration notes
+
+- You can load data using the `psql` utility, but it only supports plain-text SQL dumps, which you should only consider for small datasets or specific use cases. To create a plain-text SQL dump with `pg_dump` utility, leave out the `-F` format option. Plain-text SQL is the default `pg_dump` output format.
+- `pg_dumpall` is not supported.
+- `pg_dump` with the `-C, --create` option is not supported.
+- Some PostgreSQL features, such as tablespaces and large objects, which require access to the local file system are not supported by Neon. To exclude selecting tablespaces, specify the `--no-tablespaces` option with `pg_restore`. To exclude large objects, specify the `--no-blobs` option with `pg_dump`.
+
+## Reference
+
+For information about the Postgres client utilities referred to in this topic, refer to the following topics in the Postgres documentation:
 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)

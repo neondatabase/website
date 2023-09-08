@@ -12,7 +12,7 @@ See [Token](#token).
 
 ### Active time
 
-The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). For [Free Tier](/docs/introduction/free-tier) users, there is no limit on _Active time_ for the [primary branch](#primary-branch) compute. [Non-primary branch](#non-primary-branch) computes are limited to 100 hours of _Active time_ per month. _Active time_ on the primary branch compute is counted toward the 100 hour limit. You can monitor _Active time_ for the computes in your Neon project on the **Usage** widget on the Neon **Dashboard**.
+The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). The [Free Tier](/docs/introduction/free-tier) has an [Active time](/docs/reference/glossary#active-time) limit of 100 hours per month, but that limit only affects non-primary branch compute usage. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. The primary branch compute always remains available regardless of the limit, ensuring that access to data on the primary branch is never interrupted. Free Tier users can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**. The _Active time_ limit resets at the beginning of each month.
 
 ### Activity Monitor
 
@@ -28,7 +28,7 @@ A unique identifier used to authenticate a user or a calling program to an API. 
 
 ### apply_config
 
-A Neon Control Plane operation that applies a new configuration to a Neon object or resource. For example, creating, deleting, or updating PostgreSQL users and databases initiates this operation. See [Operations](/docs/manage/operations) for more information.
+A Neon Control Plane operation that applies a new configuration to a Neon object or resource. For example, creating, deleting, or updating Postgres users and databases initiates this operation. See [Operations](/docs/manage/operations) for more information.
 
 ### Auto-suspend compute
 
@@ -74,7 +74,7 @@ Control groups, a Linux kernel feature that allows the organization, prioritizat
 
 ### Compute
 
-A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon compute instance (also referred to as a [compute endpoint](#compute-endpoint)) runs PostgreSQL. The amount of compute resources available to a Neon project is defined by tier. Neon supports free  and paid tiers.
+A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon compute instance (also referred to as a [compute endpoint](#compute-endpoint)) runs Postgres. The amount of compute resources available to a Neon project is defined by tier. Neon supports free  and paid tiers.
 
 ### Compute endpoint
 
@@ -210,7 +210,7 @@ Least Recently Used policy, an algorithm for cache replacement that evicts the l
 
 ### Neon
 
-A fully managed serverless PostgreSQL. Neon separates storage and compute to offer modern developer features such as branching, autoscaling, and bottomless storage. For more information, see [What is Neon?](/docs/introduction/about/).
+A fully managed serverless Postgres. Neon separates storage and compute to offer modern developer features such as branching, autoscaling, and bottomless storage. For more information, see [What is Neon?](/docs/introduction/about/).
 
 ### Neon API
 
@@ -222,7 +222,7 @@ A browser-based graphical interface for managing Neon projects and resources.
 
 ### Neon user
 
-The user account that registers and authenticates with Neon using a GitHub or Google account. Once authenticated, a Neon user account can create and manage projects, branches, users, databases, and other project resources.
+The user account that registers and authenticates with Neon using a GitHub or Google account. After authenticating, a Neon user account can create and manage projects, branches, users, databases, and other project resources.
 
 ### NeonVM
 
@@ -234,7 +234,7 @@ Any branch not designated as the [primary branch](#primary-branch) is considered
 
 ### Page
 
-An 8KB unit of data, which is the smallest unit that PostgreSQL uses for storing relations and indexes on disk. In Neon, a page is also the smallest unit of data that resides on a Pageserver. For information about PostgreSQL page format, see [Database Page Layout](https://www.postgresql.org/docs/14/storage-page-layout.html), in the _PostgreSQL Documentation_.
+An 8KB unit of data, which is the smallest unit that Postgres uses for storing relations and indexes on disk. In Neon, a page is also the smallest unit of data that resides on a Pageserver. For information about Postgres page format, see [Database Page Layout](https://www.postgresql.org/docs/14/storage-page-layout.html), in the _PostgreSQL Documentation_.
 
 ### Paid plan
 
@@ -244,7 +244,7 @@ An 8KB unit of data, which is the smallest unit that PostgreSQL uses for storing
 
 A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined retention period. Neon retains 7-day history, by default.
 
-The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. Once a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
+The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. After a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
 
 ### Passwordless authentication
 
@@ -256,19 +256,19 @@ A custom volume-based paid plan offered by Neon that includes support for resale
 
 ### Point-in-time restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a data history in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. See [Create a branch](/docs/manage/branches#create-a-branch) for more information. Neon retains 7-day history, by default.
+Restoration of data to a state that existed at an earlier time. Neon retains a history in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. By default, Neon retains a 7-day history of data changes for all branches in a project. The supported range  is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. For more information about this feature, see [Branching — Point-in-time restore](https://neon.tech/docs/guides/branching-pitr).
 
 ### PostgreSQL
 
 An open-source relational database management system (RDBMS) emphasizing extensibility and SQL compliance.
 
-### PostgreSQL role
+### Postgres role
 
-A PostgreSQL role named for the registered Neon account is created with each Neon project. This user can access a Neon database from a client. Older projects may have a `web-access` system role, used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth). The `web-access` role is system managed. It cannot be modified, removed, or used in other authentication scenarios.
+A Postgre role named for the registered Neon account is created with each Neon project. This user can access a Neon database from a client. Older projects may have a `web-access` system role, used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth). The `web-access` role is system managed. It cannot be modified, removed, or used in other authentication scenarios.
 
-Additional PostgreSQL roles can be created in the Neon Console. You can think of a PostgreSQL role as a "database user".
+Additional Postgres roles can be created in the Neon Console. You can think of a Postgres role as a "database user".
 
-In PostgreSQL, a role with the `LOGIN` attribute is considered the same as a _database user_. For additional information, refer to [Database roles](https://www.postgresql.org/docs/14/user-manag.html) and [Role Attributes](https://www.postgresql.org/docs/14/role-attributes.html), in the PostgreSQL documentation.
+In Postgres, a role with the `LOGIN` attribute is considered the same as a _database user_. For additional information, refer to [Database roles](https://www.postgresql.org/docs/14/user-manag.html) and [Role Attributes](https://www.postgresql.org/docs/14/role-attributes.html), in the Postgres documentation.
 
 ### Primary branch
 
@@ -280,7 +280,7 @@ A usage-based paid plan offered by Neon. See [Neon plans](/docs/introduction/pla
 
 ### Project
 
-A collection of branches, databases, roles, and other project resources and settings. A project contains a compute with a PostgreSQL server and storage for the project data.
+A collection of branches, databases, roles, and other project resources and settings. A project contains a compute with a Postgres server and storage for the project data.
 
 ### Project sharing
 
@@ -292,7 +292,7 @@ The total volume of data stored in your Neon project. Also, a billing metric tha
 
 ### Proxy
 
-A Neon component that functions as a multitenant service that accepts and handles connections from clients that use the PostgreSQL protocol.
+A Neon component that functions as a multitenant service that accepts and handles connections from clients that use the Postgres protocol.
 
 ### Passwordless auth
 
@@ -316,7 +316,7 @@ Selling the Neon service as part of another service offering. Neon's Platform Pa
 
 ### Safekeeper
 
-A Neon architecture component responsible for the durability of database changes. PostgreSQL streams WAL records to Safekeepers. A quorum algorithm based on Paxos ensures that when a transaction is committed, it is stored on a majority of Safekeepers and can be recovered if a node is lost. Safekeepers are deployed in different availability zones to ensure high availability and durability.
+A Neon architecture component responsible for the durability of database changes. Postgres streams WAL records to Safekeepers. A quorum algorithm based on Paxos ensures that when a transaction is committed, it is stored on a majority of Safekeepers and can be recovered if a node is lost. Safekeepers are deployed in different availability zones to ensure high availability and durability.
 
 ### Scale-to-zero
 
@@ -360,11 +360,11 @@ A temporary file storage system that uses a portion of a system's RAM to store f
 
 ### User
 
-See [Neon user](#neon-user) and [PostgreSQL role](#postgresql-role).
+See [Neon user](#neon-user) and [Postgres role](#postgresql-role).
 
 ### vm-informant
 
-A program that runs inside the VM alongside PostgreSQL, responsible for requesting more resources from the autoscaler-agent and validating proposed downscaling to ensure sufficient memory.
+A program that runs inside the VM alongside Postgres, responsible for requesting more resources from the autoscaler-agent and validating proposed downscaling to ensure sufficient memory.
 
 ### vCPU
 

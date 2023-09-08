@@ -1,36 +1,34 @@
 ---
-title: Introduction to Neon
+title: Neon documentation
 ---
 
-Neon is open-source serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
+Neon is Serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
 
-## New to Neon?
+## Get started
 
-Refer to our _Get started_ documentation to get up and running with Neon in just a few minutes. You will learn how to:
+Refer to our _Get started_ documentation to get up and running in just a few minutes. You will learn how to:
 
 - [Sign up](/docs/get-started-with-neon/signing-up)
 - [Create your first project](/docs/get-started-with-neon/setting-up-a-project)
 - [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
 
-Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about basic concepts and features of Neon, including database branching.
+## Explore the docs
 
-## Neon Documentation
+<DetailIconCards>
 
-<IntroNavigation>
+<a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a  Serverless Postgres database from any application" icon="audio-jack">Connect</a>
 
-[Connect](/docs/connect/connect-from-any-app 'Learn how to connect to a Neon database from any application')
+<a href="/docs/import/import-from-postgres" description="Load your data into a Postgres database hosted by Neon" icon="import">Import data</a>
 
-[Import data](/docs/import/import-from-postgres 'Import your own data or sample data that you can use to explore Neon')
+<a href="/docs/manage/overview" description="Learn how to manage Neon projects, branches, compute resources, databases, and roles" icon="ladder">Manage</a>
 
-[Manage](/docs/manage/overview 'Learn how to manage Neon projects, branches, compute resources, databases, and roles')
+<a href="/docs/introduction/branching" description="Learn to optimize development workflows with database branching" icon="split-branch">Branching</a>
 
-[Branching](/docs/introduction/branching 'Learn about branching and how you can use it to optimize development workflows')
+<a href="/docs/extensions/pg-extensions" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
 
-[PostgreSQL extensions](/docs/extensions/pg-extensions 'Level up your PostgreSQL database with our extension installation guide')
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
 
-[Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api 'Manage Neon programmatically using the Neon API')
-
-</IntroNavigation>
+</DetailIconCards>
 
 ## Guides
 
@@ -62,8 +60,8 @@ Or step through the [Neon tutorial](/docs/tutorial/neon-tutorial) to learn about
 
 </TechnologyNavigation>
 
-## Continue learning
+## Join the community
 
-If you have technical questions, reach out to Neon developers and community members in the official [Neon Discourse Community](https://community.neon.tech/).
+If you have questions about Neon or Postgres, reach out to Neon community members and developers in the [Neon Discourse Community](https://community.neon.tech/).
 
 <CommunityBanner>Welcome to the <br /> Neon Discourse Community!</CommunityBanner>

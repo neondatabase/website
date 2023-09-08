@@ -1,14 +1,18 @@
 'use client';
 
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 
 import CheckIcon from './images/check.inline.svg';
 import CopyIcon from './images/copy.inline.svg';
+
+const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter/dist/cjs/prism'), {
+  ssr: false,
+});
 
 const DEFAULT_LANGUAGE = 'bash';
 
@@ -31,6 +35,7 @@ function parseHighlightRanges(highlight) {
 
 const CodeBlock = ({
   className = null,
+  copyButtonClassName = null,
   language = null,
   children,
   showLineNumbers = false,
@@ -85,7 +90,10 @@ const CodeBlock = ({
         {content}
       </SyntaxHighlighter>
       <button
-        className="invisible absolute right-2 top-2 rounded border border-gray-6 bg-white p-1.5 text-gray-2 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-black dark:text-gray-8 lg:visible lg:opacity-100"
+        className={clsx(
+          'invisible absolute right-2 top-2 rounded border border-gray-6 bg-white p-1.5 text-gray-2 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-black dark:text-gray-8 lg:visible lg:opacity-100',
+          copyButtonClassName
+        )}
         type="button"
         aria-label={isCopied ? 'Copied' : 'Copy'}
         disabled={isCopied}
@@ -103,6 +111,7 @@ const CodeBlock = ({
 
 CodeBlock.propTypes = {
   className: PropTypes.string,
+  copyButtonClassName: PropTypes.string,
   theme: PropTypes.oneOf(['light', 'dark']),
   language: PropTypes.string,
   children: PropTypes.node,

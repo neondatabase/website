@@ -1,7 +1,7 @@
-### What's new
+### Fixes & improvements
 
-- Compute: Added support for the PostgreSQL `xml2` and `pgjwt` extensions. For more information about PostgreSQL extensions supported by Neon, see [PostgreSQL extensions](/docs/extensions/pg-extensions).
-- Compute: Updated the versions for the following PostgreSQL extensions:
+- Compute: Added support for the Postgres `xml2` and `pgjwt` extensions. For more information about Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
+- Compute: Updated the versions for the following Postgres extensions:
   - Updated the `address_standardizer`, `address_standardizer_data_us`, `postgis`, `postgis_raster`, `postgis_tiger_geocoder`, `postgis_topology` extensions to version `3.3.2`.
   - Updated the `plv8`, `plls`, `plcoffee` extensions to `3.1.5`.
   - Updated the `h3_pg` extension to `4.1.2`.

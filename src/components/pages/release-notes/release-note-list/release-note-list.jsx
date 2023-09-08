@@ -1,42 +1,39 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
-import Aside from 'components/pages/release-notes/aside';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
-import ArrowIcon from 'icons/arrow-right.inline.svg';
 import generateReleaseNotePath from 'utils/generate-release-note-path';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 
-const ReleaseNoteList = ({ items }) => (
-  <div className="relative before:absolute before:bottom-3 before:left-[179px] before:top-4 before:h-auto before:w-px before:bg-gray-7 dark:before:bg-gray-2 xl:before:hidden sm:space-y-16">
-    {items.map(({ slug, content }, index, array) => {
-      const prevItem = array[index - 1];
-      const { datetime } = getReleaseNotesDateFromSlug(slug);
-      const isReleaseDateExist =
-        prevItem && getReleaseNotesDateFromSlug(prevItem.slug).datetime === datetime;
+const ReleaseNoteList = ({ className, items }) => (
+  <div className={clsx('sm:space-y-7', className)}>
+    {items.map(({ slug, content }, index) => {
+      const { datetime, label } = getReleaseNotesDateFromSlug(slug);
       const releaseNotesPath = generateReleaseNotePath(slug);
 
       return (
-        <article
-          className={clsx(
-            'relative flex first:mt-0 sm:flex-col sm:space-y-3',
-            isReleaseDateExist ? 'mt-6' : 'mt-12'
-          )}
-          key={index}
-        >
-          <Aside slug={slug} isReleaseDateExist={isReleaseDateExist} />
-
-          <div className="relative w-full pl-56 before:absolute before:left-[175px] before:top-3 before:h-[9px] before:w-[9px] before:rounded-full before:bg-primary-1 dark:before:bg-secondary-2 xl:max-w-[75%] xl:pl-0 xl:before:hidden sm:max-w-full">
-            <Content content={content} withoutAnchorHeading />
+        <article className="group flex first:mt-0 lg:flex-col lg:space-y-3" key={index}>
+          <div
+            className={clsx(
+              'relative ml-1.5 w-full pb-12 pl-7 before:absolute before:-left-1 before:top-2.5 before:z-10 before:h-[9px] before:w-[9px] before:rounded-full before:bg-primary-1 after:absolute after:bottom-0 after:left-0 after:top-0 after:h-auto after:w-px after:bg-gray-7 group-first:after:top-2.5 group-last:after:bottom-6 dark:before:bg-secondary-2 dark:after:bg-gray-2 md:pb-7 sm:ml-0 sm:max-w-full sm:pb-0 sm:pl-0 sm:before:hidden sm:after:hidden'
+            )}
+          >
             <Link
-              className="flex items-center font-medium text-secondary-8 hover:text-secondary-7 dark:text-primary-1"
-              theme="black"
+              className="transition-colors duration-200 hover:text-secondary-8 dark:hover:text-green-45"
               to={releaseNotesPath}
             >
-              Release note page
-              <ArrowIcon className="ml-2" aria-hidden />
+              <h2 className="whitespace-nowrap text-xl font-semibold leading-normal">
+                <time dateTime={datetime}>{label}</time>
+              </h2>
             </Link>
+
+            <Content
+              className="mt-5 prose-h3:mt-[18px] prose-h3:text-lg"
+              content={content}
+              withoutAnchorHeading
+              isReleaseNote
+            />
           </div>
         </article>
       );
@@ -45,6 +42,7 @@ const ReleaseNoteList = ({ items }) => (
 );
 
 ReleaseNoteList.propTypes = {
+  className: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string.isRequired,

@@ -4,15 +4,23 @@ import Hero from 'components/pages/release-notes/hero';
 import { RELEASE_NOTES_CATEGORIES } from 'components/pages/release-notes/release-notes-filter';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
-import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import { RELEASE_NOTES_BASE_PATH, RELEASE_NOTES_SLUG_REGEX } from 'constants/docs';
+import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import { getAllReleaseNotes, getPostBySlug, RELEASE_NOTES_DIR_PATH } from 'utils/api-docs';
 import getExcerpt from 'utils/get-excerpt';
 import getMetadata from 'utils/get-metadata';
 import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 import serializeMdx from 'utils/serialize-mdx';
+
+// @NOTE: the maximum length of the title to look fine on the og image
+const MAX_TITLE_LENGTH = 52;
+
+const vercelUrl =
+  process.env.VERCEL_ENV === 'preview'
+    ? `https://${process.env.VERCEL_BRANCH_URL}`
+    : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 export async function generateStaticParams() {
   const releaseNotes = await getAllReleaseNotes();
@@ -31,24 +39,31 @@ export async function generateMetadata({ params }) {
 
   let label = '';
   let description = '';
+  let socialPreviewTitle = '';
   const currentSlug = slug.join('/');
   const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
-
   const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
-  label = `${capitalisedCategory} release`;
-  description = `The latest ${capitalisedCategory} updates from Neon`;
+  label = 'Release notes';
+  description = `The latest product updates from Neon`;
 
   if (isReleaseNotePage) {
     const { label: date } = getReleaseNotesDateFromSlug(currentSlug);
     const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
     label = `${capitalisedCategory} release ${date}`;
+    socialPreviewTitle = `Release notes - ${date}`;
     description = getExcerpt(content, 160);
   }
+
+  const encodedLabel = Buffer.from(socialPreviewTitle ?? label).toString('base64');
 
   return getMetadata({
     title: `${label} - Neon`,
     description,
     pathname: `${RELEASE_NOTES_BASE_PATH}${currentSlug}`,
+    imagePath:
+      label.length < MAX_TITLE_LENGTH
+        ? `${vercelUrl}/docs/og?title=${encodedLabel}`
+        : DEFAULT_IMAGE_PATH,
     type: 'article',
   });
 }
@@ -56,6 +71,7 @@ export async function generateMetadata({ params }) {
 const ReleaseNotePage = async ({ currentSlug }) => {
   const { datetime, label } = getReleaseNotesDateFromSlug(currentSlug);
   const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
+
   const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
   const mdxSource = await serializeMdx(content);
 
@@ -80,31 +96,24 @@ const ReleaseNotePage = async ({ currentSlug }) => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
-      <div className="col-span-7 -mx-10 flex flex-col 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
+      <div className="col-span-6 -mx-10 flex flex-col 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
         <Hero
           className="flex justify-center dark:bg-gray-new-8 dark:text-white lg:pt-16 md:py-10 sm:py-7"
           date={label}
           withContainer
-          isReleaseNotePost
         />
-        <div className="grow pb-28 dark:bg-gray-new-8 lg:pb-20 md:pb-16">
-          <Container size="xs" className="relative flex pb-10">
-            <article className="relative flex max-w-full flex-col items-start">
-              <time
-                className="mt-3 whitespace-nowrap text-gray-new-20 dark:text-gray-new-70"
-                dateTime={datetime}
-              >
-                {label}
-              </time>
-              <Heading
-                className="!text-[36px] !leading-normal md:!text-3xl"
-                tag="h1"
-                size="sm"
-                theme="black"
-              >
-                {capitalisedCategory} release
-              </Heading>
-              <Content className="mt-8 max-w-full prose-h3:text-xl" content={mdxSource} />
+        <div className="grow pb-28 dark:bg-gray-new-8 lg:pb-20 md:pb-16 flex">
+          <Container size="xs" className="relative flex pb-10 w-full">
+            <article className="relative flex max-w-full flex-col items-start w-full">
+              <h2>
+                <time
+                  className="mt-3 whitespace-nowrap text-gray-new-20 dark:text-gray-new-70"
+                  dateTime={datetime}
+                >
+                  {label}
+                </time>
+              </h2>
+              <Content className="mt-8 max-w-full prose-h3:text-xl w-full" content={mdxSource} />
               <Link
                 className="mt-10 font-semibold lg:mt-8"
                 to={RELEASE_NOTES_BASE_PATH}

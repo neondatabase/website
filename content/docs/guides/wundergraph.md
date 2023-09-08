@@ -9,7 +9,7 @@ _This guide was contributed by the team at WunderGraph_
 
 WunderGraph is an open-source Backend for Frontend (BFF) framework designed to optimize developer workflows through API composition. Developers can use this framework to compose multiple APIs into a single unified interface and generate typesafe API clients that include authentication and file uploads. This guide shows how you can pair WunderGraph with your Neon database to accelerate application development.
 
-With WunderGraph, you can easily introspect your data sources and combine them within your virtual graph. WunderGraph treats APIs as dependencies. You can easily turn your Neon database into a GraphQL API or expose it via JSON-RPC or REST. With an easy-to-deploy PostgreSQL database like Neon, you can now have a 100% serverless stack and build your own stateful serverless apps on the edge.
+With WunderGraph, you can easily introspect your data sources and combine them within your virtual graph. WunderGraph treats APIs as dependencies. You can easily turn your Neon database into a GraphQL API or expose it via JSON-RPC or REST. With an easy-to-deploy Postgres database like Neon, you can now have a 100% serverless stack and build your own stateful serverless apps on the edge.
 
 This guide demonstrates setting up a full-stack app with Neon and WunderGraph, securely exposing Neon to your Next.js frontend in under 15 minutes. While WunderGraph and Neon are compatible with a variety of frontend clients, this demo focuses on using Next.js.
 
@@ -31,7 +31,7 @@ Sign into [WunderGraph Cloud](https://cloud.wundergraph.com/) and follow these s
 3. Select the region closest to you.
 4. Click **Deploy**.
 
-The deployment will take one or two minutes.
+The deployment will take a few moments.
 
 ### Add sample data to Neon
 
@@ -96,7 +96,7 @@ cd wundergraph
 code .
 ```
 
-3. Once the project is cloned, run the following commands in your project directory:
+3. After the project is cloned, run the following commands in your project directory:
 
    ```bash
    npm install && npm run dev
@@ -294,11 +294,10 @@ export default withWunderGraph(Home);
 ## Run the application
 
 1. Run `npm run dev`.
-2. Navigate to [http://localhost:3000](http://localhost:3000) when the application is finished building. If your application runs successfully, you should see the following:
-   ![WunderGraph operations result](/docs/guides/wundergraph_operation_result.jpg)
+2. Navigate to [http://localhost:3000](http://localhost:3000) when the application is finished building. If your application runs successfully, you should see the result of your User's operation.
 3. To take the setup one step further, commit the changes to your GitHub repository and merge them into your `main` branch.
-4. Once you merge the changes, navigate to `WunderGraph Cloud` and view out the **Deployments** tab. You should see that a deployment was triggered. Give the deployment a few seconds to finish.
-5. Once the deployment is ready, navigate to the **Operations** tab. You should see the new endpoint that you created and added to your application. Click it to see your data in real time.
+4. After you merge the changes, navigate to `WunderGraph Cloud` and view out the **Deployments** tab. You should see that a deployment was triggered. Give the deployment a few seconds to finish.
+5. When deployment is ready, navigate to the **Operations** tab. You should see the new endpoint that you created and added to your application. Click it to see your data in real time.
 
 ## Key takeaways
 

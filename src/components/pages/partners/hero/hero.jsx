@@ -15,7 +15,7 @@ const Hero = () => (
       priority
       aria-hidden
     />
-    <Container className="relative z-10 flex flex-col items-center text-center" size="mdDoc">
+    <Container className="relative z-10 flex flex-col items-center text-center" size="medium">
       <div className="absolute left-1/2 top-0 -z-10 h-[270px] w-3/4 -translate-x-1/2 rounded-[1000px] bg-black-new blur-[30px] lg:w-full" />
       <h1 className="mx-auto max-w-[820px] text-6xl font-medium leading-none tracking-[-0.02em] xl:max-w-[720px] xl:text-[56px] lg:max-w-[650px] lg:text-5xl md:text-4xl sm:text-[36px]">
         Unlock new revenue streams by partnering with Neon
@@ -26,8 +26,10 @@ const Hero = () => (
       <AnimatedButton
         className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-[-0.02em] lg:mt-7 md:mt-6"
         theme="primary"
-        spread={5}
         to="#partners-apply"
+        linesOffsetTop={22}
+        linesOffsetSide={22}
+        linesOffsetBottom={40}
         isAnimated
       >
         Become a partner

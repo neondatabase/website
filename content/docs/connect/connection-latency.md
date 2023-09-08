@@ -7,6 +7,8 @@ isDraft: false
 
 Neon's _Auto-suspend_ feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute instance transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state takes anywhere from 500 ms to a few seconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
 
+Cold-start times are fastest in the `US East (Ohio) — aws-us-east-2` region, which hosts the Neon Control Plane. The Neon Control plane will be deployed regionally in future Neon releases, bringing the same millesecond cold-start times to all supported regions.
+
 <Admonition type="note">
 Services you integrate with Neon may also have startup times, which can add to connection latencies. This topic does not address latencies of other vendors, but if your application connects to Neon via another service, remember to consider startup times for those services as well.
 </Admonition>
@@ -25,7 +27,7 @@ User actions that activate an idle compute include [connecting from a client suc
 The Neon API includes [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) and [Suspend endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) APIs for the specific purpose of activating and suspending a compute.
 </Admonition>
 
-You can try any of these methods and watch the status of your compute as it changes from an **Idle** to an **Active**. By default, a compute is suspended after 300 seconds (5 minutes) of inactivity. [Neon Pro plan](/docs/introduction/pro-plan) users can configure this delay period, which is described later in this topic.
+You can try any of these methods and watch the status of your compute as it changes from an **Idle** to an **Active** state. By default, a compute is suspended after 300 seconds (5 minutes) of inactivity. [Neon Pro plan](/docs/introduction/pro-plan) users can configure this delay period, which is described later in this topic.
 
 ## Strategies for managing latency and timeouts
 
@@ -97,14 +99,16 @@ Connection conn = DriverManager.getConnection(dbUrl, properties);
 ```
 
 ```prisma
-DATABASE_URL=postgres://<user>:<password>@<neon_hostname>/neondb?connect_timeout=20`
+DATABASE_URL=postgres://<user>:<password>@<neon_hostname>/neondb?connect_timeout=15&pool_timeout=15`
 ```
 
 </CodeTabs>
 
-For more information about timeouts when connecting from Prisma, see [Connection timeouts](/docs/guides/prisma#connection-timeouts) in our Prisma documentation.
+<Admonition type="note">
+If you are using Prisma Client, your timeout issue could be related to Prisma's connection pool configuration. The Prisma Client query engine instantiates its own connection pool when it opens a first connection to the database. If you encounter a `Timed out fetching a new connection from the connection pool` error, refer to [Prisma connection pool timeouts](/docs/guides/prisma#connection-pool-timeouts) for information about configuring your Prisma connection pool size and pool timeout settings.
+</Admonition>
 
-Remember that increasing the connection timeout might impact the responsiveness of your application, and users could end up waiting longer for their requests to be processed. Always test and monitor your application's performance when making changes like these.
+Remember that increasing connection timeout settings might impact the responsiveness of your application, and users could end up waiting longer for their requests to be processed. Always test and monitor your application's performance when making changes like these.
 
 ### Build connection timeout handling into your application
 

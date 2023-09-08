@@ -6,12 +6,12 @@ redirectFrom:
   - /docs/manage/users
 ---
 
-In Neon, roles are PostgreSQL roles. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in your Neon project's primary branch.
+In Neon, roles are Postgres roles. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in your Neon project's primary branch.
 
-Your default role and roles created in the Neon console, API, and CLI are granted membership in the [neon_superuser](#the-neon_superuser-role) role. Roles created with SQL are only granted basic privileges, as you would see in a stand-alone PostgreSQL installation.
+Your default role and roles created in the Neon console, API, and CLI are granted membership in the [neon_superuser](#the-neon_superuser-role) role. Roles created with SQL are only granted basic privileges, as you would see in a stand-alone Postgres installation.
 
 <Admonition type="note">
-Neon is a managed PostgreSQL service, so you cannot access the host operating system, and you can't connect using the PostgreSQL `superuser` account like you can in a stand-alone PostgreSQL installation.
+Neon is a managed Postgres service, so you cannot access the host operating system, and you can't connect using the Postgres `superuser` account like you can in a stand-alone Postgres installation.
 </Admonition>
 
 You can create roles in a project's primary branch or child branches. There is no limit to the number of roles you can create.
@@ -32,18 +32,19 @@ Roles created in the Neon console, CLI, or API, including the default role creat
 <CodeBlock shouldWrap>
 
 ```sql
-CREATE ROLE neon_superuser CREATEDB CREATEROLE NOLOGIN IN ROLE pg_read_all_data, pg_write_all_data;
+CREATE ROLE neon_superuser CREATEDB CREATEROLE BYPASSRLS NOLOGIN IN ROLE pg_read_all_data, pg_write_all_data;
 ```
 
 </CodeBlock>
 
 - `CREATEDB`: Provides the ability to create databases.
 - `CREATEROLE`: Provides the ability to create new roles (which also means it can alter and drop roles).
-- `NOLOGIN`: The role cannot be used to log in to the PostgreSQL server. Neon is a managed PostgreSQL service, so you cannot access the host operating system.
-- `pg_read_all_data role`: A predefined role in PostgreSQL that provides the ability to select from all tables and views.
-- `pg_write_all_data`: A predefined role in PostgreSQL that provides the ability to insert, update, and delete in all tables and use all sequences in a database.
+- `BYPASSRLS`: Provides the ability to bypass row-level security (RLS) policies. This attribute is only included in `neon_superuser` roles in projects created after the [August 15, 2023 release](/docs/release-notes/2023-08-15-storage-and-compute).
+- `NOLOGIN`: The role cannot be used to log in to the Postgres server. Neon is a managed Postgres service, so you cannot access the host operating system.
+- `pg_read_all_data role`: A predefined role in Postgres that provides the ability to select from all tables and views.
+- `pg_write_all_data`: A predefined role in Postgres that provides the ability to insert, update, and delete in all tables and use all sequences in a database.
 
-In addition, the `neon_superuser` role is able to add [PostgreSQL extensions](/docs/extensions/pg-extensions) that are available for use with Neon.
+In addition, the `neon_superuser` role is able to add [Postgres extensions](/docs/extensions/pg-extensions) that are available for use with Neon.
 
 You can think of roles with `neon_superuser` privileges as administrators. For all other users, you can create roles and manage database object access privileges with SQL. See [Manage roles with SQL](#manage-roles-with-sql).
 
@@ -322,7 +323,7 @@ Response:
 
 ## Manage roles with SQL
 
-Roles created with SQL have the same privileges as newly created roles in a stand-alone PostgreSQL installation. These roles are not granted membership in the [neon_superuser](#the-neon_superuser-role) role like roles created with the Neon Console, CLI, or API. You must grant these roles the privileges you want them to have.
+Roles created with SQL have the same privileges as newly created roles in a stand-alone Postgres installation. These roles are not granted membership in the [neon_superuser](#the-neon_superuser-role) role like roles created with the Neon Console, CLI, or API. You must grant these roles the privileges you want them to have.
 
 To create a role with SQL, issue a `CREATE ROLE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
@@ -330,7 +331,7 @@ To create a role with SQL, issue a `CREATE ROLE` statement from a client such as
 CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 ```
 
-- `WITH LOGIN` means that the role will have a login privilege, required for the role to log in to your Neon PostgreSQL instance. If the role is used only for privilege management, the `WITH LOGIN` privilege is unnecessary.
+- `WITH LOGIN` means that the role will have a login privilege, required for the role to log in to your Neon Postgres instance. If the role is used only for privilege management, the `WITH LOGIN` privilege is unnecessary.
 - A password is required and must have a minimum entropy of 60 bits.
 
     <Admonition type="info">  

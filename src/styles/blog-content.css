@@ -119,7 +119,7 @@
       @apply mx-auto rounded-md;
     }
 
-    .wp-block-embed {
+    .wp-block-embed:not(.wp-block-embed-twitter) {
       .wp-block-embed__wrapper {
         @apply relative h-0 overflow-hidden pb-[56.25%];
 
@@ -127,6 +127,10 @@
           @apply absolute left-0 top-0 h-full w-full;
         }
       }
+    }
+
+    .twitter-tweet.twitter-tweet-rendered {
+      @apply mx-auto;
     }
 
     .wp-block-quote {

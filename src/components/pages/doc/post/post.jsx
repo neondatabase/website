@@ -8,21 +8,24 @@ import TableOfContents from 'components/pages/doc/table-of-contents';
 import Hero from 'components/pages/release-notes/hero';
 // import Pagination from 'components/pages/release-notes/pagination';
 import ReleaseNoteList from 'components/pages/release-notes/release-note-list';
-import ReleaseNotesFilter from 'components/pages/release-notes/release-notes-filter';
+// import ReleaseNotesFilter from 'components/pages/release-notes/release-notes-filter';
 import Content from 'components/shared/content';
 
 // TODO: Add pagination for release notes
-const ReleaseNotes = ({ currentSlug, items }) => (
+const ReleaseNotes = ({
+  // currentSlug,
+  items,
+}) => (
   <>
     <Hero />
-    <ReleaseNotesFilter currentSlug={currentSlug} />
-    <ReleaseNoteList items={items} />
+    {/* <ReleaseNotesFilter currentSlug={currentSlug} /> */}
+    <ReleaseNoteList className="mt-4" items={items} />
     {/* {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />} */}
   </>
 );
 
 ReleaseNotes.propTypes = {
-  currentSlug: PropTypes.string,
+  // currentSlug: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string.isRequired,
@@ -45,8 +48,7 @@ const Post = ({
   <>
     <div
       className={clsx(
-        '-mx-10 flex flex-col 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
-        isReleaseNotes ? 'col-span-7' : 'col-span-6 2xl:col-span-7 2xl:mx-5 xl:mr-0'
+        'col-span-6 -mx-10 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8'
       )}
     >
       {breadcrumbs.length > 0 && <Breadcrumbs breadcrumbs={breadcrumbs} />}

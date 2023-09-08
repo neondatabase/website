@@ -21,6 +21,11 @@ import serializeMdx from 'utils/serialize-mdx';
 // @NOTE: the maximum length of the title to look fine on the og image
 const MAX_TITLE_LENGTH = 52;
 
+const vercelUrl =
+  process.env.VERCEL_ENV === 'preview'
+    ? `https://${process.env.VERCEL_BRANCH_URL}`
+    : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+
 export async function generateStaticParams() {
   const posts = await getAllPosts();
 
@@ -47,11 +52,6 @@ export async function generateMetadata({ params }) {
     data: { title },
     excerpt,
   } = post;
-
-  const vercelUrl =
-    process.env.VERCEL_ENV === 'preview'
-      ? `https://${process.env.VERCEL_BRANCH_URL}`
-      : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
   const encodedTitle = Buffer.from(title).toString('base64');
 

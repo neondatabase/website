@@ -3,7 +3,7 @@
 import useScrollPosition from '@react-hook/window-scroll';
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -19,32 +19,38 @@ const items = [
     image: '/images/pages/pricing/metrics-1-mobile.jpg',
     name: 'Compute time',
     priceFrom: 'From $0.0255 /hour',
-    details: 'Compute time is the amount of computing capacity used per hour.',
+    details:
+      'Compute time is the amount of compute resources used per hour. See entry-level compute size prices below.',
     prices: [
       {
         name: 'US East (N. Virginia)',
         price: '0.0255',
-        unit: 'Compute-hour',
+        unit: 'hour',
       },
       {
         name: 'US East (Ohio)',
         price: '0.0255',
-        unit: 'Compute-hour',
+        unit: 'hour',
       },
       {
         name: 'US West (Oregon)',
         price: '0.0255',
-        unit: 'Compute-hour',
+        unit: 'hour',
       },
       {
         name: 'Europe (Frankfurt)',
         price: '0.0295',
-        unit: 'Compute-hour',
+        unit: 'hour',
       },
       {
         name: 'Asia Pacific (Singapore)',
         price: '0.03025',
-        unit: 'Compute-hour',
+        unit: 'hour',
+      },
+      {
+        name: 'Israel (Tel Aviv)',
+        price: '0.03025',
+        unit: 'hour',
       },
     ],
   },
@@ -79,13 +85,18 @@ const items = [
         price: '0.09',
         unit: 'GiB',
       },
+      {
+        name: 'Israel (Tel Aviv)',
+        price: '0.09',
+        unit: 'GiB',
+      },
     ],
   },
   {
     image: '/images/pages/pricing/metrics-2-mobile.jpg',
     name: 'Project storage',
     priceFrom: 'From $0.000164 /GiB-hour',
-    details: 'Project storage is the volume of data and history in your Neon projects.',
+    details: 'Project storage is the volume of data and history in your Neon project.',
     prices: [
       {
         name: 'US East (N. Virginia)',
@@ -110,6 +121,11 @@ const items = [
       {
         name: 'Asia Pacific (Singapore)',
         price: '0.00018',
+        unit: 'GiB-hour',
+      },
+      {
+        name: 'Israel (Tel Aviv)',
+        price: '0.00022',
         unit: 'GiB-hour',
       },
     ],
@@ -142,6 +158,11 @@ const items = [
       },
       {
         name: 'Asia Pacific (Singapore)',
+        price: '0.096',
+        unit: 'GiB',
+      },
+      {
+        name: 'Israel (Tel Aviv)',
         price: '0.096',
         unit: 'GiB',
       },
@@ -214,9 +235,9 @@ const Metrics = () => {
   }, [pageHeight, scrollY]);
 
   return (
-    <section className="safe-paddings mt-60 xl:mt-40 lg:mt-28 md:mt-20" ref={sectionRef}>
+    <section className="safe-paddings mt-[200px] lg:mt-[152px] md:mt-28" ref={sectionRef}>
       <div className="relative flex flex-col">
-        <Container className="flex flex-col items-center" size="mdDoc">
+        <Container className="flex flex-col items-center" size="medium">
           <Heading className="text-center" badge="Metrics" tag="h2" size="2sm">
             Neon charges on <span className="text-pricing-primary-1">4 metrics</span>
           </Heading>
@@ -246,54 +267,57 @@ const Metrics = () => {
           <div className="col-span-5 col-start-8 text-left xl:col-span-6 md:col-span-full">
             <div className="lg:space-y-0" ref={contentRef}>
               {items.map(({ image, name, priceFrom, details, prices }, index) => (
-                <motion.div
-                  initial={{ opacity: windowWidth < 768 ? 1 : 0.3 }}
-                  className="flex h-[78vh] min-h-[760px] flex-col justify-center px-6 xl:pl-3 xl:pr-0 lg:px-0 md:h-auto md:min-h-0 md:px-0"
-                  key={index}
-                  animate={{
-                    opacity: currentSectionIndex === index || windowWidth < 768 ? 1 : 0.3,
-                  }}
-                >
-                  <Image
-                    className="md:my-13 my-14 hidden max-w-full md:mx-auto md:block md:max-w-[80%] sm:max-w-full"
-                    width={590}
-                    height={830}
-                    src={image}
-                    alt={`${name} illustration`}
-                  />
-                  <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white xl:text-[28px]">
-                    {name}
-                    <span
-                      className={clsx(
-                        'block font-light',
-                        index === 2 || index === 3 ? 'text-secondary-2' : 'text-pricing-primary-1'
-                      )}
-                    >
-                      {priceFrom}
-                    </span>
-                  </h2>
-                  <p className="mt-2 text-lg leading-tight tracking-tight xl:text-base">
-                    {details}
-                  </p>
-                  <div className="mt-8 max-w-[464px] xl:mt-5">
-                    <div className="grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-2.5 text-[12px] uppercase leading-none text-gray-new-40 xl:gap-x-[20%] lg:gap-x-1">
-                      <span>Region</span>
-                      <span>Price</span>
-                    </div>
-                    {prices.map(({ name, price, unit }, index) => (
-                      <div
-                        className="text-gray-94 grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-[15px] text-[15px] leading-none xl:gap-x-[20%] xl:py-3.5 lg:gap-x-1"
-                        key={index}
+                <LazyMotion key={index} features={domAnimation}>
+                  <m.div
+                    initial={{ opacity: windowWidth < 768 ? 1 : 0.3 }}
+                    className="flex h-[78vh] min-h-[760px] flex-col justify-center px-6 xl:pl-3 xl:pr-0 lg:px-0 md:h-auto md:min-h-0 md:px-0"
+                    animate={{
+                      opacity: currentSectionIndex === index || windowWidth < 768 ? 1 : 0.3,
+                    }}
+                  >
+                    <Image
+                      className="md:my-13 my-14 hidden max-w-full md:mx-auto md:block md:max-w-[80%] sm:max-w-full"
+                      width={590}
+                      height={830}
+                      src={image}
+                      alt={`${name} illustration`}
+                    />
+                    <h2 className="text-4xl font-medium leading-tight tracking-tighter text-white xl:text-[28px]">
+                      {name}
+                      <span
+                        className={clsx(
+                          'block font-light',
+                          index === 2 || index === 3 ? 'text-secondary-2' : 'text-pricing-primary-1'
+                        )}
                       >
-                        <span>{name}</span>
-                        <span>
-                          ${price} /{' '}
-                          <span className="font-light tracking-tight text-gray-new-70">{unit}</span>
-                        </span>
+                        {priceFrom}
+                      </span>
+                    </h2>
+                    <p className="mt-2 text-lg leading-tight tracking-tight xl:text-base">
+                      {details}
+                    </p>
+                    <div className="mt-8 max-w-[464px] xl:mt-5">
+                      <div className="grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-2.5 text-[12px] uppercase leading-none text-gray-new-40 xl:gap-x-[20%] lg:gap-x-1">
+                        <span>Region</span>
+                        <span>Price</span>
                       </div>
-                    ))}
-                  </div>
-                </motion.div>
+                      {prices.map(({ name, price, unit }, index) => (
+                        <div
+                          className="text-gray-94 grid grid-cols-2 gap-x-20 border-b border-[rgba(255,255,255,0.06)] py-[15px] text-[15px] leading-none xl:gap-x-[20%] xl:py-3.5 lg:gap-x-1"
+                          key={index}
+                        >
+                          <span>{name}</span>
+                          <span>
+                            ${price} /{' '}
+                            <span className="font-light tracking-tight text-gray-new-70">
+                              {unit}
+                            </span>
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </m.div>
+                </LazyMotion>
               ))}
             </div>
           </div>

@@ -13,13 +13,12 @@ The Neon Free Tier is intended for personal projects, prototyping, or evaluating
 
 - One Neon project with up to 10 branches.
 - 3 GB of storage per branch.
-- Unlimited PostgreSQL databases
+- Unlimited Postgres databases
 - A shared compute with 1 GB of RAM for each branch.
-- **No limit on [Active time](/docs/reference/glossary#active-time) for the [primary branch](/docs/reference/glossary#primary-branch) compute. This ensures that access to data on the primary branch is never interrupted.**
-- 100 hours of _Active time_ per month (total) for non-primary branch computes. The _Active time_ on your primary branch compute is counted toward the 100 hour limit. If you reach the 100 hour limit for the current month, non-primary branch computes are suspended until the limit resets at the beginning of the next month. Your primary branch compute is unaffected. You can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**.
+- 100 hours of _Active time_ per month, affecting non-primary branch compute usage only. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. **Your primary branch compute always remains available regardless of the limit, ensuring that access to data on your primary branch is never interrupted.** You can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**.
 - A point-in-time restore window of 7 days of _reasonable usage_.
 
-For higher limits and access to advanced features like _Autoscaling_, _Unlimited storage_, and _Project sharing_, upgrade to our **Pro** plan. For more information, see [Neon Pro Plan](/docs/introduction/pro-plan), or select **Upgrade to Pro** in the [Neon Console](https://console.neon.tech/).
+For higher limits and access to advanced features like _Autoscaling_, _Unlimited storage_,  _Project sharing_, and _Read replicas_, upgrade to our **Pro** plan. For more information, see [Neon Pro Plan](/docs/introduction/pro-plan), or select **Upgrade to Pro** in the [Neon Console](https://console.neon.tech/).
 
 <Admonition type="note">
 Neon reserves the right to adjust Free Tier limits, and to discontinue or limit compute usage in exceptional cases where misuse is identified, in order to protect the integrity of our platform and ensure a positive experience for all users.

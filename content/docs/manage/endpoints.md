@@ -38,14 +38,14 @@ Compute endpoint details shown on the branch page include:
 
 ## Create a compute endpoint
 
-You can only create a compute endpoint for a branch that does not have one.
+You can only create a read-write compute endpoint for a branch that does not have one, but a branch can have multiple read-only compute endpoints (referred to as "read replicas"). [Read replicas](/docs/guides/read-replica-guide) are a [Neon Pro plan](/docs/introduction/pro-plan) feature.
 
 To create an endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch that does not have an endpoint
 1. Click **Add compute**.
-1. On the **Create compute endpoint** dialog, specify your settings and click **Create**. Selecting Read-only creates a [Read replica](/docs/introduction/read-replicas).
+1. On the **Create compute endpoint** dialog, specify your settings and click **Create**. Selecting **Read-only** creates a [Read replica](/docs/introduction/read-replicas).
 
 ## Edit a compute endpoint
 
@@ -55,19 +55,35 @@ To edit a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Click the compute endpoint kebab menu, and select **Edit**.
+1. Click the kebab menu in the **Computes** table, and select **Edit**.
 1. Specify your changes and click **Save**.
 
 ### Compute size and Autoscaling configuration
 
 Neon [Pro plan](/docs/introduction/pro-plan) users can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
 
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GBs is always 4 times the number of CUs, as shown in the table below. Currently, a Neon compute can have anywhere from 1/4 (.25) to 7 CUs.
+
+| Compute Units | vCPU | RAM    |
+|:--------------|:-----|:-------|
+| .25           | .25  | 1 GB   |
+| .5            | .5   | 2 GB   |
+| 1             | 1    | 4 GB   |
+| 2             | 2    | 8 GB   |
+| 3             | 3    | 12 GB  |
+| 4             | 4    | 16 GB  |
+| 5             | 5    | 20 GB  |
+| 6             | 6    | 24 GB  |
+| 7             | 7    | 28 GB  |
 
 Neon supports two compute size configuration options:
 
 - **Fixed Size:** This option allows you to select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. _Autoscaling_ currently supports a range of 1/4 CU to 7 CU. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. _Autoscaling_ currently supports a range of 1/4 (.25) to 7 CUs. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+
+<Admonition type="info">
+The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
+</Admonition>
 
 ### Auto-suspend configuration
 
@@ -86,7 +102,7 @@ To delete a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Click the compute endpoint kebab menu, and select **Delete**.
+1. Click the kebab menu in the **Computes** table, and select **Delete**.
 1. On the confirmation dialog, click **Delete**.
 
 ## Manage compute endpoints with the Neon API

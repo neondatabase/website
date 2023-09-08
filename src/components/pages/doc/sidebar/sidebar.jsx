@@ -1,13 +1,15 @@
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
-import Search from 'components/shared/search';
 import MENUS from 'constants/menus';
 
 import { ChatWidgetTrigger } from '../chat-widget';
 
 import Item from './item';
+
+const Search = dynamic(() => import('components/shared/search/search'));
 
 const Sidebar = ({ className = null, sidebar }) => (
   <aside
@@ -16,7 +18,7 @@ const Sidebar = ({ className = null, sidebar }) => (
       className
     )}
   >
-    <div className="sticky top-10 z-30 h-[calc(100vh-108px)] before:pointer-events-none before:absolute before:-top-12 before:left-0 before:z-20 before:h-28 before:w-full before:bg-gradient-to-t before:from-transparent before:to-gray-new-98 after:pointer-events-none after:absolute after:-bottom-10 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-gray-new-10 dark:after:to-gray-new-10">
+    <div className="sticky top-10 z-30 h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-10 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-gray-new-10 dark:after:to-gray-new-10">
       <Search className="z-30" indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME} />
       <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-8">
         <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />

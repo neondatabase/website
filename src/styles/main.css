@@ -91,7 +91,7 @@
 @layer utilities {
   .with-link-primary {
     a {
-      @apply border-b border-transparent text-primary-1 transition-[border-color] duration-200 hover:border-primary-1;
+      @apply text-green-45 transition-colors duration-200 hover:text-[#00FFAA];
     }
   }
 
@@ -109,6 +109,12 @@
 
   .flat-breaks br::after {
     content: ' ';
+  }
+
+  .text-bg-clipped {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 

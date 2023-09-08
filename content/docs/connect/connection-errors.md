@@ -21,21 +21,21 @@ Connection problems are sometimes related to a system issue. To check for system
 
 ## The endpoint ID is not specified
 
-With older clients and some native PostgreSQL clients, you may receive the following error when attempting to connect to Neon:
+With older clients and some native Postgres clients, you may receive the following error when attempting to connect to Neon:
 
 <CodeBlock shouldWrap>
 
 ```txt
-ERROR: The endpoint ID is not specified. Either upgrade the PostgreSQL client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
+ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
 ```
 
 </CodeBlock>
 
 This error occurs if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
 
-Neon uses compute endpoint IDs (the first part of a Neon domain name) to route incoming connections. However, the PostgreSQL wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
+Neon uses compute endpoint IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
 
-SNI support was added to the `libpq` (the official PostgreSQL client library) in version 14, which was released in September 2021. Clients that use your system's `libpq` library should work if you `libpq` version is >= 14. On Linux and macOS, you can check your `libpq` version by running `pg_config --version`. On Windows, check the `libpq.dll` version in your PostgreSQL installation's `bin` directory. Right click on the file, select **Properties** > **Details**.  
+SNI support was added to the `libpq` (the official Postgres client library) in version 14, which was released in September 2021. Clients that use your system's `libpq` library should work if you `libpq` version is >= 14. On Linux and macOS, you can check your `libpq` version by running `pg_config --version`. On Windows, check the `libpq.dll` version in your Postgres installation's `bin` directory. Right click on the file, select **Properties** > **Details**.  
 
 If a library or application upgrade does not help, there are several workarounds, described below, for providing the required domain name information when connecting to Neon.
 
@@ -67,17 +67,27 @@ dbname=neondb options=endpoint=<endpoint_id>
 
 ### C. Set verify-full for golang-based clients
 
-If your application or service uses golang PostgreSQL clients like `pgx` and `lib/pg`, you can set `sslmode=verify-full`, which causes SNI information to be sent when you connect. Most likely, this behavior is not intended but happens inadvertently due to the golang's TLS library API design.
+If your application or service uses golang Postgres clients like `pgx` and `lib/pg`, you can set `sslmode=verify-full`, which causes SNI information to be sent when you connect. Most likely, this behavior is not intended but happens inadvertently due to the golang's TLS library API design.
 
 ### D. Specify the endpoint ID in the password field
 
-As a last resort, you can try specifying the endpoint ID in the password field. So, instead of specifying only your password, you provide a string consisting of the `endpoint` option and the password, as shown. Replace `<endpoint_id>` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-mute-recipe-123456`.
+Another supported workaround involves specifying the endpoint ID in the password field. So, instead of specifying only your password, you provide a string consisting of the `endpoint` option and your password, separated by a semicolon (`;`) or dollar sign character (`$`), as shown in the examples below. Replace `<endpoint_id>` with your compute's endpoint ID, which you can find in your Neon connection string. An `endpoint_id` looks similar to this: `ep-mute-recipe-123456`.
 
 ```txt
 endpoint=<endpoint_id>;<password>
 ```
 
-This approach is the least secure of the recommended workarounds. It causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites. We intend deprecate this option when most libraries and applications provide SNI support.
+or
+
+```txt
+endpoint=<endpoint_id>$<password>
+```
+
+<Admonition type="note">
+Using a dollar sign (`$`) character as a separator may be required if a semicolon (`;`) is not a permitted character in a password field. For example, the [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/) does not permit a semicolon character in the **Password** field when defining connection details for database endpoints.
+</Admonition>
+
+This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites. We intend deprecate this option when most libraries and applications provide SNI support.
 
 ### Libraries
 
@@ -128,14 +138,14 @@ For clients or applications that require specifying connection parameters such a
 - **User**: `daniel`
 - **Password**: `f74wh99w398H`
 - **Hostname**: `ep-white-morning-123456.us-east-2.aws.neon.tech`
-- **Port number**: `5432` (Neon uses default PostgreSQL port, `5432`, and is therefore not included in the connection string)
+- **Port number**: `5432` (Neon uses default Postgres port, `5432`, and is therefore not included in the connection string)
 - **Database name**: `neondb` (`neondb` is the default database created with each Neon project. Your database name may differ.)
 
 If you find that your connection string is defined correctly, see the instructions regarding SNI support outlined in the preceding section: [The endpoint ID is not specified](#the-endpoint-id-is-not-specified).
 
 ## Couldn't connect to compute node
 
-This error arises when the Neon proxy, which accepts and handles connections from clients that use the PostgreSQL protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [Auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale to zero). Currently, the transition from an idle state to an active one takes a few seconds.
+This error arises when the Neon proxy, which accepts and handles connections from clients that use the Postgres protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [Auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale to zero). Currently, the transition from an idle state to an active one takes a few seconds.
 
 Consider these recommended steps:
 
@@ -159,7 +169,7 @@ Please make sure your database server is running at `ep-white-thunder-826300.us-
 
 </CodeBlock>
 
-A compute node in Neon has two main states: **Active** and **Idle**. Active means that PostgreSQL is currently running. If there are no active queries for 5 minutes, the activity monitor gracefully places the compute node into an idle state to save energy and resources.
+A compute node in Neon has two main states: **Active** and **Idle**. Active means that Postgres is currently running. If there are no active queries for 5 minutes, the activity monitor gracefully places the compute node into an idle state to save energy and resources.
 
 When you connect to an idle compute, Neon automatically activates it. Activation typically happens within a few seconds. If the error above is reported, it most likely means that the Prisma query engine timed out before your Neon compute was activated. For dealing with this connection timeout scenario, refer to the [connection timeout](/docs/guides/prisma#connection-timeouts) instructions in our Prisma documentation. Our [connection latency and timeout](/docs/connect/connection-latency) documentation may also be useful in addressing this issue.
 

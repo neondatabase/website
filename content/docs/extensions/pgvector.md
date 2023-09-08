@@ -1,26 +1,10 @@
 ---
 title: The pgvector extension
-subtitle: Learn how to use the pgvector for vector similarity search and storing embeddings
+subtitle: Use the pgvector for vector similarity search in Postgres
 enableTableOfContents: true
 ---
 
-The `pgvector` extension enables vector similarity search and storing embeddings in PostgreSQL. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models. This topic covers the concepts of vector similarity and embeddings, explains how to enable the `pgvector` extension in Neon, and demonstrates how to create, store, and query vectors.
-
-## Vector similarity
-
-Vector similarity is a method used to measure how similar two items are by representing them as vectors, which are series of numbers. This approach can be applied to various types of data, such as words, images, or other elements. By using a mathematical model, each item is converted into a vector, and then these vectors are compared to determine their similarity. The closer the vectors are in terms of distance, the more alike the items.
-
-## Embeddings
-
-An embedding is a technique that transforms data, such as words, into vectors, enabling machine learning algorithms to efficiently process and analyze them. This transformation captures the relationships and similarities between data, allowing algorithms to identify patterns and make accurate predictions.
-
-A widely used example of embeddings is in natural language processing, where words are represented as vectors. For instance, consider the words "apple", "orange", and "car". By representing each word as a vector in a 2-dimensional space, you can visually observe their relationships:
-
-Apple: (1.2, 0.8)
-Orange: (1.1, 0.9)
-Car: (0.3, 1.5)
-
-In this space, the vectors for "apple" and "orange" are closer together than either is to "car", indicating that they are more similar to each other than to "car". This relationship is captured by vectors in a way that machine learning algorithms can easily understand and utilize for a variety of tasks.
+The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models. This topic describes how to enable the `pgvector` extension in Neon and how to create, store, and query vectors.
 
 ## Enable the pgvector extension
 
@@ -47,7 +31,7 @@ The command generates a table named `items` with an `embedding` column capable o
 
 ## Storing vectors and embeddings
 
-Once you have generated an embedding using a service like the OpenAI API, you can store the resulting vector in your database. Using a PostgreSQL client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings:
+After you have generated an embedding using a service like the OpenAI API, you can store the resulting vector in your database. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings:
 
 ```sql
 INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]');
@@ -73,10 +57,16 @@ For more information about querying vectors, refer to the [pgvector README](http
 
 Using an index on the vector column can improve query performance with a minor cost in recall.
 
-You can add an index for each distance function you want to use. For example, the following query adds an index to the `embedding` column for the L2 distance function:
+You can add an index for each distance function you want to use. For example, the following query adds an ivfflat index to the `embedding` column for the L2 distance function:
 
 ```sql
 CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
+```
+
+This query adds an HNSW index to the `embedding` column for the L2 distance function:
+
+```sql
+CREATE INDEX ON items USING hnsw (embedding vector_l2_ops);
 ```
 
 For additional indexing guidance and examples, see [Indexing](https://github.com/pgvector/pgvector/tree/8bf360ed84bfdeba9caa19e9f193fd9ad8dd9e73#indexing), in the _pgvector README_.
