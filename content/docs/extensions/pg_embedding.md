@@ -179,19 +179,25 @@ The first step in the migration process is to install the `pg_embedding` extensi
 CREATE EXTENSION embedding;
 ```
 
-After the `pg_embedding` extension is installed, you can use the same vector embedding table used with `pgvector`. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is to modify vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
+After the `pg_embedding` extension is installed, you can use the same vector embedding table used with `pgvector`, without modifying the table. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is to modify vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
 
 ```sql
 SELECT id, embedding FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;
 ```
 
-To make the query work with `pg_embedding`, you must cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array: `array[3,1,2]`:
+To make the query work with `pg_embedding`, cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array: `array[3,1,2]`, as shown:
 
 ```sql
 SELECT id, embedding::real[] FROM items ORDER BY embedding::real[] <-> array[3,1,2] LIMIT 1;
 ```
 
-Alternatively, to avoid typecasting, you can alter your table to change the embedding column type from `VECTOR` to `real[]`. This operation may be time and resource intensive, depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
+To create an HNSW index on your existing vector embedding table, you must also cast the `embedding` column to `real[]`, as shown:
+
+```sql
+CREATE INDEX ON items USING hnsw((embedding::real[])) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
+```
+
+Given that `pgvector` and `pg_embedding` vector types are compatible, there's no need to modify an existing vector embedding table to migrate to `pg_embedding`, but if you still want to change the embedding column type from `VECTOR` to `real[]`, instructions are provided below. The operation may be time and resource intensive, depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
 
 Given a table defined for `pgvector`, such as this one:
 
@@ -216,8 +222,6 @@ UPDATE items SET embedding_real = embedding::real[]; // Copy data
 ALTER TABLE items DROP COLUMN embedding; // Drop the old column
 ALTER TABLE items RENAME COLUMN embedding_real TO embedding; // Rename the new column
 ```
-
-If you choose to change the column type from `VECTOR` to `real[]` instead of typecasting, you still have to [create an HNSW index](#create-an-hnsw-index) (if you are indexing your data) and update your application queries to use the required [pg_embedding query syntax](#similarity-search) for the defined index.
 
 ## Upgrade to pg_embedding for on-disk indexes
 
