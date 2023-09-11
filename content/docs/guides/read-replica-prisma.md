@@ -104,7 +104,9 @@ The `@prisma/extension-read-replicas` extension allows you to connect to a Neon 
     ```
 
     <Admonition type="note">
-    You can also pass an array of connection strings if you would like to connect to multiple read replicas.
+    You can also pass an array of read replica connection strings if you would like to use multiple read replicas.
+
+    ```javascript
     // lib/prisma.ts
     const prisma = new PrismaClient()
     .$extends(
@@ -115,6 +117,8 @@ The `@prisma/extension-read-replicas` extension allows you to connect to a Neon 
         ],
     }),
     )
+    ```
+
     </Admonition>
 
     When your app runs, all read operations are sent to the read replica. If you specify multiple read replica URLs, a read replica is selected randomly.
