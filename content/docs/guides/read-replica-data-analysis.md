@@ -47,7 +47,7 @@ Creating a read replica involves adding a read-only compute endpoint to a branch
 
 Your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page. This is your read replica. The following section describes how to connect to your read replica.
 
-Alternatively, you can create read replicas using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](/docs/manage/branches#create-a-branch-with-the-api).
+Alternatively, you can create read replicas using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
 
 <CodeTabs labels={["CLI", "API"]}>
 
