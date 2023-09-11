@@ -18,8 +18,6 @@ Neon supports the following extensions for enabling Postgres as your vector data
 
 `pg_embedding` is an open-source extension that enables storing vector embeddings and graph-based vector similarity search in Postgres using the Hierarchical Navigable Small World (HNSW) algorithm. It supports HNSW indexes. To get started, see [The pg_embedding extension](/docs/extensions/pg_embedding).
 
-If you are currently using `pgvector` and want to try `pg_embedding`, refer to [Migrate from pgvector to pg_embedding](/docs/extensions/pg_embedding#migrate-from-pgvector-to-pgembedding).
-
 ### pgvector
 
 `pgvector` is an open-source extension that enables storing vector embeddings and vector similarity search in Postgres. It supports both ivfflat and HNSW indexes. To get started, see [The pgvector extension](/docs/extensions/pgvector).
@@ -29,7 +27,7 @@ If you are currently using `pgvector` and want to try `pg_embedding`, refer to [
 Check out the following AI application examples built with Neon.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/yc-idea-matcher" description="Build an AI-powered semantic search application with pg_embedding" icon="github">Semantic search app</a>
+<a href="https://github.com/neondatabase/yc-idea-matcher" description="Build an AI-powered semantic search application" icon="github">Semantic search app</a>
 <a href="https://github.com/neondatabase/ask-neon" description="Build an AI-powered chatbot with pgvector" icon="github">Chatbot app</a>
 <a href="https://vercel.com/templates/next.js/postgres-pgvector" description="Enable vector similarity search with Vercel Postgres" icon="github">Vercel Postgres pgvector Starter</a>
 <a href="https://github.com/neondatabase/postgres-ai-playground" description="Build an AI-enabled SQL playground for natural language queries" icon="github">Web-based AI SQL Playground</a>
