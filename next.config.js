@@ -131,7 +131,11 @@ const defaultConfig = {
       },
       {
         source: '/ping-thing',
-        destination: 'https://ping-thing.vercel.app/ping-thing',
+        destination: 'https://ping-thing.vercel.app/ping-thing/'
+      },
+      {
+        source: '/ping-thing/:path*',
+        destination: 'https://ping-thing.vercel.app/ping-thing/:path*',
       },
     ];
   },
