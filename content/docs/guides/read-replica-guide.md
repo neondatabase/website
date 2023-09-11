@@ -91,7 +91,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
     - role: `daniel`
     - password:`<password>`
     - hostname: `ep-raspy-cherry-95040071.us-east-2.aws.neon.tech`
-    - database name: `neondb`. This ihe default Neon database. Your database name may differ.
+    - database name: `neondb`. This is the default Neon database. Your database name may differ.
 
     When you use a read-only connection string, you are connecting to a read replica. No write operations are permitted on this connection.
 
