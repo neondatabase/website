@@ -32,8 +32,8 @@ const items = [
   },
   {
     title: 'Compatible vector types',
-    code: `    SELECT embedding::real[] 
-    AS converted_vectors
+    code: `    INSERT INTO new_items (id, embedding) 
+    SELECT id, embedding::real[]
     FROM items;
     `,
     text: 'Compatible vector types make application migration easy.',

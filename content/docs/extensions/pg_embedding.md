@@ -221,7 +221,7 @@ CREATE EXTENSION embedding;
 CREATE INDEX ON items USING hnsw(embedding) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
 ```
 
-<CodeBlock shouldWrap>
+</CodeBlock/>
 
 ## Upgrade to pg_embedding for on-disk indexes
 
