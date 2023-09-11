@@ -37,7 +37,7 @@ const items = [
     FROM items;
     `,
     text: 'Compatible vector types make application migration easy.',
-    linkUrl: '/docs/extensions/pg_embedding#migrate-from-pgvector-to-pgembedding',
+    linkUrl: '/docs/extensions/pg_embedding',
   },
 ];
 
