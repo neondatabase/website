@@ -174,10 +174,10 @@ The key idea behind HNSW is that by starting the search at the top layer and mov
 The following example demonstrates how to migrate from `pgvector` to `pg_embedding`. The procedure involves creating a new table with embedding columns defined as `real[]` instead of `VECTOR`, copying data from the old table to the new table, dropping the old table, removing the `pgvector` extension, adding the `pg_embedding` extension, renaming the new table, and creating any required indexes.
 
 <Admonition type="note">
-Currently, you cannot install both `pgvector` and `pg_embedding` in the same database. If you have the `pgvector` extension installed and try to install `pg_embedding`, the following error is returned: `ERROR: access method "hnsw" already exists (SQLSTATE 42710)`.
+Currently, you cannot install both `pgvector` and `pg_embedding` in the same database. If you have the `pgvector` extension installed, trying to install `pg_embedding` returns this error: `ERROR: access method "hnsw" already exists (SQLSTATE 42710)`.
 </Admonition>
 
-The migration example is based on the following table and index, which is defined for use with `pgvector`:
+The migration example is based on the following table and index defined for use with `pgvector`:
 
 <CodeBlock shouldWrap>
 
@@ -190,7 +190,7 @@ CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)
 
 </CodeBlock>
 
-For the example `items` table, migrating to `pg_embedding` involves the steps outline below. The same steps can be applied generally.
+Migrating the `items` table to `pg_embedding` involves the steps outline below. The same steps can be applied generally.
 
 1. Create a new table, but with the "embedding" column data type
   defined as a `real[]` array.
@@ -226,7 +226,7 @@ For the example `items` table, migrating to `pg_embedding` involves the steps ou
     DROP EXTENSION vector;
     ```
 
-6. Add the `pg_embedding` extension
+6. Add the `pg_embedding` extension.
 
     ```sql
     CREATE EXTENSION embedding;
