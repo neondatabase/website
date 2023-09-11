@@ -188,7 +188,11 @@ INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]');
 CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
 ```
 
+</CodeBlock>
+
 For the example `items` table, migrating to `pg_embedding` involves the steps outline below. The same steps can be applied generally.
+
+<CodeBlock shouldWrap>
 
 ```sql
 /* 
