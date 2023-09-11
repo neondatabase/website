@@ -130,9 +130,13 @@ const defaultConfig = {
         destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
       },
       {
+        source: '/ping-thing',
+        destination: 'https://ping-thing.vercel.app/ping-thing',
+      },
+      {
         source: '/ping-thing/:path*',
         destination: 'https://ping-thing.vercel.app/ping-thing/:path*',
-      }
+      },
     ];
   },
   webpack(config) {
