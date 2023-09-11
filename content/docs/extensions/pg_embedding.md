@@ -179,16 +179,12 @@ Currently, you cannot install both `pgvector` and `pg_embedding` in the same dat
 
 The migration example is based on the following table and index defined for use with `pgvector`:
 
-<CodeBlock shouldWrap>
-
 ```sql
 CREATE EXTENSION vector;
 CREATE TABLE items (id BIGSERIAL PRIMARY KEY, embedding VECTOR(3));
 INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]');
 CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
 ```
-
-</CodeBlock>
 
 Migrating the `items` table to `pg_embedding` involves the steps outline below. The same steps can be applied generally.
 
@@ -237,8 +233,6 @@ Migrating the `items` table to `pg_embedding` involves the steps outline below. 
     ```sql
     CREATE INDEX ON items USING hnsw(embedding) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
     ```
-
-</CodeBlock>
 
 ## Upgrade to pg_embedding for on-disk indexes
 
