@@ -219,7 +219,7 @@ Migrating the `items` table to `pg_embedding` involves the steps outline below. 
 5. Drop the `pgvector` extension.
 
     ```sql
-    DROP EXTENSION vector;
+    DROP EXTENSION vector CASCADE;
     ```
 
 6. Add the `pg_embedding` extension.
