@@ -59,9 +59,9 @@ neonctl branches add-compute mybranch --type read_only
 
 </CodeTabs>
 
-## Obtain the connection details for your read replica
+## Retrieve the connection string for your read replica
 
-Connecting to a read replica is the same as connecting to any branch in a Neon project, except you connect via a read-only compute endpoint instead of a read-write compute endpoint. The following steps describe how to obtain the connection string (URL) for a read replica from the Neon Console.
+Connecting to a read replica is the same as connecting to any branch in a Neon project, except you connect via a read-only compute endpoint instead of a read-write compute endpoint. The following steps describe how to retrieve the connection string (the URL) for a read replica from the Neon Console.
 
 1. On the Neon **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
 1. Under **Compute**, select your **Read-only** compute endpoint.
@@ -121,7 +121,7 @@ The `@prisma/extension-read-replicas` extension allows you to connect to a Neon 
 
     </Admonition>
 
-    When your app runs, all read operations are sent to the read replica. If you specify multiple read replica URLs, a read replica is selected randomly.
+    When your app runs, all read operations are sent to the read replica. If you specify multiple read replicas, a read replica is selected randomly.
 
     On the other hand, all write and `$transaction` queries are forwarded to the primary compute endpoint.
 
