@@ -1,12 +1,10 @@
 ---
 title: Use Neon read replicas with Prisma 
-subtitle: Learn how to scale your Prisma applications with Neon read replicas
+subtitle: Learn how to scale Prisma applications with Neon read replicas
 enableTableOfContents: true
 ---
 
 Neon read replicas are independent read-only compute instances that perform read operations on the same data as your read-write computes, which means zero additional storage cost since they read from the same source as your read-write compute. There is no data replication involved. When a read replica starts up, it is immediately up to date with your read-write primary. You do not have to wait for updates.
-
-Additionally, read-only computes can take advantage of Neon's Autoscaling and Auto-suspend features, which enable efficient compute resource management.
 
 A key benefit of read replicas is that you can distribute read requests to one or more read replicas, enabling you to achieve higher throughput for both read-write and read-only workloads.
 
@@ -77,11 +75,20 @@ Connecting to a read replica is the same as connecting to any branch in a Neon p
 
     </CodeBlock>
 
-    If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string, but remember to append `?pgbouncer=true` to your connection string when using a pooled connection. Prisma requires this flag when using Prisma Client with PgBouncer. See [https://neon.tech/docs/guides/prisma#connect-from-serverless-functions]/docs/guides/prisma#connect-from-serverless-functions) for more information.
+    If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string, but remember to append `?pgbouncer=true` to the connection string when using a pooled connection. Prisma requires this flag when using Prisma Client with PgBouncer. See [https://neon.tech/docs/guides/prisma#connect-from-serverless-functions](/docs/guides/prisma#connect-from-serverless-functions) for more information.
+
+## Update your env file
+
+In your `.env` file, define a `DATABASE_REPLICA_URL` environment variable to the connection string of your read replica. Your `.env` file should look something like this, with your regular `DATABASE_URL` and the newly added `DATABASE_REPLICA_URL`. Notice that the `endpoint_id` for the read replica differs. This is because the read replica is a different compute instance. Your connection strings should also differ.
+
+```text
+DATABASE_URL="postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb"
+DATABASE_REPLICA_URL="postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb"
+```
 
 ## Connect to the read replica from Prisma
 
-The `@prisma/extension-read-replicas` extension allows you to connect to a Neon read replica.
+The `@prisma/extension-read-replicas` extension adds support to Prisma Client for read replicas, enabling you to offload read-only queries to a Neon read replica compute instance. The following steps show you how to install the Prisma extension and configure it to use a Neon read replica.
 
 1. Install the extension in your Prisma project:
 
@@ -89,7 +96,7 @@ The `@prisma/extension-read-replicas` extension allows you to connect to a Neon 
     npm install @prisma/extension-read-replicas
     ```
 
-2. Extend your Prisma Client instance and point it to the Neon read replica:
+2. Extend your Prisma Client instance and point it to the Neon read replica. The `DATABASE_REPLICA_URL` environment variable should be set to the connection string of your read replica.
 
     ```javascript
     import { PrismaClient } from '@prisma/client'
@@ -123,19 +130,19 @@ The `@prisma/extension-read-replicas` extension allows you to connect to a Neon 
 
     When your app runs, all read operations are sent to the read replica. If you specify multiple read replicas, a read replica is selected randomly.
 
-    On the other hand, all write and `$transaction` queries are forwarded to the primary compute endpoint.
+    On the other hand, all write and `$transaction` queries are forwarded to the primary compute endpoint, which is read/write.
 
-    If you would like to read from the primary compute endpoint and bypass read replicas, you can use the `$primary()` method on your extended Prisma Client instance:
+    If you would like to read from the primary compute endpoint and bypass read replicas, you can use the `$primary()` method in your extended Prisma Client instance:
 
     ```bash
     const posts = await prisma.$primary().post.findMany()
     ```
 
-    This Prisma Client query is always routed to your primary database to ensure up-to-date data.
+    This Prisma Client query is always routed to your primary database.
 
 ## Examples
 
-This example shows how to use database replication using the @prisma/extension-read-replicas extension in Prisma Client. It uses a simple TypeScript script to read and write data in a PostgreSQL database.
+This example demonstrates how to use database replication using the @prisma/extension-read-replicas extension in Prisma Client. It uses a simple TypeScript script to read and write data in a PostgreSQL database.
 
 <DetailIconCards>
 <a href="https://github.com/prisma/read-replicas-demo" description="A TypeScript example showing how to use the @prisma/extension-read-replicas extension in Prisma Client" icon="github">Prisma read replicas demo</a>
