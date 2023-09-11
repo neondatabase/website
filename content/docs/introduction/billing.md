@@ -187,7 +187,7 @@ Neon provides pricing tools you can use to estimate monthly costs based on the b
 
 ### Pricing calculator
 
-The [Pricing](https://neon.tech/pricing) page on the Neon website provides a calculator that allows you to estimate monthly costs based on usage amounts that you provide.
+The [Pricing](https://neon.tech/pricing) page on the Neon website provides a [calculator](https://neon.tech/pricing#calc) that allows you to estimate monthly costs based on usage amounts that you provide.
 
 ![Pricing page calculator](/docs/introduction/pricing_page_calculator.png)
 
@@ -195,6 +195,6 @@ The [Pricing](https://neon.tech/pricing) page on the Neon website provides a cal
 
 The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimator** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Open cost calculator**.
 
-The tool displays cost estimates only after a month of project usage.
+To provide cost estimates, the **Pro Plan Cost Estimator** requires at least one month of project usage.
 
 ![Pro Plan Cost Estimation tool](/docs/introduction/billing_page_calculator.png)

@@ -40,7 +40,7 @@ In addition to the [community forum](https://community.neon.tech/) and the abili
 
 ## How does billing work?
 
-The Pro plan bills for usage monthly. Please refer to our [Billing metrics](/docs/introduction/billing) page for information about billing metrics and prices. For a calculator to estimate monthly costs, see the [Pricing](https://neon.tech/pricing) page on our website. If you still have questions or need help estimating cost, please do not hesitate to reach out to our [Sales](https://neon.tech/contact-sales) team. We're ready to help.
+The Pro plan bills for usage monthly. Please refer to our [Billing metrics](/docs/introduction/billing) page for information about metrics and rates. To estimate monthly costs, try the [pricing calculator](https://neon.tech/pricing#calc) on our [Pricing](https://neon.tech/pricing) page or the [Pro Plan Cost Estimator](/docs/introduction/billing#pro-plan-cost-estimator) in the Neon Console. If you still have questions or need help estimating costs, please reach out to our [Sales](https://neon.tech/contact-sales) team. We're ready to help.
 
 ## How do I upgrade to Pro?
 
