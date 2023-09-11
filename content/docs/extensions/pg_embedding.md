@@ -192,38 +192,51 @@ CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)
 
 For the example `items` table, migrating to `pg_embedding` involves the steps outline below. The same steps can be applied generally.
 
-<CodeBlock shouldWrap>
+1. Create a new table, but with the "embedding" column data type
+  defined as a `real[]` array.
 
-```sql
-/* 
-  Create a new table, but with the "embedding" column data type 
-  defined as a real[] array
-*/
-CREATE TABLE new_items (id BIGSERIAL PRIMARY KEY, embedding real[]);
+    ```sql
+    CREATE TABLE new_items (id BIGSERIAL PRIMARY KEY, embedding real[]);
+    ```
 
-/* 
-  Transfer data from your existing table to the new table and convert 
-  embeddings to real[]
-*/
-INSERT INTO new_items (id, embedding)
-SELECT id, embedding::real[]
-FROM items;
+2. Transfer data from your existing table to the new table and convert
+  embeddings to `real[]`.
 
--- Drop the old table
-DROP TABLE items;
+    ```sql
+    INSERT INTO new_items (id, embedding)
+    SELECT id, embedding::real[]
+    FROM items;
+    ```
 
--- Rename the new table to the name of the old table
-ALTER TABLE new_items RENAME TO items;
+3. Drop the old table.
 
--- Drop the pgvector extension
-DROP EXTENSION vector;
+    ```sql
+    DROP TABLE items;
+    ```
 
--- Add the pg_embedding extension
-CREATE EXTENSION embedding;
+4. Rename the new table to the name of the old table.
 
--- Create indexes to replace the ones you defined with pgvector
-CREATE INDEX ON items USING hnsw(embedding) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
-```
+    ```sql
+    ALTER TABLE new_items RENAME TO items;
+    ```
+
+5. Drop the `pgvector` extension.
+
+    ```sql
+    DROP EXTENSION vector;
+    ```
+
+6. Add the `pg_embedding` extension
+
+    ```sql
+    CREATE EXTENSION embedding;
+    ```
+
+6. Create indexes to replace any indexes you defined previously with `pgvector`.
+
+    ```sql
+    CREATE INDEX ON items USING hnsw(embedding) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
+    ```
 
 </CodeBlock>
 
