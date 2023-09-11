@@ -34,7 +34,7 @@ Upon creating a project, you are presented with a dialog that provides your conn
 
 ## Compute size configuration with Autoscaling
 
-Neon [Pro plan](/docs/introduction/pro-plan) users can configure compute size settings when [creating a project](#create-a-project).
+Neon [Pro plan](/docs/introduction/pro-plan) users can configure default compute size settings when [creating a project](#create-a-project) or from the the **Settings** > **Compute** page.
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
 
