@@ -199,7 +199,7 @@ CREATE TABLE new_items (id BIGSERIAL PRIMARY KEY, embedding real[]);
 
 /* 
   Transfer data from your existing table to the new table and convert 
-  embedding to real[] array type
+  embeddings to real[]
 */
 INSERT INTO new_items (id, embedding)
 SELECT id, embedding::real[]
