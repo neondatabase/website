@@ -10,7 +10,7 @@ Additionally, read-only computes can take advantage of Neon's Autoscaling and Au
 
 A key benefit of read replicas is that you can distribute read requests to one or more read replicas, enabling you to achieve higher throughput for both read-write and read-only workloads.
 
-In this guide, we'll show you how you can leverage Neon read replicas to efficiently scale your Prisma applications.
+In this guide, we'll show you how you can leverage Neon read replicas to efficiently scale your Prisma applications using [@prisma/extension-read-replicas](https://github.com/prisma/extension-read-replicas), which adds read replica support to Prisma Client.
 
 ## Prerequisites
 
@@ -132,3 +132,11 @@ The `@prisma/extension-read-replicas` extension allows you to connect to a Neon 
     ```
 
     This Prisma Client query is always routed to your primary database to ensure up-to-date data.
+
+## Examples
+
+This example shows how to use database replication using the @prisma/extension-read-replicas extension in Prisma Client. It uses a simple TypeScript script to read and write data in a PostgreSQL database.
+
+<DetailIconCards>
+<a href="https://github.com/prisma/read-replicas-demo" description="A TypeScript example showing how to use the @prisma/extension-read-replicas extension in Prisma Client" icon="github">Prisma read replicas demo</a>
+</DetailIconCards>
