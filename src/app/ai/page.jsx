@@ -21,7 +21,7 @@ const items = [
     icon: updateIcon,
     title: 'Reliable & actively maintained',
     description:
-      'pg_embedding is open-source and actively maintained by a team of Postgres committers at Neon',
+      'The pgvector and pg_embedding extensions are open-source and actively maintained',
   },
   {
     icon: scalabilityIcon,
@@ -32,12 +32,12 @@ const items = [
     icon: searchIcon,
     title: 'Blazingly fast search',
     description:
-      'pg_embedding supports HNSW indexes for fast and scalable vector similarity search',
+      'Use HNSW indexes for fast and scalable vector similarity search in Postgres',
   },
   {
     icon: compatibilityIcon,
     title: 'Highly compatible',
-    description: 'Easily switch to pg_embedding in your Postgres and LangChain projects',
+    description: 'Use Neon with pgvector or pg_embedding in your Postgres and LangChain projects',
   },
 ];
 
