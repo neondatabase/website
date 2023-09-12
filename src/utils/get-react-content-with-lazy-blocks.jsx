@@ -68,6 +68,7 @@ const sharedComponents = {
 
     return (
       <Image
+        className="rounded-md"
         src={urlWithoutSize}
         width={props.width || 975}
         height={props.height || 512}
