@@ -30,15 +30,6 @@ const items = [
     text: 'Store embeddings and perform graph-based vector similarity search with pg_embedding.',
     linkUrl: '/docs/extensions/pg_embedding',
   },
-  {
-    title: 'Compatible vector types',
-    code: `    SELECT embedding::real[] 
-    AS converted_vectors
-    FROM items;
-    `,
-    text: 'Compatible vector types make application migration easy.',
-    linkUrl: '/docs/extensions/pg_embedding',
-  },
 ];
 
 const Integration = () => {
