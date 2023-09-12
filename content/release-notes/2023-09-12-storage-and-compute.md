@@ -18,7 +18,6 @@ The following Postgres extensions were updated to a newer version:
 | `hypog`                  | 1.4.0         |
 | `plpgsql_check`          | 2.4.0         |
 
-
 If you installed these extensions previously and want to upgrade to the latest version, please refer to [Update an extension version](/docs/extensions/pg-extensions#update-an-extension-version) for instructions.
 
 For a complete list of Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
