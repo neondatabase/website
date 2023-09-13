@@ -22,7 +22,7 @@
     }
 
     img {
-      @apply border border-gray-new-94 dark:border-gray-new-20;
+      @apply border border-gray-new-94 dark:border-gray-new-20 rounded;
     }
 
     ul,
