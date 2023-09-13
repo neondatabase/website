@@ -21,6 +21,10 @@
       @apply mb-3 mt-10;
     }
 
+    img {
+      @apply border border-gray-new-94 dark:border-gray-new-20;
+    }
+
     ul,
     ol {
       @apply my-3 list-none;
