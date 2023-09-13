@@ -51,7 +51,7 @@ const StatusBadge = ({ isDocPage = false, inView = false }) => {
 
   return (
     <Link
-      to="https://statuspage.incident.io/neondatabase/"
+      to="https://neonstatus.com/"
       target="_blank"
       rel="noopener noreferrer"
       className={clsx(
