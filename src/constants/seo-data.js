@@ -77,6 +77,13 @@ export default {
     description: 'Thank you for subscribing to the Neon newsletter',
     pathname: LINKS.thankYou,
   },
+  lastWeekInAws: {
+    title: 'Neon — Serverless, Fault-Tolerant, Branchable Postgres',
+    description:
+      'Postgres made for developers. Easy to Use, Scalable, Cost efficient solution for your next project.',
+    pathname: '',
+    robotsNoindex: 'noindex',
+  },
 };
 
 export const getBlogCategoryDescription = (category) => {
