@@ -6,7 +6,7 @@ enableTableOfContents: true
 This section describes how to import a database from another Neon project using `pg_dump` and `psql`. Use these instructions to:
 
 - Import a database from a Neon project created in one region to a project created in another region.
-- Import a database from a Neon project created with Postgres 14 to a Neon project created with Postgres 15.
+- Import a database from a Neon project created with one Postgres version to a Neon project created with another Postgres version.
 
 <Admonition type="note">
 The Neon Free Tier has a limit of one project per user, which means a Free Tier user cannot have two projects simultaneously. To move you data to new Neon project while on the Free Tier, dump your database first, delete your existing Neon project, create a new Neon project with the desired region or Postgres version, and import your data into the new project. For the dump and restore procedure, refer to [pg_dump with pg_restore](/docs/import/import-from-postgres#pg_dump-with-pg_restore).
