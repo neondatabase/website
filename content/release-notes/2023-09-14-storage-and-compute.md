@@ -1,4 +1,4 @@
-### Support for Postgres 16
+### Try Postgres 16 with Neon
 
 Neon is pleased to announce support for Postgres 16. To use Postgres 16 with Neon, create a Neon project and select *16** as the **Postgres version**.
 
