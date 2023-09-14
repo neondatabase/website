@@ -31,7 +31,7 @@ You can create one or more read replicas for any branch in your Neon project. Cr
     </Admonition>
 6. When you finish making selections, click **Create**.
 
-Your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page.
+   Your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page.
 
 Alternatively, you can create read replicas using the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint) or [Neon CLI](/docs/reference/cli-branches#create).
 
@@ -144,7 +144,7 @@ Notice that the `endpoint_id` for the read replica compute differs. The read rep
 
 ## Examples
 
-This example demonstrates how to use the `@prisma/extension-read-replicas` extension in Prisma Client. It uses a simple TypeScript script to read and write data in a Postgres database.
+This example demonstrates how to use the [@prisma/extension-read-replicas](https://github.com/prisma/extension-read-replicas) extension in Prisma Client. It uses a simple TypeScript script to read and write data in a Postgres database.
 
 <DetailIconCards>
 <a href="https://github.com/prisma/read-replicas-demo" description="A TypeScript example showing how to use the @prisma/extension-read-replicas extension in Prisma Client" icon="github">Prisma read replicas demo</a>
