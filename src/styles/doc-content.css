@@ -21,7 +21,7 @@
       @apply mb-3 mt-10;
     }
 
-    img {
+    p > img {
       @apply border border-gray-new-94 dark:border-gray-new-20 rounded;
     }
 
