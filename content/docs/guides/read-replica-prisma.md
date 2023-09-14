@@ -4,11 +4,13 @@ subtitle: Learn how to scale Prisma applications with Neon read replicas
 enableTableOfContents: true
 ---
 
-A Neon read replica is an independent read-only compute instance that performs read operations on the same data as your read-write compute, which means adding a read replica requires no additional storage. Additionally, there is no replication involved. When a read replica starts, it is immediately up to date with your read-write primary. You do not have to wait for updates.
+A Neon read replica is an independent read-only compute instance that performs read operations on the same data as your read-write compute, which means adding a read replica to a Neon project requires no additional storage.
 
-A key benefit of read replicas is that you can distribute read requests to one or more read replicas, enabling you to achieve higher throughput for both read-write and read-only workloads.
+A key benefit of read replicas is that you can distribute read requests to one or more read replica compute instances, enabling you to easily scale your applications and achieve higher throughput for both read-write and read-only workloads.
 
-In this guide, we'll show you how you can leverage Neon read replicas to efficiently scale your Prisma applications using Prisma Client's read replica extension: [@prisma/extension-read-replicas](https://github.com/prisma/extension-read-replicas).
+For more information about Neon's read replica feature, see [Read replicas](/docs/introduction/read-replicas).
+
+In this guide, we'll show you how you can leverage Neon read replicas to efficiently scale Prisma applications using Prisma Client's read replica extension: [@prisma/extension-read-replicas](https://github.com/prisma/extension-read-replicas).
 
 ## Prerequisites
 
