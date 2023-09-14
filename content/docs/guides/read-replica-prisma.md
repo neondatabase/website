@@ -65,7 +65,7 @@ Connecting to a read replica is the same as connecting to any branch in a Neon p
 
 1. On the Neon **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
 1. Under **Compute**, select your **Read-only** compute endpoint.
-1. Select the connection string and copy it. This is the information you need to connect to the read replica from PrismaClient. The connection string appears similar to the following:
+1. Select the connection string and copy it. This is the information you need to connect to the read replica from your Prisma Client. The connection string appears similar to the following:
 
     <CodeBlock shouldWrap>
 
@@ -86,7 +86,7 @@ DATABASE_URL="postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aw
 DATABASE_REPLICA_URL="postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb"
 ```
 
-Notice that the `endpoint_id` for the read replica differs. The read replica is a different compute instance and therefore has a different connection string.
+Notice that the `endpoint_id` for the read replica compute differs. The read replica is a different compute instance and therefore has a different `endpoint_id`.
 
 ## Configure Prisma Client to use a read replica
 
@@ -132,7 +132,7 @@ Notice that the `endpoint_id` for the read replica differs. The read replica is 
 
     When your application runs, read operations are sent to the read replica. If you specify multiple read replicas, a read replica is selected randomly.
 
-    All write and `$transaction` queries are sent to the primary compute endpoint defined by `DATABASE_URL`, which is a read/write compute endpoint.
+    All write and `$transaction` queries are sent to the primary compute endpoint defined by `DATABASE_URL`, which is your read/write compute endpoint.
 
     If you want to read from the primary compute endpoint and bypass read replicas, you can use the `$primary()` method in your extended Prisma Client instance:
 
@@ -144,7 +144,7 @@ Notice that the `endpoint_id` for the read replica differs. The read replica is 
 
 ## Examples
 
-This example demonstrates how to use the @prisma/extension-read-replicas extension in Prisma Client. It uses a simple TypeScript script to read and write data in a PostgreSQL database.
+This example demonstrates how to use the `@prisma/extension-read-replicas` extension in Prisma Client. It uses a simple TypeScript script to read and write data in a Postgres database.
 
 <DetailIconCards>
 <a href="https://github.com/prisma/read-replicas-demo" description="A TypeScript example showing how to use the @prisma/extension-read-replicas extension in Prisma Client" icon="github">Prisma read replicas demo</a>
