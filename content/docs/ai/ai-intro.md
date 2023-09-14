@@ -31,5 +31,5 @@ Check out the following AI application examples built with Neon.
 <a href="https://github.com/neondatabase/ask-neon" description="Build an AI-powered chatbot with pgvector" icon="github">Chatbot app</a>
 <a href="https://vercel.com/templates/next.js/postgres-pgvector" description="Enable vector similarity search with Vercel Postgres" icon="github">Vercel Postgres pgvector Starter</a>
 <a href="https://github.com/neondatabase/postgres-ai-playground" description="Build an AI-enabled SQL playground for natural language queries" icon="github">Web-based AI SQL Playground</a>
-<a href="https://github.com/neondatabase/neon-vector-search-openai-notebooks" description="Jupyter Notebook for Vector Search with Neon, pgvector, and OpenAI" icon="github">Vector Search Jupyter Notebook</a>
+<a href="https://github.com/neondatabase/neon-vector-search-openai-notebooks" description="Jupyter Notebook for vector search with Neon, pgvector, and OpenAI" icon="github">Jupyter Notebook for vector search with Neon</a>
 </DetailIconCards>
