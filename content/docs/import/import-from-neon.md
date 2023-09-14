@@ -8,10 +8,9 @@ This guide describes how to migrate a database from one Neon project to another 
 - Import a database from a Neon project created in one region to a project created in another region.
 - Import a database from a Neon project created with one Postgres version to a Neon project created with another Postgres version.
 
-Piping is not recommended for medium (> 1 GB) and large databases (> 5 GB), as it is susceptible to failures during lengthier migration operations (see [Pipe pg_dump to pg_restore](/docs/import/import-from-postgres#pipe-pgdump-to-pgrestore) for more information). If your database is larger than 1 GB, we recommend performing the dump and restore as separate operations. For instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
-
 <Admonition type="note">
-The Neon Free Tier has a limit of one project per user, which means a Free Tier user cannot have two projects simultaneously. To move your data to a new Neon project while on the Free Tier, dump your database first, delete your existing Neon project, create a new Neon project with the desired region or Postgres version, and import your data into the new project. For the dump and restore procedure, refer to [pg_dump with pg_restore](/docs/import/import-from-postgres#pg_dump-with-pg_restore).
+- Piping is not recommended for medium (> 1 GB) and large databases (> 5 GB), as it is susceptible to failures during lengthier migration operations (see [Pipe pg_dump to pg_restore](/docs/import/import-from-postgres#pipe-pgdump-to-pgrestore) for more information). If your database is larger than 1 GB, we recommend performing the dump and restore as separate operations. For instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
+- The Neon Free Tier has a limit of one project per user, which means a Free Tier user cannot have two projects simultaneously. To move your data to a new Neon project while on the Free Tier, dump your database first, delete your existing Neon project, create a new Neon project with the desired region or Postgres version, and import your data into the new project. For the dump and restore procedure, refer to [pg_dump with pg_restore](/docs/import/import-from-postgres#pg_dump-with-pg_restore).
 </Admonition>
 
 To import your data from another Neon project:
