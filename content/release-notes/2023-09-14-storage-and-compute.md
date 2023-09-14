@@ -8,4 +8,4 @@ If you are a Neon Pro plan user, you can migrate a database from an existing Neo
 
 For Neon Free Tier users who are limited to a single Neon project, migrating to Postgres 16 involves dumping your database locally, removing your existing Neon project, creating a new Neon project with Postgres 16, and restoring your database to the new Neon project. For dump and restore instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
 
-For information about changes in Postgres 16, refer to the official [Postgres Release 16 documentation](https://www.postgresql.org/docs/16/release-16.html).
+For information about what's new in Postgres 16, refer to the official [Postgres Release 16 documentation](https://www.postgresql.org/docs/16/release-16.html).
