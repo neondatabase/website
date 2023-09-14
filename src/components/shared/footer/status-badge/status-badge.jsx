@@ -22,7 +22,7 @@ const statusData = {
 };
 
 const fetchStatus = async () => {
-  const res = await fetch('https://statuspage.incident.io/neondatabase/api/v1/summary');
+  const res = await fetch('https://neonstatus.com/api/v1/summary');
   const data = await res.json();
 
   if (data.ongoing_incidents.length > 0) {
