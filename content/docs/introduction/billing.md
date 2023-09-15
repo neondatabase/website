@@ -57,12 +57,12 @@ Neon uses a small amount of _Compute time_, included in your billed amount, to p
 The _Compute time_ cost calculation is as follows:
 
 ```text
-Compute time cost = Compute Units * Active time * price per hour
+Compute time cost = Compute size * Active time * price per hour
 ```
 
 ### Compute time cost estimates
 
-For an idea of _Compute time_ cost per month based on compute size and usage, refer to the following table:
+For an idea of _Compute time_ cost per month based on compute size and usage, refer to the following table. Compute size is measured in Compute Units (CUs).
 
 | Compute Units (CU) | 730 hrs/mth (all hours) | 173 hrs/mth (working hours) | 87 hrs/mth (half of working hours) |
 | :----------------- | :---------------------- | :-------------------------- | :--------------------------------- |
