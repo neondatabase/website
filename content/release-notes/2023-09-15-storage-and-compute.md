@@ -10,4 +10,4 @@ As with any database migration, always test thoroughly before migrating producti
 
 ### plv8 extension upgrade
 
-The `plv8` extension was updated from 3.1.5 to 3.1.8 in Postgres 16. For more information about Postgres extensions supported by Neon and how to install them, see [Postgres extensions](/docs/extensions/pg_extensions).
+The `plv8` extension was updated from 3.1.5 to 3.1.8 in Postgres 16. For more information about Postgres extensions supported by Neon and how to install them, see [Postgres extensions](/docs/extensions/pg-extensions).
