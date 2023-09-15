@@ -10,7 +10,7 @@ The following Postgres extensions were updated to a newer version:
 | `h3_postgis`                 | 4.1.2         | 4.1.3         |
 | `hll`                        | 2.16          | 2.18          |
 | `hypog`                      | 1.3.1         | 1.4.0         |
-| `ip4r`                       | 2.4           | 2.4.2         |
+| `ip4r`                       | 2.4.1         | 2.4.2         |
 | `plpgsql_check`              | 2.3.0         | 2.4.0         |
 | `plv8`                       | 3.1.5         | 3.1.8         |
 | `postgis`                    | 3.3.2         | 3.3.3         |
