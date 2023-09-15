@@ -27,7 +27,7 @@ _Active time_ is the total amount of time that your computes have been active wi
 
 _Compute time_ is the the amount of compute resources used per hour. It is calculated by multiplying compute size by _Active time_ hours. Neon measures compute size at regular intervals and averages those values to calculate _Compute time_.
 
-Compute size is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
+Compute size is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
 
 | Compute Units | vCPU | RAM    |
 |:--------------|:-----|:-------|
@@ -64,7 +64,7 @@ Compute time cost = Compute size * Active time * price per hour
 
 For an idea of _Compute time_ cost per month based on compute size and usage, refer to the following table. Compute size is measured in Compute Units (CUs).
 
-| Compute Units (CU) | 730 hrs/mth (all hours) | 173 hrs/mth (working hours) | 87 hrs/mth (half of working hours) |
+| Compute Units      | 730 hrs/mth (all hours) | 173 hrs/mth (working hours) | 87 hrs/mth (half of working hours) |
 | :----------------- | :---------------------- | :-------------------------- | :--------------------------------- |
 | 0.25               | $18.62                  | $4.41                       | $2.22                              |
 | 0.5                | $37.23                  | $8.82                       | $4.44                              |
