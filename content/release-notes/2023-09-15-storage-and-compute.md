@@ -7,3 +7,7 @@ Neon is pleased to announce support for Postgres 16. To use Postgres 16 with Neo
 To migrate data from an existing Neon project to one created with Postgres 16, following this dump and restore procedure: [Import data from another Neon project](/docs/import/import-from-neon).
 
 As with any database migration, always test thoroughly before migrating production systems or applications. Also, we recommend familiarizing yourself with the changes in Postgres 16, especially those affecting compatibility. For information about those changes, please refer to the official [Postgres Release 16 documentation](https://www.postgresql.org/docs/16/release-16.html).
+
+### plv8 extension upgrade
+
+Updated the `plv8` extension from 3.1.5 to 3.1.8 in Postgres 16. For more information about Postgres extensions supported by Neon and how to install them, see [Postgres extensions](/docs/extensions/pg_extensions).
