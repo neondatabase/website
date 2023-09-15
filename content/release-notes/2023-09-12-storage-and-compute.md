@@ -12,6 +12,7 @@ The following Postgres extensions were updated to a newer version:
 | `hypog`                      | 1.3.1         | 1.4.0         |
 | `ip4r`                       | 2.4.1         | 2.4.2         |
 | `plcoffee`                   | 3.1.5         | 3.1.8         |
+| `plls`                       | 3.1.5         | 3.1.8         |
 | `plpgsql_check`              | 2.3.0         | 2.4.0         |
 | `plv8`                       | 3.1.5         | 3.1.8         |
 | `postgis`                    | 3.3.2         | 3.3.3         |
