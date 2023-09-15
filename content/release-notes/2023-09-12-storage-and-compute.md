@@ -4,6 +4,8 @@ The following Postgres extensions were updated to a newer version:
 
 | Postgres extension       | New version   |
 |--------------------------|---------------|
+| `address_standardizer`   | 3.3.3         |
+| `address_standardizer_data_us` | 3.3.3   |
 | `plv8`                   | 3.1.8         |
 | `postgis`                | 3.3.3         |
 | `postgis_raster`         | 3.3.3         |
