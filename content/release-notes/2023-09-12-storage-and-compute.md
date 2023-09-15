@@ -2,23 +2,23 @@
 
 The following Postgres extensions were updated to a newer version:
 
-| Postgres extension       | New version   |
-|--------------------------|---------------|
-| `address_standardizer`   | 3.3.3         |
-| `address_standardizer_data_us` | 3.3.3   |
-| `plv8`                   | 3.1.8         |
-| `postgis`                | 3.3.3         |
-| `postgis_raster`         | 3.3.3         |
-| `postgis_sfcgal`         | 3.3.3         |
-| `postgis_tiger_geocoder` | 3.3.3         |
-| `postgis_topology`       | 3.3.3         |
-| `h3`                     | 4.1.3         |
-| `h3_postgis`             | 4.1.3         |
-| `ip4r`                   | 2.4.2         |
-| `hll`                    | 2.18          |
-| `prefix`                 | 1.2.10        |
-| `hypog`                  | 1.4.0         |
-| `plpgsql_check`          | 2.4.0         |
+| Postgres extension           | Old version   | New version   |
+|------------------------------|---------------|---------------|
+| `address_standardizer`       | 3.3.2         | 3.3.3         |
+| `address_standardizer_data_us` | 3.3.2       | 3.3.3         |
+| `h3`                         | 4.1.2         | 4.1.3         |
+| `h3_postgis`                 | 4.1.2         | 4.1.3         |
+| `hll`                        | 2.16          | 2.18          |
+| `hypog`                      | 1.3.1         | 1.4.0         |
+| `ip4r`                       | 2.4           | 2.4.2         |
+| `plpgsql_check`              | 2.3.0         | 2.4.0         |
+| `plv8`                       | 3.1.5         | 3.1.8         |
+| `postgis`                    | 3.3.2         | 3.3.3         |
+| `postgis_raster`             | 3.3.2         | 3.3.3         |
+| `postgis_sfcgal`             | 3.3.2         | 3.3.3         |
+| `postgis_tiger_geocoder`     | 3.3.2         | 3.3.3         |
+| `postgis_topology`           | 3.3.2         | 3.3.3         |
+| `prefix`                     | 1.2.0         | 1.2.10        |
 
 If you installed these extensions previously and want to upgrade to the latest version, please refer to [Update an extension version](/docs/extensions/pg-extensions#update-an-extension-version) for instructions.
 
