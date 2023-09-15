@@ -5,27 +5,27 @@ enableTableOfContents: true
 
 Neon [paid plans](/docs/introduction/plans#neon-plans) bill for usage based on the following metrics:
 
-- **Active time**: The amount of time that your computes have been active.
+- **Active time**: The amount of time that your computes are active.
 - **Compute time**: The amount of compute resources used per hour.
 - **Project storage**: The volume of data and history stored in your Neon project.
 - **Written data**: The volume of data written from compute to storage.
 - **Data transfer**: The volume of data transferred out of Neon.
 
-The following sections provide a detailed explanation of each metric and the billing rates. Billing in Neon is account-based.
+The following sections describe each metric and the billing rates for each region. Billing in Neon is account-based.
 
 <Admonition type="note">
-_Compute time_ is typically The largest contributor to cost. _Written data_ together with _Data transfer_ usually account for only about 5% of your monthly bill.
+_Compute time_ is typically The largest contributor to cost. _Written data_ and _Data transfer_ together usually account for only about 5% of your monthly bill.
 
 The **Project storage**, **Written data**, and **Data transfer** metrics are calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 </Admonition>
 
 ## Active time
 
-_Active time_ is the total amount of time, measured in hours, that your computes have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an Idle state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale-to-zero). _Active time_ is not a billed metric. It is a factor of the _Compute time_ metric.
+_Active time_ is the total amount of time that your computes have been active within a given billing period, measured in hours. This includes all computes in your Neon project but excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale-to-zero). _Active time_ is not a billed metric. It is a factor of the _Compute time_ metric.
 
 ## Compute time
 
-_Compute time_ is the the amount of compute resources used within a given billing period, measured in Compute Unit (CU) hours. It is calculated by multiplying  compute size by _Active_time_ hours. Neon measures compute size at regular intervals and averages those values to calculate _Compute time_.
+_Compute time_ is the the amount of compute resources used per hour. It is calculated by multiplying compute size by _Active time_ hours. Neon measures compute size at regular intervals and averages those values to calculate _Compute time_.
 
 Compute size is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
 
@@ -47,7 +47,7 @@ Factors that affect _Compute time_ include:
 
 - The number of active computes
 - The size of each compute
-- The _Auto-suspend_ feature, which suspends a compute after five minutes of inactivity. Neon [Pro plan](/docs/introduction/pro-plan) users can configure the `Auto-suspend` timeout timeout or disable _Auto-suspend_ entirely.
+- The _Auto-suspend_ feature, which suspends a compute after 5 minutes of inactivity. Neon [Pro plan](/docs/introduction/pro-plan) users can configure the `Auto-suspend` timeout timeout or disable _Auto-suspend_ entirely.
 - The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Compute size automatically scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
@@ -88,7 +88,7 @@ To estimate your own monthly _Compute time_ cost:
 1. Input the values into the _Compute time_ cost formula:
 
    ```text
-   Compute time cost = Compute Units * Active time * Compute-time price
+   Compute time cost = Compute size * Active time * Compute-time price
    ```
 
    For example, this is the calculation for the smallest compute offered by Neon (.25 CUs), 730 hours, and a _Compute time_ price of $0.102:
@@ -179,7 +179,7 @@ Data transfer (GiB) * price per GiB
 | AWS            | Israel (Tel Aviv)        | Written data    | $0.09600  | GiB            |
 | AWS            | Israel (Tel Aviv)        | Data transfer   | $0.09000  | GiB            |
 
-\* A _Compute-hour_ is based on a compute size with 1 Compute Unit (CU), which is 1 vCPU and 4 GB of RAM. Neon's smallest compute size is .25 CU (.25 vCPU and 1GB of RAM), which would be billed at 1/4 of a _Compute-hour_. Neon supports compute sizes ranging from .25 CU (.25 vCPU and 1 GB of RAM) to 7 CUs (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
+\* A _Compute-hour_ is based on a compute size of 1 Compute Unit (CU), which is 1 vCPU and 4 GB of RAM. Neon's smallest compute size is .25 CU (.25 vCPU and 1GB of RAM), which would be billed at 1/4 of a _Compute-hour_. Neon supports compute sizes ranging from .25 CU (.25 vCPU and 1 GB of RAM) to 7 CUs (7 vCPU and 28 GB of RAM). If you require larger computes, contact [Sales](https://neon.tech/contact-sales).
 
 ## Pricing calculators
 
@@ -193,7 +193,7 @@ The [Pricing](https://neon.tech/pricing) page on the Neon website provides a [ca
 
 ### Pro Plan Cost Estimator
 
-The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimator** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan today?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Open cost calculator**.
+The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimator** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Open Cost Estimator**.
 
 To provide cost estimates, the **Pro Plan Cost Estimator** requires at least one month of project usage.
 
