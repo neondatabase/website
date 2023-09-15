@@ -20,7 +20,6 @@ The following Postgres extensions were updated to a newer version:
 | `postgis_sfcgal`             | 3.3.2         | 3.3.3         |
 | `postgis_tiger_geocoder`     | 3.3.2         | 3.3.3         |
 | `postgis_topology`           | 3.3.2         | 3.3.3         |
-| `prefix`                     | 1.2.0         | 1.2.10        |
 
 If you installed these extensions previously and want to upgrade to the latest version, please refer to [Update an extension version](/docs/extensions/pg-extensions#update-an-extension-version) for instructions.
 
