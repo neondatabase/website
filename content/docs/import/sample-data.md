@@ -12,7 +12,7 @@ The following sections describe how to download dataset source files using `wget
 
 - [Chinook database](#chinook-database) (9.6 MB)
 - [Employees database](#employees-database) (360 MB)
-- [Lego database](#lego-database) (35 MB)
+- [Lego database](#lego-database) (42 MB)
 - [Netflix data](#netflix-data) (3.9 MB)
 - [Pagila database](#pagila-database) (7.9 MB)
 - [Periodic table data](#periodic-table-data) (72 KB)
@@ -49,7 +49,7 @@ psql -d "postgres://[user]:[password]@[hostname]/chinook" -f chinook.sql
 
 ### Employees database
 
-Employees database (6 tables, 360 MB)
+Employees database (6 tables, 333 MB)
 
 Create the database and schema:
 
@@ -68,7 +68,7 @@ wget https://raw.githubusercontent.com/danieltprice/postgres-sample-dbs/main/emp
 Navigate to the directory where you downloaded the source file, and run the following command:
 
 ```bash
-pg_restore -d postgres://[user]:[password]@[hostname]/employees -Fc employees.sql.gz -c -v -no-owner --no-privileges
+pg_restore -d postgres://[user]:[password]@[hostname]/employees -Fc employees.sql.gz -c -v --no-owner --no-privileges
 ```
 
 - Source: The initial dataset was created by Fusheng Wang and Carlo Zaniolo from Siemens Corporate Research, and can be found in XML format at this location: [http://timecenter.cs.aau.dk/software.htm](http://timecenter.cs.aau.dk/software.htm). Designing the relational schema was undertaken by Giuseppe Maxia while Patrick Crews was responsible for transforming the data into a format compatible with MySQL. Their work can be accessed here: [https://github.com/datacharmer/test_db](https://github.com/datacharmer/test_db). Subsequently, this information was adapted to a format suitable for PostgreSQL: [https://github.com/h8/employees-database](https://github.com/h8/employees-database). The data was generated, and there are inconsistencies.
