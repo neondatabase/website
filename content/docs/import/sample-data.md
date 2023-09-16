@@ -236,12 +236,25 @@ CREATE INDEX ON public.articles USING ivfflat (title_vector) WITH (lists = 1000)
 - Source: [OpenAI](https://github.com/openai/openai-cookbook/tree/main/examples/vector_databases)
 - License: [MIT License](https://github.com/openai/openai-cookbook/blob/main/LICENSE)
 
+### postgres_air database
+
+Download the file from: [Google drive](https://drive.google.com/drive/folders/13F7M80Kf_somnjb-mTYAnh1hW1Y_g4kJ)
+
+Navigate to the directory where you downloaded the source file, and run the following command:
+
+```bash
+psql -d "postgres://[user]:[password]@[hostname]/happiness_index" -f postgres_air_2023.backup
+```
+
+- Source: [tbd](tbd)
+- License: [tbd](tbd)
+
 ### Amazon DMS Sample Database
 
 Amazon DMS Sample Database (16 tables, 2 views, 8 procedures, 10 GB)
 
 <Admonition type="warning">
-This sample database is 10 GBs in size. It exceeds the Neon Free Tier storage limit of 3 GBs per branch. Do not install it unless you are a [Neon Pro plan]/docs/introduction/pro-plan) user.
+This sample database is 10 GBs in size. It exceeds the Neon Free Tier storage limit of 3 GBs per branch. Do not install it unless you are a [Neon Pro plan](/docs/introduction/pro-plan) user.
 </Admonition>
 
 For information about this database and its structure, see [Amazon DMS Sample Database for PostgreSQL: version 1.0](https://github.com/aws-samples/aws-database-migration-samples/blob/master/PostgreSQL/sampledb/v1/README.md).
