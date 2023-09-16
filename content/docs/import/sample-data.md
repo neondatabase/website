@@ -18,6 +18,7 @@ The following sections describe how to download dataset source files using `wget
 - [Periodic table data](#periodic-table-data)
 - [Titanic passenger data](#titantic-passenger-data)
 - [World Happiness Index](#world-happiness-index)
+- [Wikipedia vector embeddings](#wikipedia-vector-embeddings)
 - [postgres_air](#postgres_air-database)
 - [AWS DMS sample database](#amazon-dms-sample-database)
 
@@ -181,9 +182,9 @@ psql -d "postgres://[user]:[password]@[hostname]/happiness_index" -f happiness_i
 - Source: [https://www.kaggle.com/datasets/unsdsn/world-happiness](https://www.kaggle.com/datasets/unsdsn/world-happiness)
 - License: [CC0: Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
 
-### Wikipedia article vector embeddings
+### Wikipedia vector embeddings
 
-Wikipedia article vector embeddings (1 table, 2.8 GB)
+Wikipedia vector embeddings (1 table, 2.8 GB)
 
 This dataset consists of pre-computed vector embedding for 25000 Wikipedia articles. It is intended for use with the `pgvector` Postgres extension, which you must install first to create the table that will hold the data. For a Jupyter Notebook that uses this dataset with Neon, `pgvector`, and OpenAI, refer to the following GitHub repository: [neon-vector-search-openai-notebooks](https://github.com/neondatabase/neon-vector-search-openai-notebooks)
 
