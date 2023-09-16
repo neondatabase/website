@@ -26,6 +26,8 @@ The following sections describe how to download dataset source files using `wget
 
 Chinook digital media store database (11 tables, 2280 KB)
 
+The Chinook database is a sample database for a digital media store, with tables for artists, albums, tracks, invoices, customers, and more.
+
 Create a `chinook` database:
 
 ```sql
@@ -42,6 +44,18 @@ Navigate to the directory where you downloaded the source file, and run the foll
 
 ```bash
 psql -d "postgres://[user]:[password]@[hostname]/chinook" -f chinook.sql
+```
+
+Connect to the `chinook` database:
+
+```bash
+psql postgres://[user]:[password]@[hostname]/chinook
+```
+
+Find out the top 5 best-selling artists based on invoice total:
+
+```sql
+
 ```
 
 - Source: [https://github.com/lerocha/chinook-database](https://github.com/lerocha/chinook-database)
@@ -71,6 +85,25 @@ Navigate to the directory where you downloaded the source file, and run the foll
 pg_restore -d postgres://[user]:[password]@[hostname]/employees -Fc employees.sql.gz -c -v --no-owner --no-privileges
 ```
 
+Connect to the `employees` database:
+
+```bash
+psql postgres://[user]:[password]@[hostname]/employees
+```
+
+Find the top 5 departments with the highest average salary:
+
+```sql
+SELECT d.dept_name, AVG(s.salary) AS average_salary
+FROM salaries s
+JOIN dept_emp de ON s.emp_no = de.emp_no
+JOIN departments d ON de.dept_no = d.dept_no
+WHERE s.to_date > CURRENT_DATE AND de.to_date > CURRENT_DATE
+GROUP BY d.dept_name
+ORDER BY average_salary DESC
+LIMIT 5;
+```
+
 - Source: The initial dataset was created by Fusheng Wang and Carlo Zaniolo from Siemens Corporate Research, and can be found in XML format at this location: [http://timecenter.cs.aau.dk/software.htm](http://timecenter.cs.aau.dk/software.htm). Designing the relational schema was undertaken by Giuseppe Maxia while Patrick Crews was responsible for transforming the data into a format compatible with MySQL. Their work can be accessed here: [https://github.com/datacharmer/test_db](https://github.com/datacharmer/test_db). Subsequently, this information was adapted to a format suitable for PostgreSQL: [https://github.com/h8/employees-database](https://github.com/h8/employees-database). The data was generated, and there are inconsistencies.
 - License: This work is licensed under the Creative Commons Attribution-Share Alike 3.0 Unported License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/) or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 
@@ -94,6 +127,12 @@ Navigate to the directory where you downloaded the source file, and run the foll
 
 ```bash
 psql -d "postgres://[user]:[password]@[hostname]/lego" -f lego.sql
+```
+
+Connect to the `lego` database:
+
+```bash
+psql postgres://[user]:[password]@[hostname]/lego
 ```
 
 - Source: [https://www.kaggle.com/datasets/rtatman/lego-database](https://www.kaggle.com/datasets/rtatman/lego-database)
@@ -121,6 +160,12 @@ Navigate to the directory where you downloaded the source file, and run the foll
 psql -d "postgres://[user]:[password]@[hostname]/netflix" -f netflix_shows.sql
 ```
 
+Connect to the `netflix` database:
+
+```bash
+psql postgres://[user]:[password]@[hostname]/netflix
+```
+
 - Source: [https://www.kaggle.com/datasets/shivamb/netflix-shows](https://www.kaggle.com/datasets/shivamb/netflix-shows)
 - License: [CC0: Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
 
@@ -144,6 +189,12 @@ Navigate to the directory where you downloaded the source file, and run the foll
 
 ```bash
 psql -d "postgres://[user]:[password]@[hostname]/pagila" -f pagila.sql
+```
+
+Connect to the `pagila` database:
+
+```bash
+psql postgres://[user]:[password]@[hostname]/pagila
 ```
 
 - Source: [https://github.com/devrimgunduz/pagila](https://github.com/devrimgunduz/pagila)
