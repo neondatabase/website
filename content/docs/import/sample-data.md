@@ -254,7 +254,7 @@ Connect to the `titanic` database:
 psql postgres://[user]:[password]@[hostname]/world_happiness_index
 ```
 
-Countries where the happiness score is above average but the GDP per capita is below average
+Find the countries where the happiness score is above average but the GDP per capita is below average:
 
 ```sql
 SELECT 
@@ -330,7 +330,7 @@ Navigate to the directory where you extracted the source file, and run the follo
 psql -d "postgres://[user]:[password]@[hostname]/wikipedia" -c "\COPY public.articles (id, url, title, content, title_vector, content_vector, vector_id) FROM 'vector_database_wikipedia_articles_embedded.csv' WITH (FORMAT CSV, HEADER true, DELIMITER ',');"
 ```
 
-Optionally, create the vector search indexes using the following commands:
+Optionally, create vector search indexes using the following commands:
 
 ```sql
 CREATE INDEX ON public.articles USING ivfflat (content_vector) WITH (lists = 1000);
@@ -338,12 +338,16 @@ CREATE INDEX ON public.articles USING ivfflat (content_vector) WITH (lists = 100
 CREATE INDEX ON public.articles USING ivfflat (title_vector) WITH (lists = 1000);
 ```
 
+<Admonition type="note">
+If you encounter a memory error related to the `maintenance_work_mem` setting, refer to [Indexing vectors](/docs/extensions/pgvector#indexing-vectors) for how to increase the `maintenance_work_mem` setting.
+</Admonition>
+
 - Source: [OpenAI](https://github.com/openai/openai-cookbook/tree/main/examples/vector_databases)
 - License: [MIT License](https://github.com/openai/openai-cookbook/blob/main/LICENSE)
 
 ### Postgres air database
 
-`postgres_air` database (x tables, 1.2 GB)
+`postgres_air` database (10 tables, 6.9 GB)
 
 Create a `postgres_air` database:
 
@@ -356,43 +360,25 @@ Download the file (1.3 GB) from: [Google drive](https://drive.google.com/drive/f
 Navigate to the directory where you downloaded the source file, and run the following command:
 
 ```bash
-psql -d "postgres://[user]:[password]@[hostname]/postgres_air" -f postgres_air_2023.backup
+pg_restore -d postgres://[user]:[password]@[hostname]/postgres_air -Fc postgres_air_2023.backup -c -v --no-owner --no-privileges
+```
+
+Connect to the `postgres_air` database:
+
+```bash
+psql postgres://[user]:[password]@[hostname]/wikipedia
+```
+
+Find the aircraft type with the most flights:
+
+```sql
+SELECT ac.model, COUNT(f.flight_id) AS number_of_flights
+FROM postgres_air.aircraft ac
+JOIN postgres_air.flight f ON ac.code = f.aircraft_code
+GROUP BY ac.model
+ORDER BY number_of_flights DESC
+LIMIT 10;
 ```
 
 - Source: [https://github.com/hettie-d/postgres_air](https://github.com/hettie-d/postgres_air)
 - License: [BSD 3-Clause License](https://github.com/hettie-d/postgres_air/blob/main/LICENSE)
-
-### Amazon DMS Sample Database
-
-Amazon DMS Sample Database (16 tables, 2 views, 8 procedures, 10 GB)
-
-<Admonition type="warning">
-This sample database is 10 GBs in size. It exceeds the Neon Free Tier storage limit of 3 GBs per branch. Do not install it unless you are a [Neon Pro plan](/docs/introduction/pro-plan) user.
-</Admonition>
-
-For information about this database and its structure, see [Amazon DMS Sample Database for PostgreSQL: version 1.0](https://github.com/aws-samples/aws-database-migration-samples/blob/master/PostgreSQL/sampledb/v1/README.md).
-
-Create a `dms_sample` database:
-
-```sql
-CREATE DATABASE dms_sample;
-```
-
-Run the following command to download the database creation scripts from GitHub:
-
-```bash
-git clone https://github.com/aws-samples/aws-database-migration-samples.git
-```
-
-Change to the `aws-database-migration-samples/PostgreSQL/sampledb/v1` directory.
-
-Run the following command, providing the connection details for your `dms_sample` database.
-
-```bash
-psql -h <neon_hostname> -p 5432 -U <role> -d dms_sample -a -f ~/aws-database-migration-samples/PostgreSQL/sampledb/v1/postgresql.sql
-```
-
-You Neon hostname will look something like this: ```ep-soft-night-37218378.us-east-2.aws.neon.tech```.
-
-- Source: [https://github.com/aws-samples/aws-database-migration-samples](https://github.com/aws-samples/aws-database-migration-samples)
-- License: [Apache License](https://github.com/aws-samples/aws-database-migration-samples/blob/master/LICENSE)
