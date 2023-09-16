@@ -10,21 +10,27 @@ The following sections describe how to download dataset source files using `wget
 
 ## Datasets
 
-- [Chinook database](#chinook-database)
-- [Employees database](#employees-database)
-- [Lego database](#lego-database)
-- [Netflix data](#netflix-data)
-- [Pagila database](#pagila-database)
-- [Periodic table data](#periodic-table-data)
-- [Titanic passenger data](#titantic-passenger-data)
-- [World Happiness Index](#world-happiness-index)
-- [Wikipedia vector embeddings](#wikipedia-vector-embeddings)
-- [postgres_air](#postgres_air-database)
-- [AWS DMS sample database](#amazon-dms-sample-database)
+- [Chinook database](#chinook-database) (9.6 MB)
+- [Employees database](#employees-database) (360 MB)
+- [Lego database](#lego-database) (35 MB)
+- [Netflix data](#netflix-data) (3.9 MB)
+- [Pagila database](#pagila-database) (7.9 MB)
+- [Periodic table data](#periodic-table-data) (72 KB)
+- [Titanic passenger data](#titanic-passenger-data) (408 KB)
+- [World Happiness Index](#world-happiness-index) (56 KB)
+- [Wikipedia vector embeddings](#wikipedia-vector-embeddings) (2.8 GB)
+- [Postgres air](#postgres_air-database) (?)
+- [AWS DMS sample database](#amazon-dms-sample-database) (10 GB)
 
 ### Chinook database
 
 Chinook digital media store database (11 tables, 2280 KB)
+
+Create a `chinook` database:
+
+```sql
+CREATE DATABASE chinook;
+```
 
 Download the source file:
 
@@ -41,7 +47,7 @@ psql -d "postgres://[user]:[password]@[hostname]/chinook" -f chinook.sql
 - Source: [https://github.com/lerocha/chinook-database](https://github.com/lerocha/chinook-database)
 - License: [https://github.com/lerocha/chinook-database/blob/master/LICENSE.md](https://github.com/lerocha/chinook-database/blob/master/LICENSE.md)
 
-### employees database
+### Employees database
 
 Employees database (6 tables, 360 MB)
 
@@ -72,6 +78,12 @@ pg_restore -d postgres://[user]:[password]@[hostname]/employees -Fc employees.sq
 
 Lego database (8 tables, 35 MB)
 
+Create a `lego` database:
+
+```sql
+CREATE DATABASE lego;
+```
+
 Download the source file:
 
 ```bash
@@ -90,6 +102,12 @@ psql -d "postgres://[user]:[password]@[hostname]/lego" -f lego.sql
 ### Netflix data
 
 Netflix shows (1 table, 3832 KB)
+
+Create a `netflix` database:
+
+```sql
+CREATE DATABASE netflix;
+```
 
 Download the source file:
 
@@ -110,6 +128,12 @@ psql -d "postgres://[user]:[password]@[hostname]/netflix" -f netflix_shows.sql
 
 Pagila database (22 tables, 7856 KB)
 
+Create a `pagila` database:
+
+```sql
+CREATE DATABASE pagila;
+```
+
 Download the source file:
 
 ```bash
@@ -128,6 +152,12 @@ psql -d "postgres://[user]:[password]@[hostname]/pagila" -f pagila.sql
 ### Periodic table data
 
 Periodic table of elements (1 table, 72 KB)
+
+Create an `periodic_table` database:
+
+```sql
+CREATE DATABASE periodic_table;
+```
 
 Download the source file:
 
@@ -148,6 +178,12 @@ psql -d "postgres://[user]:[password]@[hostname]/periodic_table" -f periodic_tab
 
 Titanic passenger data (1 table, 408 KB)
 
+Create a `titanic` database:
+
+```sql
+CREATE DATABASE titanic;
+```
+
 Download the source file:
 
 ```bash
@@ -167,6 +203,12 @@ psql -d "postgres://[user]:[password]@[hostname]/titanic" -f titanic.sql
 
 World Happiness Index (1 table, 56 KB)
 
+Create a `world_happiness` database:
+
+```sql
+CREATE DATABASE world_happiness;
+```
+
 Download the source file:
 
 ```bash
@@ -185,6 +227,12 @@ psql -d "postgres://[user]:[password]@[hostname]/happiness_index" -f happiness_i
 ### Wikipedia vector embeddings
 
 Wikipedia vector embeddings (1 table, 2.8 GB)
+
+Create a `wikipedia` database:
+
+```sql
+CREATE DATABASE wikipedia;
+```
 
 This dataset consists of pre-computed vector embedding for 25000 Wikipedia articles. It is intended for use with the `pgvector` Postgres extension, which you must install first to create the table that will hold the data. For a Jupyter Notebook that uses this dataset with Neon, `pgvector`, and OpenAI, refer to the following GitHub repository: [neon-vector-search-openai-notebooks](https://github.com/neondatabase/neon-vector-search-openai-notebooks)
 
@@ -239,7 +287,13 @@ CREATE INDEX ON public.articles USING ivfflat (title_vector) WITH (lists = 1000)
 - Source: [OpenAI](https://github.com/openai/openai-cookbook/tree/main/examples/vector_databases)
 - License: [MIT License](https://github.com/openai/openai-cookbook/blob/main/LICENSE)
 
-### postgres_air database
+### Postgres air database
+
+Create a `postgres_air` database:
+
+```sql
+CREATE DATABASE wikipedia;
+```
 
 Download the file from: [Google drive](https://drive.google.com/drive/folders/13F7M80Kf_somnjb-mTYAnh1hW1Y_g4kJ)
 
@@ -262,9 +316,11 @@ This sample database is 10 GBs in size. It exceeds the Neon Free Tier storage li
 
 For information about this database and its structure, see [Amazon DMS Sample Database for PostgreSQL: version 1.0](https://github.com/aws-samples/aws-database-migration-samples/blob/master/PostgreSQL/sampledb/v1/README.md).
 
-Create a database named `dms_sample`.
+Create a `dms_sample` database:
 
-```CREATE DATABASE dms_sample;`
+```sql
+CREATE DATABASE dms_sample;
+```
 
 Run the following command to download the database creation scripts from GitHub:
 
