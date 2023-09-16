@@ -171,6 +171,18 @@ Navigate to the directory where you downloaded the source file, and run the foll
 psql -d "postgres://[user]:[password]@[hostname]/periodic_table" -f periodic_table.sql
 ```
 
+Connect to the `periodic_table` database:
+
+```bash
+psql postgres://[user]:[password]@[hostname]/periodic_table
+```
+
+Look up the most intriguing element:
+
+```sql
+SELECT * FROM periodic_table WHERE "AtomicNumber" = 10;
+```
+
 - Source: [https://github.com/andrejewski/periodic-table](https://github.com/andrejewski/periodic-table)
 - License: [ISC License](https://github.com/andrejewski/periodic-table/blob/master/LICENSE)
 
@@ -194,6 +206,21 @@ Navigate to the directory where you downloaded the source file, and run the foll
 
 ```bash
 psql -d "postgres://[user]:[password]@[hostname]/titanic" -f titanic.sql
+```
+
+Connect to the `titanic` database:
+
+```bash
+psql postgres://[user]:[password]@[hostname]/titanic
+```
+
+Query passengers with the most expensive fares:
+
+```sql
+SELECT name, fare
+FROM passenger
+ORDER BY fare DESC
+LIMIT 10;
 ```
 
 - Source: [https://www.kaggle.com/datasets/ibrahimelsayed182/titanic-dataset](https://www.kaggle.com/datasets/ibrahimelsayed182/titanic-dataset)
@@ -221,6 +248,29 @@ Navigate to the directory where you downloaded the source file, and run the foll
 psql -d "postgres://[user]:[password]@[hostname]/happiness_index" -f happiness_index.sql
 ```
 
+Connect to the `titanic` database:
+
+```bash
+psql postgres://[user]:[password]@[hostname]/world_happiness_index
+```
+
+Countries where the happiness score is above average but the GDP per capita is below average
+
+```sql
+SELECT 
+    country_or_region,
+    score,
+    gdp_per_capita
+FROM 
+    "2019"
+WHERE 
+    score > (SELECT AVG(score) FROM "2019") 
+    AND 
+    gdp_per_capita < (SELECT AVG(gdp_per_capita) FROM "2019")
+ORDER BY 
+    score DESC;
+```
+
 - Source: [https://www.kaggle.com/datasets/unsdsn/world-happiness](https://www.kaggle.com/datasets/unsdsn/world-happiness)
 - License: [CC0: Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
 
@@ -228,13 +278,7 @@ psql -d "postgres://[user]:[password]@[hostname]/happiness_index" -f happiness_i
 
 Wikipedia vector embeddings (1 table, 2.8 GB)
 
-Create a `wikipedia` database:
-
-```sql
-CREATE DATABASE wikipedia;
-```
-
-This dataset consists of pre-computed vector embedding for 25000 Wikipedia articles. It is intended for use with the `pgvector` Postgres extension, which you must install first to create the table that will hold the data. For a Jupyter Notebook that uses this dataset with Neon, `pgvector`, and OpenAI, refer to the following GitHub repository: [neon-vector-search-openai-notebooks](https://github.com/neondatabase/neon-vector-search-openai-notebooks)
+This dataset provides pre-computed vector embeddings for 25000 Wikipedia articles. It is intended for use with the `pgvector` Postgres extension, which you need install first to create a table with vector type columns. For a Jupyter Notebook that uses this dataset with Neon, `pgvector`, and OpenAI, refer to the following GitHub repository: [neon-vector-search-openai-notebooks](https://github.com/neondatabase/neon-vector-search-openai-notebooks)
 
 Download the zip file (~700MB):
 
@@ -248,6 +292,18 @@ Navigate to the directory where you downloaded the zip file, and run the followi
 unzip vector_database_wikipedia_articles_embedded.zip
 ```
 
+Create a `wikipedia` database:
+
+```sql
+CREATE DATABASE wikipedia;
+```
+
+Connect to the `wikipedia` database:
+
+```bash
+psql postgres://[user]:[password]@[hostname]/wikipedia
+```
+
 Install the `pgvector` extension:
 
 ```sql
@@ -258,7 +314,7 @@ Create the following table in your database:
 
 ```sql
 CREATE TABLE IF NOT EXISTS public.articles (
-    id INTEGER NOT NULL,
+    id INTEGER NOT NULL PRIMARY KEY,
     url TEXT,
     title TEXT,
     content TEXT,
@@ -266,14 +322,12 @@ CREATE TABLE IF NOT EXISTS public.articles (
     content_vector vector(1536),
     vector_id INTEGER
 );
-
-ALTER TABLE public.articles ADD PRIMARY KEY (id);
 ```
 
 Navigate to the directory where you extracted the source file, and run the following command:
 
 ```bash
-psql -d "postgres://[user]:[password]@[hostname]/happiness_index" -f vector_database_wikipedia_articles_embedded.sql
+psql -d "postgres://[user]:[password]@[hostname]/wikipedia" -c "\COPY public.articles (id, url, title, content, title_vector, content_vector, vector_id) FROM 'vector_database_wikipedia_articles_embedded.csv' WITH (FORMAT CSV, HEADER true, DELIMITER ',');"
 ```
 
 Optionally, create the vector search indexes using the following commands:
