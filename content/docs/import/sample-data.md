@@ -18,6 +18,8 @@ The following sections describe how to download dataset source files using `wget
 - [Periodic table data](#periodic-table-data)
 - [Titanic passenger data](#titantic-passenger-data)
 - [World Happiness Index](#world-happiness-index)
+- [postgres_air](#postgres_air-database)
+- [AWS DMS sample database](#amazon-dms-sample-database)
 
 ### Chinook database
 
