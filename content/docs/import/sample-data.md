@@ -13,8 +13,8 @@ The following sections describe how to download dataset source files using `wget
 - [Chinook database](#chinook-database) (9.6 MB)
 - [Employees database](#employees-database) (360 MB)
 - [Lego database](#lego-database) (42 MB)
-- [Netflix data](#netflix-data) (3.9 MB)
-- [Pagila database](#pagila-database) (7.9 MB)
+- [Netflix data](#netflix-data) (11 MB)
+- [Pagila database](#pagila-database) (7.1 MB)
 - [Periodic table data](#periodic-table-data) (72 KB)
 - [Titanic passenger data](#titanic-passenger-data) (408 KB)
 - [World Happiness Index](#world-happiness-index) (56 KB)
@@ -76,7 +76,7 @@ pg_restore -d postgres://[user]:[password]@[hostname]/employees -Fc employees.sq
 
 ### Lego database
 
-Lego database (8 tables, 35 MB)
+Lego database (8 tables, 42 MB)
 
 Create a `lego` database:
 
@@ -101,7 +101,7 @@ psql -d "postgres://[user]:[password]@[hostname]/lego" -f lego.sql
 
 ### Netflix data
 
-Netflix shows (1 table, 3832 KB)
+Netflix shows (1 table, 11 MB)
 
 Create a `netflix` database:
 
@@ -112,7 +112,7 @@ CREATE DATABASE netflix;
 Download the source file:
 
 ```bash
-wget https://raw.githubusercontent.com/danieltprice/postgres-sample-dbs/main/netflix_shows.sql
+wget https://raw.githubusercontent.com/danieltprice/postgres-sample-dbs/main/netflix.sql
 ```
 
 Navigate to the directory where you downloaded the source file, and run the following command:
@@ -126,7 +126,7 @@ psql -d "postgres://[user]:[password]@[hostname]/netflix" -f netflix_shows.sql
 
 ### Pagila database
 
-Pagila database (22 tables, 7856 KB)
+Pagila database (33 tables, 7.1 MB)
 
 Create a `pagila` database:
 
@@ -289,22 +289,24 @@ CREATE INDEX ON public.articles USING ivfflat (title_vector) WITH (lists = 1000)
 
 ### Postgres air database
 
+`postgres_air` database (x tables, 1.2 GB)
+
 Create a `postgres_air` database:
 
 ```sql
-CREATE DATABASE wikipedia;
+CREATE DATABASE postgres_air;
 ```
 
-Download the file from: [Google drive](https://drive.google.com/drive/folders/13F7M80Kf_somnjb-mTYAnh1hW1Y_g4kJ)
+Download the file (1.3 GB) from: [Google drive](https://drive.google.com/drive/folders/13F7M80Kf_somnjb-mTYAnh1hW1Y_g4kJ)
 
 Navigate to the directory where you downloaded the source file, and run the following command:
 
 ```bash
-psql -d "postgres://[user]:[password]@[hostname]/happiness_index" -f postgres_air_2023.backup
+psql -d "postgres://[user]:[password]@[hostname]/postgres_air" -f postgres_air_2023.backup
 ```
 
-- Source: [tbd](tbd)
-- License: [tbd](tbd)
+- Source: [https://github.com/hettie-d/postgres_air](https://github.com/hettie-d/postgres_air)
+- License: [BSD 3-Clause License](https://github.com/hettie-d/postgres_air/blob/main/LICENSE)
 
 ### Amazon DMS Sample Database
 
