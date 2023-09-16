@@ -19,8 +19,7 @@ The following sections describe how to download dataset source files using `wget
 - [Titanic passenger data](#titanic-passenger-data) (408 KB)
 - [World Happiness Index](#world-happiness-index) (56 KB)
 - [Wikipedia vector embeddings](#wikipedia-vector-embeddings) (2.8 GB)
-- [Postgres air](#postgres_air-database) (?)
-- [AWS DMS sample database](#amazon-dms-sample-database) (10 GB)
+- [Postgres air](#postgres-air-database) (6.9 GB)
 
 ### Chinook database
 
@@ -64,6 +63,8 @@ Find out the top 5 best-selling artists based on invoice total:
 ### Employees database
 
 Employees database (6 tables, 333 MB)
+
+The employees sample database contains details about employees, their departments, salaries, and more.
 
 Create the database and schema:
 
@@ -111,6 +112,8 @@ LIMIT 5;
 
 Lego database (8 tables, 42 MB)
 
+The LEGO dataset contains information about various LEGO sets, their themes, parts, colors, and other associated data.
+
 Create a `lego` database:
 
 ```sql
@@ -135,12 +138,25 @@ Connect to the `lego` database:
 psql postgres://[user]:[password]@[hostname]/lego
 ```
 
+Find the top 5 LEGO themes by the number of sets:
+
+```sql
+SELECT t.theme_name, COUNT(s.set_id) AS number_of_sets
+FROM lego_themes t
+JOIN lego_sets s ON t.theme_id = s.theme_id
+GROUP BY t.theme_name
+ORDER BY number_of_sets DESC
+LIMIT 5;
+```
+
 - Source: [https://www.kaggle.com/datasets/rtatman/lego-database](https://www.kaggle.com/datasets/rtatman/lego-database)
 - License: [CC0: Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
 
 ### Netflix data
 
 Netflix shows (1 table, 11 MB)
+
+The Netflix dataset provides a listings of movies and tv shows on Netflix.
 
 Create a `netflix` database:
 
@@ -173,6 +189,8 @@ psql postgres://[user]:[password]@[hostname]/netflix
 
 Pagila database (33 tables, 7.1 MB)
 
+The Pagila database contains sample data from a fictional DVD rental store. Pagila includes tables for films, actors, film categories, stores, customers, payments, and more.
+
 Create a `pagila` database:
 
 ```sql
@@ -195,6 +213,19 @@ Connect to the `pagila` database:
 
 ```bash
 psql postgres://[user]:[password]@[hostname]/pagila
+```
+
+Find the top 10 most popular film categories based on rental frequency:
+
+```sql
+SELECT c.name AS category_name, COUNT(r.rental_id) AS rental_count
+FROM category c
+JOIN film_category fc ON c.category_id = fc.category_id
+JOIN inventory i ON fc.film_id = i.film_id
+JOIN rental r ON i.inventory_id = r.inventory_id
+GROUP BY c.name
+ORDER BY rental_count DESC
+LIMIT 10;
 ```
 
 - Source: [https://github.com/devrimgunduz/pagila](https://github.com/devrimgunduz/pagila)
@@ -228,7 +259,7 @@ Connect to the `periodic_table` database:
 psql postgres://[user]:[password]@[hostname]/periodic_table
 ```
 
-Look up the most intriguing element:
+Look up the the element with the Atomic Number 10:
 
 ```sql
 SELECT * FROM periodic_table WHERE "AtomicNumber" = 10;
