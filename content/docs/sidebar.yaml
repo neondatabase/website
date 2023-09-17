@@ -241,7 +241,7 @@
     - title: Migrate data with AWS DMS
       slug: import/migrate-aws-dms
     - title: Import sample data
-      slug: import/sample-data
+      slug: import/import-sample-data
 - title: Security
   items:
     - title: Security overview
