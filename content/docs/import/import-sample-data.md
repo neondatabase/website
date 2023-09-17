@@ -1,6 +1,6 @@
 ---
 title: Postgres sample data
-subtitle: Download sample data for learning, testing, and exploring Neon features
+subtitle: Download sample data for learning, testing, and exploring Neon
 enableTableOfContents: true
 ---
 
@@ -486,3 +486,7 @@ An airport database containing information about airports, aircraft, bookings, p
 
 - Source: [https://github.com/hettie-d/postgres_air](https://github.com/hettie-d/postgres_air)
 - License: [BSD 3-Clause License](https://github.com/hettie-d/postgres_air/blob/main/LICENSE)
+
+## Need help?
+
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
