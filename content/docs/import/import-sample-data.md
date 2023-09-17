@@ -68,8 +68,6 @@ A table containing data about the periodic table of elements.
 
 A dataset dataset that evaluates the happiness of countries based on multiple indicators.
 
-World Happiness Index (1 table, 56 KB)
-
 1. Create a `world_happiness` database:
 
     ```sql
@@ -118,8 +116,6 @@ World Happiness Index (1 table, 56 KB)
 
 A dataset containing information on the passengers aboard the RMS Titanic, which famously sank on its maiden voyage in 1912.
 
-Titanic passenger data (1 table, 408 KB)
-
 1. Create a `titanic` database:
 
     ```sql
@@ -157,8 +153,6 @@ Titanic passenger data (1 table, 408 KB)
 - License: [Unknown](https://www.kaggle.com/datasets/vinicius150987/titanic3)
 
 ### Chinook database
-
-Chinook digital media store database (11 tables, 2280 KB)
 
 A sample database for a digital media store, including tables for artists, albums, media tracks, invoices, customers, and more.
 
@@ -208,8 +202,6 @@ A sample database for a digital media store, including tables for artists, album
 
 ### Netflix data
 
-Netflix shows (1 table, 11 MB)
-
 A dataset containing information about of movies and tv shows on Netflix.
 
 1. Create a `netflix` database:
@@ -258,8 +250,6 @@ A dataset containing information about of movies and tv shows on Netflix.
 
 ### Pagila database
 
-Pagila database (33 tables, 7.1 MB)
-
 Sample data from a fictional DVD rental store. Pagila includes tables for films, actors, film categories, stores, customers, payments, and more.
 
 1. Create a `pagila` database:
@@ -304,8 +294,6 @@ Sample data from a fictional DVD rental store. Pagila includes tables for films,
 
 ### Lego database
 
-Lego database (8 tables, 42 MB)
-
 A dataset containing information about various LEGO sets, their themes, parts, colors, and other associated data.
 
 1. Create a `lego` database:
@@ -347,8 +335,6 @@ A dataset containing information about various LEGO sets, their themes, parts, c
 - License: [CC0: Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
 
 ### Employees database
-
-Employees database (6 tables, 333 MB)
 
 A dataset containing details about employees, their departments, salaries, and more.
 
@@ -395,8 +381,6 @@ A dataset containing details about employees, their departments, salaries, and m
 - License: This work is licensed under the Creative Commons Attribution-Share Alike 3.0 Unported License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/) or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 
 ### Wikipedia vector embeddings
-
-Wikipedia vector embeddings (1 table, 2.8 GB)
 
 An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wikipedia articles. It is intended for use with the `pgvector` Postgres extension, which you need install first to create a table with vector type columns. For a Jupyter Notebook that uses this dataset with Neon, `pgvector`, and OpenAI, refer to the following GitHub repository: [neon-vector-search-openai-notebooks](https://github.com/neondatabase/neon-vector-search-openai-notebooks)
 
