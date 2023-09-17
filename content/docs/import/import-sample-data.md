@@ -17,9 +17,9 @@ Sample datasets are listed in order of smallest to largest installed size. Pleas
 | [Titanic passenger data](#titanic-passenger-data)   | 1      | 1309      | 220 KB                   | 7528 kB        |
 | [Chinook database](#chinook-database)               | 11     | 77929      | 1.8 MB                   | 9.6 MB         |
 | [Netflix data](#netflix-data)                       | 1      | 8807     | 3.2 MB                   | 11 MB          |
-| [Pagila database](#pagila-database)                 | 33     | 62322      | 3 GB                     | 17 MB          |
+| [Pagila database](#pagila-database)                 | 33     | 62322      | 3 MB                     | 17 MB          |
 | [Lego database](#lego-database)                     | 8      | 633250     | 13 MB                    | 42 MB          |
-| [Employees database](#employees-database)           | 6      | 3919015     | 34 MB                    | 850 MB         |
+| [Employees database](#employees-database)           | 6      | 3919015     | 34 MB                    | 333 MB         |
 | [Wikipedia vector embeddings](#wikipedia-vector-embeddings) | 1  | 25000 | 1.7 GB | 850 MB         |
 | [Postgres air](#postgres-air-database)              | 10     | 67228600     | 1.2 GB                   | 6.7 GB         |
 
