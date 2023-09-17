@@ -40,7 +40,7 @@ A table containing data about the periodic table of elements.
 2. Download the source file:
 
     ```bash
-    wget https://raw.githubusercontent.com/danieltprice/postgres-sample-dbs/main/periodic_table.sql
+    wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/periodic_table.sql
     ```
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
@@ -79,7 +79,7 @@ World Happiness Index (1 table, 56 KB)
 2. Download the source file:
 
     ```bash
-    wget https://raw.githubusercontent.com/danieltprice/postgres-sample-dbs/main/happiness_index.sql
+    wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/happiness_index.sql
     ```
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
@@ -129,7 +129,7 @@ Titanic passenger data (1 table, 408 KB)
 2. Download the source file:
 
     ```bash
-    wget https://raw.githubusercontent.com/danieltprice/postgres-sample-dbs/main/titanic.sql
+    wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/titanic.sql
     ```
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
@@ -171,7 +171,7 @@ A sample database for a digital media store, including tables for artists, album
 2. Download the source file:
 
     ```bash
-    wget https://raw.githubusercontent.com/danieltprice/postgres-sample-dbs/main/chinook.sql
+    wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
     ```
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
@@ -221,7 +221,7 @@ A dataset containing information about of movies and tv shows on Netflix.
 2. Download the source file:
 
     ```bash
-    wget https://raw.githubusercontent.com/danieltprice/postgres-sample-dbs/main/netflix.sql
+    wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/netflix.sql
     ```
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
@@ -271,7 +271,7 @@ Sample data from a fictional DVD rental store. Pagila includes tables for films,
 2. Download the source file:
 
     ```bash
-    wget https://raw.githubusercontent.com/danieltprice/postgres-sample-dbs/main/pagila.sql
+    wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/pagila.sql
     ```
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
@@ -317,7 +317,7 @@ A dataset containing information about various LEGO sets, their themes, parts, c
 2. Download the source file:
 
     ```bash
-    wget https://raw.githubusercontent.com/danieltprice/postgres-sample-dbs/main/lego.sql
+    wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/lego.sql
     ```
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
@@ -363,7 +363,7 @@ A dataset containing details about employees, their departments, salaries, and m
 2. Download the source file:
 
     ```bash
-    wget https://raw.githubusercontent.com/danieltprice/postgres-sample-dbs/main/employees.sql.gz
+    wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/employees.sql.gz
     ```
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
