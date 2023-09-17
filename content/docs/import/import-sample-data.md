@@ -1,5 +1,5 @@
 ---
-title: Import sample data
+title: Postgres sample data
 subtitle: Download sample data for learning, testing, and exploring Neon features
 enableTableOfContents: true
 ---
@@ -186,10 +186,21 @@ A sample database for a digital media store, including tables for artists, album
     psql postgres://[user]:[password]@[hostname]/chinook
     ```
 
-5. Find out the top 5 best-selling artists based on invoice total:
+5. Find out the most item by track title:
 
     ```sql
-
+    SELECT 
+    T."Name" AS "Track Title",
+    SUM(IL."Quantity") AS "Total Sold"
+    FROM 
+        "Track" T
+    JOIN 
+        "InvoiceLine" IL ON T."TrackId" = IL."TrackId"
+    GROUP BY 
+        T."Name"
+    ORDER BY 
+        "Total Sold" DESC
+    LIMIT 1;
     ```
 
 - Source: [https://github.com/lerocha/chinook-database](https://github.com/lerocha/chinook-database)
@@ -223,6 +234,23 @@ A dataset containing information about of movies and tv shows on Netflix.
 
     ```bash
     psql postgres://[user]:[password]@[hostname]/netflix
+    ```
+
+5. Find the directors with the most movies in the database:
+
+    ```sql
+    SELECT 
+        director,
+        COUNT(*) AS "Number of Movies"
+    FROM 
+        netflix_shows
+    WHERE 
+        type = 'Movie'
+    GROUP BY 
+        director
+    ORDER BY 
+        "Number of Movies" DESC
+    LIMIT 5;
     ```
 
 - Source: [https://www.kaggle.com/datasets/shivamb/netflix-shows](https://www.kaggle.com/datasets/shivamb/netflix-shows)
@@ -307,10 +335,10 @@ A dataset containing information about various LEGO sets, their themes, parts, c
 5. Find the top 5 LEGO themes by the number of sets:
 
     ```sql
-    SELECT t.theme_name, COUNT(s.set_id) AS number_of_sets
-    FROM lego_themes t
-    JOIN lego_sets s ON t.theme_id = s.theme_id
-    GROUP BY t.theme_name
+    SELECT lt.name AS theme_name, COUNT(ls.set_num) AS number_of_sets
+    FROM lego_themes lt
+    JOIN lego_sets ls ON lt.id = ls.theme_id
+    GROUP BY lt.name
     ORDER BY number_of_sets DESC
     LIMIT 5;
     ```
@@ -353,10 +381,10 @@ A dataset containing details about employees, their departments, salaries, and m
 5. Find the top 5 departments with the highest average salary:
 
     ```sql
-    SELECT d.dept_name, AVG(s.salary) AS average_salary
-    FROM salaries s
-    JOIN dept_emp de ON s.emp_no = de.emp_no
-    JOIN departments d ON de.dept_no = d.dept_no
+    SELECT d.dept_name, AVG(s.amount) AS average_salary
+    FROM employees.salary s
+    JOIN employees.department_employee de ON s.employee_id = de.employee_id
+    JOIN employees.department d ON de.department_id = d.id
     WHERE s.to_date > CURRENT_DATE AND de.to_date > CURRENT_DATE
     GROUP BY d.dept_name
     ORDER BY average_salary DESC
