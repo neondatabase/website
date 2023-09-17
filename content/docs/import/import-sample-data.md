@@ -180,7 +180,7 @@ A sample database for a digital media store, including tables for artists, album
     psql postgres://[user]:[password]@[hostname]/chinook
     ```
 
-5. Find out the most item by track title:
+5. Find out the most sold item by track title:
 
     ```sql
     SELECT 
@@ -202,7 +202,7 @@ A sample database for a digital media store, including tables for artists, album
 
 ### Netflix data
 
-A dataset containing information about of movies and tv shows on Netflix.
+A dataset containing information about movies and tv shows on Netflix.
 
 1. Create a `netflix` database:
 
@@ -382,7 +382,7 @@ A dataset containing details about employees, their departments, salaries, and m
 
 ### Wikipedia vector embeddings
 
-An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wikipedia articles. It is intended for use with the `pgvector` Postgres extension, which you need install first to create a table with vector type columns. For a Jupyter Notebook that uses this dataset with Neon, `pgvector`, and OpenAI, refer to the following GitHub repository: [neon-vector-search-openai-notebooks](https://github.com/neondatabase/neon-vector-search-openai-notebooks)
+An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wikipedia articles. It is intended for use with the `pgvector` Postgres extension, which you must install first to create a table with `vector` type columns. For a Jupyter Notebook that uses this dataset with Neon, refer to the following GitHub repository: [neon-vector-search-openai-notebooks](https://github.com/neondatabase/neon-vector-search-openai-notebooks)
 
 1. Download the zip file (~700MB):
 
@@ -443,7 +443,7 @@ An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wi
     ```
 
 <Admonition type="note">
-If you encounter a memory error related to the `maintenance_work_mem` setting, refer to [Indexing vectors](/docs/extensions/pgvector#indexing-vectors) for how to increase the `maintenance_work_mem` setting.
+If you encounter a memory error related to the `maintenance_work_mem` setting, refer to [Indexing vectors](/docs/extensions/pgvector#indexing-vectors) for how to increase this setting.
 </Admonition>
 
 - Source: [OpenAI](https://github.com/openai/openai-cookbook/tree/main/examples/vector_databases)
@@ -453,29 +453,27 @@ If you encounter a memory error related to the `maintenance_work_mem` setting, r
 
 An airport database containing information about airports, aircraft, bookings, passengers, and more.
 
-`postgres_air` database (10 tables, 6.9 GB)
+1. Download the file (1.3 GB) from: [Google drive](https://drive.google.com/drive/folders/13F7M80Kf_somnjb-mTYAnh1hW1Y_g4kJ)
 
-Download the file (1.3 GB) from: [Google drive](https://drive.google.com/drive/folders/13F7M80Kf_somnjb-mTYAnh1hW1Y_g4kJ)
-
-1. Create a `postgres_air` database:
+2. Create a `postgres_air` database:
 
     ```sql
     CREATE DATABASE postgres_air;
     ```
 
-2. Navigate to the directory where you downloaded the source file, and run the following command:
+3. Navigate to the directory where you downloaded the source file, and run the following command:
 
     ```bash
     pg_restore -d postgres://[user]:[password]@[hostname]/postgres_air -Fc postgres_air_2023.backup -c -v --no-owner --no-privileges
     ```
 
-3. Connect to the `postgres_air` database:
+4. Connect to the `postgres_air` database:
 
     ```bash
     psql postgres://[user]:[password]@[hostname]/wikipedia
     ```
 
-4. Find the aircraft type with the most flights:
+5. Find the aircraft type with the most flights:
 
     ```sql
     SELECT ac.model, COUNT(f.flight_id) AS number_of_flights
