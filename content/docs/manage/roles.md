@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/manage/users
 ---
 
-In Neon, roles are Postgres roles. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in your Neon project's primary branch.
+In Neon, roles are Postgres roles. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the ready-to-use database (`neondb`) that is created in your Neon project's primary branch.
 
 Your default role and roles created in the Neon console, API, and CLI are granted membership in the [neon_superuser](#the-neon_superuser-role) role. Roles created with SQL are only granted basic privileges, as you would see in a stand-alone Postgres installation.
 
@@ -27,15 +27,7 @@ Neon supports creating and managing roles from the following interfaces:
 
 ## The neon_superuser role
 
-Roles created in the Neon console, CLI, or API, including the default role created with a Neon project, are granted membership in the `neon_superuser` role. Users cannot login as `neon_superuser`, but they inherit the privileges assigned to this role. The privileges and predefined role memberships granted to `neon_superuser` are shown in this `CREATE ROLE` statement:
-
-<CodeBlock shouldWrap>
-
-```sql
-CREATE ROLE neon_superuser CREATEDB CREATEROLE BYPASSRLS NOLOGIN IN ROLE pg_read_all_data, pg_write_all_data;
-```
-
-</CodeBlock>
+Roles created in the Neon console, CLI, or API, including the default role created with a Neon project, are granted membership in the `neon_superuser` role. Users cannot login as `neon_superuser`, but they inherit the privileges assigned to this role. The privileges and predefined role memberships granted to `neon_superuser` include:
 
 - `CREATEDB`: Provides the ability to create databases.
 - `CREATEROLE`: Provides the ability to create new roles (which also means it can alter and drop roles).

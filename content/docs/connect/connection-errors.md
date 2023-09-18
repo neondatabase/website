@@ -139,7 +139,7 @@ For clients or applications that require specifying connection parameters such a
 - **Password**: `f74wh99w398H`
 - **Hostname**: `ep-white-morning-123456.us-east-2.aws.neon.tech`
 - **Port number**: `5432` (Neon uses default Postgres port, `5432`, and is therefore not included in the connection string)
-- **Database name**: `neondb` (`neondb` is the default database created with each Neon project. Your database name may differ.)
+- **Database name**: `neondb` (`neondb` is the ready-to-use database created with each Neon project. Your database name may differ.)
 
 If you find that your connection string is defined correctly, see the instructions regarding SNI support outlined in the preceding section: [The endpoint ID is not specified](#the-endpoint-id-is-not-specified).
 
