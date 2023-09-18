@@ -1,25 +1,9 @@
-### Postgres extension updates
+### Support for Postgres 16
 
-The following Postgres extensions were updated to a newer version:
+Neon is pleased to announce support for Postgres 16. To use Postgres 16 with Neon, create a new Neon project and select **16** as the **Postgres version**. See [Create a project](/docs/manage/projects#create-a-project) for instructions.
 
-| Postgres extension           | Old version   | New version   |
-|------------------------------|---------------|---------------|
-| `address_standardizer`       | 3.3.2         | 3.3.3         |
-| `address_standardizer_data_us` | 3.3.2       | 3.3.3         |
-| `h3`                         | 4.1.2         | 4.1.3         |
-| `h3_postgis`                 | 4.1.2         | 4.1.3         |
-| `hll`                        | 2.16          | 2.18          |
-| `hypog`                      | 1.3.1         | 1.4.0         |
-| `ip4r`                       | 2.4.1         | 2.4.2         |
-| `plcoffee`                   | 3.1.5         | 3.1.8         |
-| `plls`                       | 3.1.5         | 3.1.8         |
-| `plpgsql_check`              | 2.3.0         | 2.4.0         |
-| `postgis`                    | 3.3.2         | 3.3.3         |
-| `postgis_raster`             | 3.3.2         | 3.3.3         |
-| `postgis_sfcgal`             | 3.3.2         | 3.3.3         |
-| `postgis_tiger_geocoder`     | 3.3.2         | 3.3.3         |
-| `postgis_topology`           | 3.3.2         | 3.3.3         |
+![Postgres 16 Create project](/docs/relnotes/postgres_16.png)
 
-If you installed these extensions previously and want to upgrade to the latest version, please refer to [Update an extension version](/docs/extensions/pg-extensions#update-an-extension-version) for instructions.
+To migrate data from an existing Neon project to one created with Postgres 16, refer to the dump and restore procedure described in [Import data from another Neon project](/docs/import/import-from-neon).
 
-For a complete list of Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
+As with any database migration, always test thoroughly before migrating production systems or applications. Also, we recommend familiarizing yourself with the changes in Postgres 16, especially those affecting compatibility. For information about those changes, please refer to the official [Postgres Release 16 documentation](https://www.postgresql.org/docs/16/release-16.html).
