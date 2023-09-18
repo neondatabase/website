@@ -12,9 +12,9 @@ Sample datasets are listed in order of smallest to largest installed size. Pleas
 
 | Name                                                | Tables | Records | Source file size         | Installed size  |
 |-----------------------------------------------------|--------|------|--------------------------|-----------------|
-| [Periodic table data](#periodic-table-data)         | 1      | 118     | 17 KB                    | 7176 kB        |
-| [World Happiness Index](#world-happiness-index)     | 1      | 156     | 9.4 KB                   | 7200 kB        |
-| [Titanic passenger data](#titanic-passenger-data)   | 1      | 1309      | 220 KB                   | 7528 kB        |
+| [Periodic table data](#periodic-table-data)         | 1      | 118     | 17 KB                    | 7.2 MB        |
+| [World Happiness Index](#world-happiness-index)     | 1      | 156     | 9.4 KB                   | 7.2 MB        |
+| [Titanic passenger data](#titanic-passenger-data)   | 1      | 1309      | 220 KB                   | 7.5 MB        |
 | [Chinook database](#chinook-database)               | 11     | 77929      | 1.8 MB                   | 9.6 MB         |
 | [Netflix data](#netflix-data)                       | 1      | 8807     | 3.2 MB                   | 11 MB          |
 | [Pagila database](#pagila-database)                 | 33     | 62322      | 3 MB                     | 17 MB          |
