@@ -51,8 +51,6 @@ Vector similarity search computes similarities (the distance) between data point
 
 Different distance metrics can be more appropriate for different tasks, depending on the nature of the data and the specific relationships you're interested in. For instance, cosine similarity is often used in text analysis.
 
-The [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) extensions, which enable Postgres as a vector database, support different distance metrics, including those described above.
-
 ## Generating embeddings
 
 A common approach to generate embeddings is to use OpenAI’s Embeddings API. This API allows you to input a text string into an API endpoint, which then returns the corresponding embedding. The "cow jumped over the moon" example above is a simplistic example with 3 dimensions. Most embedding models generate a much larger number of embeddings. OpenAI's `text-embedding-ada-002` model, for example, generates 1536 embeddings.
@@ -103,24 +101,24 @@ To learn more about OpenAI's embeddings, see [Embeddings](https://platform.opena
 
 ## Storing vector embeddings in Postgres
 
-Neon supports the [pg_embedding](/docs/extensions/pg_embedding) and [pgvector](/docs/extensions/pgvector) Postgres extensions, which enable storing and retrieving vector embeddings directly within your Postgres database. When building AI and LLM applications, installing either of these extensions eliminates the need to build out your architecture to include a separate vector store.
+Neon supports the [pgvector](/docs/extensions/pgvector) and [pg_embedding](/docs/extensions/pg_embedding) Postgres extensions, which enable storing and retrieving vector embeddings directly within your Postgres database. When building AI and LLM applications, installing either of these extensions eliminates the need to build out your architecture to include a separate vector store.
 
-After installing an extension, you can create a table to store your embeddings. For example, if you install the `pg_embedding` extension, you might define a table similar to the following to store your embeddings:
+After installing an extension, you can create a table to store your embeddings. For example, if you install the `pgvector` extension, you might define a table similar to the following to store your embeddings:
 
 ```sql
-CREATE TABLE documents(id BIGSERIAL PRIMARY KEY, embedding REAL[1536]);
+CREATE TABLE items(id BIGSERIAL PRIMARY KEY, embedding VECTOR(1536));
 ```
 
 To add embeddings to the table, you would insert the data as shown:
 
 ```sql
-INSERT INTO documents(embedding) VALUES (ARRAY[
+INSERT INTO items(embedding) VALUES ('[
     -0.006929283495992422,
     -0.005336422007530928,
     ...
     -4.547132266452536e-05,
     -0.024047505110502243
-]);
+]');
 ```
 
 ## Building AI apps with embeddings
@@ -137,6 +135,6 @@ The concepts described above provide an introduction to the basic building block
 For example applications built based on this general process, see the following:
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/yc-idea-matcher" description="Build an AI-powered semantic search application with pg_embedding" icon="github">Semantic search app</a>
+<a href="https://github.com/neondatabase/yc-idea-matcher" description="Build an AI-powered semantic search application" icon="github">Semantic search app</a>
 <a href="https://github.com/neondatabase/ask-neon" description="Build an AI-powered chatbot with pgvector" icon="github">Chatbot app</a>
 </DetailIconCards>

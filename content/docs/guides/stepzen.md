@@ -17,7 +17,7 @@ Before generating a GraphQL API, you must set up a Neon database, which you can 
 
 1. Sign in to Neon, or [sign up](/docs/get-started-with-neon/signing-up) if you do not yet have an account.
 2. [Create a project](/docs/get-started-with-neon/setting-up-a-project).
-3. [Create a database](/docs/manage/databases#create-a-database) or use the default `neondb` database.
+3. [Create a database](/docs/manage/databases#create-a-database) or use the ready-to-use `neondb` database.
 
 You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**.
 
