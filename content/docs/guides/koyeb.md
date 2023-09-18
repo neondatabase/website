@@ -26,7 +26,7 @@ A dialog pops up with your Neon connection string, which appears similar to the 
 postgres://<user>:<password>@<host>:<port>/neondb
 ```
 
-Store this value in a safe place. It is required later. The connection string specifies `neondb` as the database. This is the default database created with each Neon project. You will use this database with the example application.
+Store this value in a safe place. It is required later. The connection string specifies `neondb` as the database. This is the ready-to-use database created with each Neon project. You will use this database with the example application.
 
 ## Deploy the application on Koyeb
 

@@ -9,7 +9,7 @@ Neon is protocol and application-compatible with Postgres. However, when using t
 
 ## Postgres versions
 
-Neon cloud service is currently compatible with Postgres 14 and Postgres 15. You can select the Postgres version you want to use when creating a Neon project. Postgres 15 is selected, by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects).
+Neon cloud service is currently compatible with Postgres 14, 15, and 16. You can select the Postgres version you want to use when creating a Neon project. Postgres 15 is selected, by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects).
 
 ## Postgres extensions
 

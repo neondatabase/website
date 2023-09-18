@@ -5,14 +5,14 @@ redirectFrom:
   - /docs/reference/pg-extensions
 ---
 
-Neon supports the Postgres extensions shown in the following table. For extension documentation, select the extension version.
+Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
 
 <a id="default-extensions/"></a>
 
 | Extension                | Version (Postgres 14)                               | Version (Postgres 15)  | Version (Postgres 16)                              |Notes                                                                                                                |
 | :------------------------| --------------------------------------------------------------: | ----------------------------------------------------------------:| ----------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------|
-| [address_standardizer](https://postgis.net/docs/Extras.html#Address_Standardizer)     | 3.3.2  | 3.3.3  |    3.3.3  |                                                                                                          |
-| [address_standardizer_data_us](https://postgis.net/docs/Extras.html#Address_Standardizer)      | 3.3.3        | 3.3.2 | 3.3.3 |                                                                                                 |
+| [address_standardizer](https://postgis.net/docs/Extras.html#Address_Standardizer)     | 3.3.3  | 3.3.3  |    3.3.3  |                                                                                                          |
+| [address_standardizer_data_us](https://postgis.net/docs/Extras.html#Address_Standardizer)      | 3.3.3        | 3.3.3 | 3.3.3 |                                                                                                 |
 | [autoinc (spi)](https://www.postgresql.org/docs/current/contrib-spi.html)             | 1.0 | 1.0  |   1.0  |                                                                                                                 |
 | [bloom](https://www.postgresql.org/docs/15/bloom.html)                     | 1.0            | 1.0             |   1.0             |                                                                                                                  |
 | [btree_gin](https://www.postgresql.org/docs/15/btree-gin.html)                | 1.3        | 1.3         |      1.3         |                                                                                                              |
@@ -83,7 +83,7 @@ Neon supports the Postgres extensions shown in the following table. For extensio
 
 ## Install an extension
 
-Unless otherwise noted, supported extensions can be installed using [CREATE EXTENSION](https://www.postgresql.org/docs/14/sql-createextension.html) syntax.
+Unless otherwise noted, supported extensions can be installed using [CREATE EXTENSION](https://www.postgresql.org/docs/15/sql-createextension.html) syntax.
 
 ```sql
 CREATE EXTENSION <extension_name>

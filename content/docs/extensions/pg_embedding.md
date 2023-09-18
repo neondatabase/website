@@ -157,68 +157,6 @@ In the bottom layer, the algorithm continues navigating to the nearest neighbor 
 
 The key idea behind HNSW is that by starting the search at the top layer and moving down through each layer, the algorithm can quickly navigate to the area of the graph that contains the node that is most similar to the query vector. This makes the search process much faster than if it had to search through every node in the graph.
 
-## Migrate from pgvector to pg_embedding
-
-Before you begin, it is important to understand that the `pgvector` extension stores vector embeddings in a `VECTOR` column type, whereas the `pg_embedding` extension stores vector embeddings as an array of `real[]` numbers, as demonstrated in the following `CREATE TABLE` statements:
-
-`pg_vector`:
-
-```sql
-CREATE TABLE items (id BIGSERIAL PRIMARY KEY, embedding VECTOR(3));
-```
-
-`pg_embedding`:
-
-```sql
-CREATE TABLE documents(id BIGSERIAL PRIMARY KEY, embedding real[]);
-```
-
-The first step in the migration process is to install the `pg_embedding` extension:
-
-```sql
-CREATE EXTENSION embedding;
-```
-
-After the `pg_embedding` extension is installed, you can use the same vector embedding table used with `pgvector`. This is possible because the `VECTOR` type used by `pgvector` is compatible with the `real[]` type used by `pg_embedding`. The only requirement is to modify vector search queries to interpret the `VECTOR` data as an array of real numbers (`real[]`). For example, take this `pgvector` query:
-
-```sql
-SELECT id, embedding FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;
-```
-
-To make the query work with `pg_embedding`, you must cast the `embedding` column to `real[]` (`embedding::real[]`) and define the search vector as an array: `array[3,1,2]`:
-
-```sql
-SELECT id, embedding::real[] FROM items ORDER BY embedding::real[] <-> array[3,1,2] LIMIT 1;
-```
-
-Alternatively, to avoid typecasting, you can alter your table to change the embedding column type from `VECTOR` to `real[]`. This operation may be time and resource intensive, depending on the size of your dataset, so please proceed with caution, as it could affect application availability.
-
-Given a table defined for `pgvector`, such as this one:
-
-```sql
-CREATE TABLE items (id BIGSERIAL PRIMARY KEY, embedding VECTOR(3));
-```
-
-You can alter the table as follows to change the column type:
-
-```sql
-ALTER TABLE items
-ALTER COLUMN embedding
-TYPE real[]
-USING (embedding::real[]);
-```
-
-You can also change the column type by adding a new `real[]` type column to your table, copying the data from the `VECTOR` column to the new column, dropping the old `VECTOR` column, and renaming the new column:
-
-```sql
-ALTER TABLE items ADD COLUMN embedding_real real[]; // Add column
-UPDATE items SET embedding_real = embedding::real[]; // Copy data
-ALTER TABLE items DROP COLUMN embedding; // Drop the old column
-ALTER TABLE items RENAME COLUMN embedding_real TO embedding; // Rename the new column
-```
-
-If you choose to change the column type from `VECTOR` to `real[]` instead of typecasting, you still have to [create an HNSW index](#create-an-hnsw-index) (if you are indexing your data) and update your application queries to use the required [pg_embedding query syntax](#similarity-search) for the defined index.
-
 ## Upgrade to pg_embedding for on-disk indexes
 
 The `pg_embedding` extension version in Neon was updated on August 3, 2023 to add support for on-disk HNSW indexes and additional distance metrics. If you installed `pg_embedding` before this date, you can upgrade to the new version (0.3.5 or higher) following the instructions below.
