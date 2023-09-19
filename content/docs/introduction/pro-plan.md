@@ -47,14 +47,14 @@ The Pro plan bills for usage monthly. Please refer to our [Billing metrics](/doc
 You can click on **Upgrade to Pro** in the Neon Console or click [here](https://console.neon.tech/app/projects?show_enroll_to_pro=true) to sign up.
 
 <Admonition type="note">
-After upgrading to a Pro account, Free Tier limits are lifted the next time your project's compute endpoint is restarted. If your compute was active before upgrading and remained active afterward, it will continue to be bound by Free Tier limits until it restarts. This can sometimes result in limit-related errors such as this one when Free Tier limits are exceeded:
+After upgrading to a Pro account, Free Tier limits are lifted the next time your project's compute endpoint is restarted. If your compute was active before upgrading and remained active afterward, it remains bound by Free Tier limits until it restarts, which can result in limit-related errors such as this one if Free Tier limits are exceeded:
 
 ```text
 ERROR: could not extend file because cluster size limit (3072 MB) has been exceeded
 HINT: This limit is defined by neon.max_cluster_size GUC
 ```
 
-To force a restart of your compute endpoint, you can temporarily set your compute's auto-suspend delay to 1 second (the default is 5 minutes). See [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. You can check the **Operations** page in the Neon Console to see if your compute endpoint was restarted. Look for `suspend_compute` and `start_compute` actions. Alternatively, you can issue [Suspend an endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start an endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. Regardless of the method you choose, please be aware that restarting a compute endpoint interrupts any connections that are currently using that compute endpoint.
+To force a restart of your compute endpoint, you can temporarily set your compute's **Auto-suspend delay** setting to 1 second (the default is 5 minutes). See [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, you can check the **Operations** page in the Neon Console to see if your compute endpoint was restarted. Look for `suspend_compute` and `start_compute` actions. Alternatively, you can issue [Suspend endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. Regardless of the method you use, please be aware that restarting a compute endpoint interrupts any connections currently using the compute endpoint.
 </Admonition>
 
 ## How do I downgrade?
