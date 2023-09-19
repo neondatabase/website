@@ -6,6 +6,15 @@ enableTableOfContents: true
 
 This guide describe how to download and install sample data using either `psql` or `pg_restore`, depending on the source file format. Most downloads are performed using `wget`. If your system does not support `wget`, you can download source files by pasting the file address in your browser's address bar.
 
+## Prerequisites
+
+- A Neon [Free Tier](/docs/introduction/free-tier) or [Pro](/docs/introduction/pro-plan) account. A Pro account is required to install datasets larger than 3 GBs.
+- A `psql` client for connecting to your Neon database and loading data. This client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
+- A `pg_restore` client if you are loading the [employees](#employees-database) or [postgres_air](#postgres-air-database) database. The `pg_restore` client is also included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
+- A Neon connection string to load data and connect to your database. After creating a database, you can obtain the connection string from the **Connection Details** widget on the Neon **Dashboard**. For instructions, see [Connect from any application](/docs/connect-connect-from-any-app).
+
+Instructions for each dataset require that you create a database. You can do so from a connected client such as `psql` or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+
 ## Sample data
 
 Sample datasets are listed in order of smallest to largest. Please be aware that the Neon Free Tier has a storage limit of 3 GBs per branch. Datasets larger than 3 GBs cannot be used on the Free Tier.
@@ -74,7 +83,7 @@ A table containing data about the periodic table of elements.
 
 ### World Happiness Index
 
-A dataset dataset that evaluates the happiness of countries based on multiple indicators.
+A dataset with multiple indicators for evaluating the happiness of countries of the world.
 
 1. Create a `world_happiness` database:
 
@@ -126,7 +135,7 @@ A dataset dataset that evaluates the happiness of countries based on multiple in
 
 ### Titanic passenger data
 
-A dataset containing information on the passengers aboard the RMS Titanic, which famously sank on its maiden voyage in 1912.
+A dataset containing information on the passengers aboard the RMS Titanic, which sank on its maiden voyage in 1912.
 
 1. Create a `titanic` database:
 
@@ -286,7 +295,7 @@ A dataset containing information about movies and tv shows on Netflix.
 
 ### Pagila database
 
-Sample data from a fictional DVD rental store. Pagila includes tables for films, actors, film categories, stores, customers, payments, and more.
+Sample data for a fictional DVD rental store. Pagila includes tables for films, actors, film categories, stores, customers, payments, and more.
 
 1. Create a `pagila` database:
 
@@ -410,6 +419,8 @@ A dataset containing details about employees, their departments, salaries, and m
 
     </CodeBlock>
 
+    Database objects are created in the `employees` schema rather than the `public` schema.
+
 4. Connect to the `employees` database:
 
     ```bash
@@ -513,7 +524,7 @@ If you encounter a memory error related to the `maintenance_work_mem` setting, r
 
 An airport database containing information about airports, aircraft, bookings, passengers, and more.
 
-1. Download the file (1.3 GB) from: [Google drive](https://drive.google.com/drive/folders/13F7M80Kf_somnjb-mTYAnh1hW1Y_g4kJ)
+1. Download the file (1.3 GB) from [Google drive](https://drive.google.com/drive/folders/13F7M80Kf_somnjb-mTYAnh1hW1Y_g4kJ)
 
 2. Create a `postgres_air` database:
 
@@ -530,6 +541,8 @@ An airport database containing information about airports, aircraft, bookings, p
     ```
 
     </CodeBlock>
+
+    Database objects are created in a `postgres_air` schema rather than the `public` schema.
 
 4. Connect to the `postgres_air` database:
 
