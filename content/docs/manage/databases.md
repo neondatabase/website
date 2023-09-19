@@ -41,6 +41,10 @@ To create a database:
 1. Enter a database name, and select a database owner.
 1. Click **Create**.
 
+<Admonition type="note">
+Some names are not permitted. See [Protected database names](#protected-database-names).
+</Admonition>
+
 ### View databases
 
 To view databases:
@@ -87,11 +91,15 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdatabase).
 
-The role specified by `owner_name` is the owner of that database. The `neon_superuser` role is also granted all privileges on databases created with the Neon API. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
+The role specified by `owner_name` is the owner of that database.
 
 ```text
 POST /projects/{project_id}/branches/{branch_id}/databases
 ```
+
+<Admonition type="note">
+Some names are not permitted for databases. See [Protected database names](#protected-database-names).
+</Admonition>
 
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and a database `name` and `owner` are required attributes.
 
@@ -108,7 +116,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 }' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -147,6 +156,8 @@ Response:
 }
 ```
 
+</details>
+
 ### List databases with the API
 
 The following Neon API method lists databases for the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranchdatabases).
@@ -163,7 +174,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -188,6 +200,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Update a database with the API
 
 The following Neon API method updates the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateprojectbranchdatabase).
@@ -210,7 +224,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 }' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -249,6 +264,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Delete a database with the API
 
 The following Neon API method deletes the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranchdatabase).
@@ -266,7 +283,8 @@ curl -X 'DELETE' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -305,6 +323,8 @@ Response:
 }
 ```
 
+</details>
+
 ## Manage databases with SQL
 
 You can create and manage databases in Neon with SQL, as you can with any stand-alone Postgres installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
@@ -326,3 +346,13 @@ For a database creation example, refer to the [Manage roles and database access 
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+
+## Protected database names
+
+The following names are protected and cannot be given to a database:
+
+- `postgres`
+- `template0`
+- `template1`
+
+</Admonition>

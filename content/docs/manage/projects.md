@@ -141,9 +141,10 @@ curl 'https://console.neon.tech/api/v2/projects' \
 }' | jq
 ```
 
-Response:
-
 The response includes information about the roles, the ready-to-use database (`neondb)`), the primary branch (`main`), and the read-write compute endpoint that is created with the project.
+
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -252,6 +253,8 @@ The response includes information about the roles, the ready-to-use database (`n
 }
 ```
 
+</details>
+
 ### List projects with the API
 
 The following Neon API method lists projects for your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojects).
@@ -268,7 +271,8 @@ curl 'https://console.neon.tech/api/v2/projects' \
  -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -290,6 +294,8 @@ Response:
   ]
 }
 ```
+
+</details>
 
 ### Update a project with the API
 
@@ -313,7 +319,8 @@ curl 'https://console.neon.tech/api/v2/projects/odd-cell-528527' \
 }'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -335,6 +342,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Delete a project with the API
 
 The following Neon API method deletes the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteproject).
@@ -352,7 +361,8 @@ curl -X 'DELETE' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -372,6 +382,8 @@ Response:
   }
 }
 ```
+
+</details>
 
 ## Need help?
 

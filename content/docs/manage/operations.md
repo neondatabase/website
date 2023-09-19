@@ -55,7 +55,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -101,6 +102,8 @@ Response:
 
 ```
 
+</details>
+
 ### List operations with pagination
 
 Pagination allows you to limit the number of operations displayed, as the number of operations for project can be large. To paginate responses, issue an initial request with a `limit` value. For brevity, the limit is set to 1 in the following example.
@@ -113,7 +116,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?li
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -136,6 +140,8 @@ Response:
 }
 ```
 
+</details>
+
 To list the next page of operations, add the `cursor` value returned in the response body of the previous request and a `limit` value for the next page.
 
 ```bash
@@ -144,7 +150,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?cu
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -167,6 +174,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Get operation
 
 This method shows only the details for the specified operation ID.
@@ -183,7 +192,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/97
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -200,6 +210,8 @@ Response:
   }
 }
 ```
+
+</details>
 
 ## Poll operation status
 
@@ -241,7 +253,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/05
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -258,6 +271,8 @@ Response:
   }
 }
 ```
+
+</details>
 
 Possible operation `status` values include `running`, `finished`, `failed`, `scheduling`. Initially, the status of an operation might be `scheduling`. Before issuing the next API request, you would poll the operation until the status changes to `finished`. You could also add logic to handle a `failed` status.
 

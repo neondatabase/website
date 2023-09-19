@@ -56,6 +56,10 @@ To create a role:
 5. In the role creation dialog, specify a role name. The length of the role name is limited to 63 bytes.
 6. Click **Create**. The role is created and you are provided with the password for the role.
 
+<Admonition type="note">
+Role names cannot exceed 63 characters, and some names are not permitted. See [Protected role names](#protected-role-names).
+</Admonition>
+
 ### Delete a role
 
 Deleting a role is a permanent action that cannot be undone, and you cannot delete a role that owns a database. The database must be deleted before you can deleting the role that owns the database.
@@ -110,6 +114,10 @@ The following Neon API method creates a role. To view the API documentation for 
 POST /projects/{project_id}/branches/{branch_id}/roles
 ```
 
+<Admonition type="note">
+Role names cannot exceed 63 characters, and some role names are not permitted. See [Protected role names](#protected-role-names).
+</Admonition>
+
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and the role `name` is a required attribute. The length of a role name is limited to 63 bytes.
 
 ```bash
@@ -124,7 +132,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 }' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -163,6 +172,8 @@ Response:
 }
 ```
 
+</details>
+
 ### List roles with the API
 
 The following Neon API method lists roles for the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranchroles).
@@ -179,7 +190,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -202,6 +214,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Reset a password with the API
 
 The following Neon API method resets the password for the specified role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/resetprojectbranchrolepassword).
@@ -219,7 +233,8 @@ curl -X 'POST' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -258,6 +273,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Delete a role with the API
 
 The following Neon API method deletes the specified role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranchrole).
@@ -275,7 +292,8 @@ curl -X 'DELETE' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -313,6 +331,8 @@ Response:
 }
 ```
 
+</details>
+
 ## Manage roles with SQL
 
 Roles created with SQL have the same privileges as newly created roles in a stand-alone Postgres installation. These roles are not granted membership in the [neon_superuser](#the-neon_superuser-role) role like roles created with the Neon Console, CLI, or API. You must grant these roles the privileges you want them to have.
@@ -348,6 +368,17 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
     </Admonition>
 
 For role creation and access management examples, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
+
+## Protected role names
+
+The following protected names and cannot given to a role:
+
+- Any name starting with `pg`
+- `neon_superuser`
+- `cloud_admin`
+- `zenith_admin`
+- `public`
+- `none`
 
 ## Need help?
 
