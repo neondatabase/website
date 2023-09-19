@@ -354,5 +354,3 @@ The following names are protected and cannot be given to a database:
 - `postgres`
 - `template0`
 - `template1`
-
-</Admonition>
