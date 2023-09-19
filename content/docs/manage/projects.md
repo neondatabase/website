@@ -101,9 +101,9 @@ To share a project:
 1. Under **Grant access to your project**, enter the email address of the account you want to share access with.
 1. Click **Grant access**.
 
-The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to rename or delete the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
+The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
 
-The costs associated with a shared project are charged to the Neon account that owns the project. To illustrate, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
+The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
 
 ## Manage projects with the Neon API
 
