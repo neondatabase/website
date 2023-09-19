@@ -4,34 +4,34 @@ subtitle: Download sample data for learning, testing, and exploring Neon
 enableTableOfContents: true
 ---
 
-The following sections describe how to download sample data source files and install them using either `psql` or `pg_restore`, depending on the source file format. Most downloads are performed using `wget`. If your system does not support `wget`, you can download source files by pasting the file address in your browser's address bar.
+This guide describe how to download and install sample data using either `psql` or `pg_restore`, depending on the source file format. Most downloads are performed using `wget`. If your system does not support `wget`, you can download source files by pasting the file address in your browser's address bar.
 
 ## Sample data
 
-Sample datasets are listed in order of smallest to largest installed size. Please be aware that the Neon Free Tier has a storage limit of 3 GBs per branch. Free Tier users are not be able to install datasets larger than 3 GBs.
+Sample datasets are listed in order of smallest to largest. Please be aware that the Neon Free Tier has a storage limit of 3 GBs per branch. Datasets larger than 3 GBs cannot be used on the Free Tier.
 
-| Name                                                | Tables | Records | Source file size         | Installed size  |
-|-----------------------------------------------------|--------|------|--------------------------|-----------------|
-| [Periodic table data](#periodic-table-data)         | 1      | 118     | 17 KB                    | 7.2 MB        |
-| [World Happiness Index](#world-happiness-index)     | 1      | 156     | 9.4 KB                   | 7.2 MB        |
-| [Titanic passenger data](#titanic-passenger-data)   | 1      | 1309      | 220 KB                   | 7.5 MB        |
-| [Chinook database](#chinook-database)               | 11     | 77929      | 1.8 MB                   | 9.6 MB         |
-| [Netflix data](#netflix-data)                       | 1      | 8807     | 3.2 MB                   | 11 MB          |
-| [Pagila database](#pagila-database)                 | 33     | 62322      | 3 MB                     | 17 MB          |
-| [Lego database](#lego-database)                     | 8      | 633250     | 13 MB                    | 42 MB          |
-| [Employees database](#employees-database)           | 6      | 3919015     | 34 MB                    | 333 MB         |
-| [Wikipedia vector embeddings](#wikipedia-vector-embeddings) | 1  | 25000 | 1.7 GB | 850 MB         |
-| [Postgres air](#postgres-air-database)              | 10     | 67228600     | 1.2 GB                   | 6.7 GB         |
+| Name                                                | Tables | Records | Source file size      | Installed size |
+|-----------------------------------------------------|--------|------   |-----------------------|----------------|
+| [Periodic table data](#periodic-table-data)         | 1      | 118     | 17 KB                 | 7.2 MB         |
+| [World Happiness Index](#world-happiness-index)     | 1      | 156     | 9.4 KB                | 7.2 MB         |
+| [Titanic passenger data](#titanic-passenger-data)   | 1      | 1309    | 220 KB                | 7.5 MB         |
+| [Chinook database](#chinook-database)               | 11     | 77929   | 1.8 MB                | 9.6 MB         |
+| [Netflix data](#netflix-data)                       | 1      | 8807    | 3.2 MB                | 11 MB          |
+| [Pagila database](#pagila-database)                 | 33     | 62322   | 3 MB                  | 17 MB          |
+| [Lego database](#lego-database)                     | 8      | 633250  | 13 MB                 | 42 MB          |
+| [Employees database](#employees-database)           | 6      | 3919015 | 34 MB                 | 333 MB         |
+| [Wikipedia vector embeddings](#wikipedia-vector-embeddings)  | 1       | 25000                 | 1.7 GB         |
+| [Postgres air](#postgres-air-database)              | 10     | 67228600 | 1.2 GB               | 6.7 GB         |
 
 <Admonition type="note">
-Installed size is measured using the query: `SELECT pg_size_pretty(pg_database_size('your_database_name'))`. The reported size for small datasets might appear larger than expected due to inherent Postgres storage overhead.
+Installed size is measured using the query: `SELECT pg_size_pretty(pg_database_size('your_database_name'))`. The reported size for small datasets may appear larger than expected due to inherent Postgres storage overhead.
 </Admonition>
 
 ### Periodic table data
 
 A table containing data about the periodic table of elements.
 
-1. Create an `periodic_table` database:
+1. Create a `periodic_table` database:
 
     ```sql
     CREATE DATABASE periodic_table;
@@ -39,15 +39,23 @@ A table containing data about the periodic table of elements.
 
 2. Download the source file:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/periodic_table.sql
     ```
 
+    </CodeBlock>
+
 3. Navigate to the directory where you downloaded the source file, and run the following command:
+
+    <CodeBlock shouldWrap>
 
     ```bash
     psql -d "postgres://[user]:[password]@[hostname]/periodic_table" -f periodic_table.sql
     ```
+
+    </CodeBlock>
 
 4. Connect to the `periodic_table` database:
 
@@ -76,9 +84,13 @@ A dataset dataset that evaluates the happiness of countries based on multiple in
 
 2. Download the source file:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/happiness_index.sql
     ```
+
+    </CodeBlock>
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
@@ -124,15 +136,23 @@ A dataset containing information on the passengers aboard the RMS Titanic, which
 
 2. Download the source file:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/titanic.sql
     ```
 
+    </CodeBlock>
+
 3. Navigate to the directory where you downloaded the source file, and run the following command:
+
+    <CodeBlock shouldWrap>
 
     ```bash
     psql -d "postgres://[user]:[password]@[hostname]/titanic" -f titanic.sql
     ```
+
+    </CodeBlock>
 
 4. Connect to the `titanic` database:
 
@@ -164,15 +184,23 @@ A sample database for a digital media store, including tables for artists, album
 
 2. Download the source file:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
     ```
 
+    </CodeBlock>
+
 3. Navigate to the directory where you downloaded the source file, and run the following command:
+
+    <CodeBlock shouldWrap>
 
     ```bash
     psql -d "postgres://[user]:[password]@[hostname]/chinook" -f chinook.sql
     ```
+
+    </CodeBlock>
 
 4. Connect to the `chinook` database:
 
@@ -212,15 +240,23 @@ A dataset containing information about movies and tv shows on Netflix.
 
 2. Download the source file:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/netflix.sql
     ```
 
+    </CodeBlock>
+
 3. Navigate to the directory where you downloaded the source file, and run the following command:
+
+    <CodeBlock>
 
     ```bash
     psql -d "postgres://[user]:[password]@[hostname]/netflix" -f netflix_shows.sql
     ```
+
+    </CodeBlock>
 
 4. Connect to the `netflix` database:
 
@@ -260,9 +296,13 @@ Sample data from a fictional DVD rental store. Pagila includes tables for films,
 
 2. Download the source file:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/pagila.sql
     ```
+
+    </CodeBlock>
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
@@ -304,9 +344,13 @@ A dataset containing information about various LEGO sets, their themes, parts, c
 
 2. Download the source file:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/lego.sql
     ```
+
+    </CodeBlock>
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
@@ -348,15 +392,23 @@ A dataset containing details about employees, their departments, salaries, and m
 
 2. Download the source file:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/employees.sql.gz
     ```
 
+    </CodeBlock>
+
 3. Navigate to the directory where you downloaded the source file, and run the following command:
+
+    <CodeBlock shouldWrap>
 
     ```bash
     pg_restore -d postgres://[user]:[password]@[hostname]/employees -Fc employees.sql.gz -c -v --no-owner --no-privileges
     ```
+
+    </CodeBlock>
 
 4. Connect to the `employees` database:
 
@@ -386,9 +438,13 @@ An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wi
 
 1. Download the zip file (~700MB):
 
+    <CodeBlock shouldWrap>
+
     ```bash
     wget https://cdn.openai.com/API/examples/data/vector_database_wikipedia_articles_embedded.zip
     ```
+
+    </CodeBlock>
 
 2. Navigate to the directory where you downloaded the zip file, and run the following command to extract the source file:
 
@@ -438,9 +494,13 @@ An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wi
 
 6. Navigate to the directory where you extracted the source file, and run the following command:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     psql -d "postgres://[user]:[password]@[hostname]/wikipedia" -c "\COPY public.articles (id, url, title, content, title_vector, content_vector, vector_id) FROM 'vector_database_wikipedia_articles_embedded.csv' WITH (FORMAT CSV, HEADER true, DELIMITER ',');"
     ```
+
+    </CodeBlock>
 
 <Admonition type="note">
 If you encounter a memory error related to the `maintenance_work_mem` setting, refer to [Indexing vectors](/docs/extensions/pgvector#indexing-vectors) for how to increase this setting.
@@ -463,9 +523,13 @@ An airport database containing information about airports, aircraft, bookings, p
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     pg_restore -d postgres://[user]:[password]@[hostname]/postgres_air -Fc postgres_air_2023.backup -c -v --no-owner --no-privileges
     ```
+
+    </CodeBlock>
 
 4. Connect to the `postgres_air` database:
 
