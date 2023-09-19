@@ -111,9 +111,9 @@ _Project storage_ is the total volume of data and history stored in your Neon pr
 
 - **History**
 
-  Neon retains a history if data changes to support _point-in-time restore_ and _database branching_.
+  Neon retains a history of changes for all branches to support _point-in-time restore_.
 
-  - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon retains a 7-day history in the form of WAL records for a Neon project, by default. You can configure the retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). WAL records that age out of the retention period are evicted from storage and no longer count toward project storage.
+  - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon retains a history of changes in the form of WAL records. You can configure the history retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). WAL records that age out of the history retention period are evicted from storage and no longer count toward project storage.
   - A _database branch_ is a virtual snapshot of your data at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
     When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's virtual snapshot still exists in the parent branch's _history_, which means that it shares this data in common with the parent branch. A branch begins adding to storage when data changes are introduced or when the branch's virtual snapshot falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data or allow the branch to age out of the parent branch's _history_.
 
