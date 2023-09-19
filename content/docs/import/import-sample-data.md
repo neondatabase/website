@@ -4,7 +4,7 @@ subtitle: Download sample data for learning, testing, and exploring Neon
 enableTableOfContents: true
 ---
 
-This guide describes how to download and install sample data using either `psql` or `pg_restore`, depending on the source file format. Most downloads are performed using `wget`. If your system does not support `wget`, you can download source files by pasting the file address in your browser's address bar.
+This guide describes how to download and install sample data using either `psql` or `pg_restore`, depending on the source file format. Most downloads are performed using [wget](https://www.gnu.org/software/wget/). If your system does not support `wget`, you can download source files by pasting the file address in your browser's address bar.
 
 ## Prerequisites
 
