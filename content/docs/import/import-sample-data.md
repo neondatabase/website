@@ -17,7 +17,7 @@ Instructions for each dataset require that you create a database. You can do so 
 
 ## Sample data
 
-Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Tier has a storage limit of 3 GBs per branch. Datasets larger than 3 GBs cannot be used on the Free Tier.
+Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Tier has a storage limit of 3 GBs per branch. Datasets larger than 3 GBs cannot be loaded on the Free Tier.
 
 | Name                                                | Tables | Records | Source file size      | Installed size |
 |-----------------------------------------------------|--------|------   |-----------------------|----------------|
