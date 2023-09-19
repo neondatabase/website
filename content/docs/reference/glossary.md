@@ -242,7 +242,7 @@ An 8KB unit of data, which is the smallest unit that Postgres uses for storing r
 
 ### Pageserver
 
-A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined history retention period. Neon retains history of changes for all branches. The default history retention period is 7 days.
+A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined history retention period. Neon retains a history for all branches. The default history retention period is 7 days.
 
 The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. After a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
 
