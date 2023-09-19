@@ -566,6 +566,7 @@ An airport database containing information about airports, aircraft, bookings, p
 
 - Source: [https://github.com/hettie-d/postgres_air](https://github.com/hettie-d/postgres_air)
 - License: [BSD 3-Clause License](https://github.com/hettie-d/postgres_air/blob/main/LICENSE)
+- `Copyright (c) 2020, hettie-d All rights reserved.`
 
 ## Need help?
 
