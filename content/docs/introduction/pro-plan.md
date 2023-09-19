@@ -46,8 +46,10 @@ The Pro plan bills for usage monthly. Please refer to our [Billing metrics](/doc
 
 You can click on **Upgrade to Pro** in the Neon Console or click [here](https://console.neon.tech/app/projects?show_enroll_to_pro=true) to sign up.
 
+After upgrading to a Pro account, Free Tier limits are lifted the next time your project's compute endpoint is restarted.
+
 <Admonition type="note">
-After upgrading to a Pro account, Free Tier limits are lifted the next time your project's compute endpoint is restarted. If your compute was active before upgrading and remained active afterward, it remains bound by Free Tier limits until it restarts, which can result in limit-related errors such as this one if Free Tier limits are exceeded:
+If your compute was active before upgrading and remained active afterward, it continues to be bound by Free Tier limits until it restarts, which can result in limit-related errors such as this one if Free Tier limits are exceeded:
 
 ```text
 ERROR: could not extend file because cluster size limit (3072 MB) has been exceeded
