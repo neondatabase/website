@@ -371,7 +371,7 @@ For role creation and access management examples, refer to the [Manage roles and
 
 ## Protected role names
 
-The following protected names and cannot given to a role:
+The following names are protected and cannot given to a role:
 
 - Any name starting with `pg`
 - `neon_superuser`
