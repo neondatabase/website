@@ -340,8 +340,8 @@ A sample database for a digital media store, including tables for artists, album
     ```
 
 - Source: [https://github.com/lerocha/chinook-database](https://github.com/lerocha/chinook-database)
-- License: [LICENSE](https://github.com/lerocha/chinook-database/blob/master/LICENSE.md)
-- `Copyright (c) 2008-2017 Luis Rocha``
+- License: [LICENSE.md](https://github.com/lerocha/chinook-database/blob/master/LICENSE.md)
+- `Copyright (c) 2008-2017 Luis Rocha`
 
 ### Lego database
 
