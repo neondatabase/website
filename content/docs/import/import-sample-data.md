@@ -80,6 +80,7 @@ A table containing data about the periodic table of elements.
 
 - Source: [https://github.com/andrejewski/periodic-table](https://github.com/andrejewski/periodic-table)
 - License: [ISC License](https://github.com/andrejewski/periodic-table/blob/master/LICENSE)
+- `Copyright (c) 2017, Chris Andrejewski <christopher.andrejewski@gmail.com>`
 
 ### World Happiness Index
 
@@ -284,6 +285,7 @@ Sample data for a fictional DVD rental store. Pagila includes tables for films, 
 
 - Source: [https://github.com/devrimgunduz/pagila](https://github.com/devrimgunduz/pagila)
 - License: [LICENSE.txt](https://github.com/devrimgunduz/pagila/blob/master/LICENSE.txt)
+- `Copyright (c) Devrim Gündüz <devrim@gunduz.org>`
 
 ### Chinook database
 
@@ -339,7 +341,8 @@ A sample database for a digital media store, including tables for artists, album
     ```
 
 - Source: [https://github.com/lerocha/chinook-database](https://github.com/lerocha/chinook-database)
-- License: [https://github.com/lerocha/chinook-database/blob/master/LICENSE.md](https://github.com/lerocha/chinook-database/blob/master/LICENSE.md)
+- License: [LICENSE](https://github.com/lerocha/chinook-database/blob/master/LICENSE.md)
+- `Copyright (c) 2008-2017 Luis Rocha``
 
 ### Lego database
 
