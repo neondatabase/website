@@ -17,19 +17,19 @@ Instructions for each dataset require that you create a database. You can do so 
 
 ## Sample data
 
-Sample datasets are listed in order of smallest to largest. Please be aware that the Neon Free Tier has a storage limit of 3 GBs per branch. Datasets larger than 3 GBs cannot be used on the Free Tier.
+Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Tier has a storage limit of 3 GBs per branch. Datasets larger than 3 GBs cannot be used on the Free Tier.
 
 | Name                                                | Tables | Records | Source file size      | Installed size |
 |-----------------------------------------------------|--------|------   |-----------------------|----------------|
 | [Periodic table data](#periodic-table-data)         | 1      | 118     | 17 KB                 | 7.2 MB         |
 | [World Happiness Index](#world-happiness-index)     | 1      | 156     | 9.4 KB                | 7.2 MB         |
 | [Titanic passenger data](#titanic-passenger-data)   | 1      | 1309    | 220 KB                | 7.5 MB         |
-| [Chinook database](#chinook-database)               | 11     | 77929   | 1.8 MB                | 9.6 MB         |
 | [Netflix data](#netflix-data)                       | 1      | 8807    | 3.2 MB                | 11 MB          |
-| [Pagila database](#pagila-database)                 | 33     | 62322   | 3 MB                  | 17 MB          |
+| [Pagila database](#pagila-database)                 | 33     | 62322   | 3 MB                  | 15 MB          |
+| [Chinook database](#chinook-database)               | 11     | 77929   | 1.8 MB                | 17 MB          |
 | [Lego database](#lego-database)                     | 8      | 633250  | 13 MB                 | 42 MB          |
 | [Employees database](#employees-database)           | 6      | 3919015 | 34 MB                 | 333 MB         |
-| [Wikipedia vector embeddings](#wikipedia-vector-embeddings)  | 1       | 25000                 | 1.7 GB         |
+| [Wikipedia vector embeddings](#wikipedia-vector-embeddings) | 1    | 25000    | 1.7 GB         | 850 MB         |
 | [Postgres air](#postgres-air-database)              | 10     | 67228600 | 1.2 GB               | 6.7 GB         |
 
 <Admonition type="note">
@@ -181,62 +181,6 @@ A dataset containing information on the passengers aboard the RMS Titanic, which
 - Source: [https://www.kaggle.com/datasets/ibrahimelsayed182/titanic-dataset](https://www.kaggle.com/datasets/ibrahimelsayed182/titanic-dataset)
 - License: [Unknown](https://www.kaggle.com/datasets/vinicius150987/titanic3)
 
-### Chinook database
-
-A sample database for a digital media store, including tables for artists, albums, media tracks, invoices, customers, and more.
-
-1. Create a `chinook` database:
-
-    ```sql
-    CREATE DATABASE chinook;
-    ```
-
-2. Download the source file:
-
-    <CodeBlock shouldWrap>
-
-    ```bash
-    wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
-    ```
-
-    </CodeBlock>
-
-3. Navigate to the directory where you downloaded the source file, and run the following command:
-
-    <CodeBlock shouldWrap>
-
-    ```bash
-    psql -d "postgres://[user]:[password]@[hostname]/chinook" -f chinook.sql
-    ```
-
-    </CodeBlock>
-
-4. Connect to the `chinook` database:
-
-    ```bash
-    psql postgres://[user]:[password]@[hostname]/chinook
-    ```
-
-5. Find out the most sold item by track title:
-
-    ```sql
-    SELECT 
-    T."Name" AS "Track Title",
-    SUM(IL."Quantity") AS "Total Sold"
-    FROM 
-        "Track" T
-    JOIN 
-        "InvoiceLine" IL ON T."TrackId" = IL."TrackId"
-    GROUP BY 
-        T."Name"
-    ORDER BY 
-        "Total Sold" DESC
-    LIMIT 1;
-    ```
-
-- Source: [https://github.com/lerocha/chinook-database](https://github.com/lerocha/chinook-database)
-- License: [https://github.com/lerocha/chinook-database/blob/master/LICENSE.md](https://github.com/lerocha/chinook-database/blob/master/LICENSE.md)
-
 ### Netflix data
 
 A dataset containing information about movies and tv shows on Netflix.
@@ -340,6 +284,62 @@ Sample data for a fictional DVD rental store. Pagila includes tables for films, 
 
 - Source: [https://github.com/devrimgunduz/pagila](https://github.com/devrimgunduz/pagila)
 - License: [LICENSE.txt](https://github.com/devrimgunduz/pagila/blob/master/LICENSE.txt)
+
+### Chinook database
+
+A sample database for a digital media store, including tables for artists, albums, media tracks, invoices, customers, and more.
+
+1. Create a `chinook` database:
+
+    ```sql
+    CREATE DATABASE chinook;
+    ```
+
+2. Download the source file:
+
+    <CodeBlock shouldWrap>
+
+    ```bash
+    wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
+    ```
+
+    </CodeBlock>
+
+3. Navigate to the directory where you downloaded the source file, and run the following command:
+
+    <CodeBlock shouldWrap>
+
+    ```bash
+    psql -d "postgres://[user]:[password]@[hostname]/chinook" -f chinook.sql
+    ```
+
+    </CodeBlock>
+
+4. Connect to the `chinook` database:
+
+    ```bash
+    psql postgres://[user]:[password]@[hostname]/chinook
+    ```
+
+5. Find out the most sold item by track title:
+
+    ```sql
+    SELECT 
+    T."Name" AS "Track Title",
+    SUM(IL."Quantity") AS "Total Sold"
+    FROM 
+        "Track" T
+    JOIN 
+        "InvoiceLine" IL ON T."TrackId" = IL."TrackId"
+    GROUP BY 
+        T."Name"
+    ORDER BY 
+        "Total Sold" DESC
+    LIMIT 1;
+    ```
+
+- Source: [https://github.com/lerocha/chinook-database](https://github.com/lerocha/chinook-database)
+- License: [https://github.com/lerocha/chinook-database/blob/master/LICENSE.md](https://github.com/lerocha/chinook-database/blob/master/LICENSE.md)
 
 ### Lego database
 
