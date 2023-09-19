@@ -54,7 +54,7 @@ ERROR: could not extend file because cluster size limit (3072 MB) has been excee
 HINT: This limit is defined by neon.max_cluster_size GUC
 ```
 
-To force a restart of your compute endpoint, you can temporarily set your set your auto-suspend delay to 1 second (the default is 5 minutes). See [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. You can check the **Operations** page in the Neon Console to see if your compute endpoint was restarted. Look for `suspend_compute` and `start_compute` actions. Alternatively, you can issue [Suspend an endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start an endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. Regardless of the method you choose, please be aware that restarting a compute endpoint interrupts any connections that are currently using that compute endpoint.
+To force a restart of your compute endpoint, you can temporarily set your compute's auto-suspend delay to 1 second (the default is 5 minutes). See [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. You can check the **Operations** page in the Neon Console to see if your compute endpoint was restarted. Look for `suspend_compute` and `start_compute` actions. Alternatively, you can issue [Suspend an endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start an endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. Regardless of the method you choose, please be aware that restarting a compute endpoint interrupts any connections that are currently using that compute endpoint.
 </Admonition>
 
 ## How do I downgrade?
