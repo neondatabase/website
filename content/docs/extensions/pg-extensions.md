@@ -9,7 +9,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 
 <a id="default-extensions/"></a>
 
-| Extension                | Version (Postgres 14)                               | Version (Postgres 15)  | Version (Postgres 16)                              |Notes                                                                                                                |
+| Extension                | PG14                               | PG15  | PG16                              |Notes                                                                                                                |
 | :------------------------| --------------------------------------------------------------: | ----------------------------------------------------------------:| ----------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------|
 | [address_standardizer](https://postgis.net/docs/Extras.html#Address_Standardizer)     | 3.3.3  | 3.3.3  |    3.3.3  |                                                                                                          |
 | [address_standardizer_data_us](https://postgis.net/docs/Extras.html#Address_Standardizer)      | 3.3.3        | 3.3.3 | 3.3.3 |                                                                                                 |

@@ -8,14 +8,14 @@ The [Neon Pro plan](/docs/introduction/pro-plan) enables sharing your Neon proje
 
 ## Set up Neon accounts
 
-You can share your Neon project with anyone. The only requirement is that the user has a Neon account. The account can be a Free Tier account or Pro account. It does not matter.
+You can share your Neon project with anyone. The only requirement is that the user has a Neon account. The account can be a Free Tier account or Pro account.
 
-1. If the user does not have a Neon account, ask them to sign up with a GitHub or Google account. You can provide your users with the following instructions: [Sign up](/docs/get-started-with-neon/signing-up).
+1. If the user does not have a Neon account, ask them to sign up. You can provide your users with the following instructions: [Sign up](/docs/get-started-with-neon/signing-up).
 2. Request the email address associated with the account the user signed up with. For example, if the user signed up with their Google account, ask for the email address associated with their Google account.
 
 ## Share your project
 
-After a user has provided you with the email address associated with their Neon account, you can share your project with them.
+After a user has provided you with the email address associated with their Neon account, you can share your project with that user.
 
 To share your project:
 
@@ -28,7 +28,7 @@ To share your project:
 1. Click **Grant access**. The email you specify is added to the list of **People who have access to the project**.
     ![People with access](/docs/guides/sharing_people_with_access.png)
 
-    The Neon account associated with the email address is granted full access to the project with the exception privileges required to edit or delete the project. When the user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
+    The Neon account associated with the email address is granted full access to the project with the exception privileges required to delete the project. When the user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
 
     ![Project shared with me](/docs/guides/shared_with_me.png)
 
@@ -36,4 +36,4 @@ To share your project:
 
 ## Shared project billing
 
-The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
+The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account.

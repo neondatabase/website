@@ -143,7 +143,8 @@ curl -X 'POST' \
 }'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -185,6 +186,8 @@ Response:
 }
 ```
 
+</details>
+
 ### List compute endpoints with the API
 
 The following Neon API method lists compute endpoints for the specified project. A compute endpoint belongs to a Neon project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectendpoints).
@@ -202,7 +205,8 @@ curl -X 'GET' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -255,6 +259,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Update a compute endpoint with the API
 
 The following Neon API method updates the specified compute endpoint. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateprojectendpoint).
@@ -278,7 +284,8 @@ curl -X 'PATCH' \
 }'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -332,6 +339,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Delete a compute endpoint with the API
 
 The following Neon API method deletes the specified compute endpoint. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectendpoint).
@@ -349,7 +358,8 @@ curl -X 'DELETE' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -378,6 +388,8 @@ Response:
   "operations": []
 }
 ```
+
+</details>
 
 ## Need help?
 
