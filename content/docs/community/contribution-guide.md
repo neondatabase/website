@@ -361,19 +361,19 @@ If you're interested in updating or adding a diagram, please open a GitHub issue
 
 Screen captures should be taken on a high resolution monitor (UHD/4K) and should be unaltered (no borders or special effects).
 
-Diagrams and images reside in the `/public/docs` directory in the Neon website repository. You can add a diagram or image to an `.md` file by specifying a relative path beginning with a slash `/`.
+Diagrams and images reside in the `/public/docs` directory in the Neon website repository. You can add a diagram or image to an `.md` file by specifying a relative path beginning with a slash `/`. The directory location of the diagram or image un  `public` should mirror the location of the file that will include the diagram or image, as shown below:
 
 Example file structure:
 
 ```md
-├── public
-│ ├── docs
-│   ├── introduction
-│     ├── neon_architecture_2.png // put images in a public directory with the same name
 ├── content
 │ ├── docs
 │   ├── introduction
 │     ├── architecture-overview.md
+├── public
+│ ├── docs
+│   ├── introduction
+│     ├── neon_architecture_2.png // put images in a public directory with the same name
 ```
 
 For example, to add an image to a file, add an entry that looks like this:
