@@ -430,7 +430,7 @@ Capitalize names of:
 - Third-party organizations, software, and products. Kubernetes, Git, and Vercel.
 - Methods or methodologies. Continuous Integration, Continuous Deployment, etc.
 
-Follow the capitalization style used by authoritative source, which may use non-standard case styles. For example: PostgreSQL, GitHub, npm.
+Follow the capitalization style used by the authoritative source, which may use non-standard case styles. For example: PostgreSQL, GitHub, npm.
 
 ### Fake user information
 
