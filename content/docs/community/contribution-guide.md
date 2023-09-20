@@ -9,17 +9,17 @@ This page offers guidelines on how to contribute to the Neon documentation. Our 
 
 ## Why should you contribute?
 
-Open-source projects and their documentation are always evolving. Contributing to documentation is a great way for beginners to get started in open-source, and for experienced developers to explain complex topics while sharing their knowledge with the community.
+Open-source projects and their documentation are always evolving. Contributing to documentation is a great way for beginners to get started in open source and for experienced developers to explain complex topics while sharing their knowledge with the community.
 
 By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or you've noticed that a certain topic is missing, your contributions are always welcome and very much appreciated.
 
 ## How to contribute
 
-The content for the documentation is located in the [Neon website repository](https://github.com/neondatabase/website), in the `doc/content/` directory. To make a contribution, you have two options: you can either edit the files directly on GitHub, or you can clone the repo and edit the files on your local machine. If you prefer the former option, which is great for edits and small updates, there is an **Edit this page** link at the bottom of each Neon documentation page.
+The content for the documentation is located in the [Neon website repository](https://github.com/neondatabase/website) in the `doc/content/` directory. To make a contribution, you have two options: you can edit files directly on GitHub or fork the repo and edit the files on your local machine. If you prefer the former option, which is great for edits and small updates, there is an **Edit this page** link at the bottom of each Neon documentation page.
 
 ![GitHub edit this page link](/docs/community/edit_this_page.png)
 
-Clicking the link takes you to the Markdown file in GitHub, where you can click the Edit this page icon to make a change. When you are finished editing, commit your changes and create a pull request.
+Clicking the link takes you to the Markdown file in GitHub, where you can click the **Edit this page** icon to make a change. When you are finished editing, commit your changes to create a pull request.
 
 ## Working with GitHub
 
@@ -27,7 +27,7 @@ If you're not familiar with GitHub, we suggest going through the [GitHub Open So
 
 ## Markdown
 
-Neon utilizes Markdown as the source format for its documentation. Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents. It's designed to be easy-to-read and easy-to-write.
+Neon uses Markdown as the source format for its documentation. Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents. It's designed to be easy-to-read and easy-to-write.
 
 If you're new to Markdown, GitHub provides an excellent guide to get you started. The [GitHub Markdown Documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) covers most of the basic writing and formatting syntax you'll need to contribute to the Neon docs.
 
@@ -35,7 +35,7 @@ If you're new to Markdown, GitHub provides an excellent guide to get you started
 
 At Neon, we use VSCode for writing documentation. VSCode includes a built-in markdown previewer that you can use to view your changes locally.
 
-To use this feature, open the command palette (⌘ + ⇧ + P on Mac or Ctrl + Shift + P on Windows) and search for `Markdown: Open Preview` or `Markdown: Open Preview to the Side`. This will open a preview window where you can see your changes in formatted markdown.
+To use this feature, open the command palette (⌘ + ⇧ + V on Mac or Ctrl + Shift + V on Windows). This will open a preview window where you can see your changes in formatted markdown.
 
 ### VSCode extensions
 
@@ -48,7 +48,7 @@ For an enhanced experience while working with markdown files in VSCode, we recom
 
 After you have submitted your contribution, the Neon documentation team will review your changes, provide feedback, and merge the pull request when it is ready.
 
-Do not hesitate to reach out if you have any questions or need further assistance. We appreciate your contribution and your participation in our community.
+Please reach out if you have any questions or need further assistance. We appreciate your contribution and your participation in our community.
 
 ## Documentation file structure
 
@@ -206,7 +206,7 @@ Optional attributes include:
 Field | Explanation
 ----- | ---
 subtitle |  A secondary title or description that appears on the page, under the main title.
-enableTableOfContents | A boolean flag (i.e., true or false) that tells the static site generator whether or not to generate a a right-hand table of contents for the page.
+enableTableOfContents | A boolean flag (i.e., true or false) that tells the static site generator whether or not to generate a a right-hand table of contents for the page. We recommend adding this option if your page has more than a few sections.
 redirectFrom | A list of directory paths that should redirect to this file. This is useful if the page has moved and you want old URLs to continue working.
 
 Example:
@@ -223,18 +223,18 @@ redirectFrom:
 
 ## Heading levels
 
-Page headings the frontmatter. This heading is translated into an h1 element when the page is converted to HTML.
+Tne page title in the frontmatter is translated into an h1 element when the page is converted to HTML.
 
 - For each subsequent section, the heading level should be increased. In other words, add an additional # character before the topic title.
-- Try to avoid heading levels beyond H5 (###).
+- Try to avoid heading levels beyond h4 (####).
 - Do not skip a level, e.g., do not go from ## to ####.
-- Ensure there's a blank line before and after the topic title.
+- Ensure there's a blank line before and after the heading.
 
 ## Common markup
 
 - Link markup: `[link](/)`
 - Italics markup: `*italic*`
-- Bold markup: `**strong**` - but that doesn't make sense, by default terms appearance is already bold
+- Bold markup: `**strong**`
 - monospace: `baktick`
 
 ## Code blocks
@@ -358,6 +358,8 @@ You may also specify an optional title with the `title` property.
 Diagrams are a great tool for clarifying complex ideas. Neon uses Figma for the creation of diagrams.
 
 If you're interested in updating or adding a diagram, please open a GitHub issue with your suggestions. Please include a draft, if possible. A tool like [tldraw](https://www.tldraw.com/) can be used to create a draft.
+
+Screen captures should be taken on a high resolution monitor (UHD/4K) and should be unaltered (no borders or special effects).
 
 Diagrams and images reside in the `/public/docs` directory in the Neon website repository. You can add a diagram or image to an `.md` file by specifying a relative path beginning with a slash `/`.
 
