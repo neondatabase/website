@@ -232,10 +232,12 @@ Tne page title in the frontmatter is translated into an h1 element when the page
 
 ## Common markup
 
-- Link markup: `[link](/)`
-- Italics markup: `*italic*`
-- Bold markup: `**strong**`
-- monospace: `baktick`
+```md
+Link markup: [link](/)
+Italics markup: *italic*
+Bold markup: **strong**
+monospace: `baktick`
+```
 
 ## Code blocks
 
