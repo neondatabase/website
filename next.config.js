@@ -120,6 +120,11 @@ const defaultConfig = {
         destination: 'https://yc-idea-matcher.vercel.app',
         permanent: true,
       },
+      {
+        source: '/trust',
+        destination: 'https://trust.neon.tech',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },
