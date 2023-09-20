@@ -15,7 +15,7 @@ By contributing to the Neon docs, you're helping us create a stronger learning r
 
 ## How to contribute
 
-The content for the documentation is located in the [Neon website repository](https://github.com/neondatabase/website) in the `doc/content/` directory. To make a contribution, you have two options: you can edit files directly on GitHub or fork the repo and edit the files on your local machine. If you prefer the former option, which is great for edits and small updates, there is an **Edit this page** link at the bottom of each Neon documentation page.
+The content for the documentation is located in the [Neon website repository](https://github.com/neondatabase/website) in the `docs/content/` directory. To make a contribution, you have two options: you can edit files directly on GitHub or fork the repo and edit the files on your local machine. If you prefer the former option, which is great for edits and small updates, there is an **Edit this page** link at the bottom of each Neon documentation page.
 
 ![GitHub edit this page link](/docs/community/edit_this_page.png)
 
