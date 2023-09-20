@@ -11,7 +11,7 @@ This page offers guidelines on how to contribute to the Neon documentation. Our 
 
 Open-source projects and their documentation are always evolving. Contributing to documentation is a great way for beginners to get started in open source and for experienced developers to explain complex topics while sharing their knowledge with the community.
 
-By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or you've noticed that a certain topic is missing, your contributions are always welcome and very much appreciated.
+By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or you've noticed that a certain topic is missing, your contributions are always welcome and appreciated.
 
 ## How to contribute
 
@@ -390,7 +390,7 @@ This section outlines the stylistic elements that we do our best to adhere to in
 
 ### Voice
 
-The voice in the documentation strives to be conversational but brief, and friendly but succinct.
+The voice in the documentation strives to be conversational but brief, friendly but succinct.
 
 ### Language
 
