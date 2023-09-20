@@ -84,7 +84,11 @@ Here is an example response:
 }
 ```
 
-Depending on the OpenID client you’re using, you might not need to explicitly interact with the API endpoints listed below.
+<Admonition type="note">
+You must add `offline` and `offline_access` scopes to your request to receive `refresh_token`.
+</Admonition>
+
+Depending on the OpenID client you’re using, you might not need to explicitly interact with the API endpoints listed below. OAuth 2.0 clients typically handle this interaction automatically. For example, the [Neon CLI](https://neon.tech/docs/reference/neon-cli), written in Typescript, interacts with the API endpoints automatically to retrieve the `refresh_token` and `access_token`. For an example, refer to this part of the Neon CLI [source code](https://github.com/neondatabase/neonctl/blob/main/src/auth.ts#L54-L71). In this example, the `oauthHost` is `https://oauth2.neon.tech`.
 
 ### 1. Initiating the OAuth flow
 
@@ -106,6 +110,10 @@ https://oauth2.neon.tech/oauth2/auth?client_id=neon-experimental&scope=openid%20
 After the user is redirected to the authorization URL, they are presented with Neon's consent screen, which is pre-populated with the scopes you requested. From the consent screen, the user is able to review the scopes and authorize your application to connect their Neon account.
 
 ![Neon OAuth consent screen](/docs/oauth/consent.png)
+
+<Admonition type="note">
+The Neon API provides a [Get current user details](https://api-docs.neon.tech/reference/getcurrentuserinfo) endpoint for retrieving information about the currently authorized Neon user.
+</Admonition>
 
 ### 2. Authorization code is returned to your callback URL
 
