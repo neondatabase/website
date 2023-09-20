@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/guides/branching-data-recovery
 ---
 
-Neon retains a 7-day history of data changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined retention period. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
+Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined history retention period. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
 
 The history retention period is configurable. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. For configuration instructions, see [Configure history retention](/docs/manage/projects#configure-history-retention).
 
@@ -21,7 +21,7 @@ To create a point-in-time branch:
 
 1. Navigate to the **Branches** page in the Neon Console.
 1. Click **Create branch** to open the branch creation dialog.
-1. Enter a name for the branch. You can call it `data_recovery`, for example.
+1. Enter a name for the branch. You can call it `recovery_branch`, for example.
     ![Data recovery create branch dialog](/docs/guides/data_recovery_create_branch.png)
 1. For the **Parent branch**, select the branch where the data loss occurred.
 1. Select the **Time** option to create a branch with data as it existed at a specific date and time. For example, if the data loss occurred on July 11, 2023 at 10:01am, set the time to July 11, 2023, at 10:00am, just before the faulty query was run.
@@ -32,7 +32,7 @@ To create a point-in-time branch:
 You can also create point-in-time branches using the [Neon CLI](/docs/reference/neon-cli). For example, you can perform the same action described above with the following CLI command:
 
 ```bash
-neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
+neonctl branches create --name recovery_branch --parent 2023-07-11T10:00:00Z
 ```
 
 The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
@@ -50,7 +50,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 To connect to your branch:
 
 1. In the Neon Console, select your project.
-2. On the project **Dashboard**, under **Connection Details**, select the `data_recovery` branch, the database, and the role you want to connect with.
+2. On the project **Dashboard**, under **Connection Details**, select your `recovery_branch`, the database, and the role you want to connect with.
 ![Connection details widget recovery branch](/docs/guides/data_recovery_connection_details.png)
 3. Copy the connection string. A connection string includes your role name, password, compute endpoint hostname, and database name.
 4. Connect with `psql`. Your connection string will look something like this:
@@ -65,7 +65,7 @@ To connect to your branch:
 
 ## Verify the data
 
-Check to see if the lost data is now present. For instance, if you lost an `orders` table, you might run a query like the following to verify that the data is available in your newly created branch:
+Check to see if the lost data is now present. For instance, if you lost an `orders` table, you might run a query like this one to verify that the data is available in your newly created branch:
 
 ```sql
 SELECT * FROM orders LIMIT 10;
@@ -79,13 +79,13 @@ To make the recovery branch your new primary:
 
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
-3. Select your `data_recovery` branch from the table.
+3. Select your `recovery_branch` from the table.
 4. On the branch details page, select **Set as Primary**.
 
 Making a branch your primary branch ensures that access to data on the branch is never interrupted, even when you exceed project limits. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
 
 <Admonition type="note">
-If your previous primary branch was your project's root branch (the initial branch created with your project), it cannot be deleted. Deleting a root branch is not yet supported. In the meantime, you can rename a root branch (perhaps adding an `OLD` or `DO_NOT_USE` prefix to its name) and remove data from it to ensure that it's not used accidentally or taking up storage space.
+If your previous primary branch was your project's root branch (the initial branch created with your project), it cannot be deleted. Deleting a root branch is not yet supported. In the meantime, you can rename a root branch (perhaps adding an `OLD` or `DO_NOT_USE` prefix to its name) and remove data from it to ensure that it's not used accidentally or consuming storage space.
 </Admonition>
 
 ## Update your connections
@@ -111,7 +111,7 @@ To avoid changing connection details in your application, you can reassign the c
 - [Using Neon branching for instant point-in-time restore](https://neon.tech/blog/point-in-time-recovery). The blog post describes point-in-time restore and provides a script for creating a recovery branch, reassigning a compute endpoint, and setting the new branch as the primary.
 - [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This blog post (with video) describes a data recovery example that uses Neon's branching feature, the Neon API, and a bisect script to recover lost data.
 
-Check out the GitHub repositories for these examples:
+The following GitHub repositories are available for these examples:
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/restore-neon-branch" description="A script to restore a Neon branch to a previous state while preserving the same endpoint" icon="github">Restore a Neon database</a>

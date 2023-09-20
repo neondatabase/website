@@ -6,9 +6,13 @@ isDraft: false
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is no limit on the number of databases you can create.
 
-A Neon project's primary branch is created with a default database called `neondb`, which is owned by your project's default role (see [Manage roles](/docs/manage/roles) for more information). You can create your own databases in a project's primary branch or in a child branch.
+A Neon project's primary branch is created with a ready-to-use database called `neondb`, which is owned by your project's default role (see [Manage roles](/docs/manage/roles) for more information). You can create your own databases in a project's primary branch or in a child branch.
 
 All databases in Neon are created with a `public` schema. SQL objects are created in the `public` schema, by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
+
+<Admonition type="note">
+As of Postgres 15, only a database owner has the `CREATE` privilege on a database's `public` schema. For other users, the `CREATE` privilege must be granted manually via a `GRANT CREATE ON SCHEMA public TO <username>;` statement.
+</Admonition>
 
 Databases belong to a branch. If you create a child branch, databases from the parent branch are copied to the child branch. For example, if database `mydb` exists in the parent branch, it will be copied to the child branch. The only time this does not occur is when you create a branch that includes data up to a particular point in time. If a database was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
@@ -36,6 +40,10 @@ To create a database:
 1. Click **New Database**.
 1. Enter a database name, and select a database owner.
 1. Click **Create**.
+
+<Admonition type="note">
+Some names are not permitted. See [Protected database names](#protected-database-names).
+</Admonition>
 
 ### View databases
 
@@ -83,11 +91,15 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdatabase).
 
-The role specified by `owner_name` is the owner of that database. The `neon_superuser` role is also granted all privileges on databases created with the Neon API. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
+The role specified by `owner_name` is the owner of that database.
 
 ```text
 POST /projects/{project_id}/branches/{branch_id}/databases
 ```
+
+<Admonition type="note">
+Some names are not permitted for databases. See [Protected database names](#protected-database-names).
+</Admonition>
 
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and a database `name` and `owner` are required attributes.
 
@@ -104,7 +116,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 }' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -143,6 +156,8 @@ Response:
 }
 ```
 
+</details>
+
 ### List databases with the API
 
 The following Neon API method lists databases for the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranchdatabases).
@@ -159,7 +174,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -184,6 +200,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Update a database with the API
 
 The following Neon API method updates the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateprojectbranchdatabase).
@@ -206,7 +224,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 }' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -245,6 +264,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Delete a database with the API
 
 The following Neon API method deletes the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranchdatabase).
@@ -262,7 +283,8 @@ curl -X 'DELETE' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -301,6 +323,8 @@ Response:
 }
 ```
 
+</details>
+
 ## Manage databases with SQL
 
 You can create and manage databases in Neon with SQL, as you can with any stand-alone Postgres installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
@@ -311,10 +335,22 @@ CREATE DATABASE testdb;
 
 Most standard [Postgres CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. This parameter requires access to the local file system, which is not permitted on Neon.
 
-The role that creates a database is the owner of the database. This role has the typical default Postgres privileges on the database, including the ability to `DROP` the database, `CONNECT` to the database, and create new `SCHEMAS` in it. For more information about database object privileges in Postgres, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
+The role that creates a database is the owner of the database. This role has the typical default Postgres privileges on the database, including the ability to `DROP` the database, `CONNECT` to the database, and create new schemas and objects in it.
+
+As of Postgres 15, only a database owner has the `CREATE` privilege on a database's `public` schema. For other users, the `CREATE` privilege must be granted manually via a `GRANT CREATE ON SCHEMA public TO <username>;` statement.
+
+For more information about database object privileges in Postgres, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
 
 For a database creation example, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
 
 ## Need help?
 
 Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+
+## Protected database names
+
+The following names are protected and cannot be given to a database:
+
+- `postgres`
+- `template0`
+- `template1`

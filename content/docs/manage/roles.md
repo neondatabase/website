@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/manage/users
 ---
 
-In Neon, roles are Postgres roles. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the default database (`neondb`) that is created in your Neon project's primary branch.
+In Neon, roles are Postgres roles. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the ready-to-use database (`neondb`) that is created in your Neon project's primary branch.
 
 Your default role and roles created in the Neon console, API, and CLI are granted membership in the [neon_superuser](#the-neon_superuser-role) role. Roles created with SQL are only granted basic privileges, as you would see in a stand-alone Postgres installation.
 
@@ -27,21 +27,13 @@ Neon supports creating and managing roles from the following interfaces:
 
 ## The neon_superuser role
 
-Roles created in the Neon console, CLI, or API, including the default role created with a Neon project, are granted membership in the `neon_superuser` role. Users cannot login as `neon_superuser`, but they inherit the privileges assigned to this role. The privileges and predefined role memberships granted to `neon_superuser` are shown in this `CREATE ROLE` statement:
-
-<CodeBlock shouldWrap>
-
-```sql
-CREATE ROLE neon_superuser CREATEDB CREATEROLE BYPASSRLS NOLOGIN IN ROLE pg_read_all_data, pg_write_all_data;
-```
-
-</CodeBlock>
+Roles created in the Neon console, CLI, or API, including the default role created with a Neon project, are granted membership in the `neon_superuser` role. Users cannot login as `neon_superuser`, but they inherit the privileges assigned to this role. The privileges and predefined role memberships granted to `neon_superuser` include:
 
 - `CREATEDB`: Provides the ability to create databases.
 - `CREATEROLE`: Provides the ability to create new roles (which also means it can alter and drop roles).
 - `BYPASSRLS`: Provides the ability to bypass row-level security (RLS) policies. This attribute is only included in `neon_superuser` roles in projects created after the [August 15, 2023 release](/docs/release-notes/2023-08-15-storage-and-compute).
 - `NOLOGIN`: The role cannot be used to log in to the Postgres server. Neon is a managed Postgres service, so you cannot access the host operating system.
-- `pg_read_all_data role`: A predefined role in Postgres that provides the ability to select from all tables and views.
+- `pg_read_all_data`: A predefined role in Postgres that provides the ability to select from all tables and views.
 - `pg_write_all_data`: A predefined role in Postgres that provides the ability to insert, update, and delete in all tables and use all sequences in a database.
 
 In addition, the `neon_superuser` role is able to add [Postgres extensions](/docs/extensions/pg-extensions) that are available for use with Neon.
@@ -63,6 +55,10 @@ To create a role:
 4. Click **New Role**.
 5. In the role creation dialog, specify a role name. The length of the role name is limited to 63 bytes.
 6. Click **Create**. The role is created and you are provided with the password for the role.
+
+<Admonition type="note">
+Role names cannot exceed 63 characters, and some names are not permitted. See [Protected role names](#protected-role-names).
+</Admonition>
 
 ### Delete a role
 
@@ -118,6 +114,10 @@ The following Neon API method creates a role. To view the API documentation for 
 POST /projects/{project_id}/branches/{branch_id}/roles
 ```
 
+<Admonition type="note">
+Role names cannot exceed 63 characters, and some role names are not permitted. See [Protected role names](#protected-role-names).
+</Admonition>
+
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and the role `name` is a required attribute. The length of a role name is limited to 63 bytes.
 
 ```bash
@@ -132,7 +132,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 }' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -171,6 +172,8 @@ Response:
 }
 ```
 
+</details>
+
 ### List roles with the API
 
 The following Neon API method lists roles for the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranchroles).
@@ -187,7 +190,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -210,6 +214,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Reset a password with the API
 
 The following Neon API method resets the password for the specified role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/resetprojectbranchrolepassword).
@@ -227,7 +233,8 @@ curl -X 'POST' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -266,6 +273,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Delete a role with the API
 
 The following Neon API method deletes the specified role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranchrole).
@@ -283,7 +292,8 @@ curl -X 'DELETE' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -321,6 +331,8 @@ Response:
 }
 ```
 
+</details>
+
 ## Manage roles with SQL
 
 Roles created with SQL have the same privileges as newly created roles in a stand-alone Postgres installation. These roles are not granted membership in the [neon_superuser](#the-neon_superuser-role) role like roles created with the Neon Console, CLI, or API. You must grant these roles the privileges you want them to have.
@@ -356,6 +368,17 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
     </Admonition>
 
 For role creation and access management examples, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
+
+## Protected role names
+
+The following names are protected and cannot given to a role:
+
+- Any name starting with `pg`
+- `neon_superuser`
+- `cloud_admin`
+- `zenith_admin`
+- `public`
+- `none`
 
 ## Need help?
 

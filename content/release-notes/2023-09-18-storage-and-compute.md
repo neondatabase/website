@@ -1,0 +1,9 @@
+### Support for Postgres 16
+
+Neon is pleased to announce support for Postgres 16. To use Postgres 16 with Neon, create a new Neon project and select **16** as the **Postgres version**. See [Create a project](/docs/manage/projects#create-a-project) for instructions.
+
+![Postgres 16 Create project](/docs/relnotes/postgres_16.png)
+
+To migrate data from an existing Neon project to one created with Postgres 16, refer to the dump and restore procedure described in [Import data from another Neon project](/docs/import/import-from-neon).
+
+As with any database migration, always test thoroughly before migrating production systems or applications. Also, we recommend familiarizing yourself with the changes in Postgres 16, especially those affecting compatibility. For information about those changes, please refer to the official [Postgres Release 16 documentation](https://www.postgresql.org/docs/16/release-16.html).

@@ -51,7 +51,7 @@ More Postgres users can be created in Neon UI.
 
 ## Postgres Databases
 
-When a Project is created, a default database for storing data is created along with it, the name of the database is "main". A Neon user can create more databases inside a Project in the Neon UI. Neon users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
+When a Project is created, a ready-to-use database for storing data is created along with it, the name of the database is "main". A Neon user can create more databases inside a Project in the Neon UI. Neon users cannot manipulate system databases, such as `postgres`, `template0`, or `template1`.
 
 ## Limits
 

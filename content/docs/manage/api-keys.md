@@ -51,7 +51,8 @@ where:
 - The `Authorization: Bearer $NEON_API_KEY` entry in the header specifies your API key. Replace `$NEON_API_KEY` with an actual 64-bit API key. A request without this header, or containing an invalid or revoked API key, fails and returns a `401 Unauthorized` HTTP status code.
 - [`jq`](https://stedolan.github.io/jq/) is an optional third-party tool that formats the JSON response, making it easier to read.
 
-A response for a Neon role with a single project appears similar to the following:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -73,6 +74,8 @@ A response for a Neon role with a single project appears similar to the followin
   ]
 }
 ```
+
+</details>
 
 Refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for other supported Neon API methods.
 
@@ -103,9 +106,10 @@ curl https://console.neon.tech/api/v2/api_keys \
   -d '{"key_name": "mynewkey"}' | jq
 ```
 
-Response:
+The response body includes an `id` for the key and a generated 64-bit `key` value, which can be used to access the Neon API. API keys should stored and managed securely, as they provide access to all objects in your Neon account.
 
-The response includes an `id` for the key and a generated 64-bit `key` value, which can be used to access the Neon API. API keys should stored and managed securely, as they provide access to all objects in your Neon account.
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -113,6 +117,8 @@ The response includes an `id` for the key and a generated 64-bit `key` value, wh
   "key": "pgh66qptg0cdbzk9jmu4qpvn65jhvwkpfzc6qzi57z814ispmhfu7q4q85r44zv8"
 }
 ```
+
+</details>
 
 ### List API keys with the API
 
@@ -130,7 +136,8 @@ curl "https://console.neon.tech/api/v2/api_keys" \
  -H "Accept: application/json"  | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 [
@@ -158,6 +165,8 @@ Response:
 ]
 ```
 
+</details>
+
 ### Revoke an API key with the API
 
 The following Neon API method revokes the specified API key. The `key_id` is a required parameter. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/revokeapikey).
@@ -175,7 +184,9 @@ curl -X DELETE \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
+
 
 ```json
 {
@@ -186,6 +197,8 @@ Response:
   "last_used_from_addr": "192.0.2.21"
 }
 ```
+
+</details>
 
 ## Need help?
 

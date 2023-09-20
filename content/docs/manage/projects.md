@@ -12,7 +12,7 @@ A Neon project is created with the following resources, by default:
 
 - A primary branch called `main`. You can create child branches from the primary branch or from a previously created branch. For more information, see [Manage branches](/docs/manage/branches).
 - A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage computes](/docs/manage/endpoints).
-- A default database, called `neondb`, which resides in the project's primary branch.
+- A ready-to-use database, called `neondb`, which resides in the project's primary branch.
 - A default Postgres role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
 
 ## Create a project
@@ -23,18 +23,18 @@ To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
-3. Specify a name, a Postgres version, and a region. Project names are limited to 64 characters. If you are a Neon [Pro plan](/docs/introduction/pro-plan) user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
+3. Specify vales for **Name**, **Postgres version**, and **Region**. Project names are limited to 64 characters. If you are a Neon [Pro plan](/docs/introduction/pro-plan) user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
     - Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
     - The **Auto-suspend delay** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
   
 4. Click **Create Project**.
 
-Upon creating a project, you are presented with a dialog that provides your connection details for the default `neondb` database, including your password.
+Upon creating a project, you are presented with a dialog that provides your connection details for a ready-to-use `neondb` database. The connection details include your password.
 
 ## Compute size configuration with Autoscaling
 
-Neon [Pro plan](/docs/introduction/pro-plan) users can configure compute size settings when [creating a project](#create-a-project).
+Neon [Pro plan](/docs/introduction/pro-plan) users can configure default compute size settings when [creating a project](#create-a-project) or from the the **Settings** > **Compute** page.
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
 
@@ -101,9 +101,9 @@ To share a project:
 1. Under **Grant access to your project**, enter the email address of the account you want to share access with.
 1. Click **Grant access**.
 
-The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to rename or delete the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
+The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
 
-The costs associated with a shared project are charged to the Neon account that owns the project. To illustrate, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
+The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
 
 ## Manage projects with the Neon API
 
@@ -141,9 +141,10 @@ curl 'https://console.neon.tech/api/v2/projects' \
 }' | jq
 ```
 
-Response:
+The response includes information about the roles, the ready-to-use database (`neondb)`), the primary branch (`main`), and the read-write compute endpoint that is created with the project.
 
-The response includes information about the roles, the default database, the primary branch (`main`), and the read-write compute endpoint that is created with the project.
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -252,6 +253,8 @@ The response includes information about the roles, the default database, the pri
 }
 ```
 
+</details>
+
 ### List projects with the API
 
 The following Neon API method lists projects for your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojects).
@@ -268,7 +271,8 @@ curl 'https://console.neon.tech/api/v2/projects' \
  -H 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -290,6 +294,8 @@ Response:
   ]
 }
 ```
+
+</details>
 
 ### Update a project with the API
 
@@ -313,7 +319,8 @@ curl 'https://console.neon.tech/api/v2/projects/odd-cell-528527' \
 }'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -335,6 +342,8 @@ Response:
 }
 ```
 
+</details>
+
 ### Delete a project with the API
 
 The following Neon API method deletes the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteproject).
@@ -352,7 +361,8 @@ curl -X 'DELETE' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-Response:
+<details>
+<summary>Response body</summary>
 
 ```json
 {
@@ -372,6 +382,8 @@ Response:
   }
 }
 ```
+
+</details>
 
 ## Need help?
 

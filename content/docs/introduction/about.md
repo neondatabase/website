@@ -38,4 +38,4 @@ You can find [neondatabase](https://github.com/neondatabase/neon) on GitHub. We 
 
 ## Compatibility
 
-Neon compute is the latest version of Postgres. It is 100% compatible with any application that uses the official release of Postgres. Currently, we support [Postgres 14](https://www.postgresql.org/docs/14/release-14.html) and [Postgres 15](https://www.postgresql.org/docs/15/release-15.html), with Postgres 15 being the default. For details refer to the [Postgres compatibility](/docs/reference/compatibility) page.
+Neon compute is the latest version of Postgres. It is 100% compatible with any application that uses the official release of Postgres. Currently, we support [Postgres 14](https://www.postgresql.org/docs/14/release-14.html), [Postgres 15](https://www.postgresql.org/docs/15/release-15.html) (the default), and [Postgres 16](https://www.postgresql.org/docs/16/release-16.html). For details refer to the [Postgres compatibility](/docs/reference/compatibility) page.

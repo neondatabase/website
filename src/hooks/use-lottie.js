@@ -1,5 +1,5 @@
-import lottie from 'lottie-web/build/player/lottie_light';
-import { useState, useRef, useEffect } from 'react';
+import lottie from 'lottie-web';
+import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 export default function useLottie({ lottieOptions, useInViewOptions = {}, events = {}, isInView }) {

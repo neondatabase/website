@@ -22,7 +22,7 @@ If you do not have one already, create a Neon project.
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
 
-The project is created with a default `neondb` database, which you will connect to.
+The project is created with a ready-to-use `neondb` database, which you will connect to.
 
 ## Create a Python project
 
