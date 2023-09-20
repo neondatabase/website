@@ -73,7 +73,7 @@ The Neon documentation file structure reflects the navigation that you see on th
 
 ## Documentation table of contents
 
-This section describes how to modify the documentation left-hand table of contents, also referred to as the "sidebar". Adding, removing, or moving a page to the documentation requires modifying the sidebar. The sidebar is managed in a `yaml` file conveniently named `siderbar.yaml`, which is found in at the root of the `/docs` directory.
+This section describes how to modify the documentation left-hand table of contents, also referred to as the "sidebar". Adding, removing, or moving a page to the documentation requires modifying the sidebar. The sidebar is managed in a `yaml` file conveniently named `sidebar.yaml`, which is found in at the root of the `/docs` directory.
 
 ### How to add a new category
 
@@ -388,6 +388,10 @@ For example, to add an image to a file, add an entry that looks like this:
 
 This section outlines the stylistic elements that we do our best to adhere to in the Neon documentation.
 
+### Voice
+
+The voice in the documentation strives to be conversational but brief, and friendly but succinct.
+
 ### Language
 
 The language used in Neon's documentation should be clear and easily understood.
@@ -409,6 +413,31 @@ The general rule is that we use lowercase wherever possible.
 For topic titles, we use sentence-style capitalization. For example: "Create your first project"
 
 Generally, product names should align with the official names of the products, protocols, etc., maintaining exact capitalization.
+
+#### UI text
+
+When referencing specific user interface text, such as button labels or menu items, we use the same capitalization displayed in the user interface wherever possible.
+
+#### Feature names
+
+Generally, feature names should be lowercase.
+
+#### Other terms
+
+Capitalize names of:
+
+- Neon tiers. For example, Neon Free Tier, Neon Pro Plan.
+- Third-party organizations, software, and products. Kubernetes, Git, and Vercel.
+- Methods or methodologies. Continuous Integration, Continuous Deployment, etc.
+
+Follow the capitalization style used by authoritative source, which may use non-standard case styles. For example: PostgreSQL, GitHub, npm.
+
+### Fake user information
+
+When including user information in API calls or UI instructions, do not use real user information or email addresses.
+
+- Use an email address ending in example.com.
+- Use strings like example_username or diverse or non-gendered names with common surnames, such as Pat Smith, Jiang Wei, or Alex Lopez.
 
 ### Commands, parameters, values, filenames
 
