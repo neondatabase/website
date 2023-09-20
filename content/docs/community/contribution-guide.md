@@ -226,8 +226,8 @@ redirectFrom:
 Tne page title in the frontmatter is translated into an h1 element when the page is converted to HTML.
 
 - For each subsequent section, the heading level should be increased. In other words, add an additional # character before the topic title.
-- Try to avoid heading levels beyond h4 (####).
-- Do not skip a level, e.g., do not go from ## to ####.
+- Try to avoid heading levels beyond h4 (`####`).
+- Do not skip a level, e.g., do not go from `##` to `####`.
 - Ensure there's a blank line before and after the heading.
 
 ## Common markup
@@ -318,7 +318,7 @@ class GFG {
 ````
 
 <details>
-<summary>Examples</summary>
+<summary>Code tabs example</summary>
 
 ![Code tabs example](/docs/community/code-tabs-example.jpg)
 
