@@ -46,6 +46,19 @@ The Pro plan bills for usage monthly. Please refer to our [Billing metrics](/doc
 
 You can click on **Upgrade to Pro** in the Neon Console or click [here](https://console.neon.tech/app/projects?show_enroll_to_pro=true) to sign up.
 
+After upgrading to a Pro account, Free Tier limits are lifted the next time your project's compute endpoint restarts.
+
+<Admonition type="note">
+If your compute was active before upgrading, it continues to be bound by Free Tier limits until it restarts, which can result in limit-related errors such as this one if Free Tier limits are exceeded:
+
+```text
+ERROR: could not extend file because cluster size limit (3072 MB) has been exceeded
+HINT: This limit is defined by neon.max_cluster_size GUC
+```
+
+To force a restart of your compute endpoint, you can temporarily set your compute's **Auto-suspend delay** setting to 1 second (the default is 5 minutes). See [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console to see if your compute endpoint restarted. Look for `suspend_compute` and `start_compute` actions. Alternatively, you can issue [Suspend endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. Please be aware that restarting a compute endpoint interrupts any connections currently using the compute endpoint.
+</Admonition>
+
 ## How do I downgrade?
 
 If you find that the Pro plan isn't for you, you can downgrade in just a few clicks. Follow the steps described in [Downgrade your plan](/docs/introduction/manage-billing#downgrade-your-plan).
