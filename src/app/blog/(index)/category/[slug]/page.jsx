@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
 import BlogPostCard from 'components/pages/blog/blog-post-card';
+import LoadMorePosts from 'components/pages/blog/load-more-posts';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import { BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
@@ -24,18 +25,20 @@ export default async function BlogCategoryPage({ params: { slug } }) {
     <>
       <h1 className="sr-only">{generateBlogTitle(category)}</h1>
       <div className="grid grid-cols-3 gap-x-10 gap-y-16 2xl:gap-y-12 xl:gap-x-6 xl:gap-y-10 md:grid-cols-2 md:gap-y-5 sm:grid-cols-1">
-        {posts.map((post, index) => (
-          <BlogPostCard
-            className={clsx({ 'col-span-full': index === 0 })}
-            {...post}
-            size={index === 0 ? 'xl' : 'md'}
-            key={post.slug}
-            withAuthorPhoto={index !== 0}
-            isPriority={index === 0}
-            imageWidth={index === 0 ? 716 : 380}
-            imageHeight={index === 0 ? 403 : 214}
-          />
-        ))}
+        <LoadMorePosts defaultCountPosts={category.slug === 'all-posts' ? 13 : -1} countToAdd={12}>
+          {posts.map((post, index) => (
+            <BlogPostCard
+              className={clsx({ 'col-span-full': index === 0 })}
+              {...post}
+              size={index === 0 ? 'xl' : 'md'}
+              key={post.slug}
+              withAuthorPhoto={index !== 0}
+              isPriority={index === 0}
+              imageWidth={index === 0 ? 716 : 380}
+              imageHeight={index === 0 ? 403 : 214}
+            />
+          ))}
+        </LoadMorePosts>
       </div>
       <SubscribeForm size="md" />
     </>
