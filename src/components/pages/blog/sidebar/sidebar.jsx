@@ -8,7 +8,7 @@ import YouTubeIcon from 'icons/youtube-sm.inline.svg';
 
 const categories = [
   {
-    name: 'Home',
+    name: 'Featured',
     slug: 'all',
   },
   {

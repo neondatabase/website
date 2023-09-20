@@ -6,7 +6,9 @@ import { useState } from 'react';
 import Button from 'components/shared/button';
 
 const LoadMorePosts = ({ children, defaultCountPosts = -1, countToAdd = 12 }) => {
-  const [countPosts, setCountPosts] = useState(defaultCountPosts);
+  const [countPosts, setCountPosts] = useState(
+    defaultCountPosts === -1 ? children.length : defaultCountPosts
+  );
 
   return (
     <>
