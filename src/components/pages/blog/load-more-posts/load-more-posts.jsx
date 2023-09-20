@@ -14,7 +14,7 @@ const LoadMorePosts = ({ children, defaultCountPosts = -1, countToAdd = 12 }) =>
       {countPosts < children.length && (
         <div className="col-span-full text-center">
           <Button
-            theme="primary"
+            theme="white-outline"
             size="xs"
             onClick={() => setCountPosts((prev) => prev + countToAdd)}
           >
