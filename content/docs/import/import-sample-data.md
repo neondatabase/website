@@ -14,7 +14,6 @@ This guide describes how to download and install sample data using either `psql`
 - A Neon [Pro](/docs/introduction/pro-plan) account is required to install datasets larger than 3 GBs.
 - Instructions for each dataset require that you create a database. You can do so from a client such as `psql` or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
-
 ## Sample data
 
 Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Tier has a storage limit of 3 GBs per branch. Datasets larger than 3 GBs cannot be loaded on the Free Tier.
