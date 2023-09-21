@@ -23,11 +23,10 @@ const BlogPage = async ({ params, searchParams }) => {
 
   let postResult;
   console.log(isDraftModeEnabled);
+  // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
+  await Promise.resolve(JSON.stringify(searchParams));
 
   if (isDraftModeEnabled) {
-    // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
-    await Promise.resolve(JSON.stringify(searchParams));
-
     console.log(searchParams);
     postResult = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
   } else {
