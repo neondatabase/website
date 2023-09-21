@@ -31,4 +31,5 @@ export default {
   ai: '/ai',
   awsIsrael: '/partners/aws-israel',
   thankYou: '/thank-you',
+  trust: '/trust',
 };
