@@ -5,10 +5,8 @@ import { useState } from 'react';
 
 import Button from 'components/shared/button';
 
-const LoadMorePosts = ({ children, defaultCountPosts = -1, countToAdd = 12 }) => {
-  const [countPosts, setCountPosts] = useState(
-    defaultCountPosts === -1 ? children.length : defaultCountPosts
-  );
+const LoadMorePosts = ({ children, defaultCountPosts, countToAdd }) => {
+  const [countPosts, setCountPosts] = useState(defaultCountPosts);
 
   return (
     <>
@@ -16,7 +14,7 @@ const LoadMorePosts = ({ children, defaultCountPosts = -1, countToAdd = 12 }) =>
       {countPosts < children.length && (
         <div className="col-span-full text-center">
           <Button
-            theme="white-outline"
+            theme="gray-outline"
             size="xs"
             onClick={() => setCountPosts((prev) => prev + countToAdd)}
           >
@@ -30,8 +28,8 @@ const LoadMorePosts = ({ children, defaultCountPosts = -1, countToAdd = 12 }) =>
 
 LoadMorePosts.propTypes = {
   children: PropTypes.node.isRequired,
-  defaultCountPosts: PropTypes.number,
-  countToAdd: PropTypes.number,
+  defaultCountPosts: PropTypes.number.isRequired,
+  countToAdd: PropTypes.number.isRequired,
 };
 
 export default LoadMorePosts;
