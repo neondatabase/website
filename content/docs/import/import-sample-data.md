@@ -501,11 +501,15 @@ An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wi
 
 5. Create vector search indexes:
 
+    <CodeBlock shouldWrap>
+
     ```sql
     CREATE INDEX ON public.articles USING ivfflat (content_vector) WITH (lists = 1000);
 
     CREATE INDEX ON public.articles USING ivfflat (title_vector) WITH (lists = 1000);
     ```
+
+    </CodeBlock>
 
 6. Navigate to the directory where you extracted the source file, and run the following command:
 
