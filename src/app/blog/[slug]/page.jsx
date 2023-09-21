@@ -22,12 +22,11 @@ const BlogPage = async ({ params, searchParams }) => {
   const { isEnabled: isDraftModeEnabled } = draftMode();
 
   let postResult;
-  console.log(isDraftModeEnabled);
+
   // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
   await Promise.resolve(JSON.stringify(searchParams));
 
   if (isDraftModeEnabled) {
-    console.log(searchParams);
     postResult = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
   } else {
     postResult = await getWpPostBySlug(params?.slug);

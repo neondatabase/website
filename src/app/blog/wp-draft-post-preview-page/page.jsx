@@ -37,6 +37,9 @@ const BlogDraft = async ({ searchParams }) => {
     return notFound();
   }
 
+  // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
+  await Promise.resolve(JSON.stringify(searchParams));
+
   const { post, relatedPosts } = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
 
   if (!post) {
@@ -113,15 +116,7 @@ const BlogDraft = async ({ searchParams }) => {
         </article>
       </div>
       <SubscribeForm />
-      {isDraftModeEnabled && (
-        <>
-          <PreviewWarning />
-          {/* 
-            TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
-          */}
-          {console.log(JSON.stringify(searchParams))}
-        </>
-      )}
+      {isDraftModeEnabled && <PreviewWarning />}
     </Layout>
   );
 };
