@@ -23,8 +23,12 @@ const BlogPage = async ({ params, searchParams }) => {
 
   let postResult;
   console.log(isDraftModeEnabled);
-  console.log(JSON.stringify(searchParams));
+
   if (isDraftModeEnabled) {
+    // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
+    await Promise.resolve(JSON.stringify(searchParams));
+
+    console.log(searchParams);
     postResult = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
   } else {
     postResult = await getWpPostBySlug(params?.slug);
@@ -106,15 +110,7 @@ const BlogPage = async ({ params, searchParams }) => {
         </article>
       </div>
       <SubscribeForm />
-      {isDraftModeEnabled && (
-        <>
-          <PreviewWarning />
-          {/* 
-            TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
-          */}
-          {console.log(JSON.stringify(searchParams))}
-        </>
-      )}
+      {isDraftModeEnabled && <PreviewWarning />}
     </Layout>
   );
 };
@@ -165,5 +161,3 @@ export async function generateStaticParams() {
 }
 
 export default BlogPage;
-
-export const revalidate = 60;
