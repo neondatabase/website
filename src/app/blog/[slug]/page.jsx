@@ -49,6 +49,7 @@ const BlogPage = async ({ params, searchParams }) => {
     true
   );
 
+  console.log(isDraftModeEnabled);
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
