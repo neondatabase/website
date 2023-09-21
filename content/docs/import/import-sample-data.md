@@ -8,7 +8,6 @@ This guide describes how to download and install sample data using either `psql`
 
 ## Prerequisites
 
-
 - A `psql` client for connecting to your Neon database and loading data. This client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
 - A `pg_restore` client if you are loading the [employees](#employees-database) or [postgres_air](#postgres-air-database) database. The `pg_restore` client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
 - A Neon database connection string to load data and connect to your database. After creating a database, you can obtain the connection string from the **Connection Details** widget on the Neon **Dashboard**. In the instructions that follow, replace `postgres://<user>:<password>@<hostname>/<dbname>` with your Neon database connection string. For further information, see [Connect from any application](/docs/connect/connect-from-any-app).
