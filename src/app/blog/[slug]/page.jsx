@@ -22,7 +22,7 @@ const BlogPage = async ({ params, searchParams }) => {
   const { isEnabled: isDraftModeEnabled } = draftMode();
 
   let postResult;
-
+  console.log(isDraftModeEnabled);
   if (isDraftModeEnabled) {
     postResult = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
   } else {
@@ -49,7 +49,6 @@ const BlogPage = async ({ params, searchParams }) => {
     true
   );
 
-  console.log(isDraftModeEnabled);
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
