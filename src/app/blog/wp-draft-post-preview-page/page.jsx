@@ -113,6 +113,10 @@ const BlogDraft = async ({ searchParams }) => {
         </article>
       </div>
       <SubscribeForm />
+      {/* 
+        TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
+      */}
+      {console.log(JSON.stringify(searchParams))}
       {isDraftModeEnabled && <PreviewWarning />}
     </Layout>
   );
