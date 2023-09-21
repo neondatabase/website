@@ -23,6 +23,7 @@ const BlogPage = async ({ params, searchParams }) => {
 
   let postResult;
   console.log(isDraftModeEnabled);
+  console.log(searchParams);
   if (isDraftModeEnabled) {
     postResult = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
   } else {
