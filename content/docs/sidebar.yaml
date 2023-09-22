@@ -240,7 +240,7 @@
       slug: import/import-from-neon
     - title: Migrate data with AWS DMS
       slug: import/migrate-aws-dms
-    - title: Import sample data
+    - title: Sample data
       slug: import/import-sample-data
 - title: Security
   items:
