@@ -4,14 +4,15 @@ subtitle: Download sample data for learning, testing, and exploring Neon
 enableTableOfContents: true
 ---
 
-This guide describes how to download and install sample data using either `psql` or `pg_restore`, depending on the source file format. Most downloads are performed using [wget](https://www.gnu.org/software/wget/). If your system does not support `wget`, you can download source files by pasting the file address in your browser's address bar.
+This guide describes how to download and install sample data for use with Neon.
 
 ## Prerequisites
 
+- [wget](https://www.gnu.org/software/wget/) for downloading datasets, unless otherwise instructed. If your system does not support `wget`, you can paste the source file address in your browser's address bar.
 - A `psql` client for connecting to your Neon database and loading data. This client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
 - A `pg_restore` client if you are loading the [employees](#employees-database) or [postgres_air](#postgres-air-database) database. The `pg_restore` client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
-- A Neon database connection string to load data and connect to your database. After creating a database, you can obtain the connection string from the **Connection Details** widget on the Neon **Dashboard**. In the instructions that follow, replace `postgres://<user>:<password>@<hostname>/<dbname>` with your Neon database connection string. For further information, see [Connect from any application](/docs/connect/connect-from-any-app).
-- A Neon [Pro](/docs/introduction/pro-plan) account is required to install datasets larger than 3 GBs.
+- A Neon database connection string. After creating a database, you can obtain the connection string from the **Connection Details** widget on the Neon **Dashboard**. In the instructions that follow, replace `postgres://<user>:<password>@<hostname>/<dbname>` with your connection string.
+- A Neon [Pro](/docs/introduction/pro-plan) if you install datasets larger than 3 GBs.
 - Instructions for each dataset require that you create a database. You can do so from a client such as `psql` or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 ## Sample data
