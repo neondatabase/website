@@ -21,15 +21,6 @@ const items = [
     text: 'Store embeddings and perform vector similarity search in Postgres with pgvector.',
     linkUrl: '/docs/extensions/pgvector',
   },
-  {
-    title: 'pg_embedding',
-    code: `    CREATE EXTENSION embedding;
-    CREATE TABLE documents(id BIGSERIAL PRIMARY KEY, embedding real[]);
-    INSERT INTO documents(embedding) VALUES ('{1,2,3}'),('{4,5,6}');
-    SELECT * FROM documents ORDER BY embedding <-> ARRAY[3,2,1] LIMIT 1;`,
-    text: 'Store embeddings and perform graph-based vector similarity search with pg_embedding.',
-    linkUrl: '/docs/extensions/pg_embedding',
-  },
 ];
 
 const Integration = () => {

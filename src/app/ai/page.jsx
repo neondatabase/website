@@ -21,7 +21,7 @@ const items = [
     icon: updateIcon,
     title: 'Reliable & actively maintained',
     description:
-      'The pgvector and pg_embedding extensions are open-source and actively maintained',
+      'The pgvector extension is open-source and actively maintained',
   },
   {
     icon: scalabilityIcon,
@@ -37,7 +37,7 @@ const items = [
   {
     icon: compatibilityIcon,
     title: 'Highly compatible',
-    description: 'Use Neon with pgvector or pg_embedding in your Postgres and LangChain projects',
+    description: 'Use Neon with pgvector in your Postgres and LangChain projects',
   },
 ];
 
