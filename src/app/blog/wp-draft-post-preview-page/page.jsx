@@ -33,12 +33,14 @@ import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blo
 const BlogDraft = async ({ searchParams }) => {
   const { isEnabled: isDraftModeEnabled } = draftMode();
 
+  // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
+  await Promise.resolve(JSON.stringify(searchParams));
+
   if (!isDraftModeEnabled) {
     return notFound();
   }
 
-  // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
-  await Promise.resolve(JSON.stringify(searchParams));
+  console.log(searchParams);
 
   const { post, relatedPosts } = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
 
