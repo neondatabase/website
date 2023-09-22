@@ -228,7 +228,11 @@ Consider using the driver with `Pool` or `Client` in the following scenarios:
 
 For configuration options that apply to `Pool` and `Client`, see [options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration) in the driver's GitHub repository.
 
-## Example application
+## Example applications
+
+Explore the example applications that use the Neon serverless driver.
+
+### UNESCO World Heritage sites app
 
 Neon provides an example application to help you get started with the Neon serverless driver. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
 
@@ -242,4 +246,12 @@ There are different implementations of the application to choose from.
 <a href="https://github.com/neondatabase/serverless-cfworker-demo" description="Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance." icon="github">Raw SQL + Cloudflare Workers</a>
 <a href="https://github.com/neondatabase/neon-vercel-kysely" description="Demonstrates using kysely and kysely-codegen with Neon's serverless driver on Vercel Edge Functions" icon="github">Kysely + Vercel Edge Functions</a>
 <a href="https://github.com/neondatabase/neon-vercel-zapatos" description="Demonstrates using Zapatos with Neon's serverless driver on Vercel Edge Functions" icon="github">Zapatos + Vercel Edge Functions</a>
+</DetailIconCards>
+
+### Ping Thing
+
+Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes. You can read more about how this app was made on the Neon blog: [How to use Postgres at the Edge](https://neon.tech/blog/how-to-use-postgres-at-the-edge)
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/ping-thing" description="Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes" icon="github">Ping Thing</a>
 </DetailIconCards>
