@@ -40,8 +40,6 @@ const BlogDraft = async ({ searchParams }) => {
     return notFound();
   }
 
-  console.log(searchParams);
-
   const { post, relatedPosts } = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
 
   if (!post) {
