@@ -104,7 +104,7 @@ To share a project:
 The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
 
 <Admonition type="note">
-A user **without** a Neon account will not receive an email notification when a project is shared. However, if a user creates a Neon account afterward with the specified email address, the shared project will be available when the user logs in to the Neon Console.
+A user **without** a Neon account will not receive an email notification when a project is shared. However, if the user creates a Neon account afterward with the specified email address, the shared project will be available when the user logs in to the Neon Console.
 </Admonition>
 
 The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.

@@ -35,7 +35,7 @@ To share your project:
     An email is also sent to the email address informing the user that a project has been shared with them. The email includes an **Open project** link the user can click on to log in to Neon. After logging in, the user is directed to the **Dashboard** for the shared project in the Neon Console.
 
     <Admonition type="note">
-    A user **without** a Neon account will not receive an email notification when a project is shared. However, if a user creates a Neon account afterward with the specified email address, the shared project will be available when the user logs in to the Neon Console.
+    A user **without** a Neon account will not receive an email notification when a project is shared. However, if the user creates a Neon account afterward with the specified email address, the shared project will be available when the user logs in to the Neon Console.
     </Admonition>
 
 ## Shared project billing
