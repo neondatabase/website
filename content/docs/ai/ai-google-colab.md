@@ -11,7 +11,7 @@ This guide provides a simple example that shows how to create a notebook in Cola
 
 ## Prerequisites
 
-- A Neon database for storing vectors. You can use the ready-to-user `neondb` database or create your own. See [Create a database](/docs/manage/create-a-database) for instructions.
+- A Neon database for storing vectors. You can use the ready-to-use `neondb` database or create your own. See [Create a database](/docs/manage/create-a-database) for instructions.
 
 ## Retrieve your database connection string
 
