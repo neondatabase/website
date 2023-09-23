@@ -90,7 +90,7 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/) 
 
 ## Query your data
 
-Add and run the following codeblock to perform a vector similarity search.
+Add the following codeblock to perform a vector similarity search.
 
 ```python
 cursor.execute("SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 3;")
