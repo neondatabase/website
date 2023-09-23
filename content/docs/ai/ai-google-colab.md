@@ -9,11 +9,9 @@ You can use Google Colab to run python code through the browser.
 
 This guide provides a simple example that shows how to create a notebook in Colab, connect to a Neon database, install the `pgvector` extension to enabled Neon as a vector store, and load and query data.
 
-## Create a notebook
+## Prerequisites
 
-In your browser, navigate to [Google Colab](https://colab.research.google.com/) and Click **New notebook**.
-
-![Google Colab](/docs/ai/google_colab.png)
+- A Neon database for storing vectors. You can use the ready-to-user `neondb` database or create your own. See [Create a database](/docs/manage/create-a-database) for instructions.
 
 ## Retrieve your database connection string
 
@@ -21,9 +19,15 @@ In the **Connection Details** widget on the Neon **Dashboard**, select a branch,
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
+## Create a notebook
+
+In your browser, navigate to [Google Colab](https://colab.research.google.com/) and Click **New notebook**.
+
+![Google Colab](/docs/ai/google_colab.png)
+
 ## Connect to your database
 
-1. Create a code block and add the following code to define your database connection and create a cursor object:
+1. In your Colab notebook, create a code block and add the following code to define your database connection and create a cursor object:
 
     ```python
     import os
