@@ -102,6 +102,10 @@ print(all_data)
 
 For a more extensive Jupyter notebook example that you can try with Google Colab, refer to our [Jupyter Notebook for vector search with Neon, pgvector, and OpenAI](https://github.com/neondatabase/neon-vector-search-openai-notebooks). This notebook shows how to create a search vector using the OpenAI API and perform a similarity search on Wikipedia article vector data.
 
+<a target="_blank" href="https://colab.research.google.com/github/neondatabase/neon-vector-search-openai-notebooks/blob/main/neon-postgres-vector-search-pgvector.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
 <DetailIconCards>
 <a href="https://github.com/neondatabase/neon-vector-search-openai-notebooks" description="Jupyter Notebook for vector search with Neon, pgvector, and OpenAI" icon="github">Jupyter Notebook for vector search with Neon</a>
 </DetailIconCards>
