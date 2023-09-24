@@ -1,12 +1,14 @@
 ---
-title: Use Langchain with Neon
-subtitle: Chat with your Neon database with Langchain
+title: Use LangChain with Neon
+subtitle: Chat with your Neon database using LangChain
 enableTableOfContents: true
 ---
 
-LangChain is an open-source toolkit that enables developers to create applications that operate on Large Language Models (LLMs). It introduces a system to connect LLMs with external data sources such as personal files or online content. With LangChain, developers can sequence multiple commands to develop sophisticated applications. Essentially, it acts as a platform that facilitates running a series of prompts to achieve a desired result.
+LangChain is an open-source framework for developing applications powered by Large Language Models (LLMs). It enables developers to build sophisticated AI-powered applications that use LLMs to reason about how to provide answers and take actions based on the provided context. Context includes such things as prompt instructions, example inputs and responses, and the content or data that responses should be based on.
 
-This guide shows how to connect to a Neon database, install the `pgvector` extension to enabled Neon as a vector store, use chat with your database using Langchain.
+Essentially, with LangChain, you can connect LLMs with external data sources and sequence multiple commands (a series of prompts) to achieve a desired result.
+
+This guide shows how to create an application that enables you to chat with your Neon database. You will be able to ask your database questions in natural language. The application turna question into an SQL query, run the query, and returns a natural language response based on the query result.
 
 ## Prerequisites
 
@@ -14,7 +16,7 @@ This guide shows how to connect to a Neon database, install the `pgvector` exten
 
 ## Configure an environment variable for your OpenAI API key
 
-You can use any open source models with langchain. However openai models gives better results than the open source models. Openai key is required to access langchain if you are using any openai models. This tutorial designed with the openai model. Follow the steps to create a new openai key.
+You can use any open source model with LangChain. However, OpenAI models give better results than the open source models. OpenAI key is required to access LangChain if you are using any OpenAI models. This tutorial designed with the OpenAI model. Follow the steps to create a new OpenAI key.
 
 1. Navigate to [https://platform.openai.com/](https://platform.openai.com/).
 2 Click on your name or icon, located at the top right corner of the page, and select **View API Keys**.
@@ -45,10 +47,10 @@ venv/Scripts/activate #for windows
 
 ## Install dependencies
 
-2. Install langchain, openai, python-environ and psycopg2 libraries using pip.
+2. Install LangChain, openai, python-environ and psycopg2 libraries using pip.
 
 ```sql
-pip install langchain openai python-environ psycopg2 
+pip install LangChain LangChain-experimental openai python-environ psycopg2 
 ```
 
 ## Create you table and insert data
@@ -113,7 +115,7 @@ python db.py
 ## Setup the SQL Database Chain
 
 ```python
-from langchain import OpenAI, SQLDatabase, SQLDatabaseChain
+from LangChain import OpenAI, SQLDatabase, SQLDatabaseChain
 
 import environ
 env = environ.Env()
@@ -167,7 +169,7 @@ get_prompt()
 
 Understanding the code:
 
-- Import Langchain modules `OpenAI`, `SQLDatabase`, and `SQLDatabaseChain`
+- Import LangChain modules `OpenAI`, `SQLDatabase`, and `SQLDatabaseChain`
 - Access `OPENAI_API_KEY` from the environment variables file.
 - Setup the database connection using `SQLDatabase.from_uri()` method by specifying the connection URL.
 - Create llm object using `OpenAI()` by specifying the `temperature` and the `openai_api_key`.
@@ -181,3 +183,7 @@ Run the SQL database chain using the following command.
 ```bash
 python app.py
 ```
+
+## Reference
+
+[LangChain: SQL](https://python.LangChain.com/docs/use_cases/qa_structured/sql)
