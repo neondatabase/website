@@ -30,7 +30,7 @@ https://neonstatus.com/feed.atom
 
 ## Slack
 
-To receive real-rime updates in Slack, run the following command in the Slack channel of your choice:
+To receive real-time updates in Slack, run the following command in the Slack channel of your choice:
 
 ```text
 /feed subscribe https://neonstatus.com/slack.rss
