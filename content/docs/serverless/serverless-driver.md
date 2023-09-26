@@ -1,9 +1,7 @@
 ---
 title: Neon serverless driver
 enableTableOfContents: true
-subtitle: >-
-  Learn how to connect to Neon from serverless and edge environments over HTTP
-  or WebSockets
+subtitle: Learn how to connect to Neon from serverless and edge environments over HTTP or WebSockets
 updatedOn: '2023-09-05T15:00:04Z'
 ---
 

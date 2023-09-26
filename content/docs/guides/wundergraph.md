@@ -1,8 +1,6 @@
 ---
 title: Use WunderGraph with Neon
-subtitle: >-
-  Leverage the power of Neon and WunderGraph to build fully serverless apps in
-  minutes
+subtitle: Leverage the power of Neon and WunderGraph to build fully serverless apps in minutes
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2023-09-07T17:05:44Z'

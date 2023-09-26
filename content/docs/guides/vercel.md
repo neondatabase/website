@@ -1,8 +1,6 @@
 ---
 title: Connect with the Neon Vercel Integration
-subtitle: >-
-  Learn how to connect your Vercel project to Neon using the Neon Vercel
-  Integration
+subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel Integration
 enableTableOfContents: true
 updatedOn: '2023-08-08T20:44:56Z'
 ---
