@@ -16,8 +16,22 @@ To view the Neon Status page, please click [here](https://neonstatus.com/).
 
 We strive to maintain the highest level of service availability and performance, but in the case of interruptions or maintenance, you'll be able to find the information you need promptly and accurately. Please remember to bookmark the link for easy access.
 
+## RRS feed
+
+```text
+https://neonstatus.com/feed.rss
+```
+
+## Atom feed:
+
+```text
+https://neonstatus.com/feed.atom
+```
+
 ## Slack
 
-Instructions for slack
+To receive real-rime updates in Slack, run the following command in the Slack channel of your choice:
 
-Second 
+```text
+/feed subscribe https://neonstatus.com/slack.rss
+```
