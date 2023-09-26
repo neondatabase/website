@@ -134,7 +134,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
       >
         <div className="relative z-20 lg:text-center">
           {size === 'sm' ? (
-            <h2 className="text-2xl leading-dense tracking-tighter w-[240px] shrink">
+            <h2 className="text-2xl leading-dense tracking-tighter w-[220px] shrink">
               Subscribe to receive our latest updates
             </h2>
           ) : (
