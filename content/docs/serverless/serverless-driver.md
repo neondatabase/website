@@ -1,7 +1,10 @@
 ---
 title: Neon serverless driver
 enableTableOfContents: true
-subtitle: Learn how to connect to Neon from serverless and edge environments over HTTP or WebSockets
+subtitle: >-
+  Learn how to connect to Neon from serverless and edge environments over HTTP
+  or WebSockets
+updatedOn: '2023-09-05T15:00:04Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP.
