@@ -25,7 +25,7 @@ const updateFrontmatter = async () => {
     ignore: ['**/RELEASE_NOTES_TEMPLATE.md', '**/README.md', '**/unused/**'],
   });
 
-  const firstFiles = files.slice(55, 57);
+  const firstFiles = files.slice(57, 116);
   firstFiles.forEach(async (path) => {
     const file = matter.read(path);
     const { data: currentFrontmatter } = file;
