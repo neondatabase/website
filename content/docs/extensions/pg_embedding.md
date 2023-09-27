@@ -1,24 +1,120 @@
 ---
-title: The pg_embedding extension (Discontinuing Support)
+title: The pg_embedding extension (Support Discontinued)
 subtitle: 
 enableTableOfContents: true
 ---
 
 <Admonition type="warning">
-As of  **Sept 29, 2020** we are no longer committing to `pg_embedding`.
+As of **Sept 29, 2023** we are no longer committing to `pg_embedding`.
 
 Support will remain in place for existing Neon users, but we strongly encourage migrating to [pgvector](https://github.com/pgvector/pgvector).
 
-More information can be found in our migration guide: [pg_embedding to pgvector migration guide](https://).
+For migration instructions, see [Migrate from pg_embedding to pgvector](#migrate-from-pg_embedding-to-pgvector).
 </Admonition>
 
 <hr />
 
-The `pg_embedding` extension enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in Postgres.
+## Migrate from pg_embedding to pgvector
 
-<Admonition type="note">
-The `pg_embedding` extension was updated on August 3, 2023 to add support for on-disk index creation and additional distance metrics. If you installed `pg_embedding` before this date and want to upgrade to the new version, please see [Upgrade to pg_embedding with on-disk indexes](#upgrade-to-pg_embedding-for-on-disk-indexes) for instructions.
-</Admonition>
+The `pg_embedding` extension stores embeddings in a `real[]` type column, while `pgvector` uses a `vector` type column. To migrate to `pg_vector`, you can keep your embeddings data as it is, in a `real[]` type column, and cast from `real[]` to `vector` in your queries and index creation statements, or you can recreate your table with the `vector` type. Both migration methods are described below.
+
+Migration instructions are based on the following setup, which has the `pg_embedding` extension installed, a table named `items` defined with a `real[]` column named `embedding`, and an `hnsw` index defined on the `embeddings` column.
+
+```sql
+CREATE EXTENSION embedding;
+CREATE TABLE items(id BIGSERIAL PRIMARY KEY, embedding real[]);
+INSERT INTO items(embedding) VALUES ('{1,2,3}'),('{4,5,6}');
+CREATE INDEX ON items USING hnsw(embedding) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
+```
+
+### Use casting
+
+To migrate to `pgvector` without altering the `embeddings` column type, casting from `real[]` to `vector` instead:
+
+1. Drop the `pg_embedding` extension:
+
+    ```sql
+    DROP EXTENSION embedding CASCADE;
+    ```
+
+    The `CASCADE` clause removes the HNSW index that you defined with `pg_embedding`, which means that search queries fall back to using sequential scans until you install `pgvector` and recreate your index.
+
+2. Create the `pgvector` extension:
+
+    ```sql
+    CREATE EXTENSION vector;
+    ```
+
+3. Update your queries to cast embeddings data from `real[]` to `vector`. For example, the following statement casts embeddings data stored in the `embedding` column, defined as a `real[]`, to `vector`.
+
+    ```sql
+    SELECT * FROM items ORDER BY embedding::vector <-> '[3,1,2]' LIMIT 5;
+    ```
+
+4. Recreate your index, casting the `real[]` type column to `vector`, as shown:
+
+    ```sql
+    CREATE INDEX ON items USING hnsw ((embedding::vector(3)) vector_cosine_ops);
+    ```
+
+## Use vector columns
+
+To migrate to `pgvector`, changing your `embeddings` column type from `real[]` to `vector`:
+
+1. Drop the `pg_embedding` extension:
+
+    ```sql
+    DROP EXTENSION embedding CASCADE;
+    ```
+
+    The `CASCADE` clause removes the HNSW index that you defined with `pg_embedding`, which means that search queries fall back to using sequential scans until you install `pgvector` and recreate your index.
+
+2. Create the `pgvector` extension:
+
+    ```sql
+    CREATE EXTENSION vector;
+    ```
+
+3. Create a new table with the `vector` type:
+
+    ```sql
+    CREATE TABLE new_items (id BIGSERIAL PRIMARY KEY, embedding vector(3));
+    ```
+
+4. Copy data over from your old table:
+
+    ```sql
+    INSERT INTO new_items (id, embedding)
+    SELECT id, embedding::vector(3) FROM items;
+    ```
+
+5. Drop the old table:
+
+    ```sql
+    DROP TABLE items;
+    ```
+
+6. Rename the new table to the name of the old table:
+
+    ```sql
+    ALTER TABLE new_items RENAME TO items;
+    ```
+
+7. Recreate your index. For example:
+
+    ```sql
+    CREATE INDEX ON items USING hnsw (embedding vector_l2_ops);
+    ```
+
+8. Optionally, run a test query:
+
+    ```sql
+    SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
+    ```
+
+## About pg_embedding
+
+The `pg_embedding` extension enables the use of the Hierarchical Navigable Small World (HNSW) algorithm for vector similarity search in Postgres.
 
 This extension is based on [ivf-hnsw](https://github.com/dbaranchuk/ivf-hnsw) implementation of HNSW
 the code for the current state-of-the-art billion-scale nearest neighbor search system<sup>[[1]](https://github.com/neondatabase/pg_embedding#references)</sup>.
