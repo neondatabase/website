@@ -11,7 +11,7 @@ const Search = dynamic(() => import('components/shared/search/search'));
 
 const categories = [
   {
-    name: 'All posts',
+    name: 'Featured',
     slug: 'all',
   },
   {
@@ -25,6 +25,10 @@ const categories = [
   {
     name: 'Community',
     slug: 'community',
+  },
+  {
+    name: 'All posts',
+    slug: 'all-posts',
   },
 ];
 

@@ -33,7 +33,7 @@ const getAllWpBlogCategories = async () => {
     (category) => category.slug !== 'uncategorized'
   );
 
-  return filteredCategories;
+  return [...filteredCategories, { name: 'All posts', slug: 'all-posts' }];
 };
 
 const getWpPostsByCategorySlug = async (slug) => {
@@ -73,6 +73,54 @@ const getWpPostsByCategorySlug = async (slug) => {
     }
   `;
 
+  const allPostsQuery = gql`
+    query AllPosts($first: Int!) {
+      posts(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+        nodes {
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
+          excerpt
+          slug
+          title(format: RENDERED)
+          date
+          pageBlogPost {
+            largeCover {
+              altText
+              mediaItemUrl
+            }
+            description
+            authors {
+              author {
+                ... on PostAuthor {
+                  title
+                  postAuthor {
+                    role
+                    url
+                    image {
+                      altText
+                      mediaItemUrl
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  if (slug === 'all-posts') {
+    const allPostsData = await graphQLClient.request(allPostsQuery, {
+      first: BLOG_POSTS_PER_PAGE,
+    });
+
+    return allPostsData?.posts?.nodes;
+  }
   const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
 
   const data = await graphQLClient.request(postsQuery, {

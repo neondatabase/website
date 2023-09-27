@@ -58,10 +58,6 @@ export default {
       heading: 'Company',
       links: [
         {
-          text: 'Blog',
-          to: LINKS.blog,
-        },
-        {
           text: 'About us',
           to: LINKS.aboutUs,
         },
@@ -72,6 +68,10 @@ export default {
         {
           text: 'Partners',
           to: LINKS.partners,
+        },
+        {
+          text: 'Trust',
+          to: LINKS.trust,
         },
         {
           text: 'Pricing',
@@ -94,6 +94,10 @@ export default {
         {
           text: 'AI',
           to: LINKS.ai,
+        },
+        {
+          text: 'Blog',
+          to: LINKS.blog,
         },
         {
           text: 'Docs',

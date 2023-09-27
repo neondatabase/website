@@ -49,6 +49,19 @@ const defaultConfig = {
           },
         ],
       },
+      {
+        source: '/blog/parsing-json-from-postgres-in-js',
+        headers: [
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'require-corp',
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin',
+          },
+        ],
+      },
     ];
   },
   async redirects() {
@@ -118,6 +131,11 @@ const defaultConfig = {
       {
         source: '/ycmatcher',
         destination: 'https://yc-idea-matcher.vercel.app',
+        permanent: true,
+      },
+      {
+        source: '/trust',
+        destination: 'https://trust.neon.tech',
         permanent: true,
       },
       ...docsRedirects,

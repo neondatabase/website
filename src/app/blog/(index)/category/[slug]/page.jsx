@@ -1,11 +1,18 @@
+import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
 import BlogPostCard from 'components/pages/blog/blog-post-card';
+import LoadMorePosts from 'components/pages/blog/load-more-posts';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import { BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
 import { getAllWpBlogCategories, getWpPostsByCategorySlug } from 'utils/api-posts';
 import getMetadata from 'utils/get-metadata';
+
+const generateBlogTitle = (category) => {
+  if (category.slug === 'all-posts') return 'All Blog Posts';
+  return `${category.name} Blog`;
+};
 
 export default async function BlogCategoryPage({ params: { slug } }) {
   const categories = await getAllWpBlogCategories();
@@ -16,20 +23,37 @@ export default async function BlogCategoryPage({ params: { slug } }) {
 
   return (
     <>
-      <h1 className="sr-only">{`${category.name} Blog`}</h1>
+      <h1 className="sr-only">{generateBlogTitle(category)}</h1>
       <div className="grid grid-cols-3 gap-x-10 gap-y-16 2xl:gap-y-12 xl:gap-x-6 xl:gap-y-10 md:grid-cols-2 md:gap-y-5 sm:grid-cols-1">
-        {posts.map((post, index) => (
-          <BlogPostCard
-            className={index === 0 ? 'col-span-full' : ''}
-            {...post}
-            size={index === 0 ? 'xl' : 'md'}
-            key={post.slug}
-            withAuthorPhoto={index !== 0}
-            isPriority={index === 0}
-            imageWidth={index === 0 ? 716 : 380}
-            imageHeight={index === 0 ? 403 : 214}
-          />
-        ))}
+        {category.slug === 'all-posts' ? (
+          <LoadMorePosts defaultCountPosts={13} countToAdd={12}>
+            {posts.map((post, index) => (
+              <BlogPostCard
+                className={clsx({ 'col-span-full': index === 0 })}
+                {...post}
+                size={index === 0 ? 'xl' : 'md'}
+                key={post.slug}
+                withAuthorPhoto={index !== 0}
+                isPriority={index === 0}
+                imageWidth={index === 0 ? 716 : 380}
+                imageHeight={index === 0 ? 403 : 214}
+              />
+            ))}
+          </LoadMorePosts>
+        ) : (
+          posts.map((post, index) => (
+            <BlogPostCard
+              className={clsx({ 'col-span-full': index === 0 })}
+              {...post}
+              size={index === 0 ? 'xl' : 'md'}
+              key={post.slug}
+              withAuthorPhoto={index !== 0}
+              isPriority={index === 0}
+              imageWidth={index === 0 ? 716 : 380}
+              imageHeight={index === 0 ? 403 : 214}
+            />
+          ))
+        )}
       </div>
       <SubscribeForm size="md" />
     </>
@@ -41,8 +65,9 @@ export async function generateMetadata({ params }) {
   const category = categories.find((cat) => cat.slug === params.slug);
 
   if (!category) return notFound();
+
   return getMetadata({
-    title: `${category.name} Blog - Neon`,
+    title: `${generateBlogTitle(category)} - Neon`,
     description: getBlogCategoryDescription(params.slug),
     pathname: `${BLOG_CATEGORY_BASE_PATH}${params.slug}`,
     imagePath: '/images/social-previews/blog.jpg',
