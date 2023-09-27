@@ -34,7 +34,13 @@ const updateFrontmatter = async () => {
 
   const [, , ...mdFilePaths] = process.argv;
 
-  const docsMdFilePaths = mdFilePaths.filter((path) => path.includes('content/docs'));
+  const docsMdFilePaths = mdFilePaths.filter(
+    (path) =>
+      path.includes('content/docs') &&
+      !path.includes('RELEASE_NOTES_TEMPLATE.md') &&
+      !path.includes('README.md') &&
+      !path.includes('unused')
+  );
 
   docsMdFilePaths.forEach(async (path) => {
     const file = matter.read(path);
