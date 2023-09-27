@@ -7,7 +7,7 @@ import Link from 'components/shared/link';
 
 import GithubIcon from './images/github.inline.svg';
 import LinkedinIcon from './images/linkedin.inline.svg';
-import TwitterIcon from './images/twitter.inline.svg';
+import XIcon from './images/x.inline.svg';
 
 const Team = ({ title, description, members }) => (
   <section className="safe-paddings pt-48 3xl:pt-44 2xl:pt-40 xl:pt-32 lg:pt-12 md:pt-6">
@@ -67,7 +67,7 @@ const Team = ({ title, description, members }) => (
                       target="_blank"
                     >
                       <span className="sr-only">Twitter</span>
-                      <TwitterIcon className="xs:h-6 xs:w-6" />
+                      <XIcon className="xs:h-6 xs:w-6" />
                     </Link>
                   </li>
                 )}
