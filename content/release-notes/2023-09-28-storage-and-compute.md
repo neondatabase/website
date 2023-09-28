@@ -8,7 +8,7 @@ As a result, we will no longer be committing to `pg_embedding`, and will direct 
 
 For those of you who are using `pg_embedding`, rest assured you will still be able to continue using it on Neon. However, we strongly encourage you to migrate to `pgvector`. You can find the migration instructions in our documentation. See [Migrate from pg_embedding to pgvector](https://neon.tech/docs/extensions/pg_embedding#migrate-from-pgembedding-to-pgvector).
 
-For more about our decision to sunset `pg_embedding` and what comes next for Neon in the vector search space, please refer to our blog post: [We’re sunsetting pg_embedding in favor of pgvector](tbd).
+For more about our decision to sunset `pg_embedding` and what comes next for Neon in the vector search space, please refer to our blog post: [We’re sunsetting pg_embedding in favor of pgvector](https://neon.tech/blog/sunset-pgembedding).
 
 ### Fixes & improvements
 
