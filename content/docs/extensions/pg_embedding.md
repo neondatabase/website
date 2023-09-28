@@ -7,7 +7,7 @@ enableTableOfContents: true
 <Admonition type="warning">
 As of **Sept 29, 2023**, Neon is no longer committing to `pg_embedding`.
 
-Support will remain in place for existing Neon users, but we strongly encourage migrating to [pgvector](https://github.com/pgvector/pgvector).
+Support will remain in place for existing users of the extension, but we strongly encourage migrating to [pgvector](https://github.com/pgvector/pgvector).
 
 For migration instructions, see [Migrate from pg_embedding to pgvector](#migrate-from-pg_embedding-to-pgvector).
 </Admonition>
@@ -21,7 +21,7 @@ The `pg_embedding` extension stores embeddings in `real[]` type columns, while `
 
 Both migration methods are described below.
 
-The migration instructions are based on the following setup, which has the `pg_embedding` extension installed, a table named `documents` defined with a `real[]` column named `embedding`, and an `hnsw` index defined on the `embeddings` column. You will have to adapt the queries in the migration instructions according to your setup.
+The migration instructions are based on the following setup, which has the `pg_embedding` extension installed, a table named `documents` defined with a `real[]` column named `embedding`, and an `hnsw` index defined on the `embeddings` column. You have to adapt the queries in the migration instructions according to your setup.
 
 ```sql
 CREATE EXTENSION embedding;
@@ -32,7 +32,7 @@ CREATE INDEX ON documents USING hnsw(embedding) WITH (dims=3, m=3, efconstructio
 
 ### Migration option 1: Use casting
 
-To migrate to `pgvector` without altering the `embeddings` column type, casting from `real[]` to `vector` instead:
+To migrate to `pgvector` without altering the `embeddings` column type, and cast from `real[]` to `vector`:
 
 1. Drop the `pg_embedding` extension:
 
@@ -48,7 +48,7 @@ To migrate to `pgvector` without altering the `embeddings` column type, casting 
     CREATE EXTENSION vector;
     ```
 
-3. Update your queries to cast embeddings data from `real[]` to `vector`. For example, the following statement casts embeddings data stored in the `embedding` column, defined as a `real[]`, to `vector`.
+3. Update your queries to cast embeddings data from `real[]` to `vector`. For example, the following query casts embeddings data stored in the `embedding` column, defined as a `real[]`, to `vector`.
 
     ```sql
     SELECT * FROM documents ORDER BY embedding::vector <-> '[3,1,2]' LIMIT 5;
