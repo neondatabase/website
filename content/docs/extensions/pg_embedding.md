@@ -17,7 +17,7 @@ For migration instructions, see [Migrate from pg_embedding to pgvector](#migrate
 The `pg_embedding` extension stores embeddings in `real[]` type columns, while `pgvector` uses `vector` type columns. To migrate from `pg_embedding` to `pg_vector`, you have two options:
 
 - **Use casting**: Keep your embeddings data as it is, in `real[]` type columns, and cast from `real[]` to `vector` in your queries and index creation statements.
-- **Use the vector type**: Recreate your table using the `vector` type instead of `real[]`. This method requires copy data from one table to another.
+- **Use the vector type**: Recreate your table using the `vector` type instead of `real[]`. This method requires copying data from one table to another.
 
 Both migration methods are described below.
 
