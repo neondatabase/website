@@ -5,29 +5,32 @@ enableTableOfContents: true
 ---
 
 <Admonition type="warning">
-As of **Sept 29, 2023** we are no longer committing to `pg_embedding`.
+As of **Sept 29, 2023**, Neon is no longer committing to `pg_embedding`.
 
 Support will remain in place for existing Neon users, but we strongly encourage migrating to [pgvector](https://github.com/pgvector/pgvector).
 
 For migration instructions, see [Migrate from pg_embedding to pgvector](#migrate-from-pg_embedding-to-pgvector).
 </Admonition>
 
-<hr />
-
 ## Migrate from pg_embedding to pgvector
 
-The `pg_embedding` extension stores embeddings in a `real[]` type column, while `pgvector` uses a `vector` type column. To migrate to `pg_vector`, you can keep your embeddings data as it is, in a `real[]` type column, and cast from `real[]` to `vector` in your queries and index creation statements, or you can recreate your table with the `vector` type. Both migration methods are described below.
+The `pg_embedding` extension stores embeddings in `real[]` type columns, while `pgvector` uses `vector` type columns. To migrate from `pg_embedding` to `pg_vector`, you have two options:
 
-Migration instructions are based on the following setup, which has the `pg_embedding` extension installed, a table named `items` defined with a `real[]` column named `embedding`, and an `hnsw` index defined on the `embeddings` column.
+- **Use casting**: Keep your embeddings data as it is, in `real[]` type columns, and cast from `real[]` to `vector` in your queries and index creation statements.
+- **Use the vector type**: Recreate your table using the `vector` type instead of `real[]`. This method requires copy data from one table to another.
+
+Both migration methods are described below.
+
+The migration instructions are based on the following setup, which has the `pg_embedding` extension installed, a table named `documents` defined with a `real[]` column named `embedding`, and an `hnsw` index defined on the `embeddings` column. You will have to adapt the queries in the migration instructions according to your setup.
 
 ```sql
 CREATE EXTENSION embedding;
-CREATE TABLE items(id BIGSERIAL PRIMARY KEY, embedding real[]);
-INSERT INTO items(embedding) VALUES ('{1,2,3}'),('{4,5,6}');
-CREATE INDEX ON items USING hnsw(embedding) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
+CREATE TABLE documents(id BIGSERIAL PRIMARY KEY, embedding real[]);
+INSERT INTO documents(embedding) VALUES ('{1,2,3}'),('{4,5,6}');
+CREATE INDEX ON documents USING hnsw(embedding) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
 ```
 
-### Use casting
+### Migration option 1: Use casting
 
 To migrate to `pgvector` without altering the `embeddings` column type, casting from `real[]` to `vector` instead:
 
@@ -48,16 +51,16 @@ To migrate to `pgvector` without altering the `embeddings` column type, casting 
 3. Update your queries to cast embeddings data from `real[]` to `vector`. For example, the following statement casts embeddings data stored in the `embedding` column, defined as a `real[]`, to `vector`.
 
     ```sql
-    SELECT * FROM items ORDER BY embedding::vector <-> '[3,1,2]' LIMIT 5;
+    SELECT * FROM documents ORDER BY embedding::vector <-> '[3,1,2]' LIMIT 5;
     ```
 
 4. Recreate your index, casting the `real[]` type column to `vector`, as shown:
 
     ```sql
-    CREATE INDEX ON items USING hnsw ((embedding::vector(3)) vector_cosine_ops);
+    CREATE INDEX ON documents USING hnsw ((embedding::vector(3)) vector_cosine_ops);
     ```
 
-## Use vector columns
+### Migration option 2: Use the vector type
 
 To migrate to `pgvector`, changing your `embeddings` column type from `real[]` to `vector`:
 
@@ -78,38 +81,38 @@ To migrate to `pgvector`, changing your `embeddings` column type from `real[]` t
 3. Create a new table with the `vector` type:
 
     ```sql
-    CREATE TABLE new_items (id BIGSERIAL PRIMARY KEY, embedding vector(3));
+    CREATE TABLE new_documents (id BIGSERIAL PRIMARY KEY, embedding vector(3));
     ```
 
 4. Copy data over from your old table:
 
     ```sql
-    INSERT INTO new_items (id, embedding)
-    SELECT id, embedding::vector(3) FROM items;
+    INSERT INTO new_documents (id, embedding)
+    SELECT id, embedding::vector(3) FROM documents;
     ```
 
 5. Drop the old table:
 
     ```sql
-    DROP TABLE items;
+    DROP TABLE documents;
     ```
 
 6. Rename the new table to the name of the old table:
 
     ```sql
-    ALTER TABLE new_items RENAME TO items;
+    ALTER TABLE new_documents RENAME TO documents;
     ```
 
 7. Recreate your index. For example:
 
     ```sql
-    CREATE INDEX ON items USING hnsw (embedding vector_l2_ops);
+    CREATE INDEX ON documents USING hnsw (embedding vector_l2_ops);
     ```
 
 8. Optionally, run a test query:
 
     ```sql
-    SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
+    SELECT * FROM documents ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
     ```
 
 ## About pg_embedding
@@ -137,6 +140,10 @@ SELECT id FROM documents ORDER BY embedding <-> ARRAY[3,3,3] LIMIT 1;
 ```
 
 ### Enable the extension
+
+<Admonition type="warning">
+The `pg_embedding` extension is no longer available for installation in Neon. Please refer to the notice at the top of the page.
+</Admonition>
 
 To enable the `pg_embedding` extension, run the following `CREATE EXTENSION` statement in the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor):
 
@@ -262,46 +269,6 @@ Using the found node as an entry point, the algorithm moves down to the next lay
 In the bottom layer, the algorithm continues navigating to the nearest neighbor until it cannot find any nodes that are more similar to the query vector. The current node is then returned as the most similar node to the query vector.
 
 The key idea behind HNSW is that by starting the search at the top layer and moving down through each layer, the algorithm can quickly navigate to the area of the graph that contains the node that is most similar to the query vector. This makes the search process much faster than if it had to search through every node in the graph.
-
-## Upgrade to pg_embedding for on-disk indexes
-
-The `pg_embedding` extension version in Neon was updated on August 3, 2023 to add support for on-disk HNSW indexes and additional distance metrics. If you installed `pg_embedding` before this date, you can upgrade to the new version (0.3.5 or higher) following the instructions below.
-
-The previous `pg_embedding` version (0.1.0 and earlier) creates HNSW indexes in memory, which means that indexes are recreated on the first index access after a compute restart. Also, this version only supports Euclidean (2) distance. The new `pg_embedding` version adds support for cosine and Manhattan distance metrics.
-
-Upgrading to the new version of `pg_embedding` requires dropping the existing `pg_embedding` extension and installing the new version. If your compute has not restarted recently, you may be required to restart it to make the new extension version available for installation.
-
-To upgrade:
-
-1. Drop the existing extension and indexes (version 0.1.0 or earlier):
-
-    ```sql
-    DROP EXTENSION embedding CASCADE;
-    ```
-
-2. Ensure that the new version of the extension is available for installation. The **default_version** should be 0.3.5 or higher.
-
-    ```sql
-    SELECT * FROM pg_available_extensions WHERE name = 'embedding';
-
-    name      | default_version | installed_version |  comment   
-    ----------+-----------------+-------------------+------------
-    embedding | 0.3.5           |                   | hnsw index
-    ```
-
-    If the **default_version** is not 0.3.5 or higher, restart your compute instance. Pro users can do so by temporarily setting the **Auto-suspend** setting to a low value, like 2 seconds, allowing the compute to restart, and then setting **Auto-suspend** back to its normal value. For instructions, refer to the _Auto-suspend_ configuration details in [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
-
-3. Install the new version of the extension (version 0.3.5 or higher).
-
-    ```sql
-    CREATE EXTENSION embedding;
-    ```
-
-4. You should now be able to recreate your HNSW index, which will be created on disk. For example:
-
-    ```sql
-    CREATE INDEX ON documents USING hnsw(embedding) WITH (dims=3, m=3, efconstruction=5, efsearch=5);
-    ```
 
 ## pg_embedding extension GitHub repository
 
