@@ -37,9 +37,9 @@ const updateFrontmatter = async () => {
   const docsMdFilePaths = mdFilePaths.filter(
     (path) =>
       path.includes('content/docs') &&
-      !path.includes('RELEASE_NOTES_TEMPLATE.md') &&
-      !path.includes('README.md') &&
-      !path.includes('unused')
+      (!path.includes('RELEASE_NOTES_TEMPLATE.md') ||
+        !path.includes('README.md') ||
+        !path.includes('unused'))
   );
 
   docsMdFilePaths.forEach(async (path) => {
