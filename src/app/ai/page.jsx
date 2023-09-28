@@ -2,7 +2,7 @@ import Examples from 'components/pages/ai/examples';
 import Hero from 'components/pages/ai/hero';
 import Integration from 'components/pages/ai/integration';
 import Stats from 'components/pages/ai/stats';
-import Testimonials from 'components/pages/ai/testimonials';
+// import Testimonials from 'components/pages/ai/testimonials';
 import CTAWithElephant from 'components/shared/cta-with-elephant';
 import Layout from 'components/shared/layout';
 import SplitViewGrid from 'components/shared/split-view-grid';
@@ -20,8 +20,7 @@ const items = [
   {
     icon: updateIcon,
     title: 'Reliable & actively maintained',
-    description:
-      'The pgvector and pg_embedding extensions are open-source and actively maintained',
+    description: 'The pgvector extension is open-source and actively maintained',
   },
   {
     icon: scalabilityIcon,
@@ -31,13 +30,12 @@ const items = [
   {
     icon: searchIcon,
     title: 'Blazingly fast search',
-    description:
-      'Use HNSW indexes for fast and scalable vector similarity search in Postgres',
+    description: 'Use HNSW indexes for fast and scalable vector similarity search in Postgres',
   },
   {
     icon: compatibilityIcon,
     title: 'Highly compatible',
-    description: 'Use Neon with pgvector or pg_embedding in your Postgres and LangChain projects',
+    description: 'Use Neon with pgvector in your Postgres and LangChain projects',
   },
 ];
 
@@ -66,7 +64,8 @@ const AIPage = () => (
       isGradientLabel
     />
     <Examples />
-    <Testimonials />
+    {/* removed testimonials section for now as part of removing the pg_embedding references */}
+    {/* <Testimonials /> */}
     <CTAWithElephant
       className="mt-[180px] 2xl:mt-40 xl:mt-[125px] lg:mt-16"
       buttonClassName="px-14 xl:px-10 lg:px-9 sm:px-14"
