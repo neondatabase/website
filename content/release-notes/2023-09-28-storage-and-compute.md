@@ -12,5 +12,5 @@ For more about our decision to sunset `pg_embedding` and what comes next for Neo
 
 ### Fixes & improvements
 
-- Compute: With the announcement regarding sunsetting of `pg_embedding` in favor of `pgvector`, Neon does not support new installations of the `pg_embedding` extension.
-- Proxy: The timing of connection retries from Neon proxy was adjusted to reduce connection wait times. The previous retry timing configuration could have resulted in making clients wait hundreds of milliseconds longer than necessary.
+- Compute: With the announcement regarding sunsetting of `pg_embedding`, Neon no longer permits new installations of the `pg_embedding` extension.
+- Proxy: The timing of connection retries from the Neon proxy was adjusted to reduce connection wait times. The previous retry timing configuration could have resulted in making clients wait hundreds of milliseconds longer than necessary.
