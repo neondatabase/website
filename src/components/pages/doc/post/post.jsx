@@ -72,9 +72,11 @@ const Post = ({
               </p>
             )}
             <Content className="mt-5" content={content} />
-            <p className="text-gray-new-40 dark:text-gray-new-80 mt-10">
-              Last updated on <time>{lastUpdatedOn}</time>
-            </p>
+            {lastUpdatedOn && (
+              <p className="text-gray-new-40 dark:text-gray-new-80 mt-10">
+                Last updated on <time dateTime={updatedOn}>{lastUpdatedOn}</time>
+              </p>
+            )}
           </article>
         )}
 
