@@ -1,6 +1,6 @@
 ### We are sunsetting pg_embedding in favor of pgvector
 
-Neon's `pg_embedding` extension was the first to introduce the Hierarchical Navigable Small World (HNSW) index to Postgres, but with the recent addition of HNSW to `pgvector`, we see little benefit to the Postgres community in continuing development of the `pg_embedding` extension`.
+Neon's `pg_embedding` extension was the first to introduce the Hierarchical Navigable Small World (HNSW) index to Postgres, but with the recent addition of HNSW to `pgvector`, we see little benefit to the Postgres community in continuing to develop a separate vector search extension.
 
 After careful consideration, we believe it is in the best interest of our users and the broader Postgres community to sunset `pg_embedding` and continue our effort in the vector search space by contributing to `pgvector`.
 
