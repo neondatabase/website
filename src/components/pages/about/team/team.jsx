@@ -62,7 +62,7 @@ const Team = ({ title, description, members }) => (
                 {twitterUrl && (
                   <li>
                     <Link
-                      className="text-gray-2 transition-colors duration-200 hover:text-[#309ce8]"
+                      className="text-gray-2 transition-colors duration-200 hover:text-black"
                       to={twitterUrl}
                       target="_blank"
                     >

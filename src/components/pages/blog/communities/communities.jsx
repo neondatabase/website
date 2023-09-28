@@ -8,7 +8,7 @@ import youtubeIcon from './images/youtube.svg';
 
 const items = [
   {
-    name: 'Neon on <mark class="text-blue-80">Twitter</mark>',
+    name: 'Neon on <mark class="text-blue-80">X</mark>',
     description: 'Follow us for real-time updates',
     icon: xIcon,
     background: '/images/pages/blog/bg-blue.svg',
