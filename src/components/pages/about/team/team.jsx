@@ -66,7 +66,7 @@ const Team = ({ title, description, members }) => (
                       to={twitterUrl}
                       target="_blank"
                     >
-                      <span className="sr-only">Twitter</span>
+                      <span className="sr-only">X</span>
                       <XIcon className="xs:h-6 xs:w-6" />
                     </Link>
                   </li>

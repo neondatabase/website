@@ -34,7 +34,7 @@ const categories = [
 
 const socialLinks = [
   {
-    name: 'Twitter',
+    name: 'X',
     url: LINKS.twitter,
     icon: XIcon,
   },
