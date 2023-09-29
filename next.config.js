@@ -155,6 +155,10 @@ const defaultConfig = {
         source: '/ping-thing/:path*',
         destination: 'https://ping-thing.vercel.app/ping-thing/:path*',
       },
+      {
+        source: '/developer-days/:path*',
+        destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
+      },
     ];
   },
   webpack(config) {
