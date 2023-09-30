@@ -33,7 +33,7 @@ Alternatively, you can open a predefined Google Colab notebook for this guide.
 
 ## Connect to your database
 
-1. In your Colab notebook, create a code block to define your database connection and create a cursor object:
+1. In your Colab notebook, create a code block to define your database connection and create a cursor object. Replace `postgres://<user>:<password>@<hostname>/neondb` with the database connection string you retrieved in the previous step.
 
     <CodeBlock shouldWrap>
 
@@ -53,7 +53,7 @@ Alternatively, you can open a predefined Google Colab notebook for this guide.
 
     </CodeBlock>
 
-2. Execute the code block (Ctrl + Enter).
+2. Execute the code block (**Ctrl** + **Enter**).
 
 3. Add a code block for testing the database connection.
 
@@ -69,18 +69,18 @@ Alternatively, you can open a predefined Google Colab notebook for this guide.
         print("Your connection failed.")
     ```
 
-4. Execute the code block (Ctrl + Enter) to test your connection.
+4. Execute the code block (**Ctrl** + **Enter**).
 
 ## Install the pgvector extension
 
-1. Create this codeblock to install the `pgvector` extension to enable Neon Postgres as a vector store.
+1. Create a codeblock to install the `pgvector` extension to enable Neon Postgres as a vector store:
 
-```python
-# Execute this query to install the pgvector extension
-cursor.execute("CREATE EXTENSION IF NOT EXISTS vector;")
-```
+    ```python
+    # Execute this query to install the pgvector extension
+    cursor.execute("CREATE EXTENSION IF NOT EXISTS vector;")
+    ```
 
-2. Execute the code block (Ctrl + Enter) to install the extension.
+2. Execute the code block (**Ctrl** + **Enter**).
 
 ## Create a table and add vector data
 
@@ -111,7 +111,7 @@ cursor.execute("CREATE EXTENSION IF NOT EXISTS vector;")
 
     </CodeBlock>
 
-2. Execute the code block (Ctrl + Enter).
+2. Execute the code block (**Ctrl** + **Enter**).
 
 ## Query your data
 
@@ -127,7 +127,7 @@ print(all_data)
 
 </CodeBlock>
 
-2. Execute the code block (Ctrl + Enter) to run the search query.
+2. Execute the code block (**Ctrl** + **Enter**).
 
 ## Need help?
 
