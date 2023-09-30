@@ -115,17 +115,17 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 ## Query your data
 
-Add a codeblock to perform a vector similarity search.
+1. Add a codeblock to perform a vector similarity search.
 
-<CodeBlock shouldWrap>
+    <CodeBlock shouldWrap>
 
-```python
-cursor.execute("SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 3;")
-all_data = cursor.fetchall()
-print(all_data)
-```
+    ```python
+    cursor.execute("SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 3;")
+    all_data = cursor.fetchall()
+    print(all_data)
+    ```
 
-</CodeBlock>
+    </CodeBlock>
 
 2. Execute the code block (**Ctrl** + **Enter**).
 
