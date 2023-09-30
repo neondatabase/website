@@ -4,14 +4,14 @@ subtitle: Use Google Colab with your Neon vector store
 enableTableOfContents: true
 ---
 
-Google Colab is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.
+[Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.
 You can use Google Colab to run python code through the browser.
 
-This guide provides a simple example that shows how to create a notebook in Colab, connect to a Neon database, install the `pgvector` extension to enabled Neon as a vector store, and load and query data.
+This guide shows how to create a notebook in Colab, connect to a Neon database, install the `pgvector` extension to enabled Neon as a vector store, and run a vector search query.
 
 ## Prerequisites
 
-- A Neon database for storing vectors. You can use the ready-to-use `neondb` database or create your own. See [Create a database](/docs/manage/create-a-database) for instructions.
+To perform the steps in this guide, you require a Neon database for storing vectors. You can use the ready-to-use `neondb` database or create your own. See [Create a database](/docs/manage/create-a-database) for instructions.
 
 ## Retrieve your database connection string
 
@@ -29,6 +29,8 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/) 
 
 1. In your Colab notebook, create a code block and add the following code to define your database connection and create a cursor object:
 
+    <CodeBlock shouldWrap>
+
     ```python
     import os
     import psycopg2
@@ -42,6 +44,8 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/) 
     # Create a new cursor object
     cursor = connection.cursor()
     ```
+
+    </CodeBlock>
 
 2. Execute the code block (ctrl+enter).
 
@@ -65,6 +69,8 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/) 
 
 1. Add the following code block to create a table and insert data:
 
+    <CodeBlock shouldWrap>
+
     ```python
     create_table_sql = '''
     CREATE TABLE items (
@@ -86,11 +92,15 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/) 
     connection.commit()
     ```
 
+    </CodeBlock>
+
 2. Execute the code block (ctrl+enter).
 
 ## Query your data
 
 Add the following codeblock to perform a vector similarity search.
+
+<CodeBlock shouldWrap>
 
 ```python
 cursor.execute("SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 3;")
@@ -98,14 +108,8 @@ all_data = cursor.fetchall()
 print(all_data)
 ```
 
-## Next steps
+</CodeBlock>
 
-For a more extensive Jupyter notebook example that you can try with Google Colab, refer to our [Jupyter Notebook for vector search with Neon, pgvector, and OpenAI](https://github.com/neondatabase/neon-vector-search-openai-notebooks). This notebook shows how to create a search vector using the OpenAI API and perform a similarity search on Wikipedia article vector data.
+## Need help?
 
-<a target="_blank" href="https://colab.research.google.com/github/neondatabase/neon-vector-search-openai-notebooks/blob/main/neon-postgres-vector-search-pgvector.ipynb">
-  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/neon-vector-search-openai-notebooks" description="Jupyter Notebook for vector search with Neon, pgvector, and OpenAI" icon="github">Jupyter Notebook for vector search with Neon</a>
-</DetailIconCards>
+Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
