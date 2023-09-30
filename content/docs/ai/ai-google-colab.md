@@ -25,9 +25,15 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/) 
 
 ![Google Colab](/docs/ai/google_colab.png)
 
+Alternatively, you can open a predefined Google Colab notebook for this guide.
+
+<a target="_blank" href="https://colab.research.google.com/github/neondatabase/neon-vector-search-openai-notebooks/blob/main/neon-postgres-vector-search-pgvector.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
 ## Connect to your database
 
-1. In your Colab notebook, create a code block and add the following code to define your database connection and create a cursor object:
+1. In your Colab notebook, create a code block to define your database connection and create a cursor object:
 
     <CodeBlock shouldWrap>
 
@@ -36,7 +42,7 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/) 
     import psycopg2
 
     # Replace the next line with Your Neon connection string.
-    connection_string = "postgres://daniel:<password>@ep-frosty-brook-74249556.us-east-2.aws.neon.tech/neondb"
+    connection_string = "postgres://<user>:<password>@<hostname>/neondb"
 
     # Connect using the connection string
     connection = psycopg2.connect(connection_string)
@@ -47,9 +53,9 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/) 
 
     </CodeBlock>
 
-2. Execute the code block (ctrl+enter).
+2. Execute the code block (Ctrl + Enter).
 
-3. Add another code block to test your database connection.
+3. Add a code block for testing the database connection.
 
     ```python
     # Execute this query to test the database connection
@@ -63,11 +69,22 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/) 
         print("Your connection failed.")
     ```
 
-4. Execute the code block (ctrl+enter) to verify that your connection works.
+4. Execute the code block (Ctrl + Enter) to test your connection.
+
+## Install the pgvector extension
+
+1. Create this codeblock to install the `pgvector` extension to enable Neon Postgres as a vector store.
+
+```python
+# Execute this query to install the pgvector extension
+cursor.execute("CREATE EXTENSION IF NOT EXISTS vector;")
+```
+
+2. Execute the code block (Ctrl + Enter) to install the extension.
 
 ## Create a table and add vector data
 
-1. Add the following code block to create a table and insert data:
+1. Add a code block to create a table and insert data:
 
     <CodeBlock shouldWrap>
 
@@ -94,11 +111,11 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/) 
 
     </CodeBlock>
 
-2. Execute the code block (ctrl+enter).
+2. Execute the code block (Ctrl + Enter).
 
 ## Query your data
 
-Add the following codeblock to perform a vector similarity search.
+Add a codeblock to perform a vector similarity search.
 
 <CodeBlock shouldWrap>
 
@@ -109,6 +126,8 @@ print(all_data)
 ```
 
 </CodeBlock>
+
+2. Execute the code block (Ctrl + Enter) to run the search query.
 
 ## Need help?
 
