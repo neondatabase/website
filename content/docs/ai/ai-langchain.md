@@ -8,18 +8,19 @@ LangChain is an open-source framework for developing applications powered by Lar
 
 Essentially, with LangChain, you can connect LLMs with external data sources and sequence multiple commands (a series of prompts) to achieve a desired result.
 
-This guide shows how to create an application that enables you to chat with your Neon database. You will be able to ask your database questions in natural language. The application turna question into an SQL query, run the query, and returns a natural language response based on the query result.
+This guide shows how to create an application that allows you to chat with your database. You will be able to ask your database questions in natural language. The application transforms your question into an SQL query, runs the query, and returns a natural language response based on the query result.
 
 ## Prerequisites
 
-- A Neon database. You can use the ready-to-use `neondb` database or create your own. See [Create a database](/docs/manage/create-a-database) for instructions.
+- A Neon database. You can use the the ready-to-use `neondb` database or create your own. See [Create a database](/docs/manage/create-a-database) for instructions.
+- You can use any open source model with LangChain, but this guide uses an OpenAI model. You will require an OpenAI API key. Instructions for obtaining an OpenAI API key are provided below.
 
 ## Configure an environment variable for your OpenAI API key
 
-You can use any open source model with LangChain. However, OpenAI models give better results than the open source models. OpenAI key is required to access LangChain if you are using any OpenAI models. This tutorial designed with the OpenAI model. Follow the steps to create a new OpenAI key.
+This guide is designed to use an OpenAI model. To use an OpenAI model, and OpenAI API key is required. If you do not have an OpenAI key, follow the steps to create one:
 
 1. Navigate to [https://platform.openai.com/](https://platform.openai.com/).
-2 Click on your name or icon, located at the top right corner of the page, and select **View API Keys**.
+2. Click on your name or icon, located at the top right corner of the page, and select **View API Keys**.
 3. Click on the **Create new secret key** button to create a new OpenAI API key.
 4. Create a file named `.env` and add the OpenAI API key as shown:
 
@@ -53,7 +54,7 @@ venv/Scripts/activate #for windows
 pip install LangChain LangChain-experimental openai python-environ psycopg2 
 ```
 
-## Create you table and insert data
+## Create a table and insert data
 
 ```python
 import psycopg2
