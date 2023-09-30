@@ -25,7 +25,7 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/) 
 
 ![Google Colab](/docs/ai/google_colab.png)
 
-Alternatively, you can open a predefined Google Colab notebook for this guide.
+Alternatively, you can open a predefined Google Colab notebook for this guide by click the **Open in Colab** button below.
 
 <a target="_blank" href="https://github.com/neondatabase/neon-google-colab-notebooks/blob/main/neon_pgvector_quickstart.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
