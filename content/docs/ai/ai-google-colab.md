@@ -21,11 +21,11 @@ In the **Connection Details** widget on the Neon **Dashboard**, select a branch,
 
 ## Create a notebook
 
-In your browser, navigate to [Google Colab](https://colab.research.google.com/) and Click **New notebook**.
+In your browser, navigate to [Google Colab](https://colab.research.google.com/), and click **New notebook**.
 
 ![Google Colab](/docs/ai/google_colab.png)
 
-Alternatively, you can open a predefined Google Colab notebook for this guide by click the **Open in Colab** button below.
+Alternatively, you can open a predefined Google Colab notebook for this guide by clicking the **Open in Colab** button below.
 
 <a target="_blank" href="https://colab.research.google.com/github/neondatabase/neon-google-colab-notebooks/blob/main/neon_pgvector_quickstart.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -41,7 +41,7 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
     import os
     import psycopg2
 
-    # Replace the next line with Your Neon connection string.
+    # Provide your Neon connection string
     connection_string = "postgres://<user>:<password>@<hostname>/neondb"
 
     # Connect using the connection string
@@ -73,7 +73,7 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 ## Install the pgvector extension
 
-1. Create a codeblock to install the `pgvector` extension to enable Neon Postgres as a vector store:
+1. Create a codeblock to install the `pgvector` extension to enable your Neon database as a vector store:
 
     ```python
     # Execute this query to install the pgvector extension
@@ -128,6 +128,10 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
     </CodeBlock>
 
 2. Execute the code block (**Ctrl** + **Enter**).
+
+## Next steps
+
+For more information about using Neon with `pgvector`, see [The pgvector extension](/docs/extensions/pgvector).
 
 ## Need help?
 
