@@ -1,6 +1,6 @@
 ---
 title: Google Colab
-subtitle: Use Google Colab with your Neon vector store
+subtitle: Use Google Colab with Neon for vector similarity search
 enableTableOfContents: true
 ---
 
