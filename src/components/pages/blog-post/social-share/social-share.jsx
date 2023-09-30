@@ -6,11 +6,11 @@ import { LinkedinShareButton, TwitterShareButton, FacebookShareButton } from 're
 
 import FacebookIcon from 'icons/facebook-sm.inline.svg';
 import LinkedinIcon from 'icons/linkedin-sm.inline.svg';
-import TwitterIcon from 'icons/twitter-sm.inline.svg';
+import XIcon from 'icons/x.inline.svg';
 
 const links = [
   {
-    icon: TwitterIcon,
+    icon: XIcon,
     tag: TwitterShareButton,
   },
   {

@@ -22,9 +22,16 @@ const statusData = {
 };
 
 const fetchStatus = async () => {
-  const res = await fetch('https://neonstatus.com/summary.json');
+  const res = await fetch('https://neonstatus.com/api/v1/summary');
   const data = await res.json();
-  return data.page.status;
+
+  if (data.ongoing_incidents.length > 0) {
+    return 'HASISSUES';
+  }
+  if (data.in_progress_maintenances.length > 0) {
+    return 'UNDERMAINTENANCE';
+  }
+  return 'UP';
 };
 
 const StatusBadge = ({ isDocPage = false, inView = false }) => {

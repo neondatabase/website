@@ -220,14 +220,14 @@
       slug: ai/ai-concepts
     - title: Scale with Neon
       slug: ai/ai-scale-with-neon
-    - title: pg_embedding
-      slug: extensions/pg_embedding
     - title: pgvector
       slug: extensions/pgvector
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
     - title: Google Colab
       slug: ai/ai-google-colab
+    - title: pg_embedding
+      slug: extensions/pg_embedding
 - title: Postgres extensions
   slug: extensions/pg-extensions
 - title: Import data
