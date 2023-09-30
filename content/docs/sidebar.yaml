@@ -224,10 +224,12 @@
       slug: extensions/pgvector
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
-    - title: Google Colab
-      slug: ai/ai-google-colab
     - title: pg_embedding
       slug: extensions/pg_embedding
+    - title: AI tools
+      items:
+        - title: Google Colab
+          slug: ai/ai-google-colab
 - title: Postgres extensions
   slug: extensions/pg-extensions
 - title: Import data
