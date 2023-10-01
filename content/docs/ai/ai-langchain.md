@@ -8,7 +8,7 @@ LangChain is an open-source framework for developing applications powered by Lar
 
 Essentially, with LangChain, you can connect LLMs with external data sources and sequence multiple commands (a series of prompts) to achieve a desired result.
 
-This guide shows how to create an application that allows you to chat with your database. You will be able to ask your database questions in natural language. The application transforms your question into an SQL query, runs the query, and returns a natural language response based on the query result.
+This guide shows how to create an application that allows you to ask your database questions in natural language. The application transforms your question into an SQL query, runs the query, and returns a natural language response based on the query result. This guide uses the [Titanic Dataset](https://www.kaggle.com/datasets/vinicius150987/titanic3), available on [Kaggle](https://www.kaggle.com).
 
 ## Prerequisites
 
@@ -113,7 +113,7 @@ To create the task table and insert values to it, run the `db.py` script using t
 python db.py
 ```
 
-## Setup the SQL Database Chain
+## Setup the SQL database chain
 
 ```python
 from LangChain import OpenAI, SQLDatabase, SQLDatabaseChain
