@@ -14,6 +14,7 @@ This guide shows how to create an application that allows you to ask your databa
 
 - A Neon database. You can use the the ready-to-use `neondb` database or create your own. See [Create a database](/docs/manage/create-a-database) for instructions.
 - You can use any open source model with LangChain, but this guide uses an OpenAI model. You will require an OpenAI API key. Instructions for obtaining an OpenAI API key are provided below.
+- Python and `pip`.
 
 ## Configure an environment variable for your OpenAI API key
 
@@ -42,19 +43,47 @@ OPENAI_API_KEY=<your_openai_key>
 
 ```python
 python -m venv venv
-source venv/bin/activate #for ubuntu
-venv/Scripts/activate #for windows
 ```
 
 ## Install dependencies
 
-2. Install LangChain, openai, python-environ and psycopg2 libraries using pip.
+Install `LangChain`, `openai`, `python-environ`, and `psycopg2` libraries using `pip`.
 
 ```sql
 pip install LangChain LangChain-experimental openai python-environ psycopg2 
 ```
 
+## Create a database in Neon
+
+In Neon, create a database named `titanic`. You can quickly do this from the Neon console:
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+1. Select a project.
+1. Select **Databases**.
+1. Select the branch where you want to create the database.
+1. Click **New Database**.
+1. Enter `titanic` as the database name, and select a database owner.
+1. Click **Create**.
+
+## Retrieve your database connection string
+
+Retrieve the connection string for your `titanic` database. You can copy it from the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
+
+```text
+postgres://<users>:<password>@ep-morning-limit-06265452.us-east-2.aws.neon.tech/titanic
+```
+
+## Set up your environment variables
+
+1. Create a `.env` file in yor project directory and configure a variable for your OpenAI API key:
+
+```text
+OPENAI_API_KEY=<your_openai_key>
+```
+
 ## Create a table and insert data
+
+Create a file named `db.py` and add the following code to connect to your database, create a `passenger` table, and load the `passenger` table with data from a `titanic.csv` file that is hosted on GitHub.
 
 ```python
 import psycopg2
