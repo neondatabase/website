@@ -8,7 +8,13 @@ LangChain is an open-source framework for developing applications powered by Lar
 
 With LangChain, you can connect LLMs with external data sources and sequence multiple commands (a series of prompts) to achieve the desired result.
 
-This guide shows how to create an application that allows you to ask your database questions in natural language. The application transforms your question into an SQL query, runs the query, and returns a natural language response based on the query result. This guide uses the [Titanic Dataset](https://www.kaggle.com/datasets/vinicius150987/titanic3), available on [Kaggle](https://www.kaggle.com).
+This guide shows how to create a Python application that allows you to ask your database questions in natural language. The application transforms your question into an SQL query, runs the query, and returns a natural language response based on the query result. This guide uses the [Titanic Dataset](https://www.kaggle.com/datasets/vinicius150987/titanic3), found on [Kaggle](https://www.kaggle.com). The application allows you to ask questions about passengers of the Titanic. You can click here to view the data: [passenger data](https://github.com/neondatabase/postgres-sample-dbs/blob/main/titanic.csv).
+
+A version of this application is also available for Google Colab.
+
+<a target="_blank" href="https://colab.research.google.com/github/neondatabase/neon-google-colab-notebooks/blob/main/chat_with_your_database_using_langchain.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
 ## Prerequisites
 
@@ -24,11 +30,16 @@ This guide is designed to use an OpenAI model. To use an OpenAI model, an OpenAI
 2. Click on your name or icon, located at the top right corner of the page, and select **View API Keys**.
 3. Click on the **Create new secret key** button to create a new OpenAI API key.
 
-    ![Connection details widget](/docs/connect/connection_details.png)
+## Create a directory for your application
+
+```bash
+mkdir titanic_app
+cd titanic_app
+```
 
 ## Set up your environment
 
-Create and activate a virtual environment by executing the following command.
+Create and activate a Python virtual environment in your application directory by executing the following command:
 
 ```python
 python -m venv venv
@@ -36,7 +47,7 @@ python -m venv venv
 
 ## Install dependencies
 
-Install `LangChain`, `openai`, `python-environ`, `psycopg2`, `environ`, `requests` libraries using `pip`.
+Install `LangChain`, `openai`, `python-environ`, `psycopg2`, `environ`, and `requests` libraries using `pip`.
 
 ```sql
 pip install LangChain LangChain-experimental openai python-environ psycopg2 
@@ -44,7 +55,7 @@ pip install LangChain LangChain-experimental openai python-environ psycopg2
 
 ## Create a database in Neon
 
-In Neon, create a database named `titanic`. You can quickly do this from the Neon console:
+In Neon, create a database named `titanic`. You can do this from the Neon console by following these steps:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
@@ -64,16 +75,16 @@ postgres://<users>:<password>@ep-morning-limit-06265452.us-east-2.aws.neon.tech/
 
 ## Set up your environment variables
 
-Create a `.env` file in yor project directory and configure a variable for your OpenAI API key:
+Create a `.env` file in your application directory and configure variables for your OpenAI API key and database connection string:
 
 ```text
-OPENAI_API_KEY=<your_openai_key>
+OPENAI_API_KEY=<your_openai_api_key>
 DATABASE_URL="postgres://<users>:<password>@ep-morning-limit-06265452.us-east-2.aws.neon.tech/titanic"
 ```
 
 ## Create a table and insert data
 
-Create a file named `db.py` and add the following code to connect to your database, create a `passenger` table, and load the `passenger` table with data from a `titanic.csv` file that is hosted on GitHub.
+Create a file named `db.py` in your application directory and add the following code to connect to your database, create a `passenger` table, and load the `passenger` table with data from a `titanic.csv` file that is hosted on GitHub.
 
 ```python
 import os
@@ -139,7 +150,8 @@ conn.commit()
 conn.close()
 ```
 
-### Understanding the db.py code
+<details>
+<summary>Understanding the db.py code</summary>
 
 - **Importing Necessary Modules**:
   - `os`: Allows interaction with the operating system, mainly to access environment variables.
@@ -175,6 +187,8 @@ conn.close()
   - Any pending database changes are committed using `conn.commit()`.
   - Finally, the connection to the database is closed with `conn.close()`.
 
+</details>
+
 ## Run the db.py script
 
 Run the `db.py` script using the following command:
@@ -187,7 +201,7 @@ You can verify that the data was loaded by viewing the data in the Neon console.
 
 ## Setup the SQL database chain
 
-Create a file named `app.py` and add the following code. When you run `app.py`, you will be prompted for a question. The code is explained below. See [Understanding the app.py code](#understanding-the-apppy-code).
+Create a file named `app.py` in your application directory and add the following code. When you run `app.py`, you will be prompted for a question to ask your database.
 
 ```python
 import os
@@ -314,7 +328,8 @@ def get_prompt():
 get_prompt()
 ```
 
-### Understanding the app.py code
+<details>
+<summary>Understanding the app.py code</summary>
 
 - **Importing Necessary Modules**:
   - `os`: Provides a portable way of using operating system-dependent functionality, mainly for accessing environment variables.
@@ -353,9 +368,11 @@ get_prompt()
 - **Start the Interactive Session**:
   - The last line calls the `get_prompt()` function, starting the interactive session when the script is run.
 
+</details>
+
 ## Run the application
 
-Run the SQL database chain using the following command. When prompted, enter a question like, "How many passengers survived?" or "What was the average age of passengers?".
+Run the application using the following command. When prompted, ask your `titanic` database a question like, "How many passengers survived?" or "What was the average age of passengers?".
 
 ```bash
 python app.py
