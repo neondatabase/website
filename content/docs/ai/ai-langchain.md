@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 LangChain is an open-source framework for developing applications powered by Large Language Models (LLMs). It enables developers to build sophisticated AI-powered applications that use LLMs to reason about how to provide answers and take actions based on the provided context. Context includes such things as prompt instructions, example inputs and responses, and the content or data that responses should be based on.
 
-Essentially, with LangChain, you can connect LLMs with external data sources and sequence multiple commands (a series of prompts) to achieve a desired result.
+With LangChain, you can connect LLMs with external data sources and sequence multiple commands (a series of prompts) to achieve the desired result.
 
 This guide shows how to create an application that allows you to ask your database questions in natural language. The application transforms your question into an SQL query, runs the query, and returns a natural language response based on the query result. This guide uses the [Titanic Dataset](https://www.kaggle.com/datasets/vinicius150987/titanic3), available on [Kaggle](https://www.kaggle.com).
 
@@ -18,7 +18,7 @@ This guide shows how to create an application that allows you to ask your databa
 
 ## Obtain an OpenAI API key
 
-This guide is designed to use an OpenAI model. To use an OpenAI model, and OpenAI API key is required. If you do not have an OpenAI API key, follow these steps to create one:
+This guide is designed to use an OpenAI model. To use an OpenAI model, an OpenAI API key is required. If you do not have an OpenAI API key, follow these steps to create one:
 
 1. Navigate to [https://platform.openai.com/](https://platform.openai.com/).
 2. Click on your name or icon, located at the top right corner of the page, and select **View API Keys**.
