@@ -11,7 +11,7 @@ This guide shows how to create a notebook in Colab, connect to a Neon database, 
 
 ## Prerequisites
 
-To perform the steps in this guide, you require a Neon database for storing vectors. You can use the ready-to-use `neondb` database or create your own. See [Create a database](/docs/manage/create-a-database) for instructions.
+To perform the steps in this guide, you require a Neon database for storing vectors. You can use the ready-to-use `neondb` database or create your own. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 
 ## Retrieve your database connection string
 
