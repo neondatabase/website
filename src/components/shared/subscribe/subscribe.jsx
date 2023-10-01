@@ -7,7 +7,7 @@ import SubscriptionForm from 'components/shared/subscription-form';
 import { HUBSPOT_NEWSLETTERS_FORM_ID } from 'constants/forms';
 import LINKS from 'constants/links';
 import linkedinIcon from 'icons/linkedin.svg';
-import twitterIcon from 'icons/twitter.svg';
+import xIcon from 'icons/x.svg';
 
 // import DiscordIcon from './images/subscribe-discord.inline.svg';
 import githubIcon from './images/subscribe-github.svg';
@@ -15,9 +15,9 @@ import illustration from './images/subscribe-illustration.jpg';
 
 const links = [
   {
-    icon: twitterIcon,
+    icon: xIcon,
     to: LINKS.twitter,
-    name: 'Twitter',
+    name: 'X',
   },
   {
     icon: linkedinIcon,

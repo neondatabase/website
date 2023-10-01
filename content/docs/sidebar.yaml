@@ -228,7 +228,7 @@
       slug: extensions/pg_embedding
     - title: AI tools
       items:
-        - title: Langchain
+        - title: LangChain
           slug: ai/ai-langchain
 - title: Postgres extensions
   slug: extensions/pg-extensions
