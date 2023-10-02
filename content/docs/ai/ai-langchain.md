@@ -4,13 +4,13 @@ subtitle: Chat with your Neon database using LangChain and OpenAI
 enableTableOfContents: true
 ---
 
-LangChain is an open-source framework for developing applications powered by Large Language Models (LLMs). It enables developers to build sophisticated AI-powered applications that use LLMs to reason about how to provide answers and take actions based on the provided context. Context includes such things as prompt instructions, example inputs and responses, and the content or data that responses should be based on.
+LangChain is an open-source framework for developing applications powered by Large Language Models (LLMs). It enables developers to build AI-powered applications that use LLMs to reason about how to provide answers and take actions based on the provided context, which includes prompt instructions, example inputs and responses, and the content or data that responses should be based on.
 
-With LangChain, you can connect LLMs with external data sources and sequence multiple commands (a series of prompts) to achieve the desired result.
+For example, with LangChain, you can connect LLMs with external data sources such as Neon Postgres and sequence multiple commands (a series of prompts) to achieve the desired result.
 
-This guide shows how to create a Python application that allows you to ask your database questions in natural language. The application transforms your question into an SQL query, runs the query, and returns a natural language response based on the query result. This guide uses the [Titanic Dataset](https://www.kaggle.com/datasets/vinicius150987/titanic3), found on [Kaggle](https://www.kaggle.com). The application allows you to ask questions about passengers of the Titanic. You can click here to view the data: [passenger data](https://github.com/neondatabase/postgres-sample-dbs/blob/main/titanic.csv).
+In this guide, you will learn how to create a Python application that allows you to ask your database questions using natural language. The application transforms your question into an SQL query, runs the query, and returns a natural language response based on the query result. The application uses the [Titanic Dataset](https://www.kaggle.com/datasets/vinicius150987/titanic3), which you can find on [Kaggle](https://www.kaggle.com). When you have the application up and running, you will be able to ask your database questions about the passengers of the Titanic.
 
-A version of this application is also available for Google Colab.
+A version of this application is also available for running in Google Colab:
 
 <a target="_blank" href="https://colab.research.google.com/github/neondatabase/neon-google-colab-notebooks/blob/main/chat_with_your_database_using_langchain.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -19,12 +19,12 @@ A version of this application is also available for Google Colab.
 ## Prerequisites
 
 - A Neon project. If you do not have one, see [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- An OpenAI API key. You can use any open source model with LangChain, but this guide uses an OpenAI model. You will require an OpenAI API key. Instructions for obtaining an OpenAI API key are provided below.
+- An OpenAI API key. Instructions for obtaining an OpenAI API key are provided below.
 - Python and `pip`.
 
 ## Obtain an OpenAI API key
 
-This guide is designed to use an OpenAI model. To use an OpenAI model, an OpenAI API key is required. If you do not have an OpenAI API key, follow these steps to create one:
+The application uses an OpenAI model, which requires an OpenAI API key. If you do not have an OpenAI API key, follow these steps to create one:
 
 1. Navigate to [https://platform.openai.com/](https://platform.openai.com/).
 2. Click on your name or icon, located at the top right corner of the page, and select **View API Keys**.
@@ -55,7 +55,7 @@ pip install LangChain LangChain-experimental openai python-environ psycopg2
 
 ## Create a database in Neon
 
-In Neon, create a database named `titanic`. You can do this from the Neon console by following these steps:
+In Neon, create a database named `titanic`. You can do this from the Neon Console:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
@@ -201,7 +201,7 @@ You can verify that the data was loaded by viewing the data in the Neon console.
 
 ## Setup the SQL database chain
 
-Create a file named `app.py` in your application directory and add the following code. When you run `app.py`, you will be prompted for a question to ask your database.
+Create a file named `app.py` in your application directory and add the following code. When you run `app.py`, you will be prompted to ask a question.
 
 ```python
 import os
