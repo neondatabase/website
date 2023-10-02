@@ -1,10 +1,11 @@
 ---
 title: Use Prisma Migrate with Neon
-subtitle: Learn how to use Prisma Migrate with Neon 
+subtitle: Learn how to use Prisma Migrate with Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/prisma
   - /docs/integrations/prisma
+updatedOn: '2023-08-11T10:04:55Z'
 ---
 
 This topic also describes how to configure Prisma Migrate when you need to connect to the same Neon database from Prisma Migrate, which requires a direct database connection, and serverless functions that require a pooled database connection.

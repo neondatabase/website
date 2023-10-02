@@ -1,6 +1,7 @@
 ---
 title: Security reporting
 enableTableOfContents: true
+updatedOn: '2023-08-11T18:01:48Z'
 ---
 
 Neon is currently in Technical Preview. We have established a security reporting procedure to address security issues quickly.

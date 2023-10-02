@@ -4,6 +4,7 @@ subtitle: Set up a Neon project in seconds and connect from a Rust application
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
+updatedOn: '2023-07-01T08:51:49Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Rust application.
