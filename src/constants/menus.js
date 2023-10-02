@@ -162,6 +162,14 @@ export default {
           text: 'Terms of Service',
           to: LINKS.terms,
         },
+        {
+          text: 'Subprocessors list',
+          to: LINKS.subprocessors,
+        },
+        {
+          text: 'DPA',
+          to: LINKS.dpa,
+        },
       ],
     },
   ],

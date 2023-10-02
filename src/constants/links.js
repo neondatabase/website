@@ -26,6 +26,8 @@ export default {
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   termsOfService: '/terms-of-service',
   privacyPolicy: '/privacy-policy',
+  dpa: '/dpa',
+  subprocessors: '/subprocessors',
   partners: '/partners',
   cliReference: '/docs/reference/neon-cli',
   ai: '/ai',
