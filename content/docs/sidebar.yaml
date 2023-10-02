@@ -230,6 +230,8 @@
       items:
         - title: LangChain
           slug: ai/ai-langchain
+        - title: Google Colab
+          slug: ai/ai-google-colab
 - title: Postgres extensions
   slug: extensions/pg-extensions
 - title: Import data
