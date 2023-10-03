@@ -19,6 +19,7 @@ const styles = {
     quaternary: 'bg-white text-black border border-black hover:border-primary-2',
     'white-outline': 'bg-transparent text-white border border-white hover:border-primary-2',
     'gray-outline': 'bg-transparent text-white border border-gray-new-30 hover:border-white',
+    'green-outline': 'bg-transparent text-white border border-green-45 hover:border-white',
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
   },
 };
