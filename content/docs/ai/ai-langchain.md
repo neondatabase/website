@@ -4,11 +4,11 @@ subtitle: Chat with your Neon database using LangChain and OpenAI
 enableTableOfContents: true
 ---
 
-LangChain is an open-source framework for developing applications powered by Large Language Models (LLMs). It enables developers to build AI-powered applications that use LLMs to reason about how to provide answers and take actions based on the provided context, which includes prompt instructions, example inputs and responses, and the content or data that responses should be based on.
+LangChain is an open-source framework for developing applications powered by Large Language Models (LLMs). It enables developers to build applications that use LLMs to reason about how to provide answers and take actions based on the provided context, which includes prompt instructions, example inputs and responses, and the data that responses should be based on.
 
-For example, with LangChain, you can connect LLMs with external data sources such as Neon Postgres and sequence multiple commands (a series of prompts) to achieve the desired result.
+For example, with LangChain, you can connect LLMs with an data source such as Neon Postgres and sequence multiple commands (a series of prompts) to achieve a desired result.
 
-In this guide, you will learn how to create a Python application that allows you to ask your database questions using natural language. The application transforms your question into an SQL query, runs the query, and returns a natural language response based on the query result. The application uses the [Titanic Dataset](https://www.kaggle.com/datasets/vinicius150987/titanic3), which you can find on [Kaggle](https://www.kaggle.com). When you have the application up and running, you will be able to ask your database questions about the passengers of the Titanic.
+In this guide, you will learn how to create a Python application that allows you to ask your database questions using natural language. The application transforms your question into an SQL query, runs the query, and returns a natural language response based on the query result. The application uses the [Titanic Dataset](https://www.kaggle.com/datasets/vinicius150987/titanic3). When you have the application up and running, you will be able to ask your database questions about the passengers of the Titanic.
 
 A version of this application is also available for running in Google Colab:
 
@@ -378,6 +378,7 @@ Run the application using the following command. When prompted, ask your `titani
 python app.py
 ```
 
-## Reference
+## Resources
 
-[LangChain: SQL](https://python.LangChain.com/docs/use_cases/qa_structured/sql)
+- [LangChain tools for interacting with SQL Databases](https://python.LangChain.com/docs/use_cases/qa_structured/sql)
+- [Titanic dataset CSV file](https://github.com/neondatabase/postgres-sample-dbs/raw/main/titanic.csv)
