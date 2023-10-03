@@ -140,7 +140,7 @@ const defaultConfig = {
       },
       {
         source: '/developer-days',
-        destination: 'https://devdays.neon.tech/',
+        destination: 'https://devdays.neon.tech',
         permanent: true,
       },
       ...docsRedirects,
