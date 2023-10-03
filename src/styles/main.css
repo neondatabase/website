@@ -71,8 +71,8 @@
     @apply mask-styles footer-icon-size;
   }
 
-  .twitter-icon {
-    -webkit-mask-image: url('/images/footer/twitter.svg');
+  .x-icon {
+    -webkit-mask-image: url('/images/footer/x.svg');
     @apply mask-styles footer-icon-size;
   }
 

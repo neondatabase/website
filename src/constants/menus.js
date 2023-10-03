@@ -121,9 +121,9 @@ export default {
       heading: 'Community',
       links: [
         {
-          text: 'Twitter',
+          text: 'X',
           to: LINKS.twitter,
-          icon: 'twitter-icon',
+          icon: 'x-icon',
         },
         {
           text: 'LinkedIn',

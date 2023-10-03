@@ -4,6 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
+updatedOn: '2023-09-19T18:06:12Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the ready-to-use database (`neondb`) that is created in your Neon project's primary branch.
@@ -371,7 +372,7 @@ For role creation and access management examples, refer to the [Manage roles and
 
 ## Protected role names
 
-The following names are protected and cannot given to a role:
+The following names are protected and cannot be given to a role:
 
 - Any name starting with `pg`
 - `neon_superuser`

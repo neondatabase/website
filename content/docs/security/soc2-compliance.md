@@ -1,6 +1,7 @@
 ---
 title: SOC 2 compliance
 enableTableOfContents: false
+updatedOn: '2023-09-16T07:36:51Z'
 ---
 
 Neon has successfully completed a SOC 2 Type 1 audit. A SOC 2 (Service Organization Control 2) Type 1 report is an attestation by an independent auditing entity, acknowledging that an organization has processes and systems in place that comply with the principles of the American Institute of Certified Public Accountants (AICPA).

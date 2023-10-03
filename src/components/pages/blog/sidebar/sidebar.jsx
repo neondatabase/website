@@ -4,7 +4,7 @@ import BlogNavLink from 'components/pages/blog/blog-nav-link';
 import LINKS from 'constants/links';
 import GitHubIcon from 'icons/github-sm.inline.svg';
 import LinkedInIcon from 'icons/linkedin-sm.inline.svg';
-import TwitterIcon from 'icons/twitter-sm.inline.svg';
+import XIcon from 'icons/x.inline.svg';
 import YouTubeIcon from 'icons/youtube-sm.inline.svg';
 
 const Search = dynamic(() => import('components/shared/search/search'));
@@ -34,9 +34,9 @@ const categories = [
 
 const socialLinks = [
   {
-    name: 'Twitter',
+    name: 'X',
     url: LINKS.twitter,
-    icon: TwitterIcon,
+    icon: XIcon,
   },
   {
     name: 'LinkedIn',
