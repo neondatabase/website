@@ -1,8 +1,9 @@
 ---
 title: Neon serverless driver
 enableTableOfContents: true
-subtitle: Learn how to connect to Neon from serverless and edge environments over HTTP or WebSockets
-updatedOn: '2023-09-05T15:00:04Z'
+subtitle: Learn how to connect to Neon from serverless and edge environments over HTTP
+  or WebSockets
+updatedOn: '2023-10-03T19:45:09.137Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP.
@@ -58,7 +59,7 @@ export default async () => {
 }
 ```
 
-```js
+```javascript
 import { neon } from '@neondatabase/serverless';
 
 export default async (req: Request) => {
@@ -134,7 +135,7 @@ export default async () => {
 
 ```
 
-```js
+```javascript
 import { Pool } from '@neondatabase/serverless';
 
 export default async (req: Request, ctx: any) => {
@@ -188,7 +189,7 @@ The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions`
 
 The `neon(...)` function also supports issuing multiple queries at once in a single, non-interactive transaction using the `transaction()` function, which is exposed as a property of the query function. For example:
 
-```js
+```javascript
 import { neon } from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL);
 const showLatestN = 10;

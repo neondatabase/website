@@ -2,7 +2,7 @@
 title: Connect from AWS Lambda
 subtitle: Learn how to set up a Neon database and connect from an AWS Lambda function
 enableTableOfContents: true
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-03T19:45:09.136Z'
 ---
 
 AWS Lambda is a serverless, event-driven compute service that allows you to run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.
@@ -143,7 +143,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
 
 5. In the `aws-node-project` directory, add a `users.js` file, and add the following code to it:
 
-    ```js
+    ```javascript
     'use strict';
 
     const { Client } = require('pg');

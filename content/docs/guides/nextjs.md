@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2023-10-03T19:39:46.165Z'
+updatedOn: '2023-10-03T19:45:09.136Z'
 ---
 
 Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js application.
@@ -85,7 +85,7 @@ DATABASE_URL=postgres://<users>:<password>@ep-snowy-unit-550577.us-east-2.aws.ne
       }
 
       ```
-      ```js
+      ```javascript
       import postgres from 'postgres';
 
       const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
