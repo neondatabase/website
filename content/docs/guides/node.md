@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-03T18:28:23.118Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
@@ -72,7 +72,7 @@ A special `endpoint` connection option is appended to the connection string abov
 To ensure the security of your data, never expose your Neon credentials to the browser.
 </Admonition>
 
-## Configure the app.js file
+## Configure the Postgres client 
 
 Add an `app.js` file to your project directory and add the following code snippet to connect to your Neon database:
   
@@ -81,20 +81,18 @@ Add an `app.js` file to your project directory and add the following code snippe
   const { Pool } = require('pg');
   require('dotenv').config();
 
-  const { DATABASE_URL } = process.env;
-
   const pool = new Pool({
-    connectionString: DATABASE_URL,
+    connectionString: process.env.DATABASE_URL,
     ssl: {
-      rejectUnauthorized: false,
+      require: true,
     },
   });
 
   async function getPostgresVersion() {
     const client = await pool.connect();
     try {
-      const res = await client.query('SELECT version()');
-      console.log(res.rows[0]);
+      const response = await client.query('SELECT version()');
+      console.log(response.rows[0]);
     } finally {
       client.release();
     }
@@ -106,13 +104,11 @@ Add an `app.js` file to your project directory and add the following code snippe
   const postgres = require('postgres');
   require('dotenv').config();
 
-  const { DATABASE_URL } = process.env;
-
-  const sql = postgres(DATABASE_URL, { ssl: 'require' });
+  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
 
   async function getPostgresVersion() {
-    const result = await sql`select version()`;
-    console.log(result);
+    const response = await sql`select version()`;
+    console.log(response);
   }
 
   getPostgresVersion();
@@ -124,11 +120,9 @@ Add an `app.js` file to your project directory and add the following code snippe
 Run `node app.js` to view the result.
 
 ```shell
-node app.js
-
 Result(1) [
   {
-    version: 'PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
+    version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
   }
 ]
 ```
