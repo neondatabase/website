@@ -28,6 +28,7 @@ export default {
   privacyPolicy: '/privacy-policy',
   dpa: '/dpa',
   subprocessors: '/subprocessors',
+  privacyGuide: '/privacy-guide',
   partners: '/partners',
   cliReference: '/docs/reference/neon-cli',
   ai: '/ai',

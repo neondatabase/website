@@ -163,12 +163,16 @@ export default {
           to: LINKS.terms,
         },
         {
-          text: 'Subprocessors list',
+          text: 'DPA',
+          to: LINKS.dpa,
+        },
+        {
+          text: 'Subprocessors List',
           to: LINKS.subprocessors,
         },
         {
-          text: 'DPA',
-          to: LINKS.dpa,
+          text: 'Privacy Guide',
+          to: LINKS.privacyGuide,
         },
       ],
     },
