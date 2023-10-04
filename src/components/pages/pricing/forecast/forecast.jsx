@@ -1,17 +1,18 @@
 'use client';
 
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import Button from 'components/shared/button/button';
 import Container from 'components/shared/container/container';
 import LinesIllustration from 'components/shared/lines-illustration';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import useClickOutside from 'hooks/use-click-outside';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
-import ChevronDownIcon from './images/chevron-down.inline.svg';
 import InputSearchIcon from './images/input-search.inline.svg';
+import Select from './select';
 
 const activities = [
   {
@@ -61,10 +62,36 @@ const storage = [
 ];
 
 const Forecast = () => {
+  const performanceRef = useRef(null);
+  const storageRef = useRef(null);
   const [activeItems, setActiveItems] = useState({
     activity: activities[0],
     performance: performance[0],
     storage: storage[0],
+  });
+
+  const [isExpanded, setIsExpanded] = useState({
+    performance: false,
+    storage: false,
+  });
+
+  const onSelect = useCallback(
+    (type, title, description) => {
+      setActiveItems({ ...activeItems, [type]: { title, description } });
+      setIsExpanded({ ...isExpanded, [type]: false });
+    },
+    [activeItems, isExpanded]
+  );
+
+  const onExpand = useCallback(
+    (type) => {
+      setIsExpanded({ ...isExpanded, [type]: !isExpanded[type] });
+    },
+    [isExpanded]
+  );
+
+  useClickOutside([performanceRef, storageRef], () => {
+    setIsExpanded({ performance: false, storage: false });
   });
 
   return (
@@ -133,19 +160,15 @@ const Forecast = () => {
             <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5">
               What peak performance is needed for your app?
             </h3>
-
-            <button
-              className="mt-7 pt-5 w-full flex items-center px-6 pb-6 border border-gray-new-15 rounded-[10px] hover:border-green-45 duration-200 transition-colors"
-              type="button"
-            >
-              <div className="flex flex-col items-start">
-                <h4 className="text-xl font-medium leading-tight">0.25 vCPU, 1GB RAM</h4>
-                <p className="text-left mt-2 text-gray-new-70 font-light leading-tight text-[15px]">
-                  Starts from $0.0082/h
-                </p>
-              </div>
-              <ChevronDownIcon className="w-6 h-6 mt-2 ml-auto" />
-            </button>
+            <Select
+              containerRef={performanceRef}
+              activeItem={activeItems.performance}
+              isExpanded={isExpanded.performance}
+              items={performance}
+              type="performance"
+              onSelect={onSelect}
+              onExpand={() => onExpand('performance')}
+            />
           </div>
 
           <div className="mt-40">
@@ -155,18 +178,16 @@ const Forecast = () => {
             <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5">
               How much storage is required?
             </h3>
-            <button
-              className="mt-7 pt-5 w-full flex items-center px-6 pb-6 border border-gray-new-15 rounded-[10px] hover:border-green-45 duration-200 transition-colors"
-              type="button"
-            >
-              <div className="flex flex-col items-start">
-                <h4 className="text-xl font-medium leading-tight">1GB</h4>
-                <p className="text-left mt-2 text-gray-new-70 font-light leading-tight text-[15px]">
-                  Starts from $0.000164 / GiB-hour
-                </p>
-              </div>
-              <ChevronDownIcon className="w-6 h-6 mt-2 ml-auto" />
-            </button>
+
+            <Select
+              buttonRef={storageRef}
+              activeItem={activeItems.storage}
+              isExpanded={isExpanded.storage}
+              items={storage}
+              type="storage"
+              onSelect={onSelect}
+              onExpand={() => onExpand('storage')}
+            />
           </div>
 
           <div className="mt-40 py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden">
