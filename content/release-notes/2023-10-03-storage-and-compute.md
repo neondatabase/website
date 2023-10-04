@@ -5,7 +5,7 @@ The following Postgres extensions were updated to a newer version and are now su
 | Postgres extension           | Old version   | New version   |
 |------------------------------|---------------|---------------|
 | `pg_jsonschema`              | 0.1.4         | 0.2.0         |
-| `pg_grapgql`                 | 1.1.0         | 1.4.0         |
+| `pg_graphql`                 | 1.1.0         | 1.4.0         |
 | `pgx_ulid`                   | 0.1.0         | 0.1.3         |
 
 If you installed these extensions previously and want to upgrade to the latest version, please refer to [Update an extension version](/docs/extensions/pg-extensions#update-an-extension-version) for instructions.
