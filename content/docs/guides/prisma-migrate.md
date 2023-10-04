@@ -1,10 +1,11 @@
 ---
 title: Use Prisma Migrate with Neon
-subtitle: Learn how to use Prisma Migrate with Neon 
+subtitle: Learn how to use Prisma Migrate with Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/prisma
   - /docs/integrations/prisma
+updatedOn: '2023-10-03T18:28:23.119Z'
 ---
 
 This topic also describes how to configure Prisma Migrate when you need to connect to the same Neon database from Prisma Migrate, which requires a direct database connection, and serverless functions that require a pooled database connection.
@@ -46,8 +47,8 @@ When you are finished updating your `.env` file, your variable settings should a
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL="postgres://daniel:<password>@ep-restless-rice-862380-pooler.us-east-2.aws.neon.tech:5432/neondb?pgbouncer=true"
-DIRECT_URL="postgres://daniel:<password>@ep-restless-rice-862380.us-east-2.aws.neon.tech:5432/neondb"
+DATABASE_URL="postgres://daniel:<password>@ep-restless-rice-862380-pooler.us-east-2.aws.neon.tech:5432/neondb?sslmode=require&pgbouncer=true"
+DIRECT_URL="postgres://daniel:<password>@ep-restless-rice-862380.us-east-2.aws.neon.tech:5432/neondb?sslmode=require"
 ```
 
 </CodeBlock>

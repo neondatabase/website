@@ -5,6 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
+updatedOn: '2023-10-03T20:31:35.165Z'
 ---
 
 Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js application.
@@ -25,47 +26,143 @@ If you do not have one already, create a Neon project. Save your connection deta
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
 
-## Create a Next.js project
+## Create a Next.js project and add dependencies
 
-Create a Next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app/setup), in the Vercel documentation.
+1. Create a Next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app/setup), in the Vercel documentation.
 
-## Add a Postgres client to your app
 
-Add a PostgreSQL client to your app, such as `Postgres.js`. For instructions, refer to the [postgres.js Getting started](https://www.npmjs.com/package/postgres).
+2. Add project dependencies using one of the following commands:
 
-## Add your Neon connection details
+    <CodeTabs labels={["node-postgres", "postgres.js"]}>
+      ```shell
+      npm install pg
+      ```
 
-Add your Neon connection string to your `.env` file.
+      ```shell
+      npm install postgres
+      ```
+    </CodeTabs>
+
+
+
+## Store your Neon credentials
+
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+
+<CodeBlock shouldWrap>
 
 ```shell
-DATABASE_URL=postgres://<user>:<password>@<hostname>:<port>/<database>
+DATABASE_URL=postgres://<user>:<password>@ep-snowy-unit-550577.us-east-2.aws.neon.tech/neondb?options=endpoint%3Dep-snowy-unit-550577
 ```
 
-where:
+</CodeBlock>
 
-- `<user>` is the database user.
-- `<password>` is the database user's password.
-- `<hostname>` the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
-- `<port>` is the Neon port number. The default port number is `5432`.
-- `<database>` is the name of the database. The default Neon database is `neondb`
+## Configure the Postgres client 
 
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app). If you have misplaced your password, see [Reset a password](/docs/manage/roles#reset-a-password).
+1. From your API handlers, add the following code snippet to connect to your Neon database:
 
-## Connect to the Neon database
+    <CodeTabs labels={["node-postgres", "postgres.js"]}>
+      ```javascript
+      import { Pool } from 'pg';
 
-From your API handlers or server functions, connect to the Neon database with the Postgres client and your Neon connection details. For example:
+      const pool = new Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          require: true,
+        },
+      });
 
-```javascript pages/api/hello_worlds.js
-import postgres from 'postgres';
+      export default async function handler(req, res) {
+        const client = await pool.connect();
 
-const sql = postgres(process.env.DATABASE_URL);
+        try {
+          const response = await client.query('SELECT version()');
+          console.log(response.rows[0]);
+        } finally {
+          client.release();
+        }
+      }
 
-const result = await sql.unsafe(req.body);
+      ```
+      ```javascript
+      import postgres from 'postgres';
+
+      const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+
+      export default async function handler(req, res) {
+        const response = await sql`select version()`;
+        console.log(response);
+      }
+
+      ```
+    </CodeTabs>
+
+
+2. From your server functions, add the following code snippet to connect to your Neon database:
+
+    <CodeTabs labels={["node-postgres", "postgres.js"]}>
+      ```javascript
+      import { Pool } from 'pg';
+
+      const pool = new Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          require: true,
+        },
+      });
+
+      export async function getServerSideProps() {
+        const client = await pool.connect();
+
+        try {
+          const response = await client.query('SELECT version()');
+          console.log(response.rows[0]);
+          return { props: { data: response.rows[0] } };
+        } finally {
+          client.release();
+        }
+      }
+
+      export default function Page({ data }) {}
+
+      ```
+      ```javascript
+      import postgres from 'postgres';
+
+      export async function getServerSideProps() {
+        const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+
+        const response = await sql`select version()`;
+        console.log(response);
+        return { props: { data: response } };
+      }
+
+      export default function Page({ data }) {}
+
+      ```
+    </CodeTabs>
+
+## Run the app
+
+For API handlers, and server functions you can expect to see one of the following in your terminal output.
+
+```shell
+# node-postgres
+
+{
+  version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
+}
+
+# postgres.js
+
+Result(1) [
+  {
+    version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
+  }
+]
 ```
 
-<Admonition type="important">
-Never expose your Neon credentials to the browser.
-</Admonition>
 
 ## Need help?
 

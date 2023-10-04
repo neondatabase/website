@@ -6,8 +6,7 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import discourseIcon from 'icons/discourse.svg';
 import githubIcon from 'icons/github.svg';
-import blueTwitterIcon from 'icons/twitter-blue.svg';
-import twitterIcon from 'icons/twitter.svg';
+import xIcon from 'icons/x.svg';
 
 import erikBernhardsson from './images/erik.jpg';
 import guillermoRauch from './images/guillermo-rauch.jpg';
@@ -20,9 +19,9 @@ const HEADER = 'Join the community';
 
 const links = [
   {
-    icon: twitterIcon,
+    icon: xIcon,
     to: LINKS.twitter,
-    name: 'Twitter',
+    name: 'X',
   },
   {
     icon: discourseIcon,
@@ -168,8 +167,8 @@ const Community = () => (
                 <div className="flex justify-between">
                   <p className="font-normal leading-none">@{twitterAccount}</p>
                   <Link className="my-auto w-6" to={twitterUrl} target="_blank">
-                    <img src={blueTwitterIcon} width={22} height={18} alt="" loading="lazy" />
-                    <span className="sr-only">Twitter</span>
+                    <img src={xIcon} width={18} height={18} alt="" loading="lazy" />
+                    <span className="sr-only">X</span>
                   </Link>
                 </div>
               </div>

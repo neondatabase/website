@@ -1,8 +1,10 @@
 ---
 title: Use Grafbase Edge Resolvers with Neon
-subtitle: Learn how to build and deploy serverless GraphQL backends with Grafbase and Neon
+subtitle: Learn how to build and deploy serverless GraphQL backends with Grafbase and
+  Neon
 enableTableOfContents: true
 isDraft: false
+updatedOn: '2023-10-04T13:12:25.660Z'
 ---
 
 _This guide was contributed by Josep Vidal from Grafbase_
@@ -159,7 +161,7 @@ To test the resolvers with Neon, perform the following steps:
     npx grafbase dev
     ```
 
-2. Go to [http://localhost:4000](http://localhost:4000) and execute the following GraphQL mutation, which creates a new product:
+2. Go to http://localhost:4000 and execute the following GraphQL mutation, which creates a new product:
 
     ```graphql
     mutation {

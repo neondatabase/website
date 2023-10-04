@@ -1,13 +1,14 @@
 ---
 title: Backups
 enableTableOfContents: true
+updatedOn: '2023-09-15T20:02:38Z'
 ---
 
-Neon does not yet provide support for configuring automated backups in the Neon Console or API. This feature is on our roadmap. You can expect it to be introduced in the coming months.  In the meantime, we support the following backup options:
+Neon does not yet provide support for configuring automated backups in the Neon Console or API. This feature is on our roadmap. You can expect it to be introduced in the coming months. In the meantime, we support the following backup options:
 
 ## Built-in backups with Neon's point-in-time restore feature
 
-By default, Neon retains a 7-day history of changes for all branches, allowing you to restore your data to a particular date and time or Log Sequence Number (LSN). The history retention period is configurable. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. With this backup option, no action or automation is required. You can quickly restore your data to a past state by creating a database branch. This feature is referred to [Point-in-time restore](/docs/introduction/point-in-time-restore).
+By default, Neon retains a 7-day history for all branches, allowing you to restore your data to a particular date and time or Log Sequence Number (LSN). The history retention period is configurable. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. With this backup option, no action or automation is required. You can restore your data to a past state at any time by creating a database branch, which is a near-instant operation. This feature is referred to [Point-in-time restore](/docs/introduction/point-in-time-restore).
 
 For information about creating a point-in-time restore branch, see [Branching — Point-in-time restore](/docs/guides/branching-pitr).
 

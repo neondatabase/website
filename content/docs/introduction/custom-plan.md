@@ -3,6 +3,7 @@ title: Neon Custom plan
 subtitle: Learn about customizing a Neon plan to meet your specific requirements
 enableTableOfContents: true
 isDraft: false
+updatedOn: '2023-06-08T16:17:43Z'
 ---
 
 Neon offers a _Custom_ plan option, which is a volume-based plan for medium and large-size teams, enterprises requiring database fleets, or SaaS vendors interested in reselling Neon or integrating serverless Postgres into their own service.

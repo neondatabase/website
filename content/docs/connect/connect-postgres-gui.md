@@ -2,6 +2,7 @@
 title: Connect a GUI application
 subtitle: Learn how to connect a GUI application to Neon
 enableTableOfContents: true
+updatedOn: '2023-09-03T22:57:38Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.
@@ -72,6 +73,7 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [Forest Admin](https://www.forestadmin.com/) | The database requires at least one table |
 | [Grafana](https://grafana.com/docs/grafana/latest/datasources/postgres/)| Requires `sslmode=verify-full`. See [SNI workaround C](/docs/connect/connection-errors#c-set-verify-full-for-golang-based-clients). |
 | [Google Looker Studio](https://lookerstudio.google.com/) | Requires **Enable SSL** and uploading the [ISRG Root X1](https://letsencrypt.org/certificates/) self-signed `pem` root certificate from Let's Encrypt. See [Connect to Looker Studio](https://community.neon.tech/t/connect-to-data-studio-looker-studio/299/3), in the _Neon Community_ forum. |
+| [Google Colab](https://colab.research.google.com/) | See [Use Google Colab with Neon](/docs/ai/ai-google-colab). |
 | [ILLA Cloud](https://www.illacloud.com/) | |
 | [Luna Modeler](https://www.datensen.com/data-modeling/luna-modeler-for-relational-databases.html) | Requires enabling the SSL/TLS option |
 | [Metabase](https://www.metabase.com/) | |
