@@ -32,4 +32,5 @@ export default {
   awsIsrael: '/partners/aws-israel',
   thankYou: '/thank-you',
   trust: '/trust',
+  billing: '/docs/billing',
 };
