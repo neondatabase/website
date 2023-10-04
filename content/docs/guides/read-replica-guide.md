@@ -80,7 +80,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
     <CodeBlock shouldWrap>
 
     ```bash
-    postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+    postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>

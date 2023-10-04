@@ -19,7 +19,7 @@ When connecting to Neon or any Postgres database, the `sslmode` parameter settin
 <CodeBlock shouldWrap>
 
 ```text
-postgres://<user>:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?sslmode=verify-full
+postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full
 ```
 
 </CodeBlock>
@@ -54,10 +54,10 @@ If the client application uses a popular Postgres client library, such as `psyco
 import psycopg2
 
 conn = psycopg2.connect(
-    dbname='<dbname>',
-    user='<username>',
-    password='<password>',
-    host='ep-wild-haze-482989.us-east-2.aws.neon.tech',
+    dbname='dbname',
+    user='alex',
+    password='AbC123dEf',
+    host='ep-cool-darkness-123456.us-east-2.aws.neon.tech',
     port='5432',
     sslmode='verify-full',
     sslrootcert='/path/to/your/root.crt'

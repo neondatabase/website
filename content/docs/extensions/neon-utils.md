@@ -71,7 +71,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     <CodeBlock shouldWrap>
 
     ```bash
-    pgbench -i postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+    pgbench -i postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>
@@ -81,7 +81,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     <CodeBlock shouldWrap>
 
     ```bash
-    pgbench -f test.sql -c 15 -T 1000 -P 1 postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+    pgbench -f test.sql -c 15 -T 1000 -P 1 postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>

@@ -30,7 +30,7 @@ To import your data from another Neon project:
    <CodeBlock shouldWrap>
 
    ```bash
-   postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
+   postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>
@@ -40,7 +40,7 @@ To import your data from another Neon project:
    <CodeBlock shouldWrap>
 
    ```bash
-   pg_dump -Fc -v -d postgres://<user>:<password>@ep-dawn-union-749234.us-east-2.aws.neon.tech/<dbname> | pg_restore -v -d postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
+   pg_dump -Fc -v -d postgres://[user]:[password]@[neon_hostname]/[dbname] | pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>

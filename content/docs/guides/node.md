@@ -59,7 +59,7 @@ Add a `.env` file to your project directory and add your Neon connection string 
 <CodeBlock shouldWrap>
 
 ```shell
-DATABASE_URL=postgres://<user>:<password>@ep-snowy-unit-550577.us-east-2.aws.neon.tech/neondb?options=endpoint%3Dep-snowy-unit-550577
+DATABASE_URL=ppostgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 </CodeBlock>

@@ -47,8 +47,8 @@ When you are finished updating your `.env` file, your variable settings should a
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL="postgres://daniel:<password>@ep-restless-rice-862380-pooler.us-east-2.aws.neon.tech:5432/neondb?sslmode=require&pgbouncer=true"
-DIRECT_URL="postgres://daniel:<password>@ep-restless-rice-862380.us-east-2.aws.neon.tech:5432/neondb?sslmode=require"
+DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&pgbouncer=true"
+DIRECT_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
 ```
 
 </CodeBlock>

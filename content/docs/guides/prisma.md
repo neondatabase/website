@@ -42,7 +42,7 @@ Your setting will appear similar to the following:
    <CodeBlock shouldWrap>
 
    ```text
-   DATABASE_URL="postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb?sslmode=require"
+   DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
    ```
 
    </CodeBlock>
@@ -58,7 +58,7 @@ Serverless functions typically require a large number of database connections. W
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-raspy-cherry-95040071-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&pgbouncer=true
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&pgbouncer=true
 ```
 
 </CodeBlock>
@@ -89,7 +89,7 @@ When you connect to an idle compute from Prisma, Neon automatically activates it
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb?sslmode=require&connect_timeout=10`
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=10`
 ```
 
 </CodeBlock>
@@ -107,7 +107,7 @@ The default size of the Prisma connection pool is determined by the following fo
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb/neondb?sslmode=require&connect_timeout=15&connection_limit=20`
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=15&connection_limit=20`
 ```
 
 </CodeBlock>
@@ -119,7 +119,7 @@ In addition to pool size, you can configure a `pool_timeout` setting. This setti
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb/neondb?sslmode=require&connect_timeout=15&connection_limit=20&pool_timeout=15`
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=15&connection_limit=20&pool_timeout=15`
 ```
 
 </CodeBlock>

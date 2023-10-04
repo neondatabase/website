@@ -180,7 +180,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
      name: aws
      runtime: nodejs14.x
      environment:
-       DATABASE_URL: postgres://<USER>:<PASSWORD>@<HOST>/<DATABASE>?sslmode=require
+       DATABASE_URL: postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
 
     functions:
      getAllUsers:

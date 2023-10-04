@@ -37,7 +37,7 @@ You can obtain the connection string for the database from the **Connection Deta
 <CodeBlock shouldWrap>
 
 ```bash
-postgres://<user>:<password>@ep-billowing-sun-767748.us-west-2.aws.neon.tech/friends
+postgres://[user]:[password]@[neon_hostname]/friends
 ```
 
 </CodeBlock>
@@ -90,12 +90,12 @@ Follow these steps to complete the configuration:
     ```elixir
     config :friends, Friends.Repo,
       database: "friends",
-      username: "<user>",
-      password: "<password>",
-      hostname: "ep-billowing-sun-767748.us-west-2.aws.neon.tech",
+      username: "alex",
+      password: "AbC123dEf",
+      hostname: "ep-cool-darkness-123456.us-west-2.aws.neon.tech",
       ssl: true,
       ssl_opts: [
-        server_name_indication: 'ep-billowing-sun-767748.us-west-2.aws.neon.tech',
+        server_name_indication: 'ep-cool-darkness-123456.us-west-2.aws.neon.tech',
         verify: :verify_none
       ]
     ```

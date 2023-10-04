@@ -61,7 +61,7 @@ Your connection string will look something like this:
 <CodeBlock shouldWrap>
 
 ```shell
-DATABASE_URL=postgres://<user>:<password>@ep-snowy-unit-550577.us-east-2.aws.neon.tech/neondb
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 </CodeBlock>

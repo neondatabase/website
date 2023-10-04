@@ -27,7 +27,7 @@ The driver includes TypeScript types (the equivalent of `@types/pg`). No additio
 You can obtain a connection string for your database from the **Connection Details** widget on the Neon **Dashboard** and set it as an environment variable. Your Neon connection string will look something like this:
 
 ```shell
-DATABASE_URL=postgres://<user>:<password>@<endpoint>.<region>.aws.neon.tech/<dbname>
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 ## How to use the driver over HTTP

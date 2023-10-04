@@ -13,7 +13,7 @@ A Neon project is created with the following resources, by default:
 
 - A primary branch called `main`. You can create child branches from the primary branch or from a previously created branch. For more information, see [Manage branches](/docs/manage/branches).
 - A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage computes](/docs/manage/endpoints).
-- A ready-to-use database, called `neondb`, which resides in the project's primary branch.
+- A ready-to-use database, called `dbname`, which resides in the project's primary branch.
 - A default Postgres role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
 
 ## Create a project
@@ -31,7 +31,7 @@ To create a Neon project:
   
 4. Click **Create Project**.
 
-Upon creating a project, you are presented with a dialog that provides your connection details for a ready-to-use `neondb` database. The connection details include your password.
+Upon creating a project, you are presented with a dialog that provides your connection details for a ready-to-use `dbname` database. The connection details include your password.
 
 ## Compute size configuration with Autoscaling
 
@@ -148,7 +148,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 }' | jq
 ```
 
-The response includes information about the roles, the ready-to-use database (`neondb)`), the primary branch (`main`), and the read-write compute endpoint that is created with the project.
+The response includes information about the roles, the ready-to-use database (`dbname)`), the primary branch (`main`), and the read-write compute endpoint that is created with the project.
 
 <details>
 <summary>Response body</summary>
@@ -157,7 +157,7 @@ The response includes information about the roles, the ready-to-use database (`n
 {
   "project": {
     "cpu_used_sec": 0,
-    "id": "odd-cell-528527",
+    "id": "ep-cool-darkness-123456",
     "platform_id": "aws",
     "region_id": "aws-us-east-2",
     "name": "myproject",
@@ -171,14 +171,14 @@ The response includes information about the roles, the ready-to-use database (`n
   },
   "connection_uris": [
     {
-      "connection_uri": "postgres://casey:kFbAy47krZeV@odd-cell-528527.us-east-2.aws.neon.tech/neondb"
+      "connection_uri": "postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
     }
   ],
   "roles": [
     {
       "branch_id": "br-falling-frost-286006",
-      "name": "casey",
-      "password": "kFbAy47krZeV",
+      "name": "alex",
+      "password": "AbC123dEf",
       "protected": false,
       "created_at": "2023-01-04T17:33:11Z",
       "updated_at": "2023-01-04T17:33:11Z"
@@ -195,8 +195,8 @@ The response includes information about the roles, the ready-to-use database (`n
     {
       "id": 1138408,
       "branch_id": "br-falling-frost-286006",
-      "name": "neondb",
-      "owner_name": "casey",
+      "name": "dbname",
+      "owner_name": "alex",
       "created_at": "2023-01-04T17:33:11Z",
       "updated_at": "2023-01-04T17:33:11Z"
     }
@@ -204,7 +204,7 @@ The response includes information about the roles, the ready-to-use database (`n
   "operations": [
     {
       "id": "b7c32d83-6402-49c8-b40b-0388309549da",
-      "project_id": "odd-cell-528527",
+      "project_id": "ep-cool-darkness-123456",
       "branch_id": "br-falling-frost-286006",
       "action": "create_timeline",
       "status": "running",
@@ -214,7 +214,7 @@ The response includes information about the roles, the ready-to-use database (`n
     },
     {
       "id": "756f2b87-f45c-4a61-9b21-6cd3f3c48c68",
-      "project_id": "odd-cell-528527",
+      "project_id": "ep-cool-darkness-123456",
       "branch_id": "br-falling-frost-286006",
       "endpoint_id": "ep-jolly-moon-631024",
       "action": "start_compute",
@@ -226,7 +226,7 @@ The response includes information about the roles, the ready-to-use database (`n
   ],
   "branch": {
     "id": "br-falling-frost-286006",
-    "project_id": "odd-cell-528527",
+    "project_id": "ep-cool-darkness-123456",
     "name": "main",
     "current_state": "init",
     "pending_state": "ready",
@@ -237,7 +237,7 @@ The response includes information about the roles, the ready-to-use database (`n
     {
       "host": "ep-jolly-moon-631024.us-east-2.aws.neon.tech",
       "id": "ep-jolly-moon-631024",
-      "project_id": "odd-cell-528527",
+      "project_id": "ep-cool-darkness-123456",
       "branch_id": "br-falling-frost-286006",
       "autoscaling_limit_min_cu": 1,
       "autoscaling_limit_max_cu": 1,
@@ -315,7 +315,7 @@ PATCH /projects/{project_id}
 The API method appears as follows when specified in a cURL command. The `project_id` is a required parameter. The example changes the project `name` to `project1`.
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/odd-cell-528527' \
+curl 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' \
   -H 'Content-Type: application/json' \
@@ -333,7 +333,7 @@ curl 'https://console.neon.tech/api/v2/projects/odd-cell-528527' \
 {
   "project": {
     "cpu_used_sec": 0,
-    "id": "odd-cell-528527",
+    "id": "ep-cool-darkness-123456",
     "platform_id": "aws",
     "region_id": "aws-us-east-2",
     "name": "project1",
@@ -363,7 +363,7 @@ The API method appears as follows when specified in a cURL command. The `project
 
 ```bash
 curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/odd-cell-528527' \
+  'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
@@ -375,7 +375,7 @@ curl -X 'DELETE' \
 {
   "project": {
     "cpu_used_sec": 0,
-    "id": "odd-cell-528527",
+    "id": "ep-cool-darkness-123456",
     "platform_id": "aws",
     "region_id": "aws-us-east-2",
     "name": "project1",

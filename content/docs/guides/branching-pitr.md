@@ -59,7 +59,7 @@ To connect to your branch:
    <CodeBlock shouldWrap>
 
    ```bash
-   postgres://daniel:<password>@ep-curly-term-54009904.us-east-2.aws.neon.tech/neondb
+   postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>

@@ -100,7 +100,7 @@ Connection conn = DriverManager.getConnection(dbUrl, properties);
 ```
 
 ```prisma
-DATABASE_URL=postgres://<user>:<password>@<neon_hostname>/neondb?connect_timeout=15&pool_timeout=15`
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?connect_timeout=15&pool_timeout=15`
 ```
 
 </CodeTabs>

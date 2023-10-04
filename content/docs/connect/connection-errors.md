@@ -47,7 +47,7 @@ Neon supports a connection option named `endpoint`, which you can use to identif
 <CodeBlock shouldWrap>
 
 ```txt
-postgres://<user>:<password>@ep-mute-recipe-123456.us-east-2.aws.neon.tech/neondb?options=endpoint%3Dep-mute-recipe-123456
+postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3Dep-mute-recipe-123456
 ```
 
 </CodeBlock>
@@ -129,7 +129,7 @@ Check your connection to see if it is defined correctly. Your Neon connection st
 <CodeBlock shouldWrap>
 
 ```text
-postgres://daniel:f98wh99w398h@ep-white-morning-123456.us-east-2.aws.neon.tech/neondb
+postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 </CodeBlock>

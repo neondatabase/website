@@ -38,7 +38,7 @@ To begin, assume you're creating a new database that will be used by several dev
     <CodeBlock shouldWrap>
 
     ```bash
-    psql postgres://john:<password>@ep-restless-waterfall-733645.us-west-2.aws.neon.tech/neondb
+    psql postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>
@@ -101,7 +101,7 @@ To begin, assume you're creating a new database that will be used by several dev
     The `dev_user1` and `dev_user2` can now connect to the `app_db` database and start using it with full privileges.
 
     ```bash
-    psql postgres://dev_user1:<password>@ep-restless-waterfall-733645.us-west-2.aws.neon.tech/app_db
+    psql postgres://[user]:[password]@[neon_hostname]/app_db
     psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
     SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
     Type "help" for help.
