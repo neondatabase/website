@@ -5,6 +5,7 @@ module.exports = {
     '/blog/rss.xml',
     '/docs/release-notes/rss.xml',
     '/last-week-in-aws',
+    '/ping-thing',
   ],
   generateRobotsTxt: true,
   robotsTxtOptions: {
