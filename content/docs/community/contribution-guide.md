@@ -434,18 +434,36 @@ Follow the capitalization style used by the authoritative source, which may use 
 
 ### Fake user information
 
-When including user information in API calls or UI instructions, do not use real user information or email addresses.
+When including user information in connection details, API calls, or UI instructions, do not use real user information or email addresses.
 
-- Use an email address ending in example.com.
-- Use strings like example_username or diverse or non-gendered names with common surnames, such as Pat Smith, Jiang Wei, or Alex Lopez.
+- Use an email address ending in `@example.com`.
+- Use strings like `example_username` or one of the following diverse and non-gendered names: Zhang Kai, Alex Lopez, or Dana Smith.
+
+### Connection strings
+
+Connection strings should be defined as follows:
+
+```text
+postgres://[user]:[password]@[your_neon_hostname]/[dbname]
+```
+
+If you need to provide a connection string with realistic values, use one of the diverse and non-gendered user names mentioned above, `AbC123dEf` for the password, and `dbname` for the database name:
+
+```text
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+```
 
 ### Commands, parameters, values, filenames
 
-Commands, parameters, values, filenames, and error messages should be enclosed in backticks. For example:
+Commands, parameters, values, filenames, error messages, and connection strings should be enclosed in backticks. For example:
 
-"Execute 'git clone' to clone a Git repository..."
+- "Run the `neonctl projects list` command."
 
-'git clone' is a command, which needs to be in lowercase, whereas Git is the product and should have a capital G.
+- "Execute 'git clone' to clone a Git repository..."
+
+- 'git clone' is a command, which needs to be in lowercase, whereas Git is the product and should have a capital G.
+
+- "A connect string has this format: `postgres://[user]:[password]@[neon_hostname]/[dbname]`"
 
 ## Questions?
 
