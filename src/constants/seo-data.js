@@ -84,6 +84,9 @@ export default {
     pathname: '',
     robotsNoindex: 'noindex',
   },
+  pingThing: {
+    robotsNoindex: 'noindex',
+  },
 };
 
 export const getBlogCategoryDescription = (category) => {
