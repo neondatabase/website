@@ -444,7 +444,7 @@ When including user information in connection details, API calls, or UI instruct
 Connection strings should be defined as follows:
 
 ```text
-postgres://[user]:[password]@[your_neon_hostname]/[dbname]
+postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 If you need to provide a connection string with realistic values, use one of the diverse and non-gendered user names mentioned above, `AbC123dEf` for the password, and `dbname` for the database name:
