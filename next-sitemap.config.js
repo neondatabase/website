@@ -12,7 +12,7 @@ module.exports = {
     policies: [
       {
         userAgent: '*',
-        disallow: ['/blog/wp-draft-post-preview-page$', '/last-week-in-aws$'],
+        disallow: ['/blog/wp-draft-post-preview-page$', '/last-week-in-aws$', '/ping-thing$'],
       },
     ],
   },
