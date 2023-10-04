@@ -143,6 +143,11 @@ const defaultConfig = {
         destination: 'https://devdays.neon.tech',
         permanent: true,
       },
+      {
+        source: '/ping-thing',
+        destination: '/demos/ping-thing',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },
@@ -153,11 +158,11 @@ const defaultConfig = {
         destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
       },
       {
-        source: '/ping-thing',
+        source: '/demos/ping-thing',
         destination: 'https://ping-thing.vercel.app/ping-thing',
       },
       {
-        source: '/ping-thing/:path*',
+        source: '/demos/ping-thing/:path*',
         destination: 'https://ping-thing.vercel.app/ping-thing/:path*',
       },
       {
