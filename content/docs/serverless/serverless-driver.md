@@ -250,7 +250,7 @@ There are different implementations of the application to choose from.
 
 ### Ping Thing
 
-Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes. You can read more about how this app was made on the Neon blog: [How to use Postgres at the Edge](https://neon.tech/blog/how-to-use-postgres-at-the-edge)
+The Ping Thing application pings a Neon Serverless Postgres database using a Vercel Edge Function and shows the journey your request makes. You can read more about this application in the accompanying blog post: [How to use Postgres at the Edge](https://neon.tech/blog/how-to-use-postgres-at-the-edge)
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/ping-thing" description="Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes" icon="github">Ping Thing</a>
