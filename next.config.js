@@ -159,11 +159,11 @@ const defaultConfig = {
       },
       {
         source: '/demos/ping-thing',
-        destination: 'https://ping-thing.vercel.app/ping-thing',
+        destination: 'https://ping-thing.vercel.app/demos/ping-thing',
       },
       {
         source: '/demos/ping-thing/:path*',
-        destination: 'https://ping-thing.vercel.app/ping-thing/:path*',
+        destination: 'https://ping-thing.vercel.app/demos/ping-thing/:path*',
       },
       {
         source: '/developer-days/:path*',
