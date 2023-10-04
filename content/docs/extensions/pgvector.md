@@ -99,6 +99,6 @@ Always consider your compute instance's memory resources when adjusting this par
 
 `pgvector` source code: [https://github.com/pgvector/pgvector](https://github.com/pgvector/pgvector)
 
-## Need help?
+## Need help\?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

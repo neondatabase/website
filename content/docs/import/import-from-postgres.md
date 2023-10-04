@@ -191,6 +191,6 @@ For information about the Postgres client utilities referred to in this topic, r
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
 - [psql](https://www.postgresql.org/docs/current/app-psql.html)
 
-## Need help?
+## Need help\?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

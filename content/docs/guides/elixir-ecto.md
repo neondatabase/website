@@ -215,6 +215,6 @@ The [Ecto Getting Started Guide](https://hexdocs.pm/ecto/getting-started.html#co
 - Suppose you have `PGHOST` environment variable on your system set to something other than your Neon hostname. In that case, this hostname will be used instead of the Neon `hostname` defined in your Ecto Repo configuration when running `mix ecto` commands. To avoid this issue, you can either set the `PGHOST` environment variable to your Neon hostname or specify `PGHOST=""` when running `mix ecto` commands; for example: `PGHOST="" mix ecto.migrate`.
 - By default, Neon's _Auto-suspend_ feature scales computes to zero after 300 seconds (5 minutes) of inactivity, which can result in a `connection not available` error when running `mix ecto` commands. Typically, a Neon compute takes a few seconds to transition from `Idle` to `Active`. Wait a few seconds and try running the command again. Alternatively, consider the strategies outlined in [Connection latency and timeouts](/docs/connect/connection-latency) to manage connection issues resulting from compute suspension.
 
-## Need help?
+## Need help\?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

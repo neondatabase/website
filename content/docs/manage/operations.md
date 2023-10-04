@@ -277,6 +277,6 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/05
 
 Possible operation `status` values include `running`, `finished`, `failed`, `scheduling`. Initially, the status of an operation might be `scheduling`. Before issuing the next API request, you would poll the operation until the status changes to `finished`. You could also add logic to handle a `failed` status.
 
-## Need help?
+## Need help\?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

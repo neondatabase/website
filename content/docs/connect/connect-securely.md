@@ -116,6 +116,6 @@ The location of the root store varies by operating system or distribution. Here 
 
 The system root certificate locations listed above may differ depending on the version, distribution, and configuration of your operating system. If you do not find the root certificates in these locations, refer to your operating system documentation.
 
-## Need help?
+## Need help\?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.
