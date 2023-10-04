@@ -143,6 +143,11 @@ const defaultConfig = {
         destination: 'https://devdays.neon.tech',
         permanent: true,
       },
+      {
+        source: '/ping-thing',
+        destination: '/demos/ping-thing',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },
