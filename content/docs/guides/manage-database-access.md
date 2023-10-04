@@ -9,14 +9,14 @@ This guide shows how to manage database access in Neon using SQL. This guide wil
 
 ## Understanding roles in Neon
 
-Before you begin, it's important to understand how roles work in Neon. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the ready-to-use database (`neondb`) that is created in your project's primary branch. For example, if you sign up for Neon with a John Smith Google account, the project is created with a default role named `john`.
+Before you begin, it's important to understand how roles work in Neon. Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the ready-to-use database (`neondb`) that is created in your project's primary branch. For example, if you sign up for Neon with a "Alex Lopez" Google account, the project is created with a default role named `alex`.
 
 Your default Neon role is automatically granted membership in a `neon_superuser` role, which provides the user with the privileges and predefined role memberships shown in this `CREATE ROLE` statement:
 
 <CodeBlock shouldWrap>
 
 ```sql
-CREATE ROLE neon_superuser CREATEDB CREATEROLE NOLOGIN IN ROLE pg_read_all_data, pg_write_all_data;
+CREATE ROLE neon_superuser CREATEDB CREATEROLE BYPASSRLS NOLOGIN IN ROLE pg_read_all_data, pg_write_all_data;
 ```
 
 </CodeBlock>
@@ -109,4 +109,113 @@ To begin, assume you're creating a new database that will be used by several dev
     app_db=> 
     ```
 
-You may want to employ a more granular privilege scheme in your database access configuration, which you can do using a similar approach of creating 'group' roles and granting membership to those roles. For more information about granting privileges in Postgres, please see the [GRANT](https://www.postgresql.org/docs/current/sql-grant.html) command in the _PostgreSQL documentation_.
+## Read-only users
+
+In Postgres, schemas are organizational structures within a database. A single PostgreSQL database can have multiple schemas, and each schema can have its own tables, views, functions, and other objects.
+
+A common access management pattern in Postgres is to grant users read-only access to objects in a particular schema. Users with read-only access cannot `INSERT`, `UPDATE`, or `DELETE` data or make schema changes. They can only run `SELECT` queries.
+
+To create read-only users in Neon, you can use an approach similar to the one described in the preceding section, which is to create a shared role, grant privileges to the shared role, and add users to that role.
+
+In Neon, creating roles with specific or limited privileges can only be performed via SQL. Roles created using the Neon console, API, or CLI, are granted [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) privileges. You can run SQL statements using Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor).
+
+To create users with read-only access to a specific schema:
+
+1. Create a `readonly` role. Neon requires specifying a password when creating a role with SQL. Since this is a shared role used for privilege management, the `LOGIN` privilege is optional.
+
+    ```sql
+    CREATE ROLE readonly [LOGIN] PASSWORD '<password>';
+    ```
+
+    <Admonition type="important">  
+    Passwords must have 60 bits of entropy. Please refer to the password requirements outlined above.
+    </Admonition>
+
+4. Grant the `readonly` role read-only privileges on the schema:
+
+    ```sql
+    -- Grant the 'readonly' role usage privileges on the specified schema. 
+    -- This allows the role to access objects in the schema but doesn't grant any specific permissions on those objects.
+    GRANT USAGE ON SCHEMA <schema> TO readonly;
+
+    -- Grant the 'readonly' role SELECT privileges on all existing tables in the specified schema.
+    -- This allows the role to read the data from any table within the schema.
+    GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO readonly; 
+
+    -- Alter the default privileges for any new tables created in the specified schema.
+    -- This ensures that any new tables created in this schema in the future automatically 
+    -- grant SELECT privileges to the 'readonly' role.
+    ALTER DEFAULT PRIVILEGES IN SCHEMA <schema>
+    GRANT SELECT ON TABLES TO readonly;
+    ```
+
+5. Create a database user. The password requirements mentioned above apply here as well.
+
+    ```sql
+    CREATE ROLE readonly_user1 WITH LOGIN PASSWORD '<password>';
+    ```
+
+6. Grant the user membership in the `readonly` role:
+
+    ```sql
+    GRANT readonly TO readonly_user1;
+    ```
+
+    The `readonly_user1` user now has read-only access to the specified schema in your database.
+
+    ```bash
+    psql postgres://readonly_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/your_db
+    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
+    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
+    Type "help" for help.
+
+    your_db=> 
+    ```
+
+    If the user attempts to perform an `INSERT`, `UPDATE`, or `DELETE` operation, a `permission denied` error is returned.
+
+### Testing your read-only user
+
+To test the read-only user setup above, you can create the following schema and table, follow the instructions above to grant read-only access to the schema, and run `SELECT` and `INSERT` queries.
+
+1. From the Neon SQL Editor or connected from a client using a `neon_superuser` account, create the schema and table:
+
+    ```sql
+    CREATE SCHEMA IF NOT EXISTS blog;
+
+    CREATE TABLE blog.post (
+        post_id SERIAL PRIMARY KEY,
+        title TEXT NOT NULL,
+        content TEXT,
+        publish_date DATE
+    );
+    ```
+
+2. Insert some data:
+
+    ```sql
+    INSERT INTO blog.post(title, content, publish_date)
+    VALUES 
+    ('First Post', 'This is the content of the first post.', '2023-01-01'),
+    ('Second Post', 'Content for the second post.', '2023-01-15'),
+    ('Third Post', 'Here goes the third post content.', '2023-02-05');
+    ```
+
+3. Set up your read-only role and user, as describe above, granting read-only access to the `blog` schema.
+
+4. Connect to Neon from a client as the read-only user and run a `SELECT` query on the `post` table. This query should succeed.
+
+    ```sql
+    SELECT * FROM blog.post;
+    ```
+
+5. Now, try inserting data into the post table. This query should fail with a `permission denied` error.
+
+    ```sql
+    INSERT INTO blog.post(title, content, publish_date)
+    VALUES ('Fourth Post', 'Content for the fourth post.', '2023-03-01');
+    ```
+
+## More information
+
+For more information about granting privileges in Postgres, please see the [GRANT](https://www.postgresql.org/docs/current/sql-grant.html) command in the _PostgreSQL documentation_.
