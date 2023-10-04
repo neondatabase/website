@@ -126,7 +126,7 @@ Follow these steps to complete the configuration:
 
     Ecto uses the module definition to query the database. The `otp_app` setting tells Ecto where to find the database configuration. In this case, the `:friends` application is specified, so Ecto will use the configuration defined in the that application's `config/config.exs` file. The `:adapter` option defines the Postgres adapter.
 
-3. Next, the `Friends.Repo` must be defined as a supervisor within the application's supervision tree. In `lib/friends/application.ex`, make sure `Friends.Repo` is specified in the `start/2` function, as shown:
+3. Next, the `Friends.Repo` must be defined as a supervisor within the application's supervision tree. In `lib/friends/application.ex`, make sure `Friends.Repo` is specified in the `start` function, as shown:
 
     ```elixir
     def start(_type, _args) do
@@ -205,6 +205,14 @@ You can use the **Tables** feature in the Neon Console to view the table that wa
 1. Select a project.
 1. Select **Tables** from the sidebar.
 1. Select the Branch, Database (`friends`), and the schema (`public`). You should see the `people` table along with a `schema_migration` table that was created by the migration.
+
+## Application code
+
+You can find the application code for the example above on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/neon-ecto-getting-started-app" description="Learn how to connect from Elixir with Ecto to Neon" icon="github">Neon Ecto Getting Started App</a>
+</DetailIconCards>
 
 ## Next steps
 
