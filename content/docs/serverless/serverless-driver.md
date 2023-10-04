@@ -246,6 +246,7 @@ There are different implementations of the application to choose from.
 <a href="https://github.com/neondatabase/serverless-cfworker-demo" description="Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance." icon="github">Raw SQL + Cloudflare Workers</a>
 <a href="https://github.com/neondatabase/neon-vercel-kysely" description="Demonstrates using kysely and kysely-codegen with Neon's serverless driver on Vercel Edge Functions" icon="github">Kysely + Vercel Edge Functions</a>
 <a href="https://github.com/neondatabase/neon-vercel-zapatos" description="Demonstrates using Zapatos with Neon's serverless driver on Vercel Edge Functions" icon="github">Zapatos + Vercel Edge Functions</a>
+<a href="https://github.com/neondatabase/neon-hyperdrive" description="Neon + Cloudflare Hyperdrive (Beta)" icon="github">Demonstrates using Cloudflare's Hyperdrive to access your Neon database from Cloudflare Workers</a>
 </DetailIconCards>
 
 ### Ping Thing
