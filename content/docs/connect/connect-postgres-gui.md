@@ -34,7 +34,7 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
 
 - role name: `alex`
-- hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech
+- hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
 - database name: `dbname`
 
 Neon uses the default Postgres port, `5432`.
