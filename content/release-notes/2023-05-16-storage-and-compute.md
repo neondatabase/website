@@ -7,7 +7,7 @@
    <CodeBlock shouldWrap>
 
   ```txt
-  postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3Dep-mute-recipe-239816
+  postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint_id]
   ```
 
    </CodeBlock>
