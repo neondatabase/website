@@ -8,7 +8,7 @@ LangChain is an open-source framework for developing applications powered by Lar
 
 For example, with LangChain, you can connect LLMs with a data source such as Neon Postgres and then sequence multiple commands (a series of prompts) that leverage that data source to achieve a desired result.
 
-In this guide, you will learn how to create a Python application that allows you to ask your database questions using natural language. The application transforms your question into an SQL query, runs the query, and returns a natural language response based on the query result. The application uses the [Titanic Dataset](https://www.kaggle.com/datasets/vinicius150987/titanic3). When you have the application up and running, you will be able to ask your database questions about the passengers of the Titanic.
+In this guide, you will learn how to create a Python application that lets you to ask your database questions using natural language. The application transforms your question into an SQL query, runs the query, and then returns a natural language response based on the query result. The application uses the [Titanic Dataset](https://www.kaggle.com/datasets/vinicius150987/titanic3) as the data source. Once you have the application up and running, you can use it to ask your database detailed questions about the passengers of the Titanic.
 
 A version of this application is also available for running in Google Colab:
 
