@@ -55,14 +55,16 @@ The project is created with a ready-to-use `neondb` database, which you will con
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project's root directory and add your Neon connection string to it. You will find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project's root directory and add your Neon connection string to it. 
+
+You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 Your connection string will look something like this:
 
 <CodeBlock shouldWrap>
 
 ```shell
-DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
 ```
 
 </CodeBlock>

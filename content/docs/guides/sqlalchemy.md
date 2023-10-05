@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-05T14:46:48.668Z'
 ---
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.
@@ -50,28 +50,20 @@ import psycopg2
 import psycopg2.extras; psycopg2.extensions.set_wait_callback(psycopg2.extras.wait_select)
 
 # You can set the password to None if it is specified in a ~/.pgpass file
-USERNAME = "<username>"
-PASSWORD = "<password>"
-HOST = "pg.neon.tech"
+USERNAME = "alex"
+PASSWORD = "AbC123dEf"
+HOST = "@ep-cool-darkness-123456.us-east-2.aws.neon.tech"
 PORT = "5432"
-PROJECT = "neondb"
+PROJECT = "dbname"
 
-conn = psycopg2.connect(
- host=HOST,
- port=PORT,
- user=USERNAME,
- password=PASSWORD,
- database=PROJECT)
+conn_str = f"dbname={PROJECT} user={USERNAME} password={PASSWORD} host={HOST} port={PORT} sslmode=require"
+
+conn = psycopg2.connect(conn_str)
 
 with conn.cursor() as cur:
  cur.execute("SELECT 'hello neon';")
  print(cur.fetchall())
 ```
-
-where:
-
-- `<username>` is the database user.
-- `<password>` is the database user's password.
 
 You can find all of the connection details mentioned above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
@@ -88,19 +80,16 @@ The following example creates an SQLAlchemy engine that points to your Neon bran
 ```python
 from sqlalchemy import create_engine
 
-USERNAME = <username>
-PASSWORD = <password>
-HOST = <hostname>
-CONNSTR = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/neondb'
+USERNAME = "alex"
+PASSWORD = "AbC123dEf"
+HOST = "@ep-cool-darkness-123456.us-east-2.aws.neon.tech"
+DATABASE = "dbname"
 
-engine = create_engine(CONNSTR)
+conn_str = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?sslmode=require'
+
+engine = create_engine(conn_str)
+
 ```
-
-where:
-
-- `<username>` is the database user.
-- `<password>` is the database user's password, which is provided to you when you create a Neon project.
-- `<hostname>` the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 
 You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
