@@ -78,7 +78,7 @@ postgres://[users]:[password]@ep-morning-limit-06265452.us-east-2.aws.neon.tech/
 Create a `.env` file in your application directory and configure variables for your OpenAI API key and database connection string:
 
 ```text
-OPENAI_API_KEY=<your_openai_api_key>
+OPENAI_API_KEY=[your_openai_api_key]
 DATABASE_URL="postgres://<users>:<password>@ep-morning-limit-06265452.us-east-2.aws.neon.tech/titanic"
 ```
 
