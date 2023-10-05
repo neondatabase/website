@@ -4,7 +4,7 @@ subtitle: Chat with your Neon database using LangChain and OpenAI
 enableTableOfContents: true
 ---
 
-LangChain is an open-source framework for developing applications powered by Large Language Models (LLMs). It enables developers to build applications that use LLMs to reason about how to provide answers and take actions based on the provided context, which includes prompt instructions, example inputs and responses, and the data that responses should be based on.
+LangChain is an open-source framework for developing applications powered by Large Language Models (LLMs). With LangChain, you can build applications that give answers or take actions in response to a variety of possible inputs or contexts: prompt instructions, sample inputs or responses, or any other data that the reactions should be based on.
 
 For example, with LangChain, you can connect LLMs with a data source such as Neon Postgres and then sequence multiple commands (a series of prompts) that leverage that data source to achieve a desired result.
 
