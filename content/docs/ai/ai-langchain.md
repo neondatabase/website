@@ -372,11 +372,13 @@ get_prompt()
 
 ## Run the application
 
-Run the application using the following command. When prompted, ask your `titanic` database a question like, "How many passengers survived?" or "What was the average age of passengers?".
+Run the application using the following command.
 
 ```bash
 python app.py
 ```
+
+When prompted, ask your `titanic` database a question like, "How many passengers survived?" or "What was the average age of passengers?".
 
 ## Resources
 
