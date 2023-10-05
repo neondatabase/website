@@ -25,22 +25,22 @@ To import your data from another Neon project:
 
 3. Retrieve the connection strings for the new and existing Neon databases.
 
-   You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Your connection strings will look something like this:
+   You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Connections strings have this format:
 
    <CodeBlock shouldWrap>
 
    ```bash
-   postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
+   postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>
 
-4. Prepare your import command to pipe data to from one Neon project to the other. The command will look similar to this one:
+4. Prepare your import command to pipe data to from one Neon project to the other. The command will look similar to this:
 
    <CodeBlock shouldWrap>
 
    ```bash
-   pg_dump -Fc -v -d postgres://<user>:<password>@ep-dawn-union-749234.us-east-2.aws.neon.tech/<dbname> | pg_restore -v -d postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
+   pg_dump -Fc -v -d postgres://[user]:[password]@[neon_hostname]/[dbname] | pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>

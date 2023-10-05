@@ -54,12 +54,12 @@ To connect to your branch:
 2. On the project **Dashboard**, under **Connection Details**, select your `recovery_branch`, the database, and the role you want to connect with.
 ![Connection details widget recovery branch](/docs/guides/data_recovery_connection_details.png)
 3. Copy the connection string. A connection string includes your role name, password, compute endpoint hostname, and database name.
-4. Connect with `psql`. Your connection string will look something like this:
+4. Connect with `psql`.
 
    <CodeBlock shouldWrap>
 
    ```bash
-   postgres://daniel:<password>@ep-curly-term-54009904.us-east-2.aws.neon.tech/neondb
+   psql postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>

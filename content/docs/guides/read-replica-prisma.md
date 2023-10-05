@@ -71,7 +71,7 @@ Connecting to a read replica is the same as connecting to any branch in a Neon p
     <CodeBlock shouldWrap>
 
     ```bash
-    postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
 
     </CodeBlock>
@@ -83,11 +83,11 @@ Connecting to a read replica is the same as connecting to any branch in a Neon p
 In your `.env` file, set a `DATABASE_REPLICA_URL` environment variable to the connection string of your read replica. Your `.env` file should look something like this, with your regular `DATABASE_URL` and the newly added `DATABASE_REPLICA_URL`.
 
 ```text
-DATABASE_URL="postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb"
-DATABASE_REPLICA_URL="postgres://daniel:<password>@ep-damp-cell-18160816.us-east-2.aws.neon.tech/neondb"
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+DATABASE_REPLICA_URL="postgres://alex:AbC123dEf@ep-damp-cell-123456.us-east-2.aws.neon.tech/dbname"
 ```
 
-Notice that the `endpoint_id` for the read replica compute differs. The read replica is a different compute instance and therefore has a different `endpoint_id`.
+Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compute differs. The read replica is a different compute instance and therefore has a different `endpoint_id`.
 
 ## Configure Prisma Client to use a read replica
 

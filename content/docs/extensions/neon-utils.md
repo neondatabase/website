@@ -66,12 +66,12 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     SELECT txid_current();
     ```
 
-3. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string from the **Connection Details** widget on the Neon **Dashboard**. Your connection string will appear similar to the one below:
+3. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string from the **Connection Details** widget on the Neon **Dashboard**.
 
     <CodeBlock shouldWrap>
 
     ```bash
-    pgbench -i postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+    pgbench -i postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>
@@ -81,7 +81,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     <CodeBlock shouldWrap>
 
     ```bash
-    pgbench -f test.sql -c 15 -T 1000 -P 1 postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+    pgbench -f test.sql -c 15 -T 1000 -P 1 postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>

@@ -33,7 +33,7 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 ## Connect to your database
 
-1. In your Colab notebook, create a code block to define your database connection and create a cursor object. Replace `postgres://<user>:<password>@<hostname>/neondb` with the database connection string you retrieved in the previous step.
+1. In your Colab notebook, create a code block to define your database connection and create a cursor object. Replace `postgres://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved in the previous step.
 
     <CodeBlock shouldWrap>
 
@@ -42,7 +42,7 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
     import psycopg2
 
     # Provide your Neon connection string
-    connection_string = "postgres://<user>:<password>@<hostname>/neondb"
+    connection_string = "postgres://[user]:[password]@[neon_hostname]/[dbname]"
 
     # Connect using the connection string
     connection = psycopg2.connect(connection_string)

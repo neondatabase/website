@@ -94,7 +94,7 @@ A database connection string is required to forward queries to your Neon databas
     <CodeBlock shouldWrap>
 
     ```text
-    postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb
+    postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>
@@ -104,7 +104,7 @@ A database connection string is required to forward queries to your Neon databas
     <CodeBlock shouldWrap>
 
     ```text
-    DATABASE_URL=postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb
+    DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>

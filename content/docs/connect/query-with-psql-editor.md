@@ -23,12 +23,12 @@ You can obtain a connection string from the **Connection Details** widget on the
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
-From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**, but be sure to add your password, as shown:
+From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**.
 
 <CodeBlock shouldWrap>
 
 ```bash
-psql postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+psql postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 </CodeBlock>
@@ -48,7 +48,7 @@ Neon uses the default Postgres port, `5432`. If you need to specify the port in 
 <CodeBlock shouldWrap>
 
 ```bash
-psql postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+psql postgres://[user]:[password]@[neon_hostname][:port]/[dbname]
 ```
 
 </CodeBlock>

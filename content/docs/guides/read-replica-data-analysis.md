@@ -88,7 +88,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
     <CodeBlock shouldWrap>
 
     ```bash
-    postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
 
     </CodeBlock>
@@ -97,10 +97,10 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
     The information in your connection string corresponds to the following connection details:
 
-    - role: `daniel`
-    - password:`<pasword>`
-    - hostname: `ep-mute-rain-952417.us-east-2.aws.neon.tech`
-    - database name: `neondb`. This is the ready-to-use database created with your Neon project. Your database name may differ.
+    - role: `alex`
+    - password:`AbC123dEf`
+    - hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
+    - database name: `dbname`. Your database name may differ.
 
     When you connect to a read-only compute, no write operations are permitted on the connection.
 
@@ -109,7 +109,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
     <CodeBlock shouldWrap>
 
     ```bash
-    psql postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb
+    psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
 
     </CodeBlock>

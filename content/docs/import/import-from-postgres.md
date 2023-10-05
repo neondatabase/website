@@ -23,7 +23,7 @@ Repeat the `pg_dump` and `pg_restore` process for each database you want to migr
    <CodeBlock shouldWrap>
 
    ```bash
-   postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
+   postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>
@@ -84,12 +84,12 @@ The following example shows how data from a `pagila` source database is dumped a
 
 ```bash
 ~$ cd mydump
-~/mydump$ pg_dump -Fc -v -d postgres://sally:<password>@<hostname>:<port>/pagila -f mydumpfile.bak 
+~/mydump$ pg_dump -Fc -v -d postgres://[user]:[password]@[neon_hostname]/pagila -f mydumpfile.bak 
 
 ~/mydump$ ls
 mydumpfile.bak
 
-~/mydump$ pg_restore -v -d postgres://sally:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/pagila mydumpfile.bak
+~/mydump$ pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak
 ```
 
 </CodeBlock>
@@ -133,7 +133,7 @@ To avoid the non-fatal errors, you can ignore database object ownership statemen
 <CodeBlock shouldWrap>
 
 ```bash
-pg_restore -v -O -d postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/pagila mydumpfile.bak 
+pg_restore -v -O -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak 
 ```
 
 </CodeBlock>
