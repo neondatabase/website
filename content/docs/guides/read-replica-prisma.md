@@ -84,7 +84,7 @@ In your `.env` file, set a `DATABASE_REPLICA_URL` environment variable to the co
 
 ```text
 DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
-DATABASE_REPLICA_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]"
+DATABASE_REPLICA_URL="postgres://alex:AbC123dEf@ep-damp-cell-123456.us-east-2.aws.neon.tech/dbname"
 ```
 
 Notice that the `endpoint_id` for the read replica compute differs. The read replica is a different compute instance and therefore has a different `endpoint_id`.
