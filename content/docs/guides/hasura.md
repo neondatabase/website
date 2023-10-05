@@ -38,7 +38,7 @@ Use the following instructions to connect to an existing Neon database from Hasu
 
 - An existing Neon account. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up).
 - An existing Neon project. If you do not have a Neon project, see [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- A connection string for a branch in Neon project that includes your password. For example:
+- A connection string for a branch in your Neon project:
 
   ```text
   postgres://[user]:[password]@[neon_hostname]/[dbname]
