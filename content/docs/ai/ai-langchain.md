@@ -69,18 +69,26 @@ In Neon, create a database named `titanic`. You can do this from the Neon Consol
 
 Retrieve the connection string for your `titanic` database. You can copy it from the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
 
+<CodeBlock shouldWrap>
+
 ```text
-postgres://[users]:[password]@ep-morning-limit-06265452.us-east-2.aws.neon.tech/titanic
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/titanic
 ```
+
+</CodeBlock>
 
 ## Set up your environment variables
 
 Create a `.env` file in your application directory and configure variables for your OpenAI API key and database connection string:
 
+<CodeBlock shouldWrap>
+
 ```text
 OPENAI_API_KEY=[your_openai_api_key]
-DATABASE_URL="postgres://[users]:[password]@ep-morning-limit-06265452.us-east-2.aws.neon.tech/titanic"
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/titanic"
 ```
+
+</CodeBlock>
 
 ## Create a table and insert data
 
