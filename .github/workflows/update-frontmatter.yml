@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -21,6 +23,7 @@ jobs:
     - name: Get list of modified files
       id: get-modified-files
       run: |
+        git --version
         modified_files=$(git diff --name-only HEAD^ HEAD | grep '^content/docs/.*\.md$')
         echo "Modified files: $modified_files"
         echo "modified_files=$modified_files" >> $GITHUB_OUTPUT
