@@ -33,7 +33,7 @@ You can seed the database directly from the terminal by running the following `p
 <CodeBlock shouldWrap>
 
 ```bash
-psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname < init.sql
+psql postgres://[user]:[password]@[neon_hostname]/[dbname] < init.sql
 ```
 
 </CodeBlock>
