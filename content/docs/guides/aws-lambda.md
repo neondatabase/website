@@ -193,7 +193,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
              method: get
     ```
 
-    </codeblock>
+    </CodeBlock>
 
 7. Deploy the serverless function using the following command:
 
