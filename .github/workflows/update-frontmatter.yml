@@ -3,7 +3,7 @@ name: Update Frontmatter
 on:
   push:
     paths:
-      - 'content/docs/*.md'
+      - 'content/docs/**/*.md'
 
 jobs:
   update-date:
@@ -22,7 +22,7 @@ jobs:
       run: npm ci
 
     - name: Run update script
-      run: node src/scripts/update-frontmatter.js content/docs/*.md
+      run: node src/scripts/update-frontmatter.js content/docs/**/*.md
 
     - name: Commit changes
       run: |
