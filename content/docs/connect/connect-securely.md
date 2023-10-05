@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/security/secure-connections
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-05T19:42:20.335Z'
 ---
 
 Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Neon rejects connections that do not use SSL/TLS, behaving in the same way as standalone Postgres with only `hostssl` records in a `pg_hba.conf` configuration file.

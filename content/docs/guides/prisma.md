@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/quickstart/prisma
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
-updatedOn: '2023-10-03T18:28:23.119Z'
+updatedOn: '2023-10-05T19:42:20.344Z'
 ---
 
 Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide explains how to connect Prisma to Neon, establish connections when using Prisma Client in serverless functions, and resolve [connection timeout](#connection-timeouts) issues.

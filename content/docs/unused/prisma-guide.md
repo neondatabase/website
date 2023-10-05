@@ -1,10 +1,11 @@
 ---
 title: Use Prisma with Neon
-subtitle: Follow this step-by-step guide to learn how to use Prisma with Neon 
+subtitle: Follow this step-by-step guide to learn how to use Prisma with Neon
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/prisma-tutorial
+updatedOn: '2023-10-05T19:42:20.372Z'
 ---
 
 Prisma is an open source next-generation ORM that consists of the following parts:

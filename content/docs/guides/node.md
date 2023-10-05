@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2023-10-03T20:31:35.166Z'
+updatedOn: '2023-10-05T19:42:20.344Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.

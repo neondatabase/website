@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura
   - /docs/integrations/hasura
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-05T19:42:20.342Z'
 ---
 
 Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.

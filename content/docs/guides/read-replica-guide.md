@@ -2,7 +2,7 @@
 title: Working with Neon read replicas
 subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
-updatedOn: '2023-09-11T13:09:15Z'
+updatedOn: '2023-10-05T19:42:20.346Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with the [Neon Pro plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating and managing read replicas.
