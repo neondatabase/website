@@ -13,10 +13,9 @@ Next.js by Vercel is an open-source web development framework that enables React
 To create a Neon project and access it from a Next.js application:
 
 1. [Create a Neon project](#create-a-neon-project)
-2. [Create a Next.js project](#create-a-nextjs-project)
-3. [Add a Postgres client to your app](#add-a-postgresql-client-to-your-app)
-4. [Add your Neon connection details](#add-your-neon-connection-details)
-5. [Connect to the Neon database](#connect-to-the-neon-database)
+2. [Create a Next.js project and add dependencies](#create-a-nextjs-project-and-add-dependencies)
+3. [Configure a Postgres client](#configure-the-postgres-client)
+4. [Run the app](#run-the-app)
 
 ## Create a Neon project
 
@@ -30,10 +29,10 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 1. Create a Next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app/setup), in the Vercel documentation.
 
-
 2. Add project dependencies using one of the following commands:
 
     <CodeTabs labels={["node-postgres", "postgres.js"]}>
+
       ```shell
       npm install pg
       ```
@@ -41,14 +40,12 @@ If you do not have one already, create a Neon project. Save your connection deta
       ```shell
       npm install postgres
       ```
+
     </CodeTabs>
-
-
 
 ## Store your Neon credentials
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
-
 
 <CodeBlock shouldWrap>
 
@@ -58,7 +55,7 @@ DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 
 </CodeBlock>
 
-## Configure the Postgres client 
+## Configure the Postgres client
 
 There a multiple ways to make server side requests with Next.js. See below for the different implementations.
 
@@ -67,136 +64,140 @@ There a multiple ways to make server side requests with Next.js. See below for t
 From your server functions using the App Router, add the following code snippet to connect to your Neon database:
 
 <CodeTabs labels={["node-postgres", "postgres.js"]}>
-  ```javascript
-  import { Pool } from 'pg';
 
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      require: true,
-    },
-  });
+```javascript
+import { Pool } from 'pg';
 
-  async function getData() {
-    const client = await pool.connect();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    require: true,
+  },
+});
 
-    try {
-      const response = await client.query('SELECT version()');
-      console.log(response.rows[0]);
-      return response.rows[0];
-    } finally {
-      client.release();
-    }
+async function getData() {
+  const client = await pool.connect();
+
+  try {
+    const response = await client.query('SELECT version()');
+    console.log(response.rows[0]);
+    return response.rows[0];
+  } finally {
+    client.release();
   }
+}
 
-  export default async function Page() {
-    const data = await getData();
-  }
-  ```
-  ```javascript
-  import postgres from 'postgres';
+export default async function Page() {
+  const data = await getData();
+}
+```
 
-  async function getData() {
-    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+```javascript
+import postgres from 'postgres';
 
-    const response = await sql`select version()`;
-    console.log(response);
-    return response;
-  }
+async function getData() {
+  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
 
-  export default async function Page() {
-    const data = await getData();
-  }
-  ```
+  const response = await sql`select version()`;
+  console.log(response);
+  return response;
+}
+
+export default async function Page() {
+  const data = await getData();
+}
+```
+
 </CodeTabs>
-
 
 ### Pages Router
 
 From your server functions using the Pages Router, add the following code snippet to connect to your Neon database:
 
 <CodeTabs labels={["node-postgres", "postgres.js"]}>
-  ```javascript
-  import { Pool } from 'pg';
 
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      require: true,
-    },
-  });
+```javascript
+import { Pool } from 'pg';
 
-  export async function getServerSideProps() {
-    const client = await pool.connect();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    require: true,
+  },
+});
 
-    try {
-      const response = await client.query('SELECT version()');
-      console.log(response.rows[0]);
-      return { props: { data: response.rows[0] } };
-    } finally {
-      client.release();
-    }
+export async function getServerSideProps() {
+  const client = await pool.connect();
+
+  try {
+    const response = await client.query('SELECT version()');
+    console.log(response.rows[0]);
+    return { props: { data: response.rows[0] } };
+  } finally {
+    client.release();
   }
+}
 
-  export default function Page({ data }) {}
+export default function Page({ data }) {}
+```
 
-  ```
-  ```javascript
-  import postgres from 'postgres';
+```javascript
+import postgres from 'postgres';
 
-  export async function getServerSideProps() {
-    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+export async function getServerSideProps() {
+  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
 
-    const response = await sql`select version()`;
-    console.log(response);
-    return { props: { data: response } };
-  }
+  const response = await sql`select version()`;
+  console.log(response);
+  return { props: { data: response } };
+}
 
-  export default function Page({ data }) {}
+export default function Page({ data }) {}
 
-  ```
+```
+
 </CodeTabs>
-
 
 ### API Routes
 
 From your API handlers, add the following code snippet to connect to your Neon database:
 
 <CodeTabs labels={["node-postgres", "postgres.js"]}>
-  ```javascript
-  import { Pool } from 'pg';
 
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      require: true,
-    },
-  });
+```javascript
+import { Pool } from 'pg';
 
-  export default async function handler(req, res) {
-    const client = await pool.connect();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    require: true,
+  },
+});
 
-    try {
-      const response = await client.query('SELECT version()');
-      console.log(response.rows[0]);
-    } finally {
-      client.release();
-    }
+export default async function handler(req, res) {
+  const client = await pool.connect();
+
+  try {
+    const response = await client.query('SELECT version()');
+    console.log(response.rows[0]);
+  } finally {
+    client.release();
   }
+}
+```
 
-  ```
-  ```javascript
-  import postgres from 'postgres';
+```javascript
+import postgres from 'postgres';
 
-  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
 
-  export default async function handler(req, res) {
-    const response = await sql`select version()`;
-    console.log(response);
-  }
-  ```
+export default async function handler(req, res) {
+  const response = await sql`select version()`;
+  console.log(response);
+}
+```
+
 </CodeTabs>
-
 
 ## Run the app
 
@@ -217,7 +218,6 @@ Result(1) [
   }
 ]
 ```
-
 
 ## Need help?
 
