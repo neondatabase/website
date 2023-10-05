@@ -2,7 +2,7 @@
 title: Connect from Laravel to Neon
 subtitle: Set up a Neon project in seconds and connect from a Laravel application
 enableTableOfContents: true
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-05T14:21:14.474Z'
 ---
 
 Laravel is a web application framework with expressive, elegant syntax. Connecting to Neon from Laravel is the same as connecting to a standalone Postgres installation from Laravel. Only the connection details differ.
@@ -26,19 +26,13 @@ Open the `.env` file in your Laravel app, and replace all the database credentia
 
 ```shell
 DB_CONNECTION=pgsql
-DB_HOST=<hostname>
+DB_HOST=[neon_hostname]
 DB_PORT=5432
-DB_DATABASE=<dbname>
-DB_USERNAME=<user>
-DB_PASSWORD=<password>
+DB_DATABASE=[dbname]
+DB_USERNAME=[user]
+DB_PASSWORD=[password]
+DB_SSLMODE=require
 ```
-
-where:
-
-- `<hostname>` the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
-- `<dbname>` is the name of the database. The default Neon database is `neondb`
-- `<user>` is the database user.
-- `<password>` is the database user's password.
 
 You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
