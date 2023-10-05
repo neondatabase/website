@@ -4,7 +4,7 @@ import GradientLabel from 'components/shared/gradient-label';
 
 const code = `  > neonctl connection-string
 
-  postgres://[user]:[password]@[neon_hostname]/[dbname]
+  postgres://[user]:[password]@ep-cool-darkness-123456.il-central-1.aws.neon.tech/neondb
 `;
 
 const Cli = () => (
