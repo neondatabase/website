@@ -37,7 +37,7 @@ You can obtain the connection string for the database from the **Connection Deta
 <CodeBlock shouldWrap>
 
 ```bash
-postgres://[user]:[password]@[neon_hostname]/friends
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/friends
 ```
 
 </CodeBlock>
