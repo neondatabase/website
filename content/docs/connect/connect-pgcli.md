@@ -31,7 +31,7 @@ From your terminal or command prompt, run the `pgcli` client with the connection
 <CodeBlock shouldWrap>
 
 ```bash
-postgres://[user]:[password]@[neon_hostname]/[dbname]
+pgcli postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
 
 </CodeBlock>
