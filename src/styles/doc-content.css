@@ -173,4 +173,10 @@
       @apply bg-gray-new-90 dark:bg-gray-new-15;
     }
   }
+
+  .prose-static {
+    .wp-block-table {
+      @apply md:-mx-4 md:overflow-x-auto md:px-4;
+    }
+  }
 }

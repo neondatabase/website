@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:Stripo.email
+BEGIN:VEVENT
+UID:651d9c3e08142
+DTSTAMP:20231004T170918Z
+SUMMARY:Neon Developer Days #3
+DESCRIPTION:Join us online on November 2nd\, at 10:00 AM PT\, for the third
+  edition of Neon Developer Days 🎉\n\nYou'll hear presentations about Po
+ stgres\, scalability\, AI\, and using Neon with modern developer tools.
+LOCATION:https://neon.tech/developer-days
+CLASS:PUBLIC
+DTSTART:20231102T170000Z
+DTEND:20231102T220000Z
+END:VEVENT
+END:VCALENDAR

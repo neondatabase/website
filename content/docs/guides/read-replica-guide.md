@@ -80,19 +80,12 @@ Connecting to a read replica is the same as connecting to any branch, except you
     <CodeBlock shouldWrap>
 
     ```bash
-    postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+    postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>
 
     If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string or example.
-
-    The information in your connection string corresponds to the following connection details:
-
-    - role: `daniel`
-    - password:`<password>`
-    - hostname: `ep-raspy-cherry-95040071.us-east-2.aws.neon.tech`
-    - database name: `neondb`. This is the default Neon database. Your database name may differ.
 
     When you use a read-only connection string, you are connecting to a read replica. No write operations are permitted on this connection.
 

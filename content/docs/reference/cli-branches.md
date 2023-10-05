@@ -147,7 +147,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ┌──────────────────────────────────────────────────────────────────────────────────────────┐
     │ Connection Uri                                                                           │
     ├──────────────────────────────────────────────────────────────────────────────────────────┤
-    │ postgres://daniel:<password>@ep-floral-violet-94096438.us-east-2.aws.neon.tech/neondb    │
+    │ postgres://[user]:[password]@[neon_hostname]/[dbname]                                    │
     └──────────────────────────────────────────────────────────────────────────────────────────┘
     ```
 
@@ -180,8 +180,8 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     },
     "endpoints": [
         {
-        "host": "ep-patient-sun-49170531.us-east-2.aws.neon.tech",
-        "id": "ep-patient-sun-49170531",
+        "host": "@ep-cool-darkness-123456.us-east-2.aws.neon.tech",
+        "id": "@ep-cool-darkness-123456",
         "project_id": "polished-shape-60485499",
         "branch_id": "br-frosty-art-30264288",
         "autoscaling_limit_min_cu": 1,
@@ -205,13 +205,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ],
     "connection_uris": [
         {
-        "connection_uri": "postgres://daniel:<password>@ep-patient-sun-49170531.us-east-2.aws.neon.tech/neondb",
+        "connection_uri": "postgres://alex:AbC123dEf@@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname",
         "connection_parameters": {
-            "database": "neondb",
-            "password": "<password>",
-            "role": "daniel",
-            "host": "ep-patient-sun-49170531.us-east-2.aws.neon.tech",
-            "pooler_host": "ep-patient-sun-49170531-pooler.us-east-2.aws.neon.tech"
+            "database": "dbname",
+            "password": "AbC123dEf",
+            "role": "alex",
+            "host": "@ep-cool-darkness-123456.us-east-2.aws.neon.tech",
+            "pooler_host": "@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech"
         }
         }
     ]

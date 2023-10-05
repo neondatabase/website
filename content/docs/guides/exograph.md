@@ -3,7 +3,7 @@ title: Use Exograph with Neon
 subtitle: Build GraphQL backends in minutes with Exograph and Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-04T13:12:25.658Z'
 ---
 
 _This guide was contributed by the Exograph team_
@@ -31,7 +31,7 @@ You can check the code it created by examining the `src/index.exo` file (which h
 Next, let's set up the Neon database.
 
 ## Create the schema in Neon
-1. Navigate to the Neon Console, select your project, and copy the connection string (which will look something like `postgres://...neon.tech/todo-db`).
+1. Navigate to the Neon Console, select your project, and copy the connection string, which will look something like this: `postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname`.
 2. Create schema in Neon using Exograph CLI:
 
 ```bash
@@ -58,7 +58,7 @@ Started server on 0.0.0.0:9876 in 717.19 ms
 	http://0.0.0.0:9876/graphql
 ```
 
-That's it! You can now open [http://localhost:9876/playground](http://localhost:9876/playground) in your browser to see the GraphQL Playground.
+That's it! You can now open http://localhost:9876/playground in your browser to see the GraphQL Playground.
 
 You can create a todo by running the following mutation:
 

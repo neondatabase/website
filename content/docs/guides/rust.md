@@ -4,7 +4,7 @@ subtitle: Set up a Neon project in seconds and connect from a Rust application
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2023-07-01T08:51:49Z'
+updatedOn: '2023-10-05T17:57:06.655Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Rust application.
@@ -36,7 +36,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
     let builder = SslConnector::builder(SslMethod::tls())?;
     let connector = MakeTlsConnector::new(builder.build());
 
-    let mut client = Client::connect("postgres://<user>:<password>@<hostname>/<dbname>", connector)?;
+    let mut client = Client::connect("postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require", connector)?;
 
     for row in client.query("SELECT 42", &[])? {
         let ret : i32 = row.get(0);
@@ -46,13 +46,6 @@ fn main() -> Result<(), Box<dyn error::Error>> {
     Ok(())
 }
 ```
-
-where:
-
-- `<user>` is the database user.
-- `<password>` is the database user's password.
-- `<dbname>` is the name of the database. The default Neon database is `neondb`
-- `<hostname>` is the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
 
 You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 

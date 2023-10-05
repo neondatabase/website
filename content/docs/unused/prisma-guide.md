@@ -25,7 +25,7 @@ The project is created and you are presented with a dialog that provides connect
 <CodeBlock shouldWrap>
 
 ```text
-postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/neondb
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb
 ```
 
 </CodeBlock>
@@ -49,7 +49,7 @@ The connection string for this database should be the same as the connection str
 <CodeBlock shouldWrap>
 
 ```text
-postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/shadow
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow
 ```
 
 </CodeBlock>
@@ -105,8 +105,8 @@ When you are finished, your `.env` file should have entries similar to the follo
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/neondb?connect_timeout=10
-SHADOW_DATABASE_URL=postgres://sally:************@ep-white-thunder-826300.us-east-2.aws.neon.tech/shadow?connect_timeout=10
+DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?connect_timeout=10
+SHADOW_DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow?connect_timeout=10
 ```
 
 </CodeBlock>
@@ -178,7 +178,7 @@ The output of this command appears similar to the following:
 ```bash
 Environment variables loaded from ../.env
 Prisma schema loaded from schema.prisma
-Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-white-thunder-826300.us-east-2.aws.neon.tech:5432"
+Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432"
 
 Applying migration `20230105222046_init`
 
@@ -236,7 +236,7 @@ model Elements {
    ```bash
    Environment variables loaded from .env
    Prisma schema loaded from prisma/schema.prisma
-   Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-white-thunder-826300.us-east-2.aws.neon.tech:5432"
+   Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432"
 
    Applying migration `20230113120852_add_field`
 
@@ -487,7 +487,7 @@ To introspect the `Elements_ext` table to generate the data model, run the `pris
 $ npx prisma db pull
 Prisma schema loaded from prisma/schema.prisma
 Environment variables loaded from .env
-Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-white-thunder-826300.us-east-2.aws.neon.tech:5432"
+Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432"
 
 ✔ Introspected 2 models and wrote them into prisma/schema.prisma in 1.78s
 ```

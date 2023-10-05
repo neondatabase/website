@@ -95,7 +95,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ┌──────────────────────────────────────────────────────────────────────────────────────┐
     │ Connection Uri                                                                       │
     ├──────────────────────────────────────────────────────────────────────────────────────┤
-    │ postgres://daniel:<password>@ep-bitter-field-476253.us-west-2.aws.neon.tech/neondb   │
+    │ postgres://[user]:[password]@[neon_hostname]/[dbname]                                │
     └──────────────────────────────────────────────────────────────────────────────────────┘
     ```
 
@@ -140,13 +140,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     },
     "connection_uris": [
         {
-        "connection_uri": "postgres://daniel:<password>@ep-bitter-heart-24388432.us-east-2.aws.neon.tech/neondb",
+        "connection_uri": "postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname",
         "connection_parameters": {
-            "database": "neondb",
-            "password": "<password>",
-            "role": "daniel",
-            "host": "ep-bitter-heart-24388432.us-east-2.aws.neon.tech",
-            "pooler_host": "ep-bitter-heart-24388432-pooler.us-east-2.aws.neon.tech"
+            "database": "dbname",
+            "password": "AbC123dEf",
+            "role": "alex",
+            "host": "ep-cool-darkness-123456.us-east-2.aws.neon.tech",
+            "pooler_host": "ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech"
         }
         }
     ]

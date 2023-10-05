@@ -44,7 +44,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     ```bash
     neonctl connection-string mybranch
-    postgres://daniel:<password>@ep-still-haze-361517.us-east-2.aws.neon.tech/neondb
+    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
 
     </CodeBlock>
@@ -55,7 +55,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     ```bash
     neonctl connection-string --pooled
-    postgres://daniel:<password>@ep-still-haze-361517-pooler.us-east-2.aws.neon.tech/neondb
+    postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
     ```
 
     </CodeBlock>
@@ -66,7 +66,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     ```bash
     neonctl connection-string --prisma
-    postgres://daniel:<password>@ep-green-thunder-758819.us-east-2.aws.neon.tech/neondb?connect_timeout=30
+   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?connect_timeout=30
     ```
 
     </CodeBlock>

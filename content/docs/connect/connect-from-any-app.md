@@ -28,9 +28,9 @@ Neon supports pooled and direct connections to the database. Use a pooled connec
 A Neon connection string includes the role, the compute endpoint hostname, and the database name.
 
 ```text
-postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
-             ^                                ^                                  ^
-             |- <role>                        |- <hostname>                      |- <database>
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+           ^              ^                                               ^
+           |- <role>      |- <hostname>                                   |- <database>
 ```
 
 <Admonition type="note">
@@ -42,11 +42,11 @@ You can use the details from the connection string or the connection string itse
 `.env` file:
 
 ```text
-PGHOST='ep-raspy-cherry-95040071.us-east-2.aws.neon.tech'
-PGDATABASE='neondb'
-PGUSER='daniel'
-PGPASSWORD='<password>'
-PGPORT='5432'
+PGUSER=alex
+PGHOST=ep-cool-darkness-123456.us-east-2.aws.neon.tech
+PGDATABASE=dbname
+PGPASSWORD=AbC123dEf
+PGPORT=5432
 ```
 
 Variable:
@@ -54,7 +54,7 @@ Variable:
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL="postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb"
+DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]"
 ```
 
 </CodeBlock>
@@ -64,7 +64,7 @@ Command-line:
 <CodeBlock shouldWrap>
 
 ```bash
-psql postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+psql postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 </CodeBlock>

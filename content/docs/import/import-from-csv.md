@@ -15,7 +15,7 @@ The following example uses the ready-to-use `neondb` database that is created wi
    <CodeBlock shouldWrap>
 
    ```bash
-   psql postgres://casey:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/neondb
+   psql postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>
