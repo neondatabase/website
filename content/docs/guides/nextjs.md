@@ -201,7 +201,7 @@ export default async function handler(req, res) {
 
 ## Run the app
 
-For API handlers, and server functions you can expect to see one of the following in your terminal output.
+For API handlers, and server functions you can expect to see one of the following in your terminal output:
 
 ```shell
 # node-postgres
