@@ -6,26 +6,13 @@ updatedOn: '2023-09-15T13:00:43Z'
 ---
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch.
 
-To connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through a compute endpoint associated with the branch.
-
-```text
-Project
-    |----primary branch (main) ---- compute endpoint <--- application/client
-             |    |
-             |    |---- database
-             |
-             ---- child branch ---- compute endpoint <--- application/client
-                            |
-                            |---- database  
-```
-
-You can obtain the connection details you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
+You can obtain the database connection details you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
 Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
 
-A Neon connection string includes the role, the compute endpoint hostname, and the database name.
+A Neon connection string includes the role, the hostname, and the database name.
 
 ```text
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
@@ -54,7 +41,7 @@ Variable:
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]"
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
 ```
 
 </CodeBlock>
@@ -64,7 +51,7 @@ Command-line:
 <CodeBlock shouldWrap>
 
 ```bash
-psql postgres://[user]:[password]@[neon_hostname]/[dbname]
+psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
 
 </CodeBlock>
