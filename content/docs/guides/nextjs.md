@@ -203,6 +203,8 @@ export default async function handler(req, res) {
 
 For API handlers, and server functions you can expect to see one of the following in your terminal output:
 
+<CodeBlock shouldWrap>
+
 ```shell
 # node-postgres
 
@@ -218,6 +220,8 @@ Result(1) [
   }
 ]
 ```
+
+</CodeBlock>
 
 ## Need help?
 
