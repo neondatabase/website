@@ -23,7 +23,7 @@ jobs:
     - name: Get list of modified files
       id: get-modified-files
       run: |
-        modified_files=$(git diff --name-only HEAD^ HEAD | grep '^content/docs/.*\.md$')
+        modified_files=$(git diff --name-only HEAD^ HEAD | grep '^content/docs/.*\.md$' | xargs)
         echo "Modified files: $modified_files"
         echo "modified_files=$modified_files" >> $GITHUB_OUTPUT
 
