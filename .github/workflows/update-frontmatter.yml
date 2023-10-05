@@ -18,11 +18,16 @@ jobs:
       with:
         node-version: 18
 
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Run update script
-      run: node src/scripts/update-frontmatter.js content/docs/**/*.md
+    - name: Get list of modified markdown files
+      id: getfile
+      run: |
+        echo "::set-output name=markdownfiles::$(git diff-tree --no-commit-id --name-only -r HEAD | grep '^content/docs/.*\.md$')"
+        
+    - name: Run update script if there are markdown changes
+      run: |
+        if [[ -n "${{ steps.getfile.outputs.markdownfiles }}" ]]; then
+          node src/scripts/update-frontmatter.js ${{ steps.getfile.outputs.markdownfiles }}
+        fi
 
     - name: Commit changes
       run: |
