@@ -23,10 +23,12 @@ jobs:
     - name: Get list of modified files
       id: get-modified-files
       run: |
-        git --version
         modified_files=$(git diff --name-only HEAD^ HEAD | grep '^content/docs/.*\.md$')
         echo "Modified files: $modified_files"
         echo "modified_files=$modified_files" >> $GITHUB_OUTPUT
+
+    - name: Install packages
+      run: npm ci
       
     - name: Run update script
       run: node src/scripts/update-frontmatter.js ${{ steps.get-modified-files.outputs.modified_files }}
