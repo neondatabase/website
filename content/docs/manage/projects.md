@@ -148,7 +148,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 }' | jq
 ```
 
-The response includes information about the roles, the ready-to-use database (`dbname)`), the primary branch (`main`), and the read-write compute endpoint that is created with the project.
+The response includes information about the roles, the ready-to-use database (`neondb`), the primary branch (`main`), and the read-write compute endpoint that is created with the project.
 
 <details>
 <summary>Response body</summary>
