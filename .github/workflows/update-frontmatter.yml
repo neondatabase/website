@@ -29,7 +29,7 @@ jobs:
         echo "modified_files=$modified_files" >> $GITHUB_OUTPUT
       
     - name: Run update script
-      run: node scr/scripts/update-frontmatter.js ${{ steps.get-modified-files.outputs.modified_files }}
+      run: node src/scripts/update-frontmatter.js ${{ steps.get-modified-files.outputs.modified_files }}
 
     - name: Commit changes
       run: |
